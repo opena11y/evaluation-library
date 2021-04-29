@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout 3: Layout tables must use role="presentation"</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td
+      {
+        border: 1px solid black;
+
+      }
+    </style>
+    <h1>Layout 3: Layout tables must use role="presentation"</h1>
+    
+    <h2> Group 1: All table elements have role presentation </h2>
+      
+      <table class="LAYOUT_3_PASS" role="presentation" >
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Row 1</td> <td class="LAYOUT_3_PASS" role="presentation"> Row 1</td> </tr>
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Row 2</td> <td class="LAYOUT_3_PASS" role="presentation"> Row 2</td> </tr>
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Row 3</td> <td class="LAYOUT_3_PASS" role="presentation">Row 3</td> </tr>
+      </table>
+
+
+    <h2> Group 2: Some table elements have role presentation </h2>
+      
+     <table role="presentation"  class="LAYOUT_3_PASS">
+        <tr class="LAYOUT_3_FAIL"> <td class="LAYOUT_3_FAIL"> Cell 11</td> </tr>
+        <tr class="LAYOUT_3_FAIL"> <td class="LAYOUT_3_FAIL"> Cell 21</td> </tr>
+        <tr class="LAYOUT_3_FAIL"> <td class="LAYOUT_3_FAIL"> Cell 31</td> </tr>
+      </table>
+
+    <table>
+      <tr> <td>Cell 11</td> <td>Cell 12</td> <td>Cell 13</td> </tr>
+      <tr> <td>Cell 21</td> <td>Cell 22</td> <td>Cell 23</td> </tr>
+      <tr> <td>Cell 31</td> <td>Cell 32</td> <td>Cell 33</td> </tr>
+    </table>
+    
+    
+    <h2> Group 3: No table elements have role presentation, nested table with all elements role presentation </h2>
+      
+      <table class="LAYOUT_3_PASS" role="presentation">
+        <tr class="LAYOUT_3_FAIL"> <td class="LAYOUT_3_FAIL"> Row 1</td> </tr>
+        <tr class="LAYOUT_3_FAIL"> <td class="LAYOUT_3_FAIL"> Row 2</td> </tr>
+        <tr class="LAYOUT_3_FAIL"> <td class="LAYOUT_3_FAIL"> <table role="presentation" class="LAYOUT_3_PASS">
+          <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Nested 1 1</td> </tr>
+          <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Nested 2</td> </tr>
+        </table> </td> </tr>
+      </table>
+
+    <h2> Group 4: Table element and row elements have role presentation, table data elements do not </h2>
+      
+      <table class="LAYOUT_3_PASS" role="presentation">
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_FAIL"> Row 1</td> </tr>
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_FAIL"> Row 2</td> </tr>
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_FAIL"> Row 3</td> </tr>
+      </table>
+    
+    <h2> Group 5: One data element is hidden in each row</h2>
+      
+      <table class="LAYOUT_3_PASS" role="presentation">
+        <table class="LAYOUT_3_PASS" role="presentation" >
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Row 1</td> <td aria-hidden="true" class="LAYOUT_3_HIDDEN" role="presentation"> Row 1</td> </tr>
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Row 2</td> <td style="display: none" class="LAYOUT_3_HIDDEN" role="presentation"> Row 2</td> </tr>
+        <tr class="LAYOUT_3_PASS" role="presentation"> <td class="LAYOUT_3_PASS" role="presentation"> Row 3</td> <td hidden class="LAYOUT_3_HIDDEN" role="presentation">Row 3</td> </tr>
+      </table>
+      </table>
+
+  </body>
+</html>

@@ -1,0 +1,359 @@
+    <style type="text/css">   
+    
+      body {
+          font-family: arial, helvetica, sans-serif;
+      }
+
+      .passed,
+      .complete {
+          color: green;
+      }
+      
+      .warning,
+      .almost_complete {
+          color: #906020;
+      }
+      
+      .manual_check,
+      .partial_implementation {
+          color: #D22222;
+      }
+      
+      .violation,
+      .not_implemented {
+          color: #b22222;
+          font-weight: bold;
+          font-size: 110%;
+      }
+
+      td.zero {
+         color: gray;
+         font-size: 90%;
+      }
+      
+      td.no {
+         color: gray;
+         font-size: 90%;
+      }
+
+      h1 {
+          font-size: 140%;
+      }
+      
+      h2 {
+          margin-top: 2em;
+          font-size: 120%;
+          border-bottom: black solid thin;
+      }
+
+      h3 {
+          margin-top: 1em;
+          font-size: 110%;
+          font-weight: bold;
+          margin-bottom: 0.5em;
+      }
+      
+      h3 span.summary {
+          font-size: 90%;
+          font-style: italic;
+          vertical-align: bottom;
+      }
+      
+      table {
+          border-collapse: collapse;
+      }
+      
+      
+      tr.odd {
+          background-color: #DDDDDD;
+      }
+
+      tr.odd td {
+          border-top: solid 1px #DDDDDD;
+      }
+
+      tr.even td {
+          border-top: solid 1px white;
+      }
+
+      th.description,
+      th.element,
+      th.h,
+      th.mc,
+      th.order,
+      th.p,
+      th.pepr,
+      th.required,
+      th.result,
+      th.rule,
+      th.message,
+      th.v,
+      th.w,
+      th.wcag20_level
+      {
+          width: 5%;
+          padding-left: 0.25em;
+          padding-right: 0.25em;
+          border-bottom: black solid thin;
+          font-size: 90%;
+          vertical-align: bottom;
+      }
+
+      th.wcag20_level {
+          width: 8%;
+      }
+
+      th.element,
+      th.description,
+      th.message {
+          min-width: 40%;
+      }
+
+      td.element {
+          text-align: left;    
+      }
+
+      th.wcag20,
+      td.wcag20,
+      td.order,
+      td.required {
+        text-align: center;  
+        vertical-align: top;
+      } 
+
+      td.passed {
+          font-size: 110%;
+      }
+      
+      
+      td.manual_check {
+          font-size: 110%;
+      }
+      
+      td.violation {
+          font-weight: bold;
+      }
+
+      td.zero {
+         color: gray;
+         font-size: 90%;
+      }
+      
+      td.no,
+      td.not_applicable {
+         color: gray;
+         font-size: 90%;
+      }
+
+      td.not_applicable,
+      td.complete,
+      td.almost_complete,
+      td.partial_implementation,
+      td.not_implemented {
+        text-align: center;    
+      }
+      
+      
+      
+      th.total,
+      td.total {
+        border-top: black thin solid;
+        font-weight: bold;
+        font-size: 100%;
+      }
+
+      td.total,
+      td.zero,
+      td.hidden,
+      td.passed,
+      td.warning,
+      td.manual_check,
+      td.violation
+      {
+          vertical-align: top;
+          text-align: center;
+      }
+
+      th.right {
+        text-align: right;
+      }
+
+      td.level_1 {
+        padding-left: 1em;
+      }
+
+      td.level_2 {
+        padding-left: 2em;
+      }
+      td.level_3 {
+        padding-left: 3em;
+      }
+      td.level_4 {
+        padding-left: 4em;
+      }
+      td.level_5 {
+        padding-left: 5em;
+      }
+      td.level_6 {
+        padding-left: 6em;
+      }
+      td.level_7 {
+        padding-left: 7em;
+      }
+      td.level_8 {
+        padding-left: 8em;
+      }
+      td.level_9 {
+        padding-left: 9em;
+      }
+      td.level_10 {
+        padding-left: 10em;
+      }
+      
+      a.element {
+          text-decoration: none;          
+      }
+
+      a.element:link,
+      a.element:visited {
+          color: black;          
+      }
+
+      a.element:focus,
+      a.element:hover,
+      a.element:active{
+          text-decoration: underline;          
+      }
+
+      div.element_details {
+           margin: 2em;
+      }
+      
+      ul.properties {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          margin-left: 1em;
+          margin-bottom: 0.5em;
+      }
+
+      ul.properties li span.label {
+        font-weight: bold;
+        font-size: 90%;
+        padding-left: 0.5em; 
+      }
+
+      ul.properties li span.value {
+        padding-left: 0.25em;
+      }
+
+span.message {
+    font-size: 110%;
+}
+
+p.properties {
+    font-size: 90%;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 0.5em;
+    padding: 0;
+}
+
+ul.severities li {
+    padding: 0;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    }
+    
+ul.severities li span{
+    padding: 0;
+    padding-left: 0.125em;
+    padding-right: 0.125em;
+    }
+    
+div.info {
+    padding: 0;
+    margin: 0;
+    padding-top: 0.125em;
+    padding-bottom: 0.125em;
+    clear: both;
+}    
+
+div.info span.label {
+    display: block;
+    text-align: right;
+    padding-right: 0.25em;
+    width: 5em;    
+    float: left;
+    font-weight: bold;
+}    
+
+div.info span.item {
+    display: block;
+}    
+
+th.g {
+    text-align: left;
+    padding-left: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 130%;
+}
+
+td.g {
+   font-size: 130%;  
+   font-weight: bold;
+}
+
+th.gr {
+    text-align: left;
+    padding-left: 1em;
+    padding-top: 0.125em;
+    padding-bottom: 0.125em;
+    font-size: 100%;
+}
+
+th.gg {
+    text-align: left;
+    padding-left: 1em;
+    padding-top: 0.375em;
+    padding-bottom: 0.375em;
+    font-size: 120%;
+}
+
+td.gg {
+   font-size: 120%;  
+   font-weight: bold;
+}
+
+th.ggr {
+    text-align: left;
+    padding-left: 2em;
+    padding-top: 0.125em;
+    padding-bottom: 0.125em;
+    font-size: 100%;
+}
+
+th.ggg {
+    text-align: left;
+    padding-left: 2em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    font-size: 110%;
+}
+
+td.ggg {
+   font-size: 110%;  
+   font-weight: bold;
+}
+
+th.gggr {
+    text-align: left;
+    padding-left: 3em;
+    padding-top: 0.125em;
+    padding-bottom: 0.125em;
+    font-size: 100%;
+}
+
+
+</style>

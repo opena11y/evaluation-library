@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Landmark 8: Banner at top level</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  
+  <body>
+    
+    <h1>Landmark 8: banner landmark top level</h1>
+
+    <header class="LANDMARK_8_PASS">
+      <h1>Landmark 8 Rule</h1>
+    </header>  
+    
+
+    <div role="navigation">
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </div>  
+    
+   <div role="main">
+     <h1>Banner at top level</h1>
+     
+     <header class="LANDMARK_8_FAIL">
+       nested banner       
+     </header>
+          
+   </div>  
+
+   <section>
+      <header>
+        section header element content
+      </header>
+      
+      section element content
+      
+   </section>
+
+   <aside>
+      <header>
+        aside header element content
+      </header>
+      
+      aside element content
+      
+   </aside>
+    
+    <div role="contentinfo">
+      OpenAjax Accessibility Task Force Testcase
+
+     <header class="LANDMARK_8_FAIL">
+       nested banner       
+     </header>
+
+    </div>  
+    
+  </body>
+</html>
+
+

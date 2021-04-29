@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Color Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+
+      test( "Color_1: Color contrast ratio", function() {
+        executeTest('ID_IFRAME_1A', 'COLOR_1');
+      });
+
+      test( "Color_2: Use of color", function() {
+        executeTest('ID_IFRAME_2A', 'COLOR_2');
+      });
+      
+      
+    </script>
+
+    <h2>Color contrast ratio </h2>
+    <iframe id="ID_IFRAME_1A" src="color/color_1_contrast_ratio.html"></iframe>    
+
+    <h2>Use of color </h2>
+    <iframe id="ID_IFRAME_2A" src="color/color_2_use_of_color.html"></iframe>    
+    
+    
+  </body>
+
+</html>

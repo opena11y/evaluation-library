@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 8: Accessible Name and Description different</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    <div role="main">
+      
+    <h1>Data Table Rule 8: Accessible Name and Description different</h1>
+
+    <h2>TABLE A: Accessible Name and Description Same</h2>
+      
+    <p id="id_table_a_desc">TABLE A: Name and Description the same</p>
+      
+    <table class="TABLE_8_FAIL" aria-describedby="id_table_a_desc">
+        <caption>TABLE A: Name and Description the same</caption>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+          <tr>
+            <th>Header 9</th>
+            <th>Header 10</th>
+            <th>Header 11</th>
+            <th>Header 12</th>
+            <th>Header 13</th>
+            <th>Header 14</th>
+            <th>Header 15</th>
+            <th>Header 16</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td>Data Cell 11</td>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+          <td>Data Cell 18</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 21</td>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+          <td>Data Cell 28</td>
+        </tr>
+      </table>
+
+    <h2>TABLE B: Accessible Name and Description Same</h2>
+      
+    <table class="TABLE_8_FAIL" summary="TABLE B: Accessible Name and Description the same">
+        <caption>TABLE B: Accessible Name and Description the same</caption>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+        </thead>
+        <tr> 
+          <th rowspan="2">Header Cell 1</th>
+          <th>Header 11</th>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+        </tr>
+        <tr> 
+          <th>Header 21</th>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+        </tr>
+      </table>
+
+    <h2>TABLE C: Accessible Name and Description Same</h2>
+      
+    <table class="TABLE_8_FAIL" summary="TABLE C: Accessible Name and Description    lowercase" title="TABLE C: Accessible     Name and Description LOWERCASE">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+        </thead>
+        <tr> 
+          <th rowspan="2">Header Cell 1</th>
+          <th>Header 11</th>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+        </tr>
+        <tr> 
+          <th>Header 21</th>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+        </tr>
+      </table>
+      
+    <h2>TABLE D: Accessible Name and Description Different</h2>
+      
+    <table class="TABLE_8_PASS" aria-label="TABLE D: Accessible Name" summary="TABLE D: Accessible Description">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+        </thead>
+        <tr> 
+          <th rowspan="2">Header Cell 1</th>
+          <th>Header 11</th>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+        </tr>
+        <tr> 
+          <th>Header 21</th>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+        </tr>
+      </table>
+      
+
+    <h2>TABLE E: Accessible Name and Description Different</h2>
+      
+    <table class="TABLE_8_PASS" aria-label="TABLE E: Accessible Name" title="TABLE E: Accessible Description">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+        </thead>
+        <tr> 
+          <th rowspan="2">Header Cell 1</th>
+          <th>Header 11</th>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+        </tr>
+        <tr> 
+          <th>Header 21</th>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+        </tr>
+      </table>
+      
+     <h2>TABLE F: Accessible Name and Description Same</h2>
+      
+    <p id="id_table_f_desc">TABLE F: Name and Description the same</p>
+      
+    <table class="TABLE_8_FAIL" aria-labelledby="id_table_f_desc" aria-describedby="id_table_f_desc">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+          <tr>
+            <th>Header 9</th>
+            <th>Header 10</th>
+            <th>Header 11</th>
+            <th>Header 12</th>
+            <th>Header 13</th>
+            <th>Header 14</th>
+            <th>Header 15</th>
+            <th>Header 16</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td>Data Cell 11</td>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+          <td>Data Cell 18</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 21</td>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+          <td>Data Cell 28</td>
+        </tr>
+      </table>
+
+    <h2>TABLE G: Accessible Name and Description Same</h2>
+      
+    <p id="id_table_g_desc">TABLE G: Name     and Description the same</p>
+      
+    <table class="TABLE_8_FAIL" aria-label="   TABLE G: Name and Description the SAME   " aria-describedby="id_table_g_desc">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+          <tr>
+            <th>Header 9</th>
+            <th>Header 10</th>
+            <th>Header 11</th>
+            <th>Header 12</th>
+            <th>Header 13</th>
+            <th>Header 14</th>
+            <th>Header 15</th>
+            <th>Header 16</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td>Data Cell 11</td>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+          <td>Data Cell 18</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 21</td>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+          <td>Data Cell 28</td>
+        </tr>
+      </table>
+
+    <h2>TABLE H: Accessible Name and Description Same</h2>
+      
+    <p id="id_table_h_desc">TABLE H: Name and Description the same</p>
+      
+    <table class="TABLE_8_FAIL" title="TABLE H: Name and Description the same" aria-describedby="id_table_h_desc">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+            <th>Header 5</th>
+            <th>Header 6</th>
+            <th>Header 7</th>
+            <th>Header 8</th>
+          </tr>
+          <tr>
+            <th>Header 9</th>
+            <th>Header 10</th>
+            <th>Header 11</th>
+            <th>Header 12</th>
+            <th>Header 13</th>
+            <th>Header 14</th>
+            <th>Header 15</th>
+            <th>Header 16</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td>Data Cell 11</td>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+          <td>Data Cell 15</td>
+          <td>Data Cell 16</td>
+          <td>Data Cell 17</td>
+          <td>Data Cell 18</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 21</td>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+          <td>Data Cell 25</td>
+          <td>Data Cell 26</td>
+          <td>Data Cell 27</td>
+          <td>Data Cell 28</td>
+        </tr>
+      </table>
+
+        
+    </div>
+    
+  </body>
+</html>

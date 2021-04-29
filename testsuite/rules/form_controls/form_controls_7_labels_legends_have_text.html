@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control 7</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form test 7: Legends or Labels must contain text</h1>
+      
+      <h2>Group 1: Legend with no text</h2>
+        <fieldset>
+          <legend class="CONTROL_7_FAIL"></legend>          
+        </fieldset>
+        
+      <h2>Group 2: Labels with no text</h2>
+      <form>
+        <label class="CONTROL_7_FAIL"></label>
+        <label class="CONTROL_7_FAIL"></label>
+      </form>
+      
+      <h2>Group 3: Label with text</h2>
+        <form>
+          <label class="CONTROL_7_PASS">Label 21</label>
+        </form>
+         
+      <h2>Group 4: legend with text</h2>
+        <form>
+          <fieldset>
+            <legend class="CONTROL_7_PASS">Legend 41</legend>
+          </fieldset>
+        </form>
+        
+      <h2>Group 5: Hidden labels and legend</h2>
+        <fieldset>
+            <legend class="CONTROL_7_HIDDEN" hidden></legend>
+            <label  class="CONTROL_7_HIDDEN" style="display: none"></label>
+            <label  class="CONTROL_7_HIDDEN" style="visibility: hidden">label 53</label>
+            <label  class="CONTROL_7_HIDDEN" aria-hidden="true">label 54</label>
+        </fieldset>
+    </div>
+  </body>
+</html>
+
+

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 2: Section element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <header role="banner" class="ROLE_2_PASS">
+      <code>header</code> element content 1
+    </header>
+
+    <header class="ROLE_2_FAIL">
+      <code>header</code> element content 2
+    </header>
+
+    <header role="banner" class="ROLE_2_HIDDEN" hidden>
+      <code>header</code> element content 5
+    </header>
+
+    <header role="presentation" class="ROLE_2_MC">
+      <code>header</code> element content 4
+    </header>
+
+    <nav role="navigation" class="ROLE_2_PASS">
+    
+      <ul>
+        <li><a href="#link1a">Link 1a</a></li>
+        <li><a href="#link2a">Link 2a</a></li>
+      </ul>
+    
+    </nav>
+
+    <nav class="ROLE_2_FAIL">
+    
+      <ul>
+        <li><a href="#link1b">Link 1b</a></li>
+        <li><a href="#link2b">Link 2b</a></li>
+      </ul>
+    
+    </nav>
+
+    <nav role="menu" class="ROLE_2_HIDDEN" style="visibility: hidden">
+    
+      <ul>
+        <li><a href="#link1c">Link 1c</a></li>
+        <li><a href="#link2c">Link 2c</a></li>
+      </ul>
+    
+    </nav>
+    
+
+    <nav role="menu" class="ROLE_2_FAIL">
+    
+      <ul>
+        <li><a href="#link1d">Link 1d</a></li>
+        <li><a href="#link2d">Link 2d</a></li>
+      </ul>
+    
+    </nav>
+    
+    
+    
+    <main role="main">
+      <h1>Role 2: Section element restrictions</h1>  
+    </main>
+
+    <aside role="complementary" class="ROLE_2_PASS">
+      <code>aside</code> element content 1  
+    </aside>
+
+    <aside role="note" class="ROLE_2_PASS">
+      <code>aside</code> element content 2  
+    </aside>
+
+    <aside role="search" class="ROLE_2_PASS">
+      <code>aside</code> element content 3  
+    </aside>
+
+    <aside role="main" class="ROLE_2_FAIL">
+      <code>aside</code> element content 4  
+    </aside>
+
+
+    <article role="main" class="ROLE_2_PASS">
+      <code>article</code> element content 1  
+    </article>
+
+    <article role="article" class="ROLE_2_PASS">
+      <code>article</code> element content 2  
+    </article>
+
+    <article role="complementary" class="ROLE_2_FAIL">
+      <code>article</code> element content 3  
+    </article>
+
+
+    <section role="complementary" class="ROLE_2_FAIL">
+      <code>section</code> element content 1  
+    </section>
+
+    <section role="region" class="ROLE_2_PASS">
+      <code>section</code> element content 2  
+    </section>
+
+    <section role="main" class="ROLE_2_PASS">
+      <code>section</code> element content 3  
+    </section>
+
+    <section role="application" class="ROLE_2_PASS">
+      <code>section</code> element content 4  
+    </section>
+
+    <section role="dialog" class="ROLE_2_PASS">
+      <code>section</code> element content 5  
+    </section>
+
+    <section role="log" class="ROLE_2_PASS">
+      <code>section</code> element content 5  
+    </section>
+
+    <section>
+      <code>section</code> element content 6  
+    </section>
+  
+    <h2 role="heading" class="ROLE_2_PASS">Heading Level 2</h2>
+
+    <h3 role="region" class="ROLE_2_FAIL">Heading Level 3</h3>
+
+    <h5 role="tab" class="ROLE_2_PASS">Heading Level 5</h5>
+
+    <h6>Heading Level 6</h3>
+
+
+
+
+
+    
+    <footer role="contentinfo" class="ROLE_2_PASS">
+      <code>footer</code> element content 1
+    </footer>
+
+    <footer class="ROLE_2_FAIL">
+      <code>footer</code> element content 2
+    </footer>
+
+    <footer role="contentinfo" class="ROLE_2_HIDDEN" style="display: none">
+      <code>footer</code> element content 3
+    </footer>
+
+    <footer role="banner" class="ROLE_2_FAIL">
+      <code>footer</code> element content 4
+    </footer>
+
+
+  </body>
+</html>

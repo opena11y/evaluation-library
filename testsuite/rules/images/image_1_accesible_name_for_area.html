@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>image 1 tests for area</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Image test 1, accessible name, for area.</h1>
+      
+      <div>Map Image <img usemap="#img1" src="img1.png"  class="IMAGE_1_FAIL"/ ></div>
+      
+      <h2>Group 1: Area with no source for accessible name</h2>
+        <map name="img1">Area 11: <area /></map>
+        
+      <h2> Group 2: Area with <code>alt</code> attribute </h2>
+        <map name="img1">Area 21: <area alt="Area21" /></map>
+       
+      <h2> Group 3: Group 3: Area with <code>aria-label</code> attribute </h2>
+        <map name="img1">Area 31: <area aria-label="Area31" /></map>
+
+      <h2> Group 4: Group 4: Area with <code>aria-labelledby</code> attribute</h2>
+        <div id="area41">Area 41:</div><map name="img1"><area aria-labelledby="area41" /></map>
+     
+      
+        
+      
+    </div>
+  </body>
+</html>
+
+

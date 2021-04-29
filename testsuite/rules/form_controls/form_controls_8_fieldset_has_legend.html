@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control 8</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form test 8: field sets must have one legend </h1>
+
+      <h2>Group 1: Field set has no legend</h2>
+      <form>
+        <fieldset class="CONTROL_8_FAIL">
+          <label>First Name: <input type="text"/></label><br/>
+          <label>Last Name: <input type="text"/></label><br/>
+          <label>Email: <input type="text"/></label><br/>
+        </fieldset>
+      </form>
+
+
+      <h2>Group 2: Field set has two legends</h2>
+        <form>
+          <fieldset class="CONTROL_8_FAIL">
+            <legend>Address Group 1a</legend>
+            <legend>Address Group 1b</legend>
+            <label>First Name: <input type="text"/></label><br/>
+            <label>Last Name: <input type="text"/></label><br/>
+            <label>Email: <input type="text"/></label><br/>
+          </fieldset>
+      </form>
+      
+      
+      <h2>Group 3: Field set has a legend</h2>
+      <form>
+        <fieldset class="CONTROL_8_PASS">
+          <legend>Radio Button Group 1</legend>
+          <label><input type="radio"/>Radio 11</label><br/>
+          <label><input type="radio"/>Radio 12</label><br/>
+          <label><input type="radio"/>Radio 13</label><br/>
+        </fieldset>
+      </form>
+      
+      <h2>Group 4: Field set legend hidden by display: none</h2>
+      <form>
+        <fieldset class="CONTROL_8_FAIL">
+          <legend style="display: none">Radio Button Group 2</legend>
+          <label><input type="radio"/>Radio 21</label><br/>
+          <label><input type="radio"/>Radio 22</label><br/>
+          <label><input type="radio"/>Radio 23</label><br/>
+        </fieldset>
+      </form>
+
+      <h2>Group 5: Field set legend hidden by visibility: hidden</h2>
+      <form>
+        <fieldset class="CONTROL_8_FAIL">
+          <legend style="visibility: hidden">Radio Button Group 2</legend>
+          <label><input type="radio"/>Radio 21</label><br/>
+          <label><input type="radio"/>Radio 22</label><br/>
+          <label><input type="radio"/>Radio 23</label><br/>
+        </fieldset>
+      </form>
+      
+      <h2>Group 6: Field set legend hidden off screen</h2>
+      <form>
+        <fieldset class="CONTROL_8_PASS">
+          <legend style="position: absolute; left: -300em; top: -30em">Radio Button Group 3</legend>
+          <label><input type="radio"/>Radio 31</label><br/>
+          <label><input type="radio"/>Radio 32</label><br/>
+          <label><input type="radio"/>Radio 33</label><br/>
+        </fieldset>
+      </form>
+    
+    </div>
+  </body>
+</html>

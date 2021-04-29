@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Link 1</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1> All link groups that have the same url must have the same accessible name</h1>
+      
+      
+
+      <h2>Group 1: Same accessible name: child text content</h2>
+      <ul>  
+        <li><a href="group1_same.html" class="LINK_1_MC">Group 1: Same</a></li> 
+        <li><a href="group1_same.html" class="LINK_1_MC">Group 1: Same</a></li>
+        <li><a href="group1_same.html" class="LINK_1_MC">Group 1: Same </a></li>
+      </ul>  
+
+      <h2>Group 2: Same accessible name: aria-label and child text content</h2>
+      <ul>  
+        <li><a href="group2_same.html" class="LINK_1_MC">Group 2: Same</a></li> 
+        <li><a href="group2_same.html" aria-label="Group 2: Same" class="LINK_1_MC">Group 2: Different A</a></li>
+      </ul>  
+        
+      <h2>Group 3: Same accessible name: aria-label and child text content</h2>
+      <ul>  
+        <li><a href="group3_same.html" class="LINK_1_MC">Group 3: Same</a></li> 
+        <div hidden style="display: none" id="div31">Group 3: Same</div><li><a href="group3_same.html" aria-labelledby="div31" class="LINK_1_MC">Group 3: Different A</a></li>
+        <li><a href="group3_same.html" aria-label="Group 3: Same" class="LINK_1_MC">Group 3: Different B</a></li>
+      </ul>  
+        
+      <h2>Group 4: Same accessible name: aria-label, child text content, and image link alt</h2>
+      <ul>  
+        <li><a href="group4_same.html" class="LINK_1_MC">Group 4: Same</a></li> 
+        <div  id="div41">Group 4: Same</div><li><a href="group4_same.html" aria-labelledby="div41" class="LINK_1_MC">Group 4: Different A</a></li>
+        <li><a href="group4_same.html"><img alt="Group 4: Same" src="black.png" class="LINK_1_MC"/></a></li>
+      </ul>
+      
+      <h2>Group 5: 2 Links have same accessible name and 1 link has a different accessible name: child text content</h2>
+      <ul>  
+        <li><a href="group5_same.html" class="LINK_1_MC">Group 5: Same</a></li> 
+        <li><a href="group5_same.html" class="LINK_1_MC">Group 5: Different A</a></li>
+        <li><a href="group5_same.html" class="LINK_1_MC">Group 5: Same</a></li>
+      </ul>
+      
+      <h2>Group 6: 3 Different accessible names: child text content</h2>
+      <ul>  
+        <li><a href="group6_same.html" class="LINK_1_MC">Group 6: Different A</a></li> 
+        <li><a href="group6_same.html" class="LINK_1_MC">Group 6: Different B</a></li>
+        <li><a href="group6_same.html" class="LINK_1_MC">Group 6: Different C</a></li>
+      </ul>
+      
+      <h2>Group 7: Different accessible names: child text content and aria-label</h2>
+      <ul>  
+        <li><a href="group7_same.html" class="LINK_1_MC">Group 7: Same</a></li> 
+        <li><a href="group7_same.html" class="LINK_1_MC" aria-label="Group 7: Different A">Group 7: Same</a></li>
+      </ul>      
+      
+      <h2>Group 8: Different accessible names: child text content, aria-labelledby, and image link alt</h2>
+      <ul>
+        <li><a href="group8_same.html" class="LINK_1_MC">Group 8: Different A</a></li> 
+        <div hidden id="div81">Group 8: Different B</div><li><a href="group8_same.html" aria-labelledby="div81" class="LINK_1_MC">Group 8: Different C</a></li>
+        <li><a href="group8_same.html"><img alt="Group 8: Different D" src="black.png" class="LINK_1_MC"/></a></li>
+      </ul>
+      
+      <h2>Group 9: Hidden Labels, all with the same accessible name. One with a different url.</h2>
+      <ul>
+        <li><a href="group9_same.html" class="LINK_1_MC">Group 9: Same</a></li> 
+        <li><a href="group9_same.html" class="LINK_1_MC">Group 9: Same</a></li> 
+        <li><a href="group9_same.html" hidden class="LINK_1_HIDDEN">Group 9: Same</a></li> 
+        <li><a href="group9_same.html" style="display: none" class="LINK_1_HIDDEN">Group 9: Different</a></li>  
+        <li><a href="group9_same.html" aria-hidden="true" class="LINK_1_HIDDEN">Group 9: Different</a></li>  
+        <li><a href="group9_different.html" style="visibility: hidden" class="LINK_1_HIDDEN">Group 9: Same</a></li>  
+      </ul>  
+  
+      <h2>Group 10: Links with different URLs</h2>
+      <ul>
+        <li><a href="group10A.html" class="LINK_1_MC">Group 10A: Different</a></li> 
+        <li><a href="group10B.html" class="LINK_1_MC">Group 10B: Different</a></li> 
+        <li><a href="group10C.html" class="LINK_1_MC">Group 10C: Different</a></li> 
+        <li><a href="group10D.html" class="LINK_1_MC">Group 10D: Different</a></li>  
+        <li><a href="group10E.html" class="LINK_1_MC">Group 10E: Different</a></li>  
+        <li><a href="group10F.html" class="LINK_1_MC">Group 10F: Different</a></li>  
+      </ul>        
+    </div>
+  </body>
+</html>

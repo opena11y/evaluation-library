@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Keyboard Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+
+      test( "KEYBOARD_1: All widgets have keyboard event handlers", function() {
+        executeTest('ID_IFRAME_1A', 'KEYBOARD_1');
+      });
+
+      test( "KEYBOARD_1: Some widgets have keyboard event handlers", function() {
+        executeTest('ID_IFRAME_1B', 'KEYBOARD_1');
+      });
+
+      test( "KEYBOARD_2: All functionality operable through the keyboard alone (all pass)", function() {
+        executeTest('ID_IFRAME_2A', 'KEYBOARD_2');
+      });
+
+      test( "KEYBOARD_2: All functionality operable through the keyboard alone (some pass)", function() {
+        executeTest('ID_IFRAME_2B', 'KEYBOARD_2');
+      });
+
+      test( "KEYBOARD_2: All functionality operable through the keyboard alone (all manual checks)", function() {
+        executeTest('ID_IFRAME_2C', 'KEYBOARD_2');
+      });
+
+      test( "KEYBOARD_3: Keyboard Trap", function() {
+        executeTest('ID_IFRAME_3A', 'KEYBOARD_3');
+      });
+
+
+    </script>
+
+    <h2>KEYBOARD_1: Widget elements must have keyboard event handlers</h2>
+    <iframe id="ID_IFRAME_1A" src="keyboard/keyboard_1_all_widgets_have_kb_handlers.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="keyboard/keyboard_1_some_widgets_have_kb_handlers.html"></iframe>
+
+    <h2>KEYBOARD_2: All functionality operable through the keyboard alone</h2>
+    <iframe id="ID_IFRAME_2A" src="keyboard/keyboard_2_all_pass.html"></iframe>
+    <iframe id="ID_IFRAME_2B" src="keyboard/keyboard_2_some_pass.html"></iframe>
+    <iframe id="ID_IFRAME_2C" src="keyboard/keyboard_2_all_mc.html"></iframe>
+
+    <h2>KEYBOARD_3: Keyboard Trap</h2>
+    <iframe id="ID_IFRAME_3A" src="keyboard/keyboard_3_keyboard_trap.html"></iframe>
+    
+  </body>
+
+</html>

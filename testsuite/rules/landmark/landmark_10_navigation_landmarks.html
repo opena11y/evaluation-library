@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 10: Navigation landmarks</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      <h1>Landmark 10: Navigation landmarks</p>
+      Main 1 content
+    </div>
+    
+    <nav class="LANDMARK_10_PASS">
+      <h2>Navigation 1</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </nav>
+    
+    <div role="navigation" class="LANDMARK_10_HIDDEN" style="display: none">
+      <h2>Navigation 2</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </div>
+
+    <div role="navigation" class="LANDMARK_10_PASS">
+      <h2>Navigation 3</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+      <div role="region"  class="LANDMARK_10_PASS" aria-label="Region 1">
+        <ul>
+          <li><a href="link1.html">Link 1</a></li>
+          <li><a href="link2.html">Link 2</a></li>
+          <li><a href="link3.html">Link 3</a></li>
+        </ul>
+      </div>  
+    </div>
+    
+    <nav class="LANDMARK_10_FAIL">
+      <h2>Navigation 4</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+      
+      <div role="main"  class="LANDMARK_10_FAIL" aria-label="Main 1">
+        <h1>Main 2</h1>
+        Main 2 content
+      </div>  
+
+      <div role="contentinfo"  class="LANDMARK_10_FAIL" aria-labelledby="id5">
+        <h2 id="id5">footer 1</h2>
+        footer content
+      </div>  
+    </nav>
+    
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 16: Region landmark must have accessible name</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <div role="navigation">
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </div>
+    
+    <div role="form">
+      <h2>Form 1</h2>
+    
+      <label>Text 1: <input type="text"></label>
+
+      <div role="region" class="LANDMARK_16_PASS" aria-label="Region 1">
+            <label>Text 2: <input type="text"></label>
+      </div>
+      
+      <div role="region" class="LANDMARK_16_MC">
+            <label>Text 3: <input type="text"></label>      
+      </div> 
+
+        <div role="region" class="LANDMARK_16_HIDDEN" style="display: none">
+          <ul>
+            <li><a href="link4.html">Link 4</a></li>
+            <li><a href="link5.html">Link 5</a></li>
+            <li><a href="link6.html">Link 6</a></li>           
+          </ul>
+        </div>
+      
+    
+    </div>
+
+    
+    <div role="main">
+      <h1>Landmark 16: Region landmark must have accessible name</h1>
+
+      <div role="form">
+        <h2>Form 2</h2>
+    
+        <label>Text 4: <input type="text"></label>
+
+        <div role="region" aria-labelledby="id_region_5" class="LANDMARK_16_PASS">
+            <label id="id_region_5">Text 5: <input type="text"></label>
+        </div>
+
+        <div role="region" class="LANDMARK_16_HIDDEN" hidden>
+            <label>Text 6: <input type="text"></label>
+        </div>
+      
+        <div role="region" class="LANDMARK_16_MC">
+            <label>Text 7: <input type="text"></label>
+        </div>
+    
+      </div>
+  
+    </div>
+
+    <div role="complementary">
+      <h1>Landmark 16: Region landmark must have accessible name</h1>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 12: Alert, alertdialog, dialog, and status must have accessible name</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 12 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 12: Alert, alertdialog, dialog, and status must have accessible name</h1>
+        
+        <div role="alert" aria-label="Alert 1"></div>
+
+        <div role="alert" aria-labelledby="ID_ALERT_2"></div>
+
+        <div role="alert" title="Alert 3"></div>
+
+        <div role="alert" hidden></div>
+
+        <div role="alertdialog" class="WIDGET_12_MC" aria-label="Alertdialog 1"></div>
+
+        <div id="ID_ALERTDIALOG_2">Alert dialog 2</div>
+        <div role="alertdialog" class="WIDGET_12_MC" aria-labelledby="ID_ALERTDIALOG_2"></div>
+
+        <div role="alertdialog" class="WIDGET_12_MC" title="Alert Dialog 3"></div>
+
+        <div role="alertdialog" style="display:none" class="WIDGET_12_HIDDEN"></div>
+       
+        <div role="alertdialog" class="WIDGET_12_FAIL"></div>
+
+        <div role="dialog" class="WIDGET_12_MC" aria-label="Dialog 1"></div>
+
+        <div id="ID_DIALOG_2">Dialog 2</div>
+        <div role="dialog" class="WIDGET_12_MC" aria-labelledby="ID_DIALOG_2"></div>
+
+        <div role="dialog" class="WIDGET_12_MC" title="Dialog 3"></div>
+
+        <div role="dialog" aria-hidden="true" class="WIDGET_12_HIDDEN"></div>
+
+        <div role="dialog" class="WIDGET_12_FAIL"></div>
+        
+        <div role="status" aria-label="Status 1"></div>
+
+        <div role="status" aria-labelledby="ID_STATUS_2"></div>
+
+        <div role="status" title="Status 3"></div>
+
+        <div role="status" hidden></div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 12 test case</div>
+      </footer>
+    
+  </body>
+</html>

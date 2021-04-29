@@ -1,0 +1,343 @@
+#!/usr/bin/env bash
+
+# exit_on_error:
+#   If set to 0, the script will run until reaching the end, without
+#   regard to the detection of warnings or errors by JavaScript Lint.
+#   If set to 1, the script will exit immediately after a warning or
+#   error is detected by JavaScript Lint.
+
+exit_on_error=1
+
+# check_status_code: Process the return status of call to JavaScript
+# Lint. When exit_on_error is set to 1 and the return status is non-
+# zero, the function prints the JavaScript Lint message that corresponds
+# to the status code and then terminates execution of the script.
+
+function check_status_code() {
+  code=$?
+  case $code in
+    (0) msg="Success" ;;
+    (1) msg="JavaScript warnings" ;;
+    (2) msg="Usage or configuration error" ;;
+    (3) msg="JavaScript error" ;;
+    (4) msg="File error" ;;
+  esac
+
+  if [[ $exit_on_error == 1 && $code != 0 ]] ; then
+    echo
+    echo JavaScript Lint message: $msg
+    exit $code
+  fi
+}
+
+# JSLINT function: A wrapper for calls to JavaScript Lint that allows
+# additional processing based on the status code of each call. In this
+# script, the function is only called when the environment variable
+# JSLINT is defined.
+
+function JSLINT() {
+  $JSLINT $1
+  check_status_code
+}
+
+echo "... rule files ..."
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT rules/rules_audio.js
+  JSLINT rules/rules_bypass.js
+  JSLINT rules/rules_color.js
+  JSLINT rules/rules_error_feedback.js
+  JSLINT rules/rules_focus.js
+  JSLINT rules/rules_form_controls.js
+  JSLINT rules/rules_frames.js
+  JSLINT rules/rules_headings.js
+  JSLINT rules/rules_html.js
+  JSLINT rules/rules_images.js
+  JSLINT rules/rules_keyboard.js
+  JSLINT rules/rules_landmarks.js
+  JSLINT rules/rules_language.js
+  JSLINT rules/rules_layout.js
+  JSLINT rules/rules_links.js
+  JSLINT rules/rules_lists.js
+  JSLINT rules/rules_navigation.js
+  JSLINT rules/rules_reading_order.js
+  JSLINT rules/rules_resize.js
+  JSLINT rules/rules_roles.js
+  JSLINT rules/rules_sensory.js
+  JSLINT rules/rules_tables.js
+  JSLINT rules/rules_timing.js
+  JSLINT rules/rules_title.js
+  JSLINT rules/rules_video.js
+  JSLINT rules/rules_widgets.js
+fi
+
+echo "... rule nls files ..."
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT nls/en-US/rules_nls_common.js
+  JSLINT nls/en-US/rules_nls_audio.js
+  JSLINT nls/en-US/rules_nls_bypass.js
+  JSLINT nls/en-US/rules_nls_color.js
+  JSLINT nls/en-US/rules_nls_error_feedback.js
+  JSLINT nls/en-US/rules_nls_focus.js
+  JSLINT nls/en-US/rules_nls_form_controls.js
+  JSLINT nls/en-US/rules_nls_frames.js
+  JSLINT nls/en-US/rules_nls_headings.js
+  JSLINT nls/en-US/rules_nls_html.js
+  JSLINT nls/en-US/rules_nls_images.js
+  JSLINT nls/en-US/rules_nls_keyboard.js
+  JSLINT nls/en-US/rules_nls_landmarks.js
+  JSLINT nls/en-US/rules_nls_language.js
+  JSLINT nls/en-US/rules_nls_layout.js
+  JSLINT nls/en-US/rules_nls_links.js
+  JSLINT nls/en-US/rules_nls_lists.js
+  JSLINT nls/en-US/rules_nls_navigation.js
+  JSLINT nls/en-US/rules_nls_reading_order.js
+  JSLINT nls/en-US/rules_nls_resize.js
+  JSLINT nls/en-US/rules_nls_roles.js
+  JSLINT nls/en-US/rules_nls_sensory.js
+  JSLINT nls/en-US/rules_nls_tables.js
+  JSLINT nls/en-US/rules_nls_timing.js
+  JSLINT nls/en-US/rules_nls_title.js
+  JSLINT nls/en-US/rules_nls_video.js
+  JSLINT nls/en-US/rules_nls_widgets.js
+  echo "----------------------------------------------------------------"
+fi
+
+echo "... ruleset files ..."
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT rulesets/wcag20_aria_strict_ruleset.js
+  JSLINT rulesets/wcag20_aria_transitional_ruleset.js
+  JSLINT rulesets/test_ruleset.js
+  echo "----------------------------------------------------------------"
+fi
+
+echo "... evaluation scripting files ..."
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT wai_aria/aria.js 
+  JSLINT scripts/cache_util.js 
+  JSLINT scripts/cache_abbreviations.js 
+  JSLINT scripts/cache_color_contrast.js 
+  JSLINT scripts/cache_controls.js 
+  JSLINT scripts/cache_dom_element.js 
+  JSLINT scripts/cache_dom_traversal.js 
+  JSLINT scripts/cache_frames.js 
+  JSLINT scripts/cache_headings_landmarks.js 
+  JSLINT scripts/cache_images.js 
+  JSLINT scripts/cache_languages.js 
+  JSLINT scripts/cache_links.js 
+  JSLINT scripts/cache_lists.js 
+  JSLINT scripts/cache_media.js
+  JSLINT scripts/cache_style.js 
+  JSLINT scripts/cache_tables.js 
+  JSLINT scripts/cache_text.js 
+  JSLINT scripts/cache_keyboard_focus.js 
+  JSLINT scripts/cache_timing.js 
+  JSLINT scripts/cache_page_information.js 
+  JSLINT scripts/information_items.js 
+  JSLINT scripts/result_summary.js 
+  JSLINT scripts/evaluation_result.js 
+  JSLINT scripts/rule_result.js 
+  JSLINT scripts/element_result.js 
+  JSLINT scripts/filtered_cache_item_results.js 
+  JSLINT scripts/rule_group_results.js 
+  JSLINT scripts/cache_nls.js 
+  JSLINT scripts/rule_category_nls.js 
+  JSLINT scripts/rule_scope_nls.js 
+  JSLINT scripts/wcag20_nls.js     
+  JSLINT scripts/evaluator.js        
+  JSLINT scripts/rule_manager.js 
+  JSLINT scripts/ruleset_manager.js        
+  echo "----------------------------------------------------------------"
+fi
+
+echo "... Checking page information file ..."
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT scripts/cache_page_information.js
+fi
+
+echo "... Updating export directory ..."
+
+cat \
+openajax_a11y_constants.js \
+language/language_codes.js \
+wai_aria/aria.js           \
+scripts/cache_util.js      \
+scripts/cache_abbreviations.js  \
+scripts/cache_color_contrast.js \
+scripts/cache_controls.js      \
+scripts/cache_dom_element.js   \
+scripts/cache_dom_traversal.js \
+scripts/cache_frames.js        \
+scripts/cache_headings_landmarks.js \
+scripts/cache_images.js    \
+scripts/cache_languages.js \
+scripts/cache_links.js     \
+scripts/cache_lists.js     \
+scripts/cache_media.js     \
+scripts/cache_style.js     \
+scripts/cache_tables.js    \
+scripts/cache_text.js      \
+scripts/cache_keyboard_focus.js \
+scripts/cache_timing.js    \
+scripts/cache_page_information.js \
+scripts/information_items.js \
+scripts/result_summary.js \
+scripts/evaluation_result.js \
+scripts/rule_result.js \
+scripts/element_result.js \
+scripts/filtered_cache_item_results.js \
+scripts/rule_group_results.js \
+scripts/formatter_tree_view.js \
+scripts/cache_nls.js \
+scripts/rule_category_nls.js \
+scripts/wcag20_nls.js \
+openajax_a11y.js  \
+scripts/rule_manager.js \
+scripts/ruleset_manager.js \
+scripts/evaluator.js \
+nls/en-US/cache_nls.js \
+nls/en-US/rule_category_nls.js \
+nls/en-US/wcag20_nls.js  > export/scripts/oaa_a11y_evaluation.js
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT export/scripts/oaa_a11y_evaluation.js
+fi
+md5 export/scripts/oaa_a11y_evaluation.js > export/md5/oaa_a11y_evaluation.md5
+
+cat \
+nls/en-US/rules_nls_common.js \
+nls/en-US/rules_nls_audio.js \
+nls/en-US/rules_nls_bypass.js \
+nls/en-US/rules_nls_color.js \
+nls/en-US/rules_nls_error_feedback.js \
+nls/en-US/rules_nls_focus.js \
+nls/en-US/rules_nls_form_controls.js \
+nls/en-US/rules_nls_frames.js \
+nls/en-US/rules_nls_images.js \
+nls/en-US/rules_nls_headings.js \
+nls/en-US/rules_nls_html.js \
+nls/en-US/rules_nls_keyboard.js \
+nls/en-US/rules_nls_landmarks.js \
+nls/en-US/rules_nls_language.js \
+nls/en-US/rules_nls_layout.js \
+nls/en-US/rules_nls_links.js \
+nls/en-US/rules_nls_lists.js \
+nls/en-US/rules_nls_navigation.js \
+nls/en-US/rules_nls_reading_order.js \
+nls/en-US/rules_nls_resize.js \
+nls/en-US/rules_nls_roles.js \
+nls/en-US/rules_nls_sensory.js \
+nls/en-US/rules_nls_tables.js \
+nls/en-US/rules_nls_timing.js \
+nls/en-US/rules_nls_title.js \
+nls/en-US/rules_nls_video.js \
+nls/en-US/rules_nls_widgets.js \
+rules/rules_audio.js \
+rules/rules_bypass.js \
+rules/rules_color.js \
+rules/rules_error_feedback.js \
+rules/rules_focus.js \
+rules/rules_form_controls.js \
+rules/rules_frames.js \
+rules/rules_images.js \
+rules/rules_headings.js \
+rules/rules_html.js \
+rules/rules_keyboard.js \
+rules/rules_landmarks.js \
+rules/rules_language.js \
+rules/rules_layout.js \
+rules/rules_links.js \
+rules/rules_lists.js \
+rules/rules_navigation.js \
+rules/rules_reading_order.js \
+rules/rules_resize.js \
+rules/rules_roles.js \
+rules/rules_sensory.js \
+rules/rules_tables.js \
+rules/rules_timing.js \
+rules/rules_title.js \
+rules/rules_video.js \
+rules/rules_widgets.js > export/scripts/oaa_a11y_rules.js
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT export/scripts/oaa_a11y_rules.js
+fi
+md5 export/scripts/oaa_a11y_rules.js > export/md5/oaa_a11y_rules.md5
+
+cat \
+rulesets/test_ruleset.js \
+rulesets/wcag20_aria_transitional_ruleset.js \
+rulesets/wcag20_aria_strict_ruleset.js > export/scripts/oaa_a11y_rulesets.js
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT export/scripts/oaa_a11y_rulesets.js
+fi
+md5 export/scripts/oaa_a11y_rulesets.js > export/md5/oaa_a11y_rulesets.md5
+
+echo "----------------------------------------------------------------"
+echo "... Creating zip, tar.gz and md5 files ..."
+
+cd export
+zip zip/oaa_a11y_all.zip scripts/*.js
+md5 zip/oaa_a11y_all.zip > md5/oaa_a11y_all.md5
+
+echo "----------------------------------------------------------------"
+tar cvzf tar/oaa_a11y_all.tar.gz scripts/*.js
+md5 tar/oaa_a11y_all.tar.gz > md5/oaa_a11y_all.tar.gz.md5
+cd ..
+
+cat \
+openajax_a11y_amd_start.js \
+export/scripts/oaa_a11y_evaluation.js \
+export/scripts/oaa_a11y_rules.js \
+export/scripts/oaa_a11y_rulesets.js \
+openajax_a11y_amd_end.js > export/amd/oaa_a11y_amd.js
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT export/amd/oaa_a11y_amd.js
+fi
+md5 export/amd/oaa_a11y_amd.js > export/md5/oaa_a11y_amd.md5
+
+cat \
+openajax_a11y_object_start.js \
+export/scripts/oaa_a11y_evaluation.js \
+export/scripts/oaa_a11y_rules.js \
+export/scripts/oaa_a11y_rulesets.js \
+openajax_a11y_object_end.js > export/object/oaa_a11y_object.js
+
+if [ -n "$JSLINT" ]; then
+  echo "---------------------------- JSLINT ----------------------------"
+  JSLINT export/object/oaa_a11y_object.js
+fi
+md5 export/object/oaa_a11y_object.js > export/md5/oaa_a11y_object.md5
+
+echo "----------------------------------------------------------------"
+cd export
+zip zip/oaa_report_all.zip reports/*.js reports/*.inc reports/*.css
+md5 zip/oaa_report_all.zip > md5/oaa_report_all.md5
+
+echo "----------------------------------------------------------------"
+tar cvzf tar/oaa_report_all.tar.gz reports/*.js reports/*.inc reports/*.css
+md5 tar/oaa_report_all.tar.gz > md5/oaa_report_all.tar.gz.md5
+cd ..
+
+echo
+if [ $exit_on_error == 1 ]
+then
+  echo No JavaScript Lint warnings or errors detected!
+else
+  echo Note: JavaScript Lint exit_on_error feature was not enabled.
+fi

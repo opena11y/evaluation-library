@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Navigation Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+
+
+      test( "NAVIGATION_1 two landmarks", function() {
+        executeTest('ID_IFRAME_1A', 'NAVIGATION_1');
+      });
+
+
+      test( "NAVIGATION_1 one landmark", function() {
+        executeTest('ID_IFRAME_1B', 'NAVIGATION_1');
+      });
+
+      test( "NAVIGATION_1 no landmarks", function() {
+        executeTest('ID_IFRAME_1C', 'NAVIGATION_1');
+      });
+
+      test( "NAVIGATION_2 five landmarks", function() {
+        executeTest('ID_IFRAME_2A', 'NAVIGATION_2');
+      });
+
+      test( "NAVIGATION_2 two landmarks", function() {
+        executeTest('ID_IFRAME_2B', 'NAVIGATION_2');
+      });
+      
+      
+     test( "NAVIGATION_2 no main landmark", function() {
+        executeTest('ID_IFRAME_2C', 'NAVIGATION_2');
+     });
+
+     test( "NAVIGATION_2 no navigation landmark", function() {
+        executeTest('ID_IFRAME_2D', 'NAVIGATION_2');
+     });
+      
+     test( "NAVIGATION_2 no landmarks", function() {
+        executeTest('ID_IFRAME_2E', 'NAVIGATION_2');
+      });
+      
+     test( "NAVIGATION_3 h1 and h3 headings", function() {
+        executeTest('ID_IFRAME_3A', 'NAVIGATION_3');
+     });
+
+     test( "NAVIGATION_3 h1, h2 and h3 headings", function() {
+        executeTest('ID_IFRAME_3B', 'NAVIGATION_3');
+     });
+
+     test( "NAVIGATION_3 no headings", function() {
+        executeTest('ID_IFRAME_3C', 'NAVIGATION_3');
+     });
+
+      test( "NAVIGATION_4 five landmarks", function() {
+        executeTest('ID_IFRAME_4A', 'NAVIGATION_4');
+      });
+
+      test( "NAVIGATION_4 two landmarks", function() {
+        executeTest('ID_IFRAME_4B', 'NAVIGATION_4');
+      });
+      
+      
+     test( "NAVIGATION_4 no main landmark", function() {
+        executeTest('ID_IFRAME_4C', 'NAVIGATION_4');
+     });
+
+     test( "NAVIGATION_4 no navigation landmark", function() {
+        executeTest('ID_IFRAME_4D', 'NAVIGATION_4');
+     });
+      
+     test( "NAVIGATION_4 no landmarks", function() {
+        executeTest('ID_IFRAME_4E', 'NAVIGATION_4');
+      });
+      
+      
+     test( "NAVIGATION_5 h1 and h3 headings", function() {
+        executeTest('ID_IFRAME_5A', 'NAVIGATION_5');
+     });
+
+     test( "NAVIGATION_5 h1, h2 and h3 headings", function() {
+        executeTest('ID_IFRAME_5B', 'NAVIGATION_5');
+     });
+
+     test( "NAVIGATION_5 no headings", function() {
+        executeTest('ID_IFRAME_5C', 'NAVIGATION_5');
+     });
+    </script>
+    
+    <h2>NAVIGATION_1: At least two ways to navigate a website</h2>
+    <iframe id="ID_IFRAME_1A" src="navigation/navigation_1_A_two_ways_with_landmarks.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="navigation/navigation_1_B_two_ways_with_one_landmark.html"></iframe>
+    <iframe id="ID_IFRAME_1C" src="navigation/navigation_1_C_two_ways_no_landmarks.html"></iframe>
+
+    <h2>NAVIGATION_2: Consistent Navigation with landmarks</h2>
+    <iframe id="ID_IFRAME_2A" src="navigation/navigation_2_A_five_landmarks.html"></iframe>
+    <iframe id="ID_IFRAME_2B" src="navigation/navigation_2_B_two_landmarks.html"></iframe>
+    <iframe id="ID_IFRAME_2C" src="navigation/navigation_2_C_no_main_landmark.html"></iframe>
+    <iframe id="ID_IFRAME_2D" src="navigation/navigation_2_D_no_navigation_landmark.html"></iframe>
+    <iframe id="ID_IFRAME_2E" src="navigation/navigation_2_E_no_landmarks.html"></iframe>
+
+    <h2>NAVIGATION_3: Consistent ordering of h1 and h2 labels</h2>
+    <iframe id="ID_IFRAME_3A" src="navigation/navigation_3_A_h1_h3_headings.html"></iframe>
+    <iframe id="ID_IFRAME_3B" src="navigation/navigation_3_B_h1_h2_h3_headings.html"></iframe>
+    <iframe id="ID_IFRAME_3C" src="navigation/navigation_3_C_no_headings.html"></iframe>
+
+    <h2>NAVIGATION_4: Consistent Labeling of landmarks</h2>
+    <iframe id="ID_IFRAME_4A" src="navigation/navigation_4_A_five_landmarks.html"></iframe>
+    <iframe id="ID_IFRAME_4B" src="navigation/navigation_4_B_two_landmarks.html"></iframe>
+    <iframe id="ID_IFRAME_4C" src="navigation/navigation_4_C_no_main_landmark.html"></iframe>
+    <iframe id="ID_IFRAME_4D" src="navigation/navigation_4_D_no_navigation_landmark.html"></iframe>
+    <iframe id="ID_IFRAME_4E" src="navigation/navigation_4_E_no_landmarks.html"></iframe>
+    
+    <h2>NAVIGATION_3: Consistent labeling of h1 and h2 labels</h2>
+    <iframe id="ID_IFRAME_5A" src="navigation/navigation_5_A_h1_h3_headings.html"></iframe>
+    <iframe id="ID_IFRAME_5B" src="navigation/navigation_5_B_h1_h2_h3_headings.html"></iframe>
+    <iframe id="ID_IFRAME_5C" src="navigation/navigation_5_C_no_headings.html"></iframe>
+
+    
+  </body>
+
+</html>

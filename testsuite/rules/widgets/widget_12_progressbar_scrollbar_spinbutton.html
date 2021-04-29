@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 12: Progressbar, scrollbar, and spinbutton must have accessible name</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 12 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 12: Progressbar, scrollbar, and spinbutton must have accessible name</h1>
+
+        <h2>Progress Bar Role</h2>
+        <div role="progressbar" class="WIDGET_12_MC" aria-label="Progressbar 1: Aria-label">Progressbar 1</div>
+
+        <div id="ID_PBAR_2">Progressbar 2: Aria-labelledby</div>
+        <div role="progressbar" class="WIDGET_12_MC" aria-labelledby="ID_PBAR_2"></div>
+
+        <div hidden role="progressbar" class="WIDGET_12_HIDDEN" aria-label="Progressbar 3: Hidden">Progressbar 3</div>
+
+        <div>Progressbar 4: Fail</div>
+        <div role="progressbar" class="WIDGET_12_FAIL">Progressbar 4</div>
+
+
+
+        <h2>Scrollbar Bar Role</h2>
+        <div role="scrollbar" class="WIDGET_12_MC" aria-label="Scrollbar 1: Aria-label">Scrollbar 1/div>
+
+        <div id="ID_SBAR_2">Scrollbar 2: Aria-labelledby</div>
+        <div role="scrollbar" class="WIDGET_12_MC" aria-labelledby="ID_SBAR_2">Scrollbar 2</div>
+
+        <div aria-hidden="true" role="scrollbar" class="WIDGET_12_HIDDEN" aria-label="Scrollbar 3: Hidden">Scrollbar 3</div>
+
+        <div>Scrollbar 4: Manual Check</div>
+        <div role="scrollbar" class="WIDGET_12_MC">Scrollbar 4</div>
+
+
+        <h2>Spin Button Role</h2>
+
+        <div role="spinbutton" class="WIDGET_12_MC" aria-label="Spinbutton 1: Aria-label">Spinbutton 1</div>
+
+        <div id="ID_SBUTTON_2">Spinbutton 2: Aria-labelledby</div>
+        <div role="spinbutton" class="WIDGET_12_MC" aria-labelledby="ID_SBUTTON_2">Spinbutton 2</div>
+
+        <div style="display:none" role="spinbutton" class="WIDGET_12_HIDDEN" aria-label="Spinbutton 3: Hidden">Spinbutton 3</div>
+
+        <div>Spinbutton 4: Fail</div>
+        <div role="spinbutton" class="WIDGET_12_FAIL">Spinbutton 4</div>
+
+
+        <h2>Timer Role</h2>
+        <div role="timer" class="WIDGET_12_MC" aria-label="Timer 1: Aria-label">Timer 1</div>
+
+        <div id="ID_TIMER_2">Timer 2: Aria-labelledby</div>
+        <div role="timer" class="WIDGET_12_MC" aria-labelledby="ID_TIMER_2">Timer 2</div>
+
+        <div hidden role="timer" class="WIDGET_12_HIDDEN" aria-label="Timer 3: Hidden">Timer 3</div>
+
+        <div>Timer 4: Fail</div>
+        <div role="timer" class="WIDGET_12_FAIL">Timer 4</div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 12 test case</div>
+      </footer>
+    
+  </body>
+</html>

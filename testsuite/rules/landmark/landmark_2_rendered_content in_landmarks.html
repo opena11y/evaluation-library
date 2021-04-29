@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 2</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <h1 class="LANDMARK_2_FAIL">Landmark 2: All rendered content should be in a landmark </h1>
+    <div  role="main">
+      <p class="LANDMARK_2_PASS">This is a paragraph in a main landmark.</p>
+      <h1 class="LANDMARK_2_PASS">This is a h1 element in a main landmark. </h1>
+      <div class="LANDMARK_2_PASS" >
+        <p class="LANDMARK_2_PASS">This is a paragraph contained in a div element contained in a main landmark.</p>
+      </div>
+    </div>
+
+    <main>
+      <p class="LANDMARK_2_PASS">This is a paragraph in a main element.</p>
+      <h1 class="LANDMARK_2_PASS">This is a h1 element in a main element. </h1>
+      <div class="LANDMARK_2_PASS" >
+        <p class="LANDMARK_2_PASS">This is a paragraph contained in a div element contained in a main element.</p>
+      </div>
+
+    </main>
+    
+    
+    <div  role="navigation">
+      <p class="LANDMARK_2_PASS"> this is a paragraph contained in a navigation landmark, below is an image contained in the same landmark</p>
+      <img class="LANDMARK_2_PASS" src="img1.png"/>
+    </div>
+
+    <nav>
+      <p class="LANDMARK_2_PASS"> this is a paragraph contained in a navigation element, below is an image contained in the same landmark</p>
+      <img class="LANDMARK_2_PASS" src="img1.png"/>
+    </nav>
+    
+    
+
+    <div  role="contentinfo">
+      <table>
+        <tr>
+          <td class="LANDMARK_2_PASS">This is a table contained in a information landmark</td>
+          <td class="LANDMARK_2_PASS">This is a table contained in a information landmark</td>
+        </tr>
+      </table>
+    </div>
+
+    <footer>
+      <table>
+        <tr>
+          <td class="LANDMARK_2_PASS">This is a table contained in a information landmark</td>
+          <td class="LANDMARK_2_PASS">This is a table contained in a information landmark</td>
+        </tr>
+      </table>
+    </footer>
+    
+    
+    <div  role="banner">
+      <form>
+        <button class="LANDMARK_2_PASS">this is a button inside of a banner landmark</button>
+        <input type="text" class="LANDMARK_2_PASS">This is a textbox inside of a banner landmark</input>
+      </form>
+      <p><embed class="LANDMARK_2_PASS"></embed></p>
+      <p><object class="LANDMARK_2_PASS"></object></p>
+    </div>
+
+    <header>
+      <form>
+        <button class="LANDMARK_2_PASS">this is a button inside of a header element</button>
+        <input type="text" class="LANDMARK_2_PASS">This is a textbox inside of a header element</input>
+      </form>
+      <p><embed class="LANDMARK_2_PASS"></embed></p>
+      <p><object class="LANDMARK_2_PASS"></object></p>
+    </header>
+    
+    <aside>
+      <table>
+        <tr>
+          <td class="LANDMARK_2_PASS">This is a table contained in a aside element</td>
+          <td class="LANDMARK_2_PASS">This is a table contained in a aside element</td>
+        </tr>
+      </table>
+    </aside>
+    
+    <div>
+      <h1 class="LANDMARK_2_FAIL"> These are rendered elements not inside of a landmark </h1>
+      <p class="LANDMARK_2_FAIL">This is paragraph not in landmark</p>
+      <a class="LANDMARK_2_FAIL">This is an anchor not in a landmark</a>
+      <p><embed class="LANDMARK_2_MC"></embed></p>
+      <p><object class="LANDMARK_2_MC"></object></p>
+      <div>
+
+
+    <div>
+      <h1 class="LANDMARK_2_FAIL"> Below are hidden elements </h1>
+      <p class="LANDMARK_2_HIDDEN" hidden>hidden paragraph</p>
+      <div class="LANDMARK_2_HIDDEN" style="display: none">hidden div</div>
+      <a class="LANDMARK_2_HIDDEN" style="visibility: hidden">hidden link </a>
+    <div>
+
+      <input type="hidden" value="0">
+      <input type="hidden" value="2">
+      <input type="hidden" value="3">
+      <input type="hidden" value="4">
+      <input type="hidden" value="5">
+    
+  </body>
+</html>

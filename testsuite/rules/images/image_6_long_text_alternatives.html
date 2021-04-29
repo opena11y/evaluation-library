@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Rule 6: Long Text Alternatives</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Image Rule 6: Long Text Alternatives</h2>
+      
+      <h2> Image with a <code>aria-describedby</code></h2>
+        <div>Image 11: Valid reference to aria-describedby <img src="img1.png" aria-describedby="desc1" alt="Short text alternative for image 11" class="IMAGE_6_MC"/></div>
+        <div id="desc1"> Long text alternative for image 11</div> 
+
+        <div>Image 12: Invalid reference to aria-describedby <img src="img1.png" aria-describedby="desc1 desc2 desc3" alt="Short text alternative for image 12" class="IMAGE_6_FAIL"/></div>
+        
+      <h2>Image with a valid <code>longdesc</code> URL</h2>
+        <div> Image 21: <img src="img2.png" longdesc="valid_url.html"  alt="Short text alternative for image 2" class="IMAGE_6_MC"/></div>
+   
+      <h2>Images with a valid <code>longdesc</code> URL with HTML 5 <code>hidden<code> attribute</h2>
+      <div>Image 31: <img src="img3.png" hidden longdesc="valid_url.html"  alt="Short text alternative for image 3" class="IMAGE_6_HIDDEN"/></div>
+      
+      <h2>Images with a valid <code>longdesc</code> URL with CSS <code>visibility<code> and <code>display</code> properties</h2>
+      <div>Image 41: <img style="visibility: hidden" src="img4.png" longdesc="valid_url.html"  alt="Short text alternative for image 4" class="IMAGE_6_HIDDEN"/></div>
+      <div>Image 42: <img style="display: none" src="img4.png" longdesc="valid_url.html"  alt="Short text alternative for image 5" class="IMAGE_6_HIDDEN"/></div>
+      
+      <h2> Image 5 with a <code>title</code> attribute</h2>  
+      <div>Image 51:<img src="img5.png"  alt="Short text alternative for image 5" title="Long text alternative for Image 5" class="IMAGE_6_MC"/></div>
+      
+      <h2>Image 6 with a valid <code>longdesc</code> URL with HTML <code>aria-hidden<code> attribute</h2>
+        <div>Image 61: <img src="img6.png" longdesc="valid_url.html"  alt="Short text alternative for image 6" aria-hidden="true" class="IMAGE_6_HIDDEN"/> </div>
+        
+      <h2> Image 7 with a valid <code>longdesc</code> URL with <code>role="presentation"</code></h2>  
+      <div>Image 71:<img src="img7.png" role="presentation"  alt="Short text alternative for image 7" longdesc="valid_url.html"/></div>
+
+      <h2> Image 8 with a <code>title</code> attribute</h2>  
+      <div>Image 81:<img src="img8.png"  alt="Short text alternative for image 8" class="IMAGE_6_MC"/></div>
+      
+     <h2>Image 9: Image with a alt text similar to title text</code></h2>
+      <div>Image 9A: <img src="img9.png" alt="description 9A" title="Description 9A" class="IMAGE_6_MC"></div>
+      <div>Image 9B: <img src="img9.png" alt="more description 9B" title="DesCription 9B" class="IMAGE_6_MC"></div>
+      <div>Image 9C: <img src="img9.png" alt="description 9C" title="About description 9C" class="IMAGE_6_MC"></div>
+ 
+    </div>
+  </body>
+</html>

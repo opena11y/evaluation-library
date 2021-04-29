@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts/cache_style.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts/cache_style.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Copyright 2011-2015  OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ 
+/**
+ * @constructor DOMElementComputedStyle
+ *
+ * @memberOf OpenAjax.a11y.cache
+ * 
+ * @desc Create a dom element computed style object is used to add style properties to dom element cache objects 
+ * 
+ * @param  {DOMElement}  dom_element     - dom element node to add computed style information to 
+ * @param  {DOMElement}  parent_element  - parent dom element node for computing inherited properties 
+ *
+ * @property  {String}  display      - Computed value of the CSS 'display' property
+ * @property  {String}  visibility   - Computed value of the CSS 'visibility' property
+ * @property  {Boolean} aria_hidden  - aria-hidden property
+ *
+ * @property  {Number}  is_visible_onscreen   - Constant representing the graphical visibility of the element (i.e is it visible to people with sight)
+ * @property  {Number}  is_visible_to_at      - Constant representing the assistive technology visibility of the element (i.e is it visible to people using a screen reader)
+ * 
+ * @property  {String}  color                 - Computed value of the CSS 'color' property
+ * @property  {String}  color_hex             - Computed value of the CSS 'color' property in hexidecimal format
+ * @property  {String}  opacity               - Computed value of the CSS 'opacity' property
+ * @property  {String}  background_color      - Computed value of the CSS 'background-color' property
+ * @property  {String}  background_color_hex  - Computed value of the CSS 'background-color' property in hexidecimal format
+ * @property  {String}  background_image      - Computed value of the CSS 'background-image' property
+ * @property  {String}  background_repeat     - Computed value of the CSS 'background-repeat' property
+ * @property  {String}  background_position   - Computed value of the CSS 'background-position' property
+ *
+ * @property  {String}  font_family  - Computed value of the CSS 'font-family' property
+ * @property  {String}  font_size    - Computed value of the CSS 'font-size' property
+ * @property  {String}  font_weight  - Computed value of the CSS 'font-weight' property
+ *
+ * @property  {String}  position  - Computed value of the CSS 'position' property
+ * @property  {String}  left      - Computed value of the CSS 'left' property  
+ * @property  {String}  top       - Computed value of the CSS 'top' property
+ * @property  {String}  width     - Computed value of the width of the rendered element in pixels  
+ * @property  {String}  height    - Computed value of the height of the rendered element in pixels
+ *
+ * @property  {String}  pseudo_before   - Computed value content in the :before pseudo  
+ * @property  {String}  pseudo_after    - Computed value content in the :after pseudo  
+ */
+ 
+OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_element) {
+
+  function normalizeBackgroundImage(value, parent_element) {
+
+    var v = value;
+
+    if ((value.toLowerCase() === 'inherit') || 
+        (value.toLowerCase() === 'none') || 
+        (value === '')) {
+    
+      if (parent_element) {  
+        v = parent_element.computed_style.background_image;
+      }
+      else {
+        v = 'none';
+      }
+    }  
+  
+    return v;
+  
+  } // end function
+
+  function  normalizeFontSize(value, parent_element) {
+    if (value.toLowerCase() == 'inherit') {
+      if (parent_element) {
+        return parent_element.computed_style.font_size;
+      }
+      else {
+        return 12;
+      }    
+    }
+    else {
+      return value;
+    }
+  } // end function
+
+  function  normalizeFontWeight(value, parent_element) {
+    if (isNaN(value) ) {
+      switch (value.toLowerCase()) {
+      case 'bold':
+        return 700;
+
+      case 'normal':
+        return 400;
+
+      case 'inherit':
+        if (parent_element) {
+          return parent_element.computed_style.font_weight;
+        }
+        else {
+          return 400;
+        }    
+
+      case 'bolder':
+        return 700;
+    
+      default:
+        return 400;
+      }
+    }
+    else {
+      return parseInt(value,10);
+    }
+  } // end function
+
+
+  function  normalizePositionTop(value, parent_element) {
+    if (value.toLowerCase() == 'inherit') {
+      if (parent_element) {
+        return parent_element.computed_style.top;
+      }
+      else {
+        return 0;
+      }    
+    }
+    else {
+      return parseInt(value,10);
+    }
+  } // end function
+
+  function  normalizePositionLeft(value, parent_element) {
+    if (value.toLowerCase() == 'inherit') {
+      if (parent_element) {
+        return parent_element.computed_style.left;
+      }
+      else {
+        return 0;
+      }    
+    }
+    else {
+      return parseInt(value,10);
+    }
+  } // end function
+
+  this.display  = "";
+  this.visibility = "";
+  this.aria_hidden = false;
+
+  this.is_visible_onscreen = OpenAjax.a11y.VISIBILITY.UNKNOWN;  
+  this.is_visible_to_at = OpenAjax.a11y.VISIBILITY.UNKNOWN;
+
+  this.color   = "";
+  
+  this.background_color = "";
+  this.background_image = "";
+  this.background_repeat = "";
+  this.background_position = "";
+
+  this.outline_style = "";
+  this.outline_color = "";
+  this.outline_width = "";
+  
+  this.font_family = "";
+  this.font_size  = "";
+  this.font_weight = "";
+  this.position  = "";
+  this.left    = "";
+  this.top     = "";
+  this.heigth  = "";
+  this.width   = "";
+  this.area   = "";
+
+  this.psuedo_focus = "";
+  this.psuedo_before = "";
+  this.psuedo_after  = "";
+ 
+  // check to see if getComputedStyle is defined for the engine 
+  if (!window.getComputedStyle) return;
+
+//  OpenAjax.a11y.logger.debug("Element: " + dom_element );  
+
+  try { 
+    var style = window.getComputedStyle(dom_element.node, null);  
+  
+    this.display    = style.getPropertyValue("display");
+    this.visibility = style.getPropertyValue("visibility");
+ 
+    this.color               = style.getPropertyValue("color");
+    this.opacity             = style.getPropertyValue("opacity");
+    
+    this.background_color    = style.getPropertyValue("background-color");
+    this.background_image    = normalizeBackgroundImage(style.getPropertyValue("background-image"), parent_element);
+    this.background_repeat   = style.getPropertyValue("background-repeat");
+    this.background_position = style.getPropertyValue("background-position");
+
+    this.outline_style    = style.getPropertyValue("outline-style");
+    this.outline_color    = style.getPropertyValue("outline-color");
+    this.outline_width    = style.getPropertyValue("outline-width");
+ 
+    this.font_family = style.getPropertyValue("font-family");  
+    this.font_size   = normalizeFontSize(style.getPropertyValue("font-size"), parent_element); 
+    this.font_weight = normalizeFontWeight(style.getPropertyValue("font-weight"), parent_element); 
+ 
+    this.position = style.getPropertyValue("position");
+  }
+  catch (e) {
+    return;
+  }
+  
+  // :before and :after pseudo elements
+
+  if (style) {
+    var before = window.getComputedStyle(dom_element.node, "::before");  
+    this.pseudo_before = before.getPropertyValue("content");
+
+    var after = window.getComputedStyle(dom_element.node, "::after");  
+    this.pseudo_after  = after.getPropertyValue("content");
+
+/*
+    var focus = window.getComputedStyle(dom_element.node, "::focus");  
+    this.focus = focus;  
+    
+    var pv = focus.getPropertyValue("color");
+    if (pv &amp;&amp; pv.length) this.focus  += "color :" + pv + "; ";
+    
+    pv = focus.getPropertyValue("background-color");
+    if (pv &amp;&amp; pv.length) this.focus  += "background-color :" + pv + "; ";
+    
+    pv = focus.getPropertyValue("background-image");
+    if (pv &amp;&amp; pv.length) this.focus  += "background-image :" + pv + "; ";
+    
+
+    pv = focus.getPropertyValue("border-style");
+    if (pv &amp;&amp; pv.length) this.focus  += "border-style :" + pv + "; ";
+
+    pv = focus.getPropertyValue("border-width");
+    if (pv &amp;&amp; pv.length) this.focus  += "border-width :" + pv + "; ";
+
+    pv = focus.getPropertyValue("border-color");
+    if (pv &amp;&amp; pv.length) this.focus  += "border-color :" + pv + "; ";
+
+
+    pv = focus.getPropertyValue("outline-style");
+    if (pv &amp;&amp; pv.length) this.focus  += "outline-style :" + pv + "; ";
+
+    pv = focus.getPropertyValue("outline-width");
+    if (pv &amp;&amp; pv.length) this.focus  += "outline-width :" + pv + "; ";
+    
+    pv = focus.getPropertyValue("outline-color");
+    if (pv &amp;&amp; pv.length) this.focus  += "outline-color :" + pv + "; ";
+*/
+    
+  }  
+
+  // test if getBoundingClientRect is supported 
+  
+  if (dom_element.node.getBoundingClientRect) {
+    var client_rect = dom_element.node.getBoundingClientRect();
+    this.client_rect = client_rect;
+    if (client_rect) {
+      this.top     = client_rect.top;
+      this.left    = client_rect.left;
+      this.height  =  Math.round(client_rect.height);
+      this.width   =  Math.round(client_rect.width); 
+      this.area    = Math.round(this.height * this.width);
+    }  
+    else {
+      this.top  = normalizePositionTop(style.getPropertyValue("top"), parent_element);
+      this.left = normalizePositionLeft(style.getPropertyValue("left"), parent_element);
+    }
+  }
+  else {
+    this.top     = normalizePositionTop(style.getPropertyValue("top"), parent_element);
+    this.left    = normalizePositionLeft(style.getPropertyValue("left"), parent_element);
+  }
+ 
+  // This is an edge case test typcially for body elements and frames
+  if ((this.background_color == 'inherit') ||
+      (this.background_color == 'transparent')) {
+    if (parent_element &amp;&amp; parent_element.computed_style) { 
+      this.background_color   = parent_element.computed_style.background_color;
+      this.background_color_hex = parent_element.computed_style.background_color_hex;
+    }
+    else {
+      this.background_color = 'rgb(255,255,255)';
+      this.background_color_hex = 'ffffff';
+    }   
+  } 
+  else {
+    this.background_color_hex = OpenAjax.a11y.util.RGBToHEX(style.getPropertyValue("background-color")); 
+  }
+
+  if (parent_element &amp;&amp; 
+      parent_element.computed_style ) {
+
+    var parent_style = parent_element.computed_style;
+
+    // We do have parent_element so use its information if needed  
+ 
+    if ((this.display === 'inherit') ||
+        (parent_style.display == 'none'))  {
+      this.display = 'none';
+    } 
+
+    if ((this.visibility === 'inherit') ||
+        (parent_style.visibility === 'hidden')) {
+      this.visibility = parent_style.visibility;
+    } 
+
+    if (this.color == 'inherit') {
+      this.color = parent_style.color;
+      this.color_hex = parent_style.color_hex;
+    }
+    else {
+      this.color_hex = OpenAjax.a11y.util.RGBToHEX(style.getPropertyValue("color"));
+    }
+    
+    if (this.font_family === 'inherit') {
+      this.font_family = parent_style.font_family;
+    } 
+  
+    if (this.position === 'inherit') {
+      this.position = parent_style.position;
+    } 
+  } 
+ 
+  // Calcuate visibility of node content in graphical renderings and to assistive technologies
+
+  if (this.visibility &amp;&amp; 
+      this.visibility.length &amp;&amp; 
+      this.display &amp;&amp; 
+      this.display.length ) { 
+      
+    if ((this.visibility === 'hidden') ||
+        (this.display === 'none')) {
+        
+      if (dom_element.tag_name !== 'area') {
+        this.is_visible_onscreen = OpenAjax.a11y.VISIBILITY.HIDDEN;    
+        this.is_visible_to_at    = OpenAjax.a11y.VISIBILITY.HIDDEN;
+      }
+      else {
+        this.is_visible_onscreen = OpenAjax.a11y.VISIBILITY.VISIBLE;    
+        this.is_visible_to_at    = OpenAjax.a11y.VISIBILITY.VISIBLE;     
+      }
+      
+    } 
+    else {
+      if ((parseInt(this.top, 10) &lt; 0) || 
+          (parseInt(this.left, 10) &lt; 0) ||
+          (parseInt(this.height, 10) &lt; 4) ||
+          (parseInt(this.width, 10) &lt; 4)) {
+        this.is_visible_onscreen = OpenAjax.a11y.VISIBILITY.HIDDEN;
+      }
+      else {
+        this.is_visible_onscreen = OpenAjax.a11y.VISIBILITY.VISIBLE;
+      }
+   
+      if (((typeof dom_element.aria_hidden === 'string') &amp;&amp; 
+          (dom_element.aria_hidden === "true")) ||
+          (parent_style &amp;&amp; parent_style.aria_hidden)) {
+        this.aria_hidden = true;  
+        this.is_visible_to_at = OpenAjax.a11y.VISIBILITY.HIDDEN;  
+      } 
+      else {
+        this.is_visible_to_at = OpenAjax.a11y.VISIBILITY.VISIBLE;     
+      }
+    }
+  } 
+
+  this.is_large_font = (parseInt(this.font_size,10) >= 18) || ((parseInt(this.font_size,10) >= 14) &amp;&amp; (parseInt(this.font_weight,10) >= 300));
+
+};
+
+/**
+ * @method calculateColorContrast
+ *  
+ * @memberOf OpenAjax.a11y.cache.DOMElementComputedStyle
+ * 
+ * @desc Calculates a color contrast raio (CCR) value for the element style object 
+ *
+ * @return {Number}  Returns a number representing the color contrast ratio (CCR)
+ */ 
+
+OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.calculateColorContrastRatio = function () {
+
+ if( this.color_hex &amp;&amp; 
+   (this.color_hex.length == 6) &amp;&amp; 
+    this.background_color_hex &amp;&amp; 
+   (this.background_color_hex.length == 6)) {
+  var L1 = this.getLuminance(this.color_hex);
+  var L2 = this.getLuminance(this.background_color_hex);
+  this.color_contrast_ratio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
+ }
+ else {
+  this.color_contrast_ratio = null;
+ }
+
+ return this.color_contrast_ratio;
+   
+};
+
+
+/**
+ * @method getLuminance
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElementComputedStyle
+ * 
+ * @desc Get the luminance value of a hex incoded color 
+ *
+ * @param {String}  color  - Hex representation of a CSS color value
+ * 
+ * @return {Number}  Returns a number representing the limnance value
+ */ 
+
+OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.getLuminance = function (color) {
+
+ // OpenAjax.a11y.logger.debug("  " + color );
+
+ // Get decimal values
+ var R8bit = parseInt(color.substring(0,2),16);
+ var G8bit = parseInt(color.substring(2,4),16);
+ var B8bit = parseInt(color.substring(4,6),16);
+        
+ // Get sRGB values
+ var RsRGB = R8bit/255;
+ var GsRGB = G8bit/255;
+ var BsRGB = B8bit/255;
+  // Calculate luminance
+ var R = (RsRGB &lt;= 0.03928) ? RsRGB/12.92 : Math.pow(((RsRGB + 0.055)/1.055), 2.4);
+ var G = (GsRGB &lt;= 0.03928) ? GsRGB/12.92 : Math.pow(((GsRGB + 0.055)/1.055), 2.4);
+ var B = (BsRGB &lt;= 0.03928) ? BsRGB/12.92 : Math.pow(((BsRGB + 0.055)/1.055), 2.4);
+			
+ return (0.2126 * R + 0.7152 * G + 0.0722 * B);
+			
+};
+
+/**
+ * @method toString
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElementComputedStyle
+ *
+ * @desc Creates a text string representation of the computed style object 
+ *
+ * @return {String} Returns a text string representation of the computed style object
+ */ 
+
+OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.toString = function (color) {
+  return "Computed style " + this.color_hex + " " + this.background_color_hex + " " + this.color_contrast_ratio; 
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableElement.html">TableElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="created.RulesetFactory.html">RulesetFactory</a></li></ul><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Fri Sep 25 2015 15:16:52 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

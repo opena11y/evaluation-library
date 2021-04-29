@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 17: Landmark must have unique label</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <div role="banner" class="LANDMARK_17_PASS">
+      <p>Landmark 17: Landmark must have unique label</p>
+    </div>
+
+    <div role="navigation" aria-labelledby="nav1" class="LANDMARK_17_PASS" >
+      <h2 id="nav1">Navigation 1</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </div>
+ 
+     <nav aria-labelledby="nav2" class="LANDMARK_17_PASS" >
+      <h2 id="nav2">Navigation 2</h2>
+      <ul>
+        <li><a href="link4.html">Link 4</a></li>
+        <li><a href="link5.html">Link 5</a></li>
+        <li><a href="link6.html">Link 6</a></li>
+      </ul>
+    </nav>
+    
+    
+    <div role="form"  class="LANDMARK_17_PASS" aria-labelledby="id_form_1">
+    
+      <h2 id="id_form_1">Form 1</h2>
+    
+      <label>Text 1: <input type="text"></label>
+
+      <div role="region" class="LANDMARK_17_PASS" aria-label="Region 1">
+         <h2>Region 1</h2>
+      </div>
+      
+      <section role="region" aria-labelledby="reg2" class="LANDMARK_17_PASS">
+         <h2 id="reg2">Region 2</h2>
+      </section> 
+
+        <div role="region" class="LANDMARK_17_HIDDEN" style="display: none">
+         <h2>Region 3</h2>
+          <ul>
+            <li><a href="link4.html">Link 4</a></li>
+            <li><a href="link5.html">Link 5</a></li>
+            <li><a href="link6.html">Link 6</a></li>           
+          </ul>
+        </div>
+    
+    </div>
+
+    
+    <div role="main" class="LANDMARK_17_PASS">
+      <h1>Landmark 17: Landmark must have unique label</h1>
+
+      <div role="form" class="LANDMARK_17_PASS">
+        <h2>Form 2</h2>
+    
+        <label>Text 4: <input type="text"></label>
+
+        <div role="region" aria-labelledby="reg4" class="LANDMARK_17_PASS">
+          <h2 id="reg4">Region 4</h2>
+          Region 4 content
+        </div>
+
+        <div role="region" class="LANDMARK_17_HIDDEN" hidden>
+          <h2>Region 5</h2>
+          Region 5 content
+        </div>
+      
+        <div role="region" class="LANDMARK_17_FAIL" aria-label="Same label">
+          <h2>Region 6</h2>
+          Region 6 content
+        </div>
+
+        <div role="region" class="LANDMARK_17_FAIL" aria-label="Same label">
+          <h2>Region 7</h2>
+          Region 7 content
+        </div>
+
+        <div role="region" aria-labelledby="reg8" class="LANDMARK_17_PASS">
+          <h2 id="reg8">Region 8</h2>
+          Region 8 content
+        </div>
+
+      </div>
+  
+    </div>
+    
+    <div role="complementary" class="LANDMARK_17_FAIL">
+      <h2>Complementary 1</h2>
+    </div>
+
+    <aside class="LANDMARK_17_FAIL">
+      <h2>Complementary 1</h2>
+    </aside>
+
+    <footer role="contentinfo" class="LANDMARK_17_PASS">
+      <h2>Contentinfo 1</h2>
+    </footer>
+
+
+  </body>
+</html>

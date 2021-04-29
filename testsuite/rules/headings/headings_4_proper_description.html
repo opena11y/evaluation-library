@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Heading 4</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  
+  <body>
+  
+    <h1 class="HEADING_4_MC">Heading 4: Check that headings properly describe sections</h1>
+    <div>
+      <h4 class="HEADING_4_MC">This heading is labelled by this text</h4>
+      <h5 class="HEADING_4_MC" aria-label="description">This heading is labelled by its aria label</h5>
+      <div id="div12" hidden>description</div><h3 class="HEADING_4_MC" aria-labelledby="div12">This heading is aria-labbelled by a div</h3>
+    </div>
+  
+    <div>
+      <p> below are two empty headings</p>
+      <h1 class="HEADING_4_FAIL"></h1>
+      <h6 class="HEADING_4_FAIL"></h6>
+    </div>
+  
+    <div>
+      <p> below are two hidden headings</p>
+      <h1 class="HEADING_4_HIDDEN" hidden>Text</h1>
+      <h6 class="HEADING_4_HIDDEN" style="display: none">Text</h6>
+    </div>
+    
+  </body>
+</html>
+
+

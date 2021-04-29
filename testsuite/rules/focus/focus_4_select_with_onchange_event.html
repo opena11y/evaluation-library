@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Focus Rule 4: Select with onchange event</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      
+    <style type="text/css">
+      
+      label {
+        display: block; 
+      }
+      
+      div > label { 
+        margin-top: 1em;
+      }
+
+      fieldset {
+        margin-top: 1em;
+      }
+    </style>  
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Focus Rule 4: Select with onchange event</h1>
+      
+      <label for="select1">Select with onchange event</label>
+      <select id="select1" onchange="onSelectChangeEvent()" class="FOCUS_4_MC">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+      </select>
+            
+      <label for="select2">Select with NO onchange event</label>
+      <select id="select2">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+      </select>
+            
+      <label for="select3">Hidden select element</label>
+      <select id="select3" onchange="onSelectChangeEvent()" class="FOCUS_4_HIDDEN" aria-hidden="true">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+      </select>
+            
+  
+
+  </body>
+</html>
+
+

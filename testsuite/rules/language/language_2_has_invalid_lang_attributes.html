@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Language Rule 2: has invalid lang attributes</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body class="LANGUAGE_2_FAIL">
+    
+    <div>
+      <h1>Language Rule 2: has invalid lang attributes</h1>
+      
+      <p lang="en" class="LANGUAGE_2_PASS">English</p>
+      <p lang="en-us" class="LANGUAGE_2_PASS">English - US</p>
+      <p lang="en-wisconsin" class="LANGUAGE_2_FAIL">English - invalid region</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 8: header element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <header role="banner">
+      <h1>Header 1</h1>
+      <code>header[role="banner"]</code> element 
+    </header>
+
+    <header role="presentation" class="ROLE_8_MC">
+      <h1>Header 2</h1>
+      <code>header[role="presentation"]</code> element 
+    </header>
+
+    <header>
+      <h1>Header 3</h1>
+      <code>header</code> element 
+    </header>
+
+    <header role="region" class="ROLE_8_FAIL">
+      <h1>Header 4</h1>
+      <code>header[role="region"]</code> element 
+    </header>
+
+    <header role="region" class="ROLE_8_HIDDEN" hidden>
+      <h1>Header 5</h1>
+      <code>header[role="region"]</code> element 
+    </header>
+
+
+    <main role="main">
+    
+      <h1><code>header</code> element restrictions</h1>
+      
+      <section>
+        <header>
+          <h2>Header 6</h2>
+        </header>
+      </section>
+      
+    </main>
+
+    <footer role="contentinfo">
+      <code>footer[role="contentinfo"]</code> element 
+    </footer>
+
+
+  </body>
+</html>

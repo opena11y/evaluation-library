@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Timing Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      // Test case for labeling form controls
+
+      test( "TIMING_1: Control time limits", function() {
+        executeTest('ID_IFRAME_1A', 'TIMING_1');
+      });
+      
+      test( "TIMING_2: Control moving, blinking or auto-updating content", function() {
+        executeTest('ID_IFRAME_2A', 'TIMING_2');
+      });
+      
+      test( "TIMING_2: Control moving, blinking or auto-updating content", function() {
+        executeTest('ID_IFRAME_2B', 'TIMING_2');
+      });
+      
+      
+    </script>
+
+    <h2>Timing 1: Control time limits.</h2>
+    <iframe id="ID_IFRAME_1A" src="timing/timing_1.html"></iframe>
+
+    <h2>Timing 2: Control moving, blinking or auto-updating content.</h2>
+    <iframe id="ID_IFRAME_2A" src="timing/timing_2a_no_images.html"></iframe>
+    <iframe id="ID_IFRAME_2B" src="timing/timing_2b_has_images.html"></iframe>
+    
+    
+  </body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Audio Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      // Test case for fieldset/legend
+
+      test( "AUDIO_1: Audio elements must have an equivalent", function() {
+
+        executeTest('ID_IFRAME_1', 'AUDIO_1');
+
+      });
+      
+      test( "AUDIO_2: Object elements used for audio only content must have an equivalent", function() {
+
+        executeTest('ID_IFRAME_2', 'AUDIO_2');
+
+      });
+      
+      test( "AUDIO_3: Embed elements used for audio only content must have equivalent", function() {
+
+        executeTest('ID_IFRAME_3', 'AUDIO_3');
+        
+      });
+    </script>
+
+    <h2>Audio 1: Audio must have alternative</h2>
+    <iframe id="ID_IFRAME_1" src="audio/audio_element_must_have_equivalent.html"></iframe>
+    <iframe id="ID_IFRAME_2" src="audio/object_element_must_have_equivalent.html"></iframe>
+    <iframe id="ID_IFRAME_3" src="audio/embed_element_must_have_equivalent.html"></iframe>
+    
+  </body>
+
+</html>

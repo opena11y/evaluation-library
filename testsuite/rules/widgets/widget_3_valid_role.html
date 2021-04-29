@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 3: Role must be valid</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner" class="WIDGET_3_PASS">
+        <div>Widget 3 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 3: Role must be valid</h1>
+
+        <h2>alert</h2>
+        <div role="alert"        class="WIDGET_3_PASS">alert pass</div>
+        <div role="alert" hidden class="WIDGET_3_HIDDEN">alert hidden</div>
+        <div role="alrt" hidden  class="WIDGET_3_HIDDEN">alert spelled wrong and hidden</div>
+        <div role="alrt"         class="WIDGET_3_FAIL">alert spelled wrong</div>
+        <div role=""             class="WIDGET_3_FAIL">alert fail empty</div>
+
+        <h2>alertdialog</h2>
+        <div role="alertdialog"        class="WIDGET_3_PASS">alertdialog pass</div>
+        <div role="alertdialog" hidden class="WIDGET_3_HIDDEN">alertdialog hidden</div>
+
+        <h2>application</h2>
+        <div role="application"        class="WIDGET_3_PASS">application pass</div>
+        <div role="application" hidden class="WIDGET_3_HIDDEN">application hidden</div>
+
+        <h2>article</h2>
+        <div role="article"        class="WIDGET_3_PASS">article pass</div>
+        <div role="article" hidden class="WIDGET_3_HIDDEN">article hidden</div>
+
+        <h2>banner</h2>
+        <div role="banner"        class="WIDGET_3_PASS">banner pass</div>
+        <div role="banner" hidden class="WIDGET_3_HIDDEN">banner hidden</div>
+
+        <h2>button</h2>
+        <div role="button"        class="WIDGET_3_PASS">button pass</div>
+        <div role="button" hidden class="WIDGET_3_HIDDEN">button hidden</div>
+
+        <h2>checkbox</h2>
+        <div role="checkbox"        class="WIDGET_3_PASS" aria-checked="true">checkbox pass</div>
+        <div role="checkbox" hidden class="WIDGET_3_HIDDEN" aria-checked="true">checkbox hidden</div>
+
+        <h2>cell</h2>
+        <div role="cell"        class="WIDGET_3_PASS" >cell pass</div>
+        <div role="cell" hidden class="WIDGET_3_HIDDEN">cell hidden</div>
+
+
+        <h2>columnheader</h2>
+        <div role="row"            class="WIDGET_3_PASS">
+          <div role="columnheader" class="WIDGET_3_PASS">columnheader pass</div>
+        </div>
+        <div role="row"                   class="WIDGET_3_PASS">
+          <div role="columnheader" hidden class="WIDGET_3_HIDDEN">columnheader hidden</div>
+        </div>
+
+        <h2>combobox</h2>
+        <div role="combobox"        class="WIDGET_3_PASS">combobox pass</div>
+        <div role="combobox" hidden class="WIDGET_3_HIDDEN">combobox hidden</div>
+
+        <h2>command</h2>
+        <div role="command" class="WIDGET_3_FAIL">command fail abstract role</div>
+        <div role="command" hidden class="WIDGET_3_HIDDEN">command hidden</div>
+
+        <h2>complementary</h2>
+        <div role="complementary" class="WIDGET_3_PASS">complementary pass</div>
+        <div role="complementary" hidden class="WIDGET_3_HIDDEN">complementary hidden</div>
+
+        <h2>composite</h2>
+        <div role="composite" class="WIDGET_3_FAIL">composite fail abstract role</div>
+        <div role="composite" hidden class="WIDGET_3_HIDDEN">composite hidden</div>
+
+        <h2>contentinfo</h2>
+        <div role="contentinfo" class="WIDGET_3_PASS">contentinfo pass</div>
+        <div role="contentinfo" hidden class="WIDGET_3_HIDDEN">contentinfo hidden</div>
+
+        <h2>definition</h2>
+        <div role="definition" class="WIDGET_3_PASS">definition pass</div>
+        <div role="definition" hidden class="WIDGET_3_HIDDEN">definition hidden</div>
+
+        <h2>dialog</h2>
+        <div role="dialog" class="WIDGET_3_PASS">dialog pass</div>
+        <div role="dialog" hidden class="WIDGET_3_HIDDEN">dialog hidden</div>
+
+        <h2>directory</h2>
+        <div role="directory" class="WIDGET_3_PASS">directory pass</div>
+        <div role="directory" hidden class="WIDGET_3_HIDDEN">directory hidden</div>
+
+        <h2>document</h2>
+        <div role="document" class="WIDGET_3_PASS">document pass</div>
+        <div role="document" hidden class="WIDGET_3_HIDDEN">document hidden</div>
+
+       <h2>figure</h2>
+        <div role="figure"        class="WIDGET_3_PASS" >figure pass</div>
+        <div role="figure" hidden class="WIDGET_3_HIDDEN">figure hidden</div>
+
+        <h2>form</h2>
+        <div role="form" class="WIDGET_3_PASS">form pass</div>
+        <div role="form" hidden class="WIDGET_3_HIDDEN">form hidden</div>
+
+        <h2>grid</h2>
+        <div role="grid" class="WIDGET_3_PASS">grid pass</div>
+        <div role="grid" hidden class="WIDGET_3_HIDDEN">grid hidden</div>
+
+        <h2>gridcell</h2>
+        <div role="row" class="WIDGET_3_PASS">
+          <div role="gridcell" class="WIDGET_3_PASS">gridcell pass</div>
+        </div>
+        <div role="row" class="WIDGET_3_PASS">
+          <div role="gridcell" hidden class="WIDGET_3_HIDDEN">gridcell hidden</div>
+        </div>
+
+        <h2>group</h2>
+        <div role="group" class="WIDGET_3_PASS">group pass</div>
+        <div role="group" hidden class="WIDGET_3_HIDDEN">group hidden</div>
+
+        <h2>heading</h2>
+        <div role="heading" class="WIDGET_3_PASS">heading pass</div>
+        <div role="heading" hidden class="WIDGET_3_HIDDEN">heading hidden</div>
+
+        <h2>img</h2>
+        <div role="img" class="WIDGET_3_PASS">img pass</div>
+        <div role="img" hidden class="WIDGET_3_HIDDEN">img hidden</div>
+
+        <h2>input</h2>
+        <div role="input" class="WIDGET_3_FAIL">input fail abstract role</div>
+        <div role="input" hidden class="WIDGET_3_HIDDEN">input hidden</div>
+
+        <h2>landmark</h2>
+        <div role="landmark" class="WIDGET_3_FAIL">landmark fail abstract role</div>
+        <div role="landmark" hidden class="WIDGET_3_HIDDEN">landmark hidden</div>
+
+        <h2>link</h2>
+        <div role="link" class="WIDGET_3_PASS">link pass</div>
+        <div role="link" hidden class="WIDGET_3_HIDDEN">link hidden</div>
+
+        <h2>list</h2>
+        <div role="list" class="WIDGET_3_PASS">list pass</div>
+        <div role="list" hidden class="WIDGET_3_HIDDEN">list hidden</div>
+
+        <h2>listbox</h2>
+        <div role="listbox" class="WIDGET_3_PASS">listbox pass</div>
+        <div role="listbox" hidden class="WIDGET_3_HIDDEN">listbox hidden</div>
+
+        <h2>listitem</h2>
+        <div role="list" class="WIDGET_3_PASS">
+          <div role="listitem" class="WIDGET_3_PASS">listitem pass</div>
+        </div>
+        <div role="list" hidden class="WIDGET_3_HIDDEN">
+          <div role="listitem" class="WIDGET_3_HIDDEN">listitem hidden</div>
+        </div>
+
+        <h2>log</h2>
+        <div role="log" class="WIDGET_3_PASS">log pass</div>
+        <div role="log" hidden class="WIDGET_3_HIDDEN">log hidden</div>
+
+        <h2>main</h2>
+        <div role="main" class="WIDGET_3_PASS">main pass</div>
+        <div role="main" hidden class="WIDGET_3_HIDDEN">main hidden</div>
+
+        <h2>marquee</h2>
+        <div role="marquee" class="WIDGET_3_PASS">marquee pass</div>
+        <div role="marquee" hidden class="WIDGET_3_HIDDEN">marquee hidden</div>
+
+        <h2>math</h2>
+        <div role="math" class="WIDGET_3_PASS">math pass</div>
+        <div role="math" hidden class="WIDGET_3_HIDDEN">math hidden</div>
+
+        <h2>menu</h2>
+        <div role="menu" class="WIDGET_3_PASS">menu pass</div>
+        <div role="menu" hidden class="WIDGET_3_HIDDEN">menu hidden</div>
+
+        <h2>menubar</h2>
+        <div role="menubar" class="WIDGET_3_PASS">menubar pass</div>
+        <div role="menubar" hidden class="WIDGET_3_HIDDEN">menubar hidden</div>
+
+        <h2>menuitem</h2>
+        <div role="menu" class="WIDGET_3_PASS">
+          <div role="menuitem" class="WIDGET_3_PASS">menuitem pass</div>
+        </div>
+        <div role="menu" hidden class="WIDGET_3_HIDDEN">
+          <div role="menuitem" class="WIDGET_3_HIDDEN">menuitem hidden</div>
+        </div>
+
+        <h2>menuitemcheckbox</h2>
+        <div role="menu" class="WIDGET_3_PASS">
+          <div role="menuitemcheckbox" class="WIDGET_3_PASS">menuitemcheckbox pass</div>
+        </div>
+        <div role="menu" hidden class="WIDGET_3_HIDDEN">
+          <div role="menuitemcheckbox" class="WIDGET_3_HIDDEN">menuitemcheckbox hidden</div>
+        </div>
+
+        <h2>menuitemradio</h2>
+        <div role="menu" class="WIDGET_3_PASS">
+          <div role="menuitemradio" class="WIDGET_3_PASS">menuitemradio pass</div>
+        </div>
+        <div role="menu" hidden class="WIDGET_3_HIDDEN">
+          <div role="menuitemradio" class="WIDGET_3_HIDDEN">menuitemradio hidden</div>
+        </div>
+
+        <h2>navigation</h2>
+        <div role="navigation" class="WIDGET_3_PASS">navigation pass</div>
+        <div role="navigation" hidden class="WIDGET_3_HIDDEN">navigation hidden</div>
+
+        <h2>none</h2>
+        <div role="none"        class="WIDGET_3_PASS" >none pass</div>
+        <div role="noe" hidden class="WIDGET_3_HIDDEN">none hidden</div>
+
+        <h2>note</h2>
+        <div role="note" class="WIDGET_3_PASS">note pass</div>
+        <div role="note" hidden class="WIDGET_3_HIDDEN">note hidden</div>
+
+        <h2>option</h2>
+        <div role="listbox" class="WIDGET_3_PASS">
+          <div role="option" class="WIDGET_3_PASS">option pass</div>
+        </div>
+        <div role="listbox" hidden class="WIDGET_3_HIDDEN">
+          <div role="option" class="WIDGET_3_HIDDEN">option hidden</div>
+        </div>
+
+        <h2>presentation</h2>
+        <div role="presentation" class="WIDGET_3_PASS">presentation pass</div>
+        <div role="presentation" hidden class="WIDGET_3_HIDDEN">presentation hidden</div>
+
+        <h2>progressbar</h2>
+        <div role="progressbar" class="WIDGET_3_PASS">progressbar pass</div>
+        <div role="progressbar" hidden class="WIDGET_3_HIDDEN">progressbar hidden</div>
+
+        <h2>radio</h2>
+        <div role="radio" class="WIDGET_3_PASS">radio pass</div>
+        <div role="radio" hidden class="WIDGET_3_HIDDEN">radio hidden</div>
+
+        <h2>radiogroup</h2>
+        <div role="radiogroup" class="WIDGET_3_PASS">radiogroup pass
+          <div role="radio" class="WIDGET_3_PASS"></div>
+        </div>
+        <div role="radiogroup" class="WIDGET_3_PASS">radiogroup hidden
+          <div role="radio" hidden class="WIDGET_3_HIDDEN"></div>
+        </div>
+
+        <h2>range</h2>
+        <div role="range" class="WIDGET_3_FAIL">range fail abstract role</div>
+        <div role="range" hidden class="WIDGET_3_HIDDEN">range hidden</div>
+
+        <h2>region</h2>
+        <div role="region" class="WIDGET_3_PASS">region pass</div>
+        <div role="region" hidden class="WIDGET_3_HIDDEN">region hidden</div>
+
+        <h2>roletype</h2>
+        <div role="roletype" class="WIDGET_3_FAIL">roletype fail abstract role</div>
+        <div role="roletype" hidden class="WIDGET_3_HIDDEN">roletype hidden</div>
+
+        <h2>row</h2>
+        <div role="row" class="WIDGET_3_PASS">row pass</div>
+        <div role="row" hidden class="WIDGET_3_HIDDEN">row hidden</div>
+
+        <h2>rowgroup</h2>
+        <div role="rowgroup" class="WIDGET_3_PASS">rowgroup pass
+          <div role="row" class="WIDGET_3_PASS"></div>
+        </div>
+        <div role="rowgroup" hidden class="WIDGET_3_HIDDEN">rowgroup hidden
+          <div role="row" class="WIDGET_3_HIDDEN"></div>
+        </div>
+
+        <h2>rowheader</h2>
+        <div role="row" class="WIDGET_3_PASS">
+          <div role="rowheader" class="WIDGET_3_PASS">rowheader pass</div>
+        </div>
+        <div role="row" hidden class="WIDGET_3_HIDDEN">
+          <div role="rowheader" class="WIDGET_3_HIDDEN">rowheader hidden</div>
+        </div>
+
+        <h2>search</h2>
+        <div role="search" class="WIDGET_3_PASS">search pass</div>
+        <div role="search" hidden class="WIDGET_3_HIDDEN">search hidden</div>
+
+        <h2>searchbox</h2>
+        <div role="searchbox" class="WIDGET_3_PASS">searchbox pass</div>
+        <div role="searchbox" hidden class="WIDGET_3_HIDDEN">searchbox hidden</div>
+ 
+        <h2>section</h2>
+        <div role="section" class="WIDGET_3_FAIL">section fail abstract role</div>
+        <div role="section" hidden class="WIDGET_3_HIDDEN">section hidden</div>
+
+        <h2>sectionhead</h2>
+        <div role="sectionhead" class="WIDGET_3_FAIL">sectionhead fail abstract role</div>
+        <div role="sectionhead" hidden class="WIDGET_3_HIDDEN">sectionhead hidden</div>
+
+        <h2>select</h2>
+        <div role="select" class="WIDGET_3_FAIL">select fail abstract role</div>
+        <div role="select" hidden class="WIDGET_3_HIDDEN">select hidden</div>
+
+        <h2>separator</h2>
+        <div role="separator" class="WIDGET_3_PASS">separator pass</div>
+        <div role="separator" hidden class="WIDGET_3_HIDDEN">separator hidden</div>
+
+        <h2>scrollbar</h2>
+        <div role="scrollbar" class="WIDGET_3_PASS">scrollbar pass</div>
+        <div role="scrollbar" hidden class="WIDGET_3_HIDDEN">scrollbar hidden</div>
+
+        <h2>slider</h2>
+        <div role="slider" class="WIDGET_3_PASS">slider pass</div>
+        <div role="slider" hidden class="WIDGET_3_HIDDEN">slider hidden</div>
+
+        <h2>spinbutton</h2>
+        <div role="spinbutton" class="WIDGET_3_PASS">spinbutton pass</div>
+        <div role="spinbutton" hidden class="WIDGET_3_HIDDEN">spinbutton hidden</div>
+
+        <h2>status</h2>
+        <div role="status" class="WIDGET_3_PASS">status pass</div>
+        <div role="status" hidden class="WIDGET_3_HIDDEN">status hidden</div>
+
+        <h2>structure</h2>
+        <div role="structure" class="WIDGET_3_FAIL">structure fail abstract role</div>
+        <div role="structure" hidden class="WIDGET_3_HIDDEN">structure hidden</div>
+
+        <h2>switch</h2>
+        <div role="switch" class="WIDGET_3_PASS">switch pass</div>
+        <div role="switch" hidden class="WIDGET_3_HIDDEN">switch hidden</div>
+
+        <h2>tab</h2>
+        <div role="tab" class="WIDGET_3_PASS">tab pass</div>
+        <div role="tab" hidden class="WIDGET_3_HIDDEN">tab hidden</div>
+
+        <h2>table</h2>
+        <div role="table" class="WIDGET_3_PASS">table pass</div>
+        <div role="table" hidden class="WIDGET_3_HIDDEN">table hidden</div>
+
+        <h2>tablist</h2>
+        <div role="tablist" class="WIDGET_3_PASS">tablist pass
+          <div role="tab" class="WIDGET_3_PASS"></div>
+        </div>
+        <div role="tablist" hidden class="WIDGET_3_HIDDEN">tablist hidden
+          <div role="tab" class="WIDGET_3_HIDDEN"></div>
+        </div>
+
+        <h2>tabpanel</h2>
+        <div role="tabpanel" class="WIDGET_3_PASS">tabpanel pass</div>
+        <div role="tabpanel" hidden class="WIDGET_3_HIDDEN">tabpanel hidden</div>
+
+        <h2>term</h2>
+        <div role="term" class="WIDGET_3_PASS">term pass</div>
+        <div role="term" hidden class="WIDGET_3_HIDDEN">term hidden</div>
+
+        <h2>text</h2>
+        <div role="text" class="WIDGET_3_PASS">text pass</div>
+        <div role="text" hidden class="WIDGET_3_HIDDEN">text hidden</div>
+
+        <h2>textbox</h2>
+        <div role="textbox" class="WIDGET_3_PASS">textbox pass</div>
+        <div role="textbox" hidden class="WIDGET_3_HIDDEN">textbox hidden</div>
+
+        <h2>timer</h2>
+        <div role="timer" class="WIDGET_3_PASS">timer pass</div>
+        <div role="timer" hidden class="WIDGET_3_HIDDEN">timer hidden</div>
+
+        <h2>toolbar</h2>
+        <div role="toolbar" class="WIDGET_3_PASS">toolbar pass</div>
+        <div role="toolbar" hidden class="WIDGET_3_HIDDEN">toolbar hidden</div>
+
+        <h2>tooltip</h2>
+        <div role="tooltip" class="WIDGET_3_PASS">tooltip pass</div>
+        <div role="tooltip" hidden class="WIDGET_3_HIDDEN">tooltip hidden</div>
+
+        <h2>tree</h2>
+        <div role="tree" class="WIDGET_3_PASS">tree pass</div>
+        <div role="tree" hidden class="WIDGET_3_HIDDEN">tree hidden</div>
+
+        <h2>treegrid</h2>
+        <div role="treegrid" class="WIDGET_3_PASS">treegrid pass</div>
+        <div role="treegrid" hidden class="WIDGET_3_HIDDEN">treegrid hidden</div>
+
+        <h2>treeitem</h2>
+        <div role="tree" class="WIDGET_3_PASS">
+          <div role="treeitem" class="WIDGET_3_PASS">treeitem pass</div>
+        </div>
+        <div role="tree" hidden class="WIDGET_3_HIDDEN">
+          <div role="treeitem" class="WIDGET_3_HIDDEN">treeitem hidden</div>
+        </div>
+
+        <h2>widget</h2>
+        <div role="widget" class="WIDGET_3_FAIL">widget fail abstract role</div>
+        <div role="widget" hidden class="WIDGET_3_HIDDEN">widget hidden</div>
+
+        <h2>window</h2>
+        <div role="window" class="WIDGET_3_FAIL">window fail abstract role</div>
+        <div role="window" hidden class="WIDGET_3_HIDDEN">window hidden</div>
+
+      </main>
+      
+      <footer role="contentinfo" class="WIDGET_3_PASS">
+        <div>Widget 3 test case</div>
+      </footer>
+    
+  </body>
+</html>

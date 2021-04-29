@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heading 5</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      <style>
+    div
+    {
+      border-width: 5px;
+      border-style: solid;
+    }
+        
+    </style>
+      
+  </head>
+  
+  <body>
+  
+   <div role="main">
+     
+     <h1 class="HEADING_5_PASS">h1 element</h1>
+    <div>
+      <h2 class="HEADING_5_PASS">h2 element</h2>
+      <h4 class="HEADING_5_FAIL">h4 element</h4>
+      <h5 class="HEADING_5_FAIL">h5 element</h5>
+    </div>
+  
+   </div>  
+    
+    <div role="banner">
+      <h2 class="HEADING_5_PASS">h2 element</h2>
+      <h3 class="HEADING_5_HIDDEN"></h3>
+      <h4 class="HEADING_5_FAIL">h4 element</h4>
+      <h3 class="HEADING_5_PASS">h3 element</h3>
+      <h4 class="HEADING_5_HIDDEN"></h4>
+      <h5 class="HEADING_5_FAIL">h5 element</h5>
+    </div>  
+
+    <div role="contentinfo">
+      <h2 class="HEADING_5_PASS">h2 element</h2>
+      <h3 style="display: none"  class="HEADING_5_HIDDEN">h3 element</h3>
+      <h4 class="HEADING_5_FAIL">h4 element</h4>
+      <h5 aria-hidden="true"  class="HEADING_5_HIDDEN">h5 element</h5>
+      <h6 class="HEADING_5_FAIL">h6 element</h6>
+      <h2 class="HEADING_5_PASS">h2 element</h2>
+    </div>  
+    
+  </body>
+</html>
+
+

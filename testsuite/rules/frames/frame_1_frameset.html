@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FRAME 1: frameset</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <frameset cols="20%, 80%, *">
+    <frameset rows="100, 100, 100, 100">
+        <frame src="frame-no-iframes.html"       title="Frame 1"  class="FRAME_1_PASS"></frame>
+        <frame src="frame-no-iframes.html"       arial-label="Frame 2"  class="FRAME_1_FAIL"></frame>
+        <frame src="frame-no-iframes.html"       title=""         class="FRAME_1_FAIL"></frame>
+        <frame title="No source attribute" ></frame>
+    </frameset>
+    <frame src="frame-no-iframes.html" class="FRAME_1_FAIL"></frame>
+    <frame src="frame-no-iframes.html" class="FRAME_1_HIDDEN"></frame>
+  </frameset>
+</html>

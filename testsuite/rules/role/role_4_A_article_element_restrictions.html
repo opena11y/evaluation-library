@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 4: Article element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <header role="banner">
+      <h1>Role 4</h1>
+      <code>header[role="banner"]</code> element 
+    </header>
+
+
+    <article role="main" >
+    
+      <h1><code>article</code> element restrictions</h1>
+
+      <article role="article" >
+        <code>article[role="article"]</code> element        
+      </article>
+
+      <article role="document" >
+        <code>article[role="document"]</code> element        
+      </article>
+      
+      <article role="application" >
+        <code>article[role="application"]</code> element        
+      </article>
+      
+      <article role="region" >
+        <code>article[role="region"]</code> element        
+      </article>
+      
+      <article>
+        <code>article</code> element        
+      </article>
+
+      <article>
+        <code>article</code> element        
+      </article>
+
+      <article role="button" class="ROLE_4_FAIL">
+        <code>article</code> element        
+      </article>
+
+
+      <article role="region" class="ROLE_4_HIDDEN" hidden>
+        <code>article[role="region"]</code> element        
+      </article>
+      
+    </main>
+
+    <footer role="contentinfo">
+      <code>footer[role="contentinfo"]</code> element 
+    </footer>
+
+
+  </body>
+</html>

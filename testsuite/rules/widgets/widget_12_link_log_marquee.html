@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 12: Link, log, marquee, and slider must have accessible name</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 12 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET_12: Link, log, marquee, and slider must have accessible name</h1>
+
+        <h2>Link Role</h2>
+        <div role="link" class="WIDGET_12_MC">Link 1: Content</div>
+
+        <div role="link" class="WIDGET_12_MC" aria-label="Link 2: Aria-label">Link 2: aria-label</div>
+
+        <div id="ID_LINK_3">Link 3: Aria-labelledby</div>
+        <div role="link" class="WIDGET_12_MC" aria-labelledby="ID_LINK_3">Link 3</div>
+
+        <div style="display:none" role="link" class="WIDGET_12_HIDDEN" aria-label="Link 4: Hidden"></div>
+
+        <div>Link 5: Fail</div>
+        <div role="link" class="WIDGET_12_FAIL"></div>
+
+
+
+        <h2>Log Role</h2>
+        <div role="log" class="WIDGET_12_MC" aria-label="Log 1: Aria-label"></div>
+
+        <div id="ID_LOG_2">Log 2: Aria-labelledby</div>
+        <div role="log" class="WIDGET_12_MC" aria-labelledby="ID_LOG_2"></div>
+
+        <div aria-hidden="true" role="log" class="WIDGET_12_HIDDEN" aria-label="Log 3: Hidden"></div>
+
+        <div>Log 4: Fail</div>
+        <div role="log" class="WIDGET_12_FAIL"></div>
+
+
+        <h2>Marquee Role</h2>
+        <div role="marquee" class="WIDGET_12_MC" aria-label="Marquee 1: Aria-label"></div>
+
+        <div id="ID_MARQUEE_2">Marquee 2: Aria-labelledby</div>
+        <div role="marquee" class="WIDGET_12_MC" aria-labelledby="ID_MARQUEE_2"></div>
+
+        <div aria-hidden="true" role="marquee" class="WIDGET_12_HIDDEN" aria-label="Marquee 3: Hidden">Marquee 3: aria-hidden="true"</div>
+
+        <div>Marquee 4: Fail</div>
+        <div role="marquee" class="WIDGET_12_FAIL"></div>
+
+
+        <h2>Slider Role</h2>
+        <div role="slider" class="WIDGET_12_MC" aria-label="Slider 1: Aria-label"></div>
+
+        <div id="ID_SLIDER_2">Slider 2: Aria-labelledby</div>
+        <div role="slider" class="WIDGET_12_MC" aria-labelledby="ID_SLIDER_2"></div>
+
+        <div role="slider" aria-hidden="true" class="WIDGET_12_HIDDEN" aria-label="Slider 3: Hidden"></div>
+
+        <div>Slider 4: Fail</div>
+        <div role="slider" class="WIDGET_12_FAIL"></div>
+
+      </main>
+      
+      <footer role="contentinfo">
+      <h2>Contentinfo Landmark</h2>
+        <div>Widget 12 test case</div>
+      </footer>
+    
+  </body>
+</html>

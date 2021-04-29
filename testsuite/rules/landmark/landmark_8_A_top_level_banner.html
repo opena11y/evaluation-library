@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Landmark 8: Banner at top level</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  
+  <body>
+    
+
+    <header class="LANDMARK_8_PASS">
+      <h1>Landmark 8: banner landmark top level</h1>
+      <h2>Banner 1</h2>
+    </header>  
+    
+
+    <div role="navigation">
+      <h2>Navigation 2</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </div>  
+    
+   <div role="main">
+     <h1>Banner at top level</h1>
+     
+     <div role="banner" class="LANDMARK_8_FAIL">
+       <h2>Banner 2</h2>
+       nested banner       
+     </div>
+          
+   </div>  
+
+   <section aria-labelledby="s1">
+      <header>
+        <h2 id="s1">Section 1</h2>
+        section header element content
+      </header>
+      
+      section 1 element content
+
+      <footer>
+        section 1 footer element content
+      </footer>
+   </section>
+
+   <main>
+      <header>
+        <h2>Main</h2>
+        section header element content
+      </header>
+
+       <section aria-labelledby="s2">
+          <header>
+            <h2 id="s2">Section 2</h2>
+            section header element content
+          </header>
+      
+          section 2 element content
+
+          <footer>
+            section 2 footer element content
+          </footer>
+       </section>
+
+       <section>
+          <header role="banner" class="LANDMARK_8_FAIL">
+            <h2>Section 3</h2>
+            section header element content
+          </header>
+      
+          section 3 element content
+
+          <footer>
+            section 3 footer element content
+          </footer>
+       </section>
+      
+       <article>
+          <header>
+            <h2>Section 4</h2>
+            article 1 header element content
+          </header>
+      
+          article 1 element content
+
+          <footer>
+            article 1 footer element content
+          </footer>
+       </article>
+       
+      <footer>
+        main footer element content
+      </footer>
+      
+   </main>
+
+   <aside>
+      <header>
+        <h2>Aside 1</h2>
+        aside header element content
+      </header>
+      
+      aside element content
+      
+   </aside>
+    
+    <div role="contentinfo">
+       <h2>Contentinfo 1</h2>
+      OpenAjax Accessibility Task Force Testcase
+
+     <div role="banner" class="LANDMARK_8_FAIL">
+       <h2>Banner 3</h2>
+       nested banner       
+     </div>
+    </div>  
+    
+  </body>
+</html>
+
+

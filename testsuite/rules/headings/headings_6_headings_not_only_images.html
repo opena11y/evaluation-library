@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Heading 6</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  
+  <body>
+    <h1 class="HEADING_6_PASS">h1 element: text content</h1>
+    <div>
+      <h2 class="HEADING_6_PASS">No accessible name or text content</h2>
+      <h3 class="HEADING_6_FAIL" style="height: 100px; width= 100%"><img src="img1.png" alt="h3 element alt"/></h3>
+      <h3 class="HEADING_6_FAIL" style="height: 100px; width= 100%; background: url(img2.png)" title="H3 element title"></h3>
+    </div>
+    
+    <div>
+      <h3 class="HEADING_6_PASS">aria labeling for accessible name</h3>
+      <h4 class="HEADING_6_FAIL" style="height: 100px; width= 100%" aria-label="h4 element: aria-label content"><img src="img3.png"/></h4>
+      <h4 class="HEADING_6_FAIL" aria-label="h22" style="height: 100px; width= 100%; background: url(img4.png)"></h4>
+    </div>
+    
+    <div>
+      <h4 class="HEADING_6_PASS">images and plain text</h4>
+      <h5 class="HEADING_6_PASS" style="height: 100px; width= 100%" ><img src="img5.png"/> Heading 31</h5>
+      <h5 class="HEADING_6_PASS" style="height: 100px; width= 100%; background: url(img6.png)">Heading 32</h5>
+    </div>
+    
+    <div>
+      <h5 class="HEADING_6_PASS"> Hidden headings</h5>
+      <h6 class="HEADING_6_HIDDEN" style="visibility: hidden"><img src="img3.png"/></h6>
+      <h6 class="HEADING_6_HIDDEN" style="height: 100px; width= 100%; background: url(img4.png)" hidden></h6>
+    </div>
+    
+  </body>
+</html>
+
+

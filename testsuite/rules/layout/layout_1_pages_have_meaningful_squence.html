@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout 1</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body class="LAYOUT_1_MC">
+    <style>
+      td
+      {
+        border: 1px solid black;
+      }
+    </style>
+    <h1> Table 1: Tables must have a meaningful sequence </h1>
+    
+    <h2> Group 1: Table is one column wide. </h2>
+    
+      <table role="presentation" class="LAYOUT_1_PASS">
+        <tr role="presentation"> 
+          <td role="presentation">Cell 11</td>
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation">Cell 21</td>
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation">Cell 31</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 2: Table is more than once column wide in every row. </h2>
+    
+      <table role="presentation" class="LAYOUT_1_MC">
+        <tr role="presentation" > 
+          <td role="presentation" >Cell 11</td> 
+          <td role="presentation" >Cell 12</td> 
+          <td role="presentation" >Cell 13</td> 
+        </tr>
+        <tr role="presentation" > 
+          <td role="presentation" >Cell 21</td> 
+          <td role="presentation" >Cell 22</td> 
+        </tr>
+        <tr role="presentation" > 
+          <td role="presentation" >Cell 31</td> 
+          <td role="presentation" >Cell 32</td> 
+          <td role="presentation" >Cell 33</td> 
+          <td role="presentation" >Cell 34</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 3: Table is two columns wide in one row. </h2>
+    
+      <table role="presentation" class="LAYOUT_1_MC">
+        <tr role="presentation">
+          <td role="presentation">Cell 11</td> 
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation">Cell 21</td> 
+          <td role="presentation">Cell 22</td> 
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation">Cell 31</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 4: Table is one column wide and has a nested table that is one column wide </h2>
+    
+      <table role="presentation" class="LAYOUT_1_PASS">
+        <tr role="presentation">
+          <td role="presentation">Cell 11</td>
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation"> 
+            <table  role="presentation" class="LAYOUT_1_PASS">
+              <tr role="presentation"> 
+                <td role="presentation">Cell 21: Cell 11</td> 
+              </tr>
+              <tr role="presentation"> 
+                <td role="presentation">Cell 21: Cell 22</td> 
+              </tr>                
+            </table> 
+          </td> 
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation">Cell 31</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 5: Table is one column wide and has a nested table that is two columns wide </h2>
+    
+      <table role="presentation" class="LAYOUT_1_PASS">
+        <tr role="presentation"> 
+          <td role="presentation">Cell 11</td> 
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation"> 
+            <table role="presentation" class="LAYOUT_1_MC">
+              <tr role="presentation"> 
+                <td role="presentation">Cell 21: Cell 11</td>
+                <td role="presentation">Cell 21: Cell 12</td> 
+              </tr>
+              <tr role="presentation"> 
+                <td role="presentation">Cell 21: Cell 21</td>
+                <td role="presentation">Cell 21: Cell 22</td> 
+              </tr>
+            </table> 
+          </td> 
+        </tr>
+        <tr> 
+          <td role="presentation">Cell 31</td>
+        </tr>
+      </table>
+    
+    <h2> Group 6: Table that is two columns wide with two nested tables that are one column wide</h2>
+    
+      <table role="presentation" class="LAYOUT_1_PASS">
+        <tr role="presentation"> 
+          <td role="presentation">Cell 11</td>
+        </tr>
+        <tr role="presentation"> 
+          <td> 
+            <table role="presentation" class="LAYOUT_1_PASS">
+              <tr role="presentation"> 
+                <td role="presentation"> 
+                  <table role="presentation" class="LAYOUT_1_PASS"> 
+                    <tr role="presentation"> 
+                      <td role="presentation">Cell 21: Cell 11: Cell 11</td> 
+                    </tr>
+                    <tr role="presentation"> 
+                      <td role="presentation">Cell 21: Cell 11: Cell 21</td> 
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr role="presentation"> 
+                <td role="presentation">Cell 21: Cell 21</td>
+              </tr>                
+            </table> 
+          </td> 
+        </tr>
+        <tr role="presentation"> 
+          <td role="presentation">Cell 31</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 7: Hidden table </h2>
+    
+      <table hidden class="LAYOUT_1_HIDDEN" role="presentation">
+        <tr> 
+          <td>Cell 11</td> 
+        </tr>
+        <tr> 
+          <td>Cell 21</td> 
+        </tr>
+        <tr> 
+          <td>Cell 31</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 7: Hidden nested table </h2>
+    
+      <table style="display: none" class="LAYOUT_1_HIDDEN" role="presentation">
+        <tr> 
+          <td>Cell 11</td> 
+        </tr>
+        <tr> 
+          <td> 
+            <table class="LAYOUT_1_HIDDEN"  role="presentation">
+              <tr> 
+                <td>Cell 21: Cell 11</td> 
+              </tr>
+              <tr> 
+                <td>Cell 21: Cell 21</td> 
+              </tr>                
+            </table> 
+          </td> 
+        </tr>
+        <tr> 
+          <td>Cell 31</td> 
+        </tr>
+      </table>
+    
+    <h2> Group 8: Nested tables </h2>
+    
+    <table>
+      <tr> 
+        <td>Cell 11</td> 
+        <td>Cell 12</td> 
+        <td>Cell 13</td> 
+      </tr>
+      <tr> 
+        <td> 
+          <table>
+            <tr> 
+              <td>Cell 21: Cell 11</td> 
+              <td>Cell 21: Cell 12</td> 
+              <td>Cell 21: Cell 13</td> 
+            </tr>
+            <tr> 
+              <td>Cell 21: Cell 21</td> 
+              <td>Cell 21: Cell 22</td> 
+              <td>Cell 21: Cell 23</td> 
+            </tr>                
+            <tr> 
+              <td>Cell 21: Cell 31</td> 
+              <td>Cell 21: Cell 32</td> 
+              <td>Cell 21: Cell 33</td> 
+            </tr>                
+          </table> 
+        </td> 
+        <td> 
+          <table>
+            <tr> 
+              <td>Cell 22: Cell 11</td> 
+              <td>
+                <table>
+                  <tr> 
+                    <td>Cell 22: Cell 12: Cell 11</td> 
+                    <td>Cell 22: Cell 12: Cell 12</td> 
+                    <td>Cell 22: Cell 12: Cell 13</td> 
+                    <td>Cell 22: Cell 12: Cell 14</td> 
+                  </tr>
+                  <tr> 
+                    <td>Cell 22: Cell 12: Cell 21</td> 
+                    <td>Cell 22: Cell 12: Cell 22</td> 
+                    <td>Cell 22: Cell 12: Cell 23</td> 
+                    <td>Cell 22: Cell 12: Cell 24</td> 
+                  </tr>                
+                </table> 
+              </td> 
+            </tr>
+            <tr> 
+              <td>Cell 22: Cell 21</td> 
+              <td>Cell 22: Cell 22</td> 
+            </tr>                
+          </table> 
+        </td> 
+        <td>Cell 23</td>
+      </tr>
+      <tr> 
+        <td>Cell 31</td> 
+        <td>Cell 32</td> 
+        <td>Cell 33</td> 
+      </tr>
+    </table>
+  </body>
+</html>

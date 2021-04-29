@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form control test 13: Submit forms with buttons</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      
+    <style type="text/css">
+      
+      label {
+        display: block; 
+      }
+      
+      div > label { 
+        margin-top: 1em;
+      }
+
+      fieldset {
+        margin-top: 1em;
+      }
+    </style>  
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form control test 13: Submit forms with buttons</h1>
+      
+      <h2>FORM 1: Has submit button</h2>
+      
+      <form class="CONTROL_13_PASS">
+        <div>
+          <label  for="id_text_1">Text 1</label>
+          <input  id="id_text_1" type="text" />          
+        </div>
+        
+        <div>
+          <label  for="id_textarea_1">Textarea 1</label>
+          <textarea id="id_textarea_1" rows="4" cols="40"></textarea>          
+        </div>
+        
+        <input type="submit"  class="CONTROL_13_PASS"> 
+        
+      </form>  
+
+      <h2>FORM 2: No buttons</h2>
+      
+      <form class="CONTROL_13_FAIL">
+        <div>
+          <label  for="id_text_2">Text 2</label>
+          <input  id="id_text_2" type="text" />          
+        </div>
+        
+        <div>
+          <label  for="id_textarea_2">Textarea 2</label>
+          <textarea id="id_textarea_2" rows="4" cols="40"></textarea>          
+        </div>
+        
+      </form>  
+
+      <h2>FORM 3: Form has <code>input[type="button"]</code></h2>
+      
+      <form class="CONTROL_13_MC">
+        <div>
+          <label  for="id_text_3">Text 3</label>
+          <input  id="id_text_3" type="text" />          
+        </div>
+        
+        <div>
+          <label  for="id_textarea_3">Textarea 3</label>
+          <textarea id="id_textarea_3" rows="4" cols="40"></textarea>          
+        </div>
+
+        <input type="button" value="Submit 3" class="CONTROL_13_MC"> 
+        
+      </form>  
+
+      <h2>FORM 4: Form has 4 buttons</h2>
+      
+      <form class="CONTROL_13_MC">
+        <div>
+          <label  for="id_text_4">Text 4</label>
+          <input  id="id_text_4" type="text" />          
+        </div>
+        
+        <div>
+          <label  for="id_textarea_4">Textarea 4</label>
+          <textarea id="id_textarea_4" rows="4" cols="40"></textarea>          
+        </div>
+
+        <input type="button" value="Submit 4a" class="CONTROL_13_MC"> 
+        
+        <button class="CONTROL_13_MC">Submit 4b</button> 
+        
+        <input type="image" alt="Submit 4c" src="img1.png" class="CONTROL_13_MC"> 
+        
+        <div role="button"class="CONTROL_13_MC">Submit 4d</div>  
+        
+      </form>  
+
+      
+      <h2>FORM 5: Form is hidden</h2>
+      
+      <form class="CONTROL_13_HIDDEN" hidden>
+        <div>
+          <label  for="id_text_5">Text 5</label>
+          <input  id="id_text_5" type="text" />          
+        </div>
+        
+        <div>
+          <label  for="id_textarea_5">Textarea 5</label>
+          <textarea id="id_textarea_5" rows="4" cols="40"></textarea>          
+        </div>
+        
+        <input type="submit"> 
+        
+      </form>  
+
+      <h2>FORM 6: Buttons are hidden</h2>
+      
+      <form class="CONTROL_13_FAIL" >
+        <div>
+          <label  for="id_text_5">Text 5</label>
+          <input  id="id_text_5" type="text" />          
+        </div>
+        
+        <div>
+          <label  for="id_textarea_5">Textarea 5</label>
+          <textarea id="id_textarea_5" rows="4" cols="40"></textarea>          
+        </div>
+        
+        <input type="submit" hidden class="CONTROL_13_HIDDEN"> 
+        
+        <input type="button" value="Submit 6a" hidden class="CONTROL_13_HIDDEN"> 
+        
+        <input type="image" alt="Submit 6c" src="img1.png" hidden class="CONTROL_13_HIDDEN"> 
+
+        
+        <button style="display: none" class="CONTROL_13_HIDDEN" >Submit 6b</button> 
+        
+        <div role="button" style="visibility: hidden" class="CONTROL_13_HIDDEN">Submit 6d</div>  
+                
+      </form>  
+
+
+  </body>
+</html>
+
+

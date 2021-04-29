@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Audio Rule 3: embed elements must have equivalent</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Audio Rule 3: <code>embed</code> elements must have equivalent</h1>
+      
+      <h2>Test 1: <code>embed</code> element that may or may not have captions or a text transcript</h2>
+      <div>
+        <embed class="AUDIO_3_MC" src="audio-test.mp3" type="audio/mp3">
+      </div>
+      
+      <h2>Test 2: <code>embed</code> element that may or may not have captions or a text transcript with no mime-type</h2>
+      <div>  
+        <embed class="AUDIO_3_MC" src="audio-test.ogg" >
+      </div>
+
+      <h2>Test 3: <code>embed</code> element with a non-audio mime type</h2>
+      <div>  
+        <embed class="AUDIO_3_MC" src="audio-test.ogg" type="application/x-shockwave-flash">
+      </div>
+      
+      <h2>Test 4: <code>embed</code> element using @aria-describedby@ to reference a text transcription</h2>
+      <div>  
+        <embed class="AUDIO_3_PASS" src="audio-test.mp3" type="audio/mp3" aria-describedby="ID_TRANSCRIPT">
+        <div id="ID_TRANSCRIPT">Test one two three</div>
+      </div>
+      
+      <h2>Test 5: <code>embed</code> element hidden using hidden attribute</h2>
+      <div hidden>
+        <embed class="AUDIO_3_HIDDEN" src="audio-test.ogg" type="audio/ogg" >
+      </div>
+      
+      <h2>Test 6: <code>embed</code> element hidden using css display none</h2>
+      <div style="display: none">
+        <embed class="AUDIO_3_HIDDEN" src="audio-test.mp3" type="audio/mp3">
+      </div>
+
+    </div>
+  </body>
+</html>

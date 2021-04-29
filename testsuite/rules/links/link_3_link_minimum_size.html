@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Link 3</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Links must be greater than 12 px in both directions.</h1>
+      
+      <h2>Group1: Both dimensions smaller than 12px.</h2>
+      <div><a href="group1.html" class="LINK_3_FAIL"><img src="11_wide_11_tall.png" alt="Group 1: 11x11"/></a></div>
+      <div><a href="group1.html" class="LINK_3_FAIL" aria-label="Group 1: 11x11"><div style="height: 11px; width: 11px; background-color: red"></div></a></div>
+
+       
+      <h2>Group 2: Width smaller than 12px, height greater than 12px</h2>
+      <div><a href="group2.html" class="LINK_3_FAIL"><img src="5_wide_13_tall.png" alt="Group 2: 5x13"/></a></div>
+      <div><a href="group2.html" class="LINK_3_FAIL" aria-label="Group 2: 5x13"><div style="height: 11px; width: 5px; background-color: red"></div></a></div>
+      
+      <h2>Group 3: Width greater than 12px, height smaller than 12px</h2>
+      <div  style="height: 5px; padding: 0; margin: 0"><a href="group3.html" class="LINK_3_PASS"><img src="13_wide_5_tall.png" alt="Group 3: 13x5"/></a></div></div>
+      <div><a href="group3.html" class="LINK_3_FAIL" aria-label="Group 3: 13x5"><div style="height: 5px; width: 13px; background-color: red"></div></a></div>
+      <div><a href="group3.html" class="LINK_3_FAIL" aria-label="Group 3: 13x5"><div style="height: 5px; width: 13px; background-image: url('test_image.png')"></div></a></div> 
+      
+      <h2>Group 4: Width equals 12px, height equals 12px</h2>
+    <div><a href="group4.html" class="LINK_3_PASS"><img src="12_wide_12_tall.png" alt="Group 4: 12x12"/></a></div>
+    <div><a href="group4.html" class="LINK_3_PASS" aria-label="Group 4: 12x12"><div style="height: 12px; width: 12px; background-color: red"></div></a></div>
+        
+      <h2>Group 5: Width greater than 12px, height greater than 12px</h2>
+    <div><a href="group5.html" class="LINK_3_PASS"><img src="13_wide_13_tall.png" alt="Group 5: 13x13"/></a></div>
+    <div><a href="group5.html" class="LINK_3_PASS" aria-label="Group 5: 13x13"><div style="height: 15px; width: 15px; background-color: red"></div></a></div>
+      
+      <h2>Group 6: Tests hidden elements</h2>
+    <div><a href="group6.html" hidden class="LINK_3_HIDDEN"><img  src="13_wide_13_tall.png" alt="Group 6: 13x13"/></a></div>
+    <div><a href="group6.html" style="display: none" class="LINK_3_HIDDEN" aria-label="Group 6: 13x13"><div  tyle="height: 15px; width: 15px;  background-color: red"></div></a></div>
+    <div><a href="group6.html" style="visibility: hidden" class="LINK_3_HIDDEN" aria-label="Group 6: 13x13"><img  src="13_wide_13_tall.png"/></a></div>
+    
+    </div>
+  </body>
+</html>

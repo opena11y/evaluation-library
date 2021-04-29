@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 1: Header Cells</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    <h1>Data table Rule 1: Header cells</h1>
+    
+    <h2> Table A: Simple Table is 4x4 table with column headers </h2>
+    
+      <table>
+        <caption>4 by 4 data table column headers</caption>
+        <thead>
+          <tr>
+            <th>Header A1</th>
+            <th>Header A2</th>
+            <th>Header A3</th>
+            <th>Header A4</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td class="TABLE_1_PASS">Data Cell A11</td>
+          <td class="TABLE_1_PASS">Data Cell A12</td>
+          <td class="TABLE_1_PASS">Data Cell A13</td>
+          <td class="TABLE_1_PASS">Data Cell A14</td>
+        </tr>
+        <tr> 
+          <td class="TABLE_1_PASS">Data Cell A21</td>
+          <td class="TABLE_1_PASS">Data Cell A22</td>
+          <td class="TABLE_1_PASS">Data Cell A23</td>
+          <td class="TABLE_1_PASS">Data Cell A24</td>
+        </tr>
+        <tr> 
+          <td class="TABLE_1_PASS">Data Cell A31</td> 
+          <td class="TABLE_1_PASS">Data Cell A32</td> 
+          <td class="TABLE_1_PASS">Data Cell A33</td> 
+          <td class="TABLE_1_PASS">Data Cell A34</td> 
+        </tr>
+        <tr> 
+          <td class="TABLE_1_PASS">Data Cell A41</td> 
+          <td class="TABLE_1_PASS">Data Cell A42</td> 
+          <td class="TABLE_1_PASS">Data Cell A43</td> 
+          <td class="TABLE_1_PASS">Data Cell A44</td> 
+        </tr>
+      </table>
+
+    <h2> Table B: Simple Table is 4x4 table with column headers </h2>
+    
+    <table>
+      <caption>4 by 4 data table row headers</caption>
+      <tr> 
+        <th>Header B1</th>
+        <td class="TABLE_1_PASS">Data Cell B11</td>
+        <td class="TABLE_1_PASS">Data Cell B12</td>
+        <td class="TABLE_1_PASS">Data Cell B13</td>
+        <td class="TABLE_1_PASS">Data Cell B14</td>
+      </tr>
+      <tr> 
+        <th>Header B2</th>
+        <td class="TABLE_1_PASS">Data Cell B21</td>
+        <td class="TABLE_1_PASS">Data Cell B22</td>
+        <td class="TABLE_1_PASS">Data Cell B23</td>
+        <td class="TABLE_1_PASS">Data Cell B24</td>
+      </tr>
+      <tr> 
+        <th>Header B3</th>
+        <td class="TABLE_1_PASS">Data Cell B31</td> 
+        <td class="TABLE_1_PASS">Data Cell B32</td> 
+        <td class="TABLE_1_PASS">Data Cell B33</td> 
+        <td class="TABLE_1_PASS">Data Cell B34</td> 
+      </tr>
+      <tr> 
+        <th>Header B4</th>
+        <td class="TABLE_1_PASS">Data Cell B41</td> 
+        <td class="TABLE_1_PASS">Data Cell B42</td> 
+        <td class="TABLE_1_PASS">Data Cell B43</td> 
+        <td class="TABLE_1_PASS">Data Cell B44</td> 
+      </tr>
+    </table>
+    
+    <h2> Table C: Simple Table is 4x4 data table with NO headers </h2>
+    
+    <table>
+      <caption>4 by 4 data table with no headers</caption>
+      <tr> 
+        <td class="TABLE_1_FAIL">Data Cell C11</td>
+        <td class="TABLE_1_FAIL">Data Cell C12</td>
+        <td class="TABLE_1_FAIL">Data Cell C13</td>
+        <td class="TABLE_1_FAIL">Data Cell C14</td>
+      </tr>
+      <tr> 
+        <td class="TABLE_1_FAIL">Data Cell C21</td>
+        <td class="TABLE_1_FAIL">Data Cell C22</td>
+        <td class="TABLE_1_FAIL">Data Cell C23</td>
+        <td class="TABLE_1_FAIL">Data Cell C24</td>
+      </tr>
+      <tr> 
+        <td class="TABLE_1_FAIL">Data Cell C31</td> 
+        <td class="TABLE_1_FAIL">Data Cell C32</td> 
+        <td class="TABLE_1_FAIL">Data Cell C33</td> 
+        <td class="TABLE_1_FAIL">Data Cell C34</td> 
+      </tr>
+      <tr> 
+        <td class="TABLE_1_FAIL">Data Cell C41</td> 
+        <td class="TABLE_1_FAIL">Data Cell C42</td> 
+        <td class="TABLE_1_FAIL">Data Cell C43</td> 
+        <td class="TABLE_1_FAIL">Data Cell C44</td> 
+      </tr>
+    </table>
+
+    <h2> Table D: Simple Table is 4x4 data table with some headers </h2>
+    
+    <table>
+      <caption>4 by 4 data table some headers</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Header D1c</th>
+          <th>Header D2c</th>
+          <th>Header D3c</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr> 
+        <th>Header D1r</th>
+        <td class="TABLE_1_PASS">Data Cell D11</td>
+        <td class="TABLE_1_PASS">Data Cell D12</td>
+        <td class="TABLE_1_PASS">Data Cell D13</td>
+        <td class="TABLE_1_PASS">Data Cell D14</td>
+      </tr>
+      <tr> 
+        <th>Header D2r</th>
+        <td class="TABLE_1_PASS">Data Cell D21</td>
+        <td class="TABLE_1_PASS">Data Cell D22</td>
+        <td class="TABLE_1_PASS">Data Cell D23</td>
+        <td class="TABLE_1_PASS">Data Cell D24</td>
+      </tr>
+      <tr> 
+        <th></th>
+        <td class="TABLE_1_PASS">Data Cell D31</td> 
+        <td class="TABLE_1_PASS">Data Cell D32</td> 
+        <td class="TABLE_1_PASS">Data Cell D33</td> 
+        <td class="TABLE_1_FAIL">Data Cell D34</td> 
+      </tr>
+      <tr> 
+        <th>Header D4r</th>
+        <td class="TABLE_1_PASS">Data Cell D41</td> 
+        <td class="TABLE_1_PASS">Data Cell D42</td> 
+        <td class="TABLE_1_PASS">Data Cell D43</td> 
+        <td class="TABLE_1_PASS">Data Cell D44</td> 
+      </tr>
+    </table>
+    
+    <h2>Table E: Simple Table with empty rows and columns</h2>
+    
+    <table>
+      <caption>Simple table with empty rows and columns</caption>
+      <thead>
+        <tr>
+          <th>Header E1</th>
+          <th>Header E2</th>
+          <td class="TABLE_1_MC"></td>
+          <th>Header E3</th>
+          <th>Header E4</th>
+        </tr>
+      </thead>
+      <tr> 
+        <td class="TABLE_1_PASS">Data Cell E11</td>
+        <td class="TABLE_1_PASS">Data Cell E12</td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_PASS">Data Cell E13</td>
+        <td class="TABLE_1_PASS">Data Cell E14</td>
+      </tr>
+      <tr> 
+        <td class="TABLE_1_PASS">Data Cell E21</td>
+        <td class="TABLE_1_PASS">Data Cell E22</td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_PASS">Data Cell E23</td>
+        <td class="TABLE_1_PASS">Data Cell E24</td>
+      </tr>
+      <tr> 
+        <td class="TABLE_1_PASS">Data Cell E31</td> 
+        <td class="TABLE_1_PASS">Data Cell E32</td> 
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_PASS">Data Cell E33</td> 
+        <td class="TABLE_1_PASS">Data Cell E34</td> 
+      </tr>
+      <tr> 
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+      </tr>
+      <tr> 
+        <td class="TABLE_1_PASS">Data Cell E41</td> 
+        <td class="TABLE_1_PASS">Data Cell E42</td> 
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_PASS">Data Cell E43</td> 
+        <td class="TABLE_1_PASS">Data Cell E44</td> 
+      </tr>
+    </table>
+
+    <h2> Table F: Simple Table is 4x4 table with column/row headers and empty cell</h2>
+    
+      <table>
+        <caption>4 by 4 data table column headers</caption>
+        <thead>
+          <tr>
+            <td class="TABLE_1_MC"></td>
+            <th>Header A1</th>
+            <th>Header A2</th>
+            <th>Header A3</th>
+          </tr>
+        </thead>
+        <tr> 
+          <th>Header B1</th>
+          <td class="TABLE_1_PASS">Data Cell B1 A1</td>
+          <td class="TABLE_1_PASS">Data Cell B1 A2</td>
+          <td class="TABLE_1_PASS">Data Cell B1 A3</td>
+        </tr>
+        <tr> 
+          <th>Header B2</th>
+          <td class="TABLE_1_PASS">Data Cell B2 A1</td>
+          <td class="TABLE_1_PASS">Data Cell B2 A2</td>
+          <td class="TABLE_1_PASS">Data Cell B2 A3</td>
+        </tr>
+        <tr> 
+          <th>Header B3</th>
+          <td class="TABLE_1_PASS">Data Cell B3 A1</td>
+          <td class="TABLE_1_PASS">Data Cell B3 A2</td>
+          <td class="TABLE_1_PASS">Data Cell B3 A3</td>
+        </tr>
+        <tr> 
+          <th>Header B4</th>
+          <td class="TABLE_1_PASS">Data Cell B4 A1</td>
+          <td class="TABLE_1_PASS">Data Cell B4 A2</td>
+          <td class="TABLE_1_PASS">Data Cell B4 A3</td>
+        </tr>
+      </table>
+
+    
+  </body>
+</html>

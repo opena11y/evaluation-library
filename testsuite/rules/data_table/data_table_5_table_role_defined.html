@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 5: Table role in page</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    <h1>Data table Rule 5: Table role in page</h1>
+    
+    <h2> Table 1: Simple Data Table is 4x4 table with column headers </h2>
+    
+    <table class="TABLE_5_PASS">
+        <caption>4 by 4 data table column headers</caption>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+            <th>Header 4</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td>Data Cell 11</td>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+          <td>Data Cell 14</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 21</td>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+          <td>Data Cell 24</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 31</td> 
+          <td>Data Cell 32</td> 
+          <td>Data Cell 33</td> 
+          <td>Data Cell 34</td> 
+        </tr>
+        <tr> 
+          <td>Data Cell 41</td> 
+          <td>Data Cell 42</td> 
+          <td>Data Cell 43</td> 
+          <td>Data Cell 44</td> 
+        </tr>
+      </table>
+
+    <h2> Table 2: Layout Table is 4x4</h2>
+    
+    <table class="TABLE_5_PASS" role="presentation">
+      <tr role="presentation"> 
+        <td role="presentation">Layout 11</td>
+        <td role="presentation">Layout 12</td>
+        <td role="presentation">Layout 13</td>
+        <td role="presentation">Layout 14</td>
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Layout 21</td>
+        <td role="presentation">Layout 22</td>
+        <td role="presentation">Layout 23</td>
+        <td role="presentation">Layout 24</td>
+      </tr>
+      <tr> 
+        <td role="presentation">Layout 31</td> 
+        <td role="presentation">Layout 32</td> 
+        <td role="presentation">Layout 33</td> 
+        <td role="presentation">Layout 34</td> 
+      </tr>
+    </table>
+    
+    <h2> Table 3: Ambiguous 4x4 Table</h2>
+    
+    <table class="TABLE_5_FAIL">
+      <tr> 
+        <td>Cell 11</td>
+        <td>Cell 12</td>
+        <td>Cell 13</td>
+        <td>Cell 14</td>
+      </tr>
+      <tr> 
+        <td>Cell 21</td>
+        <td>Cell 22</td>
+        <td>Cell 23</td>
+        <td>Cell 24</td>
+      </tr>
+      <tr> 
+        <td>Cell 31</td> 
+        <td>Cell 32</td> 
+        <td>Cell 33</td> 
+        <td>Cell 34</td> 
+      </tr>
+      <tr> 
+        <td>Cell 41</td> 
+        <td>Cell 42</td> 
+        <td>Cell 43</td> 
+        <td>Cell 44</td> 
+      </tr>
+    </table>
+
+    <h2> Table 4: 1 row</h2>
+    
+    <table class="TABLE_5_MC">
+      <tr> 
+        <td>Cell 11</td>
+        <td>Cell 12</td>
+        <td>Cell 13</td>
+        <td>Cell 14</td>
+      </tr>
+    </table>
+
+    <h2> Table 5: 1 column</h2>
+    
+    <table class="TABLE_5_MC">
+      <tr> 
+        <td>Cell 11</td>
+      </tr>
+      <tr> 
+        <td>Cell 21</td>
+      </tr>
+      <tr> 
+        <td>Cell 31</td>
+      </tr>
+      <tr> 
+        <td>Cell 41</td>
+      </tr>
+      <tr> 
+        <td>Cell 51</td>
+      </tr>
+    </table>
+    
+    
+  </body>
+</html>

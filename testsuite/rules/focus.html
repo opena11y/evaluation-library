@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Focus Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      // Test case for labeling form controls
+
+      test( "FOCUS 4: Select elements with onchange events", function() {
+        executeTest('ID_IFRAME_4', 'FOCUS_4');
+      });
+      
+      test( "FOCUS 5A: Submit forms with buttons", function() {
+        executeTest('ID_IFRAME_5A', 'FOCUS_5');
+      });      
+      
+      test( "FOCUS 5B: Submit forms with buttons (no visible buttons)", function() {
+        executeTest('ID_IFRAME_5B', 'FOCUS_5');
+      });      
+      
+    </script>
+
+    <h2>Select controls with onchange events</h2>
+    <iframe id="ID_IFRAME_4" src="focus/focus_4_select_with_onchange_event.html"></iframe>
+    
+    <h2>Forms submitted with buttons</h2>
+    <iframe id="ID_IFRAME_5A" src="focus/focus_5_submit_forms_with_buttons.html"></iframe>
+    <iframe id="ID_IFRAME_5B" src="focus/focus_5_submit_forms_with_buttons_no_visible_controls.html"></iframe>
+
+   </body>
+
+</html>

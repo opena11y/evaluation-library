@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Titling Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+
+      // Test cases for titling rules      
+
+      test( "TITLE_1: Pages must have a title", function() {
+        executeTest('ID_IFRAME_1A', 'TITLE_1');
+      });
+      
+      
+      test( "TITLE_1: Pages must have a title", function() {
+        executeTest('ID_IFRAME_1B', 'TITLE_1');
+      });
+      
+      
+      test( "TITLE_1: Pages must have a title", function() {
+        executeTest('ID_IFRAME_1C', 'TITLE_1');
+      });
+      
+      test( "TITLE_2: No title element", function() {
+        executeTest('ID_IFRAME_2A', 'TITLE_2');
+      });
+      
+      
+      test( "TITLE_2: Title and h1 element", function() {
+        executeTest('ID_IFRAME_2B', 'TITLE_2');
+      });
+      
+      test( "TITLE_2: No h1 element", function() {
+        executeTest('ID_IFRAME_2C', 'TITLE_2');
+      });
+
+      test( "TITLE_2: hidden h1 element", function() {
+        executeTest('ID_IFRAME_2D', 'TITLE_2');
+      });
+      
+      test( "TITLE_2: more than 2 h1 elements", function() {
+        executeTest('ID_IFRAME_2E', 'TITLE_2');
+      });
+      
+      test( "TITLE_2: h1 different title", function() {
+        executeTest('ID_IFRAME_2F', 'TITLE_2');
+      });      
+    </script>
+    
+    <h2>Title 1: A page must have a title.</h2>
+    <iframe id="ID_IFRAME_1A" src="title/title_1_a_no_title.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="title/title_1_b_empty_title.html"></iframe>
+    <iframe id="ID_IFRAME_1C" src="title/title_1_c_has_title.html"></iframe>
+    
+    <h2>Title 2: h1 must be the same or similar to title element</h2>
+    <iframe id="ID_IFRAME_2A" src="title/title_2_a_no_title.html"></iframe>
+    <iframe id="ID_IFRAME_2B" src="title/title_2_b_has_title.html"></iframe>
+    <iframe id="ID_IFRAME_2C" src="title/title_2_c_no_h1.html"></iframe>
+    <iframe id="ID_IFRAME_2D" src="title/title_2_d_hidden_h1.html"></iframe>
+    <iframe id="ID_IFRAME_2E" src="title/title_2_e_more_than_two_h1.html"></iframe>
+    <iframe id="ID_IFRAME_2F" src="title/title_2_f_h1_different_than_title.html"></iframe>
+      
+  </body>
+
+</html>

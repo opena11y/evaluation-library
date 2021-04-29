@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FRAME 1: frameset with iframes in frames</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE"  CONTENT="text/html; charset=UTF-8">
+  </head>
+  <frameset cols="20%, 80%, *">
+    <frameset rows="100, 100, 100, 100">
+        <frame src="frame_1-with-iframes-1.html"  title="Frame 1"  class="FRAME_1_PASS">
+        <frame src="frame_1-with-iframes-2.html"  title="Frame 2"  class="FRAME_1_PASS">
+        <frame src="frame_1-with-iframes-2.html"  title=""         class="FRAME_1_FAIL">
+        <frame src="frame_1-with-iframes-2.html"                   class="FRAME_1_FAIL">
+    </frameset>
+    <frame src="frame_1-with-iframes-4.html" title="" class="FRAME_1_FAIL">
+    <frame src="frame_1-with-iframes-5.html" class="FRAME_1_HIDDEN">
+  </frameset>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout 2</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td
+      {
+        border: 1px solid black;
+
+      }
+    </style>
+    <h1> Layout 2: Nested tables should be no wider than one column </h1>
+    
+    <h2> Group 1: No nested tables </h2>
+    <table role="presentation" class="LAYOUT_2_PASS">
+      <tr role="presentation"> 
+        <td role="presentation">Cell 11</td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Cell 21</td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Cell 31</td> 
+      </tr>
+    </table>
+ 
+    <h2> Group 2: Nested tables one column wide</h2>
+    <table role="presentation" class="LAYOUT_2_PASS">
+      <tr role="presentation"> 
+        <td role="presentation">Cell 11</td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Cell 21
+          <table role="presentation" class="LAYOUT_2_PASS">
+            <tr role="presentation"> 
+              <td role="presentation">Cell 21: Cell 11</td> 
+            </tr>
+            <tr role="presentation"> 
+              <td role="presentation">Cell 21: Cell 21
+              </td> 
+            </tr>
+            <tr role="presentation"> 
+              <td role="presentation">
+                <table role="presentation" class="LAYOUT_2_PASS">
+                  <tr role="presentation"> 
+                    <td role="presentation">Cell 21: Cell 31: Cell 11</td> 
+                  </tr>
+                  <tr role="presentation"> 
+                    <td role="presentation">Cell 21: Cell 31: Cell 21
+                    </td> 
+                  </tr>
+                  <tr role="presentation"> 
+                    <td role="presentation">Cell 21: Cell 31: Cell 31</td> 
+                  </tr>
+                </table>
+                
+              </td> 
+            </tr>
+          </table>
+        </td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Cell 31</td> 
+      </tr>
+    </table>
+    
+    <h2>Group 3: One level nested tables two column wide</h2>
+    <table role="presentation" class="LAYOUT_2_PASS">
+      <tr role="presentation"> 
+        <td role="presentation">Cell 11</td> 
+        <td role="presentation">Cell 12</td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation" colspan="2">
+          <table role="presentation" class="LAYOUT_2_FAIL">
+            <tr role="presentation"> 
+              <td role="presentation">Cell 21: Cell 11</td> 
+              <td role="presentation">Cell 21: Cell 12</td> 
+            </tr>
+            <tr role="presentation"> 
+              <td role="presentation">Cell 21: Cell 12</td> 
+              <td role="presentation">Cell 21: Cell 22</td> 
+            </tr>
+            <tr>
+              <td role="presentation">Cell 31: Cell 12</td> 
+              <td role="presentation">Cell 31: Cell 22</td> 
+            </tr>
+          </table>
+        </td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Cell 31</td> 
+        <td role="presentation">Cell 32</td> 
+      </tr>
+    </table>
+    
+    <h2>Group 4: Two Levels Nested tables two column wide</h2>
+    <table role="presentation" class="LAYOUT_2_PASS">
+      <tr role="presentation"> 
+        <td role="presentation">Cell 11</td> 
+        <td role="presentation">Cell 12</td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation" colspan="2">
+          <table role="presentation" class="LAYOUT_2_FAIL">
+            <tr role="presentation"> 
+              <td role="presentation">Cell 21: Cell 11</td> 
+              <td role="presentation">Cell 21: Cell 12</td> 
+            </tr>
+            <tr role="presentation"> 
+              <td role="presentation">Cell 21: Cell 12</td> 
+              <td role="presentation">Cell 21: Cell 22</td> 
+            </tr>
+            <tr>
+              <td role="presentation">                
+                <table role="presentation" class="LAYOUT_2_FAIL">
+                  <tr role="presentation"> 
+                    <td role="presentation">Cell 21: Cell 11</td> 
+                    <td role="presentation">Cell 21: Cell 12</td> 
+                  </tr>
+                  <tr role="presentation"> 
+                    <td role="presentation">Cell 21: Cell 12</td> 
+                    <td role="presentation">Cell 21: Cell 22</td> 
+                  </tr>
+                  <tr>
+                    <td role="presentation">Cell 31: Cell 12</td> 
+                    <td role="presentation">Cell 31: Cell 22</td> 
+                  </tr>
+                </table>
+              </td> 
+            </tr>
+          </table>
+        </td> 
+      </tr>
+      <tr role="presentation"> 
+        <td role="presentation">Cell 31</td> 
+        <td role="presentation">Cell 32</td> 
+      </tr>
+    </table>
+    
+    
+  </body>
+</html>

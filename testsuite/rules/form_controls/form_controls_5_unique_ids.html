@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control 5</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form test 5: form controls must have unique id's.</h1>
+
+      <h2>Group 1: No id's for a button, textarea, select, and input.</h2>
+        <form>
+          <fieldset>
+            <button>button 11:</button>
+            <textarea>textarea 11:</textarea>
+            <select>Select 11:</select>
+            <input>input 11:</input>
+          </fieldset>
+        </form>
+
+      <h2>Group 2: Unique id's for a button, textarea, select, and input.</h2>
+        <form>
+          <fieldset>
+            <button   id="group_2_a" class="CONTROL_5_PASS">button 21:</button>
+            <textarea id="group_2_b" class="CONTROL_5_PASS">textarea 21</textarea>
+            <select   id="group_2_c" class="CONTROL_5_PASS">Select 21:</select>
+            <input    id="group_2_d" type="text" class="CONTROL_5_PASS">input 21:</input>
+          </fieldset>
+        </form>
+      
+      <h2>Group 3: 4 Matching id's for a button, textarea, select, and input.</h2>
+        <form>
+          <fieldset>
+            <button   id="group_3"             class="CONTROL_5_FAIL">button 31:</button>
+            <textarea id="group_3"             class="CONTROL_5_FAIL">textarea 31:</textarea>
+            <select   id="group_3"             class="CONTROL_5_FAIL">Select 31:</select>
+            <input    id="group_3" type="text" class="CONTROL_5_FAIL">input 31:</input>
+          </fieldset>
+        </form>
+      
+      <h2>Group 4: 2 Matching id's for a button and input.</h2>
+        <form>
+          <fieldset>
+            <button id="group_4"             class="CONTROL_5_FAIL">button 41:</button>
+            <input  id="group_4" type="text" class="CONTROL_5_FAIL">input 41:</input>
+          </fieldset>
+        </form>
+        
+      <h2>Group 5: 2 Matching id's for 2 select elements, case sensitive test</h2>
+        <form>
+          <fieldset>
+            <select id="group_5" class="CONTROL_5_FAIL">select 51:</select>
+            <select id="group_5" class="CONTROL_5_FAIL">select 52:</select>
+          </fieldset>
+        </form>
+
+       <h2>Group 6: Hidden elements, two with matching id's one with a unique id.</h2>
+        <form>
+          <fieldset>
+            <select   id="group_6" hidden class="CONTROL_5_FAIL">select 61:</select>
+            <select   id="group_6" style="visibility: hidden" class="CONTROL_5_FAIL">select 62:</select>
+            <select   id="group_6" aria-hidden="true" class="CONTROL_5_FAIL">select 62:</select>
+            <textarea id="group_6" class="CONTROL_5_FAIL">textarea 61:</textarea>
+          </fieldset>
+        </form>
+
+        
+    </div>
+  </body>
+</html>
+
+

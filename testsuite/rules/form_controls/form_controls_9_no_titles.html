@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control 9</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form test 9: Form controls should not be labelled with the title attribute</h1>
+      
+      <h2>Group 1: No title attribute for a button, textarea, select, and input</h2>
+        <form>
+          <fieldset>
+            <button>button 11:</button>
+            <textarea>textarea 11:</textarea>
+            <select>Select 11:</select>
+            <input  type="text">input 11:</input>
+          </fieldset>
+        </form>
+      
+      <h2>Group 2: No title attribute, but aria label, for a button, textarea, select, and input</h2>
+        <form>
+            <button aria-label="button21" title="button 21">button 21:</button>
+            <label for="textarea21">textarea 21</label><textarea is="textarea21" >textarea 21:</textarea>
+            <label>Select 21:
+              <select >
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </select>
+            </label>
+            <label id="input21">Input 21</label>
+            <input type="text" aria-labelleby="input21"/>
+        </form>
+      
+      <h3>Group 3: Only a title attribute for a button, textarea, select, and input</h2>
+        <form>
+          <textarea            class="CONTROL_9_MC" title="textarea31"></textarea>
+            <select              class="CONTROL_9_MC" title="select31">
+              <option>Option 1</option>
+              <option>Option 2</option>              
+            </select>
+            <input  type="text" class="CONTROL_9_MC" title="input31">input 31:</input>
+          </fieldset>
+        </form>
+      
+      <h3>Group 4: Title attribute and an aria label for a button, textarea, select, and input</h2>
+        <form>
+            <button             aria-label="button41"   title="button31">button 41:</button>
+            <textarea           aria-label="textarea41" title="textarea31"></textarea>
+            <select             aria-label="select41"   title="select41">Select 41:</select>
+            <input  type="text" aria-label="input41"    title="input31">input 41:</input>
+          </fieldset>
+        </form>
+      
+      <h3>Group 5: Hidden elements</h2>
+        <form>
+            <button   hidden title="button51">button 51:</button>
+          <label for="textarea51">textarea 51</label><textarea id="textarea51" style="visibility: hidden" title="textarea31"></textarea>
+            <select   class="CONTROL_9_HIDDEN" style="display: none" title="select31">
+              <option>Option 1</option>
+              <option>Option 2</option>              
+            </select>
+            <label id="input51">Input 51</label>
+            <input  type="text" aria-hidden="true" aria-labelledby="input51"/>
+          </fieldset>
+        </form>
+      
+      
+    </div>
+  </body>
+</html>
+
+

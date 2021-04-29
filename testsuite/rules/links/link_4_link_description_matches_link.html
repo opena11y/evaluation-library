@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Link 4</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Link should describe target of the link</h1>
+      
+      <h2>Group 1: No description and no name for a link</h2>
+      <ul>
+        <li><a name="group1_name"></a></li>
+        <li><a href="group1_a.html" class="LINK_4_FAIL"></a></li>
+        <li><div role="link" tabindex="0" class="LINK_4_FAIL"></div></li>
+        <li><a href="group1_b.html" class="LINK_4_FAIL"><img src="13_wide_13_tall.png"/></a></li>
+        <li><div role="link" tabindex="0" class="LINK_4_FAIL"><img src="13_wide_13_tall.png"/></div></li>
+      </ul>
+      
+      <h2>Group 2: Name but no description for a link</h2>
+      <ul>
+        <li><a href="group2_a.html" aria-label="Link 21" class="LINK_4_MC">Link21</a></li>
+        <div hidden id="div21">link 22</div><li><a href="group2_b.html" aria-labelledby="div21" class="LINK_4_MC">Link22</a></li>
+        <li><a href="group2_c.html" class="LINK_4_MC">Link23</a></li>
+        <li><a href="group2_c.html" class="LINK_4_MC" title="link24"></a></li>
+        <li><div role="link" tabindex="0" class="LINK_4_MC">Link25</div></li>
+        <li><div role="link" tabindex="0" class="LINK_4_MC" aria-label="Link26"></div></li>
+        <li><span role="link" tabindex="0" class="LINK_4_MC" aria-labelledby="id_link27_label"></span><span id="id_link27_label">Link 27</span></li>
+      </ul>
+      
+      <h2>Group 3: Description for an image link</h2>
+      <ul>
+        <div id="div31">description</div><li><a href="group3_a.html" aria-labelledby="div31" class="LINK_4_MC"><img src="test_image.png"/></a></li>    
+      </ul>
+      
+      <h2>Group 4: Hidden links</h2>
+      <ul>
+        <li><a href="group4_a.html" style="display: none"      class="LINK_4_HIDDEN">Link 41</a></li>
+        <li><a href="group4_b.html" hidden                     class="LINK_4_HIDDEN">Link 42</a></li>
+        <li><a href="group4_c.html" aria-hidden="true"         class="LINK_4_HIDDEN">Link 43</a></li>
+        <li><a href="group4_d.html" style="visibility: hidden;" class="LINK_4_HIDDEN">link 44</a></li>
+      </ul>      
+      
+    </div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 3: List container element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <header role="banner">
+      Banner 1
+    </header>
+
+    
+    <main role="main">
+      <h1>Role 3: List element restrictions</h1>  
+
+       <ul role="list">
+          <li>Item 1a</li>
+          <li>Item 1b</li>
+       </ul>
+      
+       <ul role="directory">
+          <li>Item 2a</li>
+          <li>Item 2b</li>
+       </ul>
+    
+       <ul role="listbox">
+          <li>Item 3a</li>
+          <li>Item 3b</li>
+       </ul>
+    
+       <ul role="menu">
+          <li>Item 4a</li>
+          <li>Item 4b</li>
+       </ul>
+    
+       <ul role="menubar">
+          <li>Item 5a</li>
+          <li>Item 5b</li>
+       </ul>
+    
+       <ul role="navigation"  class="ROLE_3_FAIL">
+          <li><a href="#link1a">Link 6a</a></li>
+          <li><a href="#link2a">Link 6a</a></li>
+       </ul>
+
+       <ul role="presentation" class="ROLE_3_MC">
+          <li role="treeitem">Item 7a</li>
+          <li role="separator">Item 7b</li>
+       </ul>
+       
+       <ul role="tab" class="ROLE_3_FAIL">
+          <li role="tab">Item 8a</li>
+          <li role="presentation">Item 8b</li>
+       </ul>
+
+       <ul role="tablist">
+          <li role="tab">Item 8a</li>
+          <li role="presentation">Item 8b</li>
+       </ul>
+
+       <ul role="toolbar">
+          <li role="treeitem">Item 9a</li>
+          <li role="separator">Item 9b</li>
+       </ul>
+
+       <ul role="tree">
+          <li role="treeitem">Item 10a</li>
+          <li role="separator">Item 10b</li>
+       </ul>
+    
+    </main>
+
+    <footer role="contentinfo">
+      Content Information 1
+    </footer>
+
+  </body>
+</html>

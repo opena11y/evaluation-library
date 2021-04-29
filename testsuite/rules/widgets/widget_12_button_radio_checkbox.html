@@ -1,0 +1,69 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 12: Button, radio, and checkbox widgets must have accessible name</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 12 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 12: Button, radio, and checkbox widgets must have accessible name</h1>
+        
+        <div role="button" class="WIDGET_12_MC">Button 1</div>
+
+        <div role="button" class="WIDGET_12_MC" aria-label="Button 2">Button</div>
+        
+        <div role="button" class="WIDGET_12_MC" id="ID_BUTTON_3">Button 3</div> 
+
+        <div role="button" class="WIDGET_12_MC" aria-labelledby="ID_BUTTON_3">Button</div>
+
+        <div role="button" class="WIDGET_12_MC" title="Button 4"></div>                                  
+
+        <div role="button" hidden class="WIDGET_12_HIDDEN"></div>
+
+        <div role="button" class="WIDGET_12_FAIL"></div>  
+      
+        <div role="checkbox" class="WIDGET_12_MC">Checkbox 1</div>
+
+        <div role="checkbox" class="WIDGET_12_MC" aria-label="Checkbox 2">Checkbox</div>
+        
+        <div role="checkbox" class="WIDGET_12_MC" id="ID_CHECKBOX_3">Checkbox 3</div> 
+
+        <div role="checkbox" class="WIDGET_12_MC" aria-labelledby="ID_CHECKBOX_3">Checkbox</div>
+
+        <div role="checkbox" class="WIDGET_12_MC" title="Checkbox 4"></div>                                  
+
+        <div role="checkbox" style="display:none" class="WIDGET_12_HIDDEN"></div>
+
+        <div role="checkbox" class="WIDGET_12_FAIL"></div>
+
+
+        <div role="radio" class="WIDGET_12_MC">Radio 1</div>
+
+        <div role="radio" class="WIDGET_12_MC" aria-label="Radio 2"></div>
+        
+        <div role="radio" class="WIDGET_12_MC" id="ID_RADIO_3">Radio 3</div> 
+
+        <div role="radio" class="WIDGET_12_MC" aria-labelledby="ID_RADIO_3"></div>
+
+        <div role="radio" class="WIDGET_12_MC" title="Radio 4"></div>                                  
+
+        <div role="radio" aria-hidden="true" class="WIDGET_12_HIDDEN"></div>
+
+        <div role="radio" class="WIDGET_12_FAIL"></div>
+
+        
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 12 test case</div>
+      </footer>
+    
+  </body>
+</html>

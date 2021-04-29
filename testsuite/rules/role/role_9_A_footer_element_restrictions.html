@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 9: footer element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-9">
+  </head>
+
+  <body>
+
+    <header role="banner">
+      <h1>Role 9</h1>
+      <code>header[role="banner"]</code> element 
+    </header>
+
+    <main role="main">
+    
+      <h1><code>footer</code> element restrictions</h1>
+      
+    </main>
+
+    <footer role="contentinfo">
+      <code>footer[role="contentinfo"]</code> element 
+    </footer>
+
+    <footer role="presentation" class="ROLE_9_MC">
+      <code>footer[role="presentation"]</code> element 
+    </footer>
+
+
+    <footer>
+      <code>footer</code> element 
+    </footer>
+
+    <footer role="region" class="ROLE_9_FAIL">
+      <code>footer[role="region"]</code> element 
+    </footer>
+
+    <footer role="region" class="ROLE_9_HIDDEN" hidden>
+      <code>footer[role="region"]</code> element 
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 1: Header cells in Complex Tables (TABLE RULE 1 does not apply)</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+
+    <h1>Data Table Rule 1: Header cells in Complex Tables (TABLE RULE 1 does not apply)</h1>
+        
+    <h2> Table 1: Complex Data Table with NO headers </h2>
+    
+    <table>
+      <caption>4 by 4 complex data table with no headers</caption>
+      <tr> 
+        <td colspan="2">Data Cell 11</td>
+        <td >Data Cell 13</td>
+        <td >Data Cell 14</td>
+      </tr>
+      <tr> 
+        <td  rowspan="2">Data Cell 21</td>
+        <td >Data Cell 22</td>
+        <td >Data Cell 23</td>
+        <td >Data Cell 24</td>
+      </tr>
+      <tr> 
+        <td >Data Cell 32</td> 
+        <td >Data Cell 33</td> 
+        <td >Data Cell 34</td> 
+      </tr>
+      <tr> 
+        <td >Data Cell 41</td> 
+        <td >Data Cell 42</td> 
+        <td >Data Cell 43</td> 
+        <td >Data Cell 44</td> 
+      </tr>
+    </table>
+    
+    
+    <h2> Table 2: Complex Data Table with headers </h2>
+    
+    <table>
+      <caption>4 by 4 complex data table with headers</caption>
+      <thead>
+        <tr>
+          <th id="t2_h1">Header 1</th>
+          <th id="t2_h2">Header 2</th>
+          <th id="t2_h3">Header 3</th>
+          <th id="t2_h4">Header 4</th>          
+        </tr>
+      </thead>
+      <tr> 
+        <td  colspan="2" headers="t2_h1">Data Cell 11</td>
+        <td  headers="t2_h3">Data Cell 13</td>
+        <td  headers="t2_h4">Data Cell 14</td>
+      </tr>
+      <tr> 
+        <td  rowspan="2" headers="t2_h1">Data Cell 21</td>
+        <td  headers="t2_h2">Data Cell 22</td>
+        <td  headers="t2_h3">Data Cell 23</td>
+        <td  headers="t2_h4">Data Cell 24</td>
+      </tr>
+      <tr> 
+        <td  headers="t2_h2">Data Cell 32</td> 
+        <td  headers="t2_h3">Data Cell 33</td> 
+        <td  headers="t2_h4">Data Cell 34</td> 
+      </tr>
+      <tr> 
+        <td  headers="t2_h1">Data Cell 41</td> 
+        <td  headers="t2_h2">Data Cell 42</td> 
+        <td  headers="t2_h3">Data Cell 43</td> 
+        <td  headers="t2_h4">Data Cell 44</td> 
+      </tr>
+    </table>
+    
+    
+    <h2> Table 3: Complex Data Table with some headers </h2>
+    
+    <table>
+      <caption>4 by 4 complex data table with some headers</caption>
+      <thead>
+        <tr>
+          <th id="t3_h1">Header 1</th>
+          <th id="t3_h2">Header 2</th>
+          <th id="t3_h3">Header 3</th>
+        </tr>
+      </thead>
+      <tr> 
+        <td  colspan="2" headers="t3_h1">Data Cell 11</td>
+        <td  headers="t3_h3">Data Cell 13</td>
+        <td  headers="t3_h4">Data Cell 14</td>
+      </tr>
+      <tr> 
+        <td  rowspan="2" headers="t3_h1">Data Cell 21</td>
+        <td  headers="t3_h2">Data Cell 22</td>
+        <td  headers="t3_h3">Data Cell 23</td>
+        <td  headers="t3_h4">Data Cell 24</td>
+      </tr>
+      <tr> 
+        <td  headers="t3_h2">Data Cell 32</td> 
+        <td  headers="t3_h3">Data Cell 33</td> 
+        <td  headers="t3_h4">Data Cell 34</td> 
+      </tr>
+      <tr> 
+        <td  headers="t3_h1">Data Cell 41</td> 
+        <td  headers="t3_h2">Data Cell 42</td> 
+        <td  >Data Cell 43</td> 
+        <td  headers="t3_h4">Data Cell 44</td> 
+      </tr>
+    </table>
+    
+    <h2> Table 4: Complex Data Table  with empty rows and columns</h2>
+    
+    <table>
+      <caption>4 by 4 complex data table with empty rows and columns</caption>
+      <thead>
+        <tr>
+          <th id="t2_h1">Header 1</th>
+          <th id="t2_h2">Header 2</th>
+          <td ></td>
+          <th id="t2_h3">Header 3</th>
+          <th id="t2_h4">Header 4</th>          
+        </tr>
+      </thead>
+      <tr> 
+        <td  colspan="2" headers="t2_h1">Data Cell 11</td>
+        <td ></td>
+        <td  headers="t2_h3">Data Cell 13</td>
+        <td  headers="t2_h4">Data Cell 14</td>
+      </tr>
+      <tr> 
+        <td  rowspan="2" headers="t2_h1">Data Cell 21</td>
+        <td  headers="t2_h2">Data Cell 22</td>
+        <td ></td>
+        <td  headers="t2_h3">Data Cell 23</td>
+        <td  headers="t2_h4">Data Cell 24</td>
+      </tr>
+      <tr> 
+        <td  headers="t2_h2">Data Cell 32</td> 
+        <td ></td>
+        <td  headers="t2_h3">Data Cell 33</td> 
+        <td  headers="t2_h4">Data Cell 34</td> 
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>        
+      </tr>
+      <tr> 
+        <td  headers="t2_h1">Data Cell 41</td> 
+        <td  headers="t2_h2">Data Cell 42</td> 
+        <td></td>
+        <td  headers="t2_h3">Data Cell 43</td> 
+        <td  headers="t2_h4">Data Cell 44</td> 
+      </tr>
+    </table>
+    
+    
+    
+    
+    
+    
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 6: Use TH elements for headers</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    <div role="main">
+      
+      <h1>Data Table Rule 6: Use TH elements for headers</h1>
+
+      <h2>TH elements used for headers</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <td></td>
+            <th class="TABLE_6_PASS">Header 1</th>
+            <th class="TABLE_6_PASS">Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <th class="TABLE_6_PASS">Header 3</th>
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <th class="TABLE_6_PASS">Header 4</th>
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+      
+      <h2>TD[scope] elements used for headers</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <td></td>
+            <td scope="col" class="TABLE_6_FAIL">Header 1</td>
+            <td scope="col" class="TABLE_6_FAIL">Header 2</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <td scope="row" class="TABLE_6_FAIL">Header 3</td>
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <td scope="row" class="TABLE_6_FAIL">Header 4</td>
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+
+      <h2>TD[scope] elements used for headers in a hidden table</h2>
+      
+      <table style="visibility: hidden">
+        <thead>
+          <tr>
+            <td></td>
+            <td scope="col" class="TABLE_6_HIDDEN">Header 1</td>
+            <th scope="col" class="TABLE_6_HIDDEN">Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <th scope="row" class="TABLE_6_HIDDEN">Header 3</th>
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <th scope="row" class="TABLE_6_HIDDEN">Header 4</th>
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+      
+        
+    </div>
+    
+  </body>
+</html>

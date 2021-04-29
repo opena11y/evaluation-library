@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 11: LI element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <header role="banner">
+      <code>header</code> element content 1
+    </header>
+
+   <ul role="navigation">
+      <li><a href="#link1a">Link 1a</a></li>
+      <li><a href="#link2a">Link 2a</a></li>
+   </ul>
+
+   <ul role="tree">
+      <li role="treeitem">Item 1a</li>
+      <li role="separator"  class="ROLE_11_FAIL">Item 2b</li>
+   </ul>
+
+   <ul role="list">
+      <li role="listitem">Item 2a</li>
+      <li role="list" class="ROLE_11_FAIL">Item 2b</li>
+   </ul>
+    
+   <ul role="tablist">
+      <li role="tab">Item 3a</li>
+      <li role="presentation" class="ROLE_11_MC">Item 3b</li>
+   </ul>
+    
+    
+    <main role="main">
+      <h1>Role 11: <code>li</code> element restrictions</h1>  
+    </main>
+
+    <footer role="contentinfo">
+      <code>footer</code> element content 1
+    </footer>
+
+  </body>
+</html>

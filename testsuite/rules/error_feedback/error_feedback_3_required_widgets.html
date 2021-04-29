@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error Feedback 3: Use aria-required on widgets</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      
+    <style type="text/css">
+      
+      label {
+        display: block; 
+      }
+      
+      div > label { 
+        margin-top: 1em;
+      }
+
+      fieldset {
+        margin-top: 1em;
+      }
+    </style>  
+
+
+    
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Error Feedback 3: Use aria-required on widgets</h1>
+      
+      <h2>Group 1: No aria-required markup</h2>
+      
+      <div role="combobox" class="ERROR_3_MC">combobox 11</div>
+      
+      <div role="grid">
+        <div role="row">
+          <div role="gridcell" class="ERROR_3_MC">gridcell 11</div>
+          <div role="gridcell" class="ERROR_3_MC">gridcell 12</div>      
+        </div>      
+        <div role="row">
+          <div role="gridcell" class="ERROR_3_MC">gridcell 21</div>
+          <div role="gridcell" class="ERROR_3_MC">gridcell 22</div>      
+        </div>      
+      </div>
+
+      <div role="listbox" class="ERROR_3_MC">
+        <div role="option">Option 1</div>
+        <div role="option">Option 2</div>
+      </div>
+
+      <div role="radiogroup" class="ERROR_3_MC">
+        <div role="radio">Radio 1</div>
+        <div role="radio">Radio 2</div>
+      </div>
+
+      <div role="spinbutton" class="ERROR_3_MC">spinbutton 1</div>
+
+      <div role="textbox" class="ERROR_3_MC">textbox 1</div>
+
+      <div role="tree" class="ERROR_3_MC">tree 1</div>
+
+      <h2>Group 2: aria-required attribute used</h2>
+
+      <div role="combobox" class="ERROR_3_PASS" aria-required="true">combobox 21</div>
+      
+      <div role="grid">
+        <div role="row">
+          <div role="gridcell" class="ERROR_3_PASS" aria-required="true">gridcell 11</div>
+          <div role="gridcell" class="ERROR_3_PASS" aria-required="true">gridcell 12</div>      
+        </div>      
+        <div role="row">
+          <div role="gridcell" class="ERROR_3_PASS" aria-required="true">gridcell 21</div>
+          <div role="gridcell" class="ERROR_3_PASS" aria-required="true">gridcell 22</div>      
+        </div>      
+      </div>
+
+      <div role="listbox" class="ERROR_3_PASS" aria-required="true">
+        <div role="option">Option 1</div>
+        <div role="option">Option 2</div>
+      </div>
+
+      <div role="radiogroup" class="ERROR_3_PASS" aria-required="true">
+        <div role="radio">Radio 1</div>
+        <div role="radio">Radio 2</div>
+      </div>
+
+      <div role="spinbutton" class="ERROR_3_PASS" aria-required="true">spinbutton 2</div>
+
+      <div role="textbox" class="ERROR_3_PASS" aria-required="true">textbox 2</div>
+
+      <div role="tree" class="ERROR_3_PASS" aria-required="true">tree 2</div>
+
+      <h2>Group 3: Hidden</h2>
+
+      <div role="combobox" class="ERROR_3_HIDDEN" hidden>combobox 31</div>
+      
+      <div role="grid">
+        <div role="row">
+          <div role="gridcell" class="ERROR_3_HIDDEN" style="display: none" aria-required="true">gridcell 11</div>
+          <div role="gridcell" class="ERROR_3_HIDDEN" style="visibility: hidden" aria-required="true">gridcell 12</div>      
+        </div>      
+        <div role="row">
+          <div role="gridcell" class="ERROR_3_HIDDEN" hidden aria-required="true">gridcell 21</div>
+          <div role="gridcell" class="ERROR_3_HIDDEN" aria-hidden="true" aria-required="true">gridcell 22</div>      
+        </div>      
+      </div>
+
+      <div role="listbox" class="ERROR_3_HIDDEN" style="display: none" aria-required="true">
+        <div role="option">Option 1</div>
+        <div role="option">Option 2</div>
+      </div>
+
+      <div role="radiogroup" class="ERROR_3_HIDDEN" style="visibility: hidden" aria-required="true">
+        <div role="radio">Radio 1</div>
+        <div role="radio">Radio 2</div>
+      </div>
+
+      <div role="spinbutton" class="ERROR_3_HIDDEN" hidden aria-required="true">spinbutton 3</div>
+
+      <div role="textbox" class="ERROR_3_HIDDEN" style="display: none" aria-required="true">textbox 3</div>
+
+      <div role="tree" class="ERROR_3_HIDDEN" style="visibility: hidden" aria-required="true">tree 3</div>
+
+    </div>
+  </body>
+</html>
+
+

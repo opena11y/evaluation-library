@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Link Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+
+      test( "LINK_1: Link text must be descriptive", function() {
+        executeTest('ID_IFRAME_1A', 'LINK_1');
+      });
+
+      test( "LINK_2: Links with different accessible names must have different urls", function() {
+        executeTest('ID_IFRAME_2A', 'LINK_2');
+      });
+
+      /*      
+      test( "LINK_3: Linkes must be bigger than 12px", function() {
+        executeTest('ID_IFRAME_3A', 'LINK_3');
+      });
+      
+      test( "LINK_4: Description must match name", function() {
+        executeTest('ID_IFRAME_4A', 'LINK_4');
+      });
+      */
+    </script>
+
+    <h2>Link 1: Links with the same url must have the same accessible name</h2>
+    <iframe id="ID_IFRAME_1A" src="links/link_1_links_share_url_and_name.html"></iframe>
+    
+    <h2>Link 2: Links with different urls must have different accessible names</h2>
+    <iframe id="ID_IFRAME_2A" src="links/link_2_different_urls_should_have_different_names.html"></iframe>
+
+<!--
+    <h2>Link 3: Link minimum size tests</h2>
+    <iframe id="ID_IFRAME_3A" src="links/link_3_link_minimum_size.html"></iframe>
+    
+    <h2>Link 4: Link description matches link</h2>
+    <iframe id="ID_IFRAME_4A" src="links/link_4_link_description_matches_link.html"></iframe>
+-->
+  </body>
+
+</html>

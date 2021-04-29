@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Image Rule 2: Text alternatives meaningful</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Image Rule 2: Text alternatives meaningful</h1>
+
+      <h2>Group 1: Image with a empty <code> alt</code></h2>
+      <div>Image 11: <img src="img1.png" alt="Image 1" class="IMAGE_2_MC"/></div>
+        
+      <h2>Group 2: Image with a empty <code> aria-label</code></h2>
+        <div>Image 21: <img src="img2.png" aria-label="Image 2" class="IMAGE_2_MC"/></div>
+      
+      <h2>Group 3: Image with a empty <code> aria-labelledby</code></h2>
+      <div id="img31"><img aria-labelledby="img31" src="img3.png" alt="Image 3" class="IMAGE_2_MC"/></div> 
+      
+      <h2>Group 4: Image with no accessible tag</h2>
+        <div>Image 41: <img src="img4.png" role="presentation"/></div>
+    
+      <h2>Group 5: Image with HTML 5 <code>hidden</code></h2>
+        <div>Image 51: <img src="img5.png" alt="Image 5" hidden class="IMAGE_2_HIDDEN" /></div>
+        <div>Image 52: <img src="img5.png" alt="" aria-hidden="true" /></div>
+        
+      <h2>Group 6: Image with a short text alternative</h2>
+        <div>Image 11: <img src="img6.png" alt="" /></div>
+        
+      <h2>Group 7: Image with a empty <code> title</code></h2>
+        <div>Image 21: <img src="img7.png" title="Image 2" class="IMAGE_2_MC"/></div>
+      
+      <h2>Group 8: Image with a short text alternative using <code> aria-labelledby</code></h2>
+      <div id="img8">Image text description 3</div> <img aria-labelledby="img8" src="img8.png" alt="" class="IMAGE_2_MC"/>
+
+      <h2>Group 9: Image with a short text alternative using <code> aria-labelledby</code></h2>
+      <div role="img" aria-label="role based image" class="IMAGE_2_MC">Image text description 3</div>
+      
+      
+    </div>
+  </body>
+</html>  

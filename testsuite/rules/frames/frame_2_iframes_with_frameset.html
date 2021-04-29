@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML document with iframes with frameset</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <body>
+  <main>
+    <h1>HTML document with iframes with frameset</h1>
+    <iframe src="frame-no-iframes.html"           title="iframe with no sub iframes"   class="FRAME_2_PASS"></iframe>
+    <h2 id="id1">iframe with labelledby</h2>
+    <iframe src="frame_2-with-iframes-1.html" aria-labelledby="id1"  class="FRAME_2_PASS"></iframe>
+    <iframe src="frame_2-with-iframes-2.html"                        class="FRAME_2_FAIL"></iframe>
+    <iframe src="frame_2-with-iframes-3.html" style="display: none"       class="FRAME_2_HIDDEN"></iframe>
+    <iframe src="frame_2-with-iframes-4.html" style="visibility: hidden"  class="FRAME_2_HIDDEN"></iframe>
+    <iframe src="frame_2-with-iframes-5.html" hidden                      class="FRAME_2_HIDDEN"></iframe>
+<!--
+    <iframe src="frameset-with-iframes.html" aria-label="iframe with frameset"   class="FRAME_2_PASS"></iframe>
+-->
+  </main>
+  
+  <body>
+</html>

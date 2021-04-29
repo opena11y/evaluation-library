@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heading test 2: h1 element outside of the main landmark</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div role="banner">
+       <h1 class="HEADING_2_HIDDEN" style="display: none">hidden h1 element inside banner landmark</h1>
+       <p>banner content</p> 
+    </div>  
+
+    <div role="main">
+       <h1 class="HEADING_2_HIDDEN" style="visibility: hidden">hidden h1 element inside of the main landmark</h1>
+    </div>  
+    
+
+    <div role="main" style="visibility: hidden">
+       <h1 class="HEADING_2_HIDDEN">hidden h1 element inside of the main landmark</h1>
+    </div>  
+    
+
+    <div role="main">
+       <h1 class="HEADING_2_PASS">h1 element inside of the main landmark</h1>
+    </div>  
+    
+    <h1 class="HEADING_2_FAIL">h1 element outside of the main landmar</h1>
+
+    <div role="contentinfo">
+       <h1 class="HEADING_2_FAIL">h1 element inside of the contentinfo landmark</h1>
+    </div>  
+    
+
+  </body>
+</html>
+
+

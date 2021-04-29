@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>image 1 tests</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Image Test 1 for role img</h1>
+
+      <h2>Group 1: Div with <code>Role="img"</code> with no source for accessible name</h2>
+        <div role="img" style="height: 150px; width 50px; background-image: url('img1.png')" class="IMAGE_1_FAIL">Div 11: </div>
+        
+      <h2> Group 2: Div with <code>Role="img"</code> with <code>alt</code> attribute </h2>
+        <div role="img" alt="div21" style="height: 150px; width 50px;background-image: url('img2.png')" class="IMAGE_1_FAIL">Div 21: </div>
+          
+      <h2> Group 3: Div with <code>Role="img"</code> with <code>aria-label</code> attribute </h2>
+        <div role="img" aria-label="div31" style="height: 150px; width 50px; background-image: url('img3.png')" class="IMAGE_1_PASS">Div 31: </div>
+
+      <h2> Group 4: Div with <code>Role="img"</code> with <code>aria-labelledby</code> attribute</h2>
+        <div id="div41">Div 41:</div><div role="img" aria-labelledby="div41" style="height: 150px; width 50px;  background-image: url('img4.png')" class="IMAGE_1_PASS">Div 42: </div>
+     
+
+      <h2> Group 5: Div with <code>Role="img"</code> with HTML 5 <code>hidden<code> attribute</h2>
+        <div role="img" hidden style="height: 150px; width 50px; background-image: url('img5.png')" class="IMAGE_1_HIDDEN">Div 61: </div>
+      
+      <h2> Group 6: Div with <code>Role="img"</code> with HTML <code>aria-hidden</code> attribute</h2>
+        <div role="img" aria-hidden="true" style="height: 150px; width 50px; background-image: url('img6.png')" class="IMAGE_1_HIDDEN">Div 61:</div>
+        
+      
+    </div>
+  </body>
+</html>
+

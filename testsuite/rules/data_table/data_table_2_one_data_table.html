@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 2: Accessible Name (one data table)</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    
+    <div role="main">
+    
+    <h1>Data Table Rule 2: Accessible Name (one data table)</h1>
+      
+    <h2>Data Table A: Accessible Name (Caption)</h2>
+    
+    <table class="TABLE_2_PASS" summary="Description for Table A">
+        <caption>Table Name A</caption>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+          </tr>
+        </thead>
+        <tr> 
+          <td>Data Cell 11</td>
+          <td>Data Cell 12</td>
+          <td>Data Cell 13</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 21</td>
+          <td>Data Cell 22</td>
+          <td>Data Cell 23</td>
+        </tr>
+        <tr> 
+          <td>Data Cell 31</td> 
+          <td>Data Cell 32</td> 
+          <td>Data Cell 33</td> 
+        </tr>
+        <tr> 
+          <td>Data Cell 41</td> 
+          <td>Data Cell 42</td> 
+          <td>Data Cell 43</td> 
+        </tr>
+      </table>
+
+
+      <h2>Not a data table 1</h2>
+      
+      <table role="presentation">
+        <tr> 
+          <td>Layout Cell 11</td>
+          <td>Layout Cell 12</td>
+          <td>Layout Cell 13</td>
+        </tr>
+        <tr> 
+          <td>Layout Cell 21</td>
+          <td>Layout Cell 22</td>
+          <td>Layout Cell 23</td>
+        </tr>
+        <tr> 
+          <td>Layout Cell 31</td> 
+          <td>Layout Cell 32</td> 
+          <td>Layout Cell 33</td> 
+        </tr>
+      </table>
+      
+      <h2>Not a data table 2</h2>
+      
+      <table>
+        <tr> 
+          <td>Cell 11</td>
+          <td>Cell 12</td>
+          <td>Cell 13</td>
+        </tr>
+        <tr> 
+          <td>Cell 21</td>
+          <td>Cell 22</td>
+          <td>Cell 23</td>
+        </tr>
+        <tr> 
+          <td>Cell 31</td> 
+          <td>Cell 32</td> 
+          <td>Cell 33</td> 
+        </tr>
+      </table>
+      
+      
+      
+    </div>
+    
+  </body>
+</html>

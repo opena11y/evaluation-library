@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Video Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      test( "VIDEO_1: Video only must have equivalents (video element)", function() {
+        executeTest('ID_IFRAME_1A', 'VIDEO_1');
+      });
+
+      test( "VIDEO_2: Video only must have equivalents (object element)", function() {
+        executeTest('ID_IFRAME_2A', 'VIDEO_2');
+      });
+      
+      test( "VIDEO_3: Video only must have equivalents (embed element)", function() {
+        executeTest('ID_IFRAME_3A', 'VIDEO_3');
+      });
+
+      test( "VIDEO_4: Video must have captions (video element)", function() {
+        executeTest('ID_IFRAME_4A', 'VIDEO_4');
+      });
+
+      test( "VIDEO_5: Video must have captions (object element)", function() {
+        executeTest('ID_IFRAME_5A', 'VIDEO_5');
+      });
+      
+      test( "VIDEO_6: Video must have captions (embed element)", function() {
+        executeTest('ID_IFRAME_6A', 'VIDEO_6');
+      });
+      
+
+      test( "VIDEO_7: Video must have captions (video element)", function() {
+        executeTest('ID_IFRAME_7A', 'VIDEO_7');
+      });
+
+      test( "VIDEO_8: Video must have captions (object element)", function() {
+        executeTest('ID_IFRAME_8A', 'VIDEO_8');
+      });
+      
+      test( "VIDEO_9: Video must have audio descriptions (embed element)", function() {
+        executeTest('ID_IFRAME_9A', 'VIDEO_9');
+      });
+      
+
+
+    </script>
+
+    <h2>Video 1, 2 and 3: Video only must have an alternative</h2>
+    <iframe id="ID_IFRAME_1A" src="video/video_1_video_only_must_have_alternative.html"></iframe>
+    <iframe id="ID_IFRAME_2A" src="video/video_2_video_only_must_have_alternative.html"></iframe>
+    <iframe id="ID_IFRAME_3A" src="video/video_3_video_only_must_have_alternative.html"></iframe>
+
+    <h2>Video 4, 5 and 6: Video must have caption</h2>
+    <iframe id="ID_IFRAME_4A" src="video/video_4_video_must_have_caption.html"></iframe>
+    <iframe id="ID_IFRAME_5A" src="video/video_5_video_must_have_caption.html"></iframe>
+    <iframe id="ID_IFRAME_6A" src="video/video_6_video_must_have_caption.html"></iframe>
+    
+    <h2>Video 7, 8 and 9: Video must have audio description</h2>
+    <iframe id="ID_IFRAME_7A" src="video/video_7_video_must_have_audio_description.html"></iframe>
+    <iframe id="ID_IFRAME_8A" src="video/video_8_video_must_have_audio_description.html"></iframe>
+    <iframe id="ID_IFRAME_9A" src="video/video_9_video_must_have_audio_description.html"></iframe>
+    
+    
+  </body>
+
+</html>

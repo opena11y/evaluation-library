@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heading test 2: h1 element hidden </title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div role="main">
+      <h1 class="HEADING_2_HIDDEN" style="display: none">Hidden h1 element that is a child of a main landmark</h1>
+    </div>  
+
+    <div role="banner">
+      <h1 class="HEADING_2_PASS" >h1 element that is a child of the banner landmark</h1>
+    </div>  
+    
+    <div role="main">
+      <h1 class="HEADING_2_PASS" >h1 element that is a child of the main landmark</h1>
+    </div>  
+
+    <div role="main">
+      <div role="region" aria-label="container region 1">
+        <h1 class="HEADING_2_PASS" >h1 element that is a child of the main/region landmark</h1>
+      </div>  
+    </div>  
+    
+    <div role="main">
+      <div role="region" aria-label="container region 2">
+        <div role="region" aria-label="container region 3">
+          <h1 class="HEADING_2_PASS" >h1 element that is a child of the main/region/region landmark</h1>
+        </div>  
+      </div>  
+    </div>  
+    
+    
+    <h1 class="HEADING_2_FAIL" >h1 element outside of the main landmar</h1>
+ 
+    
+  </body>
+</html>
+
+

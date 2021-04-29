@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>image 4 tests</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Tests to see if accessible name is greater than 100 characters for Area</h1>
+      
+      <div>Map Image <img usemap="#img1" src="img1.png" alt="clickable image" class="IMAGE_4_EN_PASS"/ ></div>
+      
+      <h2>Group 1: Area with accessible name greater than 100 characters using <code>alt</code> attribute</h2>
+        <map name="img1">Area 11: <area alt="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa101Characters" class="IMAGE_4_EN_MC"/></map>
+        
+      <h2>Group 2: Area with accessible name greater than 100 characters using <code>aria-label</code> attribute</h2>
+      <map name="img1">Area 21: <area aria-label="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa101Characters" class="IMAGE_4_EN_MC"/></map>
+        
+      <h2>Group 3: Area with accessible name greater than 100 characters using <code>aria-labelledby</code> attribute</h2>
+      <div id="area31">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa101Characters</div><map name="img1">Area 31: <area aria-labelledby="area31" class="IMAGE_4_EN_MC"/></map>
+        
+      <h2>Group 4: Area with accessible name equal to 100 characters using <code>alt</code> attribute</h2>
+        <map name="img1">Area 41: <area alt="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa100Characters" class="IMAGE_4_EN_PASS"/></map>
+        
+      <h2>Group 5: Area with accessible name less than 100 characters using <code>aria-label</code> attribute</h2>
+        <map name="img1">Area 51: <area aria-label="aaaaaaaaaaaaaaaaaaaalessthan100Characters" class="IMAGE_4_EN_PASS"/></map>
+
+      <h2>Group 6: Area with accessible name less than 100 characters using <code>aria-labelledby</code> attributeh2>
+        <div id="area61">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaLessThan100Characters</div><map name="img1">Area 61: <area aria-labelledby="area61" class="IMAGE_4_EN_PASS"/></map>
+      
+        
+    </div>
+  </body>
+</html>

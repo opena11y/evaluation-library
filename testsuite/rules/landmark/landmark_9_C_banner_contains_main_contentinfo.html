@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 9: Banner contains main and contentinfo landmarks</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="banner" class="LANDMARK_9_FAIL">
+      <h2>Banner 1</h2>
+      <p>Banner content</p>
+      
+      <div role="contentinfo" class="LANDMARK_9_FAIL">
+        <h2>Contentinfo 1</h2>
+      </div>  
+      
+      <div role="main" class="LANDMARK_9_FAIL" aria-label="Main 1">
+        <h1>Main 1</h2>
+        
+        <div role="main" class="LANDMARK_9_FAIL" aria-label="Main 2">
+          <h1>Main 2</h1>
+          
+          <div role="complementary" class="LANDMARK_9_FAIL" aria-label="Banner 1">
+            <h2>Contentinfo 2</h2>
+            
+            <div role="navigation" class="LANDMARK_9_PASS" aria-label="Navigation 1">
+              <h2>Navigation 1</h2>
+            </div>  
+            
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div role="banner" class="LANDMARK_9_HIDDEN" hidden>
+      <h2>Banner 2</h2>
+      Hidden Banner content
+    </div>
+    
+    
+    <div  role="main">
+      
+      <h1>Landmark 9: Banner contains main and contentinfo landmarks</p>
+      <p>Main content</p>
+        
+    </div>
+    
+    <div role="contentinfo" >
+      <h2>Contentinfo 3</h2>
+      ContentInfo content
+    </div>
+    
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="HEADING_1_FAIL">
+  <head>
+    <title>Color 1:</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div role="main">
+      <h1 class="COLOR_1_PASS">Color 1: Text elements must have a high color contrast ration</h1>
+      <!--Color Contrast Tool http://leaverou.github.io/contrast-ratio -->
+      <h2 class="COLOR_1_PASS">Group 1: Background color, low color contrast ratio</h2>
+      <div style="background-color: red; height: 100px; width: 100px">
+        <h4 style="color: orange" class="COLOR_1_FAIL">Heading 11 </h4>
+        <h6 style="color: orange" class="COLOR_1_FAIL">Heading 12 </h6>
+        <p  style="color: orange" class="COLOR_1_FAIL">Paragraph 11 </p>
+      </div>
+    
+    
+      <h2 class="COLOR_1_PASS">Group 2: Background image, low color contrast ratio</h2>
+      <div style="background-image: url('img1.png'); height: 100px; width: 100px">
+        <h3 style="color: orange" class="COLOR_1_MC">Heading 21 </h3>
+        <h5 style="color: orange" class="COLOR_1_MC">Heading 22 </h4>
+        <p  style="color: orange" class="COLOR_1_MC">Paragraph 21 </p>
+      </div>
+      
+      <h2 class="COLOR_1_PASS">Group 3: Background color, high color contrast ratio</h2>
+      <div style="background-color: white; height: 100px; width: 100px">
+        <h3 style="color: black" class="COLOR_1_PASS">Heading 31 </h3>
+        <h5 style="color: black" class="COLOR_1_PASS">Heading 32 </h5>
+        <p  style="color: black" class="COLOR_1_PASS">Paragraph 31 </p>
+      </div>
+      
+      
+      <h2 class="COLOR_1_PASS">Group 4: Background image, high color contrast ratio</h2>
+      <div style="background-image: url('img2.png'); height: 100px; width: 100px">
+        <h4 style="color: black" class="COLOR_1_MC">Heading 41 </h4>
+        <h6 style="color: black" class="COLOR_1_MC">Heading 42 </h6>
+        <p  style="color: black" class="COLOR_1_MC">Paragraph 41 </p>
+      </div>
+    
+      <h2 class="COLOR_1_PASS">Group 5: Hidden elements</h2>
+      <div style="background-color: white; height: 100px; width: 100px">
+        <h3 class="COLOR_1_HIDDEN" style="color: black" hidden>Heading 51 </h3>
+        <h5 class="COLOR_1_HIDDEN" style="color: black; display: none">Heading 52 </h5>
+        <p  class="COLOR_1_HIDDEN" style="color: orange; visibility: hidden">Paragraph 51 </p>
+      </div>
+
+      <h2 class="COLOR_1_PASS">Group 6: Text with 0 height</h2>
+      <div>
+        <h3 class="COLOR_1_HIDDEN" style="height: 1px; overflow: hidden">Heading   61</h3>
+        <h5 class="COLOR_1_HIDDEN" style="height: 1px; overflow: hidden">Heading   62</h5>
+        <p  class="COLOR_1_HIDDEN" style="height: 1px; overflow: hidden">Paragraph 61</p>
+      </div>
+    
+      <h2 class="COLOR_1_PASS">Group 7: Font size of 1 px</h2>
+      <div>
+        <h3 class="COLOR_1_HIDDEN" style="font-size: 1px">Heading   71</h3>
+        <h5 class="COLOR_1_HIDDEN" style="font-size: 1px">Heading   72</h5>
+        <p  class="COLOR_1_HIDDEN" style="font-size: 1px">Paragraph 71</p>
+      </div>
+    
+    
+    
+    </div>
+    
+  </body>
+</html>
+
+

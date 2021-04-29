@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Form Control Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      // Test case for labeling form controls
+
+      test( "CONTROL_1: Forms must have labels", function() {
+        executeTest('ID_IFRAME_1', 'CONTROL_1');
+      });
+      
+      test( "CONTROL_2: Image inputs must have alts or a title", function() {
+        executeTest('ID_IFRAME_2', 'CONTROL_2');
+      });
+      
+      test( "CONTROL_3: Radio Buttons must be in a legend and fieldset", function() {
+        executeTest('ID_IFRAME_3A', 'CONTROL_3');
+        executeTest('ID_IFRAME_3B', 'CONTROL_3');
+      });
+      // Test case for fieldset/legend
+      
+      test( "CONTROL_4: Buttons must have a val and text", function() {
+        executeTest('ID_IFRAME_4', 'CONTROL_4');
+      });
+      
+      test( "CONTROL_5: Unique Ids", function() {
+        executeTest('ID_IFRAME_5', 'CONTROL_5');
+      });
+      
+      test( "CONTROL_6: Label references", function() {
+        executeTest('ID_IFRAME_6', 'CONTROL_6');
+      });
+      
+      test( "CONTROL_7: Labels and legends must have text", function() {
+        executeTest('ID_IFRAME_7', 'CONTROL_7');
+      });
+      
+      test( "CONTROL_8: Fieldset should contain exactly one legend element", function() {
+        executeTest('ID_IFRAME_8', 'CONTROL_8');
+      });
+
+      test( "CONTROL_9: Form controls should not be labelled with the title attribute", function() {
+        executeTest('ID_IFRAME_9', 'CONTROL_9');
+      });
+         
+      test( "CONTROL_10: Form controls should have unique labels", function() {
+        executeTest('ID_IFRAME_10A', 'CONTROL_10');
+      });
+         
+      test( "CONTROL_10: Form controls should have unique labels (Tab Panels)", function() {
+        executeTest('ID_IFRAME_10B', 'CONTROL_10');
+      });
+         
+                  
+    </script>
+
+    <h2>Labels</h2>
+    <iframe id="ID_IFRAME_1" src="form_controls/form_controls_1_controls_must_have_legends.html"></iframe>
+    
+    <h2>Images</h2>
+    <iframe id="ID_IFRAME_2" src="form_controls/form_controls_2_images_have_alt_or_title.html"></iframe>
+    
+    <h2>Radio buttons in field set legend</h2>
+    <iframe id="ID_IFRAME_3A" src="form_controls/form_controls_3_radio_buttons_in_legend.html"></iframe>
+    <iframe id="ID_IFRAME_3B" src="form_controls/form_controls_3_radio_buttons_in_group.html"></iframe>
+    
+    <h2>Buttons must have a value and text</h2>
+    <iframe id="ID_IFRAME_4" src="form_controls/form_controls_4_buttons_value_and_text.html"></iframe>
+    
+    <h2>TextArea, Buttons, input and select should have unique ids.</h2>
+    <iframe id="ID_IFRAME_5" src="form_controls/form_controls_5_unique_ids.html"></iframe>
+
+    <h2>TextArea, Buttons, input and select should have unique ids.</h2>
+    <iframe id="ID_IFRAME_6" src="form_controls/form_controls_6_label_references_form_control.html"></iframe>
+   
+    <h2>Legends and labels must have text</h2>
+    <iframe id="ID_IFRAME_7" src="form_controls/form_controls_7_labels_legends_have_text.html"></iframe>
+    
+    <h2>Fieldset/Legend</h2>
+    <iframe id="ID_IFRAME_8" src="form_controls/form_controls_8_fieldset_has_legend.html"></iframe>
+    
+    <h2>No titles as a label</h2>
+    <iframe id="ID_IFRAME_9" src="form_controls/form_controls_9_no_titles.html"></iframe>
+    
+    <h2>Unique labels for inputs</h2>
+    <iframe id="ID_IFRAME_10A" src="form_controls/form_controls_10_unique_accessible_labels.html"></iframe>
+    <iframe id="ID_IFRAME_10B" src="form_controls/form_controls_10_tab_panels.html"></iframe>
+    
+  </body>
+
+</html>

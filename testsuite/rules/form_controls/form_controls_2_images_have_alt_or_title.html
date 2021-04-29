@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control 2: </title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form test 2 Image Forms must have title or alt</h1>
+      
+      <h2>Group 1:Image inputs with an alt</h2>
+      <form>
+        <input type="image" src="img1.png" alt="image11" class="CONTROL_2_PASS">
+        <input type="image" src="img2.png" alt="image12" class="CONTROL_2_PASS">
+      </form>
+      
+      <h1>Group 2:Image inputs with a title</h1>
+      <form>
+        <input type="image" src="img3.png" title="image21" class="CONTROL_2_PASS">
+        <input type="image" src="img4.png" title="image22" class="CONTROL_2_PASS">
+      </form>
+      
+      <h1>Group 3: Image inputs with a blank alt</h1>
+      <form>
+        <input type="image" src="img5.png" alt="" class="CONTROL_2_FAIL">
+      </form>
+      
+      <h1>Group 5: Image inputs with a blank title</h1>
+      <form>
+        <input type="image" src="img6.png" title="" class="CONTROL_2_FAIL">
+      </form>
+      
+      <h1>Group 6: Image inputs with a blank title and full alt<h1>
+      <form>
+        <input type="image" src="img7.png" title="" alt="image 61" class="CONTROL_2_PASS">
+      </form>
+      
+      <h1>Group 7: Hidden Image inputs<h1>
+      <form>
+        <input type="image" src="img8.png" hidden class="CONTROL_2_HIDDEN">
+        <input type="image" src="img9.png" style="visibility: hidden;" class="CONTROL_2_HIDDEN">
+      </form>
+      
+      <h1>Group 8: No alt and not title<h1>
+      <form>
+        <input type="image" src="img8.png" class="CONTROL_2_FAIL">
+      </form>
+      
+    </div>
+  </body>
+</html>
+
+

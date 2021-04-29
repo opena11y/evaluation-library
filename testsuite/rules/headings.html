@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Headings Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      // Test case for labeling form controls
+
+      // Test case for fieldset/legend
+
+      test( "HEADING_1: no h1 element", function() {
+        executeTest('ID_IFRAME_1A', 'HEADING_1');
+      });
+      
+      test( "HEADING_1: One h1 element", function() {
+        executeTest('ID_IFRAME_1B', 'HEADING_1');
+      });
+      
+      test( "HEADING_1: empty h1 elements", function() {
+        executeTest('ID_IFRAME_1C', 'HEADING_1');
+      });
+     
+      test( "HEADING_2: no main landmark", function() {
+        executeTest('ID_IFRAME_2A', 'HEADING_2');
+      });
+      
+      test( "HEADING_2: h1 element child of main landmark", function() {
+        executeTest('ID_IFRAME_2B', 'HEADING_2');
+      });
+      
+      test( "HEADING_2: Multiple h1 elements and main landmarks", function() {
+        executeTest('ID_IFRAME_2C', 'HEADING_2');
+      });
+       
+      
+      test( "HEADING_2: h1 element NOT a child of the main landmark", function() {
+        executeTest('ID_IFRAME_2D', 'HEADING_2');
+      });
+         
+      test( "HEADING_3: Sibling headings must be unique", function() {
+        executeTest('ID_IFRAME_3A', 'HEADING_3');
+      });
+
+/*         
+      test( "HEADING_4: Heading must describe section", function() {
+        executeTest('ID_IFRAME_4A', 'HEADING_4');
+      });
+*/        
+      test( "HEADING_5: Headings must be properly nested in page without landmarks", function() {
+        executeTest('ID_IFRAME_5A', 'HEADING_5');
+      });
+
+      test( "HEADING_5: Headings must not properly nested with landmarks", function() {
+        executeTest('ID_IFRAME_5B', 'HEADING_5');
+      });
+
+      test( "HEADING_6: Headings must be not only images", function() {
+        executeTest('ID_IFRAME_6A', 'HEADING_6');
+      });
+
+      test( "HEADING_7: Landmarks start with h2 element", function() {
+        executeTest('ID_IFRAME_7A', 'HEADING_7');
+      });
+    </script>
+
+    <h2>Tests for heading rule 1, each page must have at least one h1 element </h2>
+    <iframe id="ID_IFRAME_1A" src="headings/headings_1_a_no_h1.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="headings/headings_1_b_h1.html"></iframe>
+    <iframe id="ID_IFRAME_1C" src="headings/headings_1_c_h1_no_content.html"></iframe>
+    
+    <h2>Tests for heading rule 2, if there is a main landmark and an h1 element the h1 element must be a child of the main landmark</h2>
+    <iframe id="ID_IFRAME_2A" src="headings/headings_2_a_h1_heading_no_main.html"></iframe>
+    <iframe id="ID_IFRAME_2B" src="headings/headings_2_b_h1_heading_main_heading_inside.html"></iframe>
+    <iframe id="ID_IFRAME_2C" src="headings/headings_2_c_multiple_h1_elements and_main_landmarks.html"></iframe>
+    <iframe id="ID_IFRAME_2D" src="headings/headings_2_d_h1_heading_main_heading_outside.html"></iframe>
+    
+    <h2>Test for heading rule 3, if there is no main landmark, sibling headings must be unique</h2>
+      <iframe id="ID_IFRAME_3A" src="headings/headings_3_a_no_main_landmark.html"></iframe>
+      
+    <h2>Tests for heading rule 4, check that heading describes it's part of the page</h2>
+      <iframe id="ID_IFRAME_4A" src="headings/headings_4_proper_description.html"></iframe>
+
+    <h2>Tests for heading rule 5, headings must be properly nested</h2>
+    <iframe id="ID_IFRAME_5A" src="headings/headings_5_properly_nested.html"></iframe>  
+    <iframe id="ID_IFRAME_5B" src="headings/headings_5_properly_nested_in_landmarks.html"></iframe>  
+    
+    <h2>Tests for heading rule 6, headings can not only be images</h2>
+    <iframe id="ID_IFRAME_6A" src="headings/headings_6_headings_not_only_images.html"></iframe>          
+
+    <h2>Tests for heading rule 7, landmarks start with h2 elements</h2>
+    <iframe id="ID_IFRAME_7A" src="headings/headings_7_A_some_landmarks_use_h2.html"></iframe>          
+  </body>
+  
+</html>

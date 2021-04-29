@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 6: Widgets must have properties</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 6 test case</div>
+      </header>
+      
+      <main>
+
+        <h1>WIDGET 6: Widgets must have properties</h1>
+
+        <h2>combobox</h2>
+        <div role="combobox" class="WIDGET_6_PASS" aria-expanded="true">combobox pass</div>
+
+        <div role="combobox" hidden class="WIDGET_6_HIDDEN" aria-expanded="true">combobox hidden</div>
+
+        <div role="combobox" class="WIDGET_6_FAIL">combobox fail</div>
+
+        <h2>scrollbar</h2>
+        <div role="scrollbar" class="WIDGET_6_PASS" aria-controls="ID_SBAR_CONTROLS" aria-orientation="vertical" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50">scrollbar pass</div>
+
+        <div role="scrollbar" hidden class="WIDGET_6_HIDDEN">scrollbar hidden</div>
+
+        <div role="scrollbar" class="WIDGET_6_FAIL">scrollbar fail</div>
+
+        <h2>checkbox</h2>
+        <div role="checkbox" class="WIDGET_6_PASS" aria-checked="true">checkbox pass</div>
+
+        <div role="checkbox" hidden class="WIDGET_6_HIDDEN" aria-checked="true">checkbox hidden</div>
+
+        <div role="checkbox" class="WIDGET_6_FAIL">checkbox fail</div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 6 test case</div>
+      </footer>
+    
+  </body>
+</html>

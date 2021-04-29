@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Audio Rule 2: object elements must have equivalent</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Audio Rule 2: <code>object</code> elements must have equivalent</h1>
+
+      <h2>Test 1: <code>object</code> element that may or may not have captions or a text transcript</h2>
+      <div>
+        <object class="AUDIO_2_MC" data="audio-test.mp3"></object>
+      </div>
+      
+      <h2>Test 2: <code>object</code> element that may or may not have captions or a text transcript</h2>
+      <div>  
+        <object class="AUDIO_2_MC" data="audio-test.ogg" type="audio/ogg"></object>
+      </div>
+
+      <h2>Test 3: <code>object</code> element with a non-audio mime type</h2>
+      <div>  
+        <object class="AUDIO_2_MC"  data="audio-test.ogg" type="application/x-shockwave-flash" ></object>
+      </div>
+      
+      <h2>Test 4: <code>object</code> element using @aria-describedby@ to reference a text transcription</h2>
+      <div>  
+        <object class="AUDIO_2_PASS" data="audio-test.mp3" aria-describedby="ID_TRANSCRIPT"></object>      
+        <div id="ID_TRANSCRIPT">Testing Testing one two three</div>
+      </div>
+      
+      <h2>Test 5: <code>object</code> element hidden using hidden attribute</h2>
+      <div  hidden>
+        <object class="AUDIO_2_HIDDEN" data="audio-test.ogg" type="audio/ogg"></object>
+      </div>
+      
+      <h2>Test 6: <code>object</code> element hidden using css display none</h2>
+      <div style="display: none" >
+        <object class="AUDIO_2_HIDDEN" data="audio-test.mp3" type="audio/mp3"></object>
+      </div>
+    </div>
+  </body>
+</html>

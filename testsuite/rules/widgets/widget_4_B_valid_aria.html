@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 4: ARIA attributes with numeric values must be valid</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 4 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 4: ARIA attributes with numeric values must be valid</h1>
+
+        <h2>aria-colcount</h2>
+        <div role="table" class="WIDGET_4_PASS"    aria-colcount="5">aria-colcount=5 pass</div>
+        <div role="table" class="WIDGET_4_PASS"    aria-colcount="12">aria-colcount=12 pass</div>
+        <div role="table" class="WIDGET_4_HIDDEN"  aria-colcount="12" hidden>aria-colcount=12 hidden</div>
+        <div role="table" class="WIDGET_4_PASS"    aria-colcount="-1">aria-colcount=-1 pass</div>
+        <div role="table" class="WIDGET_4_FAIL"    aria-colcount="">aria-colcount="" fail</div>
+
+        <h2>aria-colindex</h2>
+        <div role="table">
+            <div role="row">
+                <div role="cell" class="WIDGET_4_PASS"    aria-colindex="5">aria-colindex=5 pass</div>
+                <div role="cell" class="WIDGET_4_PASS"    aria-colindex="12">aria-colindex=12 pass</div>
+                <div role="cell" class="WIDGET_4_HIDDEN"  aria-colindex="12" hidden>aria-colindex=12 hidden</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-colindex="-1">aria-colindex=-1 fail</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-colindex="0">aria-colindex=0 fail</div>
+            </div>
+        </div>
+
+        <h2>aria-colspan</h2>
+        <div role="table">
+            <div role="row">
+                <div role="cell" class="WIDGET_4_PASS"    aria-colspan="5">aria-colspan=5 pass</div>
+                <div role="cell" class="WIDGET_4_PASS"    aria-colspan="12">aria-colspan=12 pass</div>
+                <div role="cell" class="WIDGET_4_HIDDEN"  aria-colspan="12" hidden>aria-colspan=12 hidden</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-colspan="-1">aria-colspan=-1 fail</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-colspan="0">aria-colspan=0 fail</div>
+            </div>
+        </div>
+
+        <h2>aria-level</h2>
+        <div role="heading" class="WIDGET_4_PASS"   aria-level="1"  >aria-level pass 1</div>
+        <div role="heading" class="WIDGET_4_PASS"   aria-level="12"  >aria-level pass 12</div>
+        <div role="heading" class="WIDGET_4_HIDDEN"   aria-level="-1" hidden>aria-level hidden</div>
+        <div role="heading" class="WIDGET_4_FAIL"   aria-level="-1"  >aria-level fail -1</div>
+
+        <h2>aria-posinset</h2>
+        <div role="treeitem" class="WIDGET_4_PASS"   aria-posinset="1"  >aria-posinset pass 0</div>
+        <div role="treeitem" class="WIDGET_4_PASS"   aria-posinset="2"  >aria-posinset pass 2</div>
+        <div role="treeitem" class="WIDGET_4_PASS"   aria-posinset="120">aria-posinset pass 120</div>
+        <div role="treeitem" class="WIDGET_4_HIDDEN" aria-posinset="1" hidden>aria-posinset hidden</div>
+        <div role="treeitem" class="WIDGET_4_FAIL"   aria-posinset="-1" >aria-posinset fail -1</div>
+        <div role="treeitem" class="WIDGET_4_FAIL"   aria-posinset=""   >aria-posinset fail empty</div>
+        <div role="treeitem" class="WIDGET_4_FAIL"   aria-posinset="two" >aria-posinset fail two</div>
+
+       <h2>aria-rowcount</h2>
+        <div role="table" class="WIDGET_4_PASS"    aria-rowcount="5">aria-rowcount=5 pass</div>
+        <div role="table" class="WIDGET_4_PASS"    aria-rowcount="12">aria-rowcount=12 pass</div>
+        <div role="table" class="WIDGET_4_HIDDEN"  aria-rowcount="12" hidden>aria-rowcount=12 hidden</div>
+        <div role="table" class="WIDGET_4_PASS"    aria-rowcount="-1">aria-rowcount=-1 pass</div>
+        <div role="table" class="WIDGET_4_FAIL"    aria-rowcount="">aria-rowcount="" fail</div>
+
+        <h2>aria-rowindex</h2>
+        <div role="table">
+            <div role="row">
+                <div role="cell" class="WIDGET_4_PASS"    aria-rowindex="5">aria-rowindex=5 pass</div>
+                <div role="cell" class="WIDGET_4_PASS"    aria-rowindex="12">aria-rowindex=12 pass</div>
+                <div role="cell" class="WIDGET_4_HIDDEN"  aria-rowindex="12" hidden>aria-rowindex=12 hidden</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-rowindex="-1">aria-rowindex=-1 fail</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-rowindex="0">aria-rowindex=0 fail</div>
+            </div>
+        </div>
+
+        <h2>aria-rowspan</h2>
+        <div role="table">
+            <div role="row">
+                <div role="cell" class="WIDGET_4_PASS"    aria-rowspan="5">aria-rowspan=5 pass</div>
+                <div role="cell" class="WIDGET_4_PASS"    aria-rowspan="12">aria-rowspan=12 pass</div>
+                <div role="cell" class="WIDGET_4_HIDDEN"  aria-rowspan="12" hidden>aria-rowspan=12 hidden</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-rowspan="-1">aria-rowspan=-1 fail</div>
+                <div role="cell" class="WIDGET_4_FAIL"    aria-rowspan="0">aria-rowspan=0 fail</div>
+            </div>
+        </div>
+
+        <h2>aria-setsize</h2>
+        <div role="listitem" class="WIDGET_4_PASS"   aria-setsize="1"  >aria-setsize pass 0</div>
+        <div role="listitem" class="WIDGET_4_PASS"   aria-setsize="2"  >aria-setsize pass 2</div>
+        <div role="listitem" class="WIDGET_4_PASS"   aria-setsize="120">aria-setsize pass 120</div>
+        <div role="listitem" class="WIDGET_4_HIDDEN" aria-setsize="1" hidden>aria-setsize hidden</div>
+        <div role="listitem" class="WIDGET_4_FAIL"   aria-setsize="-1" >aria-setsize fail -1</div>
+        <div role="listitem" class="WIDGET_4_FAIL"   aria-setsize=""   >aria-setsize fail empty</div>
+        <div role="listitem" class="WIDGET_4_FAIL"   aria-setsize="two" >aria-setsize fail two</div>
+
+        <h2>aria-valuemax</h2>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuemax="84" >aria-valuemax pass 84</div>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuemax="0"  >aria-valuemax pass 0</div>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuemax="-12">aria-valuemax pass -12</div>
+        <div role="slider" class="WIDGET_4_HIDDEN" aria-valuemax="true" hidden >aria-valuemax hidden </div>
+        <div role="slider" class="WIDGET_4_FAIL"   aria-valuemax="two">aria-valuemax fail string</div>
+        <div role="slider" class="WIDGET_4_FAIL"   aria-valuemax=""   >aria-valuemax fail empty</div>
+
+        <h2>aria-valuemin</h2>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuemin="84" >aria-valuemin pass 84</div>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuemin="0"  >aria-valuemin pass 0</div>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuemin="-12">aria-valuemin pass -12</div>
+        <div role="slider" class="WIDGET_4_HIDDEN" aria-valuemin="true" hidden >aria-valuemin hidden </div>
+        <div role="slider" class="WIDGET_4_FAIL"   aria-valuemin="two">aria-valuemin fail string</div>
+        <div role="slider" class="WIDGET_4_FAIL"   aria-valuemin=""   >aria-valuemin fail empty</div>
+
+        <h2>aria-valuenow</h2>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuenow="84" >aria-valuenow pass 84</div>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuenow="0"  >aria-valuenow pass 0</div>
+        <div role="slider" class="WIDGET_4_PASS"   aria-valuenow="-12">aria-valuenow pass -12</div>
+        <div role="slider" class="WIDGET_4_HIDDEN" aria-valuenow="true" hidden >aria-valuenow hidden </div>
+        <div role="slider" class="WIDGET_4_FAIL"   aria-valuenow="two">aria-valuenow fail string</div>
+        <div role="slider" class="WIDGET_4_FAIL"   aria-valuenow=""   >aria-valuenow fail empty</div>
+
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 4 test case</div>
+      </footer>
+    
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 10: Values must be in range</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 10 test case</div>
+      </header>
+
+      <main>
+
+        <h1>WIDGET 10: Values must be in range</h1>
+
+<!--progressbar passes even if the values are not in range-->
+        <h2>progressbar</h2>
+        <div role="progressbar" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">progressbar pass</div>
+
+        <div role="progressbar" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="50">progressbar fail</div>
+
+        <h2>scrollbar</h2>
+        <div role="scrollbar" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">scrollbar pass</div>
+
+        <div role="scrollbar" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar fail</div>
+
+        <h2>slider</h2>
+        <div role="slider" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">slider pass</div>
+
+        <div role="slider" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">slider fail</div>
+
+        <h2>spinbutton</h2>
+        <div role="spinbutton" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">spinbutton pass</div>
+
+        <div role="spinbutton" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="2" aria-valuenow="3">spinbutton pass</div>
+
+
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 10 test case</div>
+      </footer>
+    
+  </body>
+</html>
+

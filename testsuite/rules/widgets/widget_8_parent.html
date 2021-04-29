@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 8: Widgets must have parent</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 8 test case</div>
+      </header>
+      
+      <main>
+
+        <h1>WIDGET 8: Widgets must have parent</h1>
+
+
+        <h2>menuitem, menuitemcheckbox, menuitemradio
+        <div role="menu">
+          <div role="menuitem" class="WIDGET_8_PASS">menuitem pass</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_PASS">menuitemcheckbox pass</div>
+          <div role="menuitemradio" class="WIDGET_8_PASS">menuitemradio pass</div>
+        </div>
+
+        <div hidden role="menu">
+          <div role="menuitem" class="WIDGET_8_HIDDEN">menuitem hidden</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_HIDDEN">menuitemcheckbox hidden</div>
+          <div role="menuitemradio" class="WIDGET_8_HIDDEN">menuitemradio hidden</div>
+        </div>
+
+        <div>
+          <div role="menuitem" class="WIDGET_8_FAIL">menuitem fail</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_FAIL">menuitemcheckbox fail</div>
+          <div role="menuitemradio" class="WIDGET_8_FAIL">menuitemradio fail</div>
+        </div>
+
+        <h2>treeitem</h2>
+        <div role="tree">
+          <div role="treeitem" class="WIDGET_8_PASS">treeitem pass</div>
+        </div>
+
+        <div role="tree">
+          <div role="treeitem" hidden class="WIDGET_8_HIDDEN">treeitem hidden</div>
+        </div>
+
+        <div>
+          <div role="treeitem" class="WIDGET_8_FAIL">treeitem fail</div>
+        </div>
+
+        <h2>row and gridcell</h2>
+        <div role="grid">
+          <div role="row" class="WIDGET_8_PASS">row pass
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell pass</div>
+          </div>
+        </div>
+
+        <div hidden role="grid">
+          <div role="row"class="WIDGET_8_HIDDEN">row hidden
+            <div role="gridcell" class="WIDGET_8_HIDDEN">gridcell hidden</div>
+          </div>
+        </div>
+
+        <div>
+          <div role="row" class="WIDGET_8_FAIL">row fail
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell pass</div>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <div role="gridcell" class="WIDGET_8_FAIL">gridcell fail</div>
+          </div>
+        </div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 8 test case</div>
+      </footer>
+    
+  </body>
+</html>
+

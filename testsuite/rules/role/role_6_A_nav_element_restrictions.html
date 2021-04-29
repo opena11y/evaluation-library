@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Role 6: nav element restrictions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <header role="banner">
+      <h1>Role 6</h1>
+      <code>header[role="banner"]</code> element 
+    </header>
+
+      <nav>
+        <h2>Navigation 1</h2>
+        <code>nav</code> element        
+      </nav>
+
+
+      <nav role="navigation" >
+        <h2>Navigation 2</h2>
+        <code>nav[role="navigation"]</code> element        
+      </nav>
+
+      <nav role="presentation" class="ROLE_6_MC">
+        <h2>Navigation 3</h2>
+        <code>nav[role="presentation"]</code> element        
+      </nav>
+
+      <nav>
+        <h2>Navigation 4</h2>
+        <code>nav</code> element        
+      </nav>
+
+      <nav role="button" class="ROLE_6_FAIL">
+        <code>nav[role="button"]</code> element        
+      </nav>
+      
+      <nav>
+        <h2>Navigation 5</h2>
+        <code>nav</code> element        
+      </nav>
+      
+
+
+    <section role="main">
+    
+      <h1><code>nav</code> element restrictions</h1>
+
+
+      <nav role="region" class="ROLE_6_HIDDEN" style="display: none">
+        <h2>Navigation 6</h2>
+        <code>nav[role="region"]</code> element        
+      </nav>
+      
+    </main>
+
+    <footer role="contentinfo">
+        <h2>Contentinfo 1</h2>
+      <code>footer[role="contentinfo"]</code> element 
+    </footer>
+
+
+  </body>
+</html>

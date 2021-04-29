@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>KEYBOARD Rule 2: use tabindex or aria-activedescendant to add keyboard focus support on non-interactive elements</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <h1>KEYBOARD Rule 2 test case</h1>
+      </header>
+      
+      <main>
+        <h1>KEYBOARD Rule 2: use tabindex or aria-activedescendant to add keyboard focus support on non-interactive elements</h1>
+
+
+        <div role="menubar" tabindex="0" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)" aria-label="Menubar 1">
+          <div role="menu"  tabindex="-1" class="KEYBOARD_2_PASS" aria-label="Menu 11">
+            <div role="menuitem" tabindex="-1" class="KEYBOARD_2_PASS">Menu item 111</div>
+            <div role="menuitemcheckbox" tabindex="-1" class="KEYBOARD_2_PASS">Menu item checkbox 112</div>
+            <div role="menuitemradio" tabindex="-1" class="KEYBOARD_2_PASS">Menu item radio 113</div>
+          </div>
+        </div>
+
+        <!--  Keyboard event on container element -->
+        <div onkeydown="KBEvent(event)">
+          <div role="menubar" tabindex="0" aria-activedescendant="menu2" class="KEYBOARD_2_PASS" aria-label="Menubar 2">
+            <div id="menu2" role="menu"    class="KEYBOARD_2_PASS" aria-label="Menu 21">
+              <div role="menuitem"         class="KEYBOARD_2_PASS">Menu item 211</div>
+              <div role="menuitemcheckbox" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)">Menu item checkbox 212</div>
+              <div role="menuitemradio"    class="KEYBOARD_2_PASS">Menu item radio 213</div>
+            </div>
+          </div>
+        </div>
+
+        <div hidden role="menubar" class="KEYBOARD_2_HIDDEN" aria-label="Menubar 3">
+          <div role="menu" class="KEYBOARD_2_HIDDEN" aria-label="Menu 31">
+            <div role="menuitem" class="KEYBOARD_2_HIDDEN">Menu item 311</div>
+            <div role="menuitemcheckbox" class="KEYBOARD_2_HIDDEN">Menu item checkbox 312</div>
+            <div role="menuitemradio" class="KEYBOARD_2_HIDDEN">Menu item radio 314</div>
+          </div>
+        </div>
+
+        <div>
+          <div role="menubar" class="KEYBOARD_2_MC" aria-label="Menubar 4" aria-owns="menu41" aria-activedescendant="menu4"></div>
+        </div>
+        <div id="menu41" role="menu"  class="KEYBOARD_2_MC" aria-label="Menu 41">
+           <div id="menu411" role="menuitem"         class="KEYBOARD_2_FAIL">Menu item 411</div>
+           <div id="menu412" role="menuitemcheckbox" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)">Menu item checkbox 412</div>
+           <div id="menu413" role="menuitemradio"    class="KEYBOARD_2_FAIL">Menu item radio 413</div>
+        </div>
+
+        <div role="tree" class="KEYBOARD_2_PASS" aria-label="Tree 1" onkeydown="KBEvent(event)">
+          <div role="treeitem" class="KEYBOARD_2_MC">Tree item 11</div>
+        </div>
+
+        <div onkeydown="KBEvent(event)">
+          <div role="tree" class="KEYBOARD_2_MC" aria-label="Tree 2" >
+            <div role="treeitem" class="KEYBOARD_2_MC">Tree item 21</div>
+          </div>
+        </div>
+
+        <div role="tree" style="display:none" class="KEYBOARD_2_HIDDEN" aria-label="Tree 3"></div>
+          <div role="treeitem" style="display:none" class="KEYBOARD_2_HIDDEN">Tree item 32</div>
+        </div>
+ 
+        <div role="grid" class="KEYBOARD_2_PASS" aria-label="Grid 1" onkeydown="KBEvent(event)">
+          <div role="row" class="KEYBOARD_2_MC" >
+            <div role="gridcell" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)">Grid cell 111</div>
+            <div role="gridcell" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)">Grid cell 112</div>
+          </div>  
+          <div role="row" class="KEYBOARD_2_MC" >
+            <div role="gridcell" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)">Grid cell 121</div>
+            <div role="gridcell" class="KEYBOARD_2_PASS" onkeydown="KBEvent(event)">Grid cell 122</div>
+          </div>
+        </div>
+
+        <div onkeydown="KBEvent(event)">
+          <div role="grid" class="KEYBOARD_2_MC" aria-label="Grid 2" >
+            <div role="row" class="KEYBOARD_2_MC" >
+              <div role="gridcell" class="KEYBOARD_2_MC" >Grid cell 211</div>
+              <div role="gridcell" class="KEYBOARD_2_PASS" onkeypress="KBEvent(event)">Grid cell 212</div>
+            </div>  
+            <div role="row" class="KEYBOARD_2_MC" >
+              <div role="gridcell" class="KEYBOARD_2_PASS" onkeypress="KBEvent(event)">Grid cell 221</div>
+              <div role="gridcell" class="KEYBOARD_2_MC" >Grid cell 222</div>
+            </div>
+          </div>
+        </div>  
+
+        <div role="grid" class="KEYBOARD_2_HIDDEN" aria-label="Grid 3" hidden>
+          <div role="row" class="KEYBOARD_2_HIDDEN" >
+            <div role="gridcell" class="KEYBOARD_2_HIDDEN" >Grid cell  311</div>
+            <div role="gridcell" class="KEYBOARD_2_HIDDEN" >Grid cell  312</div>
+          </div>  
+          <div role="row" class="KEYBOARD_2_HIDDEN" >
+            <div role="gridcell" class="KEYBOARD_2_HIDDEN" >Grid cell 321</div>
+            <div role="gridcell" class="KEYBOARD_2_HIDDEN" >Grid cell 322</div>
+          </div>
+        </div>
+
+        <div role="combobox" class="KEYBOARD_2_PASS" aria-label="Combobox 1"  onkeydown="KBEvent(event)">
+          <div role="listbox" class="KEYBOARD_2_MC" aria-label="Listbox 11">
+            <div role="option" class="KEYBOARD_2_MC">Option 111</div>
+            <div role="option" class="KEYBOARD_2_MC">Option 112</div>
+          </div>
+          <input type="text" aria-label="Textbox 11">
+        </div>
+
+        <!-- Note there is a difference in running this page in the sidebar -->
+        <div role="combobox" class="KEYBOARD_2_FAIL" aria-label="Combobox 2">
+          <div role="listbox" class="KEYBOARD_2_FAIL" aria-label="Listbox 21">
+            <div role="option" class="KEYBOARD_2_FAIL">Option 211</div>
+            <div role="option" class="KEYBOARD_2_FAIL">Option 212</div>
+          </div>
+          <input type="text" role="Textbox" aria-label="Textbox 21">
+        </div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>KEYBOARD Rule 2 test case</div>
+      </footer>
+    
+  </body>
+</html>

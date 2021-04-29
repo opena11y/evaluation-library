@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 15: Form element contains only region landmarks</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <div role="navigation">
+      <h2>Navigation 1</h2>
+      <ul>
+        <li><a href="link1.html">Link 1</a></li>
+        <li><a href="link2.html">Link 2</a></li>
+        <li><a href="link3.html">Link 3</a></li>
+      </ul>
+    </div>
+    
+    <form>
+      <h2>Form 1</h2>
+    
+      <label>Text 1: <input type="text"></label>
+
+      <div role="region">
+        <h2>Region 1</h2>
+      </div>
+      
+      <div role="search">
+        <h2>Search 1</h2>
+      </div> 
+
+        <div role="navigation" style="display: none">
+          <h2>Navigation 2</h2>
+          <ul>
+            <li><a href="link4.html">Link 4</a></li>
+            <li><a href="link5.html">Link 5</a></li>
+            <li><a href="link6.html">Link 6</a></li>           
+          </ul>
+        </div>
+    
+    </form>
+
+    
+    <div role="main">
+      <h1>Landmark 15: Form element contains only region landmarks</h1>
+
+      <form >
+        <h2>Form 2</h2>
+    
+        <label>Text 4: <input type="text"></label>
+
+        <div role="region">
+          <h2>Region 2</h2>
+        </div>
+
+        <div role="form" class="LANDMARK_15_HIDDEN" hidden>
+          <h2>Form 3</h2>
+        </div>
+      
+        <div role="region">
+          <h3>Region 3</h2>
+        </div>
+        
+      </form>
+  
+    </div>
+
+    <div role="complementary">
+      <h2>Complementary 1</h1>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Table Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      test( "TABLE_1: Data tables must have row/column header cells", function() {
+
+        executeTest('ID_IFRAME_1A', 'TABLE_1');
+        executeTest('ID_IFRAME_1B', 'TABLE_1');
+      
+      });
+
+ 
+      test( "TABLE_2: Accessible Name (more than one data table)", function() {
+
+        executeTest('ID_IFRAME_2A', 'TABLE_2');
+        
+      });
+ 
+      test( "TABLE_2: Accessible Name (1 data table)", function() {
+
+        executeTest('ID_IFRAME_2B', 'TABLE_2');
+        
+      });
+ 
+
+      test( "TABLE_3: Accessible Description for complex tables", function() {
+
+        executeTest('ID_IFRAME_3', 'TABLE_3');
+        
+      });
+ 
+
+      test( "TABLE 4: Unique accessible names", function() {
+
+        executeTest('ID_IFRAME_4A', 'TABLE_4');
+        
+      });
+
+
+      test( "TABLE 4: Unique accessible names", function() {
+
+        executeTest('ID_IFRAME_4B', 'TABLE_4');
+        
+      });
+      
+      test( "TABLE_5: Table role defined", function() {
+
+        executeTest('ID_IFRAME_5', 'TABLE_5');
+        
+      });
+ 
+      test( "TABLE 6: Use TH elements instead of TD[SCOPE] for data table headers", function() {
+
+        executeTest('ID_IFRAME_6', 'TABLE_6');
+        
+      });
+
+      test( "TABLE 7:  Data cells in complex data tables must use headers", function() {
+
+        executeTest('ID_IFRAME_7', 'TABLE_7');
+        
+      });
+
+      test( "TABLE 8:  Accessible name different than accessible description", function() {
+
+        executeTest('ID_IFRAME_8', 'TABLE_8');
+        
+      });
+      
+      
+      
+    </script>
+    <h2>Pages with Tables from the Web</h2>
+    <ul>
+      <li><a href="http://www.w3.org/WAI/tutorials/tables/one-header/">W3C Web Accessibility Tutorials: Tables with one header</a></li>
+      <li><a href="http://www.w3.org/WAI/tutorials/tables/two-headers/">W3C Web Accessibility Tutorials: Tables with two headers</a></li>
+      <li><a href="http://www.w3.org/WAI/tutorials/tables/irregular/">W3C Web Accessibility Tutorials: Tables with irregular headers</a></li>
+      <li><a href="http://www.w3.org/WAI/tutorials/tables/multi-level/">W3C Web Accessibility Tutorials: Tables with multi-level headers</a></li>
+      <li><a href="http://www.w3.org/WAI/tutorials/tables/caption-summary/">W3C Web Accessibility Tutorials: Caption & Summary</a></li>
+      <li><a href="http://accessibility.oit.ncsu.edu/accessibleu/before.html">NCSU Accessible U: Inaccessible Tables</a></li>
+      <li><a href="http://accessibility.oit.ncsu.edu/accessibleu/after.html">NCSU Accessible U: Accessible Tables</a></li>
+      <li><a href="http://www.aasb.gov.au/Pronouncements/Current-standards.aspx">AASB: Accounting standards</a> (uses headers in simple data table)</li>
+    </ul>
+
+    <h2>Table 1: Data tables must have row/column header cells</h2>
+    <iframe id="ID_IFRAME_1A" src="data_table/data_table_1_A_header_cells.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="data_table/data_table_1_B_header_cells_complex.html"></iframe>
+
+    <h2>Table 2: Data tables has accessible name</h2>
+    <iframe id="ID_IFRAME_2A" src="data_table/data_table_2_accessible_name.html"></iframe>
+    <iframe id="ID_IFRAME_2B" src="data_table/data_table_2_one_data_table.html"></iframe>
+    
+    <h2>Table 3: Complex data tables have accessible description</h2>
+    <iframe id="ID_IFRAME_3" src="data_table/data_table_3_accessible_description.html"></iframe>
+
+    <h2>Table 4: Unique accessible names</h2>
+    <iframe id="ID_IFRAME_4A" src="data_table/data_table_4_unique_accessible_names.html"></iframe>
+    <iframe id="ID_IFRAME_4B" src="data_table/data_table_4B_unique_accessible_names.html"></iframe>
+    
+    <h2>Table 5: Data Table Role</h2>
+    <iframe id="ID_IFRAME_5" src="data_table/data_table_5_table_role_defined.html"></iframe>
+
+    <h2>Table 6: Use TH elements for data table headers</h2>
+    <iframe id="ID_IFRAME_6" src="data_table/data_table_6_use_th_for_headers.html"></iframe>
+    
+    <h2>Table 7: Data cells in complex data tables must use headers</h2>
+    <iframe id="ID_IFRAME_7" src="data_table/data_table_7_header_cells_complex.html"></iframe>
+    
+    <h2>Table 8: Accessible name different than accessible description</h2>
+    <iframe id="ID_IFRAME_8" src="data_table/data_table_8_accessible_name_and_description.html"></iframe>
+    
+</html>

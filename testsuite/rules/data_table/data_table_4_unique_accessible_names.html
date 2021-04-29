@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 4: Unique Accessible Names</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    <div role="main">
+      
+      <h1>Data Table Rule 4: Unique Accessible Names</h1>
+
+      <h2>Table A: Unique Accessible Name</h2>
+      
+      <table class="TABLE_4_PASS" aria-label="Table A">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+      
+      <h2>Table B: No Accessible Name</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+      
+      <h2>Table C1: Duplicate Accessible Names</h2>
+      
+      <table class="TABLE_4_FAIL" aria-label="Table C">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+
+      <h2>Table C2: Duplicate Accessible Names</h2>
+      
+      <table class="TABLE_4_FAIL" >
+        <caption> TABLE C  </caption>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+
+      <h2>Table C3: Duplicate Accessible Names</h3>
+      
+      <p id="id_c3"> TaBle   C </p>
+      
+      <table class="TABLE_4_FAIL" aria-labelledby="id_c3">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr> 
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+
+      <h2>Table D1: Duplicate Accessible Names</h3>
+
+      <table class="TABLE_4_FAIL" summary="Table D">
+          <thead>
+            <tr>
+              <th colspan="2">Header 1</th>
+              <th>Header 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <td>Data Cell 11</td>
+              <td>Data Cell 12</td>
+              <td>Data Cell 13</td>
+            </tr>
+            <tr> 
+              <td>Data Cell 21</td>
+              <td>Data Cell 22</td>
+              <td>Data Cell 23</td>
+            </tr>          
+          </tbody>
+        </table>
+
+      <h2>Table D2: Duplicate Accessible Names</h3>
+
+      <table class="TABLE_4_FAIL" title="Table D">
+          <thead>
+            <tr>
+              <th colspan="2">Header 1</th>
+              <th>Header 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <td>Data Cell 11</td>
+              <td>Data Cell 12</td>
+              <td>Data Cell 13</td>
+            </tr>
+            <tr> 
+              <td>Data Cell 21</td>
+              <td>Data Cell 22</td>
+              <td>Data Cell 23</td>
+            </tr>          
+          </tbody>
+        </table>
+
+
+    <h2>Table E: Hidden Table with duplicate name</h2>
+        <table class="TABLE_4_HIDDEN" title="Table E" style="display: none">
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <td>Data Cell 11</td>
+              <td>Data Cell 12</td>
+            </tr>
+            <tr> 
+              <td>Data Cell 21</td>
+              <td>Data Cell 22</td>
+            </tr>          
+          </tbody>
+        </table>
+        
+        
+    </div>
+    
+  </body>
+</html>

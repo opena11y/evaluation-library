@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form control test 10, tab panels</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form control test 10, form control inputs should have unique accessible labels</h1>
+      
+      <h2>Group 1:Labelling using aria-label attribute</h2>
+        <form>
+            <input  type="text" class="CONTROL_10_PASS" aria-label="Group 1-A"/>
+            <textarea           class="CONTROL_10_FAIL" aria-label="Group 1-BC"></textarea>
+            <select             class="CONTROL_10_FAIL" aria-label="Group 1-BC">
+              <select >
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </select>              
+            </select>
+        </form>
+        
+      <h2>Group 2: Tab Panel 1</h2>
+      <form>
+        <ul role="tablist">
+          <li id="tab-g2-1" role="tab" aria-controls="panel-g2-1" class="CONTROL_10_PASS">Tab G2-1</li>
+          <li id="tab-g2-2" role="tab" aria-controls="panel-g2-2" class="CONTROL_10_PASS">Tab G2-2</li>
+          <li id="tab-g2-3" role="tab" aria-controls="panel-g2-3" class="CONTROL_10_PASS">Tab G2-3</li>
+          <li id="tab-g2-4" role="tab" aria-controls="panel-g2-4" class="CONTROL_10_PASS">Tab G2-4</li>
+        </ul>
+        <div>
+          <div id="panel-g2-1" role="tabpanel" aria-labelledby="tab-g2-1" class="CONTROL_10_PASS">
+            <h3>Panel G2-1</h3>
+            <p>Some content for panel 1</p>
+          </div>
+          <div id="panel-g2-2" role="tabpanel" aria-labelledby="tab-g2-2" class="CONTROL_10_PASS">
+            <h3>Panel G2-2</h3>
+            <p>Some content for panel 2</p>
+          </div>
+          <div id="panel-g2-3" role="tabpanel" aria-labelledby="tab-g2-3" class="CONTROL_10_PASS">
+            <h3>Panel G2-3</h3>
+            <p>Some content for panel 3</p>
+          </div>
+          <div id="panel-g2-4" role="tabpanel" aria-labelledby="tab-g2-4" class="CONTROL_10_PASS">
+            <h3>Panel G2-4</h3>
+            <p>Some content for panel 4</p>
+          </div>
+        </div>
+      
+      </form>         
+
+      <h2>Group 3: Tab Panel 2</h2>
+      <form>
+        <ul role="tablist">
+          <li id="tab-g3-1" role="tab" aria-controls="panel-g3-1" class="CONTROL_10_FAIL">Tab G3-13</li>
+          <li id="tab-g3-2" role="tab" aria-controls="panel-g3-2" class="CONTROL_10_PASS">Tab G3-2</li>
+          <li id="tab-g3-3" role="tab" aria-controls="panel-g3-3" class="CONTROL_10_FAIL">Tab G3-13</li>
+          <li id="tab-g3-4" role="tab" aria-controls="panel-g3-4" class="CONTROL_10_PASS">Tab G3-4</li>
+        </ul>
+        <div>
+          <div id="panel-g3-1" role="tabpanel" aria-labelledby="tab-g3-1" class="CONTROL_10_FAIL">
+            <h3>Panel G3-13</h3>
+            <p>Some content for panel 1</p>
+          </div>
+          <div id="panel-g3-2" role="tabpanel" aria-labelledby="tab-g3-2" class="CONTROL_10_PASS">
+            <h3>Panel G3-2</h3>
+            <p>Some content for panel 2</p>
+          </div>
+          <div id="panel-g3-3" role="tabpanel" aria-labelledby="tab-g3-3" class="CONTROL_10_FAIL">
+            <h3>Panel G3-13</h3>
+            <p>Some content for panel 3</p>
+          </div>
+          <div id="panel-g3-4" role="tabpanel" aria-labelledby="tab-g3-4" class="CONTROL_10_PASS">
+            <h3>Panel G3-4</h3>
+            <p>Some content for panel 4</p>
+          </div>
+        </div>
+      
+      </form>         
+
+      <h2>Group 4: Tab Panel 2</h2>
+      <form>
+        <ul role="tablist">
+          <li id="tab-g4-1" role="tab" aria-controls="panel-g4-1" class="CONTROL_10_FAIL">Tab G4-13</li>
+          <li id="tab-g4-2" role="tab" aria-controls="panel-g4-2" class="CONTROL_10_FAIL">Tab G4-24</li>
+          <li id="tab-g4-3" role="tab" aria-controls="panel-g4-3" class="CONTROL_10_FAIL">Tab G4-13</li>
+          <li id="tab-g4-4" role="tab" aria-controls="panel-g4-4" class="CONTROL_10_FAIL">Tab G4-24</li>
+          <li id="tab-g4-5" role="tab" aria-controls="panel-g4-5" class="CONTROL_10_PASS">Tab G4-5</li>
+        </ul>
+        <div>
+          <div id="panel-g4-1" role="tabpanel" aria-labelledby="tab-g4-1" class="CONTROL_10_FAIL">
+            <h3>Panel G4-13</h3>
+            <p>Some content for panel 1</p>
+          </div>
+          <div id="panel-g4-2" role="tabpanel" aria-labelledby="tab-g4-2" class="CONTROL_10_FAIL">
+            <h3>Panel G4-2</h3>
+            <p>Some content for panel 2</p>
+          </div>
+          <div id="panel-g4-3" role="tabpanel" aria-labelledby="tab-g4-3" class="CONTROL_10_FAIL">
+            <h3>Panel G4-13</h3>
+            <p>Some content for panel 3</p>
+          </div>
+          <div id="panel-g4-4" role="tabpanel" aria-labelledby="tab-g4-4" class="CONTROL_10_FAIL">
+            <h3>Panel G4-4</h3>
+            <p>Some content for panel 4</p>
+          </div>
+          <div id="panel-g4-5" role="tabpanel" aria-labelledby="tab-g4-5" class="CONTROL_10_PASS">
+            <h3>Panel G4-5</h3>
+            <p>Some content for panel 5</p>
+          </div>
+        </div>
+      
+      </form>         
+
+      <h2>Group 5: Tab Panel 4</h2>
+      <form>
+        <ul role="tablist">
+          <li id="tab-g5-1" role="tab" aria-controls="panel-g5-1" class="CONTROL_10_PASS">Tab G5-1</li>
+          <li id="tab-g5-2" role="tab" aria-controls="panel-g5-2" class="CONTROL_10_FAIL">Tab G4-24</li>
+          <li id="tab-g5-3" role="tab" aria-controls="panel-g5-3" class="CONTROL_10_PASS">Tab G5-3</li>
+          <li id="tab-g5-4" role="tab" aria-controls="panel-g5-4" class="CONTROL_10_FAIL">Tab G4-13</li>
+          <li id="tab-g5-5" role="tab" aria-controls="panel-g5-5" class="CONTROL_10_PASS">Tab G5-5</li>
+          <li id="tab-g5-6" role="tab" aria-controls="panel-g5-6" class="CONTROL_10_PASS">Tab G5-6</li>
+        </ul>
+        <div>
+          <div id="panel-g5-1" role="tabpanel" aria-labelledby="tab-g5-1" class="CONTROL_10_PASS">
+            <h3>Panel G5-13</h3>
+            <p>Some content for panel 1</p>
+          </div>
+          <div id="panel-g5-2" role="tabpanel" aria-labelledby="tab-g5-2" class="CONTROL_10_FAIL">
+            <h3>Panel G5-2</h3>
+            <p>Some content for panel 2</p>
+          </div>
+          <div id="panel-g5-3" role="tabpanel" aria-labelledby="tab-g5-3" class="CONTROL_10_PASS">
+            <h3>Panel G5-13</h3>
+            <p>Some content for panel 3</p>
+          </div>
+          <div id="panel-g5-4" role="tabpanel" aria-labelledby="tab-g5-4" class="CONTROL_10_FAIL">
+            <h3>Panel G4-4</h3>
+            <p>Some content for panel 4</p>
+          </div>
+          <div id="panel-g5-5" role="tabpanel" aria-labelledby="tab-g5-5" class="CONTROL_10_PASS">
+            <h3>Panel G5-5</h3>
+            <p>Some content for panel 5</p>
+          </div>
+          <div id="panel-g5-6" role="tabpanel" aria-labelledby="tab-g5-6" class="CONTROL_10_PASS">
+            <h3>Panel G5-6</h3>
+            <p>Some content for panel 6</p>
+          </div>
+        </div>
+      
+      </form>         
+      
+      
+      
+    </div>
+  </body>
+</html>
+
+

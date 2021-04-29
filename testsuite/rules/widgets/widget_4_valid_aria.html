@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 4: ARIA attributes with named token values must be valid</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 4 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 4: ARIA attributes with named token values must be valid</h1>
+
+        <h2>aria-atomic</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-atomic="true">aria-atomic pass true</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-atomic="false">aria-atomic pass false</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-atomic="true">aria-atomic hidden true</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-atomic="atomic">aria-atomic fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-atomic="">aria-atomic fail empty</div>
+
+        <h2>aria-autocomplete</h2>
+        <div role="textbox" class="WIDGET_4_PASS" aria-autocomplete="inline">aria-autocomplete pass inline</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-autocomplete="list">aria-autocomplete pass list</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-autocomplete="both">aria-autocomplete pass both</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-autocomplete="none">aria-autocomplete pass none</div>
+        <div role="textbox" hidden class="WIDGET_4_HIDDEN" aria-autocomplete="inline">aria-autocomplete hidden</div>
+        <div role="textbox" class="WIDGET_4_FAIL" aria-autocomplete="autocomplete">aria-autocomplete fail</div>
+        <div role="textbox" class="WIDGET_4_FAIL" aria-autocomplete="">aria-autocomplete empty</div>
+
+        <h2>aria-busy</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-busy="true">aria-busy pass true</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-busy="false">aria-busy pass false</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-busy="true">aria-busy hidden true</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-busy="busy">aria-busy fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-busy="">aria-busy fail empty</div>
+
+        <h2>aria-checked</h2>
+        <div role="checkbox" class="WIDGET_4_PASS" aria-checked="true">aria-checked pass true</div>
+        <div role="checkbox" class="WIDGET_4_PASS" aria-checked="false">aria-checked pass false</div>
+        <div role="checkbox" class="WIDGET_4_PASS" aria-checked="mixed">aria-checked pass mixed</div>
+        <div role="checkbox" class="WIDGET_4_PASS" aria-checked="undefined">aria-checked pass undefined</div>
+        <div role="checkbox" hidden class="WIDGET_4_HIDDEN" aria-checked="true">aria-checked hidden</div>
+        <div role="checkbox" class="WIDGET_4_FAIL" aria-checked="">aria-checked fail</div>
+
+        <h2>aria-disabled</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-disabled="true">aria-disabled pass true</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-disabled="false">aria-disabled pass false</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-disabled="true">aria-disabled hidden</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-disabled="disabled">aria-disabled fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-disabled="">aria-disabled fail empty</div>
+
+        <h2>aria-dropeffect</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-dropeffect="copy">aria-dropeffect pass copy</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-dropeffect="move">aria-dropeffect pass move</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-dropeffect="link">aria-dropeffect pass link</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-dropeffect="execute">aria-dropeffect pass execute</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-dropeffect="popup">aria-dropeffect pass popup</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-dropeffect="none">aria-dropeffect pass none</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-dropeffect="copy">aria-dropeffect hidden</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-dropeffect="true">aria-dropeffect fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-dropeffect="">aria-dropeffect fail empty</div>
+
+        <h2>aria-expanded</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-expanded="true">aria-expanded pass true</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-expanded="false">aria-expanded pass false</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-expanded="undefined">aria-expanded pass undefined</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-expanded="true">aria-expanded hidden true</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-expanded="expanded">aria-expanded fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-expanded="">aria-expanded fail empty</div>
+
+        <h2>aria-grabbed</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-grabbed="true">aria-grabbed pass true</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-grabbed="false">aria-grabbed pass false</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-grabbed="undefined">aria-grabbed pass undefined</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-grabbed="true">aria-grabbed hidden true</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-grabbed="grabbed">aria-grabbed fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-grabbed="">aria-grabbed fail empty</div>
+
+        <h2>aria-haspopup</h2>
+        <div role="button" class="WIDGET_4_PASS" aria-haspopup="true">aria-haspopup pass true</div>
+        <div role="button" class="WIDGET_4_PASS" aria-haspopup="false">aria-haspopup pass false</div>
+        <div hidden role="button" class="WIDGET_4_HIDDEN" aria-haspopup="true">aria-haspopup hidden</div>
+        <div role="button" class="WIDGET_4_FAIL" aria-haspopup="popup">aria-haspopup fail</div>
+        <div role="button" class="WIDGET_4_FAIL" aria-haspopup="">aria-haspopup fail empty</div>
+
+        <h2>aria-hidden</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-hidden="true">aria-hidden pass true</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-hidden="false">aria-hidden pass false</div>
+        <div role="alert" class="WIDGET_4_HIDDEN" aria-hidden="true" hidden>aria-hidden hidden</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-hidden="hidden">aria-hidden fail</div>
+
+        <h2>aria-invalid</h2>
+        <div style="color: red; font-size: 140%">aria-invalid is not being evaluated</div> 
+        <div role="textbox" class="WIDGET_4_PASS" aria-invalid="true">aria-invalid pass true</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-invalid="false">aria-invalid pass false</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-invalid="grammar">aria-invalid pass grammar</div>
+        <div role="textbox" hidden class="WIDGET_4_HIDDEN" aria-invalid="true">aria-invalid hidden</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-invalid="spelling">aria-invalid pass spelling</div>
+        <div role="textbox" class="WIDGET_4_FAIL" aria-invalid="">aria-invalid fail</div>
+
+        <h2>aria-live</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-live="off">aria-live pass off</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-live="polite">aria-live pass polite</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-live="assertive">aria-live pass assertive</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-live="off">aria-live hidden</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-live="live">aria-live fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-live="">aria-live fail empty</div>
+
+        <h2>aria-multiline</h2>
+        <div role="textbox" class="WIDGET_4_PASS" aria-multiline="true">aria-multiline pass true</div>
+        <div role="textbox" class="WIDGET_4_PASS" aria-multiline="false">aria-multiline pass false</div>
+        <div hidden role="textbox" class="WIDGET_4_HIDDEN" aria-multiline="true">aria-multiline hidden</div>
+        <div role="textbox" class="WIDGET_4_FAIL" aria-multiline="multiline">aria-multiline fail</div>
+        <div role="textbox" class="WIDGET_4_FAIL" aria-multiline="">aria-multiline fail empty</div>
+
+        <h2>aria-multiselectable</h2>
+        <div role="listbox" class="WIDGET_4_PASS" aria-multiselectable="true">aria-multiselectable pass true</div>
+        <div role="listbox" class="WIDGET_4_PASS" aria-multiselectable="false">aria-multiselectable pass false</div>
+        <div hidden role="listbox" class="WIDGET_4_HIDDEN" aria-multiselectable="true">aria-multiselectable hidden</div>
+        <div role="listbox" class="WIDGET_4_FAIL" aria-multiselectable="multiselectable">aria-multiselectable fail</div>
+        <div role="listbox" class="WIDGET_4_FAIL" aria-multiselectable="">aria-multiselectable fail empty</div>
+
+        <h2>aria-pressed</h2>
+        <div role="button" class="WIDGET_4_PASS" aria-pressed="true">aria-pressed pass true</div>
+        <div role="button" class="WIDGET_4_PASS" aria-pressed="false">aria-pressed pass false</div>
+        <div role="button" class="WIDGET_4_PASS" aria-pressed="mixed">aria-pressed pass mixed</div>
+        <div role="button" class="WIDGET_4_PASS" aria-pressed="undefined">aria-pressed pass undefined</div>
+        <div hidden role="button" class="WIDGET_4_HIDDEN" aria-pressed="true">aria-pressed hidden</div>
+        <div role="button" class="WIDGET_4_FAIL" aria-pressed="atomic">aria-pressed fail</div>
+        <div role="button" class="WIDGET_4_FAIL" aria-pressed="">aria-pressed fail empty</div>
+
+        <h2>aria-relevant</h2>
+        <div role="alert" class="WIDGET_4_PASS" aria-relevant="additions">aria-relevant pass additions</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-relevant="removals">aria-relevant pass removals</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-relevant="text">aria-relevant pass text</div>
+        <div role="alert" class="WIDGET_4_PASS" aria-relevant="all">aria-relevant pass all</div>
+        <div hidden role="alert" class="WIDGET_4_HIDDEN" aria-relevant="off">aria-relevant hidden</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-relevant="live">aria-relevant fail</div>
+        <div role="alert" class="WIDGET_4_FAIL" aria-relevant="">aria-relevant fail empty</div>
+
+        <h2>aria-sort</h2>
+       
+        <div role="row">
+          <div role="columnheader" class="WIDGET_4_PASS" aria-sort="ascending">aria-sort pass ascending</div>
+          <div role="columnheader" class="WIDGET_4_PASS" aria-sort="descending">aria-sort pass descending</div>
+          <div role="columnheader" class="WIDGET_4_PASS" aria-sort="none">aria-sort pass none</div>
+          <div role="columnheader" class="WIDGET_4_PASS" aria-sort="other">aria-sort pass other</div>
+          <div hidden role="columnheader" class="WIDGET_4_HIDDEN" aria-sort="ascending">aria-sort hidden</div>
+          <div role="columnheader" class="WIDGET_4_FAIL" aria-sort="sort">aria-sort fail</div>
+          <div role="columnheader" class="WIDGET_4_FAIL" aria-sort="">aria-sort fail blank</div>
+        </div>
+
+        <h2>aria-readonly</h2>
+       
+          <div role="textbox" class="WIDGET_4_PASS" aria-readonly="true">aria-readonly pass true</div>
+          <div role="textbox" class="WIDGET_4_PASS" aria-readonly="false">aria-readonly pass false</div>
+          <div hidden role="textbox" class="WIDGET_4_HIDDEN" aria-readonly="ascending">aria-readonly hidden</div>
+          <div role="textbox" class="WIDGET_4_FAIL" aria-readonly="read">aria-readonly fail</div>
+          <div role="textbox" class="WIDGET_4_FAIL" aria-readonly="">aria-readonly fail blank</div>
+
+        <h2>aria-required</h2>
+        <div style="color: red; font-size: 140%">aria-required is not being evaluated</div> 
+  
+          <div role="textbox" class="WIDGET_4_PASS" aria-required="true">aria-required pass true</div>
+          <div role="textbox" class="WIDGET_4_PASS" aria-required="false">aria-required pass false</div>
+          <div hidden role="textbox" class="WIDGET_4_HIDDEN" aria-required="true">aria-required hidden</div>
+          <div role="textbox" class="WIDGET_4_FAIL" aria-required="required">aria-required fail</div>
+          <div role="textbox" class="WIDGET_4_FAIL" aria-required="">aria-required fail blank</div>
+
+        <h2>aria-selected</h2>
+
+        <div role="row">
+          <div role="tab" class="WIDGET_4_PASS" aria-selected="true">aria-selected pass true</div>
+          <div role="tab" class="WIDGET_4_PASS" aria-selected="false">aria-selected pass false</div>
+          <div role="tab" class="WIDGET_4_PASS" aria-selected="undefined">aria-selected pass undefined</div>
+          <div hidden role="tab" class="WIDGET_4_HIDDEN" aria-selected="true">aria-selected hidden</div>
+          <div role="tab" class="WIDGET_4_FAIL" aria-selected="required">aria-selected fail</div>
+          <div role="tab" class="WIDGET_4_FAIL" aria-selected="">aria-selected fail blank</div>
+        </div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 4 test case</div>
+      </footer>
+    
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Layout Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      test( "LAYOUT_1: Pages must have a meaningful layout", function() {
+        executeTest('ID_IFRAME_1A', 'LAYOUT_1');
+      });
+      
+      test( "LAYOUT_2: Nested tables must not be more than 1 column wide", function() {
+        executeTest('ID_IFRAME_2A', 'LAYOUT_2');
+      });
+
+      test( "LAYOUT_3: Check aria-flowto to make sure content makes sense", function() {
+        executeTest('ID_IFRAME_3A', 'LAYOUT_3');
+      });
+      
+      
+      
+    </script>
+
+    <h2>Page must have a meaningful layout sequence</h2>
+    <iframe id="ID_IFRAME_1A" src="layout/layout_1_pages_have_meaningful_squence.html"></iframe>
+
+    <h2>Nested tables must noe be more than 1 column wide</h2>
+    <iframe id="ID_IFRAME_2A" src="layout/layout_2_nested_columns_no_more_than_1_wide.html"></iframe>
+
+    <h2>Page with aria-flowto </h2>
+    <iframe id="ID_IFRAME_3A" src="layout/layout_3_aria_flowto.html"></iframe>
+    
+  </body>
+
+</html>

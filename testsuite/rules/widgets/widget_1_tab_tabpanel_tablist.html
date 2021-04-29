@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 1: Tab, tabpanel, and tablist must have accessible name</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 1 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 1: Tab, tabpanel, and tablist must have accessible name</h1>
+        
+        <div role="tabpanel" class="WIDGET_1_PASS" aria-label="Tabpanel 1: Content">
+          <div role="tablist" class="WIDGET_1_PASS" aria-label="Tablist 1">
+            <div role="tab" class="WIDGET_1_PASS">Tab 1</div>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="WIDGET_1_PASS" aria-label="Tabpanel 2: Aria-label">
+          <div role="tablist" class="WIDGET_1_PASS" aria-label="Tablist 2">
+            <div role="tab" class="WIDGET_1_PASS" aria-label="Tab 2"></div>
+          </div>
+
+
+        <div id="ID_TABPANEL_3">Tabpanel 3: Aria-labelledby</div>
+        <div role="tabpanel" class="WIDGET_1_PASS" aria-labelledby="ID_TABPANEL_3">
+          <div id="ID_TABLIST_3">Tablist 3</div>
+          <div role="tablist" class="WIDGET_1_PASS" aria-labelledby="ID_TABLIST_3">
+            <div id="ID_TAB_3">Tab 3</div>
+            <div role="tab" class="WIDGET_1_PASS" aria-labelledby="ID_TAB_3"></div>
+          </div>
+
+
+        <div role="tabpanel" hidden class="WIDGET_1_HIDDEN" aria-label="Tabpanel 4: Hidden">
+          <div role="tablist" class="WIDGET_1_HIDDEN" aria-label="Tablist 4">
+            <div role="tab" class="WIDGET_1_HIDDEN" aria-label="Tab 4"></div>
+          </div>
+        </div>
+
+
+        <div>Tabpanel 5: Fail</div>
+        <div role="tabpanel" class="WIDGET_1_FAIL">
+          <div role="tablist" class="WIDGET_1_MC">
+            <div role="tab" class="WIDGET_1_FAIL"></div>
+          </div>
+        </div>
+
+        <div role="tooltip" class="WIDGET_1_PASS">Tooltip 1: Content</div>
+
+        <div role="tooltip" class="WIDGET_1_PASS" aria-label="Tooltip 2: Aria-label"></div>
+
+        <div hidden id="ID_TOOLTIP_3">Tooltip 3: Aria-labelledby</div>
+        <div role="tooltip" class="WIDGET_1_PASS" aria-labelledby="ID_TOOLTIP_3"></div>
+
+        <div role="tooltip" style="display:none" class="WIDGET_1_HIDDEN" aria-label="Tooltip 4: Hidden"></div>
+
+        <div>Tooltip 5: Fail</div>
+        <div role="tooltip" class="WIDGET_1_FAIL"></div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 1 test case</div>
+      </footer>
+    
+  </body>
+</html>

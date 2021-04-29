@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts/cache_timing.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts/cache_timing.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Copyright 2011-2015  OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ---------------------------------------------------------------- */
+/*                            TimingFlashing                             */
+/* ---------------------------------------------------------------- */
+
+/**
+ * @constructor TimingFlashing
+ *
+ * @memberOf OpenAjax.a11y.cache
+ *
+ * @desc Creates cache object representing information related to links in a web page
+ *
+ * @param {DOMCache}   dom_cache   - Reference to the DOMCache object 
+ * 
+ * @property {DOMCache} dom_cache  - Reference to the DOMCache object       
+ * @property {Boolean}  up_to_date - Boolean true if the cache has been creating using the current DOMElements, else false
+ *                                   NOTE: This is a common property of all caches and is used when selectively build caches 
+ *                                         based on whether a rule needs the cache
+ *
+ * @property {Object}   page_elements             - Cache element representing the page level results 
+ * @property {Array}    timing_elements  - List of element objects related to moving, flashing, scrolling and auto updating content 
+ */
+
+OpenAjax.a11y.cache.TimingFlashingCache = function (dom_cache) {
+
+  this.dom_cache = dom_cache;
+  this.up_to_date = false;
+  this.page_element = null;
+  this.timing_elements = [];
+  
+}; 
+
+
+
+/**
+ * @method createTimingFlashingCache
+ * 
+ * @memberOf OpenAjax.a11y.cache.TimingFlashingCache
+ *
+ * @desc Populates the keyboard focus cache from the link, controls and media caches
+ */
+
+OpenAjax.a11y.cache.TimingFlashingCache.prototype.createTimingFlashingCache = function () {
+
+//  OpenAjax.a11y.logger.debug("[Timing Cache] Page Element: " + this.dom_cache.element_cache.getPageElement());
+
+  this.page_element = new OpenAjax.a11y.cache.PageElementTimingFlashing(this.dom_cache.element_cache.getPageElement());
+  
+  this.timing_elements = this.dom_cache.images_cache.image_elements;
+  this.timing_elements = this.timing_elements.concat(this.dom_cache.images_cache.canvas_elements);
+  this.timing_elements = this.timing_elements.concat(this.dom_cache.images_cache.svg_elements);
+  this.timing_elements = this.timing_elements.concat(this.dom_cache.media_cache.media_elements);
+  
+};
+
+
+/**
+ * @method getItemByCacheId
+ * 
+ * @memberOf OpenAjax.a11y.cache.TimingFlashingCache
+ *
+ * @desc Finds the the link element object with the matching cache id
+ *
+ * @param  {String }  cache_id  - Cache id of link element object
+ *
+ * @return {LinkElement} Returns cache link element object if cache id is found, otherwise null
+ */
+
+OpenAjax.a11y.cache.TimingFlashingCache.prototype.getItemByCacheId = function (cache_id) {
+
+  var i;
+
+  var link_elements_len = this.link_elements.length;
+
+  if (cache_id &amp;&amp; cache_id.length) {  
+   for (i=0; i &lt; link_elements_len; i++) {
+     if (this.link_elements[i].cache_id == cache_id) {
+       return this.link_elements[i];
+     }
+   } // end loop
+ } 
+
+ return null;
+};
+
+/**
+ * @method emptyCache
+ *
+ * @memberOf OpenAjax.a11y.cache.TimingFlashingCache
+ *
+ * @desc Resests the TimingFlashing object properties and empties all the lists and arrays 
+ */
+ 
+OpenAjax.a11y.cache.TimingFlashingCache.prototype.emptyCache = function () {
+
+  this.interactive_elements = [];
+  this.length = 0;
+  this.up_to_date = false;
+
+};
+
+
+/* ---------------------------------------------------------------- */
+/*                       PageElementTimingFlashing                   */ 
+/* ---------------------------------------------------------------- */
+
+/**
+ * @constructor PageElementTimingFlashing
+ *
+ * @memberOf OpenAjax.a11y.cache
+ *
+ * @desc Creates a body element object used to hold information about a title element
+ *
+ * @param  {DOMelement}   dom_element      - The dom element object representing the page element 
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing = function (dom_element) {
+
+  this.dom_element     = dom_element;
+  
+}; 
+
+/**
+ * @method getElementResults
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns an array of node results in severity order 
+ *
+ * @return {Array} Returns a array of node results
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getElementResults = function () {
+  return this.dom_element.getElementResults();
+};
+
+/**
+ * @method getStyle
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns an array of style items 
+ *
+ * @return {Array} Returns a array of style display objects
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getStyle = function () {
+
+  return this.dom_element.getStyle();
+  
+};
+
+/**
+ * @method getAttributes
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns an array of attributes for the element, sorted in alphabetical order 
+ *
+ * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
+ *
+ * @return {Array} Returns a array of attribute display object
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getAttributes = function (unsorted) {
+
+  var cache_nls = OpenAjax.a11y.nls.Cache;
+  var attributes = this.dom_element.getAttributes();
+  
+//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
+  
+  if (!unsorted) this.dom_element.sortItems(attributes);
+  
+  return attributes;
+};
+
+/**
+ * @method getCacheProperties
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns an array of cache properties sorted by property name 
+ *
+ * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
+ *
+ * @return {Array} Returns a array of cache property display object
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getCacheProperties = function (unsorted) {
+
+  var cache_nls = OpenAjax.a11y.nls.Cache;
+
+  var properties = this.dom_element.getCacheProperties(unsorted);
+ 
+  if (!unsorted) this.dom_element.sortItems(properties);
+
+  return properties;
+};
+
+/**
+ * @method getCachePropertyValue
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns the value of a property 
+ *
+ * @param {String}  property  - The property to retreive the value
+ *
+ * @return {String | Number} Returns the value of the property
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getCachePropertyValue = function (property) {
+
+  if (typeof this[property] == 'undefined') {
+    return this.dom_element.getCachePropertyValue(property);
+  }
+  
+  return this[property];
+};
+
+
+
+/**
+ * @method getEvents
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns an array of events for the element, sorted in alphabetical order 
+ *
+ * @return {Array} Returns a array of event item display objects
+ */
+
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getEvents = function () {
+   
+  return this.dom_element.getEvents();
+  
+};
+
+/**
+ * @method toString
+ *
+ * @memberOf OpenAjax.a11y.cache.PageElementTimingFlashing
+ *
+ * @desc Returns a text string representation of the title element 
+ *
+ * @return {String} Returns string represention the title element object
+ */
+  
+OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.toString = function () {
+  return "page";  
+};
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableElement.html">TableElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="created.RulesetFactory.html">RulesetFactory</a></li></ul><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Fri Sep 25 2015 15:16:52 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

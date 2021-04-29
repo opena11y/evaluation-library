@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: HTML Standards Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../qunit/qunit-1.11.0.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
+    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
+    <script src="../scripts/testsuite.js"></script>
+    
+    <script>
+      
+      // Test case for html standards 
+
+      test( "HTML_1: Semantics of B, I and U elements", function() {
+        executeTest('ID_IFRAME_1A', 'HTML_1');
+      });
+
+
+      // Test case for html standards 
+
+
+      test( "HTML_1: Replace marquee elements", function() {
+        executeTest('ID_IFRAME_2A', 'HTML_2');
+      });
+
+
+ 
+       
+    </script>
+    
+    <h1>HTML standards tests</h1>
+
+    <h2>Semanitcs of <code>b</code>, <code>i</code> and <code>u</code> elements</h2>
+    <iframe id="ID_IFRAME_1A" src="html/html_1_replace_b_and_i_elements.html"></iframe>
+
+    <h2>Remove <code>marquee</code> elements</h2>
+    <iframe id="ID_IFRAME_2A" src="html/html_2_marquee_element.html"></iframe>
+    
+    
+  </body>
+
+</html>

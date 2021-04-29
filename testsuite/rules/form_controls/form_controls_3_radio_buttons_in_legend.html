@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control 3</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form test 3 Radio buttons must be in a field set and a legend</h1>
+      
+      <h2>Group 1: Radio buttons in field set and legend</h2>
+        <form>
+          <fieldset>
+            <legend>Radio Button Group 1</legend>
+            <label><input name="g1" type="radio" class="CONTROL_3_PASS"/>Radio 11</label><br/>
+            <label><input name="g1" type="radio" class="CONTROL_3_PASS"/>Radio 12</label><br/>
+            <label><input name="g1" type="radio" class="CONTROL_3_PASS"/>Radio 13</label><br/>
+          </fieldset>
+        </form>
+        
+      <h2>Group 2: Radio buttons legend only</h2>
+        <form>
+            <legend>Radio Button Group 2</legend>
+            <label><input name="g2" type="radio" class="CONTROL_3_FAIL"/>Radio 21</label><br/>
+            <label><input name="g2" type="radio" class="CONTROL_3_FAIL"/>Radio 22</label><br/>
+            <label><input name="g2" type="radio" class="CONTROL_3_FAIL"/>Radio 23</label><br/>
+        </form>
+        
+      <h2>Group 3: Radio buttons field set only</h2>
+        <form>
+            <fieldset>
+              <label><input name="g3" type="radio" class="CONTROL_3_FAIL"/>Radio 31</label><br/>
+              <label><input name="g3" type="radio" class="CONTROL_3_FAIL"/>Radio 32</label><br/>
+              <label><input name="g3" type="radio" class="CONTROL_3_FAIL"/>Radio 33</label><br/>
+            </fieldset>
+        </form>
+        
+        <h2>Group 4: Radio buttons hidden fieldset</h2>
+        <form>
+            <fieldset hidden >
+              <legend>Radio Button Group 4</legend>
+              <label><input name="g4" type="radio" class="CONTROL_3_HIDDEN"/>Radio 41</label><br/>
+              <label><input name="g4" type="radio" class="CONTROL_3_HIDDEN"/>Radio 42</label><br/>
+              <label><input name="g4" type="radio" class="CONTROL_3_HIDDEN"/>Radio 43</label><br/>
+            </fieldset>
+        </form>
+        
+        
+        <h2>Group 5: hidden radio buttons</h2>
+        <form>
+            <fieldset>
+              <legend>Radio Button Group 5</legend>
+              <label><input hidden name="g5" type="radio" class="CONTROL_3_HIDDEN"/>Radio 51</label><br/>
+              <label><input hidden name="g5" type="radio" class="CONTROL_3_HIDDEN"/>Radio 52</label><br/>
+              <label><input hidden name="g5" type="radio" class="CONTROL_3_HIDDEN"/>Radio 53</label><br/>
+            </fieldset>
+        </form>
+
+      <h2>Group 6: Radio buttons aria-label</h2>
+        <form>
+            <fieldset>
+              <label><input name="g6" type="radio" class="CONTROL_3_FAIL" aria-label="Group 6: Radio 61"/>Radio 61</label><br/>
+              <label><input name="g6" type="radio" class="CONTROL_3_FAIL" aria-label="Group 6: Radio 62"/>Radio 62</label><br/>
+              <label><input name="g6" type="radio" class="CONTROL_3_FAIL" aria-label="Group 6: Radio 63"/>Radio 63</label><br/>
+            </fieldset>
+        </form>
+        
+
+      <h2>Group 7: Radio buttons aria-labelledby</h2>
+        <div id="id_g7">Group 7</div>
+        <form>
+            <fieldset>
+              <label id="id_g7_1"><input name="g7" type="radio" class="CONTROL_3_FAIL" aria-labelledby="id_g7_1 id_g7"/>Radio 71</label><br/>
+              <label id="id_g7_2"><input name="g7" type="radio" class="CONTROL_3_FAIL" aria-labelledby="id_g7_2 id_g7"/>Radio 72</label><br/>
+              <label id="id_g7_3"><input name="g7" type="radio" class="CONTROL_3_FAIL" aria-labelledby="id_g7_3 id_g7"/>Radio 73</label><br/>
+            </fieldset>
+        </form>
+        
+      <h2>Group 8: Radio buttons title attribute</h2>
+        <form>
+            <fieldset>
+              <div><input type="radio" name="g8" class="CONTROL_3_FAIL" title="Group 8: Radio 81"/>Radio 81</div>
+              <div><input type="radio" name="g8" class="CONTROL_3_FAIL" title="Group 8: Radio 82"/>Radio 82</div>
+              <div><input type="radio" name="g8" class="CONTROL_3_FAIL" title="Group 8: Radio 83"/>Radio 83</div>
+            </fieldset>
+        </form>
+        
+        
+        
+    </div>
+  </body>
+</html>
+
+

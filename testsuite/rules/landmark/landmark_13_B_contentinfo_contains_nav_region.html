@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmark 13: contentinfo contains navigation and region landmarks</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+  
+      
+    
+    <Header>
+      <h1>Banner 1</h1>
+      banner content
+    </header>
+  
+    <div  role="main">
+      
+      <h1>Contentinfo contains navigation and region landmarks</p>
+      <p>Main content</p>
+        
+    </div>
+    
+    
+    <div role="contentinfo" class="LANDMARK_13_PASS">
+      <h2>Banner 1</h2>
+      <p>Banner content</p>
+      
+      <div role="navigation" class="LANDMARK_13_PASS" aria-label="Navigation 1">
+        <h2>Navigation 1</h2>
+      </div>  
+      
+      <div role="region" class="LANDMARK_13_PASS" aria-label="Region 1">
+        <h2>Region 1</h2>
+        
+        <div role="region" class="LANDMARK_13_PASS" aria-label="Region 2">
+          <h3>Region 2</h3>
+          <div role="region" class="LANDMARK_13_PASS" aria-label="Region 3">
+            <h4>Region 3</h4>
+            
+            <div role="navigation" class="LANDMARK_13_PASS" aria-label="Navigation 2">
+              <h3>Navigation 2</h3>
+            </div>  
+          </div>
+        </div>
+      </div>  
+    </div>
+
+    <footer class="LANDMARK_13_HIDDEN" hidden>
+      <h2>Banner 2</h2>
+      <p>Hidden Banner content<p>
+      
+      <div role="navigation" aria-label="Navigaiton 1 Hidden">
+        <h2>Navigation 3</h2>
+      </div>  
+      
+      <div role="region" aria-label="Region 1 Hidden">
+        <h2>Region 4</h2>
+        <div role="region" aria-label="Region 2 Hidden">
+          <h3>Region 5</h3>
+          <div role="region" aria-label="Region 3 Hidden">
+            <h4>Region 6</h4>
+            <div role="navigation" aria-label="Navigaiton 2 Hidden">
+              <h2>Navigation 4</h2>
+            </div>  
+          </div>
+        </div>
+      </div>  
+    </footer>
+
+    
+  </body>
+</html>
