@@ -120,40 +120,41 @@ echo "... evaluation scripting files ..."
 
 if [ -n "$JSLINT" ]; then
   echo "---------------------------- JSLINT ----------------------------"
-  JSLINT wai_aria/aria.js 
-  JSLINT scripts/cache_util.js 
-  JSLINT scripts/cache_abbreviations.js 
-  JSLINT scripts/cache_color_contrast.js 
-  JSLINT scripts/cache_controls.js 
-  JSLINT scripts/cache_dom_element.js 
-  JSLINT scripts/cache_dom_traversal.js 
-  JSLINT scripts/cache_frames.js 
-  JSLINT scripts/cache_headings_landmarks.js 
-  JSLINT scripts/cache_images.js 
-  JSLINT scripts/cache_languages.js 
-  JSLINT scripts/cache_links.js 
-  JSLINT scripts/cache_lists.js 
+  JSLINT wai_aria/aria.js
+  JSLINT wai_aria/roleInfo.js
+  JSLINT scripts/cache_util.js
+  JSLINT scripts/cache_abbreviations.js
+  JSLINT scripts/cache_color_contrast.js
+  JSLINT scripts/cache_controls.js
+  JSLINT scripts/cache_dom_element.js
+  JSLINT scripts/cache_dom_traversal.js
+  JSLINT scripts/cache_frames.js
+  JSLINT scripts/cache_headings_landmarks.js
+  JSLINT scripts/cache_images.js
+  JSLINT scripts/cache_languages.js
+  JSLINT scripts/cache_links.js
+  JSLINT scripts/cache_lists.js
   JSLINT scripts/cache_media.js
-  JSLINT scripts/cache_style.js 
-  JSLINT scripts/cache_tables.js 
-  JSLINT scripts/cache_text.js 
-  JSLINT scripts/cache_keyboard_focus.js 
-  JSLINT scripts/cache_timing.js 
-  JSLINT scripts/cache_page_information.js 
-  JSLINT scripts/information_items.js 
-  JSLINT scripts/result_summary.js 
-  JSLINT scripts/evaluation_result.js 
-  JSLINT scripts/rule_result.js 
-  JSLINT scripts/element_result.js 
-  JSLINT scripts/filtered_cache_item_results.js 
-  JSLINT scripts/rule_group_results.js 
-  JSLINT scripts/cache_nls.js 
-  JSLINT scripts/rule_category_nls.js 
-  JSLINT scripts/rule_scope_nls.js 
-  JSLINT scripts/wcag20_nls.js     
-  JSLINT scripts/evaluator.js        
-  JSLINT scripts/rule_manager.js 
-  JSLINT scripts/ruleset_manager.js        
+  JSLINT scripts/cache_style.js
+  JSLINT scripts/cache_tables.js
+  JSLINT scripts/cache_text.js
+  JSLINT scripts/cache_keyboard_focus.js
+  JSLINT scripts/cache_timing.js
+  JSLINT scripts/cache_page_information.js
+  JSLINT scripts/information_items.js
+  JSLINT scripts/result_summary.js
+  JSLINT scripts/evaluation_result.js
+  JSLINT scripts/rule_result.js
+  JSLINT scripts/element_result.js
+  JSLINT scripts/filtered_cache_item_results.js
+  JSLINT scripts/rule_group_results.js
+  JSLINT scripts/cache_nls.js
+  JSLINT scripts/rule_category_nls.js
+  JSLINT scripts/rule_scope_nls.js
+  JSLINT scripts/wcag20_nls.js
+  JSLINT scripts/evaluator.js
+  JSLINT scripts/rule_manager.js
+  JSLINT scripts/ruleset_manager.js
   echo "----------------------------------------------------------------"
 fi
 
@@ -170,6 +171,7 @@ cat \
 openajax_a11y_constants.js \
 language/language_codes.js \
 wai_aria/aria.js           \
+wai_aria/roleInfo.js       \
 scripts/cache_util.js      \
 scripts/cache_abbreviations.js  \
 scripts/cache_color_contrast.js \
