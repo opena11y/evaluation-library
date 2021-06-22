@@ -2,80 +2,89 @@
     "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2",
     "status": "W3C Candidate Recommendation Snapshot      02 March 2021",
     "reference": "https://www.w3.org/TR/wai-aria-1.2/",
-    "props": {
+    "propertyDataTypes": {
         "aria-activedescendant": {
             "propType": "property",
-            "propValueType": "idref",
+            "type": "idref",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-atomic": {
             "propType": "property",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-autocomplete": {
             "propType": "property",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "inline",
                 "list",
                 "both",
                 "none"
             ],
-            "defaultValue": "none"
+            "defaultValue": "none",
+            "deprecated": false
         },
         "aria-busy": {
             "propType": "state",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-checked": {
             "propType": "state",
-            "propValueType": "tristate",
+            "type": "tristate",
             "values": [
                 "false",
                 "mixed",
                 "true",
                 "undefined"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": false
         },
         "aria-colcount": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-colindex": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-colspan": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-controls": {
             "propType": "property",
-            "propValueType": "idrefs",
+            "type": "idrefs",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-current": {
             "propType": "state",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "page",
                 "step",
@@ -85,32 +94,36 @@
                 "true",
                 "false"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-describedby": {
             "propType": "property",
-            "propValueType": "idrefs",
+            "type": "idrefs",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-details": {
             "propType": "property",
-            "propValueType": "idref",
+            "type": "idref",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-disabled": {
             "propType": "state",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-dropeffect": {
             "propType": "property",
-            "propValueType": "nmtokens",
+            "type": "nmtokens",
             "values": [
                 "copy",
                 "execute",
@@ -119,43 +132,48 @@
                 "none",
                 "popup"
             ],
-            "defaultValue": "none"
+            "defaultValue": "none",
+            "deprecated": true
         },
         "aria-errormessage": {
             "propType": "property",
-            "propValueType": "idref",
+            "type": "idref",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-expanded": {
             "propType": "state",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "false",
                 "true",
                 "undefined"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": false
         },
         "aria-flowto": {
             "propType": "property",
-            "propValueType": "idrefs",
+            "type": "idrefs",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-grabbed": {
             "propType": "state",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "false",
                 "true",
                 "undefined"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": true
         },
         "aria-haspopup": {
             "propType": "property",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "false",
                 "true",
@@ -165,141 +183,158 @@
                 "grid",
                 "dialog"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-hidden": {
             "propType": "state",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "false",
                 "true",
                 "undefined"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": false
         },
         "aria-invalid": {
             "propType": "state",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "grammar",
                 "false",
                 "spelling",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-keyshortcuts": {
             "propType": "property",
-            "propValueType": "string",
+            "type": "string",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-label": {
             "propType": "property",
-            "propValueType": "string",
+            "type": "string",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-labelledby": {
             "propType": "property",
-            "propValueType": "idrefs",
+            "type": "idrefs",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-level": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-live": {
             "propType": "property",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "assertive",
                 "off",
                 "polite"
             ],
-            "defaultValue": "off"
+            "defaultValue": "off",
+            "deprecated": false
         },
         "aria-modal": {
             "propType": "property",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-multiline": {
             "propType": "property",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-multiselectable": {
             "propType": "property",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-orientation": {
             "propType": "property",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "horizontal",
                 "undefined",
                 "vertical"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": false
         },
         "aria-owns": {
             "propType": "property",
-            "propValueType": "idrefs",
+            "type": "idrefs",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-placeholder": {
             "propType": "property",
-            "propValueType": "string",
+            "type": "string",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-posinset": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-pressed": {
             "propType": "state",
-            "propValueType": "tristate",
+            "type": "tristate",
             "values": [
                 "false",
                 "mixed",
                 "true",
                 "undefined"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": false
         },
         "aria-readonly": {
             "propType": "property",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-relevant": {
             "propType": "property",
-            "propValueType": "nmtokens",
+            "type": "nmtokens",
             "values": [
                 "additions",
                 "additions",
@@ -307,104 +342,123 @@
                 "removals",
                 "text"
             ],
-            "defaultValue": "additions"
+            "defaultValue": "additions",
+            "deprecated": false
         },
         "aria-required": {
             "propType": "property",
-            "propValueType": "boolean",
+            "type": "boolean",
             "values": [
                 "false",
                 "true"
             ],
-            "defaultValue": "false"
+            "defaultValue": "false",
+            "deprecated": false
         },
         "aria-roledescription": {
             "propType": "property",
-            "propValueType": "string",
+            "type": "string",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-rowcount": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-rowindex": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-rowspan": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-selected": {
             "propType": "state",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "false",
                 "true",
                 "undefined"
             ],
-            "defaultValue": "undefined"
+            "defaultValue": "undefined",
+            "deprecated": false
         },
         "aria-setsize": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-sort": {
             "propType": "property",
-            "propValueType": "nmtoken",
+            "type": "nmtoken",
             "values": [
                 "ascending",
                 "descending",
                 "none",
                 "other"
             ],
-            "defaultValue": "none"
+            "defaultValue": "none",
+            "deprecated": false
         },
         "aria-valuemax": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-valuemin": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-valuenow": {
             "propType": "property",
-            "propValueType": "number",
+            "type": "number",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         },
         "aria-valuetext": {
             "propType": "property",
-            "propValueType": "string",
+            "type": "string",
             "values": [],
-            "defaultValue": ""
+            "defaultValue": "",
+            "deprecated": false
         }
     },
-    "roles": {
+    "designPatterns": {
         "alert": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -413,42 +467,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "alertdialog": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -458,40 +510,36 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "application": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -500,49 +548,48 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-activedescendant",
-                "aria-errormessage",
-                "aria-haspopup"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
                 "aria-disabled",
+                "aria-errormessage",
                 "aria-expanded",
+                "aria-haspopup",
                 "aria-invalid"
             ],
-            "deprecated": [],
-            "supportedProperties": [
+            "deprecatedProps": [],
+            "props": [
                 "aria-activedescendant",
-                "aria-errormessage",
-                "aria-haspopup"
-            ],
-            "supportedStates": [
                 "aria-disabled",
+                "aria-errormessage",
                 "aria-expanded",
+                "aria-haspopup",
                 "aria-invalid"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "article": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -553,45 +600,43 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "banner": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -600,42 +645,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "blockquote": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -644,74 +687,61 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "button": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
-                "aria-keyshortcuts",
-                "aria-label",
-                "aria-labelledby",
-                "aria-live",
-                "aria-owns",
-                "aria-relevant",
-                "aria-roledescription",
-                "aria-haspopup"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
                 "aria-grabbed",
                 "aria-hidden",
                 "aria-invalid",
+                "aria-keyshortcuts",
+                "aria-label",
+                "aria-labelledby",
+                "aria-live",
+                "aria-owns",
+                "aria-relevant",
+                "aria-roledescription",
                 "aria-disabled",
+                "aria-haspopup",
                 "aria-expanded",
                 "aria-pressed"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "supportedProperties": [
-                "aria-haspopup"
-            ],
-            "supportedStates": [
+            "props": [
                 "aria-disabled",
+                "aria-haspopup",
                 "aria-expanded",
                 "aria-pressed"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -719,42 +749,40 @@
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "caption": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
@@ -766,18 +794,26 @@
                 "table",
                 "treegrid"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "cell": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -790,29 +826,19 @@
                 "aria-rowindex",
                 "aria-rowspan"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-colindex",
                 "aria-colspan",
                 "aria-rowindex",
                 "aria-rowspan"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "contents",
@@ -822,17 +848,24 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "checkbox": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -840,34 +873,24 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-checked",
                 "aria-errormessage",
+                "aria-expanded",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-checked",
-                "aria-expanded",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-errormessage",
+                "aria-expanded",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required"
             ],
-            "supportedStates": [
-                "aria-expanded",
-                "aria-invalid"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [
+            "requiredProps": [
                 "aria-checked"
             ],
             "nameRequired": true,
@@ -877,62 +900,69 @@
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "code": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "columnheader": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-colindex",
                 "aria-colspan",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
+                "aria-expanded",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -943,23 +973,12 @@
                 "aria-required",
                 "aria-roledescription",
                 "aria-rowindex",
-                "aria-rowspan"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-expanded",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
+                "aria-rowspan",
                 "aria-selected"
             ],
-            "deprecated": [],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "deprecatedProps": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -969,15 +988,22 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "combobox": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -986,38 +1012,27 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-controls",
-                "aria-activedescendant",
-                "aria-autocomplete",
-                "aria-errormessage",
-                "aria-haspopup",
-                "aria-readonly",
-                "aria-required"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
                 "aria-expanded",
-                "aria-invalid"
-            ],
-            "deprecated": [],
-            "supportedProperties": [
                 "aria-activedescendant",
                 "aria-autocomplete",
                 "aria-errormessage",
                 "aria-haspopup",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required"
             ],
-            "supportedStates": [
-                "aria-invalid"
+            "deprecatedProps": [],
+            "props": [
+                "aria-activedescendant",
+                "aria-autocomplete",
+                "aria-errormessage",
+                "aria-haspopup",
+                "aria-invalid",
+                "aria-readonly",
+                "aria-required"
             ],
-            "requiredProperties": [
-                "aria-controls"
-            ],
-            "requiredStates": [
+            "requiredProps": [
+                "aria-controls",
                 "aria-expanded"
             ],
             "nameRequired": true,
@@ -1026,18 +1041,26 @@
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "command": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1046,42 +1069,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "complementary": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1090,42 +1111,39 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "composite": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1133,47 +1151,45 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
-                "aria-activedescendant"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
+                "aria-activedescendant",
                 "aria-disabled"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
-                "aria-activedescendant"
-            ],
-            "supportedStates": [
+            "props": [
+                "aria-activedescendant",
                 "aria-disabled"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "contentinfo": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1182,42 +1198,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "definition": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1226,84 +1240,80 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "deletion": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "dialog": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1313,42 +1323,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "directory": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1357,42 +1365,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "document": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1401,84 +1407,80 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "emphasis": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "feed": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1487,24 +1489,14 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -1513,18 +1505,26 @@
             "requiredContext": [],
             "onlyContain": [
                 "article"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "figure": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1533,42 +1533,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "form": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1577,85 +1575,81 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "generic": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "grid": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-colcount",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1667,26 +1661,16 @@
                 "aria-multiselectable",
                 "aria-readonly"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-multiselectable",
                 "aria-readonly"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
@@ -1696,18 +1680,24 @@
             "onlyContain": [
                 "row",
                 "rowgroup"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "gridcell": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-colindex",
                 "aria-colspan",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1717,36 +1707,27 @@
                 "aria-roledescription",
                 "aria-rowindex",
                 "aria-rowspan",
-                "aria-errormessage",
-                "aria-haspopup",
-                "aria-readonly",
-                "aria-required"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
                 "aria-disabled",
+                "aria-errormessage",
                 "aria-expanded",
+                "aria-haspopup",
                 "aria-invalid",
+                "aria-readonly",
+                "aria-required",
                 "aria-selected"
             ],
-            "deprecated": [],
-            "supportedProperties": [
-                "aria-errormessage",
-                "aria-haspopup",
-                "aria-readonly",
-                "aria-required"
-            ],
-            "supportedStates": [
+            "deprecatedProps": [],
+            "props": [
                 "aria-disabled",
+                "aria-errormessage",
                 "aria-expanded",
+                "aria-haspopup",
                 "aria-invalid",
+                "aria-readonly",
+                "aria-required",
                 "aria-selected"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "contents",
@@ -1756,18 +1737,25 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "group": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1775,47 +1763,45 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
-                "aria-activedescendant"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
+                "aria-activedescendant",
                 "aria-disabled"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
-                "aria-activedescendant"
-            ],
-            "supportedStates": [
+            "props": [
+                "aria-activedescendant",
                 "aria-disabled"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "heading": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1824,24 +1810,14 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -1849,18 +1825,26 @@
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "img": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1869,42 +1853,39 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "input": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1913,82 +1894,79 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "insertion": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "landmark": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -1997,41 +1975,38 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "link": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2039,30 +2014,20 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-disabled",
+                "aria-expanded",
                 "aria-haspopup"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-disabled",
-                "aria-expanded"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
+                "aria-disabled",
+                "aria-expanded",
                 "aria-haspopup"
             ],
-            "supportedStates": [
-                "aria-disabled",
-                "aria-expanded"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -2070,18 +2035,26 @@
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "list": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2090,24 +2063,14 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -2116,18 +2079,25 @@
             "requiredContext": [],
             "onlyContain": [
                 "listitem"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "listbox": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2137,34 +2107,24 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-errormessage",
+                "aria-expanded",
+                "aria-invalid",
                 "aria-multiselectable",
                 "aria-readonly",
                 "aria-required"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-expanded",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-errormessage",
+                "aria-expanded",
+                "aria-invalid",
                 "aria-multiselectable",
                 "aria-readonly",
                 "aria-required"
             ],
-            "supportedStates": [
-                "aria-expanded",
-                "aria-invalid"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
@@ -2174,18 +2134,26 @@
             "onlyContain": [
                 "group",
                 "option"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "listitem": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2197,28 +2165,18 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-level",
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -2228,18 +2186,26 @@
                 "directory",
                 "list"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "log": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2248,42 +2214,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "main": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2292,42 +2256,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "marquee": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2336,42 +2298,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "math": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2380,42 +2340,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "meter": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2427,43 +2385,41 @@
                 "aria-valuemin",
                 "aria-valuetext"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "menu": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2473,23 +2429,13 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -2501,19 +2447,27 @@
                 "menuitem",
                 "menuitemcheckbox",
                 "menuitemradio"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "menubar": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2523,23 +2477,13 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -2551,17 +2495,24 @@
                 "menuitem",
                 "menuitemcheckbox",
                 "menuitemradio"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "menuitem": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2569,34 +2520,24 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-disabled",
+                "aria-expanded",
                 "aria-haspopup",
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-disabled",
-                "aria-expanded"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
+                "aria-disabled",
+                "aria-expanded",
                 "aria-haspopup",
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "supportedStates": [
-                "aria-disabled",
-                "aria-expanded"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -2608,46 +2549,44 @@
                 "menu",
                 "menubar"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "menuitemcheckbox": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
-                "aria-flowto",
-                "aria-haspopup",
-                "aria-keyshortcuts",
-                "aria-label",
-                "aria-labelledby",
-                "aria-live",
-                "aria-owns",
-                "aria-posinset",
-                "aria-relevant",
-                "aria-roledescription",
-                "aria-setsize"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
                 "aria-expanded",
+                "aria-flowto",
                 "aria-grabbed",
+                "aria-haspopup",
                 "aria-hidden",
                 "aria-invalid",
+                "aria-keyshortcuts",
+                "aria-label",
+                "aria-labelledby",
+                "aria-live",
+                "aria-owns",
+                "aria-posinset",
+                "aria-relevant",
+                "aria-roledescription",
+                "aria-setsize",
                 "aria-checked"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [
+            "props": [],
+            "requiredProps": [
                 "aria-checked"
             ],
             "nameRequired": true,
@@ -2661,18 +2600,28 @@
                 "menu",
                 "menubar"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "menuitemradio": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
+                "aria-checked",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
+                "aria-expanded",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2683,25 +2632,13 @@
                 "aria-roledescription",
                 "aria-setsize"
             ],
-            "states": [
-                "aria-busy",
-                "aria-checked",
-                "aria-current",
-                "aria-disabled",
-                "aria-expanded",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-checked",
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -2713,18 +2650,26 @@
                 "menu",
                 "menubar"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "navigation": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2733,56 +2678,53 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "none": {
-            "properties": [],
-            "states": [],
-            "deprecated": [],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "allowedProps": [],
+            "deprecatedProps": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "note": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2791,42 +2733,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "option": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2834,33 +2774,22 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-selected",
+                "aria-checked",
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-selected",
-                "aria-checked"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
+                "aria-checked",
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "supportedStates": [
-                "aria-checked"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [
+            "requiredProps": [
                 "aria-selected"
             ],
             "nameRequired": true,
@@ -2873,102 +2802,106 @@
                 "group",
                 "listbox"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "paragraph": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "presentation": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "progressbar": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -2981,42 +2914,40 @@
                 "aria-valuenow",
                 "aria-valuetext"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "radio": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3024,30 +2955,20 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-checked",
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-checked"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-posinset",
                 "aria-setsize"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [
+            "requiredProps": [
                 "aria-checked"
             ],
             "nameRequired": true,
@@ -3057,18 +2978,25 @@
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "radiogroup": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3078,30 +3006,20 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-errormessage",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-errormessage",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required"
             ],
-            "supportedStates": [
-                "aria-invalid"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
@@ -3110,18 +3028,26 @@
             "requiredContext": [],
             "onlyContain": [
                 "radio"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "range": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3134,47 +3060,45 @@
                 "aria-valuenow",
                 "aria-valuetext"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-valuemax",
                 "aria-valuemin",
                 "aria-valuenow",
                 "aria-valuetext"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "region": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3183,42 +3107,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "roletype": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy (state)",
                 "aria-controls",
+                "aria-current (state)",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled (state)",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed (state)",
                 "aria-haspopup",
+                "aria-hidden (state)",
+                "aria-invalid (state)",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3227,24 +3149,22 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy (state)",
-                "aria-current (state)",
-                "aria-disabled (state)",
-                "aria-grabbed (state)",
-                "aria-hidden (state)",
-                "aria-invalid (state)"
-            ],
-            "deprecated": [],
-            "supportedProperties": [
+            "deprecatedProps": [],
+            "props": [
                 "aria-atomic",
+                "aria-busy (state)",
                 "aria-controls",
+                "aria-current (state)",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled (state)",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed (state)",
                 "aria-haspopup",
+                "aria-hidden (state)",
+                "aria-invalid (state)",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3253,35 +3173,34 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "supportedStates": [
-                "aria-busy (state)",
-                "aria-current (state)",
-                "aria-disabled (state)",
-                "aria-grabbed (state)",
-                "aria-hidden (state)",
-                "aria-invalid (state)"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "n/a"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "row": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3290,39 +3209,28 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-colindex",
+                "aria-expanded",
                 "aria-level",
                 "aria-posinset",
                 "aria-rowindex",
-                "aria-setsize"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-expanded",
+                "aria-setsize",
                 "aria-selected"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-colindex",
+                "aria-expanded",
                 "aria-level",
                 "aria-posinset",
                 "aria-rowindex",
-                "aria-setsize"
-            ],
-            "supportedStates": [
-                "aria-expanded",
+                "aria-setsize",
                 "aria-selected"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "contents",
@@ -3340,18 +3248,26 @@
                 "columnheader",
                 "gridcell",
                 "rowheader"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "rowgroup": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3360,24 +3276,14 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -3390,20 +3296,28 @@
             ],
             "onlyContain": [
                 "row"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "rowheader": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-colindex",
                 "aria-colspan",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3415,27 +3329,16 @@
                 "aria-roledescription",
                 "aria-rowindex",
                 "aria-rowspan",
-                "aria-sort"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
                 "aria-selected",
-                "aria-expanded"
-            ],
-            "deprecated": [],
-            "supportedProperties": [
+                "aria-expanded",
                 "aria-sort"
             ],
-            "supportedStates": [
-                "aria-expanded"
+            "deprecatedProps": [],
+            "props": [
+                "aria-expanded",
+                "aria-sort"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -3445,17 +3348,24 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "scrollbar": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3466,54 +3376,52 @@
                 "aria-valuetext",
                 "aria-controls",
                 "aria-valuenow",
+                "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
                 "aria-valuemin"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-disabled"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
+                "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
                 "aria-valuemin"
             ],
-            "supportedStates": [
-                "aria-disabled"
-            ],
-            "requiredProperties": [
+            "requiredProps": [
                 "aria-controls",
                 "aria-valuenow"
             ],
-            "requiredStates": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "search": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3522,44 +3430,42 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "searchbox": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-autocomplete",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3572,37 +3478,35 @@
                 "aria-required",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "deprecatedProps": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "section": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3611,42 +3515,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "n/a"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "sectionhead": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3655,24 +3557,14 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "contents",
@@ -3680,19 +3572,27 @@
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "select": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3701,41 +3601,38 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "separator": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3743,51 +3640,48 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
                 "aria-valuemin",
                 "aria-valuetext"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-disabled"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
+                "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
                 "aria-valuemin",
                 "aria-valuetext"
             ],
-            "supportedStates": [
-                "aria-disabled"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "slider": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3799,53 +3693,50 @@
                 "aria-valuenow",
                 "aria-errormessage",
                 "aria-haspopup",
+                "aria-invalid",
                 "aria-orientation",
                 "aria-readonly",
                 "aria-valuemax",
                 "aria-valuemin"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [],
-            "supportedProperties": [
+            "deprecatedProps": [],
+            "props": [
                 "aria-errormessage",
                 "aria-haspopup",
+                "aria-invalid",
                 "aria-orientation",
                 "aria-readonly",
                 "aria-valuemax",
                 "aria-valuemin"
             ],
-            "supportedStates": [
-                "aria-invalid"
-            ],
-            "requiredProperties": [
+            "requiredProps": [
                 "aria-valuenow"
             ],
-            "requiredStates": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "spinbutton": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3854,6 +3745,7 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-errormessage",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required",
                 "aria-valuemax",
@@ -3861,19 +3753,12 @@
                 "aria-valuenow",
                 "aria-valuetext"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-errormessage",
+                "aria-invalid",
                 "aria-readonly",
                 "aria-required",
                 "aria-valuemax",
@@ -3881,29 +3766,33 @@
                 "aria-valuenow",
                 "aria-valuetext"
             ],
-            "supportedStates": [
-                "aria-invalid"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "status": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3912,84 +3801,80 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "strong": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "structure": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -3998,126 +3883,121 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "n/a"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "subscript": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "superscript": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "prohibited"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "switch": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
+                "aria-expanded",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4126,25 +4006,14 @@
                 "aria-readonly",
                 "aria-relevant",
                 "aria-required",
-                "aria-roledescription"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-expanded",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
+                "aria-roledescription",
                 "aria-checked"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [
+            "props": [],
+            "requiredProps": [
                 "aria-checked"
             ],
             "nameRequired": true,
@@ -4154,17 +4023,24 @@
             ],
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "tab": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4172,36 +4048,26 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
-                "aria-haspopup",
-                "aria-posinset",
-                "aria-setsize"
-            ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
                 "aria-disabled",
                 "aria-expanded",
-                "aria-selected"
+                "aria-haspopup",
+                "aria-posinset",
+                "aria-selected",
+                "aria-setsize"
             ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "supportedProperties": [
-                "aria-haspopup",
-                "aria-posinset",
-                "aria-setsize"
-            ],
-            "supportedStates": [
+            "props": [
                 "aria-disabled",
                 "aria-expanded",
-                "aria-selected"
+                "aria-haspopup",
+                "aria-posinset",
+                "aria-selected",
+                "aria-setsize"
             ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "contents",
@@ -4211,18 +4077,26 @@
             "requiredContext": [
                 "tablist"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "table": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4233,27 +4107,17 @@
                 "aria-colcount",
                 "aria-rowcount"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-colcount",
                 "aria-rowcount"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
@@ -4263,19 +4127,27 @@
             "onlyContain": [
                 "row",
                 "rowgroup"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "tablist": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4286,26 +4158,16 @@
                 "aria-multiselectable",
                 "aria-orientation"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-multiselectable",
                 "aria-orientation"
             ],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
@@ -4314,18 +4176,26 @@
             "requiredContext": [],
             "onlyContain": [
                 "tab"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "tabpanel": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4334,42 +4204,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "term": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4378,40 +4246,37 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "textbox": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4423,53 +4288,51 @@
                 "aria-autocomplete",
                 "aria-errormessage",
                 "aria-haspopup",
+                "aria-invalid",
                 "aria-multiline",
                 "aria-placeholder",
                 "aria-readonly",
                 "aria-required"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [],
-            "supportedProperties": [
+            "deprecatedProps": [],
+            "props": [
                 "aria-activedescendant",
                 "aria-autocomplete",
                 "aria-errormessage",
                 "aria-haspopup",
+                "aria-invalid",
                 "aria-multiline",
                 "aria-placeholder",
                 "aria-readonly",
                 "aria-required"
             ],
-            "supportedStates": [
-                "aria-invalid"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "time": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4478,42 +4341,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "timer": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4522,43 +4383,41 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "toolbar": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4567,41 +4426,39 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "tooltip": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4610,24 +4467,14 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -4635,18 +4482,25 @@
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "tree": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4656,30 +4510,20 @@
                 "aria-relevant",
                 "aria-roledescription",
                 "aria-errormessage",
+                "aria-invalid",
                 "aria-multiselectable",
                 "aria-required"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [
+            "props": [
                 "aria-errormessage",
+                "aria-invalid",
                 "aria-multiselectable",
                 "aria-required"
             ],
-            "supportedStates": [
-                "aria-invalid"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
@@ -4689,20 +4533,28 @@
             "onlyContain": [
                 "group",
                 "treeitem"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "treegrid": {
-            "properties": [
+            "allowedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
+                "aria-busy",
                 "aria-colcount",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4716,21 +4568,11 @@
                 "aria-roledescription",
                 "aria-rowcount"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "author"
@@ -4740,17 +4582,26 @@
             "onlyContain": [
                 "row",
                 "rowgroup"
-            ]
+            ],
+            "roleType": "",
+            "isAbstract": false
         },
         "treeitem": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
+                "aria-checked",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4760,33 +4611,21 @@
                 "aria-posinset",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-selected",
                 "aria-setsize",
+                "aria-expanded",
                 "aria-haspopup"
             ],
-            "states": [
-                "aria-busy",
-                "aria-checked",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid",
-                "aria-selected",
-                "aria-expanded"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-errormessage",
                 "aria-invalid",
                 "aria-selected"
             ],
-            "supportedProperties": [
+            "props": [
+                "aria-expanded",
                 "aria-haspopup"
             ],
-            "supportedStates": [
-                "aria-expanded"
-            ],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "requiredProps": [],
             "nameRequired": true,
             "nameFrom": [
                 "contents",
@@ -4797,18 +4636,26 @@
                 "group",
                 "tree"
             ],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": false
         },
         "widget": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4817,42 +4664,40 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "n/a"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         },
         "window": {
-            "properties": [
+            "allowedProps": [
                 "aria-atomic",
+                "aria-busy",
                 "aria-controls",
+                "aria-current",
                 "aria-describedby",
                 "aria-details",
+                "aria-disabled",
                 "aria-dropeffect",
                 "aria-errormessage",
                 "aria-flowto",
+                "aria-grabbed",
                 "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
                 "aria-keyshortcuts",
                 "aria-label",
                 "aria-labelledby",
@@ -4861,31 +4706,23 @@
                 "aria-relevant",
                 "aria-roledescription"
             ],
-            "states": [
-                "aria-busy",
-                "aria-current",
-                "aria-disabled",
-                "aria-grabbed",
-                "aria-hidden",
-                "aria-invalid"
-            ],
-            "deprecated": [
+            "deprecatedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "supportedProperties": [],
-            "supportedStates": [],
-            "requiredProperties": [],
-            "requiredStates": [],
+            "props": [],
+            "requiredProps": [],
             "nameRequired": false,
             "nameFrom": [
                 "author"
             ],
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": []
+            "onlyContain": [],
+            "roleType": "",
+            "isAbstract": true
         }
     }
 }

@@ -13,18 +13,23 @@ const HTMLParser = require('node-html-parser');
 
 let aria12 = 'https://www.w3.org/TR/wai-aria-1.2/';
 
-function isState(node) {
-  if (node.tagName !== 'a') {
-    node = node.querySelector('a');
+function getRoleType(elem) {
+  let superClasses = [];
+  let  refs = elem.querySelectorAll('tbody tr:nth-child(1) .role-reference');
+  for (let i = 0; i < refs.length; i += 1) {
+    let ref = refs[i];
+    if (ref) {
+      superClasses.push(ref.textContent.trim());
+    }
   }
-  return node.classList.contains('state-reference');
+  return superClasses.join(" ");
 }
 
-function isProperty(node) {
-  if (node.tagName !== 'a') {
-    node = node.querySelector('a');
+function isAbstract(elem) {
+  if (elem.querySelector('.role-abstract')) {
+    return true;
   }
-  return node.classList.contains('property-reference');
+  return false;
 }
 
 function isDeprecated(node) {
@@ -65,25 +70,20 @@ function getListOfValues(elemNode, selector) {
 
 function getRoles(dom, roles) {
 
-  let elems = dom.querySelectorAll('h4.role-name code');
+  let elems = dom.querySelectorAll('section.role');
   for (let i = 0; i < elems.length; i += 1) {
     let elem = elems[i];
-    let  role = elem.textContent.trim();
-
-    console.log('[role]: ', role);
+    let  role = elem.querySelector('h4.role-name code').textContent.trim();
 
 
     roles[role] = {};
 
-    roles[role].properties = [];
-    roles[role].states = [];
-    roles[role].deprecated = [];
+    roles[role].allowedProps = [];
+    roles[role].deprecatedProps = [];
 
-    roles[role].supportedProperties = [];
-    roles[role].supportedStates = [];
+    roles[role].props = [];
 
-    roles[role].requiredProperties = [];
-    roles[role].requiredStates = [];
+    roles[role].requiredProps = [];
 
     roles[role].nameRequired = false;
     roles[role].nameFrom = [];
@@ -92,6 +92,12 @@ function getRoles(dom, roles) {
 
     roles[role].requiredContext = [];
     roles[role].onlyContain = [];
+    roles[role].roleType = getRoleType(elem);
+    roles[role].isAbstract = isAbstract(elem);
+
+
+    console.log('[role]: ' + role + ' (' + roles[role].roleType + ')');
+
 
     let ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-inherited li');
 
@@ -99,16 +105,10 @@ function getRoles(dom, roles) {
       let ariaAttributeNode = ariaAttributeNodes[j];
       let ariaAttribute = ariaAttributeNode.querySelector('code').textContent;
 
-      if (isProperty(ariaAttributeNode)) {
-        roles[role].properties.push(ariaAttribute);
-      }
-
-      if (isState(ariaAttributeNode)) {
-        roles[role].states.push(ariaAttribute);
-      }
+      roles[role].allowedProps.push(ariaAttribute);
 
       if (isDeprecated(ariaAttributeNode)) {
-        roles[role].deprecated.push(ariaAttribute);
+        roles[role].deprecatedProps.push(ariaAttribute);
       }
     }
 
@@ -118,15 +118,8 @@ function getRoles(dom, roles) {
       let ariaAttributeNode = ariaAttributeNodes[j];
       let ariaAttribute = ariaAttributeNode.querySelector('code').textContent;
 
-      if (isProperty(ariaAttributeNode)) {
-        roles[role].requiredProperties.push(ariaAttribute);
-        roles[role].properties.push(ariaAttribute);
-      }
-
-      if (isState(ariaAttributeNode)) {
-        roles[role].requiredStates.push(ariaAttribute);
-        roles[role].states.push(ariaAttribute);
-      }
+      roles[role].requiredProps.push(ariaAttribute);
+      roles[role].allowedProps.push(ariaAttribute);
     }
 
     ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-properties li');
@@ -135,15 +128,8 @@ function getRoles(dom, roles) {
       let ariaAttributeNode = ariaAttributeNodes[j];
       let ariaAttribute = ariaAttributeNode.querySelector('code').textContent;
 
-      if (isProperty(ariaAttributeNode)) {
-        roles[role].supportedProperties.push(ariaAttribute);
-        roles[role].properties.push(ariaAttribute);
-      }
-
-      if (isState(ariaAttributeNode)) {
-        roles[role].supportedStates.push(ariaAttribute);
-        roles[role].states.push(ariaAttribute);
-      }
+      roles[role].props.push(ariaAttribute);
+      roles[role].allowedProps.push(ariaAttribute);
     }
 
     let nameRequiredNode = dom.querySelector('#' + role + ' .role-namerequired');
@@ -164,6 +150,24 @@ function getRoles(dom, roles) {
     roles[role].requiredContext = getListOfValues(dom, '#' + role + ' .role-scope');
     roles[role].onlyContain = getListOfValues(dom, '#' + role + ' .role-mustcontain');
   }
+
+  // Update the roleType to abstract roles
+
+  for (role in roles) {
+    let roleTypes = [];
+    let refs = roles[role].roleType.split(' ');
+
+    for (let i = 0; i < refs.length; i++) {
+      let ref = refs[i];
+      while (roles[ref] && !roles[ref].isAbstract) {
+       ref = roles[ref].roleType.split(' ')[0];
+      }
+
+    }
+
+    roles[role].roleType = roleTypes.join(' ');
+  }
+
 }
 
 function getPropValues(elemNode, selector) {
@@ -220,6 +224,13 @@ function getPropType(elemNode, selector) {
   return type;
 }
 
+function isPropDeprecated(elemNode, selector) {
+  let node = elemNode.querySelector(selector);
+  let content = node.textContent.toLowerCase().trim();
+
+  return content.indexOf('deprecated') >= 0;
+}
+
 
 function getProps(dom, props) {
   let elems = dom.querySelectorAll('section.property h4 code, section.state h4 code');
@@ -230,13 +241,10 @@ function getProps(dom, props) {
     console.log('[prop]: ', prop);
 
     props[prop] = {};
-
     props[prop].propType = dom.querySelector('#' + prop + ' h4 .type-indicator').textContent.toLowerCase().trim();
-
-    props[prop].propValueType = getPropType(dom, '#' + prop + ' .state-value, #' + prop + ' .property-value');
-
+    props[prop].type = getPropType(dom, '#' + prop + ' .state-value, #' + prop + ' .property-value');
     [props[prop].values, props[prop].defaultValue] = getPropValues(dom, '#' + prop + ' .value-name');
-
+    props[prop].deprecated = isPropDeprecated(dom, ('#desc-' + prop + ' p'));
 
   }
 }
@@ -246,12 +254,11 @@ function getAriaInformation(dom) {
   ariaInfo.title = dom.querySelector('h1.title').textContent;
   ariaInfo.status = dom.querySelector('h1.title + h2').textContent.trim().replace('\n', '');
   ariaInfo.reference = aria12;
-  ariaInfo.props = {};
-  ariaInfo.roles = {};
+  ariaInfo.propertyDataTypes = {};
+  ariaInfo.designPatterns = {};
 
-
-  getRoles(dom, ariaInfo.roles);
-  getProps(dom, ariaInfo.props);
+  getRoles(dom, ariaInfo.designPatterns);
+  getProps(dom, ariaInfo.propertyDataTypes);
 
   return ariaInfo
 }
