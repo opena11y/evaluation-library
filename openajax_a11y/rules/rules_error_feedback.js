@@ -332,6 +332,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       var control_type = ce.control_type;
 
+//      console.log('[ERROR_5][tag]: ' + de.tag_name + ' [role]: ' + de.role + ' [isWidget]: ' + de.is_widget);
+
       if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.node.getAttribute('type')]);
         control_count += 1;

@@ -16,11 +16,18 @@ let aria12 = 'https://www.w3.org/TR/wai-aria-1.2/';
 function getRoleType(elem) {
   let superClasses = [];
   let  refs = elem.querySelectorAll('tbody tr:nth-child(1) .role-reference');
-  for (let i = 0; i < refs.length; i += 1) {
-    let ref = refs[i];
-    if (ref) {
-      superClasses.push(ref.textContent.trim());
+  if (refs.length === 0) {
+    refs = elem.querySelectorAll('tbody tr:nth-child(2) .role-reference');
+  }
+  if (refs.length) {
+    for (let i = 0; i < refs.length; i += 1) {
+      let ref = refs[i];
+      if (ref) {
+        superClasses.push(ref.textContent.trim());
+      }
     }
+  } else {
+    superClasses.push('unknown');
   }
   return superClasses.join(" ");
 }
@@ -68,6 +75,16 @@ function getListOfValues(elemNode, selector) {
   return values;
 }
 
+
+function hasValue(value, elemNode, selector) {
+
+  let node = elemNode.querySelector(selector);
+  if (node) {
+    return node.textContent.toLowerCase().indexOf(value) >= 0;
+  }
+  return false;
+}
+
 function getRoles(dom, roles) {
 
   let elems = dom.querySelectorAll('section.role');
@@ -75,6 +92,9 @@ function getRoles(dom, roles) {
     let elem = elems[i];
     let  role = elem.querySelector('h4.role-name code').textContent.trim();
 
+    if (role === 'none' || role === 'roletype') {
+      continue;
+    }
 
     roles[role] = {};
 
@@ -86,7 +106,8 @@ function getRoles(dom, roles) {
     roles[role].requiredProps = [];
 
     roles[role].nameRequired = false;
-    roles[role].nameFrom = [];
+    roles[role].nameFromContent = false;
+    roles[role].nameProhibited = false;
 
     roles[role].childrenPresentational = false;
 
@@ -96,7 +117,7 @@ function getRoles(dom, roles) {
     roles[role].isAbstract = isAbstract(elem);
 
 
-    console.log('[role]: ' + role + ' (' + roles[role].roleType + ')');
+    console.log('[role]: ' + role + ' (' + roles[role].roleType + ') ' + (roles[role].isAbstract ? 'ABSTRACT' : ''));
 
 
     let ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-inherited li');
@@ -146,29 +167,72 @@ function getRoles(dom, roles) {
       }
     }
 
-    roles[role].nameFrom = getListOfValues(dom, '#' + role + ' .role-namefrom');
     roles[role].requiredContext = getListOfValues(dom, '#' + role + ' .role-scope');
     roles[role].onlyContain = getListOfValues(dom, '#' + role + ' .role-mustcontain');
+
+    roles[role].nameFromContent = hasValue ('content', dom, '#' + role + ' .role-namefrom');
+    roles[role].nameProhibited = hasValue ('prohibited', dom, '#' + role + ' .role-namefrom');
+
   }
+
+  roles['none'] = roles['presentation'];
 
   // Update the roleType to abstract roles
 
-  for (role in roles) {
-    let roleTypes = [];
-    let refs = roles[role].roleType.split(' ');
+  function getAbstractRoles(role) {
 
-    for (let i = 0; i < refs.length; i++) {
-      let ref = refs[i];
-      while (roles[ref] && !roles[ref].isAbstract) {
-       ref = roles[ref].roleType.split(' ')[0];
-      }
-
+    if (role === 'live') {
+      return '';
     }
 
-    roles[role].roleType = roleTypes.join(' ');
+    let roleTypes = '';
+
+    if (' structure widget window landmark abstact'.indexOf(role) > 0) {
+      roleTypes = role + ' ';
+    } else {
+      if (role.length) {
+        let refs = roles[role].roleType.split(' ');
+
+        for (let i = 0; i < refs.length; i++) {
+          let ref = refs[i];
+          roleTypes += getAbstractRoles(ref);
+        }
+      }
+    }
+
+    return roleTypes;
+
+  }
+
+  function removeDuplicates(roles) {
+    let newItems = [];
+    items = roles.split(' ');
+
+    for (let i = 0; i < items.length; i += 1) {
+      let item = items[i].trim();
+      if (newItems.indexOf(item) < 0) {
+        newItems.push(item);
+      }
+    }
+
+    return newItems.join(' ').trim();
+  }
+
+  for (role in roles) {
+    if ('tabpanel'.indexOf(role) >= 0) {
+      roles[role].roleType += ' widget';
+    }
+    console.log('\n[' + role + '][roleType]: ' + roles[role].roleType);
+    let abstractRoles = getAbstractRoles(role);
+    if ('alert log marquee status timer'.indexOf(role) >= 0) {
+      abstractRoles += 'live';
+    }
+    roles[role].roleType = removeDuplicates(abstractRoles);
+    console.log('[roleType][updated]: ' + roles[role].roleType);
   }
 
 }
+
 
 function getPropValues(elemNode, selector) {
   let values = [];

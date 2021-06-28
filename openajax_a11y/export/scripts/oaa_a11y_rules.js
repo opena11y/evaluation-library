@@ -8709,6 +8709,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       var control_type = ce.control_type;
 
+//      console.log('[ERROR_5][tag]: ' + de.tag_name + ' [role]: ' + de.role + ' [isWidget]: ' + de.is_widget);
+
       if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.node.getAttribute('type')]);
         control_count += 1;
@@ -9876,6 +9878,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ce = control_elements[i];
        var de = ce.dom_element;
 
+      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label);
+
        if (ce.needs_label) {
 
          var control_type = ce.toString();
@@ -9903,7 +9907,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        ce      = ces[i][0];
        de      = ce.dom_element;
 
-//       console.debug("ROLE: " + ce.computed_label_for_comparison + " " + ces_len + " TEST 1: " + (ces_len === 1) + " TEST 2: " + ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel'))));
+      console.debug("[CONTROL_10][ROLE]: " + ce.computed_label_for_comparison + " " + ces_len + " TEST 1: " + (ces_len === 1) + " TEST 2: " + ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel'))));
 
        if ((ces_len === 1) ||
            ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {

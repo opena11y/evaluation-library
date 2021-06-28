@@ -1572,13 +1572,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "alertdialog": {
@@ -1615,13 +1614,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure window",
             "isAbstract": false
         },
         "application": {
@@ -1661,13 +1659,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "article": {
@@ -1708,13 +1705,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "banner": {
@@ -1750,13 +1746,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "blockquote": {
@@ -1792,13 +1787,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "button": {
@@ -1839,14 +1833,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "caption": {
@@ -1880,9 +1872,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [
                 "figure",
@@ -1891,7 +1882,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "treegrid"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "cell": {
@@ -1936,16 +1927,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "checkbox": {
@@ -1990,14 +1979,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "code": {
@@ -2031,13 +2018,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "columnheader": {
@@ -2076,16 +2062,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "combobox": {
@@ -2132,13 +2116,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-expanded"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "command": {
@@ -2174,13 +2157,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "complementary": {
@@ -2216,13 +2198,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "composite": {
@@ -2261,13 +2242,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "contentinfo": {
@@ -2303,13 +2283,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "definition": {
@@ -2345,13 +2324,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "deletion": {
@@ -2385,13 +2363,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "dialog": {
@@ -2428,13 +2405,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "window",
             "isAbstract": false
         },
         "directory": {
@@ -2470,13 +2446,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "document": {
@@ -2512,13 +2487,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "emphasis": {
@@ -2552,13 +2526,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "feed": {
@@ -2594,15 +2567,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "article"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "figure": {
@@ -2638,13 +2610,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "form": {
@@ -2680,13 +2651,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "generic": {
@@ -2719,13 +2689,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "grid": {
@@ -2768,16 +2737,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "row",
                 "rowgroup"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "gridcell": {
@@ -2825,16 +2793,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "group": {
@@ -2873,13 +2839,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "heading": {
@@ -2915,14 +2880,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "img": {
@@ -2958,13 +2921,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "input": {
@@ -2998,13 +2960,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "insertion": {
@@ -3038,13 +2999,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "landmark": {
@@ -3080,13 +3040,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": true
         },
         "link": {
@@ -3125,14 +3084,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "list": {
@@ -3168,15 +3125,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "listitem"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "listbox": {
@@ -3222,16 +3178,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "group",
                 "option"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "listitem": {
@@ -3274,16 +3229,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "directory",
                 "list"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "log": {
@@ -3319,13 +3273,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "main": {
@@ -3361,13 +3314,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "marquee": {
@@ -3403,13 +3355,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "math": {
@@ -3445,13 +3396,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "meter": {
@@ -3490,13 +3440,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "menu": {
@@ -3533,9 +3482,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
@@ -3544,7 +3492,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menuitemcheckbox",
                 "menuitemradio"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "menubar": {
@@ -3581,9 +3529,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
@@ -3592,7 +3539,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menuitemcheckbox",
                 "menuitemradio"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "menuitem": {
@@ -3635,10 +3582,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "group",
@@ -3646,7 +3591,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menubar"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "menuitemcheckbox": {
@@ -3686,10 +3631,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "group",
@@ -3697,7 +3640,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menubar"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "menuitemradio": {
@@ -3736,10 +3679,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "group",
@@ -3747,7 +3688,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menubar"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "navigation": {
@@ -3783,26 +3724,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
-            "isAbstract": false
-        },
-        "none": {
-            "allowedProps": [],
-            "deprecatedProps": [],
-            "props": [],
-            "requiredProps": [],
-            "nameRequired": false,
-            "nameFrom": [],
-            "childrenPresentational": false,
-            "requiredContext": [],
-            "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "note": {
@@ -3838,13 +3765,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "option": {
@@ -3889,17 +3815,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-selected"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "group",
                 "listbox"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "paragraph": {
@@ -3933,13 +3857,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "presentation": {
@@ -3973,13 +3896,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "progressbar": {
@@ -4019,13 +3941,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "radio": {
@@ -4068,14 +3989,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "radiogroup": {
@@ -4117,15 +4036,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "radio"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "range": {
@@ -4170,13 +4088,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "region": {
@@ -4212,73 +4129,13 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
-        },
-        "roletype": {
-            "allowedProps": [
-                "aria-atomic",
-                "aria-busy (state)",
-                "aria-controls",
-                "aria-current (state)",
-                "aria-describedby",
-                "aria-details",
-                "aria-disabled (state)",
-                "aria-dropeffect",
-                "aria-errormessage",
-                "aria-flowto",
-                "aria-grabbed (state)",
-                "aria-haspopup",
-                "aria-hidden (state)",
-                "aria-invalid (state)",
-                "aria-keyshortcuts",
-                "aria-label",
-                "aria-labelledby",
-                "aria-live",
-                "aria-owns",
-                "aria-relevant",
-                "aria-roledescription"
-            ],
-            "deprecatedProps": [],
-            "props": [
-                "aria-atomic",
-                "aria-busy (state)",
-                "aria-controls",
-                "aria-current (state)",
-                "aria-describedby",
-                "aria-details",
-                "aria-disabled (state)",
-                "aria-dropeffect",
-                "aria-errormessage",
-                "aria-flowto",
-                "aria-grabbed (state)",
-                "aria-haspopup",
-                "aria-hidden (state)",
-                "aria-invalid (state)",
-                "aria-keyshortcuts",
-                "aria-label",
-                "aria-labelledby",
-                "aria-live",
-                "aria-owns",
-                "aria-relevant",
-                "aria-roledescription"
-            ],
-            "requiredProps": [],
-            "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
-            "childrenPresentational": false,
-            "requiredContext": [],
-            "onlyContain": [],
-            "roleType": "",
-            "isAbstract": true
         },
         "row": {
             "allowedProps": [
@@ -4328,10 +4185,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "grid",
@@ -4345,7 +4200,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "gridcell",
                 "rowheader"
             ],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "rowgroup": {
@@ -4381,9 +4236,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "grid",
@@ -4393,7 +4247,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "onlyContain": [
                 "row"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "rowheader": {
@@ -4436,16 +4290,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "scrollbar": {
@@ -4493,13 +4345,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuenow"
             ],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "search": {
@@ -4535,13 +4386,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "searchbox": {
@@ -4578,13 +4428,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "section": {
@@ -4620,13 +4469,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "sectionhead": {
@@ -4662,14 +4510,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "select": {
@@ -4705,13 +4551,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": true
         },
         "separator": {
@@ -4756,13 +4601,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "slider": {
@@ -4809,13 +4653,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuenow"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "spinbutton": {
@@ -4864,13 +4707,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "status": {
@@ -4906,13 +4748,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "strong": {
@@ -4946,13 +4787,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "structure": {
@@ -4988,13 +4828,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "subscript": {
@@ -5028,13 +4867,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "superscript": {
@@ -5068,13 +4906,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "switch": {
@@ -5113,14 +4950,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "tab": {
@@ -5165,16 +5000,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "tablist"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "table": {
@@ -5215,16 +5048,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "row",
                 "rowgroup"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "tablist": {
@@ -5265,15 +5097,14 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "tab"
             ],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "tabpanel": {
@@ -5309,13 +5140,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "term": {
@@ -5351,13 +5181,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "textbox": {
@@ -5404,13 +5233,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "time": {
@@ -5446,13 +5274,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "timer": {
@@ -5488,13 +5315,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "toolbar": {
@@ -5530,13 +5356,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "tooltip": {
@@ -5572,14 +5397,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "tree": {
@@ -5621,16 +5444,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "group",
                 "treeitem"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "treegrid": {
@@ -5670,16 +5492,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "row",
                 "rowgroup"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "treeitem": {
@@ -5723,17 +5544,15 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "group",
                 "tree"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "widget": {
@@ -5769,13 +5588,12 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "window": {
@@ -5811,14 +5629,52 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "window",
             "isAbstract": true
+        },
+        "none": {
+            "allowedProps": [
+                "aria-atomic",
+                "aria-busy",
+                "aria-controls",
+                "aria-current",
+                "aria-describedby",
+                "aria-details",
+                "aria-disabled",
+                "aria-dropeffect",
+                "aria-errormessage",
+                "aria-flowto",
+                "aria-grabbed",
+                "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
+                "aria-keyshortcuts",
+                "aria-live",
+                "aria-owns",
+                "aria-relevant",
+                "aria-roledescription"
+            ],
+            "deprecatedProps": [
+                "aria-disabled",
+                "aria-errormessage",
+                "aria-haspopup",
+                "aria-invalid"
+            ],
+            "props": [],
+            "requiredProps": [],
+            "nameRequired": false,
+            "nameFromContent": false,
+            "nameProhibited": true,
+            "childrenPresentational": false,
+            "requiredContext": [],
+            "onlyContain": [],
+            "roleType": "structure",
+            "isAbstract": false
         }
     }, // end designPatterns
 
@@ -7488,7 +7344,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.addChildControl = function (control_
 
 OpenAjax.a11y.cache.ControlsCache.prototype.addControlElement = function (control_element) {
 
-//  OpenAjax.a11y.logger.debug("  Adding control element: " + control_element.dom_element.tag_name + " ("+ control_element.control_type + ")");
+  OpenAjax.a11y.logger.debug("  Adding control element: " + control_element.dom_element.tag_name + " ("+ control_element.is_widget + ")");
 
   // item must exist and have the position property
   if (control_element) {
@@ -14549,46 +14405,23 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       this.role_info = role_info;
 
       if (role === 'group') this.is_group = true;
+      if (role === 'none') this.is_presentation = true;
+      if (role === 'presentation') this.is_presentation = true;
 
-//      OpenAjax.a11y.logger.debug("role=" + role + " : " + role_info.roleType);
-
-      switch (role_info.roleType) {
-
-      case 'widget':
+      if (role_info.roleType.indexOf('widget') >= 0) {
         this.is_interactive = true;
         this.is_widget = true;
         this.has_range = role_info.hasRange;
         this.is_tab_stoppable = true;
-        if (role_info.container && role_info.container.length) this.is_tab_stoppable = false;
+        if (role_info.container && role_info.container.length) {
+          this.is_tab_stoppable = false;
+        }
+      }
 
-        // Special case for log role
-        if (role === "log") this.is_live = true;
-        break;
-
-      case 'landmark':
-        this.is_landmark = true;
-        break;
-
-      case 'live':
-        this.is_live = true;
-        break;
-
-      case 'abstract':
-        this.is_abstract  = true;
-        break;
-
-      case 'section':
-        this.is_section  = true;
-        break;
-
-      case 'presentation':
-        this.is_presentation = true;
-        break;
-
-      default:
-        break;
-
-      } // end switch
+      this.is_landmark = role_info.roleType.indexOf('landmark') >= 0;
+      this.is_live = role_info.roleType.indexOf('live') >= 0;
+      this.is_section = role_info.roleType.indexOf('section') >= 0;
+      this.is_abstract = role_info.roleType.indexOf('abstract') >= 0;
 
       break;
 

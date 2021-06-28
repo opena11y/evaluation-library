@@ -476,13 +476,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "alertdialog": {
@@ -519,13 +518,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure window",
             "isAbstract": false
         },
         "application": {
@@ -565,13 +563,12 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "article": {
@@ -612,13 +609,12 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "banner": {
@@ -654,13 +650,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "blockquote": {
@@ -696,13 +691,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "button": {
@@ -743,14 +737,12 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "caption": {
@@ -784,9 +776,8 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [
                 "figure",
@@ -795,7 +786,7 @@
                 "treegrid"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "cell": {
@@ -840,16 +831,14 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "checkbox": {
@@ -894,14 +883,12 @@
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "code": {
@@ -935,13 +922,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "columnheader": {
@@ -980,16 +966,14 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "combobox": {
@@ -1036,13 +1020,12 @@
                 "aria-expanded"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "command": {
@@ -1078,13 +1061,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "complementary": {
@@ -1120,13 +1102,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "composite": {
@@ -1165,13 +1146,12 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "contentinfo": {
@@ -1207,13 +1187,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "definition": {
@@ -1249,13 +1228,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "deletion": {
@@ -1289,13 +1267,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "dialog": {
@@ -1332,13 +1309,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "window",
             "isAbstract": false
         },
         "directory": {
@@ -1374,13 +1350,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "document": {
@@ -1416,13 +1391,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "emphasis": {
@@ -1456,13 +1430,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "feed": {
@@ -1498,15 +1471,14 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "article"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "figure": {
@@ -1542,13 +1514,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "form": {
@@ -1584,13 +1555,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "generic": {
@@ -1623,13 +1593,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "grid": {
@@ -1672,16 +1641,15 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "row",
                 "rowgroup"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "gridcell": {
@@ -1729,16 +1697,14 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "group": {
@@ -1777,13 +1743,12 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "heading": {
@@ -1819,14 +1784,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "img": {
@@ -1862,13 +1825,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "input": {
@@ -1902,13 +1864,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "insertion": {
@@ -1942,13 +1903,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "landmark": {
@@ -1984,13 +1944,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": true
         },
         "link": {
@@ -2029,14 +1988,12 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "list": {
@@ -2072,15 +2029,14 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "listitem"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "listbox": {
@@ -2126,16 +2082,15 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "group",
                 "option"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "listitem": {
@@ -2178,16 +2133,15 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "directory",
                 "list"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "log": {
@@ -2223,13 +2177,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "main": {
@@ -2265,13 +2218,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "marquee": {
@@ -2307,13 +2259,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "math": {
@@ -2349,13 +2300,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "meter": {
@@ -2394,13 +2344,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "menu": {
@@ -2437,9 +2386,8 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
@@ -2448,7 +2396,7 @@
                 "menuitemcheckbox",
                 "menuitemradio"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "menubar": {
@@ -2485,9 +2433,8 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
@@ -2496,7 +2443,7 @@
                 "menuitemcheckbox",
                 "menuitemradio"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "menuitem": {
@@ -2539,10 +2486,8 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "group",
@@ -2550,7 +2495,7 @@
                 "menubar"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "menuitemcheckbox": {
@@ -2590,10 +2535,8 @@
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "group",
@@ -2601,7 +2544,7 @@
                 "menubar"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "menuitemradio": {
@@ -2640,10 +2583,8 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "group",
@@ -2651,7 +2592,7 @@
                 "menubar"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "navigation": {
@@ -2687,26 +2628,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
-            "isAbstract": false
-        },
-        "none": {
-            "allowedProps": [],
-            "deprecatedProps": [],
-            "props": [],
-            "requiredProps": [],
-            "nameRequired": false,
-            "nameFrom": [],
-            "childrenPresentational": false,
-            "requiredContext": [],
-            "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "note": {
@@ -2742,13 +2669,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "option": {
@@ -2793,17 +2719,15 @@
                 "aria-selected"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "group",
                 "listbox"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "paragraph": {
@@ -2837,13 +2761,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "presentation": {
@@ -2877,13 +2800,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "progressbar": {
@@ -2923,13 +2845,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "radio": {
@@ -2972,14 +2893,12 @@
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "radiogroup": {
@@ -3021,15 +2940,14 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "radio"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "range": {
@@ -3074,13 +2992,12 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "region": {
@@ -3116,73 +3033,13 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
-        },
-        "roletype": {
-            "allowedProps": [
-                "aria-atomic",
-                "aria-busy (state)",
-                "aria-controls",
-                "aria-current (state)",
-                "aria-describedby",
-                "aria-details",
-                "aria-disabled (state)",
-                "aria-dropeffect",
-                "aria-errormessage",
-                "aria-flowto",
-                "aria-grabbed (state)",
-                "aria-haspopup",
-                "aria-hidden (state)",
-                "aria-invalid (state)",
-                "aria-keyshortcuts",
-                "aria-label",
-                "aria-labelledby",
-                "aria-live",
-                "aria-owns",
-                "aria-relevant",
-                "aria-roledescription"
-            ],
-            "deprecatedProps": [],
-            "props": [
-                "aria-atomic",
-                "aria-busy (state)",
-                "aria-controls",
-                "aria-current (state)",
-                "aria-describedby",
-                "aria-details",
-                "aria-disabled (state)",
-                "aria-dropeffect",
-                "aria-errormessage",
-                "aria-flowto",
-                "aria-grabbed (state)",
-                "aria-haspopup",
-                "aria-hidden (state)",
-                "aria-invalid (state)",
-                "aria-keyshortcuts",
-                "aria-label",
-                "aria-labelledby",
-                "aria-live",
-                "aria-owns",
-                "aria-relevant",
-                "aria-roledescription"
-            ],
-            "requiredProps": [],
-            "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
-            "childrenPresentational": false,
-            "requiredContext": [],
-            "onlyContain": [],
-            "roleType": "",
-            "isAbstract": true
         },
         "row": {
             "allowedProps": [
@@ -3232,10 +3089,8 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "grid",
@@ -3249,7 +3104,7 @@
                 "gridcell",
                 "rowheader"
             ],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "rowgroup": {
@@ -3285,9 +3140,8 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "grid",
@@ -3297,7 +3151,7 @@
             "onlyContain": [
                 "row"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "rowheader": {
@@ -3340,16 +3194,14 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "scrollbar": {
@@ -3397,13 +3249,12 @@
                 "aria-valuenow"
             ],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "search": {
@@ -3439,13 +3290,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "landmark",
             "isAbstract": false
         },
         "searchbox": {
@@ -3482,13 +3332,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "section": {
@@ -3524,13 +3373,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "sectionhead": {
@@ -3566,14 +3414,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "select": {
@@ -3609,13 +3455,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": true
         },
         "separator": {
@@ -3660,13 +3505,12 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "slider": {
@@ -3713,13 +3557,12 @@
                 "aria-valuenow"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "spinbutton": {
@@ -3768,13 +3611,12 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "status": {
@@ -3810,13 +3652,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "strong": {
@@ -3850,13 +3691,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "structure": {
@@ -3892,13 +3732,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": true
         },
         "subscript": {
@@ -3932,13 +3771,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "superscript": {
@@ -3972,13 +3810,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "prohibited"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "switch": {
@@ -4017,14 +3854,12 @@
                 "aria-checked"
             ],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "tab": {
@@ -4069,16 +3904,14 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [
                 "tablist"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "table": {
@@ -4119,16 +3952,15 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "row",
                 "rowgroup"
             ],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "tablist": {
@@ -4169,15 +4001,14 @@
             ],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "tab"
             ],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "tabpanel": {
@@ -4213,13 +4044,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "term": {
@@ -4255,13 +4085,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "textbox": {
@@ -4308,13 +4137,12 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": false
         },
         "time": {
@@ -4350,13 +4178,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "timer": {
@@ -4392,13 +4219,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure live",
             "isAbstract": false
         },
         "toolbar": {
@@ -4434,13 +4260,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "tooltip": {
@@ -4476,14 +4301,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure",
             "isAbstract": false
         },
         "tree": {
@@ -4525,16 +4348,15 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "group",
                 "treeitem"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "treegrid": {
@@ -4574,16 +4396,15 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [
                 "row",
                 "rowgroup"
             ],
-            "roleType": "",
+            "roleType": "widget structure",
             "isAbstract": false
         },
         "treeitem": {
@@ -4627,17 +4448,15 @@
             ],
             "requiredProps": [],
             "nameRequired": true,
-            "nameFrom": [
-                "contents",
-                "author"
-            ],
+            "nameFromContent": true,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [
                 "group",
                 "tree"
             ],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "widget": {
@@ -4673,13 +4492,12 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "n/a"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "widget",
             "isAbstract": true
         },
         "window": {
@@ -4715,14 +4533,52 @@
             "props": [],
             "requiredProps": [],
             "nameRequired": false,
-            "nameFrom": [
-                "author"
-            ],
+            "nameFromContent": false,
+            "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "",
+            "roleType": "window",
             "isAbstract": true
+        },
+        "none": {
+            "allowedProps": [
+                "aria-atomic",
+                "aria-busy",
+                "aria-controls",
+                "aria-current",
+                "aria-describedby",
+                "aria-details",
+                "aria-disabled",
+                "aria-dropeffect",
+                "aria-errormessage",
+                "aria-flowto",
+                "aria-grabbed",
+                "aria-haspopup",
+                "aria-hidden",
+                "aria-invalid",
+                "aria-keyshortcuts",
+                "aria-live",
+                "aria-owns",
+                "aria-relevant",
+                "aria-roledescription"
+            ],
+            "deprecatedProps": [
+                "aria-disabled",
+                "aria-errormessage",
+                "aria-haspopup",
+                "aria-invalid"
+            ],
+            "props": [],
+            "requiredProps": [],
+            "nameRequired": false,
+            "nameFromContent": false,
+            "nameProhibited": true,
+            "childrenPresentational": false,
+            "requiredContext": [],
+            "onlyContain": [],
+            "roleType": "structure",
+            "isAbstract": false
         }
     }
 }

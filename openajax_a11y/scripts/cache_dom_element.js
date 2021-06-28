@@ -1379,46 +1379,23 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       this.role_info = role_info;
 
       if (role === 'group') this.is_group = true;
+      if (role === 'none') this.is_presentation = true;
+      if (role === 'presentation') this.is_presentation = true;
 
-//      OpenAjax.a11y.logger.debug("role=" + role + " : " + role_info.roleType);
-
-      switch (role_info.roleType) {
-
-      case 'widget':
+      if (role_info.roleType.indexOf('widget') >= 0) {
         this.is_interactive = true;
         this.is_widget = true;
         this.has_range = role_info.hasRange;
         this.is_tab_stoppable = true;
-        if (role_info.container && role_info.container.length) this.is_tab_stoppable = false;
+        if (role_info.container && role_info.container.length) {
+          this.is_tab_stoppable = false;
+        }
+      }
 
-        // Special case for log role
-        if (role === "log") this.is_live = true;
-        break;
-
-      case 'landmark':
-        this.is_landmark = true;
-        break;
-
-      case 'live':
-        this.is_live = true;
-        break;
-
-      case 'abstract':
-        this.is_abstract  = true;
-        break;
-
-      case 'section':
-        this.is_section  = true;
-        break;
-
-      case 'presentation':
-        this.is_presentation = true;
-        break;
-
-      default:
-        break;
-
-      } // end switch
+      this.is_landmark = role_info.roleType.indexOf('landmark') >= 0;
+      this.is_live = role_info.roleType.indexOf('live') >= 0;
+      this.is_section = role_info.roleType.indexOf('section') >= 0;
+      this.is_abstract = role_info.roleType.indexOf('abstract') >= 0;
 
       break;
 
