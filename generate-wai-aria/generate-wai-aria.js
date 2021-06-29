@@ -159,6 +159,10 @@ function getRoles(dom, roles) {
         roles[role].nameRequired = true;
       }
     }
+    // Fix for tab role
+    if (role === 'tab') {
+        roles[role].nameRequired = true;
+    }
 
     let childrenPresentationalNode = dom.querySelector('#' + role + ' .role-childpresentational');
     if (childrenPresentationalNode) {

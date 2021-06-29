@@ -9878,7 +9878,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ce = control_elements[i];
        var de = ce.dom_element;
 
-      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label);
+//      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label + ' [needs_label]: ' + ce.needs_label);
 
        if (ce.needs_label) {
 
@@ -9906,8 +9906,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
        ce      = ces[i][0];
        de      = ce.dom_element;
-
-      console.debug("[CONTROL_10][ROLE]: " + ce.computed_label_for_comparison + " " + ces_len + " TEST 1: " + (ces_len === 1) + " TEST 2: " + ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel'))));
 
        if ((ces_len === 1) ||
            ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {
@@ -11265,9 +11263,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         var kbd_events = "";
 
-//         OpenAjax.a11y.logger.debug("  KEYBOARD RULE 1: " + de.role + " ("+ we.toString() + ")");
+        console.log("[KEYBOARD_1][" + i + "]: " + de.role + " ("+ we.toString() + ")");
 
-        if (de.role_info.roleType === 'widget') {
+        if (de.role_info.roleType.indexOf('widget') >= 0) {
 
           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 
@@ -11342,7 +11340,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      for (var i = 0; i < interactive_elements_len; i++) {
 
-//       OpenAjax.a11y.logger.debug(" Interactive element: " + interactive_elements[i] + " (" + i + ")");
 
        var ie =interactive_elements[i];
        var de = ie.dom_element;
@@ -11351,6 +11348,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
        if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
            (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
+
+          console.log('[VISIBLE]');
 
          if (de.hasEvents() || de.has_tabindex || ie.is_embedded_app) {
            interactive_count++;
@@ -11363,11 +11362,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          }
        }
        else {
+         console.log('[HIDDEN]');
          rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name]);
        }
      }  // endfor
 
-//     OpenAjax.a11y.logger.debug(" Interactive count: " + interactive_count + " (" + interactive_elements_len + ")");
+     console.log("[KEYBOARD_1][Interactive_count]: " + interactive_count + " (" + interactive_elements_len + ")");
 
      if (interactive_count > 1) {
        if (interactive_count === 1) {
@@ -16337,7 +16337,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, de.role, we.computed_label]);
              }
              else {
-               if (!de.role_info.reqName) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
                else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
              }
            }
@@ -17255,7 +17255,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [we.computed_label, de.tag_name, de.role]);
              }
              else {
-               if (!de.role_info.reqName) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
+               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
                else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
              }
            }

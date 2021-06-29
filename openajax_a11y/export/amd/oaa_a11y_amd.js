@@ -5016,7 +5016,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-setsize"
             ],
             "requiredProps": [],
-            "nameRequired": false,
+            "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
@@ -7361,7 +7361,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.addChildControl = function (control_
 
 OpenAjax.a11y.cache.ControlsCache.prototype.addControlElement = function (control_element) {
 
-  OpenAjax.a11y.logger.debug("  Adding control element: " + control_element.dom_element.tag_name + " ("+ control_element.is_widget + ")");
+//  OpenAjax.a11y.logger.debug("  Adding control element: " + control_element.dom_element.tag_name + " ("+ control_element.is_widget + ")");
 
   // item must exist and have the position property
   if (control_element) {
@@ -7371,9 +7371,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.addControlElement = function (contro
     this.control_elements.push( control_element );
     return true;
   }
-
   return this.control_length;
-
 };
 
 /**
@@ -7562,6 +7560,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
     ci.control_element = we;
 
     if (!we.has_aria_owns) ci.parent_widget = we;
+
 
   }
   else {
@@ -12477,7 +12476,7 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.has_pattern  = false;
   this.is_valid     = true;
 
-  if (role_info && role_info.reqName) this.needs_label  = true;
+  if (role_info && role_info.nameRequired) this.needs_label  = true;
 
 };
 
@@ -12842,8 +12841,8 @@ OpenAjax.a11y.cache.InteractiveElement = function (dom_element, has_tabindex, ha
   this.element_id = tag_name;
 
   if (tag_name === 'input') {
-    if (dom_element.has_type_attr) this.element_id += "input[type=" + dom_element.type_attr + "]";
-    else this.element_id += 'input[type=text]';
+    if (dom_element.has_type_attr) this.element_id = "input[type=" + dom_element.type_attr + "]";
+    else this.element_id = 'input[type=text]';
   }
 
   if (has_tabindex || dom_element.has_tabindex) {
@@ -12854,19 +12853,19 @@ OpenAjax.a11y.cache.InteractiveElement = function (dom_element, has_tabindex, ha
           (tag_name !== 'select') &&
           (tag_name !== 'textarea'))) {
 
-      this.element_id += tag_name + '[tabindex=' + dom_element.tabindex + ']';
+      this.element_id = tag_name + '[tabindex=' + dom_element.tabindex + ']';
       this.has_tabindex_behavior = true;
      }
   }
 
-  if (has_events || dom_element.hasEvents()) this.element_id +=  tag_name + "[events]";
+  if (has_events || dom_element.hasEvents()) this.element_id =  tag_name + "[events]";
 
   if (tag_name === 'object' ||
       tag_name === 'embed' ||
       tag_name === 'video' ||
       tag_name === 'audio') {
     this.is_embedded_app = true;
-    this.element_id += tag_name;
+    this.element_id = tag_name;
   }
 };
 
@@ -49756,7 +49755,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ce = control_elements[i];
        var de = ce.dom_element;
 
-      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label);
+//      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label + ' [needs_label]: ' + ce.needs_label);
 
        if (ce.needs_label) {
 
@@ -49784,8 +49783,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
        ce      = ces[i][0];
        de      = ce.dom_element;
-
-      console.debug("[CONTROL_10][ROLE]: " + ce.computed_label_for_comparison + " " + ces_len + " TEST 1: " + (ces_len === 1) + " TEST 2: " + ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel'))));
 
        if ((ces_len === 1) ||
            ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {
@@ -51143,9 +51140,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         var kbd_events = "";
 
-//         OpenAjax.a11y.logger.debug("  KEYBOARD RULE 1: " + de.role + " ("+ we.toString() + ")");
+        console.log("[KEYBOARD_1][" + i + "]: " + de.role + " ("+ we.toString() + ")");
 
-        if (de.role_info.roleType === 'widget') {
+        if (de.role_info.roleType.indexOf('widget') >= 0) {
 
           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 
@@ -51220,7 +51217,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      for (var i = 0; i < interactive_elements_len; i++) {
 
-//       OpenAjax.a11y.logger.debug(" Interactive element: " + interactive_elements[i] + " (" + i + ")");
 
        var ie =interactive_elements[i];
        var de = ie.dom_element;
@@ -51229,6 +51225,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
        if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
            (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
+
+          console.log('[VISIBLE]');
 
          if (de.hasEvents() || de.has_tabindex || ie.is_embedded_app) {
            interactive_count++;
@@ -51241,11 +51239,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          }
        }
        else {
+         console.log('[HIDDEN]');
          rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name]);
        }
      }  // endfor
 
-//     OpenAjax.a11y.logger.debug(" Interactive count: " + interactive_count + " (" + interactive_elements_len + ")");
+     console.log("[KEYBOARD_1][Interactive_count]: " + interactive_count + " (" + interactive_elements_len + ")");
 
      if (interactive_count > 1) {
        if (interactive_count === 1) {
@@ -56215,7 +56214,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, de.role, we.computed_label]);
              }
              else {
-               if (!de.role_info.reqName) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
                else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
              }
            }
@@ -57133,7 +57132,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [we.computed_label, de.tag_name, de.role]);
              }
              else {
-               if (!de.role_info.reqName) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
+               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
                else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
              }
            }

@@ -583,7 +583,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ce = control_elements[i];
        var de = ce.dom_element;
 
-      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label);
+//      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label + ' [needs_label]: ' + ce.needs_label);
 
        if (ce.needs_label) {
 
@@ -611,8 +611,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
        ce      = ces[i][0];
        de      = ce.dom_element;
-
-      console.debug("[CONTROL_10][ROLE]: " + ce.computed_label_for_comparison + " " + ces_len + " TEST 1: " + (ces_len === 1) + " TEST 2: " + ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel'))));
 
        if ((ces_len === 1) ||
            ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {

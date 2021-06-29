@@ -174,7 +174,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.addChildControl = function (control_
 
 OpenAjax.a11y.cache.ControlsCache.prototype.addControlElement = function (control_element) {
 
-  OpenAjax.a11y.logger.debug("  Adding control element: " + control_element.dom_element.tag_name + " ("+ control_element.is_widget + ")");
+//  OpenAjax.a11y.logger.debug("  Adding control element: " + control_element.dom_element.tag_name + " ("+ control_element.is_widget + ")");
 
   // item must exist and have the position property
   if (control_element) {
@@ -184,9 +184,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.addControlElement = function (contro
     this.control_elements.push( control_element );
     return true;
   }
-
   return this.control_length;
-
 };
 
 /**
@@ -375,6 +373,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
     ci.control_element = we;
 
     if (!we.has_aria_owns) ci.parent_widget = we;
+
 
   }
   else {
@@ -5290,7 +5289,7 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.has_pattern  = false;
   this.is_valid     = true;
 
-  if (role_info && role_info.reqName) this.needs_label  = true;
+  if (role_info && role_info.nameRequired) this.needs_label  = true;
 
 };
 
@@ -5655,8 +5654,8 @@ OpenAjax.a11y.cache.InteractiveElement = function (dom_element, has_tabindex, ha
   this.element_id = tag_name;
 
   if (tag_name === 'input') {
-    if (dom_element.has_type_attr) this.element_id += "input[type=" + dom_element.type_attr + "]";
-    else this.element_id += 'input[type=text]';
+    if (dom_element.has_type_attr) this.element_id = "input[type=" + dom_element.type_attr + "]";
+    else this.element_id = 'input[type=text]';
   }
 
   if (has_tabindex || dom_element.has_tabindex) {
@@ -5667,19 +5666,19 @@ OpenAjax.a11y.cache.InteractiveElement = function (dom_element, has_tabindex, ha
           (tag_name !== 'select') &&
           (tag_name !== 'textarea'))) {
 
-      this.element_id += tag_name + '[tabindex=' + dom_element.tabindex + ']';
+      this.element_id = tag_name + '[tabindex=' + dom_element.tabindex + ']';
       this.has_tabindex_behavior = true;
      }
   }
 
-  if (has_events || dom_element.hasEvents()) this.element_id +=  tag_name + "[events]";
+  if (has_events || dom_element.hasEvents()) this.element_id =  tag_name + "[events]";
 
   if (tag_name === 'object' ||
       tag_name === 'embed' ||
       tag_name === 'video' ||
       tag_name === 'audio') {
     this.is_embedded_app = true;
-    this.element_id += tag_name;
+    this.element_id = tag_name;
   }
 };
 

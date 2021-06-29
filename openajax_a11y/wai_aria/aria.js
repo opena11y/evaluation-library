@@ -3959,7 +3959,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-setsize"
             ],
             "requiredProps": [],
-            "nameRequired": false,
+            "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,

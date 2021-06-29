@@ -3903,7 +3903,7 @@
                 "aria-setsize"
             ],
             "requiredProps": [],
-            "nameRequired": false,
+            "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
