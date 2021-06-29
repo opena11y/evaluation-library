@@ -103,8 +103,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         var kbd_events = "";
 
-        console.log("[KEYBOARD_1][" + i + "]: " + de.role + " ("+ we.toString() + ")");
-
         if (de.role_info.roleType.indexOf('widget') >= 0) {
 
           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
@@ -189,8 +187,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
            (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
 
-          console.log('[VISIBLE]');
-
          if (de.hasEvents() || de.has_tabindex || ie.is_embedded_app) {
            interactive_count++;
            if (de.hasEvents()) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.tag_name]);
@@ -202,12 +198,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          }
        }
        else {
-         console.log('[HIDDEN]');
          rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name]);
        }
      }  // endfor
-
-     console.log("[KEYBOARD_1][Interactive_count]: " + interactive_count + " (" + interactive_elements_len + ")");
 
      if (interactive_count > 1) {
        if (interactive_count === 1) {
