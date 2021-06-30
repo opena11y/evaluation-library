@@ -11263,7 +11263,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         var kbd_events = "";
 
-        if (de.role_info.roleType.indexOf('widget') >= 0) {
+        if (de.is_widget) {
 
           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 

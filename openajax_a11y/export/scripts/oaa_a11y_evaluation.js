@@ -14407,7 +14407,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (role === 'none') this.is_presentation = true;
       if (role === 'presentation') this.is_presentation = true;
 
-      if (role_info.roleType.indexOf('widget') >= 0) {
+      if (role_info.roleType.indexOf('widget') >= 0 ||
+          role_info.roleType.indexOf('window')) {
         this.is_interactive = true;
         this.is_widget = true;
         this.has_range = role_info.hasRange;
@@ -14529,32 +14530,27 @@ OpenAjax.a11y.cache.DOMElement.prototype.setImpliedRole = function (role) {
 
     if (role_info && role_info.roleType) {
 
-      switch (role_info.roleType) {
-
-      case 'widget':
+      if (role_info.roleType.indexOf('widget') >= 0 ||
+          role_info.roleType.indexOf('window') >= 0) {
         this.is_widget = true;
-        break;
+      }
 
-      case 'landmark':
+      if (role_info.roleType.indexOf('landmark') >= 0) {
         this.is_landmark = true;
-        break;
+      }
 
-      case 'live':
+      if (role_info.roleType.indexOf('live') >= 0) {
         this.is_live = true;
-        break;
+      }
 
-      case 'abstract':
-        this.is_abstract  = true;
-        break;
+      if (role_info.roleType.indexOf('abstract') >= 0) {
+        this.is_abstract = true;
+      }
 
-      case 'section':
-        this.is_section  = true;
-        break;
+      if (role_info.roleType.indexOf('section') >= 0) {
+        this.is_section = true;
+      }
 
-      default:
-        break;
-
-      } // end switch
     }
   }
 };
