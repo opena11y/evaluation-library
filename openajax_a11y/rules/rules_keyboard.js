@@ -44,7 +44,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 //           OpenAjax.a11y.logger.debug("[checkForKeyboardOnRequiredChildren] " + widget + ": " + we + " ("+ flag + ")");
 
 
-          if (de.role_info && de.role_info.reqChildren && de.role_info.reqChildren.length) {
+          if (de.role_info && de.role_info.requiredChildren && de.role_info.requiredChildren.length) {
             kbd_events = checkChildren(we.child_cache_elements);
             if (kbd_events.length) return kbd_events;
           }

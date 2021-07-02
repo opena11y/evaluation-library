@@ -59,6 +59,29 @@
         executeTest('ID_IFRAME_4B', 'WIDGET_4');
       });
 
+      test( "WIDGET_5: ARIA attributes must be defined", function() {
+        executeTest('ID_IFRAME_5', 'WIDGET_5');
+      });
+
+      test( "WIDGET_6: Widgets must have required properties", function() {
+        executeTest('ID_IFRAME_6', 'WIDGET_6');
+      });
+
+      test( "WIDGET_7: Widgets must have required owned elements", function() {
+        executeTest('ID_IFRAME_7', 'WIDGET_7');
+      });
+
+      test( "WIDGET_8: Widgets must have required parent roles", function() {
+        executeTest('ID_IFRAME_8', 'WIDGET_8');
+      });
+
+      test( "WIDGET_9: Widgets cannot be owned by more than one widget", function() {
+        executeTest('ID_IFRAME_9', 'WIDGET_9');
+      });
+
+      test( "WIDGET_10: Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax", function() {
+        executeTest('ID_IFRAME_10', 'WIDGET_10');
+      });
 
       test( "WIDGET_11: Keyboard/mouse/drag events must have roles", function() {
         executeTest('ID_IFRAME_11A', 'WIDGET_11');
@@ -117,6 +140,25 @@
     <h2>Widget 4: ARIA values must be valid</h2>
     <iframe id="ID_IFRAME_4A"  src="widgets/widget_4_A_valid_aria.html"></iframe>
     <iframe id="ID_IFRAME_4B"  src="widgets/widget_4_B_valid_aria.html"></iframe>
+
+    <h2>Widget 5: ARIA attributes must be defined</h2>
+    <iframe id="ID_IFRAME_5"  src="widgets/widget_5_define_aria.html"></iframe>
+
+    <h2>Widget 6: Widget must have required properties</h2>
+    <iframe id="ID_IFRAME_6"  src="widgets/widget_6_properties.html"></iframe>
+
+    <h2>Widget 7: Must have required child roles</h2>
+    <iframe id="ID_IFRAME_7"  src="widgets/widget_7_child_roles.html"></iframe>
+
+
+    <h2>Widget 8: Widgets must have required parent roles</h2>
+    <iframe id="ID_IFRAME_8"  src="widgets/widget_8_parent.html"></iframe>
+
+    <h2>Widget 9: Widgets cannot be owned by more than one widget</h2>
+    <iframe id="ID_IFRAME_9"  src="widgets/widget_9_one_owner.html"></iframe>
+
+    <h2>Widget 10: Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax</h2>
+    <iframe id="ID_IFRAME_10"  src="widgets/widget_10_value_range.html"></iframe>
 
     <h2>Widget 11: Keyboard/mouse/drag events must have roles</h2>
     <iframe id="ID_IFRAME_11A"  src="widgets/widget_11_event_roles.html"></iframe>

@@ -1543,7 +1543,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
            * - container: appropriate container(s) for that role
            * - props: states and properties that may be associated with this role (in addition to the global states and properties listed above)
            * - reqProps: required states or properties for this role
-           * - reqChildren: required children for this role
+           * - requiredChildren: required children for this role
            * - htmlEquiv: HTML equivalent for this role
            * - roleType: one of widget, landmark, or null
            */
@@ -1585,7 +1585,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
         },
@@ -1627,7 +1627,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure window",
             "isAbstract": false
         },
@@ -1672,7 +1672,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -1718,7 +1718,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure section",
             "isAbstract": false
         },
@@ -1759,7 +1759,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -1800,7 +1800,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1846,7 +1846,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -1890,7 +1890,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "table",
                 "treegrid"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1942,7 +1942,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure section",
             "isAbstract": false
         },
@@ -1992,7 +1992,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2031,7 +2031,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2077,7 +2077,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -2129,7 +2129,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2170,7 +2170,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -2211,7 +2211,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -2255,7 +2255,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -2296,7 +2296,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -2337,7 +2337,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2376,7 +2376,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2418,7 +2418,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "window",
             "isAbstract": false
         },
@@ -2459,7 +2459,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2500,7 +2500,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2539,7 +2539,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2580,7 +2580,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "article"
             ],
             "roleType": "structure",
@@ -2623,7 +2623,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2664,7 +2664,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -2702,7 +2702,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2750,7 +2750,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "row",
                 "rowgroup"
             ],
@@ -2808,7 +2808,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -2852,7 +2852,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2893,7 +2893,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2934,7 +2934,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2973,7 +2973,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3012,7 +3012,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3053,7 +3053,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3097,7 +3097,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3138,7 +3138,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "listitem"
             ],
             "roleType": "structure",
@@ -3191,7 +3191,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "option"
             ],
@@ -3245,7 +3245,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "directory",
                 "list"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3286,7 +3286,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -3327,7 +3327,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -3368,7 +3368,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -3409,7 +3409,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3453,7 +3453,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3495,7 +3495,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "menuitem",
                 "menuitemcheckbox",
@@ -3542,7 +3542,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "menuitem",
                 "menuitemcheckbox",
@@ -3599,7 +3599,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menu",
                 "menubar"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3648,7 +3648,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menu",
                 "menubar"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3696,7 +3696,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "menu",
                 "menubar"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3737,7 +3737,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -3778,7 +3778,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3831,7 +3831,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "group",
                 "listbox"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3870,7 +3870,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3909,7 +3909,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3954,7 +3954,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4002,7 +4002,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -4049,7 +4049,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "radio"
             ],
             "roleType": "widget structure",
@@ -4101,7 +4101,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4142,7 +4142,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -4203,7 +4203,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "table",
                 "treegrid"
             ],
-            "onlyContain": [
+            "requiredChildren": [
                 "cell",
                 "columnheader",
                 "gridcell",
@@ -4253,7 +4253,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "table",
                 "treegrid"
             ],
-            "onlyContain": [
+            "requiredChildren": [
                 "row"
             ],
             "roleType": "structure",
@@ -4305,7 +4305,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4358,7 +4358,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4399,7 +4399,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -4441,7 +4441,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -4482,7 +4482,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4523,7 +4523,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4564,7 +4564,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4614,7 +4614,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4666,7 +4666,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget structure",
             "isAbstract": false
         },
@@ -4720,7 +4720,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget structure",
             "isAbstract": false
         },
@@ -4761,7 +4761,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
         },
@@ -4800,7 +4800,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -4841,7 +4841,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4880,7 +4880,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -4919,7 +4919,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -4963,7 +4963,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -5015,7 +5015,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "requiredContext": [
                 "tablist"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -5061,7 +5061,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "row",
                 "rowgroup"
             ],
@@ -5110,7 +5110,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "tab"
             ],
             "roleType": "widget",
@@ -5153,7 +5153,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -5194,7 +5194,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -5246,7 +5246,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -5287,7 +5287,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -5328,7 +5328,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -5369,7 +5369,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -5410,7 +5410,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -5457,7 +5457,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "treeitem"
             ],
@@ -5505,7 +5505,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "row",
                 "rowgroup"
             ],
@@ -5560,7 +5560,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "group",
                 "tree"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -5601,7 +5601,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -5642,7 +5642,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -5681,7 +5681,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         }

@@ -112,7 +112,7 @@ function getRoles(dom, roles) {
     roles[role].childrenPresentational = false;
 
     roles[role].requiredContext = [];
-    roles[role].onlyContain = [];
+    roles[role].requiredChildren = [];
     roles[role].roleType = getRoleType(elem);
     roles[role].isAbstract = isAbstract(elem);
 
@@ -172,7 +172,7 @@ function getRoles(dom, roles) {
     }
 
     roles[role].requiredContext = getListOfValues(dom, '#' + role + ' .role-scope');
-    roles[role].onlyContain = getListOfValues(dom, '#' + role + ' .role-mustcontain');
+    roles[role].requiredChildren = getListOfValues(dom, '#' + role + ' .role-mustcontain');
 
     roles[role].nameFromContent = hasValue ('content', dom, '#' + role + ' .role-namefrom');
     roles[role].nameProhibited = hasValue ('prohibited', dom, '#' + role + ' .role-namefrom');

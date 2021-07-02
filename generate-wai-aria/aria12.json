@@ -489,7 +489,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
         },
@@ -531,7 +531,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure window",
             "isAbstract": false
         },
@@ -576,7 +576,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -622,7 +622,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure section",
             "isAbstract": false
         },
@@ -663,7 +663,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -704,7 +704,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -750,7 +750,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -794,7 +794,7 @@
                 "table",
                 "treegrid"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -846,7 +846,7 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure section",
             "isAbstract": false
         },
@@ -896,7 +896,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -935,7 +935,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -981,7 +981,7 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -1033,7 +1033,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -1074,7 +1074,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -1115,7 +1115,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -1159,7 +1159,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -1200,7 +1200,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -1241,7 +1241,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1280,7 +1280,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1322,7 +1322,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "window",
             "isAbstract": false
         },
@@ -1363,7 +1363,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1404,7 +1404,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1443,7 +1443,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1484,7 +1484,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "article"
             ],
             "roleType": "structure",
@@ -1527,7 +1527,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1568,7 +1568,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -1606,7 +1606,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1654,7 +1654,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "row",
                 "rowgroup"
             ],
@@ -1712,7 +1712,7 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -1756,7 +1756,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1797,7 +1797,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1838,7 +1838,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1877,7 +1877,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -1916,7 +1916,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -1957,7 +1957,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -2001,7 +2001,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2042,7 +2042,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "listitem"
             ],
             "roleType": "structure",
@@ -2095,7 +2095,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "option"
             ],
@@ -2149,7 +2149,7 @@
                 "directory",
                 "list"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2190,7 +2190,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -2231,7 +2231,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -2272,7 +2272,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -2313,7 +2313,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2357,7 +2357,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2399,7 +2399,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "menuitem",
                 "menuitemcheckbox",
@@ -2446,7 +2446,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "menuitem",
                 "menuitemcheckbox",
@@ -2503,7 +2503,7 @@
                 "menu",
                 "menubar"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2552,7 +2552,7 @@
                 "menu",
                 "menubar"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2600,7 +2600,7 @@
                 "menu",
                 "menubar"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2641,7 +2641,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -2682,7 +2682,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2735,7 +2735,7 @@
                 "group",
                 "listbox"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2774,7 +2774,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2813,7 +2813,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -2858,7 +2858,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -2906,7 +2906,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -2953,7 +2953,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "radio"
             ],
             "roleType": "widget structure",
@@ -3005,7 +3005,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3046,7 +3046,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -3107,7 +3107,7 @@
                 "table",
                 "treegrid"
             ],
-            "onlyContain": [
+            "requiredChildren": [
                 "cell",
                 "columnheader",
                 "gridcell",
@@ -3157,7 +3157,7 @@
                 "table",
                 "treegrid"
             ],
-            "onlyContain": [
+            "requiredChildren": [
                 "row"
             ],
             "roleType": "structure",
@@ -3209,7 +3209,7 @@
             "requiredContext": [
                 "row"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -3262,7 +3262,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -3303,7 +3303,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
         },
@@ -3345,7 +3345,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3386,7 +3386,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3427,7 +3427,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3468,7 +3468,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3518,7 +3518,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -3570,7 +3570,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget structure",
             "isAbstract": false
         },
@@ -3624,7 +3624,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget structure",
             "isAbstract": false
         },
@@ -3665,7 +3665,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
         },
@@ -3704,7 +3704,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3745,7 +3745,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -3784,7 +3784,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3823,7 +3823,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -3867,7 +3867,7 @@
             "nameProhibited": false,
             "childrenPresentational": true,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -3919,7 +3919,7 @@
             "requiredContext": [
                 "tablist"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -3965,7 +3965,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "row",
                 "rowgroup"
             ],
@@ -4014,7 +4014,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "tab"
             ],
             "roleType": "widget",
@@ -4057,7 +4057,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4098,7 +4098,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -4150,7 +4150,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
         },
@@ -4191,7 +4191,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -4232,7 +4232,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
         },
@@ -4273,7 +4273,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         },
@@ -4314,7 +4314,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4361,7 +4361,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "group",
                 "treeitem"
             ],
@@ -4409,7 +4409,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [
+            "requiredChildren": [
                 "row",
                 "rowgroup"
             ],
@@ -4464,7 +4464,7 @@
                 "group",
                 "tree"
             ],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
         },
@@ -4505,7 +4505,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4546,7 +4546,7 @@
             "nameProhibited": false,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
         },
@@ -4585,7 +4585,7 @@
             "nameProhibited": true,
             "childrenPresentational": false,
             "requiredContext": [],
-            "onlyContain": [],
+            "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         }

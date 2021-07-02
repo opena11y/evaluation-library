@@ -17,9 +17,13 @@
         <h1>WIDGET 6: Widgets must have properties</h1>
 
         <h2>combobox</h2>
-        <div role="combobox" class="WIDGET_6_PASS" aria-expanded="true">combobox pass</div>
+        <div role="combobox" class="WIDGET_6_PASS" aria-expanded="true" aria-controls="ID_LISTBOX">combobox pass</div>
 
         <div role="combobox" hidden class="WIDGET_6_HIDDEN" aria-expanded="true">combobox hidden</div>
+
+        <div role="combobox" class="WIDGET_6_FAIL" aria-expanded="true">combobox fail</div>
+
+        <div role="combobox" class="WIDGET_6_FAIL" aria-controls="ID_LISTBOX">combobox fail</div>
 
         <div role="combobox" class="WIDGET_6_FAIL">combobox fail</div>
 
@@ -36,6 +40,35 @@
         <div role="checkbox" hidden class="WIDGET_6_HIDDEN" aria-checked="true">checkbox hidden</div>
 
         <div role="checkbox" class="WIDGET_6_FAIL">checkbox fail</div>
+
+        <h2>menuitemcheckbox</h2>
+        <div role="menuitemcheckbox" class="WIDGET_6_PASS" aria-checked="true">menuitemcheckbox pass</div>
+
+        <div role="menuitemcheckbox" hidden class="WIDGET_6_HIDDEN" aria-checked="true">menuitemcheckbox hidden</div>
+
+        <div role="menuitemcheckbox" class="WIDGET_6_FAIL">checkbox fail</div>
+
+        <h2>option</h2>
+        <div role="listbox" id="ID_LISTBOX">
+          <div role="option" class="WIDGET_6_PASS" aria-selected="true">slider pass</div>
+          <div role="option" hidden class="WIDGET_6_HIDDEN" aria-selected="false">slider hidden</div>
+          <div role="option" class="WIDGET_6_FAIL">slider fail</div>
+        </div>
+
+        <h2>slider</h2>
+        <div role="slider" class="WIDGET_6_PASS" aria-valuenow="10">slider pass</div>
+
+        <div role="slider" hidden class="WIDGET_6_HIDDEN" aria-valuenow="10">slider hidden</div>
+
+        <div role="slider" class="WIDGET_6_FAIL">slider fail</div>
+
+
+        <h2>switch</h2>
+        <div role="switch" class="WIDGET_6_PASS" aria-checked="true">switch pass</div>
+
+        <div role="switch" hidden class="WIDGET_6_HIDDEN" aria-checked="true">switch hidden</div>
+
+        <div role="switch" class="WIDGET_6_FAIL">switch fail</div>
 
       </main>
       
