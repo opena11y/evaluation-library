@@ -16330,9 +16330,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, de.role, we.computed_label]);
              }
              else {
-               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
-               else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-             }
+               if (de.role_info.nameRequired) {
+                 rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
+               } else {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+              }
+            }
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
@@ -17292,6 +17295,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        for (var i = 0; i < elements_with_role_len; i++) {
          var de = elements_with_role[i];
          var style = de.computed_style;
+
+         console.log('[WIDGET_13]: ' + de + ' [widget]: ' + de.is_widget);
 
          if (de.is_widget) {
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {

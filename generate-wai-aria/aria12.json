@@ -56,21 +56,24 @@
         },
         "aria-colcount": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-colindex": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-colspan": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -232,7 +235,8 @@
         },
         "aria-level": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -305,7 +309,8 @@
         },
         "aria-posinset": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -364,21 +369,24 @@
         },
         "aria-rowcount": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-rowindex": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-rowspan": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -396,7 +404,8 @@
         },
         "aria-setsize": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -568,7 +577,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "article": {
@@ -614,7 +623,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure section",
             "isAbstract": false
         },
         "banner": {
@@ -838,7 +847,7 @@
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure section",
             "isAbstract": false
         },
         "checkbox": {
@@ -1066,7 +1075,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "complementary": {
@@ -1151,7 +1160,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "contentinfo": {
@@ -1869,7 +1878,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "insertion": {
@@ -1949,7 +1958,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "landmark",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "link": {
@@ -2182,7 +2191,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "main": {
@@ -2264,7 +2273,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "math": {
@@ -2997,7 +3006,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "region": {
@@ -3378,7 +3387,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "sectionhead": {
@@ -3419,7 +3428,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "select": {
@@ -3460,7 +3469,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "separator": {
@@ -3737,7 +3746,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "subscript": {
@@ -4183,7 +4192,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "timer": {
@@ -4224,7 +4233,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "toolbar": {
@@ -4306,7 +4315,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "tree": {
@@ -4497,7 +4506,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "window": {
@@ -4538,7 +4547,7 @@
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "window",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "none": {

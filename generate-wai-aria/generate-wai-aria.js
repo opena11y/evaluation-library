@@ -223,18 +223,33 @@ function getRoles(dom, roles) {
   }
 
   for (role in roles) {
-    if ('tabpanel'.indexOf(role) >= 0) {
+    // fix roles that do not have widget as a base class
+    if ('application log marquee tabpanel timer tooltip'.indexOf(role) >= 0) {
       roles[role].roleType += ' widget';
     }
+
     console.log('\n[' + role + '][roleType]: ' + roles[role].roleType);
+
     let abstractRoles = getAbstractRoles(role);
     if ('alert log marquee status timer'.indexOf(role) >= 0) {
       abstractRoles += 'live';
     }
+
+    if ('article cell'.indexOf(role) >= 0) {
+      abstractRoles += 'section';
+    }
+
     roles[role].roleType = removeDuplicates(abstractRoles);
-    console.log('[roleType][updated]: ' + roles[role].roleType);
+
+    console.log('[' + role + '][roleType]: ' + roles[role].roleType);
   }
 
+  for (role in roles) {
+    if (roles[role].isAbstract) {
+      roles[role].roleType = 'abstract';
+      console.log('[' + role + '][roleType]: ' + roles[role].roleType);
+    }
+  }
 }
 
 
@@ -281,10 +296,6 @@ function getPropType(elemNode, selector) {
       type = 'nmtokens';
       break;
 
-    case 'integer':
-      type = 'number';
-      break;
-
     default:
       break;
   }
@@ -311,6 +322,16 @@ function getProps(dom, props) {
     props[prop] = {};
     props[prop].propType = dom.querySelector('#' + prop + ' h4 .type-indicator').textContent.toLowerCase().trim();
     props[prop].type = getPropType(dom, '#' + prop + ' .state-value, #' + prop + ' .property-value');
+    if (props[prop].type === 'integer') {
+      let codeElems = dom.querySelectorAll('#' + prop + ' .property-description code');
+      let flag = false;
+      for (let i = 0; i < codeElems.length && !flag; i += 1) {
+        if (codeElems[i].textContent === "-1") {
+          flag = true;
+        }
+      }
+      props[prop].allowUndeterminedValue = flag;
+    }
     [props[prop].values, props[prop].defaultValue] = getPropValues(dom, '#' + prop + ' .value-name');
     props[prop].deprecated = isPropDeprecated(dom, ('#desc-' + prop + ' p'));
 

@@ -1138,21 +1138,24 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
         },
         "aria-colcount": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-colindex": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-colspan": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -1314,7 +1317,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
         },
         "aria-level": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -1387,7 +1391,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
         },
         "aria-posinset": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -1446,21 +1451,24 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
         },
         "aria-rowcount": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-rowindex": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
         },
         "aria-rowspan": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -1478,7 +1486,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
         },
         "aria-setsize": {
             "propType": "property",
-            "type": "number",
+            "type": "integer",
+            "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
             "deprecated": false
@@ -1681,7 +1690,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "article": {
@@ -1727,7 +1736,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure section",
             "isAbstract": false
         },
         "banner": {
@@ -1951,7 +1960,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "row"
             ],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure section",
             "isAbstract": false
         },
         "checkbox": {
@@ -2179,7 +2188,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "complementary": {
@@ -2264,7 +2273,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "contentinfo": {
@@ -2982,7 +2991,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "insertion": {
@@ -3062,7 +3071,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "landmark",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "link": {
@@ -3295,7 +3304,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "main": {
@@ -3377,7 +3386,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "math": {
@@ -4110,7 +4119,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "region": {
@@ -4491,7 +4500,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "sectionhead": {
@@ -4532,7 +4541,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "select": {
@@ -4573,7 +4582,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "separator": {
@@ -4850,7 +4859,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "subscript": {
@@ -5296,7 +5305,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "timer": {
@@ -5337,7 +5346,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure live",
+            "roleType": "structure widget live",
             "isAbstract": false
         },
         "toolbar": {
@@ -5419,7 +5428,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "structure",
+            "roleType": "structure widget",
             "isAbstract": false
         },
         "tree": {
@@ -5610,7 +5619,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "widget",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "window": {
@@ -5651,7 +5660,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredContext": [],
             "onlyContain": [],
-            "roleType": "window",
+            "roleType": "abstract",
             "isAbstract": true
         },
         "none": {
@@ -13052,7 +13061,7 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.toString = function () {
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions andf
  * limitations under the License.
  */
 
@@ -13992,7 +14001,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       return str;
     }
 
-    function validValue(value, type, values) {
+    function validValue(value, type, values, allowUndeterminedValue) {
 
       var i;
       var j;
@@ -14017,8 +14026,12 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         break;
 
       case 'integer':
+        let v = parseInt(value, 10);
         if (!isNaN(value) &&
-            (parseInt(value, 10) >= 0)) return true;
+            ( v > 0) ||
+            (allowUndeterminedValue && (v === -1 || v === 0))) {
+          return true;
+        }
         break;
 
       case 'nmtoken':
@@ -14027,6 +14040,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         }
         break;
 
+      case 'tristate':
       case 'nmtokens':
         var tokens = [];
         tokens.push(value);
@@ -14079,9 +14093,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
     if (property_info) {
       av.type = property_info.type;
       if (property_info.values) av.tokens = getTokens(property_info.values);
-      if (property_info.type === 'boolean') av.tokens = "true | false";
 
-      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values);
+      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
       else av.is_value_valid = validValue(av.value, av.type, []);
     }
     else {
@@ -14425,7 +14438,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (role === 'presentation') this.is_presentation = true;
 
       if (role_info.roleType.indexOf('widget') >= 0 ||
-          role_info.roleType.indexOf('window')) {
+          role_info.roleType.indexOf('window') >= 0) {
+
         this.is_interactive = true;
         this.is_widget = true;
         this.has_range = role_info.hasRange;
@@ -14437,7 +14451,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
       this.is_landmark = role_info.roleType.indexOf('landmark') >= 0;
       this.is_live = role_info.roleType.indexOf('live') >= 0;
-      this.is_section = role_info.roleType.indexOf('section') >= 0;
+      this.is_section = role_info.roleType.indexOf('section') >= 0 || role_info.roleType.indexOf('structure') >= 0;
       this.is_abstract = role_info.roleType.indexOf('abstract') >= 0;
 
       break;
@@ -56203,9 +56217,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, de.role, we.computed_label]);
              }
              else {
-               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
-               else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-             }
+               if (de.role_info.nameRequired) {
+                 rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
+               } else {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+              }
+            }
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
@@ -57165,6 +57182,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        for (var i = 0; i < elements_with_role_len; i++) {
          var de = elements_with_role[i];
          var style = de.computed_style;
+
+         console.log('[WIDGET_13]: ' + de + ' [widget]: ' + de.is_widget);
 
          if (de.is_widget) {
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {

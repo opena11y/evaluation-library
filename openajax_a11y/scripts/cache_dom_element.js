@@ -10,7 +10,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions andf
  * limitations under the License.
  */
 
@@ -950,7 +950,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       return str;
     }
 
-    function validValue(value, type, values) {
+    function validValue(value, type, values, allowUndeterminedValue) {
 
       var i;
       var j;
@@ -975,8 +975,12 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         break;
 
       case 'integer':
+        let v = parseInt(value, 10);
         if (!isNaN(value) &&
-            (parseInt(value, 10) >= 0)) return true;
+            ( v > 0) ||
+            (allowUndeterminedValue && (v === -1 || v === 0))) {
+          return true;
+        }
         break;
 
       case 'nmtoken':
@@ -985,6 +989,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         }
         break;
 
+      case 'tristate':
       case 'nmtokens':
         var tokens = [];
         tokens.push(value);
@@ -1037,9 +1042,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
     if (property_info) {
       av.type = property_info.type;
       if (property_info.values) av.tokens = getTokens(property_info.values);
-      if (property_info.type === 'boolean') av.tokens = "true | false";
 
-      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values);
+      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
       else av.is_value_valid = validValue(av.value, av.type, []);
     }
     else {
@@ -1383,7 +1387,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (role === 'presentation') this.is_presentation = true;
 
       if (role_info.roleType.indexOf('widget') >= 0 ||
-          role_info.roleType.indexOf('window')) {
+          role_info.roleType.indexOf('window') >= 0) {
+
         this.is_interactive = true;
         this.is_widget = true;
         this.has_range = role_info.hasRange;
@@ -1395,7 +1400,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
       this.is_landmark = role_info.roleType.indexOf('landmark') >= 0;
       this.is_live = role_info.roleType.indexOf('live') >= 0;
-      this.is_section = role_info.roleType.indexOf('section') >= 0;
+      this.is_section = role_info.roleType.indexOf('section') >= 0 || role_info.roleType.indexOf('structure') >= 0;
       this.is_abstract = role_info.roleType.indexOf('abstract') >= 0;
 
       break;

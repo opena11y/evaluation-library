@@ -53,7 +53,7 @@
 
         <div role="menubar" class="WIDGET_1_MC">
           <div>Menu 5: Fail</div>
-          <div role="menu" class="WIDGET_1_FAIL" >
+          <div role="menu" class="WIDGET_1_MC" >
             <div role="menuitem" class="WIDGET_1_FAIL"></div>
             <div role="menuitemcheckbox" class="WIDGET_1_FAIL"></div>
             <div role="menuitemradio" class="WIDGET_1_FAIL"></div>
@@ -102,14 +102,14 @@
         </div>
 
         <div role="grid" class="WIDGET_1_PASS" aria-label="Grid 1: Content">
-	  <div role="row">Row 1
+	      <div role="row" class="WIDGET_1_PASS">Row 1
             <div role="rowheader" class="WIDGET_1_PASS">Header 1</div>
             <div role="gridcell" class="WIDGET_1_PASS">Gridcell 1</div>
           </div>
         </div>
 
         <div role="grid" class="WIDGET_1_PASS" aria-label="Grid 2: aria-label">
-	  <div role="row" aria-label="Row 2">
+	  <div role="row"  class="WIDGET_1_PASS" aria-label="Row 2">
             <div role="rowheader" class="WIDGET_1_PASS" aria-label="Header 2"></div>
             <div role="gridcell" class="WIDGET_1_PASS" aria-label="Gridcell 2"></div>
           </div>
@@ -117,7 +117,7 @@
 
         <div role="grid" class="WIDGET_1_PASS" aria-label="Grid 3: aria-labelledby">
           <div hidden id="ID_ROW_3">Row 3</div>
-	  <div role="row" aria-labelledby="ID_ROW_3">
+      	  <div role="row" class="WIDGET_1_PASS" aria-labelledby="ID_ROW_3">
             <div hidden id="ID_HEADER_3">Header 3</div>
             <div role="rowheader" class="WIDGET_1_PASS" aria-labelledby="ID_HEADER_3"></div>
             <div hidden id="ID_GRIDCELL_3">Gridcell 3</div>
@@ -126,7 +126,7 @@
         </div>
 
         <div role="grid" aria-hidden="true" class="WIDGET_1_HIDDEN" aria-label="Grid 4: hidden">
-	  <div role="row" aria-label="Row 4">
+	  <div role="row" class="WIDGET_1_HIDDEN" aria-label="Row 4">
             <div role="rowheader" class="WIDGET_1_HIDDEN" aria-label="Header 4"></div>
             <div role="gridcell" class="WIDGET_1_HIDDEN" aria-label="Gridcell 4"></div>
           </div>
@@ -134,9 +134,9 @@
 
         <div>Grid 5: Fail</div>
         <div role="grid" class="WIDGET_1_FAIL" ></div>
-	  <div role="row">
-            <div role="rowheader" class="WIDGET_1_MC"></div>
-            <div role="gridcell" class="WIDGET_1_FAIL"></div>
+    	  <div role="row" class="WIDGET_1_MC">
+            <div role="rowheader" class="WIDGET_1_FAIL"></div>
+            <div role="gridcell" class="WIDGET_1_MC"></div>
           </div>
         </div>
 
