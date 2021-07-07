@@ -914,7 +914,10 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  * @property {Array}      aria_attributes_with_invlaid_values - Array of attributes who have
  *
  *
- * @property {Object}     role_info         - Object containing information about a widget
+ * @property {Object}     role_info       - Object containing information about a widget
+ * @property {Object}     owned_by        - Array of reference to Widget objects that own the dom element using aria-owns
+ * @property {Object}     widget_element  - Reference to the corresponding widget element
+ *
  *
  * @property {Object}     events              - Object that contains information about events associated with the node
  * @property {Object}     computed_style      - Object that contains information about run time styling of the node
@@ -1096,6 +1099,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.id             = node.id;
   this.name           = "";
 
+  this.owned_by = [];
+  this.widget_element = null;
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -1485,6 +1490,45 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 };
 
 /**
+ * @method addOwnedby
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Updates array of reference to widget elements that own this dom element
+ *
+ * @param  {object} widget_element - Widget element that owns
+ } r
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.addOwnedBy = function (widget_element) {
+
+  function updateReferences(de) {
+    // a widget element can only own this node once
+    if (de.owned_by.indexOf(widget_element) < 0) {
+      var role = widget_element.dom_element.role;
+      if (de.role_info && de.role_info.requiredParents.indexOf(role) >= 0) {
+        de.owned_by.push(widget_element);
+      }
+    }
+
+    if (widget_element.owned_dom_elements.indexOf(de) < 0) {
+      widget_element.owned_dom_elements.push(de);
+    }
+
+    for (var i = 0; i < de.child_dom_elements.length; i += 1) {
+      var child_de = de.child_dom_elements[i];
+      if (child_de.type === Node.ELEMENT_NODE) {
+        updateReferences(child_de);
+      }
+    }
+
+  }
+
+  updateReferences(this);
+
+};
+
+/**
  * @method setImpliedRole
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
@@ -1720,37 +1764,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.containsInteractiveElements = function 
 
 };
 
-
-/**
- * @method hasParentRole
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc Tests if a widget has a parent element with a certain role
- *
- * @param {String}  role -  Role to find
- *
- * @return {Boolean} Returns true if widget has child element with role, otherwise false
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.hasParentRole = function (role) {
-
-   function checkParentElementForRole(dom_element) {
-
-     if (!dom_element) return false;
-
-     if (dom_element.role === role) {
-       return true;
-     }
-     else {
-       return checkParentElementForRole(dom_element.parent_element);
-     }
-
-   }
-
-   return checkParentElementForRole(this.parent_element);
-
-};
 
 /**
  * @method getHasDescribedBy

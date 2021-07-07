@@ -1601,7 +1601,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
@@ -1643,7 +1643,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure window",
             "isAbstract": false
@@ -1688,7 +1688,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -1734,7 +1734,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure section",
             "isAbstract": false
@@ -1775,7 +1775,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -1816,7 +1816,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1862,7 +1862,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -1901,7 +1901,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "figure",
                 "grid",
                 "table",
@@ -1956,7 +1956,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -2008,7 +2008,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -2047,7 +2047,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2091,7 +2091,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -2145,7 +2145,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -2186,7 +2186,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -2227,7 +2227,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -2271,7 +2271,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -2312,7 +2312,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -2353,7 +2353,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2392,7 +2392,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2434,7 +2434,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "window",
             "isAbstract": false
@@ -2475,7 +2475,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2516,7 +2516,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2555,7 +2555,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2596,7 +2596,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "article"
             ],
@@ -2639,7 +2639,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2680,7 +2680,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -2718,7 +2718,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2766,7 +2766,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "row",
                 "rowgroup"
@@ -2822,7 +2822,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -2868,7 +2868,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2909,7 +2909,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2950,7 +2950,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2989,7 +2989,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3028,7 +3028,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3069,7 +3069,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3113,7 +3113,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -3154,7 +3154,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "listitem"
             ],
@@ -3207,7 +3207,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "option"
@@ -3258,7 +3258,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "directory",
                 "list"
             ],
@@ -3302,7 +3302,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -3343,7 +3343,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -3384,7 +3384,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -3425,7 +3425,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3469,7 +3469,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3511,7 +3511,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "menuitem",
@@ -3558,7 +3558,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "menuitem",
@@ -3611,7 +3611,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "menu",
                 "menubar"
@@ -3660,7 +3660,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "menu",
                 "menubar"
@@ -3708,7 +3708,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "menu",
                 "menubar"
@@ -3753,7 +3753,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -3794,7 +3794,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3844,7 +3844,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "listbox"
             ],
@@ -3886,7 +3886,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3925,7 +3925,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3970,7 +3970,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -4018,7 +4018,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -4065,7 +4065,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "radio"
             ],
@@ -4117,7 +4117,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4158,7 +4158,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -4214,7 +4214,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "grid",
                 "rowgroup",
                 "table",
@@ -4265,7 +4265,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "grid",
                 "table",
                 "treegrid"
@@ -4319,7 +4319,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -4374,7 +4374,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -4415,7 +4415,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -4457,7 +4457,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -4498,7 +4498,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4539,7 +4539,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4580,7 +4580,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4630,7 +4630,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -4682,7 +4682,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget structure",
             "isAbstract": false
@@ -4736,7 +4736,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget structure",
             "isAbstract": false
@@ -4777,7 +4777,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
@@ -4816,7 +4816,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -4857,7 +4857,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4896,7 +4896,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -4935,7 +4935,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -4979,7 +4979,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -5029,7 +5029,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "tablist"
             ],
             "requiredChildren": [],
@@ -5077,7 +5077,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "row",
                 "rowgroup"
@@ -5126,7 +5126,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "tab"
             ],
@@ -5169,7 +5169,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -5210,7 +5210,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -5262,7 +5262,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -5303,7 +5303,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -5344,7 +5344,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -5385,7 +5385,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -5426,7 +5426,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -5473,7 +5473,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "treeitem"
@@ -5521,7 +5521,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "row",
                 "rowgroup"
@@ -5573,7 +5573,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "tree"
             ],
@@ -5617,7 +5617,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -5658,7 +5658,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -5697,7 +5697,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -8238,6 +8238,29 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getControlElementById = function (id
 };
 
 /**
+ * @method getWidgetElementById
+ *
+ * @memberOf OpenAjax.a11y.cache.ControlsCache
+ *
+ * @desc Finds the the control cache element object with the matching id
+ *
+ * @param  {String }  id  - id of widget cache element object
+ *
+ * @return {Object} Returns cache widget element object if cache id is found, otherwise null
+ */
+
+OpenAjax.a11y.cache.ControlsCache.prototype.getWidgetElementById = function (id) {
+
+  for (var i = 0; i < this.widget_elements.length; i++) {
+    if (this.widget_elements[i].dom_element.id === id) {
+      return this.widget_elements[i];
+    }
+  }
+
+  return null;
+};
+
+/**
  * @method getLabelElementByCacheId
  *
  * @memberOf OpenAjax.a11y.cache.ControlsCache
@@ -8723,8 +8746,6 @@ OpenAjax.a11y.cache.ControlsCache.prototype.applyAriaOwns = function () {
 
     if (widget.has_aria_owns) {
 
-//      OpenAjax.a11y.logger.debug("  Owned: " + widget.cache_id);
-
       var ids = widget.getOwnedIds();
       var ids_len = ids.length;
 
@@ -8732,15 +8753,10 @@ OpenAjax.a11y.cache.ControlsCache.prototype.applyAriaOwns = function () {
 
          var id = ids[j];
 
-         var ce = this.getControlElementById(id);
+         var de = this.dom_cache.element_cache.getDOMElementById(id);
 
-         if (ce) {
-
-           this.removeFromChildCacheElements(ce);
-           widget.addChildControl(ce, true);
-           ce.addOwnerControl(widget);
-           // update event information owned controls
-
+         if (de) {
+           de.addOwnedBy(widget);
          }
       }
     }
@@ -12428,7 +12444,11 @@ OpenAjax.a11y.cache.OptionElement.prototype.toString = function () {
  * @property  {Boolean}     is_valid       - True if the control has a valid value, otherwise false
  * @property  {Boolean}     has_pattern    - True if the pattern attribute is defined, otherwise false
  *
- * @property  {String}      name_attribute        - Text content of the name attribute
+ * @property  {String}   name_attribute        - Text content of the name attribute
+ * @property  {String}   required       - The value of the required property
+ * @property  {String}   aria_required  - The value of the aria-required property
+ * @property  {String}   aria_invalid   - The value of the aria-invlaid property
+ * @property  {Boolean}  aria_busy      - The value of the aria-busy property
  *
  * @property  {String}  computed_label                 - Calculated label for the input element
  * @property  {Number}  computed_label_length          - Length of the label property
@@ -12440,16 +12460,19 @@ OpenAjax.a11y.cache.OptionElement.prototype.toString = function () {
  *
  * @property  {String}  readonly  - The value of the readonly attribute
  * @property  {String}  disabled  - The value of the disabled attribute
- * @property  {String}  value     - The value of the readonly attribute
- * @property  {String}  checked   - The value of the disabled attribute
+ * @property  {String}  value     - The value of value property
+ * @property  {String}  checked   - The true if checked property
  *
  * @property  {Boolean}  is_owned       - True if this widget is owned by another widget
  * @property  {Array}    owner_controls - Array of all the widgets that own this widget (NOTE: More than one owner is an error)
+ * @property  {Array}    owned_dom_elements - Array of all the dom elements referenced by aria-owns
  */
 
 OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
 
   var node = dom_element.node;
+
+  dom_element.widget_element = this;
 
   this.dom_element    = dom_element;
   this.has_aria_owns       = dom_element.hasOwns();
@@ -12458,6 +12481,7 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.parent_widget  = control_info.parent_widget;
 
   this.child_cache_elements = [];
+  this.owned_dom_elements = [];
   this.type    = node.type;
   this.value   = node.value;
   this.checked = node.checked;
@@ -12466,6 +12490,10 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.required       = node.getAttribute('required');
   this.aria_required  = node.getAttribute('aria-required');
   this.aria_invalid   = node.getAttribute('aria-invalid');
+  this.aria_busy      = node.getAttribute('aria-busy');
+  if (this.aria_busy) {
+    this.aria_busy = this.aria_busy.toLowerCase() === 'true';
+  }
 
   this.control_type   = OpenAjax.a11y.CONTROL_TYPE.WIDGET;
 
@@ -12486,6 +12514,31 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.is_valid     = true;
 
   if (role_info && role_info.nameRequired) this.needs_label  = true;
+
+  this.updateOwnedBy()
+
+};
+
+/**
+ * @method updateOwnedby
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Updates the associated dom element with parent widget information form the DOM tree
+ *
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.updateOwnedBy = function () {
+
+  var roles = this.dom_element.role_info.requiredParents;
+
+  for (var i = 0; i < roles.length; i += 1) {
+    var we = this.getParentWidgetElement(roles[i]);
+
+    if (we) {
+      this.dom_element.addOwnedBy(we);
+    }
+  }
 
 };
 
@@ -12559,7 +12612,7 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getOwnedIds = function () {
 };
 
 /**
- * @method hasChildRole
+ * @method hasRequiedChildRole
  *
  * @memberOf OpenAjax.a11y.cache.WidgetElement
  *
@@ -12570,23 +12623,104 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getOwnedIds = function () {
  * @return {Boolean} Returns true if widget has child element with role, otherwise false
  */
 
-OpenAjax.a11y.cache.WidgetElement.prototype.hasChildRole = function (role) {
+OpenAjax.a11y.cache.WidgetElement.prototype.hasRequiredChildRole = function (role) {
 
-   function checkCacheChildren(list) {
+  for (var i = 0; i < this.owned_dom_elements.length; i += 1) {
+    if (this.owned_dom_elements[i].role === role) {
+      return true;
+    }
+  }
+
+  return false;
+
+};
+
+/**
+ * @method isOwnedByRole
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Tests if a widget is owned by ARIA element with a certain role
+ *
+ * @param {String}  role -  Role to find
+ *
+ * @return {Boolean} Returns true if widget is owned by element with role, otherwise false
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.isOwnedByRole = function (role) {
+
+  for (var i = 0; i < this.dom_element.owned_by.length; i += 1) {
+    var we = this.dom_element.owned_by[i];
+    if (we.dom_element.role === role) {
+      return true;
+    }
+  }
+
+  return false;
+
+};
+
+/**
+ * @method getParentWidgetElement
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Get reference to a parent element with a certain role
+ *
+ * @param {String}  role -  Role to find
+ *
+ * @return {Object} Returns widget if parent element with role exists, otherwise false
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.getParentWidgetElement = function (role) {
+
+   function checkParentElementForRole(dom_element) {
+
+     if (!dom_element) return false;
+
+     if (dom_element.role === role) {
+       return dom_element.widget_element;
+     }
+     else {
+       return checkParentElementForRole(dom_element.parent_element);
+     }
+
+   }
+
+   return checkParentElementForRole(this.dom_element.parent_element);
+
+};
+
+
+/**
+ * @method hasOwnedRole
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Tests if a widget has a owned ARIA element with a certain role
+ *
+ * @param {String}  role -  Role to find
+ *
+ * @return {Boolean} Returns true if widget has owned element with role, otherwise false
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.hasOwnedRole = function (role) {
+
+   function checkOwnedChildren(dom_elements) {
 
      var flag = false;
 
-     for (var i = 0; (i < list.length); i++) {
+     for (var i = 0; i < dom_elements.length; i++) {
 
-       var item = list[i];
+       var dom_element = dom_elements[i];
 
-       if (item.dom_element.role === role) {
+       if (dom_element.role === role) {
          flag = true;
          break;
        }
        else {
-         if (item.child_cache_elements && item.child_cache_elements.length) {
-           flag = checkCacheChildren(item.child_cache_elements);
+         if (dom_element.child_dom_elements && dom_element.child_dom_elements.length) {
+           flag = checkOwnedChildren(dom_element.child_dom_elements);
          }
        }
      }
@@ -12595,35 +12729,7 @@ OpenAjax.a11y.cache.WidgetElement.prototype.hasChildRole = function (role) {
 
    }
 
-   return checkCacheChildren(this.child_cache_elements);
-
-};
-
-/**
- * @method hasParentRole
- *
- * @memberOf OpenAjax.a11y.cache.WidgetElement
- *
- * @desc Tests if a widget has a parent element with a certain role
- *
- * @param {String}  role -  Role to find
- *
- * @return {Boolean} Returns true if widget has child element with role, otherwise false
- */
-
-OpenAjax.a11y.cache.WidgetElement.prototype.hasParentRole = function (role) {
-
-   function checkParentRole(widget) {
-
-     if (!widget) return false;
-
-     if (widget.dom_element.role === role) return true;
-
-     return checkParentRole(widget.parent_widget);
-
-   }
-
-   return checkParentRole(this.parent_widget);
+   return checkOwnedChildren(this.owned_dom_elements);
 
 };
 
@@ -13965,7 +14071,10 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  * @property {Array}      aria_attributes_with_invlaid_values - Array of attributes who have
  *
  *
- * @property {Object}     role_info         - Object containing information about a widget
+ * @property {Object}     role_info       - Object containing information about a widget
+ * @property {Object}     owned_by        - Array of reference to Widget objects that own the dom element using aria-owns
+ * @property {Object}     widget_element  - Reference to the corresponding widget element
+ *
  *
  * @property {Object}     events              - Object that contains information about events associated with the node
  * @property {Object}     computed_style      - Object that contains information about run time styling of the node
@@ -14147,6 +14256,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.id             = node.id;
   this.name           = "";
 
+  this.owned_by = [];
+  this.widget_element = null;
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -14536,6 +14647,45 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 };
 
 /**
+ * @method addOwnedby
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Updates array of reference to widget elements that own this dom element
+ *
+ * @param  {object} widget_element - Widget element that owns
+ } r
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.addOwnedBy = function (widget_element) {
+
+  function updateReferences(de) {
+    // a widget element can only own this node once
+    if (de.owned_by.indexOf(widget_element) < 0) {
+      var role = widget_element.dom_element.role;
+      if (de.role_info && de.role_info.requiredParents.indexOf(role) >= 0) {
+        de.owned_by.push(widget_element);
+      }
+    }
+
+    if (widget_element.owned_dom_elements.indexOf(de) < 0) {
+      widget_element.owned_dom_elements.push(de);
+    }
+
+    for (var i = 0; i < de.child_dom_elements.length; i += 1) {
+      var child_de = de.child_dom_elements[i];
+      if (child_de.type === Node.ELEMENT_NODE) {
+        updateReferences(child_de);
+      }
+    }
+
+  }
+
+  updateReferences(this);
+
+};
+
+/**
  * @method setImpliedRole
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
@@ -14771,37 +14921,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.containsInteractiveElements = function 
 
 };
 
-
-/**
- * @method hasParentRole
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc Tests if a widget has a parent element with a certain role
- *
- * @param {String}  role -  Role to find
- *
- * @return {Boolean} Returns true if widget has child element with role, otherwise false
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.hasParentRole = function (role) {
-
-   function checkParentElementForRole(dom_element) {
-
-     if (!dom_element) return false;
-
-     if (dom_element.role === role) {
-       return true;
-     }
-     else {
-       return checkParentElementForRole(dom_element.parent_element);
-     }
-
-   }
-
-   return checkParentElementForRole(this.parent_element);
-
-};
 
 /**
  * @method getHasDescribedBy
@@ -47017,16 +47136,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Accessible Name (e.g. label) Calculation',
-                url:   'http://www.w3.org/TR/wai-aria/#namecalculation'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Accessible Name (e.g. label) Calculation',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#namecalculation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-labelledby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-labelledby',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-label',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-label',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47040,17 +47159,17 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA9'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'WAI-ARIA 1.0 Authoring Practices',
-                url:   'http://www.w3.org/TR/wai-aria-practices/'
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47086,12 +47205,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
-                url:   'http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#kbd_focus'
+                title: 'WAI-ARIA 1.2 Authoring Practices:  Keyboard Navigation Inside Components',
+                url:   'https://w3c.github.io/aria-practices/#kbd_general_within'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47102,12 +47221,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47144,12 +47267,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#landmark_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47164,12 +47287,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA19.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47204,8 +47331,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Supported Property and States',
-                url:   'http://www.w3.org/TR/wai-aria/#states_and_properties'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47216,12 +47343,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
       },
@@ -47253,8 +47384,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Supported Property and States',
-                url:   'http://www.w3.org/TR/wai-aria/#states_and_properties'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47265,12 +47396,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
       },
@@ -47301,8 +47436,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47313,12 +47448,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47336,6 +47475,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             },
             NODE_RESULT_MESSAGES: {
               ELEMENT_PASS_1:    '@%1@ widget has at least one required owned elements: %2.',
+              ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to have required owned elements.',
               ELEMENT_FAIL_1:  '@%1@ widget is MISSING one or more of following required owned elements: %2.',
               ELEMENT_HIDDEN_1:  'Required child widgets was not tested because the %1 widget is hidden from assistive technologies and not visible on screen.'
             },
@@ -47349,8 +47489,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47361,12 +47501,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47386,7 +47530,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_PASS_1:   '@%1@ widget is a child of the a @%2@ role.',
               ELEMENT_FAIL_1: 'Create a parent widget with the role of @%1@ for this @%2@ widget.',
               ELEMENT_FAIL_2: 'Create a parent widget with the one of the required roles (i.e. @%1@) for this @%2@ widget.',
-              ELEMENT_HIDDEN_1: 'Required parent widgets was not tested because the %1 widget is hidden from assistive technologies and/or not visible on screen.'
+              ELEMENT_HIDDEN_1: 'Required parent widgets was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
             },
             PURPOSE: [
               'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
@@ -47398,8 +47542,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47410,52 +47554,61 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
      WIDGET_9: {
             ID:                    'Widget 9',
-            DEFINITION:            'Widgets %s be owned by only one parent widget.',
+            DEFINITION:            'Elements %s be owned by only one widget.',
             SUMMARY:               'Only one owner',
             TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
             RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Update widgets with aria-owns to make sure it only references a child widget once.',
-              FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a child widget only once.',
-              HIDDEN_S: 'The widget with @aria-owns@ that is hidden and was not evaluated.',
-              HIDDEN_P: '%N_H widgets with @aria-owns@ that are hidden were not evaluated.',
-              NOT_APPLICABLE:  'No widgets using aria-owns on this page.'
+              FAIL_S:   'Update widgets with aria-owns to make sure a dom element is only referenced once.',
+              FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a dom element only once.',
+              NOT_APPLICABLE:  'No dom elements are referenced using aria-owns on this page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:   '@%1@ child widget is referenced only by @%2@ parent widget with aria-owns.',
-              ELEMENT_FAIL_1: 'Update references of @%1@ parent widgets with aria-owns to reference @%2@ child widget only once.',
-              ELEMENT_HIDDEN_1: 'Widgets owned by more than one parent widget was not tested becasue the %1 parent widget with aria-owns is hidden from assistive technologies and not visible on screen.'
+              ELEMENT_PASS_1:   '@%2@ dom element is referenced only by @%1@ widget with aria-owns.',
+              ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ dom element so it is only referenced by one widget.',
             },
             PURPOSE: [
-              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+              'Some ARIA widgets have require child roles and when the HTML DOM parent/child relationships does not identify the elements nodes with the associated roles, @aria-owns@ attribute can be used to identify the associated elements.'
             ],
             TECHNIQUES: [
-              'Parent widget roles with aria-owns must accurately describe the parent relationships, a child widget can only have one parent widget.'
+              'Parent widget roles with aria-owns must accurately describe the parent relationships, when used @aria-owns@ a dom element can only be referenced once.   NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47492,8 +47645,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47504,8 +47657,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47545,8 +47706,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: INPUT element widget role semantics',
@@ -47581,8 +47742,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47623,20 +47792,20 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'HTML 4.01 Specification: The @label@ element',
-                url:   'http://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+                title: 'HTML Specification: The @label@ element',
+                url:   'https://html.spec.whatwg.org/#the-label-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'HTML 4.01 Specification: The @title@ attribute',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+                title: 'HTML Specification: The @title@ attribute',
+                url:   'https://html.spec.whatwg.org/#the-title-attribute'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
@@ -47654,9 +47823,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/H71'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA Best Practices: Labels for Form Controls Overview',
-                url:   'http://html.cita.illinois.edu/nav/form/'
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47690,8 +47863,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
@@ -47702,12 +47875,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -47757,28 +47934,28 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Alert Role',
-                url:   'https://www.w3.org/TR/wai-aria/roles#alert'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Alert Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/roles#alert'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Log Role',
-                url:   'https://www.w3.org/TR/wai-aria/roles#log'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Log Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/roles#log'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Status Role',
-                url:   'https://www.w3.org/TR/wai-aria/roles#status'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Status Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/roles#status'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-live',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-live'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-live',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-live'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-atomic',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-atomic'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-atomic',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-atomic'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-relevant',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-relevant'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-relevant',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-relevant'
               }
 
             ]
@@ -56184,7 +56361,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_1',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -56240,7 +56417,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_2',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -56338,7 +56515,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_3',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -56387,7 +56564,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_4',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -56487,7 +56664,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_5',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -56585,7 +56762,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_6',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -56672,12 +56849,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
          var required_properties = de.role_info.requiredProps;
 
-         console.log("[WIDGET 6]: " + de + " [reqProps]: "+ de.role_info.requiredProps);
+//         console.log("[WIDGET 6]: " + de + " [reqProps]: "+ de.role_info.requiredProps);
 
-         for (var k = 0; k < de.aria_attributes.length; k += 1) {
-           var attr = de.aria_attributes[k];
-           console.log("  [props]: "+ attr.name + '=' + attr.value);
-         }
+//         for (var k = 0; k < de.aria_attributes.length; k += 1) {
+//           var attr = de.aria_attributes[k];
+//           console.log("  [props]: "+ attr.name + '=' + attr.value);
+//         }
 
 
          if (required_properties && required_properties.length) {
@@ -56764,24 +56941,29 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
          var required_child_roles = de.role_info.requiredChildren;
 
-         if (required_child_roles) {
+         if (required_child_roles && required_child_roles.length) {
+
+//           console.log("[WIDGET 7]: " + de + " [reqOwned]: "+ required_child_roles.toString());
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 
-             var flag = false;
+             if (we.aria_busy) {
+               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.role]);
+             } else {
+               var flag = false;
 
-             for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
+               for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
+                 flag = we.hasRequiredChildRole(required_child_roles[j]);
+               }
 
-               var role = required_child_roles[j];
+               var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
 
-               flag = we.hasChildRole(role);
-
+               if (flag) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
+               } else {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
+              }
              }
-
-             var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
-
-             if (flag) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
@@ -56799,13 +56981,27 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_8',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role]'],
+  target_resources    : [ "caption",
+                          "cell",
+                          "columnheader",
+                          "gridcell",
+                          "listitem",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "option",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "tab",
+                          "treeitem"
+                      ],
   primary_property    : 'role',
   resource_properties : [],
   language_dependency : "",
@@ -56839,26 +57035,26 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          var de = we.dom_element;
          var style = de.computed_style;
 
-         var required_parent_roles = de.role_info.container;
+         var required_parent_roles = de.role_info.requiredParents;
 
-         if (required_parent_roles) {
+         if (required_parent_roles && required_parent_roles.length) {
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 
              var flag = false;
 
              for (var j = 0; (j < required_parent_roles.length) && !flag; j++) {
-
-               var role = required_parent_roles[j];
-
-               flag = we.hasParentRole(role);
-
+                var role = required_parent_roles[j];
+                flag = we.isOwnedByRole(role);
              }
 
              var required_roles_string = getRequiredRolesString(required_parent_roles);
 
-             if (flag) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
+             if (flag) {
+               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
+             } else {
+               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
+             }
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
@@ -56875,60 +57071,48 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_9',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[aria-owns]', '[aria-owns]'],
+  target_resources    : ['[aria-owns]'],
   primary_property    : 'is_owned',
   resource_properties : ['owner_controls'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-     function getParentWidgetString(list) {
-
-       var str = "";
-       list_max = list.length - 1;
-
-       for (var i = 0; i < list.length; i++ ) {
-         str += list[i].toString();
-         if (i !== list_max) str += "; ";
-       }
-
-       return str;
-
-     }
 
      var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+     var we;
 
-     if (widget_elements && widget_elements) {
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+        var style = de.computed_style;
 
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
 
-         if (we.is_owned) {
+        if (de.owned_by.length === 1) {
+          console.log('[WIDGET 9]');
+          we = de.owned_by[0];
+          console.log('[WIDGET 9][PASS]' + we + ' [dom_element]: ' + de);
+          rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
+        } else {
+          if (de.owned_by.length > 1) {
+            console.log('[WIDGET 9]');
+            for (var j = 0; j < de.owned_by.length; j += 1) {
+              we = de.owned_by[j];
+              console.log('[WIDGET 9][' + j + '][fail]: ' + we + ' [dom_element]: ' + de);
+              rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
+            } // end loop
+          }
+        }
+     } // end loop
 
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             var parent_string = getParentWidgetString(we.owner_controls);
-
-             if (we.owner_controls.length === 1) rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we.toString(), parent_string]);
-             else if (we.owner_controls.length > 1) rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [parent_string, we.toString()]);
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [we.toString()]);
-           }
-         }
-       } // end loop
-     }
    } // end validation function
 },
 
@@ -56939,7 +57123,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_10',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -57059,7 +57243,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_11',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -57182,7 +57366,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_13',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,

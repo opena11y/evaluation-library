@@ -62,16 +62,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Accessible Name (e.g. label) Calculation',
-                url:   'http://www.w3.org/TR/wai-aria/#namecalculation'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Accessible Name (e.g. label) Calculation',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#namecalculation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-labelledby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-labelledby',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-label',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-label',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -85,17 +85,17 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA9'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'WAI-ARIA 1.0 Authoring Practices',
-                url:   'http://www.w3.org/TR/wai-aria-practices/'
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -131,12 +131,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
-                url:   'http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#kbd_focus'
+                title: 'WAI-ARIA 1.2 Authoring Practices:  Keyboard Navigation Inside Components',
+                url:   'https://w3c.github.io/aria-practices/#kbd_general_within'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -147,12 +147,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -189,12 +193,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#landmark_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -209,12 +213,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA19.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -249,8 +257,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Supported Property and States',
-                url:   'http://www.w3.org/TR/wai-aria/#states_and_properties'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -261,12 +269,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
       },
@@ -298,8 +310,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Supported Property and States',
-                url:   'http://www.w3.org/TR/wai-aria/#states_and_properties'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -310,12 +322,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
       },
@@ -346,8 +362,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -358,12 +374,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -381,6 +401,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             },
             NODE_RESULT_MESSAGES: {
               ELEMENT_PASS_1:    '@%1@ widget has at least one required owned elements: %2.',
+              ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to have required owned elements.',
               ELEMENT_FAIL_1:  '@%1@ widget is MISSING one or more of following required owned elements: %2.',
               ELEMENT_HIDDEN_1:  'Required child widgets was not tested because the %1 widget is hidden from assistive technologies and not visible on screen.'
             },
@@ -394,8 +415,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -406,12 +427,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -431,7 +456,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_PASS_1:   '@%1@ widget is a child of the a @%2@ role.',
               ELEMENT_FAIL_1: 'Create a parent widget with the role of @%1@ for this @%2@ widget.',
               ELEMENT_FAIL_2: 'Create a parent widget with the one of the required roles (i.e. @%1@) for this @%2@ widget.',
-              ELEMENT_HIDDEN_1: 'Required parent widgets was not tested because the %1 widget is hidden from assistive technologies and/or not visible on screen.'
+              ELEMENT_HIDDEN_1: 'Required parent widgets was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
             },
             PURPOSE: [
               'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
@@ -443,8 +468,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -455,52 +480,61 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
      WIDGET_9: {
             ID:                    'Widget 9',
-            DEFINITION:            'Widgets %s be owned by only one parent widget.',
+            DEFINITION:            'Elements %s be owned by only one widget.',
             SUMMARY:               'Only one owner',
             TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
             RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Update widgets with aria-owns to make sure it only references a child widget once.',
-              FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a child widget only once.',
-              HIDDEN_S: 'The widget with @aria-owns@ that is hidden and was not evaluated.',
-              HIDDEN_P: '%N_H widgets with @aria-owns@ that are hidden were not evaluated.',
-              NOT_APPLICABLE:  'No widgets using aria-owns on this page.'
+              FAIL_S:   'Update widgets with aria-owns to make sure a dom element is only referenced once.',
+              FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a dom element only once.',
+              NOT_APPLICABLE:  'No dom elements are referenced using aria-owns on this page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:   '@%1@ child widget is referenced only by @%2@ parent widget with aria-owns.',
-              ELEMENT_FAIL_1: 'Update references of @%1@ parent widgets with aria-owns to reference @%2@ child widget only once.',
-              ELEMENT_HIDDEN_1: 'Widgets owned by more than one parent widget was not tested becasue the %1 parent widget with aria-owns is hidden from assistive technologies and not visible on screen.'
+              ELEMENT_PASS_1:   '@%2@ dom element is referenced only by @%1@ widget with aria-owns.',
+              ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ dom element so it is only referenced by one widget.',
             },
             PURPOSE: [
-              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+              'Some ARIA widgets have require child roles and when the HTML DOM parent/child relationships does not identify the elements nodes with the associated roles, @aria-owns@ attribute can be used to identify the associated elements.'
             ],
             TECHNIQUES: [
-              'Parent widget roles with aria-owns must accurately describe the parent relationships, a child widget can only have one parent widget.'
+              'Parent widget roles with aria-owns must accurately describe the parent relationships, when used @aria-owns@ a dom element can only be referenced once.   NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -537,8 +571,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -549,8 +583,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -590,8 +632,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: INPUT element widget role semantics',
@@ -626,8 +668,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -668,20 +718,20 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'HTML 4.01 Specification: The @label@ element',
-                url:   'http://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+                title: 'HTML Specification: The @label@ element',
+                url:   'https://html.spec.whatwg.org/#the-label-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'HTML 4.01 Specification: The @title@ attribute',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+                title: 'HTML Specification: The @title@ attribute',
+                url:   'https://html.spec.whatwg.org/#the-title-attribute'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
@@ -699,9 +749,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/H71'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA Best Practices: Labels for Form Controls Overview',
-                url:   'http://html.cita.illinois.edu/nav/form/'
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -735,8 +789,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
@@ -747,12 +801,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'OAA Web Accessibility ARIA Examples',
-                url:   'http://oaa-accessibility.org/examples/'
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Accessible jQuery-ui Components Demonstration',
-                url:   'http://access.aol.com/aegis/#goto_slider'
+                title: 'MDN Web Docs: ARIA ',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'Web Fundamentals: Introduction to ARIA',
+                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },
@@ -802,28 +860,28 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Alert Role',
-                url:   'https://www.w3.org/TR/wai-aria/roles#alert'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Alert Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/roles#alert'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Log Role',
-                url:   'https://www.w3.org/TR/wai-aria/roles#log'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Log Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/roles#log'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Status Role',
-                url:   'https://www.w3.org/TR/wai-aria/roles#status'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Status Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/roles#status'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-live',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-live'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-live',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-live'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-atomic',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-atomic'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-atomic',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-atomic'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: aria-relevant',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-relevant'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-relevant',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-relevant'
               }
 
             ]

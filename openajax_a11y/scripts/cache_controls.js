@@ -1042,6 +1042,29 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getControlElementById = function (id
 };
 
 /**
+ * @method getWidgetElementById
+ *
+ * @memberOf OpenAjax.a11y.cache.ControlsCache
+ *
+ * @desc Finds the the control cache element object with the matching id
+ *
+ * @param  {String }  id  - id of widget cache element object
+ *
+ * @return {Object} Returns cache widget element object if cache id is found, otherwise null
+ */
+
+OpenAjax.a11y.cache.ControlsCache.prototype.getWidgetElementById = function (id) {
+
+  for (var i = 0; i < this.widget_elements.length; i++) {
+    if (this.widget_elements[i].dom_element.id === id) {
+      return this.widget_elements[i];
+    }
+  }
+
+  return null;
+};
+
+/**
  * @method getLabelElementByCacheId
  *
  * @memberOf OpenAjax.a11y.cache.ControlsCache
@@ -1527,8 +1550,6 @@ OpenAjax.a11y.cache.ControlsCache.prototype.applyAriaOwns = function () {
 
     if (widget.has_aria_owns) {
 
-//      OpenAjax.a11y.logger.debug("  Owned: " + widget.cache_id);
-
       var ids = widget.getOwnedIds();
       var ids_len = ids.length;
 
@@ -1536,15 +1557,10 @@ OpenAjax.a11y.cache.ControlsCache.prototype.applyAriaOwns = function () {
 
          var id = ids[j];
 
-         var ce = this.getControlElementById(id);
+         var de = this.dom_cache.element_cache.getDOMElementById(id);
 
-         if (ce) {
-
-           this.removeFromChildCacheElements(ce);
-           widget.addChildControl(ce, true);
-           ce.addOwnerControl(widget);
-           // update event information owned controls
-
+         if (de) {
+           de.addOwnedBy(widget);
          }
       }
     }
@@ -5232,7 +5248,11 @@ OpenAjax.a11y.cache.OptionElement.prototype.toString = function () {
  * @property  {Boolean}     is_valid       - True if the control has a valid value, otherwise false
  * @property  {Boolean}     has_pattern    - True if the pattern attribute is defined, otherwise false
  *
- * @property  {String}      name_attribute        - Text content of the name attribute
+ * @property  {String}   name_attribute        - Text content of the name attribute
+ * @property  {String}   required       - The value of the required property
+ * @property  {String}   aria_required  - The value of the aria-required property
+ * @property  {String}   aria_invalid   - The value of the aria-invlaid property
+ * @property  {Boolean}  aria_busy      - The value of the aria-busy property
  *
  * @property  {String}  computed_label                 - Calculated label for the input element
  * @property  {Number}  computed_label_length          - Length of the label property
@@ -5244,16 +5264,19 @@ OpenAjax.a11y.cache.OptionElement.prototype.toString = function () {
  *
  * @property  {String}  readonly  - The value of the readonly attribute
  * @property  {String}  disabled  - The value of the disabled attribute
- * @property  {String}  value     - The value of the readonly attribute
- * @property  {String}  checked   - The value of the disabled attribute
+ * @property  {String}  value     - The value of value property
+ * @property  {String}  checked   - The true if checked property
  *
  * @property  {Boolean}  is_owned       - True if this widget is owned by another widget
  * @property  {Array}    owner_controls - Array of all the widgets that own this widget (NOTE: More than one owner is an error)
+ * @property  {Array}    owned_dom_elements - Array of all the dom elements referenced by aria-owns
  */
 
 OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
 
   var node = dom_element.node;
+
+  dom_element.widget_element = this;
 
   this.dom_element    = dom_element;
   this.has_aria_owns       = dom_element.hasOwns();
@@ -5262,6 +5285,7 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.parent_widget  = control_info.parent_widget;
 
   this.child_cache_elements = [];
+  this.owned_dom_elements = [];
   this.type    = node.type;
   this.value   = node.value;
   this.checked = node.checked;
@@ -5270,6 +5294,10 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.required       = node.getAttribute('required');
   this.aria_required  = node.getAttribute('aria-required');
   this.aria_invalid   = node.getAttribute('aria-invalid');
+  this.aria_busy      = node.getAttribute('aria-busy');
+  if (this.aria_busy) {
+    this.aria_busy = this.aria_busy.toLowerCase() === 'true';
+  }
 
   this.control_type   = OpenAjax.a11y.CONTROL_TYPE.WIDGET;
 
@@ -5290,6 +5318,31 @@ OpenAjax.a11y.cache.WidgetElement = function (dom_element, control_info) {
   this.is_valid     = true;
 
   if (role_info && role_info.nameRequired) this.needs_label  = true;
+
+  this.updateOwnedBy()
+
+};
+
+/**
+ * @method updateOwnedby
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Updates the associated dom element with parent widget information form the DOM tree
+ *
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.updateOwnedBy = function () {
+
+  var roles = this.dom_element.role_info.requiredParents;
+
+  for (var i = 0; i < roles.length; i += 1) {
+    var we = this.getParentWidgetElement(roles[i]);
+
+    if (we) {
+      this.dom_element.addOwnedBy(we);
+    }
+  }
 
 };
 
@@ -5363,7 +5416,7 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getOwnedIds = function () {
 };
 
 /**
- * @method hasChildRole
+ * @method hasRequiedChildRole
  *
  * @memberOf OpenAjax.a11y.cache.WidgetElement
  *
@@ -5374,23 +5427,104 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getOwnedIds = function () {
  * @return {Boolean} Returns true if widget has child element with role, otherwise false
  */
 
-OpenAjax.a11y.cache.WidgetElement.prototype.hasChildRole = function (role) {
+OpenAjax.a11y.cache.WidgetElement.prototype.hasRequiredChildRole = function (role) {
 
-   function checkCacheChildren(list) {
+  for (var i = 0; i < this.owned_dom_elements.length; i += 1) {
+    if (this.owned_dom_elements[i].role === role) {
+      return true;
+    }
+  }
+
+  return false;
+
+};
+
+/**
+ * @method isOwnedByRole
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Tests if a widget is owned by ARIA element with a certain role
+ *
+ * @param {String}  role -  Role to find
+ *
+ * @return {Boolean} Returns true if widget is owned by element with role, otherwise false
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.isOwnedByRole = function (role) {
+
+  for (var i = 0; i < this.dom_element.owned_by.length; i += 1) {
+    var we = this.dom_element.owned_by[i];
+    if (we.dom_element.role === role) {
+      return true;
+    }
+  }
+
+  return false;
+
+};
+
+/**
+ * @method getParentWidgetElement
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Get reference to a parent element with a certain role
+ *
+ * @param {String}  role -  Role to find
+ *
+ * @return {Object} Returns widget if parent element with role exists, otherwise false
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.getParentWidgetElement = function (role) {
+
+   function checkParentElementForRole(dom_element) {
+
+     if (!dom_element) return false;
+
+     if (dom_element.role === role) {
+       return dom_element.widget_element;
+     }
+     else {
+       return checkParentElementForRole(dom_element.parent_element);
+     }
+
+   }
+
+   return checkParentElementForRole(this.dom_element.parent_element);
+
+};
+
+
+/**
+ * @method hasOwnedRole
+ *
+ * @memberOf OpenAjax.a11y.cache.WidgetElement
+ *
+ * @desc Tests if a widget has a owned ARIA element with a certain role
+ *
+ * @param {String}  role -  Role to find
+ *
+ * @return {Boolean} Returns true if widget has owned element with role, otherwise false
+ */
+
+OpenAjax.a11y.cache.WidgetElement.prototype.hasOwnedRole = function (role) {
+
+   function checkOwnedChildren(dom_elements) {
 
      var flag = false;
 
-     for (var i = 0; (i < list.length); i++) {
+     for (var i = 0; i < dom_elements.length; i++) {
 
-       var item = list[i];
+       var dom_element = dom_elements[i];
 
-       if (item.dom_element.role === role) {
+       if (dom_element.role === role) {
          flag = true;
          break;
        }
        else {
-         if (item.child_cache_elements && item.child_cache_elements.length) {
-           flag = checkCacheChildren(item.child_cache_elements);
+         if (dom_element.child_dom_elements && dom_element.child_dom_elements.length) {
+           flag = checkOwnedChildren(dom_element.child_dom_elements);
          }
        }
      }
@@ -5399,35 +5533,7 @@ OpenAjax.a11y.cache.WidgetElement.prototype.hasChildRole = function (role) {
 
    }
 
-   return checkCacheChildren(this.child_cache_elements);
-
-};
-
-/**
- * @method hasParentRole
- *
- * @memberOf OpenAjax.a11y.cache.WidgetElement
- *
- * @desc Tests if a widget has a parent element with a certain role
- *
- * @param {String}  role -  Role to find
- *
- * @return {Boolean} Returns true if widget has child element with role, otherwise false
- */
-
-OpenAjax.a11y.cache.WidgetElement.prototype.hasParentRole = function (role) {
-
-   function checkParentRole(widget) {
-
-     if (!widget) return false;
-
-     if (widget.dom_element.role === role) return true;
-
-     return checkParentRole(widget.parent_widget);
-
-   }
-
-   return checkParentRole(this.parent_widget);
+   return checkOwnedChildren(this.owned_dom_elements);
 
 };
 
