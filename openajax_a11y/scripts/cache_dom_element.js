@@ -1044,10 +1044,15 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     if (property_info) {
       av.type = property_info.type;
-      if (property_info.values) av.tokens = getTokens(property_info.values);
+      if (property_info.values && property_info.values.length) {
+        av.tokens = getTokens(property_info.values);
+      }
 
-      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
-      else av.is_value_valid = validValue(av.value, av.type, []);
+      if (typeof property_info.values !== 'undefined') {
+        av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
+      } else {
+        av.is_value_valid = validValue(av.value, av.type, []);
+      }
     }
     else {
       av.is_valid_attribute = false;
@@ -1391,12 +1396,15 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (role === 'none') this.is_presentation = true;
       if (role === 'presentation') this.is_presentation = true;
 
+      if (role_info.roleType.indexOf('range') >= 0) {
+        this.is_range = true;
+      }
+
       if (role_info.roleType.indexOf('widget') >= 0 ||
           role_info.roleType.indexOf('window') >= 0) {
 
         this.is_interactive = true;
         this.is_widget = true;
-        this.has_range = role_info.hasRange;
         this.is_tab_stoppable = true;
         if (role_info.container && role_info.container.length) {
           this.is_tab_stoppable = false;
@@ -1488,6 +1496,142 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   return this;
 
 };
+
+/**
+ * @method getAttributeValue
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Get attribute value, if not defined by author returns default value, if no default
+ *        value returns empty string
+ *
+ * @param  {String} attr          - ARIA Attribute to get value
+ *
+ * @return {String or Number} - Value of attribute based on the value type of the attribute,
+ *                              if not defined return empty string
+ }
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.getAttributeValue = function (attr) {
+
+
+  function valueAsPropertyType(value) {
+    var v;
+    switch (attr_info.type) {
+      case 'decimal':
+        v = parseFloat(value);
+        if (!isNaN(v)) {
+          value = v;
+        }
+        break;
+
+      case 'number':
+      case 'integer':
+        v = parseInt(value, 10);
+        if (!isNaN(v)) {
+          value = v;
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    return value;
+  }
+
+  var value = "";
+  var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
+
+  if (attr_info) {
+    var value = this.node.getAttribute(attr);
+    if (typeof value === 'string' && value.length) {
+      value = valueAsPropertyType(value);
+    } else {
+      // Support IDL interface for properties and states in ARIA 1.2
+      if (attr_info.idlAttribute) {
+        value = this.node[attr_info.idlAttribute];
+      }
+      if (typeof value === 'string' && value.length) {
+        value = valueAsPropertyType(value);
+      } else {
+        value = valueAsPropertyType(attr_info.defaultValue);
+      }
+    }
+  }
+
+  return value;
+}
+
+/**
+ * @method isAttributeValueValid
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Checkes the value based on the property information information
+ *        for a valid value
+ *
+ * @param  {String}           attr - ARIA Attribute to validate
+ * @param  {String or Number} value - Value to validate
+ *
+ * @return {Boolean} true if allowed value and type, otherwise false
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr, value) {
+
+  var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
+
+  var flag = false;
+
+  switch (attr_info.type) {
+
+  case 'boolean':
+    flag = typeof value === 'boolean';
+    break;
+
+  case 'number':
+  case 'decimal':
+    flag = typeof value === 'number';
+    break;
+
+  case 'idref':
+  case 'idrefs':
+  case 'string':
+    flag = (typeof value === 'string') && (value.length > 0);
+    break;
+
+  case 'integer':
+  case 'positive':
+    if ((typeof value === 'number') &&
+        ((value > 0) ||
+         (attr_info.type.allowUndeterminedValue && (v === -1 || v === 0)))) {
+      flag = true;
+    }
+    break;
+
+  case 'tristate':
+  case 'nmtoken':
+    flag = attr_info.values.indexOf(value.toLowerCase()) >= 0;
+    break;
+
+  case 'nmtokens':
+    var values = value.split(' ');
+    flag = true;
+    for (var i = 0; i < values.length && flag; i += 1) {
+      flag = flag && (attr_info.values.indexOf(values[i]) >= 0);
+    }
+    break;
+
+  default:
+    break;
+
+  }
+
+//  console.log('[valid][' + attr + '][value]: ' + value + ' (' + (typeof value) + ')' + ' [flag]: ' + flag);
+
+  return flag;
+
+}
 
 /**
  * @method addOwnedby

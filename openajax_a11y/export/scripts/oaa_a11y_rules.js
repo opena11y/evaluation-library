@@ -7608,7 +7608,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
      WIDGET_10: {
             ID:                    'Widget 10',
-            DEFINITION:            'Range widget %s have value between minimum and maximum values.',
+            DEFINITION:            'Range widget %s have value between minimum and maximum values, or have an indeterminate state.',
             SUMMARY:               'Value in range',
             TARGET_RESOURCES_DESC: 'Range widgets',
             RULE_RESULT_MESSAGES: {
@@ -7619,15 +7619,14 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               NOT_APPLICABLE:  'No @range@ widgets on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:    '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
-              ELEMENT_PASS_2:    '@%1@ widget value of %2 is in the range %3 and %4.',
-              ELEMENT_PASS_3:    '@%1@ widget has the range %3 and %4, and by not including the @aria-valuenow@ attribute the value of the progress-bar is considered indeterminate.',
+              ELEMENT_PASS_1:  '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
+              ELEMENT_PASS_2:  '@%1@ widget value of %2 is in the range %3 and %4.',
+              ELEMENT_PASS_3:  '@%1@ widget has no @aria-valuenow@ attribute and the value is considered indeterminate.',
               ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is in range.',
               ELEMENT_FAIL_2:  'Update the numeric values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) so the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
-              ELEMENT_FAIL_3:  'For progress bar update the numeric values or add @aria-valuemin@ (%2) and @aria-valuemax@ (%3) attributes and when state of progress is known use the @aria-valuenow@ attribute value to communicate the current state of progress.',
-              ELEMENT_FAIL_4:  'Update or create @%1@ attribute to be a numeric value.',
-              ELEMENT_FAIL_5:  'Update or create @%1@ attributes to be a numeric values.',
-              ELEMENT_HIDDEN_1:  'Widget range values were not tested becasue the %1 range widget is hidden from assistive technologies.'
+              ELEMENT_FAIL_3:  'Update the @%1@ widget values for @aria-valuemin@ ("%2") and/or @aria-valuemax@ ("%3") attributes to be valid numbers.',
+              ELEMENT_FAIL_4:  '@%1@ widget is missing or has an invalid value for @aria-valuenow@.',
+              ELEMENT_HIDDEN_1:  'Widget range values were not tested becasue the @%1@ range widget is hidden from assistive technologies.'
             },
             PURPOSE: [
               'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
@@ -7639,8 +7638,24 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#meter'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#progress'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#scollbar'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#slider'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#spinbutton'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -7651,16 +7666,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'ARIA Authoring Practices',
-                url:   'https://w3c.github.io/aria-practices/'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'MDN Web Docs: ARIA ',
-                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Web Fundamentals: Introduction to ARIA',
-                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+                title: 'ARIA Authoring Practices: Using aria-valuemin, aria-valuemx and aria-valuenow',
+                url:   'https://w3c.github.io/aria-practices/#range_related_properties'
               }
             ]
         },
@@ -17091,16 +17098,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
         if (de.owned_by.length === 1) {
-          console.log('[WIDGET 9]');
           we = de.owned_by[0];
-          console.log('[WIDGET 9][PASS]' + we + ' [dom_element]: ' + de);
           rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
         } else {
           if (de.owned_by.length > 1) {
-            console.log('[WIDGET 9]');
             for (var j = 0; j < de.owned_by.length; j += 1) {
               we = de.owned_by[j];
-              console.log('[WIDGET 9][' + j + '][fail]: ' + we + ' [dom_element]: ' + de);
               rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
             } // end loop
           }
@@ -17123,107 +17126,74 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role="slider"]','[role="progress"]','[role="scrollbar"]','[role="spinbutton"]'],
+  target_resources    : ['[role="meter"]',
+                         '[role="progress"]',
+                         '[role="scrollbar"]',
+                         '[role="slider"]',
+                         '[role="spinbutton"]'],
   primary_property    : '',
   resource_properties : ['aria-valuemin', 'aria-valuenow', 'aria-valuemax'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-     function getNotNumbersString() {
-
-       var str = "";
-
-       if (isNaN(min)) str += 'aria-valuemin';
-
-       if (isNaN(max)) {
-         if (str.length > 0) str += ", ";
-         str += 'aria-valuemax';
-       }
-
-       if (isNaN(value)) {
-         if (str.length > 0) str += ", ";
-         str += 'aria-valuenow';
-       }
-
-       return str;
-     }
-
-     function getNumberCount() {
-
-       var count = 0;
-
-       if (!isNaN(min)) count++;
-       if (!isNaN(max)) count++;
-       if (!isNaN(value)) count++;
-
-       return count;
-     }
-
-     function hasMaxMin() {
-
-       var count = 0;
-
-       if (!isNaN(min)) count++;
-       if (!isNaN(max)) count++;
-
-       return count === 2;
-     }
-
      var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
 
-     if (widget_elements && widget_elements) {
+     if (dom_elements && dom_elements) {
 
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
+       for (var i = 0; i < dom_elements_len; i++) {
+         var de = dom_elements[i];
          var style = de.computed_style;
 
-         if (de.has_range) {
+         if (de.is_range) {
 
-           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 
-             var valuetext = de.node.getAttribute('aria-valuetext');
-             var min       = parseInt(de.node.getAttribute('aria-valuemin'), 10);
-             var max       = parseInt(de.node.getAttribute('aria-valuemax'), 10);
-             var value     = parseInt(de.node.getAttribute('aria-valuenow'), 10);
-             var number_count = getNumberCount();
-             var has_max_min  = hasMaxMin();
+              var is_value_required = !('progressbar spinbutton'.indexOf(de.role) >= 0);
 
-             if (typeof valuetext === 'string' && (valuetext.length > 0)) {
-               rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, valuetext]);
-             }
-             else {
-               if (number_count === 3 || (de.role === 'progressbar' && has_max_min)) {
-                 if (min < max) {
-                   if ((min <= value) && (value <= max)) rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_2', [we, value, min, max]);
-                   else if (de.role === 'progressbar' && has_max_min)  rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_3', [min, max]);
-                   else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [value, min, max]);
-                 }
-                 else {
-                   rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_2', [min, max]);
-                 }
-               }
-               else {
+              var valuetext          = de.getAttributeValue('aria-valuetext');
+              var is_valuetext_valid = de.isAttributeValueValid('aria-valuetext', valuetext);
 
-                  if (de.role === 'progressbar' && !has_max_min) {
-                    rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_3', [value, min, max]);
+              var min          = de.getAttributeValue('aria-valuemin');
+              var is_min_valid = de.isAttributeValueValid('aria-valuemin', min);
+
+              var max          = de.getAttributeValue('aria-valuemax');
+              var is_max_valid = de.isAttributeValueValid('aria-valuemax', max);
+
+              var value          = de.getAttributeValue('aria-valuenow');
+              var is_value_valid = de.isAttributeValueValid('aria-valuenow', value);
+
+              if (is_valuetext_valid) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de, valuetext]);
+              } else {
+                if (is_value_valid) {
+                  if (is_max_valid && is_min_valid) {
+                    if (min < max) {
+                      if ((min <= value) && (value <= max)) {
+                        rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de, value, min, max]);
+                      } else {
+                        rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [value, min, max]);
+                      }
+                    } else {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
+                    }
+                  } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de, min, max]);
                   }
-                  else {
-                    var not_numbers_string = getNotNumbersString();
-
-                   if (number_count === 1) rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_4', [not_numbers_string]);
-                   else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_5', [not_numbers_string]);
-                 }
-               }
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [we.toString()]);
-           }
+                } else {
+                  if (is_value_required) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de]);
+                  } else {
+                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de]);
+                  }
+                }
+              }
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de]);
+            }
          }
        } // end loop
      }

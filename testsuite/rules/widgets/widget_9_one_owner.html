@@ -26,7 +26,10 @@
 
         <div role="listbox" aria-owns="ID_OPTION_2"></div>
 
-        <div role="option" id="ID_OPTION_2" class="WIDGET_9_FAIL">option fail</div>
+        <div role="option" id="ID_OPTION_2" class="WIDGET_9_FAIL">
+          <span class="WIDGET_9_FAIL"></span>
+          option fail
+        </div>
 
         <h2>menu menuitems pass</h2>
         <div role="menu" aria-owns="ID_MITEM_1 ID_MITEMCBOX_1 ID_MITEMRADIO_1">
@@ -36,12 +39,26 @@
         </div>
 
         <h2>menu menuitems fail</h2>
-        <div role="menu" aria-owns="ID_MITEM_2 ID_MITEMCBOX_2 ID_MITEMRADIO_2"></menu>        
+        <div role="menu" aria-owns="ID_MITEM_2 ID_MITEMCBOX_2 ID_MITEMRADIO_2"></div>
 
-        <div role="menu" aria-owns="ID_MITEM_2 ID_MITEMCBOX_2 ID_MITEMRADIO_2">
-          <div id="ID_MITEM_2" role="menuitem" class="WIDGET_9_FAIL">menuitem fail</div>
-          <div id="ID_MITEMCBOX_2" role="menuitemcheckbox" class="WIDGET_9_FAIL">menuitemcheckbox fail</div>
-          <div id="ID_MITEMRADIO_2" role="menuitemradio" class="WIDGET_9_FAIL">menuitemradio fail</div>
+        <div role="menu" aria-owns="ID_MITEM_2 ID_MITEMCBOX_2 ID_MITEMRADIO_2"></div>
+
+        <div role="menu">
+          <div id="ID_MITEM_2" role="menuitem" class="WIDGET_9_FAIL">
+            <span class="WIDGET_9_FAIL"></span>
+            <span class="WIDGET_9_FAIL"></span>
+            menuitem fail
+          </div>
+          <div id="ID_MITEMCBOX_2" role="menuitemcheckbox" class="WIDGET_9_FAIL">
+            <span class="WIDGET_9_FAIL"></span>
+            <span class="WIDGET_9_FAIL"></span>
+            menuitemcheckbox fail
+          </div>
+          <div id="ID_MITEMRADIO_2" role="menuitemradio" class="WIDGET_9_FAIL">
+            <span class="WIDGET_9_FAIL"></span>
+            <span class="WIDGET_9_FAIL"></span>
+            menuitemradio fail
+          </div>
         </div>
 
         <h2>tree treeitem pass</h2>
@@ -54,19 +71,34 @@
 
         <div role="tree" aria-owns="ID_TREEITEM_2"></div>
 
-        <div role="treeitem" id="ID_TREEITEM_2" class="WIDGET_9_FAIL">treeitem fail</div>
+        <div role="treeitem" id="ID_TREEITEM_2" class="WIDGET_9_FAIL">
+          <span class="WIDGET_9_FAIL"></span>
+          treeitem fail
+        </div>
 
         <h2>grid row pass</h2>
-        <div role="grid" aria-owns="ID_ROW_1" ></div>
+        <div role="grid" aria-owns="ID_ROW_1" aria-label="grid 1"></div>
 
-        <div id="ID_ROW_1" role="row" class="WIDGET_9_PASS">row pass
+        <div id="ID_ROW_1" role="row" class="WIDGET_9_PASS">row pass</div>
 
         <h2>grid row fail</h2>
-        <div role="grid" aria-owns="ID_ROW_2"></div>
+        <div role="grid" aria-owns="ID_ROW_2"  aria-label="grid 2"></div>
 
-        <div role="grid" aria-owns="ID_ROW_2"></div>
+        <div role="grid" aria-owns="ID_ROW_2" aria-label="grid 3"></div>
 
-        <div id="ID_ROW_2" role="row" class="WIDGET_9_FAIL">row fail
+        <div id="ID_ROW_2" role="row" class="WIDGET_9_FAIL">
+          <span class="WIDGET_9_FAIL">row fail</span>
+        </div>
+
+        <div role="grid" aria-owns="ID_ROW_3" aria-label="grid 4">grid 4 aria-owns</div>
+
+        <div role="grid" aria-label="grid 5">
+          <div role="row" class="WIDGET_9_FAIL" id="ID_ROW_3">
+          <span class="WIDGET_9_FAIL">row fail</span>
+          grid 5 row
+          </div>
+        </div>
+
 
       </main>
       

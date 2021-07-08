@@ -1090,7 +1090,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "type": "idref",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-atomic": {
             "propType": "property",
@@ -1100,7 +1101,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaAtomic"
         },
         "aria-autocomplete": {
             "propType": "property",
@@ -1112,7 +1114,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "none"
             ],
             "defaultValue": "none",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaAutoComplete"
         },
         "aria-busy": {
             "propType": "state",
@@ -1122,7 +1125,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaBusy"
         },
         "aria-checked": {
             "propType": "state",
@@ -1134,7 +1138,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaChecked"
         },
         "aria-colcount": {
             "propType": "property",
@@ -1142,7 +1147,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaColCount"
         },
         "aria-colindex": {
             "propType": "property",
@@ -1150,7 +1156,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaColIndex"
         },
         "aria-colspan": {
             "propType": "property",
@@ -1158,14 +1165,16 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaColSpan"
         },
         "aria-controls": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-current": {
             "propType": "state",
@@ -1180,21 +1189,24 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "false"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaCurrent"
         },
         "aria-describedby": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-details": {
             "propType": "property",
             "type": "idref",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-disabled": {
             "propType": "state",
@@ -1204,7 +1216,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaDisabled"
         },
         "aria-dropeffect": {
             "propType": "property",
@@ -1218,14 +1231,16 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "popup"
             ],
             "defaultValue": "none",
-            "deprecated": true
+            "deprecated": true,
+            "idlAttribute": ""
         },
         "aria-errormessage": {
             "propType": "property",
             "type": "idref",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-expanded": {
             "propType": "state",
@@ -1236,14 +1251,16 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaExpanded"
         },
         "aria-flowto": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-grabbed": {
             "propType": "state",
@@ -1254,7 +1271,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": true
+            "deprecated": true,
+            "idlAttribute": ""
         },
         "aria-haspopup": {
             "propType": "property",
@@ -1269,7 +1287,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "dialog"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaHasPopup"
         },
         "aria-hidden": {
             "propType": "state",
@@ -1280,7 +1299,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaHidden"
         },
         "aria-invalid": {
             "propType": "state",
@@ -1292,28 +1312,32 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaInvalid"
         },
         "aria-keyshortcuts": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaKeyShortcuts"
         },
         "aria-label": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaLabel"
         },
         "aria-labelledby": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-level": {
             "propType": "property",
@@ -1321,7 +1345,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaLevel"
         },
         "aria-live": {
             "propType": "property",
@@ -1332,7 +1357,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "polite"
             ],
             "defaultValue": "off",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaLive"
         },
         "aria-modal": {
             "propType": "property",
@@ -1342,7 +1368,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaModal"
         },
         "aria-multiline": {
             "propType": "property",
@@ -1352,7 +1379,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaMultiLine"
         },
         "aria-multiselectable": {
             "propType": "property",
@@ -1362,7 +1390,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaMultiSelectable"
         },
         "aria-orientation": {
             "propType": "property",
@@ -1373,21 +1402,24 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "vertical"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaOrientation"
         },
         "aria-owns": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-placeholder": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaPlaceholder"
         },
         "aria-posinset": {
             "propType": "property",
@@ -1395,7 +1427,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaPosInSet"
         },
         "aria-pressed": {
             "propType": "state",
@@ -1407,7 +1440,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaPressed"
         },
         "aria-readonly": {
             "propType": "property",
@@ -1417,7 +1451,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaReadOnly"
         },
         "aria-relevant": {
             "propType": "property",
@@ -1430,7 +1465,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "text"
             ],
             "defaultValue": "additions",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-required": {
             "propType": "property",
@@ -1440,14 +1476,16 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRequired"
         },
         "aria-roledescription": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRoleDescription"
         },
         "aria-rowcount": {
             "propType": "property",
@@ -1455,7 +1493,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRowCount"
         },
         "aria-rowindex": {
             "propType": "property",
@@ -1463,7 +1502,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRowIndex"
         },
         "aria-rowspan": {
             "propType": "property",
@@ -1471,7 +1511,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRowSpan"
         },
         "aria-selected": {
             "propType": "state",
@@ -1482,7 +1523,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaSelected"
         },
         "aria-setsize": {
             "propType": "property",
@@ -1490,7 +1532,8 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaSetSize"
         },
         "aria-sort": {
             "propType": "property",
@@ -1502,35 +1545,40 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "other"
             ],
             "defaultValue": "none",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaSort"
         },
         "aria-valuemax": {
             "propType": "property",
             "type": "number",
             "values": [],
-            "defaultValue": "",
-            "deprecated": false
+            "defaultValue": "100",
+            "deprecated": false,
+            "idlAttribute": "ariaValueMax"
         },
         "aria-valuemin": {
             "propType": "property",
             "type": "number",
             "values": [],
-            "defaultValue": "",
-            "deprecated": false
+            "defaultValue": "0",
+            "deprecated": false,
+            "idlAttribute": "ariaValueMin"
         },
         "aria-valuenow": {
             "propType": "property",
             "type": "number",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaValueNow"
         },
         "aria-valuetext": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaValueText"
         }
     },
         /*
@@ -1596,6 +1644,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -1638,6 +1687,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -1683,6 +1733,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-haspopup",
                 "aria-invalid"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -1729,6 +1780,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -1770,6 +1822,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -1811,6 +1864,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -1857,6 +1911,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-expanded",
                 "aria-pressed"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -1896,6 +1951,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -1951,6 +2007,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-rowindex",
                 "aria-rowspan"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
@@ -2001,6 +2058,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -2042,6 +2100,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2086,6 +2145,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "deprecatedProps": [],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -2137,6 +2197,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-controls",
                 "aria-expanded"
@@ -2181,6 +2242,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2222,6 +2284,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2266,6 +2329,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-activedescendant",
                 "aria-disabled"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2307,6 +2371,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2348,6 +2413,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2387,6 +2453,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2429,6 +2496,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -2470,6 +2538,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2511,6 +2580,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2550,6 +2620,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2591,6 +2662,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2634,6 +2706,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2675,6 +2748,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -2713,6 +2787,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2761,6 +2836,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-multiselectable",
                 "aria-readonly"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -2817,6 +2893,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-required",
                 "aria-selected"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
@@ -2863,6 +2940,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-activedescendant",
                 "aria-disabled"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -2904,6 +2982,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -2945,6 +3024,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -2984,6 +3064,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3023,6 +3104,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3064,6 +3146,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3108,6 +3191,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-expanded",
                 "aria-haspopup"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -3149,6 +3233,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3202,6 +3287,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -3253,6 +3339,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3297,6 +3384,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3338,6 +3426,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3379,6 +3468,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -3420,6 +3510,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3464,6 +3555,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -3471,7 +3563,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": true,
             "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "structure",
+            "roleType": "range",
             "isAbstract": false
         },
         "menu": {
@@ -3506,6 +3598,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3553,6 +3646,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3606,6 +3700,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -3653,6 +3748,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -3703,6 +3799,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -3748,6 +3845,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3789,6 +3887,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3837,6 +3936,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-selected"
             ],
@@ -3881,6 +3981,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3920,6 +4021,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -3965,6 +4067,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -3972,7 +4075,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": true,
             "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "structure widget",
+            "roleType": "range widget",
             "isAbstract": false
         },
         "radio": {
@@ -4011,6 +4114,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -4060,6 +4164,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -4112,6 +4217,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuenow",
                 "aria-valuetext"
             ],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4153,6 +4259,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -4209,6 +4316,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-setsize",
                 "aria-selected"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
@@ -4260,6 +4368,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4314,6 +4423,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-expanded",
                 "aria-sort"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -4366,6 +4476,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuemax",
                 "aria-valuemin"
             ],
+            "hasRange": true,
             "requiredProps": [
                 "aria-controls",
                 "aria-valuenow"
@@ -4376,7 +4487,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": true,
             "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "structure widget",
+            "roleType": "range widget",
             "isAbstract": false
         },
         "search": {
@@ -4410,6 +4521,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4452,6 +4564,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             ],
             "deprecatedProps": [],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -4493,6 +4606,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4534,6 +4648,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
@@ -4575,6 +4690,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4625,6 +4741,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuemin",
                 "aria-valuetext"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4675,6 +4792,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuemax",
                 "aria-valuemin"
             ],
+            "hasRange": true,
             "requiredProps": [
                 "aria-valuenow"
             ],
@@ -4684,7 +4802,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": true,
             "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "widget structure",
+            "roleType": "widget range",
             "isAbstract": false
         },
         "spinbutton": {
@@ -4731,6 +4849,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-valuenow",
                 "aria-valuetext"
             ],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -4738,7 +4857,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
             "childrenPresentational": false,
             "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "widget structure",
+            "roleType": "widget range",
             "isAbstract": false
         },
         "status": {
@@ -4772,6 +4891,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4811,6 +4931,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4852,6 +4973,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4891,6 +5013,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4930,6 +5053,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -4972,6 +5096,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-haspopup"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -5024,6 +5149,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-selected",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -5072,6 +5198,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-colcount",
                 "aria-rowcount"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -5121,6 +5248,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-multiselectable",
                 "aria-orientation"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5164,6 +5292,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -5205,6 +5334,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5257,6 +5387,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -5298,6 +5429,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5339,6 +5471,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5380,6 +5513,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5421,6 +5555,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -5468,6 +5603,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-multiselectable",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -5516,6 +5652,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-haspopup"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
@@ -5568,6 +5705,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-expanded",
                 "aria-haspopup"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
@@ -5612,6 +5750,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5653,6 +5792,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -5692,6 +5832,7 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
@@ -14201,10 +14342,15 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     if (property_info) {
       av.type = property_info.type;
-      if (property_info.values) av.tokens = getTokens(property_info.values);
+      if (property_info.values && property_info.values.length) {
+        av.tokens = getTokens(property_info.values);
+      }
 
-      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
-      else av.is_value_valid = validValue(av.value, av.type, []);
+      if (typeof property_info.values !== 'undefined') {
+        av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
+      } else {
+        av.is_value_valid = validValue(av.value, av.type, []);
+      }
     }
     else {
       av.is_valid_attribute = false;
@@ -14548,12 +14694,15 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (role === 'none') this.is_presentation = true;
       if (role === 'presentation') this.is_presentation = true;
 
+      if (role_info.roleType.indexOf('range') >= 0) {
+        this.is_range = true;
+      }
+
       if (role_info.roleType.indexOf('widget') >= 0 ||
           role_info.roleType.indexOf('window') >= 0) {
 
         this.is_interactive = true;
         this.is_widget = true;
-        this.has_range = role_info.hasRange;
         this.is_tab_stoppable = true;
         if (role_info.container && role_info.container.length) {
           this.is_tab_stoppable = false;
@@ -14645,6 +14794,142 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   return this;
 
 };
+
+/**
+ * @method getAttributeValue
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Get attribute value, if not defined by author returns default value, if no default
+ *        value returns empty string
+ *
+ * @param  {String} attr          - ARIA Attribute to get value
+ *
+ * @return {String or Number} - Value of attribute based on the value type of the attribute,
+ *                              if not defined return empty string
+ }
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.getAttributeValue = function (attr) {
+
+
+  function valueAsPropertyType(value) {
+    var v;
+    switch (attr_info.type) {
+      case 'decimal':
+        v = parseFloat(value);
+        if (!isNaN(v)) {
+          value = v;
+        }
+        break;
+
+      case 'number':
+      case 'integer':
+        v = parseInt(value, 10);
+        if (!isNaN(v)) {
+          value = v;
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    return value;
+  }
+
+  var value = "";
+  var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
+
+  if (attr_info) {
+    var value = this.node.getAttribute(attr);
+    if (typeof value === 'string' && value.length) {
+      value = valueAsPropertyType(value);
+    } else {
+      // Support IDL interface for properties and states in ARIA 1.2
+      if (attr_info.idlAttribute) {
+        value = this.node[attr_info.idlAttribute];
+      }
+      if (typeof value === 'string' && value.length) {
+        value = valueAsPropertyType(value);
+      } else {
+        value = valueAsPropertyType(attr_info.defaultValue);
+      }
+    }
+  }
+
+  return value;
+}
+
+/**
+ * @method isAttributeValueValid
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Checkes the value based on the property information information
+ *        for a valid value
+ *
+ * @param  {String}           attr - ARIA Attribute to validate
+ * @param  {String or Number} value - Value to validate
+ *
+ * @return {Boolean} true if allowed value and type, otherwise false
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr, value) {
+
+  var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
+
+  var flag = false;
+
+  switch (attr_info.type) {
+
+  case 'boolean':
+    flag = typeof value === 'boolean';
+    break;
+
+  case 'number':
+  case 'decimal':
+    flag = typeof value === 'number';
+    break;
+
+  case 'idref':
+  case 'idrefs':
+  case 'string':
+    flag = (typeof value === 'string') && (value.length > 0);
+    break;
+
+  case 'integer':
+  case 'positive':
+    if ((typeof value === 'number') &&
+        ((value > 0) ||
+         (attr_info.type.allowUndeterminedValue && (v === -1 || v === 0)))) {
+      flag = true;
+    }
+    break;
+
+  case 'tristate':
+  case 'nmtoken':
+    flag = attr_info.values.indexOf(value.toLowerCase()) >= 0;
+    break;
+
+  case 'nmtokens':
+    var values = value.split(' ');
+    flag = true;
+    for (var i = 0; i < values.length && flag; i += 1) {
+      flag = flag && (attr_info.values.indexOf(values[i]) >= 0);
+    }
+    break;
+
+  default:
+    break;
+
+  }
+
+//  console.log('[valid][' + attr + '][value]: ' + value + ' (' + (typeof value) + ')' + ' [flag]: ' + flag);
+
+  return flag;
+
+}
 
 /**
  * @method addOwnedby
@@ -47614,7 +47899,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
      WIDGET_10: {
             ID:                    'Widget 10',
-            DEFINITION:            'Range widget %s have value between minimum and maximum values.',
+            DEFINITION:            'Range widget %s have value between minimum and maximum values, or have an indeterminate state.',
             SUMMARY:               'Value in range',
             TARGET_RESOURCES_DESC: 'Range widgets',
             RULE_RESULT_MESSAGES: {
@@ -47625,15 +47910,14 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               NOT_APPLICABLE:  'No @range@ widgets on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:    '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
-              ELEMENT_PASS_2:    '@%1@ widget value of %2 is in the range %3 and %4.',
-              ELEMENT_PASS_3:    '@%1@ widget has the range %3 and %4, and by not including the @aria-valuenow@ attribute the value of the progress-bar is considered indeterminate.',
+              ELEMENT_PASS_1:  '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
+              ELEMENT_PASS_2:  '@%1@ widget value of %2 is in the range %3 and %4.',
+              ELEMENT_PASS_3:  '@%1@ widget has no @aria-valuenow@ attribute and the value is considered indeterminate.',
               ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is in range.',
               ELEMENT_FAIL_2:  'Update the numeric values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) so the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
-              ELEMENT_FAIL_3:  'For progress bar update the numeric values or add @aria-valuemin@ (%2) and @aria-valuemax@ (%3) attributes and when state of progress is known use the @aria-valuenow@ attribute value to communicate the current state of progress.',
-              ELEMENT_FAIL_4:  'Update or create @%1@ attribute to be a numeric value.',
-              ELEMENT_FAIL_5:  'Update or create @%1@ attributes to be a numeric values.',
-              ELEMENT_HIDDEN_1:  'Widget range values were not tested becasue the %1 range widget is hidden from assistive technologies.'
+              ELEMENT_FAIL_3:  'Update the @%1@ widget values for @aria-valuemin@ ("%2") and/or @aria-valuemax@ ("%3") attributes to be valid numbers.',
+              ELEMENT_FAIL_4:  '@%1@ widget is missing or has an invalid value for @aria-valuenow@.',
+              ELEMENT_HIDDEN_1:  'Widget range values were not tested becasue the @%1@ range widget is hidden from assistive technologies.'
             },
             PURPOSE: [
               'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
@@ -47645,8 +47929,24 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#meter'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#progress'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#scollbar'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#slider'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#spinbutton'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -47657,16 +47957,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'ARIA Authoring Practices',
-                url:   'https://w3c.github.io/aria-practices/'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'MDN Web Docs: ARIA ',
-                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Web Fundamentals: Introduction to ARIA',
-                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+                title: 'ARIA Authoring Practices: Using aria-valuemin, aria-valuemx and aria-valuenow',
+                url:   'https://w3c.github.io/aria-practices/#range_related_properties'
               }
             ]
         },
@@ -57097,16 +57389,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
         if (de.owned_by.length === 1) {
-          console.log('[WIDGET 9]');
           we = de.owned_by[0];
-          console.log('[WIDGET 9][PASS]' + we + ' [dom_element]: ' + de);
           rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
         } else {
           if (de.owned_by.length > 1) {
-            console.log('[WIDGET 9]');
             for (var j = 0; j < de.owned_by.length; j += 1) {
               we = de.owned_by[j];
-              console.log('[WIDGET 9][' + j + '][fail]: ' + we + ' [dom_element]: ' + de);
               rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
             } // end loop
           }
@@ -57129,107 +57417,74 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role="slider"]','[role="progress"]','[role="scrollbar"]','[role="spinbutton"]'],
+  target_resources    : ['[role="meter"]',
+                         '[role="progress"]',
+                         '[role="scrollbar"]',
+                         '[role="slider"]',
+                         '[role="spinbutton"]'],
   primary_property    : '',
   resource_properties : ['aria-valuemin', 'aria-valuenow', 'aria-valuemax'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-     function getNotNumbersString() {
-
-       var str = "";
-
-       if (isNaN(min)) str += 'aria-valuemin';
-
-       if (isNaN(max)) {
-         if (str.length > 0) str += ", ";
-         str += 'aria-valuemax';
-       }
-
-       if (isNaN(value)) {
-         if (str.length > 0) str += ", ";
-         str += 'aria-valuenow';
-       }
-
-       return str;
-     }
-
-     function getNumberCount() {
-
-       var count = 0;
-
-       if (!isNaN(min)) count++;
-       if (!isNaN(max)) count++;
-       if (!isNaN(value)) count++;
-
-       return count;
-     }
-
-     function hasMaxMin() {
-
-       var count = 0;
-
-       if (!isNaN(min)) count++;
-       if (!isNaN(max)) count++;
-
-       return count === 2;
-     }
-
      var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
 
-     if (widget_elements && widget_elements) {
+     if (dom_elements && dom_elements) {
 
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
+       for (var i = 0; i < dom_elements_len; i++) {
+         var de = dom_elements[i];
          var style = de.computed_style;
 
-         if (de.has_range) {
+         if (de.is_range) {
 
-           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 
-             var valuetext = de.node.getAttribute('aria-valuetext');
-             var min       = parseInt(de.node.getAttribute('aria-valuemin'), 10);
-             var max       = parseInt(de.node.getAttribute('aria-valuemax'), 10);
-             var value     = parseInt(de.node.getAttribute('aria-valuenow'), 10);
-             var number_count = getNumberCount();
-             var has_max_min  = hasMaxMin();
+              var is_value_required = !('progressbar spinbutton'.indexOf(de.role) >= 0);
 
-             if (typeof valuetext === 'string' && (valuetext.length > 0)) {
-               rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, valuetext]);
-             }
-             else {
-               if (number_count === 3 || (de.role === 'progressbar' && has_max_min)) {
-                 if (min < max) {
-                   if ((min <= value) && (value <= max)) rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_2', [we, value, min, max]);
-                   else if (de.role === 'progressbar' && has_max_min)  rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_3', [min, max]);
-                   else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [value, min, max]);
-                 }
-                 else {
-                   rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_2', [min, max]);
-                 }
-               }
-               else {
+              var valuetext          = de.getAttributeValue('aria-valuetext');
+              var is_valuetext_valid = de.isAttributeValueValid('aria-valuetext', valuetext);
 
-                  if (de.role === 'progressbar' && !has_max_min) {
-                    rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_3', [value, min, max]);
+              var min          = de.getAttributeValue('aria-valuemin');
+              var is_min_valid = de.isAttributeValueValid('aria-valuemin', min);
+
+              var max          = de.getAttributeValue('aria-valuemax');
+              var is_max_valid = de.isAttributeValueValid('aria-valuemax', max);
+
+              var value          = de.getAttributeValue('aria-valuenow');
+              var is_value_valid = de.isAttributeValueValid('aria-valuenow', value);
+
+              if (is_valuetext_valid) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de, valuetext]);
+              } else {
+                if (is_value_valid) {
+                  if (is_max_valid && is_min_valid) {
+                    if (min < max) {
+                      if ((min <= value) && (value <= max)) {
+                        rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de, value, min, max]);
+                      } else {
+                        rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [value, min, max]);
+                      }
+                    } else {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
+                    }
+                  } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de, min, max]);
                   }
-                  else {
-                    var not_numbers_string = getNotNumbersString();
-
-                   if (number_count === 1) rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_4', [not_numbers_string]);
-                   else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_5', [not_numbers_string]);
-                 }
-               }
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [we.toString()]);
-           }
+                } else {
+                  if (is_value_required) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de]);
+                  } else {
+                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de]);
+                  }
+                }
+              }
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de]);
+            }
          }
        } // end loop
      }

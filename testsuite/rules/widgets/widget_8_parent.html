@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>WIDGET 8: Widgets must have parent</title>
+    <title>WIDGET 8: Widgets must have required parent (e.g. context) roles</title>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -24,13 +24,38 @@
           <div role="menuitemradio" class="WIDGET_8_PASS">menuitemradio pass</div>
         </div>
 
+        <div role="menu" aria-owns="ID_CONTEXT_MENU_1 ID_CONTEXT_MENU_2 ID_CONTEXT_MENU_3">
+        </div>
+
+        <div role="menuitem" class="WIDGET_8_PASS" id="ID_CONTEXT_MENU_1">menuitem pass</div>
+        <div role="menuitemcheckbox" class="WIDGET_8_PASS"  id="ID_CONTEXT_MENU_2">menuitemcheckbox pass</div>
+        <div role="menuitemradio" class="WIDGET_8_PASS"  id="ID_CONTEXT_MENU_3">menuitemradio pass</div>
+
+        <div role="menu" aria-owns="ID_CONTEXT_MENU_4">
+        </div>
+
+        <div id="ID_CONTEXT_MENU_4">
+          <div role="menuitem" class="WIDGET_8_PASS">menuitem pass</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_PASS">menuitemcheckbox pass</div>
+          <div role="menuitemradio" class="WIDGET_8_PASS">menuitemradio pass</div>
+        </div>
+
         <div hidden role="menu">
           <div role="menuitem" class="WIDGET_8_HIDDEN">menuitem hidden</div>
           <div role="menuitemcheckbox" class="WIDGET_8_HIDDEN">menuitemcheckbox hidden</div>
           <div role="menuitemradio" class="WIDGET_8_HIDDEN">menuitemradio hidden</div>
         </div>
 
-        <div>
+        <div role="list">
+          <div role="menuitem" class="WIDGET_8_FAIL">menuitem fail</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_FAIL">menuitemcheckbox fail</div>
+          <div role="menuitemradio" class="WIDGET_8_FAIL">menuitemradio fail</div>
+        </div>
+
+        <div role="list" aria-owns="ID_CONTEXT_MENU_5">
+        </div>
+
+        <div id="ID_CONTEXT_MENU_5">
           <div role="menuitem" class="WIDGET_8_FAIL">menuitem fail</div>
           <div role="menuitemcheckbox" class="WIDGET_8_FAIL">menuitemcheckbox fail</div>
           <div role="menuitemradio" class="WIDGET_8_FAIL">menuitemradio fail</div>
@@ -38,7 +63,9 @@
 
         <h2>treeitem</h2>
         <div role="tree">
-          <div role="treeitem" class="WIDGET_8_PASS">treeitem pass</div>
+          <div role="group">group pass
+            <div role="treeitem" class="WIDGET_8_PASS">treeitem pass</div>
+          </div>
         </div>
 
         <div role="tree">
@@ -52,7 +79,16 @@
         <h2>row and gridcell</h2>
         <div role="grid">
           <div role="row" class="WIDGET_8_PASS">row pass
-            <div role="gridcell" class="WIDGET_8_PASS">gridcell pass</div>
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell 11 pass</div>
+          </div>
+          <div role="row" class="WIDGET_8_PASS">row pass
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell 21 pass</div>
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell 22 pass</div>
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell 23 pass</div>
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell 24 pass</div>
+          </div>
+          <div role="row" class="WIDGET_8_PASS">row pass
+            <div role="gridcell" class="WIDGET_8_PASS">gridcell 31 pass</div>
           </div>
         </div>
 

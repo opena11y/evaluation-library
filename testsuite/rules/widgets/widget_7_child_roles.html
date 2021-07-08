@@ -21,9 +21,31 @@
           <div role="menuitem"></div>
         </div>
 
+        <div role="menu" class="WIDGET_7_PASS" aria-owns="ID_OWNED_MENU_1">
+          menu pass using <code>aria-owns</code>
+        </div>
+
+        <div id="ID_OWNED_MENU_1">
+          <div role="menuitem">menuitem 1</div>
+        </div>
+
+        <div role="menu" class="WIDGET_7_FAIL" aria-owns="ID_OWNED_MENU_2">
+          menu fail using <code>aria-owns</code> since owned elements not in required child list
+        </div>
+
+        <div id="ID_OWNED_MENU_2">
+          <div role="listitem">listitem 1</div>
+        </div>
+
+        <div role="menu" class="WIDGET_7_PASS" aria-busy="true" >
+          menu pass with <code>aria-busy=true</code>
+        </div>
+
         <div role="menu" hidden class="WIDGET_7_HIDDEN">menu pass
           <div role="menuitem"></div>
         </div>
+
+        <div role="menu" aria-busy="false" class="WIDGET_7_FAIL">menu fail with <code>aria-busy=false</code></div>
 
         <div role="menu" class="WIDGET_7_FAIL">menu fail</div>
 
@@ -31,6 +53,33 @@
         <div role="tree" class="WIDGET_7_PASS">tree pass
           <div role="treeitem"></div>
         </div>
+
+        <div role="tree" class="WIDGET_7_PASS" aria-owns="ID_OWNED_TREE_1">
+          tree pass using <code>aria-owns</code>
+        </div>
+
+        <div id="ID_OWNED_TREE_1">
+          <div role="treeitem">treeitem 1</div>
+        </div>
+
+        <div role="tree" class="WIDGET_7_FAIL" aria-owns="ID_OWNED_TREE_2">
+          tree fail using <code>aria-owns</code> since owned elements not in required child list
+        </div>
+
+        <div id="ID_OWNED_TREE_2">
+          <div role="listitem">listitem 1</div>
+        </div>
+
+        <div role="tree" class="WIDGET_7_PASS" aria-busy="true" >
+          tree pass with <code>aria-busy=true</code>
+        </div>
+
+        <div role="tree" hidden class="WIDGET_7_HIDDEN">tree pass
+          <div role="treeitem"></div>
+        </div>
+
+        <div role="tree" aria-busy="false" class="WIDGET_7_FAIL">tree fail with <code>aria-busy=false</code></div>
+
 
         <div role="tree" hidden class="WIDGET_7_HIDDEN">tree hidden
           <div role="treeitem"></div>
@@ -43,6 +92,29 @@
           <div role="row" class="WIDGET_7_PASS">
             <div role="columnheader"></div>
             <div role="gridcell"></div>
+          </div>
+        </div>
+
+        <div role="grid" class="WIDGET_7_PASS" aria-owns="ID_OWNED_GRID_1">grid pass, using <code>aria-owns</code>
+        </div>
+
+        <div role="row" class="WIDGET_7_PASS" id="ID_OWNED_GRID_1" aria-owns="ID_OWNED_NO_ROLE ID_OWNED_GRID_2 ID_OWNED_GRID_3 ">
+        </div>
+        <div id="ID_OWNED_NO_ROLE"></div>
+        <div role="columnheader" id="ID_OWNED_GRID_2"></div>
+        <div role="gridcell" id="ID_OWNED_GRID_3"></div>
+
+        <div role="grid" class="WIDGET_7_PASS">grid pass with <code>aria-busy=true</code>
+          <div role="row" class="WIDGET_7_PASS" aria-busy="true">
+          </div>
+        </div>
+
+        <div role="grid" class="WIDGET_7_PASS" aria-busy="true">grid pass with <code>aria-busy=true</code>
+        </div>
+
+
+        <div role="grid" class="WIDGET_7_PASS">grid fail, missing required children for <code>row</code>
+          <div role="row" class="WIDGET_7_FAIL" aria-busy="false">
           </div>
         </div>
 

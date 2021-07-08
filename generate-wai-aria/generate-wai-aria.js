@@ -85,9 +85,10 @@ function hasValue(value, elemNode, selector) {
   return false;
 }
 
-function getRoles(dom, roles) {
+function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents) {
 
   let elems = dom.querySelectorAll('section.role');
+
   for (let i = 0; i < elems.length; i += 1) {
     let elem = elems[i];
     let  role = elem.querySelector('h4.role-name code').textContent.trim();
@@ -102,6 +103,7 @@ function getRoles(dom, roles) {
     roles[role].deprecatedProps = [];
 
     roles[role].props = [];
+    roles[role].hasRange = false;
 
     roles[role].requiredProps = [];
 
@@ -111,7 +113,7 @@ function getRoles(dom, roles) {
 
     roles[role].childrenPresentational = false;
 
-    roles[role].requiredContext = [];
+    roles[role].requiredParents = [];
     roles[role].requiredChildren = [];
     roles[role].roleType = getRoleType(elem);
     roles[role].isAbstract = isAbstract(elem);
@@ -171,8 +173,14 @@ function getRoles(dom, roles) {
       }
     }
 
-    roles[role].requiredContext = getListOfValues(dom, '#' + role + ' .role-scope');
+    roles[role].requiredParents = getListOfValues(dom, '#' + role + ' .role-scope');
+    if (roles[role].requiredParents.length > 0) {
+      rolesWithRequiredParents.push(role);
+    }
     roles[role].requiredChildren = getListOfValues(dom, '#' + role + ' .role-mustcontain');
+    if (roles[role].requiredChildren.length > 0) {
+      rolesWithRequiredChildren.push(role);
+    }
 
     roles[role].nameFromContent = hasValue ('content', dom, '#' + role + ' .role-namefrom');
     roles[role].nameProhibited = hasValue ('prohibited', dom, '#' + role + ' .role-namefrom');
@@ -191,7 +199,7 @@ function getRoles(dom, roles) {
 
     let roleTypes = '';
 
-    if (' structure widget window landmark abstact'.indexOf(role) > 0) {
+    if (' structure range widget window landmark abstact'.indexOf(role) > 0) {
       roleTypes = role + ' ';
     } else {
       if (role.length) {
@@ -241,6 +249,10 @@ function getRoles(dom, roles) {
 
     roles[role].roleType = removeDuplicates(abstractRoles);
 
+    if (roles[role].roleType.indexOf('range') >= 0) {
+      roles[role].hasRange = true;
+    }
+
     console.log('[' + role + '][roleType]: ' + roles[role].roleType);
   }
 
@@ -253,8 +265,27 @@ function getRoles(dom, roles) {
 }
 
 
+function getIDLInformation(elemNode, selector) {
+  let dict = {};
+
+  let nodes = elemNode.querySelectorAll(selector);
+  for (i = 0; i < nodes.length; i += 1) {
+    let node = nodes[i];
+    let idl = node.querySelector('td:nth-child(1)');
+    let attr = node.querySelector('td:nth-child(2)');
+
+    if (idl && attr) {
+      console.log('[getIDLInformation][' + attr.textContent + ']: ' + idl.textContent);
+      dict[attr.textContent] = idl.textContent.trim();
+    }
+  }
+  return dict;
+}
+
+
 function getPropValues(elemNode, selector) {
   let values = [];
+
   let defaultValue = '';
 
   let nodes = elemNode.querySelectorAll(selector);
@@ -267,6 +298,7 @@ function getPropValues(elemNode, selector) {
       defaultValue = value1;
     }
   }
+
   return [values, defaultValue];
 }
 
@@ -312,7 +344,11 @@ function isPropDeprecated(elemNode, selector) {
 
 
 function getProps(dom, props) {
+
+  let idlAttributes = getIDLInformation(dom, '#reflection table tr');
+
   let elems = dom.querySelectorAll('section.property h4 code, section.state h4 code');
+
   for (let i = 0; i < elems.length; i += 1) {
     let elem = elems[i];
     let prop = elem.textContent.toLowerCase().trim();
@@ -333,7 +369,17 @@ function getProps(dom, props) {
       props[prop].allowUndeterminedValue = flag;
     }
     [props[prop].values, props[prop].defaultValue] = getPropValues(dom, '#' + prop + ' .value-name');
+
+    if (prop === 'aria-valuemax') {
+      props[prop].defaultValue = '100';
+    }
+
+    if (prop === 'aria-valuemin') {
+      props[prop].defaultValue = '0';
+    }
+
     props[prop].deprecated = isPropDeprecated(dom, ('#desc-' + prop + ' p'));
+    props[prop].idlAttribute = idlAttributes[prop] ? idlAttributes[prop] : '';
 
   }
 }
@@ -345,8 +391,10 @@ function getAriaInformation(dom) {
   ariaInfo.reference = aria12;
   ariaInfo.propertyDataTypes = {};
   ariaInfo.designPatterns = {};
+  ariaInfo.rolesWithRequiredChildren = [];
+  ariaInfo.rolesWithRequiredParent = [];
 
-  getRoles(dom, ariaInfo.designPatterns);
+  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent);
   getProps(dom, ariaInfo.propertyDataTypes);
 
   return ariaInfo

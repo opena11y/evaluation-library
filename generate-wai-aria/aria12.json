@@ -8,7 +8,8 @@
             "type": "idref",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-atomic": {
             "propType": "property",
@@ -18,7 +19,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaAtomic"
         },
         "aria-autocomplete": {
             "propType": "property",
@@ -30,7 +32,8 @@
                 "none"
             ],
             "defaultValue": "none",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaAutoComplete"
         },
         "aria-busy": {
             "propType": "state",
@@ -40,7 +43,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaBusy"
         },
         "aria-checked": {
             "propType": "state",
@@ -52,7 +56,8 @@
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaChecked"
         },
         "aria-colcount": {
             "propType": "property",
@@ -60,7 +65,8 @@
             "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaColCount"
         },
         "aria-colindex": {
             "propType": "property",
@@ -68,7 +74,8 @@
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaColIndex"
         },
         "aria-colspan": {
             "propType": "property",
@@ -76,14 +83,16 @@
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaColSpan"
         },
         "aria-controls": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-current": {
             "propType": "state",
@@ -98,21 +107,24 @@
                 "false"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaCurrent"
         },
         "aria-describedby": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-details": {
             "propType": "property",
             "type": "idref",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-disabled": {
             "propType": "state",
@@ -122,7 +134,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaDisabled"
         },
         "aria-dropeffect": {
             "propType": "property",
@@ -136,14 +149,16 @@
                 "popup"
             ],
             "defaultValue": "none",
-            "deprecated": true
+            "deprecated": true,
+            "idlAttribute": ""
         },
         "aria-errormessage": {
             "propType": "property",
             "type": "idref",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-expanded": {
             "propType": "state",
@@ -154,14 +169,16 @@
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaExpanded"
         },
         "aria-flowto": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-grabbed": {
             "propType": "state",
@@ -172,7 +189,8 @@
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": true
+            "deprecated": true,
+            "idlAttribute": ""
         },
         "aria-haspopup": {
             "propType": "property",
@@ -187,7 +205,8 @@
                 "dialog"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaHasPopup"
         },
         "aria-hidden": {
             "propType": "state",
@@ -198,7 +217,8 @@
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaHidden"
         },
         "aria-invalid": {
             "propType": "state",
@@ -210,28 +230,32 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaInvalid"
         },
         "aria-keyshortcuts": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaKeyShortcuts"
         },
         "aria-label": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaLabel"
         },
         "aria-labelledby": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-level": {
             "propType": "property",
@@ -239,7 +263,8 @@
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaLevel"
         },
         "aria-live": {
             "propType": "property",
@@ -250,7 +275,8 @@
                 "polite"
             ],
             "defaultValue": "off",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaLive"
         },
         "aria-modal": {
             "propType": "property",
@@ -260,7 +286,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaModal"
         },
         "aria-multiline": {
             "propType": "property",
@@ -270,7 +297,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaMultiLine"
         },
         "aria-multiselectable": {
             "propType": "property",
@@ -280,7 +308,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaMultiSelectable"
         },
         "aria-orientation": {
             "propType": "property",
@@ -291,21 +320,24 @@
                 "vertical"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaOrientation"
         },
         "aria-owns": {
             "propType": "property",
             "type": "idrefs",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-placeholder": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaPlaceholder"
         },
         "aria-posinset": {
             "propType": "property",
@@ -313,7 +345,8 @@
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaPosInSet"
         },
         "aria-pressed": {
             "propType": "state",
@@ -325,7 +358,8 @@
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaPressed"
         },
         "aria-readonly": {
             "propType": "property",
@@ -335,7 +369,8 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaReadOnly"
         },
         "aria-relevant": {
             "propType": "property",
@@ -348,7 +383,8 @@
                 "text"
             ],
             "defaultValue": "additions",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": ""
         },
         "aria-required": {
             "propType": "property",
@@ -358,14 +394,16 @@
                 "true"
             ],
             "defaultValue": "false",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRequired"
         },
         "aria-roledescription": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRoleDescription"
         },
         "aria-rowcount": {
             "propType": "property",
@@ -373,7 +411,8 @@
             "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRowCount"
         },
         "aria-rowindex": {
             "propType": "property",
@@ -381,7 +420,8 @@
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRowIndex"
         },
         "aria-rowspan": {
             "propType": "property",
@@ -389,7 +429,8 @@
             "allowUndeterminedValue": false,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaRowSpan"
         },
         "aria-selected": {
             "propType": "state",
@@ -400,7 +441,8 @@
                 "undefined"
             ],
             "defaultValue": "undefined",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaSelected"
         },
         "aria-setsize": {
             "propType": "property",
@@ -408,7 +450,8 @@
             "allowUndeterminedValue": true,
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaSetSize"
         },
         "aria-sort": {
             "propType": "property",
@@ -420,35 +463,40 @@
                 "other"
             ],
             "defaultValue": "none",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaSort"
         },
         "aria-valuemax": {
             "propType": "property",
             "type": "number",
             "values": [],
-            "defaultValue": "",
-            "deprecated": false
+            "defaultValue": "100",
+            "deprecated": false,
+            "idlAttribute": "ariaValueMax"
         },
         "aria-valuemin": {
             "propType": "property",
             "type": "number",
             "values": [],
-            "defaultValue": "",
-            "deprecated": false
+            "defaultValue": "0",
+            "deprecated": false,
+            "idlAttribute": "ariaValueMin"
         },
         "aria-valuenow": {
             "propType": "property",
             "type": "number",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaValueNow"
         },
         "aria-valuetext": {
             "propType": "property",
             "type": "string",
             "values": [],
             "defaultValue": "",
-            "deprecated": false
+            "deprecated": false,
+            "idlAttribute": "ariaValueText"
         }
     },
     "designPatterns": {
@@ -483,12 +531,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
@@ -525,12 +574,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure window",
             "isAbstract": false
@@ -570,12 +620,13 @@
                 "aria-haspopup",
                 "aria-invalid"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -616,12 +667,13 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure section",
             "isAbstract": false
@@ -657,12 +709,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -698,12 +751,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -744,12 +798,13 @@
                 "aria-expanded",
                 "aria-pressed"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -783,12 +838,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "figure",
                 "grid",
                 "table",
@@ -838,12 +894,13 @@
                 "aria-rowindex",
                 "aria-rowspan"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -888,6 +945,7 @@
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -895,7 +953,7 @@
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -929,12 +987,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -973,12 +1032,13 @@
             ],
             "deprecatedProps": [],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -1024,6 +1084,7 @@
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-controls",
                 "aria-expanded"
@@ -1032,7 +1093,7 @@
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -1068,12 +1129,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -1109,12 +1171,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -1153,12 +1216,13 @@
                 "aria-activedescendant",
                 "aria-disabled"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -1194,12 +1258,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -1235,12 +1300,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1274,12 +1340,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1316,12 +1383,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "window",
             "isAbstract": false
@@ -1357,12 +1425,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1398,12 +1467,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1437,12 +1507,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1478,12 +1549,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "article"
             ],
@@ -1521,12 +1593,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1562,12 +1635,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -1600,12 +1674,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1648,12 +1723,13 @@
                 "aria-multiselectable",
                 "aria-readonly"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "row",
                 "rowgroup"
@@ -1704,12 +1780,13 @@
                 "aria-required",
                 "aria-selected"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -1750,12 +1827,13 @@
                 "aria-activedescendant",
                 "aria-disabled"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1791,12 +1869,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1832,12 +1911,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1871,12 +1951,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -1910,12 +1991,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -1951,12 +2033,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -1995,12 +2078,13 @@
                 "aria-expanded",
                 "aria-haspopup"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -2036,12 +2120,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "listitem"
             ],
@@ -2089,12 +2174,13 @@
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "option"
@@ -2140,12 +2226,13 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "directory",
                 "list"
             ],
@@ -2184,12 +2271,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -2225,12 +2313,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -2266,12 +2355,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -2307,12 +2397,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2351,14 +2442,15 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "structure",
+            "roleType": "range",
             "isAbstract": false
         },
         "menu": {
@@ -2393,12 +2485,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "menuitem",
@@ -2440,12 +2533,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "menuitem",
@@ -2493,12 +2587,13 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "menu",
                 "menubar"
@@ -2540,6 +2635,7 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -2547,7 +2643,7 @@
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "menu",
                 "menubar"
@@ -2590,12 +2686,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "menu",
                 "menubar"
@@ -2635,12 +2732,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -2676,12 +2774,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2724,6 +2823,7 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-selected"
             ],
@@ -2731,7 +2831,7 @@
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "listbox"
             ],
@@ -2768,12 +2868,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2807,12 +2908,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -2852,14 +2954,15 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "structure widget",
+            "roleType": "range widget",
             "isAbstract": false
         },
         "radio": {
@@ -2898,6 +3001,7 @@
                 "aria-posinset",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -2905,7 +3009,7 @@
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -2947,12 +3051,13 @@
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "radio"
             ],
@@ -2999,12 +3104,13 @@
                 "aria-valuenow",
                 "aria-valuetext"
             ],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3040,12 +3146,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -3096,12 +3203,13 @@
                 "aria-setsize",
                 "aria-selected"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "grid",
                 "rowgroup",
                 "table",
@@ -3147,12 +3255,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "grid",
                 "table",
                 "treegrid"
@@ -3201,12 +3310,13 @@
                 "aria-expanded",
                 "aria-sort"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "row"
             ],
             "requiredChildren": [],
@@ -3253,6 +3363,7 @@
                 "aria-valuemax",
                 "aria-valuemin"
             ],
+            "hasRange": true,
             "requiredProps": [
                 "aria-controls",
                 "aria-valuenow"
@@ -3261,9 +3372,9 @@
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "structure widget",
+            "roleType": "range widget",
             "isAbstract": false
         },
         "search": {
@@ -3297,12 +3408,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "landmark",
             "isAbstract": false
@@ -3339,12 +3451,13 @@
             ],
             "deprecatedProps": [],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -3380,12 +3493,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3421,12 +3535,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3462,12 +3577,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3512,12 +3628,13 @@
                 "aria-valuemin",
                 "aria-valuetext"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -3562,6 +3679,7 @@
                 "aria-valuemax",
                 "aria-valuemin"
             ],
+            "hasRange": true,
             "requiredProps": [
                 "aria-valuenow"
             ],
@@ -3569,9 +3687,9 @@
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "widget structure",
+            "roleType": "widget range",
             "isAbstract": false
         },
         "spinbutton": {
@@ -3618,14 +3736,15 @@
                 "aria-valuenow",
                 "aria-valuetext"
             ],
+            "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
-            "roleType": "widget structure",
+            "roleType": "widget range",
             "isAbstract": false
         },
         "status": {
@@ -3659,12 +3778,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure live",
             "isAbstract": false
@@ -3698,12 +3818,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3739,12 +3860,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -3778,12 +3900,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3817,12 +3940,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -3859,6 +3983,7 @@
                 "aria-haspopup"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [
                 "aria-checked"
             ],
@@ -3866,7 +3991,7 @@
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -3911,12 +4036,13 @@
                 "aria-selected",
                 "aria-setsize"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": true,
-            "requiredContext": [
+            "requiredParents": [
                 "tablist"
             ],
             "requiredChildren": [],
@@ -3959,12 +4085,13 @@
                 "aria-colcount",
                 "aria-rowcount"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "row",
                 "rowgroup"
@@ -4008,12 +4135,13 @@
                 "aria-multiselectable",
                 "aria-orientation"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "tab"
             ],
@@ -4051,12 +4179,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -4092,12 +4221,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -4144,12 +4274,13 @@
                 "aria-readonly",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "widget",
             "isAbstract": false
@@ -4185,12 +4316,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -4226,12 +4358,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget live",
             "isAbstract": false
@@ -4267,12 +4400,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
@@ -4308,12 +4442,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure widget",
             "isAbstract": false
@@ -4355,12 +4490,13 @@
                 "aria-multiselectable",
                 "aria-required"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "group",
                 "treeitem"
@@ -4403,12 +4539,13 @@
                 "aria-haspopup"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [
                 "row",
                 "rowgroup"
@@ -4455,12 +4592,13 @@
                 "aria-expanded",
                 "aria-haspopup"
             ],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [
+            "requiredParents": [
                 "group",
                 "tree"
             ],
@@ -4499,12 +4637,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4540,12 +4679,13 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
             "isAbstract": true
@@ -4579,15 +4719,47 @@
                 "aria-invalid"
             ],
             "props": [],
+            "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": true,
             "childrenPresentational": false,
-            "requiredContext": [],
+            "requiredParents": [],
             "requiredChildren": [],
             "roleType": "structure",
             "isAbstract": false
         }
-    }
+    },
+    "rolesWithRequiredChildren": [
+        "feed",
+        "grid",
+        "list",
+        "listbox",
+        "menu",
+        "menubar",
+        "radiogroup",
+        "row",
+        "rowgroup",
+        "table",
+        "tablist",
+        "tree",
+        "treegrid"
+    ],
+    "rolesWithRequiredParent": [
+        "caption",
+        "cell",
+        "columnheader",
+        "gridcell",
+        "listitem",
+        "menuitem",
+        "menuitemcheckbox",
+        "menuitemradio",
+        "option",
+        "row",
+        "rowgroup",
+        "rowheader",
+        "tab",
+        "treeitem"
+    ]
 }
