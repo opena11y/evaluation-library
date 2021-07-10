@@ -85,7 +85,7 @@ function hasValue(value, elemNode, selector) {
   return false;
 }
 
-function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents) {
+function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents, rolesWithNameProhibited) {
 
   let elems = dom.querySelectorAll('section.role');
 
@@ -184,6 +184,9 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
 
     roles[role].nameFromContent = hasValue ('content', dom, '#' + role + ' .role-namefrom');
     roles[role].nameProhibited = hasValue ('prohibited', dom, '#' + role + ' .role-namefrom');
+    if (roles[role].nameProhibited) {
+      rolesWithNameProhibited.push(role);
+    }
 
   }
 
@@ -393,8 +396,13 @@ function getAriaInformation(dom) {
   ariaInfo.designPatterns = {};
   ariaInfo.rolesWithRequiredChildren = [];
   ariaInfo.rolesWithRequiredParent = [];
+  ariaInfo.rolesWithNameProhibited = [];
 
-  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent);
+  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent, ariaInfo.rolesWithNameProhibited);
+
+  ariaInfo.designPatterns['none'] = ariaInfo.designPatterns['presentation'];
+  ariaInfo.rolesWithNameProhibited.push('none');
+
   getProps(dom, ariaInfo.propertyDataTypes);
 
   return ariaInfo

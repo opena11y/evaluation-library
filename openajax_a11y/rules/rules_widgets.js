@@ -975,17 +975,28 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 /**
  * @object WIDGET_13
  *
- * @desc Warning about using widget roles
+ * @desc Roles that prohibit accessible names
  */
 
 { rule_id             : 'WIDGET_13',
   last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
-  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
+  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
   wcag_primary_id     : '4.1.2',
-  wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : [],
+  wcag_related_ids    : ['2.4.6'],
+  target_resources    : [ "caption",
+                          "code",
+                          "deletion",
+                          "emphasis",
+                          "generic",
+                          "insertion",
+                          "none",
+                          "paragraph",
+                          "presentation",
+                          "strong",
+                          "subscript",
+                          "superscript"],
   primary_property    : '',
   resource_properties : [],
   language_dependency : "",
@@ -995,25 +1006,33 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var elements_with_role     = dom_cache.controls_cache.elements_with_role;
-     var elements_with_role_len = elements_with_role.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
 
-     if (elements_with_role && elements_with_role_len) {
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+        var style = de.computed_style;
 
-       for (var i = 0; i < elements_with_role_len; i++) {
-         var de = elements_with_role[i];
-         var style = de.computed_style;
+        if (de.has_aria_label || de.has_aria_labelledby) {
 
-         if (de.is_widget) {
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, de.tag_name]);
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-           }
-         }
-       } // end loop
-     }
+          if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
+            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, de.tag_name]);
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+            }
+          } else {
+            console.log('[implicit_role]: ' + de.implicit_role);
+            if (de.implicit_role && OpenAjax.a11y.aria.designPatterns[de.implicit_role].nameProhibited) {
+              if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+              } else {
+                rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+              }
+            }
+          }
+        } // end loop
+      }
    } // end validation function
 },
 

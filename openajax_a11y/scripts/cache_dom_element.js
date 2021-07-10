@@ -874,8 +874,9 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  *
  * @property {Number}     character_count  - Count of text charcters in the immediate child DOM text nodes
  *
- * @property {String}     class_name  - The value of the class attribute of the DOM node
- * @property {String}     role        - The value of the role attribute of the DOM node
+ * @property {String}     class_name     - The value of the class attribute of the DOM node
+ * @property {String}     role           - The value of the role attribute of the DOM node
+ * @property {String}     implicit_role  - The implicit role based on the HTML element tag name
  *
  * @property {String}     alt      - String   The value of the alt attribute of the DOM node
  * @property {Boolean}    has_alt  - true if the alt attribute is defined, otherwise false
@@ -1212,6 +1213,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_title                 = false;
 
 
+  this.inplicit_role    = "";
   this.role           = "";
   this.role_info      = null;
   this.aria_invalid   = false;
@@ -1223,6 +1225,11 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
+
+  this.implicit_role = this.getImplicitRole(node);
+  console.log('[implicit_role][' + node.tagName + ']: ' + this.implicit_role);
+
+  // Check for ARIA Attributes
 
   for (i = 0; i < attributes.length; i++) {
 
@@ -1498,6 +1505,49 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 };
 
 /**
+ * @method getImplicitRole
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Get implicit role baed on the ARIA in HTML specification
+ *
+ * @param  {Object} node - DOM element node
+ *
+ * @return {String} - Implicit role of the element
+ }
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.getImplicitRole = function (node) {
+
+  var role = 'generic';
+  var elemInfo = OpenAjax.a11y.ariaInHTML[node.tagName.toLowerCase()];
+
+  if (elemInfo) {
+    if (elemInfo.length > 1) {
+      for (let i = 0; i  < elemInfo.length; i += 1) {
+        let attr = node[elemInfo[i].attr];
+        if (attr) {
+          if (node[elemInfo[i].attr_value]) {
+            if (attr === node[elemInfo[i].attr_value]) {
+              role = elemInfo[i].defaultRole;
+              break;
+            }
+          } else {
+            role = elemInfo[i].defaultRole;
+            break;
+          }
+        }
+      }
+    } else {
+      role = elemInfo[0].defaultRole;
+    }
+  }
+  console.log('[elemInfo]: ' + elemInfo + ' (' + node.tagName + ')');
+  return role;
+};
+
+
+/**
  * @method getAttributeValue
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
@@ -1516,51 +1566,52 @@ OpenAjax.a11y.cache.DOMElement.prototype.getAttributeValue = function (attr) {
 
 
   function valueAsPropertyType(value) {
+
     var v;
-    switch (attr_info.type) {
-      case 'decimal':
-        v = parseFloat(value);
-        if (!isNaN(v)) {
-          value = v;
-        }
-        break;
 
-      case 'number':
-      case 'integer':
-        v = parseInt(value, 10);
-        if (!isNaN(v)) {
-          value = v;
-        }
-        break;
+    if (value) {
+      switch (attr_info.type) {
+        case 'decimal':
+          v = parseFloat(value);
+          if (!isNaN(v)) {
+            value = v;
+          }
+          break;
 
-      default:
-        break;
+        case 'number':
+        case 'integer':
+          v = parseInt(value, 10);
+          if (!isNaN(v)) {
+            value = v;
+          }
+          break;
+
+        default:
+          break;
+      }
     }
 
     return value;
   }
 
-  var value = "";
+  var value = '';
   var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
 
   if (attr_info) {
-    var value = this.node.getAttribute(attr);
-    if (typeof value === 'string' && value.length) {
-      value = valueAsPropertyType(value);
-    } else {
-      // Support IDL interface for properties and states in ARIA 1.2
-      if (attr_info.idlAttribute) {
-        value = this.node[attr_info.idlAttribute];
-      }
-      if (typeof value === 'string' && value.length) {
-        value = valueAsPropertyType(value);
-      } else {
-        value = valueAsPropertyType(attr_info.defaultValue);
+    // Try IDL first
+    if (attr_info.idlAttribute) {
+      value = this.node[attr_info.idlAttribute];
+    }
+
+    if (!value) {
+      value = this.node.getAttribute(attr);
+      if (!value) {
+        value = attr_info.defaultValue;
       }
     }
   }
 
-  return value;
+  return valueAsPropertyType(value);
 }
 
 /**

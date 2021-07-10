@@ -563,7 +563,11 @@ var createARIAStrictRuleset = function () {
       WIDGET_12 : {
        required : true,
        enabled  : true
-     },
+      },
+      WIDGET_13 : {
+       required : true,
+       enabled  : true
+      },
       WIDGET_14 : {
        required : true,
        enabled  : true

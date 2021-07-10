@@ -284,8 +284,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       },
       WIDGET_5: {
             ID:                    'Widget 5',
-            DEFINITION:            'ARIA property or state %s be defined.',
-            SUMMARY:               'ARIA attribute %s be defined',
+            DEFINITION:            'Elements with the attributes that start with @aria-@ %s be a valid ARIA property or state.',
+            SUMMARY:               'Attributes that start with @aria-@ %s be defined.',
             TARGET_RESOURCES_DESC: 'Elements with aria attributes',
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Change ARIA attribute to a defined property or state.',
@@ -768,29 +768,30 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         WIDGET_13: {
             ID:                    'Widget 13',
-            DEFINITION:            'Widget roles %s be removed until the ARIA properties, states, focus management and keyboard support for widgets is fully understood by the developer.',
-            SUMMARY:               'Remove widget roles',
-            TARGET_RESOURCES_DESC: 'Elements widget roles',
+            DEFINITION:            'ARIA roles that prohibit accessible names %s not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
+            SUMMARY:               'Role %s not have accessible name.',
+            TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
             RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Remove widget role from element until you are confident that you understand the ARIA properties, states, focus management and keyboard support needed by the widget.',
-              FAIL_P:   'Remove widget role from the %N_F elements until you are confident that you understand the ARIA properties, states, focus management and keyboard support needed by the widget.',
+              FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
+              FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
               HIDDEN_S: 'The element with an widget role that is hidden and was not evaluated.',
-              HIDDEN_P: '%N_H elements with widget roles that are hidden were not evaluated.',
-              NOT_APPLICABLE:  'No elements with widget toles on the page.'
+              HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
+              NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_FAIL_1:    'Remove @%1@ widget role from the %2 element.',
-              ELEMENT_HIDDEN_1:  '@%1[role="%2"]@ was not tested because it is hidden from assistive technologies.'
+              ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element with role @%2@.',
+              ELEMENT_FAIL_2:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
+              ELEMENT_HIDDEN_1:  'Element @%1[role="%2"]@ was not tested because it is hidden from assistive technologies.',
+              ELEMENT_HIDDEN_2:  'Element @%1@ was not tested because it is hidden from assistive technologies.'
             },
             PURPOSE: [
-              'Developers who are new to ARIA and do not completely understand how ARIA technologies can enhancing accessibility may.',
-              'The improper use of ARIA roles leads to less accessibility due to conflicting accessibility information being represented in the accessibility APIs.',
-              'The intention of the rule to discourage web developers form using widget roles until they fully understand how to use ARIA roles, properties, states, focus management and keyboard support.',
-              'Once a developer is confident they understand how to implement ARIA enabled widgets that should use the WCAG + ARIA ruleset to evaluate the accessibility of their pages.'
+              'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
+              'Versions of the ARIA specification before 1.2 allowed @aria-label@ or @aria-labelledby@  to be used on any element, even if an accessible name was not useful .',
+              'For example, defining an accessible name on a @p@ element or an element with @role=none@.',
+              'The text content of the @p@ element is the only part that is needed by assisitve technologies.'
             ],
             TECHNIQUES: [
-              'Remove widget roles from elements, until the developer fully understands who to create accessibility widgets with ARIA roles, properties, states, focus management and keyboard support.',
-              'Widget from javascript libraries that claim to support ARIA should be tested for correct use of ARIA roles, properties, states, focus management and keyboard support, since many javascript libraries using ARIA may be using it incorrectly, or updated to previously accessible libraries may have broken accessibility features.'
+              'Remove @aria-label@ or @aria-labelledby@ attribute from the element.'
             ],
             MANUAL_CHECKS: [
             ],
@@ -810,14 +811,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
                 url:   'https://w3c.github.io/aria-practices/'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'MDN Web Docs: ARIA ',
-                url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'Web Fundamentals: Introduction to ARIA',
-                url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
               }
             ]
         },

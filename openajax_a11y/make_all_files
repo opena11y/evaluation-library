@@ -121,7 +121,7 @@ echo "... evaluation scripting files ..."
 if [ -n "$JSLINT" ]; then
   echo "---------------------------- JSLINT ----------------------------"
   JSLINT wai_aria/aria.js
-  JSLINT wai_aria/roleInfo.js
+  JSLINT wai_aria/aria_in_html.js
   JSLINT scripts/cache_util.js
   JSLINT scripts/cache_abbreviations.js
   JSLINT scripts/cache_color_contrast.js
@@ -171,7 +171,7 @@ cat \
 openajax_a11y_constants.js \
 language/language_codes.js \
 wai_aria/aria.js           \
-wai_aria/roleInfo.js       \
+wai_aria/aria_in_html.js       \
 scripts/cache_util.js      \
 scripts/cache_abbreviations.js  \
 scripts/cache_color_contrast.js \
