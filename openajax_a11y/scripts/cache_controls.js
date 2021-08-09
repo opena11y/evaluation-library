@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                       ControlInfo                                */
 /* ---------------------------------------------------------------- */
@@ -311,6 +313,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
 
   var be;
   var fe;
+  var ge;
   var ie;
   var le;
   var me;
@@ -940,6 +943,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getRuleResults = function (filter) {
   }
 
   var RESULT_FILTER = OpenAjax.a11y.RESULT_FILTER;
+  var cache_items = [];
 
   var local_filter;
 
@@ -947,8 +951,6 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getRuleResults = function (filter) {
     local_filter = RESULT_FILTER.ALL;
   else
     local_filter = filter;
-
-  var rule_results = [];
 
   var child_cache_elements     = this.child_cache_elements;
   var child_cache_elements_len = child_cache_elements.length;
@@ -1180,12 +1182,10 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getElementTextContent = function (la
 
      case 'select':
      // *** need to add some code here to get
-       return;
        break;
 
      case 'textarea':
      // *** need to add some code here to get
-       return;
        break;
 
      default:
@@ -1613,7 +1613,6 @@ OpenAjax.a11y.cache.ControlsCache.prototype.removeFromChildCacheElements = funct
  * @desc Creates a FormElement object used to hold information about form elements
  *
  * @param  {DOMelement}   dom_element   - dom_element object references DOMElement of the form element
- * @param  {ControlInfo}  control_info  - Information about the parent control cache
  *
  * @property  {DOMElement}  dom_element           - DOMElement associated with the form element
  * @property  {String}      cache_id              - String that uniquely identifies the cache element in the DOMCache
@@ -1634,7 +1633,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.removeFromChildCacheElements = funct
  * @property  {String}  name_attribute  - The value of the name attribute of the form control
  */
 
-OpenAjax.a11y.cache.FormElement = function (dom_element, control_info) {
+OpenAjax.a11y.cache.FormElement = function (dom_element) {
 
   this.dom_element  = dom_element;
   this.child_cache_elements = [];
@@ -1716,7 +1715,6 @@ OpenAjax.a11y.cache.FormElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.FormElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   if (!unsorted) this.dom_element.sortItems(attributes);
@@ -1735,8 +1733,6 @@ OpenAjax.a11y.cache.FormElement.prototype.getAttributes = function (unsorted) {
  */
 
 OpenAjax.a11y.cache.FormElement.prototype.getCacheProperties = function () {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties();
 
@@ -1775,7 +1771,7 @@ OpenAjax.a11y.cache.FormElement.prototype.getCachePropertyValue = function (prop
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.FormElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.FormElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1917,7 +1913,6 @@ OpenAjax.a11y.cache.FieldsetElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.FieldsetElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
 //  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
@@ -1940,8 +1935,6 @@ OpenAjax.a11y.cache.FieldsetElement.prototype.getAttributes = function (unsorted
  */
 
 OpenAjax.a11y.cache.FieldsetElement.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -2123,10 +2116,7 @@ OpenAjax.a11y.cache.GroupingElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.GroupingElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2147,11 +2137,7 @@ OpenAjax.a11y.cache.GroupingElement.prototype.getAttributes = function (unsorted
 
 OpenAjax.a11y.cache.GroupingElement.prototype.getCacheProperties = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties(unsorted);
-
-//  cache_nls.addPropertyIfDefined(properties, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(properties);
 
@@ -2337,10 +2323,7 @@ OpenAjax.a11y.cache.LegendElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.LegendElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2361,11 +2344,7 @@ OpenAjax.a11y.cache.LegendElement.prototype.getAttributes = function (unsorted) 
 
 OpenAjax.a11y.cache.LegendElement.prototype.getCacheProperties = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties(unsorted);
-
-//  cache_nls.addPropertyIfDefined(properties, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(properties);
 
@@ -2556,10 +2535,7 @@ OpenAjax.a11y.cache.LabelElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.LabelElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'for_id');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2953,7 +2929,6 @@ OpenAjax.a11y.cache.InputElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.InputElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   if (!unsorted) this.dom_element.sortItems(attributes);
@@ -3048,8 +3023,6 @@ OpenAjax.a11y.cache.InputElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.InputElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   if (this.computed_label_length) {
     return this.computed_label;
@@ -3249,10 +3222,7 @@ OpenAjax.a11y.cache.ButtonElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.ButtonElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUnefined(attributes, this, 'name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -3343,8 +3313,6 @@ OpenAjax.a11y.cache.ButtonElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
-  var label_style = {};
-
   if (this.computed_label_length) {
     return this.computed_label;
   }
@@ -3369,8 +3337,6 @@ OpenAjax.a11y.cache.ButtonElement.prototype.getLabelNLS = function () {
 OpenAjax.a11y.cache.ButtonElement.prototype.getLabelSourceNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   return cache_nls.getValueNLS('computed_label_source', this.computed_label_source);
 
@@ -4687,10 +4653,7 @@ OpenAjax.a11y.cache.SelectElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.SelectElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -4781,8 +4744,6 @@ OpenAjax.a11y.cache.SelectElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
-  var label_style = {};
-
   if (this.computed_label_length) {
     return this.computed_label;
   }
@@ -4808,8 +4769,6 @@ OpenAjax.a11y.cache.SelectElement.prototype.getLabelNLS = function () {
 OpenAjax.a11y.cache.SelectElement.prototype.getLabelSourceNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   return cache_nls.getValueNLS('computed_label_source', this.computed_label_source);
 
@@ -4962,10 +4921,7 @@ OpenAjax.a11y.cache.OptgroupElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.OptgroupElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -5131,10 +5087,7 @@ OpenAjax.a11y.cache.OptionElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.OptionElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -5581,10 +5534,7 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.WidgetElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -5679,8 +5629,6 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.WidgetElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   if (this.computed_label_length) {
     return this.computed_label;
@@ -5819,10 +5767,7 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.InteractiveElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -5842,8 +5787,6 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.getAttributes = function (unsor
  */
 
 OpenAjax.a11y.cache.InteractiveElement.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -5907,8 +5850,6 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.InteractiveElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   if (this.computed_label_length) {
     return this.computed_label;

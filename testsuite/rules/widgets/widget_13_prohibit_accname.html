@@ -8,15 +8,12 @@
   </head>
 
   <body>
-      <header role="banner">
+      <header>
         <div>Widget 13 test cases</div>
       </header>
       
       <main>
         <h1>WIDGET 13: Roles that prohibit accessible names </h1>
-
-
-
 
         <div id="ID_TEST_LABEL">Test Label</div>
 
@@ -103,24 +100,28 @@
 
         <h2><code>div</code> element</h2>
         <div><code>div</code> element with no name</div>
+        <div role="radio" aria-label="radio label">"radio" role with name</div>
+        <div role="checkbox" aria-label="checkbox label">"checkbox" role with name</div>
         <div class="WIDGET_13_FAIL" aria-label="div element label"><code>div</code> element with <code>arial-label</code>: fail</div>
         <div class="WIDGET_13_FAIL" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>div</code> element with role with <code>aria-labelledby</code>: fail</div>
         <div hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>div</code> element hidden</div>
 
         <h2><code>span</code> element</h2>
         <span><code>span</code> element with no name</span>
+        <span role="switch" aria-label="switch label">Switch element with name</span>
         <span class="WIDGET_13_FAIL" aria-label="superscript label"><code>span</code> element with <code>arial-label</code>: fail</span>
         <span class="WIDGET_13_FAIL" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>span</code> element with role with <code>aria-labelledby</code>: fail</span>
         <span hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>span</code> element hidden</span>
 
-       <h2><code>a[href]</code> element</h2>
+       <h2><code>a[href]</code> element with href</h2>
         <a href="#test"><code>a[href]</code> element with no name: ignore</a>
         <a href="#test" aria-label="a[href] label"><code>a[href]</code> element with <code>arial-label</code>: ignore</a>
         <a href="#test" aria-labelledby="ID_TEST_LABEL"><code>a[href]</code> element with role with <code>aria-labelledby</code>: ignore</a>
         <a href="#test" hidden aria-labelledby="ID_TEST_LABEL"><code>a[href]</code> element hidden</a>
 
        <h2><code>a</code> element</h2>
-        <a><code>a</code> element with no name</a>
+        <a><code>a</code> element with no href or name</a>
+        <a href="#" aria-label="link name"><code>a</code> element an href with a name</a>
         <a class="WIDGET_13_FAIL" aria-label="a[href] label"><code>a</code> element with <code>arial-label</code>: fail</a>
         <a class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>a</code> element with role with <code>aria-labelledby: fail</code></a>
         <a hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>a</code> element hidden</a>

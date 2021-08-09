@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
+ // import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance (OAA) ARIA Strict Rule Mapping (Beta)                     */
 /* --------------------------------------------------------------------------- */
 
 
-var createARIAStrictRuleset = function () {
+(function () {
 
   var ruleset_info = {
     ruleset_id    : "ARIA_STRICT",
-    version       : "1.1.0",
-    last_updated  : "2017-02-01",
+    version       : "1.2.0",
+    last_updated  : "2021-07-07",
     author        : "OpenAjax Accessibility Task Force",
     author_url    : "http://www.openajax.org/member/wiki/Accessibility",
 
@@ -108,10 +110,6 @@ var createARIAStrictRuleset = function () {
         required : true,
         enabled  : true
       },
-      CONTROL_11 : {
-        required : true,
-        enabled  : true
-      },
       ERROR_1 : {
         required : true,
         enabled  : true
@@ -189,6 +187,10 @@ var createARIAStrictRuleset = function () {
         enabled  : true
       },
       HTML_2 : {
+        required : true,
+        enabled  : true
+      },
+      HTML_3 : {
         required : true,
         enabled  : true
       },
@@ -592,5 +594,5 @@ var createARIAStrictRuleset = function () {
     OpenAjax.a11y.logger.error("[ARIA STRICT Ruleset] ** Error creating ARIA Strict Ruleset");
   }
 
-}();
+}());
 

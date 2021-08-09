@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            TableInfo                             */
 /* ---------------------------------------------------------------- */
@@ -884,9 +886,6 @@ OpenAjax.a11y.cache.TableElement.prototype.multipleTHInRow = function(row) {
    var th_count;
    var td_count;
 
-   var row_max = this.max_row;
-   var col_max = this.max_column;
-   var row_len;
    var cell;
 
    var c = 0;
@@ -1326,7 +1325,7 @@ OpenAjax.a11y.cache.TableElement.prototype.getAttributes = function (unsorted) {
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1509,8 +1508,6 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getElementResults = function () {
 
 OpenAjax.a11y.cache.CaptionElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var attributes = this.dom_element.getAttributes();
 
   return attributes;
@@ -1526,7 +1523,7 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getAttributes = function () {
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.CaptionElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.CaptionElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1559,8 +1556,6 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getStyle = function () {
  */
 
 OpenAjax.a11y.cache.CaptionElement.prototype.getCacheProperties = function () {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties();
 
@@ -1726,8 +1721,6 @@ OpenAjax.a11y.cache.THeadElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.THeadElement.prototype.getCacheProperties = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties();
 
   return properties;
@@ -1765,7 +1758,7 @@ OpenAjax.a11y.cache.THeadElement.prototype.getCachePropertyValue = function (pro
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.THeadElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.THeadElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1908,8 +1901,6 @@ OpenAjax.a11y.cache.TBodyElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.TBodyElement.prototype.getCacheProperties = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties();
 
   return properties;
@@ -1947,7 +1938,7 @@ OpenAjax.a11y.cache.TBodyElement.prototype.getCachePropertyValue = function (pro
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TBodyElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TBodyElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -2130,7 +2121,7 @@ OpenAjax.a11y.cache.TableRowElement.prototype.getCachePropertyValue = function (
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -2215,7 +2206,6 @@ OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function (unsorted) {
 
 OpenAjax.a11y.cache.TableCellElement = function (dom_element, table_info) {
 
-  var headers_array = [];  // array of id headers
   var is_th;
 
   this.dom_element  = dom_element;
@@ -2428,7 +2418,7 @@ OpenAjax.a11y.cache.TableCellElement.prototype.getCachePropertyValue = function 
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableCellElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableCellElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -2593,8 +2583,6 @@ OpenAjax.a11y.cache.PageElementLayout.prototype.getAttributes = function (unsort
  */
 
 OpenAjax.a11y.cache.PageElementLayout.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 

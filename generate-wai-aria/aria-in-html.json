@@ -1,1240 +1,1333 @@
 {
     "title": "ARIA in HTML",
-    "status": "W3C Candidate Recommendation Draft      07 July 2021",
+    "status": "W3C Candidate Recommendation Draft      04 August 2021",
     "reference": "https://www.w3.org/TR/html-aria/",
-    "elementDefaultRoles": {
-        "a": [
-            {
-                "attr": "href",
-                "attr_value": "",
-                "defaultRole": "link",
-                "allowedRoles": [
-                    "button",
-                    "checkbox",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "radio",
-                    "switch",
-                    "tab",
-                    "treeitem"
-                ]
-            },
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "abbr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "address": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "area": [
-            {
-                "attr": "href",
-                "attr_value": "",
-                "defaultRole": "link",
-                "allowedRoles": []
-            },
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "article": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "article",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "feed",
-                    "main",
-                    "none",
-                    "presentation",
-                    "region"
-                ]
-            }
-        ],
-        "aside": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "complementary",
-                "allowedRoles": [
-                    "feed",
-                    "none",
-                    "note",
-                    "presentation",
-                    "region",
-                    "search"
-                ]
-            }
-        ],
-        "audio": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "b": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "base": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "bdi": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "bdo": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "blockquote": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "body": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "br": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "button": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "button",
-                "allowedRoles": [
-                    "checkbox",
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "radio",
-                    "switch",
-                    "tab"
-                ]
-            }
-        ],
-        "canvas": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "caption": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "cite": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "code": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "col": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "colgroup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "data": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "datalist": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "listbox",
-                "allowedRoles": []
-            }
-        ],
-        "dd": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "definition",
-                "allowedRoles": []
-            }
-        ],
-        "del": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "dfn": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "term",
-                "allowedRoles": []
-            }
-        ],
-        "details": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "group",
-                "allowedRoles": []
-            }
-        ],
-        "dialog": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "dialog",
-                "allowedRoles": []
-            }
-        ],
-        "div": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "dl": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "group",
-                    "list",
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "dt": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "term",
-                "allowedRoles": []
-            }
-        ],
-        "em": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "embed": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "img",
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "fieldset": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "group",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "radiogroup"
-                ]
-            }
-        ],
-        "figcaption": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "group",
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "figure": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "figure",
-                "allowedRoles": []
-            }
-        ],
-        "footer": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "article",
-                "allowedRoles": [
-                    "group",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "form": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "form",
-                "allowedRoles": [
-                    "search",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "h1 to h6": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "head": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "header": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "article",
-                "allowedRoles": [
-                    "group",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "hgroup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "hr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "separator",
-                "allowedRoles": [
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "html": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "document",
-                "allowedRoles": []
-            }
-        ],
-        "i": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "iframe": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "img",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "img": [
-            {
-                "attr": "alt",
-                "attr_value": "",
-                "defaultRole": "img",
-                "allowedRoles": [
-                    "button",
-                    "checkbox",
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "progressbar",
-                    "scrollbar",
-                    "separator",
-                    "slider",
-                    "switch",
-                    "tab",
-                    "treeitem"
-                ]
-            },
-            {
-                "attr": "alt",
-                "attr_value": "",
-                "defaultRole": "presentation",
-                "allowedRoles": []
-            },
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "img",
-                "allowedRoles": []
-            }
-        ],
-        "input": [
-            {
-                "attr": "type",
-                "attr_value": "button",
-                "defaultRole": "button",
-                "allowedRoles": [
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "radio",
-                    "switch",
-                    "tab"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "checkbox",
-                "defaultRole": "checkbox",
-                "allowedRoles": [
-                    "menuitemcheckbox",
-                    "option",
-                    "switch",
-                    "button",
-                    "aria-pressed"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "color",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "date",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "datetime-local",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "email",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "file",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "hidden",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "image",
-                "defaultRole": "button",
-                "allowedRoles": [
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "radio",
-                    "switch"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "month",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "number",
-                "defaultRole": "spinbutton",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "password",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "radio",
-                "defaultRole": "radio",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "range",
-                "defaultRole": "slider",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "reset",
-                "defaultRole": "button",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "search",
-                "defaultRole": "searchbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "submit",
-                "defaultRole": "button",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "tel",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "text",
-                "defaultRole": "textbox",
-                "allowedRoles": [
-                    "combobox",
-                    "searchbox",
-                    "spinbutton"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "text",
-                "defaultRole": "combobox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "time",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "url",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "week",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "ins": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "kbd": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "label": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "legend": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "li": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "listitem",
-                "allowedRoles": [
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "none",
-                    "presentation",
-                    "radio",
-                    "separator",
-                    "tab",
-                    "treeitem"
-                ]
-            }
-        ],
-        "link": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "main": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "main",
-                "allowedRoles": []
-            }
-        ],
-        "map": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "math": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "math",
-                "allowedRoles": []
-            }
-        ],
-        "mark": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "menu": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "list",
-                "allowedRoles": [
-                    "directory",
-                    "group",
-                    "listbox",
-                    "menu",
-                    "menubar",
-                    "none",
-                    "presentation",
-                    "radiogroup",
-                    "tablist",
-                    "toolbar",
-                    "tree"
-                ]
-            }
-        ],
-        "meta": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "meter": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "nav": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "navigation",
-                "allowedRoles": [
-                    "menu",
-                    "menubar",
-                    "tablist"
-                ]
-            }
-        ],
-        "noscript": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "object": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "img"
-                ]
-            }
-        ],
-        "ol": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "list",
-                "allowedRoles": [
-                    "directory",
-                    "group",
-                    "listbox",
-                    "menu",
-                    "menubar",
-                    "none",
-                    "presentation",
-                    "radiogroup",
-                    "tablist",
-                    "toolbar",
-                    "tree"
-                ]
-            }
-        ],
-        "optgroup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "group",
-                "allowedRoles": []
-            }
-        ],
-        "option": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "option",
-                "allowedRoles": []
-            }
-        ],
-        "output": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "status",
-                "allowedRoles": []
-            }
-        ],
-        "p": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "param": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "picture": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "pre": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "progress": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "progressbar",
-                "allowedRoles": []
-            }
-        ],
-        "q": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "rp": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "rt": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "ruby": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "s": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "samp": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "script": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "section": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "region",
-                "allowedRoles": [
-                    "alert",
-                    "alertdialog",
-                    "application",
-                    "banner",
-                    "complementary",
-                    "contentinfo",
-                    "dialog",
-                    "document",
-                    "feed",
-                    "log",
-                    "main",
-                    "marquee",
-                    "navigation",
-                    "none",
-                    "note",
-                    "presentation",
-                    "search",
-                    "status",
-                    "tabpanel"
-                ]
-            }
-        ],
-        "select": [
-            {
-                "attr": "multiple",
-                "attr_value": "",
-                "defaultRole": "combobox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "multiple",
-                "attr_value": "",
-                "defaultRole": "listbox",
-                "allowedRoles": []
-            }
-        ],
-        "slot": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "small": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "source": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "span": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "strong": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "style": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "SVG": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "graphics-document",
-                "allowedRoles": []
-            }
-        ],
-        "sub": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "summary": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "button",
-                "allowedRoles": []
-            }
-        ],
-        "sup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "table": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "table",
-                "allowedRoles": []
-            }
-        ],
-        "tbody": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "rowgroup",
-                "allowedRoles": []
-            }
-        ],
-        "template": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "textarea": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            }
-        ],
-        "tfoot": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "rowgroup",
-                "allowedRoles": []
-            }
-        ],
-        "thead": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "rowgroup",
-                "allowedRoles": []
-            }
-        ],
-        "time": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "title": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "td": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "cell",
-                "allowedRoles": []
-            }
-        ],
-        "th": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "columnheader",
-                "allowedRoles": []
-            }
-        ],
-        "tr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "row",
-                "allowedRoles": []
-            }
-        ],
-        "track": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "u": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "ul": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "list",
-                "allowedRoles": [
-                    "directory",
-                    "group",
-                    "listbox",
-                    "menu",
-                    "menubar",
-                    "none",
-                    "presentation",
-                    "radiogroup",
-                    "tablist",
-                    "toolbar",
-                    "tree"
-                ]
-            }
-        ],
-        "var": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "video": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "wbr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ]
+    "anyRoleAllowed": false,
+    "noRoleAllowed": false,
+    "elementInfo": {
+        "a[href]": {
+            "tagName": "a",
+            "defaultRole": "link",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "checkbox",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "radio",
+                "switch",
+                "tab",
+                "treeitem"
+            ],
+            "attr1": "href"
+        },
+        "a": {
+            "tagName": "a",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "abbr": {
+            "tagName": "abbr",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "address": {
+            "tagName": "address",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "area[href]": {
+            "tagName": "area",
+            "defaultRole": "link",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "href"
+        },
+        "area": {
+            "tagName": "area",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "article": {
+            "tagName": "article",
+            "defaultRole": "article",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "feed",
+                "main",
+                "none",
+                "presentation",
+                "region"
+            ]
+        },
+        "aside": {
+            "tagName": "aside",
+            "defaultRole": "complementary",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "feed",
+                "none",
+                "note",
+                "presentation",
+                "region",
+                "search"
+            ]
+        },
+        "audio": {
+            "tagName": "audio",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application"
+            ]
+        },
+        "b": {
+            "tagName": "b",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "base": {
+            "tagName": "base",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "bdi": {
+            "tagName": "bdi",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "bdo": {
+            "tagName": "bdo",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "blockquote": {
+            "tagName": "blockquote",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "body": {
+            "tagName": "body",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "br": {
+            "tagName": "br",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "presentation",
+                "none"
+            ]
+        },
+        "button": {
+            "tagName": "button",
+            "defaultRole": "button",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "checkbox",
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "radio",
+                "switch",
+                "tab"
+            ]
+        },
+        "canvas": {
+            "tagName": "canvas",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "caption": {
+            "tagName": "caption",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "cite": {
+            "tagName": "cite",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "code": {
+            "tagName": "code",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "col": {
+            "tagName": "col",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "colgroup": {
+            "tagName": "colgroup",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "data": {
+            "tagName": "data",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "datalist": {
+            "tagName": "datalist",
+            "defaultRole": "listbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "dd": {
+            "tagName": "dd",
+            "defaultRole": "definition",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "del": {
+            "tagName": "del",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "dfn": {
+            "tagName": "dfn",
+            "defaultRole": "term",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "details": {
+            "tagName": "details",
+            "defaultRole": "group",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "dialog": {
+            "tagName": "dialog",
+            "defaultRole": "dialog",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "alertdialog"
+            ]
+        },
+        "div": {
+            "tagName": "div",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "dl": {
+            "tagName": "dl",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "list",
+                "presentation",
+                "none"
+            ]
+        },
+        "dt": {
+            "tagName": "dt",
+            "defaultRole": "term",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "listitem"
+            ]
+        },
+        "em": {
+            "tagName": "em",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "embed": {
+            "tagName": "embed",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "img",
+                "presentation",
+                "none"
+            ]
+        },
+        "fieldset": {
+            "tagName": "fieldset",
+            "defaultRole": "group",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "radiogroup"
+            ]
+        },
+        "figcaption": {
+            "tagName": "figcaption",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "presentation",
+                "none"
+            ]
+        },
+        "figure[figcaption]": {
+            "tagName": "figure",
+            "defaultRole": "figure",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "hasFigcaption": true
+        },
+        "figure": {
+            "tagName": "figure",
+            "defaultRole": "figure",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "footer[contentinfo]": {
+            "tagName": "footer",
+            "defaultRole": "contentInfo",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ],
+            "isLandmark": true
+        },
+        "footer": {
+            "tagName": "footer",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ]
+        },
+        "form": {
+            "tagName": "form",
+            "defaultRole": "form",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "search",
+                "none",
+                "presentation"
+            ]
+        },
+        "h1": {
+            "tagName": "h1",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h2": {
+            "tagName": "h2",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h3": {
+            "tagName": "h3",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h4": {
+            "tagName": "h4",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h5": {
+            "tagName": "h5",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h6": {
+            "tagName": "h6",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "head": {
+            "tagName": "head",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "header[banner]": {
+            "tagName": "header",
+            "defaultRole": "banner",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ],
+            "isLandmark": true
+        },
+        "header": {
+            "tagName": "header",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ]
+        },
+        "hgroup": {
+            "tagName": "hgroup",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "hr": {
+            "tagName": "hr",
+            "defaultRole": "separator",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation"
+            ]
+        },
+        "html": {
+            "tagName": "html",
+            "defaultRole": "document",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "i": {
+            "tagName": "i",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "iframe": {
+            "tagName": "iframe",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "img",
+                "none",
+                "presentation"
+            ]
+        },
+        "img[accname]": {
+            "tagName": "img",
+            "defaultRole": "img",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "checkbox",
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "progressbar",
+                "scrollbar",
+                "separator",
+                "slider",
+                "switch",
+                "tab",
+                "treeitem"
+            ],
+            "hasAccname": true
+        },
+        "img[alt]": {
+            "tagName": "img",
+            "defaultRole": "img",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "checkbox",
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "progressbar",
+                "scrollbar",
+                "separator",
+                "slider",
+                "switch",
+                "tab",
+                "treeitem"
+            ],
+            "attr1": "alt"
+        },
+        "img[emptyalt]": {
+            "tagName": "img",
+            "defaultRole": "presentation",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "alt=\"\""
+        },
+        "img": {
+            "tagName": "img",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "input[type=button]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "radio",
+                "switch",
+                "tab"
+            ],
+            "attr1": "type=button"
+        },
+        "input[type=checkbox]": {
+            "tagName": "input",
+            "defaultRole": "checkbox",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menuitemcheckbox",
+                "option",
+                "switch",
+                "button"
+            ],
+            "attr1": "type=checkbox"
+        },
+        "input[type=color]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=color"
+        },
+        "input[type=date]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=date"
+        },
+        "input[type=datetime-local]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=datetime-local"
+        },
+        "input[type=email][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=email",
+            "attr2": "list"
+        },
+        "input[type=email]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=email"
+        },
+        "input[type=file]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=file"
+        },
+        "input[type=hidden]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [],
+            "attr1": "type=hidden"
+        },
+        "input[type=image]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "radio",
+                "switch"
+            ],
+            "attr1": "type=image"
+        },
+        "input[type=month]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=month"
+        },
+        "input[type=number]": {
+            "tagName": "input",
+            "defaultRole": "spinbutton",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=number"
+        },
+        "input[type=password]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=password"
+        },
+        "input[type=radio]": {
+            "tagName": "input",
+            "defaultRole": "radio",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menuitemradio"
+            ],
+            "attr1": "type=radio"
+        },
+        "input[type=range]": {
+            "tagName": "input",
+            "defaultRole": "slider",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=range"
+        },
+        "input[type=reset]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=reset"
+        },
+        "input[type=search][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=search",
+            "attr2": "list"
+        },
+        "input[type=search]": {
+            "tagName": "input",
+            "defaultRole": "searchbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=search"
+        },
+        "input[type=submit]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=submit"
+        },
+        "input[type=tel][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=tel",
+            "attr2": "list"
+        },
+        "input[type=tel]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=tel"
+        },
+        "input[type=text][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=text",
+            "attr2": "list"
+        },
+        "input[type=text]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "combobox",
+                "searchbox",
+                "spinbutton"
+            ],
+            "attr1": "type=text"
+        },
+        "input[type=time]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=time"
+        },
+        "input[type=url][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=url",
+            "attr2": "list"
+        },
+        "input[type=url]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=url"
+        },
+        "input[type=week]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=week"
+        },
+        "ins": {
+            "tagName": "ins",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "kbd": {
+            "tagName": "kbd",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "label": {
+            "tagName": "label",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "legend": {
+            "tagName": "legend",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "li": {
+            "tagName": "li",
+            "defaultRole": "listitem",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "none",
+                "presentation",
+                "radio",
+                "separator",
+                "tab",
+                "treeitem"
+            ]
+        },
+        "link": {
+            "tagName": "link",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "main": {
+            "tagName": "main",
+            "defaultRole": "main",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "map": {
+            "tagName": "map",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "math": {
+            "tagName": "math",
+            "defaultRole": "math",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "mark": {
+            "tagName": "mark",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "menu": {
+            "tagName": "menu",
+            "defaultRole": "list",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "directory",
+                "group",
+                "listbox",
+                "menu",
+                "menubar",
+                "none",
+                "presentation",
+                "radiogroup",
+                "tablist",
+                "toolbar",
+                "tree"
+            ]
+        },
+        "meta": {
+            "tagName": "meta",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "meter": {
+            "tagName": "meter",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "nav": {
+            "tagName": "nav",
+            "defaultRole": "navigation",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menu",
+                "menubar",
+                "tablist"
+            ]
+        },
+        "noscript": {
+            "tagName": "noscript",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "object": {
+            "tagName": "object",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "img"
+            ]
+        },
+        "ol": {
+            "tagName": "ol",
+            "defaultRole": "list",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "directory",
+                "group",
+                "listbox",
+                "menu",
+                "menubar",
+                "none",
+                "presentation",
+                "radiogroup",
+                "tablist",
+                "toolbar",
+                "tree"
+            ]
+        },
+        "optgroup": {
+            "tagName": "optgroup",
+            "defaultRole": "group",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "option": {
+            "tagName": "option",
+            "defaultRole": "option",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "output": {
+            "tagName": "output",
+            "defaultRole": "status",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "p": {
+            "tagName": "p",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "param": {
+            "tagName": "param",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "picture": {
+            "tagName": "picture",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "pre": {
+            "tagName": "pre",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "progress": {
+            "tagName": "progress",
+            "defaultRole": "progressbar",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "q": {
+            "tagName": "q",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "rp": {
+            "tagName": "rp",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "rt": {
+            "tagName": "rt",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "ruby": {
+            "tagName": "ruby",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "s": {
+            "tagName": "s",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "samp": {
+            "tagName": "samp",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "script": {
+            "tagName": "script",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "section[accname]": {
+            "tagName": "section",
+            "defaultRole": "region",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "alert",
+                "alertdialog",
+                "application",
+                "banner",
+                "complementary",
+                "contentinfo",
+                "dialog",
+                "document",
+                "feed",
+                "log",
+                "main",
+                "marquee",
+                "navigation",
+                "none",
+                "note",
+                "presentation",
+                "search",
+                "status",
+                "tabpanel"
+            ],
+            "hasAccname": true
+        },
+        "section": {
+            "tagName": "section",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "alert",
+                "alertdialog",
+                "application",
+                "banner",
+                "complementary",
+                "contentinfo",
+                "dialog",
+                "document",
+                "feed",
+                "log",
+                "main",
+                "marquee",
+                "navigation",
+                "none",
+                "note",
+                "presentation",
+                "search",
+                "status",
+                "tabpanel"
+            ]
+        },
+        "select": {
+            "tagName": "select",
+            "defaultRole": "combobox",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menu"
+            ]
+        },
+        "select[size-or-multiple]": {
+            "tagName": "select",
+            "defaultRole": "listbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "hasSizeOrMultiple": true
+        },
+        "slot": {
+            "tagName": "slot",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "small": {
+            "tagName": "small",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "source": {
+            "tagName": "source",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "span": {
+            "tagName": "span",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "strong": {
+            "tagName": "strong",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "style": {
+            "tagName": "style",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "SVG": {
+            "tagName": "SVG",
+            "defaultRole": "graphics-document",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "sub": {
+            "tagName": "sub",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "summary": {
+            "tagName": "summary",
+            "defaultRole": "button",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "sup": {
+            "tagName": "sup",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "table": {
+            "tagName": "table",
+            "defaultRole": "table",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "tbody": {
+            "tagName": "tbody",
+            "defaultRole": "rowgroup",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "template": {
+            "tagName": "template",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "textarea": {
+            "tagName": "textarea",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "tfoot": {
+            "tagName": "tfoot",
+            "defaultRole": "rowgroup",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "thead": {
+            "tagName": "thead",
+            "defaultRole": "rowgroup",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "time": {
+            "tagName": "time",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "title": {
+            "tagName": "title",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "td[cell]": {
+            "tagName": "td",
+            "defaultRole": "cell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true
+        },
+        "td[gridcell]": {
+            "tagName": "td",
+            "defaultRole": "gridcell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "td": {
+            "tagName": "td",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "th[cell]": {
+            "tagName": "th",
+            "defaultRole": "cell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true
+        },
+        "th[gridcell]": {
+            "tagName": "th",
+            "defaultRole": "gridcell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "th[colheder]": {
+            "tagName": "th",
+            "defaultRole": "colheader",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "th": {
+            "tagName": "th",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "tr[table]": {
+            "tagName": "tr",
+            "defaultRole": "row",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "tr": {
+            "tagName": "tr",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "track": {
+            "tagName": "track",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "u": {
+            "tagName": "u",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "ul": {
+            "tagName": "ul",
+            "defaultRole": "list",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "directory",
+                "group",
+                "listbox",
+                "menu",
+                "menubar",
+                "none",
+                "presentation",
+                "radiogroup",
+                "tablist",
+                "toolbar",
+                "tree"
+            ]
+        },
+        "var": {
+            "tagName": "var",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "video": {
+            "tagName": "video",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application"
+            ]
+        },
+        "wbr": {
+            "tagName": "wbr",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        }
     }
 }

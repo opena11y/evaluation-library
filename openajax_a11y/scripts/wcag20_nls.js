@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-OpenAjax.a11y.nls = OpenAjax.a11y.nls || {};
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+var wcag20_nls = wcag20_nls || {};
 
 /* ---------------------------------------------------------------- */
 /*                       WCAG20                                     */
@@ -51,7 +51,6 @@ OpenAjax.a11y.nls.WCAG20 = function() {
 
       OpenAjax.a11y.logger.info("[WCAG20 NLS] Adding WCAG 2.0 NLS for locale: " + locale);
 
-      var item;
       var  p,  p_id,  np;  /* WCAG 2.0 Principle */
       var  g,  g_id,  ng;  /* WCAG 2.0 Guideline */
       var sc, sc_id, nsc;  /* WCAG 2.0 Success Criterion */
@@ -245,15 +244,15 @@ OpenAjax.a11y.nls.WCAG20NLS.prototype.getSuccessCriteriaLevel = function (sc_id)
 
   var principles = this.principles;
 
-  for (i = 0; i < principles.length; i++) {
+  for (var i = 0; i < principles.length; i++) {
 
     var p = wcag20_nls.principles[i];
 
-    for (j = 0; j < p.guidelines.length; j++) {
+    for (var j = 0; j < p.guidelines.length; j++) {
 
       var g = p.guidelines[i];
 
-      for (k = 0; k < g.success_criteria.length; k++) {
+      for (var k = 0; k < g.success_criteria.length; k++) {
 
         var sc = g.success_criteria[i];
 

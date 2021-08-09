@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
 /* ---------------------------------------------------------------- */
@@ -41,7 +43,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var audio_elements     = dom_cache.media_cache.audio_elements;
     var audio_elements_len = audio_elements.length;
@@ -85,7 +86,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var object_elements     = dom_cache.media_cache.object_elements;
     var object_elements_len = object_elements.length;
@@ -137,7 +137,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var embed_elements     = dom_cache.media_cache.embed_elements;
     var embed_elements_len = embed_elements.length;

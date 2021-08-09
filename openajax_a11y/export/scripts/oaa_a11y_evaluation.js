@@ -18,6 +18,7 @@
  * Support IE and Node constant
  */
 
+
 try {
     if (Node.ELEMENT_NODE != 1) {
         throw true;
@@ -51,12 +52,14 @@ catch(e) {
 
 var OpenAjax = OpenAjax || {};
 
+// export { OpenAjax };
+
 /**
  * @namespace OpenAjax.a11y
  */
 
 OpenAjax.a11y = OpenAjax.a11y || {};
-OpenAjax.a11y.VERSION = "1.1.2";
+OpenAjax.a11y.VERSION = "1.2.0";
 
 /**
  * @method getVersion
@@ -1054,6 +1057,7 @@ OpenAjax.a11y.LANGUAGE_CODES = OpenAjax.a11y.LANGUAGE_CODES || {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*              ARIA Defintions and Validation Methods              */
@@ -5869,1303 +5873,1446 @@ if (typeof OpenAjax.a11y.aria == "undefined") {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*              ARIA In HTML                                        */
 /* ---------------------------------------------------------------- */
 
+/*
+* design patterns for ARIA in HTML
+* legitimate keys for each role include:
+*
+* {Boolean} noRoleAllowed     : No role can be set for the element (required)
+* {Boolean} anyRoleAllowed    : Any role can be set for the element (required)
+* {String}  defaultRole       : Default role for the element (required)
+* {Array}   allowedRoles      : Array of allowed role values (optional)
+* {String}  reqAttribute      : Required attribute is present (optional)
+* {String   reqAttributeValue : Required attribute value (optional)
+* {Boolean} hasAccName        : ELement has an accessible name (optional)
+* {Boolean} hasNoRole         : ELement has no role attribute (optional)
+* {Boolean} hasListAttribute  : Element has a datalist (optional)
+* - :
+* - :
+*/
+
 
 if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
   OpenAjax.a11y.ariaInHTML = {
-        "a": [
-            {
-                "attr": "href",
-                "attr_value": "",
-                "defaultRole": "link",
-                "allowedRoles": [
-                    "button",
-                    "checkbox",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "radio",
-                    "switch",
-                    "tab",
-                    "treeitem"
-                ]
-            },
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "abbr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "address": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "area": [
-            {
-                "attr": "href",
-                "attr_value": "",
-                "defaultRole": "link",
-                "allowedRoles": []
-            },
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "article": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "article",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "feed",
-                    "main",
-                    "none",
-                    "presentation",
-                    "region"
-                ]
-            }
-        ],
-        "aside": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "complementary",
-                "allowedRoles": [
-                    "feed",
-                    "none",
-                    "note",
-                    "presentation",
-                    "region",
-                    "search"
-                ]
-            }
-        ],
-        "audio": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "b": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "base": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "bdi": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "bdo": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "blockquote": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "body": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "br": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "button": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "button",
-                "allowedRoles": [
-                    "checkbox",
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "radio",
-                    "switch",
-                    "tab"
-                ]
-            }
-        ],
-        "canvas": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "caption": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "cite": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "code": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "col": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "colgroup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "data": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "datalist": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "listbox",
-                "allowedRoles": []
-            }
-        ],
-        "dd": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "definition",
-                "allowedRoles": []
-            }
-        ],
-        "del": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "dfn": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "term",
-                "allowedRoles": []
-            }
-        ],
-        "details": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "group",
-                "allowedRoles": []
-            }
-        ],
-        "dialog": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "dialog",
-                "allowedRoles": []
-            }
-        ],
-        "div": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "dl": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "group",
-                    "list",
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "dt": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "term",
-                "allowedRoles": []
-            }
-        ],
-        "em": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "embed": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "img",
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "fieldset": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "group",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "radiogroup"
-                ]
-            }
-        ],
-        "figcaption": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "group",
-                    "presentation",
-                    "none"
-                ]
-            }
-        ],
-        "figure": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "figure",
-                "allowedRoles": []
-            }
-        ],
-        "footer": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "group",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "form": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "form",
-                "allowedRoles": [
-                    "search",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "h1": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "h2": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "h3": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "h4": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "h5": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "h6": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "heading",
-                "allowedRoles": [
-                    "none",
-                    "presentation",
-                    "tab"
-                ]
-            }
-        ],
-        "head": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "header": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "group",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "hgroup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "hr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "separator",
-                "allowedRoles": [
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "html": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "document",
-                "allowedRoles": []
-            }
-        ],
-        "i": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "iframe": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "img",
-                    "none",
-                    "presentation"
-                ]
-            }
-        ],
-        "img": [
-            {
-                "attr": "alt",
-                "attr_value": "",
-                "defaultRole": "img",
-                "allowedRoles": [
-                    "button",
-                    "checkbox",
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "progressbar",
-                    "scrollbar",
-                    "separator",
-                    "slider",
-                    "switch",
-                    "tab",
-                    "treeitem"
-                ]
-            },
-            {
-                "attr": "alt",
-                "attr_value": "",
-                "defaultRole": "presentation",
-                "allowedRoles": []
-            },
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "img",
-                "allowedRoles": []
-            }
-        ],
-        "input": [
-            {
-                "attr": "type",
-                "attr_value": "button",
-                "defaultRole": "button",
-                "allowedRoles": [
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "radio",
-                    "switch",
-                    "tab"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "checkbox",
-                "defaultRole": "checkbox",
-                "allowedRoles": [
-                    "menuitemcheckbox",
-                    "option",
-                    "switch",
-                    "button",
-                    "aria-pressed"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "color",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "date",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "datetime-local",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "email",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "file",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "hidden",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "image",
-                "defaultRole": "button",
-                "allowedRoles": [
-                    "link",
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "radio",
-                    "switch"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "month",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "number",
-                "defaultRole": "spinbutton",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "password",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "radio",
-                "defaultRole": "radio",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "range",
-                "defaultRole": "slider",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "reset",
-                "defaultRole": "button",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "search",
-                "defaultRole": "searchbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "submit",
-                "defaultRole": "button",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "tel",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "text",
-                "defaultRole": "textbox",
-                "allowedRoles": [
-                    "combobox",
-                    "searchbox",
-                    "spinbutton"
-                ]
-            },
-            {
-                "attr": "type",
-                "attr_value": "time",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "url",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "type",
-                "attr_value": "week",
-                "defaultRole": "widget",
-                "allowedRoles": []
-            }
-        ],
-        "ins": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "kbd": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "label": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "legend": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "li": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "listitem",
-                "allowedRoles": [
-                    "menuitem",
-                    "menuitemcheckbox",
-                    "menuitemradio",
-                    "option",
-                    "none",
-                    "presentation",
-                    "radio",
-                    "separator",
-                    "tab",
-                    "treeitem"
-                ]
-            }
-        ],
-        "link": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "main": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "main",
-                "allowedRoles": []
-            }
-        ],
-        "map": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "math": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "math",
-                "allowedRoles": []
-            }
-        ],
-        "mark": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "menu": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "list",
-                "allowedRoles": [
-                    "directory",
-                    "group",
-                    "listbox",
-                    "menu",
-                    "menubar",
-                    "none",
-                    "presentation",
-                    "radiogroup",
-                    "tablist",
-                    "toolbar",
-                    "tree"
-                ]
-            }
-        ],
-        "meta": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "meter": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "nav": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "navigation",
-                "allowedRoles": [
-                    "menu",
-                    "menubar",
-                    "tablist"
-                ]
-            }
-        ],
-        "noscript": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "object": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": [
-                    "application",
-                    "document",
-                    "img"
-                ]
-            }
-        ],
-        "ol": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "list",
-                "allowedRoles": [
-                    "directory",
-                    "group",
-                    "listbox",
-                    "menu",
-                    "menubar",
-                    "none",
-                    "presentation",
-                    "radiogroup",
-                    "tablist",
-                    "toolbar",
-                    "tree"
-                ]
-            }
-        ],
-        "optgroup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "group",
-                "allowedRoles": []
-            }
-        ],
-        "option": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "option",
-                "allowedRoles": []
-            }
-        ],
-        "output": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "status",
-                "allowedRoles": []
-            }
-        ],
-        "p": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "param": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "picture": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "pre": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "progress": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "progressbar",
-                "allowedRoles": []
-            }
-        ],
-        "q": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "rp": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "rt": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "ruby": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "s": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "samp": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "script": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "section": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "region",
-                "allowedRoles": [
-                    "alert",
-                    "alertdialog",
-                    "application",
-                    "banner",
-                    "complementary",
-                    "contentinfo",
-                    "dialog",
-                    "document",
-                    "feed",
-                    "log",
-                    "main",
-                    "marquee",
-                    "navigation",
-                    "none",
-                    "note",
-                    "presentation",
-                    "search",
-                    "status",
-                    "tabpanel"
-                ]
-            }
-        ],
-        "select": [
-            {
-                "attr": "multiple",
-                "attr_value": "",
-                "defaultRole": "combobox",
-                "allowedRoles": []
-            },
-            {
-                "attr": "multiple",
-                "attr_value": "",
-                "defaultRole": "listbox",
-                "allowedRoles": []
-            }
-        ],
-        "slot": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "small": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "source": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "span": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "strong": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "style": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "SVG": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "graphics-document",
-                "allowedRoles": []
-            }
-        ],
-        "sub": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "summary": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "button",
-                "allowedRoles": []
-            }
-        ],
-        "sup": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "table": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "table",
-                "allowedRoles": []
-            }
-        ],
-        "tbody": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "rowgroup",
-                "allowedRoles": []
-            }
-        ],
-        "template": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "textarea": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "textbox",
-                "allowedRoles": []
-            }
-        ],
-        "tfoot": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "rowgroup",
-                "allowedRoles": []
-            }
-        ],
-        "thead": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "rowgroup",
-                "allowedRoles": []
-            }
-        ],
-        "time": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "title": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "td": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "cell",
-                "allowedRoles": []
-            }
-        ],
-        "th": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "columnheader",
-                "allowedRoles": []
-            }
-        ],
-        "tr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "row",
-                "allowedRoles": []
-            }
-        ],
-        "track": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "u": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "ul": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "list",
-                "allowedRoles": [
-                    "directory",
-                    "group",
-                    "listbox",
-                    "menu",
-                    "menubar",
-                    "none",
-                    "presentation",
-                    "radiogroup",
-                    "tablist",
-                    "toolbar",
-                    "tree"
-                ]
-            }
-        ],
-        "var": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "video": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ],
-        "wbr": [
-            {
-                "attr": "",
-                "attr_value": "",
-                "defaultRole": "generic",
-                "allowedRoles": []
-            }
-        ]
-  };
+    "elementInfo": {
+        "a[href]": {
+            "tagName": "a",
+            "defaultRole": "link",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "checkbox",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "radio",
+                "switch",
+                "tab",
+                "treeitem"
+            ],
+            "attr1": "href"
+        },
+        "a": {
+            "tagName": "a",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "abbr": {
+            "tagName": "abbr",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "address": {
+            "tagName": "address",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "area[href]": {
+            "tagName": "area",
+            "defaultRole": "link",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "href"
+        },
+        "area": {
+            "tagName": "area",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "article": {
+            "tagName": "article",
+            "defaultRole": "article",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "feed",
+                "main",
+                "none",
+                "presentation",
+                "region"
+            ]
+        },
+        "aside": {
+            "tagName": "aside",
+            "defaultRole": "complementary",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "feed",
+                "none",
+                "note",
+                "presentation",
+                "region",
+                "search"
+            ]
+        },
+        "audio": {
+            "tagName": "audio",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application"
+            ]
+        },
+        "b": {
+            "tagName": "b",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "base": {
+            "tagName": "base",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "bdi": {
+            "tagName": "bdi",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "bdo": {
+            "tagName": "bdo",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "blockquote": {
+            "tagName": "blockquote",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "body": {
+            "tagName": "body",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "br": {
+            "tagName": "br",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "presentation",
+                "none"
+            ]
+        },
+        "button": {
+            "tagName": "button",
+            "defaultRole": "button",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "checkbox",
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "radio",
+                "switch",
+                "tab"
+            ]
+        },
+        "canvas": {
+            "tagName": "canvas",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "caption": {
+            "tagName": "caption",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "cite": {
+            "tagName": "cite",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "code": {
+            "tagName": "code",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "col": {
+            "tagName": "col",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "colgroup": {
+            "tagName": "colgroup",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "data": {
+            "tagName": "data",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "datalist": {
+            "tagName": "datalist",
+            "defaultRole": "listbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "dd": {
+            "tagName": "dd",
+            "defaultRole": "definition",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "del": {
+            "tagName": "del",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "dfn": {
+            "tagName": "dfn",
+            "defaultRole": "term",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "details": {
+            "tagName": "details",
+            "defaultRole": "group",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "dialog": {
+            "tagName": "dialog",
+            "defaultRole": "dialog",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "alertdialog"
+            ]
+        },
+        "div": {
+            "tagName": "div",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "dl": {
+            "tagName": "dl",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "list",
+                "presentation",
+                "none"
+            ]
+        },
+        "dt": {
+            "tagName": "dt",
+            "defaultRole": "term",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "listitem"
+            ]
+        },
+        "em": {
+            "tagName": "em",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "embed": {
+            "tagName": "embed",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "img",
+                "presentation",
+                "none"
+            ]
+        },
+        "fieldset": {
+            "tagName": "fieldset",
+            "defaultRole": "group",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "radiogroup"
+            ]
+        },
+        "figcaption": {
+            "tagName": "figcaption",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "presentation",
+                "none"
+            ]
+        },
+        "figure[figcaption]": {
+            "tagName": "figure",
+            "defaultRole": "figure",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "hasFigcaption": true
+        },
+        "figure": {
+            "tagName": "figure",
+            "defaultRole": "figure",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "footer[contentinfo]": {
+            "tagName": "footer",
+            "defaultRole": "contentInfo",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ],
+            "isLandmark": true
+        },
+        "footer": {
+            "tagName": "footer",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ]
+        },
+        "form": {
+            "tagName": "form",
+            "defaultRole": "form",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "search",
+                "none",
+                "presentation"
+            ]
+        },
+        "h1": {
+            "tagName": "h1",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h2": {
+            "tagName": "h2",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h3": {
+            "tagName": "h3",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h4": {
+            "tagName": "h4",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h5": {
+            "tagName": "h5",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "h6": {
+            "tagName": "h6",
+            "defaultRole": "heading",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation",
+                "tab"
+            ]
+        },
+        "head": {
+            "tagName": "head",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "header[banner]": {
+            "tagName": "header",
+            "defaultRole": "banner",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ],
+            "isLandmark": true
+        },
+        "header": {
+            "tagName": "header",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "group",
+                "none",
+                "presentation"
+            ]
+        },
+        "hgroup": {
+            "tagName": "hgroup",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "hr": {
+            "tagName": "hr",
+            "defaultRole": "separator",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation"
+            ]
+        },
+        "html": {
+            "tagName": "html",
+            "defaultRole": "document",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "i": {
+            "tagName": "i",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "iframe": {
+            "tagName": "iframe",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "img",
+                "none",
+                "presentation"
+            ]
+        },
+        "img[accname]": {
+            "tagName": "img",
+            "defaultRole": "img",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "checkbox",
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "progressbar",
+                "scrollbar",
+                "separator",
+                "slider",
+                "switch",
+                "tab",
+                "treeitem"
+            ],
+            "hasAccname": true
+        },
+        "img[alt]": {
+            "tagName": "img",
+            "defaultRole": "img",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "checkbox",
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "progressbar",
+                "scrollbar",
+                "separator",
+                "slider",
+                "switch",
+                "tab",
+                "treeitem"
+            ],
+            "attr1": "alt"
+        },
+        "img[emptyalt]": {
+            "tagName": "img",
+            "defaultRole": "presentation",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "alt=\"\""
+        },
+        "img": {
+            "tagName": "img",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "input[type=button]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "radio",
+                "switch",
+                "tab"
+            ],
+            "attr1": "type=button"
+        },
+        "input[type=checkbox]": {
+            "tagName": "input",
+            "defaultRole": "checkbox",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menuitemcheckbox",
+                "option",
+                "switch",
+                "button"
+            ],
+            "attr1": "type=checkbox"
+        },
+        "input[type=color]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=color"
+        },
+        "input[type=date]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=date"
+        },
+        "input[type=datetime-local]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=datetime-local"
+        },
+        "input[type=email][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=email",
+            "attr2": "list"
+        },
+        "input[type=email]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=email"
+        },
+        "input[type=file]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=file"
+        },
+        "input[type=hidden]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [],
+            "attr1": "type=hidden"
+        },
+        "input[type=image]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "link",
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "radio",
+                "switch"
+            ],
+            "attr1": "type=image"
+        },
+        "input[type=month]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=month"
+        },
+        "input[type=number]": {
+            "tagName": "input",
+            "defaultRole": "spinbutton",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=number"
+        },
+        "input[type=password]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=password"
+        },
+        "input[type=radio]": {
+            "tagName": "input",
+            "defaultRole": "radio",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menuitemradio"
+            ],
+            "attr1": "type=radio"
+        },
+        "input[type=range]": {
+            "tagName": "input",
+            "defaultRole": "slider",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=range"
+        },
+        "input[type=reset]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=reset"
+        },
+        "input[type=search][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=search",
+            "attr2": "list"
+        },
+        "input[type=search]": {
+            "tagName": "input",
+            "defaultRole": "searchbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=search"
+        },
+        "input[type=submit]": {
+            "tagName": "input",
+            "defaultRole": "button",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=submit"
+        },
+        "input[type=tel][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=tel",
+            "attr2": "list"
+        },
+        "input[type=tel]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=tel"
+        },
+        "input[type=text][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=text",
+            "attr2": "list"
+        },
+        "input[type=text]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "combobox",
+                "searchbox",
+                "spinbutton"
+            ],
+            "attr1": "type=text"
+        },
+        "input[type=time]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=time"
+        },
+        "input[type=url][list]": {
+            "tagName": "input",
+            "defaultRole": "combobox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=url",
+            "attr2": "list"
+        },
+        "input[type=url]": {
+            "tagName": "input",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=url"
+        },
+        "input[type=week]": {
+            "tagName": "input",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "attr1": "type=week"
+        },
+        "ins": {
+            "tagName": "ins",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "kbd": {
+            "tagName": "kbd",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "label": {
+            "tagName": "label",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "legend": {
+            "tagName": "legend",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "li": {
+            "tagName": "li",
+            "defaultRole": "listitem",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menuitem",
+                "menuitemcheckbox",
+                "menuitemradio",
+                "option",
+                "none",
+                "presentation",
+                "radio",
+                "separator",
+                "tab",
+                "treeitem"
+            ]
+        },
+        "link": {
+            "tagName": "link",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "main": {
+            "tagName": "main",
+            "defaultRole": "main",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "map": {
+            "tagName": "map",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "math": {
+            "tagName": "math",
+            "defaultRole": "math",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "mark": {
+            "tagName": "mark",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "menu": {
+            "tagName": "menu",
+            "defaultRole": "list",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "directory",
+                "group",
+                "listbox",
+                "menu",
+                "menubar",
+                "none",
+                "presentation",
+                "radiogroup",
+                "tablist",
+                "toolbar",
+                "tree"
+            ]
+        },
+        "meta": {
+            "tagName": "meta",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "meter": {
+            "tagName": "meter",
+            "defaultRole": "generic",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "nav": {
+            "tagName": "nav",
+            "defaultRole": "navigation",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menu",
+                "menubar",
+                "tablist"
+            ]
+        },
+        "noscript": {
+            "tagName": "noscript",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "object": {
+            "tagName": "object",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application",
+                "document",
+                "img"
+            ]
+        },
+        "ol": {
+            "tagName": "ol",
+            "defaultRole": "list",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "directory",
+                "group",
+                "listbox",
+                "menu",
+                "menubar",
+                "none",
+                "presentation",
+                "radiogroup",
+                "tablist",
+                "toolbar",
+                "tree"
+            ]
+        },
+        "optgroup": {
+            "tagName": "optgroup",
+            "defaultRole": "group",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "option": {
+            "tagName": "option",
+            "defaultRole": "option",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "output": {
+            "tagName": "output",
+            "defaultRole": "status",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "p": {
+            "tagName": "p",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "param": {
+            "tagName": "param",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "picture": {
+            "tagName": "picture",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "pre": {
+            "tagName": "pre",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "progress": {
+            "tagName": "progress",
+            "defaultRole": "progressbar",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "q": {
+            "tagName": "q",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "rp": {
+            "tagName": "rp",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "rt": {
+            "tagName": "rt",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "ruby": {
+            "tagName": "ruby",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "s": {
+            "tagName": "s",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "samp": {
+            "tagName": "samp",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "script": {
+            "tagName": "script",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "section[accname]": {
+            "tagName": "section",
+            "defaultRole": "region",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "alert",
+                "alertdialog",
+                "application",
+                "banner",
+                "complementary",
+                "contentinfo",
+                "dialog",
+                "document",
+                "feed",
+                "log",
+                "main",
+                "marquee",
+                "navigation",
+                "none",
+                "note",
+                "presentation",
+                "search",
+                "status",
+                "tabpanel"
+            ],
+            "hasAccname": true
+        },
+        "section": {
+            "tagName": "section",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "alert",
+                "alertdialog",
+                "application",
+                "banner",
+                "complementary",
+                "contentinfo",
+                "dialog",
+                "document",
+                "feed",
+                "log",
+                "main",
+                "marquee",
+                "navigation",
+                "none",
+                "note",
+                "presentation",
+                "search",
+                "status",
+                "tabpanel"
+            ]
+        },
+        "select": {
+            "tagName": "select",
+            "defaultRole": "combobox",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "menu"
+            ]
+        },
+        "select[size-or-multiple]": {
+            "tagName": "select",
+            "defaultRole": "listbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "hasSizeOrMultiple": true
+        },
+        "slot": {
+            "tagName": "slot",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "small": {
+            "tagName": "small",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "source": {
+            "tagName": "source",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "span": {
+            "tagName": "span",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "strong": {
+            "tagName": "strong",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "style": {
+            "tagName": "style",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "SVG": {
+            "tagName": "SVG",
+            "defaultRole": "graphics-document",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "sub": {
+            "tagName": "sub",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "summary": {
+            "tagName": "summary",
+            "defaultRole": "button",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "sup": {
+            "tagName": "sup",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "table": {
+            "tagName": "table",
+            "defaultRole": "table",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "tbody": {
+            "tagName": "tbody",
+            "defaultRole": "rowgroup",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "template": {
+            "tagName": "template",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "textarea": {
+            "tagName": "textarea",
+            "defaultRole": "textbox",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false
+        },
+        "tfoot": {
+            "tagName": "tfoot",
+            "defaultRole": "rowgroup",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "thead": {
+            "tagName": "thead",
+            "defaultRole": "rowgroup",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "time": {
+            "tagName": "time",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "title": {
+            "tagName": "title",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "td[cell]": {
+            "tagName": "td",
+            "defaultRole": "cell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true
+        },
+        "td[gridcell]": {
+            "tagName": "td",
+            "defaultRole": "gridcell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "td": {
+            "tagName": "td",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "th[cell]": {
+            "tagName": "th",
+            "defaultRole": "cell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true
+        },
+        "th[gridcell]": {
+            "tagName": "th",
+            "defaultRole": "gridcell",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "th[colheder]": {
+            "tagName": "th",
+            "defaultRole": "colheader",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "th": {
+            "tagName": "th",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "tr[table]": {
+            "tagName": "tr",
+            "defaultRole": "row",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "ownedbyTable": true,
+            "ownedbyGrid": true,
+            "ownedbyTreegrid": true
+        },
+        "tr": {
+            "tagName": "tr",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "track": {
+            "tagName": "track",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": []
+        },
+        "u": {
+            "tagName": "u",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "ul": {
+            "tagName": "ul",
+            "defaultRole": "list",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "directory",
+                "group",
+                "listbox",
+                "menu",
+                "menubar",
+                "none",
+                "presentation",
+                "radiogroup",
+                "tablist",
+                "toolbar",
+                "tree"
+            ]
+        },
+        "var": {
+            "tagName": "var",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        },
+        "video": {
+            "tagName": "video",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "application"
+            ]
+        },
+        "wbr": {
+            "tagName": "wbr",
+            "defaultRole": "generic",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true
+        }
+    },
+    getElementAriaInfo : function (node) {
 
+        var tagName = node.tagName.toLowerCase();
+        var elemInfo, type;
+
+        switch (tagName) {
+            case 'a':
+                if (node.href) {
+                    elemInfo = this.elementInfo['a[href]'];
+                } else {
+                    elemInfo = this.elementInfo['a'];
+                }
+                break;
+
+            case 'area':
+                if (node.href) {
+                    elemInfo = this.elementInfo['area[href]'];
+                } else {
+                    elemInfo = this.elementInfo['area'];
+                }
+                break;
+
+            case 'img':
+                if (node.alt) {
+                    if (node.alt.trim().length) {
+                        elemInfo = this.elementInfo['img[alt]'];
+                    } else {
+                        elemInfo = this.elementInfo['img[emptyalt]'];
+                    }
+                } else {
+                    if (node.hasAttribute('aria-label') ||
+                        node.hasAttribute('aria-labelledby')) {
+                        elemInfo = this.elementInfo['img[accname]'];
+                    } else {
+                        elemInfo = this.elementInfo['img'];
+                    }
+                }
+                break;
+
+            case 'input':
+
+                type = node.type;
+
+                if (!type) {
+                    type = 'text';
+                }
+                tagName += '[type=' + type + ']';
+
+                if (node.list) {
+                    tagName += '[list]';
+                }
+                elemInfo = this.elementInfo[tagName];
+                break;
+
+            case 'section':
+                if (node.hasAttribute('aria-label') ||
+                    node.hasAttribute('aria-labelledby')) {
+                    elemInfo = this.elementInfo['section[accname]'];
+                } else {
+                    elemInfo = this.elementInfo['section'];
+                }
+                break;
+
+            case 'select':
+                if (node.multiple || (node.size > 1)) {
+                    elemInfo = this.elementInfo['select[size-or-multiple]'];
+                } else {
+                    elemInfo = this.elementInfo['select'];
+                }
+                break;
+
+            default:
+                elemInfo = this.elementInfo[tagName];
+
+        }
+
+        if (!elemInfo) {
+            elemInfo = {
+              "tagName": node.tagName,
+              "defaultRole": "generic",
+              "noRoleAllowed": false,
+              "anyRoleAllowed": true
+            }
+        }
+
+        return elemInfo;
+    }
+  };
 }
 /**
  * Copyright 2011-2018 OpenAjax Alliance
@@ -7183,6 +7330,9 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
+
 /* ---------------------------------------------------------------- */
 /*        Utilities and String Extensions                           */
 /* ---------------------------------------------------------------- */
@@ -7191,9 +7341,8 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
  * @namespace OpenAjax.a11y.util
  */
 
-OpenAjax.a11y.util = OpenAjax.a11y.util || {};
-
-
+OpenAjax.a11y =  OpenAjax.a11y || {};
+OpenAjax.a11y.util =  OpenAjax.a11y.util || {};
 
 /**
  * @function cleanForUTF8
@@ -7232,7 +7381,7 @@ OpenAjax.a11y.util.cleanForUTF8 = function(str) {
  * @return {String}  Formatted date string
  */
 
-OpenAjax.a11y.util.getFormattedDate = function(str) {
+OpenAjax.a11y.util.getFormattedDate = function() {
 
   function leadingZero(n) {
     var n1 = n.toString();
@@ -7440,7 +7589,7 @@ OpenAjax.a11y.util.RGBToHEX = function( rgb_color ) {
 
  var hex = [];
  var color_hex = "000000";
- var components = rgb_color.match(/[\d\.]+/g);
+ var components = rgb_color.match(/[\d.]+/g);
 
  if (components && components.length) {
   length = components.length;
@@ -7531,12 +7680,11 @@ OpenAjax.a11y.util.normalizeSpace = function (s) {
  * @param {String}  s       - String to have replacements
  * @param {String}  str1    - String to replace
  * @param {String}  str2    - The replacement string
- * @param {Boolean} ignore  - True if ignore uppercase and lowercase
  *
  * @return  String
  */
 
-OpenAjax.a11y.util.replaceAll = function(s, str1, str2, ignore) {
+OpenAjax.a11y.util.replaceAll = function(s, str1, str2) {
 
   var len = s.length;
   var pos = s.indexOf(str1);
@@ -7557,7 +7705,8 @@ OpenAjax.a11y.util.replaceAll = function(s, str1, str2, ignore) {
 
   return s1;
 
-};/*
+};
+/*
  * Copyright 2011-2018 OpenAjax Alliance
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7573,6 +7722,7 @@ OpenAjax.a11y.util.replaceAll = function(s, str1, str2, ignore) {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      AbbreviationsCache                          */
@@ -7959,12 +8109,10 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function () {
 
   return [];
 
@@ -7977,12 +8125,10 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function (unsorte
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.AbbreviationItem.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getCacheProperties = function () {
 
   return [];
 
@@ -8041,7 +8187,7 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.getEvents = function () {
 
 OpenAjax.a11y.cache.AbbreviationItem.prototype.toString = function () {
 
- return "Abbreviation: " + abbreviation_text;
+ return "Abbreviation: " + this.abbreviation_text;
 };
 
 
@@ -8061,6 +8207,8 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       ColorContrstCache                          */
@@ -8396,8 +8544,6 @@ OpenAjax.a11y.cache.ColorContrastCache.prototype.toString = function () {
 
   var i;
 
-  var item;
-
   var str = "\n\nColor Contrast List Information\n";
 
   var list_length = this.color_contrast_items.length;
@@ -8540,12 +8686,10 @@ OpenAjax.a11y.cache.ColorContrastItem.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.ColorContrastItem.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.ColorContrastItem.prototype.getAttributes = function () {
 
   return [];
 
@@ -8558,12 +8702,10 @@ OpenAjax.a11y.cache.ColorContrastItem.prototype.getAttributes = function (unsort
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.ColorContrastItem.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.ColorContrastItem.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -8647,6 +8789,8 @@ OpenAjax.a11y.cache.ColorContrastItem.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       ControlInfo                                */
@@ -8945,6 +9089,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
 
   var be;
   var fe;
+  var ge;
   var ie;
   var le;
   var me;
@@ -9574,6 +9719,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getRuleResults = function (filter) {
   }
 
   var RESULT_FILTER = OpenAjax.a11y.RESULT_FILTER;
+  var cache_items = [];
 
   var local_filter;
 
@@ -9581,8 +9727,6 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getRuleResults = function (filter) {
     local_filter = RESULT_FILTER.ALL;
   else
     local_filter = filter;
-
-  var rule_results = [];
 
   var child_cache_elements     = this.child_cache_elements;
   var child_cache_elements_len = child_cache_elements.length;
@@ -9814,12 +9958,10 @@ OpenAjax.a11y.cache.ControlsCache.prototype.getElementTextContent = function (la
 
      case 'select':
      // *** need to add some code here to get
-       return;
        break;
 
      case 'textarea':
      // *** need to add some code here to get
-       return;
        break;
 
      default:
@@ -10247,7 +10389,6 @@ OpenAjax.a11y.cache.ControlsCache.prototype.removeFromChildCacheElements = funct
  * @desc Creates a FormElement object used to hold information about form elements
  *
  * @param  {DOMelement}   dom_element   - dom_element object references DOMElement of the form element
- * @param  {ControlInfo}  control_info  - Information about the parent control cache
  *
  * @property  {DOMElement}  dom_element           - DOMElement associated with the form element
  * @property  {String}      cache_id              - String that uniquely identifies the cache element in the DOMCache
@@ -10268,7 +10409,7 @@ OpenAjax.a11y.cache.ControlsCache.prototype.removeFromChildCacheElements = funct
  * @property  {String}  name_attribute  - The value of the name attribute of the form control
  */
 
-OpenAjax.a11y.cache.FormElement = function (dom_element, control_info) {
+OpenAjax.a11y.cache.FormElement = function (dom_element) {
 
   this.dom_element  = dom_element;
   this.child_cache_elements = [];
@@ -10350,7 +10491,6 @@ OpenAjax.a11y.cache.FormElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.FormElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   if (!unsorted) this.dom_element.sortItems(attributes);
@@ -10369,8 +10509,6 @@ OpenAjax.a11y.cache.FormElement.prototype.getAttributes = function (unsorted) {
  */
 
 OpenAjax.a11y.cache.FormElement.prototype.getCacheProperties = function () {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties();
 
@@ -10409,7 +10547,7 @@ OpenAjax.a11y.cache.FormElement.prototype.getCachePropertyValue = function (prop
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.FormElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.FormElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -10551,7 +10689,6 @@ OpenAjax.a11y.cache.FieldsetElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.FieldsetElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
 //  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
@@ -10574,8 +10711,6 @@ OpenAjax.a11y.cache.FieldsetElement.prototype.getAttributes = function (unsorted
  */
 
 OpenAjax.a11y.cache.FieldsetElement.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -10757,10 +10892,7 @@ OpenAjax.a11y.cache.GroupingElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.GroupingElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -10781,11 +10913,7 @@ OpenAjax.a11y.cache.GroupingElement.prototype.getAttributes = function (unsorted
 
 OpenAjax.a11y.cache.GroupingElement.prototype.getCacheProperties = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties(unsorted);
-
-//  cache_nls.addPropertyIfDefined(properties, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(properties);
 
@@ -10971,10 +11099,7 @@ OpenAjax.a11y.cache.LegendElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.LegendElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -10995,11 +11120,7 @@ OpenAjax.a11y.cache.LegendElement.prototype.getAttributes = function (unsorted) 
 
 OpenAjax.a11y.cache.LegendElement.prototype.getCacheProperties = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties(unsorted);
-
-//  cache_nls.addPropertyIfDefined(properties, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(properties);
 
@@ -11190,10 +11311,7 @@ OpenAjax.a11y.cache.LabelElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.LabelElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'for_id');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -11587,7 +11705,6 @@ OpenAjax.a11y.cache.InputElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.InputElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   if (!unsorted) this.dom_element.sortItems(attributes);
@@ -11682,8 +11799,6 @@ OpenAjax.a11y.cache.InputElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.InputElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   if (this.computed_label_length) {
     return this.computed_label;
@@ -11883,10 +11998,7 @@ OpenAjax.a11y.cache.ButtonElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.ButtonElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUnefined(attributes, this, 'name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -11977,8 +12089,6 @@ OpenAjax.a11y.cache.ButtonElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
-  var label_style = {};
-
   if (this.computed_label_length) {
     return this.computed_label;
   }
@@ -12003,8 +12113,6 @@ OpenAjax.a11y.cache.ButtonElement.prototype.getLabelNLS = function () {
 OpenAjax.a11y.cache.ButtonElement.prototype.getLabelSourceNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   return cache_nls.getValueNLS('computed_label_source', this.computed_label_source);
 
@@ -13321,10 +13429,7 @@ OpenAjax.a11y.cache.SelectElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.SelectElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -13415,8 +13520,6 @@ OpenAjax.a11y.cache.SelectElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
-  var label_style = {};
-
   if (this.computed_label_length) {
     return this.computed_label;
   }
@@ -13442,8 +13545,6 @@ OpenAjax.a11y.cache.SelectElement.prototype.getLabelNLS = function () {
 OpenAjax.a11y.cache.SelectElement.prototype.getLabelSourceNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   return cache_nls.getValueNLS('computed_label_source', this.computed_label_source);
 
@@ -13596,10 +13697,7 @@ OpenAjax.a11y.cache.OptgroupElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.OptgroupElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -13765,10 +13863,7 @@ OpenAjax.a11y.cache.OptionElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.OptionElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -14215,10 +14310,7 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.WidgetElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -14313,8 +14405,6 @@ OpenAjax.a11y.cache.WidgetElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.WidgetElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   if (this.computed_label_length) {
     return this.computed_label;
@@ -14453,10 +14543,7 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.InteractiveElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfUndefined(attributes, this, 'name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -14476,8 +14563,6 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.getAttributes = function (unsor
  */
 
 OpenAjax.a11y.cache.InteractiveElement.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -14541,8 +14626,6 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.InteractiveElement.prototype.getLabelNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var label_style = {};
 
   if (this.computed_label_length) {
     return this.computed_label;
@@ -14608,6 +14691,8 @@ OpenAjax.a11y.cache.InteractiveElement.prototype.toString = function () {
  * See the License for the specific language governing permissions andf
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       DOMElementCache                            */
@@ -15204,7 +15289,7 @@ OpenAjax.a11y.cache.DOMText.prototype.getAccessibility = function () {
  * @return {Array} Returns a empty array
  */
 
-OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function () {
 
   return [];
 
@@ -15220,7 +15305,7 @@ OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function (unsorted) {
  * @return {Array} Returns a empty array
  */
 
-OpenAjax.a11y.cache.DOMText.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.DOMText.prototype.getEvents = function () {
 
   return [];
 
@@ -15471,7 +15556,6 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  *
  * @property {String}     class_name     - The value of the class attribute of the DOM node
  * @property {String}     role           - The value of the role attribute of the DOM node
- * @property {String}     implicit_role  - The implicit role based on the HTML element tag name
  *
  * @property {String}     alt      - String   The value of the alt attribute of the DOM node
  * @property {Boolean}    has_alt  - true if the alt attribute is defined, otherwise false
@@ -15554,6 +15638,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       var i;
       var j;
 
+      var v = parseInt(value, 10);
+
       switch (type) {
 
       case 'boolean':
@@ -15562,7 +15648,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
       case 'decimal':
         if (typeof parseFloat(value) === 'number') return true;
-        return true;
         break;
 
       case 'idref':
@@ -15574,8 +15659,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         break;
 
       case 'integer':
-        let v = parseInt(value, 10);
-        if (!isNaN(value) &&
+        if (!isNaN(v) &&
             ( v > 0) ||
             (allowUndeterminedValue && (v === -1 || v === 0))) {
           return true;
@@ -15603,7 +15687,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
           }
         }
         return flag;
-        break;
 
       case 'number':
         if (!isNaN(value) && value.length) return true;
@@ -15682,7 +15765,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   var i;
   var attr;
   var attributes;
-  var attributes_len;
   var role_info;
 
   // check to make sure it is a valid node
@@ -15702,6 +15784,13 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
   this.owned_by = [];
   this.widget_element = null;
+
+  this.element_aria_info = OpenAjax.a11y.ariaInHTML.getElementAriaInfo(node);
+  if (this.tag_name === 'figure') {
+    if (node.querySelector('figcaption')) {
+      this.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['figure[figcaption]'];
+    }
+  }
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -15727,7 +15816,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   i = 0;
   attr = null;
   attributes = node.attributes;
-  attributes_len = attributes.length;
 
   this.class_name = "";
 
@@ -15820,9 +15908,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
-
-  this.implicit_role = this.getImplicitRole(node);
-  console.log('[implicit_role][' + node.tagName + ']: ' + this.implicit_role);
 
   // Check for ARIA Attributes
 
@@ -16100,49 +16185,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 };
 
 /**
- * @method getImplicitRole
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc  Get implicit role baed on the ARIA in HTML specification
- *
- * @param  {Object} node - DOM element node
- *
- * @return {String} - Implicit role of the element
- }
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.getImplicitRole = function (node) {
-
-  var role = 'generic';
-  var elemInfo = OpenAjax.a11y.ariaInHTML[node.tagName.toLowerCase()];
-
-  if (elemInfo) {
-    if (elemInfo.length > 1) {
-      for (let i = 0; i  < elemInfo.length; i += 1) {
-        let attr = node[elemInfo[i].attr];
-        if (attr) {
-          if (node[elemInfo[i].attr_value]) {
-            if (attr === node[elemInfo[i].attr_value]) {
-              role = elemInfo[i].defaultRole;
-              break;
-            }
-          } else {
-            role = elemInfo[i].defaultRole;
-            break;
-          }
-        }
-      }
-    } else {
-      role = elemInfo[0].defaultRole;
-    }
-  }
-  console.log('[elemInfo]: ' + elemInfo + ' (' + node.tagName + ')');
-  return role;
-};
-
-
-/**
  * @method getAttributeValue
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
@@ -16229,6 +16271,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr,
 
   var flag = false;
 
+  var v = parseInt(value, 10);
+
   switch (attr_info.type) {
 
   case 'boolean':
@@ -16248,8 +16292,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr,
 
   case 'integer':
   case 'positive':
-    if ((typeof value === 'number') &&
-        ((value > 0) ||
+    if ((typeof v === 'number') &&
+        ((v > 0) ||
          (attr_info.type.allowUndeterminedValue && (v === -1 || v === 0)))) {
       flag = true;
     }
@@ -16332,7 +16376,7 @@ OpenAjax.a11y.cache.DOMElement.prototype.setImpliedRole = function (role) {
 
   if (!this.has_role && typeof role === 'string' && (role.length > 0)) {
 
-    role_info = OpenAjax.a11y.aria.getRoleObject(role);
+    var role_info = OpenAjax.a11y.aria.getRoleObject(role);
 
     if (!role_info) return;
 
@@ -16442,30 +16486,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.getParentLandmark = function () {
 
 };
 
-
-/**
- * @method hasAttrWithValue
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc   Check DOMElement for presence of attribute with specified value
- *
- * @param  {String} name  - name of attribute
- * @param  {String} value - value of attribute
- *
- * @return {boolean} Indicates whether or not DOMElement has the specified
- *                   attribute with the specified value.
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.hasAttrWithValue = function (name, value) {
-
-  if (this.hasOwnProperty (name)) {
-    return this[name] === value;
-  }
-
-  return false;
-
-};
 
 /**
  * @method hasOwns
@@ -16590,11 +16610,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.getAccessibility = function () {
   var RESULT_VALUE       = OpenAjax.a11y.RESULT_VALUE;
 
   var severity = cache_nls.getResultValueNLS(RESULT_VALUE.NONE);
-  a.label    = severity.label;
-
-//  if (this.rules_hidden.length) {
-//    severity = cache_nls.getResultValueNLS(RESULT_VALUE.HIDDEN);
-//  }
 
   if (this.rules_passed.length) {
     severity = cache_nls.getResultValueNLS(RESULT_VALUE.PASS);
@@ -17025,8 +17040,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.hasDragEvents = function (prop_list) {
   }
 
   var has_event = false;
-
-  var de = this;
 
 //  OpenAjax.a11y.logger.debug("DRAG: " + de.toString());
 
@@ -17566,6 +17579,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.EnumerateFirefoxEvents = function (node
   var i;
   var event_info;
 
+  var Components = Components || {};
+
   if (node.tagName && node.tagName.toLowerCase() === 'body') {
      event_info = this.EnumerateFirefoxEvents(this.document, null);
 //     OpenAjax.a11y.logger.debug('body: ' + event_info.has_key_down);
@@ -17858,6 +17873,9 @@ OpenAjax.a11y.cache.DOMElement.prototype.EnumerateInlineEvents = function (node,
   }
 
   function testForPropertyAndJQueryEvent(p) {
+
+    // If JQuery is defined
+    var $ = $ || {};
 
     if (typeof node['on' + p] === 'function') {
       events.supports_events = true;
@@ -18426,6 +18444,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.toString = function() {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            DOMCache                              */
 /* ---------------------------------------------------------------- */
@@ -18694,8 +18714,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateAllCaches = function () {
 
 OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElementCache = function () {
 
- var de;
-
  this.initCache();
 
  // add title information to DOMElement Cache
@@ -18879,7 +18897,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
     } // end loop
 
     return dom_element;
-    break;
 
   case Node.TEXT_NODE:
    // OpenAjax.a11y.logger.debug("DOM node text: " + node.data);
@@ -18904,8 +18921,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
    else {
      return previous_sibling;
    }
-
-   break;
 
   default:
     break;
@@ -19350,6 +19365,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.getDuplicateObjects = function(objects, p
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                              FrameInfo                            */
@@ -19474,7 +19490,7 @@ OpenAjax.a11y.cache.FramesCache.prototype.updateCacheItems = function (dom_eleme
     this.addFrameElement(fe);
 
     if (frame_info.parent_frame) {
-      list_info.parent_frame.addChildElement(fe);
+      frame_info.parent_frame.addChildElement(fe);
     }
     else {
       this.addChildElement(fe);
@@ -19677,14 +19693,11 @@ OpenAjax.a11y.cache.FrameElement.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.FrameElement.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.FrameElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   return attributes;
@@ -19802,6 +19815,8 @@ OpenAjax.a11y.cache.FrameElement.prototype.toString = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Heading and Landmark Cache                   */
 /* ---------------------------------------------------------------- */
@@ -19873,12 +19888,12 @@ OpenAjax.a11y.cache.LandmarkInfo = function (landmark_info) {
 OpenAjax.a11y.cache.HeadingInfo = function (heading_info) {
 
   if (heading_info) {
-    this.is_past_first_h1 = landmark_info.is_past_first_h1;
-    this.nesting_h1       = landmark_info.nesting_h1;
-    this.nesting_h2       = landmark_info.nesting_h2;
-    this.nesting_h3       = landmark_info.nesting_h3;
-    this.nesting_h4       = landmark_info.nesting_h4;
-    this.nesting_h5       = landmark_info.nesting_h5;
+    this.is_past_first_h1 = heading_info.is_past_first_h1;
+    this.nesting_h1       = heading_info.nesting_h1;
+    this.nesting_h2       = heading_info.nesting_h2;
+    this.nesting_h3       = heading_info.nesting_h3;
+    this.nesting_h4       = heading_info.nesting_h4;
+    this.nesting_h5       = heading_info.nesting_h5;
   }
   else {
     this.is_past_first_h1 = false;
@@ -20013,11 +20028,23 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.addChildElement = function 
 OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.addLandmarkElement = function (landmark_element) {
 
   if (landmark_element) {
+    var de = landmark_element.dom_element;
+
     this.landmark_length = this.landmark_length + 1;
     landmark_element.document_order = this.landmark_length;
     landmark_element.cache_id = "landmark_" + this.landmark_length;
     this.landmark_elements.push(landmark_element);
+
+    if (de.tag_name === 'header') {
+      de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+    }
+
+    if (de.tag_name === 'footer') {
+      de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+    }
+
   }
+
 
   return this.landmark_length;
 };
@@ -20541,6 +20568,7 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             break;
 
           case 'header':
+            dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
             this.dom_cache.getNameFromARIALabel(le, "BANNER");
             break;
@@ -20560,7 +20588,6 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
 
           }
         }
-
 
         this.addLandmarkElement(le);
 
@@ -20707,6 +20734,7 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.traverseDOMElementsForLandm
 OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCache = function () {
   var i;
   var li;
+  var hi;
   var children = this.dom_cache.element_cache.child_dom_elements;
   var children_len = children.length;
 
@@ -20918,10 +20946,7 @@ OpenAjax.a11y.cache.SectionElement.prototype.getElementResults = function () {
 
 OpenAjax.a11y.cache.SectionElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -21208,10 +21233,7 @@ OpenAjax.a11y.cache.LandmarkElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.LandmarkElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -21544,10 +21566,7 @@ OpenAjax.a11y.cache.HeadingElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.HeadingElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -21864,10 +21883,7 @@ OpenAjax.a11y.cache.MainElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.MainElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -22112,10 +22128,7 @@ OpenAjax.a11y.cache.H1Element.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.H1Element.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -22299,10 +22312,7 @@ OpenAjax.a11y.cache.TitleElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.TitleElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -22499,10 +22509,7 @@ OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getStyle = function (
 
 OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -22522,8 +22529,6 @@ OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getAttributes = funct
  */
 
 OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -22600,6 +22605,8 @@ OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.toString = function (
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            ImageCache                            */
@@ -22965,8 +22972,6 @@ OpenAjax.a11y.cache.ImagesCache.prototype.getNameForImage = function (image) {
 
 OpenAjax.a11y.cache.ImageElement = function (dom_element, base_url) {
 
-  var alt_value;
-
   if (!dom_element) return null;
 
   var node = dom_element.node;
@@ -23124,12 +23129,10 @@ OpenAjax.a11y.cache.ImageElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.ImageElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.ImageElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -23206,8 +23209,6 @@ OpenAjax.a11y.cache.ImageElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.ImageElement.prototype.getAltTextNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var alt_style = {};
 
   if (this.dom_element.has_alt) {
     if (this.alt_length) {
@@ -23444,12 +23445,10 @@ OpenAjax.a11y.cache.CanvasElement.prototype.getAttributes = function (unsorted) 
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.CanvasElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.CanvasElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -23648,12 +23647,10 @@ OpenAjax.a11y.cache.SVGElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.SVGElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.SVGElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -23754,6 +23751,7 @@ OpenAjax.a11y.cache.SVGElement.prototype.getEvents = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            LanguagesCache                        */
@@ -23933,6 +23931,8 @@ OpenAjax.a11y.cache.LanguagesCache.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            LinkCache                             */
@@ -24247,14 +24247,6 @@ OpenAjax.a11y.cache.LinksCache.prototype.getLinksThatShareTheSameHREF = function
   }
 
   if (same_hrefs) list_of_same_hrefs.push(same_hrefs);
-
-
-//  OpenAjax.a11y.logger.debug( "Number of DUP HREF objects: " + list_of_same_hrefs.length);
-
-  for (i = 0; i < list_of_same_hrefs.length; i++ ) {
-    var item = list_of_same_hrefs[i];
-//    OpenAjax.a11y.logger.debug("[Cache Links] " + i  + " HREF: " + item.links[0].href + "  Number: " + item.links.length + "  Same Name: " + item.same_names);
-  }
 
   return list_of_same_hrefs;
 
@@ -24785,6 +24777,7 @@ OpenAjax.a11y.cache.LinkElement.prototype.getLinkType = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                              ListInfo                            */
@@ -25233,7 +25226,6 @@ OpenAjax.a11y.cache.ListElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.ListElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   if (!unsorted) this.dom_element.sortItems(attributes);
@@ -25577,14 +25569,11 @@ OpenAjax.a11y.cache.ContainerElement.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.ContainerElement.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.ContainerElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   return attributes;
@@ -25703,6 +25692,8 @@ OpenAjax.a11y.cache.ContainerElement.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      OpenAjax Media Cache                        */
@@ -25926,15 +25917,17 @@ OpenAjax.a11y.cache.MediaCache.prototype.updateCacheItems = function (dom_elemen
   else {
 
     if ((dom_element.tag_name === 'param') &&
-        (media_info.media_element && media_info.media_element.dom_element.tag_name === 'object')) {
+        (media_info.media_element &&
+         media_info.media_element.dom_element &&
+         media_info.media_element.dom_element.tag_name === 'object')) {
        media_element = new OpenAjax.a11y.cache.MediaChildElement(dom_element);
        media_info.media_element.addMediaElement(media_element);
     }
 
     if ((dom_element.tag_name === 'track') &&
-        (media_info.media_element &&
-         (media_info.media_element.dom_element.tag_name === 'video') ||
-         (media_info.media_element.dom_element.tag_name === 'audio'))) {
+        (media_info.media_element && media_info.media_element.dom_element &&
+         ((media_info.media_element.dom_element.tag_name === 'video') ||
+         (media_info.media_element.dom_element.tag_name === 'audio')))) {
        media_element = new OpenAjax.a11y.cache.MediaChildElement(dom_element);
        media_info.media_element.addMediaElement(media_element);
     }
@@ -26232,12 +26225,10 @@ OpenAjax.a11y.cache.MediaElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.MediaElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.MediaElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -26517,12 +26508,10 @@ OpenAjax.a11y.cache.MediaChildElement.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.MediaChildElement.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.MediaChildElement.prototype.getAttributes = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -26547,14 +26536,10 @@ OpenAjax.a11y.cache.MediaChildElement.prototype.getAttributes = function (unsort
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.MediaChildElement.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
+OpenAjax.a11y.cache.MediaChildElement.prototype.getCacheProperties = function () {
 
   var properties = [];
 
@@ -26699,10 +26684,7 @@ OpenAjax.a11y.cache.PageElementMedia.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.PageElementMedia.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -26722,8 +26704,6 @@ OpenAjax.a11y.cache.PageElementMedia.prototype.getAttributes = function (unsorte
  */
 
 OpenAjax.a11y.cache.PageElementMedia.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -26801,6 +26781,7 @@ OpenAjax.a11y.cache.PageElementMedia.prototype.toString = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /**
  * @constructor DOMElementComputedStyle
@@ -27239,7 +27220,7 @@ OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.getLuminance = function (c
  * @return {String} Returns a text string representation of the computed style object
  */
 
-OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.toString = function (color) {
+OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.toString = function () {
   return "Computed style " + this.color_hex + " " + this.background_color_hex + " " + this.color_contrast_ratio;
 };
 /*
@@ -27257,6 +27238,8 @@ OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.toString = function (color
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            TableInfo                             */
@@ -28128,9 +28111,6 @@ OpenAjax.a11y.cache.TableElement.prototype.multipleTHInRow = function(row) {
    var th_count;
    var td_count;
 
-   var row_max = this.max_row;
-   var col_max = this.max_column;
-   var row_len;
    var cell;
 
    var c = 0;
@@ -28570,7 +28550,7 @@ OpenAjax.a11y.cache.TableElement.prototype.getAttributes = function (unsorted) {
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -28753,8 +28733,6 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getElementResults = function () {
 
 OpenAjax.a11y.cache.CaptionElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var attributes = this.dom_element.getAttributes();
 
   return attributes;
@@ -28770,7 +28748,7 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getAttributes = function () {
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.CaptionElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.CaptionElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -28803,8 +28781,6 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getStyle = function () {
  */
 
 OpenAjax.a11y.cache.CaptionElement.prototype.getCacheProperties = function () {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties();
 
@@ -28970,8 +28946,6 @@ OpenAjax.a11y.cache.THeadElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.THeadElement.prototype.getCacheProperties = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties();
 
   return properties;
@@ -29009,7 +28983,7 @@ OpenAjax.a11y.cache.THeadElement.prototype.getCachePropertyValue = function (pro
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.THeadElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.THeadElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -29152,8 +29126,6 @@ OpenAjax.a11y.cache.TBodyElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.TBodyElement.prototype.getCacheProperties = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties();
 
   return properties;
@@ -29191,7 +29163,7 @@ OpenAjax.a11y.cache.TBodyElement.prototype.getCachePropertyValue = function (pro
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TBodyElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TBodyElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -29374,7 +29346,7 @@ OpenAjax.a11y.cache.TableRowElement.prototype.getCachePropertyValue = function (
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -29459,7 +29431,6 @@ OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function (unsorted) {
 
 OpenAjax.a11y.cache.TableCellElement = function (dom_element, table_info) {
 
-  var headers_array = [];  // array of id headers
   var is_th;
 
   this.dom_element  = dom_element;
@@ -29672,7 +29643,7 @@ OpenAjax.a11y.cache.TableCellElement.prototype.getCachePropertyValue = function 
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableCellElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableCellElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -29838,8 +29809,6 @@ OpenAjax.a11y.cache.PageElementLayout.prototype.getAttributes = function (unsort
 
 OpenAjax.a11y.cache.PageElementLayout.prototype.getCacheProperties = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties(unsorted);
 
   if (!unsorted) this.dom_element.sortItems(properties);
@@ -29914,6 +29883,8 @@ OpenAjax.a11y.cache.PageElementLayout.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            TextCache                            */
@@ -30129,6 +30100,8 @@ OpenAjax.a11y.cache.TextCache.prototype.updateCache = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            KeyboardFocus                             */
 /* ---------------------------------------------------------------- */
@@ -30293,10 +30266,7 @@ OpenAjax.a11y.cache.PageElementKeyboardFocus.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.PageElementKeyboardFocus.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -30316,8 +30286,6 @@ OpenAjax.a11y.cache.PageElementKeyboardFocus.prototype.getAttributes = function 
  */
 
 OpenAjax.a11y.cache.PageElementKeyboardFocus.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -30395,6 +30363,8 @@ OpenAjax.a11y.cache.PageElementKeyboardFocus.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            TimingFlashing                             */
@@ -30561,10 +30531,7 @@ OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -30584,8 +30551,6 @@ OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getAttributes = function
  */
 
 OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 
@@ -30664,7 +30629,7 @@ OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.toString = function () {
  * limitations under the License.
  */
 
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       ElementInformation                         */
@@ -31224,8 +31189,9 @@ OpenAjax.a11y.cache.ElementInformation.prototype.countElement = function (dom_el
     default:
       break;
    }
+   break;
 
-   case 'output':
+  case 'output':
     this.output_count++;
     this.all_forms_count++;
     if (dom_element.has_title)   this.title_attribute_count++;
@@ -31793,6 +31759,8 @@ OpenAjax.a11y.cache.ElementInformation.prototype.toJSON = function (add_comma, p
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /**
  * @namespace OpenAjax.a11y.info
  */
@@ -31831,8 +31799,6 @@ OpenAjax.a11y.info = OpenAjax.a11y.info || {};
  */
 
 OpenAjax.a11y.info.InformationalLinkInfo = function (rt, t, u) {
-
-  var REFS = OpenAjax.a11y.REFERENCES;
 
   var reference_type = OpenAjax.a11y.REFERENCES.UNKNOWN;
   var title = "";
@@ -32405,7 +32371,7 @@ OpenAjax.a11y.info.PageInfo = function (dom_cache) {
  * limitations under the License.
  */
 
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                             ElementResultSummary                        */
@@ -32434,7 +32400,7 @@ OpenAjax.a11y.info.PageInfo = function (dom_cache) {
  *                                      (value >= 0)
  */
 
-OpenAjax.a11y.info.ElementResultsSummary = function (required) {
+OpenAjax.a11y.info.ElementResultsSummary = function () {
 
   // Element result counts
   var p   = 0;  // Pass result (p)
@@ -32719,6 +32685,7 @@ OpenAjax.a11y.info.RuleResultsSummary = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       EvaluationResult                           */
@@ -33047,8 +33014,6 @@ OpenAjax.a11y.EvaluationResult.prototype.toJSON = function (include_element_resu
 
   if (typeof include_element_results !== 'boolean') include_element_results = false;
 
-  var wcag20_nls  = OpenAjax.a11y.nls.WCAG20.getNLS();
-
   var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
 
   var ruleset = this.getRuleset();
@@ -33109,6 +33074,8 @@ OpenAjax.a11y.EvaluationResult.prototype.toJSON = function (include_element_resu
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                             RuleResult                           */
@@ -34007,6 +33974,8 @@ OpenAjax.a11y.RuleResult.prototype.toString = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                      ElementInfo                                   */
 /* ---------------------------------------------------------------- */
@@ -34446,43 +34415,33 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
     switch(source) {
       case SOURCE.ALT_ATTRIBUTE:
         return "alt attribute";
-        break;
 
       case SOURCE.ARIA_LABELLEDBY:
         return "aria-labelledby attribute";
-        break;
 
       case SOURCE.ARIA_LABEL:
         return "aria-label attribute";
-        break;
 
       case SOURCE.LABEL_REFERENCE:
         return "label reference";
-        break;
 
       case SOURCE.LABEL_ENCAPSULATION:
         return "label encapsulation";
-        break;
 
       case SOURCE.TABLE_CAPTION:
         return "caption element";
-        break;
 
       case SOURCE.TABLE_SUMMARY:
         return "summary attribute";
-        break;
 
       case SOURCE.TEXT_CONTENT:
         return "text content";
-        break;
 
       case SOURCE.TITLE_ATTRIBUTE:
         return "title attribute";
-        break;
 
       case SOURCE.VALUE_ATTRIBUTE:
         return "value attribute";
-        break;
 
       default:
         break;
@@ -34493,7 +34452,6 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
   }
 
   var de = this.getDOMElement();
-  var source = '';
 
   if (this.cache_item.accessible_name) {
     if (this.cache_item.accessible_name_source) {
@@ -34534,7 +34492,6 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
             }
           }
           return ['none', '', de.src];
-          break;
 
         case 'a':
         case 'area':
@@ -34547,7 +34504,6 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
             }
           }
           return ['none', '', de.href];
-          break;
 
         default:
           if (text_content) {
@@ -34615,11 +34571,6 @@ OpenAjax.a11y.ElementResult.prototype.toString = function () {
  */
 
 OpenAjax.a11y.ElementResult.prototype.toJSON = function (prefix) {
-
-  var next_prefix = "";
-
-  if (typeof prefix !== 'string' || prefix.length === 0) prefix = "";
-  else next_prefix = prefix + "    ";
 
   var json = "";
 
@@ -34768,6 +34719,8 @@ OpenAjax.a11y.RelatedElements.prototype.toString = function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      FilteredCacheItemResults                    */
@@ -34993,8 +34946,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.updateSummary = function(cache_
 
 //  OpenAjax.a11y.logger.debug("FILTER: " + filter );
 
-  var total;
-
   var ELEMENT_TYPE = OpenAjax.a11y.ELEMENT_TYPE;
 
   this.element_type  = element_type;
@@ -35102,8 +35053,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.filterCacheItemsByElementResult
 
   this.is_tree = false;
 
-  var RESULT_FILTER = OpenAjax.a11y.RESULT_FILTER;
-
   var cache_items_len = cache_items.length;
 
   for (var i = 0; i < cache_items_len; i++) {
@@ -35175,8 +35124,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.filterCacheItemsByElementResult
 
   }
 
-  var RESULT_FILTER = OpenAjax.a11y.RESULT_FILTER;
-
   var is_tree = false;
 
   var filtered_cache_item_results = this;
@@ -35190,8 +35137,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.filterCacheItemsByElementResult
   var cache_item_results = [];
 
   var cache_items_len = cache_items.length;
-
-  var all_flag = (this.filter === RESULT_FILTER.ALL);
 
   for (var i = 0; i < cache_items_len; i++) {
     var ci = cache_items[i];
@@ -35367,8 +35312,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.toCSV = function(title) {
   var result_items_len = result_items.length;
 
   for (var i = 0; i < result_items_len; i++) {
-
-     var position = i+1;
 
      var result_item      = result_items[i];
      var node_results     = result_item.node_results;
@@ -35786,6 +35729,7 @@ OpenAjax.a11y.CacheItemResult.prototype.toJSON = function(prefix) {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      RuleGroupResult                             */
@@ -36052,13 +35996,9 @@ OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
 
   if (typeof flag !== 'boolean') flag = true;
 
-  if (typeof prefix !== 'string' || prefix.length === 0) prefix = "";
-  else next_prefix = prefix + "    ";
-
   var rule_group_info = this.getRuleGroupInfo();
 
   var ruleset_title   = this.evaluation_result.ruleset_title;
-  var ruleset_abbrev  = this.evaluation_result.ruleset_abbrev;
   var ruleset_version = this.evaluation_result.ruleset_version;
   var ruleset_id      = this.evaluation_result.ruleset_id;
 
@@ -36097,7 +36037,7 @@ OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
 
   var rule_results     = this.rule_results;
   var rule_results_len = rule_results.length;
-  var comma_len   = results_len - 1;
+  var comma_len   = rule_results_len - 1;
 
   for (var i = 0; i < rule_results_len; i++) {
     json += rule_results[i].toJSON(prefix + "  ", flag);
@@ -36131,7 +36071,7 @@ OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
  * limitations under the License.
  */
 
-OpenAjax.a11y.nls = OpenAjax.a11y.nls || {};
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            Properties NLS                        */
@@ -36614,34 +36554,6 @@ OpenAjax.a11y.nls.Cache = function() {
       list.push(o);
     },
 
-    /**
-     * @method addInvalidValue
-     *
-     * @memberOf OpenAjax.a11y.nls.Cache
-     *
-     * @desc Adds an attribute with a value to a list of attributes
-     *
-     * @param  {Array}   list      - List of properties
-     * @param  {String}  attribute - Attribute of an element represented in the cache
-     * @param  {String}  value     - Value of an attribute
-     * @param  {String}  loc       - String representing the language
-     */
-
-    addInvalidValue : function (list, attribute, value, loc) {
-      var locale = "en-us";
-      if ((typeof loc === 'string') && loc.length) locale = loc;
-
-      var locale_nls = cache_nls[OpenAjax.a11y.locale];
-      var o = {};
-
-      o.label = attribute;
-      o.value = value + " " + locale_nls.invalid_value.value;
-      o.style = locale_nls.invalid_value.style;
-
-      list.push(o);
-
-    },
-
 
     /**
      * @method toJSON
@@ -36658,11 +36570,6 @@ OpenAjax.a11y.nls.Cache = function() {
     toJSON : function(prefix) {
 
       var locale_nls = cache_nls[OpenAjax.a11y.locale];
-
-      var next_prefix = "";
-
-      if (typeof prefix !== 'string' || prefix.length === 0) prefix = "";
-      else next_prefix = prefix + "  ";
 
       var json = "";
 
@@ -36688,7 +36595,8 @@ OpenAjax.a11y.nls.Cache = function() {
       return json;
     }
   };
-}();/*
+}();
+/*
  * Copyright 2011-2018 OpenAjax Alliance
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36704,7 +36612,7 @@ OpenAjax.a11y.nls.Cache = function() {
  * limitations under the License.
  */
 
-OpenAjax.a11y.nls = OpenAjax.a11y.nls || {};
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 
 /* ---------------------------------------------------------------- */
@@ -36954,8 +36862,8 @@ OpenAjax.a11y.nls.RuleCategoryNLS.prototype.toJSON = function(prefix) {
  * limitations under the License.
  */
 
-OpenAjax.a11y.nls = OpenAjax.a11y.nls || {};
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+var wcag20_nls = wcag20_nls || {};
 
 /* ---------------------------------------------------------------- */
 /*                       WCAG20                                     */
@@ -36991,7 +36899,6 @@ OpenAjax.a11y.nls.WCAG20 = function() {
 
       OpenAjax.a11y.logger.info("[WCAG20 NLS] Adding WCAG 2.0 NLS for locale: " + locale);
 
-      var item;
       var  p,  p_id,  np;  /* WCAG 2.0 Principle */
       var  g,  g_id,  ng;  /* WCAG 2.0 Guideline */
       var sc, sc_id, nsc;  /* WCAG 2.0 Success Criterion */
@@ -37185,15 +37092,15 @@ OpenAjax.a11y.nls.WCAG20NLS.prototype.getSuccessCriteriaLevel = function (sc_id)
 
   var principles = this.principles;
 
-  for (i = 0; i < principles.length; i++) {
+  for (var i = 0; i < principles.length; i++) {
 
     var p = wcag20_nls.principles[i];
 
-    for (j = 0; j < p.guidelines.length; j++) {
+    for (var j = 0; j < p.guidelines.length; j++) {
 
       var g = p.guidelines[i];
 
-      for (k = 0; k < g.success_criteria.length; k++) {
+      for (var k = 0; k < g.success_criteria.length; k++) {
 
         var sc = g.success_criteria[i];
 
@@ -37550,10 +37457,10 @@ OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.prototype.toJSON = function(prefix) 
  */
 
 OpenAjax.a11y.logger = OpenAjax.a11y.logger || {
-  debug: function (message) {},
-  info:  function (message) {},
-  warn:  function (message) {},
-  error: function (message) {}
+  debug: function (message) {console.log('[DEBUG]: ' + message)},
+  info:  function (message) {console.log('[ INFO]: ' + message)},
+  warn:  function (message) {console.log('[ WARN]: ' + message)},
+  error: function (message) {console.log('[ERROR]: ' + message)}
 };
 
 OpenAjax.a11y.setLogger = function (logger) {
@@ -37586,6 +37493,7 @@ OpenAjax.a11y.baseUri = "http://www.openajax.org/member/wiki/Accessibility";
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                             Rule                                 */
@@ -37925,15 +37833,12 @@ OpenAjax.a11y.Rule.prototype.getGroupNLS = function () {
 
   case RULE_GROUP.GROUP1:
     return "Group 1";
-    break;
 
   case RULE_GROUP.GROUP2:
     return "Group 2";
-    break;
 
   case RULE_GROUP.GROUP3:
     return "Group 3";
-    break;
 
   default:
     break;
@@ -38430,14 +38335,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
     else json += ",\n";
   }
 
-  function booleanItem(property, value, last) {
-    if (value) json += prefix + "    \"" + property + "\" : true";
-    else json += prefix + "    \"" + property + "\" : false";
-
-    if (last) json += "\n";
-    else json += ",\n";
-  }
-
   function stringListItem(property, list, last) {
     json += prefix + "    \"" + property + "\" : [";
 
@@ -38452,23 +38349,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
     if (last) json += "]\n";
     else json += "],\n";
   }
-
-  function stringListItem2(property, list, last ) {
-    json += prefix + "    \"" + property + "\" : [";
-
-    if (list && list.length) {
-      var last_item = list.length - 1;
-      for (var i = 0; i < list.length; i++) {
-        if (last_item === i) json += "  " + JSON.stringify(list[i]) + "\n";
-        else json += "  " + JSON.stringify(list[i]) + ",\n";
-      }
-    }
-
-    if (last) json += "]\n";
-    else json += "],\n";
-
-  }
-
 
   function addListOfStrings(name, list, last) {
 
@@ -38525,7 +38405,7 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
 
     if (list) {
       var first = true;
-      for (item in list) {
+      for (var item in list) {
         if (first) json += "           " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
         else json += ",\n          " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
         first = false;
@@ -38544,7 +38424,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
 
   var json = "";
 
-  var rule     = this;
   var rule_nls = this.rule_nls;
 
   OpenAjax.a11y.logger.debug("[RULE] Exporting rule: " + this.rule_id);
@@ -38891,6 +38770,8 @@ OpenAjax.a11y.RuleManager = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                       RulesetFactory                             */
 /* ---------------------------------------------------------------- */
@@ -38957,7 +38838,6 @@ OpenAjax.a11y.RulesetFactory = {
           else {
             throw new Error("[OpenAjax A11y][Rulesetfactory] Invalid Ruleset Information Object");
           }
-          break;
 
         case 'rulemappinginfo':
           if (value) {
@@ -38967,13 +38847,10 @@ OpenAjax.a11y.RulesetFactory = {
           else {
             throw new Error("[OpenAjax A11y][Rulesetfactory] Invalid Rule Mapping Information Object");
           }
-          break;
 
         default:
           throw new Error("[OpenAjax A11y][Rulesetfactory] Unsupported paramater: " + name);
-          break;
         } // end switch
-        return false;
       }, // end setParameter
 
       /**
@@ -39006,16 +38883,12 @@ OpenAjax.a11y.RulesetFactory = {
           else {
             throw new Error("[OpenAjax A11y][Rulesetfactory] Locale is not a string");
           }
-          break;
 
         default:
           // throw exception to console
           throw new Error("[OpenAjax A11y][Rulesetfactory] Unsupported feature: " + name);
-          break;
 
         }
-
-        return false;
 
       },  // end setFeature
 
@@ -39079,7 +38952,7 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
   var wcag20_nls = OpenAjax.a11y.nls.WCAG20.getNLS(locale);
 
-  if (typeof loc !== 'String') loc = "en-us";
+  if (typeof loc !== 'string') loc = "en-us";
 
   var locale = loc;
 
@@ -39366,43 +39239,6 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
     toJSON : function (prefix) {
 
-      function referencesToJSON(name, refs, last) {
-
-        var title = "";
-        var url = "";
-
-        var refs_len = refs.length;
-        var refs_last = refs_len - 1;
-
-        if (refs_len > 0) {
-          json += next_prefix + "  " + JSON.stringify(name) + " : [\n";
-          for (var i = 0; i < refs_len; i++) {
-            var ref = refs[i];
-
-            if (typeof ref === 'string') {
-               title = ref;
-               url = "";
-            }
-            else {
-               title = ref.title;
-               url = ref.url;
-            }
-
-            if (i === refs_last) json += next_prefix_2 + "{ \"title\" : " + JSON.stringify(title) + ", \"url\" : " + JSON.stringify(url) + "}\n";
-            else json += next_prefix_2 + "{ \"title\" : " + JSON.stringify(title) + ", \"url\" : " + JSON.stringify(url) + "},\n";
-          }
-          json += next_prefix + "  ]";
-        }
-        else {
-          json += next_prefix + "  \"purpose\"    : []";
-        }
-
-        if (typeof last === 'undefined' || !last) json += ',\n';
-        else json += '\n';
-
-      } // end function
-
-
       if (typeof prefix !== 'string' || prefix.length === 0) {
         prefix = "";
       }
@@ -39429,7 +39265,6 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
           var rule_mapping = rule_mappings[i];
           var rule = rule_mapping.rule;
-          var rule_definition  = rule.getDefinition(rule_mapping.required);
 
           json += next_prefix_2 + "\"" + rule.getId() + "\" : {\n";
           json += next_prefix_2 + "  \"enabled\"    : "  + rule_mapping.enabled + ",\n";
@@ -39576,12 +39411,10 @@ OpenAjax.a11y.RulesetManager = function() {
      *
      * @desc Creates a JSON representation of the rules in the ruleset
      *
-     * @param  {String}  prefix         - A prefix string typically spaces for formatting output
-     *
      * @return {String} JSON formatted string representing the ruleset
      */
 
-    toJSON : function (prefix) {
+    toJSON : function () {
 
       var json = "[\n";
 
@@ -39616,6 +39449,7 @@ OpenAjax.a11y.RulesetManager = function() {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       EvaluatorFactory                           */
@@ -39669,13 +39503,11 @@ OpenAjax.a11y.EvaluatorFactory = {
           else {
             throw new Error("[EvaluatorFactory] Invalid Ruleset Object");
           }
-          break;
 
         default:
           throw new Error("[EvaluatorFactory] " + name + " is not a supported parameterå");
-          break;
         } // end switch
-        return false;
+
       }, // end setParameter
 
       setFeature : function(name, value) {
@@ -39700,7 +39532,6 @@ OpenAjax.a11y.EvaluatorFactory = {
           else {
             throw new Error("[EvaluatorFactory] group is not a number or out of range");
           }
-          break;
 
 
         case 'eventprocessing':
@@ -39718,21 +39549,17 @@ OpenAjax.a11y.EvaluatorFactory = {
               OpenAjax.a11y.EVENT_HANDLER_PROCESSOR = value;
 //              OpenAjax.a11y.logger.debug("[EvaluatorFactory] event processing: " + event_processing);
               return true;
-            break;
 
             default:
               event_processing = "none";
               OpenAjax.a11y.EVENT_HANDLER_PROCESSOR = "none";
               throw new Error("[EvaluatorFactory] Invalid event processor: " + value);
-              return false;
-              break;
             } // end switch
 
           }
           else {
             throw new Error("[EvaluatorFactory] Event processor value is not a string ");
           }
-          break;
 
         case 'brokenlinktesting':
 
@@ -39745,7 +39572,6 @@ OpenAjax.a11y.EvaluatorFactory = {
 
         default:
           throw new Error("[EvaluatorFactory] " + name + " is not a supported feature");
-          break;
         } // end switch
         return false;
       },  // end setFeature
@@ -39866,7 +39692,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
      * @desc Legacy support for FAE 2.0, remove when fae-util config scripts are updated
      */
 
-    setEventHandlerProcessor: function(value) {
+    setEventHandlerProcessor: function() {
 
     },
 
@@ -39930,6 +39756,8 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* -------------------------------------------------------------------------------------- */
 /* OpenAjax Alliance Cache Properties and Values National Language Support (NLS): English */
@@ -40534,6 +40362,8 @@ OpenAjax.a11y.nls.Cache.addCacheNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance Rule Category National Language Support (NLS): English    */
 /* --------------------------------------------------------------------------- */
@@ -40641,11 +40471,11 @@ OpenAjax.a11y.nls.RuleCategories.addNLS('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance WCAG 2.0 National Language Support (NLS): English         */
 /* --------------------------------------------------------------------------- */
-
-
 
 OpenAjax.a11y.nls.WCAG20.addNLS('en-us', {
 

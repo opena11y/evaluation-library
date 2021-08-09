@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                              ListInfo                            */
@@ -462,7 +463,6 @@ OpenAjax.a11y.cache.ListElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.ListElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   if (!unsorted) this.dom_element.sortItems(attributes);
@@ -806,14 +806,11 @@ OpenAjax.a11y.cache.ContainerElement.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.ContainerElement.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.ContainerElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   return attributes;

@@ -34,10 +34,10 @@
  */
 
 OpenAjax.a11y.logger = OpenAjax.a11y.logger || {
-  debug: function (message) {},
-  info:  function (message) {},
-  warn:  function (message) {},
-  error: function (message) {}
+  debug: function (message) {console.log('[DEBUG]: ' + message)},
+  info:  function (message) {console.log('[ INFO]: ' + message)},
+  warn:  function (message) {console.log('[ WARN]: ' + message)},
+  error: function (message) {console.log('[ERROR]: ' + message)}
 };
 
 OpenAjax.a11y.setLogger = function (logger) {

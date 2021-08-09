@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 
 /* ---------------------------------------------------------------- */
 /*          Extend EvaluationResult for more export options         */
@@ -122,15 +124,11 @@ OpenAjax.a11y.EvaluationResult.prototype.toCSV = function (rule_categories_filte
       return items;
     }
 
-  var wcag20_nls  = OpenAjax.a11y.nls.WCAG20.getNLS();
-
   var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
 
   var ruleset = this.getRuleset();
 
   var ruleset_info = ruleset.getRulesetInfo();
-
-  var rule_mappings = ruleset.getRuleMappingsArray();
 
   var csv = "";
 
@@ -197,7 +195,7 @@ OpenAjax.a11y.EvaluationResult.prototype.toCSV = function (rule_categories_filte
     var element_results     = rule_results[i].getElementResultsArray();
     var element_results_len = element_results.length;
 
-    for (j = 0; j < element_results_len; j++) {
+    for (var j = 0; j < element_results_len; j++) {
       var er = element_results[j];
       var de = er.getDOMElement();
       var cs = de.computed_style;
@@ -329,12 +327,10 @@ OpenAjax.a11y.EvaluationResult.prototype.toHTML = function (category_filter, gui
     var html_group_details = "";
     var spaces = "      ";
 
-    var title = "WCAG 2.0 Guidelines";
     var groupLabel = "Guideline";
     var groups = wcag_guidelines;
 
     if (isCategory) {
-      title = "Rule Catgories";
       groupLabel = "Category";
       groups = rule_categories;
     }
@@ -416,7 +412,7 @@ OpenAjax.a11y.EvaluationResult.prototype.toHTML = function (category_filter, gui
 
     function cleanMessages(msgs) {
 
-      new_msgs = [];
+      var new_msgs = [];
 
       for(var i = 0; i < msgs.length; i++) {
         var msg = msgs[i];
@@ -454,7 +450,6 @@ OpenAjax.a11y.EvaluationResult.prototype.toHTML = function (category_filter, gui
       var rule_result = rule_results[i];
       var result_messages = cleanMessages(rule_result.getResultMessagesArray());
       var result = rule_result.getResultValueNLS();
-      var elem_results = rule_result.getElementResultsArray();
 
       if (result !== 'N/A') {
         html_elem_results += htmlElementResults(rule_result);
@@ -595,7 +590,7 @@ OpenAjax.a11y.EvaluationResult.prototype.toHTML = function (category_filter, gui
     var element_results     = rule_result.getElementResultsArray();
 
     if (element_results.length) {
-      for (i = 0; i < element_results.length; i++) {
+      for (var i = 0; i < element_results.length; i++) {
         var er = element_results[i];
         var de = er.getDOMElement();
         var cs = de.computed_style;
@@ -669,20 +664,16 @@ OpenAjax.a11y.EvaluationResult.prototype.toHTML = function (category_filter, gui
   var GL = OpenAjax.a11y.WCAG20_GUIDELINE;
   var wcag_guidelines = [GL.G_1_1, GL.G_1_2, GL.G_1_3, GL.G_1_4, GL.G_2_1, GL.G_2_2, GL.G_2_3, GL.G_2_4, GL.G_3_1, GL.G_3_2, GL.G_3_3, GL.G_4_1];
 
-  var wcag20_nls  = OpenAjax.a11y.nls.WCAG20.getNLS();
-
   var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
 
   var ruleset = this.getRuleset();
 
   var ruleset_info = ruleset.getRulesetInfo();
 
-  var rule_mappings = ruleset.getRuleMappingsArray();
-
   var now = new Date();
 
 
-  html =  "<!DOCTYPE html>\n";
+  var html =  "<!DOCTYPE html>\n";
   html += "<html>\n";
   html += "  <head>\n";
   html += "    <title>AInspector Evaluation Result</title>\n";

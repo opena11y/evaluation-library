@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -319,7 +321,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             TARGET_RESOURCES_DESC: '@nav@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute on the @nav@ element to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
-              FAIL_S:         'Remove the @role@ attribute on the %N_F @nav@ elements to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
+              FAIL_P:         'Remove the @role@ attribute on the %N_F @nav@ elements to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
               HIDDEN_S:       'One @nav@ element that is hidden was not evaluated.',
               HIDDEN_P:       '%N_H @nav@ elements that are hidden were not evaluated.',
               NOT_APPLICABLE: 'No @nav@ elements found on the page'

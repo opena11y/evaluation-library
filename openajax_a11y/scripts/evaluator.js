@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       EvaluatorFactory                           */
@@ -67,13 +68,11 @@ OpenAjax.a11y.EvaluatorFactory = {
           else {
             throw new Error("[EvaluatorFactory] Invalid Ruleset Object");
           }
-          break;
 
         default:
           throw new Error("[EvaluatorFactory] " + name + " is not a supported parameterå");
-          break;
         } // end switch
-        return false;
+
       }, // end setParameter
 
       setFeature : function(name, value) {
@@ -98,7 +97,6 @@ OpenAjax.a11y.EvaluatorFactory = {
           else {
             throw new Error("[EvaluatorFactory] group is not a number or out of range");
           }
-          break;
 
 
         case 'eventprocessing':
@@ -116,21 +114,17 @@ OpenAjax.a11y.EvaluatorFactory = {
               OpenAjax.a11y.EVENT_HANDLER_PROCESSOR = value;
 //              OpenAjax.a11y.logger.debug("[EvaluatorFactory] event processing: " + event_processing);
               return true;
-            break;
 
             default:
               event_processing = "none";
               OpenAjax.a11y.EVENT_HANDLER_PROCESSOR = "none";
               throw new Error("[EvaluatorFactory] Invalid event processor: " + value);
-              return false;
-              break;
             } // end switch
 
           }
           else {
             throw new Error("[EvaluatorFactory] Event processor value is not a string ");
           }
-          break;
 
         case 'brokenlinktesting':
 
@@ -143,7 +137,6 @@ OpenAjax.a11y.EvaluatorFactory = {
 
         default:
           throw new Error("[EvaluatorFactory] " + name + " is not a supported feature");
-          break;
         } // end switch
         return false;
       },  // end setFeature
@@ -264,7 +257,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
      * @desc Legacy support for FAE 2.0, remove when fae-util config scripts are updated
      */
 
-    setEventHandlerProcessor: function(value) {
+    setEventHandlerProcessor: function() {
 
     },
 

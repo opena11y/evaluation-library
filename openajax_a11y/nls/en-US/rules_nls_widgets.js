@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -442,42 +444,41 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
      WIDGET_8: {
             ID:                    'Widget 8',
-            DEFINITION:            'Widgets %s have required parent role.',
-            SUMMARY:               'Widgets %s have parent',
-            TARGET_RESOURCES_DESC: 'Widgets with required parent role',
+            DEFINITION:            'Role %s have a required parent role using the HTML DOM structure or the @aria-owns@ attribute.',
+            SUMMARY:               'Role %s have parent',
+            TARGET_RESOURCES_DESC: 'Role with required parent role',
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Add required parent role to the widget.',
               FAIL_P:   'Add required parent role to the %N_F of the %N_T widgets that require a parent role.',
-              HIDDEN_S: 'The widget that requires a parent role that is hidden and was not evaluated.',
+              HIDDEN_S: 'The role that requires a parent role that is hidden and was not evaluated.',
               HIDDEN_P: '%N_H widgets that require a parent roles that are hidden were not evaluated.',
               NOT_APPLICABLE:  'No widgets with required parent role on this page'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:   '@%1@ widget is a child of the a @%2@ role.',
-              ELEMENT_FAIL_1: 'Create a parent widget with the role of @%1@ for this @%2@ widget.',
-              ELEMENT_FAIL_2: 'Create a parent widget with the one of the required roles (i.e. @%1@) for this @%2@ widget.',
-              ELEMENT_HIDDEN_1: 'Required parent widgets was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
+              ELEMENT_PASS_1:   '@%1@ role is a child of the a @%2@ role.',
+              ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes defines a required parent role.',
+              ELEMENT_HIDDEN_1: 'Required parent role was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
             },
             PURPOSE: [
-              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
+              'Roles that are part of more complicated widgets have important parent/child relationships with other roles.'
             ],
             TECHNIQUES: [
-              'Use required parent roles to describe the features and options of a widget.'
+              'Parent roles can be defined using the HTML DOM structure or the @aria-owns@ attribute.',
+              'Required parent role is a DOM ancestor of the element.',
+              'Required parent role references the element using the @aria-owns@ attribute.',
+              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
               },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-owns'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -511,18 +512,20 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               'Some ARIA widgets have require child roles and when the HTML DOM parent/child relationships does not identify the elements nodes with the associated roles, @aria-owns@ attribute can be used to identify the associated elements.'
             ],
             TECHNIQUES: [
-              'Parent widget roles with aria-owns must accurately describe the parent relationships, when used @aria-owns@ a dom element can only be referenced once.   NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@.'
+              'Parent widget roles defined using @aria-owns@ attribute must accurately describe the parent/child relationship.',
+              'An element can only be referenced once using the @aria-owns@ attribute.',
+              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
               },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-owns'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -769,7 +772,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         WIDGET_13: {
             ID:                    'Widget 13',
             DEFINITION:            'ARIA roles that prohibit accessible names %s not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
-            SUMMARY:               'Role %s not have accessible name.',
+            SUMMARY:               'Role does not support accessible name.',
             TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
@@ -787,7 +790,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             PURPOSE: [
               'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
               'Versions of the ARIA specification before 1.2 allowed @aria-label@ or @aria-labelledby@  to be used on any element, even if an accessible name was not useful .',
-              'For example, defining an accessible name on a @p@ element or an element with @role=none@.',
+              'For example, defining an accessible name on a @p@ element or an element with @role=none@ does not provide any useful accessibility information to assistive technologies.',
               'The text content of the @p@ element is the only part that is needed by assisitve technologies.'
             ],
             TECHNIQUES: [
@@ -885,6 +888,52 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               }
 
             ]
-        }
+        },
+        WIDGET_15: {
+            ID:                    'Widget 15',
+            DEFINITION:            'ARIA attribute %s not be used on roles it is not supported.',
+            SUMMARY:               'ARIA attribute not supported.',
+            TARGET_RESOURCES_DESC: 'Roles where an attribute is not supoorted',
+            RULE_RESULT_MESSAGES: {
+              FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
+              FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
+              HIDDEN_S: 'The element with an widget role that is hidden and was not evaluated.',
+              HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
+              NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
+            },
+            NODE_RESULT_MESSAGES: {
+              ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element with role @%2@.',
+              ELEMENT_FAIL_2:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
+              ELEMENT_HIDDEN_1:  'Element @%1[role="%2"]@ was not tested because it is hidden from assistive technologies.',
+              ELEMENT_HIDDEN_2:  'Element @%1@ was not tested because it is hidden from assistive technologies.'
+            },
+            PURPOSE: [
+              '',
+              ''
+            ],
+            TECHNIQUES: [
+              'Remove unspoorted ARIA attribute from the element.'
+            ],
+            MANUAL_CHECKS: [
+            ],
+            INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
+                url:   'http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#kbd_focus'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+                url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              }
+            ]
+        },
     }
 });

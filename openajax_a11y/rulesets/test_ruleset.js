@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance (OAA) Test Ruleset for WCAG 2.0 (Beta)           */
 /* --------------------------------------------------------------------------- */
 
-var createARIATestRuleset = function () {
+(function () {
 
   var ruleset_info = {
     ruleset_id    : "TEST",
@@ -107,10 +109,6 @@ var createARIATestRuleset = function () {
        required : true,
        enabled  : true
      },
-   CONTROL_11 : {
-       required : true,
-       enabled  : true
-     },
    ERROR_1 : {
        required : true,
        enabled  : true
@@ -192,6 +190,10 @@ var createARIATestRuleset = function () {
        enabled  : true
      },
    HTML_2 : {
+       required : true,
+       enabled  : true
+     },
+   HTML_3 : {
        required : true,
        enabled  : true
      },
@@ -598,6 +600,6 @@ var createARIATestRuleset = function () {
     OpenAjax.a11y.logger.error("[TEST Ruleset] ** Error creating ARIA Test Ruleset");
   }
 
-}();
+}());
 
 

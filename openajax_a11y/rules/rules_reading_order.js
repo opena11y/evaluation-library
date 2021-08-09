@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
 /* ---------------------------------------------------------------- */
@@ -49,8 +51,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       var de = dom_elements[i];
       var cs = de.computed_style;
-      var tag_name = de.tag_name;
-
 
       if (cs.position === 'absolute' || cs.position === 'relative' || cs.position === 'fixed') {
 

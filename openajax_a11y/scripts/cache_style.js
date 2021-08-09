@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /**
  * @constructor DOMElementComputedStyle
@@ -452,6 +453,6 @@ OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.getLuminance = function (c
  * @return {String} Returns a text string representation of the computed style object
  */
 
-OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.toString = function (color) {
+OpenAjax.a11y.cache.DOMElementComputedStyle.prototype.toString = function () {
   return "Computed style " + this.color_hex + " " + this.background_color_hex + " " + this.color_contrast_ratio;
 };

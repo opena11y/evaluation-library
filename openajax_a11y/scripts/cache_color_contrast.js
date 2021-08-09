@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                       ColorContrstCache                          */
 /* ---------------------------------------------------------------- */
@@ -348,8 +350,6 @@ OpenAjax.a11y.cache.ColorContrastCache.prototype.toString = function () {
 
   var i;
 
-  var item;
-
   var str = "\n\nColor Contrast List Information\n";
 
   var list_length = this.color_contrast_items.length;
@@ -492,12 +492,10 @@ OpenAjax.a11y.cache.ColorContrastItem.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.ColorContrastItem.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.ColorContrastItem.prototype.getAttributes = function () {
 
   return [];
 
@@ -510,12 +508,10 @@ OpenAjax.a11y.cache.ColorContrastItem.prototype.getAttributes = function (unsort
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.ColorContrastItem.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.ColorContrastItem.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 

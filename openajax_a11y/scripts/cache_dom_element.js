@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                       DOMElementCache                            */
 /* ---------------------------------------------------------------- */
@@ -609,7 +611,7 @@ OpenAjax.a11y.cache.DOMText.prototype.getAccessibility = function () {
  * @return {Array} Returns a empty array
  */
 
-OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function () {
 
   return [];
 
@@ -625,7 +627,7 @@ OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function (unsorted) {
  * @return {Array} Returns a empty array
  */
 
-OpenAjax.a11y.cache.DOMText.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.DOMText.prototype.getEvents = function () {
 
   return [];
 
@@ -876,7 +878,6 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  *
  * @property {String}     class_name     - The value of the class attribute of the DOM node
  * @property {String}     role           - The value of the role attribute of the DOM node
- * @property {String}     implicit_role  - The implicit role based on the HTML element tag name
  *
  * @property {String}     alt      - String   The value of the alt attribute of the DOM node
  * @property {Boolean}    has_alt  - true if the alt attribute is defined, otherwise false
@@ -959,6 +960,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       var i;
       var j;
 
+      var v = parseInt(value, 10);
+
       switch (type) {
 
       case 'boolean':
@@ -967,7 +970,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
       case 'decimal':
         if (typeof parseFloat(value) === 'number') return true;
-        return true;
         break;
 
       case 'idref':
@@ -979,8 +981,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         break;
 
       case 'integer':
-        let v = parseInt(value, 10);
-        if (!isNaN(value) &&
+        if (!isNaN(v) &&
             ( v > 0) ||
             (allowUndeterminedValue && (v === -1 || v === 0))) {
           return true;
@@ -1008,7 +1009,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
           }
         }
         return flag;
-        break;
 
       case 'number':
         if (!isNaN(value) && value.length) return true;
@@ -1087,7 +1087,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   var i;
   var attr;
   var attributes;
-  var attributes_len;
   var role_info;
 
   // check to make sure it is a valid node
@@ -1107,6 +1106,13 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
   this.owned_by = [];
   this.widget_element = null;
+
+  this.element_aria_info = OpenAjax.a11y.ariaInHTML.getElementAriaInfo(node);
+  if (this.tag_name === 'figure') {
+    if (node.querySelector('figcaption')) {
+      this.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['figure[figcaption]'];
+    }
+  }
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -1132,7 +1138,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   i = 0;
   attr = null;
   attributes = node.attributes;
-  attributes_len = attributes.length;
 
   this.class_name = "";
 
@@ -1225,9 +1230,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
-
-  this.implicit_role = this.getImplicitRole(node);
-  console.log('[implicit_role][' + node.tagName + ']: ' + this.implicit_role);
 
   // Check for ARIA Attributes
 
@@ -1505,49 +1507,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 };
 
 /**
- * @method getImplicitRole
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc  Get implicit role baed on the ARIA in HTML specification
- *
- * @param  {Object} node - DOM element node
- *
- * @return {String} - Implicit role of the element
- }
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.getImplicitRole = function (node) {
-
-  var role = 'generic';
-  var elemInfo = OpenAjax.a11y.ariaInHTML[node.tagName.toLowerCase()];
-
-  if (elemInfo) {
-    if (elemInfo.length > 1) {
-      for (let i = 0; i  < elemInfo.length; i += 1) {
-        let attr = node[elemInfo[i].attr];
-        if (attr) {
-          if (node[elemInfo[i].attr_value]) {
-            if (attr === node[elemInfo[i].attr_value]) {
-              role = elemInfo[i].defaultRole;
-              break;
-            }
-          } else {
-            role = elemInfo[i].defaultRole;
-            break;
-          }
-        }
-      }
-    } else {
-      role = elemInfo[0].defaultRole;
-    }
-  }
-  console.log('[elemInfo]: ' + elemInfo + ' (' + node.tagName + ')');
-  return role;
-};
-
-
-/**
  * @method getAttributeValue
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
@@ -1634,6 +1593,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr,
 
   var flag = false;
 
+  var v = parseInt(value, 10);
+
   switch (attr_info.type) {
 
   case 'boolean':
@@ -1653,8 +1614,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr,
 
   case 'integer':
   case 'positive':
-    if ((typeof value === 'number') &&
-        ((value > 0) ||
+    if ((typeof v === 'number') &&
+        ((v > 0) ||
          (attr_info.type.allowUndeterminedValue && (v === -1 || v === 0)))) {
       flag = true;
     }
@@ -1737,7 +1698,7 @@ OpenAjax.a11y.cache.DOMElement.prototype.setImpliedRole = function (role) {
 
   if (!this.has_role && typeof role === 'string' && (role.length > 0)) {
 
-    role_info = OpenAjax.a11y.aria.getRoleObject(role);
+    var role_info = OpenAjax.a11y.aria.getRoleObject(role);
 
     if (!role_info) return;
 
@@ -1847,30 +1808,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.getParentLandmark = function () {
 
 };
 
-
-/**
- * @method hasAttrWithValue
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc   Check DOMElement for presence of attribute with specified value
- *
- * @param  {String} name  - name of attribute
- * @param  {String} value - value of attribute
- *
- * @return {boolean} Indicates whether or not DOMElement has the specified
- *                   attribute with the specified value.
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.hasAttrWithValue = function (name, value) {
-
-  if (this.hasOwnProperty (name)) {
-    return this[name] === value;
-  }
-
-  return false;
-
-};
 
 /**
  * @method hasOwns
@@ -1995,11 +1932,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.getAccessibility = function () {
   var RESULT_VALUE       = OpenAjax.a11y.RESULT_VALUE;
 
   var severity = cache_nls.getResultValueNLS(RESULT_VALUE.NONE);
-  a.label    = severity.label;
-
-//  if (this.rules_hidden.length) {
-//    severity = cache_nls.getResultValueNLS(RESULT_VALUE.HIDDEN);
-//  }
 
   if (this.rules_passed.length) {
     severity = cache_nls.getResultValueNLS(RESULT_VALUE.PASS);
@@ -2430,8 +2362,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.hasDragEvents = function (prop_list) {
   }
 
   var has_event = false;
-
-  var de = this;
 
 //  OpenAjax.a11y.logger.debug("DRAG: " + de.toString());
 
@@ -2971,6 +2901,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.EnumerateFirefoxEvents = function (node
   var i;
   var event_info;
 
+  var Components = Components || {};
+
   if (node.tagName && node.tagName.toLowerCase() === 'body') {
      event_info = this.EnumerateFirefoxEvents(this.document, null);
 //     OpenAjax.a11y.logger.debug('body: ' + event_info.has_key_down);
@@ -3263,6 +3195,9 @@ OpenAjax.a11y.cache.DOMElement.prototype.EnumerateInlineEvents = function (node,
   }
 
   function testForPropertyAndJQueryEvent(p) {
+
+    // If JQuery is defined
+    var $ = $ || {};
 
     if (typeof node['on' + p] === 'function') {
       events.supports_events = true;

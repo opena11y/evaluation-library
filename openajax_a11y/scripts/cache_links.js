@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            LinkCache                             */
 /* ---------------------------------------------------------------- */
@@ -327,14 +329,6 @@ OpenAjax.a11y.cache.LinksCache.prototype.getLinksThatShareTheSameHREF = function
   }
 
   if (same_hrefs) list_of_same_hrefs.push(same_hrefs);
-
-
-//  OpenAjax.a11y.logger.debug( "Number of DUP HREF objects: " + list_of_same_hrefs.length);
-
-  for (i = 0; i < list_of_same_hrefs.length; i++ ) {
-    var item = list_of_same_hrefs[i];
-//    OpenAjax.a11y.logger.debug("[Cache Links] " + i  + " HREF: " + item.links[0].href + "  Number: " + item.links.length + "  Same Name: " + item.same_names);
-  }
 
   return list_of_same_hrefs;
 

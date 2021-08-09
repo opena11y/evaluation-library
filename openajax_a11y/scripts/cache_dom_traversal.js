@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            DOMCache                              */
 /* ---------------------------------------------------------------- */
@@ -282,8 +284,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateAllCaches = function () {
 
 OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElementCache = function () {
 
- var de;
-
  this.initCache();
 
  // add title information to DOMElement Cache
@@ -467,7 +467,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
     } // end loop
 
     return dom_element;
-    break;
 
   case Node.TEXT_NODE:
    // OpenAjax.a11y.logger.debug("DOM node text: " + node.data);
@@ -492,8 +491,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
    else {
      return previous_sibling;
    }
-
-   break;
 
   default:
     break;

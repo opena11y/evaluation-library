@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -28,9 +46,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-    var tag_name;
-    var type;
-
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
 
@@ -39,8 +54,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       for (var i = 0; i < control_elements_len; i++) {
         var ce = control_elements[i];
-
-        var control_type = ce.control_type;
 
         if (ce.needs_label) {
 
@@ -82,8 +95,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-
-    var tag_name;
 
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
@@ -361,7 +372,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < label_elements_len; i++) {
        var le = label_elements[i];
        var de = le.dom_element;
-       var cs = de.computed_style;
 
        if (le.for_id && le.for_id.length) {
 
@@ -647,8 +657,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   primary_property    : 'computed_label',
   resource_properties : ['value'],
   language_dependency : "",
-  validate            : function (dom_cache, rule_result) {
+  validate            : function (/* dom_cache, rule_result */) {
 
+/* This rule needs to be completed
    function get_input_by_type(list, form, type) {
 
    }
@@ -686,6 +697,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        }
      } // end loop
    }
+*/
   } // end validate function
 
 }

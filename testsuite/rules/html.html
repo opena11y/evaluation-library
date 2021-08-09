@@ -24,16 +24,49 @@
         executeTest('ID_IFRAME_1A', 'HTML_1');
       });
 
-
-      // Test case for html standards 
-
-
-      test( "HTML_1: Replace marquee elements", function() {
+      test( "HTML_2: Replace marquee elements", function() {
         executeTest('ID_IFRAME_2A', 'HTML_2');
       });
 
+      test( "HTML_3: ARIA in HTML role restrictions: a and area", function() {
+        executeTest('ID_IFRAME_3A', 'HTML_3');
+      });
 
- 
+      test( "HTML_3: ARIA in HTML role restrictions: figure", function() {
+        executeTest('ID_IFRAME_3B', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: header and footer", function() {
+        executeTest('ID_IFRAME_3C', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: img", function() {
+        executeTest('ID_IFRAME_3D', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: input", function() {
+        executeTest('ID_IFRAME_3E', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: section", function() {
+        executeTest('ID_IFRAME_3F', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: selection", function() {
+        executeTest('ID_IFRAME_3G', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: table, th and td", function() {
+        executeTest('ID_IFRAME_3H', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: NO role allowed", function() {
+        executeTest('ID_IFRAME_3_NO', 'HTML_3');
+      });
+
+      test( "HTML_3: ARIA in HTML role restrictions: ANY role allowed", function() {
+        executeTest('ID_IFRAME_3_ANY', 'HTML_3');
+      });
        
     </script>
     
@@ -45,6 +78,18 @@
     <h2>Remove <code>marquee</code> elements</h2>
     <iframe id="ID_IFRAME_2A" src="html/html_2_marquee_element.html"></iframe>
     
+    <h2>ARIA in HTML role restrictions</h2>
+    <iframe id="ID_IFRAME_3A" src="html/html_3_aria_in_html_a_area.html"></iframe>
+    <iframe id="ID_IFRAME_3B" src="html/html_3_aria_in_html_figure.html"></iframe>
+    <iframe id="ID_IFRAME_3C" src="html/html_3_aria_in_html_header_footer.html"></iframe>
+    <iframe id="ID_IFRAME_3D" src="html/html_3_aria_in_html_img.html"></iframe>
+    <iframe id="ID_IFRAME_3E" src="html/html_3_aria_in_html_input.html"></iframe>
+    <iframe id="ID_IFRAME_3F" src="html/html_3_aria_in_html_section.html"></iframe>
+    <iframe id="ID_IFRAME_3G" src="html/html_3_aria_in_html_select.html"></iframe>
+    <iframe id="ID_IFRAME_3H" src="html/html_3_aria_in_html_table_row_th_td.html"></iframe>
+
+    <iframe id="ID_IFRAME_3_NO" src="html/html_3_aria_in_html_no_role_allowed.html"></iframe>
+    <iframe id="ID_IFRAME_3_ANY" src="html/html_3_aria_in_html_any_role_allowed.html"></iframe>
     
   </body>
 

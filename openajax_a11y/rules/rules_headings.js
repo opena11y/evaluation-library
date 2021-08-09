@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Heading and Landmark Rules                    */
 /* ---------------------------------------------------------------- */
@@ -93,7 +111,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var h1_elements     = dom_cache.headings_landmarks_cache.h1_elements;
     var h1_elements_len = h1_elements.length;
@@ -205,13 +222,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
     var heading_elements_len = heading_elements.length;
-
-    var main_elements     = dom_cache.headings_landmarks_cache.main_elements;
-    var main_elements_len = main_elements.length;
 
     var tested_list = [];
     var done_list   = [];
@@ -219,7 +232,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var sibling_headings = [];
     var sibling_headings_len = 0;
 
-//    if (main_elements_len === 0 && heading_elements_len > 1) {
     if (heading_elements_len > 1) {
 
       for (i = 0; i < (heading_elements_len-1); i++) {
@@ -290,8 +302,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
     var heading_elements_len = heading_elements.length;
@@ -358,7 +368,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
     var heading_elements_len = heading_elements.length;
@@ -403,8 +412,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -422,7 +429,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         if (cs.is_visible_to_at) {
 
           var heading_elements = le.getHeadings();
-          var heading_elements_len = heading_elements.length;
 
           if (heading_elements.length) {
             var he = heading_elements[0];
@@ -460,8 +466,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;

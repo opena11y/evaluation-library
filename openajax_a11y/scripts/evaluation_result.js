@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       EvaluationResult                           */
@@ -341,8 +342,6 @@ OpenAjax.a11y.EvaluationResult.prototype.getRuleResultsByCategory = function (ca
 OpenAjax.a11y.EvaluationResult.prototype.toJSON = function (include_element_results) {
 
   if (typeof include_element_results !== 'boolean') include_element_results = false;
-
-  var wcag20_nls  = OpenAjax.a11y.nls.WCAG20.getNLS();
 
   var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
 

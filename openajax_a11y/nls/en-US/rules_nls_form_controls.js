@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -530,7 +532,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             SUMMARY:    '@submit@ and @reset@ buttons %s be unique',
             TARGET_RESOURCES_DESC: '@submit@ and @reset@ buttons',
             RULE_RESULT_MESSAGES: {
-              FAIL_P:   'Change the labeling of %N_F @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
+              FAIL_S:   'Change the labeling of the @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
               FAIL_P:   'Change the labeling of %N_F @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
               HIDDEN_S: 'The @submit@ or @reset@ control element that is hidden was not evaluated.',
               HIDDEN_P: 'The %N_H @submit@ and/or @reset@ control elements that are hidden were not evaluated.',

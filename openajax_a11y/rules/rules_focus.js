@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -215,8 +233,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      var link_elements     = dom_cache.links_cache.link_elements;
      var link_elements_len = link_elements.length;
-
-     var visible_interactive_count = 0;
 
      for (var i = 0; i < link_elements_len; i++) {
 
@@ -436,7 +452,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var form_elements   = dom_cache.controls_cache.form_elements;
     var form_elements_len = form_elements.length;
-    var fes   = [];
 
     // Check to see if valid cache reference
     if (form_elements && form_elements_len) {
@@ -507,11 +522,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT  = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY   = OpenAjax.a11y.VISIBILITY;
-    var CONTROL_TYPE =  OpenAjax.a11y.CONTROL_TYPE;
 
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
-    var ces   = [];
 
     // Check to see if valid cache reference
     if (control_elements && control_elements_len) {

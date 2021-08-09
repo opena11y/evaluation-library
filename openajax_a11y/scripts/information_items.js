@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /**
  * @namespace OpenAjax.a11y.info
  */
@@ -52,8 +54,6 @@ OpenAjax.a11y.info = OpenAjax.a11y.info || {};
  */
 
 OpenAjax.a11y.info.InformationalLinkInfo = function (rt, t, u) {
-
-  var REFS = OpenAjax.a11y.REFERENCES;
 
   var reference_type = OpenAjax.a11y.REFERENCES.UNKNOWN;
   var title = "";

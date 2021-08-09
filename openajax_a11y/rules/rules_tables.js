@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*      OpenAjax Alliance Table Rules                               */
 /* ---------------------------------------------------------------- */
@@ -56,9 +58,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var TABLE_ROLE    = OpenAjax.a11y.TABLE_ROLE;
 
     var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -242,8 +241,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var DESCRIPTION_SOURCE = OpenAjax.a11y.DESCRIPTION_SOURCE;
     var TABLE_ROLE         = OpenAjax.a11y.TABLE_ROLE;
 
-    var LARGE_TABLE_CELL_COUNT = 64;
-
     var table_elements     = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
 
@@ -315,11 +312,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT   = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY    = OpenAjax.a11y.VISIBILITY;
-
-    var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -411,8 +403,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       for (var i = 0; i < table_elements_len; i++) {
         var te = table_elements[i];
-        var es = te.effective_summary_for_comparison;
-        var ec = te.effective_caption_for_comparison;
         var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
 
         if (is_visible_to_at == VISIBILITY.VISIBLE) {
@@ -467,9 +457,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var VISIBILITY    = OpenAjax.a11y.VISIBILITY;
 
     var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -552,9 +539,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var TABLE_ROLE    = OpenAjax.a11y.TABLE_ROLE;
 
     var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -646,14 +630,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
     var TEST_RESULT   = OpenAjax.a11y.TEST_RESULT;
-    var HEADER_SOURCE = OpenAjax.a11y.HEADER_SOURCE;
     var VISIBILITY    = OpenAjax.a11y.VISIBILITY;
     var TABLE_ROLE    = OpenAjax.a11y.TABLE_ROLE;
-
-    var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;

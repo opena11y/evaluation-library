@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                             ElementResultSummary                        */
@@ -43,7 +43,7 @@
  *                                      (value >= 0)
  */
 
-OpenAjax.a11y.info.ElementResultsSummary = function (required) {
+OpenAjax.a11y.info.ElementResultsSummary = function () {
 
   // Element result counts
   var p   = 0;  // Pass result (p)

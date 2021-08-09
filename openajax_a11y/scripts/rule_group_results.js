@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      RuleGroupResult                             */
@@ -280,13 +281,9 @@ OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
 
   if (typeof flag !== 'boolean') flag = true;
 
-  if (typeof prefix !== 'string' || prefix.length === 0) prefix = "";
-  else next_prefix = prefix + "    ";
-
   var rule_group_info = this.getRuleGroupInfo();
 
   var ruleset_title   = this.evaluation_result.ruleset_title;
-  var ruleset_abbrev  = this.evaluation_result.ruleset_abbrev;
   var ruleset_version = this.evaluation_result.ruleset_version;
   var ruleset_id      = this.evaluation_result.ruleset_id;
 
@@ -325,7 +322,7 @@ OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
 
   var rule_results     = this.rule_results;
   var rule_results_len = rule_results.length;
-  var comma_len   = results_len - 1;
+  var comma_len   = rule_results_len - 1;
 
   for (var i = 0; i < rule_results_len; i++) {
     json += rule_results[i].toJSON(prefix + "  ", flag);

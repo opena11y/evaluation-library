@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance (OAA) Test Ruleset for WCAG 2.0 (Beta)           */
 /* --------------------------------------------------------------------------- */
 
-var createARIATestRuleset = function () {
+(function () {
 
   var ruleset_info = {
     ruleset_id    : "TEST",
@@ -107,10 +109,6 @@ var createARIATestRuleset = function () {
        required : true,
        enabled  : true
      },
-   CONTROL_11 : {
-       required : true,
-       enabled  : true
-     },
    ERROR_1 : {
        required : true,
        enabled  : true
@@ -192,6 +190,10 @@ var createARIATestRuleset = function () {
        enabled  : true
      },
    HTML_2 : {
+       required : true,
+       enabled  : true
+     },
+   HTML_3 : {
        required : true,
        enabled  : true
      },
@@ -598,11 +600,11 @@ var createARIATestRuleset = function () {
     OpenAjax.a11y.logger.error("[TEST Ruleset] ** Error creating ARIA Test Ruleset");
   }
 
-}();
+}());
 
 
 /**
- * Copyright 2011-2018 OpenAjax Alliance
+ * Copyright 2011-2021 OpenAjax Alliance
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -617,16 +619,18 @@ var createARIATestRuleset = function () {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance (OAA) ARIA Transitional Rule Mapping (Beta)               */
 /* --------------------------------------------------------------------------- */
 
-var createARIATransitionalRuleset = function () {
+(function () {
 
   var ruleset_info = {
     ruleset_id    : "ARIA_TRANS",
-    version       : "1.1.0",
-    last_updated  : "2017-02-01",
+    version       : "1.2.0",
+    last_updated  : "2021-07-07",
     author        : "OpenAjax Accessibility Task Force",
     author_url    : "http://www.openajax.org/member/wiki/Accessibility",
 
@@ -710,10 +714,6 @@ var createARIATransitionalRuleset = function () {
        required : true,
        enabled  : true
      },
-   CONTROL_11 : {
-       required : true,
-       enabled  : true
-     },
    ERROR_1 : {
        required : true,
        enabled  : true
@@ -779,6 +779,10 @@ var createARIATransitionalRuleset = function () {
        enabled  : true
      },
    HTML_2 : {
+       required : true,
+       enabled  : true
+     },
+   HTML_3 : {
        required : true,
        enabled  : true
      },
@@ -1154,7 +1158,7 @@ var createARIATransitionalRuleset = function () {
     OpenAjax.a11y.logger.error("[ARIA TRANS Ruleset] ** Error creating ARIA Strict Ruleset");
   }
 
-}();
+}());
 /**
  * Copyright 2011-2018 OpenAjax Alliance
  *
@@ -1171,17 +1175,19 @@ var createARIATransitionalRuleset = function () {
  * limitations under the License.
  */
 
+ // import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance (OAA) ARIA Strict Rule Mapping (Beta)                     */
 /* --------------------------------------------------------------------------- */
 
 
-var createARIAStrictRuleset = function () {
+(function () {
 
   var ruleset_info = {
     ruleset_id    : "ARIA_STRICT",
-    version       : "1.1.0",
-    last_updated  : "2017-02-01",
+    version       : "1.2.0",
+    last_updated  : "2021-07-07",
     author        : "OpenAjax Accessibility Task Force",
     author_url    : "http://www.openajax.org/member/wiki/Accessibility",
 
@@ -1265,10 +1271,6 @@ var createARIAStrictRuleset = function () {
         required : true,
         enabled  : true
       },
-      CONTROL_11 : {
-        required : true,
-        enabled  : true
-      },
       ERROR_1 : {
         required : true,
         enabled  : true
@@ -1346,6 +1348,10 @@ var createARIAStrictRuleset = function () {
         enabled  : true
       },
       HTML_2 : {
+        required : true,
+        enabled  : true
+      },
+      HTML_3 : {
         required : true,
         enabled  : true
       },
@@ -1749,5 +1755,5 @@ var createARIAStrictRuleset = function () {
     OpenAjax.a11y.logger.error("[ARIA STRICT Ruleset] ** Error creating ARIA Strict Ruleset");
   }
 
-}();
+}());
 

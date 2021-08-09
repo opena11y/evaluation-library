@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            TimingFlashing                             */
 /* ---------------------------------------------------------------- */
@@ -179,10 +181,7 @@ OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -202,8 +201,6 @@ OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getAttributes = function
  */
 
 OpenAjax.a11y.cache.PageElementTimingFlashing.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 

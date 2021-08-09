@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                              FrameInfo                            */
@@ -138,7 +139,7 @@ OpenAjax.a11y.cache.FramesCache.prototype.updateCacheItems = function (dom_eleme
     this.addFrameElement(fe);
 
     if (frame_info.parent_frame) {
-      list_info.parent_frame.addChildElement(fe);
+      frame_info.parent_frame.addChildElement(fe);
     }
     else {
       this.addChildElement(fe);
@@ -341,14 +342,11 @@ OpenAjax.a11y.cache.FrameElement.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.FrameElement.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.FrameElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
 
   return attributes;

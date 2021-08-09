@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       ElementInformation                         */
@@ -574,8 +574,9 @@ OpenAjax.a11y.cache.ElementInformation.prototype.countElement = function (dom_el
     default:
       break;
    }
+   break;
 
-   case 'output':
+  case 'output':
     this.output_count++;
     this.all_forms_count++;
     if (dom_element.has_title)   this.title_attribute_count++;

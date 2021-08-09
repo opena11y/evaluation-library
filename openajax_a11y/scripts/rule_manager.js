@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                             Rule                                 */
@@ -353,15 +354,12 @@ OpenAjax.a11y.Rule.prototype.getGroupNLS = function () {
 
   case RULE_GROUP.GROUP1:
     return "Group 1";
-    break;
 
   case RULE_GROUP.GROUP2:
     return "Group 2";
-    break;
 
   case RULE_GROUP.GROUP3:
     return "Group 3";
-    break;
 
   default:
     break;
@@ -858,14 +856,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
     else json += ",\n";
   }
 
-  function booleanItem(property, value, last) {
-    if (value) json += prefix + "    \"" + property + "\" : true";
-    else json += prefix + "    \"" + property + "\" : false";
-
-    if (last) json += "\n";
-    else json += ",\n";
-  }
-
   function stringListItem(property, list, last) {
     json += prefix + "    \"" + property + "\" : [";
 
@@ -880,23 +870,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
     if (last) json += "]\n";
     else json += "],\n";
   }
-
-  function stringListItem2(property, list, last ) {
-    json += prefix + "    \"" + property + "\" : [";
-
-    if (list && list.length) {
-      var last_item = list.length - 1;
-      for (var i = 0; i < list.length; i++) {
-        if (last_item === i) json += "  " + JSON.stringify(list[i]) + "\n";
-        else json += "  " + JSON.stringify(list[i]) + ",\n";
-      }
-    }
-
-    if (last) json += "]\n";
-    else json += "],\n";
-
-  }
-
 
   function addListOfStrings(name, list, last) {
 
@@ -953,7 +926,7 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
 
     if (list) {
       var first = true;
-      for (item in list) {
+      for (var item in list) {
         if (first) json += "           " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
         else json += ",\n          " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
         first = false;
@@ -972,7 +945,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
 
   var json = "";
 
-  var rule     = this;
   var rule_nls = this.rule_nls;
 
   OpenAjax.a11y.logger.debug("[RULE] Exporting rule: " + this.rule_id);

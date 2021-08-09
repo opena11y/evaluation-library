@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                      FilteredCacheItemResults                    */
 /* ---------------------------------------------------------------- */
@@ -238,8 +240,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.updateSummary = function(cache_
 
 //  OpenAjax.a11y.logger.debug("FILTER: " + filter );
 
-  var total;
-
   var ELEMENT_TYPE = OpenAjax.a11y.ELEMENT_TYPE;
 
   this.element_type  = element_type;
@@ -347,8 +347,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.filterCacheItemsByElementResult
 
   this.is_tree = false;
 
-  var RESULT_FILTER = OpenAjax.a11y.RESULT_FILTER;
-
   var cache_items_len = cache_items.length;
 
   for (var i = 0; i < cache_items_len; i++) {
@@ -420,8 +418,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.filterCacheItemsByElementResult
 
   }
 
-  var RESULT_FILTER = OpenAjax.a11y.RESULT_FILTER;
-
   var is_tree = false;
 
   var filtered_cache_item_results = this;
@@ -435,8 +431,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.filterCacheItemsByElementResult
   var cache_item_results = [];
 
   var cache_items_len = cache_items.length;
-
-  var all_flag = (this.filter === RESULT_FILTER.ALL);
 
   for (var i = 0; i < cache_items_len; i++) {
     var ci = cache_items[i];
@@ -612,8 +606,6 @@ OpenAjax.a11y.FilteredCacheItemResults.prototype.toCSV = function(title) {
   var result_items_len = result_items.length;
 
   for (var i = 0; i < result_items_len; i++) {
-
-     var position = i+1;
 
      var result_item      = result_items[i];
      var node_results     = result_item.node_results;

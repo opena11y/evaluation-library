@@ -6,7 +6,7 @@
 #   If set to 1, the script will exit immediately after a warning or
 #   error is detected by JavaScript Lint.
 
-exit_on_error=1
+exit_on_error=0
 
 # check_status_code: Process the return status of call to JavaScript
 # Lint. When exit_on_error is set to 1 and the return status is non-
@@ -30,139 +30,139 @@ function check_status_code() {
   fi
 }
 
-# JSLINT function: A wrapper for calls to JavaScript Lint that allows
+# ESLINT function: A wrapper for calls to JavaScript Lint that allows
 # additional processing based on the status code of each call. In this
 # script, the function is only called when the environment variable
-# JSLINT is defined.
+# ESLINT is defined.
 
-function JSLINT() {
-  $JSLINT $1
+function ESLINT() {
+  $ESLINT $1
   check_status_code
 }
 
 echo "... rule files ..."
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT rules/rules_audio.js
-  JSLINT rules/rules_bypass.js
-  JSLINT rules/rules_color.js
-  JSLINT rules/rules_error_feedback.js
-  JSLINT rules/rules_focus.js
-  JSLINT rules/rules_form_controls.js
-  JSLINT rules/rules_frames.js
-  JSLINT rules/rules_headings.js
-  JSLINT rules/rules_html.js
-  JSLINT rules/rules_images.js
-  JSLINT rules/rules_keyboard.js
-  JSLINT rules/rules_landmarks.js
-  JSLINT rules/rules_language.js
-  JSLINT rules/rules_layout.js
-  JSLINT rules/rules_links.js
-  JSLINT rules/rules_lists.js
-  JSLINT rules/rules_navigation.js
-  JSLINT rules/rules_reading_order.js
-  JSLINT rules/rules_resize.js
-  JSLINT rules/rules_roles.js
-  JSLINT rules/rules_sensory.js
-  JSLINT rules/rules_tables.js
-  JSLINT rules/rules_timing.js
-  JSLINT rules/rules_title.js
-  JSLINT rules/rules_video.js
-  JSLINT rules/rules_widgets.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT rules/rules_audio.js
+  ESLINT rules/rules_bypass.js
+  ESLINT rules/rules_color.js
+  ESLINT rules/rules_error_feedback.js
+  ESLINT rules/rules_focus.js
+  ESLINT rules/rules_form_controls.js
+  ESLINT rules/rules_frames.js
+  ESLINT rules/rules_headings.js
+  ESLINT rules/rules_html.js
+  ESLINT rules/rules_images.js
+  ESLINT rules/rules_keyboard.js
+  ESLINT rules/rules_landmarks.js
+  ESLINT rules/rules_language.js
+  ESLINT rules/rules_layout.js
+  ESLINT rules/rules_links.js
+  ESLINT rules/rules_lists.js
+  ESLINT rules/rules_navigation.js
+  ESLINT rules/rules_reading_order.js
+  ESLINT rules/rules_resize.js
+  ESLINT rules/rules_roles.js
+  ESLINT rules/rules_sensory.js
+  ESLINT rules/rules_tables.js
+  ESLINT rules/rules_timing.js
+  ESLINT rules/rules_title.js
+  ESLINT rules/rules_video.js
+  ESLINT rules/rules_widgets.js
 fi
 
 echo "... rule nls files ..."
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT nls/en-US/rules_nls_common.js
-  JSLINT nls/en-US/rules_nls_audio.js
-  JSLINT nls/en-US/rules_nls_bypass.js
-  JSLINT nls/en-US/rules_nls_color.js
-  JSLINT nls/en-US/rules_nls_error_feedback.js
-  JSLINT nls/en-US/rules_nls_focus.js
-  JSLINT nls/en-US/rules_nls_form_controls.js
-  JSLINT nls/en-US/rules_nls_frames.js
-  JSLINT nls/en-US/rules_nls_headings.js
-  JSLINT nls/en-US/rules_nls_html.js
-  JSLINT nls/en-US/rules_nls_images.js
-  JSLINT nls/en-US/rules_nls_keyboard.js
-  JSLINT nls/en-US/rules_nls_landmarks.js
-  JSLINT nls/en-US/rules_nls_language.js
-  JSLINT nls/en-US/rules_nls_layout.js
-  JSLINT nls/en-US/rules_nls_links.js
-  JSLINT nls/en-US/rules_nls_lists.js
-  JSLINT nls/en-US/rules_nls_navigation.js
-  JSLINT nls/en-US/rules_nls_reading_order.js
-  JSLINT nls/en-US/rules_nls_resize.js
-  JSLINT nls/en-US/rules_nls_roles.js
-  JSLINT nls/en-US/rules_nls_sensory.js
-  JSLINT nls/en-US/rules_nls_tables.js
-  JSLINT nls/en-US/rules_nls_timing.js
-  JSLINT nls/en-US/rules_nls_title.js
-  JSLINT nls/en-US/rules_nls_video.js
-  JSLINT nls/en-US/rules_nls_widgets.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT nls/en-US/rules_nls_common.js
+  ESLINT nls/en-US/rules_nls_audio.js
+  ESLINT nls/en-US/rules_nls_bypass.js
+  ESLINT nls/en-US/rules_nls_color.js
+  ESLINT nls/en-US/rules_nls_error_feedback.js
+  ESLINT nls/en-US/rules_nls_focus.js
+  ESLINT nls/en-US/rules_nls_form_controls.js
+  ESLINT nls/en-US/rules_nls_frames.js
+  ESLINT nls/en-US/rules_nls_headings.js
+  ESLINT nls/en-US/rules_nls_html.js
+  ESLINT nls/en-US/rules_nls_images.js
+  ESLINT nls/en-US/rules_nls_keyboard.js
+  ESLINT nls/en-US/rules_nls_landmarks.js
+  ESLINT nls/en-US/rules_nls_language.js
+  ESLINT nls/en-US/rules_nls_layout.js
+  ESLINT nls/en-US/rules_nls_links.js
+  ESLINT nls/en-US/rules_nls_lists.js
+  ESLINT nls/en-US/rules_nls_navigation.js
+  ESLINT nls/en-US/rules_nls_reading_order.js
+  ESLINT nls/en-US/rules_nls_resize.js
+  ESLINT nls/en-US/rules_nls_roles.js
+  ESLINT nls/en-US/rules_nls_sensory.js
+  ESLINT nls/en-US/rules_nls_tables.js
+  ESLINT nls/en-US/rules_nls_timing.js
+  ESLINT nls/en-US/rules_nls_title.js
+  ESLINT nls/en-US/rules_nls_video.js
+  ESLINT nls/en-US/rules_nls_widgets.js
   echo "----------------------------------------------------------------"
 fi
 
 echo "... ruleset files ..."
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT rulesets/wcag20_aria_strict_ruleset.js
-  JSLINT rulesets/wcag20_aria_transitional_ruleset.js
-  JSLINT rulesets/test_ruleset.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT rulesets/wcag20_aria_strict_ruleset.js
+  ESLINT rulesets/wcag20_aria_transitional_ruleset.js
+  ESLINT rulesets/test_ruleset.js
   echo "----------------------------------------------------------------"
 fi
 
 echo "... evaluation scripting files ..."
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT wai_aria/aria.js
-  JSLINT wai_aria/aria_in_html.js
-  JSLINT scripts/cache_util.js
-  JSLINT scripts/cache_abbreviations.js
-  JSLINT scripts/cache_color_contrast.js
-  JSLINT scripts/cache_controls.js
-  JSLINT scripts/cache_dom_element.js
-  JSLINT scripts/cache_dom_traversal.js
-  JSLINT scripts/cache_frames.js
-  JSLINT scripts/cache_headings_landmarks.js
-  JSLINT scripts/cache_images.js
-  JSLINT scripts/cache_languages.js
-  JSLINT scripts/cache_links.js
-  JSLINT scripts/cache_lists.js
-  JSLINT scripts/cache_media.js
-  JSLINT scripts/cache_style.js
-  JSLINT scripts/cache_tables.js
-  JSLINT scripts/cache_text.js
-  JSLINT scripts/cache_keyboard_focus.js
-  JSLINT scripts/cache_timing.js
-  JSLINT scripts/cache_page_information.js
-  JSLINT scripts/information_items.js
-  JSLINT scripts/result_summary.js
-  JSLINT scripts/evaluation_result.js
-  JSLINT scripts/rule_result.js
-  JSLINT scripts/element_result.js
-  JSLINT scripts/filtered_cache_item_results.js
-  JSLINT scripts/rule_group_results.js
-  JSLINT scripts/cache_nls.js
-  JSLINT scripts/rule_category_nls.js
-  JSLINT scripts/rule_scope_nls.js
-  JSLINT scripts/wcag20_nls.js
-  JSLINT scripts/evaluator.js
-  JSLINT scripts/rule_manager.js
-  JSLINT scripts/ruleset_manager.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT wai_aria/aria.js
+  ESLINT wai_aria/aria_in_html.js
+  ESLINT scripts/cache_util.js
+  ESLINT scripts/cache_abbreviations.js
+  ESLINT scripts/cache_color_contrast.js
+  ESLINT scripts/cache_controls.js
+  ESLINT scripts/cache_dom_element.js
+  ESLINT scripts/cache_dom_traversal.js
+  ESLINT scripts/cache_frames.js
+  ESLINT scripts/cache_headings_landmarks.js
+  ESLINT scripts/cache_images.js
+  ESLINT scripts/cache_languages.js
+  ESLINT scripts/cache_links.js
+  ESLINT scripts/cache_lists.js
+  ESLINT scripts/cache_media.js
+  ESLINT scripts/cache_style.js
+  ESLINT scripts/cache_tables.js
+  ESLINT scripts/cache_text.js
+  ESLINT scripts/cache_keyboard_focus.js
+  ESLINT scripts/cache_timing.js
+  ESLINT scripts/cache_page_information.js
+  ESLINT scripts/information_items.js
+  ESLINT scripts/result_summary.js
+  ESLINT scripts/evaluation_result.js
+  ESLINT scripts/rule_result.js
+  ESLINT scripts/element_result.js
+  ESLINT scripts/filtered_cache_item_results.js
+  ESLINT scripts/rule_group_results.js
+  ESLINT scripts/cache_nls.js
+  ESLINT scripts/rule_category_nls.js
+  ESLINT scripts/rule_scope_nls.js
+  ESLINT scripts/wcag20_nls.js
+  ESLINT scripts/evaluator.js
+  ESLINT scripts/rule_manager.js
+  ESLINT scripts/ruleset_manager.js
   echo "----------------------------------------------------------------"
 fi
 
 echo "... Checking page information file ..."
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT scripts/cache_page_information.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT scripts/cache_page_information.js
 fi
 
 echo "... Updating export directory ..."
@@ -210,9 +210,9 @@ nls/en-US/cache_nls.js \
 nls/en-US/rule_category_nls.js \
 nls/en-US/wcag20_nls.js  > export/scripts/oaa_a11y_evaluation.js
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT export/scripts/oaa_a11y_evaluation.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT export/scripts/oaa_a11y_evaluation.js
 fi
 md5 export/scripts/oaa_a11y_evaluation.js > export/md5/oaa_a11y_evaluation.md5
 
@@ -271,20 +271,21 @@ rules/rules_title.js \
 rules/rules_video.js \
 rules/rules_widgets.js > export/scripts/oaa_a11y_rules.js
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT export/scripts/oaa_a11y_rules.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT export/scripts/oaa_a11y_rules.js
 fi
 md5 export/scripts/oaa_a11y_rules.js > export/md5/oaa_a11y_rules.md5
 
 cat \
+openajax_a11y_import.js \
 rulesets/test_ruleset.js \
 rulesets/wcag20_aria_transitional_ruleset.js \
 rulesets/wcag20_aria_strict_ruleset.js > export/scripts/oaa_a11y_rulesets.js
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT export/scripts/oaa_a11y_rulesets.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT export/scripts/oaa_a11y_rulesets.js
 fi
 md5 export/scripts/oaa_a11y_rulesets.js > export/md5/oaa_a11y_rulesets.md5
 
@@ -307,9 +308,9 @@ export/scripts/oaa_a11y_rules.js \
 export/scripts/oaa_a11y_rulesets.js \
 openajax_a11y_amd_end.js > export/amd/oaa_a11y_amd.js
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT export/amd/oaa_a11y_amd.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT export/amd/oaa_a11y_amd.js
 fi
 md5 export/amd/oaa_a11y_amd.js > export/md5/oaa_a11y_amd.md5
 
@@ -320,9 +321,9 @@ export/scripts/oaa_a11y_rules.js \
 export/scripts/oaa_a11y_rulesets.js \
 openajax_a11y_object_end.js > export/object/oaa_a11y_object.js
 
-if [ -n "$JSLINT" ]; then
-  echo "---------------------------- JSLINT ----------------------------"
-  JSLINT export/object/oaa_a11y_object.js
+if [ -n "$ESLINT" ]; then
+  echo "---------------------------- ESLINT ----------------------------"
+  ESLINT export/object/oaa_a11y_object.js
 fi
 md5 export/object/oaa_a11y_object.js > export/md5/oaa_a11y_object.md5
 
@@ -335,6 +336,8 @@ echo "----------------------------------------------------------------"
 tar cvzf tar/oaa_report_all.tar.gz reports/*.js reports/*.inc reports/*.css
 md5 tar/oaa_report_all.tar.gz > md5/oaa_report_all.tar.gz.md5
 cd ..
+
+cp export/scripts/*.js ../../firefox-ainspector-wcag/scripts/
 
 echo
 if [ $exit_on_error == 1 ]

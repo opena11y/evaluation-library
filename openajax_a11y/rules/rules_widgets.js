@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -664,8 +682,16 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var required_roles_max = required_roles.length - 1;
 
        for (var i = 0; i < required_roles.length; i++ ) {
-         str += required_roles[i];
-         if (i !== required_roles_max) str += ", ";
+         if (i > 0) {
+          if ( i === required_roles_max) {
+            str += "@ or @" + required_roles[i];
+          } else {
+            str += "@, @" + required_roles[i];
+;
+          }
+         } else {
+           str += required_roles[i];
+         }
        }
 
        return str;
@@ -733,8 +759,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-
-     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
      var dom_elements     = dom_cache.element_cache.dom_elements;
@@ -743,8 +767,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      for (var i = 0; i < dom_elements_len; i++) {
         var de = dom_elements[i];
-        var style = de.computed_style;
-
 
         if (de.owned_by.length === 1) {
           we = de.owned_by[0];
@@ -1012,20 +1034,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < dom_elements_len; i++) {
         var de = dom_elements[i];
         var style = de.computed_style;
+        var implicit_role = de.element_aria_info.defaultRole;
 
         if (de.has_aria_label || de.has_aria_labelledby) {
 
           if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
             if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, de.tag_name]);
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
             } else {
               rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
             }
           } else {
-            console.log('[implicit_role]: ' + de.implicit_role);
-            if (de.implicit_role && OpenAjax.a11y.aria.designPatterns[de.implicit_role].nameProhibited) {
+            if (!de.role && implicit_role && OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
               if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+                if (de.tag_name === 'a') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+                } else {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+                }
               } else {
                 rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
               }

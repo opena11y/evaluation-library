@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -45,7 +46,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
 
     NOT_APPLICABLE: 'N/A'
 
-});/*
+});
+/*
  * Copyright 2011-2018 OpenAjax Alliance
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,6 +62,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -269,6 +273,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -353,6 +359,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -475,6 +483,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -761,6 +771,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -1060,6 +1072,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -1577,7 +1591,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             SUMMARY:    '@submit@ and @reset@ buttons %s be unique',
             TARGET_RESOURCES_DESC: '@submit@ and @reset@ buttons',
             RULE_RESULT_MESSAGES: {
-              FAIL_P:   'Change the labeling of %N_F @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
+              FAIL_S:   'Change the labeling of the @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
               FAIL_P:   'Change the labeling of %N_F @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
               HIDDEN_S: 'The @submit@ or @reset@ control element that is hidden was not evaluated.',
               HIDDEN_P: 'The %N_H @submit@ and/or @reset@ control elements that are hidden were not evaluated.',
@@ -1639,6 +1653,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -1752,6 +1768,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -2234,6 +2252,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -2581,6 +2601,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -2663,6 +2685,54 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
             ]
+        },
+        HTML_3: {
+            ID:         'HTML 3',
+            DEFINITION: 'Some HTML elements are restricted in the role allowed based on the semantics of the element (e.g. @li@ elements can only have list related ARIA roles).',
+            SUMMARY:    'Role is not allowed',
+            TARGET_RESOURCES_DESC: '',
+            RULE_RESULT_MESSAGES: {
+              FAIL_S:   'Remove or update the role to an allowed role on the element',
+              FAIL_P:   'Remove or update the roles to an allowed role on the %N_F elements',
+              HIDDEN_S: 'If the hidden element becomes visible, it\'s role must be removed or updated.',
+              HIDDEN_P: 'If any of the %N_H hidden elements become visible, it\'s role must be removed or updated to an allowed role.',
+              NOT_APPLICABLE:  'No elements with role restrictions found on the page.'
+            },
+            NODE_RESULT_MESSAGES: {
+              ELEMENT_FAIL_1: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the implict role of the element to be changed.  Remove the @%4@ role fromm the element.',
+              ELEMENT_FAIL_2: 'The @%1@ element with the @%2@ attribute does not allow the implict role of the element to be changed.  Remove the @%3@ role from the element.',
+              ELEMENT_FAIL_3: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow the implict role of the element to be changed.  Remove the @%2@ role from the element.',
+              ELEMENT_FAIL_4: 'The @%1@ element does not allowed the implict role of the element to be changed.  Remove the @%2@ role from the element.',
+              ELEMENT_FAIL_5: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the @%4@ role.  Either remove the role or change it to one of the following allowed values: %5.',
+              ELEMENT_FAIL_6: 'The @%1@ element with the @%2@ attribute does not allow the @%3@ role.  Either remove the role or change it to one of the following allowed values: @%4@.',
+              ELEMENT_FAIL_7: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow @%2@ role. Either remove the role or change it to one of the following allowed values: @%3@.',
+              ELEMENT_FAIL_8: 'The @%1@ element does not allow the @%2@ role.  Either remove the role or change it to one of the following allowed values: @%3@.',
+              ELEMENT_HIDDEN_1: '@%1@ element is hidden, the @%2@ role must be removed before it becomes visible.',
+              ELEMENT_HIDDEN_2: '@%1@ element is hidden, the @%2@ role must be removed or changed to an allowed role before it becomes visible.'
+            },
+            PURPOSE: [
+              'ARIA role attributes change the exposed meaning (semantics) of HTML elements to assisitve technologies.',
+              'When a role conflicts with the implicit semantics of an HTML element the accessibility API provides confusing and/or conflicting information to screen readers.',
+              'Role restrictions make sure roles enhance rather than conflict with the implicit semantcs of an HTML element.'
+            ],
+            TECHNIQUES: [
+              'Some HTML elements do not allow any role to override of the implicit role, in this case the role must be removed.',
+              'Some HTML elements only allow certain roles to override of the implicit role, in this case only those roles can be used to override the implicit role.'
+            ],
+            INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'W3C ARIA in HTML',
+                url:   'https://www.w3.org/TR/html-aria/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'W3C WAI-ARIA Authoring Practices 1.2 (Editor\'s Draft)',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'W3C HTML Accessibility API Mappings 1.0',
+                url:   'https://www.w3.org/TR/html-aam-1.0/'
+              },
+            ]
         }
    }
 });
@@ -2681,6 +2751,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -2862,6 +2934,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -4037,6 +4111,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -4206,6 +4282,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -4404,6 +4482,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -4565,6 +4645,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -4742,6 +4824,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -4996,6 +5080,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -5065,6 +5151,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -5121,6 +5209,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -5427,7 +5517,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             TARGET_RESOURCES_DESC: '@nav@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute on the @nav@ element to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
-              FAIL_S:         'Remove the @role@ attribute on the %N_F @nav@ elements to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
+              FAIL_P:         'Remove the @role@ attribute on the %N_F @nav@ elements to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
               HIDDEN_S:       'One @nav@ element that is hidden was not evaluated.',
               HIDDEN_P:       '%N_H @nav@ elements that are hidden were not evaluated.',
               NOT_APPLICABLE: 'No @nav@ elements found on the page'
@@ -5814,6 +5904,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -5870,6 +5962,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -6409,6 +6503,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -6534,6 +6630,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
@@ -6658,6 +6756,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -7081,6 +7181,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -7510,42 +7612,41 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
      WIDGET_8: {
             ID:                    'Widget 8',
-            DEFINITION:            'Widgets %s have required parent role.',
-            SUMMARY:               'Widgets %s have parent',
-            TARGET_RESOURCES_DESC: 'Widgets with required parent role',
+            DEFINITION:            'Role %s have a required parent role using the HTML DOM structure or the @aria-owns@ attribute.',
+            SUMMARY:               'Role %s have parent',
+            TARGET_RESOURCES_DESC: 'Role with required parent role',
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Add required parent role to the widget.',
               FAIL_P:   'Add required parent role to the %N_F of the %N_T widgets that require a parent role.',
-              HIDDEN_S: 'The widget that requires a parent role that is hidden and was not evaluated.',
+              HIDDEN_S: 'The role that requires a parent role that is hidden and was not evaluated.',
               HIDDEN_P: '%N_H widgets that require a parent roles that are hidden were not evaluated.',
               NOT_APPLICABLE:  'No widgets with required parent role on this page'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:   '@%1@ widget is a child of the a @%2@ role.',
-              ELEMENT_FAIL_1: 'Create a parent widget with the role of @%1@ for this @%2@ widget.',
-              ELEMENT_FAIL_2: 'Create a parent widget with the one of the required roles (i.e. @%1@) for this @%2@ widget.',
-              ELEMENT_HIDDEN_1: 'Required parent widgets was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
+              ELEMENT_PASS_1:   '@%1@ role is a child of the a @%2@ role.',
+              ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes defines a required parent role.',
+              ELEMENT_HIDDEN_1: 'Required parent role was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
             },
             PURPOSE: [
-              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
+              'Roles that are part of more complicated widgets have important parent/child relationships with other roles.'
             ],
             TECHNIQUES: [
-              'Use required parent roles to describe the features and options of a widget.'
+              'Parent roles can be defined using the HTML DOM structure or the @aria-owns@ attribute.',
+              'Required parent role is a DOM ancestor of the element.',
+              'Required parent role references the element using the @aria-owns@ attribute.',
+              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
               },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-owns'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -7579,18 +7680,20 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               'Some ARIA widgets have require child roles and when the HTML DOM parent/child relationships does not identify the elements nodes with the associated roles, @aria-owns@ attribute can be used to identify the associated elements.'
             ],
             TECHNIQUES: [
-              'Parent widget roles with aria-owns must accurately describe the parent relationships, when used @aria-owns@ a dom element can only be referenced once.   NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@.'
+              'Parent widget roles defined using @aria-owns@ attribute must accurately describe the parent/child relationship.',
+              'An element can only be referenced once using the @aria-owns@ attribute.',
+              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
               },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#aria-owns'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -7837,7 +7940,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         WIDGET_13: {
             ID:                    'Widget 13',
             DEFINITION:            'ARIA roles that prohibit accessible names %s not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
-            SUMMARY:               'Role %s not have accessible name.',
+            SUMMARY:               'Role does not support accessible name.',
             TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
@@ -7855,7 +7958,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             PURPOSE: [
               'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
               'Versions of the ARIA specification before 1.2 allowed @aria-label@ or @aria-labelledby@  to be used on any element, even if an accessible name was not useful .',
-              'For example, defining an accessible name on a @p@ element or an element with @role=none@.',
+              'For example, defining an accessible name on a @p@ element or an element with @role=none@ does not provide any useful accessibility information to assistive technologies.',
               'The text content of the @p@ element is the only part that is needed by assisitve technologies.'
             ],
             TECHNIQUES: [
@@ -7953,7 +8056,53 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               }
 
             ]
-        }
+        },
+        WIDGET_15: {
+            ID:                    'Widget 15',
+            DEFINITION:            'ARIA attribute %s not be used on roles it is not supported.',
+            SUMMARY:               'ARIA attribute not supported.',
+            TARGET_RESOURCES_DESC: 'Roles where an attribute is not supoorted',
+            RULE_RESULT_MESSAGES: {
+              FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
+              FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
+              HIDDEN_S: 'The element with an widget role that is hidden and was not evaluated.',
+              HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
+              NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
+            },
+            NODE_RESULT_MESSAGES: {
+              ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element with role @%2@.',
+              ELEMENT_FAIL_2:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
+              ELEMENT_HIDDEN_1:  'Element @%1[role="%2"]@ was not tested because it is hidden from assistive technologies.',
+              ELEMENT_HIDDEN_2:  'Element @%1@ was not tested because it is hidden from assistive technologies.'
+            },
+            PURPOSE: [
+              '',
+              ''
+            ],
+            TECHNIQUES: [
+              'Remove unspoorted ARIA attribute from the element.'
+            ],
+            MANUAL_CHECKS: [
+            ],
+            INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+                url:   'http://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
+                url:   'http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#kbd_focus'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+                url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'ARIA Authoring Practices',
+                url:   'https://w3c.github.io/aria-practices/'
+              }
+            ]
+        },
     }
 });
 /**
@@ -7971,6 +8120,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
@@ -7999,7 +8150,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var audio_elements     = dom_cache.media_cache.audio_elements;
     var audio_elements_len = audio_elements.length;
@@ -8043,7 +8193,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var object_elements     = dom_cache.media_cache.object_elements;
     var object_elements_len = object_elements.length;
@@ -8095,7 +8244,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var embed_elements     = dom_cache.media_cache.embed_elements;
     var embed_elements_len = embed_elements.length;
@@ -8172,6 +8320,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance List Rules                         */
@@ -8297,6 +8447,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 }
 ]);
 
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 //
 // OpenAjax Alliance Rules
 // Rule group: Styling Rules
@@ -8333,10 +8501,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       var cc_items_len = cc_items.length;
 
       for (var i = 0; i < cc_items_len; i++) {
-
-        var test_result = TEST_RESULT.PASS;
-        var message_id = '';
-        var args = [];
 
         var cc_item = cc_items[i];
         var pe = cc_item.parent_element;
@@ -8433,6 +8597,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -8464,7 +8646,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
-    var ces   = [];
 
     // Check to see if valid cache reference
     if (control_elements && control_elements_len) {
@@ -8687,12 +8868,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
 
-    var widget_elements     = dom_cache.controls_cache.widget_elements;
-    var widget_elements_len = widget_elements.length;
-
-
-    var target_controls = [];
-
     // collect all the visible controls
     for (var i = 0; i < control_elements_len; i++) {
       var ce = control_elements[i];
@@ -8765,8 +8940,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       var de = ce.dom_element;
       var cs = de.computed_style;
 
-      var control_type = ce.control_type;
-
 //      console.log('[ERROR_5][tag]: ' + de.tag_name + ' [role]: ' + de.role + ' [isWidget]: ' + de.is_widget);
 
       if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
@@ -8791,6 +8964,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 
+
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
@@ -9010,8 +9201,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      var link_elements     = dom_cache.links_cache.link_elements;
      var link_elements_len = link_elements.length;
 
-     var visible_interactive_count = 0;
-
      for (var i = 0; i < link_elements_len; i++) {
 
        var le = link_elements[i];
@@ -9230,7 +9419,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var form_elements   = dom_cache.controls_cache.form_elements;
     var form_elements_len = form_elements.length;
-    var fes   = [];
 
     // Check to see if valid cache reference
     if (form_elements && form_elements_len) {
@@ -9301,11 +9489,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT  = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY   = OpenAjax.a11y.VISIBILITY;
-    var CONTROL_TYPE =  OpenAjax.a11y.CONTROL_TYPE;
 
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
-    var ces   = [];
 
     // Check to see if valid cache reference
     if (control_elements && control_elements_len) {
@@ -9351,6 +9537,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -9381,9 +9585,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-    var tag_name;
-    var type;
-
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
 
@@ -9392,8 +9593,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       for (var i = 0; i < control_elements_len; i++) {
         var ce = control_elements[i];
-
-        var control_type = ce.control_type;
 
         if (ce.needs_label) {
 
@@ -9435,8 +9634,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-
-    var tag_name;
 
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
@@ -9714,7 +9911,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < label_elements_len; i++) {
        var le = label_elements[i];
        var de = le.dom_element;
-       var cs = de.computed_style;
 
        if (le.for_id && le.for_id.length) {
 
@@ -10000,8 +10196,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   primary_property    : 'computed_label',
   resource_properties : ['value'],
   language_dependency : "",
-  validate            : function (dom_cache, rule_result) {
+  validate            : function (/* dom_cache, rule_result */) {
 
+/* This rule needs to be completed
    function get_input_by_type(list, form, type) {
 
    }
@@ -10039,6 +10236,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        }
      } // end loop
    }
+*/
   } // end validate function
 
 }
@@ -10046,6 +10244,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 
+
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 //
 // OpenAjax Alliance Rules
@@ -10140,7 +10356,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         for (var i = 0; i < iframe_elements_len; i++) {
           var fe = iframe_elements[i];
-          var de = fe.dom_element;
 
           // if no content in frame ignore
           if (fe.src.length === 0) continue;
@@ -10170,6 +10385,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 
+
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /* OpenAjax Alliance IMG and AREA element Rules                     */
@@ -10578,6 +10811,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   } // end validation function
 }]);
 
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Heading and Landmark Rules                    */
 /* ---------------------------------------------------------------- */
@@ -10673,7 +10924,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var h1_elements     = dom_cache.headings_landmarks_cache.h1_elements;
     var h1_elements_len = h1_elements.length;
@@ -10785,13 +11035,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
     var heading_elements_len = heading_elements.length;
-
-    var main_elements     = dom_cache.headings_landmarks_cache.main_elements;
-    var main_elements_len = main_elements.length;
 
     var tested_list = [];
     var done_list   = [];
@@ -10799,7 +11045,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var sibling_headings = [];
     var sibling_headings_len = 0;
 
-//    if (main_elements_len === 0 && heading_elements_len > 1) {
     if (heading_elements_len > 1) {
 
       for (i = 0; i < (heading_elements_len-1); i++) {
@@ -10870,8 +11115,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
     var heading_elements_len = heading_elements.length;
@@ -10938,7 +11181,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
     var heading_elements_len = heading_elements.length;
@@ -10983,8 +11225,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11002,7 +11242,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         if (cs.is_visible_to_at) {
 
           var heading_elements = le.getHeadings();
-          var heading_elements_len = heading_elements.length;
 
           if (heading_elements.length) {
             var he = heading_elements[0];
@@ -11040,8 +11279,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11123,6 +11360,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
@@ -11214,8 +11453,127 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     }
 
   } // end validate function
+},
+
+/**
+ * @object HTML_3
+ *
+ * @desc Role restrictions on HTML elements
+ */
+
+{ rule_id             : 'HTML_3',
+  last_updated        : '2021-07-30',
+  rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
+  rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP1,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['html elements'],
+  primary_property    : 'tag_name',
+  resource_properties : [],
+  language_dependency : "",
+  validate          : function (dom_cache, rule_result) {
+
+    function checkResult(result, de) {
+      if (de.node.className.indexOf(result) < 0) {
+        console.log('[HTML3][ERROR]: ' + de.toString());
+      }
+    }
+
+    var TEST_RESULT    = OpenAjax.a11y.TEST_RESULT;
+    var VISIBILITY     = OpenAjax.a11y.VISIBILITY;
+
+    var dom_elements     = dom_cache.element_cache.dom_elements;
+    var dom_elements_len = dom_elements.length;
+
+    for (var i = 0; i < dom_elements_len; i++) {
+      var de = dom_elements[i];
+      var eai = de.element_aria_info;
+
+      if (de.role) {
+
+        if (eai.noRoleAllowed) {
+          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+            if (eai.attr2) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
+              checkResult('FAIL', de);
+            } else {
+              if (eai.attr1) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
+                checkResult('FAIL', de);
+              } else {
+                if (eai.hasAccname) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
+                  checkResult('FAIL', de);
+                } else {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
+                  checkResult('FAIL', de);
+                }
+              }
+            }
+          } else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [eai.tagName, de.role]);
+          }
+        } else {
+          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+
+            var allowedRoles = [];
+            if (eai.allowedRoles) {
+              allowedRoles = allowedRoles.concat(eai.allowedRoles);
+            }
+            if (eai.defaultRole && eai.defaultRole !== 'generic') {
+              allowedRoles.push(eai.defaultRole);
+            }
+            if (!eai.anyRoleAllowed && allowedRoles.length && (allowedRoles.indexOf(de.role) < 0)) {
+              if (eai.attr2) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
+                checkResult('FAIL', de);
+              } else {
+                if (eai.attr1) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
+                  checkResult('FAIL', de);
+                } else {
+                  if (eai.hasAccname) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
+                    checkResult('FAIL', de);
+                } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
+                    checkResult('FAIL', de);
+                  }
+                }
+              }
+            }
+            else {
+              checkResult('NORESULT', de);
+            }
+          } else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+          }
+        }
+      }
+    }
+
+  } // end validate function
 }
 ]);
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -11400,7 +11758,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ie =interactive_elements[i];
        var de = ie.dom_element;
        var cs = de.computed_style;
-       var tab_index = parseInt(de.tab_index,10);
 
        if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
            (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
@@ -11500,6 +11857,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Heading and Landmark Rules                    */
 /* ---------------------------------------------------------------- */
@@ -11527,7 +11902,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var main_elements     = dom_cache.headings_landmarks_cache.main_elements;
     var main_elements_len = main_elements.length;
@@ -11581,14 +11955,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var elements_with_content    = dom_cache.headings_landmarks_cache.elements_with_content;
     var elements_with_content_len = elements_with_content.length;
-
-    var pass_count   = 0;
-    var fail_count   = 0;
-    var mc_count     = 0;
 
     var tag_name = "";
 
@@ -11606,16 +11975,13 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       else {
         if (de.parent_landmark) {
           rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tag_name, de.parent_landmark.landmark]);
-          pass_count++;
         }
         else {
           if (de.may_have_renderable_content) {
             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [tag_name]);
-            mc_count++;
           }
           else {
             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tag_name]);
-            fail_count++;
           }
         }
       }
@@ -11645,7 +12011,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11655,7 +12020,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var page_element = dom_cache.headings_landmarks_cache.page_element;
 
-    var i, ci, le, de, cs, li;
+    var i, ci, le, de, cs;
 
 
     var navigation_count = 0;
@@ -11740,7 +12105,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11816,7 +12180,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11894,7 +12257,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11970,7 +12332,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -11979,8 +12340,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var landmark_count = 0;
     var les = [];
-
-    var LANDMARK_ROLE = 'contentinfo';
 
     for (var i = 0; i < landmark_elements_len; i++ ) {
       var le = landmark_elements[i];
@@ -12048,7 +12407,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -12110,7 +12468,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -12205,7 +12562,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -12301,7 +12657,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -12360,7 +12715,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -12422,7 +12776,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -12517,7 +12870,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -12615,7 +12967,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -12706,11 +13057,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
-    var fail_count = 0;
 
     for (var i = 0; i < landmark_elements_len; i++ ) {
 
@@ -12790,7 +13139,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -12840,7 +13188,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -12878,7 +13225,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -12919,6 +13265,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 }
 
 ]);
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -13051,6 +13415,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*      OpenAjax Alliance Table Rules                               */
 /* ---------------------------------------------------------------- */
@@ -13104,7 +13470,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      var page_element = dom_cache.headings_landmarks_cache.page_element;
      var layout_pass = 0;
      var layout_mc   = 0;
-     var layout_fail = 0;
 
      // Check to see if valid cache reference
      if (table_elements && table_elements_len) {
@@ -13182,7 +13547,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      var i;
      var te;
-     var nesting_level;
 
      var table_elements     = dom_cache.tables_cache.table_elements;
      var table_elements_len = table_elements.length;
@@ -13260,8 +13624,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     }
   } // end validation function
 }
-]);/**
- * Copyright 2011-2017  OpenAjax Alliance
+]);
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13275,6 +13640,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Link Rules                          */
@@ -13414,7 +13781,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
 /**
- * Copyright 2011-2017  OpenAjax Alliance
+ * Copyright 2011-2018 OpenAjax Alliance
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13428,6 +13795,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance List Rules                          */
@@ -13540,6 +13909,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   }
 ]);
 
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -13568,22 +13955,17 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
 
     var page_element = dom_cache.headings_landmarks_cache.page_element;
 
-    var landmark_count = 0;
     var navigation_count = 0;
     var search_count     = 0;
 
-    var LANDMARK_ROLE = 'navigation';
-
     for (var i = 0; i < landmark_elements_len; i++ ) {
       var le = landmark_elements[i];
-      var tag_name = le.dom_element.tag_name;
 
       if (le.role === 'navigation') {
         if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
@@ -13632,7 +14014,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -13815,7 +14196,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -13954,6 +14334,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
 /* ---------------------------------------------------------------- */
@@ -13989,8 +14371,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       var de = dom_elements[i];
       var cs = de.computed_style;
-      var tag_name = de.tag_name;
-
 
       if (cs.position === 'absolute' || cs.position === 'relative' || cs.position === 'fixed') {
 
@@ -14025,6 +14405,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
@@ -14080,6 +14462,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
@@ -14161,7 +14545,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
     var TEST_RESULT    = OpenAjax.a11y.TEST_RESULT;
-    var VISIBILITY     = OpenAjax.a11y.VISIBILITY;
 
     var section_elements     = dom_cache.headings_landmarks_cache.getListOfSectionElements();
     var section_elements_len = section_elements.length;
@@ -14866,6 +15249,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
 /* ---------------------------------------------------------------- */
@@ -14918,6 +15303,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*      OpenAjax Alliance Table Rules                               */
 /* ---------------------------------------------------------------- */
@@ -14960,9 +15347,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var TABLE_ROLE    = OpenAjax.a11y.TABLE_ROLE;
 
     var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -15146,8 +15530,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var DESCRIPTION_SOURCE = OpenAjax.a11y.DESCRIPTION_SOURCE;
     var TABLE_ROLE         = OpenAjax.a11y.TABLE_ROLE;
 
-    var LARGE_TABLE_CELL_COUNT = 64;
-
     var table_elements     = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
 
@@ -15219,11 +15601,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT   = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY    = OpenAjax.a11y.VISIBILITY;
-
-    var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -15315,8 +15692,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       for (var i = 0; i < table_elements_len; i++) {
         var te = table_elements[i];
-        var es = te.effective_summary_for_comparison;
-        var ec = te.effective_caption_for_comparison;
         var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
 
         if (is_visible_to_at == VISIBILITY.VISIBLE) {
@@ -15371,9 +15746,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var VISIBILITY    = OpenAjax.a11y.VISIBILITY;
 
     var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -15456,9 +15828,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
     var TABLE_ROLE    = OpenAjax.a11y.TABLE_ROLE;
 
     var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -15550,14 +15919,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
 
     var TEST_RESULT   = OpenAjax.a11y.TEST_RESULT;
-    var HEADER_SOURCE = OpenAjax.a11y.HEADER_SOURCE;
     var VISIBILITY    = OpenAjax.a11y.VISIBILITY;
     var TABLE_ROLE    = OpenAjax.a11y.TABLE_ROLE;
-
-    var span_cells = [];
-
-    var info_row;
-    var info_column;
 
     var table_elements   = dom_cache.tables_cache.table_elements;
     var table_elements_len = table_elements.length;
@@ -15619,6 +15982,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
@@ -15745,6 +16110,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 }
 
 ]);
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Heading and Landmark Rules                    */
 /* ---------------------------------------------------------------- */
@@ -15929,6 +16312,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Alliance Media Rules                         */
 /* ---------------------------------------------------------------- */
@@ -15956,7 +16341,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var video_elements     = dom_cache.media_cache.video_elements;
     var video_elements_len = video_elements.length;
@@ -16000,7 +16384,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var object_elements     = dom_cache.media_cache.object_elements;
     var object_elements_len = object_elements.length;
@@ -16048,7 +16431,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var embed_elements     = dom_cache.media_cache.embed_elements;
     var embed_elements_len = embed_elements.length;
@@ -16094,7 +16476,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var video_elements     = dom_cache.media_cache.video_elements;
     var video_elements_len = video_elements.length;
@@ -16136,7 +16517,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var object_elements     = dom_cache.media_cache.object_elements;
     var object_elements_len = object_elements.length;
@@ -16182,7 +16562,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var embed_elements     = dom_cache.media_cache.embed_elements;
     var embed_elements_len = embed_elements.length;
@@ -16228,7 +16607,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var video_elements     = dom_cache.media_cache.video_elements;
     var video_elements_len = video_elements.length;
@@ -16270,7 +16648,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var object_elements     = dom_cache.media_cache.object_elements;
     var object_elements_len = object_elements.length;
@@ -16316,7 +16693,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var MEDIA       = OpenAjax.a11y.MEDIA;
 
     var embed_elements     = dom_cache.media_cache.embed_elements;
     var embed_elements_len = embed_elements.length;
@@ -16342,6 +16718,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 }
 
 ]);
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -17008,8 +17402,16 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var required_roles_max = required_roles.length - 1;
 
        for (var i = 0; i < required_roles.length; i++ ) {
-         str += required_roles[i];
-         if (i !== required_roles_max) str += ", ";
+         if (i > 0) {
+          if ( i === required_roles_max) {
+            str += "@ or @" + required_roles[i];
+          } else {
+            str += "@, @" + required_roles[i];
+;
+          }
+         } else {
+           str += required_roles[i];
+         }
        }
 
        return str;
@@ -17077,8 +17479,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-
-     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
      var dom_elements     = dom_cache.element_cache.dom_elements;
@@ -17087,8 +17487,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      for (var i = 0; i < dom_elements_len; i++) {
         var de = dom_elements[i];
-        var style = de.computed_style;
-
 
         if (de.owned_by.length === 1) {
           we = de.owned_by[0];
@@ -17356,20 +17754,24 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < dom_elements_len; i++) {
         var de = dom_elements[i];
         var style = de.computed_style;
+        var implicit_role = de.element_aria_info.defaultRole;
 
         if (de.has_aria_label || de.has_aria_labelledby) {
 
           if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
             if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, de.tag_name]);
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
             } else {
               rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
             }
           } else {
-            console.log('[implicit_role]: ' + de.implicit_role);
-            if (de.implicit_role && OpenAjax.a11y.aria.designPatterns[de.implicit_role].nameProhibited) {
+            if (!de.role && implicit_role && OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
               if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+                if (de.tag_name === 'a') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+                } else {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+                }
               } else {
                 rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
               }

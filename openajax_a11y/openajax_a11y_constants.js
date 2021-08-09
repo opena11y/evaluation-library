@@ -18,6 +18,7 @@
  * Support IE and Node constant
  */
 
+
 try {
     if (Node.ELEMENT_NODE != 1) {
         throw true;
@@ -51,12 +52,14 @@ catch(e) {
 
 var OpenAjax = OpenAjax || {};
 
+// export { OpenAjax };
+
 /**
  * @namespace OpenAjax.a11y
  */
 
 OpenAjax.a11y = OpenAjax.a11y || {};
-OpenAjax.a11y.VERSION = "1.1.2";
+OpenAjax.a11y.VERSION = "1.2.0";
 
 /**
  * @method getVersion

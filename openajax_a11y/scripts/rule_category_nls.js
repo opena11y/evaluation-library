@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-OpenAjax.a11y.nls = OpenAjax.a11y.nls || {};
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 
 /* ---------------------------------------------------------------- */

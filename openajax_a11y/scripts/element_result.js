@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                      ElementInfo                                   */
 /* ---------------------------------------------------------------- */
@@ -453,43 +455,33 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
     switch(source) {
       case SOURCE.ALT_ATTRIBUTE:
         return "alt attribute";
-        break;
 
       case SOURCE.ARIA_LABELLEDBY:
         return "aria-labelledby attribute";
-        break;
 
       case SOURCE.ARIA_LABEL:
         return "aria-label attribute";
-        break;
 
       case SOURCE.LABEL_REFERENCE:
         return "label reference";
-        break;
 
       case SOURCE.LABEL_ENCAPSULATION:
         return "label encapsulation";
-        break;
 
       case SOURCE.TABLE_CAPTION:
         return "caption element";
-        break;
 
       case SOURCE.TABLE_SUMMARY:
         return "summary attribute";
-        break;
 
       case SOURCE.TEXT_CONTENT:
         return "text content";
-        break;
 
       case SOURCE.TITLE_ATTRIBUTE:
         return "title attribute";
-        break;
 
       case SOURCE.VALUE_ATTRIBUTE:
         return "value attribute";
-        break;
 
       default:
         break;
@@ -500,7 +492,6 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
   }
 
   var de = this.getDOMElement();
-  var source = '';
 
   if (this.cache_item.accessible_name) {
     if (this.cache_item.accessible_name_source) {
@@ -541,7 +532,6 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
             }
           }
           return ['none', '', de.src];
-          break;
 
         case 'a':
         case 'area':
@@ -554,7 +544,6 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
             }
           }
           return ['none', '', de.href];
-          break;
 
         default:
           if (text_content) {
@@ -622,11 +611,6 @@ OpenAjax.a11y.ElementResult.prototype.toString = function () {
  */
 
 OpenAjax.a11y.ElementResult.prototype.toJSON = function (prefix) {
-
-  var next_prefix = "";
-
-  if (typeof prefix !== 'string' || prefix.length === 0) prefix = "";
-  else next_prefix = prefix + "    ";
 
   var json = "";
 

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance WCAG 2.0 National Language Support (NLS): English         */
 /* --------------------------------------------------------------------------- */
-
-
 
 OpenAjax.a11y.nls.WCAG20.addNLS('en-us', {
 

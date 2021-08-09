@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*      OpenAjax Alliance Table Rules                               */
 /* ---------------------------------------------------------------- */
@@ -67,7 +69,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      var page_element = dom_cache.headings_landmarks_cache.page_element;
      var layout_pass = 0;
      var layout_mc   = 0;
-     var layout_fail = 0;
 
      // Check to see if valid cache reference
      if (table_elements && table_elements_len) {
@@ -145,7 +146,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      var i;
      var te;
-     var nesting_level;
 
      var table_elements     = dom_cache.tables_cache.table_elements;
      var table_elements_len = table_elements.length;

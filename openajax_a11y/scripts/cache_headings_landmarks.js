@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*            OpenAjax Heading and Landmark Cache                   */
 /* ---------------------------------------------------------------- */
@@ -85,12 +87,12 @@ OpenAjax.a11y.cache.LandmarkInfo = function (landmark_info) {
 OpenAjax.a11y.cache.HeadingInfo = function (heading_info) {
 
   if (heading_info) {
-    this.is_past_first_h1 = landmark_info.is_past_first_h1;
-    this.nesting_h1       = landmark_info.nesting_h1;
-    this.nesting_h2       = landmark_info.nesting_h2;
-    this.nesting_h3       = landmark_info.nesting_h3;
-    this.nesting_h4       = landmark_info.nesting_h4;
-    this.nesting_h5       = landmark_info.nesting_h5;
+    this.is_past_first_h1 = heading_info.is_past_first_h1;
+    this.nesting_h1       = heading_info.nesting_h1;
+    this.nesting_h2       = heading_info.nesting_h2;
+    this.nesting_h3       = heading_info.nesting_h3;
+    this.nesting_h4       = heading_info.nesting_h4;
+    this.nesting_h5       = heading_info.nesting_h5;
   }
   else {
     this.is_past_first_h1 = false;
@@ -225,11 +227,23 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.addChildElement = function 
 OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.addLandmarkElement = function (landmark_element) {
 
   if (landmark_element) {
+    var de = landmark_element.dom_element;
+
     this.landmark_length = this.landmark_length + 1;
     landmark_element.document_order = this.landmark_length;
     landmark_element.cache_id = "landmark_" + this.landmark_length;
     this.landmark_elements.push(landmark_element);
+
+    if (de.tag_name === 'header') {
+      de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+    }
+
+    if (de.tag_name === 'footer') {
+      de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+    }
+
   }
+
 
   return this.landmark_length;
 };
@@ -753,6 +767,7 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             break;
 
           case 'header':
+            dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
             this.dom_cache.getNameFromARIALabel(le, "BANNER");
             break;
@@ -772,7 +787,6 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
 
           }
         }
-
 
         this.addLandmarkElement(le);
 
@@ -919,6 +933,7 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.traverseDOMElementsForLandm
 OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCache = function () {
   var i;
   var li;
+  var hi;
   var children = this.dom_cache.element_cache.child_dom_elements;
   var children_len = children.length;
 
@@ -1130,10 +1145,7 @@ OpenAjax.a11y.cache.SectionElement.prototype.getElementResults = function () {
 
 OpenAjax.a11y.cache.SectionElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -1420,10 +1432,7 @@ OpenAjax.a11y.cache.LandmarkElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.LandmarkElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -1756,10 +1765,7 @@ OpenAjax.a11y.cache.HeadingElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.HeadingElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2076,10 +2082,7 @@ OpenAjax.a11y.cache.MainElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.MainElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2324,10 +2327,7 @@ OpenAjax.a11y.cache.H1Element.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.H1Element.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2511,10 +2511,7 @@ OpenAjax.a11y.cache.TitleElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.TitleElement.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2711,10 +2708,7 @@ OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getStyle = function (
 
 OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -2734,8 +2728,6 @@ OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getAttributes = funct
  */
 
 OpenAjax.a11y.cache.PageElementHeadingsLandmarks.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 

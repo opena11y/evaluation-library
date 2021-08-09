@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*                            ImageCache                            */
 /* ---------------------------------------------------------------- */
@@ -378,8 +380,6 @@ OpenAjax.a11y.cache.ImagesCache.prototype.getNameForImage = function (image) {
 
 OpenAjax.a11y.cache.ImageElement = function (dom_element, base_url) {
 
-  var alt_value;
-
   if (!dom_element) return null;
 
   var node = dom_element.node;
@@ -537,12 +537,10 @@ OpenAjax.a11y.cache.ImageElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.ImageElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.ImageElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -619,8 +617,6 @@ OpenAjax.a11y.cache.ImageElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.ImageElement.prototype.getAltTextNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var alt_style = {};
 
   if (this.dom_element.has_alt) {
     if (this.alt_length) {
@@ -857,12 +853,10 @@ OpenAjax.a11y.cache.CanvasElement.prototype.getAttributes = function (unsorted) 
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.CanvasElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.CanvasElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -1061,12 +1055,10 @@ OpenAjax.a11y.cache.SVGElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.SVGElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.SVGElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
