@@ -11,7 +11,7 @@ const path = require('path');
 
 let aria12Info = {};
 let ariaInHTMLInfo = {};
-let notAllowedTagNames = ' audio bdo body br datalist details head iframe math optgroup rp ruby rt summary track video ';
+let notAllowedTagNames = ' bdo body br datalist details head iframe math optgroup rp ruby rt summary track ';
 
 function getResult (infoItem, role) {
 
@@ -84,16 +84,46 @@ function generateTestItems(infoItem, spaces, childContent) {
       }
     }
 
+    switch (tagName) {
+
+      case 'audio':
+        html += spaces + '<div>\n';
+        html += spaces + `  <code>audio</code> with role=${ariaRole} (${result})\n`;
+        html += spaces + `  <audio role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
+        html += spaces + '    <source src="../audio/audio-test.mp3" type="audio/mp3"/>\n';
+        html += spaces + '  </audio>\n';
+        html += spaces + '<div>\n';
+
+        break;
+
+      case 'img':
+        html += spaces + '<div>\n';
+        html += spaces + '  ' + `<${tagName} src="../images/blue.png" role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}/>\n`;
+        html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
+        html += spaces + '<div>\n';
+
+        break;
+
+      case 'video':
+        html += spaces + '<div>\n';
+        html += spaces + `  <code>video</code> with role=${ariaRole} (${result})\n`;
+        html += spaces + `  <video role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
+        html += spaces + '    <source src="../audio/audio-test.mp3" type="audio/mp3"/>\n';
+        html += spaces + '  </video>\n';
+        html += spaces + '<div>\n';
+
+        break;
+
+      default:
+        html += spaces + `<${tagName} role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}${sizeOrMultiple}>\n`;
+        html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
+        childContent ? html += spaces + '  ' + childContent + '\n' : '';
+        html += spaces + `</${tagName}>\n`;
+        break;
+
+    }
     if (tagName === 'img') {
-      html += spaces + '<div>\n';
-      html += spaces + '  ' + `<${tagName} src="../images/blue.png" role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}/>\n`;
-      html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
-      html += spaces + '<div>\n';
     } else {
-      html += spaces + `<${tagName} role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}${sizeOrMultiple}>\n`;
-      html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
-      childContent ? html += spaces + '  ' + childContent + '\n' : '';
-      html += spaces + `</${tagName}>\n`;
     }
 
     roleCount += 1;
@@ -306,7 +336,6 @@ function createTestCases(name, testItems) {
         body += generateTableTestItems(infoItem);
         break;
 
-
       default:
         body += generateTestItems(infoItem, '  ');
         break;
@@ -401,6 +430,10 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
         let tableItems = ['table', 'tr', 'tr[table]', 'thead', 'tbody', 'td', 'th', 'td[cell]', 'th[cell]', 'td[gridcell]', 'th[gridcell]'];
         createTestCases('table_row_th_td', tableItems);
         completedItems = completedItems.concat(tableItems);
+
+        let mediaItems = ['audio', 'video'];
+        createTestCases('media', mediaItems);
+        completedItems = completedItems.concat(mediaItems);
 
         let landmarkItems = ['header', 'header[banner]', 'footer', 'footer[contentinfo]'];
         createTestCases('header_footer', landmarkItems);

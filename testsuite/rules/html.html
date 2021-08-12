@@ -64,6 +64,10 @@
         executeTest('ID_IFRAME_3I', 'HTML_3');
       });
 
+      test( "HTML_3: ARIA in HTML role restrictions: media elements audio and video", function() {
+        executeTest('ID_IFRAME_3J', 'HTML_3');
+      });
+
       test( "HTML_3: ARIA in HTML role restrictions: NO role allowed", function() {
         executeTest('ID_IFRAME_3_NO', 'HTML_3');
       });
@@ -71,7 +75,7 @@
       test( "HTML_3: ARIA in HTML role restrictions: ANY role allowed", function() {
         executeTest('ID_IFRAME_3_ANY', 'HTML_3');
       });
-       
+
     </script>
     
     <h1>HTML standards tests</h1>
@@ -92,6 +96,7 @@
     <iframe id="ID_IFRAME_3G" src="html/html_3_aria_in_html_section.html"></iframe>
     <iframe id="ID_IFRAME_3H" src="html/html_3_aria_in_html_select.html"></iframe>
     <iframe id="ID_IFRAME_3I" src="html/html_3_aria_in_html_table_row_th_td.html"></iframe>
+    <iframe id="ID_IFRAME_3J" src="html/html_3_aria_in_html_media.html"></iframe>
 
     <iframe id="ID_IFRAME_3_NO" src="html/html_3_aria_in_html_no_role_allowed.html"></iframe>
     <iframe id="ID_IFRAME_3_ANY" src="html/html_3_aria_in_html_any_role_allowed.html"></iframe>
