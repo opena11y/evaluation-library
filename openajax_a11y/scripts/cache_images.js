@@ -395,7 +395,7 @@ OpenAjax.a11y.cache.ImageElement = function (dom_element, base_url) {
   this.is_presentation = false;
 
   if (dom_element.has_role && dom_element.role != 'img') this.is_image = false;
-  if (dom_element.has_role && dom_element.role === 'presentation') this.is_presentation = true;
+  if (dom_element.has_role && (dom_element.role === 'presentation' || dom_element.role === 'none')) this.is_presentation = true;
 
 //  OpenAjax.a11y.logger.debug("Image element: " + dom_element.toString() + " has: " + dom_element.has_role + " role: " + dom_element.role  + " image: " + this.is_image + " presentation: " + this.is_presentation);
 
@@ -975,7 +975,7 @@ OpenAjax.a11y.cache.SVGElement = function (dom_element) {
   this.document_order = 0;
 
   this.is_presentation = false;
-  if (dom_element.has_role && dom_element.role === 'presentation') this.is_presentation = true;
+  if (dom_element.has_role && (dom_element.role === 'presentation' || dom_element.role === 'none')) this.is_presentation = true;
 
 //  OpenAjax.a11y.logger.debug("Canvas element: " + dom_element.toString() + " has: " + dom_element.has_role + " role: " + dom_element.role  + " image: " + this.is_image + " presentation: " + this.is_presentation);
 

@@ -759,6 +759,7 @@ OpenAjax.a11y.cache.ElementInformation.prototype.countElement = function (dom_el
         this.all_structures_count++;
         break;
 
+      case 'none':
       case 'presentation':
         this.role_presentation_count++;
         this.all_structures_count++;

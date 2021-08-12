@@ -133,7 +133,6 @@ OpenAjax.a11y.cache.TablesCache = function (dom_cache) {
  */
 
  OpenAjax.a11y.cache.TablesCache.prototype.addChild = function (table_element) {
-
    if (table_element) {
      this.child_cache_elements.push(table_element);
    }
@@ -554,8 +553,11 @@ OpenAjax.a11y.cache.TablesCache = function (dom_cache) {
    this.accessible_description_source         = OpenAjax.a11y.DESCRIPTION_SOURCE.NONE;
 
    if (dom_element.role &&
-       (dom_element.role === 'presentation')) this.table_role = OpenAjax.a11y.TABLE_ROLE.LAYOUT;
-   else this.table_role = OpenAjax.a11y.TABLE_ROLE.UNKNOWN;
+       (dom_element.role === 'presentation' || dom_element.role === 'none')) {
+      this.table_role = OpenAjax.a11y.TABLE_ROLE.LAYOUT;
+   } else {
+      this.table_role = OpenAjax.a11y.TABLE_ROLE.UNKNOWN;
+   }
 
    this.is_complex_data_table = false;
 
@@ -594,7 +596,7 @@ OpenAjax.a11y.cache.TableElement.prototype.setIsDataTable = function () {
 
   // if role=presentation this is a layout table
   if (this.dom_element.has_role  &&
-      (this.dom_element.role === 'presentation')) {
+      (this.dom_element.role === 'presentation' || this.dom_element.role === 'none')) {
 
     this.setIsLayoutTable();
     return;
@@ -2003,6 +2005,14 @@ OpenAjax.a11y.cache.TableRowElement = function (dom_element, table_info) {
   this.header_cell_count = 0;
   this.data_cell_count   = 0;
 
+  var te = table_info.table_element;
+  var de = dom_element;
+
+  if (te && (te.table_role !== OpenAjax.a11y.TABLE_ROLE.LAYOUT)) {
+    de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['tr[table]'];
+  }
+
+
 };
 
 /**
@@ -2239,6 +2249,25 @@ OpenAjax.a11y.cache.TableCellElement = function (dom_element, table_info) {
 
       if (this.scope == 'row' || this.scope == 'col') {
        this.table_type = OpenAjax.a11y.TABLE.TH_ELEMENT;
+      }
+    }
+  }
+
+  var te = table_info.table_element;
+  var de = this.dom_element;
+
+  if (te && (te.table_role !== OpenAjax.a11y.TABLE_ROLE.LAYOUT)) {
+    if (is_th) {
+      if (te.dom_element.role && ('grid'.indexOf(te.dom_element.role) >= 0)) {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['th[gridcell]'];
+      } else {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['th[cell]'];
+      }
+    } else {
+      if (te.dom_element.role && ('grid'.indexOf(te.dom_element.role) >= 0)) {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['td[gridcell]'];
+      } else {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['td[cell]'];
       }
     }
   }

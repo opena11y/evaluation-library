@@ -2699,7 +2699,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               NOT_APPLICABLE:  'No elements with role restrictions found on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_FAIL_1: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the implict role of the element to be changed.  Remove the @%4@ role fromm the element.',
+              ELEMENT_FAIL_1: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the implict role of the element to be changed.  Remove the @%4@ role from the element.',
               ELEMENT_FAIL_2: 'The @%1@ element with the @%2@ attribute does not allow the implict role of the element to be changed.  Remove the @%3@ role from the element.',
               ELEMENT_FAIL_3: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow the implict role of the element to be changed.  Remove the @%2@ role from the element.',
               ELEMENT_FAIL_4: 'The @%1@ element does not allowed the implict role of the element to be changed.  Remove the @%2@ role from the element.',
@@ -11474,12 +11474,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   language_dependency : "",
   validate          : function (dom_cache, rule_result) {
 
-    function checkResult(result, de) {
-      if (de.node.className.indexOf(result) < 0) {
-        console.log('[HTML3][ERROR]: ' + de.toString());
-      }
-    }
-
     var TEST_RESULT    = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY     = OpenAjax.a11y.VISIBILITY;
 
@@ -11490,24 +11484,20 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       var de = dom_elements[i];
       var eai = de.element_aria_info;
 
-      if (de.role) {
+      if (de.role && !de.is_implied_role) {
 
         if (eai.noRoleAllowed) {
           if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
             if (eai.attr2) {
               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
-              checkResult('FAIL', de);
             } else {
               if (eai.attr1) {
                 rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
-                checkResult('FAIL', de);
               } else {
                 if (eai.hasAccname) {
                   rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
-                  checkResult('FAIL', de);
                 } else {
                   rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
-                  checkResult('FAIL', de);
                 }
               }
             }
@@ -11517,34 +11507,23 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         } else {
           if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
 
-            var allowedRoles = [];
-            if (eai.allowedRoles) {
-              allowedRoles = allowedRoles.concat(eai.allowedRoles);
-            }
-            if (eai.defaultRole && eai.defaultRole !== 'generic') {
-              allowedRoles.push(eai.defaultRole);
-            }
-            if (!eai.anyRoleAllowed && allowedRoles.length && (allowedRoles.indexOf(de.role) < 0)) {
+            if (!eai.anyRoleAllowed && eai.allowedRoles && (eai.allowedRoles.indexOf(de.role) < 0)) {
+
+              var allowedRoles = eai.allowedRoles.join(', ');
+
               if (eai.attr2) {
                 rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
-                checkResult('FAIL', de);
               } else {
                 if (eai.attr1) {
                   rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
-                  checkResult('FAIL', de);
                 } else {
                   if (eai.hasAccname) {
                     rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
-                    checkResult('FAIL', de);
                 } else {
                     rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
-                    checkResult('FAIL', de);
                   }
                 }
               }
-            }
-            else {
-              checkResult('NORESULT', de);
             }
           } else {
             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
@@ -17754,7 +17733,11 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < dom_elements_len; i++) {
         var de = dom_elements[i];
         var style = de.computed_style;
-        var implicit_role = de.element_aria_info.defaultRole;
+        var implicit_role = '';
+
+        if (de.element_aria_info) {
+          implicit_role = de.element_aria_info.defaultRole;
+        }
 
         if (de.has_aria_label || de.has_aria_labelledby) {
 

@@ -1108,11 +1108,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.widget_element = null;
 
   this.element_aria_info = OpenAjax.a11y.ariaInHTML.getElementAriaInfo(node);
-  if (this.tag_name === 'figure') {
-    if (node.querySelector('figcaption')) {
-      this.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['figure[figcaption]'];
-    }
-  }
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;

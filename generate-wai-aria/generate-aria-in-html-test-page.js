@@ -11,28 +11,20 @@ const path = require('path');
 
 let aria12Info = {};
 let ariaInHTMLInfo = {};
-let notAllowedTagNames = 'audio bdo body br datalist details head iframe math optgroup rp ruby rt summary track video';
+let notAllowedTagNames = ' audio bdo body br datalist details head iframe math optgroup rp ruby rt summary track video ';
 
 function getResult (infoItem, role) {
 
   let result = 'NORESULT';
   let allowedRoles = [];
 
-  if (infoItem.allowedRoles) {
-    allowedRoles = allowedRoles.concat(infoItem.allowedRoles);
-  }
-
-  if (infoItem.defaultRole && infoItem.defaultRole !== 'generic') {
-    allowedRoles.push(infoItem.defaultRole);
-  }
-
   if (infoItem.noRoleAllowed) {
     result = 'FAIL';
   }
 
   if ((!infoItem.anyRoleAllowed &&
-       allowedRoles &&
-      (allowedRoles.indexOf(role) < 0))
+       infoItem.allowedRoles &&
+      (infoItem.allowedRoles.indexOf(role) < 0))
      ) {
     result = 'FAIL';
   }
@@ -48,6 +40,7 @@ function generateTestItems(infoItem, spaces, childContent) {
   }
 
   let html = '';
+  let parts;
 
   let roleCount = 0;
 
@@ -60,13 +53,23 @@ function generateTestItems(infoItem, spaces, childContent) {
     let sizeOrMultiple = '';
 
     let attr1 = infoItem.attr1 ? infoItem.attr1  : '';
-    if (attr1.length && attr1.indexOf('=') < 0) {
-      attr1 = ' ' + attr1 + '="content"';
+    if (attr1.length) {
+      if (attr1.indexOf('=') < 0) {
+        attr1 = ' ' + attr1 + '="content"';
+      } else {
+        parts = attr1.split('=');
+        attr1 = ' ' + parts[0] + '="' + parts[1] + '"';
+      }
     }
 
     let attr2 = infoItem.attr2 ? infoItem.attr2  : '';
-    if (attr2.length && attr2.indexOf('=') < 0) {
-      attr2 = ' ' + attr2 + '="data-list"';
+    if (attr2.length) {
+      if (attr2.indexOf('=') < 0) {
+        attr2 = ' ' + attr2 + '="data-list"';
+      } else {
+        parts = attr2.split('=');
+        attr2 = ' ' + parts[0] + '="' + parts[1] + '"';
+      }
     }
 
     if (infoItem.hasAccname) {
@@ -142,8 +145,8 @@ function generateListTestItems(infoItem) {
 
 function generateTableRowTestItems(infoItem, role) {
   let html = '';
-  html += role ? `<table role="${role}">` : '<table>\n';
-  html += '  ' + generateTestItems(infoItem, '  ');
+  html += role ? `<table role="${role}">\n` : '<table>\n';
+  html += generateTestItems(infoItem, '  ');
   html += '</table>\n';
 
   return html;
@@ -183,7 +186,7 @@ function generateTableHeaderCellTestItems(infoItem, role) {
 function generateTestItemsInElementRole(infoItem, elem, role) {
 
   let html = '';
-  html += role ? `<${elem} role=${role}>\n` : `<${elem}>\n`;
+  html += role ? `<${elem} role="${role}">\n` : `<${elem}>\n`;
   html += '  ' + generateTestItems(infoItem, '  ');
   html += `</${elem}>\n`;
 
@@ -200,8 +203,8 @@ function generateSectionHeading(infoItem) {
 
   let context = infoItem.hasAccname ? ` with accessible name` : '';
 
-  context = infoItem.ownedbyTable ? ` ownedby <code>role=table</code>` : context;
   context = infoItem.ownedbyGrid ? ` ownedby <code>role=grid</code> or <code>role=treegrid</code>` : context;
+  context = infoItem.ownedbyTable ? ` ownedby <code>role=table</code>` : context;
   context = infoItem.hasFigcaption ? ` has descendant <code>figcaption</code>` : context;
   context = infoItem.hasSizeOrMultiple ? ` has <code>size=2</code> or <code>multiple</code> attribute` : context;
 
@@ -219,7 +222,7 @@ function createTestCases(name, testItems) {
 
     let infoItem = ariaInHTMLInfo.elementInfo[item];
 
-    if (testItems.indexOf(item) < 0 || (notAllowedTagNames.indexOf(infoItem.tagName) >= 0)) {
+    if (testItems.indexOf(item) < 0 || (notAllowedTagNames.indexOf(' ' + infoItem.tagName + ' ') >= 0)) {
       continue;
     }
 
@@ -372,13 +375,20 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
         completedItems = completedItems.concat(imgItems);
 
         let inputItems = [];
+        let inputListItems = [];
         for(item in ariaInHTMLInfo.elementInfo) {
-          if (ariaInHTMLInfo.elementInfo[item].tagName === 'input' ) {
-            inputItems.push(item)
-            completedItems.push(item);
+          if (ariaInHTMLInfo.elementInfo[item].tagName === 'input') {
+            if (item.indexOf('list') < 0) {
+              inputItems.push(item)
+              completedItems.push(item);
+            } else {
+              inputListItems.push(item)
+              completedItems.push(item);
+            }
           }
         };
         createTestCases('input', inputItems);
+        createTestCases('input_list', inputListItems);
 
         let selectItems = ['select', 'select[size-or-multiple]']
         createTestCases('select', selectItems);

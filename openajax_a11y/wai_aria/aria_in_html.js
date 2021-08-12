@@ -1407,16 +1407,19 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
 
             case 'input':
 
-                type = node.type;
+                type = node.getAttribute('type');
 
                 if (!type) {
                     type = 'text';
                 }
+
+
                 tagName += '[type=' + type + ']';
 
-                if (node.list) {
+                if (node.hasAttribute('list')) {
                     tagName += '[list]';
                 }
+
                 elemInfo = this.elementInfo[tagName];
                 break;
 
@@ -1435,6 +1438,16 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
                 } else {
                     elemInfo = this.elementInfo['select'];
                 }
+                break;
+
+            case 'figure':
+
+                if (node.querySelector('figcaption')) {
+                    elemInfo = this.elementInfo['figure[figcaption]'];
+                } else {
+                    elemInfo = this.elementInfo['figure'];
+                }
+
                 break;
 
             default:

@@ -1034,7 +1034,11 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < dom_elements_len; i++) {
         var de = dom_elements[i];
         var style = de.computed_style;
-        var implicit_role = de.element_aria_info.defaultRole;
+        var implicit_role = '';
+
+        if (de.element_aria_info) {
+          implicit_role = de.element_aria_info.defaultRole;
+        }
 
         if (de.has_aria_label || de.has_aria_labelledby) {
 
@@ -1069,6 +1073,125 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 { rule_id             : 'WIDGET_14',
   last_updated        : '2017-02-08',
+  rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
+  rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : [],
+  target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
+  primary_property    : 'is_live',
+  resource_properties : ['is_live', 'role','aria_live', 'aria_atomic', 'aria_busy', 'aria_relavent'],
+  language_dependency : "",
+  validate          : function (dom_cache, rule_result) {
+
+    var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
+    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
+
+    var dom_elements     = dom_cache.element_cache.dom_elements;
+    var dom_elements_len = dom_elements.length;
+
+
+    for (var i = 0; i < dom_elements_len; i++ ) {
+
+      var de =dom_elements[i];
+
+      if (de.type != Node.ELEMENT_NODE || !de.is_live || (de.aria_live === 'off')) continue;
+
+      var has_failure = false;
+
+      var has_live_role =  de.role && de.role.length && (" alert log status".indexOf(de.role) > 0);
+
+
+      if (de.has_aria_live) {
+        if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.aria_live]);
+        }
+        else {
+          if (has_live_role) {
+
+            switch (de.role) {
+
+              case 'alert':
+                if (de.aria_live === 'polite') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', ['polite', 'assertive',  de.role]);
+                  has_failure = true;
+                }
+                break;
+
+              case 'log':
+              case 'status':
+                if (de.aria_live === 'assertive') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', ['assertive', 'polite', de.role]);
+                  has_failure = true;
+                }
+                break;
+
+              default:
+                break;
+
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name, de.aria_live]);
+          }
+        }
+      }
+
+      if (de.has_aria_atomic && has_live_role && (de.role === 'alert' || de.role === 'status')) {
+
+        if (de.aria_atomic === 'false') {
+          rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.role]);
+          has_failure = true;
+        }
+
+      }
+
+      if(has_live_role && !has_failure) {
+
+        switch (de.role) {
+
+          case 'alert':
+            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tag_name]);
+            }
+            break;
+
+          case 'log':
+            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tag_name]);
+            }
+            break;
+
+          case 'status':
+            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tag_name]);
+            }
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+  } // end validation function
+}
+
+/**
+ * @object WIDGET_15
+ *
+ * @desc     Verify live regions are being used properly
+ */
+{ rule_id             : 'WIDGET_15',
+  last_updated        : '2021-08-10',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,

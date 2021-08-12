@@ -494,6 +494,22 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
         interactive_element_added = true;
       }
 
+      // For ARIA in HTML rule
+
+      var typeId = dom_element.node.getAttribute('type');
+      if (typeId) {
+        typeId = '[' + typeId + ']';
+      } else {
+        typeId = '';
+      }
+
+      var listId = dom_element.node.hasAttribute('list');
+      if (listId) {
+        listId = '[list]';
+      } else {
+        listId = '';
+      }
+
       break;
 
     case 'button':
