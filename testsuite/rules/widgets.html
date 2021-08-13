@@ -119,6 +119,17 @@
         executeTest('ID_IFRAME_14A', 'WIDGET_14');
       });
 
+      test( "WIDGET_15: Roles with deprecated ARIA attributes", function() {
+        executeTest('ID_IFRAME_15A', 'WIDGET_15');
+      });
+
+      test( "WIDGET_15: Roles with deprecated ARIA attributes (implicit roles)", function() {
+        executeTest('ID_IFRAME_15B', 'WIDGET_15');
+      });
+
+      test( "WIDGET_16: Web components", function() {
+        executeTest('ID_IFRAME_16', 'WIDGET_16');
+      });
 
 
     </script>
@@ -177,6 +188,12 @@
     <h2>Widget 14: verify live regions</h2>
     <iframe id="ID_IFRAME_14A"  src="widgets/widget_14_live_regions.html"></iframe>
 
+    <h2>Widget 15: Roles with deprecated ARIA attributes</h2>
+    <iframe id="ID_IFRAME_15A"  src="widgets/widget_15_deprecated_aria_attributes.html"></iframe>
+    <iframe id="ID_IFRAME_15B"  src="widgets/widget_15_deprecated_aria_attributes_implicit_roles.html"></iframe>
+
+    <h2>Widget 16: Web components</h2>
+    <iframe id="ID_IFRAME_16"  src="widgets/widget_16_web_components.html"></iframe>
 
   </body>
 
