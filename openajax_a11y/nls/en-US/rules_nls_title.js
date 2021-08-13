@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -56,15 +56,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML TITLE Element Specification',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G88: Providing descriptive titles for Web pages',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G88'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/G88'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H25: Providing a title using the title element',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H25'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/H25'
               }
             ]
         },
@@ -111,15 +111,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML TITLE Element Specification',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G88: Providing descriptive titles for Web pages',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G88'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/G88'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H25: Providing a title using the title element',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H25'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/H25'
               }
             ]
         }

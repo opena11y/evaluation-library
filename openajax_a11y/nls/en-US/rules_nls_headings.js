@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,19 +60,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H1'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Unique Title',
-          url:   'http://html.cita.illinois.edu/nav/title/'
+          url:   'https://html.cita.illinois.edu/nav/title/'
         }
       ]
     },
@@ -111,15 +111,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H1'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
-          url:   'http://www.w3.org/TR/wai-aria/#main'
+          url:   'https://www.w3.org/TR/wai-aria/#main'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
-          url:   'http://www.w3.org/TR/wai-aria/#banner'
+          url:   'https://www.w3.org/TR/wai-aria/#banner'
         }
       ]
     },
@@ -150,23 +150,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H1'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Unique Title',
-          url:   'http://html.cita.illinois.edu/nav/title/'
+          url:   'https://html.cita.illinois.edu/nav/title/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Sub Headings',
-          url:   'http://html.cita.illinois.edu/nav/heading/'
+          url:   'https://html.cita.illinois.edu/nav/heading/'
         }
       ]
     },
@@ -204,23 +204,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H1'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Unique Title',
-          url:   'http://html.cita.illinois.edu/nav/title/'
+          url:   'https://html.cita.illinois.edu/nav/title/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Sub Headings',
-          url:   'http://html.cita.illinois.edu/nav/heading/'
+          url:   'https://html.cita.illinois.edu/nav/heading/'
         }
       ]
     },
@@ -253,11 +253,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H1'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'C22: Using CSS to control visual presentation of text',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/C22'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
         }
       ]
     },
@@ -292,11 +292,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: landmark roles',
-          url:   'http://www.w3.org/TR/wai-aria/#landmark'
+          url:   'https://www.w3.org/TR/wai-aria/#landmark'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H2 elements',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H2'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
         }
       ]
     },
@@ -341,7 +341,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               }
             ]
         }

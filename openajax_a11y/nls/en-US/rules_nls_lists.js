@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -68,47 +68,47 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: ol element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: ul element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: li element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-li-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-li-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: dl element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: dt element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-dt-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dt-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: dd element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-dd-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dd-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; group role',
-                url:   'http://www.w3.org/TR/wai-aria/#group'
+                url:   'https://www.w3.org/TR/wai-aria/#group'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; list role',
-                url:   'http://www.w3.org/TR/wai-aria/#list'
+                url:   'https://www.w3.org/TR/wai-aria/#list'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; listitem role',
-                url:   'http://www.w3.org/TR/wai-aria/#listitem'
+                url:   'https://www.w3.org/TR/wai-aria/#listitem'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; aria-posinset',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-posinset'
+                url:   'https://www.w3.org/TR/wai-aria/#aria-posinset'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; aria-setsize',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-setsize'
+                url:   'https://www.w3.org/TR/wai-aria/#aria-setsize'
               }
             ]
         },
@@ -142,35 +142,35 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: ol element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: ul element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: dl element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; group role',
-                url:   'http://www.w3.org/TR/wai-aria/#group'
+                url:   'https://www.w3.org/TR/wai-aria/#group'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; list role',
-                url:   'http://www.w3.org/TR/wai-aria/#list'
+                url:   'https://www.w3.org/TR/wai-aria/#list'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                url:   'https://www.w3.org/TR/wai-aria/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                url:   'https://www.w3.org/TR/wai-aria/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @title@ attribute',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               }
             ]
         }

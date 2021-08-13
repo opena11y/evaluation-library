@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,35 +60,35 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @label@ element',
-          url:   'http://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+          url:   'https://www.w3.org/TR/wai-aria/#aria-label'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+          url:   'https://www.w3.org/TR/wai-aria/#aria-labelledby'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/H44'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/H65'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/H71'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Labels for Form Controls Overview',
-          url:   'http://html.cita.illinois.edu/nav/form/'
+          url:   'https://html.cita.illinois.edu/nav/form/'
         }
       ]
     },
@@ -133,23 +133,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H1'
+          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Unique Title',
-          url:   'http://html.cita.illinois.edu/nav/title/'
+          url:   'https://html.cita.illinois.edu/nav/title/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Sub Headings',
-          url:   'http://html.cita.illinois.edu/nav/heading/'
+          url:   'https://html.cita.illinois.edu/nav/heading/'
         }
       ]
     },
@@ -184,11 +184,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-          url:   'http://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+          url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/F30'
         }
       ]
     },
@@ -223,11 +223,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'W3C Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification',
-          url:   'http://www.w3.org/TR/CSS2/'
+          url:   'https://www.w3.org/TR/CSS2/'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'How to meet Success Criterion 1.4.5 Images of Text',
-          url:   'http://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-text-presentation'
+          url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-text-presentation'
         }
       ]
     },
@@ -261,19 +261,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         INFORMATIONAL_LINKS: [
           { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmarks',
-            url:   'http://www.w3.org/TR/wai-aria/#landmark'
+            url:   'https://www.w3.org/TR/wai-aria/#landmark'
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-            url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+            url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-            url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+            url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-            url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+            url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
           }
         ]
     },
@@ -309,11 +309,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 12.2 The A element',
-          url:   'http://www.w3.org/TR/html4/struct/links.html#edef-A'
+          url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'IITAA Implementation Guidelines 1.0: 9.3 - Avoid using small links.',
-          url:   'http://www.dhs.state.il.us/IITAA/IITAAWebImplementationGuidelines.html'
+          url:   'https://www.dhs.state.il.us/IITAA/IITAAWebImplementationGuidelines.html'
         }
       ]
     },
@@ -345,15 +345,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 12.2 The A element',
-          url:   'http://www.w3.org/TR/html4/struct/links.html#edef-A'
+          url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0 The LINK role',
-          url:   'http://www.w3.org/TR/wai-aria/#link'
+          url:   'https://www.w3.org/TR/wai-aria/#link'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/H30'
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/H30'
         }
       ]
     },
@@ -393,11 +393,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'WCAG 2.0 Success Criterion 1.3.2 Meaningful Sequence',
-          url:   'http://www.w3.org/TR/WCAG20/#content-structure-separation-sequence'
+          url:   'https://www.w3.org/TR/WCAG20/#content-structure-separation-sequence'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 5.1: Sectioning Elements',
-          url:   'http://www.w3.org/TR/html51/semantics.html#sections'
+          url:   'https://www.w3.org/TR/html51/semantics.html#sections'
         }
       ]
     }

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -61,19 +61,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The main element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-main-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Using WAI-ARIA in HTML',
-                url:   'http://www.w3.org/TR/aria-in-html/'
+                url:   'https://www.w3.org/TR/aria-in-html/'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: main role',
-                url:   'http://www.w3.org/TR/wai-aria/#main'
+                url:   'https://www.w3.org/TR/wai-aria/#main'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               }
             ]
         },
@@ -103,19 +103,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The body element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-body-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-body-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: document role',
-                url:   'http://www.w3.org/TR/wai-aria/#document'
+                url:   'https://www.w3.org/TR/wai-aria/#document'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: application role',
-                url:   'http://www.w3.org/TR/wai-aria/#application'
+                url:   'https://www.w3.org/TR/wai-aria/#application'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Using WAI-ARIA in HTML',
-                url:   'http://www.w3.org/TR/aria-in-html/'
+                url:   'https://www.w3.org/TR/aria-in-html/'
               }
             ]
         },
@@ -154,11 +154,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The ol element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The ul element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
               }
             ]
         },
@@ -197,23 +197,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The article element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-article-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-article-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: document role',
-                url:   'http://www.w3.org/TR/wai-aria/#document'
+                url:   'https://www.w3.org/TR/wai-aria/#document'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: application role',
-                url:   'http://www.w3.org/TR/wai-aria/#application'
+                url:   'https://www.w3.org/TR/wai-aria/#application'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: main role',
-                url:   'http://www.w3.org/TR/wai-aria/#main'
+                url:   'https://www.w3.org/TR/wai-aria/#main'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: article role',
-                url:   'http://www.w3.org/TR/wai-aria/#article'
+                url:   'https://www.w3.org/TR/wai-aria/#article'
               }
 
             ]
@@ -262,55 +262,55 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The article element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-article-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-article-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: alert role',
-                url:   'http://www.w3.org/TR/wai-aria/#alert'
+                url:   'https://www.w3.org/TR/wai-aria/#alert'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: alertdialog role',
-                url:   'http://www.w3.org/TR/wai-aria/#alertdialog'
+                url:   'https://www.w3.org/TR/wai-aria/#alertdialog'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: application role',
-                url:   'http://www.w3.org/TR/wai-aria/#application'
+                url:   'https://www.w3.org/TR/wai-aria/#application'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0:contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: dialog role',
-                url:   'http://www.w3.org/TR/wai-aria/#dialog'
+                url:   'https://www.w3.org/TR/wai-aria/#dialog'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: document role',
-                url:   'http://www.w3.org/TR/wai-aria/#document'
+                url:   'https://www.w3.org/TR/wai-aria/#document'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: log role',
-                url:   'http://www.w3.org/TR/wai-aria/#log'
+                url:   'https://www.w3.org/TR/wai-aria/#log'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: main role',
-                url:   'http://www.w3.org/TR/wai-aria/#main'
+                url:   'https://www.w3.org/TR/wai-aria/#main'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: marquee role',
-                url:   'http://www.w3.org/TR/wai-aria/#marquee'
+                url:   'https://www.w3.org/TR/wai-aria/#marquee'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: search role',
-                url:   'http://www.w3.org/TR/wai-aria/#search'
+                url:   'https://www.w3.org/TR/wai-aria/#search'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: status role',
-                url:   'http://www.w3.org/TR/wai-aria/#status'
+                url:   'https://www.w3.org/TR/wai-aria/#status'
               }
             ]
         },
@@ -346,15 +346,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The nav element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-nav-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: navigation role',
-                url:   'http://www.w3.org/TR/wai-aria/#navigation'
+                url:   'https://www.w3.org/TR/wai-aria/#navigation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               }
 
             ]
@@ -394,23 +394,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The aside element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-aside-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-aside-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: complementary role',
-                url:   'http://www.w3.org/TR/wai-aria/#complementary'
+                url:   'https://www.w3.org/TR/wai-aria/#complementary'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: note role',
-                url:   'http://www.w3.org/TR/wai-aria/#note'
+                url:   'https://www.w3.org/TR/wai-aria/#note'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: search role',
-                url:   'http://www.w3.org/TR/wai-aria/#search'
+                url:   'https://www.w3.org/TR/wai-aria/#search'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               }
             ]
         },
@@ -448,15 +448,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The main element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-main-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: banner role',
-                url:   'http://www.w3.org/TR/wai-aria/#banner'
+                url:   'https://www.w3.org/TR/wai-aria/#banner'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               }
             ]
         },
@@ -494,15 +494,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The main element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-main-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               }
             ]
         },
@@ -539,19 +539,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The main element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-main-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: heading role',
-                url:   'http://www.w3.org/TR/wai-aria/#heading'
+                url:   'https://www.w3.org/TR/wai-aria/#heading'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: tab role',
-                url:   'http://www.w3.org/TR/wai-aria/#tab'
+                url:   'https://www.w3.org/TR/wai-aria/#tab'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                url:   'https://www.w3.org/TR/wai-aria/#presentation'
               }
             ]
         },
@@ -588,7 +588,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The li element',
-                url:   'http://www.w3.org/TR/html5/grouping-content.html#the-li-element'
+                url:   'https://www.w3.org/TR/html5/grouping-content.html#the-li-element'
               }
             ]
         },
@@ -621,7 +621,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The a element',
-                url:   'http://www.w3.org/TR/html51/semantics.html#the-a-element'
+                url:   'https://www.w3.org/TR/html51/semantics.html#the-a-element'
               }
             ]
         },
@@ -654,7 +654,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The select element',
-                url:   'http://www.w3.org/TR/html51/semantics.html#the-select-element'
+                url:   'https://www.w3.org/TR/html51/semantics.html#the-select-element'
               }
             ]
         },
@@ -686,7 +686,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 5 Specification: The textarea element',
-                url:   'http://www.w3.org/TR/html51/semantics.html#the-textarea-element'
+                url:   'https://www.w3.org/TR/html51/semantics.html#the-textarea-element'
               }
             ]
         }

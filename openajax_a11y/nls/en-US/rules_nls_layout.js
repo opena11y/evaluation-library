@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -64,47 +64,47 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification: Visual formatting model',
-                url:   'http://www.w3.org/TR/CSS21/visuren.html'
+                url:   'https://www.w3.org/TR/CSS21/visuren.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G57: Ordering the content in a meaningful sequence',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G57'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/G57'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'C6: Positioning content based on structural markup',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/C6'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/C6'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'C8: Using CSS letter-spacing to control spacing within a word',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/C8'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/C8'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'C27: Making the DOM order match the visual order',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/C27'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/C27'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F1: Failure of Success Criterion 1.3.2 due to changing the meaning of content by positioning information with CSS',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F1'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/F1'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F33'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/F33'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F34: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to format tables in plain text content',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F34'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/F34'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F49'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/F49'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'Web Standards Group',
-                url:   'http://webstandardsgroup.org/standards/'
+                url:   'https://webstandardsgroup.org/standards/'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Standards',
-                url:   'http://www.w3.org/standards/'
+                url:   'https://www.w3.org/standards/'
               }
             ]
         },
@@ -140,23 +140,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification: Visual formatting model',
-                url:   'http://www.w3.org/TR/CSS21/visuren.html'
+                url:   'https://www.w3.org/TR/CSS21/visuren.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F33'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/F33'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F49'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/F49'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'Web Standards Group',
-                url:   'http://webstandardsgroup.org/standards/'
+                url:   'https://webstandardsgroup.org/standards/'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Standards',
-                url:   'http://www.w3.org/standards/'
+                url:   'https://www.w3.org/standards/'
               }
             ]
         },

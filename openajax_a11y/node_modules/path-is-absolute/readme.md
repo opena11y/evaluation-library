@@ -1,6 +1,6 @@
 # path-is-absolute [![Build Status](https://travis-ci.org/sindresorhus/path-is-absolute.svg?branch=master)](https://travis-ci.org/sindresorhus/path-is-absolute)
 
-> Node.js 0.12 [`path.isAbsolute()`](http://nodejs.org/api/path.html#path_path_isabsolute_path) [ponyfill](https://ponyfill.com)
+> Node.js 0.12 [`path.isAbsolute()`](https://nodejs.org/api/path.html#path_path_isabsolute_path) [ponyfill](https://ponyfill.com)
 
 
 ## Install
@@ -41,7 +41,7 @@ pathIsAbsolute.win32('/home/foo');
 
 ## API
 
-See the [`path.isAbsolute()` docs](http://nodejs.org/api/path.html#path_path_isabsolute_path).
+See the [`path.isAbsolute()` docs](https://nodejs.org/api/path.html#path_path_isabsolute_path).
 
 ### pathIsAbsolute(path)
 

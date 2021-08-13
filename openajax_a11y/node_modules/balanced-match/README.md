@@ -2,7 +2,7 @@
 
 Match balanced string pairs, like `{` and `}` or `<b>` and `</b>`. Supports regular expressions as well!
 
-[![build status](https://secure.travis-ci.org/juliangruber/balanced-match.svg)](http://travis-ci.org/juliangruber/balanced-match)
+[![build status](https://secure.travis-ci.org/juliangruber/balanced-match.svg)](https://travis-ci.org/juliangruber/balanced-match)
 [![downloads](https://img.shields.io/npm/dm/balanced-match.svg)](https://www.npmjs.org/package/balanced-match)
 
 [![testling badge](https://ci.testling.com/juliangruber/balanced-match.png)](https://ci.testling.com/juliangruber/balanced-match)

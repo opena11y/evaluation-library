@@ -10,7 +10,7 @@ var wrappy = require("wrappy")
 // var wrapper = wrappy(wrapperFunction)
 
 // make sure a cb is called only once
-// See also: http://npm.im/once for this specific use case
+// See also: https://npm.im/once for this specific use case
 var once = wrappy(function (cb) {
   var called = false
   return function () {

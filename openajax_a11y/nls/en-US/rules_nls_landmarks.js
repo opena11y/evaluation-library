@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -67,23 +67,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: main role',
-                url:   'http://www.w3.org/TR/wai-aria/#main'
+                url:   'https://www.w3.org/TR/wai-aria/#main'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The MAIN element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-main-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -133,23 +133,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#landmark_roles'
+                url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
-                url:   'http://www.w3.org/TR/html5/sections.html#sections'
+                url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -198,23 +198,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: navigation role',
-                url:   'http://www.w3.org/TR/wai-aria/#navigation'
+                url:   'https://www.w3.org/TR/wai-aria/#navigation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The NAV element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-nav-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H97: Grouping related links using the nav element',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H97.html'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/H97.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -259,31 +259,31 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
-                url:   'http://www.w3.org/TR/wai-aria/#banner'
+                url:   'https://www.w3.org/TR/wai-aria/#banner'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-footer-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning content',
-                url:   'http://www.w3.org/TR/html5/dom.html#sectioning-content-0'
+                url:   'https://www.w3.org/TR/html5/dom.html#sectioning-content-0'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning root',
-                url:   'http://www.w3.org/TR/html5/sections.html#sectioning-root'
+                url:   'https://www.w3.org/TR/html5/sections.html#sectioning-root'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -329,23 +329,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
-                url:   'http://www.w3.org/TR/wai-aria/#banner'
+                url:   'https://www.w3.org/TR/wai-aria/#banner'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-footer-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -391,31 +391,31 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-footer-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning content',
-                url:   'http://www.w3.org/TR/html5/dom.html#sectioning-content-0'
+                url:   'https://www.w3.org/TR/html5/dom.html#sectioning-content-0'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning root',
-                url:   'http://www.w3.org/TR/html5/sections.html#sectioning-root'
+                url:   'https://www.w3.org/TR/html5/sections.html#sectioning-root'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -463,23 +463,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-footer-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -523,23 +523,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
-                url:   'http://www.w3.org/TR/wai-aria/#banner'
+                url:   'https://www.w3.org/TR/wai-aria/#banner'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The HEADER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-header-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-header-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -582,19 +582,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
-                url:   'http://www.w3.org/TR/wai-aria/#banner'
+                url:   'https://www.w3.org/TR/wai-aria/#banner'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The HEADER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-header-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-header-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
-                url:   'http://www.w3.org/TR/html5/sections.html#sections'
+                url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#landmark_roles'
+                url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
               }
             ]
         },
@@ -637,11 +637,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: navigation role',
-                url:   'http://www.w3.org/TR/wai-aria/#navigation'
+                url:   'https://www.w3.org/TR/wai-aria/#navigation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The NAV element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-nav-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
               }
             ]
         },
@@ -684,15 +684,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: main role',
-                url:   'http://www.w3.org/TR/wai-aria/#main'
+                url:   'https://www.w3.org/TR/wai-aria/#main'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The MAIN element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-main-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               }
             ]
         },
@@ -735,15 +735,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-footer-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               }
             ]
         },
@@ -786,19 +786,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-                url:   'http://www.w3.org/TR/wai-aria/#contentinfo'
+                url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-footer-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
-                url:   'http://www.w3.org/TR/html5/sections.html#sections'
+                url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#landmark_roles'
+                url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
               }
             ]
         },
@@ -844,19 +844,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: search role',
-                url:   'http://www.w3.org/TR/wai-aria/#search'
+                url:   'https://www.w3.org/TR/wai-aria/#search'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -904,19 +904,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: form role',
-                url:   'http://www.w3.org/TR/wai-aria/#form'
+                url:   'https://www.w3.org/TR/wai-aria/#form'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -960,27 +960,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: region role',
-                url:   'http://www.w3.org/TR/wai-aria/#region'
+                url:   'https://www.w3.org/TR/wai-aria/#region'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The SECTION element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-section-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-section-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA20: Using the region role to identify a region of the page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA20'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA20'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
 
             ]
@@ -1024,23 +1024,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: region role',
-                url:   'http://www.w3.org/TR/wai-aria/#region'
+                url:   'https://www.w3.org/TR/wai-aria/#region'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
-                url:   'http://www.w3.org/TR/html5/sections.html#sections'
+                url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         },
@@ -1090,23 +1090,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
-                url:   'http://www.w3.org/TR/wai-aria/#landmark_roles'
+                url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
-                url:   'http://www.w3.org/TR/html5/sections.html#sections'
+                url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
 
             ]
@@ -1152,23 +1152,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: complementary role',
-                url:   'http://www.w3.org/TR/wai-aria/#complementary'
+                url:   'https://www.w3.org/TR/wai-aria/#complementary'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The ASIDE element',
-                url:   'http://www.w3.org/TR/html5/sections.html#the-aside-element'
+                url:   'https://www.w3.org/TR/html5/sections.html#the-aside-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
               }
             ]
         }
