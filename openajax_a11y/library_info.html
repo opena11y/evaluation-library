@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Utility to extract WCAG, rule and ruleset information to a JSON format</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+    <script src="export/scripts/oaa_a11y_evaluation.js"></script>
+    <script src="export/scripts/oaa_a11y_rules.js"></script>
+    <script src="export/scripts/oaa_a11y_rulesets.js"></script>
+
+    <div>
+      <code>
+      <pre id="id1">
+      </pre>
+      </code>
+    </div>
+
+    <script>
+
+     var asRuleset = OpenAjax.a11y.RulesetManager.getRuleset('TEST');
+
+     // then needs to get an evaluatorFactory
+     var evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
+
+     // and configure it...
+     evaluatorFactory.setParameter('ruleset', asRuleset);
+
+     evaluatorFactory.setFeature('eventProcessing',   'none');
+     evaluatorFactory.setFeature('brokenLinkTesting', false);
+
+     // before getting the actual evaluator
+     var evaluator = evaluatorFactory.newEvaluator();
+
+      let node     = document.getElementById('id1');
+
+      var wcag20   = '\n"wcag20" : ' + OpenAjax.a11y.nls.WCAG20.getNLS('en-us').toJSON("\n      ") + ',\n';
+      var ruleCategories =  '\n"rule_categories" : ' + OpenAjax.a11y.nls.RuleCategories.getNLS('en-us').toJSON("\n      ") + ',\n';
+      var rules    =   '\n"rules" : ' + OpenAjax.a11y.RuleManager.toJSON("      ") + ",\n";
+      var rulesets =   '\n"rulesests" : ' + OpenAjax.a11y.RulesetManager.toJSON("      ");
+
+      node.textContent = '{\n' + wcag20 + ruleCategories + rules + rulesets + '\n}';
+
+    </script>
+
+
+
+  </body>
+
+</html>
