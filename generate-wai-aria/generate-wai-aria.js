@@ -85,7 +85,7 @@ function hasValue(value, elemNode, selector) {
   return false;
 }
 
-function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents, rolesWithNameProhibited) {
+function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents, rolesWithNameProhibited, rolesWithDeprecatedAttributes, attributesThatMaybeDeprecated) {
 
   let elems = dom.querySelectorAll('section.role');
 
@@ -132,7 +132,18 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
 
       if (isDeprecated(ariaAttributeNode)) {
         roles[role].deprecatedProps.push(ariaAttribute);
+
+        if (attributesThatMaybeDeprecated.indexOf(ariaAttribute) < 0) {
+          attributesThatMaybeDeprecated.push(ariaAttribute);
+        }
       }
+    }
+
+    if (roles[role].deprecatedProps.length) {
+      rolesWithDeprecatedAttributes.push(role);
+
+
+
     }
 
     ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-required-properties li');
@@ -397,8 +408,10 @@ function getAriaInformation(dom) {
   ariaInfo.rolesWithRequiredChildren = [];
   ariaInfo.rolesWithRequiredParent = [];
   ariaInfo.rolesWithNameProhibited = [];
+  ariaInfo.rolesWithDeprecatedAttributes = [];
+  ariaInfo.attributesThatMaybeDeprecated = [];
 
-  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent, ariaInfo.rolesWithNameProhibited);
+  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent, ariaInfo.rolesWithNameProhibited, ariaInfo.rolesWithDeprecatedAttributes, ariaInfo.attributesThatMaybeDeprecated);
 
   ariaInfo.designPatterns['none'] = ariaInfo.designPatterns['presentation'];
   ariaInfo.rolesWithNameProhibited.push('none');
