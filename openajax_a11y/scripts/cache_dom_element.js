@@ -900,6 +900,8 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  * @property {String}     calculated_aria_description  - If aria-describedby defined this is a string of the
  *                                                       description content
  *
+ * @property {String}     role                - Implicit or set role on the element
+ * @property {String}     implicit_role       - Implict role of the elements based on ARIA in HTML spec
  * @property {Boolean}    has_role            - True if element has a role value, otherwise false
  * @property {Boolean}    has_aria_owns            - True if element has a aria-owns property, otherwise false
  * @property {Boolean}    has_aria-attributes - True if element has a aria attributes, otherwise false
@@ -1213,7 +1215,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_title                 = false;
 
 
-  this.inplicit_role    = "";
+  this.implicit_role    = "";
   this.role           = "";
   this.role_info      = null;
   this.aria_invalid   = false;
