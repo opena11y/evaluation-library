@@ -236,10 +236,12 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.addLandmarkElement = functi
 
     if (de.tag_name === 'header') {
       de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+      de.implicit_role = de.element_aria_info.defaultRole;
     }
 
     if (de.tag_name === 'footer') {
       de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+      de.implicit_role = de.element_aria_info.defaultRole;
     }
 
   }
@@ -757,6 +759,8 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             break;
 
           case 'footer':
+            dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+            dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
             this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
             break;
@@ -768,6 +772,7 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
 
           case 'header':
             dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+            dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
             this.dom_cache.getNameFromARIALabel(le, "BANNER");
             break;

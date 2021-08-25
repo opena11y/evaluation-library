@@ -1215,7 +1215,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_title                 = false;
 
 
-  this.implicit_role    = "";
+  this.implicit_role  = this.element_aria_info.defaultRole;
   this.role           = "";
   this.role_info      = null;
   this.aria_invalid   = false;

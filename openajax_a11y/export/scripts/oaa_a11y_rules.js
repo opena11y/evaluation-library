@@ -2702,11 +2702,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_FAIL_1: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the implict role of the element to be changed.  Remove the @%4@ role from the element.',
               ELEMENT_FAIL_2: 'The @%1@ element with the @%2@ attribute does not allow the implict role of the element to be changed.  Remove the @%3@ role from the element.',
               ELEMENT_FAIL_3: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow the implict role of the element to be changed.  Remove the @%2@ role from the element.',
-              ELEMENT_FAIL_4: 'The @%1@ element does not allowed the implict role of the element to be changed.  Remove the @%2@ role from the element.',
+              ELEMENT_FAIL_4: 'The @%1@ element does not allow the implict role of the element to be changed.  Remove the @%2@ role from the element.',
               ELEMENT_FAIL_5: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the @%4@ role.  Either remove the role or change it to one of the following allowed values: %5.',
               ELEMENT_FAIL_6: 'The @%1@ element with the @%2@ attribute does not allow the @%3@ role.  Either remove the role or change it to one of the following allowed values: @%4@.',
               ELEMENT_FAIL_7: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow @%2@ role. Either remove the role or change it to one of the following allowed values: @%3@.',
               ELEMENT_FAIL_8: 'The @%1@ element does not allow the @%2@ role.  Either remove the role or change it to one of the following allowed values: @%3@.',
+              ELEMENT_FAIL_9: 'The explict @%1@ role is the same as the native semantic role of the @%2@ element.  The explict role must be removed to ensure the semantics of the element are properly represented in accessibility APIs.',
+              ELEMENT_FAIL_10: 'The explict @%1@ role is the same as the native semantic role of the @%2@ element.  The explict role must be removed to ensure the semantics of the element are properly represented in accessibility APIs or use one of the other allowed roles (if appropriate): @%3@.',
               ELEMENT_HIDDEN_1: '@%1@ element is hidden, the @%2@ role must be removed before it becomes visible.',
               ELEMENT_HIDDEN_2: '@%1@ element is hidden, the @%2@ role must be removed or changed to an allowed role before it becomes visible.'
             },
@@ -2717,7 +2719,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             TECHNIQUES: [
               'Some HTML elements do not allow any role to override of the implicit role, in this case the role must be removed.',
-              'Some HTML elements only allow certain roles to override of the implicit role, in this case only those roles can be used to override the implicit role.'
+              'Some HTML elements only allow certain roles to override of the implicit role, in this case only the allowed roles can be used to override the implicit role.',
+              'When the explict role is the same as the implicit role for an HTML element the explict role must be removed to insure the native semantics of the element are properly represented in accessibility APIs.'
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
@@ -7559,42 +7562,45 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
       WIDGET_7: {
             ID:                    'Widget 7',
-            DEFINITION:            'Widgets %s have required child roles.',
-            SUMMARY:               'Widgets %s have child roles',
+            DEFINITION:            'Container widgets %s have required owned elements.',
+            SUMMARY:               'Widgets %s have owned elements',
             TARGET_RESOURCES_DESC: 'Widgets with required owned elements',
             RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Add required child roles to child elements in the widget.',
-              FAIL_P:   'Add required child roles to child elements in the %N_F out of %N_T widgets with required child elements.',
-              HIDDEN_S: 'The widget that requires child widget roles that is hidden and was not evaluated.',
-              HIDDEN_P: '%N_H widgets that require child widget roles that are hidden were not evaluated.',
-              NOT_APPLICABLE:  'No widgets with required child ARIA elements on this page.'
+              FAIL_S:   'Add required child element to the widget.',
+              FAIL_P:   'Add required child elements for the %N_F out of %N_T widgets missing required child elements.',
+              HIDDEN_S: 'The widget with requires child elements that is is hidden and was not evaluated.',
+              HIDDEN_P: '%N_H hidden widgets that require child elements were not evaluated.',
+              NOT_APPLICABLE:  'No widgets with required child elements on this page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:    '@%1@ widget has at least one required owned elements: %2.',
-              ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to have required owned elements.',
-              ELEMENT_FAIL_1:  '@%1@ widget is MISSING one or more of following required owned elements: %2.',
-              ELEMENT_HIDDEN_1:  'Required child widgets was not tested because the %1 widget is hidden from assistive technologies and not visible on screen.'
+              ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element: @%2@.',
+              ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to contain required owned elements.',
+              ELEMENT_FAIL_1:  '@%1@ widget does not contain one or more of following required owned elements: @%2@.',
+              ELEMENT_HIDDEN_1:  'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
             },
             PURPOSE: [
-              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
+              'Roles that are associated with container widgets have important parent/child relationships with other roles.',
+              'Parent/Child relationships are used by assistive technologies for computing the number of items in a container and the item position.',
+              'Container roles are also used by assistive technologies to provide enhanced navigation features for moving between items in lists, tables, grids and treegrids.'
             ],
             TECHNIQUES: [
-              'Use required ARIA owned elements to describe the features and options of a widget.'
+              'Required owned elements can be defined using the HTML DOM structure or the @aria-owns@ attribute.',
+              'Use the DOM structure to add required owned elements by making them a descendant of the container element.',
+              'When the owned elements are not descendants of the container element, use the @aria-owns@ attribute on the container element to reference the owned elements.',
+              'When @aria-busy@ attribute is set to @true@ on the container element, the container element does not need to own any required elements.  @aria-busy@ should be used when a container element is being dynamically populated.',
+              'NOTE: The DOM structure technique is preferred over the @aria-owns@ technique, since it is less likely to result in authoring errors associated with creating and referencing elements with unique @id@s.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-                url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
               },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -7624,18 +7630,20 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             },
             NODE_RESULT_MESSAGES: {
               ELEMENT_PASS_1:   '@%1@ role is a child of the a @%2@ role.',
-              ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes defines a required parent role.',
+              ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes identifies a required parent role.',
               ELEMENT_HIDDEN_1: 'Required parent role was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
             },
             PURPOSE: [
               'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
-              'Roles that are part of more complicated widgets have important parent/child relationships with other roles.'
+              'Roles that are associated with container widgets have important parent/child relationships with other roles.',
+              'Parent/child relationships are used by assistive technologies for computing the number of items owned by a container and the position of an item (e.g. "third of five links").',
+              'Container roles are also used by assistive technologies to provide enhanced navigation features for moving between items in lists, tables, grids and treegrids.'
             ],
             TECHNIQUES: [
               'Parent roles can be defined using the HTML DOM structure or the @aria-owns@ attribute.',
               'Required parent role is a DOM ancestor of the element.',
               'Required parent role references the element using the @aria-owns@ attribute.',
-              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute.'
+              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute, since it is less likely to result in authoring errors associated with creating and referencing elements with unique @id@s.'
             ],
             MANUAL_CHECKS: [
             ],
@@ -7668,21 +7676,24 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             SUMMARY:               'Only one owner',
             TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
             RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Update widgets with aria-owns to make sure a dom element is only referenced once.',
-              FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a dom element only once.',
-              NOT_APPLICABLE:  'No dom elements are referenced using aria-owns on this page.'
+              FAIL_S:   'Update widgets with aria-owns to make sure a element is only referenced once.',
+              FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a element only once.',
+              NOT_APPLICABLE:  'No elements are referenced using aria-owns on this page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:   '@%2@ dom element is referenced only by @%1@ widget with aria-owns.',
-              ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ dom element so it is only referenced by one widget.',
+              ELEMENT_PASS_1:   '@%2@ element is referenced only by @%1@ container element using aria-owns.',
+              ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ element so it is only referenced by one container element.',
             },
             PURPOSE: [
-              'Some ARIA widgets have require child roles and when the HTML DOM parent/child relationships does not identify the elements nodes with the associated roles, @aria-owns@ attribute can be used to identify the associated elements.'
+              'ARIA container elements  have require child elements.',
+              'When the HTML DOM parent/child relationships do not identify the child elements the @aria-owns@ attribute can be used to reference the child elements.',
+              'A child element can only be referenced using @aria-owns@ by one container element.'
             ],
             TECHNIQUES: [
-              'Parent widget roles defined using @aria-owns@ attribute must accurately describe the parent/child relationship.',
-              'An element can only be referenced once using the @aria-owns@ attribute.',
-              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute.'
+              'Container elements using @aria-owns@ attribute must accurately reference the associated child elements.',
+              'A child element can only be referenced by one container element using the @aria-owns@ attribute.',
+              'Update the application to use the DOM parent/child relationships instead of using @aria-owns@ technique.',
+              'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute, since it is less likely to result in authoring errors associated with creating and referencing elements with unique @id@s.'
             ],
             MANUAL_CHECKS: [
             ],
@@ -7729,17 +7740,28 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_FAIL_2:  'Update the numeric values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) so the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
               ELEMENT_FAIL_3:  'Update the @%1@ widget values for @aria-valuemin@ ("%2") and/or @aria-valuemax@ ("%3") attributes to be valid numbers.',
               ELEMENT_FAIL_4:  '@%1@ widget is missing or has an invalid value for @aria-valuenow@.',
-              ELEMENT_HIDDEN_1:  'Widget range values were not tested becasue the @%1@ range widget is hidden from assistive technologies.'
+              ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
             },
             PURPOSE: [
-              'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+              'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton).',
+              'Screen readers typcially render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
+              '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
+              'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
             ],
             TECHNIQUES: [
-              'Use the @aria-valuenow@, @aria-valuemin@ and @aria-valuemax@ are accurately defined.'
+              'Use the @aria-valuenow@ attributes numerical value must be in the range defined by @aria-valuemin@ and @aria-valuemax@.',
+              'Screen reader typically render the slider value as a percentage, requiring a valid @aria-valuenow@ attribute.',
+              'Use the @aria-valuetext@ to provide an alternative to the percentage typically spoken by assistive technologies (e.g. "32 dollars", "78 degrees")',
+              'For most range roles, if @aria-valuemin@ is not defined it\'s default value is 0.',
+              'For most range roles, if @aria-valuemax@ is not defined it\'s default value is 100.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'ARIA Authoring Practices: Communicating Value and Limits for Range Widgets',
+                url:   'https://w3c.github.io/aria-practices/#range_related_properties'
+              },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
                 url:   'https://www.w3.org/TR/wai-aria-1.2/#meter'
@@ -7767,10 +7789,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'ARIA Authoring Practices: Using aria-valuemin, aria-valuemx and aria-valuenow',
-                url:   'https://w3c.github.io/aria-practices/#range_related_properties'
               }
             ]
         },
@@ -7958,8 +7976,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             PURPOSE: [
               'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
               'Versions of the ARIA specification before 1.2 allowed @aria-label@ or @aria-labelledby@  to be used on any element, even if an accessible name was not useful .',
-              'For example, defining an accessible name on a @p@ element or an element with @role=none@ does not provide any useful accessibility information to assistive technologies.',
-              'The text content of the @p@ element is the only part that is needed by assisitve technologies.'
+              'For example, defining an accessible name on a @p@ element or an element with @role=none@ does not provide any useful accessibility information to assistive technologies.  For a @p@ element the text content is the only part that is needed by assistive technologies.'
             ],
             TECHNIQUES: [
               'Remove @aria-label@ or @aria-labelledby@ attribute from the element.'
@@ -7970,10 +7987,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
                 url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'WAI-ARIA 1.0 Authoring Practices: Tabindex for managing focus',
-                url:   'https://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#kbd_focus'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -11532,16 +11545,21 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         if (eai.noRoleAllowed) {
           if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-            if (eai.attr2) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
+
+            if (de.role === de.implicit_role) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_9', [de.role, eai.tagName]);
             } else {
-              if (eai.attr1) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
+              if (eai.attr2) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
               } else {
-                if (eai.hasAccname) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
+                if (eai.attr1) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
                 } else {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
+                  if (eai.hasAccname) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
+                  } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
+                  }
                 }
               }
             }
@@ -11552,19 +11570,22 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
           if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
 
             if (!eai.anyRoleAllowed && eai.allowedRoles && (eai.allowedRoles.indexOf(de.role) < 0)) {
-
               var allowedRoles = eai.allowedRoles.join(', ');
 
-              if (eai.attr2) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
+              if (de.role === de.implicit_role) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_10', [de.role, eai.tagName, allowedRoles]);
               } else {
-                if (eai.attr1) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
+                if (eai.attr2) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
                 } else {
-                  if (eai.hasAccname) {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
-                } else {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
+                  if (eai.attr1) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
+                  } else {
+                    if (eai.hasAccname) {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
+                  } else {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
+                    }
                   }
                 }
               }
@@ -17318,7 +17339,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                          '[tree]',
                          '[treegrid]'],
   primary_property    : 'role',
-  resource_properties : [],
+  resource_properties : ['aria_busy', 'aria_owns'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
@@ -17414,7 +17435,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                           "treeitem"
                       ],
   primary_property    : 'role',
-  resource_properties : [],
+  resource_properties : ['aria_owns'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 

@@ -143,7 +143,7 @@ function getElementInfo(dom, ariaInfo) {
 
       let footerInfo = {};
       Object.assign(footerInfo, newInfo);
-      footerInfo.defaultRole = 'contentInfo';
+      footerInfo.defaultRole = 'contentinfo';
 
       let refContentinfo = 'footer[contentinfo]';
       ariaInfo[refContentinfo] = footerInfo;

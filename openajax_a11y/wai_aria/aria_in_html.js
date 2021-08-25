@@ -359,7 +359,7 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
         },
         "footer[contentinfo]": {
             "tagName": "footer",
-            "defaultRole": "contentInfo",
+            "defaultRole": "contentinfo",
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [

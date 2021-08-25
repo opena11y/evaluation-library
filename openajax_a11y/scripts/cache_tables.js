@@ -2010,6 +2010,7 @@ OpenAjax.a11y.cache.TableRowElement = function (dom_element, table_info) {
 
   if (te && (te.table_role !== OpenAjax.a11y.TABLE_ROLE.LAYOUT)) {
     de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['tr[table]'];
+    de.implicit_role = de.element_aria_info.defaultRole;
   }
 
 
@@ -2270,6 +2271,7 @@ OpenAjax.a11y.cache.TableCellElement = function (dom_element, table_info) {
         de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['td[cell]'];
       }
     }
+    de.implicit_role = de.element_aria_info.defaultRole;
   }
 
   if (table_info.table_row_element) {

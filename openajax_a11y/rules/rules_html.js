@@ -141,16 +141,21 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         if (eai.noRoleAllowed) {
           if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-            if (eai.attr2) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
+
+            if (de.role === de.implicit_role) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_9', [de.role, eai.tagName]);
             } else {
-              if (eai.attr1) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
+              if (eai.attr2) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
               } else {
-                if (eai.hasAccname) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
+                if (eai.attr1) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
                 } else {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
+                  if (eai.hasAccname) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
+                  } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
+                  }
                 }
               }
             }
@@ -161,19 +166,22 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
           if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
 
             if (!eai.anyRoleAllowed && eai.allowedRoles && (eai.allowedRoles.indexOf(de.role) < 0)) {
-
               var allowedRoles = eai.allowedRoles.join(', ');
 
-              if (eai.attr2) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
+              if (de.role === de.implicit_role) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_10', [de.role, eai.tagName, allowedRoles]);
               } else {
-                if (eai.attr1) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
+                if (eai.attr2) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
                 } else {
-                  if (eai.hasAccname) {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
-                } else {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
+                  if (eai.attr1) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
+                  } else {
+                    if (eai.hasAccname) {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
+                  } else {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
+                    }
                   }
                 }
               }

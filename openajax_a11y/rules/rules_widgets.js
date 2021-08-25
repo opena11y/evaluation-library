@@ -575,7 +575,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                          '[tree]',
                          '[treegrid]'],
   primary_property    : 'role',
-  resource_properties : [],
+  resource_properties : ['aria_busy', 'aria_owns'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
@@ -671,7 +671,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                           "treeitem"
                       ],
   primary_property    : 'role',
-  resource_properties : [],
+  resource_properties : ['aria_owns'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 

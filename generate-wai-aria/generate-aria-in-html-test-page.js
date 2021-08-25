@@ -392,7 +392,7 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
         let completedItems = [];
 
         let  linkItems = ['a', 'a[href]', 'area', 'area[href]'];
-        createTestCases('a_aria', linkItems);
+        createTestCases('a_area', linkItems);
         completedItems = completedItems.concat(linkItems);
 
         let figureItems = ['figure', 'figure[figcaption]', 'figcaption'];
