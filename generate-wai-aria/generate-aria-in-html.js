@@ -106,6 +106,7 @@ function getElementInfo(dom, ariaInfo) {
         let refAccname = 'img[accname]';
         ariaInfo[refAccname] = imgAccnameInfo;
         ariaInfo[refAccname].hasAccname = true;
+        ariaInfo[refAccname].id = refAccname;
 
       } else {
 
@@ -116,7 +117,7 @@ function getElementInfo(dom, ariaInfo) {
           newInfo.anyRoleAllowed = false;
           delete newInfo.allowedRoles;
         } else {
-          newInfo.defaultRole = 'generic';
+          newInfo.defaultRole = 'img';
         }
 
       }
@@ -135,6 +136,7 @@ function getElementInfo(dom, ariaInfo) {
       let refHeader = 'header[banner]';
       ariaInfo[refHeader] = bannerInfo;
       ariaInfo[refHeader].isLandmark = true;
+      ariaInfo[refHeader].id = refHeader;
     }
 
     if (tagName === 'footer') {
@@ -148,6 +150,7 @@ function getElementInfo(dom, ariaInfo) {
       let refContentinfo = 'footer[contentinfo]';
       ariaInfo[refContentinfo] = footerInfo;
       ariaInfo[refContentinfo].isLandmark = true;
+      ariaInfo[refContentinfo].id = refContentinfo;
     }
 
     // figure element special case
@@ -164,6 +167,7 @@ function getElementInfo(dom, ariaInfo) {
       captionInfo.anyRoleAllowed = false;
       captionInfo.hasFigcaption = true;
       ariaInfo['figure[figcaption]'] = captionInfo;
+      ariaInfo['figure[figcaption]'].id = 'figure[figcaption]';
     }
 
     // row, th and td element special case
@@ -180,6 +184,7 @@ function getElementInfo(dom, ariaInfo) {
       cellInfo.anyRoleAllowed = false;
       cellInfo.ownedbyTable = true;
       ariaInfo['td[cell]'] = cellInfo;
+      ariaInfo['td[cell]'].id = 'td[cell]';
 
       let gridInfo = {};
       gridInfo.tagName = 'td';
@@ -189,6 +194,7 @@ function getElementInfo(dom, ariaInfo) {
       gridInfo.ownedbyGrid = true;
       gridInfo.ownedbyTreegrid = true;
       ariaInfo['td[gridcell]'] = gridInfo;
+      ariaInfo['td[gridcell]'].id = 'td[gridcell]';
 
     }
 
@@ -204,6 +210,7 @@ function getElementInfo(dom, ariaInfo) {
       cellInfo.anyRoleAllowed = false;
       cellInfo.ownedbyTable = true;
       ariaInfo['th[cell]'] = cellInfo;
+      ariaInfo['th[cell]'].id = 'th[cell]';
 
       let gridInfo = {};
       gridInfo.tagName = 'th';
@@ -213,6 +220,7 @@ function getElementInfo(dom, ariaInfo) {
       gridInfo.ownedbyGrid = true;
       gridInfo.ownedbyTreegrid = true;
       ariaInfo['th[gridcell]'] = gridInfo;
+      ariaInfo['th[gridcell]'].id = 'th[gridcell]';
 
       let colInfo = {};
       colInfo.tagName = 'th';
@@ -223,6 +231,7 @@ function getElementInfo(dom, ariaInfo) {
       colInfo.ownedbyGrid = true;
       colInfo.ownedbyTreegrid = true;
       ariaInfo['th[colheder]'] = colInfo;
+      ariaInfo['th[colheder]'].id = 'th[colheder]';
 
       let rowInfo = {};
       rowInfo.tagName = 'th';
@@ -233,6 +242,7 @@ function getElementInfo(dom, ariaInfo) {
       rowInfo.ownedbyGrid = true;
       rowInfo.ownedbyTreegrid = true;
       rowInfo['th[rowheder]'] = rowInfo;
+      rowInfo['th[rowheder]'].id = 'th[rowheder]';
 
     }
 
@@ -250,7 +260,7 @@ function getElementInfo(dom, ariaInfo) {
       tableInfo.ownedbyGrid = true;
       tableInfo.ownedbyTreegrid = true;
       ariaInfo['tr[table]'] = tableInfo;
-
+      ariaInfo['tr[table]'].id = 'tr[table]';
     }
 
     // section element special case
@@ -265,6 +275,7 @@ function getElementInfo(dom, ariaInfo) {
 
       let refRegion = 'section[accname]'
       ariaInfo[refRegion] = regionInfo;
+      ariaInfo[refRegion].id = refRegion;
     }
 
     // input element special cases
@@ -284,6 +295,7 @@ function getElementInfo(dom, ariaInfo) {
         ariaInfo[refNameList] = comboboxInfo;
         ariaInfo[refNameList].tagName = tagName;
         ariaInfo[refNameList].attr2 = 'list';
+        ariaInfo[refNameList].id = refNameList;
       }
     }
 
@@ -297,34 +309,42 @@ function getElementInfo(dom, ariaInfo) {
     if (tagName.indexOf('h6') > 0) {
       ariaInfo['h1'] = newInfo;
       ariaInfo['h1'].tagName ='h1';
+      ariaInfo['h1'].id ='h1';
 
       let h2Info = {};
       Object.assign(h2Info, newInfo);
       h2Info.tagName = 'h2';
       ariaInfo['h2'] = h2Info;
+      ariaInfo['h2'].id ='h2';
 
       let h3Info = {};
       Object.assign(h3Info, newInfo);
       h3Info.tagName = 'h3';
       ariaInfo['h3'] = h3Info;
+      ariaInfo['h3'].id ='h3';
 
       let h4Info = {};
       Object.assign(h4Info, newInfo);
       h4Info.tagName = 'h4';
       ariaInfo['h4'] = h4Info;
+      ariaInfo['h4'].id ='h4';
 
       let h5Info = {};
       Object.assign(h5Info, newInfo);
       h5Info.tagName = 'h5';
       ariaInfo['h5'] = h5Info;
+      ariaInfo['h5'].id ='h5';
 
       let h6Info = {};
       Object.assign(h6Info, newInfo);
       h6Info.tagName = 'h6';
       ariaInfo['h6'] = h6Info;
+      ariaInfo['h6'].id ='h6';
+
     } else {
       if (!ariaInfo[refName]) {
         ariaInfo[refName] = newInfo;
+        ariaInfo[refName].id = refName;
       } else {
         console.log('Duplicate Reference: ' + refName);
       }

@@ -2694,6 +2694,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Remove or update the role to an allowed role on the element',
               FAIL_P:   'Remove or update the roles to an allowed role on the %N_F elements',
+              MANUAL_CHECK_S: 'The explict role on the element can be removed, since it is redundant with the implict role of the element.',
+              MANUAL_CHECK_P: 'The explict role on the %N_MC elements can be removed, since they are redundant with the implict role of each element.',
               HIDDEN_S: 'If the hidden element becomes visible, it\'s role must be removed or updated.',
               HIDDEN_P: 'If any of the %N_H hidden elements become visible, it\'s role must be removed or updated to an allowed role.',
               NOT_APPLICABLE:  'No elements with role restrictions found on the page.'
@@ -2707,8 +2709,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_FAIL_6: 'The @%1@ element with the @%2@ attribute does not allow the @%3@ role.  Either remove the role or change it to one of the following allowed values: @%4@.',
               ELEMENT_FAIL_7: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow @%2@ role. Either remove the role or change it to one of the following allowed values: @%3@.',
               ELEMENT_FAIL_8: 'The @%1@ element does not allow the @%2@ role.  Either remove the role or change it to one of the following allowed values: @%3@.',
-              ELEMENT_FAIL_9: 'The explict @%1@ role is the same as the native semantic role of the @%2@ element.  The explict role must be removed to ensure the semantics of the element are properly represented in accessibility APIs.',
-              ELEMENT_FAIL_10: 'The explict @%1@ role is the same as the native semantic role of the @%2@ element.  The explict role must be removed to ensure the semantics of the element are properly represented in accessibility APIs or use one of the other allowed roles (if appropriate): @%3@.',
+              ELEMENT_MC_1: 'The explict @%1@ role is the same as the native semantic role of the @%2@ element.  Defining the explict role is not recommended, and should be removed to ensure the semantics of the element are properly represented in accessibility APIs.',
               ELEMENT_HIDDEN_1: '@%1@ element is hidden, the @%2@ role must be removed before it becomes visible.',
               ELEMENT_HIDDEN_2: '@%1@ element is hidden, the @%2@ role must be removed or changed to an allowed role before it becomes visible.'
             },
@@ -2720,7 +2721,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             TECHNIQUES: [
               'Some HTML elements do not allow any role to override of the implicit role, in this case the role must be removed.',
               'Some HTML elements only allow certain roles to override of the implicit role, in this case only the allowed roles can be used to override the implicit role.',
-              'When the explict role is the same as the implicit role for an HTML element the explict role must be removed to insure the native semantics of the element are properly represented in accessibility APIs.'
+              'When the explict role is the same as the implicit role for an HTML element, the explict role should be removed to insure the native semantics of the element are properly represented in accessibility APIs.'
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
@@ -11531,6 +11532,104 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   language_dependency : "",
   validate          : function (dom_cache, rule_result) {
 
+
+    function checkResult(de, result) {
+      if (de.node.className.indexOf(result) < 0) {
+        console.log('[checkResult]: ' + de.element_aria_info.id + ' (' + result.trim() + ')');
+        console.log('       [HTML]: ' + de.node.outerHTML);
+        console.log('      [roles]: ' + de.role + ' ' + de.element_aria_info.defaultRole + ' ' + isImplicitRole(de, de.element_aria_info));
+      }
+    }
+
+    function isImplicitRole(de, eai) {
+
+      if (eai.defaultRole === 'generic') {
+        return false;
+      }
+      if (de.role === eai.defaultRole) {
+        return true;
+      }
+      if (de.role === 'none' && eai.defaultRole === 'presentation') {
+        return true;
+      }
+
+      return false;
+    }
+
+    function checkAnyRoleAllowed (de, eai) {
+      if (isImplicitRole(de, eai)) {
+        if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, eai.tagName]);
+          checkResult(de, "MC")
+        } else {
+          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [eai.tagName, de.role]);
+        }
+      }
+    }
+
+    function checkNoRoleAllowed (de, eai) {
+      if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+
+        if (isImplicitRole(de, eai)) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, eai.tagName]);
+          checkResult(de, "MC")
+        } else {
+          if (eai.attr2) {
+            rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
+            checkResult(de, "FAIL")
+          } else {
+            if (eai.attr1) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
+              checkResult(de, "FAIL")
+            } else {
+              if (eai.hasAccname) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
+                checkResult(de, "FAIL")
+              } else {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
+                checkResult(de, "FAIL")
+              }
+            }
+          }
+        }
+      } else {
+        rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [eai.tagName, de.role]);
+      }
+    }
+
+    function checkSomeRolesAllowed (de, eai) {
+      if (!eai.anyRoleAllowed && eai.allowedRoles && (eai.allowedRoles.indexOf(de.role) < 0)) {
+        if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+          var strAllowedRoles = eai.allowedRoles.join(', ');
+
+          if (isImplicitRole(de, eai)) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, eai.tagName]);
+            checkResult(de, "MC")
+          } else {
+            if (eai.attr2) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, strAllowedRoles]);
+              checkResult(de, "FAIL")
+            } else {
+              if (eai.attr1) {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, strAllowedRoles]);
+                checkResult(de, "FAIL")
+              } else {
+                if (eai.hasAccname) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, strAllowedRoles]);
+                  checkResult(de, "FAIL")
+              } else {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, strAllowedRoles]);
+                  checkResult(de, "FAIL")
+                }
+              }
+            }
+          }
+        } else {
+          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+        }
+      }
+    }
+
     var TEST_RESULT    = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY     = OpenAjax.a11y.VISIBILITY;
 
@@ -11542,56 +11641,13 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       var eai = de.element_aria_info;
 
       if (de.role && !de.is_implied_role) {
-
-        if (eai.noRoleAllowed) {
-          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-
-            if (de.role === de.implicit_role) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_9', [de.role, eai.tagName]);
-            } else {
-              if (eai.attr2) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
-              } else {
-                if (eai.attr1) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
-                } else {
-                  if (eai.hasAccname) {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
-                  } else {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
-                  }
-                }
-              }
-            }
-          } else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [eai.tagName, de.role]);
-          }
+        if (eai.anyRoleAllowed) {
+          checkAnyRoleAllowed(de, eai);
         } else {
-          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-
-            if (!eai.anyRoleAllowed && eai.allowedRoles && (eai.allowedRoles.indexOf(de.role) < 0)) {
-              var allowedRoles = eai.allowedRoles.join(', ');
-
-              if (de.role === de.implicit_role) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_10', [de.role, eai.tagName, allowedRoles]);
-              } else {
-                if (eai.attr2) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, allowedRoles]);
-                } else {
-                  if (eai.attr1) {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, allowedRoles]);
-                  } else {
-                    if (eai.hasAccname) {
-                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, allowedRoles]);
-                  } else {
-                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, allowedRoles]);
-                    }
-                  }
-                }
-              }
-            }
+          if (eai.noRoleAllowed) {
+            checkNoRoleAllowed(de, eai);
           } else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            checkSomeRolesAllowed(de, eai);
           }
         }
       }

@@ -29,11 +29,23 @@ function getResult (infoItem, role) {
     result = 'FAIL';
   }
 
+  if ((infoItem.defaultRole !== 'generic') &&
+      (infoItem.defaultRole === role)) {
+    result = 'MC';
+  }
+
+  if ((infoItem.defaultRole === 'presentation') &&
+      (role === 'none')) {
+    result = 'MC';
+  }
+
+
+
   return result;
 
 }
 
-function generateTestItems(infoItem, spaces, childContent) {
+function generateTestItems(testId, infoItem, spaces, childContent) {
 
   if (typeof spaces !== 'string') {
     spaces = '  ';
@@ -42,9 +54,13 @@ function generateTestItems(infoItem, spaces, childContent) {
   let html = '';
   let parts;
 
-  let roleCount = 0;
+  let roleCount = 1;
+
+  let id;
 
   for (ariaRole in aria12Info.designPatterns) {
+
+    id = 'id="test-' + testId + '-' + roleCount + '"';
 
     let result = getResult(infoItem, ariaRole);
 
@@ -58,7 +74,11 @@ function generateTestItems(infoItem, spaces, childContent) {
         attr1 = ' ' + attr1 + '="content"';
       } else {
         parts = attr1.split('=');
-        attr1 = ' ' + parts[0] + '="' + parts[1] + '"';
+        if (parts[1] !== '""') {
+          attr1 = ' ' + parts[0] + '="' + parts[1] + '"';
+        } else {
+          attr1 = ' ' + parts[0] + '=""';
+        }
       }
     }
 
@@ -68,7 +88,11 @@ function generateTestItems(infoItem, spaces, childContent) {
         attr2 = ' ' + attr2 + '="data-list"';
       } else {
         parts = attr2.split('=');
-        attr2 = ' ' + parts[0] + '="' + parts[1] + '"';
+        if (parts[1] !== '""') {
+          attr1 = ' ' + parts[0] + '="' + parts[1] + '"';
+        } else {
+          attr1 = ' ' + parts[0] + '=""';
+        }
       }
     }
 
@@ -89,7 +113,7 @@ function generateTestItems(infoItem, spaces, childContent) {
       case 'audio':
         html += spaces + '<div>\n';
         html += spaces + `  <code>audio</code> with role=${ariaRole} (${result})\n`;
-        html += spaces + `  <audio role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
+        html += spaces + `  <audio ${id} role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
         html += spaces + '    <source src="../audio/audio-test.mp3" type="audio/mp3"/>\n';
         html += spaces + '  </audio>\n';
         html += spaces + '<div>\n';
@@ -98,7 +122,7 @@ function generateTestItems(infoItem, spaces, childContent) {
 
       case 'img':
         html += spaces + '<div>\n';
-        html += spaces + '  ' + `<${tagName} src="../images/blue.png" role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}/>\n`;
+        html += spaces + '  ' + `<${tagName} src="../images/blue.png" ${id} role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}/>\n`;
         html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
         html += spaces + '<div>\n';
 
@@ -107,7 +131,7 @@ function generateTestItems(infoItem, spaces, childContent) {
       case 'video':
         html += spaces + '<div>\n';
         html += spaces + `  <code>video</code> with role=${ariaRole} (${result})\n`;
-        html += spaces + `  <video role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
+        html += spaces + `  <video ${id} role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
         html += spaces + '    <source src="../audio/audio-test.mp3" type="audio/mp3"/>\n';
         html += spaces + '  </video>\n';
         html += spaces + '<div>\n';
@@ -115,7 +139,7 @@ function generateTestItems(infoItem, spaces, childContent) {
         break;
 
       default:
-        html += spaces + `<${tagName} role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}${sizeOrMultiple}>\n`;
+        html += spaces + `<${tagName} ${id} role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}${sizeOrMultiple}>\n`;
         html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
         childContent ? html += spaces + '  ' + childContent + '\n' : '';
         html += spaces + `</${tagName}>\n`;
@@ -134,7 +158,7 @@ function generateTestItems(infoItem, spaces, childContent) {
 
 }
 
-function generateTableTestItems(infoItem, spaces) {
+function generateTableTestItems(testId, infoItem, spaces) {
 
   if (typeof spaces !== 'string') {
     spaces = '  ';
@@ -162,34 +186,34 @@ function generateTableTestItems(infoItem, spaces) {
 
 }
 
-function generateListTestItems(infoItem) {
+function generateListTestItems(testId, infoItem) {
 
   let html = '';
   html += '<ul>\n';
-  html += generateTestItems(infoItem);
+  html += generateTestItems(testId, infoItem);
   html += '</ul>\n';
 
   return html;
 
 }
 
-function generateTableRowTestItems(infoItem, role) {
+function generateTableRowTestItems(testId, infoItem, role) {
   let html = '';
   html += role ? `<table role="${role}">\n` : '<table>\n';
-  html += generateTestItems(infoItem, '  ');
+  html += generateTestItems(testId, infoItem, '  ');
   html += '</table>\n';
 
   return html;
 
 }
 
-function generateTableCellTestItems(infoItem, role) {
+function generateTableCellTestItems(testId, infoItem, role) {
 
   let html = '';
   html += role ? `<table role="${role}">\n` : '<table>\n';
   html += '  <tbody>\n';
   html += '    <tr>\n';
-  html += generateTestItems(infoItem, '      ');
+  html += generateTestItems(testId, infoItem, '      ');
   html += '    </tr>\n';
   html += '  </tbody>\n';
   html += '</table>\n';
@@ -198,13 +222,13 @@ function generateTableCellTestItems(infoItem, role) {
 
 }
 
-function generateTableHeaderCellTestItems(infoItem, role) {
+function generateTableHeaderCellTestItems(testId, infoItem, role) {
 
   let html = '';
   html += role ? `<table role="${role}">\n` : '<table>\n';
   html += '  <thead>\n';
   html += '    <tr>\n';
-  html += generateTestItems(infoItem, '      ');
+  html += generateTestItems(testId, infoItem, '      ');
   html += '    </tr>\n';
   html += '  </thead>\n';
   html += '</table>\n';
@@ -213,11 +237,11 @@ function generateTableHeaderCellTestItems(infoItem, role) {
 
 }
 
-function generateTestItemsInElementRole(infoItem, elem, role) {
+function generateTestItemsInElementRole(testId, infoItem, elem, role) {
 
   let html = '';
   html += role ? `<${elem} role="${role}">\n` : `<${elem}>\n`;
-  html += '  ' + generateTestItems(infoItem, '  ');
+  html += '  ' + generateTestItems(testId, infoItem, '  ');
   html += `</${elem}>\n`;
 
   return html;
@@ -246,7 +270,7 @@ function createTestCases(name, testItems) {
 
   let body = ``;
 
-  let itemCount = 0;
+  let itemCount = 1;
 
   for (item in ariaInHTMLInfo.elementInfo) {
 
@@ -275,69 +299,69 @@ function createTestCases(name, testItems) {
     switch (item) {
 
       case 'figure[figcaption]':
-        body += generateTestItems(infoItem, '  ', '<figcaption>Text content for <code>figcaption</code></figcaption>');
+        body += generateTestItems(itemCount, infoItem, '  ', '<figcaption>Text content for <code>figcaption</code></figcaption>');
         break;
 
       case 'figcaption':
-        body += generateTestItemsInElementRole(infoItem, 'figure');
+        body += generateTestItemsInElementRole(itemCount, infoItem, 'figure');
         break;
 
       case 'header[banner]':
       case 'footer[contentinfo]':
-        body += generateTestItemsInElementRole(infoItem, 'div');
-        body += generateTestItemsInElementRole(infoItem, 'section');
+        body += generateTestItemsInElementRole(itemCount+'a', infoItem, 'div');
+        body += generateTestItemsInElementRole(itemCount+'b', infoItem, 'section');
         break;
 
       case 'header':
       case 'footer':
-        body += generateTestItemsInElementRole(infoItem, 'main');
-        body += generateTestItemsInElementRole(infoItem, 'div', 'main');
-        body += generateTestItemsInElementRole(infoItem, 'aside');
-        body += generateTestItemsInElementRole(infoItem, 'div', 'complementary');
-        body += generateTestItemsInElementRole(infoItem, 'div', 'region');
+        body += generateTestItemsInElementRole(itemCount+'a', infoItem, 'main');
+        body += generateTestItemsInElementRole(itemCount+'b', infoItem, 'div', 'main');
+        body += generateTestItemsInElementRole(itemCount+'c', infoItem, 'aside');
+        body += generateTestItemsInElementRole(itemCount+'d', infoItem, 'div', 'complementary');
+        body += generateTestItemsInElementRole(itemCount+'e', infoItem, 'div', 'region');
         break;
 
       case 'li':
-        body += generateListTestItems(infoItem);
+        body += generateListTestItems(itemCount, infoItem);
         break;
 
       case 'tr':
       case 'tbody':
       case 'thead':
-        body += generateTableRowTestItems(infoItem, 'none');
+        body += generateTableRowTestItems(itemCount, infoItem, 'none');
         break;
 
       case 'tr[grid]':
-        body += generateTableRowTestItems(infoItem, 'grid');
-        body += generateTableRowTestItems(infoItem, 'treegrid');
+        body += generateTableRowTestItems(itemCount+'a', infoItem, 'grid');
+        body += generateTableRowTestItems(itemCount+'b', infoItem, 'treegrid');
         break;
 
       case 'tr[table]':
-        body += generateTableRowTestItems(infoItem);
+        body += generateTableRowTestItems(itemCount, infoItem);
         break;
 
       case 'td':
       case 'th':
-        body += generateTableCellTestItems(infoItem, 'none');
+        body += generateTableCellTestItems(itemCount, infoItem, 'none');
         break;
 
       case 'td[cell]':
       case 'th[cell]':
-        body += generateTableCellTestItems(infoItem);
+        body += generateTableCellTestItems(itemCount, infoItem);
         break;
 
       case 'td[gridcell]':
       case 'th[gridcell]':
-        body += generateTableCellTestItems(infoItem, 'grid');
-        body += generateTableCellTestItems(infoItem, 'treegrid');
+        body += generateTableCellTestItems(itemCount+'a', infoItem, 'grid');
+        body += generateTableCellTestItems(itemCount+'b', infoItem, 'treegrid');
         break;
 
       case 'table':
-        body += generateTableTestItems(infoItem);
+        body += generateTableTestItems(itemCount, infoItem);
         break;
 
       default:
-        body += generateTestItems(infoItem, '  ');
+        body += generateTestItems(itemCount, infoItem, '  ');
         break;
 
     }
