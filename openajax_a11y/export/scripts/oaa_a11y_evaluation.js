@@ -20218,16 +20218,6 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.addLandmarkElement = functi
     landmark_element.cache_id = "landmark_" + this.landmark_length;
     this.landmark_elements.push(landmark_element);
 
-    if (de.tag_name === 'header') {
-      de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
-      de.implicit_role = de.element_aria_info.defaultRole;
-    }
-
-    if (de.tag_name === 'footer') {
-      de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
-      de.implicit_role = de.element_aria_info.defaultRole;
-    }
-
   }
 
 
@@ -20509,8 +20499,17 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
   var li = new OpenAjax.a11y.cache.LandmarkInfo(landmark_info);
   var tag_name = dom_element.tag_name;
 
-  dom_element.parent_landmark = landmark_info.landmark_element;
-  dom_element.body_element    = landmark_info.body_element;
+  if (typeof landmark_info.landmark_element === 'object') {
+    dom_element.parent_landmark = landmark_info.landmark_element;
+  } else {
+    dom_element.parent_landmark = null;
+  }
+
+  if (typeof landmark_info.body_element === 'object') {
+    dom_element.body_element    = landmark_info.body_element;
+  } else {
+    dom_element.body_landmark = null;
+  }
 
 //  OpenAjax.a11y.logger.debug("Body Element: " +  dom_element.body_element);
 
@@ -20700,8 +20699,8 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
           dom_element.has_aria_labelledby ||
           dom_element.has_title)) ||
         (!landmark_info.inside_sectioning_element && (
-         (dom_element.tag_name === 'footer' && !dom_element.has_role) ||
-         (dom_element.tag_name === 'header' && !dom_element.has_role)))) {
+         (dom_element.tag_name === 'footer' && !dom_element.has_role)) ||
+         (dom_element.tag_name === 'header' && !dom_element.has_role))) {
 
       if (dom_element.role == 'main' || (dom_element.tag_name === 'main'  && !dom_element.has_role)) {
 
@@ -20743,8 +20742,6 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             break;
 
           case 'footer':
-            dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
-            dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
             this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
             break;
@@ -20755,8 +20752,6 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             break;
 
           case 'header':
-            dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
-            dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
             this.dom_cache.getNameFromARIALabel(le, "BANNER");
             break;
@@ -21258,6 +21253,20 @@ OpenAjax.a11y.cache.SectionElement.prototype.toString = function () {
  */
 
 OpenAjax.a11y.cache.LandmarkElement = function (dom_element, landmark) {
+
+  if ((dom_element.tag_name === 'footer') &&
+      (dom_element.parent_landmark === null) &&
+      (!dom_element.has_role || (dom_element.role === 'contentinfo'))) {
+    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
+  }
+
+  if ((dom_element.tag_name === 'header') &&
+      (dom_element.parent_landmark === null) &&
+      (!dom_element.has_role || (dom_element.role === 'banner'))) {
+    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
+  }
 
   this.dom_element           = dom_element;
   this.cache_id              = "";

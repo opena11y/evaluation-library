@@ -11533,99 +11533,102 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate          : function (dom_cache, rule_result) {
 
 
-    function checkResult(de, result) {
-      if (de.node.className.indexOf(result) < 0) {
-        console.log('[checkResult]: ' + de.element_aria_info.id + ' (' + result.trim() + ')');
-        console.log('       [HTML]: ' + de.node.outerHTML);
-        console.log('      [roles]: ' + de.role + ' ' + de.element_aria_info.defaultRole + ' ' + isImplicitRole(de, de.element_aria_info));
+    function checkResult(d, result) {
+      if (d.node.className.indexOf(result) < 0) {
+        console.log('\n[             ID]: ' + d.element_aria_info.id + ' (' + result.trim() + ')');
+        console.log('[       tag_name]: ' + d.tag_name);
+        console.log('[parent_landmark]: ' + d.parent_landmark);
+        console.log('[       has_role]: ' + d.has_role);
+        console.log('[           HTML]: ' + d.node.outerHTML);
+        console.log('[          roles]: ' + d.role + ' ' + d.element_aria_info.defaultRole + ' ' + isImplicitRole(d, de.element_aria_info));
       }
     }
 
-    function isImplicitRole(de, eai) {
+    function isImplicitRole(d, e) {
 
-      if (eai.defaultRole === 'generic') {
+      if (e.defaultRole === 'generic') {
         return false;
       }
-      if (de.role === eai.defaultRole) {
+      if (d.role === e.defaultRole) {
         return true;
       }
-      if (de.role === 'none' && eai.defaultRole === 'presentation') {
+      if (d.role === 'none' && e.defaultRole === 'presentation') {
         return true;
       }
 
       return false;
     }
 
-    function checkAnyRoleAllowed (de, eai) {
-      if (isImplicitRole(de, eai)) {
-        if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, eai.tagName]);
-          checkResult(de, "MC")
+    function checkAnyRoleAllowed (d, e) {
+      if (isImplicitRole(d, e)) {
+        if (d.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
+          checkResult(d, "MC")
         } else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [eai.tagName, de.role]);
+          rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_1', [e.tagName, d.role]);
         }
       }
     }
 
-    function checkNoRoleAllowed (de, eai) {
-      if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+    function checkNoRoleAllowed (d, e) {
+      if (d.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
 
-        if (isImplicitRole(de, eai)) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, eai.tagName]);
-          checkResult(de, "MC")
+        if (isImplicitRole(d, e)) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
+          checkResult(d, "MC")
         } else {
-          if (eai.attr2) {
-            rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [eai.tagName, eai.attr1, eai.attr2, de.role]);
-            checkResult(de, "FAIL")
+          if (e.attr2) {
+            rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_1', [e.tagName, e.attr1, e.attr2, d.role]);
+            checkResult(d, "FAIL")
           } else {
-            if (eai.attr1) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [eai.tagName, eai.attr1, de.role]);
-              checkResult(de, "FAIL")
+            if (e.attr1) {
+              rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_2', [e.tagName, e.attr1, d.role]);
+              checkResult(d, "FAIL")
             } else {
-              if (eai.hasAccname) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [eai.tagName, de.role]);
-                checkResult(de, "FAIL")
+              if (e.hasAccname) {
+                rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_3', [e.tagName, d.role]);
+                checkResult(d, "FAIL")
               } else {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [eai.tagName, de.role]);
-                checkResult(de, "FAIL")
+                rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_4', [e.tagName, d.role]);
+                checkResult(d, "FAIL")
               }
             }
           }
         }
       } else {
-        rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [eai.tagName, de.role]);
+        rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_1', [e.tagName, d.role]);
       }
     }
 
-    function checkSomeRolesAllowed (de, eai) {
-      if (!eai.anyRoleAllowed && eai.allowedRoles && (eai.allowedRoles.indexOf(de.role) < 0)) {
-        if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-          var strAllowedRoles = eai.allowedRoles.join(', ');
+    function checkSomeRolesAllowed (d, e) {
+      if (!e.anyRoleAllowed && e.allowedRoles && (e.allowedRoles.indexOf(d.role) < 0)) {
+        if (d.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+          var strAllowedRoles = e.allowedRoles.join(', ');
 
-          if (isImplicitRole(de, eai)) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, eai.tagName]);
-            checkResult(de, "MC")
+          if (isImplicitRole(d, e)) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
+            checkResult(d, "MC")
           } else {
-            if (eai.attr2) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [eai.tagName, eai.attr1, eai.attr2, strAllowedRoles]);
-              checkResult(de, "FAIL")
+            if (e.attr2) {
+              rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_5', [e.tagName, e.attr1, e.attr2, strAllowedRoles]);
+              checkResult(d, "FAIL")
             } else {
-              if (eai.attr1) {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [eai.tagName, eai.attr1, de.role, strAllowedRoles]);
-                checkResult(de, "FAIL")
+              if (e.attr1) {
+                rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_6', [e.tagName, e.attr1, d.role, strAllowedRoles]);
+                checkResult(d, "FAIL")
               } else {
-                if (eai.hasAccname) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [eai.tagName, de.role, strAllowedRoles]);
-                  checkResult(de, "FAIL")
+                if (e.hasAccname) {
+                  rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_7', [e.tagName, d.role, strAllowedRoles]);
+                  checkResult(d, "FAIL")
               } else {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [eai.tagName, de.role, strAllowedRoles]);
-                  checkResult(de, "FAIL")
+                  rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_8', [e.tagName, d.role, strAllowedRoles]);
+                  checkResult(d, "FAIL")
                 }
               }
             }
           }
         } else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+          rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_2', [d.tag_name, d.role]);
         }
       }
     }
