@@ -6268,8 +6268,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               }
             ]
         },
@@ -6331,6 +6331,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @title@ attribute',
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H39'
@@ -6346,14 +6350,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
                 url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
               }
             ]
         },
@@ -6404,16 +6400,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
                 url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
               }
             ]
         },
@@ -6471,6 +6463,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @title@ attribute',
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H39'
@@ -6486,14 +6482,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
                 url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
               }
             ]
         },
@@ -6554,6 +6542,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: summary attribute',
                 url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
               },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
@@ -6565,14 +6557,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
                 url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
               }
             ]
         },
@@ -6609,6 +6593,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
                 url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
               },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
@@ -6620,14 +6608,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
                 url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
               }
             ]
         },
@@ -6670,12 +6650,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'https://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                title: 'IBM Web checklist Checkpoint 1.3e: Tables',
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -6717,6 +6697,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
                 url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               }
             ]
         }
@@ -10421,8 +10405,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ce = control_elements[i];
        var de = ce.dom_element;
 
-//      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label + ' [needs_label]: ' + ce.needs_label);
-
        if (ce.needs_label) {
 
          var control_type = ce.toString();
@@ -10498,7 +10480,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       for (var j = 0; j < form_elements_len; j += 1) {
         var fe2 = form_elements[j];
 
-        console.log('[CONTROL11][checkButtons][' + i + '][' + j + ']: ' + fe1.cache_id + ' ' + fe2.cache_id + ' ' + (fe1.cache_id === fe2.cache_id));
         if (fe1.cache_id === fe2.cache_id) {
           continue;
         }
@@ -11799,18 +11780,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   language_dependency : "",
   validate          : function (dom_cache, rule_result) {
 
-
-    function checkResult(d, result) {
-      if (d.node.className.indexOf(result) < 0) {
-        console.log('\n[             ID]: ' + d.element_aria_info.id + ' (' + result.trim() + ')');
-        console.log('[       tag_name]: ' + d.tag_name);
-        console.log('[parent_landmark]: ' + d.parent_landmark);
-        console.log('[       has_role]: ' + d.has_role);
-        console.log('[           HTML]: ' + d.node.outerHTML);
-        console.log('[          roles]: ' + d.role + ' ' + d.element_aria_info.defaultRole + ' ' + isImplicitRole(d, de.element_aria_info));
-      }
-    }
-
     function isImplicitRole(d, e) {
 
       if (e.defaultRole === 'generic') {
@@ -11830,7 +11799,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       if (isImplicitRole(d, e)) {
         if (d.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
-          checkResult(d, "MC")
         } else {
           rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_1', [e.tagName, d.role]);
         }
@@ -11842,22 +11810,17 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         if (isImplicitRole(d, e)) {
           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
-          checkResult(d, "MC")
         } else {
           if (e.attr2) {
             rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_1', [e.tagName, e.attr1, e.attr2, d.role]);
-            checkResult(d, "FAIL")
           } else {
             if (e.attr1) {
               rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_2', [e.tagName, e.attr1, d.role]);
-              checkResult(d, "FAIL")
             } else {
               if (e.hasAccname) {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_3', [e.tagName, d.role]);
-                checkResult(d, "FAIL")
               } else {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_4', [e.tagName, d.role]);
-                checkResult(d, "FAIL")
               }
             }
           }
@@ -11874,22 +11837,17 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
           if (isImplicitRole(d, e)) {
             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
-            checkResult(d, "MC")
           } else {
             if (e.attr2) {
               rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_5', [e.tagName, e.attr1, e.attr2, strAllowedRoles]);
-              checkResult(d, "FAIL")
             } else {
               if (e.attr1) {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_6', [e.tagName, e.attr1, d.role, strAllowedRoles]);
-                checkResult(d, "FAIL")
               } else {
                 if (e.hasAccname) {
                   rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_7', [e.tagName, d.role, strAllowedRoles]);
-                  checkResult(d, "FAIL")
               } else {
                   rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_8', [e.tagName, d.role, strAllowedRoles]);
-                  checkResult(d, "FAIL")
                 }
               }
             }
@@ -17607,14 +17565,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
          var required_properties = de.role_info.requiredProps;
 
-//         console.log("[WIDGET 6]: " + de + " [reqProps]: "+ de.role_info.requiredProps);
-
-//         for (var k = 0; k < de.aria_attributes.length; k += 1) {
-//           var attr = de.aria_attributes[k];
-//           console.log("  [props]: "+ attr.name + '=' + attr.value);
-//         }
-
-
          if (required_properties && required_properties.length) {
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
@@ -17700,8 +17650,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          var required_child_roles = de.role_info.requiredChildren;
 
          if (required_child_roles && required_child_roles.length) {
-
-//           console.log("[WIDGET 7]: " + de + " [reqOwned]: "+ required_child_roles.toString());
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 

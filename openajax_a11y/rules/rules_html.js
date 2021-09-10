@@ -127,18 +127,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   language_dependency : "",
   validate          : function (dom_cache, rule_result) {
 
-
-    function checkResult(d, result) {
-      if (d.node.className.indexOf(result) < 0) {
-        console.log('\n[             ID]: ' + d.element_aria_info.id + ' (' + result.trim() + ')');
-        console.log('[       tag_name]: ' + d.tag_name);
-        console.log('[parent_landmark]: ' + d.parent_landmark);
-        console.log('[       has_role]: ' + d.has_role);
-        console.log('[           HTML]: ' + d.node.outerHTML);
-        console.log('[          roles]: ' + d.role + ' ' + d.element_aria_info.defaultRole + ' ' + isImplicitRole(d, de.element_aria_info));
-      }
-    }
-
     function isImplicitRole(d, e) {
 
       if (e.defaultRole === 'generic') {
@@ -158,7 +146,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       if (isImplicitRole(d, e)) {
         if (d.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
-          checkResult(d, "MC")
         } else {
           rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_1', [e.tagName, d.role]);
         }
@@ -170,22 +157,17 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         if (isImplicitRole(d, e)) {
           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
-          checkResult(d, "MC")
         } else {
           if (e.attr2) {
             rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_1', [e.tagName, e.attr1, e.attr2, d.role]);
-            checkResult(d, "FAIL")
           } else {
             if (e.attr1) {
               rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_2', [e.tagName, e.attr1, d.role]);
-              checkResult(d, "FAIL")
             } else {
               if (e.hasAccname) {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_3', [e.tagName, d.role]);
-                checkResult(d, "FAIL")
               } else {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_4', [e.tagName, d.role]);
-                checkResult(d, "FAIL")
               }
             }
           }
@@ -202,22 +184,17 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
           if (isImplicitRole(d, e)) {
             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
-            checkResult(d, "MC")
           } else {
             if (e.attr2) {
               rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_5', [e.tagName, e.attr1, e.attr2, strAllowedRoles]);
-              checkResult(d, "FAIL")
             } else {
               if (e.attr1) {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_6', [e.tagName, e.attr1, d.role, strAllowedRoles]);
-                checkResult(d, "FAIL")
               } else {
                 if (e.hasAccname) {
                   rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_7', [e.tagName, d.role, strAllowedRoles]);
-                  checkResult(d, "FAIL")
               } else {
                   rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_8', [e.tagName, d.role, strAllowedRoles]);
-                  checkResult(d, "FAIL")
                 }
               }
             }

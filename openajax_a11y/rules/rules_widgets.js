@@ -517,14 +517,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
          var required_properties = de.role_info.requiredProps;
 
-//         console.log("[WIDGET 6]: " + de + " [reqProps]: "+ de.role_info.requiredProps);
-
-//         for (var k = 0; k < de.aria_attributes.length; k += 1) {
-//           var attr = de.aria_attributes[k];
-//           console.log("  [props]: "+ attr.name + '=' + attr.value);
-//         }
-
-
          if (required_properties && required_properties.length) {
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
@@ -610,8 +602,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          var required_child_roles = de.role_info.requiredChildren;
 
          if (required_child_roles && required_child_roles.length) {
-
-//           console.log("[WIDGET 7]: " + de + " [reqOwned]: "+ required_child_roles.toString());
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 

@@ -593,8 +593,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var ce = control_elements[i];
        var de = ce.dom_element;
 
-//      console.debug("[CONTROL_10][element]: " + de.tag_name + " [role]: " + de.role + " [accname]: " + ce.computed_label + ' [needs_label]: ' + ce.needs_label);
-
        if (ce.needs_label) {
 
          var control_type = ce.toString();
@@ -670,7 +668,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       for (var j = 0; j < form_elements_len; j += 1) {
         var fe2 = form_elements[j];
 
-        console.log('[CONTROL11][checkButtons][' + i + '][' + j + ']: ' + fe1.cache_id + ' ' + fe2.cache_id + ' ' + (fe1.cache_id === fe2.cache_id));
         if (fe1.cache_id === fe2.cache_id) {
           continue;
         }
