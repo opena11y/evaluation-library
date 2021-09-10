@@ -9440,6 +9440,12 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
 
         if (control_info.form_element) {
           control_info.form_element.number_of_controls += 1;
+          if (ie.type === 'submit') {
+            control_info.form_element.submit_button = ie;
+          }
+          if (ie.type === 'reset') {
+            control_info.form_element.reset_button = ie;
+          }
         }
 
         if (control_info.grouping_element) {
@@ -9491,6 +9497,14 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
 
       if (control_info.form_element) {
         control_info.form_element.number_of_controls += 1;
+
+        if (be.type === 'submit') {
+          control_info.form_element.submit_button = be;
+        }
+        if (be.type === 'reset') {
+          control_info.form_element.reset_button = be;
+        }
+
       }
 
       if (control_info.grouping_element) {
@@ -10623,6 +10637,9 @@ OpenAjax.a11y.cache.FormElement = function (dom_element) {
   this.has_validity = false;
   this.has_pattern  = false;
   this.is_valid     = true;
+  this.submit_button = null;
+  this.reset_button  = null;
+
 
   this.control_type = OpenAjax.a11y.CONTROL_TYPE.FORM;
   this.number_of_controls = 0;
@@ -10648,6 +10665,9 @@ OpenAjax.a11y.cache.FormElement.prototype.addChildControl = function (child_cont
 
   if (child_control) {
    this.child_cache_elements.push(child_control);
+
+
+
   }
 };
 
@@ -12119,6 +12139,8 @@ OpenAjax.a11y.cache.ButtonElement = function (dom_element, control_info) {
   this.has_validity = false;
   this.has_pattern  = false;
   this.is_valid     = true;
+
+  this.type = node.type;
 
 };
 
@@ -42847,6 +42869,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @title@ attribute',
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
@@ -42858,10 +42884,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA Best Practices: Labels for Form Controls Overview',
-                url:   'https://html.cita.illinois.edu/nav/form/'
               }
             ]
         },
@@ -42911,13 +42933,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @title@ attribute',
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H36: Using alt attributes on images used as submit buttons',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H36'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA Best Practices: Labels for Form Controls Overview',
-                url:   'https://html.cita.illinois.edu/nav/form/'
               }
             ]
         },
@@ -42960,13 +42982,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @group@ role',
                 url:   'https://www.w3.org/TR/wai-aria/roles#group'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA: Example 7: Fieldset/Legend for providing a grouping label for radio buttons',
-                url:   'https://html.cita.illinois.edu/nav/form/radio/index.php?example=6'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist: HTML example 6',
@@ -43004,6 +43026,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @button@ elements',
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-BUTTON'
+              },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
               }
             ]
         },
@@ -43038,6 +43064,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: @id@ attribute',
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-id'
+              },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F77: Failure of Success Criterion 4.1.1 due to duplicate values of type ID',
@@ -43082,13 +43112,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @label@ element FOR attribute',
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-for'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA: Using @label@ Element for Labeling Form Controls',
-                url:   'https://html.cita.illinois.edu/nav/form/form-label-markup.php'
               }
             ]
         },
@@ -43122,6 +43152,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @label@ element @for@ attribute',
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-for'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using @label@ elements to associate text labels with form controls',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
@@ -43129,10 +43163,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA: Using @label@ element for Labeling Form Controls',
-                url:   'https://html.cita.illinois.edu/nav/form/form-label-markup.php'
               }
             ]
         },
@@ -43168,6 +43198,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: Adding structure to forms: the @fieldset@ and @legend@ elements',
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
@@ -43175,10 +43209,6 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA: Using @label@ element for Labeling Form Controls',
-                url:   'https://html.cita.illinois.edu/nav/form/form-label-markup.php'
               }
             ]
         },
@@ -43219,13 +43249,13 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: Adding structure to forms: the @fieldset@ and @legend@ elements',
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA: Using @label@ element for Labeling Form Controls',
-                url:   'https://html.cita.illinois.edu/nav/form/form-label-markup.php'
               }
             ]
         },
@@ -43282,6 +43312,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @title@ attribute',
                 url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
@@ -43293,30 +43327,25 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA Best Practices: Labels for Form Controls Overview',
-                url:   'https://html.cita.illinois.edu/nav/form/'
               }
             ]
         },
         CONTROL_11: {
             ID:         'Control 11',
-            DEFINITION: 'If there is more than one form on a page, each @input@ element of type @submit@ or @reset@ %s have a unique label, specified using its @value@ attribute.',
-            SUMMARY:    '@submit@ and @reset@ buttons %s be unique',
-            TARGET_RESOURCES_DESC: '@submit@ and @reset@ buttons',
+            DEFINITION: 'If there is more than one form on a page, each submit and reset button %s have a unique label.',
+            SUMMARY:    'Ssubmit and reset button labels %s be unique',
+            TARGET_RESOURCES_DESC: 'submit and reset buttons',
             RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Change the labeling of the @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
-              FAIL_P:   'Change the labeling of %N_F @submit@ or @reset@ buttons to uniquely identify the purpose of each on the page.',
-              HIDDEN_S: 'The @submit@ or @reset@ control element that is hidden was not evaluated.',
-              HIDDEN_P: 'The %N_H @submit@ and/or @reset@ control elements that are hidden were not evaluated.',
-              NOT_APPLICABLE: 'No forms or only one form on this page.'
+              FAIL_S:   'Change the labeling of the submit or reset button to uniquely identify which form on the page will be sumnitted or reset on the page.',
+              FAIL_P:   'Change the labeling of the %N_F submit or reset buttons to uniquely identify which form on the page will be sumnitted or reset on the page.',
+              HIDDEN_S: 'The submit or reset button that is hidden was not evaluated.',
+              HIDDEN_P: 'The %N_H submit and/or reset buttons that are hidden were not evaluated.',
+              NOT_APPLICABLE: 'No forms or only one form with submit or reset buttons on this page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1: 'Label is unique.',
-              ELEMENT_FAIL_1: 'Add label to %1 control.',
-              ELEMENT_FAIL_2: 'Change the @value@ attribute content, or use an ARIA technique to make the @submit@ or @reset@ labels unique on the page.',
-              ELEMENT_HIDDEN_1: '%1 control element was not evaluated because it is hidden from assistive technologies.'
+              ELEMENT_FAIL_1: 'Change the text content of the @button@ element to create a unique label, or use @aria-label@ or @aria-labelledby@ to make the @%1@ button accessible names unique on the page.',
+              ELEMENT_FAIL_2: 'Change the @value@ attribute of the @input@ element to create a unique label, or use @aria-label@ or @aria-labelledby@ to make the @%1@ button accessible names unique on the page.',
+              ELEMENT_HIDDEN_1: '@%1@ button was not evaluated because it is hidden from assistive technologies.'
             },
             PURPOSE: [
               'Labels that are unique make it possible for people to understand the different purposes of form controls on the same page.',
@@ -43334,22 +43363,14 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML 4.01 Specification: The @form@ element',
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FORM'
               },
+              {type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+                url: 'https://www.w3.org/WAI/tutorials/forms/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
               },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-                title: 'iCITA Best Practices: Labels for Form Controls Overview',
-                url:   'https://html.cita.illinois.edu/nav/form/'
-              }
             ]
         }    }
 });
@@ -44024,8 +44045,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Unique Title',
-          url:   'https://html.cita.illinois.edu/nav/title/'
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -44073,6 +44094,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
           url:   'https://www.w3.org/TR/wai-aria/#banner'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'W3C Web Accessibility Tutorials: Page Structure',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
       ]
     },
@@ -44114,12 +44139,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Unique Title',
-          url:   'https://html.cita.illinois.edu/nav/title/'
-        },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Sub Headings',
-          url:   'https://html.cita.illinois.edu/nav/heading/'
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -44168,12 +44189,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Unique Title',
-          url:   'https://html.cita.illinois.edu/nav/title/'
-        },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Sub Headings',
-          url:   'https://html.cita.illinois.edu/nav/heading/'
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -44211,6 +44228,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'C22: Using CSS to control visual presentation of text',
           url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -44244,7 +44265,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       ],
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: landmark roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
           url:   'https://www.w3.org/TR/wai-aria/#landmark'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
@@ -44295,6 +44316,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
                 url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }
             ]
         }
@@ -44714,6 +44739,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -44778,6 +44815,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -44845,6 +44894,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H97: Grouping related links using the nav element',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H97.html'
               },
@@ -44904,6 +44965,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning content',
@@ -44976,6 +45049,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -45040,6 +45125,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning content',
                 url:   'https://www.w3.org/TR/html5/dom.html#sectioning-content-0'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning root',
@@ -45110,6 +45207,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -45168,6 +45277,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The HEADER element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-header-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -45232,6 +45353,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML5: Sections',
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
                 url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
@@ -45282,6 +45415,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The NAV element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
               }
             ]
         },
@@ -45329,6 +45474,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The MAIN element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-main-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -45380,6 +45537,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -45439,6 +45608,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
                 url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }
             ]
         },
@@ -45485,6 +45666,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: search role',
                 url:   'https://www.w3.org/TR/wai-aria/#search'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -45547,6 +45740,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/wai-aria/#form'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -45605,6 +45810,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The SECTION element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-section-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -45669,6 +45886,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -45737,6 +45966,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -45797,6 +46038,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The ASIDE element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-aside-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -51965,16 +52218,68 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['input[type="submit"]', 'input[type="reset"]'],
+  target_resources    : ['input[type="submit"]', 'input[type="reset"]','button[type="submit"]', 'button[type="reset"]'],
   primary_property    : 'computed_label',
   resource_properties : ['value'],
   language_dependency : "",
-  validate            : function (/* dom_cache, rule_result */) {
+  validate            : function (dom_cache, rule_result) {
 
-/* This rule needs to be completed
-   function get_input_by_type(list, form, type) {
+    function checkButtons(fe1) {
 
-   }
+      var flag1 = false;
+      var flag2 = false;
+
+      var sb1 = fe1.submit_button ? fe1.submit_button : null;
+      var rb1 = fe1.reset_button ? fe1.reset_button : null;
+
+      for (var j = 0; j < form_elements_len; j += 1) {
+        var fe2 = form_elements[j];
+
+        console.log('[CONTROL11][checkButtons][' + i + '][' + j + ']: ' + fe1.cache_id + ' ' + fe2.cache_id + ' ' + (fe1.cache_id === fe2.cache_id));
+        if (fe1.cache_id === fe2.cache_id) {
+          continue;
+        }
+
+        var sb2 = fe2.submit_button ? fe2.submit_button : null;
+        var rb2 = fe2.reset_button  ? fe2.reset_button : null;
+
+        if (!flag1 && sb1 && sb2 && (sb1.computed_label_for_comparison === sb2.computed_label_for_comparison)) {
+
+          if (sb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (sb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (sb1.dom_element.tag_name === 'button') {
+                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_1', ['submit']);
+              } else {
+                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_2', ['submit']);
+              }
+            } else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, sb1, 'ELEMENT_HIDDEN_1', ['submit']);
+            }
+            flag1 = true;
+          }
+        }
+
+        if (!flag2 && rb1 && rb2 && (rb1.computed_label_for_comparison === rb2.computed_label_for_comparison)) {
+
+          if (rb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (rb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (rb1.dom_element.tag_name === 'button') {
+                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_1', ['reset']);
+              } else {
+                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_2', ['reset']);
+              }
+            } else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, rb1, 'ELEMENT_HIDDEN_1', ['reset']);
+            }
+            flag2 = true;
+          }
+        }
+
+        if (flag1 && flag2) {
+          return;
+        }
+      } // end loop
+    }
 
    var TEST_RESULT  = OpenAjax.a11y.TEST_RESULT;
    var VISIBILITY   = OpenAjax.a11y.VISIBILITY;
@@ -51990,28 +52295,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
    // Check to see if valid cache reference
    if (form_elements && form_elements_len) {
 
-     // collect all the visible submit and reset buttons controls
-     for (var i = 0; i < form_elements_len; i++) {
+     for (var i = 0; i < form_elements_len; i += 1) {
        var fe = form_elements[i];
-       var de = fe.dom_element;
-       var cs = de.computed_style;
-
-       var control_type = fe.control_type;
-
-       if (control_type === OpenAjax.a11y.CONTROL_TYPE.FORM) {
-
-         if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-           get_input_by_type(input_submit_info, fe, 'submit');
-           get_input_by_type(input_reset_info, fe, 'reset');
-
-         }
-       }
+       checkButtons(fe);
      } // end loop
    }
-*/
   } // end validate function
-
 }
 ]);
 
@@ -60039,6 +60328,10 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        required : true,
        enabled  : true
      },
+   CONTROL_11 : {
+       required : true,
+       enabled  : true
+     },
    ERROR_1 : {
        required : true,
        enabled  : true
@@ -60652,6 +60945,10 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        required : true,
        enabled  : true
      },
+   CONTROL_11 : {
+       required : true,
+       enabled  : true
+     },
    ERROR_1 : {
        required : true,
        enabled  : true
@@ -61216,6 +61513,10 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       CONTROL_10 : {
         required : true,
         enabled  : true
+      },
+      CONTROL_11 : {
+       required : true,
+       enabled  : true
       },
       ERROR_1 : {
         required : true,

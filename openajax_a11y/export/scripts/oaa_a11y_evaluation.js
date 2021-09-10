@@ -9423,6 +9423,12 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
 
         if (control_info.form_element) {
           control_info.form_element.number_of_controls += 1;
+          if (ie.type === 'submit') {
+            control_info.form_element.submit_button = ie;
+          }
+          if (ie.type === 'reset') {
+            control_info.form_element.reset_button = ie;
+          }
         }
 
         if (control_info.grouping_element) {
@@ -9474,6 +9480,14 @@ OpenAjax.a11y.cache.ControlsCache.prototype.updateCacheItems = function (dom_ele
 
       if (control_info.form_element) {
         control_info.form_element.number_of_controls += 1;
+
+        if (be.type === 'submit') {
+          control_info.form_element.submit_button = be;
+        }
+        if (be.type === 'reset') {
+          control_info.form_element.reset_button = be;
+        }
+
       }
 
       if (control_info.grouping_element) {
@@ -10606,6 +10620,9 @@ OpenAjax.a11y.cache.FormElement = function (dom_element) {
   this.has_validity = false;
   this.has_pattern  = false;
   this.is_valid     = true;
+  this.submit_button = null;
+  this.reset_button  = null;
+
 
   this.control_type = OpenAjax.a11y.CONTROL_TYPE.FORM;
   this.number_of_controls = 0;
@@ -10631,6 +10648,9 @@ OpenAjax.a11y.cache.FormElement.prototype.addChildControl = function (child_cont
 
   if (child_control) {
    this.child_cache_elements.push(child_control);
+
+
+
   }
 };
 
@@ -12102,6 +12122,8 @@ OpenAjax.a11y.cache.ButtonElement = function (dom_element, control_info) {
   this.has_validity = false;
   this.has_pattern  = false;
   this.is_valid     = true;
+
+  this.type = node.type;
 
 };
 

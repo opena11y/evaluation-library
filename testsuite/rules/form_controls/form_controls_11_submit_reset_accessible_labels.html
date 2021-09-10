@@ -12,80 +12,85 @@
       
       <h1>Form control test 11, unique labels for the submit button</h1>
       
-      <h2>Group 1: 2 Forms with submit buttons with the same value element</h2>
+      <h2>Group 1: Forms with submit buttons with the same and different value element</h2>
         <form>
-          <textarea>textarea 11</textarea>
-          <textarea>textarea 12</textarea>
-          <submit val="group_1_same" class="CONTROL_11_FAIL">Submit 11</submit>
+          <label>Text 11<input type="text"></label>
+          <label>Text 12<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Same" class="CONTROL_11_FAIL">
+          <input type="reset" value="Reset 1 Input Same" class="CONTROL_11_FAIL">
         </form>
         <form>
-          <textarea>textarea 13</textarea>
-          <textarea>textarea 14</textarea>
-          <submit val="group_1_same" class="CONTROL_11_FAIL">Submit 12</submit>
-        </form>
-      
-      <h2>Group 2: 2 Forms with reset buttons with the same value element</h2>
-        <form>
-          <input type="password">input 21</input>
-          <input type="password">input 22</input>
-          <reset val="group_2_same" class="CONTROL_11_FAIL">reset 21</reset>
+          <label>Text 15<input type="text"></label>
+          <label>Text 16<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Different A" >
+          <input type="reset" value="Reset 1 Input Different A" >
         </form>
         <form>
-          <button>textarea 23</button>
-          <button>textarea 24</button>
-          <reset val="group_2_same" class="CONTROL_11_FAIL">reset 22</reset>
-        </form>
-      
-      <h2>Group 3: 2 Forms one with a reset button, and one with a submit button</h2>
-        <form>
-          <input type="password">input 31</input>
-          <input type="password">input 32</input>
-          <reset val="group_3_same" class="CONTROL_11_FAIL">reset 31</reset>
+          <label>Text 17<input type="text"></label>
+          <label>Text 18<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Different B">
+          <input type="reset" value="Reset 1 Input Different B">
         </form>
         <form>
-          <legend>radio</legend>
-          <radio>radio 33</radio>
-          <radio>radio 34</radio>
-          <submit val="group_3_same" class="CONTROL_11_FAIL">Submit 31</submit>
+          <label>Text 13<input type="text"></label>
+          <label>Text 14<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Same" class="CONTROL_11_FAIL">
+          <input type="reset" value="Reset 1 Input Same" class="CONTROL_11_FAIL">
         </form>
-      
-      <h2>Group 4: 1 Form with a reset and a submit button with matching values</h2>
+
+      <h2>Group 2: Forms with submit buttons with the same and different value element</h2>
         <form>
-          <input type="password">input 41</input>
-          <input type="password">input 42</input>
-          <reset val="group_4_same" class="CONTROL_11_FAIL">reset 41</reset>
-          <submit val="group_4_same" class="CONTROL_11_FAIL">Submit 41</submit>
-        </form>
-      
-      <h2>Group 5: 1 Form with a reset and a submit button with different values</h2>
-        <form>
-          <input type="text">input 51</input>
-          <input type="text">input 52</input>
-          <reset val="group_5_unique_a" class="CONTROL_11_PASS">reset 51</reset>
-          <submit val="group_5_unique_b" class="CONTROL_11_PASS">Submit 51</reset>
-        </form>
-      
-      <h2>Group 6: 2 Forms, each with a reset and submit button. Form 1 reset matches form 2 submit </h2>
-        <form>
-          <input type="text">input 61</input>
-          <input type="text">input 62</input>
-          <reset val="group_7_same" class="CONTROL_11_PASS">reset 61</reset>
-          <submit val="group_7_unique_a" class="CONTROL_11_FAIL">Submit 61</submit>
+          <label>Text 21<input type="text"></label>
+          <label>Text 22<input type="text"></label>
+          <button type="submit" class="CONTROL_11_FAIL">Submit 2 Button Same</button>
+          <button type="reset" class="CONTROL_11_FAIL">Reset 2 Button Same</button>
         </form>
         <form>
-          <legend>radio</legend>
-          <radio>radio 61</radio>
-          <radio>radio 62</radio>
-          <reset val="group_7_unique_b" class="CONTROL_11_PASS">reset 62</reset>
-          <submit val="group_7_same" class="CONTROL_11_FAIL">Submit 62</submit>
+          <label>Text 25<input type="text"></label>
+          <label>Text 26<input type="text"></label>
+          <button type="submit" class="CONTROL_11_FAIL">Submit 2 Button Same</button>
+          <button type="reset" class="CONTROL_11_FAIL">Reset 2 Button Same</button>
+        </form>
+        <form>
+          <label>Text 27<input type="text"></label>
+          <label>Text 28<input type="text"></label>
+          <button type="submit">Submit 2 Button Different A</button>
+          <button type="reset" >Reset 2 Button Different A</button>
+        </form>
+        <form>
+          <label>Text 23<input type="text"></label>
+          <label>Text 24<input type="text"></label>
+          <button type="submit" >Submit 2 Button Different B</button>
+          <button type="reset" >Reset 2 Button Different B</button>
         </form>
       
-      <h2>Group 7: Hidden Elements</h2>
+
+      <h2>Group 3: Hidden Elements</h2>
+        <form hidden>
+          <label>Name 31<input type="text"></label>
+          <label>Name 32<input type="text"></label>
+          <input type="submit" value="Submit 31">
+          <input type="reset" value="Reset 31">
+        </form>
+
+        <form hidden>
+          <label>Name 33<input type="text"></label>
+          <label>Name 34<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Different A" class="CONTROL_11_HIDDEN">
+          <input type="reset" value="Reset 1 Input Different A" class="CONTROL_11_HIDDEN">
+        </form>
+
+        <form hidden>
+          <label>Name 35<input type="text"></label>
+          <label>Name 36<input type="text"></label>
+          <button type="submit" class="CONTROL_11_HIDDEN">Submit 2 Button Different A</button>
+          <button type="reset" class="CONTROL_11_HIDDEN">Reset 2 Button Different A</button>
+        </form>
+
+      <h2>Group 4: No Submit or Reset</h2>
         <form>
-          <input type="text">input 51</input>
-          <input type="text">input 52</input>
-          <reset val="group_5_unique_a" hidden class="CONTROL_11_HIDDEN">reset 51</reset>
-          <submit val="group_5_unique_b" style="visibility: hidden" class="CONTROL_11_HIDDEN">Submit 51</reset>
+          <label>Name 41<input type="text"></label>
+          <label>Name 42<input type="text"></label>
         </form>
       
     </div>

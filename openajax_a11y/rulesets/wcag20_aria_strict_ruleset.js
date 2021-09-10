@@ -110,6 +110,10 @@
         required : true,
         enabled  : true
       },
+      CONTROL_11 : {
+       required : true,
+       enabled  : true
+      },
       ERROR_1 : {
         required : true,
         enabled  : true

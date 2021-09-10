@@ -74,6 +74,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-main-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -138,6 +150,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -205,6 +229,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H97: Grouping related links using the nav element',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/H97.html'
               },
@@ -264,6 +300,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning content',
@@ -336,6 +384,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -400,6 +460,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning content',
                 url:   'https://www.w3.org/TR/html5/dom.html#sectioning-content-0'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sectioning root',
@@ -470,6 +542,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -528,6 +612,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The HEADER element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-header-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -592,6 +688,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 title: 'HTML5: Sections',
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
                 url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
@@ -642,6 +750,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The NAV element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-nav-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
               }
             ]
         },
@@ -689,6 +809,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The MAIN element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-main-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -740,6 +872,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The FOOTER element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -799,6 +943,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
                 url:   'https://www.w3.org/TR/wai-aria/#landmark_roles'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }
             ]
         },
@@ -845,6 +1001,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: search role',
                 url:   'https://www.w3.org/TR/wai-aria/#search'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -907,6 +1075,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/wai-aria/#form'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -965,6 +1145,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The SECTION element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-section-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -1029,6 +1221,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: Sections',
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -1097,6 +1301,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/sections.html#sections'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
                 url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
               },
@@ -1157,6 +1373,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The ASIDE element',
                 url:   'https://www.w3.org/TR/html5/sections.html#the-aside-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
+                url:   'https://w3c.github.io/aria-practices/#aria_landmark'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
+                url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',

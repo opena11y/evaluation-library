@@ -71,8 +71,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Unique Title',
-          url:   'https://html.cita.illinois.edu/nav/title/'
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -120,6 +120,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
           url:   'https://www.w3.org/TR/wai-aria/#banner'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'W3C Web Accessibility Tutorials: Page Structure',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
       ]
     },
@@ -161,12 +165,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Unique Title',
-          url:   'https://html.cita.illinois.edu/nav/title/'
-        },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Sub Headings',
-          url:   'https://html.cita.illinois.edu/nav/heading/'
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -215,12 +215,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Unique Title',
-          url:   'https://html.cita.illinois.edu/nav/title/'
-        },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
-          title: 'iCITA Best Practices: Sub Headings',
-          url:   'https://html.cita.illinois.edu/nav/heading/'
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -258,6 +254,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'C22: Using CSS to control visual presentation of text',
           url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'W3C Web Accessibility Tutorials: Headings',
+          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
       ]
     },
@@ -291,7 +291,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       ],
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: landmark roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
           url:   'https://www.w3.org/TR/wai-aria/#landmark'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
@@ -342,6 +342,10 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
                 url:   'https://www.w3.org/TR/wai-aria/#contentinfo'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'W3C Web Accessibility Tutorials: Page Structure',
+                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }
             ]
         }
