@@ -537,7 +537,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         CONTROL_11: {
             ID:         'Control 11',
             DEFINITION: 'If there is more than one form on a page, each submit and reset button %s have a unique label.',
-            SUMMARY:    'Ssubmit and reset button labels %s be unique',
+            SUMMARY:    'Submit and reset button labels %s be unique',
             TARGET_RESOURCES_DESC: 'submit and reset buttons',
             RULE_RESULT_MESSAGES: {
               FAIL_S:   'Change the labeling of the submit or reset button to uniquely identify which form on the page will be sumnitted or reset on the page.',
