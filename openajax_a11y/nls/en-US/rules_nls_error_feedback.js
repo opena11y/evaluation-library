@@ -69,8 +69,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: aria-invalid',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-invalid'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-invalid'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
@@ -124,8 +124,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/forms.html#attr-input-required'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: aria-required',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-required'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA2: Identifying a required field with the aria-required property',
@@ -162,8 +162,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: aria-required',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-required'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
               }
             ]
         },
@@ -202,8 +202,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: aria-invalid',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-invalid'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-invalid'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',

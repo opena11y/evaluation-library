@@ -284,12 +284,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: Checkbox Role',
-                url:   'https://www.w3.org/TR/wai-aria/#checkbox'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Checkbox Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#checkbox'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: Radio Role',
-                url:   'https://www.w3.org/TR/wai-aria/#radio'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Radio Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#radio'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H32: Providing submit buttons',

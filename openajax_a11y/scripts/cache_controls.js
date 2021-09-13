@@ -3140,7 +3140,7 @@ OpenAjax.a11y.cache.InputElement.prototype.toString = function () {
  *
  * @property  {String}     computed_label                  - Calculated label for the button element
  * @property  {Number}     computed_label_length           - Length of the label property
- * @property  {String}     computed_ label_for_comparison  - Label for comparison (lowercase, space normalization and trimmed)
+ * @property  {String}     computed_label_for_comparison  - Label for comparison (lowercase, space normalization and trimmed)
  *
  * @property  {String}     readonly              - The value of the readonly attribute
  * @property  {String}     disabled              - The value of the disabled attribute

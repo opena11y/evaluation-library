@@ -191,7 +191,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: flowto property',
-                url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-flowto'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-flowto'
               }
             ]
         }

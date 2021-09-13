@@ -63,12 +63,12 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria/#aria-label'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria/#aria-labelledby'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @title@ attribute',
@@ -261,7 +261,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         INFORMATIONAL_LINKS: [
           { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmarks',
-            url:   'https://www.w3.org/TR/wai-aria/#landmark'
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
@@ -349,7 +349,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0 The LINK role',
-          url:   'https://www.w3.org/TR/wai-aria/#link'
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#link'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',

@@ -91,24 +91,24 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dd-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; group role',
-                url:   'https://www.w3.org/TR/wai-aria/#group'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; list role',
-                url:   'https://www.w3.org/TR/wai-aria/#list'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#list'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; listitem role',
-                url:   'https://www.w3.org/TR/wai-aria/#listitem'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: listitem role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#listitem'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; aria-posinset',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-posinset'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-posinset',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-posinset'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; aria-setsize',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-setsize'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-setsize',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-setsize'
               }
             ]
         },
@@ -153,20 +153,20 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; group role',
-                url:   'https://www.w3.org/TR/wai-aria/#group'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0; list role',
-                url:   'https://www.w3.org/TR/wai-aria/#list'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#list'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @title@ attribute',

@@ -78,7 +78,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -125,7 +133,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -172,7 +188,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -196,14 +220,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                             ],
             MANUAL_CHECKS:  [ 'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.'
                             ],
-            INFORMATIONAL_LINKS: [{ type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                               title: 'WCAG 2.0 Success Criterion 1.4.2 Audio Control',
-                               url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-dis-audio'
-                             },
-                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
-                               title: 'How to meet Success Criterion 1.4.2 Audio Control',
-                               url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-dis-audio'
-                             }
+            INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'WCAG 2.0 Success Criterion 1.4.2 Audio Control',
+                url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-dis-audio'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+                title: 'How to meet Success Criterion 1.4.2 Audio Control',
+                url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-dis-audio'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
+              }
                             ]
         }
     }
