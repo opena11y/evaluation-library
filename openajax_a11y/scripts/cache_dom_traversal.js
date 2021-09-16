@@ -444,15 +444,20 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
       if (dom_element.tag_name === 'frame') this.frame_count += 1;
       else this.iframe_count += 1;
 
-      var frame_doc = node.contentWindow.document;
+//      OpenAjax.a11y.logger.debug("[updateDOMElements]iframe][found]");
 
-//      OpenAjax.a11y.logger.debug("frame: " + node.src + " " + frame_doc);
+      try {
+        var frame_doc = node.contentWindow.document;
 
-      if (frame_doc && frame_doc.firstChild) {
-        for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
-          this.updateDOMElements( n, dom_element, null);
-        } // end loop
+        if (frame_doc && frame_doc.firstChild) {
+          for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
+            this.updateDOMElements( n, dom_element, null);
+          } // end loop
+        }
+      } catch (e) {
+//        OpenAjax.a11y.logger.debug("[updateDOMElements][iframe][error]: " + e);
       }
+
       break;
 
     default:

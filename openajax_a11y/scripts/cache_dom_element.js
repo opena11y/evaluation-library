@@ -1034,7 +1034,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     }   // end addAriaAttribute function
 
-
     var property_info = OpenAjax.a11y.aria.propertyDataTypes[name];
 
     var av = {};
@@ -1106,10 +1105,14 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.id             = node.id;
   this.name           = "";
 
+//  OpenAjax.a11y.logger.debug("[DOMElement][tag_name]: " + this.tag_name);
+
   this.owned_by = [];
   this.widget_element = null;
 
   this.element_aria_info = OpenAjax.a11y.ariaInHTML.getElementAriaInfo(node);
+
+//  OpenAjax.a11y.logger.debug("[DOMElement][element_aria_info]: " + this.element_aria_info);
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -1464,9 +1467,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     } // end switch
-  } // end loop0
+  } // end loop
 
-//  OpenAjax.a11y.logger.debug("[DOMElement][Constructor] tag: " + this.tag_name + " tabindex: " + this.tab_index + " has tabindex: " + this.has_tabindex);
 
   this.aria_attributes          = aria_attributes;
   this.other_attributes         = other_attributes;
@@ -1498,6 +1500,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.rules_warnings                  = [];
   this.rules_passed                    = [];
   this.rules_hidden                    = [];
+
+//  OpenAjax.a11y.logger.debug("[DOMElement][done]");
 
   return this;
 

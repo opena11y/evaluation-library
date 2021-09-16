@@ -15937,7 +15937,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     }   // end addAriaAttribute function
 
-
     var property_info = OpenAjax.a11y.aria.propertyDataTypes[name];
 
     var av = {};
@@ -16009,10 +16008,14 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.id             = node.id;
   this.name           = "";
 
+//  OpenAjax.a11y.logger.debug("[DOMElement][tag_name]: " + this.tag_name);
+
   this.owned_by = [];
   this.widget_element = null;
 
   this.element_aria_info = OpenAjax.a11y.ariaInHTML.getElementAriaInfo(node);
+
+//  OpenAjax.a11y.logger.debug("[DOMElement][element_aria_info]: " + this.element_aria_info);
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -16367,9 +16370,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     } // end switch
-  } // end loop0
+  } // end loop
 
-//  OpenAjax.a11y.logger.debug("[DOMElement][Constructor] tag: " + this.tag_name + " tabindex: " + this.tab_index + " has tabindex: " + this.has_tabindex);
 
   this.aria_attributes          = aria_attributes;
   this.other_attributes         = other_attributes;
@@ -16401,6 +16403,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.rules_warnings                  = [];
   this.rules_passed                    = [];
   this.rules_hidden                    = [];
+
+//  OpenAjax.a11y.logger.debug("[DOMElement][done]");
 
   return this;
 
@@ -19096,15 +19100,20 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
       if (dom_element.tag_name === 'frame') this.frame_count += 1;
       else this.iframe_count += 1;
 
-      var frame_doc = node.contentWindow.document;
+//      OpenAjax.a11y.logger.debug("[updateDOMElements]iframe][found]");
 
-//      OpenAjax.a11y.logger.debug("frame: " + node.src + " " + frame_doc);
+      try {
+        var frame_doc = node.contentWindow.document;
 
-      if (frame_doc && frame_doc.firstChild) {
-        for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
-          this.updateDOMElements( n, dom_element, null);
-        } // end loop
+        if (frame_doc && frame_doc.firstChild) {
+          for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
+            this.updateDOMElements( n, dom_element, null);
+          } // end loop
+        }
+      } catch (e) {
+//        OpenAjax.a11y.logger.debug("[updateDOMElements][iframe][error]: " + e);
       }
+
       break;
 
     default:
@@ -33215,7 +33224,7 @@ OpenAjax.a11y.EvaluationResult.prototype.getRuleResultsByGuideline = function (g
      var rr = this.rule_results[i];
      var r = rr.getRule();
 
-     OpenAjax.a11y.logger.debug("[EvaluationResult][getRuleResultsByGuideline] Compare: " + r.getGuideline() + " " + guideline_id + " " + (r.getGuideline() & guideline_id));
+//     OpenAjax.a11y.logger.debug("[EvaluationResult][getRuleResultsByGuideline] Compare: " + r.getGuideline() + " " + guideline_id + " " + (r.getGuideline() & guideline_id));
 
      if ((r.getGuideline() & guideline_id)&&
          (r.getGroup()     & group_filter)) {
@@ -38867,18 +38876,11 @@ OpenAjax.a11y.RuleManager = function () {
 
         var rule_item;
 
-        OpenAjax.a11y.logger.info("[RuleManager] Loading Rules");
+//        OpenAjax.a11y.logger.info("[RuleManager] Loading Rules");
 
         for (var i = 0; i < rule_array.length; i++) {
 
           rule_item = rule_array[i];
-
-      //    OpenAjax.a11y.logger.debug("[RuleManager] Rule: " + rule_item.rule_id);
-      //    OpenAjax.a11y.logger.debug("  last update: " + rule_item.last_updated);
-      //    OpenAjax.a11y.logger.debug("   properties: " + typeof rule_item.resource_properties);
-      //    OpenAjax.a11y.logger.debug("     language: " + rule_item.language_dependency);
-      //    OpenAjax.a11y.logger.debug("     validate: " + typeof rule_item.validate);
-
           this.addRule(rule_item);
 
         }
@@ -39914,11 +39916,10 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         url   = doc_1;
       }
 
-     // OpenAjax.a11y.logger.debug("Starting evaluation: " + this.ruleset_id + " " + this.default_name + " " + this.number_of_rules + " rules" );
-
       var dom_cache = new OpenAjax.a11y.cache.DOMCache(url, title, doc);
 
       dom_cache.updateDOMElementCache();
+
       dom_cache.updateAllCaches();
 
       var evaluation_result = new OpenAjax.a11y.EvaluationResult(doc, title, url, ruleset, dom_cache);
@@ -50197,22 +50198,22 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         WIDGET_16: {
             ID:                    'Widget 16',
-            DEFINITION:            'Web compnent %s be manually checked for accessibility requirements.',
-            SUMMARY:               'Web component manual check.',
-            TARGET_RESOURCES_DESC: 'Custom web components.',
+            DEFINITION:            'Custom element using web components API %s be manually checked for accessibility requirements.',
+            SUMMARY:               'Custom element manual check.',
+            TARGET_RESOURCES_DESC: 'Custom elements.',
             RULE_RESULT_MESSAGES: {
-              MANUAL_CHECK_S:  'Verify the web component meets WCAG accessibility requirments.',
-              MANUAL_CHECK_P:  'Verify the %N_MC web components meet WCAG accessibility requirments.',
-              NOT_APPLICABLE:  'No web components found on the page.'
+              MANUAL_CHECK_S:  'Verify the custom element meets WCAG accessibility requirments.',
+              MANUAL_CHECK_P:  'Verify the %N_MC custom elementsmeet WCAG accessibility requirments.',
+              NOT_APPLICABLE:  'No custom elements found on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_MC_1:       'Verify the @aria-live@ attribute value of @%1@ is appropriate for the type of informational change that can occur in the region.',
-              ELEMENT_HIDDEN_1:  'The @%1@ attribute on the @%2[role="%3"]@ element was not tested because it is hidden from assistive technologies.',
+              ELEMENT_MC_1:       'Verify the features of the custom component with the tag name of @%1@ is accessible using manual checking techniques or automated tools that can anlyze the shaodw DOM of custom elements.',
+              ELEMENT_HIDDEN_1:  'The @%1@ custom element is hidden from assistive technologies.',
             },
             PURPOSE: [
-              'Web compnent technology is used to create user interface components by packaging HTML, CSS and Javascript in a single loadable file using a DOM template.',
-              'Web compnents cannot be analyzed by the evaluation library because they have their own isolated "shadow" DOM that cannot be accessed by the library.',
-              'The evaluation library does report the presence of web components for manually checking the component for accessibility or use other DOM inspection tools to identify accessibility issues and features.'
+              'Custom elements using the web compnents API technology is used to create user interface components by packaging HTML, CSS and Javascript in a single loadable file using a DOM template.',
+              'Custom elements cannot be analyzed by the evaluation library because they have their own isolated "shadow" DOM that cannot be accessed by the library.',
+              'The evaluation library does report the presence of custom elements for manually checking the component for accessibility or use other DOM inspection tools to identify accessibility issues and features.'
             ],
             TECHNIQUES: [
               'Using the keyboard to test keyboard navigation and operation requirements.',

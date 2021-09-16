@@ -337,7 +337,7 @@ tar cvzf tar/oaa_report_all.tar.gz reports/*.js reports/*.inc reports/*.css
 md5 tar/oaa_report_all.tar.gz > md5/oaa_report_all.tar.gz.md5
 cd ..
 
-cp export/scripts/*.js ../../firefox-ainspector-wcag/scripts/
+cp export/scripts/*.js ~/aitg/firefox-ainspector-wcag/scripts/
 
 echo
 if [ $exit_on_error == 1 ]

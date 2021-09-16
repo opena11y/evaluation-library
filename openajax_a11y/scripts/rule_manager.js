@@ -1120,18 +1120,11 @@ OpenAjax.a11y.RuleManager = function () {
 
         var rule_item;
 
-        OpenAjax.a11y.logger.info("[RuleManager] Loading Rules");
+//        OpenAjax.a11y.logger.info("[RuleManager] Loading Rules");
 
         for (var i = 0; i < rule_array.length; i++) {
 
           rule_item = rule_array[i];
-
-      //    OpenAjax.a11y.logger.debug("[RuleManager] Rule: " + rule_item.rule_id);
-      //    OpenAjax.a11y.logger.debug("  last update: " + rule_item.last_updated);
-      //    OpenAjax.a11y.logger.debug("   properties: " + typeof rule_item.resource_properties);
-      //    OpenAjax.a11y.logger.debug("     language: " + rule_item.language_dependency);
-      //    OpenAjax.a11y.logger.debug("     validate: " + typeof rule_item.validate);
-
           this.addRule(rule_item);
 
         }

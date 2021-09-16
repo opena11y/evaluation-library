@@ -211,11 +211,10 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         url   = doc_1;
       }
 
-     // OpenAjax.a11y.logger.debug("Starting evaluation: " + this.ruleset_id + " " + this.default_name + " " + this.number_of_rules + " rules" );
-
       var dom_cache = new OpenAjax.a11y.cache.DOMCache(url, title, doc);
 
       dom_cache.updateDOMElementCache();
+
       dom_cache.updateAllCaches();
 
       var evaluation_result = new OpenAjax.a11y.EvaluationResult(doc, title, url, ruleset, dom_cache);

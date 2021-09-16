@@ -276,7 +276,7 @@ OpenAjax.a11y.EvaluationResult.prototype.getRuleResultsByGuideline = function (g
      var rr = this.rule_results[i];
      var r = rr.getRule();
 
-     OpenAjax.a11y.logger.debug("[EvaluationResult][getRuleResultsByGuideline] Compare: " + r.getGuideline() + " " + guideline_id + " " + (r.getGuideline() & guideline_id));
+//     OpenAjax.a11y.logger.debug("[EvaluationResult][getRuleResultsByGuideline] Compare: " + r.getGuideline() + " " + guideline_id + " " + (r.getGuideline() & guideline_id));
 
      if ((r.getGuideline() & guideline_id)&&
          (r.getGroup()     & group_filter)) {
