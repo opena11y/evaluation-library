@@ -30,6 +30,16 @@ function check_status_code() {
   fi
 }
 
+function copy_scripts() {
+  echo ""
+  if [ -d "$1" ]; then
+    cp export/scripts/*.js $1
+    echo "Copying scripts to '$1' directory"
+  else
+    echo "ERROR: The '$1' directory does not exist"
+  fi
+}
+
 # ESLINT function: A wrapper for calls to JavaScript Lint that allows
 # additional processing based on the status code of each call. In this
 # script, the function is only called when the environment variable
@@ -283,6 +293,15 @@ rulesets/test_ruleset.js \
 rulesets/wcag20_aria_transitional_ruleset.js \
 rulesets/wcag20_aria_strict_ruleset.js > export/scripts/oaa_a11y_rulesets.js
 
+
+cat \
+export/scripts/oaa_a11y_evaluation.js \
+export/scripts/oaa_a11y_rules.js \
+export/scripts/oaa_a11y_rulesets.js \
+gen_populate_json.js > export/populate/generate-json.js
+
+node export/populate/generate-json.js
+
 if [ -n "$ESLINT" ]; then
   echo "---------------------------- ESLINT ----------------------------"
   ESLINT export/scripts/oaa_a11y_rulesets.js
@@ -337,7 +356,19 @@ tar cvzf tar/oaa_report_all.tar.gz reports/*.js reports/*.inc reports/*.css
 md5 tar/oaa_report_all.tar.gz > md5/oaa_report_all.tar.gz.md5
 cd ..
 
-cp export/scripts/*.js ~/aitg/firefox-ainspector-wcag/scripts/
+if [ -n "$AI_DIR" ]; then
+  copy_scripts "$AI_DIR/scripts/"
+fi
+
+if [ -n "$FAE_DIR" ]; then
+  copy_scripts "$FAE_DIR/fae2/fae-util/openajax_a11y/"
+  cp export/populate/oaa_exported_rules.json "$FAE_DIR/fae2/populate/"
+fi
+
+if [ -n "$AUDITOR_DIR" ]; then
+  copy_scripts "$AUDITOR_DIR/faeAuditor/fae-util/openajax_a11y/"
+  cp export/populate/oaa_exported_rules.json "$AUDITOR_DIR/faeAuditor/populate/"
+fi
 
 echo
 if [ $exit_on_error == 1 ]

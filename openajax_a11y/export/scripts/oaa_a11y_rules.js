@@ -8460,16 +8460,18 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         WIDGET_16: {
             ID:                    'Widget 16',
-            DEFINITION:            'Custom element using web components API %s be manually checked for accessibility requirements.',
+            DEFINITION:            'Custom elements using web components API %s be manually checked for accessibility requirements.',
             SUMMARY:               'Custom element manual check.',
-            TARGET_RESOURCES_DESC: 'Custom elements.',
+            TARGET_RESOURCES_DESC: 'Custom elements using web components API.',
             RULE_RESULT_MESSAGES: {
               MANUAL_CHECK_S:  'Verify the custom element meets WCAG accessibility requirments.',
-              MANUAL_CHECK_P:  'Verify the %N_MC custom elementsmeet WCAG accessibility requirments.',
+              MANUAL_CHECK_P:  'Verify the %N_MC custom elements meet WCAG accessibility requirments.',
+              HIDDEN_S: 'A custom element is hidden and was not evaluated.',
+              HIDDEN_P: '%N_H custom elements are hidden and were not evaluated.',
               NOT_APPLICABLE:  'No custom elements found on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_MC_1:       'Verify the features of the custom component with the tag name of @%1@ is accessible using manual checking techniques or automated tools that can anlyze the shaodw DOM of custom elements.',
+              ELEMENT_MC_1:       'Verify the accessibility of the features of the custom component with the tag name of @%1@ using manual checking techniques or automated tools that can anlyze the shadow DOM of custom elements.',
               ELEMENT_HIDDEN_1:  'The @%1@ custom element is hidden from assistive technologies.',
             },
             PURPOSE: [
@@ -8478,15 +8480,22 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               'The evaluation library does report the presence of custom elements for manually checking the component for accessibility or use other DOM inspection tools to identify accessibility issues and features.'
             ],
             TECHNIQUES: [
-              'Using the keyboard to test keyboard navigation and operation requirements.',
-              'Testing with a screen reader to verify functionality is operable by a screen reader user.',
-              'Using accessibility tools in the browser DOM inspector, which can access the "shadow" DOM of the web component.',
-              'You can use the rules in the evaluation library to help guide your manual testing proceedures.'
-
+              'When a custom element is used to create an interactive widget, the most important manual check is keyboard navigation and focus styling for the operation of the widget.',
+              'Testing with screen readers to verify functionality is operable by a screen reader user.',
+              'Use accessibility tools in browser DOM inspectors to assist with manual and in automated inspection, since the DOM inspector allows access the "shadow" DOM of the custom element.',
+              'You can use the rules used in this tool to help guide your manual testing proceedures.'
             ],
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'MDN: Web Components',
+                url:   'https://developer.mozilla.org/en-US/docs/Web/Web_Components'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'WebComponents.org: Introduction',
+                url:   'https://www.webcomponents.org/introduction'
+              },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Web Content Accessibility Guidelines (WCAG)',
                 url:   'https://www.w3.org/TR/WCAG/'
@@ -18515,13 +18524,13 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * @desc     Web compnents require manual check
  */
 { rule_id             : 'WIDGET_16',
-  last_updated        : '2021-08-12',
+  last_updated        : '2021-09-12',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['4.1.2'],
-  target_resources    : ["web components"],
+  target_resources    : ["Custom elements using web component APIs"],
   primary_property    : '',
   resource_properties : [],
   language_dependency : "",

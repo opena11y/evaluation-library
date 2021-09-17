@@ -1342,13 +1342,13 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  * @desc     Web compnents require manual check
  */
 { rule_id             : 'WIDGET_16',
-  last_updated        : '2021-08-12',
+  last_updated        : '2021-09-12',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['4.1.2'],
-  target_resources    : ["web components"],
+  target_resources    : ["Custom elements using web component APIs"],
   primary_property    : '',
   resource_properties : [],
   language_dependency : "",
