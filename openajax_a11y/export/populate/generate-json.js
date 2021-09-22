@@ -50177,14 +50177,14 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         WIDGET_16: {
             ID:                    'Widget 16',
-            DEFINITION:            'Custom elements using web components API %s be manually checked for accessibility requirements.',
-            SUMMARY:               'Custom element manual check.',
-            TARGET_RESOURCES_DESC: 'Custom elements using web components API.',
+            DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) %s be manually checked for accessibility requirements.',
+            SUMMARY:               'Custom element requires manual check.',
+            TARGET_RESOURCES_DESC: 'Custom elements created using web components API.',
             RULE_RESULT_MESSAGES: {
               MANUAL_CHECK_S:  'Verify the custom element meets WCAG accessibility requirments.',
               MANUAL_CHECK_P:  'Verify the %N_MC custom elements meet WCAG accessibility requirments.',
-              HIDDEN_S: 'A custom element is hidden and was not evaluated.',
-              HIDDEN_P: '%N_H custom elements are hidden and were not evaluated.',
+              HIDDEN_S: 'A custom element is hidden and only needs to be checked if has features that become visible need to be checked for accessbility.',
+              HIDDEN_P: '%N_H custom elements are hidden and only the custom elements with features that may become visible need to be checked for accessibility.',
               NOT_APPLICABLE:  'No custom elements found on the page.'
             },
             NODE_RESULT_MESSAGES: {
@@ -50192,15 +50192,16 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_HIDDEN_1:  'The @%1@ custom element is hidden from assistive technologies.',
             },
             PURPOSE: [
-              'Custom elements using the web compnents API technology is used to create user interface components by packaging HTML, CSS and Javascript in a single loadable file using a DOM template.',
-              'Custom elements cannot be analyzed by the evaluation library because they have their own isolated "shadow" DOM that cannot be accessed by the library.',
-              'The evaluation library does report the presence of custom elements for manually checking the component for accessibility or use other DOM inspection tools to identify accessibility issues and features.'
+              'Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.',
+              'Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they cannot be accessed by the evaluation library for programmatic checking of accessibility features.',
+              'The evaluation library is able to report the presence of custom elements, but can only recommend that they be manually checked for accessibility, possible by using other DOM inspection tools to identify accessibility issues and features.'
             ],
             TECHNIQUES: [
-              'When a custom element is used to create an interactive widget, the most important manual check is keyboard navigation and focus styling for the operation of the widget.',
-              'Testing with screen readers to verify functionality is operable by a screen reader user.',
-              'Use accessibility tools in browser DOM inspectors to assist with manual and in automated inspection, since the DOM inspector allows access the "shadow" DOM of the custom element.',
-              'You can use the rules used in this tool to help guide your manual testing proceedures.'
+              'In evaluating custom elements that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.',
+              'Test with screen readers to verify functionality is operable by a screen reader user.',
+              'Test the graphical rendering in operating system using high contrast settings to verify content is perceivable by people with visual impairments.',
+              'Use accessibility tools in browser DOM inspectors to assist with manual inspection, since the DOM inspector of most  browsers allows access to the Shadow DOM of the custom element.',
+              'You can use the accessibility rules in this tool to help guide your manual testing procedures.'
             ],
             MANUAL_CHECKS: [
             ],
@@ -60245,8 +60246,8 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
-  wcag_primary_id     : '4.1.1',
-  wcag_related_ids    : ['4.1.2'],
+  wcag_primary_id     : '2.1.1',
+  wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
   target_resources    : ["Custom elements using web component APIs"],
   primary_property    : '',
   resource_properties : [],

@@ -370,6 +370,10 @@ if [ -n "$AUDITOR_DIR" ]; then
   cp export/populate/oaa_exported_rules.json "$AUDITOR_DIR/faeAuditor/populate/"
 fi
 
+if [ -n "$FAE_UTIL_DIR" ]; then
+  copy_scripts "$FAE_UTIL_DIR/openajax_a11y/"
+fi
+
 echo
 if [ $exit_on_error == 1 ]
 then
