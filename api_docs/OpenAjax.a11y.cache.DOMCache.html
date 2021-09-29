@@ -1,0 +1,3408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: DOMCache</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: DOMCache</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="OpenAjax.html">OpenAjax</a><a href="OpenAjax.a11y.html">.a11y</a><a href="OpenAjax.a11y.cache.html">.cache</a>.</span>DOMCache<span class="signature">(url, title, document)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="DOMCache"><span class="type-signature"></span>new DOMCache<span class="signature">(url, title, document)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Constructs a DOMCache Object
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">URL of the page being evaluated</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value of title property of the document being evaluated</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>document</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The document object reference of the document being evaluated</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>nls</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">NLS cache items for properties</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">URL of the page being evaluated</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>base_url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Base URL of the page being evaluated calculated from the URL</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value of title property of the document being evaluated</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>document</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The document object reference of the document being evaluatedDOM cache element objects</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>element_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">dom element cache for all elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>element_with_id_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">dom element cache items with a defined idSpecialize cache element objects</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>abbreviations_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of abbreviation elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color_contrast_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of abbreviation items</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>controls_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of form controls and widgets</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headings_landmarks_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of headings and abbreviations</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>frames_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of frames and iframes</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>images_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of image and area elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keyboard_focus_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of all interactive elements on a web page</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>languages_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of language change items</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>links_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of a and area elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lists_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of list elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>media_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of media elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tables_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of table elements</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timing_cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache of elements with moving, flashing or auto-updating content</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var dom_cache = new OpenAjax.a11y.cache.DOMCache(url, title, doc, locale);dom_cache.updateDOMElementCache();dom_cache.updateAllCaches();</code></pre>
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".addTitleDOMElement"><span class="type-signature">(static) </span>addTitleDOMElement<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Adds a DOMElement to represent a TITLE
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line311">line 311</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Nothing
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".calculateDescriptions"><span class="type-signature">(static) </span>calculateDescriptions<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculates a description if a element has an aria-describedby attribute defined
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line509">line 509</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getCaptionForTable"><span class="type-signature">(static) </span>getCaptionForTable<span class="signature">(table)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculates a computed caption and summary for a table element, using ARIA properties if defined
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>table</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="TableElement.html">TableElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Table element object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code></code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CaptionElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Caption element object (can be null)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line577">line 577</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getDescriptionFromARIADescribedby"><span class="type-signature">(static) </span>getDescriptionFromARIADescribedby<span class="signature">(element)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculates a description based on ARIA properties
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Cache element object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line732">line 732</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Description string, if no aria-describedby the string is empty
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getDuplicateObjects"><span class="type-signature">(static) </span>getDuplicateObjects<span class="signature">(objects, property)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get duplicate objects in an array based on one of its properties and marks any properties that are duplicates      Algorithm assumes that the object list is sorted by the property, so objects with duplicate properties are adjacent      to each other
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>objects</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of objects to sort</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>property</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Text string of property to sort</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line878">line 878</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    [Array][Array] of duplicate objects
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getNameForLink"><span class="type-signature">(static) </span>getNameForLink<span class="signature">(link)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculates a computed accessible name for a link, using ARIA properties if defined
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>link</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">LinkElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Link element object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line533">line 533</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getNameFromARIALabel"><span class="type-signature">(static) </span>getNameFromARIALabel<span class="signature">(control, prefix, only_when_label)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculates a computed label and accessible name based on ARIA properties
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>control</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Control cache element object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Used to include role in the accessible label for landmarks and widgets</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>only_when_label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Only add prefix if there is a label defined (i.e. for REGION landmark)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line676">line 676</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getNameFromARIALabel"><span class="type-signature">(static) </span>getNameFromARIALabel<span class="signature">(image)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculates a computed accessible name based on ALT attribute and ARIA label properties
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Image cache element object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_images.js.html">scripts/cache_images.js</a>, <a href="scripts_cache_images.js.html#line302">line 302</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getTextFromIDs"><span class="type-signature">(static) </span>getTextFromIDs<span class="signature">(ids)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the text content of the elements identified in the list of ids
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ids</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An string with space separated ids</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line763">line 763</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    String
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getUndefinedIDs"><span class="type-signature">(static) </span>getUndefinedIDs<span class="signature">(ids)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the text content of the elements identified in the list of ids
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ids</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An string with space separated ids</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line782">line 782</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A string of the invalid ids, string is empty if all valid
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".initCache"><span class="type-signature">(static) </span>initCache<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Initialize specialized caches   The specialized caches will be updated all at once or or when   needed by a rule depending on how an evaluation is requested
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line88">line 88</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".isUpToDate"><span class="type-signature">(static) </span>isUpToDate<span class="signature">(cache_name)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks to see if the specified cache is up to date
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cache_name</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">String Cache to update</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Object with two properties:    o.up_to_date Boolean true if cache is up to date, otherwise false    o.exists   Boolean true if cache exists, otherwise false
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".sortArrayOfObjects"><span class="type-signature">(static) </span>sortArrayOfObjects<span class="signature">(objects, property, ascending)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sort an array of objects by one of its properties and marks any properties that are duplicates
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>objects</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of objects to sort</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>property</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Text string of property to sort</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ascending</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True sort by ascending values otherwise sort by descending values</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line802">line 802</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Array of sorted objects
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".traverseDOMElementsForAllCaches"><span class="type-signature">(static) </span>traverseDOMElementsForAllCaches<span class="signature">(dom_element, landmark_info, heading_global_info, heading_landmark_info, table_info, control_info, list_info)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates all the specialized caches at one time, in general this   is faster than updating the caches individually based on the   needs of rules, but may create caches that will not be used if   some rules are disabled
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dom_element</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  Current DOMElement object being processed</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>landmark_info</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  LandmarkInfo object containing current landmark and heading information for tree representations</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>heading_global_info</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  HeadingInfo object containing current heading information used for heading nesting rules</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>heading_landmark_info</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  HeadingInfo object containing current heading information used for heading nesting rules</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>table_info</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  TableInfo object containing current table information for tree representations</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>control_info</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  ControlInfo object containing current control information for tree representations</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>list_info</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object  Current LanguageElement object that contains the DOMElement</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line172">line 172</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    none
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".updateAllCaches"><span class="type-signature">(static) </span>updateAllCaches<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Traverses the DOMElements and      calls the update function to see which specialized caches want information on this element
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line241">line 241</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    none
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".updateCache"><span class="type-signature">(static) </span>updateCache<span class="signature">(cache_name)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the specified cache
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cache_name</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">String name of the cache to update</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns true if cache is updated, false if cache does not exist
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".updateDOMElementCache"><span class="type-signature">(static) </span>updateDOMElementCache<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates a DOMElement object caches by traversing the DOM of the browser object
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line276">line 276</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    DOMCache Object
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".updateDOMElements"><span class="type-signature">(static) </span>updateDOMElements<span class="signature">(node, parent_dom_element, previous_sibling)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Traverse document DOM and create a tree of DOMElement objects.   The DOMElement objects will be used to generate more specific   lists of elements without need to touch the document DOM.   Additional information is collected on tables to be used in   creating the table cache
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">node is the current node object tbing analyzed</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent_dom_element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">DOMElement object that is the parent of the current node</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>previous_sibling</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The DOMElement or DOMText object that is the previous siblingreturn nothing</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_dom_traversal.js.html">scripts/cache_dom_traversal.js</a>, <a href="scripts_cache_dom_traversal.js.html#line365">line 365</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul><h3>Classes</h3><ul><li><a href="HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.GroupingElement.html">GroupingElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="OpenAjax.a11y%250D%250DNOTE_%2520The%2520following%2520properties%2520are%2520defined%2520when%2520the%2520ruleset%2520is%2520created.RulesetFactory.html">RulesetFactory</a></li><li><a href="TableElement.html">TableElement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Sep 20 2021 13:52:07 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

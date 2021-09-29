@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts/result_summary.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts/result_summary.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
+/* ---------------------------------------------------------------- */
+/*                             ElementResultSummary                        */
+/* ---------------------------------------------------------------- */
+
+ /**
+ * @constructor ElementResultsSummary
+ *
+ * @memberOf OpenAjax.a11y.info
+ *
+ * @desc Constructor for an object that contains summary of element results for rule
+ *       result, cache item result, rule result group result or evaluation result
+ *       objects
+ *
+ * @property  {Number}  passed        - Number of element results that passed the
+ *                                      rule (value >= 0)
+ * @property  {Number}  page          - Number of element results that contribute to
+ *                                      a page level manual check
+ * @property  {Number}  violations    - Number of element results that failed the
+ *                                      rule as a violation (value >= 0)
+ * @property  {Number}  warnings      - Number of element results that failed the
+ *                                      rule as a warning (value >= 0)
+ * @property  {Number}  manual_checks - Number of element results that require a
+ *                                      manual check (value >= 0)
+ * @property  {Number}  hidden        - Number of element results that are hidden
+ *                                      (value >= 0)
+ */
+
+OpenAjax.a11y.info.ElementResultsSummary = function () {
+
+  // Element result counts
+  var p   = 0;  // Pass result (p)
+  var v   = 0;  // Fail result (f)
+  var w   = 0;  // Fail result (f)
+  var mc  = 0;
+  var h   = 0;
+
+
+  return {
+
+     get violations()     { return v;   },
+     get warnings()       { return w;   },
+     get manual_checks()  { return mc;  },
+     get passed()         { return p;   },
+     get hidden()         { return h;   },
+
+    /**
+     * @method hasResults
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc True if at least one element results is a violation, warning, manual check
+     *       or passed, otherwise false (e.g no element results or all hidden)
+     *
+     * @return {Boolean} see description
+     */
+
+    hasResults : function() {
+
+      if (v | w | mc | p) return true;
+
+      return false;
+    },
+
+    /**
+     * @method addViolations
+     * @private
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc Adds violation element results to the summary calculation
+     *
+     * @param  {Number}  n  - Number of element results that passed
+     */
+
+    addViolations : function(n) {
+      if (n > 0) {
+        v += n;
+      }
+    },
+
+    /**
+     * @method addWarnings
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc Adds warning element results to the summary calculation
+     *
+     * @param  {Number}  n  - Number of element results that passed
+     */
+
+    addWarnings : function(n) {
+      if (n > 0) {
+        w += n;
+      }
+    },
+
+
+    /**
+     * @method addManualChecks
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc Adds manual check element results to the summary calculation
+     *
+     * @param  {Number}  n  - Number of element results that passed
+     */
+
+    addManualChecks : function(n) {
+      if ( n > 0) {
+        mc += n;
+      }
+    },
+
+    /**
+     * @method addPassed
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc Adds passed element results to the summary calculation
+     *
+     * @param  {Number}  n  - Number of element results that passed
+     */
+
+     addPassed : function(n) {
+       if (n > 0) {
+         p   += n;
+       }
+     },
+
+    /**
+     * @method addHidden
+     * @private
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc Adds hidden element results to the summary calculation
+     *
+     * @param  {Number}  n  -  Number of element results that are hidden
+     */
+
+    addHidden : function(n) {
+      if (n > 0) {
+        h += n;
+      }
+    },
+
+    /*
+     * @method toString
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc output information about the summary
+     *
+     * @return  {String}  Information about element summary
+     */
+
+    toString : function() {
+      return "V: " + v + " W: " + w + " MC: " + mc + " P: " + p + " H: " + h;
+    }
+  };
+};
+
+
+/* ---------------------------------------------------------------- */
+/*                             RuleResultsSummary                        */
+/* ---------------------------------------------------------------- */
+
+ /**
+ * @constructor RuleResultsSummary
+ *
+ * @memberOf OpenAjax.a11y.info
+ *
+ * @desc Constructor for an object that contains summary of rule results for a
+ *       set of rule result objects or a cache item result
+ *
+ * @property  {Number}  violations      - Number of rule results with at
+ *                                        least one violation
+ * @property  {Number}  warnings        - Number of rule results with at
+ *                                        least one warning
+ * @property  {Number}  failures        - Number of rule results with at
+ *                                        least one violation or warning
+ * @property  {Number}  manual_checks   - Number of rule results with at
+ *                                        least one manual check
+ * @property  {Number}  passed          - Number of rule results that all
+ *                                        element results pass
+ * @property  {Number}  not_applicable  - Number of rule results with no
+ *                                        element results
+ */
+
+OpenAjax.a11y.info.RuleResultsSummary = function () {
+
+  var v   = 0;  // Number of rule results with are violations
+  var w   = 0;  // Number of rule results with are warnings
+  var mc  = 0;  // Number of rule results with are manual checks
+  var p   = 0;  // Number of rule results with are passed
+  var na  = 0;  // Number of rule results with are not applicable
+  var hmc = 0;  // True if any of the rule results includes at least one element
+                // result that is a manual check
+
+  var t   =  0;  // total number of rule results with results
+  var sum =  0;  // summ of the implementation scores for all rule results
+  var is  = -1;  // implementation score for group
+  var iv  = OpenAjax.a11y.IMPLEMENTATION_VALUE.UNDEFINED; // implementation value for the group
+
+  return {
+     get violations()     { return v;  },
+     get warnings()       { return w;  },
+     get manual_checks()  { return mc; },
+     get passed()         { return p;  },
+     get not_applicable() { return na;  },
+
+     get implementation_score() { return is;  },
+     get implementation_value() { return iv;  },
+
+    /**
+     * @method addRuleResult
+     *
+     * @memberOf OpenAjax.a11y.RuleResultsSummary
+     * @private
+     *
+     * @desc Adds rule result to the summary calculation
+     *
+     * @param  {RuleResult}  rule_result  - Rule result object to add to summary
+     */
+
+     addRuleResult : function(rule_result) {
+
+       var IMPLEMENTATION_VALUE = OpenAjax.a11y.IMPLEMENTATION_VALUE;
+       var RULE_RESULT_VALUE    = OpenAjax.a11y.RULE_RESULT_VALUE;
+
+       var rrv = rule_result.getResultValue();
+
+       if (rrv === RULE_RESULT_VALUE.VIOLATION        ) v  += 1;
+       else if (rrv === RULE_RESULT_VALUE.WARNING     ) w  += 1;
+       else if (rrv === RULE_RESULT_VALUE.MANUAL_CHECK) mc += 1;
+       else if (rrv === RULE_RESULT_VALUE.PASS        ) p  += 1;
+       else  na += 1;
+
+       hmc = hmc || (rule_result.getElementResultsSummary().manual_checks > 0);
+
+       var rris = rule_result.getImplementationScore();
+
+       if (rris >= 0) {
+         t += 1;
+         sum = sum + rris;
+         is = Math.round(sum/t);
+         if ((is === 100) &amp;&amp; ((v+w) > 0)) is = 99;
+       }
+
+       if (hmc) iv = IMPLEMENTATION_VALUE.MANUAL_CHECKS_ONLY;
+       else iv = IMPLEMENTATION_VALUE.NOT_APPLICABLE;
+
+       if (is === 100) {
+         if (hmc) iv = IMPLEMENTATION_VALUE.COMPLETE_WITH_MANUAL_CHECKS;
+         else iv = IMPLEMENTATION_VALUE.COMPLETE;
+       } else if (is > 95) iv = IMPLEMENTATION_VALUE.ALMOST_COMPLETE;
+       else if (is > 50)   iv = IMPLEMENTATION_VALUE.PARTIAL_IMPLEMENTATION;
+       else if (is >= 0)   iv = IMPLEMENTATION_VALUE.NOT_IMPLEMENTED;
+
+     },
+
+    /**
+     * @method hasResults
+     *
+     * @memberOf OpenAjax.a11y.ElementResultSummary
+     *
+     * @desc True if at least one element results is a violation, warning, manual check
+     *       or passed, otherwise false (e.g no element results or all hidden)
+     *
+     * @return {Boolean} see description
+     */
+
+    hasResults : function() {
+
+      if (v | w | mc | p | na) return true;
+
+      return false;
+    },
+
+    /**
+     * @method toString
+     *
+     * @memberOf OpenAjax.a11y.RuleResultsSummary
+     *
+     * @desc output information about the summary
+     *
+     * @return  {String}  Information about rule summary
+     */
+
+    toString : function() {
+      return "V: " + v + " W: " + w + " MC: " + mc + " P: " + p + " NA: " + na;
+    }
+
+  };
+};
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul><h3>Classes</h3><ul><li><a href="HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.GroupingElement.html">GroupingElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="OpenAjax.a11y%250D%250DNOTE_%2520The%2520following%2520properties%2520are%2520defined%2520when%2520the%2520ruleset%2520is%2520created.RulesetFactory.html">RulesetFactory</a></li><li><a href="TableElement.html">TableElement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Sep 20 2021 13:52:07 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
