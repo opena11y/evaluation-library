@@ -8445,7 +8445,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                 url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                ttile: 'ARIA in HTML',
+                title: 'ARIA in HTML',
                 url:   'https://www.w3.org/TR/html-aria/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,

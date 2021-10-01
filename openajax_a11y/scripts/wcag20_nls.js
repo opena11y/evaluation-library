@@ -567,7 +567,7 @@ OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.prototype.toJSON = function(prefix) 
   json += prefix + "  \"url_meet\"       : \"" + this.url_meet + "\",";
   json += prefix + "  \"url_understand\" : \"" + this.url_understand + "\"";
 
-  if (this.sc_id === '4.1.2') json += prefix + "}";
+  if (this.sc_id === '4.1.3') json += prefix + "}";
   else json += prefix + "},";
 
   return json;
