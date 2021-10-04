@@ -77,15 +77,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA6: Using aria-label to provide labels for objects',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA6'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA9'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -142,11 +142,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -204,15 +204,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA19: Using ARIA role=alert or Live Regions to Identify Errors',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA19.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -264,11 +264,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -317,11 +317,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -369,11 +369,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -613,11 +613,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               }
             ]
         },
@@ -686,11 +686,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -760,19 +760,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA6: Using aria-label to provide labels for objects',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA6'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA9'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'MDN Web Docs: ARIA ',
@@ -819,7 +819,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -938,7 +938,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',

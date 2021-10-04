@@ -76,15 +76,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Labels for Form Controls Overview',
@@ -137,11 +137,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'iCITA Best Practices: Unique Title',
@@ -188,7 +188,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -265,15 +265,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-            url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-            url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
           },
           { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
             title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-            url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
           }
         ]
     },
@@ -353,7 +353,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
         }
       ]
     },

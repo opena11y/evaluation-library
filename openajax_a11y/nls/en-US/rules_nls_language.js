@@ -68,7 +68,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H57: Using language attributes on the html element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H57'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H57'
               }
             ]
         },
@@ -123,7 +123,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H58: Using language attributes to identify changes in the human language',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H58'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H58'
               }
             ]
         },

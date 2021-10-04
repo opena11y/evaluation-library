@@ -12,12 +12,15 @@ evaluatorFactory.setFeature('brokenLinkTesting', false);
 // before getting the actual evaluator
 var evaluator = evaluatorFactory.newEvaluator();
 
-var wcag20   = '\n"wcag20" : ' + OpenAjax.a11y.nls.WCAG20.getNLS('en-us').toJSON("\n      ") + ',\n';
-var ruleCategories =  '\n"rule_categories" : ' + OpenAjax.a11y.nls.RuleCategories.getNLS('en-us').toJSON("\n      ") + ',\n';
-var rules    =   '\n"rules" : ' + OpenAjax.a11y.RuleManager.toJSON("      ") + ",\n";
-var rulesets =   '\n"rulesets" : ' + OpenAjax.a11y.RulesetManager.toJSON("      ");
-var json = '{\n' + wcag20 + ruleCategories + rules + rulesets + '\n}';
+var ruleCategories = OpenAjax.a11y.nls.RuleCategories.getNLS('en-us').toJSON("\n  ");
+var rules    = '{ "rules" : ' + OpenAjax.a11y.RuleManager.toJSON("      ") + '}\n';
+var rulesets = '{ "rulesets" : ' + OpenAjax.a11y.RulesetManager.toJSON("      ") + '}\n';
 
-var fs = require('fs');
-fs.writeFileSync('export/populate/oaa_exported_rules.json', json);
+var fs1 = require('fs');
+fs1.writeFileSync('export/populate/rules.json', rules);
 
+var fs2 = require('fs');
+fs2.writeFileSync('export/populate/rulesets.json', rulesets);
+
+var fs3 = require('fs');
+fs3.writeFileSync('export/populate/rule_categories.json', ruleCategories);

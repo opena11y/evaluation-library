@@ -93,11 +93,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
@@ -177,11 +177,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
@@ -237,15 +237,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -285,15 +285,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -417,7 +417,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',

@@ -79,7 +79,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',
@@ -171,7 +171,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',

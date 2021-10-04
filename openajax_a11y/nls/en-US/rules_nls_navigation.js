@@ -62,27 +62,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G63: Providing a site map',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G63'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G64: Providing a Table of Contents',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G64'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G64'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G125: Providing links to navigate to related Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G125'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G125'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G126: Providing a list of links to all other Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G126'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G126'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G161: Providing a search function to help users find content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G161'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G161'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G185: Linking to all of the pages on the site from the home page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G185'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G185'
               }
             ]
         },
@@ -123,7 +123,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         },
@@ -162,7 +162,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         },
@@ -208,7 +208,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         },
@@ -247,7 +247,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         }

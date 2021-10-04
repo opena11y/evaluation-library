@@ -74,11 +74,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA21: Using Aria-invalid to Indicate An Error Field',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA21'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA21'
               }
             ]
         },
@@ -129,7 +129,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA2: Identifying a required field with the aria-required property',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA2'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA2'
               }
             ]
         },
@@ -207,15 +207,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA19: Using ARIA role=alert or Live Regions to Identify Errors',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA19.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19'
               }             ]
         },
         ERROR_5: {
@@ -252,35 +252,35 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G164: Providing a stated time within which an online request (or transaction) may be amended or canceled by the user after making the request.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G164'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G164'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G98: Providing the ability for the user to review and correct answers before submitting.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G98'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G98'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G155: Providing a checkbox in addition to a submit button.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G155'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G155'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G99: Providing the ability to recover deleted information.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G99'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G99'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G168: Requesting confirmation to continue with selected action.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G168'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G168'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G155: Providing a checkbox in addition to a submit button.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G155'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G155'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G98: Providing the ability for the user to review and correct answers before submitting.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G98'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G98'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: ' G168: Requesting confirmation to continue with selected action.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G168'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G168'
               }
             ]
         }

@@ -71,19 +71,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                              },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G17: Ensuring that a contrast ratio of at least 7:1 exists between text (and images of text) and background behind the text',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G17'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G17'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G18: Ensuring that a contrast ratio of at least 4.5:1 exists between text (and images of text) and background behind the text',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G18'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G18'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G148: Not specifying background color, not specifying text color, and not using technology features that change those default',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G148'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G148'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G174'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                             }
                             ]
         },
@@ -116,7 +116,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                              },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G14: Ensuring that information conveyed by color differences is also available in text',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G14'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G14ß'
                             }
                             ]
         }

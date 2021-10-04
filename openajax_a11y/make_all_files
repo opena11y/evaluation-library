@@ -362,12 +362,18 @@ fi
 
 if [ -n "$FAE_DIR" ]; then
   copy_scripts "$FAE_DIR/fae2/fae-util/openajax_a11y/"
-  cp export/populate/oaa_exported_rules.json "$FAE_DIR/fae2/populate/"
+  cp export/populate/wcag.json "$FAE_DIR/fae2/populate/"
+  cp export/populate/rule_categories.json "$FAE_DIR/fae2/populate/"
+  cp export/populate/rules.json "$FAE_DIR/fae2/populate/"
+  cp export/populate/rulesets.json "$FAE_DIR/fae2/populate/"
 fi
 
 if [ -n "$AUDITOR_DIR" ]; then
   copy_scripts "$AUDITOR_DIR/faeAuditor/fae-util/openajax_a11y/"
-  cp export/populate/oaa_exported_rules.json "$AUDITOR_DIR/faeAuditor/populate/"
+  cp export/populate/wcag.json "$AUDITOR_DIR/fae2/populate/"
+  cp export/populate/rule_categories.json "$AUDITOR_DIR/fae2/populate/"
+  cp export/populate/rules.json "$AUDITOR_DIR/fae2/populate/"
+  cp export/populate/rulesets.json "$AUDITOR_DIR/fae2/populate/"
 fi
 
 if [ -n "$FAE_UTIL_DIR" ]; then

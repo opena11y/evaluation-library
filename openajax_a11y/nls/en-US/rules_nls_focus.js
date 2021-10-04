@@ -66,11 +66,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G59: Placing the interactive elements in an order that follows sequences and relationships within the content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G59'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G59'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H4: Creating a logical tab order through links, form controls, and objects',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H4'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H4'
               }
             ]
         },
@@ -116,7 +116,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G195: Using an author-supplied, highly visible focus indicator',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G195'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
               }
             ]
         },
@@ -148,15 +148,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G200: Opening new windows and tabs from a link only when necessary',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G200'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G201: Giving users advanced warning when opening a new window',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G201'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F52'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
               }
             ]
         },
@@ -190,15 +190,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G200: Opening new windows and tabs from a link only when necessary',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G200'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G201: Giving users advanced warning when opening a new window',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G201'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F52'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
               }
             ]
         },

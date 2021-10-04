@@ -64,11 +64,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
@@ -158,11 +158,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
@@ -208,11 +208,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',

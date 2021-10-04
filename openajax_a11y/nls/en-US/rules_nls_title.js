@@ -60,11 +60,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G88: Providing descriptive titles for Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G88'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H25: Providing a title using the title element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H25'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H25'
               }
             ]
         },
@@ -115,11 +115,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G88: Providing descriptive titles for Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G88'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H25: Providing a title using the title element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H25'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H25'
               }
             ]
         }

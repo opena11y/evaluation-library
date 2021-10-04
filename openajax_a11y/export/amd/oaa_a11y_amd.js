@@ -42223,19 +42223,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                              },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G17: Ensuring that a contrast ratio of at least 7:1 exists between text (and images of text) and background behind the text',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G17'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G17'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G18: Ensuring that a contrast ratio of at least 4.5:1 exists between text (and images of text) and background behind the text',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G18'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G18'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G148: Not specifying background color, not specifying text color, and not using technology features that change those default',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G148'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G148'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G174'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                             }
                             ]
         },
@@ -42268,7 +42268,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                              },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G14: Ensuring that information conveyed by color differences is also available in text',
-                              url:   'https://www.w3.org/TR/WCAG20-TECHS/G14'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G14ß'
                             }
                             ]
         }
@@ -42350,11 +42350,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA21: Using Aria-invalid to Indicate An Error Field',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA21'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA21'
               }
             ]
         },
@@ -42405,7 +42405,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA2: Identifying a required field with the aria-required property',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA2'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA2'
               }
             ]
         },
@@ -42483,15 +42483,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA19: Using ARIA role=alert or Live Regions to Identify Errors',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA19.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19'
               }             ]
         },
         ERROR_5: {
@@ -42528,35 +42528,35 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G164: Providing a stated time within which an online request (or transaction) may be amended or canceled by the user after making the request.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G164'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G164'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G98: Providing the ability for the user to review and correct answers before submitting.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G98'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G98'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G155: Providing a checkbox in addition to a submit button.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G155'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G155'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G99: Providing the ability to recover deleted information.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G99'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G99'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G168: Requesting confirmation to continue with selected action.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G168'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G168'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G155: Providing a checkbox in addition to a submit button.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G155'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G155'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G98: Providing the ability for the user to review and correct answers before submitting.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G98'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G98'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: ' G168: Requesting confirmation to continue with selected action.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G168'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G168'
               }
             ]
         }
@@ -42630,11 +42630,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G59: Placing the interactive elements in an order that follows sequences and relationships within the content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G59'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G59'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H4: Creating a logical tab order through links, form controls, and objects',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H4'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H4'
               }
             ]
         },
@@ -42680,7 +42680,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G195: Using an author-supplied, highly visible focus indicator',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G195'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
               }
             ]
         },
@@ -42712,15 +42712,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G200: Opening new windows and tabs from a link only when necessary',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G200'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G201: Giving users advanced warning when opening a new window',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G201'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F52'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
               }
             ]
         },
@@ -42754,15 +42754,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G200: Opening new windows and tabs from a link only when necessary',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G200'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G201: Giving users advanced warning when opening a new window',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G201'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F52'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
               }
             ]
         },
@@ -42944,15 +42944,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               }
             ]
         },
@@ -43008,7 +43008,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H36: Using alt attributes on images used as submit buttons',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H36'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H36'
               }
             ]
         },
@@ -43057,7 +43057,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist: HTML example 6',
@@ -43140,11 +43140,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F77: Failure of Success Criterion 4.1.1 due to duplicate values of type ID',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F77'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F77'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -43187,7 +43187,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               }
             ]
         },
@@ -43227,11 +43227,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using @label@ elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -43273,11 +43273,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -43324,7 +43324,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -43387,15 +43387,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               }
             ]
         },
@@ -43438,7 +43438,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
             ]
         }    }
@@ -43508,7 +43508,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                        },
                        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                          title: 'H64: Using the title attribute of the frame and iframe elements',
-                         url:   'https://www.w3.org/TR/WCAG20-TECHS/H64.html'
+                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                        }
                       ]
     },
@@ -43552,7 +43552,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                       },
                       { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                         title: 'H64: Using the title attribute of the frame and iframe elements',
-                        url:   'https://www.w3.org/TR/WCAG20-TECHS/H64.html'
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                       }
       ]
     }
@@ -43653,11 +43653,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
@@ -43737,11 +43737,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
@@ -43797,15 +43797,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -43845,15 +43845,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -43977,7 +43977,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
@@ -44127,11 +44127,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
@@ -44221,11 +44221,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
@@ -44271,11 +44271,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G130'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G141'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
@@ -44650,7 +44650,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',
@@ -44742,7 +44742,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',
@@ -44841,15 +44841,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -44919,15 +44919,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -44996,15 +44996,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H97: Grouping related links using the nav element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H97.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H97.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45077,15 +45077,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45151,15 +45151,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45233,15 +45233,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45309,15 +45309,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45381,15 +45381,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45578,7 +45578,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               }
             ]
         },
@@ -45641,7 +45641,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               }
             ]
         },
@@ -45770,15 +45770,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45842,15 +45842,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -45914,19 +45914,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA20: Using the region role to identify a region of the page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA20'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA20'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
 
             ]
@@ -45990,15 +45990,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -46068,15 +46068,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
 
             ]
@@ -46142,15 +46142,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         }
@@ -46226,7 +46226,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H57: Using language attributes on the html element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H57'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H57'
               }
             ]
         },
@@ -46281,7 +46281,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H58: Using language attributes to identify changes in the human language',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H58'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H58'
               }
             ]
         },
@@ -46398,7 +46398,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G57: Ordering the content in a meaningful sequence',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G57'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G57'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'C6: Positioning content based on structural markup',
@@ -46414,19 +46414,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F1: Failure of Success Criterion 1.3.2 due to changing the meaning of content by positioning information with CSS',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F1'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F1'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F33'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F33'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F34: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to format tables in plain text content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F34'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F34'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F49'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F49'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'Web Standards Group',
@@ -46474,11 +46474,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F33'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F33'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F49'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F49'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'Web Standards Group',
@@ -46612,7 +46612,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Example 44 - Using aria-describedby to satisfy WCAG 2.4.4 Link Purpose in Context',
@@ -46669,19 +46669,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA1'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA7: Using aria-labelledby for link purpose',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA7'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA7'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA8: Using aria-label for link purpose',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA8'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA8'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Example 44 - Using aria-describedby to satisfy WCAG 2.4.4 Link Purpose in Context',
@@ -46934,27 +46934,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G63: Providing a site map',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G63'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G64: Providing a Table of Contents',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G64'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G64'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G125: Providing links to navigate to related Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G125'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G125'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G126: Providing a list of links to all other Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G126'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G126'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G161: Providing a search function to help users find content',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G161'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G161'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G185: Linking to all of the pages on the site from the home page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G185'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G185'
               }
             ]
         },
@@ -46995,7 +46995,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         },
@@ -47034,7 +47034,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         },
@@ -47080,7 +47080,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         },
@@ -47119,7 +47119,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G61: Presenting repeated components in the same relative order each time they appear',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G61'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
               }
             ]
         }
@@ -48083,11 +48083,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -48163,15 +48163,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H39'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H73'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F46'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -48295,15 +48295,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H39'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H73'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F46'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -48374,11 +48374,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -48425,11 +48425,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -48721,11 +48721,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G88: Providing descriptive titles for Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G88'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H25: Providing a title using the title element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H25'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H25'
               }
             ]
         },
@@ -48776,11 +48776,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G88: Providing descriptive titles for Web pages',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G88'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H25: Providing a title using the title element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H25'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H25'
               }
             ]
         }
@@ -49362,15 +49362,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA6: Using aria-label to provide labels for objects',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA6'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA9'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -49427,11 +49427,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -49489,15 +49489,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA4.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA4.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA19: Using ARIA role=alert or Live Regions to Identify Errors',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA19.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -49549,11 +49549,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -49602,11 +49602,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -49654,11 +49654,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -49898,11 +49898,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA5.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
               }
             ]
         },
@@ -49971,11 +49971,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -50045,19 +50045,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA6: Using aria-label to provide labels for objects',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA6'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA9'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'MDN Web Docs: ARIA ',
@@ -50104,7 +50104,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',
@@ -50223,7 +50223,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/G108'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'ARIA Authoring Practices',

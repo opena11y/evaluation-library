@@ -79,15 +79,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               }
             ]
         },
@@ -143,7 +143,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H36: Using alt attributes on images used as submit buttons',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H36'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H36'
               }
             ]
         },
@@ -192,7 +192,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist: HTML example 6',
@@ -275,11 +275,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F77: Failure of Success Criterion 4.1.1 due to duplicate values of type ID',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F77'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F77'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -322,7 +322,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               }
             ]
         },
@@ -362,11 +362,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using @label@ elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -408,11 +408,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -459,7 +459,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H88: Using HTML according to spec',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H88'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H88'
               }
             ]
         },
@@ -522,15 +522,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H65'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H71'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
               }
             ]
         },
@@ -573,7 +573,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H44: Using label elements to associate text labels with form controls',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H44'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
               },
             ]
         }    }

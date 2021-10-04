@@ -83,7 +83,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Example 44 - Using aria-describedby to satisfy WCAG 2.4.4 Link Purpose in Context',
@@ -140,19 +140,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/H30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA1'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA7: Using aria-labelledby for link purpose',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA7'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA7'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA8: Using aria-label for link purpose',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA8'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA8'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Example 44 - Using aria-describedby to satisfy WCAG 2.4.4 Link Purpose in Context',

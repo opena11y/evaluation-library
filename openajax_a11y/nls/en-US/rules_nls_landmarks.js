@@ -87,15 +87,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -165,15 +165,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -242,15 +242,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H97: Grouping related links using the nav element',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H97.html'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H97.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -323,15 +323,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -397,15 +397,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -479,15 +479,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -555,15 +555,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -627,15 +627,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -824,7 +824,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               }
             ]
         },
@@ -887,7 +887,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               }
             ]
         },
@@ -1016,15 +1016,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -1088,15 +1088,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -1160,19 +1160,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA20: Using the region role to identify a region of the page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA20'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA20'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
 
             ]
@@ -1236,15 +1236,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         },
@@ -1314,15 +1314,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
 
             ]
@@ -1388,15 +1388,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA11: Using ARIA landmarks to identify regions of a page',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA11'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA13: Using aria-labelledby to name regions and landmarks',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA13'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/ARIA14'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14'
               }
             ]
         }

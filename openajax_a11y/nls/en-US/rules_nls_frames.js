@@ -63,7 +63,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                        },
                        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                          title: 'H64: Using the title attribute of the frame and iframe elements',
-                         url:   'https://www.w3.org/TR/WCAG20-TECHS/H64.html'
+                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                        }
                       ]
     },
@@ -107,7 +107,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                       },
                       { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                         title: 'H64: Using the title attribute of the frame and iframe elements',
-                        url:   'https://www.w3.org/TR/WCAG20-TECHS/H64.html'
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                       }
       ]
     }

@@ -73,11 +73,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -153,15 +153,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H39'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H73'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F46'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -285,15 +285,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H39'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H73'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/F46'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -364,11 +364,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
@@ -415,11 +415,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'https://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
