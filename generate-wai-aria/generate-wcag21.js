@@ -20,6 +20,16 @@ function cleanString(s) {
   return s.trim();
 }
 
+function removePrefix(s) {
+  parts = s.split('.');
+  s = parts[parts.length-1];
+  s = s.trim();
+  if (s[1] === ' ') {
+    s = s.substring(2,s.length);
+  }
+  return s;
+}
+
 function getWCAGInformation(dom) {
   wcagInfo = {};
   wcagInfo.abbreviation = 'WCAG 2.1';
@@ -48,7 +58,7 @@ function getWCAGInformation(dom) {
     wcagInfo.principles[p] = {};
     pInfo = wcagInfo.principles[p];
     pInfo.id          = 'OpenAjax.a11y.WCAG20_PRINCIPLE.P_' + p;
-    pInfo.title       = cleanString(principle.querySelector('h2').textContent);
+    pInfo.title       = removePrefix(cleanString(principle.querySelector('h2').textContent));
     pInfo.description = cleanString(principle.querySelector('p').textContent);
     pInfo.url_spec    = wcag21 + '#' + principle.id;
 
@@ -65,7 +75,7 @@ function getWCAGInformation(dom) {
       gInfo = pInfo.guidelines[(p + '.' + g)] = {};
 
       gInfo.id          = 'OpenAjax.a11y.WCAG20_GUIDELINE.G_' + p + '_' + g;
-      gInfo.title       = cleanString(guideline.querySelector('h3').textContent);
+      gInfo.title       = removePrefix(cleanString(guideline.querySelector('h3').textContent));
       gInfo.description = cleanString(guideline.querySelector('p').textContent);
       gInfo.url_spec    = wcag21 + '#' + guideline.id;
 
@@ -94,7 +104,7 @@ function getWCAGInformation(dom) {
 
         scInfo.id             = 'OpenAjax.a11y.WCAG20_SUCCESS_CRITERION.SC_' + p + '_' + g + '_' + sc;
         scInfo.level          = level;
-        scInfo.title          = cleanString(success_criterion.querySelector('h4').textContent);
+        scInfo.title          = removePrefix(cleanString(success_criterion.querySelector('h4').textContent));
         scInfo.description    = cleanString(success_criterion.querySelectorAll('p')[1].textContent);
         scInfo.url_spec       = wcag21 + '#' + success_criterion.id;
         scInfo.url_understand = success_criterion.querySelectorAll('div.doclinks a')[0].getAttribute('href');
