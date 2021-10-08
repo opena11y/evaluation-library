@@ -5,14 +5,16 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions andf
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       DOMElementCache                            */
@@ -609,7 +611,7 @@ OpenAjax.a11y.cache.DOMText.prototype.getAccessibility = function () {
  * @return {Array} Returns a empty array
  */
 
-OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function () {
 
   return [];
 
@@ -625,7 +627,7 @@ OpenAjax.a11y.cache.DOMText.prototype.getAttributes = function (unsorted) {
  * @return {Array} Returns a empty array
  */
 
-OpenAjax.a11y.cache.DOMText.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.DOMText.prototype.getEvents = function () {
 
   return [];
 
@@ -874,8 +876,8 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  *
  * @property {Number}     character_count  - Count of text charcters in the immediate child DOM text nodes
  *
- * @property {String}     class_name  - The value of the class attribute of the DOM node
- * @property {String}     role        - The value of the role attribute of the DOM node
+ * @property {String}     class_name     - The value of the class attribute of the DOM node
+ * @property {String}     role           - The value of the role attribute of the DOM node
  *
  * @property {String}     alt      - String   The value of the alt attribute of the DOM node
  * @property {Boolean}    has_alt  - true if the alt attribute is defined, otherwise false
@@ -898,6 +900,8 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  * @property {String}     calculated_aria_description  - If aria-describedby defined this is a string of the
  *                                                       description content
  *
+ * @property {String}     role                - Implicit or set role on the element
+ * @property {String}     implicit_role       - Implict role of the elements based on ARIA in HTML spec
  * @property {Boolean}    has_role            - True if element has a role value, otherwise false
  * @property {Boolean}    has_aria_owns            - True if element has a aria-owns property, otherwise false
  * @property {Boolean}    has_aria-attributes - True if element has a aria attributes, otherwise false
@@ -914,7 +918,10 @@ OpenAjax.a11y.cache.DOMText.prototype.toString = function(option) {
  * @property {Array}      aria_attributes_with_invlaid_values - Array of attributes who have
  *
  *
- * @property {Object}     role_info         - Object containing information about a widget
+ * @property {Object}     role_info       - Object containing information about a widget
+ * @property {Object}     owned_by        - Array of reference to Widget objects that own the dom element using aria-owns
+ * @property {Object}     widget_element  - Reference to the corresponding widget element
+ *
  *
  * @property {Object}     events              - Object that contains information about events associated with the node
  * @property {Object}     computed_style      - Object that contains information about run time styling of the node
@@ -950,10 +957,12 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       return str;
     }
 
-    function validValue(value, type, values) {
+    function validValue(value, type, values, allowUndeterminedValue) {
 
       var i;
       var j;
+
+      var v = parseInt(value, 10);
 
       switch (type) {
 
@@ -963,7 +972,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
       case 'decimal':
         if (typeof parseFloat(value) === 'number') return true;
-        return true;
         break;
 
       case 'idref':
@@ -975,8 +983,11 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         break;
 
       case 'integer':
-        if (!isNaN(value) &&
-            (parseInt(value, 10) >= 0)) return true;
+        if (!isNaN(v) &&
+            ( v > 0) ||
+            (allowUndeterminedValue && (v === -1 || v === 0))) {
+          return true;
+        }
         break;
 
       case 'nmtoken':
@@ -985,6 +996,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         }
         break;
 
+      case 'tristate':
       case 'nmtokens':
         var tokens = [];
         tokens.push(value);
@@ -999,7 +1011,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
           }
         }
         return flag;
-        break;
 
       case 'number':
         if (!isNaN(value) && value.length) return true;
@@ -1023,7 +1034,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     }   // end addAriaAttribute function
 
-
     var property_info = OpenAjax.a11y.aria.propertyDataTypes[name];
 
     var av = {};
@@ -1036,11 +1046,15 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     if (property_info) {
       av.type = property_info.type;
-      if (property_info.values) av.tokens = getTokens(property_info.values);
-      if (property_info.type === 'boolean') av.tokens = "true | false";
+      if (property_info.values && property_info.values.length) {
+        av.tokens = getTokens(property_info.values);
+      }
 
-      if (typeof property_info.values !== 'undefined') av.is_value_valid = validValue(av.value, av.type, property_info.values);
-      else av.is_value_valid = validValue(av.value, av.type, []);
+      if (typeof property_info.values !== 'undefined') {
+        av.is_value_valid = validValue(av.value, av.type, property_info.values, property_info.allowUndeterminedValue);
+      } else {
+        av.is_value_valid = validValue(av.value, av.type, []);
+      }
     }
     else {
       av.is_valid_attribute = false;
@@ -1074,7 +1088,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   var i;
   var attr;
   var attributes;
-  var attributes_len;
   var role_info;
 
   // check to make sure it is a valid node
@@ -1092,6 +1105,14 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.id             = node.id;
   this.name           = "";
 
+//  OpenAjax.a11y.logger.debug("[DOMElement][tag_name]: " + this.tag_name);
+
+  this.owned_by = [];
+  this.widget_element = null;
+
+  this.element_aria_info = OpenAjax.a11y.ariaInHTML.getElementAriaInfo(node);
+
+//  OpenAjax.a11y.logger.debug("[DOMElement][element_aria_info]: " + this.element_aria_info);
 
   if (!this.id || this.id.length === 0) {
     this.id_unique  = OpenAjax.a11y.ID.NOT_DEFINED;
@@ -1117,7 +1138,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   i = 0;
   attr = null;
   attributes = node.attributes;
-  attributes_len = attributes.length;
 
   this.class_name = "";
 
@@ -1198,6 +1218,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_title                 = false;
 
 
+  this.implicit_role  = this.element_aria_info.defaultRole;
   this.role           = "";
   this.role_info      = null;
   this.aria_invalid   = false;
@@ -1209,6 +1230,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
+
+  // Check for ARIA Attributes
 
   for (i = 0; i < attributes.length; i++) {
 
@@ -1379,46 +1402,28 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       this.role_info = role_info;
 
       if (role === 'group') this.is_group = true;
+      if (role === 'none') this.is_presentation = true;
+      if (role === 'presentation') this.is_presentation = true;
 
-//      OpenAjax.a11y.logger.debug("role=" + role + " : " + role_info.roleType);
+      if (role_info.roleType.indexOf('range') >= 0) {
+        this.is_range = true;
+      }
 
-      switch (role_info.roleType) {
+      if (role_info.roleType.indexOf('widget') >= 0 ||
+          role_info.roleType.indexOf('window') >= 0) {
 
-      case 'widget':
         this.is_interactive = true;
         this.is_widget = true;
-        this.has_range = role_info.hasRange;
         this.is_tab_stoppable = true;
-        if (role_info.container && role_info.container.length) this.is_tab_stoppable = false;
+        if (role_info.container && role_info.container.length) {
+          this.is_tab_stoppable = false;
+        }
+      }
 
-        // Special case for log role
-        if (role === "log") this.is_live = true;
-        break;
-
-      case 'landmark':
-        this.is_landmark = true;
-        break;
-
-      case 'live':
-        this.is_live = true;
-        break;
-
-      case 'abstract':
-        this.is_abstract  = true;
-        break;
-
-      case 'section':
-        this.is_section  = true;
-        break;
-
-      case 'presentation':
-        this.is_presentation = true;
-        break;
-
-      default:
-        break;
-
-      } // end switch
+      this.is_landmark = role_info.roleType.indexOf('landmark') >= 0;
+      this.is_live = role_info.roleType.indexOf('live') >= 0;
+      this.is_section = role_info.roleType.indexOf('section') >= 0 || role_info.roleType.indexOf('structure') >= 0;
+      this.is_abstract = role_info.roleType.indexOf('abstract') >= 0;
 
       break;
 
@@ -1462,9 +1467,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     } // end switch
-  } // end loop0
+  } // end loop
 
-//  OpenAjax.a11y.logger.debug("[DOMElement][Constructor] tag: " + this.tag_name + " tabindex: " + this.tab_index + " has tabindex: " + this.has_tabindex);
 
   this.aria_attributes          = aria_attributes;
   this.other_attributes         = other_attributes;
@@ -1497,7 +1501,187 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.rules_passed                    = [];
   this.rules_hidden                    = [];
 
+//  OpenAjax.a11y.logger.debug("[DOMElement][done]");
+
   return this;
+
+};
+
+/**
+ * @method getAttributeValue
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Get attribute value, if not defined by author returns default value, if no default
+ *        value returns empty string
+ *
+ * @param  {String} attr          - ARIA Attribute to get value
+ *
+ * @return {String or Number} - Value of attribute based on the value type of the attribute,
+ *                              if not defined return empty string
+ }
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.getAttributeValue = function (attr) {
+
+
+  function valueAsPropertyType(value) {
+
+    var v;
+
+    if (value) {
+      switch (attr_info.type) {
+        case 'decimal':
+          v = parseFloat(value);
+          if (!isNaN(v)) {
+            value = v;
+          }
+          break;
+
+        case 'number':
+        case 'integer':
+          v = parseInt(value, 10);
+          if (!isNaN(v)) {
+            value = v;
+          }
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    return value;
+  }
+
+  var value = '';
+  var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
+
+  if (attr_info) {
+    // Try IDL first
+    if (attr_info.idlAttribute) {
+      value = this.node[attr_info.idlAttribute];
+    }
+
+    if (!value) {
+      value = this.node.getAttribute(attr);
+      if (!value) {
+        value = attr_info.defaultValue;
+      }
+    }
+  }
+
+  return valueAsPropertyType(value);
+}
+
+/**
+ * @method isAttributeValueValid
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Checkes the value based on the property information information
+ *        for a valid value
+ *
+ * @param  {String}           attr - ARIA Attribute to validate
+ * @param  {String or Number} value - Value to validate
+ *
+ * @return {Boolean} true if allowed value and type, otherwise false
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.isAttributeValueValid = function (attr, value) {
+
+  var attr_info = OpenAjax.a11y.aria.propertyDataTypes[attr];
+
+  var flag = false;
+
+  var v = parseInt(value, 10);
+
+  switch (attr_info.type) {
+
+  case 'boolean':
+    flag = typeof value === 'boolean';
+    break;
+
+  case 'number':
+  case 'decimal':
+    flag = typeof value === 'number';
+    break;
+
+  case 'idref':
+  case 'idrefs':
+  case 'string':
+    flag = (typeof value === 'string') && (value.length > 0);
+    break;
+
+  case 'integer':
+  case 'positive':
+    if ((typeof v === 'number') &&
+        ((v > 0) ||
+         (attr_info.type.allowUndeterminedValue && (v === -1 || v === 0)))) {
+      flag = true;
+    }
+    break;
+
+  case 'tristate':
+  case 'nmtoken':
+    flag = attr_info.values.indexOf(value.toLowerCase()) >= 0;
+    break;
+
+  case 'nmtokens':
+    var values = value.split(' ');
+    flag = true;
+    for (var i = 0; i < values.length && flag; i += 1) {
+      flag = flag && (attr_info.values.indexOf(values[i]) >= 0);
+    }
+    break;
+
+  default:
+    break;
+
+  }
+
+//  console.log('[valid][' + attr + '][value]: ' + value + ' (' + (typeof value) + ')' + ' [flag]: ' + flag);
+
+  return flag;
+
+}
+
+/**
+ * @method addOwnedby
+ *
+ * @memberOf OpenAjax.a11y.cache.DOMElement
+ *
+ * @desc  Updates array of reference to widget elements that own this dom element
+ *
+ * @param  {object} widget_element - Widget element that owns
+ } r
+ */
+
+OpenAjax.a11y.cache.DOMElement.prototype.addOwnedBy = function (widget_element) {
+
+  function updateReferences(de) {
+    // a widget element can only own this node once
+    if (de.owned_by.indexOf(widget_element) < 0) {
+      var role = widget_element.dom_element.role;
+      if (de.role_info && de.role_info.requiredParents.indexOf(role) >= 0) {
+        de.owned_by.push(widget_element);
+      }
+    }
+
+    if (widget_element.owned_dom_elements.indexOf(de) < 0) {
+      widget_element.owned_dom_elements.push(de);
+    }
+
+    for (var i = 0; i < de.child_dom_elements.length; i += 1) {
+      var child_de = de.child_dom_elements[i];
+      if (child_de.type === Node.ELEMENT_NODE) {
+        updateReferences(child_de);
+      }
+    }
+
+  }
+
+  updateReferences(this);
 
 };
 
@@ -1515,7 +1699,7 @@ OpenAjax.a11y.cache.DOMElement.prototype.setImpliedRole = function (role) {
 
   if (!this.has_role && typeof role === 'string' && (role.length > 0)) {
 
-    role_info = OpenAjax.a11y.aria.getRoleObject(role);
+    var role_info = OpenAjax.a11y.aria.getRoleObject(role);
 
     if (!role_info) return;
 
@@ -1527,32 +1711,27 @@ OpenAjax.a11y.cache.DOMElement.prototype.setImpliedRole = function (role) {
 
     if (role_info && role_info.roleType) {
 
-      switch (role_info.roleType) {
-
-      case 'widget':
+      if (role_info.roleType.indexOf('widget') >= 0 ||
+          role_info.roleType.indexOf('window') >= 0) {
         this.is_widget = true;
-        break;
+      }
 
-      case 'landmark':
+      if (role_info.roleType.indexOf('landmark') >= 0) {
         this.is_landmark = true;
-        break;
+      }
 
-      case 'live':
+      if (role_info.roleType.indexOf('live') >= 0) {
         this.is_live = true;
-        break;
+      }
 
-      case 'abstract':
-        this.is_abstract  = true;
-        break;
+      if (role_info.roleType.indexOf('abstract') >= 0) {
+        this.is_abstract = true;
+      }
 
-      case 'section':
-        this.is_section  = true;
-        break;
+      if (role_info.roleType.indexOf('section') >= 0) {
+        this.is_section = true;
+      }
 
-      default:
-        break;
-
-      } // end switch
     }
   }
 };
@@ -1630,30 +1809,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.getParentLandmark = function () {
 
 };
 
-
-/**
- * @method hasAttrWithValue
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc   Check DOMElement for presence of attribute with specified value
- *
- * @param  {String} name  - name of attribute
- * @param  {String} value - value of attribute
- *
- * @return {boolean} Indicates whether or not DOMElement has the specified
- *                   attribute with the specified value.
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.hasAttrWithValue = function (name, value) {
-
-  if (this.hasOwnProperty (name)) {
-    return this[name] === value;
-  }
-
-  return false;
-
-};
 
 /**
  * @method hasOwns
@@ -1744,37 +1899,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.containsInteractiveElements = function 
 
 
 /**
- * @method hasParentRole
- *
- * @memberOf OpenAjax.a11y.cache.DOMElement
- *
- * @desc Tests if a widget has a parent element with a certain role
- *
- * @param {String}  role -  Role to find
- *
- * @return {Boolean} Returns true if widget has child element with role, otherwise false
- */
-
-OpenAjax.a11y.cache.DOMElement.prototype.hasParentRole = function (role) {
-
-   function checkParentElementForRole(dom_element) {
-
-     if (!dom_element) return false;
-
-     if (dom_element.role === role) {
-       return true;
-     }
-     else {
-       return checkParentElementForRole(dom_element.parent_element);
-     }
-
-   }
-
-   return checkParentElementForRole(this.parent_element);
-
-};
-
-/**
  * @method getHasDescribedBy
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
@@ -1809,11 +1933,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.getAccessibility = function () {
   var RESULT_VALUE       = OpenAjax.a11y.RESULT_VALUE;
 
   var severity = cache_nls.getResultValueNLS(RESULT_VALUE.NONE);
-  a.label    = severity.label;
-
-//  if (this.rules_hidden.length) {
-//    severity = cache_nls.getResultValueNLS(RESULT_VALUE.HIDDEN);
-//  }
 
   if (this.rules_passed.length) {
     severity = cache_nls.getResultValueNLS(RESULT_VALUE.PASS);
@@ -2244,8 +2363,6 @@ OpenAjax.a11y.cache.DOMElement.prototype.hasDragEvents = function (prop_list) {
   }
 
   var has_event = false;
-
-  var de = this;
 
 //  OpenAjax.a11y.logger.debug("DRAG: " + de.toString());
 
@@ -2785,6 +2902,8 @@ OpenAjax.a11y.cache.DOMElement.prototype.EnumerateFirefoxEvents = function (node
   var i;
   var event_info;
 
+  var Components = Components || {};
+
   if (node.tagName && node.tagName.toLowerCase() === 'body') {
      event_info = this.EnumerateFirefoxEvents(this.document, null);
 //     OpenAjax.a11y.logger.debug('body: ' + event_info.has_key_down);
@@ -3077,6 +3196,9 @@ OpenAjax.a11y.cache.DOMElement.prototype.EnumerateInlineEvents = function (node,
   }
 
   function testForPropertyAndJQueryEvent(p) {
+
+    // If JQuery is defined
+    var $ = $ || {};
 
     if (typeof node['on' + p] === 'function') {
       events.supports_events = true;

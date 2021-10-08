@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -11,7 +29,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_1',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -44,9 +62,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, de.role, we.computed_label]);
              }
              else {
-               if (!de.role_info.reqName) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
-               else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-             }
+               if (de.role_info.nameRequired) {
+                 rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
+               } else {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+              }
+            }
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
@@ -64,7 +85,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_2',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -162,7 +183,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_3',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -211,7 +232,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_4',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -307,11 +328,11 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 /**
  * @object WIDGET_5
  *
- * @desc Elements with ARIA attributes have valid values
+ * @desc ARIA attributes must be defined
  */
 
 { rule_id             : 'WIDGET_5',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -409,13 +430,19 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_6',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role]'],
+  target_resources    : ['[checkbox]',
+                         '[combobox]',
+                         '[menuitemcheckbox]',
+                         '[option]',
+                         '[scrollbar]',
+                         '[slider]',
+                         '[switch]'],
   primary_property    : 'role',
   resource_properties : [],
   language_dependency : "",
@@ -488,11 +515,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          var de = we.dom_element;
          var style = de.computed_style;
 
-//         OpenAjax.a11y.logger.debug("  RULE WIDGET 6: " + de.role + " ("+ de.role_info + ")");
+         var required_properties = de.role_info.requiredProps;
 
-         var required_properties = de.role_info.reqProps;
-
-         if (required_properties) {
+         if (required_properties && required_properties.length) {
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 
@@ -522,15 +547,27 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_7',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-02',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role]'],
+  target_resources    : ['[feed]',
+                         '[grid]',
+                         '[list]',
+                         '[listbox]',
+                         '[menu]',
+                         '[menubar]',
+                         '[radiogroup]',
+                         '[row]',
+                         '[rowgroup]',
+                         '[table]',
+                         '[tablist]',
+                         '[tree]',
+                         '[treegrid]'],
   primary_property    : 'role',
-  resource_properties : [],
+  resource_properties : ['aria_busy', 'aria_owns'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
@@ -562,26 +599,29 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          var de = we.dom_element;
          var style = de.computed_style;
 
-         var required_child_roles = de.role_info.reqChildren;
+         var required_child_roles = de.role_info.requiredChildren;
 
-         if (required_child_roles) {
+         if (required_child_roles && required_child_roles.length) {
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 
-             var flag = false;
+             if (we.aria_busy) {
+               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.role]);
+             } else {
+               var flag = false;
 
-             for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
+               for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
+                 flag = we.hasRequiredChildRole(required_child_roles[j]);
+               }
 
-               var role = required_child_roles[j];
+               var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
 
-               flag = we.hasChildRole(role);
-
+               if (flag) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
+               } else {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
+              }
              }
-
-             var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
-
-             if (flag) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
@@ -599,15 +639,29 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_8',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role]'],
+  target_resources    : [ "caption",
+                          "cell",
+                          "columnheader",
+                          "gridcell",
+                          "listitem",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "option",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "tab",
+                          "treeitem"
+                      ],
   primary_property    : 'role',
-  resource_properties : [],
+  resource_properties : ['aria_owns'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
@@ -618,8 +672,16 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        var required_roles_max = required_roles.length - 1;
 
        for (var i = 0; i < required_roles.length; i++ ) {
-         str += required_roles[i];
-         if (i !== required_roles_max) str += ", ";
+         if (i > 0) {
+          if ( i === required_roles_max) {
+            str += "@ or @" + required_roles[i];
+          } else {
+            str += "@, @" + required_roles[i];
+;
+          }
+         } else {
+           str += required_roles[i];
+         }
        }
 
        return str;
@@ -639,26 +701,26 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          var de = we.dom_element;
          var style = de.computed_style;
 
-         var required_parent_roles = de.role_info.container;
+         var required_parent_roles = de.role_info.requiredParents;
 
-         if (required_parent_roles) {
+         if (required_parent_roles && required_parent_roles.length) {
 
            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
 
              var flag = false;
 
              for (var j = 0; (j < required_parent_roles.length) && !flag; j++) {
-
-               var role = required_parent_roles[j];
-
-               flag = we.hasParentRole(role);
-
+                var role = required_parent_roles[j];
+                flag = we.isOwnedByRole(role);
              }
 
              var required_roles_string = getRequiredRolesString(required_parent_roles);
 
-             if (flag) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
+             if (flag) {
+               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
+             } else {
+               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
+             }
            }
            else {
              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
@@ -675,60 +737,40 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_9',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[aria-owns]', '[aria-owns]'],
+  target_resources    : ['[aria-owns]'],
   primary_property    : 'is_owned',
   resource_properties : ['owner_controls'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-     function getParentWidgetString(list) {
-
-       var str = "";
-       list_max = list.length - 1;
-
-       for (var i = 0; i < list.length; i++ ) {
-         str += list[i].toString();
-         if (i !== list_max) str += "; ";
-       }
-
-       return str;
-
-     }
-
-     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+     var we;
 
-     if (widget_elements && widget_elements) {
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
 
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
+        if (de.owned_by.length === 1) {
+          we = de.owned_by[0];
+          rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
+        } else {
+          if (de.owned_by.length > 1) {
+            for (var j = 0; j < de.owned_by.length; j += 1) {
+              we = de.owned_by[j];
+              rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
+            } // end loop
+          }
+        }
+     } // end loop
 
-         if (we.is_owned) {
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             var parent_string = getParentWidgetString(we.owner_controls);
-
-             if (we.owner_controls.length === 1) rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we.toString(), parent_string]);
-             else if (we.owner_controls.length > 1) rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [parent_string, we.toString()]);
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [we.toString()]);
-           }
-         }
-       } // end loop
-     }
    } // end validation function
 },
 
@@ -739,113 +781,80 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_10',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[role="slider"]','[role="progress"]','[role="scrollbar"]','[role="spinbutton"]'],
+  target_resources    : ['[role="meter"]',
+                         '[role="progress"]',
+                         '[role="scrollbar"]',
+                         '[role="slider"]',
+                         '[role="spinbutton"]'],
   primary_property    : '',
   resource_properties : ['aria-valuemin', 'aria-valuenow', 'aria-valuemax'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-     function getNotNumbersString() {
-
-       var str = "";
-
-       if (isNaN(min)) str += 'aria-valuemin';
-
-       if (isNaN(max)) {
-         if (str.length > 0) str += ", ";
-         str += 'aria-valuemax';
-       }
-
-       if (isNaN(value)) {
-         if (str.length > 0) str += ", ";
-         str += 'aria-valuenow';
-       }
-
-       return str;
-     }
-
-     function getNumberCount() {
-
-       var count = 0;
-
-       if (!isNaN(min)) count++;
-       if (!isNaN(max)) count++;
-       if (!isNaN(value)) count++;
-
-       return count;
-     }
-
-     function hasMaxMin() {
-
-       var count = 0;
-
-       if (!isNaN(min)) count++;
-       if (!isNaN(max)) count++;
-
-       return count === 2;
-     }
-
      var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
 
-     if (widget_elements && widget_elements) {
+     if (dom_elements && dom_elements) {
 
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
+       for (var i = 0; i < dom_elements_len; i++) {
+         var de = dom_elements[i];
          var style = de.computed_style;
 
-         if (de.has_range) {
+         if (de.is_range) {
 
-           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 
-             var valuetext = de.node.getAttribute('aria-valuetext');
-             var min       = parseInt(de.node.getAttribute('aria-valuemin'), 10);
-             var max       = parseInt(de.node.getAttribute('aria-valuemax'), 10);
-             var value     = parseInt(de.node.getAttribute('aria-valuenow'), 10);
-             var number_count = getNumberCount();
-             var has_max_min  = hasMaxMin();
+              var is_value_required = !('progressbar spinbutton'.indexOf(de.role) >= 0);
 
-             if (typeof valuetext === 'string' && (valuetext.length > 0)) {
-               rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, valuetext]);
-             }
-             else {
-               if (number_count === 3 || (de.role === 'progressbar' && has_max_min)) {
-                 if (min < max) {
-                   if ((min <= value) && (value <= max)) rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_2', [we, value, min, max]);
-                   else if (de.role === 'progressbar' && has_max_min)  rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_3', [min, max]);
-                   else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [value, min, max]);
-                 }
-                 else {
-                   rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_2', [min, max]);
-                 }
-               }
-               else {
+              var valuetext          = de.getAttributeValue('aria-valuetext');
+              var is_valuetext_valid = de.isAttributeValueValid('aria-valuetext', valuetext);
 
-                  if (de.role === 'progressbar' && !has_max_min) {
-                    rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_3', [value, min, max]);
+              var min          = de.getAttributeValue('aria-valuemin');
+              var is_min_valid = de.isAttributeValueValid('aria-valuemin', min);
+
+              var max          = de.getAttributeValue('aria-valuemax');
+              var is_max_valid = de.isAttributeValueValid('aria-valuemax', max);
+
+              var value          = de.getAttributeValue('aria-valuenow');
+              var is_value_valid = de.isAttributeValueValid('aria-valuenow', value);
+
+              if (is_valuetext_valid) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de, valuetext]);
+              } else {
+                if (is_value_valid) {
+                  if (is_max_valid && is_min_valid) {
+                    if (min < max) {
+                      if ((min <= value) && (value <= max)) {
+                        rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de, value, min, max]);
+                      } else {
+                        rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [value, min, max]);
+                      }
+                    } else {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
+                    }
+                  } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de, min, max]);
                   }
-                  else {
-                    var not_numbers_string = getNotNumbersString();
-
-                   if (number_count === 1) rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_4', [not_numbers_string]);
-                   else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_5', [not_numbers_string]);
-                 }
-               }
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [we.toString()]);
-           }
+                } else {
+                  if (is_value_required) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de]);
+                  } else {
+                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de]);
+                  }
+                }
+              }
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de]);
+            }
          }
        } // end loop
      }
@@ -859,7 +868,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
  */
 
 { rule_id             : 'WIDGET_11',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
@@ -962,7 +971,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [we.computed_label, de.tag_name, de.role]);
              }
              else {
-               if (!de.role_info.reqName) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
+               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
                else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
              }
            }
@@ -978,17 +987,28 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 /**
  * @object WIDGET_13
  *
- * @desc Warning about using widget roles
+ * @desc Roles that prohibit accessible names
  */
 
 { rule_id             : 'WIDGET_13',
-  last_updated        : '2014-11-28',
+  last_updated        : '2021-07-07',
   rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
   rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
-  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP3,
+  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
   wcag_primary_id     : '4.1.2',
-  wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : [],
+  wcag_related_ids    : ['2.4.6'],
+  target_resources    : [ "caption",
+                          "code",
+                          "deletion",
+                          "emphasis",
+                          "generic",
+                          "insertion",
+                          "none",
+                          "paragraph",
+                          "presentation",
+                          "strong",
+                          "subscript",
+                          "superscript"],
   primary_property    : '',
   resource_properties : [],
   language_dependency : "",
@@ -998,25 +1018,41 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
      var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-     var elements_with_role     = dom_cache.controls_cache.elements_with_role;
-     var elements_with_role_len = elements_with_role.length;
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
 
-     if (elements_with_role && elements_with_role_len) {
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+        var style = de.computed_style;
+        var implicit_role = '';
 
-       for (var i = 0; i < elements_with_role_len; i++) {
-         var de = elements_with_role[i];
-         var style = de.computed_style;
+        if (de.element_aria_info) {
+          implicit_role = de.element_aria_info.defaultRole;
+        }
 
-         if (de.is_widget) {
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, de.tag_name]);
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-           }
-         }
-       } // end loop
-     }
+        if (de.has_aria_label || de.has_aria_labelledby) {
+
+          if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
+            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+            }
+          } else {
+            if (!de.role && implicit_role && OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
+              if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                if (de.tag_name === 'a') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+                } else {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+                }
+              } else {
+                rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+              }
+            }
+          }
+        } // end loop
+      }
    } // end validation function
 },
 
@@ -1133,6 +1169,206 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
           default:
             break;
+        }
+      }
+    }
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_15
+ *
+ * @desc     Roles with deprecated ARIA attributes
+ */
+{ rule_id             : 'WIDGET_15',
+  last_updated        : '2021-08-10',
+  rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
+  rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
+  wcag_primary_id     : '4.1.1',
+  wcag_related_ids    : ['4.1.2'],
+  target_resources    : [
+        "alert",
+        "alertdialog",
+        "article",
+        "banner",
+        "blockquote",
+        "button",
+        "caption",
+        "cell",
+        "checkbox",
+        "code",
+        "command",
+        "complementary",
+        "composite",
+        "contentinfo",
+        "definition",
+        "deletion",
+        "dialog",
+        "directory",
+        "document",
+        "emphasis",
+        "feed",
+        "figure",
+        "form",
+        "generic",
+        "grid",
+        "group",
+        "heading",
+        "img",
+        "input",
+        "insertion",
+        "landmark",
+        "link",
+        "list",
+        "listbox",
+        "listitem",
+        "log",
+        "main",
+        "marquee",
+        "math",
+        "meter",
+        "menu",
+        "menubar",
+        "menuitem",
+        "menuitemcheckbox",
+        "menuitemradio",
+        "navigation",
+        "note",
+        "option",
+        "paragraph",
+        "presentation",
+        "progressbar",
+        "radio",
+        "radiogroup",
+        "range",
+        "region",
+        "row",
+        "rowgroup",
+        "scrollbar",
+        "search",
+        "section",
+        "sectionhead",
+        "select",
+        "separator",
+        "spinbutton",
+        "status",
+        "strong",
+        "structure",
+        "subscript",
+        "superscript",
+        "switch",
+        "tab",
+        "table",
+        "tablist",
+        "tabpanel",
+        "term",
+        "time",
+        "timer",
+        "toolbar",
+        "tooltip",
+        "tree",
+        "treegrid",
+        "treeitem",
+        "widget",
+        "window"
+    ],
+  primary_property    : 'role',
+  resource_properties : [
+        "aria-disabled",
+        "aria-errormessage",
+        "aria-haspopup",
+        "aria-invalid",
+        "aria-checked",
+        "aria-selected"
+    ],
+  language_dependency : "",
+  validate          : function (dom_cache, rule_result) {
+
+     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
+     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
+
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+        var style = de.computed_style;
+        var role = de.role;
+        var implicit_role = '';
+        var deprecatedProps = [];
+
+        if (!de.has_role && de.element_aria_info) {
+          implicit_role = de.element_aria_info.defaultRole;
+        }
+
+        if (de.has_role && OpenAjax.a11y.aria.designPatterns[role]) {
+          deprecatedProps = OpenAjax.a11y.aria.designPatterns[role].deprecatedProps;
+        } else {
+          if (implicit_role && OpenAjax.a11y.aria.designPatterns[implicit_role]) {
+            deprecatedProps = OpenAjax.a11y.aria.designPatterns[implicit_role].deprecatedProps;
+          }
+        }
+
+        if (deprecatedProps.length) {
+          for (var j = 0; j < deprecatedProps.length; j += 1) {
+            var prop = deprecatedProps[j];
+
+            if (de.node.hasAttribute(prop)) {
+
+              if (role) {
+                if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [prop, de.tag_name, role]);
+                } else {
+                  rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [prop, de.tag_name, role]);
+                }
+              } else {
+                if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [prop, de.tag_name, implicit_role]);
+                } else {
+                  rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [prop, de.tag_name, implicit_role]);
+                }
+              }
+            }
+          }
+        }
+      }
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_16
+ *
+ * @desc     Web compnents require manual check
+ */
+{ rule_id             : 'WIDGET_16',
+  last_updated        : '2021-09-12',
+  rule_scope          : OpenAjax.a11y.RULE_SCOPE.ELEMENT,
+  rule_category       : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
+  wcag_primary_id     : '2.1.1',
+  wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
+  target_resources    : ["Custom elements using web component APIs"],
+  primary_property    : '',
+  resource_properties : [],
+  language_dependency : "",
+  validate          : function (dom_cache, rule_result) {
+
+    var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
+    var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
+
+    var dom_elements     = dom_cache.element_cache.dom_elements;
+    var dom_elements_len = dom_elements.length;
+
+    for (var i = 0; i < dom_elements_len; i++) {
+      var de = dom_elements[i];
+      var style = de.computed_style;
+
+      if (de.tag_name.indexOf('-') >= 0) {
+        if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name]);
+        } else {
+        rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
         }
       }
     }

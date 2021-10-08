@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test: IDL Properties</title>
+    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>  
+
+    <h1>Test: IDL Properties</h1>
+
+    <div id="id-slider-1" role="slider" aria-label="slider 1" aria-valuenow="10"></div>
+
+    <div id="id-slider-2"></div>
+
+    <div id="id-slider-3"></div>
+
+    <img id="id-image-1" src="image.png" alt="alt 1"/>
+
+    <img id="id-image-2" src="image.png"/>
+
+    <img id="id-image-3" src="image.png"/>
+
+      <script>
+        let s = document.getElementById('id-slider-2');
+        s.role = 'slider';
+        s.ariaValueNow = 20;
+        s.ariaLabel = 'Slider 2';
+
+        let img = document.getElementById('id-image-2');
+        img.alt = 'alt 2';
+
+        // Testing the use of querySelectorAll
+        let roles = document.querySelectorAll('[role]');
+        console.log('[roles]: ' + roles.length);
+
+        // Testing the use of querySelectorAll
+        let vns = document.querySelectorAll('[aria-valuenow]');
+        console.log('[aria-valuenow]: ' + vns.length);
+
+        // Testing reflection of properties and attributes
+        let divs = document.querySelectorAll('div[id]');
+        for (let i = 0; i < divs.length; i += 1) {
+          let d = divs[i];
+          let idlRole  = d.role;
+          let attrRole = d.getAttribute('role');
+
+          console.log('[id]: ' + d.id);
+
+          console.log('[ IDL][role]: ' + idlRole  + ( idlRole ? ' (' + typeof idlRole  + ')' : ' (false)'));
+          console.log('[Attr][role]: ' + attrRole + (attrRole ? ' (' + typeof attrRole + ')' : ' (false)'));
+
+          let idlLabel  = d.ariaLabel;
+          let attrLabel = d.getAttribute('aria-label');
+          console.log('[ IDL][label]: ' + idlLabel  + (  idlLabel ? ' (' + typeof idlLabel  + ')' : ' (false)'));
+          console.log('[Attr][label]: ' + attrLabel + ( attrLabel ? ' (' + typeof attrLabel + ')' : ' (false)'));
+
+          let idlValueNow  = d.ariaValueNow;
+          let attrValueNow = d.getAttribute('aria-label');
+          console.log('[ IDL][aria-valuenow]: ' + idlValueNow  + (  idlValueNow ? ' (' + typeof idlValueNow  + ')' : ' (false)'));
+          console.log('[Attr][aria-valuenow]: ' + attrValueNow + ( attrValueNow ? ' (' + typeof attrValueNow + ')' : ' (false)'));
+        }
+
+        console.log('\n');
+
+        // Testing reflection of properties and attributes
+        let imgs = document.querySelectorAll('img[id]');
+        let imgs2 = document.querySelectorAll('img[alt]');
+        console.log('[imgs]: ' + imgs2.length);
+
+        for (let i = 0; i < imgs.length; i += 1) {
+          let img = imgs[i];
+          let idlAlt  = img.alt;
+          let attrAlt = img.getAttribute('alt');
+
+          console.log('[id]: ' + img.id + ' [num attrs]: ' + img.attributes.length);
+
+          console.log('[ IDL][alt]: ' + idlAlt  + ( idlAlt ? ' (' + typeof idlAlt  + ')' : ' (false)'));
+          console.log('[Attr][alt]: ' + attrAlt + (attrAlt ? ' (' + typeof attrAlt + ')' : ' (false)'));
+
+        }
+
+        console.log('\n');
+
+        console.log('[Empty string test]: ' + ('' ? 'true' : 'false'))
+        console.log('[        null test]: ' + (null ? 'true' : 'false'))
+
+      </script>
+
+
+
+    
+  </body>
+
+</html>

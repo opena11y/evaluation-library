@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Heading and Landmark Rules                    */
 /* ---------------------------------------------------------------- */
@@ -25,7 +43,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var main_elements     = dom_cache.headings_landmarks_cache.main_elements;
     var main_elements_len = main_elements.length;
@@ -79,14 +96,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var elements_with_content    = dom_cache.headings_landmarks_cache.elements_with_content;
     var elements_with_content_len = elements_with_content.length;
-
-    var pass_count   = 0;
-    var fail_count   = 0;
-    var mc_count     = 0;
 
     var tag_name = "";
 
@@ -104,16 +116,13 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       else {
         if (de.parent_landmark) {
           rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tag_name, de.parent_landmark.landmark]);
-          pass_count++;
         }
         else {
           if (de.may_have_renderable_content) {
             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [tag_name]);
-            mc_count++;
           }
           else {
             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tag_name]);
-            fail_count++;
           }
         }
       }
@@ -143,7 +152,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -153,7 +161,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var page_element = dom_cache.headings_landmarks_cache.page_element;
 
-    var i, ci, le, de, cs, li;
+    var i, ci, le, de, cs;
 
 
     var navigation_count = 0;
@@ -238,7 +246,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -314,7 +321,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -392,7 +398,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -468,7 +473,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -477,8 +481,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var landmark_count = 0;
     var les = [];
-
-    var LANDMARK_ROLE = 'contentinfo';
 
     for (var i = 0; i < landmark_elements_len; i++ ) {
       var le = landmark_elements[i];
@@ -546,7 +548,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -608,7 +609,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -703,7 +703,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -799,7 +798,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -858,7 +856,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -920,7 +917,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -1015,7 +1011,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -1113,7 +1108,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     function checkLandmarkChildren(landmark) {
 
@@ -1204,11 +1198,9 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
-    var fail_count = 0;
 
     for (var i = 0; i < landmark_elements_len; i++ ) {
 
@@ -1288,7 +1280,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -1338,7 +1329,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;
@@ -1376,7 +1366,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
     var VISIBILITY  = OpenAjax.a11y.VISIBILITY;
-    var SOURCE      = OpenAjax.a11y.SOURCE;
 
     var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
     var landmark_elements_len = landmark_elements.length;

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -61,27 +63,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [{ type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                                title: 'WCAG 2.0 Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1',
-                               url:   'http://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast'
+                               url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast'
                              },
                              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                                title: 'How to meet Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1',
-                               url:   'http://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast'
+                               url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast'
                              },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G17: Ensuring that a contrast ratio of at least 7:1 exists between text (and images of text) and background behind the text',
-                              url:   'http://www.w3.org/TR/WCAG20-TECHS/G17'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G17'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G18: Ensuring that a contrast ratio of at least 4.5:1 exists between text (and images of text) and background behind the text',
-                              url:   'http://www.w3.org/TR/WCAG20-TECHS/G18'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G18'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G148: Not specifying background color, not specifying text color, and not using technology features that change those default',
-                              url:   'http://www.w3.org/TR/WCAG20-TECHS/G148'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G148'
                             },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
-                              url:   'http://www.w3.org/TR/WCAG20-TECHS/G174'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                             }
                             ]
         },
@@ -106,15 +108,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
                             ],
             INFORMATIONAL_LINKS: [{ type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                                title: 'WCAG 2.0 Success Criterion 1.4.1 Use of Color',
-                               url:   'http://www.w3.org/TR/WCAG20/#visual-audio-contrast-without-color'
+                               url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-without-color'
                              },
                              { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                                title: 'How to meet Success Criterion 1.4.1 Use of Color',
-                               url:   'http://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-without-color'
+                               url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-without-color'
                              },
                             { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                               title: 'G14: Ensuring that information conveyed by color differences is also available in text',
-                              url:   'http://www.w3.org/TR/WCAG20-TECHS/G14'
+                              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G14'
                             }
                             ]
         }

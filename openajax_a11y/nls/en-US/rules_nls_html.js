@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -57,11 +59,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: Headings: The em and strong elements',
-                url:   'http://www.w3.org/TR/html4/struct/text.html#edef-EM'
+                url:   'https://www.w3.org/TR/html4/struct/text.html#edef-EM'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: Headings: The H1-H6 elements',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#edef-H2'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
               }
             ]
         },
@@ -95,6 +97,58 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               'Verify that there are start and pause buttons that start and stop the scrolling of content.'
             ],
             INFORMATIONAL_LINKS: [
+            ]
+        },
+        HTML_3: {
+            ID:         'HTML 3',
+            DEFINITION: 'Some HTML elements are restricted in the role allowed based on the semantics of the element (e.g. @li@ elements can only have list related ARIA roles).',
+            SUMMARY:    'Role is not allowed',
+            TARGET_RESOURCES_DESC: '',
+            RULE_RESULT_MESSAGES: {
+              FAIL_S:   'Remove or update the role to an allowed role on the element',
+              FAIL_P:   'Remove or update the roles to an allowed role on the %N_F elements',
+              MANUAL_CHECK_S: 'The explict role on the element can be removed, since it is redundant with the implict role of the element.',
+              MANUAL_CHECK_P: 'The explict role on the %N_MC elements can be removed, since they are redundant with the implict role of each element.',
+              HIDDEN_S: 'If the hidden element becomes visible, it\'s role must be removed or updated.',
+              HIDDEN_P: 'If any of the %N_H hidden elements become visible, it\'s role must be removed or updated to an allowed role.',
+              NOT_APPLICABLE:  'No elements with role restrictions found on the page.'
+            },
+            NODE_RESULT_MESSAGES: {
+              ELEMENT_FAIL_1: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the implict role of the element to be changed.  Remove the @%4@ role from the element.',
+              ELEMENT_FAIL_2: 'The @%1@ element with the @%2@ attribute does not allow the implict role of the element to be changed.  Remove the @%3@ role from the element.',
+              ELEMENT_FAIL_3: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow the implict role of the element to be changed.  Remove the @%2@ role from the element.',
+              ELEMENT_FAIL_4: 'The @%1@ element does not allow the implict role of the element to be changed.  Remove the @%2@ role from the element.',
+              ELEMENT_FAIL_5: 'The @%1@ element with the @%2@ and @%3@ attributes does not allow the @%4@ role.  Either remove the role or change it to one of the following allowed values: %5.',
+              ELEMENT_FAIL_6: 'The @%1@ element with the @%2@ attribute does not allow the @%3@ role.  Either remove the role or change it to one of the following allowed values: @%4@.',
+              ELEMENT_FAIL_7: 'The @%1@ element with an accessible name (e.g. using @aria-label@ or @aria-labelledby@) does not allow @%2@ role. Either remove the role or change it to one of the following allowed values: @%3@.',
+              ELEMENT_FAIL_8: 'The @%1@ element does not allow the @%2@ role.  Either remove the role or change it to one of the following allowed values: @%3@.',
+              ELEMENT_MC_1: 'The explict @%1@ role is the same as the native semantic role of the @%2@ element.  Defining the explict role is not recommended, and should be removed to ensure the semantics of the element are properly represented in accessibility APIs.',
+              ELEMENT_HIDDEN_1: '@%1@ element is hidden, the @%2@ role must be removed before it becomes visible.',
+              ELEMENT_HIDDEN_2: '@%1@ element is hidden, the @%2@ role must be removed or changed to an allowed role before it becomes visible.'
+            },
+            PURPOSE: [
+              'ARIA role attributes change the exposed meaning (semantics) of HTML elements to assisitve technologies.',
+              'When a role conflicts with the implicit semantics of an HTML element the accessibility API provides confusing and/or conflicting information to screen readers.',
+              'Role restrictions make sure roles enhance rather than conflict with the implicit semantcs of an HTML element.'
+            ],
+            TECHNIQUES: [
+              'Some HTML elements do not allow any role to override of the implicit role, in this case the role must be removed.',
+              'Some HTML elements only allow certain roles to override of the implicit role, in this case only the allowed roles can be used to override the implicit role.',
+              'When the explict role is the same as the implicit role for an HTML element, the explict role should be removed to insure the native semantics of the element are properly represented in accessibility APIs.'
+            ],
+            INFORMATIONAL_LINKS: [
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'W3C ARIA in HTML',
+                url:   'https://www.w3.org/TR/html-aria/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'W3C WAI-ARIA Authoring Practices 1.2 (Editor\'s Draft)',
+                url:   'https://w3c.github.io/aria-practices/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+                title: 'W3C HTML Accessibility API Mappings 1.0',
+                url:   'https://www.w3.org/TR/html-aam-1.0/'
+              },
             ]
         }
    }

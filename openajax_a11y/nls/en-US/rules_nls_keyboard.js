@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -77,11 +79,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',
-          url:   'http://oaa-accessibility.org/examples/'
+          url:   'https://oaa-accessibility.org/examples/'
         }
       ]
     },
@@ -127,15 +129,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'WAI-ARIA 1.0 Authoring Practices',
-          url:   'http://www.w3.org/WAI/PF/aria-practices/'
+          url:   'https://www.w3.org/WAI/PF/aria-practices/'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',
-          url:   'http://oaa-accessibility.org/examples/'
+          url:   'https://oaa-accessibility.org/examples/'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'Accessible jQuery-ui Components Demonstration',
-          url:   'http://access.aol.com/aegis/'
+          url:   'https://access.aol.com/aegis/'
         }
       ]
     },
@@ -169,11 +171,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G108'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
         },
         { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
           title: 'OAA Web Accessibility ARIA Examples',
-          url:   'http://oaa-accessibility.org/examples/'
+          url:   'https://oaa-accessibility.org/examples/'
         }
       ]
     }

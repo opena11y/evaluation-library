@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
+ // import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* --------------------------------------------------------------------------- */
 /* OpenAjax Alliance (OAA) ARIA Strict Rule Mapping (Beta)                     */
 /* --------------------------------------------------------------------------- */
 
 
-var createARIAStrictRuleset = function () {
+(function () {
 
   var ruleset_info = {
     ruleset_id    : "ARIA_STRICT",
-    version       : "1.1.0",
-    last_updated  : "2017-02-01",
+    version       : "1.2.0",
+    last_updated  : "2021-07-07",
     author        : "OpenAjax Accessibility Task Force",
-    author_url    : "http://www.openajax.org/member/wiki/Accessibility",
+    author_url    : "https://www.openajax.org/member/wiki/Accessibility",
 
     nls : {
       'en-us' : {
@@ -109,8 +111,8 @@ var createARIAStrictRuleset = function () {
         enabled  : true
       },
       CONTROL_11 : {
-        required : true,
-        enabled  : true
+       required : true,
+       enabled  : true
       },
       ERROR_1 : {
         required : true,
@@ -189,6 +191,10 @@ var createARIAStrictRuleset = function () {
         enabled  : true
       },
       HTML_2 : {
+        required : true,
+        enabled  : true
+      },
+      HTML_3 : {
         required : true,
         enabled  : true
       },
@@ -563,8 +569,20 @@ var createARIAStrictRuleset = function () {
       WIDGET_12 : {
        required : true,
        enabled  : true
-     },
+      },
+      WIDGET_13 : {
+       required : true,
+       enabled  : true
+      },
       WIDGET_14 : {
+       required : true,
+       enabled  : true
+     },
+     WIDGET_15: {
+       required : false,
+       enabled  : true
+     },
+     WIDGET_16: {
        required : true,
        enabled  : true
      }
@@ -588,5 +606,5 @@ var createARIAStrictRuleset = function () {
     OpenAjax.a11y.logger.error("[ARIA STRICT Ruleset] ** Error creating ARIA Strict Ruleset");
   }
 
-}();
+}());
 

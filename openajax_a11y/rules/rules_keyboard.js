@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -44,7 +62,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 //           OpenAjax.a11y.logger.debug("[checkForKeyboardOnRequiredChildren] " + widget + ": " + we + " ("+ flag + ")");
 
 
-          if (de.role_info && de.role_info.reqChildren && de.role_info.reqChildren.length) {
+          if (de.role_info && de.role_info.requiredChildren && de.role_info.requiredChildren.length) {
             kbd_events = checkChildren(we.child_cache_elements);
             if (kbd_events.length) return kbd_events;
           }
@@ -103,9 +121,7 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         var kbd_events = "";
 
-//         OpenAjax.a11y.logger.debug("  KEYBOARD RULE 1: " + de.role + " ("+ we.toString() + ")");
-
-        if (de.role_info.roleType === 'widget') {
+        if (de.is_widget) {
 
           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
 
@@ -180,12 +196,10 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
      for (var i = 0; i < interactive_elements_len; i++) {
 
-//       OpenAjax.a11y.logger.debug(" Interactive element: " + interactive_elements[i] + " (" + i + ")");
 
        var ie =interactive_elements[i];
        var de = ie.dom_element;
        var cs = de.computed_style;
-       var tab_index = parseInt(de.tab_index,10);
 
        if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
            (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
@@ -204,8 +218,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
          rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name]);
        }
      }  // endfor
-
-//     OpenAjax.a11y.logger.debug(" Interactive count: " + interactive_count + " (" + interactive_elements_len + ")");
 
      if (interactive_count > 1) {
        if (interactive_count === 1) {

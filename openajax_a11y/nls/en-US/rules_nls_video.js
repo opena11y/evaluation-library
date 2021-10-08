@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -60,15 +62,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The video element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-video-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The track element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-track-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-track-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -108,11 +118,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The object element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-object-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -152,11 +170,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The embed element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -198,11 +224,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The video element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-video-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The track element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-track-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-track-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -241,7 +275,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The object element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-object-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -280,7 +322,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The embed element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -321,15 +371,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The video element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-video-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-video-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The track element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-track-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-track-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -368,11 +426,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The object element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-object-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-object-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         },
@@ -411,11 +477,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HMTL 5: The embed element',
-                url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element'
+                url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-embed-element'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'University of Washington: Creating Accessible Videos',
+                url:   'https://www.washington.edu/accessibility/videos/'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+                title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+                url:   'https://webaim.org/techniques/captions/'
               }
             ]
         }

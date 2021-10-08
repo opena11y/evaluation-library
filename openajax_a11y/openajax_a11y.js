@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,10 +34,10 @@
  */
 
 OpenAjax.a11y.logger = OpenAjax.a11y.logger || {
-  debug: function (message) {},
-  info:  function (message) {},
-  warn:  function (message) {},
-  error: function (message) {}
+  debug: function (message) {console.log('[DEBUG]: ' + message)},
+  info:  function (message) {console.log('[ INFO]: ' + message)},
+  warn:  function (message) {console.log('[ WARN]: ' + message)},
+  error: function (message) {console.log('[ERROR]: ' + message)}
 };
 
 OpenAjax.a11y.setLogger = function (logger) {
@@ -50,7 +50,7 @@ OpenAjax.a11y.setLogger = function (logger) {
 
 // basic info about version of ruleset and rules
 OpenAjax.a11y.name = "OpenAjax Alliance Accessibility Tools Task Force";
-OpenAjax.a11y.baseUri = "http://www.openajax.org/member/wiki/Accessibility";
+OpenAjax.a11y.baseUri = "https://www.openajax.org/member/wiki/Accessibility";
 
 
 

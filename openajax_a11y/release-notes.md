@@ -1,3 +1,21 @@
+Version 1.2 Overview
+=============================
+
+* Updated Widget rule references to use ARIA 1.2 spec, ARIA Authoring Practices, MDN resources for ARIA and Web Foundation references for ARIA.
+* Updated references to remove references to iCITA website
+* Updated references to include W3C WAI Web Accessibility Tutorials
+* Updated regression tests based on ARIA 1.2 changes
+* Fixed bugs in CONTROL 11 rule on unique names for submit and reset buttons when there are multiple forms
+* Fixed bugs in WIDGET 7 rule on owned elements
+* Fixed bugs in WIDGET 8 rule related to being owned by another element
+* Fixed bugs in WIDGET 9 rule related to having required parent roles
+* Fixed bugs in WIDGET 10 rule related to range control attributes
+* Changed WIDGET 13 to test for name prohibitied requirement (from prohibiting any ARIA markup and this original rule was not included in any rulesets)
+* Added HTML 3 rule to support W3C ARIA in HTML specification
+* Added WIDGET 15 rule to test for use of deprecated ARIA states and properties on selected roles
+* Added WIDGET 16 rule to raise awareness of web components being user on a page and the need for manual checking
+
+
 Version 1.1.2 Overview
 =============================
 

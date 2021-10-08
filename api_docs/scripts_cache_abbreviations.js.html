@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts/cache_abbreviations.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts/cache_abbreviations.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
+/* ---------------------------------------------------------------- */
+/*                      AbbreviationsCache                          */
+/* ---------------------------------------------------------------- */
+
+/**
+ * @constructor AbbreviationsCache
+ *
+ * @memberOf OpenAjax.a11y.cache
+ *
+ * @desc Constructor for abbreviations cache object which contains a list of
+ *    abbreviation items representing the abbreviations defined
+ *    in a document. The item also contains a list of all the
+ *    dom element objects that share the same abbreviation
+ *
+ * @param {DOMCache}   dom_cache   - Reference to the DOMCache object
+ *
+ * @property {DOMCache} dom_cache  - Reference to the DOMCache object
+ *
+ * @property {Boolean}  up_to_date - Boolean true if the cache has been creating using the current DOMElements, else false
+ *                                   NOTE: This is a common property of all caches and is used when selectively build caches
+ *                                         based on whether a rule needs the cache
+ *
+ * @property {String}   sort_property   - Property of abbreviation item that the list is sorted on
+ * @property {Boolean}  sort_ascending  - true if list is sorted by ascending values, otherwsie false
+ *
+ * @property {Array}   abbreviation_items  - List of abbreviation items
+ * @property {Number}  length              - Number of abbreviation items in list
+ *
+ * @property {ResultRuleSummary}  rule_summary_result  - Rule results associated with this cache
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache = function (dom_cache) {
+
+  this.dom_cache  = dom_cache;
+  this.up_to_date = false;
+
+  this.abbreviation_items = [];
+  this.length = 0;
+
+  this.sort_property  = 'abbreviation_text';
+  this.sort_ascending = true;
+
+};
+
+/**
+ * @method addAbbreviationItem
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Adds a DOM Element object with an abbreviation to the abbreviation item list.
+ *       If the abreviation item does not exist the function will create one
+ *
+ * @param {DOMElement}  dom_element  - dom element to add to a abbreviation list
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.addAbbreviationItem = function (dom_element) {
+
+ var abbreviation_item = null;
+ var abbreviation_items_len = this.abbreviation_items.length;
+ var found = false;
+ var node_text = dom_element.getText();
+
+ for (var i=0; i &lt; abbreviation_items_len; i++ ) {
+  abbreviation_item = this.abbreviation_items[i];
+
+  if (node_text == abbreviation_item.abbreviation_text) {
+
+    abbreviation_item.dom_elements.push(dom_element);
+    abbreviation_item.count = abbreviation_item.dom_elements.length;
+
+    found = true;
+    break;
+  }
+ } // end loop
+
+ if (!found) {
+  abbreviation_item = new OpenAjax.a11y.cache.AbbreviationItem(node_text);
+
+  abbreviation_item.dom_elements.push(dom_element);
+  abbreviation_item.count = abbreviation_item.dom_elements.length;
+  abbreviation_item.cache_id = "abbrev_" + this.length;
+
+  this.abbreviation_items.push(abbreviation_item);
+  this.length = this.length + 1;
+ }
+
+};
+
+/**
+ * @deprecated getAbbreviationItemByCacheId
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Returns the abbreviation item with the cache id
+ *
+ * @param {String}  cache_id  - cache id of the abbreviation item object
+ *
+ * @return {AbbreviationItem} Returns abbreviation item object if cache id found, otherwise null
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.getAbbreviationItemByCacheId = function (cache_id) {
+  return this.getItemByCacheId(cache_id);
+};
+
+/**
+ * @method getItemByCacheId
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Returns the abbreviation item with the cache id
+ *
+ * @param {String}  cache_id  - cache id of the abbreviation item object
+ *
+ * @return {AbbreviationItem} Returns abbreviation item object if cache id found, otherwise null
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.getItemByCacheId = function (cache_id) {
+
+  var i, j;
+  var ai, de;
+  var dom_elements, dom_elements_len;
+
+  var abbreviation_items     = this.abbreviation_items;
+  var abbreviation_items_len = abbreviation_items.length;
+
+  if (cache_id &amp;&amp; cache_id.length) {
+
+    for (i = 0; i &lt; abbreviation_items_len; i++) {
+      ai = abbreviation_items[i];
+
+      if (ai.cache_id == cache_id) return ai;
+
+      dom_elements     = ai.dom_elements;
+      dom_elements_len = dom_elements.length;
+
+      for (j = 0; j &lt; dom_elements_len; j++ ) {
+        de = dom_elements[j];
+        if (de.cache_id == cache_id) return de;
+      } // end loop
+    } // end loop
+  }
+
+ return null;
+};
+
+/**
+ * @method emptyCache
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Empties all the abbreviation items from the cache
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.emptyCache = function () {
+
+ this.abbreviation_items.length = 0;
+ this.sort_property = 'abbreviation_text';
+ this.sort_ascending = true;
+ this.up_to_date = false;
+
+};
+
+/**
+ * @method updateCacheItems
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Updates the AbbreviationsCache object with information from a DOMElement object
+ *    This is used during the creation of the cache and is used by the functions for
+ *    either creating the cache all at one time or selectively
+ *
+ * @param {DOMElement}  dom_element  - DOM Element object to add to the abbreviations cache
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.updateCacheItems = function (dom_element) {
+
+ if ((dom_element.tag_name == 'abbr') ||
+   (dom_element.tag_name == 'acronym')) {
+
+   this.addAbbreviationItem(dom_element);
+
+ }
+
+};
+
+/**
+ * @method traverseDOMElementsForAbbreviations
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Traverses the DOMElements to update the abbreviation cache
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.traverseDOMElementsForAbbreviations = function (dom_element) {
+
+ if (!dom_element) return;
+
+ if (dom_element.type == Node.ELEMENT_NODE) {
+
+  this.updateCacheItems(dom_element);
+
+  for (var i = 0; i &lt; dom_element.child_dom_elements.length; i++ ) {
+   this.traverseDOMElementsForAbbreviations(dom_element.child_dom_elements[i]);
+  } // end loop
+
+ }
+
+};
+
+/**
+ * @method updateCache
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Traverses the DOMElements to update the abbreviation cache
+ *    This function is used to update the abbreviation cache
+ *    when needed by a rule, it sets the up to date flag when done
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.updateCache = function () {
+ var i;
+ var children = this.dom_cache.element_cache.child_dom_elements;
+ var children_len = children.length;
+
+ for (i=0; i &lt; children_len; i++) {
+  this.traverseDOMElementsForAbbreviations(children[i]);
+ }
+
+ this.up_to_date = true;
+
+};
+
+/**
+ * @method sortAbbreviationItems
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Sorts abbreviations by abbreviation_text property
+ *
+ * @param {Boolean}  ascending  - true if sort in ascending order; false in descending order
+ *
+ * @return {Boolean}  Returns true if list was sorted, false if not
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.sortAbbreviationItems = function(ascending) {
+
+  var swapped = false;
+  var temp = null;
+  var i;
+
+  if( !this.abbreviation_items || (this.abbreviation_items.length === 0)) {
+    return false;
+  } // endif
+
+  this.sort_ascending = ascending;
+
+  var abbreviation_items_len = this.abbreviation_items.length;
+
+  if( ascending ) {
+    do{
+      swapped = false;
+      for (i = 1; i &lt; abbreviation_items_len; i++ ) {
+        if (this.abbreviation_items[i-1].abbreviation_text > this.abbreviation_items[i].abbreviation_text) {
+          // swap the values
+          temp = this.abbreviation_items[i-1];
+          this.abbreviation_items[i-1] = this.abbreviation_items[i];
+          this.abbreviation_items[i] = temp;
+          swapped = true;
+        }
+      } // end loop
+    } while (swapped);
+  }
+  else {
+    do {
+      swapped = false;
+      for (i = 1; i &lt; abbreviation_items_len; i++ ) {
+        if (this.abbreviation_items[i-1].abbreviation_text &lt; this.abbreviation_items[i].abbreviation_text) {
+          // swap the values
+          temp = this.abbreviation_items[i-1];
+          this.abbreviation_items[i-1] = this.abbreviation_items[i];
+          this.abbreviation_items[i] = temp;
+          swapped = true;
+        }
+      } // end loop
+    } while (swapped);
+  }
+
+  this.sort_property = 'abbreviation_text';
+
+  return true;
+
+};
+
+/**
+ * @method toString
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationsCache
+ *
+ * @desc Returns a text string representation of the abbreviation cache object
+ *
+ * @return {String} Returns string represention the abbreviations cache object
+ */
+
+OpenAjax.a11y.cache.AbbreviationsCache.prototype.toString = function () {
+
+ var str ="\n\nAbbreviation Information\n";
+
+ var list_length = this.abbreviation_items.length;
+
+ for (var i=0; i &lt; list_length; i++ ) {
+  str += this.abbreviation_items[i].toString();
+ } // end loop
+
+ return str;
+};
+
+/* ---------------------------------------------------------------- */
+/*                      AbbreviationItem                            */
+/* ---------------------------------------------------------------- */
+
+/**
+ * @constructor AbbreviationItem
+ *
+ * @memberOf OpenAjax.a11y.cache
+ *
+ * @desc Constructor for abbreviation item object which contains information
+ *       about dom elements that share the same abbreviation
+ *
+ * @param  {String}  abbreviation  - text of abbreviation
+ *
+ * @property  {String}  cache_id            - String that uniquely identifies the cache element in the DOMCache
+ * @property  {String}  abbreviation_text   - text of abbreviation
+ *
+ * @property  {Array}   dom_elements  - List of dom elements associated with the abbreviation
+ * @property  {Number}  count         - Number of dom elements that share this abbreviation
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem = function (abbreviation) {
+
+  this.cach_id = "";
+
+  this.abbreviation_text = abbreviation;
+
+  this.dom_elements = [];
+  this.count = 0;
+
+};
+
+/**
+ * @method getElementResults
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns an array of node results in severity order
+ *
+ * @return {Array} Returns a array of node results
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getElementResults = function () {
+  return this.dom_elements[0].getElementResults();
+};
+
+/**
+ * @method getStyle
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns an array of style items
+ *
+ * @return {Array} Returns a array of style display objects
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getStyle = function () {
+
+  return this.dom_elements[0].getStyle();
+
+};
+
+/**
+ * @method getAttributes
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns an array of attributes for the element, sorted in alphabetical order
+ *
+ * @return {Array} Returns a array of attribute display object
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function () {
+
+  return [];
+
+};
+
+/**
+ * @method getCacheProperties
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns an array of cache properties sorted by property name
+ *
+ * @return {Array} Returns a array of cache property display object
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getCacheProperties = function () {
+
+  return [];
+
+};
+
+
+/**
+ * @method getCachePropertyValue
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns the value of a property
+ *
+ * @param {String}  property  - The property to retreive the value
+ *
+ * @return {String | Number} Returns the value of the property
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getCachePropertyValue = function (property) {
+
+  if (typeof this[property] == 'undefined') {
+    return this.dom_element.getCachePropertyValue(property);
+  }
+
+  return this[property];
+};
+
+/**
+
+ * @method getEvents
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns an array of events for the element, sorted in alphabetical order
+ *
+ * @return {Array} Returns a array of event item display objects
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getEvents = function () {
+
+  return [];
+
+};
+
+
+
+/**
+ * @method toString
+ *
+ * @memberOf OpenAjax.a11y.cache.AbbreviationItem
+ *
+ * @desc Returns a text string representation of the abbreviation item object
+ *
+ * @return {String} Returns string represention the abbreviation item object
+ */
+
+OpenAjax.a11y.cache.AbbreviationItem.prototype.toString = function () {
+
+ return "Abbreviation: " + this.abbreviation_text;
+};
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul><h3>Classes</h3><ul><li><a href="HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.GroupingElement.html">GroupingElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="OpenAjax.a11y%250D%250DNOTE_%2520The%2520following%2520properties%2520are%2520defined%2520when%2520the%2520ruleset%2520is%2520created.RulesetFactory.html">RulesetFactory</a></li><li><a href="TableElement.html">TableElement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Sep 20 2021 13:52:07 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

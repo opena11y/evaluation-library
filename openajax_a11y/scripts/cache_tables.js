@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            TableInfo                             */
@@ -131,7 +133,6 @@ OpenAjax.a11y.cache.TablesCache = function (dom_cache) {
  */
 
  OpenAjax.a11y.cache.TablesCache.prototype.addChild = function (table_element) {
-
    if (table_element) {
      this.child_cache_elements.push(table_element);
    }
@@ -552,8 +553,11 @@ OpenAjax.a11y.cache.TablesCache = function (dom_cache) {
    this.accessible_description_source         = OpenAjax.a11y.DESCRIPTION_SOURCE.NONE;
 
    if (dom_element.role &&
-       (dom_element.role === 'presentation')) this.table_role = OpenAjax.a11y.TABLE_ROLE.LAYOUT;
-   else this.table_role = OpenAjax.a11y.TABLE_ROLE.UNKNOWN;
+       (dom_element.role === 'presentation' || dom_element.role === 'none')) {
+      this.table_role = OpenAjax.a11y.TABLE_ROLE.LAYOUT;
+   } else {
+      this.table_role = OpenAjax.a11y.TABLE_ROLE.UNKNOWN;
+   }
 
    this.is_complex_data_table = false;
 
@@ -592,7 +596,7 @@ OpenAjax.a11y.cache.TableElement.prototype.setIsDataTable = function () {
 
   // if role=presentation this is a layout table
   if (this.dom_element.has_role  &&
-      (this.dom_element.role === 'presentation')) {
+      (this.dom_element.role === 'presentation' || this.dom_element.role === 'none')) {
 
     this.setIsLayoutTable();
     return;
@@ -884,9 +888,6 @@ OpenAjax.a11y.cache.TableElement.prototype.multipleTHInRow = function(row) {
    var th_count;
    var td_count;
 
-   var row_max = this.max_row;
-   var col_max = this.max_column;
-   var row_len;
    var cell;
 
    var c = 0;
@@ -1326,7 +1327,7 @@ OpenAjax.a11y.cache.TableElement.prototype.getAttributes = function (unsorted) {
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1509,8 +1510,6 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getElementResults = function () {
 
 OpenAjax.a11y.cache.CaptionElement.prototype.getAttributes = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var attributes = this.dom_element.getAttributes();
 
   return attributes;
@@ -1526,7 +1525,7 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getAttributes = function () {
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.CaptionElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.CaptionElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1559,8 +1558,6 @@ OpenAjax.a11y.cache.CaptionElement.prototype.getStyle = function () {
  */
 
 OpenAjax.a11y.cache.CaptionElement.prototype.getCacheProperties = function () {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties();
 
@@ -1726,8 +1723,6 @@ OpenAjax.a11y.cache.THeadElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.THeadElement.prototype.getCacheProperties = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties();
 
   return properties;
@@ -1765,7 +1760,7 @@ OpenAjax.a11y.cache.THeadElement.prototype.getCachePropertyValue = function (pro
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.THeadElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.THeadElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -1908,8 +1903,6 @@ OpenAjax.a11y.cache.TBodyElement.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.TBodyElement.prototype.getCacheProperties = function () {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
-
   var properties = this.dom_element.getCacheProperties();
 
   return properties;
@@ -1947,7 +1940,7 @@ OpenAjax.a11y.cache.TBodyElement.prototype.getCachePropertyValue = function (pro
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TBodyElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TBodyElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -2011,6 +2004,15 @@ OpenAjax.a11y.cache.TableRowElement = function (dom_element, table_info) {
 
   this.header_cell_count = 0;
   this.data_cell_count   = 0;
+
+  var te = table_info.table_element;
+  var de = dom_element;
+
+  if (te && (te.table_role !== OpenAjax.a11y.TABLE_ROLE.LAYOUT)) {
+    de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['tr[table]'];
+    de.implicit_role = de.element_aria_info.defaultRole;
+  }
+
 
 };
 
@@ -2130,7 +2132,7 @@ OpenAjax.a11y.cache.TableRowElement.prototype.getCachePropertyValue = function (
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -2215,7 +2217,6 @@ OpenAjax.a11y.cache.TableRowElement.prototype.getEvents = function (unsorted) {
 
 OpenAjax.a11y.cache.TableCellElement = function (dom_element, table_info) {
 
-  var headers_array = [];  // array of id headers
   var is_th;
 
   this.dom_element  = dom_element;
@@ -2251,6 +2252,26 @@ OpenAjax.a11y.cache.TableCellElement = function (dom_element, table_info) {
        this.table_type = OpenAjax.a11y.TABLE.TH_ELEMENT;
       }
     }
+  }
+
+  var te = table_info.table_element;
+  var de = this.dom_element;
+
+  if (te && (te.table_role !== OpenAjax.a11y.TABLE_ROLE.LAYOUT)) {
+    if (is_th) {
+      if (te.dom_element.role && ('grid'.indexOf(te.dom_element.role) >= 0)) {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['th[gridcell]'];
+      } else {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['th[cell]'];
+      }
+    } else {
+      if (te.dom_element.role && ('grid'.indexOf(te.dom_element.role) >= 0)) {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['td[gridcell]'];
+      } else {
+        de.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['td[cell]'];
+      }
+    }
+    de.implicit_role = de.element_aria_info.defaultRole;
   }
 
   if (table_info.table_row_element) {
@@ -2428,7 +2449,7 @@ OpenAjax.a11y.cache.TableCellElement.prototype.getCachePropertyValue = function 
  * @return {Array} Returns a array of event information
  */
 
-OpenAjax.a11y.cache.TableCellElement.prototype.getEvents = function (unsorted) {
+OpenAjax.a11y.cache.TableCellElement.prototype.getEvents = function () {
 
   return this.dom_element.getEvents();
 
@@ -2593,8 +2614,6 @@ OpenAjax.a11y.cache.PageElementLayout.prototype.getAttributes = function (unsort
  */
 
 OpenAjax.a11y.cache.PageElementLayout.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 

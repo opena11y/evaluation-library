@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       ElementInformation                         */
@@ -574,8 +574,9 @@ OpenAjax.a11y.cache.ElementInformation.prototype.countElement = function (dom_el
     default:
       break;
    }
+   break;
 
-   case 'output':
+  case 'output':
     this.output_count++;
     this.all_forms_count++;
     if (dom_element.has_title)   this.title_attribute_count++;
@@ -758,6 +759,7 @@ OpenAjax.a11y.cache.ElementInformation.prototype.countElement = function (dom_el
         this.all_structures_count++;
         break;
 
+      case 'none':
       case 'presentation':
         this.role_presentation_count++;
         this.all_structures_count++;

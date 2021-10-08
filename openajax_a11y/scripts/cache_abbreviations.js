@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      AbbreviationsCache                          */
@@ -400,12 +401,10 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function () {
 
   return [];
 
@@ -418,12 +417,10 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.getAttributes = function (unsorte
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.AbbreviationItem.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.AbbreviationItem.prototype.getCacheProperties = function () {
 
   return [];
 
@@ -482,7 +479,7 @@ OpenAjax.a11y.cache.AbbreviationItem.prototype.getEvents = function () {
 
 OpenAjax.a11y.cache.AbbreviationItem.prototype.toString = function () {
 
- return "Abbreviation: " + abbreviation_text;
+ return "Abbreviation: " + this.abbreviation_text;
 };
 
 

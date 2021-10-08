@@ -1,0 +1,51 @@
+
+  <!DOCTYPE html>
+  <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+      <title>WIDGET 16: Web compnents</title>
+      <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+      <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>WIDGET 16: Web compnents</h1>
+
+
+      <!-- Step 1: Create template for the component -->
+      <template id="vanilla-webcomponent-template">
+        <!-- When we insert this into a Shadow DOM, the styles will be scoped -->
+        <style>
+          .red {
+            color: red;
+          }
+        </style>
+
+        Hello, <span class="red">world</span>!
+      </template>
+
+      <!-- Step 2: Create custom element class and register it -->
+      <script>
+        class VanillaWebcomponent extends HTMLElement {
+          constructor() {
+            super();
+
+            this.attachShadow({ mode: 'open' }); // Creates a shadow DOM root node for the element
+
+            const template = document.getElementById('vanilla-webcomponent-template');
+            const templateInstance = template.content.cloneNode(true); // Clones the contents of the template
+            this.shadowRoot.appendChild(templateInstance); // Inserts the template contents into the shadow DOM
+          }
+        }
+
+        customElements.define('vanilla-webcomponent', VanillaWebcomponent);
+      </script>
+
+      <!-- Step 3: Render custom component and compare it to non-custom markup -->
+      <p>Hello, <span class="red">world</span>!</p>
+
+      <vanilla-webcomponent  class="WIDGET_16_MC"></vanilla-webcomponent>
+
+      <vanilla-webcomponent hidden class="WIDGET_16_HIDDEN"></vanilla-webcomponent>
+
+  </body>
+</html>
+          

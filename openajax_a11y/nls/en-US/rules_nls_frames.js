@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -57,11 +59,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
                        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                          title: 'WCAG 2.0 Success Criterion 2.4.1 Bypass Blocks: A mechanism is available to bypass blocks of content that are repeated on multiple Web pages',
-                         url:   'http://www.w3.org/TR/WCAG20/#navigation-mechanisms-skip'
+                         url:   'https://www.w3.org/TR/WCAG20/#navigation-mechanisms-skip'
                        },
                        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                          title: 'H64: Using the title attribute of the frame and iframe elements',
-                         url:   'http://www.w3.org/TR/WCAG20-TECHS/H64.html'
+                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                        }
                       ]
     },
@@ -101,11 +103,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
                       { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                         title: 'WCAG 2.0 Success Criterion 2.4.1 Bypass Blocks: A mechanism is available to bypass blocks of content that are repeated on multiple Web pages',
-                        url:   'http://www.w3.org/TR/WCAG20/#navigation-mechanisms-skip'
+                        url:   'https://www.w3.org/TR/WCAG20/#navigation-mechanisms-skip'
                       },
                       { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                         title: 'H64: Using the title attribute of the frame and iframe elements',
-                        url:   'http://www.w3.org/TR/WCAG20-TECHS/H64.html'
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                       }
       ]
     }

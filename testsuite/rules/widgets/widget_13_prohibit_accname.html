@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 13: Roles that prohibit accessible names</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header>
+        <div>Widget 13 test cases</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 13: Roles that prohibit accessible names </h1>
+
+        <div id="ID_TEST_LABEL">Test Label</div>
+
+        <h2>caption</h2>
+        <div role="caption">"Caption" role with no name</div>
+        <div role="caption" class="WIDGET_13_FAIL" aria-label="caption label">"Caption" role with <code>arial-label</code>: fail</div>
+        <div role="caption" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"Caption" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="caption" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"Caption" role hidden</div>
+
+        <h2>code</h2>
+        <div role="code">"code" role with no name</div>
+        <div role="code" class="WIDGET_13_FAIL" aria-label="code label">"code" role with <code>arial-label</code>: fail</div>
+        <div role="code" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"code" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="code" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"code" role hidden</div>
+
+        <h2>deletion</h2>
+        <div role="deletion">"deletion" role with no name</div>
+        <div role="deletion" class="WIDGET_13_FAIL" aria-label="deletion label">"deletion" role with <code>arial-label</code>: fail</div>
+        <div role="deletion" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"deletion" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="deletion" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"deletion" role hidden</div>
+
+        <h2>emphasis</h2>
+        <div role="emphasis">"emphasis" role with no name</div>
+        <div role="emphasis" class="WIDGET_13_FAIL" aria-label="emphasis label">"emphasis" role with <code>arial-label</code>: fail</div>
+        <div role="emphasis" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"emphasis" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="emphasis" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"emphasis" role hidden</div>
+
+        <h2>generic</h2>
+        <div role="generic">"generic" role with no name</div>
+        <div role="generic" class="WIDGET_13_FAIL" aria-label="generic label">"generic" role with <code>arial-label</code>: fail</div>
+        <div role="generic" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"generic" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="generic" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"generic" role hidden</div>
+
+        <h2>insertion</h2>
+        <div role="insertion">"insertion" role with no name</div>
+        <div role="insertion" class="WIDGET_13_FAIL" aria-label="insertion label">"insertion" role  with <code>arial-label</code>: fail</div>
+        <div role="insertion" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"insertion" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="insertion" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"insertion" role hidden</div>
+
+        <h2>none</h2>
+        <div role="none">"none" role with no name</div>
+        <div role="none" class="WIDGET_13_FAIL" aria-label="none label">"none" rolevwith <code>arial-label</code>: fail</div>
+        <div role="none" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"none" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="none" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"none" role hidden</div>
+
+        <h2>paragraph</h2>
+        <div role="paragraph">"paragraph" role with no name</div>
+        <div role="paragraph" class="WIDGET_13_FAIL" aria-label="paragraph label">"paragraph" rolevwith <code>arial-label</code>: fail</div>
+        <div role="paragraph" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"paragraph" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="paragraph" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"paragraph" role hidden</div>
+
+
+        <h2>presentation</h2>
+        <div role="presentation">"presentation" role with no name</div>
+        <div role="presentation" class="WIDGET_13_FAIL" aria-label="presentation label">"presentation" rolevwith <code>arial-label</code>: fail</div>
+        <div role="presentation" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"presentation" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="presentation" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"presentation" role hidden</div>
+
+
+        <h2>strong</h2>
+        <div role="strong">"strong" role with no name</div>
+        <div role="strong" class="WIDGET_13_FAIL" aria-label="strong label">"strong" rolevwith <code>arial-label</code>: fail</div>
+        <div role="strong" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"strong" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="strong" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"strong" role hidden</div>
+
+        <h2>subscript</h2>
+        <div role="subscript">"subscript" role with no name</div>
+        <div role="subscript" class="WIDGET_13_FAIL" aria-label="subscript label">"subscript" rolevwith <code>arial-label</code>: fail</div>
+        <div role="subscript" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"subscript" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="subscript" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"subscript" role hidden</div>
+
+
+        <h2>superscript</h2>
+        <div role="superscript">"superscript" role with no name</div>
+        <div role="superscript" class="WIDGET_13_FAIL" aria-label="superscript label">"superscript" role with <code>arial-label</code>: fail</div>
+        <div role="superscript" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL">"superscript" role with <code>aria-labelledby</code>: fail</div>
+        <div hidden role="superscript" class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL">"superscript" role hidden</div>
+
+        <h2><code>p</code> element</h2>
+        <p><code>p</code> element with no name</p>
+        <p class="WIDGET_13_FAIL" aria-label="p element label"><code>p</code> element with <code>arial-label</code>: fail</p>
+        <p class="WIDGET_13_FAIL" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>p</code> element with role with <code>aria-labelledby</code>: fail</p>
+        <p hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>p</code> element hidden</p>
+
+        <h2><code>div</code> element</h2>
+        <div><code>div</code> element with no name</div>
+        <div role="radio" aria-label="radio label">"radio" role with name</div>
+        <div role="checkbox" aria-label="checkbox label">"checkbox" role with name</div>
+        <div class="WIDGET_13_FAIL" aria-label="div element label"><code>div</code> element with <code>arial-label</code>: fail</div>
+        <div class="WIDGET_13_FAIL" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>div</code> element with role with <code>aria-labelledby</code>: fail</div>
+        <div hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>div</code> element hidden</div>
+
+        <h2><code>span</code> element</h2>
+        <span><code>span</code> element with no name</span>
+        <span role="switch" aria-label="switch label">Switch element with name</span>
+        <span class="WIDGET_13_FAIL" aria-label="superscript label"><code>span</code> element with <code>arial-label</code>: fail</span>
+        <span class="WIDGET_13_FAIL" class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>span</code> element with role with <code>aria-labelledby</code>: fail</span>
+        <span hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>span</code> element hidden</span>
+
+       <h2><code>a[href]</code> element with href</h2>
+        <a href="#test"><code>a[href]</code> element with no name: ignore</a>
+        <a href="#test" aria-label="a[href] label"><code>a[href]</code> element with <code>arial-label</code>: ignore</a>
+        <a href="#test" aria-labelledby="ID_TEST_LABEL"><code>a[href]</code> element with role with <code>aria-labelledby</code>: ignore</a>
+        <a href="#test" hidden aria-labelledby="ID_TEST_LABEL"><code>a[href]</code> element hidden</a>
+
+       <h2><code>a</code> element</h2>
+        <a><code>a</code> element with no href or name</a>
+        <a href="#" aria-label="link name"><code>a</code> element an href with a name</a>
+        <a class="WIDGET_13_FAIL" aria-label="a[href] label"><code>a</code> element with <code>arial-label</code>: fail</a>
+        <a class="WIDGET_13_FAIL" aria-labelledby="ID_TEST_LABEL"><code>a</code> element with role with <code>aria-labelledby: fail</code></a>
+        <a hidden class="WIDGET_13_HIDDEN" aria-labelledby="ID_TEST_LABEL"><code>a</code> element hidden</a>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 12 test case</div>
+      </footer>
+    
+  </body>
+</html>

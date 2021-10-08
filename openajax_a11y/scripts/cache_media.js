@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      OpenAjax Media Cache                        */
@@ -236,15 +238,17 @@ OpenAjax.a11y.cache.MediaCache.prototype.updateCacheItems = function (dom_elemen
   else {
 
     if ((dom_element.tag_name === 'param') &&
-        (media_info.media_element && media_info.media_element.dom_element.tag_name === 'object')) {
+        (media_info.media_element &&
+         media_info.media_element.dom_element &&
+         media_info.media_element.dom_element.tag_name === 'object')) {
        media_element = new OpenAjax.a11y.cache.MediaChildElement(dom_element);
        media_info.media_element.addMediaElement(media_element);
     }
 
     if ((dom_element.tag_name === 'track') &&
-        (media_info.media_element &&
-         (media_info.media_element.dom_element.tag_name === 'video') ||
-         (media_info.media_element.dom_element.tag_name === 'audio'))) {
+        (media_info.media_element && media_info.media_element.dom_element &&
+         ((media_info.media_element.dom_element.tag_name === 'video') ||
+         (media_info.media_element.dom_element.tag_name === 'audio')))) {
        media_element = new OpenAjax.a11y.cache.MediaChildElement(dom_element);
        media_info.media_element.addMediaElement(media_element);
     }
@@ -542,12 +546,10 @@ OpenAjax.a11y.cache.MediaElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.MediaElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.MediaElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -827,12 +829,10 @@ OpenAjax.a11y.cache.MediaChildElement.prototype.getStyle = function () {
  *
  * @desc Returns an array of attributes for the element, sorted in alphabetical order
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of attribute display object
  */
 
-OpenAjax.a11y.cache.MediaChildElement.prototype.getAttributes = function (unsorted) {
+OpenAjax.a11y.cache.MediaChildElement.prototype.getAttributes = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -857,14 +857,10 @@ OpenAjax.a11y.cache.MediaChildElement.prototype.getAttributes = function (unsort
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.MediaChildElement.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
+OpenAjax.a11y.cache.MediaChildElement.prototype.getCacheProperties = function () {
 
   var properties = [];
 
@@ -1009,10 +1005,7 @@ OpenAjax.a11y.cache.PageElementMedia.prototype.getStyle = function () {
 
 OpenAjax.a11y.cache.PageElementMedia.prototype.getAttributes = function (unsorted) {
 
-  var cache_nls = OpenAjax.a11y.nls.Cache;
   var attributes = this.dom_element.getAttributes();
-
-//  cache_nls.addPropertyIfDefined(attributes, this, 'tag_name');
 
   if (!unsorted) this.dom_element.sortItems(attributes);
 
@@ -1032,8 +1025,6 @@ OpenAjax.a11y.cache.PageElementMedia.prototype.getAttributes = function (unsorte
  */
 
 OpenAjax.a11y.cache.PageElementMedia.prototype.getCacheProperties = function (unsorted) {
-
-  var cache_nls = OpenAjax.a11y.nls.Cache;
 
   var properties = this.dom_element.getCacheProperties(unsorted);
 

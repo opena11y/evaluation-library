@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -63,43 +65,47 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 5 Specification: 12.2 The @img@ element',
-          url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+          url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @img@ role',
-          url:   'http://www.w3.org/TR/wai-aria/#img'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-          url:   'http://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+          url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'Web Accessibility Tutorials : Images',
+          url:   'https://www.w3.org/WAI/tutorials/images/'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'Diagram Center: Image Description',
+          url:   'http://diagramcenter.org/making-images-accessible.html'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
-          url:   'http://webaim.org/techniques/alttext/'
+          url:   'https://webaim.org/techniques/alttext/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'Accessibility at Penn State: Text Equivalents for Images',
-          url:   'http://accessibility.psu.edu/images/'
-        },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'CSS Backgrounds and Borders Module Level 3: The @background-image@ property',
-          url:   'http://www.w3.org/TR/css3-background/#the-background-image'
+          url:   'https://accessibility.psu.edu/images/'
         }
       ]
     },
@@ -143,43 +149,51 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 5 Specification: 12.2 The @img@ element',
-          url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+          url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @img@ role',
-          url:   'http://www.w3.org/TR/wai-aria/#img'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-          url:   'http://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+          url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'Web Accessibility Tutorials : Images',
+          url:   'https://www.w3.org/WAI/tutorials/images/'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'Diagram Center: Image Description',
+          url:   'http://diagramcenter.org/making-images-accessible.html'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
-          url:   'http://webaim.org/techniques/alttext/'
+          url:   'https://webaim.org/techniques/alttext/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'Accessibility at Penn State: Text Equivalents for Images',
-          url:   'http://accessibility.psu.edu/images/'
+          url:   'https://accessibility.psu.edu/images/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'Diagram Center: Digital Image And Graphic Resources for Accessible Materials',
-          url:   'http://diagramcenter.org/'
+          url:   'https://diagramcenter.org/'
         }
 
       ]
@@ -219,19 +233,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-          url:   'http://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+          url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -267,19 +281,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-          url:   'http://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+          url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G95'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
         },
         { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
           title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/F30'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
         }
       ]
     },
@@ -314,15 +328,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 5 Specification: 12.2 The @img@ element',
-          url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+          url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @presentation@ role',
-          url:   'http://www.w3.org/TR/wai-aria/#presentation'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @presentation@ role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'CSS Backgrounds and Borders Module Level 3: The @background-image@ property',
-          url:   'http://www.w3.org/TR/css3-background/#the-background-image'
+          url:   'https://www.w3.org/TR/css3-background/#the-background-image'
         }
       ]
     },
@@ -375,39 +389,47 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 5 Specification: 12.2 The @img@ element',
-          url:   'http://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+          url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @img@ role',
-          url:   'http://www.w3.org/TR/wai-aria/#img'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-describedby@ attribute',
-          url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML5 Image Description Extension (longdesc)',
-          url:   'http://www.w3.org/TR/html-longdesc/'
+          url:   'https://www.w3.org/TR/html-longdesc/'
         },
         { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-          url:   'http://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+          url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'Web Accessibility Tutorials : Images',
+          url:   'https://www.w3.org/WAI/tutorials/images/'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+          title: 'Diagram Center: Image Description',
+          url:   'http://diagramcenter.org/making-images-accessible.html'
+        },
+        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
-          url:   'http://www.w3.org/TR/WCAG20-TECHS/G94'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'WebAIM: Alternative Text',
-          url:   'http://webaim.org/techniques/alttext/'
+          url:   'https://webaim.org/techniques/alttext/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'Accessibility at Penn State: Text Equivalents for Images',
-          url:   'http://accessibility.psu.edu/images/'
+          url:   'https://accessibility.psu.edu/images/'
         },
         { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
           title: 'Diagram Center: Digital Image And Graphic Resources for Accessible Materials',
-          url:   'http://diagramcenter.org/'
+          url:   'https://diagramcenter.org/'
         }
       ]
     },
@@ -445,7 +467,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
       INFORMATIONAL_LINKS: [
         {type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
           title: 'Mathematical Markup Language (MathML) Version 3.0',
-          url:   'http://www.w3.org/TR/MathML/'
+          url:   'https://www.w3.org/TR/MathML/'
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'MathJax Javascript Library',
@@ -453,27 +475,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'PSU Accessibility: MathML and MathJax',
-          url:   'http://accessibility.psu.edu/math/mathml/'
+          url:   'https://accessibility.psu.edu/math/mathml/'
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'Design Science: Math Type',
-          url:   'http://www.dessci.com/en/products/mathtype/'
+          url:   'https://www.dessci.com/en/products/mathtype/'
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'Design Science: Math Player',
-          url:   'http://www.dessci.com/en/products/mathplayer/'
+          url:   'https://www.dessci.com/en/products/mathplayer/'
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'MathML in Daisy',
-          url:   'http://www.daisy.org/project/mathml'
+          url:   'https://www.daisy.org/project/mathml'
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'EPUB 3 Accessibility Guidelines: MathML',
-          url:   'http://www.idpf.org/accessibility/guidelines/content/mathml/desc.php'
+          url:   'https://www.idpf.org/accessibility/guidelines/content/mathml/desc.php'
         },
         {type:  OpenAjax.a11y.REFERENCES.REFERENCE,
           title: 'W3C Math Wiki: MathML Tools',
-          url:   'http://www.w3.org/Math/wiki/Tools'
+          url:   'https://www.w3.org/Math/wiki/Tools'
         }
       ]
     }

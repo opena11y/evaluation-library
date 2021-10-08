@@ -65,6 +65,11 @@
       test( "CONTROL_10: Form controls should have unique labels (Tab Panels)", function() {
         executeTest('ID_IFRAME_10B', 'CONTROL_10');
       });
+
+      test( "CONTROL_11: Submit and reset buttons must be unique", function() {
+        executeTest('ID_IFRAME_11', 'CONTROL_11');
+      });
+
          
                   
     </script>
@@ -100,7 +105,10 @@
     <h2>Unique labels for inputs</h2>
     <iframe id="ID_IFRAME_10A" src="form_controls/form_controls_10_unique_accessible_labels.html"></iframe>
     <iframe id="ID_IFRAME_10B" src="form_controls/form_controls_10_tab_panels.html"></iframe>
-    
+
+    <h2>Submit and reset buttons must be unique</h2>
+    <iframe id="ID_IFRAME_11" src="form_controls/form_controls_11_submit_reset_accessible_labels.html"></iframe>
+
   </body>
 
 </html>

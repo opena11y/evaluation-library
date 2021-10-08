@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /**
  * @namespace OpenAjax.a11y.info
@@ -52,8 +54,6 @@ OpenAjax.a11y.info = OpenAjax.a11y.info || {};
  */
 
 OpenAjax.a11y.info.InformationalLinkInfo = function (rt, t, u) {
-
-  var REFS = OpenAjax.a11y.REFERENCES;
 
   var reference_type = OpenAjax.a11y.REFERENCES.UNKNOWN;
   var title = "";

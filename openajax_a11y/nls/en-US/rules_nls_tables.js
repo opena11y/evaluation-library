@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -63,27 +65,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: scope attribute',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#adef-scope'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-scope'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               }
             ]
         },
@@ -127,47 +129,43 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: summary attribute',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @title@ attribute',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H39'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H73'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F46'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -207,27 +205,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: summary attribute',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-describedby@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-describedby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @title@ attribute',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -267,47 +261,43 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: summary attribute',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-label@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-label'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: The @aria-labelledby@ attribute',
-                url:   'http://www.w3.org/TR/wai-aria/#aria-labelledby'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @title@ attribute',
-                url:   'http://www.w3.org/TR/html4/struct/global.html#adef-title'
+                url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H39: Using caption elements to associate data table captions with data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H39'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H73'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F46'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -353,40 +343,36 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             ],
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: presentation role',
-                url:   'http://www.w3.org/TR/wai-aria/#presentation'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: presentation role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: summary attribute',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -421,27 +407,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H51: Using table markup to present tabular information',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H51'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H63'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Simple Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-simple.php'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -481,15 +463,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               },
               { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
                 title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-                url:   'http://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
-              },
-              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
-                title: 'iCITA HTML Best Practices: Complex Data Table Example',
-                url:   'http://html.cita.illinois.edu/nav/dtable/dtable-example-complex.php'
+                url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
               }
             ]
         },
@@ -530,7 +512,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-                url:   'http://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+                url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+              },
+              { type:  OpenAjax.a11y.REFERENCES.EXAMPLE,
+                title: 'W3C Web Accessibility Tutorials: Tables',
+                url:   'https://www.w3.org/WAI/tutorials/tables/'
               }
             ]
         }

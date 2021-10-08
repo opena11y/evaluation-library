@@ -23,43 +23,46 @@
 
 
 
+
 <section>
 
 <header>
-    <h2>
-        <span class="ancestors"><a href="OpenAjax.html">OpenAjax</a><a href="OpenAjax.a11y.html">.a11y</a><a href="OpenAjax.a11y.cache.html">.cache</a>.</span>
     
-    WidgetElement
-    </h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="OpenAjax.html">OpenAjax</a><a href="OpenAjax.a11y.html">.a11y</a><a href="OpenAjax.a11y.cache.html">.cache</a>.</span>WidgetElement<span class="signature">(dom_element, control_info)</span><span class="type-signature"></span></h2>
+        
     
 </header>
 
 <article>
     <div class="container-overview">
     
+        
 
     
-        
-<dt>
+
+    
     <h4 class="name" id="WidgetElement"><span class="type-signature"></span>new WidgetElement<span class="signature">(dom_element, control_info)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Creates a InputElement object used to hold information about input elements
-    </div>
     
 
     
 
-    
 
+
+<div class="description">
+    Creates a InputElement object used to hold information about input elements
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-        <h5>Parameters:</h5>
-        
 
 <table class="params">
     <thead>
@@ -128,15 +131,15 @@
     
     </tbody>
 </table>
-    
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
 
     
-<dl class="details">
-    
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
 
 <table class="props">
     <thead>
@@ -436,6 +439,98 @@
 
         <tr>
             
+                <td class="name"><code>required</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value of the required property</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aria_required</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value of the aria-required property</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aria_invalid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value of the aria-invlaid property</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aria_busy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value of the aria-busy property</td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>computed_label</code></td>
             
 
@@ -636,7 +731,7 @@
 
             
 
-            <td class="description last">The value of the readonly attribute</td>
+            <td class="description last">The value of value property</td>
         </tr>
 
     
@@ -659,7 +754,7 @@
 
             
 
-            <td class="description last">The value of the disabled attribute</td>
+            <td class="description last">The true if checked property</td>
         </tr>
 
     
@@ -709,8 +804,42 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>owned_dom_elements</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of all the dom elements referenced by aria-owns</td>
+        </tr>
+
+    
     </tbody>
-</table></dl>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
 
     
 
@@ -733,7 +862,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line4948">line 4948</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5218">line 5218</a>
     </li></ul></dd>
     
 
@@ -745,23 +874,28 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
     
     </div>
+
+    
 
     
 
@@ -778,28 +912,33 @@
     
         <h3 class="subsection-title">Methods</h3>
 
-        <dl>
-            
-<dt>
-    <h4 class="name" id="addChildControl"><span class="type-signature">&lt;static> </span>addChildControl<span class="signature">(control_element, override_owns)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a cache control element to the tree representation of control elements
-    </div>
-    
-
-    
-
-    
-
-    
-        <h5>Parameters:</h5>
         
+            
+
+    
+
+    
+    <h4 class="name" id=".addChildControl"><span class="type-signature">(static) </span>addChildControl<span class="signature">(control_element, override_owns)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Adds a cache control element to the tree representation of control elements
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -898,10 +1037,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -923,7 +1072,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5033">line 5033</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5340">line 5340</a>
     </li></ul></dd>
     
 
@@ -935,43 +1084,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1017,10 +1174,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1042,7 +1209,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line2615">line 2615</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line2906">line 2906</a>
     </li></ul></dd>
     
 
@@ -1054,43 +1221,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1136,10 +1311,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1161,7 +1346,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line4539">line 4539</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line3184">line 3184</a>
     </li></ul></dd>
     
 
@@ -1173,43 +1358,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1255,10 +1448,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1280,7 +1483,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line4041">line 4041</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line3485">line 3485</a>
     </li></ul></dd>
     
 
@@ -1292,43 +1495,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1374,10 +1585,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1399,7 +1620,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line3764">line 3764</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line3773">line 3773</a>
     </li></ul></dd>
     
 
@@ -1411,43 +1632,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1493,10 +1722,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1518,7 +1757,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line3202">line 3202</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line4047">line 4047</a>
     </li></ul></dd>
     
 
@@ -1530,43 +1769,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1612,10 +1859,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1637,7 +1894,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5053">line 5053</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line4324">line 4324</a>
     </li></ul></dd>
     
 
@@ -1649,43 +1906,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1731,10 +1996,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1756,7 +2031,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line2894">line 2894</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line4815">line 4815</a>
     </li></ul></dd>
     
 
@@ -1768,43 +2043,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="addOwnerControl"><span class="type-signature">&lt;static> </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Adds a ARIA owner control element reference
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".addOwnerControl"><span class="type-signature">(static) </span>addOwnerControl<span class="signature">(owner_control)</span><span class="type-signature"></span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Adds a ARIA owner control element reference
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1850,10 +2133,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1875,7 +2168,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line3490">line 3490</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5360">line 5360</a>
     </li></ul></dd>
     
 
@@ -1887,43 +2180,51 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-</dd>
+
+
+
+
+
+
+
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getAttributes"><span class="type-signature">&lt;static> </span>getAttributes<span class="signature">(unsorted)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an array of attributes for the element, sorted in alphabetical order
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".getAttributes"><span class="type-signature">(static) </span>getAttributes<span class="signature">(unsorted)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Returns an array of attributes for the element, sorted in alphabetical order
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -1969,10 +2270,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -1994,7 +2305,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5201">line 5201</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5561">line 5561</a>
     </li></ul></dd>
     
 
@@ -2006,20 +2317,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns a array of attribute display object
 </div>
@@ -2038,33 +2351,39 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getCacheProperties"><span class="type-signature">&lt;static> </span>getCacheProperties<span class="signature">(unsorted)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an array of cache properties sorted by property name
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".getCacheProperties"><span class="type-signature">(static) </span>getCacheProperties<span class="signature">(unsorted)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Returns an array of cache properties sorted by property name
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -2110,10 +2429,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -2135,7 +2464,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5225">line 5225</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5582">line 5582</a>
     </li></ul></dd>
     
 
@@ -2147,20 +2476,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns a array of cache property display object
 </div>
@@ -2179,33 +2510,39 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getCachePropertyValue"><span class="type-signature">&lt;static> </span>getCachePropertyValue<span class="signature">(property)</span><span class="type-signature"> &rarr; {String|Number}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns the value of a property
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".getCachePropertyValue"><span class="type-signature">(static) </span>getCachePropertyValue<span class="signature">(property)</span><span class="type-signature"> &rarr; {String|Number}</span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Returns the value of a property
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -2251,10 +2588,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -2276,7 +2623,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5258">line 5258</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5615">line 5615</a>
     </li></ul></dd>
     
 
@@ -2288,20 +2635,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns the value of the property
 </div>
@@ -2323,34 +2672,49 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getElementResults"><span class="type-signature">&lt;static> </span>getElementResults<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an array of node results in severity order
-    </div>
-    
 
     
 
     
-
+    <h4 class="name" id=".getElementResults"><span class="type-signature">(static) </span>getElementResults<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
+
+
+
+<div class="description">
+    Returns an array of node results in severity order
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -2372,7 +2736,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5171">line 5171</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5531">line 5531</a>
     </li></ul></dd>
     
 
@@ -2384,20 +2748,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns a array of node results
 </div>
@@ -2416,34 +2782,49 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getEvents"><span class="type-signature">&lt;static> </span>getEvents<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an array of events for the element, sorted in alphabetical order
-    </div>
-    
 
     
 
     
-
+    <h4 class="name" id=".getEvents"><span class="type-signature">(static) </span>getEvents<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
+
+
+
+<div class="description">
+    Returns an array of events for the element, sorted in alphabetical order
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -2465,7 +2846,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5280">line 5280</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5637">line 5637</a>
     </li></ul></dd>
     
 
@@ -2477,20 +2858,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns a array of event item display objects
 </div>
@@ -2509,35 +2892,50 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getLabelNLS"><span class="type-signature">&lt;static> </span>getLabelNLS<span class="signature">()</span><span class="type-signature"> &rarr; {String|Object}</span></h4>
 
     
-</dt>
-<dd>
 
     
-    <div class="description">
-        Returns an object with an NLS localized string and style properties
+    <h4 class="name" id=".getLabelNLS"><span class="type-signature">(static) </span>getLabelNLS<span class="signature">()</span><span class="type-signature"> &rarr; {String|Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns an object with an NLS localized string and style properties
       If label is empty a missing label message will the returned
-    </div>
-    
+</div>
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -2559,7 +2957,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5297">line 5297</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5654">line 5654</a>
     </li></ul></dd>
     
 
@@ -2571,23 +2969,25 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
-    Returns a String if the label has content, 
-                           but if label is empty it returns an object 
+    Returns a String if the label has content,
+                           but if label is empty it returns an object
                            with a 'label and 'style' property
 </div>
 
@@ -2608,34 +3008,49 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getLabelSourceNLS"><span class="type-signature">&lt;static> </span>getLabelSourceNLS<span class="signature">()</span><span class="type-signature"> &rarr; {String|Object}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an object with an NLS localized information on the source of the label
-    </div>
-    
 
     
 
     
-
+    <h4 class="name" id=".getLabelSourceNLS"><span class="type-signature">(static) </span>getLabelSourceNLS<span class="signature">()</span><span class="type-signature"> &rarr; {String|Object}</span></h4>
     
 
     
+
+
+
+<div class="description">
+    Returns an object with an NLS localized information on the source of the label
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -2657,7 +3072,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5325">line 5325</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5680">line 5680</a>
     </li></ul></dd>
     
 
@@ -2669,23 +3084,25 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
-    Returns a String if the label has content, 
-                           but if label is empty it returns an object 
+    Returns a String if the label has content,
+                           but if label is empty it returns an object
                            with a 'label and 'style' property
 </div>
 
@@ -2706,34 +3123,49 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getOwnedIds"><span class="type-signature">&lt;static> </span>getOwnedIds<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an array of strings representing the ids in the aria-owns property
-    </div>
-    
 
     
 
     
-
+    <h4 class="name" id=".getOwnedIds"><span class="type-signature">(static) </span>getOwnedIds<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
+
+
+
+<div class="description">
+    Returns an array of strings representing the ids in the aria-owns property
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -2755,7 +3187,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5072">line 5072</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5379">line 5379</a>
     </li></ul></dd>
     
 
@@ -2767,20 +3199,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns an array of string objects represrenting the ids of the aria-owns property
 </div>
@@ -2799,34 +3233,98 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="getStyle"><span class="type-signature">&lt;static> </span>getStyle<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns an array of style items
-    </div>
-    
 
     
 
     
-
+    <h4 class="name" id=".getParentWidgetElement"><span class="type-signature">(static) </span>getParentWidgetElement<span class="signature">(role)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
+
+
+
+<div class="description">
+    Get reference to a parent element with a certain role
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>role</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Role to find</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -2848,7 +3346,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5185">line 5185</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5458">line 5458</a>
     </li></ul></dd>
     
 
@@ -2860,20 +3358,132 @@
 </dl>
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns widget if parent element with role exists, otherwise false
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
 
     
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
+
+        
             
+
+    
+
+    
+    <h4 class="name" id=".getStyle"><span class="type-signature">(static) </span>getStyle<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns an array of style items
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5545">line 5545</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns a array of style display objects
 </div>
@@ -2892,33 +3502,39 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="hasChildRole"><span class="type-signature">&lt;static> </span>hasChildRole<span class="signature">(role)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Tests if a widget has a child ARIA element with a certain role
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".hasOwnedRole"><span class="type-signature">(static) </span>hasOwnedRole<span class="signature">(role)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Tests if a widget has a owned ARIA element with a certain role
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -2964,10 +3580,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -2989,7 +3615,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5102">line 5102</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5490">line 5490</a>
     </li></ul></dd>
     
 
@@ -3001,22 +3627,24 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
-    Returns true if widget has child element with role, otherwise false
+    Returns true if widget has owned element with role, otherwise false
 </div>
 
 
@@ -3033,33 +3661,39 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="hasParentRole"><span class="type-signature">&lt;static> </span>hasParentRole<span class="signature">(role)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Tests if a widget has a parent element with a certain role
-    </div>
-    
 
     
 
     
+    <h4 class="name" id=".hasRequiedChildRole"><span class="type-signature">(static) </span>hasRequiedChildRole<span class="signature">(role)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
 
     
-        <h5>Parameters:</h5>
-        
+
+
+
+<div class="description">
+    Tests if a widget has a child ARIA element with a certain role
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
 
 <table class="params">
     <thead>
@@ -3105,10 +3739,20 @@
     
     </tbody>
 </table>
+
+
+
+
+
+
+<dl class="details">
+
     
 
     
-<dl class="details">
+
+    
+
     
 
     
@@ -3130,7 +3774,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5143">line 5143</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5409">line 5409</a>
     </li></ul></dd>
     
 
@@ -3142,20 +3786,22 @@
 </dl>
 
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns true if widget has child element with role, otherwise false
 </div>
@@ -3174,34 +3820,98 @@
     </dd>
 </dl>
 
-        
-
     
-</dd>
+
+
+
+
 
         
             
-<dt>
-    <h4 class="name" id="toString"><span class="type-signature">&lt;static> </span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Returns a text string representation of the input element
-    </div>
-    
 
     
 
     
-
+    <h4 class="name" id=".isOwnedByRole"><span class="type-signature">(static) </span>isOwnedByRole<span class="signature">(role)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
 
     
+
+
+
+<div class="description">
+    Tests if a widget is owned by ARIA element with a certain role
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>role</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Role to find</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
 <dl class="details">
+
+    
+
+    
+
+    
+
     
 
     
@@ -3223,7 +3933,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache_controls.js.html">scripts/cache_controls.js</a>, <a href="cache_controls.js.html#line5347">line 5347</a>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5433">line 5433</a>
     </li></ul></dd>
     
 
@@ -3235,20 +3945,132 @@
 </dl>
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns true if widget is owned by element with role, otherwise false
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
 
     
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
+
+        
             
+
+    
+
+    
+    <h4 class="name" id=".toString"><span class="type-signature">(static) </span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns a text string representation of the input element
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5702">line 5702</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 <div class="param-desc">
     Returns string represention the InputElement object
 </div>
@@ -3267,12 +4089,101 @@
     </dd>
 </dl>
 
+    
+
+
+
+
+
         
+            
 
     
-</dd>
 
-        </dl>
+    
+    <h4 class="name" id=".updateOwnedby"><span class="type-signature">(static) </span>updateOwnedby<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the associated dom element with parent widget information form the DOM tree
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="scripts_cache_controls.js.html">scripts/cache_controls.js</a>, <a href="scripts_cache_controls.js.html#line5317">line 5317</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -3288,13 +4199,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableElement.html">TableElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="created.RulesetFactory.html">RulesetFactory</a></li></ul><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="OpenAjax.html">OpenAjax</a></li><li><a href="OpenAjax.a11y.html">a11y</a></li><li><a href="OpenAjax.a11y.cache.html">cache</a></li><li><a href="OpenAjax.a11y.info.html">info</a></li><li><a href="OpenAjax.a11y.nls.html">nls</a></li><li><a href="OpenAjax.a11y.util.html">util</a></li></ul><h3>Classes</h3><ul><li><a href="HeadingsLandmarksCache.html">HeadingsLandmarksCache</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationItem.html">AbbreviationItem</a></li><li><a href="OpenAjax.a11y.cache.AbbreviationsCache.html">AbbreviationsCache</a></li><li><a href="OpenAjax.a11y.cache.ButtonElement.html">ButtonElement</a></li><li><a href="OpenAjax.a11y.cache.CanvasElement.html">CanvasElement</a></li><li><a href="OpenAjax.a11y.cache.CaptionElement.html">CaptionElement</a></li><li><a href="OpenAjax.a11y.cache.ContainerElement.html">ContainerElement</a></li><li><a href="OpenAjax.a11y.cache.ControlInfo.html">ControlInfo</a></li><li><a href="OpenAjax.a11y.cache.ControlsCache.html">ControlsCache</a></li><li><a href="OpenAjax.a11y.cache.DOMCache.html">DOMCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElement.html">DOMElement</a></li><li><a href="OpenAjax.a11y.cache.DOMElementCache.html">DOMElementCache</a></li><li><a href="OpenAjax.a11y.cache.DOMElementComputedStyle.html">DOMElementComputedStyle</a></li><li><a href="OpenAjax.a11y.cache.DOMText.html">DOMText</a></li><li><a href="OpenAjax.a11y.cache.FieldsetElement.html">FieldsetElement</a></li><li><a href="OpenAjax.a11y.cache.FormElement.html">FormElement</a></li><li><a href="OpenAjax.a11y.cache.GroupingElement.html">GroupingElement</a></li><li><a href="OpenAjax.a11y.cache.H1Element.html">H1Element</a></li><li><a href="OpenAjax.a11y.cache.HeadingElement.html">HeadingElement</a></li><li><a href="OpenAjax.a11y.cache.HeadingInfo.html">HeadingInfo</a></li><li><a href="OpenAjax.a11y.cache.ImageElement.html">ImageElement</a></li><li><a href="OpenAjax.a11y.cache.ImagesCache.html">ImagesCache</a></li><li><a href="OpenAjax.a11y.cache.InputElement.html">InputElement</a></li><li><a href="OpenAjax.a11y.cache.InteractiveElement.html">InteractiveElement</a></li><li><a href="OpenAjax.a11y.cache.KeyboardFocus.html">KeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.LabelElement.html">LabelElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkElement.html">LandmarkElement</a></li><li><a href="OpenAjax.a11y.cache.LandmarkInfo.html">LandmarkInfo</a></li><li><a href="OpenAjax.a11y.cache.LanguagesCache.html">LanguagesCache</a></li><li><a href="OpenAjax.a11y.cache.LegendElement.html">LegendElement</a></li><li><a href="OpenAjax.a11y.cache.LinkElement.html">LinkElement</a></li><li><a href="OpenAjax.a11y.cache.LinksCache.html">LinksCache</a></li><li><a href="OpenAjax.a11y.cache.ListElement.html">ListElement</a></li><li><a href="OpenAjax.a11y.cache.ListInfo.html">ListInfo</a></li><li><a href="OpenAjax.a11y.cache.ListsCache.html">ListsCache</a></li><li><a href="OpenAjax.a11y.cache.MainElement.html">MainElement</a></li><li><a href="OpenAjax.a11y.cache.MediaCache.html">MediaCache</a></li><li><a href="OpenAjax.a11y.cache.MediaChildElement.html">MediaChildElement</a></li><li><a href="OpenAjax.a11y.cache.MediaElement.html">MediaElement</a></li><li><a href="OpenAjax.a11y.cache.MediaInfo.html">MediaInfo</a></li><li><a href="OpenAjax.a11y.cache.MeterElement.html">MeterElement</a></li><li><a href="OpenAjax.a11y.cache.OptgroupElement.html">OptgroupElement</a></li><li><a href="OpenAjax.a11y.cache.OptionElement.html">OptionElement</a></li><li><a href="OpenAjax.a11y.cache.OutputElement.html">OutputElement</a></li><li><a href="OpenAjax.a11y.cache.PageElementHeadingsLandmarks.html">PageElementHeadingsLandmarks</a></li><li><a href="OpenAjax.a11y.cache.PageElementKeyboardFocus.html">PageElementKeyboardFocus</a></li><li><a href="OpenAjax.a11y.cache.PageElementLayout.html">PageElementLayout</a></li><li><a href="OpenAjax.a11y.cache.PageElementTimingFlashing.html">PageElementTimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.ProgressElement.html">ProgressElement</a></li><li><a href="OpenAjax.a11y.cache.SectionElement.html">SectionElement</a></li><li><a href="OpenAjax.a11y.cache.SelectElement.html">SelectElement</a></li><li><a href="OpenAjax.a11y.cache.SVGElement.html">SVGElement</a></li><li><a href="OpenAjax.a11y.cache.TableCellElement.html">TableCellElement</a></li><li><a href="OpenAjax.a11y.cache.TableInfo.html">TableInfo</a></li><li><a href="OpenAjax.a11y.cache.TableRowElement.html">TableRowElement</a></li><li><a href="OpenAjax.a11y.cache.TablesCache.html">TablesCache</a></li><li><a href="OpenAjax.a11y.cache.TBodyElement.html">TBodyElement</a></li><li><a href="OpenAjax.a11y.cache.TextareaElement.html">TextareaElement</a></li><li><a href="OpenAjax.a11y.cache.TextCache.html">TextCache</a></li><li><a href="OpenAjax.a11y.cache.THeadElement.html">THeadElement</a></li><li><a href="OpenAjax.a11y.cache.TimingFlashing.html">TimingFlashing</a></li><li><a href="OpenAjax.a11y.cache.TitleElement.html">TitleElement</a></li><li><a href="OpenAjax.a11y.cache.WidgetElement.html">WidgetElement</a></li><li><a href="OpenAjax.a11y.ElementResult.html">ElementResult</a></li><li><a href="OpenAjax.a11y.EvaluationResult.html">EvaluationResult</a></li><li><a href="OpenAjax.a11y.Evaluator.html">Evaluator</a></li><li><a href="OpenAjax.a11y.EvaluatorFactory.html">EvaluatorFactory</a></li><li><a href="OpenAjax.a11y.info.ElementInfo.html">ElementInfo</a></li><li><a href="OpenAjax.a11y.info.ElementResultsSummary.html">ElementResultsSummary</a></li><li><a href="OpenAjax.a11y.info.ElementSummary.html">ElementSummary</a></li><li><a href="OpenAjax.a11y.info.GuidelineInfo.html">GuidelineInfo</a></li><li><a href="OpenAjax.a11y.info.InformationalLinkInfo.html">InformationalLinkInfo</a></li><li><a href="OpenAjax.a11y.info.PageInfo.html">PageInfo</a></li><li><a href="OpenAjax.a11y.info.RelatedElementInfo.html">RelatedElementInfo</a></li><li><a href="OpenAjax.a11y.info.RuleCategoryInfo.html">RuleCategoryInfo</a></li><li><a href="OpenAjax.a11y.info.RuleGroupInfo.html">RuleGroupInfo</a></li><li><a href="OpenAjax.a11y.info.RuleResultsSummary.html">RuleResultsSummary</a></li><li><a href="OpenAjax.a11y.info.RulesetInfo.html">RulesetInfo</a></li><li><a href="OpenAjax.a11y.info.SuccessCriterionInfo.html">SuccessCriterionInfo</a></li><li><a href="OpenAjax.a11y.nls.Cache.html">Cache</a></li><li><a href="OpenAjax.a11y.nls.WCAG20.html">WCAG20</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLS.html">WCAG20NLS</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSGuideline.html">WCAG20NLSGuideline</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSPrinciple.html">WCAG20NLSPrinciple</a></li><li><a href="OpenAjax.a11y.nls.WCAG20NLSSuccessCriterion.html">WCAG20NLSSuccessCriterion</a></li><li><a href="OpenAjax.a11y.RelatedElements.html">RelatedElements</a></li><li><a href="OpenAjax.a11y.Rule.html">Rule</a></li><li><a href="OpenAjax.a11y.RuleGroupResult.html">RuleGroupResult</a></li><li><a href="OpenAjax.a11y.RuleManager.html">RuleManager</a></li><li><a href="OpenAjax.a11y.RuleMapping.html">RuleMapping</a></li><li><a href="OpenAjax.a11y.RuleResult.html">RuleResult</a></li><li><a href="OpenAjax.a11y.Ruleset.html">Ruleset</a></li><li><a href="OpenAjax.a11y.RulesetManager.html">RulesetManager</a></li><li><a href="OpenAjax.a11y%250D%250DNOTE_%2520The%2520following%2520properties%2520are%2520defined%2520when%2520the%2520ruleset%2520is%2520created.RulesetFactory.html">RulesetFactory</a></li><li><a href="TableElement.html">TableElement</a></li></ul>
 </nav>
 
-<br clear="both">
+<br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Fri Sep 25 2015 15:16:52 GMT-0500 (CDT)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Sep 20 2021 13:52:07 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

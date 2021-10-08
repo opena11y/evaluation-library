@@ -1,3 +1,21 @@
+/**
+ * Copyright 2011-2018 OpenAjax Alliance
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 /* ---------------------------------------------------------------- */
 /*  OpenAjax Alliance Control Rules                                 */
 /* ---------------------------------------------------------------- */
@@ -28,9 +46,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
 
-    var tag_name;
-    var type;
-
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
 
@@ -39,8 +54,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
       for (var i = 0; i < control_elements_len; i++) {
         var ce = control_elements[i];
-
-        var control_type = ce.control_type;
 
         if (ce.needs_label) {
 
@@ -82,8 +95,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   validate            : function (dom_cache, rule_result) {
 
     var TEST_RESULT = OpenAjax.a11y.TEST_RESULT;
-
-    var tag_name;
 
     var control_elements   = dom_cache.controls_cache.control_elements;
     var control_elements_len = control_elements.length;
@@ -361,7 +372,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      for (var i = 0; i < label_elements_len; i++) {
        var le = label_elements[i];
        var de = le.dom_element;
-       var cs = de.computed_style;
 
        if (le.for_id && le.for_id.length) {
 
@@ -610,8 +620,6 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
        ce      = ces[i][0];
        de      = ce.dom_element;
 
-//       console.debug("ROLE: " + ce.computed_label_for_comparison + " " + ces_len + " TEST 1: " + (ces_len === 1) + " TEST 2: " + ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel'))));
-
        if ((ces_len === 1) ||
            ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {
          rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
@@ -643,15 +651,67 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
   rule_group          : OpenAjax.a11y.RULE_GROUP.GROUP2,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['input[type="submit"]', 'input[type="reset"]'],
+  target_resources    : ['input[type="submit"]', 'input[type="reset"]','button[type="submit"]', 'button[type="reset"]'],
   primary_property    : 'computed_label',
   resource_properties : ['value'],
   language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-   function get_input_by_type(list, form, type) {
+    function checkButtons(fe1) {
 
-   }
+      var flag1 = false;
+      var flag2 = false;
+
+      var sb1 = fe1.submit_button ? fe1.submit_button : null;
+      var rb1 = fe1.reset_button ? fe1.reset_button : null;
+
+      for (var j = 0; j < form_elements_len; j += 1) {
+        var fe2 = form_elements[j];
+
+        if (fe1.cache_id === fe2.cache_id) {
+          continue;
+        }
+
+        var sb2 = fe2.submit_button ? fe2.submit_button : null;
+        var rb2 = fe2.reset_button  ? fe2.reset_button : null;
+
+        if (!flag1 && sb1 && sb2 && (sb1.computed_label_for_comparison === sb2.computed_label_for_comparison)) {
+
+          if (sb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (sb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (sb1.dom_element.tag_name === 'button') {
+                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_1', ['submit']);
+              } else {
+                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_2', ['submit']);
+              }
+            } else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, sb1, 'ELEMENT_HIDDEN_1', ['submit']);
+            }
+            flag1 = true;
+          }
+        }
+
+        if (!flag2 && rb1 && rb2 && (rb1.computed_label_for_comparison === rb2.computed_label_for_comparison)) {
+
+          if (rb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (rb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (rb1.dom_element.tag_name === 'button') {
+                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_1', ['reset']);
+              } else {
+                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_2', ['reset']);
+              }
+            } else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, rb1, 'ELEMENT_HIDDEN_1', ['reset']);
+            }
+            flag2 = true;
+          }
+        }
+
+        if (flag1 && flag2) {
+          return;
+        }
+      } // end loop
+    }
 
    var TEST_RESULT  = OpenAjax.a11y.TEST_RESULT;
    var VISIBILITY   = OpenAjax.a11y.VISIBILITY;
@@ -667,27 +727,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
    // Check to see if valid cache reference
    if (form_elements && form_elements_len) {
 
-     // collect all the visible submit and reset buttons controls
-     for (var i = 0; i < form_elements_len; i++) {
+     for (var i = 0; i < form_elements_len; i += 1) {
        var fe = form_elements[i];
-       var de = fe.dom_element;
-       var cs = de.computed_style;
-
-       var control_type = fe.control_type;
-
-       if (control_type === OpenAjax.a11y.CONTROL_TYPE.FORM) {
-
-         if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-           get_input_by_type(input_submit_info, fe, 'submit');
-           get_input_by_type(input_reset_info, fe, 'reset');
-
-         }
-       }
+       checkButtons(fe);
      } // end loop
    }
   } // end validate function
-
 }
 ]);
 

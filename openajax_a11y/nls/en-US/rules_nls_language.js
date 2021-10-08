@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -50,23 +52,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML4: Specifying the language of content: the lang attribute',
-                url:   'http://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
+                url:   'https://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The lang and xml:lang attributes',
-                url:   'http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
+                url:   'https://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Internationalization: Language tags in HTML and XML',
-                url:   'http://www.w3.org/International/articles/language-tags/'
+                url:   'https://www.w3.org/International/articles/language-tags/'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Internationalization: Choosing a Language Tag',
-                url:   'http://www.w3.org/International/questions/qa-choosing-language-tags'
+                url:   'https://www.w3.org/International/questions/qa-choosing-language-tags'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H57: Using language attributes on the html element',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H57'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H57'
               }
             ]
         },
@@ -105,23 +107,23 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML4: Specifying the language of content: the lang attribute',
-                url:   'http://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
+                url:   'https://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The lang and xml:lang attributes',
-                url:   'http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
+                url:   'https://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Internationalization: Language tags in HTML and XML',
-                url:   'http://www.w3.org/International/articles/language-tags/'
+                url:   'https://www.w3.org/International/articles/language-tags/'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Internationalization: Choosing a Language Tag',
-                url:   'http://www.w3.org/International/questions/qa-choosing-language-tags'
+                url:   'https://www.w3.org/International/questions/qa-choosing-language-tags'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H58: Using language attributes to identify changes in the human language',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H58'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H58'
               }
             ]
         },
@@ -150,19 +152,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML4: Specifying the language of content: the lang attribute',
-                url:   'http://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
+                url:   'https://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML5: The lang and xml:lang attributes',
-                url:   'http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
+                url:   'https://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Internationalization: Language tags in HTML and XML',
-                url:   'http://www.w3.org/International/articles/language-tags/'
+                url:   'https://www.w3.org/International/articles/language-tags/'
               },
               { type:  OpenAjax.a11y.REFERENCES.OTHER,
                 title: 'W3C Internationalization: Choosing a Language Tag',
-                url:   'http://www.w3.org/International/questions/qa-choosing-language-tags'
+                url:   'https://www.w3.org/International/questions/qa-choosing-language-tags'
               }
             ]
         }

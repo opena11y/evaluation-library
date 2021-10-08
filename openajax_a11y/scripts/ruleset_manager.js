@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       RulesetFactory                             */
@@ -80,7 +82,6 @@ OpenAjax.a11y.RulesetFactory = {
           else {
             throw new Error("[OpenAjax A11y][Rulesetfactory] Invalid Ruleset Information Object");
           }
-          break;
 
         case 'rulemappinginfo':
           if (value) {
@@ -90,13 +91,10 @@ OpenAjax.a11y.RulesetFactory = {
           else {
             throw new Error("[OpenAjax A11y][Rulesetfactory] Invalid Rule Mapping Information Object");
           }
-          break;
 
         default:
           throw new Error("[OpenAjax A11y][Rulesetfactory] Unsupported paramater: " + name);
-          break;
         } // end switch
-        return false;
       }, // end setParameter
 
       /**
@@ -129,16 +127,12 @@ OpenAjax.a11y.RulesetFactory = {
           else {
             throw new Error("[OpenAjax A11y][Rulesetfactory] Locale is not a string");
           }
-          break;
 
         default:
           // throw exception to console
           throw new Error("[OpenAjax A11y][Rulesetfactory] Unsupported feature: " + name);
-          break;
 
         }
-
-        return false;
 
       },  // end setFeature
 
@@ -202,7 +196,7 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
   var wcag20_nls = OpenAjax.a11y.nls.WCAG20.getNLS(locale);
 
-  if (typeof loc !== 'String') loc = "en-us";
+  if (typeof loc !== 'string') loc = "en-us";
 
   var locale = loc;
 
@@ -489,43 +483,6 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
     toJSON : function (prefix) {
 
-      function referencesToJSON(name, refs, last) {
-
-        var title = "";
-        var url = "";
-
-        var refs_len = refs.length;
-        var refs_last = refs_len - 1;
-
-        if (refs_len > 0) {
-          json += next_prefix + "  " + JSON.stringify(name) + " : [\n";
-          for (var i = 0; i < refs_len; i++) {
-            var ref = refs[i];
-
-            if (typeof ref === 'string') {
-               title = ref;
-               url = "";
-            }
-            else {
-               title = ref.title;
-               url = ref.url;
-            }
-
-            if (i === refs_last) json += next_prefix_2 + "{ \"title\" : " + JSON.stringify(title) + ", \"url\" : " + JSON.stringify(url) + "}\n";
-            else json += next_prefix_2 + "{ \"title\" : " + JSON.stringify(title) + ", \"url\" : " + JSON.stringify(url) + "},\n";
-          }
-          json += next_prefix + "  ]";
-        }
-        else {
-          json += next_prefix + "  \"purpose\"    : []";
-        }
-
-        if (typeof last === 'undefined' || !last) json += ',\n';
-        else json += '\n';
-
-      } // end function
-
-
       if (typeof prefix !== 'string' || prefix.length === 0) {
         prefix = "";
       }
@@ -552,7 +509,6 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
           var rule_mapping = rule_mappings[i];
           var rule = rule_mapping.rule;
-          var rule_definition  = rule.getDefinition(rule_mapping.required);
 
           json += next_prefix_2 + "\"" + rule.getId() + "\" : {\n";
           json += next_prefix_2 + "  \"enabled\"    : "  + rule_mapping.enabled + ",\n";
@@ -699,12 +655,10 @@ OpenAjax.a11y.RulesetManager = function() {
      *
      * @desc Creates a JSON representation of the rules in the ruleset
      *
-     * @param  {String}  prefix         - A prefix string typically spaces for formatting output
-     *
      * @return {String} JSON formatted string representing the ruleset
      */
 
-    toJSON : function (prefix) {
+    toJSON : function () {
 
       var json = "[\n";
 

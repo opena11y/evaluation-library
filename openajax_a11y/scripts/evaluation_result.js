@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                       EvaluationResult                           */
@@ -275,7 +276,7 @@ OpenAjax.a11y.EvaluationResult.prototype.getRuleResultsByGuideline = function (g
      var rr = this.rule_results[i];
      var r = rr.getRule();
 
-     OpenAjax.a11y.logger.debug("[EvaluationResult][getRuleResultsByGuideline] Compare: " + r.getGuideline() + " " + guideline_id + " " + (r.getGuideline() & guideline_id));
+//     OpenAjax.a11y.logger.debug("[EvaluationResult][getRuleResultsByGuideline] Compare: " + r.getGuideline() + " " + guideline_id + " " + (r.getGuideline() & guideline_id));
 
      if ((r.getGuideline() & guideline_id)&&
          (r.getGroup()     & group_filter)) {
@@ -341,8 +342,6 @@ OpenAjax.a11y.EvaluationResult.prototype.getRuleResultsByCategory = function (ca
 OpenAjax.a11y.EvaluationResult.prototype.toJSON = function (include_element_results) {
 
   if (typeof include_element_results !== 'boolean') include_element_results = false;
-
-  var wcag20_nls  = OpenAjax.a11y.nls.WCAG20.getNLS();
 
   var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
 

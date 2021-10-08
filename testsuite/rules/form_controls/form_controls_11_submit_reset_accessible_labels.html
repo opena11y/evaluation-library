@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form control test 11, unique labels for submit button</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form control test 11, unique labels for the submit button</h1>
+      
+      <h2>Group 1: Forms with submit buttons with the same and different value element</h2>
+        <form>
+          <label>Text 11<input type="text"></label>
+          <label>Text 12<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Same" class="CONTROL_11_FAIL">
+          <input type="reset" value="Reset 1 Input Same" class="CONTROL_11_FAIL">
+        </form>
+        <form>
+          <label>Text 15<input type="text"></label>
+          <label>Text 16<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Different A" >
+          <input type="reset" value="Reset 1 Input Different A" >
+        </form>
+        <form>
+          <label>Text 17<input type="text"></label>
+          <label>Text 18<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Different B">
+          <input type="reset" value="Reset 1 Input Different B">
+        </form>
+        <form>
+          <label>Text 13<input type="text"></label>
+          <label>Text 14<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Same" class="CONTROL_11_FAIL">
+          <input type="reset" value="Reset 1 Input Same" class="CONTROL_11_FAIL">
+        </form>
+
+      <h2>Group 2: Forms with submit buttons with the same and different value element</h2>
+        <form>
+          <label>Text 21<input type="text"></label>
+          <label>Text 22<input type="text"></label>
+          <button type="submit" class="CONTROL_11_FAIL">Submit 2 Button Same</button>
+          <button type="reset" class="CONTROL_11_FAIL">Reset 2 Button Same</button>
+        </form>
+        <form>
+          <label>Text 25<input type="text"></label>
+          <label>Text 26<input type="text"></label>
+          <button type="submit" class="CONTROL_11_FAIL">Submit 2 Button Same</button>
+          <button type="reset" class="CONTROL_11_FAIL">Reset 2 Button Same</button>
+        </form>
+        <form>
+          <label>Text 27<input type="text"></label>
+          <label>Text 28<input type="text"></label>
+          <button type="submit">Submit 2 Button Different A</button>
+          <button type="reset" >Reset 2 Button Different A</button>
+        </form>
+        <form>
+          <label>Text 23<input type="text"></label>
+          <label>Text 24<input type="text"></label>
+          <button type="submit" >Submit 2 Button Different B</button>
+          <button type="reset" >Reset 2 Button Different B</button>
+        </form>
+      
+
+      <h2>Group 3: Hidden Elements</h2>
+        <form hidden>
+          <label>Name 31<input type="text"></label>
+          <label>Name 32<input type="text"></label>
+          <input type="submit" value="Submit 31">
+          <input type="reset" value="Reset 31">
+        </form>
+
+        <form hidden>
+          <label>Name 33<input type="text"></label>
+          <label>Name 34<input type="text"></label>
+          <input type="submit" value="Submit 1 Input Different A" class="CONTROL_11_HIDDEN">
+          <input type="reset" value="Reset 1 Input Different A" class="CONTROL_11_HIDDEN">
+        </form>
+
+        <form hidden>
+          <label>Name 35<input type="text"></label>
+          <label>Name 36<input type="text"></label>
+          <button type="submit" class="CONTROL_11_HIDDEN">Submit 2 Button Different A</button>
+          <button type="reset" class="CONTROL_11_HIDDEN">Reset 2 Button Different A</button>
+        </form>
+
+      <h2>Group 4: No Submit or Reset</h2>
+        <form>
+          <label>Name 41<input type="text"></label>
+          <label>Name 42<input type="text"></label>
+        </form>
+      
+    </div>
+  </body>
+</html>
+
+

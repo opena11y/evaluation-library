@@ -59,7 +59,7 @@ var EXPORTED_SYMBOLS = ["getLogger"];
  * @namespace OpenAjax
  */
 
-var OpenAjax = OpenAjax || {};
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /**
  * @namespace OpenAjax.a11y

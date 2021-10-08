@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                             Rule                                 */
@@ -353,15 +354,12 @@ OpenAjax.a11y.Rule.prototype.getGroupNLS = function () {
 
   case RULE_GROUP.GROUP1:
     return "Group 1";
-    break;
 
   case RULE_GROUP.GROUP2:
     return "Group 2";
-    break;
 
   case RULE_GROUP.GROUP3:
     return "Group 3";
-    break;
 
   default:
     break;
@@ -858,14 +856,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
     else json += ",\n";
   }
 
-  function booleanItem(property, value, last) {
-    if (value) json += prefix + "    \"" + property + "\" : true";
-    else json += prefix + "    \"" + property + "\" : false";
-
-    if (last) json += "\n";
-    else json += ",\n";
-  }
-
   function stringListItem(property, list, last) {
     json += prefix + "    \"" + property + "\" : [";
 
@@ -880,23 +870,6 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
     if (last) json += "]\n";
     else json += "],\n";
   }
-
-  function stringListItem2(property, list, last ) {
-    json += prefix + "    \"" + property + "\" : [";
-
-    if (list && list.length) {
-      var last_item = list.length - 1;
-      for (var i = 0; i < list.length; i++) {
-        if (last_item === i) json += "  " + JSON.stringify(list[i]) + "\n";
-        else json += "  " + JSON.stringify(list[i]) + ",\n";
-      }
-    }
-
-    if (last) json += "]\n";
-    else json += "],\n";
-
-  }
-
 
   function addListOfStrings(name, list, last) {
 
@@ -953,7 +926,7 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
 
     if (list) {
       var first = true;
-      for (item in list) {
+      for (var item in list) {
         if (first) json += "           " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
         else json += ",\n          " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
         first = false;
@@ -972,10 +945,7 @@ OpenAjax.a11y.Rule.prototype.toJSON = function (prefix, required) {
 
   var json = "";
 
-  var rule     = this;
   var rule_nls = this.rule_nls;
-
-  OpenAjax.a11y.logger.debug("[RULE] Exporting rule: " + this.rule_id);
 
   json += prefix + "  {\n";
 
@@ -1148,18 +1118,11 @@ OpenAjax.a11y.RuleManager = function () {
 
         var rule_item;
 
-        OpenAjax.a11y.logger.info("[RuleManager] Loading Rules");
+//        OpenAjax.a11y.logger.info("[RuleManager] Loading Rules");
 
         for (var i = 0; i < rule_array.length; i++) {
 
           rule_item = rule_array[i];
-
-      //    OpenAjax.a11y.logger.debug("[RuleManager] Rule: " + rule_item.rule_id);
-      //    OpenAjax.a11y.logger.debug("  last update: " + rule_item.last_updated);
-      //    OpenAjax.a11y.logger.debug("   properties: " + typeof rule_item.resource_properties);
-      //    OpenAjax.a11y.logger.debug("     language: " + rule_item.language_dependency);
-      //    OpenAjax.a11y.logger.debug("     validate: " + typeof rule_item.validate);
-
           this.addRule(rule_item);
 
         }
@@ -1280,8 +1243,6 @@ OpenAjax.a11y.RuleManager = function () {
         if (typeof prefix !== 'string') prefix = "";
 
         var json = "";
-
-        OpenAjax.a11y.logger.debug("[RuleManager] Number of rules: " + rules.length);
 
         json += prefix + "[\n";
 

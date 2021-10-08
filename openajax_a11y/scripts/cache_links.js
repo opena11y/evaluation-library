@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            LinkCache                             */
@@ -328,14 +330,6 @@ OpenAjax.a11y.cache.LinksCache.prototype.getLinksThatShareTheSameHREF = function
 
   if (same_hrefs) list_of_same_hrefs.push(same_hrefs);
 
-
-//  OpenAjax.a11y.logger.debug( "Number of DUP HREF objects: " + list_of_same_hrefs.length);
-
-  for (i = 0; i < list_of_same_hrefs.length; i++ ) {
-    var item = list_of_same_hrefs[i];
-//    OpenAjax.a11y.logger.debug("[Cache Links] " + i  + " HREF: " + item.links[0].href + "  Number: " + item.links.length + "  Same Name: " + item.same_names);
-  }
-
   return list_of_same_hrefs;
 
 };
@@ -580,7 +574,7 @@ OpenAjax.a11y.cache.LinkElement = function (dom_element) {
 
     if (href === '#') return OpenAjax.a11y.LINK_TYPE.EMPTY;
 
-    if (href.indexOf('http://') >= 0) return OpenAjax.a11y.LINK_TYPE.HTTP;
+    if (href.indexOf('https://') >= 0) return OpenAjax.a11y.LINK_TYPE.HTTP;
     else
       if (href.indexOf('https://') >= 0) return OpenAjax.a11y.LINK_TYPE.HTTPS;
       else
@@ -604,7 +598,7 @@ OpenAjax.a11y.cache.LinkElement = function (dom_element) {
 
     if (typeof href != 'string') return false;
 
-    if (url.indexOf('http://') >= 0) return true;
+    if (url.indexOf('https://') >= 0) return true;
     else
       if (url.indexOf('https://') >= 0) return true;
       else

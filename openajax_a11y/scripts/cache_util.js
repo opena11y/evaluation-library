@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
+
 
 /* ---------------------------------------------------------------- */
 /*        Utilities and String Extensions                           */
@@ -22,9 +25,8 @@
  * @namespace OpenAjax.a11y.util
  */
 
-OpenAjax.a11y.util = OpenAjax.a11y.util || {};
-
-
+OpenAjax.a11y =  OpenAjax.a11y || {};
+OpenAjax.a11y.util =  OpenAjax.a11y.util || {};
 
 /**
  * @function cleanForUTF8
@@ -63,7 +65,7 @@ OpenAjax.a11y.util.cleanForUTF8 = function(str) {
  * @return {String}  Formatted date string
  */
 
-OpenAjax.a11y.util.getFormattedDate = function(str) {
+OpenAjax.a11y.util.getFormattedDate = function() {
 
   function leadingZero(n) {
     var n1 = n.toString();
@@ -271,7 +273,7 @@ OpenAjax.a11y.util.RGBToHEX = function( rgb_color ) {
 
  var hex = [];
  var color_hex = "000000";
- var components = rgb_color.match(/[\d\.]+/g);
+ var components = rgb_color.match(/[\d.]+/g);
 
  if (components && components.length) {
   length = components.length;
@@ -362,12 +364,11 @@ OpenAjax.a11y.util.normalizeSpace = function (s) {
  * @param {String}  s       - String to have replacements
  * @param {String}  str1    - String to replace
  * @param {String}  str2    - The replacement string
- * @param {Boolean} ignore  - True if ignore uppercase and lowercase
  *
  * @return  String
  */
 
-OpenAjax.a11y.util.replaceAll = function(s, str1, str2, ignore) {
+OpenAjax.a11y.util.replaceAll = function(s, str1, str2) {
 
   var len = s.length;
   var pos = s.indexOf(str1);

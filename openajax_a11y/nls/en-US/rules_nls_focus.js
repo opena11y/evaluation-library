@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../../openajax_a11y_constants.js';
 
 /* --------------------------------------------------------------------------- */
 /*       OpenAjax Alliance Rules National Language Support (NLS): English      */
@@ -64,11 +66,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G59: Placing the interactive elements in an order that follows sequences and relationships within the content',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G59'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G59'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H4: Creating a logical tab order through links, form controls, and objects',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/H4'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H4'
               }
             ]
         },
@@ -110,11 +112,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'C15: Using CSS to change the presentation of a user interface component when it receives focus ',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/C15'
+                url:   'https://www.w3.org/TR/WCAG20-TECHS/C15'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G195: Using an author-supplied, highly visible focus indicator',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G195'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
               }
             ]
         },
@@ -146,15 +148,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G200: Opening new windows and tabs from a link only when necessary',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G200'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G201: Giving users advanced warning when opening a new window',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G201'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F52'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
               }
             ]
         },
@@ -188,15 +190,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G200: Opening new windows and tabs from a link only when necessary',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G200'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'G201: Giving users advanced warning when opening a new window',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/G201'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-                url:   'http://www.w3.org/TR/WCAG20-TECHS/F52'
+                url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
               }
             ]
         },
@@ -242,11 +244,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
-                url:   'http://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+                url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H32: Providing submit buttons',
-                url:   'http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+                url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
               }
             ]
         },
@@ -279,19 +281,19 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             INFORMATIONAL_LINKS: [
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
                 title: 'HTML 4.01 Specification: The @input[type="checkbox"]@ and @input[type="radio"]@ element',
-                url:   'http://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+                url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: Checkbox Role',
-                url:   'http://www.w3.org/TR/wai-aria/#checkbox'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Checkbox Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#checkbox'
               },
               { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.0: Radio Role',
-                url:   'http://www.w3.org/TR/wai-aria/#radio'
+                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Radio Role',
+                url:   'https://www.w3.org/TR/wai-aria-1.2/#radio'
               },
               { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
                 title: 'H32: Providing submit buttons',
-                url:   'http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+                url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
               }
             ]
         }

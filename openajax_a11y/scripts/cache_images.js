@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            ImageCache                            */
@@ -378,8 +380,6 @@ OpenAjax.a11y.cache.ImagesCache.prototype.getNameForImage = function (image) {
 
 OpenAjax.a11y.cache.ImageElement = function (dom_element, base_url) {
 
-  var alt_value;
-
   if (!dom_element) return null;
 
   var node = dom_element.node;
@@ -395,7 +395,7 @@ OpenAjax.a11y.cache.ImageElement = function (dom_element, base_url) {
   this.is_presentation = false;
 
   if (dom_element.has_role && dom_element.role != 'img') this.is_image = false;
-  if (dom_element.has_role && dom_element.role === 'presentation') this.is_presentation = true;
+  if (dom_element.has_role && (dom_element.role === 'presentation' || dom_element.role === 'none')) this.is_presentation = true;
 
 //  OpenAjax.a11y.logger.debug("Image element: " + dom_element.toString() + " has: " + dom_element.has_role + " role: " + dom_element.role  + " image: " + this.is_image + " presentation: " + this.is_presentation);
 
@@ -437,7 +437,7 @@ OpenAjax.a11y.cache.ImageElement = function (dom_element, base_url) {
 
     this.longdesc_url = this.longdesc;
 
-    if (this.longdesc.indexOf('http:') == -1 ) {
+    if (this.longdesc.indexOf('https:') == -1 ) {
       this.longdesc_url = base_url + this.longdesc;
     }
 
@@ -537,12 +537,10 @@ OpenAjax.a11y.cache.ImageElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.ImageElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.ImageElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -619,8 +617,6 @@ OpenAjax.a11y.cache.ImageElement.prototype.getEvents = function () {
 OpenAjax.a11y.cache.ImageElement.prototype.getAltTextNLS = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
-
-  var alt_style = {};
 
   if (this.dom_element.has_alt) {
     if (this.alt_length) {
@@ -857,12 +853,10 @@ OpenAjax.a11y.cache.CanvasElement.prototype.getAttributes = function (unsorted) 
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.CanvasElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.CanvasElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 
@@ -981,7 +975,7 @@ OpenAjax.a11y.cache.SVGElement = function (dom_element) {
   this.document_order = 0;
 
   this.is_presentation = false;
-  if (dom_element.has_role && dom_element.role === 'presentation') this.is_presentation = true;
+  if (dom_element.has_role && (dom_element.role === 'presentation' || dom_element.role === 'none')) this.is_presentation = true;
 
 //  OpenAjax.a11y.logger.debug("Canvas element: " + dom_element.toString() + " has: " + dom_element.has_role + " role: " + dom_element.role  + " image: " + this.is_image + " presentation: " + this.is_presentation);
 
@@ -1061,12 +1055,10 @@ OpenAjax.a11y.cache.SVGElement.prototype.getAttributes = function (unsorted) {
  *
  * @desc Returns an array of cache properties sorted by property name
  *
- * @param {Boolean}  unsorted  - If defined and true the results will NOT be sorted alphabetically
- *
  * @return {Array} Returns a array of cache property display object
  */
 
-OpenAjax.a11y.cache.SVGElement.prototype.getCacheProperties = function (unsorted) {
+OpenAjax.a11y.cache.SVGElement.prototype.getCacheProperties = function () {
 
   var cache_nls = OpenAjax.a11y.nls.Cache;
 

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            DOMCache                              */
@@ -282,8 +284,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateAllCaches = function () {
 
 OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElementCache = function () {
 
- var de;
-
  this.initCache();
 
  // add title information to DOMElement Cache
@@ -444,15 +444,20 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
       if (dom_element.tag_name === 'frame') this.frame_count += 1;
       else this.iframe_count += 1;
 
-      var frame_doc = node.contentWindow.document;
+//      OpenAjax.a11y.logger.debug("[updateDOMElements]iframe][found]");
 
-//      OpenAjax.a11y.logger.debug("frame: " + node.src + " " + frame_doc);
+      try {
+        var frame_doc = node.contentWindow.document;
 
-      if (frame_doc && frame_doc.firstChild) {
-        for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
-          this.updateDOMElements( n, dom_element, null);
-        } // end loop
+        if (frame_doc && frame_doc.firstChild) {
+          for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
+            this.updateDOMElements( n, dom_element, null);
+          } // end loop
+        }
+      } catch (e) {
+//        OpenAjax.a11y.logger.debug("[updateDOMElements][iframe][error]: " + e);
       }
+
       break;
 
     default:
@@ -467,7 +472,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
     } // end loop
 
     return dom_element;
-    break;
 
   case Node.TEXT_NODE:
    // OpenAjax.a11y.logger.debug("DOM node text: " + node.data);
@@ -492,8 +496,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
    else {
      return previous_sibling;
    }
-
-   break;
 
   default:
     break;

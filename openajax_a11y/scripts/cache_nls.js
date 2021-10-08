@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-OpenAjax.a11y.nls = OpenAjax.a11y.nls || {};
+// import {OpenAjax} from '../openajax_a11y_constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                            Properties NLS                        */
@@ -497,34 +497,6 @@ OpenAjax.a11y.nls.Cache = function() {
       list.push(o);
     },
 
-    /**
-     * @method addInvalidValue
-     *
-     * @memberOf OpenAjax.a11y.nls.Cache
-     *
-     * @desc Adds an attribute with a value to a list of attributes
-     *
-     * @param  {Array}   list      - List of properties
-     * @param  {String}  attribute - Attribute of an element represented in the cache
-     * @param  {String}  value     - Value of an attribute
-     * @param  {String}  loc       - String representing the language
-     */
-
-    addInvalidValue : function (list, attribute, value, loc) {
-      var locale = "en-us";
-      if ((typeof loc === 'string') && loc.length) locale = loc;
-
-      var locale_nls = cache_nls[OpenAjax.a11y.locale];
-      var o = {};
-
-      o.label = attribute;
-      o.value = value + " " + locale_nls.invalid_value.value;
-      o.style = locale_nls.invalid_value.style;
-
-      list.push(o);
-
-    },
-
 
     /**
      * @method toJSON
@@ -541,11 +513,6 @@ OpenAjax.a11y.nls.Cache = function() {
     toJSON : function(prefix) {
 
       var locale_nls = cache_nls[OpenAjax.a11y.locale];
-
-      var next_prefix = "";
-
-      if (typeof prefix !== 'string' || prefix.length === 0) prefix = "";
-      else next_prefix = prefix + "  ";
 
       var json = "";
 
