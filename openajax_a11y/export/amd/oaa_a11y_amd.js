@@ -18872,43 +18872,51 @@ OpenAjax.a11y.cache.DOMCache.prototype.traverseDOMElementsForAllCaches = functio
                                           media_info,
                                           frame_info) {
 
- if (!dom_element) return;
- // if an element for through all the children elements looking for text
+  if (!dom_element) return;
+  // if an element for through all the children elements looking for text
 
- if (dom_element.type == Node.ELEMENT_NODE) {
-   // flag for testing for an HTML DOM versus a XML DOM
-   if (dom_element.tag_name === 'body') this.has_body_element = true;
+  switch (dom_element.type) {
+
+    case Node.ELEMENT_NODE:
+      // flag for testing for an HTML DOM versus a XML DOM
+      if (dom_element.tag_name === 'body') this.has_body_element = true;
 
 //  OpenAjax.a11y.logger.debug("[traverseDOMElementsForAllCaches][dom_element]: " + dom_element.tag_name + " " + dom_element.type);
 
-  this.abbreviations_cache.updateCacheItems(dom_element);
-  this.images_cache.updateCacheItems(dom_element);
-  this.languages_cache.updateCacheItems(dom_element);
-  this.links_cache.updateCacheItems(dom_element);
+      this.abbreviations_cache.updateCacheItems(dom_element);
+      this.images_cache.updateCacheItems(dom_element);
+      this.languages_cache.updateCacheItems(dom_element);
+      this.links_cache.updateCacheItems(dom_element);
 
-  var hi = this.headings_landmarks_cache.updateCacheItems(dom_element, landmark_info, heading_global_info);
-  var ti = this.tables_cache.updateCacheItems(dom_element, table_info);
-  var ci = this.controls_cache.updateCacheItems(dom_element, control_info);
-  var li = this.lists_cache.updateCacheItems(dom_element, list_info);
-  var mi = this.media_cache.updateCacheItems(dom_element, media_info);
-  var fi = this.frames_cache.updateCacheItems(dom_element, frame_info);
+      var hi = this.headings_landmarks_cache.updateCacheItems(dom_element, landmark_info, heading_global_info);
+      var ti = this.tables_cache.updateCacheItems(dom_element, table_info);
+      var ci = this.controls_cache.updateCacheItems(dom_element, control_info);
+      var li = this.lists_cache.updateCacheItems(dom_element, list_info);
+      var mi = this.media_cache.updateCacheItems(dom_element, media_info);
+      var fi = this.frames_cache.updateCacheItems(dom_element, frame_info);
 
 //  if (dom_element.tag_name === 'h2')        OpenAjax.a11y.logger.debug("[traverseDOMElementsForAllCaches][dom_element]: " + dom_element);
 //  if (dom_element.tag_name === 'input')     OpenAjax.a11y.logger.debug("[traverseDOMElementsForAllCaches][dom_element]: " + dom_element);
 //  if (dom_element.tag_name === 'textarea')  OpenAjax.a11y.logger.debug("[traverseDOMElementsForAllCaches][dom_element]: " + dom_element);
 
-  var children_length = dom_element.child_dom_elements.length;
-  for (var i = 0; i < children_length; i++ ) {
-   this.traverseDOMElementsForAllCaches(dom_element.child_dom_elements[i], hi, heading_global_info, ti, ci, li, mi, fi);
-  } // end loop
+      var children_length = dom_element.child_dom_elements.length;
+        for (var i = 0; i < children_length; i++ ) {
+        this.traverseDOMElementsForAllCaches(dom_element.child_dom_elements[i], hi, heading_global_info, ti, ci, li, mi, fi);
+      } // end loop
 
-  this.element_information.countElement(dom_element);
+      this.element_information.countElement(dom_element);
 
- } else {
-   this.text_cache.updateCacheItems(dom_element);
-   this.headings_landmarks_cache.updateCacheItems(dom_element, landmark_info, heading_global_info);
- }
+      break;
 
+    case Node.TEXT_NODE:
+      this.text_cache.updateCacheItems(dom_element);
+      this.headings_landmarks_cache.updateCacheItems(dom_element, landmark_info, heading_global_info);
+      break;
+
+    default:
+      break;
+
+  }
 };
 
 
@@ -19053,126 +19061,182 @@ OpenAjax.a11y.cache.DOMCache.prototype.addTitleDOMElement = function () {
  * return nothing
  */
 
-OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, parent_dom_element, previous_sibling) {
+OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, parent_dom_element, previous_sibling, showElements) {
 
+  function showElement(node) {
+    if (showElements) {
+      switch (node.nodeType) {
+
+        case Node.ELEMENT_NODE:
+          console.log('ELEM: ' + node.tagName + ' (' + node.className + ')');
+          break;
+
+        case Node.TEXT_NODE:
+          var txt = node.data;
+          console.log('TEXT: ' + txt.length);
+          break;
+
+        default:
+          console.log('OTHER');
+          break;
+      }
+    }
+  }
+
+  if (typeof showElements !== 'boolean') {
+    showElements = true;
+  }
 
   var n;
+  var nodes;
   var de;
   var dom_element;
 
   switch (node.nodeType ) {
 
-  case Node.DOCUMENT_NODE:
-  case Node.DOCUMENT_TYPE_NODE:
-    // OpenAjax.a11y.logger.debug("Document node type");
-    break;
-
-  case Node.ELEMENT_NODE:
-
-    var tag_name = node.tagName.toLowerCase();
-
-    if (tag_name === 'input' && tag_name === 'hidden') break;
-
-    if (tag_name === 'body') dom_element = new OpenAjax.a11y.cache.DOMElement(node, parent_dom_element, this.document);
-    else dom_element = new OpenAjax.a11y.cache.DOMElement(node, parent_dom_element, null);
-
-    dom_element.addComputedStyle(parent_dom_element);
-
-    dom_element.calculateXPath(parent_dom_element);
-    this.element_cache.addDOMElement(dom_element);
-
-    if (parent_dom_element) {
-      parent_dom_element.has_element_children = true;
-      parent_dom_element.addChild(dom_element);
-    }
-    else {
-      this.element_cache.addChild(dom_element);
-    }
-
-//    if (dom_element.tag_name === 'h2')       OpenAjax.a11y.logger.debug("[updateDOMElements][ELEMENT_NODE][DOMElement]: " + dom_element);
-//    if (dom_element.tag_name === 'input')    OpenAjax.a11y.logger.debug("[updateDOMElements][ELEMENT_NODE][DOMElement]: " + dom_element);
-//    if (dom_element.tag_name === 'textarea') OpenAjax.a11y.logger.debug("[updateDOMElements][ELEMENT_NODE][DOMElement]: " + dom_element);
-
-
-    if (dom_element.id && dom_element.id.length) {
-      // use append so that document_order of the dom_element does not get updated
-
-      de = this.element_with_id_cache.getDOMElementById(dom_element.id);
-
-//      if (de) OpenAjax.a11y.logger.debug("[DOMCache][updateDOMElements] id 1: " + dom_element.id + " id 2:" + de.id + " " + (de === dom_element));
-
-      if (de) {
-        dom_element.id_unique = OpenAjax.a11y.ID.NOT_UNIQUE;
-        de.id_unique          = OpenAjax.a11y.ID.NOT_UNIQUE;
-      }
-
-      this.element_with_id_cache.dom_elements.push(dom_element);
-
-    }
-
-    switch (dom_element.tag_name) {
-
-    case 'frame':
-    case 'iframe':
-
-      if (dom_element.tag_name === 'frame') this.frame_count += 1;
-      else this.iframe_count += 1;
-
-//      OpenAjax.a11y.logger.debug("[updateDOMElements]iframe][found]");
-
-      try {
-        var frame_doc = node.contentWindow.document;
-
-        if (frame_doc && frame_doc.firstChild) {
-          for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
-            this.updateDOMElements( n, dom_element, null);
-          } // end loop
-        }
-      } catch (e) {
-//        OpenAjax.a11y.logger.debug("[updateDOMElements][iframe][error]: " + e);
-      }
-
+    case Node.DOCUMENT_NODE:
+    case Node.DOCUMENT_TYPE_NODE:
+      // OpenAjax.a11y.logger.debug("Document node type");
       break;
+
+    case Node.ELEMENT_NODE:
+
+      var tag_name = node.tagName.toLowerCase();
+      showElement(node);
+
+      if (tag_name === 'input' && tag_name === 'hidden') break;
+
+      if (tag_name === 'body') dom_element = new OpenAjax.a11y.cache.DOMElement(node, parent_dom_element, this.document);
+      else dom_element = new OpenAjax.a11y.cache.DOMElement(node, parent_dom_element, null);
+
+      dom_element.addComputedStyle(parent_dom_element);
+
+      dom_element.calculateXPath(parent_dom_element);
+      this.element_cache.addDOMElement(dom_element);
+
+      if (parent_dom_element) {
+        parent_dom_element.has_element_children = true;
+        parent_dom_element.addChild(dom_element);
+      }
+      else {
+        this.element_cache.addChild(dom_element);
+      }
+
+      if (dom_element.id && dom_element.id.length) {
+        // use append so that document_order of the dom_element does not get updated
+
+        de = this.element_with_id_cache.getDOMElementById(dom_element.id);
+
+  //      if (de) OpenAjax.a11y.logger.debug("[DOMCache][updateDOMElements] id 1: " + dom_element.id + " id 2:" + de.id + " " + (de === dom_element));
+
+        if (de) {
+          dom_element.id_unique = OpenAjax.a11y.ID.NOT_UNIQUE;
+          de.id_unique          = OpenAjax.a11y.ID.NOT_UNIQUE;
+        }
+
+        this.element_with_id_cache.dom_elements.push(dom_element);
+
+      }
+
+      switch (dom_element.tag_name) {
+
+        case 'frame':
+        case 'iframe':
+
+          if (dom_element.tag_name === 'frame') this.frame_count += 1;
+          else this.iframe_count += 1;
+
+    //      OpenAjax.a11y.logger.debug("[updateDOMElements]iframe][found]");
+
+          try {
+            var frame_doc = node.contentWindow.document;
+
+            if (frame_doc && frame_doc.firstChild) {
+              for (n = frame_doc.firstChild; n !== null; n = n.nextSibling) {
+                this.updateDOMElements( n, dom_element, null);
+              } // end loop
+            }
+          } catch (e) {
+    //        OpenAjax.a11y.logger.debug("[updateDOMElements][iframe][error]: " + e);
+          }
+
+          break;
+
+        default:
+          break;
+
+      } // end switch
+
+      var ps = null;
+
+      // Check for custom element
+
+      if (dom_element.tag_name.indexOf('-') >= 0) {
+        var rn = node.shadowRoot;
+        console.log('[custom element]: ' + dom_element.tag_name + ' (' + rn.mode + ')');
+        if (rn) {
+          for (n = rn.firstElementChild; n !== null; n = n.nextElementSibling ) {
+            ps = this.updateDOMElements(n, dom_element, ps);
+          } // end loop
+
+        }
+      } else {
+        switch (dom_element.tag_name) {
+          case 'svg':
+            console.log('[SVG]');
+            break;
+
+          case 'template':
+          case 'content':
+          case 'shadow':
+            break;
+
+          case 'slot':
+            nodes = node.assignedNodes();
+            console.log('[SLOT]: ' + nodes.length);
+            for (var i = 0; i < nodes.length; i += 1) {
+              n = nodes[i];
+              ps = this.updateDOMElements(n, dom_element, ps, showElements);
+            } // end loop
+            break;
+
+          default:
+            for (n = node.firstChild; n !== null; n = n.nextSibling ) {
+              ps = this.updateDOMElements(n, dom_element, ps, showElements);
+            } // end loop
+            break;
+
+        }
+      }
+
+      return dom_element;
+
+    case Node.TEXT_NODE:
+     // OpenAjax.a11y.logger.debug("DOM node text: " + node.data);
+
+     var dom_text = new OpenAjax.a11y.cache.DOMText(node, parent_dom_element);
+
+     if (dom_text.text_length) {
+
+       if (!previous_sibling || previous_sibling.type != Node.TEXT_NODE) {
+
+         this.element_cache.addDOMText(dom_text);
+         if (parent_dom_element) parent_dom_element.addChild(dom_text);
+         return dom_text;
+
+       } else {
+
+         if (previous_sibling) previous_sibling.addText(dom_text.text);
+
+         return previous_sibling;
+       }
+     }
+     else {
+       return previous_sibling;
+     }
 
     default:
       break;
-
-    } // end switch
-
-    var ps = null;
-
-    for (n = node.firstChild; n !== null; n = n.nextSibling ) {
-      ps = this.updateDOMElements(n, dom_element, ps);
-    } // end loop
-
-    return dom_element;
-
-  case Node.TEXT_NODE:
-   // OpenAjax.a11y.logger.debug("DOM node text: " + node.data);
-
-   var dom_text = new OpenAjax.a11y.cache.DOMText(node, parent_dom_element);
-
-   if (dom_text.text_length) {
-
-     if (!previous_sibling || previous_sibling.type != Node.TEXT_NODE) {
-
-       this.element_cache.addDOMText(dom_text);
-       if (parent_dom_element) parent_dom_element.addChild(dom_text);
-       return dom_text;
-
-     } else {
-
-       if (previous_sibling) previous_sibling.addText(dom_text.text);
-
-       return previous_sibling;
-     }
-   }
-   else {
-     return previous_sibling;
-   }
-
-  default:
-    break;
   } // end switch
 
   return null;
@@ -39950,7 +40014,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         var rule_mapping = rule_mappings[i];
         var rule = rule_mapping.rule;
 
-//        OpenAjax.a11y.logger.debug("[evaluate][rule]: " + rule.getIdNLS());
+        OpenAjax.a11y.logger.info("[evaluate][rule]: " + rule.getIdNLS());
 
         if (rule_mapping.enabled && (rule.getGroup() & groups)) {
 
@@ -39963,6 +40027,8 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         }
 
       } // end rule loop
+
+      OpenAjax.a11y.logger.info("Evaluation Complete!");
 
       return evaluation_result;
     },
@@ -49857,7 +49923,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
             },
             PURPOSE: [
-              'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton).',
+              'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
               'Screen readers typcially render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
               '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
               'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
@@ -59982,11 +60048,14 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         var style = de.computed_style;
         var implicit_role = '';
 
+        console.log('[WIDGET 13]: ' + de.tag_name + ' has label=' + (de.has_aria_label || de.has_aria_labelledby));
+
         if (de.element_aria_info) {
           implicit_role = de.element_aria_info.defaultRole;
         }
 
-        if (de.has_aria_label || de.has_aria_labelledby) {
+        if (OpenAjax.a11y.aria.designPatterns[de.role] &&
+            (de.has_aria_label || de.has_aria_labelledby)) {
 
           if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
             if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {

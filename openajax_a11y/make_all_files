@@ -370,10 +370,10 @@ fi
 
 if [ -n "$AUDITOR_DIR" ]; then
   copy_scripts "$AUDITOR_DIR/faeAuditor/fae-util/openajax_a11y/"
-  cp export/populate/wcag.json "$AUDITOR_DIR/fae2/populate/"
-  cp export/populate/rule_categories.json "$AUDITOR_DIR/fae2/populate/"
-  cp export/populate/rules.json "$AUDITOR_DIR/fae2/populate/"
-  cp export/populate/rulesets.json "$AUDITOR_DIR/fae2/populate/"
+  cp export/populate/wcag.json "$AUDITOR_DIR/faeAuditor/populate/"
+  cp export/populate/rule_categories.json "$AUDITOR_DIR/faeAuditor/populate/"
+  cp export/populate/rules.json "$AUDITOR_DIR/faeAuditor/populate/"
+  cp export/populate/rulesets.json "$AUDITOR_DIR/faeAuditor/populate/"
 fi
 
 if [ -n "$FAE_UTIL_DIR" ]; then

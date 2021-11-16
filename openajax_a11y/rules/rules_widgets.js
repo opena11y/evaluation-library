@@ -1026,11 +1026,14 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         var style = de.computed_style;
         var implicit_role = '';
 
+        console.log('[WIDGET 13]: ' + de.tag_name + ' has label=' + (de.has_aria_label || de.has_aria_labelledby));
+
         if (de.element_aria_info) {
           implicit_role = de.element_aria_info.defaultRole;
         }
 
-        if (de.has_aria_label || de.has_aria_labelledby) {
+        if (OpenAjax.a11y.aria.designPatterns[de.role] &&
+            (de.has_aria_label || de.has_aria_labelledby)) {
 
           if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
             if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {

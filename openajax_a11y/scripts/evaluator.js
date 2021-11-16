@@ -231,7 +231,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         var rule_mapping = rule_mappings[i];
         var rule = rule_mapping.rule;
 
-//        OpenAjax.a11y.logger.debug("[evaluate][rule]: " + rule.getIdNLS());
+        OpenAjax.a11y.logger.info("[evaluate][rule]: " + rule.getIdNLS());
 
         if (rule_mapping.enabled && (rule.getGroup() & groups)) {
 
@@ -244,6 +244,8 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         }
 
       } // end rule loop
+
+      OpenAjax.a11y.logger.info("Evaluation Complete!");
 
       return evaluation_result;
     },
