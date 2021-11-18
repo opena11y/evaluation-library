@@ -1,3 +1,10 @@
+Version 1.3 Overview
+=============================
+* Added support for analyzing custom elements with "open" shado DOM
+* Added support for analaying SLOT element content
+* Updated WIDGET 16 to only require manual checking of custom elements with closed shadow DOMs
+* Fixed bugs with landmark rules related to header and footer elements
+
 Version 1.2 Overview
 =============================
 

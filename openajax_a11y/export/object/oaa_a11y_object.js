@@ -76,7 +76,7 @@ var OpenAjax = OpenAjax || {};
  */
 
 OpenAjax.a11y = OpenAjax.a11y || {};
-OpenAjax.a11y.VERSION = "1.2.0";
+OpenAjax.a11y.VERSION = "1.3.0";
 
 /**
  * @method getVersion
@@ -50298,15 +50298,15 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             SUMMARY:               'Closed shadow DOM requires manual check.',
             TARGET_RESOURCES_DESC: 'Custom elements created using web components API with closed shadow DOM.',
             RULE_RESULT_MESSAGES: {
-              MANUAL_CHECK_S:  'Verify the custom element meets WCAG accessibility requirments.',
-              MANUAL_CHECK_P:  'Verify the %N_MC custom elements meet WCAG accessibility requirments.',
-              HIDDEN_S: 'A custom element is hidden and only needs to be checked if has features that become visible need to be checked for accessbility.',
-              HIDDEN_P: '%N_H custom elements are hidden and only the custom elements with features that may become visible need to be checked for accessibility.',
+              MANUAL_CHECK_S:  'Verify the custom element with a closed shadow DOM meets WCAG accessibility requirments.',
+              MANUAL_CHECK_P:  'Verify the %N_MC custom elements with a closed shadow DOM meet WCAG accessibility requirments.',
+              HIDDEN_S: 'A custom element with a closed shadow DOM is hidden and only needs to be checked if has features that become visible need to be checked for accessbility.',
+              HIDDEN_P: '%N_H custom elements with a closed shadow DOM are hidden and only the custom elements with features that may become visible need to be checked for accessibility.',
               NOT_APPLICABLE:  'No custom elements found on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_MC_1:       'Verify the accessibility of the features of the custom component with the tag name of @%1@ using manual checking techniques or automated tools that can anlyze the shadow DOM of custom elements.',
-              ELEMENT_HIDDEN_1:  'The @%1@ custom element is hidden from assistive technologies.',
+              ELEMENT_MC_1:       'Verify the accessibility of the "@%1@"" custom component with a closed shadow DOM using manual checking techniques or automated tools that can anlyze the shadow DOM of custom elements.',
+              ELEMENT_HIDDEN_1:  'The @%1@ custom element with a closed shadow DOM is hidden from assistive technologies.',
             },
             PURPOSE: [
               'Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.',
