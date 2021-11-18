@@ -50277,9 +50277,9 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         WIDGET_16: {
             ID:                    'Widget 16',
-            DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) %s be manually checked for accessibility requirements.',
-            SUMMARY:               'Custom element requires manual check.',
-            TARGET_RESOURCES_DESC: 'Custom elements created using web components API.',
+            DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs %s be manually checked for accessibility requirements.',
+            SUMMARY:               'Closed shadow DOM requires manual check.',
+            TARGET_RESOURCES_DESC: 'Custom elements created using web components API with closed shadow DOM.',
             RULE_RESULT_MESSAGES: {
               MANUAL_CHECK_S:  'Verify the custom element meets WCAG accessibility requirments.',
               MANUAL_CHECK_P:  'Verify the %N_MC custom elements meet WCAG accessibility requirments.',
@@ -50293,11 +50293,11 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
             },
             PURPOSE: [
               'Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.',
-              'Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they cannot be accessed by the evaluation library for programmatic checking of accessibility features.',
-              'The evaluation library is able to report the presence of custom elements, but can only recommend that they be manually checked for accessibility, possibly by using other DOM inspection tools to identify accessibility issues and features.'
+              'Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they can only be accessed by the evaluation library for programmatic checking of accessibility features when the shadow DOM is "open".',
+              'The evaluation library is unable to analyze custom elements created with "closed" shadow DOMs. In the case of the "closed" shadow DOM all accessibility requirements require manual checks, possibly by using other DOM inspection tools to identify accessibility issues and features.'
             ],
             TECHNIQUES: [
-              'In evaluating custom elements that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.',
+              'In evaluating custom elements with "closed" shadow DOMs that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.',
               'Test with screen readers to verify functionality is operable by a screen reader user.',
               'Test the graphical rendering in operating system using high contrast settings to verify content is perceivable by people with visual impairments.',
               'Use accessibility tools in browser DOM inspectors to assist with manual inspection, since the DOM inspector of most  browsers allows access to the Shadow DOM of the custom element.',
@@ -60397,10 +60397,12 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       var style = de.computed_style;
 
       if (de.tag_name.indexOf('-') >= 0) {
-        if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name]);
-        } else {
-        rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+        if (!de.node.shadowRoot) {
+          if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name]);
+          } else {
+          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+          }
         }
       }
     }
