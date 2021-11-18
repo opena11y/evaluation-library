@@ -108,7 +108,7 @@ OpenAjax.a11y.cache.DOMElementCache.prototype.addDOMElement = function (dom_elem
     this.dom_elements.push( dom_element );
 
     // only one page element per page
-    if ((this.page_element === null) &&
+    if (!this.page_element &&
         (dom_element.tag_name === 'body')) {
       this.page_element = dom_element;
     }

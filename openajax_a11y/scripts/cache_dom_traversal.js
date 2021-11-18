@@ -410,7 +410,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
   }
 
   if (typeof showElements !== 'boolean') {
-    showElements = true;
+    showElements = false;
   }
 
   var n;
@@ -452,8 +452,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         // use append so that document_order of the dom_element does not get updated
 
         de = this.element_with_id_cache.getDOMElementById(dom_element.id);
-
-  //      if (de) OpenAjax.a11y.logger.debug("[DOMCache][updateDOMElements] id 1: " + dom_element.id + " id 2:" + de.id + " " + (de === dom_element));
 
         if (de) {
           dom_element.id_unique = OpenAjax.a11y.ID.NOT_UNIQUE;
@@ -499,7 +497,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
 
       if (dom_element.tag_name.indexOf('-') >= 0) {
         var rn = node.shadowRoot;
-        console.log('[custom element]: ' + dom_element.tag_name + ' (' + rn.mode + ')');
         if (rn) {
           for (n = rn.firstElementChild; n !== null; n = n.nextElementSibling ) {
             ps = this.updateDOMElements(n, dom_element, ps);
@@ -508,10 +505,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         }
       } else {
         switch (dom_element.tag_name) {
-          case 'svg':
-            console.log('[SVG]');
-            break;
-
           case 'template':
           case 'content':
           case 'shadow':
@@ -519,7 +512,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
 
           case 'slot':
             nodes = node.assignedNodes();
-            console.log('[SLOT]: ' + nodes.length);
             for (var i = 0; i < nodes.length; i += 1) {
               n = nodes[i];
               ps = this.updateDOMElements(n, dom_element, ps, showElements);

@@ -465,7 +465,7 @@ OpenAjax.a11y.nls.Cache = function() {
       //  OpenAjax.a11y.logger.debug("Undefined '" + item + "': " + item[property]);
 
       if ((typeof item[property] === 'undefined') ||
-          (item[property] === null) ||
+          !item[property] ||
           (item[property] === "")) {
         list.push(this.getLabelAndValueNLS(property, 'undefined', locale));
       } // endif

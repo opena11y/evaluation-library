@@ -1322,7 +1322,7 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
             "anyRoleAllowed": true,
             "id": "sup"
         },
-        "SVG": {
+        "svg": {
             "tagName": "SVG",
             "defaultRole": "graphics-document",
             "noRoleAllowed": false,

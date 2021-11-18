@@ -1,6 +1,6 @@
 {
     "title": "ARIA in HTML",
-    "status": "W3C Candidate Recommendation Draft      23 August 2021",
+    "status": "W3C Proposed Recommendation      30 September 2021",
     "reference": "https://www.w3.org/TR/html-aria/",
     "anyRoleAllowed": false,
     "noRoleAllowed": false,

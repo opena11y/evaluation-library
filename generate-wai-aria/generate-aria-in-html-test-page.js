@@ -116,7 +116,7 @@ function generateTestItems(testId, infoItem, spaces, childContent) {
         html += spaces + `  <audio ${id} role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
         html += spaces + '    <source src="../audio/audio-test.mp3" type="audio/mp3"/>\n';
         html += spaces + '  </audio>\n';
-        html += spaces + '<div>\n';
+        html += spaces + '</div>\n';
 
         break;
 
@@ -124,7 +124,7 @@ function generateTestItems(testId, infoItem, spaces, childContent) {
         html += spaces + '<div>\n';
         html += spaces + '  ' + `<${tagName} src="../images/blue.png" ${id} role="${ariaRole}" class="HTML_3_${result}"${attr1} ${attr2}${accName}/>\n`;
         html += spaces + '  ' + `<code>${tagName}${attr1 ? '[' + attr1 + ']' : ''}${attr2 ? '[' + attr2 + ']' : ''}${infoItem.hasAccname ? ' has accessible name' : ''}</code> with role=${ariaRole} (${result})\n`;
-        html += spaces + '<div>\n';
+        html += spaces + '</div>\n';
 
         break;
 
@@ -134,7 +134,7 @@ function generateTestItems(testId, infoItem, spaces, childContent) {
         html += spaces + `  <video ${id} role="${ariaRole}" class="HTML_3_${result}" controls>\n`;
         html += spaces + '    <source src="../audio/audio-test.mp3" type="audio/mp3"/>\n';
         html += spaces + '  </video>\n';
-        html += spaces + '<div>\n';
+        html += spaces + '</div>\n';
 
         break;
 
@@ -309,7 +309,6 @@ function createTestCases(name, testItems) {
       case 'header[banner]':
       case 'footer[contentinfo]':
         body += generateTestItemsInElementRole(itemCount+'a', infoItem, 'div');
-        body += generateTestItemsInElementRole(itemCount+'b', infoItem, 'section');
         break;
 
       case 'header':
@@ -319,6 +318,7 @@ function createTestCases(name, testItems) {
         body += generateTestItemsInElementRole(itemCount+'c', infoItem, 'aside');
         body += generateTestItemsInElementRole(itemCount+'d', infoItem, 'div', 'complementary');
         body += generateTestItemsInElementRole(itemCount+'e', infoItem, 'div', 'region');
+        body += generateTestItemsInElementRole(itemCount+'b', infoItem, 'section');
         break;
 
       case 'li':

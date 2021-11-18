@@ -7216,7 +7216,7 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
             "anyRoleAllowed": true,
             "id": "sup"
         },
-        "SVG": {
+        "svg": {
             "tagName": "SVG",
             "defaultRole": "graphics-document",
             "noRoleAllowed": false,
@@ -15029,7 +15029,7 @@ OpenAjax.a11y.cache.DOMElementCache.prototype.addDOMElement = function (dom_elem
     this.dom_elements.push( dom_element );
 
     // only one page element per page
-    if ((this.page_element === null) &&
+    if (!this.page_element &&
         (dom_element.tag_name === 'body')) {
       this.page_element = dom_element;
     }
@@ -19084,7 +19084,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
   }
 
   if (typeof showElements !== 'boolean') {
-    showElements = true;
+    showElements = false;
   }
 
   var n;
@@ -19126,8 +19126,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         // use append so that document_order of the dom_element does not get updated
 
         de = this.element_with_id_cache.getDOMElementById(dom_element.id);
-
-  //      if (de) OpenAjax.a11y.logger.debug("[DOMCache][updateDOMElements] id 1: " + dom_element.id + " id 2:" + de.id + " " + (de === dom_element));
 
         if (de) {
           dom_element.id_unique = OpenAjax.a11y.ID.NOT_UNIQUE;
@@ -19173,7 +19171,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
 
       if (dom_element.tag_name.indexOf('-') >= 0) {
         var rn = node.shadowRoot;
-        console.log('[custom element]: ' + dom_element.tag_name + ' (' + rn.mode + ')');
         if (rn) {
           for (n = rn.firstElementChild; n !== null; n = n.nextElementSibling ) {
             ps = this.updateDOMElements(n, dom_element, ps);
@@ -19182,10 +19179,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         }
       } else {
         switch (dom_element.tag_name) {
-          case 'svg':
-            console.log('[SVG]');
-            break;
-
           case 'template':
           case 'content':
           case 'shadow':
@@ -19193,7 +19186,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
 
           case 'slot':
             nodes = node.assignedNodes();
-            console.log('[SLOT]: ' + nodes.length);
             for (var i = 0; i < nodes.length; i += 1) {
               n = nodes[i];
               ps = this.updateDOMElements(n, dom_element, ps, showElements);
@@ -20857,6 +20849,21 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
       }
       else {
 
+        if ((dom_element.tag_name === 'header') &&
+            (!dom_element.parent_landmark &&
+             (!dom_element.has_role || dom_element.role === 'banner') &&
+             !landmark_info.inside_sectioning_element)) {
+          dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+          dom_element.implicit_role = 'banner';
+        }
+
+        if ((dom_element.tag_name === 'footer') &&
+            (!dom_element.parent_landmark &&
+             (!dom_element.has_role  || dom_element.role === 'contentinfo') &&
+             !landmark_info.inside_sectioning_element)) {
+          dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+          dom_element.implicit_role = 'contentinfo';
+        }
 
         if (dom_element.has_role) {
           le = new OpenAjax.a11y.cache.LandmarkElement(dom_element);
@@ -20871,19 +20878,23 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             this.dom_cache.getNameFromARIALabel(le, "COMPLEMENTARY");
             break;
 
-          case 'footer':
-            le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
-            this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
-            break;
-
           case 'form':
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'form');
             this.dom_cache.getNameFromARIALabel(le, "FORM", true);
             break;
 
+          case 'footer':
+            if (dom_element.implicit_role === 'contentinfo') {
+              le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
+              this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
+            }
+            break;
+
           case 'header':
-            le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
-            this.dom_cache.getNameFromARIALabel(le, "BANNER");
+            if (dom_element.implicit_role === 'banner') {
+              le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
+              this.dom_cache.getNameFromARIALabel(le, "BANNER");
+            }
             break;
 
           case 'nav':
@@ -21384,20 +21395,6 @@ OpenAjax.a11y.cache.SectionElement.prototype.toString = function () {
 
 OpenAjax.a11y.cache.LandmarkElement = function (dom_element, landmark) {
 
-  if ((dom_element.tag_name === 'footer') &&
-      (dom_element.parent_landmark === null) &&
-      (!dom_element.has_role || (dom_element.role === 'contentinfo'))) {
-    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
-    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
-  }
-
-  if ((dom_element.tag_name === 'header') &&
-      (dom_element.parent_landmark === null) &&
-      (!dom_element.has_role || (dom_element.role === 'banner'))) {
-    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
-    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
-  }
-
   this.dom_element           = dom_element;
   this.cache_id              = "";
   this.document_order        = 0;
@@ -21759,13 +21756,13 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h2;
       this.nesting_parent_heading  = heading_info.nesting_h2;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h2;
         this.last_landmark_parent_heading = le.heading_info.nesting_h2;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -21778,15 +21775,15 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h3;
       this.nesting_parent_heading  = heading_info.nesting_h3;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h3;
         this.last_landmark_parent_heading = le.heading_info.nesting_h3;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -21799,17 +21796,17 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h4;
       this.nesting_parent_heading  = heading_info.nesting_h4;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h3;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h3;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h4;
         this.last_landmark_parent_heading = le.heading_info.nesting_h4;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
     break;
@@ -21821,19 +21818,19 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h5;
       this.nesting_parent_heading  = heading_info.nesting_h5;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h4;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h3;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h4;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h3;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h5;
         this.last_landmark_parent_heading = le.heading_info.nesting_h5;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h4;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h4;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -22397,7 +22394,7 @@ OpenAjax.a11y.cache.H1Element = function (dom_element, main_landmark) {
 OpenAjax.a11y.cache.H1Element.prototype.isH1UsedAsLabelForMainRole = function () {
 
   if (this.dom_element.id.length === 0 ||
-      this.main_landmark === null) {
+      !this.main_landmark) {
     this.is_label_for_main = false;
     return;
   }
@@ -23895,8 +23892,6 @@ OpenAjax.a11y.cache.SVGElement = function (dom_element) {
 
   this.is_presentation = false;
   if (dom_element.has_role && (dom_element.role === 'presentation' || dom_element.role === 'none')) this.is_presentation = true;
-
-//  OpenAjax.a11y.logger.debug("Canvas element: " + dom_element.toString() + " has: " + dom_element.has_role + " role: " + dom_element.role  + " image: " + this.is_image + " presentation: " + this.is_presentation);
 
   this.accessible_name = null;
   this.accessible_name_length = null;
@@ -36881,7 +36876,7 @@ OpenAjax.a11y.nls.Cache = function() {
       //  OpenAjax.a11y.logger.debug("Undefined '" + item + "': " + item[property]);
 
       if ((typeof item[property] === 'undefined') ||
-          (item[property] === null) ||
+          !item[property] ||
           (item[property] === "")) {
         list.push(this.getLabelAndValueNLS(property, 'undefined', locale));
       } // endif
@@ -40014,7 +40009,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         var rule_mapping = rule_mappings[i];
         var rule = rule_mapping.rule;
 
-        OpenAjax.a11y.logger.info("[evaluate][rule]: " + rule.getIdNLS());
+//        OpenAjax.a11y.logger.info("[evaluate][rule]: " + rule.getIdNLS());
 
         if (rule_mapping.enabled && (rule.getGroup() & groups)) {
 
@@ -53773,8 +53768,10 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
       if (isImplicitRole(d, e)) {
         if (d.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
+          logProblemResult(d, e, 'MC', 'ELEMENT_MC_1A');
         } else {
           rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_1', [e.tagName, d.role]);
+          logProblemResult(d, e, 'HIDDEN', 'ELEMENT_HIDDEN_1A');
         }
       }
     }
@@ -53784,23 +53781,29 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
         if (isImplicitRole(d, e)) {
           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
+          logProblemResult(d, e, 'MC', 'ELEMENT_MC_1B');
         } else {
           if (e.attr2) {
             rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_1', [e.tagName, e.attr1, e.attr2, d.role]);
+            logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_1');
           } else {
             if (e.attr1) {
               rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_2', [e.tagName, e.attr1, d.role]);
+              logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_2');
             } else {
               if (e.hasAccname) {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_3', [e.tagName, d.role]);
+                logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_3');
               } else {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_4', [e.tagName, d.role]);
+                logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_4');
               }
             }
           }
         }
       } else {
         rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_1', [e.tagName, d.role]);
+        logProblemResult(d, e, 'HIDDEN', 'ELEMENT_HIDDEN_1B');
       }
     }
 
@@ -53811,25 +53814,44 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
 
           if (isImplicitRole(d, e)) {
             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, d, 'ELEMENT_MC_1', [d.role, e.tagName]);
+            logProblemResult(d, e, 'MC', 'ELEMENT_MC_1C');
           } else {
             if (e.attr2) {
               rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_5', [e.tagName, e.attr1, e.attr2, strAllowedRoles]);
+              logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_5');
             } else {
               if (e.attr1) {
                 rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_6', [e.tagName, e.attr1, d.role, strAllowedRoles]);
+                logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_6');
               } else {
                 if (e.hasAccname) {
                   rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_7', [e.tagName, d.role, strAllowedRoles]);
+                  logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_7');
               } else {
                   rule_result.addResult(TEST_RESULT.FAIL, d, 'ELEMENT_FAIL_8', [e.tagName, d.role, strAllowedRoles]);
+                  logProblemResult(d, e, 'FAIL', 'ELEMENT_FAIL_8');
                 }
               }
             }
           }
         } else {
           rule_result.addResult(TEST_RESULT.HIDDEN, d, 'ELEMENT_HIDDEN_2', [d.tag_name, d.role]);
+          logProblemResult(d, e, 'HIDDEN', 'ELEMENT_HIDDEN_2');
         }
       }
+    }
+
+    function logProblemResult(d, e, result, desc) {
+      var show = false;
+      if (show && d.node.className.indexOf(result) < 0) {
+        console.log('[HTML3]: ' + desc + ' in context of ' + d.node.parentNode.tagName + '[role="' + d.node.parentNode.getAttribute('role') + '"]');
+        console.log('[HTML3][' + d.tag_name + '][       role]: ' + d.role + ' [implicit]: ' + d.implicit_role);
+        console.log('[HTML3][' + d.tag_name + '][  className]: ' + d.node.className);
+        console.log('[HTML3][' + d.tag_name + '][    allowed]: ' + e.allowedRoles.join(', '));
+        console.log('[HTML3][' + d.tag_name + '][defaultRole]: ' + e.defaultRole);
+        console.log('[HTML3][' + d.tag_name + '][ isImplicit]: ' + isImplicitRole(d, e));
+      }
+
     }
 
     var TEST_RESULT    = OpenAjax.a11y.TEST_RESULT;
@@ -60048,23 +60070,25 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         var style = de.computed_style;
         var implicit_role = '';
 
-        console.log('[WIDGET 13]: ' + de.tag_name + ' has label=' + (de.has_aria_label || de.has_aria_labelledby));
-
         if (de.element_aria_info) {
           implicit_role = de.element_aria_info.defaultRole;
         }
 
-        if (OpenAjax.a11y.aria.designPatterns[de.role] &&
-            (de.has_aria_label || de.has_aria_labelledby)) {
+        if (de.has_aria_label || de.has_aria_labelledby) {
 
-          if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
+          if (de.role &&
+              OpenAjax.a11y.aria.designPatterns[de.role] &&
+              OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
             if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
             } else {
               rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
             }
           } else {
-            if (!de.role && implicit_role && OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
+            if (!de.role &&
+                implicit_role &&
+                OpenAjax.a11y.aria.designPatterns[implicit_role] &&
+                OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
               if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
                 if (de.tag_name === 'a') {
                   rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);

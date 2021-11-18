@@ -1026,23 +1026,25 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         var style = de.computed_style;
         var implicit_role = '';
 
-        console.log('[WIDGET 13]: ' + de.tag_name + ' has label=' + (de.has_aria_label || de.has_aria_labelledby));
-
         if (de.element_aria_info) {
           implicit_role = de.element_aria_info.defaultRole;
         }
 
-        if (OpenAjax.a11y.aria.designPatterns[de.role] &&
-            (de.has_aria_label || de.has_aria_labelledby)) {
+        if (de.has_aria_label || de.has_aria_labelledby) {
 
-          if (de.role && OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
+          if (de.role &&
+              OpenAjax.a11y.aria.designPatterns[de.role] &&
+              OpenAjax.a11y.aria.designPatterns[de.role].nameProhibited) {
             if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
             } else {
               rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
             }
           } else {
-            if (!de.role && implicit_role && OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
+            if (!de.role &&
+                implicit_role &&
+                OpenAjax.a11y.aria.designPatterns[implicit_role] &&
+                OpenAjax.a11y.aria.designPatterns[implicit_role].nameProhibited) {
               if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
                 if (de.tag_name === 'a') {
                   rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);

@@ -7199,7 +7199,7 @@ if (typeof OpenAjax.a11y.ariaInHTML == "undefined") {
             "anyRoleAllowed": true,
             "id": "sup"
         },
-        "SVG": {
+        "svg": {
             "tagName": "SVG",
             "defaultRole": "graphics-document",
             "noRoleAllowed": false,
@@ -15012,7 +15012,7 @@ OpenAjax.a11y.cache.DOMElementCache.prototype.addDOMElement = function (dom_elem
     this.dom_elements.push( dom_element );
 
     // only one page element per page
-    if ((this.page_element === null) &&
+    if (!this.page_element &&
         (dom_element.tag_name === 'body')) {
       this.page_element = dom_element;
     }
@@ -19067,7 +19067,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
   }
 
   if (typeof showElements !== 'boolean') {
-    showElements = true;
+    showElements = false;
   }
 
   var n;
@@ -19109,8 +19109,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         // use append so that document_order of the dom_element does not get updated
 
         de = this.element_with_id_cache.getDOMElementById(dom_element.id);
-
-  //      if (de) OpenAjax.a11y.logger.debug("[DOMCache][updateDOMElements] id 1: " + dom_element.id + " id 2:" + de.id + " " + (de === dom_element));
 
         if (de) {
           dom_element.id_unique = OpenAjax.a11y.ID.NOT_UNIQUE;
@@ -19156,7 +19154,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
 
       if (dom_element.tag_name.indexOf('-') >= 0) {
         var rn = node.shadowRoot;
-        console.log('[custom element]: ' + dom_element.tag_name + ' (' + rn.mode + ')');
         if (rn) {
           for (n = rn.firstElementChild; n !== null; n = n.nextElementSibling ) {
             ps = this.updateDOMElements(n, dom_element, ps);
@@ -19165,10 +19162,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         }
       } else {
         switch (dom_element.tag_name) {
-          case 'svg':
-            console.log('[SVG]');
-            break;
-
           case 'template':
           case 'content':
           case 'shadow':
@@ -19176,7 +19169,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
 
           case 'slot':
             nodes = node.assignedNodes();
-            console.log('[SLOT]: ' + nodes.length);
             for (var i = 0; i < nodes.length; i += 1) {
               n = nodes[i];
               ps = this.updateDOMElements(n, dom_element, ps, showElements);
@@ -20840,6 +20832,21 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
       }
       else {
 
+        if ((dom_element.tag_name === 'header') &&
+            (!dom_element.parent_landmark &&
+             (!dom_element.has_role || dom_element.role === 'banner') &&
+             !landmark_info.inside_sectioning_element)) {
+          dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+          dom_element.implicit_role = 'banner';
+        }
+
+        if ((dom_element.tag_name === 'footer') &&
+            (!dom_element.parent_landmark &&
+             (!dom_element.has_role  || dom_element.role === 'contentinfo') &&
+             !landmark_info.inside_sectioning_element)) {
+          dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+          dom_element.implicit_role = 'contentinfo';
+        }
 
         if (dom_element.has_role) {
           le = new OpenAjax.a11y.cache.LandmarkElement(dom_element);
@@ -20854,19 +20861,23 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             this.dom_cache.getNameFromARIALabel(le, "COMPLEMENTARY");
             break;
 
-          case 'footer':
-            le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
-            this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
-            break;
-
           case 'form':
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'form');
             this.dom_cache.getNameFromARIALabel(le, "FORM", true);
             break;
 
+          case 'footer':
+            if (dom_element.implicit_role === 'contentinfo') {
+              le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
+              this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
+            }
+            break;
+
           case 'header':
-            le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
-            this.dom_cache.getNameFromARIALabel(le, "BANNER");
+            if (dom_element.implicit_role === 'banner') {
+              le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
+              this.dom_cache.getNameFromARIALabel(le, "BANNER");
+            }
             break;
 
           case 'nav':
@@ -21367,20 +21378,6 @@ OpenAjax.a11y.cache.SectionElement.prototype.toString = function () {
 
 OpenAjax.a11y.cache.LandmarkElement = function (dom_element, landmark) {
 
-  if ((dom_element.tag_name === 'footer') &&
-      (dom_element.parent_landmark === null) &&
-      (!dom_element.has_role || (dom_element.role === 'contentinfo'))) {
-    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
-    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
-  }
-
-  if ((dom_element.tag_name === 'header') &&
-      (dom_element.parent_landmark === null) &&
-      (!dom_element.has_role || (dom_element.role === 'banner'))) {
-    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
-    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
-  }
-
   this.dom_element           = dom_element;
   this.cache_id              = "";
   this.document_order        = 0;
@@ -21742,13 +21739,13 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h2;
       this.nesting_parent_heading  = heading_info.nesting_h2;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h2;
         this.last_landmark_parent_heading = le.heading_info.nesting_h2;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -21761,15 +21758,15 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h3;
       this.nesting_parent_heading  = heading_info.nesting_h3;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h3;
         this.last_landmark_parent_heading = le.heading_info.nesting_h3;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -21782,17 +21779,17 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h4;
       this.nesting_parent_heading  = heading_info.nesting_h4;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h3;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h3;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h4;
         this.last_landmark_parent_heading = le.heading_info.nesting_h4;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
     break;
@@ -21804,19 +21801,19 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h5;
       this.nesting_parent_heading  = heading_info.nesting_h5;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h4;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h3;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h4;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h3;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h5;
         this.last_landmark_parent_heading = le.heading_info.nesting_h5;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h4;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h4;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -22380,7 +22377,7 @@ OpenAjax.a11y.cache.H1Element = function (dom_element, main_landmark) {
 OpenAjax.a11y.cache.H1Element.prototype.isH1UsedAsLabelForMainRole = function () {
 
   if (this.dom_element.id.length === 0 ||
-      this.main_landmark === null) {
+      !this.main_landmark) {
     this.is_label_for_main = false;
     return;
   }
@@ -23878,8 +23875,6 @@ OpenAjax.a11y.cache.SVGElement = function (dom_element) {
 
   this.is_presentation = false;
   if (dom_element.has_role && (dom_element.role === 'presentation' || dom_element.role === 'none')) this.is_presentation = true;
-
-//  OpenAjax.a11y.logger.debug("Canvas element: " + dom_element.toString() + " has: " + dom_element.has_role + " role: " + dom_element.role  + " image: " + this.is_image + " presentation: " + this.is_presentation);
 
   this.accessible_name = null;
   this.accessible_name_length = null;
@@ -36864,7 +36859,7 @@ OpenAjax.a11y.nls.Cache = function() {
       //  OpenAjax.a11y.logger.debug("Undefined '" + item + "': " + item[property]);
 
       if ((typeof item[property] === 'undefined') ||
-          (item[property] === null) ||
+          !item[property] ||
           (item[property] === "")) {
         list.push(this.getLabelAndValueNLS(property, 'undefined', locale));
       } // endif
@@ -39997,7 +39992,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
         var rule_mapping = rule_mappings[i];
         var rule = rule_mapping.rule;
 
-        OpenAjax.a11y.logger.info("[evaluate][rule]: " + rule.getIdNLS());
+//        OpenAjax.a11y.logger.info("[evaluate][rule]: " + rule.getIdNLS());
 
         if (rule_mapping.enabled && (rule.getGroup() & groups)) {
 
