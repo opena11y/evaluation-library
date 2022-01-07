@@ -50,7 +50,7 @@ OpenAjax.a11y.nls.RuleScopes = function() {
 
 OpenAjax.a11y.nls.RuleScopes.prototype.addNLS = function (locale, nls) {
 
-  OpenAjax.a11y.logger.info("  LOADING RULE SCOPE INFORMATION FOR " + locale);
+//  OpenAjax.a11y.logger.info("  LOADING RULE SCOPE INFORMATION FOR " + locale);
 
   this.nls[locale] = new OpenAjax.a11y.nls.RuleScopesNLS(locale, nls.abbreviation, nls.title, nls.url, nls.rule_scopes);
 

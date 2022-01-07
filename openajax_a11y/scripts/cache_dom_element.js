@@ -1216,6 +1216,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_summary               = false;
   this.has_tabindex              = false;
   this.has_title                 = false;
+  this.has_value                 = false;
 
 
   this.implicit_role  = this.element_aria_info.defaultRole;
@@ -1225,8 +1226,42 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.aria_required  = false;
 
   this.src = "";
+  if (node.src && (node.src.length > 0)) {
+    this.has_src = true;
+    this.src = node.src;
+    addOtherAttribute('src', node.src);
+  }
+
   this.href = "";
+  if (node.href && (node.href.length > 0)) {
+    this.has_href = true;
+    this.href = node.href;
+    addOtherAttribute('href', node.href);
+  }
+
   this.title = "";
+  if (node.title && (node.title.length > 0)) {
+    this.has_title = true;
+    this.title = node.title;
+  }
+
+  this.value = "";
+  if (node.value && (node.value.length > 0)) {
+    this.has_value = true;
+    this.value = node.value;
+  }
+
+  this.aria_labelledby = node.getAttribute('aria-labelledby');
+  if (this.aria_labelledby && this.aria_labelledby.length) {
+    addAriaAttribute('aria-labelledby', this.aria_labelledby);
+    this.has_aria_labelledby = true;
+  }
+
+  this.aria_label = node.getAttribute('aria-label');
+  if (this.aria_label && this.aria_label.length) {
+    addAriaAttribute('aria-label', this.aria_label);
+    this.has_aria_label = true;
+  }
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
@@ -1291,17 +1326,9 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     case 'aria-label':
-      this.aria_label = attr_value;
-      addAriaAttribute('aria-label', attr_value);
-      this.has_aria_label      = true;
-      this.has_aria_attributes = true;
       break;
 
     case 'aria-labelledby':
-      this.aria_labelledby  = attr_value;
-      addAriaAttribute('aria-labelledby', attr_value);
-      this.has_aria_labelledby = true;
-      this.has_aria_attributes = true;
       break;
 
     case 'aria-live':
@@ -1341,13 +1368,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     case 'headers':
       if (attr_value.length > 0) this.has_headers = true;
-      break;
-
-    case 'href':
-      if (attr_value.length) {
-        this.has_href = true;
-        addOtherAttribute(attr.name, attr_value);
-      }
       break;
 
     case 'lang':
@@ -1432,11 +1452,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (attr_value.length > 0) this.has_scope = true;
       break;
 
-    case 'src':
-      this.src = node.src;
-      if (attr_value.length > 0) this.has_src = true;
-      break;
-
     case 'summary':
       this.summary = attr.value;
       if (attr_value.length > 0) this.has_summary = true;
@@ -1448,12 +1463,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         this.has_tabindex = true;
       }
       break;
-
-    case 'title':
-      this.title = attr_value;
-      if (attr_value.length > 0) this.has_title = true;
-      break;
-
 
     default:
 

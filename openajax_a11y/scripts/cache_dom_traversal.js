@@ -505,6 +505,11 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         }
       } else {
         switch (dom_element.tag_name) {
+          case 'base':
+          case 'link':
+          case 'noscript':
+          case 'script':
+          case 'style':
           case 'template':
           case 'content':
           case 'shadow':
@@ -750,6 +755,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.getNameFromARIALabel = function (control,
 
   var SOURCE = OpenAjax.a11y.SOURCE;
 
+  var compare_label;
   var computed_label = "";
   var computed_label_source = SOURCE.NONE;
   var de = control.dom_element;
@@ -771,15 +777,16 @@ OpenAjax.a11y.cache.DOMCache.prototype.getNameFromARIALabel = function (control,
     computed_label_source = SOURCE.TITLE_ATTRIBUTE;
   }
 
+  compare_label = computed_label;
   if ((only_when_label && computed_label.length) ||
       !only_when_label) {
-    computed_label = prefix + computed_label;
+    compare_label = prefix + computed_label;
   }
 
   control.computed_label = computed_label;
   control.computed_label_length = computed_label.length;
   control.computed_label_source = computed_label_source;
-  control.computed_label_for_comparison = OpenAjax.a11y.util.normalizeSpace(computed_label);
+  control.computed_label_for_comparison = OpenAjax.a11y.util.normalizeSpace(compare_label);
   control.accessible_name = computed_label;
 
   this.getDescriptionFromARIADescribedby(control);

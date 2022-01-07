@@ -192,7 +192,7 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
   // local references to current NLS information, based on current locale setting
 
-  OpenAjax.a11y.logger.info("[OpenAjax A11y][Ruleset] Creating Ruleset: " + ruleset_info['ruleset_id']);
+//  OpenAjax.a11y.logger.info("[OpenAjax A11y][Ruleset] Creating Ruleset: " + ruleset_info['ruleset_id']);
 
   var wcag20_nls = OpenAjax.a11y.nls.WCAG20.getNLS(locale);
 

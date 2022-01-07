@@ -3680,7 +3680,7 @@ OpenAjax.a11y.cache.TextareaElement.prototype.getLabelSourceNLS = function () {
 OpenAjax.a11y.cache.TextareaElement.prototype.toString = function () {
   var str = "textarea";
 
-  if (this.rows && this.cols) str = "[" + this.rows + "x" + this.cols + "]";
+  if (this.rows && this.cols) str += "[" + this.rows + "x" + this.cols + "]";
 
   var label = "no label";
   if (this.computed_label_for_comparison.length) label = this.computed_label;

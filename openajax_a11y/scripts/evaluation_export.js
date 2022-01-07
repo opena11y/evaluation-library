@@ -44,9 +44,9 @@ OpenAjax.a11y.EvaluationResult.prototype.toCSV = function (rule_categories_filte
   if (typeof rule_filter            !== 'string')  rule_filter = false;
   if (typeof details                !== 'boolean') details = true;
 
-  OpenAjax.a11y.logger.info("RCF: " + rule_categories_filter);
-  OpenAjax.a11y.logger.info("GLF: " + guideline_filter);
-  OpenAjax.a11y.logger.info(" RF: " + rule_filter);
+//  OpenAjax.a11y.logger.info("RCF: " + rule_categories_filter);
+//  OpenAjax.a11y.logger.info("GLF: " + guideline_filter);
+//  OpenAjax.a11y.logger.info(" RF: " + rule_filter);
 
   function formatCSV(s, first) {
     if (typeof first !== 'boolean') first = false;

@@ -357,7 +357,7 @@ md5 tar/oaa_report_all.tar.gz > md5/oaa_report_all.tar.gz.md5
 cd ..
 
 if [ -n "$AI_DIR" ]; then
-  copy_scripts "$AI_DIR/scripts/"
+  copy_scripts "$AI_DIR/content-scripts/"
 fi
 
 if [ -n "$FAE_DIR" ]; then

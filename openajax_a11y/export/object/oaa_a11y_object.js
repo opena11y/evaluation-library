@@ -12661,7 +12661,7 @@ OpenAjax.a11y.cache.TextareaElement.prototype.getLabelSourceNLS = function () {
 OpenAjax.a11y.cache.TextareaElement.prototype.toString = function () {
   var str = "textarea";
 
-  if (this.rows && this.cols) str = "[" + this.rows + "x" + this.cols + "]";
+  if (this.rows && this.cols) str += "[" + this.rows + "x" + this.cols + "]";
 
   var label = "no label";
   if (this.computed_label_for_comparison.length) label = this.computed_label;
@@ -16137,6 +16137,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_summary               = false;
   this.has_tabindex              = false;
   this.has_title                 = false;
+  this.has_value                 = false;
 
 
   this.implicit_role  = this.element_aria_info.defaultRole;
@@ -16146,8 +16147,42 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.aria_required  = false;
 
   this.src = "";
+  if (node.src && (node.src.length > 0)) {
+    this.has_src = true;
+    this.src = node.src;
+    addOtherAttribute('src', node.src);
+  }
+
   this.href = "";
+  if (node.href && (node.href.length > 0)) {
+    this.has_href = true;
+    this.href = node.href;
+    addOtherAttribute('href', node.href);
+  }
+
   this.title = "";
+  if (node.title && (node.title.length > 0)) {
+    this.has_title = true;
+    this.title = node.title;
+  }
+
+  this.value = "";
+  if (node.value && (node.value.length > 0)) {
+    this.has_value = true;
+    this.value = node.value;
+  }
+
+  this.aria_labelledby = node.getAttribute('aria-labelledby');
+  if (this.aria_labelledby && this.aria_labelledby.length) {
+    addAriaAttribute('aria-labelledby', this.aria_labelledby);
+    this.has_aria_labelledby = true;
+  }
+
+  this.aria_label = node.getAttribute('aria-label');
+  if (this.aria_label && this.aria_label.length) {
+    addAriaAttribute('aria-label', this.aria_label);
+    this.has_aria_label = true;
+  }
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
@@ -16212,17 +16247,9 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     case 'aria-label':
-      this.aria_label = attr_value;
-      addAriaAttribute('aria-label', attr_value);
-      this.has_aria_label      = true;
-      this.has_aria_attributes = true;
       break;
 
     case 'aria-labelledby':
-      this.aria_labelledby  = attr_value;
-      addAriaAttribute('aria-labelledby', attr_value);
-      this.has_aria_labelledby = true;
-      this.has_aria_attributes = true;
       break;
 
     case 'aria-live':
@@ -16262,13 +16289,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
 
     case 'headers':
       if (attr_value.length > 0) this.has_headers = true;
-      break;
-
-    case 'href':
-      if (attr_value.length) {
-        this.has_href = true;
-        addOtherAttribute(attr.name, attr_value);
-      }
       break;
 
     case 'lang':
@@ -16353,11 +16373,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       if (attr_value.length > 0) this.has_scope = true;
       break;
 
-    case 'src':
-      this.src = node.src;
-      if (attr_value.length > 0) this.has_src = true;
-      break;
-
     case 'summary':
       this.summary = attr.value;
       if (attr_value.length > 0) this.has_summary = true;
@@ -16369,12 +16384,6 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
         this.has_tabindex = true;
       }
       break;
-
-    case 'title':
-      this.title = attr_value;
-      if (attr_value.length > 0) this.has_title = true;
-      break;
-
 
     default:
 
@@ -19179,6 +19188,11 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
         }
       } else {
         switch (dom_element.tag_name) {
+          case 'base':
+          case 'link':
+          case 'noscript':
+          case 'script':
+          case 'style':
           case 'template':
           case 'content':
           case 'shadow':
@@ -19424,6 +19438,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.getNameFromARIALabel = function (control,
 
   var SOURCE = OpenAjax.a11y.SOURCE;
 
+  var compare_label;
   var computed_label = "";
   var computed_label_source = SOURCE.NONE;
   var de = control.dom_element;
@@ -19445,15 +19460,16 @@ OpenAjax.a11y.cache.DOMCache.prototype.getNameFromARIALabel = function (control,
     computed_label_source = SOURCE.TITLE_ATTRIBUTE;
   }
 
+  compare_label = computed_label;
   if ((only_when_label && computed_label.length) ||
       !only_when_label) {
-    computed_label = prefix + computed_label;
+    compare_label = prefix + computed_label;
   }
 
   control.computed_label = computed_label;
   control.computed_label_length = computed_label.length;
   control.computed_label_source = computed_label_source;
-  control.computed_label_for_comparison = OpenAjax.a11y.util.normalizeSpace(computed_label);
+  control.computed_label_for_comparison = OpenAjax.a11y.util.normalizeSpace(compare_label);
   control.accessible_name = computed_label;
 
   this.getDescriptionFromARIADescribedby(control);
@@ -34410,10 +34426,17 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
   this.result_message       = "";
   this.position = 0;
 
+  this.nameSource = ['not defined', 'none', 'label[for]', 'label', 'title attribute', 'value attribute', 'alt attribute', 'type attribute', 'text content', 'aria-lablledby', 'aria-label', 'caption element', 'summary attribute'];
+  this.descSource = ['not defined', 'none', 'title attribute', 'aria-describedby', 'summary attribute'];
+  this.visibility = ['not defined', 'unkown', 'hidden', 'visible'];
+
 //  OpenAjax.a11y.logger.debug("Rule: " + elem_identifier + " (" + (typeof elem_identifier) + ")");
 
-  if (typeof elem_identifier === 'string') this.element_identifier = elem_identifier;
-  else this.element_identifier = cache_item.toString();
+  if (typeof elem_identifier === 'string') {
+    this.element_identifier = elem_identifier;
+  } else {
+    this.element_identifier = cache_item.toString();
+  }
 
   this.primary_element_info = false;
   this.secondary_element_info_array = [];
@@ -34426,12 +34449,70 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
 //  OpenAjax.a11y.logger.debug("Rule: " + this.getRuleId() + "Prop: " + typeof props);
 
   this.cache_item    = cache_item;
+  this.dom_element = cache_item;
 
-  if (cache_item.dom_element && cache_item.dom_element.node) this.dom_node = cache_item.dom_element.node;
-  else this.dom_node = cache_item.node;
-
+  if (cache_item.dom_element) {
+    this.dom_element = cache_item.dom_element;
+  } else {
+    if (cache_item.type === Node.TEXT_NODE) {
+      this.dom_element = cache_item.parent_element;
+    }
+  }
+  this.dom_node = cache_item.node;
 };
 
+
+ /**
+ * @method getTagName
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets tag name for the element results
+ *
+ * @return {String} tag name of the element
+ */
+OpenAjax.a11y.ElementResult.prototype.getTagName = function () {
+   var tag_name = this.dom_element.tag_name;
+
+   if (!tag_name && (this.dom_node.type === Node.TEXT_NODE)) {
+      tag_name = this.dom_node.parentNode.tagName;
+   }
+
+   if (!tag_name && (this.dom_node.type === Node.ELEMENT_NODE)) {
+      tag_name = this.dom_node.tagName;
+   }
+
+   if ((tag_name === 'input') ||
+       (tag_name === 'button')) {
+      var type = this.dom_element.node.type;
+      if (type) {
+        tag_name += '[type=' + type + ']';
+      }
+   }
+
+   if (tag_name === 'body') {
+    tag_name = 'page';
+   }
+
+   return tag_name;
+};
+
+ /**
+ * @method getRole
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets role attribute for the element results
+ *
+ * @return {String} Role attribute of the element
+ */
+OpenAjax.a11y.ElementResult.prototype.getRole = function () {
+  var role = '';
+  if (this.dom_element.has_role) {
+   role = this.dom_element.role;
+  }
+  return role;
+};
 
  /**
  * @method getRule
@@ -34447,6 +34528,184 @@ OpenAjax.a11y.ElementResult.prototype.getRule = function () {
    return this.getRuleResult().getRule();
 };
 
+ /**
+ * @method checkForAttribute
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Tests to see if the DOM element has
+ *       a specific property defined
+ *       if it is defined add it to the object
+ *
+ * @param {Object} Collection of attributes
+ * @param {String} Test attribute
+ */
+OpenAjax.a11y.ElementResult.prototype.checkForAttribute = function (attrs, attr, attr_name) {
+  if (typeof attr_name !== 'string') {
+    attr_name = attr;
+  }
+  if (attr_name.indexOf('aria_') >= 0) {
+    attr_name = attr_name.replace('_', '-');
+  }
+  if (this.dom_element['has_' + attr]) {
+    attrs[attr_name] = this.dom_element[attr];
+  }
+};
+
+ /**
+ * @method HTMLAttributes
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets common HTML attributes related to elements
+ *       some elements have special props like alt
+ *
+ * @return {Object} see description
+ */
+OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
+  var attrs = {};
+
+  this.checkForAttribute(attrs, 'class_name', 'class');
+  this.checkForAttribute(attrs, 'headers');
+  this.checkForAttribute(attrs, 'href');
+  this.checkForAttribute(attrs, 'type_attr', 'type');
+  this.checkForAttribute(attrs, 'lang');
+  this.checkForAttribute(attrs, 'longdesc');
+  this.checkForAttribute(attrs, 'name');
+  this.checkForAttribute(attrs, 'pattern');
+  this.checkForAttribute(attrs, 'placeholder');
+  this.checkForAttribute(attrs, 'required');
+  this.checkForAttribute(attrs, 'scope');
+  this.checkForAttribute(attrs, 'src');
+  this.checkForAttribute(attrs, 'summary');
+  this.checkForAttribute(attrs, 'tabindex');
+  this.checkForAttribute(attrs, 'title');
+  this.checkForAttribute(attrs, 'value');
+
+  return attrs;
+};
+
+ /**
+ * @method getAccessibleNameInfo
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets accessible name and description information
+ *
+ * @return {Object}
+ */
+OpenAjax.a11y.ElementResult.prototype.getAccessibleNameInfo = function () {
+  var info = {};
+
+
+  if (this.cache_item.accessible_name) {
+    info.name = this.cache_item.accessible_name;
+    if (this.cache_item.accessible_name_source) {
+      info.name_source = this.nameSource[this.cache_item.accessible_name_source];
+    } else {
+      if (this.cache_item.computed_label_source) {
+        info.name_source = this.nameSource[this.cache_item.computed_label_source];
+      }
+    }
+  } else {
+    if (this.cache_item.computed_label) {
+      info.name = this.cache_item.computed_label;
+      info.name_source = this.nameSource[this.cache_item.computed_label_source];
+    }
+  }
+
+  if (this.cache_item.accessible_description) {
+    info.desc = this.cache_item.accessible_discription;
+    info.desc_source = this.descSource*=(this.cache_item.accessible_discription_source);
+  }
+
+  return info;
+};
+
+
+ /**
+ * @method getColorContrastInfo
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets color contrast information for an element result
+ *
+ * @return {Object}
+ */
+OpenAjax.a11y.ElementResult.prototype.getColorContrastInfo = function () {
+  var info = {};
+  var cs;
+  var rule = this.rule_result.getRule();
+
+  if (rule && (rule.getId() === 'COLOR_1') &&
+      this.dom_element) {
+    cs = this.dom_element.computed_style;
+    if (cs) {
+      info.color                 = cs.color;
+      info.color_hex             = '#' + cs.color_hex;
+      info.background_color      = cs.background_color;
+      info.background_color_hex  = '#' + cs.background_color_hex;
+      info.color_contrast_ratio  = cs.color_contrast_ratio;
+      info.large_font            = cs.is_large_font;
+      info.background_image      = cs.background_image;
+      info.background_repeat     = cs.background_repeat;
+      info.background_position   = cs.background_position;
+    }
+  }
+  return info;
+};
+
+ /**
+ * @method getVisibilityInfo
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets visibility information for an element result
+ *
+ * @return {Object}
+ */
+OpenAjax.a11y.ElementResult.prototype.getVisibilityInfo = function () {
+  var info = {};
+  var cs;
+  if (this.dom_element) {
+    cs = this.dom_element.computed_style;
+    if (cs) {
+      info.graphical_rendering  = this.visibility[cs.is_visible_onscreen];
+      info.assistive_technology = this.visibility[cs.is_visible_to_at];
+    }
+  }
+  return info;
+};
+
+ /**
+ * @method AriaAttributes
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets common HTML attributes related to elements
+ *       some elements have special props like alt
+ *
+ * @return {Object} see description
+ */
+OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
+  var attrs = {};
+
+  this.checkForAttribute(attrs, 'role');
+  this.checkForAttribute(attrs, 'aria_atomic');
+  this.checkForAttribute(attrs, 'aria_activedescendant');
+  this.checkForAttribute(attrs, 'aria_controls');
+  this.checkForAttribute(attrs, 'aria_describedby');
+  this.checkForAttribute(attrs, 'aria_flowto');
+  this.checkForAttribute(attrs, 'aria_hidden');
+  this.checkForAttribute(attrs, 'aria_invalid');
+  this.checkForAttribute(attrs, 'aria_label');
+  this.checkForAttribute(attrs, 'aria_labelledby');
+  this.checkForAttribute(attrs, 'aria_live');
+  this.checkForAttribute(attrs, 'aria_owns');
+  this.checkForAttribute(attrs, 'aria_required');
+
+  return attrs;
+};
 
 
  /**
@@ -34758,7 +35017,7 @@ OpenAjax.a11y.ElementResult.prototype.getDOMElement = function () {
  *
  * @desc Gets accessible name of cache item if it exists or its text content
  *
- * @returns {String}
+ * @returns {Array} Array of
  */
 
 OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {
@@ -37002,7 +37261,7 @@ OpenAjax.a11y.nls.RuleCategories = function() {
 
     addNLS : function (loc, nls_info) {
 
-      OpenAjax.a11y.logger.info("[RuleCategories] Adding NLS: " + loc);
+//      OpenAjax.a11y.logger.info("[RuleCategories] Adding NLS: " + loc);
 
       rcs_nls[loc] = new OpenAjax.a11y.nls.RuleCategoriesNLS(loc, nls_info.abbreviation, nls_info.title, nls_info.url, nls_info.rule_categories);
 
@@ -37251,7 +37510,7 @@ OpenAjax.a11y.nls.WCAG20 = function() {
 
     addNLS : function (locale, nls) {
 
-      OpenAjax.a11y.logger.info("[WCAG20 NLS] Adding WCAG 2.0 NLS for locale: " + locale);
+//      OpenAjax.a11y.logger.info("[WCAG20 NLS] Adding WCAG 2.0 NLS for locale: " + locale);
 
       var  p,  p_id,  np;  /* WCAG 2.0 Principle */
       var  g,  g_id,  ng;  /* WCAG 2.0 Guideline */
@@ -38865,13 +39124,14 @@ OpenAjax.a11y.RuleManager = function () {
 
         var errors = false;
 
-        if (typeof rule_item.rule_id !== 'string') {
-          OpenAjax.a11y.logger.error("[RuleManager]  ** Rule ID is missing");
-          errors = true;
+        // If library is loaded in a page, ignore reloading of a rule already loaded
+        if (this.getRuleByRuleId(rule_item.rule_id)) {
+          // OpenAjax.a11y.logger.error("[RuleManager]  ** Duplicate Rule ID: " + rule_item.rule_id);
+          return false;
         }
 
-        if (this.getRuleByRuleId(rule_item.rule_id)) {
-          OpenAjax.a11y.logger.error("[RuleManager]  ** Duplicate Rule ID: " + rule_item.rule_id);
+        if (typeof rule_item.rule_id !== 'string') {
+          OpenAjax.a11y.logger.error("[RuleManager]  ** Rule ID is missing");
           errors = true;
         }
 
@@ -39291,7 +39551,7 @@ OpenAjax.a11y.Ruleset = function (ruleset_info, rule_mapping_info, loc) {
 
   // local references to current NLS information, based on current locale setting
 
-  OpenAjax.a11y.logger.info("[OpenAjax A11y][Ruleset] Creating Ruleset: " + ruleset_info['ruleset_id']);
+//  OpenAjax.a11y.logger.info("[OpenAjax A11y][Ruleset] Creating Ruleset: " + ruleset_info['ruleset_id']);
 
   var wcag20_nls = OpenAjax.a11y.nls.WCAG20.getNLS(locale);
 
@@ -39997,9 +40257,9 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
 
       var evaluation_result = new OpenAjax.a11y.EvaluationResult(doc, title, url, ruleset, dom_cache);
 
-      OpenAjax.a11y.logger.info("Starting evaluation....");
-      OpenAjax.a11y.logger.info("         URL: " + url);
-      OpenAjax.a11y.logger.info("     RULESET: " + ruleset.getRulesetInfo().title);
+//      OpenAjax.a11y.logger.info("Starting evaluation....");
+//      OpenAjax.a11y.logger.info("         URL: " + url);
+//      OpenAjax.a11y.logger.info("     RULESET: " + ruleset.getRulesetInfo().title);
 
       var rule_mappings = ruleset.getRuleMappingsArray();
       var rule_mappings_len = rule_mappings.length;
@@ -40023,7 +40283,7 @@ OpenAjax.a11y.Evaluator = function (r, blt, ep, grps) {
 
       } // end rule loop
 
-      OpenAjax.a11y.logger.info("Evaluation Complete!");
+//      OpenAjax.a11y.logger.info("Evaluation Complete!");
 
       return evaluation_result;
     },

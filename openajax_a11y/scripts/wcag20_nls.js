@@ -49,7 +49,7 @@ OpenAjax.a11y.nls.WCAG20 = function() {
 
     addNLS : function (locale, nls) {
 
-      OpenAjax.a11y.logger.info("[WCAG20 NLS] Adding WCAG 2.0 NLS for locale: " + locale);
+//      OpenAjax.a11y.logger.info("[WCAG20 NLS] Adding WCAG 2.0 NLS for locale: " + locale);
 
       var  p,  p_id,  np;  /* WCAG 2.0 Principle */
       var  g,  g_id,  ng;  /* WCAG 2.0 Guideline */
