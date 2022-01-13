@@ -1139,6 +1139,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   attr = null;
   attributes = node.attributes;
 
+  this.attributes = attributes;
+
   this.class_name = "";
 
   if (typeof node.className === 'string') this.class_name = node.className;

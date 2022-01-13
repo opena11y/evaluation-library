@@ -96,6 +96,9 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
   this.result_message       = "";
   this.position = 0;
 
+  this.html_attrs = {};
+  this.aria_attrs = {};
+
   this.nameSource = ['not defined', 'none', 'label[for]', 'label', 'title attribute', 'value attribute', 'alt attribute', 'type attribute', 'text content', 'aria-lablledby', 'aria-label', 'caption element', 'summary attribute'];
   this.descSource = ['not defined', 'none', 'title attribute', 'aria-describedby', 'summary attribute'];
   this.visibility = ['not defined', 'unkown', 'hidden', 'visible'];
@@ -129,6 +132,20 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
     }
   }
   this.dom_node = cache_item.node;
+
+  if (this.dom_element && this.dom_element.attributes) {
+//    console.log('[' + this.dom_element.tag_name + '][attributes]: ' + this.dom_element.attributes)
+    for (var i = 0; i < this.dom_element.attributes.length; i += 1) {
+      var attr = this.dom_element.attributes[i];
+      var name = attr.name.trim();
+      var value = attr.value.trim();
+      if (name.indexOf('aria-') < 0) {
+        this.html_attrs[name] = value;
+      } else {
+        this.aria_attrs[name] = value;
+      }
+    }
+  }
 };
 
 
@@ -223,7 +240,7 @@ OpenAjax.a11y.ElementResult.prototype.checkForAttribute = function (attrs, attr,
 };
 
  /**
- * @method HTMLAttributes
+ * @method getHTMLAttributes
  *
  * @memberOf OpenAjax.a11y.ElementResult
  *
@@ -233,26 +250,21 @@ OpenAjax.a11y.ElementResult.prototype.checkForAttribute = function (attrs, attr,
  * @return {Object} see description
  */
 OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
-  var attrs = {};
+  return this.html_attrs;
+};
 
-  this.checkForAttribute(attrs, 'class_name', 'class');
-  this.checkForAttribute(attrs, 'headers');
-  this.checkForAttribute(attrs, 'href');
-  this.checkForAttribute(attrs, 'type_attr', 'type');
-  this.checkForAttribute(attrs, 'lang');
-  this.checkForAttribute(attrs, 'longdesc');
-  this.checkForAttribute(attrs, 'name');
-  this.checkForAttribute(attrs, 'pattern');
-  this.checkForAttribute(attrs, 'placeholder');
-  this.checkForAttribute(attrs, 'required');
-  this.checkForAttribute(attrs, 'scope');
-  this.checkForAttribute(attrs, 'src');
-  this.checkForAttribute(attrs, 'summary');
-  this.checkForAttribute(attrs, 'tabindex');
-  this.checkForAttribute(attrs, 'title');
-  this.checkForAttribute(attrs, 'value');
-
-  return attrs;
+ /**
+ * @method getAriaAttributes
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets common HTML attributes related to elements
+ *       some elements have special props like alt
+ *
+ * @return {Object} see description
+ */
+OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
+  return this.aria_attrs;
 };
 
  /**
@@ -346,37 +358,6 @@ OpenAjax.a11y.ElementResult.prototype.getVisibilityInfo = function () {
   }
   return info;
 };
-
- /**
- * @method AriaAttributes
- *
- * @memberOf OpenAjax.a11y.ElementResult
- *
- * @desc Gets common HTML attributes related to elements
- *       some elements have special props like alt
- *
- * @return {Object} see description
- */
-OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
-  var attrs = {};
-
-  this.checkForAttribute(attrs, 'role');
-  this.checkForAttribute(attrs, 'aria_atomic');
-  this.checkForAttribute(attrs, 'aria_activedescendant');
-  this.checkForAttribute(attrs, 'aria_controls');
-  this.checkForAttribute(attrs, 'aria_describedby');
-  this.checkForAttribute(attrs, 'aria_flowto');
-  this.checkForAttribute(attrs, 'aria_hidden');
-  this.checkForAttribute(attrs, 'aria_invalid');
-  this.checkForAttribute(attrs, 'aria_label');
-  this.checkForAttribute(attrs, 'aria_labelledby');
-  this.checkForAttribute(attrs, 'aria_live');
-  this.checkForAttribute(attrs, 'aria_owns');
-  this.checkForAttribute(attrs, 'aria_required');
-
-  return attrs;
-};
-
 
  /**
  * @method getRuleResult
