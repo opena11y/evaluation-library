@@ -1139,7 +1139,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   attr = null;
   attributes = node.attributes;
 
-  this.attributes = attributes;
+  this.html_attrs = {};
+  this.aria_attrs = {};
 
   this.class_name = "";
 
@@ -1273,6 +1274,12 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   for (i = 0; i < attributes.length; i++) {
 
     attr = attributes[i];
+
+    if (attr.name.toLowerCase().indexOf('aria-') === 0) {
+      this.aria_attrs[attr.name] = attr.value;
+    } else {
+      this.html_attrs[attr.name] = attr.value;
+    }
 
     var attr_value = OpenAjax.a11y.util.normalizeSpace(attr.value);
 

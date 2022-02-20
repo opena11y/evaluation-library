@@ -4,6 +4,7 @@ Version 1.3 Overview
 * Added support for analaying SLOT element content
 * Updated WIDGET 16 to only require manual checking of custom elements with closed shadow DOMs
 * Fixed bugs with landmark rules related to header and footer elements
+* Removed ROLE_* rules from strict ruleset on role restrictions for certain HTML elements. The requirements are now part of the new HTML_3 rule which is more robust and is based on the ARIA in HTML specification requirements.
 
 Version 1.2 Overview
 =============================

@@ -132,20 +132,6 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
     }
   }
   this.dom_node = cache_item.node;
-
-  if (this.dom_element && this.dom_element.attributes) {
-//    console.log('[' + this.dom_element.tag_name + '][attributes]: ' + this.dom_element.attributes)
-    for (var i = 0; i < this.dom_element.attributes.length; i += 1) {
-      var attr = this.dom_element.attributes[i];
-      var name = attr.name.trim();
-      var value = attr.value.trim();
-      if (name.indexOf('aria-') < 0) {
-        this.html_attrs[name] = value;
-      } else {
-        this.aria_attrs[name] = value;
-      }
-    }
-  }
 };
 
 
@@ -250,7 +236,10 @@ OpenAjax.a11y.ElementResult.prototype.checkForAttribute = function (attrs, attr,
  * @return {Object} see description
  */
 OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
-  return this.html_attrs;
+  if (this.dom_element.html_attrs) {
+    return this.dom_element.html_attrs;
+  }
+  return {};
 };
 
  /**
@@ -264,7 +253,10 @@ OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
  * @return {Object} see description
  */
 OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
-  return this.aria_attrs;
+  if (this.dom_element.aria_attrs) {
+    return this.dom_element.aria_attrs;
+  }
+  return {};
 };
 
  /**
@@ -277,8 +269,25 @@ OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
  * @return {Object}
  */
 OpenAjax.a11y.ElementResult.prototype.getAccessibleNameInfo = function () {
-  var info = {};
+  var info = {}, dp = false;
 
+  // If the results are dom_element object, they do not have names, like for CCR rule
+  info.name_possible = this.dom_element !== this.cache_item;
+
+  if (this.dom_element) {
+    if (this.dom_element.role) {
+      dp = OpenAjax.a11y.aria.designPatterns[this.dom_element.role];
+    } else {
+      if (this.dom_element.implicit_role) {
+        dp = OpenAjax.a11y.aria.designPatterns[this.dom_element.implicit_role];
+      }
+    }
+  }
+
+  if (dp) {
+    info.name_required   = dp.nameRequired;
+    info.name_prohibited = dp.nameProhibited;
+  }
 
   if (this.cache_item.accessible_name) {
     info.name = this.cache_item.accessible_name;
@@ -293,7 +302,18 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleNameInfo = function () {
     if (this.cache_item.computed_label) {
       info.name = this.cache_item.computed_label;
       info.name_source = this.nameSource[this.cache_item.computed_label_source];
+    } else {
+      // This option is for heading cache items
+      if (this.cache_item.name) {
+        info.name = this.cache_item.name;
+        info.name_source = this.nameSource[OpenAjax.a11y.SOURCE.TEXT_CONTENT];
+      }
     }
+  }
+
+  if (!info.name) {
+    info.name = '';
+    info.name_source = ''
   }
 
   if (this.cache_item.accessible_description) {
@@ -328,7 +348,10 @@ OpenAjax.a11y.ElementResult.prototype.getColorContrastInfo = function () {
       info.color_hex             = '#' + cs.color_hex;
       info.background_color      = cs.background_color;
       info.background_color_hex  = '#' + cs.background_color_hex;
-      info.large_font            = cs.is_large_font;
+      info.font_family           = cs.font_family;
+      info.font_size             = cs.font_size;
+      info.font_weight           = cs.font_weight;
+      info.large_font            = cs.is_large_font ? 'Yes' : 'no';
       info.background_image      = cs.background_image;
       info.background_repeat     = cs.background_repeat;
       info.background_position   = cs.background_position;

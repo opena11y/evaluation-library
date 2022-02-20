@@ -16043,7 +16043,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   attr = null;
   attributes = node.attributes;
 
-  this.attributes = attributes;
+  this.html_attrs = {};
+  this.aria_attrs = {};
 
   this.class_name = "";
 
@@ -16177,6 +16178,12 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   for (i = 0; i < attributes.length; i++) {
 
     attr = attributes[i];
+
+    if (attr.name.toLowerCase().indexOf('aria-') === 0) {
+      this.aria_attrs[attr.name] = attr.value;
+    } else {
+      this.html_attrs[attr.name] = attr.value;
+    }
 
     var attr_value = OpenAjax.a11y.util.normalizeSpace(attr.value);
 
@@ -34447,20 +34454,6 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
     }
   }
   this.dom_node = cache_item.node;
-
-  if (this.dom_element && this.dom_element.attributes) {
-//    console.log('[' + this.dom_element.tag_name + '][attributes]: ' + this.dom_element.attributes)
-    for (var i = 0; i < this.dom_element.attributes.length; i += 1) {
-      var attr = this.dom_element.attributes[i];
-      var name = attr.name.trim();
-      var value = attr.value.trim();
-      if (name.indexOf('aria-') < 0) {
-        this.html_attrs[name] = value;
-      } else {
-        this.aria_attrs[name] = value;
-      }
-    }
-  }
 };
 
 
@@ -34565,7 +34558,10 @@ OpenAjax.a11y.ElementResult.prototype.checkForAttribute = function (attrs, attr,
  * @return {Object} see description
  */
 OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
-  return this.html_attrs;
+  if (this.dom_element.html_attrs) {
+    return this.dom_element.html_attrs;
+  }
+  return {};
 };
 
  /**
@@ -34579,7 +34575,10 @@ OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
  * @return {Object} see description
  */
 OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
-  return this.aria_attrs;
+  if (this.dom_element.aria_attrs) {
+    return this.dom_element.aria_attrs;
+  }
+  return {};
 };
 
  /**
@@ -34592,8 +34591,25 @@ OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
  * @return {Object}
  */
 OpenAjax.a11y.ElementResult.prototype.getAccessibleNameInfo = function () {
-  var info = {};
+  var info = {}, dp = false;
 
+  // If the results are dom_element object, they do not have names, like for CCR rule
+  info.name_possible = this.dom_element !== this.cache_item;
+
+  if (this.dom_element) {
+    if (this.dom_element.role) {
+      dp = OpenAjax.a11y.aria.designPatterns[this.dom_element.role];
+    } else {
+      if (this.dom_element.implicit_role) {
+        dp = OpenAjax.a11y.aria.designPatterns[this.dom_element.implicit_role];
+      }
+    }
+  }
+
+  if (dp) {
+    info.name_required   = dp.nameRequired;
+    info.name_prohibited = dp.nameProhibited;
+  }
 
   if (this.cache_item.accessible_name) {
     info.name = this.cache_item.accessible_name;
@@ -34608,7 +34624,18 @@ OpenAjax.a11y.ElementResult.prototype.getAccessibleNameInfo = function () {
     if (this.cache_item.computed_label) {
       info.name = this.cache_item.computed_label;
       info.name_source = this.nameSource[this.cache_item.computed_label_source];
+    } else {
+      // This option is for heading cache items
+      if (this.cache_item.name) {
+        info.name = this.cache_item.name;
+        info.name_source = this.nameSource[OpenAjax.a11y.SOURCE.TEXT_CONTENT];
+      }
     }
+  }
+
+  if (!info.name) {
+    info.name = '';
+    info.name_source = ''
   }
 
   if (this.cache_item.accessible_description) {
@@ -34643,7 +34670,10 @@ OpenAjax.a11y.ElementResult.prototype.getColorContrastInfo = function () {
       info.color_hex             = '#' + cs.color_hex;
       info.background_color      = cs.background_color;
       info.background_color_hex  = '#' + cs.background_color_hex;
-      info.large_font            = cs.is_large_font;
+      info.font_family           = cs.font_family;
+      info.font_size             = cs.font_size;
+      info.font_weight           = cs.font_weight;
+      info.large_font            = cs.is_large_font ? 'Yes' : 'no';
       info.background_image      = cs.background_image;
       info.background_repeat     = cs.background_repeat;
       info.background_position   = cs.background_position;
@@ -36573,13 +36603,14 @@ OpenAjax.a11y.RuleGroupResult.prototype.addRuleResult = function(rule_result) {
 
 OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
 
-  if (typeof flag !== 'boolean') flag = true;
+  if (typeof prefix !== 'string') prefix = '';
+  if (typeof flag   !== 'boolean') flag = true;
+
+  var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
 
   var rule_group_info = this.getRuleGroupInfo();
-
-  var ruleset_title   = this.evaluation_result.ruleset_title;
-  var ruleset_version = this.evaluation_result.ruleset_version;
-  var ruleset_id      = this.evaluation_result.ruleset_id;
+  var ruleset         = this.evaluation_result.getRuleset();
+  var ruleset_info    = ruleset.getRulesetInfo();
 
   var eval_title = this.evaluation_result.title;
   var eval_url   = this.evaluation_result.url;
@@ -36591,28 +36622,19 @@ OpenAjax.a11y.RuleGroupResult.prototype.toJSON = function(prefix, flag) {
 
   json += prefix + "{";
 
-  json += prefix + "  \"group_title\"   : " + JSON.stringify(rule_group_info.title) + ",";
-  json += prefix + "  \"group_url\"     : " + JSON.stringify(rule_group_info.url)   + ",";
+  json += prefix + "  \"eval_url\"                  : " + JSON.stringify(cleanForUTF8(eval_url))   + ",\n";
+  json += prefix + "  \"eval_url_encoded\"          : " + JSON.stringify(encodeURI(eval_url))      + ",\n";
+  json += prefix + "  \"eval_title\"                : " + JSON.stringify(cleanForUTF8(eval_title)) + ",\n";
 
-  json += prefix + "  \"ruleset_title\"   : " + JSON.stringify(ruleset_title)   + ",";
-  json += prefix + "  \"ruleset_version\" : " + JSON.stringify(ruleset_version) + ",";
-  json += prefix + "  \"ruleset_id\"      : \"" + ruleset_id + "\",";
+  json += prefix + "  \"ruleset_id\"                : " + JSON.stringify(ruleset.getId())         + ",\n";
+  json += prefix + "  \"ruleset_title\"             : " + JSON.stringify(ruleset_info.title)      + ",\n";
+  json += prefix + "  \"ruleset_abbrev\"            : " + JSON.stringify(ruleset_info.abbrev)     + ",\n";
+  json += prefix + "  \"ruleset_version\"           : " + JSON.stringify(ruleset_info.version)    + ",\n";
 
-  json += prefix + "  \"eval_title\"    : " + JSON.stringify(eval_title) + ",";
-  json += prefix + "  \"eval_url\"      : " + JSON.stringify(eval_url)   + ",";
-  json += prefix + "  \"eval_date\"     : " + JSON.stringify(eval_date)  + ",";
-  json += prefix + "  \"eval_time\"     : " + JSON.stringify(eval_time)  + ",";
+  json += prefix + "  \"group_title\"   : " + JSON.stringify(rule_group_info.title) + ",\n";
+  json += prefix + "  \"group_url\"     : " + JSON.stringify(rule_group_info.url)   + ",\n";
 
-  json += prefix + "  \"required_rules\"    : \"" + rule_group_info.required_rules    + "\",";
-  json += prefix + "  \"recommened_rules\"  : \"" + rule_group_info.recommended_rules + "\",";
-
-  json += prefix + "  \"has_results\"  : \"" + this.hasResults() + "\",";
-  json += prefix + "  \"has_rules\"    : \"" + this.hasRules()   + "\",";
-
-  json += prefix + "  \"implementation_score\" : \"" + this.rule_results_summary.implementation_score + "\",";
-  json += prefix + "  \"implementation_value\" : \"" + this.rule_results_summaryrs.implementation_value + "\",";
-
-  json += prefix + "  \"rule_results\" : [";
+  json += prefix + "  \"rule_results\" : [\n";
 
   var rule_results     = this.rule_results;
   var rule_results_len = rule_results.length;
@@ -40958,7 +40980,7 @@ OpenAjax.a11y.nls.RuleCategories.addNLS('en-us', {
     },
     {
       id           : OpenAjax.a11y.RULE_CATEGORIES.STYLES_READABILITY,
-      title        : 'Styling/Content',
+      title        : 'Styles/Content',
       url          : '',
       description  : 'Use proper HTML markup to identify the semantics and language of text content. Ensure that text is readable by adhering to color contrast guidelines, and that information is not conveyed solely by the use of color, shape, location or sound.'
     },
@@ -40988,7 +41010,7 @@ OpenAjax.a11y.nls.RuleCategories.addNLS('en-us', {
     },
     {
       id           : OpenAjax.a11y.RULE_CATEGORIES.WIDGETS_SCRIPTS,
-      title        : 'Widgets/Scripting',
+      title        : 'Widgets/Scripts',
       url          : '',
       description  : 'Use appropriate event handlers on elements to support native interactivity using JavaScript. Ensure that custom widgets created using JavaScript support keyboard interaction and include ARIA markup to describe their roles, properties and states.'
     },
@@ -41019,7 +41041,7 @@ OpenAjax.a11y.nls.RuleCategories.addNLS('en-us', {
     // Composite rule categories
     {
       id           : OpenAjax.a11y.RULE_CATEGORIES.ALL,
-      title        : 'All Categories',
+      title        : 'All Rules',
       url          : '',
       description  : 'Includes all rules in the ruleset and provides a way to sort and compare the results of all the rules.'
     }
@@ -41058,7 +41080,7 @@ OpenAjax.a11y.nls.WCAG20.addNLS('en-us', {
   levels: [  'Undefined',  'AAA',  'AA',  '',  'A'  ],
   evaluation_levels: [  'Undefined',  'AAA',  'AA',  'AA and AAA',  'A',  'A and AAA',  'A nd AA',  'A, AA and AAA'  ],
   all_guidelines: {
-    title: 'All Guidelines',
+    title: 'All Rules',
     description: 'All the rules related to WCAG 2.1.',
     url_spec: 'https://www.w3.org/TR/WCAG21/'
   },
@@ -47573,8 +47595,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
     rules: {
         ROLE_1: {
             ID:               'Role 1',
-            DEFINITION:       'Overriding a @main@ element\'s default @role@ of @main@ landmark %s only be done in special cases.',
-            SUMMARY:          '@main@ element @role@ semantics.',
+            DEFINITION:       'Overriding a @main@ element\'s default @role@ of @main@ landmark %s only be done in special cases. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@main@ element @role@ semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@main@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute from the @main@ element to support the default @main@ landmark semantics, if the content does not represent @main@ landmark semantics use @role="presentation"@ or change the element to one that does identify the semantics of the content.',
@@ -47623,8 +47645,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_2: {
             ID:               'Role 2',
-            DEFINITION:       'The @body@ element %s only @document@ (default) or @application@ role semantics.',
-            SUMMARY:          '@body@ element role semantics.',
+            DEFINITION:       'The @body@ element %s only @document@ (default) or @application@ role semantics. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@body@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@body@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Change the role attribute on the @body@ element to either @document@ or @application@, or remove the @role@ attribute all together.',
@@ -47665,8 +47687,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_3: {
             ID:               'Role 3',
-            DEFINITION:       '@ol@ and @ul@ elements %s only have grouping role values of @directory, @group@, @listbox@, @menu@, @menubar@, @presentation@, @radiogroup@, @tablist@, @toolbar@ or @tree@.',
-            SUMMARY:          '@ol@ and @ul@ role grouping semantics',
+            DEFINITION:       '@ol@ and @ul@ elements %s only have grouping role values of @directory, @group@, @listbox@, @menu@, @menubar@, @presentation@, @radiogroup@, @tablist@, @toolbar@ or @tree@. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@ol@ and @ul@ role grouping semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@ol@ and @ul@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ on the @ol@ and @ul@ element or change the @role@ semantics to an allowed grouping widget role.',
@@ -47708,8 +47730,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_4: {
             ID:               'Role 4',
-            DEFINITION:       '@article@ element %s only have @role@ semantics of @region@, @article@ (default), @main@, @document@ or @application@.',
-            SUMMARY:          '@article@ element role semantics',
+            DEFINITION:       '@article@ element %s only have @role@ semantics of @region@, @article@ (default), @main@, @document@ or @application@. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@article@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@article@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute or change the @role@ attribute on the @article@ element to an allowed @role@ value or remove the @role@ attribute all together.',
@@ -47764,8 +47786,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_5: {
             ID:               'Role 5',
-            DEFINITION:       '@section@ element %s only have role semantics of @alert@, @alertdialog@, @application@, @contentinfo@, @dialog@, @document@, @log@, @main@, @marquee@, @presentation@, @region@, @search@ or @status@.',
-            SUMMARY:          '@section@ element role semantics',
+            DEFINITION:       '@section@ element %s only have role semantics of @alert@, @alertdialog@, @application@, @contentinfo@, @dialog@, @document@, @log@, @main@, @marquee@, @presentation@, @region@, @search@ or @status@. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@section@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@section@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute on the @section@ element or change the role to an allowed role that semantically identifies the content:  @alert@, @alertdialog@, @application@, @contentinfo@, @dialog@, @document@, @log@, @main@, @marquee@, @presentation@, @region@, @search@ or @status@, or remove the @role@ attribute all together.',
@@ -47860,8 +47882,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_6: {
             ID:               'Role 6',
-            DEFINITION:       'Overriding a @nav@ element\'s default @role@ of @navigation@ landmark %s only be done in special cases.',
-            SUMMARY:          'Do not override @nav@ element semantics.',
+            DEFINITION:       'Overriding a @nav@ element\'s default @role@ of @navigation@ landmark %s only be done in special cases. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          'Do not override @nav@ element semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@nav@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute on the @nav@ element to support the default semantics of a @navigation@ landmark, change the @role@ attribute to @presentation@ if the content does not represent a @navigation@ landmark or change the element to an element that better represents the semantics of the content.',
@@ -47905,8 +47927,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_7: {
             ID:               'Role 7',
-            DEFINITION:       '@aside@ element %s only have role semantics of @complementary@ (default do not set), @note@, @region@, @search@ or @presentation@.',
-            SUMMARY:          '@aside@ element role semantics',
+            DEFINITION:       '@aside@ element %s only have role semantics of @complementary@ (default do not set), @note@, @region@, @search@ or @presentation@. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@aside@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@aside@ element',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute on the @aside@ element, change the role to an allowed role that semantically identifies the content: @complementary@ (default do not set), @note@, @region@, @search@ or @presentation@ .',
@@ -47960,8 +47982,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_8: {
             ID:               'Role 8',
-            DEFINITION:       'Overriding a @header@ element\'s default @role@ of @banner@ landmark %s only be done in special cases.',
-            SUMMARY:          'Do not override @header@ element @role@.',
+            DEFINITION:       'Overriding a @header@ element\'s default @role@ of @banner@ landmark %s only be done in special cases. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          'Do not override @header@ element @role@. (Deprecated)',
             TARGET_RESOURCES_DESC: '@header@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute from the @header@ element to support the default @banner@ landmark semantics, if the content does not represent @banner@ landmark semantics use @role="presentation"@ or change the element to one that does identify the semantics of the content .',
@@ -48006,8 +48028,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_9: {
             ID:               'Role 9',
-            DEFINITION:       'Overriding a @footer@ element\'s default @role@ of @contentinfo@ landmark %s only be done in special cases.',
-            SUMMARY:          'Do not override @footer@ element @role@.',
+            DEFINITION:       'Overriding a @footer@ element\'s default @role@ of @contentinfo@ landmark %s only be done in special cases. NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          'Do not override @footer@ element @role@. (Deprecated)',
             TARGET_RESOURCES_DESC: '@footer@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute from the @footer@ element to support the default @contentinfo@ landmark semantics, if the content does not represent @contentinfo@ landmark semantics use @role="presentation"@ or change the element to one that does identify the semantics of the content .',
@@ -48052,8 +48074,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_10: {
             ID:               'Role 10',
-            DEFINITION:       'Overriding heading element\'s (@h1-h6@) default @role@ of @heading@  %s only be done in special cases.',
-            SUMMARY:          'Overriding @h1-h6@ role semantics',
+            DEFINITION:       'Overriding heading element\'s (@h1-h6@) default @role@ of @heading@  %s only be done in special cases.  NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          'Overriding @h1-h6@ role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@h1@, @h2@, @h3@, @h4@, @h5@, @h6@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ attribute from the heading element to support the default @heading@ semantics, use @tab@ if the heading represents a @tab@ in a @tabpanel@, or use @role="presentation"@ if the content does not represent @heading@ or @tab@ semantics.',
@@ -48101,8 +48123,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_11: {
             ID:               'Role 11',
-            DEFINITION:       '@li@ elements %s only have group item role values of @listitem@ (default - do not set), @menuitem@, @menuitemcheckbox@, @menuitemradio@, @option@, @tab@, @treeitem@ or @presentation@.',
-            SUMMARY:          '@li@ element group item semantics',
+            DEFINITION:       '@li@ elements %s only have group item role values of @listitem@ (default - do not set), @menuitem@, @menuitemcheckbox@, @menuitemradio@, @option@, @tab@, @treeitem@ or @presentation@.  NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@li@ element group item semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@li@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ on the @li@ element to support the default @listitem@ semantics or change the @role@ semantics to an allowed grouping widget role.',
@@ -48138,8 +48160,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_12: {
             ID:               'Role 12',
-            DEFINITION:       '@a[href]@ elements %s only have role values of @link@ (default), @button@, @checkbox@, @menuitem@, @menuitemcheckbox@, @menuitemradio@, @tab@, @switch@ or @treeitem@.',
-            SUMMARY:          '@a[href]@ element role semantics',
+            DEFINITION:       '@a[href]@ elements %s only have role values of @link@ (default), @button@, @checkbox@, @menuitem@, @menuitemcheckbox@, @menuitemradio@, @tab@, @switch@ or @treeitem@.  NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@a[href]@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@a[href]@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ on the @a@ element to support the default @link@ semantics or change the @role@ semantics to an allowed grouping widget role.',
@@ -48171,8 +48193,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_13: {
             ID:               'Role 13',
-            DEFINITION:       '@select@ elements %s only have role values of @listbox@ (default) or @menu@.',
-            SUMMARY:          '@select@ element role semantics',
+            DEFINITION:       '@select@ elements %s only have role values of @listbox@ (default) or @menu@.  NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@select@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@select]@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ on the @select@ element to support the default @listbox@ semantics or change the @role@ semantics to the @menu@ role.',
@@ -48204,8 +48226,8 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         ROLE_14: {
             ID:               'Role 14',
-            DEFINITION:       '@textarea@ elements %s only have role values of @listbox@ (default) or @menu@.',
-            SUMMARY:          '@textarea@ element role semantics',
+            DEFINITION:       '@textarea@ elements %s only have role values of @listbox@ (default) or @menu@.  NOTE: Deprecated in favor of HTML 3 a more general rule on role restrictions based on ARIA in HTML specification.',
+            SUMMARY:          '@textarea@ element role semantics. (Deprecated)',
             TARGET_RESOURCES_DESC: '@textarea]@ elements',
             RULE_RESULT_MESSAGES: {
               FAIL_S:         'Remove the @role@ on the @textarea@ element to support the default @textbox@ semantics or use a different element to represent the semantics of the content.',
@@ -61623,59 +61645,59 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
      },
    ROLE_1 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_2 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_3 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_4 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_5 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_6 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_7 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_8 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_9 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_10 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_11 : {
        required : false,
-       enabled  : true
+       enabled  : false
      },
    ROLE_12 : {
        required : false,
-       enabled  : true
+       enabled  : false
     },
       ROLE_13 : {
-       required : true,
-       enabled  : true
+       required : false,
+       enabled  : false
       },
    ROLE_14: {
-       required : true,
-       enabled  : true
+       required : false,
+       enabled  : false
      },
    SENSORY_1 : {
        required : true,
@@ -62223,60 +62245,60 @@ OpenAjax.a11y.RuleManager.addRulesFromJSON([
         enabled  : true
       },
       ROLE_1 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_2 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_3 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_4 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_5 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_6 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_7 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_8 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_9 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_10 : {
-        required : true,
-        enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_11 : {
-       required : true,
-       enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_12 : {
-       required : true,
-       enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_13 : {
-       required : true,
-       enabled  : true
+        required : false,
+        enabled  : false
       },
       ROLE_14 : {
-       required : true,
-       enabled  : true
+        required : false,
+        enabled  : false
      },
       SENSORY_1 : {
         required : true,
