@@ -1,6 +1,13 @@
 Version 1.3 Overview
 =============================
-* Added support for analyzing custom elements with "open" shado DOM
+* Added methods ElementResult object for use in AInspector Element Results view:
+  * getTagName
+  * getHTMLAttributes
+  * getAriaAttributes
+  * getAccessibleNameInfo
+  * getColorContrastInfo
+  * getVisibilityInfo
+* Added support for analyzing custom elements with "open" shadow DOM
 * Added support for analaying SLOT element content
 * Updated WIDGET 16 to only require manual checking of custom elements with closed shadow DOMs
 * Fixed bugs with landmark rules related to header and footer elements
