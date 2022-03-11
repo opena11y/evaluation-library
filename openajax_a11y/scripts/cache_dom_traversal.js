@@ -501,7 +501,6 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
           for (n = rn.firstElementChild; n !== null; n = n.nextElementSibling ) {
             ps = this.updateDOMElements(n, dom_element, ps);
           } // end loop
-
         }
       } else {
         switch (dom_element.tag_name) {
@@ -516,7 +515,7 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
             break;
 
           case 'slot':
-            nodes = node.assignedNodes();
+            nodes = node.assignedNodes({ flatten: true });
             for (var i = 0; i < nodes.length; i += 1) {
               n = nodes[i];
               ps = this.updateDOMElements(n, dom_element, ps, showElements);
