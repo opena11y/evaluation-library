@@ -31,7 +31,7 @@ OpenAjax.a11y.nls.WCAG20.addNLS('en-us', {
   levels: [  'Undefined',  'AAA',  'AA',  '',  'A'  ],
   evaluation_levels: [  'Undefined',  'AAA',  'AA',  'AA and AAA',  'A',  'A and AAA',  'A nd AA',  'A, AA and AAA'  ],
   all_guidelines: {
-    title: 'All Guidelines',
+    title: 'All Rules',
     description: 'All the rules related to WCAG 2.1.',
     url_spec: 'https://www.w3.org/TR/WCAG21/'
   },

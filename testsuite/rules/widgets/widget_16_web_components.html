@@ -19,12 +19,12 @@
           }
         </style>
 
-        Hello, <span class="red">world</span>!
+        <div> Hello, <span class="red"><slot name="name"></slot></span>!</div>
       </template>
 
       <!-- Step 2: Create custom element class and register it -->
       <script>
-        class VanillaWebcomponent extends HTMLElement {
+        class VanillaWebcomponentOpen extends HTMLElement {
           constructor() {
             super();
 
@@ -36,15 +36,43 @@
           }
         }
 
-        customElements.define('vanilla-webcomponent', VanillaWebcomponent);
+        customElements.define('vanilla-webcomponent-open', VanillaWebcomponentOpen);
+
+        class VanillaWebcomponentClosed extends HTMLElement {
+          constructor() {
+            super();
+
+            this._root = this.attachShadow({ mode: 'closed' }); // Creates a shadow DOM root node for the element
+
+            const template = document.getElementById('vanilla-webcomponent-template');
+            const templateInstance = template.content.cloneNode(true); // Clones the contents of the template
+            this._root.appendChild(templateInstance); // Inserts the template contents into the shadow DOM
+          }
+        }
+
+        customElements.define('vanilla-webcomponent-closed', VanillaWebcomponentClosed);
+
+
       </script>
 
       <!-- Step 3: Render custom component and compare it to non-custom markup -->
       <p>Hello, <span class="red">world</span>!</p>
 
-      <vanilla-webcomponent  class="WIDGET_16_MC"></vanilla-webcomponent>
+      <vanilla-webcomponent-open class="WIDGET_16_NO_RESULT">
+        <span slot="name">Open Shadow DOM</span>
+      </vanilla-webcomponent-open>
 
-      <vanilla-webcomponent hidden class="WIDGET_16_HIDDEN"></vanilla-webcomponent>
+      <vanilla-webcomponent-open hidden class="WIDGET_16_NO_RESULT">
+        <span slot="name">Open Shadow DOM</span>
+      </vanilla-webcomponent-open>
+
+      <vanilla-webcomponent-closed class="WIDGET_16_MC">
+        <span slot="name">Closed Shadow DOM</span>
+      </vanilla-webcomponent-closed>
+
+      <vanilla-webcomponent-closed hidden class="WIDGET_16_HIDDEN">
+        <span slot="name">Closed Shadow DOM</span>
+      </vanilla-webcomponent-closed>
 
   </body>
 </html>

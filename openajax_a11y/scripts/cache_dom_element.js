@@ -108,7 +108,7 @@ OpenAjax.a11y.cache.DOMElementCache.prototype.addDOMElement = function (dom_elem
     this.dom_elements.push( dom_element );
 
     // only one page element per page
-    if ((this.page_element === null) &&
+    if (!this.page_element &&
         (dom_element.tag_name === 'body')) {
       this.page_element = dom_element;
     }
@@ -1139,6 +1139,9 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   attr = null;
   attributes = node.attributes;
 
+  this.html_attrs = {};
+  this.aria_attrs = {};
+
   this.class_name = "";
 
   if (typeof node.className === 'string') this.class_name = node.className;
@@ -1216,6 +1219,7 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.has_summary               = false;
   this.has_tabindex              = false;
   this.has_title                 = false;
+  this.has_value                 = false;
 
 
   this.implicit_role  = this.element_aria_info.defaultRole;
@@ -1223,10 +1227,8 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   this.role_info      = null;
   this.aria_invalid   = false;
   this.aria_required  = false;
+  this.title = '';
 
-  this.src = "";
-  this.href = "";
-  this.title = "";
 
   this.ancestor_has_aria_activedescendant = false;
   if (parent_dom_element) this.ancestor_has_aria_activedescendant = parent_dom_element.ancestor_has_aria_activedescendant;
@@ -1236,6 +1238,12 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
   for (i = 0; i < attributes.length; i++) {
 
     attr = attributes[i];
+
+    if (attr.name.toLowerCase().indexOf('aria-') === 0) {
+      this.aria_attrs[attr.name] = attr.value;
+    } else {
+      this.html_attrs[attr.name] = attr.value;
+    }
 
     var attr_value = OpenAjax.a11y.util.normalizeSpace(attr.value);
 
@@ -1291,17 +1299,15 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     case 'aria-label':
-      this.aria_label = attr_value;
+      this.aria_label = attr_value;;
       addAriaAttribute('aria-label', attr_value);
-      this.has_aria_label      = true;
-      this.has_aria_attributes = true;
+      this.has_aria_label = true;
       break;
 
     case 'aria-labelledby':
-      this.aria_labelledby  = attr_value;
-      addAriaAttribute('aria-labelledby', attr_value);
       this.has_aria_labelledby = true;
-      this.has_aria_attributes = true;
+      this.aria_labelledby = attr_value;;
+      addAriaAttribute('aria-labelledby', attr_value);
       break;
 
     case 'aria-live':
@@ -1344,10 +1350,9 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     case 'href':
-      if (attr_value.length) {
-        this.has_href = true;
-        addOtherAttribute(attr.name, attr_value);
-      }
+      this.has_href = true;
+      this.href = attr_value;
+      addOtherAttribute('href', attr_value);
       break;
 
     case 'lang':
@@ -1433,8 +1438,9 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     case 'src':
-      this.src = node.src;
-      if (attr_value.length > 0) this.has_src = true;
+      this.has_src = true;
+      this.src = attr.value;
+      addOtherAttribute('src', attr.value);
       break;
 
     case 'summary':
@@ -1450,10 +1456,14 @@ OpenAjax.a11y.cache.DOMElement = function (node, parent_dom_element, doc) {
       break;
 
     case 'title':
-      this.title = attr_value;
-      if (attr_value.length > 0) this.has_title = true;
+      this.has_title = true;
+      this.title = attr.value;
       break;
 
+    case 'value':
+      this.has_value = true;
+      this.value = attr.value;
+      break;
 
     default:
 
@@ -2037,29 +2047,7 @@ OpenAjax.a11y.cache.DOMElement.prototype.hasEvents = function () {
 
 
 /**
- * @method   var SOURCE = OpenAjax.a11y.SOURCE;
-
-  var computed_label = "";
-  var computed_label_source = SOURCE.NONE;
-  var de = link.dom_element;
-
-  if (de.has_aria_labelledby) {
-    computed_label = this.element_with_id_cache.getTextFromIds(de.aria_labelledby);
-    computed_label_source = SOURCE.ARIA_LABELLEDBY;
-  }
-  else if (de.has_aria_label) {
-    computed_label = de.aria_label;
-    computed_label_source = SOURCE.ARIA_LABEL;
-  }
-  else if (de.has_title) {
-    computed_label = de.title;
-    computed_label_source = SOURCE.TITLE_ATTRIBUTE;
-  }
-  else {
-    computed_label = de.getText();
-    computed_label_source = SOURCE.TEXT_CONTENT;
-  }
-angeEvents
+ * @method   hasChangeEvents
  *
  * @memberOf OpenAjax.a11y.cache.DOMElement
  *

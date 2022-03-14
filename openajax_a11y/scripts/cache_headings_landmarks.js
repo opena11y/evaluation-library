@@ -743,6 +743,21 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
       }
       else {
 
+        if ((dom_element.tag_name === 'header') &&
+            (!dom_element.parent_landmark &&
+             (!dom_element.has_role || dom_element.role === 'banner') &&
+             !landmark_info.inside_sectioning_element)) {
+          dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
+          dom_element.implicit_role = 'banner';
+        }
+
+        if ((dom_element.tag_name === 'footer') &&
+            (!dom_element.parent_landmark &&
+             (!dom_element.has_role  || dom_element.role === 'contentinfo') &&
+             !landmark_info.inside_sectioning_element)) {
+          dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
+          dom_element.implicit_role = 'contentinfo';
+        }
 
         if (dom_element.has_role) {
           le = new OpenAjax.a11y.cache.LandmarkElement(dom_element);
@@ -757,19 +772,23 @@ OpenAjax.a11y.cache.HeadingsLandmarksCache.prototype.updateCacheItems = function
             this.dom_cache.getNameFromARIALabel(le, "COMPLEMENTARY");
             break;
 
-          case 'footer':
-            le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
-            this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
-            break;
-
           case 'form':
             le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'form');
             this.dom_cache.getNameFromARIALabel(le, "FORM", true);
             break;
 
+          case 'footer':
+            if (dom_element.implicit_role === 'contentinfo') {
+              le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'contentinfo');
+              this.dom_cache.getNameFromARIALabel(le, "CONTENTINFO");
+            }
+            break;
+
           case 'header':
-            le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
-            this.dom_cache.getNameFromARIALabel(le, "BANNER");
+            if (dom_element.implicit_role === 'banner') {
+              le = new OpenAjax.a11y.cache.LandmarkElement(dom_element, 'banner');
+              this.dom_cache.getNameFromARIALabel(le, "BANNER");
+            }
             break;
 
           case 'nav':
@@ -1270,20 +1289,6 @@ OpenAjax.a11y.cache.SectionElement.prototype.toString = function () {
 
 OpenAjax.a11y.cache.LandmarkElement = function (dom_element, landmark) {
 
-  if ((dom_element.tag_name === 'footer') &&
-      (dom_element.parent_landmark === null) &&
-      (!dom_element.has_role || (dom_element.role === 'contentinfo'))) {
-    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['footer[contentinfo]'];
-    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
-  }
-
-  if ((dom_element.tag_name === 'header') &&
-      (dom_element.parent_landmark === null) &&
-      (!dom_element.has_role || (dom_element.role === 'banner'))) {
-    dom_element.element_aria_info = OpenAjax.a11y.ariaInHTML.elementInfo['header[banner]'];
-    dom_element.implicit_role = dom_element.element_aria_info.defaultRole;
-  }
-
   this.dom_element           = dom_element;
   this.cache_id              = "";
   this.document_order        = 0;
@@ -1645,13 +1650,13 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h2;
       this.nesting_parent_heading  = heading_info.nesting_h2;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h2;
         this.last_landmark_parent_heading = le.heading_info.nesting_h2;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -1664,15 +1669,15 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h3;
       this.nesting_parent_heading  = heading_info.nesting_h3;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h3;
         this.last_landmark_parent_heading = le.heading_info.nesting_h3;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -1685,17 +1690,17 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h4;
       this.nesting_parent_heading  = heading_info.nesting_h4;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h3;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h3;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h4;
         this.last_landmark_parent_heading = le.heading_info.nesting_h4;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
     break;
@@ -1707,19 +1712,19 @@ OpenAjax.a11y.cache.HeadingElement = function (dom_element, landmark_info, headi
       this.last_parent_heading     = heading_info.nesting_h5;
       this.nesting_parent_heading  = heading_info.nesting_h5;
 
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h4;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h3;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h2;
-      if (this.last_parent_heading === null) this.last_parent_heading = heading_info.nesting_h1;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h4;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h3;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h2;
+      if (!this.last_parent_heading) this.last_parent_heading = heading_info.nesting_h1;
 
       if (le) {
         this.landmark_parent_heading      = le.heading_info.nesting_h5;
         this.last_landmark_parent_heading = le.heading_info.nesting_h5;
 
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h4;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
-        if (this.last_landmark_parent_heading === null) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h4;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h3;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h2;
+        if (!this.last_landmark_parent_heading) this.last_landmark_parent_heading = le.heading_info.nesting_h1;
       }
     }
 
@@ -2283,7 +2288,7 @@ OpenAjax.a11y.cache.H1Element = function (dom_element, main_landmark) {
 OpenAjax.a11y.cache.H1Element.prototype.isH1UsedAsLabelForMainRole = function () {
 
   if (this.dom_element.id.length === 0 ||
-      this.main_landmark === null) {
+      !this.main_landmark) {
     this.is_label_for_main = false;
     return;
   }

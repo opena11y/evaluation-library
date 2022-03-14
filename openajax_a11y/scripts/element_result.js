@@ -96,10 +96,20 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
   this.result_message       = "";
   this.position = 0;
 
+  this.html_attrs = {};
+  this.aria_attrs = {};
+
+  this.nameSource = ['not defined', 'none', 'label[for]', 'label', 'title attribute', 'value attribute', 'alt attribute', 'type attribute', 'text content', 'aria-lablledby', 'aria-label', 'caption element', 'summary attribute'];
+  this.descSource = ['not defined', 'none', 'title attribute', 'aria-describedby', 'summary attribute'];
+  this.visibility = ['not defined', 'unkown', 'hidden', 'visible'];
+
 //  OpenAjax.a11y.logger.debug("Rule: " + elem_identifier + " (" + (typeof elem_identifier) + ")");
 
-  if (typeof elem_identifier === 'string') this.element_identifier = elem_identifier;
-  else this.element_identifier = cache_item.toString();
+  if (typeof elem_identifier === 'string') {
+    this.element_identifier = elem_identifier;
+  } else {
+    this.element_identifier = cache_item.toString();
+  }
 
   this.primary_element_info = false;
   this.secondary_element_info_array = [];
@@ -112,12 +122,70 @@ OpenAjax.a11y.ElementResult = function (rule_result, result_value, cache_item, m
 //  OpenAjax.a11y.logger.debug("Rule: " + this.getRuleId() + "Prop: " + typeof props);
 
   this.cache_item    = cache_item;
+  this.dom_element = cache_item;
 
-  if (cache_item.dom_element && cache_item.dom_element.node) this.dom_node = cache_item.dom_element.node;
-  else this.dom_node = cache_item.node;
-
+  if (cache_item.dom_element) {
+    this.dom_element = cache_item.dom_element;
+  } else {
+    if (cache_item.type === Node.TEXT_NODE) {
+      this.dom_element = cache_item.parent_element;
+    }
+  }
+  this.dom_node = cache_item.node;
 };
 
+
+ /**
+ * @method getTagName
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets tag name for the element results
+ *
+ * @return {String} tag name of the element
+ */
+OpenAjax.a11y.ElementResult.prototype.getTagName = function () {
+   var tag_name = this.dom_element.tag_name;
+
+   if (!tag_name && (this.dom_node.type === Node.TEXT_NODE)) {
+      tag_name = this.dom_node.parentNode.tagName;
+   }
+
+   if (!tag_name && (this.dom_node.type === Node.ELEMENT_NODE)) {
+      tag_name = this.dom_node.tagName;
+   }
+
+   if ((tag_name === 'input') ||
+       (tag_name === 'button')) {
+      var type = this.dom_element.node.type;
+      if (type) {
+        tag_name += '[type=' + type + ']';
+      }
+   }
+
+   if (tag_name === 'body') {
+    tag_name = 'page';
+   }
+
+   return tag_name;
+};
+
+ /**
+ * @method getRole
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets role attribute for the element results
+ *
+ * @return {String} Role attribute of the element
+ */
+OpenAjax.a11y.ElementResult.prototype.getRole = function () {
+  var role = '';
+  if (this.dom_element.has_role) {
+   role = this.dom_element.role;
+  }
+  return role;
+};
 
  /**
  * @method getRule
@@ -133,7 +201,186 @@ OpenAjax.a11y.ElementResult.prototype.getRule = function () {
    return this.getRuleResult().getRule();
 };
 
+ /**
+ * @method checkForAttribute
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Tests to see if the DOM element has
+ *       a specific property defined
+ *       if it is defined add it to the object
+ *
+ * @param {Object} Collection of attributes
+ * @param {String} Test attribute
+ */
+OpenAjax.a11y.ElementResult.prototype.checkForAttribute = function (attrs, attr, attr_name) {
+  if (typeof attr_name !== 'string') {
+    attr_name = attr;
+  }
+  if (attr_name.indexOf('aria_') >= 0) {
+    attr_name = attr_name.replace('_', '-');
+  }
+  if (this.dom_element['has_' + attr]) {
+    attrs[attr_name] = this.dom_element[attr];
+  }
+};
 
+ /**
+ * @method getHTMLAttributes
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets common HTML attributes related to elements
+ *       some elements have special props like alt
+ *
+ * @return {Object} see description
+ */
+OpenAjax.a11y.ElementResult.prototype.getHTMLAttributes = function () {
+  if (this.dom_element.html_attrs) {
+    return this.dom_element.html_attrs;
+  }
+  return {};
+};
+
+ /**
+ * @method getAriaAttributes
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets common HTML attributes related to elements
+ *       some elements have special props like alt
+ *
+ * @return {Object} see description
+ */
+OpenAjax.a11y.ElementResult.prototype.getAriaAttributes = function () {
+  if (this.dom_element.aria_attrs) {
+    return this.dom_element.aria_attrs;
+  }
+  return {};
+};
+
+ /**
+ * @method getAccessibleNameInfo
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets accessible name and description information
+ *
+ * @return {Object}
+ */
+OpenAjax.a11y.ElementResult.prototype.getAccessibleNameInfo = function () {
+  var info = {}, dp = false;
+
+  // If the results are dom_element object, they do not have names, like for CCR rule
+  info.name_possible = this.dom_element !== this.cache_item;
+
+  if (this.dom_element) {
+    if (this.dom_element.role) {
+      dp = OpenAjax.a11y.aria.designPatterns[this.dom_element.role];
+    } else {
+      if (this.dom_element.implicit_role) {
+        dp = OpenAjax.a11y.aria.designPatterns[this.dom_element.implicit_role];
+      }
+    }
+  }
+
+  if (dp) {
+    info.name_required   = dp.nameRequired;
+    info.name_prohibited = dp.nameProhibited;
+  }
+
+  if (this.cache_item.accessible_name) {
+    info.name = this.cache_item.accessible_name;
+    if (this.cache_item.accessible_name_source) {
+      info.name_source = this.nameSource[this.cache_item.accessible_name_source];
+    } else {
+      if (this.cache_item.computed_label_source) {
+        info.name_source = this.nameSource[this.cache_item.computed_label_source];
+      }
+    }
+  } else {
+    if (this.cache_item.computed_label) {
+      info.name = this.cache_item.computed_label;
+      info.name_source = this.nameSource[this.cache_item.computed_label_source];
+    } else {
+      // This option is for heading cache items
+      if (this.cache_item.name) {
+        info.name = this.cache_item.name;
+        info.name_source = this.nameSource[OpenAjax.a11y.SOURCE.TEXT_CONTENT];
+      }
+    }
+  }
+
+  if (!info.name) {
+    info.name = '';
+    info.name_source = ''
+  }
+
+  if (this.cache_item.accessible_description) {
+    info.desc = this.cache_item.accessible_discription;
+    info.desc_source = this.descSource*=(this.cache_item.accessible_discription_source);
+  }
+
+  return info;
+};
+
+
+ /**
+ * @method getColorContrastInfo
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets color contrast information for an element result
+ *
+ * @return {Object}
+ */
+OpenAjax.a11y.ElementResult.prototype.getColorContrastInfo = function () {
+  var info = {};
+  var cs;
+  var rule = this.rule_result.getRule();
+
+  if (rule && (rule.getId() === 'COLOR_1') &&
+      this.dom_element) {
+    cs = this.dom_element.computed_style;
+    if (cs) {
+      info.color_contrast_ratio  = cs.color_contrast_ratio;
+      info.color                 = cs.color;
+      info.color_hex             = '#' + cs.color_hex;
+      info.background_color      = cs.background_color;
+      info.background_color_hex  = '#' + cs.background_color_hex;
+      info.font_family           = cs.font_family;
+      info.font_size             = cs.font_size;
+      info.font_weight           = cs.font_weight;
+      info.large_font            = cs.is_large_font ? 'Yes' : 'no';
+      info.background_image      = cs.background_image;
+      info.background_repeat     = cs.background_repeat;
+      info.background_position   = cs.background_position;
+    }
+  }
+  return info;
+};
+
+ /**
+ * @method getVisibilityInfo
+ *
+ * @memberOf OpenAjax.a11y.ElementResult
+ *
+ * @desc Gets visibility information for an element result
+ *
+ * @return {Object}
+ */
+OpenAjax.a11y.ElementResult.prototype.getVisibilityInfo = function () {
+  var info = {};
+  var cs;
+  if (this.dom_element) {
+    cs = this.dom_element.computed_style;
+    if (cs) {
+      info.graphical_rendering  = this.visibility[cs.is_visible_onscreen];
+      info.assistive_technology = this.visibility[cs.is_visible_to_at];
+    }
+  }
+  return info;
+};
 
  /**
  * @method getRuleResult
@@ -444,7 +691,7 @@ OpenAjax.a11y.ElementResult.prototype.getDOMElement = function () {
  *
  * @desc Gets accessible name of cache item if it exists or its text content
  *
- * @returns {String}
+ * @returns {Array} Array of
  */
 
 OpenAjax.a11y.ElementResult.prototype.getAccessibleName = function () {

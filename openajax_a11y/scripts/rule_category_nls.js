@@ -50,7 +50,7 @@ OpenAjax.a11y.nls.RuleCategories = function() {
 
     addNLS : function (loc, nls_info) {
 
-      OpenAjax.a11y.logger.info("[RuleCategories] Adding NLS: " + loc);
+//      OpenAjax.a11y.logger.info("[RuleCategories] Adding NLS: " + loc);
 
       rcs_nls[loc] = new OpenAjax.a11y.nls.RuleCategoriesNLS(loc, nls_info.abbreviation, nls_info.title, nls_info.url, nls_info.rule_categories);
 

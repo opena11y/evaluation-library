@@ -1032,13 +1032,14 @@ OpenAjax.a11y.RuleManager = function () {
 
         var errors = false;
 
-        if (typeof rule_item.rule_id !== 'string') {
-          OpenAjax.a11y.logger.error("[RuleManager]  ** Rule ID is missing");
-          errors = true;
+        // If library is loaded in a page, ignore reloading of a rule already loaded
+        if (this.getRuleByRuleId(rule_item.rule_id)) {
+          // OpenAjax.a11y.logger.error("[RuleManager]  ** Duplicate Rule ID: " + rule_item.rule_id);
+          return false;
         }
 
-        if (this.getRuleByRuleId(rule_item.rule_id)) {
-          OpenAjax.a11y.logger.error("[RuleManager]  ** Duplicate Rule ID: " + rule_item.rule_id);
+        if (typeof rule_item.rule_id !== 'string') {
+          OpenAjax.a11y.logger.error("[RuleManager]  ** Rule ID is missing");
           errors = true;
         }
 

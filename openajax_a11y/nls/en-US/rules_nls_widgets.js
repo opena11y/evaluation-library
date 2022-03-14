@@ -572,7 +572,7 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
               ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
             },
             PURPOSE: [
-              'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton).',
+              'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
               'Screen readers typcially render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
               '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
               'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
@@ -948,27 +948,27 @@ OpenAjax.a11y.RuleManager.addRulesNLSFromJSON('en-us', {
         },
         WIDGET_16: {
             ID:                    'Widget 16',
-            DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) %s be manually checked for accessibility requirements.',
-            SUMMARY:               'Custom element requires manual check.',
-            TARGET_RESOURCES_DESC: 'Custom elements created using web components API.',
+            DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs %s be manually checked for accessibility requirements.',
+            SUMMARY:               'Closed shadow DOM requires manual check.',
+            TARGET_RESOURCES_DESC: 'Custom elements created using web components API with closed shadow DOM.',
             RULE_RESULT_MESSAGES: {
-              MANUAL_CHECK_S:  'Verify the custom element meets WCAG accessibility requirments.',
-              MANUAL_CHECK_P:  'Verify the %N_MC custom elements meet WCAG accessibility requirments.',
-              HIDDEN_S: 'A custom element is hidden and only needs to be checked if has features that become visible need to be checked for accessbility.',
-              HIDDEN_P: '%N_H custom elements are hidden and only the custom elements with features that may become visible need to be checked for accessibility.',
+              MANUAL_CHECK_S:  'Verify the custom element with a closed shadow DOM meets WCAG accessibility requirments.',
+              MANUAL_CHECK_P:  'Verify the %N_MC custom elements with a closed shadow DOM meet WCAG accessibility requirments.',
+              HIDDEN_S: 'A custom element with a closed shadow DOM is hidden and only needs to be checked if has features that become visible need to be checked for accessbility.',
+              HIDDEN_P: '%N_H custom elements with a closed shadow DOM are hidden and only the custom elements with features that may become visible need to be checked for accessibility.',
               NOT_APPLICABLE:  'No custom elements found on the page.'
             },
             NODE_RESULT_MESSAGES: {
-              ELEMENT_MC_1:       'Verify the accessibility of the features of the custom component with the tag name of @%1@ using manual checking techniques or automated tools that can anlyze the shadow DOM of custom elements.',
-              ELEMENT_HIDDEN_1:  'The @%1@ custom element is hidden from assistive technologies.',
+              ELEMENT_MC_1:       'Verify the accessibility of the "@%1@"" custom component with a closed shadow DOM using manual checking techniques or automated tools that can anlyze the shadow DOM of custom elements.',
+              ELEMENT_HIDDEN_1:  'The @%1@ custom element with a closed shadow DOM is hidden from assistive technologies.',
             },
             PURPOSE: [
               'Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.',
-              'Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they cannot be accessed by the evaluation library for programmatic checking of accessibility features.',
-              'The evaluation library is able to report the presence of custom elements, but can only recommend that they be manually checked for accessibility, possibly by using other DOM inspection tools to identify accessibility issues and features.'
+              'Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they can only be accessed by the evaluation library for programmatic checking of accessibility features when the shadow DOM is "open".',
+              'The evaluation library is unable to analyze custom elements created with "closed" shadow DOMs. In the case of the "closed" shadow DOM all accessibility requirements require manual checks, possibly by using other DOM inspection tools to identify accessibility issues and features.'
             ],
             TECHNIQUES: [
-              'In evaluating custom elements that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.',
+              'In evaluating custom elements with "closed" shadow DOMs that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.',
               'Test with screen readers to verify functionality is operable by a screen reader user.',
               'Test the graphical rendering in operating system using high contrast settings to verify content is perceivable by people with visual impairments.',
               'Use accessibility tools in browser DOM inspectors to assist with manual inspection, since the DOM inspector of most  browsers allows access to the Shadow DOM of the custom element.',
