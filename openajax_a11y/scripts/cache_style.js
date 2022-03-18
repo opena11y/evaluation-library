@@ -194,20 +194,16 @@ OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_elem
     this.visibility = style.getPropertyValue("visibility");
 
     this.color               = style.getPropertyValue("color");
-    this.opacity             = style.getPropertyValue("opacity");
+    this.backgroundColor     = style.getPropertyValue("background-color");
+    this.opacity             = this.normalizeOpacity(style, parent_element);
 
-    this.background_color    = style.getPropertyValue("background-color");
-    this.background_image    = normalizeBackgroundImage(style.getPropertyValue("background-image"), parent_element);
-    this.background_repeat   = style.getPropertyValue("background-repeat");
-    this.background_position = style.getPropertyValue("background-position");
+    this.backgroundImage     = this.normalizeBackgroundImage(style, parent_element);
+    this.backgroundRepeat    = style.getPropertyValue("background-repeat");
+    this.backgroundPosition  = style.getPropertyValue("background-position");
 
-    this.outline_style    = style.getPropertyValue("outline-style");
-    this.outline_color    = style.getPropertyValue("outline-color");
-    this.outline_width    = style.getPropertyValue("outline-width");
-
-    this.font_family = style.getPropertyValue("font-family");
-    this.font_size   = normalizeFontSize(style.getPropertyValue("font-size"), parent_element);
-    this.font_weight = normalizeFontWeight(style.getPropertyValue("font-weight"), parent_element);
+    this.fontFamily = style.getPropertyValue("font-family");
+    this.fontSize   = this.normalizeFontSize(style, parent_element);
+    this.fontWeight = this.normalizeFontWeight(style, parent_element);
 
     this.position = style.getPropertyValue("position");
   }

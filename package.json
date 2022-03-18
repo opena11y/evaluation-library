@@ -6,13 +6,21 @@
     "type": "git",
     "url": "git+https://github.com/ainspector/a11y-evaluation-library.git"
   },
-  "keywords": ["evalution library", "accessibility", "wcag", "aria"],
+  "keywords": [
+    "evalution library",
+    "accessibility",
+    "wcag",
+    "aria"
+  ],
   "author": "Jon Gunderson",
   "license": "Apache License, Version 2.0",
   "bugs": {
     "url": "https://github.com/ainspector/a11y-evaluation-library/issues"
   },
   "homepage": "https://github.com/ainspector/a11y-evaluation-library#readme",
-  "eslintConfig": {
+  "eslintConfig": {},
+  "dependencies": {
+    "eslint": "^8.11.0",
+    "rollup": "^2.70.1"
   }
 }
