@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-echo "... Creating evalaution-library.js ..."
-npx eslint -c eslint.json src/*.js
+echo "... Creating evaluation-library.js ..."
+npx eslint src/*.js
 rollup -c
