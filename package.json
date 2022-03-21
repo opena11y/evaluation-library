@@ -19,4 +19,8 @@
   },
   "homepage": "https://github.com/opena11y/evaluation-library#readme",
   "eslintConfig": {},
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "rollup": "^2.70.1"
+  }
 }
