@@ -27,7 +27,7 @@ function debugSeparator (debug, moduleName) {
 /* colorContrast.js */
 
 // Debug resources
-const debug$4 = false;
+const debug$4 = true;
 const moduleName$4 = 'ColorContrast';
 
 // Constants
@@ -557,7 +557,7 @@ class Visibility {
 /* domElement.js */
 
 // Debug constants
-const debug$2 = true;
+const debug$2 = false;
 const moduleName$2 = 'domElement';
 
 /**

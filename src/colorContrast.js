@@ -1,7 +1,7 @@
 /* colorContrast.js */
 
 // Debug resources
-const debug = false;
+const debug = true;
 const moduleName = 'ColorContrast';
 
 // Imports

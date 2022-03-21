@@ -1,7 +1,7 @@
 /* domElement.js */
 
 // Debug constants
-const debug = true;
+const debug = false;
 const moduleName = 'domElement';
 
 // Imports

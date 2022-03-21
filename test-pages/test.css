@@ -40,3 +40,22 @@ heading-webcomponent {
 .content {
 	padding: 0.25em;
 }
+
+.center {
+	text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid darkblue;
+}
+
+table thead th {
+	padding: 0.25em 1em;
+  background-color: darkblue;
+  color:  white;
+}
+
+table tbody td {
+	padding: 0.25em 1em;
+}
