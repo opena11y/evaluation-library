@@ -1,11 +1,11 @@
 /* domCache.js */
 
 // Debug tools
-const debug = true;
+const debug = false;
 const moduleName = 'domCache';
 
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
 
 // Imports
 import DOMElement  from './domElement.js';

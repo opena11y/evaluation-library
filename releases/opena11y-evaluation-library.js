@@ -17,7 +17,7 @@ function debugSeparator (moduleName) {
 }
 
 /* colorContrast.js */
-const moduleName$2 = 'ColorContrast';
+const moduleName$1 = 'ColorContrast';
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -36,23 +36,28 @@ const fontWeightBold = 300;
 
 class ColorContrast {
   constructor (parentDomElement, elementNode) {
-    let parentComputedStyle = parentDomElement ? parentDomElement.computedStyle : false;
+    let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    this.opacity            = this.normalizeOpacity(style, parentComputedStyle);
+    {
+      debugSeparator(moduleName$1);
+      debugTag(elementNode, moduleName$1);
+    }
+
+    this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
     this.color              = style.getPropertyValue("color");
     this.colorHex           = this.RGBToHEX(this.color, this.opacity);
-    this.backgroundColor    = this.normalizeBackgroundColor(style, parentComputedStyle);
+    this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
     this.backgroundColorHex = this.RGBToHEX(this.backgroundColor);
 
-    this.backgroundImage    = this.normalizeBackgroundImage(style, parentComputedStyle);
+    this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
     this.backgroundPosition = style.getPropertyValue("background-position");
 
     this.fontFamily = style.getPropertyValue("font-family");
-    this.fontSize   = this.normalizeFontSize(style, parentComputedStyle);
-    this.fontWeight = this.normalizeFontWeight(style, parentComputedStyle);
+    this.fontSize   = this.normalizeFontSize(style, parentColorContrast);
+    this.fontWeight = this.normalizeFontWeight(style, parentColorContrast);
     this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
 
     const L1 = this.getLuminance(this.colorHex);
@@ -60,18 +65,16 @@ class ColorContrast {
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
     {
-      debugSeparator(moduleName$2);
-      debugTag(elementNode, moduleName$2);
-      debugMessage(`[      opacity]: ${this.opacity}`, moduleName$2);
-      debugMessage(`[        color]: ${this.color}`, moduleName$2);
-      debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName$2);
-      debugMessage(`[   background]: ${this.backgroundColor}`, moduleName$2);
-      debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName$2);
-      debugMessage(`\n[   fontFamily]: ${this.fontFamily}`, moduleName$2);
-      debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName$2);
-      debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName$2);
-      debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName$2);
-      debugMessage(`\n[          ccr]: ${this.colorContrastRatio}`, moduleName$2);
+      debugMessage(`[      opacity]: ${this.opacity}`, moduleName$1);
+      debugMessage(`[        color]: ${this.color}`, moduleName$1);
+      debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName$1);
+      debugMessage(`[   background]: ${this.backgroundColor}`, moduleName$1);
+      debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName$1);
+      debugMessage(`[   fontFamily]: ${this.fontFamily}`, moduleName$1);
+      debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName$1);
+      debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName$1);
+      debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName$1);
+      debugMessage(`[          ccr]: ${this.colorContrastRatio}`, moduleName$1);
     }
   }
 
@@ -81,14 +84,22 @@ class ColorContrast {
    * @desc Normalizes opacity to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing the opacity
    */
 
-  normalizeOpacity (style, parentComputedStyle) {
+  normalizeOpacity (style, parentColorContrast) {
     let opacity = style.getPropertyValue("opacity");
+    let parentOpacity = 1.0;
+    debugMessage(`[opacity][parentColorContrast]: ${parentColorContrast}`, moduleName$1);
+
+    if (parentColorContrast) {
+      parentOpacity = parentColorContrast.opacity;
+    }
+
+    debugMessage(`[opacity][A]: ${opacity} (${typeof opacity})  [parentOpacity]: ${parentOpacity} (${typeof parentOpacity}) `, moduleName$1);
 
     if (isNaN(opacity)) {
       opacity = opacity.toLowerCase();
@@ -96,7 +107,7 @@ class ColorContrast {
       switch (opacity) {
         case 'inherit':
         case 'unset':
-          opacity = parentComputedStyle.opacity;
+          opacity = parentOpacity;
           break;
 
         case 'initial':
@@ -108,23 +119,33 @@ class ColorContrast {
           if (opacity.indexOf('%')) {
             opacity = parseInt(opacity.split('%')[0]);
             if (isNaN(opacity)) {
-              opacity = 1.0;
+              opacity = parentOpacity;
             } else {
-              opacity = opacity / 100;
+              opacity = parentOpacity * (opacity / 100);
             }
           }
           else {
-            opacity = parseFloat(opacity);
+            opacity = parseFloat(opacity) * parentOpacity;
             if (isNaN(opacity)) {
               opacity = 1.0;
             }
           }
           break;
       }  // end switch
+    } else {
+      opacity = parseFloat(opacity) * parentOpacity;
+      if (isNaN(opacity)) {
+        opacity = 1.0;
+      }
+
     }
+
+    debugMessage(`[opacity][B]: ${opacity} (${typeof opacity})`, moduleName$1);
 
     // Make sure opacity is between 0 and 1
     opacity = Math.max(Math.min(opacity, 1.0), 0.0);
+
+    debugMessage(`[opacity][C]: ${opacity} (${typeof opacity})`, moduleName$1);
 
     return opacity;
   }  
@@ -135,21 +156,20 @@ class ColorContrast {
    * @desc Normalizes background color
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {String}  Returns the background color
    */
 
-  normalizeBackgroundColor (style, parentComputedStyle) {
+  normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-
-    if ((backgroundColor.indexOf("0, 0, 0, 0") > 0) ||
-        (backgroundColor == 'transparent') ||
+    debugMessage(`[normalizeBackgroundColor]: ${backgroundColor}`);
+    if ((backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      if (parentComputedStyle) {
-        backgroundColor   = parentComputedStyle.backgroundCcolor;
+      if (parentColorContrast) {
+        backgroundColor   = parentColorContrast.backgroundCcolor;
       }
       else {
         // This is an edge case test typcially for body elements and frames
@@ -165,20 +185,20 @@ class ColorContrast {
    * @desc Normalizes background image 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {String}  Returns a reference to a background image URL or none
    */
 
-  normalizeBackgroundImage (style, parentComputedStyle) {
+  normalizeBackgroundImage (style, parentColorContrast) {
     let backgroundImage = style.getPropertyValue("background-image").toLowerCase();
 
     if ((backgroundImage === 'inherit') ||
         (backgroundImage === 'none') ||
         (backgroundImage === '')) {
-      if (parentComputedStyle) {
-        backgroundImage = parentComputedStyle.backgroundImage;
+      if (parentColorContrast) {
+        backgroundImage = parentColorContrast.backgroundImage;
       }
       else {
         backgroundImage = 'none';
@@ -193,18 +213,18 @@ class ColorContrast {
    * @desc Normalizes font size to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font size value in pixels (px)
    */
 
-  normalizeFontSize (style, parentComputedStyle) {
+  normalizeFontSize (style, parentColorContrast) {
     let fontSize = style.getPropertyValue("font-size");
     if (isNaN(fontSize)) {
       if (fontSize.toLowerCase() == 'inherit') {
-        if (parentComputedStyle) {
-          fontSize = parentComputedStyle.fontSize;
+        if (parentColorContrast) {
+          fontSize = parentColorContrast.fontSize;
         }
         else {
           fontSize = defaultFontSize;
@@ -225,13 +245,13 @@ class ColorContrast {
    * @desc Normalizes font weight to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font weight value
    */
 
-  normalizeFontWeight (style, parentComputedStyle) {
+  normalizeFontWeight (style, parentColorContrast) {
     let fontWeight = style.getPropertyValue("font-weight");
 
     if (isNaN(fontWeight)) {
@@ -245,8 +265,8 @@ class ColorContrast {
         break;
 
       case 'inherit':
-        if (parentComputedStyle) {
-          fontWeight = parentComputedStyle.fontWeight;
+        if (parentColorContrast) {
+          fontWeight = parentColorContrast.fontWeight;
         }
         else {
           fontWeight = 400;
@@ -338,7 +358,8 @@ class ColorContrast {
         case 3:
           // RGB values to HEX value
           rgbParts.forEach( rgbColor => {
-            value = opacity * Math.round(parseFloat(rgbColor));
+            value = Math.round(opacity * Math.round(parseFloat(rgbColor)));
+            debugMessage(`[rgbColor]: ${rgbColor} [opacity]: ${opacity}  [value]: ${value} `, moduleName$1);
             hex.push(toHex(value));            
           });
           colorHex = hex.join('');
@@ -350,7 +371,7 @@ class ColorContrast {
           // remove A value from array
           rgbParts.pop();
           rgbParts.forEach( rgbColor => {
-            value = opacity * A * Math.round(parseFloat(rgbColor));
+            value = Math.round(opacity * A * Math.round(parseFloat(rgbColor)));
             hex.push(toHex(value));            
           });
           colorHex = hex.join('');
@@ -397,14 +418,14 @@ class ColorContrast {
 
 class Visibility {
   constructor (parentDomElement, elementNode) {
-    let parentComputedStyle = parentDomElement ? parentDomElement.computedStyle : false;
+    let parentVisibility = parentDomElement ? parentDomElement.visibility : false;
     let style = window.getComputedStyle(elementNode, null);
     let tagName = elementNode.tagName ? elementNode.tagName : '';
 
-    this.isHidden           = this.normalizeHidden (elementNode, parentComputedStyle);
-    this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentComputedStyle);
-    this.isDisplayNone      = this.normalizeDisplay (style, parentComputedStyle);
-    this.isVisibilityHidden = this.normalizeVisibility (style, parentComputedStyle);
+    this.isHidden           = this.normalizeHidden (elementNode, parentVisibility);
+    this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
+    this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
+    this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -431,19 +452,19 @@ class Visibility {
    * @desc Determine if the hidden attribute is set on this element
    *       or one of its ancestors 
    *
-   * @param {Object}  node                 - dom element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns true if element or one of its ancestors has the 
    *                    hidden attribute 
    */
 
-  normalizeHidden (node, parentComputedStyle) {
+  normalizeHidden (node, parentVisibility) {
     let hidden = node.getAttribute('hidden');
     hidden = hidden ? true : false;
-    if (parentComputedStyle && 
-        parentComputedStyle.hidden)  {
+    if (parentVisibility &&
+        parentVisibility.hidden)  {
       hidden = true;
     }
     return hidden;
@@ -455,23 +476,23 @@ class Visibility {
    * @desc Determine if the aria-hidden attribute is set to true on this element
    *       or one of its ancestors 
    *
-   * @param {Object}  node                 - dom element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns true if element or one of its ancestors has the 
    *                    aria-hidden attribute set to true 
    */
 
-  normalizeAriaHidden (node, parentComputedStyle) {
+  normalizeAriaHidden (node, parentVisibility) {
     let ariaHidden = node.getAttribute('aria-hidden');
     if (ariaHidden) {
       ariaHidden = ariaHidden.toLowerCase();
     }
     ariaHidden = (ariaHidden === 'true') ? true : false;
 
-    if (parentComputedStyle && 
-        parentComputedStyle.ariaHidden)  {
+    if (parentVisibility &&
+        parentVisibility.ariaHidden)  {
       ariaHidden = true;
     }
     return ariaHidden;
@@ -484,19 +505,19 @@ class Visibility {
    *       ancestor that results in content not being displayed based on 
    *       the CSS display property
    *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns a true if content is visible
    */
 
-  normalizeDisplay (style, parentComputedStyle) {
+  normalizeDisplay (style, parentVisibility) {
     let display = style.getPropertyValue("display");
     let isDisplayNone = false;
 
     if ((display === 'none') || 
-        (parentComputedStyle && parentComputedStyle.isDisplayNone)) {
+        (parentVisibility && parentVisibility.isDisplayNone)) {
       isDisplayNone = true;
     }
 
@@ -510,14 +531,14 @@ class Visibility {
    *       ancestor that results in content not being displayed based on 
    *       the CSS visibility property
    *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns a true if content is visible
    */
 
-  normalizeVisibility (style, parentComputedStyle) {
+  normalizeVisibility (style, parentVisibility) {
     let visibility = style.getPropertyValue("visibility");
     let isVisibilityHidden = false; 
 
@@ -531,7 +552,6 @@ class Visibility {
 }
 
 /* domElement.js */
-const moduleName$1 = 'domElement';
 
 /**
  * @class DOMElement
@@ -551,7 +571,6 @@ class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
-    debugTag(moduleName$1, elementNode);
   }
 
   get isDomText () {
@@ -604,6 +623,7 @@ class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
+    debugg && debugMessage('[addTextNode]: ' + s + ' (' + s.length + ')', moduleName);
   }
 }
 

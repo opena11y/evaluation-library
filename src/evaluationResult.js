@@ -5,7 +5,7 @@ const debug = false;
 const moduleName = 'evaluationResult';
 
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage}  from './debug.js';
 
 export default class EvaluationResult {
   constructor (domCache, title, url) {
@@ -14,8 +14,8 @@ export default class EvaluationResult {
     this.url = url;
 
     if (debug) {
-      debugMessage('[title]: ' + this.title, moduleName);
-      debugMessage('[  url]: ' + this.url, moduleName);
+      debugMessage(`[title]: ${this.title}`, moduleName);
+      debugMessage(`[  url]: ${this.url}`,   moduleName);
     }
   }
 }

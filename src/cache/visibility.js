@@ -5,7 +5,7 @@ const debug = false;
 const moduleName = 'visibility';
 
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
 
 // Constants
 
@@ -21,14 +21,14 @@ import {debugMessage, debugTag, debugSeparator}  from './debug.js';
 
 export default class Visibility {
   constructor (parentDomElement, elementNode) {
-    let parentComputedStyle = parentDomElement ? parentDomElement.computedStyle : false;
+    let parentVisibility = parentDomElement ? parentDomElement.visibility : false;
     let style = window.getComputedStyle(elementNode, null);
     let tagName = elementNode.tagName ? elementNode.tagName : '';
 
-    this.isHidden           = this.normalizeHidden (elementNode, parentComputedStyle);
-    this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentComputedStyle);
-    this.isDisplayNone      = this.normalizeDisplay (style, parentComputedStyle);
-    this.isVisibilityHidden = this.normalizeVisibility (style, parentComputedStyle);
+    this.isHidden           = this.normalizeHidden (elementNode, parentVisibility);
+    this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
+    this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
+    this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -66,19 +66,19 @@ export default class Visibility {
    * @desc Determine if the hidden attribute is set on this element
    *       or one of its ancestors 
    *
-   * @param {Object}  node                 - dom element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns true if element or one of its ancestors has the 
    *                    hidden attribute 
    */
 
-  normalizeHidden (node, parentComputedStyle) {
+  normalizeHidden (node, parentVisibility) {
     let hidden = node.getAttribute('hidden');
     hidden = hidden ? true : false;
-    if (parentComputedStyle && 
-        parentComputedStyle.hidden)  {
+    if (parentVisibility &&
+        parentVisibility.hidden)  {
       hidden = true;
     }
     return hidden;
@@ -90,23 +90,23 @@ export default class Visibility {
    * @desc Determine if the aria-hidden attribute is set to true on this element
    *       or one of its ancestors 
    *
-   * @param {Object}  node                 - dom element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns true if element or one of its ancestors has the 
    *                    aria-hidden attribute set to true 
    */
 
-  normalizeAriaHidden (node, parentComputedStyle) {
+  normalizeAriaHidden (node, parentVisibility) {
     let ariaHidden = node.getAttribute('aria-hidden');
     if (ariaHidden) {
       ariaHidden = ariaHidden.toLowerCase();
     }
     ariaHidden = (ariaHidden === 'true') ? true : false;
 
-    if (parentComputedStyle && 
-        parentComputedStyle.ariaHidden)  {
+    if (parentVisibility &&
+        parentVisibility.ariaHidden)  {
       ariaHidden = true;
     }
     return ariaHidden;
@@ -119,19 +119,19 @@ export default class Visibility {
    *       ancestor that results in content not being displayed based on 
    *       the CSS display property
    *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns a true if content is visible
    */
 
-  normalizeDisplay (style, parentComputedStyle) {
+  normalizeDisplay (style, parentVisibility) {
     let display = style.getPropertyValue("display");
     let isDisplayNone = false;
 
     if ((display === 'none') || 
-        (parentComputedStyle && parentComputedStyle.isDisplayNone)) {
+        (parentVisibility && parentVisibility.isDisplayNone)) {
       isDisplayNone = true;
     }
 
@@ -145,14 +145,14 @@ export default class Visibility {
    *       ancestor that results in content not being displayed based on 
    *       the CSS visibility property
    *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
    *
    * @return {Boolean}  Returns a true if content is visible
    */
 
-  normalizeVisibility (style, parentComputedStyle) {
+  normalizeVisibility (style, parentVisibility) {
     let visibility = style.getPropertyValue("visibility");
     let isVisibilityHidden = false; 
 

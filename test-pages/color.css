@@ -5,3 +5,8 @@
 .bold {
   font-weight: bold;
 }
+
+.opacity {
+  color: #fff;
+  background-color: #000;
+}

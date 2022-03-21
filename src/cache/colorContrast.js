@@ -5,7 +5,7 @@ const debug = true;
 const moduleName = 'ColorContrast';
 
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -24,23 +24,28 @@ const fontWeightBold = 300;
 
 export default class ColorContrast {
   constructor (parentDomElement, elementNode) {
-    let parentComputedStyle = parentDomElement ? parentDomElement.computedStyle : false;
+    let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    this.opacity            = this.normalizeOpacity(style, parentComputedStyle);
+    if (debug) {
+      debugSeparator(moduleName);
+      debugTag(elementNode, moduleName);
+    }
+
+    this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
     this.color              = style.getPropertyValue("color");
     this.colorHex           = this.RGBToHEX(this.color, this.opacity);
-    this.backgroundColor    = this.normalizeBackgroundColor(style, parentComputedStyle);
+    this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
     this.backgroundColorHex = this.RGBToHEX(this.backgroundColor);
 
-    this.backgroundImage    = this.normalizeBackgroundImage(style, parentComputedStyle);
+    this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
     this.backgroundPosition = style.getPropertyValue("background-position");
 
     this.fontFamily = style.getPropertyValue("font-family");
-    this.fontSize   = this.normalizeFontSize(style, parentComputedStyle);
-    this.fontWeight = this.normalizeFontWeight(style, parentComputedStyle);
+    this.fontSize   = this.normalizeFontSize(style, parentColorContrast);
+    this.fontWeight = this.normalizeFontWeight(style, parentColorContrast);
     this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
 
     const L1 = this.getLuminance(this.colorHex);
@@ -48,18 +53,16 @@ export default class ColorContrast {
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
     if (debug) {
-      debugSeparator(moduleName);
-      debugTag(elementNode, moduleName);
       debugMessage(`[      opacity]: ${this.opacity}`, moduleName);
       debugMessage(`[        color]: ${this.color}`, moduleName);
       debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName);
       debugMessage(`[   background]: ${this.backgroundColor}`, moduleName);
       debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName);
-      debugMessage(`\n[   fontFamily]: ${this.fontFamily}`, moduleName);
+      debugMessage(`[   fontFamily]: ${this.fontFamily}`, moduleName);
       debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName);
       debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName);
       debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName);
-      debugMessage(`\n[          ccr]: ${this.colorContrastRatio}`, moduleName);
+      debugMessage(`[          ccr]: ${this.colorContrastRatio}`, moduleName);
     }
   }
 
@@ -69,14 +72,22 @@ export default class ColorContrast {
    * @desc Normalizes opacity to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing the opacity
    */
 
-  normalizeOpacity (style, parentComputedStyle) {
+  normalizeOpacity (style, parentColorContrast) {
     let opacity = style.getPropertyValue("opacity");
+    let parentOpacity = 1.0;
+    debugMessage(`[opacity][parentColorContrast]: ${parentColorContrast}`, moduleName);
+
+    if (parentColorContrast) {
+      parentOpacity = parentColorContrast.opacity;
+    }
+
+    debugMessage(`[opacity][A]: ${opacity} (${typeof opacity})  [parentOpacity]: ${parentOpacity} (${typeof parentOpacity}) `, moduleName);
 
     if (isNaN(opacity)) {
       opacity = opacity.toLowerCase();
@@ -84,7 +95,7 @@ export default class ColorContrast {
       switch (opacity) {
         case 'inherit':
         case 'unset':
-          opacity = parentComputedStyle.opacity;
+          opacity = parentOpacity;
           break;
 
         case 'initial':
@@ -96,23 +107,33 @@ export default class ColorContrast {
           if (opacity.indexOf('%')) {
             opacity = parseInt(opacity.split('%')[0]);
             if (isNaN(opacity)) {
-              opacity = 1.0;
+              opacity = parentOpacity;
             } else {
-              opacity = opacity / 100;
+              opacity = parentOpacity * (opacity / 100);
             }
           }
           else {
-            opacity = parseFloat(opacity);
+            opacity = parseFloat(opacity) * parentOpacity;
             if (isNaN(opacity)) {
               opacity = 1.0;
             }
           }
           break;
       }  // end switch
+    } else {
+      opacity = parseFloat(opacity) * parentOpacity;
+      if (isNaN(opacity)) {
+        opacity = 1.0;
+      }
+
     }
+
+    debugMessage(`[opacity][B]: ${opacity} (${typeof opacity})`, moduleName);
 
     // Make sure opacity is between 0 and 1
     opacity = Math.max(Math.min(opacity, 1.0), 0.0);
+
+    debugMessage(`[opacity][C]: ${opacity} (${typeof opacity})`, moduleName);
 
     return opacity;
   }  
@@ -123,21 +144,20 @@ export default class ColorContrast {
    * @desc Normalizes background color
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {String}  Returns the background color
    */
 
-  normalizeBackgroundColor (style, parentComputedStyle) {
+  normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-
-    if ((backgroundColor.indexOf("0, 0, 0, 0") > 0) ||
-        (backgroundColor == 'transparent') ||
+    debugMessage(`[normalizeBackgroundColor]: ${backgroundColor}`);
+    if ((backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      if (parentComputedStyle) {
-        backgroundColor   = parentComputedStyle.backgroundCcolor;
+      if (parentColorContrast) {
+        backgroundColor   = parentColorContrast.backgroundCcolor;
       }
       else {
         // This is an edge case test typcially for body elements and frames
@@ -153,20 +173,20 @@ export default class ColorContrast {
    * @desc Normalizes background image 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {String}  Returns a reference to a background image URL or none
    */
 
-  normalizeBackgroundImage (style, parentComputedStyle) {
+  normalizeBackgroundImage (style, parentColorContrast) {
     let backgroundImage = style.getPropertyValue("background-image").toLowerCase();
 
     if ((backgroundImage === 'inherit') ||
         (backgroundImage === 'none') ||
         (backgroundImage === '')) {
-      if (parentComputedStyle) {
-        backgroundImage = parentComputedStyle.backgroundImage;
+      if (parentColorContrast) {
+        backgroundImage = parentColorContrast.backgroundImage;
       }
       else {
         backgroundImage = 'none';
@@ -181,18 +201,18 @@ export default class ColorContrast {
    * @desc Normalizes font size to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font size value in pixels (px)
    */
 
-  normalizeFontSize (style, parentComputedStyle) {
+  normalizeFontSize (style, parentColorContrast) {
     let fontSize = style.getPropertyValue("font-size");
     if (isNaN(fontSize)) {
       if (fontSize.toLowerCase() == 'inherit') {
-        if (parentComputedStyle) {
-          fontSize = parentComputedStyle.fontSize;
+        if (parentColorContrast) {
+          fontSize = parentColorContrast.fontSize;
         }
         else {
           fontSize = defaultFontSize;
@@ -213,13 +233,13 @@ export default class ColorContrast {
    * @desc Normalizes font weight to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentComputedStyle  - Computed style information for parent 
+   * @param {Object}  parentColorContrast  - Computed style information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font weight value
    */
 
-  normalizeFontWeight (style, parentComputedStyle) {
+  normalizeFontWeight (style, parentColorContrast) {
     let fontWeight = style.getPropertyValue("font-weight");
 
     if (isNaN(fontWeight)) {
@@ -233,8 +253,8 @@ export default class ColorContrast {
         break;
 
       case 'inherit':
-        if (parentComputedStyle) {
-          fontWeight = parentComputedStyle.fontWeight;
+        if (parentColorContrast) {
+          fontWeight = parentColorContrast.fontWeight;
         }
         else {
           fontWeight = 400;
@@ -326,7 +346,8 @@ export default class ColorContrast {
         case 3:
           // RGB values to HEX value
           rgbParts.forEach( rgbColor => {
-            value = opacity * Math.round(parseFloat(rgbColor));
+            value = Math.round(opacity * Math.round(parseFloat(rgbColor)));
+            debugMessage(`[rgbColor]: ${rgbColor} [opacity]: ${opacity}  [value]: ${value} `, moduleName);
             hex.push(toHex(value));            
           });
           colorHex = hex.join('');
@@ -338,7 +359,7 @@ export default class ColorContrast {
           // remove A value from array
           rgbParts.pop()
           rgbParts.forEach( rgbColor => {
-            value = opacity * A * Math.round(parseFloat(rgbColor));
+            value = Math.round(opacity * A * Math.round(parseFloat(rgbColor)));
             hex.push(toHex(value));            
           });
           colorHex = hex.join('');

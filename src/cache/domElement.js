@@ -5,7 +5,7 @@ const debug = false;
 const moduleName = 'domElement';
 
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
 import ColorContrast  from './colorContrast.js';
 import Visibility     from './visibility.js';
 

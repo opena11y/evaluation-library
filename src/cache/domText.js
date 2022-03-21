@@ -1,11 +1,11 @@
 /* domText.js */
 
 // Debug constants
-const debug = true;
+const debug = false;
 const moduleName = 'domText';
 
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
 
 /**
  * @class DOMText
