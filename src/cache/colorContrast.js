@@ -72,7 +72,7 @@ export default class ColorContrast {
    * @desc Normalizes opacity to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing the opacity
@@ -81,13 +81,10 @@ export default class ColorContrast {
   normalizeOpacity (style, parentColorContrast) {
     let opacity = style.getPropertyValue("opacity");
     let parentOpacity = 1.0;
-    debugMessage(`[opacity][parentColorContrast]: ${parentColorContrast}`, moduleName);
 
     if (parentColorContrast) {
       parentOpacity = parentColorContrast.opacity;
     }
-
-    debugMessage(`[opacity][A]: ${opacity} (${typeof opacity})  [parentOpacity]: ${parentOpacity} (${typeof parentOpacity}) `, moduleName);
 
     if (isNaN(opacity)) {
       opacity = opacity.toLowerCase();
@@ -144,7 +141,7 @@ export default class ColorContrast {
    * @desc Normalizes background color
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {String}  Returns the background color
@@ -173,7 +170,7 @@ export default class ColorContrast {
    * @desc Normalizes background image 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {String}  Returns a reference to a background image URL or none
@@ -201,7 +198,7 @@ export default class ColorContrast {
    * @desc Normalizes font size to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font size value in pixels (px)
@@ -233,7 +230,7 @@ export default class ColorContrast {
    * @desc Normalizes font weight to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font weight value
@@ -377,9 +374,8 @@ export default class ColorContrast {
    *
    * @desc Returns a boolean indiciating if the fontis considered large
    *
-   * @param {Number}  fontSize    - Computed style object for an element node 
-   * @param {Number}  fontWeight  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Number}  fontSize    - font size of the element in pixels
+   * @param {Number}  fontWeight  - Numberical value of the font wieght (100-900)
    *
    * @return {Boolean}  Returns true if considered a large font, otherwise fals
    */
