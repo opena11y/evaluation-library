@@ -759,4 +759,4 @@ class EvaluationLibrary {
 
 }
 
-export { EvaluationLibrary as default };
+export default EvaluationLibrary;
