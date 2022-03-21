@@ -5,7 +5,7 @@ const debug = false;
 const moduleName = 'ColorContrast';
 
 // Imports
-import {debugConsole, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from './debug.js';
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -49,18 +49,18 @@ export default class ColorContrast {
 
     debugSeparator(debug, moduleName);
     debugTag(debug, moduleName, elementNode);
-    debugConsole(debug, moduleName, '[      opacity]: ' + this.opacity);
-    debugConsole(debug, moduleName, '[        color]: ' + this.color);
-    debugConsole(debug, moduleName, '[     colorHex]: ' + this.colorHex);
-    debugConsole(debug, moduleName, '[   background]: ' + this.backgroundColor);
-    debugConsole(debug, moduleName, '[backgroundHex]: ' + this.backgroundColorHex);
-    debugConsole(debug, moduleName, '');
-    debugConsole(debug, moduleName, '[   fontFamily]: ' + this.fontFamily);
-    debugConsole(debug, moduleName, '[     fontSize]: ' + this.fontSize);
-    debugConsole(debug, moduleName, '[   fontWeight]: ' + this.fontWeight);
-    debugConsole(debug, moduleName, '[  isLargeFont]: ' + this.isLargeFont);
-    debugConsole(debug, moduleName, '');
-    debugConsole(debug, moduleName, '[          ccr]: ' + this.colorContrastRatio);
+    debugMessage(debug, moduleName, '[      opacity]: ' + this.opacity);
+    debugMessage(debug, moduleName, '[        color]: ' + this.color);
+    debugMessage(debug, moduleName, '[     colorHex]: ' + this.colorHex);
+    debugMessage(debug, moduleName, '[   background]: ' + this.backgroundColor);
+    debugMessage(debug, moduleName, '[backgroundHex]: ' + this.backgroundColorHex);
+    debugMessage(debug, moduleName, '');
+    debugMessage(debug, moduleName, '[   fontFamily]: ' + this.fontFamily);
+    debugMessage(debug, moduleName, '[     fontSize]: ' + this.fontSize);
+    debugMessage(debug, moduleName, '[   fontWeight]: ' + this.fontWeight);
+    debugMessage(debug, moduleName, '[  isLargeFont]: ' + this.isLargeFont);
+    debugMessage(debug, moduleName, '');
+    debugMessage(debug, moduleName, '[          ccr]: ' + this.colorContrastRatio);
   }
 
   /**

@@ -24,7 +24,19 @@ iframe {
 
 heading-webcomponent {
 	display: block;
-	padding: 0.5em;
+	padding: 0;
 	margin: 0.25em;
 	border: dashed green 2px;
+}
+
+.custom-header {
+	display: block;
+	padding: 0.25em;
+	background: darkgreen;
+	color: white;
+	font-family: monospace;
+}
+
+.content {
+	padding: 0.25em;
 }

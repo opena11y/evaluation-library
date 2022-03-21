@@ -5,7 +5,7 @@ const debug = true;
 const moduleName = 'domCache';
 
 // Imports
-import {debugConsole, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from './debug.js';
 
 // Imports
 import DOMElement  from './domElement.js';

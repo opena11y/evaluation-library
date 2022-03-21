@@ -4,36 +4,24 @@
 
 // If called with only two parameters, assume the second is the message string
 // and use 'debug' for the moduleName
-function debugConsole(debug, moduleName, message) {
+function debugMessage(debug, moduleName, message) {
   if (typeof message !== 'string') {
     message = moduleName;
     moduleName = 'debug';
   }
   if (debug) {
-    console.log(`[${moduleName}]` + s);
+    console.log(`[${moduleName}]` + message);
   }
 }
 
-// If called with only two parameters, assume the second is the element node
-// and use 'debug' for the moduleName
 function debugTag (debug, moduleName, node) {
-  if (typeof moduleName !== 'string') {
-    node = moduleName;
-    moduleName = 'debug';
-  }
-  if (debug && node) {
-    console.log(`[${moduleName}][` + node.tagName + ']: ' + node.textContent.trim().substring(0, 20).trim());
+  if (node && node.tagName) {
+    debugMessage(debug, moduleName, `[${node.tagName}]: ${node.textContent.trim().substring(0, 20).trim()}`);
   }
 }
 
-// If called with only one parameter, use 'debug' for the moduleName
 function debugSeparator (debug, moduleName) {
-  if (typeof moduleName !== 'string') {
-    moduleName = 'debug';
-  }
-  if (debug) {
-    console.log(`[${moduleName}] ------------------- `);
-  }
+    debugMessage(debug, moduleName, '-----------------------------');
 }
 
 /* colorContrast.js */
@@ -84,18 +72,18 @@ class ColorContrast {
 
     debugSeparator(debug$4, moduleName$4);
     debugTag(debug$4, moduleName$4, elementNode);
-    debugConsole(debug$4, moduleName$4, '[      opacity]: ' + this.opacity);
-    debugConsole(debug$4, moduleName$4, '[        color]: ' + this.color);
-    debugConsole(debug$4, moduleName$4, '[     colorHex]: ' + this.colorHex);
-    debugConsole(debug$4, moduleName$4, '[   background]: ' + this.backgroundColor);
-    debugConsole(debug$4, moduleName$4, '[backgroundHex]: ' + this.backgroundColorHex);
-    debugConsole(debug$4, moduleName$4, '');
-    debugConsole(debug$4, moduleName$4, '[   fontFamily]: ' + this.fontFamily);
-    debugConsole(debug$4, moduleName$4, '[     fontSize]: ' + this.fontSize);
-    debugConsole(debug$4, moduleName$4, '[   fontWeight]: ' + this.fontWeight);
-    debugConsole(debug$4, moduleName$4, '[  isLargeFont]: ' + this.isLargeFont);
-    debugConsole(debug$4, moduleName$4, '');
-    debugConsole(debug$4, moduleName$4, '[          ccr]: ' + this.colorContrastRatio);
+    debugMessage(debug$4, moduleName$4, '[      opacity]: ' + this.opacity);
+    debugMessage(debug$4, moduleName$4, '[        color]: ' + this.color);
+    debugMessage(debug$4, moduleName$4, '[     colorHex]: ' + this.colorHex);
+    debugMessage(debug$4, moduleName$4, '[   background]: ' + this.backgroundColor);
+    debugMessage(debug$4, moduleName$4, '[backgroundHex]: ' + this.backgroundColorHex);
+    debugMessage(debug$4, moduleName$4, '');
+    debugMessage(debug$4, moduleName$4, '[   fontFamily]: ' + this.fontFamily);
+    debugMessage(debug$4, moduleName$4, '[     fontSize]: ' + this.fontSize);
+    debugMessage(debug$4, moduleName$4, '[   fontWeight]: ' + this.fontWeight);
+    debugMessage(debug$4, moduleName$4, '[  isLargeFont]: ' + this.isLargeFont);
+    debugMessage(debug$4, moduleName$4, '');
+    debugMessage(debug$4, moduleName$4, '[          ccr]: ' + this.colorContrastRatio);
   }
 
   /**
@@ -453,12 +441,12 @@ class Visibility {
 
     debugSeparator(debug$3, moduleName$3);
     debugTag(debug$3, moduleName$3, elementNode);
-    debugConsole(debug$3, moduleName$3, '[          isHidden]: ' + this.isHidden);
-    debugConsole(debug$3, moduleName$3, '[      isAriaHidden]: ' + this.isAriaHidden);
-    debugConsole(debug$3, moduleName$3, '[     isDisplayNone]: ' + this.isDisplayNone);
-    debugConsole(debug$3, moduleName$3, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
-    debugConsole(debug$3, moduleName$3, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-    debugConsole(debug$3, moduleName$3, '[     isVisibleToAT]: ' + this.isVisibleToAT);
+    debugMessage(debug$3, moduleName$3, '[          isHidden]: ' + this.isHidden);
+    debugMessage(debug$3, moduleName$3, '[      isAriaHidden]: ' + this.isAriaHidden);
+    debugMessage(debug$3, moduleName$3, '[     isDisplayNone]: ' + this.isDisplayNone);
+    debugMessage(debug$3, moduleName$3, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
+    debugMessage(debug$3, moduleName$3, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+    debugMessage(debug$3, moduleName$3, '[     isVisibleToAT]: ' + this.isVisibleToAT);
   }
 
   /**
@@ -626,7 +614,7 @@ class DOMText {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
     if (this.hasContent) {
-      debugConsole(debug$1, moduleName$1, '[text]' + this.text  + ' (' + this.text.length + ')');
+      debugMessage(debug$1, moduleName$1, '[text]' + this.text  + ' (' + this.text.length + ')');
     }
   }
 
@@ -643,7 +631,7 @@ class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugConsole(debug$1, moduleName$1, '[addTextNode]: ' + s + ' (' + s.length + ')');
+    debugMessage(debug$1, moduleName$1, '[addTextNode]: ' + s + ' (' + s.length + ')');
   }
 }
 
@@ -773,8 +761,8 @@ class EvaluationResult {
     this.title = title;
     this.url = url;
 
-    debugConsole(debug, moduleName, '[title]: ' + this.title);
-    debugConsole(debug, moduleName, '[  url]: ' + this.url);
+    debugMessage(debug, moduleName, '[title]: ' + this.title);
+    debugMessage(debug, moduleName, '[  url]: ' + this.url);
   }
 }
 

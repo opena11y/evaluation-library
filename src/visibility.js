@@ -5,7 +5,7 @@ const debug = false;
 const moduleName = 'visibility';
 
 // Imports
-import {debugConsole, debugTag, debugSeparator}  from './debug.js';
+import {debugMessage, debugTag, debugSeparator}  from './debug.js';
 
 // Constants
 
@@ -50,12 +50,12 @@ export default class Visibility {
 
     debugSeparator(debug, moduleName);
     debugTag(debug, moduleName, elementNode);
-    debugConsole(debug, moduleName, '[          isHidden]: ' + this.isHidden);
-    debugConsole(debug, moduleName, '[      isAriaHidden]: ' + this.isAriaHidden);
-    debugConsole(debug, moduleName, '[     isDisplayNone]: ' + this.isDisplayNone);
-    debugConsole(debug, moduleName, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
-    debugConsole(debug, moduleName, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-    debugConsole(debug, moduleName, '[     isVisibleToAT]: ' + this.isVisibleToAT);
+    debugMessage(debug, moduleName, '[          isHidden]: ' + this.isHidden);
+    debugMessage(debug, moduleName, '[      isAriaHidden]: ' + this.isAriaHidden);
+    debugMessage(debug, moduleName, '[     isDisplayNone]: ' + this.isDisplayNone);
+    debugMessage(debug, moduleName, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
+    debugMessage(debug, moduleName, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+    debugMessage(debug, moduleName, '[     isVisibleToAT]: ' + this.isVisibleToAT);
   }
 
   /**
