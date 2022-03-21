@@ -50,18 +50,16 @@ export default class ColorContrast {
     if (debug) {
       debugSeparator(moduleName);
       debugTag(elementNode, moduleName);
-      debugMessage('[      opacity]: ' + this.opacity, moduleName);
-      debugMessage('[        color]: ' + this.color, moduleName);
-      debugMessage('[     colorHex]: ' + this.colorHex, moduleName);
-      debugMessage('[   background]: ' + this.backgroundColor, moduleName);
-      debugMessage('[backgroundHex]: ' + this.backgroundColorHex, moduleName);
-      debugMessage('', moduleName);
-      debugMessage('[   fontFamily]: ' + this.fontFamily, moduleName);
-      debugMessage('[     fontSize]: ' + this.fontSize, moduleName);
-      debugMessage('[   fontWeight]: ' + this.fontWeight, moduleName);
-      debugMessage('[  isLargeFont]: ' + this.isLargeFont, moduleName);
-      debugMessage('');
-      debugMessage('[          ccr]: ' + this.colorContrastRatio, moduleName);
+      debugMessage(`[      opacity]: ${this.opacity}`, moduleName);
+      debugMessage(`[        color]: ${this.color}`, moduleName);
+      debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName);
+      debugMessage(`[   background]: ${this.backgroundColor}`, moduleName);
+      debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName);
+      debugMessage(`\n[   fontFamily]: ${this.fontFamily}`, moduleName);
+      debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName);
+      debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName);
+      debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName);
+      debugMessage(`\n[          ccr]: ${this.colorContrastRatio}`, moduleName);
     }
   }
 

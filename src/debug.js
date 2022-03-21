@@ -13,5 +13,5 @@ export function debugTag (node, moduleName) {
 }
 
 export function debugSeparator (moduleName) {
-    debugMessage(moduleName, '-----------------------------');
+    debugMessage('-----------------------------', moduleName);
 }

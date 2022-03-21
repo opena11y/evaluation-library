@@ -13,7 +13,7 @@ function debugTag (node, moduleName) {
 }
 
 function debugSeparator (moduleName) {
-    debugMessage(moduleName, '-----------------------------');
+    debugMessage('-----------------------------', moduleName);
 }
 
 /* colorContrast.js */
@@ -62,18 +62,16 @@ class ColorContrast {
     {
       debugSeparator(moduleName$2);
       debugTag(elementNode, moduleName$2);
-      debugMessage('[      opacity]: ' + this.opacity, moduleName$2);
-      debugMessage('[        color]: ' + this.color, moduleName$2);
-      debugMessage('[     colorHex]: ' + this.colorHex, moduleName$2);
-      debugMessage('[   background]: ' + this.backgroundColor, moduleName$2);
-      debugMessage('[backgroundHex]: ' + this.backgroundColorHex, moduleName$2);
-      debugMessage('', moduleName$2);
-      debugMessage('[   fontFamily]: ' + this.fontFamily, moduleName$2);
-      debugMessage('[     fontSize]: ' + this.fontSize, moduleName$2);
-      debugMessage('[   fontWeight]: ' + this.fontWeight, moduleName$2);
-      debugMessage('[  isLargeFont]: ' + this.isLargeFont, moduleName$2);
-      debugMessage('');
-      debugMessage('[          ccr]: ' + this.colorContrastRatio, moduleName$2);
+      debugMessage(`[      opacity]: ${this.opacity}`, moduleName$2);
+      debugMessage(`[        color]: ${this.color}`, moduleName$2);
+      debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName$2);
+      debugMessage(`[   background]: ${this.backgroundColor}`, moduleName$2);
+      debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName$2);
+      debugMessage(`\n[   fontFamily]: ${this.fontFamily}`, moduleName$2);
+      debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName$2);
+      debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName$2);
+      debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName$2);
+      debugMessage(`\n[          ccr]: ${this.colorContrastRatio}`, moduleName$2);
     }
   }
 
