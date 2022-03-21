@@ -1,7 +1,7 @@
 /* domText.js */
 
 // Debug constants
-const debug = false;
+const debug = true;
 const moduleName = 'domText';
 
 // Imports
@@ -42,8 +42,6 @@ export default class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    if (debug) {
-      debugMessage('[addTextNode]: ' + s + ' (' + s.length + ')', moduleName);
-    }
+    debugg && debugMessage('[addTextNode]: ' + s + ' (' + s.length + ')', moduleName);
   }
 }
