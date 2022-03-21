@@ -2,6 +2,7 @@
 
 const template = document.createElement('template');
 template.innerHTML = `
+  <p><code>heading-webcomponent</code> custom web component</p>
   <h3><slot name="h3">Default Slotted H3 content</slot></h3>
   <slot name="h4"><h4>Default Slotted H4 content</h4></slot>
   <slot name="h5"><h5>Default Slotted H5 content</h5></slot>
