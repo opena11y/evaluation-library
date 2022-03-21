@@ -27,7 +27,7 @@ export default class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
-    debugTag(debug, moduleName, elementNode);
+    debugTag(moduleName, elementNode);
   }
 
   get isDomText () {

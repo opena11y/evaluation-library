@@ -48,14 +48,16 @@ export default class Visibility {
         this.isVisibleToAt = false;
     }
 
-    debugSeparator(debug, moduleName);
-    debugTag(debug, moduleName, elementNode);
-    debugMessage(debug, moduleName, '[          isHidden]: ' + this.isHidden);
-    debugMessage(debug, moduleName, '[      isAriaHidden]: ' + this.isAriaHidden);
-    debugMessage(debug, moduleName, '[     isDisplayNone]: ' + this.isDisplayNone);
-    debugMessage(debug, moduleName, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
-    debugMessage(debug, moduleName, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-    debugMessage(debug, moduleName, '[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug) {
+      debugSeparator(moduleName);
+      debugTag(elementNode, moduleName);
+      debugMessage('[          isHidden]: ' + this.isHidden, moduleName);
+      debugMessage('[      isAriaHidden]: ' + this.isAriaHidden, moduleName);
+      debugMessage('[     isDisplayNone]: ' + this.isDisplayNone, moduleName);
+      debugMessage('[isVisibilityHidden]: ' + this.isVisibilityHidden, moduleName);
+      debugMessage('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen, moduleName);
+      debugMessage('[     isVisibleToAT]: ' + this.isVisibleToAT, moduleName);
+    }
   }
 
   /**

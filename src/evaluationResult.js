@@ -13,7 +13,9 @@ export default class EvaluationResult {
     this.title = title;
     this.url = url;
 
-    debugMessage(debug, moduleName, '[title]: ' + this.title);
-    debugMessage(debug, moduleName, '[  url]: ' + this.url);
+    if (debug) {
+      debugMessage('[title]: ' + this.title, moduleName);
+      debugMessage('[  url]: ' + this.url, moduleName);
+    }
   }
 }

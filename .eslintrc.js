@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "es2019": true
     },
-    "extends": "eslint:recommended",
+//    "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"

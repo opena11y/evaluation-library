@@ -2,33 +2,22 @@
 
 // Debug tools
 
-// If called with only two parameters, assume the second is the message string
-// and use 'debug' for the moduleName
-function debugMessage(debug, moduleName, message) {
-  if (typeof message !== 'string') {
-    message = moduleName;
-    moduleName = 'debug';
-  }
-  if (debug) {
-    console.log(`[${moduleName}]` + message);
-  }
+function debugMessage(message, moduleName='debug') {
+  console.log(`[${moduleName}]` + message);
 }
 
-function debugTag (debug, moduleName, node) {
+function debugTag (node, moduleName) {
   if (node && node.tagName) {
-    debugMessage(debug, moduleName, `[${node.tagName}]: ${node.textContent.trim().substring(0, 20).trim()}`);
+    debugMessage(`[${node.tagName}]: ${node.textContent.trim().substring(0, 20).trim()}`, moduleName);
   }
 }
 
-function debugSeparator (debug, moduleName) {
-    debugMessage(debug, moduleName, '-----------------------------');
+function debugSeparator (moduleName) {
+    debugMessage(moduleName, '-----------------------------');
 }
 
 /* colorContrast.js */
-
-// Debug resources
-const debug$4 = true;
-const moduleName$4 = 'ColorContrast';
+const moduleName$2 = 'ColorContrast';
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -70,20 +59,22 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    debugSeparator(debug$4, moduleName$4);
-    debugTag(debug$4, moduleName$4, elementNode);
-    debugMessage(debug$4, moduleName$4, '[      opacity]: ' + this.opacity);
-    debugMessage(debug$4, moduleName$4, '[        color]: ' + this.color);
-    debugMessage(debug$4, moduleName$4, '[     colorHex]: ' + this.colorHex);
-    debugMessage(debug$4, moduleName$4, '[   background]: ' + this.backgroundColor);
-    debugMessage(debug$4, moduleName$4, '[backgroundHex]: ' + this.backgroundColorHex);
-    debugMessage(debug$4, moduleName$4, '');
-    debugMessage(debug$4, moduleName$4, '[   fontFamily]: ' + this.fontFamily);
-    debugMessage(debug$4, moduleName$4, '[     fontSize]: ' + this.fontSize);
-    debugMessage(debug$4, moduleName$4, '[   fontWeight]: ' + this.fontWeight);
-    debugMessage(debug$4, moduleName$4, '[  isLargeFont]: ' + this.isLargeFont);
-    debugMessage(debug$4, moduleName$4, '');
-    debugMessage(debug$4, moduleName$4, '[          ccr]: ' + this.colorContrastRatio);
+    {
+      debugSeparator(moduleName$2);
+      debugTag(elementNode, moduleName$2);
+      debugMessage('[      opacity]: ' + this.opacity, moduleName$2);
+      debugMessage('[        color]: ' + this.color, moduleName$2);
+      debugMessage('[     colorHex]: ' + this.colorHex, moduleName$2);
+      debugMessage('[   background]: ' + this.backgroundColor, moduleName$2);
+      debugMessage('[backgroundHex]: ' + this.backgroundColorHex, moduleName$2);
+      debugMessage('', moduleName$2);
+      debugMessage('[   fontFamily]: ' + this.fontFamily, moduleName$2);
+      debugMessage('[     fontSize]: ' + this.fontSize, moduleName$2);
+      debugMessage('[   fontWeight]: ' + this.fontWeight, moduleName$2);
+      debugMessage('[  isLargeFont]: ' + this.isLargeFont, moduleName$2);
+      debugMessage('');
+      debugMessage('[          ccr]: ' + this.colorContrastRatio, moduleName$2);
+    }
   }
 
   /**
@@ -394,10 +385,6 @@ class ColorContrast {
 
 /* colorContrast.js */
 
-// Debug constants
-const debug$3 = false;
-const moduleName$3 = 'visibility';
-
 // Constants
 
 /**
@@ -438,15 +425,6 @@ class Visibility {
     if (this.isAriaHidden) {
         this.isVisibleToAt = false;
     }
-
-    debugSeparator(debug$3, moduleName$3);
-    debugTag(debug$3, moduleName$3, elementNode);
-    debugMessage(debug$3, moduleName$3, '[          isHidden]: ' + this.isHidden);
-    debugMessage(debug$3, moduleName$3, '[      isAriaHidden]: ' + this.isAriaHidden);
-    debugMessage(debug$3, moduleName$3, '[     isDisplayNone]: ' + this.isDisplayNone);
-    debugMessage(debug$3, moduleName$3, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
-    debugMessage(debug$3, moduleName$3, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-    debugMessage(debug$3, moduleName$3, '[     isVisibleToAT]: ' + this.isVisibleToAT);
   }
 
   /**
@@ -555,10 +533,7 @@ class Visibility {
 }
 
 /* domElement.js */
-
-// Debug constants
-const debug$2 = false;
-const moduleName$2 = 'domElement';
+const moduleName$1 = 'domElement';
 
 /**
  * @class DOMElement
@@ -578,7 +553,7 @@ class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
-    debugTag(debug$2, moduleName$2, elementNode);
+    debugTag(moduleName$1, elementNode);
   }
 
   get isDomText () {
@@ -593,8 +568,8 @@ class DOMElement {
 /* domText.js */
 
 // Debug constants
-const debug$1 = false;
-const moduleName$1 = 'domText';
+const debug = false;
+const moduleName = 'domText';
 
 /**
  * @class DOMText
@@ -613,8 +588,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (this.hasContent) {
-      debugMessage(debug$1, moduleName$1, '[text]' + this.text  + ' (' + this.text.length + ')');
+    if (this.hasContent && debug) {
+      debugMessage('[text]' + this.text  + ' (' + this.text.length + ')', moduleName);
     }
   }
 
@@ -631,7 +606,6 @@ class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugMessage(debug$1, moduleName$1, '[addTextNode]: ' + s + ' (' + s.length + ')');
   }
 }
 
@@ -751,18 +725,11 @@ class DOMCache {
 
 /* evaluationResult.js */
 
-// Debug constants
-const debug = false;
-const moduleName = 'evaluationResult';
-
 class EvaluationResult {
   constructor (domCache, title, url) {
     this.domCache = domCache;
     this.title = title;
     this.url = url;
-
-    debugMessage(debug, moduleName, '[title]: ' + this.title);
-    debugMessage(debug, moduleName, '[  url]: ' + this.url);
   }
 }
 

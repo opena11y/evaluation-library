@@ -47,20 +47,22 @@ export default class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    debugSeparator(debug, moduleName);
-    debugTag(debug, moduleName, elementNode);
-    debugMessage(debug, moduleName, '[      opacity]: ' + this.opacity);
-    debugMessage(debug, moduleName, '[        color]: ' + this.color);
-    debugMessage(debug, moduleName, '[     colorHex]: ' + this.colorHex);
-    debugMessage(debug, moduleName, '[   background]: ' + this.backgroundColor);
-    debugMessage(debug, moduleName, '[backgroundHex]: ' + this.backgroundColorHex);
-    debugMessage(debug, moduleName, '');
-    debugMessage(debug, moduleName, '[   fontFamily]: ' + this.fontFamily);
-    debugMessage(debug, moduleName, '[     fontSize]: ' + this.fontSize);
-    debugMessage(debug, moduleName, '[   fontWeight]: ' + this.fontWeight);
-    debugMessage(debug, moduleName, '[  isLargeFont]: ' + this.isLargeFont);
-    debugMessage(debug, moduleName, '');
-    debugMessage(debug, moduleName, '[          ccr]: ' + this.colorContrastRatio);
+    if (debug) {
+      debugSeparator(moduleName);
+      debugTag(elementNode, moduleName);
+      debugMessage('[      opacity]: ' + this.opacity, moduleName);
+      debugMessage('[        color]: ' + this.color, moduleName);
+      debugMessage('[     colorHex]: ' + this.colorHex, moduleName);
+      debugMessage('[   background]: ' + this.backgroundColor, moduleName);
+      debugMessage('[backgroundHex]: ' + this.backgroundColorHex, moduleName);
+      debugMessage('', moduleName);
+      debugMessage('[   fontFamily]: ' + this.fontFamily, moduleName);
+      debugMessage('[     fontSize]: ' + this.fontSize, moduleName);
+      debugMessage('[   fontWeight]: ' + this.fontWeight, moduleName);
+      debugMessage('[  isLargeFont]: ' + this.isLargeFont, moduleName);
+      debugMessage('');
+      debugMessage('[          ccr]: ' + this.colorContrastRatio, moduleName);
+    }
   }
 
   /**

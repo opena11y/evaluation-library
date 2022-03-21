@@ -24,8 +24,8 @@ export default class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (this.hasContent) {
-      debugMessage(debug, moduleName, '[text]' + this.text  + ' (' + this.text.length + ')');
+    if (this.hasContent && debug) {
+      debugMessage('[text]' + this.text  + ' (' + this.text.length + ')', moduleName);
     }
   }
 
@@ -42,6 +42,8 @@ export default class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugMessage(debug, moduleName, '[addTextNode]: ' + s + ' (' + s.length + ')');
+    if (debug) {
+      debugMessage('[addTextNode]: ' + s + ' (' + s.length + ')', moduleName);
+    }
   }
 }
