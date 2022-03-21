@@ -1,14 +1,11 @@
 /* domElement.js */
 
-// Debug tools
+// Debug constants
 const debug = true;
-function debugConsole(s) {
-  if (debug) {
-    console.log('[DOMElement]' + s);
-  } 
-}
+const moduleName = 'domElement';
 
 // Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 import ColorContrast  from './colorContrast.js';
 import Visibility     from './visibility.js';
 
@@ -30,7 +27,7 @@ export default class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
-    debugConsole('[tagName]' + this.tagName);
+    debugTag(debug, moduleName, elementNode);
   }
 
   get isDomText () {

@@ -1,5 +1,11 @@
 /* evaluate.js */
 
+// Debug constants
+const debug = false;
+const moduleName = 'evaluationLibrary';
+
+// Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 import DOMCache          from './domCache.js';
 import EvaluationResult  from './evaluationResult.js';
 

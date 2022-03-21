@@ -1,12 +1,11 @@
 /* evaluationResult.js */
 
-// Debug tools
+// Debug constants
 const debug = false;
-function debugConsole(s) {
-  if (debug) {
-    console.log('[EvaluationResult]' + s);
-  } 
-}
+const moduleName = 'evaluationResult';
+
+// Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 
 export default class EvaluationResult {
   constructor (domCache, title, url) {
@@ -14,7 +13,7 @@ export default class EvaluationResult {
     this.title = title;
     this.url = url;
 
-    debugConsole('[title]: ' + this.title);
-    debugConsole('[  url]: ' + this.url);
+    debugConsole(debug, moduleName, '[title]: ' + this.title);
+    debugConsole(debug, moduleName, '[  url]: ' + this.url);
   }
 }

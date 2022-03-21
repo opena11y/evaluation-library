@@ -1,12 +1,11 @@
 /* domText.js */
 
-// Debug tools
-const debug = true;
-function debugConsole(s) {
-  if (debug) {
-    console.log('[DOMText]' + s);
-  } 
-}
+// Debug constants
+const debug = false;
+const moduleName = 'domText';
+
+// Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 
 /**
  * @class DOMText
@@ -26,7 +25,7 @@ export default class DOMText {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
     if (this.hasContent) {
-      debugConsole('[text]' + this.text  + ' (' + this.text.length + ')');
+      debugConsole(debug, moduleName, '[text]' + this.text  + ' (' + this.text.length + ')');
     }
   }
 
@@ -43,6 +42,6 @@ export default class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugConsole('[addTextNode]: ' + s + ' (' + s.length + ')');
+    debugConsole(debug, moduleName, '[addTextNode]: ' + s + ' (' + s.length + ')');
   }
 }

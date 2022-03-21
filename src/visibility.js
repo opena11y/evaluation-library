@@ -1,12 +1,11 @@
 /* colorContrast.js */
 
-// Debug resources
-const debug = true;
-function debugConsole(s) {
-  if (debug) {
-    console.log('[Visibility]' + s);
-  } 
-}
+// Debug constants
+const debug = false;
+const moduleName = 'visibility';
+
+// Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 
 // Constants
 
@@ -49,14 +48,14 @@ export default class Visibility {
         this.isVisibleToAt = false;
     }
 
-    debugConsole('-------------------');
-    debugConsole('[               tag]: ' + elementNode.tagName);
-    debugConsole('[          isHidden]: ' + this.isHidden);
-    debugConsole('[      isAriaHidden]: ' + this.isAriaHidden);
-    debugConsole('[     isDisplayNone]: ' + this.isDisplayNone);
-    debugConsole('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-    debugConsole('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-    debugConsole('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    debugSeparator(debug, moduleName);
+    debugTag(debug, moduleName, elementNode);
+    debugConsole(debug, moduleName, '[          isHidden]: ' + this.isHidden);
+    debugConsole(debug, moduleName, '[      isAriaHidden]: ' + this.isAriaHidden);
+    debugConsole(debug, moduleName, '[     isDisplayNone]: ' + this.isDisplayNone);
+    debugConsole(debug, moduleName, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
+    debugConsole(debug, moduleName, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+    debugConsole(debug, moduleName, '[     isVisibleToAT]: ' + this.isVisibleToAT);
   }
 
   /**

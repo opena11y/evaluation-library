@@ -2,11 +2,10 @@
 
 // Debug tools
 const debug = true;
-function debugConsole(s) {
-  if (debug) {
-    console.log('[DOMCache]' + s);
-  } 
-}
+const moduleName = 'domCache';
+
+// Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 
 // Imports
 import DOMElement  from './domElement.js';

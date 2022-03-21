@@ -17,3 +17,14 @@ header .title {
 main {
 	padding: 0.5em;
 }
+
+iframe {
+	border: double green 2px;
+}
+
+heading-webcomponent {
+	display: block;
+	padding: 0.5em;
+	margin: 0.25em;
+	border: dashed green 2px;
+}

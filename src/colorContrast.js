@@ -2,11 +2,10 @@
 
 // Debug resources
 const debug = false;
-function debugConsole(s) {
-  if (debug) {
-    console.log('[ColorContrast]' + s);
-  } 
-}
+const moduleName = 'ColorContrast';
+
+// Imports
+import {debugConsole, debugTag, debugSeparator}  from './debug.js';
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -48,20 +47,20 @@ export default class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    debugConsole('---------------');
-    debugConsole('[          tag]: ' + elementNode.tagName);
-    debugConsole('[      opacity]: ' + this.opacity);
-    debugConsole('[        color]: ' + this.color);
-    debugConsole('[     colorHex]: ' + this.colorHex);
-    debugConsole('[   background]: ' + this.backgroundColor);
-    debugConsole('[backgroundHex]: ' + this.backgroundColorHex);
-    debugConsole('');
-    debugConsole('[   fontFamily]: ' + this.fontFamily);
-    debugConsole('[     fontSize]: ' + this.fontSize);
-    debugConsole('[   fontWeight]: ' + this.fontWeight);
-    debugConsole('[  isLargeFont]: ' + this.isLargeFont);
-    debugConsole('');
-    debugConsole('[          ccr]: ' + this.colorContrastRatio);
+    debugSeparator(debug, moduleName);
+    debugTag(debug, moduleName, elementNode);
+    debugConsole(debug, moduleName, '[      opacity]: ' + this.opacity);
+    debugConsole(debug, moduleName, '[        color]: ' + this.color);
+    debugConsole(debug, moduleName, '[     colorHex]: ' + this.colorHex);
+    debugConsole(debug, moduleName, '[   background]: ' + this.backgroundColor);
+    debugConsole(debug, moduleName, '[backgroundHex]: ' + this.backgroundColorHex);
+    debugConsole(debug, moduleName, '');
+    debugConsole(debug, moduleName, '[   fontFamily]: ' + this.fontFamily);
+    debugConsole(debug, moduleName, '[     fontSize]: ' + this.fontSize);
+    debugConsole(debug, moduleName, '[   fontWeight]: ' + this.fontWeight);
+    debugConsole(debug, moduleName, '[  isLargeFont]: ' + this.isLargeFont);
+    debugConsole(debug, moduleName, '');
+    debugConsole(debug, moduleName, '[          ccr]: ' + this.colorContrastRatio);
   }
 
   /**

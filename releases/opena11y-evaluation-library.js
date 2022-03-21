@@ -1,6 +1,46 @@
-/* colorContrast.js */
-function debugConsole$4(s) {
+/* debug.js */
+
+// Debug tools
+
+// If called with only two parameters, assume the second is the message string
+// and use 'debug' for the moduleName
+function debugConsole(debug, moduleName, message) {
+  if (typeof message !== 'string') {
+    message = moduleName;
+    moduleName = 'debug';
+  }
+  if (debug) {
+    console.log(`[${moduleName}]` + s);
+  }
 }
+
+// If called with only two parameters, assume the second is the element node
+// and use 'debug' for the moduleName
+function debugTag (debug, moduleName, node) {
+  if (typeof moduleName !== 'string') {
+    node = moduleName;
+    moduleName = 'debug';
+  }
+  if (debug && node) {
+    console.log(`[${moduleName}][` + node.tagName + ']: ' + node.textContent.trim().substring(0, 20).trim());
+  }
+}
+
+// If called with only one parameter, use 'debug' for the moduleName
+function debugSeparator (debug, moduleName) {
+  if (typeof moduleName !== 'string') {
+    moduleName = 'debug';
+  }
+  if (debug) {
+    console.log(`[${moduleName}] ------------------- `);
+  }
+}
+
+/* colorContrast.js */
+
+// Debug resources
+const debug$4 = false;
+const moduleName$4 = 'ColorContrast';
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -41,17 +81,21 @@ class ColorContrast {
     const L1 = this.getLuminance(this.colorHex);
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
-    debugConsole$4('[          tag]: ' + elementNode.tagName);
-    debugConsole$4('[      opacity]: ' + this.opacity);
-    debugConsole$4('[        color]: ' + this.color);
-    debugConsole$4('[     colorHex]: ' + this.colorHex);
-    debugConsole$4('[   background]: ' + this.backgroundColor);
-    debugConsole$4('[backgroundHex]: ' + this.backgroundColorHex);
-    debugConsole$4('[   fontFamily]: ' + this.fontFamily);
-    debugConsole$4('[     fontSize]: ' + this.fontSize);
-    debugConsole$4('[   fontWeight]: ' + this.fontWeight);
-    debugConsole$4('[  isLargeFont]: ' + this.isLargeFont);
-    debugConsole$4('[          ccr]: ' + this.colorContrastRatio);
+
+    debugSeparator(debug$4, moduleName$4);
+    debugTag(debug$4, moduleName$4, elementNode);
+    debugConsole(debug$4, moduleName$4, '[      opacity]: ' + this.opacity);
+    debugConsole(debug$4, moduleName$4, '[        color]: ' + this.color);
+    debugConsole(debug$4, moduleName$4, '[     colorHex]: ' + this.colorHex);
+    debugConsole(debug$4, moduleName$4, '[   background]: ' + this.backgroundColor);
+    debugConsole(debug$4, moduleName$4, '[backgroundHex]: ' + this.backgroundColorHex);
+    debugConsole(debug$4, moduleName$4, '');
+    debugConsole(debug$4, moduleName$4, '[   fontFamily]: ' + this.fontFamily);
+    debugConsole(debug$4, moduleName$4, '[     fontSize]: ' + this.fontSize);
+    debugConsole(debug$4, moduleName$4, '[   fontWeight]: ' + this.fontWeight);
+    debugConsole(debug$4, moduleName$4, '[  isLargeFont]: ' + this.isLargeFont);
+    debugConsole(debug$4, moduleName$4, '');
+    debugConsole(debug$4, moduleName$4, '[          ccr]: ' + this.colorContrastRatio);
   }
 
   /**
@@ -361,11 +405,10 @@ class ColorContrast {
 }
 
 /* colorContrast.js */
-function debugConsole$3(s) {
-  {
-    console.log('[Visibility]' + s);
-  } 
-}
+
+// Debug constants
+const debug$3 = false;
+const moduleName$3 = 'visibility';
 
 // Constants
 
@@ -408,14 +451,14 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    debugConsole$3('-------------------');
-    debugConsole$3('[               tag]: ' + elementNode.tagName);
-    debugConsole$3('[          isHidden]: ' + this.isHidden);
-    debugConsole$3('[      isAriaHidden]: ' + this.isAriaHidden);
-    debugConsole$3('[     isDisplayNone]: ' + this.isDisplayNone);
-    debugConsole$3('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-    debugConsole$3('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-    debugConsole$3('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    debugSeparator(debug$3, moduleName$3);
+    debugTag(debug$3, moduleName$3, elementNode);
+    debugConsole(debug$3, moduleName$3, '[          isHidden]: ' + this.isHidden);
+    debugConsole(debug$3, moduleName$3, '[      isAriaHidden]: ' + this.isAriaHidden);
+    debugConsole(debug$3, moduleName$3, '[     isDisplayNone]: ' + this.isDisplayNone);
+    debugConsole(debug$3, moduleName$3, '[isVisibilityHidden]: ' + this.isVisibilityHidden);
+    debugConsole(debug$3, moduleName$3, '[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+    debugConsole(debug$3, moduleName$3, '[     isVisibleToAT]: ' + this.isVisibleToAT);
   }
 
   /**
@@ -524,11 +567,10 @@ class Visibility {
 }
 
 /* domElement.js */
-function debugConsole$2(s) {
-  {
-    console.log('[DOMElement]' + s);
-  } 
-}
+
+// Debug constants
+const debug$2 = true;
+const moduleName$2 = 'domElement';
 
 /**
  * @class DOMElement
@@ -548,7 +590,7 @@ class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
-    debugConsole$2('[tagName]' + this.tagName);
+    debugTag(debug$2, moduleName$2, elementNode);
   }
 
   get isDomText () {
@@ -561,11 +603,10 @@ class DOMElement {
 }
 
 /* domText.js */
-function debugConsole$1(s) {
-  {
-    console.log('[DOMText]' + s);
-  } 
-}
+
+// Debug constants
+const debug$1 = false;
+const moduleName$1 = 'domText';
 
 /**
  * @class DOMText
@@ -585,7 +626,7 @@ class DOMText {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
     if (this.hasContent) {
-      debugConsole$1('[text]' + this.text  + ' (' + this.text.length + ')');
+      debugConsole(debug$1, moduleName$1, '[text]' + this.text  + ' (' + this.text.length + ')');
     }
   }
 
@@ -602,7 +643,7 @@ class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugConsole$1('[addTextNode]: ' + s + ' (' + s.length + ')');
+    debugConsole(debug$1, moduleName$1, '[addTextNode]: ' + s + ' (' + s.length + ')');
   }
 }
 
@@ -721,8 +762,10 @@ class DOMCache {
 }
 
 /* evaluationResult.js */
-function debugConsole(s) {
-}
+
+// Debug constants
+const debug = false;
+const moduleName = 'evaluationResult';
 
 class EvaluationResult {
   constructor (domCache, title, url) {
@@ -730,8 +773,8 @@ class EvaluationResult {
     this.title = title;
     this.url = url;
 
-    debugConsole('[title]: ' + this.title);
-    debugConsole('[  url]: ' + this.url);
+    debugConsole(debug, moduleName, '[title]: ' + this.title);
+    debugConsole(debug, moduleName, '[  url]: ' + this.url);
   }
 }
 
