@@ -1,12 +1,5 @@
 /* domText.js */
 
-// Debug constants
-const debug = false;
-const moduleName = 'domText';
-
-// Imports
-import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
-
 /**
  * @class DOMText
  *
@@ -24,9 +17,6 @@ export default class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (this.hasContent && debug) {
-      debugMessage('[text]' + this.text  + ' (' + this.text.length + ')', moduleName);
-    }
   }
 
   get isDomText () {
@@ -42,6 +32,5 @@ export default class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugg && debugMessage('[addTextNode]: ' + s + ' (' + s.length + ')', moduleName);
   }
 }

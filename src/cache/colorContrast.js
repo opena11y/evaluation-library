@@ -1,11 +1,8 @@
 /* colorContrast.js */
 
-// Debug resources
-const debug = true;
-const moduleName = 'ColorContrast';
-
 // Imports
-import {debugMessage, debugTag, debugSeparator}  from '../debug.js';
+import DebugLogging  from '../debug.js';
+const debug = new DebugLogging('colorContrast', true)
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -27,9 +24,9 @@ export default class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug) {
-      debugSeparator(moduleName);
-      debugTag(elementNode, moduleName);
+    if (debug.flag) {
+      debug.separator();
+      debug.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -52,17 +49,20 @@ export default class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug) {
-      debugMessage(`[      opacity]: ${this.opacity}`, moduleName);
-      debugMessage(`[        color]: ${this.color}`, moduleName);
-      debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName);
-      debugMessage(`[   background]: ${this.backgroundColor}`, moduleName);
-      debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName);
-      debugMessage(`[   fontFamily]: ${this.fontFamily}`, moduleName);
-      debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName);
-      debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName);
-      debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName);
-      debugMessage(`[          ccr]: ${this.colorContrastRatio}`, moduleName);
+    if (debug.flag) {
+      debug.log(`[           opacity]: ${this.opacity}`);
+      debug.log(`[             color]: ${this.color}`);
+      debug.log(`[          colorHex]: ${this.colorHex}`);
+      debug.log(`[        background]: ${this.backgroundColor}`);
+      debug.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
+      debug.log(`[   backgroundImage]: ${this.backgroundImage}`, true);
+      debug.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
+      debug.log(`[backgroundPosition]: ${this.backgroundPosition}`);
+      debug.log(`[        fontFamily]: ${this.fontFamily}`, true);
+      debug.log(`[          fontSize]: ${this.fontSize}`);
+      debug.log(`[        fontWeight]: ${this.fontWeight}`);
+      debug.log(`[       isLargeFont]: ${this.isLargeFont}`);
+      debug.log(`[               ccr]: ${this.colorContrastRatio}`);
     }
   }
 
@@ -125,12 +125,8 @@ export default class ColorContrast {
 
     }
 
-    debugMessage(`[opacity][B]: ${opacity} (${typeof opacity})`, moduleName);
-
     // Make sure opacity is between 0 and 1
     opacity = Math.max(Math.min(opacity, 1.0), 0.0);
-
-    debugMessage(`[opacity][C]: ${opacity} (${typeof opacity})`, moduleName);
 
     return opacity;
   }  
@@ -149,11 +145,13 @@ export default class ColorContrast {
 
   normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-    debugMessage(`[normalizeBackgroundColor]: ${backgroundColor}`);
-    if ((backgroundColor == 'transparent') ||
+    debug.log(`[normalizeBackgroundColor][A]: ${backgroundColor}`);
+    if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
+        (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
       if (parentColorContrast) {
+        debug.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundCcolor;
       }
       else {
@@ -161,6 +159,7 @@ export default class ColorContrast {
         backgroundColor = 'rgb(255,255,255)';
       }
     }
+    debug.log(`[normalizeBackgroundColor][C]: ${backgroundColor}`);
     return backgroundColor;
   }
 
@@ -344,7 +343,6 @@ export default class ColorContrast {
           // RGB values to HEX value
           rgbParts.forEach( rgbColor => {
             value = Math.round(opacity * Math.round(parseFloat(rgbColor)));
-            debugMessage(`[rgbColor]: ${rgbColor} [opacity]: ${opacity}  [value]: ${value} `, moduleName);
             hex.push(toHex(value));            
           });
           colorHex = hex.join('');

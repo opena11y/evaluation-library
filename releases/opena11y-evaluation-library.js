@@ -1,23 +1,92 @@
-/* debug.js */
+/*
+*   debug.js
+*
+*   Usage
+*     import DebugLogging from './debug.js';
+*     const debug = new DebugLogging('myLabel', true); // e.g. 'myModule'
+*     ...
+*     if (debug.flag) debug.log('myMessage');
+*
+*   Notes
+*     new DebugLogging() - calling the constructor with no arguments results
+*                   in debug.flag set to false and debug.label set to 'debug';
+*                   constructor accepts 0, 1 or 2 arguments in any order
+*                   @param flag [optional] {boolean} - sets debug.flag
+*                   @param label [optional] {string} - sets debug.label
+*   Properties
+*     debug.flag    {boolean} allows you to switch debug logging on or off;
+*                   default value is false
+*     debug.label   {string} rendered as a prefix to each log message;
+*                   default value is 'debug'
+*   Methods
+*     debug.log     calls console.log with label prefix and message
+*                   @param message {string}
+*                   @param spaceAbove [optional] {boolean}
+*     debug.tag     outputs tagName and textContent of DOM element
+*                   @param node {DOM node reference} - usually an HTMLElement
+*                   @param spaceAbove [optional] {boolean}
+*     debug.separator - outputs only debug.label and a series of hyphens
+*                   @param spaceAbove [optional] {boolean}
+*/
 
-// Debug tools
+class DebugLogging {
+  constructor (...args) {
+    // Default values for cases where fewer than two arguments are provided
+    this._flag = false;
+    this._label = 'debug';
 
-function debugMessage(message, moduleName='debug') {
-  console.log(`[${moduleName}]` + message);
-}
+    // The constructor may be called with zero, one or two arguments. If two
+    // arguments, they can be in any order: one is assumed to be the boolean
+    // value for '_flag' and the other one the string value for '_label'.
+    for (const [index, arg] of args.entries()) {
+      if (index < 2) {
+        switch (typeof arg) {
+          case 'boolean':
+            this._flag = arg;
+            break;
+          case 'string':
+            this._label = arg;
+            break;
+        }
+      }
+    }
+  }
 
-function debugTag (node, moduleName) {
-  if (node && node.tagName) {
-    debugMessage(`[${node.tagName}]: ${node.textContent.trim().substring(0, 20).trim()}`, moduleName);
+  get flag () { return this._flag; }
+
+  set flag (value) {
+    if (typeof value === 'boolean') {
+      this._flag = value;
+    }
+  }
+
+  get label () { return this._label; }
+
+  set label (value) {
+    if (typeof value === 'string') {
+      this._label = value;
+    }
+  }
+
+  log (message, spaceAbove) {
+    const newline = spaceAbove ? '\n' : '';
+    console.log(`${newline}[${this._label}] ${message}`);
+  }
+
+  tag (node, spaceAbove) {
+    if (node && node.tagName) {
+      const text = node.textContent.trim().replace(/\s+/g, ' ');
+      this.log(`[${node.tagName}]: ${text.substring(0, 20)}`, spaceAbove);
+    }
+  }
+
+  separator (spaceAbove) {
+    this.log('-----------------------------', spaceAbove);
   }
 }
 
-function debugSeparator (moduleName) {
-    debugMessage('-----------------------------', moduleName);
-}
-
 /* colorContrast.js */
-const moduleName$1 = 'ColorContrast';
+const debug$1 = new DebugLogging('colorContrast', true);
 
 // Constants
 const defaultFontSize = 16; // In pixels (px)
@@ -39,9 +108,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    {
-      debugSeparator(moduleName$1);
-      debugTag(elementNode, moduleName$1);
+    if (debug$1.flag) {
+      debug$1.separator();
+      debug$1.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -64,17 +133,20 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    {
-      debugMessage(`[      opacity]: ${this.opacity}`, moduleName$1);
-      debugMessage(`[        color]: ${this.color}`, moduleName$1);
-      debugMessage(`[     colorHex]: ${this.colorHex}`, moduleName$1);
-      debugMessage(`[   background]: ${this.backgroundColor}`, moduleName$1);
-      debugMessage(`[backgroundHex]: ${this.backgroundColorHex}`, moduleName$1);
-      debugMessage(`[   fontFamily]: ${this.fontFamily}`, moduleName$1);
-      debugMessage(`[     fontSize]: ${this.fontSize}`, moduleName$1);
-      debugMessage(`[   fontWeight]: ${this.fontWeight}`, moduleName$1);
-      debugMessage(`[  isLargeFont]: ${this.isLargeFont}`, moduleName$1);
-      debugMessage(`[          ccr]: ${this.colorContrastRatio}`, moduleName$1);
+    if (debug$1.flag) {
+      debug$1.log(`[           opacity]: ${this.opacity}`);
+      debug$1.log(`[             color]: ${this.color}`);
+      debug$1.log(`[          colorHex]: ${this.colorHex}`);
+      debug$1.log(`[        background]: ${this.backgroundColor}`);
+      debug$1.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
+      debug$1.log(`[   backgroundImage]: ${this.backgroundImage}`, true);
+      debug$1.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
+      debug$1.log(`[backgroundPosition]: ${this.backgroundPosition}`);
+      debug$1.log(`[        fontFamily]: ${this.fontFamily}`, true);
+      debug$1.log(`[          fontSize]: ${this.fontSize}`);
+      debug$1.log(`[        fontWeight]: ${this.fontWeight}`);
+      debug$1.log(`[       isLargeFont]: ${this.isLargeFont}`);
+      debug$1.log(`[               ccr]: ${this.colorContrastRatio}`);
     }
   }
 
@@ -84,7 +156,7 @@ class ColorContrast {
    * @desc Normalizes opacity to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing the opacity
@@ -93,13 +165,10 @@ class ColorContrast {
   normalizeOpacity (style, parentColorContrast) {
     let opacity = style.getPropertyValue("opacity");
     let parentOpacity = 1.0;
-    debugMessage(`[opacity][parentColorContrast]: ${parentColorContrast}`, moduleName$1);
 
     if (parentColorContrast) {
       parentOpacity = parentColorContrast.opacity;
     }
-
-    debugMessage(`[opacity][A]: ${opacity} (${typeof opacity})  [parentOpacity]: ${parentOpacity} (${typeof parentOpacity}) `, moduleName$1);
 
     if (isNaN(opacity)) {
       opacity = opacity.toLowerCase();
@@ -140,12 +209,8 @@ class ColorContrast {
 
     }
 
-    debugMessage(`[opacity][B]: ${opacity} (${typeof opacity})`, moduleName$1);
-
     // Make sure opacity is between 0 and 1
     opacity = Math.max(Math.min(opacity, 1.0), 0.0);
-
-    debugMessage(`[opacity][C]: ${opacity} (${typeof opacity})`, moduleName$1);
 
     return opacity;
   }  
@@ -156,7 +221,7 @@ class ColorContrast {
    * @desc Normalizes background color
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {String}  Returns the background color
@@ -164,11 +229,13 @@ class ColorContrast {
 
   normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-    debugMessage(`[normalizeBackgroundColor]: ${backgroundColor}`);
-    if ((backgroundColor == 'transparent') ||
+    debug$1.log(`[normalizeBackgroundColor][A]: ${backgroundColor}`);
+    if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
+        (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
       if (parentColorContrast) {
+        debug$1.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundCcolor;
       }
       else {
@@ -176,6 +243,7 @@ class ColorContrast {
         backgroundColor = 'rgb(255,255,255)';
       }
     }
+    debug$1.log(`[normalizeBackgroundColor][C]: ${backgroundColor}`);
     return backgroundColor;
   }
 
@@ -185,7 +253,7 @@ class ColorContrast {
    * @desc Normalizes background image 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {String}  Returns a reference to a background image URL or none
@@ -213,7 +281,7 @@ class ColorContrast {
    * @desc Normalizes font size to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font size value in pixels (px)
@@ -245,7 +313,7 @@ class ColorContrast {
    * @desc Normalizes font weight to a number 
    *
    * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed style information for parent
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
    *                                         DomElement
    *
    * @return {Number}  Returns a number representing font weight value
@@ -359,7 +427,6 @@ class ColorContrast {
           // RGB values to HEX value
           rgbParts.forEach( rgbColor => {
             value = Math.round(opacity * Math.round(parseFloat(rgbColor)));
-            debugMessage(`[rgbColor]: ${rgbColor} [opacity]: ${opacity}  [value]: ${value} `, moduleName$1);
             hex.push(toHex(value));            
           });
           colorHex = hex.join('');
@@ -386,9 +453,8 @@ class ColorContrast {
    *
    * @desc Returns a boolean indiciating if the fontis considered large
    *
-   * @param {Number}  fontSize    - Computed style object for an element node 
-   * @param {Number}  fontWeight  - Computed style information for parent 
-   *                                         DomElement
+   * @param {Number}  fontSize    - font size of the element in pixels
+   * @param {Number}  fontWeight  - Numberical value of the font wieght (100-900)
    *
    * @return {Boolean}  Returns true if considered a large font, otherwise fals
    */
@@ -403,6 +469,7 @@ class ColorContrast {
 }
 
 /* colorContrast.js */
+const debug = new DebugLogging('colorContrast', false);
 
 // Constants
 
@@ -443,6 +510,17 @@ class Visibility {
 
     if (this.isAriaHidden) {
         this.isVisibleToAt = false;
+    }
+
+    if (debug.flag) {
+      debug.separator();
+      debug.tag(elementNode);
+      debug.log('[          isHidden]: ' + this.isHidden);
+      debug.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -584,10 +662,6 @@ class DOMElement {
 
 /* domText.js */
 
-// Debug constants
-const debug = false;
-const moduleName = 'domText';
-
 /**
  * @class DOMText
  *
@@ -605,9 +679,6 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (this.hasContent && debug) {
-      debugMessage('[text]' + this.text  + ' (' + this.text.length + ')', moduleName);
-    }
   }
 
   get isDomText () {
@@ -623,7 +694,6 @@ class DOMText {
     if (s) {
       this.text += ' ' + s;
     }
-    debugg && debugMessage('[addTextNode]: ' + s + ' (' + s.length + ')', moduleName);
   }
 }
 

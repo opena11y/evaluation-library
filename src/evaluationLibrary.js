@@ -1,11 +1,5 @@
 /* evaluate.js */
 
-// Debug constants
-const debug = false;
-const moduleName = 'evaluationLibrary';
-
-// Imports
-import {debugMessage}  from './debug.js';
 import DOMCache          from './cache/domCache.js';
 import EvaluationResult  from './evaluationResult.js';
 
@@ -24,7 +18,6 @@ export default class EvaluationLibrary {
    */
 
   evaluate (startingNode, title='', url='') {
-    debug && debugMessage(`Starting Evaluation`, moduleName);
     let domCache = new DOMCache(startingNode);
     let evaluationResult = new EvaluationResult(domCache, title, url);
     return evaluationResult;
