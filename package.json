@@ -20,7 +20,7 @@
   "homepage": "https://github.com/opena11y/evaluation-library#readme",
   "scripts": {
     "build": "npm run eslint && npm run bundle",
-    "eslint": "npx eslint src/*.js",
+    "eslint": "eslint src/*.js",
     "bundle": "rollup -c"
   },
   "devDependencies": {
