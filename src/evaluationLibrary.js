@@ -1,7 +1,13 @@
 /* evaluate.js */
 
+/* Imports */
 import DOMCache          from './cache/domCache.js';
 import EvaluationResult  from './evaluationResult.js';
+import DebugLogging      from './debug.js';
+
+/* Constants */
+const debug = new DebugLogging('evaluate', false)
+
 
 export default class EvaluationLibrary {
   constructor () {
@@ -20,6 +26,9 @@ export default class EvaluationLibrary {
   evaluate (startingNode, title='', url='') {
     let domCache = new DOMCache(startingNode);
     let evaluationResult = new EvaluationResult(domCache, title, url);
+    if (debug.flag) {
+      debug.log('EvaluationResult');
+    }
     return evaluationResult;
   }
 

@@ -1,7 +1,12 @@
 /* domElement.js */
 
+/* Imports */
 import ColorContrast  from './colorContrast.js';
 import Visibility     from './visibility.js';
+import DebugLogging  from '../debug.js';
+
+/* Constants */
+const debug = new DebugLogging('colorContrast', false);
 
 /**
  * @class DOMElement

@@ -1,10 +1,10 @@
 /* colorContrast.js */
 
-// Imports
+/* Imports */
 import DebugLogging  from '../debug.js';
-const debug = new DebugLogging('colorContrast', false)
 
-// Constants
+/* Constants */
+const debug = new DebugLogging('visibility', false)
 
 /**
  * @class Visibility

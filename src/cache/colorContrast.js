@@ -1,10 +1,10 @@
 /* colorContrast.js */
 
-// Imports
+/* Imports */
 import DebugLogging  from '../debug.js';
-const debug = new DebugLogging('colorContrast', true)
 
-// Constants
+/* Constants */
+const debug = new DebugLogging('colorContrast', true);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 

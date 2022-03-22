@@ -1,10 +1,13 @@
 /* domCache.js */
 
-// Imports
+/* Imports */
 import DOMElement  from './domElement.js';
 import DOMText     from './domText.js';
+import DebugLogging  from '../debug.js';
 
 /* Constants */
+const debug = new DebugLogging('colorContrast', false);
+
 
 const skipableElements = [
   'base',

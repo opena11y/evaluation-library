@@ -20,7 +20,7 @@
 *                   default value is 'debug'
 *   Methods
 *     debug.log     calls console.log with label prefix and message
-*                   @param message {string}
+*                   @param message {object} - console.log calls toString()
 *                   @param spaceAbove [optional] {boolean}
 *     debug.tag     outputs tagName and textContent of DOM element
 *                   @param node {DOM node reference} - usually an HTMLElement
@@ -86,9 +86,9 @@ class DebugLogging {
 }
 
 /* colorContrast.js */
-const debug$1 = new DebugLogging('colorContrast', true);
 
-// Constants
+/* Constants */
+const debug$3 = new DebugLogging('colorContrast', true);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -108,9 +108,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$1.flag) {
-      debug$1.separator();
-      debug$1.tag(elementNode);
+    if (debug$3.flag) {
+      debug$3.separator();
+      debug$3.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -133,20 +133,20 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$1.flag) {
-      debug$1.log(`[           opacity]: ${this.opacity}`);
-      debug$1.log(`[             color]: ${this.color}`);
-      debug$1.log(`[          colorHex]: ${this.colorHex}`);
-      debug$1.log(`[        background]: ${this.backgroundColor}`);
-      debug$1.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
-      debug$1.log(`[   backgroundImage]: ${this.backgroundImage}`, true);
-      debug$1.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
-      debug$1.log(`[backgroundPosition]: ${this.backgroundPosition}`);
-      debug$1.log(`[        fontFamily]: ${this.fontFamily}`, true);
-      debug$1.log(`[          fontSize]: ${this.fontSize}`);
-      debug$1.log(`[        fontWeight]: ${this.fontWeight}`);
-      debug$1.log(`[       isLargeFont]: ${this.isLargeFont}`);
-      debug$1.log(`[               ccr]: ${this.colorContrastRatio}`);
+    if (debug$3.flag) {
+      debug$3.log(`[           opacity]: ${this.opacity}`);
+      debug$3.log(`[             color]: ${this.color}`);
+      debug$3.log(`[          colorHex]: ${this.colorHex}`);
+      debug$3.log(`[        background]: ${this.backgroundColor}`);
+      debug$3.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
+      debug$3.log(`[   backgroundImage]: ${this.backgroundImage}`, true);
+      debug$3.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
+      debug$3.log(`[backgroundPosition]: ${this.backgroundPosition}`);
+      debug$3.log(`[        fontFamily]: ${this.fontFamily}`, true);
+      debug$3.log(`[          fontSize]: ${this.fontSize}`);
+      debug$3.log(`[        fontWeight]: ${this.fontWeight}`);
+      debug$3.log(`[       isLargeFont]: ${this.isLargeFont}`);
+      debug$3.log(`[               ccr]: ${this.colorContrastRatio}`);
     }
   }
 
@@ -229,13 +229,13 @@ class ColorContrast {
 
   normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-    debug$1.log(`[normalizeBackgroundColor][A]: ${backgroundColor}`);
+    debug$3.log(`[normalizeBackgroundColor][A]: ${backgroundColor}`);
     if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
       if (parentColorContrast) {
-        debug$1.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
+        debug$3.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundCcolor;
       }
       else {
@@ -243,7 +243,7 @@ class ColorContrast {
         backgroundColor = 'rgb(255,255,255)';
       }
     }
-    debug$1.log(`[normalizeBackgroundColor][C]: ${backgroundColor}`);
+    debug$3.log(`[normalizeBackgroundColor][C]: ${backgroundColor}`);
     return backgroundColor;
   }
 
@@ -469,9 +469,9 @@ class ColorContrast {
 }
 
 /* colorContrast.js */
-const debug = new DebugLogging('colorContrast', false);
 
-// Constants
+/* Constants */
+const debug$2 = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -512,15 +512,15 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    if (debug.flag) {
-      debug.separator();
-      debug.tag(elementNode);
-      debug.log('[          isHidden]: ' + this.isHidden);
-      debug.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$2.flag) {
+      debug$2.separator();
+      debug$2.tag(elementNode);
+      debug$2.log('[          isHidden]: ' + this.isHidden);
+      debug$2.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$2.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$2.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$2.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$2.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -631,6 +631,9 @@ class Visibility {
 
 /* domElement.js */
 
+/* Constants */
+new DebugLogging('colorContrast', false);
+
 /**
  * @class DOMElement
  *
@@ -661,6 +664,9 @@ class DOMElement {
 }
 
 /* domText.js */
+
+/* Constants */
+new DebugLogging('colorContrast', false);
 
 /**
  * @class DOMText
@@ -700,6 +706,8 @@ class DOMText {
 /* domCache.js */
 
 /* Constants */
+new DebugLogging('colorContrast', false);
+
 
 const skipableElements = [
   'base',
@@ -813,15 +821,25 @@ class DOMCache {
 
 /* evaluationResult.js */
 
+/* Constants */
+const debug$1 = new DebugLogging('EvaluationResult', false);
+
 class EvaluationResult {
   constructor (domCache, title, url) {
     this.domCache = domCache;
     this.title = title;
     this.url = url;
+    if (debug$1.flag) {
+      debug$1.log(`[title]: ${this.title}`);
+    }
   }
 }
 
 /* evaluate.js */
+
+/* Constants */
+const debug = new DebugLogging('evaluate', false);
+
 
 class EvaluationLibrary {
   constructor () {
@@ -840,6 +858,9 @@ class EvaluationLibrary {
   evaluate (startingNode, title='', url='') {
     let domCache = new DOMCache(startingNode);
     let evaluationResult = new EvaluationResult(domCache, title, url);
+    if (debug.flag) {
+      debug.log('EvaluationResult');
+    }
     return evaluationResult;
   }
 

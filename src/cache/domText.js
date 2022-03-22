@@ -1,5 +1,11 @@
 /* domText.js */
 
+/* Imports */
+import DebugLogging  from '../debug.js';
+
+/* Constants */
+const debug = new DebugLogging('colorContrast', false)
+
 /**
  * @class DOMText
  *
