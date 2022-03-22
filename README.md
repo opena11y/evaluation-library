@@ -5,9 +5,9 @@ Javascript library for evaluating WCAG and ARIA conformance.  The library is des
 
 # NPM development commands
 
-| Command      | Description |
-| ----------- | ----------- |
-| npm run eslint  | Uses eslint to validate JS source files in the `src` directory |
+| Command         | Description |
+| --------------- | ----------- |
+| npm run eslint  | Uses `eslint` to validate Javaascript files in the `src` directory |
 | npm run bundle  | Uses `rollup` to compile module files in `src` into a single JS file `releases/evaluation-library.js` |        |
-| npm run build  | runs eslint and then the bundle command   |
+| npm run build   | runs `eslint` and then the `bundle` command   |
 
