@@ -1,5 +1,5 @@
 # evaluation-library
-Javascript library for evaluating WCAG and ARIA conformance
+Javascript library for evaluating WCAG and ARIA conformance.  The library is designed to be used in browser extensions or emulators to evaluate accessibility features and issues.  The evaluation results can be accessed through APIs or exporting the results in a JSON format.
 
 [change.log](openajax_a11y/release-notes.md)
 
@@ -8,6 +8,6 @@ Javascript library for evaluating WCAG and ARIA conformance
 | Command      | Description |
 | ----------- | ----------- |
 | npm run eslint  | Uses eslint to validate JS source files in the `src` directory |
-| npm run bundle  | Uses `rollup` to compile module files into a single JS file `releases/evaluation-library.js` |        |
-| npm run build  | runs eslint and then bundle commands   |
+| npm run bundle  | Uses `rollup` to compile module files in `src` into a single JS file `releases/evaluation-library.js` |        |
+| npm run build  | runs eslint and then the bundle command   |
 
