@@ -236,7 +236,7 @@ class ColorContrast {
 
       if (parentColorContrast) {
         debug$3.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
-        backgroundColor   = parentColorContrast.backgroundCcolor;
+        backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
         // This is an edge case test typcially for body elements and frames
