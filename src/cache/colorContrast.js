@@ -55,7 +55,7 @@ export default class ColorContrast {
       debug.log(`[          colorHex]: ${this.colorHex}`);
       debug.log(`[        background]: ${this.backgroundColor}`);
       debug.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
-      debug.log(`[   backgroundImage]: ${this.backgroundImage}`, true);
+      debug.log(`[   backgroundImage]: ${this.backgroundImage}`);
       debug.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
       debug.log(`[backgroundPosition]: ${this.backgroundPosition}`);
       debug.log(`[        fontFamily]: ${this.fontFamily}`, true);
@@ -145,13 +145,11 @@ export default class ColorContrast {
 
   normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-    debug.log(`[normalizeBackgroundColor][A]: ${backgroundColor}`);
     if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
       if (parentColorContrast) {
-        debug.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -159,7 +157,6 @@ export default class ColorContrast {
         backgroundColor = 'rgb(255,255,255)';
       }
     }
-    debug.log(`[normalizeBackgroundColor][C]: ${backgroundColor}`);
     return backgroundColor;
   }
 

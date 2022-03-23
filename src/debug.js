@@ -76,7 +76,7 @@ export default class DebugLogging {
   tag (node, spaceAbove) {
     if (node && node.tagName) {
       const text = node.textContent.trim().replace(/\s+/g, ' ');
-      this.log(`[${node.tagName}]: ${text.substring(0, 20)}`, spaceAbove);
+      this.log(`[${node.tagName}]: ${text.substring(0, 40)}`, spaceAbove);
     }
   }
 

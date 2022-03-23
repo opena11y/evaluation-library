@@ -76,7 +76,7 @@ class DebugLogging {
   tag (node, spaceAbove) {
     if (node && node.tagName) {
       const text = node.textContent.trim().replace(/\s+/g, ' ');
-      this.log(`[${node.tagName}]: ${text.substring(0, 20)}`, spaceAbove);
+      this.log(`[${node.tagName}]: ${text.substring(0, 40)}`, spaceAbove);
     }
   }
 
@@ -139,7 +139,7 @@ class ColorContrast {
       debug$3.log(`[          colorHex]: ${this.colorHex}`);
       debug$3.log(`[        background]: ${this.backgroundColor}`);
       debug$3.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
-      debug$3.log(`[   backgroundImage]: ${this.backgroundImage}`, true);
+      debug$3.log(`[   backgroundImage]: ${this.backgroundImage}`);
       debug$3.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
       debug$3.log(`[backgroundPosition]: ${this.backgroundPosition}`);
       debug$3.log(`[        fontFamily]: ${this.fontFamily}`, true);
@@ -229,13 +229,11 @@ class ColorContrast {
 
   normalizeBackgroundColor (style, parentColorContrast) {
     let backgroundColor = style.getPropertyValue("background-color");
-    debug$3.log(`[normalizeBackgroundColor][A]: ${backgroundColor}`);
     if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
       if (parentColorContrast) {
-        debug$3.log(`[normalizeBackgroundColor][B]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -243,7 +241,6 @@ class ColorContrast {
         backgroundColor = 'rgb(255,255,255)';
       }
     }
-    debug$3.log(`[normalizeBackgroundColor][C]: ${backgroundColor}`);
     return backgroundColor;
   }
 
