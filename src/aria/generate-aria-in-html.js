@@ -10,6 +10,7 @@ const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
+const outputFilename = './src/aria/aria-in-html.json';
 
 let ariaInHTML = 'https://www.w3.org/TR/html-aria/';
 let elementInfoSelector = '#document-conformance-requirements-for-use-of-aria-attributes-in-html table.simple';
@@ -26,7 +27,7 @@ function getElementInfo(dom, ariaInfo) {
     let elem = elements[i];
 
     let firstCell = elem.querySelector("th:nth-child(1)");
-    if (firstCell) {
+    if (firstCell && firstCell.textContent) {
        hasAttr = (firstCell.textContent.indexOf('with') >= 0) && (firstCell.textContent.indexOf('without') < 0);
     }
 
@@ -48,7 +49,7 @@ function getElementInfo(dom, ariaInfo) {
     newInfo.tagName = tagName;
 
     let defaultRole = elem.querySelector("td:nth-child(2) code");
-    if (defaultRole) {
+    if (defaultRole && defaultRole.textContent) {
       defaultRole = defaultRole.textContent.replace('role=', '');
     } else {
       defaultRole = 'generic';
@@ -64,7 +65,7 @@ function getElementInfo(dom, ariaInfo) {
       allowedRoles = [];
 
       let roles = elem.querySelector("td:nth-child(3) p");
-      if (roles) {
+      if (roles && roles.textContent) {
         if ((roles.textContent.indexOf('Roles:') >= 0) ||
             (roles.textContent.indexOf('Role:') >= 0)) {
           roles = roles.querySelectorAll('code');
@@ -93,7 +94,7 @@ function getElementInfo(dom, ariaInfo) {
 
     // img element special case
 
-    if (tagName === 'img') {
+    if (tagName === 'img' && firstCell.textContent) {
       if (firstCell.textContent.indexOf('some text') >= 0) {
 
         refName += '[alt]';
@@ -358,7 +359,7 @@ function getElementInfo(dom, ariaInfo) {
 function getAriaInformation(dom) {
   ariaInfo = {};
   ariaInfo.title = dom.querySelector('h1.title').textContent;
-  ariaInfo.status = dom.querySelector('h1.title + h2').textContent.trim().replace('\n', '');
+  ariaInfo.status = dom.querySelector('h1.title + p').textContent.trim().replace('\n', '');
   ariaInfo.reference = ariaInHTML;
   ariaInfo.anyRoleAllowed = false;
   ariaInfo.noRoleAllowed = false;
@@ -371,7 +372,7 @@ function getAriaInformation(dom) {
 
 function outputAsJSON(ariaInfo) {
 
-  fs.writeFile('aria-in-html.json', JSON.stringify(ariaInfo, null, 4), err => {
+  fs.writeFile(outputFilename, JSON.stringify(ariaInfo, null, 4), err => {
     if (err) {
       console.error(err)
       return

@@ -10,8 +10,10 @@ const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
+const outputFilename = './src/aria/aria.json';
 
-let aria12 = 'https://www.w3.org/TR/wai-aria-1.2/';
+
+let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
 
 function getRoleType(elem) {
   let superClasses = [];
@@ -401,8 +403,8 @@ function getProps(dom, props) {
 function getAriaInformation(dom) {
   ariaInfo = {};
   ariaInfo.title = dom.querySelector('h1.title').textContent;
-  ariaInfo.status = dom.querySelector('h1.title + h2').textContent.trim().replace('\n', '');
-  ariaInfo.reference = aria12;
+  ariaInfo.status = dom.querySelector('h1.title + p').textContent.trim().replace('\n', '');
+  ariaInfo.reference = ariaURL;
   ariaInfo.propertyDataTypes = {};
   ariaInfo.designPatterns = {};
   ariaInfo.rolesWithRequiredChildren = [];
@@ -423,7 +425,7 @@ function getAriaInformation(dom) {
 
 function outputAsJSON(ariaInfo) {
 
-  fs.writeFile('aria12.json', JSON.stringify(ariaInfo, null, 4), err => {
+  fs.writeFile(outputFilename, JSON.stringify(ariaInfo, null, 4), err => {
     if (err) {
       console.error(err)
       return
@@ -432,7 +434,7 @@ function outputAsJSON(ariaInfo) {
   })
 }
 
-fetch(aria12)
+fetch(ariaURL)
   .then(data => data.text())
   .then(html => HTMLParser.parse(html))
   .then(dom => getAriaInformation(dom))
