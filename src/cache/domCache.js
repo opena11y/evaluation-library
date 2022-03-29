@@ -6,7 +6,7 @@ import DOMText     from './domText.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('colorContrast', false);
+const debug = new DebugLogging('domCache', false);
 
 
 const skipableElements = [
@@ -86,10 +86,14 @@ export default class DOMCache {
           const tagName = node.tagName.toLowerCase();
           if (!this.isSkipable(tagName)) {
             if (tagName === 'slot') {
-              node.assignedNodes({ flatten: true }).forEach( assignedNode => {
-                domItem = new DOMElement(parentDomElement, assignedNode);
-                parentDomElement.addChild(domItem);
-              });
+              let assignedNodes = node.assignedNodes();
+              // if no slotted elements, check for default slotted content
+              assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
+              if (assignedNodes.length) {
+                assignedNodes.forEach( assignedNode => {
+                  this.transverseDOM(parentDomElement, assignedNode);
+                });
+              }
             } else {
               domItem = new DOMElement(parentDomElement, node);
               parentDomElement.addChild(domItem);

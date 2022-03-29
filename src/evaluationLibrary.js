@@ -6,7 +6,7 @@ import EvaluationResult  from './evaluationResult.js';
 import DebugLogging      from './debug.js';
 
 /* Constants */
-const debug = new DebugLogging('evaluate', false)
+const debug = new DebugLogging('evaluationLibrary', false)
 
 
 export default class EvaluationLibrary {

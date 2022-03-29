@@ -34,7 +34,7 @@ template2.innerHTML = `
   <div class="content">
     <div class="custom-header">ccr-webcomponent</div>
     <slot name="content">
-      <p>No slot content</p>
+      <p>No slot content, <span><code>span</code> child of <code>p</code> element</span></p>
     </slot>
   </div>
 `;

@@ -80,6 +80,11 @@ export default class DebugLogging {
     }
   }
 
+  color (message, color="#000", backgroundColor='#fff', spaceAbove) {
+    const newline = spaceAbove ? '\n' : '';
+    console.log(`${newline}[${this._label}] ` + `%c${message}`, `color: ${color}; background: ${backgroundColor}`);
+  }
+
   separator (spaceAbove) {
     this.log('-----------------------------', spaceAbove);
   }

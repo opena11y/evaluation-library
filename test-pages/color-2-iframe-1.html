@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>IFRAME 1: Color Contrast Computations for iframes and custom elements  | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <script src="webComponent.js" type="module"></script>
+  </head>
+  <body style="background-color: #eef">
+
+    <section>
+      <h1>IFRAME 1: Color Contrast Computations for iframes and custom elements </h1>
+
+      <h2>Default Text</h2>
+
+      <p>Paragraph for testing <code>default</code> text.</p>
+
+      <ul>
+        <li style="color: #111">Item E: <span>Default Text</span></li>
+        <li style="color: #888">Item F: <span>Default Text</span></li>
+      </ul>
+
+      <cc-webcomponent backgroundColor="#aaf">
+        <ul slot="content">
+          <li style="color: #111">Item G: <span>Default Text</span></li>
+          <li style="color: #888">Item H: <span>Default Text</span></li>
+        </ul>
+      </cc-webcomponent>
+
+      <cc-webcomponent backgroundColor="#ffa"></cc-webcomponent>
+
+  </body>
+</html>

@@ -6,7 +6,7 @@ import Visibility     from './visibility.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('colorContrast', false);
+const debug = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -26,6 +26,8 @@ export default class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
+
+    debug.flag && debug.tag(elementNode);
   }
 
   get isDomText () {

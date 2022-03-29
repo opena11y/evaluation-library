@@ -80,6 +80,11 @@ class DebugLogging {
     }
   }
 
+  color (message, color="#000", backgroundColor='#fff', spaceAbove) {
+    const newline = spaceAbove ? '\n' : '';
+    console.log(`${newline}[${this._label}] ` + `%c${message}`, `color: ${color}; background: ${backgroundColor}`);
+  }
+
   separator (spaceAbove) {
     this.log('-----------------------------', spaceAbove);
   }
@@ -88,7 +93,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$3 = new DebugLogging('colorContrast', true);
+const debug$4 = new DebugLogging('colorContrast', true);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -108,9 +113,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$3.flag) {
-      debug$3.separator();
-      debug$3.tag(elementNode);
+    if (debug$4.flag) {
+      debug$4.separator();
+      debug$4.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -133,20 +138,12 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$3.flag) {
-      debug$3.log(`[           opacity]: ${this.opacity}`);
-      debug$3.log(`[             color]: ${this.color}`);
-      debug$3.log(`[          colorHex]: ${this.colorHex}`);
-      debug$3.log(`[        background]: ${this.backgroundColor}`);
-      debug$3.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
-      debug$3.log(`[   backgroundImage]: ${this.backgroundImage}`);
-      debug$3.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
-      debug$3.log(`[backgroundPosition]: ${this.backgroundPosition}`);
-      debug$3.log(`[        fontFamily]: ${this.fontFamily}`, true);
-      debug$3.log(`[          fontSize]: ${this.fontSize}`);
-      debug$3.log(`[        fontWeight]: ${this.fontWeight}`);
-      debug$3.log(`[       isLargeFont]: ${this.isLargeFont}`);
-      debug$3.log(`[               ccr]: ${this.colorContrastRatio}`);
+    if (debug$4.flag) {
+      debug$4.log(`[                    opacity]: ${this.opacity}`);
+      debug$4.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug$4.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$4.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+
     }
   }
 
@@ -468,7 +465,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$2 = new DebugLogging('visibility', false);
+const debug$3 = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -509,15 +506,15 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    if (debug$2.flag) {
-      debug$2.separator();
-      debug$2.tag(elementNode);
-      debug$2.log('[          isHidden]: ' + this.isHidden);
-      debug$2.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$2.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$2.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$2.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$2.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$3.flag) {
+      debug$3.separator();
+      debug$3.tag(elementNode);
+      debug$3.log('[          isHidden]: ' + this.isHidden);
+      debug$3.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$3.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$3.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$3.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$3.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -629,7 +626,7 @@ class Visibility {
 /* domElement.js */
 
 /* Constants */
-new DebugLogging('colorContrast', false);
+const debug$2 = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -649,6 +646,8 @@ class DOMElement {
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
+
+    debug$2.flag && debug$2.tag(elementNode);
   }
 
   get isDomText () {
@@ -663,7 +662,7 @@ class DOMElement {
 /* domText.js */
 
 /* Constants */
-new DebugLogging('colorContrast', false);
+new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -703,7 +702,7 @@ class DOMText {
 /* domCache.js */
 
 /* Constants */
-new DebugLogging('colorContrast', false);
+new DebugLogging('domCache', false);
 
 
 const skipableElements = [
@@ -783,10 +782,14 @@ class DOMCache {
           const tagName = node.tagName.toLowerCase();
           if (!this.isSkipable(tagName)) {
             if (tagName === 'slot') {
-              node.assignedNodes({ flatten: true }).forEach( assignedNode => {
-                domItem = new DOMElement(parentDomElement, assignedNode);
-                parentDomElement.addChild(domItem);
-              });
+              let assignedNodes = node.assignedNodes();
+              // if no slotted elements, check for default slotted content
+              assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
+              if (assignedNodes.length) {
+                assignedNodes.forEach( assignedNode => {
+                  this.transverseDOM(parentDomElement, assignedNode);
+                });
+              }
             } else {
               domItem = new DOMElement(parentDomElement, node);
               parentDomElement.addChild(domItem);
@@ -835,7 +838,7 @@ class EvaluationResult {
 /* evaluate.js */
 
 /* Constants */
-const debug = new DebugLogging('evaluate', false);
+const debug = new DebugLogging('evaluationLibrary', false);
 
 
 class EvaluationLibrary {

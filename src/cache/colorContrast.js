@@ -50,19 +50,10 @@ export default class ColorContrast {
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
     if (debug.flag) {
-      debug.log(`[           opacity]: ${this.opacity}`);
-      debug.log(`[             color]: ${this.color}`);
-      debug.log(`[          colorHex]: ${this.colorHex}`);
-      debug.log(`[        background]: ${this.backgroundColor}`);
-      debug.log(`[     backgroundHex]: ${this.backgroundColorHex}`);
-      debug.log(`[   backgroundImage]: ${this.backgroundImage}`);
-      debug.log(`[  backgroundRepeat]: ${this.backgroundRepeat}`);
-      debug.log(`[backgroundPosition]: ${this.backgroundPosition}`);
-      debug.log(`[        fontFamily]: ${this.fontFamily}`, true);
-      debug.log(`[          fontSize]: ${this.fontSize}`);
-      debug.log(`[        fontWeight]: ${this.fontWeight}`);
-      debug.log(`[       isLargeFont]: ${this.isLargeFont}`);
-      debug.log(`[               ccr]: ${this.colorContrastRatio}`);
+      debug.log(`[                    opacity]: ${this.opacity}`);
+      debug.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 

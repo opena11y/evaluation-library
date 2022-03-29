@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('colorContrast', false)
+const debug = new DebugLogging('domText', false)
 
 /**
  * @class DOMText
