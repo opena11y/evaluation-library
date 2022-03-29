@@ -16,25 +16,13 @@
 
         <h1>WIDGET 5: ARIA attribute must be defined</h1>
 
-        <h2>aria-labelledby</h2>
-        <div role="alert" class="WIDGET_5_PASS" aria-labelledby="ID_LABEL_1">aria-labelledby pass</div>
-
-        <div hidden role="alert" class="WIDGET_5_HIDDEN" aria-labelledby="ID_LABEL_2">aria-labelledby hidden</div>
-
-        <div role="alert" class="WIDGET_5_FAIL" aria-labeledby="ID_LABEL_3">aria-labelledby fail</div>
-
         <h2>aria-checked</h2>
         <div role="checkbox" class="WIDGET_5_PASS" aria-checked="true">aria-checked pass true</div>
 
         <div role="checkbox" hidden class="WIDGET_5_HIDDEN" aria-checked="true">aria-checked hidden</div>
 
         <div role="checkbox" class="WIDGET_5_FAIL" aria-check="true">aria-checked fail</div>
-<!-- pass and hidden don't work
-        <h2>aria-invalid</h2>
-        <div role="alert" class="WIDGET_5_PASS" aria-invalid="true">aria-invalid pass true</div>
 
-        <div role="alert" hidden class="WIDGET_5_HIDDEN" aria-invalid="false">aria-invalid hidden</div>
--->
         <div role="alert" class="WIDGET_5_FAIL" aria-valid="true">aria-invalid pass true</div>
 
         <h2>aria-valuenow</h2>
