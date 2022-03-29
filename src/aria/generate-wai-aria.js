@@ -10,7 +10,10 @@ const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
-const outputFilename = './src/aria/aria.json';
+const outputFilename = './src/aria/aria.js';
+const exportPrefix = '/* generated file */\nexport default aria = '
+
+
 
 
 let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
@@ -425,7 +428,7 @@ function getAriaInformation(dom) {
 
 function outputAsJSON(ariaInfo) {
 
-  fs.writeFile(outputFilename, JSON.stringify(ariaInfo, null, 4), err => {
+  fs.writeFile(outputFilename, exportPrefix + JSON.stringify(ariaInfo, null, 4), err => {
     if (err) {
       console.error(err)
       return

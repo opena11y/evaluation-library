@@ -10,7 +10,8 @@ const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
-const outputFilename = './src/aria/aria-in-html.json';
+const outputFilename = './src/aria/aria-in-html.js';
+const exportPrefix = '/* generated file */\nexport default ariaInHTML = ';
 
 let ariaInHTML = 'https://www.w3.org/TR/html-aria/';
 let elementInfoSelector = '#document-conformance-requirements-for-use-of-aria-attributes-in-html table.simple';
@@ -372,7 +373,7 @@ function getAriaInformation(dom) {
 
 function outputAsJSON(ariaInfo) {
 
-  fs.writeFile(outputFilename, JSON.stringify(ariaInfo, null, 4), err => {
+  fs.writeFile(outputFilename, exportPrefix + JSON.stringify(ariaInfo, null, 4), err => {
     if (err) {
       console.error(err)
       return

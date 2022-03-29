@@ -1,4 +1,5 @@
-{
+/* generated file */
+export default aria = {
     "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2",
     "status": "W3C Candidate Recommendation Draft 08 December 2021",
     "reference": "https://www.w3.org/TR/wai-aria-1.2/",
