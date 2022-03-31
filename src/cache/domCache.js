@@ -1,8 +1,9 @@
 /* domCache.js */
 
 /* Imports */
-import DOMElement  from './domElement.js';
-import DOMText     from './domText.js';
+import DOMElement    from './domElement.js';
+import DOMText       from './domText.js';
+import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
@@ -22,6 +23,29 @@ const skipableElements = [
 ]
 
 /**
+ * @class parentInfo
+ *
+ * @desc Contains reference to ancestor objects in the DOMCache
+ *
+ * @param  {Object}  info - Parent ParentInfo object
+ */
+
+
+class parentInfo {
+  constructor (info) {
+    if (info) {
+      this.domElement = info.domElement;
+      this.landmarkElement = info.landmrkElement;
+      this.controlElement = info.controlElement;
+    } else {
+      this.domElement = null;
+      this.landmarkElement = null;
+      this.controlElement = null;
+    }
+  }
+}
+
+/**
  * @class DOMCache
  *
  * @desc Builds a cache of the dom from the startingNode and computes
@@ -34,6 +58,7 @@ const skipableElements = [
 
 export default class DOMCache {
   constructor (startingNode) {
+    this.structureInfo = new StructureInfo();
   	this.domCache = new DOMElement(null, startingNode);
     this.transverseDOM(this.domCache, startingNode);
   }
@@ -56,15 +81,16 @@ export default class DOMCache {
    *       that are used by the accessibility rules to test accessibility 
    *       requirements 
    *
-   * @param {Object}  parentDomElement  - Parent DomElement associated with the
+   * @param {Object}  parentinfo  - Parent DomElement associated with the
    *                                      parent element node of the starting node  
    * @param {Object}  startingNode      - The dom element to start transversing the
    *                                      dom
    */
 
-  transverseDOM(parentDomElement, startingNode) {
+  transverseDOM(parentInfo, startingNode) {
     let domItem = null;
     let isLastDomText = false;  // used for combining ajacent dom text nodes
+    parentInfo = new ParentInfo(parentInfo);
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
 
       switch (node.nodeType) {
@@ -74,7 +100,7 @@ export default class DOMCache {
           if (isLastDomText) {
             domItem.addTextNode(node);
           } else {
-            domItem = new DOMText(parentDomElement, node)
+            domItem = new DOMText(parentInfo, node)
             if (domItem.hasContent) {
               parentDomElement.addChild(domItem);            
               isLastDomText = true;
@@ -91,24 +117,25 @@ export default class DOMCache {
               assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
               if (assignedNodes.length) {
                 assignedNodes.forEach( assignedNode => {
-                  this.transverseDOM(parentDomElement, assignedNode);
+                  this.transverseDOM(parentInfo, assignedNode);
                 });
               }
             } else {
-              domItem = new DOMElement(parentDomElement, node);
-              parentDomElement.addChild(domItem);
+              domItem = new DOMElement(parentInfo, node);
+              parentInfo.parentDomElement.addChild(domItem);
+              parentInfo.domElement = domItem;
 
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
-                  this.transverseDOM(domItem, node.shadowRoot);
+                  this.transverseDOM(parentInfo, node.shadowRoot);
                 }
               } else {
                 if ((tagName === 'frame') || (tagName === 'iframe')) {
                   if (node.contentWindow.document) {
-                    this.transverseDOM(domItem, node.contentWindow.document);
+                    this.transverseDOM(parentInfo, node.contentWindow.document);
                   }
                 } else {
-                  this.transverseDOM(domItem, node);
+                  this.transverseDOM(parentInfo, node);
                 }
               }
             }

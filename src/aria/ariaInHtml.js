@@ -1,4 +1,4 @@
-/* generated file */
+/* generated file, use npm run aria-in-html */
 export default ariaInHTML = {
     "title": "ARIA in HTML",
     "status": "W3C Recommendation 09 December 2021",
