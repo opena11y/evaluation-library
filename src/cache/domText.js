@@ -15,14 +15,25 @@ const debug = new DebugLogging('domText', false)
  *       NOTE: Adjacent dom text node in the live dom are combined into a 
  *             single DOMText object
  *
- * @param  {Object}  parentDomElement - Parent DOMElement object (is null for top level)
- * @param  {Object}  textNode         - dom text node to be represented
+ * @param  {Object}  parentInfo - ParentInfo object 
+ * @param  {Object}  textNode   - dom text node to be represented
  */
 
 export default class DOMText {
-  constructor (parentDomElement, textNode) {
-    this.parentDomElement = parentDomElement;
+  constructor (parentInfo, textNode) {
+    this.parentInfo = parentInfo;
     this.text = textNode.textContent.trim();
+
+    if (this.hasContent) {
+      if (parentInfo && parentInfo.domElement) {
+        const domElement = parentInfo.domElement;
+        if (domElement.isLastChildText) {
+          domElement.addTextToLastChild(this.text);
+        } else {
+          domElement.addChild(this);
+        }
+      }
+    } 
   }
 
   get isDomText () {
@@ -33,8 +44,8 @@ export default class DOMText {
     return this.text.length;
   }
 
-  addTextNode (textNode) {
-    const s = textNode.textContent.trim();
+  addText (text) {
+    const s = text.trim();
     if (s) {
       this.text += ' ' + s;
     }

@@ -11,7 +11,7 @@ const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
 const outputFilename = './src/aria/aria.js';
-const exportPrefix = '/* generated file, use npm run aria */\nexport default aria = '
+const exportPrefix = '/* generated file, use npm run aria */\nexport default const aria = '
 
 
 

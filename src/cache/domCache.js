@@ -23,7 +23,7 @@ const skipableElements = [
 ]
 
 /**
- * @class parentInfo
+ * @class ParentInfo
  *
  * @desc Contains reference to ancestor objects in the DOMCache
  *
@@ -31,7 +31,7 @@ const skipableElements = [
  */
 
 
-class parentInfo {
+class ParentInfo {
   constructor (info) {
     if (info) {
       this.domElement = info.domElement;
@@ -73,6 +73,11 @@ export default class DOMCache {
     return tagName.indexOf('-') >= 0;
   }
 
+  // Tests if a tag name is an iframe or frame
+  isIFrame(tagName) {
+    return tagName === 'iframe' || tagName === 'frame';
+  }
+
   /**
    * @method transverseDOM
    *
@@ -89,23 +94,12 @@ export default class DOMCache {
 
   transverseDOM(parentInfo, startingNode) {
     let domItem = null;
-    let isLastDomText = false;  // used for combining ajacent dom text nodes
-    parentInfo = new ParentInfo(parentInfo);
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
 
       switch (node.nodeType) {
 
         case Node.TEXT_NODE:
-          // Combine text nodes if siblings
-          if (isLastDomText) {
-            domItem.addTextNode(node);
-          } else {
-            domItem = new DOMText(parentInfo, node)
-            if (domItem.hasContent) {
-              parentDomElement.addChild(domItem);            
-              isLastDomText = true;
-            } 
-          }
+          domItem = new DOMText(parentInfo, node)
           break;
 
         case Node.ELEMENT_NODE:
@@ -122,25 +116,26 @@ export default class DOMCache {
               }
             } else {
               domItem = new DOMElement(parentInfo, node);
-              parentInfo.parentDomElement.addChild(domItem);
-              parentInfo.domElement = domItem;
+              let newParentInfo = new ParentInfo(parentInfo);
+              newParentInfo.domElement = domItem;
 
+              // check for custom elements
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
-                  this.transverseDOM(parentInfo, node.shadowRoot);
+                  this.transverseDOM(newParentInfo, node.shadowRoot);
                 }
               } else {
-                if ((tagName === 'frame') || (tagName === 'iframe')) {
+                // Check for iframe or frame tag
+                if (this.isIFrame(tagName)) {
                   if (node.contentWindow.document) {
-                    this.transverseDOM(parentInfo, node.contentWindow.document);
+                    this.transverseDOM(newParentInfo, node.contentWindow.document);
                   }
                 } else {
-                  this.transverseDOM(parentInfo, node);
+                  this.transverseDOM(newParentInfo, node);
                 }
               }
             }
           }   
-          isLastDomText = false;
           break;
 
         default:
