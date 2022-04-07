@@ -1,10 +1,11 @@
 /* domElement.js */
 
 /* Imports */
-import ColorContrast  from './colorContrast.js';
-import Visibility     from './visibility.js';
-import DebugLogging   from '../debug.js';
-// import ariaInHTML     from '../aria/ariaInHtml.js';
+import ColorContrast     from './colorContrast.js';
+import Visibility        from './visibility.js';
+import DebugLogging      from '../debug.js';
+import AriaValidation    from '../aria/ariaValidation.js';
+import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 
 /* Constants */
 const debug = new DebugLogging('DOMElement', false);
@@ -21,21 +22,15 @@ const debug = new DebugLogging('DOMElement', false);
 
 export default class DOMElement {
   constructor (parentInfo, elementNode) {
-
-    let parentDomElement = null;
-
-    if (parentInfo) {
-      parentDomElement = parentInfo.domElement;
-      if (parentDomElement) {
-        parentDomElement.addChild(this);
-      }
-    }
+    const parentDomElement = parentInfo.domElement;
+    const role = elementNode.role;
 
     this.parentInfo       = parentInfo; 
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
-    this.role             = this.node.role;
-//    this.ariaInHTMLInfo   = getAriaInHTMLInfo(elementNode, parentInfo);
+    this.ariaInHTMLInfo   = getAriaInHTMLInfo(parentInfo, elementNode);
+    this.role             = role ? role : this.ariaInHTMLInfo.defaultRole;
+    this.ariaValidation   = new AriaValidation(this.role, elementNode);
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
@@ -47,17 +42,17 @@ export default class DOMElement {
     return false;
   }
 
-  get isLastChildText () {
-    return true;
+  get isLastChildDomText () {
+    let flag = false;
+    const lastChild = this.getLastChild();
+    if (lastChild && lastChild.isDomText) {
+      flag = true;
+    }
+    return flag;
   }
 
   addChild (domItem) {
     this.children.push(domItem);
-  }
-
-  getAriaInHTMLInfo (node) {
-    let role = 'generic';
-    return role;
   }
 
   getLastChild () {
@@ -69,6 +64,12 @@ export default class DOMElement {
     return domItem;
   }
 
+  getAriaInHTMLInfo (node) {
+    let role = 'generic';
+    return role;
+  }
+
+
   addTextToLastChild (text) {
     const domItem = this.getLastChild();
     if (domItem && domItem.isDomText) {
@@ -76,4 +77,4 @@ export default class DOMElement {
     }
   }
 
-}
+ }

@@ -10,8 +10,8 @@ const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
-const outputFilename = './src/aria/ariaInHtml.js';
-const exportPrefix = '/* generated file, use npm run aria-in-html */\nexport default const ariaInHTML = ';
+const outputFilename = './src/aria-in-html/ariaInHtmlInfo.js';
+const exportPrefix = '/* generated file, use npm run aria-in-html */\nexport const ariaInHTMLInfo = ';
 
 let ariaInHTML = 'https://www.w3.org/TR/html-aria/';
 let elementInfoSelector = '#document-conformance-requirements-for-use-of-aria-attributes-in-html table.simple';

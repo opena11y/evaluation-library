@@ -10,11 +10,8 @@ const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
-const outputFilename = './src/aria/aria.js';
-const exportPrefix = '/* generated file, use npm run aria */\nexport default const aria = '
-
-
-
+const outputFilename = './src/aria/ariaInfo.js';
+const exportPrefix = '/* generated file, use npm run aria */\nexport const ariaInfo = '
 
 let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
 

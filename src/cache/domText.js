@@ -12,7 +12,7 @@ const debug = new DebugLogging('domText', false)
  * @desc Used to represent a dom text node for use in computing information 
  *       usefule for accessibility rules.
  * 
- *       NOTE: Adjacent dom text node in the live dom are combined into a 
+ *       NOTE: Adjacent dom text nodes in the live dom are combined into a
  *             single DOMText object
  *
  * @param  {Object}  parentInfo - ParentInfo object 
@@ -23,17 +23,10 @@ export default class DOMText {
   constructor (parentInfo, textNode) {
     this.parentInfo = parentInfo;
     this.text = textNode.textContent.trim();
+  }
 
-    if (this.hasContent) {
-      if (parentInfo && parentInfo.domElement) {
-        const domElement = parentInfo.domElement;
-        if (domElement.isLastChildText) {
-          domElement.addTextToLastChild(this.text);
-        } else {
-          domElement.addChild(this);
-        }
-      }
-    } 
+  get getText () {
+    return this.text + ' (' + this.text.length + ')';
   }
 
   get isDomText () {

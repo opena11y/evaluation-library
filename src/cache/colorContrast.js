@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('colorContrast', true);
+const debug = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 

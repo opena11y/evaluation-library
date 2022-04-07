@@ -33,14 +33,16 @@ const skipableElements = [
 
 class ParentInfo {
   constructor (info) {
+    this.document = null;
+    this.domElement = null;
+    this.landmarkElement = null;
+    this.controlElement = null;
+
     if (info) {
+      this.document = info.document;
       this.domElement = info.domElement;
       this.landmarkElement = info.landmrkElement;
       this.controlElement = info.controlElement;
-    } else {
-      this.domElement = null;
-      this.landmarkElement = null;
-      this.controlElement = null;
     }
   }
 }
@@ -53,14 +55,18 @@ class ParentInfo {
  *       The dom cache is passed into rules for computing evaluation
  *       results
  *
- * @param  {Object}  startingNode - Browser document object model (DOM) to build cache
+ * @param  {Object}  startingDoc - Browser document object model (DOM) to build cache
  */
 
 export default class DOMCache {
-  constructor (startingNode) {
+  constructor (startingDoc) {
+    const parentInfo = new ParentInfo();
+    parentInfo.document = startingDoc;
+
     this.structureInfo = new StructureInfo();
-  	this.domCache = new DOMElement(null, startingNode);
-    this.transverseDOM(this.domCache, startingNode);
+  	this.domCache = new DOMElement(parentInfo, startingDoc);
+
+    this.transverseDOM(this.domCache, startingDoc);
   }
 
   // Tests if a tag name can be skipped
@@ -76,6 +82,11 @@ export default class DOMCache {
   // Tests if a tag name is an iframe or frame
   isIFrame(tagName) {
     return tagName === 'iframe' || tagName === 'frame';
+  }
+
+  // Tests if a tag name is a slot
+  isSlotted(tagName) {
+    return tagName  === 'slot';
   }
 
   /**
@@ -94,18 +105,36 @@ export default class DOMCache {
 
   transverseDOM(parentInfo, startingNode) {
     let domItem = null;
+    let parentDomElement = parentInfo.domElement;
+
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
 
       switch (node.nodeType) {
 
         case Node.TEXT_NODE:
-          domItem = new DOMText(parentInfo, node)
+          domItem = new DOMText(parentInfo, node);
+          debug.flag && debug.log('[text]: ' + domItem.getText);
+          // Check to see if text node has any renderable content
+          if (domItem.hasContent) {
+            // Merge text nodes in to a single DomText node if sibling text nodes
+            if (parentDomElement) {
+              // if last child node of parent is a DomText node merge text content
+              if (parentDomElement.isLastChildDomText) {
+                parentDomElement.addTextToLastChild(domItem.text);
+              } else {
+                parentDomElement.addChild(domItem);
+              }
+            }
+          }
           break;
 
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
+          debug.flag && debug.log('[tagName]: ' + tagName);
+
           if (!this.isSkipable(tagName)) {
-            if (tagName === 'slot') {
+            // check for slotted content
+            if (this.isSlotted(tagName)) {
               let assignedNodes = node.assignedNodes();
               // if no slotted elements, check for default slotted content
               assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
@@ -116,18 +145,19 @@ export default class DOMCache {
               }
             } else {
               domItem = new DOMElement(parentInfo, node);
-              let newParentInfo = new ParentInfo(parentInfo);
-              newParentInfo.domElement = domItem;
+              const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
+                  newParentInfo.document = node.shadowRoot;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
                 }
               } else {
                 // Check for iframe or frame tag
                 if (this.isIFrame(tagName)) {
                   if (node.contentWindow.document) {
+                    newParentInfo.document = node.contentWindow.document;
                     this.transverseDOM(newParentInfo, node.contentWindow.document);
                   }
                 } else {
@@ -145,5 +175,11 @@ export default class DOMCache {
     } /* end for */
   }
 
+  updateDOMElementInformation (parentInfo, domElement) {
+    let newParentInfo = new ParentInfo(parentInfo);
+    newParentInfo.domElement = domElement;
+
+    return newParentInfo;
+  }
 
 }
