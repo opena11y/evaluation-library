@@ -28,7 +28,7 @@ export default class DOMElement {
     this.parentInfo       = parentInfo; 
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
-    this.ariaInHTMLInfo   = getAriaInHTMLInfo(parentInfo, elementNode);
+    this.ariaInHTMLInfo   = getAriaInHTMLInfo(elementNode);
     this.role             = role ? role : this.ariaInHTMLInfo.defaultRole;
     this.ariaValidation   = new AriaValidation(this.role, elementNode);
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);

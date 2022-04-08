@@ -232,8 +232,8 @@ function getElementInfo(dom, ariaInfo) {
       colInfo.ownedbyTable = true;
       colInfo.ownedbyGrid = true;
       colInfo.ownedbyTreegrid = true;
-      ariaInfo['th[colheder]'] = colInfo;
-      ariaInfo['th[colheder]'].id = 'th[colheder]';
+      ariaInfo['th[colheader]'] = colInfo;
+      ariaInfo['th[colheader]'].id = 'th[colheader]';
 
       let rowInfo = {};
       rowInfo.tagName = 'th';
@@ -243,8 +243,8 @@ function getElementInfo(dom, ariaInfo) {
       rowInfo.ownedbyTable = true;
       rowInfo.ownedbyGrid = true;
       rowInfo.ownedbyTreegrid = true;
-      rowInfo['th[rowheder]'] = rowInfo;
-      rowInfo['th[rowheder]'].id = 'th[rowheder]';
+      rowInfo['th[rowheader]'] = rowInfo;
+      rowInfo['th[rowheader]'].id = 'th[rowheader]';
 
     }
 
@@ -355,7 +355,6 @@ function getElementInfo(dom, ariaInfo) {
   }
 
 }
-
 
 function getAriaInformation(dom) {
   ariaInfo = {};

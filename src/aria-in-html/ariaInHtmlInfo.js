@@ -1393,7 +1393,7 @@ export const ariaInHTMLInfo = {
             "ownedbyTreegrid": true,
             "id": "th[gridcell]"
         },
-        "th[colheder]": {
+        "th[colheader]": {
             "tagName": "th",
             "defaultRole": "colheader",
             "noRoleAllowed": true,
@@ -1401,7 +1401,7 @@ export const ariaInHTMLInfo = {
             "ownedbyTable": true,
             "ownedbyGrid": true,
             "ownedbyTreegrid": true,
-            "id": "th[colheder]"
+            "id": "th[colheader]"
         },
         "th": {
             "tagName": "th",
