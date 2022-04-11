@@ -61,6 +61,15 @@ export default class StructureInfo {
     }
   }
 
+  /**
+   * @method addChildLandmark
+   *
+   * @desc
+   *
+   * @param  {Object}  domElement            - DOMElement object representing an element in the DOM
+   * @param  {Object}  parentLandmarkElement - LandmarkELement object representing an landmark region
+   */
+
   addchildLandmark (domElement, parentLandmarkElement) {
     const landmarkElement = new LandmarkElement(domElement, parentLandmarkElement);
     this.allLandmarkElements.push(landmarkElement);
@@ -72,6 +81,14 @@ export default class StructureInfo {
     }
   }
 
+  /**
+   * @method addChildHeading
+   *
+   * @desc
+   *
+   * @param  {Object}  domElement            - DOMElement object representing an element in the DOM
+   * @param  {Object}  parentLandmarkElement - LandmarkELement object representing an landmark region
+   */
 
   addchildHeading (domElement, parentLandmarkElement) {
     this.allHeadingDomElements.push(domElement);
@@ -80,14 +97,22 @@ export default class StructureInfo {
     }
   }
 
+  /**
+   * @method isLandmark
+   *
+   * @desc Tests if a domElement is a landmark
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
   isLandmark(domElement) {
     const flag = false;
     const role = domElement.role || domElement.defaultRole;
     const name = domElement.accessibleName;
 
-    if (landmarkRoles.indexOf(role) >= 0) {
+    if (landmarkRoles.contains(role)) {
 
-      if (requireAccessibleNames.indexOf(role) >= 0) {
+      if (requireAccessibleNames.contains(role)) {
         flag = name && name.length;
       } else {
         flag = true;
@@ -97,12 +122,23 @@ export default class StructureInfo {
     return flag;
   }
 
+  /**
+   * @method isHeading
+   *
+   * @desc Tests if a domElement is a heading
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
   isHeading(domElement) {
     const tagName = domElement.tagName;
     const role = domElement.role;
-    return (role === headingRole) || (headingTags.indexOf(tagName) >= 0);
+    return (role === headingRole) || (headingTags.contains(tagName));
   }
 
+  update(domElement) {
+
+  }
 };
 
 

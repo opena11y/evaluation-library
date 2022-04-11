@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Accessible Name and Description Calculations | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Accessible Name and Description Calculations</h1>
+
+      <h2>Label Reference</h2>
+
+      <div>
+        <label for="control-11">Label Reference 1: TextBox</label>
+        <input id="control-11" type="text" title="Desc Reference 1: title" aria-errormessage="control-11-err"/>
+        <div id="control-11-err">Label Reference 1: Error message</div>
+      </div>
+
+      <div>
+        <label for="control-12">Label Reference 2: Select</label>
+        <select id="control-12">
+          <option>Red</option>
+          <option>Yellow</option>
+          <option>Green</option>
+        </select>
+      </div>
+
+      <h2>Label Encapsulation</h2>
+
+      <div>
+        <label>
+          Label Encapsulation 1: TextBox
+          <input type="checbox" aria-describedby="control-22"/>
+        </label>
+        <div id="control-22">Description Encapsulation 1: TextBox</div>
+      </div>
+
+      <div>
+        <label>Label Encapsulation 2: Select</label>
+        <select>
+          <option>Red</option>
+          <option>Yellow</option>
+          <option>Green</option>
+        </select>
+      </div>
+
+      <fieldset>
+        <legend>Legend 1: Radio Group</legend>
+        <label>
+          Label Encapsulation 3: Radio
+          <input name="test" type="radio"/>
+        </label>
+        <label>
+          Label Encapsulation 4: Radio
+          <input name="test" type="radio"/>
+        </label>
+        <label>
+          Label Encapsulation 5: Radio
+          <input name="test" type="radio"/>
+        </label>
+      </fieldset>
+
+    </main>
+
+<!--
+    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
+-->
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc.body, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

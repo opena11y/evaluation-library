@@ -5,7 +5,7 @@ import DebugLogging     from '../debug.js';
 import {ariaInHTMLInfo} from '../aria-in-html/ariaInHtmlInfo.js';
 
 /* Constants */
-const debug = new DebugLogging('ariaInHtml', true);
+const debug = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -40,7 +40,7 @@ const landmarkRoles = [
 export default function getAriaInHTMLInfo (node) {
   let elemInfo, type;
 
-  const tagName = node.tagName.toLowerCase();
+  let tagName = node.tagName.toLowerCase();
   const elementInfo = ariaInHTMLInfo.elementInfo;
 
   switch (tagName) {
@@ -120,7 +120,8 @@ export default function getAriaInHTMLInfo (node) {
 
     case 'section':
       if (node.hasAttribute('aria-label') ||
-        node.hasAttribute('aria-labelledby')) {
+        node.hasAttribute('aria-labelledby')||
+        node.hasAttribute('title')) {
         elemInfo = elementInfo['section[accname]'];
       } else {
         elemInfo = elementInfo['section'];
@@ -195,7 +196,7 @@ export default function getAriaInHTMLInfo (node) {
 
 function getString (value) {
   if (typeof value === 'string') {
-    return value.toLowerCase();
+    return value.trim().toLowerCase();
   }
   return '';
 }

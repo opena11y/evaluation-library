@@ -41,7 +41,7 @@ class ParentInfo {
     if (info) {
       this.document = info.document;
       this.domElement = info.domElement;
-      this.landmarkElement = info.landmrkElement;
+      this.landmarkElement = info.landmarkElement;
       this.controlElement = info.controlElement;
     }
   }
@@ -75,7 +75,7 @@ export default class DOMCache {
   }
 
   // Tests if a tag name is a custom element
-  isCustomElement(tagName) {
+  isCustom(tagName) {
     return tagName.indexOf('-') >= 0;
   }
 
@@ -148,7 +148,7 @@ export default class DOMCache {
               const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
-              if (this.isCustomElement(tagName)) {
+              if (this.isCustom(tagName)) {
                 if (node.shadowRoot) {
                   newParentInfo.document = node.shadowRoot;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
