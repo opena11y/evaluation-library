@@ -5,6 +5,11 @@
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
     <link href="test.css" rel="stylesheet" type="text/css"/>
+    <style>
+      label {
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -44,29 +49,106 @@
       </div>
 
       <div>
-        <label>Label Encapsulation 2: Select</label>
-        <select>
-          <option>Red</option>
-          <option>Yellow</option>
-          <option>Green</option>
-        </select>
+        <label>Label Encapsulation 2: Select
+          <select>
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
       </div>
 
       <fieldset>
         <legend>Legend 1: Radio Group</legend>
         <label>
+          <input name="test" type="radio"/>
           Label Encapsulation 3: Radio
-          <input name="test" type="radio"/>
         </label>
         <label>
+          <input name="test" type="radio"/>
           Label Encapsulation 4: Radio
-          <input name="test" type="radio"/>
         </label>
         <label>
-          Label Encapsulation 5: Radio
           <input name="test" type="radio"/>
+          Label Encapsulation 5: Radio
         </label>
       </fieldset>
+
+      <h2><code>aria-label</code></h2>
+
+      <div>
+        <label>
+          <code>aria-label 1</code>: TextBox
+          <input type="checbox" aria-label="aria-label 1 textbox label, overrides label encapsulation"/>
+        </label>
+      </div>
+
+      <div>
+        <label>2: Select
+          <select aria-label="aria-label 1 textbox label, overrides label encapsulation">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend aria-label="aria-label legend, overrides legend text content">Legend 1: Radio Group</legend>
+        <label>
+          <input name="test" type="radio" aria-label="aria-label 3 radio label, overrides label encapsulation"/>
+          <code>aria-label</code>  3: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" aria-label="aria-label 4 radio label, overrides label encapsulation"/>
+          <code>aria-label</code>  4: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" aria-label="aria-label 4 radio label, overrides label encapsulation"/>
+          <code>aria-label</code>  5: Radio
+        </label>
+      </fieldset>
+
+
+      <h2><code>aria-labelledby</code></h2>
+
+      <div>
+        <label>
+          <code>aria-labelledby</code> 1: TextBox
+          <input type="checbox"  aria-labelledby="textbox-a"/>
+        </label>
+        <div id="textbox-a">aria-labelledy 1 textbox label, overrides label encapsulation"</div>
+      </div>
+
+      <div>
+        <label><code>aria-labelledby</code> 2: Select
+          <select aria-labelledby="select-b">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+        <div id="select-b">aria-labelledy 2 select label, overrides label encapsulation"</div>
+      </div>
+
+      <fieldset>
+        <legend aria-labellby="legend-c">Legend 1: Radio Group</legend>
+        <div id="legend-c">aria-labelledy  legend, overrides legend text content"</div>
+        <label>
+          <input name="test" type="radio" aria-labelledby=""/>
+          Label Encapsulation 3: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" aria-label="aria-label 4 radio label, overrides label encapsulation"/>
+          Label Encapsulation 4: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" aria-label="aria-label 4 radio label, overrides label encapsulation"/>
+          Label Encapsulation 5: Radio
+        </label>
+      </fieldset>
+
+
 
     </main>
 
