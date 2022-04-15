@@ -15,7 +15,7 @@ import {
 } from '../utils/getaccname.js';
 
 /* Constants */
-const debug = new DebugLogging('DOMElement', true);
+const debug = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -30,21 +30,26 @@ const debug = new DebugLogging('DOMElement', true);
 export default class DOMElement {
   constructor (parentInfo, elementNode) {
     const parentDomElement = parentInfo.domElement;
-    const role = elementNode.role;
+
+    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
+    const defaultRole    = this.ariaInHTMLInfo.defaultRole;
+    const role           = elementNode.getAttribute('role');
 
     this.parentInfo       = parentInfo; 
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
 
     this.ariaInHTMLInfo   = getAriaInHTMLInfo(elementNode);
-    this.role             = role ? role : this.ariaInHTMLInfo.defaultRole;
-    this.ariaValidation   = new AriaValidation(this.role, elementNode);
+    this.role             = role ? role : defaultRole;
+    this.ariaValidation   = new AriaValidation(this.role, defaultRole, elementNode);
 
     this.accName           = getAccessibleName(elementNode);
     this.accDescription    = getAccessibleDesc(elementNode);
     this.errMessage        = getErrMessage(elementNode);
 
-    debug.flag && debug.log(`[       tagName]: ${this.tagName} (${this.role})`, 1);
+/* Used for testing naming module with accname-1.html test page */
+    debug.flag && (this.tagName === 'h2') && debug.separator(1);
+    debug.flag && debug.log(`[       tagName]: ${this.tagName} (${this.role})`);
     debug.flag && this.accName && debug.log(`[       aacName]: ${this.accName.name} (${this.accName.source})`);
     debug.flag && this.accDescription && debug.log(`[aacDescription]: ${this.accDescription.name} (${this.accDescription.source})`);
     debug.flag && this.errMessage && debug.log(`[    errMessage]: ${this.errMessage.name} (${this.errMessage.source})`);
