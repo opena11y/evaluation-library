@@ -35,6 +35,11 @@ export {
   nameFromNativeSemantics
 };
 
+const noAccName = {
+  name: '',
+  source: 'none'
+};
+
 /*
 *   getAccessibleName: Use the ARIA Roles Model specification for accessible
 *   name calculation based on its precedence order:
@@ -49,6 +54,7 @@ function getAccessibleName (element, recFlag) {
   if (!recFlag) accName = nameFromAttributeIdRefs(element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
   if (accName === null) accName = nameFromNativeSemantics(element, recFlag);
+  if (accName === null) accName = noAccName;
 
   return accName;
 }
@@ -64,6 +70,7 @@ function getAccessibleDesc (element, recFlag) {
 
   if (!recFlag) accDesc = nameFromAttributeIdRefs(element, 'aria-describedby');
   if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
+  if (accDesc === null) accDesc = noAccName;
 
   return accDesc;
 }
@@ -78,6 +85,8 @@ function getErrMessage (element) {
   let errMessage = null;
 
   errMessage = nameFromAttributeIdRefs(element, 'aria-errormessage');
+
+  if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
 }

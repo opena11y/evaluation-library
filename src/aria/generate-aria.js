@@ -6,15 +6,18 @@
  *   File:   reference-tables.js
  */
 
-const fs = require('fs');
-const url = require('url');
+const fs    = require('fs');
+const os    = require('os');
+const util  = require('util');
+const url   = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
-const outputFilename = './src/aria/ariaInfo.js';
+
+const exportFilename = './src/aria/ariaInfo';
 const exportPrefix = '/* generated file, use npm run aria */\nexport const ariaInfo = '
+const exportSuffix = `;${os.EOL}`;
 
 let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
-
 
 function getRoleType(elem) {
   let superClasses = [];
@@ -426,17 +429,33 @@ function getAriaInformation(dom) {
 
 function outputAsJSON(ariaInfo) {
 
-  fs.writeFile(outputFilename, exportPrefix + JSON.stringify(ariaInfo, null, 4), err => {
+  fs.writeFile(exportFilename + '.json', JSON.stringify(ariaInfo, null, 4), err => {
     if (err) {
       console.error(err)
       return
     }
     //file written successfully
   })
+
+  return ariaInfo;
+}
+
+function outputAsJSObject(ariaInfo) {
+
+  fs.writeFile(exportFilename + '.js', exportPrefix + util.inspect(ariaInfo, { compact: false, depth: null }) + exportSuffix, err => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    //file written successfully
+  })
+
+  return ariaInfo;
 }
 
 fetch(ariaURL)
   .then(data => data.text())
   .then(html => HTMLParser.parse(html))
   .then(dom => getAriaInformation(dom))
-  .then(ariaInfo => outputAsJSON(ariaInfo));
+  .then(ariaInfo => outputAsJSON(ariaInfo))
+  .then(ariaInfo => outputAsJSObject(ariaInfo));

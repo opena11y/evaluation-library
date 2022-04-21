@@ -88,4 +88,13 @@ export default class DebugLogging {
   separator (spaceAbove) {
     this.log('-----------------------------', spaceAbove);
   }
+
+  domElement (domElement, prefix) {
+    if (domElement) {
+      const accName = domElement.accName
+      this.log(`${prefix}[${domElement.tagName}]: ${accName.name} (source: ${accName.source})`, 0);
+    }
+  }
+
+
 }

@@ -72,6 +72,8 @@ export default class DOMCache {
   	this.domCache = new DOMElement(parentInfo, startingElement);
 
     this.transverseDOM(parentInfo, startingElement);
+
+    this.structureInfo.showStructureInfo()
   }
 
   // Tests if a tag name can be skipped
