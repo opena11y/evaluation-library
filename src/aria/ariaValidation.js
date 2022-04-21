@@ -1,17 +1,73 @@
-/* aria.js */
+/* ariaValidation.js */
 
 /* Imports */
-import DebugLogging     from '../debug.js';
-import {ariaInfo} from '../aria/ariaInfo.js';
+import DebugLogging      from '../debug.js';
+import {ariaInfo}        from '../aria/ariaInfo.js';
+import {hasCheckedState} from '../utils/utils.js'
+
+/* Debug help functions */
+
+function debugRefs (refs) {
+  let s = '';
+  refs.forEach(r => {
+    s += `[${r.name} -> ${r.invalidIds.join()}]\n`;
+  });
+  return s;
+}
+
+function debugAttrs (attrs) {
+  let s = '';
+  attrs.forEach(attr => {
+    if (typeof attr === 'string') {
+      s += attr + ' ';
+    } else {
+      if (attr.invalidTokens && attr.invalidTokens.length) {
+        s += `[${attr.name}=${attr.invalidTokens.join(' ')}]\n`;
+      } else {
+        s += `[${attr.name}=${attr.value}]\n`;
+      }
+    }
+  });
+  return s;
+}
 
 /* Constants */
-const debug = new DebugLogging('AriaValidation', true);
+const debug = new DebugLogging('AriaValidation', false);
 
+/**
+ * @class TokenInfo
+ *
+ * @desc Information about an ARIA attribute that can include one or
+ *       more tokens.  The invalidTokens array contains a list of
+ *       invalid tokens.
+ *
+ * @param  {String}  name   - name of attribute
+ * @param  {String}  value  - value of attribute
+ */
 
-class ariaAttribute {
-  constructor (attr, value) {
-    this.attr  = attr;
+class TokenInfo {
+  constructor (name, value) {
+    this.name = name;
     this.value = value;
+    this.invalidTokens = [];
+  }
+}
+
+/**
+ * @class RefInfo
+ *
+ * @desc Information about an ARIA attributes the reference IDs.
+ *       The invalidIds array is a array of the invalid ID values.
+ *
+ * @param  {String}  name   - name of attribute
+ * @param  {String}  value  - value of attribute
+ */
+
+class RefInfo {
+  constructor (name, value) {
+    this.name = name;
+    this.value = value;
+    this.invalidIds = [];
   }
 }
 
@@ -25,7 +81,7 @@ class ariaAttribute {
  */
 
 export default class AriaValidation {
-  constructor (role, defaultRole, node) {
+  constructor (doc, role, defaultRole, node) {
     let designPattern = ariaInfo.designPatterns[role];
 
     this.isValidRole          = typeof designPattern === 'object';
@@ -35,18 +91,16 @@ export default class AriaValidation {
       designPattern = ariaInfo.designPatterns[defaultRole];
     }
 
-    this.nameRequired       = designPattern.nameRequired;
-    this.nameProhibited     = designPattern.nameProbihited;
+    this.nameRequired     = designPattern.nameRequired;
+    this.nameProhibited   = designPattern.nameProbihited;
 
     const attrs = Array.from(node.attributes);
 
     this.validAttrs        = [];
     this.invalidAttrs      = [];
 
-    debug && debug.log(`[${node.tagName}][${role}]: ${attrs.length} attributes`, 1);
     attrs.forEach( attr =>  {
       if (attr.name.indexOf('aria') === 0) {
-        debug && debug.log(`[${attr.name}]: ${attr.value}  (${typeof ariaInfo.propertyDataTypes[attr.name]})`);
         if (typeof ariaInfo.propertyDataTypes[attr.name] === 'object') {
           this.validAttrs.push(attr);
         } else {
@@ -55,12 +109,21 @@ export default class AriaValidation {
       }
     });
 
-    this.invalidAttrValues = this.checkForInalidAttributeValue(this.validAttrs);
-    this.invalidRefs       = this.checkForInvalidReferences(this.validAttrs);
-    this.unsupportedAttrs  = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
-    this.deprecatedAttrs   = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
-    this.missingReqAttrs   = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
+    this.invalidAttrValues  = this.checkForInalidAttributeValue(this.validAttrs);
+    this.invalidRefs        = this.checkForInvalidReferences(doc, this.validAttrs);
+    this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
+    this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
+    this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
 
+    if (debug.flag) {
+      node.attributes.length && debug.log(`${node.outerHTML}`, 1);
+      debug.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    }
   }
 
   // check if the value of the aria attribute
@@ -68,12 +131,13 @@ export default class AriaValidation {
   checkForInalidAttributeValue (attrs) {
     const booleanValues = ['true', 'false'];
     const tristateValues = ['true', 'false', 'mixed'];
-    const valueTypes = ['boolean', 'integer', 'nmtoken', 'number', 'tristate'];
     const attrsWithInvalidValues = [];
 
     attrs.forEach( attr => {
-      const attrInfo = ariaInfo.propertyDataTypes[attr.name];
-      const value = attr.value.toLowerCase();
+      const attrInfo  = ariaInfo.propertyDataTypes[attr.name];
+      const value     = attr.value.toLowerCase();
+      const values    = value.split(' ');
+      const tokenInfo = new TokenInfo (attr.name, attr.value);
 
       switch (attrInfo.type) {
         case 'boolean':
@@ -84,7 +148,7 @@ export default class AriaValidation {
 
         case 'integer':
           const num = Number(value);
-          if (!Number.isInteger(num) || (num < 0)) {
+          if (!Number.isInteger(num) || (num <= 0)) {
             attrsWithInvalidValues.push(attr);
           }
           break;
@@ -95,8 +159,19 @@ export default class AriaValidation {
           }
           break;
 
+        case 'nmtokens':
+          values.forEach( v => {
+            if (!attrInfo.values.includes(v.trim())) {
+              tokenInfo.invalidTokens.push(v);
+            }
+          });
+          if (tokenInfo.invalidTokens.length) {
+            attrsWithInvalidValues.push(tokenInfo);
+          }
+          break;
+
         case 'number':
-          if (!isNaN(value)) {
+          if (isNaN(value) || (value === '')) {
             attrsWithInvalidValues.push(attr);
           }
           break;
@@ -120,7 +195,7 @@ export default class AriaValidation {
   // checks for valid IDREF and IDREFs for
   // aria attributes like aria-labelledby,
   // aria-controls, etc...
-  checkForInvalidReferences (attrs) {
+  checkForInvalidReferences (doc, attrs) {
     const invalidRefs = [];
 
     attrs.forEach( attr => {
@@ -129,15 +204,16 @@ export default class AriaValidation {
 
       if ((attrInfo.type === 'idref') ||
           (attrInfo.type === 'idrefs')) {
-        const invalidRef = Object.assign({}, attr);
-        invalidRef.invalidIds = [];
+
+        const refInfo = new RefInfo (attr.name, attr.value);
+
         idRefs.forEach( id => {
-          if (!document.querySelector(`#${id}`)) {
-            invalidRef.invalidIds.push(id);
+          if (doc && !doc.querySelector(`#${id}`)) {
+            refInfo.invalidIds.push(id);
           }
         });
-        if (invalidRef.invalidIds.length) {
-          invalidRefs.push(invalidRef);
+        if (refInfo.invalidIds.length) {
+          invalidRefs.push(refInfo);
         }
       }
     });
@@ -152,8 +228,9 @@ export default class AriaValidation {
 
     attrs.forEach( attr => {
       const name     = attr.name.toLowerCase();
-      if (!designPattern.requiredProps.includes(name) &&
-        !designPattern.allowedProps.includes(name)) {
+      if (!designPattern.supportedProps.includes(name) &&
+        !designPattern.requiredProps.includes(name) &&
+        !designPattern.inheritedProps.includes(name)) {
         unsupportedAttrs.push(attr);
       }
     });
@@ -180,23 +257,23 @@ export default class AriaValidation {
   }
 
   // checks for required aria attributes for a specific role
-  // In some cased native HTML semanitics like the 'invalid' property
-  // or 'checked' property can be used to satisfy the requirement
+  // In some cased native HTML semanitics like "checked' property of
+  // an input element can be used to satisfy the requirement
   checkForMissingRequiredAttributes(attrs, designPattern, node) {
-    const missingReqAttrs = [];
+    const missingReqAttrNames = [];
     let count = 0;
     designPattern.requiredProps.forEach (reqAttr => {
-      let flag = false;
+      const defaultValue = ariaInfo.propertyDataTypes[reqAttr].defaultValue;
+      let flag = (defaultValue !== '') && (defaultValue !== 'undefined');
       attrs.forEach( attr => {
-        const name     = attr.name.toLowerCase();
+        const name  = attr.name.toLowerCase();
         flag = flag || (attr.name === reqAttr);
-        flag = flag || ((reqAttr === 'aria-invalid') && node.hasAttribute('invalid'));
-        flag = flag || ((reqAttr === 'aria-checked') && node.hasAttribute('checked'));
+        flag = flag || ((reqAttr === 'aria-checked') && hasCheckedState(node));
       });
       if (!flag) {
-        missingReqAttrs.push(reqAttr);
+        missingReqAttrNames.push(reqAttr);
       }
     });
-    return missingReqAttrs;
+    return missingReqAttrNames;
   }
 }

@@ -4,7 +4,14 @@ export {
   normalize,
   getAttributeValue,
   hasEmptyAltText,
+  hasInvalidState,
+  hasCheckedState
 }
+/* constants */
+const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
+const inputsWithChecked   = ['checkbox', 'radio'];
+
+/* helper functions */
 
 /*
 *   normalize: Trim leading and trailing whitespace and condense all
@@ -38,4 +45,36 @@ function hasEmptyAltText (element) {
     return (normalize(value).length === 0);
 
   return false;
+}
+
+/**
+ * @function hasInvalidState
+ *
+ * @desc Identifies elements with the invalid state, that would overide
+ *       or replace the use of aria-invalid attribute
+ *
+ * @param  {Object}  node   - DOM element node
+ *
+ * @returns {Boolean} true it element has a invalid state, otherwise false
+ */
+
+function hasInvalidState (node) {
+  return elementsWithInvalid.includes(node.tagName.toLowerCase());
+}
+
+/**
+ * @function hasCheckedState
+ *
+ * @desc Identifies elements with the checked state, that would overide
+ *       or replace the use of aria-checked attribute
+ *
+ * @param  {Object}  node   - DOM element node
+ *
+ * @returns {Boolean} true it element has a checked state, otherwise false
+ */
+
+function hasCheckedState (node) {
+  let flag = node.tagName.toLowerCase() === 'input';
+  flag = flag && inputsWithChecked.includes(node.type.toLowerCase());
+  return flag;
 }

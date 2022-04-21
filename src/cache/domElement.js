@@ -7,6 +7,10 @@ import DebugLogging      from '../debug.js';
 import AriaValidation    from '../aria/ariaValidation.js';
 import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
+  hasInvalidState,
+  hasCheckedState
+} from '../utils/utils.js'
+import {
   getAccessibleName,
   getAccessibleDesc,
   getErrMessage,
@@ -30,6 +34,7 @@ const debug = new DebugLogging('DOMElement', false);
 export default class DOMElement {
   constructor (parentInfo, elementNode) {
     const parentDomElement = parentInfo.domElement;
+    const doc              = parentInfo.document;
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
     const defaultRole    = this.ariaInHTMLInfo.defaultRole;
@@ -39,20 +44,25 @@ export default class DOMElement {
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
 
+    this.hasNativeCheckedState  = hasCheckedState(elementNode);
+    this.hasNativeInvalidState  = hasInvalidState(elementNode);
+
     this.ariaInHTMLInfo   = getAriaInHTMLInfo(elementNode);
     this.role             = role ? role : defaultRole;
-    this.ariaValidation   = new AriaValidation(this.role, defaultRole, elementNode);
+    this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
 
     this.accName           = getAccessibleName(elementNode);
     this.accDescription    = getAccessibleDesc(elementNode);
     this.errMessage        = getErrMessage(elementNode);
 
 /* Used for testing naming module with accname-1.html test page */
-    debug.flag && (this.tagName === 'h2') && debug.separator(1);
-    debug.flag && debug.log(`[       tagName]: ${this.tagName} (${this.role})`);
-    debug.flag && this.accName && debug.log(`[       aacName]: ${this.accName.name} (${this.accName.source})`);
-    debug.flag && this.accDescription && debug.log(`[aacDescription]: ${this.accDescription.name} (${this.accDescription.source})`);
-    debug.flag && this.errMessage && debug.log(`[    errMessage]: ${this.errMessage.name} (${this.errMessage.source})`);
+    if (debug.flag) {
+      (this.tagName === 'h2') && debug.separator(1);
+      debug.log(`[       tagName]: ${this.tagName} (${this.role})`);
+      this.accName        && debug.log(`[       aacName]: ${this.accName.name} (${this.accName.source})`);
+      this.accDescription && debug.log(`[aacDescription]: ${this.accDescription.name} (${this.accDescription.source})`);
+      this.errMessage     && debug.log(`[    errMessage]: ${this.errMessage.name} (${this.errMessage.source})`);
+    }
 
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);

@@ -502,7 +502,7 @@ export const ariaInfo = {
     },
     "designPatterns": {
         "alert": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -531,7 +531,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -544,7 +544,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "alertdialog": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -574,7 +574,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -587,7 +587,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "application": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -613,7 +613,7 @@ export const ariaInfo = {
                 "aria-invalid"
             ],
             "deprecatedProps": [],
-            "props": [
+            "supportedProps": [
                 "aria-activedescendant",
                 "aria-disabled",
                 "aria-errormessage",
@@ -633,7 +633,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "article": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -664,7 +664,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-posinset",
                 "aria-setsize"
             ],
@@ -680,7 +680,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "banner": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -709,7 +709,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -722,7 +722,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "blockquote": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -751,7 +751,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -764,7 +764,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "button": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -793,7 +793,7 @@ export const ariaInfo = {
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-haspopup",
                 "aria-expanded",
@@ -811,7 +811,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "caption": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -838,7 +838,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -856,7 +856,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "cell": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -889,7 +889,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-colindex",
                 "aria-colspan",
                 "aria-rowindex",
@@ -909,7 +909,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "checkbox": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -939,7 +939,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-errormessage",
                 "aria-expanded",
                 "aria-invalid",
@@ -960,7 +960,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "code": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -987,7 +987,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1000,7 +1000,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "columnheader": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-colindex",
@@ -1032,7 +1032,7 @@ export const ariaInfo = {
                 "aria-selected"
             ],
             "deprecatedProps": [],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -1047,7 +1047,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "combobox": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-current",
@@ -1076,7 +1076,7 @@ export const ariaInfo = {
                 "aria-required"
             ],
             "deprecatedProps": [],
-            "props": [
+            "supportedProps": [
                 "aria-activedescendant",
                 "aria-autocomplete",
                 "aria-errormessage",
@@ -1100,7 +1100,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "command": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1129,7 +1129,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1142,7 +1142,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "complementary": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1171,7 +1171,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1184,7 +1184,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "composite": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1213,7 +1213,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-activedescendant",
                 "aria-disabled"
             ],
@@ -1229,7 +1229,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "contentinfo": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1258,7 +1258,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1271,7 +1271,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "definition": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1300,7 +1300,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1313,7 +1313,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "deletion": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1340,7 +1340,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1353,7 +1353,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "dialog": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1383,7 +1383,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -1396,7 +1396,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "directory": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1425,7 +1425,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1438,7 +1438,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "document": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1467,7 +1467,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1480,7 +1480,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "emphasis": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1507,7 +1507,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1520,7 +1520,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "feed": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1549,7 +1549,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1564,7 +1564,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "figure": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1593,7 +1593,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1606,7 +1606,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "form": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1635,7 +1635,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -1648,7 +1648,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "generic": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1674,7 +1674,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1687,7 +1687,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "grid": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -1720,7 +1720,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-multiselectable",
                 "aria-readonly"
             ],
@@ -1739,7 +1739,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "gridcell": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-colindex",
@@ -1771,7 +1771,7 @@ export const ariaInfo = {
                 "aria-selected"
             ],
             "deprecatedProps": [],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-errormessage",
                 "aria-expanded",
@@ -1795,7 +1795,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "group": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1824,7 +1824,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-activedescendant",
                 "aria-disabled"
             ],
@@ -1840,7 +1840,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "heading": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1869,7 +1869,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -1882,7 +1882,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "img": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1911,7 +1911,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -1924,7 +1924,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "input": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1951,7 +1951,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -1964,7 +1964,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "insertion": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -1991,7 +1991,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2004,7 +2004,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "landmark": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2033,7 +2033,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2046,7 +2046,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "link": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2074,7 +2074,7 @@ export const ariaInfo = {
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-expanded",
                 "aria-haspopup"
@@ -2091,7 +2091,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "list": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2120,7 +2120,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2135,7 +2135,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "listbox": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -2167,7 +2167,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-errormessage",
                 "aria-expanded",
                 "aria-invalid",
@@ -2190,7 +2190,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "listitem": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2222,7 +2222,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-level",
                 "aria-posinset",
                 "aria-setsize"
@@ -2242,7 +2242,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "log": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2271,7 +2271,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2284,7 +2284,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "main": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2313,7 +2313,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2326,7 +2326,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "marquee": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2355,7 +2355,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -2368,7 +2368,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "math": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2397,7 +2397,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2410,7 +2410,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "meter": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2442,7 +2442,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
@@ -2455,7 +2455,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "menu": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -2485,7 +2485,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2503,7 +2503,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "menubar": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -2533,7 +2533,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2551,7 +2551,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "menuitem": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2581,7 +2581,7 @@ export const ariaInfo = {
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-expanded",
                 "aria-haspopup",
@@ -2604,7 +2604,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "menuitemcheckbox": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2635,7 +2635,7 @@ export const ariaInfo = {
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [
                 "aria-checked"
@@ -2654,7 +2654,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "menuitemradio": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-checked",
@@ -2686,7 +2686,7 @@ export const ariaInfo = {
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -2703,7 +2703,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "navigation": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2732,7 +2732,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2745,7 +2745,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "note": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2774,7 +2774,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2787,7 +2787,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "option": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2819,7 +2819,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-checked",
                 "aria-posinset",
                 "aria-setsize"
@@ -2841,7 +2841,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "paragraph": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2868,7 +2868,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2881,7 +2881,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "presentation": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2908,7 +2908,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -2921,7 +2921,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "progressbar": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2954,7 +2954,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": true,
             "requiredProps": [],
             "nameRequired": true,
@@ -2967,7 +2967,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "radio": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -2998,7 +2998,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-posinset",
                 "aria-setsize"
             ],
@@ -3016,7 +3016,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "radiogroup": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -3046,7 +3046,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-errormessage",
                 "aria-invalid",
                 "aria-readonly",
@@ -3066,7 +3066,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "range": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3099,7 +3099,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-valuemax",
                 "aria-valuemin",
                 "aria-valuenow",
@@ -3117,7 +3117,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "region": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3146,7 +3146,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -3159,7 +3159,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "row": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -3195,7 +3195,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-colindex",
                 "aria-expanded",
                 "aria-level",
@@ -3226,7 +3226,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "rowgroup": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3255,7 +3255,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3274,7 +3274,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "rowheader": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-colindex",
@@ -3307,7 +3307,7 @@ export const ariaInfo = {
                 "aria-sort"
             ],
             "deprecatedProps": [],
-            "props": [
+            "supportedProps": [
                 "aria-expanded",
                 "aria-sort"
             ],
@@ -3325,7 +3325,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "scrollbar": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-current",
@@ -3358,7 +3358,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
@@ -3379,7 +3379,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "search": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3408,7 +3408,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3421,7 +3421,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "searchbox": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-autocomplete",
@@ -3451,7 +3451,7 @@ export const ariaInfo = {
                 "aria-roledescription"
             ],
             "deprecatedProps": [],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -3464,7 +3464,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "section": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3493,7 +3493,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3506,7 +3506,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "sectionhead": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3535,7 +3535,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3548,7 +3548,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "select": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -3577,7 +3577,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3590,7 +3590,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "separator": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3622,7 +3622,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
@@ -3641,7 +3641,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "slider": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3671,7 +3671,7 @@ export const ariaInfo = {
                 "aria-valuemin"
             ],
             "deprecatedProps": [],
-            "props": [
+            "supportedProps": [
                 "aria-errormessage",
                 "aria-haspopup",
                 "aria-invalid",
@@ -3694,7 +3694,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "spinbutton": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -3727,7 +3727,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-errormessage",
                 "aria-invalid",
                 "aria-readonly",
@@ -3749,7 +3749,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "status": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3778,7 +3778,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3791,7 +3791,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "strong": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3818,7 +3818,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3831,7 +3831,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "structure": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3860,7 +3860,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3873,7 +3873,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "subscript": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3900,7 +3900,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3913,7 +3913,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "superscript": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3940,7 +3940,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -3953,7 +3953,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "switch": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -3983,7 +3983,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [
                 "aria-checked"
@@ -3998,7 +3998,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "tab": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4029,7 +4029,7 @@ export const ariaInfo = {
                 "aria-errormessage",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-disabled",
                 "aria-expanded",
                 "aria-haspopup",
@@ -4051,7 +4051,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "table": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4082,7 +4082,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-colcount",
                 "aria-rowcount"
             ],
@@ -4101,7 +4101,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "tablist": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -4132,7 +4132,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-multiselectable",
                 "aria-orientation"
             ],
@@ -4150,7 +4150,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "tabpanel": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4179,7 +4179,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -4192,7 +4192,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "term": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4221,7 +4221,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -4234,7 +4234,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "textbox": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4264,7 +4264,7 @@ export const ariaInfo = {
                 "aria-required"
             ],
             "deprecatedProps": [],
-            "props": [
+            "supportedProps": [
                 "aria-activedescendant",
                 "aria-autocomplete",
                 "aria-errormessage",
@@ -4287,7 +4287,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "time": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4316,7 +4316,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -4329,7 +4329,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "timer": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4358,7 +4358,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -4371,7 +4371,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "toolbar": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -4400,7 +4400,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -4413,7 +4413,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "tooltip": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4442,7 +4442,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -4455,7 +4455,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "tree": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -4485,7 +4485,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-errormessage",
                 "aria-invalid",
                 "aria-multiselectable",
@@ -4506,7 +4506,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "treegrid": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-activedescendant",
                 "aria-atomic",
                 "aria-busy",
@@ -4539,7 +4539,7 @@ export const ariaInfo = {
             "deprecatedProps": [
                 "aria-haspopup"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": true,
@@ -4555,7 +4555,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "treeitem": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-checked",
@@ -4589,7 +4589,7 @@ export const ariaInfo = {
                 "aria-invalid",
                 "aria-selected"
             ],
-            "props": [
+            "supportedProps": [
                 "aria-expanded",
                 "aria-haspopup"
             ],
@@ -4608,7 +4608,7 @@ export const ariaInfo = {
             "isAbstract": false
         },
         "widget": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4637,7 +4637,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -4650,7 +4650,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "window": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4679,7 +4679,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,
@@ -4692,7 +4692,7 @@ export const ariaInfo = {
             "isAbstract": true
         },
         "none": {
-            "allowedProps": [
+            "inheritedProps": [
                 "aria-atomic",
                 "aria-busy",
                 "aria-controls",
@@ -4719,7 +4719,7 @@ export const ariaInfo = {
                 "aria-haspopup",
                 "aria-invalid"
             ],
-            "props": [],
+            "supportedProps": [],
             "hasRange": false,
             "requiredProps": [],
             "nameRequired": false,

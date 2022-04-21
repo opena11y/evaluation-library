@@ -15,6 +15,7 @@ const exportPrefix = '/* generated file, use npm run aria */\nexport const ariaI
 
 let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
 
+
 function getRoleType(elem) {
   let superClasses = [];
   let  refs = elem.querySelectorAll('tbody tr:nth-child(1) .role-reference');
@@ -101,10 +102,10 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
 
     roles[role] = {};
 
-    roles[role].allowedProps = [];
+    roles[role].inheritedProps = [];
     roles[role].deprecatedProps = [];
 
-    roles[role].props = [];
+    roles[role].supportedProps = [];
     roles[role].hasRange = false;
 
     roles[role].requiredProps = [];
@@ -130,7 +131,7 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
       let ariaAttributeNode = ariaAttributeNodes[j];
       let ariaAttribute = ariaAttributeNode.querySelector('code').textContent;
 
-      roles[role].allowedProps.push(ariaAttribute);
+      roles[role].inheritedProps.push(ariaAttribute);
 
       if (isDeprecated(ariaAttributeNode)) {
         roles[role].deprecatedProps.push(ariaAttribute);
@@ -155,7 +156,7 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
       let ariaAttribute = ariaAttributeNode.querySelector('code').textContent;
 
       roles[role].requiredProps.push(ariaAttribute);
-      roles[role].allowedProps.push(ariaAttribute);
+      roles[role].inheritedProps.push(ariaAttribute);
     }
 
     ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-properties li');
@@ -164,8 +165,8 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
       let ariaAttributeNode = ariaAttributeNodes[j];
       let ariaAttribute = ariaAttributeNode.querySelector('code').textContent;
 
-      roles[role].props.push(ariaAttribute);
-      roles[role].allowedProps.push(ariaAttribute);
+      roles[role].supportedProps.push(ariaAttribute);
+      roles[role].inheritedProps.push(ariaAttribute);
     }
 
     let nameRequiredNode = dom.querySelector('#' + role + ' .role-namerequired');

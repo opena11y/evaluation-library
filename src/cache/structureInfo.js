@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('structureInfo', true);
+const debug = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -30,12 +30,11 @@ class LandmarkElement {
     }
   }
 
-  addchildLandmark (LandmarkElement) {
+  addChildLandmark (LandmarkElement) {
     this.childLandmarkElements.push(LandmarkElement);
   }
 
-
-  addchildHeading (domElement) {
+  addChildHeading (domElement) {
     this.childHeadingDomElements.push(domElement);
   }
 
@@ -54,7 +53,7 @@ export default class StructureInfo {
   constructor () {
 
     this.allLandmarkElements = [];
-    this.allHeadingDomELements = [];
+    this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
 
     if (debug.flag) {
@@ -67,17 +66,17 @@ export default class StructureInfo {
    * @desc
    *
    * @param  {Object}  domElement            - DOMElement object representing an element in the DOM
-   * @param  {Object}  parentLandmarkElement - LandmarkELement object representing an landmark region
+   * @param  {Object}  parentLandmarkElement - LandmarkElement object representing an landmark region
    */
 
-  addchildLandmark (domElement, parentLandmarkElement) {
+  addChildLandmark (domElement, parentLandmarkElement) {
     const landmarkElement = new LandmarkElement(domElement, parentLandmarkElement);
     this.allLandmarkElements.push(landmarkElement);
 
     if (parentLandmarkElement) {
-      parentLandmarkElement.childLandmarkElements(landmarkElement)
+      parentLandmarkElement.addChildLandmark(landmarkElement)
     } else {
-      this.childLandmarkElements(landmarkElement);
+      this.childLandmarkElements.push(landmarkElement);
     }
   }
 
@@ -87,10 +86,10 @@ export default class StructureInfo {
    * @desc
    *
    * @param  {Object}  domElement            - DOMElement object representing an element in the DOM
-   * @param  {Object}  parentLandmarkElement - LandmarkELement object representing an landmark region
+   * @param  {Object}  parentLandmarkElement - LandmarkElement object representing an landmark region
    */
 
-  addchildHeading (domElement, parentLandmarkElement) {
+  addChildHeading (domElement, parentLandmarkElement) {
     this.allHeadingDomElements.push(domElement);
     if (parentLandmarkElement) {
       parentLandmarkElement.addChildHeading(domElement)
@@ -106,13 +105,12 @@ export default class StructureInfo {
    */
 
   isLandmark(domElement) {
-    const flag = false;
+    let flag = false;
     const role = domElement.role || domElement.defaultRole;
     const name = domElement.accessibleName;
 
-    if (landmarkRoles.contains(role)) {
-
-      if (requireAccessibleNames.contains(role)) {
+    if (landmarkRoles.includes(role)) {
+      if (requireAccessibleNames.includes(role)) {
         flag = name && name.length;
       } else {
         flag = true;
@@ -133,11 +131,21 @@ export default class StructureInfo {
   isHeading(domElement) {
     const tagName = domElement.tagName;
     const role = domElement.role;
-    return (role === headingRole) || (headingTags.contains(tagName));
+    return (role === headingRole) || (headingTags.includes(tagName));
   }
 
-  update(domElement) {
+  update(parentLandmarkElement, domElement) {
+    let landmarkElement = parentLandmarkElement;
+    if (this.isHeading(domElement)) {
+      this.addChildHeading(domElement, parentLandmarkElement);
+    }
 
+    if (this.isLandmark(domElement)) {
+      const le = new LandmarkElement(domElement, parentLandmarkElement);
+      this.addChildLandmark(le, parentLandmarkElement);
+      landmarkElement = le;
+    }
+    return landmarkElement;
   }
 };
 

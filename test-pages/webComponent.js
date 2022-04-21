@@ -27,8 +27,6 @@ class HeadingWebComponent extends HTMLElement {
   }
 }
 
-customElements.define('heading-webcomponent', HeadingWebComponent);
-
 const template2 = document.createElement('template');
 template2.innerHTML = `
   <div class="content">
@@ -63,6 +61,7 @@ class ColorContrastComponent extends HTMLElement {
   }
 }
 
+customElements.define('heading-webcomponent', HeadingWebComponent);
 customElements.define('cc-webcomponent', ColorContrastComponent);
 
 

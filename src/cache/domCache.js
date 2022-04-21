@@ -55,18 +55,23 @@ class ParentInfo {
  *       The dom cache is passed into rules for computing evaluation
  *       results
  *
- * @param  {Object}  startingDoc - Browser document object model (DOM) to build cache
+ * @param  {Object}  startingDoc     - Browser document object model (DOM) to build cache
+ * @param  {Object}  startingElement - DOM node to start evalution, if not defined use
+ *                                     document.body
  */
 
 export default class DOMCache {
-  constructor (startingDoc) {
+  constructor (startingDoc, startingElement) {
+    if (typeof startingElement !== 'object') {
+      startingElement = startingDoc.body;
+    }
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
-  	this.domCache = new DOMElement(parentInfo, startingDoc);
+  	this.domCache = new DOMElement(parentInfo, startingElement);
 
-    this.transverseDOM(this.domCache, startingDoc);
+    this.transverseDOM(parentInfo, startingElement);
   }
 
   // Tests if a tag name can be skipped
@@ -145,6 +150,9 @@ export default class DOMCache {
               }
             } else {
               domItem = new DOMElement(parentInfo, node);
+              if (parentDomElement) {
+                parentDomElement.addChild(domItem);
+              }
               const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
@@ -176,8 +184,11 @@ export default class DOMCache {
   }
 
   updateDOMElementInformation (parentInfo, domElement) {
+    const landmarkElement = parentInfo.landmarkElement;
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
+
+    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement);
 
     return newParentInfo;
   }
