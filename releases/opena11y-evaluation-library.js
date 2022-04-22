@@ -90,12 +90,34 @@ class DebugLogging {
   }
 
   domElement (domElement, prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+
     if (domElement) {
       const accName = domElement.accName;
-      this.log(`${prefix}[${domElement.tagName}]: ${accName.name} (source: ${accName.source})`, 0);
+      const count = domElement.children.length;
+      if (accName.name.length) {
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count})`, 0);
+      } else {
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count})`, 0);
+      }
     }
   }
 
+  domText (domText, prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    const maxDisplay = 20;
+    if (domText) {
+      if (domText.getText.length < maxDisplay) {
+        this.log(`${prefix}[text]: ${domText.getText}`, 0);
+      } else {
+        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ...`, 0);
+      }
+    }
+  }
 
 }
 
@@ -8184,12 +8206,12 @@ function nameFromDescendant (element, tagName) {
 /*
 *   nameFromLabelElement
 */
-function nameFromLabelElement (element) {
+function nameFromLabelElement (doc, element) {
   let name, label;
 
   // label [for=id]
   if (element.id) {
-    label = document.querySelector('[for="' + element.id + '"]');
+    label = doc.querySelector('[for="' + element.id + '"]');
     if (label) {
       name = getElementContents(label, element);
       if (name.length) return { name: name, source: 'label reference' };
@@ -8249,31 +8271,45 @@ function nameFromDetailsOrSummary (element) {
 */
 function getNodeContents (node, forElem) {
   let contents = '';
+  let nc;
+  let arr = [];
 
   if (node === forElem) return '';
 
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
-      if (couldHaveAltText(node)) {
-        contents = getAttributeValue(node, 'alt');
-      }
-      else if (isEmbeddedControl(node)) {
-        contents = getEmbeddedControlValue(node);
-      }
-      else {
-        if (node.hasChildNodes()) {
-          let children = node.childNodes,
-              arr = [];
-
-          for (let i = 0; i < children.length; i++) {
-            let nc = getNodeContents(children[i], forElem);
-            if (nc.length) arr.push(nc);
-          }
-
-          contents = (arr.length) ? arr.join(' ') : '';
+      if (node.tagName.toLowerCase() === 'slot') {
+        let assignedNodes = node.assignedNodes();
+        // if no slotted elements, check for default slotted content
+        assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
+        assignedNodes = Array.from(assignedNodes);
+        arr = [];
+        assignedNodes.forEach( assignedNode => {
+          nc = getNodeContents(assignedNode, forElem);
+          if (nc.length) arr.push(nc);
+        });
+        contents = (arr.length) ? arr.join(' ') : '';
+      } else {
+        if (couldHaveAltText(node)) {
+          contents = getAttributeValue(node, 'alt');
         }
+        else if (isEmbeddedControl(node)) {
+          contents = getEmbeddedControlValue(node);
+        }
+        else {
+          if (node.hasChildNodes()) {
+            let children = Array.from(node.childNodes);
+            arr = [];
+
+            children.forEach( child => {
+              nc = getNodeContents(child, forElem);
+              if (nc.length) arr.push(nc);
+            });
+            contents = (arr.length) ? arr.join(' ') : '';
+          }
+        }
+        // For all branches of the ELEMENT_NODE case...
       }
-      // For all branches of the ELEMENT_NODE case...
       contents = addCssGeneratedContent(node, contents);
       break;
 
@@ -8369,12 +8405,12 @@ const noAccName = {
 *   (3) Use whatever method is specified by the native semantics of the
 *   element, which includes, as last resort, use of the title attribute.
 */
-function getAccessibleName (element, recFlag) {
+function getAccessibleName (doc, element, recFlag) {
   let accName = null;
 
-  if (!recFlag) accName = nameFromAttributeIdRefs(element, 'aria-labelledby');
+  if (!recFlag) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(element, recFlag);
+  if (accName === null) accName = nameFromNativeSemantics(doc, element, recFlag);
   if (accName === null) accName = noAccName;
 
   return accName;
@@ -8386,10 +8422,10 @@ function getAccessibleName (element, recFlag) {
 *   (1) Use aria-describedby, unless a traversal is already underway;
 *   (2) As last resort, use the title attribute.
 */
-function getAccessibleDesc (element, recFlag) {
+function getAccessibleDesc (doc, element, recFlag) {
   let accDesc = null;
 
-  if (!recFlag) accDesc = nameFromAttributeIdRefs(element, 'aria-describedby');
+  if (!recFlag) accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
   if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
 
@@ -8402,11 +8438,10 @@ function getAccessibleDesc (element, recFlag) {
 *   description calculation based on its precedence order:
 *   (1) Use aria-errormessage, unless a traversal is already underway;
 */
-function getErrMessage (element) {
+function getErrMessage (doc, element) {
   let errMessage = null;
 
-  errMessage = nameFromAttributeIdRefs(element, 'aria-errormessage');
-
+  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
@@ -8420,7 +8455,7 @@ function getErrMessage (element) {
 *   indicating that we are in a recursive aria-labelledby calculation, the
 *   nameFromContents method is used.
 */
-function nameFromNativeSemantics (element, recFlag) {
+function nameFromNativeSemantics (doc, element, recFlag) {
   let tagName = element.tagName.toLowerCase(),
       ariaRole = getAriaRole(element),
       accName = null;
@@ -8437,7 +8472,7 @@ function nameFromNativeSemantics (element, recFlag) {
         // HIDDEN
         case 'hidden':
           if (recFlag) {
-            accName = nameFromLabelElement(element);
+            accName = nameFromLabelElement(doc, element);
           }
           break;
 
@@ -8448,7 +8483,7 @@ function nameFromNativeSemantics (element, recFlag) {
         case 'tel':
         case 'text':
         case 'url':
-          accName = nameFromLabelElement(element);
+          accName = nameFromLabelElement(doc, element);
           if (accName === null) accName = nameFromAttribute(element, 'placeholder');
           break;
 
@@ -8473,7 +8508,7 @@ function nameFromNativeSemantics (element, recFlag) {
           break;
 
         default:
-          accName = nameFromLabelElement(element);
+          accName = nameFromLabelElement(doc, element);
           break;
       }
       break;
@@ -8492,11 +8527,11 @@ function nameFromNativeSemantics (element, recFlag) {
     case 'output':
     case 'progress':
     case 'select':
-      accName = nameFromLabelElement(element);
+      accName = nameFromLabelElement(doc, element);
       break;
 
     case 'textarea':
-      accName = nameFromLabelElement(element);
+      accName = nameFromLabelElement(doc, element);
       if (accName === null) accName = nameFromAttribute(element, 'placeholder');
       break;
 
@@ -8570,7 +8605,10 @@ function nameFromNativeSemantics (element, recFlag) {
 *   with name property set to a string that is a space-separated concatena-
 *   tion of those results if any, otherwise return null.
 */
-function nameFromAttributeIdRefs (element, attribute) {
+function nameFromAttributeIdRefs (doc, element, attribute) {
+//  console.log(`[nameFromAttributeIdRefs][      doc]: ${doc}`)
+//  console.log(`[nameFromAttributeIdRefs][  element]: ${element}`)
+//  console.log(`[nameFromAttributeIdRefs][attribute]: ${attribute}`)
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, accName, arr = [];
 
@@ -8578,9 +8616,9 @@ function nameFromAttributeIdRefs (element, attribute) {
     idRefs = value.split(' ');
 
     for (i = 0; i < idRefs.length; i++) {
-      refElement = document.getElementById(idRefs[i]);
+      refElement = doc.getElementById(idRefs[i]);
       if (refElement) {
-        accName = getAccessibleName(refElement, true);
+        accName = getAccessibleName(doc, refElement, true);
         if (accName && accName.name.length) arr.push(accName.name);
       }
     }
@@ -8595,7 +8633,7 @@ function nameFromAttributeIdRefs (element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$4 = new DebugLogging('DOMElement', false);
+const debug$4 = new DebugLogging('DOMElement', true);
 
 /**
  * @class DOMElement
@@ -8627,27 +8665,35 @@ class DOMElement {
     this.role             = role ? role : defaultRole;
     this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
 
-    this.accName           = getAccessibleName(elementNode);
-    this.accDescription    = getAccessibleDesc(elementNode);
-    this.errMessage        = getErrMessage(elementNode);
-
-/* Used for testing naming module with accname-1.html test page */
-    if (debug$4.flag) {
-      (this.tagName === 'h2') && debug$4.separator(1);
-      debug$4.log(`[       tagName]: ${this.tagName} (${this.role})`);
-      this.accName        && debug$4.log(`[       aacName]: ${this.accName.name} (${this.accName.source})`);
-      this.accDescription && debug$4.log(`[aacDescription]: ${this.accDescription.name} (${this.accDescription.source})`);
-      this.errMessage     && debug$4.log(`[    errMessage]: ${this.errMessage.name} (${this.errMessage.source})`);
-    }
+    this.accName           = getAccessibleName(doc, elementNode);
+    this.accDescription    = getAccessibleDesc(doc, elementNode);
+    this.errMessage        = getErrMessage(doc, elementNode);
 
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
   }
 
+
+  /**
+   * @method isDomText
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns false since this is a DOMElement object
+   */
+
   get isDomText () {
     return false;
   }
+
+  /**
+   * @method isLastChildDomText
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns true if the last child is a DOMText object, otherwise false
+   */
 
   get isLastChildDomText () {
     let flag = false;
@@ -8658,9 +8704,23 @@ class DOMElement {
     return flag;
   }
 
+  /**
+   * @method addChild
+   *
+   * @desc
+   *
+   * @param {Object}  domItem  -
+   */
+
   addChild (domItem) {
     this.children.push(domItem);
   }
+
+  /**
+   * @method getLastChild
+   *
+   * @desc
+   */
 
   getLastChild () {
     let len = this.children.length;
@@ -8671,11 +8731,26 @@ class DOMElement {
     return domItem;
   }
 
+  /**
+   * @method getAriaInHTMLInfo
+   *
+   * @desc
+   *
+   * @param {Object}  node  -
+   */
+
   getAriaInHTMLInfo (node) {
     let role = 'generic';
     return role;
   }
 
+  /**
+   * @method addTextToLastChild
+   *
+   * @desc
+   *
+   * @param {String}  text  -
+   */
 
   addTextToLastChild (text) {
     const domItem = this.getLastChild();
@@ -8684,7 +8759,27 @@ class DOMElement {
     }
   }
 
- }
+  /**
+   * @method showDomElementTree
+   *
+   * @desc  Used for debugging the DOMElement tree
+   */
+  showDomElementTree (prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    if (debug$4.flag) {
+      this.children.forEach( domItem => {
+        if (domItem.isDomText) {
+          debug$4.domText(domItem, prefix);
+        } else {
+          debug$4.domElement(domItem, prefix);
+          domItem.showDomElementTree(prefix + '   ');
+        }
+      });
+    }
+  }
+}
 
 /* domText.js */
 
@@ -8710,13 +8805,37 @@ class DOMText {
     this.text = textNode.textContent.trim();
   }
 
+  /**
+   * @method getText
+   *
+   * @desc
+   *
+   * @return {String} Returns text content
+   */
+
   get getText () {
-    return this.text + ' (' + this.text.length + ')';
+    return this.text;
   }
+
+  /**
+   * @method isDomText
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns true since this is a DOMText object
+   */
 
   get isDomText () {
     return true;
   }
+
+  /**
+   * @method hasContent
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns true if the DOMText has content, otherwise false
+   */
 
   get hasContent () {
     return this.text.length;
@@ -8755,7 +8874,9 @@ class LandmarkElement {
     this.childLandmarkElements = [];
     this.childHeadingDomElements = [];
 
-    if (debug$3.flag) ;
+    if (debug$3.flag) {
+      debug$3.log('');
+    }
   }
 
   addChildLandmark (LandmarkElement) {
@@ -8766,6 +8887,20 @@ class LandmarkElement {
     this.childHeadingDomElements.push(domElement);
   }
 
+  showLandmarkInfo (prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    debug$3.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
+    this.childLandmarkElements.forEach( le => {
+      debug$3.domElement(le.domElement, prefix);
+      le.showLandmarkInfo(prefix + '  ');
+    });
+    debug$3.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
+    this.childHeadingDomElements.forEach( h => {
+      debug$3.domElement(h, prefix);
+    });
+  }
 }
 /**
  * @class StructureInfo
@@ -8837,7 +8972,7 @@ class StructureInfo {
   isLandmark (domElement) {
     let flag = false;
     const role = domElement.role || domElement.defaultRole;
-    const name = domElement.accessibleName;
+    const name = domElement.accName.name;
 
     if (landmarkRoles.includes(role)) {
       if (requireAccessibleNames.includes(role)) {
@@ -8896,16 +9031,18 @@ class StructureInfo {
 
   showStructureInfo () {
     if (debug$3.flag) {
-      debug$3.log('== Headings ==');
+      debug$3.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
         debug$3.domElement(h);
       });
-      debug$3.log('== Landmarks ==', 1);
+      debug$3.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
         debug$3.domElement(le.domElement);
-        le.childHeadingDomElements.forEach( h => {
-          debug$3.domElement(h, '  ');
-        });
+      });
+      debug$3.log('== Structure Tree ==', 1);
+      this.childLandmarkElements.forEach( le => {
+        debug$3.domElement(le.domElement);
+        le.showLandmarkInfo('  ');
       });
     }
   }
@@ -8914,7 +9051,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$2 = new DebugLogging('domCache', false);
+const debug$2 = new DebugLogging('domCache', true);
 
 
 const skipableElements = [
@@ -8977,9 +9114,12 @@ class DOMCache {
 
     this.structureInfo = new StructureInfo();
   	this.domCache = new DOMElement(parentInfo, startingElement);
+    parentInfo.domElement = this.domCache;
 
     this.transverseDOM(parentInfo, startingElement);
 
+    // Debug features
+    this.showDomElementTree();
     this.structureInfo.showStructureInfo();
   }
 
@@ -9027,7 +9167,6 @@ class DOMCache {
 
         case Node.TEXT_NODE:
           domItem = new DOMText(parentInfo, node);
-          debug$2.flag && debug$2.log('[text]: ' + domItem.getText);
           // Check to see if text node has any renderable content
           if (domItem.hasContent) {
             // Merge text nodes in to a single DomText node if sibling text nodes
@@ -9044,7 +9183,6 @@ class DOMCache {
 
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
-          debug$2.flag && debug$2.log('[tagName]: ' + tagName);
 
           if (!this.isSkipable(tagName)) {
             // check for slotted content
@@ -9052,11 +9190,10 @@ class DOMCache {
               let assignedNodes = node.assignedNodes();
               // if no slotted elements, check for default slotted content
               assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
-              if (assignedNodes.length) {
-                assignedNodes.forEach( assignedNode => {
-                  this.transverseDOM(parentInfo, assignedNode);
-                });
-              }
+              assignedNodes = Array.from(assignedNodes);
+              assignedNodes.forEach( assignedNode => {
+                this.transverseDOM(parentInfo, assignedNode);
+              });
             } else {
               domItem = new DOMElement(parentInfo, node);
               if (parentDomElement) {
@@ -9089,6 +9226,19 @@ class DOMCache {
     } /* end for */
   }
 
+
+  /**
+   * @method updateDOMElementInformation
+   *
+   * @desc  Updates page level collections of elements for landmarks, headings and controls
+   *
+   * @param {Object}  parentinfo  - Parent DomElement associated DOMElement
+   * @param {Object}  domElement  - The dom element to start transversing the
+   *                                      dom
+   *
+   * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
+   */
+
   updateDOMElementInformation (parentInfo, domElement) {
     const landmarkElement = parentInfo.landmarkElement;
     let newParentInfo = new ParentInfo(parentInfo);
@@ -9097,6 +9247,20 @@ class DOMCache {
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement);
 
     return newParentInfo;
+  }
+
+  /**
+   * @method showDomElementTree
+   *
+   * @desc  Used for debugging the DOMElement tree
+   */
+  showDomElementTree () {
+    if (debug$2.flag) {
+      debug$2.separator(1);
+      debug$2.log(' === DOMCache Tree ===');
+      debug$2.domElement(this.domCache);
+      this.domCache.showDomElementTree(' ');
+    }
   }
 
 }

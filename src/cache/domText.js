@@ -25,13 +25,37 @@ export default class DOMText {
     this.text = textNode.textContent.trim();
   }
 
+  /**
+   * @method getText
+   *
+   * @desc
+   *
+   * @return {String} Returns text content
+   */
+
   get getText () {
-    return this.text + ' (' + this.text.length + ')';
+    return this.text;
   }
+
+  /**
+   * @method isDomText
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns true since this is a DOMText object
+   */
 
   get isDomText () {
     return true;
   }
+
+  /**
+   * @method hasContent
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns true if the DOMText has content, otherwise false
+   */
 
   get hasContent () {
     return this.text.length;

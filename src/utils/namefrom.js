@@ -140,12 +140,12 @@ function nameFromDescendant (element, tagName) {
 /*
 *   nameFromLabelElement
 */
-function nameFromLabelElement (element) {
+function nameFromLabelElement (doc, element) {
   let name, label;
 
   // label [for=id]
   if (element.id) {
-    label = document.querySelector('[for="' + element.id + '"]');
+    label = doc.querySelector('[for="' + element.id + '"]');
     if (label) {
       name = getElementContents(label, element);
       if (name.length) return { name: name, source: 'label reference' };
@@ -205,31 +205,45 @@ function nameFromDetailsOrSummary (element) {
 */
 function getNodeContents (node, forElem) {
   let contents = '';
+  let nc;
+  let arr = [];
 
   if (node === forElem) return '';
 
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
-      if (couldHaveAltText(node)) {
-        contents = getAttributeValue(node, 'alt');
-      }
-      else if (isEmbeddedControl(node)) {
-        contents = getEmbeddedControlValue(node);
-      }
-      else {
-        if (node.hasChildNodes()) {
-          let children = node.childNodes,
-              arr = [];
-
-          for (let i = 0; i < children.length; i++) {
-            let nc = getNodeContents(children[i], forElem);
-            if (nc.length) arr.push(nc);
-          }
-
-          contents = (arr.length) ? arr.join(' ') : '';
+      if (node.tagName.toLowerCase() === 'slot') {
+        let assignedNodes = node.assignedNodes();
+        // if no slotted elements, check for default slotted content
+        assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
+        assignedNodes = Array.from(assignedNodes);
+        arr = [];
+        assignedNodes.forEach( assignedNode => {
+          nc = getNodeContents(assignedNode, forElem);
+          if (nc.length) arr.push(nc);
+        });
+        contents = (arr.length) ? arr.join(' ') : '';
+      } else {
+        if (couldHaveAltText(node)) {
+          contents = getAttributeValue(node, 'alt');
         }
+        else if (isEmbeddedControl(node)) {
+          contents = getEmbeddedControlValue(node);
+        }
+        else {
+          if (node.hasChildNodes()) {
+            let children = Array.from(node.childNodes);
+            arr = [];
+
+            children.forEach( child => {
+              nc = getNodeContents(child, forElem);
+              if (nc.length) arr.push(nc);
+            });
+            contents = (arr.length) ? arr.join(' ') : '';
+          }
+        }
+        // For all branches of the ELEMENT_NODE case...
       }
-      // For all branches of the ELEMENT_NODE case...
       contents = addCssGeneratedContent(node, contents);
       break;
 

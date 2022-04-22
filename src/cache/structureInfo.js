@@ -27,6 +27,7 @@ class LandmarkElement {
     this.childHeadingDomElements = [];
 
     if (debug.flag) {
+      debug.log('')
     }
   }
 
@@ -38,6 +39,20 @@ class LandmarkElement {
     this.childHeadingDomElements.push(domElement);
   }
 
+  showLandmarkInfo (prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    debug.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
+    this.childLandmarkElements.forEach( le => {
+      debug.domElement(le.domElement, prefix);
+      le.showLandmarkInfo(prefix + '  ');
+    });
+    debug.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
+    this.childHeadingDomElements.forEach( h => {
+      debug.domElement(h, prefix);
+    });
+  }
 };
 
 /**
@@ -111,7 +126,7 @@ export default class StructureInfo {
   isLandmark (domElement) {
     let flag = false;
     const role = domElement.role || domElement.defaultRole;
-    const name = domElement.accessibleName;
+    const name = domElement.accName.name;
 
     if (landmarkRoles.includes(role)) {
       if (requireAccessibleNames.includes(role)) {
@@ -170,16 +185,18 @@ export default class StructureInfo {
 
   showStructureInfo () {
     if (debug.flag) {
-      debug.log('== Headings ==');
+      debug.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
         debug.domElement(h);
       });
-      debug.log('== Landmarks ==', 1);
+      debug.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
         debug.domElement(le.domElement);
-        le.childHeadingDomElements.forEach( h => {
-          debug.domElement(h, '  ');
-        });
+      });
+      debug.log('== Structure Tree ==', 1);
+      this.childLandmarkElements.forEach( le => {
+        debug.domElement(le.domElement);
+        le.showLandmarkInfo('  ');
       });
     }
   }

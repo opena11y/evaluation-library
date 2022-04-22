@@ -90,11 +90,33 @@ export default class DebugLogging {
   }
 
   domElement (domElement, prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+
     if (domElement) {
       const accName = domElement.accName
-      this.log(`${prefix}[${domElement.tagName}]: ${accName.name} (source: ${accName.source})`, 0);
+      const count = domElement.children.length;
+      if (accName.name.length) {
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count})`, 0);
+      } else {
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count})`, 0);
+      }
     }
   }
 
+  domText (domText, prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    const maxDisplay = 20;
+    if (domText) {
+      if (domText.getText.length < maxDisplay) {
+        this.log(`${prefix}[text]: ${domText.getText}`, 0);
+      } else {
+        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ...`, 0);
+      }
+    }
+  }
 
 }

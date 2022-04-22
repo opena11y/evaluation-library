@@ -7,7 +7,7 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', false);
+const debug = new DebugLogging('domCache', true);
 
 
 const skipableElements = [
@@ -70,10 +70,13 @@ export default class DOMCache {
 
     this.structureInfo = new StructureInfo();
   	this.domCache = new DOMElement(parentInfo, startingElement);
+    parentInfo.domElement = this.domCache;
 
     this.transverseDOM(parentInfo, startingElement);
 
-    this.structureInfo.showStructureInfo()
+    // Debug features
+    this.showDomElementTree();
+    this.structureInfo.showStructureInfo();
   }
 
   // Tests if a tag name can be skipped
@@ -120,7 +123,6 @@ export default class DOMCache {
 
         case Node.TEXT_NODE:
           domItem = new DOMText(parentInfo, node);
-          debug.flag && debug.log('[text]: ' + domItem.getText);
           // Check to see if text node has any renderable content
           if (domItem.hasContent) {
             // Merge text nodes in to a single DomText node if sibling text nodes
@@ -137,7 +139,6 @@ export default class DOMCache {
 
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
-          debug.flag && debug.log('[tagName]: ' + tagName);
 
           if (!this.isSkipable(tagName)) {
             // check for slotted content
@@ -145,11 +146,10 @@ export default class DOMCache {
               let assignedNodes = node.assignedNodes();
               // if no slotted elements, check for default slotted content
               assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
-              if (assignedNodes.length) {
-                assignedNodes.forEach( assignedNode => {
-                  this.transverseDOM(parentInfo, assignedNode);
-                });
-              }
+              assignedNodes = Array.from(assignedNodes);
+              assignedNodes.forEach( assignedNode => {
+                this.transverseDOM(parentInfo, assignedNode);
+              });
             } else {
               domItem = new DOMElement(parentInfo, node);
               if (parentDomElement) {
@@ -185,6 +185,19 @@ export default class DOMCache {
     } /* end for */
   }
 
+
+  /**
+   * @method updateDOMElementInformation
+   *
+   * @desc  Updates page level collections of elements for landmarks, headings and controls
+   *
+   * @param {Object}  parentinfo  - Parent DomElement associated DOMElement
+   * @param {Object}  domElement  - The dom element to start transversing the
+   *                                      dom
+   *
+   * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
+   */
+
   updateDOMElementInformation (parentInfo, domElement) {
     const landmarkElement = parentInfo.landmarkElement;
     let newParentInfo = new ParentInfo(parentInfo);
@@ -193,6 +206,20 @@ export default class DOMCache {
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement);
 
     return newParentInfo;
+  }
+
+  /**
+   * @method showDomElementTree
+   *
+   * @desc  Used for debugging the DOMElement tree
+   */
+  showDomElementTree () {
+    if (debug.flag) {
+      debug.separator(1);
+      debug.log(' === DOMCache Tree ===');
+      debug.domElement(this.domCache);
+      this.domCache.showDomElementTree(' ');
+    }
   }
 
 }

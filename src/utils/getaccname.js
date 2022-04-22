@@ -48,12 +48,12 @@ const noAccName = {
 *   (3) Use whatever method is specified by the native semantics of the
 *   element, which includes, as last resort, use of the title attribute.
 */
-function getAccessibleName (element, recFlag) {
+function getAccessibleName (doc, element, recFlag) {
   let accName = null;
 
-  if (!recFlag) accName = nameFromAttributeIdRefs(element, 'aria-labelledby');
+  if (!recFlag) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(element, recFlag);
+  if (accName === null) accName = nameFromNativeSemantics(doc, element, recFlag);
   if (accName === null) accName = noAccName;
 
   return accName;
@@ -65,10 +65,10 @@ function getAccessibleName (element, recFlag) {
 *   (1) Use aria-describedby, unless a traversal is already underway;
 *   (2) As last resort, use the title attribute.
 */
-function getAccessibleDesc (element, recFlag) {
+function getAccessibleDesc (doc, element, recFlag) {
   let accDesc = null;
 
-  if (!recFlag) accDesc = nameFromAttributeIdRefs(element, 'aria-describedby');
+  if (!recFlag) accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
   if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
 
@@ -81,11 +81,10 @@ function getAccessibleDesc (element, recFlag) {
 *   description calculation based on its precedence order:
 *   (1) Use aria-errormessage, unless a traversal is already underway;
 */
-function getErrMessage (element) {
+function getErrMessage (doc, element) {
   let errMessage = null;
 
-  errMessage = nameFromAttributeIdRefs(element, 'aria-errormessage');
-
+  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
@@ -112,7 +111,7 @@ function getGroupingLabels (element) {
 *   indicating that we are in a recursive aria-labelledby calculation, the
 *   nameFromContents method is used.
 */
-function nameFromNativeSemantics (element, recFlag) {
+function nameFromNativeSemantics (doc, element, recFlag) {
   let tagName = element.tagName.toLowerCase(),
       ariaRole = getAriaRole(element),
       accName = null;
@@ -129,7 +128,7 @@ function nameFromNativeSemantics (element, recFlag) {
         // HIDDEN
         case 'hidden':
           if (recFlag) {
-            accName = nameFromLabelElement(element);
+            accName = nameFromLabelElement(doc, element);
           }
           break;
 
@@ -140,7 +139,7 @@ function nameFromNativeSemantics (element, recFlag) {
         case 'tel':
         case 'text':
         case 'url':
-          accName = nameFromLabelElement(element);
+          accName = nameFromLabelElement(doc, element);
           if (accName === null) accName = nameFromAttribute(element, 'placeholder');
           break;
 
@@ -165,7 +164,7 @@ function nameFromNativeSemantics (element, recFlag) {
           break;
 
         default:
-          accName = nameFromLabelElement(element);
+          accName = nameFromLabelElement(doc, element);
           break;
       }
       break;
@@ -184,11 +183,11 @@ function nameFromNativeSemantics (element, recFlag) {
     case 'output':
     case 'progress':
     case 'select':
-      accName = nameFromLabelElement(element);
+      accName = nameFromLabelElement(doc, element);
       break;
 
     case 'textarea':
-      accName = nameFromLabelElement(element);
+      accName = nameFromLabelElement(doc, element);
       if (accName === null) accName = nameFromAttribute(element, 'placeholder');
       break;
 
@@ -262,7 +261,10 @@ function nameFromNativeSemantics (element, recFlag) {
 *   with name property set to a string that is a space-separated concatena-
 *   tion of those results if any, otherwise return null.
 */
-function nameFromAttributeIdRefs (element, attribute) {
+function nameFromAttributeIdRefs (doc, element, attribute) {
+//  console.log(`[nameFromAttributeIdRefs][      doc]: ${doc}`)
+//  console.log(`[nameFromAttributeIdRefs][  element]: ${element}`)
+//  console.log(`[nameFromAttributeIdRefs][attribute]: ${attribute}`)
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, accName, arr = [];
 
@@ -270,9 +272,9 @@ function nameFromAttributeIdRefs (element, attribute) {
     idRefs = value.split(' ');
 
     for (i = 0; i < idRefs.length; i++) {
-      refElement = document.getElementById(idRefs[i]);
+      refElement = doc.getElementById(idRefs[i]);
       if (refElement) {
-        accName = getAccessibleName(refElement, true);
+        accName = getAccessibleName(doc, refElement, true);
         if (accName && accName.name.length) arr.push(accName.name);
       }
     }

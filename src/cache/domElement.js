@@ -19,7 +19,7 @@ import {
 } from '../utils/getaccname.js';
 
 /* Constants */
-const debug = new DebugLogging('DOMElement', false);
+const debug = new DebugLogging('DOMElement', true);
 
 /**
  * @class DOMElement
@@ -51,27 +51,35 @@ export default class DOMElement {
     this.role             = role ? role : defaultRole;
     this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
 
-    this.accName           = getAccessibleName(elementNode);
-    this.accDescription    = getAccessibleDesc(elementNode);
-    this.errMessage        = getErrMessage(elementNode);
-
-/* Used for testing naming module with accname-1.html test page */
-    if (debug.flag) {
-      (this.tagName === 'h2') && debug.separator(1);
-      debug.log(`[       tagName]: ${this.tagName} (${this.role})`);
-      this.accName        && debug.log(`[       aacName]: ${this.accName.name} (${this.accName.source})`);
-      this.accDescription && debug.log(`[aacDescription]: ${this.accDescription.name} (${this.accDescription.source})`);
-      this.errMessage     && debug.log(`[    errMessage]: ${this.errMessage.name} (${this.errMessage.source})`);
-    }
+    this.accName           = getAccessibleName(doc, elementNode);
+    this.accDescription    = getAccessibleDesc(doc, elementNode);
+    this.errMessage        = getErrMessage(doc, elementNode);
 
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
     this.children = [];
   }
 
+
+  /**
+   * @method isDomText
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns false since this is a DOMElement object
+   */
+
   get isDomText () {
     return false;
   }
+
+  /**
+   * @method isLastChildDomText
+   *
+   * @desc
+   *
+   * @return {Boolean} Returns true if the last child is a DOMText object, otherwise false
+   */
 
   get isLastChildDomText () {
     let flag = false;
@@ -82,9 +90,23 @@ export default class DOMElement {
     return flag;
   }
 
+  /**
+   * @method addChild
+   *
+   * @desc
+   *
+   * @param {Object}  domItem  -
+   */
+
   addChild (domItem) {
     this.children.push(domItem);
   }
+
+  /**
+   * @method getLastChild
+   *
+   * @desc
+   */
 
   getLastChild () {
     let len = this.children.length;
@@ -95,11 +117,26 @@ export default class DOMElement {
     return domItem;
   }
 
+  /**
+   * @method getAriaInHTMLInfo
+   *
+   * @desc
+   *
+   * @param {Object}  node  -
+   */
+
   getAriaInHTMLInfo (node) {
     let role = 'generic';
     return role;
   }
 
+  /**
+   * @method addTextToLastChild
+   *
+   * @desc
+   *
+   * @param {String}  text  -
+   */
 
   addTextToLastChild (text) {
     const domItem = this.getLastChild();
@@ -108,4 +145,24 @@ export default class DOMElement {
     }
   }
 
- }
+  /**
+   * @method showDomElementTree
+   *
+   * @desc  Used for debugging the DOMElement tree
+   */
+  showDomElementTree (prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    if (debug.flag) {
+      this.children.forEach( domItem => {
+        if (domItem.isDomText) {
+          debug.domText(domItem, prefix);
+        } else {
+          debug.domElement(domItem, prefix);
+          domItem.showDomElementTree(prefix + '   ');
+        }
+      });
+    }
+  }
+}
