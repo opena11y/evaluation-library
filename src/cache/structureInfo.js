@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('structureInfo', true);
+const debug = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];

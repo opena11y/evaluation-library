@@ -7,7 +7,7 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', true);
+const debug = new DebugLogging('domCache', false);
 
 
 const skipableElements = [
@@ -75,8 +75,10 @@ export default class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    this.showDomElementTree();
-    this.structureInfo.showStructureInfo();
+    if (debug.flag) {
+      this.showDomElementTree();
+      this.structureInfo.showStructureInfo();
+    }
   }
 
   // Tests if a tag name can be skipped
@@ -214,12 +216,10 @@ export default class DOMCache {
    * @desc  Used for debugging the DOMElement tree
    */
   showDomElementTree () {
-    if (debug.flag) {
-      debug.separator(1);
-      debug.log(' === DOMCache Tree ===');
-      debug.domElement(this.domCache);
-      this.domCache.showDomElementTree(' ');
-    }
+    debug.separator(1);
+    debug.log(' === DOMCache Tree ===');
+    debug.domElement(this.domCache);
+    this.domCache.showDomElementTree(' ');
   }
 
 }

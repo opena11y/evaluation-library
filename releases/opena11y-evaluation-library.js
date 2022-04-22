@@ -8633,7 +8633,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$4 = new DebugLogging('DOMElement', true);
+const debug$4 = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -8852,7 +8852,7 @@ class DOMText {
 /* structureInfo.js */
 
 /* Constants */
-const debug$3 = new DebugLogging('structureInfo', true);
+const debug$3 = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9051,7 +9051,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$2 = new DebugLogging('domCache', true);
+const debug$2 = new DebugLogging('domCache', false);
 
 
 const skipableElements = [
@@ -9119,8 +9119,10 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    this.showDomElementTree();
-    this.structureInfo.showStructureInfo();
+    if (debug$2.flag) {
+      this.showDomElementTree();
+      this.structureInfo.showStructureInfo();
+    }
   }
 
   // Tests if a tag name can be skipped
@@ -9255,12 +9257,10 @@ class DOMCache {
    * @desc  Used for debugging the DOMElement tree
    */
   showDomElementTree () {
-    if (debug$2.flag) {
-      debug$2.separator(1);
-      debug$2.log(' === DOMCache Tree ===');
-      debug$2.domElement(this.domCache);
-      this.domCache.showDomElementTree(' ');
-    }
+    debug$2.separator(1);
+    debug$2.log(' === DOMCache Tree ===');
+    debug$2.domElement(this.domCache);
+    this.domCache.showDomElementTree(' ');
   }
 
 }
