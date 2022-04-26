@@ -2,6 +2,7 @@
 
 /* Imports */
 import DOMCache          from './cache/domCache.js';
+import {rules}           from './rules/rules.js';
 import EvaluationResult  from './evaluationResult.js';
 import DebugLogging      from './debug.js';
 
@@ -25,7 +26,7 @@ export default class EvaluationLibrary {
 
   evaluate (startingDoc, title='', url='') {
     let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(domCache, title, url);
+    let evaluationResult = new EvaluationResult(rules, domCache, title, url);
     if (debug.flag) {
       debug.log('EvaluationResult');
     }

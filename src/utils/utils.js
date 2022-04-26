@@ -2,10 +2,13 @@
 
 export {
   normalize,
+  filterTextContent,
+  replaceAll,
   getAttributeValue,
   hasEmptyAltText,
   hasInvalidState,
-  hasCheckedState
+  hasCheckedState,
+  transformElementMarkup
 }
 /* constants */
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
@@ -77,4 +80,107 @@ function hasCheckedState (node) {
   let flag = node.tagName.toLowerCase() === 'input';
   flag = flag && inputsWithChecked.includes(node.type.toLowerCase());
   return flag;
+}
+
+/**
+ * @function transformElementMarkup
+ *
+ * @desc Converts element markup in strings to capitalized text
+ *
+ * @param {String}  elemStr - Element result message to convert content inside '@' to caps
+ *
+ * @return  String
+ */
+
+function transformElementMarkup (elemStr) {
+  let newStr = "";
+  let transform_flag = false;
+
+  if (typeof str === 'String') {
+    const len = str.length;
+    for (let i = 0; i < len; i++) {
+      let c = str[i];
+      if (c == '@') {
+        transform_flag = !transform_flag;
+        continue;
+      }
+      if (transform_flag)
+        newStr += c.toUpperCase();
+      else
+        newStr += c;
+    }
+  }
+  return newStr;
+}
+
+/**
+ * @function filterTextContent
+ *
+ * @desc Normalizes spaces in a string and removes any non-printable characters
+ *
+ * @param {String} s - string to be normalized
+ *
+ * @return  String
+ */
+
+function filterTextContent  (s) {
+  // Replace repeated spaces, newlines and tabs with a single space
+
+  if (typeof s !== 'string') return "";
+
+// **** NOTE *****
+// This function was changed to support fae-util based on HTMLUnit, which does not seem to
+// handle character entities the same as a browser DOM
+// This resulted in special characters being generated triggering false positives in some
+/// rules, usually Landmark rules related to content being outside a landmark
+
+//  if (s.replace) return s.replace(/^\s*|\s(?=\s)|\s*$/g, "");
+
+  const len = s.length;
+  let s1 = "";
+  let last_c = 32;
+
+  for (let i = 0; i < len; i++) {
+
+    var c = s.charCodeAt(i);
+
+    // only include printable characters less than '~' character
+    if (c < 32 || c > 126) continue;
+
+    if ((c !== 32) || (last_c !== 32)) {
+      s1 += s[i];
+      last_c = c;
+    }
+
+  }
+  return s1.trim();
+};
+
+/**
+ * @function replaceAll
+ *
+ * @desc Normalizes spaces in a string
+ *
+ * @param {String}  s       - String to have replacements
+ * @param {String}  str1    - String to replace
+ * @param {String}  str2    - The replacement string
+ *
+ * @return  String
+ */
+
+function replaceAll (s, str1, str2) {
+  const len = s.length;
+  let pos = s.indexOf(str1);
+  let s1  = "";
+
+  while (pos >= 0) {
+    s1 += s.slice(0,pos);
+    s1 += str2;
+    s   = s.slice((pos+str1.length), len);
+
+    pos = s.indexOf(str1);
+    len = s.length;
+  }
+  s1 += s.slice(0, len);
+  return s1;
 }

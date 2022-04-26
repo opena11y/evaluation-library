@@ -1,13 +1,14 @@
 /* evaluationResult.js */
 
 /* Imports */
-import DebugLogging      from './debug.js';
+import DebugLogging  from './debug.js';
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
 
 export default class EvaluationResult {
-  constructor (domCache, title, url) {
+  constructor (rules, domCache, title, url) {
+    this.rules = rules;
     this.domCache = domCache;
     this.title = title;
     this.url = url;

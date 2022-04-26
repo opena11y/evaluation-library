@@ -19,7 +19,7 @@ import {
 } from '../utils/getaccname.js';
 
 /* Constants */
-const debug = new DebugLogging('DOMElement', false);
+const debug = new DebugLogging('DOMElement', true);
 
 /**
  * @class DOMElement
@@ -32,23 +32,25 @@ const debug = new DebugLogging('DOMElement', false);
  */
 
 export default class DOMElement {
-  constructor (parentInfo, elementNode) {
+  constructor (parentInfo, elementNode, ordinalPosition) {
     const parentDomElement = parentInfo.domElement;
     const doc              = parentInfo.document;
 
-    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
-    const defaultRole    = this.ariaInHTMLInfo.defaultRole;
-    const role           = elementNode.getAttribute('role');
-
-    this.parentInfo       = parentInfo; 
+    this.ordinalPosition  = ordinalPosition;
+    this.parentInfo       = parentInfo;
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
+
+    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
+    const defaultRole = this.ariaInHTMLInfo.defaultRole;
+
+    this.role         = elementNode.hasAttribute('role') ?
+                        elementNode.getAttribute('role') :
+                        defaultRole;
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInHTMLInfo   = getAriaInHTMLInfo(elementNode);
-    this.role             = role ? role : defaultRole;
     this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
 
     this.accName           = getAccessibleName(doc, elementNode);
@@ -57,6 +59,12 @@ export default class DOMElement {
 
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
+
+    this.id         = elementNode.id        ? elementNode.id : '';
+    this.className  = elementNode.className ? elementNode.className : '';
+    this.htmlAttrs  = this.getHtmlAttrs(elementNode);
+    this.ariaAttrs  = this.getAriaAttrs(elementNode);
+
     this.children = [];
   }
 
@@ -118,16 +126,45 @@ export default class DOMElement {
   }
 
   /**
-   * @method getAriaInHTMLInfo
+   * @method getHtmlAttrs
    *
-   * @desc
+   * @desc Get non-ARIA attributes for the element in a name value object
    *
-   * @param {Object}  node  -
+   * @param {Object}  node  - DOM node element
+   *
+   * @param {Array} array of objects with attribute name and value properties
    */
 
-  getAriaInHTMLInfo (node) {
-    let role = 'generic';
-    return role;
+  getHtmlAttrs (node) {
+    const htmlAttrs = {};
+    const attrs = Array.from(node.attributes);
+    attrs.forEach( attr => {
+      if (attr.name.toLowerCase().indexOf('aria') !== 0) {
+        htmlAttrs[attr.name] = attr.value;
+      }
+    });
+    return htmlAttrs;
+  }
+
+  /**
+   * @method getAriaAttrs
+   *
+   * @desc Get ARIA attributes for the element in a name value object
+   *
+   * @param {Object}  node  - DOM node element
+   *
+   * @param {Array} array of objects with attribute name and value properties
+   */
+
+  getAriaAttrs (node) {
+    const ariaAttrs = {};
+    const attrs = Array.from(node.attributes);
+    attrs.forEach( attr => {
+      if (attr.name.toLowerCase().indexOf('aria') === 0) {
+        ariaAttrs[attr.name] = attr.value;
+      }
+    });
+    return ariaAttrs;
   }
 
   /**
@@ -143,6 +180,22 @@ export default class DOMElement {
     if (domItem && domItem.isDomText) {
       domItem.addText(text);
     }
+  }
+
+  toString () {
+    let identifer = this.tagName;
+    let type = '';
+    let id = '';
+
+    if (this.node.type) {
+      type = `[type=${this.node.type}]`;
+    }
+
+    if (this.node.id) {
+      id = `[id=${this.node.id}]`;
+    }
+
+    return `${this.tagName}${type}${id}[${this.role}]`;
   }
 
   /**

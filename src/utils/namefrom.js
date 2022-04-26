@@ -212,12 +212,9 @@ function getNodeContents (node, forElem) {
 
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
-      if (node.tagName.toLowerCase() === 'slot') {
-        let assignedNodes = node.assignedNodes();
+      if (node instanceof HTMLSlotElement) {
         // if no slotted elements, check for default slotted content
-        assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
-        assignedNodes = Array.from(assignedNodes);
-        arr = [];
+        const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
         assignedNodes.forEach( assignedNode => {
           nc = getNodeContents(assignedNode, forElem);
           if (nc.length) arr.push(nc);
@@ -233,8 +230,6 @@ function getNodeContents (node, forElem) {
         else {
           if (node.hasChildNodes()) {
             let children = Array.from(node.childNodes);
-            arr = [];
-
             children.forEach( child => {
               nc = getNodeContents(child, forElem);
               if (nc.length) arr.push(nc);

@@ -82,17 +82,16 @@ class RefInfo {
 
 export default class AriaValidation {
   constructor (doc, role, defaultRole, node) {
-    let designPattern = ariaInfo.designPatterns[role];
-
-    this.isValidRole          = typeof designPattern === 'object';
+    let designPattern = ariaInfo.designPatterns[role] || null;
+    this.isValidRole  = designPattern !== null;
 
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
       designPattern = ariaInfo.designPatterns[defaultRole];
     }
 
-    this.nameRequired     = designPattern.nameRequired;
-    this.nameProhibited   = designPattern.nameProbihited;
+    this.isNameRequired     = designPattern.nameRequired;
+    this.isNameProhibited   = designPattern.nameProbihited;
 
     const attrs = Array.from(node.attributes);
 
@@ -109,7 +108,7 @@ export default class AriaValidation {
       }
     });
 
-    this.invalidAttrValues  = this.checkForInalidAttributeValue(this.validAttrs);
+    this.invalidAttrValues  = this.checkForInvalidAttributeValue(this.validAttrs);
     this.invalidRefs        = this.checkForInvalidReferences(doc, this.validAttrs);
     this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
@@ -128,7 +127,7 @@ export default class AriaValidation {
 
   // check if the value of the aria attribute
   // is allowed
-  checkForInalidAttributeValue (attrs) {
+  checkForInvalidAttributeValue (attrs) {
     const booleanValues = ['true', 'false'];
     const tristateValues = ['true', 'false', 'mixed'];
     const attrsWithInvalidValues = [];

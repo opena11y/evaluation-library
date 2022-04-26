@@ -19,14 +19,25 @@
 *     debug.label   {string} rendered as a prefix to each log message;
 *                   default value is 'debug'
 *   Methods
-*     debug.log     calls console.log with label prefix and message
-*                   @param message {object} - console.log calls toString()
-*                   @param spaceAbove [optional] {boolean}
-*     debug.tag     outputs tagName and textContent of DOM element
-*                   @param node {DOM node reference} - usually an HTMLElement
-*                   @param spaceAbove [optional] {boolean}
-*     debug.separator - outputs only debug.label and a series of hyphens
-*                   @param spaceAbove [optional] {boolean}
+*     debug.log        calls console.log with label prefix and message
+*                      @param message {object} - console.log calls toString()
+*                      @param spaceAbove [optional] {boolean}
+*
+*     debug.tag        outputs tagName and textContent of DOM element
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param spaceAbove [optional] {boolean}
+*
+*     debug.domElement outputs tagName, role, name and number of children of
+*                      DOMElement object
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param prefix [optional] {String}
+*
+*     debug.domText    outputs text content of DOMText object
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param prefix [optional] {String}
+*
+*     debug.separator  outputs only debug.label and a series of hyphens
+*                      @param spaceAbove [optional] {boolean}
 */
 
 export default class DebugLogging {
@@ -96,11 +107,12 @@ export default class DebugLogging {
 
     if (domElement) {
       const accName = domElement.accName
-      const count = domElement.children.length;
+      const count   = domElement.children.length;
+      const pos     = domElement.ordinalPosition;
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count})`, 0);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}), position: ${pos}`);
       } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count})`, 0);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}), position: ${pos}`);
       }
     }
   }
@@ -112,9 +124,9 @@ export default class DebugLogging {
     const maxDisplay = 20;
     if (domText) {
       if (domText.getText.length < maxDisplay) {
-        this.log(`${prefix}[text]: ${domText.getText}`, 0);
+        this.log(`${prefix}[text]: ${domText.getText} (parent: ${domText.parentDomElement.tagName})`);
       } else {
-        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ...`, 0);
+        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ... (parent: ${domText.parentDomElement.tagName})`);
       }
     }
   }

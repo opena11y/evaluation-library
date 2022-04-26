@@ -7,7 +7,7 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', false);
+const debug = new DebugLogging('domCache', true);
 
 
 const skipableElements = [
@@ -65,14 +65,19 @@ export default class DOMCache {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
+
+    this.allDomElements = [];
+    this.allDomTexts    = [];
+
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
   	this.domCache = new DOMElement(parentInfo, startingElement);
     parentInfo.domElement = this.domCache;
+    this.allDomElements.push(this.domCache);
 
-    this.transverseDOM(parentInfo, startingElement);
+    this.transverseDOM(parentInfo, startingElement, 0);
 
     // Debug features
     if (debug.flag) {
@@ -82,23 +87,23 @@ export default class DOMCache {
   }
 
   // Tests if a tag name can be skipped
-  isSkipable(tagName) {
+  isSkipableElement(tagName) {
     return skipableElements.includes(tagName);
   }
 
   // Tests if a tag name is a custom element
-  isCustom(tagName) {
+  isCustomElement(tagName) {
     return tagName.indexOf('-') >= 0;
   }
 
   // Tests if a tag name is an iframe or frame
-  isIFrame(tagName) {
+  isIFrameElement(tagName) {
     return tagName === 'iframe' || tagName === 'frame';
   }
 
-  // Tests if a tag name is a slot
-  isSlotted(tagName) {
-    return tagName  === 'slot';
+  // Tests if a node is a slot element
+  isSlotElement(node) {
+    return (node instanceof HTMLSlotElement);
   }
 
   /**
@@ -109,13 +114,15 @@ export default class DOMCache {
    *       that are used by the accessibility rules to test accessibility 
    *       requirements 
    *
-   * @param {Object}  parentinfo  - Parent DomElement associated with the
-   *                                      parent element node of the starting node  
-   * @param {Object}  startingNode      - The dom element to start transversing the
-   *                                      dom
+   * @param {Object}  parentinfo      - Parent DomElement associated with the
+   *                                    parent element node of the starting node
+   * @param {Object}  startingNode    - The dom element to start transversing the
+   *                                    dom
+   * @param {Number}  ordinalPosition - Ordinal position of the element on the web
+   *                                    page
    */
 
-  transverseDOM(parentInfo, startingNode) {
+  transverseDOM(parentInfo, startingNode, ordinalPosition) {
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
 
@@ -124,7 +131,7 @@ export default class DOMCache {
       switch (node.nodeType) {
 
         case Node.TEXT_NODE:
-          domItem = new DOMText(parentInfo, node);
+          domItem = new DOMText(parentDomElement, node);
           // Check to see if text node has any renderable content
           if (domItem.hasContent) {
             // Merge text nodes in to a single DomText node if sibling text nodes
@@ -134,6 +141,7 @@ export default class DOMCache {
                 parentDomElement.addTextToLastChild(domItem.text);
               } else {
                 parentDomElement.addChild(domItem);
+                this.allDomTexts.push(domItem);
               }
             }
           }
@@ -142,32 +150,35 @@ export default class DOMCache {
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
 
-          if (!this.isSkipable(tagName)) {
+          if (!this.isSkipableElement(tagName)) {
             // check for slotted content
-            if (this.isSlotted(tagName)) {
-              let assignedNodes = node.assignedNodes();
-              // if no slotted elements, check for default slotted content
-              assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
-              assignedNodes = Array.from(assignedNodes);
+            if (this.isSlotElement(node)) {
+                // if no slotted elements, check for default slotted content
+              const assignedNodes = node.assignedNodes().length ?
+                                    node.assignedNodes() :
+                                    node.assignedNodes({ flatten: true });
               assignedNodes.forEach( assignedNode => {
                 this.transverseDOM(parentInfo, assignedNode);
               });
             } else {
-              domItem = new DOMElement(parentInfo, node);
+              domItem = new DOMElement(parentInfo, node, (ordinalPosition + 1));
+              ordinalPosition += 1;
+              this.allDomElements.push(domItem);
+
               if (parentDomElement) {
                 parentDomElement.addChild(domItem);
               }
               const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
-              if (this.isCustom(tagName)) {
+              if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
                   newParentInfo.document = node.shadowRoot;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
                 }
               } else {
                 // Check for iframe or frame tag
-                if (this.isIFrame(tagName)) {
+                if (this.isIFrameElement(tagName)) {
                   if (node.contentWindow.document) {
                     newParentInfo.document = node.contentWindow.document;
                     this.transverseDOM(newParentInfo, node.contentWindow.document);
@@ -216,8 +227,17 @@ export default class DOMCache {
    * @desc  Used for debugging the DOMElement tree
    */
   showDomElementTree () {
-    debug.separator(1);
-    debug.log(' === DOMCache Tree ===');
+    debug.log(' === AllDomElements ===', true);
+    this.allDomElements.forEach( de => {
+      debug.domElement(de);
+    });
+
+    debug.log(' === AllDomTexts ===', true);
+    this.allDomTexts.forEach( dt => {
+      debug.domText(dt);
+    });
+
+    debug.log(' === DOMCache Tree ===', true);
     debug.domElement(this.domCache);
     this.domCache.showDomElementTree(' ');
   }

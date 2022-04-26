@@ -19,14 +19,25 @@
 *     debug.label   {string} rendered as a prefix to each log message;
 *                   default value is 'debug'
 *   Methods
-*     debug.log     calls console.log with label prefix and message
-*                   @param message {object} - console.log calls toString()
-*                   @param spaceAbove [optional] {boolean}
-*     debug.tag     outputs tagName and textContent of DOM element
-*                   @param node {DOM node reference} - usually an HTMLElement
-*                   @param spaceAbove [optional] {boolean}
-*     debug.separator - outputs only debug.label and a series of hyphens
-*                   @param spaceAbove [optional] {boolean}
+*     debug.log        calls console.log with label prefix and message
+*                      @param message {object} - console.log calls toString()
+*                      @param spaceAbove [optional] {boolean}
+*
+*     debug.tag        outputs tagName and textContent of DOM element
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param spaceAbove [optional] {boolean}
+*
+*     debug.domElement outputs tagName, role, name and number of children of
+*                      DOMElement object
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param prefix [optional] {String}
+*
+*     debug.domText    outputs text content of DOMText object
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param prefix [optional] {String}
+*
+*     debug.separator  outputs only debug.label and a series of hyphens
+*                      @param spaceAbove [optional] {boolean}
 */
 
 class DebugLogging {
@@ -96,11 +107,12 @@ class DebugLogging {
 
     if (domElement) {
       const accName = domElement.accName;
-      const count = domElement.children.length;
+      const count   = domElement.children.length;
+      const pos     = domElement.ordinalPosition;
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count})`, 0);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}), position: ${pos}`);
       } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count})`, 0);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}), position: ${pos}`);
       }
     }
   }
@@ -112,9 +124,9 @@ class DebugLogging {
     const maxDisplay = 20;
     if (domText) {
       if (domText.getText.length < maxDisplay) {
-        this.log(`${prefix}[text]: ${domText.getText}`, 0);
+        this.log(`${prefix}[text]: ${domText.getText} (parent: ${domText.parentDomElement.tagName})`);
       } else {
-        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ...`, 0);
+        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ... (parent: ${domText.parentDomElement.tagName})`);
       }
     }
   }
@@ -159,6 +171,7 @@ class ColorContrast {
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
     this.backgroundPosition = style.getPropertyValue("background-position");
+    this.hasBackgroundImage = this.backgroundImage && this.backgroundImage.length;
 
     this.fontFamily = style.getPropertyValue("font-family");
     this.fontSize   = this.normalizeFontSize(style, parentColorContrast);
@@ -5680,17 +5693,16 @@ class RefInfo {
 
 class AriaValidation {
   constructor (doc, role, defaultRole, node) {
-    let designPattern = ariaInfo.designPatterns[role];
-
-    this.isValidRole          = typeof designPattern === 'object';
+    let designPattern = ariaInfo.designPatterns[role] || null;
+    this.isValidRole  = designPattern !== null;
 
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
       designPattern = ariaInfo.designPatterns[defaultRole];
     }
 
-    this.nameRequired     = designPattern.nameRequired;
-    this.nameProhibited   = designPattern.nameProbihited;
+    this.isNameRequired     = designPattern.nameRequired;
+    this.isNameProhibited   = designPattern.nameProbihited;
 
     const attrs = Array.from(node.attributes);
 
@@ -5707,7 +5719,7 @@ class AriaValidation {
       }
     });
 
-    this.invalidAttrValues  = this.checkForInalidAttributeValue(this.validAttrs);
+    this.invalidAttrValues  = this.checkForInvalidAttributeValue(this.validAttrs);
     this.invalidRefs        = this.checkForInvalidReferences(doc, this.validAttrs);
     this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
@@ -5726,7 +5738,7 @@ class AriaValidation {
 
   // check if the value of the aria attribute
   // is allowed
-  checkForInalidAttributeValue (attrs) {
+  checkForInvalidAttributeValue (attrs) {
     const booleanValues = ['true', 'false'];
     const tristateValues = ['true', 'false', 'mixed'];
     const attrsWithInvalidValues = [];
@@ -7463,20 +7475,15 @@ function getAriaInHTMLInfo (node) {
       break;
 
     case 'input':
-
       type = node.getAttribute('type');
-
       if (!type) {
         type = 'text';
       }
-
-      tagName += '[type=' + type + ']';
-
+      let selector = tagName + '[type=' + type + ']';
       if (node.hasAttribute('list')) {
-        tagName += '[list]';
+        selector += '[list]';
       }
-
-      elemInfo = elementInfo[tagName];
+      elemInfo = elementInfo[selector];
       break;
 
     case 'section':
@@ -7524,7 +7531,6 @@ function getAriaInHTMLInfo (node) {
   }
 
   if (!elemInfo) {
-
       elemInfo = {
       "tagName": node.tagName,
       "defaultRole": "generic",
@@ -7532,7 +7538,6 @@ function getAriaInHTMLInfo (node) {
       "anyRoleAllowed": true,
       "id": "custom"
     };
-
   }
 
   if (debug$5.flag) {
@@ -8278,12 +8283,9 @@ function getNodeContents (node, forElem) {
 
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
-      if (node.tagName.toLowerCase() === 'slot') {
-        let assignedNodes = node.assignedNodes();
+      if (node instanceof HTMLSlotElement) {
         // if no slotted elements, check for default slotted content
-        assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
-        assignedNodes = Array.from(assignedNodes);
-        arr = [];
+        const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
         assignedNodes.forEach( assignedNode => {
           nc = getNodeContents(assignedNode, forElem);
           if (nc.length) arr.push(nc);
@@ -8299,8 +8301,6 @@ function getNodeContents (node, forElem) {
         else {
           if (node.hasChildNodes()) {
             let children = Array.from(node.childNodes);
-            arr = [];
-
             children.forEach( child => {
               nc = getNodeContents(child, forElem);
               if (nc.length) arr.push(nc);
@@ -8633,7 +8633,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$4 = new DebugLogging('DOMElement', false);
+const debug$4 = new DebugLogging('DOMElement', true);
 
 /**
  * @class DOMElement
@@ -8646,23 +8646,25 @@ const debug$4 = new DebugLogging('DOMElement', false);
  */
 
 class DOMElement {
-  constructor (parentInfo, elementNode) {
+  constructor (parentInfo, elementNode, ordinalPosition) {
     const parentDomElement = parentInfo.domElement;
     const doc              = parentInfo.document;
 
-    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
-    const defaultRole    = this.ariaInHTMLInfo.defaultRole;
-    const role           = elementNode.getAttribute('role');
-
-    this.parentInfo       = parentInfo; 
+    this.ordinalPosition  = ordinalPosition;
+    this.parentInfo       = parentInfo;
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
+
+    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
+    const defaultRole = this.ariaInHTMLInfo.defaultRole;
+
+    this.role         = elementNode.hasAttribute('role') ?
+                        elementNode.getAttribute('role') :
+                        defaultRole;
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInHTMLInfo   = getAriaInHTMLInfo(elementNode);
-    this.role             = role ? role : defaultRole;
     this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
 
     this.accName           = getAccessibleName(doc, elementNode);
@@ -8671,6 +8673,12 @@ class DOMElement {
 
     this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
     this.visibility       = new Visibility(parentDomElement, elementNode);
+
+    this.id         = elementNode.id        ? elementNode.id : '';
+    this.className  = elementNode.className ? elementNode.className : '';
+    this.htmlAttrs  = this.getHtmlAttrs(elementNode);
+    this.ariaAttrs  = this.getAriaAttrs(elementNode);
+
     this.children = [];
   }
 
@@ -8732,16 +8740,45 @@ class DOMElement {
   }
 
   /**
-   * @method getAriaInHTMLInfo
+   * @method getHtmlAttrs
    *
-   * @desc
+   * @desc Get non-ARIA attributes for the element in a name value object
    *
-   * @param {Object}  node  -
+   * @param {Object}  node  - DOM node element
+   *
+   * @param {Array} array of objects with attribute name and value properties
    */
 
-  getAriaInHTMLInfo (node) {
-    let role = 'generic';
-    return role;
+  getHtmlAttrs (node) {
+    const htmlAttrs = {};
+    const attrs = Array.from(node.attributes);
+    attrs.forEach( attr => {
+      if (attr.name.toLowerCase().indexOf('aria') !== 0) {
+        htmlAttrs[attr.name] = attr.value;
+      }
+    });
+    return htmlAttrs;
+  }
+
+  /**
+   * @method getAriaAttrs
+   *
+   * @desc Get ARIA attributes for the element in a name value object
+   *
+   * @param {Object}  node  - DOM node element
+   *
+   * @param {Array} array of objects with attribute name and value properties
+   */
+
+  getAriaAttrs (node) {
+    const ariaAttrs = {};
+    const attrs = Array.from(node.attributes);
+    attrs.forEach( attr => {
+      if (attr.name.toLowerCase().indexOf('aria') === 0) {
+        ariaAttrs[attr.name] = attr.value;
+      }
+    });
+    return ariaAttrs;
   }
 
   /**
@@ -8757,6 +8794,22 @@ class DOMElement {
     if (domItem && domItem.isDomText) {
       domItem.addText(text);
     }
+  }
+
+  toString () {
+    this.tagName;
+    let type = '';
+    let id = '';
+
+    if (this.node.type) {
+      type = `[type=${this.node.type}]`;
+    }
+
+    if (this.node.id) {
+      id = `[id=${this.node.id}]`;
+    }
+
+    return `${this.tagName}${type}${id}[${this.role}]`;
   }
 
   /**
@@ -8800,8 +8853,8 @@ new DebugLogging('domText', false);
  */
 
 class DOMText {
-  constructor (parentInfo, textNode) {
-    this.parentInfo = parentInfo;
+  constructor (parentDomElement, textNode) {
+    this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
   }
 
@@ -9051,7 +9104,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$2 = new DebugLogging('domCache', false);
+const debug$2 = new DebugLogging('domCache', true);
 
 
 const skipableElements = [
@@ -9109,14 +9162,19 @@ class DOMCache {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
+
+    this.allDomElements = [];
+    this.allDomTexts    = [];
+
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
   	this.domCache = new DOMElement(parentInfo, startingElement);
     parentInfo.domElement = this.domCache;
+    this.allDomElements.push(this.domCache);
 
-    this.transverseDOM(parentInfo, startingElement);
+    this.transverseDOM(parentInfo, startingElement, 0);
 
     // Debug features
     if (debug$2.flag) {
@@ -9126,23 +9184,23 @@ class DOMCache {
   }
 
   // Tests if a tag name can be skipped
-  isSkipable(tagName) {
+  isSkipableElement(tagName) {
     return skipableElements.includes(tagName);
   }
 
   // Tests if a tag name is a custom element
-  isCustom(tagName) {
+  isCustomElement(tagName) {
     return tagName.indexOf('-') >= 0;
   }
 
   // Tests if a tag name is an iframe or frame
-  isIFrame(tagName) {
+  isIFrameElement(tagName) {
     return tagName === 'iframe' || tagName === 'frame';
   }
 
-  // Tests if a tag name is a slot
-  isSlotted(tagName) {
-    return tagName  === 'slot';
+  // Tests if a node is a slot element
+  isSlotElement(node) {
+    return (node instanceof HTMLSlotElement);
   }
 
   /**
@@ -9153,13 +9211,15 @@ class DOMCache {
    *       that are used by the accessibility rules to test accessibility 
    *       requirements 
    *
-   * @param {Object}  parentinfo  - Parent DomElement associated with the
-   *                                      parent element node of the starting node  
-   * @param {Object}  startingNode      - The dom element to start transversing the
-   *                                      dom
+   * @param {Object}  parentinfo      - Parent DomElement associated with the
+   *                                    parent element node of the starting node
+   * @param {Object}  startingNode    - The dom element to start transversing the
+   *                                    dom
+   * @param {Number}  ordinalPosition - Ordinal position of the element on the web
+   *                                    page
    */
 
-  transverseDOM(parentInfo, startingNode) {
+  transverseDOM(parentInfo, startingNode, ordinalPosition) {
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
 
@@ -9168,7 +9228,7 @@ class DOMCache {
       switch (node.nodeType) {
 
         case Node.TEXT_NODE:
-          domItem = new DOMText(parentInfo, node);
+          domItem = new DOMText(parentDomElement, node);
           // Check to see if text node has any renderable content
           if (domItem.hasContent) {
             // Merge text nodes in to a single DomText node if sibling text nodes
@@ -9178,6 +9238,7 @@ class DOMCache {
                 parentDomElement.addTextToLastChild(domItem.text);
               } else {
                 parentDomElement.addChild(domItem);
+                this.allDomTexts.push(domItem);
               }
             }
           }
@@ -9186,32 +9247,35 @@ class DOMCache {
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
 
-          if (!this.isSkipable(tagName)) {
+          if (!this.isSkipableElement(tagName)) {
             // check for slotted content
-            if (this.isSlotted(tagName)) {
-              let assignedNodes = node.assignedNodes();
-              // if no slotted elements, check for default slotted content
-              assignedNodes = assignedNodes.length ? assignedNodes : node.assignedNodes({ flatten: true });
-              assignedNodes = Array.from(assignedNodes);
+            if (this.isSlotElement(node)) {
+                // if no slotted elements, check for default slotted content
+              const assignedNodes = node.assignedNodes().length ?
+                                    node.assignedNodes() :
+                                    node.assignedNodes({ flatten: true });
               assignedNodes.forEach( assignedNode => {
                 this.transverseDOM(parentInfo, assignedNode);
               });
             } else {
-              domItem = new DOMElement(parentInfo, node);
+              domItem = new DOMElement(parentInfo, node, (ordinalPosition + 1));
+              ordinalPosition += 1;
+              this.allDomElements.push(domItem);
+
               if (parentDomElement) {
                 parentDomElement.addChild(domItem);
               }
               const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
-              if (this.isCustom(tagName)) {
+              if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
                   newParentInfo.document = node.shadowRoot;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
                 }
               } else {
                 // Check for iframe or frame tag
-                if (this.isIFrame(tagName)) {
+                if (this.isIFrameElement(tagName)) {
                   if (node.contentWindow.document) {
                     newParentInfo.document = node.contentWindow.document;
                     this.transverseDOM(newParentInfo, node.contentWindow.document);
@@ -9257,13 +9321,217 @@ class DOMCache {
    * @desc  Used for debugging the DOMElement tree
    */
   showDomElementTree () {
-    debug$2.separator(1);
-    debug$2.log(' === DOMCache Tree ===');
+    debug$2.log(' === AllDomElements ===', true);
+    this.allDomElements.forEach( de => {
+      debug$2.domElement(de);
+    });
+
+    debug$2.log(' === AllDomTexts ===', true);
+    this.allDomTexts.forEach( dt => {
+      debug$2.domText(dt);
+    });
+
+    debug$2.log(' === DOMCache Tree ===', true);
     debug$2.domElement(this.domCache);
     this.domCache.showDomElementTree(' ');
   }
 
 }
+
+/* constants.js */
+
+/**
+ * @constant RULE_CATEGORIES
+ * @type Number
+ * @desc Numercial constant representing a rule category and is bit maskable
+ *
+ * @example
+ * RULE_CATEGORIES.UNDEFINED
+ * RULE_CATEGORIES.AUDIO_VIDEO
+ * RULE_CATEGORIES.FORMS
+ * RULE_CATEGORIES.HEADINGS
+ * RULE_CATEGORIES.IMAGES
+ * RULE_CATEGORIES.KEYBOARD_SUPPORT
+ * RULE_CATEGORIES.LINKS
+ * RULE_CATEGORIES.LANDMARKS
+ * RULE_CATEGORIES.SITE_NAVIGATION
+ * RULE_CATEGORIES.STYLES_READABILITY
+ * RULE_CATEGORIES.TABLES
+ * RULE_CATEGORIES.TIMING
+ * RULE_CATEGORIES.WIDGETS_SCRIPTS
+ */
+
+const RULE_CATEGORIES = {
+  UNDEFINED              : 0x0000,
+  LANDMARKS              : 0x0001,
+  HEADINGS               : 0x0002,
+  STYLES_READABILITY     : 0x0004,
+  IMAGES                 : 0x0008,
+  LINKS                  : 0x0010,
+  TABLES                 : 0x0020,
+  FORMS                  : 0x0040,
+  WIDGETS_SCRIPTS        : 0x0080,
+  AUDIO_VIDEO            : 0x0100,
+  KEYBOARD_SUPPORT       : 0x0200,
+  TIMING                 : 0x0400,
+  SITE_NAVIGATION        : 0x0800,
+  // Composite categories
+  ALL                    : 0x0FFF
+};
+
+/**
+ * @constant RULE_SCOPE
+ * @type Number
+ * @desc Defines scope of a rule
+ *
+ * @example
+ * RULE_SCOPE.UNKNOWN
+ * RULE_SCOPE.ELEMENT
+ * RULE_SCOPE.PAGE
+ * RULE_SCOPE.WEBSITE
+ */
+
+const RULE_SCOPE =  {
+  UNKNOWN : 0,
+  ELEMENT : 1,
+  PAGE    : 2,
+  WEBSITE : 3
+};
+
+/**
+ * @constant TEST_RESULT
+ * @type Number
+ * @desc Types of rule results, used in validation functions
+ *
+ * @example
+ * TEST_RESULT.FAIL
+ * TEST_RESULT.HIDDEN
+ * TEST_RESULT.MANUAL_CHECK
+ * TEST_RESULT.NONE
+ * TEST_RESULT.PASS
+ */
+
+const TEST_RESULT = {
+  PASS         : 1,
+  FAIL         : 2,
+  MANUAL_CHECK : 3,
+  HIDDEN       : 4,
+  NONE         : 5
+};
+
+/* colorRules.js */
+
+/* Constants */
+new DebugLogging('colorRules', false);
+
+//
+// OpenAjax Alliance Rules
+// Rule group: Styling Rules
+//
+const colorRules = [
+  /**
+   * @object COLOR_1
+   *
+   * @desc  Color contrast ratio must be > 4.5 for normal text, or > 3.1 for large text
+   */
+
+  { rule_id             : 'COLOR_1',
+    last_updated        : '2022-04-21',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.3',
+    wcag_related_ids    : ['1.4.1','1.4.6'],
+    target_resources    : ['text content'],
+    validate            : function (domCache, ruleResult) {
+
+      const MIN_CCR_NORMAL_FONT = 4.5;
+      const MIN_CCR_LARGE_FONT  = 3.1;
+
+      domCache.allDomTexts.forEach( domText => {
+        const de  = domText.parentDomElement;
+        const cc  = de.colorContrast;
+        const ccr = cc.colorContrastRatio;
+        const vis = de.visibility;
+
+        if (vis.isVisibleOnScreen) {
+          if (cs.isLargeFont) {
+            if (ccr >= MIN_CCR_LARGE_FONT) {
+              // Passes color contrast requirements
+              if (cc.hasBackgroundImage) {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
+              }
+              else {
+                rule_result.addResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+              }
+            }
+            else {
+              // Fails color contrast requirements
+              if (cc.hasBackgroundImage) {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
+              }
+              else {
+                rule_result.addResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+              }
+            }
+          }
+          else {
+            if (ccr >= MIN_CCR_NORMAL_FONT) {
+              // Passes color contrast requirements
+              if (cc.hasBackgroundImage) {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
+              }
+              else {
+                rule_result.addResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+              }
+            }
+            else {
+              // Fails color contrast requirements
+              if (cc.background_image === "none") {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
+              }
+              else {
+                rule_result.addResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+              }
+            }
+          }
+        } else {
+          rule_result.addResult(TEST_RESULT.HIDDEN, comText, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+    } // end validate function
+  },
+
+  /**
+   * @object COLOR_1
+   *
+   * @desc  Use of color
+   */
+
+  { rule_id             : 'COLOR_2',
+    last_updated        : '2022-04-21',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    wcag_primary_id     : '1.4.1',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate            : function (domCache, ruleResult) {
+
+      ruleResult.addPageResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+
+    } // end validate function
+  }
+
+];
+
+/* rules.js */
+
+/* Constants */
+new DebugLogging('Rules', false);
+
+let rules = [];
+
+rules = rules.concat(colorRules);
 
 /* evaluationResult.js */
 
@@ -9271,7 +9539,8 @@ class DOMCache {
 const debug$1 = new DebugLogging('EvaluationResult', false);
 
 class EvaluationResult {
-  constructor (domCache, title, url) {
+  constructor (rules, domCache, title, url) {
+    this.rules = rules;
     this.domCache = domCache;
     this.title = title;
     this.url = url;
@@ -9303,7 +9572,7 @@ class EvaluationLibrary {
 
   evaluate (startingDoc, title='', url='') {
     let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(domCache, title, url);
+    let evaluationResult = new EvaluationResult(rules, domCache, title, url);
     if (debug.flag) {
       debug.log('EvaluationResult');
     }

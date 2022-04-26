@@ -102,20 +102,15 @@ export default function getAriaInHTMLInfo (node) {
       break;
 
     case 'input':
-
       type = node.getAttribute('type');
-
       if (!type) {
         type = 'text';
       }
-
-      tagName += '[type=' + type + ']';
-
+      let selector = tagName + '[type=' + type + ']';
       if (node.hasAttribute('list')) {
-        tagName += '[list]';
+        selector += '[list]';
       }
-
-      elemInfo = elementInfo[tagName];
+      elemInfo = elementInfo[selector];
       break;
 
     case 'section':
@@ -163,7 +158,6 @@ export default function getAriaInHTMLInfo (node) {
   }
 
   if (!elemInfo) {
-
       elemInfo = {
       "tagName": node.tagName,
       "defaultRole": "generic",
@@ -171,7 +165,6 @@ export default function getAriaInHTMLInfo (node) {
       "anyRoleAllowed": true,
       "id": "custom"
     }
-
   }
 
   if (debug.flag) {

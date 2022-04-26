@@ -20,8 +20,8 @@ const debug = new DebugLogging('domText', false)
  */
 
 export default class DOMText {
-  constructor (parentInfo, textNode) {
-    this.parentInfo = parentInfo;
+  constructor (parentDomElement, textNode) {
+    this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
   }
 
