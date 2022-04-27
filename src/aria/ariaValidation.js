@@ -1,9 +1,10 @@
 /* ariaValidation.js */
 
 /* Imports */
-import DebugLogging      from '../debug.js';
-import {ariaInfo}        from '../aria/ariaInfo.js';
-import {hasCheckedState} from '../utils/utils.js'
+import DebugLogging        from '../debug.js';
+import {propertyDataTypes} from '../aria/propertyDataTypes.js';
+import {designPatterns}    from '../aria/designPatterns.js';
+import {hasCheckedState}   from '../utils.js'
 
 /* Debug help functions */
 
@@ -82,12 +83,12 @@ class RefInfo {
 
 export default class AriaValidation {
   constructor (doc, role, defaultRole, node) {
-    let designPattern = ariaInfo.designPatterns[role] || null;
+    let designPattern = designPatterns[role] || null;
     this.isValidRole  = designPattern !== null;
 
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
-      designPattern = ariaInfo.designPatterns[defaultRole];
+      designPattern = designPatterns[defaultRole];
     }
 
     this.isNameRequired     = designPattern.nameRequired;
@@ -100,7 +101,7 @@ export default class AriaValidation {
 
     attrs.forEach( attr =>  {
       if (attr.name.indexOf('aria') === 0) {
-        if (typeof ariaInfo.propertyDataTypes[attr.name] === 'object') {
+        if (typeof propertyDataTypes[attr.name] === 'object') {
           this.validAttrs.push(attr);
         } else {
           this.invalidAttrs.push(attr);
@@ -133,7 +134,7 @@ export default class AriaValidation {
     const attrsWithInvalidValues = [];
 
     attrs.forEach( attr => {
-      const attrInfo  = ariaInfo.propertyDataTypes[attr.name];
+      const attrInfo  = propertyDataTypes[attr.name];
       const value     = attr.value.toLowerCase();
       const values    = value.split(' ');
       const tokenInfo = new TokenInfo (attr.name, attr.value);
@@ -198,7 +199,7 @@ export default class AriaValidation {
     const invalidRefs = [];
 
     attrs.forEach( attr => {
-      const attrInfo = ariaInfo.propertyDataTypes[attr.name];
+      const attrInfo = propertyDataTypes[attr.name];
       const idRefs = attr.value.split(' ');
 
       if ((attrInfo.type === 'idref') ||
@@ -245,7 +246,7 @@ export default class AriaValidation {
 
     attrs.forEach( attr => {
       const name     = attr.name.toLowerCase();
-      const attrInfo = ariaInfo.propertyDataTypes[name];
+      const attrInfo = propertyDataTypes[name];
       if (designPattern.deprecatedProps.includes(name) ||
         attrInfo.deprecated) {
         deprecatedAttrs.push(attr);
@@ -262,7 +263,7 @@ export default class AriaValidation {
     const missingReqAttrNames = [];
     let count = 0;
     designPattern.requiredProps.forEach (reqAttr => {
-      const defaultValue = ariaInfo.propertyDataTypes[reqAttr].defaultValue;
+      const defaultValue = propertyDataTypes[reqAttr].defaultValue;
       let flag = (defaultValue !== '') && (defaultValue !== 'undefined');
       attrs.forEach( attr => {
         const name  = attr.name.toLowerCase();

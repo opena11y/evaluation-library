@@ -17,7 +17,7 @@ import {
 import {
   replaceAll,
   transformElementMarkup
-} from './utils/utils.js'
+} from './utils.js'
 
 const debug = new DebugLogging('ruleResult', false);
 

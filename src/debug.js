@@ -110,9 +110,9 @@ export default class DebugLogging {
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}), position: ${pos}`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}, position: ${pos})`);
       } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}), position: ${pos}`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}, position: ${pos})`);
       }
     }
   }

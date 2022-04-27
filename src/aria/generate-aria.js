@@ -8,14 +8,16 @@
 
 const fs    = require('fs');
 const os    = require('os');
+const path  = require('path');
 const util  = require('util');
 const url   = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
 
-const exportFilename = './src/aria/ariaInfo';
-const exportPrefix = '/* generated file, use npm run aria */\nexport const ariaInfo = '
-const exportSuffix = `;${os.EOL}`;
+const ariaInfoFilename          = path.join('src', 'aria', 'ariaInfo.js');
+const ariaInfoFilenameJSON      = path.join('src', 'aria', 'ariaInfo.json');
+const designPatternsFilename    = path.join('src', 'aria', 'designPatterns.js');
+const propertyDataTypesFilename = path.join('src', 'aria', 'propertyDataTypes.js');
 
 let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
 
@@ -427,9 +429,9 @@ function getAriaInformation(dom) {
   return ariaInfo
 }
 
-function outputAsJSON(ariaInfo) {
+function outputAsJSON(filename, info) {
 
-  fs.writeFile(exportFilename + '.json', JSON.stringify(ariaInfo, null, 4), err => {
+  fs.writeFile(filename, JSON.stringify(info, null, 4), err => {
     if (err) {
       console.error(err)
       return
@@ -440,9 +442,11 @@ function outputAsJSON(ariaInfo) {
   return ariaInfo;
 }
 
-function outputAsJSObject(ariaInfo) {
+function outputAsJSObject(filename, constName, info) {
+  const exportPrefix = `/* ${path.basename(filename)} is a generated file, use "npm run aria" */\nexport const ${constName} = `;
+  const exportSuffix = `;${os.EOL}`;
 
-  fs.writeFile(exportFilename + '.js', exportPrefix + util.inspect(ariaInfo, { compact: false, depth: null }) + exportSuffix, err => {
+  fs.writeFile(filename, exportPrefix + util.inspect(info, { compact: false, depth: null }) + exportSuffix, err => {
     if (err) {
       console.error(err)
       return
@@ -457,5 +461,7 @@ fetch(ariaURL)
   .then(data => data.text())
   .then(html => HTMLParser.parse(html))
   .then(dom => getAriaInformation(dom))
-  .then(ariaInfo => outputAsJSON(ariaInfo))
-  .then(ariaInfo => outputAsJSObject(ariaInfo));
+  .then(ariaInfo => outputAsJSON(ariaInfoFilenameJSON, ariaInfo))
+  .then(ariaInfo => outputAsJSObject(ariaInfoFilename,          'ariaInfo',          ariaInfo))
+  .then(ariaInfo => outputAsJSObject(propertyDataTypesFilename, 'propertyDataTypes', ariaInfo.propertyDataTypes))
+  .then(ariaInfo => outputAsJSObject(designPatternsFilename,    'designPatterns',    ariaInfo.designPatterns))

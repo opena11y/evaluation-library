@@ -8,7 +8,7 @@
 */
 
 import { isDescendantOf, hasParentWithName } from './dom';
-import { getAttributeValue, hasEmptyAltText } from './utils';
+import { getAttributeValue, hasEmptyAltText } from '../utils';
 export { getValidRole, getAriaRole, nameFromIncludesContents };
 
 /*

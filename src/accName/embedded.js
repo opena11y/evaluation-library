@@ -13,7 +13,7 @@
 */
 
 import { getAriaRole } from './roles';
-import { getAttributeValue, normalize } from './utils';
+import { getAttributeValue, normalize } from '../utils';
 export { isEmbeddedControl, getEmbeddedControlValue };
 
 /*

@@ -92,14 +92,14 @@ function hasCheckedState (node) {
  * @return  String
  */
 
-function transformElementMarkup (elemStr) {
+function transformElementMarkup (elemResultStr) {
   let newStr = "";
   let transform_flag = false;
 
-  if (typeof str === 'String') {
-    const len = str.length;
+  if (typeof elemResultStr === 'string') {
+    const len = elemResultStr.length;
     for (let i = 0; i < len; i++) {
-      let c = str[i];
+      let c = elemResultStr[i];
       if (c == '@') {
         transform_flag = !transform_flag;
         continue;
@@ -154,7 +154,7 @@ function filterTextContent  (s) {
 
   }
   return s1.trim();
-};
+}
 
 /**
  * @function replaceAll
@@ -169,7 +169,7 @@ function filterTextContent  (s) {
  */
 
 function replaceAll (s, str1, str2) {
-  const len = s.length;
+  let len = s.length;
   let pos = s.indexOf(str1);
   let s1  = "";
 

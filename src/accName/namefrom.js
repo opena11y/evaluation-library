@@ -6,7 +6,7 @@ import {
   normalize,
   getAttributeValue,
   hasEmptyAltText,
-} from './utils.js';
+} from '../utils.js';
 
 import {
   isEmbeddedControl,

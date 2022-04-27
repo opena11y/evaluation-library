@@ -5,7 +5,7 @@ import {ELEMENT_RESULT_VALUE} from './constants.js';
 import {
   filterTextContent,
   transformElementMarkup
-} from './utils/utils.js'
+} from './utils.js'
 import DebugLogging  from './debug.js';
 
 /* Constants */

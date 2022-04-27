@@ -8,7 +8,7 @@
 
 import {
   getAttributeValue
-} from './utils';
+} from '../utils';
 
 import {
   getElementContents,

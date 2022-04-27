@@ -1,4 +1,4 @@
-/* generated file, use npm run aria */
+/* ariaInfo.js is a generated file, use "npm run aria" */
 export const ariaInfo = {
   title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2',
   status: 'W3C Candidate Recommendation Draft 08 December 2021',

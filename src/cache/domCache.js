@@ -12,14 +12,16 @@ const debug = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
+  'content',
   'link',
+  'meta',
   'noscript',
   'object',
   'script',
   'style',
   'template',
-  'content',
-  'shadow'
+  'shadow',
+  'title'
 ]
 
 /**
@@ -66,18 +68,21 @@ export default class DOMCache {
       startingElement = startingDoc.body;
     }
 
+    this.ordinalPosition = 2;
+
     this.allDomElements = [];
     this.allDomTexts    = [];
+
 
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
-  	this.domCache = new DOMElement(parentInfo, startingElement);
+  	this.domCache = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.domCache;
     this.allDomElements.push(this.domCache);
 
-    this.transverseDOM(parentInfo, startingElement, 0);
+    this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
     if (debug.flag) {
@@ -96,9 +101,9 @@ export default class DOMCache {
     return tagName.indexOf('-') >= 0;
   }
 
-  // Tests if a tag name is an iframe or frame
-  isIFrameElement(tagName) {
-    return tagName === 'iframe' || tagName === 'frame';
+  // Tests if a node is a iframe element
+  isIFrameElement(node) {
+    return (node instanceof HTMLIFrameElement);
   }
 
   // Tests if a node is a slot element
@@ -118,11 +123,9 @@ export default class DOMCache {
    *                                    parent element node of the starting node
    * @param {Object}  startingNode    - The dom element to start transversing the
    *                                    dom
-   * @param {Number}  ordinalPosition - Ordinal position of the element on the web
-   *                                    page
    */
 
-  transverseDOM(parentInfo, startingNode, ordinalPosition) {
+  transverseDOM(parentInfo, startingNode) {
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
 
@@ -161,8 +164,8 @@ export default class DOMCache {
                 this.transverseDOM(parentInfo, assignedNode);
               });
             } else {
-              domItem = new DOMElement(parentInfo, node, (ordinalPosition + 1));
-              ordinalPosition += 1;
+              domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
+              this.ordinalPosition += 1;
               this.allDomElements.push(domItem);
 
               if (parentDomElement) {
@@ -178,7 +181,7 @@ export default class DOMCache {
                 }
               } else {
                 // Check for iframe or frame tag
-                if (this.isIFrameElement(tagName)) {
+                if (this.isIFrameElement(node)) {
                   if (node.contentWindow.document) {
                     newParentInfo.document = node.contentWindow.document;
                     this.transverseDOM(newParentInfo, node.contentWindow.document);

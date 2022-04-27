@@ -9,14 +9,14 @@ import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
   hasInvalidState,
   hasCheckedState
-} from '../utils/utils.js'
+} from '../utils.js'
 import {
   getAccessibleName,
   getAccessibleDesc,
   getErrMessage,
   getGroupingLabels,
   nameFromNativeSemantics
-} from '../utils/getaccname.js';
+} from '../accName/getaccname.js';
 
 /* Constants */
 const debug = new DebugLogging('DOMElement', true);
