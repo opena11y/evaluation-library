@@ -6,10 +6,17 @@ import {
 
 import {
   getCommonMessage,
-  getRuleCategoryInfo,
   getGuidelineInfo,
-  getScope,
-  getRuleId
+  getInformationLinks,
+  getManualChecks,
+  getPurposes,
+  getRuleCategoryInfo,
+  getRuleId,
+  getRuleDefinition,
+  getRuleSummary,
+  getTargetResourcesDesc,
+  getTechniques,
+  getScope
 } from '../_locale/locale.js';
 
 import {
@@ -50,14 +57,14 @@ export default class Rule {
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id) // String
 
-    this.rule_nls_id         = getRuleId(this.rule_id); // String
-//    this.summary             = getRuleSummary(this.rule_id); // String
-//    this.definition          = getRuleDefintion(this.rule_id); // String
-//    this.target_resources    = getRuleTargetResources(this.rule_id); // String
-//    this.purposes            = getPurposes(this.rule_id);  // Array of strings
-//    this.techniques          = getTechniques(this.rule_id);  // Array of strings
-//    this.manual_checks       = getManualChecks(this.rule_id);  // Array of strings
-//    this.informational_links = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
+    this.rule_nls_id           = getRuleId(this.rule_id); // String
+    this.summary               = getRuleSummary(this.rule_id); // String
+    this.definition            = getRuleDefinition(this.rule_id); // String
+    this.target_resources_desc = getTargetResourcesDesc(this.rule_id); // String
+    this.purposes              = getPurposes(this.rule_id);  // Array of strings
+    this.techniques            = getTechniques(this.rule_id);  // Array of strings
+    this.manual_checks         = getManualChecks(this.rule_id);  // Array of strings
+    this.informational_links   = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
 
     // Localized messsages for evaluation results
 //    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings

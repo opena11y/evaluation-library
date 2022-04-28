@@ -9,8 +9,8 @@ import {REFERENCES} from '../../constants.js';
 export const colorRules = {
   COLOR_1: {
       ID:                    'Color 1',
-      DEFINITION:            'Text content %s exceed Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
-      SUMMARY:               'Text %s exceed CCR threshold',
+      DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
+      SUMMARY:               'Text must exceed CCR threshold',
       TARGET_RESOURCES_DESC: 'All elements with text content',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
@@ -69,7 +69,7 @@ export const colorRules = {
   },
   COLOR_2: {
       ID:                    'Color 2',
-      DEFINITION:            'Color %s not be the only way to convey information on the page.',
+      DEFINITION:            'Color must not be the only way to convey information on the page.',
       SUMMARY:               'Use of color',
       TARGET_RESOURCES_DESC: 'Any content on the page that refers to or is a specific color',
       RULE_RESULT_MESSAGES: {

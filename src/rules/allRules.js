@@ -8,10 +8,14 @@ import DebugLogging  from '../debug.js';
 /* Constants */
 const debug = new DebugLogging('Rules', false)
 
-export let rules = [];
+export const allRules = [];
 
-colorRules.forEach( r => {
-  rules.push(new Rule(r));
-});
+function addToRuleArray (ruleArray) {
+  ruleArray.forEach( r => {
+    allRules.push(new Rule(r));
+  });
+}
+
+addToRuleArray(colorRules);
 
 

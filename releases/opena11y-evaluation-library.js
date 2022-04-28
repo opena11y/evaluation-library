@@ -110,9 +110,9 @@ class DebugLogging {
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}), position: ${pos}`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}, position: ${pos})`);
       } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}), position: ${pos}`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}, position: ${pos})`);
       }
     }
   }
@@ -136,7 +136,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$8 = new DebugLogging('colorContrast', false);
+const debug$a = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -156,9 +156,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$8.flag) {
-      debug$8.separator();
-      debug$8.tag(elementNode);
+    if (debug$a.flag) {
+      debug$a.separator();
+      debug$a.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -182,11 +182,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$8.flag) {
-      debug$8.log(`[                    opacity]: ${this.opacity}`);
-      debug$8.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
-      debug$8.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$8.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$a.flag) {
+      debug$a.log(`[                    opacity]: ${this.opacity}`);
+      debug$a.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug$a.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$a.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -508,7 +508,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$7 = new DebugLogging('visibility', false);
+const debug$9 = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -549,15 +549,15 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    if (debug$7.flag) {
-      debug$7.separator();
-      debug$7.tag(elementNode);
-      debug$7.log('[          isHidden]: ' + this.isHidden);
-      debug$7.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$7.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$7.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$7.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$7.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$9.flag) {
+      debug$9.separator();
+      debug$9.tag(elementNode);
+      debug$9.log('[          isHidden]: ' + this.isHidden);
+      debug$9.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$9.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$9.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$9.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$9.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -666,4879 +666,4737 @@ class Visibility {
 
 }
 
-/* generated file, use npm run aria */
-const ariaInfo = {
-  title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2',
-  status: 'W3C Candidate Recommendation Draft 08 December 2021',
-  reference: 'https://www.w3.org/TR/wai-aria-1.2/',
-  propertyDataTypes: {
-    'aria-activedescendant': {
-      propType: 'property',
-      type: 'idref',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-atomic': {
-      propType: 'property',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-autocomplete': {
-      propType: 'property',
-      type: 'nmtoken',
-      values: [
-        'inline',
-        'list',
-        'both',
-        'none'
-      ],
-      defaultValue: 'none',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-busy': {
-      propType: 'state',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-checked': {
-      propType: 'state',
-      type: 'tristate',
-      values: [
-        'false',
-        'mixed',
-        'true',
-        'undefined'
-      ],
-      defaultValue: 'undefined',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-colcount': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: true,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-colindex': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: false,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-colspan': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: false,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-controls': {
-      propType: 'property',
-      type: 'idrefs',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-current': {
-      propType: 'state',
-      type: 'nmtoken',
-      values: [
-        'page',
-        'step',
-        'location',
-        'date',
-        'time',
-        'true',
-        'false'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-describedby': {
-      propType: 'property',
-      type: 'idrefs',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-details': {
-      propType: 'property',
-      type: 'idref',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-disabled': {
-      propType: 'state',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-dropeffect': {
-      propType: 'property',
-      type: 'nmtokens',
-      values: [
-        'copy',
-        'execute',
-        'link',
-        'move',
-        'none',
-        'popup'
-      ],
-      defaultValue: 'none',
-      deprecated: true,
-      idlAttribute: ''
-    },
-    'aria-errormessage': {
-      propType: 'property',
-      type: 'idref',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-expanded': {
-      propType: 'state',
-      type: 'nmtoken',
-      values: [
-        'false',
-        'true',
-        'undefined'
-      ],
-      defaultValue: 'undefined',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-flowto': {
-      propType: 'property',
-      type: 'idrefs',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-grabbed': {
-      propType: 'state',
-      type: 'nmtoken',
-      values: [
-        'false',
-        'true',
-        'undefined'
-      ],
-      defaultValue: 'undefined',
-      deprecated: true,
-      idlAttribute: ''
-    },
-    'aria-haspopup': {
-      propType: 'property',
-      type: 'nmtoken',
-      values: [
-        'false',
-        'true',
-        'menu',
-        'listbox',
-        'tree',
-        'grid',
-        'dialog'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-hidden': {
-      propType: 'state',
-      type: 'nmtoken',
-      values: [
-        'false',
-        'true',
-        'undefined'
-      ],
-      defaultValue: 'undefined',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-invalid': {
-      propType: 'state',
-      type: 'nmtoken',
-      values: [
-        'grammar',
-        'false',
-        'spelling',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-keyshortcuts': {
-      propType: 'property',
-      type: 'string',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-label': {
-      propType: 'property',
-      type: 'string',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-labelledby': {
-      propType: 'property',
-      type: 'idrefs',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-level': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: false,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-live': {
-      propType: 'property',
-      type: 'nmtoken',
-      values: [
-        'assertive',
-        'off',
-        'polite'
-      ],
-      defaultValue: 'off',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-modal': {
-      propType: 'property',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-multiline': {
-      propType: 'property',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-multiselectable': {
-      propType: 'property',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-orientation': {
-      propType: 'property',
-      type: 'nmtoken',
-      values: [
-        'horizontal',
-        'undefined',
-        'vertical'
-      ],
-      defaultValue: 'undefined',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-owns': {
-      propType: 'property',
-      type: 'idrefs',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-placeholder': {
-      propType: 'property',
-      type: 'string',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-posinset': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: false,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-pressed': {
-      propType: 'state',
-      type: 'tristate',
-      values: [
-        'false',
-        'mixed',
-        'true',
-        'undefined'
-      ],
-      defaultValue: 'undefined',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-readonly': {
-      propType: 'property',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-relevant': {
-      propType: 'property',
-      type: 'nmtokens',
-      values: [
-        'additions',
-        'additions',
-        'all',
-        'removals',
-        'text'
-      ],
-      defaultValue: 'additions',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-required': {
-      propType: 'property',
-      type: 'boolean',
-      values: [
-        'false',
-        'true'
-      ],
-      defaultValue: 'false',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-roledescription': {
-      propType: 'property',
-      type: 'string',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-rowcount': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: true,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-rowindex': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: false,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-rowspan': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: false,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-selected': {
-      propType: 'state',
-      type: 'nmtoken',
-      values: [
-        'false',
-        'true',
-        'undefined'
-      ],
-      defaultValue: 'undefined',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-setsize': {
-      propType: 'property',
-      type: 'integer',
-      allowUndeterminedValue: true,
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-sort': {
-      propType: 'property',
-      type: 'nmtoken',
-      values: [
-        'ascending',
-        'descending',
-        'none',
-        'other'
-      ],
-      defaultValue: 'none',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-valuemax': {
-      propType: 'property',
-      type: 'number',
-      values: [],
-      defaultValue: '100',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-valuemin': {
-      propType: 'property',
-      type: 'number',
-      values: [],
-      defaultValue: '0',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-valuenow': {
-      propType: 'property',
-      type: 'number',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    },
-    'aria-valuetext': {
-      propType: 'property',
-      type: 'string',
-      values: [],
-      defaultValue: '',
-      deprecated: false,
-      idlAttribute: ''
-    }
+/* propertyDataTypes.js is a generated file, use "npm run aria" */
+const propertyDataTypes = {
+  'aria-activedescendant': {
+    propType: 'property',
+    type: 'idref',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
   },
-  designPatterns: {
-    alert: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure live',
-      isAbstract: false
-    },
-    alertdialog: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-modal',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure window',
-      isAbstract: false
-    },
-    application: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-activedescendant',
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      deprecatedProps: [],
-      supportedProps: [
-        'aria-activedescendant',
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    article: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure section',
-      isAbstract: false
-    },
-    banner: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    blockquote: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    button: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-disabled',
-        'aria-haspopup',
-        'aria-expanded',
-        'aria-pressed'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-disabled',
-        'aria-haspopup',
-        'aria-expanded',
-        'aria-pressed'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    caption: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [
-        'figure',
-        'grid',
-        'table',
-        'treegrid'
-      ],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    cell: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-colindex',
-        'aria-colspan',
-        'aria-rowindex',
-        'aria-rowspan'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-colindex',
-        'aria-colspan',
-        'aria-rowindex',
-        'aria-rowspan'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'row'
-      ],
-      requiredChildren: [],
-      roleType: 'structure section',
-      isAbstract: false
-    },
-    checkbox: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-checked',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required'
-      ],
-      hasRange: false,
-      requiredProps: [
-        'aria-checked'
-      ],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    code: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    columnheader: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-colindex',
-        'aria-colspan',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-readonly',
-        'aria-relevant',
-        'aria-required',
-        'aria-roledescription',
-        'aria-rowindex',
-        'aria-rowspan',
-        'aria-selected'
-      ],
-      deprecatedProps: [],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'row'
-      ],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    combobox: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-controls',
-        'aria-expanded',
-        'aria-activedescendant',
-        'aria-autocomplete',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required'
-      ],
-      deprecatedProps: [],
-      supportedProps: [
-        'aria-activedescendant',
-        'aria-autocomplete',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required'
-      ],
-      hasRange: false,
-      requiredProps: [
-        'aria-controls',
-        'aria-expanded'
-      ],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    command: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    complementary: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    composite: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-activedescendant',
-        'aria-disabled'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-activedescendant',
-        'aria-disabled'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    contentinfo: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    definition: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    deletion: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    dialog: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-modal',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'window',
-      isAbstract: false
-    },
-    directory: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    document: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    emphasis: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    feed: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'article'
-      ],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    figure: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    form: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    generic: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    grid: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-colcount',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-rowcount',
-        'aria-multiselectable',
-        'aria-readonly'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-multiselectable',
-        'aria-readonly'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'row',
-        'rowgroup'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    gridcell: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-colindex',
-        'aria-colspan',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-rowindex',
-        'aria-rowspan',
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required',
-        'aria-selected'
-      ],
-      deprecatedProps: [],
-      supportedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required',
-        'aria-selected'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'row'
-      ],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    group: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-activedescendant',
-        'aria-disabled'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-activedescendant',
-        'aria-disabled'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    heading: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    img: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    input: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    insertion: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    landmark: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    link: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-disabled',
-        'aria-expanded',
-        'aria-haspopup'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-disabled',
-        'aria-expanded',
-        'aria-haspopup'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    list: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'listitem'
-      ],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    listbox: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-orientation',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-invalid',
-        'aria-multiselectable',
-        'aria-readonly',
-        'aria-required'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-invalid',
-        'aria-multiselectable',
-        'aria-readonly',
-        'aria-required'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'group',
-        'option'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    listitem: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-level',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-level',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'directory',
-        'list'
-      ],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    log: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget live',
-      isAbstract: false
-    },
-    main: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    marquee: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget live',
-      isAbstract: false
-    },
-    math: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    meter: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuetext'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: true,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'range',
-      isAbstract: false
-    },
-    menu: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-orientation',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'group',
-        'menuitem',
-        'menuitemcheckbox',
-        'menuitemradio'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    menubar: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-orientation',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'group',
-        'menuitem',
-        'menuitemcheckbox',
-        'menuitemradio'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    menuitem: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-disabled',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-disabled',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'group',
-        'menu',
-        'menubar'
-      ],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    menuitemcheckbox: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-posinset',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-setsize',
-        'aria-checked'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [
-        'aria-checked'
-      ],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [
-        'group',
-        'menu',
-        'menubar'
-      ],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    menuitemradio: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-checked',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-posinset',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-checked',
-        'aria-errormessage',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [
-        'group',
-        'menu',
-        'menubar'
-      ],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    navigation: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    note: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    option: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-selected',
-        'aria-checked',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-checked',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      hasRange: false,
-      requiredProps: [
-        'aria-selected'
-      ],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [
-        'group',
-        'listbox'
-      ],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    paragraph: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    presentation: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    progressbar: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuenow',
-        'aria-valuetext'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: true,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'range widget',
-      isAbstract: false
-    },
-    radio: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-checked',
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-posinset',
-        'aria-setsize'
-      ],
-      hasRange: false,
-      requiredProps: [
-        'aria-checked'
-      ],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    radiogroup: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-orientation',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'radio'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    range: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuenow',
-        'aria-valuetext'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuenow',
-        'aria-valuetext'
-      ],
-      hasRange: true,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    region: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    row: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-colindex',
-        'aria-expanded',
-        'aria-level',
-        'aria-posinset',
-        'aria-rowindex',
-        'aria-setsize',
-        'aria-selected'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-colindex',
-        'aria-expanded',
-        'aria-level',
-        'aria-posinset',
-        'aria-rowindex',
-        'aria-setsize',
-        'aria-selected'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'grid',
-        'rowgroup',
-        'table',
-        'treegrid'
-      ],
-      requiredChildren: [
-        'cell',
-        'columnheader',
-        'gridcell',
-        'rowheader'
-      ],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    rowgroup: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'grid',
-        'table',
-        'treegrid'
-      ],
-      requiredChildren: [
-        'row'
-      ],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    rowheader: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-colindex',
-        'aria-colspan',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-readonly',
-        'aria-relevant',
-        'aria-required',
-        'aria-roledescription',
-        'aria-rowindex',
-        'aria-rowspan',
-        'aria-selected',
-        'aria-expanded',
-        'aria-sort'
-      ],
-      deprecatedProps: [],
-      supportedProps: [
-        'aria-expanded',
-        'aria-sort'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'row'
-      ],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    scrollbar: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-valuetext',
-        'aria-controls',
-        'aria-valuenow',
-        'aria-disabled',
-        'aria-orientation',
-        'aria-valuemax',
-        'aria-valuemin'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-disabled',
-        'aria-orientation',
-        'aria-valuemax',
-        'aria-valuemin'
-      ],
-      hasRange: true,
-      requiredProps: [
-        'aria-controls',
-        'aria-valuenow'
-      ],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'range widget',
-      isAbstract: false
-    },
-    search: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'landmark',
-      isAbstract: false
-    },
-    searchbox: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-autocomplete',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-multiline',
-        'aria-owns',
-        'aria-placeholder',
-        'aria-readonly',
-        'aria-relevant',
-        'aria-required',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    section: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    sectionhead: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    select: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    separator: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-disabled',
-        'aria-orientation',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuetext'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-disabled',
-        'aria-orientation',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuetext'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    slider: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-valuetext',
-        'aria-valuenow',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-orientation',
-        'aria-readonly',
-        'aria-valuemax',
-        'aria-valuemin'
-      ],
-      deprecatedProps: [],
-      supportedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-orientation',
-        'aria-readonly',
-        'aria-valuemax',
-        'aria-valuemin'
-      ],
-      hasRange: true,
-      requiredProps: [
-        'aria-valuenow'
-      ],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget range',
-      isAbstract: false
-    },
-    spinbutton: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuenow',
-        'aria-valuetext'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-readonly',
-        'aria-required',
-        'aria-valuemax',
-        'aria-valuemin',
-        'aria-valuenow',
-        'aria-valuetext'
-      ],
-      hasRange: true,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget range',
-      isAbstract: false
-    },
-    status: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure live',
-      isAbstract: false
-    },
-    strong: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    structure: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    subscript: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    superscript: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    switch: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-expanded',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-readonly',
-        'aria-relevant',
-        'aria-required',
-        'aria-roledescription',
-        'aria-checked'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [
-        'aria-checked'
-      ],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    tab: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-disabled',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-posinset',
-        'aria-selected',
-        'aria-setsize'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-disabled',
-        'aria-expanded',
-        'aria-haspopup',
-        'aria-posinset',
-        'aria-selected',
-        'aria-setsize'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: true,
-      requiredParents: [
-        'tablist'
-      ],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    table: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-colcount',
-        'aria-rowcount'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-colcount',
-        'aria-rowcount'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'row',
-        'rowgroup'
-      ],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    tablist: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-multiselectable',
-        'aria-orientation'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [
-        'aria-multiselectable',
-        'aria-orientation'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'tab'
-      ],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    tabpanel: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    term: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    textbox: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-activedescendant',
-        'aria-autocomplete',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-multiline',
-        'aria-placeholder',
-        'aria-readonly',
-        'aria-required'
-      ],
-      deprecatedProps: [],
-      supportedProps: [
-        'aria-activedescendant',
-        'aria-autocomplete',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid',
-        'aria-multiline',
-        'aria-placeholder',
-        'aria-readonly',
-        'aria-required'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'widget',
-      isAbstract: false
-    },
-    time: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget live',
-      isAbstract: false
-    },
-    timer: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget live',
-      isAbstract: false
-    },
-    toolbar: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    },
-    tooltip: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    tree: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-orientation',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-multiselectable',
-        'aria-required'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-multiselectable',
-        'aria-required'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'group',
-        'treeitem'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    treegrid: {
-      inheritedProps: [
-        'aria-activedescendant',
-        'aria-atomic',
-        'aria-busy',
-        'aria-colcount',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-multiselectable',
-        'aria-orientation',
-        'aria-owns',
-        'aria-readonly',
-        'aria-relevant',
-        'aria-required',
-        'aria-roledescription',
-        'aria-rowcount'
-      ],
-      deprecatedProps: [
-        'aria-haspopup'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [
-        'row',
-        'rowgroup'
-      ],
-      roleType: 'widget structure',
-      isAbstract: false
-    },
-    treeitem: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-checked',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-level',
-        'aria-live',
-        'aria-owns',
-        'aria-posinset',
-        'aria-relevant',
-        'aria-roledescription',
-        'aria-selected',
-        'aria-setsize',
-        'aria-expanded',
-        'aria-haspopup'
-      ],
-      deprecatedProps: [
-        'aria-errormessage',
-        'aria-invalid',
-        'aria-selected'
-      ],
-      supportedProps: [
-        'aria-expanded',
-        'aria-haspopup'
-      ],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: true,
-      nameFromContent: true,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [
-        'group',
-        'tree'
-      ],
-      requiredChildren: [],
-      roleType: 'structure widget',
-      isAbstract: false
-    },
-    widget: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    window: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-label',
-        'aria-labelledby',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: false,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'abstract',
-      isAbstract: true
-    },
-    none: {
-      inheritedProps: [
-        'aria-atomic',
-        'aria-busy',
-        'aria-controls',
-        'aria-current',
-        'aria-describedby',
-        'aria-details',
-        'aria-disabled',
-        'aria-dropeffect',
-        'aria-errormessage',
-        'aria-flowto',
-        'aria-grabbed',
-        'aria-haspopup',
-        'aria-hidden',
-        'aria-invalid',
-        'aria-keyshortcuts',
-        'aria-live',
-        'aria-owns',
-        'aria-relevant',
-        'aria-roledescription'
-      ],
-      deprecatedProps: [
-        'aria-disabled',
-        'aria-errormessage',
-        'aria-haspopup',
-        'aria-invalid'
-      ],
-      supportedProps: [],
-      hasRange: false,
-      requiredProps: [],
-      nameRequired: false,
-      nameFromContent: false,
-      nameProhibited: true,
-      childrenPresentational: false,
-      requiredParents: [],
-      requiredChildren: [],
-      roleType: 'structure',
-      isAbstract: false
-    }
+  'aria-atomic': {
+    propType: 'property',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
   },
-  rolesWithRequiredChildren: [
-    'feed',
-    'grid',
-    'list',
-    'listbox',
-    'menu',
-    'menubar',
-    'radiogroup',
-    'row',
-    'rowgroup',
-    'table',
-    'tablist',
-    'tree',
-    'treegrid'
-  ],
-  rolesWithRequiredParent: [
-    'caption',
-    'cell',
-    'columnheader',
-    'gridcell',
-    'listitem',
-    'menuitem',
-    'menuitemcheckbox',
-    'menuitemradio',
-    'option',
-    'row',
-    'rowgroup',
-    'rowheader',
-    'tab',
-    'treeitem'
-  ],
-  rolesWithNameProhibited: [
-    'caption',
-    'code',
-    'deletion',
-    'emphasis',
-    'generic',
-    'insertion',
-    'paragraph',
-    'presentation',
-    'strong',
-    'subscript',
-    'superscript',
-    'none'
-  ],
-  rolesWithDeprecatedAttributes: [
-    'alert',
-    'alertdialog',
-    'article',
-    'banner',
-    'blockquote',
-    'button',
-    'caption',
-    'cell',
-    'checkbox',
-    'code',
-    'command',
-    'complementary',
-    'composite',
-    'contentinfo',
-    'definition',
-    'deletion',
-    'dialog',
-    'directory',
-    'document',
-    'emphasis',
-    'feed',
-    'figure',
-    'form',
-    'generic',
-    'grid',
-    'group',
-    'heading',
-    'img',
-    'input',
-    'insertion',
-    'landmark',
-    'link',
-    'list',
-    'listbox',
-    'listitem',
-    'log',
-    'main',
-    'marquee',
-    'math',
-    'meter',
-    'menu',
-    'menubar',
-    'menuitem',
-    'menuitemcheckbox',
-    'menuitemradio',
-    'navigation',
-    'note',
-    'option',
-    'paragraph',
-    'presentation',
-    'progressbar',
-    'radio',
-    'radiogroup',
-    'range',
-    'region',
-    'row',
-    'rowgroup',
-    'scrollbar',
-    'search',
-    'section',
-    'sectionhead',
-    'select',
-    'separator',
-    'spinbutton',
-    'status',
-    'strong',
-    'structure',
-    'subscript',
-    'superscript',
-    'switch',
-    'tab',
-    'table',
-    'tablist',
-    'tabpanel',
-    'term',
-    'time',
-    'timer',
-    'toolbar',
-    'tooltip',
-    'tree',
-    'treegrid',
-    'treeitem',
-    'widget',
-    'window'
-  ],
-  attributesThatMaybeDeprecated: [
-    'aria-disabled',
-    'aria-errormessage',
-    'aria-haspopup',
-    'aria-invalid',
-    'aria-checked',
-    'aria-selected'
-  ]
+  'aria-autocomplete': {
+    propType: 'property',
+    type: 'nmtoken',
+    values: [
+      'inline',
+      'list',
+      'both',
+      'none'
+    ],
+    defaultValue: 'none',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-busy': {
+    propType: 'state',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-checked': {
+    propType: 'state',
+    type: 'tristate',
+    values: [
+      'false',
+      'mixed',
+      'true',
+      'undefined'
+    ],
+    defaultValue: 'undefined',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-colcount': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: true,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-colindex': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: false,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-colspan': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: false,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-controls': {
+    propType: 'property',
+    type: 'idrefs',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-current': {
+    propType: 'state',
+    type: 'nmtoken',
+    values: [
+      'page',
+      'step',
+      'location',
+      'date',
+      'time',
+      'true',
+      'false'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-describedby': {
+    propType: 'property',
+    type: 'idrefs',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-details': {
+    propType: 'property',
+    type: 'idref',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-disabled': {
+    propType: 'state',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-dropeffect': {
+    propType: 'property',
+    type: 'nmtokens',
+    values: [
+      'copy',
+      'execute',
+      'link',
+      'move',
+      'none',
+      'popup'
+    ],
+    defaultValue: 'none',
+    deprecated: true,
+    idlAttribute: ''
+  },
+  'aria-errormessage': {
+    propType: 'property',
+    type: 'idref',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-expanded': {
+    propType: 'state',
+    type: 'nmtoken',
+    values: [
+      'false',
+      'true',
+      'undefined'
+    ],
+    defaultValue: 'undefined',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-flowto': {
+    propType: 'property',
+    type: 'idrefs',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-grabbed': {
+    propType: 'state',
+    type: 'nmtoken',
+    values: [
+      'false',
+      'true',
+      'undefined'
+    ],
+    defaultValue: 'undefined',
+    deprecated: true,
+    idlAttribute: ''
+  },
+  'aria-haspopup': {
+    propType: 'property',
+    type: 'nmtoken',
+    values: [
+      'false',
+      'true',
+      'menu',
+      'listbox',
+      'tree',
+      'grid',
+      'dialog'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-hidden': {
+    propType: 'state',
+    type: 'nmtoken',
+    values: [
+      'false',
+      'true',
+      'undefined'
+    ],
+    defaultValue: 'undefined',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-invalid': {
+    propType: 'state',
+    type: 'nmtoken',
+    values: [
+      'grammar',
+      'false',
+      'spelling',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-keyshortcuts': {
+    propType: 'property',
+    type: 'string',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-label': {
+    propType: 'property',
+    type: 'string',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-labelledby': {
+    propType: 'property',
+    type: 'idrefs',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-level': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: false,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-live': {
+    propType: 'property',
+    type: 'nmtoken',
+    values: [
+      'assertive',
+      'off',
+      'polite'
+    ],
+    defaultValue: 'off',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-modal': {
+    propType: 'property',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-multiline': {
+    propType: 'property',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-multiselectable': {
+    propType: 'property',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-orientation': {
+    propType: 'property',
+    type: 'nmtoken',
+    values: [
+      'horizontal',
+      'undefined',
+      'vertical'
+    ],
+    defaultValue: 'undefined',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-owns': {
+    propType: 'property',
+    type: 'idrefs',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-placeholder': {
+    propType: 'property',
+    type: 'string',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-posinset': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: false,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-pressed': {
+    propType: 'state',
+    type: 'tristate',
+    values: [
+      'false',
+      'mixed',
+      'true',
+      'undefined'
+    ],
+    defaultValue: 'undefined',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-readonly': {
+    propType: 'property',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-relevant': {
+    propType: 'property',
+    type: 'nmtokens',
+    values: [
+      'additions',
+      'additions',
+      'all',
+      'removals',
+      'text'
+    ],
+    defaultValue: 'additions',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-required': {
+    propType: 'property',
+    type: 'boolean',
+    values: [
+      'false',
+      'true'
+    ],
+    defaultValue: 'false',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-roledescription': {
+    propType: 'property',
+    type: 'string',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-rowcount': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: true,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-rowindex': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: false,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-rowspan': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: false,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-selected': {
+    propType: 'state',
+    type: 'nmtoken',
+    values: [
+      'false',
+      'true',
+      'undefined'
+    ],
+    defaultValue: 'undefined',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-setsize': {
+    propType: 'property',
+    type: 'integer',
+    allowUndeterminedValue: true,
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-sort': {
+    propType: 'property',
+    type: 'nmtoken',
+    values: [
+      'ascending',
+      'descending',
+      'none',
+      'other'
+    ],
+    defaultValue: 'none',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-valuemax': {
+    propType: 'property',
+    type: 'number',
+    values: [],
+    defaultValue: '100',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-valuemin': {
+    propType: 'property',
+    type: 'number',
+    values: [],
+    defaultValue: '0',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-valuenow': {
+    propType: 'property',
+    type: 'number',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  },
+  'aria-valuetext': {
+    propType: 'property',
+    type: 'string',
+    values: [],
+    defaultValue: '',
+    deprecated: false,
+    idlAttribute: ''
+  }
+};
+
+/* designPatterns.js is a generated file, use "npm run aria" */
+const designPatterns = {
+  alert: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure live',
+    isAbstract: false
+  },
+  alertdialog: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-modal',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure window',
+    isAbstract: false
+  },
+  application: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-activedescendant',
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    deprecatedProps: [],
+    supportedProps: [
+      'aria-activedescendant',
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  article: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure section',
+    isAbstract: false
+  },
+  banner: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  blockquote: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  button: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-disabled',
+      'aria-haspopup',
+      'aria-expanded',
+      'aria-pressed'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-disabled',
+      'aria-haspopup',
+      'aria-expanded',
+      'aria-pressed'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  caption: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [
+      'figure',
+      'grid',
+      'table',
+      'treegrid'
+    ],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  cell: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-colindex',
+      'aria-colspan',
+      'aria-rowindex',
+      'aria-rowspan'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-colindex',
+      'aria-colspan',
+      'aria-rowindex',
+      'aria-rowspan'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'row'
+    ],
+    requiredChildren: [],
+    roleType: 'structure section',
+    isAbstract: false
+  },
+  checkbox: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-checked',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required'
+    ],
+    hasRange: false,
+    requiredProps: [
+      'aria-checked'
+    ],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  code: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  columnheader: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-colindex',
+      'aria-colspan',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-readonly',
+      'aria-relevant',
+      'aria-required',
+      'aria-roledescription',
+      'aria-rowindex',
+      'aria-rowspan',
+      'aria-selected'
+    ],
+    deprecatedProps: [],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'row'
+    ],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  combobox: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-controls',
+      'aria-expanded',
+      'aria-activedescendant',
+      'aria-autocomplete',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required'
+    ],
+    deprecatedProps: [],
+    supportedProps: [
+      'aria-activedescendant',
+      'aria-autocomplete',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required'
+    ],
+    hasRange: false,
+    requiredProps: [
+      'aria-controls',
+      'aria-expanded'
+    ],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  command: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  complementary: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  composite: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-activedescendant',
+      'aria-disabled'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-activedescendant',
+      'aria-disabled'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  contentinfo: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  definition: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  deletion: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  dialog: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-modal',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'window',
+    isAbstract: false
+  },
+  directory: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  document: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  emphasis: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  feed: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'article'
+    ],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  figure: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  form: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  generic: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  grid: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-colcount',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-rowcount',
+      'aria-multiselectable',
+      'aria-readonly'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-multiselectable',
+      'aria-readonly'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'row',
+      'rowgroup'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  gridcell: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-colindex',
+      'aria-colspan',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-rowindex',
+      'aria-rowspan',
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required',
+      'aria-selected'
+    ],
+    deprecatedProps: [],
+    supportedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required',
+      'aria-selected'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'row'
+    ],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  group: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-activedescendant',
+      'aria-disabled'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-activedescendant',
+      'aria-disabled'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  heading: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  img: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  input: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  insertion: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  landmark: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  link: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-disabled',
+      'aria-expanded',
+      'aria-haspopup'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-disabled',
+      'aria-expanded',
+      'aria-haspopup'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  list: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'listitem'
+    ],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  listbox: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-orientation',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-invalid',
+      'aria-multiselectable',
+      'aria-readonly',
+      'aria-required'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-invalid',
+      'aria-multiselectable',
+      'aria-readonly',
+      'aria-required'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'group',
+      'option'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  listitem: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-level',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-level',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'directory',
+      'list'
+    ],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  log: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget live',
+    isAbstract: false
+  },
+  main: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  marquee: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget live',
+    isAbstract: false
+  },
+  math: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  meter: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuetext'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: true,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'range',
+    isAbstract: false
+  },
+  menu: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-orientation',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'group',
+      'menuitem',
+      'menuitemcheckbox',
+      'menuitemradio'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  menubar: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-orientation',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'group',
+      'menuitem',
+      'menuitemcheckbox',
+      'menuitemradio'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  menuitem: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-disabled',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-disabled',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'group',
+      'menu',
+      'menubar'
+    ],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  menuitemcheckbox: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-posinset',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-setsize',
+      'aria-checked'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [
+      'aria-checked'
+    ],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [
+      'group',
+      'menu',
+      'menubar'
+    ],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  menuitemradio: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-checked',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-posinset',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-checked',
+      'aria-errormessage',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [
+      'group',
+      'menu',
+      'menubar'
+    ],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  navigation: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  note: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  option: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-selected',
+      'aria-checked',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-checked',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    hasRange: false,
+    requiredProps: [
+      'aria-selected'
+    ],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [
+      'group',
+      'listbox'
+    ],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  paragraph: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  presentation: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  progressbar: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuenow',
+      'aria-valuetext'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: true,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'range widget',
+    isAbstract: false
+  },
+  radio: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-checked',
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-posinset',
+      'aria-setsize'
+    ],
+    hasRange: false,
+    requiredProps: [
+      'aria-checked'
+    ],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  radiogroup: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-orientation',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'radio'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  range: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuenow',
+      'aria-valuetext'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuenow',
+      'aria-valuetext'
+    ],
+    hasRange: true,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  region: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  row: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-colindex',
+      'aria-expanded',
+      'aria-level',
+      'aria-posinset',
+      'aria-rowindex',
+      'aria-setsize',
+      'aria-selected'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-colindex',
+      'aria-expanded',
+      'aria-level',
+      'aria-posinset',
+      'aria-rowindex',
+      'aria-setsize',
+      'aria-selected'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'grid',
+      'rowgroup',
+      'table',
+      'treegrid'
+    ],
+    requiredChildren: [
+      'cell',
+      'columnheader',
+      'gridcell',
+      'rowheader'
+    ],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  rowgroup: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'grid',
+      'table',
+      'treegrid'
+    ],
+    requiredChildren: [
+      'row'
+    ],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  rowheader: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-colindex',
+      'aria-colspan',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-readonly',
+      'aria-relevant',
+      'aria-required',
+      'aria-roledescription',
+      'aria-rowindex',
+      'aria-rowspan',
+      'aria-selected',
+      'aria-expanded',
+      'aria-sort'
+    ],
+    deprecatedProps: [],
+    supportedProps: [
+      'aria-expanded',
+      'aria-sort'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'row'
+    ],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  scrollbar: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-valuetext',
+      'aria-controls',
+      'aria-valuenow',
+      'aria-disabled',
+      'aria-orientation',
+      'aria-valuemax',
+      'aria-valuemin'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-disabled',
+      'aria-orientation',
+      'aria-valuemax',
+      'aria-valuemin'
+    ],
+    hasRange: true,
+    requiredProps: [
+      'aria-controls',
+      'aria-valuenow'
+    ],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'range widget',
+    isAbstract: false
+  },
+  search: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'landmark',
+    isAbstract: false
+  },
+  searchbox: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-autocomplete',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-multiline',
+      'aria-owns',
+      'aria-placeholder',
+      'aria-readonly',
+      'aria-relevant',
+      'aria-required',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  section: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  sectionhead: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  select: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  separator: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-disabled',
+      'aria-orientation',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuetext'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-disabled',
+      'aria-orientation',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuetext'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  slider: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-valuetext',
+      'aria-valuenow',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-orientation',
+      'aria-readonly',
+      'aria-valuemax',
+      'aria-valuemin'
+    ],
+    deprecatedProps: [],
+    supportedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-orientation',
+      'aria-readonly',
+      'aria-valuemax',
+      'aria-valuemin'
+    ],
+    hasRange: true,
+    requiredProps: [
+      'aria-valuenow'
+    ],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget range',
+    isAbstract: false
+  },
+  spinbutton: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuenow',
+      'aria-valuetext'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-readonly',
+      'aria-required',
+      'aria-valuemax',
+      'aria-valuemin',
+      'aria-valuenow',
+      'aria-valuetext'
+    ],
+    hasRange: true,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget range',
+    isAbstract: false
+  },
+  status: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure live',
+    isAbstract: false
+  },
+  strong: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  structure: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  subscript: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  superscript: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  switch: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-expanded',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-readonly',
+      'aria-relevant',
+      'aria-required',
+      'aria-roledescription',
+      'aria-checked'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [
+      'aria-checked'
+    ],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  tab: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-disabled',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-posinset',
+      'aria-selected',
+      'aria-setsize'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-disabled',
+      'aria-expanded',
+      'aria-haspopup',
+      'aria-posinset',
+      'aria-selected',
+      'aria-setsize'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: true,
+    requiredParents: [
+      'tablist'
+    ],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  table: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-colcount',
+      'aria-rowcount'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-colcount',
+      'aria-rowcount'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'row',
+      'rowgroup'
+    ],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  tablist: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-multiselectable',
+      'aria-orientation'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [
+      'aria-multiselectable',
+      'aria-orientation'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'tab'
+    ],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  tabpanel: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  term: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  textbox: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-activedescendant',
+      'aria-autocomplete',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-multiline',
+      'aria-placeholder',
+      'aria-readonly',
+      'aria-required'
+    ],
+    deprecatedProps: [],
+    supportedProps: [
+      'aria-activedescendant',
+      'aria-autocomplete',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid',
+      'aria-multiline',
+      'aria-placeholder',
+      'aria-readonly',
+      'aria-required'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'widget',
+    isAbstract: false
+  },
+  time: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget live',
+    isAbstract: false
+  },
+  timer: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget live',
+    isAbstract: false
+  },
+  toolbar: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
+  tooltip: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  tree: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-orientation',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-multiselectable',
+      'aria-required'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-multiselectable',
+      'aria-required'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'group',
+      'treeitem'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  treegrid: {
+    inheritedProps: [
+      'aria-activedescendant',
+      'aria-atomic',
+      'aria-busy',
+      'aria-colcount',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-multiselectable',
+      'aria-orientation',
+      'aria-owns',
+      'aria-readonly',
+      'aria-relevant',
+      'aria-required',
+      'aria-roledescription',
+      'aria-rowcount'
+    ],
+    deprecatedProps: [
+      'aria-haspopup'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [
+      'row',
+      'rowgroup'
+    ],
+    roleType: 'widget structure',
+    isAbstract: false
+  },
+  treeitem: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-checked',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-level',
+      'aria-live',
+      'aria-owns',
+      'aria-posinset',
+      'aria-relevant',
+      'aria-roledescription',
+      'aria-selected',
+      'aria-setsize',
+      'aria-expanded',
+      'aria-haspopup'
+    ],
+    deprecatedProps: [
+      'aria-errormessage',
+      'aria-invalid',
+      'aria-selected'
+    ],
+    supportedProps: [
+      'aria-expanded',
+      'aria-haspopup'
+    ],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: true,
+    nameFromContent: true,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [
+      'group',
+      'tree'
+    ],
+    requiredChildren: [],
+    roleType: 'structure widget',
+    isAbstract: false
+  },
+  widget: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  window: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'abstract',
+    isAbstract: true
+  },
+  none: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: true,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  }
 };
 
 // LOW-LEVEL FUNCTIONS
@@ -5614,6 +5472,37 @@ function hasCheckedState (node) {
   return flag;
 }
 
+/**
+ * @function transformElementMarkup
+ *
+ * @desc Converts element markup in strings to capitalized text
+ *
+ * @param {String}  elemStr - Element result message to convert content inside '@' to caps
+ *
+ * @return  String
+ */
+
+function transformElementMarkup (elemResultStr) {
+  let newStr = "";
+  let transform_flag = false;
+
+  if (typeof elemResultStr === 'string') {
+    const len = elemResultStr.length;
+    for (let i = 0; i < len; i++) {
+      let c = elemResultStr[i];
+      if (c == '@') {
+        transform_flag = !transform_flag;
+        continue;
+      }
+      if (transform_flag)
+        newStr += c.toUpperCase();
+      else
+        newStr += c;
+    }
+  }
+  return newStr;
+}
+
 /* ariaValidation.js */
 
 /* Debug help functions */
@@ -5643,7 +5532,7 @@ function debugAttrs (attrs) {
 }
 
 /* Constants */
-const debug$6 = new DebugLogging('AriaValidation', false);
+const debug$8 = new DebugLogging('AriaValidation', false);
 
 /**
  * @class TokenInfo
@@ -5693,12 +5582,12 @@ class RefInfo {
 
 class AriaValidation {
   constructor (doc, role, defaultRole, node) {
-    let designPattern = ariaInfo.designPatterns[role] || null;
+    let designPattern = designPatterns[role] || null;
     this.isValidRole  = designPattern !== null;
 
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
-      designPattern = ariaInfo.designPatterns[defaultRole];
+      designPattern = designPatterns[defaultRole];
     }
 
     this.isNameRequired     = designPattern.nameRequired;
@@ -5711,7 +5600,7 @@ class AriaValidation {
 
     attrs.forEach( attr =>  {
       if (attr.name.indexOf('aria') === 0) {
-        if (typeof ariaInfo.propertyDataTypes[attr.name] === 'object') {
+        if (typeof propertyDataTypes[attr.name] === 'object') {
           this.validAttrs.push(attr);
         } else {
           this.invalidAttrs.push(attr);
@@ -5725,14 +5614,14 @@ class AriaValidation {
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
     this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
 
-    if (debug$6.flag) {
-      node.attributes.length && debug$6.log(`${node.outerHTML}`, 1);
-      debug$6.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$6.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$6.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$6.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$6.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$6.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$8.flag) {
+      node.attributes.length && debug$8.log(`${node.outerHTML}`, 1);
+      debug$8.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$8.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$8.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$8.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$8.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$8.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -5744,7 +5633,7 @@ class AriaValidation {
     const attrsWithInvalidValues = [];
 
     attrs.forEach( attr => {
-      const attrInfo  = ariaInfo.propertyDataTypes[attr.name];
+      const attrInfo  = propertyDataTypes[attr.name];
       const value     = attr.value.toLowerCase();
       const values    = value.split(' ');
       const tokenInfo = new TokenInfo (attr.name, attr.value);
@@ -5806,7 +5695,7 @@ class AriaValidation {
     const invalidRefs = [];
 
     attrs.forEach( attr => {
-      const attrInfo = ariaInfo.propertyDataTypes[attr.name];
+      const attrInfo = propertyDataTypes[attr.name];
       const idRefs = attr.value.split(' ');
 
       if ((attrInfo.type === 'idref') ||
@@ -5853,7 +5742,7 @@ class AriaValidation {
 
     attrs.forEach( attr => {
       const name     = attr.name.toLowerCase();
-      const attrInfo = ariaInfo.propertyDataTypes[name];
+      const attrInfo = propertyDataTypes[name];
       if (designPattern.deprecatedProps.includes(name) ||
         attrInfo.deprecated) {
         deprecatedAttrs.push(attr);
@@ -5869,7 +5758,7 @@ class AriaValidation {
   checkForMissingRequiredAttributes(attrs, designPattern, node) {
     const missingReqAttrNames = [];
     designPattern.requiredProps.forEach (reqAttr => {
-      const defaultValue = ariaInfo.propertyDataTypes[reqAttr].defaultValue;
+      const defaultValue = propertyDataTypes[reqAttr].defaultValue;
       let flag = (defaultValue !== '') && (defaultValue !== 'undefined');
       attrs.forEach( attr => {
         attr.name.toLowerCase();
@@ -7378,7 +7267,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$5 = new DebugLogging('ariaInHtml', false);
+const debug$7 = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7540,11 +7429,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$5.flag) {
+  if (debug$7.flag) {
     if (tagName === 'h2') {
-      debug$5.tag(node);
+      debug$7.tag(node);
     }
-    debug$5.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$7.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8633,7 +8522,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$4 = new DebugLogging('DOMElement', true);
+const debug$6 = new DebugLogging('DOMElement', true);
 
 /**
  * @class DOMElement
@@ -8821,12 +8710,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$4.flag) {
+    if (debug$6.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$4.domText(domItem, prefix);
+          debug$6.domText(domItem, prefix);
         } else {
-          debug$4.domElement(domItem, prefix);
+          debug$6.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -8905,7 +8794,7 @@ class DOMText {
 /* structureInfo.js */
 
 /* Constants */
-const debug$3 = new DebugLogging('structureInfo', false);
+const debug$5 = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -8927,8 +8816,8 @@ class LandmarkElement {
     this.childLandmarkElements = [];
     this.childHeadingDomElements = [];
 
-    if (debug$3.flag) {
-      debug$3.log('');
+    if (debug$5.flag) {
+      debug$5.log('');
     }
   }
 
@@ -8944,14 +8833,14 @@ class LandmarkElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$3.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
+    debug$5.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
     this.childLandmarkElements.forEach( le => {
-      debug$3.domElement(le.domElement, prefix);
+      debug$5.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
-    debug$3.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
+    debug$5.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
     this.childHeadingDomElements.forEach( h => {
-      debug$3.domElement(h, prefix);
+      debug$5.domElement(h, prefix);
     });
   }
 }
@@ -8971,7 +8860,7 @@ class StructureInfo {
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
 
-    if (debug$3.flag) ;
+    if (debug$5.flag) ;
   }
 
   /**
@@ -9083,18 +8972,18 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$3.flag) {
-      debug$3.log('== All Headings ==', 1);
+    if (debug$5.flag) {
+      debug$5.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$3.domElement(h);
+        debug$5.domElement(h);
       });
-      debug$3.log('== All Landmarks ==', 1);
+      debug$5.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$3.domElement(le.domElement);
+        debug$5.domElement(le.domElement);
       });
-      debug$3.log('== Structure Tree ==', 1);
+      debug$5.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$3.domElement(le.domElement);
+        debug$5.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9104,19 +8993,21 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$2 = new DebugLogging('domCache', true);
+const debug$4 = new DebugLogging('domCache', true);
 
 
 const skipableElements = [
   'base',
+  'content',
   'link',
+  'meta',
   'noscript',
   'object',
   'script',
   'style',
   'template',
-  'content',
-  'shadow'
+  'shadow',
+  'title'
 ];
 
 /**
@@ -9163,21 +9054,24 @@ class DOMCache {
       startingElement = startingDoc.body;
     }
 
+    this.ordinalPosition = 2;
+
     this.allDomElements = [];
     this.allDomTexts    = [];
+
 
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
-  	this.domCache = new DOMElement(parentInfo, startingElement);
+  	this.domCache = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.domCache;
     this.allDomElements.push(this.domCache);
 
-    this.transverseDOM(parentInfo, startingElement, 0);
+    this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$2.flag) {
+    if (debug$4.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
     }
@@ -9193,9 +9087,9 @@ class DOMCache {
     return tagName.indexOf('-') >= 0;
   }
 
-  // Tests if a tag name is an iframe or frame
-  isIFrameElement(tagName) {
-    return tagName === 'iframe' || tagName === 'frame';
+  // Tests if a node is a iframe element
+  isIFrameElement(node) {
+    return (node instanceof HTMLIFrameElement);
   }
 
   // Tests if a node is a slot element
@@ -9215,11 +9109,9 @@ class DOMCache {
    *                                    parent element node of the starting node
    * @param {Object}  startingNode    - The dom element to start transversing the
    *                                    dom
-   * @param {Number}  ordinalPosition - Ordinal position of the element on the web
-   *                                    page
    */
 
-  transverseDOM(parentInfo, startingNode, ordinalPosition) {
+  transverseDOM(parentInfo, startingNode) {
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
 
@@ -9258,8 +9150,8 @@ class DOMCache {
                 this.transverseDOM(parentInfo, assignedNode);
               });
             } else {
-              domItem = new DOMElement(parentInfo, node, (ordinalPosition + 1));
-              ordinalPosition += 1;
+              domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
+              this.ordinalPosition += 1;
               this.allDomElements.push(domItem);
 
               if (parentDomElement) {
@@ -9275,7 +9167,7 @@ class DOMCache {
                 }
               } else {
                 // Check for iframe or frame tag
-                if (this.isIFrameElement(tagName)) {
+                if (this.isIFrameElement(node)) {
                   if (node.contentWindow.document) {
                     newParentInfo.document = node.contentWindow.document;
                     this.transverseDOM(newParentInfo, node.contentWindow.document);
@@ -9321,18 +9213,18 @@ class DOMCache {
    * @desc  Used for debugging the DOMElement tree
    */
   showDomElementTree () {
-    debug$2.log(' === AllDomElements ===', true);
+    debug$4.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$2.domElement(de);
+      debug$4.domElement(de);
     });
 
-    debug$2.log(' === AllDomTexts ===', true);
+    debug$4.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$2.domText(dt);
+      debug$4.domText(dt);
     });
 
-    debug$2.log(' === DOMCache Tree ===', true);
-    debug$2.domElement(this.domCache);
+    debug$4.log(' === DOMCache Tree ===', true);
+    debug$4.domElement(this.domCache);
     this.domCache.showDomElementTree(' ');
   }
 
@@ -9340,9 +9232,11 @@ class DOMCache {
 
 /* constants.js */
 
+/* Constants */
+const debug$3 = new DebugLogging('constants', false);
+
 /**
- * @constant RULE_CATEGORIES
- * @type Number
+ * @constant RULE_CATEGORIES * @type Number
  * @desc Numercial constant representing a rule category and is bit maskable
  *
  * @example
@@ -9379,9 +9273,8 @@ const RULE_CATEGORIES = {
   ALL                    : 0x0FFF
 };
 
-/**
- * @constant RULE_SCOPE
- * @type Number
+  /**
+ * @constant RULE_SCOPE * @type Number
  * @desc Defines scope of a rule
  *
  * @example
@@ -9398,9 +9291,8 @@ const RULE_SCOPE =  {
   WEBSITE : 3
 };
 
-/**
- * @constant TEST_RESULT
- * @type Number
+  /**
+ * @constant TEST_RESULT * @type Number
  * @desc Types of rule results, used in validation functions
  *
  * @example
@@ -9419,6 +9311,229 @@ const TEST_RESULT = {
   NONE         : 5
 };
 
+  /**
+ * @constant WCAG_PRINCIPLE
+ * @type Number
+ * @desc Numercial constant representing a WCAG 2.0 Principles
+ *
+ * @example
+ * WCAG_PRINCIPLE.P_1
+ * WCAG_PRINCIPLE.P_2
+ * WCAG_PRINCIPLE.P_3
+ * WCAG_PRINCIPLE.P_4
+ */
+const WCAG_PRINCIPLE = {
+  P_1          : 0x000001,
+  P_2          : 0x000002,
+  P_3          : 0x000004,
+  P_4          : 0x000008,
+  ALL          : 0x00000F
+};
+
+  /**
+ * @constant WCAG_GUIDELINE
+ * @type Number
+ * @desc Numercial constant representing a WCAG 2.0 Guidelines
+ *
+ * @example
+ * WCAG_GUIDELINE.G_1_1
+ * WCAG_GUIDELINE.G_1_2
+ * WCAG_GUIDELINE.G_1_3
+ * WCAG_GUIDELINE.G_1_4
+ * WCAG_GUIDELINE.G_2_1
+ * WCAG_GUIDELINE.G_2_2
+ * WCAG_GUIDELINE.G_2_3
+ * WCAG_GUIDELINE.G_2_4
+ * WCAG_GUIDELINE.G_3_1
+ * WCAG_GUIDELINE.G_3_2
+ * WCAG_GUIDELINE.G_3_3
+ * WCAG_GUIDELINE.G_4_1
+ */
+
+const WCAG_GUIDELINE = {
+  G_1_1          : 0x000010,
+  G_1_2          : 0x000020,
+  G_1_3          : 0x000040,
+  G_1_4          : 0x000080,
+  G_2_1          : 0x000100,
+  G_2_2          : 0x000200,
+  G_2_3          : 0x000400,
+  G_2_4          : 0x000800,
+  G_2_5          : 0x001000,
+  G_3_1          : 0x002000,
+  G_3_2          : 0x004000,
+  G_3_3          : 0x008000,
+  G_4_1          : 0x010000,
+  ALL            : 0x01FFF0
+};
+
+/**
+ * @constant WCAG_SUCCESS_CRITERION * @type Number
+ * @desc Numercial constant representing a WCAG 2.x Success Criteria
+ *
+ * @example
+ * WCAG_SUCCESS_CRITERION.SC_1_1_1
+ * ....
+ * WCAG_SUCCESS_CRITERION.SC_4_1_2
+ */
+
+const WCAG_SUCCESS_CRITERION = {
+  SC_1_1_1          : 0x1101,
+  SC_1_2_1          : 0x1201,
+  SC_1_2_2          : 0x1202,
+  SC_1_2_3          : 0x1203,
+  SC_1_2_4          : 0x1204,
+  SC_1_2_5          : 0x1205,
+  SC_1_2_6          : 0x1206,
+  SC_1_2_7          : 0x1207,
+  SC_1_2_8          : 0x1208,
+  SC_1_2_9          : 0x1209,
+  SC_1_3_1          : 0x1301,
+  SC_1_3_2          : 0x1302,
+  SC_1_3_3          : 0x1303,
+  SC_1_3_4          : 0x1304,
+  SC_1_3_5          : 0x1305,
+  SC_1_3_6          : 0x1306,
+  SC_1_4_1          : 0x1401,
+  SC_1_4_2          : 0x1402,
+  SC_1_4_3          : 0x1403,
+  SC_1_4_4          : 0x1404,
+  SC_1_4_5          : 0x1405,
+  SC_1_4_6          : 0x1406,
+  SC_1_4_7          : 0x1407,
+  SC_1_4_8          : 0x1408,
+  SC_1_4_9          : 0x1409,
+  SC_1_4_10         : 0x1410,
+  SC_1_4_11         : 0x1411,
+  SC_1_4_12         : 0x1412,
+  SC_1_4_13         : 0x1413,
+  SC_2_1_1          : 0x2101,
+  SC_2_1_2          : 0x2102,
+  SC_2_1_3          : 0x2103,
+  SC_2_1_4          : 0x2104,
+  SC_2_2_1          : 0x2201,
+  SC_2_2_2          : 0x2202,
+  SC_2_2_3          : 0x2203,
+  SC_2_2_4          : 0x2204,
+  SC_2_2_5          : 0x2205,
+  SC_2_2_6          : 0x2206,
+  SC_2_3_1          : 0x2301,
+  SC_2_3_2          : 0x2302,
+  SC_2_3_3          : 0x2303,
+  SC_2_4_1          : 0x2401,
+  SC_2_4_2          : 0x2402,
+  SC_2_4_3          : 0x2403,
+  SC_2_4_4          : 0x2404,
+  SC_2_4_5          : 0x2405,
+  SC_2_4_6          : 0x2406,
+  SC_2_4_7          : 0x2407,
+  SC_2_4_8          : 0x2408,
+  SC_2_4_9          : 0x2409,
+  SC_2_4_10         : 0x2410,
+  SC_2_5_1          : 0x2501,
+  SC_2_5_2          : 0x2502,
+  SC_2_5_3          : 0x2503,
+  SC_2_5_4          : 0x2504,
+  SC_2_5_5          : 0x2505,
+  SC_2_5_6          : 0x2506,
+  SC_3_1_1          : 0x3101,
+  SC_3_1_2          : 0x3102,
+  SC_3_1_3          : 0x3103,
+  SC_3_1_4          : 0x3104,
+  SC_3_1_5          : 0x3105,
+  SC_3_1_6          : 0x3106,
+  SC_3_2_1          : 0x3201,
+  SC_3_2_2          : 0x3202,
+  SC_3_2_3          : 0x3203,
+  SC_3_2_4          : 0x3204,
+  SC_3_2_5          : 0x3205,
+  SC_3_3_1          : 0x3301,
+  SC_3_3_2          : 0x3302,
+  SC_3_3_3          : 0x3303,
+  SC_3_3_4          : 0x3304,
+  SC_3_3_5          : 0x3305,
+  SC_3_3_6          : 0x3306,
+  SC_4_1_1          : 0x4101,
+  SC_4_1_2          : 0x4102,
+  SC_4_1_3          : 0x4103
+};
+
+/**
+ * @constant REFERENCES
+ * @type Number
+ * @desc Types of reference for supplemential materials to help people understand an accessibility requirement and
+ *       how to improve the accessibility
+ *
+ * @example
+ * REFERENCES.UNKNOWN
+ * REFERENCES.SPECIFICATION
+ * REFERENCES.WCAG_TECHNIQUE
+ * REFERENCES.TECHNIQUE
+ * REFERENCES.EXAMPLE
+ * REFERENCES.MANUAL_CHECK
+ * REFERENCES.AUTHORING_TOOL
+ * REFERENCES.OTHER
+ */
+
+const REFERENCES = {
+  UNKNOWN         : 0,
+  AUTHORING_TOOL  : 1,
+  EXAMPLE         : 2,
+  LIBRARY_PRODUCT : 3,
+  MANUAL_CHECK    : 4,
+  OTHER           : 5,
+  PURPOSE         : 6,
+  RULE_CATEGORY   : 7,
+  REFERENCE       : 8,
+  SPECIFICATION   : 9,
+  TECHNIQUE       : 10,
+  WCAG_TECHNIQUE  : 11
+};
+
+/* Helper functions */
+
+/**
+ * @constant WCAG_LEVEL
+ * @type Number
+ * @desc Constants related to the level of importance of a success criteria
+ *
+ * @example
+ * WCAG_LEVEL.A
+ * WCAG_LEVEL.AA
+ * WCAG_LEVEL.AAA
+ */
+
+const WCAG_LEVEL =  {
+  A       : 4,
+  AA      : 2,
+  AAA     : 1,
+  UNKNOWN : 0
+};
+
+/*  Constant helper functions */
+
+
+/**
+ * @function getGuidelineId
+ *
+ * @desc Returns constant identifying the WCAG Guideline
+ *
+ * @param {String} sc - String representing a success criteria (e.g. '2.4.1')
+ *
+ * @return {Integer}
+ */
+
+function getGuidelineId(sc) {
+  debug$3.flag && debug$3.log(`[getGuidelineId][sc]: ${sc}`);
+  const parts = sc.split('.');
+  const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
+  if (!gl) {
+    return 0;
+  }
+  debug$3.flag && debug$3.log(`[getGuidelineId][gl]: ${gl}`);
+  return WCAG_GUIDELINE[gl];
+}
+
 /* colorRules.js */
 
 /* Constants */
@@ -9428,7 +9543,7 @@ new DebugLogging('colorRules', false);
 // OpenAjax Alliance Rules
 // Rule group: Styling Rules
 //
-const colorRules = [
+const colorRules$1 = [
   /**
    * @object COLOR_1
    *
@@ -9524,14 +9639,2069 @@ const colorRules = [
 
 ];
 
+/* common.js */
+
+const common = {
+  yes: 'Yes',
+  no: 'No',
+  elementResult: ['Undefined','P','H','MC','W','V'],
+  ruleScopes: ['undefined', 'element', 'page', 'website']
+};
+
+/* ruleCategories.js */
+
+const ruleCategories = [
+  {
+    id           : RULE_CATEGORIES.LANDMARKS,
+    title        : 'Landmarks',
+    url          : '',
+    description  : 'Use ARIA landmark roles to structure the content of each page and identify major sections of content, thus making them more findable and navigable. The use of landmarks will, in many cases, reflect the visual styling and page layouts that web designers utilize to set apart various sections of content.'
+  },
+  {
+    id           : RULE_CATEGORIES.HEADINGS,
+    title        : 'Headings',
+    url          : '',
+    description  : 'Use heading elements (H1-H6) to provide appropriate labels for landmarks, and to identify subsections of content within landmarks.'
+  },
+  {
+    id           : RULE_CATEGORIES.STYLES_READABILITY,
+    title        : 'Styles/Content',
+    url          : '',
+    description  : 'Use proper HTML markup to identify the semantics and language of text content. Ensure that text is readable by adhering to color contrast guidelines, and that information is not conveyed solely by the use of color, shape, location or sound.'
+  },
+  {
+    id           : RULE_CATEGORIES.IMAGES,
+    title        : 'Images',
+    url          : '',
+    description  : 'Provide appropriate text alternatives for static images and graphics.'
+  },
+  {
+    id           : RULE_CATEGORIES.LINKS,
+    title        : 'Links',
+    url          : '',
+    description  : 'Use link text that properly describes the target of each link. Ensure consistency and uniqueness for links that are usable, predictable and understandable.'
+  },
+  {
+    id           : RULE_CATEGORIES.TABLES,
+    title        : 'Tables',
+    url          : '',
+    description  : 'Provide table captions or other meta-information as needed. Provide row and column header references for data cells of data tables. Ensure that tables used for layout properly linearize text content.'
+  },
+  {
+    id           : RULE_CATEGORIES.FORMS,
+    title        : 'Forms',
+    url          : '',
+    description  : 'Provide meaningful labels for form elements and usable and understandable error feedback as needed.'
+  },
+  {
+    id           : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+    title        : 'Widgets/Scripts',
+    url          : '',
+    description  : 'Use appropriate event handlers on elements to support native interactivity using JavaScript. Ensure that custom widgets created using JavaScript support keyboard interaction and include ARIA markup to describe their roles, properties and states.'
+  },
+  {
+    id           : RULE_CATEGORIES.AUDIO_VIDEO,
+    title        : 'Audio/Video',
+    url          : '',
+    description  : 'Provide appropriate text transcripts, captions or audio descriptions for elements used in rendering audio and video content.'
+  },
+  {
+    id           : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    title        : 'Keyboard Support',
+    url          : '',
+    description  : 'Provide logical and sequential keyboard navigation among interactive elements such as links and form controls. Use standard models of keyboard interaction for custom widgets.'
+  },
+  {
+    id           : RULE_CATEGORIES.TIMING,
+    title        : 'Timing',
+    url          : '',
+    description  : 'Eliminate accessibility problems caused by time limits on input and by content that moves, scrolls, flashes or auto-updates.'
+  },
+  {
+    id           : RULE_CATEGORIES.SITE_NAVIGATION,
+    title        : 'Site Navigation',
+    url          : '',
+    description  : 'Ensure the consistent labeling and ordering of recurrent page sections across all pages within a website. Provide a meaningful title for each page within a website.'
+  },
+  // Composite rule categories
+  {
+    id           : RULE_CATEGORIES.ALL,
+    title        : 'All Rules',
+    url          : '',
+    description  : 'Includes all rules in the ruleset and provides a way to sort and compare the results of all the rules.'
+  }
+];
+
+/* ruleCategories.js */
+
+const wcag = {
+  abbreviation: 'WCAG 2.1',
+  title: 'Web Content Accessibility Guidelines (WCAG) 2.1',
+  url: 'https://www.w3.org/TR/WCAG21/',
+  status: 'W3C Recommendation 05 June 2018',
+  level: 'Level ',
+  levels: ['Undefined',  'AAA',  'AA',  '',  'A'  ],
+  all_guidelines: {
+    title: 'All Rules',
+    description: 'All the rules related to WCAG 2.1.',
+    url_spec: 'https://www.w3.org/TR/WCAG21/'
+  },
+  principles: {
+    '1': {
+      id: WCAG_PRINCIPLE.P_1,
+      title: '1. Perceivable',
+      description: 'Information and user interface components must be presentable to users in ways they can perceive.',
+      url_spec: 'https://www.w3.org/TR/WCAG21/#perceivable',
+      guidelines: {
+        '1.1': {
+          id: WCAG_GUIDELINE.G_1_1,
+          title: 'Guideline 1.1 Text Alternatives',
+          description: 'Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#text-alternatives',
+          success_criteria: {
+            '1.1.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_1_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.1.1 Non-text Content',
+              description: 'All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for the situations listed below.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#non-text-content',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#non-text-content',
+              references: {
+              }
+            }
+          }
+        },
+        '1.2': {
+          id: WCAG_GUIDELINE.G_1_2,
+          title: 'Guideline 1.2 Time-based Media',
+          description: 'Provide alternatives for time-based media.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#time-based-media',
+          success_criteria: {
+            '1.2.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)',
+              description: 'For prerecorded audio-only and prerecorded video-only media, the following are true, except when the audio or video is a media alternative for text and is clearly labeled as such:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#audio-only-and-video-only-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/audio-only-and-video-only-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#audio-only-and-video-only-prerecorded',
+              references: {
+              }
+            },
+            '1.2.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.2.2 Captions (Prerecorded)',
+              description: 'Captions are provided for all prerecorded audio content in synchronized media, except when the media is a media alternative for text and is clearly labeled as such.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#captions-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#captions-prerecorded',
+              references: {
+              }
+            },
+            '1.2.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_3,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.2.3 Audio Description or Media Alternative (Prerecorded)',
+              description: 'An alternative for time-based media or audio description of the prerecorded video content is provided for synchronized media, except when the media is a media alternative for text and is clearly labeled as such.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#audio-description-or-media-alternative-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/audio-description-or-media-alternative-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#audio-description-or-media-alternative-prerecorded',
+              references: {
+              }
+            },
+            '1.2.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_4,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.2.4 Captions (Live)',
+              description: 'Captions are provided for all live audio content in synchronized media.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#captions-live',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/captions-live.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#captions-live',
+              references: {
+              }
+            },
+            '1.2.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_5,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.2.5 Audio Description (Prerecorded)',
+              description: 'Audio description is provided for all prerecorded video content in synchronized media.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#audio-description-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/audio-description-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#audio-description-prerecorded',
+              references: {
+              }
+            },
+            '1.2.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.2.6 Sign Language (Prerecorded)',
+              description: 'Sign language interpretation is provided for all prerecorded audio content in synchronized media.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#sign-language-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/sign-language-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#sign-language-prerecorded',
+              references: {
+              }
+            },
+            '1.2.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_7,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.2.7 Extended Audio Description (Prerecorded)',
+              description: 'Where pauses in foreground audio are insufficient to allow audio descriptions to convey the sense of the video, extended audio description is provided for all prerecorded video content in synchronized media.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#extended-audio-description-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/extended-audio-description-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#extended-audio-description-prerecorded',
+              references: {
+              }
+            },
+            '1.2.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_8,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.2.8 Media Alternative (Prerecorded)',
+              description: 'An alternative for time-based media is provided for all prerecorded synchronized media and for all prerecorded video-only media.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#media-alternative-prerecorded',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/media-alternative-prerecorded.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#media-alternative-prerecorded',
+              references: {
+              }
+            },
+            '1.2.9': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_2_9,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.2.9 Audio-only (Live)',
+              description: 'An alternative for time-based media that presents equivalent information for live audio-only content is provided.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#audio-only-live',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/audio-only-live.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#audio-only-live',
+              references: {
+              }
+            }
+          }
+        },
+        '1.3': {
+          id: WCAG_GUIDELINE.G_1_3,
+          title: 'Guideline 1.3 Adaptable',
+          description: 'Create content that can be presented in different ways (for example simpler layout) without losing information or structure.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#adaptable',
+          success_criteria: {
+            '1.3.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_3_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.3.1 Info and Relationships',
+              description: 'Information, structure, and relationships conveyed through presentation can be programmatically determined or are available in text.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#info-and-relationships',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#info-and-relationships',
+              references: {
+              }
+            },
+            '1.3.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_3_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.3.2 Meaningful Sequence',
+              description: 'When the sequence in which content is presented affects its meaning, a correct reading sequence can be programmatically determined.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#meaningful-sequence',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/meaningful-sequence.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#meaningful-sequence',
+              references: {
+              }
+            },
+            '1.3.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_3_3,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.3.3 Sensory Characteristics',
+              description: 'Instructions provided for understanding and operating content do not rely solely on sensory characteristics of components such as shape, color, size, visual location, orientation, or sound.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#sensory-characteristics',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/sensory-characteristics.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#sensory-characteristics',
+              references: {
+              }
+            },
+            '1.3.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_3_4,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.3.4 Orientation',
+              description: 'Content does not restrict its view and operation to a single display orientation, such as portrait or landscape, unless a specific display orientation is essential.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#orientation',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/orientation.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#orientation',
+              references: {
+              }
+            },
+            '1.3.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_3_5,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.3.5 Identify Input Purpose',
+              description: 'The purpose of each input field collecting information about the user can be programmatically determined when:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#identify-input-purpose',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#identify-input-purpose',
+              references: {
+              }
+            },
+            '1.3.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_3_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.3.6 Identify Purpose',
+              description: 'In content implemented using markup languages, the purpose of User Interface Components, icons, and regions can be programmatically determined.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#identify-purpose',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/identify-purpose.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#identify-purpose',
+              references: {
+              }
+            }
+          }
+        },
+        '1.4': {
+          id: WCAG_GUIDELINE.G_1_4,
+          title: 'Guideline 1.4 Distinguishable',
+          description: 'Make it easier for users to see and hear content including separating foreground from background.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#distinguishable',
+          success_criteria: {
+            '1.4.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.4.1 Use of Color',
+              description: 'Color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#use-of-color',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#use-of-color',
+              references: {
+              }
+            },
+            '1.4.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 1.4.2 Audio Control',
+              description: 'If any audio on a Web page plays automatically for more than 3 seconds, either a mechanism is available to pause or stop the audio, or a mechanism is available to control audio volume independently from the overall system volume level.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#audio-control',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/audio-control.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#audio-control',
+              references: {
+              }
+            },
+            '1.4.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_3,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.3 Contrast (Minimum)',
+              description: 'The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#contrast-minimum',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum',
+              references: {
+              }
+            },
+            '1.4.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_4,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.4 Resize text',
+              description: 'Except for captions and images of text, text can be resized without assistive technology up to 200 percent without loss of content or functionality.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#resize-text',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#resize-text',
+              references: {
+              }
+            },
+            '1.4.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_5,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.5 Images of Text',
+              description: 'If the technologies being used can achieve the visual presentation, text is used to convey information rather than images of text except for the following:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#images-of-text',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/images-of-text.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#images-of-text',
+              references: {
+              }
+            },
+            '1.4.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.4.6 Contrast (Enhanced)',
+              description: 'The visual presentation of text and images of text has a contrast ratio of at least 7:1, except for the following:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#contrast-enhanced',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/contrast-enhanced.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#contrast-enhanced',
+              references: {
+              }
+            },
+            '1.4.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_7,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.4.7 Low or No Background Audio',
+              description: 'For prerecorded audio-only content that (1) contains primarily speech in the foreground, (2) is not an audio CAPTCHA or audio logo, and (3) is not vocalization intended to be primarily musical expression such as singing or rapping, at least one of the following is true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#low-or-no-background-audio',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/low-or-no-background-audio.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#low-or-no-background-audio',
+              references: {
+              }
+            },
+            '1.4.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_8,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.4.8 Visual Presentation',
+              description: 'For the visual presentation of blocks of text, a mechanism is available to achieve the following:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#visual-presentation',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#visual-presentation',
+              references: {
+              }
+            },
+            '1.4.9': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_9,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 1.4.9 Images of Text (No Exception)',
+              description: 'Images of text are only used for pure decoration or where a particular presentation of text is essential to the information being conveyed.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#images-of-text-no-exception',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/images-of-text-no-exception.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#images-of-text-no-exception',
+              references: {
+              }
+            },
+            '1.4.10': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_10,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.10 Reflow',
+              description: 'Content can be presented without loss of information or functionality, and without requiring scrolling in two dimensions for:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#reflow',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/reflow.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#reflow',
+              references: {
+              }
+            },
+            '1.4.11': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_11,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.11 Non-text Contrast',
+              description: 'The visual presentation of the following have a contrast ratio of at least 3:1 against adjacent color(s):',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#non-text-contrast',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#non-text-contrast',
+              references: {
+              }
+            },
+            '1.4.12': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_12,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.12 Text Spacing',
+              description: 'In content implemented using markup languages that support the following text style properties, no loss of content or functionality occurs by setting all of the following and by changing no other style property:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#text-spacing',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/text-spacing.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#text-spacing',
+              references: {
+              }
+            },
+            '1.4.13': {
+              id: WCAG_SUCCESS_CRITERION.SC_1_4_13,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 1.4.13 Content on Hover or Focus',
+              description: 'Where receiving and then removing pointer hover or keyboard focus triggers additional content to become visible and then hidden, the following are true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#content-on-hover-or-focus',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#content-on-hover-or-focus',
+              references: {
+              }
+            }
+          }
+        }
+      }
+    },
+    '2': {
+      id: WCAG_PRINCIPLE.P_2,
+      title: '2. Operable',
+      description: 'User interface components and navigation must be operable.',
+      url_spec: 'https://www.w3.org/TR/WCAG21/#operable',
+      guidelines: {
+        '2.1': {
+          id: WCAG_GUIDELINE.G_2_1,
+          title: 'Guideline 2.1 Keyboard Accessible',
+          description: 'Make all functionality available from a keyboard.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#keyboard-accessible',
+          success_criteria: {
+            '2.1.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_1_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.1.1 Keyboard',
+              description: 'All functionality of the content is operable through a keyboard interface without requiring specific timings for individual keystrokes, except where the underlying function requires input that depends on the path of the user\'s movement and not just the endpoints.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#keyboard',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#keyboard',
+              references: {
+              }
+            },
+            '2.1.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_1_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.1.2 No Keyboard Trap',
+              description: 'If keyboard focus can be moved to a component of the page using a keyboard interface, then focus can be moved away from that component using only a keyboard interface, and, if it requires more than unmodified arrow or tab keys or other standard exit methods, the user is advised of the method for moving focus away.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#no-keyboard-trap',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/no-keyboard-trap.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#no-keyboard-trap',
+              references: {
+              }
+            },
+            '2.1.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_1_3,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.1.3 Keyboard (No Exception)',
+              description: 'All functionality of the content is operable through a keyboard interface without requiring specific timings for individual keystrokes.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#keyboard-no-exception',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard-no-exception.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#keyboard-no-exception',
+              references: {
+              }
+            },
+            '2.1.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_1_4,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.1.4 Character Key Shortcuts',
+              description: 'If a keyboard shortcut is implemented in content using only letter (including upper- and lower-case letters), punctuation, number, or symbol characters, then at least one of the following is true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#character-key-shortcuts',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/character-key-shortcuts.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#character-key-shortcuts',
+              references: {
+              }
+            }
+          }
+        },
+        '2.2': {
+          id: WCAG_GUIDELINE.G_2_2,
+          title: 'Guideline 2.2 Enough Time',
+          description: 'Provide users enough time to read and use content.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#enough-time',
+          success_criteria: {
+            '2.2.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_2_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.2.1 Timing Adjustable',
+              description: 'For each time limit that is set by the content, at least one of the following is true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#timing-adjustable',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#timing-adjustable',
+              references: {
+              }
+            },
+            '2.2.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_2_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.2.2 Pause, Stop, Hide',
+              description: 'For moving, blinking, scrolling, or auto-updating information, all of the following are true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#pause-stop-hide',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/pause-stop-hide.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#pause-stop-hide',
+              references: {
+              }
+            },
+            '2.2.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_2_3,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.2.3 No Timing',
+              description: 'Timing is not an essential part of the event or activity presented by the content, except for non-interactive synchronized media and real-time events.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#no-timing',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/no-timing.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#no-timing',
+              references: {
+              }
+            },
+            '2.2.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_2_4,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.2.4 Interruptions',
+              description: 'Interruptions can be postponed or suppressed by the user, except interruptions involving an emergency.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#interruptions',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/interruptions.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#interruptions',
+              references: {
+              }
+            },
+            '2.2.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_2_5,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.2.5 Re-authenticating',
+              description: 'When an authenticated session expires, the user can continue the activity without loss of data after re-authenticating.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#re-authenticating',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/re-authenticating.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#re-authenticating',
+              references: {
+              }
+            },
+            '2.2.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_2_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.2.6 Timeouts',
+              description: 'Users are warned of the duration of any user inactivity that could cause data loss, unless the data is preserved for more than 20 hours when the user does not take any actions.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#timeouts',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/timeouts.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#timeouts',
+              references: {
+              }
+            }
+          }
+        },
+        '2.3': {
+          id: WCAG_GUIDELINE.G_2_3,
+          title: 'Guideline 2.3 Seizures and Physical Reactions',
+          description: 'Do not design content in a way that is known to cause seizures or physical reactions.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#seizures-and-physical-reactions',
+          success_criteria: {
+            '2.3.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_3_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.3.1 Three Flashes or Below Threshold',
+              description: 'Web pages do not contain anything that flashes more than three times in any one second period, or the flash is below the general flash and red flash thresholds.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#three-flashes-or-below-threshold',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/three-flashes-or-below-threshold.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#three-flashes-or-below-threshold',
+              references: {
+              }
+            },
+            '2.3.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_3_2,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.3.2 Three Flashes',
+              description: 'Web pages do not contain anything that flashes more than three times in any one second period.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#three-flashes',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/three-flashes.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#three-flashes',
+              references: {
+              }
+            },
+            '2.3.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_3_3,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.3.3 Animation from Interactions',
+              description: 'Motion animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#animation-from-interactions',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#animation-from-interactions',
+              references: {
+              }
+            }
+          }
+        },
+        '2.4': {
+          id: WCAG_GUIDELINE.G_2_4,
+          title: 'Guideline 2.4 Navigable',
+          description: 'Provide ways to help users navigate, find content, and determine where they are.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#navigable',
+          success_criteria: {
+            '2.4.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.4.1 Bypass Blocks',
+              description: 'A mechanism is available to bypass blocks of content that are repeated on multiple Web pages.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#bypass-blocks',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#bypass-blocks',
+              references: {
+              }
+            },
+            '2.4.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.4.2 Page Titled',
+              description: 'Web pages have titles that describe topic or purpose.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#page-titled',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/page-titled.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#page-titled',
+              references: {
+              }
+            },
+            '2.4.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_3,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.4.3 Focus Order',
+              description: 'If a Web page can be navigated sequentially and the navigation sequences affect meaning or operation, focusable components receive focus in an order that preserves meaning and operability.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#focus-order',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#focus-order',
+              references: {
+              }
+            },
+            '2.4.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_4,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.4.4 Link Purpose (In Context)',
+              description: 'The purpose of each link can be determined from the link text alone or from the link text together with its programmatically determined link context, except where the purpose of the link would be ambiguous to users in general.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#link-purpose-in-context',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#link-purpose-in-context',
+              references: {
+              }
+            },
+            '2.4.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_5,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.4.5 Multiple Ways',
+              description: 'More than one way is available to locate a Web page within a set of Web pages except where the Web Page is the result of, or a step in, a process.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#multiple-ways',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/multiple-ways.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#multiple-ways',
+              references: {
+              }
+            },
+            '2.4.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_6,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.4.6 Headings and Labels',
+              description: 'Headings and labels describe topic or purpose.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#headings-and-labels',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/headings-and-labels.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#headings-and-labels',
+              references: {
+              }
+            },
+            '2.4.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_7,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.4.7 Focus Visible',
+              description: 'Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#focus-visible',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#focus-visible',
+              references: {
+              }
+            },
+            '2.4.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_8,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.4.8 Location',
+              description: 'Information about the user\'s location within a set of Web pages is available.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#location',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/location.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#location',
+              references: {
+              }
+            },
+            '2.4.9': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_9,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.4.9 Link Purpose (Link Only)',
+              description: 'A mechanism is available to allow the purpose of each link to be identified from link text alone, except where the purpose of the link would be ambiguous to users in general.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#link-purpose-link-only',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-link-only.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#link-purpose-link-only',
+              references: {
+              }
+            },
+            '2.4.10': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_10,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.4.10 Section Headings',
+              description: 'Section headings are used to organize the content.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#section-headings',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/section-headings.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#section-headings',
+              references: {
+              }
+            }
+          }
+        },
+        '2.5': {
+          id: WCAG_GUIDELINE.G_2_5,
+          title: 'Guideline 2.5 Input Modalities',
+          description: 'Make it easier for users to operate functionality through various inputs beyond keyboard.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#input-modalities',
+          success_criteria: {
+            '2.5.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.5.1 Pointer Gestures',
+              description: 'All functionality that uses multipoint or path-based gestures for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#pointer-gestures',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/pointer-gestures.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#pointer-gestures',
+              references: {
+              }
+            },
+            '2.5.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.5.2 Pointer Cancellation',
+              description: 'For functionality that can be operated using a single pointer, at least one of the following is true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#pointer-cancellation',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/pointer-cancellation.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#pointer-cancellation',
+              references: {
+              }
+            },
+            '2.5.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_3,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.5.3 Label in Name',
+              description: 'For user interface components with labels that include text or images of text, the name contains the text that is presented visually.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#label-in-name',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#label-in-name',
+              references: {
+              }
+            },
+            '2.5.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_4,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 2.5.4 Motion Actuation',
+              description: 'Functionality that can be operated by device motion or user motion can also be operated by user interface components and responding to the motion can be disabled to prevent accidental actuation, except when:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#motion-actuation',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/motion-actuation.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#motion-actuation',
+              references: {
+              }
+            },
+            '2.5.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_5,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.5.5 Target Size',
+              description: 'The size of the target for pointer inputs is at least 44 by 44 CSS pixels except when:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#target-size',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/target-size.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#target-size',
+              references: {
+              }
+            },
+            '2.5.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.5.6 Concurrent Input Mechanisms',
+              description: 'Web content does not restrict use of input modalities available on a platform except where the restriction is essential, required to ensure the security of the content, or required to respect user settings.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#concurrent-input-mechanisms',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/concurrent-input-mechanisms.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#concurrent-input-mechanisms',
+              references: {
+              }
+            }
+          }
+        }
+      }
+    },
+    '3': {
+      id: WCAG_PRINCIPLE.P_3,
+      title: '3. Understandable',
+      description: 'Information and the operation of user interface must be understandable.',
+      url_spec: 'https://www.w3.org/TR/WCAG21/#understandable',
+      guidelines: {
+        '3.1': {
+          id: WCAG_GUIDELINE.G_3_1,
+          title: 'Guideline 3.1 Readable',
+          description: 'Make text content readable and understandable.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#readable',
+          success_criteria: {
+            '3.1.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_1_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.1.1 Language of Page',
+              description: 'The default human language of each Web page can be programmatically determined.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#language-of-page',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/language-of-page.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#language-of-page',
+              references: {
+              }
+            },
+            '3.1.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_1_2,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.1.2 Language of Parts',
+              description: 'The human language of each passage or phrase in the content can be programmatically determined except for proper names, technical terms, words of indeterminate language, and words or phrases that have become part of the vernacular of the immediately surrounding text.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#language-of-parts',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/language-of-parts.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#language-of-parts',
+              references: {
+              }
+            },
+            '3.1.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_1_3,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.1.3 Unusual Words',
+              description: 'A mechanism is available for identifying specific definitions of words or phrases used in an unusual or restricted way, including idioms and jargon.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#unusual-words',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/unusual-words.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#unusual-words',
+              references: {
+              }
+            },
+            '3.1.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_1_4,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.1.4 Abbreviations',
+              description: 'A mechanism for identifying the expanded form or meaning of abbreviations is available.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#abbreviations',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/abbreviations.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#abbreviations',
+              references: {
+              }
+            },
+            '3.1.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_1_5,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.1.5 Reading Level',
+              description: 'When text requires reading ability more advanced than the lower secondary education level after removal of proper names and titles, supplemental content, or a version that does not require reading ability more advanced than the lower secondary education level, is available.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#reading-level',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/reading-level.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#reading-level',
+              references: {
+              }
+            },
+            '3.1.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_1_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.1.6 Pronunciation',
+              description: 'A mechanism is available for identifying specific pronunciation of words where meaning of the words, in context, is ambiguous without knowing the pronunciation.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#pronunciation',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/pronunciation.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#pronunciation',
+              references: {
+              }
+            }
+          }
+        },
+        '3.2': {
+          id: WCAG_GUIDELINE.G_3_2,
+          title: 'Guideline 3.2 Predictable',
+          description: 'Make Web pages appear and operate in predictable ways.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#predictable',
+          success_criteria: {
+            '3.2.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.2.1 On Focus',
+              description: 'When any user interface component receives focus, it does not initiate a change of context.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#on-focus',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/on-focus.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#on-focus',
+              references: {
+              }
+            },
+            '3.2.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.2.2 On Input',
+              description: 'Changing the setting of any user interface component does not automatically cause a change of context unless the user has been advised of the behavior before using the component.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#on-input',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/on-input.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#on-input',
+              references: {
+              }
+            },
+            '3.2.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_3,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.2.3 Consistent Navigation',
+              description: 'Navigational mechanisms that are repeated on multiple Web pages within a set of Web pages occur in the same relative order each time they are repeated, unless a change is initiated by the user.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#consistent-navigation',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/consistent-navigation.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#consistent-navigation',
+              references: {
+              }
+            },
+            '3.2.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_4,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.2.4 Consistent Identification',
+              description: 'Components that have the same functionality within a set of Web pages are identified consistently.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#consistent-identification',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/consistent-identification.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#consistent-identification',
+              references: {
+              }
+            },
+            '3.2.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_5,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.2.5 Change on Request',
+              description: 'Changes of context are initiated only by user request or a mechanism is available to turn off such changes.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#change-on-request',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/change-on-request.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#change-on-request',
+              references: {
+              }
+            }
+          }
+        },
+        '3.3': {
+          id: WCAG_GUIDELINE.G_3_3,
+          title: 'Guideline 3.3 Input Assistance',
+          description: 'Help users avoid and correct mistakes.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#input-assistance',
+          success_criteria: {
+            '3.3.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.3.1 Error Identification',
+              description: 'If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#error-identification',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#error-identification',
+              references: {
+              }
+            },
+            '3.3.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.3.2 Labels or Instructions',
+              description: 'Labels or instructions are provided when content requires user input.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#labels-or-instructions',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#labels-or-instructions',
+              references: {
+              }
+            },
+            '3.3.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_3,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.3.3 Error Suggestion',
+              description: 'If an input error is automatically detected and suggestions for correction are known, then the suggestions are provided to the user, unless it would jeopardize the security or purpose of the content.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#error-suggestion',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/error-suggestion.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#error-suggestion',
+              references: {
+              }
+            },
+            '3.3.4': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_4,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.3.4 Error Prevention (Legal, Financial, Data)',
+              description: 'For Web pages that cause legal commitments or financial transactions for the user to occur, that modify or delete user-controllable data in data storage systems, or that submit user test responses, at least one of the following is true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#error-prevention-legal-financial-data',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-legal-financial-data.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#error-prevention-legal-financial-data',
+              references: {
+              }
+            },
+            '3.3.5': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_5,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.3.5 Help',
+              description: 'Context-sensitive help is available.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#help',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/help.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#help',
+              references: {
+              }
+            },
+            '3.3.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_6,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.3.6 Error Prevention (All)',
+              description: 'For Web pages that require the user to submit information, at least one of the following is true:',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#error-prevention-all',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-all.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#error-prevention-all',
+              references: {
+              }
+            }
+          }
+        }
+      }
+    },
+    '4': {
+      id: WCAG_PRINCIPLE.P_4,
+      title: '4. Robust',
+      description: 'Content must be robust enough that it can be interpreted by by a wide variety of user agents, including assistive technologies.',
+      url_spec: 'https://www.w3.org/TR/WCAG21/#robust',
+      guidelines: {
+        '4.1': {
+          id: WCAG_GUIDELINE.G_4_1,
+          title: 'Guideline 4.1 Compatible',
+          description: 'Maximize compatibility with current and future user agents, including assistive technologies.',
+          url_spec: 'https://www.w3.org/TR/WCAG21/#compatible',
+          success_criteria: {
+            '4.1.1': {
+              id: WCAG_SUCCESS_CRITERION.SC_4_1_1,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 4.1.1 Parsing',
+              description: 'In content implemented using markup languages, elements have complete start and end tags, elements are nested according to their specifications, elements do not contain duplicate attributes, and any IDs are unique, except where the specifications allow these features.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#parsing',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/parsing.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#parsing',
+              references: {
+              }
+            },
+            '4.1.2': {
+              id: WCAG_SUCCESS_CRITERION.SC_4_1_2,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 4.1.2 Name, Role, Value',
+              description: 'For all user interface components (including but not limited to: form elements, links and components generated by scripts), the name and role can be programmatically determined; states, properties, and values that can be set by the user can be programmatically set; and notification of changes to these items is available to user agents, including assistive technologies.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#name-role-value',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#name-role-value',
+              references: {
+              }
+            },
+            '4.1.3': {
+              id: WCAG_SUCCESS_CRITERION.SC_4_1_3,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 4.1.3 Status Messages',
+              description: 'In content implemented using markup languages, status messages can be programmatically determined through role or properties such that they can be presented to the user by assistive technologies without receiving focus.',
+              url_spec: 'https://www.w3.org/TR/WCAG21/#status-messages',
+              url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/status-messages.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#status-messages',
+              references: {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+/* colorRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const colorRules = {
+  COLOR_1: {
+      ID:                    'Color 1',
+      DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
+      SUMMARY:               'Text must exceed CCR threshold',
+      TARGET_RESOURCES_DESC: 'All elements with text content',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
+        FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
+        MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold to the use of a background image.',
+        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR thrshold to the use of background images.',
+        HIDDEN_S: 'The element with text content that is hidden was not analyzed for color contrast accessibility.',
+        HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
+        NOT_APPLICABLE:  'No visible text content on this page.'
+      },
+      ELEMENT_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'CCR of %1 exceeds 4.5.',
+        ELEMENT_PASS_2:   'CCR of %1 exceeds 3.1 for large or bolded text.',
+        ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to exceed 4.5.',
+        ELEMENT_FAIL_2:   'CCR of %1 for large or bolded text, adjust foreground and background colors to exceed 3.1.',
+        ELEMENT_MC_1:     'CCR of %1 is greater than 4.5, but background image may reduce color contrast.',
+        ELEMENT_MC_2:     'CCR of %1 is less than or equal to 4.5, but background image may improve color contrast.',
+        ELEMENT_MC_3:     'CCR of %1 is greater than 3.1 for large or bolded text, but background image may reduce color contrast.',
+        ELEMENT_MC_4:     'CCR of %1 is less than or equal to 3.1 for large and bolded text, but background image may improve color contrast.',
+        ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
+      },
+      PURPOSE:        [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
+                      ],
+      TECHNIQUES:     [ 'Change the foreground color to a more complementary color to the background color.',
+                        'Change the background color to a more complementary color to the foreground color.',
+                        'Remove background images or verify they do not compromise color contrast requirements.'
+                      ],
+      MANUAL_CHECKS:  [ 'Use graphic editing tools to analyze the color(s) of the background image and then recacluate the CCR with the range of colors in the background image.',
+                        'Verify the range of colors that could be part of the background of text is have a CCR > 4.5.'
+      ],
+      INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
+                         title: 'WCAG 2.0 Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1',
+                         url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'How to meet Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1',
+                         url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast'
+                       },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G17: Ensuring that a contrast ratio of at least 7:1 exists between text (and images of text) and background behind the text',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G17'
+                      },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G18: Ensuring that a contrast ratio of at least 4.5:1 exists between text (and images of text) and background behind the text',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G18'
+                      },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G148: Not specifying background color, not specifying text color, and not using technology features that change those default',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G148'
+                      },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
+                      }
+                      ]
+  },
+  COLOR_2: {
+      ID:                    'Color 2',
+      DEFINITION:            'Color must not be the only way to convey information on the page.',
+      SUMMARY:               'Use of color',
+      TARGET_RESOURCES_DESC: 'Any content on the page that refers to or is a specific color',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
+      },
+      PAGE_RESULT_MESSAGES: {
+        PAGE_MC_1: 'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
+      },
+      PURPOSE:        [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',
+                        'This requirement also includes references to color of content on page to identify some type of information, there should be redundant labeling of the content, for example using text labels to also identify and refer to the information.'
+                      ],
+      TECHNIQUES:     [ 'Provide redundant text labels for content presented in color, it the color is presenting meaningful information.',
+                        'Use background patterns to also identify information.'
+                      ],
+      MANUAL_CHECKS:  [ 'Verify the page does not use color alone to identify or refer to information on the page.'
+                      ],
+      INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
+                         title: 'WCAG 2.0 Success Criterion 1.4.1 Use of Color',
+                         url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-without-color'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'How to meet Success Criterion 1.4.1 Use of Color',
+                         url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-without-color'
+                       },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G14: Ensuring that information conveyed by color differences is also available in text',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G14'
+                      }
+                      ]
+  }
+};
+
+/* messages.js for English messages */
+
+const messages$1 = {
+  common: common,
+  ruleCategories: ruleCategories,
+  wcag: wcag,
+  rules: {}
+};
+
+messages$1.rules = Object.assign(messages$1.rules, colorRules);
+
+/* locale.js */
+
+/* Constants */
+const debug$2 = new DebugLogging('locale', true);
+
+
+const messages = {
+  en: messages$1
+};
+
+// Default language is 'en' for English
+let locale = 'en';
+
+/**
+ * @function getRuleCategoryInfo
+ *
+ * @desc Gets a object with keys into strings with rule category information,
+ *       keys are:
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Integer} categoryId - Used to idenitify the rule category
+ */
+
+function getRuleCategoryInfo(categoryId) {
+  const ruleCategories = messages[locale].ruleCategories;
+  for (let i = 0; i > ruleCategories; i +=1) {
+    let rc = ruleCategories;
+    if (rc.id === categoryId) {
+      return rc;
+    }
+  }
+  return null;
+}
+
+/**
+ * @function getGuidelineInfo
+ *
+ * @desc Gets a object with keys into strings with WCAG Guideline information,
+ *       keys are:
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Integer} categoryId - Used to idenitify the rule category
+ */
+
+function getGuidelineInfo(guidelineId) {
+  const principles = messages[locale].wcag.principles;
+  for (const p in principles) {
+    const principle = principles[p];
+    for (const g in principle.guidelines) {
+      const guideline = principle.guidelines[g];
+      if (guideline.id === guidelineId) {
+        debug$2.flag && debug$2.log(`[getGuidelineInfo][${guidelineId}]: ` + guideline.title);
+        return {
+          title: guideline.title,
+          url: guideline.url_spec,
+          description: guideline.description
+        }
+      }
+    }
+  }
+  debug$2.flag && debug$2.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  return null;
+}
+
+/**
+ * @function getScope
+ *
+ * @desc Gets a localize string for the rule scope id
+ *
+ * @param {Integer} scopeId - Numberical id associates with the rule scope
+ *
+ * @returns {String} see @desc
+ */
+
+function getScope (scopeId) {
+  return messages[locale].common.ruleScopes[scopeId];
+}
+
+/**
+ * @function getRuleId
+ *
+ * @desc Gets a localize string for the rule id
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {String} see @desc
+ */
+
+function getRuleId (ruleId) {
+  return messages[locale].rules[ruleId].ID;
+}
+
+/**
+ * @function getRuleDefinition
+ *
+ * @desc Gets a localize string for a rule definition
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {String} see @desc
+ */
+
+function getRuleDefinition (ruleId) {
+  debug$2.flag && debug$2.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  return messages[locale].rules[ruleId].DEFINITION;
+}
+
+/**
+ * @function getRuleSummary
+ *
+ * @desc Gets a localize string for a rule summary
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {String} see @desc
+ */
+
+function getRuleSummary (ruleId) {
+  debug$2.flag && debug$2.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  return messages[locale].rules[ruleId].SUMMARY;
+}
+
+/**
+ * @function getTargetResourcesDesc
+ *
+ * @desc Gets a description of the target resources
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {String} see @desc
+ */
+
+function getTargetResourcesDesc (ruleId) {
+  debug$2.flag && debug$2.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  return messages[locale].rules[ruleId].TARGET_RESOURCES_DESC;
+}
+
+/**
+ * @function getPurposes
+ *
+ * @desc Gets an array of localized strings describing the purpose of the rule
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {String} see @desc
+ */
+
+function getPurposes (ruleId) {
+  debug$2.flag && debug$2.log(`[getPurposes][${ruleId}]: ${messages[locale].rules[ruleId].PURPOSE.join('; ')}`);
+  return messages[locale].rules[ruleId].PURPOSE;
+}
+
+/**
+ * @function getTechniques
+ *
+ * @desc Gets an array of localized strings describing the techniques to implement the rule requirements
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array} see @desc
+ */
+
+function getTechniques (ruleId) {
+  debug$2.flag && debug$2.log(`[getTechniques][${ruleId}]: ${messages[locale].rules[ruleId].TECHNIQUES.join('; ')}`);
+  return messages[locale].rules[ruleId].TECHNIQUES;
+}
+
+/**
+ * @function getInformationLinks
+ *
+ * @desc Gets an array of objects with keys to localized strings to more information about the rule,
+ *       the keys include:
+ *       'type': Integer
+ *       'title' : String
+ *       'url' : String
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array} see @desc
+ */
+
+function getInformationLinks (ruleId) {
+  return messages[locale].rules[ruleId].INFORMATIONAL_LINKS;
+}
+
+/**
+ * @function getManualChecks
+ *
+ * @desc Gets an array of localized strings describing manual checks for verifying rule requirements
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {String} see @desc
+ */
+
+function getManualChecks (ruleId) {
+  debug$2.flag && debug$2.log(`[getManualChecks][${ruleId}]: ${messages[locale].rules[ruleId].MANUAL_CHECKS.join('; ')}`);
+  return messages[locale].rules[ruleId].MANUAL_CHECKS;
+}
+
+/* rule.js   */
+
+/* ----------------------------------------------------------------   */
+/*                             Rule                                   */
+/* ----------------------------------------------------------------   */
+
+/**
+ * @constructor Rule
+ *
+ * @desc Creates and validates a rule used to evaluate an accessibility feature
+ *       of a document
+ *
+ * @param {Object}    rule_item          - Object containing rule information
+ */
+
+class Rule {
+  constructor (rule_item) {
+
+    // Rule information that is NOT dependent locale
+    this.rule_id             = rule_item.rule_id; // String
+    this.rule_required       = rule_item.rule_required; // Boolean
+    this.rule_scope_id       = rule_item.rule_scope; // Integer
+    this.rule_category_id    = rule_item.rule_category; // Integer
+    this.wcag_primary_id     = rule_item.wcag_primary_id; // String
+    this.wcag_related_ids    = rule_item.wcag_related_ids; // Array of strings
+    this.last_updated        = rule_item.last_updated; // String
+    this.target_resources    = rule_item.target_resources; // array of strings
+    this.primary_property    = rule_item.primary_property; // string
+    this.validate            = rule_item.validate;  // function
+    this.wcag_guideline_id   = getGuidelineId(rule_item.wcag_primary_id); // Integer
+
+    // Rule information that is locale dependent
+    this.rule_category_info  = getRuleCategoryInfo(this.rule_category); // Object with keys to strings
+    this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
+    this.rule_scope          = getScope(this.rule_scope_id); // String
+
+    this.rule_nls_id           = getRuleId(this.rule_id); // String
+    this.summary               = getRuleSummary(this.rule_id); // String
+    this.definition            = getRuleDefinition(this.rule_id); // String
+    this.target_resources_desc = getTargetResourcesDesc(this.rule_id); // String
+    this.purposes              = getPurposes(this.rule_id);  // Array of strings
+    this.techniques            = getTechniques(this.rule_id);  // Array of strings
+    this.manual_checks         = getManualChecks(this.rule_id);  // Array of strings
+    this.informational_links   = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
+
+    // Localized messsages for evaluation results
+//    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
+//    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+  }
+
+  /**
+   * @method getId
+   *
+   * @desc Get the programmatic id that uniquely identifies the rule
+   *
+   * @return {String} The rule id
+   */
+
+  getId () {
+    return this.rule_id;
+  }
+
+  /**
+   * @method getIdNLS
+   *
+   * @desc Get a localized human readable id for uniquely identifying the rule
+   *
+   * @return {String} Localized string of the rule id
+   */
+
+  getIdNLS () {
+    return this.rule_nls_id;
+  }
+
+  /**
+   * @method getGuideline
+   *
+   * @desc Get number of the associated guideline
+   *
+   * @return  {Number} see description
+   */
+
+  getGuideline () {
+   return this.wcag_guideline_id;
+  };
+
+  /**
+   * @method getGuidelineInfo
+   *
+   * @desc Get information about the WCAG 2.0 Guideline associated with the rule
+   *
+   * @return  {GuidelineInfo}  see description
+   */
+
+  getGuidelineInfo () {
+   return this.guideline_info;
+  }
+
+  /**
+   * @method getCategory
+   *
+   * @desc Get a numerical constant representing the rule category
+   *
+   * @return {Number}  see description
+   */
+
+  getCategory () {
+    return this.rule_category_id;
+  }
+
+  /**
+   * @method getCategoryInfo
+   *
+   * @desc Get a localized title, url and description of the rule category
+   *
+   * @return {RuleCategoryInfoItem}  Returns a InformationalLinkInfo object
+   */
+
+  getCategoryInfo () {
+    return this.rule_category_info;
+  }
+
+  /**
+   * @method getScope
+   *
+   * @desc Get the rule scope constant of the rule
+   *
+   * @return {Number} rule scope constant
+   */
+
+  getScope () {
+    return this.rule_scope_id;
+  }
+
+
+  /**
+   * @method getScopeNLS
+   *
+   * @desc Get a localized string of the rule scope (i.e. 'element' or 'page')
+   *
+   * @return {String} Localized string of the rule scope
+   */
+
+  getScopeNLS () {
+    return this.rule_scope;
+  }
+
+
+  /**
+   * @method getDefinition
+   *
+   * @desc Gets the definition of the rule
+   *
+   * @param {Boolean}  required  - True if rule is required
+   *
+   * @return {String} Localized string of the rule definition based on being
+   *                  required or recommended
+   */
+  getDefinition (required) {
+
+    var str = this.rule_nls['DEFINITION'];
+
+    var message;
+
+    var vstr;
+
+    if (str) {
+
+      vstr = "%s";
+
+      if (str.indexOf(vstr) >= 0) {
+
+       if (typeof required === 'boolean') {
+
+        if (required) message = this.common_nls.message_severities.MUST;
+        else message = this.common_nls.message_severities.SHOULD;
+
+       }
+       else {
+         // If no rule type is defined assume "must"
+          message = this.common_nls.message_severities.MUST + "/" + this.common_nls.message_severities.SHOULD;
+       }
+
+       str = str.replace(vstr, message);
+     }
+
+     return transformElementMarkup(str);
+   }
+
+   return "Definition not found for rule: " + this.rule_id;
+
+  }
+
+  /**
+   * @method getSummary
+   *
+   * @desc Gets the summary of the rule
+   *
+   * @param {Boolean}  required  - True if rule is required
+   *
+   * @return {String} Localized string of the rule summary based on being
+   *                  required or recommended
+   */
+  getSummary (required) {
+    var str = this.rule_nls['SUMMARY'];
+    var message;
+    var vstr;
+    if (str) {
+      vstr = "%s";
+      if (str.indexOf(vstr) >= 0) {
+
+        if (typeof required === 'boolean') {
+          if (required) message = this.common_nls.message_severities.MUST;
+          else message = this.common_nls.message_severities.SHOULD;
+        }
+        else {
+          // If no rule type is defined assume "must"
+          message = this.common_nls.message_severities.MUST + "/" + this.common_nls.message_severities.SHOULD;
+        }
+        str = str.replace(vstr, message);
+      }
+      return transformElementMarkup(str);
+    }
+    return "Summary not found for rule: " + this.rule_id;
+
+  }
+
+  /**
+   * @method getPurpose
+   *
+   * @desc Gets an array strings representing the purpose, basically
+   *       how does the rule help people with disabilities
+   *
+   * @return  {Array}  Returns an array of localized string describing the purpose
+   */
+
+  getPurpose () {
+    var list = this.rule_nls['PURPOSE'];
+    var new_list = [];
+    if (list && list.length) {
+      for (var i = 0; i < list.length; i++) {
+        new_list.push(transformElementMarkup(list[i]));
+      } // end for
+      return new_list;
+    }
+    return [];
+  }
+
+  /**
+   * @method getTargetResourcesDescription
+   *
+   * @desc Get a description of the markup or page feature the rule is evaluates
+   *
+   * @return  {String}  Localized string representing the markup or page feature
+   *                    tested by the rule
+   */
+
+  getTargetResourcesDescription () {
+    var target = this.rule_nls['TARGET_RESOURCES_DESC'];
+    if (target) return transformElementMarkup(target);
+    return "** Target resource description not defined";
+  }
+
+  /**
+   * @method getTargetResources
+   *
+   * @desc Returns an localized array strings representing target resources of
+   *       the rule
+   *
+   * @return  {Array}  Returns an array of strings identifying the elements and/or
+   *                    attributes that the rule evaluates
+   */
+
+  getTargetResources () {
+    if (this.target_resources) return this.target_resources;
+    return [];
+  }
+
+  /**
+   * @method getTargetResourcePrimaryProperty
+   *
+   * @desc Get the primary attribute or calculated property of element used to evaluate a rule
+   *
+   * @return  {String}  see description
+   */
+  getTargetResourcePrimaryProperty () {
+    if (typeof this.primary_property === 'string') return this.primary_property;
+    return "";
+  };
+
+
+  /**
+   * @method getTargetResourceSecondaryProperties
+   *
+   * @desc Get the attributes and calculated properties of element used to evaluate a rule
+   *
+   * @return  {Array}  Returns an array of strings identifying the calculated properties
+   *                   and/or attributes that the rule uses to evaluate the rule requirements
+   */
+  getTargetResourceSecondaryProperties () {
+    if (this.resource_properties) return this.resource_properties;
+    return [];
+  }
+
+
+  /**
+   * @method getTechniques
+   *
+   * @desc Get the techniques to implement the requirements of the rule
+   *
+   * @return  {Array}  Array of InformationalLinkInfo objects
+   */
+  getTechniques () {
+    var list = this.rule_nls['TECHNIQUES'];
+    var new_list = [];
+    if (list && list.length) {
+      for (var i = 0; i < list.length; i++) {
+        var item = list[i];
+        var ref;
+        if (typeof item === 'string') ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.TECHNIQUE, item, "");
+        else ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.TECHNIQUE, item.title, item.url);
+
+        new_list.push(ref);
+      } // end for
+      return new_list;
+    }
+    return [];
+  }
+
+  /**
+   * @method getManualCheckProcedures
+   *
+   * @desc Gets manual checking proceedures for evaluating the rule
+   *       requirements
+   *
+   * @return  {Array}  Array of InformationalLinkInfo objects
+   */
+
+  getManualCheckProcedures () {
+    var list = this.rule_nls['MANUAL_CHECKS'];
+    var new_list = [];
+
+    if (list && list.length) {
+
+      for (var i = 0; i < list.length; i++) {
+        var item = list[i];
+        var ref;
+
+        if (typeof item === 'string') ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.MANUAL_CHECK, item, "");
+        else ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.MANUAL_CHECK, item.title, item.url);
+
+        new_list.push(ref);
+      } // end for
+      return new_list;
+    }
+    return [];
+
+  }
+
+  /**
+   * @method getInformationalLinks
+   *
+   * @desc Get information links related to understanding or implementation of the rule
+   *
+   * @return  {Array}  Returns an array of InformationalLinkInfo objects
+   *
+   * @example
+   *
+   * var node_list = [];
+   * var info_links = rule.getInformationalLinks();
+   *
+   * for(var i = 0; i < info_links.length; i++) {
+   *   var info_link = info_links[i];
+   *
+   *   // Using object properties to create a link element
+   *   var node = document.createElement('a');
+   *   node.appendChild(document.createTextNode(info_link.title));
+   *   node.setAttribute('href',  info_link.url);
+   *   node.setAttribute('class', info_link.type_const.toString());
+   *
+   *   node_list.push(node);
+   * }
+   */
+
+  getInformationalLinks () {
+    var list = this.rule_nls['INFORMATIONAL_LINKS'];
+    var new_list = [];
+    if (list && list.length) {
+
+      for (var i = 0; i < list.length; i++) {
+        var link = list[i];
+        var ref = new OpenAjax.a11y.info.InformationalLinkInfo(link.type, link.title, link.url);
+        new_list.push(ref);
+      } // end for
+      return new_list;
+    }
+    return [];
+  }
+
+  /**
+   * @method getPrimarySuccessCriterion
+   *
+   * @desc Get id of the primary WCAG 2.0 Success Criteria for the rule
+   *
+   * @return  {Number}  see description
+   */
+
+  getPrimarySuccessCriterion () {
+    return this.wcag_primary_id;
+  }
+
+  /**
+   * @method getPrimarySuccessCriterionNLS
+   *
+   * @desc Get information about primary WCAG 2.0 Success Criteria for the rule
+   *
+   * @return  {SuccessCriterionInfo}  Object representing information about the SC
+   */
+
+  getPrimarySuccessCriterionNLS () {
+    var info = new OpenAjax.a11y.info.SuccessCriterionInfo(this.wcag_primary_id);
+    return info;
+  }
+
+  /**
+   * @method getRelatedSuccessCriteria
+   *
+   * @desc Get information about the related WCAG 2.0 Success Criteria for the rule
+   *
+   * @return  {Array}  Array of SuccessCriterionInfo objects
+   */
+
+  getRelatedSuccessCriteria () {
+    var list = [];
+    var ids = this.wcag_related_ids;
+    var ids_len = ids.length;
+    for (var i = 0; i < ids_len; i++) {
+      var id = ids[i];
+      var ref = new OpenAjax.a11y.info.SuccessCriterionInfo(id);
+      list.push(ref);
+    }
+    return list;
+  }
+
+  /**
+   * @method getWCAGLevel
+   *
+   * @desc Get the string representation of the the WCAG 2.0 Success Criterion Level
+   *       based on the primary id of the rule
+   *
+   * @return  {String}  String representing the WCAG 2.0 success criterion level
+   *                    (i.e. A, AA or AAA)
+   */
+
+  getWCAGLevel () {
+    return this.getPrimarySuccessCriterion().level_nls;
+  }
+
+  /**
+   * @method toJSON
+   *
+   * @desc Returns a JSON representation of the rule
+   *
+   * @param  {String}   prefix    - String of leading spaces for formatting JSON output (Optional)
+   * @param  {Boolean}  required  - Required is needed for adjusting definition and summary strings to ruleset
+   *                                requirements
+   *
+   * @return  {String}  Returns a JSON representation of the rule
+   */
+
+  toJSON (prefix, required) {
+
+    function stringItem(property, value, last) {
+      if (typeof value === 'string') json += prefix + "    \"" + property + "\" : " + JSON.stringify(value);
+      else json += prefix + "    \"" + property + "\" : \"\"";
+
+      if (last) json += "\n";
+      else json += ",\n";
+    }
+
+    function numberItem(property, value, last) {
+      json += prefix + "    \"" + property + "\" : " + value;
+
+      if (last) json += "\n";
+      else json += ",\n";
+    }
+
+    function stringListItem(property, list, last) {
+      json += prefix + "    \"" + property + "\" : [";
+
+      if (list && list.length) {
+        var last_item = list.length - 1;
+        for (var i = 0; i < list.length; i++) {
+          if (last_item === i) json += JSON.stringify(list[i]);
+          else json += JSON.stringify(list[i]) + ",";
+        }
+      }
+
+      if (last) json += "]\n";
+      else json += "],\n";
+    }
+
+    function addListOfStrings(name, list, last) {
+
+      json += prefix + "    \"" + name + "\" : [\n";
+
+      if (list && list.length) {
+        var last_item = list.length - 1;
+        for (var i = 0; i < list.length; i++) {
+          if (last_item === i) json += "          " + JSON.stringify(list[i]) + "\n";
+          else json += "          " + JSON.stringify(list[i]) + ",\n";
+        }
+      }
+
+      if (last) json += prefix + "    ]\n";
+      else json += prefix + "    ],\n";
+
+    }
+
+
+
+    function addInformationalLinks(last) {
+
+      function addReferenceItem(reference, last) {
+
+        json += prefix + "      { \"type\"  : "   + reference['type']  + ",\n";
+        json += prefix + "        \"title\" : " + JSON.stringify(reference['title']) + ",\n";
+        json += prefix + "        \"url\"   : " + JSON.stringify(reference['url'])   + "\n";
+
+        if (last) json += prefix + "      }\n";
+        else json += prefix + "      },\n";
+
+      }
+
+      json += prefix + "    \"informational_links\" : [\n";
+
+      var info_links = rule_nls['INFORMATIONAL_LINKS'];
+
+      if (info_links && info_links.length) {
+        var last_item = info_links.length - 1;
+        for (var i = 0; i < info_links.length; i++) {
+          if (last_item === i) addReferenceItem(info_links[i], true);
+          else addReferenceItem(info_links[i], false);
+        }
+      }
+
+      if (last) json += prefix + "    ]\n";
+      else json += prefix + "    ],\n";
+
+    }
+
+    function addMessages(name, list, last) {
+
+      json += prefix + "    \"" + name + "\" : {\n";
+
+      if (list) {
+        var first = true;
+        for (var item in list) {
+          if (first) json += "           " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
+          else json += ",\n          " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
+          first = false;
+        }
+      }
+
+      if (last) json += "\n" + prefix + "    }\n";
+      else json += "\n" + prefix + "    },\n";
+
+    }
+
+
+
+
+    if (typeof prefix !== 'string') prefix = "";
+
+    var json = "";
+
+    var rule_nls = this.rule_nls;
+
+    json += prefix + "  {\n";
+
+    stringItem(    'rule_id',             this.rule_id);
+    numberItem(    'rule_scope',          this.getScope());
+  //  stringItem(    'rule_scope_nls',      this.getScopeNLS());
+    numberItem(    'rule_category',       this.getCategory());
+    stringItem(    'rule_category_nls',   this.getCategoryInfo().title);
+    numberItem(    'rule_group',          this.getGroup());
+    stringItem(    'rule_group_nls',      this.getGroupNLS());
+    stringItem(    'wcag_primary',        this.wcag_primary_id);
+    stringListItem('wcag_related',        this.wcag_related_ids);
+    stringItem(    'last_updated',        this.last_updated);
+    stringListItem('target_resources',    this.target_resources);
+    stringItem(    'language_dependency', this.language_dependency);
+    stringItem(    'primary_property',    this.primary_property);
+    stringListItem('resource_properties', this.resource_properties);
+    stringItem(    'validate',            this.validate.toString());
+
+    stringItem('nls_rule_id', rule_nls['ID']);
+
+    if (typeof required === 'boolean') {
+      stringItem('definition', this.getRuleDefinition(required));
+      stringItem('summary', this.getRuleSummary(required));
+    }
+    else {
+      stringItem('definition', rule_nls['DEFINITION']);
+      stringItem('summary', rule_nls['SUMMARY']);
+    }
+
+    stringItem('target_resource_desc', rule_nls['TARGET_RESOURCES_DESC']);
+
+    addListOfStrings('purpose',       rule_nls['PURPOSE']);
+
+    addListOfStrings('techniques',    rule_nls['TECHNIQUES']);
+
+    addListOfStrings('manual_checks', rule_nls['MANUAL_CHECKS']);
+
+    addInformationalLinks();
+
+    addMessages('rule_result_messages', rule_nls['RULE_RESULT_MESSAGES'], false);
+    addMessages('node_result_messages', rule_nls['NODE_RESULT_MESSAGES'], true);
+
+    json += prefix + "  }";
+
+    return json;
+
+  }
+}
+
 /* rules.js */
 
 /* Constants */
 new DebugLogging('Rules', false);
 
-let rules = [];
+const allRules = [];
 
-rules = rules.concat(colorRules);
+function addToRuleArray (ruleArray) {
+  ruleArray.forEach( r => {
+    allRules.push(new Rule(r));
+  });
+}
+
+addToRuleArray(colorRules$1);
 
 /* evaluationResult.js */
 
@@ -9572,7 +11742,7 @@ class EvaluationLibrary {
 
   evaluate (startingDoc, title='', url='') {
     let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(rules, domCache, title, url);
+    let evaluationResult = new EvaluationResult(allRules, domCache, title, url);
     if (debug.flag) {
       debug.log('EvaluationResult');
     }
