@@ -32,7 +32,7 @@ export const colorRules = {
         ELEMENT_MC_4:     'CCR of %1 is less than or equal to 3.1 for large and bolded text, but background image may improve color contrast.',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
-      PURPOSE:        [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
+      PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
                       ],
       TECHNIQUES:     [ 'Change the foreground color to a more complementary color to the background color.',
                         'Change the background color to a more complementary color to the foreground color.',
@@ -78,7 +78,7 @@ export const colorRules = {
       PAGE_RESULT_MESSAGES: {
         PAGE_MC_1: 'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
       },
-      PURPOSE:        [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',
                         'This requirement also includes references to color of content on page to identify some type of information, there should be redundant labeling of the content, for example using text labels to also identify and refer to the information.'
                       ],
       TECHNIQUES:     [ 'Provide redundant text labels for content presented in color, it the color is presenting meaningful information.',

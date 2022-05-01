@@ -136,7 +136,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$a = new DebugLogging('colorContrast', false);
+const debug$b = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -156,9 +156,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$a.flag) {
-      debug$a.separator();
-      debug$a.tag(elementNode);
+    if (debug$b.flag) {
+      debug$b.separator();
+      debug$b.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -182,11 +182,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$a.flag) {
-      debug$a.log(`[                    opacity]: ${this.opacity}`);
-      debug$a.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
-      debug$a.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$a.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$b.flag) {
+      debug$b.log(`[                    opacity]: ${this.opacity}`);
+      debug$b.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug$b.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$b.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -508,7 +508,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$9 = new DebugLogging('visibility', false);
+const debug$a = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -549,15 +549,15 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    if (debug$9.flag) {
-      debug$9.separator();
-      debug$9.tag(elementNode);
-      debug$9.log('[          isHidden]: ' + this.isHidden);
-      debug$9.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$9.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$9.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$9.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$9.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$a.flag) {
+      debug$a.separator();
+      debug$a.tag(elementNode);
+      debug$a.log('[          isHidden]: ' + this.isHidden);
+      debug$a.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$a.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$a.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$a.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$a.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5472,37 +5472,6 @@ function hasCheckedState (node) {
   return flag;
 }
 
-/**
- * @function transformElementMarkup
- *
- * @desc Converts element markup in strings to capitalized text
- *
- * @param {String}  elemStr - Element result message to convert content inside '@' to caps
- *
- * @return  String
- */
-
-function transformElementMarkup (elemResultStr) {
-  let newStr = "";
-  let transform_flag = false;
-
-  if (typeof elemResultStr === 'string') {
-    const len = elemResultStr.length;
-    for (let i = 0; i < len; i++) {
-      let c = elemResultStr[i];
-      if (c == '@') {
-        transform_flag = !transform_flag;
-        continue;
-      }
-      if (transform_flag)
-        newStr += c.toUpperCase();
-      else
-        newStr += c;
-    }
-  }
-  return newStr;
-}
-
 /* ariaValidation.js */
 
 /* Debug help functions */
@@ -5532,7 +5501,7 @@ function debugAttrs (attrs) {
 }
 
 /* Constants */
-const debug$8 = new DebugLogging('AriaValidation', false);
+const debug$9 = new DebugLogging('AriaValidation', false);
 
 /**
  * @class TokenInfo
@@ -5614,14 +5583,14 @@ class AriaValidation {
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
     this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
 
-    if (debug$8.flag) {
-      node.attributes.length && debug$8.log(`${node.outerHTML}`, 1);
-      debug$8.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$8.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$8.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$8.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$8.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$8.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$9.flag) {
+      node.attributes.length && debug$9.log(`${node.outerHTML}`, 1);
+      debug$9.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$9.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$9.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$9.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$9.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$9.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7267,7 +7236,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$7 = new DebugLogging('ariaInHtml', false);
+const debug$8 = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7429,11 +7398,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$7.flag) {
+  if (debug$8.flag) {
     if (tagName === 'h2') {
-      debug$7.tag(node);
+      debug$8.tag(node);
     }
-    debug$7.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$8.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8522,7 +8491,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$6 = new DebugLogging('DOMElement', true);
+const debug$7 = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -8710,12 +8679,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$6.flag) {
+    if (debug$7.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$6.domText(domItem, prefix);
+          debug$7.domText(domItem, prefix);
         } else {
-          debug$6.domElement(domItem, prefix);
+          debug$7.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -8794,7 +8763,7 @@ class DOMText {
 /* structureInfo.js */
 
 /* Constants */
-const debug$5 = new DebugLogging('structureInfo', false);
+const debug$6 = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -8816,8 +8785,8 @@ class LandmarkElement {
     this.childLandmarkElements = [];
     this.childHeadingDomElements = [];
 
-    if (debug$5.flag) {
-      debug$5.log('');
+    if (debug$6.flag) {
+      debug$6.log('');
     }
   }
 
@@ -8833,14 +8802,14 @@ class LandmarkElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$5.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
+    debug$6.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
     this.childLandmarkElements.forEach( le => {
-      debug$5.domElement(le.domElement, prefix);
+      debug$6.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
-    debug$5.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
+    debug$6.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
     this.childHeadingDomElements.forEach( h => {
-      debug$5.domElement(h, prefix);
+      debug$6.domElement(h, prefix);
     });
   }
 }
@@ -8860,7 +8829,7 @@ class StructureInfo {
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
 
-    if (debug$5.flag) ;
+    if (debug$6.flag) ;
   }
 
   /**
@@ -8972,18 +8941,18 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$5.flag) {
-      debug$5.log('== All Headings ==', 1);
+    if (debug$6.flag) {
+      debug$6.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$5.domElement(h);
+        debug$6.domElement(h);
       });
-      debug$5.log('== All Landmarks ==', 1);
+      debug$6.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$5.domElement(le.domElement);
+        debug$6.domElement(le.domElement);
       });
-      debug$5.log('== Structure Tree ==', 1);
+      debug$6.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$5.domElement(le.domElement);
+        debug$6.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -8993,7 +8962,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$4 = new DebugLogging('domCache', true);
+const debug$5 = new DebugLogging('domCache', false);
 
 
 const skipableElements = [
@@ -9071,7 +9040,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$4.flag) {
+    if (debug$5.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
     }
@@ -9213,18 +9182,18 @@ class DOMCache {
    * @desc  Used for debugging the DOMElement tree
    */
   showDomElementTree () {
-    debug$4.log(' === AllDomElements ===', true);
+    debug$5.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$4.domElement(de);
+      debug$5.domElement(de);
     });
 
-    debug$4.log(' === AllDomTexts ===', true);
+    debug$5.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$4.domText(dt);
+      debug$5.domText(dt);
     });
 
-    debug$4.log(' === DOMCache Tree ===', true);
-    debug$4.domElement(this.domCache);
+    debug$5.log(' === DOMCache Tree ===', true);
+    debug$5.domElement(this.domCache);
     this.domCache.showDomElementTree(' ');
   }
 
@@ -9233,7 +9202,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$3 = new DebugLogging('constants', false);
+const debug$4 = new DebugLogging('constants', false);
 
 /**
  * @constant RULE_CATEGORIES * @type Number
@@ -9524,13 +9493,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$3.flag && debug$3.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$4.flag && debug$4.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$3.flag && debug$3.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$4.flag && debug$4.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -9642,9 +9611,8 @@ const colorRules$1 = [
 /* common.js */
 
 const common = {
-  yes: 'Yes',
-  no: 'No',
-  elementResult: ['Undefined','P','H','MC','W','V'],
+  level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
+  elementResult: ['undefined','P','H','MC','W','V'],
   ruleScopes: ['undefined', 'element', 'page', 'website']
 };
 
@@ -10776,7 +10744,7 @@ const colorRules = {
         ELEMENT_MC_4:     'CCR of %1 is less than or equal to 3.1 for large and bolded text, but background image may improve color contrast.',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
-      PURPOSE:        [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
+      PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
                       ],
       TECHNIQUES:     [ 'Change the foreground color to a more complementary color to the background color.',
                         'Change the background color to a more complementary color to the foreground color.',
@@ -10822,7 +10790,7 @@ const colorRules = {
       PAGE_RESULT_MESSAGES: {
         PAGE_MC_1: 'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
       },
-      PURPOSE:        [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',
                         'This requirement also includes references to color of content on page to identify some type of information, there should be redundant labeling of the content, for example using text labels to also identify and refer to the information.'
                       ],
       TECHNIQUES:     [ 'Provide redundant text labels for content presented in color, it the color is presenting meaningful information.',
@@ -10860,7 +10828,7 @@ messages$1.rules = Object.assign(messages$1.rules, colorRules);
 /* locale.js */
 
 /* Constants */
-const debug$2 = new DebugLogging('locale', true);
+const debug$3 = new DebugLogging('locale', true);
 
 
 const messages = {
@@ -10868,7 +10836,29 @@ const messages = {
 };
 
 // Default language is 'en' for English
-let locale = 'en';
+var locale = 'en';
+
+/**
+ * @function getCommonMessage
+ *
+ * @desc Gets a string associated with strings in the common messages
+ *
+ * @param {String} id     - id is used as the key into the common messages
+ * @param {integer} value - If the key identifies an array the value is used to
+ *                          select a value from the array
+ */
+
+function getCommonMessage(id, value=0) {
+  let message = messages[locale].common[id];
+  if (Array.isArray(message)) {
+    message = message[value];
+  }
+  if (!message) {
+    message = `[common][error]: id="${id}"`;
+  }
+  debug$3.flag && debug$3.log(`[${id}][${value}]: ${message}`);
+  return message;
+}
 
 /**
  * @function getRuleCategoryInfo
@@ -10902,7 +10892,7 @@ function getRuleCategoryInfo(categoryId) {
  *       'url'
  *       'description'
  *
- * @param {Integer} categoryId - Used to idenitify the rule category
+ * @param {Integer} categoryId - Used to idenitify the WCAG guideline
  */
 
 function getGuidelineInfo(guidelineId) {
@@ -10912,17 +10902,80 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$2.flag && debug$2.log(`[getGuidelineInfo][${guidelineId}]: ` + guideline.title);
+        debug$3.flag && debug$3.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           title: guideline.title,
-          url: guideline.url_spec,
+          url: encodeURIComponent(guideline.url_spec),
           description: guideline.description
         }
       }
     }
   }
-  debug$2.flag && debug$2.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$3.flag && debug$3.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   return null;
+}
+
+/**
+ * @function getSuccessCriterionInfo
+ *
+ * @desc Gets a object with keys into strings with WCAG Success Criteria information,
+ *       keys are:
+ *       'level'
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {String} successCriteriaIds - Used to idenitify the rule category (e.g. P.G.SC)
+ *
+ * @return {Object} see @desc
+ */
+
+function getSuccessCriterionInfo(successCriterionId) {
+  const principles = messages[locale].wcag.principles;
+  for (const p in principles) {
+    const principle = principles[p];
+    for (const g in principle.guidelines) {
+      const guideline = principle.guidelines[g];
+      for (const sc in guideline.success_criteria) {
+        const success_criterion = guideline.success_criteria[sc];
+        if (sc === successCriterionId) {
+          debug$3.flag && debug$3.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          return {
+            level: success_criterion.level,
+            title: success_criterion.title,
+            url: encodeURIComponent(success_criterion.url_spec),
+            description: success_criterion.description
+          }
+        }
+      }
+    }
+  }
+  debug$3.flag && debug$3.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  return null;
+}
+
+/**
+ * @function getSuccessCriteriaInfo
+ *
+ * @desc Gets an array of objects, each object has a keys to a string with WCAG Success Criteria information,
+ *       keys are:
+ *       'level'
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Array of String} successCriteriaIds - An array of success criterion reference (e.g. P.G.SC)
+ *
+ * @return {Array od Objects} see @desc
+ */
+
+function getSuccessCriteriaInfo(successCriteriaIds) {
+  debug$3.flag && debug$3.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  const scInfoArray = [];
+  successCriteriaIds.forEach( sc => {
+    scInfoArray.push(getSuccessCriterionInfo(sc));
+  });
+  return scInfoArray;
 }
 
 /**
@@ -10964,7 +11017,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$2.flag && debug$2.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$3.flag && debug$3.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return messages[locale].rules[ruleId].DEFINITION;
 }
 
@@ -10979,8 +11032,8 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$2.flag && debug$2.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
-  return messages[locale].rules[ruleId].SUMMARY;
+  debug$3.flag && debug$3.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
 /**
@@ -10994,8 +11047,8 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$2.flag && debug$2.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
-  return messages[locale].rules[ruleId].TARGET_RESOURCES_DESC;
+  debug$3.flag && debug$3.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
 /**
@@ -11005,12 +11058,16 @@ function getTargetResourcesDesc (ruleId) {
  *
  * @param {String} ruleId - String id associated with the rule
  *
- * @returns {String} see @desc
+ * @returns {Array of Strings} see @desc
  */
 
 function getPurposes (ruleId) {
-  debug$2.flag && debug$2.log(`[getPurposes][${ruleId}]: ${messages[locale].rules[ruleId].PURPOSE.join('; ')}`);
-  return messages[locale].rules[ruleId].PURPOSE;
+  const purposes = [];
+  messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
+    purposes.push(transformElementMarkup(p));
+  });
+  debug$3.flag && debug$3.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  return purposes;
 }
 
 /**
@@ -11020,12 +11077,16 @@ function getPurposes (ruleId) {
  *
  * @param {String} ruleId - String id associated with the rule
  *
- * @returns {Array} see @desc
+ * @returns {Array of Strings} see @desc
  */
 
 function getTechniques (ruleId) {
-  debug$2.flag && debug$2.log(`[getTechniques][${ruleId}]: ${messages[locale].rules[ruleId].TECHNIQUES.join('; ')}`);
-  return messages[locale].rules[ruleId].TECHNIQUES;
+  const techniques = [];
+  messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
+    techniques.push(transformElementMarkup(t));
+  });
+  debug$3.flag && debug$3.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  return techniques;
 }
 
 /**
@@ -11043,7 +11104,19 @@ function getTechniques (ruleId) {
  */
 
 function getInformationLinks (ruleId) {
-  return messages[locale].rules[ruleId].INFORMATIONAL_LINKS;
+  const infoLinks = [];
+  messages[locale].rules[ruleId].INFORMATIONAL_LINKS.forEach( infoLink => {
+    infoLinks.push(
+      {
+        type: infoLink.type,
+        title: infoLink.title,
+        url: encodeURIComponent(infoLink.url)
+      }
+    );
+    debug$3.flag && debug$3.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$3.flag && debug$3.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
+  });
+  return infoLinks;
 }
 
 /**
@@ -11053,15 +11126,117 @@ function getInformationLinks (ruleId) {
  *
  * @param {String} ruleId - String id associated with the rule
  *
- * @returns {String} see @desc
+ * @returns {Array of Strings} see @desc
  */
 
 function getManualChecks (ruleId) {
-  debug$2.flag && debug$2.log(`[getManualChecks][${ruleId}]: ${messages[locale].rules[ruleId].MANUAL_CHECKS.join('; ')}`);
-  return messages[locale].rules[ruleId].MANUAL_CHECKS;
+  const manualChecks = [];
+  messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
+    manualChecks.push(transformElementMarkup(mc));
+  });
+  debug$3.flag && debug$3.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  return manualChecks;
+}
+
+/**
+ * @function getRuleResultMessages
+ *
+ * @desc Gets an array of localized strings for rule results
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array of Strings} see @desc
+ */
+
+function getRuleResultMessages (ruleId) {
+  const resultMessages = {};
+  const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    resultMessages[key] = transformElementMarkup(msgs[key]);
+    debug$3.flag && debug$3.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+  }
+  return resultMessages;
+}
+
+
+
+/**
+ * @function getPageResultMessages
+ *
+ * @desc Gets an array of localized strings for page results
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array of Strings} see @desc
+ */
+
+function getPageResultMessages (ruleId) {
+  const resultMessages = {};
+  const msgs = messages[locale].rules[ruleId].PAGE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    resultMessages[key] = transformElementMarkup(msgs[key]);
+    debug$3.flag && debug$3.log(`[getPageResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+  }
+  return resultMessages;
+}
+
+
+/**
+ * @function getElementResultMessages
+ *
+ * @desc Gets an array of localized strings for element results
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array of Strings} see @desc
+ */
+
+function getElementResultMessages (ruleId) {
+  const resultMessages = {};
+  const msgs = messages[locale].rules[ruleId].ELEMENT_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    resultMessages[key] = transformElementMarkup(msgs[key]);
+    debug$3.flag && debug$3.log(`[getElementResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+  }
+  return resultMessages;
+}
+
+
+/**
+ * @function transformElementMarkup
+ *
+ * @desc Converts element markup identified in strings with '@' characters will be capitalized text
+ *       or encapsulated within a code element.
+ *
+ * @param {String}   elemStr     - Element result message to convert content inside '@' to caps
+ * @param {Boolean}  useCodeTags - If true content between '@' characters will be encapsulated
+ *                                 in either a code element or if false or ommitted capitalized
+ * @return  String
+ */
+
+function transformElementMarkup (elemStr, useCodeTags=false) {
+  let newStr = "";
+  let transform_flag = false;
+
+  if (typeof elemStr === 'string') {
+    for (let c of elemStr) {
+      if (c === '@') {
+        transform_flag = !transform_flag;
+        if (useCodeTags) {
+          newStr += (transform_flag ? '<code>' : '</code>');
+        }
+        continue;
+      }
+      newStr += (transform_flag && !useCodeTags) ? c.toUpperCase() : c;
+    }
+  }
+  return newStr;
 }
 
 /* rule.js   */
+
+/* Constants */
+const debug$2 = new DebugLogging('Rule', true);
 
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
@@ -11079,23 +11254,25 @@ function getManualChecks (ruleId) {
 class Rule {
   constructor (rule_item) {
 
-    // Rule information that is NOT dependent locale
+    // Rule information that is NOT dependent on locale
     this.rule_id             = rule_item.rule_id; // String
     this.rule_required       = rule_item.rule_required; // Boolean
     this.rule_scope_id       = rule_item.rule_scope; // Integer
     this.rule_category_id    = rule_item.rule_category; // Integer
-    this.wcag_primary_id     = rule_item.wcag_primary_id; // String
-    this.wcag_related_ids    = rule_item.wcag_related_ids; // Array of strings
     this.last_updated        = rule_item.last_updated; // String
     this.target_resources    = rule_item.target_resources; // array of strings
-    this.primary_property    = rule_item.primary_property; // string
-    this.validate            = rule_item.validate;  // function
+    this.wcag_primary_id     = rule_item.wcag_primary_id;  // String (P.G.SC)
+    this.wcag_related_ids    = rule_item.wcag_related_ids; // Array of Strings (P.G.SC)
     this.wcag_guideline_id   = getGuidelineId(rule_item.wcag_primary_id); // Integer
+    this.validate            = rule_item.validate;  // function
 
     // Rule information that is locale dependent
     this.rule_category_info  = getRuleCategoryInfo(this.rule_category); // Object with keys to strings
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id); // String
+    this.wcag_primary        = getSuccessCriterionInfo(this.wcag_primary_id);
+    this.wcag_related        = getSuccessCriteriaInfo(this.wcag_related_ids);
+    this.wcag_level          = getCommonMessage('level', this.wcag_primary.level);
 
     this.rule_nls_id           = getRuleId(this.rule_id); // String
     this.summary               = getRuleSummary(this.rule_id); // String
@@ -11107,8 +11284,11 @@ class Rule {
     this.informational_links   = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
 
     // Localized messsages for evaluation results
-//    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
-//    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+    this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
+    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
+    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+
+    debug$2.flag && this.toJSON();
   }
 
   /**
@@ -11150,7 +11330,7 @@ class Rule {
   /**
    * @method getGuidelineInfo
    *
-   * @desc Get information about the WCAG 2.0 Guideline associated with the rule
+   * @desc Get information about the WCAG Guideline associated with the rule
    *
    * @return  {GuidelineInfo}  see description
    */
@@ -11214,44 +11394,10 @@ class Rule {
    *
    * @desc Gets the definition of the rule
    *
-   * @param {Boolean}  required  - True if rule is required
-   *
-   * @return {String} Localized string of the rule definition based on being
-   *                  required or recommended
+   * @return {String} Localized string of the rule definition
    */
-  getDefinition (required) {
-
-    var str = this.rule_nls['DEFINITION'];
-
-    var message;
-
-    var vstr;
-
-    if (str) {
-
-      vstr = "%s";
-
-      if (str.indexOf(vstr) >= 0) {
-
-       if (typeof required === 'boolean') {
-
-        if (required) message = this.common_nls.message_severities.MUST;
-        else message = this.common_nls.message_severities.SHOULD;
-
-       }
-       else {
-         // If no rule type is defined assume "must"
-          message = this.common_nls.message_severities.MUST + "/" + this.common_nls.message_severities.SHOULD;
-       }
-
-       str = str.replace(vstr, message);
-     }
-
-     return transformElementMarkup(str);
-   }
-
-   return "Definition not found for rule: " + this.rule_id;
-
+  getDefinition () {
+    return this.definition;
   }
 
   /**
@@ -11259,37 +11405,14 @@ class Rule {
    *
    * @desc Gets the summary of the rule
    *
-   * @param {Boolean}  required  - True if rule is required
-   *
-   * @return {String} Localized string of the rule summary based on being
-   *                  required or recommended
+   * @return {String} Localized string of the rule summary
    */
   getSummary (required) {
-    var str = this.rule_nls['SUMMARY'];
-    var message;
-    var vstr;
-    if (str) {
-      vstr = "%s";
-      if (str.indexOf(vstr) >= 0) {
-
-        if (typeof required === 'boolean') {
-          if (required) message = this.common_nls.message_severities.MUST;
-          else message = this.common_nls.message_severities.SHOULD;
-        }
-        else {
-          // If no rule type is defined assume "must"
-          message = this.common_nls.message_severities.MUST + "/" + this.common_nls.message_severities.SHOULD;
-        }
-        str = str.replace(vstr, message);
-      }
-      return transformElementMarkup(str);
-    }
-    return "Summary not found for rule: " + this.rule_id;
-
+    return this.summary;
   }
 
   /**
-   * @method getPurpose
+   * @method getPurposes
    *
    * @desc Gets an array strings representing the purpose, basically
    *       how does the rule help people with disabilities
@@ -11297,16 +11420,8 @@ class Rule {
    * @return  {Array}  Returns an array of localized string describing the purpose
    */
 
-  getPurpose () {
-    var list = this.rule_nls['PURPOSE'];
-    var new_list = [];
-    if (list && list.length) {
-      for (var i = 0; i < list.length; i++) {
-        new_list.push(transformElementMarkup(list[i]));
-      } // end for
-      return new_list;
-    }
-    return [];
+  getPurposes () {
+    return this.purposes;
   }
 
   /**
@@ -11319,9 +11434,7 @@ class Rule {
    */
 
   getTargetResourcesDescription () {
-    var target = this.rule_nls['TARGET_RESOURCES_DESC'];
-    if (target) return transformElementMarkup(target);
-    return "** Target resource description not defined";
+    return this.target_resources_desc;
   }
 
   /**
@@ -11335,36 +11448,8 @@ class Rule {
    */
 
   getTargetResources () {
-    if (this.target_resources) return this.target_resources;
-    return [];
+    return this.target_resources;
   }
-
-  /**
-   * @method getTargetResourcePrimaryProperty
-   *
-   * @desc Get the primary attribute or calculated property of element used to evaluate a rule
-   *
-   * @return  {String}  see description
-   */
-  getTargetResourcePrimaryProperty () {
-    if (typeof this.primary_property === 'string') return this.primary_property;
-    return "";
-  };
-
-
-  /**
-   * @method getTargetResourceSecondaryProperties
-   *
-   * @desc Get the attributes and calculated properties of element used to evaluate a rule
-   *
-   * @return  {Array}  Returns an array of strings identifying the calculated properties
-   *                   and/or attributes that the rule uses to evaluate the rule requirements
-   */
-  getTargetResourceSecondaryProperties () {
-    if (this.resource_properties) return this.resource_properties;
-    return [];
-  }
-
 
   /**
    * @method getTechniques
@@ -11374,20 +11459,7 @@ class Rule {
    * @return  {Array}  Array of InformationalLinkInfo objects
    */
   getTechniques () {
-    var list = this.rule_nls['TECHNIQUES'];
-    var new_list = [];
-    if (list && list.length) {
-      for (var i = 0; i < list.length; i++) {
-        var item = list[i];
-        var ref;
-        if (typeof item === 'string') ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.TECHNIQUE, item, "");
-        else ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.TECHNIQUE, item.title, item.url);
-
-        new_list.push(ref);
-      } // end for
-      return new_list;
-    }
-    return [];
+    return this.techniques;
   }
 
   /**
@@ -11400,24 +11472,7 @@ class Rule {
    */
 
   getManualCheckProcedures () {
-    var list = this.rule_nls['MANUAL_CHECKS'];
-    var new_list = [];
-
-    if (list && list.length) {
-
-      for (var i = 0; i < list.length; i++) {
-        var item = list[i];
-        var ref;
-
-        if (typeof item === 'string') ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.MANUAL_CHECK, item, "");
-        else ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.MANUAL_CHECK, item.title, item.url);
-
-        new_list.push(ref);
-      } // end for
-      return new_list;
-    }
-    return [];
-
+    return this.manual_checks;
   }
 
   /**
@@ -11446,24 +11501,13 @@ class Rule {
    */
 
   getInformationalLinks () {
-    var list = this.rule_nls['INFORMATIONAL_LINKS'];
-    var new_list = [];
-    if (list && list.length) {
-
-      for (var i = 0; i < list.length; i++) {
-        var link = list[i];
-        var ref = new OpenAjax.a11y.info.InformationalLinkInfo(link.type, link.title, link.url);
-        new_list.push(ref);
-      } // end for
-      return new_list;
-    }
-    return [];
+    return this.informationa_links;
   }
 
   /**
    * @method getPrimarySuccessCriterion
    *
-   * @desc Get id of the primary WCAG 2.0 Success Criteria for the rule
+   * @desc Get id of the primary WCAG Success Criteria for the rule
    *
    * @return  {Number}  see description
    */
@@ -11475,48 +11519,39 @@ class Rule {
   /**
    * @method getPrimarySuccessCriterionNLS
    *
-   * @desc Get information about primary WCAG 2.0 Success Criteria for the rule
+   * @desc Get information about primary WCAG Success Criteria for the rule
    *
    * @return  {SuccessCriterionInfo}  Object representing information about the SC
    */
 
   getPrimarySuccessCriterionNLS () {
-    var info = new OpenAjax.a11y.info.SuccessCriterionInfo(this.wcag_primary_id);
-    return info;
+    return this.wcag_primary;
   }
 
   /**
    * @method getRelatedSuccessCriteria
    *
-   * @desc Get information about the related WCAG 2.0 Success Criteria for the rule
+   * @desc Get information about the related WCAG Success Criteria for the rule
    *
    * @return  {Array}  Array of SuccessCriterionInfo objects
    */
 
   getRelatedSuccessCriteria () {
-    var list = [];
-    var ids = this.wcag_related_ids;
-    var ids_len = ids.length;
-    for (var i = 0; i < ids_len; i++) {
-      var id = ids[i];
-      var ref = new OpenAjax.a11y.info.SuccessCriterionInfo(id);
-      list.push(ref);
-    }
-    return list;
+    return this.wcag_related;
   }
 
   /**
    * @method getWCAGLevel
    *
-   * @desc Get the string representation of the the WCAG 2.0 Success Criterion Level
+   * @desc Get the string representation of the the WCAG Success Criterion Level
    *       based on the primary id of the rule
    *
-   * @return  {String}  String representing the WCAG 2.0 success criterion level
+   * @return  {String}  String representing the WCAG success criterion level
    *                    (i.e. A, AA or AAA)
    */
 
   getWCAGLevel () {
-    return this.getPrimarySuccessCriterion().level_nls;
+    return this.wcag_level;
   }
 
   /**
@@ -11524,184 +11559,67 @@ class Rule {
    *
    * @desc Returns a JSON representation of the rule
    *
-   * @param  {String}   prefix    - String of leading spaces for formatting JSON output (Optional)
-   * @param  {Boolean}  required  - Required is needed for adjusting definition and summary strings to ruleset
-   *                                requirements
-   *
    * @return  {String}  Returns a JSON representation of the rule
    */
 
-  toJSON (prefix, required) {
+  toJSON () {
 
-    function stringItem(property, value, last) {
-      if (typeof value === 'string') json += prefix + "    \"" + property + "\" : " + JSON.stringify(value);
-      else json += prefix + "    \"" + property + "\" : \"\"";
+    const ruleInfo = {
+      last_updated: this.last_updated,
 
-      if (last) json += "\n";
-      else json += ",\n";
-    }
+      rule_id:      this.rule_id,
+      rule_nls_id:  this.rule_nls_id,
+      summary:      this.summary,
+      definition:   this.definition,
 
-    function numberItem(property, value, last) {
-      json += prefix + "    \"" + property + "\" : " + value;
+      rule_required:  this.rule_required,
 
-      if (last) json += "\n";
-      else json += ",\n";
-    }
+      target_resources_desc:  this.target_resources_desc,
 
-    function stringListItem(property, list, last) {
-      json += prefix + "    \"" + property + "\" : [";
+      rule_scope_id:  this.rule_scope_id,
+      rule_scope:     this.rule_scope,
+      rule_category_id:   this.rule_category_id,
+      rule_category_info: this.rule_category_info,
+      wcag_guideline_id:  this.wcag_guideline_id,
+      guideline_info:     this.guideline_info,
 
-      if (list && list.length) {
-        var last_item = list.length - 1;
-        for (var i = 0; i < list.length; i++) {
-          if (last_item === i) json += JSON.stringify(list[i]);
-          else json += JSON.stringify(list[i]) + ",";
-        }
-      }
+      target_resources:  this.target_resources,
 
-      if (last) json += "]\n";
-      else json += "],\n";
-    }
+      wcag_primary_id:  this.wcag_primary_id,
+      wcag_primary:     this.wcag_primary,
+      wcag_level:       this.wcag_level,
 
-    function addListOfStrings(name, list, last) {
+      wcag_related_ids: this.wcag_related_ids,
+      wcag_related:     this.wcag_related,
 
-      json += prefix + "    \"" + name + "\" : [\n";
+      purposes:       this.purposes,
+      techniques:     this.techniques,
+      manual_checks:  this.manual_checks,
 
-      if (list && list.length) {
-        var last_item = list.length - 1;
-        for (var i = 0; i < list.length; i++) {
-          if (last_item === i) json += "          " + JSON.stringify(list[i]) + "\n";
-          else json += "          " + JSON.stringify(list[i]) + ",\n";
-        }
-      }
+      informational_links:    this.informational_links
+    };
 
-      if (last) json += prefix + "    ]\n";
-      else json += prefix + "    ],\n";
-
-    }
-
-
-
-    function addInformationalLinks(last) {
-
-      function addReferenceItem(reference, last) {
-
-        json += prefix + "      { \"type\"  : "   + reference['type']  + ",\n";
-        json += prefix + "        \"title\" : " + JSON.stringify(reference['title']) + ",\n";
-        json += prefix + "        \"url\"   : " + JSON.stringify(reference['url'])   + "\n";
-
-        if (last) json += prefix + "      }\n";
-        else json += prefix + "      },\n";
-
-      }
-
-      json += prefix + "    \"informational_links\" : [\n";
-
-      var info_links = rule_nls['INFORMATIONAL_LINKS'];
-
-      if (info_links && info_links.length) {
-        var last_item = info_links.length - 1;
-        for (var i = 0; i < info_links.length; i++) {
-          if (last_item === i) addReferenceItem(info_links[i], true);
-          else addReferenceItem(info_links[i], false);
-        }
-      }
-
-      if (last) json += prefix + "    ]\n";
-      else json += prefix + "    ],\n";
-
-    }
-
-    function addMessages(name, list, last) {
-
-      json += prefix + "    \"" + name + "\" : {\n";
-
-      if (list) {
-        var first = true;
-        for (var item in list) {
-          if (first) json += "           " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
-          else json += ",\n          " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
-          first = false;
-        }
-      }
-
-      if (last) json += "\n" + prefix + "    }\n";
-      else json += "\n" + prefix + "    },\n";
-
-    }
-
-
-
-
-    if (typeof prefix !== 'string') prefix = "";
-
-    var json = "";
-
-    var rule_nls = this.rule_nls;
-
-    json += prefix + "  {\n";
-
-    stringItem(    'rule_id',             this.rule_id);
-    numberItem(    'rule_scope',          this.getScope());
-  //  stringItem(    'rule_scope_nls',      this.getScopeNLS());
-    numberItem(    'rule_category',       this.getCategory());
-    stringItem(    'rule_category_nls',   this.getCategoryInfo().title);
-    numberItem(    'rule_group',          this.getGroup());
-    stringItem(    'rule_group_nls',      this.getGroupNLS());
-    stringItem(    'wcag_primary',        this.wcag_primary_id);
-    stringListItem('wcag_related',        this.wcag_related_ids);
-    stringItem(    'last_updated',        this.last_updated);
-    stringListItem('target_resources',    this.target_resources);
-    stringItem(    'language_dependency', this.language_dependency);
-    stringItem(    'primary_property',    this.primary_property);
-    stringListItem('resource_properties', this.resource_properties);
-    stringItem(    'validate',            this.validate.toString());
-
-    stringItem('nls_rule_id', rule_nls['ID']);
-
-    if (typeof required === 'boolean') {
-      stringItem('definition', this.getRuleDefinition(required));
-      stringItem('summary', this.getRuleSummary(required));
-    }
-    else {
-      stringItem('definition', rule_nls['DEFINITION']);
-      stringItem('summary', rule_nls['SUMMARY']);
-    }
-
-    stringItem('target_resource_desc', rule_nls['TARGET_RESOURCES_DESC']);
-
-    addListOfStrings('purpose',       rule_nls['PURPOSE']);
-
-    addListOfStrings('techniques',    rule_nls['TECHNIQUES']);
-
-    addListOfStrings('manual_checks', rule_nls['MANUAL_CHECKS']);
-
-    addInformationalLinks();
-
-    addMessages('rule_result_messages', rule_nls['RULE_RESULT_MESSAGES'], false);
-    addMessages('node_result_messages', rule_nls['NODE_RESULT_MESSAGES'], true);
-
-    json += prefix + "  }";
-
+    const json = JSON.stringify(ruleInfo, null, '  ');
+    debug$2.flag && debug$2.log(`[JSON]: ${json}`);
     return json;
 
   }
 }
 
-/* rules.js */
+/* allRules.js */
 
 /* Constants */
 new DebugLogging('Rules', false);
 
 const allRules = [];
 
-function addToRuleArray (ruleArray) {
+function addToArray (ruleArray) {
   ruleArray.forEach( r => {
     allRules.push(new Rule(r));
   });
 }
 
-addToRuleArray(colorRules$1);
+addToArray(colorRules$1);
 
 /* evaluationResult.js */
 

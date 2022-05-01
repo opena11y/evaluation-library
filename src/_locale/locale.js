@@ -5,15 +5,20 @@ import DebugLogging  from '../debug.js';
 
 export {
   getCommonMessage,
+  getElementResultMessages,
   getGuidelineInfo,
   getInformationLinks,
   getManualChecks,
+  getPageResultMessages,
   getPurposes,
   getRuleCategoryInfo,
   getRuleDefinition,
   getRuleId,
+  getRuleResultMessages,
   getRuleSummary,
   getScope,
+  getSuccessCriteriaInfo,
+  getSuccessCriterionInfo,
   getTargetResourcesDesc,
   getTechniques,
   setLocale
@@ -28,10 +33,10 @@ export const messages = {
 };
 
 // Default language is 'en' for English
-let locale = 'en';
+var locale = 'en';
 
 /**
- * @function getId
+ * @function setLocale
  *
  * @desc Set the language for message strings, default is English
  *
@@ -50,16 +55,37 @@ function setLocale(lang='en') {
 /**
  * @function getCommonMessage
  *
- * @desc Gets a string associates with strings in the common messages
+ * @desc Gets a string associated with strings in the common messages
  *
- * @param {String} id - id is used as the key into the common messages
+ * @param {String} id     - id is used as the key into the common messages
+ * @param {integer} value - If the key identifies an array the value is used to
+ *                          select a value from the array
  */
 
-function getCommonMessage(id) {
+function getCommonMessage(id, value=0) {
   let message = messages[locale].common[id];
+  if (Array.isArray(message)) {
+    message = message[value];
+  }
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
+  debug.flag && debug.log(`[${id}][${value}]: ${message}`);
+  return message;
+}
+
+/**
+ * @function getImplementationValue
+ *
+ * @desc Gets a localized string description for a implementation level
+ *
+ * @param {integer} implementationId - If the id is an index into an array
+ *                                     of strings
+ */
+
+function getImplementationValue(implementationId) {
+  let message = messages[locale].common.implementationValues[implementationId];
+  debug.flag && debug.log(`[getImplementationValue][${implementatinId}]: ${message}`);
   return message;
 }
 
@@ -95,7 +121,7 @@ function getRuleCategoryInfo(categoryId) {
  *       'url'
  *       'description'
  *
- * @param {Integer} categoryId - Used to idenitify the rule category
+ * @param {Integer} categoryId - Used to idenitify the WCAG guideline
  */
 
 function getGuidelineInfo(guidelineId) {
@@ -105,10 +131,10 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug.flag && debug.log(`[getGuidelineInfo][${guidelineId}]: ` + guideline.title);
+        debug.flag && debug.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           title: guideline.title,
-          url: guideline.url_spec,
+          url: encodeURIComponent(guideline.url_spec),
           description: guideline.description
         }
       }
@@ -116,6 +142,69 @@ function getGuidelineInfo(guidelineId) {
   }
   debug.flag && debug.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   return null;
+}
+
+/**
+ * @function getSuccessCriterionInfo
+ *
+ * @desc Gets a object with keys into strings with WCAG Success Criteria information,
+ *       keys are:
+ *       'level'
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {String} successCriteriaIds - Used to idenitify the rule category (e.g. P.G.SC)
+ *
+ * @return {Object} see @desc
+ */
+
+function getSuccessCriterionInfo(successCriterionId) {
+  const principles = messages[locale].wcag.principles;
+  for (const p in principles) {
+    const principle = principles[p];
+    for (const g in principle.guidelines) {
+      const guideline = principle.guidelines[g];
+      for (const sc in guideline.success_criteria) {
+        const success_criterion = guideline.success_criteria[sc];
+        if (sc === successCriterionId) {
+          debug.flag && debug.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          return {
+            level: success_criterion.level,
+            title: success_criterion.title,
+            url: encodeURIComponent(success_criterion.url_spec),
+            description: success_criterion.description
+          }
+        }
+      }
+    }
+  }
+  debug.flag && debug.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  return null;
+}
+
+/**
+ * @function getSuccessCriteriaInfo
+ *
+ * @desc Gets an array of objects, each object has a keys to a string with WCAG Success Criteria information,
+ *       keys are:
+ *       'level'
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Array of String} successCriteriaIds - An array of success criterion reference (e.g. P.G.SC)
+ *
+ * @return {Array od Objects} see @desc
+ */
+
+function getSuccessCriteriaInfo(successCriteriaIds) {
+  debug.flag && debug.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  const scInfoArray = []
+  successCriteriaIds.forEach( sc => {
+    scInfoArray.push(getSuccessCriterionInfo(sc));
+  })
+  return scInfoArray;
 }
 
 /**
@@ -173,7 +262,7 @@ function getRuleDefinition (ruleId) {
 
 function getRuleSummary (ruleId) {
   debug.flag && debug.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
-  return messages[locale].rules[ruleId].SUMMARY;
+  return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
 /**
@@ -188,7 +277,7 @@ function getRuleSummary (ruleId) {
 
 function getTargetResourcesDesc (ruleId) {
   debug.flag && debug.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
-  return messages[locale].rules[ruleId].TARGET_RESOURCES_DESC;
+  return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
 /**
@@ -198,12 +287,16 @@ function getTargetResourcesDesc (ruleId) {
  *
  * @param {String} ruleId - String id associated with the rule
  *
- * @returns {String} see @desc
+ * @returns {Array of Strings} see @desc
  */
 
 function getPurposes (ruleId) {
-  debug.flag && debug.log(`[getPurposes][${ruleId}]: ${messages[locale].rules[ruleId].PURPOSE.join('; ')}`);
-  return messages[locale].rules[ruleId].PURPOSE;
+  const purposes = [];
+  messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
+    purposes.push(transformElementMarkup(p));
+  })
+  debug.flag && debug.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  return purposes;
 }
 
 /**
@@ -213,12 +306,16 @@ function getPurposes (ruleId) {
  *
  * @param {String} ruleId - String id associated with the rule
  *
- * @returns {Array} see @desc
+ * @returns {Array of Strings} see @desc
  */
 
 function getTechniques (ruleId) {
-  debug.flag && debug.log(`[getTechniques][${ruleId}]: ${messages[locale].rules[ruleId].TECHNIQUES.join('; ')}`);
-  return messages[locale].rules[ruleId].TECHNIQUES;
+  const techniques = [];
+  messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
+    techniques.push(transformElementMarkup(t));
+  })
+  debug.flag && debug.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  return techniques;
 }
 
 /**
@@ -236,7 +333,19 @@ function getTechniques (ruleId) {
  */
 
 function getInformationLinks (ruleId) {
-  return messages[locale].rules[ruleId].INFORMATIONAL_LINKS;
+  const infoLinks = [];
+  messages[locale].rules[ruleId].INFORMATIONAL_LINKS.forEach( infoLink => {
+    infoLinks.push(
+      {
+        type: infoLink.type,
+        title: infoLink.title,
+        url: encodeURIComponent(infoLink.url)
+      }
+    );
+    debug.flag && debug.log(`[infoLink][title]: ${infoLink.title}`);
+    debug.flag && debug.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
+  })
+  return infoLinks;
 }
 
 /**
@@ -246,11 +355,110 @@ function getInformationLinks (ruleId) {
  *
  * @param {String} ruleId - String id associated with the rule
  *
- * @returns {String} see @desc
+ * @returns {Array of Strings} see @desc
  */
 
 function getManualChecks (ruleId) {
-  debug.flag && debug.log(`[getManualChecks][${ruleId}]: ${messages[locale].rules[ruleId].MANUAL_CHECKS.join('; ')}`);
-  return messages[locale].rules[ruleId].MANUAL_CHECKS;
+  const manualChecks = [];
+  messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
+    manualChecks.push(transformElementMarkup(mc));
+  })
+  debug.flag && debug.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  return manualChecks;
+}
+
+/**
+ * @function getRuleResultMessages
+ *
+ * @desc Gets an array of localized strings for rule results
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array of Strings} see @desc
+ */
+
+function getRuleResultMessages (ruleId) {
+  const resultMessages = {};
+  const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    resultMessages[key] = transformElementMarkup(msgs[key]);
+    debug.flag && debug.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+  }
+  return resultMessages;
+}
+
+
+
+/**
+ * @function getPageResultMessages
+ *
+ * @desc Gets an array of localized strings for page results
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array of Strings} see @desc
+ */
+
+function getPageResultMessages (ruleId) {
+  const resultMessages = {};
+  const msgs = messages[locale].rules[ruleId].PAGE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    resultMessages[key] = transformElementMarkup(msgs[key]);
+    debug.flag && debug.log(`[getPageResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+  }
+  return resultMessages;
+}
+
+
+/**
+ * @function getElementResultMessages
+ *
+ * @desc Gets an array of localized strings for element results
+ *
+ * @param {String} ruleId - String id associated with the rule
+ *
+ * @returns {Array of Strings} see @desc
+ */
+
+function getElementResultMessages (ruleId) {
+  const resultMessages = {};
+  const msgs = messages[locale].rules[ruleId].ELEMENT_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    resultMessages[key] = transformElementMarkup(msgs[key]);
+    debug.flag && debug.log(`[getElementResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+  }
+  return resultMessages;
+}
+
+
+/**
+ * @function transformElementMarkup
+ *
+ * @desc Converts element markup identified in strings with '@' characters will be capitalized text
+ *       or encapsulated within a code element.
+ *
+ * @param {String}   elemStr     - Element result message to convert content inside '@' to caps
+ * @param {Boolean}  useCodeTags - If true content between '@' characters will be encapsulated
+ *                                 in either a code element or if false or ommitted capitalized
+ * @return  String
+ */
+
+function transformElementMarkup (elemStr, useCodeTags=false) {
+  let newStr = "";
+  let transform_flag = false;
+
+  if (typeof elemStr === 'string') {
+    for (let c of elemStr) {
+      if (c === '@') {
+        transform_flag = !transform_flag;
+        if (useCodeTags) {
+          newStr += (transform_flag ? '<code>' : '</code>');
+        }
+        continue;
+      }
+      newStr += (transform_flag && !useCodeTags) ? c.toUpperCase() : c;
+    }
+  }
+  return newStr;
 }
 

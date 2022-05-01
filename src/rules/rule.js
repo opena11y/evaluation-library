@@ -6,22 +6,28 @@ import {
 
 import {
   getCommonMessage,
+  getElementResultMessages,
   getGuidelineInfo,
   getInformationLinks,
   getManualChecks,
+  getPageResultMessages,
   getPurposes,
   getRuleCategoryInfo,
   getRuleId,
   getRuleDefinition,
+  getRuleResultMessages,
   getRuleSummary,
+  getSuccessCriteriaInfo,
+  getSuccessCriterionInfo,
   getTargetResourcesDesc,
   getTechniques,
   getScope
 } from '../_locale/locale.js';
 
-import {
-  transformElementMarkup
-} from '../utils.js';
+import DebugLogging from '../debug.js';
+
+/* Constants */
+const debug = new DebugLogging('Rule', true);
 
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
@@ -39,23 +45,25 @@ import {
 export default class Rule {
   constructor (rule_item) {
 
-    // Rule information that is NOT dependent locale
+    // Rule information that is NOT dependent on locale
     this.rule_id             = rule_item.rule_id; // String
     this.rule_required       = rule_item.rule_required; // Boolean
     this.rule_scope_id       = rule_item.rule_scope; // Integer
     this.rule_category_id    = rule_item.rule_category; // Integer
-    this.wcag_primary_id     = rule_item.wcag_primary_id; // String
-    this.wcag_related_ids    = rule_item.wcag_related_ids; // Array of strings
     this.last_updated        = rule_item.last_updated; // String
     this.target_resources    = rule_item.target_resources; // array of strings
-    this.primary_property    = rule_item.primary_property; // string
-    this.validate            = rule_item.validate;  // function
+    this.wcag_primary_id     = rule_item.wcag_primary_id  // String (P.G.SC)
+    this.wcag_related_ids    = rule_item.wcag_related_ids // Array of Strings (P.G.SC)
     this.wcag_guideline_id   = getGuidelineId(rule_item.wcag_primary_id); // Integer
+    this.validate            = rule_item.validate;  // function
 
     // Rule information that is locale dependent
     this.rule_category_info  = getRuleCategoryInfo(this.rule_category); // Object with keys to strings
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id) // String
+    this.wcag_primary        = getSuccessCriterionInfo(this.wcag_primary_id);
+    this.wcag_related        = getSuccessCriteriaInfo(this.wcag_related_ids);
+    this.wcag_level          = getCommonMessage('level', this.wcag_primary.level);
 
     this.rule_nls_id           = getRuleId(this.rule_id); // String
     this.summary               = getRuleSummary(this.rule_id); // String
@@ -67,8 +75,11 @@ export default class Rule {
     this.informational_links   = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
 
     // Localized messsages for evaluation results
-//    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
-//    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+    this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
+    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
+    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+
+    debug.flag && this.toJSON();
   }
 
   /**
@@ -110,7 +121,7 @@ export default class Rule {
   /**
    * @method getGuidelineInfo
    *
-   * @desc Get information about the WCAG 2.0 Guideline associated with the rule
+   * @desc Get information about the WCAG Guideline associated with the rule
    *
    * @return  {GuidelineInfo}  see description
    */
@@ -174,44 +185,10 @@ export default class Rule {
    *
    * @desc Gets the definition of the rule
    *
-   * @param {Boolean}  required  - True if rule is required
-   *
-   * @return {String} Localized string of the rule definition based on being
-   *                  required or recommended
+   * @return {String} Localized string of the rule definition
    */
-  getDefinition (required) {
-
-    var str = this.rule_nls['DEFINITION'];
-
-    var message;
-
-    var vstr;
-
-    if (str) {
-
-      vstr = "%s";
-
-      if (str.indexOf(vstr) >= 0) {
-
-       if (typeof required === 'boolean') {
-
-        if (required) message = this.common_nls.message_severities.MUST;
-        else message = this.common_nls.message_severities.SHOULD;
-
-       }
-       else {
-         // If no rule type is defined assume "must"
-          message = this.common_nls.message_severities.MUST + "/" + this.common_nls.message_severities.SHOULD;
-       }
-
-       str = str.replace(vstr, message);
-     }
-
-     return transformElementMarkup(str);
-   }
-
-   return "Definition not found for rule: " + this.rule_id;
-
+  getDefinition () {
+    return this.definition;
   }
 
   /**
@@ -219,37 +196,14 @@ export default class Rule {
    *
    * @desc Gets the summary of the rule
    *
-   * @param {Boolean}  required  - True if rule is required
-   *
-   * @return {String} Localized string of the rule summary based on being
-   *                  required or recommended
+   * @return {String} Localized string of the rule summary
    */
   getSummary (required) {
-    var str = this.rule_nls['SUMMARY'];
-    var message;
-    var vstr;
-    if (str) {
-      vstr = "%s";
-      if (str.indexOf(vstr) >= 0) {
-
-        if (typeof required === 'boolean') {
-          if (required) message = this.common_nls.message_severities.MUST;
-          else message = this.common_nls.message_severities.SHOULD;
-        }
-        else {
-          // If no rule type is defined assume "must"
-          message = this.common_nls.message_severities.MUST + "/" + this.common_nls.message_severities.SHOULD;
-        }
-        str = str.replace(vstr, message);
-      }
-      return transformElementMarkup(str);
-    }
-    return "Summary not found for rule: " + this.rule_id;
-
+    return this.summary;
   }
 
   /**
-   * @method getPurpose
+   * @method getPurposes
    *
    * @desc Gets an array strings representing the purpose, basically
    *       how does the rule help people with disabilities
@@ -257,16 +211,8 @@ export default class Rule {
    * @return  {Array}  Returns an array of localized string describing the purpose
    */
 
-  getPurpose () {
-    var list = this.rule_nls['PURPOSE'];
-    var new_list = [];
-    if (list && list.length) {
-      for (var i = 0; i < list.length; i++) {
-        new_list.push(transformElementMarkup(list[i]));
-      } // end for
-      return new_list;
-    }
-    return [];
+  getPurposes () {
+    return this.purposes;
   }
 
   /**
@@ -279,9 +225,7 @@ export default class Rule {
    */
 
   getTargetResourcesDescription () {
-    var target = this.rule_nls['TARGET_RESOURCES_DESC'];
-    if (target) return transformElementMarkup(target);
-    return "** Target resource description not defined";
+    return this.target_resources_desc;
   }
 
   /**
@@ -295,36 +239,8 @@ export default class Rule {
    */
 
   getTargetResources () {
-    if (this.target_resources) return this.target_resources;
-    return [];
+    return this.target_resources;
   }
-
-  /**
-   * @method getTargetResourcePrimaryProperty
-   *
-   * @desc Get the primary attribute or calculated property of element used to evaluate a rule
-   *
-   * @return  {String}  see description
-   */
-  getTargetResourcePrimaryProperty () {
-    if (typeof this.primary_property === 'string') return this.primary_property;
-    return "";
-  };
-
-
-  /**
-   * @method getTargetResourceSecondaryProperties
-   *
-   * @desc Get the attributes and calculated properties of element used to evaluate a rule
-   *
-   * @return  {Array}  Returns an array of strings identifying the calculated properties
-   *                   and/or attributes that the rule uses to evaluate the rule requirements
-   */
-  getTargetResourceSecondaryProperties () {
-    if (this.resource_properties) return this.resource_properties;
-    return [];
-  }
-
 
   /**
    * @method getTechniques
@@ -334,20 +250,7 @@ export default class Rule {
    * @return  {Array}  Array of InformationalLinkInfo objects
    */
   getTechniques () {
-    var list = this.rule_nls['TECHNIQUES'];
-    var new_list = [];
-    if (list && list.length) {
-      for (var i = 0; i < list.length; i++) {
-        var item = list[i];
-        var ref;
-        if (typeof item === 'string') ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.TECHNIQUE, item, "");
-        else ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.TECHNIQUE, item.title, item.url);
-
-        new_list.push(ref);
-      } // end for
-      return new_list;
-    }
-    return [];
+    return this.techniques;
   }
 
   /**
@@ -360,24 +263,7 @@ export default class Rule {
    */
 
   getManualCheckProcedures () {
-    var list = this.rule_nls['MANUAL_CHECKS'];
-    var new_list = [];
-
-    if (list && list.length) {
-
-      for (var i = 0; i < list.length; i++) {
-        var item = list[i];
-        var ref;
-
-        if (typeof item === 'string') ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.MANUAL_CHECK, item, "");
-        else ref = new OpenAjax.a11y.info.InformationalLinkInfo(OpenAjax.a11y.REFERENCES.MANUAL_CHECK, item.title, item.url);
-
-        new_list.push(ref);
-      } // end for
-      return new_list;
-    }
-    return [];
-
+    return this.manual_checks;
   }
 
   /**
@@ -406,24 +292,13 @@ export default class Rule {
    */
 
   getInformationalLinks () {
-    var list = this.rule_nls['INFORMATIONAL_LINKS'];
-    var new_list = [];
-    if (list && list.length) {
-
-      for (var i = 0; i < list.length; i++) {
-        var link = list[i];
-        var ref = new OpenAjax.a11y.info.InformationalLinkInfo(link.type, link.title, link.url);
-        new_list.push(ref);
-      } // end for
-      return new_list;
-    }
-    return [];
+    return this.informationa_links;
   }
 
   /**
    * @method getPrimarySuccessCriterion
    *
-   * @desc Get id of the primary WCAG 2.0 Success Criteria for the rule
+   * @desc Get id of the primary WCAG Success Criteria for the rule
    *
    * @return  {Number}  see description
    */
@@ -435,48 +310,39 @@ export default class Rule {
   /**
    * @method getPrimarySuccessCriterionNLS
    *
-   * @desc Get information about primary WCAG 2.0 Success Criteria for the rule
+   * @desc Get information about primary WCAG Success Criteria for the rule
    *
    * @return  {SuccessCriterionInfo}  Object representing information about the SC
    */
 
   getPrimarySuccessCriterionNLS () {
-    var info = new OpenAjax.a11y.info.SuccessCriterionInfo(this.wcag_primary_id);
-    return info;
+    return this.wcag_primary;
   }
 
   /**
    * @method getRelatedSuccessCriteria
    *
-   * @desc Get information about the related WCAG 2.0 Success Criteria for the rule
+   * @desc Get information about the related WCAG Success Criteria for the rule
    *
    * @return  {Array}  Array of SuccessCriterionInfo objects
    */
 
   getRelatedSuccessCriteria () {
-    var list = [];
-    var ids = this.wcag_related_ids;
-    var ids_len = ids.length;
-    for (var i = 0; i < ids_len; i++) {
-      var id = ids[i];
-      var ref = new OpenAjax.a11y.info.SuccessCriterionInfo(id);
-      list.push(ref);
-    }
-    return list;
+    return this.wcag_related;
   }
 
   /**
    * @method getWCAGLevel
    *
-   * @desc Get the string representation of the the WCAG 2.0 Success Criterion Level
+   * @desc Get the string representation of the the WCAG Success Criterion Level
    *       based on the primary id of the rule
    *
-   * @return  {String}  String representing the WCAG 2.0 success criterion level
+   * @return  {String}  String representing the WCAG success criterion level
    *                    (i.e. A, AA or AAA)
    */
 
   getWCAGLevel () {
-    return this.getPrimarySuccessCriterion().level_nls;
+    return this.wcag_level;
   }
 
   /**
@@ -484,165 +350,48 @@ export default class Rule {
    *
    * @desc Returns a JSON representation of the rule
    *
-   * @param  {String}   prefix    - String of leading spaces for formatting JSON output (Optional)
-   * @param  {Boolean}  required  - Required is needed for adjusting definition and summary strings to ruleset
-   *                                requirements
-   *
    * @return  {String}  Returns a JSON representation of the rule
    */
 
-  toJSON (prefix, required) {
+  toJSON () {
 
-    function stringItem(property, value, last) {
-      if (typeof value === 'string') json += prefix + "    \"" + property + "\" : " + JSON.stringify(value);
-      else json += prefix + "    \"" + property + "\" : \"\"";
+    const ruleInfo = {
+      last_updated: this.last_updated,
 
-      if (last) json += "\n";
-      else json += ",\n";
-    }
+      rule_id:      this.rule_id,
+      rule_nls_id:  this.rule_nls_id,
+      summary:      this.summary,
+      definition:   this.definition,
 
-    function numberItem(property, value, last) {
-      json += prefix + "    \"" + property + "\" : " + value;
+      rule_required:  this.rule_required,
 
-      if (last) json += "\n";
-      else json += ",\n";
-    }
+      target_resources_desc:  this.target_resources_desc,
 
-    function stringListItem(property, list, last) {
-      json += prefix + "    \"" + property + "\" : [";
+      rule_scope_id:  this.rule_scope_id,
+      rule_scope:     this.rule_scope,
+      rule_category_id:   this.rule_category_id,
+      rule_category_info: this.rule_category_info,
+      wcag_guideline_id:  this.wcag_guideline_id,
+      guideline_info:     this.guideline_info,
 
-      if (list && list.length) {
-        var last_item = list.length - 1;
-        for (var i = 0; i < list.length; i++) {
-          if (last_item === i) json += JSON.stringify(list[i]);
-          else json += JSON.stringify(list[i]) + ",";
-        }
-      }
+      target_resources:  this.target_resources,
 
-      if (last) json += "]\n";
-      else json += "],\n";
-    }
+      wcag_primary_id:  this.wcag_primary_id,
+      wcag_primary:     this.wcag_primary,
+      wcag_level:       this.wcag_level,
 
-    function addListOfStrings(name, list, last) {
+      wcag_related_ids: this.wcag_related_ids,
+      wcag_related:     this.wcag_related,
 
-      json += prefix + "    \"" + name + "\" : [\n";
+      purposes:       this.purposes,
+      techniques:     this.techniques,
+      manual_checks:  this.manual_checks,
 
-      if (list && list.length) {
-        var last_item = list.length - 1;
-        for (var i = 0; i < list.length; i++) {
-          if (last_item === i) json += "          " + JSON.stringify(list[i]) + "\n";
-          else json += "          " + JSON.stringify(list[i]) + ",\n";
-        }
-      }
+      informational_links:    this.informational_links
+    };
 
-      if (last) json += prefix + "    ]\n";
-      else json += prefix + "    ],\n";
-
-    }
-
-
-
-    function addInformationalLinks(last) {
-
-      function addReferenceItem(reference, last) {
-
-        json += prefix + "      { \"type\"  : "   + reference['type']  + ",\n";
-        json += prefix + "        \"title\" : " + JSON.stringify(reference['title']) + ",\n";
-        json += prefix + "        \"url\"   : " + JSON.stringify(reference['url'])   + "\n";
-
-        if (last) json += prefix + "      }\n";
-        else json += prefix + "      },\n";
-
-      }
-
-      json += prefix + "    \"informational_links\" : [\n";
-
-      var info_links = rule_nls['INFORMATIONAL_LINKS'];
-
-      if (info_links && info_links.length) {
-        var last_item = info_links.length - 1;
-        for (var i = 0; i < info_links.length; i++) {
-          if (last_item === i) addReferenceItem(info_links[i], true);
-          else addReferenceItem(info_links[i], false);
-        }
-      }
-
-      if (last) json += prefix + "    ]\n";
-      else json += prefix + "    ],\n";
-
-    }
-
-    function addMessages(name, list, last) {
-
-      json += prefix + "    \"" + name + "\" : {\n";
-
-      if (list) {
-        var first = true;
-        for (var item in list) {
-          if (first) json += "           " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
-          else json += ",\n          " + JSON.stringify(item) + ": " + JSON.stringify(list[item]);
-          first = false;
-        }
-      }
-
-      if (last) json += "\n" + prefix + "    }\n";
-      else json += "\n" + prefix + "    },\n";
-
-    }
-
-
-
-
-    if (typeof prefix !== 'string') prefix = "";
-
-    var json = "";
-
-    var rule_nls = this.rule_nls;
-
-    json += prefix + "  {\n";
-
-    stringItem(    'rule_id',             this.rule_id);
-    numberItem(    'rule_scope',          this.getScope());
-  //  stringItem(    'rule_scope_nls',      this.getScopeNLS());
-    numberItem(    'rule_category',       this.getCategory());
-    stringItem(    'rule_category_nls',   this.getCategoryInfo().title);
-    numberItem(    'rule_group',          this.getGroup());
-    stringItem(    'rule_group_nls',      this.getGroupNLS());
-    stringItem(    'wcag_primary',        this.wcag_primary_id);
-    stringListItem('wcag_related',        this.wcag_related_ids);
-    stringItem(    'last_updated',        this.last_updated);
-    stringListItem('target_resources',    this.target_resources);
-    stringItem(    'language_dependency', this.language_dependency);
-    stringItem(    'primary_property',    this.primary_property);
-    stringListItem('resource_properties', this.resource_properties);
-    stringItem(    'validate',            this.validate.toString());
-
-    stringItem('nls_rule_id', rule_nls['ID']);
-
-    if (typeof required === 'boolean') {
-      stringItem('definition', this.getRuleDefinition(required));
-      stringItem('summary', this.getRuleSummary(required));
-    }
-    else {
-      stringItem('definition', rule_nls['DEFINITION']);
-      stringItem('summary', rule_nls['SUMMARY']);
-    }
-
-    stringItem('target_resource_desc', rule_nls['TARGET_RESOURCES_DESC']);
-
-    addListOfStrings('purpose',       rule_nls['PURPOSE']);
-
-    addListOfStrings('techniques',    rule_nls['TECHNIQUES']);
-
-    addListOfStrings('manual_checks', rule_nls['MANUAL_CHECKS']);
-
-    addInformationalLinks();
-
-    addMessages('rule_result_messages', rule_nls['RULE_RESULT_MESSAGES'], false);
-    addMessages('node_result_messages', rule_nls['NODE_RESULT_MESSAGES'], true);
-
-    json += prefix + "  }";
-
+    const json = JSON.stringify(ruleInfo, null, '  ');
+    debug.flag && debug.log(`[JSON]: ${json}`);
     return json;
 
   }

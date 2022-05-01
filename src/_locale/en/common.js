@@ -1,9 +1,17 @@
 /* common.js */
 
 export const common = {
-  yes: 'Yes',
-  no: 'No',
-  elementResult: ['Undefined','P','H','MC','W','V'],
-  ruleScopes: ['undefined', 'element', 'page', 'website']
+  level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
+  elementResult: ['undefined','P','H','MC','W','V'],
+  ruleScopes: ['undefined', 'element', 'page', 'website'],
+  implementationValue: [
+    'undefined',
+    'Not Applicable',
+    'Not Implemented',
+    'Partial Implementation',
+    'Almost Complete',
+    'Complete',
+    'Complete with Manual Checks',
+    'Manual Checks Only'
+    ]
 }
-

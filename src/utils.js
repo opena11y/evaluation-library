@@ -1,14 +1,15 @@
 // LOW-LEVEL FUNCTIONS
 
 export {
-  normalize,
+  cleanForUTF8,
   filterTextContent,
-  replaceAll,
   getAttributeValue,
+  getFormattedDate,
   hasEmptyAltText,
   hasInvalidState,
   hasCheckedState,
-  transformElementMarkup
+  normalize,
+  replaceAll
 }
 /* constants */
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
@@ -83,37 +84,6 @@ function hasCheckedState (node) {
 }
 
 /**
- * @function transformElementMarkup
- *
- * @desc Converts element markup in strings to capitalized text
- *
- * @param {String}  elemStr - Element result message to convert content inside '@' to caps
- *
- * @return  String
- */
-
-function transformElementMarkup (elemResultStr) {
-  let newStr = "";
-  let transform_flag = false;
-
-  if (typeof elemResultStr === 'string') {
-    const len = elemResultStr.length;
-    for (let i = 0; i < len; i++) {
-      let c = elemResultStr[i];
-      if (c == '@') {
-        transform_flag = !transform_flag;
-        continue;
-      }
-      if (transform_flag)
-        newStr += c.toUpperCase();
-      else
-        newStr += c;
-    }
-  }
-  return newStr;
-}
-
-/**
  * @function filterTextContent
  *
  * @desc Normalizes spaces in a string and removes any non-printable characters
@@ -184,3 +154,49 @@ function replaceAll (s, str1, str2) {
   s1 += s.slice(0, len);
   return s1;
 }
+
+/**
+ * @function getFormattedDate
+ *
+ * @desc Returns a fomratted string (YYYY-MM-DD) represeting the current date
+ *       with leading zeros
+ *
+ * @return {String}  Formatted date string
+ */
+
+function getFormattedDate() {
+
+  function leadingZero(n) {
+    let n1 = n.toString();
+    if (n < 10) n1 = "0" + n;
+    return n1;
+  }
+
+  const date = new Date();
+
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1;
+  const d = date.getDate();
+  const hours = date.getHours() + 1;
+  const minutes = date.getMinutes() + 1;
+
+  return y + "-" + leadingZero(m) + "-" + leadingZero(d) + ":" + leadingZero(hours)+ ":" + leadingZero(minutes);
+}
+
+/**
+ * @function cleanForUTF8
+ *
+ * @desc Returns an string with only UTF8 characters
+ *
+ * @param  {String}  str - string to clean
+ *
+ * @return {String}  String with only ASCII characters
+ */
+
+function cleanForUTF8 (str) {
+  let nstr = '';
+  str.forEach( c => {
+    if (c >= ' ' && c < '~') nstr += c;
+  });
+  return nstr;
+};
