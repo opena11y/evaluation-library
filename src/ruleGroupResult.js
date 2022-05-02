@@ -3,7 +3,7 @@
 /* Imports */
 import DebugLogging       from './debug.js';
 import RuleResultsSummary from './ruleResultsSummary.js';
-import {getRulesetInfo}   from './versionRulesetInfo;'
+import {getRulesetInfo}   from './versionRulesetInfo.js';
 import {getImplementationValue} from './_locale/locale.js';
 import {cleanForUTF8}     from './utils.js';
 
@@ -205,8 +205,6 @@ export default class RuleGroupResult {
     if (typeof prefix !== 'string') prefix = '';
     if (typeof flag   !== 'boolean') flag = true;
 
-    var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
-
     const ruleset         = this.evaluation_result.getRuleset();
     var ruleset_info    = ruleset.getRulesetInfo();
 
@@ -217,11 +215,10 @@ export default class RuleGroupResult {
     var eval_date  = date[0];
 
     const ruleGroupResultInfo = {
-      eval_url:         cleanForUTF8(this.evaluation_result.eval_url),
+      eval_url: cleanForUTF8(this.evaluation_result.eval_url),
       eval_url_encoded: encodeURI(this.evaluation_result.eval_url),
       eval_title: this.evaluation_result.title,
-      ruleset_id: ruleset.getId(),
-
+      ruleset_id: ruleset.getId()
     }
 
     var json = "";

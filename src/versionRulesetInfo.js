@@ -7,7 +7,7 @@ export {
 
 const version = '2.0.beta';
 
-export function getRulesetInfo () {
+function getRulesetInfo () {
   return {
     id: 'ARIA_STRICT',
     date: '2022-04-30',
