@@ -1,7 +1,7 @@
 /* resultSummary.js */
 
 /* Imports */
-import DebugLogging  from '../debug.js';
+import DebugLogging  from './debug.js';
 
 const debug = new DebugLogging('elementResultSummary', false);
 
@@ -10,9 +10,7 @@ const debug = new DebugLogging('elementResultSummary', false);
 /* ---------------------------------------------------------------- */
 
  /**
- * @constructor ElementResultsSummary
- *
- * @memberOf OpenAjax.a11y.info
+ * @class ElementResultsSummary
  *
  * @desc Constructor for an object that contains summary of element results for rule
  *       result, cache item result, rule result group result or evaluation result
@@ -53,8 +51,6 @@ export default class ElementResultsSummary {
   /**
    * @method hasResults
    *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
-   *
    * @desc True if at least one element results is a violation, warning, manual check
    *       or passed, otherwise false (e.g no element results or all hidden)
    *
@@ -68,8 +64,6 @@ export default class ElementResultsSummary {
   /**
    * @method addViolations
    * @private
-   *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
    *
    * @desc Adds violation element results to the summary calculation
    *
@@ -85,8 +79,6 @@ export default class ElementResultsSummary {
   /**
    * @method addWarnings
    *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
-   *
    * @desc Adds warning element results to the summary calculation
    *
    * @param  {Number}  n  - Number of element results that passed
@@ -101,8 +93,6 @@ export default class ElementResultsSummary {
   /**
    * @method addManualChecks
    *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
-   *
    * @desc Adds manual check element results to the summary calculation
    *
    * @param  {Number}  n  - Number of element results that passed
@@ -116,8 +106,6 @@ export default class ElementResultsSummary {
 
   /**
    * @method addPassed
-   *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
    *
    * @desc Adds passed element results to the summary calculation
    *
@@ -134,8 +122,6 @@ export default class ElementResultsSummary {
    * @method addHidden
    * @private
    *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
-   *
    * @desc Adds hidden element results to the summary calculation
    *
    * @param  {Number}  n  -  Number of element results that are hidden
@@ -149,8 +135,6 @@ export default class ElementResultsSummary {
 
   /*
    * @method toString
-   *
-   * @memberOf OpenAjax.a11y.ElementResultSummary
    *
    * @desc output information about the summary
    *

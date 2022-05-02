@@ -1,4 +1,4 @@
-/* rule.js   */
+/* rule.js */
 
 import {
   getGuidelineId
@@ -17,6 +17,7 @@ import {
   getRuleDefinition,
   getRuleResultMessages,
   getRuleSummary,
+  getRulesetInfo,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
   getTargetResourcesDesc,
@@ -50,6 +51,7 @@ export default class Rule {
     this.rule_required       = rule_item.rule_required; // Boolean
     this.rule_scope_id       = rule_item.rule_scope; // Integer
     this.rule_category_id    = rule_item.rule_category; // Integer
+    this.ruleset_id          = rule_item.ruleset; // Integer
     this.last_updated        = rule_item.last_updated; // String
     this.target_resources    = rule_item.target_resources; // array of strings
     this.wcag_primary_id     = rule_item.wcag_primary_id  // String (P.G.SC)
@@ -60,6 +62,7 @@ export default class Rule {
     // Rule information that is locale dependent
     this.rule_category_info  = getRuleCategoryInfo(this.rule_category); // Object with keys to strings
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
+    this.ruleset_info        = getRulesetInfo(this.ruleset_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id) // String
     this.wcag_primary        = getSuccessCriterionInfo(this.wcag_primary_id);
     this.wcag_related        = getSuccessCriteriaInfo(this.wcag_related_ids);
@@ -111,7 +114,7 @@ export default class Rule {
    *
    * @desc Get number of the associated guideline
    *
-   * @return  {Number} see description
+   * @return  {Integer} see description
    */
 
   getGuideline () {
@@ -135,7 +138,7 @@ export default class Rule {
    *
    * @desc Get a numerical constant representing the rule category
    *
-   * @return {Number}  see description
+   * @return {Integer}  see @desc
    */
 
   getCategory () {
@@ -147,7 +150,7 @@ export default class Rule {
    *
    * @desc Get a localized title, url and description of the rule category
    *
-   * @return {RuleCategoryInfoItem}  Returns a InformationalLinkInfo object
+   * @return {RuleCategoryInfoItem}  see @desc
    */
 
   getCategoryInfo () {
@@ -155,11 +158,35 @@ export default class Rule {
   }
 
   /**
+   * @method getRuleset
+   *
+   * @desc Get a numerical constant representing the ruleset
+   *
+   * @return {Integer}  see @desc
+   */
+
+  getCategory () {
+    return this.rule_category_id;
+  }
+
+  /**
+   * @method getRulesetInfo
+   *
+   * @desc Get a localized title, url and description of the ruleset
+   *
+   * @return {Object}  see @desc
+   */
+
+  getRulesetInfo () {
+    return this.ruleset_info;
+  }
+
+  /**
    * @method getScope
    *
    * @desc Get the rule scope constant of the rule
    *
-   * @return {Number} rule scope constant
+   * @return {Integer} rule scope constant
    */
 
   getScope () {
@@ -300,7 +327,7 @@ export default class Rule {
    *
    * @desc Get id of the primary WCAG Success Criteria for the rule
    *
-   * @return  {Number}  see description
+   * @return  {Integer}  see description
    */
 
   getPrimarySuccessCriterion () {
@@ -369,8 +396,13 @@ export default class Rule {
 
       rule_scope_id:  this.rule_scope_id,
       rule_scope:     this.rule_scope,
+
       rule_category_id:   this.rule_category_id,
       rule_category_info: this.rule_category_info,
+      
+      ruleset_id:   this.ruleset_id,
+      ruleset_info: this.ruleset_info,
+      
       wcag_guideline_id:  this.wcag_guideline_id,
       guideline_info:     this.guideline_info,
 

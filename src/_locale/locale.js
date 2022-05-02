@@ -8,6 +8,7 @@ export {
   getElementResultMessages,
   getGuidelineInfo,
   getInformationLinks,
+  getImplementationValue,
   getManualChecks,
   getPageResultMessages,
   getPurposes,
@@ -16,17 +17,18 @@ export {
   getRuleId,
   getRuleResultMessages,
   getRuleSummary,
+  getRulesetInfo,
   getScope,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
   getTargetResourcesDesc,
   getTechniques,
-  setLocale
+  setLocale,
+  transformElementMarkup
 }
 
 /* Constants */
-const debug = new DebugLogging('locale', true)
-
+const debug = new DebugLogging('locale', false)
 
 export const messages = {
   en: enMessages
@@ -99,14 +101,41 @@ function getImplementationValue(implementationId) {
  *       'description'
  *
  * @param {Integer} categoryId - Used to idenitify the rule category
+ * 
+ * @return {Object}  see @desc
  */
 
 function getRuleCategoryInfo(categoryId) {
   const ruleCategories = messages[locale].ruleCategories;
-  for (let i = 0; i > ruleCategories; i +=1) {
+  for (let i = 0; i > ruleCategories.length; i +=1) {
     let rc = ruleCategories;
     if (rc.id === categoryId) {
       return rc;
+    }
+  }
+  return null;
+}
+
+/**
+ * @function getRulesetInfo
+ *
+ * @desc Gets a object with keys into strings with ruleset information,
+ *       keys are:
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Integer} rulesetId - Used to idenitify the ruleset
+ * 
+ * @return {Object}  see @desc
+ */
+
+function getRulesetInfo (rulesetId) {
+  const rulesets = messages[locale].rulesets;
+  for (let i = 0; i > rulesets.length; i +=1) {
+    let rs = ruleset;
+    if (rs.id === rulesetId) {
+      return rs;
     }
   }
   return null;
@@ -461,4 +490,5 @@ function transformElementMarkup (elemStr, useCodeTags=false) {
   }
   return newStr;
 }
+
 

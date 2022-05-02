@@ -2,6 +2,7 @@
 
 /* Imports */
 import {
+  RULESET,
   RULE_SCOPE,
   RULE_CATEGORIES,
   TEST_RESULT
@@ -26,6 +27,7 @@ export const colorRules = [
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    ruleset             : RULESET.TRIAGE,
     rule_required       : true,
     wcag_primary_id     : '1.4.3',
     wcag_related_ids    : ['1.4.1','1.4.6'],
@@ -99,6 +101,7 @@ export const colorRules = [
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    ruleset             : RULESET.TRIAGE,
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
     target_resources    : [],

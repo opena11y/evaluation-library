@@ -1,7 +1,7 @@
 /* resultSummary.js */
 
 /* Imports */
-import DebugLogging  from '../debug.js';
+import DebugLogging  from './debug.js';
 
 /* Constants */
 import {

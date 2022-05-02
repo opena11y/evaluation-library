@@ -9,15 +9,39 @@ export {
   ELEMENT_RESULT_VALUE,
   IMPLEMENTATION_VALUE,
   REFERENCES,
+  RULESET,
   RULE_CATEGORIES,
   RULE_RESULT_VALUE,
   RULE_SCOPE,
   TEST_RESULT,
+  VERSION,
   WCAG_PRINCIPLE,
   WCAG_GUIDELINE,
   WCAG_SUCCESS_CRITERION,
   WCAG_LEVEL,
   getGuidelineId
+}
+
+const VERSION = '2.0.beta1';
+
+/**
+ * @constant RULESET
+ * @type Number
+ * @desc Constants related to the priority of learning a rule
+ *       For example people new to accessibility would start
+ *       with understanding TRIAGE rules and then moving to MORE
+ *       and as they gain experience can use ALL
+ *
+ * @example
+ * RULESET.TRIAGE
+ * RULESET.MORE
+ * RULESET.ALL
+ */
+
+const RULESET =  {
+  TRIAGE: 1,
+  MORE: 3,
+  ALL:7
 }
 
 /**
@@ -345,8 +369,6 @@ const REFERENCES = {
   WCAG_TECHNIQUE  : 11
 }
 
-/* Helper functions */
-
 /**
  * @constant WCAG_LEVEL
  * @type Number
@@ -366,7 +388,6 @@ const WCAG_LEVEL =  {
 }
 
 /*  Constant helper functions */
-
 
 /**
  * @function getGuidelineId

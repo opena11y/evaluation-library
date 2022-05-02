@@ -1,14 +1,16 @@
 /* elementResult.js */
 
 /* Imports */
-import {ELEMENT_RESULT_VALUE}   from './constants.js';
-import {filterTextContent}      from './utils.js'
-import {transformElementMarkup} from './_locale/locale.js'
-import DebugLogging             from './debug.js';
+import {ELEMENT_RESULT_VALUE} from './constants.js';
+import {
+  filterTextContent,
+  transformElementMarkup
+} from './utils.js'
+import DebugLogging  from './debug.js';
 
 /* Constants */
 
-const debug = new DebugLogging('elementResult', false);
+const debug = new DebugLogging('pageResult', false);
 
 /* ---------------------------------------------------------------- */
 /*                             ElementResult                           */
@@ -22,7 +24,6 @@ const debug = new DebugLogging('elementResult', false);
  *
  * @param  {ResultRule}   rule_result         - reference to the rule result object
  * @param  {Number}       result_value        - Constant representing result value of the evaluation result
- * @param  {Object}       domElement          - DOmElement reference to element information used by this rule result
  * @param  {String}       message_id          - String reference to the message string in the NLS file
  * @param  {Array}        message_arguments   - Array  array of values used in the message string
  * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -35,13 +36,12 @@ const debug = new DebugLogging('elementResult', false);
  *
  * @property  {RuleResult} rule_result         - reference to the rule result object
  * @property  {Number}     result_value        - Constant representing result value of the evaluation result
- * @property  {DOMElement} cache_item          - Object reference to cache item associated with the test
  * @property  {String}     message_id          - String reference to the message string in the NLS file
  * @property  {Array}      message_arguments   - Array  array of values used in the message string
  */
 
-export default class ElementResult {
-  constrcutor (rule_result, result_value, domElement, message_id, message_arguments) {
+export default class PageResult {
+  constrcutor (rule_result, result_value, message_id, message_arguments) {
 
     this.rule_result = rule_result;
     this.result_value   = result_value;
@@ -49,8 +49,6 @@ export default class ElementResult {
 
     this.message_id        = message_id;
     this.message_arguments = message_arguments;
-
-    this.domElement = domElement;
 
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
@@ -60,106 +58,14 @@ export default class ElementResult {
   /**
    * @getter isElementResult
    *
-   * @desc Returns true, since this class is a ElementResult
-   *       Use to distinguish from PageResult class
+   * @desc Returns false, since this class is a PageResult class
+   *       Use to distinguish from ElementResult class
    *    
-   * @return {Boolean} true
+   * @return {Boolean} false
    */
 
   get isElementResult () {
-    return true;
-  }
-
-  /**
-   * @method getHTMLAttributes
-   *
-   * @desc Gets common HTML attributes related to elements
-   *       some elements have special props like alt
-   *
-   * @return {Object} with attribute name as key to attribute value
-   */
-   
-  getHTMLAttributes () {
-    return this.domElement.htmlAttrs;
-  }
-
-  /**
-   * @method getAriaAttributes
-   *
-   * @desc Gets ARIA attributes
-   *
-   * @return {Object} with attribute name as key to attribute value
-   */
-  getAriaAttributes () {
-    return this.domElement.ariaAttrs;
-  }
-
- /**
- * @method getAccessibleNameInfo
- *
- * @desc Gets accessible name and description information
- *
- * @return {Object}
- */
-  getAccessibleNameInfo () {
-    const info = {
-      name:            this.domElement.accName.name,
-      name_source:     this.domElement.accName.source,
-      name_required:   this.domElement.ariaValidation.isNameRequired,
-      name_prohibited: this.domElement.ariaValidation.isNameProhibited,
-    }
-    return info;
-  }
-
-  /**
-  * @method getColorContrastInfo
-  *
-  * @desc Gets color contrast information for an element result
-  *
-  * @return {Object} Object with color contrast keys and values
-  */
-  getColorContrastInfo () {
-    const info = {};
-    const rule = this.rule_result.getRule();
-
-    if (rule && (rule.getId() === 'COLOR_1')) {
-      const cc = this.domElement.colorContrast;
-      if (cc) {
-        info.color_contrast_ratio  = cc.colorContrastRatio;
-        info.color                 = cc.color;
-        info.color_hex             = '#' + cc.colorHex;
-        info.background_color      = cc.backgroundColor;
-        info.background_color_hex  = '#' + cc.backgroundColorHex;
-        info.font_family           = cc.fontFamily;
-        info.font_size             = cc.fontSize;
-        info.font_weight           = cc.fontWeight;
-        info.large_font            = cc.isLargeFont ? 'Yes' : 'no';
-        info.background_image      = cc.backgroundImage;
-        info.background_repeat     = cc.backgroundRepeat;
-        info.background_position   = cc.backgroundPosition;
-      }
-    }
-    return info;
-  }
-
-  /**
-  * @method getVisibilityInfo
-  *
-  * @desc Gets visibility information for an element result
-  *
-  * @return {Object} Object with vibility keys and values
-  */
-  getVisibilityInfo () {
-    var info = {};
-    var cs;
-    if (this.dom_element) {
-      cs = this.dom_element.computed_style;
-      if (cs) {
-        info.graphical_rendering  = this.visibility[cs.is_visible_onscreen];
-        info.assistive_technology = this.visibility[cs.is_visible_to_at];
-      }
-    }
-    return info;
+    return false;
   }
 
   /**
@@ -184,7 +90,7 @@ export default class ElementResult {
    */
 
   getElementIdentifier () {
-    return this.domElement.toString();
+    return 'Page';
   }
 
 
@@ -286,33 +192,34 @@ export default class ElementResult {
   }
 
   /**
-   * @method getDataForJSON
-   *
-   * @desc Object containing the data for exporting an element result to JSON
-   *
-   * @return {Object} see @desc
-   */
-
-  getDataForJSON () {
-    const data = {
-      result_value:       this.getResultValue(),
-      result_value_nls:   this.getResultValueNLS(),
-      element_identifier: this.getElementIdentifier(),
-      ordinal_position:   this.domElement.ordinalPosition,
-      message:            this.getResultMessage()
-    }
-    return data;
-  }
-
-  /**
    * @method toJSON
+   *
+   * @memberOf OpenAjax.a11y.ElementResult
    *
    * @desc Creates JSON object descibing the properties of the node result
    *
-   * @return {String} see @desc
+   * @param {String} prefix  -  A prefix string typically spaces
+   *
+   * @return String information about the node result
    */
 
-  toJSON () {
-    return JSON.stringify(this.getDataForJSON());
+  toJSON (prefix) {
+
+    let json = "";
+
+    const className = this.domElement.className;
+    const id        = this.domElement.id;
+    const position  = this.domElement.ordinalPosition;
+
+    json += prefix + "{ \"result_value\"       : \"" + this.getResultValue()       + "\",\n";
+    json += prefix + "  \"result_value_nls\"   : \"" + this.getResultValueNLS()    + "\",\n";
+    json += prefix + "  \"element_identifier\" : " + JSON.stringify(this.getElementIdentifier()) + ",\n";
+    json += prefix + "  \"ordinal_position\"   : " + position + ",\n";
+    json += prefix + "  \"message\"            : " + JSON.stringify(this.getResultMessage()) + ",\n";
+    json += prefix + "  \"class\"              : " + JSON.stringify(className) + ",\n";
+    json += prefix + "  \"id\"                 : " + JSON.stringify(id) + "\n";
+    json += prefix + "}";
+
+    return json;
   }
 }

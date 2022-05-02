@@ -10,14 +10,10 @@ import {
   TEST_RESULT,
   RULE_RESULT_VALUE
 } from './constants.js';
-import {ElementResult} from './elementResult.js';
-import {
-  ElementResultsSummary
-} from './resultSummary.js';
-import {
-  replaceAll,
-  transformElementMarkup
-} from './utils.js'
+import ElementResult from './elementResult.js';
+import ElementResultsSummary from './elementResultsSummary.js';
+import {replaceAll} from './utils.js'
+import {transformElementMarkup} from './_locale/locale.js';
 
 const debug = new DebugLogging('ruleResult', false);
 
@@ -200,8 +196,9 @@ export default class RuleResult {
   *
   * @desc Gets numerical summary information about the element results
   *
-  * @return {ElementResultSummary} Returns the ElementResultsSummary object
+  * @return {ElementResultSummary} see @desc
   */
+
   getElementResultsSummary () {
     return this.element_results_summary;
   }
@@ -618,87 +615,78 @@ export default class RuleResult {
   }
 
   /**
-   * @method toJSON
+   * @method getDataForJSON
    *
-   * @desc Returns a JSON representation of the cache item
+   * @desc Object containing the data for exporting a rule result to JSON
    *
-   * @param {String}  prefix  -  A prefix string typically spaces
    * @param {Boolean} flag    -  if true include element result details
    *
-   * @return  {String}  String representing the cache item result object
+   * @return {Object} see @desc
    */
 
-  toJSON = function(prefix, flag) {
+  getDataForJSON (flag=false) {
 
-    if (typeof flag !== 'boolean') flag = false;
+    const summary = this.element_results_summary;
 
-    let next_prefix = "";
-    let next_prefix_2 = "";
+    const data = {
+      rule_id: this.rule.getId(),
+      rule_summary: this.getRuleSummary(),
 
-    if (typeof prefix !== 'string' || prefix.length === 0) {
-      prefix = "";
+      success_criteria_nls:  this.rule.getPrimarySuccessCriterion().title,
+      success_criteria_code: this.rule.getPrimarySuccessCriterion().id,
+
+      guideline_nls:  this.rule.getGuidelineInfo().title,
+      guideline_code: this.rule.getGuidelineInfo().id,
+
+      rule_category_nls:  this.rule.getCategoryInfo().title,
+      rule_category_code: this.rule.getCategory(),
+
+      rule_scope_code_nls: this.rule.getScopeNLS(),
+      rule_scope_code:     this.rule.getScope(),
+
+      ruleset_nls:  this.rule.getRulesetNLS(),
+      ruleset_code: this.rule.getRuleset(),
+
+      result_value_nls: this.getResultValueNLS(),
+      result_value:     this.getResultValue(),
+      result_message:   this.getResultMessage(),
+
+      rule_required: this.isRuleRequired(),
+      has_hidden:    this.hasHiddenElementResults(),
+
+      implementation_score: this.getImplementationScore(),
+      implementation_value: this.getImplementationValue(),
+      implementation_nls:   this.getImplementationValueNLS(),
+
+      elements_passed:       summary.passed,
+      elements_violation:    summary.violations,
+      elements_warning:      summary.warnings,
+      elements_failure:     (summary.violations + summary.warnings),
+      elements_manual_check: summary.manual_checks,
+      elements_hidden:       summary.hidden
     }
-    else {
-      next_prefix = prefix + "  ";
-      next_prefix_2 = next_prefix + "  ";
-    }
-
-    let json = "";
-    const summary  = this.getElementResultsSummary();
-
-    json += prefix + "{ \"rule_id\"               : \"" + this.rule.getId()                            + "\",\n";
-    json += prefix + "  \"rule_summary\"          :   " + JSON.stringify(this.getRuleSummary())   + ",\n";
-    json += prefix + "  \"success_criteria_nls\"  : \"" + this.rule.getPrimarySuccessCriterion().title + "\",\n";
-    json += prefix + "  \"success_criteria_code\" : \"" + this.rule.getPrimarySuccessCriterion().id    + "\",\n";
-    json += prefix + "  \"guideline_nls\"         : \"" + this.rule.getGuidelineInfo().title           + "\",\n";
-    json += prefix + "  \"guideline_code\"        : \"" + this.rule.getGuidelineInfo().id              + "\",\n";
-    json += prefix + "  \"rule_category_nls\"     : \"" + this.rule.getCategoryInfo().title            + "\",\n";
-    json += prefix + "  \"rule_category_code\"    : "   + this.rule.getCategory()                      + ",\n";
-    json += prefix + "  \"rule_scope_code_nls\"   : \"" + this.rule.getScopeNLS()                      + "\",\n";
-    json += prefix + "  \"rule_scope_code\"       : "   + this.rule.getScope()                         + ",\n";
-    json += prefix + "  \"rule_group_code_nls\"   : \"" + this.rule.getGroupNLS()                      + "\",\n";
-    json += prefix + "  \"rule_group_code\"       : "   + this.rule.getGroup()                         + ",\n";
-    json += prefix + "  \"result_message\"        :   " + JSON.stringify(this.getResultMessage()) + ",\n";
-    json += prefix + "  \"result_value_nls\"      : \"" + this.getResultValueNLS()                + "\",\n";
-    json += prefix + "  \"result_value\"          : "   + this.getResultValue()                   + ",\n";
-
-    json += prefix + "  \"rule_required\"         : "   + this.isRuleRequired()          + ",\n";
-    json += prefix + "  \"has_hidden\"            : "   + this.hasHiddenElementResults() + ",\n";
-
-    json += prefix + "  \"implementation_score\"  : "   + this.getImplementationScore() + ",\n";
-    json += prefix + "  \"implementation_value\"  : "   + this.getImplementationValue() + ",\n";
-    json += prefix + "  \"implementation_nls\"    : \"" + this.getImplementationValueNLS()   + "\",\n";
-
-    json += prefix + "  \"elements_passed\"       : "   + summary.passed                     + ",\n";
-    json += prefix + "  \"elements_violation\"    : "   + summary.violations                 + ",\n";
-    json += prefix + "  \"elements_warning\"      : "   + summary.warnings                   + ",\n";
-    json += prefix + "  \"elements_failure\"      : "   + (summary.violations + summary.warnings)  + ",\n";
-    json += prefix + "  \"elements_manual_check\" : "   + summary.manual_checks              + ",\n";
-    json += prefix + "  \"elements_hidden\"       : "   + summary.hidden;
 
     if (flag) {
-      json += ",\n";
-      const comma_count = element_results.length - 1;
-
-      json += prefix + "  \"element_results\" : [\n";
-
-      const element_results = this.getElementResults();
-
-      element_results.forEach ( (er, index) => {
-        if (index < comma_count) {
-          json += er.toJSON(next_prefix_2) + ',\n';
-        }
-        else {
-          json += er.toJSON(next_prefix_2) + ',';
-        }
+      data.element_results = [];
+      this.element_results.forEach ( er => {
+        data.element_results.push(er.getDataForJSON());
       });
-      json += prefix + "  ]\n";
     }
-    else {
-      json += "\n";
-    }
-    json += prefix + "}";
-    return json;
+    return data; 
+  }
+
+  /**
+   * @method toJSON
+   *
+   * @desc Returns a JSON representation of the rule result
+   *
+   * @param {Boolean} flag    -  if true include element result details
+   *
+   * @return  {String}  see @desc
+   */
+
+  toJSON (flag=false) {
+    return JSON.stringify(this.getDataForJSON(flag));
   }
 
   /**

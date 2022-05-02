@@ -3,6 +3,10 @@
 /* Imports */
 import DebugLogging  from './debug.js';
 import {
+  VERSION,
+  RULESET
+} from './constants.js';
+import {
   getFormattedDate,
   cleanForUTF8
 } from './utils.js';
@@ -12,8 +16,7 @@ import {
   getCommonMessage,
   getGuidelineInfo,
   getRuleCategoryInfo
-} from './_locale/locale.js'
-
+} from './_locale/locale.js';
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
@@ -23,6 +26,7 @@ export default class EvaluationResult {
     this.title = title;
     this.url = url;
     this.date = getFormattedDate();
+    this.version = VERSION;
     this.allRuleResults = [];
 
     debug.flag && debug.log(`[title]: ${this.title}`);
@@ -89,13 +93,16 @@ export default class EvaluationResult {
    *
    * @desc Returns an object containing a set of all rule results
    *
+   * @param  {Integer}  ruleset - Numerical constant that specifies the ruleset
+   *                             By default all rules are included
+   * 
    * @return {RuleGroupResult}  see description
    */
 
-  getRuleResultsAll () {
-    var rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "");
+  getRuleResultsAll (ruleset=RULESET.ALL) {
+    var rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "", ruleset);
     this.allRuleResults.forEach( rr => {
-       rgr.addRuleResult(rr);
+      rgr.addRuleResult(rr);
     });
     return rgr;
   }
@@ -105,14 +112,16 @@ export default class EvaluationResult {
    *
    * @desc Returns an object containing the rule results associated with a WCAG 2.0 Guideline
    *
-   * @param {Number}  guidelineId  -  Number representing the guideline id
-   *
+   * @param {Integer}  guidelineId  - Number representing the guideline id
+   * @param {Integer}  ruleset      - Numerical constant that specifies the ruleset
+   *                                  By default all rules are included
+   * 
    * @return {RuleGroupResult}  see description
    */
 
-  getRuleResultsByGuideline (guidelineId) {
+  getRuleResultsByGuideline (guidelineId, ruleset=RULESET.ALL) {
     const glInfo = getGuidelineInfo(guidelineId);
-    const rgr = new RuleGroupResult(this, glInfo.title, glInfo.url, glInfo.description);
+    const rgr = new RuleGroupResult(this, glInfo.title, glInfo.url, glInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
       if (rr.getRule().getGuideline() & guidelineId) {
@@ -127,14 +136,16 @@ export default class EvaluationResult {
    *
    * @desc Returns an object containing the rule results for the rules in a rule category
    *
-   * @param {Number}  categoryId  -  Number of the rule category
+   * @param {Integer}  categoryId  -  Number of the rule category
+   * @param {Integer}  ruleset      - Numerical constant that specifies the ruleset
+   *                                  By default all rules are included
    *
    * @return {RuleGroupResult}  see description
    */
 
-  getRuleResultsByCategory (categoryId) {
+  getRuleResultsByCategory (categoryId, ruleset=RULESET.ALL) {
     var rcInfo = getRuleCategoryInfo(categoryId);
-    var rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description);
+    var rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
       if (rr.getRule().getRuleCategory() & categoryId) {
