@@ -3,6 +3,7 @@
 /* Imports */
 import DebugLogging       from './debug.js';
 import RuleResultsSummary from './ruleResultsSummary.js';
+import {getRulesetInfo}   from './versionRulesetInfo;'
 import {getImplementationValue} from './_locale/locale.js';
 import {cleanForUTF8}     from './utils.js';
 
@@ -216,9 +217,9 @@ export default class RuleGroupResult {
     var eval_date  = date[0];
 
     const ruleGroupResultInfo = {
-      eval_url:         cleanForUTF8(this.evaluation_result.eval_url);
-      eval_url_encoded: encodeURI(this.evaluation_result.eval_url);
-      eval_title: this.evaluation_result.title;
+      eval_url:         cleanForUTF8(this.evaluation_result.eval_url),
+      eval_url_encoded: encodeURI(this.evaluation_result.eval_url),
+      eval_title: this.evaluation_result.title,
       ruleset_id: ruleset.getId(),
 
     }
