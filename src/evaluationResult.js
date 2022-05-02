@@ -33,7 +33,7 @@ export default class EvaluationResult {
 
     allRules.forEach (rule => {
       const ruleResult = new RuleResult(rule);
-      rule.evaluate(domCache, ruleResult);
+      ruleResult.validate(domCache);
       this.allRuleResults(ruleResult);
     });
 

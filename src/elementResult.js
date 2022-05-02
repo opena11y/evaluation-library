@@ -1,7 +1,7 @@
 /* elementResult.js */
 
 /* Imports */
-import {ELEMENT_RESULT_VALUE}   from './constants.js';
+import {RESULT_VALUE}   from './constants.js';
 import {filterTextContent}      from './utils.js'
 import {transformElementMarkup} from './_locale/locale.js'
 import DebugLogging             from './debug.js';
@@ -242,15 +242,15 @@ export default class ElementResult {
     if (str.indexOf(vstr) >= 0) {
 
       switch (this.result_value) {
-        case ELEMENT_RESULT_VALUE.VIOLATION:
+        case RESULT_VALUE.VIOLATION:
           message = common_nls.message_severities.MUST;
           break;
 
-        case ELEMENT_RESULT_VALUE.WARNING:
+        case RESULT_VALUE.WARNING:
           message = common_nls.message_severities.SHOULD;
           break;
 
-        case ELEMENT_RESULT_VALUE.MANUAL_CHECK:
+        case RESULT_VALUE.MANUAL_CHECK:
           message = common_nls.message_severities.MAY;
           break;
 

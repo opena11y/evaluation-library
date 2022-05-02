@@ -174,7 +174,7 @@ export default class RuleGroupResult {
    */
 
   addRuleResult (rule_result) {
-    if (rule_result.rule.getRuleset() & this.ruleset) {
+    if (rule_result.rule.getRuleset() <= this.ruleset) {
       this.rule_results.push(rule_result);
       this.rule_results_summary.updateSummary(rule_result);
 

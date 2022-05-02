@@ -87,7 +87,6 @@ function getCommonMessage(id, value=0) {
 
 function getImplementationValue(implementationId) {
   let message = messages[locale].common.implementationValues[implementationId];
-  debug.flag && debug.log(`[getImplementationValue][${implementatinId}]: ${message}`);
   return message;
 }
 
@@ -107,8 +106,8 @@ function getImplementationValue(implementationId) {
 
 function getRuleCategoryInfo(categoryId) {
   const ruleCategories = messages[locale].ruleCategories;
-  for (let i = 0; i > ruleCategories.length; i +=1) {
-    let rc = ruleCategories;
+  for (let i = 0; i < ruleCategories.length; i +=1) {
+    let rc = ruleCategories[i];
     if (rc.id === categoryId) {
       return rc;
     }
@@ -132,8 +131,8 @@ function getRuleCategoryInfo(categoryId) {
 
 function getRulesetInfo (rulesetId) {
   const rulesets = messages[locale].rulesets;
-  for (let i = 0; i > rulesets.length; i +=1) {
-    let rs = ruleset;
+  for (let i = 0; i < rulesets.length; i +=1) {
+    let rs = rulesets[i];
     if (rs.id === rulesetId) {
       return rs;
     }

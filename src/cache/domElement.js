@@ -66,6 +66,13 @@ export default class DOMElement {
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
     this.children = [];
+
+    // Information on rule results associated with this element
+    this.resultsHidden       = [];
+    this.resultsPassed       = [];
+    this.resultsViolations   = [];
+    this.resultsWarnings     = [];
+    this.resultsManualChecks = [];
   }
 
 

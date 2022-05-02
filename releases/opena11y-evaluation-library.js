@@ -8656,6 +8656,13 @@ class DOMElement {
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
     this.children = [];
+
+    // Information on rule results associated with this element
+    this.resultsHidden       = [];
+    this.resultsPassed       = [];
+    this.resultsViolations   = [];
+    this.resultsWarnings     = [];
+    this.resultsManualChecks = [];
   }
 
 
@@ -9164,6 +9171,11 @@ class DOMCache {
     }
   }
 
+  // Returns the root element of the transversal
+  get page () {
+    return this.domCache;
+  }
+
   // Tests if a tag name can be skipped
   isSkipableElement(tagName) {
     return skipableElements.includes(tagName);
@@ -9315,6 +9327,8 @@ class DOMCache {
     this.domCache.showDomElementTree(' ');
   }
 
+
+
 }
 
 /* constants.js */
@@ -9326,7 +9340,7 @@ const VERSION = '2.0.beta1';
 
 /**
  * @constant RULESET
- * @type Number
+ * @type Integer
  * @desc Constants related to the priority of learning a rule
  *       For example people new to accessibility would start
  *       with understanding TRIAGE rules and then moving to MORE
@@ -9340,12 +9354,12 @@ const VERSION = '2.0.beta1';
 
 const RULESET =  {
   TRIAGE: 1,
-  MORE: 3,
-  ALL:7
+  MORE: 2,
+  ALL: 3
 };
 
 /**
- * @constant RULE_CATEGORIES * @type Number
+ * @constant RULE_CATEGORIES * @type Integer
  * @desc Numercial constant representing a rule category and is bit maskable
  *
  * @example
@@ -9383,7 +9397,7 @@ const RULE_CATEGORIES = {
 };
 
   /**
- * @constant RULE_SCOPE * @type Number
+ * @constant RULE_SCOPE * @type Integer
  * @desc Defines scope of a rule
  *
  * @example
@@ -9401,7 +9415,7 @@ const RULE_SCOPE =  {
 };
 
   /**
- * @constant TEST_RESULT * @type Number
+ * @constant TEST_RESULT * @type Integer
  * @desc Types of rule results, used in validation functions
  *
  * @example
@@ -9421,7 +9435,7 @@ const TEST_RESULT = {
 };
 
 /**
- * @constant IMPLEMENTATION_VALUE * @type Number
+ * @constant IMPLEMENTATION_VALUE * @type Integer
  * @desc Constants used to represent the level of implementation
  *
  * @example
@@ -9447,19 +9461,20 @@ const IMPLEMENTATION_VALUE = {
 };
 
   /**
- * @constant ELEMENT_RESULT_VALUE * @type Number
+ * @constant RESULT_VALUE
+ * @type Integer
  * @desc Constants used to represent evaluation results at the element level
  *
  * @example
- * ELEMENT_RESULT_VALUE.UNDEFINED
- * ELEMENT_RESULT_VALUE.PASS
- * ELEMENT_RESULT_VALUE.HIDDEN
- * ELEMENT_RESULT_VALUE.MANUAL_CHECK
- * ELEMENT_RESULT_VALUE.VIOLATION
- * ELEMENT_RESULT_VALUE.WARNING
+ * RESULT_VALUE.UNDEFINED
+ * RESULT_VALUE.PASS
+ * RESULT_VALUE.HIDDEN
+ * RESULT_VALUE.MANUAL_CHECK
+ * RESULT_VALUE.VIOLATION
+ * RESULT_VALUE.WARNING
  */
 
-const ELEMENT_RESULT_VALUE = {
+const RESULT_VALUE = {
   UNDEFINED      : 0,
   PASS           : 1,
   HIDDEN         : 2,  // Content is hidden and not tested for accessibility
@@ -9469,7 +9484,7 @@ const ELEMENT_RESULT_VALUE = {
 };
 
 /**
- * @constant RULE_RESULT_VALUE * @type Number
+ * @constant RULE_RESULT_VALUE * @type Integer
  * @desc Constants used to represent evaluation results at the rule level
  *
  * @example
@@ -9492,7 +9507,7 @@ const RULE_RESULT_VALUE = {
 
   /**
  * @constant WCAG_PRINCIPLE
- * @type Number
+ * @type Integer
  * @desc Numercial constant representing a WCAG 2.0 Principles
  *
  * @example
@@ -9511,7 +9526,7 @@ const WCAG_PRINCIPLE = {
 
   /**
  * @constant WCAG_GUIDELINE
- * @type Number
+ * @type Integer
  * @desc Numercial constant representing a WCAG 2.0 Guidelines
  *
  * @example
@@ -9547,7 +9562,7 @@ const WCAG_GUIDELINE = {
 };
 
 /**
- * @constant WCAG_SUCCESS_CRITERION * @type Number
+ * @constant WCAG_SUCCESS_CRITERION * @type Integer
  * @desc Numercial constant representing a WCAG 2.x Success Criteria
  *
  * @example
@@ -9639,7 +9654,7 @@ const WCAG_SUCCESS_CRITERION = {
 
 /**
  * @constant REFERENCES
- * @type Number
+ * @type Integer
  * @desc Types of reference for supplemential materials to help people understand an accessibility requirement and
  *       how to improve the accessibility
  *
@@ -9671,7 +9686,7 @@ const REFERENCES = {
 
 /**
  * @constant WCAG_LEVEL
- * @type Number
+ * @type Integer
  * @desc Constants related to the level of importance of a success criteria
  *
  * @example
@@ -9710,6 +9725,43 @@ function getGuidelineId(sc) {
   return WCAG_GUIDELINE[gl];
 }
 
+/**
+ * @function getResultValue
+ *
+ * @desc Returns RESULT_VALUE constant identifying the result based on
+ *       the rule being required or recommended
+ *
+ * @param  {Integer}  testValue  - a TEST_VALUE constant representing the
+ *                                 result
+ * @param  {Boolean}  isrequired  - true if the rule is required
+ *
+ * @return {Integer} see @desc
+ */
+
+function getResultValue(testValue, isRequired) {
+    switch (testValue) {
+
+      case TEST_RESULT.PASS:
+        return RESULT_VALUE.PASS;
+
+      case TEST_RESULT.FAIL:
+        if (isRequired) {
+          return RESULT_VALUE.VIOLATION;
+        }
+        else {
+          return RESULT_VALUE.WARNING;
+        }
+
+      case TEST_RESULT.MANUAL_CHECK:
+        return RESULT_VALUE.MANUAL_CHECK;
+
+      case TEST_RESULT.HIDDEN:
+        return RESULT_VALUE.HIDDEN;
+    }
+
+    return RESULT_VALUE.NONE;
+}
+
 /* colorRules.js */
 
 /* Constants */
@@ -9735,35 +9787,35 @@ const colorRules$1 = [
     wcag_primary_id     : '1.4.3',
     wcag_related_ids    : ['1.4.1','1.4.6'],
     target_resources    : ['text content'],
-    validate            : function (domCache, ruleResult) {
+    validate            : function (dom_cache, rule_result) {
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      domCache.allDomTexts.forEach( domText => {
+      dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
         const cc  = de.colorContrast;
         const ccr = cc.colorContrastRatio;
         const vis = de.visibility;
 
         if (vis.isVisibleOnScreen) {
-          if (cs.isLargeFont) {
+          if (cc.isLargeFont) {
             if (ccr >= MIN_CCR_LARGE_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
               }
               else {
-                rule_result.addResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
               }
             }
             else {
               // Fails color contrast requirements
               if (cc.hasBackgroundImage) {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
               }
               else {
-                rule_result.addResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
               }
             }
           }
@@ -9771,24 +9823,24 @@ const colorRules$1 = [
             if (ccr >= MIN_CCR_NORMAL_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
               }
               else {
-                rule_result.addResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
               }
             }
             else {
               // Fails color contrast requirements
               if (cc.background_image === "none") {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
               }
               else {
-                rule_result.addResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
               }
             }
           }
         } else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, comText, 'ELEMENT_HIDDEN_1', []);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
         }
       });
     } // end validate function
@@ -9808,9 +9860,9 @@ const colorRules$1 = [
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
     target_resources    : [],
-    validate            : function (domCache, ruleResult) {
+    validate            : function (dom_ache, rule_esult) {
 
-      ruleResult.addPageResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+      ruleResult.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validate function
   }
@@ -9822,6 +9874,7 @@ const colorRules$1 = [
 const common = {
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
   elementResult: ['undefined','P','H','MC','W','V'],
+  ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
   ruleScopes: ['undefined', 'element', 'page', 'website'],
   allRuleResults: 'All Rule Results',
   implementationValue: [
@@ -9833,7 +9886,11 @@ const common = {
     'Complete',
     'Complete with Manual Checks',
     'Manual Checks Only'
-    ]
+    ],
+  ruleResultMessages: {
+    'ACTION_NONE': 'No action needed',
+    'NOT_APPLICABLE': 'Not applicable'
+  }
 };
 
 /* ruleCategories.js */
@@ -11112,7 +11169,6 @@ function getCommonMessage(id, value=0) {
 
 function getImplementationValue(implementationId) {
   let message = messages[locale].common.implementationValues[implementationId];
-  debug$8.flag && debug$8.log(`[getImplementationValue][${implementatinId}]: ${message}`);
   return message;
 }
 
@@ -11132,8 +11188,8 @@ function getImplementationValue(implementationId) {
 
 function getRuleCategoryInfo(categoryId) {
   const ruleCategories = messages[locale].ruleCategories;
-  for (let i = 0; i > ruleCategories.length; i +=1) {
-    let rc = ruleCategories;
+  for (let i = 0; i < ruleCategories.length; i +=1) {
+    let rc = ruleCategories[i];
     if (rc.id === categoryId) {
       return rc;
     }
@@ -11157,8 +11213,8 @@ function getRuleCategoryInfo(categoryId) {
 
 function getRulesetInfo (rulesetId) {
   const rulesets = messages[locale].rulesets;
-  for (let i = 0; i > rulesets.length; i +=1) {
-    let rs = ruleset;
+  for (let i = 0; i < rulesets.length; i +=1) {
+    let rs = rulesets[i];
     if (rs.id === rulesetId) {
       return rs;
     }
@@ -11519,7 +11575,7 @@ function transformElementMarkup (elemStr, useCodeTags=false) {
 /* rule.js */
 
 /* Constants */
-const debug$7 = new DebugLogging('Rule', true);
+const debug$7 = new DebugLogging('Rule', false);
 
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
@@ -11551,7 +11607,7 @@ class Rule {
     this.validate            = rule_item.validate;  // function
 
     // Rule information that is locale dependent
-    this.rule_category_info  = getRuleCategoryInfo(this.rule_category); // Object with keys to strings
+    this.rule_category_info  = getRuleCategoryInfo(this.rule_category_id); // Object with keys to strings
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
     this.ruleset_info        = getRulesetInfo(this.ruleset_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id); // String
@@ -12236,7 +12292,7 @@ class RuleGroupResult {
    */
 
   addRuleResult (rule_result) {
-    if (rule_result.rule.getRuleset() & this.ruleset) {
+    if (rule_result.rule.getRuleset() <= this.ruleset) {
       this.rule_results.push(rule_result);
       this.rule_results_summary.updateSummary(rule_result);
 
@@ -12521,15 +12577,15 @@ class ElementResult {
     if (str.indexOf(vstr) >= 0) {
 
       switch (this.result_value) {
-        case ELEMENT_RESULT_VALUE.VIOLATION:
+        case RESULT_VALUE.VIOLATION:
           message = common_nls.message_severities.MUST;
           break;
 
-        case ELEMENT_RESULT_VALUE.WARNING:
+        case RESULT_VALUE.WARNING:
           message = common_nls.message_severities.SHOULD;
           break;
 
-        case ELEMENT_RESULT_VALUE.MANUAL_CHECK:
+        case RESULT_VALUE.MANUAL_CHECK:
           message = common_nls.message_severities.MAY;
           break;
 
@@ -12601,36 +12657,31 @@ class ElementResult {
 const debug$3 = new DebugLogging('elementResultSummary', false);
 
 /* ---------------------------------------------------------------- */
-/*                             ElementResultSummary                        */
+/*                             ResultSummary                        */
 /* ---------------------------------------------------------------- */
 
  /**
- * @class ElementResultsSummary
+ * @class ResultsSummary
  *
- * @desc Constructor for an object that contains summary of element results for rule
- *       result, cache item result, rule result group result or evaluation result
- *       objects
+ * @desc Constructor for an object that contains summary of element, page, website
+ *       results for rule result
  *
- * @property  {Number}  passed        - Number of element results that passed the
- *                                      rule (value >= 0)
- * @property  {Number}  page          - Number of element results that contribute to
- *                                      a page level manual check
- * @property  {Number}  violations    - Number of element results that failed the
- *                                      rule as a violation (value >= 0)
- * @property  {Number}  warnings      - Number of element results that failed the
- *                                      rule as a warning (value >= 0)
- * @property  {Number}  manual_checks - Number of element results that require a
- *                                      manual check (value >= 0)
- * @property  {Number}  hidden        - Number of element results that are hidden
- *                                      (value >= 0)
+ * @property  {Integer}  p  - Number of element, page or website results that passed
+ * @property  {Integer}  v  - Number of required element, page or website results that
+ *                            failed
+ * @property  {Integer}  w  - Number of recommended element, page or website results
+ *                            that failed
+ * @property  {Integer}  mc - Number of element, page or website results that require
+ *                            a mannual check
+ * @property  {Integer}  h  - Number of element, page or website results that are hidden
  */
 
-class ElementResultsSummary {
+class ResultsSummary {
   constructor () {
     // Element result counts
-    this.p   = 0;  // Pass result (p)
-    this.v   = 0;  // Fail result (f)
-    this.w   = 0;  // Fail result (f)
+    this.p   = 0;
+    this.v   = 0;
+    this.w   = 0;
     this.mc  = 0;
     this.h   = 0;
 
@@ -12662,7 +12713,7 @@ class ElementResultsSummary {
    *
    * @desc Adds violation element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
   addViolations ( n ) {
@@ -12676,7 +12727,7 @@ class ElementResultsSummary {
    *
    * @desc Adds warning element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
   addWarnings ( n ) {
@@ -12690,7 +12741,7 @@ class ElementResultsSummary {
    *
    * @desc Adds manual check element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
   addManualChecks ( n ) {
@@ -12704,7 +12755,7 @@ class ElementResultsSummary {
    *
    * @desc Adds passed element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
    addPassed ( n ) {
@@ -12719,7 +12770,7 @@ class ElementResultsSummary {
    *
    * @desc Adds hidden element results to the summary calculation
    *
-   * @param  {Number}  n  -  Number of element results that are hidden
+   * @param  {Integer}  n  -  Number of element results that are hidden
    */
 
   addHidden ( n ) {
@@ -12762,20 +12813,20 @@ const debug$2 = new DebugLogging('ruleResult', false);
  * @private
  * @constructor Internal Properties
  *
- * @property  {Object} rule                            - Rule associated with the result
+ * @property  {Object} rule                   - Rule associated with the result
  *
- * @property  {Array}  element_results_passed          - Array of all the element results
- *                                                       that passed
- * @property  {Array}  elements_results_violations     - Array of all the element results
- *                                                       that resulted in violations
- * @property  {Array}  elements_results_warnings       - Array of all the element results
- *                                                       that resulted in warnings
- * @property  {Array}  elements_results_manual_checks  - Array of all the element results
- *                                                       that require manual evaluations
- * @property  {Array}  elements_results_hidden         - Array of all the element results
- *                                                       that are hidden
+ * @property  {Array}  results_passed         - Array of all the results
+ *                                              that passed
+ * @property  {Array}  results_violations     - Array of all the results
+ *                                              that resulted in violations
+ * @property  {Array}  results_warnings       - Array of all the results
+ *                                              that resulted in warnings
+ * @property  {Array}  results_manual_checks  - Array of all the results
+ *                                              that require manual evaluations
+ * @property  {Array}  results_hidden         - Array of all the results
+ *                                              that are hidden
  *
- * @property  {ElementResultsSummary} element_results_summary  - Summary of the node results for
+ * @property  {ElementResultsSummary} results_summary  - Summary of the node results for
  *                                               the rule result
  */
 
@@ -12784,20 +12835,31 @@ class RuleResult {
   constructor (rule) {
     this.rule = rule;
 
-    this.element_results_passed         = [];
-    this.element_results_violations     = [];
-    this.element_results_warnings       = [];
-    this.element_results_manual_checks  = [];
-    this.element_results_hidden         = [];
+    this.results_passed         = [];
+    this.results_violations     = [];
+    this.results_warnings       = [];
+    this.results_manual_checks  = [];
+    this.results_hidden         = [];
 
-    this.element_results_summary = new ElementResultsSummary();
+    this.results_summary = new ResultsSummary();
 
     if (debug$2.flag) {
       debug$2.log(this.toString());
     }
   }
 
-   /**
+  /**
+   * @method validate
+   *
+   * @desc Executes the validate function of the rule and stores the
+   *       results in this rule result
+  */
+
+  validate (domCache) {
+    return this.rule.validate(domCache, this);
+  }
+
+  /**
    * @method hasHiddenElementResults
    *
    * @desc True if at least one element result is a hidden,
@@ -12807,7 +12869,7 @@ class RuleResult {
    */
 
   hasHiddenElementResults () {
-    return this.element_results_summary.hidden > 0;
+    return this.results_summary.hidden > 0;
   }
 
   /**
@@ -12816,11 +12878,10 @@ class RuleResult {
    * @desc Returns a number between 0 - 100 indicating the level of
    *       implementation the violations, warnings and passed element results
    *
-   * @return {Number} see description
+   * @return {Integer} see description
    */
 
   getImplementationScore () {
-
     let score = -1;
     const ers = this.getElementResultsSummary();
     const failures = ers.violations + ers.warnings;
@@ -12839,10 +12900,10 @@ class RuleResult {
  *
  * @desc Return a numerical constant indicating the level of implementation:
  *
- * @return {Number} see description
+ * @return {Integer} see description
  */
 
-  getImplementationValue   () {
+  getImplementationValue () {
 
     let value     = IMPLEMENTATION_VALUE.NOT_APPLICABLE;
     const summary = this.getElementResultsSummary();
@@ -12884,48 +12945,19 @@ class RuleResult {
   */
 
   getImplementationValueNLS () {
-
-    const implValue = this.getImplementationValue();
-    let nls = "Undefined";
-    switch (implValue) {
-      case IMPLEMENTATION_VALUE.NOT_APPLICABLE:
-        nls = "Not Implemented";
-        break;
-
-      case IMPLEMENTATION_VALUE.PARTIAL_IMPLEMENTATION:
-        nls = "Partial Implementation";
-        break;
-
-      case IMPLEMENTATION_VALUE.ALMOST_COMPLETE:
-        nls = "Almost Complete";
-        break;
-
-      case IMPLEMENTATION_VALUE.COMPLETE:
-        nls = "Complete";
-        break;
-
-      case IMPLEMENTATION_VALUE.COMPLETE_WITH_MANUAL_CHECKS:
-        nls = "Complete with Manual Checks";
-        break;
-
-      case IMPLEMENTATION_VALUE.MANUAL_CHECKS_ONLY:
-        nls = "Manual Checks Only";
-        break;
-
-    }
-    return nls;
+    return getCommonMessage('implementationValue', this.getImplementationValue());
   }
 
   /**
-  * @method getElementResultsSummary
+  * @method getResultsSummary
   *
-  * @desc Gets numerical summary information about the element results
+  * @desc Gets numerical summary information about the results
   *
   * @return {ElementResultSummary} see @desc
   */
 
-  getElementResultsSummary () {
-    return this.element_results_summary;
+  getResultsSummary () {
+    return this.results_summary;
   }
 
   /**
@@ -12936,7 +12968,6 @@ class RuleResult {
   * @return {RULE_RESULT_VALUE} Returns a rule result value constant
   */
   getResultValue () {
-
     let resultValue = RULE_RESULT_VALUE.NOT_APPLICABLE;
     const summary = this.getElementResultsSummary();
 
@@ -12949,83 +12980,47 @@ class RuleResult {
   }
 
   /**
-  * @method getResultValueNLS
-  *
-  * @desc Gets a string representation of the rule result value:
-  *
-  * @return {String} Returns a string representing the rule result value
-  */
+   * @method getResultValueNLS
+   *
+   * @desc Gets a short string representation of the rule result value:
+   *
+   * @return {String} Returns a string representing the rule result value
+   */
   getResultValueNLS () {
-    const summary = this.getElementResultsSummary();
-
-    if (summary.violations > 0)         return 'V';
-    else if (summary.warnings > 0)      return 'W';
-    else if (summary.manual_checks > 0) return 'MC';
-    else if (summary.passed > 0)        return 'P';
-
-    return 'N/A';
+    return getCommonMessage('ruleResult', this.getResultValue());
   }
 
   /**
-  * @method getMessage
-  *
-  * @desc Generates a localized rule result message
-  *
-  * @param {String}  id      -  Id of the rule result message string
-  * @param {String}  prefix  -  Prefix message for the string
-  *
-  * @return {String} Strings with rule result message
-  */
-  getMessage   (id, prefix) {
+   * @method getMessage
+   *
+   * @desc Generates a localized rule result message
+   *
+   * @param {String}  id      -  Id of the rule result message string
+   *
+   * @return {String} Strings with rule result message
+   */
 
-    if (typeof prefix !== 'string') prefix = "";
-
-    const rule       = this.getRule();
-    const rule_nls   = rule.getNLS();
-    const common_nls = rule.getCommonNLS();
-    const rule_id    = rule.getId();
-
-    let message = rule_nls['RULE_RESULT_MESSAGES'][id];
-
-    if (id === 'ACTION_NONE') {
-      message = common_nls.ACTION_NONE;
-      return message;
+  getMessage (id) {
+    if ((id === 'ACTION_NONE') ||
+        (id === 'NOT_APPLICABLE')) {
+      return getCommonMessage('ruleResultMessages', id);
     }
 
-    if (id === 'NOT_APPLICABLE') {
-      message = common_nls.NOT_APPLICABLE;
-      return message;
-    }
-
+    let message = this.rule_result_msgs[id];
     if (typeof message !== 'string' || (message.length === 0)) {
-      message = "Message is missing for rule id: " + rule_id + " and mesage id: " + id;
-    }
-    else {
-      message = prefix + message;
+      message = "Message is missing for rule id: " + this.rule.rule_id + " and mesage id: " + id;
     }
 
-    var type = "";
-
-    if (message.indexOf("%RULE_TYPE") >= 0) {
-
-      if (this.rule_mapping.required) type = common_nls.message_severities.MUST;
-      else type = common_nls.message_severities.SHOULD;
-
-      message = message.replaceAll("%RULE_TYPE", type);
-    }
-
-    var rs = this.getElementResultsSummary();
+    const summary = this.results_summary;
+    const failures = summary.violations + summary.warnings;
+    const total    = summary.violations + summary.warnings + summary.passed;
 
     // Replace tokens with rule values
-
-    var failures = rs.violations + rs.warnings;
-    var total    = rs.violations + rs.warnings + rs.passed;
-
     message = replaceAll(message, "%N_F",  failures.toString());
-    message = replaceAll(message, "%N_P",  rs.passed.toString());
-    message = replaceAll(message, "%N_T",  (total + rs.manual_checks).toString());
-    message = replaceAll(message, "%N_MC", rs.manual_checks.toString());
-    message = replaceAll(message, "%N_H",  rs.hidden.toString());
+    message = replaceAll(message, "%N_P",  summary.passed.toString());
+    message = replaceAll(message, "%N_T",  (total + summary.manual_checks).toString());
+    message = replaceAll(message, "%N_MC", summary.manual_checks.toString());
+    message = replaceAll(message, "%N_H",  summary.hidden.toString());
     message = transformElementMarkup(message);
 
     return message;
@@ -13042,10 +13037,7 @@ class RuleResult {
 
   getResultMessagesArray () {
 
-    // If the messages already exist, just return them
-    if (this.rule_result_messages.length) return this.rule_result_messages;
-
-    const summary = this.element_results_summary;
+    const summary = this.results_summary;
 
     let messages = [];
     let message = "";
@@ -13095,137 +13087,73 @@ class RuleResult {
   */
 
   getResultMessage   () {
-
     const messages = this.getResultMessagesArray();
-    const last = messages.length - 1;
-    let message = "";
-
-    messages.forEach( (m, index) => {
-      if (index < last) {
-        message += m + '; ';
-      } else {
-        message += m;
-      }
-    });
-    return message;
-
+    return messages.join('; ');
   }
 
   /**
-   * @method getElementResultsArray
+   * @method getAllResultsArray
    *
-   * @desc Returns an array of element results in severity order
+   * @desc Returns an array of all results in severity order
    *
-   * @return {Array} Returns a array of element results
+   * @return {Array} see @desc
    */
 
-  getElementResultsArray   () {
-
-    function addElementResults(items) {
-      let i;
-      const len = items.length;
-
-      for (i = 0; i < len; i++) {
-        element_results.push(items[i]);
-      }
-    }
-
-    let element_results = [];
-
-    addElementResults(this.element_results_passed);
-    addElementResults(this.element_results_violations);
-    addElementResults(this.element_results_warnings);
-    addElementResults(this.element_results_manual_checks);
-    addElementResults(this.element_results_hidden);
-
-    return element_results;
+  getAllResultsArray   () {
+    return this.results_violations.contact(
+      this.results_warnings,
+      this.results_manual_checks,
+      this.results_passed,
+      this.results_hidden);
   }
 
-
   /**
-   * @method addResult
+   * @method addElementResult
    *
-   * @desc Adds a result of an evaluation of rule on a node in the dom
+   * @desc Adds a element result of an evaluation of rule on a node in the dom
    *
-   * @param  {Number}  test_result         - Number representing if a node passed, failed, manual check or other test result
-   * @param  {Object}  cache_item          - Reference to cache item associated with the test
+   * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
+   * @param  {Object}  dom_item            - Reference to DOMcache item (e.g. domElement, domText objects)
    * @param  {String}  message_id          - Reference to the message string in the NLS file
    * @param  {Array}   message_arguements  - Array of values used in the message string
-   * @param  {String}  element_identifier  - String identifying the element (Optional)
    */
 
-  addResult   (test_result, cache_item, message_id, message_arguments, element_identifier) {
+  addElementResult (test_result, dom_item, message_id, message_arguments) {
+    dom_item = dom_item.isDomText ? dom_item.parentDomElement : dom_item;
+    const result_value = getResultValue(test_result, this.isRuleRequired());
+    const element_result = new ElementResult(this, result_value, dom_item, message_id, message_arguments);
 
-    if (!cache_item) return;
+    switch (result_value) {
+      case RESULT_VALUE.HIDDEN:
+        this.results_hidden.push(element_result);
+        dom_item.resultsHidden.push(element_result);
+        this.results_summary.addHidden(1);
+        break;
 
-    var dom_element_item = null;
+      case RESULT_VALUE.PASS:
+        this.results_passed.push(element_result);
+        dom_item.resultsPassed.push(element_result);
+        this.results_summary.addPassed(1);
+        break;
 
-    if (cache_item.dom_element) {
-      dom_element_item = cache_item.dom_element;
-    }
-    else {
-      dom_element_item = cache_item;
-    }
+      case RESULT_VALUE.VIOLATION:
+        this.results_violations.push(element_result);
+        dom_item.resultsViolations.push(element_result);
+        this.results_summary.addViolations(1);
+        break;
 
-    dom_element_item.has_rule_results = true;
+      case RESULT_VALUE.WARNING:
+        this.results_warnings.push(element_result);
+        dom_item.resultsWarnings.push(element_result);
+        this.results_summary.addWarnings(1);
+        break;
 
-    var element_result_value = ELEMENT_RESULT_VALUE.NONE;
-
-    switch (test_result) {
-
-    case TEST_RESULT.PASS:
-      element_result_value = ELEMENT_RESULT_VALUE.PASS;
-      break;
-
-    case TEST_RESULT.FAIL:
-      if (this.isRuleRequired()) element_result_value = ELEMENT_RESULT_VALUE.VIOLATION;
-      else element_result_value = ELEMENT_RESULT_VALUE.WARNING;
-      break;
-
-    case TEST_RESULT.MANUAL_CHECK:
-      element_result_value = ELEMENT_RESULT_VALUE.MANUAL_CHECK;
-      break;
-
-    case TEST_RESULT.HIDDEN:
-      element_result_value = ELEMENT_RESULT_VALUE.HIDDEN;
-      break;
-    }
-
-    var element_result = new ElementResult(this, element_result_value, cache_item, message_id, message_arguments, element_identifier);
-
-    switch (element_result_value) {
-
-    case ELEMENT_RESULT_VALUE.HIDDEN:
-      this.element_results_hidden.push(element_result);
-      if (dom_element_item)  dom_element_item.rules_hidden.push(element_result);
-      this.element_results_summary.addHidden(1);
-      break;
-
-    case ELEMENT_RESULT_VALUE.PASS:
-      this.element_results_passed.push(element_result);
-      if (dom_element_item) dom_element_item.rules_passed.push(element_result);
-      this.element_results_summary.addPassed(1);
-      break;
-
-    case ELEMENT_RESULT_VALUE.VIOLATION:
-      this.element_results_violations.push(element_result);
-      if (dom_element_item) dom_element_item.rules_violations.push(element_result);
-      this.element_results_summary.addViolations(1);
-      break;
-
-    case ELEMENT_RESULT_VALUE.WARNING:
-      this.element_results_warnings.push(element_result);
-      if (dom_element_item) dom_element_item.rules_warnings.push(element_result);
-      this.element_results_summary.addWarnings(1);
-      break;
-
-    case ELEMENT_RESULT_VALUE.MANUAL_CHECK:
-      this.element_results_manual_checks.push(element_result);
-      if (dom_element_item) dom_element_item.rules_manual_checks.push(element_result);
-      this.element_results_summary.addManualChecks(1);
-      break;
+      case RESULT_VALUE.MANUAL_CHECK:
+        this.results_manual_checks.push(element_result);
+        dom_item.resultsManualChecks.push(element_result);
+        this.results_summary.addManualChecks(1);
+        break;
     } // end switch
-
   }
 
   /**
@@ -13313,7 +13241,7 @@ class RuleResult {
    *
    * @desc Get the rule scope constant of the rule
    *
-   * @return {Number} rule scope constant
+   * @return {Integer} rule scope constant
    */
 
   getRuleScope   () {
@@ -13344,7 +13272,7 @@ class RuleResult {
 
   getDataForJSON (flag=false) {
 
-    const summary = this.element_results_summary;
+    const summary = this.results_summary;
 
     const data = {
       rule_id: this.rule.getId(),
@@ -13376,18 +13304,18 @@ class RuleResult {
       implementation_value: this.getImplementationValue(),
       implementation_nls:   this.getImplementationValueNLS(),
 
-      elements_passed:       summary.passed,
-      elements_violation:    summary.violations,
-      elements_warning:      summary.warnings,
-      elements_failure:     (summary.violations + summary.warnings),
-      elements_manual_check: summary.manual_checks,
-      elements_hidden:       summary.hidden
+      results_passed:       summary.passed,
+      results_violation:    summary.violations,
+      results_warning:      summary.warnings,
+      results_failure:     (summary.violations + summary.warnings),
+      results_manual_check: summary.manual_checks,
+      results_hidden:       summary.hidden
     };
 
     if (flag) {
-      data.element_results = [];
-      this.element_results.forEach ( er => {
-        data.element_results.push(er.getDataForJSON());
+      data.results = [];
+      this.getAllResults().forEach ( r => {
+        data.element_results.push(r.getDataForJSON());
       });
     }
     return data; 
@@ -13416,7 +13344,7 @@ class RuleResult {
    */
 
   toString () {
-    return this.getRuleDefinition() + " (" + this.element_results_summary + ")";
+    return this.getRuleDefinition() + " (" + this.results_summary + ")";
   }
 
 }
@@ -13438,7 +13366,7 @@ class EvaluationResult {
 
     allRules.forEach (rule => {
       const ruleResult = new RuleResult(rule);
-      rule.evaluate(domCache, ruleResult);
+      ruleResult.validate(domCache);
       this.allRuleResults(ruleResult);
     });
 

@@ -6,7 +6,7 @@ import DebugLogging  from './debug.js';
 const debug = new DebugLogging('constants', false)
 
 export {
-  ELEMENT_RESULT_VALUE,
+  RESULT_VALUE,
   IMPLEMENTATION_VALUE,
   REFERENCES,
   RULESET,
@@ -19,14 +19,15 @@ export {
   WCAG_GUIDELINE,
   WCAG_SUCCESS_CRITERION,
   WCAG_LEVEL,
-  getGuidelineId
+  getGuidelineId,
+  getResultValue
 }
 
 const VERSION = '2.0.beta1';
 
 /**
  * @constant RULESET
- * @type Number
+ * @type Integer
  * @desc Constants related to the priority of learning a rule
  *       For example people new to accessibility would start
  *       with understanding TRIAGE rules and then moving to MORE
@@ -40,12 +41,12 @@ const VERSION = '2.0.beta1';
 
 const RULESET =  {
   TRIAGE: 1,
-  MORE: 3,
-  ALL:7
+  MORE: 2,
+  ALL: 3
 }
 
 /**
- * @constant RULE_CATEGORIES * @type Number
+ * @constant RULE_CATEGORIES * @type Integer
  * @desc Numercial constant representing a rule category and is bit maskable
  *
  * @example
@@ -83,7 +84,7 @@ const RULE_CATEGORIES = {
 };
 
   /**
- * @constant RULE_SCOPE * @type Number
+ * @constant RULE_SCOPE * @type Integer
  * @desc Defines scope of a rule
  *
  * @example
@@ -101,7 +102,7 @@ const RULE_SCOPE =  {
 };
 
   /**
- * @constant TEST_RESULT * @type Number
+ * @constant TEST_RESULT * @type Integer
  * @desc Types of rule results, used in validation functions
  *
  * @example
@@ -121,7 +122,7 @@ const TEST_RESULT = {
 }
 
 /**
- * @constant IMPLEMENTATION_VALUE * @type Number
+ * @constant IMPLEMENTATION_VALUE * @type Integer
  * @desc Constants used to represent the level of implementation
  *
  * @example
@@ -147,19 +148,20 @@ const IMPLEMENTATION_VALUE = {
 }
 
   /**
- * @constant ELEMENT_RESULT_VALUE * @type Number
+ * @constant RESULT_VALUE
+ * @type Integer
  * @desc Constants used to represent evaluation results at the element level
  *
  * @example
- * ELEMENT_RESULT_VALUE.UNDEFINED
- * ELEMENT_RESULT_VALUE.PASS
- * ELEMENT_RESULT_VALUE.HIDDEN
- * ELEMENT_RESULT_VALUE.MANUAL_CHECK
- * ELEMENT_RESULT_VALUE.VIOLATION
- * ELEMENT_RESULT_VALUE.WARNING
+ * RESULT_VALUE.UNDEFINED
+ * RESULT_VALUE.PASS
+ * RESULT_VALUE.HIDDEN
+ * RESULT_VALUE.MANUAL_CHECK
+ * RESULT_VALUE.VIOLATION
+ * RESULT_VALUE.WARNING
  */
 
-const ELEMENT_RESULT_VALUE = {
+const RESULT_VALUE = {
   UNDEFINED      : 0,
   PASS           : 1,
   HIDDEN         : 2,  // Content is hidden and not tested for accessibility
@@ -169,7 +171,7 @@ const ELEMENT_RESULT_VALUE = {
 };
 
 /**
- * @constant RULE_RESULT_VALUE * @type Number
+ * @constant RULE_RESULT_VALUE * @type Integer
  * @desc Constants used to represent evaluation results at the rule level
  *
  * @example
@@ -192,7 +194,7 @@ const RULE_RESULT_VALUE = {
 
   /**
  * @constant WCAG_PRINCIPLE
- * @type Number
+ * @type Integer
  * @desc Numercial constant representing a WCAG 2.0 Principles
  *
  * @example
@@ -211,7 +213,7 @@ const WCAG_PRINCIPLE = {
 
   /**
  * @constant WCAG_GUIDELINE
- * @type Number
+ * @type Integer
  * @desc Numercial constant representing a WCAG 2.0 Guidelines
  *
  * @example
@@ -247,7 +249,7 @@ const WCAG_GUIDELINE = {
 }
 
 /**
- * @constant WCAG_SUCCESS_CRITERION * @type Number
+ * @constant WCAG_SUCCESS_CRITERION * @type Integer
  * @desc Numercial constant representing a WCAG 2.x Success Criteria
  *
  * @example
@@ -339,7 +341,7 @@ const WCAG_SUCCESS_CRITERION = {
 
 /**
  * @constant REFERENCES
- * @type Number
+ * @type Integer
  * @desc Types of reference for supplemential materials to help people understand an accessibility requirement and
  *       how to improve the accessibility
  *
@@ -371,7 +373,7 @@ const REFERENCES = {
 
 /**
  * @constant WCAG_LEVEL
- * @type Number
+ * @type Integer
  * @desc Constants related to the level of importance of a success criteria
  *
  * @example
@@ -409,3 +411,45 @@ function getGuidelineId(sc) {
   debug.flag && debug.log(`[getGuidelineId][gl]: ${gl}`)
   return WCAG_GUIDELINE[gl];
 }
+
+/**
+ * @function getResultValue
+ *
+ * @desc Returns RESULT_VALUE constant identifying the result based on
+ *       the rule being required or recommended
+ *
+ * @param  {Integer}  testValue  - a TEST_VALUE constant representing the
+ *                                 result
+ * @param  {Boolean}  isrequired  - true if the rule is required
+ *
+ * @return {Integer} see @desc
+ */
+
+function getResultValue(testValue, isRequired) {
+    switch (testValue) {
+
+      case TEST_RESULT.PASS:
+        return RESULT_VALUE.PASS;
+
+      case TEST_RESULT.FAIL:
+        if (isRequired) {
+          return RESULT_VALUE.VIOLATION;
+        }
+        else {
+          return RESULT_VALUE.WARNING;
+        }
+
+      case TEST_RESULT.MANUAL_CHECK:
+        return RESULT_VALUE.MANUAL_CHECK;
+
+      case TEST_RESULT.HIDDEN:
+        return RESULT_VALUE.HIDDEN;
+
+      default:
+        break;
+    }
+
+    return RESULT_VALUE.NONE;
+}
+
+

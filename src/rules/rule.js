@@ -28,7 +28,7 @@ import {
 import DebugLogging from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Rule', true);
+const debug = new DebugLogging('Rule', false);
 
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
@@ -60,7 +60,7 @@ export default class Rule {
     this.validate            = rule_item.validate;  // function
 
     // Rule information that is locale dependent
-    this.rule_category_info  = getRuleCategoryInfo(this.rule_category); // Object with keys to strings
+    this.rule_category_info  = getRuleCategoryInfo(this.rule_category_id); // Object with keys to strings
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
     this.ruleset_info        = getRulesetInfo(this.ruleset_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id) // String

@@ -6,36 +6,31 @@ import DebugLogging  from './debug.js';
 const debug = new DebugLogging('elementResultSummary', false);
 
 /* ---------------------------------------------------------------- */
-/*                             ElementResultSummary                        */
+/*                             ResultSummary                        */
 /* ---------------------------------------------------------------- */
 
  /**
- * @class ElementResultsSummary
+ * @class ResultsSummary
  *
- * @desc Constructor for an object that contains summary of element results for rule
- *       result, cache item result, rule result group result or evaluation result
- *       objects
+ * @desc Constructor for an object that contains summary of element, page, website
+ *       results for rule result
  *
- * @property  {Number}  passed        - Number of element results that passed the
- *                                      rule (value >= 0)
- * @property  {Number}  page          - Number of element results that contribute to
- *                                      a page level manual check
- * @property  {Number}  violations    - Number of element results that failed the
- *                                      rule as a violation (value >= 0)
- * @property  {Number}  warnings      - Number of element results that failed the
- *                                      rule as a warning (value >= 0)
- * @property  {Number}  manual_checks - Number of element results that require a
- *                                      manual check (value >= 0)
- * @property  {Number}  hidden        - Number of element results that are hidden
- *                                      (value >= 0)
+ * @property  {Integer}  p  - Number of element, page or website results that passed
+ * @property  {Integer}  v  - Number of required element, page or website results that
+ *                            failed
+ * @property  {Integer}  w  - Number of recommended element, page or website results
+ *                            that failed
+ * @property  {Integer}  mc - Number of element, page or website results that require
+ *                            a mannual check
+ * @property  {Integer}  h  - Number of element, page or website results that are hidden
  */
 
-export default class ElementResultsSummary {
+export default class ResultsSummary {
   constructor () {
     // Element result counts
-    this.p   = 0;  // Pass result (p)
-    this.v   = 0;  // Fail result (f)
-    this.w   = 0;  // Fail result (f)
+    this.p   = 0;
+    this.v   = 0;
+    this.w   = 0;
     this.mc  = 0;
     this.h   = 0;
 
@@ -67,7 +62,7 @@ export default class ElementResultsSummary {
    *
    * @desc Adds violation element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
   addViolations ( n ) {
@@ -81,7 +76,7 @@ export default class ElementResultsSummary {
    *
    * @desc Adds warning element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
   addWarnings ( n ) {
@@ -95,7 +90,7 @@ export default class ElementResultsSummary {
    *
    * @desc Adds manual check element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
   addManualChecks ( n ) {
@@ -109,7 +104,7 @@ export default class ElementResultsSummary {
    *
    * @desc Adds passed element results to the summary calculation
    *
-   * @param  {Number}  n  - Number of element results that passed
+   * @param  {Integer}  n  - Number of element results that passed
    */
 
    addPassed ( n ) {
@@ -124,7 +119,7 @@ export default class ElementResultsSummary {
    *
    * @desc Adds hidden element results to the summary calculation
    *
-   * @param  {Number}  n  -  Number of element results that are hidden
+   * @param  {Integer}  n  -  Number of element results that are hidden
    */
 
   addHidden ( n ) {

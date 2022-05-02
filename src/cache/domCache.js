@@ -91,6 +91,11 @@ export default class DOMCache {
     }
   }
 
+  // Returns the root element of the transversal
+  get page () {
+    return this.domCache;
+  }
+
   // Tests if a tag name can be skipped
   isSkipableElement(tagName) {
     return skipableElements.includes(tagName);
@@ -244,5 +249,7 @@ export default class DOMCache {
     debug.domElement(this.domCache);
     this.domCache.showDomElementTree(' ');
   }
+
+
 
 }
