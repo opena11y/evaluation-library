@@ -215,12 +215,11 @@ export default class RuleGroupResult {
     var eval_time  = date[1] + ":" + date[2];
     var eval_date  = date[0];
 
-    const ruleGroupResultInfo {
+    const ruleGroupResultInfo = {
       eval_url:         cleanForUTF8(this.evaluation_result.eval_url);
       eval_url_encoded: encodeURI(this.evaluation_result.eval_url);
       eval_title: this.evaluation_result.title;
-
-      ruleset_id:
+      ruleset_id: ruleset.getId(),
 
     }
 

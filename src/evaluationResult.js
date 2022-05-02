@@ -2,7 +2,18 @@
 
 /* Imports */
 import DebugLogging  from './debug.js';
-import {getFormattedDate} from './utils.js';
+import {
+  getFormattedDate,
+  cleanForUTF8
+} from './utils.js';
+import RuleGroupResult from './ruleGroupResult.js';
+import RuleResult from './ruleResult.js';
+import {
+  getCommonMessage,
+  getGuidelineInfo,
+  getRuleCategoryInfo
+} from './_locale/locale.js'
+
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
@@ -81,23 +92,12 @@ export default class EvaluationResult {
    * @return {RuleGroupResult}  see description
    */
 
-  getRuleResultsAll (group_filter) {
-
-    if (typeof group_filter !== 'number') group_filter = OpenAjax.a11y.RULE_GROUP.GROUP123;
-
-    var rgr = new OpenAjax.a11y.RuleGroupResult(this, "All Rule Results", "", "");
-
-    for (var i = 0; i < this.rule_results.length; i++) {
-       var rr = this.rule_results[i];
-       var r = rr.getRule();
-
-       if (r.getGroup() & group_filter) {
-         rgr.addRuleResult(rr);
-       }
-    }
-
+  getRuleResultsAll () {
+    var rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "");
+    this.allRuleResults.forEach( rr => {
+       rgr.addRuleResult(rr);
+    });
     return rgr;
-
   }
 
   /**
@@ -105,69 +105,43 @@ export default class EvaluationResult {
    *
    * @desc Returns an object containing the rule results associated with a WCAG 2.0 Guideline
    *
-   * @param {Number}  guideline_id  -  Number representing the guideline id
-   * @param {Number}  group_filter -  Number of bit mask for which rule groups to include
+   * @param {Number}  guidelineId  -  Number representing the guideline id
    *
    * @return {RuleGroupResult}  see description
    */
 
-  getRuleResultsByGuideline (guideline_id, group_filter) {
+  getRuleResultsByGuideline (guidelineId) {
+    const glInfo = getGuidelineInfo(guidelineId);
+    const rgr = new RuleGroupResult(this, glInfo.title, glInfo.url, glInfo.description);
 
-    if (typeof group_filter !== 'number') group_filter = OpenAjax.a11y.RULE_GROUP.GROUP123;
-
-    var gl_info = OpenAjax.a11y.info.GuidelineInfo(guideline_id);
-
-    var rgr = new OpenAjax.a11y.RuleGroupResult(this, gl_info.title, gl_info.url, gl_info.description);
-
-    for (var i = 0; i < this.rule_results.length; i++) {
-
-       var rr = this.rule_results[i];
-       var r = rr.getRule();
-
-       if ((r.getGuideline() & guideline_id)&&
-           (r.getGroup()     & group_filter)) {
-         rgr.addRuleResult(rr);
-       }
-
-    }
-
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getGuideline() & guidelineId) {
+        rgr.addRuleResult(rr);
+      }
+    });
     return rgr;
-
   }
-
 
   /**
    * @method getRuleResultsByCategory
    *
    * @desc Returns an object containing the rule results for the rules in a rule category
    *
-   * @param {Number}  category_id  -  Number of the rule category
-   * @param {Number}  group_filter -  Number of bit mask for which rule groups to include
+   * @param {Number}  categoryId  -  Number of the rule category
    *
    * @return {RuleGroupResult}  see description
    */
 
-  getRuleResultsByCategory (category_id, group_filter) {
+  getRuleResultsByCategory (categoryId) {
+    var rcInfo = getRuleCategoryInfo(categoryId);
+    var rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description);
 
-    if (typeof group_filter !== 'number') group_filter = OpenAjax.a11y.RULE_GROUP.GROUP123;
-
-    var rc_info = OpenAjax.a11y.info.RuleCategoryInfo(category_id);
-
-    var rgr = new OpenAjax.a11y.RuleGroupResult(this, rc_info.title, rc_info.url, rc_info.description);
-
-    for (var i = 0; i < this.rule_results.length; i++) {
-
-       var rr = this.rule_results[i];
-       var r = rr.getRule();
-
-       if ((r.getCategory() & category_id) &&
-           (r.getGroup()    & group_filter)) {
-         rgr.addRuleResult(rr);
-       }
-    }
-
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getRuleCategory() & categoryId) {
+        rgr.addRuleResult(rr);
+      }
+    });
     return rgr;
-
   }
 
   /**
@@ -184,11 +158,7 @@ export default class EvaluationResult {
   toJSON (include_element_results) {
 
     if (typeof include_element_results !== 'boolean') include_element_results = false;
-
-    var cleanForUTF8  = OpenAjax.a11y.util.cleanForUTF8;
-
     var ruleset = this.getRuleset();
-
     var ruleset_info = ruleset.getRulesetInfo();
 
     var json = "{\n";

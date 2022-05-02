@@ -199,4 +199,4 @@ function cleanForUTF8 (str) {
     if (c >= ' ' && c < '~') nstr += c;
   });
   return nstr;
-};
+}
