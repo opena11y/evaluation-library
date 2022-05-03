@@ -10,9 +10,10 @@ import {
   RULE_RESULT_VALUE,
   getResultValue
 } from './constants.js';
-import ElementResult from './elementResult.js';
+import ElementResult  from './elementResult.js';
+import PageResult     from './pageResult.js';
 import ResultsSummary from './elementResultsSummary.js';
-import {replaceAll} from './utils.js'
+import {replaceAll}   from './utils.js';
 import {
   getCommonMessage,
   transformElementMarkup
@@ -77,10 +78,10 @@ export default class RuleResult {
    *
    * @desc Executes the validate function of the rule and stores the
    *       results in this rule result
-  */
+   */
 
   validate (domCache) {
-    return this.rule.validate(domCache, this);
+    this.rule.validate(domCache, this);
   }
 
   /**
@@ -101,13 +102,15 @@ export default class RuleResult {
    *
    * @desc Returns a number between 0 - 100 indicating the level of
    *       implementation the violations, warnings and passed element results
+   *       A score value of -1 means the rule only had manual checks or was not
+   *       applicable
    *
    * @return {Integer} see description
    */
 
   getImplementationScore () {
     let score = -1;
-    const ers = this.getElementResultsSummary();
+    const ers = this.getResultsSummary();
     const failures = ers.violations + ers.warnings;
     const passed = ers.passed;
     const total = failures + passed;
@@ -119,18 +122,18 @@ export default class RuleResult {
     return score;
   }
 
- /**
- * @method getImplementationValue
- *
- * @desc Return a numerical constant indicating the level of implementation:
- *
- * @return {Integer} see description
- */
+  /**
+   * @method getImplementationValue
+   *
+   * @desc Return a numerical constant indicating the level of implementation:
+   *
+   * @return {Integer} see description
+   */
 
   getImplementationValue () {
 
     let value     = IMPLEMENTATION_VALUE.NOT_APPLICABLE;
-    const summary = this.getElementResultsSummary();
+    const summary = this.getResultsSummary();
     const score   = this.getImplementationScore();
 
     if (summary.manual_checks > 0) {
@@ -161,39 +164,40 @@ export default class RuleResult {
   }
 
   /**
-  * @method getImplementationValueNLS
-  *
-  * @desc Returns a string indicating the level of implementation:
-  *
-  * @return {String} see description
-  */
+   * @method getImplementationValueNLS
+   *
+   * @desc Returns a string indicating the level of implementation:
+   *
+   * @return {String} see description
+   */
 
   getImplementationValueNLS () {
     return getCommonMessage('implementationValue', this.getImplementationValue());
   }
 
   /**
-  * @method getResultsSummary
-  *
-  * @desc Gets numerical summary information about the results
-  *
-  * @return {ElementResultSummary} see @desc
-  */
+   * @method getResultsSummary
+   *
+   * @desc Gets numerical summary information about the results
+   *
+   * @return {ElementResultSummary} see @desc
+   */
 
   getResultsSummary () {
     return this.results_summary;
   }
 
   /**
-  * @method getResultValue
-  *
-  * @desc Gets the rule result value based on element results
-  *
-  * @return {RULE_RESULT_VALUE} Returns a rule result value constant
-  */
+   * @method getResultValue
+   *
+   * @desc Gets the rule result value based on element results
+   *
+   * @return {RULE_RESULT_VALUE} Returns a rule result value constant
+   */
+
   getResultValue () {
     let resultValue = RULE_RESULT_VALUE.NOT_APPLICABLE;
-    const summary = this.getElementResultsSummary();
+    const summary = this.getResultsSummary();
 
     if (summary.violations > 0) resultValue = RULE_RESULT_VALUE.VIOLATION;
     else if (summary.warnings > 0) resultValue = RULE_RESULT_VALUE.WARNING;
@@ -210,6 +214,7 @@ export default class RuleResult {
    *
    * @return {String} Returns a string representing the rule result value
    */
+
   getResultValueNLS () {
     return getCommonMessage('ruleResult', this.getResultValue());
   }
@@ -225,39 +230,41 @@ export default class RuleResult {
    */
 
   getMessage (id) {
+    let message;
     if ((id === 'ACTION_NONE') ||
         (id === 'NOT_APPLICABLE')) {
-      return getCommonMessage('ruleResultMessages', id);
+      message = getCommonMessage('ruleResultMessages', id);
     }
 
-    let message = this.rule_result_msgs[id];
-    if (typeof message !== 'string' || (message.length === 0)) {
-      message = "Message is missing for rule id: " + this.rule.rule_id + " and mesage id: " + id;
+    if (!message) {
+      message = this.rule.rule_result_msgs[id];
+      if (typeof message !== 'string' || (message.length === 0)) {
+        message = "Message is missing for rule id: " + this.rule.rule_id + " and mesage id: " + id;
+      }
+
+      const summary = this.results_summary;
+      const failures = summary.violations + summary.warnings;
+      const total    = summary.violations + summary.warnings + summary.passed;
+
+      // Replace tokens with rule values
+      message = replaceAll(message, "%N_F",  failures.toString());
+      message = replaceAll(message, "%N_P",  summary.passed.toString());
+      message = replaceAll(message, "%N_T",  (total + summary.manual_checks).toString());
+      message = replaceAll(message, "%N_MC", summary.manual_checks.toString());
+      message = replaceAll(message, "%N_H",  summary.hidden.toString());
+      message = transformElementMarkup(message);
     }
-
-    const summary = this.results_summary;
-    const failures = summary.violations + summary.warnings;
-    const total    = summary.violations + summary.warnings + summary.passed;
-
-    // Replace tokens with rule values
-    message = replaceAll(message, "%N_F",  failures.toString());
-    message = replaceAll(message, "%N_P",  summary.passed.toString());
-    message = replaceAll(message, "%N_T",  (total + summary.manual_checks).toString());
-    message = replaceAll(message, "%N_MC", summary.manual_checks.toString());
-    message = replaceAll(message, "%N_H",  summary.hidden.toString());
-    message = transformElementMarkup(message);
-
     return message;
   }
 
   /**
-  * @method getResultMessagesArray
-  *
-  * @desc Generates a localized rule result messages
-  *
-  * @return {Array} An array of strings with rule result messages
-  *                 (typically only one string in the array)
-  */
+   * @method getResultMessagesArray
+   *
+   * @desc Generates a localized rule result messages
+   *
+   * @return {Array} An array of strings with rule result messages
+   *                 (typically only one string in the array)
+   */
 
   getResultMessagesArray () {
 
@@ -303,12 +310,12 @@ export default class RuleResult {
   }
 
   /**
-  * @method getResultMessage
-  *
-  * @desc Generates a localized rule result messages
-  *
-  * @return {String} Returns a single string with all result messages
-  */
+   * @method getResultMessage
+   *
+   * @desc Generates a localized rule result messages
+   *
+   * @return {String} Returns a single string with all result messages
+   */
 
   getResultMessage   () {
     const messages = this.getResultMessagesArray();
@@ -324,7 +331,7 @@ export default class RuleResult {
    */
 
   getAllResultsArray   () {
-    return this.results_violations.contact(
+    return this.results_violations.concat(
       this.results_warnings,
       this.results_manual_checks,
       this.results_passed,
@@ -332,9 +339,56 @@ export default class RuleResult {
   }
 
   /**
+   * @method updateResults
+   *
+   * @desc Updates rule result information for a element or page result
+   *
+   * @param  {Integer}  test_result   - Number representing if a result value
+   * @param  {Object}   result_item   - Reference to ElementResult or PageResult object
+   * @param  {Object}   dom_item      - Reference to DOMcache or domElement objects
+   */
+
+  updateResults (result_value, result_item, dom_item) {
+    switch (result_value) {
+      case RESULT_VALUE.HIDDEN:
+        this.results_hidden.push(result_item);
+        dom_item.resultsHidden.push(result_item);
+        this.results_summary.addHidden(1);
+        break;
+
+      case RESULT_VALUE.PASS:
+        this.results_passed.push(result_item);
+        dom_item.resultsPassed.push(result_item);
+        this.results_summary.addPassed(1);
+        break;
+
+      case RESULT_VALUE.VIOLATION:
+        this.results_violations.push(result_item);
+        dom_item.resultsViolations.push(result_item);
+        this.results_summary.addViolations(1);
+        break;
+
+      case RESULT_VALUE.WARNING:
+        this.results_warnings.push(result_item);
+        dom_item.resultsWarnings.push(result_item);
+        this.results_summary.addWarnings(1);
+        break;
+
+      case RESULT_VALUE.MANUAL_CHECK:
+        this.results_manual_checks.push(result_item);
+        dom_item.resultsManualChecks.push(result_item);
+        this.results_summary.addManualChecks(1);
+        break;
+
+      default:
+        break;
+    } // end switch
+  }
+
+  /**
    * @method addElementResult
    *
-   * @desc Adds a element result of an evaluation of rule on a node in the dom
+   * @desc Adds a element result from an evaluation of rule on the dom
    *
    * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
    * @param  {Object}  dom_item            - Reference to DOMcache item (e.g. domElement, domText objects)
@@ -347,40 +401,25 @@ export default class RuleResult {
     const result_value = getResultValue(test_result, this.isRuleRequired());
     const element_result = new ElementResult(this, result_value, dom_item, message_id, message_arguments);
 
-    switch (result_value) {
-      case RESULT_VALUE.HIDDEN:
-        this.results_hidden.push(element_result);
-        dom_item.resultsHidden.push(element_result);
-        this.results_summary.addHidden(1);
-        break;
+    this.updateResults(result_value, element_result, dom_item);
+  }
 
-      case RESULT_VALUE.PASS:
-        this.results_passed.push(element_result);
-        dom_item.resultsPassed.push(element_result);
-        this.results_summary.addPassed(1);
-        break;
+  /**
+   * @method addPageResult
+   *
+   * @desc Adds a page result from an evaluation of rule on the dom
+   *
+   * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
+   * @param  {Object}   dom_cache           - Reference to DOMcache for saving page results
+   * @param  {String}   message_id          - Reference to the message string in the NLS file
+   * @param  {Array}    message_arguements  - Array of values used in the message string
+   */
 
-      case RESULT_VALUE.VIOLATION:
-        this.results_violations.push(element_result);
-        dom_item.resultsViolations.push(element_result);
-        this.results_summary.addViolations(1);
-        break;
+  addPageResult (test_result, dom_cache, message_id, message_arguments) {
+    const result_value = getResultValue(test_result, this.isRuleRequired());
+    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments);
 
-      case RESULT_VALUE.WARNING:
-        this.results_warnings.push(element_result);
-        dom_item.resultsWarnings.push(element_result);
-        this.results_summary.addWarnings(1);
-        break;
-
-      case RESULT_VALUE.MANUAL_CHECK:
-        this.results_manual_checks.push(element_result);
-        dom_item.resultsManualChecks.push(element_result);
-        this.results_summary.addManualChecks(1);
-        break;
-
-      default:
-        break;
-    } // end switch
+    this.updateResults(result_value, page_result, dom_cache);
   }
 
   /**
@@ -396,31 +435,16 @@ export default class RuleResult {
   }
 
   /**
-   * @method isRuleRequiredNLS
+   * @method getRuleDefinition
    *
-   * @desc Returns 'Yes' or "No' depending on whether the rule is required or recommended rule
+   * @desc Gets the definition of the rule
    *
-   * @return {String} Returns "Yes" if required, otherwise "No"
+   * @return {String} Localized string of the rule definition based on being
+   *                  required or recommended
    */
-
-  isRuleRequiredNLS   () {
-    return this.isRuleRequired() ? 'Yes' : 'No';
-
-  }
-
-/**
- * @method getRuleDefinition
- *
- * @desc Gets the definition of the rule
- *
- * @return {String} Localized string of the rule definition based on being
- *                  required or recommended
- */
   getRuleDefinition   () {
-
-  return this.rule.getDefinition(this.isRuleRequired());
-
-}
+    return this.rule.getDefinition(this.isRuleRequired());
+  }
 
   /**
    * @method getRuleSummary
@@ -512,12 +536,12 @@ export default class RuleResult {
       guideline_code: this.rule.getGuidelineInfo().id,
 
       rule_category_nls:  this.rule.getCategoryInfo().title,
-      rule_category_code: this.rule.getCategory(),
+      rule_category_code: this.rule.getCategoryInfo().id,
 
       rule_scope_code_nls: this.rule.getScopeNLS(),
       rule_scope_code:     this.rule.getScope(),
 
-      ruleset_nls:  this.rule.getRulesetNLS(),
+      ruleset_nls:  this.rule.getRulesetInfo(),
       ruleset_code: this.rule.getRuleset(),
 
       result_value_nls: this.getResultValueNLS(),
@@ -536,13 +560,15 @@ export default class RuleResult {
       results_warning:      summary.warnings,
       results_failure:     (summary.violations + summary.warnings),
       results_manual_check: summary.manual_checks,
-      results_hidden:       summary.hidden
+      results_hidden:       summary.hidden,
+
+      results: []
     }
 
     if (flag) {
       data.results = [];
-      this.getAllResults().forEach ( r => {
-        data.element_results.push(r.getDataForJSON());
+      this.getAllResultsArray().forEach ( result => {
+        data.results.push(result.getDataForJSON());
       });
     }
     return data; 
@@ -559,7 +585,7 @@ export default class RuleResult {
    */
 
   toJSON (flag=false) {
-    return JSON.stringify(this.getDataForJSON(flag));
+    return JSON.stringify(this.getDataForJSON(flag), null, '  ');
   }
 
   /**

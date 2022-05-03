@@ -195,7 +195,7 @@ function getFormattedDate() {
 
 function cleanForUTF8 (str) {
   let nstr = '';
-  str.forEach( c => {
+  str.split().forEach( c => {
     if (c >= ' ' && c < '~') nstr += c;
   });
   return nstr;

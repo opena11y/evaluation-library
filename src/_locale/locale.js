@@ -2,15 +2,16 @@
 
 import {messages as enMessages} from './en/messages.js';
 import DebugLogging  from '../debug.js';
+import {RESULT_VALUE} from '../constants.js';
 
 export {
+  getBaseResultMessages,
+  getBaseResultMessage,
   getCommonMessage,
-  getElementResultMessages,
   getGuidelineInfo,
   getInformationLinks,
   getImplementationValue,
   getManualChecks,
-  getPageResultMessages,
   getPurposes,
   getRuleCategoryInfo,
   getRuleDefinition,
@@ -66,9 +67,11 @@ function setLocale(lang='en') {
 
 function getCommonMessage(id, value=0) {
   let message = messages[locale].common[id];
-  if (Array.isArray(message)) {
+  if (Array.isArray(message) ||
+      (typeof message === 'object')) {
     message = message[value];
   }
+
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
@@ -415,31 +418,8 @@ function getRuleResultMessages (ruleId) {
   return resultMessages;
 }
 
-
-
 /**
- * @function getPageResultMessages
- *
- * @desc Gets an array of localized strings for page results
- *
- * @param {String} ruleId - String id associated with the rule
- *
- * @returns {Array of Strings} see @desc
- */
-
-function getPageResultMessages (ruleId) {
-  const resultMessages = {};
-  const msgs = messages[locale].rules[ruleId].PAGE_RESULT_MESSAGES;
-  for ( const key in msgs ) {
-    resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug.flag && debug.log(`[getPageResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
-  }
-  return resultMessages;
-}
-
-
-/**
- * @function getElementResultMessages
+ * @function getBaseResultMessages
  *
  * @desc Gets an array of localized strings for element results
  *
@@ -448,16 +428,44 @@ function getPageResultMessages (ruleId) {
  * @returns {Array of Strings} see @desc
  */
 
-function getElementResultMessages (ruleId) {
+function getBaseResultMessages (ruleId) {
   const resultMessages = {};
-  const msgs = messages[locale].rules[ruleId].ELEMENT_RESULT_MESSAGES;
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug.flag && debug.log(`[getElementResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug.flag && debug.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
 
+/**
+ * @method getBaseResultMessage
+ *
+ * @desc Returns an localized element result message
+ *
+ * @return {String} String with element result message
+ */
+
+function getBaseResultMessage (msg, msgArgs) {
+  let message = msg;
+  msgArgs.forEach( (arg, index) => {
+    const argId = "%" + (index + 1);
+
+    if (typeof arg === 'string') {
+      arg = filterTextContent(arg);
+    }
+    else {
+      if (typeof arg === 'number') {
+        arg = arg.toString();
+      }
+      else {
+        arg = "";
+      }
+    }
+    message = message.replace(argId, arg);
+  });
+  return transformElementMarkup(message);
+}
 
 /**
  * @function transformElementMarkup

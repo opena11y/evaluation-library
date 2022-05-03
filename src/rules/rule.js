@@ -6,11 +6,10 @@ import {
 
 import {
   getCommonMessage,
-  getElementResultMessages,
+  getBaseResultMessages,
   getGuidelineInfo,
   getInformationLinks,
   getManualChecks,
-  getPageResultMessages,
   getPurposes,
   getRuleCategoryInfo,
   getRuleId,
@@ -79,8 +78,7 @@ export default class Rule {
 
     // Localized messsages for evaluation results
     this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
-    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
-    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+    this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
     debug.flag && this.toJSON();
   }
@@ -165,8 +163,8 @@ export default class Rule {
    * @return {Integer}  see @desc
    */
 
-  getCategory () {
-    return this.rule_category_id;
+  getRuleset () {
+    return this.ruleset_id;
   }
 
   /**

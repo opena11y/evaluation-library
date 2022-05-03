@@ -21,7 +21,7 @@ export const colorRules = {
         HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
         NOT_APPLICABLE:  'No visible text content on this page.'
       },
-      ELEMENT_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'CCR of %1 exceeds 4.5.',
         ELEMENT_PASS_2:   'CCR of %1 exceeds 3.1 for large or bolded text.',
         ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to exceed 4.5.',
@@ -75,7 +75,7 @@ export const colorRules = {
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
       },
-      PAGE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         PAGE_MC_1: 'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
       },
       PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',

@@ -7,8 +7,7 @@ import EvaluationResult  from './evaluationResult.js';
 import DebugLogging      from './debug.js';
 
 /* Constants */
-const debug   = new DebugLogging('evaluationLibrary', false)
-export const version = '2.0.0.beta';
+const debug   = new DebugLogging('EvaluationLibrary', false)
 
 export default class EvaluationLibrary {
   constructor () {

@@ -19,7 +19,7 @@ import {
 } from './_locale/locale.js';
 
 /* Constants */
-const debug = new DebugLogging('EvaluationResult', false)
+const debug = new DebugLogging('EvaluationResult', true)
 
 export default class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -34,9 +34,9 @@ export default class EvaluationResult {
     allRules.forEach (rule => {
       const ruleResult = new RuleResult(rule);
       ruleResult.validate(domCache);
-      this.allRuleResults(ruleResult);
+      this.allRuleResults.push(ruleResult);
     });
-
+    debug.flag && debug.log(`[JSON]: ${this.toJSON(true)}`);
   }
 
   /**
@@ -156,60 +156,53 @@ export default class EvaluationResult {
   }
 
   /**
-   * @method toJSON
+   * @method getDataForJSON
    *
-   * @desc Creates a string representing the evaluation results in a JSON format
+   * @desc Creates a data object with rule, element and page results
    *
-   * @param  {Boolean}  include_element_results  -  Optional param, if true then element
-   *                                                results are included in the JSON file
+   * @param  {Boolean}  flag  -  Optional param, if true then element
+   *                             results are included in the JSON file
    *
    * @return {String} Returns a string in JSON format
    */
 
-  toJSON (include_element_results) {
+  getDataForJSON (flag=false) {
 
-    if (typeof include_element_results !== 'boolean') include_element_results = false;
-    var ruleset = this.getRuleset();
-    var ruleset_info = ruleset.getRulesetInfo();
+    const data = {
+      eval_url: cleanForUTF8(this.url),
+      eval_url_encoded: encodeURI(this.url),
+      eval_title: cleanForUTF8(this.title),
 
-    var json = "{\n";
+      // For compatibility with previous versions of the library
+      ruleset_id:     'ARIA_STRICT',
+      ruleset_title:  'HTML and ARIA Techniques',
+      ruleset_abbrev: 'HTML5+ARIA',
+      ruleset_version: VERSION,
 
-    json += "  \"eval_url\"                  : " + JSON.stringify(cleanForUTF8(this.url))   + ",\n";
-    json += "  \"eval_url_encoded\"          : " + JSON.stringify(encodeURI(this.url))      + ",\n";
-    json += "  \"eval_title\"                : " + JSON.stringify(cleanForUTF8(this.title)) + ",\n";
-
-    json += "  \"ruleset_id\"                : " + JSON.stringify(ruleset.getId())         + ",\n";
-    json += "  \"ruleset_title\"             : " + JSON.stringify(ruleset_info.title)      + ",\n";
-    json += "  \"ruleset_abbrev\"            : " + JSON.stringify(ruleset_info.abbrev)     + ",\n";
-    json += "  \"ruleset_version\"           : " + JSON.stringify(ruleset_info.version)    + ",\n";
-
-    json += this.dom_cache.element_information.toJSON(true, "  ");
-  //  json += this.dom_cache.aria_information.toJSON(true, "  ");
-  //  json += this.dom_cache.event_information.toJSON(true, "  ");
-
-    var rule_group       = this.getRuleResultsAll();
-    var rule_results     = rule_group.getRuleResultsArray();
-    var rule_results_len = rule_results.length;
-
-    json += "  \"rule_results\": [\n";
-
-    for (var i = 0; i < rule_results_len; i++) {
-
-      json += rule_results[i].toJSON("    ", include_element_results);
-
-      if (i < (rule_results_len-1))  json += ",\n";
-      else json += "\n";
-
+      rule_results: []
     }
 
-    json += "                ]\n";
+//    json += this.dom_cache.element_information.toJSON(true, "  ");
 
-    json += "}\n";
+    this.allRuleResults.forEach( rr => {
+      data.rule_results.push(rr.getDataForJSON(flag));
+    });
+    return data;
+  }
 
-    json = unescape(encodeURIComponent(json));
+  /**
+   * @method toJSON
+   *
+   * @desc Creates a string representing the evaluation results in a JSON format
+   *
+   * @param  {Boolean}  flag  -  Optional param, if true then element
+   *                             results are included in the JSON file
+   *
+   * @return {String} Returns a string in JSON format
+   */
 
-    return json;
-
+  toJSON (flag=false) {
+    return JSON.stringify(this.getDataForJSON(flag), null, '  ');
   }
 }
 

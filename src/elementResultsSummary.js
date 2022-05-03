@@ -3,7 +3,7 @@
 /* Imports */
 import DebugLogging  from './debug.js';
 
-const debug = new DebugLogging('elementResultSummary', false);
+const debug = new DebugLogging('ElementResultSummary', false);
 
 /* ---------------------------------------------------------------- */
 /*                             ResultSummary                        */

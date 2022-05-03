@@ -39,7 +39,7 @@ export default class ColorContrast {
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
     this.backgroundPosition = style.getPropertyValue("background-position");
-    this.hasBackgroundImage = this.backgroundImage && this.backgroundImage.length;
+    this.hasBackgroundImage = this.backgroundImage !== 'none';
 
     this.fontFamily = style.getPropertyValue("font-family");
     this.fontSize   = this.normalizeFontSize(style, parentColorContrast);

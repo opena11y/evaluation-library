@@ -1,14 +1,12 @@
 /* elementResult.js */
 
 /* Imports */
-import {RESULT_VALUE}   from './constants.js';
-import {filterTextContent}      from './utils.js'
-import {transformElementMarkup} from './_locale/locale.js'
+import BaseResult               from './baseResult.js';
 import DebugLogging             from './debug.js';
 
 /* Constants */
 
-const debug = new DebugLogging('elementResult', false);
+const debug = new DebugLogging('ElementResult', false);
 
 /* ---------------------------------------------------------------- */
 /*                             ElementResult                           */
@@ -40,15 +38,9 @@ const debug = new DebugLogging('elementResult', false);
  * @property  {Array}      message_arguments   - Array  array of values used in the message string
  */
 
-export default class ElementResult {
-  constrcutor (rule_result, result_value, domElement, message_id, message_arguments) {
-
-    this.rule_result = rule_result;
-    this.result_value   = result_value;
-    this.result_message = "";
-
-    this.message_id        = message_id;
-    this.message_arguments = message_arguments;
+export default class ElementResult extends BaseResult {
+  constructor (rule_result, result_value, domElement, message_id, message_arguments) {
+    super(rule_result, result_value, message_id, message_arguments)
 
     this.domElement = domElement;
 
@@ -163,19 +155,7 @@ export default class ElementResult {
   }
 
   /**
-   * @method getRuleResult
-   *
-   * @desc Gets the rule result that this element result is associated with.
-   *       Provides access to rule and ruleset information if needed
-   *
-   * @return {Object} see description
-   */
-  getRuleResult () {
-     return this.rule_result;
-  }
-
-  /**
-   * @method getElementIdentifier
+   * @method getResultIdentifier
    *
    * @desc Gets a string identifying the element, typically element and//or a key attribute
    *       or property value
@@ -183,136 +163,26 @@ export default class ElementResult {
    * @return {String} see description
    */
 
-  getElementIdentifier () {
-    return this.domElement.toString();
+  getResultIdentifier () {
+    const de = this.domElement;
+    const identifier =  de.node.hasAttribute('type') ?
+                        `${de.tagName}[${de.getAttribute('type')}]` :
+                        de.tagName;
+    return identifier;
   }
 
 
   /**
-   * @method getResultValue
+   * @method getOrdinalPosition
    *
-   * @desc Returns an numerical constant representing the element result
-   *
-   * @return {Number} see description
-   */
-   getResultValue () {
-     return this.result_value;
-   }
-
-  /**
-   * @method getResultValueNLS
-   *
-   * @desc Gets a string representation of the rule result value
+   * @desc Gets a string identifying the ordinal position,
+   *       is overrided by ElementResult and PageResult
    *
    * @return {String} see description
    */
 
-  getResultValueNLS () {
-    const elementResultNLS = ['Undefined','P','H','MC','W','V'];
-    return elementResultNLS[this.result_value];
+  getOrdinalPosition () {
+    return this.domElement.ordinalPosition;
   }
 
-  /**
-   * @method getResultMessage
-   *
-   * @desc Returns an localized element result message
-   *
-   * @return {String} String with element result message
-   */
-  getResultMessage () {
-    const rule       = this.getRuleResult().getRule();
-    const rule_nls   = rule.getNLS();
-    const common_nls = rule.getCommonNLS();
-    let message;
-
-    // If no message id return the empty string
-    if (this.message_id.length === 0) return "";
-
-    let str = rule_nls['NODE_RESULT_MESSAGES'][this.message_id];
-
-    if (!str) return common_nls.missing_message + this.message_id;
-
-    let vstr; // i.e. %1, %2 ....
-    let message_arguments_len = this.message_arguments.length;
-
-    // check to see if message has result value dependence
-
-    vstr = "%s";
-
-    if (str.indexOf(vstr) >= 0) {
-
-      switch (this.result_value) {
-        case RESULT_VALUE.VIOLATION:
-          message = common_nls.message_severities.MUST;
-          break;
-
-        case RESULT_VALUE.WARNING:
-          message = common_nls.message_severities.SHOULD;
-          break;
-
-        case RESULT_VALUE.MANUAL_CHECK:
-          message = common_nls.message_severities.MAY;
-          break;
-
-        default:
-          message = "";
-          break;
-      }
-      str = str.replace(vstr, message);
-    }
-
-    // Replace
-
-    for (var i = 0; i < message_arguments_len; i++) {
-      vstr = "%" + (i+1);
-      message = this.message_arguments[i];
-
-      if (typeof message === 'string') {
-        message = filterTextContent(message);
-      }
-      else {
-        if (typeof message === 'number') {
-          message = message.toString();
-        }
-        else {
-          message = "";
-        }
-      }
-      str = str.replace(vstr, message);
-    } // end loop
-
-    return transformElementMarkup(str);
-
-  }
-
-  /**
-   * @method getDataForJSON
-   *
-   * @desc Object containing the data for exporting an element result to JSON
-   *
-   * @return {Object} see @desc
-   */
-
-  getDataForJSON () {
-    const data = {
-      result_value:       this.getResultValue(),
-      result_value_nls:   this.getResultValueNLS(),
-      element_identifier: this.getElementIdentifier(),
-      ordinal_position:   this.domElement.ordinalPosition,
-      message:            this.getResultMessage()
-    }
-    return data;
-  }
-
-  /**
-   * @method toJSON
-   *
-   * @desc Creates JSON object descibing the properties of the node result
-   *
-   * @return {String} see @desc
-   */
-
-  toJSON () {
-    return JSON.stringify(this.getDataForJSON());
-  }
 }

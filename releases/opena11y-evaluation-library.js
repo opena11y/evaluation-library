@@ -136,7 +136,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$g = new DebugLogging('colorContrast', false);
+const debug$h = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -156,9 +156,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$g.flag) {
-      debug$g.separator();
-      debug$g.tag(elementNode);
+    if (debug$h.flag) {
+      debug$h.separator();
+      debug$h.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -171,7 +171,7 @@ class ColorContrast {
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
     this.backgroundPosition = style.getPropertyValue("background-position");
-    this.hasBackgroundImage = this.backgroundImage && this.backgroundImage.length;
+    this.hasBackgroundImage = this.backgroundImage !== 'none';
 
     this.fontFamily = style.getPropertyValue("font-family");
     this.fontSize   = this.normalizeFontSize(style, parentColorContrast);
@@ -182,11 +182,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$g.flag) {
-      debug$g.log(`[                    opacity]: ${this.opacity}`);
-      debug$g.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
-      debug$g.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$g.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$h.flag) {
+      debug$h.log(`[                    opacity]: ${this.opacity}`);
+      debug$h.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug$h.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$h.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -508,7 +508,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$f = new DebugLogging('visibility', false);
+const debug$g = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -549,15 +549,15 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    if (debug$f.flag) {
-      debug$f.separator();
-      debug$f.tag(elementNode);
-      debug$f.log('[          isHidden]: ' + this.isHidden);
-      debug$f.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$f.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$f.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$f.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$f.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$g.flag) {
+      debug$g.separator();
+      debug$g.tag(elementNode);
+      debug$g.log('[          isHidden]: ' + this.isHidden);
+      debug$g.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$g.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$g.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$g.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$g.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5473,49 +5473,6 @@ function hasCheckedState (node) {
 }
 
 /**
- * @function filterTextContent
- *
- * @desc Normalizes spaces in a string and removes any non-printable characters
- *
- * @param {String} s - string to be normalized
- *
- * @return  String
- */
-
-function filterTextContent  (s) {
-  // Replace repeated spaces, newlines and tabs with a single space
-
-  if (typeof s !== 'string') return "";
-
-// **** NOTE *****
-// This function was changed to support fae-util based on HTMLUnit, which does not seem to
-// handle character entities the same as a browser DOM
-// This resulted in special characters being generated triggering false positives in some
-/// rules, usually Landmark rules related to content being outside a landmark
-
-//  if (s.replace) return s.replace(/^\s*|\s(?=\s)|\s*$/g, "");
-
-  const len = s.length;
-  let s1 = "";
-  let last_c = 32;
-
-  for (let i = 0; i < len; i++) {
-
-    var c = s.charCodeAt(i);
-
-    // only include printable characters less than '~' character
-    if (c < 32 || c > 126) continue;
-
-    if ((c !== 32) || (last_c !== 32)) {
-      s1 += s[i];
-      last_c = c;
-    }
-
-  }
-  return s1.trim();
-}
-
-/**
  * @function replaceAll
  *
  * @desc Normalizes spaces in a string
@@ -5584,7 +5541,7 @@ function getFormattedDate() {
 
 function cleanForUTF8 (str) {
   let nstr = '';
-  str.forEach( c => {
+  str.split().forEach( c => {
     if (c >= ' ' && c < '~') nstr += c;
   });
   return nstr;
@@ -5619,7 +5576,7 @@ function debugAttrs (attrs) {
 }
 
 /* Constants */
-const debug$e = new DebugLogging('AriaValidation', false);
+const debug$f = new DebugLogging('AriaValidation', false);
 
 /**
  * @class TokenInfo
@@ -5701,14 +5658,14 @@ class AriaValidation {
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
     this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
 
-    if (debug$e.flag) {
-      node.attributes.length && debug$e.log(`${node.outerHTML}`, 1);
-      debug$e.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$e.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$e.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$e.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$e.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$e.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$f.flag) {
+      node.attributes.length && debug$f.log(`${node.outerHTML}`, 1);
+      debug$f.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$f.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$f.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$f.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$f.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$f.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7354,7 +7311,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$d = new DebugLogging('ariaInHtml', false);
+const debug$e = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7516,11 +7473,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$d.flag) {
+  if (debug$e.flag) {
     if (tagName === 'h2') {
-      debug$d.tag(node);
+      debug$e.tag(node);
     }
-    debug$d.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$e.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8609,7 +8566,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$c = new DebugLogging('DOMElement', true);
+const debug$d = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -8804,12 +8761,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$c.flag) {
+    if (debug$d.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$c.domText(domItem, prefix);
+          debug$d.domText(domItem, prefix);
         } else {
-          debug$c.domElement(domItem, prefix);
+          debug$d.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -8888,7 +8845,7 @@ class DOMText {
 /* structureInfo.js */
 
 /* Constants */
-const debug$b = new DebugLogging('structureInfo', false);
+const debug$c = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -8910,8 +8867,8 @@ class LandmarkElement {
     this.childLandmarkElements = [];
     this.childHeadingDomElements = [];
 
-    if (debug$b.flag) {
-      debug$b.log('');
+    if (debug$c.flag) {
+      debug$c.log('');
     }
   }
 
@@ -8927,14 +8884,14 @@ class LandmarkElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$b.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
+    debug$c.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
     this.childLandmarkElements.forEach( le => {
-      debug$b.domElement(le.domElement, prefix);
+      debug$c.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
-    debug$b.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
+    debug$c.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
     this.childHeadingDomElements.forEach( h => {
-      debug$b.domElement(h, prefix);
+      debug$c.domElement(h, prefix);
     });
   }
 }
@@ -8954,7 +8911,7 @@ class StructureInfo {
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
 
-    if (debug$b.flag) ;
+    if (debug$c.flag) ;
   }
 
   /**
@@ -9066,18 +9023,18 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$b.flag) {
-      debug$b.log('== All Headings ==', 1);
+    if (debug$c.flag) {
+      debug$c.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$b.domElement(h);
+        debug$c.domElement(h);
       });
-      debug$b.log('== All Landmarks ==', 1);
+      debug$c.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$b.domElement(le.domElement);
+        debug$c.domElement(le.domElement);
       });
-      debug$b.log('== Structure Tree ==', 1);
+      debug$c.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$b.domElement(le.domElement);
+        debug$c.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9087,8 +9044,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$a = new DebugLogging('domCache', true);
-
+const debug$b = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -9111,7 +9067,6 @@ const skipableElements = [
  *
  * @param  {Object}  info - Parent ParentInfo object
  */
-
 
 class ParentInfo {
   constructor (info) {
@@ -9153,27 +9108,28 @@ class DOMCache {
     this.allDomElements = [];
     this.allDomTexts    = [];
 
-
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
-  	this.domCache = new DOMElement(parentInfo, startingElement, 1);
-    parentInfo.domElement = this.domCache;
-    this.allDomElements.push(this.domCache);
+  	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
+    parentInfo.domElement = this.startingDomElement;
+    this.allDomElements.push(this.startingDomElement);
+
+    // Information on rule results associated with page
+    this.resultsHidden       = [];
+    this.resultsPassed       = [];
+    this.resultsViolations   = [];
+    this.resultsWarnings     = [];
+    this.resultsManualChecks = [];
 
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$a.flag) {
+    if (debug$b.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
     }
-  }
-
-  // Returns the root element of the transversal
-  get page () {
-    return this.domCache;
   }
 
   // Tests if a tag name can be skipped
@@ -9311,30 +9267,28 @@ class DOMCache {
    *
    * @desc  Used for debugging the DOMElement tree
    */
+
   showDomElementTree () {
-    debug$a.log(' === AllDomElements ===', true);
+    debug$b.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$a.domElement(de);
+      debug$b.domElement(de);
     });
 
-    debug$a.log(' === AllDomTexts ===', true);
+    debug$b.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$a.domText(dt);
+      debug$b.domText(dt);
     });
 
-    debug$a.log(' === DOMCache Tree ===', true);
-    debug$a.domElement(this.domCache);
-    this.domCache.showDomElementTree(' ');
+    debug$b.log(' === DOMCache Tree ===', true);
+    debug$b.domElement(this.startingDomElement);
+    this.startingDomElement.showDomElementTree(' ');
   }
-
-
-
 }
 
 /* constants.js */
 
 /* Constants */
-const debug$9 = new DebugLogging('constants', false);
+const debug$a = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -9715,13 +9669,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$9.flag && debug$9.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$a.flag && debug$a.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$9.flag && debug$9.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$a.flag && debug$a.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -9860,9 +9814,9 @@ const colorRules$1 = [
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
     target_resources    : [],
-    validate            : function (dom_ache, rule_esult) {
+    validate            : function (dom_cache, rule_result) {
 
-      ruleResult.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validate function
   }
@@ -11031,7 +10985,7 @@ const colorRules = {
         HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
         NOT_APPLICABLE:  'No visible text content on this page.'
       },
-      ELEMENT_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'CCR of %1 exceeds 4.5.',
         ELEMENT_PASS_2:   'CCR of %1 exceeds 3.1 for large or bolded text.',
         ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to exceed 4.5.',
@@ -11085,7 +11039,7 @@ const colorRules = {
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
       },
-      PAGE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         PAGE_MC_1: 'Verify color is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element on the page.'
       },
       PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.',
@@ -11127,7 +11081,7 @@ messages$1.rules = Object.assign(messages$1.rules, colorRules);
 /* locale.js */
 
 /* Constants */
-const debug$8 = new DebugLogging('locale', false);
+const debug$9 = new DebugLogging('locale', false);
 
 const messages = {
   en: messages$1
@@ -11148,13 +11102,15 @@ var locale = 'en';
 
 function getCommonMessage(id, value=0) {
   let message = messages[locale].common[id];
-  if (Array.isArray(message)) {
+  if (Array.isArray(message) ||
+      (typeof message === 'object')) {
     message = message[value];
   }
+
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$8.flag && debug$8.log(`[${id}][${value}]: ${message}`);
+  debug$9.flag && debug$9.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -11241,7 +11197,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$8.flag && debug$8.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$9.flag && debug$9.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           title: guideline.title,
           url: encodeURIComponent(guideline.url_spec),
@@ -11250,7 +11206,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$8.flag && debug$8.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$9.flag && debug$9.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   return null;
 }
 
@@ -11278,7 +11234,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$8.flag && debug$8.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$9.flag && debug$9.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             level: success_criterion.level,
             title: success_criterion.title,
@@ -11289,7 +11245,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$8.flag && debug$8.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$9.flag && debug$9.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -11309,7 +11265,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$8.flag && debug$8.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$9.flag && debug$9.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -11356,7 +11312,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$8.flag && debug$8.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$9.flag && debug$9.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return messages[locale].rules[ruleId].DEFINITION;
 }
 
@@ -11371,7 +11327,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$8.flag && debug$8.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$9.flag && debug$9.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -11386,7 +11342,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$8.flag && debug$8.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$9.flag && debug$9.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -11405,7 +11361,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$8.flag && debug$8.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$9.flag && debug$9.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -11424,7 +11380,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$8.flag && debug$8.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$9.flag && debug$9.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -11452,8 +11408,8 @@ function getInformationLinks (ruleId) {
         url: encodeURIComponent(infoLink.url)
       }
     );
-    debug$8.flag && debug$8.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$8.flag && debug$8.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
+    debug$9.flag && debug$9.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$9.flag && debug$9.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
   });
   return infoLinks;
 }
@@ -11473,7 +11429,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$8.flag && debug$8.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$9.flag && debug$9.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -11492,36 +11448,13 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$8.flag && debug$8.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$9.flag && debug$9.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
 
-
-
 /**
- * @function getPageResultMessages
- *
- * @desc Gets an array of localized strings for page results
- *
- * @param {String} ruleId - String id associated with the rule
- *
- * @returns {Array of Strings} see @desc
- */
-
-function getPageResultMessages (ruleId) {
-  const resultMessages = {};
-  const msgs = messages[locale].rules[ruleId].PAGE_RESULT_MESSAGES;
-  for ( const key in msgs ) {
-    resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$8.flag && debug$8.log(`[getPageResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
-  }
-  return resultMessages;
-}
-
-
-/**
- * @function getElementResultMessages
+ * @function getBaseResultMessages
  *
  * @desc Gets an array of localized strings for element results
  *
@@ -11530,16 +11463,44 @@ function getPageResultMessages (ruleId) {
  * @returns {Array of Strings} see @desc
  */
 
-function getElementResultMessages (ruleId) {
+function getBaseResultMessages (ruleId) {
   const resultMessages = {};
-  const msgs = messages[locale].rules[ruleId].ELEMENT_RESULT_MESSAGES;
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$8.flag && debug$8.log(`[getElementResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$9.flag && debug$9.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
 
+/**
+ * @method getBaseResultMessage
+ *
+ * @desc Returns an localized element result message
+ *
+ * @return {String} String with element result message
+ */
+
+function getBaseResultMessage (msg, msgArgs) {
+  let message = msg;
+  msgArgs.forEach( (arg, index) => {
+    const argId = "%" + (index + 1);
+
+    if (typeof arg === 'string') {
+      arg = filterTextContent(arg);
+    }
+    else {
+      if (typeof arg === 'number') {
+        arg = arg.toString();
+      }
+      else {
+        arg = "";
+      }
+    }
+    message = message.replace(argId, arg);
+  });
+  return transformElementMarkup(message);
+}
 
 /**
  * @function transformElementMarkup
@@ -11575,7 +11536,7 @@ function transformElementMarkup (elemStr, useCodeTags=false) {
 /* rule.js */
 
 /* Constants */
-const debug$7 = new DebugLogging('Rule', false);
+const debug$8 = new DebugLogging('Rule', false);
 
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
@@ -11626,10 +11587,9 @@ class Rule {
 
     // Localized messsages for evaluation results
     this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
-    this.page_result_msgs = getPageResultMessages(this.rule_id); // Object with keys to strings
-    this.elem_result_msgs = getElementResultMessages(this.rule_id); // Object with keys to strings
+    this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
-    debug$7.flag && this.toJSON();
+    debug$8.flag && this.toJSON();
   }
 
   /**
@@ -11712,8 +11672,8 @@ class Rule {
    * @return {Integer}  see @desc
    */
 
-  getCategory () {
-    return this.rule_category_id;
+  getRuleset () {
+    return this.ruleset_id;
   }
 
   /**
@@ -11970,7 +11930,7 @@ class Rule {
     };
 
     const json = JSON.stringify(ruleInfo, null, '  ');
-    debug$7.flag && debug$7.log(`[JSON]: ${json}`);
+    debug$8.flag && debug$8.log(`[JSON]: ${json}`);
     return json;
 
   }
@@ -11993,7 +11953,7 @@ addToArray(colorRules$1);
 
 /* resultSummary.js */
 
-const debug$6 = new DebugLogging('ruleResultSummary', false);
+const debug$7 = new DebugLogging('ruleResultSummary', false);
 
 /* ---------------------------------------------------------------- */
 /*                             RuleResultsSummary                        */
@@ -12035,7 +11995,7 @@ class RuleResultsSummary  {
     this.is  = -1;  // implementation score for group
     this.iv  = IMPLEMENTATION_VALUE.UNDEFINED; // implementation value for the group
 
-    debug$6.flag && debug$6.log(`[RuleResultsSummary]: ${this.toString()}`);
+    debug$7.flag && debug$7.log(`[RuleResultsSummary]: ${this.toString()}`);
   }
 
    get violations()     { return this.v;  }
@@ -12129,7 +12089,7 @@ class RuleResultsSummary  {
 /* ruleGroupResult.js */
 
 /* Constants */
-const debug$5 = new DebugLogging('ruleGroupResult', false);
+const debug$6 = new DebugLogging('ruleGroupResult', false);
 
 /**
  * @class RuleGroupResult
@@ -12176,7 +12136,7 @@ class RuleGroupResult {
     this.rule_results = [];
     this.rule_results_summary = new RuleResultsSummary();
 
-    debug$5.flag && debug$5.log(`[title]: ${this.title} (${ruleset})`);
+    debug$6.flag && debug$6.log(`[title]: ${this.title} (${ruleset})`);
   }
 
   /**
@@ -12334,8 +12294,166 @@ class RuleGroupResult {
     };
 
     const json = JSON.stringify(ruleGroupResultInfo);
-    debug$5.flag && debug$5.log(`[JSON]: ${json}`);
+    debug$6.flag && debug$6.log(`[JSON]: ${json}`);
     return json;
+  }
+}
+
+/* elementResult.js */
+
+/* ---------------------------------------------------------------- */
+/*                             BaseResult                           */
+/* ---------------------------------------------------------------- */
+
+/**
+ * @class Result
+ *
+ * @desc Constructor for an object that contains a the results of
+ *          the evaluation of a rule on a element or page
+ *
+ * @param  {ResultRule}   ruleResult   - reference to the rule result object
+ * @param  {Number}       resultValue  - Constant representing result value of the evaluation result
+ * @param  {String}       msgId        - String reference to the message string in the NLS file
+ * @param  {Array}        msgArgs      - Array  array of values used in the message string
+ */
+
+/**
+ * @private
+ * @constructor Internal Properties
+ *
+ * @property  {RuleResult} rule_result    - reference to the rule result object
+ * @property  {Number}     result_value   - Constant representing result value of the evaluation result
+ * @property  {String}     result_message - String reference to the message string in the NLS file
+ */
+
+class BaseResult {
+  constructor (ruleResult, resultValue, msgId, msgArgs) {
+
+    const msg = ruleResult.rule.base_result_msgs[msgId];
+
+    this.rule_result    = ruleResult;
+    this.result_value   = resultValue;
+    this.result_message = getBaseResultMessage(msg, msgArgs);
+  }
+
+  /**
+   * @getter isElementResult
+   *
+   * @desc Returns true, since this class is the base result class
+   *       Use to distinguish from PageResult class
+   *    
+   * @return {Boolean} false
+   */
+
+  get isElementResult () {
+    return false;
+  }
+
+  /**
+   * @getter isPageResult
+   *
+   * @desc Returns false, since this class is the base result class
+   *       Use to distinguish from ElementResult class
+   *
+   * @return {Boolean} false
+   */
+
+  get isPageResult () {
+    return false;
+  }
+
+  /**
+   * @method getRuleResult
+   *
+   * @desc Gets the rule result that this element result is associated with.
+   *       Provides access to rule and ruleset information if needed
+   *
+   * @return {Object} see @desc
+   */
+  getRuleResult () {
+     return this.rule_result;
+  }
+
+  /**
+   * @method getElementIdentifier
+   *
+   * @desc Gets a string identifying the result,
+   *       is overrided by ElementResult and PageResult
+   *
+   * @return {String} see @desc
+   */
+
+  getResultIdentifier () {
+    return 'undefined';
+  }
+
+  /**
+   * @method getOrdinalPosition
+   *
+   * @desc Gets a string identifying the ordinal position,
+   *       is overrided by ElementResult and not needed for
+   *       PageResults
+   *
+   * @return {String} see @desc
+   */
+
+  getOrdinalPosition () {
+    return '';
+  }
+
+  /**
+   * @method getResultValue
+   *
+   * @desc Returns an numerical constant representing the element result
+   *
+   * @return {Number} see @desc
+   */
+   getResultValue () {
+     return this.result_value;
+   }
+
+  /**
+   * @method getResultValueNLS
+   *
+   * @desc Gets a string representation of the rule result value
+   *
+   * @return {String} see @desc
+   */
+
+  getResultValueNLS () {
+    const elementResultNLS = ['Undefined','P','H','MC','W','V'];
+    return elementResultNLS[this.result_value];
+  }
+
+ /**
+   * @method getDataForJSON
+   *
+   * @desc Object containing the data for exporting result to JSON
+   *
+   * @return {Object} see @desc
+   */
+
+  getDataForJSON () {
+    const data = {
+      result_value:       this.getResultValue(),
+      result_value_nls:   this.getResultValueNLS(),
+      result_identifier:  this.getResultIdentifier(),
+      ordinal_position:   this.getOrdinalPosition(),
+      message:            this.result_message
+    };
+    return data;
+  }
+
+  /**
+   * @method toJSON
+   *
+   * @desc Creates JSON object descibing the properties of the result
+   *
+   * @return {String} see @desc
+   */
+
+  toJSON () {
+    return JSON.stringify(this.getDataForJSON(), null, '  ');
   }
 }
 
@@ -12343,7 +12461,7 @@ class RuleGroupResult {
 
 /* Constants */
 
-const debug$4 = new DebugLogging('elementResult', false);
+const debug$5 = new DebugLogging('ElementResult', false);
 
 /* ---------------------------------------------------------------- */
 /*                             ElementResult                           */
@@ -12375,20 +12493,14 @@ const debug$4 = new DebugLogging('elementResult', false);
  * @property  {Array}      message_arguments   - Array  array of values used in the message string
  */
 
-class ElementResult {
-  constrcutor (rule_result, result_value, domElement, message_id, message_arguments) {
-
-    this.rule_result = rule_result;
-    this.result_value   = result_value;
-    this.result_message = "";
-
-    this.message_id        = message_id;
-    this.message_arguments = message_arguments;
+class ElementResult extends BaseResult {
+  constructor (rule_result, result_value, domElement, message_id, message_arguments) {
+    super(rule_result, result_value, message_id, message_arguments);
 
     this.domElement = domElement;
 
-    if (debug$4.flag) {
-      debug$4.log(`${this.result_value}: ${this.result_message}`);
+    if (debug$5.flag) {
+      debug$5.log(`${this.result_value}: ${this.result_message}`);
     }
   }
 
@@ -12498,19 +12610,7 @@ class ElementResult {
   }
 
   /**
-   * @method getRuleResult
-   *
-   * @desc Gets the rule result that this element result is associated with.
-   *       Provides access to rule and ruleset information if needed
-   *
-   * @return {Object} see description
-   */
-  getRuleResult () {
-     return this.rule_result;
-  }
-
-  /**
-   * @method getElementIdentifier
+   * @method getResultIdentifier
    *
    * @desc Gets a string identifying the element, typically element and//or a key attribute
    *       or property value
@@ -12518,143 +12618,108 @@ class ElementResult {
    * @return {String} see description
    */
 
-  getElementIdentifier () {
-    return this.domElement.toString();
+  getResultIdentifier () {
+    const de = this.domElement;
+    const identifier =  de.node.hasAttribute('type') ?
+                        `${de.tagName}[${de.getAttribute('type')}]` :
+                        de.tagName;
+    return identifier;
   }
 
 
   /**
-   * @method getResultValue
+   * @method getOrdinalPosition
    *
-   * @desc Returns an numerical constant representing the element result
-   *
-   * @return {Number} see description
-   */
-   getResultValue () {
-     return this.result_value;
-   }
-
-  /**
-   * @method getResultValueNLS
-   *
-   * @desc Gets a string representation of the rule result value
+   * @desc Gets a string identifying the ordinal position,
+   *       is overrided by ElementResult and PageResult
    *
    * @return {String} see description
    */
 
-  getResultValueNLS () {
-    const elementResultNLS = ['Undefined','P','H','MC','W','V'];
-    return elementResultNLS[this.result_value];
+  getOrdinalPosition () {
+    return this.domElement.ordinalPosition;
   }
 
-  /**
-   * @method getResultMessage
-   *
-   * @desc Returns an localized element result message
-   *
-   * @return {String} String with element result message
-   */
-  getResultMessage () {
-    const rule       = this.getRuleResult().getRule();
-    const rule_nls   = rule.getNLS();
-    const common_nls = rule.getCommonNLS();
-    let message;
+}
 
-    // If no message id return the empty string
-    if (this.message_id.length === 0) return "";
+/* elementResult.js */
 
-    let str = rule_nls['NODE_RESULT_MESSAGES'][this.message_id];
+/* Constants */
 
-    if (!str) return common_nls.missing_message + this.message_id;
+const debug$4 = new DebugLogging('PageResult', false);
 
-    let vstr; // i.e. %1, %2 ....
-    let message_arguments_len = this.message_arguments.length;
+/* ---------------------------------------------------------------- */
+/*                             PageResult                           */
+/* ---------------------------------------------------------------- */
 
-    // check to see if message has result value dependence
+/**
+ * @class ElementResult
+ *
+ * @desc Constructor for an object that contains a the results of
+ *          the evaluation of a rule on a element
+ *
+ * @param  {ResultRule}   rule_result         - reference to the rule result object
+ * @param  {Number}       result_value        - Constant representing result value of the evaluation result
+ * @param  {Object}       domCache            - DomCache reference to element information used by this rule result
+ * @param  {String}       message_id          - String reference to the message string in the NLS file
+ * @param  {Array}        message_arguments   - Array  array of values used in the message string
+ * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
+ * @param  {String}       elem_identifier     - String identifying the element (Optional)
+ */
 
-    vstr = "%s";
+/**
+ * @private
+ * @constructor Internal Properties
+ *
+ * @property  {RuleResult} rule_result         - reference to the rule result object
+ * @property  {Number}     result_value        - Constant representing result value of the evaluation result
+ * @property  {DOMElement} cache_item          - Object reference to cache item associated with the test
+ * @property  {String}     message_id          - String reference to the message string in the NLS file
+ * @property  {Array}      message_arguments   - Array  array of values used in the message string
+ */
 
-    if (str.indexOf(vstr) >= 0) {
+class PageResult extends BaseResult {
+  constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+    super(rule_result, result_value, message_id, message_arguments);
 
-      switch (this.result_value) {
-        case RESULT_VALUE.VIOLATION:
-          message = common_nls.message_severities.MUST;
-          break;
+    this.domCache = domCache;
 
-        case RESULT_VALUE.WARNING:
-          message = common_nls.message_severities.SHOULD;
-          break;
-
-        case RESULT_VALUE.MANUAL_CHECK:
-          message = common_nls.message_severities.MAY;
-          break;
-
-        default:
-          message = "";
-          break;
-      }
-      str = str.replace(vstr, message);
+    if (debug$4.flag) {
+      debug$4.log(`${this.result_value}: ${this.result_message}`);
     }
-
-    // Replace
-
-    for (var i = 0; i < message_arguments_len; i++) {
-      vstr = "%" + (i+1);
-      message = this.message_arguments[i];
-
-      if (typeof message === 'string') {
-        message = filterTextContent(message);
-      }
-      else {
-        if (typeof message === 'number') {
-          message = message.toString();
-        }
-        else {
-          message = "";
-        }
-      }
-      str = str.replace(vstr, message);
-    } // end loop
-
-    return transformElementMarkup(str);
-
   }
 
   /**
-   * @method getDataForJSON
+   * @getter isPageResult
    *
-   * @desc Object containing the data for exporting an element result to JSON
-   *
-   * @return {Object} see @desc
+   * @desc Returns true, since this class is a PageResult
+   *       Use to distinguish from ElementResult class
+   *    
+   * @return {Boolean} true
    */
 
-  getDataForJSON () {
-    const data = {
-      result_value:       this.getResultValue(),
-      result_value_nls:   this.getResultValueNLS(),
-      element_identifier: this.getElementIdentifier(),
-      ordinal_position:   this.domElement.ordinalPosition,
-      message:            this.getResultMessage()
-    };
-    return data;
+  get isPageResult () {
+    return true;
   }
 
   /**
-   * @method toJSON
+   * @method getResultIdentifier
    *
-   * @desc Creates JSON object descibing the properties of the node result
+   * @desc Gets a string identifying the element, typically element and//or a key attribute
+   *       or property value
    *
-   * @return {String} see @desc
+   * @return {String} see description
    */
 
-  toJSON () {
-    return JSON.stringify(this.getDataForJSON());
+  getResultIdentifier () {
+    return 'page';
   }
+
 }
 
 /* resultSummary.js */
 
-const debug$3 = new DebugLogging('elementResultSummary', false);
+const debug$3 = new DebugLogging('ElementResultSummary', false);
 
 /* ---------------------------------------------------------------- */
 /*                             ResultSummary                        */
@@ -12853,10 +12918,10 @@ class RuleResult {
    *
    * @desc Executes the validate function of the rule and stores the
    *       results in this rule result
-  */
+   */
 
   validate (domCache) {
-    return this.rule.validate(domCache, this);
+    this.rule.validate(domCache, this);
   }
 
   /**
@@ -12877,13 +12942,15 @@ class RuleResult {
    *
    * @desc Returns a number between 0 - 100 indicating the level of
    *       implementation the violations, warnings and passed element results
+   *       A score value of -1 means the rule only had manual checks or was not
+   *       applicable
    *
    * @return {Integer} see description
    */
 
   getImplementationScore () {
     let score = -1;
-    const ers = this.getElementResultsSummary();
+    const ers = this.getResultsSummary();
     const failures = ers.violations + ers.warnings;
     const passed = ers.passed;
     const total = failures + passed;
@@ -12895,18 +12962,18 @@ class RuleResult {
     return score;
   }
 
- /**
- * @method getImplementationValue
- *
- * @desc Return a numerical constant indicating the level of implementation:
- *
- * @return {Integer} see description
- */
+  /**
+   * @method getImplementationValue
+   *
+   * @desc Return a numerical constant indicating the level of implementation:
+   *
+   * @return {Integer} see description
+   */
 
   getImplementationValue () {
 
     let value     = IMPLEMENTATION_VALUE.NOT_APPLICABLE;
-    const summary = this.getElementResultsSummary();
+    const summary = this.getResultsSummary();
     const score   = this.getImplementationScore();
 
     if (summary.manual_checks > 0) {
@@ -12937,39 +13004,40 @@ class RuleResult {
   }
 
   /**
-  * @method getImplementationValueNLS
-  *
-  * @desc Returns a string indicating the level of implementation:
-  *
-  * @return {String} see description
-  */
+   * @method getImplementationValueNLS
+   *
+   * @desc Returns a string indicating the level of implementation:
+   *
+   * @return {String} see description
+   */
 
   getImplementationValueNLS () {
     return getCommonMessage('implementationValue', this.getImplementationValue());
   }
 
   /**
-  * @method getResultsSummary
-  *
-  * @desc Gets numerical summary information about the results
-  *
-  * @return {ElementResultSummary} see @desc
-  */
+   * @method getResultsSummary
+   *
+   * @desc Gets numerical summary information about the results
+   *
+   * @return {ElementResultSummary} see @desc
+   */
 
   getResultsSummary () {
     return this.results_summary;
   }
 
   /**
-  * @method getResultValue
-  *
-  * @desc Gets the rule result value based on element results
-  *
-  * @return {RULE_RESULT_VALUE} Returns a rule result value constant
-  */
+   * @method getResultValue
+   *
+   * @desc Gets the rule result value based on element results
+   *
+   * @return {RULE_RESULT_VALUE} Returns a rule result value constant
+   */
+
   getResultValue () {
     let resultValue = RULE_RESULT_VALUE.NOT_APPLICABLE;
-    const summary = this.getElementResultsSummary();
+    const summary = this.getResultsSummary();
 
     if (summary.violations > 0) resultValue = RULE_RESULT_VALUE.VIOLATION;
     else if (summary.warnings > 0) resultValue = RULE_RESULT_VALUE.WARNING;
@@ -12986,6 +13054,7 @@ class RuleResult {
    *
    * @return {String} Returns a string representing the rule result value
    */
+
   getResultValueNLS () {
     return getCommonMessage('ruleResult', this.getResultValue());
   }
@@ -13001,39 +13070,41 @@ class RuleResult {
    */
 
   getMessage (id) {
+    let message;
     if ((id === 'ACTION_NONE') ||
         (id === 'NOT_APPLICABLE')) {
-      return getCommonMessage('ruleResultMessages', id);
+      message = getCommonMessage('ruleResultMessages', id);
     }
 
-    let message = this.rule_result_msgs[id];
-    if (typeof message !== 'string' || (message.length === 0)) {
-      message = "Message is missing for rule id: " + this.rule.rule_id + " and mesage id: " + id;
+    if (!message) {
+      message = this.rule.rule_result_msgs[id];
+      if (typeof message !== 'string' || (message.length === 0)) {
+        message = "Message is missing for rule id: " + this.rule.rule_id + " and mesage id: " + id;
+      }
+
+      const summary = this.results_summary;
+      const failures = summary.violations + summary.warnings;
+      const total    = summary.violations + summary.warnings + summary.passed;
+
+      // Replace tokens with rule values
+      message = replaceAll(message, "%N_F",  failures.toString());
+      message = replaceAll(message, "%N_P",  summary.passed.toString());
+      message = replaceAll(message, "%N_T",  (total + summary.manual_checks).toString());
+      message = replaceAll(message, "%N_MC", summary.manual_checks.toString());
+      message = replaceAll(message, "%N_H",  summary.hidden.toString());
+      message = transformElementMarkup(message);
     }
-
-    const summary = this.results_summary;
-    const failures = summary.violations + summary.warnings;
-    const total    = summary.violations + summary.warnings + summary.passed;
-
-    // Replace tokens with rule values
-    message = replaceAll(message, "%N_F",  failures.toString());
-    message = replaceAll(message, "%N_P",  summary.passed.toString());
-    message = replaceAll(message, "%N_T",  (total + summary.manual_checks).toString());
-    message = replaceAll(message, "%N_MC", summary.manual_checks.toString());
-    message = replaceAll(message, "%N_H",  summary.hidden.toString());
-    message = transformElementMarkup(message);
-
     return message;
   }
 
   /**
-  * @method getResultMessagesArray
-  *
-  * @desc Generates a localized rule result messages
-  *
-  * @return {Array} An array of strings with rule result messages
-  *                 (typically only one string in the array)
-  */
+   * @method getResultMessagesArray
+   *
+   * @desc Generates a localized rule result messages
+   *
+   * @return {Array} An array of strings with rule result messages
+   *                 (typically only one string in the array)
+   */
 
   getResultMessagesArray () {
 
@@ -13079,12 +13150,12 @@ class RuleResult {
   }
 
   /**
-  * @method getResultMessage
-  *
-  * @desc Generates a localized rule result messages
-  *
-  * @return {String} Returns a single string with all result messages
-  */
+   * @method getResultMessage
+   *
+   * @desc Generates a localized rule result messages
+   *
+   * @return {String} Returns a single string with all result messages
+   */
 
   getResultMessage   () {
     const messages = this.getResultMessagesArray();
@@ -13100,7 +13171,7 @@ class RuleResult {
    */
 
   getAllResultsArray   () {
-    return this.results_violations.contact(
+    return this.results_violations.concat(
       this.results_warnings,
       this.results_manual_checks,
       this.results_passed,
@@ -13108,9 +13179,53 @@ class RuleResult {
   }
 
   /**
+   * @method updateResults
+   *
+   * @desc Updates rule result information for a element or page result
+   *
+   * @param  {Integer}  test_result   - Number representing if a result value
+   * @param  {Object}   result_item   - Reference to ElementResult or PageResult object
+   * @param  {Object}   dom_item      - Reference to DOMcache or domElement objects
+   */
+
+  updateResults (result_value, result_item, dom_item) {
+    switch (result_value) {
+      case RESULT_VALUE.HIDDEN:
+        this.results_hidden.push(result_item);
+        dom_item.resultsHidden.push(result_item);
+        this.results_summary.addHidden(1);
+        break;
+
+      case RESULT_VALUE.PASS:
+        this.results_passed.push(result_item);
+        dom_item.resultsPassed.push(result_item);
+        this.results_summary.addPassed(1);
+        break;
+
+      case RESULT_VALUE.VIOLATION:
+        this.results_violations.push(result_item);
+        dom_item.resultsViolations.push(result_item);
+        this.results_summary.addViolations(1);
+        break;
+
+      case RESULT_VALUE.WARNING:
+        this.results_warnings.push(result_item);
+        dom_item.resultsWarnings.push(result_item);
+        this.results_summary.addWarnings(1);
+        break;
+
+      case RESULT_VALUE.MANUAL_CHECK:
+        this.results_manual_checks.push(result_item);
+        dom_item.resultsManualChecks.push(result_item);
+        this.results_summary.addManualChecks(1);
+        break;
+    } // end switch
+  }
+
+  /**
    * @method addElementResult
    *
-   * @desc Adds a element result of an evaluation of rule on a node in the dom
+   * @desc Adds a element result from an evaluation of rule on the dom
    *
    * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
    * @param  {Object}  dom_item            - Reference to DOMcache item (e.g. domElement, domText objects)
@@ -13123,37 +13238,25 @@ class RuleResult {
     const result_value = getResultValue(test_result, this.isRuleRequired());
     const element_result = new ElementResult(this, result_value, dom_item, message_id, message_arguments);
 
-    switch (result_value) {
-      case RESULT_VALUE.HIDDEN:
-        this.results_hidden.push(element_result);
-        dom_item.resultsHidden.push(element_result);
-        this.results_summary.addHidden(1);
-        break;
+    this.updateResults(result_value, element_result, dom_item);
+  }
 
-      case RESULT_VALUE.PASS:
-        this.results_passed.push(element_result);
-        dom_item.resultsPassed.push(element_result);
-        this.results_summary.addPassed(1);
-        break;
+  /**
+   * @method addPageResult
+   *
+   * @desc Adds a page result from an evaluation of rule on the dom
+   *
+   * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
+   * @param  {Object}   dom_cache           - Reference to DOMcache for saving page results
+   * @param  {String}   message_id          - Reference to the message string in the NLS file
+   * @param  {Array}    message_arguements  - Array of values used in the message string
+   */
 
-      case RESULT_VALUE.VIOLATION:
-        this.results_violations.push(element_result);
-        dom_item.resultsViolations.push(element_result);
-        this.results_summary.addViolations(1);
-        break;
+  addPageResult (test_result, dom_cache, message_id, message_arguments) {
+    const result_value = getResultValue(test_result, this.isRuleRequired());
+    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments);
 
-      case RESULT_VALUE.WARNING:
-        this.results_warnings.push(element_result);
-        dom_item.resultsWarnings.push(element_result);
-        this.results_summary.addWarnings(1);
-        break;
-
-      case RESULT_VALUE.MANUAL_CHECK:
-        this.results_manual_checks.push(element_result);
-        dom_item.resultsManualChecks.push(element_result);
-        this.results_summary.addManualChecks(1);
-        break;
-    } // end switch
+    this.updateResults(result_value, page_result, dom_cache);
   }
 
   /**
@@ -13169,31 +13272,16 @@ class RuleResult {
   }
 
   /**
-   * @method isRuleRequiredNLS
+   * @method getRuleDefinition
    *
-   * @desc Returns 'Yes' or "No' depending on whether the rule is required or recommended rule
+   * @desc Gets the definition of the rule
    *
-   * @return {String} Returns "Yes" if required, otherwise "No"
+   * @return {String} Localized string of the rule definition based on being
+   *                  required or recommended
    */
-
-  isRuleRequiredNLS   () {
-    return this.isRuleRequired() ? 'Yes' : 'No';
-
-  }
-
-/**
- * @method getRuleDefinition
- *
- * @desc Gets the definition of the rule
- *
- * @return {String} Localized string of the rule definition based on being
- *                  required or recommended
- */
   getRuleDefinition   () {
-
-  return this.rule.getDefinition(this.isRuleRequired());
-
-}
+    return this.rule.getDefinition(this.isRuleRequired());
+  }
 
   /**
    * @method getRuleSummary
@@ -13285,12 +13373,12 @@ class RuleResult {
       guideline_code: this.rule.getGuidelineInfo().id,
 
       rule_category_nls:  this.rule.getCategoryInfo().title,
-      rule_category_code: this.rule.getCategory(),
+      rule_category_code: this.rule.getCategoryInfo().id,
 
       rule_scope_code_nls: this.rule.getScopeNLS(),
       rule_scope_code:     this.rule.getScope(),
 
-      ruleset_nls:  this.rule.getRulesetNLS(),
+      ruleset_nls:  this.rule.getRulesetInfo(),
       ruleset_code: this.rule.getRuleset(),
 
       result_value_nls: this.getResultValueNLS(),
@@ -13309,13 +13397,15 @@ class RuleResult {
       results_warning:      summary.warnings,
       results_failure:     (summary.violations + summary.warnings),
       results_manual_check: summary.manual_checks,
-      results_hidden:       summary.hidden
+      results_hidden:       summary.hidden,
+
+      results: []
     };
 
     if (flag) {
       data.results = [];
-      this.getAllResults().forEach ( r => {
-        data.element_results.push(r.getDataForJSON());
+      this.getAllResultsArray().forEach ( result => {
+        data.results.push(result.getDataForJSON());
       });
     }
     return data; 
@@ -13332,7 +13422,7 @@ class RuleResult {
    */
 
   toJSON (flag=false) {
-    return JSON.stringify(this.getDataForJSON(flag));
+    return JSON.stringify(this.getDataForJSON(flag), null, '  ');
   }
 
   /**
@@ -13352,7 +13442,7 @@ class RuleResult {
 /* evaluationResult.js */
 
 /* Constants */
-const debug$1 = new DebugLogging('EvaluationResult', false);
+const debug$1 = new DebugLogging('EvaluationResult', true);
 
 class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -13367,9 +13457,9 @@ class EvaluationResult {
     allRules.forEach (rule => {
       const ruleResult = new RuleResult(rule);
       ruleResult.validate(domCache);
-      this.allRuleResults(ruleResult);
+      this.allRuleResults.push(ruleResult);
     });
-
+    debug$1.flag && debug$1.log(`[JSON]: ${this.toJSON(true)}`);
   }
 
   /**
@@ -13489,68 +13579,60 @@ class EvaluationResult {
   }
 
   /**
-   * @method toJSON
+   * @method getDataForJSON
    *
-   * @desc Creates a string representing the evaluation results in a JSON format
+   * @desc Creates a data object with rule, element and page results
    *
-   * @param  {Boolean}  include_element_results  -  Optional param, if true then element
-   *                                                results are included in the JSON file
+   * @param  {Boolean}  flag  -  Optional param, if true then element
+   *                             results are included in the JSON file
    *
    * @return {String} Returns a string in JSON format
    */
 
-  toJSON (include_element_results) {
+  getDataForJSON (flag=false) {
 
-    if (typeof include_element_results !== 'boolean') include_element_results = false;
-    var ruleset = this.getRuleset();
-    var ruleset_info = ruleset.getRulesetInfo();
+    const data = {
+      eval_url: cleanForUTF8(this.url),
+      eval_url_encoded: encodeURI(this.url),
+      eval_title: cleanForUTF8(this.title),
 
-    var json = "{\n";
+      // For compatibility with previous versions of the library
+      ruleset_id:     'ARIA_STRICT',
+      ruleset_title:  'HTML and ARIA Techniques',
+      ruleset_abbrev: 'HTML5+ARIA',
+      ruleset_version: VERSION,
 
-    json += "  \"eval_url\"                  : " + JSON.stringify(cleanForUTF8(this.url))   + ",\n";
-    json += "  \"eval_url_encoded\"          : " + JSON.stringify(encodeURI(this.url))      + ",\n";
-    json += "  \"eval_title\"                : " + JSON.stringify(cleanForUTF8(this.title)) + ",\n";
+      rule_results: []
+    };
 
-    json += "  \"ruleset_id\"                : " + JSON.stringify(ruleset.getId())         + ",\n";
-    json += "  \"ruleset_title\"             : " + JSON.stringify(ruleset_info.title)      + ",\n";
-    json += "  \"ruleset_abbrev\"            : " + JSON.stringify(ruleset_info.abbrev)     + ",\n";
-    json += "  \"ruleset_version\"           : " + JSON.stringify(ruleset_info.version)    + ",\n";
+//    json += this.dom_cache.element_information.toJSON(true, "  ");
 
-    json += this.dom_cache.element_information.toJSON(true, "  ");
-  //  json += this.dom_cache.aria_information.toJSON(true, "  ");
-  //  json += this.dom_cache.event_information.toJSON(true, "  ");
+    this.allRuleResults.forEach( rr => {
+      data.rule_results.push(rr.getDataForJSON(flag));
+    });
+    return data;
+  }
 
-    var rule_group       = this.getRuleResultsAll();
-    var rule_results     = rule_group.getRuleResultsArray();
-    var rule_results_len = rule_results.length;
+  /**
+   * @method toJSON
+   *
+   * @desc Creates a string representing the evaluation results in a JSON format
+   *
+   * @param  {Boolean}  flag  -  Optional param, if true then element
+   *                             results are included in the JSON file
+   *
+   * @return {String} Returns a string in JSON format
+   */
 
-    json += "  \"rule_results\": [\n";
-
-    for (var i = 0; i < rule_results_len; i++) {
-
-      json += rule_results[i].toJSON("    ", include_element_results);
-
-      if (i < (rule_results_len-1))  json += ",\n";
-      else json += "\n";
-
-    }
-
-    json += "                ]\n";
-
-    json += "}\n";
-
-    json = unescape(encodeURIComponent(json));
-
-    return json;
-
+  toJSON (flag=false) {
+    return JSON.stringify(this.getDataForJSON(flag), null, '  ');
   }
 }
 
 /* evaluate.js */
 
 /* Constants */
-const debug   = new DebugLogging('evaluationLibrary', false);
-const version = '2.0.0.beta';
+const debug   = new DebugLogging('EvaluationLibrary', false);
 
 class EvaluationLibrary {
   constructor () {
@@ -13577,4 +13659,4 @@ class EvaluationLibrary {
 
 }
 
-export { EvaluationLibrary as default, version };
+export { EvaluationLibrary as default };

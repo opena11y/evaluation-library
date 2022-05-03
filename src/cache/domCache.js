@@ -7,8 +7,7 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', true);
-
+const debug = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -31,7 +30,6 @@ const skipableElements = [
  *
  * @param  {Object}  info - Parent ParentInfo object
  */
-
 
 class ParentInfo {
   constructor (info) {
@@ -73,14 +71,20 @@ export default class DOMCache {
     this.allDomElements = [];
     this.allDomTexts    = [];
 
-
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
-  	this.domCache = new DOMElement(parentInfo, startingElement, 1);
-    parentInfo.domElement = this.domCache;
-    this.allDomElements.push(this.domCache);
+  	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
+    parentInfo.domElement = this.startingDomElement;
+    this.allDomElements.push(this.startingDomElement);
+
+    // Information on rule results associated with page
+    this.resultsHidden       = [];
+    this.resultsPassed       = [];
+    this.resultsViolations   = [];
+    this.resultsWarnings     = [];
+    this.resultsManualChecks = [];
 
     this.transverseDOM(parentInfo, startingElement);
 
@@ -89,11 +93,6 @@ export default class DOMCache {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
     }
-  }
-
-  // Returns the root element of the transversal
-  get page () {
-    return this.domCache;
   }
 
   // Tests if a tag name can be skipped
@@ -234,6 +233,7 @@ export default class DOMCache {
    *
    * @desc  Used for debugging the DOMElement tree
    */
+
   showDomElementTree () {
     debug.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
@@ -246,10 +246,7 @@ export default class DOMCache {
     });
 
     debug.log(' === DOMCache Tree ===', true);
-    debug.domElement(this.domCache);
-    this.domCache.showDomElementTree(' ');
+    debug.domElement(this.startingDomElement);
+    this.startingDomElement.showDomElementTree(' ');
   }
-
-
-
 }

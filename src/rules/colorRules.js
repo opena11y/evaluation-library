@@ -105,9 +105,9 @@ export const colorRules = [
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
     target_resources    : [],
-    validate            : function (dom_ache, rule_esult) {
+    validate            : function (dom_cache, rule_result) {
 
-      ruleResult.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validate function
   }
