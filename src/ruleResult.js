@@ -272,6 +272,7 @@ export default class RuleResult {
 
     let messages = [];
     let message = "";
+    let prefix;
 
     const failures = summary.violations + summary.warnings;
 
@@ -285,26 +286,31 @@ export default class RuleResult {
     }
     else {
       if (failures > 0) {
-        if (this.isRuleRequired())  message = "V: ";
-        else message = "W: ";
+        prefix =  this.isRuleRequired() ?
+                  getCommonMessage('ruleResult', RESULT_VALUE.VIOLATION) :
+                  getCommonMessage('ruleResult', RESULT_VALUE.WARNING);
 
-        if (failures === 1) message += this.getMessage('FAIL_S');
-        else message += this.getMessage('FAIL_P');
-        messages.push(message);
+        message = (failures === 1) ?
+                  this.getMessage('FAIL_S') :
+                  this.getMessage('FAIL_P');
+        messages.push(prefix + ': ' + message);
       }
 
       if (summary.manual_checks > 0) {
-        if (summary.manual_checks === 1) message = "MC: " + this.getMessage('MANUAL_CHECK_S');
-        else message = "MC: " + this.getMessage('MANUAL_CHECK_P');
-        messages.push(message);
+        prefix = getCommonMessage('ruleResult', RESULT_VALUE.MANUAL_CHECK);
+        message = (summary.manual_checks === 1) ?
+                  this.getMessage('MANUAL_CHECK_S') :
+                  this.getMessage('MANUAL_CHECK_P');
+        messages.push(prefix + ': ' + message);
       }
-
     }
 
     if (summary.hidden > 0) {
-      if (summary.hidden === 1) message = "H: " + this.getMessage('HIDDEN_S');
-      else message = "H: " + this.getMessage('HIDDEN_P');
-      messages.push(message);
+        prefix = getCommonMessage('ruleResult', RESULT_VALUE.HIDDEN);
+      message = (summary.hidden === 1) ?
+                this.getMessage('HIDDEN_S') :
+                this.getMessage('HIDDEN_P');
+      messages.push(prefix + ': ' + message);
     }
     return messages;
   }

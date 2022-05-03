@@ -2,6 +2,7 @@
 
 /* Imports */
 import {
+  getCommonMessage,
   getBaseResultMessage
 } from './_locale/locale.js'
 
@@ -125,8 +126,7 @@ export default class BaseResult {
    */
 
   getResultValueNLS () {
-    const elementResultNLS = ['Undefined','P','H','MC','W','V'];
-    return elementResultNLS[this.result_value];
+    return getCommonMessage('ruleResult', this.result_value);
   }
 
  /**

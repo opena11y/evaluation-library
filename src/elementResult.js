@@ -1,8 +1,8 @@
 /* elementResult.js */
 
 /* Imports */
-import BaseResult               from './baseResult.js';
-import DebugLogging             from './debug.js';
+import BaseResult         from './baseResult.js';
+import DebugLogging       from './debug.js';
 
 /* Constants */
 
