@@ -9,7 +9,7 @@ import DebugLogging             from './debug.js';
 const debug = new DebugLogging('PageResult', false);
 
 /**
- * @class PageResult
+ * @class WebsiteResult
  *
  * @desc Constructor for an object that contains a the results of
  *          the evaluation of a rule on a element
@@ -34,7 +34,7 @@ const debug = new DebugLogging('PageResult', false);
  * @property  {Array}      message_arguments   - Array  array of values used in the message string
  */
 
-export default class PageResult extends BaseResult {
+export default class WebsiteResult extends BaseResult {
   constructor (rule_result, result_value, domCache, message_id, message_arguments) {
     super(rule_result, result_value, message_id, message_arguments)
 
@@ -46,28 +46,28 @@ export default class PageResult extends BaseResult {
   }
 
   /**
-   * @getter isPageResult
+   * @getter isWebsiteResult
    *
-   * @desc Returns true, since this class is a PageResult
+   * @desc Returns true, since this class is a WebResult
    *       Use to distinguish from ElementResult class
    *    
    * @return {Boolean} true
    */
 
-  get isPageResult () {
+  get isWebsiteResult () {
     return true;
   }
 
   /**
    * @method getResultIdentifier
    *
-   * @desc Gets a string identifying the page result
+   * @desc Gets a string identifying the website result
    *
    * @return {String} see description
    */
 
   getResultIdentifier () {
-    return 'page';
+    return 'website';
   }
 
 }

@@ -10,12 +10,13 @@ import {
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('colorRules', false);
+const debug = new DebugLogging('Color Rules', false);
 
-//
-// OpenAjax Alliance Rules
-// Rule group: Styling Rules
-//
+/*
+ * OpenA11y Alliance Rules
+ * Rule group: Styling Rules
+ */
+
 export const colorRules = [
   /**
    * @object COLOR_1

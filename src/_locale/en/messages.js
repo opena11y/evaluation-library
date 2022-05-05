@@ -4,7 +4,9 @@ import {common}         from './common.js';
 import {ruleCategories} from './ruleCategories.js';
 import {rulesets}       from './rulesets.js';
 import {wcag}           from './wcag.js';
+
 import {colorRules}     from './colorRules.js';
+import {landmarkRules}  from './landmarkRules.js';
 
 export const messages = {
   common: common,
@@ -15,3 +17,4 @@ export const messages = {
 }
 
 messages.rules = Object.assign(messages.rules, colorRules);
+messages.rules = Object.assign(messages.rules, landmarkRules);

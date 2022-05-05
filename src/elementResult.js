@@ -8,10 +8,6 @@ import DebugLogging       from './debug.js';
 
 const debug = new DebugLogging('ElementResult', false);
 
-/* ---------------------------------------------------------------- */
-/*                             ElementResult                           */
-/* ---------------------------------------------------------------- */
-
 /**
  * @class ElementResult
  *

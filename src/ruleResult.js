@@ -11,9 +11,10 @@ import {
   getResultValue
 } from './constants.js';
 import ElementResult  from './elementResult.js';
-import PageResult     from './pageResult.js';
 import ResultsSummary from './elementResultsSummary.js';
+import PageResult     from './pageResult.js';
 import {replaceAll}   from './utils.js';
+import WebsiteResult  from './websiteResult.js';
 import {
   getCommonMessage,
   transformElementMarkup
@@ -403,11 +404,11 @@ export default class RuleResult {
    */
 
   addElementResult (test_result, dom_item, message_id, message_arguments) {
-    dom_item = dom_item.isDomText ? dom_item.parentDomElement : dom_item;
+    const dom_element = dom_item.isDomText ? dom_item.parentDomElement : dom_item;
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const element_result = new ElementResult(this, result_value, dom_item, message_id, message_arguments);
+    const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments);
 
-    this.updateResults(result_value, element_result, dom_item);
+    this.updateResults(result_value, element_result, dom_element);
   }
 
   /**
@@ -426,6 +427,24 @@ export default class RuleResult {
     const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments);
 
     this.updateResults(result_value, page_result, dom_cache);
+  }
+
+  /**
+   * @method addWebsiteResult
+   *
+   * @desc Adds a website result from an evaluation of rule on the dom
+   *
+   * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
+   * @param  {Object}   dom_cache           - Reference to DOMcache for saving page results
+   * @param  {String}   message_id          - Reference to the message string in the NLS file
+   * @param  {Array}    message_arguements  - Array of values used in the message string
+   */
+
+  addWebsiteResult (test_result, dom_cache, message_id, message_arguments) {
+    const result_value = getResultValue(test_result, this.isRuleRequired());
+    const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments);
+
+    this.updateResults(result_value, website_result, dom_cache);
   }
 
   /**

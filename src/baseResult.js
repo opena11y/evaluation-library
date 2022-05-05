@@ -68,6 +68,19 @@ export default class BaseResult {
   }
 
   /**
+   * @getter isWebsiteResult
+   *
+   * @desc Returns false, since this class is the base result class
+   *       Use to distinguish from ElementResult class
+   *
+   * @return {Boolean} true
+   */
+
+  get isWebsiteResult () {
+    return false;
+  }
+
+  /**
    * @method getRuleResult
    *
    * @desc Gets the rule result that this element result is associated with.

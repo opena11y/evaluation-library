@@ -1,9 +1,10 @@
 /* allRules.js */
 
 /* Imports */
-import {colorRules}  from './colorRules.js';
-import Rule          from './rule.js';
-import DebugLogging  from '../debug.js';
+import {colorRules}     from './colorRules.js';
+import {landmarkRules}  from './landmarkRules.js';
+import Rule             from './rule.js';
+import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('Rules', false)
@@ -17,5 +18,6 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules);
+// addToArray(landmarkRules);
 
 

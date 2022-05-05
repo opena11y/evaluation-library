@@ -44,9 +44,10 @@ export default class DOMElement {
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
     const defaultRole = this.ariaInHTMLInfo.defaultRole;
 
-    this.role         = elementNode.hasAttribute('role') ?
-                        elementNode.getAttribute('role') :
-                        defaultRole;
+    this.hasRole = elementNode.hasAttribute('role');
+    this.role    = this.hasRole ?
+                   elementNode.getAttribute('role') :
+                   defaultRole;
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
@@ -65,6 +66,8 @@ export default class DOMElement {
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
+    this.hasContent = false;
+    this.mayHaveContent = false;
     this.children = [];
 
     // Information on rule results associated with this element

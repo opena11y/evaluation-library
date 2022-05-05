@@ -3,11 +3,29 @@
 /* Imports */
 import DOMElement    from './domElement.js';
 import DOMText       from './domText.js';
+import ListInfo      from './listInfo.js';
 import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', false);
+const debug = new DebugLogging('domCache', true);
+
+const elementsWithContent = [
+  'area',
+  'audio',
+  'canvas',
+  'img',
+  'input',
+  'select',
+  'svg',
+  'textarea',
+  'video'
+];
+
+const elementsThatMayHaveContent = [
+  'embed',
+  'object'
+];
 
 const skipableElements = [
   'base',
@@ -21,7 +39,7 @@ const skipableElements = [
   'template',
   'shadow',
   'title'
-]
+];
 
 /**
  * @class ParentInfo
@@ -33,16 +51,18 @@ const skipableElements = [
 
 class ParentInfo {
   constructor (info) {
-    this.document = null;
-    this.domElement = null;
+    this.document        = null;
+    this.domElement      = null;
     this.landmarkElement = null;
-    this.controlElement = null;
+    this.listElement     = null;
+    this.controlElement  = null;
 
     if (info) {
-      this.document = info.document;
-      this.domElement = info.domElement;
+      this.document        = info.document;
+      this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
-      this.controlElement = info.controlElement;
+      this.listElement     = info.listElement;
+      this.controlElement  = info.controlElement;
     }
   }
 }
@@ -75,6 +95,8 @@ export default class DOMCache {
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
+    this.listInfo      = new ListInfo();
+
   	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
@@ -92,6 +114,7 @@ export default class DOMCache {
     if (debug.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
+      this.listInfo.showListInfo();
     }
   }
 
@@ -143,6 +166,7 @@ export default class DOMCache {
           if (domItem.hasContent) {
             // Merge text nodes in to a single DomText node if sibling text nodes
             if (parentDomElement) {
+              parentDomElement.hasContent = true;
               // if last child node of parent is a DomText node merge text content
               if (parentDomElement.isLastChildDomText) {
                 parentDomElement.addTextToLastChild(domItem.text);
@@ -156,6 +180,15 @@ export default class DOMCache {
 
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
+
+          if (parentDomElement) {
+            if (elementsWithContent.includes(tagName)) {
+                parentDomElement.hasContent = true;
+            }
+            if (elementsThatMayHaveContent.includes(tagName)) {
+                parentDomElement.mayHaveContent = true;
+            }
+          }
 
           if (!this.isSkipableElement(tagName)) {
             // check for slotted content
@@ -220,10 +253,13 @@ export default class DOMCache {
 
   updateDOMElementInformation (parentInfo, domElement) {
     const landmarkElement = parentInfo.landmarkElement;
+    const listElement = parentInfo.listElement;
+
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
 
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement);
+    newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
 
     return newParentInfo;
   }

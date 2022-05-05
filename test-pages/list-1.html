@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>List test page | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <script src="webComponent.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>ist Test Page</h1>
+
+      <h2>Unordered List</h2>
+      <ul>
+        <li>List 1A</li>
+        <li>List 1B</li>
+        <li>
+          List 1C
+          <ul>
+            <li>List 1C-1</li>
+            <li>List 1C-2</li>
+            <li>List 1C-3</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2>Ordered List</h2>
+      <ol>
+        <li>List 2A</li>
+        <li>
+          List 2B
+          <ol>
+            <li>List 2B-1</li>
+            <li>List 2B-2</li>
+            <li>List 2B-3</li>
+          </ol>
+        </li>
+        <li>List 2C</li>
+      </ol>
+
+      <h2>Definition List</h2>
+      <dl>
+        <dt>Term 3A</dt>
+        <dd>Defintion 3A-1</dd>
+        <dd>Defintion 3A-2</dd>
+        <dd>Defintion 3A-3</dd>
+        <dt>Term 3B</dt>
+        <dd>Defintion 3B-1</dd>
+        <dd>
+          Defintion 3B-2
+          <ul>
+            <li>Defintion 3B-2-A</li>
+            <li>Defintion 3B-2-B</li>
+          </ul>
+        </dd>
+        <dt>Term 3C</dt>
+        <dd>Defintion 3C-1</dd>
+        <dd>Defintion 3C-2</dd>
+        <dd>Defintion 3C-3</dd>
+      </dl>
+
+      <h2>List Roles</h2>
+      <div role="list">
+        <div role="listitem">List 4A</div>
+        <div role="listitem">
+          List 4B
+          <div role="list">
+            <div role="listitem">List 4B-1</div>
+            <div role="listitem">List 4B-2</div>
+            <div role="listitem">List 4B-3</div>
+          </div>
+        </div>
+        <div role="listitem">List 4C</div>
+      </div>
+
+      <h2>Unordered List with links</h2>
+      <ul>
+        <li><a href="#">List 5A</a></li>
+        <li><a href="#">List 5B</a></li>
+        <li>
+          <a href="#">List 5C</a>
+          <ul>
+            <li><a href="#">List 5C-1</a></li>
+            <li><a href="#">List 5C-2</a></li>
+            <li><a href="#">List 5C-3</a></li>
+            <li><a href="#">List 5C-4</a></li>
+            <li><a href="#">List 5C-5</a></li>
+            <li><a href="#">List 5C-6</a></li>
+            <li><a href="#">List 5C-7</a></li>
+          </ul>
+        <li><a href="#">List 5D</a></li>
+        <li><a href="#">List 5E</a></li>
+        <li><a href="#">List 5F</a></li>
+        <li><a href="#">List 5G</a></li>
+        <li><a href="#">List 5H</a></li>
+        </li>
+      </ul>
+
+      <h2>Ordered List with links</h2>
+      <ol>
+        <li><a href="#">List 6A</a></li>
+        <li>
+          <a href="#">List 6B</a>
+          <ol>
+            <li><a href="#">List 6B-1</a></li>
+            <li><a href="#">List 6B-2</a></li>
+            <li><a href="#">List 6B-3</a></li>
+          </ol>
+        </li>
+        <li><a href="#">List 6C</a></li>
+      </ol>
+
+
+    </main>
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>
