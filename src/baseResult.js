@@ -1,17 +1,18 @@
-/* elementResult.js */
+/* baseResult.js */
 
 /* Imports */
+import DebugLogging from './debug.js';
+import {RESULT_TYPE} from './constants.js';
 import {
   getCommonMessage,
   getBaseResultMessage
 } from './_locale/locale.js'
 
-/* ---------------------------------------------------------------- */
-/*                             BaseResult                           */
-/* ---------------------------------------------------------------- */
+/* constants */
+const debug = new DebugLogging('baseResult', false);
 
 /**
- * @class Result
+ * @class baseResult
  *
  * @desc Constructor for an object that contains a the results of
  *          the evaluation of a rule on a element or page
@@ -32,52 +33,68 @@ import {
  */
 
 export default class BaseResult {
-  constructor (ruleResult, resultValue, msgId, msgArgs) {
+  constructor (ruleResult, resultValue, msgId, msgArgs, result_identifier, ordinal_position) {
 
     const msg = ruleResult.rule.base_result_msgs[msgId];
 
-    this.rule_result    = ruleResult;
-    this.result_value   = resultValue;
-    this.result_message = getBaseResultMessage(msg, msgArgs);
+    this.result_type       = RESULT_TYPE.BASE;
+    this.rule_result       = ruleResult;
+    this.result_value      = resultValue;
+    this.result_message    = getBaseResultMessage(msg, msgArgs);
+    this.result_identifier = result_identifier;
+    this.ordinal_position  = ordinal_position;
+
+    debug.flag && debug.log('');
   }
 
   /**
    * @getter isElementResult
    *
-   * @desc Returns true, since this class is the base result class
-   *       Use to distinguish from PageResult class
+   * @desc Returns true if the result type is element,
+   *       otherwise false
    *    
-   * @return {Boolean} false
+   * @return {Boolean} see @desc
    */
 
   get isElementResult () {
-    return false;
+    return this.result_type === RESULT_TYPE.ELEMENT;
   }
 
   /**
    * @getter isPageResult
    *
-   * @desc Returns false, since this class is the base result class
-   *       Use to distinguish from ElementResult class
+   * @desc Returns true if the result type is page,
+   *       otherwise false
    *
-   * @return {Boolean} false
+   * @return {Boolean} see @desc
    */
 
   get isPageResult () {
-    return false;
+    return this.result_type === RESULT_TYPE.PAGE;
   }
 
   /**
    * @getter isWebsiteResult
    *
-   * @desc Returns false, since this class is the base result class
-   *       Use to distinguish from ElementResult class
+   * @desc Returns true if the result type is website,
+   *       otherwise false
    *
-   * @return {Boolean} true
+   * @return {Boolean} see @desc
    */
 
   get isWebsiteResult () {
-    return false;
+    return this.result_type === RESULT_TYPE.WEBSITE;
+  }
+
+  /**
+   * @method getResultType
+   *
+   * @desc Returns the result type: element, page or website
+   *
+   * @return {Object} see @desc
+   */
+  getResultType () {
+     return this.rule_result;
   }
 
   /**
@@ -102,7 +119,7 @@ export default class BaseResult {
    */
 
   getResultIdentifier () {
-    return 'undefined';
+    return this.result_identifier;
   }
 
   /**
@@ -116,7 +133,7 @@ export default class BaseResult {
    */
 
   getOrdinalPosition () {
-    return '';
+    return this.ordinal_position;
   }
 
   /**
@@ -151,14 +168,14 @@ export default class BaseResult {
    */
 
   getDataForJSON () {
-    const data = {
-      result_value:       this.getResultValue(),
-      result_value_nls:   this.getResultValueNLS(),
-      result_identifier:  this.getResultIdentifier(),
-      ordinal_position:   this.getOrdinalPosition(),
+    return {
+      result_type:        this.result_type,
+      result_value:       this.result_value,
+      result_value_nls:   this.result_value_nls,
+      result_identifier:  this.result_identifier,
+      ordinal_position:   this.ordinal_position,
       message:            this.result_message
     }
-    return data;
   }
 
   /**

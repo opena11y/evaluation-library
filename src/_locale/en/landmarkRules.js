@@ -32,7 +32,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="main"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@main@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A @main@ landmark provides a navigation point to the primary content of the page for users of assistive technologies.',
         'Most pages only need one @main@ landmark, but in the case of portals or mashups, there may be more than one @main@ landmark on a "page".'
       ],
@@ -46,7 +46,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: main role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: main role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -107,7 +107,7 @@ export const landmarkRules = {
         ELEMENT_FAIL_1:   'Move @%1@ element into an appropriate landmark. (This may require creating an additional landmark.)',
         ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Landmarks provide a way to organize the various types of content on a page for users of assistive technologies. The organization of content regions using landmarks is functionally similar to the way visual designers organize information for people who rely on a graphical rendering of the content.',
         'When content is not contained in a landmark, it will be unreachable using landmark navigation, which is an important feature provided by assistive technologies such as screen readers.'
       ],
@@ -124,7 +124,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -183,7 +183,7 @@ export const landmarkRules = {
         ELEMENT_FAIL_1:   '@%1@ list element has %2 links and not in any landmark.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="navigation"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Navigation landmarks provide a way to identify groups (e.g. lists) of links that are intended to be used for website or page content navigation.'
       ],
       TECHNIQUES: [
@@ -201,7 +201,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: navigation role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: navigation role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#navigation'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -259,7 +259,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: 'A top level @header@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A @banner@ landmark provides a way to identify organizational or company branding content, usually replicated across all pages and located at the top of each page.'
       ],
       TECHNIQUES: [
@@ -274,7 +274,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -341,7 +341,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: 'Top level @header@ element  was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A banner landmark provides a way to identify redundant branding content, usually placed at the top of each web page.'
       ],
       TECHNIQUES: [
@@ -356,7 +356,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -414,7 +414,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@footer@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The @contentinfo@ landmark provides a way to identify administrative content, typically found at the bottom of each page in a website and referred to as footer information in publishing contexts.',
         'The @contentinfo@ landmark typically includes information and/or links to copyright, contact info, privacy policies and other general information found on all pages in the website.'
       ],
@@ -430,7 +430,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -497,7 +497,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@footer@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The @contentinfo@ landmark provides a way to identify administrative content, typically found at the bottom of each page in a website and referred to as footer information in publishing contexts.',
         'The @contentinfo@ landmark typically includes information and/or links to copyright, contact info, privacy policies and other general information found on all pages in the website.',
         'The @footer@ element that is NOT contained in an @section@ and @aside@ element has the default role of @contentinfo@ landmark.'
@@ -514,7 +514,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -569,12 +569,12 @@ export const landmarkRules = {
         ELEMENT_PASS_2:   '@%1[role="banner"]@ defines a top-level @banner@ landmark in the @frame@ or @iframe@.',
         ELEMENT_PASS_3:   '@header@ element defines a top-level @banner@ landmark.',
         ELEMENT_PASS_4:   '@header@ element defines a top-level @banner@ landmark in the @frame@ or @iframe@.',
-        ELEMENT_FAIL_1:   'Update the landmark structure on the page such that the @%1[role="banner"]@ element is a top-level landmark (it is currently the child of a @%2@ landmark).',
-        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @header@ element is a top-level landmark (it is currently the child of a @%1@ landmark).',
+        ELEMENT_FAIL_1:   'Update the landmark structure on the page such that the @%1[role="banner"]@ element is a top-level landmark (it is currently the child of a @%2@ landmark region).',
+        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @header@ element is a top-level landmark (it is currently the child of a @%1@ landmark region).',
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@header@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Top-level landmarks are the easiest to find and navigate to using assistive technologies.',
         'Banner content is usually the content at beginning of a page that repeats on most pages within a website.'
       ],
@@ -586,7 +586,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -647,7 +647,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@header@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
          'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
       ],
       TECHNIQUES: [
@@ -657,7 +657,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -681,7 +681,7 @@ export const landmarkRules = {
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         }
       ]
@@ -714,7 +714,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="navigation"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@nav@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
       ],
       TECHNIQUES: [
@@ -724,7 +724,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: navigation role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: navigation role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#navigation'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -772,7 +772,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="main"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@main@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Top-level landmarks are the easiest landmarks to find and navigate to using assistive technologies.'
       ],
       TECHNIQUES: [
@@ -783,7 +783,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: main role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: main role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -835,7 +835,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Top-level landmarks are the easiest to find and navigate to using assistive technologies.'
       ],
       TECHNIQUES: [
@@ -846,7 +846,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -899,7 +899,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="contentinfo"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@footer@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
          'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
       ],
       TECHNIQUES: [
@@ -909,7 +909,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -921,7 +921,7 @@ export const landmarkRules = {
           url:   'https://www.w3.org/TR/html5/sections.html#sections'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -966,7 +966,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="search"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ element with @role="@%2"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A @search@ landmark identifies a form on the page used to search for content across the entire website.',
         'For @search@ landmarks containing more than one search option and where each option can be represented as its own section, use @region@ landmarks to identify these sections.',
         'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
@@ -979,7 +979,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: search role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: search role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#search'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -1036,7 +1036,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_2: '@form@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_3: '@%1@ element with @role="%2"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Form landmarks provide a way to identify groups of form controls and widgets on the page.',
         'For @form@ landmarks containing more than one group of controls, where each is considered its own section, use @region@ landmarks to identify these sections.',
         'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
@@ -1051,7 +1051,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: form role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: form role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#form'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -1105,7 +1105,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="region"]@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@section@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The @region@ landmark is used to identify subsections of @banner@, @complementary@, @contentinfo@, @main@, @navigation@ and @search@ landmarks.',
         'For an element with an @[role=region]@ to be considered an @region@ landmark on the page, it must have an accessible name that identifies the contents of the region.'
       ],
@@ -1119,7 +1119,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: region role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -1179,7 +1179,7 @@ export const landmarkRules = {
         ELEMENT_FAIL_1:   'Change the accessible name "%1" of the @%2@ landmark (or the other duplicates) so that it is unique on the page.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="%2"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Landmarks identify the regions of content on a page.',
         'When a landmark does not have an author-defined accessible name, assistive technologies will use its ARIA role as an identifier.',
         'When there is more than one landmark of the same type on the page (e.g., multiple @navigation@ and/or @region@ landmarks), additional labeling through the use of author-defined accessible names is needed to allow users to differentiate among them.'
@@ -1195,7 +1195,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: region role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -1249,7 +1249,7 @@ export const landmarkRules = {
         ELEMENT_MC_1:      'Verify the @%1@ landmark with the label "%2" describes the type of content it contains.',
         ELEMENT_HIDDEN_1:  'The @%1@ landmark was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'When ARIA landmarks are used to identify regions of content on the page, users of assistive technologies gain programmatic access to those regions through built-in navigation commands.',
         'Proper use of landmarks provides a navigable structure where common sections or features of pages can be easily accessed or, conversely, skipped over if they represent repeated blocks of content.',
         'If the appropriate landmark roles are NOT used, the type or purpose of each content region will be less obvious to users of assistive technologies.',
@@ -1273,7 +1273,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -1334,7 +1334,7 @@ export const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="complementary"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@aside@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         '@complementary@ landmarks provide a way to identify sections of a page that may not be considered the main content, but that provide important supporting or related information to the main content.',
         'Top-level landmarks are the easiest to find and navigate to using assistive technologies.'
       ],
@@ -1347,7 +1347,7 @@ export const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: complementary role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: complementary role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#complementary'
         },
         { type:  REFERENCES.SPECIFICATION,

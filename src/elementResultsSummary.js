@@ -1,4 +1,4 @@
-/* resultSummary.js */
+/* elementResultSummary.js */
 
 /* Imports */
 import DebugLogging  from './debug.js';

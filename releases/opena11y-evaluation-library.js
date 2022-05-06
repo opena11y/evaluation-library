@@ -136,7 +136,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$j = new DebugLogging('colorContrast', false);
+const debug$k = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -156,9 +156,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$j.flag) {
-      debug$j.separator();
-      debug$j.tag(elementNode);
+    if (debug$k.flag) {
+      debug$k.separator();
+      debug$k.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -182,11 +182,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$j.flag) {
-      debug$j.log(`[                    opacity]: ${this.opacity}`);
-      debug$j.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
-      debug$j.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$j.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$k.flag) {
+      debug$k.log(`[                    opacity]: ${this.opacity}`);
+      debug$k.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug$k.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$k.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -508,7 +508,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$i = new DebugLogging('visibility', false);
+const debug$j = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -549,15 +549,15 @@ class Visibility {
         this.isVisibleToAt = false;
     }
 
-    if (debug$i.flag) {
-      debug$i.separator();
-      debug$i.tag(elementNode);
-      debug$i.log('[          isHidden]: ' + this.isHidden);
-      debug$i.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$i.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$i.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$i.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$i.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$j.flag) {
+      debug$j.separator();
+      debug$j.tag(elementNode);
+      debug$j.log('[          isHidden]: ' + this.isHidden);
+      debug$j.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$j.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$j.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$j.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5399,7 +5399,7 @@ const designPatterns = {
   }
 };
 
-// LOW-LEVEL FUNCTIONS
+/* utils.js */
 /* constants */
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
 const inputsWithChecked   = ['checkbox', 'radio'];
@@ -5473,6 +5473,49 @@ function hasCheckedState (node) {
 }
 
 /**
+ * @function filterTextContent
+ *
+ * @desc Normalizes spaces in a string and removes any non-printable characters
+ *
+ * @param {String} s - string to be normalized
+ *
+ * @return  String
+ */
+
+function filterTextContent  (s) {
+  // Replace repeated spaces, newlines and tabs with a single space
+
+  if (typeof s !== 'string') return "";
+
+// **** NOTE *****
+// This function was changed to support fae-util based on HTMLUnit, which does not seem to
+// handle character entities the same as a browser DOM
+// This resulted in special characters being generated triggering false positives in some
+/// rules, usually Landmark rules related to content being outside a landmark
+
+//  if (s.replace) return s.replace(/^\s*|\s(?=\s)|\s*$/g, "");
+
+  const len = s.length;
+  let s1 = "";
+  let last_c = 32;
+
+  for (let i = 0; i < len; i++) {
+
+    var c = s.charCodeAt(i);
+
+    // only include printable characters less than '~' character
+    if (c < 32 || c > 126) continue;
+
+    if ((c !== 32) || (last_c !== 32)) {
+      s1 += s[i];
+      last_c = c;
+    }
+
+  }
+  return s1.trim();
+}
+
+/**
  * @function replaceAll
  *
  * @desc Normalizes spaces in a string
@@ -5526,7 +5569,11 @@ function getFormattedDate() {
   const hours = date.getHours() + 1;
   const minutes = date.getMinutes() + 1;
 
-  return y + "-" + leadingZero(m) + "-" + leadingZero(d) + ":" + leadingZero(hours)+ ":" + leadingZero(minutes);
+  return y + "-" +
+        leadingZero(m) + "-" +
+        leadingZero(d) + ":" +
+        leadingZero(hours)+ ":" +
+        leadingZero(minutes);
 }
 
 /**
@@ -5545,6 +5592,20 @@ function cleanForUTF8 (str) {
     if (c >= ' ' && c < '~') nstr += c;
   });
   return nstr;
+}
+
+/**
+ * @function accNamesTheSame
+ *
+ * @desc Returns true if the names a equivalent, otherwise false
+ *
+ * @param  {accName}  str - string to clean
+ *
+ * @return {String}  String with only ASCII characters
+ */
+
+function accNamesTheSame (accName1, accName2) {
+  return accName1.name.toLowerCase() === accName2.name.toLowerCase();
 }
 
 /* ariaValidation.js */
@@ -5576,7 +5637,7 @@ function debugAttrs (attrs) {
 }
 
 /* Constants */
-const debug$h = new DebugLogging('AriaValidation', false);
+const debug$i = new DebugLogging('AriaValidation', false);
 
 /**
  * @class TokenInfo
@@ -5658,14 +5719,14 @@ class AriaValidation {
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
     this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
 
-    if (debug$h.flag) {
-      node.attributes.length && debug$h.log(`${node.outerHTML}`, 1);
-      debug$h.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$h.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$h.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$h.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$h.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$h.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$i.flag) {
+      node.attributes.length && debug$i.log(`${node.outerHTML}`, 1);
+      debug$i.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$i.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$i.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$i.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$i.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$i.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7311,7 +7372,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$g = new DebugLogging('ariaInHtml', false);
+const debug$h = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7473,11 +7534,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$g.flag) {
+  if (debug$h.flag) {
     if (tagName === 'h2') {
-      debug$g.tag(node);
+      debug$h.tag(node);
     }
-    debug$g.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$h.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8566,7 +8627,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$f = new DebugLogging('DOMElement', false);
+const debug$g = new DebugLogging('DOMElement', false);
 
 /**
  * @class DOMElement
@@ -8668,6 +8729,19 @@ class DOMElement {
   }
 
   /**
+   * @method getIndentifier
+   *
+   * @desc
+   */
+
+  getIdentifier () {
+    let identifier = this.node.hasAttribute('type') ?
+                     `${this.tagName}[${this.node.getAttribute('type')}]` :
+                     this.tagName;
+    return identifier;
+  }
+
+  /**
    * @method getLastChild
    *
    * @desc
@@ -8764,12 +8838,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$f.flag) {
+    if (debug$g.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$f.domText(domItem, prefix);
+          debug$g.domText(domItem, prefix);
         } else {
-          debug$f.domElement(domItem, prefix);
+          debug$g.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -8848,7 +8922,7 @@ class DOMText {
 /* listInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('ListInfo', true);
+const debug$f = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -8869,8 +8943,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$e.flag) {
-      debug$e.log('');
+    if (debug$f.flag) {
+      debug$f.log('');
     }
   }
 
@@ -8895,9 +8969,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$e.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$e.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9004,16 +9078,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$e.flag) {
-      debug$e.log('== All ListElements ==', 1);
-      debug$e.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$f.flag) {
+      debug$f.log('== All ListElements ==', 1);
+      debug$f.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$e.log('== List Tree ==', 1);
-      debug$e.log(`[linkCount]: ${this.linkCount}`);
+      debug$f.log('== List Tree ==', 1);
+      debug$f.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9023,7 +9097,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$d = new DebugLogging('structureInfo', false);
+const debug$e = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9040,18 +9114,25 @@ const requireAccessibleNames = ['region', 'form'];
 class LandmarkElement {
   constructor (domElement, parentLandmarkElement) {
 
-    this.parentLandmarkElement = parentLandmarkElement;
-    this.domElement = domElement;
-    this.childLandmarkElements = [];
-    this.childHeadingDomElements = [];
+    this.parentLandmarkElement   = parentLandmarkElement;
+    this.domElement              = domElement;
 
-    if (debug$d.flag) {
-      debug$d.log('');
+    this.descendantLandmarkElements = [];
+    this.childLandmarkElements      = [];
+    this.childHeadingDomElements    = [];
+
+    if (debug$e.flag) {
+      debug$e.log('');
     }
   }
 
-  addChildLandmark (LandmarkElement) {
-    this.childLandmarkElements.push(LandmarkElement);
+  addChildLandmark (landmarkElement) {
+    this.childLandmarkElements.push(landmarkElement);
+    let ple = landmarkElement.parentLandmarkElement;
+    while (ple) {
+      ple.descendantLandmarkElements.push(landmarkElement);
+      ple = ple.parentLandmarkElement;
+    }
   }
 
   addChildHeading (domElement) {
@@ -9062,15 +9143,19 @@ class LandmarkElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$d.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
+    debug$e.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
     this.childLandmarkElements.forEach( le => {
-      debug$d.domElement(le.domElement, prefix);
+      debug$e.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
-    debug$d.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
+    debug$e.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
     this.childHeadingDomElements.forEach( h => {
-      debug$d.domElement(h, prefix);
+      debug$e.domElement(h, prefix);
     });
+  }
+
+  toString () {
+    return this.domElement.role;
   }
 }
 /**
@@ -9089,7 +9174,7 @@ class StructureInfo {
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
 
-    if (debug$d.flag) ;
+    if (debug$e.flag) ;
   }
 
   /**
@@ -9201,18 +9286,18 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$d.flag) {
-      debug$d.log('== All Headings ==', 1);
+    if (debug$e.flag) {
+      debug$e.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$d.domElement(h);
+        debug$e.domElement(h);
       });
-      debug$d.log('== All Landmarks ==', 1);
+      debug$e.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$d.domElement(le.domElement);
+        debug$e.domElement(le.domElement);
       });
-      debug$d.log('== Structure Tree ==', 1);
+      debug$e.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$d.domElement(le.domElement);
+        debug$e.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9222,7 +9307,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$c = new DebugLogging('domCache', true);
+const debug$d = new DebugLogging('domCache', false);
 
 const elementsWithContent = [
   'area',
@@ -9325,7 +9410,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$c.flag) {
+    if (debug$d.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
       this.listInfo.showListInfo();
@@ -9482,18 +9567,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$c.log(' === AllDomElements ===', true);
+    debug$d.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$c.domElement(de);
+      debug$d.domElement(de);
     });
 
-    debug$c.log(' === AllDomTexts ===', true);
+    debug$d.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$c.domText(dt);
+      debug$d.domText(dt);
     });
 
-    debug$c.log(' === DOMCache Tree ===', true);
-    debug$c.domElement(this.startingDomElement);
+    debug$d.log(' === DOMCache Tree ===', true);
+    debug$d.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -9501,7 +9586,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$b = new DebugLogging('constants', false);
+const debug$c = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -9563,8 +9648,9 @@ const RULE_CATEGORIES = {
   ALL                    : 0x0FFF
 };
 
-  /**
- * @constant RULE_SCOPE * @type Integer
+/**
+ * @constant RULE_SCOPE
+ * @type Integer
  * @desc Defines scope of a rule
  *
  * @example
@@ -9581,7 +9667,26 @@ const RULE_SCOPE =  {
   WEBSITE : 3
 };
 
-  /**
+/**
+ * @constant RESULT_TYPE
+ * @type Integer
+ * @desc Defines if the rule represents a element, page or website result
+ *
+ * @example
+ * RESULT_TYPE.BASE
+ * RESULT_TYPE.ELEMENT
+ * RESULT_TYPE.PAGE
+ * RESULT_TYPE.WEBSITE
+ */
+
+const RESULT_TYPE =  {
+  BASE    : 0,
+  ELEMENT : 1,
+  PAGE    : 2,
+  WEBSITE : 3
+};
+
+/**
  * @constant TEST_RESULT * @type Integer
  * @desc Types of rule results, used in validation functions
  *
@@ -9882,13 +9987,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$b.flag && debug$b.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$b.flag && debug$b.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -10041,6 +10146,792 @@ const colorRules$1 = [
 
 /* Constants */
 new DebugLogging('Landmark Rules', false);
+
+/* Helper Functions for Landmarks */
+
+
+/**
+ * @function validateTopLevelLandmark
+ *
+ * @desc Evaluate if a landmark role is top level (e.g. not contained in other landmarks)
+ *
+ * @param  {DOMCache}    dom_cache   - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result - RuleResult object
+ * @param  {String}      role        - Landmark role to check
+ */
+
+function validateTopLevelLandmark(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+
+        if (de.parentInfo.landmarkElement === null) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []);
+          }
+        }
+        else {
+          // Check to see if the two elements with the role share the same DOM (e.g. iframe check)
+          // If in a different DOM, allow it to be the top level in that DOM
+          const de1 = de.parentInfo.landmarkElement.domElement;
+
+          if (de1 && (de.parentInfo.document !== de1.parentInfo.document)) {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', []);
+            }
+          }
+          else {
+            // Fails if they are in the same DOM
+            const landmarkRole = de.parentInfo.landmarkElement.domElement.role;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, landmarkRole]);
+            } else  {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [landmarkRole]);
+            }
+          }
+        }
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+}
+
+/**
+ * @function validateAtLeastOne
+ *
+ * @desc Evaluate if the the landmark region role exists in the page.
+ *       The required parameter determines if the landamrk is missing whether
+ *       a failure or manual check is required
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark role
+ * @oaram  {Boolean}     required     - Is the landamrk region role required
+ */
+
+function validateAtLeastOne(dom_cache, rule_result, role, required) {
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let roleCount = 0;
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === 'main') {
+      if (de.visibility.isVisibleToAT) {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+        roleCount += 1;
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+
+  if (roleCount === 0) {
+    if (required) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+    }
+    else {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    }
+  } else {
+    if (roleCount === 1) {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+    } else {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
+    }
+  }
+}
+
+
+/**
+ * @function validateNoMoreThanOne
+ *
+ * @desc Evaluate if the the landmark region role exists more than once on the page.
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark region role
+ */
+
+function validateNoMoreThanOne(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let roleCount = 0;
+  let visibleDomElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleDomElements.push(de);
+        roleCount += 1;
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+
+  if (roleCount > 0) {
+    if (roleCount === 1) {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+      visibleDomElements.forEach( de => {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+      });
+    } else {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_2', [roleCount]);
+      visibleDomElements.forEach( de => {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_1', [de.tagName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_2', []);
+        }
+      });
+    }
+  }
+}
+
+/**
+ * @function validateLandmarkDescendants
+ *
+ * @desc Evaluate if the descendant landmark roles are a certain type
+ *
+ * @param  {DOMCache}    dom_cache             - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result           - RuleResult object
+ * @param  {String}      role                  - Landmark region role
+ * @param  {Array}       allowedLandmarkRoles  - An array of allowed descendant roles
+ */
+
+function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandmarkRoles) {
+
+  function checkForDescendantLandmarks(landmarkElement) {
+    const result = {
+      failedCount: 0,
+      failedRoles : [],
+      passedCount: 0,
+      passedRoles : []
+    };
+
+    landmarkElement.descendantLandmarkElements.forEach( le => {
+      const de   = le.domElement;
+      const role = de.role;
+      if (allowedLandmarkRoles.includes(role)) {
+        rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
+        result.passedCount += 1;
+        result.passedRoles.push(role);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+        result.failedCount += 1;
+        result.failedRoles.push(role);
+      }
+    });
+
+    return result;
+  }
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let visibleLandmarkElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleLandmarkElements.push(le);
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+
+  visibleLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    const result = checkForDescendantLandmarks(le);
+    const failedRoles = result.failedRoles.join(', ');
+    const passedRoles = result.passedRoles.join(', ');
+
+    if (result.failedCount === 1) {
+      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [failedRoles]);
+    } else {
+      if (result.failedCount > 1) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [result.failedCount, failedRoles]);
+      }
+      else {
+        if (result.passedCount === 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+        else {
+          if (result.passedCount === 1) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [passedRoles]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [result.passedCount, passedRoles]);
+          }
+        }
+      }
+    }
+  });
+}
+
+/**
+ * @function validateUniqueAccessibleNames
+ *
+ * @desc Evaluate if the accessible names for the landmark role are unique.
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark region role
+ */
+
+function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let roleCount = 0;
+  let visibleDomElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleDomElements.push(de);
+        roleCount += 1;
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+      }
+    }
+  });
+
+  if (roleCount > 1) {
+    visibleDomElements.forEach( (de1, index1) => {
+      let duplicate = false;
+      visibleDomElements.forEach( (de2, index2) => {
+        if ((index1 !== index2) &&
+            accNamesTheSame(de1.accName, de2.accName)) {
+          duplicate = true;
+        }
+      });
+      if (duplicate) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.accName.name, role]);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [role]);
+      }
+    });
+  }
+}
+
+/*
+ * OpenA11y Alliance Rules
+ * Rule group: Landmark Rules
+ */
+
+const landmarkRules$1 = [
+
+  /**
+   * @object LANDMARK_1
+   *
+   * @desc Each page should have at least one main landmark
+   */
+
+  { rule_id             : 'LANDMARK_1',
+    last_updated        : '2022-05-03',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['main', '[role="main"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateAtLeastOne(dom_cache, rule_result, 'main', true);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_2
+   *
+   * @desc All rendered content should be contained in a landmark
+   */
+  { rule_id             : 'LANDMARK_2',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['Page', 'all'],
+    validate            : function (dom_cache, rule_result) {
+      dom_cache.allDomElements.forEach ( de => {
+        if (de.hasContent || de.mayHaveContent) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.parentInfo.landmarkElement) {
+              const role = de.parentInfo.landmarkElement.domElement.role;
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, role]);
+            }
+            else {
+              if (de.mayHaveContent) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+              }
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          }
+        }
+      });
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_3
+   *
+   * @desc Each page within a website should have at least one navigation landmark
+   *
+   */
+  { rule_id             : 'LANDMARK_3',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.WEBSITE,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['nav', '[role="navigation"]'],
+    validate            : function (dom_cache, rule_result) {
+
+      const MINIMUM_LINKS = 4;
+      const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+      let navigationCount = 0;
+
+      allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        if (de.role === 'navigation') {
+          if (de.visibility.isVisibleToAT) {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            }
+            navigationCount += 1;
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          }
+        }
+      });
+
+      if (navigationCount === 0) {
+        // See if there are any lists of links greater than the MINIMUM_LINKS
+        const allListElements = dom_cache.listInfo.allListElements;
+        let listWithLinksCount = 0;
+        allListElements.forEach ( le => {
+          const de = le.domElement;
+          if (le.linkCount > MINIMUM_LINKS) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, one_link_count]);
+            listWithLinksCount += 1;
+          }
+        });
+
+        if (listWithLinksCount > 0) {
+          rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+        }
+      } else {
+        if (navigationCount === 1) {
+          rule_result.addWebsiteResult(TEST_RESULT.PASS, dom_cache, 'WEBSITE_PASS_1', []);
+        } else {
+          rule_result.addWebsiteResult(TEST_RESULT.PASS, dom_cache, 'WEBSITE_PASS_2', [navigationCount]);
+        }
+      }
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_4
+   *
+   * @desc Each page may have at least one banner landmark
+   *
+   */
+
+  { rule_id             : 'LANDMARK_4',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['header', '[role="banner"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateAtLeastOne(dom_cache, rule_result, 'main', false);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_5
+   *
+   * @desc Each page should not have more than one banner landmark
+   *
+   */
+
+  { rule_id             : 'LANDMARK_5',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['header', '[role="banner"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateNoMoreThanOne(dom_cache, rule_result, 'banner');
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_6
+   *
+   * @desc Each page may have one contentinfo landmark
+   *
+   */
+  { rule_id             : 'LANDMARK_6',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['footer', '[role="contentinfo"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateAtLeastOne(dom_cache, rule_result, 'contentinfo', false);
+   } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_7
+   *
+   * @desc Each page may have only one contentinfo landmark
+   *
+   */
+  { rule_id             : 'LANDMARK_7',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['footer', '[role="contentinfo"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateNoMoreThanOne(dom_cache, rule_result, 'contentinfo');
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_8
+   *
+   * @desc banner landmark must be a top level landmark
+   */
+  { rule_id             : 'LANDMARK_8',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    required            : true,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['header', '[role="banner"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateTopLevelLandmark(dom_cache, rule_result, 'banner');
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_9
+   *
+   * @desc Banner landmark should only contain only region, navigation and search landmarks
+   */
+  { rule_id             : 'LANDMARK_9',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['header', '[role="banner"]'],
+    validate            : function (dom_cache, rule_result) {
+     validateLandmarkDescendants(dom_cache, rule_result, 'banner', ['navigation', 'region', 'search']);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_10
+   *
+   * @desc Navigation landmark should only contain only region and search landmarks
+   */
+  { rule_id             : 'LANDMARK_10',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['nav', '[role="naviation"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateLandmarkDescendants(dom_cache, rule_result, 'navigation', ['region', 'search']);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_11
+   *
+   * @desc Main landmark must be a top level lanmark
+   */
+  { rule_id             : 'LANDMARK_11',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['main', '[role="main"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateTopLevelLandmark(dom_cache, rule_result, 'main');
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_12
+   *
+   * @desc Contentinfo landmark must be a top level landmark
+   */
+  { rule_id             : 'LANDMARK_12',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['footer', '[role="contentinfo"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateTopLevelLandmark(dom_cache, rule_result, 'contentinfo');
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_13
+   *
+   * @desc Contentinfo landmark should only contain only search, region and navigation landmarks
+   */
+  { rule_id             : 'LANDMARK_13',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['header', '[role="banner"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateLandmarkDescendants(dom_cache, rule_result, 'contentinfo', ['navigation', 'region', 'search']);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_14
+   *
+   * @desc Search landmark should only contain only region landmarks
+   */
+  { rule_id             : 'LANDMARK_14',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['[role="search"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateLandmarkDescendants(dom_cache, rule_result, 'search', ['region']);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_15
+   *
+   * @desc Form landmark should only contain only region landmarks
+   */
+  { rule_id             : 'LANDMARK_15',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['[role="form"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateLandmarkDescendants(dom_cache, rule_result, 'form', ['region']);
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_16
+   *
+   * @desc Elements with the role=region must have accessible name to be considered a landmark
+   */
+  { rule_id             : 'LANDMARK_16',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['[role="region"]'],
+    validate            : function (dom_cache, rule_result) {
+      const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+
+      allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        if (de.hasRole && de.role === 'region') {
+          if (de.visibility.isVisibleToAT) {
+            if ((de.accName)) {
+              if (de.hasRole) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ de.tagName]);
+              } else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+              }
+            }
+            else {
+              if (de.hasRole) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              } else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+              }
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          }
+        }
+      });
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_17
+   *
+   * @desc Landmark must have unique labels
+   */
+
+  { rule_id             : 'LANDMARK_17',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['main', 'nav', 'header', 'footer', 'section', 'aside', '[role="application"]','[role="banner"]', '[role="complementary"]','[role="contentinfo"]','[role="form"]','[role="main"]','[role="navigation"]','[role="region"]','[role="search"]'],
+    validate            : function (dom_cache, rule_result) {
+      const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'navigation', 'region', 'search'];
+      landmarkRoles.forEach( role => {
+        validateUniqueAccessibleNames(dom_cache, rule_result, role);
+      });
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_18
+   *
+   * @desc Landmark must identify content regions
+   */
+
+  { rule_id             : 'LANDMARK_18',
+    last_updated        : '2015-08-07',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.NORE,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['main', 'nav', 'header', 'footer', 'section', 'aside', '[role="application"]','[role="banner"]', '[role="complementary"]','[role="contentinfo"]','[role="form"]','[role="main"]','[role="navigation"]','[role="region"]','[role="search"]'],
+    validate            : function (dom_cache, rule_result) {
+      const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+      allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role, de.accName.name]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+        }
+      });
+    } // end validate function
+  },
+
+  /**
+   * @object LANDMARK_19
+   *
+   * @desc Complementary landmark must be a top level landmark
+   */
+  { rule_id             : 'LANDMARK_19',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LANDMARKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : false,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+    target_resources    : ['aside', '[role="complementary"]'],
+    validate            : function (dom_cache, rule_result) {
+      validateTopLevelLandmark(dom_cache, rule_result, 'complementary');
+    } // end validate function
+  }
+];
 
 /* common.js */
 
@@ -11316,7 +12207,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="main"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@main@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A @main@ landmark provides a navigation point to the primary content of the page for users of assistive technologies.',
         'Most pages only need one @main@ landmark, but in the case of portals or mashups, there may be more than one @main@ landmark on a "page".'
       ],
@@ -11330,7 +12221,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: main role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: main role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11391,7 +12282,7 @@ const landmarkRules = {
         ELEMENT_FAIL_1:   'Move @%1@ element into an appropriate landmark. (This may require creating an additional landmark.)',
         ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Landmarks provide a way to organize the various types of content on a page for users of assistive technologies. The organization of content regions using landmarks is functionally similar to the way visual designers organize information for people who rely on a graphical rendering of the content.',
         'When content is not contained in a landmark, it will be unreachable using landmark navigation, which is an important feature provided by assistive technologies such as screen readers.'
       ],
@@ -11408,7 +12299,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11467,7 +12358,7 @@ const landmarkRules = {
         ELEMENT_FAIL_1:   '@%1@ list element has %2 links and not in any landmark.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="navigation"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Navigation landmarks provide a way to identify groups (e.g. lists) of links that are intended to be used for website or page content navigation.'
       ],
       TECHNIQUES: [
@@ -11485,7 +12376,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: navigation role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: navigation role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#navigation'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11543,7 +12434,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: 'A top level @header@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A @banner@ landmark provides a way to identify organizational or company branding content, usually replicated across all pages and located at the top of each page.'
       ],
       TECHNIQUES: [
@@ -11558,7 +12449,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11625,7 +12516,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: 'Top level @header@ element  was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A banner landmark provides a way to identify redundant branding content, usually placed at the top of each web page.'
       ],
       TECHNIQUES: [
@@ -11640,7 +12531,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11698,7 +12589,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@footer@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The @contentinfo@ landmark provides a way to identify administrative content, typically found at the bottom of each page in a website and referred to as footer information in publishing contexts.',
         'The @contentinfo@ landmark typically includes information and/or links to copyright, contact info, privacy policies and other general information found on all pages in the website.'
       ],
@@ -11714,7 +12605,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11781,7 +12672,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@footer@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The @contentinfo@ landmark provides a way to identify administrative content, typically found at the bottom of each page in a website and referred to as footer information in publishing contexts.',
         'The @contentinfo@ landmark typically includes information and/or links to copyright, contact info, privacy policies and other general information found on all pages in the website.',
         'The @footer@ element that is NOT contained in an @section@ and @aside@ element has the default role of @contentinfo@ landmark.'
@@ -11798,7 +12689,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11853,12 +12744,12 @@ const landmarkRules = {
         ELEMENT_PASS_2:   '@%1[role="banner"]@ defines a top-level @banner@ landmark in the @frame@ or @iframe@.',
         ELEMENT_PASS_3:   '@header@ element defines a top-level @banner@ landmark.',
         ELEMENT_PASS_4:   '@header@ element defines a top-level @banner@ landmark in the @frame@ or @iframe@.',
-        ELEMENT_FAIL_1:   'Update the landmark structure on the page such that the @%1[role="banner"]@ element is a top-level landmark (it is currently the child of a @%2@ landmark).',
-        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @header@ element is a top-level landmark (it is currently the child of a @%1@ landmark).',
+        ELEMENT_FAIL_1:   'Update the landmark structure on the page such that the @%1[role="banner"]@ element is a top-level landmark (it is currently the child of a @%2@ landmark region).',
+        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @header@ element is a top-level landmark (it is currently the child of a @%1@ landmark region).',
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@header@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Top-level landmarks are the easiest to find and navigate to using assistive technologies.',
         'Banner content is usually the content at beginning of a page that repeats on most pages within a website.'
       ],
@@ -11870,7 +12761,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11931,7 +12822,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="banner"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@header@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
          'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
       ],
       TECHNIQUES: [
@@ -11941,7 +12832,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: banner role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -11965,7 +12856,7 @@ const landmarkRules = {
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         }
       ]
@@ -11998,7 +12889,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="navigation"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@nav@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
       ],
       TECHNIQUES: [
@@ -12008,7 +12899,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: navigation role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: navigation role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#navigation'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12056,7 +12947,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="main"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@main@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Top-level landmarks are the easiest landmarks to find and navigate to using assistive technologies.'
       ],
       TECHNIQUES: [
@@ -12067,7 +12958,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: main role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: main role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12119,7 +13010,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ element with @role="contentinfo"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Top-level landmarks are the easiest to find and navigate to using assistive technologies.'
       ],
       TECHNIQUES: [
@@ -12130,7 +13021,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12183,7 +13074,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="contentinfo"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@footer@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
          'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
       ],
       TECHNIQUES: [
@@ -12193,7 +13084,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12205,7 +13096,7 @@ const landmarkRules = {
           url:   'https://www.w3.org/TR/html5/sections.html#sections'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -12250,7 +13141,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1@ element with @role="search"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ element with @role="@%2"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'A @search@ landmark identifies a form on the page used to search for content across the entire website.',
         'For @search@ landmarks containing more than one search option and where each option can be represented as its own section, use @region@ landmarks to identify these sections.',
         'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
@@ -12263,7 +13154,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: search role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: search role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#search'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -12320,7 +13211,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_2: '@form@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_3: '@%1@ element with @role="%2"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Form landmarks provide a way to identify groups of form controls and widgets on the page.',
         'For @form@ landmarks containing more than one group of controls, where each is considered its own section, use @region@ landmarks to identify these sections.',
         'Ensuring that the landmark structure of a page is not overly complex enables users of assistive technologies to more easily find and navigate to the desired content.'
@@ -12335,7 +13226,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: form role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: form role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#form'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -12389,7 +13280,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="region"]@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@section@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The @region@ landmark is used to identify subsections of @banner@, @complementary@, @contentinfo@, @main@, @navigation@ and @search@ landmarks.',
         'For an element with an @[role=region]@ to be considered an @region@ landmark on the page, it must have an accessible name that identifies the contents of the region.'
       ],
@@ -12403,7 +13294,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: region role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12463,7 +13354,7 @@ const landmarkRules = {
         ELEMENT_FAIL_1:   'Change the accessible name "%1" of the @%2@ landmark (or the other duplicates) so that it is unique on the page.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="%2"@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'Landmarks identify the regions of content on a page.',
         'When a landmark does not have an author-defined accessible name, assistive technologies will use its ARIA role as an identifier.',
         'When there is more than one landmark of the same type on the page (e.g., multiple @navigation@ and/or @region@ landmarks), additional labeling through the use of author-defined accessible names is needed to allow users to differentiate among them.'
@@ -12479,7 +13370,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: region role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12533,7 +13424,7 @@ const landmarkRules = {
         ELEMENT_MC_1:      'Verify the @%1@ landmark with the label "%2" describes the type of content it contains.',
         ELEMENT_HIDDEN_1:  'The @%1@ landmark was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'When ARIA landmarks are used to identify regions of content on the page, users of assistive technologies gain programmatic access to those regions through built-in navigation commands.',
         'Proper use of landmarks provides a navigable structure where common sections or features of pages can be easily accessed or, conversely, skipped over if they represent repeated blocks of content.',
         'If the appropriate landmark roles are NOT used, the type or purpose of each content region will be less obvious to users of assistive technologies.',
@@ -12557,7 +13448,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: Landmark Roles',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12618,7 +13509,7 @@ const landmarkRules = {
         ELEMENT_HIDDEN_1: '@%1[role="complementary"]@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@aside@ element was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         '@complementary@ landmarks provide a way to identify sections of a page that may not be considered the main content, but that provide important supporting or related information to the main content.',
         'Top-level landmarks are the easiest to find and navigate to using assistive technologies.'
       ],
@@ -12631,7 +13522,7 @@ const landmarkRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: complementary role',
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: complementary role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#complementary'
         },
         { type:  REFERENCES.SPECIFICATION,
@@ -12682,7 +13573,7 @@ messages$1.rules = Object.assign(messages$1.rules, landmarkRules);
 /* locale.js */
 
 /* Constants */
-const debug$a = new DebugLogging('locale', false);
+const debug$b = new DebugLogging('locale', false);
 
 const messages = {
   en: messages$1
@@ -12711,7 +13602,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$a.flag && debug$a.log(`[${id}][${value}]: ${message}`);
+  debug$b.flag && debug$b.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -12798,7 +13689,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$a.flag && debug$a.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$b.flag && debug$b.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           title: guideline.title,
           url: encodeURIComponent(guideline.url_spec),
@@ -12807,7 +13698,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$a.flag && debug$a.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$b.flag && debug$b.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   return null;
 }
 
@@ -12835,7 +13726,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$a.flag && debug$a.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$b.flag && debug$b.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             level: success_criterion.level,
             title: success_criterion.title,
@@ -12846,7 +13737,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$a.flag && debug$a.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$b.flag && debug$b.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -12866,7 +13757,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$a.flag && debug$a.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$b.flag && debug$b.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -12913,7 +13804,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$a.flag && debug$a.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$b.flag && debug$b.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return messages[locale].rules[ruleId].DEFINITION;
 }
 
@@ -12928,7 +13819,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$a.flag && debug$a.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$b.flag && debug$b.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -12943,7 +13834,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$a.flag && debug$a.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$b.flag && debug$b.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -12962,7 +13853,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$a.flag && debug$a.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$b.flag && debug$b.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -12981,7 +13872,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$a.flag && debug$a.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$b.flag && debug$b.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -13009,8 +13900,8 @@ function getInformationLinks (ruleId) {
         url: encodeURIComponent(infoLink.url)
       }
     );
-    debug$a.flag && debug$a.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$a.flag && debug$a.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
+    debug$b.flag && debug$b.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$b.flag && debug$b.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
   });
   return infoLinks;
 }
@@ -13030,7 +13921,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$a.flag && debug$a.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$b.flag && debug$b.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -13049,7 +13940,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$a.flag && debug$a.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$b.flag && debug$b.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -13069,7 +13960,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$a.flag && debug$a.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$b.flag && debug$b.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -13137,7 +14028,7 @@ function transformElementMarkup (elemStr, useCodeTags=false) {
 /* rule.js */
 
 /* Constants */
-const debug$9 = new DebugLogging('Rule', false);
+const debug$a = new DebugLogging('Rule', false);
 
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
@@ -13190,7 +14081,7 @@ class Rule {
     this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
     this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
-    debug$9.flag && this.toJSON();
+    debug$a.flag && this.toJSON();
   }
 
   /**
@@ -13531,7 +14422,7 @@ class Rule {
     };
 
     const json = JSON.stringify(ruleInfo, null, '  ');
-    debug$9.flag && debug$9.log(`[JSON]: ${json}`);
+    debug$a.flag && debug$a.log(`[JSON]: ${json}`);
     return json;
 
   }
@@ -13551,11 +14442,11 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules$1);
-// addToArray(landmarkRules);
+addToArray(landmarkRules$1);
 
 /* resultSummary.js */
 
-const debug$8 = new DebugLogging('ruleResultSummary', false);
+const debug$9 = new DebugLogging('ruleResultSummary', false);
 
 /* ---------------------------------------------------------------- */
 /*                             RuleResultsSummary                        */
@@ -13597,7 +14488,7 @@ class RuleResultsSummary  {
     this.is  = -1;  // implementation score for group
     this.iv  = IMPLEMENTATION_VALUE.UNDEFINED; // implementation value for the group
 
-    debug$8.flag && debug$8.log(`[RuleResultsSummary]: ${this.toString()}`);
+    debug$9.flag && debug$9.log(`[RuleResultsSummary]: ${this.toString()}`);
   }
 
    get violations()     { return this.v;  }
@@ -13691,7 +14582,7 @@ class RuleResultsSummary  {
 /* ruleGroupResult.js */
 
 /* Constants */
-const debug$7 = new DebugLogging('ruleGroupResult', false);
+const debug$8 = new DebugLogging('ruleGroupResult', false);
 
 /**
  * @class RuleGroupResult
@@ -13738,7 +14629,7 @@ class RuleGroupResult {
     this.rule_results = [];
     this.rule_results_summary = new RuleResultsSummary();
 
-    debug$7.flag && debug$7.log(`[title]: ${this.title} (${ruleset})`);
+    debug$8.flag && debug$8.log(`[title]: ${this.title} (${ruleset})`);
   }
 
   /**
@@ -13896,19 +14787,18 @@ class RuleGroupResult {
     };
 
     const json = JSON.stringify(ruleGroupResultInfo);
-    debug$7.flag && debug$7.log(`[JSON]: ${json}`);
+    debug$8.flag && debug$8.log(`[JSON]: ${json}`);
     return json;
   }
 }
 
-/* elementResult.js */
+/* baseResult.js */
 
-/* ---------------------------------------------------------------- */
-/*                             BaseResult                           */
-/* ---------------------------------------------------------------- */
+/* constants */
+const debug$7 = new DebugLogging('baseResult', false);
 
 /**
- * @class Result
+ * @class baseResult
  *
  * @desc Constructor for an object that contains a the results of
  *          the evaluation of a rule on a element or page
@@ -13929,52 +14819,68 @@ class RuleGroupResult {
  */
 
 class BaseResult {
-  constructor (ruleResult, resultValue, msgId, msgArgs) {
+  constructor (ruleResult, resultValue, msgId, msgArgs, result_identifier, ordinal_position) {
 
     const msg = ruleResult.rule.base_result_msgs[msgId];
 
-    this.rule_result    = ruleResult;
-    this.result_value   = resultValue;
-    this.result_message = getBaseResultMessage(msg, msgArgs);
+    this.result_type       = RESULT_TYPE.BASE;
+    this.rule_result       = ruleResult;
+    this.result_value      = resultValue;
+    this.result_message    = getBaseResultMessage(msg, msgArgs);
+    this.result_identifier = result_identifier;
+    this.ordinal_position  = ordinal_position;
+
+    debug$7.flag && debug$7.log('');
   }
 
   /**
    * @getter isElementResult
    *
-   * @desc Returns true, since this class is the base result class
-   *       Use to distinguish from PageResult class
+   * @desc Returns true if the result type is element,
+   *       otherwise false
    *    
-   * @return {Boolean} false
+   * @return {Boolean} see @desc
    */
 
   get isElementResult () {
-    return false;
+    return this.result_type === RESULT_TYPE.ELEMENT;
   }
 
   /**
    * @getter isPageResult
    *
-   * @desc Returns false, since this class is the base result class
-   *       Use to distinguish from ElementResult class
+   * @desc Returns true if the result type is page,
+   *       otherwise false
    *
-   * @return {Boolean} false
+   * @return {Boolean} see @desc
    */
 
   get isPageResult () {
-    return false;
+    return this.result_type === RESULT_TYPE.PAGE;
   }
 
   /**
    * @getter isWebsiteResult
    *
-   * @desc Returns false, since this class is the base result class
-   *       Use to distinguish from ElementResult class
+   * @desc Returns true if the result type is website,
+   *       otherwise false
    *
-   * @return {Boolean} true
+   * @return {Boolean} see @desc
    */
 
   get isWebsiteResult () {
-    return false;
+    return this.result_type === RESULT_TYPE.WEBSITE;
+  }
+
+  /**
+   * @method getResultType
+   *
+   * @desc Returns the result type: element, page or website
+   *
+   * @return {Object} see @desc
+   */
+  getResultType () {
+     return this.rule_result;
   }
 
   /**
@@ -13999,7 +14905,7 @@ class BaseResult {
    */
 
   getResultIdentifier () {
-    return 'undefined';
+    return this.result_identifier;
   }
 
   /**
@@ -14013,7 +14919,7 @@ class BaseResult {
    */
 
   getOrdinalPosition () {
-    return '';
+    return this.ordinal_position;
   }
 
   /**
@@ -14048,14 +14954,14 @@ class BaseResult {
    */
 
   getDataForJSON () {
-    const data = {
-      result_value:       this.getResultValue(),
-      result_value_nls:   this.getResultValueNLS(),
-      result_identifier:  this.getResultIdentifier(),
-      ordinal_position:   this.getOrdinalPosition(),
+    return {
+      result_type:        this.result_type,
+      result_value:       this.result_value,
+      result_value_nls:   this.result_value_nls,
+      result_identifier:  this.result_identifier,
+      ordinal_position:   this.ordinal_position,
       message:            this.result_message
-    };
-    return data;
+    }
   }
 
   /**
@@ -14105,26 +15011,19 @@ const debug$6 = new DebugLogging('ElementResult', false);
 
 class ElementResult extends BaseResult {
   constructor (rule_result, result_value, domElement, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments);
+    super(rule_result,
+          result_value,
+          message_id,
+          message_arguments,
+          domElement.getIdentifier(),
+          domElement.ordinalPosition);
 
     this.domElement = domElement;
+    this.result_type    = RESULT_TYPE.ELEMENT;
 
     if (debug$6.flag) {
       debug$6.log(`${this.result_value}: ${this.result_message}`);
     }
-  }
-
-  /**
-   * @getter isElementResult
-   *
-   * @desc Returns true, since this class is a ElementResult
-   *       Use to distinguish from PageResult class
-   *    
-   * @return {Boolean} true
-   */
-
-  get isElementResult () {
-    return true;
   }
 
   /**
@@ -14252,7 +15151,7 @@ class ElementResult extends BaseResult {
 
 }
 
-/* resultSummary.js */
+/* elementResultSummary.js */
 
 const debug$5 = new DebugLogging('ElementResultSummary', false);
 
@@ -14392,7 +15291,7 @@ class ResultsSummary {
   }
 }
 
-/* elementResult.js */
+/* pageResult.js */
 
 /* Constants */
 
@@ -14426,43 +15325,19 @@ const debug$4 = new DebugLogging('PageResult', false);
 
 class PageResult extends BaseResult {
   constructor (rule_result, result_value, domCache, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments);
+    super(rule_result, result_value, message_id, message_arguments, 'page', -1);
 
-    this.domCache = domCache;
+    this.domCache     = domCache;
+    this.result_type  = RESULT_TYPE.PAGE;
 
     if (debug$4.flag) {
       debug$4.log(`${this.result_value}: ${this.result_message}`);
     }
   }
 
-  /**
-   * @getter isPageResult
-   *
-   * @desc Returns true, since this class is a PageResult
-   *       Use to distinguish from ElementResult class
-   *    
-   * @return {Boolean} true
-   */
-
-  get isPageResult () {
-    return true;
-  }
-
-  /**
-   * @method getResultIdentifier
-   *
-   * @desc Gets a string identifying the page result
-   *
-   * @return {String} see description
-   */
-
-  getResultIdentifier () {
-    return 'page';
-  }
-
 }
 
-/* elementResult.js */
+/* websiteResult.js */
 
 /* Constants */
 
@@ -14496,49 +15371,23 @@ const debug$3 = new DebugLogging('PageResult', false);
 
 class WebsiteResult extends BaseResult {
   constructor (rule_result, result_value, domCache, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments);
+    super(rule_result, result_value, message_id, message_arguments, 'website', -1);
 
-    this.domCache = domCache;
+    this.domCache     = domCache;
+    this.result_type  = RESULT_TYPE.WEBSITE;
 
     if (debug$3.flag) {
       debug$3.log(`${this.result_value}: ${this.result_message}`);
     }
   }
 
-  /**
-   * @getter isWebsiteResult
-   *
-   * @desc Returns true, since this class is a WebResult
-   *       Use to distinguish from ElementResult class
-   *    
-   * @return {Boolean} true
-   */
-
-  get isWebsiteResult () {
-    return true;
-  }
-
-  /**
-   * @method getResultIdentifier
-   *
-   * @desc Gets a string identifying the website result
-   *
-   * @return {String} see description
-   */
-
-  getResultIdentifier () {
-    return 'website';
-  }
-
 }
 
 /* ruleResult.js */
 
-const debug$2 = new DebugLogging('ruleResult', false);
 
-/* ---------------------------------------------------------------- */
-/*                             RuleResult                           */
-/* ---------------------------------------------------------------- */
+/* constants */
+const debug$2 = new DebugLogging('ruleResult', true);
 
  /**
  * @class RuleResult
@@ -14582,10 +15431,6 @@ class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
-
-    if (debug$2.flag) {
-      debug$2.log(this.toString());
-    }
   }
 
   /**
@@ -14852,7 +15697,8 @@ class RuleResult {
    */
 
   getAllResultsArray   () {
-    return this.results_violations.concat(
+    return [].concat(
+      this.results_violations,
       this.results_warnings,
       this.results_manual_checks,
       this.results_passed,
@@ -14966,7 +15812,7 @@ class RuleResult {
    * @return {Boolean}  True if rule is a required rule, false if a recommended rule
    */
 
-  isRuleRequired   () {
+  isRuleRequired () {
     return this.rule.rule_required;
   }
 
@@ -15102,12 +15948,17 @@ class RuleResult {
     };
 
     if (flag) {
-      data.results = [];
-      this.getAllResultsArray().forEach ( result => {
+      const results = this.getAllResultsArray();
+      debug$2.log(`[${this.rule.getId()}][LENGTH]: ${results.length}`);
+      results.forEach ( result => {
+//        debug.log(`[${this.rule.getId()}][DATA]: ${JSON.stringify(result.getDataForJSON(), null, '  ')}`);
         data.results.push(result.getDataForJSON());
       });
     }
-    return data; 
+    if (debug$2.flag) {
+      debug$2.log(`[${this.rule.getId()}][JSON]: ${JSON.stringify(data, null, '  ')}`);
+    }
+    return data;
   }
 
   /**
@@ -15141,7 +15992,7 @@ class RuleResult {
 /* evaluationResult.js */
 
 /* Constants */
-const debug$1 = new DebugLogging('EvaluationResult', true);
+const debug$1 = new DebugLogging('EvaluationResult', false);
 
 class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -15151,6 +16002,7 @@ class EvaluationResult {
     this.version = VERSION;
     this.allRuleResults = [];
 
+    debug$1.log(`[start]`);
     debug$1.flag && debug$1.log(`[title]: ${this.title}`);
 
     allRules.forEach (rule => {
@@ -15158,7 +16010,12 @@ class EvaluationResult {
       ruleResult.validate(domCache);
       this.allRuleResults.push(ruleResult);
     });
-    debug$1.flag && debug$1.log(`[JSON]: ${this.toJSON(true)}`);
+
+    const json = this.toJSON(true);
+    debug$1.flag && debug$1.log(`[JSON]: ${json}`);
+
+    debug$1.log(`[end]`);
+
   }
 
   /**
@@ -15328,7 +16185,7 @@ class EvaluationResult {
   }
 }
 
-/* evaluate.js */
+/* evaluatationLibrary.js */
 
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false);

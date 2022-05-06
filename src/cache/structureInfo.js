@@ -21,18 +21,25 @@ const requireAccessibleNames = ['region', 'form'];
 class LandmarkElement {
   constructor (domElement, parentLandmarkElement) {
 
-    this.parentLandmarkElement = parentLandmarkElement;
-    this.domElement = domElement;
-    this.childLandmarkElements = [];
-    this.childHeadingDomElements = [];
+    this.parentLandmarkElement   = parentLandmarkElement;
+    this.domElement              = domElement;
+
+    this.descendantLandmarkElements = [];
+    this.childLandmarkElements      = [];
+    this.childHeadingDomElements    = [];
 
     if (debug.flag) {
       debug.log('')
     }
   }
 
-  addChildLandmark (LandmarkElement) {
-    this.childLandmarkElements.push(LandmarkElement);
+  addChildLandmark (landmarkElement) {
+    this.childLandmarkElements.push(landmarkElement);
+    let ple = landmarkElement.parentLandmarkElement;
+    while (ple) {
+      ple.descendantLandmarkElements.push(landmarkElement);
+      ple = ple.parentLandmarkElement;
+    }
   }
 
   addChildHeading (domElement) {
@@ -52,6 +59,10 @@ class LandmarkElement {
     this.childHeadingDomElements.forEach( h => {
       debug.domElement(h, prefix);
     });
+  }
+
+  toString () {
+    return this.domElement.role;
   }
 };
 

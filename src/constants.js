@@ -9,6 +9,7 @@ export {
   RESULT_VALUE,
   IMPLEMENTATION_VALUE,
   REFERENCES,
+  RESULT_TYPE,
   RULESET,
   RULE_CATEGORIES,
   RULE_RESULT_VALUE,
@@ -83,8 +84,9 @@ const RULE_CATEGORIES = {
   ALL                    : 0x0FFF
 };
 
-  /**
- * @constant RULE_SCOPE * @type Integer
+/**
+ * @constant RULE_SCOPE
+ * @type Integer
  * @desc Defines scope of a rule
  *
  * @example
@@ -101,7 +103,26 @@ const RULE_SCOPE =  {
   WEBSITE : 3
 };
 
-  /**
+/**
+ * @constant RESULT_TYPE
+ * @type Integer
+ * @desc Defines if the rule represents a element, page or website result
+ *
+ * @example
+ * RESULT_TYPE.BASE
+ * RESULT_TYPE.ELEMENT
+ * RESULT_TYPE.PAGE
+ * RESULT_TYPE.WEBSITE
+ */
+
+const RESULT_TYPE =  {
+  BASE    : 0,
+  ELEMENT : 1,
+  PAGE    : 2,
+  WEBSITE : 3
+};
+
+/**
  * @constant TEST_RESULT * @type Integer
  * @desc Types of rule results, used in validation functions
  *

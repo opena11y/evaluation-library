@@ -1,8 +1,9 @@
 /* elementResult.js */
 
 /* Imports */
-import BaseResult         from './baseResult.js';
-import DebugLogging       from './debug.js';
+import {RESULT_TYPE}  from './constants.js';
+import BaseResult     from './baseResult.js';
+import DebugLogging   from './debug.js';
 
 /* Constants */
 
@@ -36,26 +37,19 @@ const debug = new DebugLogging('ElementResult', false);
 
 export default class ElementResult extends BaseResult {
   constructor (rule_result, result_value, domElement, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments)
+    super(rule_result,
+          result_value,
+          message_id,
+          message_arguments,
+          domElement.getIdentifier(),
+          domElement.ordinalPosition);
 
     this.domElement = domElement;
+    this.result_type    = RESULT_TYPE.ELEMENT;
 
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
     }
-  }
-
-  /**
-   * @getter isElementResult
-   *
-   * @desc Returns true, since this class is a ElementResult
-   *       Use to distinguish from PageResult class
-   *    
-   * @return {Boolean} true
-   */
-
-  get isElementResult () {
-    return true;
   }
 
   /**

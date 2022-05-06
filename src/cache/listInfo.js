@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('ListInfo', true);
+const debug = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 

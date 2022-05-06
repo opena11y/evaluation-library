@@ -1,8 +1,9 @@
-/* elementResult.js */
+/* pageResult.js */
 
 /* Imports */
-import BaseResult               from './baseResult.js';
-import DebugLogging             from './debug.js';
+import {RESULT_TYPE}  from './constants.js';
+import BaseResult     from './baseResult.js';
+import DebugLogging   from './debug.js';
 
 /* Constants */
 
@@ -36,38 +37,14 @@ const debug = new DebugLogging('PageResult', false);
 
 export default class PageResult extends BaseResult {
   constructor (rule_result, result_value, domCache, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments)
+    super(rule_result, result_value, message_id, message_arguments, 'page', -1);
 
-    this.domCache = domCache;
+    this.domCache     = domCache;
+    this.result_type  = RESULT_TYPE.PAGE;
 
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
     }
-  }
-
-  /**
-   * @getter isPageResult
-   *
-   * @desc Returns true, since this class is a PageResult
-   *       Use to distinguish from ElementResult class
-   *    
-   * @return {Boolean} true
-   */
-
-  get isPageResult () {
-    return true;
-  }
-
-  /**
-   * @method getResultIdentifier
-   *
-   * @desc Gets a string identifying the page result
-   *
-   * @return {String} see description
-   */
-
-  getResultIdentifier () {
-    return 'page';
   }
 
 }

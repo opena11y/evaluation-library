@@ -121,6 +121,19 @@ export default class DOMElement {
   }
 
   /**
+   * @method getIndentifier
+   *
+   * @desc
+   */
+
+  getIdentifier () {
+    let identifier = this.node.hasAttribute('type') ?
+                     `${this.tagName}[${this.node.getAttribute('type')}]` :
+                     this.tagName;
+    return identifier;
+  }
+
+  /**
    * @method getLastChild
    *
    * @desc

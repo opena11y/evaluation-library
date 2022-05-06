@@ -1,4 +1,4 @@
-/* evaluate.js */
+/* evaluatationLibrary.js */
 
 /* Imports */
 import DOMCache          from './cache/domCache.js';

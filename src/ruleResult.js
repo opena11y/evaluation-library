@@ -20,11 +20,9 @@ import {
   transformElementMarkup
 } from './_locale/locale.js';
 
-const debug = new DebugLogging('ruleResult', false);
 
-/* ---------------------------------------------------------------- */
-/*                             RuleResult                           */
-/* ---------------------------------------------------------------- */
+/* constants */
+const debug = new DebugLogging('ruleResult', true);
 
  /**
  * @class RuleResult
@@ -68,10 +66,6 @@ export default class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
-
-    if (debug.flag) {
-      debug.log(this.toString());
-    }
   }
 
   /**
@@ -338,7 +332,8 @@ export default class RuleResult {
    */
 
   getAllResultsArray   () {
-    return this.results_violations.concat(
+    return [].concat(
+      this.results_violations,
       this.results_warnings,
       this.results_manual_checks,
       this.results_passed,
@@ -455,7 +450,7 @@ export default class RuleResult {
    * @return {Boolean}  True if rule is a required rule, false if a recommended rule
    */
 
-  isRuleRequired   () {
+  isRuleRequired () {
     return this.rule.rule_required;
   }
 
@@ -591,12 +586,17 @@ export default class RuleResult {
     }
 
     if (flag) {
-      data.results = [];
-      this.getAllResultsArray().forEach ( result => {
+      const results = this.getAllResultsArray();
+      debug.log(`[${this.rule.getId()}][LENGTH]: ${results.length}`);
+      results.forEach ( result => {
+//        debug.log(`[${this.rule.getId()}][DATA]: ${JSON.stringify(result.getDataForJSON(), null, '  ')}`);
         data.results.push(result.getDataForJSON());
       });
     }
-    return data; 
+    if (debug.flag) {
+      debug.log(`[${this.rule.getId()}][JSON]: ${JSON.stringify(data, null, '  ')}`);
+    }
+    return data;
   }
 
   /**

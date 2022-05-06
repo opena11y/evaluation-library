@@ -1,7 +1,8 @@
-// LOW-LEVEL FUNCTIONS
+/* utils.js */
 
 export {
   cleanForUTF8,
+  accNamesTheSame,
   filterTextContent,
   getAttributeValue,
   getFormattedDate,
@@ -180,7 +181,11 @@ function getFormattedDate() {
   const hours = date.getHours() + 1;
   const minutes = date.getMinutes() + 1;
 
-  return y + "-" + leadingZero(m) + "-" + leadingZero(d) + ":" + leadingZero(hours)+ ":" + leadingZero(minutes);
+  return y + "-" +
+        leadingZero(m) + "-" +
+        leadingZero(d) + ":" +
+        leadingZero(hours)+ ":" +
+        leadingZero(minutes);
 }
 
 /**
@@ -199,4 +204,18 @@ function cleanForUTF8 (str) {
     if (c >= ' ' && c < '~') nstr += c;
   });
   return nstr;
+}
+
+/**
+ * @function accNamesTheSame
+ *
+ * @desc Returns true if the names a equivalent, otherwise false
+ *
+ * @param  {accName}  str - string to clean
+ *
+ * @return {String}  String with only ASCII characters
+ */
+
+function accNamesTheSame (accName1, accName2) {
+  return accName1.name.toLowerCase() === accName2.name.toLowerCase();
 }

@@ -19,7 +19,7 @@ import {
 } from './_locale/locale.js';
 
 /* Constants */
-const debug = new DebugLogging('EvaluationResult', true)
+const debug = new DebugLogging('EvaluationResult', false)
 
 export default class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -29,6 +29,7 @@ export default class EvaluationResult {
     this.version = VERSION;
     this.allRuleResults = [];
 
+    debug.log(`[start]`);
     debug.flag && debug.log(`[title]: ${this.title}`);
 
     allRules.forEach (rule => {
@@ -36,7 +37,12 @@ export default class EvaluationResult {
       ruleResult.validate(domCache);
       this.allRuleResults.push(ruleResult);
     });
-    debug.flag && debug.log(`[JSON]: ${this.toJSON(true)}`);
+
+    const json = this.toJSON(true);
+    debug.flag && debug.log(`[JSON]: ${json}`);
+
+    debug.log(`[end]`);
+
   }
 
   /**

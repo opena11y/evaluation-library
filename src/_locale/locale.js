@@ -1,8 +1,10 @@
 /* locale.js */
 
 import {messages as enMessages} from './en/messages.js';
-import DebugLogging  from '../debug.js';
-import {RESULT_VALUE} from '../constants.js';
+
+import DebugLogging        from '../debug.js';
+import {RESULT_VALUE}      from '../constants.js';
+import {filterTextContent} from '../utils.js';
 
 export {
   getBaseResultMessages,

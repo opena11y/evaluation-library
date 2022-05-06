@@ -18,6 +18,6 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules);
-// addToArray(landmarkRules);
+addToArray(landmarkRules);
 
 
