@@ -308,7 +308,6 @@ export default class AriaValidation {
           }
         }
         break;
-
     }
     return 0;
   }

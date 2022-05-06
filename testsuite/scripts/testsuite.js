@@ -1,36 +1,8 @@
-/*
- * Copyright 2011-2013 OpenAjax Alliance
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/* testsuite.js */
 
- // A tools developer wants to use the ARIAStrictRuleset
- var asRuleset = OpenAjax.a11y.RulesetManager.getRuleset('TEST');
- 
- // then needs to get an evaluatorFactory
- var evaluatorFactory = OpenAjax.a11y.EvaluatorFactory.newInstance();
+ var evaluator = new EvaluationLibrary();
 
- // and configure it...
- evaluatorFactory.setParameter('ruleset', asRuleset);
-
- evaluatorFactory.setFeature('eventProcessing',   'none');
- evaluatorFactory.setFeature('brokenLinkTesting', false);
-
- // before getting the actual evaluator
- var evaluator = evaluatorFactory.newEvaluator();
- 
- 
- function getCount(iframe, class_name) {
+function getCount(iframe, class_name) {
 
    var i;
    var item_count = 0
@@ -68,6 +40,7 @@ function executeTest(IFRAME_ID, RULE_ID) {
   var doc    = iframe.contentDocument;
   var title  = doc.title;
   var url    = win.location.href;
+
 
   var evaluation_result = evaluator.evaluate(doc, title, url);
   var ers = evaluation_result.getRuleResult(RULE_ID).getElementResultsSummary();
