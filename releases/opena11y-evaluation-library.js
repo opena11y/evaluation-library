@@ -508,7 +508,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$j = new DebugLogging('visibility', false);
+const debug$j = new DebugLogging('visibility', true);
 
 /**
  * @class Visibility
@@ -539,9 +539,12 @@ class Visibility {
         this.isDisplayNone ||
         this.isVisibilityHidden) {
 
+      this.isVisibleOnScreen = false;
+      this.isVisibleToAt     = false;
+
       if (this.isHidden && (tagName !== 'area')) {
-        this.isVisibleOnScreen = false;
-        this.isVisibleToAt     = false;
+        this.isVisibleOnScreen = true;
+        this.isVisibleToAt     = true;
       }
     }
 
@@ -2527,7 +2530,8 @@ const designPatterns = {
       'aria-live',
       'aria-owns',
       'aria-relevant',
-      'aria-roledescription'
+      'aria-roledescription',
+      'aria-level'
     ],
     deprecatedProps: [
       'aria-disabled',
@@ -2537,7 +2541,9 @@ const designPatterns = {
     ],
     supportedProps: [],
     hasRange: false,
-    requiredProps: [],
+    requiredProps: [
+      'aria-level'
+    ],
     nameRequired: true,
     nameFromContent: true,
     nameProhibited: false,
@@ -3100,7 +3106,8 @@ const designPatterns = {
       'aria-roledescription',
       'aria-valuemax',
       'aria-valuemin',
-      'aria-valuetext'
+      'aria-valuetext',
+      'aria-valuenow'
     ],
     deprecatedProps: [
       'aria-disabled',
@@ -3110,7 +3117,9 @@ const designPatterns = {
     ],
     supportedProps: [],
     hasRange: true,
-    requiredProps: [],
+    requiredProps: [
+      'aria-valuenow'
+    ],
     nameRequired: true,
     nameFromContent: false,
     nameProhibited: false,
@@ -4277,6 +4286,7 @@ const designPatterns = {
       'aria-owns',
       'aria-relevant',
       'aria-roledescription',
+      'aria-valuenow',
       'aria-disabled',
       'aria-orientation',
       'aria-valuemax',
@@ -4296,7 +4306,9 @@ const designPatterns = {
       'aria-valuetext'
     ],
     hasRange: false,
-    requiredProps: [],
+    requiredProps: [
+      'aria-valuenow'
+    ],
     nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
@@ -5698,6 +5710,9 @@ class AriaValidation {
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProbihited;
 
+    // Used for heading
+    this.headingLevel = this.getHeadingLevel(role, node);
+
     const attrs = Array.from(node.attributes);
 
     this.validAttrs        = [];
@@ -5875,6 +5890,38 @@ class AriaValidation {
       }
     });
     return missingReqAttrNames;
+  }
+
+  getHeadingLevel (role, node) {
+    switch (node.tagName.toLowerCase()) {
+      case 'h1':
+        return 1;
+
+      case 'h2':
+        return 2;
+
+      case 'h3':
+        return 3;
+
+      case 'h4':
+        return 4;
+
+      case 'h5':
+        return 5;
+
+      case 'h6':
+        return 6;
+
+      default:
+        if (role === 'heading') {
+          const level = parseInt(node.getAttribute('aria-level'));
+          if (Number.isInteger(level)) {
+            return level;
+          }
+        }
+        break;
+    }
+    return 0;
   }
 }
 
@@ -9307,7 +9354,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', false);
+const debug$d = new DebugLogging('domCache', true);
 
 const elementsWithContent = [
   'area',
@@ -10494,7 +10541,7 @@ const landmarkRules$1 = [
    * @desc All rendered content should be contained in a landmark
    */
   { rule_id             : 'LANDMARK_2',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10534,7 +10581,7 @@ const landmarkRules$1 = [
    *
    */
   { rule_id             : 'LANDMARK_3',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.WEBSITE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10599,7 +10646,7 @@ const landmarkRules$1 = [
    */
 
   { rule_id             : 'LANDMARK_4',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10620,7 +10667,7 @@ const landmarkRules$1 = [
    */
 
   { rule_id             : 'LANDMARK_5',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10640,7 +10687,7 @@ const landmarkRules$1 = [
    *
    */
   { rule_id             : 'LANDMARK_6',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10660,7 +10707,7 @@ const landmarkRules$1 = [
    *
    */
   { rule_id             : 'LANDMARK_7',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10679,7 +10726,7 @@ const landmarkRules$1 = [
    * @desc banner landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_8',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10698,7 +10745,7 @@ const landmarkRules$1 = [
    * @desc Banner landmark should only contain only region, navigation and search landmarks
    */
   { rule_id             : 'LANDMARK_9',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10717,7 +10764,7 @@ const landmarkRules$1 = [
    * @desc Navigation landmark should only contain only region and search landmarks
    */
   { rule_id             : 'LANDMARK_10',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10735,7 +10782,7 @@ const landmarkRules$1 = [
    * @desc Main landmark must be a top level lanmark
    */
   { rule_id             : 'LANDMARK_11',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10753,7 +10800,7 @@ const landmarkRules$1 = [
    * @desc Contentinfo landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_12',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10771,7 +10818,7 @@ const landmarkRules$1 = [
    * @desc Contentinfo landmark should only contain only search, region and navigation landmarks
    */
   { rule_id             : 'LANDMARK_13',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10789,7 +10836,7 @@ const landmarkRules$1 = [
    * @desc Search landmark should only contain only region landmarks
    */
   { rule_id             : 'LANDMARK_14',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10807,7 +10854,7 @@ const landmarkRules$1 = [
    * @desc Form landmark should only contain only region landmarks
    */
   { rule_id             : 'LANDMARK_15',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10825,7 +10872,7 @@ const landmarkRules$1 = [
    * @desc Elements with the role=region must have accessible name to be considered a landmark
    */
   { rule_id             : 'LANDMARK_16',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10869,7 +10916,7 @@ const landmarkRules$1 = [
    */
 
   { rule_id             : 'LANDMARK_17',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10919,7 +10966,7 @@ const landmarkRules$1 = [
    * @desc Complementary landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_19',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -12189,8 +12236,8 @@ const headingRules = {
   rules: {
     HEADING_1: {
       ID:                    'Heading 1',
-      DEFINITION:            'The page %s contain at least one @h1@ element identifying and describing the main content of the page.',
-      SUMMARY:               'Page %s have @h1@ element',
+      DEFINITION:            'The page should contain at least one @h1@ element identifying and describing the main content of the page.',
+      SUMMARY:               'Page should have @h1@ element',
       TARGET_RESOURCES_DESC: '@h1@ and @body@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a descriptive @h1@ element at the beginning of the main content of the page.',
@@ -12219,19 +12266,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12239,8 +12286,8 @@ const headingRules = {
     },
     HEADING_2: {
       ID:                    'Heading 2',
-      DEFINITION:            'If the page contains @h1@ element and either a @main@ or @banner@ landmark, the @h1@ element %s be a child of either the main or @banner@ landmark.',
-      SUMMARY:               '@h1@ %s be in @main@ or @banner@ landmark',
+      DEFINITION:            'If the page contains @h1@ element and either a @main@ or @banner@ landmark, the @h1@ element should be a child of either the main or @banner@ landmark.',
+      SUMMARY:               '@h1@ should be in @main@ or @banner@ landmark',
       TARGET_RESOURCES_DESC: '@h1@ elements and elements with ARIA attribute @role="main"@ or @role="banner"@ ',
       RULE_RESULT_MESSAGES: {
         FAIL_S: 'Move the @h1@ element inside (and preferably at the beginning) of the @main@ element, or change the @h1@ element to another heading level.',
@@ -12270,19 +12317,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
@@ -12290,8 +12337,8 @@ const headingRules = {
     },
     HEADING_3: {
       ID:                    'Heading 3',
-      DEFINITION:            'The accessible names of sibling heading elements of the same level %s be unique.',
-      SUMMARY:               'Sibling headings %s be unique',
+      DEFINITION:            'The accessible names of sibling heading elements of the same level should be unique.',
+      SUMMARY:               'Sibling headings should be unique',
       TARGET_RESOURCES_DESC: 'Heading elements',
       RULE_RESULT_MESSAGES: {
         FAIL_P: 'Update the accessible names of the %N_F sibling heading elements of the same level to be unique.',
@@ -12313,19 +12360,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12333,8 +12380,8 @@ const headingRules = {
     },
     HEADING_5: {
       ID:                    'Heading 5',
-      DEFINITION:            'Heading elements %s be properly nested on the page.',
-      SUMMARY:               'Headings %s be properly nested',
+      DEFINITION:            'Heading elements must be properly nested on the page.',
+      SUMMARY:               'Headings must be properly nested',
       TARGET_RESOURCES_DESC: 'Heading elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:  'Review the entire heading structure and update the heading levels so that the heading element is properly nested in relation to the %N_T headings on the page.',
@@ -12363,19 +12410,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12383,8 +12430,8 @@ const headingRules = {
     },
     HEADING_6: {
       ID:                    'Heading 6',
-      DEFINITION:            'Heading elements %s have visible text content.',
-      SUMMARY:               'Headings %s have text content',
+      DEFINITION:            'Heading elements should have visible text content.',
+      SUMMARY:               'Headings should have text content',
       TARGET_RESOURCES_DESC: 'Heading elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'For the heading element with only image content, replace the image with text content styled using CSS.',
@@ -12408,15 +12455,15 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C22: Using CSS to control visual presentation of text',
           url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12451,11 +12498,11 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H2 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
         }
@@ -12500,11 +12547,11 @@ const headingRules = {
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
-              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+              { type:  REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
                 url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+              { type:  REFERENCES.TECHNIQUE,
                 title: 'W3C Web Accessibility Tutorials: Page Structure',
                 url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }
@@ -16328,7 +16375,7 @@ class RuleResult {
 /* evaluationResult.js */
 
 /* Constants */
-const debug$1 = new DebugLogging('EvaluationResult', true);
+const debug$1 = new DebugLogging('EvaluationResult', false);
 
 class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -16338,7 +16385,7 @@ class EvaluationResult {
     this.version = VERSION;
     this.allRuleResults = [];
 
-    debug$1.log(`[start]`);
+    const startTime = new Date();
     debug$1.flag && debug$1.log(`[title]: ${this.title}`);
 
     allRules.forEach (rule => {
@@ -16350,7 +16397,9 @@ class EvaluationResult {
     const json = this.toJSON(true);
     debug$1.flag && debug$1.log(`[JSON]: ${json}`);
 
-    debug$1.log(`[end]`);
+    const endTime = new Date();
+    debug$1.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
 
   }
 
@@ -16400,7 +16449,7 @@ class EvaluationResult {
    * @return {RuleResult} Returns the ResultResult object
    */
   getRuleResult (rule_id) {
-    return this.ruleResults.find( rr => rr.rule.rule_id === rule_id);
+    return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
   }
 
   /**

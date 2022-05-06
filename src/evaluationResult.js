@@ -19,7 +19,7 @@ import {
 } from './_locale/locale.js';
 
 /* Constants */
-const debug = new DebugLogging('EvaluationResult', true)
+const debug = new DebugLogging('EvaluationResult', false)
 
 export default class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -29,7 +29,7 @@ export default class EvaluationResult {
     this.version = VERSION;
     this.allRuleResults = [];
 
-    debug.log(`[start]`);
+    const startTime = new Date();
     debug.flag && debug.log(`[title]: ${this.title}`);
 
     allRules.forEach (rule => {
@@ -41,7 +41,9 @@ export default class EvaluationResult {
     const json = this.toJSON(true);
     debug.flag && debug.log(`[JSON]: ${json}`);
 
-    debug.log(`[end]`);
+    const endTime = new Date();
+    debug.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
 
   }
 
@@ -91,7 +93,7 @@ export default class EvaluationResult {
    * @return {RuleResult} Returns the ResultResult object
    */
   getRuleResult (rule_id) {
-    return this.ruleResults.find( rr => rr.rule.rule_id === rule_id);
+    return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
   }
 
   /**

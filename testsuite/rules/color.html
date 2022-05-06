@@ -11,21 +11,20 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../releases/opena11y-evaluation-library.js" type="module"></script>
-    <script src="../scripts/testsuite.js"></script>
     
-    <script>
+    <script type="module">
       
+      import executeTest from '../scripts/testsuite.js';
 
       test( "Color_1: Color contrast ratio", function() {
         executeTest('ID_IFRAME_1A', 'COLOR_1');
       });
 
+/*
       test( "Color_2: Use of color", function() {
         executeTest('ID_IFRAME_2A', 'COLOR_2');
       });
-      
-      
+*/            
     </script>
 
     <h2>Color contrast ratio </h2>

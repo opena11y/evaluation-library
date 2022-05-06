@@ -11,13 +11,11 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
     <script src="../scripts/testsuite.js"></script>
     
-    <script>
+    <script type="module">
       
+      import executeTest from '../scripts/testsuite.js';
 
       test( "LANDMARK_1 no main landmark", function() {
         executeTest('ID_IFRAME_1A', 'LANDMARK_1');

@@ -1,6 +1,8 @@
 /* testsuite.js */
 
- var evaluator = new EvaluationLibrary();
+import EvaluationLibrary from '../../releases/opena11y-evaluation-library.js';
+
+var evaluator = new EvaluationLibrary();
 
 function getCount(iframe, class_name) {
 
@@ -32,7 +34,7 @@ function getCount(iframe, class_name) {
 }
  
  
-function executeTest(IFRAME_ID, RULE_ID) {
+export default function executeTest(IFRAME_ID, RULE_ID) {
 
   var iframe = document.getElementById(IFRAME_ID);
   
@@ -43,7 +45,7 @@ function executeTest(IFRAME_ID, RULE_ID) {
 
 
   var evaluation_result = evaluator.evaluate(doc, title, url);
-  var ers = evaluation_result.getRuleResult(RULE_ID).getElementResultsSummary();
+  var ers = evaluation_result.getRuleResult(RULE_ID).getResultsSummary();
 
   var f  = getCount(iframe, RULE_ID + '_FAIL');
   var p  = getCount(iframe, RULE_ID + '_PASS');
