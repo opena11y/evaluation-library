@@ -154,7 +154,10 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
 
     }
 
-    ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-required-properties li');
+    ariaAttributeNodes = dom.querySelectorAll(`#${role} .role-required-properties li`);
+    if (ariaAttributeNodes.length === 0) {
+      ariaAttributeNodes = dom.querySelectorAll(`#${role} .role-required-properties`);
+    }
 
     for (let j = 0; j < ariaAttributeNodes.length; j += 1) {
       let ariaAttributeNode = ariaAttributeNodes[j];

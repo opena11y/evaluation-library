@@ -22,7 +22,7 @@ import {
 
 
 /* constants */
-const debug = new DebugLogging('ruleResult', true);
+const debug = new DebugLogging('ruleResult', false);
 
  /**
  * @class RuleResult
@@ -66,6 +66,8 @@ export default class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
+
+    debug.flag && debug.log('');
   }
 
   /**
@@ -587,14 +589,9 @@ export default class RuleResult {
 
     if (flag) {
       const results = this.getAllResultsArray();
-      debug.log(`[${this.rule.getId()}][LENGTH]: ${results.length}`);
       results.forEach ( result => {
-//        debug.log(`[${this.rule.getId()}][DATA]: ${JSON.stringify(result.getDataForJSON(), null, '  ')}`);
         data.results.push(result.getDataForJSON());
       });
-    }
-    if (debug.flag) {
-      debug.log(`[${this.rule.getId()}][JSON]: ${JSON.stringify(data, null, '  ')}`);
     }
     return data;
   }

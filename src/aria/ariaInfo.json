@@ -1860,7 +1860,8 @@
                 "aria-live",
                 "aria-owns",
                 "aria-relevant",
-                "aria-roledescription"
+                "aria-roledescription",
+                "aria-level"
             ],
             "deprecatedProps": [
                 "aria-disabled",
@@ -1870,7 +1871,9 @@
             ],
             "supportedProps": [],
             "hasRange": false,
-            "requiredProps": [],
+            "requiredProps": [
+                "aria-level"
+            ],
             "nameRequired": true,
             "nameFromContent": true,
             "nameProhibited": false,
@@ -2433,7 +2436,8 @@
                 "aria-roledescription",
                 "aria-valuemax",
                 "aria-valuemin",
-                "aria-valuetext"
+                "aria-valuetext",
+                "aria-valuenow"
             ],
             "deprecatedProps": [
                 "aria-disabled",
@@ -2443,7 +2447,9 @@
             ],
             "supportedProps": [],
             "hasRange": true,
-            "requiredProps": [],
+            "requiredProps": [
+                "aria-valuenow"
+            ],
             "nameRequired": true,
             "nameFromContent": false,
             "nameProhibited": false,
@@ -3610,6 +3616,7 @@
                 "aria-owns",
                 "aria-relevant",
                 "aria-roledescription",
+                "aria-valuenow",
                 "aria-disabled",
                 "aria-orientation",
                 "aria-valuemax",
@@ -3629,7 +3636,9 @@
                 "aria-valuetext"
             ],
             "hasRange": false,
-            "requiredProps": [],
+            "requiredProps": [
+                "aria-valuenow"
+            ],
             "nameRequired": false,
             "nameFromContent": false,
             "nameProhibited": false,

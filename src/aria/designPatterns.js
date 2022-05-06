@@ -1360,7 +1360,8 @@ export const designPatterns = {
       'aria-live',
       'aria-owns',
       'aria-relevant',
-      'aria-roledescription'
+      'aria-roledescription',
+      'aria-level'
     ],
     deprecatedProps: [
       'aria-disabled',
@@ -1370,7 +1371,9 @@ export const designPatterns = {
     ],
     supportedProps: [],
     hasRange: false,
-    requiredProps: [],
+    requiredProps: [
+      'aria-level'
+    ],
     nameRequired: true,
     nameFromContent: true,
     nameProhibited: false,
@@ -1933,7 +1936,8 @@ export const designPatterns = {
       'aria-roledescription',
       'aria-valuemax',
       'aria-valuemin',
-      'aria-valuetext'
+      'aria-valuetext',
+      'aria-valuenow'
     ],
     deprecatedProps: [
       'aria-disabled',
@@ -1943,7 +1947,9 @@ export const designPatterns = {
     ],
     supportedProps: [],
     hasRange: true,
-    requiredProps: [],
+    requiredProps: [
+      'aria-valuenow'
+    ],
     nameRequired: true,
     nameFromContent: false,
     nameProhibited: false,
@@ -3110,6 +3116,7 @@ export const designPatterns = {
       'aria-owns',
       'aria-relevant',
       'aria-roledescription',
+      'aria-valuenow',
       'aria-disabled',
       'aria-orientation',
       'aria-valuemax',
@@ -3129,7 +3136,9 @@ export const designPatterns = {
       'aria-valuetext'
     ],
     hasRange: false,
-    requiredProps: [],
+    requiredProps: [
+      'aria-valuenow'
+    ],
     nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,

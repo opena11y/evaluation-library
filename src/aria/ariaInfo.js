@@ -1861,7 +1861,8 @@ export const ariaInfo = {
         'aria-live',
         'aria-owns',
         'aria-relevant',
-        'aria-roledescription'
+        'aria-roledescription',
+        'aria-level'
       ],
       deprecatedProps: [
         'aria-disabled',
@@ -1871,7 +1872,9 @@ export const ariaInfo = {
       ],
       supportedProps: [],
       hasRange: false,
-      requiredProps: [],
+      requiredProps: [
+        'aria-level'
+      ],
       nameRequired: true,
       nameFromContent: true,
       nameProhibited: false,
@@ -2434,7 +2437,8 @@ export const ariaInfo = {
         'aria-roledescription',
         'aria-valuemax',
         'aria-valuemin',
-        'aria-valuetext'
+        'aria-valuetext',
+        'aria-valuenow'
       ],
       deprecatedProps: [
         'aria-disabled',
@@ -2444,7 +2448,9 @@ export const ariaInfo = {
       ],
       supportedProps: [],
       hasRange: true,
-      requiredProps: [],
+      requiredProps: [
+        'aria-valuenow'
+      ],
       nameRequired: true,
       nameFromContent: false,
       nameProhibited: false,
@@ -3611,6 +3617,7 @@ export const ariaInfo = {
         'aria-owns',
         'aria-relevant',
         'aria-roledescription',
+        'aria-valuenow',
         'aria-disabled',
         'aria-orientation',
         'aria-valuemax',
@@ -3630,7 +3637,9 @@ export const ariaInfo = {
         'aria-valuetext'
       ],
       hasRange: false,
-      requiredProps: [],
+      requiredProps: [
+        'aria-valuenow'
+      ],
       nameRequired: false,
       nameFromContent: false,
       nameProhibited: false,

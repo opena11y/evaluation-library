@@ -6,6 +6,7 @@ import {rulesets}       from './rulesets.js';
 import {wcag}           from './wcag.js';
 
 import {colorRules}     from './colorRules.js';
+import {headingRules}  from './headingRules.js';
 import {landmarkRules}  from './landmarkRules.js';
 
 export const messages = {
@@ -17,4 +18,5 @@ export const messages = {
 }
 
 messages.rules = Object.assign(messages.rules, colorRules);
+messages.rules = Object.assign(messages.rules, headingRules);
 messages.rules = Object.assign(messages.rules, landmarkRules);

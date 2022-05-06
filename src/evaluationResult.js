@@ -19,7 +19,7 @@ import {
 } from './_locale/locale.js';
 
 /* Constants */
-const debug = new DebugLogging('EvaluationResult', false)
+const debug = new DebugLogging('EvaluationResult', true)
 
 export default class EvaluationResult {
   constructor (allRules, domCache, title, url) {

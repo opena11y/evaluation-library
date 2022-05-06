@@ -94,6 +94,9 @@ export default class AriaValidation {
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProbihited;
 
+    // Used for heading
+    this.headingLevel = this.getHeadingLevel(role, node);
+
     const attrs = Array.from(node.attributes);
 
     this.validAttrs        = [];
@@ -275,5 +278,38 @@ export default class AriaValidation {
       }
     });
     return missingReqAttrNames;
+  }
+
+  getHeadingLevel (role, node) {
+    switch (node.tagName.toLowerCase()) {
+      case 'h1':
+        return 1;
+
+      case 'h2':
+        return 2;
+
+      case 'h3':
+        return 3;
+
+      case 'h4':
+        return 4;
+
+      case 'h5':
+        return 5;
+
+      case 'h6':
+        return 6;
+
+      default:
+        if (role === 'heading') {
+          const level = parseInt(node.getAttribute('aria-level'));
+          if (Number.isInteger(level)) {
+            return level;
+          }
+        }
+        break;
+
+    }
+    return 0;
   }
 }

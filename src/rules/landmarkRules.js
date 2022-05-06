@@ -362,7 +362,7 @@ export const landmarkRules = [
    * @desc All rendered content should be contained in a landmark
    */
   { rule_id             : 'LANDMARK_2',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -402,7 +402,7 @@ export const landmarkRules = [
    *
    */
   { rule_id             : 'LANDMARK_3',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.WEBSITE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -467,7 +467,7 @@ export const landmarkRules = [
    */
 
   { rule_id             : 'LANDMARK_4',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -488,7 +488,7 @@ export const landmarkRules = [
    */
 
   { rule_id             : 'LANDMARK_5',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -508,7 +508,7 @@ export const landmarkRules = [
    *
    */
   { rule_id             : 'LANDMARK_6',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -528,7 +528,7 @@ export const landmarkRules = [
    *
    */
   { rule_id             : 'LANDMARK_7',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -547,7 +547,7 @@ export const landmarkRules = [
    * @desc banner landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_8',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -566,7 +566,7 @@ export const landmarkRules = [
    * @desc Banner landmark should only contain only region, navigation and search landmarks
    */
   { rule_id             : 'LANDMARK_9',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -585,7 +585,7 @@ export const landmarkRules = [
    * @desc Navigation landmark should only contain only region and search landmarks
    */
   { rule_id             : 'LANDMARK_10',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -603,7 +603,7 @@ export const landmarkRules = [
    * @desc Main landmark must be a top level lanmark
    */
   { rule_id             : 'LANDMARK_11',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -621,7 +621,7 @@ export const landmarkRules = [
    * @desc Contentinfo landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_12',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -639,7 +639,7 @@ export const landmarkRules = [
    * @desc Contentinfo landmark should only contain only search, region and navigation landmarks
    */
   { rule_id             : 'LANDMARK_13',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -657,7 +657,7 @@ export const landmarkRules = [
    * @desc Search landmark should only contain only region landmarks
    */
   { rule_id             : 'LANDMARK_14',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -675,7 +675,7 @@ export const landmarkRules = [
    * @desc Form landmark should only contain only region landmarks
    */
   { rule_id             : 'LANDMARK_15',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -693,7 +693,7 @@ export const landmarkRules = [
    * @desc Elements with the role=region must have accessible name to be considered a landmark
    */
   { rule_id             : 'LANDMARK_16',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -737,7 +737,7 @@ export const landmarkRules = [
    */
 
   { rule_id             : 'LANDMARK_17',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -787,7 +787,7 @@ export const landmarkRules = [
    * @desc Complementary landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_19',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
