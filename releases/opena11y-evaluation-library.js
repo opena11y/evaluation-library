@@ -530,6 +530,8 @@ class Visibility {
     this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
     this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
     this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
+    this.isSmallFont        = this.normalizeSmallFont (style);
+    this.isSmallHeight      = this.normalizeSmallHeight (style);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -537,7 +539,9 @@ class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden) {
+        this.isVisibilityHidden ||
+        this.isSmallFont  ||
+        this.isSmallHeight) {
 
       this.isVisibleOnScreen = false;
       this.isVisibleToAt     = false;
@@ -559,7 +563,10 @@ class Visibility {
       debug$j.log('[      isAriaHidden]: ' + this.isAriaHidden);
       debug$j.log('[     isDisplayNone]: ' + this.isDisplayNone);
       debug$j.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$j.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$j.log('[     isSmallHeight]: ' + this.isSmallHeight);
+
+      debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen, true);
       debug$j.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
@@ -667,6 +674,43 @@ class Visibility {
     return isVisibilityHidden;
   }
 
+  /**
+   * @method normalizeSmallFont
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on 
+   *       the CSS font size property
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+   normalizeSmallFont (style) {
+    let fontSize = parseFloat(style.getPropertyValue("font-size"));
+    return fontSize <= 1.0;
+  }
+
+  /**
+   * @method normalizeSmallHeight
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on 
+   *       the CSS font size property
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+   normalizeSmallHeight (style) {
+    let height = parseFloat(style.getPropertyValue("height"));
+    return height <= 1;
+  }
 }
 
 /* propertyDataTypes.js is a generated file, use "npm run aria" */
