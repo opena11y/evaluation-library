@@ -709,7 +709,9 @@ class Visibility {
 
    normalizeSmallHeight (style) {
     let height = parseFloat(style.getPropertyValue("height"));
-    return height <= 1;
+    let overflow = style.getPropertyValue("overflow");
+
+    return (height <= 1) && (overflow === 'hidden');
   }
 }
 
