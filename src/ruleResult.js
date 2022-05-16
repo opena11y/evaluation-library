@@ -355,33 +355,33 @@ export default class RuleResult {
   updateResults (result_value, result_item, dom_item) {
     switch (result_value) {
       case RESULT_VALUE.HIDDEN:
+        this.results_summary.addHidden(1);
         this.results_hidden.push(result_item);
         dom_item.resultsHidden.push(result_item);
-        this.results_summary.addHidden(1);
         break;
 
       case RESULT_VALUE.PASS:
+        this.results_summary.addPassed(1);
         this.results_passed.push(result_item);
         dom_item.resultsPassed.push(result_item);
-        this.results_summary.addPassed(1);
         break;
 
       case RESULT_VALUE.VIOLATION:
+        this.results_summary.addViolations(1);
         this.results_violations.push(result_item);
         dom_item.resultsViolations.push(result_item);
-        this.results_summary.addViolations(1);
         break;
 
       case RESULT_VALUE.WARNING:
+        this.results_summary.addWarnings(1);
         this.results_warnings.push(result_item);
         dom_item.resultsWarnings.push(result_item);
-        this.results_summary.addWarnings(1);
         break;
 
       case RESULT_VALUE.MANUAL_CHECK:
+        this.results_summary.addManualChecks(1);
         this.results_manual_checks.push(result_item);
         dom_item.resultsManualChecks.push(result_item);
-        this.results_summary.addManualChecks(1);
         break;
 
       default:

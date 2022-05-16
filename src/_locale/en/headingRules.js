@@ -44,19 +44,19 @@ export const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -95,19 +95,19 @@ export const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
@@ -138,19 +138,19 @@ export const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -188,19 +188,19 @@ export const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -233,15 +233,15 @@ export const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C22: Using CSS to control visual presentation of text',
           url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -276,11 +276,11 @@ export const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H2 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
         }
@@ -292,7 +292,7 @@ export const headingRules = {
 
         HEADING_8: {
             ID:         'Heading 8',
-            DEFINITION: 'Headings %s be properly nested within a landmark.',
+            DEFINITION: 'Headings must be properly nested within a landmark.',
             SUMMARY:    'Headings nested in landmarks',
             TARGET_RESOURCES_DESC: 'Landmark elements',
             RULE_RESULT_MESSAGES: {
@@ -325,11 +325,11 @@ export const headingRules = {
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
-              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+              { type:  REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
                 url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+              { type:  REFERENCES.TECHNIQUE,
                 title: 'W3C Web Accessibility Tutorials: Page Structure',
                 url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }

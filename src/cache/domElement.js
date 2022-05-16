@@ -21,6 +21,24 @@ import {
 /* Constants */
 const debug = new DebugLogging('DOMElement', false);
 
+const elementsWithContent = [
+  'area',
+  'audio',
+  'canvas',
+  'img',
+  'input',
+  'select',
+  'svg',
+  'textarea',
+  'video'
+];
+
+const elementsThatMayHaveContent = [
+  'embed',
+  'object'
+];
+
+
 /**
  * @class DOMElement
  *
@@ -66,8 +84,9 @@ export default class DOMElement {
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
-    this.hasContent = false;
-    this.mayHaveContent = false;
+    this.hasContent = elementsWithContent.includes(this.tagName);
+    this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
+
     this.children = [];
 
     // Information on rule results associated with this element

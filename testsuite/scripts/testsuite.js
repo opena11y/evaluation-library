@@ -1,17 +1,19 @@
 /* testsuite.js */
 
- var evaluator = new EvaluationLibrary();
+import EvaluationLibrary from '../../releases/opena11y-evaluation-library.js';
+
+var evaluator = new EvaluationLibrary();
 
 function getCount(iframe, class_name) {
 
-   var i;
-   var item_count = 0
+   let i;
+   let item_count = 0
  
-   var doc = iframe.contentDocument || iframe.document;
+   const doc = iframe.contentDocument || iframe.document;
    
    if (!doc) return 0;
 
-   var items = doc.getElementsByClassName(class_name);
+   const items = doc.getElementsByClassName(class_name);
    
    if ((typeof items         === 'object') && 
        (typeof items.length  === 'number')) { 
@@ -20,10 +22,10 @@ function getCount(iframe, class_name) {
      
    }
 
-   var frames = doc.getElementsByTagName('frame');
+   const frames = doc.getElementsByTagName('frame');
    for (i = 0; i < frames.length; i++) item_count += getCount(frames[i], class_name);
 
-   var iframes = doc.getElementsByTagName('iframe');
+   const iframes = doc.getElementsByTagName('iframe');
    for (i = 0; i < iframes.length; i++) item_count += getCount(iframes[i], class_name);
    
    
@@ -32,28 +34,46 @@ function getCount(iframe, class_name) {
 }
  
  
-function executeTest(IFRAME_ID, RULE_ID) {
+export default function executeTest(label, IFRAME_ID, RULE_ID) {
 
-  var iframe = document.getElementById(IFRAME_ID);
+  const iframe = document.getElementById(IFRAME_ID);
   
-  var win    = iframe.contentWindow;
-  var doc    = iframe.contentDocument;
-  var title  = doc.title;
-  var url    = win.location.href;
+  const win    = iframe.contentWindow;
+  const doc    = iframe.contentDocument;
+  const title  = doc.title;
+  const url    = win.location.href;
 
 
-  var evaluation_result = evaluator.evaluate(doc, title, url);
-  var ers = evaluation_result.getRuleResult(RULE_ID).getElementResultsSummary();
+  const evaluationResult = evaluator.evaluate(doc, title, url);
+  const resultSummary = evaluationResult.getRuleResult(RULE_ID).getResultsSummary();
 
-  var f  = getCount(iframe, RULE_ID + '_FAIL');
-  var p  = getCount(iframe, RULE_ID + '_PASS');
-  var mc = getCount(iframe, RULE_ID + '_MC');
-  var h  = getCount(iframe, RULE_ID + '_HIDDEN');
+  const f  = getCount(iframe, RULE_ID + '_FAIL');
+  const p  = getCount(iframe, RULE_ID + '_PASS');
+  const mc = getCount(iframe, RULE_ID + '_MC');
+  const h  = getCount(iframe, RULE_ID + '_HIDDEN');
 
-  equal( (ers.violations + ers.warnings),  f, "We expect failures      to be " + f);
-  equal( ers.passed,         p, "We expect passed        to be " + p);
-  equal( ers.manual_checks, mc, "We expect manual checks to be " + mc);
-  equal( ers.hidden,         h, "We expect hidden        to be " + h); 
+
+  function getFailures(ers) {
+    return ers.violations + ers.warnings;
+  }
+
+  QUnit.module(label, function() {
+    QUnit.test(`We expect failures to be ${f}`, function(assert) {
+      assert.equal(getFailures(resultSummary), f);
+    });
+
+    QUnit.test(`We expect passed to be ${p}`, function(assert) {
+      assert.equal(resultSummary.passed, p);
+    });
+            ;
+    QUnit.test(`We expect manual checks to be ${mc}`, function(assert) {
+      assert.equal(resultSummary.manual_checks, mc);
+    });
+            ;
+    QUnit.test(`We expect hidden to be ${h}`, function(assert) {
+      assert.equal(resultSummary.hidden, h);
+    });
+  });
   
 };
   

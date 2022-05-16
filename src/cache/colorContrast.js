@@ -52,7 +52,7 @@ export default class ColorContrast {
 
     if (debug.flag) {
       debug.log(`[                    opacity]: ${this.opacity}`);
-      debug.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
       debug.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
       debug.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }

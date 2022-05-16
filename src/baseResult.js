@@ -40,11 +40,13 @@ export default class BaseResult {
     this.result_type       = RESULT_TYPE.BASE;
     this.rule_result       = ruleResult;
     this.result_value      = resultValue;
+    debug.flag && debug.log(`[  msgId]: ${msgId}`);
+    debug.flag && debug.log(`[    msg]: ${msg}`);
+    debug.flag && debug.log(`[msgArgs]: ${msgArgs}`);
     this.result_message    = getBaseResultMessage(msg, msgArgs);
     this.result_identifier = result_identifier;
     this.ordinal_position  = ordinal_position;
 
-    debug.flag && debug.log('');
   }
 
   /**

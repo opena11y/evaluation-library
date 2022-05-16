@@ -8,32 +8,15 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', false);
-
-const elementsWithContent = [
-  'area',
-  'audio',
-  'canvas',
-  'img',
-  'input',
-  'select',
-  'svg',
-  'textarea',
-  'video'
-];
-
-const elementsThatMayHaveContent = [
-  'embed',
-  'object'
-];
+const debug = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
   'content',
+  'input[type=hidden]',
   'link',
   'meta',
   'noscript',
-  'object',
   'script',
   'style',
   'template',
@@ -119,8 +102,10 @@ export default class DOMCache {
   }
 
   // Tests if a tag name can be skipped
-  isSkipableElement(tagName) {
-    return skipableElements.includes(tagName);
+  isSkipableElement(tagName, type) {
+    const elemSelector = (typeof type !== 'string') ? tagName : `${tagName}[type=${type}]`;
+    debug.log(`[elemSelector]: ${elemSelector} (${skipableElements.includes(elemSelector)})`);
+    return skipableElements.includes(elemSelector);
   }
 
   // Tests if a tag name is a custom element
@@ -181,16 +166,8 @@ export default class DOMCache {
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
 
-          if (parentDomElement) {
-            if (elementsWithContent.includes(tagName)) {
-                parentDomElement.hasContent = true;
-            }
-            if (elementsThatMayHaveContent.includes(tagName)) {
-                parentDomElement.mayHaveContent = true;
-            }
-          }
 
-          if (!this.isSkipableElement(tagName)) {
+          if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content
             if (this.isSlotElement(node)) {
                 // if no slotted elements, check for default slotted content

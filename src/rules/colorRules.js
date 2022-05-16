@@ -42,9 +42,8 @@ export const colorRules = [
         const de  = domText.parentDomElement;
         const cc  = de.colorContrast;
         const ccr = cc.colorContrastRatio;
-        const vis = de.visibility;
 
-        if (vis.isVisibleOnScreen) {
+        if (de.visibility.isVisibleOnScreen) {
           if (cc.isLargeFont) {
             if (ccr >= MIN_CCR_LARGE_FONT) {
               // Passes color contrast requirements
@@ -77,7 +76,7 @@ export const colorRules = [
             }
             else {
               // Fails color contrast requirements
-              if (cc.background_image === "none") {
+              if (cc.hasBackgroundImage) {
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
               }
               else {

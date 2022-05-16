@@ -19,7 +19,7 @@ import {
 } from './_locale/locale.js';
 
 /* Constants */
-const debug = new DebugLogging('EvaluationResult', true)
+const debug = new DebugLogging('EvaluationResult', false)
 
 export default class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -34,6 +34,7 @@ export default class EvaluationResult {
 
     allRules.forEach (rule => {
       const ruleResult = new RuleResult(rule);
+      debug.flag && debug.log(`[validate]: ${ruleResult.rule.getId()}`);
       ruleResult.validate(domCache);
       this.allRuleResults.push(ruleResult);
     });
@@ -91,7 +92,7 @@ export default class EvaluationResult {
    * @return {RuleResult} Returns the ResultResult object
    */
   getRuleResult (rule_id) {
-    return this.ruleResults.find( rr => rr.rule.rule_id === rule_id);
+    return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
   }
 
   /**

@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('visibility', false)
+const debug = new DebugLogging('visibility', true)
 
 /**
  * @class Visibility
@@ -26,6 +26,8 @@ export default class Visibility {
     this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
     this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
     this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
+    this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
+    this.isSmallFont        = this.getFontSize(style);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -33,16 +35,18 @@ export default class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden) {
+        this.isVisibilityHidden ||
+        this.isSmallHeight ||
+        this.isSmallFont) {
 
-      if (this.isHidden && (tagName !== 'area')) {
+      if (tagName !== 'area') {
         this.isVisibleOnScreen = false;
-        this.isVisibleToAt     = false;
+        this.isVisibleToAT     = false;
       }
     }
 
     if (this.isAriaHidden) {
-        this.isVisibleToAt = false;
+        this.isVisibleToAT = false;
     }
 
     if (debug.flag) {
@@ -52,6 +56,8 @@ export default class Visibility {
       debug.log('[      isAriaHidden]: ' + this.isAriaHidden);
       debug.log('[     isDisplayNone]: ' + this.isDisplayNone);
       debug.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug.log('[       isSmallFont]: ' + this.isSmallFont);
       debug.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
       debug.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
@@ -136,7 +142,7 @@ export default class Visibility {
   }
 
   /**
-   * @method normalizeVisiibility
+   * @method normalizeVisibility
    *
    * @desc Computes a boolean value to indicate whether the content or its
    *       ancestor that results in content not being displayed based on 
@@ -158,6 +164,44 @@ export default class Visibility {
         isVisibilityHidden = true;
     }
     return isVisibilityHidden;
+  }
+
+  /**
+   * @method normalizeHeight
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on
+   *       the CSS height and overflow properties
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+  normalizeHeight (style, parentVisibility) {
+    const height   = parseFloat(style.getPropertyValue("height"));
+    const overflow = style.getPropertyValue("overflow");
+    return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
+  }
+
+
+  /**
+   * @method getFontSize
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on
+   *       the CSS height and overflow properties
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   *
+   * @return {Boolean}  Returns a true if content is small
+   */
+
+  getFontSize (style) {
+    const fontSize = parseFloat(style.getPropertyValue("font-size"));
+    return fontSize <= 1;
   }
 
 };

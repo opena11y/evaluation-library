@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>QUNIT: Color Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,23 +11,14 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../releases/opena11y-evaluation-library.js" type="module"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
 
-      test( "Color_1: Color contrast ratio", function() {
-        executeTest('ID_IFRAME_1A', 'COLOR_1');
-      });
-
-      test( "Color_2: Use of color", function() {
-        executeTest('ID_IFRAME_2A', 'COLOR_2');
-      });
-      
-      
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      executeTest('Color_1: Color contrast ratio', 'ID_IFRAME_1A', 'COLOR_1');
+      executeTest('Color_2: Use of color', 'ID_IFRAME_2A', 'COLOR_2');
     </script>
+
+
 
     <h2>Color contrast ratio </h2>
     <iframe id="ID_IFRAME_1A" src="color/color_1_contrast_ratio.html"></iframe>    

@@ -109,11 +109,19 @@ export default class DebugLogging {
       const accName = domElement.accName
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
+      const parentLandmark = domElement.parentInfo.landmarkElement ?
+                            domElement.parentInfo.landmarkElement.domElement.role
+                            :
+                            'none';
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}, position: ${pos})`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos}`);
       } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}, position: ${pos})`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
       }
+      this.log(`${prefix}[${domElement.tagName}][parentLandmark]: ${parentLandmark}]`);
+      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaValidation.isLandmark}]`);
+      this.log(`${prefix}[${domElement.tagName}][    hasContent]: ${domElement.hasContent}]`);
+      this.log(`${prefix}[${domElement.tagName}][mayHaveContent]: ${domElement.mayHaveContent}]`);
     }
   }
 

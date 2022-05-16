@@ -109,11 +109,19 @@ class DebugLogging {
       const accName = domElement.accName;
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
+      const parentLandmark = domElement.parentInfo.landmarkElement ?
+                            domElement.parentInfo.landmarkElement.domElement.role
+                            :
+                            'none';
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}, children: ${count}, position: ${pos})`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos}`);
       } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}] (children: ${count}, position: ${pos})`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
       }
+      this.log(`${prefix}[${domElement.tagName}][parentLandmark]: ${parentLandmark}]`);
+      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaValidation.isLandmark}]`);
+      this.log(`${prefix}[${domElement.tagName}][    hasContent]: ${domElement.hasContent}]`);
+      this.log(`${prefix}[${domElement.tagName}][mayHaveContent]: ${domElement.mayHaveContent}]`);
     }
   }
 
@@ -184,7 +192,7 @@ class ColorContrast {
 
     if (debug$k.flag) {
       debug$k.log(`[                    opacity]: ${this.opacity}`);
-      debug$k.log(`[Background Repeat/Pos/Image]: ${this.backgroundRepeat}/${this.backgroundPosition}/${this.backgroundImage}`);
+      debug$k.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
       debug$k.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
       debug$k.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
@@ -508,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$j = new DebugLogging('visibility', false);
+const debug$j = new DebugLogging('visibility', true);
 
 /**
  * @class Visibility
@@ -530,6 +538,8 @@ class Visibility {
     this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
     this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
     this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
+    this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
+    this.isSmallFont        = this.getFontSize(style);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -537,16 +547,18 @@ class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden) {
+        this.isVisibilityHidden ||
+        this.isSmallHeight ||
+        this.isSmallFont) {
 
-      if (this.isHidden && (tagName !== 'area')) {
+      if (tagName !== 'area') {
         this.isVisibleOnScreen = false;
-        this.isVisibleToAt     = false;
+        this.isVisibleToAT     = false;
       }
     }
 
     if (this.isAriaHidden) {
-        this.isVisibleToAt = false;
+        this.isVisibleToAT = false;
     }
 
     if (debug$j.flag) {
@@ -556,6 +568,8 @@ class Visibility {
       debug$j.log('[      isAriaHidden]: ' + this.isAriaHidden);
       debug$j.log('[     isDisplayNone]: ' + this.isDisplayNone);
       debug$j.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$j.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$j.log('[       isSmallFont]: ' + this.isSmallFont);
       debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
       debug$j.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
@@ -640,7 +654,7 @@ class Visibility {
   }
 
   /**
-   * @method normalizeVisiibility
+   * @method normalizeVisibility
    *
    * @desc Computes a boolean value to indicate whether the content or its
    *       ancestor that results in content not being displayed based on 
@@ -662,6 +676,44 @@ class Visibility {
         isVisibilityHidden = true;
     }
     return isVisibilityHidden;
+  }
+
+  /**
+   * @method normalizeHeight
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on
+   *       the CSS height and overflow properties
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+  normalizeHeight (style, parentVisibility) {
+    const height   = parseFloat(style.getPropertyValue("height"));
+    const overflow = style.getPropertyValue("overflow");
+    return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
+  }
+
+
+  /**
+   * @method getFontSize
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on
+   *       the CSS height and overflow properties
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   *
+   * @return {Boolean}  Returns a true if content is small
+   */
+
+  getFontSize (style) {
+    const fontSize = parseFloat(style.getPropertyValue("font-size"));
+    return fontSize <= 1;
   }
 
 }
@@ -2527,7 +2579,8 @@ const designPatterns = {
       'aria-live',
       'aria-owns',
       'aria-relevant',
-      'aria-roledescription'
+      'aria-roledescription',
+      'aria-level'
     ],
     deprecatedProps: [
       'aria-disabled',
@@ -2537,7 +2590,9 @@ const designPatterns = {
     ],
     supportedProps: [],
     hasRange: false,
-    requiredProps: [],
+    requiredProps: [
+      'aria-level'
+    ],
     nameRequired: true,
     nameFromContent: true,
     nameProhibited: false,
@@ -3100,7 +3155,8 @@ const designPatterns = {
       'aria-roledescription',
       'aria-valuemax',
       'aria-valuemin',
-      'aria-valuetext'
+      'aria-valuetext',
+      'aria-valuenow'
     ],
     deprecatedProps: [
       'aria-disabled',
@@ -3110,7 +3166,9 @@ const designPatterns = {
     ],
     supportedProps: [],
     hasRange: true,
-    requiredProps: [],
+    requiredProps: [
+      'aria-valuenow'
+    ],
     nameRequired: true,
     nameFromContent: false,
     nameProhibited: false,
@@ -4277,6 +4335,7 @@ const designPatterns = {
       'aria-owns',
       'aria-relevant',
       'aria-roledescription',
+      'aria-valuenow',
       'aria-disabled',
       'aria-orientation',
       'aria-valuemax',
@@ -4296,7 +4355,9 @@ const designPatterns = {
       'aria-valuetext'
     ],
     hasRange: false,
-    requiredProps: [],
+    requiredProps: [
+      'aria-valuenow'
+    ],
     nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
@@ -5610,7 +5671,10 @@ function accNamesTheSame (accName1, accName2) {
 
 /* ariaValidation.js */
 
-/* Debug help functions */
+/* Constants */
+const debug$i = new DebugLogging('AriaValidation', false);
+
+/* Debug helper functions */
 
 function debugRefs (refs) {
   let s = '';
@@ -5635,9 +5699,6 @@ function debugAttrs (attrs) {
   });
   return s;
 }
-
-/* Constants */
-const debug$i = new DebugLogging('AriaValidation', false);
 
 /**
  * @class TokenInfo
@@ -5698,6 +5759,12 @@ class AriaValidation {
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProbihited;
 
+    this.isLandmark = designPattern.roleType === 'landmark';
+    this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
+
+    // Used for heading
+    this.headingLevel = this.getHeadingLevel(role, node);
+
     const attrs = Array.from(node.attributes);
 
     this.validAttrs        = [];
@@ -5721,6 +5788,8 @@ class AriaValidation {
 
     if (debug$i.flag) {
       node.attributes.length && debug$i.log(`${node.outerHTML}`, 1);
+      debug$i.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$i.log(`[         isWidget]: ${this.isWidget}`);
       debug$i.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
       debug$i.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
       debug$i.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
@@ -5875,6 +5944,38 @@ class AriaValidation {
       }
     });
     return missingReqAttrNames;
+  }
+
+  getHeadingLevel (role, node) {
+    switch (node.tagName.toLowerCase()) {
+      case 'h1':
+        return 1;
+
+      case 'h2':
+        return 2;
+
+      case 'h3':
+        return 3;
+
+      case 'h4':
+        return 4;
+
+      case 'h5':
+        return 5;
+
+      case 'h6':
+        return 6;
+
+      default:
+        if (role === 'heading') {
+          const level = parseInt(node.getAttribute('aria-level'));
+          if (Number.isInteger(level)) {
+            return level;
+          }
+        }
+        break;
+    }
+    return 0;
   }
 }
 
@@ -8629,6 +8730,24 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* Constants */
 const debug$g = new DebugLogging('DOMElement', false);
 
+const elementsWithContent = [
+  'area',
+  'audio',
+  'canvas',
+  'img',
+  'input',
+  'select',
+  'svg',
+  'textarea',
+  'video'
+];
+
+const elementsThatMayHaveContent = [
+  'embed',
+  'object'
+];
+
+
 /**
  * @class DOMElement
  *
@@ -8674,8 +8793,9 @@ class DOMElement {
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
-    this.hasContent = false;
-    this.mayHaveContent = false;
+    this.hasContent = elementsWithContent.includes(this.tagName);
+    this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
+
     this.children = [];
 
     // Information on rule results associated with this element
@@ -9097,7 +9217,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('structureInfo', false);
+const debug$e = new DebugLogging('structureInfo', true);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9120,10 +9240,6 @@ class LandmarkElement {
     this.descendantLandmarkElements = [];
     this.childLandmarkElements      = [];
     this.childHeadingDomElements    = [];
-
-    if (debug$e.flag) {
-      debug$e.log('');
-    }
   }
 
   addChildLandmark (landmarkElement) {
@@ -9169,12 +9285,9 @@ class LandmarkElement {
 
 class StructureInfo {
   constructor () {
-
     this.allLandmarkElements = [];
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
-
-    if (debug$e.flag) ;
   }
 
   /**
@@ -9307,32 +9420,15 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', false);
-
-const elementsWithContent = [
-  'area',
-  'audio',
-  'canvas',
-  'img',
-  'input',
-  'select',
-  'svg',
-  'textarea',
-  'video'
-];
-
-const elementsThatMayHaveContent = [
-  'embed',
-  'object'
-];
+const debug$d = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
   'content',
+  'input[type=hidden]',
   'link',
   'meta',
   'noscript',
-  'object',
   'script',
   'style',
   'template',
@@ -9418,8 +9514,10 @@ class DOMCache {
   }
 
   // Tests if a tag name can be skipped
-  isSkipableElement(tagName) {
-    return skipableElements.includes(tagName);
+  isSkipableElement(tagName, type) {
+    const elemSelector = (typeof type !== 'string') ? tagName : `${tagName}[type=${type}]`;
+    debug$d.log(`[elemSelector]: ${elemSelector} (${skipableElements.includes(elemSelector)})`);
+    return skipableElements.includes(elemSelector);
   }
 
   // Tests if a tag name is a custom element
@@ -9480,16 +9578,8 @@ class DOMCache {
         case Node.ELEMENT_NODE:
           const tagName = node.tagName.toLowerCase();
 
-          if (parentDomElement) {
-            if (elementsWithContent.includes(tagName)) {
-                parentDomElement.hasContent = true;
-            }
-            if (elementsThatMayHaveContent.includes(tagName)) {
-                parentDomElement.mayHaveContent = true;
-            }
-          }
 
-          if (!this.isSkipableElement(tagName)) {
+          if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content
             if (this.isSlotElement(node)) {
                 // if no slotted elements, check for default slotted content
@@ -10069,9 +10159,8 @@ const colorRules$1 = [
         const de  = domText.parentDomElement;
         const cc  = de.colorContrast;
         const ccr = cc.colorContrastRatio;
-        const vis = de.visibility;
 
-        if (vis.isVisibleOnScreen) {
+        if (de.visibility.isVisibleOnScreen) {
           if (cc.isLargeFont) {
             if (ccr >= MIN_CCR_LARGE_FONT) {
               // Passes color contrast requirements
@@ -10104,7 +10193,7 @@ const colorRules$1 = [
             }
             else {
               // Fails color contrast requirements
-              if (cc.background_image === "none") {
+              if (cc.hasBackgroundImage) {
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
               }
               else {
@@ -10313,7 +10402,7 @@ function validateNoMoreThanOne(dom_cache, rule_result, role) {
         }
       });
     } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_2', [roleCount]);
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_1', [roleCount]);
       visibleDomElements.forEach( de => {
         if (de.hasRole) {
           rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_1', [de.tagName]);
@@ -10494,7 +10583,7 @@ const landmarkRules$1 = [
    * @desc All rendered content should be contained in a landmark
    */
   { rule_id             : 'LANDMARK_2',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10504,7 +10593,9 @@ const landmarkRules$1 = [
     target_resources    : ['Page', 'all'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
-        if (de.hasContent || de.mayHaveContent) {
+        if (!de.ariaValidation.isLandmark &&
+             de.tagName !== 'body' &&
+            (de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
             if (de.parentInfo.landmarkElement) {
               const role = de.parentInfo.landmarkElement.domElement.role;
@@ -10534,7 +10625,7 @@ const landmarkRules$1 = [
    *
    */
   { rule_id             : 'LANDMARK_3',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.WEBSITE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10599,7 +10690,7 @@ const landmarkRules$1 = [
    */
 
   { rule_id             : 'LANDMARK_4',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10608,7 +10699,7 @@ const landmarkRules$1 = [
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['header', '[role="banner"]'],
     validate            : function (dom_cache, rule_result) {
-      validateAtLeastOne(dom_cache, rule_result, 'main', false);
+      validateAtLeastOne(dom_cache, rule_result, 'banner', false);
     } // end validate function
   },
 
@@ -10620,7 +10711,7 @@ const landmarkRules$1 = [
    */
 
   { rule_id             : 'LANDMARK_5',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10640,7 +10731,7 @@ const landmarkRules$1 = [
    *
    */
   { rule_id             : 'LANDMARK_6',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10660,7 +10751,7 @@ const landmarkRules$1 = [
    *
    */
   { rule_id             : 'LANDMARK_7',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10679,7 +10770,7 @@ const landmarkRules$1 = [
    * @desc banner landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_8',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10698,7 +10789,7 @@ const landmarkRules$1 = [
    * @desc Banner landmark should only contain only region, navigation and search landmarks
    */
   { rule_id             : 'LANDMARK_9',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10717,7 +10808,7 @@ const landmarkRules$1 = [
    * @desc Navigation landmark should only contain only region and search landmarks
    */
   { rule_id             : 'LANDMARK_10',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10735,7 +10826,7 @@ const landmarkRules$1 = [
    * @desc Main landmark must be a top level lanmark
    */
   { rule_id             : 'LANDMARK_11',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10753,7 +10844,7 @@ const landmarkRules$1 = [
    * @desc Contentinfo landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_12',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10771,7 +10862,7 @@ const landmarkRules$1 = [
    * @desc Contentinfo landmark should only contain only search, region and navigation landmarks
    */
   { rule_id             : 'LANDMARK_13',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10789,7 +10880,7 @@ const landmarkRules$1 = [
    * @desc Search landmark should only contain only region landmarks
    */
   { rule_id             : 'LANDMARK_14',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10807,7 +10898,7 @@ const landmarkRules$1 = [
    * @desc Form landmark should only contain only region landmarks
    */
   { rule_id             : 'LANDMARK_15',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10825,7 +10916,7 @@ const landmarkRules$1 = [
    * @desc Elements with the role=region must have accessible name to be considered a landmark
    */
   { rule_id             : 'LANDMARK_16',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10869,7 +10960,7 @@ const landmarkRules$1 = [
    */
 
   { rule_id             : 'LANDMARK_17',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -10919,7 +11010,7 @@ const landmarkRules$1 = [
    * @desc Complementary landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_19',
-    last_updated        : '2014-11-28',
+    last_updated        : '2022-05-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
@@ -12189,8 +12280,8 @@ const headingRules = {
   rules: {
     HEADING_1: {
       ID:                    'Heading 1',
-      DEFINITION:            'The page %s contain at least one @h1@ element identifying and describing the main content of the page.',
-      SUMMARY:               'Page %s have @h1@ element',
+      DEFINITION:            'The page should contain at least one @h1@ element identifying and describing the main content of the page.',
+      SUMMARY:               'Page should have @h1@ element',
       TARGET_RESOURCES_DESC: '@h1@ and @body@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a descriptive @h1@ element at the beginning of the main content of the page.',
@@ -12219,19 +12310,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12239,8 +12330,8 @@ const headingRules = {
     },
     HEADING_2: {
       ID:                    'Heading 2',
-      DEFINITION:            'If the page contains @h1@ element and either a @main@ or @banner@ landmark, the @h1@ element %s be a child of either the main or @banner@ landmark.',
-      SUMMARY:               '@h1@ %s be in @main@ or @banner@ landmark',
+      DEFINITION:            'If the page contains @h1@ element and either a @main@ or @banner@ landmark, the @h1@ element should be a child of either the main or @banner@ landmark.',
+      SUMMARY:               '@h1@ should be in @main@ or @banner@ landmark',
       TARGET_RESOURCES_DESC: '@h1@ elements and elements with ARIA attribute @role="main"@ or @role="banner"@ ',
       RULE_RESULT_MESSAGES: {
         FAIL_S: 'Move the @h1@ element inside (and preferably at the beginning) of the @main@ element, or change the @h1@ element to another heading level.',
@@ -12270,19 +12361,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: The @h1@ element',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
@@ -12290,8 +12381,8 @@ const headingRules = {
     },
     HEADING_3: {
       ID:                    'Heading 3',
-      DEFINITION:            'The accessible names of sibling heading elements of the same level %s be unique.',
-      SUMMARY:               'Sibling headings %s be unique',
+      DEFINITION:            'The accessible names of sibling heading elements of the same level should be unique.',
+      SUMMARY:               'Sibling headings should be unique',
       TARGET_RESOURCES_DESC: 'Heading elements',
       RULE_RESULT_MESSAGES: {
         FAIL_P: 'Update the accessible names of the %N_F sibling heading elements of the same level to be unique.',
@@ -12313,19 +12404,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12333,8 +12424,8 @@ const headingRules = {
     },
     HEADING_5: {
       ID:                    'Heading 5',
-      DEFINITION:            'Heading elements %s be properly nested on the page.',
-      SUMMARY:               'Headings %s be properly nested',
+      DEFINITION:            'Heading elements must be properly nested on the page.',
+      SUMMARY:               'Headings must be properly nested',
       TARGET_RESOURCES_DESC: 'Heading elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:  'Review the entire heading structure and update the heading levels so that the heading element is properly nested in relation to the %N_T headings on the page.',
@@ -12363,19 +12454,19 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G130: Providing descriptive headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G141: Organizing a page using headings',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12383,8 +12474,8 @@ const headingRules = {
     },
     HEADING_6: {
       ID:                    'Heading 6',
-      DEFINITION:            'Heading elements %s have visible text content.',
-      SUMMARY:               'Headings %s have text content',
+      DEFINITION:            'Heading elements should have visible text content.',
+      SUMMARY:               'Headings should have text content',
       TARGET_RESOURCES_DESC: 'Heading elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'For the heading element with only image content, replace the image with text content styled using CSS.',
@@ -12408,15 +12499,15 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
         },
-        { type:  OpenAjax.a11y.REFERENCES.WCAG_TECHNIQUE,
+        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C22: Using CSS to control visual presentation of text',
           url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
         },
-        { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+        { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Headings',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
         }
@@ -12451,11 +12542,11 @@ const headingRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
         },
-        { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: Headings: The H2 elements',
           url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
         }
@@ -12467,7 +12558,7 @@ const headingRules = {
 
         HEADING_8: {
             ID:         'Heading 8',
-            DEFINITION: 'Headings %s be properly nested within a landmark.',
+            DEFINITION: 'Headings must be properly nested within a landmark.',
             SUMMARY:    'Headings nested in landmarks',
             TARGET_RESOURCES_DESC: 'Landmark elements',
             RULE_RESULT_MESSAGES: {
@@ -12500,11 +12591,11 @@ const headingRules = {
             MANUAL_CHECKS: [
             ],
             INFORMATIONAL_LINKS: [
-              { type:  OpenAjax.a11y.REFERENCES.SPECIFICATION,
+              { type:  REFERENCES.SPECIFICATION,
                 title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
                 url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
               },
-              { type:  OpenAjax.a11y.REFERENCES.TECHNIQUE,
+              { type:  REFERENCES.TECHNIQUE,
                 title: 'W3C Web Accessibility Tutorials: Page Structure',
                 url:   'https://www.w3.org/WAI/tutorials/page-structure/'
               }
@@ -15165,11 +15256,13 @@ class BaseResult {
     this.result_type       = RESULT_TYPE.BASE;
     this.rule_result       = ruleResult;
     this.result_value      = resultValue;
+    debug$7.flag && debug$7.log(`[  msgId]: ${msgId}`);
+    debug$7.flag && debug$7.log(`[    msg]: ${msg}`);
+    debug$7.flag && debug$7.log(`[msgArgs]: ${msgArgs}`);
     this.result_message    = getBaseResultMessage(msg, msgArgs);
     this.result_identifier = result_identifier;
     this.ordinal_position  = ordinal_position;
 
-    debug$7.flag && debug$7.log('');
   }
 
   /**
@@ -16059,33 +16152,33 @@ class RuleResult {
   updateResults (result_value, result_item, dom_item) {
     switch (result_value) {
       case RESULT_VALUE.HIDDEN:
+        this.results_summary.addHidden(1);
         this.results_hidden.push(result_item);
         dom_item.resultsHidden.push(result_item);
-        this.results_summary.addHidden(1);
         break;
 
       case RESULT_VALUE.PASS:
+        this.results_summary.addPassed(1);
         this.results_passed.push(result_item);
         dom_item.resultsPassed.push(result_item);
-        this.results_summary.addPassed(1);
         break;
 
       case RESULT_VALUE.VIOLATION:
+        this.results_summary.addViolations(1);
         this.results_violations.push(result_item);
         dom_item.resultsViolations.push(result_item);
-        this.results_summary.addViolations(1);
         break;
 
       case RESULT_VALUE.WARNING:
+        this.results_summary.addWarnings(1);
         this.results_warnings.push(result_item);
         dom_item.resultsWarnings.push(result_item);
-        this.results_summary.addWarnings(1);
         break;
 
       case RESULT_VALUE.MANUAL_CHECK:
+        this.results_summary.addManualChecks(1);
         this.results_manual_checks.push(result_item);
         dom_item.resultsManualChecks.push(result_item);
-        this.results_summary.addManualChecks(1);
         break;
     } // end switch
   }
@@ -16328,7 +16421,7 @@ class RuleResult {
 /* evaluationResult.js */
 
 /* Constants */
-const debug$1 = new DebugLogging('EvaluationResult', true);
+const debug$1 = new DebugLogging('EvaluationResult', false);
 
 class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -16343,6 +16436,7 @@ class EvaluationResult {
 
     allRules.forEach (rule => {
       const ruleResult = new RuleResult(rule);
+      debug$1.flag && debug$1.log(`[validate]: ${ruleResult.rule.getId()}`);
       ruleResult.validate(domCache);
       this.allRuleResults.push(ruleResult);
     });
@@ -16400,7 +16494,7 @@ class EvaluationResult {
    * @return {RuleResult} Returns the ResultResult object
    */
   getRuleResult (rule_id) {
-    return this.ruleResults.find( rr => rr.rule.rule_id === rule_id);
+    return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
   }
 
   /**

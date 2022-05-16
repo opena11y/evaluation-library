@@ -6,7 +6,10 @@ import {propertyDataTypes} from '../aria/propertyDataTypes.js';
 import {designPatterns}    from '../aria/designPatterns.js';
 import {hasCheckedState}   from '../utils.js'
 
-/* Debug help functions */
+/* Constants */
+const debug = new DebugLogging('AriaValidation', false);
+
+/* Debug helper functions */
 
 function debugRefs (refs) {
   let s = '';
@@ -31,9 +34,6 @@ function debugAttrs (attrs) {
   });
   return s;
 }
-
-/* Constants */
-const debug = new DebugLogging('AriaValidation', false);
 
 /**
  * @class TokenInfo
@@ -94,6 +94,9 @@ export default class AriaValidation {
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProbihited;
 
+    this.isLandmark = designPattern.roleType === 'landmark';
+    this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
+
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);
 
@@ -120,6 +123,8 @@ export default class AriaValidation {
 
     if (debug.flag) {
       node.attributes.length && debug.log(`${node.outerHTML}`, 1);
+      debug.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug.log(`[         isWidget]: ${this.isWidget}`);
       debug.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
       debug.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
       debug.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);

@@ -179,7 +179,7 @@ function validateNoMoreThanOne(dom_cache, rule_result, role) {
         }
       });
     } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_2', [roleCount]);
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_1', [roleCount]);
       visibleDomElements.forEach( de => {
         if (de.hasRole) {
           rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_1', [de.tagName]);
@@ -372,7 +372,9 @@ export const landmarkRules = [
     target_resources    : ['Page', 'all'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
-        if (de.hasContent || de.mayHaveContent) {
+        if (!de.ariaValidation.isLandmark &&
+             de.tagName !== 'body' &&
+            (de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
             if (de.parentInfo.landmarkElement) {
               const role = de.parentInfo.landmarkElement.domElement.role;
@@ -476,7 +478,7 @@ export const landmarkRules = [
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['header', '[role="banner"]'],
     validate            : function (dom_cache, rule_result) {
-      validateAtLeastOne(dom_cache, rule_result, 'main', false);
+      validateAtLeastOne(dom_cache, rule_result, 'banner', false);
     } // end validate function
   },
 
