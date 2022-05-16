@@ -186,7 +186,6 @@ export default class Visibility {
     return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
   }
 
-
   /**
    * @method getFontSize
    *
@@ -203,7 +202,6 @@ export default class Visibility {
     const fontSize = parseFloat(style.getPropertyValue("font-size"));
     return fontSize <= 1;
   }
-
 };
 
 

@@ -698,7 +698,6 @@ class Visibility {
     return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
   }
 
-
   /**
    * @method getFontSize
    *
@@ -715,7 +714,6 @@ class Visibility {
     const fontSize = parseFloat(style.getPropertyValue("font-size"));
     return fontSize <= 1;
   }
-
 }
 
 /* propertyDataTypes.js is a generated file, use "npm run aria" */
@@ -16431,7 +16429,7 @@ class EvaluationResult {
     this.version = VERSION;
     this.allRuleResults = [];
 
-    debug$1.log(`[start]`);
+    const startTime = new Date();
     debug$1.flag && debug$1.log(`[title]: ${this.title}`);
 
     allRules.forEach (rule => {
@@ -16444,7 +16442,9 @@ class EvaluationResult {
     const json = this.toJSON(true);
     debug$1.flag && debug$1.log(`[JSON]: ${json}`);
 
-    debug$1.log(`[end]`);
+    const endTime = new Date();
+    debug$1.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
 
   }
 

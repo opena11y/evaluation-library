@@ -52,7 +52,6 @@ export default function executeTest(label, IFRAME_ID, RULE_ID) {
   const mc = getCount(iframe, RULE_ID + '_MC');
   const h  = getCount(iframe, RULE_ID + '_HIDDEN');
 
-
   function getFailures(ers) {
     return ers.violations + ers.warnings;
   }

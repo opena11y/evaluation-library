@@ -29,7 +29,7 @@ export default class EvaluationResult {
     this.version = VERSION;
     this.allRuleResults = [];
 
-    debug.log(`[start]`);
+    const startTime = new Date();
     debug.flag && debug.log(`[title]: ${this.title}`);
 
     allRules.forEach (rule => {
@@ -42,7 +42,9 @@ export default class EvaluationResult {
     const json = this.toJSON(true);
     debug.flag && debug.log(`[JSON]: ${json}`);
 
-    debug.log(`[end]`);
+    const endTime = new Date();
+    debug.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
 
   }
 
