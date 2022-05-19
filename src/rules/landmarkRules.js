@@ -11,7 +11,7 @@ import {accNamesTheSame} from '../utils.js';
 import DebugLogging      from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Landmark Rules', false);
+const debug = new DebugLogging('Landmark Rules', true);
 
 /* Helper Functions for Landmarks */
 
@@ -88,16 +88,16 @@ function validateTopLevelLandmark(dom_cache, rule_result, role) {
  * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
  * @param  {RuleResult}  rule_result  - RuleResult object
  * @param  {String}      role         - Landmark role
- * @oaram  {Boolean}     required     - Is the landamrk region role required
+ * @oaram  {Boolean}     roleRequired - Is the landamrk region role required
  */
 
-function validateAtLeastOne(dom_cache, rule_result, role, required) {
+function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
   const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
   let roleCount = 0;
 
   allLandmarkElements.forEach( le => {
     const de = le.domElement;
-    if (de.role === 'main') {
+    if (de.role === role) {
       if (de.visibility.isVisibleToAT) {
         if (de.hasRole) {
           rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
@@ -118,7 +118,7 @@ function validateAtLeastOne(dom_cache, rule_result, role, required) {
   });
 
   if (roleCount === 0) {
-    if (required) {
+    if (roleRequired) {
       rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
     }
     else {
@@ -146,48 +146,57 @@ function validateAtLeastOne(dom_cache, rule_result, role, required) {
 
 function validateNoMoreThanOne(dom_cache, rule_result, role) {
 
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
-  let visibleDomElements = [];
+  const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
+  let totalRoleCount = 0;
+  let anyMoreThanOne = false;
 
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        visibleDomElements.push(de);
-        roleCount += 1;
-      }
-      else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+  landmarkElementsByDoc.forEach( les => {
+    let visibleDomElements = [];
+    if (Array.isArray(les)) {
+      les.forEach( le => {
+        const de = le.domElement;
+        if (de.role === role) {
+          if (de.visibility.isVisibleToAT) {
+            visibleDomElements.push(de);
+            totalRoleCount += 1;
+          }
+          else {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+            }
+          }
         }
-      }
+      });
+
+      visibleDomElements.forEach( de => {
+        if (visibleDomElements.length === 1) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+          }
+        } else {
+          anyMoreThanOne = true;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+          }
+        }
+      });
     }
   });
 
-  if (roleCount > 0) {
-    if (roleCount === 1) {
+  if (totalRoleCount > 0) {
+    if (anyMoreThanOne) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
+    }
+    else {
       rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
-      visibleDomElements.forEach( de => {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-        }
-      });
-    } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_1', [roleCount]);
-      visibleDomElements.forEach( de => {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_1', [de.tagName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_2', []);
-        }
-      });
     }
   }
 }
@@ -216,15 +225,21 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
     landmarkElement.descendantLandmarkElements.forEach( le => {
       const de   = le.domElement;
       const role = de.role;
-      if (allowedLandmarkRoles.includes(role)) {
-        rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
-        result.passedCount += 1;
-        result.passedRoles.push(role);
+
+      if (de.visibility.isVisibleToAT) {
+        if (allowedLandmarkRoles.includes(role)) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
+          result.passedCount += 1;
+          result.passedRoles.push(role);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role]);
+          result.failedCount += 1;
+          result.failedRoles.push(role);
+        }
       }
       else {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
-        result.failedCount += 1;
-        result.failedRoles.push(role);
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName, role]);
       }
     });
 
@@ -243,11 +258,7 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
         roleCount += 1;
       }
       else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-        }
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
       }
     }
   });
@@ -259,10 +270,10 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
     const passedRoles = result.passedRoles.join(', ');
 
     if (result.failedCount === 1) {
-      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [failedRoles]);
+      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [failedRoles]);
     } else {
       if (result.failedCount > 1) {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [result.failedCount, failedRoles]);
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [result.failedCount, failedRoles]);
       }
       else {
         if (result.passedCount === 0) {
@@ -294,7 +305,6 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
 function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 
   const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
   let visibleDomElements = [];
 
   allLandmarkElements.forEach( le => {
@@ -302,7 +312,6 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
     if (de.role === role) {
       if (de.visibility.isVisibleToAT) {
         visibleDomElements.push(de);
-        roleCount += 1;
       }
       else {
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
@@ -310,12 +319,12 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
     }
   });
 
-  if (roleCount > 1) {
+  if (visibleDomElements.length > 1) {
     visibleDomElements.forEach( (de1, index1) => {
       let duplicate = false;
       visibleDomElements.forEach( (de2, index2) => {
         if ((index1 !== index2) &&
-            accNamesTheSame(de1.accName, de2.accName)) {
+            (accNamesTheSame(de1.accName, de2.accName))) {
           duplicate = true;
         }
       });
@@ -372,12 +381,12 @@ export const landmarkRules = [
     target_resources    : ['Page', 'all'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
-        if (!de.ariaValidation.isLandmark &&
-             de.tagName !== 'body' &&
-            (de.hasContent || de.mayHaveContent)) {
+        const parentLandmark = de.parentInfo.landmarkElement;
+        const isLandmark = de.ariaValidation.isLandmark;
+        if ((de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
-            if (de.parentInfo.landmarkElement) {
-              const role = de.parentInfo.landmarkElement.domElement.role;
+            if ( isLandmark || parentLandmark ) {
+              const role = isLandmark ? de.role : parentLandmark.domElement.role;
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, role]);
             }
             else {
@@ -443,7 +452,7 @@ export const landmarkRules = [
         allListElements.forEach ( le => {
           const de = le.domElement;
           if (le.linkCount > MINIMUM_LINKS) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, one_link_count]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, le.linkCount]);
             listWithLinksCount += 1;
           }
         });
@@ -591,6 +600,7 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['nav', '[role="naviation"]'],
@@ -609,6 +619,7 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['main', '[role="main"]'],
@@ -627,6 +638,7 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['footer', '[role="contentinfo"]'],
@@ -645,6 +657,7 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['header', '[role="banner"]'],
@@ -663,6 +676,7 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['[role="search"]'],
@@ -681,6 +695,7 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['[role="form"]'],
@@ -699,29 +714,19 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['[role="region"]'],
     validate            : function (dom_cache, rule_result) {
-      const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-
-      allLandmarkElements.forEach( le => {
-        const de = le.domElement;
+      dom_cache.allDomElements.forEach( de => {
         if (de.hasRole && de.role === 'region') {
           if (de.visibility.isVisibleToAT) {
-            if ((de.accName)) {
-              if (de.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ de.tagName]);
-              } else {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-              }
+            if (de.accName.name.length) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
             }
             else {
-              if (de.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
-              } else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-              }
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
             }
           }
           else {
@@ -743,11 +748,12 @@ export const landmarkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['main', 'nav', 'header', 'footer', 'section', 'aside', '[role="application"]','[role="banner"]', '[role="complementary"]','[role="contentinfo"]','[role="form"]','[role="main"]','[role="navigation"]','[role="region"]','[role="search"]'],
     validate            : function (dom_cache, rule_result) {
-      const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'navigation', 'region', 'search'];
+      const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
       landmarkRoles.forEach( role => {
         validateUniqueAccessibleNames(dom_cache, rule_result, role);
       });

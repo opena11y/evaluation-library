@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('visibility', true)
+const debug = new DebugLogging('visibility', false)
 
 /**
  * @class Visibility
@@ -35,14 +35,17 @@ export default class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden ||
-        this.isSmallHeight ||
-        this.isSmallFont) {
+        this.isVisibilityHidden) {
 
       if (tagName !== 'area') {
         this.isVisibleOnScreen = false;
         this.isVisibleToAT     = false;
       }
+    }
+
+    if (this.isSmallHeight ||
+        this.isSmallFont) {
+      this.isVisibleOnScreen = false;
     }
 
     if (this.isAriaHidden) {

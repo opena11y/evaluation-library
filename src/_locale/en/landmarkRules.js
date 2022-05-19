@@ -180,7 +180,7 @@ export const landmarkRules = {
         WEBSITE_FAIL_1: 'Add at least one @navigation@ landmark to the page to identify the links used for website or page content navigation.',
         ELEMENT_PASS_1:   '@%1[role="navigation"]@ defines a @navigation@ landmark.',
         ELEMENT_PASS_2:   '@nav@ element defines a @navigation@ landmark.',
-        ELEMENT_FAIL_1:   '@%1@ list element has %2 links and not in any landmark.',
+        ELEMENT_FAIL_1:   '@%1@ list element has %2 links and they are not in a @navigation@ landmark.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="navigation"@ was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -265,7 +265,7 @@ export const landmarkRules = {
       TECHNIQUES: [
         'The @header@ element defines a @banner@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@ or @section@.',
         'If the @header@ element technique is not being used, a @role="banner"@ attribute on the container element for the branding content can be used to define a @banner@ landmark.',
-        'In websites that support mashups using @iframe@ or @frame@ elements, a @banner@ landmark is allowed in each frame.',
+        'In websites that support mashups using @iframe@ or custom web components, a @banner@ landmark is allowed in each iframe or shadowRoot.',
         'If the page is part of a website supporting mashups, use the @aria-labelledby@ or @aria-label@ attribute to differentiate @banner@ landmarks in each frame.'
       ],
      MANUAL_CHECKS: [
@@ -1031,7 +1031,7 @@ export const landmarkRules = {
         ELEMENT_PASS_3:   '@form@ landmark contains one @region@ landmark.',
         ELEMENT_PASS_4:   '@form@ landmark contains %1 @region@ landmarks.',
         ELEMENT_FAIL_1:   'Update the landmark structure on the page such that the @%1@ landmark is not contained by the @form@ landmark. Depending on the content in this landmark, consider moving it outside the @form@ landmark.',
-        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @form@ landmark contains only @region@ landmarks.',
+        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @form@ landmarks contains only @region@ landmarks, the following %1 landamrks were found: %2.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="form"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@form@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_3: '@%1@ element with @role="%2"@ was not evaluated because it is hidden from assistive technologies.'
@@ -1099,11 +1099,8 @@ export const landmarkRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1[role="region"]@ element has an accessible name and is considered an ARIA landmark.',
-        ELEMENT_PASS_2:   '@section@ element has an accessible name.',
         ELEMENT_MC_1:     'Determine if the @%1[role="region"]@ element should be an ARIA landmark, and if so, add an accessible name.',
-        ELEMENT_MC_2:     'Determine if the @section@ element should be an ARIA landmark, and if so, add an accessible name.',
         ELEMENT_HIDDEN_1: '@%1[role="region"]@ element was not evaluated because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: '@section@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'The @region@ landmark is used to identify subsections of @banner@, @complementary@, @contentinfo@, @main@, @navigation@ and @search@ landmarks.',

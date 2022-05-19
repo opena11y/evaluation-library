@@ -516,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$j = new DebugLogging('visibility', true);
+const debug$j = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -547,14 +547,17 @@ class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden ||
-        this.isSmallHeight ||
-        this.isSmallFont) {
+        this.isVisibilityHidden) {
 
       if (tagName !== 'area') {
         this.isVisibleOnScreen = false;
         this.isVisibleToAT     = false;
       }
+    }
+
+    if (this.isSmallHeight ||
+        this.isSmallFont) {
+      this.isVisibleOnScreen = false;
     }
 
     if (this.isAriaHidden) {
@@ -9215,7 +9218,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('structureInfo', true);
+const debug$e = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9257,12 +9260,10 @@ class LandmarkElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$e.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
     this.childLandmarkElements.forEach( le => {
       debug$e.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
-    debug$e.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
     this.childHeadingDomElements.forEach( h => {
       debug$e.domElement(h, prefix);
     });
@@ -9286,6 +9287,7 @@ class StructureInfo {
     this.allLandmarkElements = [];
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
+    this.landmarkElementsByDoc = [];
   }
 
   /**
@@ -9294,14 +9296,21 @@ class StructureInfo {
    * @desc Creates a new LandmarkElement and to the array of
    *       LandmarkElements
    *
-   * @param  {Object}  domElement       - New LandmarkElement object being added to StrutureInfo
-   * @param  {Object}  parentLandmarkElement - LandmarkElement object representing that parent
-   *                                           LandmarkElement
+   * @param  {Object}  domElement             - New LandmarkElement object being added to StrutureInfo
+   * @param  {Object}  parentLandmarkElement  - LandmarkElement object identifying the parent
+   *                                            LandmarkElement
+   * @param  {Integer} documentIndex          - index for identifying the current document (e.g. iframe
+   *                                             or custom element dom)
    */
 
-  addChildLandmark (domElement, parentLandmarkElement) {
+  addChildLandmark (domElement, parentLandmarkElement, documentIndex) {
     const le = new LandmarkElement(domElement, parentLandmarkElement);
     this.allLandmarkElements.push(le);
+
+    if (!Array.isArray(this.landmarkElementsByDoc[documentIndex])) {
+      this.landmarkElementsByDoc[documentIndex] = [];
+    }
+    this.landmarkElementsByDoc[documentIndex].push(le);
 
     if (parentLandmarkElement) {
       parentLandmarkElement.addChildLandmark(le);
@@ -9372,20 +9381,23 @@ class StructureInfo {
    * @desc Checks to see if the domElement is a heading or landmark and if so adds the
    *       domElement to the StrutureInfo object and current LandmarkElement
    *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   * @param  {Object}  parentLandmarkElement  - Parent LandmarkElement (note: can be null)
+   * @param  {Object}  domElement             - DOMElement object representing an element in the DOM
+   * @param  {Integer} documentIndex          - index for identifying the current document (e.g. iframe
+   *                                            or custom element dom)
    *
    * @return  {Object}  LandmarkElement - Landmarklement object for use as the parent landmark
    *                                      element for descendant domElements
    */
 
-  update (parentLandmarkElement, domElement) {
+  update (parentLandmarkElement, domElement, documentIndex) {
     let landmarkElement = parentLandmarkElement;
     if (this.isHeading(domElement)) {
       this.addChildHeading(domElement, parentLandmarkElement);
     }
 
     if (this.isLandmark(domElement)) {
-      landmarkElement = this.addChildLandmark(domElement, parentLandmarkElement);
+      landmarkElement = this.addChildLandmark(domElement, parentLandmarkElement, documentIndex);
     }
     return landmarkElement;
   }
@@ -9406,6 +9418,15 @@ class StructureInfo {
       this.allLandmarkElements.forEach( le => {
         debug$e.domElement(le.domElement);
       });
+      debug$e.log('== Landmarks By Doc ==', 1);
+      this.landmarkElementsByDoc.forEach( (les, index) => {
+        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        if (Array.isArray(les)) {
+          les.forEach(le => {
+            debug$e.domElement(le.domElement);
+          });
+        }
+      });
       debug$e.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
         debug$e.domElement(le.domElement);
@@ -9418,7 +9439,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', true);
+const debug$d = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -9445,6 +9466,7 @@ const skipableElements = [
 class ParentInfo {
   constructor (info) {
     this.document        = null;
+    this.documentIndex   = 0;
     this.domElement      = null;
     this.landmarkElement = null;
     this.listElement     = null;
@@ -9452,6 +9474,7 @@ class ParentInfo {
 
     if (info) {
       this.document        = info.document;
+      this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
@@ -9480,6 +9503,7 @@ class DOMCache {
     }
 
     this.ordinalPosition = 2;
+    this.documentIndex = 0;
 
     this.allDomElements = [];
     this.allDomTexts    = [];
@@ -9514,7 +9538,6 @@ class DOMCache {
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
     const elemSelector = (typeof type !== 'string') ? tagName : `${tagName}[type=${type}]`;
-    debug$d.log(`[elemSelector]: ${elemSelector} (${skipableElements.includes(elemSelector)})`);
     return skipableElements.includes(elemSelector);
   }
 
@@ -9524,8 +9547,8 @@ class DOMCache {
   }
 
   // Tests if a node is a iframe element
-  isIFrameElement(node) {
-    return (node instanceof HTMLIFrameElement);
+  isIFrameElement(tagName) {
+    return tagName === 'iframe';
   }
 
   // Tests if a node is a slot element
@@ -9550,7 +9573,6 @@ class DOMCache {
   transverseDOM(parentInfo, startingNode) {
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
-
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
 
       switch (node.nodeType) {
@@ -9601,14 +9623,18 @@ class DOMCache {
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
                   newParentInfo.document = node.shadowRoot;
+                  this.documentIndex += 1;
+                  newParentInfo.documentIndex = this.documentIndex;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
                 }
               } else {
-                // Check for iframe or frame tag
-                if (this.isIFrameElement(node)) {
-                  if (node.contentWindow.document) {
+                // Check for iframe tag
+                if (this.isIFrameElement(tagName)) {
+                  if (node.contentDocument) {
                     newParentInfo.document = node.contentWindow.document;
-                    this.transverseDOM(newParentInfo, node.contentWindow.document);
+                    this.documentIndex += 1;
+                    newParentInfo.documentIndex = this.documentIndex;
+                    this.transverseDOM(newParentInfo, node.contentDocument);
                   }
                 } else {
                   this.transverseDOM(newParentInfo, node);
@@ -9637,12 +9663,13 @@ class DOMCache {
 
   updateDOMElementInformation (parentInfo, domElement) {
     const landmarkElement = parentInfo.landmarkElement;
-    const listElement = parentInfo.listElement;
+    const listElement     = parentInfo.listElement;
+    const documentIndex   = parentInfo.documentIndex;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
 
-    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement);
+    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
 
     return newParentInfo;
@@ -10232,7 +10259,7 @@ const colorRules$1 = [
 /* landmarkRules.js */
 
 /* Constants */
-new DebugLogging('Landmark Rules', false);
+new DebugLogging('Landmark Rules', true);
 
 /* Helper Functions for Landmarks */
 
@@ -10309,16 +10336,16 @@ function validateTopLevelLandmark(dom_cache, rule_result, role) {
  * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
  * @param  {RuleResult}  rule_result  - RuleResult object
  * @param  {String}      role         - Landmark role
- * @oaram  {Boolean}     required     - Is the landamrk region role required
+ * @oaram  {Boolean}     roleRequired - Is the landamrk region role required
  */
 
-function validateAtLeastOne(dom_cache, rule_result, role, required) {
+function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
   const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
   let roleCount = 0;
 
   allLandmarkElements.forEach( le => {
     const de = le.domElement;
-    if (de.role === 'main') {
+    if (de.role === role) {
       if (de.visibility.isVisibleToAT) {
         if (de.hasRole) {
           rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
@@ -10339,7 +10366,7 @@ function validateAtLeastOne(dom_cache, rule_result, role, required) {
   });
 
   if (roleCount === 0) {
-    if (required) {
+    if (roleRequired) {
       rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
     }
     else {
@@ -10367,48 +10394,57 @@ function validateAtLeastOne(dom_cache, rule_result, role, required) {
 
 function validateNoMoreThanOne(dom_cache, rule_result, role) {
 
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
-  let visibleDomElements = [];
+  const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
+  let totalRoleCount = 0;
+  let anyMoreThanOne = false;
 
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        visibleDomElements.push(de);
-        roleCount += 1;
-      }
-      else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+  landmarkElementsByDoc.forEach( les => {
+    let visibleDomElements = [];
+    if (Array.isArray(les)) {
+      les.forEach( le => {
+        const de = le.domElement;
+        if (de.role === role) {
+          if (de.visibility.isVisibleToAT) {
+            visibleDomElements.push(de);
+            totalRoleCount += 1;
+          }
+          else {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+            }
+          }
         }
-      }
+      });
+
+      visibleDomElements.forEach( de => {
+        if (visibleDomElements.length === 1) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+          }
+        } else {
+          anyMoreThanOne = true;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+          }
+        }
+      });
     }
   });
 
-  if (roleCount > 0) {
-    if (roleCount === 1) {
+  if (totalRoleCount > 0) {
+    if (anyMoreThanOne) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
+    }
+    else {
       rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
-      visibleDomElements.forEach( de => {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-        }
-      });
-    } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_FAIL_1', [roleCount]);
-      visibleDomElements.forEach( de => {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_1', [de.tagName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_FAIL_2', []);
-        }
-      });
     }
   }
 }
@@ -10437,15 +10473,21 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
     landmarkElement.descendantLandmarkElements.forEach( le => {
       const de   = le.domElement;
       const role = de.role;
-      if (allowedLandmarkRoles.includes(role)) {
-        rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
-        result.passedCount += 1;
-        result.passedRoles.push(role);
+
+      if (de.visibility.isVisibleToAT) {
+        if (allowedLandmarkRoles.includes(role)) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
+          result.passedCount += 1;
+          result.passedRoles.push(role);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role]);
+          result.failedCount += 1;
+          result.failedRoles.push(role);
+        }
       }
       else {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
-        result.failedCount += 1;
-        result.failedRoles.push(role);
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName, role]);
       }
     });
 
@@ -10462,11 +10504,7 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
         visibleLandmarkElements.push(le);
       }
       else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-        }
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
       }
     }
   });
@@ -10478,10 +10516,10 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
     const passedRoles = result.passedRoles.join(', ');
 
     if (result.failedCount === 1) {
-      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [failedRoles]);
+      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [failedRoles]);
     } else {
       if (result.failedCount > 1) {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [result.failedCount, failedRoles]);
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [result.failedCount, failedRoles]);
       }
       else {
         if (result.passedCount === 0) {
@@ -10513,7 +10551,6 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
 function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 
   const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
   let visibleDomElements = [];
 
   allLandmarkElements.forEach( le => {
@@ -10521,7 +10558,6 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
     if (de.role === role) {
       if (de.visibility.isVisibleToAT) {
         visibleDomElements.push(de);
-        roleCount += 1;
       }
       else {
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
@@ -10529,12 +10565,12 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
     }
   });
 
-  if (roleCount > 1) {
+  if (visibleDomElements.length > 1) {
     visibleDomElements.forEach( (de1, index1) => {
       let duplicate = false;
       visibleDomElements.forEach( (de2, index2) => {
         if ((index1 !== index2) &&
-            accNamesTheSame(de1.accName, de2.accName)) {
+            (accNamesTheSame(de1.accName, de2.accName))) {
           duplicate = true;
         }
       });
@@ -10591,12 +10627,12 @@ const landmarkRules$1 = [
     target_resources    : ['Page', 'all'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
-        if (!de.ariaValidation.isLandmark &&
-             de.tagName !== 'body' &&
-            (de.hasContent || de.mayHaveContent)) {
+        const parentLandmark = de.parentInfo.landmarkElement;
+        const isLandmark = de.ariaValidation.isLandmark;
+        if ((de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
-            if (de.parentInfo.landmarkElement) {
-              const role = de.parentInfo.landmarkElement.domElement.role;
+            if ( isLandmark || parentLandmark ) {
+              const role = isLandmark ? de.role : parentLandmark.domElement.role;
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, role]);
             }
             else {
@@ -10662,7 +10698,7 @@ const landmarkRules$1 = [
         allListElements.forEach ( le => {
           const de = le.domElement;
           if (le.linkCount > MINIMUM_LINKS) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, one_link_count]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, le.linkCount]);
             listWithLinksCount += 1;
           }
         });
@@ -10810,6 +10846,7 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['nav', '[role="naviation"]'],
@@ -10828,6 +10865,7 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['main', '[role="main"]'],
@@ -10846,6 +10884,7 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['footer', '[role="contentinfo"]'],
@@ -10864,6 +10903,7 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['header', '[role="banner"]'],
@@ -10882,6 +10922,7 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['[role="search"]'],
@@ -10900,6 +10941,7 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['[role="form"]'],
@@ -10918,29 +10960,19 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['[role="region"]'],
     validate            : function (dom_cache, rule_result) {
-      const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-
-      allLandmarkElements.forEach( le => {
-        const de = le.domElement;
+      dom_cache.allDomElements.forEach( de => {
         if (de.hasRole && de.role === 'region') {
           if (de.visibility.isVisibleToAT) {
-            if ((de.accName)) {
-              if (de.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ de.tagName]);
-              } else {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-              }
+            if (de.accName.name.length) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
             }
             else {
-              if (de.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
-              } else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-              }
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
             }
           }
           else {
@@ -10962,11 +10994,12 @@ const landmarkRules$1 = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
     target_resources    : ['main', 'nav', 'header', 'footer', 'section', 'aside', '[role="application"]','[role="banner"]', '[role="complementary"]','[role="contentinfo"]','[role="form"]','[role="main"]','[role="navigation"]','[role="region"]','[role="search"]'],
     validate            : function (dom_cache, rule_result) {
-      const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'navigation', 'region', 'search'];
+      const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
       landmarkRoles.forEach( role => {
         validateUniqueAccessibleNames(dom_cache, rule_result, role);
       });
@@ -12782,7 +12815,7 @@ const landmarkRules = {
         WEBSITE_FAIL_1: 'Add at least one @navigation@ landmark to the page to identify the links used for website or page content navigation.',
         ELEMENT_PASS_1:   '@%1[role="navigation"]@ defines a @navigation@ landmark.',
         ELEMENT_PASS_2:   '@nav@ element defines a @navigation@ landmark.',
-        ELEMENT_FAIL_1:   '@%1@ list element has %2 links and not in any landmark.',
+        ELEMENT_FAIL_1:   '@%1@ list element has %2 links and they are not in a @navigation@ landmark.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="navigation"@ was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -12867,7 +12900,7 @@ const landmarkRules = {
       TECHNIQUES: [
         'The @header@ element defines a @banner@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@ or @section@.',
         'If the @header@ element technique is not being used, a @role="banner"@ attribute on the container element for the branding content can be used to define a @banner@ landmark.',
-        'In websites that support mashups using @iframe@ or @frame@ elements, a @banner@ landmark is allowed in each frame.',
+        'In websites that support mashups using @iframe@ or custom web components, a @banner@ landmark is allowed in each iframe or shadowRoot.',
         'If the page is part of a website supporting mashups, use the @aria-labelledby@ or @aria-label@ attribute to differentiate @banner@ landmarks in each frame.'
       ],
      MANUAL_CHECKS: [
@@ -13633,7 +13666,7 @@ const landmarkRules = {
         ELEMENT_PASS_3:   '@form@ landmark contains one @region@ landmark.',
         ELEMENT_PASS_4:   '@form@ landmark contains %1 @region@ landmarks.',
         ELEMENT_FAIL_1:   'Update the landmark structure on the page such that the @%1@ landmark is not contained by the @form@ landmark. Depending on the content in this landmark, consider moving it outside the @form@ landmark.',
-        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @form@ landmark contains only @region@ landmarks.',
+        ELEMENT_FAIL_2:   'Update the landmark structure on the page such that the @form@ landmarks contains only @region@ landmarks, the following %1 landamrks were found: %2.',
         ELEMENT_HIDDEN_1: '@%1@ element with @role="form"@ was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@form@ element was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_3: '@%1@ element with @role="%2"@ was not evaluated because it is hidden from assistive technologies.'
@@ -13701,11 +13734,8 @@ const landmarkRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1[role="region"]@ element has an accessible name and is considered an ARIA landmark.',
-        ELEMENT_PASS_2:   '@section@ element has an accessible name.',
         ELEMENT_MC_1:     'Determine if the @%1[role="region"]@ element should be an ARIA landmark, and if so, add an accessible name.',
-        ELEMENT_MC_2:     'Determine if the @section@ element should be an ARIA landmark, and if so, add an accessible name.',
         ELEMENT_HIDDEN_1: '@%1[role="region"]@ element was not evaluated because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: '@section@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'The @region@ landmark is used to identify subsections of @banner@, @complementary@, @contentinfo@, @main@, @navigation@ and @search@ landmarks.',

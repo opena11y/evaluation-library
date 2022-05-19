@@ -8,7 +8,7 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', true);
+const debug = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -35,6 +35,7 @@ const skipableElements = [
 class ParentInfo {
   constructor (info) {
     this.document        = null;
+    this.documentIndex   = 0;
     this.domElement      = null;
     this.landmarkElement = null;
     this.listElement     = null;
@@ -42,6 +43,7 @@ class ParentInfo {
 
     if (info) {
       this.document        = info.document;
+      this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
@@ -70,6 +72,7 @@ export default class DOMCache {
     }
 
     this.ordinalPosition = 2;
+    this.documentIndex = 0;
 
     this.allDomElements = [];
     this.allDomTexts    = [];
@@ -104,7 +107,6 @@ export default class DOMCache {
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
     const elemSelector = (typeof type !== 'string') ? tagName : `${tagName}[type=${type}]`;
-    debug.log(`[elemSelector]: ${elemSelector} (${skipableElements.includes(elemSelector)})`);
     return skipableElements.includes(elemSelector);
   }
 
@@ -114,8 +116,8 @@ export default class DOMCache {
   }
 
   // Tests if a node is a iframe element
-  isIFrameElement(node) {
-    return (node instanceof HTMLIFrameElement);
+  isIFrameElement(tagName) {
+    return tagName === 'iframe';
   }
 
   // Tests if a node is a slot element
@@ -140,7 +142,6 @@ export default class DOMCache {
   transverseDOM(parentInfo, startingNode) {
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
-
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
 
       switch (node.nodeType) {
@@ -191,14 +192,18 @@ export default class DOMCache {
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
                   newParentInfo.document = node.shadowRoot;
+                  this.documentIndex += 1;
+                  newParentInfo.documentIndex = this.documentIndex;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
                 }
               } else {
-                // Check for iframe or frame tag
-                if (this.isIFrameElement(node)) {
-                  if (node.contentWindow.document) {
+                // Check for iframe tag
+                if (this.isIFrameElement(tagName)) {
+                  if (node.contentDocument) {
                     newParentInfo.document = node.contentWindow.document;
-                    this.transverseDOM(newParentInfo, node.contentWindow.document);
+                    this.documentIndex += 1;
+                    newParentInfo.documentIndex = this.documentIndex;
+                    this.transverseDOM(newParentInfo, node.contentDocument);
                   }
                 } else {
                   this.transverseDOM(newParentInfo, node);
@@ -230,12 +235,13 @@ export default class DOMCache {
 
   updateDOMElementInformation (parentInfo, domElement) {
     const landmarkElement = parentInfo.landmarkElement;
-    const listElement = parentInfo.listElement;
+    const listElement     = parentInfo.listElement;
+    const documentIndex   = parentInfo.documentIndex;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
 
-    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement);
+    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
 
     return newParentInfo;

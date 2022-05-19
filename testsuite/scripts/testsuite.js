@@ -36,27 +36,27 @@ function getCount(iframe, class_name) {
  
 export default function executeTest(label, IFRAME_ID, RULE_ID) {
 
-  const iframe = document.getElementById(IFRAME_ID);
-  
-  const win    = iframe.contentWindow;
-  const doc    = iframe.contentDocument;
-  const title  = doc.title;
-  const url    = win.location.href;
-
-
-  const evaluationResult = evaluator.evaluate(doc, title, url);
-  const resultSummary = evaluationResult.getRuleResult(RULE_ID).getResultsSummary();
-
-  const f  = getCount(iframe, RULE_ID + '_FAIL');
-  const p  = getCount(iframe, RULE_ID + '_PASS');
-  const mc = getCount(iframe, RULE_ID + '_MC');
-  const h  = getCount(iframe, RULE_ID + '_HIDDEN');
-
-  function getFailures(ers) {
-    return ers.violations + ers.warnings;
-  }
-
   QUnit.module(label, function() {
+
+    const iframe = document.getElementById(IFRAME_ID);
+
+    const win    = iframe.contentWindow;
+    const doc    = iframe.contentDocument;
+    const title  = doc.title;
+    const url    = win.location.href;
+
+    const evaluationResult = evaluator.evaluate(doc, title, url);
+    const resultSummary = evaluationResult.getRuleResult(RULE_ID).getResultsSummary();
+
+    const f  = getCount(iframe, RULE_ID + '_FAIL');
+    const p  = getCount(iframe, RULE_ID + '_PASS');
+    const mc = getCount(iframe, RULE_ID + '_MC');
+    const h  = getCount(iframe, RULE_ID + '_HIDDEN');
+
+    function getFailures(ers) {
+      return ers.violations + ers.warnings;
+    }
+
     QUnit.test(`We expect failures to be ${f}`, function(assert) {
       assert.equal(getFailures(resultSummary), f);
     });

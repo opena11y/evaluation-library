@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('structureInfo', true);
+const debug = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -46,12 +46,10 @@ class LandmarkElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug.log(`${prefix}[Landmarks Count]: ${this.childLandmarkElements.length}`);
     this.childLandmarkElements.forEach( le => {
       debug.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
-    debug.log(`${prefix}[Headings Count]: ${this.childHeadingDomElements.length}`);
     this.childHeadingDomElements.forEach( h => {
       debug.domElement(h, prefix);
     });
@@ -76,6 +74,7 @@ export default class StructureInfo {
     this.allLandmarkElements = [];
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
+    this.landmarkElementsByDoc = [];
   }
 
   /**
@@ -84,14 +83,21 @@ export default class StructureInfo {
    * @desc Creates a new LandmarkElement and to the array of
    *       LandmarkElements
    *
-   * @param  {Object}  domElement       - New LandmarkElement object being added to StrutureInfo
-   * @param  {Object}  parentLandmarkElement - LandmarkElement object representing that parent
-   *                                           LandmarkElement
+   * @param  {Object}  domElement             - New LandmarkElement object being added to StrutureInfo
+   * @param  {Object}  parentLandmarkElement  - LandmarkElement object identifying the parent
+   *                                            LandmarkElement
+   * @param  {Integer} documentIndex          - index for identifying the current document (e.g. iframe
+   *                                             or custom element dom)
    */
 
-  addChildLandmark (domElement, parentLandmarkElement) {
+  addChildLandmark (domElement, parentLandmarkElement, documentIndex) {
     const le = new LandmarkElement(domElement, parentLandmarkElement);
     this.allLandmarkElements.push(le);
+
+    if (!Array.isArray(this.landmarkElementsByDoc[documentIndex])) {
+      this.landmarkElementsByDoc[documentIndex] = [];
+    }
+    this.landmarkElementsByDoc[documentIndex].push(le);
 
     if (parentLandmarkElement) {
       parentLandmarkElement.addChildLandmark(le)
@@ -162,20 +168,23 @@ export default class StructureInfo {
    * @desc Checks to see if the domElement is a heading or landmark and if so adds the
    *       domElement to the StrutureInfo object and current LandmarkElement
    *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   * @param  {Object}  parentLandmarkElement  - Parent LandmarkElement (note: can be null)
+   * @param  {Object}  domElement             - DOMElement object representing an element in the DOM
+   * @param  {Integer} documentIndex          - index for identifying the current document (e.g. iframe
+   *                                            or custom element dom)
    *
    * @return  {Object}  LandmarkElement - Landmarklement object for use as the parent landmark
    *                                      element for descendant domElements
    */
 
-  update (parentLandmarkElement, domElement) {
+  update (parentLandmarkElement, domElement, documentIndex) {
     let landmarkElement = parentLandmarkElement;
     if (this.isHeading(domElement)) {
       this.addChildHeading(domElement, parentLandmarkElement);
     }
 
     if (this.isLandmark(domElement)) {
-      landmarkElement = this.addChildLandmark(domElement, parentLandmarkElement);
+      landmarkElement = this.addChildLandmark(domElement, parentLandmarkElement, documentIndex);
     }
     return landmarkElement;
   }
@@ -195,6 +204,15 @@ export default class StructureInfo {
       debug.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
         debug.domElement(le.domElement);
+      });
+      debug.log('== Landmarks By Doc ==', 1);
+      this.landmarkElementsByDoc.forEach( (les, index) => {
+        debug.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        if (Array.isArray(les)) {
+          les.forEach(le => {
+            debug.domElement(le.domElement);
+          });
+        }
       });
       debug.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
