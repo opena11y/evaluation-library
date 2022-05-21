@@ -11,7 +11,7 @@ import {accNamesTheSame} from '../utils.js';
 import DebugLogging      from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Heading Rules', true);
+const debug = new DebugLogging('Heading Rules', false);
 
 /*
  * OpenA11y Rules
@@ -358,11 +358,9 @@ export const headingRules = [
           const ariaLevel = de.ariaValidation.ariaLevel;
           if (ariaLevel === 2) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
-            debug.log(`[${role}][${de}]: PASSED`);
           }
           else {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role, ariaLevel]);
-            debug.log(`[${role}][${de}]: FAILED`);
           }
         }
       }

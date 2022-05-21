@@ -144,7 +144,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$l = new DebugLogging('colorContrast', false);
+const debug$k = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -164,9 +164,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$l.flag) {
-      debug$l.separator();
-      debug$l.tag(elementNode);
+    if (debug$k.flag) {
+      debug$k.separator();
+      debug$k.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -190,11 +190,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$l.flag) {
-      debug$l.log(`[                    opacity]: ${this.opacity}`);
-      debug$l.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$l.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$l.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$k.flag) {
+      debug$k.log(`[                    opacity]: ${this.opacity}`);
+      debug$k.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$k.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$k.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -516,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$k = new DebugLogging('visibility', false);
+const debug$j = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -564,17 +564,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$k.flag) {
-      debug$k.separator();
-      debug$k.tag(elementNode);
-      debug$k.log('[          isHidden]: ' + this.isHidden);
-      debug$k.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$k.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$k.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$k.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$k.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$k.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$k.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$j.flag) {
+      debug$j.separator();
+      debug$j.tag(elementNode);
+      debug$j.log('[          isHidden]: ' + this.isHidden);
+      debug$j.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$j.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$j.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$j.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$j.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$j.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5673,7 +5673,7 @@ function accNamesTheSame (accName1, accName2) {
 /* ariaValidation.js */
 
 /* Constants */
-const debug$j = new DebugLogging('AriaValidation', false);
+const debug$i = new DebugLogging('AriaValidation', false);
 
 /* Debug helper functions */
 
@@ -5820,16 +5820,16 @@ class AriaValidation {
         break;
     }
 
-    if (debug$j.flag) {
-      node.attributes.length && debug$j.log(`${node.outerHTML}`, 1);
-      debug$j.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$j.log(`[         isWidget]: ${this.isWidget}`);
-      debug$j.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$j.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$j.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$j.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$j.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$j.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$i.flag) {
+      node.attributes.length && debug$i.log(`${node.outerHTML}`, 1);
+      debug$i.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$i.log(`[         isWidget]: ${this.isWidget}`);
+      debug$i.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$i.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$i.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$i.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$i.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$i.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7507,7 +7507,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$i = new DebugLogging('ariaInHtml', false);
+const debug$h = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7669,11 +7669,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$i.flag) {
+  if (debug$h.flag) {
     if (tagName === 'h2') {
-      debug$i.tag(node);
+      debug$h.tag(node);
     }
-    debug$i.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$h.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8768,7 +8768,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$h = new DebugLogging('DOMElement', false);
+const debug$g = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -9026,12 +9026,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$h.flag) {
+    if (debug$g.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$h.domText(domItem, prefix);
+          debug$g.domText(domItem, prefix);
         } else {
-          debug$h.domElement(domItem, prefix);
+          debug$g.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9110,7 +9110,7 @@ class DOMText {
 /* listInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('ListInfo', false);
+const debug$f = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -9131,8 +9131,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$g.flag) {
-      debug$g.log('');
+    if (debug$f.flag) {
+      debug$f.log('');
     }
   }
 
@@ -9157,9 +9157,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$g.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9266,16 +9266,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All ListElements ==', 1);
-      debug$g.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$f.flag) {
+      debug$f.log('== All ListElements ==', 1);
+      debug$f.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$g.log('== List Tree ==', 1);
-      debug$g.log(`[linkCount]: ${this.linkCount}`);
+      debug$f.log('== List Tree ==', 1);
+      debug$f.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9285,7 +9285,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('structureInfo', false);
+const debug$e = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9328,11 +9328,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$e.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$f.domElement(h, prefix);
+      debug$e.domElement(h, prefix);
     });
   }
 
@@ -9493,27 +9493,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All Headings ==', 1);
+    if (debug$e.flag) {
+      debug$e.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$f.domElement(h);
+        debug$e.domElement(h);
       });
-      debug$f.log('== All Landmarks ==', 1);
+      debug$e.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$e.domElement(le.domElement);
       });
-      debug$f.log('== Landmarks By Doc ==', 1);
+      debug$e.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$f.domElement(le.domElement);
+            debug$e.domElement(le.domElement);
           });
         }
       });
-      debug$f.log('== Structure Tree ==', 1);
+      debug$e.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$e.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9523,7 +9523,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$e = new DebugLogging('domCache', false);
+const debug$d = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -9612,7 +9612,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$e.flag) {
+    if (debug$d.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
       this.listInfo.showListInfo();
@@ -9766,18 +9766,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$e.log(' === AllDomElements ===', true);
+    debug$d.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$e.domElement(de);
+      debug$d.domElement(de);
     });
 
-    debug$e.log(' === AllDomTexts ===', true);
+    debug$d.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$e.domText(dt);
+      debug$d.domText(dt);
     });
 
-    debug$e.log(' === DOMCache Tree ===', true);
-    debug$e.domElement(this.startingDomElement);
+    debug$d.log(' === DOMCache Tree ===', true);
+    debug$d.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -9785,7 +9785,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$d = new DebugLogging('constants', false);
+const debug$c = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -10186,13 +10186,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$d.flag && debug$d.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$d.flag && debug$d.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -10343,7 +10343,7 @@ const colorRules$1 = [
 /* headingRules.js */
 
 /* Constants */
-const debug$c = new DebugLogging('Heading Rules', true);
+new DebugLogging('Heading Rules', false);
 
 /*
  * OpenA11y Rules
@@ -10685,11 +10685,9 @@ const headingRules$1 = [
           const ariaLevel = de.ariaValidation.ariaLevel;
           if (ariaLevel === 2) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
-            debug$c.log(`[${role}][${de}]: PASSED`);
           }
           else {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role, ariaLevel]);
-            debug$c.log(`[${role}][${de}]: FAILED`);
           }
         }
       }
@@ -16958,7 +16956,7 @@ class EvaluationResult {
     debug$1.flag && debug$1.log(`[JSON]: ${json}`);
 
     const endTime = new Date();
-    debug$1.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+    debug$1.flag && debug$1.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
 
   }

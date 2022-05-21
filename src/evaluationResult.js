@@ -43,7 +43,7 @@ export default class EvaluationResult {
     debug.flag && debug.log(`[JSON]: ${json}`);
 
     const endTime = new Date();
-    debug.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+    debug.flag && debug.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
 
   }
