@@ -119,7 +119,7 @@ export default class DebugLogging {
         this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
       }
       this.log(`${prefix}[${domElement.tagName}][parentLandmark]: ${parentLandmark}]`);
-      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaValidation.isLandmark}]`);
+      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaInfo.isLandmark}]`);
       this.log(`${prefix}[${domElement.tagName}][    hasContent]: ${domElement.hasContent}]`);
       this.log(`${prefix}[${domElement.tagName}][mayHaveContent]: ${domElement.mayHaveContent}]`);
     }

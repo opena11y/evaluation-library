@@ -3,12 +3,14 @@
 /* Imports */
 import DOMElement    from './domElement.js';
 import DOMText       from './domText.js';
+import ImageInfo     from './imageInfo.js';
+import LinkInfo      from './linkInfo.js';
 import ListInfo      from './listInfo.js';
 import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', false);
+const debug = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -34,20 +36,22 @@ const skipableElements = [
 
 class ParentInfo {
   constructor (info) {
+    this.controlElement  = null;
     this.document        = null;
     this.documentIndex   = 0;
     this.domElement      = null;
     this.landmarkElement = null;
     this.listElement     = null;
-    this.controlElement  = null;
+    this.mapElement      = null;
 
     if (info) {
+      this.controlElement  = info.controlElement;
       this.document        = info.document;
       this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
-      this.controlElement  = info.controlElement;
+      this.mapElement      = info.mapElement;
     }
   }
 }
@@ -81,7 +85,9 @@ export default class DOMCache {
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
+    this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
+    this.imageInfo      = new ImageInfo();
 
   	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
@@ -100,7 +106,9 @@ export default class DOMCache {
     if (debug.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
+      this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
+      this.imageInfo.showImageInfo();
     }
   }
 
@@ -234,15 +242,18 @@ export default class DOMCache {
    */
 
   updateDOMElementInformation (parentInfo, domElement) {
+    const documentIndex   = parentInfo.documentIndex;
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
-    const documentIndex   = parentInfo.documentIndex;
+    const mapElement     = parentInfo.mapElement;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
-
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
+    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
+
+    this.linkInfo.update(domElement);
 
     return newParentInfo;
   }

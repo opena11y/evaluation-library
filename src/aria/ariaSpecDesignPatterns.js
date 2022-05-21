@@ -1,4 +1,4 @@
-/* designPatterns.js is a generated file, use "npm run aria" */
+/* ariaSpecDesignPatterns.js is a generated file, use "npm run aria" */
 export const designPatterns = {
   alert: {
     inheritedProps: [

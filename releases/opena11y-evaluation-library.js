@@ -119,7 +119,7 @@ class DebugLogging {
         this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
       }
       this.log(`${prefix}[${domElement.tagName}][parentLandmark]: ${parentLandmark}]`);
-      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaValidation.isLandmark}]`);
+      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaInfo.isLandmark}]`);
       this.log(`${prefix}[${domElement.tagName}][    hasContent]: ${domElement.hasContent}]`);
       this.log(`${prefix}[${domElement.tagName}][mayHaveContent]: ${domElement.mayHaveContent}]`);
     }
@@ -144,7 +144,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$k = new DebugLogging('colorContrast', false);
+const debug$m = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -164,9 +164,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$k.flag) {
-      debug$k.separator();
-      debug$k.tag(elementNode);
+    if (debug$m.flag) {
+      debug$m.separator();
+      debug$m.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -190,11 +190,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$k.flag) {
-      debug$k.log(`[                    opacity]: ${this.opacity}`);
-      debug$k.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$k.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$k.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$m.flag) {
+      debug$m.log(`[                    opacity]: ${this.opacity}`);
+      debug$m.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$m.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$m.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -516,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$j = new DebugLogging('visibility', false);
+const debug$l = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -564,17 +564,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$j.flag) {
-      debug$j.separator();
-      debug$j.tag(elementNode);
-      debug$j.log('[          isHidden]: ' + this.isHidden);
-      debug$j.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$j.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$j.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$j.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$j.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$j.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$l.flag) {
+      debug$l.separator();
+      debug$l.tag(elementNode);
+      debug$l.log('[          isHidden]: ' + this.isHidden);
+      debug$l.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$l.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$l.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$l.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$l.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$l.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$l.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -719,7 +719,7 @@ class Visibility {
   }
 }
 
-/* propertyDataTypes.js is a generated file, use "npm run aria" */
+/* ariaSpecPropertyDataTypes.js is a generated file, use "npm run aria" */
 const propertyDataTypes = {
   'aria-activedescendant': {
     propType: 'property',
@@ -1218,7 +1218,7 @@ const propertyDataTypes = {
   }
 };
 
-/* designPatterns.js is a generated file, use "npm run aria" */
+/* ariaSpecDesignPatterns.js is a generated file, use "npm run aria" */
 const designPatterns = {
   alert: {
     inheritedProps: [
@@ -5670,10 +5670,10 @@ function accNamesTheSame (accName1, accName2) {
   return accName1.name.toLowerCase() === accName2.name.toLowerCase();
 }
 
-/* ariaValidation.js */
+/* ariaInfo.js */
 
 /* Constants */
-const debug$i = new DebugLogging('AriaValidation', false);
+const debug$k = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -5739,15 +5739,15 @@ class RefInfo {
 }
 
 /**
- * @class AriaValidation
+ * @class AriaInfo
  *
- * @desc Validates aria information for a dom node
+ * @desc Aria information for a dom node
  *
  * @param  {String}  role  - ARIA role for the element
  * @param  {Object}  node  - dom element node
  */
 
-class AriaValidation {
+class AriaInfo {
   constructor (doc, role, defaultRole, node) {
     const tagName = node.tagName.toLowerCase();
 
@@ -5820,16 +5820,16 @@ class AriaValidation {
         break;
     }
 
-    if (debug$i.flag) {
-      node.attributes.length && debug$i.log(`${node.outerHTML}`, 1);
-      debug$i.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$i.log(`[         isWidget]: ${this.isWidget}`);
-      debug$i.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$i.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$i.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$i.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$i.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$i.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$k.flag) {
+      node.attributes.length && debug$k.log(`${node.outerHTML}`, 1);
+      debug$k.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$k.log(`[         isWidget]: ${this.isWidget}`);
+      debug$k.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$k.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$k.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$k.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$k.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$k.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7507,7 +7507,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$h = new DebugLogging('ariaInHtml', false);
+const debug$j = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7669,11 +7669,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$h.flag) {
+  if (debug$j.flag) {
     if (tagName === 'h2') {
-      debug$h.tag(node);
+      debug$j.tag(node);
     }
-    debug$h.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$j.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8768,7 +8768,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$g = new DebugLogging('DOMElement', false);
+const debug$i = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -8819,7 +8819,7 @@ class DOMElement {
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo   = new AriaInfo(doc, this.role, defaultRole, elementNode);
 
     this.accName           = getAccessibleName(doc, elementNode);
     this.accDescription    = getAccessibleDesc(doc, elementNode);
@@ -9026,12 +9026,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$g.flag) {
+    if (debug$i.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$g.domText(domItem, prefix);
+          debug$i.domText(domItem, prefix);
         } else {
-          debug$g.domElement(domItem, prefix);
+          debug$i.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9103,6 +9103,263 @@ class DOMText {
     const s = text.trim();
     if (s) {
       this.text += ' ' + s;
+    }
+  }
+}
+
+/* imageInfo.js */
+
+/* Constants */
+const debug$h = new DebugLogging('imageInfo', true);
+
+/**
+ * @class ImageElement
+ *
+ * @desc Idenifies a DOM element as a image or graphical object
+ *
+ * @param  {Object}  domElement   - Structural Information
+ */
+
+class ImageElement {
+  constructor (domElement) {
+    this.domElement = domElement;
+  }
+
+  toString () {
+    return this.domElement.role;
+  }
+}
+/**
+ * @class MapElement
+ *
+ * @desc Idenifies a DOM element as an image map
+ *
+ * @param  {Object}  domElement   - Structural Information
+ */
+
+class MapElement {
+  constructor (domElement) {
+    this.domElement = domElement;
+    this.areaDomElements = [];
+  }
+
+  addAreaDomElement (domElement) {
+    this.areaDomElements.push(domElement);
+  }
+
+  toString () {
+    return this.domElement.role;
+  }
+}
+
+/**
+ * @class ImageInfo
+ *
+ * @desc Collects information on the landmarks or headings on a web page for use in
+ *       rules
+ */
+
+class ImageInfo$1 {
+  constructor () {
+    this.allImageElements  = [];
+    this.allMapElements    = [];
+    this.allSVGDomElements = [];
+  }
+
+  /**
+   * @method addImageElement
+   *
+   * @desc Creates a new IamgeElement and to the array of
+   *       ImageElements
+   *
+   * @param  {Object}  domElement -
+   *
+   */
+
+  addImageElement (domElement) {
+    const ie = new ImageElement(domElement);
+    this.allImageElements.push(ie);
+    return ie;
+  }
+
+  /**
+   * @method addMapElement
+   *
+   * @desc Creates a new MapElement and to the array of
+   *       MapElements
+   *
+   * @param  {Object}  domElement -
+   *
+   */
+
+  addMapElement (domElement) {
+    const me = new MapElement(domElement);
+    this.allMapElements.push(me);
+    return me;
+  }
+
+  /**
+   * @method isImage
+   *
+   * @desc Tests if a domElement for role of "img"
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isImage (domElement) {
+    return domElement.role === 'img';
+  }
+
+  /**
+   * @method isSVG
+   *
+   * @desc Tests if a domElement is an SVG graphic
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isSVG (domElement) {
+    return domElement.tagName === 'svg';
+  }
+
+  /**
+   * @method isMap
+   *
+   * @desc Tests if a domElement is an map element
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isMap (domElement) {
+    return domElement.tagName === 'map';
+  }
+
+  /**
+   * @method isArea
+   *
+   * @desc Tests if a domElement is an area element
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isArea (domElement) {
+    return domElement.tagName === 'area';
+  }
+
+  /**
+   * @method update
+   *
+   * @desc Checks to see if the domElement has a role of "img" or a graphical tag name
+   *
+   * @param  {Object}  parentMapElement  - current ancestor MapElement object
+   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   *
+   * @return {Object}  Last MapElement object
+   */
+
+  update (parentMapElement, domElement) {
+    let currentMapElement = parentMapElement;
+
+    if (this.isImage(domElement)) {
+      this.addImageElement(domElement);
+    }
+
+   if (this.isSVG(domElement)) {
+      this.allSVGDomElements.push(domElement);
+    }
+
+    if (this.isMap(domElement)) {
+      currentMapElement = this.addMapElement.push(domElement);
+    }
+
+    if (this.isArea(domElement)) {
+      if (parentMapElement) {
+        parentMapElement.addAreaDomElement(domElement);
+      }
+    }
+
+    return currentMapElement;
+  }
+
+  /**
+   * @method showImageInfo
+   *
+   * @desc showImageInfo is used for debugging the ImageInfo, ImageElement and MapElement objects
+   */
+
+  showImageInfo () {
+    if (debug$h.flag) {
+      debug$h.log('== All Images ==', 1);
+      this.allImageElements.forEach( ie => {
+        debug$h.domElement(ie.domElement);
+      });
+      debug$h.log('== All SVG domElements  ==', 1);
+      this.allSVGDomElements.forEach( de => {
+        debug$h.domElement(de);
+      });
+      debug$h.log('== All MapElements ==', 1);
+      this.allMapElements.forEach( me => {
+        debug$h.domElement(me.domElement);
+      });
+    }
+  }
+}
+
+/* linkInfo.js */
+
+/* Constants */
+const debug$g = new DebugLogging('linkInfo', true);
+
+
+/**
+ * @class LinkInfo
+ *
+ * @desc Collects information on the links in a web page
+ */
+
+class ImageInfo {
+  constructor () {
+    this.allLinkDomElements  = [];
+  }
+
+  /**
+   * @method isLink
+   *
+   * @desc Tests if a domElement for role of "link"
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isLink (domElement) {
+    return domElement.role === 'link';
+  }
+
+  /**
+   * @method update
+   *
+   * @desc Checks to see if the domElement has a role of "link"
+   *
+   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   */
+
+  update (domElement) {
+    if (this.isLink(domElement)) {
+      this.allLinkDomElements.push(domElement);
+    }
+  }
+
+  /**
+   * @method showLinkInfo
+   *
+   * @desc showLinkInfo is used for debugging the LinkInfo object
+   */
+
+  showLinkInfo () {
+    if (debug$g.flag) {
+      debug$g.log('== All Links ==', 1);
+      this.allLinkDomElements.forEach( de => {
+        debug$g.domElement(de);
+      });
     }
   }
 }
@@ -9523,7 +9780,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', false);
+const debug$d = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -9549,20 +9806,22 @@ const skipableElements = [
 
 class ParentInfo {
   constructor (info) {
+    this.controlElement  = null;
     this.document        = null;
     this.documentIndex   = 0;
     this.domElement      = null;
     this.landmarkElement = null;
     this.listElement     = null;
-    this.controlElement  = null;
+    this.mapElement      = null;
 
     if (info) {
+      this.controlElement  = info.controlElement;
       this.document        = info.document;
       this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
-      this.controlElement  = info.controlElement;
+      this.mapElement      = info.mapElement;
     }
   }
 }
@@ -9596,7 +9855,9 @@ class DOMCache {
     parentInfo.document = startingDoc;
 
     this.structureInfo = new StructureInfo();
+    this.linkInfo      = new ImageInfo();
     this.listInfo      = new ListInfo();
+    this.imageInfo      = new ImageInfo$1();
 
   	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
@@ -9615,7 +9876,9 @@ class DOMCache {
     if (debug$d.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
+      this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
+      this.imageInfo.showImageInfo();
     }
   }
 
@@ -9746,15 +10009,18 @@ class DOMCache {
    */
 
   updateDOMElementInformation (parentInfo, domElement) {
+    const documentIndex   = parentInfo.documentIndex;
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
-    const documentIndex   = parentInfo.documentIndex;
+    const mapElement     = parentInfo.mapElement;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
-
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
+    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
+
+    this.linkInfo.update(domElement);
 
     return newParentInfo;
   }
@@ -10370,7 +10636,7 @@ const headingRules$1 = [
       let h1Count = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
-        if (de.tagName === 'h1') {
+        if (de.ariaInfo.ariaLevel === 1) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName && de.accName.name.length) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
@@ -10423,7 +10689,7 @@ const headingRules$1 = [
       }
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
-        if (de.tagName === 'h1') {
+        if (de.ariaInfo.ariaLevel === 1) {
           if (de.visibility.isVisibleToAT) {
             if (checkForAnscetorLandmarkRole(de, 'main')) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
@@ -10504,33 +10770,33 @@ const headingRules$1 = [
       const name = de.accName.name.toLowerCase();
 
       // save the name of the last heading of each level
-      switch (de.tagName) {
-        case 'h1':
+      switch (de.ariaInfo.ariaLevel) {
+        case 1:
           updateLastHeadingNamesAtLevel(1, name);
           headingNameForComparison[index] = name;
           break;
 
-        case 'h2':
+        case 2:
           updateLastHeadingNamesAtLevel(2, name);
           headingNameForComparison[index] = getParentHeadingName(1) + name;
           break;
 
-        case 'h3':
+        case 3:
           updateLastHeadingNamesAtLevel(3, name);
           headingNameForComparison[index] = getParentHeadingName(2) + name;
           break;
 
-        case 'h4':
+        case 4:
           updateLastHeadingNamesAtLevel(4, name);
           headingNameForComparison[index] = getParentHeadingName(3) + name;
           break;
 
-        case 'h5':
+        case 5:
           updateLastHeadingNamesAtLevel(5, name);
           headingNameForComparison[index] = getParentHeadingName(4) + name;
           break;
 
-        case 'h6':
+        case 6:
           updateLastHeadingNamesAtLevel(6, name);
           headingNameForComparison[index] = getParentHeadingName(5) + name;
           break;
@@ -10682,7 +10948,7 @@ const headingRules$1 = [
 
         const de = le.getFirstVisibleHeadingDomElement();
         if (de) {
-          const ariaLevel = de.ariaValidation.ariaLevel;
+          const ariaLevel = de.ariaInfo.ariaLevel;
           if (ariaLevel === 2) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
           }
@@ -10719,9 +10985,9 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements, landmar
   });
 
   let nestingErrors = 0;
-  let lastLevel = visibleHeadings.length ? visibleHeadings[0].ariaValidation.ariaLevel : 1;
+  let lastLevel = visibleHeadings.length ? visibleHeadings[0].ariaInfo.ariaLevel : 1;
   visibleHeadings.forEach( de => {
-    const level = de.ariaValidation.ariaLevel;
+    const level = de.ariaInfo.ariaLevel;
     if ( level <= (lastLevel + 1)) {
       rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
       // Only update lastLevel when you get a pass
@@ -11108,7 +11374,7 @@ const landmarkRules$1 = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
         const parentLandmark = de.parentInfo.landmarkElement;
-        const isLandmark = de.ariaValidation.isLandmark;
+        const isLandmark = de.ariaInfo.isLandmark;
         if ((de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
             if ( isLandmark || parentLandmark ) {
@@ -16004,8 +16270,8 @@ class ElementResult extends BaseResult {
     const info = {
       name:            this.domElement.accName.name,
       name_source:     this.domElement.accName.source,
-      name_required:   this.domElement.ariaValidation.isNameRequired,
-      name_prohibited: this.domElement.ariaValidation.isNameProhibited,
+      name_required:   this.domElement.ariaInfo.isNameRequired,
+      name_prohibited: this.domElement.ariaInfo.isNameProhibited,
     };
     return info;
   }

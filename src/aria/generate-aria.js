@@ -14,10 +14,10 @@ const url   = require('url');
 const fetch = require('node-fetch');
 const HTMLParser = require('node-html-parser');
 
-const ariaInfoFilename          = path.join('src', 'aria', 'ariaInfo.js');
-const ariaInfoFilenameJSON      = path.join('src', 'aria', 'ariaInfo.json');
-const designPatternsFilename    = path.join('src', 'aria', 'designPatterns.js');
-const propertyDataTypesFilename = path.join('src', 'aria', 'propertyDataTypes.js');
+const ariaInfoFilename          = path.join('src', 'aria', 'ariaSpecInfo.js');
+const ariaInfoFilenameJSON      = path.join('src', 'aria', 'ariaSpecInfo.json');
+const designPatternsFilename    = path.join('src', 'aria', 'ariaSpecDesignPatterns.js');
+const propertyDataTypesFilename = path.join('src', 'aria', 'ariaSpecPropertyDataTypes.js');
 
 let ariaURL = 'https://www.w3.org/TR/wai-aria-1.2/';
 

@@ -4,7 +4,7 @@
 import ColorContrast     from './colorContrast.js';
 import Visibility        from './visibility.js';
 import DebugLogging      from '../debug.js';
-import AriaValidation    from '../aria/ariaValidation.js';
+import AriaInfo          from '../aria/ariaInfo.js';
 import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
   hasInvalidState,
@@ -70,7 +70,7 @@ export default class DOMElement {
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaValidation   = new AriaValidation(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo   = new AriaInfo(doc, this.role, defaultRole, elementNode);
 
     this.accName           = getAccessibleName(doc, elementNode);
     this.accDescription    = getAccessibleDesc(doc, elementNode);

@@ -1,4 +1,4 @@
-/* propertyDataTypes.js is a generated file, use "npm run aria" */
+/* ariaSpecPropertyDataTypes.js is a generated file, use "npm run aria" */
 export const propertyDataTypes = {
   'aria-activedescendant': {
     propType: 'property',

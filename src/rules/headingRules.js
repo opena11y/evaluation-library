@@ -38,7 +38,7 @@ export const headingRules = [
       let h1Count = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
-        if (de.tagName === 'h1') {
+        if (de.ariaInfo.ariaLevel === 1) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName && de.accName.name.length) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
@@ -93,7 +93,7 @@ export const headingRules = [
       let h1Count = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
-        if (de.tagName === 'h1') {
+        if (de.ariaInfo.ariaLevel === 1) {
           if (de.visibility.isVisibleToAT) {
             if (checkForAnscetorLandmarkRole(de, 'main')) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
@@ -174,33 +174,33 @@ export const headingRules = [
       const name = de.accName.name.toLowerCase();
 
       // save the name of the last heading of each level
-      switch (de.tagName) {
-        case 'h1':
+      switch (de.ariaInfo.ariaLevel) {
+        case 1:
           updateLastHeadingNamesAtLevel(1, name);
           headingNameForComparison[index] = name;
           break;
 
-        case 'h2':
+        case 2:
           updateLastHeadingNamesAtLevel(2, name);
           headingNameForComparison[index] = getParentHeadingName(1) + name;
           break;
 
-        case 'h3':
+        case 3:
           updateLastHeadingNamesAtLevel(3, name);
           headingNameForComparison[index] = getParentHeadingName(2) + name;
           break;
 
-        case 'h4':
+        case 4:
           updateLastHeadingNamesAtLevel(4, name);
           headingNameForComparison[index] = getParentHeadingName(3) + name;
           break;
 
-        case 'h5':
+        case 5:
           updateLastHeadingNamesAtLevel(5, name);
           headingNameForComparison[index] = getParentHeadingName(4) + name;
           break;
 
-        case 'h6':
+        case 6:
           updateLastHeadingNamesAtLevel(6, name);
           headingNameForComparison[index] = getParentHeadingName(5) + name;
           break;
@@ -355,7 +355,7 @@ export const headingRules = [
 
         const de = le.getFirstVisibleHeadingDomElement();
         if (de) {
-          const ariaLevel = de.ariaValidation.ariaLevel;
+          const ariaLevel = de.ariaInfo.ariaLevel;
           if (ariaLevel === 2) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
           }
@@ -392,9 +392,9 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements, landmar
   });
 
   let nestingErrors = 0;
-  let lastLevel = visibleHeadings.length ? visibleHeadings[0].ariaValidation.ariaLevel : 1;
+  let lastLevel = visibleHeadings.length ? visibleHeadings[0].ariaInfo.ariaLevel : 1;
   visibleHeadings.forEach( de => {
-    const level = de.ariaValidation.ariaLevel;
+    const level = de.ariaInfo.ariaLevel;
     if ( level <= (lastLevel + 1)) {
       rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
       // Only update lastLevel when you get a pass

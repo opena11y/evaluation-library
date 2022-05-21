@@ -87,8 +87,8 @@ export default class ElementResult extends BaseResult {
     const info = {
       name:            this.domElement.accName.name,
       name_source:     this.domElement.accName.source,
-      name_required:   this.domElement.ariaValidation.isNameRequired,
-      name_prohibited: this.domElement.ariaValidation.isNameProhibited,
+      name_required:   this.domElement.ariaInfo.isNameRequired,
+      name_prohibited: this.domElement.ariaInfo.isNameProhibited,
     }
     return info;
   }
