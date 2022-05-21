@@ -22,7 +22,7 @@
     "build": "npm run eslint && npm run bundle",
     "eslint": "eslint src/*.js",
     "bundle": "rollup -c",
-    "aria": "node src/aria/generate-aria.js",
+    "aria-spec": "node src/aria/generate-aria-spec-files.js",
     "aria-in-html": "node src/aria-in-html/generate-aria-in-html.js"
   },
   "devDependencies": {

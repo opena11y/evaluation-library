@@ -10,6 +10,6 @@ Javascript library for evaluating WCAG and ARIA conformance.  The library is des
 | npm run eslint  | Uses `eslint` to validate Javascript files in the `src` directory |
 | npm run bundle  | Uses `rollup` to compile module files in `src` into a single JS file `releases/evaluation-library.js` |        |
 | npm run build   | runs `eslint` and then the `bundle` command   |
-| npm run aria   | Generates a JSON file representing the requirements of the ARIA specification   |
+| npm run aria-spec   | Generates files representing the requirements of the ARIA specification   |
 | npm run aria-in-html   | Generates a JSON file representing the requirements of the ARIA in HTML specification   |
 
