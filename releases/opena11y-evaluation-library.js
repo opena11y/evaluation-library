@@ -144,7 +144,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$k = new DebugLogging('colorContrast', false);
+const debug$l = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -164,9 +164,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$k.flag) {
-      debug$k.separator();
-      debug$k.tag(elementNode);
+    if (debug$l.flag) {
+      debug$l.separator();
+      debug$l.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -190,11 +190,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$k.flag) {
-      debug$k.log(`[                    opacity]: ${this.opacity}`);
-      debug$k.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$k.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$k.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$l.flag) {
+      debug$l.log(`[                    opacity]: ${this.opacity}`);
+      debug$l.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$l.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$l.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -516,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$j = new DebugLogging('visibility', false);
+const debug$k = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -564,17 +564,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$j.flag) {
-      debug$j.separator();
-      debug$j.tag(elementNode);
-      debug$j.log('[          isHidden]: ' + this.isHidden);
-      debug$j.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$j.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$j.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$j.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$j.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$j.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$j.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$k.flag) {
+      debug$k.separator();
+      debug$k.tag(elementNode);
+      debug$k.log('[          isHidden]: ' + this.isHidden);
+      debug$k.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$k.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$k.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$k.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$k.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$k.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$k.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5673,7 +5673,7 @@ function accNamesTheSame (accName1, accName2) {
 /* ariaValidation.js */
 
 /* Constants */
-const debug$i = new DebugLogging('AriaValidation', false);
+const debug$j = new DebugLogging('AriaValidation', false);
 
 /* Debug helper functions */
 
@@ -5749,6 +5749,8 @@ class RefInfo {
 
 class AriaValidation {
   constructor (doc, role, defaultRole, node) {
+    const tagName = node.tagName.toLowerCase();
+
     let designPattern = designPatterns[role] || null;
     this.isValidRole  = designPattern !== null;
 
@@ -5787,16 +5789,47 @@ class AriaValidation {
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
     this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
 
-    if (debug$i.flag) {
-      node.attributes.length && debug$i.log(`${node.outerHTML}`, 1);
-      debug$i.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$i.log(`[         isWidget]: ${this.isWidget}`);
-      debug$i.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$i.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$i.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$i.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$i.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$i.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    switch (tagName) {
+      case 'h1':
+        this.ariaLevel = 1;
+        break;
+
+      case 'h2':
+        this.ariaLevel = 2;
+        break;
+
+      case 'h3':
+        this.ariaLevel = 3;
+        break;
+
+      case 'h4':
+        this.ariaLevel = 4;
+        break;
+
+      case 'h5':
+        this.ariaLevel = 5;
+        break;
+
+      case 'h6':
+        this.ariaLevel = 6;
+        break;
+
+      default:
+        const level = parseInt(node.getAttribute('aria-level'));
+        this.ariaLevel = (typeof level === 'Number') && (level > 0) ? level : 0;
+        break;
+    }
+
+    if (debug$j.flag) {
+      node.attributes.length && debug$j.log(`${node.outerHTML}`, 1);
+      debug$j.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$j.log(`[         isWidget]: ${this.isWidget}`);
+      debug$j.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$j.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$j.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$j.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$j.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$j.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7474,7 +7507,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$h = new DebugLogging('ariaInHtml', false);
+const debug$i = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7636,11 +7669,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$h.flag) {
+  if (debug$i.flag) {
     if (tagName === 'h2') {
-      debug$h.tag(node);
+      debug$i.tag(node);
     }
-    debug$h.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$i.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8500,6 +8533,8 @@ const noAccName = {
 *   (2) Use aria-label attribute value;
 *   (3) Use whatever method is specified by the native semantics of the
 *   element, which includes, as last resort, use of the title attribute.
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
 function getAccessibleName (doc, element, recFlag) {
   let accName = null;
@@ -8517,6 +8552,8 @@ function getAccessibleName (doc, element, recFlag) {
 *   description calculation based on its precedence order:
 *   (1) Use aria-describedby, unless a traversal is already underway;
 *   (2) As last resort, use the title attribute.
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
 function getAccessibleDesc (doc, element, recFlag) {
   let accDesc = null;
@@ -8533,6 +8570,8 @@ function getAccessibleDesc (doc, element, recFlag) {
 *   getErrMessage: Use the ARIA Roles Model specification for accessible
 *   description calculation based on its precedence order:
 *   (1) Use aria-errormessage, unless a traversal is already underway;
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
 function getErrMessage (doc, element) {
   let errMessage = null;
@@ -8729,7 +8768,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$g = new DebugLogging('DOMElement', false);
+const debug$h = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -8922,9 +8961,9 @@ class DOMElement {
   /**
    * @method addTextToLastChild
    *
-   * @desc
+   * @desc Adds the text content to an existing DOMText object
    *
-   * @param {String}  text  -
+   * @param {String}  text  - text content to add
    */
 
   addTextToLastChild (text) {
@@ -8933,6 +8972,34 @@ class DOMElement {
       domItem.addText(text);
     }
   }
+
+  /**
+   * @method hasTextContent
+   *
+   * @desc Checks to see if the element contains any text content
+   *
+   * @return {Boolean} True it there are text nodes, otherwise false
+   */
+
+  hasTextContent () {
+
+    function anyDOMText (domItems) {
+      for (let i = 0; i < domItems.length; i += 1) {
+        const domItem = domItems[i];
+        if (domItem.isDomText) {
+          return true;
+        }
+        else {
+          if (anyDOMText (domItem.children)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+    return anyDOMText(this.children);
+  }
+
 
   toString () {
     this.tagName;
@@ -8959,12 +9026,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$g.flag) {
+    if (debug$h.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$g.domText(domItem, prefix);
+          debug$h.domText(domItem, prefix);
         } else {
-          debug$g.domElement(domItem, prefix);
+          debug$h.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9043,7 +9110,7 @@ class DOMText {
 /* listInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('ListInfo', false);
+const debug$g = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -9064,8 +9131,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$f.flag) {
-      debug$f.log('');
+    if (debug$g.flag) {
+      debug$g.log('');
     }
   }
 
@@ -9090,9 +9157,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$g.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9199,16 +9266,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All ListElements ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$g.flag) {
+      debug$g.log('== All ListElements ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
       });
-      debug$f.log('== List Tree ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+      debug$g.log('== List Tree ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9218,7 +9285,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('structureInfo', false);
+const debug$f = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9261,12 +9328,23 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$e.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$e.domElement(h, prefix);
+      debug$f.domElement(h, prefix);
     });
+  }
+
+  getFirstVisibleHeadingDomElement() {
+    const domElements = this.childHeadingDomElements;
+    for (let i = 0; i < domElements.length; i += 1){
+      const de = domElements[i];
+      if (de.visibility.isVisibleToAT) {
+        return de;
+      }
+    }
+    return false;
   }
 
   toString () {
@@ -9284,6 +9362,7 @@ class LandmarkElement {
 
 class StructureInfo {
   constructor () {
+    this.hasMainLandmark = false;
     this.allLandmarkElements = [];
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
@@ -9304,6 +9383,11 @@ class StructureInfo {
    */
 
   addChildLandmark (domElement, parentLandmarkElement, documentIndex) {
+
+    if (domElement.role === 'main') {
+      this.hasMainLandmark = true;
+    }
+
     const le = new LandmarkElement(domElement, parentLandmarkElement);
     this.allLandmarkElements.push(le);
 
@@ -9409,27 +9493,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$e.flag) {
-      debug$e.log('== All Headings ==', 1);
+    if (debug$f.flag) {
+      debug$f.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$e.domElement(h);
+        debug$f.domElement(h);
       });
-      debug$e.log('== All Landmarks ==', 1);
+      debug$f.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$e.log('== Landmarks By Doc ==', 1);
+      debug$f.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$e.domElement(le.domElement);
+            debug$f.domElement(le.domElement);
           });
         }
       });
-      debug$e.log('== Structure Tree ==', 1);
+      debug$f.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9439,7 +9523,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', false);
+const debug$e = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -9528,7 +9612,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$d.flag) {
+    if (debug$e.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
       this.listInfo.showListInfo();
@@ -9682,18 +9766,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$d.log(' === AllDomElements ===', true);
+    debug$e.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$d.domElement(de);
+      debug$e.domElement(de);
     });
 
-    debug$d.log(' === AllDomTexts ===', true);
+    debug$e.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$d.domText(dt);
+      debug$e.domText(dt);
     });
 
-    debug$d.log(' === DOMCache Tree ===', true);
-    debug$d.domElement(this.startingDomElement);
+    debug$e.log(' === DOMCache Tree ===', true);
+    debug$e.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -9701,7 +9785,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$c = new DebugLogging('constants', false);
+const debug$d = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -10102,13 +10186,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -10255,6 +10339,404 @@ const colorRules$1 = [
   }
 
 ];
+
+/* headingRules.js */
+
+/* Constants */
+const debug$c = new DebugLogging('Heading Rules', true);
+
+/*
+ * OpenA11y Rules
+ * Rule group: Heading Rules
+ */
+
+const headingRules$1 = [
+
+  /**
+   * @object HEADING_1
+   *
+   * @desc Page contains at least one H1 element and each H1 element has content
+   */
+   { rule_id            : 'HEADING_1',
+    last_updated        : '2022-05-19',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.HEADINGS,
+    ruleset             : RULESET.TRIAGE,
+    rule_required       : false,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
+    target_resources    : ['h1'],
+    validate            : function (dom_cache, rule_result) {
+      let h1Count = 0;
+
+      dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
+        if (de.tagName === 'h1') {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName && de.accName.name.length) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              h1Count++;
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+
+      if (h1Count === 0) {
+        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+      }
+    } // end validate function
+  },
+
+  /**
+   * @object HEADING_2
+   *
+   * @desc If there are main and/or banner landmarks and H1 elements,
+   *       H1 elements should be children of main or banner landmarks
+   *
+   */
+  { rule_id             : 'HEADING_2',
+    last_updated        : '2022-05-19',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.HEADINGS,
+    ruleset             : RULESET.MORE,
+    rule_required       : false,
+    wcag_primary_id     : '2.4.6',
+    wcag_related_ids    : ['1.3.1', '2.4.1', '2.4.2', '2.4.10'],
+    target_resources    : ['h1'],
+    validate            : function (dom_cache, rule_result) {
+
+      function checkForAnscetorLandmarkRole(de, role) {
+        let ple = de.parentInfo.landmarkElement;
+        while (ple) {
+           if (ple.domElement.role === role) return true;
+           ple = ple.parentLandmarkElement;
+        }
+        return false;
+      }
+
+      dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
+        if (de.tagName === 'h1') {
+          if (de.visibility.isVisibleToAT) {
+            if (checkForAnscetorLandmarkRole(de, 'main')) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+            }
+            else {
+              if (checkForAnscetorLandmarkRole(de, 'banner')) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              }
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+    } // end validate function
+  },
+
+/**
+ * @object HEADING_3
+ *
+ * @desc Sibling headings of the same level that share the same parent heading should be unique
+ *       This rule applies only when there are no main landmarks on the page and at least one
+ *       sibling heading
+ *
+ */
+{ rule_id             : 'HEADING_3',
+  last_updated        : '2014-11-25',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.HEADINGS,
+  ruleset             : RULESET.MORE,
+  required            : false,
+  wcag_primary_id     : '2.4.6',
+  wcag_related_ids    : ['1.3.1', '2.4.10'],
+  target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  validate            : function (dom_cache, rule_result) {
+
+    const visibleHeadings = [];
+    const lastHeadingNamesAtLevel = ['', '', '', '', '', '', ''];
+    const headingNameForComparison = [];
+
+    function updateLastHeadingNamesAtLevel (level, name) {
+      if ((level > 0) && (level < 7)) {
+        lastHeadingNamesAtLevel[level] = name;
+        for (let i = level + 1; i < 7; i += 1) {
+          // clear lower level names, since a new heading context
+          lastHeadingNamesAtLevel[i] = '';
+        }
+      }
+    }
+
+    function getParentHeadingName (level) {
+      let name = '';
+      while (level > 0) {
+        name = lastHeadingNamesAtLevel[level];
+        if (name.length) {
+          break;
+        }
+        level -= 1;
+      }
+      return name;
+    }
+
+    dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
+      if (de.visibility.isVisibleToAT) {
+        visibleHeadings.push(de);
+      } else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    });
+
+
+    visibleHeadings.forEach( (de, index) => {
+
+      const name = de.accName.name.toLowerCase();
+
+      // save the name of the last heading of each level
+      switch (de.tagName) {
+        case 'h1':
+          updateLastHeadingNamesAtLevel(1, name);
+          headingNameForComparison[index] = name;
+          break;
+
+        case 'h2':
+          updateLastHeadingNamesAtLevel(2, name);
+          headingNameForComparison[index] = getParentHeadingName(1) + name;
+          break;
+
+        case 'h3':
+          updateLastHeadingNamesAtLevel(3, name);
+          headingNameForComparison[index] = getParentHeadingName(2) + name;
+          break;
+
+        case 'h4':
+          updateLastHeadingNamesAtLevel(4, name);
+          headingNameForComparison[index] = getParentHeadingName(3) + name;
+          break;
+
+        case 'h5':
+          updateLastHeadingNamesAtLevel(5, name);
+          headingNameForComparison[index] = getParentHeadingName(4) + name;
+          break;
+
+        case 'h6':
+          updateLastHeadingNamesAtLevel(6, name);
+          headingNameForComparison[index] = getParentHeadingName(5) + name;
+          break;
+      }
+    });
+
+    visibleHeadings.forEach( (de1, index1) => {
+      let duplicate = false;
+      visibleHeadings.forEach( (de2, index2) => {
+        if ((index1 !== index2) &&
+          (headingNameForComparison[index1] ===  headingNameForComparison[index2])) {
+          duplicate = true;
+        }
+      });
+      if (duplicate) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName]);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [de1.tagName]);
+      }
+    });
+
+  } // end validate function
+},
+
+/**
+ * @object HEADING_5
+ *
+ * @desc Headings must be properly nested
+ *
+ */
+{ rule_id             : 'HEADING_5',
+  last_updated        : '2022-05-20',
+  rule_scope          : RULE_SCOPE.PAGE,
+  rule_category       : RULE_CATEGORIES.HEADINGS,
+  ruleset             : RULESET.MORE,
+  required            : false,
+  wcag_primary_id     : '1.3.1',
+  wcag_related_ids    : ['2.4.6', '2.4.10'],
+  target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  validate            : function (dom_cache, rule_result) {
+    let nestingErrors = 0;
+    let manualChecks = 0;
+
+    if (dom_cache.structureInfo.hasMainLandmark) {
+      dom_cache.structureInfo.allLandmarkElements.forEach ( le => {
+        nestingErrors += checkHeadingNesting(dom_cache, rule_result, le.childHeadingDomElements, le.domElement.role);
+      });
+
+      dom_cache.structureInfo.allHeadingDomElements.forEach ( de => {
+        if (!de.parentInfo.landmarkElement) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.name.length === 0) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              manualChecks += 1;
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          }
+        }
+      });
+    } else {
+      nestingErrors = checkHeadingNesting(dom_cache, rule_result, dom_cache.structureInfo.allHeadingDomElements);
+    }
+
+    if (nestingErrors > 0) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [nestingErrors]);
+    }
+    else {
+      if (manualChecks > 0) {
+        if (manualChecks === 1) {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        }
+        else {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
+        }
+      } else {
+        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+      }
+    }
+
+
+  } // end validate function
+},
+
+/**
+ * @object HEADING_6
+ *
+ * @desc Headings should not consist only of image content
+ *
+ */
+{ rule_id             : 'HEADING_6',
+  last_updated        : '2022-05-20',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.HEADINGS,
+  ruleset             : RULESET.ALL,
+  required            : false,
+  wcag_primary_id     : '1.3.1',
+  wcag_related_ids    : ['2.4.6', '2.4.10'],
+  target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.structureInfo.allHeadingDomElements.forEach( (de, index) => {
+      if (de.visibility.isVisibleToAT) {
+        if (de.accName.name.length) {
+          if (de.hasTextContent()) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    });
+  } // end validate function
+},
+
+/**
+ * @object HEADING_7
+ *
+ * @desc First heading in contentinfo, complementary, form, navigation and search landmark must be an h2, except main landmark h1
+ */
+{ rule_id             : 'HEADING_7',
+  last_updated        : '2022-05-20',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.HEADINGS,
+  ruleset             : RULESET.ALL,
+  required            : false,
+  wcag_primary_id     : '1.3.1',
+  wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
+  target_resources    : ['h2', '[role="contentinfo"]', '[role="complementary"]', '[role="form"]', '[role="navigation"]', '[role="search"]'],
+  validate            : function (dom_cache, rule_result) {
+
+    const testRoles = ['contentinfo', 'complementary', 'form', 'navigation', 'search'];
+
+    dom_cache.structureInfo.allLandmarkElements.forEach( le => {
+      const role = le.domElement.role;
+
+      if (testRoles.indexOf(role) >= 0) {
+
+        const de = le.getFirstVisibleHeadingDomElement();
+        if (de) {
+          const ariaLevel = de.ariaValidation.ariaLevel;
+          if (ariaLevel === 2) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
+            debug$c.log(`[${role}][${de}]: PASSED`);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role, ariaLevel]);
+            debug$c.log(`[${role}][${de}]: FAILED`);
+          }
+        }
+      }
+    });
+  } // end validate function
+}
+
+];
+
+/*
+ * Heading Rule Helper Functions
+ */
+
+function checkHeadingNesting(dom_cache, rule_result, headingDomElements, landmarkRole='') {
+  const visibleHeadings = [];
+
+  headingDomElements.forEach( de => {
+    if (de.visibility.isVisibleToAT) {
+      if (de.accName.name.length) {
+        visibleHeadings.push(de);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+      }
+    }
+    else {
+      rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+    }
+  });
+
+  let nestingErrors = 0;
+  let lastLevel = visibleHeadings.length ? visibleHeadings[0].ariaValidation.ariaLevel : 1;
+  visibleHeadings.forEach( de => {
+    const level = de.ariaValidation.ariaLevel;
+    if ( level <= (lastLevel + 1)) {
+      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+      // Only update lastLevel when you get a pass
+      lastLevel = level;
+    }
+    else {
+      nestingErrors += 1;
+      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+    }
+  });
+
+  return nestingErrors;
+}
 
 /* landmarkRules.js */
 
@@ -10585,7 +11067,7 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 }
 
 /*
- * OpenA11y Alliance Rules
+ * OpenA11y Rules
  * Rule group: Landmark Rules
  */
 
@@ -12305,334 +12787,336 @@ const colorRules = {
 
 const headingRules = {
 
-  //
-  //  OAA Rules title and message string National Language Support (NLS)
-  //
-  rules: {
-    HEADING_1: {
-      ID:                    'Heading 1',
-      DEFINITION:            'The page should contain at least one @h1@ element identifying and describing the main content of the page.',
-      SUMMARY:               'Page should have @h1@ element',
-      TARGET_RESOURCES_DESC: '@h1@ and @body@ elements',
-      RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add a descriptive @h1@ element at the beginning of the main content of the page.',
-        FAIL_P:   'Add a descriptive @h1@ element at the beginning of the main content of the page.',
-        HIDDEN_S: 'One @h1@ element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H @h1@ elements that are hidden were not evaluated.'
-      },
-      BASE_RESULT_MESSAGES: {
-        PAGE_PASS_1:     'Page has @h1@ element.',
-        PAGE_FAIL_1:     'Add an @h1@ element at the beginning of the main content of the page.',
-        ELEMENT_PASS_1:  '@h1@ element contributes to passing this rule.',
-        ELEMENT_FAIL_1:  'Add an accessible name to the @h1@ element that describes the main content of the page.',
-        ELEMENT_HIDDEN_1:'The @h1@ element was not evaluated because it is hidden from assistive technologies.'
-      },
-      PURPOSES: [
-        'An @h1@ heading provides an important navigation point for users of assistive technologies, allowing them to easily find the main content of the page.',
-        'An @h1@ heading is often also used in the banner of a web page to identify and describe the website.',
-        'Home pages of websites often have a variety of "main" sections (e.g. navigation links, news, calendars, ...) that could be considered having somewhat equal potential interest by a visitor, these sections could each be identified using @h1@ headings.'
-      ],
-      TECHNIQUES: [
-        'Include an @h1@ element at the beginning of the main content.',
-        'The accessible name of the @h1@ element should describe the main content of the page.',
-        'The accessible name of the @h1@ element in the banner of the page, should identify and describe the website.',
-        'The @h1@ element should be visible graphically and to assistive technologies. It should not be hidden using CSS techniques.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @h1@ element',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
-        },
-        { type:  REFERENCES.TECHNIQUE,
-          title: 'W3C Web Accessibility Tutorials: Headings',
-          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
-        }
-      ]
+  HEADING_1: {
+    ID:                    'Heading 1',
+    DEFINITION:            'The page should contain at least one @h1@ element identifying and describing the main content of the page.',
+    SUMMARY:               'Page should have @h1@ element',
+    TARGET_RESOURCES_DESC: '@h1@ and @body@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Add a descriptive @h1@ element at the beginning of the main content of the page.',
+      FAIL_P:   'Add a descriptive @h1@ element at the beginning of the main content of the page.',
+      HIDDEN_S: 'One @h1@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @h1@ elements that are hidden were not evaluated.'
     },
-    HEADING_2: {
-      ID:                    'Heading 2',
-      DEFINITION:            'If the page contains @h1@ element and either a @main@ or @banner@ landmark, the @h1@ element should be a child of either the main or @banner@ landmark.',
-      SUMMARY:               '@h1@ should be in @main@ or @banner@ landmark',
-      TARGET_RESOURCES_DESC: '@h1@ elements and elements with ARIA attribute @role="main"@ or @role="banner"@ ',
+    BASE_RESULT_MESSAGES: {
+      PAGE_PASS_1:     'Page has @h1@ element.',
+      PAGE_FAIL_1:     'Add an @h1@ element at the beginning of the main content of the page.',
+      ELEMENT_PASS_1:  '@h1@ element contributes to passing this rule.',
+      ELEMENT_FAIL_1:  'Add an accessible name to the @h1@ element that describes the main content of the page.',
+      ELEMENT_HIDDEN_1:'The @h1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'An @h1@ heading provides an important navigation point for users of assistive technologies, allowing them to easily find the main content of the page.',
+      'An @h1@ heading is often also used in the banner of a web page to identify and describe the website.',
+      'Home pages of websites often have a variety of "main" sections (e.g. navigation links, news, calendars, ...) that could be considered having somewhat equal potential interest by a visitor, these sections could each be identified using @h1@ headings.'
+    ],
+    TECHNIQUES: [
+      'Include an @h1@ element at the beginning of the main content.',
+      'The accessible name of the @h1@ element should describe the main content of the page.',
+      'The accessible name of the @h1@ element in the banner of the page, should identify and describe the website.',
+      'The @h1@ element should be visible graphically and to assistive technologies. It should not be hidden using CSS techniques.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: The @h1@ element',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G130: Providing descriptive headings',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G141: Organizing a page using headings',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C Web Accessibility Tutorials: Headings',
+        url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
+      }
+    ]
+  },
+
+  HEADING_2: {
+    ID:                    'Heading 2',
+    DEFINITION:            'If the page contains @h1@ element and either a @main@ or @banner@ landmark, the @h1@ element should be a child of either the main or @banner@ landmark.',
+    SUMMARY:               '@h1@ should be in @main@ or @banner@ landmark',
+    TARGET_RESOURCES_DESC: '@h1@ elements and elements with ARIA attribute @role="main"@ or @role="banner"@ ',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S: 'Move the @h1@ element inside (and preferably at the beginning) of the @main@ element, or change the @h1@ element to another heading level.',
+      FAIL_P: 'Move the %N_F @h1@ elements inside (and preferably at the beginning) of @main@ or @banner@ landmark elements, or change the @h1@ elements to other heading levels.',
+      HIDDEN_S: 'One @h1@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @h1@ elements that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @h1@ elements and either a @main@ or @banner@ landmark.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   'The @h1@ is a child element of a @main@ landmark.',
+      ELEMENT_PASS_2:   'The @h1@ is a child element of a @banner@ landmark.',
+      ELEMENT_FAIL_1:   'Position the @h1@ element as one of the first child elements of a @main@ landmark to mark the beginning of main content to identify the main content of this page, or within the @banner@ landmark to provide a label for the website.',
+      ELEMENT_HIDDEN_1: 'The @h1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'An @h1@ heading should primarily be used to identify the content on the specific page within the website and be placed at the beginning of the main content to provide an important navigation point for users of assistive technologies, allowing them to easily find the main content of the page.',
+      'An @h1@ heading can also be used (but not required) to provide a label for the website and when it is used for this purpose it should be placed in the @banner@ element.',
+      'Including both a @main@ landmark and an @h1@ element provides a redundant way for users of assistive technologies to find the main content of a web page.'
+    ],
+    TECHNIQUES: [
+      'This rule supports the coding practice of reserving the @h1@ element for titling the main content area of a web page.',
+      'Include an @h1@ element at the beginning of each @main@ landmark.',
+      'The @h1@ element should describe the main content or purpose of the page.',
+      'If there is more than one @main@ landmark, use the @aria-labelledby@ attribute on each to reference an @h1@ element that provides its accessible name.',
+      'An @h1@ element being used to label the the website must be placed inside the @banner@ element.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: The @h1@ element',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C Web Accessibility Tutorials: Page Structure',
+        url:   'https://www.w3.org/WAI/tutorials/page-structure/'
+      }
+    ]
+  },
+
+  HEADING_3: {
+    ID:                    'Heading 3',
+    DEFINITION:            'The accessible names of sibling heading elements of the same level should be unique.',
+    SUMMARY:               'Sibling headings should be unique',
+    TARGET_RESOURCES_DESC: 'Heading elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_P: 'Update the accessible names of the %N_F sibling heading elements of the same level to be unique.',
+      HIDDEN_S: 'One heading element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H heading elements that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No sibling heading elements of the same level were found on the page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:    'The %1 heading content is unique among its sibling headings.',
+      ELEMENT_FAIL_1:  'Change the accessible name of %1 heading to make it unique among its sibling headings.',
+      ELEMENT_HIDDEN_1:  'The %1 element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'If section headings that share the same parent heading are NOT unique, users of assistive technologies will not be able to discern the differences among sibling sections of the web page.'
+    ],
+    TECHNIQUES: [
+      'Make sure the accessible names of sibling headings that share the same parent heading help users understand the unique content of each section they describe.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G130: Providing descriptive headings',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G141: Organizing a page using headings',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C Web Accessibility Tutorials: Headings',
+        url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
+      }
+    ]
+  },
+
+  HEADING_5: {
+    ID:                    'Heading 5',
+    DEFINITION:            'Heading elements must be properly nested on the page.',
+    SUMMARY:               'Headings must be properly nested',
+    TARGET_RESOURCES_DESC: 'Heading elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:  'Review the entire heading structure and update the heading levels so that the heading element is properly nested in relation to the %N_T headings on the page.',
+      FAIL_P:  'Review the entire heading structure and update the heading levels so that the %N_F heading elements are properly nested in relation to the %N_T headings on the page.',
+      MANUAL_CHECK_S: 'One heading element requires manual checking for proper nesting level with the headings within landmarks.',
+      MANUAL_CHECK_P: '%N_MC headings require manual checking for proper nesting level with the headings within and outside of landmarks.',
+      HIDDEN_S: 'One heading element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H heading elements that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No heading elements or only one heading element on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   'The %1 element is properly nested.',
+      ELEMENT_FAIL_1:   'Adjust the level of the %1 element or other heading elements so that the headings are properly nested on the page.',
+      ELEMENT_HIDDEN_1: 'The %1 element was not evaluated because it is hidden from assistive technologies.',
+      ELEMENT_HIDDEN_2: 'The %1 element has not text content either add content, or remove it from the page if it is not needed.',
+      ELEMENT_MC_1:     'The %1 element is not contained a landmark, verify that it is properly nested with the associated landmarks and other headings not in landmarks.',
+      PAGE_PASS_1:      'All heading elements are properly nested',
+      PAGE_FAIL_1:      'There are at least %1 header nesting level problems on the page, adjust the use of heading elements on the page so they are properly nested.',
+      PAGE_MC_1:       'There is one header element outside of landmarks that needs manual checking for proper nesting level.',
+      PAGE_MC_2:       'There are %1 header elements outside of landmarks that need manual checking for proper nesting level.'
+    },
+    PURPOSES: [
+      'Heading elements that are properly nested help users of assistive technologies understand the structure of the information on the web page.'
+    ],
+    TECHNIQUES: [
+      'Include headings elements at the proper level for each section of a web page.',
+      'Use headings as labels for ARIA landmarks to provide a redundant way for users of assistive technologies to navigate the page (i.e. header or landmark navigation).',
+      'Check headings against other headings in the document to make sure they uniquely describe the content of each section of the web page.',
+      'If headings are too similar to each other, users of assistive technologies will not be able to use them to understand the differences between sections of the web page.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G130: Providing descriptive headings',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G141: Organizing a page using headings',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C Web Accessibility Tutorials: Headings',
+        url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
+      }
+    ]
+  },
+
+  HEADING_6: {
+    ID:                    'Heading 6',
+    DEFINITION:            'Heading elements should have visible text content.',
+    SUMMARY:               'Headings should have text content',
+    TARGET_RESOURCES_DESC: 'Heading elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'For the heading element with only image content, replace the image with text content styled using CSS.',
+      FAIL_P:   'For the %N_F heading elements with only image content, replace the images with text content styled using CSS.',
+      HIDDEN_S: 'One heading element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H heading elements that are hidden were not evaluated.',
+      NOT_APPLICABLE:  'No headings with only image content.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   'The %1 element contains visible text content.',
+      ELEMENT_FAIL_1: 'Add visible text content to the %1 element.',
+      ELEMENT_FAIL_2: 'The %1 element does not have an accessible name.  Either remove the heading from the page or add visible text content to describe the section.',
+      ELEMENT_HIDDEN_1: 'The %1 element was not evaluated because it is hidden from assistive technologies.',
+    },
+    PURPOSES: [
+      'Heading elements that consist only of image content are not easily restyled for readabilty by people with low vision.'
+    ],
+    TECHNIQUES: [
+      'Use CSS instead of images to style heading text content.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'C22: Using CSS to control visual presentation of text',
+        url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C Web Accessibility Tutorials: Headings',
+        url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
+      }
+    ]
+  },
+
+  HEADING_7: {
+    ID:                    'Heading 7',
+    DEFINITION:            'If a @contentinfo@, @complementary@, @form@, @navigation@ or @search@ landmark contains a heading element, the first heading should be an @h2@ element.',
+    SUMMARY:               'First landmark heading @h2@',
+    TARGET_RESOURCES_DESC: '@contentinfo@, @complementary@, @form@, @navigation@ or @search@ landmarks elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Adjust the heading structure within the landmark so that the first heading is an @h2@ element.',
+      FAIL_P:   'Adjust the heading structures of the %N_F landmarks with headings so that the first heading of each is an @h2@ element.',
+      HIDDEN_S: 'One @h2@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @h2@ elements that are hidden were not evaluated.',
+      NOT_APPLICABLE:  'No headings in landmarks, or no landmarks on the page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   'The @h2@ element is the first heading in the landmark.',
+      ELEMENT_FAIL_1: 'Adjust the headings in the %1 landmark to ensure that the first heading is an @h2@ element instead of an @%2@.',
+      ELEMENT_HIDDEN_1: 'The @h2@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'Headings provide a redundant way for people to navigate and orient themselves to content on a web page.',
+      'The use of an @h2@ element as the first heading in a landmark (except the @main@ and @banner@ landmarks) supports a consistent use of headings for finding the main sections in a web page.'
+    ],
+    TECHNIQUES: [
+      'Locate an @h2@ element at the beginning of the content in the landmark to describe the content in the landmark.',
+      'The @h2@ element can be used as the accessible name for a landmark using the @aria-labelledby@ attribute on the landmark to point to an @id@ attribute on the @h2@ element.',
+      'The @h2@ element can be hidden from the graphical rendering using offscreen CSS positioning (e.g. @position: absolute@ )techniques.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: Headings: The H2 elements',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
+      }
+    ]
+  },
+
+  HEADING_8: {
+      ID:         'Heading 8',
+      DEFINITION: 'Headings must be properly nested within a landmark.',
+      SUMMARY:    'Headings nested in landmarks',
+      TARGET_RESOURCES_DESC: 'Landmark elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S: 'Move the @h1@ element inside (and preferably at the beginning) of the @main@ element, or change the @h1@ element to another heading level.',
-        FAIL_P: 'Move the %N_F @h1@ elements inside (and preferably at the beginning) of @main@ or @banner@ landmark elements, or change the @h1@ elements to other heading levels.',
-        HIDDEN_S: 'One @h1@ element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H @h1@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE: 'No @h1@ elements and either a @main@ or @banner@ landmark.'
+        FAIL_S:   'Review the heading structure within the landmark and adjust the heading levels such that all are properly nested.',
+        FAIL_P:   'Review the heading structure for each landmark with more than one heading, and adjust the heading levels in each landmark such that all headings are properly nested.',
+        HIDDEN_S: 'If the hidden heading element is supposed to be visible to assistive technologies, style it to be positioned off-screen.',
+        HIDDEN_P: 'If any of the %N_H hidden heading elements are supposed to be visible to assistive technologies, style them to be positioned off-screen.',
+        NOT_APPLICABLE: 'No nested headings found in landmarks.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @h1@ is a child element of a @main@ landmark.',
-        ELEMENT_PASS_2:   'The @h1@ is a child element of a @banner@ landmark.',
-        ELEMENT_FAIL_1:   'Position the @h1@ element as one of the first child elements of a @main@ landmark to mark the beginning of main content to identify the main content of this page, or within the @banner@ landmark to provide a label for the website.',
-        ELEMENT_HIDDEN_1: 'The @h1@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   '@%1@ heading is properly nested in the @%2@ landmark.',
+        ELEMENT_FAIL_1:   'Adjust the level of the @%1@ heading or other heading elements such that the headings are properly nested in the @%2@ landmark.',
+        ELEMENT_FAIL_2:   'Add text content to @%1@ element that describes the section it labels or remove it from the @%2@ landmark.',
+        ELEMENT_FAIL_3:   'Adjust the level of either the parent @%1@ heading or this @%2@ heading such that they are properly nested in the @%3@ landmark.',
+        ELEMENT_HIDDEN_1: 'The @%1@ heading in the @%2@ landmark was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'The @%2@ landmark was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'An @h1@ heading should primarily be used to identify the content on the specific page within the website and be placed at the beginning of the main content to provide an important navigation point for users of assistive technologies, allowing them to easily find the main content of the page.',
-        'An @h1@ heading can also be used (but not required) to provide a label for the website and when it is used for this purpose it should be placed in the @banner@ element.',
-        'Including both a @main@ landmark and an @h1@ element provides a redundant way for users of assistive technologies to find the main content of a web page.'
+        // TODO: what is the purpose?
+        'Headings provide a way to indicate the structure and to label the sections of content within a landmark.',
+        'Headings and there associated heading levels provide a way for people using assistive technology to understand and navigate the structure of the content within a landmark.'
       ],
       TECHNIQUES: [
-        'This rule supports the coding practice of reserving the @h1@ element for titling the main content area of a web page.',
-        'Include an @h1@ element at the beginning of each @main@ landmark.',
-        'The @h1@ element should describe the main content or purpose of the page.',
-        'If there is more than one @main@ landmark, use the @aria-labelledby@ attribute on each to reference an @h1@ element that provides its accessible name.',
-        'An @h1@ element being used to label the the website must be placed inside the @banner@ element.'
+        // TODO: what are the techniques?
+        'Use an @h1@ element for the first heading in @main@ landmarks.',
+        'Use an @h2@ element for the first heading in other top level landmarks.',
+        'Use heading elements to identify the content of each section within a landmark.',
+        'Properly nest of heading elements within a landmark (e.g. @h2@ follows @h1@ headings, @h3@ follows @h2@ headings, ...).'
       ],
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @h1@ element',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
       ]
-    },
-    HEADING_3: {
-      ID:                    'Heading 3',
-      DEFINITION:            'The accessible names of sibling heading elements of the same level should be unique.',
-      SUMMARY:               'Sibling headings should be unique',
-      TARGET_RESOURCES_DESC: 'Heading elements',
-      RULE_RESULT_MESSAGES: {
-        FAIL_P: 'Update the accessible names of the %N_F sibling heading elements of the same level to be unique.',
-        HIDDEN_S: 'One heading element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H heading elements that are hidden were not evaluated.',
-        NOT_APPLICABLE: 'No sibling heading elements of the same level were found on the page.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:    'The %1 heading content is unique among its sibling headings.',
-        ELEMENT_FAIL_1:  'Change the accessible name of %1 heading to make it unique among its sibling headings.',
-        ELEMENT_HIDDEN_1:  'The %1 element was not evaluated because it is hidden from assistive technologies.'
-      },
-      PURPOSES: [
-        'If section headings that share the same parent heading are NOT unique, users of assistive technologies will not be able to discern the differences among sibling sections of the web page.'
-      ],
-      TECHNIQUES: [
-        'Make sure the accessible names of sibling headings that share the same parent heading help users understand the unique content of each section they describe.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
-        },
-        { type:  REFERENCES.TECHNIQUE,
-          title: 'W3C Web Accessibility Tutorials: Headings',
-          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
-        }
-      ]
-    },
-    HEADING_5: {
-      ID:                    'Heading 5',
-      DEFINITION:            'Heading elements must be properly nested on the page.',
-      SUMMARY:               'Headings must be properly nested',
-      TARGET_RESOURCES_DESC: 'Heading elements',
-      RULE_RESULT_MESSAGES: {
-        FAIL_S:  'Review the entire heading structure and update the heading levels so that the heading element is properly nested in relation to the %N_T headings on the page.',
-        FAIL_P:  'Review the entire heading structure and update the heading levels so that the %N_F heading elements are properly nested in relation to the %N_T headings on the page.',
-        HIDDEN_S: 'One heading element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H heading elements that are hidden were not evaluated.',
-        NOT_APPLICABLE: 'No heading elements or only one heading element on this page.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The %1 element is properly nested.',
-        ELEMENT_PASS_2:   'All heading elements are properly nested',
-        ELEMENT_FAIL_1:   'Adjust the level of the %1 element or other heading elements so that the headings are properly nested on the page.',
-        ELEMENT_FAIL_2:   'Adjust the heading levels of the parent %1 element or this %2 element so that the headings are properly nested on the page.',
-        ELEMENT_HIDDEN_1: 'The %1 element was not evaluated because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: 'The %1 element has not text content either add content, or remove it from the page if it is not needed.'
-      },
-      PURPOSES: [
-        'Heading elements that are properly nested help users of assistive technologies understand the structure of the information on the web page.'
-      ],
-      TECHNIQUES: [
-        'Include headings elements at the proper level for each section of a web page.',
-        'Use headings as labels for ARIA landmarks to provide a redundant way for users of assistive technologies to navigate the page (i.e. header or landmark navigation).',
-        'Check headings against other headings in the document to make sure they uniquely describe the content of each section of the web page.',
-        'If headings are too similar to each other, users of assistive technologies will not be able to use them to understand the differences between sections of the web page.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G130: Providing descriptive headings',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G130'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G141: Organizing a page using headings',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G141'
-        },
-        { type:  REFERENCES.TECHNIQUE,
-          title: 'W3C Web Accessibility Tutorials: Headings',
-          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
-        }
-      ]
-    },
-    HEADING_6: {
-      ID:                    'Heading 6',
-      DEFINITION:            'Heading elements should have visible text content.',
-      SUMMARY:               'Headings should have text content',
-      TARGET_RESOURCES_DESC: 'Heading elements',
-      RULE_RESULT_MESSAGES: {
-        FAIL_S:   'For the heading element with only image content, replace the image with text content styled using CSS.',
-        FAIL_P:   'For the %N_F heading elements with only image content, replace the images with text content styled using CSS.',
-        HIDDEN_S: 'One heading element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H heading elements that are hidden were not evaluated.',
-        NOT_APPLICABLE:  'No headings with only image content.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The %1 element contains visible text content.',
-        ELEMENT_FAIL_1: 'Add visible text content to the %1 element.',
-        ELEMENT_FAIL_2: 'The %1 element does not have an accessible name.  Either remove the heading from the page or add visible text content to describe the section.',
-        ELEMENT_HIDDEN_1: 'The %1 element was not evaluated because it is hidden from assistive technologies.'
-      },
-      PURPOSES: [
-        'Heading elements that consist only of image content are not easily restyled for readabilty by people with low vision.'
-      ],
-      TECHNIQUES: [
-        'Use CSS instead of images to style heading text content.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'C22: Using CSS to control visual presentation of text',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/C22'
-        },
-        { type:  REFERENCES.TECHNIQUE,
-          title: 'W3C Web Accessibility Tutorials: Headings',
-          url:   'https://www.w3.org/WAI/tutorials/page-structure/headings/'
-        }
-      ]
-    },
-    HEADING_7: {
-      ID:                    'Heading 7',
-      DEFINITION:            'If a @contentinfo@, @complementary@, @form@, @navigation@ or @search@ landmark contains a heading element, the first heading should be an @h2@ element.',
-      SUMMARY:               'First landmark heading @h2@',
-      TARGET_RESOURCES_DESC: '@contentinfo@, @complementary@, @form@, @navigation@ or @search@ landmarks elements',
-      RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Adjust the heading structure within the landmark so that the first heading is an @h2@ element.',
-        FAIL_P:   'Adjust the heading structures of the %N_F landmarks with headings so that the first heading of each is an @h2@ element.',
-        HIDDEN_S: 'One @h2@ element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H @h2@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE:  'No headings in landmarks, or no landmarks on the page.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @h2@ element is the first heading in the landmark.',
-        ELEMENT_FAIL_1: 'Adjust the headings in the %1 landmark to ensure that the first heading is an @h2@ element instead of an @%2@.',
-        ELEMENT_HIDDEN_1: 'The @h2@ element was not evaluated because it is hidden from assistive technologies.'
-      },
-      PURPOSES: [
-        'Headings provide a redundant way for people to navigate and orient themselves to content on a web page.',
-        'The use of an @h2@ element as the first heading in a landmark (except the @main@ and @banner@ landmarks) supports a consistent use of headings for finding the main sections in a web page.'
-      ],
-      TECHNIQUES: [
-        'Locate an @h2@ element at the beginning of the content in the landmark to describe the content in the landmark.',
-        'The @h2@ element can be used as the accessible name for a landmark using the @aria-labelledby@ attribute on the landmark to point to an @id@ attribute on the @h2@ element.',
-        'The @h2@ element can be hidden from the graphical rendering using offscreen CSS positioning (e.g. @position: absolute@ )techniques.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Headings: The H2 elements',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
-        }
-      ]
-    },
-        // ----------------------------------------------------------------
-        // LANDMARK_8: Headings nested in landmarks
-        // ----------------------------------------------------------------
-
-        HEADING_8: {
-            ID:         'Heading 8',
-            DEFINITION: 'Headings must be properly nested within a landmark.',
-            SUMMARY:    'Headings nested in landmarks',
-            TARGET_RESOURCES_DESC: 'Landmark elements',
-            RULE_RESULT_MESSAGES: {
-              FAIL_S:   'Review the heading structure within the landmark and adjust the heading levels such that all are properly nested.',
-              FAIL_P:   'Review the heading structure for each landmark with more than one heading, and adjust the heading levels in each landmark such that all headings are properly nested.',
-              HIDDEN_S: 'If the hidden heading element is supposed to be visible to assistive technologies, style it to be positioned off-screen.',
-              HIDDEN_P: 'If any of the %N_H hidden heading elements are supposed to be visible to assistive technologies, style them to be positioned off-screen.',
-              NOT_APPLICABLE: 'No nested headings found in landmarks.'
-            },
-            BASE_RESULT_MESSAGES: {
-              ELEMENT_PASS_1:   '@%1@ heading is properly nested in the @%2@ landmark.',
-              ELEMENT_FAIL_1:   'Adjust the level of the @%1@ heading or other heading elements such that the headings are properly nested in the @%2@ landmark.',
-              ELEMENT_FAIL_2:   'Add text content to @%1@ element that describes the section it labels or remove it from the @%2@ landmark.',
-              ELEMENT_FAIL_3:   'Adjust the level of either the parent @%1@ heading or this @%2@ heading such that they are properly nested in the @%3@ landmark.',
-              ELEMENT_HIDDEN_1: 'The @%1@ heading in the @%2@ landmark was not evaluated because it is hidden from assistive technologies.',
-              ELEMENT_HIDDEN_2: 'The @%2@ landmark was not evaluated because it is hidden from assistive technologies.'
-            },
-            PURPOSES: [
-              // TODO: what is the purpose?
-              'Headings provide a way to indicate the structure and to label the sections of content within a landmark.',
-              'Headings and there associated heading levels provide a way for people using assistive technology to understand and navigate the structure of the content within a landmark.'
-            ],
-            TECHNIQUES: [
-              // TODO: what are the techniques?
-              'Use an @h1@ element for the first heading in @main@ landmarks.',
-              'Use an @h2@ element for the first heading in other top level landmarks.',
-              'Use heading elements to identify the content of each section within a landmark.',
-              'Properly nest of heading elements within a landmark (e.g. @h2@ follows @h1@ headings, @h3@ follows @h2@ headings, ...).'
-            ],
-            MANUAL_CHECKS: [
-            ],
-            INFORMATIONAL_LINKS: [
-              { type:  REFERENCES.SPECIFICATION,
-                title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-                url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
-              },
-              { type:  REFERENCES.TECHNIQUE,
-                title: 'W3C Web Accessibility Tutorials: Page Structure',
-                url:   'https://www.w3.org/WAI/tutorials/page-structure/'
-              }
-            ]
-        }
-    }
+  }
 };
 
 /* landmarkRules.js */
@@ -14900,6 +15384,7 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules$1);
+addToArray(headingRules$1);
 addToArray(landmarkRules$1);
 
 /* resultSummary.js */

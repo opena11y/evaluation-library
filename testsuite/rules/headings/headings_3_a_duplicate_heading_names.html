@@ -15,18 +15,19 @@
     }
   </style>
   <body>
-    <h1>Sibling headings are unique/same, no main landmark</h1>
+    <h1 class="HEADING_3_PASS">Sibling headings are unique/same, no main landmark</h1>
 
     <h2 class="HEADING_3_PASS">h2 different 1</h2>
     
     <div class="border">
       <h3 class="HEADING_3_FAIL">h3 same</h3>
-      <h4>h4 different 1</h4>
+      <h4 class="HEADING_3_PASS">h4 different 1</h4>
       <h3 class="HEADING_3_FAIL">h3 same</h3>
-      <h4>h4 no siblings</h4>
+      <h3 class="HEADING_3_HIDDEN" hidden>h3 same</h3>
+      <h4 class="HEADING_3_PASS">h4 no siblings</h4>
       <h5 class="HEADING_3_PASS">h5 different 1</h5>
       <h5 class="HEADING_3_FAIL">h5 same</h5>
-      <h6>h6 no siblings</h6>
+      <h6 class="HEADING_3_PASS">h6 no siblings</h6>
       <h5 class="HEADING_3_PASS">h5 different 2</h5>
       <h6 class="HEADING_3_PASS">h6 different 2</h6>
       <h6 class="HEADING_3_FAIL">h6 same</h6>
@@ -41,14 +42,15 @@
     <div class="border">
       <h3 class="HEADING_3_PASS">h3 different 2</h3>
       <h3 class="HEADING_3_PASS">h3 different 3</h3>
+      <h3 class="HEADING_3_HIDDEN" hidden>h3 different 3</h3>
     </div>  
 
     <h2 class="HEADING_3_FAIL">h2 same</h2>
     
     <div class="border">
       <h3 class="HEADING_3_PASS">h3 same</h3>
-      <h3 style="display: none">h3 same</h3>
-      <h3 aria-hidden="true">h3 same</h3>
+      <h3 style="display: none"  class="HEADING_3_HIDDEN">h3 same</h3>
+      <h3 aria-hidden="true" class="HEADING_3_HIDDEN">h3 same</h3>
       <h3 class="HEADING_3_PASS" aria-hidden="false">h3 different 4</h3>
     </div>  
 

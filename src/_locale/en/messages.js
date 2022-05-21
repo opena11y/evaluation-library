@@ -6,7 +6,7 @@ import {rulesets}       from './rulesets.js';
 import {wcag}           from './wcag.js';
 
 import {colorRules}     from './colorRules.js';
-import {headingRules}  from './headingRules.js';
+import {headingRules}   from './headingRules.js';
 import {landmarkRules}  from './landmarkRules.js';
 
 export const messages = {

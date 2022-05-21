@@ -55,6 +55,17 @@ class LandmarkElement {
     });
   }
 
+  getFirstVisibleHeadingDomElement() {
+    const domElements = this.childHeadingDomElements;
+    for (let i = 0; i < domElements.length; i += 1){
+      const de = domElements[i];
+      if (de.visibility.isVisibleToAT) {
+        return de;
+      }
+    }
+    return false;
+  }
+
   toString () {
     return this.domElement.role;
   }
@@ -71,6 +82,7 @@ class LandmarkElement {
 
 export default class StructureInfo {
   constructor () {
+    this.hasMainLandmark = false;
     this.allLandmarkElements = [];
     this.allHeadingDomElements = [];
     this.childLandmarkElements = [];
@@ -91,6 +103,11 @@ export default class StructureInfo {
    */
 
   addChildLandmark (domElement, parentLandmarkElement, documentIndex) {
+
+    if (domElement.role === 'main') {
+      this.hasMainLandmark = true;
+    }
+
     const le = new LandmarkElement(domElement, parentLandmarkElement);
     this.allLandmarkElements.push(le);
 

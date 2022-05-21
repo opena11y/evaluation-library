@@ -212,9 +212,9 @@ export default class DOMElement {
   /**
    * @method addTextToLastChild
    *
-   * @desc
+   * @desc Adds the text content to an existing DOMText object
    *
-   * @param {String}  text  -
+   * @param {String}  text  - text content to add
    */
 
   addTextToLastChild (text) {
@@ -223,6 +223,34 @@ export default class DOMElement {
       domItem.addText(text);
     }
   }
+
+  /**
+   * @method hasTextContent
+   *
+   * @desc Checks to see if the element contains any text content
+   *
+   * @return {Boolean} True it there are text nodes, otherwise false
+   */
+
+  hasTextContent () {
+
+    function anyDOMText (domItems) {
+      for (let i = 0; i < domItems.length; i += 1) {
+        const domItem = domItems[i];
+        if (domItem.isDomText) {
+          return true;
+        }
+        else {
+          if (anyDOMText (domItem.children)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+    return anyDOMText(this.children);
+  }
+
 
   toString () {
     let identifer = this.tagName;

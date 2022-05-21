@@ -339,7 +339,7 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 }
 
 /*
- * OpenA11y Alliance Rules
+ * OpenA11y Rules
  * Rule group: Landmark Rules
  */
 

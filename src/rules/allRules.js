@@ -2,6 +2,7 @@
 
 /* Imports */
 import {colorRules}     from './colorRules.js';
+import {headingRules}   from './headingRules.js';
 import {landmarkRules}  from './landmarkRules.js';
 import Rule             from './rule.js';
 import DebugLogging     from '../debug.js';
@@ -18,6 +19,7 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules);
+addToArray(headingRules);
 addToArray(landmarkRules);
 
 

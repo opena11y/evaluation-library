@@ -47,6 +47,8 @@ const noAccName = {
 *   (2) Use aria-label attribute value;
 *   (3) Use whatever method is specified by the native semantics of the
 *   element, which includes, as last resort, use of the title attribute.
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
 function getAccessibleName (doc, element, recFlag) {
   let accName = null;
@@ -64,6 +66,8 @@ function getAccessibleName (doc, element, recFlag) {
 *   description calculation based on its precedence order:
 *   (1) Use aria-describedby, unless a traversal is already underway;
 *   (2) As last resort, use the title attribute.
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
 function getAccessibleDesc (doc, element, recFlag) {
   let accDesc = null;
@@ -80,6 +84,8 @@ function getAccessibleDesc (doc, element, recFlag) {
 *   getErrMessage: Use the ARIA Roles Model specification for accessible
 *   description calculation based on its precedence order:
 *   (1) Use aria-errormessage, unless a traversal is already underway;
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
 function getErrMessage (doc, element) {
   let errMessage = null;

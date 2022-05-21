@@ -83,6 +83,8 @@ class RefInfo {
 
 export default class AriaValidation {
   constructor (doc, role, defaultRole, node) {
+    const tagName = node.tagName.toLowerCase();
+
     let designPattern = designPatterns[role] || null;
     this.isValidRole  = designPattern !== null;
 
@@ -120,6 +122,37 @@ export default class AriaValidation {
     this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
     this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
+
+    switch (tagName) {
+      case 'h1':
+        this.ariaLevel = 1;
+        break;
+
+      case 'h2':
+        this.ariaLevel = 2;
+        break;
+
+      case 'h3':
+        this.ariaLevel = 3;
+        break;
+
+      case 'h4':
+        this.ariaLevel = 4;
+        break;
+
+      case 'h5':
+        this.ariaLevel = 5;
+        break;
+
+      case 'h6':
+        this.ariaLevel = 6;
+        break;
+
+      default:
+        const level = parseInt(node.getAttribute('aria-level'));
+        this.ariaLevel = (typeof level === 'Number') && (level > 0) ? level : 0;
+        break;
+    }
 
     if (debug.flag) {
       node.attributes.length && debug.log(`${node.outerHTML}`, 1);
