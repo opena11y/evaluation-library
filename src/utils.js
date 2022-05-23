@@ -213,9 +213,10 @@ function cleanForUTF8 (str) {
  *
  * @param  {accName}  str - string to clean
  *
- * @return {String}  String with only ASCII characters
+ * @return {Object} ref1 - Name object 1
+ * @return {Object} ref2 - Name object 1
  */
 
-function accNamesTheSame (accName1, accName2) {
-  return accName1.name.toLowerCase() === accName2.name.toLowerCase();
+function accNamesTheSame (ref1, ref2) {
+  return ref1.name.toLowerCase() === ref2.name.toLowerCase();
 }

@@ -6,16 +6,15 @@ import DebugLogging  from '../debug.js';
 /* Constants */
 const debug = new DebugLogging('linkInfo', true);
 
-
 /**
  * @class LinkInfo
  *
  * @desc Collects information on the links in a web page
  */
 
-export default class ImageInfo {
+export default class LinkInfo {
   constructor () {
-    this.allLinkDomElements  = [];
+    this.allLinkDomElements = [];
   }
 
   /**
