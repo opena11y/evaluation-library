@@ -144,7 +144,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$m = new DebugLogging('colorContrast', false);
+const debug$n = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -164,9 +164,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$m.flag) {
-      debug$m.separator();
-      debug$m.tag(elementNode);
+    if (debug$n.flag) {
+      debug$n.separator();
+      debug$n.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -190,11 +190,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$m.flag) {
-      debug$m.log(`[                    opacity]: ${this.opacity}`);
-      debug$m.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$m.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$m.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$n.flag) {
+      debug$n.log(`[                    opacity]: ${this.opacity}`);
+      debug$n.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$n.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$n.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -516,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$l = new DebugLogging('visibility', false);
+const debug$m = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -564,17 +564,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$l.flag) {
-      debug$l.separator();
-      debug$l.tag(elementNode);
-      debug$l.log('[          isHidden]: ' + this.isHidden);
-      debug$l.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$l.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$l.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$l.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$l.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$l.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$l.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$m.flag) {
+      debug$m.separator();
+      debug$m.tag(elementNode);
+      debug$m.log('[          isHidden]: ' + this.isHidden);
+      debug$m.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$m.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$m.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$m.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$m.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$m.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$m.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5466,6 +5466,7 @@ const designPatterns = {
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
 const inputsWithChecked   = ['checkbox', 'radio'];
 
+
 /* helper functions */
 
 /*
@@ -5671,10 +5672,54 @@ function accNamesTheSame (ref1, ref2) {
   return ref1.name.toLowerCase() === ref2.name.toLowerCase();
 }
 
+/**
+ * @function checkIsTabStop
+ *
+ * @desc Returns true if the element is a tab stop
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns true if the elements is a tab stop, otherwise false
+ */
+
+function checkIsTabStop (node) {
+  const tagName  = node.tagName.toLowerCase();
+  const href     = node.hasAttribute('href');
+  const controls = node.hasAttribute('controls');
+  const type     = node.hasAttribute('type') ? node.getAttribute('type') : '';
+
+  if (node.tabIndex >= 0) {
+    return true;
+  }
+
+  switch (tagName ) {
+    case 'a':
+      return href;
+
+    case 'audio':
+      return controls;
+
+    case 'input':
+      return type !== 'hidden';
+
+    case 'select':
+      return true;
+
+    case 'textarea':
+      return true;
+
+    case 'video':
+      return controls;
+
+  }
+
+  return false;
+}
+
 /* ariaInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('AriaInfo', false);
+const debug$l = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -5821,16 +5866,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$k.flag) {
-      node.attributes.length && debug$k.log(`${node.outerHTML}`, 1);
-      debug$k.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$k.log(`[         isWidget]: ${this.isWidget}`);
-      debug$k.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$k.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$k.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$k.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$k.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$k.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$l.flag) {
+      node.attributes.length && debug$l.log(`${node.outerHTML}`, 1);
+      debug$l.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$l.log(`[         isWidget]: ${this.isWidget}`);
+      debug$l.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$l.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$l.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$l.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$l.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$l.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7508,7 +7553,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$j = new DebugLogging('ariaInHtml', false);
+const debug$k = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7670,11 +7715,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$j.flag) {
+  if (debug$k.flag) {
     if (tagName === 'h2') {
-      debug$j.tag(node);
+      debug$k.tag(node);
     }
-    debug$j.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$k.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8769,7 +8814,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$i = new DebugLogging('DOMElement', false);
+const debug$j = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -8816,6 +8861,8 @@ class DOMElement {
     this.role    = this.hasRole ?
                    elementNode.getAttribute('role') :
                    defaultRole;
+
+    this.isTabStop = checkIsTabStop(elementNode);
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
@@ -9027,12 +9074,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$i.flag) {
+    if (debug$j.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$i.domText(domItem, prefix);
+          debug$j.domText(domItem, prefix);
         } else {
-          debug$i.domElement(domItem, prefix);
+          debug$j.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9111,12 +9158,12 @@ class DOMText {
 /* imageInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('imageInfo', true);
+const debug$i = new DebugLogging('imageInfo', true);
 
 /**
  * @class ImageElement
  *
- * @desc Idenifies a DOM element as a image or graphical object
+ * @desc Identifies a DOM element as an image or graphical object
  *
  * @param  {Object}  domElement   - Structural Information
  */
@@ -9124,6 +9171,18 @@ const debug$h = new DebugLogging('imageInfo', true);
 class ImageElement {
   constructor (domElement) {
     this.domElement = domElement;
+    this.url = domElement.node.src ? new URL(domElement.node.src) : '';
+    if (this.url) {
+      const parts = this.url.pathname.split('/');
+      this.fileName = parts.length ? parts.pop : '';
+    }
+    else {
+      this.fileName = '';
+    }
+  }
+
+  addAreaDomElement (domElement) {
+    this.areaDomElements.push(domElement);
   }
 
   toString () {
@@ -9133,7 +9192,7 @@ class ImageElement {
 /**
  * @class MapElement
  *
- * @desc Idenifies a DOM element as an image map
+ * @desc Identifies a DOM element as an image map
  *
  * @param  {Object}  domElement   - Structural Information
  */
@@ -9163,8 +9222,8 @@ class MapElement {
 class ImageInfo {
   constructor () {
     this.allImageElements  = [];
-    this.allMapElements    = [];
-    this.allSVGDomElements = [];
+    this.allSVGDomElements    = [];
+    this.allMapElements       = [];
   }
 
   /**
@@ -9270,7 +9329,7 @@ class ImageInfo {
     }
 
     if (this.isMap(domElement)) {
-      currentMapElement = this.addMapElement.push(domElement);
+      currentMapElement = this.addMapElement(domElement);
     }
 
     if (this.isArea(domElement)) {
@@ -9289,18 +9348,19 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All Images ==', 1);
+    if (debug$i.flag) {
+      debug$i.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$h.domElement(ie.domElement);
+        debug$i.log(ie.domElement.tagName);
+        debug$i.log(ie.fileName);
       });
-      debug$h.log('== All SVG domElements  ==', 1);
+      debug$i.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$h.domElement(de);
+        debug$i.domElement(de);
       });
-      debug$h.log('== All MapElements ==', 1);
+      debug$i.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$h.domElement(me.domElement);
+        debug$i.domElement(me.domElement);
       });
     }
   }
@@ -9309,7 +9369,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('linkInfo', true);
+const debug$h = new DebugLogging('linkInfo', true);
 
 /**
  * @class LinkInfo
@@ -9355,10 +9415,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All Links ==', 1);
+    if (debug$h.flag) {
+      debug$h.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$g.domElement(de);
+        debug$h.domElement(de);
       });
     }
   }
@@ -9367,7 +9427,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('ListInfo', false);
+const debug$g = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -9388,8 +9448,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$f.flag) {
-      debug$f.log('');
+    if (debug$g.flag) {
+      debug$g.log('');
     }
   }
 
@@ -9414,9 +9474,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$g.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9523,16 +9583,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All ListElements ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$g.flag) {
+      debug$g.log('== All ListElements ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
       });
-      debug$f.log('== List Tree ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+      debug$g.log('== List Tree ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9542,7 +9602,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('structureInfo', false);
+const debug$f = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9585,11 +9645,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$e.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$e.domElement(h, prefix);
+      debug$f.domElement(h, prefix);
     });
   }
 
@@ -9750,27 +9810,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$e.flag) {
-      debug$e.log('== All Headings ==', 1);
+    if (debug$f.flag) {
+      debug$f.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$e.domElement(h);
+        debug$f.domElement(h);
       });
-      debug$e.log('== All Landmarks ==', 1);
+      debug$f.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$e.log('== Landmarks By Doc ==', 1);
+      debug$f.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$e.domElement(le.domElement);
+            debug$f.domElement(le.domElement);
           });
         }
       });
-      debug$e.log('== Structure Tree ==', 1);
+      debug$f.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9780,7 +9840,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', true);
+const debug$e = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -9873,7 +9933,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$d.flag) {
+    if (debug$e.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
       this.linkInfo.showLinkInfo();
@@ -10032,18 +10092,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$d.log(' === AllDomElements ===', true);
+    debug$e.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$d.domElement(de);
+      debug$e.domElement(de);
     });
 
-    debug$d.log(' === AllDomTexts ===', true);
+    debug$e.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$d.domText(dt);
+      debug$e.domText(dt);
     });
 
-    debug$d.log(' === DOMCache Tree ===', true);
-    debug$d.domElement(this.startingDomElement);
+    debug$e.log(' === DOMCache Tree ===', true);
+    debug$e.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -10051,7 +10111,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$c = new DebugLogging('constants', false);
+const debug$d = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -10452,13 +10512,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -10506,7 +10566,7 @@ new DebugLogging('Color Rules', false);
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Styling Rules
+ * Rule group: Color Rules
  */
 
 const colorRules$1 = [
@@ -10603,6 +10663,499 @@ const colorRules$1 = [
 
     } // end validate function
   }
+
+];
+
+/* focusRules.js */
+
+/* Constants */
+new DebugLogging('Focus Rules', false);
+
+/*
+ * OpenA11y Alliance Rules
+ * Rule group: Focus Rules
+ */
+
+const focusRules$1 = [
+
+/**
+ * @object FOCUS_1
+ *
+ * @desc Focus order
+ */
+
+{ rule_id             : 'FOCUS_1',
+  last_updated        : '2022-05-24',
+  rule_scope          : RULE_SCOPE.PAGE,
+  rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '2.4.3',
+  wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
+  target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
+  validate            : function (dom_cache, rule_result) {
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var page_element = dom_cache.keyboard_focus_cache.page_element;
+
+//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
+
+     var interactive_elements     = dom_cache.keyboard_focus_cache.interactive_elements;
+     var interactive_elements_len = interactive_elements.length;
+
+     var tab_count = 0;
+     var visible_count = 0;
+
+     for (var i = 0; i < interactive_elements_len; i++) {
+
+       var ie = interactive_elements[i];
+
+       var de = ie.dom_element;
+       if (!de) de =ie;
+
+       var cs = de.computed_style;
+
+       if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
+           (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
+
+         visible_count++;
+
+         if (de.tab_index >= 0) {
+           if (de.is_widget) {
+             // only include widgets that can be part of the tab order
+             if (de.is_tab_stoppable) {
+                tab_count++;
+               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+             }
+           }
+           else {
+             tab_count++;
+             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
+           }
+         }
+         else {
+           if (de.is_widget) {
+             // only include widgets that can be part of the tab order
+             if (de.is_tab_stoppable) {
+               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3', [de.tag_name, de.role, de.tab_index]);
+             }
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_4', [de.tag_name, de.tab_index]);
+           }
+         }
+
+       }
+       else {
+
+         if (de.is_widget) {
+           // only include widgets that can be part of the tab order
+           if (de.is_tab_stoppable) {
+             rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+           }
+         }
+         else {
+           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+         }
+       }
+     }  // endfor
+
+ //    logger.debug(" Visible count: " + visible_count + "  Tab count: " + tab_count);
+
+     if (visible_count > 1) {
+
+       if (tab_count === visible_count) {
+         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [tab_count]);
+       }
+       else {
+         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [tab_count, (visible_count-tab_count)]);
+       }
+
+     }
+
+*/
+
+   } // end validation function
+},
+
+/**
+ * @object FOCUS_2
+ *
+ * @desc Focus style
+ */
+
+{ rule_id             : 'FOCUS_2',
+  last_updated        : '2022-05-24',
+  rule_scope          : RULE_SCOPE.PAGE,
+  rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '2.4.7',
+  wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
+  target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
+  validate            : function (dom_cache, rule_result) {
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var page_element = dom_cache.keyboard_focus_cache.page_element;
+
+//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
+
+     var interactive_elements     = dom_cache.keyboard_focus_cache.interactive_elements;
+     var interactive_elements_len = interactive_elements.length;
+
+     var visible_interactive_count = 0;
+
+     for (var i = 0; i < interactive_elements_len; i++) {
+
+       var ie = interactive_elements[i];
+
+       var de = ie.dom_element;
+       if (!de) de =ie;
+
+       var cs = de.computed_style;
+
+       if (cs.is_visible_onscreen === VISIBILITY.VISIBLE) {
+
+         visible_interactive_count++;
+
+         if (de.is_widget) {
+           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.tag_name, de.role]);
+         }
+         else {
+           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
+         }
+
+       }
+       else {
+
+         if (de.is_widget) {
+           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+         }
+         else {
+           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+         }
+
+       }
+     }  // endfor
+
+//     logger.debug(" Visible Interactive Count: " + visible_interactive_count);
+
+     if (visible_interactive_count > 1) {
+
+       if (visible_interactive_count === interactive_elements_len) {
+         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [interactive_elements_len]);
+       }
+       else {
+         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [visible_interactive_count, (interactive_elements_len - visible_interactive_count)]);
+       }
+
+     }
+
+*/
+
+   } // end validation function
+
+},
+
+/**
+ * @object FOCUS_3
+ *
+ * @desc Target of a link does not go to a page with popup windows
+ */
+
+{ rule_id             : 'FOCUS_3',
+  last_updated        : '2022-05-24',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.LINKS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '3.2.1',
+  wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+  target_resources    : ['a', 'area', 'select'],
+  validate            : function (dom_cache, rule_result) {
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
+
+     var link_elements     = dom_cache.links_cache.link_elements;
+     var link_elements_len = link_elements.length;
+
+     for (var i = 0; i < link_elements_len; i++) {
+
+       var le = link_elements[i];
+
+       var de = le.dom_element;
+       if (!de) de =le;
+
+       var cs = de.computed_style;
+
+       if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+
+         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [de.tag_name]);
+
+       }
+       else {
+         rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+       }
+     }  // endfor
+*/
+
+   } // end validation function
+},
+
+/**
+ * @object FOCUS_4
+ *
+ * @desc Select elements with onchange events
+ */
+
+{ rule_id             : 'FOCUS_4',
+  last_updated        : '2022-05-24',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '3.2.2',
+  wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+  target_resources    : ['select'],
+  validate            : function (dom_cache, rule_result) {
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
+
+     var control_elements     = dom_cache.controls_cache.control_elements;
+     var control_elements_len = control_elements.length;
+
+     for (var i = 0; i < control_elements_len; i++) {
+
+       var ce = control_elements[i];
+
+       var de = ce.dom_element;
+
+       var cs = de.computed_style;
+
+       if ((de.tag_name === 'select') &&
+            de.events.has_change) {
+
+         if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.tag_name]);
+         }
+         else {
+           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+         }
+       }
+     }  // endfor
+*/
+
+   } // end validation function
+},
+
+/**
+ * @object FOCUS_5
+ *
+ * @desc Form include a submit button
+ *
+ */
+
+{ rule_id             : 'FOCUS_5',
+  last_updated        : '2022-05-24',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '3.2.2',
+  wcag_related_ids    : [],
+  target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
+  validate            : function (dom_cache, rule_result) {
+
+/*
+    function has_submit_button(control) {
+
+      var cce = control.child_cache_elements;
+      var cce_len = cce.length;
+
+      var has_submit = false;
+
+      for(var i = 0; i < cce_len; i++) {
+        var ce = cce[i];
+        var de = ce.dom_element;
+        var cs = de.computed_style;
+
+        if(ce.control_type === CONTROL_TYPE.SUBMIT) {
+          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', []);
+            has_submit = true;
+          }
+          else {
+           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_2', []);                          }
+        }
+
+        if (ce.child_cache_elements && ce.child_cache_elements.length) {
+          has_submit = has_submit || has_submit_button(ce);
+        }
+
+      }
+
+      return has_submit;
+
+    }
+
+    function has_other_button(control, count) {
+
+      var cee = control.child_cache_elements;
+      var cee_len = cee.length;
+
+      for(var i = 0; i < cee_len; i++) {
+        var ce = cee[i];
+        var de = ce.dom_element;
+        var cs = de.computed_style;
+
+//        logger.debug("Control: " + ce + " de: " + de + " cs: " + cs);
+
+        if (ce.control_type === CONTROL_TYPE.BUTTON_INPUT) {
+          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', ['button']);
+            count += 1;
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_3', ['button']);
+          }
+        }
+        else {
+           if (ce.control_type === CONTROL_TYPE.IMAGE) {
+             if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', ['image']);
+               count += 1;
+             }
+             else {
+               rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_3', ['image']);
+             }
+           }
+           else {
+             if (ce.control_type === CONTROL_TYPE.BUTTON_ELEMENT) {
+               if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+                 rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_4', []);
+                 count += 1;
+               }
+               else {
+                 rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_4', []);
+               }
+             }
+             else {
+               if (de.has_role && (de.role === 'button')) {
+                 if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_5', [de.tag_name]);
+                   count += 1;
+                 }
+                 else {
+                  rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_5', [de.tag_name]);
+                 }
+               }
+             }
+           }
+        }
+
+        if (ce.child_cache_elements && ce.child_cache_elements.length) {
+          count += has_other_button(ce, count);
+        }
+
+      }
+
+      return count;
+
+    }
+
+    function hasVisibleFormControls(controls) {
+
+      for (var i = 0; i < controls.length; i++) {
+
+        var ce = controls[i];
+        if (ce.control_type === CONTROL_TYPE.LABEL) continue;
+
+        var de = ce.dom_element;
+        var cs = de.computed_style;
+
+        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+          return true;
+        }
+        else {
+          if (ce.child_cache_elements && ce.child_cache_elements.length) {
+            var result = hasVisibleFormControls(ce.child_cache_elements);
+            if (result) return true;
+          }
+        }
+      }
+
+      return false;
+    }
+
+    var TEST_RESULT  = TEST_RESULT;
+    var VISIBILITY   = VISIBILITY;
+    var CONTROL_TYPE =  CONTROL_TYPE;
+
+    var form_elements   = dom_cache.controls_cache.form_elements;
+    var form_elements_len = form_elements.length;
+
+    // Check to see if valid cache reference
+    if (form_elements && form_elements_len) {
+
+      // collect all the visible controls
+      for (var i = 0; i < form_elements_len; i++) {
+        var fe = form_elements[i];
+        var de = fe.dom_element;
+        var cs = de.computed_style;
+
+        var control_type = fe.control_type;
+
+//        logger.debug("Form: " + fe + " controls: " + fe.number_of_controls + " cache elements: " + fe.child_cache_elements);
+
+        if ((control_type === CONTROL_TYPE.FORM) &&
+            (fe.number_of_controls > 0) &&
+            (hasVisibleFormControls(fe.child_cache_elements))) {
+
+          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+
+            if (has_submit_button(fe)) {
+              rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', []);
+            }
+            else {
+              var button_count = has_other_button(fe, 0);
+
+              if (button_count === 1) {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, fe, 'ELEMENT_MC_1', []);
+              }
+              else {
+                if (button_count > 1) {
+                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, fe, 'ELEMENT_MC_2', [button_count]);
+                }
+                else {
+                  rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
+                }
+              }
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      } // end loop
+    }
+    */
+
+  } // end validate function
+}
 
 ];
 
@@ -11002,6 +11555,380 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements, landmar
   return nestingErrors;
 }
 
+/* imageRules.js */
+
+/* Constants */
+const debug$c = new DebugLogging('Image Rules', true);
+
+/*
+ * OpenA11y Alliance Rules
+ * Rule group: Color Rules
+ */
+
+const imageRules$1 = [
+
+/**
+ * @object IMAGE_1
+ *
+ * @desc Images must have a source for an accessible name or be identified as decorative
+ */
+
+{ rule_id             : 'IMAGE_1',
+  last_updated        : '2014-11-28',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.TRIAGE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', 'area', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.imageInfo.allImageElements.forEach(ie => {
+      const de = ie.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if (de.accName.source === 'none') {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+        }
+        else {
+          if (de.accName.source === 'alt') {
+            if (de.tagName === "img") {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
+            }
+          }
+          else {
+            if (de.accName.source === 'aria-labelledby') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+            }
+            else {
+              if (de.accName.source === 'aria-label') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.tagName]);
+              }
+            }
+          }
+        }
+      } else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    });
+  } // end validation function
+},
+
+/**
+ * @object IMAGE_2
+ *
+ * @desc Text alternatives accurately describe images
+ */
+{ rule_id             : 'IMAGE_2',
+  last_updated        : '2015-09-11',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.imageInfo.allImageElements.forEach( ie => {
+      const de = ie.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if (de.tagName === 'img') {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+        }
+      } else {
+        if (de.tagName === 'img') {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+        }
+      }
+    });
+  } // end validation function
+},
+
+/**
+ * @object IMAGE_3
+ *
+ * @desc The file name of the image should not be part of the accessible name content (it must have an image file extension)
+ */
+{ rule_id             : 'IMAGE_3',
+  last_updated        : '2014-11-28',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+
+    dom_cache.imageInfo.allImageElements.forEach( ie => {
+      const de = ie.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if (de.tagName === 'img') {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+        }
+      } else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    });
+  } // end validation function
+ },
+
+/**
+ * @object IMAGE_4_EN (English)
+ *
+ * @desc If the accessible name contains content, it should be less than 100 characters long, longer descriptions should use long description techniques (English only)
+ */
+{ rule_id             : 'IMAGE_4_EN',
+  last_updated        : '2014-11-28',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', 'area'],
+  validate            : function (dom_cache, rule_result) {
+    debug$c.log('[IMAGE 4_EN]');
+
+/*
+    var MAX_ACCESSIBLE_NAME_LENGTH = 100;
+
+    var TEST_RESULT = TEST_RESULT;
+    var VISIBILITY  = VISIBILITY;
+    var SOURCE      = SOURCE;
+
+    var image_elements   = dom_cache.images_cache.image_elements;
+    var image_elements_len = image_elements.length;
+
+    // Check to see if valid cache reference
+    if (image_elements && image_elements_len) {
+
+      for (var i = 0; i < image_elements_len; i++) {
+        var ie = image_elements[i];
+        var de = ie.dom_element;
+
+        if (ie.accessible_name_source !== SOURCE.NONE && (ie.accessible_name_for_comparison.length > 0)) {
+
+          if ((de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) &&
+              (!de.has_role || (de.role !== 'presentation'))){
+
+            if (ie.accessible_name_for_comparison.length > MAX_ACCESSIBLE_NAME_LENGTH) {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [ie.accessible_name_for_comparison.length], ie.toString('short'));
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.PASS, ie, 'ELEMENT_PASS_1', [ie.accessible_name_for_comparison.length], ie.toString('short'));
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name], ie.toString('short'));
+          }
+        }
+      } // end loop
+    }
+    */
+
+  } // end validation function
+},
+
+/**
+ * @object IMAGE_5
+ *
+ * @desc Verify the image is decorative
+ */
+{ rule_id             : 'IMAGE_5',
+  last_updated        : '2015-09-11',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    debug$c.log('[IMAGE 5]');
+
+/*
+    var TEST_RESULT   = TEST_RESULT;
+    var VISIBILITY    = VISIBILITY;
+
+    var image_elements   = dom_cache.images_cache.image_elements;
+    var image_elements_len = image_elements.length;
+
+    // Check to see if valid cache reference
+    if (image_elements && image_elements_len) {
+
+      for (var i = 0; i < image_elements_len; i++) {
+        var ie = image_elements[i];
+        var de = ie.dom_element;
+        var cs = de.computed_style;
+
+        if (ie.accessible_name_source !== SOURCE.NONE || ie.is_presentation) {
+          if (ie.accessible_name_for_comparison.length === 0 || ie.is_presentation) {
+            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', []);
+              else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
+            }
+            else {
+              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', []);
+              else rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+            }
+          }
+        }
+      } // end loop
+    }
+    */
+  } // end validation function
+},
+
+/**
+ * @object IMAGE_6
+ *
+ * @desc For complex images, charts or graphs provide long description
+ */
+{ rule_id             : 'IMAGE_6',
+  last_updated        : '2014-11-28',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    debug$c.log('[IMAGE 6]');
+
+/*
+    function isSimilar(alt, title) {
+
+      if (typeof alt   !== 'string') return false;
+      if (typeof title !== 'string') return false;
+
+      alt   = util.normalizeSpace(alt.toLowerCase());
+      title = util.normalizeSpace(title.toLowerCase());
+
+      if (alt === title) return true;
+
+      if ((alt.length >= title.length) &&
+          (alt.indexOf(title) >= 0)) return true;
+
+      return false;
+    }
+
+    var TEST_RESULT   = TEST_RESULT;
+    var VISIBILITY    = VISIBILITY;
+
+    var image_elements   = dom_cache.images_cache.image_elements;
+    var image_elements_len = image_elements.length;
+
+    // Check to see if valid cache reference
+    if (image_elements && image_elements_len) {
+
+      for (var i = 0; i < image_elements_len; i++) {
+        var ie = image_elements[i];
+        var de = ie.dom_element;
+        var cs = de.computed_style;
+
+        if (ie.is_presentation || (ie.accessible_name_length === 0) || ie.accessible_name_source === SOURCE.NONE) continue;
+
+        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+          if (de.has_aria_describedby) {
+            if (de.undefined_aria_describedby_ids && de.undefined_aria_describedby_ids.length) {
+              rule_result.addResult(TEST_RESULT.FAIL, ie, 'ELEMENT_FAIL_1', [de.undefined_aria_describedby_ids], ie.toString('long'));
+            }
+            else {
+              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.aria_describedby], ie.toString('long'));
+              else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name, de.aria_describedby], ie.toString('long'));
+            }
+          } else if (de.has_title && (ie.accessible_name_source !== SOURCE.TITLE)) {
+              if (de.tag_name === 'img') {
+                if (isSimilar(de.alt, de.title)) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3A', [], ie.toString('long'));
+                else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3', [de.title], ie.toString('long'));
+              } else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_4', [de.tag_name, de.title], ie.toString('long'));
+            }
+            else if (ie.has_longdesc) {
+              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_5', [ie.longdesc], ie.toString('long'));
+              else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_6', [de.tag_name. ie.longdesc], ie.toString('long'));
+            }
+          else {
+            if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_7', [], ie.toString('long'));
+            else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_8', [de.tag_name], ie.toString('long'));
+          }
+        }
+        else {
+          if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [], ie.toString('long'));
+          else rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name], ie.toString('long'));
+        }
+      } // end loop
+    }
+    */
+
+  } // end validation function
+},
+
+/**
+ * @object IMAGE_7
+ *
+ * @desc MathML for mathematical expressions
+ */
+{ rule_id             : 'IMAGE_7',
+  last_updated        : '2015-09-15',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['img', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    debug$c.log('[IMAGE 7]');
+
+/*
+    var TEST_RESULT   = TEST_RESULT;
+    var VISIBILITY    = VISIBILITY;
+
+    var image_elements   = dom_cache.images_cache.image_elements;
+    var image_elements_len = image_elements.length;
+
+    // Check to see if valid cache reference
+    if (image_elements && image_elements_len) {
+
+      for (var i = 0; i < image_elements_len; i++) {
+        var ie = image_elements[i];
+        var de = ie.dom_element;
+        var cs = de.computed_style;
+
+        if (ie.is_presentation || (ie.accessible_name_length === 0)) continue;
+
+        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+          if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [], ie.toString('short'));
+          else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name], ie.toString('short'));
+        }
+        else {
+          if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [], ie.toString('short'));
+          else rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name], ie.toString('short'));
+        }
+      } // end loop
+    }
+    */
+
+  } // end validation function
+}
+];
+
 /* linkRules.js */
 
 /* Constants */
@@ -11133,328 +12060,6 @@ const linkRules$1 = [
 /* Constants */
 new DebugLogging('Landmark Rules', true);
 
-/* Helper Functions for Landmarks */
-
-
-/**
- * @function validateTopLevelLandmark
- *
- * @desc Evaluate if a landmark role is top level (e.g. not contained in other landmarks)
- *
- * @param  {DOMCache}    dom_cache   - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result - RuleResult object
- * @param  {String}      role        - Landmark role to check
- */
-
-function validateTopLevelLandmark(dom_cache, rule_result, role) {
-
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-
-        if (de.parentInfo.landmarkElement === null) {
-          if (de.hasRole) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []);
-          }
-        }
-        else {
-          // Check to see if the two elements with the role share the same DOM (e.g. iframe check)
-          // If in a different DOM, allow it to be the top level in that DOM
-          const de1 = de.parentInfo.landmarkElement.domElement;
-
-          if (de1 && (de.parentInfo.document !== de1.parentInfo.document)) {
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', []);
-            }
-          }
-          else {
-            // Fails if they are in the same DOM
-            const landmarkRole = de.parentInfo.landmarkElement.domElement.role;
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, landmarkRole]);
-            } else  {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [landmarkRole]);
-            }
-          }
-        }
-      }
-      else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-        }
-      }
-    }
-  });
-}
-
-/**
- * @function validateAtLeastOne
- *
- * @desc Evaluate if the the landmark region role exists in the page.
- *       The required parameter determines if the landamrk is missing whether
- *       a failure or manual check is required
- *
- * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result  - RuleResult object
- * @param  {String}      role         - Landmark role
- * @oaram  {Boolean}     roleRequired - Is the landamrk region role required
- */
-
-function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-        }
-        roleCount += 1;
-      }
-      else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-        }
-      }
-    }
-  });
-
-  if (roleCount === 0) {
-    if (roleRequired) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
-    }
-    else {
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-    }
-  } else {
-    if (roleCount === 1) {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
-    } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
-    }
-  }
-}
-
-
-/**
- * @function validateNoMoreThanOne
- *
- * @desc Evaluate if the the landmark region role exists more than once on the page.
- *
- * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result  - RuleResult object
- * @param  {String}      role         - Landmark region role
- */
-
-function validateNoMoreThanOne(dom_cache, rule_result, role) {
-
-  const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
-  let totalRoleCount = 0;
-  let anyMoreThanOne = false;
-
-  landmarkElementsByDoc.forEach( les => {
-    let visibleDomElements = [];
-    if (Array.isArray(les)) {
-      les.forEach( le => {
-        const de = le.domElement;
-        if (de.role === role) {
-          if (de.visibility.isVisibleToAT) {
-            visibleDomElements.push(de);
-            totalRoleCount += 1;
-          }
-          else {
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-            } else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-            }
-          }
-        }
-      });
-
-      visibleDomElements.forEach( de => {
-        if (visibleDomElements.length === 1) {
-          if (de.hasRole) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-          }
-        } else {
-          anyMoreThanOne = true;
-          if (de.hasRole) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
-          }
-        }
-      });
-    }
-  });
-
-  if (totalRoleCount > 0) {
-    if (anyMoreThanOne) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
-    }
-    else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
-    }
-  }
-}
-
-/**
- * @function validateLandmarkDescendants
- *
- * @desc Evaluate if the descendant landmark roles are a certain type
- *
- * @param  {DOMCache}    dom_cache             - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result           - RuleResult object
- * @param  {String}      role                  - Landmark region role
- * @param  {Array}       allowedLandmarkRoles  - An array of allowed descendant roles
- */
-
-function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandmarkRoles) {
-
-  function checkForDescendantLandmarks(landmarkElement) {
-    const result = {
-      failedCount: 0,
-      failedRoles : [],
-      passedCount: 0,
-      passedRoles : []
-    };
-
-    landmarkElement.descendantLandmarkElements.forEach( le => {
-      const de   = le.domElement;
-      const role = de.role;
-
-      if (de.visibility.isVisibleToAT) {
-        if (allowedLandmarkRoles.includes(role)) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
-          result.passedCount += 1;
-          result.passedRoles.push(role);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role]);
-          result.failedCount += 1;
-          result.failedRoles.push(role);
-        }
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName, role]);
-      }
-    });
-
-    return result;
-  }
-
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let visibleLandmarkElements = [];
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        visibleLandmarkElements.push(le);
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-      }
-    }
-  });
-
-  visibleLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    const result = checkForDescendantLandmarks(le);
-    const failedRoles = result.failedRoles.join(', ');
-    const passedRoles = result.passedRoles.join(', ');
-
-    if (result.failedCount === 1) {
-      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [failedRoles]);
-    } else {
-      if (result.failedCount > 1) {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [result.failedCount, failedRoles]);
-      }
-      else {
-        if (result.passedCount === 0) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-        }
-        else {
-          if (result.passedCount === 1) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [passedRoles]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [result.passedCount, passedRoles]);
-          }
-        }
-      }
-    }
-  });
-}
-
-/**
- * @function validateUniqueAccessibleNames
- *
- * @desc Evaluate if the accessible names for the landmark role are unique.
- *
- * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result  - RuleResult object
- * @param  {String}      role         - Landmark region role
- */
-
-function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
-
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let visibleDomElements = [];
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        visibleDomElements.push(de);
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
-      }
-    }
-  });
-
-  if (visibleDomElements.length > 1) {
-    visibleDomElements.forEach( (de1, index1) => {
-      let duplicate = false;
-      visibleDomElements.forEach( (de2, index2) => {
-        if ((index1 !== index2) &&
-            (accNamesTheSame(de1.accName, de2.accName))) {
-          duplicate = true;
-        }
-      });
-      if (duplicate) {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.accName.name, role]);
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [role]);
-      }
-    });
-  }
-}
 
 /*
  * OpenA11y Rules
@@ -11926,6 +12531,329 @@ const landmarkRules$1 = [
     } // end validate function
   }
 ];
+
+/* Helper Functions for Landmarks */
+
+
+/**
+ * @function validateTopLevelLandmark
+ *
+ * @desc Evaluate if a landmark role is top level (e.g. not contained in other landmarks)
+ *
+ * @param  {DOMCache}    dom_cache   - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result - RuleResult object
+ * @param  {String}      role        - Landmark role to check
+ */
+
+function validateTopLevelLandmark(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+
+        if (de.parentInfo.landmarkElement === null) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []);
+          }
+        }
+        else {
+          // Check to see if the two elements with the role share the same DOM (e.g. iframe check)
+          // If in a different DOM, allow it to be the top level in that DOM
+          const de1 = de.parentInfo.landmarkElement.domElement;
+
+          if (de1 && (de.parentInfo.document !== de1.parentInfo.document)) {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', []);
+            }
+          }
+          else {
+            // Fails if they are in the same DOM
+            const landmarkRole = de.parentInfo.landmarkElement.domElement.role;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, landmarkRole]);
+            } else  {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [landmarkRole]);
+            }
+          }
+        }
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+}
+
+/**
+ * @function validateAtLeastOne
+ *
+ * @desc Evaluate if the the landmark region role exists in the page.
+ *       The required parameter determines if the landamrk is missing whether
+ *       a failure or manual check is required
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark role
+ * @oaram  {Boolean}     roleRequired - Is the landamrk region role required
+ */
+
+function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let roleCount = 0;
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+        roleCount += 1;
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+
+  if (roleCount === 0) {
+    if (roleRequired) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+    }
+    else {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    }
+  } else {
+    if (roleCount === 1) {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+    } else {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
+    }
+  }
+}
+
+
+/**
+ * @function validateNoMoreThanOne
+ *
+ * @desc Evaluate if the the landmark region role exists more than once on the page.
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark region role
+ */
+
+function validateNoMoreThanOne(dom_cache, rule_result, role) {
+
+  const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
+  let totalRoleCount = 0;
+  let anyMoreThanOne = false;
+
+  landmarkElementsByDoc.forEach( les => {
+    let visibleDomElements = [];
+    if (Array.isArray(les)) {
+      les.forEach( le => {
+        const de = le.domElement;
+        if (de.role === role) {
+          if (de.visibility.isVisibleToAT) {
+            visibleDomElements.push(de);
+            totalRoleCount += 1;
+          }
+          else {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+            }
+          }
+        }
+      });
+
+      visibleDomElements.forEach( de => {
+        if (visibleDomElements.length === 1) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+          }
+        } else {
+          anyMoreThanOne = true;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+          }
+        }
+      });
+    }
+  });
+
+  if (totalRoleCount > 0) {
+    if (anyMoreThanOne) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
+    }
+    else {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+    }
+  }
+}
+
+/**
+ * @function validateLandmarkDescendants
+ *
+ * @desc Evaluate if the descendant landmark roles are a certain type
+ *
+ * @param  {DOMCache}    dom_cache             - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result           - RuleResult object
+ * @param  {String}      role                  - Landmark region role
+ * @param  {Array}       allowedLandmarkRoles  - An array of allowed descendant roles
+ */
+
+function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandmarkRoles) {
+
+  function checkForDescendantLandmarks(landmarkElement) {
+    const result = {
+      failedCount: 0,
+      failedRoles : [],
+      passedCount: 0,
+      passedRoles : []
+    };
+
+    landmarkElement.descendantLandmarkElements.forEach( le => {
+      const de   = le.domElement;
+      const role = de.role;
+
+      if (de.visibility.isVisibleToAT) {
+        if (allowedLandmarkRoles.includes(role)) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
+          result.passedCount += 1;
+          result.passedRoles.push(role);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role]);
+          result.failedCount += 1;
+          result.failedRoles.push(role);
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName, role]);
+      }
+    });
+
+    return result;
+  }
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let visibleLandmarkElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleLandmarkElements.push(le);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    }
+  });
+
+  visibleLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    const result = checkForDescendantLandmarks(le);
+    const failedRoles = result.failedRoles.join(', ');
+    const passedRoles = result.passedRoles.join(', ');
+
+    if (result.failedCount === 1) {
+      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [failedRoles]);
+    } else {
+      if (result.failedCount > 1) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [result.failedCount, failedRoles]);
+      }
+      else {
+        if (result.passedCount === 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+        else {
+          if (result.passedCount === 1) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [passedRoles]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [result.passedCount, passedRoles]);
+          }
+        }
+      }
+    }
+  });
+}
+
+/**
+ * @function validateUniqueAccessibleNames
+ *
+ * @desc Evaluate if the accessible names for the landmark role are unique.
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark region role
+ */
+
+function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let visibleDomElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleDomElements.push(de);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+      }
+    }
+  });
+
+  if (visibleDomElements.length > 1) {
+    visibleDomElements.forEach( (de1, index1) => {
+      let duplicate = false;
+      visibleDomElements.forEach( (de2, index2) => {
+        if ((index1 !== index2) &&
+            (accNamesTheSame(de1.accName, de2.accName))) {
+          duplicate = true;
+        }
+      });
+      if (duplicate) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.accName.name, role]);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [role]);
+      }
+    });
+  }
+}
 
 /* common.js */
 
@@ -13169,6 +14097,240 @@ const colorRules = {
   }
 };
 
+/* focusRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const focusRules = {
+  FOCUS_1: {
+      ID:                    'Focus 1',
+      DEFINITION:            'The sequential focus order of links, form controls, embedded apps and widgets %s be meaningful.',
+      SUMMARY:               'Focus order %s be meaningful',
+      TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements and elements with widget roles with @tabindex@ values',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Check the "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+        MANUAL_CHECK_P:     'Check the "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+        HIDDEN_S: 'The link, form control, embedded app or widget element that is hidden does not need to be tested for focus order.',
+        HIDDEN_P: 'The %N_H links, form controls, embedded apps and/or widgets that are hidden do not need to be tested for focus order.',
+        NOT_APPLICABLE:  'No or only one focusable element on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, ...).',
+        PAGE_MC_2:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 other interactive elements on the page have been removed from the tab order by setting the @tabindex@ value to less than 0.',
+        ELEMENT_MC_1:     '%1 element with @role@="%2" is part of the sequential focus order manual check.',
+        ELEMENT_MC_2:     '%1 element is part of the sequential focus order manual check.',
+        ELEMENT_MC_3:     '%1 element with @role@="%2" has a @tabindex@="%2", so it is NOT part of the sequential focus oarder of the page.',
+        ELEMENT_MC_4:     '%1 element has a @tabindex@="%2", so it is NOT part of the sequential focus order of the page.',
+        ELEMENT_HIDDEN_1: '%1 element with @role@="%2" is hidden, so NOT a part of the sequential focus order of the page.',
+        ELEMENT_HIDDEN_2: '%1 element is hidden, so NOT a part of the sequential focus order of the page.'
+      },
+      PURPOSES: [
+        'The "tab" key is the primary key many browsers use to navigate the interactive elements on a web page.',
+        'The sequential order of the elements receiving focus can help a user understand the features on a web page.',
+        'The usability of frequently used or important interactive features of a web page can be improved by moving them to the beginning of the focus sequence.'
+      ],
+      TECHNIQUES: [
+        'Use document order to place related interactive items in a meaningful sequence.',
+        'The @tabindex@ atttribute value (i.e. values greater than 0) can be used to change the sequence of focusable elements in a web page or make non-interactive elements part of the "tab" order of the page.',
+        'A @tabindex@ values of less than 0 remove redundent interactive elements from the sequential focus order.'
+      ],
+      MANUAL_CHECKS: [
+        'Use the "tab" key to move focus through the links, form controls, embedded applications and widgets on the page.',
+        'Does the sequence of elements receiving focus make sense (i.e. related items on the page are navigated sequentially as a group).'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G59: Placing the interactive elements in an order that follows sequences and relationships within the content',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G59'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H4: Creating a logical tab order through links, form controls, and objects',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H4'
+        }
+      ]
+  },
+  FOCUS_2: {
+      ID:                    'Focus 2',
+      DEFINITION:            'The element with keyboard focus must have a visible focus style that is different from the non-focus state.',
+      SUMMARY:               'Focus must be visible',
+      TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements and elements with widget roles with @tabindex@ values',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Use the "tab" key to move focus between links, form controls, embedded apps and widgets and check the visibility of focus styling for each element as it receives focus.',
+        MANUAL_CHECK_P:     'Use the "tab" key to move focus between links, form controls, embedded apps and widgets and check the visibility of focus styling for each element as it receives focus.',
+        HIDDEN_S: 'The link, form control, embedded app or widget element that is hidden does not need to be tested for focus order.',
+        HIDDEN_P: 'The %N_H links, form controls, embedded apps and/or widgets that are hidden do not need to be tested for focus order.',
+        NOT_APPLICABLE:  'No focusable elements on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...).',
+        PAGE_MC_2:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 interactive elements are hidden.',
+        ELEMENT_MC_1:     '%1 element with @role@="%2" is part of the keyboard focus styling manual check.',
+        ELEMENT_MC_2:     '%1 element is part of the keyboard focus styling manual check.',
+        ELEMENT_HIDDEN_1: '%1 element with @role@="%2" is hidden, so is not visible for changing the focus styling.',
+        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for changing the focus styling.'
+      },
+      PURPOSES: [
+        'Many browsers don\'t provide a prominent or consistent visible keyboard focus styling for interactive elements, making it difficult for users to identify and track the element with keyboard focus.',
+        'Author defined visible keyboard focus style makes it easier for users to know which interactive element has keyboard focus and provides more consistent user experience between browsers and operating systems.'
+      ],
+      TECHNIQUES: [
+        'Use CSS psuedo element selector @:focus@ to change the styling of elements with keyboard focus.',
+        'Use @focus@ and @blur@ event handlers on checkboxes and radio buttons to change the styling of not only the form control, but also its label text to make it easier to see.',
+        'Styling changes should include creating a border around the interactive element and its label, typically using the CSS @border@ or @outline@ properties.',
+        'For consistent look and feel to the website it is often useful for the focus and hover styles to be the same or similar.'
+      ],
+      MANUAL_CHECKS: [
+        'Use the the keyboard (i.e. typically he "tab" key, but in the case of widgets other keys) to move focus through the links, form controls, embedded applications and widgets on the page.',
+        'Check if the element with keyboard focus is clearly visible for all focusable elements on the page as you move focus between elements, and that it changes more than just color (i.e. border/outline around element with focus).',
+        'Test keyboard focus styling using more than one browser and operating system, since there is a wide varability of between operating systems and browsers for styling keyboard focus.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C15: Using CSS to change the presentation of a user interface component when it receives focus ',
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/C15'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G195: Using an author-supplied, highly visible focus indicator',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
+        }
+      ]
+  },
+  FOCUS_3: {
+      ID:                    'Focus 3',
+      DEFINITION:            'The target of a link should result in focus the content the window if the target results in more than one window opening.',
+      SUMMARY:               'Target focus should be in content window',
+      TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Check the link to make sure that if the link opens more than one window that the focus is in the content window.',
+        MANUAL_CHECK_P:     'Check the %N_MC links to make sure that if any of the links opens more than one window that the focus is in the content window.',
+        HIDDEN_S: 'The link element that is hidden does not need to be tested for content focus.',
+        HIDDEN_P: 'The %N_H link elements that are hidden do not need to be tested for content focus.',
+        NOT_APPLICABLE:  'No link elements on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'If the target of the link opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
+        ELEMENT_HIDDEN_1:       '%1 element is hidden, so cannot open any new windows.'
+      },
+      PURPOSES: [
+        'User\'s can become disoriented if the focus causes unpredicatable actions, including new URLs and popup windows for advertisements or promotions.'
+      ],
+      TECHNIQUES: [
+        'Do not link to URLs that open multiple windows and do not manage the focus to be in the content windoow the user was expecting by following the link.'
+      ],
+      MANUAL_CHECKS: [
+        'After selecting a link and if it opens multiple windows, make sure the keyboard focus is in the content window.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G200: Opening new windows and tabs from a link only when necessary',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G201: Giving users advanced warning when opening a new window',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
+        }
+      ]
+  },
+  FOCUS_4: {
+      ID:                    'Focus 4',
+      DEFINITION:            '@select@ elements with @onchange@ event handler must not automatically change the user\'s context when keyboard focus moves between options.',
+      SUMMARY:               '@select@ must not change context',
+      TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Check the @select@ element to make sure that when keyboard focus moves between options does not cause a change in context (e.g. moving to a new URL or focus being moved from the @select@ element).',
+        MANUAL_CHECK_P:     'Check the %N_MC @select@ elements to make sure that when keyboard focus moves between options in each control does not cause a change in context (e.g. moving to a new URL or focus being moved from the @select@ element).',
+        HIDDEN_S: 'The @select@ element that is hidden does not need to be tested for automatically changing user context.',
+        HIDDEN_P: 'The %N_H @select@ elements that are hidden do not need to be tested for automatically changing user context.',
+        NOT_APPLICABLE:  'No @select@ elements on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Check to make sure moving keyboard focus between options in the @select@ box does not move focus from the list of options.',
+        ELEMENT_HIDDEN_1:       '@select@ element is hidden.'
+      },
+      PURPOSES: [
+        'User\'s can become disoriented if the focus changes cause unpredicatable actions.',
+        'When the user is using the kyboard to explore @select@ box options, the focus must stay on the options, until the user selects one of the options.'
+      ],
+      TECHNIQUES: [
+        'Do not use @onchange@ event handlers on @select@ elements.',
+        'Use selections should be made using the enter key.'
+      ],
+      MANUAL_CHECKS: [
+        'Move focus to the @selection@ box and use the keyboard to move the focus between options, check to make sure the focus changes are not causing the context to change (i.e. focus movig to a new window or focus moving from the current option in the select box).'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G200: Opening new windows and tabs from a link only when necessary',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G201: Giving users advanced warning when opening a new window',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
+        }
+      ]
+  },
+  FOCUS_5: {
+      ID:         'Focus 5',
+      DEFINITION: 'Forms must use @input[type="submit"]@ or other form control buttons for submitting forms.',
+      SUMMARY:    'Forms submitted using buttons',
+      TARGET_RESOURCES_DESC: '@input[type="submit"]@, @input[type="button"]@, @input[type="image"]@, @button@, @[role="button"]@',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that the form has uses a button to submit the form.',
+        MANUAL_CHECK_P: 'Verify that each of the %N_MC forms has a button used to submit the form.',
+        FAIL_S:    'No button elements found for submitting the form.',
+        FAIL_P:    'No button elements found for submitting %N_MC forms.',
+        HIDDEN_S:  'The form that is hidden was not evaluated.',
+        HIDDEN_P:  'The %N_H forms that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'No form controls on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1: 'The form has an @input[type="submit"]@.',
+        ELEMENT_PASS_2: '@input[type="submit"]@ is used for form submission.',
+        ELEMENT_FAIL_1: 'The form has no button elements.',
+        ELEMENT_MC_1: 'Verify that the button element contained in the form can be used for form submission.',
+        ELEMENT_MC_2: 'Verify that at least one of the %1 button elements contained in the form can be used for form submission.',
+        ELEMENT_MC_3: 'Verify if the @input[type="%1"]@ element can be used to  submit the form.',
+        ELEMENT_MC_4: 'Verify if the @button@ element can be used to  submit the form.',
+        ELEMENT_MC_5: 'Verify if the @%1[role="button"]@ element can be used to  submit the form.',
+        ELEMENT_HIDDEN_1: '@form@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@input[type="submit"]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_3: '@input[type="%1"]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_4: '@button@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_5: '@%1[role="button"]@ element was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Using a submit button allows users to easily identify and control how to  submit form information to a server for processing.  Forms that are submitted through changes in focus or selection may result in users prematurely submitting the form or not being aware they submitted the form.'
+      ],
+      TECHNIQUES: [
+        'The preferred technique for submitting forms is with the use of the input[type="submit"] form control.',
+        'An alternative techniques include using other HTML form control elements, including @input[type="button"]@, @input[type="image"]@ or @button@ elements with an accessible name indicating that the button is for submitting form information.',
+        'In the case when a non-form control element (e.g. @a@ or @div@ element) is being used to submit the form, the element can use ARIA [role="button"] attribute with the accessible name indicating that the button is for submitting form information.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
+          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H32: Providing submit buttons',
+          url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+        }
+      ]
+  }
+};
+
 /* headingRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -13506,6 +14668,487 @@ const headingRules = {
           url:   'https://www.w3.org/WAI/tutorials/page-structure/'
         }
       ]
+  }
+};
+
+/* imageRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const imageRules = {
+  IMAGE_1: {
+    ID:         'Image 1',
+    DEFINITION: 'Each @img@ element must specify an @alt@ attribute or equivalent markup that either defines a text alternative or identifies the image as being used for decoration, spacing or some other stylistic purpose.',
+    SUMMARY:    'Images must have alt text',
+    TARGET_RESOURCES_DESC: '@img@ and [role="img"]',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Add an @alt@ attribute or equivalent markup to the image element with missing alt text, or identify the image as decorative.',
+      FAIL_P:   'Add an @alt@ attribute or equivalent markup to each of the %N_F image elements with missing alt text, or identify the image as decorative.',
+      HIDDEN_S: 'One image element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H image elements that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@ or @[role="img"]@ elements found on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1: '@%1@ element has @alt@ attribute.',
+      ELEMENT_PASS_2: '@%1@ element has @aria-labelledby@ attribute.',
+      ELEMENT_PASS_3: '@%1@ element has @aria-label@ attribute.',
+      ELEMENT_PASS_4: '@%1@ element has @title@ attribute.',
+      ELEMENT_FAIL_1: 'Add an @alt@, @aria-labelledby@ or @aria-label@ attribute to the @%1@ element to add a text alternative, or use @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as purely decorative.',
+      ELEMENT_FAIL_2: 'Use the @aria-labelledby@ or @aria-label@ attribute instead of @alt@ attribute for the text alternative for @%1[role="img"]@ element, or change the role to @role="presentation"@ to identify the image as purely decorative.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'A text alternative for an image, usually specified with an @alt@ attribute, provides a summary of the purpose of the image for people with visual impairments, enabling them to understand the content or purpose of the image on the page.',
+      'An image with a text alternative that is an empty string or that has @role="presentation"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
+    ],
+    TECHNIQUES: [
+      'A text alternative should summarize the purpose of an image as succinctly as possible (preferably with no more than 100 characters).',
+      'The @alt@ attribute is the preferred and most commonly used way to provide a text alternative for @img@ and @area@ elements.',
+      'The @aria-labelledby@ attribute can be used to provide a text alternative when an image can be described using text already associated with the image, or for elements with @role="img"@.',
+      'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute. Use the @alt@ attribute for @img@ and @area@ elements.',
+      'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.',
+      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 5 Specification: 12.2 The @img@ element',
+        url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
+        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Web Accessibility Tutorials : Images',
+        url:   'https://www.w3.org/WAI/tutorials/images/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Diagram Center: Image Description',
+        url:   'http://diagramcenter.org/making-images-accessible.html'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Alternative Text',
+        url:   'https://webaim.org/techniques/alttext/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Accessibility at Penn State: Text Equivalents for Images',
+        url:   'https://accessibility.psu.edu/images/'
+      }
+    ]
+  },
+
+  IMAGE_2: {
+    ID:         'Image 2',
+    DEFINITION: 'The text alternative for @img@ elements and elements with @[role="img"]@ must summarize the content and/or purpose of the image.',
+    SUMMARY:    'Alt text must summarize purpose',
+    TARGET_RESOURCES_DESC: '@img@, [role="img"] with short descriptions',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'Verify that the text alternative of the @img@ element or element with @[role="img"]@ accurately and succinctly summarizes the content and/or purpose of the image.',
+      MANUAL_CHECK_P: 'Verify that the text alternative for each of the %N_MC @img@ elements and/or elements with @[role="img"]@ accurately and succinctly summarizes the content and/or purpose of the image.',
+      HIDDEN_S: 'One @img@ element or element with @[role="img"]@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @img@ elements and/or elements with @[role="img"]@ that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@ elements and/or elements with @[role="img"]@ on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1: 'Verify the @img@ element\'s text alternative accurately and succinctly summarizes the content and/or purpose of the image.',
+      ELEMENT_MC_2: 'Verify the @%1[role=img]@ element\'s text alternative accurately and succinctly summarizes the content and/or purpose of the image.',
+      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
+      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'Images can convey a wide range of content and be used for many different purposes on a web page, from button and icon images that perform simple actions to complex graphics that help people visualize the features and relationships of large data sets.',
+      'Markup supports creating both short and long text alternatives. A short text alternative is designed to orient people who cannot see the image to the type of content it contains or its purpose on the page.  A long text alternative or long description provides comprehensive details of the features of an image, e.g., the data used to generate a chart or graph, relationships in a flow chart, or a MathML version of a mathematical equation.',
+      'Images that function as buttons and perform an action on the page should have a short text alternative that is as succinct as possible (e.g., "Increase text size").',
+      'Informative images of photographs need a short text alternative and additionally can often benefit from long descriptions.',
+      'Informative images of charts or graphs need both a short text alternative and a long description to describe its purpose and the data used to create it.',
+      'If an image that is informative does not have text alternative content, users of assistive technologies will not have access to the information the image conveys.'
+    ],
+    TECHNIQUES: [
+      'Use the @alt@ attribute on @img@ elements to provide a text alternative for the image. A rule of thumb is to use what you would say to someone over the phone to describe the image.',
+      'The @aria-labelledby@ attribute can be used to provide a text alternative when images can be described using text already associated with the image, such as a visible caption, or for elements with @role="img"@.',
+      'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute.',
+      'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.  NOTE: Using the @title@ attribute will also generate a tooltip in some browsers.',
+      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+    ],
+    MANUAL_CHECKS: [
+      'Find each image on the page and verify that it is only being used decoratively or is redundant with other information on the page.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 5 Specification: 12.2 The @img@ element',
+        url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
+        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Web Accessibility Tutorials : Images',
+        url:   'https://www.w3.org/WAI/tutorials/images/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Diagram Center: Image Description',
+        url:   'http://diagramcenter.org/making-images-accessible.html'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Alternative Text',
+        url:   'https://webaim.org/techniques/alttext/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Accessibility at Penn State: Text Equivalents for Images',
+        url:   'https://accessibility.psu.edu/images/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Diagram Center: Digital Image And Graphic Resources for Accessible Materials',
+        url:   'https://diagramcenter.org/'
+      }
+
+    ]
+  },
+
+  IMAGE_3: {
+    ID:         'Image 3',
+    DEFINITION: 'The source filename of the image element must not be part of its text alternative.',
+    SUMMARY:    'Alt text must not include filename',
+    TARGET_RESOURCES_DESC: '@img@, @area@ and @[role="img"]@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Change the value of the @alt@ attribute on the image element to summarize the purpose of the image without referencing its source filename.',
+      FAIL_P:   'Change the value of the @alt@ attribute on the %N_F out of %N_T image elements to summarize the purpose of each image without referencing its source filename.',
+      HIDDEN_S: 'One image element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H image elements that are hidden were not evaluated.',
+      NOT_APPLICABLE:  'No @img@, @area@ or @[role="img"]@ elements found on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1: 'The text alternative does not contain the source filename.',
+      ELEMENT_FAIL_1: 'Change the text alternative to summarize the purpose of the image without referencing its source filename.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'A text alternative should summarize the purpose of an image for people with visual impairments.',
+      'The source filename of the image should not be included because generally it is not useful information.',
+      'An image with a text alternative that is an empty string is ignored by assistive technologies, and indicates that it is being used for styling purposes rather than meaningful content.'
+    ],
+    TECHNIQUES: [
+      'A text alternative should describe the purpose of an image as succinctly as possible (preferably with no more than 100 characters). Do not include the source filename as part of the text content.',
+      'The @alt@ attribute is the preferred and most commonly used way to provide a text alternative for @img@ and @area@ elements.',
+      'The @aria-labelledby@ attribute can be used to provide a text alternative when images can be described using text already associated with the image, such as a visible caption, or for elements with @role="img"@.',
+      'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute.',
+      'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
+        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
+      }
+    ]
+  },
+
+  IMAGE_4_EN: {
+    ID:         'Image 4 (English)',
+    DEFINITION: 'The text alternative  for an image should be no more than 100 characters in length.',
+    SUMMARY:    'Alt text no more than 100 characters',
+    TARGET_RESOURCES_DESC: '@img@, @area@ and @[role="img"]@ elements',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'Verify the image with the text alternative longer than 100 characters could not be reworded more succinctly or be rewritten to use a long description.',
+      MANUAL_CHECK_P: 'Verify the %N_MC images with text alternatives longer than 100 characters can not be reworded more succinctly or be rewritten to use long descriptions.',
+      HIDDEN_S: 'One image element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H image elements that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@ or @[role="img"]@ elements on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1: 'The text alternative is %1 characters long.',
+      ELEMENT_MC_1:   'The text alternative is %1 characters long. Check its content to determine whether it can be reworded to be no more than 100 characters. Also consider providing a long description using the @aria-describedby@, @title@ or @longdesc@ attribute, which would then allow shortening the text alternative content.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'A text alternative should summarize the purpose of an image as succinctly as possible for people with visual impairments.',
+      'Overly long text alternatives can reduce usability by increasing the time it takes to read a web page and understand the significance of the included images.',
+      'An image with a text alternative that is an empty string (e.g. @alt=""@) is ignored by assistive technologies, and indicates that it is being used for purely decorative, spacing or stylistic purposes rather than for meaningful content.'
+    ],
+    TECHNIQUES: [
+      'A text alternative (e.g. in English and many other Western languages) should describe the purpose of an image as succinctly as possible (preferably with no more than 100 characters).',
+      'If a text alternative requires more than 100 characters, consider using the @aria-describedby@, @title@ or @longdesc@ attribute for a longer, more detailed description of the image, along with shortening the text alternative content.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
+        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'G95: Providing text alternatives that provide a brief description of the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G95'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F30'
+      }
+    ]
+  },
+
+  IMAGE_5: {
+    ID:         'Image 5',
+    DEFINITION: 'Verify an image with @[alt=""]@ or @[role="presentation"]@ is only being used for purely decorative, spacing or stylistic purposes.',
+    SUMMARY:    'Verify image is decorative',
+    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="presentation"]@, @[role="img"]@ with an empty text alternative',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'Verify the image is being used purely for decorative, spacing or styling purposes.',
+      MANUAL_CHECK_P: 'Verify the %N_MC images are being used purely for decorative, spacing or styling purposes.',
+      HIDDEN_S: 'One @img@ element or element with @[role="img"]@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @img@ elements and/or elements with @[role="img"]@ that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@ elements or elements with @[role="img"]@ on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1: 'Verify that the @img@ element is used only for decorative, spacing or styling purposes.',
+      ELEMENT_MC_2: 'Verify that the @%1[role=img]@ element is used only for decorative, spacing or styling purposes.',
+      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
+      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'If an image is used purely for stylistic or decorative purposes, users of screen readers do not need to know that the image exists and no alternative is needed.',
+      'If an image contains information, but is mistakenly identified as decorative, users of assistive technologies will not have access to the information.'
+    ],
+    TECHNIQUES: [
+      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 5 Specification: 12.2 The @img@ element',
+        url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @presentation@ role',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'CSS Backgrounds and Borders Module Level 3: The @background-image@ property',
+        url:   'https://www.w3.org/TR/css3-background/#the-background-image'
+      }
+    ]
+  },
+
+  IMAGE_6: {
+    ID:         'Image 6',
+    DEFINITION: 'Complex images, charts or graphs (e.g. images generated from tabular data) must have long descriptions to provide an additional detailed description of the information conveyed by the image.',
+    SUMMARY:    'Long description for complex images',
+    TARGET_RESOURCES_DESC: '@img@, [role="img"] that represent complex images and images generated from tabular data.',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S: 'Update the undefined @idrefs@ of the @img@ element or element with @aria-describedby@ to include only defined @id@ values.',
+      FAIL_P: 'Update the undefined @idrefs@ of the %N_MC @img@ elements and/or elements with @aria-describedby@ to include only defined @id@ values.',
+      MANUAL_CHECK_S: 'Determine if the @img@ element or element with @[role="img"]@ can benefit from a long description, and if so, provide a detailed description of the content of the image.',
+      MANUAL_CHECK_P: 'Determine if any of the %N_MC @img@ elements and/or elements with @[role="img"]@ can benefit from a long description, and for each that can, provide a detailed description of the content of the image.',
+      HIDDEN_S: 'One @img@ element or element with @[role="img"]@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @img@ elements and/or elements with @[role="img"]@ that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@ elements and/or elements with @[role="img"]@ on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_FAIL_1: 'The @aria-describedby@ attribute references undefined @id@ value(s): %1.',
+      ELEMENT_MC_1: 'Verify the @img@ element\'s long description "%1" (from @aria-describedby="%1"@) provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_2: 'Verify the @%1[role=img]@\'s long description "%1" (from @aria-describedby="%1"@) provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_3A: 'Update the @title@ attribute content to provide additional information than what is already available in the @alt@ attribute for it to become a long description.',
+      ELEMENT_MC_3: 'Verify the @img@ element\'s long description "%1" (from @title@) provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_4: 'Verify the @%1[role=img]@\'s long description "%1" (from @title@) provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_5: 'Verify the @img@ element\'s long description defined using @longdesc="%1"@ provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_6: 'Verify the @%1[role=img]@\'s long description defined using @longdesc="%2"@ provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_7: 'Determine whether the @img@ element is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
+      ELEMENT_MC_8: 'Determine if the  @%1[role=img]@ element is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
+      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
+      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'A long description should provide more information and detail than the text alternative for the image (e.g. @alt@ attribute).',
+      'Images can convey a wide range of content and be used for many different purposes on a web page, from purely decorative to complex graphics helping people visualize the features and relationships of large data sets.',
+      'All users can benefit from long descriptions by providing another modality for the author to convey information contained in the image and by providing search engines with information to more accurately return relevant results.',
+      'Informative images of photographs or paintings can often benefit from long descriptions.',
+      'Informative images like charts or graphs need long descriptions to describe the data used to create the chart or graph.'
+    ],
+    TECHNIQUES: [
+      'Ideally, the long description of an image should be accessible to all users by including it as part of the page content, and in close proximity to the image it describes.',
+      'Use the @aria-describedby@ attribute to reference one or more @id@s on the page that contain the long description. When this technique is used, assistive technologies extract the text content of the referenced @id@s and make it available as concatenated, unstructured text (i.e., stripping out any list markup, links, paragraphs, etc.).',
+      'Use the @title@ attribute to provide a long description.',
+      'Use the @alt@ attribute or equivalent markup to indicate the presence and location of the long description when it consists of structured content (e.g. tabular data, lists, links) in close proximity to the image. For example, @alt="..., for more information view the following data table"@.',
+      'Use the @longdesc@ attribute, which requires a URI value, to link to a long description for an image. NOTES: (1) The URI can be an internal link on the same page as the image, or a link to an external page or a fragment thereof. (2) There is a discoverability problem with this technique in that the description will typically only be available to screen reader users. Therefore, until browser implementations for @longdesc@ have improved, alternative techniques that enable all users to access the long description are preferred.',
+      'Use techniques that allow all users to view the long description. For example, the @summary/details@ elements can be used when the author prefers the detailed description to be initially hidden from users.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 5 Specification: 12.2 The @img@ element',
+        url:   'https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML5 Image Description Extension (longdesc)',
+        url:   'https://www.w3.org/TR/html-longdesc/'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
+        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Web Accessibility Tutorials : Images',
+        url:   'https://www.w3.org/WAI/tutorials/images/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Diagram Center: Image Description',
+        url:   'http://diagramcenter.org/making-images-accessible.html'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G94'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Alternative Text',
+        url:   'https://webaim.org/techniques/alttext/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Accessibility at Penn State: Text Equivalents for Images',
+        url:   'https://accessibility.psu.edu/images/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'Diagram Center: Digital Image And Graphic Resources for Accessible Materials',
+        url:   'https://diagramcenter.org/'
+      }
+    ]
+  },
+
+  IMAGE_7: {
+    ID:         'Image 7',
+    DEFINITION: 'Mathematical expressions should use MathJax instead of bitmapped images.',
+    SUMMARY:    'Use MathJax for mathematical expressions',
+    TARGET_RESOURCES_DESC: '@img@ and [role="img"] elements representing mathematical expressions',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'If the @img@ element or element with @[role="img"]@ represents a mathematical expression, convert the image content to MathML.',
+      MANUAL_CHECK_P: 'If the %N_MC @img@ elements and/or elements with @[role="img"]@ represents a mathematical expression, convert the image content to MathML.',
+      HIDDEN_S: 'The @img@ element or element with @[role="img"]@ element that is hidden was not evaluated.',
+      HIDDEN_P: '%N_H @img@ elements and/or elements with @[role="img"]@ that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@ elements and/or elements with @[role="img"]@ on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1: 'If the @img@ element represents a mathematical expression, convert the image content to MathML.',
+      ELEMENT_MC_2: 'If the @%1[role=img]@ element represents a mathematical expression, convert the image content to MathML.',
+      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
+      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'Images used to convey mathematical expressions are not accessible to people with disabilities using assistive technologies.',
+      'MathML is a W3C standard for representing mathematical expressions for web technologies and is the most accessible web math format for people using assistive technologies.',
+      'MathML has capabilities similar to SVG graphics, providing the abilities to resize and style content without the loss of fidelity of the visual rendering to match the capabilities of people with visual impairments.'
+    ],
+    TECHNIQUES: [
+      'Use MathML to represent the mathematical expressions.',
+      'Use MathJax to support MathML rendering in a wide range of browsers with and without native support for rendering MathML.',
+      'Design Science MathPlayer is a universal math reader that now enables math to be spoken in many assistive technology products.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      {type:  REFERENCES.SPECIFICATION,
+        title: 'Mathematical Markup Language (MathML) Version 3.0',
+        url:   'https://www.w3.org/TR/MathML/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'MathJax Javascript Library',
+        url:   'https://www.mathjax.org/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'PSU Accessibility: MathML and MathJax',
+        url:   'https://accessibility.psu.edu/math/mathml/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'Design Science: Math Type',
+        url:   'https://www.dessci.com/en/products/mathtype/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'Design Science: Math Player',
+        url:   'https://www.dessci.com/en/products/mathplayer/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'MathML in Daisy',
+        url:   'https://www.daisy.org/project/mathml'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'EPUB 3 Accessibility Guidelines: MathML',
+        url:   'https://www.idpf.org/accessibility/guidelines/content/mathml/desc.php'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'W3C Math Wiki: MathML Tools',
+        url:   'https://www.w3.org/Math/wiki/Tools'
+      }
+    ]
   }
 };
 
@@ -15040,7 +16683,9 @@ const messages$1 = {
 };
 
 messages$1.rules = Object.assign(messages$1.rules, colorRules);
+messages$1.rules = Object.assign(messages$1.rules, focusRules);
 messages$1.rules = Object.assign(messages$1.rules, headingRules);
+messages$1.rules = Object.assign(messages$1.rules, imageRules);
 messages$1.rules = Object.assign(messages$1.rules, linkRules);
 messages$1.rules = Object.assign(messages$1.rules, landmarkRules);
 
@@ -15916,7 +17561,9 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules$1);
+addToArray(focusRules$1);
 addToArray(headingRules$1);
+addToArray(imageRules$1);
 addToArray(linkRules$1);
 addToArray(landmarkRules$1);
 

@@ -2,7 +2,9 @@
 
 /* Imports */
 import {colorRules}     from './colorRules.js';
+import {focusRules}     from './focusRules.js';
 import {headingRules}   from './headingRules.js';
+import {imageRules}     from './imageRules.js';
 import {linkRules}      from './linkRules.js';
 import {landmarkRules}  from './landmarkRules.js';
 import Rule             from './rule.js';
@@ -20,7 +22,9 @@ function addToArray (ruleArray) {
 }
 
 addToArray(colorRules);
+addToArray(focusRules);
 addToArray(headingRules);
+addToArray(imageRules);
 addToArray(linkRules);
 addToArray(landmarkRules);
 

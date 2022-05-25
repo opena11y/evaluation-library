@@ -9,7 +9,7 @@ const debug = new DebugLogging('imageInfo', true);
 /**
  * @class ImageElement
  *
- * @desc Idenifies a DOM element as a image or graphical object
+ * @desc Identifies a DOM element as an image or graphical object
  *
  * @param  {Object}  domElement   - Structural Information
  */
@@ -17,6 +17,18 @@ const debug = new DebugLogging('imageInfo', true);
 class ImageElement {
   constructor (domElement) {
     this.domElement = domElement;
+    this.url = domElement.node.src ? new URL(domElement.node.src) : '';
+    if (this.url) {
+      const parts = this.url.pathname.split('/');
+      this.fileName = parts.length ? parts.pop : '';
+    }
+    else {
+      this.fileName = '';
+    }
+  }
+
+  addAreaDomElement (domElement) {
+    this.areaDomElements.push(domElement);
   }
 
   toString () {
@@ -27,7 +39,7 @@ class ImageElement {
 /**
  * @class MapElement
  *
- * @desc Idenifies a DOM element as an image map
+ * @desc Identifies a DOM element as an image map
  *
  * @param  {Object}  domElement   - Structural Information
  */
@@ -58,8 +70,8 @@ class MapElement {
 export default class ImageInfo {
   constructor () {
     this.allImageElements  = [];
-    this.allMapElements    = []
-    this.allSVGDomElements = [];
+    this.allSVGDomElements    = [];
+    this.allMapElements       = []
   }
 
   /**
@@ -165,7 +177,7 @@ export default class ImageInfo {
     }
 
     if (this.isMap(domElement)) {
-      currentMapElement = this.addMapElement.push(domElement);
+      currentMapElement = this.addMapElement(domElement);
     }
 
     if (this.isArea(domElement)) {
@@ -185,9 +197,10 @@ export default class ImageInfo {
 
   showImageInfo () {
     if (debug.flag) {
-      debug.log('== All Images ==', 1);
+      debug.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug.domElement(ie.domElement);
+        debug.log(ie.domElement.tagName);
+        debug.log(ie.fileName);
       });
       debug.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {

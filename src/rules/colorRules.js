@@ -14,7 +14,7 @@ const debug = new DebugLogging('Color Rules', false);
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Styling Rules
+ * Rule group: Color Rules
  */
 
 export const colorRules = [

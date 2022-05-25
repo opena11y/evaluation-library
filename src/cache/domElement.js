@@ -7,6 +7,7 @@ import DebugLogging      from '../debug.js';
 import AriaInfo          from '../aria/ariaInfo.js';
 import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
+  checkIsTabStop,
   hasInvalidState,
   hasCheckedState
 } from '../utils.js'
@@ -66,6 +67,8 @@ export default class DOMElement {
     this.role    = this.hasRole ?
                    elementNode.getAttribute('role') :
                    defaultRole;
+
+    this.isTabStop = checkIsTabStop(elementNode);
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);

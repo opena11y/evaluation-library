@@ -13,330 +13,6 @@ import DebugLogging      from '../debug.js';
 /* Constants */
 const debug = new DebugLogging('Landmark Rules', true);
 
-/* Helper Functions for Landmarks */
-
-
-/**
- * @function validateTopLevelLandmark
- *
- * @desc Evaluate if a landmark role is top level (e.g. not contained in other landmarks)
- *
- * @param  {DOMCache}    dom_cache   - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result - RuleResult object
- * @param  {String}      role        - Landmark role to check
- */
-
-function validateTopLevelLandmark(dom_cache, rule_result, role) {
-
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-
-        if (de.parentInfo.landmarkElement === null) {
-          if (de.hasRole) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []);
-          }
-        }
-        else {
-          // Check to see if the two elements with the role share the same DOM (e.g. iframe check)
-          // If in a different DOM, allow it to be the top level in that DOM
-          const de1 = de.parentInfo.landmarkElement.domElement;
-
-          if (de1 && (de.parentInfo.document !== de1.parentInfo.document)) {
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', []);
-            }
-          }
-          else {
-            // Fails if they are in the same DOM
-            const landmarkRole = de.parentInfo.landmarkElement.domElement.role;
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, landmarkRole]);
-            } else  {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [landmarkRole]);
-            }
-          }
-        }
-      }
-      else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-        }
-      }
-    }
-  });
-}
-
-/**
- * @function validateAtLeastOne
- *
- * @desc Evaluate if the the landmark region role exists in the page.
- *       The required parameter determines if the landamrk is missing whether
- *       a failure or manual check is required
- *
- * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result  - RuleResult object
- * @param  {String}      role         - Landmark role
- * @oaram  {Boolean}     roleRequired - Is the landamrk region role required
- */
-
-function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-        }
-        roleCount += 1;
-      }
-      else {
-        if (de.hasRole) {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-        }
-      }
-    }
-  });
-
-  if (roleCount === 0) {
-    if (roleRequired) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
-    }
-    else {
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-    }
-  } else {
-    if (roleCount === 1) {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
-    } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
-    }
-  }
-}
-
-
-/**
- * @function validateNoMoreThanOne
- *
- * @desc Evaluate if the the landmark region role exists more than once on the page.
- *
- * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result  - RuleResult object
- * @param  {String}      role         - Landmark region role
- */
-
-function validateNoMoreThanOne(dom_cache, rule_result, role) {
-
-  const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
-  let totalRoleCount = 0;
-  let anyMoreThanOne = false;
-
-  landmarkElementsByDoc.forEach( les => {
-    let visibleDomElements = [];
-    if (Array.isArray(les)) {
-      les.forEach( le => {
-        const de = le.domElement;
-        if (de.role === role) {
-          if (de.visibility.isVisibleToAT) {
-            visibleDomElements.push(de);
-            totalRoleCount += 1;
-          }
-          else {
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-            } else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
-            }
-          }
-        }
-      });
-
-      visibleDomElements.forEach( de => {
-        if (visibleDomElements.length === 1) {
-          if (de.hasRole) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-          }
-        } else {
-          anyMoreThanOne = true;
-          if (de.hasRole) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
-          }
-        }
-      });
-    }
-  });
-
-  if (totalRoleCount > 0) {
-    if (anyMoreThanOne) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
-    }
-    else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
-    }
-  }
-}
-
-/**
- * @function validateLandmarkDescendants
- *
- * @desc Evaluate if the descendant landmark roles are a certain type
- *
- * @param  {DOMCache}    dom_cache             - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result           - RuleResult object
- * @param  {String}      role                  - Landmark region role
- * @param  {Array}       allowedLandmarkRoles  - An array of allowed descendant roles
- */
-
-function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandmarkRoles) {
-
-  function checkForDescendantLandmarks(landmarkElement) {
-    const result = {
-      failedCount: 0,
-      failedRoles : [],
-      passedCount: 0,
-      passedRoles : []
-    }
-
-    landmarkElement.descendantLandmarkElements.forEach( le => {
-      const de   = le.domElement;
-      const role = de.role;
-
-      if (de.visibility.isVisibleToAT) {
-        if (allowedLandmarkRoles.includes(role)) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
-          result.passedCount += 1;
-          result.passedRoles.push(role);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role]);
-          result.failedCount += 1;
-          result.failedRoles.push(role);
-        }
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName, role]);
-      }
-    });
-
-    return result;
-  }
-
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
-  let visibleLandmarkElements = [];
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        visibleLandmarkElements.push(le);
-        roleCount += 1;
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-      }
-    }
-  });
-
-  visibleLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    const result = checkForDescendantLandmarks(le);
-    const failedRoles = result.failedRoles.join(', ');
-    const passedRoles = result.passedRoles.join(', ');
-
-    if (result.failedCount === 1) {
-      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [failedRoles]);
-    } else {
-      if (result.failedCount > 1) {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [result.failedCount, failedRoles]);
-      }
-      else {
-        if (result.passedCount === 0) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
-        }
-        else {
-          if (result.passedCount === 1) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [passedRoles]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [result.passedCount, passedRoles]);
-          }
-        }
-      }
-    }
-  });
-}
-
-/**
- * @function validateUniqueAccessibleNames
- *
- * @desc Evaluate if the accessible names for the landmark role are unique.
- *
- * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
- * @param  {RuleResult}  rule_result  - RuleResult object
- * @param  {String}      role         - Landmark region role
- */
-
-function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
-
-  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let visibleDomElements = [];
-
-  allLandmarkElements.forEach( le => {
-    const de = le.domElement;
-    if (de.role === role) {
-      if (de.visibility.isVisibleToAT) {
-        visibleDomElements.push(de);
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
-      }
-    }
-  });
-
-  if (visibleDomElements.length > 1) {
-    visibleDomElements.forEach( (de1, index1) => {
-      let duplicate = false;
-      visibleDomElements.forEach( (de2, index2) => {
-        if ((index1 !== index2) &&
-            (accNamesTheSame(de1.accName, de2.accName))) {
-          duplicate = true;
-        }
-      });
-      if (duplicate) {
-        rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.accName.name, role]);
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [role]);
-      }
-    });
-  }
-}
 
 /*
  * OpenA11y Rules
@@ -808,3 +484,329 @@ export const landmarkRules = [
     } // end validate function
   }
 ];
+
+/* Helper Functions for Landmarks */
+
+
+/**
+ * @function validateTopLevelLandmark
+ *
+ * @desc Evaluate if a landmark role is top level (e.g. not contained in other landmarks)
+ *
+ * @param  {DOMCache}    dom_cache   - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result - RuleResult object
+ * @param  {String}      role        - Landmark role to check
+ */
+
+function validateTopLevelLandmark(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+
+        if (de.parentInfo.landmarkElement === null) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []);
+          }
+        }
+        else {
+          // Check to see if the two elements with the role share the same DOM (e.g. iframe check)
+          // If in a different DOM, allow it to be the top level in that DOM
+          const de1 = de.parentInfo.landmarkElement.domElement;
+
+          if (de1 && (de.parentInfo.document !== de1.parentInfo.document)) {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', []);
+            }
+          }
+          else {
+            // Fails if they are in the same DOM
+            const landmarkRole = de.parentInfo.landmarkElement.domElement.role;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, landmarkRole]);
+            } else  {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [landmarkRole]);
+            }
+          }
+        }
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+}
+
+/**
+ * @function validateAtLeastOne
+ *
+ * @desc Evaluate if the the landmark region role exists in the page.
+ *       The required parameter determines if the landamrk is missing whether
+ *       a failure or manual check is required
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark role
+ * @oaram  {Boolean}     roleRequired - Is the landamrk region role required
+ */
+
+function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let roleCount = 0;
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+        roleCount += 1;
+      }
+      else {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+        }
+      }
+    }
+  });
+
+  if (roleCount === 0) {
+    if (roleRequired) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+    }
+    else {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    }
+  } else {
+    if (roleCount === 1) {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+    } else {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
+    }
+  }
+}
+
+
+/**
+ * @function validateNoMoreThanOne
+ *
+ * @desc Evaluate if the the landmark region role exists more than once on the page.
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark region role
+ */
+
+function validateNoMoreThanOne(dom_cache, rule_result, role) {
+
+  const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
+  let totalRoleCount = 0;
+  let anyMoreThanOne = false;
+
+  landmarkElementsByDoc.forEach( les => {
+    let visibleDomElements = [];
+    if (Array.isArray(les)) {
+      les.forEach( le => {
+        const de = le.domElement;
+        if (de.role === role) {
+          if (de.visibility.isVisibleToAT) {
+            visibleDomElements.push(de);
+            totalRoleCount += 1;
+          }
+          else {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+            }
+          }
+        }
+      });
+
+      visibleDomElements.forEach( de => {
+        if (visibleDomElements.length === 1) {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+          }
+        } else {
+          anyMoreThanOne = true;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+          }
+        }
+      });
+    }
+  });
+
+  if (totalRoleCount > 0) {
+    if (anyMoreThanOne) {
+      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
+    }
+    else {
+      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+    }
+  }
+}
+
+/**
+ * @function validateLandmarkDescendants
+ *
+ * @desc Evaluate if the descendant landmark roles are a certain type
+ *
+ * @param  {DOMCache}    dom_cache             - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result           - RuleResult object
+ * @param  {String}      role                  - Landmark region role
+ * @param  {Array}       allowedLandmarkRoles  - An array of allowed descendant roles
+ */
+
+function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandmarkRoles) {
+
+  function checkForDescendantLandmarks(landmarkElement) {
+    const result = {
+      failedCount: 0,
+      failedRoles : [],
+      passedCount: 0,
+      passedRoles : []
+    }
+
+    landmarkElement.descendantLandmarkElements.forEach( le => {
+      const de   = le.domElement;
+      const role = de.role;
+
+      if (de.visibility.isVisibleToAT) {
+        if (allowedLandmarkRoles.includes(role)) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [role]);
+          result.passedCount += 1;
+          result.passedRoles.push(role);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [role]);
+          result.failedCount += 1;
+          result.failedRoles.push(role);
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName, role]);
+      }
+    });
+
+    return result;
+  }
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let roleCount = 0;
+  let visibleLandmarkElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleLandmarkElements.push(le);
+        roleCount += 1;
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    }
+  });
+
+  visibleLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    const result = checkForDescendantLandmarks(le);
+    const failedRoles = result.failedRoles.join(', ');
+    const passedRoles = result.passedRoles.join(', ');
+
+    if (result.failedCount === 1) {
+      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [failedRoles]);
+    } else {
+      if (result.failedCount > 1) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [result.failedCount, failedRoles]);
+      }
+      else {
+        if (result.passedCount === 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+        }
+        else {
+          if (result.passedCount === 1) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [passedRoles]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [result.passedCount, passedRoles]);
+          }
+        }
+      }
+    }
+  });
+}
+
+/**
+ * @function validateUniqueAccessibleNames
+ *
+ * @desc Evaluate if the accessible names for the landmark role are unique.
+ *
+ * @param  {DOMCache}    dom_cache    - DOMCache object being used in the evaluation
+ * @param  {RuleResult}  rule_result  - RuleResult object
+ * @param  {String}      role         - Landmark region role
+ */
+
+function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
+
+  const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
+  let visibleDomElements = [];
+
+  allLandmarkElements.forEach( le => {
+    const de = le.domElement;
+    if (de.role === role) {
+      if (de.visibility.isVisibleToAT) {
+        visibleDomElements.push(de);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+      }
+    }
+  });
+
+  if (visibleDomElements.length > 1) {
+    visibleDomElements.forEach( (de1, index1) => {
+      let duplicate = false;
+      visibleDomElements.forEach( (de2, index2) => {
+        if ((index1 !== index2) &&
+            (accNamesTheSame(de1.accName, de2.accName))) {
+          duplicate = true;
+        }
+      });
+      if (duplicate) {
+        rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.accName.name, role]);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [role]);
+      }
+    });
+  }
+}
+

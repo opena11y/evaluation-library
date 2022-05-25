@@ -1,8 +1,9 @@
 /* utils.js */
 
 export {
-  cleanForUTF8,
   accNamesTheSame,
+  checkIsTabStop,
+  cleanForUTF8,
   filterTextContent,
   getAttributeValue,
   getFormattedDate,
@@ -15,6 +16,7 @@ export {
 /* constants */
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
 const inputsWithChecked   = ['checkbox', 'radio'];
+
 
 /* helper functions */
 
@@ -219,4 +221,51 @@ function cleanForUTF8 (str) {
 
 function accNamesTheSame (ref1, ref2) {
   return ref1.name.toLowerCase() === ref2.name.toLowerCase();
+}
+
+/**
+ * @function checkIsTabStop
+ *
+ * @desc Returns true if the element is a tab stop
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns true if the elements is a tab stop, otherwise false
+ */
+
+function checkIsTabStop (node) {
+  const tagName  = node.tagName.toLowerCase();
+  const href     = node.hasAttribute('href');
+  const controls = node.hasAttribute('controls');
+  const type     = node.hasAttribute('type') ? node.getAttribute('type') : '';
+
+  if (node.tabIndex >= 0) {
+    return true;
+  }
+
+  switch (tagName ) {
+    case 'a':
+      return href;
+
+    case 'audio':
+      return controls;
+
+    case 'input':
+      return type !== 'hidden';
+
+    case 'select':
+      return true;
+
+    case 'textarea':
+      return true;
+
+    case 'video':
+      return controls;
+
+    default:
+      break;
+
+  }
+
+  return false;
 }
