@@ -96,9 +96,7 @@ function nameFromAltAttribute (element) {
   // Attribute is present
   if (name !== null) {
     name = normalize(name);
-    return (name.length) ?
-      { name: name, source: 'alt' } :
-      { name: '<empty>', source: 'alt' };
+    return { name: name, source: 'alt' };
   }
 
   // Attribute not present

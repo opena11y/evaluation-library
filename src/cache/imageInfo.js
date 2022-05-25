@@ -20,7 +20,7 @@ class ImageElement {
     this.url = domElement.node.src ? new URL(domElement.node.src) : '';
     if (this.url) {
       const parts = this.url.pathname.split('/');
-      this.fileName = parts.length ? parts.pop : '';
+      this.fileName = parts.length ? parts.pop() : '';
     }
     else {
       this.fileName = '';
@@ -115,7 +115,8 @@ export default class ImageInfo {
    */
 
   isImage (domElement) {
-    return domElement.role === 'img';
+    return (domElement.tagName === 'img') || 
+           (domElement.role === 'img');
   }
 
   /**
@@ -199,8 +200,9 @@ export default class ImageInfo {
     if (debug.flag) {
       debug.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug.log(ie.domElement.tagName);
-        debug.log(ie.fileName);
+        debug.log(`[fileName]: ${ie.fileName}`, true);
+        debug.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
       debug.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {

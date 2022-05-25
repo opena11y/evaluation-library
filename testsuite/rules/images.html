@@ -18,18 +18,19 @@
 
         // Test case for seeing if Images have descriptors
 
+
         executeTest('IMAGE_1: Images must have accessible names for img', 'ID_IFRAME_1A', 'IMAGE_1');
         executeTest('IMAGE_1: Images must have accessible names for area', 'ID_IFRAME_1B', 'IMAGE_1');
         executeTest('IMAGE_1: Images must have accessible names for role img', 'ID_IFRAME_1C', 'IMAGE_1');
-/*
 
         executeTest('IMAGE_2: Text alternatives are meaningful', 'ID_IFRAME_2A', 'IMAGE_2');
+        
         executeTest('IMAGE_3: Accessible name must not contain file name for Image', 'ID_IFRAME_3A', 'IMAGE_3');
         executeTest('IMAGE_4: Accessible name length must be less than 100 characters for Image', 'ID_IFRAME_4A', 'IMAGE_4_EN');
-        executeTest('IMAGE_4: Accessible name length must be less than 100 characters for Area', 'ID_IFRAME_4B', 'IMAGE_4_EN');
+
         executeTest('IMAGE_5: Verify images are decorative', 'ID_IFRAME_5A', 'IMAGE_5');
+
         executeTest('IMAGE_6: long text alternatives', 'ID_IFRAME_6A', 'IMAGE_6');
-        */
       });
     </script>
 
@@ -48,7 +49,6 @@
     
     <h2>Tests that accessible image name is less than 100 characters</h2>
     <iframe id="ID_IFRAME_4A" src="images/image_4_accessible_name_length_for_img.html"></iframe>
-    <iframe id="ID_IFRAME_4B" src="images/image_4_accessible_name_length_for_area.html"></iframe>
     
     <h2>Verify images are decorative</h2>
     <iframe id="ID_IFRAME_5A" src="images/image_5_decorative_images.html"></iframe>

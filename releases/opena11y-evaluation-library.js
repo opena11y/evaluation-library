@@ -144,7 +144,7 @@ class DebugLogging {
 /* colorContrast.js */
 
 /* Constants */
-const debug$n = new DebugLogging('colorContrast', false);
+const debug$m = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -164,9 +164,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$n.flag) {
-      debug$n.separator();
-      debug$n.tag(elementNode);
+    if (debug$m.flag) {
+      debug$m.separator();
+      debug$m.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -190,11 +190,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$n.flag) {
-      debug$n.log(`[                    opacity]: ${this.opacity}`);
-      debug$n.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$n.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$n.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$m.flag) {
+      debug$m.log(`[                    opacity]: ${this.opacity}`);
+      debug$m.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$m.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$m.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -516,7 +516,7 @@ class ColorContrast {
 /* colorContrast.js */
 
 /* Constants */
-const debug$m = new DebugLogging('visibility', false);
+const debug$l = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -564,17 +564,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$m.flag) {
-      debug$m.separator();
-      debug$m.tag(elementNode);
-      debug$m.log('[          isHidden]: ' + this.isHidden);
-      debug$m.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$m.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$m.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$m.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$m.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$m.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$m.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$l.flag) {
+      debug$l.separator();
+      debug$l.tag(elementNode);
+      debug$l.log('[          isHidden]: ' + this.isHidden);
+      debug$l.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$l.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$l.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$l.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$l.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$l.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$l.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5719,7 +5719,7 @@ function checkIsTabStop (node) {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$l = new DebugLogging('AriaInfo', false);
+const debug$k = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -5866,16 +5866,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$l.flag) {
-      node.attributes.length && debug$l.log(`${node.outerHTML}`, 1);
-      debug$l.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$l.log(`[         isWidget]: ${this.isWidget}`);
-      debug$l.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$l.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$l.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$l.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$l.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$l.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$k.flag) {
+      node.attributes.length && debug$k.log(`${node.outerHTML}`, 1);
+      debug$k.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$k.log(`[         isWidget]: ${this.isWidget}`);
+      debug$k.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$k.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$k.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$k.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$k.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$k.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7553,7 +7553,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$k = new DebugLogging('ariaInHtml', false);
+const debug$j = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7715,11 +7715,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$k.flag) {
+  if (debug$j.flag) {
     if (tagName === 'h2') {
-      debug$k.tag(node);
+      debug$j.tag(node);
     }
-    debug$k.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$j.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8342,9 +8342,7 @@ function nameFromAltAttribute (element) {
   // Attribute is present
   if (name !== null) {
     name = normalize(name);
-    return (name.length) ?
-      { name: name, source: 'alt' } :
-      { name: '<empty>', source: 'alt' };
+    return { name: name, source: 'alt' };
   }
 
   // Attribute not present
@@ -8814,7 +8812,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$j = new DebugLogging('DOMElement', false);
+const debug$i = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -9074,12 +9072,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$j.flag) {
+    if (debug$i.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$j.domText(domItem, prefix);
+          debug$i.domText(domItem, prefix);
         } else {
-          debug$j.domElement(domItem, prefix);
+          debug$i.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9158,7 +9156,7 @@ class DOMText {
 /* imageInfo.js */
 
 /* Constants */
-const debug$i = new DebugLogging('imageInfo', true);
+const debug$h = new DebugLogging('imageInfo', true);
 
 /**
  * @class ImageElement
@@ -9174,7 +9172,7 @@ class ImageElement {
     this.url = domElement.node.src ? new URL(domElement.node.src) : '';
     if (this.url) {
       const parts = this.url.pathname.split('/');
-      this.fileName = parts.length ? parts.pop : '';
+      this.fileName = parts.length ? parts.pop() : '';
     }
     else {
       this.fileName = '';
@@ -9267,7 +9265,8 @@ class ImageInfo {
    */
 
   isImage (domElement) {
-    return domElement.role === 'img';
+    return (domElement.tagName === 'img') || 
+           (domElement.role === 'img');
   }
 
   /**
@@ -9348,19 +9347,20 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$i.flag) {
-      debug$i.log('== All Image elements ==', 1);
+    if (debug$h.flag) {
+      debug$h.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$i.log(ie.domElement.tagName);
-        debug$i.log(ie.fileName);
+        debug$h.log(`[fileName]: ${ie.fileName}`, true);
+        debug$h.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$h.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$i.log('== All SVG domElements  ==', 1);
+      debug$h.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$i.domElement(de);
+        debug$h.domElement(de);
       });
-      debug$i.log('== All MapElements ==', 1);
+      debug$h.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$i.domElement(me.domElement);
+        debug$h.domElement(me.domElement);
       });
     }
   }
@@ -9369,7 +9369,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('linkInfo', true);
+const debug$g = new DebugLogging('linkInfo', true);
 
 /**
  * @class LinkInfo
@@ -9415,10 +9415,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All Links ==', 1);
+    if (debug$g.flag) {
+      debug$g.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$h.domElement(de);
+        debug$g.domElement(de);
       });
     }
   }
@@ -9427,7 +9427,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('ListInfo', false);
+const debug$f = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -9448,8 +9448,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$g.flag) {
-      debug$g.log('');
+    if (debug$f.flag) {
+      debug$f.log('');
     }
   }
 
@@ -9474,9 +9474,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$g.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9583,16 +9583,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All ListElements ==', 1);
-      debug$g.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$f.flag) {
+      debug$f.log('== All ListElements ==', 1);
+      debug$f.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$g.log('== List Tree ==', 1);
-      debug$g.log(`[linkCount]: ${this.linkCount}`);
+      debug$f.log('== List Tree ==', 1);
+      debug$f.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9602,7 +9602,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('structureInfo', false);
+const debug$e = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9645,11 +9645,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$e.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$f.domElement(h, prefix);
+      debug$e.domElement(h, prefix);
     });
   }
 
@@ -9810,27 +9810,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All Headings ==', 1);
+    if (debug$e.flag) {
+      debug$e.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$f.domElement(h);
+        debug$e.domElement(h);
       });
-      debug$f.log('== All Landmarks ==', 1);
+      debug$e.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$e.domElement(le.domElement);
       });
-      debug$f.log('== Landmarks By Doc ==', 1);
+      debug$e.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$f.domElement(le.domElement);
+            debug$e.domElement(le.domElement);
           });
         }
       });
-      debug$f.log('== Structure Tree ==', 1);
+      debug$e.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$e.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9840,7 +9840,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$e = new DebugLogging('domCache', true);
+const debug$d = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -9933,7 +9933,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$e.flag) {
+    if (debug$d.flag) {
       this.showDomElementTree();
       this.structureInfo.showStructureInfo();
       this.linkInfo.showLinkInfo();
@@ -10092,18 +10092,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$e.log(' === AllDomElements ===', true);
+    debug$d.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$e.domElement(de);
+      debug$d.domElement(de);
     });
 
-    debug$e.log(' === AllDomTexts ===', true);
+    debug$d.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$e.domText(dt);
+      debug$d.domText(dt);
     });
 
-    debug$e.log(' === DOMCache Tree ===', true);
-    debug$e.domElement(this.startingDomElement);
+    debug$d.log(' === DOMCache Tree ===', true);
+    debug$d.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -10111,7 +10111,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$d = new DebugLogging('constants', false);
+const debug$c = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -10512,13 +10512,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$d.flag && debug$d.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$d.flag && debug$d.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -11558,7 +11558,7 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements, landmar
 /* imageRules.js */
 
 /* Constants */
-const debug$c = new DebugLogging('Image Rules', true);
+new DebugLogging('Image Rules', true);
 
 /*
  * OpenA11y Alliance Rules
@@ -11670,15 +11670,15 @@ const imageRules$1 = [
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
-
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+        const name = de.accName.name.toLowerCase();
+        if (name.indexOf(ie.fileName) < 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
         }
         else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);          
         }
       } else {
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
@@ -11702,45 +11702,20 @@ const imageRules$1 = [
   wcag_related_ids    : [],
   target_resources    : ['img', 'area'],
   validate            : function (dom_cache, rule_result) {
-    debug$c.log('[IMAGE 4_EN]');
-
-/*
-    var MAX_ACCESSIBLE_NAME_LENGTH = 100;
-
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
-    var SOURCE      = SOURCE;
-
-    var image_elements   = dom_cache.images_cache.image_elements;
-    var image_elements_len = image_elements.length;
-
-    // Check to see if valid cache reference
-    if (image_elements && image_elements_len) {
-
-      for (var i = 0; i < image_elements_len; i++) {
-        var ie = image_elements[i];
-        var de = ie.dom_element;
-
-        if (ie.accessible_name_source !== SOURCE.NONE && (ie.accessible_name_for_comparison.length > 0)) {
-
-          if ((de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) &&
-              (!de.has_role || (de.role !== 'presentation'))){
-
-            if (ie.accessible_name_for_comparison.length > MAX_ACCESSIBLE_NAME_LENGTH) {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [ie.accessible_name_for_comparison.length], ie.toString('short'));
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.PASS, ie, 'ELEMENT_PASS_1', [ie.accessible_name_for_comparison.length], ie.toString('short'));
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name], ie.toString('short'));
-          }
+    dom_cache.imageInfo.allImageElements.forEach( ie => {
+      const de = ie.domElement;
+      if (de.visibility.isVisibleToAT) {
+        const length = de.accName.name.length; 
+        if (length <= 100) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [length]);
         }
-      } // end loop
-    }
-    */
-
+        else {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [length]);          
+        }
+      } else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    });
   } // end validation function
 },
 
@@ -11759,38 +11734,26 @@ const imageRules$1 = [
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
-    debug$c.log('[IMAGE 5]');
-
-/*
-    var TEST_RESULT   = TEST_RESULT;
-    var VISIBILITY    = VISIBILITY;
-
-    var image_elements   = dom_cache.images_cache.image_elements;
-    var image_elements_len = image_elements.length;
-
-    // Check to see if valid cache reference
-    if (image_elements && image_elements_len) {
-
-      for (var i = 0; i < image_elements_len; i++) {
-        var ie = image_elements[i];
-        var de = ie.dom_element;
-        var cs = de.computed_style;
-
-        if (ie.accessible_name_source !== SOURCE.NONE || ie.is_presentation) {
-          if (ie.accessible_name_for_comparison.length === 0 || ie.is_presentation) {
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', []);
-              else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
-            }
-            else {
-              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', []);
-              else rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-            }
+    dom_cache.imageInfo.allImageElements.forEach( ie => {
+      const de = ie.domElement;
+      if (de.accName.name.length === 0) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);          
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);          
+          }
+        } else {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
           }
         }
-      } // end loop
-    }
-    */
+      }
+    });
   } // end validation function
 },
 
@@ -11809,73 +11772,27 @@ const imageRules$1 = [
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
-    debug$c.log('[IMAGE 6]');
-
-/*
-    function isSimilar(alt, title) {
-
-      if (typeof alt   !== 'string') return false;
-      if (typeof title !== 'string') return false;
-
-      alt   = util.normalizeSpace(alt.toLowerCase());
-      title = util.normalizeSpace(title.toLowerCase());
-
-      if (alt === title) return true;
-
-      if ((alt.length >= title.length) &&
-          (alt.indexOf(title) >= 0)) return true;
-
-      return false;
-    }
-
-    var TEST_RESULT   = TEST_RESULT;
-    var VISIBILITY    = VISIBILITY;
-
-    var image_elements   = dom_cache.images_cache.image_elements;
-    var image_elements_len = image_elements.length;
-
-    // Check to see if valid cache reference
-    if (image_elements && image_elements_len) {
-
-      for (var i = 0; i < image_elements_len; i++) {
-        var ie = image_elements[i];
-        var de = ie.dom_element;
-        var cs = de.computed_style;
-
-        if (ie.is_presentation || (ie.accessible_name_length === 0) || ie.accessible_name_source === SOURCE.NONE) continue;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          if (de.has_aria_describedby) {
-            if (de.undefined_aria_describedby_ids && de.undefined_aria_describedby_ids.length) {
-              rule_result.addResult(TEST_RESULT.FAIL, ie, 'ELEMENT_FAIL_1', [de.undefined_aria_describedby_ids], ie.toString('long'));
-            }
-            else {
-              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.aria_describedby], ie.toString('long'));
-              else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name, de.aria_describedby], ie.toString('long'));
-            }
-          } else if (de.has_title && (ie.accessible_name_source !== SOURCE.TITLE)) {
-              if (de.tag_name === 'img') {
-                if (isSimilar(de.alt, de.title)) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3A', [], ie.toString('long'));
-                else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3', [de.title], ie.toString('long'));
-              } else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_4', [de.tag_name, de.title], ie.toString('long'));
-            }
-            else if (ie.has_longdesc) {
-              if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_5', [ie.longdesc], ie.toString('long'));
-              else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_6', [de.tag_name. ie.longdesc], ie.toString('long'));
-            }
-          else {
-            if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_7', [], ie.toString('long'));
-            else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_8', [de.tag_name], ie.toString('long'));
+    dom_cache.imageInfo.allImageElements.forEach( ie => {
+      const de   = ie.domElement;
+      const accName = de.accName;
+      const accDesc = de.accDescription;
+      if (accName.name.length > 0) {
+        if (de.visibility.isVisibleToAT) {
+          if (accDesc.name.length) {
+           rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [accDesc.source]);                    
           }
+          else {
+            if (de.node.hasAttribute('longdesc')) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);                                
+            } else {
+             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);                                
+            }
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
-        else {
-          if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [], ie.toString('long'));
-          else rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name], ie.toString('long'));
-        }
-      } // end loop
-    }
-    */
-
+      }
+    });
   } // end validation function
 },
 
@@ -11894,37 +11811,27 @@ const imageRules$1 = [
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
-    debug$c.log('[IMAGE 7]');
-
-/*
-    var TEST_RESULT   = TEST_RESULT;
-    var VISIBILITY    = VISIBILITY;
-
-    var image_elements   = dom_cache.images_cache.image_elements;
-    var image_elements_len = image_elements.length;
-
-    // Check to see if valid cache reference
-    if (image_elements && image_elements_len) {
-
-      for (var i = 0; i < image_elements_len; i++) {
-        var ie = image_elements[i];
-        var de = ie.dom_element;
-        var cs = de.computed_style;
-
-        if (ie.is_presentation || (ie.accessible_name_length === 0)) continue;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [], ie.toString('short'));
-          else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name], ie.toString('short'));
-        }
+    dom_cache.imageInfo.allImageElements.forEach( ie => {
+      const de   = ie.domElement;
+      const accName = de.accName;
+      if (accName.name.length > 0) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);                    
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);                    
+          }
+        } 
         else {
-          if (de.tag_name === 'img') rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [], ie.toString('short'));
-          else rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name], ie.toString('short'));
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);                    
+          }
         }
-      } // end loop
-    }
-    */
-
+      }
+    });
   } // end validation function
 }
 ];
@@ -15007,18 +14914,10 @@ const imageRules = {
       NOT_APPLICABLE: 'No @img@ elements and/or elements with @[role="img"]@ on this page.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_FAIL_1: 'The @aria-describedby@ attribute references undefined @id@ value(s): %1.',
-      ELEMENT_MC_1: 'Verify the @img@ element\'s long description "%1" (from @aria-describedby="%1"@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_2: 'Verify the @%1[role=img]@\'s long description "%1" (from @aria-describedby="%1"@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_3A: 'Update the @title@ attribute content to provide additional information than what is already available in the @alt@ attribute for it to become a long description.',
-      ELEMENT_MC_3: 'Verify the @img@ element\'s long description "%1" (from @title@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_4: 'Verify the @%1[role=img]@\'s long description "%1" (from @title@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_5: 'Verify the @img@ element\'s long description defined using @longdesc="%1"@ provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_6: 'Verify the @%1[role=img]@\'s long description defined using @longdesc="%2"@ provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_7: 'Determine whether the @img@ element is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
-      ELEMENT_MC_8: 'Determine if the  @%1[role=img]@ element is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
-      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
-      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+      ELEMENT_FAIL_1: 'The @longdesc@ attribute is not supported by broswers to provide a long description.',
+      ELEMENT_MC_1: 'Verify the long description defined by the @%1@ attribute provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_2: 'Determine whether the image is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
+      ELEMENT_HIDDEN_1: 'The image was not evaluated because it is hidden from assistive technologies.',
     },
     PURPOSES: [
       'A long description should provide more information and detail than the text alternative for the image (e.g. @alt@ attribute).',

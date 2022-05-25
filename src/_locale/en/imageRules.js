@@ -336,18 +336,10 @@ export const imageRules = {
       NOT_APPLICABLE: 'No @img@ elements and/or elements with @[role="img"]@ on this page.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_FAIL_1: 'The @aria-describedby@ attribute references undefined @id@ value(s): %1.',
-      ELEMENT_MC_1: 'Verify the @img@ element\'s long description "%1" (from @aria-describedby="%1"@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_2: 'Verify the @%1[role=img]@\'s long description "%1" (from @aria-describedby="%1"@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_3A: 'Update the @title@ attribute content to provide additional information than what is already available in the @alt@ attribute for it to become a long description.',
-      ELEMENT_MC_3: 'Verify the @img@ element\'s long description "%1" (from @title@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_4: 'Verify the @%1[role=img]@\'s long description "%1" (from @title@) provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_5: 'Verify the @img@ element\'s long description defined using @longdesc="%1"@ provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_6: 'Verify the @%1[role=img]@\'s long description defined using @longdesc="%2"@ provides a detailed description of the information conveyed by the image.',
-      ELEMENT_MC_7: 'Determine whether the @img@ element is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
-      ELEMENT_MC_8: 'Determine if the  @%1[role=img]@ element is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
-      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
-      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+      ELEMENT_FAIL_1: 'The @longdesc@ attribute is not supported by broswers to provide a long description.',
+      ELEMENT_MC_1: 'Verify the long description defined by the @%1@ attribute provides a detailed description of the information conveyed by the image.',
+      ELEMENT_MC_2: 'Determine whether the image is a complex image, chart or graph that needs a long description, and whether the text alternative could be used to indicate the presence and location of the long description.',
+      ELEMENT_HIDDEN_1: 'The image was not evaluated because it is hidden from assistive technologies.',
     },
     PURPOSES: [
       'A long description should provide more information and detail than the text alternative for the image (e.g. @alt@ attribute).',
