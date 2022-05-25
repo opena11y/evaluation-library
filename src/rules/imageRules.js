@@ -39,32 +39,23 @@ export const imageRules = [
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
         if (de.accName.source === 'none') {
-          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
-        }
-        else {
-          if (de.accName.source === 'alt') {
-            if (de.tagName === "img") {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-            }
-            else {
+          if ((de.role === 'none') ||
+              (de.role === 'presentation')) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role]);
+          }
+          else {
+            if ((de.tagName === 'img') || (de.tagName === 'area')) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+            } else {
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
             }
           }
-          else {
-            if (de.accName.source === 'aria-labelledby') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-            }
-            else {
-              if (de.accName.source === 'aria-label') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.tagName]);
-              }
-            }
-          }
         }
-      } else {
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.source]);
+        }
+      }
+      else {
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
       }
     });
@@ -88,19 +79,21 @@ export const imageRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
-      if (de.visibility.isVisibleToAT) {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-        }
-      } else {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+      if (de.accName.name.length > 0) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+          }
+        } else {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+          }
         }
       }
     });
@@ -156,16 +149,18 @@ export const imageRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
-      if (de.visibility.isVisibleToAT) {
-        const length = de.accName.name.length; 
-        if (length <= 100) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [length]);
+      if (de.accName.name.length > 0) {
+        if (de.visibility.isVisibleToAT) {
+          const length = de.accName.name.length;
+          if (length <= 100) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [length]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [length]);
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
-        else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [length]);          
-        }
-      } else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
       }
     });
   } // end validation function

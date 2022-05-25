@@ -115,8 +115,8 @@ export default class ImageInfo {
    */
 
   isImage (domElement) {
-    return (domElement.tagName === 'img') || 
-           (domElement.role === 'img');
+    return (domElement.role === 'img') ||
+           (domElement.tagName === 'img');
   }
 
   /**
@@ -201,7 +201,9 @@ export default class ImageInfo {
       debug.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
         debug.log(`[fileName]: ${ie.fileName}`, true);
+        debug.log(`[    role]: ${ie.domElement.role}`);
         debug.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug.log(`[  source]: ${ie.domElement.accName.source}`);
         debug.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
       debug.log('== All SVG domElements  ==', 1);

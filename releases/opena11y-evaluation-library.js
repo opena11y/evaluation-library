@@ -9265,8 +9265,8 @@ class ImageInfo {
    */
 
   isImage (domElement) {
-    return (domElement.tagName === 'img') || 
-           (domElement.role === 'img');
+    return (domElement.role === 'img') ||
+           (domElement.tagName === 'img');
   }
 
   /**
@@ -9351,7 +9351,9 @@ class ImageInfo {
       debug$h.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
         debug$h.log(`[fileName]: ${ie.fileName}`, true);
+        debug$h.log(`[    role]: ${ie.domElement.role}`);
         debug$h.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$h.log(`[  source]: ${ie.domElement.accName.source}`);
         debug$h.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
       debug$h.log('== All SVG domElements  ==', 1);
@@ -11587,32 +11589,23 @@ const imageRules$1 = [
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
         if (de.accName.source === 'none') {
-          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
-        }
-        else {
-          if (de.accName.source === 'alt') {
-            if (de.tagName === "img") {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
-            }
-            else {
+          if ((de.role === 'none') ||
+              (de.role === 'presentation')) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role]);
+          }
+          else {
+            if ((de.tagName === 'img') || (de.tagName === 'area')) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+            } else {
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
             }
           }
-          else {
-            if (de.accName.source === 'aria-labelledby') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-            }
-            else {
-              if (de.accName.source === 'aria-label') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.tagName]);
-              }
-            }
-          }
         }
-      } else {
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.source]);
+        }
+      }
+      else {
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
       }
     });
@@ -11636,19 +11629,21 @@ const imageRules$1 = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
-      if (de.visibility.isVisibleToAT) {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-        }
-      } else {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+      if (de.accName.name.length > 0) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+          }
+        } else {
+          if (de.tagName === 'img') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+          }
         }
       }
     });
@@ -11704,16 +11699,18 @@ const imageRules$1 = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
-      if (de.visibility.isVisibleToAT) {
-        const length = de.accName.name.length; 
-        if (length <= 100) {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [length]);
+      if (de.accName.name.length > 0) {
+        if (de.visibility.isVisibleToAT) {
+          const length = de.accName.name.length;
+          if (length <= 100) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [length]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [length]);
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
-        else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [length]);          
-        }
-      } else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
       }
     });
   } // end validation function
@@ -14598,12 +14595,9 @@ const imageRules = {
       NOT_APPLICABLE: 'No @img@ or @[role="img"]@ elements found on this page.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_PASS_1: '@%1@ element has @alt@ attribute.',
-      ELEMENT_PASS_2: '@%1@ element has @aria-labelledby@ attribute.',
-      ELEMENT_PASS_3: '@%1@ element has @aria-label@ attribute.',
-      ELEMENT_PASS_4: '@%1@ element has @title@ attribute.',
-      ELEMENT_FAIL_1: 'Add an @alt@, @aria-labelledby@ or @aria-label@ attribute to the @%1@ element to add a text alternative, or use @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as purely decorative.',
-      ELEMENT_FAIL_2: 'Use the @aria-labelledby@ or @aria-label@ attribute instead of @alt@ attribute for the text alternative for @%1[role="img"]@ element, or change the role to @role="presentation"@ to identify the image as purely decorative.',
+      ELEMENT_PASS_1: '@%1@ element has a role of @%1@ attribute to define an accessible name.',
+      ELEMENT_FAIL_1: 'Use the  @alt@ attribute on the @%1@ element to add a text alternative, or to indentify the image as purley decorative set @alt=""@ attribute or change the image to a CSS @background-image@.',
+      ELEMENT_FAIL_2: 'Use the @aria-labelledby@ or @aria-label@ attribute for the text alternative for @%1[role="img"]@ element, or change the role to @role="none"@ to identify the image as purely decorative.',
       ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [

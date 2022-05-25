@@ -20,12 +20,9 @@ export const imageRules = {
       NOT_APPLICABLE: 'No @img@ or @[role="img"]@ elements found on this page.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_PASS_1: '@%1@ element has @alt@ attribute.',
-      ELEMENT_PASS_2: '@%1@ element has @aria-labelledby@ attribute.',
-      ELEMENT_PASS_3: '@%1@ element has @aria-label@ attribute.',
-      ELEMENT_PASS_4: '@%1@ element has @title@ attribute.',
-      ELEMENT_FAIL_1: 'Add an @alt@, @aria-labelledby@ or @aria-label@ attribute to the @%1@ element to add a text alternative, or use @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as purely decorative.',
-      ELEMENT_FAIL_2: 'Use the @aria-labelledby@ or @aria-label@ attribute instead of @alt@ attribute for the text alternative for @%1[role="img"]@ element, or change the role to @role="presentation"@ to identify the image as purely decorative.',
+      ELEMENT_PASS_1: '@%1@ element has a role of @%1@ attribute to define an accessible name.',
+      ELEMENT_FAIL_1: 'Use the  @alt@ attribute on the @%1@ element to add a text alternative, or to indentify the image as purley decorative set @alt=""@ attribute or change the image to a CSS @background-image@.',
+      ELEMENT_FAIL_2: 'Use the @aria-labelledby@ or @aria-label@ attribute for the text alternative for @%1[role="img"]@ element, or change the role to @role="none"@ to identify the image as purely decorative.',
       ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [
