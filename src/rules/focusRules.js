@@ -10,7 +10,7 @@ import {
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Focus Rules', false);
+const debug = new DebugLogging('Focus Rules', true);
 
 /*
  * OpenA11y Alliance Rules
@@ -33,93 +33,50 @@ export const focusRules = [
   rule_required       : true,
   wcag_primary_id     : '2.4.3',
   wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
-  target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
+  target_resources    : ['Page', 'a', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
   validate            : function (dom_cache, rule_result) {
 
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
+    let controlCount = 0
+    let removedCount = 0;
 
-     var page_element = dom_cache.keyboard_focus_cache.page_element;
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (de.isInteractiveElement ||
+          (de.ariaInfo.isWidget && !de.ariaInfo.hasRequiredParents)) {
+        if (de.visibility.isVisibleOnScreen) {
+          controlCount += 1;
+          if (de.isInteractiveElement && (de.tabIndex < 0)) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName, de.role, de.tabIndex]);
+            removedCount += 1;
+          }
+          else {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+            }
+          }
+        }
+        else {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+          }
+        }
+      }
+    });
 
-//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
-
-     var interactive_elements     = dom_cache.keyboard_focus_cache.interactive_elements;
-     var interactive_elements_len = interactive_elements.length;
-
-     var tab_count = 0;
-     var visible_count = 0;
-
-     for (var i = 0; i < interactive_elements_len; i++) {
-
-       var ie = interactive_elements[i];
-
-       var de = ie.dom_element;
-       if (!de) de =ie;
-
-       var cs = de.computed_style;
-
-       if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
-           (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
-
-         visible_count++;
-
-         if (de.tab_index >= 0) {
-           if (de.is_widget) {
-             // only include widgets that can be part of the tab order
-             if (de.is_tab_stoppable) {
-                tab_count++;
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.tag_name, de.role]);
-             }
-           }
-           else {
-             tab_count++;
-             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
-           }
-         }
-         else {
-           if (de.is_widget) {
-             // only include widgets that can be part of the tab order
-             if (de.is_tab_stoppable) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3', [de.tag_name, de.role, de.tab_index]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_4', [de.tag_name, de.tab_index]);
-           }
-         }
-
-       }
-       else {
-
-         if (de.is_widget) {
-           // only include widgets that can be part of the tab order
-           if (de.is_tab_stoppable) {
-             rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-           }
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-         }
-       }
-     }  // endfor
-
- //    logger.debug(" Visible count: " + visible_count + "  Tab count: " + tab_count);
-
-     if (visible_count > 1) {
-
-       if (tab_count === visible_count) {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [tab_count]);
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [tab_count, (visible_count-tab_count)]);
-       }
-
-     }
-
-*/
-
-   } // end validation function
+    if (controlCount > 1) {
+      if (removedCount == 0) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, removedCount]);
+      }
+    }
+  } // end validation function
 },
 
 /**
@@ -138,6 +95,44 @@ export const focusRules = [
   wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
   target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
   validate            : function (dom_cache, rule_result) {
+
+    let controlCount = 0
+    let hiddenCount = 0;
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (de.isInteractiveElement ||
+          de.ariaInfo.isWidget) {
+        if (de.visibility.isVisibleOnScreen) {
+          debug.domElement(de, '[FOCUS 2]');
+          controlCount += 1;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+          }
+        }
+        else {
+          hiddenCount += 1;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+          }
+        }
+      }
+    });
+
+    if (controlCount > 1) {
+      if (hiddenCount == 0) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
+      }
+    }
+
 
 /*
      var VISIBILITY  = VISIBILITY;

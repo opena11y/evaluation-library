@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('linkInfo', true);
+const debug = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo

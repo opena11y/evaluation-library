@@ -2,12 +2,12 @@
 
 /* Imports */
 import ColorContrast     from './colorContrast.js';
+import HasEvents         from './hasEvents.js';
 import Visibility        from './visibility.js';
 import DebugLogging      from '../debug.js';
 import AriaInfo          from '../aria/ariaInfo.js';
 import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
-  checkIsTabStop,
   hasInvalidState,
   hasCheckedState
 } from '../utils.js'
@@ -20,7 +20,7 @@ import {
 } from '../accName/getaccname.js';
 
 /* Constants */
-const debug = new DebugLogging('DOMElement', false);
+const debug = new DebugLogging('DOMElement', true);
 
 const elementsWithContent = [
   'area',
@@ -68,19 +68,18 @@ export default class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
-    this.isTabStop = checkIsTabStop(elementNode);
-
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInfo   = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo = new AriaInfo(doc, this.role, defaultRole, elementNode);
 
-    this.accName           = getAccessibleName(doc, elementNode);
-    this.accDescription    = getAccessibleDesc(doc, elementNode);
-    this.errMessage        = getErrMessage(doc, elementNode);
+    this.accName        = getAccessibleName(doc, elementNode);
+    this.accDescription = getAccessibleDesc(doc, elementNode);
+    this.errMessage     = getErrMessage(doc, elementNode);
 
-    this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
-    this.visibility       = new Visibility(parentDomElement, elementNode);
+    this.colorContrast = new ColorContrast(parentDomElement, elementNode);
+    this.visibility    = new Visibility(parentDomElement, elementNode);
+    this.hasEvents     = new HasEvents(elementNode);
 
     this.id         = elementNode.id        ? elementNode.id : '';
     this.className  = elementNode.className ? elementNode.className : '';
@@ -89,6 +88,10 @@ export default class DOMElement {
 
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
+
+    this.tabIndex             = checkTabIndex(elementNode);
+    this.isTabStop            = checkIsTabStop(elementNode);
+    this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.children = [];
 
@@ -292,3 +295,87 @@ export default class DOMElement {
     }
   }
 }
+
+// Helper functions
+
+/**
+ * @function checkForInteractiveElement
+ *
+ * @desc Returns true if the element is natively interactive
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns true if the elements is interactive, otherwise false
+ */
+
+function checkForInteractiveElement (node) {
+  const tagName     = node.tagName.toLowerCase();
+  const hasHref     = node.hasAttribute('href');
+  const hasControls = node.hasAttribute('controls');
+  const type        = node.hasAttribute('type') ? node.getAttribute('type') : '';
+
+  switch (tagName ) {
+    case 'a':
+    case 'area':
+      return hasHref;
+
+    case 'audio':
+      return hasControls;
+
+    case 'button':
+      return true;
+
+    case 'input':
+      return type !== 'hidden';
+
+    case 'select':
+      return true;
+
+    case 'textarea':
+      return true;
+
+    case 'video':
+      return hasControls;
+
+    default:
+      break;
+
+  }
+
+  return false;
+}
+
+
+/**
+ * @function checkIsTabStop
+ *
+ * @desc Returns true if the tabindex is defined and greater than or equal to zero,
+ *       or the element's native semantics is an interactive element
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns true if the elements is a tab stop, otherwise false
+ */
+
+function checkIsTabStop (node) {
+  return (node.tabIndex >= 0) || checkForInteractiveElement(node);
+}
+
+/**
+ * @function checkTabIndex
+ *
+ * @desc Returns value of tabindex if it is defined
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns value of tabindex if defined
+ */
+
+function checkTabIndex (node) {
+  if (node.tabIndex >= 0) {
+    return node.tabIndex
+  }
+  return node.hasAttribute('tabIndex') ? -1 : undefined;
+}
+
+

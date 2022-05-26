@@ -9,24 +9,23 @@ import {REFERENCES} from '../../constants.js';
 export const focusRules = {
   FOCUS_1: {
       ID:                    'Focus 1',
-      DEFINITION:            'The sequential focus order of links, form controls, embedded apps and widgets %s be meaningful.',
-      SUMMARY:               'Focus order %s be meaningful',
+      DEFINITION:            'The sequential focus order of links, form controls, embedded apps and widgets must be meaningful.',
+      SUMMARY:               'Focus order must be meaningful',
       TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements and elements with widget roles with @tabindex@ values',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:     'Check the "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
-        MANUAL_CHECK_P:     'Check the "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+        MANUAL_CHECK_S:     'Check the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+        MANUAL_CHECK_P:     'Check the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
         HIDDEN_S: 'The link, form control, embedded app or widget element that is hidden does not need to be tested for focus order.',
         HIDDEN_P: 'The %N_H links, form controls, embedded apps and/or widgets that are hidden do not need to be tested for focus order.',
         NOT_APPLICABLE:  'No or only one focusable element on the page'
       },
       BASE_RESULT_MESSAGES: {
-        PAGE_MC_1:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, ...).',
-        PAGE_MC_2:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 other interactive elements on the page have been removed from the tab order by setting the @tabindex@ value to less than 0.',
-        ELEMENT_MC_1:     '%1 element with @role@="%2" is part of the sequential focus order manual check.',
-        ELEMENT_MC_2:     '%1 element is part of the sequential focus order manual check.',
-        ELEMENT_MC_3:     '%1 element with @role@="%2" has a @tabindex@="%2", so it is NOT part of the sequential focus oarder of the page.',
-        ELEMENT_MC_4:     '%1 element has a @tabindex@="%2", so it is NOT part of the sequential focus order of the page.',
-        ELEMENT_HIDDEN_1: '%1 element with @role@="%2" is hidden, so NOT a part of the sequential focus order of the page.',
+        PAGE_MC_1:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, widgets ...).',
+        PAGE_MC_2:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, widgets ...); NOTE: %2 other interactive elements on the page have been removed from the tab order by setting the @tabindex@ value to less than 0.',
+        ELEMENT_MC_1:     'Verify the %1[@role@="%2"] element sense in the sequential focus order of the page.',
+        ELEMENT_MC_2:     'Verify the %1 element makes sense in the sequential focus order of the page.',
+        ELEMENT_MC_3:     '%1[@role@="%2"] element has a @tabindex="%3"@ removing it from the sequential focus order of the page.  Verify it makes sense for the %1 element to be removed from the focus order of the page.',
+        ELEMENT_HIDDEN_1: '%1[ element is hidden, so NOT a part of the sequential focus order of the page.',
         ELEMENT_HIDDEN_2: '%1 element is hidden, so NOT a part of the sequential focus order of the page.'
       },
       PURPOSES: [
@@ -69,19 +68,19 @@ export const focusRules = {
       BASE_RESULT_MESSAGES: {
         PAGE_MC_1:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...).',
         PAGE_MC_2:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 interactive elements are hidden.',
-        ELEMENT_MC_1:     '%1 element with @role@="%2" is part of the keyboard focus styling manual check.',
-        ELEMENT_MC_2:     '%1 element is part of the keyboard focus styling manual check.',
-        ELEMENT_HIDDEN_1: '%1 element with @role@="%2" is hidden, so is not visible for changing the focus styling.',
-        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for changing the focus styling.'
+        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1[role="%2"]@ element includes a solid discernable focus border at least 2 pixels in width.',
+        ELEMENT_MC_2:     'Verify the visual focus styling of the @%1@ element includes a solid discernable focus border at least 2 pixels in width.',
+        ELEMENT_HIDDEN_1: '%1[@role@="%2"] element is hidden, so is not visible for observing focus styling.',
+        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for observing the focus styling.'
       },
       PURPOSES: [
         'Many browsers don\'t provide a prominent or consistent visible keyboard focus styling for interactive elements, making it difficult for users to identify and track the element with keyboard focus.',
         'Author defined visible keyboard focus style makes it easier for users to know which interactive element has keyboard focus and provides more consistent user experience between browsers and operating systems.'
       ],
       TECHNIQUES: [
-        'Use CSS psuedo element selector @:focus@ to change the styling of elements with keyboard focus.',
+        'Use CSS psuedo element selector @:focus@ to change the styling of elements with keyboard focus to include a 2 pixel border.',
         'Use @focus@ and @blur@ event handlers on checkboxes and radio buttons to change the styling of not only the form control, but also its label text to make it easier to see.',
-        'Styling changes should include creating a border around the interactive element and its label, typically using the CSS @border@ or @outline@ properties.',
+        'Styling changes should include creating at least a 2 pixel border around the interactive element and its label, typically using the CSS @border@ or @outline@ properties.',
         'For consistent look and feel to the website it is often useful for the focus and hover styles to be the same or similar.'
       ],
       MANUAL_CHECKS: [

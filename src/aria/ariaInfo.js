@@ -99,6 +99,8 @@ export default class AriaInfo {
     this.isLandmark = designPattern.roleType === 'landmark';
     this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
 
+    this.hasRequiredParents = designPattern.requiredParents.length > 0;
+
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);
 

@@ -1,4 +1,4 @@
-/* colorContrast.js */
+/* visibility.js */
 
 /* Imports */
 import DebugLogging  from '../debug.js';

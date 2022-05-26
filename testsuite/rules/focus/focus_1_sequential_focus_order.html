@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Focus Rule 1: Interative Elements</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      
+    <style type="text/css">
+      
+      label {
+        display: block; 
+      }
+      
+      div > label { 
+        margin-top: 1em;
+      }
+
+      fieldset {
+        margin-top: 1em;
+      }
+    </style>  
+  </head>
+
+  <body class="FOCUS_1_MC">
+    
+    <header>
+      <h1>Focus Rules</h1>
+    </header>
+
+    <div role="main">
+      
+      <h1>Focus Rule 1: Interative Elements</h1>
+
+      <div><a name="test"><code>a[name]</code> element used as reference, not part of tab sequence</a></div>
+      <div><a href="test.html"  class="FOCUS_1_MC"><code>a[href]</code> element with <code>href</code>, part of tab sequence</a></div>
+
+      <button class="FOCUS_1_MC">Test button 1</button>
+      <div role="button"  class="FOCUS_1_MC">Test Button 2: no tabindex</div>
+      <div role="button" tabindex="0"   class="FOCUS_1_MC">Test Button 3: tabindex=0</div>
+      <div role="button" tabindex="-1"  class="FOCUS_1_MC">Test Button 4: tabindex=-1</div>
+      <div role="button" id="button5"   class="FOCUS_1_MC">Test Button 5: tabindex=0</div>
+      <div role="button" id="button6"   class="FOCUS_1_MC">Test Button 6: tabindex=0</div>
+
+      <script>
+        document.getElementById('button5').setAttribute('tabIndex', '0');
+        document.getElementById('button6').tabIndex = 0;
+      </script>
+
+      <label for="input1">Textbox 1</label>
+      <input id="input1"  class="FOCUS_1_MC">
+      <input class="FOCUS_1_MC">
+
+      <input type="checkbox" tabindex="-1" class="FOCUS_1_MC">
+
+      <label for="select1">Select with onchange event</label>
+      <select id="select1" onchange="onSelectChangeEvent()" class="FOCUS_1_MC">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+      </select>
+
+      <div role="menu" class="FOCUS_1_MC">
+        <div role="menuitem">Item 1</div>
+        <div role="menuitem">Item 2</div>
+        <div role="menuitem">Item 3</div>
+        <div role="menuitem">Item 4</div>
+      </div>
+
+      <button aria-hidden="true" class="FOCUS_1_MC">Hidden Button 1</button>
+      <button hidden class="FOCUS_1_HIDDEN">Hidden Button 1</button>
+      <button hidden tabindex="-1" class="FOCUS_1_HIDDEN">Hidden Button 2</button>
+
+  </body>
+</html>
+
+

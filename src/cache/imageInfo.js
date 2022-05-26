@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('imageInfo', true);
+const debug = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement

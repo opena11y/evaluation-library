@@ -15,12 +15,24 @@
     <script type="module">
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', (event) => {
-        executeTest('FOCUS 1: Only interactive elements should have tabindex',  'ID_IFRAME_1',  'FOCUS_1');
+/*
+        executeTest('FOCUS 1: Sequential focus order is logical',  'ID_IFRAME_1',  'FOCUS_1');
+*/
+        executeTest('FOCUS 2: Focus styling',                      'ID_IFRAME_2',  'FOCUS_2');
+
+/*
         executeTest('FOCUS 4: Select elements with onchange events',            'ID_IFRAME_4',  'FOCUS_4');
         executeTest('FOCUS 5A: Submit forms with buttons',                      'ID_IFRAME_5A', 'FOCUS_5');
         executeTest('FOCUS 5B: Submit forms with buttons (no visible buttons)', 'ID_IFRAME_5B', 'FOCUS_5');
+*/
       });
     </script>
+
+    <h2>Sequential focus order is logical</h2>
+    <iframe id="ID_IFRAME_1" src="focus/focus_1_sequential_focus_order.html"></iframe>
+
+    <h2>Focus styling</h2>
+    <iframe id="ID_IFRAME_2" src="focus/focus_2_focus_styling.html"></iframe>
 
     <h2>Select controls with onchange events</h2>
     <iframe id="ID_IFRAME_4" src="focus/focus_4_select_with_onchange_event.html"></iframe>

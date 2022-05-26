@@ -109,19 +109,17 @@ class DebugLogging {
       const accName = domElement.accName;
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
-      const parentLandmark = domElement.parentInfo.landmarkElement ?
-                            domElement.parentInfo.landmarkElement.domElement.role
-                            :
-                            'none';
+
       if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos}`);
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos})`);
       } else {
         this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
       }
-      this.log(`${prefix}[${domElement.tagName}][parentLandmark]: ${parentLandmark}]`);
-      this.log(`${prefix}[${domElement.tagName}][    isLandmark]: ${domElement.ariaInfo.isLandmark}]`);
-      this.log(`${prefix}[${domElement.tagName}][    hasContent]: ${domElement.hasContent}]`);
-      this.log(`${prefix}[${domElement.tagName}][mayHaveContent]: ${domElement.mayHaveContent}]`);
+
+//      this.log(`${prefix}[${domElement.tagName}][            tabIndex]: ${domElement.tabIndex}`);
+//      this.log(`${prefix}[${domElement.tagName}][           isTabStop]: ${domElement.isTabStop}`);
+//      this.log(`${prefix}[${domElement.tagName}][isInteractiveElement]: ${domElement.isInteractiveElement}`);
+//      this.log(`${prefix}[${domElement.tagName}][            isWidget]: ${domElement.ariaInfo.isWidget}`);
     }
   }
 
@@ -141,10 +139,144 @@ class DebugLogging {
 
 }
 
+/* controlInfo.js */
+
+/* Constants */
+const debug$o = new DebugLogging('widgetInfo', true);
+
+/**
+ * @class ControlElement
+ *
+ * @desc Idenifies a DOM element for native HTML controls and ARIA widgets.
+ *
+ * @param  {Object}  domElement   - Structural Information
+ */
+
+class ControlElement {
+  constructor (domElement, parentControlElement) {
+
+    this.parentControlElement = parentControlElement;
+    this.domElement = domElement;
+    this.childControlElements = [];
+
+    if (debug$o.flag) {
+      debug$o.log('');
+    }
+  }
+
+  addChildControlElement (controlElement) {
+    this.childControlElements.push(controlElement);
+  }
+
+  showControlInfo (prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    this.childControlElements.forEach( ce => {
+      debug$o.domElement(ce.domElement, prefix);
+      ce.showControlInfo(prefix + '  ');
+    });
+  }
+}
+/**
+ * @class ControlInfo
+ *
+ * @desc Collects information on the HTML control elements and ARIA widget roles
+ *       on a web page for use in rules
+ *
+ * @param  {Object}  ControlInfo   - Structural Information
+ */
+
+class ControlInfo {
+  constructor () {
+    this.allControlElements   = [];
+    this.childControlElements = [];
+    this.allForms             = [];
+  }
+
+  /**
+   * @method addChildControlElement
+   *
+   * @desc Creates a new ControlElement and adds it to the array of
+   *       ControlElements
+   *
+   * @param  {Object}  domElement           - domElement object being added to ControlInfo
+   * @param  {Object}  parentControlElement - ControlElement object representing that parent ControlElement
+   *
+   */
+
+  addChildControlElement (domElement, parentControlElement) {
+    const ce = new ControlElement(domElement, parentControlElement);
+    this.allControlElements.push(ce);
+
+    if (parentControlElement) {
+      parentControlElement.addChildControlElement(ce);
+    } else {
+      this.childControlElements.push(ce);
+    }
+    return ce;
+  }
+
+  /**
+   * @method isControl
+   *
+   * @desc Tests if a domElement is a HTML control element, a grouping item or ARIA widget role
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isControl (domElement) {
+    const isGroupRole = domElement.role === 'group';
+    return domElement.isInteractiveElement ||
+           isGroupRole ||
+           domElement.ariaInfo.isWidget;
+  }
+
+
+  /**
+   * @method update
+   *
+   * @desc Checks to see if the domElement is a HTML control element or has an ARIA
+   *       widget role
+   *
+   * @param  {Object}  parentControlElement - ControlElement object representing the current
+   *                                          ancestor controls in the DOM
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   *
+   * @return  {Object}  ControlElement - ControlElement object for use as the parent ControlElement
+   *                                     for descendant domElements
+   */
+
+  update (parentControlElement, domElement) {
+    let controlElement = parentControlElement;
+    if (this.isControl(domElement)) {
+      controlElement = this.addChildControlElement(domElement, parentControlElement);
+    }
+    return controlElement;
+  }
+
+  /**
+   * @method showControlInfo
+   *
+   * @desc showControlInfo is used for debugging the ControlInfo and ControlElement objects
+   */
+
+  showControlInfo () {
+    if (debug$o.flag) {
+      debug$o.log('== Control Tree ==', 1);
+      this.childControlElements.forEach( ce => {
+        debug$o.domElement(ce.domElement);
+        ce.showControlInfo('  ');
+      });
+    }
+  }
+}
+
 /* colorContrast.js */
 
 /* Constants */
-const debug$m = new DebugLogging('colorContrast', false);
+const debug$n = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -164,9 +296,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$m.flag) {
-      debug$m.separator();
-      debug$m.tag(elementNode);
+    if (debug$n.flag) {
+      debug$n.separator();
+      debug$n.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -190,11 +322,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$m.flag) {
-      debug$m.log(`[                    opacity]: ${this.opacity}`);
-      debug$m.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$m.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$m.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$n.flag) {
+      debug$n.log(`[                    opacity]: ${this.opacity}`);
+      debug$n.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$n.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$n.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -513,10 +645,29 @@ class ColorContrast {
   }
 }
 
-/* colorContrast.js */
+/* hasEvents.js */
 
 /* Constants */
-const debug$l = new DebugLogging('visibility', false);
+new DebugLogging('hasEvents', false);
+
+/**
+ * @class Events
+ *
+ * @desc Identifies inline HTML event handlers
+ *
+ * @param  {Object}  elementNode      - dom element node 
+ */
+
+class HasEvents {
+  constructor (elementNode) {
+    this.onChange = elementNode.hasAttribute('onchange');
+  }
+}
+
+/* visibility.js */
+
+/* Constants */
+const debug$m = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -564,17 +715,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$l.flag) {
-      debug$l.separator();
-      debug$l.tag(elementNode);
-      debug$l.log('[          isHidden]: ' + this.isHidden);
-      debug$l.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$l.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$l.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$l.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$l.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$l.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$l.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$m.flag) {
+      debug$m.separator();
+      debug$m.tag(elementNode);
+      debug$m.log('[          isHidden]: ' + this.isHidden);
+      debug$m.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$m.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$m.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$m.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$m.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$m.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$m.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5672,54 +5823,10 @@ function accNamesTheSame (ref1, ref2) {
   return ref1.name.toLowerCase() === ref2.name.toLowerCase();
 }
 
-/**
- * @function checkIsTabStop
- *
- * @desc Returns true if the element is a tab stop
- *
- * @param  {Object}  node - DOM node
- *
- * @return Returns true if the elements is a tab stop, otherwise false
- */
-
-function checkIsTabStop (node) {
-  const tagName  = node.tagName.toLowerCase();
-  const href     = node.hasAttribute('href');
-  const controls = node.hasAttribute('controls');
-  const type     = node.hasAttribute('type') ? node.getAttribute('type') : '';
-
-  if (node.tabIndex >= 0) {
-    return true;
-  }
-
-  switch (tagName ) {
-    case 'a':
-      return href;
-
-    case 'audio':
-      return controls;
-
-    case 'input':
-      return type !== 'hidden';
-
-    case 'select':
-      return true;
-
-    case 'textarea':
-      return true;
-
-    case 'video':
-      return controls;
-
-  }
-
-  return false;
-}
-
 /* ariaInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('AriaInfo', false);
+const debug$l = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -5811,6 +5918,8 @@ class AriaInfo {
     this.isLandmark = designPattern.roleType === 'landmark';
     this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
 
+    this.hasRequiredParents = designPattern.requiredParents.length > 0;
+
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);
 
@@ -5866,16 +5975,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$k.flag) {
-      node.attributes.length && debug$k.log(`${node.outerHTML}`, 1);
-      debug$k.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$k.log(`[         isWidget]: ${this.isWidget}`);
-      debug$k.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$k.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$k.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$k.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$k.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$k.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$l.flag) {
+      node.attributes.length && debug$l.log(`${node.outerHTML}`, 1);
+      debug$l.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$l.log(`[         isWidget]: ${this.isWidget}`);
+      debug$l.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$l.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$l.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$l.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$l.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$l.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7553,7 +7662,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$j = new DebugLogging('ariaInHtml', false);
+const debug$k = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7715,11 +7824,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$j.flag) {
+  if (debug$k.flag) {
     if (tagName === 'h2') {
-      debug$j.tag(node);
+      debug$k.tag(node);
     }
-    debug$j.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$k.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8812,7 +8921,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$i = new DebugLogging('DOMElement', false);
+const debug$j = new DebugLogging('DOMElement', true);
 
 const elementsWithContent = [
   'area',
@@ -8860,19 +8969,18 @@ class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
-    this.isTabStop = checkIsTabStop(elementNode);
-
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInfo   = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo = new AriaInfo(doc, this.role, defaultRole, elementNode);
 
-    this.accName           = getAccessibleName(doc, elementNode);
-    this.accDescription    = getAccessibleDesc(doc, elementNode);
-    this.errMessage        = getErrMessage(doc, elementNode);
+    this.accName        = getAccessibleName(doc, elementNode);
+    this.accDescription = getAccessibleDesc(doc, elementNode);
+    this.errMessage     = getErrMessage(doc, elementNode);
 
-    this.colorContrast    = new ColorContrast(parentDomElement, elementNode);
-    this.visibility       = new Visibility(parentDomElement, elementNode);
+    this.colorContrast = new ColorContrast(parentDomElement, elementNode);
+    this.visibility    = new Visibility(parentDomElement, elementNode);
+    this.hasEvents     = new HasEvents(elementNode);
 
     this.id         = elementNode.id        ? elementNode.id : '';
     this.className  = elementNode.className ? elementNode.className : '';
@@ -8881,6 +8989,10 @@ class DOMElement {
 
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
+
+    this.tabIndex             = checkTabIndex(elementNode);
+    this.isTabStop            = checkIsTabStop(elementNode);
+    this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.children = [];
 
@@ -9072,17 +9184,96 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$i.flag) {
+    if (debug$j.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$i.domText(domItem, prefix);
+          debug$j.domText(domItem, prefix);
         } else {
-          debug$i.domElement(domItem, prefix);
+          debug$j.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
     }
   }
+}
+
+// Helper functions
+
+/**
+ * @function checkForInteractiveElement
+ *
+ * @desc Returns true if the element is natively interactive
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns true if the elements is interactive, otherwise false
+ */
+
+function checkForInteractiveElement (node) {
+  const tagName     = node.tagName.toLowerCase();
+  const hasHref     = node.hasAttribute('href');
+  const hasControls = node.hasAttribute('controls');
+  const type        = node.hasAttribute('type') ? node.getAttribute('type') : '';
+
+  switch (tagName ) {
+    case 'a':
+    case 'area':
+      return hasHref;
+
+    case 'audio':
+      return hasControls;
+
+    case 'button':
+      return true;
+
+    case 'input':
+      return type !== 'hidden';
+
+    case 'select':
+      return true;
+
+    case 'textarea':
+      return true;
+
+    case 'video':
+      return hasControls;
+
+  }
+
+  return false;
+}
+
+
+/**
+ * @function checkIsTabStop
+ *
+ * @desc Returns true if the tabindex is defined and greater than or equal to zero,
+ *       or the element's native semantics is an interactive element
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns true if the elements is a tab stop, otherwise false
+ */
+
+function checkIsTabStop (node) {
+  return (node.tabIndex >= 0) || checkForInteractiveElement(node);
+}
+
+/**
+ * @function checkTabIndex
+ *
+ * @desc Returns value of tabindex if it is defined
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return Returns value of tabindex if defined
+ */
+
+function checkTabIndex (node) {
+  if (node.tabIndex >= 0) {
+    return node.tabIndex
+  }
+  return node.hasAttribute('tabIndex') ? -1 : undefined;
 }
 
 /* domText.js */
@@ -9156,7 +9347,7 @@ class DOMText {
 /* imageInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('imageInfo', true);
+const debug$i = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -9347,22 +9538,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All Image elements ==', 1);
+    if (debug$i.flag) {
+      debug$i.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$h.log(`[fileName]: ${ie.fileName}`, true);
-        debug$h.log(`[    role]: ${ie.domElement.role}`);
-        debug$h.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$h.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$h.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$i.log(`[fileName]: ${ie.fileName}`, true);
+        debug$i.log(`[    role]: ${ie.domElement.role}`);
+        debug$i.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$i.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$i.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$h.log('== All SVG domElements  ==', 1);
+      debug$i.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$h.domElement(de);
+        debug$i.domElement(de);
       });
-      debug$h.log('== All MapElements ==', 1);
+      debug$i.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$h.domElement(me.domElement);
+        debug$i.domElement(me.domElement);
       });
     }
   }
@@ -9371,7 +9562,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('linkInfo', true);
+const debug$h = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -9417,10 +9608,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All Links ==', 1);
+    if (debug$h.flag) {
+      debug$h.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$g.domElement(de);
+        debug$h.domElement(de);
       });
     }
   }
@@ -9429,7 +9620,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('ListInfo', false);
+const debug$g = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -9450,8 +9641,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$f.flag) {
-      debug$f.log('');
+    if (debug$g.flag) {
+      debug$g.log('');
     }
   }
 
@@ -9476,9 +9667,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$g.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9585,16 +9776,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All ListElements ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$g.flag) {
+      debug$g.log('== All ListElements ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
       });
-      debug$f.log('== List Tree ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+      debug$g.log('== List Tree ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9604,7 +9795,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('structureInfo', false);
+const debug$f = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9647,11 +9838,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$e.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$e.domElement(h, prefix);
+      debug$f.domElement(h, prefix);
     });
   }
 
@@ -9812,27 +10003,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$e.flag) {
-      debug$e.log('== All Headings ==', 1);
+    if (debug$f.flag) {
+      debug$f.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$e.domElement(h);
+        debug$f.domElement(h);
       });
-      debug$e.log('== All Landmarks ==', 1);
+      debug$f.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$e.log('== Landmarks By Doc ==', 1);
+      debug$f.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$e.domElement(le.domElement);
+            debug$f.domElement(le.domElement);
           });
         }
       });
-      debug$e.log('== Structure Tree ==', 1);
+      debug$f.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -9842,7 +10033,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', true);
+const debug$e = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -9916,10 +10107,11 @@ class DOMCache {
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
-    this.structureInfo = new StructureInfo();
+    this.controlInfo   = new ControlInfo();
+    this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
-    this.imageInfo      = new ImageInfo();
+    this.structureInfo = new StructureInfo();
 
   	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
@@ -9935,12 +10127,14 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$d.flag) {
+    if (debug$e.flag) {
       this.showDomElementTree();
-      this.structureInfo.showStructureInfo();
+
+      this.controlInfo.showControlInfo();
+      this.imageInfo.showImageInfo();
       this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
-      this.imageInfo.showImageInfo();
+      this.structureInfo.showStructureInfo();
     }
   }
 
@@ -10072,17 +10266,20 @@ class DOMCache {
 
   updateDOMElementInformation (parentInfo, domElement) {
     const documentIndex   = parentInfo.documentIndex;
+
+    const controlElement   = parentInfo.controlElement;
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
     const mapElement     = parentInfo.mapElement;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
-    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
-    newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
-    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
 
+    newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
+    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
     this.linkInfo.update(domElement);
+    newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
+    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
 
     return newParentInfo;
   }
@@ -10094,18 +10291,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$d.log(' === AllDomElements ===', true);
+    debug$e.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$d.domElement(de);
+      debug$e.domElement(de);
     });
 
-    debug$d.log(' === AllDomTexts ===', true);
+    debug$e.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$d.domText(dt);
+      debug$e.domText(dt);
     });
 
-    debug$d.log(' === DOMCache Tree ===', true);
-    debug$d.domElement(this.startingDomElement);
+    debug$e.log(' === DOMCache Tree ===', true);
+    debug$e.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -10113,7 +10310,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$c = new DebugLogging('constants', false);
+const debug$d = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -10514,13 +10711,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -10671,7 +10868,7 @@ const colorRules$1 = [
 /* focusRules.js */
 
 /* Constants */
-new DebugLogging('Focus Rules', false);
+const debug$c = new DebugLogging('Focus Rules', true);
 
 /*
  * OpenA11y Alliance Rules
@@ -10694,93 +10891,50 @@ const focusRules$1 = [
   rule_required       : true,
   wcag_primary_id     : '2.4.3',
   wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
-  target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
+  target_resources    : ['Page', 'a', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
   validate            : function (dom_cache, rule_result) {
 
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
+    let controlCount = 0;
+    let removedCount = 0;
 
-     var page_element = dom_cache.keyboard_focus_cache.page_element;
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (de.isInteractiveElement ||
+          (de.ariaInfo.isWidget && !de.ariaInfo.hasRequiredParents)) {
+        if (de.visibility.isVisibleOnScreen) {
+          controlCount += 1;
+          if (de.isInteractiveElement && (de.tabIndex < 0)) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName, de.role, de.tabIndex]);
+            removedCount += 1;
+          }
+          else {
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+            }
+          }
+        }
+        else {
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+          }
+        }
+      }
+    });
 
-//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
-
-     var interactive_elements     = dom_cache.keyboard_focus_cache.interactive_elements;
-     var interactive_elements_len = interactive_elements.length;
-
-     var tab_count = 0;
-     var visible_count = 0;
-
-     for (var i = 0; i < interactive_elements_len; i++) {
-
-       var ie = interactive_elements[i];
-
-       var de = ie.dom_element;
-       if (!de) de =ie;
-
-       var cs = de.computed_style;
-
-       if ((cs.is_visible_to_at    === VISIBILITY.VISIBLE) ||
-           (cs.is_visible_onscreen === VISIBILITY.VISIBLE)) {
-
-         visible_count++;
-
-         if (de.tab_index >= 0) {
-           if (de.is_widget) {
-             // only include widgets that can be part of the tab order
-             if (de.is_tab_stoppable) {
-                tab_count++;
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.tag_name, de.role]);
-             }
-           }
-           else {
-             tab_count++;
-             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
-           }
-         }
-         else {
-           if (de.is_widget) {
-             // only include widgets that can be part of the tab order
-             if (de.is_tab_stoppable) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_3', [de.tag_name, de.role, de.tab_index]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_4', [de.tag_name, de.tab_index]);
-           }
-         }
-
-       }
-       else {
-
-         if (de.is_widget) {
-           // only include widgets that can be part of the tab order
-           if (de.is_tab_stoppable) {
-             rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-           }
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-         }
-       }
-     }  // endfor
-
- //    logger.debug(" Visible count: " + visible_count + "  Tab count: " + tab_count);
-
-     if (visible_count > 1) {
-
-       if (tab_count === visible_count) {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [tab_count]);
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [tab_count, (visible_count-tab_count)]);
-       }
-
-     }
-
-*/
-
-   } // end validation function
+    if (controlCount > 1) {
+      if (removedCount == 0) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, removedCount]);
+      }
+    }
+  } // end validation function
 },
 
 /**
@@ -10799,6 +10953,44 @@ const focusRules$1 = [
   wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
   target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
   validate            : function (dom_cache, rule_result) {
+
+    let controlCount = 0;
+    let hiddenCount = 0;
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (de.isInteractiveElement ||
+          de.ariaInfo.isWidget) {
+        if (de.visibility.isVisibleOnScreen) {
+          debug$c.domElement(de, '[FOCUS 2]');
+          controlCount += 1;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+          }
+        }
+        else {
+          hiddenCount += 1;
+          if (de.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+          }
+        }
+      }
+    });
+
+    if (controlCount > 1) {
+      if (hiddenCount == 0) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
+      }
+    }
+
 
 /*
      var VISIBILITY  = VISIBILITY;
@@ -14010,24 +14202,23 @@ const colorRules = {
 const focusRules = {
   FOCUS_1: {
       ID:                    'Focus 1',
-      DEFINITION:            'The sequential focus order of links, form controls, embedded apps and widgets %s be meaningful.',
-      SUMMARY:               'Focus order %s be meaningful',
+      DEFINITION:            'The sequential focus order of links, form controls, embedded apps and widgets must be meaningful.',
+      SUMMARY:               'Focus order must be meaningful',
       TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements and elements with widget roles with @tabindex@ values',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:     'Check the "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
-        MANUAL_CHECK_P:     'Check the "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+        MANUAL_CHECK_S:     'Check the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+        MANUAL_CHECK_P:     'Check the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
         HIDDEN_S: 'The link, form control, embedded app or widget element that is hidden does not need to be tested for focus order.',
         HIDDEN_P: 'The %N_H links, form controls, embedded apps and/or widgets that are hidden do not need to be tested for focus order.',
         NOT_APPLICABLE:  'No or only one focusable element on the page'
       },
       BASE_RESULT_MESSAGES: {
-        PAGE_MC_1:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, ...).',
-        PAGE_MC_2:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 other interactive elements on the page have been removed from the tab order by setting the @tabindex@ value to less than 0.',
-        ELEMENT_MC_1:     '%1 element with @role@="%2" is part of the sequential focus order manual check.',
-        ELEMENT_MC_2:     '%1 element is part of the sequential focus order manual check.',
-        ELEMENT_MC_3:     '%1 element with @role@="%2" has a @tabindex@="%2", so it is NOT part of the sequential focus oarder of the page.',
-        ELEMENT_MC_4:     '%1 element has a @tabindex@="%2", so it is NOT part of the sequential focus order of the page.',
-        ELEMENT_HIDDEN_1: '%1 element with @role@="%2" is hidden, so NOT a part of the sequential focus order of the page.',
+        PAGE_MC_1:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, widgets ...).',
+        PAGE_MC_2:        'Use the "tab" key to check the focus order of the %1 interactive elements on the page (i.e. links, form controls, widgets ...); NOTE: %2 other interactive elements on the page have been removed from the tab order by setting the @tabindex@ value to less than 0.',
+        ELEMENT_MC_1:     'Verify the %1[@role@="%2"] element sense in the sequential focus order of the page.',
+        ELEMENT_MC_2:     'Verify the %1 element makes sense in the sequential focus order of the page.',
+        ELEMENT_MC_3:     '%1[@role@="%2"] element has a @tabindex="%3"@ removing it from the sequential focus order of the page.  Verify it makes sense for the %1 element to be removed from the focus order of the page.',
+        ELEMENT_HIDDEN_1: '%1[ element is hidden, so NOT a part of the sequential focus order of the page.',
         ELEMENT_HIDDEN_2: '%1 element is hidden, so NOT a part of the sequential focus order of the page.'
       },
       PURPOSES: [
@@ -14070,19 +14261,19 @@ const focusRules = {
       BASE_RESULT_MESSAGES: {
         PAGE_MC_1:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...).',
         PAGE_MC_2:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 interactive elements are hidden.',
-        ELEMENT_MC_1:     '%1 element with @role@="%2" is part of the keyboard focus styling manual check.',
-        ELEMENT_MC_2:     '%1 element is part of the keyboard focus styling manual check.',
-        ELEMENT_HIDDEN_1: '%1 element with @role@="%2" is hidden, so is not visible for changing the focus styling.',
-        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for changing the focus styling.'
+        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1[role="%2"]@ element includes a solid discernable focus border at least 2 pixels in width.',
+        ELEMENT_MC_2:     'Verify the visual focus styling of the @%1@ element includes a solid discernable focus border at least 2 pixels in width.',
+        ELEMENT_HIDDEN_1: '%1[@role@="%2"] element is hidden, so is not visible for observing focus styling.',
+        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for observing the focus styling.'
       },
       PURPOSES: [
         'Many browsers don\'t provide a prominent or consistent visible keyboard focus styling for interactive elements, making it difficult for users to identify and track the element with keyboard focus.',
         'Author defined visible keyboard focus style makes it easier for users to know which interactive element has keyboard focus and provides more consistent user experience between browsers and operating systems.'
       ],
       TECHNIQUES: [
-        'Use CSS psuedo element selector @:focus@ to change the styling of elements with keyboard focus.',
+        'Use CSS psuedo element selector @:focus@ to change the styling of elements with keyboard focus to include a 2 pixel border.',
         'Use @focus@ and @blur@ event handlers on checkboxes and radio buttons to change the styling of not only the form control, but also its label text to make it easier to see.',
-        'Styling changes should include creating a border around the interactive element and its label, typically using the CSS @border@ or @outline@ properties.',
+        'Styling changes should include creating at least a 2 pixel border around the interactive element and its label, typically using the CSS @border@ or @outline@ properties.',
         'For consistent look and feel to the website it is often useful for the focus and hover styles to be the same or similar.'
       ],
       MANUAL_CHECKS: [

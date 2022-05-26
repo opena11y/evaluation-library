@@ -1,6 +1,7 @@
 /* domCache.js */
 
 /* Imports */
+import ControlInfo   from './controlInfo.js';
 import DOMElement    from './domElement.js';
 import DOMText       from './domText.js';
 import ImageInfo     from './imageInfo.js';
@@ -84,10 +85,11 @@ export default class DOMCache {
     const parentInfo = new ParentInfo();
     parentInfo.document = startingDoc;
 
-    this.structureInfo = new StructureInfo();
+    this.controlInfo   = new ControlInfo();
+    this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
-    this.imageInfo      = new ImageInfo();
+    this.structureInfo = new StructureInfo();
 
   	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
@@ -105,10 +107,12 @@ export default class DOMCache {
     // Debug features
     if (debug.flag) {
       this.showDomElementTree();
-      this.structureInfo.showStructureInfo();
+
+      this.controlInfo.showControlInfo();
+      this.imageInfo.showImageInfo();
       this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
-      this.imageInfo.showImageInfo();
+      this.structureInfo.showStructureInfo();
     }
   }
 
@@ -243,17 +247,20 @@ export default class DOMCache {
 
   updateDOMElementInformation (parentInfo, domElement) {
     const documentIndex   = parentInfo.documentIndex;
+
+    const controlElement   = parentInfo.controlElement;
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
     const mapElement     = parentInfo.mapElement;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
-    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
-    newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
-    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
 
+    newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
+    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
     this.linkInfo.update(domElement);
+    newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
+    newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
 
     return newParentInfo;
   }
