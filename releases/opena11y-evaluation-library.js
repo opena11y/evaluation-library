@@ -142,7 +142,7 @@ class DebugLogging {
 /* controlInfo.js */
 
 /* Constants */
-const debug$n = new DebugLogging('widgetInfo', true);
+const debug$o = new DebugLogging('widgetInfo', true);
 
 /**
  * @class ControlElement
@@ -159,8 +159,8 @@ class ControlElement {
     this.domElement = domElement;
     this.childControlElements = [];
 
-    if (debug$n.flag) {
-      debug$n.log('');
+    if (debug$o.flag) {
+      debug$o.log('');
     }
   }
 
@@ -173,7 +173,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$n.domElement(ce.domElement, prefix);
+      debug$o.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -189,9 +189,9 @@ class ControlElement {
 
 class ControlInfo {
   constructor () {
-    this.allControlElements   = [];
-    this.childControlElements = [];
-    this.allForms             = [];
+    this.allControlElements      = [];
+    this.childControlElements    = [];
+    this.allFormControlElements  = [];
   }
 
   /**
@@ -208,6 +208,9 @@ class ControlInfo {
   addChildControlElement (domElement, parentControlElement) {
     const ce = new ControlElement(domElement, parentControlElement);
     this.allControlElements.push(ce);
+    if (domElement.tagName === 'form') {
+      this.allFormControlElements.push(ce);
+    }
 
     if (parentControlElement) {
       parentControlElement.addChildControlElement(ce);
@@ -227,10 +230,12 @@ class ControlInfo {
 
   isControl (domElement) {
     const isGroupRole = domElement.role === 'group';
-    const isFormRole = domElement.role === 'form';
+    const isFormRole  = domElement.role === 'form';
+    const isLabel     = domElement.tagName === 'label';
     return domElement.isInteractiveElement ||
            isFormRole ||
            isGroupRole ||
+           isLabel ||
            domElement.ariaInfo.isWidget;
   }
 
@@ -265,11 +270,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$n.flag) {
-      debug$n.log('== Control Tree ==', 1);
+    if (debug$o.flag) {
+      debug$o.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$n.domElement(ce.domElement);
+        debug$o.domElement(ce.domElement);
         ce.showControlInfo('  ');
+      });
+      debug$o.log('== Forms ==', 1);
+      this.allFormControlElements.forEach( ce => {
+        debug$o.domElement(ce.domElement);
       });
     }
   }
@@ -278,7 +287,7 @@ class ControlInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$m = new DebugLogging('colorContrast', false);
+const debug$n = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -298,9 +307,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$m.flag) {
-      debug$m.separator();
-      debug$m.tag(elementNode);
+    if (debug$n.flag) {
+      debug$n.separator();
+      debug$n.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -324,11 +333,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$m.flag) {
-      debug$m.log(`[                    opacity]: ${this.opacity}`);
-      debug$m.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$m.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$m.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$n.flag) {
+      debug$n.log(`[                    opacity]: ${this.opacity}`);
+      debug$n.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$n.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$n.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -669,7 +678,7 @@ class HasEvents {
 /* visibility.js */
 
 /* Constants */
-const debug$l = new DebugLogging('visibility', false);
+const debug$m = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -717,17 +726,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$l.flag) {
-      debug$l.separator();
-      debug$l.tag(elementNode);
-      debug$l.log('[          isHidden]: ' + this.isHidden);
-      debug$l.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$l.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$l.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$l.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$l.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$l.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$l.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$m.flag) {
+      debug$m.separator();
+      debug$m.tag(elementNode);
+      debug$m.log('[          isHidden]: ' + this.isHidden);
+      debug$m.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$m.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$m.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$m.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$m.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$m.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$m.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5828,7 +5837,7 @@ function accNamesTheSame (ref1, ref2) {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('AriaInfo', false);
+const debug$l = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -5977,16 +5986,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$k.flag) {
-      node.attributes.length && debug$k.log(`${node.outerHTML}`, 1);
-      debug$k.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$k.log(`[         isWidget]: ${this.isWidget}`);
-      debug$k.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$k.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$k.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$k.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$k.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$k.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$l.flag) {
+      node.attributes.length && debug$l.log(`${node.outerHTML}`, 1);
+      debug$l.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$l.log(`[         isWidget]: ${this.isWidget}`);
+      debug$l.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$l.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$l.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$l.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$l.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$l.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7664,7 +7673,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$j = new DebugLogging('ariaInHtml', false);
+const debug$k = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7826,11 +7835,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$j.flag) {
+  if (debug$k.flag) {
     if (tagName === 'h2') {
-      debug$j.tag(node);
+      debug$k.tag(node);
     }
-    debug$j.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$k.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8923,7 +8932,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$i = new DebugLogging('DOMElement', true);
+const debug$j = new DebugLogging('DOMElement', true);
 
 const elementsWithContent = [
   'area',
@@ -9186,12 +9195,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$i.flag) {
+    if (debug$j.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$i.domText(domItem, prefix);
+          debug$j.domText(domItem, prefix);
         } else {
-          debug$i.domElement(domItem, prefix);
+          debug$j.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9349,7 +9358,7 @@ class DOMText {
 /* imageInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('imageInfo', false);
+const debug$i = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -9540,22 +9549,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All Image elements ==', 1);
+    if (debug$i.flag) {
+      debug$i.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$h.log(`[fileName]: ${ie.fileName}`, true);
-        debug$h.log(`[    role]: ${ie.domElement.role}`);
-        debug$h.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$h.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$h.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$i.log(`[fileName]: ${ie.fileName}`, true);
+        debug$i.log(`[    role]: ${ie.domElement.role}`);
+        debug$i.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$i.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$i.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$h.log('== All SVG domElements  ==', 1);
+      debug$i.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$h.domElement(de);
+        debug$i.domElement(de);
       });
-      debug$h.log('== All MapElements ==', 1);
+      debug$i.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$h.domElement(me.domElement);
+        debug$i.domElement(me.domElement);
       });
     }
   }
@@ -9564,7 +9573,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('linkInfo', false);
+const debug$h = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -9610,10 +9619,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All Links ==', 1);
+    if (debug$h.flag) {
+      debug$h.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$g.domElement(de);
+        debug$h.domElement(de);
       });
     }
   }
@@ -9622,7 +9631,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('ListInfo', false);
+const debug$g = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -9643,8 +9652,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$f.flag) {
-      debug$f.log('');
+    if (debug$g.flag) {
+      debug$g.log('');
     }
   }
 
@@ -9669,9 +9678,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$f.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$g.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -9778,16 +9787,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All ListElements ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$g.flag) {
+      debug$g.log('== All ListElements ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
       });
-      debug$f.log('== List Tree ==', 1);
-      debug$f.log(`[linkCount]: ${this.linkCount}`);
+      debug$g.log('== List Tree ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -9797,7 +9806,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$e = new DebugLogging('structureInfo', false);
+const debug$f = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -9840,11 +9849,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$e.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$e.domElement(h, prefix);
+      debug$f.domElement(h, prefix);
     });
   }
 
@@ -10005,27 +10014,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$e.flag) {
-      debug$e.log('== All Headings ==', 1);
+    if (debug$f.flag) {
+      debug$f.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$e.domElement(h);
+        debug$f.domElement(h);
       });
-      debug$e.log('== All Landmarks ==', 1);
+      debug$f.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$e.log('== Landmarks By Doc ==', 1);
+      debug$f.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$e.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$e.domElement(le.domElement);
+            debug$f.domElement(le.domElement);
           });
         }
       });
-      debug$e.log('== Structure Tree ==', 1);
+      debug$f.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$e.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -10035,7 +10044,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$d = new DebugLogging('domCache', true);
+const debug$e = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -10129,7 +10138,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$d.flag) {
+    if (debug$e.flag) {
       this.showDomElementTree();
 
       this.controlInfo.showControlInfo();
@@ -10293,18 +10302,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$d.log(' === AllDomElements ===', true);
+    debug$e.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$d.domElement(de);
+      debug$e.domElement(de);
     });
 
-    debug$d.log(' === AllDomTexts ===', true);
+    debug$e.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$d.domText(dt);
+      debug$e.domText(dt);
     });
 
-    debug$d.log(' === DOMCache Tree ===', true);
-    debug$d.domElement(this.startingDomElement);
+    debug$e.log(' === DOMCache Tree ===', true);
+    debug$e.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -10312,7 +10321,7 @@ class DOMCache {
 /* constants.js */
 
 /* Constants */
-const debug$c = new DebugLogging('constants', false);
+const debug$d = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -10713,13 +10722,13 @@ const WCAG_LEVEL =  {
  */
 
 function getGuidelineId(sc) {
-  debug$c.flag && debug$c.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$c.flag && debug$c.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$d.flag && debug$d.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -10870,7 +10879,7 @@ const colorRules$1 = [
 /* focusRules.js */
 
 /* Constants */
-new DebugLogging('Focus Rules', true);
+const debug$c = new DebugLogging('Focus Rules', true);
 
 /*
  * OpenA11y Alliance Rules
@@ -10991,70 +11000,7 @@ const focusRules$1 = [
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
       }
     }
-
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var page_element = dom_cache.keyboard_focus_cache.page_element;
-
-//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
-
-     var interactive_elements     = dom_cache.keyboard_focus_cache.interactive_elements;
-     var interactive_elements_len = interactive_elements.length;
-
-     var visible_interactive_count = 0;
-
-     for (var i = 0; i < interactive_elements_len; i++) {
-
-       var ie = interactive_elements[i];
-
-       var de = ie.dom_element;
-       if (!de) de =ie;
-
-       var cs = de.computed_style;
-
-       if (cs.is_visible_onscreen === VISIBILITY.VISIBLE) {
-
-         visible_interactive_count++;
-
-         if (de.is_widget) {
-           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_1', [de.tag_name, de.role]);
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ie, 'ELEMENT_MC_2', [de.tag_name]);
-         }
-
-       }
-       else {
-
-         if (de.is_widget) {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ie, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-         }
-
-       }
-     }  // endfor
-
-//     logger.debug(" Visible Interactive Count: " + visible_interactive_count);
-
-     if (visible_interactive_count > 1) {
-
-       if (visible_interactive_count === interactive_elements_len) {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [interactive_elements_len]);
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [visible_interactive_count, (interactive_elements_len - visible_interactive_count)]);
-       }
-
-     }
-
-*/
-
-   } // end validation function
+  } // end validation function
 
 },
 
@@ -11074,36 +11020,14 @@ const focusRules$1 = [
   wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
   target_resources    : ['a', 'area', 'select'],
   validate            : function (dom_cache, rule_result) {
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
-
-     var link_elements     = dom_cache.links_cache.link_elements;
-     var link_elements_len = link_elements.length;
-
-     for (var i = 0; i < link_elements_len; i++) {
-
-       var le = link_elements[i];
-
-       var de = le.dom_element;
-       if (!de) de =le;
-
-       var cs = de.computed_style;
-
-       if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [de.tag_name]);
-
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-       }
-     }  // endfor
-*/
-
+    dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+      if (de.visibility.isVisibleOnScreen) {
+        rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+      }
+    });
    } // end validation function
 },
 
@@ -11124,36 +11048,17 @@ const focusRules$1 = [
   target_resources    : ['select'],
   validate            : function (dom_cache, rule_result) {
 
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-//     logger.debug(" Page Element: " + page_element + "  " + page_element.dom_element);
-
-     var control_elements     = dom_cache.controls_cache.control_elements;
-     var control_elements_len = control_elements.length;
-
-     for (var i = 0; i < control_elements_len; i++) {
-
-       var ce = control_elements[i];
-
-       var de = ce.dom_element;
-
-       var cs = de.computed_style;
-
-       if ((de.tag_name === 'select') &&
-            de.events.has_change) {
-
-         if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.tag_name]);
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-         }
-       }
-     }  // endfor
-*/
-
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (de.tagName === 'select') {
+        if (de.visibility.isVisibleOnScreen) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      }
+    });
    } // end validation function
 },
 
@@ -11175,181 +11080,113 @@ const focusRules$1 = [
   target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
   validate            : function (dom_cache, rule_result) {
 
-/*
-    function has_submit_button(control) {
+    function getChildButtonDomElements (ce) {
+      let buttonDomElements = [];
 
-      var cce = control.child_cache_elements;
-      var cce_len = cce.length;
-
-      var has_submit = false;
-
-      for(var i = 0; i < cce_len; i++) {
-        var ce = cce[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        if(ce.control_type === CONTROL_TYPE.SUBMIT) {
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', []);
-            has_submit = true;
-          }
-          else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_2', []);                          }
+      ce.childControlElements.forEach( cce => {
+        const de = cce.domElement;
+        if (de.role === 'button') {
+          buttonDomElements.push(de);
         }
+        buttonDomElements = buttonDomElements.concat(getChildButtonDomElements(cce));
+      });
 
-        if (ce.child_cache_elements && ce.child_cache_elements.length) {
-          has_submit = has_submit || has_submit_button(ce);
-        }
-
-      }
-
-      return has_submit;
-
+      return buttonDomElements;
     }
 
-    function has_other_button(control, count) {
+    dom_cache.controlInfo.allFormControlElements.forEach( fce => {
+      debug$c.log('[FORM]');
+      const de = fce.domElement;
+      if (de.visibility.isVisibleOnScreen) {
+        const buttonDomElements = getChildButtonDomElements(fce);
+        let submitButtons = 0;
+        let otherButtons  = 0;
 
-      var cee = control.child_cache_elements;
-      var cee_len = cee.length;
-
-      for(var i = 0; i < cee_len; i++) {
-        var ce = cee[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-//        logger.debug("Control: " + ce + " de: " + de + " cs: " + cs);
-
-        if (ce.control_type === CONTROL_TYPE.BUTTON_INPUT) {
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', ['button']);
-            count += 1;
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_3', ['button']);
-          }
-        }
-        else {
-           if (ce.control_type === CONTROL_TYPE.IMAGE) {
-             if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', ['image']);
-               count += 1;
-             }
-             else {
-               rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_3', ['image']);
-             }
-           }
-           else {
-             if (ce.control_type === CONTROL_TYPE.BUTTON_ELEMENT) {
-               if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-                 rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_4', []);
-                 count += 1;
-               }
-               else {
-                 rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_4', []);
-               }
-             }
-             else {
-               if (de.has_role && (de.role === 'button')) {
-                 if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_5', [de.tag_name]);
-                   count += 1;
-                 }
-                 else {
-                  rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_5', [de.tag_name]);
-                 }
-               }
-             }
-           }
-        }
-
-        if (ce.child_cache_elements && ce.child_cache_elements.length) {
-          count += has_other_button(ce, count);
-        }
-
-      }
-
-      return count;
-
-    }
-
-    function hasVisibleFormControls(controls) {
-
-      for (var i = 0; i < controls.length; i++) {
-
-        var ce = controls[i];
-        if (ce.control_type === CONTROL_TYPE.LABEL) continue;
-
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          return true;
-        }
-        else {
-          if (ce.child_cache_elements && ce.child_cache_elements.length) {
-            var result = hasVisibleFormControls(ce.child_cache_elements);
-            if (result) return true;
-          }
-        }
-      }
-
-      return false;
-    }
-
-    var TEST_RESULT  = TEST_RESULT;
-    var VISIBILITY   = VISIBILITY;
-    var CONTROL_TYPE =  CONTROL_TYPE;
-
-    var form_elements   = dom_cache.controls_cache.form_elements;
-    var form_elements_len = form_elements.length;
-
-    // Check to see if valid cache reference
-    if (form_elements && form_elements_len) {
-
-      // collect all the visible controls
-      for (var i = 0; i < form_elements_len; i++) {
-        var fe = form_elements[i];
-        var de = fe.dom_element;
-        var cs = de.computed_style;
-
-        var control_type = fe.control_type;
-
-//        logger.debug("Form: " + fe + " controls: " + fe.number_of_controls + " cache elements: " + fe.child_cache_elements);
-
-        if ((control_type === CONTROL_TYPE.FORM) &&
-            (fe.number_of_controls > 0) &&
-            (hasVisibleFormControls(fe.child_cache_elements))) {
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-            if (has_submit_button(fe)) {
-              rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', []);
-            }
-            else {
-              var button_count = has_other_button(fe, 0);
-
-              if (button_count === 1) {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, fe, 'ELEMENT_MC_1', []);
+        buttonDomElements.forEach( b => {
+          debug$c.log(`  [${b.tagName}][role=${b.role}][type=${b.node.type}]`);
+          if (b.tagName === 'input') {
+            const type = b.node.getAttribute('type');
+            if (type === 'submit') {
+              if (b.visibility.isVisibleOnScreen) {
+                submitButtons += 1;
+                rule_result.addElementResult(TEST_RESULT.PASS, b, 'ELEMENT_PASS_2', []);
+                debug$c.log(`  [PASS_2]`);
               }
               else {
-                if (button_count > 1) {
-                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, fe, 'ELEMENT_MC_2', [button_count]);
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_2', []);
+                debug$c.log(`  [HIDDEN_2]`);
+              }
+            }
+            else {
+              if ((type === 'button') || (type === "image")) {
+               if (b.visibility.isVisibleOnScreen) {
+                  otherButtons += 1;
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_3', [type]);
+                  debug$c.log(`  [MC_3]`);
                 }
                 else {
-                  rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
+                  rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_3', [type]);
+                  debug$c.log(`  [HIDDEN_3]`);
                 }
               }
             }
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
+            if (b.tagName === 'button') {
+             if (b.visibility.isVisibleOnScreen) {
+                otherButtons += 1;
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_4', []);
+                debug$c.log(`  [MC_4]`);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_4', []);
+                debug$c.log(`  [HIDDEN_4]`);
+              }
+            } else {
+              if (b.role === 'button') {
+               if (b.visibility.isVisibleOnScreen) {
+                  otherButtons += 1;
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_5', [b.tagName]);
+                  debug$c.log(`  [MC_4]`);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_5', [b.tagName]);
+                  debug$c.log(`  [HIDDEN_4]`);
+                }
+              }
+            }
+          }
+        });
+
+        debug$c.log(`[submitButtons]: ${submitButtons}`);
+        debug$c.log(`[otherButtons]: ${otherButtons}`);
+
+        if (submitButtons > 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          debug$c.log(`[FORM][PASS_1]`);
+        }
+        else {
+          if (otherButtons > 0) {
+            if (otherButtons === 1) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+              debug$c.log(`[FORM][MC_1]`);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [otherButtons]);
+              debug$c.log(`[FORM][MC_2]`);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            debug$c.log(`[FORM][FAIL_1]`);
           }
         }
-      } // end loop
-    }
-    */
-
-  } // end validate function
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+      }
+    });
+  } // end validation function
 }
 
 ];
@@ -14307,7 +14144,7 @@ const focusRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'If the target of the link opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
-        ELEMENT_HIDDEN_1:       '%1 element is hidden, so cannot open any new windows.'
+        ELEMENT_HIDDEN_1: 'The link is hidden, so cannot open any new windows.'
       },
       PURPOSES: [
         'User\'s can become disoriented if the focus causes unpredicatable actions, including new URLs and popup windows for advertisements or promotions.'
@@ -14335,7 +14172,7 @@ const focusRules = {
   },
   FOCUS_4: {
       ID:                    'Focus 4',
-      DEFINITION:            '@select@ elements with @onchange@ event handler must not automatically change the user\'s context when keyboard focus moves between options.',
+      DEFINITION:            '@select@ elements with @onchange@ or other event handlers must not automatically change the user\'s context when keyboard focus moves between options.',
       SUMMARY:               '@select@ must not change context',
       TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
       RULE_RESULT_MESSAGES: {
@@ -14347,7 +14184,7 @@ const focusRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'Check to make sure moving keyboard focus between options in the @select@ box does not move focus from the list of options.',
-        ELEMENT_HIDDEN_1:       '@select@ element is hidden.'
+        ELEMENT_HIDDEN_1: '@select@ element is hidden and therefore not operable by any user.'
       },
       PURPOSES: [
         'User\'s can become disoriented if the focus changes cause unpredicatable actions.',

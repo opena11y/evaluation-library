@@ -113,7 +113,7 @@ export const focusRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'If the target of the link opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
-        ELEMENT_HIDDEN_1:       '%1 element is hidden, so cannot open any new windows.'
+        ELEMENT_HIDDEN_1: 'The link is hidden, so cannot open any new windows.'
       },
       PURPOSES: [
         'User\'s can become disoriented if the focus causes unpredicatable actions, including new URLs and popup windows for advertisements or promotions.'
@@ -141,7 +141,7 @@ export const focusRules = {
   },
   FOCUS_4: {
       ID:                    'Focus 4',
-      DEFINITION:            '@select@ elements with @onchange@ event handler must not automatically change the user\'s context when keyboard focus moves between options.',
+      DEFINITION:            '@select@ elements with @onchange@ or other event handlers must not automatically change the user\'s context when keyboard focus moves between options.',
       SUMMARY:               '@select@ must not change context',
       TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
       RULE_RESULT_MESSAGES: {
@@ -153,7 +153,7 @@ export const focusRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'Check to make sure moving keyboard focus between options in the @select@ box does not move focus from the list of options.',
-        ELEMENT_HIDDEN_1:       '@select@ element is hidden.'
+        ELEMENT_HIDDEN_1: '@select@ element is hidden and therefore not operable by any user.'
       },
       PURPOSES: [
         'User\'s can become disoriented if the focus changes cause unpredicatable actions.',

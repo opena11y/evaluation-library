@@ -52,9 +52,9 @@ class ControlElement {
 
 export default class ControlInfo {
   constructor () {
-    this.allControlElements   = [];
-    this.childControlElements = [];
-    this.allForms             = [];
+    this.allControlElements      = [];
+    this.childControlElements    = [];
+    this.allFormControlElements  = [];
   }
 
   /**
@@ -71,6 +71,9 @@ export default class ControlInfo {
   addChildControlElement (domElement, parentControlElement) {
     const ce = new ControlElement(domElement, parentControlElement);
     this.allControlElements.push(ce);
+    if (domElement.tagName === 'form') {
+      this.allFormControlElements.push(ce);
+    }
 
     if (parentControlElement) {
       parentControlElement.addChildControlElement(ce)
@@ -90,10 +93,12 @@ export default class ControlInfo {
 
   isControl (domElement) {
     const isGroupRole = domElement.role === 'group';
-    const isFormRole = domElement.role === 'form';
+    const isFormRole  = domElement.role === 'form';
+    const isLabel     = domElement.tagName === 'label';
     return domElement.isInteractiveElement ||
            isFormRole ||
            isGroupRole ||
+           isLabel ||
            domElement.ariaInfo.isWidget;
   }
 
@@ -133,6 +138,10 @@ export default class ControlInfo {
       this.childControlElements.forEach( ce => {
         debug.domElement(ce.domElement);
         ce.showControlInfo('  ');
+      });
+      debug.log('== Forms ==', 1);
+      this.allFormControlElements.forEach( ce => {
+        debug.domElement(ce.domElement);
       });
     }
   }
