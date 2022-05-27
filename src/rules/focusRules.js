@@ -226,7 +226,6 @@ export const focusRules = [
     }
 
     dom_cache.controlInfo.allFormControlElements.forEach( fce => {
-      debug.log('[FORM]');
       const de = fce.domElement;
       if (de.visibility.isVisibleOnScreen) {
         const buttonDomElements = getChildButtonDomElements(fce);
@@ -234,18 +233,15 @@ export const focusRules = [
         let otherButtons  = 0;
 
         buttonDomElements.forEach( b => {
-          debug.log(`  [${b.tagName}][role=${b.role}][type=${b.node.type}]`);
           if (b.tagName === 'input') {
             const type = b.node.getAttribute('type');
             if (type === 'submit') {
               if (b.visibility.isVisibleOnScreen) {
                 submitButtons += 1;
                 rule_result.addElementResult(TEST_RESULT.PASS, b, 'ELEMENT_PASS_2', []);
-                debug.log(`  [PASS_2]`);
               }
               else {
                 rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_2', []);
-                debug.log(`  [HIDDEN_2]`);
               }
             }
             else {
@@ -253,11 +249,9 @@ export const focusRules = [
                if (b.visibility.isVisibleOnScreen) {
                   otherButtons += 1;
                   rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_3', [type]);
-                  debug.log(`  [MC_3]`);
                 }
                 else {
                   rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_3', [type]);
-                  debug.log(`  [HIDDEN_3]`);
                 }
               }
             }
@@ -267,49 +261,38 @@ export const focusRules = [
              if (b.visibility.isVisibleOnScreen) {
                 otherButtons += 1;
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_4', []);
-                debug.log(`  [MC_4]`);
               }
               else {
                 rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_4', []);
-                debug.log(`  [HIDDEN_4]`);
               }
             } else {
               if (b.role === 'button') {
                if (b.visibility.isVisibleOnScreen) {
                   otherButtons += 1;
                   rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_5', [b.tagName]);
-                  debug.log(`  [MC_4]`);
                 }
                 else {
                   rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_5', [b.tagName]);
-                  debug.log(`  [HIDDEN_4]`);
                 }
               }
             }
           }
         });
 
-        debug.log(`[submitButtons]: ${submitButtons}`);
-        debug.log(`[otherButtons]: ${otherButtons}`);
-
         if (submitButtons > 0) {
           rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          debug.log(`[FORM][PASS_1]`);
         }
         else {
           if (otherButtons > 0) {
             if (otherButtons === 1) {
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-              debug.log(`[FORM][MC_1]`);
             }
             else {
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [otherButtons]);
-              debug.log(`[FORM][MC_2]`);
             }
           }
           else {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
-            debug.log(`[FORM][FAIL_1]`);
           }
         }
       }
