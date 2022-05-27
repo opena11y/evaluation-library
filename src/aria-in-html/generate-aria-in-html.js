@@ -6,12 +6,13 @@
  *   File:   reference-tables.js
  */
 
-const fs    = require('fs');
-const os    = require('os');
-const util  = require('util');
-const url   = require('url');
-const fetch = require('node-fetch');
-const HTMLParser = require('node-html-parser');
+import fs    from 'fs';
+import os    from 'os';
+import path  from 'path';
+import util  from 'util';
+import url   from 'url';
+import fetch from 'node-fetch';
+import HTMLParser from 'node-html-parser';
 
 const exportFilename = './src/aria-in-html/ariaInHtmlInfo';
 const exportPrefix = '/* generated file, use npm run aria-in-html */\nexport const ariaInHTMLInfo = ';
@@ -67,7 +68,7 @@ function getElementInfo(dom, ariaInfo) {
 
     // Elements with role restrictions
     if (!newInfo.noRoleAllowed && !newInfo.anyRoleAllowed) {
-      allowedRoles = [];
+      const allowedRoles = [];
 
       let roles = elem.querySelector("td:nth-child(3) p");
       if (roles && roles.textContent) {
@@ -90,7 +91,7 @@ function getElementInfo(dom, ariaInfo) {
     // a and area element special case
 
     if (tagName === 'a' || tagName === 'area') {
-      attr = elem.querySelector("th:nth-child(1) code:nth-child(2)");
+      const attr = elem.querySelector("th:nth-child(1) code:nth-child(2)");
       if (attr && hasAttr) {
         refName += '[href]';
         newInfo.attr1 = 'href';
@@ -361,7 +362,7 @@ function getElementInfo(dom, ariaInfo) {
 }
 
 function getAriaInformation(dom) {
-  ariaInfo = {};
+  const ariaInfo = {};
   ariaInfo.title = dom.querySelector('h1.title').textContent;
   ariaInfo.status = dom.querySelector('h1.title + p').textContent.trim().replace('\n', '');
   ariaInfo.reference = ariaInHTML;

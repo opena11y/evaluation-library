@@ -6,13 +6,13 @@
  *   File:   reference-tables.js
  */
 
-const fs    = require('fs');
-const os    = require('os');
-const path  = require('path');
-const util  = require('util');
-const url   = require('url');
-const fetch = require('node-fetch');
-const HTMLParser = require('node-html-parser');
+import fs    from 'fs';
+import os    from 'os';
+import path  from 'path';
+import util  from 'util';
+import url   from 'url';
+import fetch from 'node-fetch';
+import HTMLParser from 'node-html-parser';
 
 const ariaInfoFilename          = path.join('src', 'aria', 'ariaSpecInfo.js');
 const ariaInfoFilenameJSON      = path.join('src', 'aria', 'ariaSpecInfo.json');
@@ -69,7 +69,7 @@ function getListOfValues(elemNode, selector) {
   if (node) {
     let listItems = getList(node);
     if (listItems && listItems.length) {
-      for (j = 0; j < listItems.length; j += 1) {
+      for (let j = 0; j < listItems.length; j += 1) {
         let value = listItems[j].textContent.toLowerCase().trim();
         value = value.split(' ')[0];
         if (!values.includes(value)) {
@@ -242,8 +242,8 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
   }
 
   function removeDuplicates(roles) {
-    let newItems = [];
-    items = roles.split(' ');
+    const newItems = [];
+    const items = roles.split(' ');
 
     for (let i = 0; i < items.length; i += 1) {
       let item = items[i].trim();
@@ -255,7 +255,7 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
     return newItems.join(' ').trim();
   }
 
-  for (role in roles) {
+  for (let role in roles) {
     // fix roles that do not have widget as a base class
     if ('application log marquee tabpanel timer tooltip'.indexOf(role) >= 0) {
       roles[role].roleType += ' widget';
@@ -281,7 +281,7 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
     console.log('[' + role + '][roleType]: ' + roles[role].roleType);
   }
 
-  for (role in roles) {
+  for (let role in roles) {
     if (roles[role].isAbstract) {
       roles[role].roleType = 'abstract';
       console.log('[' + role + '][roleType]: ' + roles[role].roleType);
@@ -294,7 +294,7 @@ function getIDLInformation(elemNode, selector) {
   let dict = {};
 
   let nodes = elemNode.querySelectorAll(selector);
-  for (i = 0; i < nodes.length; i += 1) {
+  for (let i = 0; i < nodes.length; i += 1) {
     let node = nodes[i];
     let idl = node.querySelector('td:nth-child(1)');
     let attr = node.querySelector('td:nth-child(2)');
@@ -314,7 +314,7 @@ function getPropValues(elemNode, selector) {
   let defaultValue = '';
 
   let nodes = elemNode.querySelectorAll(selector);
-  for (j = 0; j < nodes.length; j += 1) {
+  for (let j = 0; j < nodes.length; j += 1) {
     let value = nodes[j].textContent.toLowerCase().trim();
     let parts = value.split(' ');
     let value1 = parts[0];
@@ -410,7 +410,7 @@ function getProps(dom, props) {
 }
 
 function getAriaInformation(dom) {
-  ariaInfo = {};
+  const ariaInfo = {};
   ariaInfo.title = dom.querySelector('h1.title').textContent;
   ariaInfo.status = dom.querySelector('h1.title + p').textContent.trim().replace('\n', '');
   ariaInfo.reference = ariaURL;
@@ -442,7 +442,7 @@ function outputAsJSON(filename, info) {
     //file written successfully
   })
 
-  return ariaInfo;
+  return info;
 }
 
 function outputAsJSObject(filename, constName, info) {
@@ -457,7 +457,7 @@ function outputAsJSObject(filename, constName, info) {
     //file written successfully
   })
 
-  return ariaInfo;
+  return info;
 }
 
 fetch(ariaURL)
