@@ -104,7 +104,6 @@ export const focusRules = [
       if (de.isInteractiveElement ||
           de.ariaInfo.isWidget) {
         if (de.visibility.isVisibleOnScreen) {
-          debug.domElement(de, '[FOCUS 2]');
           controlCount += 1;
           if (de.hasRole) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);

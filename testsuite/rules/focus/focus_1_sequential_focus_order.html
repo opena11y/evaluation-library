@@ -34,18 +34,21 @@
       <div><a name="test"><code>a[name]</code> element used as reference, not part of tab sequence</a></div>
       <div><a href="test.html"  class="FOCUS_1_MC"><code>a[href]</code> element with <code>href</code>, part of tab sequence</a></div>
 
-      <button class="FOCUS_1_MC">Test button 1</button>
-      <div role="button"  class="FOCUS_1_MC">Test Button 2: no tabindex</div>
-      <div role="button" tabindex="0"   class="FOCUS_1_MC">Test Button 3: tabindex=0</div>
-      <div role="button" tabindex="-1"  class="FOCUS_1_MC">Test Button 4: tabindex=-1</div>
-      <div role="button" id="button5"   class="FOCUS_1_MC">Test Button 5: tabindex=0</div>
-      <div role="button" id="button6"   class="FOCUS_1_MC">Test Button 6: tabindex=0</div>
+      <div role="group" aria-label="Buttons">
+        <button class="FOCUS_1_MC">Test button 1</button>
+        <div role="button"  class="FOCUS_1_MC">Test Button 2: no tabindex</div>
+        <div role="button" tabindex="0"   class="FOCUS_1_MC">Test Button 3: tabindex=0</div>
+        <div role="button" tabindex="-1"  class="FOCUS_1_MC">Test Button 4: tabindex=-1</div>
+        <div role="button" id="button5"   class="FOCUS_1_MC">Test Button 5: tabindex=0</div>
+        <div role="button" id="button6"   class="FOCUS_1_MC">Test Button 6: tabindex=0</div>
+      </div>
 
       <script>
         document.getElementById('button5').setAttribute('tabIndex', '0');
         document.getElementById('button6').tabIndex = 0;
       </script>
 
+      <form>
       <label for="input1">Textbox 1</label>
       <input id="input1"  class="FOCUS_1_MC">
       <input class="FOCUS_1_MC">
@@ -59,6 +62,19 @@
         <option>Option 3</option>
         <option>Option 4</option>
       </select>
+
+      <fieldset>
+        <lengend>Radio Group</lengend>
+
+        <label><input type="radio" name="name1" class="FOCUS_1_MC" />Radio A</label>
+        <label><input type="radio" name="name1" class="FOCUS_1_MC" />Radio B</label>
+        <label><input type="radio" name="name1" class="FOCUS_1_MC" />Radio C</label>
+        <label><input type="radio" name="name1" class="FOCUS_1_MC" />Radio D</label>
+
+      </fieldset>
+
+      <input type="submit" class="FOCUS_1_MC"/>
+    </form>
 
       <div role="menu" class="FOCUS_1_MC">
         <div role="menuitem">Item 1</div>

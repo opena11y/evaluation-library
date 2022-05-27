@@ -90,7 +90,9 @@ export default class ControlInfo {
 
   isControl (domElement) {
     const isGroupRole = domElement.role === 'group';
+    const isFormRole = domElement.role === 'form';
     return domElement.isInteractiveElement ||
+           isFormRole ||
            isGroupRole ||
            domElement.ariaInfo.isWidget;
   }
