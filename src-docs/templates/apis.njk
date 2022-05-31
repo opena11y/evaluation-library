@@ -1,0 +1,24 @@
+<html>
+  <head>
+    {% include "./head.njk" %}
+  </head>
+  <body>
+    {% include "./header.njk" %}
+
+    <!-- Main section-->
+    <main class="container px-4">
+      <div class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          <div id="apis">
+            {% block title %}
+            <h1>{{title}}</h1>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include "./footer.njk" %}
+    {% include "./scripts.njk" %}
+
+  </body>
+</html>
