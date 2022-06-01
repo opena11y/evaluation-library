@@ -183,6 +183,7 @@ function getGuidelineInfo(guidelineId) {
       if (guideline.id === guidelineId) {
         debug.flag && debug.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
+          num: g,
           title: guideline.title,
           url: guideline.url_spec,
           description: guideline.description
