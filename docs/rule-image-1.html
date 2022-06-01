@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 <html>
   <head>
         <head>
@@ -30,19 +38,145 @@
         </nav>
 
 
+
     <!-- Main section-->
-    <main class="container px-4">
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Images must have alt text</li>
+        </ol>
+      </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
-          <div id="about">
+          <main id="rule">
             
-            <h1>Images must have alt text</h1>
+            <h1 id="h1-title">Rule: Images must have alt text</h1>
             
-            <em>Each @img@ element must specify an @alt@ attribute or equivalent markup that either defines a text alternative or identifies the image as being used for decoration, spacing or some other stylistic purpose.</em>
-          </div>
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  
+<tr>
+  <th>Rule ID</th>
+  <td>Image 1</td>
+</tr>
+
+                  
+<tr>
+  <th>Definition</th>
+  <td>Each <code>img</code> element must specify an <code>alt</code> attribute or equivalent markup that either defines a text alternative or identifies the image as being used for decoration, spacing or some other stylistic purpose.</td>
+</tr>
+
+                  
+<tr>
+  <th>Purpose</th>
+  <td>
+    <ul>
+      
+      <li>A text alternative for an image, usually specified with an <code>alt</code> attribute, provides a summary of the purpose of the image for people with visual impairments, enabling them to understand the content or purpose of the image on the page.</li>
+      
+      <li>An image with a text alternative that is an empty string or that has <code>role="presentation"</code> is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Conformance</th>
+  <td>Required</td>
+</tr>
+
+                  
+<tr>
+  <th>WCAG Success Criteria</th>
+  <td>
+    <p class="primary">
+      <a href="https://www.w3.org/TR/WCAG21/#non-text-content" target="_spec">
+        Success Criterion 1.1.1 Non-text Content
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Category</th>
+  <td>Images</td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Scope</th>
+  <td>element</td>
+</tr>
+
+                  
+<tr>
+  <th>Techniques</th>
+  <td>
+    <ul>
+      
+      <li>A text alternative should summarize the purpose of an image as succinctly as possible (preferably with no more than 100 characters).</li>
+      
+      <li>The <code>alt</code> attribute is the preferred and most commonly used way to provide a text alternative for <code>img</code> and <code>area</code> elements.</li>
+      
+      <li>The <code>aria-labelledby</code> attribute can be used to provide a text alternative when an image can be described using text already associated with the image, or for elements with <code>role="img"</code>.</li>
+      
+      <li>The <code>aria-label</code> attribute should only be used to provide a text alternative in the special case when an element has a <code>role="img"</code> attribute. Use the <code>alt</code> attribute for <code>img</code> and <code>area</code> elements.</li>
+      
+      <li>The <code>title</code> attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.</li>
+      
+      <li>Use the attributes <code>alt=""</code>, <code>role="presentation"</code> or include the image as a CSS <code>background-image</code> to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Information Links</th>
+  <td>
+    <ul>
+      
+      <li><a href="https://www.w3.org/TR/html5/embedded-content-0.html#the-img-element">HTML 5 Specification: 12.2 The <code>img</code> element</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#img">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>img</code> role</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-label">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-label</code> attribute</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-labelledby</code> attribute</a></li>
+      
+      <li><a href="https://www.w3.org/TR/html4/struct/objects.html#adef-alt">HTML 4.01 Specification: 13.8 How to specify alternate text</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/tutorials/images/">Web Accessibility Tutorials : Images</a></li>
+      
+      <li><a href="http://diagramcenter.org/making-images-accessible.html">Diagram Center: Image Description</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G94">G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G95">G95: Providing text alternatives that provide a brief description of the non-text content</a></li>
+      
+      <li><a href="https://webaim.org/techniques/alttext/">WebAIM: Alternative Text</a></li>
+      
+      <li><a href="https://accessibility.psu.edu/images/">Accessibility at Penn State: Text Equivalents for Images</a></li>
+      
+    </ul>
+  </td>
+</tr>
+
+                </tbody>
+              </table>
+          </main>
         </div>
       </div>
-    </main>
+    </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>

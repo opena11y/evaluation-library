@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 <html>
   <head>
         <head>
@@ -30,19 +38,155 @@
         </nav>
 
 
+
     <!-- Main section-->
-    <main class="container px-4">
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active"><code>region</code> landmark must have accessible name</li>
+        </ol>
+      </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
-          <div id="about">
+          <main id="rule">
             
-            <h1>REGION landmark must have accessible name</h1>
+            <h1 id="h1-title">Rule: <code>region</code> landmark must have accessible name</h1>
             
-            <em>Each element with an @[role=region]@ that should be an @region@ landmark must have an accessible name.</em>
-          </div>
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  
+<tr>
+  <th>Rule ID</th>
+  <td>Landmark 16</td>
+</tr>
+
+                  
+<tr>
+  <th>Definition</th>
+  <td>Each element with an <code>[role=region]</code> that should be an <code>region</code> landmark must have an accessible name.</td>
+</tr>
+
+                  
+<tr>
+  <th>Purpose</th>
+  <td>
+    <ul>
+      
+      <li>The <code>region</code> landmark is used to identify subsections of <code>banner</code>, <code>complementary</code>, <code>contentinfo</code>, <code>main</code>, <code>navigation</code> and <code>search</code> landmarks.</li>
+      
+      <li>For an element with an <code>[role=region]</code> to be considered an <code>region</code> landmark on the page, it must have an accessible name that identifies the contents of the region.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Conformance</th>
+  <td>Required</td>
+</tr>
+
+                  
+<tr>
+  <th>WCAG Success Criteria</th>
+  <td>
+    <p class="primary">
+      <a href="https://www.w3.org/TR/WCAG21/#info-and-relationships" target="_spec">
+        Success Criterion 1.3.1 Info and Relationships
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#bypass-blocks" target="_spec">
+          Success Criterion 2.4.1 Bypass Blocks
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
+          Success Criterion 2.4.6 Headings and Labels
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#section-headings" target="_spec">
+          Success Criterion 2.4.10 Section Headings
+        </a>
+      </li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Category</th>
+  <td>Landmarks</td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Scope</th>
+  <td>element</td>
+</tr>
+
+                  
+<tr>
+  <th>Techniques</th>
+  <td>
+    <ul>
+      
+      <li>A <code>section</code> element or an element with a <code>role="region"</code> attribute, which also has an author-defined accessible name, will be considered an <code>region</code> landmark.</li>
+      
+      <li>Use the <code>aria-labelledby</code> attribute to provide an accessible name by referencing the <code>id</code>s of one or more heading (e.g. h2, h3, h4 element) or other elements that identify the contents of the region.</li>
+      
+      <li>Use the <code>aria-label</code> attribute to provide an accessible name that identifies the contents of the region.</li>
+      
+      <li>The <code>title</code> attribute may also be used to provide an accessible name to identify the contents of the region. Note, however, that this technique also generates a tooltip in many  web browsers.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Information Links</th>
+  <td>
+    <ul>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#region">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role</a></li>
+      
+      <li><a href="https://www.w3.org/TR/html5/sections.html#the-section-element">HTML5: The SECTION element</a></li>
+      
+      <li><a href="https://w3c.github.io/aria-practices/#aria_landmark">WAI-ARIA Authoring Practices 1.2: Landmarks</a></li>
+      
+      <li><a href="https://w3c.github.io/aria-practices/examples/landmarks/">WAI-ARIA Authoring Practices 1.2: Landmark Example</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/tutorials/page-structure/">W3C Web Accessibility Tutorials: Page Structure</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11">ARIA11: Using ARIA landmarks to identify regions of a page</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13">ARIA13: Using aria-labelledby to name regions and landmarks</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA20">ARIA20: Using the region role to identify a region of the page</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14">ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used</a></li>
+      
+    </ul>
+  </td>
+</tr>
+
+                </tbody>
+              </table>
+          </main>
         </div>
       </div>
-    </main>
+    </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>

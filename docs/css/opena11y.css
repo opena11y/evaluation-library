@@ -1,5 +1,17 @@
-main {
-  margin-top: 100px;
+#main-section {
+  margin-top: 60px;
+}
+
+nav ol.breadcrumb {
+  padding-left:  0;
+}
+
+table.rule-info th {
+  width: 8em;
+}
+
+table.rule-info td ul {
+  padding-left: 1em;
 }
 
 footer {

@@ -4776,7 +4776,7 @@ textarea.form-control-lg {
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 0;
+  padding: .75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
 }

@@ -19,5 +19,7 @@ export const common = {
   ruleResultMessages: {
     'ACTION_NONE': 'No action needed',
     'NOT_APPLICABLE': 'Not applicable'
-  }
+  },
+  required: 'Required',
+  recommended: 'Recommended'
 }

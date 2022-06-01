@@ -27,11 +27,14 @@ export {
   getTargetResourcesDesc,
   getTechniques,
   setLocale,
-  transformElementMarkup
+  transformElementMarkup,
+  setUseCodeTags
 }
 
 /* Constants */
 const debug = new DebugLogging('locale', false)
+
+var globalUseCodeTags = false;
 
 export const messages = {
   en: enMessages
@@ -39,6 +42,20 @@ export const messages = {
 
 // Default language is 'en' for English
 var locale = 'en';
+
+/**
+ * @function setUseCodeTags
+ *
+ * @desc Set the global default for transformating markup with code segments
+ *       identified with opening and closing '@' characters
+ *
+ * @param {Boolen} value - If true use code tags
+ */
+
+function setUseCodeTags(value=false) {
+  globalUseCodeTags = (value === true) ? true : false;
+}
+
 
 /**
  * @function setLocale
@@ -167,7 +184,7 @@ function getGuidelineInfo(guidelineId) {
         debug.flag && debug.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           title: guideline.title,
-          url: encodeURIComponent(guideline.url_spec),
+          url: guideline.url_spec,
           description: guideline.description
         }
       }
@@ -205,7 +222,7 @@ function getSuccessCriterionInfo(successCriterionId) {
           return {
             level: success_criterion.level,
             title: success_criterion.title,
-            url: encodeURIComponent(success_criterion.url_spec),
+            url: success_criterion.url_spec,
             description: success_criterion.description
           }
         }
@@ -280,7 +297,7 @@ function getRuleId (ruleId) {
 
 function getRuleDefinition (ruleId) {
   debug.flag && debug.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
-  return messages[locale].rules[ruleId].DEFINITION;
+  return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
 /**
@@ -371,12 +388,12 @@ function getInformationLinks (ruleId) {
     infoLinks.push(
       {
         type: infoLink.type,
-        title: infoLink.title,
-        url: encodeURIComponent(infoLink.url)
+        title: transformElementMarkup(infoLink.title),
+        url: infoLink.url
       }
     );
     debug.flag && debug.log(`[infoLink][title]: ${infoLink.title}`);
-    debug.flag && debug.log(`[infoLink][  url]: ${encodeURIComponent(infoLink.url)}`);
+    debug.flag && debug.log(`[infoLink][  url]: ${infoLink.url}`);
   })
   return infoLinks;
 }
@@ -481,7 +498,7 @@ function getBaseResultMessage (msg, msgArgs) {
  * @return  String
  */
 
-function transformElementMarkup (elemStr, useCodeTags=false) {
+function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
   let newStr = "";
   let transform_flag = false;
 

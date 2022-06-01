@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 <html>
   <head>
         <head>
@@ -30,19 +38,147 @@
         </nav>
 
 
+
     <!-- Main section-->
-    <main class="container px-4">
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Focus order must be meaningful</li>
+        </ol>
+      </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
-          <div id="about">
+          <main id="rule">
             
-            <h1>Focus order must be meaningful</h1>
+            <h1 id="h1-title">Rule: Focus order must be meaningful</h1>
             
-            <em>The sequential focus order of links, form controls, embedded apps and widgets must be meaningful.</em>
-          </div>
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  
+<tr>
+  <th>Rule ID</th>
+  <td>Focus 1</td>
+</tr>
+
+                  
+<tr>
+  <th>Definition</th>
+  <td>The sequential focus order of links, form controls, embedded apps and widgets must be meaningful.</td>
+</tr>
+
+                  
+<tr>
+  <th>Purpose</th>
+  <td>
+    <ul>
+      
+      <li>The "tab" key is the primary key many browsers use to navigate the interactive elements on a web page.</li>
+      
+      <li>The sequential order of the elements receiving focus can help a user understand the features on a web page.</li>
+      
+      <li>The usability of frequently used or important interactive features of a web page can be improved by moving them to the beginning of the focus sequence.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Conformance</th>
+  <td>Required</td>
+</tr>
+
+                  
+<tr>
+  <th>WCAG Success Criteria</th>
+  <td>
+    <p class="primary">
+      <a href="https://www.w3.org/TR/WCAG21/#focus-order" target="_spec">
+        Success Criterion 2.4.3 Focus Order
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#keyboard" target="_spec">
+          Success Criterion 2.1.1 Keyboard
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#no-keyboard-trap" target="_spec">
+          Success Criterion 2.1.2 No Keyboard Trap
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#on-focus" target="_spec">
+          Success Criterion 3.2.1 On Focus
+        </a>
+      </li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Category</th>
+  <td>Keyboard Support</td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Scope</th>
+  <td>page</td>
+</tr>
+
+                  
+<tr>
+  <th>Techniques</th>
+  <td>
+    <ul>
+      
+      <li>Use document order to place related interactive items in a meaningful sequence.</li>
+      
+      <li>The <code>tabindex</code> atttribute value (i.e. values greater than 0) can be used to change the sequence of focusable elements in a web page or make non-interactive elements part of the "tab" order of the page.</li>
+      
+      <li>A <code>tabindex</code> values of less than 0 remove redundent interactive elements from the sequential focus order.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Information Links</th>
+  <td>
+    <ul>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G59">G59: Placing the interactive elements in an order that follows sequences and relationships within the content</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H4">H4: Creating a logical tab order through links, form controls, and objects</a></li>
+      
+    </ul>
+  </td>
+</tr>
+
+                </tbody>
+              </table>
+          </main>
         </div>
       </div>
-    </main>
+    </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
