@@ -1,3 +1,61 @@
+{% macro infoItem(name, item) %}
+<tr>
+  <th>{{name}}</th>
+  <td>{{item | safe}}</td>
+</tr>
+{% endmacro %}
+
+{% macro infoItems(name, items) %}
+<tr>
+  <th>{{name}}</th>
+  <td>
+    <ul>
+      {% for item in items %}
+      <li>{{item | safe}}</li>
+      {% endfor %}
+    </ul>
+  </td>
+</tr>
+{% endmacro %}
+
+{% macro infoLinks(name, links) %}
+<tr>
+  <th>{{name}}</th>
+  <td>
+    <ul>
+      {% for link in links %}
+      <li><a href="{{link.url}}">{{link.title | safe}}</a></li>
+      {% endfor %}
+    </ul>
+  </td>
+</tr>
+{% endmacro %}
+
+{% macro infoWCAG(name, primary, allRelated) %}
+<tr>
+  <th>{{name}}</th>
+  <td>
+    <p class="primary">
+      <a href="{{primary.url}}" target="_spec">
+        {{primary.title}}
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      {% for related in allRelated %}
+      <li>
+        <a href="{{related.url}}" target="_spec">
+          {{related.title}}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </td>
+</tr>
+{% endmacro %}
+
 <html>
   <head>
     {% include "./head.njk" %}
@@ -5,19 +63,38 @@
   <body>
     {% include "./header.njk" %}
 
+
     <!-- Main section-->
-    <main class="container px-4">
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">{{title | safe}}</li>
+        </ol>
+      </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
-          <div id="about">
+          <main id="rule">
             {% block title %}
-            <h1>{{title}}</h1>
+            <h1 id="h1-title">Rule: {{title | safe}}</h1>
             {% endblock %}
-            <em>{{ruleInfo.definition}}</em>
-          </div>
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  {{ infoItem('Rule ID',    ruleInfo.id) }}
+                  {{ infoItem('Definition', ruleInfo.definition) }}
+                  {{ infoItems('Purpose',   ruleInfo.purposes) }}
+                  {{ infoItem('Conformance',   ruleInfo.conformance) }}
+                  {{ infoWCAG('WCAG Success Criteria', ruleInfo.primary, ruleInfo.related) }}
+                  {{ infoItem('Rule Category', ruleInfo.rule_category.title) }}
+                  {{ infoItem('Rule Scope',    ruleInfo.rule_scope) }}
+                  {{ infoItems('Techniques',    ruleInfo.techniques) }}
+                  {{ infoLinks('Information Links', ruleInfo.information_links) }}
+                </tbody>
+              </table>
+          </main>
         </div>
       </div>
-    </main>
+    </div>
     {% include "./footer.njk" %}
     {% include "./scripts.njk" %}
 

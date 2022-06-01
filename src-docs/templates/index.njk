@@ -8,7 +8,7 @@
     <header class="bg-primary bg-gradient text-white">
         <div class="container px-4 text-center">
             <h1 class="fw-bolder">Welcome to OpenA11y Evaluation Library</h1>
-            <p class="lead">Open Souce Web Accessibility Evaluation Library for Evaluating WCAG 2.1 requirements using ARIA 1.2 best practices.</p>
+            <p class="lead">Javascript Library for Evaluating WCAG 2.1 Accessibility Requirements.</p>
         </div>
     </header>
 
@@ -16,30 +16,35 @@
     <main class="container px-4">
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
-          {% block title %}
+          {% block content %}
           <h1>{{title}}</h1>
-          {% endblock %}
-          <div id="about">
-            {% block content %}
-            <table class="table table-striped">
-              <thead>
-                <th>ID</th>
-                <th>Summary</th>
-                <th>Level</th>
-                <th>SC</th>
-              </thead>
-              <tbody>
-            {% for ruleInfo in allRuleInfo %}
-              <tr>
-                <td>{{ruleInfo.id}}</td>
-                <td><a href="{{ruleInfo.filename}}">{{ruleInfo.summary}}</a></td>
-                <td>{{ruleInfo.primary.level}}</td>
-                <td><a href="{{ruleInfo.primary.url}}">{{ruleInfo.primary_id}}</a></td>
-              </tr>
+          <div id="rule-summary-tables">
+            {% for rc in allRuleCategories %}
+              <h2 id="rc-{{rc.rule_category_id}}">{{rc.title}}</h2>
+              <table class="table table-striped" aria-labelledby="rc-{{rc.rule_category_id}}">
+                <thead>
+                  <th>ID</th>
+                  <th>Summary</th>
+                  <th>Level</th>
+                  <th>SC</th>
+                </thead>
+                <tbody>
+                {% for r in rc.rules %}
+                  <tr>
+                    <td>{{r.id}}</td>
+                    <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
+                    <td>{{r.primary.level}}</td>
+                    <td><a href="{{r.primary.url | safe}}" target="_spec">{{r.primary_id}}</a></td>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td colspan="4"><em>no rules</em></td>
+                  </tr>
+                {% endfor %}
+              </table>
             {% endfor %}
-            </table>
-            {% endblock %}
           </div>
+          {% endblock %}
         </div>
       </div>
     </main>
