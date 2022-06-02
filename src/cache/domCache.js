@@ -11,7 +11,7 @@ import StructureInfo from './structureInfo.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('domCache', true);
+const debug = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',

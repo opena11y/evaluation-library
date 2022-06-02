@@ -20,7 +20,7 @@ import {
 } from '../accName/getaccname.js';
 
 /* Constants */
-const debug = new DebugLogging('DOMElement', true);
+const debug = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',

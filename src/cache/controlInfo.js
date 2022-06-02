@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('widgetInfo', true);
+const debug = new DebugLogging('widgetInfo', false);
 
 /**
  * @class ControlElement
