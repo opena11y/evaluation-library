@@ -17554,7 +17554,7 @@ class RuleResultsSummary  {
     else if (rrv === RULE_RESULT_VALUE.PASS        ) this.p  += 1;
     else  this.na += 1;
 
-    this.hmc = this.hmc || (rule_result.getElementResultsSummary().manual_checks > 0);
+    this.hmc = this.hmc || (rule_result.getResultsSummary().manual_checks > 0);
 
     const rris = rule_result.getImplementationScore();
 
