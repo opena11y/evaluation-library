@@ -445,18 +445,19 @@ function outputAsJSON(filename, info) {
   return info;
 }
 
-function outputAsJSObject(filename, constName, info) {
+function outputAsJSObject(filename, constName, info, data) {
   const exportPrefix = `/* ${path.basename(filename)} is a generated file, use "npm run aria" */\nexport const ${constName} = `;
   const exportSuffix = `;${os.EOL}`;
 
-  fs.writeFile(filename, exportPrefix + util.inspect(info, { compact: false, depth: null }) + exportSuffix, err => {
+  fs.writeFile(filename, exportPrefix + util.inspect(data, { compact: false, depth: null }) + exportSuffix, err => {
     if (err) {
       console.error(err)
       return
+    } else {
+      console.log(`[${filename}]: ${data}`);
     }
-    //file written successfully
-  })
-
+  });
+  console.log(`[designPattern][2]: ${info.designPatterns}`);
   return info;
 }
 
@@ -465,6 +466,6 @@ fetch(ariaURL)
   .then(html => HTMLParser.parse(html))
   .then(dom => getAriaInformation(dom))
   .then(ariaInfo => outputAsJSON(ariaInfoFilenameJSON, ariaInfo))
-  .then(ariaInfo => outputAsJSObject(ariaInfoFilename,          'ariaInfo',          ariaInfo))
-  .then(ariaInfo => outputAsJSObject(propertyDataTypesFilename, 'propertyDataTypes', ariaInfo.propertyDataTypes))
-  .then(ariaInfo => outputAsJSObject(designPatternsFilename,    'designPatterns',    ariaInfo.designPatterns))
+  .then(ariaInfo => outputAsJSObject(ariaInfoFilename,          'ariaInfo',          ariaInfo, ariaInfo))
+  .then(ariaInfo => outputAsJSObject(propertyDataTypesFilename, 'propertyDataTypes', ariaInfo, ariaInfo.propertyDataTypes))
+  .then(ariaInfo => outputAsJSObject(designPatternsFilename,    'designPatterns',    ariaInfo, ariaInfo.designPatterns))
