@@ -457,6 +457,17 @@ export default class RuleResult {
   }
 
   /**
+   * @method getRule
+   *
+   * @desc Gets the associated rule
+   *
+   * @return {Object} Rule object
+   */
+  getRule () {
+    return this.rule;
+  }
+
+  /**
    * @method getRuleDefinition
    *
    * @desc Gets the definition of the rule
@@ -464,7 +475,7 @@ export default class RuleResult {
    * @return {String} Localized string of the rule definition based on being
    *                  required or recommended
    */
-  getRuleDefinition   () {
+  getRuleDefinition () {
     return this.rule.getDefinition(this.isRuleRequired());
   }
 
@@ -482,7 +493,7 @@ export default class RuleResult {
   }
 
   /**
-   * @method getWCAG20Level
+   * @method getWCAGLevel
    *
    * @desc Get the string representation of the the WCAG 2.0 Success Criterion Level
    *       based on the primary id of the rule
@@ -491,12 +502,12 @@ export default class RuleResult {
    *                    (i.e. A, AA or AAA)
    */
 
-  getWCAG20Level   () {
+  getWCAGLevel   () {
     return this.rule.getWCAG20Level();
   }
 
   /**
-   * @method getWCAG20LevelNLS
+   * @method getWCAGLevelNLS
    *
    * @desc Get the string representation of the the WCAG 2.0 Success Criterion Level
    *       based on the primary id of the rule
@@ -505,8 +516,8 @@ export default class RuleResult {
    *                    (i.e. A, AA or AAA)
    */
 
-  getWCAG20LevelNLS   () {
-    return this.rule.getWCAG20Level();
+  getWCAGLevelNLS   () {
+    return this.rule.getWCAGLevel();
   }
 
   /**
@@ -557,8 +568,8 @@ export default class RuleResult {
       guideline_nls:  this.rule.getGuidelineInfo().title,
       guideline_code: this.rule.getGuidelineInfo().id,
 
-      rule_category_nls:  this.rule.getCategoryInfo().title,
-      rule_category_code: this.rule.getCategoryInfo().id,
+      rule_category_nls:  this.rule.getRuleCategoryInfo().title,
+      rule_category_code: this.rule.getRuleCategoryInfo().id,
 
       rule_scope_code_nls: this.rule.getScopeNLS(),
       rule_scope_code:     this.rule.getScope(),

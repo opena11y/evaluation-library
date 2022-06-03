@@ -132,26 +132,26 @@ export default class Rule {
   }
 
   /**
-   * @method getCategory
+   * @method getRuleCategory
    *
    * @desc Get a numerical constant representing the rule category
    *
    * @return {Integer}  see @desc
    */
 
-  getCategory () {
+  getRuleCategory () {
     return this.rule_category_id;
   }
 
   /**
-   * @method getCategoryInfo
+   * @method getRuleCategoryInfo
    *
    * @desc Get a localized title, url and description of the rule category
    *
    * @return {RuleCategoryInfoItem}  see @desc
    */
 
-  getCategoryInfo () {
+  getRuleCategoryInfo () {
     return this.rule_category_info;
   }
 
