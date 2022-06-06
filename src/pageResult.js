@@ -37,7 +37,7 @@ const debug = new DebugLogging('PageResult', false);
 
 export default class PageResult extends BaseResult {
   constructor (rule_result, result_value, domCache, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments, 'page', -1);
+    super(rule_result, result_value, message_id, message_arguments, 'page');
 
     this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.PAGE;

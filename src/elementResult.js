@@ -41,8 +41,7 @@ export default class ElementResult extends BaseResult {
           result_value,
           message_id,
           message_arguments,
-          domElement.getIdentifier(),
-          domElement.ordinalPosition);
+          domElement.getIdentifier());
 
     this.domElement = domElement;
     this.result_type    = RESULT_TYPE.ELEMENT;
@@ -50,6 +49,59 @@ export default class ElementResult extends BaseResult {
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
     }
+  }
+  /**
+   * @method getResultIdentifier
+   *
+   * @desc Gets a string identifying the element, typically element and//or a key attribute
+   *       or property value
+   *
+   * @return {String} see description
+   */
+
+  getResultIdentifier () {
+    const de = this.domElement;
+    const identifier =  de.node.hasAttribute('type') ?
+                        `${de.tagName}[${de.getAttribute('type')}]` :
+                        de.tagName;
+    return identifier;
+  }
+
+  /**
+   * @method getTagName
+   *
+   * @desc Gets a string identifying the elements tag
+   *
+   * @return {String} see description
+   */
+
+  getTagName () {
+    return this.domElement.tagName;
+  }
+
+  /**
+   * @method getRole
+   *
+   * @desc Gets a string identifying the elements role
+   *
+   * @return {String} see description
+   */
+
+  getRole () {
+    return this.domElement.role;
+  }
+
+  /**
+   * @method getOrdinalPosition
+   *
+   * @desc Gets a string identifying the ordinal position,
+   *       is overrided by ElementResult and PageResult
+   *
+   * @return {String} see description
+   */
+
+  getOrdinalPosition () {
+    return this.domElement.ordinalPosition;
   }
 
   /**
@@ -144,35 +196,5 @@ export default class ElementResult extends BaseResult {
     return info;
   }
 
-  /**
-   * @method getResultIdentifier
-   *
-   * @desc Gets a string identifying the element, typically element and//or a key attribute
-   *       or property value
-   *
-   * @return {String} see description
-   */
-
-  getResultIdentifier () {
-    const de = this.domElement;
-    const identifier =  de.node.hasAttribute('type') ?
-                        `${de.tagName}[${de.getAttribute('type')}]` :
-                        de.tagName;
-    return identifier;
-  }
-
-
-  /**
-   * @method getOrdinalPosition
-   *
-   * @desc Gets a string identifying the ordinal position,
-   *       is overrided by ElementResult and PageResult
-   *
-   * @return {String} see description
-   */
-
-  getOrdinalPosition () {
-    return this.domElement.ordinalPosition;
-  }
 
 }

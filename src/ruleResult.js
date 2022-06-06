@@ -503,20 +503,6 @@ export default class RuleResult {
    */
 
   getWCAGLevel   () {
-    return this.rule.getWCAG20Level();
-  }
-
-  /**
-   * @method getWCAGLevelNLS
-   *
-   * @desc Get the string representation of the the WCAG 2.0 Success Criterion Level
-   *       based on the primary id of the rule
-   *
-   * @return  {String}  String representing the WCAG 2.0 success criterion level
-   *                    (i.e. A, AA or AAA)
-   */
-
-  getWCAGLevelNLS   () {
     return this.rule.getWCAGLevel();
   }
 
@@ -562,14 +548,14 @@ export default class RuleResult {
       rule_id: this.rule.getId(),
       rule_summary: this.getRuleSummary(),
 
-      success_criteria_nls:  this.rule.getPrimarySuccessCriterion().title,
-      success_criteria_code: this.rule.getPrimarySuccessCriterion().id,
+      success_criteria_nls:  this.rule.getPrimarySuccessCriterionInfo().title,
+      success_criteria_code: this.rule.getPrimarySuccessCriterionInfo().id,
 
       guideline_nls:  this.rule.getGuidelineInfo().title,
       guideline_code: this.rule.getGuidelineInfo().id,
 
-      rule_category_nls:  this.rule.getRuleCategoryInfo().title,
-      rule_category_code: this.rule.getRuleCategoryInfo().id,
+      rule_category_nls:  this.rule.getCategoryInfo().title,
+      rule_category_code: this.rule.getCategoryInfo().id,
 
       rule_scope_code_nls: this.rule.getScopeNLS(),
       rule_scope_code:     this.rule.getScope(),

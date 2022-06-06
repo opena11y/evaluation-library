@@ -32,7 +32,7 @@ export {
 }
 
 /* Constants */
-const debug = new DebugLogging('locale', false)
+const debug = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -221,6 +221,7 @@ function getSuccessCriterionInfo(successCriterionId) {
         if (sc === successCriterionId) {
           debug.flag && debug.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
+            id: successCriterionId,
             level: success_criterion.level,
             title: success_criterion.title,
             url: success_criterion.url_spec,

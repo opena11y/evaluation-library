@@ -46,12 +46,14 @@ export default class RuleGroupResult {
   constructor (evaluationResult, title, url, desc, ruleset=RULESET.ALL) {
     this.evaluation_result = evaluationResult;
 
-    this.title       = title;
-    this.url         = url;
-    this.description = desc;
+    this.rule_group_information = {};
 
-    this.rules_required    = 0;
-    this.rules_recommended = 0;
+    this.rule_group_information.title       = title;
+    this.rule_group_information.url         = url;
+    this.rule_group_information.description = desc;
+
+    this.rule_group_information.rules_required    = 0;
+    this.rule_group_information.rules_recommended = 0;
 
     this.ruleset = ruleset;
 
@@ -59,6 +61,18 @@ export default class RuleGroupResult {
     this.rule_results_summary = new RuleResultsSummary();
 
     debug.flag && debug.log(`[title]: ${this.title} (${ruleset})`)
+  }
+
+  /**
+   * @method getRuleGroupInfo
+   *
+   * @desc Return information on the group of rules
+   *
+   * @return {RuleGroupInfo}  RuleGroupInfo object
+   */
+
+  getRuleGroupInfo () {
+    return this.rule_group_information;
   }
 
   /**
@@ -179,10 +193,10 @@ export default class RuleGroupResult {
       this.rule_results_summary.updateSummary(rule_result);
 
       if (rule_result.isRuleRequired()) {
-        this.rules_required += 1;
+        this.rule_group_information.rules_required += 1;
       }
       else {
-        this.rules_recommended += 1;
+        this.rule_group_information.rules_recommended += 1;
       }
     }
   }

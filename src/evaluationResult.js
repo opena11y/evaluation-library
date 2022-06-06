@@ -157,7 +157,7 @@ export default class EvaluationResult {
     var rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
-      if (rr.getRule().getRuleCategory() & categoryId) {
+      if (rr.getRule().getCategory() & categoryId) {
         rgr.addRuleResult(rr);
       }
     });

@@ -200,6 +200,9 @@ function getFormattedDate() {
  */
 
 function cleanForUTF8 (str) {
+  if (typeof str !== 'string') {
+    return "[cleanForUTF8]: Not a string";
+  }
   let nstr = '';
   str.split().forEach( c => {
     if (c >= ' ' && c < '~') nstr += c;

@@ -33,7 +33,7 @@ const debug = new DebugLogging('baseResult', false);
  */
 
 export default class BaseResult {
-  constructor (ruleResult, resultValue, msgId, msgArgs, result_identifier, ordinal_position) {
+  constructor (ruleResult, resultValue, msgId, msgArgs, result_identifier) {
 
     const msg = ruleResult.rule.base_result_msgs[msgId];
 
@@ -45,7 +45,6 @@ export default class BaseResult {
     debug.flag && debug.log(`[msgArgs]: ${msgArgs}`);
     this.result_message    = getBaseResultMessage(msg, msgArgs);
     this.result_identifier = result_identifier;
-    this.ordinal_position  = ordinal_position;
 
   }
 
@@ -125,20 +124,6 @@ export default class BaseResult {
   }
 
   /**
-   * @method getOrdinalPosition
-   *
-   * @desc Gets a string identifying the ordinal position,
-   *       is overrided by ElementResult and not needed for
-   *       PageResults
-   *
-   * @return {String} see @desc
-   */
-
-  getOrdinalPosition () {
-    return this.ordinal_position;
-  }
-
-  /**
    * @method getResultValue
    *
    * @desc Returns an numerical constant representing the element result
@@ -161,6 +146,19 @@ export default class BaseResult {
     return getCommonMessage('ruleResult', this.result_value);
   }
 
+
+  /**
+   * @method getResultMessage
+   *
+   * @desc Gets a string representation of the result message
+   *
+   * @return {String} see @desc
+   */
+
+  getResultMessage () {
+    return this.result_message;
+  }
+  
  /**
    * @method getDataForJSON
    *
@@ -175,7 +173,6 @@ export default class BaseResult {
       result_value:       this.result_value,
       result_value_nls:   this.result_value_nls,
       result_identifier:  this.result_identifier,
-      ordinal_position:   this.ordinal_position,
       message:            this.result_message
     }
   }

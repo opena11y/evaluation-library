@@ -132,26 +132,26 @@ export default class Rule {
   }
 
   /**
-   * @method getRuleCategory
+   * @method getCategoryInfo
    *
    * @desc Get a numerical constant representing the rule category
    *
    * @return {Integer}  see @desc
    */
 
-  getRuleCategory () {
+  getCategory () {
     return this.rule_category_id;
   }
 
   /**
-   * @method getRuleCategoryInfo
+   * @method getCategoryInfo
    *
    * @desc Get a localized title, url and description of the rule category
    *
    * @return {RuleCategoryInfoItem}  see @desc
    */
 
-  getRuleCategoryInfo () {
+  getCategoryInfo () {
     return this.rule_category_info;
   }
 
@@ -321,38 +321,38 @@ export default class Rule {
   }
 
   /**
-   * @method getPrimarySuccessCriterion
+   * @method getPrimarySuccessCriterionId
    *
    * @desc Get id of the primary WCAG Success Criteria for the rule
    *
    * @return  {Integer}  see description
    */
 
-  getPrimarySuccessCriterion () {
+  getPrimarySuccessCriterionId () {
     return this.wcag_primary_id;
   }
 
   /**
-   * @method getPrimarySuccessCriterionNLS
+   * @method getPrimarySuccessCriterionInfo
    *
    * @desc Get information about primary WCAG Success Criteria for the rule
    *
    * @return  {SuccessCriterionInfo}  Object representing information about the SC
    */
 
-  getPrimarySuccessCriterionNLS () {
+  getPrimarySuccessCriterionInfo () {
     return this.wcag_primary;
   }
 
   /**
-   * @method getRelatedSuccessCriteria
+   * @method getRelatedSuccessCriteriaInfo
    *
    * @desc Get information about the related WCAG Success Criteria for the rule
    *
    * @return  {Array}  Array of SuccessCriterionInfo objects
    */
 
-  getRelatedSuccessCriteria () {
+  getRelatedSuccessCriteriaInfo () {
     return this.wcag_related;
   }
 
