@@ -18446,7 +18446,7 @@ const debug$3 = new DebugLogging('PageResult', false);
 
 class WebsiteResult extends BaseResult {
   constructor (rule_result, result_value, domCache, message_id, message_arguments) {
-    super(rule_result, result_value, message_id, message_arguments, 'website', -1);
+    super(rule_result, result_value, message_id, message_arguments, 'website');
 
     this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.WEBSITE;

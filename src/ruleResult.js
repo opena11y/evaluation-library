@@ -347,7 +347,7 @@ export default class RuleResult {
    *
    * @desc Updates rule result information for a element or page result
    *
-   * @param  {Integer}  test_result   - Number representing if a result value
+   * @param  {Integer}  test_result   - Number representing a result value
    * @param  {Object}   result_item   - Reference to ElementResult or PageResult object
    * @param  {Object}   dom_item      - Reference to DOMcache or domElement objects
    */

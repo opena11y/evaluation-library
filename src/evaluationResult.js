@@ -109,7 +109,7 @@ export default class EvaluationResult {
    */
 
   getRuleResultsAll (ruleset=RULESET.ALL) {
-    var rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "", ruleset);
+    const rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "", ruleset);
     this.allRuleResults.forEach( rr => {
       rgr.addRuleResult(rr);
     });
@@ -153,8 +153,8 @@ export default class EvaluationResult {
    */
 
   getRuleResultsByCategory (categoryId, ruleset=RULESET.ALL) {
-    var rcInfo = getRuleCategoryInfo(categoryId);
-    var rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description, ruleset);
+    const rcInfo = getRuleCategoryInfo(categoryId);
+    const rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
       if (rr.getRule().getCategory() & categoryId) {

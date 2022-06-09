@@ -143,7 +143,7 @@ export default class BaseResult {
    */
 
   getResultValueNLS () {
-    return getCommonMessage('ruleResult', this.result_value);
+    return getCommonMessage('baseResult', this.result_value);
   }
 
 
