@@ -2,7 +2,10 @@
 
 /* Imports */
 import DebugLogging from './debug.js';
-import {RESULT_TYPE} from './constants.js';
+import {
+  RESULT_TYPE,
+  RESULT_VALUE
+} from './constants.js';
 import {
   getCommonMessage,
   getBaseResultMessage
@@ -46,6 +49,20 @@ export default class BaseResult {
     this.result_message    = getBaseResultMessage(msg, msgArgs);
     this.result_identifier = result_identifier;
 
+  }
+
+  /**
+   * @getter isActionMessage
+   *
+   * @desc Returns true if the result is a violation, warning or manual check
+   *    
+   * @return {Boolean} see @desc
+   */
+
+  get isActionMessage () {
+    return (this.result_value === RESULT_VALUE.VIOLATION) ||
+           (this.result_value === RESULT_VALUE.WARNING) ||
+           (this.result_value === RESULT_VALUE.MANUAL_CHECK);
   }
 
   /**
@@ -95,7 +112,7 @@ export default class BaseResult {
    * @return {Object} see @desc
    */
   getResultType () {
-     return this.rule_result;
+    return getCommonMessage('resultType', this.result_type);
   }
 
   /**
@@ -137,7 +154,7 @@ export default class BaseResult {
   /**
    * @method getResultValueNLS
    *
-   * @desc Gets a string representation of the rule result value
+   * @desc Gets a abbreviated string representing of the rule result value
    *
    * @return {String} see @desc
    */
@@ -146,6 +163,17 @@ export default class BaseResult {
     return getCommonMessage('baseResult', this.result_value);
   }
 
+  /**
+   * @method getResultValueLongNLS
+   *
+   * @desc Gets a verbose string representing of the rule result value
+   *
+   * @return {String} see @desc
+   */
+
+  getResultValueLongNLS () {
+    return getCommonMessage('baseResultLong', this.result_value);
+  }
 
   /**
    * @method getResultMessage

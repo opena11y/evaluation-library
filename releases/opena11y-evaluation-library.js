@@ -12780,6 +12780,8 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 const common = {
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
   baseResult: ['undefined','P','H','MC','W','V'],
+  baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warining','Violation'],
+  resultType: ['base','element','page','website'],
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
   ruleScopes: ['undefined', 'element', 'page', 'website'],
   allRuleResults: 'All Rule Results',
@@ -17889,6 +17891,20 @@ class BaseResult {
   }
 
   /**
+   * @getter isActionMessage
+   *
+   * @desc Returns true if the result is a violation, warning or manual check
+   *    
+   * @return {Boolean} see @desc
+   */
+
+  get isActionMessage () {
+    return (this.result_value === RESULT_VALUE.VIOLATION) ||
+           (this.result_value === RESULT_VALUE.WARNING) ||
+           (this.result_value === RESULT_VALUE.MANUAL_CHECK);
+  }
+
+  /**
    * @getter isElementResult
    *
    * @desc Returns true if the result type is element,
@@ -17935,7 +17951,7 @@ class BaseResult {
    * @return {Object} see @desc
    */
   getResultType () {
-     return this.rule_result;
+    return getCommonMessage('resultType', this.result_type);
   }
 
   /**
@@ -17977,7 +17993,7 @@ class BaseResult {
   /**
    * @method getResultValueNLS
    *
-   * @desc Gets a string representation of the rule result value
+   * @desc Gets a abbreviated string representing of the rule result value
    *
    * @return {String} see @desc
    */
@@ -17986,6 +18002,17 @@ class BaseResult {
     return getCommonMessage('baseResult', this.result_value);
   }
 
+  /**
+   * @method getResultValueLongNLS
+   *
+   * @desc Gets a verbose string representing of the rule result value
+   *
+   * @return {String} see @desc
+   */
+
+  getResultValueLongNLS () {
+    return getCommonMessage('baseResultLong', this.result_value);
+  }
 
   /**
    * @method getResultMessage

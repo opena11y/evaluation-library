@@ -76,6 +76,8 @@ function getElementResultInfo(ruleResult) {
 
   function addElementResult(elementResult) {
 
+    console.log(`[addElementResult][A]`);
+
     let accNameInfo    = JSON.stringify(elementResult.getAccessibleNameInfo());
     let ccrInfo        = JSON.stringify(elementResult.getColorContrastInfo());
     let visibilityInfo = JSON.stringify(elementResult.getVisibilityInfo());
@@ -87,8 +89,10 @@ function getElementResultInfo(ruleResult) {
       'role'             : elementResult.getRole(),
       'position'         : elementResult.getOrdinalPosition(),
       'result'           : elementResult.getResultValueNLS(),
+      'resultLong'       : elementResult.getResultValueLongNLS(),
       'resultValue'      : elementResult.getResultValue(),
       'actionMessage'    : elementResult.getResultMessage(),
+      'resultType'       : elementResult.getResultType(),
       'accNameInfo'      : accNameInfo,
       'ccrInfo'          : ccrInfo,
       'visibilityInfo'   : visibilityInfo,
@@ -96,8 +100,11 @@ function getElementResultInfo(ruleResult) {
       'ariaAttrInfo'     : ariaAttrInfo,
       'isElementResult'  : elementResult.isElementResult,
       'isPageResult'     : elementResult.isPageResult,
-      'isWebsiteResult'  : elementResult.isWebsiteesult
+      'isWebsiteResult'  : elementResult.isWebsiteResult,
+      'isActionMessage'  : elementResult.isActionMessage,
     };
+
+    console.log(`[addElementResult][item]: ${JSON.stringify(item)}`);
 
     // Adjust sort order of element results for AInspector Sidebar
     if (item.resultValue === RESULT_VALUE.HIDDEN) {
@@ -135,11 +142,14 @@ function getPageOrWebsiteResultInfo(ruleResult) {
         'otherName'        : result.getResultIdentifier(),
         'position'         : 0,
         'result'           : result.getResultValueNLS(),
+        'resultLong'       : result.getResultValueLongNLS(),
         'resultValue'      : result.getResultValue(),
         'actionMessage'    : result.getResultMessage(),
+        'resultType'       : result.getResultType(),
         'isElementResult'  : result.isElementResult,
         'isPageResult'     : result.isPageResult,
-        'isWebsiteResult'  : result.isWebsiteesult
+        'isWebsiteResult'  : result.isWebsiteResult,
+        'isActionMessage'  : result.isActionMessage,
       };
     }
   }
