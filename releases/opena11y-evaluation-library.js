@@ -12779,7 +12779,7 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 
 const common = {
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
-  elementResult: ['undefined','P','H','MC','W','V'],
+  baseResult: ['undefined','P','H','MC','W','V'],
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
   ruleScopes: ['undefined', 'element', 'page', 'website'],
   allRuleResults: 'All Rule Results',
@@ -17983,7 +17983,7 @@ class BaseResult {
    */
 
   getResultValueNLS () {
-    return getCommonMessage('ruleResult', this.result_value);
+    return getCommonMessage('baseResult', this.result_value);
   }
 
 
@@ -18787,7 +18787,7 @@ class RuleResult {
    *
    * @desc Updates rule result information for a element or page result
    *
-   * @param  {Integer}  test_result   - Number representing if a result value
+   * @param  {Integer}  test_result   - Number representing a result value
    * @param  {Object}   result_item   - Reference to ElementResult or PageResult object
    * @param  {Object}   dom_item      - Reference to DOMcache or domElement objects
    */
@@ -19151,7 +19151,7 @@ class EvaluationResult {
    */
 
   getRuleResultsAll (ruleset=RULESET.ALL) {
-    var rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "", ruleset);
+    const rgr = new RuleGroupResult(this, getCommonMessage('allRuleResults'), "", "", ruleset);
     this.allRuleResults.forEach( rr => {
       rgr.addRuleResult(rr);
     });
@@ -19195,8 +19195,8 @@ class EvaluationResult {
    */
 
   getRuleResultsByCategory (categoryId, ruleset=RULESET.ALL) {
-    var rcInfo = getRuleCategoryInfo(categoryId);
-    var rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description, ruleset);
+    const rcInfo = getRuleCategoryInfo(categoryId);
+    const rgr = new RuleGroupResult(this, rcInfo.title, rcInfo.url, rcInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
       if (rr.getRule().getCategory() & categoryId) {

@@ -26,15 +26,11 @@
     "aria-in-html": "node src/aria-in-html/generate-aria-in-html.js"
   },
   "devDependencies": {
-    "babel-preset-es2015-rollup": "^3.0.0",
     "eslint": "^8.11.0",
     "gulp": "^4.0.2",
-    "gulp-rollup": "^2.17.0",
-    "gulp-sourcemaps": "^3.0.0",
     "node-fetch": "^2.6.7",
     "node-html-parser": "^3.3.6",
-    "rollup": "^2.70.1",
-    "rollup-plugin-babel": "^4.4.0"
+    "rollup": "^2.70.1"
   },
   "dependencies": {
     "nunjucks": "^3.2.3",
