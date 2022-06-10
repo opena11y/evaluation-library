@@ -17354,7 +17354,7 @@ class Rule {
    */
 
   getInformationalLinks () {
-    return this.informationa_links;
+    return this.informational_links;
   }
 
   /**
