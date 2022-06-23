@@ -9,15 +9,28 @@ export {
   hasEmptyAltText,
   hasInvalidState,
   hasCheckedState,
+  isLabelable,
   normalize,
   replaceAll
 }
 /* constants */
+const labelableElements = ['input', 'meter', 'option', 'output', 'progress', 'select', 'textarea'];
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
 const inputsWithChecked   = ['checkbox', 'radio'];
 
 
 /* helper functions */
+
+function isLabelable (node) {
+
+  const tagName = node.tagName.toLowerCase();
+
+  if ((tagName === 'input') && node.hasAttribute('type')) {
+    return node.type.toLowerCase() !== 'hidden';
+  }
+
+  return labelableElements.includes(tagName);
+}
 
 /*
 *   normalize: Trim leading and trailing whitespace and condense all

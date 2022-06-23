@@ -105,17 +105,18 @@ export default class Visibility {
    */
 
   normalizeAriaHidden (node, parentVisibility) {
+    let hidden = false;
     let ariaHidden = node.getAttribute('aria-hidden');
     if (ariaHidden) {
       ariaHidden = ariaHidden.toLowerCase();
     }
-    ariaHidden = (ariaHidden === 'true') ? true : false;
+    hidden = (ariaHidden === 'true') ? true : false;
 
     if (parentVisibility &&
         parentVisibility.ariaHidden)  {
-      ariaHidden = true;
+      hidden = true;
     }
-    return ariaHidden;
+    return hidden;
   }
 
   /**
@@ -160,11 +161,16 @@ export default class Visibility {
 
   normalizeVisibility (style, parentVisibility) {
     let visibility = style.getPropertyValue("visibility");
-    let isVisibilityHidden = false; 
+    let isVisibilityHidden =  parentVisibility.isVisibilityHidden; 
 
     if ((visibility === 'collapse') ||
         (visibility === 'hidden')) {
         isVisibilityHidden = true;
+    }
+    else {
+      if (visibility === 'visible') {
+        isVisibilityHidden = false;        
+      }
     }
     return isVisibilityHidden;
   }
@@ -205,6 +211,6 @@ export default class Visibility {
     const fontSize = parseFloat(style.getPropertyValue("font-size"));
     return fontSize <= 1;
   }
-};
+}
 
 

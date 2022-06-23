@@ -1,14 +1,14 @@
 /* domCache.js */
 
 /* Imports */
-import ControlInfo   from './controlInfo.js';
-import DOMElement    from './domElement.js';
-import DOMText       from './domText.js';
-import ImageInfo     from './imageInfo.js';
-import LinkInfo      from './linkInfo.js';
-import ListInfo      from './listInfo.js';
-import StructureInfo from './structureInfo.js';
-import DebugLogging  from '../debug.js';
+import ControlInfo      from './controlInfo.js';
+import DOMElement       from './domElement.js';
+import DOMText          from './domText.js';
+import ImageInfo        from './imageInfo.js';
+import LinkInfo         from './linkInfo.js';
+import ListInfo         from './listInfo.js';
+import StructureInfo    from './structureInfo.js';
+import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
@@ -91,7 +91,7 @@ export default class DOMCache {
     this.listInfo      = new ListInfo();
     this.structureInfo = new StructureInfo();
 
-  	this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
+    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
 
@@ -114,6 +114,7 @@ export default class DOMCache {
       this.listInfo.showListInfo();
       this.structureInfo.showStructureInfo();
     }
+
   }
 
   // Tests if a tag name can be skipped
@@ -152,6 +153,7 @@ export default class DOMCache {
    */
 
   transverseDOM(parentInfo, startingNode) {
+    let tagName;
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
@@ -177,7 +179,7 @@ export default class DOMCache {
           break;
 
         case Node.ELEMENT_NODE:
-          const tagName = node.tagName.toLowerCase();
+          tagName = node.tagName.toLowerCase();
 
 
           if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {

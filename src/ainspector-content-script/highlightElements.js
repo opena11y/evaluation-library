@@ -2,6 +2,10 @@
 
 import {highlightModule} from './highlightModule.js';
 
+/* Constants */
+
+var ainspectorSidebarRuleResult = ainspectorSidebarRuleResult || {};
+
 /*
 *   highlightElements
 */
@@ -13,6 +17,7 @@ export function highlightElements(highlight, position) {
       ainspectorSidebarRuleResult.getElementResultsArray;
   }
 
+/*
   function getElementResultByPosition() {
     if (validElementResults()) {
       const elementResults = ainspectorSidebarRuleResult.getElementResultsArray();
@@ -25,7 +30,7 @@ export function highlightElements(highlight, position) {
     }
     return false;
   }
-
+*/
   let domNode = false;
 
   let info = {};

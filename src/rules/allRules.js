@@ -3,6 +3,7 @@
 /* Imports */
 import {colorRules}     from './colorRules.js';
 import {focusRules}     from './focusRules.js';
+import {controlRules}   from './controlRules.js';
 import {headingRules}   from './headingRules.js';
 import {imageRules}     from './imageRules.js';
 import {linkRules}      from './linkRules.js';
@@ -23,9 +24,13 @@ function addToArray (ruleArray) {
 
 addToArray(colorRules);
 addToArray(focusRules);
+addToArray(controlRules);
 addToArray(headingRules);
 addToArray(imageRules);
 addToArray(linkRules);
 addToArray(landmarkRules);
 
 
+if (debug.flag) {
+  console.log('All rules loaded');
+}

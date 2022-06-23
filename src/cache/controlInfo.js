@@ -4,7 +4,7 @@
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('widgetInfo', false);
+const debug = new DebugLogging('ControlInfo', true);
 
 /**
  * @class ControlElement
@@ -20,10 +20,6 @@ class ControlElement {
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
     this.childControlElements = [];
-
-    if (debug.flag) {
-      debug.log('')
-    }
   }
 
   addChildControlElement (controlElement) {
@@ -39,7 +35,7 @@ class ControlElement {
       ce.showControlInfo(prefix + '  ');
     });
   }
-};
+}
 
 /**
  * @class ControlInfo
@@ -92,13 +88,15 @@ export default class ControlInfo {
    */
 
   isControl (domElement) {
-    const isGroupRole = domElement.role === 'group';
-    const isFormRole  = domElement.role === 'form';
+    const isGroupRole = domElement.role    === 'group';
+    const isFormTag   = domElement.tagName === 'form';
     const isLabel     = domElement.tagName === 'label';
+    const isMeter     = domElement.tagName === 'meter';
     return domElement.isInteractiveElement ||
-           isFormRole ||
+           isFormTag   ||
            isGroupRole ||
-           isLabel ||
+           isLabel     ||
+           isMeter     ||
            domElement.ariaInfo.isWidget;
   }
 
@@ -145,6 +143,6 @@ export default class ControlInfo {
       });
     }
   }
-};
+}
 
 

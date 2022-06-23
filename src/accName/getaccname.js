@@ -19,6 +19,7 @@ import {
   nameFromDefault,
   nameFromDescendant,
   nameFromLabelElement,
+  nameFromLegendElement,
   nameFromDetailsOrSummary
 } from './namefrom';
 
@@ -50,14 +51,13 @@ const noAccName = {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (doc, element, recFlag) {
+function getAccessibleName (doc, element, recFlag=false) {
   let accName = null;
 
   if (!recFlag) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
   if (accName === null) accName = nameFromNativeSemantics(doc, element, recFlag);
   if (accName === null) accName = noAccName;
-
   return accName;
 }
 
@@ -180,6 +180,10 @@ function nameFromNativeSemantics (doc, element, recFlag) {
       accName = nameFromContents(element);
       break;
 
+    case 'fieldset':
+      accName = nameFromLegendElement(doc, element);
+      break;
+
     case 'label':
       accName = nameFromContents(element);
       break;
@@ -268,9 +272,6 @@ function nameFromNativeSemantics (doc, element, recFlag) {
 *   tion of those results if any, otherwise return null.
 */
 function nameFromAttributeIdRefs (doc, element, attribute) {
-//  console.log(`[nameFromAttributeIdRefs][      doc]: ${doc}`)
-//  console.log(`[nameFromAttributeIdRefs][  element]: ${element}`)
-//  console.log(`[nameFromAttributeIdRefs][attribute]: ${attribute}`)
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, accName, arr = [];
 

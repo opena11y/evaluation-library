@@ -6,6 +6,8 @@
  *   File:   reference-tables.js
  */
 
+var require = require || {};
+
 const fs = require('fs');
 const path = require('path');
 
@@ -42,13 +44,13 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
 
         let body = '';
 
-        for (ariaRole in aria12Info.designPatterns) {
+        for (let ariaRole in aria12Info.designPatterns) {
           let dp = aria12Info.designPatterns[ariaRole];
           let depProps = dp.deprecatedProps;
           if (depProps.length) {
             console.log('[role]: ' + ariaRole + ' (' + depProps.length + ')');
 
-            for (item in ariaInHTMLInfo.elementInfo) {
+            for (let item in ariaInHTMLInfo.elementInfo) {
 
               let itemInfo = ariaInHTMLInfo.elementInfo[item];
 

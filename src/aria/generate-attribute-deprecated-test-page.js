@@ -6,11 +6,13 @@
  *   File:   reference-tables.js
  */
 
+var require = require || {};
+
 const fs = require('fs');
 const path = require('path');
 
-let aria12Info = {};
-let ariaInHTMLInfo = {};
+var aria12Info;
+var ariaInHTMLInfo;
 
 function getPropValue(prop)  {
   let propInfo = aria12Info.propertyDataTypes[prop];
@@ -38,10 +40,11 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
 
         ariaInHTMLInfo = JSON.parse(data);
 
-        let body = '';
-        var body_implicit = '';
+        console.log(ariaInHTMLInfo);
 
-        for (ariaRole in aria12Info.designPatterns) {
+        let body = '';
+
+        for (let ariaRole in aria12Info.designPatterns) {
           let dp = aria12Info.designPatterns[ariaRole];
           let depProps = dp.deprecatedProps;
           let prop;

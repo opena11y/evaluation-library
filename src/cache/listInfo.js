@@ -57,7 +57,7 @@ class ListElement {
       le.showListInfo(prefix + '  ');
     });
   }
-};
+}
 
 /**
  * @class ListInfo
@@ -175,6 +175,6 @@ export default class ListInfo {
       });
     }
   }
-};
+}
 
 

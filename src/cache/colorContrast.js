@@ -324,6 +324,7 @@ export default class ColorContrast {
     let value;
     let colorHex = "000000";
     let rgbParts = rgbColor.match(/[\d.]+/g);
+    let A;
 
     if (rgbParts && rgbParts.length) {
 
@@ -339,7 +340,7 @@ export default class ColorContrast {
 
         case 4:
           // RGBA value to HEX valuye
-          let A = parseFloat(rgbParts[3]);
+          A = parseFloat(rgbParts[3]);
           // remove A value from array
           rgbParts.pop()
           rgbParts.forEach( rgbColor => {
@@ -374,6 +375,6 @@ export default class ColorContrast {
 
     return isSizeReallyBig || (isSizeBig && isBold);
   }
-};
+}
 
 

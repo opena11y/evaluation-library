@@ -17,5 +17,8 @@ const debug = new DebugLogging('hasEvents', false)
 export default class HasEvents {
   constructor (elementNode) {
     this.onChange = elementNode.hasAttribute('onchange');
+    if (debug.flag) {
+      console.log(`[hasEvents]: ${this.onChange}`);
+    }
   }
 }

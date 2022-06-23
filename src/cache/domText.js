@@ -23,6 +23,9 @@ export default class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
+    if (debug.flag) {
+      debug.log(`[text]: ${this.text}`)
+    }
   }
 
   /**

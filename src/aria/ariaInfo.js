@@ -84,6 +84,7 @@ class RefInfo {
 export default class AriaInfo {
   constructor (doc, role, defaultRole, node) {
     const tagName = node.tagName.toLowerCase();
+    const level = parseInt(node.getAttribute('aria-level'));
 
     let designPattern = designPatterns[role] || null;
     this.isValidRole  = designPattern !== null;
@@ -151,8 +152,7 @@ export default class AriaInfo {
         break;
 
       default:
-        const level = parseInt(node.getAttribute('aria-level'));
-        this.ariaLevel = (typeof level === 'Number') && (level > 0) ? level : 0;
+        this.ariaLevel = (typeof level === 'number') && (level > 0) ? level : 0;
         break;
     }
 
@@ -181,6 +181,7 @@ export default class AriaInfo {
       const value     = attr.value.toLowerCase();
       const values    = value.split(' ');
       const tokenInfo = new TokenInfo (attr.name, attr.value);
+      const num       = Number(value);
 
       switch (attrInfo.type) {
         case 'boolean':
@@ -190,7 +191,6 @@ export default class AriaInfo {
           break;
 
         case 'integer':
-          const num = Number(value);
           if (!Number.isInteger(num) || (num <= 0)) {
             attrsWithInvalidValues.push(attr);
           }
@@ -304,13 +304,12 @@ export default class AriaInfo {
   // an input element can be used to satisfy the requirement
   checkForMissingRequiredAttributes(attrs, designPattern, node) {
     const missingReqAttrNames = [];
-    let count = 0;
     designPattern.requiredProps.forEach (reqAttr => {
       const defaultValue = propertyDataTypes[reqAttr].defaultValue;
       let flag = (defaultValue !== '') && (defaultValue !== 'undefined');
       attrs.forEach( attr => {
         const name  = attr.name.toLowerCase();
-        flag = flag || (attr.name === reqAttr);
+        flag = flag || (name === reqAttr);
         flag = flag || ((reqAttr === 'aria-checked') && hasCheckedState(node));
       });
       if (!flag) {

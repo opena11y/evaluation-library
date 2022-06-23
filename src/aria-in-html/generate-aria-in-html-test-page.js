@@ -6,6 +6,8 @@
  *   File:   reference-tables.js
  */
 
+var require = require || {};
+
 const fs = require('fs');
 const path = require('path');
 
@@ -16,7 +18,6 @@ let notAllowedTagNames = ' bdo body br datalist details head iframe math optgrou
 function getResult (infoItem, role) {
 
   let result = 'NORESULT';
-  let allowedRoles = [];
 
   if (infoItem.noRoleAllowed) {
     result = 'FAIL';
@@ -38,11 +39,7 @@ function getResult (infoItem, role) {
       (role === 'none')) {
     result = 'MC';
   }
-
-
-
   return result;
-
 }
 
 function generateTestItems(testId, infoItem, spaces, childContent) {
@@ -58,7 +55,7 @@ function generateTestItems(testId, infoItem, spaces, childContent) {
 
   let id;
 
-  for (ariaRole in aria12Info.designPatterns) {
+  for (let ariaRole in aria12Info.designPatterns) {
 
     id = 'id="test-' + testId + '-' + roleCount + '"';
 
@@ -146,16 +143,9 @@ function generateTestItems(testId, infoItem, spaces, childContent) {
         break;
 
     }
-    if (tagName === 'img') {
-    } else {
-    }
-
     roleCount += 1;
-
   }
-
   return html;
-
 }
 
 function generateTableTestItems(testId, infoItem, spaces) {
@@ -166,9 +156,7 @@ function generateTableTestItems(testId, infoItem, spaces) {
 
   let html = '';
 
-  let roleCount = 0;
-
-  for (ariaRole in aria12Info.designPatterns) {
+  for (let ariaRole in aria12Info.designPatterns) {
 
     let result = getResult(infoItem, ariaRole);
 
@@ -222,6 +210,7 @@ function generateTableCellTestItems(testId, infoItem, role) {
 
 }
 
+/*
 function generateTableHeaderCellTestItems(testId, infoItem, role) {
 
   let html = '';
@@ -236,6 +225,7 @@ function generateTableHeaderCellTestItems(testId, infoItem, role) {
   return html;
 
 }
+*/
 
 function generateTestItemsInElementRole(testId, infoItem, elem, role) {
 
@@ -272,7 +262,7 @@ function createTestCases(name, testItems) {
 
   let itemCount = 1;
 
-  for (item in ariaInHTMLInfo.elementInfo) {
+  for (let item in ariaInHTMLInfo.elementInfo) {
 
     let infoItem = ariaInHTMLInfo.elementInfo[item];
 
@@ -429,7 +419,7 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
 
         let inputItems = [];
         let inputListItems = [];
-        for(item in ariaInHTMLInfo.elementInfo) {
+        for(let item in ariaInHTMLInfo.elementInfo) {
           if (ariaInHTMLInfo.elementInfo[item].tagName === 'input') {
             if (item.indexOf('list') < 0) {
               inputItems.push(item)
@@ -439,7 +429,7 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
               completedItems.push(item);
             }
           }
-        };
+        }
         createTestCases('input', inputItems);
         createTestCases('input_list', inputListItems);
 
@@ -465,21 +455,21 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
 
 
         let noRoleItems = [];
-        for(item in ariaInHTMLInfo.elementInfo) {
+        for(let item in ariaInHTMLInfo.elementInfo) {
           if (ariaInHTMLInfo.elementInfo[item].noRoleAllowed && (completedItems.indexOf(item) < 0)) {
             noRoleItems.push(item)
             completedItems.push(item);
           }
-        };
+        }
         createTestCases('no_role_allowed', noRoleItems);
 
         let anyRoleItems = [];
-        for(item in ariaInHTMLInfo.elementInfo && (completedItems.indexOf(item) < 0)) {
+        for(let item in ariaInHTMLInfo.elementInfo && (completedItems.indexOf(item) < 0)) {
           if (ariaInHTMLInfo.elementInfo[item].anyRoleAllowed) {
             anyRoleItems.push(item)
             completedItems.push(item);
           }
-        };
+        }
         createTestCases('any_role_allowed', anyRoleItems);
 
       }

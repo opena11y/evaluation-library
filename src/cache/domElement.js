@@ -9,14 +9,13 @@ import AriaInfo          from '../aria/ariaInfo.js';
 import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
   hasInvalidState,
-  hasCheckedState
+  hasCheckedState,
+  isLabelable,
 } from '../utils.js'
 import {
   getAccessibleName,
   getAccessibleDesc,
-  getErrMessage,
-  getGroupingLabels,
-  nameFromNativeSemantics
+  getErrMessage
 } from '../accName/getaccname.js';
 
 /* Constants */
@@ -59,6 +58,7 @@ export default class DOMElement {
     this.parentInfo       = parentInfo;
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
+    this.isLabelable      = isLabelable(elementNode);
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
     const defaultRole = this.ariaInHTMLInfo.defaultRole;
@@ -259,7 +259,6 @@ export default class DOMElement {
 
 
   toString () {
-    let identifer = this.tagName;
     let type = '';
     let id = '';
 
@@ -327,6 +326,9 @@ function checkForInteractiveElement (node) {
 
     case 'input':
       return type !== 'hidden';
+
+    case 'output':
+      return true;
 
     case 'select':
       return true;

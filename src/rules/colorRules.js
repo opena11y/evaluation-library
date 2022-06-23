@@ -7,10 +7,10 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-import DebugLogging  from '../debug.js';
+// import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Color Rules', false);
+// const debug = new DebugLogging('Color Rules', false);
 
 /*
  * OpenA11y Alliance Rules

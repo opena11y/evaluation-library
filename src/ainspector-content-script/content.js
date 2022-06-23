@@ -9,6 +9,8 @@ import {getElementResultsInfo} from './getElementResultsInfo.js';
 import {highlightModule}       from './highlightModule.js';
 import {highlightElements}     from './highlightElements.js';
 
+const browser = browser || {};
+var infoAInspectorEvaluation = infoAInspectorEvaluation || {};
 const debug = true;
 
 

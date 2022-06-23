@@ -69,7 +69,7 @@ class LandmarkElement {
   toString () {
     return this.domElement.role;
   }
-};
+}
 
 /**
  * @class StructureInfo
@@ -238,6 +238,6 @@ export default class StructureInfo {
       });
     }
   }
-};
+}
 
 

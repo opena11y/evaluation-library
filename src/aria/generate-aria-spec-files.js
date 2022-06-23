@@ -10,7 +10,6 @@ import fs    from 'fs';
 import os    from 'os';
 import path  from 'path';
 import util  from 'util';
-import url   from 'url';
 import fetch from 'node-fetch';
 import HTMLParser from 'node-html-parser';
 

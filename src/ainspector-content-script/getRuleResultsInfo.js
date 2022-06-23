@@ -1,7 +1,6 @@
  /* getRuleResultInfo.js */
 
 import {evaluate}           from './evaluate.js';
-import {getDetailsAction}   from './getDetailsAction.js';
 import {getRuleResultsItem} from './getRuleResultsItem.js';
 
 /*

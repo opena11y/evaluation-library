@@ -8,10 +8,10 @@ import {
   TEST_RESULT
 } from '../constants.js';
 import {accNamesTheSame} from '../utils.js';
-import DebugLogging      from '../debug.js';
+// import DebugLogging      from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Link Rules', false);
+// const debug = new DebugLogging('Link Rules', false);
 
 /*
  * OpenA11y Rules

@@ -38,7 +38,7 @@ const landmarkRoles = [
 */
 
 export default function getAriaInHTMLInfo (node) {
-  let elemInfo, type;
+  let elemInfo, type, selector;
 
   let tagName = node.tagName.toLowerCase();
   const elementInfo = ariaInHTMLInfo.elementInfo;
@@ -84,6 +84,20 @@ export default function getAriaInHTMLInfo (node) {
       }
       break;
 
+    // This is a fix since you don't always want an accessible name on a form
+    case 'form':
+      if (node.hasAttribute('aria-label') ||
+        node.hasAttribute('aria-labelledby')||
+        node.hasAttribute('title')) {
+        elemInfo = elementInfo['form'];
+        console.log('FORM[FORM]');
+      } else {
+        elemInfo = elementInfo['form'];
+        elemInfo.defaultRole = 'generic';
+        console.log('FORM[GENERIC]');
+      }
+      break;
+
     case 'img':
       if (node.hasAttribute('aria-label') ||
           node.hasAttribute('aria-labelledby')) {
@@ -106,11 +120,32 @@ export default function getAriaInHTMLInfo (node) {
       if (!type) {
         type = 'text';
       }
-      let selector = tagName + '[type=' + type + ']';
+      selector = tagName + '[type=' + type + ']';
       if (node.hasAttribute('list')) {
         selector += '[list]';
       }
+
       elemInfo = elementInfo[selector];
+
+      switch (type) {
+        case 'color':
+        case 'date':
+        case 'datetime-local':
+        case 'month':
+        case 'password':
+        case 'time':
+        case 'week':
+          elemInfo.defaultRole = 'textbox';
+          break;
+
+        case 'file':
+          elemInfo.defaultRole = 'button';
+          break;
+
+        default:
+          break;  
+      }
+
       break;
 
     case 'section':

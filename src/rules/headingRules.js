@@ -7,11 +7,10 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-import {accNamesTheSame} from '../utils.js';
-import DebugLogging      from '../debug.js';
+// import DebugLogging      from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Heading Rules', false);
+// const debug = new DebugLogging('Heading Rules', false);
 
 /*
  * OpenA11y Rules
@@ -89,8 +88,6 @@ export const headingRules = [
         }
         return false;
       }
-
-      let h1Count = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
         if (de.ariaInfo.ariaLevel === 1) {
@@ -309,7 +306,7 @@ export const headingRules = [
   wcag_related_ids    : ['2.4.6', '2.4.10'],
   target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
   validate            : function (dom_cache, rule_result) {
-    dom_cache.structureInfo.allHeadingDomElements.forEach( (de, index) => {
+    dom_cache.structureInfo.allHeadingDomElements.forEach( (de) => {
       if (de.visibility.isVisibleToAT) {
         if (de.accName.name.length) {
           if (de.hasTextContent()) {
@@ -374,7 +371,7 @@ export const headingRules = [
  * Heading Rule Helper Functions
  */
 
-function checkHeadingNesting(dom_cache, rule_result, headingDomElements, landmarkRole='') {
+function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
   const visibleHeadings = [];
 
   headingDomElements.forEach( de => {

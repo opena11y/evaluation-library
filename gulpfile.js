@@ -1,7 +1,21 @@
-const gulp = require('gulp');
-const rollup = require('rollup');
-const { task } = require('gulp');
-const { parallel } = require('gulp');
+const gulp         = require('gulp');
+const rollup       = require('rollup');
+const {src, task}  = require('gulp');
+const {parallel, series}   = require('gulp');
+const eslint = require('gulp-eslint');
+ 
+task('linting', () => {
+    return src(['src/*/*.js'])
+        // eslint() attaches the lint output to the "eslint" property
+        // of the file object so it can be used by other modules.
+        .pipe(eslint())
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format())
+        // To have the process exit with an error code (1) on
+        // lint error, return the stream and pipe to failAfterError last.
+        .pipe(eslint.failAfterError());
+});
 
 gulp.task('build', () => {
   return rollup
@@ -16,7 +30,7 @@ gulp.task('build', () => {
     });
 });
 
-gulp.task('ai', () => {
+gulp.task('ainspector', () => {
   return rollup
     .rollup({
       input: './src/ainspector-content-script/content.js'
@@ -30,6 +44,7 @@ gulp.task('ai', () => {
 });
 
 const build = task('build');
-const ai = task('ai');
+const ainspector = task('ainspector');
+const linting = task('linting');
 
-exports.default = parallel( build, ai);
+exports.default = series(linting, parallel( build, ainspector));

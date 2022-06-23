@@ -1,4 +1,3 @@
-/*
 export default {
   input: 'src/evaluationLibrary.js',
   output: {
@@ -6,8 +5,8 @@ export default {
     format: 'es'
   }
 };
-*/
 
+/*
 export default {
   input: 'src/ainspector-content-script/content.js',
   output: {
@@ -15,3 +14,6 @@ export default {
     format: 'iife'
   }
 };
+
+*/
+

@@ -117,7 +117,7 @@ export default class Rule {
 
   getGuideline () {
    return this.wcag_guideline_id;
-  };
+  }
 
   /**
    * @method getGuidelineInfo
@@ -223,7 +223,7 @@ export default class Rule {
    *
    * @return {String} Localized string of the rule summary
    */
-  getSummary (required) {
+  getSummary () {
     return this.summary;
   }
 

@@ -6,13 +6,17 @@ import {
   RESULT_VALUE
 } from '../constants.js';
 
+/* Constants */
+
+var ainspectorSidebarRuleResult = ainspectorSidebarRuleResult || {};
+
 /*
 *   getElementResultsInfo
 *   (1) Run evlauation library;
 *   (2) return result objec for the rule view in the sidebar;
 */
 
-export function getElementResultsInfo(ruleId, highlight, position) {
+export function getElementResultsInfo(ruleId) {
 
   const evaluationResult  = evaluate();
   const ruleResult = evaluationResult.getRuleResult(ruleId);

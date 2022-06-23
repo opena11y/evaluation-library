@@ -3,7 +3,6 @@
 import {messages as enMessages} from './en/messages.js';
 
 import DebugLogging        from '../debug.js';
-import {RESULT_VALUE}      from '../constants.js';
 import {filterTextContent} from '../utils.js';
 
 export {
@@ -68,7 +67,7 @@ function setUseCodeTags(value=false) {
 
 function setLocale(lang='en') {
   if (messages[lang]) {
-    local = lang;
+    locale = lang;
   } else {
     locale = 'en';
   }

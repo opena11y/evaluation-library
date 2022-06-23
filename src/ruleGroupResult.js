@@ -85,7 +85,7 @@ export default class RuleGroupResult {
    * @return {EvaluationResult}  see description
    */
 
-  getEvaluationResult = function () {
+  getEvaluationResult () {
     return this.evaluation_result;
   }
 
@@ -99,7 +99,7 @@ export default class RuleGroupResult {
    * @return {Number}  see description
    */
 
-  getImplementationScore = function () {
+  getImplementationScore () {
     return this.rule_results_summary.implementation_score;
   }
 
@@ -112,7 +112,7 @@ export default class RuleGroupResult {
    * @return {Number}  see description
    */
 
-  getImplementationValue = function () {
+  getImplementationValue () {
     return this.rule_results_summary.implementation_value;
   }
 
@@ -124,7 +124,7 @@ export default class RuleGroupResult {
    * @return {String} see description
    */
 
-  getImplementationValueNLS = function () {
+  getImplementationValueNLS () {
     return getImplementationValue(this.getImplementationValue());
   }
 
@@ -136,7 +136,7 @@ export default class RuleGroupResult {
    * @return {Array}  see description
    */
 
-  getRuleResultsArray = function () {
+  getRuleResultsArray () {
     return this.rule_results;
   }
 
@@ -148,7 +148,7 @@ export default class RuleGroupResult {
    * @return {RuleResultsSummary} Returns the rule result summary object
    */
 
-  getRuleResultsSummary = function () {
+  getRuleResultsSummary () {
     return this.rule_results_summary;
   }
 
@@ -162,7 +162,7 @@ export default class RuleGroupResult {
    * @return {Boolean} True if any of the rule have results, otherwise false
    */
 
-  hasRuleResults = function () {
+  hasRuleResults () {
     return this.rule_results_summary.hasResults();
   }
 
@@ -174,7 +174,7 @@ export default class RuleGroupResult {
    * @return {Boolean} True if the group contains at least one rule, otherwise false
    */
 
-  hasRules = function () {
+  hasRules  () {
     return this.rule_results.length > 0;
   }
 

@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>QUNIT: Form Control Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,15 +11,16 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
+
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
+        executeTest('CONTROL_1: Forms must have labels', 'ID_IFRAME_1', 'CONTROL_1');
+      });
+    </script>
       
-      // Test case for labeling form controls
+
+<!--
 
       test( "CONTROL_1: Forms must have labels", function() {
         executeTest('ID_IFRAME_1', 'CONTROL_1');
@@ -70,9 +72,7 @@
         executeTest('ID_IFRAME_11', 'CONTROL_11');
       });
 
-         
-                  
-    </script>
+-->
 
     <h2>Labels</h2>
     <iframe id="ID_IFRAME_1" src="form_controls/form_controls_1_controls_must_have_legends.html"></iframe>

@@ -4,8 +4,7 @@
 
 import {
   normalize,
-  getAttributeValue,
-  hasEmptyAltText,
+  getAttributeValue
 } from '../utils.js';
 
 import {
@@ -23,6 +22,7 @@ export {
   nameFromDefault,
   nameFromDescendant,
   nameFromLabelElement,
+  nameFromLegendElement,
   nameFromDetailsOrSummary
 };
 
@@ -163,6 +163,24 @@ function nameFromLabelElement (doc, element) {
 }
 
 /*
+*   nameFromLegendElement
+*/
+function nameFromLegendElement (doc, element) {
+  let name, legend;
+
+  // legend
+  if (element) {
+    legend = doc.querySelector('legend');
+    if (legend) {
+      name = getElementContents(legend, element);
+    if (name.length) return { name: name, source: 'legend' };
+    }
+  }
+  return null;
+}
+
+
+/*
 *   nameFromDetailsOrSummary: If element is expanded (has open attribute),
 *   return the contents of the summary element followed by the text contents
 *   of element and all of its non-summary child elements. Otherwise, return
@@ -194,6 +212,51 @@ function nameFromDetailsOrSummary (element) {
 // LOW-LEVEL HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
+*   isVisible: Checks to see if the node or any of it's ancestor
+*   are visible for the purpose of accessible name calculation
+*/
+
+/*
+function isVisible (node, isVisible=false) {
+
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    return true;
+  }
+
+  if (node.hasAttribute('hidden')) {
+    return false;
+  }
+
+  if (node.hasAttribute('aria-hidden')) {
+    return node.getAttribute('aria-hidden').toLowerCase() !== 'true';
+  }
+
+  const style = window.getComputedStyle(node, null);
+
+  const visibility = style.getPropertyValue("visibility");
+  if (!isVisible) {
+    if ((visibility === 'collapse') ||
+        (visibility === 'hidden')) {
+        return false;
+    }
+    if (visibility === 'visible') {
+      isVisible = true;
+    }
+  }
+
+  const display = style.getPropertyValue("display");
+  if (display === 'none') { 
+    return false;
+  }
+
+  if (node.parentNode) {
+    return isVisible(node.parentNode, isVisible);
+  }
+  return true;
+}
+*/
+
+/*
 *   getNodeContents: Recursively process element and text nodes by aggregating
 *   their text values for an ARIA text equivalent calculation.
 *   1. This includes special handling of elements with 'alt' text and embedded
@@ -222,17 +285,19 @@ function getNodeContents (node, forElem) {
         if (couldHaveAltText(node)) {
           contents = getAttributeValue(node, 'alt');
         }
-        else if (isEmbeddedControl(node)) {
-          contents = getEmbeddedControlValue(node);
-        }
         else {
-          if (node.hasChildNodes()) {
-            let children = Array.from(node.childNodes);
-            children.forEach( child => {
-              nc = getNodeContents(child, forElem);
-              if (nc.length) arr.push(nc);
-            });
-            contents = (arr.length) ? arr.join(' ') : '';
+          if (isEmbeddedControl(node)) {
+            contents = getEmbeddedControlValue(node);
+          }
+          else {
+            if (node.hasChildNodes()) {
+              let children = Array.from(node.childNodes);
+              children.forEach( child => {
+                nc = getNodeContents(child, forElem);
+                if (nc.length) arr.push(nc);
+              });
+              contents = (arr.length) ? arr.join(' ') : '';
+            }
           }
         }
         // For all branches of the ELEMENT_NODE case...

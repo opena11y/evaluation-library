@@ -8,11 +8,10 @@ import {
   TEST_RESULT
 } from '../constants.js';
 import {accNamesTheSame} from '../utils.js';
-import DebugLogging      from '../debug.js';
+// import DebugLogging      from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Landmark Rules', true);
-
+// const debug = new DebugLogging('Landmark Rules', true);
 
 /*
  * OpenA11y Rules
@@ -719,7 +718,6 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
   }
 
   const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
-  let roleCount = 0;
   let visibleLandmarkElements = [];
 
   allLandmarkElements.forEach( le => {
@@ -727,7 +725,6 @@ function validateLandmarkDescendants(dom_cache, rule_result, role, allowedLandma
     if (de.role === role) {
       if (de.visibility.isVisibleToAT) {
         visibleLandmarkElements.push(le);
-        roleCount += 1;
       }
       else {
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);

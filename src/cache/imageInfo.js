@@ -34,7 +34,7 @@ class ImageElement {
   toString () {
     return this.domElement.role;
   }
-};
+}
 
 /**
  * @class MapElement
@@ -57,7 +57,7 @@ class MapElement {
   toString () {
     return this.domElement.role;
   }
-};
+}
 
 
 /**
@@ -216,6 +216,6 @@ export default class ImageInfo {
       });
     }
   }
-};
+}
 
 

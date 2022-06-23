@@ -1,14 +1,14 @@
 /**
- * @file highlight.js
+ * @file highlightModule.js
  *
  * @desc Module that provides data structures and functions for highlighting
  *       elements on the current page.
- *
- * @external OpenAjax.a11y.RULE_SCOPE
- * @external OpenAjax.a11y.ELEMENT_RESULT_VALUE
- * @external OpenAjax.a11y.VISIBILITY
- */
+ * */
 
+import {
+  RULE_SCOPE,
+  RESULT_VALUE
+} from '../constants.js';
 
 /* ---------------------------------------------------------------- */
 /*                      Highlight Module                            */
@@ -115,11 +115,11 @@ export const highlightModule = {
   },
 
   isElementScopeRule: function (elementResult) {
-    return (this.getRuleScope(elementResult) === OpenAjax.a11y.RULE_SCOPE.ELEMENT);
+    return (this.getRuleScope(elementResult) === RULE_SCOPE.ELEMENT);
   },
 
   isPageScopeRule: function (elementResult) {
-    return (this.getRuleScope(elementResult) === OpenAjax.a11y.RULE_SCOPE.PAGE);
+    return (this.getRuleScope(elementResult) === RULE_SCOPE.PAGE);
   },
 
   /**
@@ -169,8 +169,6 @@ export const highlightModule = {
    */
 
   highlightElementResults: function (document, element_results) {
-
-    let RESULT_VALUE = OpenAjax.a11y.ELEMENT_RESULT_VALUE;
 
     // counters
     let v = 0; // violations
