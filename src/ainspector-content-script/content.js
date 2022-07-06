@@ -9,15 +9,13 @@ import {getElementResultsInfo} from './getElementResultsInfo.js';
 import {highlightModule}       from './highlightModule.js';
 import {highlightElements}     from './highlightElements.js';
 
-const browser = browser || {};
-var infoAInspectorEvaluation = infoAInspectorEvaluation || {};
 const debug = true;
-
 
 /*
 **  Connect to panel.js script and set up listener/handler
 */
-var panelPort = browser.runtime.connect({ name: 'content' });
+// NOTE: browser is a global object 
+var panelPort = browser.runtime.connect({ name: 'content' }); // eslint-disable-line 
 
 panelPort.onMessage.addListener(messageHandler);
 
@@ -35,35 +33,28 @@ function messageHandler (message) {
 
 function getEvaluationInfo(panelPort) {
 
-  let view      = infoAInspectorEvaluation.view;
-  let groupType = infoAInspectorEvaluation.groupType;
-  let groupId   = infoAInspectorEvaluation.groupId;
-  let ruleId    = infoAInspectorEvaluation.ruleId;
-  let rulesetId = infoAInspectorEvaluation.rulesetId;
-  let highlight = infoAInspectorEvaluation.highlight;
-  let position  = infoAInspectorEvaluation.position;
-  let highlightOnly   = infoAInspectorEvaluation.highlightOnly;
-  let removeHighlight = infoAInspectorEvaluation.removeHighlight;
+  // NOTE: infoAInspectorEvaluation is a global variable in the page
+  const aiInfo = infoAInspectorEvaluation; // eslint-disable-line 
 
   if (debug) {
-    console.log(`[getEvaluationInfo][           view]: ${view}`);
-    console.log(`[getEvaluationInfo][      groupType]: ${groupType}`);
-    console.log(`[getEvaluationInfo][        groupId]: ${groupId}`);
-    console.log(`[getEvaluationInfo][         ruleId]: ${ruleId}`);
-    console.log(`[getEvaluationInfo][      rulesetId]: ${rulesetId}`);
-    console.log(`[getEvaluationInfo][      highlight]: ${highlight}`);
-    console.log(`[getEvaluationInfo][       position]: ${position}`);
-    console.log(`[getEvaluationInfo][  highlightOnly]: ${highlightOnly}`);
-    console.log(`[getEvaluationInfo][removeHighlight]: ${removeHighlight}`);
+    console.log(`[getEvaluationInfo][           view]: ${aiInfo.view}`);
+    console.log(`[getEvaluationInfo][      groupType]: ${aiInfo.groupType}`);
+    console.log(`[getEvaluationInfo][        groupId]: ${aiInfo.groupId}`);
+    console.log(`[getEvaluationInfo][         ruleId]: ${aiInfo.ruleId}`);
+    console.log(`[getEvaluationInfo][      rulesetId]: ${aiInfo.rulesetId}`);
+    console.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
+    console.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
+    console.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
+    console.log(`[getEvaluationInfo][removeHighlight]: ${aiInfo.removeHighlight}`);
   }
 
   let info = {};
   info.id       = 'info';
   info.title    = document.title;
   info.location = document.location.href
-  info.ruleset  = rulesetId;
+  info.ruleset  = aiInfo.rulesetId;
 
-  switch(view) {
+  switch(aiInfo.view) {
     case viewId.summary:
       highlightModule.removeHighlight(document);
       info.infoSummary = getSummaryInfo();
@@ -71,16 +62,16 @@ function getEvaluationInfo(panelPort) {
 
     case viewId.ruleResults:
       highlightModule.removeHighlight(document);
-      info.infoRuleResults = getRuleResultsInfo(groupType, groupId);
+      info.infoRuleResults = getRuleResultsInfo(aiInfo.groupType, aiInfo.groupId);
       break;
 
     case viewId.elementResults:
-      if (highlightOnly) {
-        info.infoHighlight = highlightElements(highlight, position);
+      if (aiInfo.highlightOnly) {
+        info.infoHighlight = highlightElements(aiInfo.highlight, aiInfo.position);
       } else {
         highlightModule.removeHighlight(document);
-        info.infoElementResults = getElementResultsInfo(ruleId, highlight, position);
-        highlightElements(highlight, position);
+        info.infoElementResults = getElementResultsInfo(aiInfo.ruleId, aiInfo.highlight, aiInfo.position);
+        highlightElements(aiInfo.highlight, aiInfo.position);
       }
       break;
 
@@ -95,7 +86,8 @@ function getEvaluationInfo(panelPort) {
 *  This message handler is used to remove element highlighting
 *  when the sidebar is closed
 */
-browser.runtime.onMessage.addListener(request => {
+// NOTE: browser is a global object 
+browser.runtime.onMessage.addListener(request => {  // eslint-disable-line
   // to be executed on receiving messages from the panel
   if ((request.option    === 'highlight') &&
       (request.highlight === 'none')) {

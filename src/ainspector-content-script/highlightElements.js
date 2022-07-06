@@ -2,10 +2,6 @@
 
 import {highlightModule} from './highlightModule.js';
 
-/* Constants */
-
-var ainspectorSidebarRuleResult = ainspectorSidebarRuleResult || {};
-
 /*
 *   highlightElements
 */
@@ -13,8 +9,9 @@ var ainspectorSidebarRuleResult = ainspectorSidebarRuleResult || {};
 export function highlightElements(highlight, position) {
 
   function validElementResults () {
-    return ainspectorSidebarRuleResult &&
-      ainspectorSidebarRuleResult.getElementResultsArray;
+    // NOTE: ainspectorSidebarRuleResult is a global variable in the page
+    return ainspectorSidebarRuleResult && // eslint-disable-line
+      ainspectorSidebarRuleResult.getElementResultsArray; // eslint-disable-line
   }
 
 /*
@@ -38,7 +35,8 @@ export function highlightElements(highlight, position) {
   info.option = 'highlight';
 
   if (validElementResults()) {
-    const elementResults = ainspectorSidebarRuleResult.getElementResultsArray();
+    // NOTE: ainspectorSidebarRuleResult is a global variable in the page
+    const elementResults = ainspectorSidebarRuleResult.getElementResultsArray(); // eslint-disable-line
 
     if (elementResults) {
       highlightModule.initHighlight();

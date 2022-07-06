@@ -8,8 +8,6 @@ import {
 
 /* Constants */
 
-var ainspectorSidebarRuleResult = ainspectorSidebarRuleResult || {};
-
 /*
 *   getElementResultsInfo
 *   (1) Run evlauation library;
@@ -45,7 +43,7 @@ export function getElementResultsInfo(ruleId) {
   info.json = ruleResult.toJSON('', true);
 
   // Save reference to rule results for highlighting elements
-  ainspectorSidebarRuleResult = ruleResult;
+  ainspectorSidebarRuleResult = ruleResult; // eslint-disable-line 
 
   return info;
 }

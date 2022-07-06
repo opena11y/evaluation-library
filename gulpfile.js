@@ -37,7 +37,7 @@ gulp.task('ainspector', () => {
     })
     .then(bundle => {
       return bundle.write({
-	    file: './releases/ainspector-content-script.js',
+	    file: '../ainspector-for-firefox/src/ainspector-content-script.js',
 	    format: 'iife'
       });
     });
