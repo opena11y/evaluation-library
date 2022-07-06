@@ -352,7 +352,10 @@ export const highlightModule = {
               case 'frame':
               case 'iframe':
                 try {
-                  elems = getHighlightedElements(node.contentWindow.document, elems);
+                  const doc = node.contentDocument || node.contentWindow.document;
+                  if (doc) {
+                    elems = getHighlightedElements(doc, elems);
+                  }
                 } catch (error) {
                   console.log('[removeFromDocument][catch]' + error);
                 }

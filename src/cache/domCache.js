@@ -217,7 +217,12 @@ export default class DOMCache {
                     newParentInfo.document = node.contentWindow.document;
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
-                    this.transverseDOM(newParentInfo, node.contentDocument);
+                    const doc = node.contentDocument || node.contentWindow.document;
+                    try {
+                      this.transverseDOM(newParentInfo, doc);
+                    } catch (error) {
+                      console.log('[tranverseDOM][catch]' + error);
+                    }                    
                   }
                 } else {
                   this.transverseDOM(newParentInfo, node);

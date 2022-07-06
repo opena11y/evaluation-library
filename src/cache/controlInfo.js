@@ -88,6 +88,9 @@ export default class ControlInfo {
    */
 
   isControl (domElement) {
+    if (domElement.role === 'link') {
+      return false;
+    }
     const isGroupRole = domElement.role    === 'group';
     const isFormTag   = domElement.tagName === 'form';
     const isLabel     = domElement.tagName === 'label';

@@ -47,14 +47,14 @@ export const controlRules = [
         debug.log(`[CONTROL 1][${count++}][${de.tagName}][${de.node.type}][${de.role}]: ${de.accName.name ? `${de.accName.name}(${de.accName.source})` : 'none'}`);
         if (de.visibility.isVisibleToAT) {
           if (de.accName.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.name]);
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
           }
         }
         else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
         }
       }
     });

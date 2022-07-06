@@ -226,6 +226,9 @@ class ControlInfo {
    */
 
   isControl (domElement) {
+    if (domElement.role === 'link') {
+      return false;
+    }
     const isGroupRole = domElement.role    === 'group';
     const isFormTag   = domElement.tagName === 'form';
     const isLabel     = domElement.tagName === 'label';
@@ -10381,7 +10384,12 @@ class DOMCache {
                     newParentInfo.document = node.contentWindow.document;
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
-                    this.transverseDOM(newParentInfo, node.contentDocument);
+                    const doc = node.contentDocument || node.contentWindow.document;
+                    try {
+                      this.transverseDOM(newParentInfo, doc);
+                    } catch (error) {
+                      console.log('[tranverseDOM][catch]' + error);
+                    }                    
                   }
                 } else {
                   this.transverseDOM(newParentInfo, node);
@@ -11349,14 +11357,14 @@ const controlRules$1 = [
         debug$d.log(`[CONTROL 1][${count++}][${de.tagName}][${de.node.type}][${de.role}]: ${de.accName.name ? `${de.accName.name}(${de.accName.source})` : 'none'}`);
         if (de.visibility.isVisibleToAT) {
           if (de.accName.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.name]);
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
           }
         }
         else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
         }
       }
     });
@@ -15235,8 +15243,8 @@ const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/multipage/forms.html#the-label-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -15247,8 +15255,8 @@ const controlRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
