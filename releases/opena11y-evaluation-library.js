@@ -142,7 +142,7 @@ class DebugLogging {
 /* controlInfo.js */
 
 /* Constants */
-const debug$r = new DebugLogging('ControlInfo', true);
+const debug$s = new DebugLogging('ControlInfo', true);
 
 /**
  * @class ControlElement
@@ -169,7 +169,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$r.domElement(ce.domElement, prefix);
+      debug$s.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -272,15 +272,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$r.flag) {
-      debug$r.log('== Control Tree ==', 1);
+    if (debug$s.flag) {
+      debug$s.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$r.domElement(ce.domElement);
+        debug$s.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$r.log('== Forms ==', 1);
+      debug$s.log('== Forms ==', 1);
       this.allFormControlElements.forEach( ce => {
-        debug$r.domElement(ce.domElement);
+        debug$s.domElement(ce.domElement);
       });
     }
   }
@@ -289,7 +289,7 @@ class ControlInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$q = new DebugLogging('colorContrast', false);
+const debug$r = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -309,9 +309,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$q.flag) {
-      debug$q.separator();
-      debug$q.tag(elementNode);
+    if (debug$r.flag) {
+      debug$r.separator();
+      debug$r.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -335,11 +335,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$q.flag) {
-      debug$q.log(`[                    opacity]: ${this.opacity}`);
-      debug$q.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$q.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$q.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$r.flag) {
+      debug$r.log(`[                    opacity]: ${this.opacity}`);
+      debug$r.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$r.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$r.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -662,7 +662,7 @@ class ColorContrast {
 /* hasEvents.js */
 
 /* Constants */
-const debug$p = new DebugLogging('hasEvents', false);
+const debug$q = new DebugLogging('hasEvents', false);
 
 /**
  * @class Events
@@ -675,7 +675,7 @@ const debug$p = new DebugLogging('hasEvents', false);
 class HasEvents {
   constructor (elementNode) {
     this.onChange = elementNode.hasAttribute('onchange');
-    if (debug$p.flag) {
+    if (debug$q.flag) {
       console.log(`[hasEvents]: ${this.onChange}`);
     }
   }
@@ -684,7 +684,7 @@ class HasEvents {
 /* visibility.js */
 
 /* Constants */
-const debug$o = new DebugLogging('visibility', false);
+const debug$p = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -732,17 +732,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$o.flag) {
-      debug$o.separator();
-      debug$o.tag(elementNode);
-      debug$o.log('[          isHidden]: ' + this.isHidden);
-      debug$o.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$o.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$o.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$o.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$o.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$o.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$o.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$p.flag) {
+      debug$p.separator();
+      debug$p.tag(elementNode);
+      debug$p.log('[          isHidden]: ' + this.isHidden);
+      debug$p.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$p.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$p.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$p.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$p.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$p.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$p.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5864,7 +5864,7 @@ function accNamesTheSame (ref1, ref2) {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$n = new DebugLogging('AriaInfo', false);
+const debug$o = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6013,16 +6013,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$n.flag) {
-      node.attributes.length && debug$n.log(`${node.outerHTML}`, 1);
-      debug$n.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$n.log(`[         isWidget]: ${this.isWidget}`);
-      debug$n.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$n.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$n.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$n.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$n.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$n.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$o.flag) {
+      node.attributes.length && debug$o.log(`${node.outerHTML}`, 1);
+      debug$o.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$o.log(`[         isWidget]: ${this.isWidget}`);
+      debug$o.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$o.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$o.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$o.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$o.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$o.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7700,7 +7700,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$m = new DebugLogging('ariaInHtml', false);
+const debug$n = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7894,11 +7894,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$m.flag) {
+  if (debug$n.flag) {
     if (tagName === 'h2') {
-      debug$m.tag(node);
+      debug$n.tag(node);
     }
-    debug$m.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$n.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -9056,7 +9056,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$l = new DebugLogging('DOMElement', false);
+const debug$m = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -9319,12 +9319,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$l.flag) {
+    if (debug$m.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$l.domText(domItem, prefix);
+          debug$m.domText(domItem, prefix);
         } else {
-          debug$l.domElement(domItem, prefix);
+          debug$m.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9417,7 +9417,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$k = new DebugLogging('domText', false);
+const debug$l = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -9436,8 +9436,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$k.flag) {
-      debug$k.log(`[text]: ${this.text}`);
+    if (debug$l.flag) {
+      debug$l.log(`[text]: ${this.text}`);
     }
   }
 
@@ -9481,6 +9481,74 @@ class DOMText {
     const s = text.trim();
     if (s) {
       this.text += ' ' + s;
+    }
+  }
+}
+
+/* iframeInfo.js */
+
+/* Constants */
+const debug$k = new DebugLogging('iframeInfo', false);
+
+/**
+ * @class IFrameElement
+ *
+ * @desc Idenifies a DOM element as being an iframe.
+ *
+ * @param  {Object}  domElement   - dome element information
+ */
+
+class IFrameElement {
+  constructor (domElement, isCrossDomain) {
+    this.domElement = domElement;
+    this.src = domElement.node.src;
+    this.isCrossDomain = isCrossDomain;
+  }
+
+  showInfo () {
+    if (debug$k.flag) {
+      debug$k.log(`[          src]: ${this.src}`);
+      debug$k.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    }
+  }
+}
+
+/**
+ * @class IframeInfo
+ *
+ * @desc Collects information on the iframes in a web page
+ */
+
+class IframeInfo {
+  constructor () {
+    this.allIFrameElements = [];
+  }
+
+  /**
+   * @method update
+   *
+   * @desc Checks to see if the domElement has a role of "link"
+   *
+   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   */
+
+  update (domElement, isCrossDomain) {
+    const ife = new IFrameElement(domElement, isCrossDomain);
+    this.allIFrameElements.push(ife);
+  }
+
+  /**
+   * @method showLinkInfo
+   *
+   * @desc showLinkInfo is used for debugging the LinkInfo object
+   */
+
+  showIFrameInfo () {
+    if (debug$k.flag) {
+      debug$k.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+      this.allIFrameElements.forEach( ife => {
+        ife.showInfo();
+      });
     }
   }
 }
@@ -10257,6 +10325,7 @@ class DOMCache {
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
     this.structureInfo = new StructureInfo();
+    this.iframeInfo    = new IframeInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
@@ -10276,6 +10345,7 @@ class DOMCache {
       this.showDomElementTree();
 
       this.controlInfo.showControlInfo();
+      this.iframeInfo.showIFrameInfo();
       this.imageInfo.showImageInfo();
       this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
@@ -10380,17 +10450,18 @@ class DOMCache {
               } else {
                 // Check for iframe tag
                 if (this.isIFrameElement(tagName)) {
-                  if (node.contentDocument) {
-                    newParentInfo.document = node.contentWindow.document;
+                  let isCrossDomain = false;
+                  try {
+                    const doc = node.contentDocument || node.contentWindow.document;
+                    newParentInfo.document = doc;
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
-                    const doc = node.contentDocument || node.contentWindow.document;
-                    try {
-                      this.transverseDOM(newParentInfo, doc);
-                    } catch (error) {
-                      console.log('[tranverseDOM][catch]' + error);
-                    }                    
-                  }
+                    this.transverseDOM(newParentInfo, doc);
+                  } catch (error) {
+                    debug$f.flag && debug$f.log('[transverseDOM][catch]' + error);
+                    isCrossDomain = true;
+                  }                    
+                  this.iframeInfo.update(domItem, isCrossDomain);
                 } else {
                   this.transverseDOM(newParentInfo, node);
                 }

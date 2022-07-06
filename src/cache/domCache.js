@@ -4,6 +4,7 @@
 import ControlInfo      from './controlInfo.js';
 import DOMElement       from './domElement.js';
 import DOMText          from './domText.js';
+import IFrameInfo       from './iframeInfo.js';
 import ImageInfo        from './imageInfo.js';
 import LinkInfo         from './linkInfo.js';
 import ListInfo         from './listInfo.js';
@@ -90,6 +91,7 @@ export default class DOMCache {
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
     this.structureInfo = new StructureInfo();
+    this.iframeInfo    = new IFrameInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
     parentInfo.domElement = this.startingDomElement;
@@ -109,6 +111,7 @@ export default class DOMCache {
       this.showDomElementTree();
 
       this.controlInfo.showControlInfo();
+      this.iframeInfo.showIFrameInfo();
       this.imageInfo.showImageInfo();
       this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
@@ -213,17 +216,18 @@ export default class DOMCache {
               } else {
                 // Check for iframe tag
                 if (this.isIFrameElement(tagName)) {
-                  if (node.contentDocument) {
-                    newParentInfo.document = node.contentWindow.document;
+                  let isCrossDomain = false;
+                  try {
+                    const doc = node.contentDocument || node.contentWindow.document;
+                    newParentInfo.document = doc;
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
-                    const doc = node.contentDocument || node.contentWindow.document;
-                    try {
-                      this.transverseDOM(newParentInfo, doc);
-                    } catch (error) {
-                      console.log('[tranverseDOM][catch]' + error);
-                    }                    
-                  }
+                    this.transverseDOM(newParentInfo, doc);
+                  } catch (error) {
+                    debug.flag && debug.log('[transverseDOM][catch]' + error);
+                    isCrossDomain = true;
+                  }                    
+                  this.iframeInfo.update(domItem, isCrossDomain);
                 } else {
                   this.transverseDOM(newParentInfo, node);
                 }
