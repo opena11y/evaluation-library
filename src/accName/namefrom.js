@@ -58,19 +58,22 @@ function isLabelableElement (element) {
 function getElementContents (element, forElement) {
   let result = '';
 
-  if (element.hasChildNodes()) {
-    let children = element.childNodes,
-        arrayOfStrings = [];
+  if (isVisible(element)) {
+    if (element.hasChildNodes()) {
+      let children = element.childNodes,
+          arrayOfStrings = [];
 
-    for (let i = 0; i < children.length; i++) {
-      let contents = getNodeContents(children[i], forElement);
-      if (contents.length) arrayOfStrings.push(contents);
+      for (let i = 0; i < children.length; i++) {
+        let contents = getNodeContents(children[i], forElement);
+        if (contents.length) arrayOfStrings.push(contents);
+      }
+
+      result = (arrayOfStrings.length) ? arrayOfStrings.join(' ') : '';
     }
 
-    result = (arrayOfStrings.length) ? arrayOfStrings.join(' ') : '';
+    return addCssGeneratedContent(element, result);
   }
-
-  return addCssGeneratedContent(element, result);
+  return '';
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -212,49 +215,86 @@ function nameFromDetailsOrSummary (element) {
 // LOW-LEVEL HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
-*   isVisible: Checks to see if the node or any of it's ancestor
-*   are visible for the purpose of accessible name calculation
+*   isHidden: Checks to see if the node or any of it's ancestor
+*   are hidden for the purpose of accessible name calculation
 */
 
-/*
-function isVisible (node, isVisible=false) {
+function isHidden (node) {
 
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    return true;
-  }
-
-  if (node.hasAttribute('hidden')) {
+  if (!node) {
     return false;
   }
 
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    if ((node.nodeType === Node.TEXT_NODE) &&
+        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+      node = node.parentNode;
+    }
+    return false;
+  }
+
+  if (node.hasAttribute('hidden')) {
+    return true;
+  }
+
   if (node.hasAttribute('aria-hidden')) {
-    return node.getAttribute('aria-hidden').toLowerCase() !== 'true';
+    return node.getAttribute('aria-hidden').toLowerCase() === 'true';
   }
 
   const style = window.getComputedStyle(node, null);
 
-  const visibility = style.getPropertyValue("visibility");
-  if (!isVisible) {
-    if ((visibility === 'collapse') ||
-        (visibility === 'hidden')) {
-        return false;
-    }
-    if (visibility === 'visible') {
-      isVisible = true;
-    }
-  }
-
   const display = style.getPropertyValue("display");
   if (display === 'none') { 
-    return false;
+    return true;
   }
 
   if (node.parentNode) {
-    return isVisible(node.parentNode, isVisible);
+    return isHidden(node.parentNode);
   }
-  return true;
+
+  return false;
 }
+
+/*
+*   isVisible: Checks to see if the node or any of it's ancestor
+*   are visible for the purpose of accessible name calculation
 */
+
+function isVisible (node) {
+  return !isHidden(node);
+}
+
+/*
+*   isHiddenCSSVisibilityProp: Checks to see if the node or any of it's ancestor
+*   are visible based on CSS visibility property for the purpose of accessible name calculation
+*/
+
+function isHiddenCSSVisibilityProp(node) {
+
+  if (!node) {
+    return false;
+  }
+
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    if ((node.nodeType === Node.TEXT_NODE) &&
+        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+      node = node.parentNode;
+    }
+    return false;
+  }
+  const style = window.getComputedStyle(node, null);
+
+  const visibility = style.getPropertyValue("visibility");
+  if (visibility) {
+    return (visibility === 'hidden') || (visibility === 'collapse');
+  }
+
+  if (node.parentNode) {
+    return isHidden(node.parentNode);
+  }
+
+  return false;
+}
 
 /*
 *   getNodeContents: Recursively process element and text nodes by aggregating
@@ -269,7 +309,12 @@ function getNodeContents (node, forElem) {
   let nc;
   let arr = [];
 
-  if (node === forElem) return '';
+  console.log(`[isHidden][${node.tagName ? node.tagName : `P: ${node.parentNode.tagName}`}][${node.parentNode.htmlFor}]: ${isHidden(node)}`);
+
+  if (isHidden(node) || 
+      (node === forElem)) {
+    return '';
+  } 
 
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
@@ -306,7 +351,13 @@ function getNodeContents (node, forElem) {
       break;
 
     case Node.TEXT_NODE:
-      contents = normalize(node.textContent);
+      if (!isHiddenCSSVisibilityProp(node.parentNode)) {
+        contents = normalize(node.textContent);
+      }
+      break;
+
+    default:
+      break;  
   }
 
   return contents;

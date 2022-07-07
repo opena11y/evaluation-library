@@ -78,8 +78,6 @@ function getElementResultInfo(ruleResult) {
 
   function addElementResult(elementResult) {
 
-    console.log(`[addElementResult][A]`);
-
     let accNameInfo    = JSON.stringify(elementResult.getAccessibleNameInfo());
     let ccrInfo        = JSON.stringify(elementResult.getColorContrastInfo());
     let visibilityInfo = JSON.stringify(elementResult.getVisibilityInfo());
@@ -105,8 +103,6 @@ function getElementResultInfo(ruleResult) {
       'isWebsiteResult'  : elementResult.isWebsiteResult,
       'isActionMessage'  : elementResult.isActionMessage,
     };
-
-    console.log(`[addElementResult][item]: ${JSON.stringify(item)}`);
 
     // Adjust sort order of element results for AInspector Sidebar
     if (item.resultValue === RESULT_VALUE.HIDDEN) {

@@ -157,11 +157,19 @@ class ControlElement {
 
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
+    this.isInputTypeImage = this.isInputType(domElement.node, 'image');
     this.childControlElements = [];
   }
 
   addChildControlElement (controlElement) {
     this.childControlElements.push(controlElement);
+  }
+
+  isInputType (node, type) {
+    if (node.tagName.toLowerCase() === 'input') {
+      return node.type === type;
+    }
+    return false;
   }
 
   showControlInfo (prefix) {
@@ -7785,11 +7793,9 @@ function getAriaInHTMLInfo (node) {
         node.hasAttribute('aria-labelledby')||
         node.hasAttribute('title')) {
         elemInfo = elementInfo['form'];
-        console.log('FORM[FORM]');
       } else {
         elemInfo = elementInfo['form'];
         elemInfo.defaultRole = 'generic';
-        console.log('FORM[GENERIC]');
       }
       break;
 
@@ -8483,19 +8489,22 @@ function getListboxValue (element) {
 function getElementContents (element, forElement) {
   let result = '';
 
-  if (element.hasChildNodes()) {
-    let children = element.childNodes,
-        arrayOfStrings = [];
+  if (isVisible(element)) {
+    if (element.hasChildNodes()) {
+      let children = element.childNodes,
+          arrayOfStrings = [];
 
-    for (let i = 0; i < children.length; i++) {
-      let contents = getNodeContents(children[i], forElement);
-      if (contents.length) arrayOfStrings.push(contents);
+      for (let i = 0; i < children.length; i++) {
+        let contents = getNodeContents(children[i], forElement);
+        if (contents.length) arrayOfStrings.push(contents);
+      }
+
+      result = (arrayOfStrings.length) ? arrayOfStrings.join(' ') : '';
     }
 
-    result = (arrayOfStrings.length) ? arrayOfStrings.join(' ') : '';
+    return addCssGeneratedContent(element, result);
   }
-
-  return addCssGeneratedContent(element, result);
+  return '';
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -8637,49 +8646,86 @@ function nameFromDetailsOrSummary (element) {
 // LOW-LEVEL HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
-*   isVisible: Checks to see if the node or any of it's ancestor
-*   are visible for the purpose of accessible name calculation
+*   isHidden: Checks to see if the node or any of it's ancestor
+*   are hidden for the purpose of accessible name calculation
 */
 
-/*
-function isVisible (node, isVisible=false) {
+function isHidden (node) {
 
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    return true;
-  }
-
-  if (node.hasAttribute('hidden')) {
+  if (!node) {
     return false;
   }
 
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    if ((node.nodeType === Node.TEXT_NODE) &&
+        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+      node = node.parentNode;
+    }
+    return false;
+  }
+
+  if (node.hasAttribute('hidden')) {
+    return true;
+  }
+
   if (node.hasAttribute('aria-hidden')) {
-    return node.getAttribute('aria-hidden').toLowerCase() !== 'true';
+    return node.getAttribute('aria-hidden').toLowerCase() === 'true';
   }
 
   const style = window.getComputedStyle(node, null);
 
-  const visibility = style.getPropertyValue("visibility");
-  if (!isVisible) {
-    if ((visibility === 'collapse') ||
-        (visibility === 'hidden')) {
-        return false;
-    }
-    if (visibility === 'visible') {
-      isVisible = true;
-    }
-  }
-
   const display = style.getPropertyValue("display");
   if (display === 'none') { 
-    return false;
+    return true;
   }
 
   if (node.parentNode) {
-    return isVisible(node.parentNode, isVisible);
+    return isHidden(node.parentNode);
   }
-  return true;
+
+  return false;
 }
+
+/*
+*   isVisible: Checks to see if the node or any of it's ancestor
+*   are visible for the purpose of accessible name calculation
 */
+
+function isVisible (node) {
+  return !isHidden(node);
+}
+
+/*
+*   isHiddenCSSVisibilityProp: Checks to see if the node or any of it's ancestor
+*   are visible based on CSS visibility property for the purpose of accessible name calculation
+*/
+
+function isHiddenCSSVisibilityProp(node) {
+
+  if (!node) {
+    return false;
+  }
+
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    if ((node.nodeType === Node.TEXT_NODE) &&
+        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+      node = node.parentNode;
+    }
+    return false;
+  }
+  const style = window.getComputedStyle(node, null);
+
+  const visibility = style.getPropertyValue("visibility");
+  if (visibility) {
+    return (visibility === 'hidden') || (visibility === 'collapse');
+  }
+
+  if (node.parentNode) {
+    return isHidden(node.parentNode);
+  }
+
+  return false;
+}
 
 /*
 *   getNodeContents: Recursively process element and text nodes by aggregating
@@ -8694,7 +8740,12 @@ function getNodeContents (node, forElem) {
   let nc;
   let arr = [];
 
-  if (node === forElem) return '';
+  console.log(`[isHidden][${node.tagName ? node.tagName : `P: ${node.parentNode.tagName}`}][${node.parentNode.htmlFor}]: ${isHidden(node)}`);
+
+  if (isHidden(node) || 
+      (node === forElem)) {
+    return '';
+  } 
 
   switch (node.nodeType) {
     case Node.ELEMENT_NODE:
@@ -8731,7 +8782,10 @@ function getNodeContents (node, forElem) {
       break;
 
     case Node.TEXT_NODE:
-      contents = normalize(node.textContent);
+      if (!isHiddenCSSVisibilityProp(node.parentNode)) {
+        contents = normalize(node.textContent);
+      }
+      break;
   }
 
   return contents;
@@ -11420,22 +11474,22 @@ const controlRules$1 = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
   validate            : function (dom_cache, rule_result) {
-    let count = 1;
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       const ai = de.ariaInfo;
-      if (ai.isNameRequired || de.isLabelable) {
-        debug$d.log(`[CONTROL 1][${count++}][${de.tagName}][${de.node.type}][${de.role}]: ${de.accName.name ? `${de.accName.name}(${de.accName.source})` : 'none'}`);
-        if (de.visibility.isVisibleToAT) {
-          if (de.accName.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+      if (!ce.isInputTypeImage) {
+        if (ai.isNameRequired || de.isLabelable) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
         }
       }
     });
@@ -11449,7 +11503,7 @@ const controlRules$1 = [
  */
 
 { rule_id             : 'CONTROL_2',
-  last_updated        : '2022-06-10',
+  last_updated        : '2022-07-07',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.TRIAGE,
@@ -11458,54 +11512,30 @@ const controlRules$1 = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="image"]'],
   validate            : function (dom_cache, rule_result) {
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_2]: ${info}`);
-
-    /*
-    var TEST_RESULT = TEST_RESULT;
-
-    var control_elements   = dom_cache.controls_cache.control_elements;
-    var control_elements_len = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-
-        var type = control_elements[i].type;
-
-        if (type === 'image') {
-
-          if (de.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-            if (ce.computed_label) {
-              if (ce.computed_label.length) {
-                rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [ce.computed_label]);
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      const ai = de.ariaInfo;
+      if (ce.isInputTypeImage) {
+        if (ai.isNameRequired || de.isLabelable) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.source !== 'none') {
+              if (de.accName.name.length) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
               }
               else {
-                rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', []);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
               }
             }
             else {
-              rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
             }
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
           }
         }
-      } // end loop
-    }
-
-    */
-
+      }
+    });
   } // end validation function
  },
 

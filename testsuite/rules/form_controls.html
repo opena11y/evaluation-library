@@ -16,20 +16,14 @@
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', (event) => {
         executeTest('CONTROL_1: Forms must have labels', 'ID_IFRAME_1', 'CONTROL_1');
+        executeTest('CONTROL_2: input[type=image] must have alt or a title', 'ID_IFRAME_2', 'CONTROL_2');
       });
     </script>
       
 
 <!--
 
-      test( "CONTROL_1: Forms must have labels", function() {
-        executeTest('ID_IFRAME_1', 'CONTROL_1');
-      });
-      
-      test( "CONTROL_2: Image inputs must have alts or a title", function() {
-        executeTest('ID_IFRAME_2', 'CONTROL_2');
-      });
-      
+            
       test( "CONTROL_3: Radio Buttons must be in a legend and fieldset", function() {
         executeTest('ID_IFRAME_3A', 'CONTROL_3');
         executeTest('ID_IFRAME_3B', 'CONTROL_3');

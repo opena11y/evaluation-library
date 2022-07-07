@@ -19,11 +19,19 @@ class ControlElement {
 
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
+    this.isInputTypeImage = this.isInputType(domElement.node, 'image');
     this.childControlElements = [];
   }
 
   addChildControlElement (controlElement) {
     this.childControlElements.push(controlElement);
+  }
+
+  isInputType (node, type) {
+    if (node.tagName.toLowerCase() === 'input') {
+      return node.type === type;
+    }
+    return false;
   }
 
   showControlInfo (prefix) {

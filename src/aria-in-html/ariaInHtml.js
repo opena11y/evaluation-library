@@ -90,11 +90,9 @@ export default function getAriaInHTMLInfo (node) {
         node.hasAttribute('aria-labelledby')||
         node.hasAttribute('title')) {
         elemInfo = elementInfo['form'];
-        console.log('FORM[FORM]');
       } else {
         elemInfo = elementInfo['form'];
         elemInfo.defaultRole = 'generic';
-        console.log('FORM[GENERIC]');
       }
       break;
 

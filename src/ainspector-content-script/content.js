@@ -34,7 +34,8 @@ function messageHandler (message) {
 function getEvaluationInfo(panelPort) {
 
   // NOTE: infoAInspectorEvaluation is a global variable in the page
-  const aiInfo = infoAInspectorEvaluation; // eslint-disable-line 
+  const aiInfo     = infoAInspectorEvaluation; // eslint-disable-line 
+  const ruleResult = ainspectorSidebarRuleResult; // eslint-disable-line
 
   if (debug) {
     console.log(`[getEvaluationInfo][           view]: ${aiInfo.view}`);
@@ -46,6 +47,7 @@ function getEvaluationInfo(panelPort) {
     console.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
     console.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
     console.log(`[getEvaluationInfo][removeHighlight]: ${aiInfo.removeHighlight}`);
+    console.log(`[ainspectorSidebarRuleResult][ruleId]: ${(ruleResult && ruleResult.rule) ? ruleResult.rule.getId() : 'none'}`);
   }
 
   let info = {};

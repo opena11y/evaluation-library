@@ -58,10 +58,6 @@ export function getDetailsAction(ruleResult) {
     'sc'              : getInformationalInfoArray(wcag),
     'additionalLinks' : getInformationalInfoArray(rule.getInformationalLinks())
   }
-
-  console.log(`[additionalLinks]: ${detailsAction.additionalLinks.length}`);
-
   return detailsAction;
-
 }
 
