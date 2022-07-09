@@ -17,9 +17,14 @@ const debug = new DebugLogging('ControlInfo', true);
 class ControlElement {
   constructor (domElement, parentControlElement) {
 
+    const node = domElement.node;
+
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
-    this.isInputTypeImage = this.isInputType(domElement.node, 'image');
+    this.isGroup = domElement.role === 'group';
+    this.isInputTypeImage  = this.isInputType(node, 'image');
+    this.isInputTypeRadio  = this.isInputType(node, 'radio');
+    this.isInputTypeButton = this.isInputType(node, 'button');
     this.childControlElements = [];
   }
 
@@ -32,6 +37,17 @@ class ControlElement {
       return node.type === type;
     }
     return false;
+  }
+
+  getGroupControlElement () {
+    let ce = this.parentControlElement;
+    while (ce) {
+      if (ce.isGroup) {
+        return ce;
+      }
+      ce = ce.parentControlElement;
+    }
+    return null;
   }
 
   showControlInfo (prefix) {

@@ -79,25 +79,22 @@ export const controlRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      const ai = de.ariaInfo;
       if (ce.isInputTypeImage) {
-        if (ai.isNameRequired || de.isLabelable) {
-          if (de.visibility.isVisibleToAT) {
-            if (de.accName.source !== 'none') {
-              if (de.accName.name.length) {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
-              }
+        if (de.visibility.isVisibleToAT) {
+          if (de.accName.source !== 'none') {
+            if (de.accName.name.length) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
             }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
           }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       }
     });
@@ -119,73 +116,40 @@ export const controlRules = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="radio"]'],
   validate            : function (dom_cache, rule_result) {
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_3]: ${info}`);
-
-
-    /*
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
-
-    var control_elements   = dom_cache.controls_cache.control_elements;
-    var control_elements_len = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        var type = control_elements[i].control_type;
-
-        if (type == CONTROL_TYPE.RADIO) {
-
-          if (cs.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-            if (ce.grouping_element) {
-              var ge = ce.grouping_element;
-              var dge = ge.dom_element;
-
-              if (ge.control_type === CONTROL_TYPE.FIELDSET) {
-                if (ge.legend_element &&
-                    ge.legend_element.computed_label &&
-                    ge.legend_element.computed_label.length) {
-                  rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [ge.legend_element.computed_label]);
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', []);
-                }
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.isInputTypeRadio) {
+        if (de.visibility.isVisibleToAT) {
+          const gce = ce.getGroupControlElement(); 
+          if (gce) {
+            const gde = gce.domElement;
+            if (gde.tagName === 'fieldset') {
+              debug.log(`[radio][${de.node.getAttribute('name')}]: ${de.accName.name} (${gde.accName.name})`);
+              if (gde.accName.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [gde.accName.name]);
               }
               else {
-                if (ge.computed_label &&
-                    ge.computed_label.length) {
-                  rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [dge.tag_name, ce.grouping_element.computed_label]);
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_3', [dge.tag_name]);
-                }
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);              
               }
             }
             else {
-              rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
+              if (gde.accName.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [gde.tagName, gde.role, gde.accName.name]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [gde.tagName, gde.role]);              
+              }
             }
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);              
           }
         }
-      } // end loop
-    }
-
-    */
-
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      }
+    });
   } // end validate function
 },
 
@@ -199,78 +163,44 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
-  rule_required       : true,
+  rule_required       : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['button'],
   validate            : function (dom_cache, rule_result) {
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_4]: ${info}`);
-
-    /*
-    var TEST_RESULT  = TEST_RESULT;
-    var VISIBILITY   = VISIBILITY;
-    var CONTROL_TYPE = CONTROL_TYPE;
-
-    var control_elements     = dom_cache.controls_cache.control_elements;
-    var control_elements_len = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-
-        if (ce.control_type === CONTROL_TYPE.BUTTON_ELEMENT) {
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-            if (ce.computed_label_for_comparison.length > 0) {
-              rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if ((de.tagName === 'button') || ce.isInputTypeButton) {
+        if (de.visibility.isVisibleToAT) {
+          if (ce.isInputTypeButton) {
+            if (de.accName.source === 'attribute') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
             }
             else {
-              rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
-            }
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);              
+            }            
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
-          }
-
-        }
-        else {
-
-          if (ce.control_type === CONTROL_TYPE.BUTTON_INPUT) {
-
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-              if (ce.value && (ce.value.length > 0)) {
-                rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
-              }
-              else {
-                rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
-              }
+            if (de.accName.source === 'contents') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
             }
             else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
-            }
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);              
+            }            
           }
         }
-
-      } // end loop
-    }
-    */
-
+        else {
+          if (ce.isInputTypeButton) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);            
+          }
+        }
+      }
+    });
   } // end validate function
 },
-
 
 /**
  * @object CONTROL_5

@@ -173,7 +173,7 @@ function nameFromLegendElement (doc, element) {
 
   // legend
   if (element) {
-    legend = doc.querySelector('legend');
+    legend = element.querySelector('legend');
     if (legend) {
       name = getElementContents(legend, element);
     if (name.length) return { name: name, source: 'legend' };
@@ -308,8 +308,6 @@ function getNodeContents (node, forElem) {
   let contents = '';
   let nc;
   let arr = [];
-
-  console.log(`[isHidden][${node.tagName ? node.tagName : `P: ${node.parentNode.tagName}`}][${node.parentNode.htmlFor}]: ${isHidden(node)}`);
 
   if (isHidden(node) || 
       (node === forElem)) {

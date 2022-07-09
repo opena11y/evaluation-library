@@ -155,9 +155,14 @@ const debug$s = new DebugLogging('ControlInfo', true);
 class ControlElement {
   constructor (domElement, parentControlElement) {
 
+    const node = domElement.node;
+
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
-    this.isInputTypeImage = this.isInputType(domElement.node, 'image');
+    this.isGroup = domElement.role === 'group';
+    this.isInputTypeImage  = this.isInputType(node, 'image');
+    this.isInputTypeRadio  = this.isInputType(node, 'radio');
+    this.isInputTypeButton = this.isInputType(node, 'button');
     this.childControlElements = [];
   }
 
@@ -170,6 +175,17 @@ class ControlElement {
       return node.type === type;
     }
     return false;
+  }
+
+  getGroupControlElement () {
+    let ce = this.parentControlElement;
+    while (ce) {
+      if (ce.isGroup) {
+        return ce;
+      }
+      ce = ce.parentControlElement;
+    }
+    return null;
   }
 
   showControlInfo (prefix) {
@@ -8604,7 +8620,7 @@ function nameFromLegendElement (doc, element) {
 
   // legend
   if (element) {
-    legend = doc.querySelector('legend');
+    legend = element.querySelector('legend');
     if (legend) {
       name = getElementContents(legend, element);
     if (name.length) return { name: name, source: 'legend' };
@@ -8739,8 +8755,6 @@ function getNodeContents (node, forElem) {
   let contents = '';
   let nc;
   let arr = [];
-
-  console.log(`[isHidden][${node.tagName ? node.tagName : `P: ${node.parentNode.tagName}`}][${node.parentNode.htmlFor}]: ${isHidden(node)}`);
 
   if (isHidden(node) || 
       (node === forElem)) {
@@ -10300,7 +10314,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$f = new DebugLogging('domCache', false);
+const debug$f = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -11514,25 +11528,22 @@ const controlRules$1 = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      const ai = de.ariaInfo;
       if (ce.isInputTypeImage) {
-        if (ai.isNameRequired || de.isLabelable) {
-          if (de.visibility.isVisibleToAT) {
-            if (de.accName.source !== 'none') {
-              if (de.accName.name.length) {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
-              }
+        if (de.visibility.isVisibleToAT) {
+          if (de.accName.source !== 'none') {
+            if (de.accName.name.length) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
             }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
           }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       }
     });
@@ -11554,73 +11565,40 @@ const controlRules$1 = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="radio"]'],
   validate            : function (dom_cache, rule_result) {
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_3]: ${info}`);
-
-
-    /*
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
-
-    var control_elements   = dom_cache.controls_cache.control_elements;
-    var control_elements_len = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        var type = control_elements[i].control_type;
-
-        if (type == CONTROL_TYPE.RADIO) {
-
-          if (cs.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-            if (ce.grouping_element) {
-              var ge = ce.grouping_element;
-              var dge = ge.dom_element;
-
-              if (ge.control_type === CONTROL_TYPE.FIELDSET) {
-                if (ge.legend_element &&
-                    ge.legend_element.computed_label &&
-                    ge.legend_element.computed_label.length) {
-                  rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [ge.legend_element.computed_label]);
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', []);
-                }
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.isInputTypeRadio) {
+        if (de.visibility.isVisibleToAT) {
+          const gce = ce.getGroupControlElement(); 
+          if (gce) {
+            const gde = gce.domElement;
+            if (gde.tagName === 'fieldset') {
+              debug$d.log(`[radio][${de.node.getAttribute('name')}]: ${de.accName.name} (${gde.accName.name})`);
+              if (gde.accName.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [gde.accName.name]);
               }
               else {
-                if (ge.computed_label &&
-                    ge.computed_label.length) {
-                  rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [dge.tag_name, ce.grouping_element.computed_label]);
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_3', [dge.tag_name]);
-                }
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);              
               }
             }
             else {
-              rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
+              if (gde.accName.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [gde.tagName, gde.role, gde.accName.name]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [gde.tagName, gde.role]);              
+              }
             }
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);              
           }
         }
-      } // end loop
-    }
-
-    */
-
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      }
+    });
   } // end validate function
 },
 
@@ -11634,78 +11612,44 @@ const controlRules$1 = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
-  rule_required       : true,
+  rule_required       : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['button'],
   validate            : function (dom_cache, rule_result) {
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_4]: ${info}`);
-
-    /*
-    var TEST_RESULT  = TEST_RESULT;
-    var VISIBILITY   = VISIBILITY;
-    var CONTROL_TYPE = CONTROL_TYPE;
-
-    var control_elements     = dom_cache.controls_cache.control_elements;
-    var control_elements_len = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-
-        if (ce.control_type === CONTROL_TYPE.BUTTON_ELEMENT) {
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-            if (ce.computed_label_for_comparison.length > 0) {
-              rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if ((de.tagName === 'button') || ce.isInputTypeButton) {
+        if (de.visibility.isVisibleToAT) {
+          if (ce.isInputTypeButton) {
+            if (de.accName.source === 'attribute') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
             }
             else {
-              rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
-            }
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);              
+            }            
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
-          }
-
-        }
-        else {
-
-          if (ce.control_type === CONTROL_TYPE.BUTTON_INPUT) {
-
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-              if (ce.value && (ce.value.length > 0)) {
-                rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
-              }
-              else {
-                rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', []);
-              }
+            if (de.accName.source === 'contents') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
             }
             else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', []);
-            }
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);              
+            }            
           }
         }
-
-      } // end loop
-    }
-    */
-
+        else {
+          if (ce.isInputTypeButton) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);            
+          }
+        }
+      }
+    });
   } // end validate function
 },
-
 
 /**
  * @object CONTROL_5
@@ -15447,10 +15391,10 @@ const controlRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: 'Radio button has grouping label "%1" from @fieldset/legend@ elements.',
-        ELEMENT_PASS_2: 'Radio button has grouping label "%2" from @%1[role=group]@ element.',
+        ELEMENT_PASS_2: 'Radio button has grouping label "%3x" from @%1[role=%2]@ element.',
         ELEMENT_FAIL_1: 'Add a @fieldset@ element with a @legend@ element to provide a grouping label for the radio buttons.',
         ELEMENT_FAIL_2: 'The @fieldset@ element has a missing or empty @legend@ element.',
-        ELEMENT_FAIL_3: 'The @%1[role=group]@ grouping element does not have an accessible name.',
+        ELEMENT_FAIL_3: 'The @%1[role=%2]@ grouping element does not have an accessible name.',
         ELEMENT_HIDDEN_1: 'Radio button was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -15465,8 +15409,12 @@ const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @fieldset@ and @legend@ elements',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
+          title: 'HTML Specification: The @fieldset@ element',
+          url:   'https://html.spec.whatwg.org/multipage/form-elements.html#the-fieldset-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/multipage/form-elements.html#the-legend-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @group@ role',
@@ -15487,7 +15435,6 @@ const controlRules = {
       ]
   },
   CONTROL_4: {
-      // TODO: Question: What if button only contains img elements with alt. text?
       ID:         'Control 4',
       DEFINITION: '@button@ elements must have text content.',
       SUMMARY:    '@button@s must have content',
@@ -15500,22 +15447,32 @@ const controlRules = {
         NOT_APPLICABLE:  'No @button@ elements on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: '@button@ element has text content.',
-        ELEMENT_FAIL_1: 'Add text content to the @button@ element.',
-        ELEMENT_HIDDEN_1: '@button@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1: '@input[type=button]@ element has text content in the @value@ attribute.',
+        ELEMENT_FAIL_1: 'Add text content to @value@ attribute of the @input[type=button]@ element.',
+        ELEMENT_HIDDEN_1: '@input[type=button]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_PASS_2: '@button@ element has text content.',
+        ELEMENT_FAIL_2: 'Add text content to the @button@ element.',
+        ELEMENT_HIDDEN_2: '@button@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'The text content of a @button@ element is used as its label, and ensures that the purpose of the button is spoken by screen readers when the button receives focus.'
+        'The text content of a @button@ element is used as its label, and ensures that the purpose of the button is spoken by screen readers when the button receives focus.',
+        'The @value@ attribute of a @input[type=button]@ element is used as its label, and ensures that the purpose of the button is spoken by screen readers when the button receives focus.',
+        'The use of rendered text allows operating system and browser settings to adjust size and color of the rendering of the label for people with visual impairments.'
       ],
       TECHNIQUES: [
-        'The accessible label of a @button@ element includes its text content along with the @alt@ attribute content of any image elements it contains.'
+        'The accessible label of a @button@ element includes its text content along with the @alt@ attribute content of any image elements it contains.',
+        'The accessible label of a @input[type=button]@ element is the @value@ attribute content.'
       ],
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @button@ elements',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-BUTTON'
+          title: 'HTML Specification: The @button@ element',
+          url:   'https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @input[type=button]@ element',
+          url:   'https://html.spec.whatwg.org/multipage/input.html#button-state-(type=button)'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
