@@ -1,6 +1,7 @@
 Version 2.0 Overview
 =============================
 * Completely rewrote evaluation library and rules to use modules and modern JS techniques
+* Improved I18N support 
 * Updated unit tests to tuse QUNIT 2.19
 * Generates content script for AInspector for Firefox
 * Updated evaluation library APIs
