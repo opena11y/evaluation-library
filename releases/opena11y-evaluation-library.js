@@ -162,12 +162,17 @@ class ControlElement {
     this.isGroup = domElement.role === 'group';
     this.isInputTypeImage  = this.isInputType(node, 'image');
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
-    this.isInputTypeButton = this.isInputType(node, 'button');
+    this.typeAttr = node.type ? node.type : '';
+    this.hasSVGContent = this.checkForSVGContent(node);
     this.childControlElements = [];
   }
 
   addChildControlElement (controlElement) {
     this.childControlElements.push(controlElement);
+  }
+
+  checkForSVGContent (node) {
+    return node.querySelector('svg') ? true : false;
   }
 
   isInputType (node, type) {
@@ -11608,7 +11613,7 @@ const controlRules$1 = [
  * @desc Button elements must have text content and input type button must have a value attribute with content
  */
 { rule_id             : 'CONTROL_4',
-  last_updated        : '2022-06-10',
+  last_updated        : '2022-07-10',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
@@ -11619,31 +11624,57 @@ const controlRules$1 = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      if ((de.tagName === 'button') || ce.isInputTypeButton) {
+      if (de.role === 'button') {
+        debug$d.log(`[hasSVGContent]: ${ce.hasSVGContent}`);
         if (de.visibility.isVisibleToAT) {
-          if (ce.isInputTypeButton) {
-            if (de.accName.source === 'attribute') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          if (de.tagName === 'input') {
+            if (de.accName.source === 'value') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.typeAttr]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);              
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.typeAttr]);              
             }            
           }
           else {
-            if (de.accName.source === 'contents') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            if (de.tagName === 'button') {
+              if (de.accName.source === 'contents') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+              }
+              else {
+                if (ce.hasSVGContent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+                }
+              }            
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);              
-            }            
+              if (de.accName.source === 'contents') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
+              }
+              else {
+                if (ce.hasSVGContent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName]);
+                }
+              }                          
+            }
           }
         }
         else {
-          if (ce.isInputTypeButton) {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          if (de.tagName === 'input') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [ce.typeAttr]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);            
+            if (de.tagName === 'button') {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.tagName]);            
+            }
           }
         }
       }
@@ -15436,32 +15467,39 @@ const controlRules = {
   },
   CONTROL_4: {
       ID:         'Control 4',
-      DEFINITION: '@button@ elements must have text content.',
+      DEFINITION: '@button@ elements must have visible text content.',
       SUMMARY:    '@button@s must have content',
       TARGET_RESOURCES_DESC: '@button@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add descriptive text content to the @button@ element.',
-        FAIL_P:   'Add descriptive text content to %N_F @button@ elements.',
+        FAIL_S:   'Use text content to define the visible label of the element with @role=button@.',
+        FAIL_P:   'Use text content to define the visible labels of the %N_F elements with @role=button@.',
+        MANUAL_CHECK_S: 'Verify the visual rendering of the SVG content of the element with @role=button@ adapts to operating system and browser color and size settings.',
+        MANUAL_CHECK_P: 'Verify the visual rendering of the SVG content of the %N_MC elements with @role=button@ adapt to operating system and browser color and size settings.',
         HIDDEN_S: 'The @button@ that is hidden was not evaluated.',
         HIDDEN_P: 'The %N_H @button@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No @button@ elements on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: '@input[type=button]@ element has text content in the @value@ attribute.',
-        ELEMENT_FAIL_1: 'Add text content to @value@ attribute of the @input[type=button]@ element.',
-        ELEMENT_HIDDEN_1: '@input[type=button]@ element was not evaluated because it is hidden from assistive technologies.',
-        ELEMENT_PASS_2: '@button@ element has text content.',
-        ELEMENT_FAIL_2: 'Add text content to the @button@ element.',
-        ELEMENT_HIDDEN_2: '@button@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1: 'The @input[type=%1]@ uses the @value@ attribute to define the graphically rendered label.',
+        ELEMENT_FAIL_1: 'Use the @value@ attribute of the @input[type=%1]@ element to define the graphically rendered label.',
+        ELEMENT_HIDDEN_1: '@input[type=%1]@ element was not evaluated because it is hidden from the graphical rendering.',
+        ELEMENT_PASS_2: '@button@ element uses the text content for the graphically rendered label.',
+        ELEMENT_FAIL_2: 'Use text content to define the graphically rendered label for the @button@ element.',
+        ELEMENT_MC_2:   'Verify the SVG content of the @button@ element adapts to operating system and browser color preference settings.',
+        ELEMENT_HIDDEN_2: '@button@ element was not evaluated because it is hidden from graphical rendering.',
+        ELEMENT_PASS_3: 'The @%1[role=button]@ element uses text content for the graphically rendered label.',
+        ELEMENT_FAIL_3: 'Use text content to define the graphically rendered label for the @%1[role=button]1@ element.',
+        ELEMENT_MC_3:   'Verify the SVG content of the @%1[role=button]@ element adapts to operating system and browser color preference settings.',
+        ELEMENT_HIDDEN_3: '@%1[role=button]@ element was not evaluated because it is hidden from graphical rendering.'
       },
       PURPOSES: [
-        'The text content of a @button@ element is used as its label, and ensures that the purpose of the button is spoken by screen readers when the button receives focus.',
-        'The @value@ attribute of a @input[type=button]@ element is used as its label, and ensures that the purpose of the button is spoken by screen readers when the button receives focus.',
-        'The use of rendered text allows operating system and browser settings to adjust size and color of the rendering of the label for people with visual impairments.'
+        'The use of rendered text supports people with visual impairments and learning disabilities to use operating system and browser settings to adjust size and color to make it esaier to perceive the purpose of the button.',
+        'The use of text content as the accessible name insures that the visible name and the accessible name are the same, reducing the chance the accessible name not describing the purpose of the button.'
       ],
       TECHNIQUES: [
-        'The accessible label of a @button@ element includes its text content along with the @alt@ attribute content of any image elements it contains.',
-        'The accessible label of a @input[type=button]@ element is the @value@ attribute content.'
+        'The accessible label of a @button@ element or an element with @role=button@ by default is its text content.',
+        'The accessible label of a @input[type=button]@ element is the @value@ attribute content.',
+        'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.'
       ],
       MANUAL_CHECKS: [
       ],

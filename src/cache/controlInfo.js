@@ -24,12 +24,17 @@ class ControlElement {
     this.isGroup = domElement.role === 'group';
     this.isInputTypeImage  = this.isInputType(node, 'image');
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
-    this.isInputTypeButton = this.isInputType(node, 'button');
+    this.typeAttr = node.type ? node.type : '';
+    this.hasSVGContent = this.checkForSVGContent(node);
     this.childControlElements = [];
   }
 
   addChildControlElement (controlElement) {
     this.childControlElements.push(controlElement);
+  }
+
+  checkForSVGContent (node) {
+    return node.querySelector('svg') ? true : false;
   }
 
   isInputType (node, type) {

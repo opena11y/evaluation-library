@@ -159,7 +159,7 @@ export const controlRules = [
  * @desc Button elements must have text content and input type button must have a value attribute with content
  */
 { rule_id             : 'CONTROL_4',
-  last_updated        : '2022-06-10',
+  last_updated        : '2022-07-10',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
@@ -170,31 +170,57 @@ export const controlRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      if ((de.tagName === 'button') || ce.isInputTypeButton) {
+      if (de.role === 'button') {
+        debug.log(`[hasSVGContent]: ${ce.hasSVGContent}`);
         if (de.visibility.isVisibleToAT) {
-          if (ce.isInputTypeButton) {
-            if (de.accName.source === 'attribute') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          if (de.tagName === 'input') {
+            if (de.accName.source === 'value') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.typeAttr]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);              
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.typeAttr]);              
             }            
           }
           else {
-            if (de.accName.source === 'contents') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            if (de.tagName === 'button') {
+              if (de.accName.source === 'contents') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+              }
+              else {
+                if (ce.hasSVGContent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+                }
+              }            
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);              
-            }            
+              if (de.accName.source === 'contents') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
+              }
+              else {
+                if (ce.hasSVGContent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName]);
+                }
+              }                          
+            }
           }
         }
         else {
-          if (ce.isInputTypeButton) {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          if (de.tagName === 'input') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [ce.typeAttr]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);            
+            if (de.tagName === 'button') {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.tagName]);            
+            }
           }
         }
       }
