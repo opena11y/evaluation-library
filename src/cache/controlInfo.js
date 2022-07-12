@@ -5,6 +5,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('ControlInfo', true);
+const controlTagNames = ['button', 'input', 'keygen', 'meter', 'output', 'progess', 'select', 'textarea'];
 
 /**
  * @class ControlElement
@@ -26,6 +27,10 @@ class ControlElement {
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
     this.typeAttr = node.type ? node.type : '';
     this.hasSVGContent = this.checkForSVGContent(node);
+    this.labelForAttr = this.getLabelForAttribute(node);
+    const refControlNode = this.getReferenceControl(this.labelForAttr);
+    this.isLabelForAttrValid = refControlNode ? this.isTagNameControl(refControlNode) : false;
+    this.labelforTargetUsesAriaLabeling = refControlNode ? this.usesARIALabeling(refControlNode) : false;
     this.childControlElements = [];
   }
 
@@ -40,6 +45,36 @@ class ControlElement {
   isInputType (node, type) {
     if (node.tagName.toLowerCase() === 'input') {
       return node.type === type;
+    }
+    return false;
+  }
+
+  getLabelForAttribute (node) {
+    const tagName = node.tagName.toLowerCase();
+    if ((tagName === 'label') && node.hasAttribute('for')) {
+      return node.getAttribute('for');
+    }
+    return '';
+  }
+
+  isTagNameControl (node) {
+    if (node) {
+      const tagName = node.tagName.toLowerCase();
+      return controlTagNames.includes(tagName);
+    }
+    return false;
+  }
+
+  usesARIALabeling (node) {
+    return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
+  }
+
+  getReferenceControl(id) {
+    if (id) {
+      const node = document.getElementById(id);
+      if (node) {
+        return node;
+      }
     }
     return false;
   }

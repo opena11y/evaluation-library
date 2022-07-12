@@ -5,6 +5,7 @@ import ControlInfo      from './controlInfo.js';
 import DOMElement       from './domElement.js';
 import DOMText          from './domText.js';
 import IFrameInfo       from './iframeInfo.js';
+import IdInfo           from './idInfo.js';
 import ImageInfo        from './imageInfo.js';
 import LinkInfo         from './linkInfo.js';
 import ListInfo         from './listInfo.js';
@@ -87,6 +88,7 @@ export default class DOMCache {
     parentInfo.document = startingDoc;
 
     this.controlInfo   = new ControlInfo();
+    this.idInfo        = new IdInfo();
     this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
@@ -112,6 +114,7 @@ export default class DOMCache {
 
       this.controlInfo.showControlInfo();
       this.iframeInfo.showIFrameInfo();
+      this.idInfo.showIdInfo();
       this.imageInfo.showImageInfo();
       this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
@@ -269,6 +272,7 @@ export default class DOMCache {
 
     newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
     newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
+    this.idInfo.update(documentIndex, domElement);
     this.linkInfo.update(domElement);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;button&lt;/code&gt;s must have content | OpenA11y Evaluation Library 2.0</title>
+        <title>&lt;code&gt;button&lt;/code&gt;s should have text content | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
@@ -46,14 +46,14 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active"><code>button</code>s must have content</li>
+          <li class="breadcrumb-item active"><code>button</code>s should have text content</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>button</code>s must have content</h1>
+            <h1 id="h1-title">Rule: <code>button</code>s should have text content</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -66,7 +66,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td><code>button</code> elements must have text content.</td>
+  <td><code>button</code> elements should have visible text content.</td>
 </tr>
 
                   
@@ -75,7 +75,9 @@
   <td>
     <ul>
       
-      <li>The text content of a <code>button</code> element is used as its label, and ensures that the purpose of the button is spoken by screen readers when the button receives focus.</li>
+      <li>The use of rendered text supports people with visual impairments and learning disabilities to use operating system and browser settings to adjust size and color to make it esaier to perceive the purpose of the button.</li>
+      
+      <li>The use of text content as the accessible name insures that the visible name and the accessible name are the same, reducing the chance the accessible name not describing the purpose of the button.</li>
       
     </ul>
   </td>
@@ -84,7 +86,7 @@
                   
 <tr>
   <th>Conformance</th>
-  <td>Required</td>
+  <td>Recommended</td>
 </tr>
 
                   
@@ -135,7 +137,13 @@
   <td>
     <ul>
       
-      <li>The accessible label of a <code>button</code> element includes its text content along with the <code>alt</code> attribute content of any image elements it contains.</li>
+      <li>The accessible label of a <code>button</code> element or an element with <code>role=button</code> by default is its text content.</li>
+      
+      <li>The accessible label of a <code>input[type=button]</code> element is the <code>value</code> attribute content.</li>
+      
+      <li>SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.</li>
+      
+      <li>Do not use <code>input[type=image]</code> elements, instead use other botton elements that support text content for the visual label.</li>
       
     </ul>
   </td>
@@ -147,7 +155,9 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/html4/interact/forms.html#edef-BUTTON">HTML 4.01 Specification: The <code>button</code> elements</a></li>
+      <li><a href="https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element">HTML Specification: The <code>button</code> element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/input.html#button-state-(type=button)">HTML Specification: The <code>input[type=button]</code> element</a></li>
       
       <li><a href="https://www.w3.org/WAI/tutorials/forms/">W3C WAI Accessibility Tutorials: Forms Concepts</a></li>
       

@@ -171,47 +171,51 @@ export const controlRules = [
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (de.role === 'button') {
-        debug.log(`[hasSVGContent]: ${ce.hasSVGContent}`);
         if (de.visibility.isVisibleToAT) {
-          if (de.tagName === 'input') {
-            if (de.accName.source === 'value') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.typeAttr]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.typeAttr]);              
-            }            
+          if (ce.isInputTypeImage) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [ce.typeAttr]);              
           }
-          else {
-            if (de.tagName === 'button') {
-              if (de.accName.source === 'contents') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            else {
+            if (de.tagName === 'input') {
+              if (de.accName.source === 'value') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.typeAttr]);
               }
               else {
-                if (ce.hasSVGContent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
-                }
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.typeAttr]);              
               }            
             }
             else {
-              if (de.accName.source === 'contents') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
-              }
-              else {
-                if (ce.hasSVGContent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              if (de.tagName === 'button') {
+                if (de.accName.source === 'contents') {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
                 }
                 else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName]);
+                  if (ce.hasSVGContent) {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+                  }
+                }            
+              }
+              else {
+                if (de.accName.source === 'contents') {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
                 }
-              }                          
+                else {
+                  if (ce.hasSVGContent) {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName]);
+                  }
+                }                          
+              }
             }
           }
         }
         else {
-          if (de.tagName === 'input') {
+          if (de.tagName === 'input' || ce.isInputTypeImage) {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [ce.typeAttr]);
           }
           else {
@@ -245,53 +249,22 @@ export const controlRules = [
   wcag_related_ids    : ['3.3.2', '1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="radio"]', 'input[type="text"]', 'input[type="password"]', 'input[type="file"]', 'select', 'textarea'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_5]: ${info}`);
-
-    /*
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
-    var ID          = ID;
-
-    var control_elements      = dom_cache.controls_cache.control_elements;
-    var control_elements_len  = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        switch (de.id_unique) {
-        case ID.NOT_UNIQUE:
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [de.tag_name, de.id]);
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (de.id) {
+        const docIndex = de.parentInfo.documentIndex;
+        if (dom_cache.idInfo.idCountsByDoc[docIndex][de.id] > 1) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, de.id]);
           }
           else {
-            rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [de.tag_name, de.id]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName, de.id]);
           }
-          break;
-
-        case ID.UNIQUE:
-          rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [de.id]);
-          break;
-
-        default:
-          break;
-        } // end switch
-
-     } // end loop
-   }
-    */
-
+        } else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.id]);
+        }
+      }
+    });
   } // end validate function
 },
 
@@ -310,49 +283,26 @@ export const controlRules = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_6]: ${info}`);
-
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var label_elements      = dom_cache.controls_cache.label_elements;
-   var label_elements_len  = label_elements.length;
-
-   // Check to see if valid cache reference
-   if (label_elements && label_elements_len) {
-
-     for (var i = 0; i < label_elements_len; i++) {
-       var le = label_elements[i];
-       var de = le.dom_element;
-
-       if (le.for_id && le.for_id.length) {
-
-         if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-           if (le.unused_label) {
-              rule_result.addResult(TEST_RESULT.FAIL, le, 'ELEMENT_FAIL_1', [le.for_id]);
-           }
-           else {
-              if (le.duplicate_label) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [le.for_id]);
-              else rule_result.addResult(TEST_RESULT.PASS, le, 'ELEMENT_PASS_1', [le.for_id]);
-           }
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', []);
-         }
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.labelForAttr) {
+        if (de.visibility.isVisibleToAT) {
+          if (ce.isLabelForAttrValid) {
+            if (ce.labelforTargetUsesAriaLabeling) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [ce.labelForAttr]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.labelForAttr]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.labelForAttr]);
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
       }
-     } // end loop
-   }
-
-    */
-
+    });
   } // end validate function
 },
 

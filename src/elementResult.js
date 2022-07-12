@@ -61,8 +61,9 @@ export default class ElementResult extends BaseResult {
 
   getResultIdentifier () {
     const de = this.domElement;
-    const identifier =  de.node.hasAttribute('type') ?
-                        `${de.tagName}[${de.getAttribute('type')}]` :
+    const typeAttr = de.node.getAttribute('type');
+    const identifier =  typeAttr ?
+                        `${de.tagName}[type=${typeAttr}]` :
                         de.tagName;
     return identifier;
   }
@@ -76,7 +77,19 @@ export default class ElementResult extends BaseResult {
    */
 
   getTagName () {
-    return this.domElement.tagName;
+    return this.getResultIdentifier();
+  }
+
+  /**
+   * @method getHasRole
+   *
+   * @desc True if the element has a role attribute, otherwise false
+   *
+   * @return {Boolean} see description
+   */
+
+  getHasRole () {
+    return this.domElement.hasRole;
   }
 
   /**

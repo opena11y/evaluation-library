@@ -142,7 +142,8 @@ class DebugLogging {
 /* controlInfo.js */
 
 /* Constants */
-const debug$s = new DebugLogging('ControlInfo', true);
+const debug$t = new DebugLogging('ControlInfo', true);
+const controlTagNames = ['button', 'input', 'keygen', 'meter', 'output', 'progess', 'select', 'textarea'];
 
 /**
  * @class ControlElement
@@ -164,6 +165,10 @@ class ControlElement {
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
     this.typeAttr = node.type ? node.type : '';
     this.hasSVGContent = this.checkForSVGContent(node);
+    this.labelForAttr = this.getLabelForAttribute(node);
+    const refControlNode = this.getReferenceControl(this.labelForAttr);
+    this.isLabelForAttrValid = refControlNode ? this.isTagNameControl(refControlNode) : false;
+    this.labelforTargetUsesAriaLabeling = refControlNode ? this.usesARIALabeling(refControlNode) : false;
     this.childControlElements = [];
   }
 
@@ -178,6 +183,36 @@ class ControlElement {
   isInputType (node, type) {
     if (node.tagName.toLowerCase() === 'input') {
       return node.type === type;
+    }
+    return false;
+  }
+
+  getLabelForAttribute (node) {
+    const tagName = node.tagName.toLowerCase();
+    if ((tagName === 'label') && node.hasAttribute('for')) {
+      return node.getAttribute('for');
+    }
+    return '';
+  }
+
+  isTagNameControl (node) {
+    if (node) {
+      const tagName = node.tagName.toLowerCase();
+      return controlTagNames.includes(tagName);
+    }
+    return false;
+  }
+
+  usesARIALabeling (node) {
+    return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
+  }
+
+  getReferenceControl(id) {
+    if (id) {
+      const node = document.getElementById(id);
+      if (node) {
+        return node;
+      }
     }
     return false;
   }
@@ -198,7 +233,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$s.domElement(ce.domElement, prefix);
+      debug$t.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -301,15 +336,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$s.flag) {
-      debug$s.log('== Control Tree ==', 1);
+    if (debug$t.flag) {
+      debug$t.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$s.domElement(ce.domElement);
+        debug$t.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$s.log('== Forms ==', 1);
+      debug$t.log('== Forms ==', 1);
       this.allFormControlElements.forEach( ce => {
-        debug$s.domElement(ce.domElement);
+        debug$t.domElement(ce.domElement);
       });
     }
   }
@@ -318,7 +353,7 @@ class ControlInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$r = new DebugLogging('colorContrast', false);
+const debug$s = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -338,9 +373,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$r.flag) {
-      debug$r.separator();
-      debug$r.tag(elementNode);
+    if (debug$s.flag) {
+      debug$s.separator();
+      debug$s.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -364,11 +399,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$r.flag) {
-      debug$r.log(`[                    opacity]: ${this.opacity}`);
-      debug$r.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$r.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$r.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$s.flag) {
+      debug$s.log(`[                    opacity]: ${this.opacity}`);
+      debug$s.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$s.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$s.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -691,7 +726,7 @@ class ColorContrast {
 /* hasEvents.js */
 
 /* Constants */
-const debug$q = new DebugLogging('hasEvents', false);
+const debug$r = new DebugLogging('hasEvents', false);
 
 /**
  * @class Events
@@ -704,7 +739,7 @@ const debug$q = new DebugLogging('hasEvents', false);
 class HasEvents {
   constructor (elementNode) {
     this.onChange = elementNode.hasAttribute('onchange');
-    if (debug$q.flag) {
+    if (debug$r.flag) {
       console.log(`[hasEvents]: ${this.onChange}`);
     }
   }
@@ -713,7 +748,7 @@ class HasEvents {
 /* visibility.js */
 
 /* Constants */
-const debug$p = new DebugLogging('visibility', false);
+const debug$q = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -761,17 +796,17 @@ class Visibility {
         this.isVisibleToAT = false;
     }
 
-    if (debug$p.flag) {
-      debug$p.separator();
-      debug$p.tag(elementNode);
-      debug$p.log('[          isHidden]: ' + this.isHidden);
-      debug$p.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$p.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$p.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$p.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$p.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$p.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$p.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$q.flag) {
+      debug$q.separator();
+      debug$q.tag(elementNode);
+      debug$q.log('[          isHidden]: ' + this.isHidden);
+      debug$q.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$q.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$q.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$q.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$q.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$q.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$q.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -5893,7 +5928,7 @@ function accNamesTheSame (ref1, ref2) {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$o = new DebugLogging('AriaInfo', false);
+const debug$p = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6042,16 +6077,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$o.flag) {
-      node.attributes.length && debug$o.log(`${node.outerHTML}`, 1);
-      debug$o.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$o.log(`[         isWidget]: ${this.isWidget}`);
-      debug$o.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$o.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$o.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$o.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$o.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$o.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$p.flag) {
+      node.attributes.length && debug$p.log(`${node.outerHTML}`, 1);
+      debug$p.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$p.log(`[         isWidget]: ${this.isWidget}`);
+      debug$p.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$p.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$p.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$p.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$p.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$p.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7729,7 +7764,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$n = new DebugLogging('ariaInHtml', false);
+const debug$o = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -7921,11 +7956,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$n.flag) {
+  if (debug$o.flag) {
     if (tagName === 'h2') {
-      debug$n.tag(node);
+      debug$o.tag(node);
     }
-    debug$n.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$o.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -9129,7 +9164,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$m = new DebugLogging('DOMElement', false);
+const debug$n = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -9392,12 +9427,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$m.flag) {
+    if (debug$n.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$m.domText(domItem, prefix);
+          debug$n.domText(domItem, prefix);
         } else {
-          debug$m.domElement(domItem, prefix);
+          debug$n.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9490,7 +9525,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$l = new DebugLogging('domText', false);
+const debug$m = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -9509,8 +9544,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$l.flag) {
-      debug$l.log(`[text]: ${this.text}`);
+    if (debug$m.flag) {
+      debug$m.log(`[text]: ${this.text}`);
     }
   }
 
@@ -9561,7 +9596,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('iframeInfo', false);
+const debug$l = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -9579,9 +9614,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$k.flag) {
-      debug$k.log(`[          src]: ${this.src}`);
-      debug$k.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$l.flag) {
+      debug$l.log(`[          src]: ${this.src}`);
+      debug$l.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -9617,10 +9652,65 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$k.flag) {
-      debug$k.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$l.flag) {
+      debug$l.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
+      });
+    }
+  }
+}
+
+/* linkInfo.js */
+
+/* Constants */
+const debug$k = new DebugLogging('idInfo', false);
+
+/**
+ * @class idInfo
+ *
+ * @desc Collects information on the ids in a web page
+ */
+
+class IdInfo {
+  constructor () {
+    this.idCountsByDoc = [];
+  }
+
+  /**
+   * @method update
+   *
+   * @desc Checks to see if the domElement has a role of "link"
+   *
+   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   */
+
+  update (documentIndex, domElement) {
+    const id = domElement.node.id;
+    if (id) {
+      if (!this.idCountsByDoc[documentIndex]) {
+        this.idCountsByDoc[documentIndex] = {};
+      }
+      if (this.idCountsByDoc[documentIndex][id]) {
+        this.idCountsByDoc[documentIndex][id] += 1;       
+      }
+      else {
+        this.idCountsByDoc[documentIndex][id] = 1;       
+      }
+    }
+  }
+
+  /**
+   * @method showIdInfo
+   *
+   * @desc showIdInfo is used for debugging the IdInfo object
+   */
+
+  showIdInfo () {
+    if (debug$k.flag) {
+      debug$k.log('== All Links ==', 1);
+      this.idCounts.for( id => {
+        debug$k.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10394,6 +10484,7 @@ class DOMCache {
     parentInfo.document = startingDoc;
 
     this.controlInfo   = new ControlInfo();
+    this.idInfo        = new IdInfo();
     this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
@@ -10419,6 +10510,7 @@ class DOMCache {
 
       this.controlInfo.showControlInfo();
       this.iframeInfo.showIFrameInfo();
+      this.idInfo.showIdInfo();
       this.imageInfo.showImageInfo();
       this.linkInfo.showLinkInfo();
       this.listInfo.showListInfo();
@@ -10573,6 +10665,7 @@ class DOMCache {
 
     newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
     newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
+    this.idInfo.update(documentIndex, domElement);
     this.linkInfo.update(domElement);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
@@ -11625,47 +11718,51 @@ const controlRules$1 = [
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (de.role === 'button') {
-        debug$d.log(`[hasSVGContent]: ${ce.hasSVGContent}`);
         if (de.visibility.isVisibleToAT) {
-          if (de.tagName === 'input') {
-            if (de.accName.source === 'value') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.typeAttr]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.typeAttr]);              
-            }            
+          if (ce.isInputTypeImage) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [ce.typeAttr]);              
           }
-          else {
-            if (de.tagName === 'button') {
-              if (de.accName.source === 'contents') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            else {
+            if (de.tagName === 'input') {
+              if (de.accName.source === 'value') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.typeAttr]);
               }
               else {
-                if (ce.hasSVGContent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
-                }
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.typeAttr]);              
               }            
             }
             else {
-              if (de.accName.source === 'contents') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
-              }
-              else {
-                if (ce.hasSVGContent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              if (de.tagName === 'button') {
+                if (de.accName.source === 'contents') {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
                 }
                 else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName]);
+                  if (ce.hasSVGContent) {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+                  }
+                }            
+              }
+              else {
+                if (de.accName.source === 'contents') {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
                 }
-              }                          
+                else {
+                  if (ce.hasSVGContent) {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName]);
+                  }
+                }                          
+              }
             }
           }
         }
         else {
-          if (de.tagName === 'input') {
+          if (de.tagName === 'input' || ce.isInputTypeImage) {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [ce.typeAttr]);
           }
           else {
@@ -11699,53 +11796,22 @@ const controlRules$1 = [
   wcag_related_ids    : ['3.3.2', '1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="radio"]', 'input[type="text"]', 'input[type="password"]', 'input[type="file"]', 'select', 'textarea'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_5]: ${info}`);
-
-    /*
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
-    var ID          = ID;
-
-    var control_elements      = dom_cache.controls_cache.control_elements;
-    var control_elements_len  = control_elements.length;
-
-    // Check to see if valid cache reference
-    if (control_elements && control_elements_len) {
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        switch (de.id_unique) {
-        case ID.NOT_UNIQUE:
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [de.tag_name, de.id]);
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (de.id) {
+        const docIndex = de.parentInfo.documentIndex;
+        if (dom_cache.idInfo.idCountsByDoc[docIndex][de.id] > 1) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, de.id]);
           }
           else {
-            rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [de.tag_name, de.id]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName, de.id]);
           }
-          break;
-
-        case ID.UNIQUE:
-          rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [de.id]);
-          break;
-
-        default:
-          break;
-        } // end switch
-
-     } // end loop
-   }
-    */
-
+        } else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.id]);
+        }
+      }
+    });
   } // end validate function
 },
 
@@ -11764,49 +11830,26 @@ const controlRules$1 = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_6]: ${info}`);
-
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var label_elements      = dom_cache.controls_cache.label_elements;
-   var label_elements_len  = label_elements.length;
-
-   // Check to see if valid cache reference
-   if (label_elements && label_elements_len) {
-
-     for (var i = 0; i < label_elements_len; i++) {
-       var le = label_elements[i];
-       var de = le.dom_element;
-
-       if (le.for_id && le.for_id.length) {
-
-         if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-           if (le.unused_label) {
-              rule_result.addResult(TEST_RESULT.FAIL, le, 'ELEMENT_FAIL_1', [le.for_id]);
-           }
-           else {
-              if (le.duplicate_label) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [le.for_id]);
-              else rule_result.addResult(TEST_RESULT.PASS, le, 'ELEMENT_PASS_1', [le.for_id]);
-           }
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', []);
-         }
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.labelForAttr) {
+        if (de.visibility.isVisibleToAT) {
+          if (ce.isLabelForAttrValid) {
+            if (ce.labelforTargetUsesAriaLabeling) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [ce.labelForAttr]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [ce.labelForAttr]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.labelForAttr]);
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
       }
-     } // end loop
-   }
-
-    */
-
+    });
   } // end validate function
 },
 
@@ -15467,8 +15510,8 @@ const controlRules = {
   },
   CONTROL_4: {
       ID:         'Control 4',
-      DEFINITION: '@button@ elements must have visible text content.',
-      SUMMARY:    '@button@s must have content',
+      DEFINITION: '@button@ elements should have visible text content.',
+      SUMMARY:    '@button@s should have text content',
       TARGET_RESOURCES_DESC: '@button@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Use text content to define the visible label of the element with @role=button@.',
@@ -15488,7 +15531,8 @@ const controlRules = {
         ELEMENT_MC_2:   'Verify the SVG content of the @button@ element adapts to operating system and browser color preference settings.',
         ELEMENT_HIDDEN_2: '@button@ element was not evaluated because it is hidden from graphical rendering.',
         ELEMENT_PASS_3: 'The @%1[role=button]@ element uses text content for the graphically rendered label.',
-        ELEMENT_FAIL_3: 'Use text content to define the graphically rendered label for the @%1[role=button]1@ element.',
+        ELEMENT_FAIL_3: 'Use text content to define the graphically rendered label for the @%1[role=button]@ element.',
+        ELEMENT_FAIL_4: 'Change the @input[type=image]@ to a button that can use text content for the visual label.',
         ELEMENT_MC_3:   'Verify the SVG content of the @%1[role=button]@ element adapts to operating system and browser color preference settings.',
         ELEMENT_HIDDEN_3: '@%1[role=button]@ element was not evaluated because it is hidden from graphical rendering.'
       },
@@ -15499,7 +15543,8 @@ const controlRules = {
       TECHNIQUES: [
         'The accessible label of a @button@ element or an element with @role=button@ by default is its text content.',
         'The accessible label of a @input[type=button]@ element is the @value@ attribute content.',
-        'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.'
+        'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.',
+        'Do not use @input[type=image]@ elements, instead use other botton elements that support text content for the visual label.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -15526,15 +15571,12 @@ const controlRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Update elements with @id@ attributes so that each attribute value is unique.',
         FAIL_P:   'Update elements with @id@ attributes so that each attribute value is unique.',
-        HIDDEN_S: 'The element with an @id@ attribute that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H elements with @id@ attributes that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No elements or only one element with an @id@ attribute on this page.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: '\'%1\' @id@ attribute value is unique.',
-        ELEMENT_FAIL_1: '@%1@ element shares the \'%2\' @id@ value with another element on the page.',
-        ELEMENT_FAIL_2: 'The hidden @%1@ element shares the \'%2\' @id@ value with another element on the page.',
-        ELEMENT_HIDDEN_1: '%1 element with @id@ attribute was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1: '@%1@ element shares the \'%2\' @id@ value with another element on the page, update the elements to make the @id@s unique.',
+        ELEMENT_FAIL_2: 'The hidden @%1@ element shares the \'%2\' @id@ value with another element on the page, update the elements to make the @id@s unique.',
       },
       PURPOSES: [
         '@id@ attribute values on form control elements can be used as references by @label@ elements. When @id@ attribute values on the page are not unique, form controls may be incorrectly labelled.',
@@ -15547,8 +15589,8 @@ const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: @id@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-id'
+          title: 'HTML Specification: @id@ attribute',
+          url:   'https://dom.spec.whatwg.org/#concept-id'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -19725,8 +19767,9 @@ class ElementResult extends BaseResult {
 
   getResultIdentifier () {
     const de = this.domElement;
-    const identifier =  de.node.hasAttribute('type') ?
-                        `${de.tagName}[${de.getAttribute('type')}]` :
+    const typeAttr = de.node.getAttribute('type');
+    const identifier =  typeAttr ?
+                        `${de.tagName}[type=${typeAttr}]` :
                         de.tagName;
     return identifier;
   }
@@ -19740,7 +19783,19 @@ class ElementResult extends BaseResult {
    */
 
   getTagName () {
-    return this.domElement.tagName;
+    return this.getResultIdentifier();
+  }
+
+  /**
+   * @method getHasRole
+   *
+   * @desc True if the element has a role attribute, otherwise false
+   *
+   * @return {Boolean} see description
+   */
+
+  getHasRole () {
+    return this.domElement.hasRole;
   }
 
   /**

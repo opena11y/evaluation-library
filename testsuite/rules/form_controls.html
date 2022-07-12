@@ -15,24 +15,20 @@
     <script type="module">
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', (event) => {
+/*
         executeTest('CONTROL_1: Forms must have labels',                     'ID_IFRAME_1',  'CONTROL_1');
         executeTest('CONTROL_2: input[type=image] must have alt or a title', 'ID_IFRAME_2',  'CONTROL_2');
         executeTest('CONTROL_3: Radio Buttons must use fieldset/legend',     'ID_IFRAME_3A', 'CONTROL_3');
         executeTest('CONTROL_3: Radio Buttons must use group label',         'ID_IFRAME_3B', 'CONTROL_3');
-        executeTest('CONTROL_4: Buttons must have text content',           'ID_IFRAME_4',  'CONTROL_4');
+        executeTest('CONTROL_4: Buttons must have text content',             'ID_IFRAME_4',  'CONTROL_4');
+        executeTest('CONTROL_5: Unique Ids',                                 'ID_IFRAME_5',  'CONTROL_5');
+*/
+        executeTest('CONTROL_6: Valid Label references',                     'ID_IFRAME_6',  'CONTROL_6');
       });
     </script>
       
 
 <!--
-
-      test( "CONTROL_5: Unique Ids", function() {
-        executeTest('ID_IFRAME_5', 'CONTROL_5');
-      });
-      
-      test( "CONTROL_6: Label references", function() {
-        executeTest('ID_IFRAME_6', 'CONTROL_6');
-      });
       
       test( "CONTROL_7: Labels and legends must have text", function() {
         executeTest('ID_IFRAME_7', 'CONTROL_7');

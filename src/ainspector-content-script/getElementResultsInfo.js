@@ -86,6 +86,7 @@ function getElementResultInfo(ruleResult) {
 
     const item = {
       'tagName'          : elementResult.getTagName(),
+      'hasRole'          : elementResult.getHasRole(),
       'role'             : elementResult.getRole(),
       'position'         : elementResult.getOrdinalPosition(),
       'result'           : elementResult.getResultValueNLS(),

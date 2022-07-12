@@ -186,8 +186,8 @@ export const controlRules = {
   },
   CONTROL_4: {
       ID:         'Control 4',
-      DEFINITION: '@button@ elements must have visible text content.',
-      SUMMARY:    '@button@s must have content',
+      DEFINITION: '@button@ elements should have visible text content.',
+      SUMMARY:    '@button@s should have text content',
       TARGET_RESOURCES_DESC: '@button@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Use text content to define the visible label of the element with @role=button@.',
@@ -208,6 +208,7 @@ export const controlRules = {
         ELEMENT_HIDDEN_2: '@button@ element was not evaluated because it is hidden from graphical rendering.',
         ELEMENT_PASS_3: 'The @%1[role=button]@ element uses text content for the graphically rendered label.',
         ELEMENT_FAIL_3: 'Use text content to define the graphically rendered label for the @%1[role=button]@ element.',
+        ELEMENT_FAIL_4: 'Change the @input[type=image]@ to a button that can use text content for the visual label.',
         ELEMENT_MC_3:   'Verify the SVG content of the @%1[role=button]@ element adapts to operating system and browser color preference settings.',
         ELEMENT_HIDDEN_3: '@%1[role=button]@ element was not evaluated because it is hidden from graphical rendering.'
       },
@@ -218,7 +219,8 @@ export const controlRules = {
       TECHNIQUES: [
         'The accessible label of a @button@ element or an element with @role=button@ by default is its text content.',
         'The accessible label of a @input[type=button]@ element is the @value@ attribute content.',
-        'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.'
+        'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.',
+        'Do not use @input[type=image]@ elements, instead use other botton elements that support text content for the visual label.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -245,15 +247,12 @@ export const controlRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Update elements with @id@ attributes so that each attribute value is unique.',
         FAIL_P:   'Update elements with @id@ attributes so that each attribute value is unique.',
-        HIDDEN_S: 'The element with an @id@ attribute that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H elements with @id@ attributes that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No elements or only one element with an @id@ attribute on this page.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: '\'%1\' @id@ attribute value is unique.',
-        ELEMENT_FAIL_1: '@%1@ element shares the \'%2\' @id@ value with another element on the page.',
-        ELEMENT_FAIL_2: 'The hidden @%1@ element shares the \'%2\' @id@ value with another element on the page.',
-        ELEMENT_HIDDEN_1: '%1 element with @id@ attribute was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1: '@%1@ element shares the \'%2\' @id@ value with another element on the page, update the elements to make the @id@s unique.',
+        ELEMENT_FAIL_2: 'The hidden @%1@ element shares the \'%2\' @id@ value with another element on the page, update the elements to make the @id@s unique.',
       },
       PURPOSES: [
         '@id@ attribute values on form control elements can be used as references by @label@ elements. When @id@ attribute values on the page are not unique, form controls may be incorrectly labelled.',
@@ -266,8 +265,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: @id@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-id'
+          title: 'HTML Specification: @id@ attribute',
+          url:   'https://dom.spec.whatwg.org/#concept-id'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
