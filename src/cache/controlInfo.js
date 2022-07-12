@@ -1,11 +1,11 @@
 /* controlInfo.js */
 
 /* Imports */
+import {isLabelable, usesARIALabeling} from '../utils.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('ControlInfo', true);
-const controlTagNames = ['button', 'input', 'keygen', 'meter', 'output', 'progess', 'select', 'textarea'];
 
 /**
  * @class ControlElement
@@ -18,6 +18,7 @@ const controlTagNames = ['button', 'input', 'keygen', 'meter', 'output', 'proges
 class ControlElement {
   constructor (domElement, parentControlElement) {
 
+    const doc = domElement.parentInfo.document;
     const node = domElement.node;
 
     this.parentControlElement = parentControlElement;
@@ -28,9 +29,9 @@ class ControlElement {
     this.typeAttr = node.type ? node.type : '';
     this.hasSVGContent = this.checkForSVGContent(node);
     this.labelForAttr = this.getLabelForAttribute(node);
-    const refControlNode = this.getReferenceControl(this.labelForAttr);
-    this.isLabelForAttrValid = refControlNode ? this.isTagNameControl(refControlNode) : false;
-    this.labelforTargetUsesAriaLabeling = refControlNode ? this.usesARIALabeling(refControlNode) : false;
+    const refControlNode = this.getReferenceControl(doc, this.labelForAttr);
+    this.isLabelForAttrValid = refControlNode ? isLabelable(refControlNode) : false;
+    this.labelforTargetUsesAriaLabeling = refControlNode ? usesARIALabeling(refControlNode) : false;
     this.childControlElements = [];
   }
 
@@ -57,21 +58,9 @@ class ControlElement {
     return '';
   }
 
-  isTagNameControl (node) {
-    if (node) {
-      const tagName = node.tagName.toLowerCase();
-      return controlTagNames.includes(tagName);
-    }
-    return false;
-  }
-
-  usesARIALabeling (node) {
-    return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
-  }
-
-  getReferenceControl(id) {
-    if (id) {
-      const node = document.getElementById(id);
+  getReferenceControl(doc, id) {
+    if (doc && id) {
+      const node = doc.getElementById(id);
       if (node) {
         return node;
       }

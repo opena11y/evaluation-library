@@ -11,7 +11,8 @@ export {
   hasCheckedState,
   isLabelable,
   normalize,
-  replaceAll
+  replaceAll,
+  usesARIALabeling
 }
 /* constants */
 const labelableElements = ['input', 'meter', 'option', 'output', 'progress', 'select', 'textarea'];
@@ -236,6 +237,21 @@ function cleanForUTF8 (str) {
 
 function accNamesTheSame (ref1, ref2) {
   return ref1.name.toLowerCase() === ref2.name.toLowerCase();
+}
+
+/**
+ * @function usesARIALabeling
+ *
+ * @desc Returns true if the element has an aria-label or aria-labeledby 
+ *       attributes
+ *
+ * @param  {Object}  node - DOM node
+ *
+ * @return {Boolean} see @desc
+ */
+
+function  usesARIALabeling (node) {
+  return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
 }
 
 
