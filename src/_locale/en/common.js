@@ -3,7 +3,7 @@
 export const common = {
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
   baseResult: ['undefined','P','H','MC','W','V'],
-  baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warining','Violation'],
+  baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
   resultType: ['base','element','page','website'],
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
   ruleScopes: ['undefined', 'element', 'page', 'website'],

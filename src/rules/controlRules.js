@@ -171,7 +171,7 @@ export const controlRules = [
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (de.role === 'button') {
-        if (de.visibility.isVisibleToAT) {
+        if (de.visibility.isVisibleOnScreen) {
           if (ce.isInputTypeImage) {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [ce.typeAttr]);              
           }
@@ -186,7 +186,7 @@ export const controlRules = [
             }
             else {
               if (de.tagName === 'button') {
-                if (de.accName.source === 'contents') {
+                if (ce.hasTextContent) {
                   rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
                 }
                 else {
@@ -199,7 +199,7 @@ export const controlRules = [
                 }            
               }
               else {
-                if (de.accName.source === 'contents') {
+                if (ce.hasTextContent) {
                   rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.tagName]);
                 }
                 else {
@@ -274,7 +274,7 @@ export const controlRules = [
  * @desc Label element with a for attribute reference does not reference a form control
  */
 { rule_id             : 'CONTROL_6',
-  last_updated        : '2022-06-10',
+  last_updated        : '2022-07-11',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
@@ -285,7 +285,7 @@ export const controlRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      if (ce.labelForAttr) {
+      if (ce.isLabel && ce.labelForAttr) {
         if (de.visibility.isVisibleToAT) {
           if (ce.isLabelForAttrValid) {
             if (ce.labelforTargetUsesAriaLabeling) {
@@ -309,7 +309,7 @@ export const controlRules = [
 /**
  * @object CONTROL_7
  *
- * @desc Label or legend element must contain content
+ * @desc Label or legend element must contain text content
  */
 
 { rule_id             : 'CONTROL_7',
@@ -322,50 +322,28 @@ export const controlRules = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label', 'legend'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_7]: ${info}`);
-
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var label_elements      = dom_cache.controls_cache.label_elements;
-   var label_elements_len  = label_elements.length;
-
-   // Check to see if valid cache reference
-   if (label_elements && label_elements_len) {
-
-     for (var i = 0; i < label_elements_len; i++) {
-       var le = label_elements[i];
-       var de = le.dom_element;
-       var cs = de.computed_style;
-
-       if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-         if (le.computed_label_for_comparison.length === 0) {
-           rule_result.addResult(TEST_RESULT.FAIL, le, 'ELEMENT_FAIL_1', [le.tag_name]);
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.PASS, le, 'ELEMENT_PASS_1', [le.tag_name]);
-         }
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [le.tag_name]);
-       }
-     } // end loop
-
-   }
-    */
-
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.isLabel || ce.isLegend) {
+        if (de.visibility.isVisibleOnScreen) {
+          if (ce.hasTextContent) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+          }
+          else {
+            if (ce.hasSVGContent) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+            }
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });  
   } // end validate function
 },
-
 
 /**
  * @object CONTROL 8

@@ -49,7 +49,7 @@ export default class Visibility {
     }
 
     if (this.isAriaHidden) {
-        this.isVisibleToAT = false;
+      this.isVisibleToAT = false;
     }
 
     if (debug.flag) {

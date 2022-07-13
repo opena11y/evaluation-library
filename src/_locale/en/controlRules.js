@@ -217,8 +217,8 @@ export const controlRules = {
         'The use of text content as the accessible name insures that the visible name and the accessible name are the same, reducing the chance the accessible name not describing the purpose of the button.'
       ],
       TECHNIQUES: [
-        'The accessible label of a @button@ element or an element with @role=button@ by default is its text content.',
-        'The accessible label of a @input[type=button]@ element is the @value@ attribute content.',
+        'The accessible name of a @button@ element or an element with @role=button@ by default is its text content.',
+        'The accessible name of a @input[type=button]@ element is the @value@ attribute content.',
         'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.',
         'Do not use @input[type=image]@ elements, instead use other botton elements that support text content for the visual label.'
       ],
@@ -331,29 +331,46 @@ export const controlRules = {
       SUMMARY:    '@label@ must have content',
       TARGET_RESOURCES_DESC: '@label@ and @legend@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add text content to the @label@ or @legend@ element that describes the purpose of the form control or group of form controls, or remove the element if it is not needed for labeling.',
-        FAIL_P:   'Add text content to the %N_F @label@ or @legend@ elements that describes the purpose of the form control or group of form controls, or remove the element(s) if they are not needed for labeling.',
-        HIDDEN_S: 'One @label@ or @legend@ element that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H @label@ or @legend@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE: 'No @label@ or @legend@ elements on this page.'
+        FAIL_S:   'Use text content in @label@ or @legend@ element for the visual rendering to adapt to operating system and browser color and size settings.',
+        FAIL_P:   'Use text content in %N_F @label@ or @legend@ elements for the visual rendering to adapt to operating system and browser color and size settings.',
+        MANUAL_CHECK_S: 'Verify the visual rendering of the SVG content of the @label@ or @legend@ element adapts to operating system and browser color and size settings.',
+        MANUAL_CHECK_P: 'Verify the visual rendering of the SVG content of the %N_MC @label@ or @legend@ elements adapt to operating system and browser color and size settings.',
+        HIDDEN_S: 'The @label@ or @legend@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @label@ or @legend@  elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @label@ or @legend@  elements on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: '@%1@ has text content.',
-        ELEMENT_FAIL_1: 'Add text content to the @%1@ element, or if it is unneeded, remove it from the page.',
-        ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1: '@%1@ element uses the text content for the graphically rendered label.',
+        ELEMENT_FAIL_1: 'Use text content to define the graphically rendered content for the @%1@ element.',
+        ELEMENT_MC_1:   'Verify the SVG content of the @%1@ element adapts to operating system and browser color preference settings.',
+        ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from graphical rendering.',
       },
       PURPOSES: [
-        'A @label@ or @legend@ elements is only useful for accessibility when it contains content that describes the purpose of the associated form control(s).'
+        'The use of rendered text supports people with visual impairments and learning disabilities to use operating system and browser settings to adjust size and color to make it esaier to perceive the purpose of the button.',
+        'The use of text content as the accessible name insures that the visible name and the accessible name are the same, reducing the chance the accessible name not describing the purpose of the button.'
       ],
       TECHNIQUES: [
-        'Add text content to @label@ and @legend@ elements that describes the purpose of the form control or group of form controls.'
+        'The accessible name of a @label@ and @legend@ elements is its text content.',
+        'SVG graphics can be used to create content (e.g. icons) that can adapt to operating system and browser settings for color and size, but requires manual testing to insure content adapts to user preferences.'
       ],
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element @for@ attribute',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-for'
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <label>: The Input Label element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <legend>: The Field Set Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',

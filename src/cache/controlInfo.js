@@ -18,7 +18,6 @@ const debug = new DebugLogging('ControlInfo', true);
 class ControlElement {
   constructor (domElement, parentControlElement) {
 
-    const doc = domElement.parentInfo.document;
     const node = domElement.node;
 
     this.parentControlElement = parentControlElement;
@@ -27,20 +26,28 @@ class ControlElement {
     this.isInputTypeImage  = this.isInputType(node, 'image');
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
     this.typeAttr = node.type ? node.type : '';
-    this.hasSVGContent = this.checkForSVGContent(node);
-    this.labelForAttr = this.getLabelForAttribute(node);
-    const refControlNode = this.getReferenceControl(doc, this.labelForAttr);
-    this.isLabelForAttrValid = refControlNode ? isLabelable(refControlNode) : false;
-    this.labelforTargetUsesAriaLabeling = refControlNode ? usesARIALabeling(refControlNode) : false;
     this.childControlElements = [];
   }
 
-  addChildControlElement (controlElement) {
-    this.childControlElements.push(controlElement);
+  get isButton () {
+    return false;
   }
 
-  checkForSVGContent (node) {
-    return node.querySelector('svg') ? true : false;
+  get isFieldset () {
+    return false;
+  }
+
+  get isLabel () {
+    return false;
+  }
+
+  get isLegend () {
+    return false;
+  }
+
+
+  addChildControlElement (controlElement) {
+    this.childControlElements.push(controlElement);
   }
 
   isInputType (node, type) {
@@ -48,6 +55,92 @@ class ControlElement {
       return node.type === type;
     }
     return false;
+  }
+
+  getGroupControlElement () {
+    let ce = this.parentControlElement;
+    while (ce) {
+      if (ce.isGroup) {
+        return ce;
+      }
+      ce = ce.parentControlElement;
+    }
+    return null;
+  }
+
+  updateLegendCount () {
+    let pce = this.parentControlElement;
+    while (pce) {
+      if (pce.isFieldset) {
+        pce.legendCount += 1;
+        break;
+      }
+      pce = pce.parentControlElement;
+    }
+  }
+
+  showControlInfo (prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    this.childControlElements.forEach( ce => {
+      debug.domElement(ce.domElement, prefix);
+      ce.showControlInfo(prefix + '  ');
+    });
+  }
+}
+
+class ButtonElement extends ControlElement {
+
+  constructor (domElement, parentControlElement) {
+    super(domElement, parentControlElement);
+    
+    const node = domElement.node;
+
+    this.hasTextContent = node.textContent.trim().length > 0; 
+    this.hasSVGContent = this.checkForSVGContent(node);
+
+  }
+
+  get isButton () {
+    return true;
+  }
+
+  checkForSVGContent (node) {
+    return node.querySelector('svg') ? true : false;
+  }  
+}
+
+
+class FieldsetElement extends ControlElement {
+
+  constructor (domElement, parentControlElement) {
+    super(domElement, parentControlElement);
+    this.legendCount = 0;
+  }
+
+  get isFieldset () {
+    return true;
+  }
+
+}
+
+class LabelElement extends ButtonElement {
+
+  constructor (domElement, parentControlElement) {
+    super(domElement, parentControlElement);
+
+    const doc = domElement.parentInfo.document;
+    const node = domElement.node;
+
+    this.labelForAttr = this.getLabelForAttribute(node);
+    const refControlNode = this.getReferenceControl(doc, this.labelForAttr);
+    this.isLabelForAttrValid = refControlNode ? isLabelable(refControlNode) : false;
+    this.labelforTargetUsesAriaLabeling = refControlNode ? usesARIALabeling(refControlNode) : false;
+  }
+
+  get isLabel () {
+    return true;
   }
 
   getLabelForAttribute (node) {
@@ -66,29 +159,21 @@ class ControlElement {
       }
     }
     return false;
+  }  
+}
+
+class LegendElement extends ButtonElement {
+
+  constructor (domElement, parentControlElement) {
+    super(domElement, parentControlElement);
+    
   }
 
-  getGroupControlElement () {
-    let ce = this.parentControlElement;
-    while (ce) {
-      if (ce.isGroup) {
-        return ce;
-      }
-      ce = ce.parentControlElement;
-    }
-    return null;
-  }
-
-  showControlInfo (prefix) {
-    if (typeof prefix !== 'string') {
-      prefix = '';
-    }
-    this.childControlElements.forEach( ce => {
-      debug.domElement(ce.domElement, prefix);
-      ce.showControlInfo(prefix + '  ');
-    });
+  get isLegend () {
+    return true;
   }
 }
+
 
 /**
  * @class ControlInfo
@@ -118,7 +203,40 @@ export default class ControlInfo {
    */
 
   addChildControlElement (domElement, parentControlElement) {
-    const ce = new ControlElement(domElement, parentControlElement);
+    const tagName = domElement.tagName;
+    const role = domElement.role; 
+    let ce;
+
+    switch (tagName) {
+      case 'button':
+        ce = new ButtonElement(domElement, parentControlElement);
+        break;
+
+      case 'fieldset':
+        ce = new FieldsetElement(domElement, parentControlElement);
+        break;
+
+      case 'label':
+        ce = new LabelElement(domElement, parentControlElement);
+        break;
+
+      case 'legend':
+        ce = new LegendElement(domElement, parentControlElement);
+        break;
+
+      default:
+        if ((tagName !== 'input') && (role === 'button')) {
+          ce = new ButtonElement(domElement, parentControlElement);
+        }
+        else {
+          ce = new ControlElement(domElement, parentControlElement);
+        }
+        if (domElement.tagName === 'legend') {
+          ce.updateLegendCount();
+        }
+        break;
+    }
+
     this.allControlElements.push(ce);
     if (domElement.tagName === 'form') {
       this.allFormControlElements.push(ce);
@@ -147,11 +265,13 @@ export default class ControlInfo {
     const isGroupRole = domElement.role    === 'group';
     const isFormTag   = domElement.tagName === 'form';
     const isLabel     = domElement.tagName === 'label';
+    const isLegend    = domElement.tagName === 'legend';
     const isMeter     = domElement.tagName === 'meter';
     return domElement.isInteractiveElement ||
            isFormTag   ||
            isGroupRole ||
            isLabel     ||
+           isLegend    ||
            isMeter     ||
            domElement.ariaInfo.isWidget;
   }
