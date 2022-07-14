@@ -361,59 +361,39 @@ export const controlRules = [
   wcag_related_ids    : ['1.3.1', '2.4.6', '4.1.1'],
   target_resources    : ['fieldset'],
   validate            : function (dom_cache, rule_result) {
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      let le;
+      if (ce.isFieldset) {
+        if (de.visibility.isVisibleToAT) {
 
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
+          const legendCount = ce.legendElements.length;
 
-    debug.flag && debug.log(`[CONTROL_8]: ${info}`);
+          switch (legendCount) {
+            case 0:
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              break;
 
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
+            case 1:
+              le = ce.legendElements[0];
+              if (le.domElement.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+              }
+              break;
+            
+            default:
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [legendCount]);
+              break;  
+          }
 
-   var grouping_elements      = dom_cache.controls_cache.grouping_elements;
-   var grouping_elements_len  = grouping_elements.length;
-
-   // Check to see if valid cache reference
-   if (grouping_elements && grouping_elements_len) {
-
-     for (var i = 0; i < grouping_elements_len; i++) {
-       var fe = grouping_elements[i];
-
-       if (fe.control_type !== CONTROL_TYPE.FIELDSET) continue;
-
-       var de = fe.dom_element;
-
-       if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-         if (fe.legend_count === 0 || !fe.legend_element ) {
-           rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
-         }
-         else {
-           if (fe.legend_count > 1) {
-             rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_2', [(fe.legend_count-1)]);
-           }
-           else {
-             de = fe.legend_element.dom_element;
-
-             if (de.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-               rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', []);
-             }
-             else {
-               rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_3', []);
-             }
-           }
-         }
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
-       }
-     } // end loop
-   }
-    */
-
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });  
   } // end validate function
 },
 
@@ -433,42 +413,17 @@ export const controlRules = [
   wcag_related_ids    : ['4.1.1'],
   target_resources    : ['input', 'select', 'textarea'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_9]: ${info}`);
-
-
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var control_elements      = dom_cache.controls_cache.control_elements;
-   var control_elements_len  = control_elements.length;
-
-   // Check to see if valid cache reference
-   if (control_elements && control_elements_len) {
-
-     for (var i = 0; i < control_elements_len; i++) {
-       var ce = control_elements[i];
-       var de = ce.dom_element;
-
-       if (ce.computed_label_source === SOURCE.TITLE_ATTRIBUTE) {
-          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.tag_name]);
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.tag_name]);
-         }
-       }
-     } // end loop
-   }
-    */
-
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (de.accName.source === 'title') {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+        }
+        else {      
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });  
   } // end validate function
 },
 
@@ -491,13 +446,38 @@ export const controlRules = [
   target_resources    : ['input[type="checkbox"]', 'input[type="radio"]', 'input[type="text"]', 'input[type="password"]', 'input[type="file"]', 'select', 'textarea'],
   validate            : function (dom_cache, rule_result) {
 
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_10]: ${info}`);
+    dom_cache.controlInfo.allControlElements.forEach(ce1 => {
+      const de1 = ce1.domElement;
+      let count;
+      if (de1.isInteractiveElement) {
+        if (de1.visibility.isVisibleToAT) {
+          count = 0;
+          dom_cache.controlInfo.allControlElements.forEach(ce2 => {
+            const de2 = ce2.domElement;
+            if ((ce1 !== ce2) && de2.isInteractiveElement && de2.visibility.isVisibleToAT) {
+              if (ce1.nameForComparision === ce2.nameForComparision) {
+                count += 1;
+              }
+            }
+          });
+          if (count === 0){
+            rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+          } 
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.role]);
+          }
+        }
+        else {
+          if (de1.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_1', [de1.tagName, de1.role]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_2', [de1.tagName]);
+          }
+        }
+      }
+    });  
+  } // end validate function
 
     /*
    var TEST_RESULT = TEST_RESULT;
@@ -558,7 +538,6 @@ export const controlRules = [
    }
     */
 
-  } // end validate function
 },
 
 /**

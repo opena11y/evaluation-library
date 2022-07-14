@@ -401,8 +401,8 @@ export const controlRules = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: '@fieldset@ has one @legend@ element.',
         ELEMENT_FAIL_1: 'Add @legend@ element.',
-        ELEMENT_FAIL_2: 'Remove %1 @legend@ elements.',
-        ELEMENT_FAIL_3: '@legend@ element is hidden from assistive technologies. Use CSS off-screen positioning instead of CSS display or visibility properties to remove @legend@ from graphical rendering.',
+        ELEMENT_FAIL_2: '@legend@ element is hidden from assistive technologies. Use CSS off-screen positioning instead of CSS display or visibility properties to remove @legend@ from graphical rendering.',
+        ELEMENT_FAIL_3: 'There are %1 @legend@ elements, update the code so the @feildset@ contains only one @legend@ element.',
         ELEMENT_HIDDEN_1: '@fieldset@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -415,8 +415,16 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Adding structure to forms: the @fieldset@ and @legend@ elements',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
+          title: 'HTML Specification: The @fieldset@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-fieldset-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <legend>: The Field Set Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -445,7 +453,6 @@ export const controlRules = {
         NOT_APPLICABLE: 'No @textarea@, @select@ or @input@ elements on this page with a @title@ attribute.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: '@title@ is not used as label.',
         ELEMENT_MC_1:   'If possible use the @label@ element or an ARIA technique to label %1 form control instead of using the @title@ attribute.',
         ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
@@ -466,8 +473,12 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Adding structure to forms: the @fieldset@ and @legend@ elements',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
+          title: 'HTML Specification: @title@ attribute',
+          url:   'https://html.spec.whatwg.org/dev/dom.html#attr-title'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN title attribute',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -481,23 +492,24 @@ export const controlRules = {
   },
   CONTROL_10: {
       ID:         'Control 10',
-      DEFINITION: 'Each standard HTML form control and ARIA widget role must have a label that is unique on the page.',
-      SUMMARY:    'Labels must be unique',
+      DEFINITION: 'Each standard HTML form control and ARIA widget role must have an accessible name that is unique on the page.',
+      SUMMARY:    'Accessible name must be unique',
       TARGET_RESOURCES_DESC: '@select@, @textarea@ and @input@ elements of type @text@, @password@, @checkbox@, @radio@, @file@ and aria widget roles',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Update the labels for the %N_F form controls and ARIA widgets with duplicate labels to uniquely identify the purpose of each control on the page.',
-        FAIL_P:   'Update the labels for the %N_F form controls and ARIA widgets with duplicate labels to uniquely identify the purpose of each control on the page.',
+        FAIL_S:   'Update the accessible name for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
+        FAIL_P:   'Update the accessible names for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
         HIDDEN_S: 'The form control or ARIA widget element that is hidden was not evaluated.',
         HIDDEN_P: 'The %N_H form control and/or ARIA widget elements or widgets that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No form controls or only one form control on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: 'Label is unique.',
-        ELEMENT_FAIL_1: 'Change the @label@ element content, use @fieldset@ and @legend@ elements or an ARIA technique to make the label text content unique on the page.',
-        ELEMENT_HIDDEN_1: '%1 control element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1: 'Accessible name is unique.',
+        ELEMENT_FAIL_1: 'Change the accessible name of the %1 control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_HIDDEN_1: '@%1[role=%2]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'Labels that are unique make it possible for people to understand the different purposes of form controls on the same page.'
+        'Accessibe names that are unique make it possible for people to understand the different purposes of form controls on the same page.'
       ],
       TECHNIQUES: [
         'The preferred technique for labeling standard HTML form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
@@ -517,8 +529,20 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <label>: The Input Label element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <legend>: The Field Set Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',

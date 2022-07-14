@@ -405,6 +405,7 @@ class ControlElement {
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
     this.typeAttr = node.type ? node.type : '';
     this.childControlElements = [];
+    this.nameForComparision = this.getNameForComparison(domElement, parentControlElement);
   }
 
   get isButton () {
@@ -446,11 +447,26 @@ class ControlElement {
     return null;
   }
 
-  updateLegendCount () {
+  getNameForComparison (domElement, parentControlElement) {
+    let name = domElement.accName.name.trim().toLowerCase();
+
+    let pce = parentControlElement;
+
+    while (pce) {
+      if (pce.domElement.role === 'group') {
+        name += ': ' + pce.domElement.accName.name.trim().toLowerCase();
+      }
+      pce = pce.parentControlElement;
+    }
+
+    return name;
+  }
+
+  updateLegendInfo (legendElement) {
     let pce = this.parentControlElement;
     while (pce) {
       if (pce.isFieldset) {
-        pce.legendCount += 1;
+        pce.legendElements.push(legendElement);
         break;
       }
       pce = pce.parentControlElement;
@@ -494,7 +510,7 @@ class FieldsetElement extends ControlElement {
 
   constructor (domElement, parentControlElement) {
     super(domElement, parentControlElement);
-    this.legendCount = 0;
+    this.legendElements = [];
   }
 
   get isFieldset () {
@@ -600,6 +616,7 @@ class ControlInfo {
 
       case 'legend':
         ce = new LegendElement(domElement, parentControlElement);
+        ce.updateLegendInfo(ce);
         break;
 
       default:
@@ -608,9 +625,6 @@ class ControlInfo {
         }
         else {
           ce = new ControlElement(domElement, parentControlElement);
-        }
-        if (domElement.tagName === 'legend') {
-          ce.updateLegendCount();
         }
         break;
     }
@@ -12031,59 +12045,39 @@ const controlRules$1 = [
   wcag_related_ids    : ['1.3.1', '2.4.6', '4.1.1'],
   target_resources    : ['fieldset'],
   validate            : function (dom_cache, rule_result) {
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      let le;
+      if (ce.isFieldset) {
+        if (de.visibility.isVisibleToAT) {
 
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
+          const legendCount = ce.legendElements.length;
 
-    debug$d.flag && debug$d.log(`[CONTROL_8]: ${info}`);
+          switch (legendCount) {
+            case 0:
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              break;
 
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
+            case 1:
+              le = ce.legendElements[0];
+              if (le.domElement.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+              }
+              break;
+            
+            default:
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [legendCount]);
+              break;  
+          }
 
-   var grouping_elements      = dom_cache.controls_cache.grouping_elements;
-   var grouping_elements_len  = grouping_elements.length;
-
-   // Check to see if valid cache reference
-   if (grouping_elements && grouping_elements_len) {
-
-     for (var i = 0; i < grouping_elements_len; i++) {
-       var fe = grouping_elements[i];
-
-       if (fe.control_type !== CONTROL_TYPE.FIELDSET) continue;
-
-       var de = fe.dom_element;
-
-       if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-         if (fe.legend_count === 0 || !fe.legend_element ) {
-           rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
-         }
-         else {
-           if (fe.legend_count > 1) {
-             rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_2', [(fe.legend_count-1)]);
-           }
-           else {
-             de = fe.legend_element.dom_element;
-
-             if (de.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-               rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', []);
-             }
-             else {
-               rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_3', []);
-             }
-           }
-         }
-       }
-       else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
-       }
-     } // end loop
-   }
-    */
-
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });  
   } // end validate function
 },
 
@@ -12103,42 +12097,17 @@ const controlRules$1 = [
   wcag_related_ids    : ['4.1.1'],
   target_resources    : ['input', 'select', 'textarea'],
   validate            : function (dom_cache, rule_result) {
-
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_9]: ${info}`);
-
-
-    /*
-   var TEST_RESULT   = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var control_elements      = dom_cache.controls_cache.control_elements;
-   var control_elements_len  = control_elements.length;
-
-   // Check to see if valid cache reference
-   if (control_elements && control_elements_len) {
-
-     for (var i = 0; i < control_elements_len; i++) {
-       var ce = control_elements[i];
-       var de = ce.dom_element;
-
-       if (ce.computed_label_source === SOURCE.TITLE_ATTRIBUTE) {
-          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.tag_name]);
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.tag_name]);
-         }
-       }
-     } // end loop
-   }
-    */
-
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (de.accName.source === 'title') {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+        }
+        else {      
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });  
   } // end validate function
 },
 
@@ -12161,13 +12130,38 @@ const controlRules$1 = [
   target_resources    : ['input[type="checkbox"]', 'input[type="radio"]', 'input[type="text"]', 'input[type="password"]', 'input[type="file"]', 'select', 'textarea'],
   validate            : function (dom_cache, rule_result) {
 
-
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_10]: ${info}`);
+    dom_cache.controlInfo.allControlElements.forEach(ce1 => {
+      const de1 = ce1.domElement;
+      let count;
+      if (de1.isInteractiveElement) {
+        if (de1.visibility.isVisibleToAT) {
+          count = 0;
+          dom_cache.controlInfo.allControlElements.forEach(ce2 => {
+            const de2 = ce2.domElement;
+            if ((ce1 !== ce2) && de2.isInteractiveElement && de2.visibility.isVisibleToAT) {
+              if (ce1.nameForComparision === ce2.nameForComparision) {
+                count += 1;
+              }
+            }
+          });
+          if (count === 0){
+            rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+          } 
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.role]);
+          }
+        }
+        else {
+          if (de1.hasRole) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_1', [de1.tagName, de1.role]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_2', [de1.tagName]);
+          }
+        }
+      }
+    });  
+  } // end validate function
 
     /*
    var TEST_RESULT = TEST_RESULT;
@@ -12228,7 +12222,6 @@ const controlRules$1 = [
    }
     */
 
-  } // end validate function
 },
 
 /**
@@ -15826,8 +15819,8 @@ const controlRules = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: '@fieldset@ has one @legend@ element.',
         ELEMENT_FAIL_1: 'Add @legend@ element.',
-        ELEMENT_FAIL_2: 'Remove %1 @legend@ elements.',
-        ELEMENT_FAIL_3: '@legend@ element is hidden from assistive technologies. Use CSS off-screen positioning instead of CSS display or visibility properties to remove @legend@ from graphical rendering.',
+        ELEMENT_FAIL_2: '@legend@ element is hidden from assistive technologies. Use CSS off-screen positioning instead of CSS display or visibility properties to remove @legend@ from graphical rendering.',
+        ELEMENT_FAIL_3: 'There are %1 @legend@ elements, update the code so the @feildset@ contains only one @legend@ element.',
         ELEMENT_HIDDEN_1: '@fieldset@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -15840,8 +15833,16 @@ const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Adding structure to forms: the @fieldset@ and @legend@ elements',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
+          title: 'HTML Specification: The @fieldset@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-fieldset-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <legend>: The Field Set Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -15870,7 +15871,6 @@ const controlRules = {
         NOT_APPLICABLE: 'No @textarea@, @select@ or @input@ elements on this page with a @title@ attribute.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: '@title@ is not used as label.',
         ELEMENT_MC_1:   'If possible use the @label@ element or an ARIA technique to label %1 form control instead of using the @title@ attribute.',
         ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
@@ -15891,8 +15891,12 @@ const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: Adding structure to forms: the @fieldset@ and @legend@ elements',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FIELDSET'
+          title: 'HTML Specification: @title@ attribute',
+          url:   'https://html.spec.whatwg.org/dev/dom.html#attr-title'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN title attribute',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -15906,23 +15910,24 @@ const controlRules = {
   },
   CONTROL_10: {
       ID:         'Control 10',
-      DEFINITION: 'Each standard HTML form control and ARIA widget role must have a label that is unique on the page.',
-      SUMMARY:    'Labels must be unique',
+      DEFINITION: 'Each standard HTML form control and ARIA widget role must have an accessible name that is unique on the page.',
+      SUMMARY:    'Accessible name must be unique',
       TARGET_RESOURCES_DESC: '@select@, @textarea@ and @input@ elements of type @text@, @password@, @checkbox@, @radio@, @file@ and aria widget roles',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Update the labels for the %N_F form controls and ARIA widgets with duplicate labels to uniquely identify the purpose of each control on the page.',
-        FAIL_P:   'Update the labels for the %N_F form controls and ARIA widgets with duplicate labels to uniquely identify the purpose of each control on the page.',
+        FAIL_S:   'Update the accessible name for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
+        FAIL_P:   'Update the accessible names for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
         HIDDEN_S: 'The form control or ARIA widget element that is hidden was not evaluated.',
         HIDDEN_P: 'The %N_H form control and/or ARIA widget elements or widgets that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No form controls or only one form control on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1: 'Label is unique.',
-        ELEMENT_FAIL_1: 'Change the @label@ element content, use @fieldset@ and @legend@ elements or an ARIA technique to make the label text content unique on the page.',
-        ELEMENT_HIDDEN_1: '%1 control element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1: 'Accessible name is unique.',
+        ELEMENT_FAIL_1: 'Change the accessible name of the %1 control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_HIDDEN_1: '@%1[role=%2]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'Labels that are unique make it possible for people to understand the different purposes of form controls on the same page.'
+        'Accessibe names that are unique make it possible for people to understand the different purposes of form controls on the same page.'
       ],
       TECHNIQUES: [
         'The preferred technique for labeling standard HTML form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
@@ -15942,8 +15947,20 @@ const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <label>: The Input Label element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <legend>: The Field Set Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',

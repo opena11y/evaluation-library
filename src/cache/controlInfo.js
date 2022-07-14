@@ -27,6 +27,7 @@ class ControlElement {
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
     this.typeAttr = node.type ? node.type : '';
     this.childControlElements = [];
+    this.nameForComparision = this.getNameForComparison(domElement, parentControlElement);
   }
 
   get isButton () {
@@ -68,11 +69,26 @@ class ControlElement {
     return null;
   }
 
-  updateLegendCount () {
+  getNameForComparison (domElement, parentControlElement) {
+    let name = domElement.accName.name.trim().toLowerCase();
+
+    let pce = parentControlElement;
+
+    while (pce) {
+      if (pce.domElement.role === 'group') {
+        name += ': ' + pce.domElement.accName.name.trim().toLowerCase();
+      }
+      pce = pce.parentControlElement;
+    }
+
+    return name;
+  }
+
+  updateLegendInfo (legendElement) {
     let pce = this.parentControlElement;
     while (pce) {
       if (pce.isFieldset) {
-        pce.legendCount += 1;
+        pce.legendElements.push(legendElement);
         break;
       }
       pce = pce.parentControlElement;
@@ -116,7 +132,7 @@ class FieldsetElement extends ControlElement {
 
   constructor (domElement, parentControlElement) {
     super(domElement, parentControlElement);
-    this.legendCount = 0;
+    this.legendElements = [];
   }
 
   get isFieldset () {
@@ -222,6 +238,7 @@ export default class ControlInfo {
 
       case 'legend':
         ce = new LegendElement(domElement, parentControlElement);
+        ce.updateLegendInfo(ce);
         break;
 
       default:
@@ -230,9 +247,6 @@ export default class ControlInfo {
         }
         else {
           ce = new ControlElement(domElement, parentControlElement);
-        }
-        if (domElement.tagName === 'legend') {
-          ce.updateLegendCount();
         }
         break;
     }
