@@ -449,6 +449,7 @@ export const controlRules = [
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
       let count;
+      debug.log(`[CONTROL 10]: ${ce1.nameForComparision}`);
       if (de1.isInteractiveElement) {
         if (de1.visibility.isVisibleToAT) {
           count = 0;

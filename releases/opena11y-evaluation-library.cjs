@@ -1,3 +1,5 @@
+'use strict';
+
 /* utils.js */
 /* constants */
 const labelableElements = ['input', 'meter', 'option', 'output', 'progress', 'select', 'textarea'];
@@ -21234,4 +21236,4 @@ class EvaluationLibrary {
   }
 }
 
-export { EvaluationLibrary as default };
+module.exports = EvaluationLibrary;

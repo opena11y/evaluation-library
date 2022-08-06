@@ -3,14 +3,18 @@
 /* Imports */
 import DOMCache          from './cache/domCache.js';
 import {allRules}        from './rules/allRules.js';
+import RuleInformation   from './rules/ruleInformation.js';
 import EvaluationResult  from './evaluationResult.js';
+import {setUseCodeTags}  from './_locale/locale.js'
 import DebugLogging      from './debug.js';
 
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false)
 
 export default class EvaluationLibrary {
-  constructor () {
+  constructor (codeTags = false) {
+    this.ruleInfo = new RuleInformation();
+    setUseCodeTags(codeTags);
   }
 
   /**
@@ -32,5 +36,8 @@ export default class EvaluationLibrary {
     return evaluationResult;
   }
 
+  get getRuleInfo () {
+    return this.ruleInfo;
+  }
 }
 

@@ -26,8 +26,8 @@ export {
   getTargetResourcesDesc,
   getTechniques,
   setLocale,
-  transformElementMarkup,
-  setUseCodeTags
+  setUseCodeTags,
+  transformElementMarkup
 }
 
 /* Constants */

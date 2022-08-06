@@ -1,4 +1,5 @@
 const gulp         = require('gulp');
+const exec         = require('child_process').exec;
 const rollup       = require('rollup');
 const {src, task}  = require('gulp');
 const {parallel, series}   = require('gulp');
@@ -30,6 +31,20 @@ gulp.task('build', () => {
     });
 });
 
+gulp.task('buildcjs', () => {
+  return rollup
+    .rollup({
+      input: './src/evaluationLibrary.js'
+    })
+    .then(bundle => {
+      return bundle.write({
+        file: './releases/opena11y-evaluation-library.cjs',
+        format: 'cjs',
+      });
+    });
+});
+
+
 gulp.task('ainspector', () => {
   return rollup
     .rollup({
@@ -43,8 +58,18 @@ gulp.task('ainspector', () => {
     });
 });
 
-const build = task('build');
-const ainspector = task('ainspector');
-const linting = task('linting');
+gulp.task('documentation', function (cb) {
+  exec('node ./gen-documentation.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+})
 
-exports.default = series(linting, parallel( build, ainspector));
+const ainspector    = task('ainspector');
+const build         = task('build');
+const buildcjs      = task('buildcjs');
+const documentation = task('documentation');
+const linting       = task('linting');
+
+exports.default = series(linting, parallel( build, buildcjs, ainspector), documentation);
