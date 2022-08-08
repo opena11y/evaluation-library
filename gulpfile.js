@@ -31,6 +31,9 @@ gulp.task('build', () => {
     });
 });
 
+// The common JS version of the library is used by the documenation
+// script to generate website documentation, since Gulp does not
+// support modules
 gulp.task('buildcjs', () => {
   return rollup
     .rollup({
@@ -43,7 +46,6 @@ gulp.task('buildcjs', () => {
       });
     });
 });
-
 
 gulp.task('ainspector', () => {
   return rollup

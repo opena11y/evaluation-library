@@ -1,3 +1,613 @@
+/*
+*   debug.js
+*
+*   Usage
+*     import DebugLogging from './debug.js';
+*     const debug = new DebugLogging('myLabel', true); // e.g. 'myModule'
+*     ...
+*     if (debug.flag) debug.log('myMessage');
+*
+*   Notes
+*     new DebugLogging() - calling the constructor with no arguments results
+*                   in debug.flag set to false and debug.label set to 'debug';
+*                   constructor accepts 0, 1 or 2 arguments in any order
+*                   @param flag [optional] {boolean} - sets debug.flag
+*                   @param label [optional] {string} - sets debug.label
+*   Properties
+*     debug.flag    {boolean} allows you to switch debug logging on or off;
+*                   default value is false
+*     debug.label   {string} rendered as a prefix to each log message;
+*                   default value is 'debug'
+*   Methods
+*     debug.log        calls console.log with label prefix and message
+*                      @param message {object} - console.log calls toString()
+*                      @param spaceAbove [optional] {boolean}
+*
+*     debug.tag        outputs tagName and textContent of DOM element
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param spaceAbove [optional] {boolean}
+*
+*     debug.domElement outputs tagName, role, name and number of children of
+*                      DOMElement object
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param prefix [optional] {String}
+*
+*     debug.domText    outputs text content of DOMText object
+*                      @param node {DOM node reference} - usually an HTMLElement
+*                      @param prefix [optional] {String}
+*
+*     debug.separator  outputs only debug.label and a series of hyphens
+*                      @param spaceAbove [optional] {boolean}
+*/
+
+class DebugLogging {
+  constructor (...args) {
+    // Default values for cases where fewer than two arguments are provided
+    this._flag = false;
+    this._label = 'debug';
+
+    // The constructor may be called with zero, one or two arguments. If two
+    // arguments, they can be in any order: one is assumed to be the boolean
+    // value for '_flag' and the other one the string value for '_label'.
+    for (const [index, arg] of args.entries()) {
+      if (index < 2) {
+        switch (typeof arg) {
+          case 'boolean':
+            this._flag = arg;
+            break;
+          case 'string':
+            this._label = arg;
+            break;
+        }
+      }
+    }
+  }
+
+  get flag () { return this._flag; }
+
+  set flag (value) {
+    if (typeof value === 'boolean') {
+      this._flag = value;
+    }
+  }
+
+  get label () { return this._label; }
+
+  set label (value) {
+    if (typeof value === 'string') {
+      this._label = value;
+    }
+  }
+
+  log (message, spaceAbove) {
+    const newline = spaceAbove ? '\n' : '';
+    console.log(`${newline}[${this._label}] ${message}`);
+  }
+
+  tag (node, spaceAbove) {
+    if (node && node.tagName) {
+      const text = node.textContent.trim().replace(/\s+/g, ' ');
+      this.log(`[${node.tagName}]: ${text.substring(0, 40)}`, spaceAbove);
+    }
+  }
+
+  color (message, color="#000", backgroundColor='#fff', spaceAbove) {
+    const newline = spaceAbove ? '\n' : '';
+    console.log(`${newline}[${this._label}] ` + `%c${message}`, `color: ${color}; background: ${backgroundColor}`);
+  }
+
+  separator (spaceAbove) {
+    this.log('-----------------------------', spaceAbove);
+  }
+
+  domElement (domElement, prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+
+    if (domElement) {
+      const accName = domElement.accName;
+      const count   = domElement.children.length;
+      const pos     = domElement.ordinalPosition;
+
+      if (accName.name.length) {
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos})`);
+      } else {
+        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
+      }
+
+//      this.log(`${prefix}[${domElement.tagName}][            tabIndex]: ${domElement.tabIndex}`);
+//      this.log(`${prefix}[${domElement.tagName}][           isTabStop]: ${domElement.isTabStop}`);
+//      this.log(`${prefix}[${domElement.tagName}][isInteractiveElement]: ${domElement.isInteractiveElement}`);
+//      this.log(`${prefix}[${domElement.tagName}][            isWidget]: ${domElement.ariaInfo.isWidget}`);
+    }
+  }
+
+  domText (domText, prefix) {
+    if (typeof prefix !== 'string') {
+      prefix = '';
+    }
+    const maxDisplay = 20;
+    if (domText) {
+      if (domText.getText.length < maxDisplay) {
+        this.log(`${prefix}[text]: ${domText.getText} (parent: ${domText.parentDomElement.tagName})`);
+      } else {
+        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ... (parent: ${domText.parentDomElement.tagName})`);
+      }
+    }
+  }
+
+}
+
+/* constants.js */
+
+/* Constants */
+const debug$t = new DebugLogging('constants', false);
+
+const VERSION = '2.0.beta1';
+
+/**
+ * @constant RULESET
+ * @type Integer
+ * @desc Constants related to the priority of learning a rule
+ *       For example people new to accessibility would start
+ *       with understanding TRIAGE rules and then moving to MORE
+ *       and as they gain experience can use ALL
+ *
+ * @example
+ * RULESET.TRIAGE
+ * RULESET.MORE
+ * RULESET.ALL
+ */
+
+const RULESET =  {
+  TRIAGE: 1,
+  MORE: 2,
+  ALL: 3
+};
+
+/**
+ * @constant RULE_CATEGORIES * @type Integer
+ * @desc Numercial constant representing a rule category and is bit maskable
+ *
+ * @example
+ * RULE_CATEGORIES.UNDEFINED
+ * RULE_CATEGORIES.AUDIO_VIDEO
+ * RULE_CATEGORIES.FORMS
+ * RULE_CATEGORIES.HEADINGS
+ * RULE_CATEGORIES.IMAGES
+ * RULE_CATEGORIES.KEYBOARD_SUPPORT
+ * RULE_CATEGORIES.LINKS
+ * RULE_CATEGORIES.LANDMARKS
+ * RULE_CATEGORIES.SITE_NAVIGATION
+ * RULE_CATEGORIES.STYLES_READABILITY
+ * RULE_CATEGORIES.TABLES
+ * RULE_CATEGORIES.TIMING
+ * RULE_CATEGORIES.WIDGETS_SCRIPTS
+ */
+
+const RULE_CATEGORIES = {
+  UNDEFINED              : 0x0000,
+  LANDMARKS              : 0x0001,
+  HEADINGS               : 0x0002,
+  STYLES_READABILITY     : 0x0004,
+  IMAGES                 : 0x0008,
+  LINKS                  : 0x0010,
+  TABLES                 : 0x0020,
+  FORMS                  : 0x0040,
+  WIDGETS_SCRIPTS        : 0x0080,
+  AUDIO_VIDEO            : 0x0100,
+  KEYBOARD_SUPPORT       : 0x0200,
+  TIMING                 : 0x0400,
+  SITE_NAVIGATION        : 0x0800,
+  // Composite categories
+  ALL                    : 0x0FFF
+};
+
+/**
+ * @constant RULE_SCOPE
+ * @type Integer
+ * @desc Defines scope of a rule
+ *
+ * @example
+ * RULE_SCOPE.UNKNOWN
+ * RULE_SCOPE.ELEMENT
+ * RULE_SCOPE.PAGE
+ * RULE_SCOPE.WEBSITE
+ */
+
+const RULE_SCOPE =  {
+  UNKNOWN : 0,
+  ELEMENT : 1,
+  PAGE    : 2,
+  WEBSITE : 3
+};
+
+/**
+ * @constant RESULT_TYPE
+ * @type Integer
+ * @desc Defines if the rule represents a element, page or website result
+ *
+ * @example
+ * RESULT_TYPE.BASE
+ * RESULT_TYPE.ELEMENT
+ * RESULT_TYPE.PAGE
+ * RESULT_TYPE.WEBSITE
+ */
+
+const RESULT_TYPE =  {
+  BASE    : 0,
+  ELEMENT : 1,
+  PAGE    : 2,
+  WEBSITE : 3
+};
+
+/**
+ * @constant TEST_RESULT * @type Integer
+ * @desc Types of rule results, used in validation functions
+ *
+ * @example
+ * TEST_RESULT.FAIL
+ * TEST_RESULT.HIDDEN
+ * TEST_RESULT.MANUAL_CHECK
+ * TEST_RESULT.NONE
+ * TEST_RESULT.PASS
+ */
+
+const TEST_RESULT = {
+  PASS         : 1,
+  FAIL         : 2,
+  MANUAL_CHECK : 3,
+  HIDDEN       : 4,
+  NONE         : 5
+};
+
+/**
+ * @constant IMPLEMENTATION_VALUE * @type Integer
+ * @desc Constants used to represent the level of implementation
+ *
+ * @example
+ * IMPLEMENTATION_VALUE.UNDEFINED
+ * IMPLEMENTATION_VALUE.NOT_APPLICABLE
+ * IMPLEMENTATION_VALUE.NOT_IMPLEMENTED
+ * IMPLEMENTATION_VALUE.PARTIAL_IMPLEMENTATION
+ * IMPLEMENTATION_VALUE.ALMOST_COMPLETE
+ * IMPLEMENTATION_VALUE.COMPLETE
+ * IMPLEMENTATION_VALUE.COMPLETE_WITH_MANUAL_CHECKS
+ * IMPLEMENTATION_VALUE.MANUAL_CHECKS_ONLY
+ */
+
+const IMPLEMENTATION_VALUE = {
+  UNDEFINED                   : 0,
+  NOT_APPLICABLE              : 1,
+  NOT_IMPLEMENTED             : 2,
+  PARTIAL_IMPLEMENTATION      : 3,
+  ALMOST_COMPLETE             : 4,
+  COMPLETE                    : 5,
+  COMPLETE_WITH_MANUAL_CHECKS : 6,
+  MANUAL_CHECKS_ONLY          : 7
+};
+
+  /**
+ * @constant RESULT_VALUE
+ * @type Integer
+ * @desc Constants used to represent evaluation results at the element level
+ *
+ * @example
+ * RESULT_VALUE.UNDEFINED
+ * RESULT_VALUE.PASS
+ * RESULT_VALUE.HIDDEN
+ * RESULT_VALUE.MANUAL_CHECK
+ * RESULT_VALUE.VIOLATION
+ * RESULT_VALUE.WARNING
+ */
+
+const RESULT_VALUE = {
+  UNDEFINED      : 0,
+  PASS           : 1,
+  HIDDEN         : 2,  // Content is hidden and not tested for accessibility
+  MANUAL_CHECK   : 3,
+  WARNING        : 4,
+  VIOLATION      : 5
+};
+
+/**
+ * @constant RULE_RESULT_VALUE * @type Integer
+ * @desc Constants used to represent evaluation results at the rule level
+ *
+ * @example
+ * RULE_RESULT_VALUE.UNDEFINED
+ * RULE_RESULT_VALUE.NOT_APPLICABLE
+ * RULE_RESULT_VALUE.PASS
+ * RULE_RESULT_VALUE.MANUAL_CHECK
+ * RULE_RESULT_VALUE.WARNING
+ * RULE_RESULT_VALUE.VIOLATION
+ */
+
+const RULE_RESULT_VALUE = {
+  UNDEFINED      : 0,
+  NOT_APPLICABLE : 1,
+  PASS           : 2,
+  MANUAL_CHECK   : 3,
+  WARNING        : 4,
+  VIOLATION      : 5
+};
+
+  /**
+ * @constant WCAG_PRINCIPLE
+ * @type Integer
+ * @desc Numercial constant representing a WCAG 2.0 Principles
+ *
+ * @example
+ * WCAG_PRINCIPLE.P_1
+ * WCAG_PRINCIPLE.P_2
+ * WCAG_PRINCIPLE.P_3
+ * WCAG_PRINCIPLE.P_4
+ */
+const WCAG_PRINCIPLE = {
+  P_1          : 0x000001,
+  P_2          : 0x000002,
+  P_3          : 0x000004,
+  P_4          : 0x000008,
+  ALL          : 0x00000F
+};
+
+  /**
+ * @constant WCAG_GUIDELINE
+ * @type Integer
+ * @desc Numercial constant representing a WCAG 2.0 Guidelines
+ *
+ * @example
+ * WCAG_GUIDELINE.G_1_1
+ * WCAG_GUIDELINE.G_1_2
+ * WCAG_GUIDELINE.G_1_3
+ * WCAG_GUIDELINE.G_1_4
+ * WCAG_GUIDELINE.G_2_1
+ * WCAG_GUIDELINE.G_2_2
+ * WCAG_GUIDELINE.G_2_3
+ * WCAG_GUIDELINE.G_2_4
+ * WCAG_GUIDELINE.G_3_1
+ * WCAG_GUIDELINE.G_3_2
+ * WCAG_GUIDELINE.G_3_3
+ * WCAG_GUIDELINE.G_4_1
+ */
+
+const WCAG_GUIDELINE = {
+  G_1_1          : 0x000010,
+  G_1_2          : 0x000020,
+  G_1_3          : 0x000040,
+  G_1_4          : 0x000080,
+  G_2_1          : 0x000100,
+  G_2_2          : 0x000200,
+  G_2_3          : 0x000400,
+  G_2_4          : 0x000800,
+  G_2_5          : 0x001000,
+  G_3_1          : 0x002000,
+  G_3_2          : 0x004000,
+  G_3_3          : 0x008000,
+  G_4_1          : 0x010000,
+  ALL            : 0x01FFF0
+};
+
+/**
+ * @constant WCAG_SUCCESS_CRITERION * @type Integer
+ * @desc Numercial constant representing a WCAG 2.x Success Criteria
+ *
+ * @example
+ * WCAG_SUCCESS_CRITERION.SC_1_1_1
+ * ....
+ * WCAG_SUCCESS_CRITERION.SC_4_1_2
+ */
+
+const WCAG_SUCCESS_CRITERION = {
+  SC_1_1_1          : 0x1101,
+  SC_1_2_1          : 0x1201,
+  SC_1_2_2          : 0x1202,
+  SC_1_2_3          : 0x1203,
+  SC_1_2_4          : 0x1204,
+  SC_1_2_5          : 0x1205,
+  SC_1_2_6          : 0x1206,
+  SC_1_2_7          : 0x1207,
+  SC_1_2_8          : 0x1208,
+  SC_1_2_9          : 0x1209,
+  SC_1_3_1          : 0x1301,
+  SC_1_3_2          : 0x1302,
+  SC_1_3_3          : 0x1303,
+  SC_1_3_4          : 0x1304,
+  SC_1_3_5          : 0x1305,
+  SC_1_3_6          : 0x1306,
+  SC_1_4_1          : 0x1401,
+  SC_1_4_2          : 0x1402,
+  SC_1_4_3          : 0x1403,
+  SC_1_4_4          : 0x1404,
+  SC_1_4_5          : 0x1405,
+  SC_1_4_6          : 0x1406,
+  SC_1_4_7          : 0x1407,
+  SC_1_4_8          : 0x1408,
+  SC_1_4_9          : 0x1409,
+  SC_1_4_10         : 0x1410,
+  SC_1_4_11         : 0x1411,
+  SC_1_4_12         : 0x1412,
+  SC_1_4_13         : 0x1413,
+  SC_2_1_1          : 0x2101,
+  SC_2_1_2          : 0x2102,
+  SC_2_1_3          : 0x2103,
+  SC_2_1_4          : 0x2104,
+  SC_2_2_1          : 0x2201,
+  SC_2_2_2          : 0x2202,
+  SC_2_2_3          : 0x2203,
+  SC_2_2_4          : 0x2204,
+  SC_2_2_5          : 0x2205,
+  SC_2_2_6          : 0x2206,
+  SC_2_3_1          : 0x2301,
+  SC_2_3_2          : 0x2302,
+  SC_2_3_3          : 0x2303,
+  SC_2_4_1          : 0x2401,
+  SC_2_4_2          : 0x2402,
+  SC_2_4_3          : 0x2403,
+  SC_2_4_4          : 0x2404,
+  SC_2_4_5          : 0x2405,
+  SC_2_4_6          : 0x2406,
+  SC_2_4_7          : 0x2407,
+  SC_2_4_8          : 0x2408,
+  SC_2_4_9          : 0x2409,
+  SC_2_4_10         : 0x2410,
+  SC_2_5_1          : 0x2501,
+  SC_2_5_2          : 0x2502,
+  SC_2_5_3          : 0x2503,
+  SC_2_5_4          : 0x2504,
+  SC_2_5_5          : 0x2505,
+  SC_2_5_6          : 0x2506,
+  SC_3_1_1          : 0x3101,
+  SC_3_1_2          : 0x3102,
+  SC_3_1_3          : 0x3103,
+  SC_3_1_4          : 0x3104,
+  SC_3_1_5          : 0x3105,
+  SC_3_1_6          : 0x3106,
+  SC_3_2_1          : 0x3201,
+  SC_3_2_2          : 0x3202,
+  SC_3_2_3          : 0x3203,
+  SC_3_2_4          : 0x3204,
+  SC_3_2_5          : 0x3205,
+  SC_3_3_1          : 0x3301,
+  SC_3_3_2          : 0x3302,
+  SC_3_3_3          : 0x3303,
+  SC_3_3_4          : 0x3304,
+  SC_3_3_5          : 0x3305,
+  SC_3_3_6          : 0x3306,
+  SC_4_1_1          : 0x4101,
+  SC_4_1_2          : 0x4102,
+  SC_4_1_3          : 0x4103
+};
+
+/**
+ * @constant REFERENCES
+ * @type Integer
+ * @desc Types of reference for supplemential materials to help people understand an accessibility requirement and
+ *       how to improve the accessibility
+ *
+ * @example
+ * REFERENCES.UNKNOWN
+ * REFERENCES.SPECIFICATION
+ * REFERENCES.WCAG_TECHNIQUE
+ * REFERENCES.TECHNIQUE
+ * REFERENCES.EXAMPLE
+ * REFERENCES.MANUAL_CHECK
+ * REFERENCES.AUTHORING_TOOL
+ * REFERENCES.OTHER
+ */
+
+const REFERENCES = {
+  UNKNOWN         : 0,
+  AUTHORING_TOOL  : 1,
+  EXAMPLE         : 2,
+  LIBRARY_PRODUCT : 3,
+  MANUAL_CHECK    : 4,
+  OTHER           : 5,
+  PURPOSE         : 6,
+  RULE_CATEGORY   : 7,
+  REFERENCE       : 8,
+  SPECIFICATION   : 9,
+  TECHNIQUE       : 10,
+  WCAG_TECHNIQUE  : 11
+};
+
+/**
+ * @constant WCAG_LEVEL
+ * @type Integer
+ * @desc Constants related to the level of importance of a success criteria
+ *
+ * @example
+ * WCAG_LEVEL.A
+ * WCAG_LEVEL.AA
+ * WCAG_LEVEL.AAA
+ */
+
+const WCAG_LEVEL =  {
+  A       : 4,
+  AA      : 2,
+  AAA     : 1,
+  UNKNOWN : 0
+};
+
+/* Constant Class */
+
+class Constants {
+  constructor () {
+    this.IMPLEMENTATION_VALUE   = IMPLEMENTATION_VALUE;
+    this.RESULT_VALUE           = RESULT_VALUE;
+    this.RESULT_TYPE            = RESULT_TYPE;
+    this.RULESET                = RULESET;
+    this.RULE_CATEGORIES        = RULE_CATEGORIES;
+    this.RULE_RESULT_VALUE      = RULE_RESULT_VALUE;
+    this.RULE_SCOPE             = RULE_SCOPE;
+    this.WCAG_GUIDELINE         = WCAG_GUIDELINE;
+    this.WCAG_LEVEL             = WCAG_LEVEL;
+    this.WCAG_PRINCIPLE         = WCAG_PRINCIPLE;
+    this.WCAG_SUCCESS_CRITERION = WCAG_SUCCESS_CRITERION;
+  }
+} 
+
+/*  Constant helper functions */
+
+/**
+ * @function getGuidelineId
+ *
+ * @desc Returns constant identifying the WCAG Guideline
+ *
+ * @param {String} sc - String representing a success criteria (e.g. '2.4.1')
+ *
+ * @return {Integer}
+ */
+
+function getGuidelineId(sc) {
+  debug$t.flag && debug$t.log(`[getGuidelineId][sc]: ${sc}`);
+  const parts = sc.split('.');
+  const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
+  if (!gl) {
+    return 0;
+  }
+  debug$t.flag && debug$t.log(`[getGuidelineId][gl]: ${gl}`);
+  return WCAG_GUIDELINE[gl];
+}
+
+/**
+ * @function getResultValue
+ *
+ * @desc Returns RESULT_VALUE constant identifying the result based on
+ *       the rule being required or recommended
+ *
+ * @param  {Integer}  testValue  - a TEST_VALUE constant representing the
+ *                                 result
+ * @param  {Boolean}  isrequired  - true if the rule is required
+ *
+ * @return {Integer} see @desc
+ */
+
+function getResultValue(testValue, isRequired) {
+    switch (testValue) {
+
+      case TEST_RESULT.PASS:
+        return RESULT_VALUE.PASS;
+
+      case TEST_RESULT.FAIL:
+        if (isRequired) {
+          return RESULT_VALUE.VIOLATION;
+        }
+        else {
+          return RESULT_VALUE.WARNING;
+        }
+
+      case TEST_RESULT.MANUAL_CHECK:
+        return RESULT_VALUE.MANUAL_CHECK;
+
+      case TEST_RESULT.HIDDEN:
+        return RESULT_VALUE.HIDDEN;
+    }
+
+    return RESULT_VALUE.NONE;
+}
+
 /* utils.js */
 /* constants */
 const labelableElements = ['input', 'meter', 'option', 'output', 'progress', 'select', 'textarea'];
@@ -239,151 +849,10 @@ function  usesARIALabeling (node) {
   return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
 }
 
-/*
-*   debug.js
-*
-*   Usage
-*     import DebugLogging from './debug.js';
-*     const debug = new DebugLogging('myLabel', true); // e.g. 'myModule'
-*     ...
-*     if (debug.flag) debug.log('myMessage');
-*
-*   Notes
-*     new DebugLogging() - calling the constructor with no arguments results
-*                   in debug.flag set to false and debug.label set to 'debug';
-*                   constructor accepts 0, 1 or 2 arguments in any order
-*                   @param flag [optional] {boolean} - sets debug.flag
-*                   @param label [optional] {string} - sets debug.label
-*   Properties
-*     debug.flag    {boolean} allows you to switch debug logging on or off;
-*                   default value is false
-*     debug.label   {string} rendered as a prefix to each log message;
-*                   default value is 'debug'
-*   Methods
-*     debug.log        calls console.log with label prefix and message
-*                      @param message {object} - console.log calls toString()
-*                      @param spaceAbove [optional] {boolean}
-*
-*     debug.tag        outputs tagName and textContent of DOM element
-*                      @param node {DOM node reference} - usually an HTMLElement
-*                      @param spaceAbove [optional] {boolean}
-*
-*     debug.domElement outputs tagName, role, name and number of children of
-*                      DOMElement object
-*                      @param node {DOM node reference} - usually an HTMLElement
-*                      @param prefix [optional] {String}
-*
-*     debug.domText    outputs text content of DOMText object
-*                      @param node {DOM node reference} - usually an HTMLElement
-*                      @param prefix [optional] {String}
-*
-*     debug.separator  outputs only debug.label and a series of hyphens
-*                      @param spaceAbove [optional] {boolean}
-*/
-
-class DebugLogging {
-  constructor (...args) {
-    // Default values for cases where fewer than two arguments are provided
-    this._flag = false;
-    this._label = 'debug';
-
-    // The constructor may be called with zero, one or two arguments. If two
-    // arguments, they can be in any order: one is assumed to be the boolean
-    // value for '_flag' and the other one the string value for '_label'.
-    for (const [index, arg] of args.entries()) {
-      if (index < 2) {
-        switch (typeof arg) {
-          case 'boolean':
-            this._flag = arg;
-            break;
-          case 'string':
-            this._label = arg;
-            break;
-        }
-      }
-    }
-  }
-
-  get flag () { return this._flag; }
-
-  set flag (value) {
-    if (typeof value === 'boolean') {
-      this._flag = value;
-    }
-  }
-
-  get label () { return this._label; }
-
-  set label (value) {
-    if (typeof value === 'string') {
-      this._label = value;
-    }
-  }
-
-  log (message, spaceAbove) {
-    const newline = spaceAbove ? '\n' : '';
-    console.log(`${newline}[${this._label}] ${message}`);
-  }
-
-  tag (node, spaceAbove) {
-    if (node && node.tagName) {
-      const text = node.textContent.trim().replace(/\s+/g, ' ');
-      this.log(`[${node.tagName}]: ${text.substring(0, 40)}`, spaceAbove);
-    }
-  }
-
-  color (message, color="#000", backgroundColor='#fff', spaceAbove) {
-    const newline = spaceAbove ? '\n' : '';
-    console.log(`${newline}[${this._label}] ` + `%c${message}`, `color: ${color}; background: ${backgroundColor}`);
-  }
-
-  separator (spaceAbove) {
-    this.log('-----------------------------', spaceAbove);
-  }
-
-  domElement (domElement, prefix) {
-    if (typeof prefix !== 'string') {
-      prefix = '';
-    }
-
-    if (domElement) {
-      const accName = domElement.accName;
-      const count   = domElement.children.length;
-      const pos     = domElement.ordinalPosition;
-
-      if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos})`);
-      } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
-      }
-
-//      this.log(`${prefix}[${domElement.tagName}][            tabIndex]: ${domElement.tabIndex}`);
-//      this.log(`${prefix}[${domElement.tagName}][           isTabStop]: ${domElement.isTabStop}`);
-//      this.log(`${prefix}[${domElement.tagName}][isInteractiveElement]: ${domElement.isInteractiveElement}`);
-//      this.log(`${prefix}[${domElement.tagName}][            isWidget]: ${domElement.ariaInfo.isWidget}`);
-    }
-  }
-
-  domText (domText, prefix) {
-    if (typeof prefix !== 'string') {
-      prefix = '';
-    }
-    const maxDisplay = 20;
-    if (domText) {
-      if (domText.getText.length < maxDisplay) {
-        this.log(`${prefix}[text]: ${domText.getText} (parent: ${domText.parentDomElement.tagName})`);
-      } else {
-        this.log(`${prefix}[text]: ${domText.getText.substring(0, maxDisplay)} ... (parent: ${domText.parentDomElement.tagName})`);
-      }
-    }
-  }
-
-}
-
 /* controlInfo.js */
 
 /* Constants */
-const debug$t = new DebugLogging('ControlInfo', true);
+const debug$s = new DebugLogging('ControlInfo', true);
 
 /**
  * @class ControlElement
@@ -447,19 +916,65 @@ class ControlElement {
     return null;
   }
 
-  getNameForComparison (domElement, parentControlElement) {
-    let name = domElement.accName.name.trim().toLowerCase();
-
-    let pce = parentControlElement;
+  getGroupingNames (controlElement) {
+    let names = '';
+    let pce = controlElement;
 
     while (pce) {
       if (pce.domElement.role === 'group') {
-        name += ': ' + pce.domElement.accName.name.trim().toLowerCase();
+        names += ' [g]: ' + pce.domElement.accName.name.trim().toLowerCase();
       }
       pce = pce.parentControlElement;
     }
+    return names;
+  }
+
+  getRequiredParentControlName (roles, controlElement) {
+    let pce = controlElement;
+    while (pce) {
+      if (roles.indexOf(pce.domElement.role) >= 0) {
+        return ' [p]: ' + pce.domElement.accName.name.trim().toLowerCase();
+      }
+      pce = pce.parentControlElement;
+    }
+    return '';
+  }
+
+  getNameForComparison (domElement, parentControlElement) {
+    let name = domElement.accName.name.trim().toLowerCase();
+
+    console.log(`[getNameForComparison][roles]: ${domElement.ariaInfo.requiredParents.length}`);
+    // If it has a required parent, include required parent control name
+    if (domElement.ariaInfo.requiredParents.length > 0) {
+      name += this.getRequiredParentControlName(domElement.ariaInfo.requiredParents, parentControlElement);
+    }
+    else {
+      // Include all grouping names
+      name += this.getGroupingNames(parentControlElement);
+    }
 
     return name;
+  }
+
+  getButtonControl (type) {
+    function findButton(controlElements) {
+      for (let i = 0; i < controlElements.length; i++) {
+        const ce = controlElements[i];
+        const de = ce.domElement; 
+        if (((de.tagName === 'input') || (de.tagName === 'button')) &&
+            de.typeAttr === type) {
+          return ce;
+        } 
+        if (ce.childControlElements.length) {
+          const buttonControl = findButton(ce.childControlElements);
+          if (buttonControl) {
+            return buttonControl;
+          }
+        }        
+      }
+      return null;
+    }
+    return findButton(this.childControlElements);
   }
 
   updateLegendInfo (legendElement) {
@@ -478,7 +993,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$t.domElement(ce.domElement, prefix);
+      debug$s.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -582,7 +1097,7 @@ class ControlInfo {
   constructor () {
     this.allControlElements      = [];
     this.childControlElements    = [];
-    this.allFormControlElements  = [];
+    this.allFormElements  = [];
   }
 
   /**
@@ -631,7 +1146,7 @@ class ControlInfo {
 
     this.allControlElements.push(ce);
     if (domElement.tagName === 'form') {
-      this.allFormControlElements.push(ce);
+      this.allFormElements.push(ce);
     }
 
     if (parentControlElement) {
@@ -699,15 +1214,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$t.flag) {
-      debug$t.log('== Control Tree ==', 1);
+    if (debug$s.flag) {
+      debug$s.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$t.domElement(ce.domElement);
+        debug$s.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$t.log('== Forms ==', 1);
-      this.allFormControlElements.forEach( ce => {
-        debug$t.domElement(ce.domElement);
+      debug$s.log('== Forms ==', 1);
+      this.allFormElements.forEach( ce => {
+        debug$s.domElement(ce.domElement);
       });
     }
   }
@@ -716,7 +1231,7 @@ class ControlInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$s = new DebugLogging('colorContrast', false);
+const debug$r = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -736,9 +1251,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$s.flag) {
-      debug$s.separator();
-      debug$s.tag(elementNode);
+    if (debug$r.flag) {
+      debug$r.separator();
+      debug$r.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -762,11 +1277,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$s.flag) {
-      debug$s.log(`[                    opacity]: ${this.opacity}`);
-      debug$s.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$s.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$s.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$r.flag) {
+      debug$r.log(`[                    opacity]: ${this.opacity}`);
+      debug$r.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$r.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$r.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -1089,7 +1604,7 @@ class ColorContrast {
 /* hasEvents.js */
 
 /* Constants */
-const debug$r = new DebugLogging('hasEvents', false);
+const debug$q = new DebugLogging('hasEvents', false);
 
 /**
  * @class Events
@@ -1102,7 +1617,7 @@ const debug$r = new DebugLogging('hasEvents', false);
 class HasEvents {
   constructor (elementNode) {
     this.onChange = elementNode.hasAttribute('onchange');
-    if (debug$r.flag) {
+    if (debug$q.flag) {
       console.log(`[hasEvents]: ${this.onChange}`);
     }
   }
@@ -1111,7 +1626,7 @@ class HasEvents {
 /* visibility.js */
 
 /* Constants */
-const debug$q = new DebugLogging('visibility', false);
+const debug$p = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -1159,17 +1674,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$q.flag) {
-      debug$q.separator();
-      debug$q.tag(elementNode);
-      debug$q.log('[          isHidden]: ' + this.isHidden);
-      debug$q.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$q.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$q.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$q.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$q.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$q.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$q.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$p.flag) {
+      debug$p.separator();
+      debug$p.tag(elementNode);
+      debug$p.log('[          isHidden]: ' + this.isHidden);
+      debug$p.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$p.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$p.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$p.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$p.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$p.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$p.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -1215,12 +1730,11 @@ class Visibility {
     let hidden = false;
     let ariaHidden = node.getAttribute('aria-hidden');
     if (ariaHidden) {
-      ariaHidden = ariaHidden.toLowerCase();
+      ariaHidden = ariaHidden.trim().toLowerCase();
+      hidden = (ariaHidden === 'true') ? true : false;
     }
-    hidden = (ariaHidden === 'true') ? true : false;
-
     if (parentVisibility &&
-        parentVisibility.ariaHidden)  {
+        parentVisibility.isAriaHidden)  {
       hidden = true;
     }
     return hidden;
@@ -6065,7 +6579,7 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$p = new DebugLogging('AriaInfo', false);
+const debug$o = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6154,6 +6668,7 @@ class AriaInfo {
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProbihited;
+    this.requiredParents  = designPattern.requiredParents;
 
     this.isLandmark = designPattern.roleType === 'landmark';
     this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
@@ -6214,16 +6729,16 @@ class AriaInfo {
         break;
     }
 
-    if (debug$p.flag) {
-      node.attributes.length && debug$p.log(`${node.outerHTML}`, 1);
-      debug$p.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$p.log(`[         isWidget]: ${this.isWidget}`);
-      debug$p.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$p.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$p.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$p.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$p.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$p.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$o.flag) {
+      node.attributes.length && debug$o.log(`${node.outerHTML}`, 1);
+      debug$o.log(`[       isLandmark]: ${this.isLandmark}`);
+      debug$o.log(`[         isWidget]: ${this.isWidget}`);
+      debug$o.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$o.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$o.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$o.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$o.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$o.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -7901,7 +8416,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$o = new DebugLogging('ariaInHtml', false);
+const debug$n = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8093,11 +8608,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$o.flag) {
+  if (debug$n.flag) {
     if (tagName === 'h2') {
-      debug$o.tag(node);
+      debug$n.tag(node);
     }
-    debug$o.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$n.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -9301,7 +9816,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$n = new DebugLogging('DOMElement', false);
+const debug$m = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -9349,6 +9864,9 @@ class DOMElement {
     this.role    = this.hasRole ?
                    elementNode.getAttribute('role') :
                    defaultRole;
+
+    // used for button and form control related rules
+    this.typeAttr = elementNode.getAttribute('type');
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
@@ -9564,12 +10082,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$n.flag) {
+    if (debug$m.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$n.domText(domItem, prefix);
+          debug$m.domText(domItem, prefix);
         } else {
-          debug$n.domElement(domItem, prefix);
+          debug$m.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -9662,7 +10180,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$m = new DebugLogging('domText', false);
+const debug$l = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -9681,8 +10199,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$m.flag) {
-      debug$m.log(`[text]: ${this.text}`);
+    if (debug$l.flag) {
+      debug$l.log(`[text]: ${this.text}`);
     }
   }
 
@@ -9733,7 +10251,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$l = new DebugLogging('iframeInfo', false);
+const debug$k = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -9751,9 +10269,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$l.flag) {
-      debug$l.log(`[          src]: ${this.src}`);
-      debug$l.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$k.flag) {
+      debug$k.log(`[          src]: ${this.src}`);
+      debug$k.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -9789,8 +10307,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$l.flag) {
-      debug$l.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$k.flag) {
+      debug$k.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -9801,7 +10319,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('idInfo', false);
+const debug$j = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -9844,10 +10362,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$k.flag) {
-      debug$k.log('== All Links ==', 1);
+    if (debug$j.flag) {
+      debug$j.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$k.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$j.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -9856,7 +10374,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$j = new DebugLogging('imageInfo', false);
+const debug$i = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10049,22 +10567,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$j.flag) {
-      debug$j.log('== All Image elements ==', 1);
+    if (debug$i.flag) {
+      debug$i.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$j.log(`[fileName]: ${ie.fileName}`, true);
-        debug$j.log(`[    role]: ${ie.domElement.role}`);
-        debug$j.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$j.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$j.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$i.log(`[fileName]: ${ie.fileName}`, true);
+        debug$i.log(`[    role]: ${ie.domElement.role}`);
+        debug$i.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$i.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$i.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$j.log('== All SVG domElements  ==', 1);
+      debug$i.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$j.domElement(de);
+        debug$i.domElement(de);
       });
-      debug$j.log('== All MapElements ==', 1);
+      debug$i.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$j.domElement(me.domElement);
+        debug$i.domElement(me.domElement);
       });
     }
   }
@@ -10073,7 +10591,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$i = new DebugLogging('linkInfo', false);
+const debug$h = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10119,10 +10637,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$i.flag) {
-      debug$i.log('== All Links ==', 1);
+    if (debug$h.flag) {
+      debug$h.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$i.domElement(de);
+        debug$h.domElement(de);
       });
     }
   }
@@ -10131,7 +10649,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('ListInfo', false);
+const debug$g = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10152,8 +10670,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$h.flag) {
-      debug$h.log('');
+    if (debug$g.flag) {
+      debug$g.log('');
     }
   }
 
@@ -10178,9 +10696,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$h.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$h.domElement(le.domElement, prefix);
+      debug$g.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -10288,16 +10806,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All ListElements ==', 1);
-      debug$h.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$g.flag) {
+      debug$g.log('== All ListElements ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$h.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
       });
-      debug$h.log('== List Tree ==', 1);
-      debug$h.log(`[linkCount]: ${this.linkCount}`);
+      debug$g.log('== List Tree ==', 1);
+      debug$g.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$h.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -10307,7 +10825,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('structureInfo', false);
+const debug$f = new DebugLogging('structureInfo', false);
 const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const headingRole = 'heading';
 const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
@@ -10350,11 +10868,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$g.domElement(le.domElement, prefix);
+      debug$f.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$g.domElement(h, prefix);
+      debug$f.domElement(h, prefix);
     });
   }
 
@@ -10516,27 +11034,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All Headings ==', 1);
+    if (debug$f.flag) {
+      debug$f.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$g.domElement(h);
+        debug$f.domElement(h);
       });
-      debug$g.log('== All Landmarks ==', 1);
+      debug$f.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
       });
-      debug$g.log('== Landmarks By Doc ==', 1);
+      debug$f.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$g.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$g.domElement(le.domElement);
+            debug$f.domElement(le.domElement);
           });
         }
       });
-      debug$g.log('== Structure Tree ==', 1);
+      debug$f.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$f.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -10546,7 +11064,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$f = new DebugLogging('domCache', true);
+const debug$e = new DebugLogging('domCache', true);
 
 const skipableElements = [
   'base',
@@ -10642,7 +11160,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$f.flag) {
+    if (debug$e.flag) {
       this.showDomElementTree();
 
       this.controlInfo.showControlInfo();
@@ -10760,7 +11278,7 @@ class DOMCache {
                     newParentInfo.documentIndex = this.documentIndex;
                     this.transverseDOM(newParentInfo, doc);
                   } catch (error) {
-                    debug$f.flag && debug$f.log('[transverseDOM][catch]' + error);
+                    debug$e.flag && debug$e.log('[transverseDOM][catch]' + error);
                     isCrossDomain = true;
                   }                    
                   this.iframeInfo.update(domItem, isCrossDomain);
@@ -10817,471 +11335,20 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$f.log(' === AllDomElements ===', true);
+    debug$e.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$f.domElement(de);
+      debug$e.domElement(de);
     });
 
-    debug$f.log(' === AllDomTexts ===', true);
+    debug$e.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$f.domText(dt);
+      debug$e.domText(dt);
     });
 
-    debug$f.log(' === DOMCache Tree ===', true);
-    debug$f.domElement(this.startingDomElement);
+    debug$e.log(' === DOMCache Tree ===', true);
+    debug$e.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
-}
-
-/* constants.js */
-
-/* Constants */
-const debug$e = new DebugLogging('constants', false);
-
-const VERSION = '2.0.beta1';
-
-/**
- * @constant RULESET
- * @type Integer
- * @desc Constants related to the priority of learning a rule
- *       For example people new to accessibility would start
- *       with understanding TRIAGE rules and then moving to MORE
- *       and as they gain experience can use ALL
- *
- * @example
- * RULESET.TRIAGE
- * RULESET.MORE
- * RULESET.ALL
- */
-
-const RULESET =  {
-  TRIAGE: 1,
-  MORE: 2,
-  ALL: 3
-};
-
-/**
- * @constant RULE_CATEGORIES * @type Integer
- * @desc Numercial constant representing a rule category and is bit maskable
- *
- * @example
- * RULE_CATEGORIES.UNDEFINED
- * RULE_CATEGORIES.AUDIO_VIDEO
- * RULE_CATEGORIES.FORMS
- * RULE_CATEGORIES.HEADINGS
- * RULE_CATEGORIES.IMAGES
- * RULE_CATEGORIES.KEYBOARD_SUPPORT
- * RULE_CATEGORIES.LINKS
- * RULE_CATEGORIES.LANDMARKS
- * RULE_CATEGORIES.SITE_NAVIGATION
- * RULE_CATEGORIES.STYLES_READABILITY
- * RULE_CATEGORIES.TABLES
- * RULE_CATEGORIES.TIMING
- * RULE_CATEGORIES.WIDGETS_SCRIPTS
- */
-
-const RULE_CATEGORIES = {
-  UNDEFINED              : 0x0000,
-  LANDMARKS              : 0x0001,
-  HEADINGS               : 0x0002,
-  STYLES_READABILITY     : 0x0004,
-  IMAGES                 : 0x0008,
-  LINKS                  : 0x0010,
-  TABLES                 : 0x0020,
-  FORMS                  : 0x0040,
-  WIDGETS_SCRIPTS        : 0x0080,
-  AUDIO_VIDEO            : 0x0100,
-  KEYBOARD_SUPPORT       : 0x0200,
-  TIMING                 : 0x0400,
-  SITE_NAVIGATION        : 0x0800,
-  // Composite categories
-  ALL                    : 0x0FFF
-};
-
-/**
- * @constant RULE_SCOPE
- * @type Integer
- * @desc Defines scope of a rule
- *
- * @example
- * RULE_SCOPE.UNKNOWN
- * RULE_SCOPE.ELEMENT
- * RULE_SCOPE.PAGE
- * RULE_SCOPE.WEBSITE
- */
-
-const RULE_SCOPE =  {
-  UNKNOWN : 0,
-  ELEMENT : 1,
-  PAGE    : 2,
-  WEBSITE : 3
-};
-
-/**
- * @constant RESULT_TYPE
- * @type Integer
- * @desc Defines if the rule represents a element, page or website result
- *
- * @example
- * RESULT_TYPE.BASE
- * RESULT_TYPE.ELEMENT
- * RESULT_TYPE.PAGE
- * RESULT_TYPE.WEBSITE
- */
-
-const RESULT_TYPE =  {
-  BASE    : 0,
-  ELEMENT : 1,
-  PAGE    : 2,
-  WEBSITE : 3
-};
-
-/**
- * @constant TEST_RESULT * @type Integer
- * @desc Types of rule results, used in validation functions
- *
- * @example
- * TEST_RESULT.FAIL
- * TEST_RESULT.HIDDEN
- * TEST_RESULT.MANUAL_CHECK
- * TEST_RESULT.NONE
- * TEST_RESULT.PASS
- */
-
-const TEST_RESULT = {
-  PASS         : 1,
-  FAIL         : 2,
-  MANUAL_CHECK : 3,
-  HIDDEN       : 4,
-  NONE         : 5
-};
-
-/**
- * @constant IMPLEMENTATION_VALUE * @type Integer
- * @desc Constants used to represent the level of implementation
- *
- * @example
- * IMPLEMENTATION_VALUE.UNDEFINED
- * IMPLEMENTATION_VALUE.NOT_APPLICABLE
- * IMPLEMENTATION_VALUE.NOT_IMPLEMENTED
- * IMPLEMENTATION_VALUE.PARTIAL_IMPLEMENTATION
- * IMPLEMENTATION_VALUE.ALMOST_COMPLETE
- * IMPLEMENTATION_VALUE.COMPLETE
- * IMPLEMENTATION_VALUE.COMPLETE_WITH_MANUAL_CHECKS
- * IMPLEMENTATION_VALUE.MANUAL_CHECKS_ONLY
- */
-
-const IMPLEMENTATION_VALUE = {
-  UNDEFINED                   : 0,
-  NOT_APPLICABLE              : 1,
-  NOT_IMPLEMENTED             : 2,
-  PARTIAL_IMPLEMENTATION      : 3,
-  ALMOST_COMPLETE             : 4,
-  COMPLETE                    : 5,
-  COMPLETE_WITH_MANUAL_CHECKS : 6,
-  MANUAL_CHECKS_ONLY          : 7
-};
-
-  /**
- * @constant RESULT_VALUE
- * @type Integer
- * @desc Constants used to represent evaluation results at the element level
- *
- * @example
- * RESULT_VALUE.UNDEFINED
- * RESULT_VALUE.PASS
- * RESULT_VALUE.HIDDEN
- * RESULT_VALUE.MANUAL_CHECK
- * RESULT_VALUE.VIOLATION
- * RESULT_VALUE.WARNING
- */
-
-const RESULT_VALUE = {
-  UNDEFINED      : 0,
-  PASS           : 1,
-  HIDDEN         : 2,  // Content is hidden and not tested for accessibility
-  MANUAL_CHECK   : 3,
-  WARNING        : 4,
-  VIOLATION      : 5
-};
-
-/**
- * @constant RULE_RESULT_VALUE * @type Integer
- * @desc Constants used to represent evaluation results at the rule level
- *
- * @example
- * RULE_RESULT_VALUE.UNDEFINED
- * RULE_RESULT_VALUE.NOT_APPLICABLE
- * RULE_RESULT_VALUE.PASS
- * RULE_RESULT_VALUE.MANUAL_CHECK
- * RULE_RESULT_VALUE.WARNING
- * RULE_RESULT_VALUE.VIOLATION
- */
-
-const RULE_RESULT_VALUE = {
-  UNDEFINED      : 0,
-  NOT_APPLICABLE : 1,
-  PASS           : 2,
-  MANUAL_CHECK   : 3,
-  WARNING        : 4,
-  VIOLATION      : 5
-};
-
-  /**
- * @constant WCAG_PRINCIPLE
- * @type Integer
- * @desc Numercial constant representing a WCAG 2.0 Principles
- *
- * @example
- * WCAG_PRINCIPLE.P_1
- * WCAG_PRINCIPLE.P_2
- * WCAG_PRINCIPLE.P_3
- * WCAG_PRINCIPLE.P_4
- */
-const WCAG_PRINCIPLE = {
-  P_1          : 0x000001,
-  P_2          : 0x000002,
-  P_3          : 0x000004,
-  P_4          : 0x000008,
-  ALL          : 0x00000F
-};
-
-  /**
- * @constant WCAG_GUIDELINE
- * @type Integer
- * @desc Numercial constant representing a WCAG 2.0 Guidelines
- *
- * @example
- * WCAG_GUIDELINE.G_1_1
- * WCAG_GUIDELINE.G_1_2
- * WCAG_GUIDELINE.G_1_3
- * WCAG_GUIDELINE.G_1_4
- * WCAG_GUIDELINE.G_2_1
- * WCAG_GUIDELINE.G_2_2
- * WCAG_GUIDELINE.G_2_3
- * WCAG_GUIDELINE.G_2_4
- * WCAG_GUIDELINE.G_3_1
- * WCAG_GUIDELINE.G_3_2
- * WCAG_GUIDELINE.G_3_3
- * WCAG_GUIDELINE.G_4_1
- */
-
-const WCAG_GUIDELINE = {
-  G_1_1          : 0x000010,
-  G_1_2          : 0x000020,
-  G_1_3          : 0x000040,
-  G_1_4          : 0x000080,
-  G_2_1          : 0x000100,
-  G_2_2          : 0x000200,
-  G_2_3          : 0x000400,
-  G_2_4          : 0x000800,
-  G_2_5          : 0x001000,
-  G_3_1          : 0x002000,
-  G_3_2          : 0x004000,
-  G_3_3          : 0x008000,
-  G_4_1          : 0x010000,
-  ALL            : 0x01FFF0
-};
-
-/**
- * @constant WCAG_SUCCESS_CRITERION * @type Integer
- * @desc Numercial constant representing a WCAG 2.x Success Criteria
- *
- * @example
- * WCAG_SUCCESS_CRITERION.SC_1_1_1
- * ....
- * WCAG_SUCCESS_CRITERION.SC_4_1_2
- */
-
-const WCAG_SUCCESS_CRITERION = {
-  SC_1_1_1          : 0x1101,
-  SC_1_2_1          : 0x1201,
-  SC_1_2_2          : 0x1202,
-  SC_1_2_3          : 0x1203,
-  SC_1_2_4          : 0x1204,
-  SC_1_2_5          : 0x1205,
-  SC_1_2_6          : 0x1206,
-  SC_1_2_7          : 0x1207,
-  SC_1_2_8          : 0x1208,
-  SC_1_2_9          : 0x1209,
-  SC_1_3_1          : 0x1301,
-  SC_1_3_2          : 0x1302,
-  SC_1_3_3          : 0x1303,
-  SC_1_3_4          : 0x1304,
-  SC_1_3_5          : 0x1305,
-  SC_1_3_6          : 0x1306,
-  SC_1_4_1          : 0x1401,
-  SC_1_4_2          : 0x1402,
-  SC_1_4_3          : 0x1403,
-  SC_1_4_4          : 0x1404,
-  SC_1_4_5          : 0x1405,
-  SC_1_4_6          : 0x1406,
-  SC_1_4_7          : 0x1407,
-  SC_1_4_8          : 0x1408,
-  SC_1_4_9          : 0x1409,
-  SC_1_4_10         : 0x1410,
-  SC_1_4_11         : 0x1411,
-  SC_1_4_12         : 0x1412,
-  SC_1_4_13         : 0x1413,
-  SC_2_1_1          : 0x2101,
-  SC_2_1_2          : 0x2102,
-  SC_2_1_3          : 0x2103,
-  SC_2_1_4          : 0x2104,
-  SC_2_2_1          : 0x2201,
-  SC_2_2_2          : 0x2202,
-  SC_2_2_3          : 0x2203,
-  SC_2_2_4          : 0x2204,
-  SC_2_2_5          : 0x2205,
-  SC_2_2_6          : 0x2206,
-  SC_2_3_1          : 0x2301,
-  SC_2_3_2          : 0x2302,
-  SC_2_3_3          : 0x2303,
-  SC_2_4_1          : 0x2401,
-  SC_2_4_2          : 0x2402,
-  SC_2_4_3          : 0x2403,
-  SC_2_4_4          : 0x2404,
-  SC_2_4_5          : 0x2405,
-  SC_2_4_6          : 0x2406,
-  SC_2_4_7          : 0x2407,
-  SC_2_4_8          : 0x2408,
-  SC_2_4_9          : 0x2409,
-  SC_2_4_10         : 0x2410,
-  SC_2_5_1          : 0x2501,
-  SC_2_5_2          : 0x2502,
-  SC_2_5_3          : 0x2503,
-  SC_2_5_4          : 0x2504,
-  SC_2_5_5          : 0x2505,
-  SC_2_5_6          : 0x2506,
-  SC_3_1_1          : 0x3101,
-  SC_3_1_2          : 0x3102,
-  SC_3_1_3          : 0x3103,
-  SC_3_1_4          : 0x3104,
-  SC_3_1_5          : 0x3105,
-  SC_3_1_6          : 0x3106,
-  SC_3_2_1          : 0x3201,
-  SC_3_2_2          : 0x3202,
-  SC_3_2_3          : 0x3203,
-  SC_3_2_4          : 0x3204,
-  SC_3_2_5          : 0x3205,
-  SC_3_3_1          : 0x3301,
-  SC_3_3_2          : 0x3302,
-  SC_3_3_3          : 0x3303,
-  SC_3_3_4          : 0x3304,
-  SC_3_3_5          : 0x3305,
-  SC_3_3_6          : 0x3306,
-  SC_4_1_1          : 0x4101,
-  SC_4_1_2          : 0x4102,
-  SC_4_1_3          : 0x4103
-};
-
-/**
- * @constant REFERENCES
- * @type Integer
- * @desc Types of reference for supplemential materials to help people understand an accessibility requirement and
- *       how to improve the accessibility
- *
- * @example
- * REFERENCES.UNKNOWN
- * REFERENCES.SPECIFICATION
- * REFERENCES.WCAG_TECHNIQUE
- * REFERENCES.TECHNIQUE
- * REFERENCES.EXAMPLE
- * REFERENCES.MANUAL_CHECK
- * REFERENCES.AUTHORING_TOOL
- * REFERENCES.OTHER
- */
-
-const REFERENCES = {
-  UNKNOWN         : 0,
-  AUTHORING_TOOL  : 1,
-  EXAMPLE         : 2,
-  LIBRARY_PRODUCT : 3,
-  MANUAL_CHECK    : 4,
-  OTHER           : 5,
-  PURPOSE         : 6,
-  RULE_CATEGORY   : 7,
-  REFERENCE       : 8,
-  SPECIFICATION   : 9,
-  TECHNIQUE       : 10,
-  WCAG_TECHNIQUE  : 11
-};
-
-/**
- * @constant WCAG_LEVEL
- * @type Integer
- * @desc Constants related to the level of importance of a success criteria
- *
- * @example
- * WCAG_LEVEL.A
- * WCAG_LEVEL.AA
- * WCAG_LEVEL.AAA
- */
-
-const WCAG_LEVEL =  {
-  A       : 4,
-  AA      : 2,
-  AAA     : 1,
-  UNKNOWN : 0
-};
-
-/*  Constant helper functions */
-
-/**
- * @function getGuidelineId
- *
- * @desc Returns constant identifying the WCAG Guideline
- *
- * @param {String} sc - String representing a success criteria (e.g. '2.4.1')
- *
- * @return {Integer}
- */
-
-function getGuidelineId(sc) {
-  debug$e.flag && debug$e.log(`[getGuidelineId][sc]: ${sc}`);
-  const parts = sc.split('.');
-  const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
-  if (!gl) {
-    return 0;
-  }
-  debug$e.flag && debug$e.log(`[getGuidelineId][gl]: ${gl}`);
-  return WCAG_GUIDELINE[gl];
-}
-
-/**
- * @function getResultValue
- *
- * @desc Returns RESULT_VALUE constant identifying the result based on
- *       the rule being required or recommended
- *
- * @param  {Integer}  testValue  - a TEST_VALUE constant representing the
- *                                 result
- * @param  {Boolean}  isrequired  - true if the rule is required
- *
- * @return {Integer} see @desc
- */
-
-function getResultValue(testValue, isRequired) {
-    switch (testValue) {
-
-      case TEST_RESULT.PASS:
-        return RESULT_VALUE.PASS;
-
-      case TEST_RESULT.FAIL:
-        if (isRequired) {
-          return RESULT_VALUE.VIOLATION;
-        }
-        else {
-          return RESULT_VALUE.WARNING;
-        }
-
-      case TEST_RESULT.MANUAL_CHECK:
-        return RESULT_VALUE.MANUAL_CHECK;
-
-      case TEST_RESULT.HIDDEN:
-        return RESULT_VALUE.HIDDEN;
-    }
-
-    return RESULT_VALUE.NONE;
 }
 
 /* colorRules.js */
@@ -11611,7 +11678,7 @@ const focusRules$1 = [
       return buttonDomElements;
     }
 
-    dom_cache.controlInfo.allFormControlElements.forEach( fce => {
+    dom_cache.controlInfo.allFormElements.forEach( fce => {
       const de = fce.domElement;
       if (de.visibility.isVisibleOnScreen) {
         const buttonDomElements = getChildButtonDomElements(fce);
@@ -12133,14 +12200,18 @@ const controlRules$1 = [
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
       let count;
-      debug$d.log(`[CONTROL 10]: ${ce1.nameForComparision}`);
-      if (de1.isInteractiveElement) {
+      if (de1.ariaInfo.isNameRequired) {
         if (de1.visibility.isVisibleToAT) {
           count = 0;
           dom_cache.controlInfo.allControlElements.forEach(ce2 => {
             const de2 = ce2.domElement;
-            if ((ce1 !== ce2) && de2.isInteractiveElement && de2.visibility.isVisibleToAT) {
-              if (ce1.nameForComparision === ce2.nameForComparision) {
+            if ((ce1 !== ce2) && 
+                ((de1.ariaInfo.requiredParents.length === 0) || 
+                 (ce1.parentControlElement === ce2.parentControlElement)) &&
+                de2.ariaInfo.isNameRequired && 
+                de2.visibility.isVisibleToAT) {
+              if ((de1.role === de2.role) && 
+                  (ce1.nameForComparision === ce2.nameForComparision)) {
                 count += 1;
               }
             }
@@ -12149,7 +12220,12 @@ const controlRules$1 = [
             rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
           } 
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.role]);
+            if (de1.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.tagName]);
+            }
           }
         }
         else {
@@ -12163,66 +12239,6 @@ const controlRules$1 = [
       }
     });  
   } // end validate function
-
-    /*
-   var TEST_RESULT = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var control_elements   = dom_cache.controls_cache.control_elements;
-   var control_elements_len = control_elements.length;
-   var ces   = [];
-   var ces_len = 0;
-   var i, j;
-
-   // Check to see if valid cache reference
-   if (control_elements && control_elements_len) {
-
-     // collect all the visible controls
-     for (i = 0; i < control_elements_len; i++) {
-       var ce = control_elements[i];
-       var de = ce.dom_element;
-
-       if (ce.needs_label) {
-
-         var control_type = ce.toString();
-
-         if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-           // Only test form controls with labels
-           if (ce.computed_label && ce.computed_label.length) {
-             ces.push(ce);
-           }
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [control_type]);
-         }
-       }
-     } // end loop
-
-     // sort labels
-
-     ces = dom_cache.sortArrayOfObjects(ces,'computed_label_for_comparison', true);
-     ces = dom_cache.getDuplicateObjects(ces,'computed_label_for_comparison');
-
-     for (i = 0; i < ces.length; i++) {
-       ces_len = ces[i].length;
-
-       ce      = ces[i][0];
-       de      = ce.dom_element;
-
-       if ((ces_len === 1) ||
-           ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {
-         rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
-         if (ces_len === 2) rule_result.addResult(TEST_RESULT.PASS, ces[i][1], 'ELEMENT_PASS_1', []);
-       }
-       else {
-         for (j = 0; j < ces_len; j++) {
-           rule_result.addResult(TEST_RESULT.FAIL, ces[i][j], 'ELEMENT_FAIL_1', []);
-         }
-       }
-     }
-   }
-    */
-
 },
 
 /**
@@ -12234,7 +12250,7 @@ const controlRules$1 = [
  */
 
 { rule_id             : 'CONTROL_11',
-  last_updated        : '2022-06-10',
+  last_updated        : '2022-08-08',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
@@ -12244,93 +12260,69 @@ const controlRules$1 = [
   target_resources    : ['input[type="submit"]', 'input[type="reset"]','button[type="submit"]', 'button[type="reset"]'],
   validate            : function (dom_cache, rule_result) {
 
+    let de1, de2, count;
 
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    };
-
-    debug$d.flag && debug$d.log(`[CONTROL_2]: ${info}`);
-
-    /*
-
-    function checkButtons(fe1) {
-
-      var flag1 = false;
-      var flag2 = false;
-
-      var sb1 = fe1.submit_button ? fe1.submit_button : null;
-      var rb1 = fe1.reset_button ? fe1.reset_button : null;
-
-      for (var j = 0; j < form_elements_len; j += 1) {
-        var fe2 = form_elements[j];
-
-        if (fe1.cache_id === fe2.cache_id) {
-          continue;
-        }
-
-        var sb2 = fe2.submit_button ? fe2.submit_button : null;
-        var rb2 = fe2.reset_button  ? fe2.reset_button : null;
-
-        if (!flag1 && sb1 && sb2 && (sb1.computed_label_for_comparison === sb2.computed_label_for_comparison)) {
-
-          if (sb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (sb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (sb1.dom_element.tag_name === 'button') {
-                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_1', ['submit']);
-              } else {
-                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_2', ['submit']);
+    if (dom_cache.controlInfo.allFormElements.length > 1 ) {
+      dom_cache.controlInfo.allFormElements.forEach(fe1 => {
+        const sb1 = fe1.getButtonControl('submit');
+        if (sb1) {
+          de1 = sb1.domElement;
+          count = 0;
+          if (de1.visibility.isVisibleToAT) {
+            dom_cache.controlInfo.allFormElements.forEach(fe2 => {
+              if (fe1 !== fe2) {
+                const sb2 = fe2.getButtonControl('submit');
+                if (sb1 && sb2) {
+                  de2 = sb2.domElement;
+                  if (de2.visibility.isVisibleToAT && 
+                      (sb1.nameForComparision === sb2.nameForComparision)) {
+                    count += 1;
+                  }
+                }
               }
-            } else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, sb1, 'ELEMENT_HIDDEN_1', ['submit']);
+            });
+            if (count) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.typeAttr, de1.accName.name]);
             }
-            flag1 = true;
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [de1.tagName, de1.typeAttr, de1.accName.name]);                
+            }          
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_1', [de1.tagName, de1.typeAttr]);
           }
         }
 
-        if (!flag2 && rb1 && rb2 && (rb1.computed_label_for_comparison === rb2.computed_label_for_comparison)) {
-
-          if (rb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (rb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (rb1.dom_element.tag_name === 'button') {
-                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_1', ['reset']);
-              } else {
-                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_2', ['reset']);
+        const rb1 = fe1.getButtonControl('reset');
+        if (rb1) {
+          de1 = rb1.domElement;
+          count = 0;
+          if (de1.visibility.isVisibleToAT) {
+            dom_cache.controlInfo.allFormElements.forEach(fe2 => {
+              if (fe1 !== fe2) {
+                const rb2 = fe2.getButtonControl('reset');
+                if (rb1 && rb2) {
+                  de2 = rb2.domElement;
+                  if (de2.visibility.isVisibleToAT && 
+                      (rb1.nameForComparision === rb2.nameForComparision)) {
+                    count += 1;
+                  }
+                }
               }
-            } else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, rb1, 'ELEMENT_HIDDEN_1', ['reset']);
+            });
+            if (count) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.typeAttr, de1.accName.name]);
             }
-            flag2 = true;
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [de1.tagName, de1.typeAttr, de1.accName.name]);                
+            }          
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_1', [de1.tagName, de1.typeAttr]);
           }
         }
-
-        if (flag1 && flag2) {
-          return;
-        }
-      } // end loop
+      });
     }
-
-   var TEST_RESULT  = TEST_RESULT;
-   var VISIBILITY   = VISIBILITY;
-   var CONTROL_TYPE =  CONTROL_TYPE;
-
-   var form_elements   = dom_cache.controls_cache.form_elements;
-   var form_elements_len = form_elements.length;
-   var fes   = [];
-
-   var input_submit_info = [];
-   var input_reset_info  = [];
-
-   // Check to see if valid cache reference
-   if (form_elements && form_elements_len) {
-
-     for (var i = 0; i < form_elements_len; i += 1) {
-       var fe = form_elements[i];
-       checkButtons(fe);
-     } // end loop
-   }
-
-   */
   } // end validate function
 }
 
@@ -15923,12 +15915,14 @@ const controlRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: 'Accessible name is unique.',
-        ELEMENT_FAIL_1: 'Change the accessible name of the %1 control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
-        ELEMENT_HIDDEN_1: '@%1[role=%2]@ element was not evaluated because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[role=%2]@ control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@%1@ control was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'Accessibe names that are unique make it possible for people to understand the different purposes of form controls on the same page.'
+        'Accessibe names that are unique make it possible for people to understand the different purposes of form controls on the same page.',
+        'For controls with required parent elements, the accessible name only needs to be unique with the sibling controls.'
       ],
       TECHNIQUES: [
         'The preferred technique for labeling standard HTML form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
@@ -15947,37 +15941,21 @@ const controlRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML Specification: The @label@ element',
-          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'MDN <label>: The Input Label element',
-          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML Specification: The @legend@ element',
-          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'MDN <legend>: The Field Set Legend element',
-          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
-        },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
           url: 'https://www.w3.org/WAI/tutorials/forms/'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA APG: Providing Accessible Names and Descriptions',
+          url: 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/'
+        },        
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The Input Label element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The Fieldset/Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
@@ -15990,6 +15968,26 @@ const controlRules = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/multipage/dom.html#attr-title'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         }
       ]
   },
@@ -16006,9 +16004,9 @@ const controlRules = {
         NOT_APPLICABLE: 'No forms or only one form with submit or reset buttons on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_FAIL_1: 'Change the text content of the @button@ element to create a unique label, or use @aria-label@ or @aria-labelledby@ to make the @%1@ button accessible names unique on the page.',
-        ELEMENT_FAIL_2: 'Change the @value@ attribute of the @input@ element to create a unique label, or use @aria-label@ or @aria-labelledby@ to make the @%1@ button accessible names unique on the page.',
-        ELEMENT_HIDDEN_1: '@%1@ button was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[type="%2"]@ element to create a unique name for the form\'s %2 button, current accessible name is "%4".',
+        ELEMENT_PASS_1: 'The accessible name of the @%1[type="%2"]@ element is unique for form\'s %2 button on the page, current accessible name is "%3".',
+        ELEMENT_HIDDEN_1: '@%1[type="%2"]@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'Labels that are unique make it possible for people to understand the different purposes of form controls on the same page.',
@@ -16022,17 +16020,21 @@ const controlRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @form@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FORM'
-        },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
           url: 'https://www.w3.org/WAI/tutorials/forms/'
         },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA APG: Providing Accessible Names and Descriptions',
+          url: 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/'
+        } ,
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @form@ element',
+          url:   'https://html.spec.whatwg.org/multipage/forms.html#the-form-element'
         },
       ]
   }
@@ -19377,15 +19379,6 @@ class RuleInformation {
 
     return rules;
   }
-
-  get RULE_CATEGORIES () {
-    return RULE_CATEGORIES;
-  }
-
-  get WCAG_GUIDELINE () {
-    return WCAG_GUIDELINE;
-  }
-
 }
 
 /* resultSummary.js */
@@ -21204,14 +21197,24 @@ class EvaluationResult {
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false);
 
+/**
+ * @class EvaluateLibrary
+ *
+ * @desc Base class for APIs for using the evaluation library to evaluate a DOM 
+ *       for WCAG requirements and provides access to descriptive rule information
+ */
+
 class EvaluationLibrary {
   constructor (codeTags = false) {
     this.ruleInfo = new RuleInformation();
+    this.constants = new Constants();
+    // setUseCodeTags sets if localized strings using the @ character to identify 
+    // code items in the string return <code> tags or capitalization  
     setUseCodeTags(codeTags);
   }
 
   /**
-   * @class evaluate
+   * @method evaluate
    *
    * @desc Evaluate a document using the OpenA11y ruleset and return an evaluation object
    *
@@ -21229,9 +21232,27 @@ class EvaluationLibrary {
     return evaluationResult;
   }
 
+  /**
+   * @method getRuleInfo
+   * 
+   * @desc Provides information on the current rules used in the evaluation library, 
+   *       including localized strings
+   */
+
   get getRuleInfo () {
     return this.ruleInfo;
   }
+
+  /**
+   * @method CONSTANTS
+   * 
+   * @desc Provides access to the Constants used in the evaluation library
+   */
+
+  get CONSTANTS () {
+    return this.constants;
+  }
+
 }
 
 export { EvaluationLibrary as default };

@@ -11,8 +11,8 @@ const el = new EvaluationLibrary(true);
 
 /* Constants */
 
-const RULE_CATEGORIES = el.getRuleInfo.RULE_CATEGORIES;
-const WCAG_GUIDELINE  = el.getRuleInfo.WCAG_GUIDELINE;
+const RULE_CATEGORIES = el.CONSTANTS.RULE_CATEGORIES;
+const WCAG_GUIDELINE  = el.CONSTANTS.WCAG_GUIDELINE;
 
 const ruleCategories = [
   RULE_CATEGORIES.LANDMARKS,
@@ -61,7 +61,7 @@ function outputFile(fname, data) {
 }
 
 
-const allRulesInfo = el.getRuleInfo.getRulesByCategory(el.getRuleInfo.RULE_CATEGORIES.ALL);
+const allRulesInfo = el.getRuleInfo.getRulesByCategory(RULE_CATEGORIES.ALL);
 
 const allRuleCategories = [];
 const allGuidelines = [];

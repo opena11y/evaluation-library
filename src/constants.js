@@ -410,6 +410,24 @@ const WCAG_LEVEL =  {
   UNKNOWN : 0
 }
 
+/* Constant Class */
+
+export class Constants {
+  constructor () {
+    this.IMPLEMENTATION_VALUE   = IMPLEMENTATION_VALUE;
+    this.RESULT_VALUE           = RESULT_VALUE;
+    this.RESULT_TYPE            = RESULT_TYPE;
+    this.RULESET                = RULESET;
+    this.RULE_CATEGORIES        = RULE_CATEGORIES;
+    this.RULE_RESULT_VALUE      = RULE_RESULT_VALUE;
+    this.RULE_SCOPE             = RULE_SCOPE;
+    this.WCAG_GUIDELINE         = WCAG_GUIDELINE;
+    this.WCAG_LEVEL             = WCAG_LEVEL;
+    this.WCAG_PRINCIPLE         = WCAG_PRINCIPLE;
+    this.WCAG_SUCCESS_CRITERION = WCAG_SUCCESS_CRITERION;
+  }
+} 
+
 /*  Constant helper functions */
 
 /**

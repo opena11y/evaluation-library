@@ -68,6 +68,9 @@ export default class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
+    // used for button and form control related rules
+    this.typeAttr = elementNode.getAttribute('type');
+
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 

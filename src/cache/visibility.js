@@ -108,12 +108,11 @@ export default class Visibility {
     let hidden = false;
     let ariaHidden = node.getAttribute('aria-hidden');
     if (ariaHidden) {
-      ariaHidden = ariaHidden.toLowerCase();
+      ariaHidden = ariaHidden.trim().toLowerCase();
+      hidden = (ariaHidden === 'true') ? true : false;
     }
-    hidden = (ariaHidden === 'true') ? true : false;
-
     if (parentVisibility &&
-        parentVisibility.ariaHidden)  {
+        parentVisibility.isAriaHidden)  {
       hidden = true;
     }
     return hidden;

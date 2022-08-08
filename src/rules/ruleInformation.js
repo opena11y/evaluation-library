@@ -3,12 +3,6 @@
 /* Imports */
 
 import {
-  RULE_CATEGORIES,
-  WCAG_GUIDELINE
-}
-from '../constants.js'
-
-import {
   getCommonMessage,
   getGuidelineInfo,
   getInformationLinks,
@@ -113,13 +107,4 @@ export default class RuleInformation {
 
     return rules;
   }
-
-  get RULE_CATEGORIES () {
-    return RULE_CATEGORIES;
-  }
-
-  get WCAG_GUIDELINE () {
-    return WCAG_GUIDELINE;
-  }
-
 }

@@ -504,12 +504,14 @@ export const controlRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: 'Accessible name is unique.',
-        ELEMENT_FAIL_1: 'Change the accessible name of the %1 control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
-        ELEMENT_HIDDEN_1: '@%1[role=%2]@ element was not evaluated because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[role=%2]@ control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@%1@ control was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'Accessibe names that are unique make it possible for people to understand the different purposes of form controls on the same page.'
+        'Accessibe names that are unique make it possible for people to understand the different purposes of form controls on the same page.',
+        'For controls with required parent elements, the accessible name only needs to be unique with the sibling controls.'
       ],
       TECHNIQUES: [
         'The preferred technique for labeling standard HTML form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
@@ -528,37 +530,21 @@ export const controlRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML Specification: The @label@ element',
-          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'MDN <label>: The Input Label element',
-          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML Specification: The @legend@ element',
-          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'MDN <legend>: The Field Set Legend element',
-          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
-        },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
           url: 'https://www.w3.org/WAI/tutorials/forms/'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA APG: Providing Accessible Names and Descriptions',
+          url: 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/'
+        },        
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The Input Label element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The Fieldset/Legend element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
@@ -571,6 +557,26 @@ export const controlRules = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/dev/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @legend@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/multipage/dom.html#attr-title'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         }
       ]
   },
@@ -587,9 +593,9 @@ export const controlRules = {
         NOT_APPLICABLE: 'No forms or only one form with submit or reset buttons on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_FAIL_1: 'Change the text content of the @button@ element to create a unique label, or use @aria-label@ or @aria-labelledby@ to make the @%1@ button accessible names unique on the page.',
-        ELEMENT_FAIL_2: 'Change the @value@ attribute of the @input@ element to create a unique label, or use @aria-label@ or @aria-labelledby@ to make the @%1@ button accessible names unique on the page.',
-        ELEMENT_HIDDEN_1: '@%1@ button was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[type="%2"]@ element to create a unique name for the form\'s %2 button, current accessible name is "%4".',
+        ELEMENT_PASS_1: 'The accessible name of the @%1[type="%2"]@ element is unique for form\'s %2 button on the page, current accessible name is "%3".',
+        ELEMENT_HIDDEN_1: '@%1[type="%2"]@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'Labels that are unique make it possible for people to understand the different purposes of form controls on the same page.',
@@ -603,17 +609,21 @@ export const controlRules = {
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @form@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-FORM'
-        },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
           url: 'https://www.w3.org/WAI/tutorials/forms/'
         },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA APG: Providing Accessible Names and Descriptions',
+          url: 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/'
+        } ,
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @form@ element',
+          url:   'https://html.spec.whatwg.org/multipage/forms.html#the-form-element'
         },
       ]
   }

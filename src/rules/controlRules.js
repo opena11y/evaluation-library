@@ -449,14 +449,18 @@ export const controlRules = [
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
       let count;
-      debug.log(`[CONTROL 10]: ${ce1.nameForComparision}`);
-      if (de1.isInteractiveElement) {
+      if (de1.ariaInfo.isNameRequired) {
         if (de1.visibility.isVisibleToAT) {
           count = 0;
           dom_cache.controlInfo.allControlElements.forEach(ce2 => {
             const de2 = ce2.domElement;
-            if ((ce1 !== ce2) && de2.isInteractiveElement && de2.visibility.isVisibleToAT) {
-              if (ce1.nameForComparision === ce2.nameForComparision) {
+            if ((ce1 !== ce2) && 
+                ((de1.ariaInfo.requiredParents.length === 0) || 
+                 (ce1.parentControlElement === ce2.parentControlElement)) &&
+                de2.ariaInfo.isNameRequired && 
+                de2.visibility.isVisibleToAT) {
+              if ((de1.role === de2.role) && 
+                  (ce1.nameForComparision === ce2.nameForComparision)) {
                 count += 1;
               }
             }
@@ -465,7 +469,12 @@ export const controlRules = [
             rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
           } 
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.role]);
+            if (de1.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.tagName]);
+            }
           }
         }
         else {
@@ -479,66 +488,6 @@ export const controlRules = [
       }
     });  
   } // end validate function
-
-    /*
-   var TEST_RESULT = TEST_RESULT;
-   var VISIBILITY = VISIBILITY;
-
-   var control_elements   = dom_cache.controls_cache.control_elements;
-   var control_elements_len = control_elements.length;
-   var ces   = [];
-   var ces_len = 0;
-   var i, j;
-
-   // Check to see if valid cache reference
-   if (control_elements && control_elements_len) {
-
-     // collect all the visible controls
-     for (i = 0; i < control_elements_len; i++) {
-       var ce = control_elements[i];
-       var de = ce.dom_element;
-
-       if (ce.needs_label) {
-
-         var control_type = ce.toString();
-
-         if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-           // Only test form controls with labels
-           if (ce.computed_label && ce.computed_label.length) {
-             ces.push(ce);
-           }
-         }
-         else {
-           rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [control_type]);
-         }
-       }
-     } // end loop
-
-     // sort labels
-
-     ces = dom_cache.sortArrayOfObjects(ces,'computed_label_for_comparison', true);
-     ces = dom_cache.getDuplicateObjects(ces,'computed_label_for_comparison');
-
-     for (i = 0; i < ces.length; i++) {
-       ces_len = ces[i].length;
-
-       ce      = ces[i][0];
-       de      = ce.dom_element;
-
-       if ((ces_len === 1) ||
-           ((ces_len === 2) && ((de.role === 'tab') || (de.role === 'tabpanel')))) {
-         rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
-         if (ces_len === 2) rule_result.addResult(TEST_RESULT.PASS, ces[i][1], 'ELEMENT_PASS_1', []);
-       }
-       else {
-         for (j = 0; j < ces_len; j++) {
-           rule_result.addResult(TEST_RESULT.FAIL, ces[i][j], 'ELEMENT_FAIL_1', []);
-         }
-       }
-     }
-   }
-    */
-
 },
 
 /**
@@ -550,7 +499,7 @@ export const controlRules = [
  */
 
 { rule_id             : 'CONTROL_11',
-  last_updated        : '2022-06-10',
+  last_updated        : '2022-08-08',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   ruleset             : RULESET.MORE,
@@ -560,93 +509,69 @@ export const controlRules = [
   target_resources    : ['input[type="submit"]', 'input[type="reset"]','button[type="submit"]', 'button[type="reset"]'],
   validate            : function (dom_cache, rule_result) {
 
+    let de1, de2, count;
 
-    let info = {
-      dom_cache: dom_cache,
-      rule_result: rule_result
-    }
-
-    debug.flag && debug.log(`[CONTROL_2]: ${info}`);
-
-    /*
-
-    function checkButtons(fe1) {
-
-      var flag1 = false;
-      var flag2 = false;
-
-      var sb1 = fe1.submit_button ? fe1.submit_button : null;
-      var rb1 = fe1.reset_button ? fe1.reset_button : null;
-
-      for (var j = 0; j < form_elements_len; j += 1) {
-        var fe2 = form_elements[j];
-
-        if (fe1.cache_id === fe2.cache_id) {
-          continue;
-        }
-
-        var sb2 = fe2.submit_button ? fe2.submit_button : null;
-        var rb2 = fe2.reset_button  ? fe2.reset_button : null;
-
-        if (!flag1 && sb1 && sb2 && (sb1.computed_label_for_comparison === sb2.computed_label_for_comparison)) {
-
-          if (sb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (sb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (sb1.dom_element.tag_name === 'button') {
-                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_1', ['submit']);
-              } else {
-                rule_result.addResult(TEST_RESULT.FAIL, sb1, 'ELEMENT_FAIL_2', ['submit']);
+    if (dom_cache.controlInfo.allFormElements.length > 1 ) {
+      dom_cache.controlInfo.allFormElements.forEach(fe1 => {
+        const sb1 = fe1.getButtonControl('submit');
+        if (sb1) {
+          de1 = sb1.domElement;
+          count = 0;
+          if (de1.visibility.isVisibleToAT) {
+            dom_cache.controlInfo.allFormElements.forEach(fe2 => {
+              if (fe1 !== fe2) {
+                const sb2 = fe2.getButtonControl('submit');
+                if (sb1 && sb2) {
+                  de2 = sb2.domElement;
+                  if (de2.visibility.isVisibleToAT && 
+                      (sb1.nameForComparision === sb2.nameForComparision)) {
+                    count += 1;
+                  }
+                }
               }
-            } else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, sb1, 'ELEMENT_HIDDEN_1', ['submit']);
+            });
+            if (count) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.typeAttr, de1.accName.name]);
             }
-            flag1 = true;
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [de1.tagName, de1.typeAttr, de1.accName.name]);                
+            }          
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_1', [de1.tagName, de1.typeAttr]);
           }
         }
 
-        if (!flag2 && rb1 && rb2 && (rb1.computed_label_for_comparison === rb2.computed_label_for_comparison)) {
-
-          if (rb2.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (rb1.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (rb1.dom_element.tag_name === 'button') {
-                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_1', ['reset']);
-              } else {
-                rule_result.addResult(TEST_RESULT.FAIL, rb1, 'ELEMENT_FAIL_2', ['reset']);
+        const rb1 = fe1.getButtonControl('reset');
+        if (rb1) {
+          de1 = rb1.domElement;
+          count = 0;
+          if (de1.visibility.isVisibleToAT) {
+            dom_cache.controlInfo.allFormElements.forEach(fe2 => {
+              if (fe1 !== fe2) {
+                const rb2 = fe2.getButtonControl('reset');
+                if (rb1 && rb2) {
+                  de2 = rb2.domElement;
+                  if (de2.visibility.isVisibleToAT && 
+                      (rb1.nameForComparision === rb2.nameForComparision)) {
+                    count += 1;
+                  }
+                }
               }
-            } else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, rb1, 'ELEMENT_HIDDEN_1', ['reset']);
+            });
+            if (count) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.typeAttr, de1.accName.name]);
             }
-            flag2 = true;
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', [de1.tagName, de1.typeAttr, de1.accName.name]);                
+            }          
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de1, 'ELEMENT_HIDDEN_1', [de1.tagName, de1.typeAttr]);
           }
         }
-
-        if (flag1 && flag2) {
-          return;
-        }
-      } // end loop
+      });
     }
-
-   var TEST_RESULT  = TEST_RESULT;
-   var VISIBILITY   = VISIBILITY;
-   var CONTROL_TYPE =  CONTROL_TYPE;
-
-   var form_elements   = dom_cache.controls_cache.form_elements;
-   var form_elements_len = form_elements.length;
-   var fes   = [];
-
-   var input_submit_info = [];
-   var input_reset_info  = [];
-
-   // Check to see if valid cache reference
-   if (form_elements && form_elements_len) {
-
-     for (var i = 0; i < form_elements_len; i += 1) {
-       var fe = form_elements[i];
-       checkButtons(fe);
-     } // end loop
-   }
-
-   */
   } // end validate function
 }
 

@@ -69,19 +69,65 @@ class ControlElement {
     return null;
   }
 
-  getNameForComparison (domElement, parentControlElement) {
-    let name = domElement.accName.name.trim().toLowerCase();
-
-    let pce = parentControlElement;
+  getGroupingNames (controlElement) {
+    let names = '';
+    let pce = controlElement;
 
     while (pce) {
       if (pce.domElement.role === 'group') {
-        name += ': ' + pce.domElement.accName.name.trim().toLowerCase();
+        names += ' [g]: ' + pce.domElement.accName.name.trim().toLowerCase();
       }
       pce = pce.parentControlElement;
     }
+    return names;
+  }
+
+  getRequiredParentControlName (roles, controlElement) {
+    let pce = controlElement;
+    while (pce) {
+      if (roles.indexOf(pce.domElement.role) >= 0) {
+        return ' [p]: ' + pce.domElement.accName.name.trim().toLowerCase();
+      }
+      pce = pce.parentControlElement;
+    }
+    return '';
+  }
+
+  getNameForComparison (domElement, parentControlElement) {
+    let name = domElement.accName.name.trim().toLowerCase();
+
+    console.log(`[getNameForComparison][roles]: ${domElement.ariaInfo.requiredParents.length}`);
+    // If it has a required parent, include required parent control name
+    if (domElement.ariaInfo.requiredParents.length > 0) {
+      name += this.getRequiredParentControlName(domElement.ariaInfo.requiredParents, parentControlElement);
+    }
+    else {
+      // Include all grouping names
+      name += this.getGroupingNames(parentControlElement);
+    }
 
     return name;
+  }
+
+  getButtonControl (type) {
+    function findButton(controlElements) {
+      for (let i = 0; i < controlElements.length; i++) {
+        const ce = controlElements[i];
+        const de = ce.domElement; 
+        if (((de.tagName === 'input') || (de.tagName === 'button')) &&
+            de.typeAttr === type) {
+          return ce;
+        } 
+        if (ce.childControlElements.length) {
+          const buttonControl = findButton(ce.childControlElements);
+          if (buttonControl) {
+            return buttonControl;
+          }
+        }        
+      }
+      return null;
+    }
+    return findButton(this.childControlElements);
   }
 
   updateLegendInfo (legendElement) {
@@ -204,7 +250,7 @@ export default class ControlInfo {
   constructor () {
     this.allControlElements      = [];
     this.childControlElements    = [];
-    this.allFormControlElements  = [];
+    this.allFormElements  = [];
   }
 
   /**
@@ -253,7 +299,7 @@ export default class ControlInfo {
 
     this.allControlElements.push(ce);
     if (domElement.tagName === 'form') {
-      this.allFormControlElements.push(ce);
+      this.allFormElements.push(ce);
     }
 
     if (parentControlElement) {
@@ -328,7 +374,7 @@ export default class ControlInfo {
         ce.showControlInfo('  ');
       });
       debug.log('== Forms ==', 1);
-      this.allFormControlElements.forEach( ce => {
+      this.allFormElements.forEach( ce => {
         debug.domElement(ce.domElement);
       });
     }

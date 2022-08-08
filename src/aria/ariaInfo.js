@@ -96,6 +96,7 @@ export default class AriaInfo {
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProbihited;
+    this.requiredParents  = designPattern.requiredParents;
 
     this.isLandmark = designPattern.roleType === 'landmark';
     this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;

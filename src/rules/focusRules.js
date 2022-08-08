@@ -225,7 +225,7 @@ export const focusRules = [
       return buttonDomElements;
     }
 
-    dom_cache.controlInfo.allFormControlElements.forEach( fce => {
+    dom_cache.controlInfo.allFormElements.forEach( fce => {
       const de = fce.domElement;
       if (de.visibility.isVisibleOnScreen) {
         const buttonDomElements = getChildButtonDomElements(fce);

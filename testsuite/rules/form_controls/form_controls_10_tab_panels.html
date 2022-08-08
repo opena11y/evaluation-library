@@ -16,10 +16,11 @@
         <form>
             <input  type="text" class="CONTROL_10_PASS" aria-label="Group 1-A"/>
             <textarea           class="CONTROL_10_FAIL" aria-label="Group 1-BC"></textarea>
-            <select             class="CONTROL_10_FAIL" aria-label="Group 1-BC">
+            <textarea           class="CONTROL_10_FAIL" aria-label="Group 1-BC"></textarea>
+            <select             class="CONTROL_10_PASS" aria-label="Group 1-BC">
               <select >
-                <option>Option 1</option>
-                <option>Option 2</option>
+                <option class="CONTROL_10_PASS" >Option 1</option>
+                <option class="CONTROL_10_PASS" >Option 2</option>
               </select>              
             </select>
         </form>
@@ -90,6 +91,8 @@
           <li id="tab-g4-3" role="tab" aria-controls="panel-g4-3" class="CONTROL_10_FAIL">Tab G4-13</li>
           <li id="tab-g4-4" role="tab" aria-controls="panel-g4-4" class="CONTROL_10_FAIL">Tab G4-24</li>
           <li id="tab-g4-5" role="tab" aria-controls="panel-g4-5" class="CONTROL_10_PASS">Tab G4-5</li>
+          <li id="tab-g4-6" role="tab" aria-controls="panel-g4-6" class="CONTROL_10_HIDDEN" hidden>Tab G4-13</li>
+          <li id="tab-g4-7" role="tab" aria-controls="panel-g4-7" class="CONTROL_10_HIDDEN" aria-hidden="true">Tab G4-13</li>
         </ul>
         <div>
           <div id="panel-g4-1" role="tabpanel" aria-labelledby="tab-g4-1" class="CONTROL_10_FAIL">
@@ -110,6 +113,14 @@
           </div>
           <div id="panel-g4-5" role="tabpanel" aria-labelledby="tab-g4-5" class="CONTROL_10_PASS">
             <h3>Panel G4-5</h3>
+            <p>Some content for panel 5</p>
+          </div>
+          <div id="panel-g4-6" role="tabpanel" aria-labelledby="tab-g4-6" class="CONTROL_10_HIDDEN" hidden>
+            <h3>Panel G4-6</h3>
+            <p>Some content for panel 5</p>
+          </div>
+          <div id="panel-g4-7" role="tabpanel" aria-labelledby="tab-g4-7" class="CONTROL_10_HIDDEN" aria-hidden="true">
+            <h3>Panel G4-7</h3>
             <p>Some content for panel 5</p>
           </div>
         </div>
