@@ -498,14 +498,18 @@ export const controlRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Update the accessible name for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
         FAIL_P:   'Update the accessible names for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
+        MANUAL_CHECK_S: 'Verify the accessible name of the button accurately describes the function of the button.',
+        MANUAL_CHECK_P: 'Verify the accessible names of the %N_MC buttons with duplicate names accurately describe the function of each button.',
         HIDDEN_S: 'The form control or ARIA widget element that is hidden was not evaluated.',
         HIDDEN_P: 'The %N_H form control and/or ARIA widget elements or widgets that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No form controls or only one form control on this page.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: 'Accessible name is unique.',
-        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[role=%2]@ control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
-        ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ control, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[role=%2]@ element, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ element, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_MC_1:   'Verify the accessible name of the @%1[role=%2]@ element accurately describes the action of the button, since it shares the same name as other buttons.',
+        ELEMENT_MC_2:   'Verify the accessible name of the @%1@ element accurately describes the action of the button, since it shares the same name as other buttons',
         ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ control was not evaluated because it is hidden from assistive technologies.'
       },
@@ -602,7 +606,8 @@ export const controlRules = {
         '@submit@ and @reset@ form controls have default labels and if these are present on more than one form on a page, the user may not understand which form they are submitting.'
       ],
       TECHNIQUES: [
-        'The preferred technique for changing the default label for @submit@ and @reset@ controls is the @value@ attribute.',
+        'The preferred technique for changing the default label for @input[type="submit"]@ and @input[type="reset"]@ controls is the @value@ attribute.',
+        'The preferred technique for changing the default label for @button[type="submit"]@ and @button[type="reset"]@ controls is the text content of the button.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.'
       ],

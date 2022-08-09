@@ -285,6 +285,9 @@ export const highlightModule = {
    * @param {Array}  elems  - Array of elements with highlight class
    */
   removeHighlightedElements: function (elems) {
+    if (!Array.isArray(elems)) {
+      return;
+    }
     let highlightClass = this.highlightDivClass;
     elems.forEach(elem => {
       // Verify the element has the highlight class and is a element node
@@ -331,6 +334,10 @@ export const highlightModule = {
      */
 
     function getHighlightedElements(startingNode, elems) {
+
+      if (!startingNode || !startingNode.firstChild) {
+        return;
+      }
 
       for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
         if (node.nodeType === Node.ELEMENT_NODE) {
