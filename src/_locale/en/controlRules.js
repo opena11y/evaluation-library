@@ -1,4 +1,4 @@
-/* foromControlules.js */
+/* controlRules.js */
 
 import {REFERENCES} from '../../constants.js';
 
@@ -9,7 +9,7 @@ import {REFERENCES} from '../../constants.js';
 export const controlRules = {
   CONTROL_1: {
       ID:         'Control 1',
-      DEFINITION: 'Each @input@, @select@, @textarea@, @progress@, @meter@ and @output@ element must have an accessible label.',
+      DEFINITION: 'Each @input@, @select@, @textarea@, @progress@, @meter@ and @output@ element must have an accessible name using @label@ elements.',
       SUMMARY:    'Form controls must have labels',
       TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
       RULE_RESULT_MESSAGES: {
@@ -35,6 +35,9 @@ export const controlRules = {
         'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
       ],
       MANUAL_CHECKS: [
+        'Good labels are both concise and descriptive of the control elements purpose.',
+        'If control elements are arranged in groups, use @fieldset/legend@ elements@ to provide a grouping label.',
+        'Consider using @aria-describedby@ to provide references to instructions or error information related to the form control.',
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Form controls must have labels | OpenA11y Evaluation Library 2.0</title>
+        <title>Elements with event handlers %s have roles | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
@@ -46,27 +46,27 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Form controls must have labels</li>
+          <li class="breadcrumb-item active">Elements with event handlers %s have roles</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Form controls must have labels</h1>
+            <h1 id="h1-title">Rule: Elements with event handlers %s have roles</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Control 1</td>
+  <td>Widget 11</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td>Each <code>input</code>, <code>select</code>, <code>textarea</code>, <code>progress</code>, <code>meter</code> and <code>output</code> element must have an accessible name using <code>label</code> elements.</td>
+  <td>Elements with UI event handlers %s have widget roles that accurately describe the options and actions available to the user upon interacting with the element.</td>
 </tr>
 
                   
@@ -75,7 +75,13 @@
   <td>
     <ul>
       
-      <li>A label associated with a form control ensures that information about the form control is spoken by screen readers when it receives focus.</li>
+      <li>ARIA widget roles describe the user options and actions, or more generally, the expected behavior, of interactive elements to users of assistive technologies.</li>
+      
+      <li>Standard HTML form controls and links have default widget roles that describe their behavior.</li>
+      
+      <li>When UI event handlers are used to create user options and actions that change the expected behavior of an interactive element, ensure that the appropriate widget role is assigned to the element.</li>
+      
+      <li>Conversely, ensure that the event handlers are adding appropriate behaviors that align with the ARIA widget role.</li>
       
     </ul>
   </td>
@@ -92,8 +98,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
-        Success Criterion 3.3.2 Labels or Instructions
+      <a href="https://www.w3.org/TR/WCAG21/#name-role-value" target="_spec">
+        Success Criterion 4.1.2 Name, Role, Value
       </a>
     </p>
     <p class="related">
@@ -108,8 +114,8 @@
       </li>
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
-          Success Criterion 2.4.6 Headings and Labels
+        <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
+          Success Criterion 3.3.2 Labels or Instructions
         </a>
       </li>
       
@@ -120,7 +126,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Forms</td>
+  <td>Widgets/Scripts</td>
 </tr>
 
                   
@@ -135,15 +141,11 @@
   <td>
     <ul>
       
-      <li>The preferred technique for labeling form controls is by reference: First, include an <code>id</code> attribute on the form control to be labeled; then use the <code>label</code> element with a <code>for</code> attribute value that references the <code>id</code> value of the control.</li>
+      <li>Use the <code>role</code> attribute with an ARIA widget role value to describe the user options, actions and expected behavior of custom interactive elements.</li>
       
-      <li>An alternative technique is to use the <code>label</code> element to encapsulate the form control element.</li>
+      <li>Use ARIA property and state attributes to describe the features of each widget role. Note that some widget roles have required properties and states.</li>
       
-      <li>In special cases, the <code>aria-labelledby</code> attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.</li>
-      
-      <li>In special cases, the <code>aria-label</code> attribute can be used on the form control element to provide an explicit text description of its purpose.</li>
-      
-      <li>In special cases, the <code>title</code> attribute on the form control element can be used to provide an explicit text description of its purpose.</li>
+      <li>Ensure that all options and actions of interactive elements are available through keyboard-only interaction.</li>
       
     </ul>
   </td>
@@ -155,21 +157,29 @@
   <td>
     <ul>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#the-label-element">HTML Specification: The <code>label</code> element</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#widget_roles">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-label">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-label</code> attribute</a></li>
+      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#state-of-the-type-attribute">HTML5: INPUT element widget role semantics</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-labelledby</code> attribute</a></li>
+      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#the-select-element">HTML5: SELECT element widget role semantics</a></li>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute">HTML Specification: The <code>title</code> attribute</a></li>
+      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#the-textarea-element">HTML5: TEXTAREA element widget role semantics</a></li>
       
-      <li><a href="https://www.w3.org/WAI/tutorials/forms/">W3C WAI Accessibility Tutorials: Forms Concepts</a></li>
+      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#the-button-element">HTML5: BUTTON element widget role semantics</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
+      <li><a href="https://www.w3.org/TR/html51/textlevel-semantics.html#the-a-element">HTML5: A element widget role semantics</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H65">H65: Using the title attribute to identify form controls when the label element cannot be used</a></li>
+      <li><a href="https://www.w3.org/TR/DOM-Level-3-Events/">UI Events Specification</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H71">H71: Providing a description for groups of form controls using fieldset and legend elements</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.</a></li>
+      
+      <li><a href="https://w3c.github.io/aria-practices/">ARIA Authoring Practices</a></li>
+      
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN Web Docs: ARIA </a></li>
+      
+      <li><a href="https://developers.google.com/web/fundamentals/accessibility/semantics-aria">Web Fundamentals: Introduction to ARIA</a></li>
       
     </ul>
   </td>

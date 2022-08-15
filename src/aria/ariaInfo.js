@@ -86,20 +86,31 @@ export default class AriaInfo {
     const tagName = node.tagName.toLowerCase();
     const level = parseInt(node.getAttribute('aria-level'));
 
-    let designPattern = designPatterns[role] || null;
-    this.isValidRole  = designPattern !== null;
+    let designPattern = designPatterns[role];
+    this.isValidRole  = typeof designPattern === 'object';
+    debug.log(`[${tagName}][${role}][designPattern]: ${designPattern} (${typeof designPattern}) (${this.isValidRole})`)
+
+    this.isAbstractRole = false;
 
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
       designPattern = designPatterns[defaultRole];
+    } else {
+      this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
     }
 
     this.isNameRequired     = designPattern.nameRequired;
-    this.isNameProhibited   = designPattern.nameProbihited;
+    this.isNameProhibited   = designPattern.nameProhibited;
     this.requiredParents  = designPattern.requiredParents;
 
-    this.isLandmark = designPattern.roleType === 'landmark';
-    this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
+    this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
+                      (designPattern.roleType.indexOf('widget') >= 0)  ||
+                      (designPattern.roleType.indexOf('window') >= 0);
+
+    this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
+    this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
+    this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
+    this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
 
     this.hasRequiredParents = designPattern.requiredParents.length > 0;
 
@@ -159,7 +170,6 @@ export default class AriaInfo {
 
     if (debug.flag) {
       node.attributes.length && debug.log(`${node.outerHTML}`, 1);
-      debug.log(`[       isLandmark]: ${this.isLandmark}`);
       debug.log(`[         isWidget]: ${this.isWidget}`);
       debug.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
       debug.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);

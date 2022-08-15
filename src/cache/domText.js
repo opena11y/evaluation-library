@@ -41,6 +41,18 @@ export default class DOMText {
   }
 
   /**
+   * @method isDomElement
+   *
+   * @desc Returns false since this is a DOMText object
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isDomElement () {
+    return false;
+  }  
+
+  /**
    * @method isDomText
    *
    * @desc

@@ -144,7 +144,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$t = new DebugLogging('constants', false);
+const debug$u = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -563,13 +563,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$t.flag && debug$t.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$u.flag && debug$u.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$t.flag && debug$t.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$u.flag && debug$u.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -854,7 +854,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$s = new DebugLogging('ControlInfo', true);
+const debug$t = new DebugLogging('ControlInfo', true);
 
 /**
  * @class ControlElement
@@ -945,7 +945,6 @@ class ControlElement {
   getNameForComparison (domElement, parentControlElement) {
     let name = domElement.accName.name.trim().toLowerCase();
 
-    console.log(`[getNameForComparison][roles]: ${domElement.ariaInfo.requiredParents.length}`);
     // If it has a required parent, include required parent control name
     if (domElement.ariaInfo.requiredParents.length > 0) {
       name += this.getRequiredParentControlName(domElement.ariaInfo.requiredParents, parentControlElement);
@@ -995,7 +994,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$s.domElement(ce.domElement, prefix);
+      debug$t.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1216,15 +1215,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$s.flag) {
-      debug$s.log('== Control Tree ==', 1);
+    if (debug$t.flag) {
+      debug$t.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$s.domElement(ce.domElement);
+        debug$t.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$s.log('== Forms ==', 1);
+      debug$t.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$s.domElement(ce.domElement);
+        debug$t.domElement(ce.domElement);
       });
     }
   }
@@ -1233,7 +1232,7 @@ class ControlInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$r = new DebugLogging('colorContrast', false);
+const debug$s = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -1253,9 +1252,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$r.flag) {
-      debug$r.separator();
-      debug$r.tag(elementNode);
+    if (debug$s.flag) {
+      debug$s.separator();
+      debug$s.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -1279,11 +1278,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$r.flag) {
-      debug$r.log(`[                    opacity]: ${this.opacity}`);
-      debug$r.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$r.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$r.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$s.flag) {
+      debug$s.log(`[                    opacity]: ${this.opacity}`);
+      debug$s.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$s.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$s.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -1603,24 +1602,25 @@ class ColorContrast {
   }
 }
 
-/* hasEvents.js */
+/* eventInfo.js */
 
 /* Constants */
-const debug$q = new DebugLogging('hasEvents', false);
+const debug$r = new DebugLogging('EventInfo', false);
 
 /**
- * @class Events
+ * @class EventInfo
  *
- * @desc Identifies inline HTML event handlers
- *
- * @param  {Object}  elementNode      - dom element node 
+ * @desc Collects information on the links in a web page
  */
 
-class HasEvents {
-  constructor (elementNode) {
-    this.onChange = elementNode.hasAttribute('onchange');
-    if (debug$q.flag) {
-      console.log(`[hasEvents]: ${this.onChange}`);
+class EventInfo {
+  constructor (node) {
+    this.hasClick  = node.hasAttribute('onclick');
+    this.hasChange = node.hasAttribute('onchange');
+
+    if (debug$r.flag) {
+      console.log(`[hasClick ]: ${this.hasClick}`);
+      console.log(`[hasChange]: ${this.hasChange}`);
     }
   }
 }
@@ -1628,7 +1628,7 @@ class HasEvents {
 /* visibility.js */
 
 /* Constants */
-const debug$p = new DebugLogging('visibility', false);
+const debug$q = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -1676,17 +1676,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$p.flag) {
-      debug$p.separator();
-      debug$p.tag(elementNode);
-      debug$p.log('[          isHidden]: ' + this.isHidden);
-      debug$p.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$p.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$p.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$p.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$p.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$p.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$p.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$q.flag) {
+      debug$q.separator();
+      debug$q.tag(elementNode);
+      debug$q.log('[          isHidden]: ' + this.isHidden);
+      debug$q.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$q.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$q.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$q.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$q.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$q.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$q.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -6581,7 +6581,7 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$o = new DebugLogging('AriaInfo', false);
+const debug$p = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6660,20 +6660,31 @@ class AriaInfo {
     const tagName = node.tagName.toLowerCase();
     const level = parseInt(node.getAttribute('aria-level'));
 
-    let designPattern = designPatterns[role] || null;
-    this.isValidRole  = designPattern !== null;
+    let designPattern = designPatterns[role];
+    this.isValidRole  = typeof designPattern === 'object';
+    debug$p.log(`[${tagName}][${role}][designPattern]: ${designPattern} (${typeof designPattern}) (${this.isValidRole})`);
+
+    this.isAbstractRole = false;
 
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
       designPattern = designPatterns[defaultRole];
+    } else {
+      this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
     }
 
     this.isNameRequired     = designPattern.nameRequired;
-    this.isNameProhibited   = designPattern.nameProbihited;
+    this.isNameProhibited   = designPattern.nameProhibited;
     this.requiredParents  = designPattern.requiredParents;
 
-    this.isLandmark = designPattern.roleType === 'landmark';
-    this.isWidget   = designPattern.roleType.indexOf('widget') >= 0;
+    this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
+                      (designPattern.roleType.indexOf('widget') >= 0)  ||
+                      (designPattern.roleType.indexOf('window') >= 0);
+
+    this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
+    this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
+    this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
+    this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
 
     this.hasRequiredParents = designPattern.requiredParents.length > 0;
 
@@ -6731,16 +6742,15 @@ class AriaInfo {
         break;
     }
 
-    if (debug$o.flag) {
-      node.attributes.length && debug$o.log(`${node.outerHTML}`, 1);
-      debug$o.log(`[       isLandmark]: ${this.isLandmark}`);
-      debug$o.log(`[         isWidget]: ${this.isWidget}`);
-      debug$o.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$o.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$o.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$o.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$o.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
-      debug$o.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$p.flag) {
+      node.attributes.length && debug$p.log(`${node.outerHTML}`, 1);
+      debug$p.log(`[         isWidget]: ${this.isWidget}`);
+      debug$p.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$p.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$p.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$p.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$p.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug$p.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -8418,7 +8428,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$n = new DebugLogging('ariaInHtml', false);
+const debug$o = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8610,11 +8620,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$n.flag) {
+  if (debug$o.flag) {
     if (tagName === 'h2') {
-      debug$n.tag(node);
+      debug$o.tag(node);
     }
-    debug$n.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$o.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -9818,7 +9828,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 /* domElement.js */
 
 /* Constants */
-const debug$m = new DebugLogging('DOMElement', false);
+const debug$n = new DebugLogging('DOMElement', false);
 
 const elementsWithContent = [
   'area',
@@ -9837,6 +9847,8 @@ const elementsThatMayHaveContent = [
   'object'
 ];
 
+const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
+const requireAccessibleNames = ['region', 'form'];
 
 /**
  * @class DOMElement
@@ -9867,13 +9879,15 @@ class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
+
     // used for button and form control related rules
     this.typeAttr = elementNode.getAttribute('type');
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInfo = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.eventInfo = new EventInfo(elementNode);
 
     this.accName        = getAccessibleName(doc, elementNode);
     this.accDescription = getAccessibleDesc(doc, elementNode);
@@ -9881,7 +9895,6 @@ class DOMElement {
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
-    this.hasEvents     = new HasEvents(elementNode);
 
     this.id         = elementNode.id        ? elementNode.id : '';
     this.className  = elementNode.className ? elementNode.className : '';
@@ -9894,6 +9907,10 @@ class DOMElement {
     this.tabIndex             = checkTabIndex(elementNode);
     this.isTabStop            = checkIsTabStop(elementNode);
     this.isInteractiveElement = checkForInteractiveElement(elementNode);
+
+    this.isLink      = this.role === 'link';
+    this.isLandmark  = this.checkForLandamrk();
+    this.isHeading   = this.role === 'heading';
 
     this.children = [];
 
@@ -9916,6 +9933,43 @@ class DOMElement {
 
   get isDomText () {
     return false;
+  }
+
+
+  /**
+   * @method isDomElement
+   *
+   * @desc Returns true since this is a DOMElement object
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isDomElement () {
+    return true;
+  }
+
+  /**
+   * @method checkForLandamrk
+   *
+   * @desc Tests if a domElement is a landmark
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  checkForLandamrk () {
+    let flag = false;
+    const role = this.role || this.defaultRole;
+    const name = this.accName.name;
+
+    if (landmarkRoles.includes(role)) {
+      if (requireAccessibleNames.includes(role)) {
+        flag = name && name.length;
+      } else {
+        flag = true;
+      }
+    }
+
+    return flag;
   }
 
   /**
@@ -10084,12 +10138,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$m.flag) {
+    if (debug$n.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$m.domText(domItem, prefix);
+          debug$n.domText(domItem, prefix);
         } else {
-          debug$m.domElement(domItem, prefix);
+          debug$n.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10182,7 +10236,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$l = new DebugLogging('domText', false);
+const debug$m = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10201,8 +10255,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$l.flag) {
-      debug$l.log(`[text]: ${this.text}`);
+    if (debug$m.flag) {
+      debug$m.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10217,6 +10271,18 @@ class DOMText {
   get getText () {
     return this.text;
   }
+
+  /**
+   * @method isDomElement
+   *
+   * @desc Returns false since this is a DOMText object
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isDomElement () {
+    return false;
+  }  
 
   /**
    * @method isDomText
@@ -10253,7 +10319,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('iframeInfo', false);
+const debug$l = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10271,9 +10337,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$k.flag) {
-      debug$k.log(`[          src]: ${this.src}`);
-      debug$k.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$l.flag) {
+      debug$l.log(`[          src]: ${this.src}`);
+      debug$l.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10309,8 +10375,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$k.flag) {
-      debug$k.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$l.flag) {
+      debug$l.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10321,7 +10387,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$j = new DebugLogging('idInfo', false);
+const debug$k = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10364,10 +10430,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$j.flag) {
-      debug$j.log('== All Links ==', 1);
+    if (debug$k.flag) {
+      debug$k.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$j.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$k.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10376,7 +10442,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$i = new DebugLogging('imageInfo', false);
+const debug$j = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10569,22 +10635,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$i.flag) {
-      debug$i.log('== All Image elements ==', 1);
+    if (debug$j.flag) {
+      debug$j.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$i.log(`[fileName]: ${ie.fileName}`, true);
-        debug$i.log(`[    role]: ${ie.domElement.role}`);
-        debug$i.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$i.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$i.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$j.log(`[fileName]: ${ie.fileName}`, true);
+        debug$j.log(`[    role]: ${ie.domElement.role}`);
+        debug$j.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$j.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$j.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$i.log('== All SVG domElements  ==', 1);
+      debug$j.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$i.domElement(de);
+        debug$j.domElement(de);
       });
-      debug$i.log('== All MapElements ==', 1);
+      debug$j.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$i.domElement(me.domElement);
+        debug$j.domElement(me.domElement);
       });
     }
   }
@@ -10593,7 +10659,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('linkInfo', false);
+const debug$i = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10639,10 +10705,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All Links ==', 1);
+    if (debug$i.flag) {
+      debug$i.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$h.domElement(de);
+        debug$i.domElement(de);
       });
     }
   }
@@ -10651,7 +10717,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('ListInfo', false);
+const debug$h = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10672,8 +10738,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$g.flag) {
-      debug$g.log('');
+    if (debug$h.flag) {
+      debug$h.log('');
     }
   }
 
@@ -10698,9 +10764,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$g.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$h.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$g.domElement(le.domElement, prefix);
+      debug$h.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -10808,16 +10874,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All ListElements ==', 1);
-      debug$g.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$h.flag) {
+      debug$h.log('== All ListElements ==', 1);
+      debug$h.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$h.domElement(le.domElement);
       });
-      debug$g.log('== List Tree ==', 1);
-      debug$g.log(`[linkCount]: ${this.linkCount}`);
+      debug$h.log('== List Tree ==', 1);
+      debug$h.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$h.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -10827,11 +10893,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$f = new DebugLogging('structureInfo', false);
-const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-const headingRole = 'heading';
-const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
-const requireAccessibleNames = ['region', 'form'];
+const debug$g = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -10870,11 +10932,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$f.domElement(le.domElement, prefix);
+      debug$g.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$f.domElement(h, prefix);
+      debug$g.domElement(h, prefix);
     });
   }
 
@@ -10965,44 +11027,6 @@ class StructureInfo {
   }
 
   /**
-   * @method isLandmark
-   *
-   * @desc Tests if a domElement is a landmark
-   *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-   */
-
-  isLandmark (domElement) {
-    let flag = false;
-    const role = domElement.role || domElement.defaultRole;
-    const name = domElement.accName.name;
-
-    if (landmarkRoles.includes(role)) {
-      if (requireAccessibleNames.includes(role)) {
-        flag = name && name.length;
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
-  }
-
-  /**
-   * @method isHeading
-   *
-   * @desc Tests if a domElement is a heading
-   *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-   */
-
-  isHeading (domElement) {
-    const tagName = domElement.tagName;
-    const role = domElement.role;
-    return (role === headingRole) || (headingTags.includes(tagName));
-  }
-
-  /**
    * @method update
    *
    * @desc Checks to see if the domElement is a heading or landmark and if so adds the
@@ -11019,11 +11043,11 @@ class StructureInfo {
 
   update (parentLandmarkElement, domElement, documentIndex) {
     let landmarkElement = parentLandmarkElement;
-    if (this.isHeading(domElement)) {
+    if (domElement.isHeading) {
       this.addChildHeading(domElement, parentLandmarkElement);
     }
 
-    if (this.isLandmark(domElement)) {
+    if (domElement.isLandmark) {
       landmarkElement = this.addChildLandmark(domElement, parentLandmarkElement, documentIndex);
     }
     return landmarkElement;
@@ -11036,27 +11060,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$f.flag) {
-      debug$f.log('== All Headings ==', 1);
+    if (debug$g.flag) {
+      debug$g.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$f.domElement(h);
+        debug$g.domElement(h);
       });
-      debug$f.log('== All Landmarks ==', 1);
+      debug$g.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
       });
-      debug$f.log('== Landmarks By Doc ==', 1);
+      debug$g.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$f.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$g.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$f.domElement(le.domElement);
+            debug$g.domElement(le.domElement);
           });
         }
       });
-      debug$f.log('== Structure Tree ==', 1);
+      debug$g.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$f.domElement(le.domElement);
+        debug$g.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -11066,7 +11090,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$e = new DebugLogging('domCache', true);
+const debug$f = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -11162,7 +11186,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$e.flag) {
+    if (debug$f.flag) {
       this.showDomElementTree();
 
       this.controlInfo.showControlInfo();
@@ -11280,7 +11304,7 @@ class DOMCache {
                     newParentInfo.documentIndex = this.documentIndex;
                     this.transverseDOM(newParentInfo, doc);
                   } catch (error) {
-                    debug$e.flag && debug$e.log('[transverseDOM][catch]' + error);
+                    debug$f.flag && debug$f.log('[transverseDOM][catch]' + error);
                     isCrossDomain = true;
                   }                    
                   this.iframeInfo.update(domItem, isCrossDomain);
@@ -11337,18 +11361,18 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$e.log(' === AllDomElements ===', true);
+    debug$f.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$e.domElement(de);
+      debug$f.domElement(de);
     });
 
-    debug$e.log(' === AllDomTexts ===', true);
+    debug$f.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$e.domText(dt);
+      debug$f.domText(dt);
     });
 
-    debug$e.log(' === DOMCache Tree ===', true);
-    debug$e.domElement(this.startingDomElement);
+    debug$f.log(' === DOMCache Tree ===', true);
+    debug$f.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
@@ -11760,10 +11784,10 @@ const focusRules$1 = [
 
 ];
 
-/* formControlRules.js */
+/* controlRules.js */
 
 /* Constants */
-const debug$d = new DebugLogging('Control Rules', true);
+const debug$e = new DebugLogging('Control Rules', true);
 
 
 /*
@@ -11778,7 +11802,7 @@ const controlRules$1 = [
  *
  * @desc textarea, select and input elements of type text,
  *       password, checkbox, radio and file must have an
- *       accessible name
+ *       accessible name using label elements
  *
  */
 
@@ -11794,9 +11818,8 @@ const controlRules$1 = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      const ai = de.ariaInfo;
       if (!ce.isInputTypeImage) {
-        if (ai.isNameRequired || de.isLabelable) {
+        if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
@@ -11877,7 +11900,7 @@ const controlRules$1 = [
           if (gce) {
             const gde = gce.domElement;
             if (gde.tagName === 'fieldset') {
-              debug$d.log(`[radio][${de.node.getAttribute('name')}]: ${de.accName.name} (${gde.accName.name})`);
+              debug$e.log(`[radio][${de.node.getAttribute('name')}]: ${de.accName.name} (${gde.accName.name})`);
               if (gde.accName.name) {
                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [gde.accName.name]);
               }
@@ -13193,7 +13216,7 @@ const landmarkRules$1 = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
         const parentLandmark = de.parentInfo.landmarkElement;
-        const isLandmark = de.ariaInfo.isLandmark;
+        const isLandmark = de.isLandmark;
         if ((de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
             if ( isLandmark || parentLandmark ) {
@@ -13942,6 +13965,1370 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
     });
   }
 }
+
+/* widgetRules.js */
+
+/* Constants */
+const debug$d = new DebugLogging('ARIA Rules', false);
+
+
+/*
+ * OpenA11y Rules
+ * Rule group: Widget Rules
+ */
+
+const widgetRules$1 = [
+/**
+ * @object WIDGET_1
+ *
+ * @desc ARIA Widgets must have accessible names
+ */
+
+{ rule_id             : 'WIDGET_1',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['ARIA Widget roles'],
+  validate            : function (dom_cache, rule_result) {
+
+    dom_cache.allDomElements.forEach(de => {
+      const ai = de.ariaInfo;
+      // There are other rules that check for accessible name for labelable controls, landmarks, headings and links
+      if (ai.isWidget && !de.isLabelable && !de.isLink) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role, de.accName.name]);
+          }
+          else {
+            if (ai.isNameRequired) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, de.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);              
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+        }
+      }
+    });
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_2
+ *
+ * @desc Elements with onClick event handlers event handlers need role
+ */
+
+{ rule_id             : 'WIDGET_2',
+  last_updated        : '2022-08-15',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['Elements with onclick events'],
+  validate            : function (dom_cache, rule_result) {
+
+    function hasDecendantWidgetRole (domElement) {
+      for (let i = 0; i < domElement.children.length; i += 1) {
+        const cde = domElement.children[i];
+        if (cde.isDomElement) {
+          if (cde.ariaInfo.isWidget) {
+            return true;
+          }
+          if (hasDecendantWidgetRole(cde)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    dom_cache.allDomElements.forEach(de => {
+      if (de.eventInfo.hasClick) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.ariaInfo.isWidget) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role]);
+          }
+          else {
+            if (hasDecendantWidgetRole(de)) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            }
+            else {
+              if (de.hasRole) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, de.role]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
+              }
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+        }
+      }
+    });
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_3
+ *
+ * @desc Elements with role values must have valid widget or landmark roles
+ */
+
+{ rule_id             : 'WIDGET_3',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[role]'],
+  validate            : function (dom_cache, rule_result) {
+
+    dom_cache.allDomElements.forEach(de => {
+      if (de.hasRole) {
+        if (de.visibility.isVisibleToAT) {
+          debug$d.log(`[${de.tagName}][${de.role}][isValidRole]: ${de.ariaInfo.isValidRole} (${de.hasRole})`);
+          if (!de.ariaInfo.isValidRole) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+          }
+          else {
+            if (de.ariaInfo.isAbstractRole) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.role]);
+            } else {
+              if (de.ariaInfo.isWidget) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role]);
+              }
+              else {
+                if (de.ariaInfo.isLandmark) {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.role]);
+                }
+                else {
+                  if (de.ariaInfo.isLive) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.role]);
+                  }
+                  else {
+                    if (de.ariaInfo.isSection) {
+                      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.role]);
+                    }
+                    else {
+                      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_5', [de.role]);
+                    }
+                  }
+                }
+              }            
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+        }        
+      }
+    });
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_4
+ *
+ * @desc Elements with ARIA attributes have valid values
+ */
+
+{ rule_id             : 'WIDGET_4',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[aria-atomic]',
+                         '[aria-autocomplete]',
+                         '[aria-busy]',
+                         '[aria-checked]',
+                         '[aria-colcount]',
+                         '[aria-colindex]',
+                         '[aria-colspan]',
+                         '[aria-current]',
+                         '[aria-disabled]',
+                         '[aria-dropeffect]',
+                         '[aria-expanded]',
+                         '[aria-grabbed]',
+                         '[aria-haspopup]',
+                         '[aria-hidden]',
+                         '[aria-invalid]',
+                         '[aria-label]',
+                         '[aria-labelledby]',
+                         '[aria-live]',
+                         '[aria-modal]',
+                         '[aria-multiline]',
+                         '[aria-multiselectable]',
+                         '[aria-orientation]',
+                         '[aria-pressed]',
+                         '[aria-readonly]',
+                         '[aria-relevant]',
+                         '[aria-required]',
+                         '[aria-rowcount]',
+                         '[aria-rowindex]',
+                         '[aria-rowspan]',
+                         '[aria-selected]',
+                         '[aria-sort]'],
+  primary_property    : '',
+  resource_properties : [],
+  language_dependency : "",
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 4] ${dom_cache} ${rule_result}`);
+
+
+/*
+     function makeProp(label, value) {
+
+       var p = {};
+
+       p.label = label;
+       p.value = value;
+       p.description = "";
+
+       return p;
+
+     }
+
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var elements_with_aria_attributes     = dom_cache.controls_cache.elements_with_aria_attributes;
+     var elements_with_aria_attributes_len = elements_with_aria_attributes.length;
+
+     if (elements_with_aria_attributes && elements_with_aria_attributes_len) {
+
+       for (var i = 0; i < elements_with_aria_attributes_len; i++) {
+         var de = elements_with_aria_attributes[i];
+         var style = de.computed_style;
+         var aria_attrs = de.aria_attributes;
+         var aria_attrs_len = aria_attrs.length;
+
+         for (var j = 0; j < aria_attrs_len; j++) {
+
+           var attr = aria_attrs[j];
+
+           var prop = makeProp(attr.name, attr.value);
+
+           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+
+             if (attr.is_value_valid && attr.tokens) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name, attr.value], [prop]);
+             else if (attr.is_value_valid) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [attr.name, attr.value, attr.type], [prop]);
+             else if (attr.type === 'nmtoken' || attr.type === 'boolean') rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, attr.value, attr.tokens], [prop]);
+             else if (attr.type === 'nmtokens') rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, attr.value, attr.tokens], [prop]);
+             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [attr.name, attr.value, attr.type], [prop]);
+
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, attr.value], [prop]);
+           }
+
+         } // end loop
+       } // end loop
+     }
+     */
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_5
+ *
+ * @desc ARIA attributes must be defined
+ */
+
+{ rule_id             : 'WIDGET_5',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[aria-atomic]',
+                         '[aria-autocomplete]',
+                         '[aria-busy]',
+                         '[aria-checked]',
+                         '[aria-controls]',
+                         '[aria-describedby]',
+                         '[aria-disabled]',
+                         '[aria-dropeffect]',
+                         '[aria-expanded]',
+                         '[aria-flowto]',
+                         '[aria-grabbed]',
+                         '[aria-haspopup]',
+                         '[aria-hidden]',
+                         '[aria-invalid]',
+                         '[aria-label]',
+                         '[aria-labelledby]',
+                         '[aria-level]',
+                         '[aria-live]',
+                         '[aria-multiline]',
+                         '[aria-multiselectable]',
+                         '[aria-orientation]',
+                         '[aria-owns]',
+                         '[aria-pressed]',
+                         '[aria-readonly]',
+                         '[aria-relevant]',
+                         '[aria-required]',
+                         '[aria-selected]',
+                         '[aria-sort]',
+                         '[aria-valuemax]',
+                         '[aria-valuemin]',
+                         '[aria-valuenow]',
+                         '[aria-valuetext]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 5] ${dom_cache} ${rule_result}`);
+
+/*
+     function makeProp(label, value) {
+
+       var p = {};
+
+       p.label = label;
+       p.value = value;
+       p.description = "";
+
+       return p;
+
+     }
+
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var elements_with_aria_attributes     = dom_cache.controls_cache.elements_with_aria_attributes;
+     var elements_with_aria_attributes_len = elements_with_aria_attributes.length;
+
+     if (elements_with_aria_attributes && elements_with_aria_attributes_len) {
+
+       for (var i = 0; i < elements_with_aria_attributes_len; i++) {
+         var de = elements_with_aria_attributes[i];
+
+         var style = de.computed_style;
+         var aria_attrs = de.aria_attributes;
+         var aria_attrs_len = aria_attrs.length;
+
+         for (var j = 0; j < aria_attrs_len; j++) {
+
+           var attr = aria_attrs[j];
+           var prop = makeProp(attr.name, attr.value);
+
+           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+             if (attr.is_valid_attribute) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name], [prop]);
+             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name], [prop]);
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, attr.value], [prop]);
+           }
+
+         } // end loop
+       } // end loop
+     }
+     */
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_6
+ *
+ * @desc Widgets must have required properties
+ */
+
+{ rule_id             : 'WIDGET_6',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[checkbox]',
+                         '[combobox]',
+                         '[menuitemcheckbox]',
+                         '[option]',
+                         '[scrollbar]',
+                         '[slider]',
+                         '[switch]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 6] ${dom_cache} ${rule_result}`);
+
+/*
+     function getRequiredPropertiesAndValues(dom_element, required_props) {
+
+       var rps = [];
+
+       var attrs     = dom_element.aria_attributes;
+       var attrs_len = attrs.length;
+
+       for (var i = 0; i < required_props.length; i++) {
+
+         var prop = required_props[i];
+
+         var flag = false;
+
+         for (var j = 0; j <attrs_len; j++) {
+           if (prop === attrs[j].name) {
+             flag = true;
+             break;
+           }
+         }
+
+         var rp = {};
+         rp.label = prop;
+         rp.description = "";
+         rp.defined = flag;
+
+         if (flag) {
+           rp.value  = attrs[j].value;
+         }
+         else {
+           rp.value  = "undefined";
+         }
+
+         rps.push(rp);
+
+       }
+
+       return rps;
+
+     }
+
+     function getPropsString(props) {
+
+       var str = "";
+       var prop_max = props.length - 1;
+
+       for (var i = 0; i < props.length; i++ ) {
+         str += props[i];
+         if (i !== prop_max) str += ", ";
+       }
+
+       return str;
+
+     }
+
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var widget_elements     = dom_cache.controls_cache.widget_elements;
+     var widget_elements_len = widget_elements.length;
+
+     if (widget_elements && widget_elements) {
+
+       for (var i = 0; i < widget_elements_len; i++) {
+         var we = widget_elements[i];
+         var de = we.dom_element;
+         var style = de.computed_style;
+
+         var required_properties = de.role_info.requiredProps;
+
+         if (required_properties && required_properties.length) {
+
+           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+
+             var props_string   = getPropsString(required_properties);
+             var required_props = getRequiredPropertiesAndValues(de, required_properties);
+
+             var flag = true;
+
+             for (var j = 0; (j < required_props.length) && flag; j++) flag = flag && required_props[j].defined;
+
+             if (flag) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, props_string], required_props);
+             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, props_string], required_props);
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+           }
+         }
+       } // end loop
+     }
+     */
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_7
+ *
+ * @desc Widgets must have required owned elements
+ */
+
+{ rule_id             : 'WIDGET_7',
+  last_updated        : '2021-07-02',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[feed]',
+                         '[grid]',
+                         '[list]',
+                         '[listbox]',
+                         '[menu]',
+                         '[menubar]',
+                         '[radiogroup]',
+                         '[row]',
+                         '[rowgroup]',
+                         '[table]',
+                         '[tablist]',
+                         '[tree]',
+                         '[treegrid]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 7] ${dom_cache} ${rule_result}`);
+
+/*
+
+     function getRequiredChildRolesString(required_children) {
+
+       var str = "";
+       var required_children_max = required_children.length - 1;
+
+       for (var i = 0; i < required_children.length; i++ ) {
+         str += required_children[i];
+         if (i !== required_children_max) str += ", ";
+       }
+
+       return str;
+
+     }
+
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var widget_elements     = dom_cache.controls_cache.widget_elements;
+     var widget_elements_len = widget_elements.length;
+
+     if (widget_elements && widget_elements) {
+
+       for (var i = 0; i < widget_elements_len; i++) {
+         var we = widget_elements[i];
+         var de = we.dom_element;
+         var style = de.computed_style;
+
+         var required_child_roles = de.role_info.requiredChildren;
+
+         if (required_child_roles && required_child_roles.length) {
+
+           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+
+             if (we.aria_busy) {
+               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.role]);
+             } else {
+               var flag = false;
+
+               for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
+                 flag = we.hasRequiredChildRole(required_child_roles[j]);
+               }
+
+               var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
+
+               if (flag) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
+               } else {
+                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
+              }
+             }
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+           }
+         }
+       } // end loop
+     }
+     */
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_8
+ *
+ * @desc Widgets must have required parent roles
+ */
+
+{ rule_id             : 'WIDGET_8',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : [ "caption",
+                          "cell",
+                          "columnheader",
+                          "gridcell",
+                          "listitem",
+                          "menuitem",
+                          "menuitemcheckbox",
+                          "menuitemradio",
+                          "option",
+                          "row",
+                          "rowgroup",
+                          "rowheader",
+                          "tab",
+                          "treeitem"
+                      ],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 8] ${dom_cache} ${rule_result}`);
+
+/*
+     function getRequiredRolesString(required_roles) {
+
+       var str = "";
+       var required_roles_max = required_roles.length - 1;
+
+       for (var i = 0; i < required_roles.length; i++ ) {
+         if (i > 0) {
+          if ( i === required_roles_max) {
+            str += "@ or @" + required_roles[i];
+          } else {
+            str += "@, @" + required_roles[i];
+;
+          }
+         } else {
+           str += required_roles[i];
+         }
+       }
+
+       return str;
+
+     }
+
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var widget_elements     = dom_cache.controls_cache.widget_elements;
+     var widget_elements_len = widget_elements.length;
+
+     if (widget_elements && widget_elements) {
+
+       for (var i = 0; i < widget_elements_len; i++) {
+         var we = widget_elements[i];
+         var de = we.dom_element;
+         var style = de.computed_style;
+
+         var required_parent_roles = de.role_info.requiredParents;
+
+         if (required_parent_roles && required_parent_roles.length) {
+
+           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+
+             var flag = false;
+
+             for (var j = 0; (j < required_parent_roles.length) && !flag; j++) {
+                var role = required_parent_roles[j];
+                flag = we.isOwnedByRole(role);
+             }
+
+             var required_roles_string = getRequiredRolesString(required_parent_roles);
+
+             if (flag) {
+               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
+             } else {
+               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
+             }
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+           }
+         }
+       } // end loop
+     }
+     */
+
+   } // end validation function
+},
+/**
+ * @object WIDGET_9
+ *
+ * @desc Widgets cannot be owned by more than one widget
+ */
+
+{ rule_id             : 'WIDGET_9',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[aria-owns]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 9] ${dom_cache} ${rule_result}`);
+
+/*
+     var TEST_RESULT = TEST_RESULT;
+
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+     var we;
+
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+
+        if (de.owned_by.length === 1) {
+          we = de.owned_by[0];
+          rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
+        } else {
+          if (de.owned_by.length > 1) {
+            for (var j = 0; j < de.owned_by.length; j += 1) {
+              we = de.owned_by[j];
+              rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
+            } // end loop
+          }
+        }
+     } // end loop
+*/
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_10
+ *
+ * @desc Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax
+ */
+
+{ rule_id             : 'WIDGET_10',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[role="meter"]',
+                         '[role="progress"]',
+                         '[role="scrollbar"]',
+                         '[role="slider"]',
+                         '[role="spinbutton"]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 10] ${dom_cache} ${rule_result}`);
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+
+     if (dom_elements && dom_elements) {
+
+       for (var i = 0; i < dom_elements_len; i++) {
+         var de = dom_elements[i];
+         var style = de.computed_style;
+
+         if (de.is_range) {
+
+            if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
+
+              var is_value_required = !('progressbar spinbutton'.indexOf(de.role) >= 0);
+
+              var valuetext          = de.getAttributeValue('aria-valuetext');
+              var is_valuetext_valid = de.isAttributeValueValid('aria-valuetext', valuetext);
+
+              var min          = de.getAttributeValue('aria-valuemin');
+              var is_min_valid = de.isAttributeValueValid('aria-valuemin', min);
+
+              var max          = de.getAttributeValue('aria-valuemax');
+              var is_max_valid = de.isAttributeValueValid('aria-valuemax', max);
+
+              var value          = de.getAttributeValue('aria-valuenow');
+              var is_value_valid = de.isAttributeValueValid('aria-valuenow', value);
+
+              if (is_valuetext_valid) {
+                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de, valuetext]);
+              } else {
+                if (is_value_valid) {
+                  if (is_max_valid && is_min_valid) {
+                    if (min < max) {
+                      if ((min <= value) && (value <= max)) {
+                        rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de, value, min, max]);
+                      } else {
+                        rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [value, min, max]);
+                      }
+                    } else {
+                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
+                    }
+                  } else {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de, min, max]);
+                  }
+                } else {
+                  if (is_value_required) {
+                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de]);
+                  } else {
+                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de]);
+                  }
+                }
+              }
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de]);
+            }
+         }
+       } // end loop
+     }
+     */
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_11
+ *
+ * @desc Elements with mouse down, mouse move and mouse up events must have roles
+ */
+
+{ rule_id             : 'WIDGET_11',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[onmousedown]', '[onmouseup]', '[onmousemove]', '[onkeydown]', '[onkeyup]', '[onkeypress]', '[onclick]', '[ondbclick]', '[ondrag]', '[ondragstart]', '[ondragend]', '[ondragover]', '[onenter]', '[ondragleave]', '[ondrop]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 11] ${dom_cache} ${rule_result}`);
+
+/*
+     function getUIEvents(dom_element) {
+
+        var events = dom_element.getMouseEvents();
+        events += dom_element.getClickEvents();
+        events += dom_element.getDragEvents();
+        events += dom_element.getKeyboardEvents();
+
+        return events;
+     }
+
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var dom_elements_with_events     = dom_cache.controls_cache.elements_with_events;
+     var dom_elements_with_events_len = dom_elements_with_events.length;
+
+     if (dom_elements_with_events_len) {
+
+       for (var i = 0; i < dom_elements_with_events_len; i++) {
+         var de = dom_elements_with_events[i];
+
+         var style = de.computed_style;
+         var events = getUIEvents(de);
+
+         if (events.length &&
+             (de.tag_name !== 'embed') &&
+             (de.tag_name !== 'applet') &&
+             (de.tag_name !== 'object') &&
+             (de.tag_name !== 'video') &&
+             (de.tag_name !== 'audio')) {
+
+           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
+
+             if (de.is_widget) {
+               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_1', [de.role, events]);
+             }
+             else {
+               if (de.is_interactive) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_2', [de.tag_name, events]);
+               else if (de.containsInteractiveElements()) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_3', [de.tag_name, events]);
+               else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, events]);
+             }
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+           }
+         }
+       } // end loop
+     }
+     */
+
+   } // end validation function
+},
+/**
+ * @object WIDGET_12
+ *
+ * @desc Element with widget role label should describe the purpose of the widget
+ *
+ */
+
+{ rule_id             : 'WIDGET_12',
+  last_updated        : '2015-08-10',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '2.4.6',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[Widget roles'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 12] ${dom_cache} ${rule_result}`);
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var widgets     = dom_cache.controls_cache.widget_elements;
+     var widgets_len = widgets.length;
+
+     // Check to see if valid cache reference
+     if (widgets && widgets_len) {
+
+       for (var i = 0; i < widgets_len; i++) {
+         var we = widgets[i];
+         var de = we.dom_element;
+
+         if (de.is_widget) {
+
+           if (de.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
+
+             if (we.computed_label && we.computed_label.length) {
+               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [we.computed_label, de.tag_name, de.role]);
+             }
+             else {
+               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
+               else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
+             }
+           }
+           else {
+             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+           }
+         }
+       } // end loop
+     }
+     */
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_13
+ *
+ * @desc Roles that prohibit accessible names
+ */
+
+{ rule_id             : 'WIDGET_13',
+  last_updated        : '2021-07-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['2.4.6'],
+  target_resources    : [ "caption",
+                          "code",
+                          "deletion",
+                          "emphasis",
+                          "generic",
+                          "insertion",
+                          "none",
+                          "paragraph",
+                          "presentation",
+                          "strong",
+                          "subscript",
+                          "superscript"],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 13] ${dom_cache} ${rule_result}`);
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+        var style = de.computed_style;
+        var implicit_role = '';
+
+        if (de.element_aria_info) {
+          implicit_role = de.element_aria_info.defaultRole;
+        }
+
+        if (de.has_aria_label || de.has_aria_labelledby) {
+
+          if (de.role &&
+              aria.designPatterns[de.role] &&
+              aria.designPatterns[de.role].nameProhibited) {
+            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
+            } else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
+            }
+          } else {
+            if (!de.role &&
+                implicit_role &&
+                aria.designPatterns[implicit_role] &&
+                aria.designPatterns[implicit_role].nameProhibited) {
+              if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                if (de.tag_name === 'a') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+                } else {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
+                }
+              } else {
+                rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+              }
+            }
+          }
+        } // end loop
+      }
+
+      */
+
+   } // end validation function
+},
+
+/**
+ * @object WIDGET_14
+ *
+ * @desc     Verify live regions are being used properly
+ */
+{ rule_id             : 'WIDGET_14',
+  last_updated        : '2017-02-08',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : [],
+  target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
+  validate          : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 14] ${dom_cache} ${rule_result}`);
+
+/*
+    var TEST_RESULT = TEST_RESULT;
+    var VISIBILITY  = VISIBILITY;
+
+    var dom_elements     = dom_cache.element_cache.dom_elements;
+    var dom_elements_len = dom_elements.length;
+
+
+    for (var i = 0; i < dom_elements_len; i++ ) {
+
+      var de =dom_elements[i];
+
+      if (de.type != Node.ELEMENT_NODE || !de.is_live || (de.aria_live === 'off')) continue;
+
+      var has_failure = false;
+
+      var has_live_role =  de.role && de.role.length && (" alert log status".indexOf(de.role) > 0);
+
+
+      if (de.has_aria_live) {
+        if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.aria_live]);
+        }
+        else {
+          if (has_live_role) {
+
+            switch (de.role) {
+
+              case 'alert':
+                if (de.aria_live === 'polite') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', ['polite', 'assertive',  de.role]);
+                  has_failure = true;
+                }
+                break;
+
+              case 'log':
+              case 'status':
+                if (de.aria_live === 'assertive') {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', ['assertive', 'polite', de.role]);
+                  has_failure = true;
+                }
+                break;
+
+              default:
+                break;
+
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name, de.aria_live]);
+          }
+        }
+      }
+
+      if (de.has_aria_atomic && has_live_role && (de.role === 'alert' || de.role === 'status')) {
+
+        if (de.aria_atomic === 'false') {
+          rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.role]);
+          has_failure = true;
+        }
+
+      }
+
+      if(has_live_role && !has_failure) {
+
+        switch (de.role) {
+
+          case 'alert':
+            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tag_name]);
+            }
+            break;
+
+          case 'log':
+            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tag_name]);
+            }
+            break;
+
+          case 'status':
+            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
+              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tag_name]);
+            }
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+    */
+
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_15
+ *
+ * @desc     Roles with deprecated ARIA attributes
+ */
+{ rule_id             : 'WIDGET_15',
+  last_updated        : '2021-08-10',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.1',
+  wcag_related_ids    : ['4.1.2'],
+  target_resources    : [
+        "alert",
+        "alertdialog",
+        "article",
+        "banner",
+        "blockquote",
+        "button",
+        "caption",
+        "cell",
+        "checkbox",
+        "code",
+        "command",
+        "complementary",
+        "composite",
+        "contentinfo",
+        "definition",
+        "deletion",
+        "dialog",
+        "directory",
+        "document",
+        "emphasis",
+        "feed",
+        "figure",
+        "form",
+        "generic",
+        "grid",
+        "group",
+        "heading",
+        "img",
+        "input",
+        "insertion",
+        "landmark",
+        "link",
+        "list",
+        "listbox",
+        "listitem",
+        "log",
+        "main",
+        "marquee",
+        "math",
+        "meter",
+        "menu",
+        "menubar",
+        "menuitem",
+        "menuitemcheckbox",
+        "menuitemradio",
+        "navigation",
+        "note",
+        "option",
+        "paragraph",
+        "presentation",
+        "progressbar",
+        "radio",
+        "radiogroup",
+        "range",
+        "region",
+        "row",
+        "rowgroup",
+        "scrollbar",
+        "search",
+        "section",
+        "sectionhead",
+        "select",
+        "separator",
+        "spinbutton",
+        "status",
+        "strong",
+        "structure",
+        "subscript",
+        "superscript",
+        "switch",
+        "tab",
+        "table",
+        "tablist",
+        "tabpanel",
+        "term",
+        "time",
+        "timer",
+        "toolbar",
+        "tooltip",
+        "tree",
+        "treegrid",
+        "treeitem",
+        "widget",
+        "window"
+    ],
+  validate          : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 15] ${dom_cache} ${rule_result}`);
+
+/*
+     var VISIBILITY  = VISIBILITY;
+     var TEST_RESULT = TEST_RESULT;
+
+     var dom_elements     = dom_cache.element_cache.dom_elements;
+     var dom_elements_len = dom_elements.length;
+
+     for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+        var style = de.computed_style;
+        var role = de.role;
+        var implicit_role = '';
+        var deprecatedProps = [];
+
+        if (!de.has_role && de.element_aria_info) {
+          implicit_role = de.element_aria_info.defaultRole;
+        }
+
+        if (de.has_role && aria.designPatterns[role]) {
+          deprecatedProps = aria.designPatterns[role].deprecatedProps;
+        } else {
+          if (implicit_role && aria.designPatterns[implicit_role]) {
+            deprecatedProps = aria.designPatterns[implicit_role].deprecatedProps;
+          }
+        }
+
+        if (deprecatedProps.length) {
+          for (var j = 0; j < deprecatedProps.length; j += 1) {
+            var prop = deprecatedProps[j];
+
+            if (de.node.hasAttribute(prop)) {
+
+              if (role) {
+                if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [prop, de.tag_name, role]);
+                } else {
+                  rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [prop, de.tag_name, role]);
+                }
+              } else {
+                if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [prop, de.tag_name, implicit_role]);
+                } else {
+                  rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [prop, de.tag_name, implicit_role]);
+                }
+              }
+            }
+          }
+        }
+      }
+      */
+
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_16
+ *
+ * @desc     Web compnents require manual check
+ */
+{ rule_id             : 'WIDGET_16',
+  last_updated        : '2021-09-12',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  ruleset             : RULESET.MORE,
+  rule_required       : true,
+  wcag_primary_id     : '2.1.1',
+  wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
+  target_resources    : ["Custom elements using web component APIs"],
+  validate          : function (dom_cache, rule_result) {
+
+    debug$d.flag && debug$d.log(`[WIDGET 16] ${dom_cache} ${rule_result}`);
+
+/*
+    var VISIBILITY  = VISIBILITY;
+    var TEST_RESULT = TEST_RESULT;
+
+    var dom_elements     = dom_cache.element_cache.dom_elements;
+    var dom_elements_len = dom_elements.length;
+
+    for (var i = 0; i < dom_elements_len; i++) {
+      var de = dom_elements[i];
+      var style = de.computed_style;
+
+      if (de.tag_name.indexOf('-') >= 0) {
+        if (!de.node.shadowRoot) {
+          if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name]);
+          } else {
+          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+          }
+        }
+      }
+    }
+    */
+
+  } // end validation function
+}
+
+];
 
 /* common.js */
 
@@ -15425,7 +16812,7 @@ const focusRules = {
   }
 };
 
-/* foromControlules.js */
+/* controlRules.js */
 
 /* --------------------------------------------------------------------------- */
 /*       OpenA11y Rules Localized Language Support (NLS): English      */
@@ -15434,7 +16821,7 @@ const focusRules = {
 const controlRules = {
   CONTROL_1: {
       ID:         'Control 1',
-      DEFINITION: 'Each @input@, @select@, @textarea@, @progress@, @meter@ and @output@ element must have an accessible label.',
+      DEFINITION: 'Each @input@, @select@, @textarea@, @progress@, @meter@ and @output@ element must have an accessible name using @label@ elements.',
       SUMMARY:    'Form controls must have labels',
       TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
       RULE_RESULT_MESSAGES: {
@@ -15460,6 +16847,9 @@ const controlRules = {
         'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
       ],
       MANUAL_CHECKS: [
+        'Good labels are both concise and descriptive of the control elements purpose.',
+        'If control elements are arranged in groups, use @fieldset/legend@ elements@ to provide a grouping label.',
+        'Consider using @aria-describedby@ to provide references to instructions or error information related to the form control.',
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -18389,6 +19779,989 @@ const landmarkRules = {
   }
 };
 
+/* widgetRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const widgetRules = {
+    WIDGET_1: {
+        ID:                    'Widget 1',
+        DEFINITION:            'Widget roles must have an accessible name.',
+        SUMMARY:               'Widget roles must have an accessible name',
+        TARGET_RESOURCES_DESC: 'Elements with widget roles that allow accessible names',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:         'Add an accessible name to the element with a widget role that requires an accessible name.',
+          FAIL_P:         'Add accessible names to the %N_F elements with widget roles that require an accessible name.',
+          MANUAL_CHECK_S: 'Check the element with a role that may need an accessible name.',
+          MANUAL_CHECK_P: 'Check the %N_MC elements with widget roles that may need an accessible name.',
+          HIDDEN_S:       'An element with a widget role that allows an accessible name is hidden and was not evaluated.',
+          HIDDEN_P:       '%N_H elements with widget roles that allow an accessible name are hidden and were not evaluated.',
+          NOT_APPLICABLE: 'No elements with widget roles that allow an accessible name'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1: '@%1[role=%2]@ element has the accessible name: %3.',
+          ELEMENT_MC_1:   '@%1[role=%2]@ element may require an accessible name depending on context (i.e multiple elements with the same widget role) in the page, adding an accessible name will improve accessibility.',
+          ELEMENT_FAIL_1: 'Add an accessible name to the @%1[role=%2]@ element.',
+          ELEMENT_HIDDEN_1: '@%1[role=%2]@ element is hidden from assistive technologies and was not evaluated.'
+        },
+        PURPOSES: [
+          'An accessible name identifies the purpose or action of a widget on the page.',
+          'For example when a widget role receives keyboard focus, both the role and the accessible name is spoken by screen readers.',
+          'This rule does not test HTML form controls and links, since the accessible name requirement for them is covered in other rules.'
+        ],
+        TECHNIQUES: [
+          'Some ARIA roles allow child text content and @alt@ attribute content from descendant image elements to be used for the accessible name.',
+          'Use the @aria-labelledby@ attribute to reference the id(s) of visible content on the page to define an accessible name.',
+          'Use the @aria-label@ attribute to provide an explicit accessible name for an element.',
+          'Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the element'
+        ],
+        MANUAL_CHECKS: [
+          'Good labels are both concise and descriptive of the element with widget role purpose.',
+          'If element with widget roles are arranged in groups, make sure labels include grouping information.',
+          'Consider using @aria-describedby@ to provide references to instructions or error information.',
+          'When there is more than one widget of the same type on a page, they need an label for users to uniquely identify the form control.'
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'ARIA Authoring Practices: Providing Accessible Names and Descriptions',
+            url:   'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-labelledby',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-label',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Accessible Name (e.g. label) Calculation',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#namecalculation'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA6: Using aria-label to provide labels for objects',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+    WIDGET_2: {
+        ID:                    'Widget 2',
+        DEFINITION:            'Elements with @onClick@ event handlers must be a link, button or have a widget role.',
+        SUMMARY:               '@onClick@ event handlers must have widget role',
+        TARGET_RESOURCES_DESC: 'Elements with @onClick@ event handler values that are defined as widgets',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Add widget role name to element.',
+          FAIL_P:   'Add widget roles to each of the %N_F elements.',
+          MANUAL_CHECK_S:     'Verify that any child elements that can respond to element with an @onclick@ event handler are a link, form control or has a widget role, and can be accessed with the keyboard alone.',
+          MANUAL_CHECK_P:     'Verify that any child elements that can respond to %N_MC elements with an @onclick@ event handler are a link, form control or has a widget role, and can be accessed with the keyboard alone.',
+          HIDDEN_S: 'The element with an @onClick@ event handler that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H elements with @onClick@ events handler that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No elements with @onClick@ event handlers on the page'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   '@%1@ element has the @%2@ widget role.',
+          ELEMENT_FAIL_1:   'Change the role of the @%1[role=%2]@ element to a widget role.',
+          ELEMENT_FAIL_2:   'Add a widget role to the @%1@ element that describes the action of the element.',
+          ELEMENT_MC_1:     'The @%1@ element has an @onclick@ event handler, verify any child elements that can respond to the @onclick@ event handler are a link, form control or have a widget role, and can be access with the keyboard alone.',
+          ELEMENT_HIDDEN_1: 'The @%1@ element with an onClick events having a @role@ was not tested because %1 element with @onClick@ event handler is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'Elements with @onClick@ event handlers must be a link, form control or have a widget role.',
+          'NOTE: This rule can only identify elements using the @onclick@ attribute.  There is currently no programatic way to detect elements with @click@ events added using @addEventListener@.'
+        ],
+        TECHNIQUES: [
+          'Use ARIA widget roles on non-form controls to describe their function on the page.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'ARIA Authoring Practices:  Keyboard Navigation Inside Components',
+            url:   'https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA4.html'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+    WIDGET_3: {
+        ID:                    'Widget 3',
+        DEFINITION:            '@role@ attribute value must be a widget, section, landmark or live region role.',
+        SUMMARY:               '@role@ must be valid',
+        TARGET_RESOURCES_DESC: 'Elements with @role@ attribute values',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Add a valid widget, section, landmark or live region role value to the element.',
+          FAIL_P:   'Add a valid widget, section, landmark or live region role values to %N_F out of %N_T elements with @role@ attributes.',
+          HIDDEN_S: 'The element with a role that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H elements with a role that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No elements with @role@ attribute on this page'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   '@%1@ is a widget role.',
+          ELEMENT_PASS_2:   '@%1@ is a landmark role.',
+          ELEMENT_PASS_3:   '@%1@ is a live region role.',
+          ELEMENT_PASS_4:   '@%1@ is a section role.',
+          ELEMENT_PASS_5:   '@%1@ is a valid ARIA role.',
+          ELEMENT_FAIL_1:   '@%1@ is not a defined ARIA role, change the @role@ attribute value to an appropriate widget, landmark, section or live region role.',
+          ELEMENT_FAIL_2:   '@%1@ is an abstract ARIA role, change the role attribute to a widget, landmark or live region role.',
+          ELEMENT_HIDDEN_1: '@role@ attribute value was not validated because the %1 element is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'Elements with @role@ attributes describe the sections of a document (i.e landmarks) or the types of interactive elements (i.e. widgets) to users of assistive technologies, especially screen reader users.'
+        ],
+        TECHNIQUES: [
+          'Use ARIA landmark roles to describe the sections of a web page.',
+          'Use ARIA widget roles to describe interactive elements on a web page'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA4: Using a WAI-ARIA role to expose the role of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA4.html'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA19: Using ARIA role=alert or Live Regions to Identify Errors',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19.html'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+    WIDGET_4: {
+        ID:                    'Widget 4',
+        DEFINITION:            'ARIA property and state values %s be valid types.',
+        SUMMARY:               'ARIA values %s be valid',
+        TARGET_RESOURCES_DESC: 'Elements with aria attributes',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Change ARIA attribute to a valid type.',
+          FAIL_P:   'Change %N_F out of %N_T ARIA attributes to a valid types.',
+          HIDDEN_S: 'The widget that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H widgets that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No ARIA attributes on this page'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   'The @%1@ attribute with the value "@%2@" is a valid token.',
+          ELEMENT_PASS_2:   'The @%1@ attribute with the value "@%2@" is a valid "%3" type.',
+          ELEMENT_FAIL_1: 'The @%1@ attribute with the value "@%2@" must change to one of the following values: %3.',
+          ELEMENT_FAIL_2: 'The @%1@ attribute with the value "@%2@" must change to one or more of the following values: %3.',
+          ELEMENT_FAIL_3: 'The @%1@ attribute with the value "@%2@" must change to a value with type of \'%3\'.',
+          ELEMENT_HIDDEN_1: 'ARIA attribute value was not tested for validity because the @%1@ attribute with the value "@%2@" is hidden from assistive technologies and not visible on screen.'
+        },
+        PURPOSES: [
+          'ARIA attributes must be a valid type to accurately describe web content to users of assistive technologies, especially screen reader users.'
+        ],
+        TECHNIQUES: [
+          'Use valid values for ARIA attributes.',
+          'Check W3C WAI Accessible Rich Internet Applications specifications for allowed values for ARIA attributes.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+  },
+  WIDGET_5: {
+        ID:                    'Widget 5',
+        DEFINITION:            'Elements with the attributes that start with @aria-@ %s be a valid ARIA property or state.',
+        SUMMARY:               'Attributes that start with @aria-@ %s be defined.',
+        TARGET_RESOURCES_DESC: 'Elements with aria attributes',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Change ARIA attribute to a defined property or state.',
+          FAIL_P:   'Change all %N_F out of %N_T ARIA attributes to a defined properties or states.',
+          HIDDEN_S: 'The widget that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H widgets that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No undefined ARIA attributes on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:    'The @%1@ attribute is a defined ARIA property or state.',
+          ELEMENT_FAIL_1:  'The @%1@ attribute must be changed to a defined ARIA property or state.',
+          ELEMENT_HIDDEN_1:  'Valid ARIA attribute was not tested becasue the @%1@ attribute with the value "@%2@" is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'ARIA attributes must be defined properties or states to accurately describe web content to users of assistive technologies, especially screen reader users'
+        ],
+        TECHNIQUES: [
+          'Use defined ARIA properties and states in the ARIA specification.',
+          'Check W3C WAI Accessible Rich Internet Applications specifications for allowed values for ARIA attributes.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+  },
+  WIDGET_6: {
+        ID:                    'Widget 6',
+        DEFINITION:            'Widgets %s define required properties and states.',
+        SUMMARY:               'Widgets %s have properties',
+        TARGET_RESOURCES_DESC: 'Widgets with required properties and states',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Add required properties and states to widget.',
+          FAIL_P:   'Add required properties and states to the %N_F of the %N_T widgets with required properties and/or states on the page.',
+          HIDDEN_S: 'The widget with required properties and states that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H widgets that have required properties and states that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No widgets with required properties and states on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   '@%1@ widget has the following required ARIA properties and states: %2.',
+          ELEMENT_FAIL_1: 'Add one or more of the required ARIA properties and states (i.e. "%2") to the @%1@ widget.',
+          ELEMENT_HIDDEN_1: 'Required ARA properties and states was not tested because the %1 widget is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+        ],
+        TECHNIQUES: [
+          'Use required ARIA properties to describe the features and options of a widget.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+  WIDGET_7: {
+        ID:                    'Widget 7',
+        DEFINITION:            'Container widgets %s have required owned elements.',
+        SUMMARY:               'Widgets %s have owned elements',
+        TARGET_RESOURCES_DESC: 'Widgets with required owned elements',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Add required child element to the widget.',
+          FAIL_P:   'Add required child elements for the %N_F out of %N_T widgets missing required child elements.',
+          HIDDEN_S: 'The widget with requires child elements that is is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H hidden widgets that require child elements were not evaluated.',
+          NOT_APPLICABLE:  'No widgets with required child elements on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element: @%2@.',
+          ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to contain required owned elements.',
+          ELEMENT_FAIL_1:  '@%1@ widget does not contain one or more of following required owned elements: @%2@.',
+          ELEMENT_HIDDEN_1:  'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
+        },
+        PURPOSES: [
+          'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
+          'Roles that are associated with container widgets have important parent/child relationships with other roles.',
+          'Parent/Child relationships are used by assistive technologies for computing the number of items in a container and the item position.',
+          'Container roles are also used by assistive technologies to provide enhanced navigation features for moving between items in lists, tables, grids and treegrids.'
+        ],
+        TECHNIQUES: [
+          'Required owned elements can be defined using the HTML DOM structure or the @aria-owns@ attribute.',
+          'Use the DOM structure to add required owned elements by making them a descendant of the container element.',
+          'When the owned elements are not descendants of the container element, use the @aria-owns@ attribute on the container element to reference the owned elements.',
+          'When @aria-busy@ attribute is set to @true@ on the container element, the container element does not need to own any required elements.  @aria-busy@ should be used when a container element is being dynamically populated.',
+          'NOTE: The DOM structure technique is preferred over the @aria-owns@ technique, since it is less likely to result in authoring errors associated with creating and referencing elements with unique @id@s.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+ WIDGET_8: {
+        ID:                    'Widget 8',
+        DEFINITION:            'Role %s have a required parent role using the HTML DOM structure or the @aria-owns@ attribute.',
+        SUMMARY:               'Role %s have parent',
+        TARGET_RESOURCES_DESC: 'Role with required parent role',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Add required parent role to the widget.',
+          FAIL_P:   'Add required parent role to the %N_F of the %N_T widgets that require a parent role.',
+          HIDDEN_S: 'The role that requires a parent role that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H widgets that require a parent roles that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No widgets with required parent role on this page'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   '@%1@ role is a child of the a @%2@ role.',
+          ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes identifies a required parent role.',
+          ELEMENT_HIDDEN_1: 'Required parent role was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
+          'Roles that are associated with container widgets have important parent/child relationships with other roles.',
+          'Parent/child relationships are used by assistive technologies for computing the number of items owned by a container and the position of an item (e.g. "third of five links").',
+          'Container roles are also used by assistive technologies to provide enhanced navigation features for moving between items in lists, tables, grids and treegrids.'
+        ],
+        TECHNIQUES: [
+          'Parent roles can be defined using the HTML DOM structure or the @aria-owns@ attribute.',
+          'Required parent role is a DOM ancestor of the element.',
+          'Required parent role references the element using the @aria-owns@ attribute.',
+          'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute, since it is less likely to result in authoring errors associated with creating and referencing elements with unique @id@s.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+ WIDGET_9: {
+        ID:                    'Widget 9',
+        DEFINITION:            'Elements %s be owned by only one widget.',
+        SUMMARY:               'Only one owner',
+        TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Update widgets with aria-owns to make sure a element is only referenced once.',
+          FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a element only once.',
+          NOT_APPLICABLE:  'No elements are referenced using aria-owns on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   '@%2@ element is referenced only by @%1@ container element using aria-owns.',
+          ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ element so it is only referenced by one container element.',
+        },
+        PURPOSES: [
+          'ARIA container elements  have require child elements.',
+          'When the HTML DOM parent/child relationships do not identify the child elements the @aria-owns@ attribute can be used to reference the child elements.',
+          'A child element can only be referenced using @aria-owns@ by one container element.'
+        ],
+        TECHNIQUES: [
+          'Container elements using @aria-owns@ attribute must accurately reference the associated child elements.',
+          'A child element can only be referenced by one container element using the @aria-owns@ attribute.',
+          'Update the application to use the DOM parent/child relationships instead of using @aria-owns@ technique.',
+          'NOTE: HTML DOM parent/child relationships for defining relationships is preferred over the use of @aria-owns@ attribute, since it is less likely to result in authoring errors associated with creating and referencing elements with unique @id@s.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+ WIDGET_10: {
+        ID:                    'Widget 10',
+        DEFINITION:            'Range widget %s have value between minimum and maximum values, or have an indeterminate state.',
+        SUMMARY:               'Value in range',
+        TARGET_RESOURCES_DESC: 'Range widgets',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Update @range@ widget attributes of the range widget so the @aria-valuenow@ attribute is in the range defined by @aria-valuemin@ and @aria-valuemax@ attributes.',
+          FAIL_P:   'Update @range@ widget attributes of the %N_F out of %N_T range widgets so the @aria-valuenow@ attribute of each widget is in the range defined by @aria-valuemin@ and @aria-valuemax@ attributes.',
+          HIDDEN_S: 'The @range@ widget that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H @range@ widgets that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No @range@ widgets on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:  '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
+          ELEMENT_PASS_2:  '@%1@ widget value of %2 is in the range %3 and %4.',
+          ELEMENT_PASS_3:  '@%1@ widget has no @aria-valuenow@ attribute and the value is considered indeterminate.',
+          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is in range.',
+          ELEMENT_FAIL_2:  'Update the numeric values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) so the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
+          ELEMENT_FAIL_3:  'Update the @%1@ widget values for @aria-valuemin@ ("%2") and/or @aria-valuemax@ ("%3") attributes to be valid numbers.',
+          ELEMENT_FAIL_4:  '@%1@ widget is missing or has an invalid value for @aria-valuenow@.',
+          ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
+          'Screen readers typcially render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
+          '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
+          'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
+        ],
+        TECHNIQUES: [
+          'Use the @aria-valuenow@ attributes numerical value must be in the range defined by @aria-valuemin@ and @aria-valuemax@.',
+          'Screen reader typically render the slider value as a percentage, requiring a valid @aria-valuenow@ attribute.',
+          'Use the @aria-valuetext@ to provide an alternative to the percentage typically spoken by assistive technologies (e.g. "32 dollars", "78 degrees")',
+          'For most range roles, if @aria-valuemin@ is not defined it\'s default value is 0.',
+          'For most range roles, if @aria-valuemax@ is not defined it\'s default value is 100.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Communicating Value and Limits for Range Widgets',
+            url:   'https://w3c.github.io/aria-practices/#range_related_properties'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#meter'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#progress'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#scollbar'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#slider'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#spinbutton'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
+          }
+        ]
+    },
+ WIDGET_11: {
+        ID:                    'Widget 11',
+        DEFINITION:            'Elements with UI event handlers %s have widget roles that accurately describe the options and actions available to the user upon interacting with the element.',
+        SUMMARY:               'Elements with event handlers %s have roles',
+        TARGET_RESOURCES_DESC: 'Elements with event handlers',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:          'Add an ARIA widget role to the interactive element, or to its descendants, to describe the user interactions associated with the event handler or handlers on the element.',
+          FAIL_P:          'Add ARIA widget roles to the %N_F interactive elements, or to their descendants, to describe the user interactions associated with the event handlers on those elements.',
+          MANUAL_CHECK_S:  'Verify the user interactions associated with the interactive element with one or more event handlers are accurately described by the element\'s widget role and/or those of its descendants.',
+          MANUAL_CHECK_P:  'Verify the user interactions associated with the %N_MC interactive elements with one or more event handlers are accurately described by each element\'s widget role and/or their descendants.',
+          HIDDEN_S:        'The hidden interactive element with event handlers was not evaluated.',
+          HIDDEN_P:        'The %N_H interactive elements with event handlers were not evaluated.',
+          NOT_APPLICABLE:  'No interactive elements with event handlers found on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_MANUAL_CHECK_1:  'Verify the user options and actions available through the "@%2@" event handler(s) are accurately described by the @%1@ widget role.',
+          ELEMENT_MANUAL_CHECK_2:  'Verify the user options and actions available through the "@%2@" event handler(s) are accurately described by native role semantics of the @%1@ element.',
+          ELEMENT_MANUAL_CHECK_3:  'Verify the user options and actions available through the "@%2@" event handler(s) are accurately described by the descendant elements with widget roles or the native role semantics of the interactive elements.',
+          ELEMENT_FAIL_1:   'Add widget role(s) to the element and/or its descendants that accurately describe the user options and actions of the @%1@ element with the following event handlers: %2.',
+          ELEMENT_HIDDEN_1: 'Roles for interactive elements was not tested because the %1 element is hidden from assistive technologies with following event handlers: %2'
+        },
+        PURPOSES: [
+          'ARIA widget roles describe the user options and actions, or more generally, the expected behavior, of interactive elements to users of assistive technologies.',
+          'Standard HTML form controls and links have default widget roles that describe their behavior.',
+          'When UI event handlers are used to create user options and actions that change the expected behavior of an interactive element, ensure that the appropriate widget role is assigned to the element.',
+          'Conversely, ensure that the event handlers are adding appropriate behaviors that align with the ARIA widget role.'
+        ],
+        TECHNIQUES: [
+          'Use the @role@ attribute with an ARIA widget role value to describe the user options, actions and expected behavior of custom interactive elements.',
+          'Use ARIA property and state attributes to describe the features of each widget role. Note that some widget roles have required properties and states.',
+          'Ensure that all options and actions of interactive elements are available through keyboard-only interaction.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML5: INPUT element widget role semantics',
+            url:   'https://www.w3.org/TR/html51/sec-forms.html#state-of-the-type-attribute'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML5: SELECT element widget role semantics',
+            url:   'https://www.w3.org/TR/html51/sec-forms.html#the-select-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML5: TEXTAREA element widget role semantics',
+            url:   'https://www.w3.org/TR/html51/sec-forms.html#the-textarea-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML5: BUTTON element widget role semantics',
+            url:   'https://www.w3.org/TR/html51/sec-forms.html#the-button-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML5: A element widget role semantics',
+            url:   'https://www.w3.org/TR/html51/textlevel-semantics.html#the-a-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'UI Events Specification',
+            url:   'https://www.w3.org/TR/DOM-Level-3-Events/'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+    WIDGET_12: {
+        ID:         'Widget 12',
+        DEFINITION: 'The label for elements with a widget roles on a page %s sufficiently describe its purpose.',
+        SUMMARY:    'Widget labels %s be descriptive',
+        TARGET_RESOURCES_DESC: 'Elements with widget roles on a page',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'To the element with widget role missing a label, add a label that describes its purpose.',
+          FAIL_P:   'To each of the %N_F element with widget roles missing labels, add a label that uniquely describes its purpose.',
+          MANUAL_CHECK_S: 'Verify that the label uniquely describes the purpose of the element with widget role.',
+          MANUAL_CHECK_P: 'Verify that the label for each of the %N_MC element with widget roles uniquely describes its purpose.',
+          HIDDEN_S: 'The control element that is hidden was not evaluated.',
+          HIDDEN_P: 'The %N_H control elements that are hidden were not evaluated.',
+          NOT_APPLICABLE: 'No element with widget roles on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_MC_1:     'Verify the label "%1" for the @%2@ element with @%3@ widget role describes its purpose.',
+          ELEMENT_MC_2:     'Verify the @%1@ element with @%2@ widget role does not need a label, a label is only needed  if it clarifies the purpose of the widget on the page.',
+          ELEMENT_FAIL_1:   'Add a label to the @%1@ element with @%2@ widget role.',
+          ELEMENT_HIDDEN_1: '@%1@ element with the %2@ widget role was not evaluated because it is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          'Labels that are sufficiently descriptive make it possible for people to understand the purposes of elements with widget roles on the page.'
+        ],
+        TECHNIQUES: [
+          'In some cases the child text nodes and @alt@ from descendant image elements will be used as the label for elements with widget roles.',
+          'Use @aria-labelledby@ attribute to reference the id(s) of the elements on the page to label elements with widget roles.',
+          'Use @aria-label@ attribute to provide a explicit label for an element with a widget role.',
+          'Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the widget'
+        ],
+        MANUAL_CHECKS: [
+          'Good labels are both concise and descriptive of the element with widget role purpose.',
+          'If element with widget roles are arranged in groups, make sure labels include grouping information.',
+          'Consider using @aria-describedby@ to provide references to instructions or error information.',
+          'When there is more than one widget of the same type on a page, they need an label for users to uniquely identify the form control.'
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML Specification: The @label@ element',
+            url:   'https://html.spec.whatwg.org/#the-label-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML Specification: The @title@ attribute',
+            url:   'https://html.spec.whatwg.org/#the-title-attribute'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA6: Using aria-label to provide labels for objects',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'ARIA9: Using aria-labelledby to concatenate a label from several text nodes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'MDN Web Docs: ARIA ',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'Web Fundamentals: Introduction to ARIA',
+            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+          }
+        ]
+    },
+    WIDGET_13: {
+        ID:                    'Widget 13',
+        DEFINITION:            'ARIA roles that prohibit accessible names %s not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
+        SUMMARY:               'Role does not support accessible name.',
+        TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
+          FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
+          HIDDEN_S: 'The element with an widget role that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
+          NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element with role @%2@.',
+          ELEMENT_FAIL_2:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
+          ELEMENT_HIDDEN_1:  'Element @%1[role="%2"]@ was not tested because it is hidden from assistive technologies.',
+          ELEMENT_HIDDEN_2:  'Element @%1@ was not tested because it is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
+          'Versions of the ARIA specification before 1.2 allowed @aria-label@ or @aria-labelledby@  to be used on any element, even if an accessible name was not useful .',
+          'For example, defining an accessible name on a @p@ element or an element with @role=none@ does not provide any useful accessibility information to assistive technologies.  For a @p@ element the text content is the only part that is needed by assistive technologies.'
+        ],
+        TECHNIQUES: [
+          'Remove @aria-label@ or @aria-labelledby@ attribute from the element.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          }
+        ]
+    },
+    WIDGET_14: {
+        ID:                    'Widget 14',
+        DEFINITION:            'Verify the live region has the appropriate ARIA markup to indicate whether or how the screen reader will interrupt the user with a change notification.',
+        SUMMARY:               'Verify appropriate use of live region',
+        TARGET_RESOURCES_DESC: 'Elements with @alert@, @log@ or @status@ roles or the @aria-live@ attribute',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:          'One element identified as a live region has a conflict between the implied attribute values of the role and the defined attribute values.',
+          FAIL_P:          'The %N_F elements identified as live regions have conflicts between the implied attribute values of their roles and the defined attribute values.',
+          HIDDEN_S:        'One element identified as a live region is hidden and was not evaluated.',
+          MANUAL_CHECK_S:  'Verify the element identified as a live region has the appropriate ARIA markup for the type of informational change that can occur.',
+          MANUAL_CHECK_P:  'Verify the %N_MC elements identified as live regions have the appropriate ARIA markup for the type of informational changes that can occur in those regions.',
+          HIDDEN_P:        '%N_H elements identified as live regions are hidden and were not evaluated.',
+          NOT_APPLICABLE:  'No elements were identified as live regions on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:     'The @aria-live@ attribute value of @%1@ conflicts with the default value of @%2@ for the @aria-live@ property of the @%3@ role.',
+          ELEMENT_FAIL_2:     'The @aria-atomic@ attribute value of @false@ conflicts with the default value of @true@ for the @aria-atomic@ property of the @%1@ role.',
+          ELEMENT_MC_1:       'Verify the @aria-live@ attribute value of @%1@ is appropriate for the type of informational change that can occur in the region.',
+          ELEMENT_MC_2:       'Verify the @alert@ role identifies a live region with critical time-sensitive information.',
+          ELEMENT_MC_3:       'Verify the @log@ role identifies a live region where new information added and deleted in a meaningful order.',
+          ELEMENT_MC_4:       'Verify the @alert@ role identifies a live region with advisory information.',
+          ELEMENT_HIDDEN_1:   '@%1[arial-live="%2"]@ was not evaluated because it is hidden from assistive technologies.',
+          ELEMENT_HIDDEN_2:   '@%1[role="%2"]@ was not evaluated because it is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          'ARIA live regions provide a mechanism for displaying dynamic text content on a page such that changes in the content will be automatically announced to screen reader users while they are focusing on other parts of the page.',
+          'The manner in which informational changes in live regions are announced to screen reader users is controlled by three separate ARIA roles that may be assigned to the region: @alert@, @log@ and @status@.',
+          'In general, live regions should be used sparingly, since live regions that are constantly announcing changes become distracting, and may prevent the user from completing the task they are working on.',
+          'A common misuse of live regions is to announce the opening of pull down menus or dialog boxes: These types of announcements are better handled through the appropriate use of other ARIA markup such as the @menu@ and @dialog@ roles.'
+        ],
+        TECHNIQUES: [
+          'The @alert@ role identifies a live region with very important, and usually time-sensitive, information. When the information changes in this type of live region, a message is typically sent that interrupts the current speech being spoken by a screen reader. Examples includes transaction errors that are cancelling or impeding the progress of completing a financial transaction.',
+          'The @log@ role identifies a type of live region where new information is added in a meaningful order and old information may disappear. Examples include chat logs, messaging history, game log, or an error log.',
+          'The @status@ role identifies a live region that contains an advisory message, but one that is not important enough to justify an @alert@ role. This type of region is often, but not necessarily, presented as a status bar, and announcements of informational changes are typically delayed until a break occurs in the current speech being read by the screen reader software.',
+          'When the @aria-atomic@ attribute is specified for a live region, it indicates to assistive technologies that when a change occurs, it should re-render all of the content or just the changes.',
+          'The optional @aria-relevant@ attribute on a live region indicates what types of informational changes should be communicated to the user (e.g. @additions@, @deletions@, @text@ and @all@).',
+          'The @aria-live@ attribute can be used to create custom live regions, with possible values of @polite@, @assertive@ and @off@. When used in conjunction with the ARIA @alert@, @log@ or @status@ roles, care must be taken in order to avoid conflicts with the default properties of those roles.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.OTHER,
+            title: 'Mozilla Developer Network: ARIA Live Regions',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/WIDGET_Live_Regions'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Alert Role',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/roles#alert'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Log Role',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/roles#log'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Status Role',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/roles#status'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-live',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-live'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-atomic',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-atomic'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-relevant',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-relevant'
+          }
+
+        ]
+    },
+    WIDGET_15: {
+        ID:                    'Widget 15',
+        DEFINITION:            'ARIA attributes that have been deprecated for a role %s be removed.',
+        SUMMARY:               'Remove deprecated ARIA attributes.',
+        TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are deprecated.',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Remove the deprecated ARIA attribute from the element.',
+          FAIL_P:   'Remove the deprecated ARIA attributes from the %N_F elements.',
+          HIDDEN_S: 'The element with deprecated ARIA attribute that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H elements with deprecated ARIA attributes that are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No elements with deprecated ARIA attributes found.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element with role @%3@.',
+          ELEMENT_FAIL_2:    'Remove @%1@ attribute from @%2@ element which has an implicit role of "@%3@".',
+          ELEMENT_HIDDEN_1:  'The @%1@ attribute on the @%2[role="%3"]@ element was not tested because it is hidden from assistive technologies.',
+          ELEMENT_HIDDEN_2:  'The @%1@ attribute on the @%2@ element which has the implicit role of "@%3@"" was not tested because it is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          'Not all ARIA properties and states are useful on every ARIA role and starting with ARIA 1.2 certain states and properties that were once considered global have been deprecated on specific roles.',
+          'The ARIA in HTML specification defines implicit roles for most HTML elememnts.',
+          'The same ARIA property and state restrictions on explicit roles apply to implicit roles.'
+        ],
+        TECHNIQUES: [
+          'Remove the deprecated ARIA attribute from the element.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'ARIA in HTML',
+            url:   'https://www.w3.org/TR/html-aria/'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          }
+        ]
+    },
+    WIDGET_16: {
+        ID:                    'Widget 16',
+        DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs %s be manually checked for accessibility requirements.',
+        SUMMARY:               'Closed shadow DOM requires manual check.',
+        TARGET_RESOURCES_DESC: 'Custom elements created using web components API with closed shadow DOM.',
+        RULE_RESULT_MESSAGES: {
+          MANUAL_CHECK_S:  'Verify the custom element with a closed shadow DOM meets WCAG accessibility requirments.',
+          MANUAL_CHECK_P:  'Verify the %N_MC custom elements with a closed shadow DOM meet WCAG accessibility requirments.',
+          HIDDEN_S: 'A custom element with a closed shadow DOM is hidden and only needs to be checked if has features that become visible need to be checked for accessbility.',
+          HIDDEN_P: '%N_H custom elements with a closed shadow DOM are hidden and only the custom elements with features that may become visible need to be checked for accessibility.',
+          NOT_APPLICABLE:  'No custom elements found on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_MC_1:       'Verify the accessibility of the "@%1@"" custom component with a closed shadow DOM using manual checking techniques or automated tools that can anlyze the shadow DOM of custom elements.',
+          ELEMENT_HIDDEN_1:  'The @%1@ custom element with a closed shadow DOM is hidden from assistive technologies.',
+        },
+        PURPOSES: [
+          'Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.',
+          'Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they can only be accessed by the evaluation library for programmatic checking of accessibility features when the shadow DOM is "open".',
+          'The evaluation library is unable to analyze custom elements created with "closed" shadow DOMs. In the case of the "closed" shadow DOM all accessibility requirements require manual checks, possibly by using other DOM inspection tools to identify accessibility issues and features.'
+        ],
+        TECHNIQUES: [
+          'In evaluating custom elements with "closed" shadow DOMs that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.',
+          'Test with screen readers to verify functionality is operable by a screen reader user.',
+          'Test the graphical rendering in operating system using high contrast settings to verify content is perceivable by people with visual impairments.',
+          'Use accessibility tools in browser DOM inspectors to assist with manual inspection, since the DOM inspector of most  browsers allows access to the Shadow DOM of the custom element.',
+          'You can use the accessibility rules in this tool to help guide your manual testing procedures.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'MDN: Web Components',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Web_Components'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'WebComponents.org: Introduction',
+            url:   'https://www.webcomponents.org/introduction'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Web Content Accessibility Guidelines (WCAG)',
+            url:   'https://www.w3.org/TR/WCAG/'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices',
+            url:   'https://w3c.github.io/aria-practices/'
+          }
+        ]
+    }
+};
+
 /* messages.js for English messages */
 
 const messages$1 = {
@@ -18406,6 +20779,7 @@ messages$1.rules = Object.assign(messages$1.rules, headingRules);
 messages$1.rules = Object.assign(messages$1.rules, imageRules);
 messages$1.rules = Object.assign(messages$1.rules, linkRules);
 messages$1.rules = Object.assign(messages$1.rules, landmarkRules);
+messages$1.rules = Object.assign(messages$1.rules, widgetRules);
 
 /* locale.js */
 
@@ -19302,6 +21676,7 @@ addToArray(headingRules$1);
 addToArray(imageRules$1);
 addToArray(linkRules$1);
 addToArray(landmarkRules$1);
+addToArray(widgetRules$1);
 
 
 if (debug$a.flag) {

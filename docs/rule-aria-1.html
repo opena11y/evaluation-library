@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Form controls must have labels | OpenA11y Evaluation Library 2.0</title>
+        <title>Widget roles must have an accessible name | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
@@ -46,27 +46,27 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Form controls must have labels</li>
+          <li class="breadcrumb-item active">Widget roles must have an accessible name</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Form controls must have labels</h1>
+            <h1 id="h1-title">Rule: Widget roles must have an accessible name</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Control 1</td>
+  <td>ARIA 1</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td>Each <code>input</code>, <code>select</code>, <code>textarea</code>, <code>progress</code>, <code>meter</code> and <code>output</code> element must have an accessible name using <code>label</code> elements.</td>
+  <td>Widget roles must have an accessible name.</td>
 </tr>
 
                   
@@ -75,7 +75,11 @@
   <td>
     <ul>
       
-      <li>A label associated with a form control ensures that information about the form control is spoken by screen readers when it receives focus.</li>
+      <li>An accessible name identifies the purpose or action of a widget on the page.</li>
+      
+      <li>For example when a widget role receives keyboard focus, both the role and the accessible name is spoken by screen readers when it receives focus</li>
+      
+      <li>This rule does not test HTML form controls and links, since the accessible name requirement for them is covered in other rules.</li>
       
     </ul>
   </td>
@@ -92,8 +96,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
-        Success Criterion 3.3.2 Labels or Instructions
+      <a href="https://www.w3.org/TR/WCAG21/#name-role-value" target="_spec">
+        Success Criterion 4.1.2 Name, Role, Value
       </a>
     </p>
     <p class="related">
@@ -108,8 +112,8 @@
       </li>
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
-          Success Criterion 2.4.6 Headings and Labels
+        <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
+          Success Criterion 3.3.2 Labels or Instructions
         </a>
       </li>
       
@@ -120,7 +124,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Forms</td>
+  <td>Widgets/Scripts</td>
 </tr>
 
                   
@@ -135,15 +139,13 @@
   <td>
     <ul>
       
-      <li>The preferred technique for labeling form controls is by reference: First, include an <code>id</code> attribute on the form control to be labeled; then use the <code>label</code> element with a <code>for</code> attribute value that references the <code>id</code> value of the control.</li>
+      <li>Some ARIA roles allow child text content and <code>alt</code> attribute content from descendant image elements to be used for the accessible name.</li>
       
-      <li>An alternative technique is to use the <code>label</code> element to encapsulate the form control element.</li>
+      <li>Use the <code>aria-labelledby</code> attribute to reference the id(s) of visible content on the page to define an accessible name.</li>
       
-      <li>In special cases, the <code>aria-labelledby</code> attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.</li>
+      <li>Use the <code>aria-label</code> attribute to provide an explicit accessible name for an element.</li>
       
-      <li>In special cases, the <code>aria-label</code> attribute can be used on the form control element to provide an explicit text description of its purpose.</li>
-      
-      <li>In special cases, the <code>title</code> attribute on the form control element can be used to provide an explicit text description of its purpose.</li>
+      <li>Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the element</li>
       
     </ul>
   </td>
@@ -155,21 +157,25 @@
   <td>
     <ul>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#the-label-element">HTML Specification: The <code>label</code> element</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/">ARIA Authoring Practices: Providing Accessible Names and Descriptions</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-label">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-label</code> attribute</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-labelledby</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-labelledby</code> attribute</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-label">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-label</a></li>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute">HTML Specification: The <code>title</code> attribute</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#namecalculation">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Accessible Name (e.g. label) Calculation</a></li>
       
-      <li><a href="https://www.w3.org/WAI/tutorials/forms/">W3C WAI Accessibility Tutorials: Forms Concepts</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA6">ARIA6: Using aria-label to provide labels for objects</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H65">H65: Using the title attribute to identify form controls when the label element cannot be used</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA9">ARIA9: Using aria-labelledby to concatenate a label from several text nodes</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H71">H71: Providing a description for groups of form controls using fieldset and legend elements</a></li>
+      <li><a href="https://w3c.github.io/aria-practices/">ARIA Authoring Practices</a></li>
+      
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN Web Docs: ARIA </a></li>
+      
+      <li><a href="https://developers.google.com/web/fundamentals/accessibility/semantics-aria">Web Fundamentals: Introduction to ARIA</a></li>
       
     </ul>
   </td>

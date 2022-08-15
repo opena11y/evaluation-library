@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>QUNIT: Widget Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <title>QUNIT: Aria Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,46 +11,22 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
 
-      test( "WIDGET_1: Button, radio, and checkbox widgets must have accessible name", function() {
-        executeTest('ID_IFRAME_1A', 'WIDGET_1');
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
+
+        executeTest('WIDGET_1: Button, radio, and checkbox widgets must have accessible name', 'ID_IFRAME_1A',  'WIDGET_1');
+        executeTest('WIDGET_1: Alert, alertdialog, dialog, and status must have accessible name', 'ID_IFRAME_1B',  'WIDGET_1');
+        executeTest('WIDGET_1: Menu, tree, and grid must have accessible name', 'ID_IFRAME_1C',  'WIDGET_1');
+        executeTest('WIDGET_1: Tab, tabpanel, and tablist must have accessible name', 'ID_IFRAME_1D',  'WIDGET_1');
+        executeTest('WIDGET_1: Link, log, marquee, and slider must have accessible name', 'ID_IFRAME_1E',  'WIDGET_1');
+        executeTest('WIDGET_1: Progressbar, scrollbar, and spinbutton must have accessible name', 'ID_IFRAME_1F',  'WIDGET_1');
+        executeTest('WIDGET_2: onClick must have role', 'ID_IFRAME_2A',  'WIDGET_2');
+        executeTest('WIDGET_3: Role must be valid', 'ID_IFRAME_3A',  'WIDGET_3');
       });
 
-      test( "WIDGET_1: Alert, alertdialog, dialog, and status must have accessible name", function() {
-        executeTest('ID_IFRAME_1B', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Menu, tree, and grid must have accessible name", function() {
-        executeTest('ID_IFRAME_1C', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Tab, tabpanel, and tablist must have accessible name", function() {
-        executeTest('ID_IFRAME_1D', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Link, log, marquee, and slider must have accessible name", function() {
-        executeTest('ID_IFRAME_1E', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Progressbar, scrollbar, and spinbutton must have accessible name", function() {
-        executeTest('ID_IFRAME_1F', 'WIDGET_1');
-      });
-
-      test( "WIDGET_2: onClick must have role", function() {
-        executeTest('ID_IFRAME_2A', 'WIDGET_2');
-      });
-
-      test( "WIDGET_3: Role must be valid", function() {
-        executeTest('ID_IFRAME_3A', 'WIDGET_3');
-      });
+      /*
 
       test( "WIDGET_4: ARIA values named token values must be valid", function() {
         executeTest('ID_IFRAME_4A', 'WIDGET_4');
@@ -131,6 +108,7 @@
         executeTest('ID_IFRAME_16', 'WIDGET_16');
       });
 
+    */
 
     </script>
 
@@ -143,7 +121,7 @@
     <iframe id="ID_IFRAME_1F"  src="widgets/widget_1_progressbar_scrollbar_spinbutton.html"></iframe> 
 
     <h2>Widget 2: onClick must have role</h2>
-    <iframe id="ID_IFRAME_2A"  src="widgets/widget_2_static_elements.html"></iframe>
+    <iframe id="ID_IFRAME_2A"  src="widgets/widget_2_onclick_elements.html"></iframe>
 
     <h2>Widget 3: Role must be valid</h2>
     <iframe id="ID_IFRAME_3A"  src="widgets/widget_3_valid_role.html"></iframe>

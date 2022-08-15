@@ -5,10 +5,6 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('structureInfo', false);
-const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-const headingRole = 'heading';
-const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
-const requireAccessibleNames = ['region', 'form'];
 
 /**
  * @class LandmarkElement
@@ -142,44 +138,6 @@ export default class StructureInfo {
   }
 
   /**
-   * @method isLandmark
-   *
-   * @desc Tests if a domElement is a landmark
-   *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-   */
-
-  isLandmark (domElement) {
-    let flag = false;
-    const role = domElement.role || domElement.defaultRole;
-    const name = domElement.accName.name;
-
-    if (landmarkRoles.includes(role)) {
-      if (requireAccessibleNames.includes(role)) {
-        flag = name && name.length;
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
-  }
-
-  /**
-   * @method isHeading
-   *
-   * @desc Tests if a domElement is a heading
-   *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-   */
-
-  isHeading (domElement) {
-    const tagName = domElement.tagName;
-    const role = domElement.role;
-    return (role === headingRole) || (headingTags.includes(tagName));
-  }
-
-  /**
    * @method update
    *
    * @desc Checks to see if the domElement is a heading or landmark and if so adds the
@@ -196,11 +154,11 @@ export default class StructureInfo {
 
   update (parentLandmarkElement, domElement, documentIndex) {
     let landmarkElement = parentLandmarkElement;
-    if (this.isHeading(domElement)) {
+    if (domElement.isHeading) {
       this.addChildHeading(domElement, parentLandmarkElement);
     }
 
-    if (this.isLandmark(domElement)) {
+    if (domElement.isLandmark) {
       landmarkElement = this.addChildLandmark(domElement, parentLandmarkElement, documentIndex);
     }
     return landmarkElement;

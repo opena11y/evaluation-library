@@ -57,7 +57,7 @@ export const landmarkRules = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach ( de => {
         const parentLandmark = de.parentInfo.landmarkElement;
-        const isLandmark = de.ariaInfo.isLandmark;
+        const isLandmark = de.isLandmark;
         if ((de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
             if ( isLandmark || parentLandmark ) {

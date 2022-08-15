@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
-    <title>WIDGET 2: onClick must have role</title>
+        <title>WIDGET 2: onClick must have role</title>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
-
-
-
   </head>
 
   <body>
       <header role="banner">
         <div>Widget 1 test case</div>
-
       </header>
       
       <main>
@@ -25,7 +20,6 @@
           alert(event.currentTarget.tagName + " " + event.currentTarget.className);
           
           }
-
 
         </script>
 
@@ -43,18 +37,15 @@
 
         <div><textarea onclick="handleOnClick(event)" class="WIDGET_2_PASS">onClick 7: textarea Pass</textarea></div>
 
-        <div><object onclick="handleOnClick(event)">onClick 8: object ignore</object></div>
+        <div><object onclick="handleOnClick(event)" class="WIDGET_2_FAIL">onClick 8: object ignore</object></div>
       
+        <div><a onclick="handleOnClick(event)" class="WIDGET_2_FAIL"> onClick 10: div a Pass</a></div>
 
-        <div><embed onclick="handleOnClick(event)"> onClick 9: embed ignore</embed></div>
+        <div onclick="handleOnClick(event)" class="WIDGET_2_FAIL"><a> onClick 11: div a manual check</a></div>
 
-        <div><a onclick="handleOnClick(event)" class="WIDGET_2_PASS"> onClick 10: div a Pass</a></div>
+        <div onclick="handleOnClick(event)" class="WIDGET_2_MC"><span role="link">onClick 12: span link manual check</span></div>
 
-        <div onclick="handleOnClick(event)" class="WIDGET_2_MC"><a> onClick 11: div a Pass</a></div>
-
-        <div onclick="handleOnClick(event)" class="WIDGET_2_MC"><span role="link">onClick 12: span link Pass</span></div>
-
-        <div onclick="handleOnClick(event)" class="WIDGET_2_FAIL">onClick 13: div Fail</div>
+        <div onclick="handleOnClick(event)" class="WIDGET_2_FAIL">onClick 15: div Fail</div>
 
       </main>
       

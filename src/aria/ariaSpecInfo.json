@@ -4655,7 +4655,7 @@
             "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
-            "isAbstract": true
+                
         },
         "window": {
             "inheritedProps": [

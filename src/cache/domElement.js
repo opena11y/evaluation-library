@@ -2,7 +2,7 @@
 
 /* Imports */
 import ColorContrast     from './colorContrast.js';
-import HasEvents         from './hasEvents.js';
+import EventInfo         from './eventInfo.js';
 import Visibility        from './visibility.js';
 import DebugLogging      from '../debug.js';
 import AriaInfo          from '../aria/ariaInfo.js';
@@ -10,7 +10,7 @@ import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import {
   hasInvalidState,
   hasCheckedState,
-  isLabelable,
+  isLabelable
 } from '../utils.js'
 import {
   getAccessibleName,
@@ -38,6 +38,8 @@ const elementsThatMayHaveContent = [
   'object'
 ];
 
+const landmarkRoles = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
+const requireAccessibleNames = ['region', 'form'];
 
 /**
  * @class DOMElement
@@ -68,13 +70,15 @@ export default class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
+
     // used for button and form control related rules
     this.typeAttr = elementNode.getAttribute('type');
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInfo = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.eventInfo = new EventInfo(elementNode);
 
     this.accName        = getAccessibleName(doc, elementNode);
     this.accDescription = getAccessibleDesc(doc, elementNode);
@@ -82,7 +86,6 @@ export default class DOMElement {
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
-    this.hasEvents     = new HasEvents(elementNode);
 
     this.id         = elementNode.id        ? elementNode.id : '';
     this.className  = elementNode.className ? elementNode.className : '';
@@ -95,6 +98,10 @@ export default class DOMElement {
     this.tabIndex             = checkTabIndex(elementNode);
     this.isTabStop            = checkIsTabStop(elementNode);
     this.isInteractiveElement = checkForInteractiveElement(elementNode);
+
+    this.isLink      = this.role === 'link';
+    this.isLandmark  = this.checkForLandamrk();
+    this.isHeading   = this.role === 'heading';
 
     this.children = [];
 
@@ -117,6 +124,43 @@ export default class DOMElement {
 
   get isDomText () {
     return false;
+  }
+
+
+  /**
+   * @method isDomElement
+   *
+   * @desc Returns true since this is a DOMElement object
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isDomElement () {
+    return true;
+  }
+
+  /**
+   * @method checkForLandamrk
+   *
+   * @desc Tests if a domElement is a landmark
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  checkForLandamrk () {
+    let flag = false;
+    const role = this.role || this.defaultRole;
+    const name = this.accName.name;
+
+    if (landmarkRoles.includes(role)) {
+      if (requireAccessibleNames.includes(role)) {
+        flag = name && name.length;
+      } else {
+        flag = true;
+      }
+    }
+
+    return flag;
   }
 
   /**

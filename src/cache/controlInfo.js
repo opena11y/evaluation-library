@@ -96,7 +96,6 @@ class ControlElement {
   getNameForComparison (domElement, parentControlElement) {
     let name = domElement.accName.name.trim().toLowerCase();
 
-    console.log(`[getNameForComparison][roles]: ${domElement.ariaInfo.requiredParents.length}`);
     // If it has a required parent, include required parent control name
     if (domElement.ariaInfo.requiredParents.length > 0) {
       name += this.getRequiredParentControlName(domElement.ariaInfo.requiredParents, parentControlElement);

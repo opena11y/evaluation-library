@@ -1,4 +1,4 @@
-/* formControlRules.js */
+/* controlRules.js */
 
 /* Imports */
 import {
@@ -25,7 +25,7 @@ export const controlRules = [
  *
  * @desc textarea, select and input elements of type text,
  *       password, checkbox, radio and file must have an
- *       accessible name
+ *       accessible name using label elements
  *
  */
 
@@ -41,9 +41,8 @@ export const controlRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
-      const ai = de.ariaInfo;
       if (!ce.isInputTypeImage) {
-        if (ai.isNameRequired || de.isLabelable) {
+        if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
