@@ -36,25 +36,6 @@ function debugAttrs (attrs) {
 }
 
 /**
- * @class TokenInfo
- *
- * @desc Information about an ARIA attribute that can include one or
- *       more tokens.  The invalidTokens array contains a list of
- *       invalid tokens.
- *
- * @param  {String}  name   - name of attribute
- * @param  {String}  value  - value of attribute
- */
-
-class TokenInfo {
-  constructor (name, value) {
-    this.name = name;
-    this.value = value;
-    this.invalidTokens = [];
-  }
-}
-
-/**
  * @class RefInfo
  *
  * @desc Information about an ARIA attributes the reference IDs.
@@ -88,7 +69,6 @@ export default class AriaInfo {
 
     let designPattern = designPatterns[role];
     this.isValidRole  = typeof designPattern === 'object';
-    debug.log(`[${tagName}][${role}][designPattern]: ${designPattern} (${typeof designPattern}) (${this.isValidRole})`)
 
     this.isAbstractRole = false;
 
@@ -125,7 +105,14 @@ export default class AriaInfo {
     attrs.forEach( attr =>  {
       if (attr.name.indexOf('aria') === 0) {
         if (typeof propertyDataTypes[attr.name] === 'object') {
-          this.validAttrs.push(attr);
+          const a = {
+            name: attr.name,
+            value: attr.value,
+            type: propertyDataTypes[attr.name].type,
+            values: propertyDataTypes[attr.name].values,
+            allowUndeterminedValue: propertyDataTypes[attr.name].allowUndeterminedValue
+          }
+          this.validAttrs.push(a);
         } else {
           this.invalidAttrs.push(attr);
         }
@@ -183,44 +170,49 @@ export default class AriaInfo {
   // check if the value of the aria attribute
   // is allowed
   checkForInvalidAttributeValue (attrs) {
-    const booleanValues = ['true', 'false'];
-    const tristateValues = ['true', 'false', 'mixed'];
     const attrsWithInvalidValues = [];
+    let count;
 
     attrs.forEach( attr => {
-      const attrInfo  = propertyDataTypes[attr.name];
-      const value     = attr.value.toLowerCase();
+      const value     = attr.value.trim().toLowerCase();
       const values    = value.split(' ');
-      const tokenInfo = new TokenInfo (attr.name, attr.value);
       const num       = Number(value);
 
-      switch (attrInfo.type) {
+      switch (attr.type) {
         case 'boolean':
-          if (!booleanValues.includes(value)) {
+          if (!attr.values.includes(value)) {
             attrsWithInvalidValues.push(attr);
           }
           break;
 
         case 'integer':
-          if (!Number.isInteger(num) || (num <= 0)) {
-            attrsWithInvalidValues.push(attr);
+          if (attr.allowUndeterminedValue) {
+            if (!Number.isInteger(num) || (num < -1) || (value === ''))  {
+              attrsWithInvalidValues.push(attr);
+            }            
+          }
+          else {
+            if (!Number.isInteger(num) || (num < 1) || (value === ''))  {
+              attrsWithInvalidValues.push(attr);
+            }            
           }
           break;
 
         case 'nmtoken':
-          if (!attrInfo.values.includes(value)) {
+          if (!attr.values.includes(value)) {
             attrsWithInvalidValues.push(attr);
           }
           break;
 
         case 'nmtokens':
+          count = 0;
           values.forEach( v => {
-            if (!attrInfo.values.includes(v.trim())) {
-              tokenInfo.invalidTokens.push(v);
+            if (!attr.values.includes(v.trim())) {
+              count += 1;
             }
           });
-          if (tokenInfo.invalidTokens.length) {
-            attrsWithInvalidValues.push(tokenInfo);
+          if (count) {
+            attrsWithInvalidValues.push(attr);
           }
           break;
 
@@ -231,7 +223,7 @@ export default class AriaInfo {
           break;
 
         case 'tristate':
-          if (!tristateValues.includes(value)) {
+          if (!attr.values.includes(value)) {
             attrsWithInvalidValues.push(attr);
           }
           break;

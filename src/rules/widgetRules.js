@@ -142,7 +142,6 @@ export const widgetRules = [
     dom_cache.allDomElements.forEach(de => {
       if (de.hasRole) {
         if (de.visibility.isVisibleToAT) {
-          debug.log(`[${de.tagName}][${de.role}][isValidRole]: ${de.ariaInfo.isValidRole} (${de.hasRole})`);
           if (!de.ariaInfo.isValidRole) {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
           }
@@ -227,13 +226,72 @@ export const widgetRules = [
                          '[aria-rowspan]',
                          '[aria-selected]',
                          '[aria-sort]'],
-  primary_property    : '',
-  resource_properties : [],
-  language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 4] ${dom_cache} ${rule_result}`);
-
+    dom_cache.allDomElements.forEach(de => {
+      de.ariaInfo.validAttrs.forEach( attr => {
+        if (de.visibility.isVisibleToAT) {
+          const allowedValues = attr.values ? attr.values.join(' | ') : '';
+          if (de.ariaInfo.invalidAttrValues.includes(attr)) {
+            if (attr.type === 'nmtoken' || attr.type === 'boolean' || attr.type === 'tristate') {
+              if (attr.value === '') {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, allowedValues]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, attr.value, allowedValues]);
+              }
+            }
+            else {
+              if (attr.type === 'nmtokens') {
+                if (attr.value === '') {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [attr.name, allowedValues]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [attr.name, attr.value, allowedValues]);
+                }
+              }
+              else {
+                if (attr.type === 'integer') {
+                  if (attr.value === '') {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [attr.name]);
+                  }
+                  else {
+                    if (attr.allowUndeterminedValue) {
+                      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [attr.name, attr.value]);
+                    }
+                    else {
+                      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [attr.name, attr.value]);
+                    }
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [attr.name, attr.value, attr.type]);
+                }  
+              }
+            }
+          }
+          else {
+            if (attr.type === 'boolean' || 
+                attr.type === 'nmtoken' || 
+                attr.type === 'nmtokens' || 
+                attr.type === 'tristate') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name, attr.value]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [attr.name, attr.value, attr.type]);
+            }
+          }
+        }
+        else {
+          if (attr.value === '') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [attr.name, attr.value]);
+          }
+        }
+      });
+    });
 
 /*
      function makeProp(label, value) {

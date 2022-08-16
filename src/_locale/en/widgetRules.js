@@ -212,8 +212,8 @@ export const widgetRules = {
     },
     WIDGET_4: {
         ID:                    'Widget 4',
-        DEFINITION:            'ARIA property and state values %s be valid types.',
-        SUMMARY:               'ARIA values %s be valid',
+        DEFINITION:            'ARIA property and state values must be valid types.',
+        SUMMARY:               'ARIA values must be valid',
         TARGET_RESOURCES_DESC: 'Elements with aria attributes',
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Change ARIA attribute to a valid type.',
@@ -223,19 +223,25 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No ARIA attributes on this page'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   'The @%1@ attribute with the value "@%2@" is a valid token.',
-          ELEMENT_PASS_2:   'The @%1@ attribute with the value "@%2@" is a valid "%3" type.',
-          ELEMENT_FAIL_1: 'The @%1@ attribute with the value "@%2@" must change to one of the following values: %3.',
-          ELEMENT_FAIL_2: 'The @%1@ attribute with the value "@%2@" must change to one or more of the following values: %3.',
-          ELEMENT_FAIL_3: 'The @%1@ attribute with the value "@%2@" must change to a value with type of \'%3\'.',
-          ELEMENT_HIDDEN_1: 'ARIA attribute value was not tested for validity because the @%1@ attribute with the value "@%2@" is hidden from assistive technologies and not visible on screen.'
+          ELEMENT_PASS_1: 'The @%1@ attribute with the value "@%2@" is a valid.',
+          ELEMENT_PASS_2: 'The @%1@ attribute with the value "@%2@" is a valid "%3" type.',
+          ELEMENT_FAIL_1: 'The @%1@ attribute must have one of the following values: %2.',
+          ELEMENT_FAIL_2: 'The @%1@ attribute with the value "@%2@" must change to one of the following values: %3.',
+          ELEMENT_FAIL_3: 'The @%1@ attribute must have one or more of the following values: %2.',
+          ELEMENT_FAIL_4: 'The @%1@ attribute with the value "@%2@" must change to one or more of the following values: %3.',
+          ELEMENT_FAIL_5: 'The @%1@ attribute is empty and must change to a valid integer value.',
+          ELEMENT_FAIL_6: 'The @%1@ attribute with the value "@%2@" must change to a integer greater than or equal to 0, if the value cannot be determined use "-1".',
+          ELEMENT_FAIL_7: 'The @%1@ attribute with the value "@%2@" must change to a integer greater than or equal to 1.',
+          ELEMENT_FAIL_8: 'The @%1@ attribute with the value "@%2@" must change to a value with type of \'%3\'.',
+          ELEMENT_HIDDEN_1: 'The @%1@ attribute with an empty value was not tested for validity because it is hidden from assistive technologies.',
+          ELEMENT_HIDDEN_2: 'The @%1@ attribute with the value "@%2@" was not tested for validity because it is hidden from assistive technologies.'
         },
         PURPOSES: [
           'ARIA attributes must be a valid type to accurately describe web content to users of assistive technologies, especially screen reader users.'
         ],
         TECHNIQUES: [
           'Use valid values for ARIA attributes.',
-          'Check W3C WAI Accessible Rich Internet Applications specifications for allowed values for ARIA attributes.'
+          'Check W3C WAI Accessible Rich Internet Applications specification for allowed values for ARIA attributes.'
         ],
         MANUAL_CHECKS: [
         ],

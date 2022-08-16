@@ -99,21 +99,21 @@
         <div role="button" class="WIDGET_4_FAIL" aria-haspopup="">aria-haspopup fail empty</div>
 
         <h2>aria-hidden</h2>
-        <div role="alert" class="WIDGET_4_PASS" aria-hidden="true">aria-hidden pass true</div>
+        <div role="alert" class="WIDGET_4_HIDDEN" aria-hidden="true">aria-hidden pass true</div>
         <div role="alert" class="WIDGET_4_PASS" aria-hidden="false">aria-hidden pass false</div>
         <div role="alert" class="WIDGET_4_HIDDEN" aria-hidden="true" hidden>aria-hidden hidden</div>
         <div role="alert" class="WIDGET_4_FAIL" aria-hidden="hidden">aria-hidden fail</div>
 
         <h2>aria-invalid</h2>
         <div style="color: red; font-size: 140%">aria-invalid is not being evaluated</div> 
-<!--
+
         <div role="textbox" class="WIDGET_4_PASS" aria-invalid="true">aria-invalid pass true</div>
         <div role="textbox" class="WIDGET_4_PASS" aria-invalid="false">aria-invalid pass false</div>
         <div role="textbox" class="WIDGET_4_PASS" aria-invalid="grammar">aria-invalid pass grammar</div>
         <div role="textbox" hidden class="WIDGET_4_HIDDEN" aria-invalid="true">aria-invalid hidden</div>
         <div role="textbox" class="WIDGET_4_PASS" aria-invalid="spelling">aria-invalid pass spelling</div>
         <div role="textbox" class="WIDGET_4_FAIL" aria-invalid="">aria-invalid fail</div>
--->
+
         <h2>aria-live</h2>
         <div role="alert" class="WIDGET_4_PASS" aria-live="off">aria-live pass off</div>
         <div role="alert" class="WIDGET_4_PASS" aria-live="polite">aria-live pass polite</div>
@@ -181,15 +181,24 @@
           <div role="textbox" class="WIDGET_4_FAIL" aria-readonly="read">aria-readonly fail</div>
           <div role="textbox" class="WIDGET_4_FAIL" aria-readonly="">aria-readonly fail blank</div>
 
+        <h2>aria-relevant</h2>
+       
+          <div class="WIDGET_4_PASS" aria-relevant="additions removals text">aria-relevant pass addtions removals text</div>
+          <div class="WIDGET_4_PASS" aria-relevant="all">aria-relevant pass all</div>
+          <div hidden class="WIDGET_4_HIDDEN" aria-relevant="">aria-relevant empty hidden</div>
+          <div class="WIDGET_4_FAIL" aria-relevant="addtion">aria-relevant fail mispelling</div>
+          <div class="WIDGET_4_FAIL" aria-relevant="addtion dletions">aria-relevant fail mispellings</div>
+          <div class="WIDGET_4_FAIL" aria-relevant="">aria-relevant fail blank</div>
+
         <h2>aria-required</h2>
         <div style="color: red; font-size: 140%">aria-required is not being evaluated</div> 
- <!-- 
+  
           <div role="textbox" class="WIDGET_4_PASS" aria-required="true">aria-required pass true</div>
           <div role="textbox" class="WIDGET_4_PASS" aria-required="false">aria-required pass false</div>
           <div hidden role="textbox" class="WIDGET_4_HIDDEN" aria-required="true">aria-required hidden</div>
           <div role="textbox" class="WIDGET_4_FAIL" aria-required="required">aria-required fail</div>
           <div role="textbox" class="WIDGET_4_FAIL" aria-required="">aria-required fail blank</div>
--->
+
         <h2>aria-selected</h2>
 
         <div role="row">
@@ -197,6 +206,7 @@
           <div role="tab" class="WIDGET_4_PASS" aria-selected="false">aria-selected pass false</div>
           <div role="tab" class="WIDGET_4_PASS" aria-selected="undefined">aria-selected pass undefined</div>
           <div hidden role="tab" class="WIDGET_4_HIDDEN" aria-selected="true">aria-selected hidden</div>
+          <div hidden role="tab" class="WIDGET_4_HIDDEN" aria-selected="">aria-selected hidden</div>
           <div role="tab" class="WIDGET_4_FAIL" aria-selected="required">aria-selected fail</div>
           <div role="tab" class="WIDGET_4_FAIL" aria-selected="">aria-selected fail blank</div>
         </div>

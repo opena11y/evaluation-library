@@ -2212,12 +2212,11 @@ const propertyDataTypes = {
     type: 'nmtokens',
     values: [
       'additions',
-      'additions',
       'all',
       'removals',
       'text'
     ],
-    defaultValue: 'additions',
+    defaultValue: 'additions text',
     deprecated: false,
     idlAttribute: ''
   },
@@ -6610,25 +6609,6 @@ function debugAttrs (attrs) {
 }
 
 /**
- * @class TokenInfo
- *
- * @desc Information about an ARIA attribute that can include one or
- *       more tokens.  The invalidTokens array contains a list of
- *       invalid tokens.
- *
- * @param  {String}  name   - name of attribute
- * @param  {String}  value  - value of attribute
- */
-
-class TokenInfo {
-  constructor (name, value) {
-    this.name = name;
-    this.value = value;
-    this.invalidTokens = [];
-  }
-}
-
-/**
  * @class RefInfo
  *
  * @desc Information about an ARIA attributes the reference IDs.
@@ -6662,7 +6642,6 @@ class AriaInfo {
 
     let designPattern = designPatterns[role];
     this.isValidRole  = typeof designPattern === 'object';
-    debug$p.log(`[${tagName}][${role}][designPattern]: ${designPattern} (${typeof designPattern}) (${this.isValidRole})`);
 
     this.isAbstractRole = false;
 
@@ -6699,7 +6678,14 @@ class AriaInfo {
     attrs.forEach( attr =>  {
       if (attr.name.indexOf('aria') === 0) {
         if (typeof propertyDataTypes[attr.name] === 'object') {
-          this.validAttrs.push(attr);
+          const a = {
+            name: attr.name,
+            value: attr.value,
+            type: propertyDataTypes[attr.name].type,
+            values: propertyDataTypes[attr.name].values,
+            allowUndeterminedValue: propertyDataTypes[attr.name].allowUndeterminedValue
+          };
+          this.validAttrs.push(a);
         } else {
           this.invalidAttrs.push(attr);
         }
@@ -6757,44 +6743,49 @@ class AriaInfo {
   // check if the value of the aria attribute
   // is allowed
   checkForInvalidAttributeValue (attrs) {
-    const booleanValues = ['true', 'false'];
-    const tristateValues = ['true', 'false', 'mixed'];
     const attrsWithInvalidValues = [];
+    let count;
 
     attrs.forEach( attr => {
-      const attrInfo  = propertyDataTypes[attr.name];
-      const value     = attr.value.toLowerCase();
+      const value     = attr.value.trim().toLowerCase();
       const values    = value.split(' ');
-      const tokenInfo = new TokenInfo (attr.name, attr.value);
       const num       = Number(value);
 
-      switch (attrInfo.type) {
+      switch (attr.type) {
         case 'boolean':
-          if (!booleanValues.includes(value)) {
+          if (!attr.values.includes(value)) {
             attrsWithInvalidValues.push(attr);
           }
           break;
 
         case 'integer':
-          if (!Number.isInteger(num) || (num <= 0)) {
-            attrsWithInvalidValues.push(attr);
+          if (attr.allowUndeterminedValue) {
+            if (!Number.isInteger(num) || (num < -1) || (value === ''))  {
+              attrsWithInvalidValues.push(attr);
+            }            
+          }
+          else {
+            if (!Number.isInteger(num) || (num < 1) || (value === ''))  {
+              attrsWithInvalidValues.push(attr);
+            }            
           }
           break;
 
         case 'nmtoken':
-          if (!attrInfo.values.includes(value)) {
+          if (!attr.values.includes(value)) {
             attrsWithInvalidValues.push(attr);
           }
           break;
 
         case 'nmtokens':
+          count = 0;
           values.forEach( v => {
-            if (!attrInfo.values.includes(v.trim())) {
-              tokenInfo.invalidTokens.push(v);
+            if (!attr.values.includes(v.trim())) {
+              count += 1;
             }
           });
-          if (tokenInfo.invalidTokens.length) {
-            attrsWithInvalidValues.push(tokenInfo);
+          if (count) {
+            attrsWithInvalidValues.push(attr);
           }
           break;
 
@@ -6805,7 +6796,7 @@ class AriaInfo {
           break;
 
         case 'tristate':
-          if (!tristateValues.includes(value)) {
+          if (!attr.values.includes(value)) {
             attrsWithInvalidValues.push(attr);
           }
           break;
@@ -14101,7 +14092,6 @@ const widgetRules$1 = [
     dom_cache.allDomElements.forEach(de => {
       if (de.hasRole) {
         if (de.visibility.isVisibleToAT) {
-          debug$d.log(`[${de.tagName}][${de.role}][isValidRole]: ${de.ariaInfo.isValidRole} (${de.hasRole})`);
           if (!de.ariaInfo.isValidRole) {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
           }
@@ -14186,13 +14176,72 @@ const widgetRules$1 = [
                          '[aria-rowspan]',
                          '[aria-selected]',
                          '[aria-sort]'],
-  primary_property    : '',
-  resource_properties : [],
-  language_dependency : "",
   validate            : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`[WIDGET 4] ${dom_cache} ${rule_result}`);
-
+    dom_cache.allDomElements.forEach(de => {
+      de.ariaInfo.validAttrs.forEach( attr => {
+        if (de.visibility.isVisibleToAT) {
+          const allowedValues = attr.values ? attr.values.join(' | ') : '';
+          if (de.ariaInfo.invalidAttrValues.includes(attr)) {
+            if (attr.type === 'nmtoken' || attr.type === 'boolean' || attr.type === 'tristate') {
+              if (attr.value === '') {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, allowedValues]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, attr.value, allowedValues]);
+              }
+            }
+            else {
+              if (attr.type === 'nmtokens') {
+                if (attr.value === '') {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [attr.name, allowedValues]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [attr.name, attr.value, allowedValues]);
+                }
+              }
+              else {
+                if (attr.type === 'integer') {
+                  if (attr.value === '') {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [attr.name]);
+                  }
+                  else {
+                    if (attr.allowUndeterminedValue) {
+                      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_6', [attr.name, attr.value]);
+                    }
+                    else {
+                      rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_7', [attr.name, attr.value]);
+                    }
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_8', [attr.name, attr.value, attr.type]);
+                }  
+              }
+            }
+          }
+          else {
+            if (attr.type === 'boolean' || 
+                attr.type === 'nmtoken' || 
+                attr.type === 'nmtokens' || 
+                attr.type === 'tristate') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name, attr.value]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [attr.name, attr.value, attr.type]);
+            }
+          }
+        }
+        else {
+          if (attr.value === '') {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [attr.name, attr.value]);
+          }
+        }
+      });
+    });
 
 /*
      function makeProp(label, value) {
@@ -19991,8 +20040,8 @@ const widgetRules = {
     },
     WIDGET_4: {
         ID:                    'Widget 4',
-        DEFINITION:            'ARIA property and state values %s be valid types.',
-        SUMMARY:               'ARIA values %s be valid',
+        DEFINITION:            'ARIA property and state values must be valid types.',
+        SUMMARY:               'ARIA values must be valid',
         TARGET_RESOURCES_DESC: 'Elements with aria attributes',
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Change ARIA attribute to a valid type.',
@@ -20002,19 +20051,25 @@ const widgetRules = {
           NOT_APPLICABLE:  'No ARIA attributes on this page'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   'The @%1@ attribute with the value "@%2@" is a valid token.',
-          ELEMENT_PASS_2:   'The @%1@ attribute with the value "@%2@" is a valid "%3" type.',
-          ELEMENT_FAIL_1: 'The @%1@ attribute with the value "@%2@" must change to one of the following values: %3.',
-          ELEMENT_FAIL_2: 'The @%1@ attribute with the value "@%2@" must change to one or more of the following values: %3.',
-          ELEMENT_FAIL_3: 'The @%1@ attribute with the value "@%2@" must change to a value with type of \'%3\'.',
-          ELEMENT_HIDDEN_1: 'ARIA attribute value was not tested for validity because the @%1@ attribute with the value "@%2@" is hidden from assistive technologies and not visible on screen.'
+          ELEMENT_PASS_1: 'The @%1@ attribute with the value "@%2@" is a valid.',
+          ELEMENT_PASS_2: 'The @%1@ attribute with the value "@%2@" is a valid "%3" type.',
+          ELEMENT_FAIL_1: 'The @%1@ attribute must have one of the following values: %2.',
+          ELEMENT_FAIL_2: 'The @%1@ attribute with the value "@%2@" must change to one of the following values: %3.',
+          ELEMENT_FAIL_3: 'The @%1@ attribute must have one or more of the following values: %2.',
+          ELEMENT_FAIL_4: 'The @%1@ attribute with the value "@%2@" must change to one or more of the following values: %3.',
+          ELEMENT_FAIL_5: 'The @%1@ attribute is empty and must change to a valid integer value.',
+          ELEMENT_FAIL_6: 'The @%1@ attribute with the value "@%2@" must change to a integer greater than or equal to 0, if the value cannot be determined use "-1".',
+          ELEMENT_FAIL_7: 'The @%1@ attribute with the value "@%2@" must change to a integer greater than or equal to 1.',
+          ELEMENT_FAIL_8: 'The @%1@ attribute with the value "@%2@" must change to a value with type of \'%3\'.',
+          ELEMENT_HIDDEN_1: 'The @%1@ attribute with an empty value was not tested for validity because it is hidden from assistive technologies.',
+          ELEMENT_HIDDEN_2: 'The @%1@ attribute with the value "@%2@" was not tested for validity because it is hidden from assistive technologies.'
         },
         PURPOSES: [
           'ARIA attributes must be a valid type to accurately describe web content to users of assistive technologies, especially screen reader users.'
         ],
         TECHNIQUES: [
           'Use valid values for ARIA attributes.',
-          'Check W3C WAI Accessible Rich Internet Applications specifications for allowed values for ARIA attributes.'
+          'Check W3C WAI Accessible Rich Internet Applications specification for allowed values for ARIA attributes.'
         ],
         MANUAL_CHECKS: [
         ],
