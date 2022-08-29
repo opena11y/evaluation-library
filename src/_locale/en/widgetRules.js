@@ -260,7 +260,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -274,8 +274,8 @@ export const widgetRules = {
   },
   WIDGET_5: {
         ID:                    'Widget 5',
-        DEFINITION:            'Elements with the attributes that start with @aria-@ %s be a valid ARIA property or state.',
-        SUMMARY:               'Attributes that start with @aria-@ %s be defined.',
+        DEFINITION:            'Elements with the attributes that start with @aria-@must be a valid ARIA property or state.',
+        SUMMARY:               'Attributes that start with @aria-@ must be defined.',
         TARGET_RESOURCES_DESC: 'Elements with aria attributes',
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Change ARIA attribute to a defined property or state.',
@@ -286,8 +286,8 @@ export const widgetRules = {
         },
         BASE_RESULT_MESSAGES: {
           ELEMENT_PASS_1:    'The @%1@ attribute is a defined ARIA property or state.',
-          ELEMENT_FAIL_1:  'The @%1@ attribute must be changed to a defined ARIA property or state.',
-          ELEMENT_HIDDEN_1:  'Valid ARIA attribute was not tested becasue the @%1@ attribute with the value "@%2@" is hidden from assistive technologies and/or not visible on screen.'
+          ELEMENT_FAIL_1:  'The @%1@ attribute must be changed to a defined ARIA property or state, otherwise remove.',
+          ELEMENT_HIDDEN_1:  'Valid ARIA attribute was not tested becasue the @%1@ attribute with the value "@%2@" is hidden from assistive technologies.'
         },
         PURPOSES: [
           'ARIA attributes must be defined properties or states to accurately describe web content to users of assistive technologies, especially screen reader users'
@@ -327,8 +327,8 @@ export const widgetRules = {
   },
   WIDGET_6: {
         ID:                    'Widget 6',
-        DEFINITION:            'Widgets %s define required properties and states.',
-        SUMMARY:               'Widgets %s have properties',
+        DEFINITION:            'Widgets must set required properties and states.',
+        SUMMARY:               'Widgets must set properties',
         TARGET_RESOURCES_DESC: 'Widgets with required properties and states',
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add required properties and states to widget.',
@@ -338,17 +338,18 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No widgets with required properties and states on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   '@%1@ widget has the following required ARIA properties and states: %2.',
-          ELEMENT_FAIL_1: 'Add one or more of the required ARIA properties and states (i.e. "%2") to the @%1@ widget.',
+          ELEMENT_PASS_1: '@%1@ widget has the required @%2@ attribute with the value @%3@.',
+          ELEMENT_FAIL_1: 'Add the required @%2@ attribute to the @%1@ widget.',
           ELEMENT_HIDDEN_1: 'Required ARA properties and states was not tested because the %1 widget is hidden from assistive technologies and/or not visible on screen.'
         },
         PURPOSES: [
-          'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.'
+          'ARIA roles, properties and states describe the features and options of widgets to users of assistive technologies, especially screen reader users.'
         ],
         TECHNIQUES: [
-          'Use required ARIA properties to describe the features and options of a widget.'
+          'Required ARIA properties and states are needed accurately describe the features and options of a widget.'
         ],
         MANUAL_CHECKS: [
+          'Verify that the values of properties and states accurately describe a widget'
         ],
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
@@ -379,8 +380,8 @@ export const widgetRules = {
     },
   WIDGET_7: {
         ID:                    'Widget 7',
-        DEFINITION:            'Container widgets %s have required owned elements.',
-        SUMMARY:               'Widgets %s have owned elements',
+        DEFINITION:            'Container widgets must have required owned elements.',
+        SUMMARY:               'Widgets must have owned elements',
         TARGET_RESOURCES_DESC: 'Widgets with required owned elements',
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add required child element to the widget.',
@@ -435,8 +436,8 @@ export const widgetRules = {
     },
  WIDGET_8: {
         ID:                    'Widget 8',
-        DEFINITION:            'Role %s have a required parent role using the HTML DOM structure or the @aria-owns@ attribute.',
-        SUMMARY:               'Role %s have parent',
+        DEFINITION:            'Role must have a required parent role using the HTML DOM structure or the @aria-owns@ attribute.',
+        SUMMARY:               'Role must have parent',
         TARGET_RESOURCES_DESC: 'Role with required parent role',
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add required parent role to the widget.',
@@ -489,7 +490,7 @@ export const widgetRules = {
     },
  WIDGET_9: {
         ID:                    'Widget 9',
-        DEFINITION:            'Elements %s be owned by only one widget.',
+        DEFINITION:            'Elements must be owned by only one widget.',
         SUMMARY:               'Only one owner',
         TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
         RULE_RESULT_MESSAGES: {

@@ -76,7 +76,7 @@ function getRuleResultInfo(ruleResult) {
 
 function getElementResultInfo(ruleResult) {
 
-  function addElementResult(elementResult) {
+  function addElementResult(index, elementResult) {
 
     let accNameInfo    = JSON.stringify(elementResult.getAccessibleNameInfo());
     let ccrInfo        = JSON.stringify(elementResult.getColorContrastInfo());
@@ -85,7 +85,10 @@ function getElementResultInfo(ruleResult) {
     let ariaAttrInfo   = JSON.stringify(elementResult.getAriaAttributes());
 
     const item = {
+      'index'            : (index + 1).toString(),
       'tagName'          : elementResult.getTagName(),
+      'id'               : elementResult.getId(),
+      'className'        : elementResult.getClassName(),
       'hasRole'          : elementResult.getHasRole(),
       'role'             : elementResult.getRole(),
       'position'         : elementResult.getOrdinalPosition(),
@@ -124,7 +127,7 @@ function getElementResultInfo(ruleResult) {
   for(let i = 0; i < allResults.length; i++) {
     const result = allResults[i];
     if (result.isElementResult) {
-      addElementResult(result);
+      addElementResult(i, result);
     }
   }
   return elementResults;

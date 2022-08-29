@@ -125,7 +125,9 @@ export default class DOMCache {
 
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
-    const elemSelector = (typeof type !== 'string') ? tagName : `${tagName}[type=${type}]`;
+    const elemSelector = (tagName === 'input') && (typeof type === 'string') ? 
+                         `${tagName}[type=${type}]` :
+                         tagName;
     return skipableElements.includes(elemSelector);
   }
 
@@ -187,7 +189,6 @@ export default class DOMCache {
         case Node.ELEMENT_NODE:
           tagName = node.tagName.toLowerCase();
 
-
           if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content
             if (this.isSlotElement(node)) {
@@ -227,7 +228,6 @@ export default class DOMCache {
                     newParentInfo.documentIndex = this.documentIndex;
                     this.transverseDOM(newParentInfo, doc);
                   } catch (error) {
-                    debug.flag && debug.log('[transverseDOM][catch]' + error);
                     isCrossDomain = true;
                   }                    
                   this.iframeInfo.update(domItem, isCrossDomain);

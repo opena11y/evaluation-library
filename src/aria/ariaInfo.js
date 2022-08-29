@@ -72,6 +72,7 @@ export default class AriaInfo {
 
     this.isAbstractRole = false;
 
+
     // if role is not valid use default role for element for validation
     if (!this.isValidRole) {
       designPattern = designPatterns[defaultRole];
@@ -123,7 +124,7 @@ export default class AriaInfo {
     this.invalidRefs        = this.checkForInvalidReferences(doc, this.validAttrs);
     this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
-    this.missingReqAttrs    = this.checkForMissingRequiredAttributes(this.validAttrs, designPattern, node);
+    this.requiredAttrs      = this.checkForRequiredAttributes(this.validAttrs, designPattern, node);
 
     switch (tagName) {
       case 'h1':
@@ -155,6 +156,7 @@ export default class AriaInfo {
         break;
     }
 
+
     if (debug.flag) {
       node.attributes.length && debug.log(`${node.outerHTML}`, 1);
       debug.log(`[         isWidget]: ${this.isWidget}`);
@@ -162,7 +164,7 @@ export default class AriaInfo {
       debug.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
       debug.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
       debug.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug.log(`[  missingReqAttrs]: ${debugAttrs(this.missingReqAttrs)}`);
+      debug.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
       debug.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
@@ -254,8 +256,12 @@ export default class AriaInfo {
         const refInfo = new RefInfo (attr.name, attr.value);
 
         idRefs.forEach( id => {
-          if (doc && !doc.querySelector(`#${id}`)) {
-            refInfo.invalidIds.push(id);
+          try {
+            if (doc && !doc.querySelector(`#${id}`)) {
+              refInfo.invalidIds.push(id);
+            }
+          } catch (error) {
+            debug.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {
@@ -305,21 +311,28 @@ export default class AriaInfo {
   // checks for required aria attributes for a specific role
   // In some cased native HTML semanitics like "checked' property of
   // an input element can be used to satisfy the requirement
-  checkForMissingRequiredAttributes(attrs, designPattern, node) {
-    const missingReqAttrNames = [];
+  checkForRequiredAttributes(attrs, designPattern, node) {
+    let requiredAttrs = [];
     designPattern.requiredProps.forEach (reqAttr => {
+
       const defaultValue = propertyDataTypes[reqAttr].defaultValue;
-      let flag = (defaultValue !== '') && (defaultValue !== 'undefined');
+      const attrInfo = {
+        name: reqAttr,
+        hasDefaultValue: (defaultValue !== '') && (defaultValue !== 'undefined'),
+        defaultValue: defaultValue,
+        isDefined: (reqAttr === 'aria-checked') && hasCheckedState(node),
+        value: ''
+      };
+
       attrs.forEach( attr => {
-        const name  = attr.name.toLowerCase();
-        flag = flag || (name === reqAttr);
-        flag = flag || ((reqAttr === 'aria-checked') && hasCheckedState(node));
+        if (attr.name === reqAttr) {
+          attrInfo.isDefined = true;
+          attrInfo.value = attr.value;
+        }
       });
-      if (!flag) {
-        missingReqAttrNames.push(reqAttr);
-      }
+      requiredAttrs.push(attrInfo);
     });
-    return missingReqAttrNames;
+    return requiredAttrs;
   }
 
   getHeadingLevel (role, node) {

@@ -26,6 +26,9 @@ export {
   nameFromDetailsOrSummary
 };
 
+import DebugLogging        from '../debug.js';
+const debug = new DebugLogging('nameFrom', false);
+
 /*
 *   isLabelableElement: Based on HTML5 specification, determine whether
 *   element can be associated with a label.
@@ -146,10 +149,14 @@ function nameFromLabelElement (doc, element) {
 
   // label [for=id]
   if (element.id) {
-    label = doc.querySelector('[for="' + element.id + '"]');
-    if (label) {
-      name = getElementContents(label, element);
-      if (name.length) return { name: name, source: 'label reference' };
+    try {
+      label = doc.querySelector('[for="' + element.id + '"]');
+      if (label) {
+        name = getElementContents(label, element);
+        if (name.length) return { name: name, source: 'label reference' };
+      }
+    } catch (error) {
+      debug.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 

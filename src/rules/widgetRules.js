@@ -292,58 +292,6 @@ export const widgetRules = [
         }
       });
     });
-
-/*
-     function makeProp(label, value) {
-
-       var p = {};
-
-       p.label = label;
-       p.value = value;
-       p.description = "";
-
-       return p;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var elements_with_aria_attributes     = dom_cache.controls_cache.elements_with_aria_attributes;
-     var elements_with_aria_attributes_len = elements_with_aria_attributes.length;
-
-     if (elements_with_aria_attributes && elements_with_aria_attributes_len) {
-
-       for (var i = 0; i < elements_with_aria_attributes_len; i++) {
-         var de = elements_with_aria_attributes[i];
-         var style = de.computed_style;
-         var aria_attrs = de.aria_attributes;
-         var aria_attrs_len = aria_attrs.length;
-
-         for (var j = 0; j < aria_attrs_len; j++) {
-
-           var attr = aria_attrs[j];
-
-           var prop = makeProp(attr.name, attr.value);
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             if (attr.is_value_valid && attr.tokens) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name, attr.value], [prop]);
-             else if (attr.is_value_valid) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [attr.name, attr.value, attr.type], [prop]);
-             else if (attr.type === 'nmtoken' || attr.type === 'boolean') rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, attr.value, attr.tokens], [prop]);
-             else if (attr.type === 'nmtokens') rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, attr.value, attr.tokens], [prop]);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [attr.name, attr.value, attr.type], [prop]);
-
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, attr.value], [prop]);
-           }
-
-         } // end loop
-       } // end loop
-     }
-     */
-
    } // end validation function
 },
 
@@ -354,7 +302,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_5',
-  last_updated        : '2021-07-07',
+  last_updated        : '2022-08-15',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -395,54 +343,25 @@ export const widgetRules = [
                          '[aria-valuetext]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 5] ${dom_cache} ${rule_result}`);
-
-/*
-     function makeProp(label, value) {
-
-       var p = {};
-
-       p.label = label;
-       p.value = value;
-       p.description = "";
-
-       return p;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var elements_with_aria_attributes     = dom_cache.controls_cache.elements_with_aria_attributes;
-     var elements_with_aria_attributes_len = elements_with_aria_attributes.length;
-
-     if (elements_with_aria_attributes && elements_with_aria_attributes_len) {
-
-       for (var i = 0; i < elements_with_aria_attributes_len; i++) {
-         var de = elements_with_aria_attributes[i];
-
-         var style = de.computed_style;
-         var aria_attrs = de.aria_attributes;
-         var aria_attrs_len = aria_attrs.length;
-
-         for (var j = 0; j < aria_attrs_len; j++) {
-
-           var attr = aria_attrs[j];
-           var prop = makeProp(attr.name, attr.value);
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-             if (attr.is_valid_attribute) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name], [prop]);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name], [prop]);
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, attr.value], [prop]);
-           }
-
-         } // end loop
-       } // end loop
-     }
-     */
-   } // end validation function
+    dom_cache.allDomElements.forEach(de => {
+      de.ariaInfo.invalidAttrs.forEach( attr => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name]);
+        }
+      });
+      de.ariaInfo.validAttrs.forEach( attr => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [attr.name]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name]);
+        }
+      });
+    });
+  } // end validation function
 },
 
 /**
@@ -462,106 +381,31 @@ export const widgetRules = [
   target_resources    : ['[checkbox]',
                          '[combobox]',
                          '[menuitemcheckbox]',
+                         '[menuitemradio]',
+                         '[meter]',
                          '[option]',
+                         '[separator]',
                          '[scrollbar]',
                          '[slider]',
                          '[switch]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 6] ${dom_cache} ${rule_result}`);
-
-/*
-     function getRequiredPropertiesAndValues(dom_element, required_props) {
-
-       var rps = [];
-
-       var attrs     = dom_element.aria_attributes;
-       var attrs_len = attrs.length;
-
-       for (var i = 0; i < required_props.length; i++) {
-
-         var prop = required_props[i];
-
-         var flag = false;
-
-         for (var j = 0; j <attrs_len; j++) {
-           if (prop === attrs[j].name) {
-             flag = true;
-             break;
-           }
-         }
-
-         var rp = {};
-         rp.label = prop;
-         rp.description = "";
-         rp.defined = flag;
-
-         if (flag) {
-           rp.value  = attrs[j].value;
-         }
-         else {
-           rp.value  = "undefined";
-         }
-
-         rps.push(rp);
-
-       }
-
-       return rps;
-
-     }
-
-     function getPropsString(props) {
-
-       var str = "";
-       var prop_max = props.length - 1;
-
-       for (var i = 0; i < props.length; i++ ) {
-         str += props[i];
-         if (i !== prop_max) str += ", ";
-       }
-
-       return str;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
-
-     if (widget_elements && widget_elements) {
-
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
-
-         var required_properties = de.role_info.requiredProps;
-
-         if (required_properties && required_properties.length) {
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             var props_string   = getPropsString(required_properties);
-             var required_props = getRequiredPropertiesAndValues(de, required_properties);
-
-             var flag = true;
-
-             for (var j = 0; (j < required_props.length) && flag; j++) flag = flag && required_props[j].defined;
-
-             if (flag) rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, props_string], required_props);
-             else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, props_string], required_props);
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      de.ariaInfo.requiredAttrs.forEach( reqAttrInfo => {
+        if (de.visibility.isVisibleToAT) {
+          if (reqAttrInfo.isDefined) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, reqAttrInfo.name, reqAttrInfo.value]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, reqAttrInfo.name]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role, reqAttrInfo.name]);
+        }
+      });
+    });
    } // end validation function
 },
 

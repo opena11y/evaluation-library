@@ -111,6 +111,7 @@ export default class DOMElement {
     this.resultsViolations   = [];
     this.resultsWarnings     = [];
     this.resultsManualChecks = [];
+
   }
 
 

@@ -17,22 +17,22 @@
         <h1>WIDGET 6: Widgets must have properties</h1>
 
         <h2>combobox</h2>
-        <div role="combobox" class="WIDGET_6_PASS" aria-expanded="true" aria-controls="ID_LISTBOX">combobox pass</div>
+        <div role="combobox" class="WIDGET_6_PASS" aria-expanded="true" aria-controls="ID_LISTBOX"><span class="WIDGET_6_PASS">combobox pass</span></div>
 
-        <div role="combobox" hidden class="WIDGET_6_HIDDEN" aria-expanded="true">combobox hidden</div>
+        <div role="combobox" hidden class="WIDGET_6_HIDDEN" aria-expanded="true"><span class="WIDGET_6_HIDDEN">combobox hidden</span></div>
 
-        <div role="combobox" class="WIDGET_6_FAIL" aria-expanded="true">combobox fail</div>
+        <div role="combobox" class="WIDGET_6_PASS" aria-expanded="true"><span class="WIDGET_6_FAIL">combobox fail for aria-controls</span></div>
 
-        <div role="combobox" class="WIDGET_6_FAIL" aria-controls="ID_LISTBOX">combobox fail</div>
+        <div role="combobox" class="WIDGET_6_PASS" aria-controls="ID_LISTBOX"><span class="WIDGET_6_FAIL">combobox fail for aria-expanded</span></div>
 
-        <div role="combobox" class="WIDGET_6_FAIL">combobox fail</div>
+        <div role="combobox" class="WIDGET_6_FAIL"><span class="WIDGET_6_FAIL">combobox fail</span></div>
 
         <h2>scrollbar</h2>
-        <div role="scrollbar" class="WIDGET_6_PASS" aria-controls="ID_SBAR_CONTROLS" aria-orientation="vertical" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50">scrollbar pass</div>
+        <div role="scrollbar" class="WIDGET_6_PASS" aria-controls="ID_SBAR_CONTROLS" aria-orientation="vertical" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"><span class="WIDGET_6_PASS">scrollbar pass</span></div>
 
-        <div role="scrollbar" hidden class="WIDGET_6_HIDDEN">scrollbar hidden</div>
+        <div role="scrollbar" hidden class="WIDGET_6_HIDDEN"><span class="WIDGET_6_HIDDEN">scrollbar hidden</span></div>
 
-        <div role="scrollbar" class="WIDGET_6_FAIL">scrollbar fail</div>
+        <div role="scrollbar" class="WIDGET_6_FAIL"><span class="WIDGET_6_FAIL">scrollbar fail for aria-controls and aria-valuenow</span></div>
 
         <h2>checkbox</h2>
         <div role="checkbox" class="WIDGET_6_PASS" aria-checked="true">checkbox pass</div>
@@ -58,7 +58,7 @@
         <h2>slider</h2>
         <div role="slider" class="WIDGET_6_PASS" aria-valuenow="10">slider pass</div>
 
-        <div role="slider" hidden class="WIDGET_6_HIDDEN" aria-valuenow="10">slider hidden</div>
+        <div role="slider" hidden class="WIDGET_6_HIDDEN">slider hidden</div>
 
         <div role="slider" class="WIDGET_6_FAIL">slider fail</div>
 

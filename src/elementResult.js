@@ -81,6 +81,36 @@ export default class ElementResult extends BaseResult {
   }
 
   /**
+   * @method getId
+   *
+   * @desc Gets a string identifying the elements id 
+   *
+   * @return {String} see description
+   */
+
+  getId () {
+    let id = this.domElement.node.id;
+    id = id ? '#' + id : '';
+    return id;
+  }
+
+  /**
+   * @method getClassName
+   *
+   * @desc Gets a string identifying the elements class names
+   *
+   * @return {String} see description
+   */
+
+  getClassName () {
+    let names = this.domElement.node.classList.value;
+    if (names) {
+      names = '.' + names.replaceAll(' ', '.');
+    }
+    return names;
+  }
+
+  /**
    * @method getHasRole
    *
    * @desc True if the element has a role attribute, otherwise false
