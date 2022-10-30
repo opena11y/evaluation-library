@@ -196,9 +196,42 @@ export default class DOMCache {
               const assignedNodes = node.assignedNodes().length ?
                                     node.assignedNodes() :
                                     node.assignedNodes({ flatten: true });
-              assignedNodes.forEach( assignedNode => {
-                this.transverseDOM(parentInfo, assignedNode);
-              });
+              // 2022-08-30 review this code for improvements and qaulity                      
+              for (let i = 0; i < assignedNodes.length; i += 1) {
+                const assignedNode = assignedNodes[i];
+                switch (assignedNode.nodeType) {
+
+                  case Node.TEXT_NODE:
+                    domItem = new DOMText(parentDomElement, assignedNode);
+                    // Check to see if text node has any renderable content
+                    if (domItem.hasContent) {
+                      // Merge text nodes in to a single DomText node if sibling text nodes
+                      if (parentDomElement) {
+                        parentDomElement.hasContent = true;
+                        // if last child node of parent is a DomText node merge text content
+                        if (parentDomElement.isLastChildDomText) {
+                          parentDomElement.addTextToLastChild(domItem.text);
+                        } else {
+                          parentDomElement.addChild(domItem);
+                          this.allDomTexts.push(domItem);
+                        }
+                      }
+                    }
+                    break;
+
+                  case Node.ELEMENT_NODE:
+                    domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
+                    this.ordinalPosition += 1;
+                    this.allDomElements.push(domItem);
+                    if (parentDomElement) {
+                      parentDomElement.addChild(domItem);
+                    }
+                    break;
+
+                  default:
+                    break;
+                }
+              }
             } else {
               domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
               this.ordinalPosition += 1;

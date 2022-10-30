@@ -11,7 +11,6 @@ import {
 } from '../utils';
 
 import {
-  getElementContents,
   isLabelableElement,
   nameFromAttribute,
   nameFromAltAttribute,

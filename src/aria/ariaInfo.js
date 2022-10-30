@@ -261,6 +261,7 @@ export default class AriaInfo {
               refInfo.invalidIds.push(id);
             }
           } catch (error) {
+            refInfo.invalidIds.push(id);
             debug.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
