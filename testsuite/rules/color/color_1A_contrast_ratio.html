@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="HEADING_1_FAIL">
   <head>
-    <title>Color 1:</title>
+    <title>Color 1A: Color Contrast Ratios</title>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -60,9 +60,40 @@
         <h5 class="COLOR_1_HIDDEN" style="font-size: 1px">Heading   72</h5>
         <p  class="COLOR_1_HIDDEN" style="font-size: 1px">Paragraph 71</p>
       </div>
-    
-    
-    
+
+      <h2 class="COLOR_1_PASS">Group 8: RGBA values for color</h2>
+      <div style="background-color: #224466; padding: 0.5em">
+        <p style="color: rgba(255, 255, 255, 1.0)"  class="COLOR_1_PASS">rgba(255, 255, 255, 1.0)</p>
+        <p style="color: rgba(255, 255, 255, 0.5)"  class="COLOR_1_PASS">rgba(255, 255, 255, 0.5)</p>
+        <p style="color: rgba(255, 255, 255, 0.25)" class="COLOR_1_FAIL">rgba(255, 255, 255, 0.25)</p>
+        <p style="color: rgba(255, 255, 255, 0.1)"  class="COLOR_1_FAIL">rgba(255, 255, 255, 0.1)</p>
+      </div>
+
+      <h2 class="COLOR_1_PASS">Group 9: RGBA values for background color</h2>
+      <div style="background-color: black; padding: 0.5em; color: rgb(19, 41, 75)">
+        <p style="background-color: rgba(255, 255, 255, 0)"  class="COLOR_1_FAIL">rgba(255, 255, 255, 0)</p>
+        <p style="background-color: rgba(255, 255, 255, 0.5)"  class="COLOR_1_PASS">rgba(255, 255, 255, 0.5)</p>
+        <p style="background-color: rgba(255, 255, 255, 0.75)" class="COLOR_1_PASS">rgba(255, 255, 255, 0.25)</p>
+        <p style="background-color: rgba(255, 255, 255, 1.0)"  class="COLOR_1_PASS">rgba(255, 255, 255, 0.1)</p>
+      </div>
+
+      <div style="background-color: white; padding: 0.5em; color: white">
+        <p style="background-color: rgba(0, 0, 0, 1.0)"  class="COLOR_1_PASS">rgba(0, 0, 0, 1.0)</p>
+        <p style="background-color: rgba(0, 0, 0, 0.5)"  class="COLOR_1_PASS">rgba(0, 0, 0, 0.5)</p>
+        <p style="background-color: rgba(0, 0, 0, 0.25)"  class="COLOR_1_FAIL">rgba(0, 0, 0, 0.25)</p>
+        <p style="background-color: rgba(0, 0, 0, 0.1)"  class="COLOR_1_FAIL">rgba(0, 0, 0, 0.1)</p>
+      </div>
+
+      <h2 class="COLOR_1_PASS">Group 10: Opacity</h2>
+      <div style="background-color: #224466; padding: 0.5em">
+        <p style="color: rgba(255, 255, 255); opacity: 1.0"  class="COLOR_1_PASS">opacity: 1.0</p>
+        <p style="color: rgba(255, 255, 255); opacity: 0.5"  class="COLOR_1_PASS">opacity: 0.5</p>
+        <p style="color: rgba(255, 255, 255); opacity: 0.25" class="COLOR_1_FAIL">opacity: 0.25</p>
+        <p style="color: rgba(255, 255, 255); opacity: 0.1"  class="COLOR_1_FAIL">opacity: 0.1</p>
+      </div>
+
+
+
     </div>
     
   </body>

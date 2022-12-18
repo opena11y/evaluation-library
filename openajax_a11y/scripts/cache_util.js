@@ -246,61 +246,72 @@ OpenAjax.a11y.util.urlExists = function (url) {
 };
 
 /**
- * @function RGBToHex
+ * @function rgbToHex
  * @memberOf OpenAjax.a11y.util
  *
  * @desc Converts an RGB color to Hex values
  *
- * @param {String} rgb_color - RGB Color
+ * @param {String} colorRGB      - RGB Color
+ * @param {String} backgroundHex - Background color as a hex value
+ * @param {String} opacity        - Opacity value for a foreground color
  *
  * @return  String
  */
 
-OpenAjax.a11y.util.RGBToHEX = function( rgb_color ) {
+OpenAjax.a11y.util.rgbToHex = function( colorRGB, backgroundHex, opacity=1.0 ) {
 
- function stringToHex(d) {
-  var hex = Number(d).toString(16);
-  if (hex.length == 1) {
-   hex = "0" + hex;
+  function hexToString(d) {
+    let hex = Number(d).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
   }
-  return hex;
- }
 
- var i;
- var length;
+  if (!colorRGB) return "000000";
 
- if (!rgb_color) return "000000";
+  colorRGB = colorRGB.replace('"', '');
+  colorRGB = colorRGB.split(')')[0];
+  colorRGB = colorRGB.split('(')[1];
+  const parts = colorRGB.split(',');
+  let r1 = parseFloat(parts[0]);
+  let g1 = parseFloat(parts[1]);
+  let b1 = parseFloat(parts[2]);
+  const o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
 
- var hex = [];
- var color_hex = "000000";
- var components = rgb_color.match(/[\d.]+/g);
+  if (typeof backgroundHex !== 'string' || backgroundHex.length !== 6) {
+    backgroundHex = 'FFFFFF';
+  }
 
- if (components && components.length) {
-  length = components.length;
+  const r2 = parseInt(backgroundHex.substring(0,2), 16);
+  const g2 = parseInt(backgroundHex.substring(2,4), 16);
+  const b2 = parseInt(backgroundHex.substring(4,6), 16);
 
-  if (length == 3) {
-   // RGB value
-   for (i=0; i<3; i++) {
-    hex.push(stringToHex(components[i]));
-   } // end loop
+  const min = 0.0001;
 
-   color_hex = hex[0] + hex[1] + hex[2];
-   // OpenAjax.a11y.logger.debug( rgb_color + " " + color_hex );
-
+  if (o1 < min) {
+    return backgroundHex;
   }
   else {
-
-   if (length == 4) {
-    // RGBA value
-    for (i=0; i<3; i++) {
-     hex[i] = stringToHex(Math.round(parseFloat(components[i])*parseFloat(components[3])));
-    } // end loop
-    color_hex = hex[0] + hex[1] + hex[2];
-   }
+    if (o1 < 1.0) {
+      r1 = Math.round(r1 * o1 + r2 * (1 - o1));
+      g1 = Math.round(g1 * o1 + g2 * (1 - o1));
+      b1 = Math.round(b1 * o1 + b2 * (1 - o1));
+    }
   }
- }
 
- return color_hex;
+  if (typeof opacity === 'string') {
+    opacity = parseFloat(opacity);
+  }
+
+  if ((opacity === Number.NaN) || (opacity < 0.0) || (opacity > 1.0)) {
+    opacity = 1.0;
+  }
+
+  if (opacity < 1.0) {
+    r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
+    g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
+    b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
+  }
+
+  return hexToString(r1) + hexToString(g1) + hexToString(b1);
 };
 
 
