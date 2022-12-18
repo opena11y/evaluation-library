@@ -1,3 +1,8 @@
+Version 1.3.1 Overview
+=============================
+* Fixed bug in inheriting background color
+* Fixed bug in computing colors with opacity values
+
 Version 1.3 Overview
 =============================
 * Added methods ElementResult object for use in AInspector Element Results view:

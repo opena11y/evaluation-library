@@ -58,6 +58,8 @@
 
 OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_element) {
 
+//  console.log(`\n${dom_element.tag_name}: "${dom_element.node.textContent ? dom_element.node.textContent.trim().substring(0,20) : ''}"`);
+
   function normalizeBackgroundImage(value, parent_element) {
 
     var v = value;
@@ -201,6 +203,8 @@ OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_elem
     this.background_repeat   = style.getPropertyValue("background-repeat");
     this.background_position = style.getPropertyValue("background-position");
 
+//    console.log(`[color]: ${this.color} [background_color]: ${this.background_color}`);
+
     this.outline_style    = style.getPropertyValue("outline-style");
     this.outline_color    = style.getPropertyValue("outline-color");
     this.outline_width    = style.getPropertyValue("outline-width");
@@ -282,8 +286,7 @@ OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_elem
     this.left    = normalizePositionLeft(style.getPropertyValue("left"), parent_element);
   }
 
-  if ((this.background_color.indexOf("0, 0, 0, 0") > 0) ||
-      (this.background_color == 'transparent') ||
+  if ((this.background_color == 'transparent') ||
       (this.background_color == 'inherit')) {
 
     if (parent_element && parent_element.computed_style) {
@@ -297,8 +300,14 @@ OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_elem
     }
   }
   else {
-    this.background_color_hex = OpenAjax.a11y.util.RGBToHEX(this.background_color);
+    if (parent_element && parent_element.computed_style) {
+      this.background_color_hex = OpenAjax.a11y.util.RGBToHEX(this.background_color, parent_element.computed_style.background_color_hex);
+    }
+    else {
+      this.background_color_hex = OpenAjax.a11y.util.RGBToHEX(this.background_color, 'FFFFFF');
+    }
   }
+//  console.log(`[background_color]: ${this.background_color} ${this.background_color_hex}`);
 
   if (parent_element &&
       parent_element.computed_style ) {
@@ -321,7 +330,7 @@ OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_elem
       this.color_hex = parent_style.color_hex;
     }
     else {
-      this.color_hex = OpenAjax.a11y.util.RGBToHEX(style.getPropertyValue("color"));
+      this.color_hex = OpenAjax.a11y.util.RGBToHEX(this.color, this.background_color_hex, this.opacity);
     }
 
     if (this.font_family === 'inherit') {
@@ -333,7 +342,7 @@ OpenAjax.a11y.cache.DOMElementComputedStyle = function (dom_element, parent_elem
     }
   }
 
-  // Calcuate visibility of node content in graphical renderings and to assistive technologies
+  // Calculate visibility of node content in graphical renderings and to assistive technologies
 
   if (this.visibility &&
       this.visibility.length &&
