@@ -31,10 +31,10 @@ export default class ColorContrast {
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
-    this.color              = style.getPropertyValue("color");
-    this.colorHex           = this.RGBToHEX(this.color, this.opacity);
     this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex = this.RGBToHEX(this.backgroundColor);
+    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColor);
+    this.color              = style.getPropertyValue("color");
+    this.colorHex           = this.rgbToHex(this.color, this.backgroundColor, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
@@ -293,68 +293,72 @@ export default class ColorContrast {
   }
 
   /**
-  * @function RGBToHex
+  * @function rgbToHex
   *
   * @desc Converts an RGB color to Hex values
   *
-  * @param {String} rgbColor  - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
-  * @param {Number}  opacity  - A number between 0 and 1 representing CSS value
-  *                             default value is 1.0
+  * @param {String} colorRGB       - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
+  * @param {String} backgroundHex  - Background color as a hex value
+  * @param {Number}  opacity       - A number between 0 and 1 representing CSS value
+  *                                  default value is 1.0
   *
-  * @return  {String}  - Hex version of the RDB color 
+  * @return  {String}  - Hex version of the RGB color
   */
 
-  RGBToHEX ( rgbColor, opacity=1.0 ) {
+  rgbToHex ( colorRGB, backgroundHex, opacity=1.0 ) {
 
-    // num is a string or a number representing a base 10 number
-    function toHex(num) {
-      let hex = Number(num).toString(16);
-      if (hex.length == 1) {
-        hex = "0" + hex;
-      }
-      return hex;
+    function hexToString(d) {
+      let hex = Number(d).toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
     }
 
-    // if rgbNumber not defined return 0000000
-    if (!rgbColor) {
-      return "000000";
+    if (!colorRGB) return "000000";
+
+    colorRGB = colorRGB.replace('"', '');
+    colorRGB = colorRGB.split(')')[0];
+    colorRGB = colorRGB.split('(')[1];
+    const parts = colorRGB.split(',');
+    let r1 = parseFloat(parts[0]);
+    let g1 = parseFloat(parts[1]);
+    let b1 = parseFloat(parts[2]);
+    const o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+
+    if (typeof backgroundHex !== 'string' || backgroundHex.length !== 6) {
+      backgroundHex = 'FFFFFF';
     }
 
-    let hex = [];
-    let value;
-    let colorHex = "000000";
-    let rgbParts = rgbColor.match(/[\d.]+/g);
-    let A;
+    const r2 = parseInt(backgroundHex.substring(0,2), 16);
+    const g2 = parseInt(backgroundHex.substring(2,4), 16);
+    const b2 = parseInt(backgroundHex.substring(4,6), 16);
 
-    if (rgbParts && rgbParts.length) {
+    const min = 0.0001;
 
-      switch (rgbParts.length) {
-        case 3:
-          // RGB values to HEX value
-          rgbParts.forEach( rgbColor => {
-            value = Math.round(opacity * Math.round(parseFloat(rgbColor)));
-            hex.push(toHex(value));            
-          });
-          colorHex = hex.join('');
-          break;
-
-        case 4:
-          // RGBA value to HEX valuye
-          A = parseFloat(rgbParts[3]);
-          // remove A value from array
-          rgbParts.pop()
-          rgbParts.forEach( rgbColor => {
-            value = Math.round(opacity * A * Math.round(parseFloat(rgbColor)));
-            hex.push(toHex(value));            
-          });
-          colorHex = hex.join('');
-          break;
-
-        default:
-          break;  
+    if (o1 < min) {
+      return backgroundHex;
+    }
+    else {
+      if (o1 < 1.0) {
+        r1 = Math.round(r1 * o1 + r2 * (1 - o1));
+        g1 = Math.round(g1 * o1 + g2 * (1 - o1));
+        b1 = Math.round(b1 * o1 + b2 * (1 - o1));
       }
     }
-   return colorHex;
+
+    if (typeof opacity === 'string') {
+      opacity = parseFloat(opacity);
+    }
+
+    if ((opacity === Number.NaN) || (opacity < 0.0) || (opacity > 1.0)) {
+      opacity = 1.0;
+    }
+
+    if (opacity < 1.0) {
+      r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
+      g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
+      b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
+    }
+
+    return hexToString(r1) + hexToString(g1) + hexToString(b1);
   }
 
   /**
