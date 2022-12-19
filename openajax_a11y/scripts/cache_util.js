@@ -246,7 +246,7 @@ OpenAjax.a11y.util.urlExists = function (url) {
 };
 
 /**
- * @function RGBToHex
+ * @function rgbToHex
  * @memberOf OpenAjax.a11y.util
  *
  * @desc Converts an RGB color to Hex values
@@ -258,7 +258,7 @@ OpenAjax.a11y.util.urlExists = function (url) {
  * @return  String
  */
 
-OpenAjax.a11y.util.RGBToHEX = function( colorRGB, backgroundHex, opacity=1.0 ) {
+OpenAjax.a11y.util.rgbToHex = function( colorRGB, backgroundHex, opacity=1.0 ) {
 
   function hexToString(d) {
     let hex = Number(d).toString(16);
