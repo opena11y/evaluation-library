@@ -32,9 +32,9 @@ export default class ColorContrast {
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
     this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColor);
+    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
     this.color              = style.getPropertyValue("color");
-    this.colorHex           = this.rgbToHex(this.color, this.backgroundColor, this.opacity);
+    this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
