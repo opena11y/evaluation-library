@@ -15,13 +15,15 @@
     <script type="module">
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', (event) => {
-        executeTest('Color_1: Color contrast ratio', 'ID_IFRAME_1A', 'COLOR_1');
+        executeTest('Color_1A: Color contrast ratio', 'ID_IFRAME_1A', 'COLOR_1');
+        executeTest('Color_1B: Color contrast ratio', 'ID_IFRAME_1B', 'COLOR_1');
         executeTest('Color_2: Use of color', 'ID_IFRAME_2A', 'COLOR_2');
       });
     </script>
 
     <h2>Color contrast ratio </h2>
-    <iframe id="ID_IFRAME_1A" src="color/color_1_contrast_ratio.html"></iframe>    
+    <iframe id="ID_IFRAME_1A" src="color/color_1A_contrast_ratio.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="color/color_1B_contrast_ratio.html"></iframe>
 
     <h2>Use of color </h2>
     <iframe id="ID_IFRAME_2A" src="color/color_2_use_of_color.html"></iframe>    
