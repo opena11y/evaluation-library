@@ -20,6 +20,7 @@ import {
 
 /* Constants */
 const debug = new DebugLogging('DOMElement', false);
+debug.flag = true;
 
 const elementsWithContent = [
   'area',
@@ -80,9 +81,20 @@ export default class DOMElement {
     this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(doc, elementNode);
-    this.accDescription = getAccessibleDesc(doc, elementNode);
-    this.errMessage     = getErrMessage(doc, elementNode);
+    this.accName        = getAccessibleName(this.ariaInfo, doc, elementNode);
+    if (elementNode.id && elementNode.hasAttribute('data-label')) {
+      const label = elementNode.getAttribute('data-label');
+      if (this.accName.name !== label) {
+        if (this.tagName === 'input') {
+          debug.log(`[${this.tagName}][type=${elementNode.type}][${elementNode.id}]: ${this.accName.name} (${this.accName.source})`);
+        }
+        else {
+          debug.log(`[${this.tagName}][${elementNode.id}]: ${this.accName.name} (${this.accName.source})`);
+        }
+      }
+    }
+    this.accDescription = getAccessibleDesc(this.ariaInfo, doc, elementNode);
+    this.errMessage     = getErrMessage(this.ariaInfo, doc, elementNode);
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);

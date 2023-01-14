@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Accessible Name Calculation with control values in the label | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <style>
+      label {
+        display: block;
+      }
+      code {
+        display: inline-block;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+        background: #ddd;
+      }
+      .css-content::before {
+        content: 'A';
+      }
+      .css-content::after {
+        content: 'D';
+      }
+      .css-radio::before {
+        content: 'RADIO';
+      }
+      .css-1::after {
+        content: '1';
+      }
+      .css-2::after {
+        content: '2';
+      }
+      .css-3::after {
+        content: '3';
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Accessible Name Calculation with control values in the label</h1>
+
+      <h2>Label Reference</h2>
+
+      <h3><code>input[type=text]</code> in label </h3>
+      <label for="label-ref-11">ABCD <input type="text" value="1234"></label>
+      <input id="label-ref-11" type="text">
+
+      <h2><code>aria-labelledby</code> in reference</h2>
+
+      <h3><code>input[type=text]</code> in label </h3>
+      <div id="aria-labelledby-1-abcd">ABCD <input type="text" value="1234"></label>
+      <input id="aria-labelledbby-11" type="text" aria-labelledby="aria-labelledby-1-abcd">
+
+    </main>
+
+<!--
+    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
+-->
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

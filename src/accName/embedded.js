@@ -12,7 +12,7 @@
 *   based on its ARIA role.
 */
 
-import { getAriaRole } from './roles';
+import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import { getAttributeValue, normalize } from '../utils';
 export { isEmbeddedControl, getEmbeddedControlValue };
 
@@ -21,16 +21,20 @@ export { isEmbeddedControl, getEmbeddedControlValue };
 *   to an HTML form control that could be embedded within text content.
 */
 function isEmbeddedControl (element) {
-  let embeddedControlRoles = [
+  const embeddedControlRoles = [
     'textbox',
     'combobox',
     'listbox',
     'slider',
     'spinbutton'
   ];
-  let role = getAriaRole(element);
 
-  return (embeddedControlRoles.indexOf(role) !== -1);
+  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
+  const role = element.hasAttribute('role') ?
+               element.getAttribute('role').toLowerCase() :
+               ariaInHTMLInfo.defaultRole;
+
+  return embeddedControlRoles.includes(role);
 }
 
 /*
@@ -38,7 +42,10 @@ function isEmbeddedControl (element) {
 *   of HTML to get the corresponding text value of the embedded control.
 */
 function getEmbeddedControlValue (element) {
-  let role = getAriaRole(element);
+  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
+  const role = element.hasAttribute('role') ?
+               element.getAttribute('role').toLowerCase() :
+               ariaInHTMLInfo.defaultRole;
 
   switch (role) {
     case 'textbox':

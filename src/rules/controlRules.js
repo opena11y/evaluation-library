@@ -10,7 +10,8 @@ import {
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Control Rules', true);
+const debug = new DebugLogging('Control Rules', false);
+debug.flag = false;
 
 
 /*
@@ -123,7 +124,6 @@ export const controlRules = [
           if (gce) {
             const gde = gce.domElement;
             if (gde.tagName === 'fieldset') {
-              debug.log(`[radio][${de.node.getAttribute('name')}]: ${de.accName.name} (${gde.accName.name})`);
               if (gde.accName.name) {
                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [gde.accName.name]);
               }

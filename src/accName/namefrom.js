@@ -4,6 +4,7 @@
 
 import {
   normalize,
+  normalizeLeadingAndTrailingSpace,
   getAttributeValue
 } from '../utils.js';
 
@@ -12,10 +13,11 @@ import {
   getEmbeddedControlValue
 } from './embedded';
 
-
 export {
+  addCssGeneratedContent,
   isLabelableElement,
   getElementContents,
+  getNodeContents,
   nameFromAttribute,
   nameFromAltAttribute,
   nameFromContents,
@@ -61,22 +63,19 @@ function isLabelableElement (element) {
 function getElementContents (element, forElement) {
   let result = '';
 
-  if (isVisible(element)) {
-    if (element.hasChildNodes()) {
-      let children = element.childNodes,
-          arrayOfStrings = [];
+  if (element.hasChildNodes()) {
+    let children = element.childNodes,
+        arrayOfStrings = [];
 
-      for (let i = 0; i < children.length; i++) {
-        let contents = getNodeContents(children[i], forElement);
-        if (contents.length) arrayOfStrings.push(contents);
-      }
-
-      result = (arrayOfStrings.length) ? arrayOfStrings.join(' ') : '';
+    for (let i = 0; i < children.length; i++) {
+      let contents = getNodeContents(children[i], forElement);
+      if (contents.length) arrayOfStrings.push(contents);
     }
 
-    return addCssGeneratedContent(element, result);
+    result = (arrayOfStrings.length) ? arrayOfStrings.join('') : '';
   }
-  return '';
+
+  return addCssGeneratedContent(element, result);
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -88,7 +87,7 @@ function nameFromAttribute (element, attribute) {
   let name;
 
   name = getAttributeValue(element, attribute);
-  if (name.length) return { name: name, source: attribute };
+  if (name.length) return { name: normalize(name), source: attribute };
 
   return null;
 }
@@ -116,7 +115,7 @@ function nameFromContents (element) {
   let name;
 
   name = getElementContents(element);
-  if (name.length) return { name: name, source: 'contents' };
+  if (name.length) return { name: normalize(name), source: 'contents' };
 
   return null;
 }
@@ -134,8 +133,10 @@ function nameFromDefault (name) {
 function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
   if (descendant) {
-    let name = getElementContents(descendant);
-    if (name.length) return { name: name, source: tagName + ' element' };
+    let name = descendant.hasAttribute('aria-label') ?
+               descendant.getAttribute('aria-label') :
+               getElementContents(descendant);
+    if (name.length) return { name: normalize(name), source: tagName + ' element' };
   }
 
   return null;
@@ -145,15 +146,16 @@ function nameFromDescendant (element, tagName) {
 *   nameFromLabelElement
 */
 function nameFromLabelElement (doc, element) {
-  let name, label;
-
+  let label, name;
   // label [for=id]
   if (element.id) {
     try {
       label = doc.querySelector('[for="' + element.id + '"]');
       if (label) {
-        name = getElementContents(label, element);
-        if (name.length) return { name: name, source: 'label reference' };
+        name = label.hasAttribute('aria-label') ?
+               label.getAttribute('aria-label') :
+               getElementContents(label, element);
+        if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
       debug.log(`[nameFromLabelElement][error]: ${error}`);
@@ -164,8 +166,10 @@ function nameFromLabelElement (doc, element) {
   if (typeof element.closest === 'function') {
     label = element.closest('label');
     if (label) {
-      name = getElementContents(label, element);
-      if (name.length) return { name: name, source: 'label encapsulation' };
+      name = label.hasAttribute('aria-label') ?
+             label.getAttribute('aria-label') :
+             getElementContents(label, element);
+      if (name.length) return { name: normalize(name), source: 'label encapsulation' };
     }
   }
 
@@ -182,13 +186,14 @@ function nameFromLegendElement (doc, element) {
   if (element) {
     legend = element.querySelector('legend');
     if (legend) {
-      name = getElementContents(legend, element);
-    if (name.length) return { name: name, source: 'legend' };
+      name = legend.hasAttribute('aria-label') ?
+             legend.getAttribute('aria-label') :
+             getElementContents(legend, element);
+    if (name.length) return { name: normalize(name), source: 'legend' };
     }
   }
   return null;
 }
-
 
 /*
 *   nameFromDetailsOrSummary: If element is expanded (has open attribute),
@@ -210,10 +215,10 @@ function nameFromDetailsOrSummary (element) {
     name += getContentsOfChildNodes(element, function (elem) {
       return elem.tagName.toLowerCase() !== 'summary';
     });
-    if (name.length) return { name: name, source: 'contents' };
+    if (name.length) return { name: normalize(name), source: 'contents' };
   }
   else {
-    if (name.length) return { name: name, source: 'summary element' };
+    if (name.length) return { name: normalize(name), source: 'summary element' };
   }
 
   return null;
@@ -222,142 +227,214 @@ function nameFromDetailsOrSummary (element) {
 // LOW-LEVEL HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
-*   isHidden: Checks to see if the node or any of it's ancestor
-*   are hidden for the purpose of accessible name calculation
+*   @function  isDisplayNone
+*
+*   @desc Returns true if the element or parent element has set the CSS
+*         display property to none or has the hidden attribute,
+*         otherwise false
+*
+*   @param  {Object}  node  - a DOM node
+*
+*   @returns  {Boolean} see @desc
 */
 
-function isHidden (node) {
+function isDisplayNone (node) {
 
   if (!node) {
     return false;
   }
 
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    if ((node.nodeType === Node.TEXT_NODE) &&
-        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+  if (node.nodeType === Node.TEXT_NODE) {
       node = node.parentNode;
+  }
+
+  if (node.nodeType === Node.ELEMENT_NODE) {
+
+    if (node.hasAttribute('hidden')) {
+      return true;
     }
+
+    // aria-hidden attribute with the value "true" is an same as
+    // setting the hidden attribute for name calcuation
+    if (node.hasAttribute('aria-hidden')) {
+      if (node.getAttribute('aria-hidden').toLowerCase()  === 'true') {
+        return true;
+      }
+    }
+
+    const style = window.getComputedStyle(node, null);
+
+    const display = style.getPropertyValue("display");
+
+    if (display) {
+      return display === 'none';
+    }
+  }
+  return false;
+}
+
+/*
+*   @function isVisibilityHidden
+*
+*   @desc Returns true if the node (or it's parrent) has the CSS visibility
+*         property set to "hidden" or "collapse", otherwise false
+*
+*   @param  {Object}   node  -  DOM node
+*
+*   @return  see @desc
+*/
+
+function isVisibilityHidden(node) {
+
+  if (!node) {
     return false;
   }
 
-  if (node.hasAttribute('hidden')) {
-    return true;
+  if (node.nodeType === Node.TEXT_NODE) {
+    node = node.parentNode;
   }
 
-  if (node.hasAttribute('aria-hidden')) {
-    return node.getAttribute('aria-hidden').toLowerCase() === 'true';
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    const style = window.getComputedStyle(node, null);
+
+    const visibility = style.getPropertyValue("visibility");
+    if (visibility) {
+      return (visibility === 'hidden') || (visibility === 'collapse');
+    }
+  }
+  return false;
+}
+
+/*
+*   @function isAriaHiddenFalse
+*
+*   @desc Returns true if the node has the aria-hidden property set to
+*         "false", otherwise false.
+*         NOTE: This function is important in the accessible name
+*               calculation, since content hidden with a CSS technique
+*               can be included in the accessible name calculation when
+*               aria-hidden is set to false for the chrome browser
+*
+*   @param  {Object}   node  -  DOM node
+*
+*   @return  see @desc
+*/
+
+function isAriaHiddenFalse(node) {
+
+  if (!node) {
+    return false;
   }
 
-  const style = window.getComputedStyle(node, null);
-
-  const display = style.getPropertyValue("display");
-  if (display === 'none') { 
-    return true;
+  if (node.nodeType === Node.TEXT_NODE) {
+      node = node.parentNode;
   }
 
-  if (node.parentNode) {
-    return isHidden(node.parentNode);
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    return (node.hasAttribute('aria-hidden') &&
+        (node.getAttribute('aria-hidden').toLowerCase() === 'false'));
   }
 
   return false;
 }
 
 /*
-*   isVisible: Checks to see if the node or any of it's ancestor
-*   are visible for the purpose of accessible name calculation
+*   @function includeContentInName
+*
+*   @desc Checks the CSS display and hidden properties, and
+*         the aria-hidden property to see if the content
+*         should be included in the accessible name
+*        calculation.  Returns true if it should be
+*         included, otherwise false
+*
+*   @param  {Object}   node  -  DOM node
+*
+*   @return  see @desc
 */
 
-function isVisible (node) {
-  return !isHidden(node);
+function includeContentInName(node) {
+  // NOTE: Chrome is the only major browser using aria-hidden=false in
+  //       accessible name computation
+  const flag = isAriaHiddenFalse(node) && false;
+  return flag || (!isVisibilityHidden(node) && !isDisplayNone(node));
 }
 
 /*
-*   isHiddenCSSVisibilityProp: Checks to see if the node or any of it's ancestor
-*   are visible based on CSS visibility property for the purpose of accessible name calculation
+*   @function includeContentInName
+*
+*   @desc Checks the CSS display and hidden properties, and
+*         the aria-hidden property to see if the content
+*         should be included in the accessible name
+*        calculation.  Returns true if it should be
+*         included, otherwise false
+*
+*   @param  {Object}   node     -  DOM node
+*   @param  {Object}   forElem  -  DOM node the name is being computed for
+*
+*   @return  see @desc
 */
 
-function isHiddenCSSVisibilityProp(node) {
-
-  if (!node) {
-    return false;
-  }
-
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    if ((node.nodeType === Node.TEXT_NODE) &&
-        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
-      node = node.parentNode;
-    }
-    return false;
-  }
-  const style = window.getComputedStyle(node, null);
-
-  const visibility = style.getPropertyValue("visibility");
-  if (visibility) {
-    return (visibility === 'hidden') || (visibility === 'collapse');
-  }
-
-  if (node.parentNode) {
-    return isHidden(node.parentNode);
-  }
-
-  return false;
-}
-
-/*
-*   getNodeContents: Recursively process element and text nodes by aggregating
-*   their text values for an ARIA text equivalent calculation.
-*   1. This includes special handling of elements with 'alt' text and embedded
-*      controls.
-*   2. The forElem parameter is needed for label processing to avoid inclusion
-*      of an embedded control's value when the label is for the control itself.
-*/
-function getNodeContents (node, forElem) {
+function getNodeContents (node, forElem, alwaysInclude=false) {
   let contents = '';
   let nc;
   let arr = [];
 
-  if (isHidden(node) || 
-      (node === forElem)) {
+  // Cannot recursively use the element
+  // in computing it's accessible name
+  if (node === forElem) {
     return '';
-  } 
+  }
 
   switch (node.nodeType) {
-    case Node.ELEMENT_NODE:
-      if (node instanceof HTMLSlotElement) {
-        // if no slotted elements, check for default slotted content
-        const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
-        assignedNodes.forEach( assignedNode => {
-          nc = getNodeContents(assignedNode, forElem);
-          if (nc.length) arr.push(nc);
-        });
-        contents = (arr.length) ? arr.join(' ') : '';
-      } else {
-        if (couldHaveAltText(node)) {
-          contents = getAttributeValue(node, 'alt');
+
+      case Node.ELEMENT_NODE:
+      // If aria-label is present, node recursion stops and
+      // aria-label value is returned
+      if (node.hasAttribute('aria-label')) {
+        if (includeContentInName(node) || alwaysInclude ) {
+          contents = node.getAttribute('aria-label');
         }
-        else {
-          if (isEmbeddedControl(node)) {
-            contents = getEmbeddedControlValue(node);
+      }
+      else {
+        if (node instanceof HTMLSlotElement) {
+          // if no slotted elements, check for default slotted content
+          const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
+          assignedNodes.forEach( assignedNode => {
+            nc = getNodeContents(assignedNode, forElem);
+            if (nc.length) arr.push(nc);
+          });
+          contents = (arr.length) ? arr.join('') : '';
+        } else {
+          if (couldHaveAltText(node) && (includeContentInName(node) || alwaysInclude)) {
+            contents = getAttributeValue(node, 'alt');
           }
           else {
-            if (node.hasChildNodes()) {
-              let children = Array.from(node.childNodes);
-              children.forEach( child => {
-                nc = getNodeContents(child, forElem);
-                if (nc.length) arr.push(nc);
-              });
-              contents = (arr.length) ? arr.join(' ') : '';
+            if (isEmbeddedControl(node) && (includeContentInName(node) || alwaysInclude)) {
+              contents = getEmbeddedControlValue(node);
+            }
+            else {
+              if (node.hasChildNodes()) {
+                let children = Array.from(node.childNodes);
+                children.forEach( child => {
+                  nc = getNodeContents(child, forElem);
+                  if (nc.length) arr.push(nc);
+                });
+                contents = (arr.length) ? arr.join('') : '';
+              }
             }
           }
+          // For all branches of the ELEMENT_NODE case...
         }
-        // For all branches of the ELEMENT_NODE case...
       }
       contents = addCssGeneratedContent(node, contents);
+      if (contents.length) {
+        contents = ' ' + contents;
+      }
       break;
 
     case Node.TEXT_NODE:
-      if (!isHiddenCSSVisibilityProp(node.parentNode)) {
-        contents = normalize(node.textContent);
+      if (includeContentInName(node) || alwaysInclude) {
+        contents = normalizeLeadingAndTrailingSpace(node.textContent);
       }
       break;
 
@@ -400,8 +477,8 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
-  if (prefix !== 'none') result = prefix + result;
-  if (suffix !== 'none') result = result + suffix;
+  if (prefix !== 'none') result = prefix.replaceAll('"', '') + result;
+  if (suffix !== 'none') result = result + suffix.replaceAll('"', '');
 
   return result;
 }
@@ -422,7 +499,7 @@ function getContentsOfChildNodes (element, predicate) {
         }
         break;
       case (Node.TEXT_NODE):
-        content = normalize(node.textContent);
+        content = normalizeLeadingAndTrailingSpace(node.textContent);
         if (content.length) arr.push(content);
         break;
     }

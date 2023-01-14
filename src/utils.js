@@ -11,6 +11,7 @@ export {
   hasCheckedState,
   isLabelable,
   normalize,
+  normalizeLeadingAndTrailingSpace,
   replaceAll,
   usesARIALabeling
 }
@@ -40,9 +41,34 @@ function isLabelable (node) {
 *   BOM and NBSP characters.
 */
 function normalize (s) {
-  let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+  const rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
   return s.replace(rtrim, '').replace(/\s+/g, ' ');
 }
+
+/*
+*   normalizeLeadingAndTrailingSpace: Trim leading and trailing redundant
+*   whitespace and condense all internal sequences of whitespace to a single
+*   space.
+*/
+function normalizeLeadingAndTrailingSpace (s) {
+  let n = normalize(s);
+  // preserve a space character before and after the string
+  if (n.length && s.length) {
+    if (n[0] !== s[0]) {
+      n = ' ' + n;
+    }
+    if (n[n.length-1] !== s[s.length-1]) {
+      n = n + ' ';
+    }
+  }
+  else {
+    if (s.length) {
+      n = ' ';
+    }
+  }
+  return n;
+}
+
 
 /*
 *   getAttributeValue: Return attribute value if present on element,

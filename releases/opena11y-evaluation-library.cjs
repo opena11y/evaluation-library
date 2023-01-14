@@ -637,9 +637,34 @@ function isLabelable (node) {
 *   BOM and NBSP characters.
 */
 function normalize (s) {
-  let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+  const rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
   return s.replace(rtrim, '').replace(/\s+/g, ' ');
 }
+
+/*
+*   normalizeLeadingAndTrailingSpace: Trim leading and trailing redundant
+*   whitespace and condense all internal sequences of whitespace to a single
+*   space.
+*/
+function normalizeLeadingAndTrailingSpace (s) {
+  let n = normalize(s);
+  // preserve a space character before and after the string
+  if (n.length && s.length) {
+    if (n[0] !== s[0]) {
+      n = ' ' + n;
+    }
+    if (n[n.length-1] !== s[s.length-1]) {
+      n = n + ' ';
+    }
+  }
+  else {
+    if (s.length) {
+      n = ' ';
+    }
+  }
+  return n;
+}
+
 
 /*
 *   getAttributeValue: Return attribute value if present on element,
@@ -648,20 +673,6 @@ function normalize (s) {
 function getAttributeValue (element, attribute) {
   let value = element.getAttribute(attribute);
   return (value === null) ? '' : normalize(value);
-}
-
-/*
-*   hasEmptyAltText: Determine whether the alt attribute is present
-*   and its value is the empty string.
-*/
-function hasEmptyAltText (element) {
-  let value = element.getAttribute('alt');
-
-   // Attribute is present
-  if (value !== null)
-    return (normalize(value).length === 0);
-
-  return false;
 }
 
 /**
@@ -1259,10 +1270,10 @@ class ColorContrast {
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
-    this.color              = style.getPropertyValue("color");
-    this.colorHex           = this.RGBToHEX(this.color, this.opacity);
     this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex = this.RGBToHEX(this.backgroundColor);
+    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+    this.color              = style.getPropertyValue("color");
+    this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
@@ -1521,65 +1532,72 @@ class ColorContrast {
   }
 
   /**
-  * @function RGBToHex
+  * @function rgbToHex
   *
   * @desc Converts an RGB color to Hex values
   *
-  * @param {String} rgbColor  - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
-  * @param {Number}  opacity  - A number between 0 and 1 representing CSS value
-  *                             default value is 1.0
+  * @param {String} colorRGB       - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
+  * @param {String} backgroundHex  - Background color as a hex value
+  * @param {Number}  opacity       - A number between 0 and 1 representing CSS value
+  *                                  default value is 1.0
   *
-  * @return  {String}  - Hex version of the RDB color 
+  * @return  {String}  - Hex version of the RGB color
   */
 
-  RGBToHEX ( rgbColor, opacity=1.0 ) {
+  rgbToHex ( colorRGB, backgroundHex, opacity=1.0 ) {
 
-    // num is a string or a number representing a base 10 number
-    function toHex(num) {
-      let hex = Number(num).toString(16);
-      if (hex.length == 1) {
-        hex = "0" + hex;
-      }
-      return hex;
+    function hexToString(d) {
+      let hex = Number(d).toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
     }
 
-    // if rgbNumber not defined return 0000000
-    if (!rgbColor) {
-      return "000000";
+    if (!colorRGB) return "000000";
+
+    colorRGB = colorRGB.replace('"', '');
+    colorRGB = colorRGB.split(')')[0];
+    colorRGB = colorRGB.split('(')[1];
+    const parts = colorRGB.split(',');
+    let r1 = parseFloat(parts[0]);
+    let g1 = parseFloat(parts[1]);
+    let b1 = parseFloat(parts[2]);
+    const o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+
+    if (typeof backgroundHex !== 'string' || backgroundHex.length !== 6) {
+      backgroundHex = 'FFFFFF';
     }
 
-    let hex = [];
-    let value;
-    let colorHex = "000000";
-    let rgbParts = rgbColor.match(/[\d.]+/g);
-    let A;
+    const r2 = parseInt(backgroundHex.substring(0,2), 16);
+    const g2 = parseInt(backgroundHex.substring(2,4), 16);
+    const b2 = parseInt(backgroundHex.substring(4,6), 16);
 
-    if (rgbParts && rgbParts.length) {
+    const min = 0.0001;
 
-      switch (rgbParts.length) {
-        case 3:
-          // RGB values to HEX value
-          rgbParts.forEach( rgbColor => {
-            value = Math.round(opacity * Math.round(parseFloat(rgbColor)));
-            hex.push(toHex(value));            
-          });
-          colorHex = hex.join('');
-          break;
-
-        case 4:
-          // RGBA value to HEX valuye
-          A = parseFloat(rgbParts[3]);
-          // remove A value from array
-          rgbParts.pop();
-          rgbParts.forEach( rgbColor => {
-            value = Math.round(opacity * A * Math.round(parseFloat(rgbColor)));
-            hex.push(toHex(value));            
-          });
-          colorHex = hex.join('');
-          break;
+    if (o1 < min) {
+      return backgroundHex;
+    }
+    else {
+      if (o1 < 1.0) {
+        r1 = Math.round(r1 * o1 + r2 * (1 - o1));
+        g1 = Math.round(g1 * o1 + g2 * (1 - o1));
+        b1 = Math.round(b1 * o1 + b2 * (1 - o1));
       }
     }
-   return colorHex;
+
+    if (typeof opacity === 'string') {
+      opacity = parseFloat(opacity);
+    }
+
+    if ((opacity === Number.NaN) || (opacity < 0.0) || (opacity > 1.0)) {
+      opacity = 1.0;
+    }
+
+    if (opacity < 1.0) {
+      r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
+      g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
+      b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
+    }
+
+    return hexToString(r1) + hexToString(g1) + hexToString(b1);
   }
 
   /**
@@ -8725,332 +8743,6 @@ function isCellInLayoutTable  (node) {
 }
 
 /*
-*   dom.js: functions for getting information about DOM elements
-*/
-
-/*
-*   isDescendantOf: Determine whether element is a descendant of any
-*   element in the DOM with a tagName in the list of tagNames.
-*/
-function isDescendantOf (element, tagNames) {
-  if (typeof element.closest === 'function') {
-    return tagNames.some(name => element.closest(name) !== null);
-  }
-  return false;
-}
-
-/*
-*   hasParentWithName: Determine whether element has a parent with
-*   tagName in the list of tagNames.
-*/
-function hasParentWithName (element, tagNames) {
-  let parentTagName = element.parentElement.tagName.toLowerCase();
-  if (parentTagName) {
-    return tagNames.some(name => parentTagName === name);
-  }
-  return false;
-}
-
-/*
-*   roles.js
-*
-*   Note: The information in this module is based on the following documents:
-*   1. ARIA in HTML (https://specs.webplatform.org/html-aria/webspecs/master/)
-*   2. WAI-ARIA 1.1 (http://www.w3.org/TR/wai-aria-1.1/)
-*   3. WAI-ARIA 1.0 (http://www.w3.org/TR/wai-aria/)
-*/
-
-/*
-*   inListOfOptions: Determine whether element is a child of
-*   1. a select element
-*   2. an optgroup element that is a child of a select element
-*   3. a datalist element
-*/
-function inListOfOptions (element) {
-  let parent = element.parentElement,
-      parentName = parent.tagName.toLowerCase(),
-      parentOfParentName = parent.parentElement.tagName.toLowerCase();
-
-  if (parentName === 'select')
-    return true;
-
-  if (parentName === 'optgroup' && parentOfParentName === 'select')
-    return true;
-
-  if (parentName === 'datalist')
-    return true;
-
-  return false;
-}
-
-/*
-*   validRoles: Reference list of all concrete ARIA roles as specified in
-*   WAI-ARIA 1.1 Working Draft of 14 July 2015
-*/
-var validRoles = [
-
-  // LANDMARK
-  'application',
-  'banner',
-  'complementary',
-  'contentinfo',
-  'form',
-  'main',
-  'navigation',
-  'search',
-
-  // WIDGET
-  'alert',
-  'alertdialog',
-  'button',
-  'checkbox',
-  'dialog',
-  'gridcell',
-  'link',
-  'log',
-  'marquee',
-  'menuitem',
-  'menuitemcheckbox',
-  'menuitemradio',
-  'option',
-  'progressbar',
-  'radio',
-  'scrollbar',
-  'searchbox',             // ARIA 1.1
-  'slider',
-  'spinbutton',
-  'status',
-  'switch',                // ARIA 1.1
-  'tab',
-  'tabpanel',
-  'textbox',
-  'timer',
-  'tooltip',
-  'treeitem',
-
-  // COMPOSITE WIDGET
-  'combobox',
-  'grid',
-  'listbox',
-  'menu',
-  'menubar',
-  'radiogroup',
-  'tablist',
-  'tree',
-  'treegrid',
-
-  // DOCUMENT STRUCTURE
-  'article',
-  'cell',                  // ARIA 1.1
-  'columnheader',
-  'definition',
-  'directory',
-  'document',
-  'group',
-  'heading',
-  'img',
-  'list',
-  'listitem',
-  'math',
-  'none',                  // ARIA 1.1
-  'note',
-  'presentation',
-  'region',
-  'row',
-  'rowgroup',
-  'rowheader',
-  'separator',
-  'table',                 // ARIA 1.1
-  'text',                  // ARIA 1.1
-  'toolbar'
-];
-
-/*
-*   getValidRole: Examine each value in space-separated list by attempting
-*   to find its match in the validRoles array. If a match is found, return
-*   it. Otherwise, return null.
-*/
-function getValidRole (spaceSepList) {
-  let arr = spaceSepList.split(' ');
-
-  for (let i = 0; i < arr.length; i++) {
-    let value = arr[i].toLowerCase();
-    let validRole = validRoles.find(role => role === value);
-    if (validRole) return validRole;
-  }
-
-  return null;
-}
-
-/*
-*   getAriaRole: Get the value of the role attribute, if it is present. If
-*   not specified, get the default role of element if it has one. Based on
-*   ARIA in HTML as of 21 October 2015.
-*/
-function getAriaRole (element) {
-  let tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (element.hasAttribute('role')) {
-    return getValidRole(getAttributeValue(element, 'role'));
-  }
-
-  switch (tagName) {
-
-    case 'a':
-      if (element.hasAttribute('href'))
-        return 'link';
-      break;
-
-    case 'area':
-      if (element.hasAttribute('href'))
-        return 'link';
-      break;
-
-    case 'article':     return 'article';
-    case 'aside':       return 'complementary';
-    case 'body':        return 'document';
-    case 'button':      return 'button';
-    case 'datalist':    return 'listbox';
-    case 'details':     return 'group';
-    case 'dialog':      return 'dialog';
-    case 'dl':          return 'list';
-    case 'fieldset':    return 'group';
-
-    case 'footer':
-      if (!isDescendantOf(element, ['article', 'section']))
-        return 'contentinfo';
-      break;
-
-    case 'form':        return 'form';
-
-    case 'h1':          return 'heading';
-    case 'h2':          return 'heading';
-    case 'h3':          return 'heading';
-    case 'h4':          return 'heading';
-    case 'h5':          return 'heading';
-    case 'h6':          return 'heading';
-
-    case 'header':
-      if (!isDescendantOf(element, ['article', 'section']))
-        return 'banner';
-      break;
-
-    case 'hr':          return 'separator';
-
-    case 'img':
-      if (!hasEmptyAltText(element))
-        return 'img';
-      break;
-
-    case 'input':
-      if (type === 'button')    return 'button';
-      if (type === 'checkbox')  return 'checkbox';
-      if (type === 'email')     return (element.hasAttribute('list')) ? 'combobox' : 'textbox';
-      if (type === 'image')     return 'button';
-      if (type === 'number')    return 'spinbutton';
-      if (type === 'password')  return 'textbox';
-      if (type === 'radio')     return 'radio';
-      if (type === 'range')     return 'slider';
-      if (type === 'reset')     return 'button';
-      if (type === 'search')    return (element.hasAttribute('list')) ? 'combobox' : 'textbox';
-      if (type === 'submit')    return 'button';
-      if (type === 'tel')       return (element.hasAttribute('list')) ? 'combobox' : 'textbox';
-      if (type === 'text')      return (element.hasAttribute('list')) ? 'combobox' : 'textbox';
-      if (type === 'url')       return (element.hasAttribute('list')) ? 'combobox' : 'textbox';
-      break;
-
-    case 'li':
-      if (hasParentWithName(element, ['ol', 'ul']))
-        return 'listitem';
-      break;
-
-    case 'link':
-      if (element.hasAttribute('href'))
-        return 'link';
-      break;
-
-    case 'main':      return 'main';
-
-    case 'menu':
-      if (type === 'toolbar')
-        return 'toolbar';
-      break;
-
-    case 'menuitem':
-      if (type === 'command')   return 'menuitem';
-      if (type === 'checkbox')  return 'menuitemcheckbox';
-      if (type === 'radio')     return 'menuitemradio';
-      break;
-
-    case 'meter':       return 'progressbar';
-    case 'nav':         return 'navigation';
-    case 'ol':          return 'list';
-
-    case 'option':
-      if (inListOfOptions(element))
-        return 'option';
-      break;
-
-    case 'output':      return 'status';
-    case 'progress':    return 'progressbar';
-    case 'section':     return 'region';
-    case 'select':      return 'listbox';
-    case 'summary':     return 'button';
-
-    case 'tbody':       return 'rowgroup';
-    case 'tfoot':       return 'rowgroup';
-    case 'thead':       return 'rowgroup';
-
-    case 'textarea':    return 'textbox';
-
-    // TODO: th can have role 'columnheader' or 'rowheader'
-    case 'th':          return 'columnheader';
-
-    case 'ul':          return 'list';
-  }
-
-  return null;
-}
-
-/*
-*   nameFromIncludesContents: Determine whether the ARIA role of element
-*   specifies that its 'name from' includes 'contents'.
-*/
-function nameFromIncludesContents (element) {
-  let elementRole = getAriaRole(element);
-  if (elementRole === null) return false;
-
-  let contentsRoles = [
-    'button',
-    'cell',                // ARIA 1.1
-    'checkbox',
-    'columnheader',
-    'directory',
-    'gridcell',
-    'heading',
-    'link',
-    'listitem',
-    'menuitem',
-    'menuitemcheckbox',
-    'menuitemradio',
-    'option',
-    'radio',
-    'row',
-    'rowgroup',
-    'rowheader',
-    'switch',              // ARIA 1.1
-    'tab',
-    'text',                // ARIA 1.1
-    'tooltip',
-    'treeitem'
-  ];
-
-  let contentsRole = contentsRoles.find(role => role === elementRole);
-  return (typeof contentsRole !== 'undefined');
-}
-
-/*
 *   embedded.js
 *
 *   To calculate the accessible name of a form element from its label, it is
@@ -9069,16 +8761,20 @@ function nameFromIncludesContents (element) {
 *   to an HTML form control that could be embedded within text content.
 */
 function isEmbeddedControl (element) {
-  let embeddedControlRoles = [
+  const embeddedControlRoles = [
     'textbox',
     'combobox',
     'listbox',
     'slider',
     'spinbutton'
   ];
-  let role = getAriaRole(element);
 
-  return (embeddedControlRoles.indexOf(role) !== -1);
+  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
+  const role = element.hasAttribute('role') ?
+               element.getAttribute('role').toLowerCase() :
+               ariaInHTMLInfo.defaultRole;
+
+  return embeddedControlRoles.includes(role);
 }
 
 /*
@@ -9086,7 +8782,10 @@ function isEmbeddedControl (element) {
 *   of HTML to get the corresponding text value of the embedded control.
 */
 function getEmbeddedControlValue (element) {
-  let role = getAriaRole(element);
+  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
+  const role = element.hasAttribute('role') ?
+               element.getAttribute('role').toLowerCase() :
+               ariaInHTMLInfo.defaultRole;
 
   switch (role) {
     case 'textbox':
@@ -9216,22 +8915,19 @@ const debug$o = new DebugLogging('nameFrom', false);
 function getElementContents (element, forElement) {
   let result = '';
 
-  if (isVisible(element)) {
-    if (element.hasChildNodes()) {
-      let children = element.childNodes,
-          arrayOfStrings = [];
+  if (element.hasChildNodes()) {
+    let children = element.childNodes,
+        arrayOfStrings = [];
 
-      for (let i = 0; i < children.length; i++) {
-        let contents = getNodeContents(children[i], forElement);
-        if (contents.length) arrayOfStrings.push(contents);
-      }
-
-      result = (arrayOfStrings.length) ? arrayOfStrings.join(' ') : '';
+    for (let i = 0; i < children.length; i++) {
+      let contents = getNodeContents(children[i], forElement);
+      if (contents.length) arrayOfStrings.push(contents);
     }
 
-    return addCssGeneratedContent(element, result);
+    result = (arrayOfStrings.length) ? arrayOfStrings.join('') : '';
   }
-  return '';
+
+  return addCssGeneratedContent(element, result);
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -9243,7 +8939,7 @@ function nameFromAttribute (element, attribute) {
   let name;
 
   name = getAttributeValue(element, attribute);
-  if (name.length) return { name: name, source: attribute };
+  if (name.length) return { name: normalize(name), source: attribute };
 
   return null;
 }
@@ -9271,7 +8967,7 @@ function nameFromContents (element) {
   let name;
 
   name = getElementContents(element);
-  if (name.length) return { name: name, source: 'contents' };
+  if (name.length) return { name: normalize(name), source: 'contents' };
 
   return null;
 }
@@ -9289,8 +8985,10 @@ function nameFromDefault (name) {
 function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
   if (descendant) {
-    let name = getElementContents(descendant);
-    if (name.length) return { name: name, source: tagName + ' element' };
+    let name = descendant.hasAttribute('aria-label') ?
+               descendant.getAttribute('aria-label') :
+               getElementContents(descendant);
+    if (name.length) return { name: normalize(name), source: tagName + ' element' };
   }
 
   return null;
@@ -9300,15 +8998,16 @@ function nameFromDescendant (element, tagName) {
 *   nameFromLabelElement
 */
 function nameFromLabelElement (doc, element) {
-  let name, label;
-
+  let label, name;
   // label [for=id]
   if (element.id) {
     try {
       label = doc.querySelector('[for="' + element.id + '"]');
       if (label) {
-        name = getElementContents(label, element);
-        if (name.length) return { name: name, source: 'label reference' };
+        name = label.hasAttribute('aria-label') ?
+               label.getAttribute('aria-label') :
+               getElementContents(label, element);
+        if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
       debug$o.log(`[nameFromLabelElement][error]: ${error}`);
@@ -9319,8 +9018,10 @@ function nameFromLabelElement (doc, element) {
   if (typeof element.closest === 'function') {
     label = element.closest('label');
     if (label) {
-      name = getElementContents(label, element);
-      if (name.length) return { name: name, source: 'label encapsulation' };
+      name = label.hasAttribute('aria-label') ?
+             label.getAttribute('aria-label') :
+             getElementContents(label, element);
+      if (name.length) return { name: normalize(name), source: 'label encapsulation' };
     }
   }
 
@@ -9337,13 +9038,14 @@ function nameFromLegendElement (doc, element) {
   if (element) {
     legend = element.querySelector('legend');
     if (legend) {
-      name = getElementContents(legend, element);
-    if (name.length) return { name: name, source: 'legend' };
+      name = legend.hasAttribute('aria-label') ?
+             legend.getAttribute('aria-label') :
+             getElementContents(legend, element);
+    if (name.length) return { name: normalize(name), source: 'legend' };
     }
   }
   return null;
 }
-
 
 /*
 *   nameFromDetailsOrSummary: If element is expanded (has open attribute),
@@ -9365,10 +9067,10 @@ function nameFromDetailsOrSummary (element) {
     name += getContentsOfChildNodes(element, function (elem) {
       return elem.tagName.toLowerCase() !== 'summary';
     });
-    if (name.length) return { name: name, source: 'contents' };
+    if (name.length) return { name: normalize(name), source: 'contents' };
   }
   else {
-    if (name.length) return { name: name, source: 'summary element' };
+    if (name.length) return { name: normalize(name), source: 'summary element' };
   }
 
   return null;
@@ -9377,142 +9079,214 @@ function nameFromDetailsOrSummary (element) {
 // LOW-LEVEL HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
-*   isHidden: Checks to see if the node or any of it's ancestor
-*   are hidden for the purpose of accessible name calculation
+*   @function  isDisplayNone
+*
+*   @desc Returns true if the element or parent element has set the CSS
+*         display property to none or has the hidden attribute,
+*         otherwise false
+*
+*   @param  {Object}  node  - a DOM node
+*
+*   @returns  {Boolean} see @desc
 */
 
-function isHidden (node) {
+function isDisplayNone (node) {
 
   if (!node) {
     return false;
   }
 
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    if ((node.nodeType === Node.TEXT_NODE) &&
-        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+  if (node.nodeType === Node.TEXT_NODE) {
       node = node.parentNode;
+  }
+
+  if (node.nodeType === Node.ELEMENT_NODE) {
+
+    if (node.hasAttribute('hidden')) {
+      return true;
     }
+
+    // aria-hidden attribute with the value "true" is an same as
+    // setting the hidden attribute for name calcuation
+    if (node.hasAttribute('aria-hidden')) {
+      if (node.getAttribute('aria-hidden').toLowerCase()  === 'true') {
+        return true;
+      }
+    }
+
+    const style = window.getComputedStyle(node, null);
+
+    const display = style.getPropertyValue("display");
+
+    if (display) {
+      return display === 'none';
+    }
+  }
+  return false;
+}
+
+/*
+*   @function isVisibilityHidden
+*
+*   @desc Returns true if the node (or it's parrent) has the CSS visibility
+*         property set to "hidden" or "collapse", otherwise false
+*
+*   @param  {Object}   node  -  DOM node
+*
+*   @return  see @desc
+*/
+
+function isVisibilityHidden(node) {
+
+  if (!node) {
     return false;
   }
 
-  if (node.hasAttribute('hidden')) {
-    return true;
+  if (node.nodeType === Node.TEXT_NODE) {
+    node = node.parentNode;
   }
 
-  if (node.hasAttribute('aria-hidden')) {
-    return node.getAttribute('aria-hidden').toLowerCase() === 'true';
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    const style = window.getComputedStyle(node, null);
+
+    const visibility = style.getPropertyValue("visibility");
+    if (visibility) {
+      return (visibility === 'hidden') || (visibility === 'collapse');
+    }
+  }
+  return false;
+}
+
+/*
+*   @function isAriaHiddenFalse
+*
+*   @desc Returns true if the node has the aria-hidden property set to
+*         "false", otherwise false.
+*         NOTE: This function is important in the accessible name
+*               calculation, since content hidden with a CSS technique
+*               can be included in the accessible name calculation when
+*               aria-hidden is set to false for the chrome browser
+*
+*   @param  {Object}   node  -  DOM node
+*
+*   @return  see @desc
+*/
+
+function isAriaHiddenFalse(node) {
+
+  if (!node) {
+    return false;
   }
 
-  const style = window.getComputedStyle(node, null);
-
-  const display = style.getPropertyValue("display");
-  if (display === 'none') { 
-    return true;
+  if (node.nodeType === Node.TEXT_NODE) {
+      node = node.parentNode;
   }
 
-  if (node.parentNode) {
-    return isHidden(node.parentNode);
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    return (node.hasAttribute('aria-hidden') &&
+        (node.getAttribute('aria-hidden').toLowerCase() === 'false'));
   }
 
   return false;
 }
 
 /*
-*   isVisible: Checks to see if the node or any of it's ancestor
-*   are visible for the purpose of accessible name calculation
+*   @function includeContentInName
+*
+*   @desc Checks the CSS display and hidden properties, and
+*         the aria-hidden property to see if the content
+*         should be included in the accessible name
+*        calculation.  Returns true if it should be
+*         included, otherwise false
+*
+*   @param  {Object}   node  -  DOM node
+*
+*   @return  see @desc
 */
 
-function isVisible (node) {
-  return !isHidden(node);
+function includeContentInName(node) {
+  // NOTE: Chrome is the only major browser using aria-hidden=false in
+  //       accessible name computation
+  const flag = isAriaHiddenFalse(node) && false;
+  return flag || (!isVisibilityHidden(node) && !isDisplayNone(node));
 }
 
 /*
-*   isHiddenCSSVisibilityProp: Checks to see if the node or any of it's ancestor
-*   are visible based on CSS visibility property for the purpose of accessible name calculation
+*   @function includeContentInName
+*
+*   @desc Checks the CSS display and hidden properties, and
+*         the aria-hidden property to see if the content
+*         should be included in the accessible name
+*        calculation.  Returns true if it should be
+*         included, otherwise false
+*
+*   @param  {Object}   node     -  DOM node
+*   @param  {Object}   forElem  -  DOM node the name is being computed for
+*
+*   @return  see @desc
 */
 
-function isHiddenCSSVisibilityProp(node) {
-
-  if (!node) {
-    return false;
-  }
-
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    if ((node.nodeType === Node.TEXT_NODE) &&
-        (node.parentNode.nodeType !== Node.ELEMENT_NODE)) {
-      node = node.parentNode;
-    }
-    return false;
-  }
-  const style = window.getComputedStyle(node, null);
-
-  const visibility = style.getPropertyValue("visibility");
-  if (visibility) {
-    return (visibility === 'hidden') || (visibility === 'collapse');
-  }
-
-  if (node.parentNode) {
-    return isHidden(node.parentNode);
-  }
-
-  return false;
-}
-
-/*
-*   getNodeContents: Recursively process element and text nodes by aggregating
-*   their text values for an ARIA text equivalent calculation.
-*   1. This includes special handling of elements with 'alt' text and embedded
-*      controls.
-*   2. The forElem parameter is needed for label processing to avoid inclusion
-*      of an embedded control's value when the label is for the control itself.
-*/
-function getNodeContents (node, forElem) {
+function getNodeContents (node, forElem, alwaysInclude=false) {
   let contents = '';
   let nc;
   let arr = [];
 
-  if (isHidden(node) || 
-      (node === forElem)) {
+  // Cannot recursively use the element
+  // in computing it's accessible name
+  if (node === forElem) {
     return '';
-  } 
+  }
 
   switch (node.nodeType) {
-    case Node.ELEMENT_NODE:
-      if (node instanceof HTMLSlotElement) {
-        // if no slotted elements, check for default slotted content
-        const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
-        assignedNodes.forEach( assignedNode => {
-          nc = getNodeContents(assignedNode, forElem);
-          if (nc.length) arr.push(nc);
-        });
-        contents = (arr.length) ? arr.join(' ') : '';
-      } else {
-        if (couldHaveAltText(node)) {
-          contents = getAttributeValue(node, 'alt');
+
+      case Node.ELEMENT_NODE:
+      // If aria-label is present, node recursion stops and
+      // aria-label value is returned
+      if (node.hasAttribute('aria-label')) {
+        if (includeContentInName(node) || alwaysInclude ) {
+          contents = node.getAttribute('aria-label');
         }
-        else {
-          if (isEmbeddedControl(node)) {
-            contents = getEmbeddedControlValue(node);
+      }
+      else {
+        if (node instanceof HTMLSlotElement) {
+          // if no slotted elements, check for default slotted content
+          const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
+          assignedNodes.forEach( assignedNode => {
+            nc = getNodeContents(assignedNode, forElem);
+            if (nc.length) arr.push(nc);
+          });
+          contents = (arr.length) ? arr.join('') : '';
+        } else {
+          if (couldHaveAltText(node) && (includeContentInName(node) || alwaysInclude)) {
+            contents = getAttributeValue(node, 'alt');
           }
           else {
-            if (node.hasChildNodes()) {
-              let children = Array.from(node.childNodes);
-              children.forEach( child => {
-                nc = getNodeContents(child, forElem);
-                if (nc.length) arr.push(nc);
-              });
-              contents = (arr.length) ? arr.join(' ') : '';
+            if (isEmbeddedControl(node) && (includeContentInName(node) || alwaysInclude)) {
+              contents = getEmbeddedControlValue(node);
+            }
+            else {
+              if (node.hasChildNodes()) {
+                let children = Array.from(node.childNodes);
+                children.forEach( child => {
+                  nc = getNodeContents(child, forElem);
+                  if (nc.length) arr.push(nc);
+                });
+                contents = (arr.length) ? arr.join('') : '';
+              }
             }
           }
+          // For all branches of the ELEMENT_NODE case...
         }
-        // For all branches of the ELEMENT_NODE case...
       }
       contents = addCssGeneratedContent(node, contents);
+      if (contents.length) {
+        contents = ' ' + contents;
+      }
       break;
 
     case Node.TEXT_NODE:
-      if (!isHiddenCSSVisibilityProp(node.parentNode)) {
-        contents = normalize(node.textContent);
+      if (includeContentInName(node) || alwaysInclude) {
+        contents = normalizeLeadingAndTrailingSpace(node.textContent);
       }
       break;
   }
@@ -9552,8 +9326,8 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
-  if (prefix !== 'none') result = prefix + result;
-  if (suffix !== 'none') result = result + suffix;
+  if (prefix !== 'none') result = prefix.replaceAll('"', '') + result;
+  if (suffix !== 'none') result = result + suffix.replaceAll('"', '');
 
   return result;
 }
@@ -9574,7 +9348,7 @@ function getContentsOfChildNodes (element, predicate) {
         }
         break;
       case (Node.TEXT_NODE):
-        content = normalize(node.textContent);
+        content = normalizeLeadingAndTrailingSpace(node.textContent);
         if (content.length) arr.push(content);
         break;
     }
@@ -9607,12 +9381,12 @@ const noAccName = {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (doc, element, recFlag=false) {
+function getAccessibleName (ariaInfo, doc, element, recFlag=false) {
   let accName = null;
 
-  if (!recFlag) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
+  if (!recFlag) accName = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(doc, element, recFlag);
+  if (accName === null) accName = nameFromNativeSemantics(ariaInfo, doc, element, recFlag);
   if (accName === null) accName = noAccName;
   return accName;
 }
@@ -9625,13 +9399,10 @@ function getAccessibleName (doc, element, recFlag=false) {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleDesc (doc, element, recFlag) {
-  let accDesc = null;
-
-  if (!recFlag) accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+function getAccessibleDesc (ariaInfo, doc, element) {
+  let accDesc = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-describedby');
   if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
-
   return accDesc;
 }
 
@@ -9643,10 +9414,10 @@ function getAccessibleDesc (doc, element, recFlag) {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getErrMessage (doc, element) {
+function getErrMessage (ariaInfo, doc, element) {
   let errMessage = null;
 
-  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
+  errMessage = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
@@ -9660,15 +9431,9 @@ function getErrMessage (doc, element) {
 *   indicating that we are in a recursive aria-labelledby calculation, the
 *   nameFromContents method is used.
 */
-function nameFromNativeSemantics (doc, element, recFlag) {
+function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
   let tagName = element.tagName.toLowerCase(),
-      ariaRole = getAriaRole(element),
       accName = null;
-
-  // TODO: Verify that this applies to all elements
-  if (ariaRole && (ariaRole === 'presentation' || ariaRole === 'none')) {
-    return null;
-  }
 
   switch (tagName) {
     // FORM ELEMENTS: INPUT
@@ -9793,7 +9558,7 @@ function nameFromNativeSemantics (doc, element, recFlag) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (nameFromIncludesContents(element) || recFlag)
+      if (ariaInfo.nameFromContent || recFlag)
         accName = nameFromContents(element);
       break;
   }
@@ -9814,9 +9579,9 @@ function nameFromNativeSemantics (doc, element, recFlag) {
 *   with name property set to a string that is a space-separated concatena-
 *   tion of those results if any, otherwise return null.
 */
-function nameFromAttributeIdRefs (doc, element, attribute) {
+function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
-  let idRefs, i, refElement, accName, arr = [];
+  let idRefs, i, refElement, name, names, arr = [];
 
   if (value.length) {
     idRefs = value.split(' ');
@@ -9824,14 +9589,31 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
     for (i = 0; i < idRefs.length; i++) {
       refElement = doc.getElementById(idRefs[i]);
       if (refElement) {
-        accName = getAccessibleName(doc, refElement, true);
-        if (accName && accName.name.length) arr.push(accName.name);
+        if (refElement.hasAttribute('aria-label')) {
+          name = refElement.getAttribute('aria-label');
+        }
+        else {
+          if (refElement.hasChildNodes()) {
+            names = [];
+            let children = Array.from(refElement.childNodes);
+            children.forEach( child => {
+              const nc = getNodeContents(child, refElement, true);
+              if (nc.length) names.push(nc);
+            });
+            name = (names.length) ? names.join('') : '';
+          }
+          else {
+            name = '';
+          }
+        }
+        name = addCssGeneratedContent(refElement, name);
+        if (name.length) arr.push(name);
       }
     }
   }
 
   if (arr.length)
-    return { name: arr.join(' '), source: attribute };
+    return { name: normalize(arr.join(' ')), source: attribute };
 
   return null;
 }
@@ -9840,6 +9622,7 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 
 /* Constants */
 const debug$n = new DebugLogging('DOMElement', false);
+debug$n.flag = true;
 
 const elementsWithContent = [
   'area',
@@ -9900,9 +9683,20 @@ class DOMElement {
     this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(doc, elementNode);
-    this.accDescription = getAccessibleDesc(doc, elementNode);
-    this.errMessage     = getErrMessage(doc, elementNode);
+    this.accName        = getAccessibleName(this.ariaInfo, doc, elementNode);
+    if (elementNode.id && elementNode.hasAttribute('data-label')) {
+      const label = elementNode.getAttribute('data-label');
+      if (this.accName.name !== label) {
+        if (this.tagName === 'input') {
+          debug$n.log(`[${this.tagName}][type=${elementNode.type}][${elementNode.id}]: ${this.accName.name} (${this.accName.source})`);
+        }
+        else {
+          debug$n.log(`[${this.tagName}][${elementNode.id}]: ${this.accName.name} (${this.accName.source})`);
+        }
+      }
+    }
+    this.accDescription = getAccessibleDesc(this.ariaInfo, doc, elementNode);
+    this.errMessage     = getErrMessage(this.ariaInfo, doc, elementNode);
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
@@ -11285,6 +11079,7 @@ class DOMCache {
               const assignedNodes = node.assignedNodes().length ?
                                     node.assignedNodes() :
                                     node.assignedNodes({ flatten: true });
+              // 2022-08-30 review this code for improvements and qaulity                      
               for (let i = 0; i < assignedNodes.length; i += 1) {
                 const assignedNode = assignedNodes[i];
                 switch (assignedNode.nodeType) {
@@ -11828,7 +11623,8 @@ const focusRules$1 = [
 /* controlRules.js */
 
 /* Constants */
-const debug$e = new DebugLogging('Control Rules', true);
+const debug$e = new DebugLogging('Control Rules', false);
+debug$e.flag = false;
 
 
 /*
@@ -11941,7 +11737,6 @@ const controlRules$1 = [
           if (gce) {
             const gde = gce.domElement;
             if (gde.tagName === 'fieldset') {
-              debug$e.log(`[radio][${de.node.getAttribute('name')}]: ${de.accName.name} (${gde.accName.name})`);
               if (gde.accName.name) {
                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [gde.accName.name]);
               }

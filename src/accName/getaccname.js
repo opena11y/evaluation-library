@@ -7,10 +7,14 @@
 */
 
 import {
-  getAttributeValue
+  getAttributeValue,
+  normalize
 } from '../utils';
 
 import {
+  addCssGeneratedContent,
+  getElementContents,
+  getNodeContents,
   isLabelableElement,
   nameFromAttribute,
   nameFromAltAttribute,
@@ -21,11 +25,6 @@ import {
   nameFromLegendElement,
   nameFromDetailsOrSummary
 } from './namefrom';
-
-import {
-  getAriaRole,
-  nameFromIncludesContents
-} from './roles';
 
 export {
   getAccessibleName,
@@ -50,12 +49,12 @@ const noAccName = {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (doc, element, recFlag=false) {
+function getAccessibleName (ariaInfo, doc, element, recFlag=false) {
   let accName = null;
 
-  if (!recFlag) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
+  if (!recFlag) accName = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(doc, element, recFlag);
+  if (accName === null) accName = nameFromNativeSemantics(ariaInfo, doc, element, recFlag);
   if (accName === null) accName = noAccName;
   return accName;
 }
@@ -68,13 +67,10 @@ function getAccessibleName (doc, element, recFlag=false) {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleDesc (doc, element, recFlag) {
-  let accDesc = null;
-
-  if (!recFlag) accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+function getAccessibleDesc (ariaInfo, doc, element) {
+  let accDesc = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-describedby');
   if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
-
   return accDesc;
 }
 
@@ -86,10 +82,10 @@ function getAccessibleDesc (doc, element, recFlag) {
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getErrMessage (doc, element) {
+function getErrMessage (ariaInfo, doc, element) {
   let errMessage = null;
 
-  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
+  errMessage = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
@@ -116,15 +112,9 @@ function getGroupingLabels (element) {
 *   indicating that we are in a recursive aria-labelledby calculation, the
 *   nameFromContents method is used.
 */
-function nameFromNativeSemantics (doc, element, recFlag) {
+function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
   let tagName = element.tagName.toLowerCase(),
-      ariaRole = getAriaRole(element),
       accName = null;
-
-  // TODO: Verify that this applies to all elements
-  if (ariaRole && (ariaRole === 'presentation' || ariaRole === 'none')) {
-    return null;
-  }
 
   switch (tagName) {
     // FORM ELEMENTS: INPUT
@@ -249,7 +239,7 @@ function nameFromNativeSemantics (doc, element, recFlag) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (nameFromIncludesContents(element) || recFlag)
+      if (ariaInfo.nameFromContent || recFlag)
         accName = nameFromContents(element);
       break;
   }
@@ -270,9 +260,9 @@ function nameFromNativeSemantics (doc, element, recFlag) {
 *   with name property set to a string that is a space-separated concatena-
 *   tion of those results if any, otherwise return null.
 */
-function nameFromAttributeIdRefs (doc, element, attribute) {
+function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
-  let idRefs, i, refElement, accName, arr = [];
+  let idRefs, i, refElement, name, names, arr = [];
 
   if (value.length) {
     idRefs = value.split(' ');
@@ -280,14 +270,31 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
     for (i = 0; i < idRefs.length; i++) {
       refElement = doc.getElementById(idRefs[i]);
       if (refElement) {
-        accName = getAccessibleName(doc, refElement, true);
-        if (accName && accName.name.length) arr.push(accName.name);
+        if (refElement.hasAttribute('aria-label')) {
+          name = refElement.getAttribute('aria-label');
+        }
+        else {
+          if (refElement.hasChildNodes()) {
+            names = [];
+            let children = Array.from(refElement.childNodes);
+            children.forEach( child => {
+              const nc = getNodeContents(child, refElement, true);
+              if (nc.length) names.push(nc);
+            });
+            name = (names.length) ? names.join('') : '';
+          }
+          else {
+            name = '';
+          }
+        }
+        name = addCssGeneratedContent(refElement, name);
+        if (name.length) arr.push(name);
       }
     }
   }
 
   if (arr.length)
-    return { name: arr.join(' '), source: attribute };
+    return { name: normalize(arr.join(' ')), source: attribute };
 
   return null;
 }
