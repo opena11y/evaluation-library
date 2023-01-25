@@ -12,56 +12,51 @@
 *   based on its ARIA role.
 */
 
-import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
 import { getAttributeValue, normalize } from '../utils';
 export { isEmbeddedControl, getEmbeddedControlValue };
 
+const rangeRoles = ['slider', 'spinbutton'];
+
 /*
-*   isEmbeddedControl: Determine whether element has a role that corresponds
-*   to an HTML form control that could be embedded within text content.
+*   @function isEmbeddedControl
+*
+*   @desc  Determine whether element is an element or has a role
+*          that could be embedded within text content of a label.
+*
+*   @parm {Object}  element  - DOM node of element
+*
+*   @returns {Boolean}  True if element has content, otherwise false
 */
 function isEmbeddedControl (element) {
-  const embeddedControlRoles = [
-    'textbox',
-    'combobox',
-    'listbox',
-    'slider',
-    'spinbutton'
-  ];
-
-  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
-  const role = element.hasAttribute('role') ?
-               element.getAttribute('role').toLowerCase() :
-               ariaInHTMLInfo.defaultRole;
-
-  return embeddedControlRoles.includes(role);
+  return isInputWithValue(element) ||
+         isSelectElement(element) ||
+         rangeRoles.includes(getRole(element));
 }
 
 /*
-*   getEmbeddedControlValue: Based on the role of element, use native semantics
-*   of HTML to get the corresponding text value of the embedded control.
+*   @function getEmbeddedControlValue
+*
+*   @desc Based on the tag name or the role of element,
+*         value of the embedded control.
+*
+*   @parm {Object}  element  - DOM node of input element
+*
+*   @returns {String}  Content of the value attribute if defined,
+*                      else empty string
 */
 function getEmbeddedControlValue (element) {
-  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
-  const role = element.hasAttribute('role') ?
-               element.getAttribute('role').toLowerCase() :
-               ariaInHTMLInfo.defaultRole;
-
-  switch (role) {
-    case 'textbox':
-      return getTextboxValue(element);
-
-    case 'combobox':
-      return getComboboxValue(element);
-
-    case 'listbox':
-      return getListboxValue(element);
-
-    case 'slider':
-      return getSliderValue(element);
-
-    case 'spinbutton':
-      return getSpinbuttonValue(element);
+  if (isInputWithValue(element)) {
+    return getAttributeValue(element, 'value') + ' ';
+  }
+  else {
+    if (isSelectElement(element)) {
+      return getSelectValue(element) + ' ';
+    }
+    else {
+      if (rangeRoles.includes(getRole(element))) {
+        return getRangeValue(element) + ' ';
+      }
+    }
   }
 
   return '';
@@ -70,15 +65,14 @@ function getEmbeddedControlValue (element) {
 // LOW-LEVEL FUNCTIONS
 
 /*
-*   getInputValue: Get current value of 'input' or 'textarea' element.
-*/
-function getInputValue (element) {
-  return normalize(element.value);
-}
-
-/*
-*   getRangeValue: Get current value of control with role 'spinbutton'
-*   or 'slider' (i.e., subclass of abstract 'range' role).
+*   @function getRangeValue
+*
+*   @desc Get current value of element with role 'slider'
+*         or 'spinbutton' (i.e., subclass of abstract 'range' role).
+*
+*   @parm {Object}  element  - DOM node of select element
+*
+*   @returns {String}  @desc
 */
 function getRangeValue (element) {
   let value;
@@ -89,62 +83,21 @@ function getRangeValue (element) {
   value = getAttributeValue(element, 'aria-valuenow');
   if (value.length) return value;
 
-  return getInputValue(element);
-}
-
-// HELPER FUNCTIONS FOR SPECIFIC ROLES
-
-function getTextboxValue (element) {
-  let inputTypes = ['email', 'password', 'search', 'tel', 'text', 'url'],
-      tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && inputTypes.indexOf(type) !== -1) {
-    return getInputValue(element);
-  }
-
-  if (tagName === 'textarea') {
-    return getInputValue(element);
-  }
-
   return '';
 }
 
-function getComboboxValue (element) {
-  let inputTypes = ['email', 'search', 'tel', 'text', 'url'],
-      tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && inputTypes.indexOf(type) !== -1) {
-    return getInputValue(element);
-  }
-
-  return '';
-}
-
-function getSliderValue (element) {
-  let tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && type === 'range') {
-    return getRangeValue(element);
-  }
-
-  return '';
-}
-
-function getSpinbuttonValue (element) {
-  let tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && type === 'number') {
-    return getRangeValue(element);
-  }
-
-  return '';
-}
-
-function getListboxValue (element) {
+/*
+*   @function getSelectValue
+*
+*   @desc Returns the content of the selected option elements
+*         of a select element, if no selected options returns
+*         empty string
+*
+*   @parm {Object}  element  - DOM node of select element
+*
+*   @returns {String}  @desc
+*/
+function getSelectValue (element) {
   let tagName = element.tagName.toLowerCase();
 
   if (tagName === 'select') {
@@ -161,3 +114,51 @@ function getListboxValue (element) {
 
   return '';
 }
+
+/*   @function  getRole
+*
+*    @desc  If defined return attribbute role
+*
+*    @parm {Object}  element  - DOM node of element
+*
+*    @returns {String}  see @desc
+*/
+function getRole (element) {
+  return element.hasAttribute('role') ? element.getAttribute('role').toLowerCase() : '';
+}
+
+/*   @function  isInputWithValue
+*
+*    @desc  Returns true if an input element can be used in accessible
+*           name calculation, (e.g. not all types can be included)
+*
+*    @parm {Object}  element  - DOM node of element
+*
+*    @returns {Boolean}  see @desc
+*/
+function isInputWithValue (element) {
+  // Included types are based on testing with Chrome browser
+  const includeTypes = ['button', 'email', 'number', 'password', 'range', 'tel', 'text', 'url'];
+  const tagName   = element.tagName.toLowerCase();
+  const typeValue = element.hasAttribute('type') ?
+                    element.getAttribute('type').toLowerCase() :
+                    'text';
+
+  return (tagName === 'input') &&
+        includeTypes.includes(typeValue);
+}
+
+/*   @function  isSelectElement
+*
+*    @desc  Returns true if a select element, otherwise false
+*
+*    @parm {Object}  element  - DOM node of element
+*
+*    @returns {Boolean}  see @desc
+*/
+function isSelectElement (element) {
+  const tagName = element.tagName.toLowerCase();
+  return (tagName === 'select');
+}
+
+

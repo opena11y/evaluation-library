@@ -8754,52 +8754,48 @@ function isCellInLayoutTable  (node) {
 *   based on its ARIA role.
 */
 
+const rangeRoles = ['slider', 'spinbutton'];
+
 /*
-*   isEmbeddedControl: Determine whether element has a role that corresponds
-*   to an HTML form control that could be embedded within text content.
+*   @function isEmbeddedControl
+*
+*   @desc  Determine whether element is an element or has a role
+*          that could be embedded within text content of a label.
+*
+*   @parm {Object}  element  - DOM node of element
+*
+*   @returns {Boolean}  True if element has content, otherwise false
 */
 function isEmbeddedControl (element) {
-  const embeddedControlRoles = [
-    'textbox',
-    'combobox',
-    'listbox',
-    'slider',
-    'spinbutton'
-  ];
-
-  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
-  const role = element.hasAttribute('role') ?
-               element.getAttribute('role').toLowerCase() :
-               ariaInHTMLInfo.defaultRole;
-
-  return embeddedControlRoles.includes(role);
+  return isInputWithValue(element) ||
+         isSelectElement(element) ||
+         rangeRoles.includes(getRole(element));
 }
 
 /*
-*   getEmbeddedControlValue: Based on the role of element, use native semantics
-*   of HTML to get the corresponding text value of the embedded control.
+*   @function getEmbeddedControlValue
+*
+*   @desc Based on the tag name or the role of element,
+*         value of the embedded control.
+*
+*   @parm {Object}  element  - DOM node of input element
+*
+*   @returns {String}  Content of the value attribute if defined,
+*                      else empty string
 */
 function getEmbeddedControlValue (element) {
-  const ariaInHTMLInfo  = getAriaInHTMLInfo(element);
-  const role = element.hasAttribute('role') ?
-               element.getAttribute('role').toLowerCase() :
-               ariaInHTMLInfo.defaultRole;
-
-  switch (role) {
-    case 'textbox':
-      return getTextboxValue(element);
-
-    case 'combobox':
-      return getComboboxValue(element);
-
-    case 'listbox':
-      return getListboxValue(element);
-
-    case 'slider':
-      return getSliderValue(element);
-
-    case 'spinbutton':
-      return getSpinbuttonValue(element);
+  if (isInputWithValue(element)) {
+    return getAttributeValue(element, 'value') + ' ';
+  }
+  else {
+    if (isSelectElement(element)) {
+      return getSelectValue(element) + ' ';
+    }
+    else {
+      if (rangeRoles.includes(getRole(element))) {
+        return getRangeValue(element) + ' ';
+      }
+    }
   }
 
   return '';
@@ -8808,15 +8804,14 @@ function getEmbeddedControlValue (element) {
 // LOW-LEVEL FUNCTIONS
 
 /*
-*   getInputValue: Get current value of 'input' or 'textarea' element.
-*/
-function getInputValue (element) {
-  return normalize(element.value);
-}
-
-/*
-*   getRangeValue: Get current value of control with role 'spinbutton'
-*   or 'slider' (i.e., subclass of abstract 'range' role).
+*   @function getRangeValue
+*
+*   @desc Get current value of element with role 'slider'
+*         or 'spinbutton' (i.e., subclass of abstract 'range' role).
+*
+*   @parm {Object}  element  - DOM node of select element
+*
+*   @returns {String}  @desc
 */
 function getRangeValue (element) {
   let value;
@@ -8827,62 +8822,21 @@ function getRangeValue (element) {
   value = getAttributeValue(element, 'aria-valuenow');
   if (value.length) return value;
 
-  return getInputValue(element);
-}
-
-// HELPER FUNCTIONS FOR SPECIFIC ROLES
-
-function getTextboxValue (element) {
-  let inputTypes = ['email', 'password', 'search', 'tel', 'text', 'url'],
-      tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && inputTypes.indexOf(type) !== -1) {
-    return getInputValue(element);
-  }
-
-  if (tagName === 'textarea') {
-    return getInputValue(element);
-  }
-
   return '';
 }
 
-function getComboboxValue (element) {
-  let inputTypes = ['email', 'search', 'tel', 'text', 'url'],
-      tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && inputTypes.indexOf(type) !== -1) {
-    return getInputValue(element);
-  }
-
-  return '';
-}
-
-function getSliderValue (element) {
-  let tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && type === 'range') {
-    return getRangeValue(element);
-  }
-
-  return '';
-}
-
-function getSpinbuttonValue (element) {
-  let tagName = element.tagName.toLowerCase(),
-      type    = element.type;
-
-  if (tagName === 'input' && type === 'number') {
-    return getRangeValue(element);
-  }
-
-  return '';
-}
-
-function getListboxValue (element) {
+/*
+*   @function getSelectValue
+*
+*   @desc Returns the content of the selected option elements
+*         of a select element, if no selected options returns
+*         empty string
+*
+*   @parm {Object}  element  - DOM node of select element
+*
+*   @returns {String}  @desc
+*/
+function getSelectValue (element) {
   let tagName = element.tagName.toLowerCase();
 
   if (tagName === 'select') {
@@ -8900,15 +8854,68 @@ function getListboxValue (element) {
   return '';
 }
 
+/*   @function  getRole
+*
+*    @desc  If defined return attribbute role
+*
+*    @parm {Object}  element  - DOM node of element
+*
+*    @returns {String}  see @desc
+*/
+function getRole (element) {
+  return element.hasAttribute('role') ? element.getAttribute('role').toLowerCase() : '';
+}
+
+/*   @function  isInputWithValue
+*
+*    @desc  Returns true if an input element can be used in accessible
+*           name calculation, (e.g. not all types can be included)
+*
+*    @parm {Object}  element  - DOM node of element
+*
+*    @returns {Boolean}  see @desc
+*/
+function isInputWithValue (element) {
+  // Included types are based on testing with Chrome browser
+  const includeTypes = ['button', 'email', 'number', 'password', 'range', 'tel', 'text', 'url'];
+  const tagName   = element.tagName.toLowerCase();
+  const typeValue = element.hasAttribute('type') ?
+                    element.getAttribute('type').toLowerCase() :
+                    'text';
+
+  return (tagName === 'input') &&
+        includeTypes.includes(typeValue);
+}
+
+/*   @function  isSelectElement
+*
+*    @desc  Returns true if a select element, otherwise false
+*
+*    @parm {Object}  element  - DOM node of element
+*
+*    @returns {Boolean}  see @desc
+*/
+function isSelectElement (element) {
+  const tagName = element.tagName.toLowerCase();
+  return (tagName === 'select');
+}
+
 /*
 *   namefrom.js
 */
 const debug$o = new DebugLogging('nameFrom', false);
 
 /*
-*   getElementContents: Construct the ARIA text alternative for element by
-*   processing its element and text node descendants and then adding any CSS-
-*   generated content if present.
+*   @function getElementContents
+*
+*   @desc  Construct the ARIA text alternative for element by
+*          processing its element and text node descendants and then adding any CSS-
+*          generated content if present.
+*
+*   @parm {Object}  element     - DOM node of element
+*   @parm {Object}  forElement  - DOM node of element being labelled
+*
+*   @returns {String}  @desc
 */
 function getElementContents (element, forElement) {
   let result = '';
@@ -8931,7 +8938,14 @@ function getElementContents (element, forElement) {
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
 
 /*
-*   nameFromAttribute
+*   @function nameFromAttribute
+*
+*   @desc
+*
+*   @parm {Object}  element    - DOM node of element
+*   @parm {String}  attribute  - name of attribute (e.g. 'alt', 'value')
+*
+*   @returns {Object}  @desc
 */
 function nameFromAttribute (element, attribute) {
   let name;
@@ -8943,7 +8957,13 @@ function nameFromAttribute (element, attribute) {
 }
 
 /*
-*   nameFromAltAttribute
+*   @function  nameFromAltAttribute
+*
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromAltAttribute (element) {
   let name = element.getAttribute('alt');
@@ -8959,7 +8979,12 @@ function nameFromAltAttribute (element) {
 }
 
 /*
-*   nameFromContents
+*   @function nameFromContents
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromContents (element) {
   let name;
@@ -8971,14 +8996,24 @@ function nameFromContents (element) {
 }
 
 /*
-*   nameFromDefault
+*   @function nameFromDefault
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromDefault (name) {
   return name.length ? { name: name, source: 'default' } : null;
 }
 
 /*
-*   nameFromDescendant
+*   @function nameFromDescendant
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
@@ -8993,7 +9028,13 @@ function nameFromDescendant (element, tagName) {
 }
 
 /*
-*   nameFromLabelElement
+*   @function nameFromLabelElement
+*   @desc
+*
+*   @parm {Object}  doc     - Parent document of the element
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromLabelElement (doc, element) {
   let label, name;
@@ -9027,7 +9068,14 @@ function nameFromLabelElement (doc, element) {
 }
 
 /*
-*   nameFromLegendElement
+*   @function nameFromLegendElement
+*
+*   @desc
+*
+*   @parm {Object}  doc     - Parent document of the element
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromLegendElement (doc, element) {
   let name, legend;
@@ -9046,11 +9094,19 @@ function nameFromLegendElement (doc, element) {
 }
 
 /*
-*   nameFromDetailsOrSummary: If element is expanded (has open attribute),
-*   return the contents of the summary element followed by the text contents
-*   of element and all of its non-summary child elements. Otherwise, return
-*   only the contents of the first summary element descendant.
+*   @function nameFromDetailsOrSummary
+*
+*   @desc If element is expanded (has open attribute),
+*         return the contents of the summary element followed
+*         by the text contents of element and all of its non-summary
+*         child elements. Otherwise, return only the contents of the
+*         first summary element descendant.
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
+
 function nameFromDetailsOrSummary (element) {
   let name, summary;
 
@@ -9370,66 +9426,86 @@ const noAccName = {
 };
 
 /*
-*   getAccessibleName: Use the ARIA Roles Model specification for accessible
-*   name calculation based on its precedence order:
-*   (1) Use aria-labelledby, unless a traversal is already underway;
-*   (2) Use aria-label attribute value;
-*   (3) Use whatever method is specified by the native semantics of the
-*   element, which includes, as last resort, use of the title attribute.
+*   @function getAccessibleName
+*
+*   @desc Use the ARIA Roles Model specification for accessible
+*         name calculation based on its precedence order:
+*         (1) Use aria-labelledby, unless a traversal is already underway;
+*         (2) Use aria-label attribute value;
+*         (3) Use whatever method is specified by the native semantics of the
+*             element, which includes, as last resort, use of the title attribute.
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute name
+*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (ariaInfo, doc, element, recFlag=false) {
-  let accName = null;
-
-  if (!recFlag) accName = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-labelledby');
+function getAccessibleName (doc, element, nameFromContent=false) {
+  let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(ariaInfo, doc, element, recFlag);
+  if (accName === null) accName = nameFromNativeSemantics(doc, element, nameFromContent);
   if (accName === null) accName = noAccName;
   return accName;
 }
 
 /*
-*   getAccessibleDesc: Use the ARIA Roles Model specification for accessible
-*   description calculation based on its precedence order:
-*   (1) Use aria-describedby, unless a traversal is already underway;
-*   (2) As last resort, use the title attribute.
+*   @function getAccessibleDesc
+*
+*   @desc Use the ARIA Roles Model specification for accessible
+*         description calculation based on its precedence order:
+*         (1) Use aria-describedby, unless a traversal is already underway;
+*         (2) As last resort, use the title attribute, if not used as accessible name.
+*
+*   @desc (Object)  doc         -  Parent document of element
+*   @desc (Object)  element     -  DOM node of element to compute description
+*   @desc (Boolean) allowTitle  -  Allow title as accessible description
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleDesc (ariaInfo, doc, element) {
-  let accDesc = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-describedby');
-  if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
+function getAccessibleDesc (doc, element, allowTitle=true) {
+  let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+  if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
   return accDesc;
 }
 
 
 /*
-*   getErrMessage: Use the ARIA Roles Model specification for accessible
-*   description calculation based on its precedence order:
-*   (1) Use aria-errormessage, unless a traversal is already underway;
+*   @function getErrMessage
+*
+*   @desc Use the ARIA Roles Model specification for accessible
+*         error description uses aria-errormessage attribute
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute error message
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getErrMessage (ariaInfo, doc, element) {
+function getErrMessage (doc, element) {
   let errMessage = null;
 
-  errMessage = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-errormessage');
+  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
 }
 
 /*
-*   nameFromNativeSemantics: Use method appropriate to the native semantics
-*   of element to find accessible name. Includes methods for all interactive
-*   elements. For non-interactive elements, if the element's ARIA role allows
-*   its acc. name to be derived from its text contents, or if recFlag is set,
-*   indicating that we are in a recursive aria-labelledby calculation, the
-*   nameFromContents method is used.
+*   @function nameFromNativeSemantics
+*
+*   @desc Use method appropriate to the native semantics
+*         of element to find accessible name. Includes methods for all interactive
+*         elements. For non-interactive elements, if the element's ARIA role allows
+*         its acc. name to be derived from its text contents
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute name
+*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
+function nameFromNativeSemantics (doc, element, nameFromContent) {
   let tagName = element.tagName.toLowerCase(),
       accName = null;
 
@@ -9439,9 +9515,7 @@ function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
       switch (element.type) {
         // HIDDEN
         case 'hidden':
-          if (recFlag) {
-            accName = nameFromLabelElement(doc, element);
-          }
+            accName = '';
           break;
 
         // TEXT FIELDS
@@ -9556,7 +9630,7 @@ function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (ariaInfo.nameFromContent || recFlag)
+      if (nameFromContent)
         accName = nameFromContents(element);
       break;
   }
@@ -9570,14 +9644,21 @@ function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
 // HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
-*   nameFromAttributeIdRefs: Get the value of attrName on element (a space-
-*   separated list of IDREFs), visit each referenced element in the order it
-*   appears in the list and obtain its accessible name (skipping recursive
-*   aria-labelledby or aria-describedby calculations), and return an object
-*   with name property set to a string that is a space-separated concatena-
-*   tion of those results if any, otherwise return null.
+*   @function nameFromAttributeIdRefs
+*
+*   @desc Get the value of attrName on element (a space-
+*         separated list of IDREFs), visit each referenced element in the order it
+*         appears in the list and obtain its accessible name, and return an object
+*         with name property set to a string that is a space-separated concatenation
+*         of those results if any, otherwise return null.
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute name
+*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
+function nameFromAttributeIdRefs (doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, name, names, arr = [];
 
@@ -9595,6 +9676,8 @@ function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
             names = [];
             let children = Array.from(refElement.childNodes);
             children.forEach( child => {
+              // Need to ignore CSS display: none and visibility: hidden for referenced
+              // elements, but not their child elements
               const nc = getNodeContents(child, refElement, true);
               if (nc.length) names.push(nc);
             });
@@ -9681,20 +9764,9 @@ class DOMElement {
     this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(this.ariaInfo, doc, elementNode);
-    if (elementNode.id && elementNode.hasAttribute('data-label')) {
-      const label = elementNode.getAttribute('data-label');
-      if (this.accName.name !== label) {
-        if (this.tagName === 'input') {
-          debug$n.log(`[${this.tagName}][type=${elementNode.type}][${elementNode.id}]: ${this.accName.name} (${this.accName.source})`);
-        }
-        else {
-          debug$n.log(`[${this.tagName}][${elementNode.id}]: ${this.accName.name} (${this.accName.source})`);
-        }
-      }
-    }
-    this.accDescription = getAccessibleDesc(this.ariaInfo, doc, elementNode);
-    this.errMessage     = getErrMessage(this.ariaInfo, doc, elementNode);
+    this.accName        = getAccessibleName(doc, elementNode, this.ariaInfo.nameFromContent);
+    this.accDescription = getAccessibleDesc(doc, elementNode, (this.accName.source !== 'title'));
+    this.errMessage     = getErrMessage(doc, elementNode);
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
@@ -23171,6 +23243,7 @@ class EvaluationResult {
     this.url = url;
     this.date = getFormattedDate();
     this.version = VERSION;
+    this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
     const startTime = new Date();
@@ -23239,6 +23312,27 @@ class EvaluationResult {
    */
   getRuleResult (rule_id) {
     return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
+  }
+
+
+  /**
+   * @method getDomElementById
+   *
+   * @desc Returns an DomElement object with the associated id, otherwise
+   *       null if the DomElement does not exist
+   *
+   * @param  {Stirng}  id  -  ID of the element in the DOM
+   *
+   * @return {DomElement}  see @desc
+   */
+
+  getDomElementById (id) {
+    for (let i = 0; i < this.allDomElements.length; i += 1) {
+      if (this.allDomElements[i].id === id) {
+        return this.allDomElements[i];
+      }
+    }
+    return null;
   }
 
   /**

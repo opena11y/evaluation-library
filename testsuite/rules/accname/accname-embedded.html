@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<html lang="en-US">
   <head>
     <title>Accessible Name Calculation with control values in the label | Evaluation Library Test Pages</title>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
-    <link href="test.css" rel="stylesheet" type="text/css"/>
     <style>
       label {
         display: block;
@@ -90,20 +89,5 @@
       <input id="aria-labelledbby-25" type="text" aria-labelledby="aria-labelledby-5-1234" data-label="1 23 4">
 
     </main>
-
-<!--
-    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
--->
-
-    <script type="module">
-      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
-
-      console.log('Running opena11y evaluation library script');
-      window.addEventListener('load', () => {
-        let doc = document;
-        let evalLibrary = new EvaluationLibrary();
-        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
-      });
-    </script>
   </body>
 </html>

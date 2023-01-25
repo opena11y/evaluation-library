@@ -27,6 +27,7 @@ export default class EvaluationResult {
     this.url = url;
     this.date = getFormattedDate();
     this.version = VERSION;
+    this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
     const startTime = new Date();
@@ -95,6 +96,27 @@ export default class EvaluationResult {
    */
   getRuleResult (rule_id) {
     return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
+  }
+
+
+  /**
+   * @method getDomElementById
+   *
+   * @desc Returns an DomElement object with the associated id, otherwise
+   *       null if the DomElement does not exist
+   *
+   * @param  {Stirng}  id  -  ID of the element in the DOM
+   *
+   * @return {DomElement}  see @desc
+   */
+
+  getDomElementById (id) {
+    for (let i = 0; i < this.allDomElements.length; i += 1) {
+      if (this.allDomElements[i].id === id) {
+        return this.allDomElements[i];
+      }
+    }
+    return null;
   }
 
   /**

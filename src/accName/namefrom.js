@@ -32,8 +32,14 @@ import DebugLogging        from '../debug.js';
 const debug = new DebugLogging('nameFrom', false);
 
 /*
-*   isLabelableElement: Based on HTML5 specification, determine whether
-*   element can be associated with a label.
+*   @function isLabelableElement
+*
+*   @desc  Based on HTML5 specification, determine whether
+*          element can be associated with a label.
+*
+*   @parm {Object}  element  - DOM node of element
+*
+*   @returns {String}  @desc
 */
 function isLabelableElement (element) {
   let tagName = element.tagName.toLowerCase(),
@@ -56,9 +62,16 @@ function isLabelableElement (element) {
 }
 
 /*
-*   getElementContents: Construct the ARIA text alternative for element by
-*   processing its element and text node descendants and then adding any CSS-
-*   generated content if present.
+*   @function getElementContents
+*
+*   @desc  Construct the ARIA text alternative for element by
+*          processing its element and text node descendants and then adding any CSS-
+*          generated content if present.
+*
+*   @parm {Object}  element     - DOM node of element
+*   @parm {Object}  forElement  - DOM node of element being labelled
+*
+*   @returns {String}  @desc
 */
 function getElementContents (element, forElement) {
   let result = '';
@@ -81,7 +94,14 @@ function getElementContents (element, forElement) {
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
 
 /*
-*   nameFromAttribute
+*   @function nameFromAttribute
+*
+*   @desc
+*
+*   @parm {Object}  element    - DOM node of element
+*   @parm {String}  attribute  - name of attribute (e.g. 'alt', 'value')
+*
+*   @returns {Object}  @desc
 */
 function nameFromAttribute (element, attribute) {
   let name;
@@ -93,7 +113,13 @@ function nameFromAttribute (element, attribute) {
 }
 
 /*
-*   nameFromAltAttribute
+*   @function  nameFromAltAttribute
+*
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromAltAttribute (element) {
   let name = element.getAttribute('alt');
@@ -109,7 +135,12 @@ function nameFromAltAttribute (element) {
 }
 
 /*
-*   nameFromContents
+*   @function nameFromContents
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromContents (element) {
   let name;
@@ -121,14 +152,24 @@ function nameFromContents (element) {
 }
 
 /*
-*   nameFromDefault
+*   @function nameFromDefault
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromDefault (name) {
   return name.length ? { name: name, source: 'default' } : null;
 }
 
 /*
-*   nameFromDescendant
+*   @function nameFromDescendant
+*   @desc
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
@@ -143,7 +184,13 @@ function nameFromDescendant (element, tagName) {
 }
 
 /*
-*   nameFromLabelElement
+*   @function nameFromLabelElement
+*   @desc
+*
+*   @parm {Object}  doc     - Parent document of the element
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromLabelElement (doc, element) {
   let label, name;
@@ -177,7 +224,14 @@ function nameFromLabelElement (doc, element) {
 }
 
 /*
-*   nameFromLegendElement
+*   @function nameFromLegendElement
+*
+*   @desc
+*
+*   @parm {Object}  doc     - Parent document of the element
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
 function nameFromLegendElement (doc, element) {
   let name, legend;
@@ -196,11 +250,19 @@ function nameFromLegendElement (doc, element) {
 }
 
 /*
-*   nameFromDetailsOrSummary: If element is expanded (has open attribute),
-*   return the contents of the summary element followed by the text contents
-*   of element and all of its non-summary child elements. Otherwise, return
-*   only the contents of the first summary element descendant.
+*   @function nameFromDetailsOrSummary
+*
+*   @desc If element is expanded (has open attribute),
+*         return the contents of the summary element followed
+*         by the text contents of element and all of its non-summary
+*         child elements. Otherwise, return only the contents of the
+*         first summary element descendant.
+*
+*   @parm {Object}  element - DOM node of element
+*
+*   @returns {Object}  @desc
 */
+
 function nameFromDetailsOrSummary (element) {
   let name, summary;
 

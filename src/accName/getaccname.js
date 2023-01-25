@@ -40,60 +40,79 @@ const noAccName = {
 };
 
 /*
-*   getAccessibleName: Use the ARIA Roles Model specification for accessible
-*   name calculation based on its precedence order:
-*   (1) Use aria-labelledby, unless a traversal is already underway;
-*   (2) Use aria-label attribute value;
-*   (3) Use whatever method is specified by the native semantics of the
-*   element, which includes, as last resort, use of the title attribute.
+*   @function getAccessibleName
+*
+*   @desc Use the ARIA Roles Model specification for accessible
+*         name calculation based on its precedence order:
+*         (1) Use aria-labelledby, unless a traversal is already underway;
+*         (2) Use aria-label attribute value;
+*         (3) Use whatever method is specified by the native semantics of the
+*             element, which includes, as last resort, use of the title attribute.
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute name
+*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (ariaInfo, doc, element, recFlag=false) {
-  let accName = null;
-
-  if (!recFlag) accName = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-labelledby');
+function getAccessibleName (doc, element, nameFromContent=false) {
+  let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(ariaInfo, doc, element, recFlag);
+  if (accName === null) accName = nameFromNativeSemantics(doc, element, nameFromContent);
   if (accName === null) accName = noAccName;
   return accName;
 }
 
 /*
-*   getAccessibleDesc: Use the ARIA Roles Model specification for accessible
-*   description calculation based on its precedence order:
-*   (1) Use aria-describedby, unless a traversal is already underway;
-*   (2) As last resort, use the title attribute.
+*   @function getAccessibleDesc
+*
+*   @desc Use the ARIA Roles Model specification for accessible
+*         description calculation based on its precedence order:
+*         (1) Use aria-describedby, unless a traversal is already underway;
+*         (2) As last resort, use the title attribute, if not used as accessible name.
+*
+*   @desc (Object)  doc         -  Parent document of element
+*   @desc (Object)  element     -  DOM node of element to compute description
+*   @desc (Boolean) allowTitle  -  Allow title as accessible description
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleDesc (ariaInfo, doc, element) {
-  let accDesc = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-describedby');
-  if (accDesc === null) accDesc = nameFromAttribute(element, 'title');
+function getAccessibleDesc (doc, element, allowTitle=true) {
+  let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+  if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
   return accDesc;
 }
 
 
 /*
-*   getErrMessage: Use the ARIA Roles Model specification for accessible
-*   description calculation based on its precedence order:
-*   (1) Use aria-errormessage, unless a traversal is already underway;
+*   @function getErrMessage
+*
+*   @desc Use the ARIA Roles Model specification for accessible
+*         error description uses aria-errormessage attribute
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute error message
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getErrMessage (ariaInfo, doc, element) {
+function getErrMessage (doc, element) {
   let errMessage = null;
 
-  errMessage = nameFromAttributeIdRefs(ariaInfo, doc, element, 'aria-errormessage');
+  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
 }
 
 /*
-*   getGroupingLabels: Return an array of grouping label objects for
-*   element, each with two properties: 'name' and 'source'.
+*   @function getGroupingLabels
+*
+*   @desc Return an array of grouping label objects for
+*         element, each with two properties: 'name' and 'source'.
+*   @desc (Object)  element          -  DOM node of element to compute error message
+*
+*   @returns {Object} Returns a DOM elements related to using the legend element, or empty array
 */
 function getGroupingLabels (element) {
   // We currently only handle labelable elements as defined in HTML 5.1
@@ -105,14 +124,20 @@ function getGroupingLabels (element) {
 }
 
 /*
-*   nameFromNativeSemantics: Use method appropriate to the native semantics
-*   of element to find accessible name. Includes methods for all interactive
-*   elements. For non-interactive elements, if the element's ARIA role allows
-*   its acc. name to be derived from its text contents, or if recFlag is set,
-*   indicating that we are in a recursive aria-labelledby calculation, the
-*   nameFromContents method is used.
+*   @function nameFromNativeSemantics
+*
+*   @desc Use method appropriate to the native semantics
+*         of element to find accessible name. Includes methods for all interactive
+*         elements. For non-interactive elements, if the element's ARIA role allows
+*         its acc. name to be derived from its text contents
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute name
+*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
+function nameFromNativeSemantics (doc, element, nameFromContent) {
   let tagName = element.tagName.toLowerCase(),
       accName = null;
 
@@ -122,9 +147,7 @@ function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
       switch (element.type) {
         // HIDDEN
         case 'hidden':
-          if (recFlag) {
-            accName = nameFromLabelElement(doc, element);
-          }
+            accName = '';
           break;
 
         // TEXT FIELDS
@@ -239,7 +262,7 @@ function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (ariaInfo.nameFromContent || recFlag)
+      if (nameFromContent)
         accName = nameFromContents(element);
       break;
   }
@@ -253,14 +276,21 @@ function nameFromNativeSemantics (ariaInfo, doc, element, recFlag) {
 // HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
-*   nameFromAttributeIdRefs: Get the value of attrName on element (a space-
-*   separated list of IDREFs), visit each referenced element in the order it
-*   appears in the list and obtain its accessible name (skipping recursive
-*   aria-labelledby or aria-describedby calculations), and return an object
-*   with name property set to a string that is a space-separated concatena-
-*   tion of those results if any, otherwise return null.
+*   @function nameFromAttributeIdRefs
+*
+*   @desc Get the value of attrName on element (a space-
+*         separated list of IDREFs), visit each referenced element in the order it
+*         appears in the list and obtain its accessible name, and return an object
+*         with name property set to a string that is a space-separated concatenation
+*         of those results if any, otherwise return null.
+*
+*   @desc (Object)  doc              -  Parent document of element
+*   @desc (Object)  element          -  DOM node of element to compute name
+*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
+function nameFromAttributeIdRefs (doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, name, names, arr = [];
 
@@ -278,6 +308,8 @@ function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
             names = [];
             let children = Array.from(refElement.childNodes);
             children.forEach( child => {
+              // Need to ignore CSS display: none and visibility: hidden for referenced
+              // elements, but not their child elements
               const nc = getNodeContents(child, refElement, true);
               if (nc.length) names.push(nc);
             });
@@ -300,9 +332,15 @@ function nameFromAttributeIdRefs (ariaInfo, doc, element, attribute) {
 }
 
 /*
-*   getFieldsetLegendLabels: Recursively collect legend contents of
-*   fieldset ancestors, starting with the closest (innermost).
-*   Return collection as a possibly empty array of strings.
+*   @function getFieldsetLegendLabels
+*
+*   @desc Recursively collect legend contents of fieldset ancestors,
+*         starting with the closest (innermost).  Return collection
+*         as a possibly empty array of objects.
+*
+*   @desc (Object)  element  -  DOM node of element with label
+*
+*   @returns {Object} Returns an array of objects or an empty array
 */
 function getFieldsetLegendLabels (element) {
   let arrayOfStrings = [];

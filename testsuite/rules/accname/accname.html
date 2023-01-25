@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Accessible Name and Description Calculations | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <style>
+      label {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Accessible Name and Description Calculations</h1>
+
+      <h2>Label Reference</h2>
+
+      <div>
+        <label for="control-11">Label Reference 1: TextBox</label>
+        <input id="control-11"
+               type="text"
+               data-label="Label Reference 1: TextBox"
+               title="WXYZ"
+               data-desc="WXYZ">
+      </div>
+
+      <div>
+        <label for="control-12">Label Reference 2: Select</label>
+        <select id="control-12"
+                data-label="Label Reference 2: Select"
+                data-desc="WXYZ"
+                aria-describedby="control-12-desc">
+          <option>Red</option>
+          <option>Yellow</option>
+          <option>Green</option>
+        </select>
+        <div id="control-12-desc">WXYZ</div>
+      </div>
+
+      <h2>Label Encapsulation</h2>
+
+      <div>
+        <label>
+          Label Encapsulation 1: TextBox
+          <input id="control-21"
+                 type="checbox"
+                 data-label="Label Encapsulation 1: TextBox"/>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Label Encapsulation 2: Select
+          <select id="control-22" data-label="Label Encapsulation 2: Select">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset id="fieldset-2" data-label="Legend 1: Radio Group">
+        <legend>Legend 1: Radio Group</legend>
+        <label>
+          <input name="test" type="radio" id="control-23" data-label="Label Encapsulation 3: Radio">
+          Label Encapsulation 3: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" id="control-24" data-label="Label Encapsulation 4: Radio">
+          Label Encapsulation 4: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" id="control-25" data-label="Label Encapsulation 5: Radio">
+          Label Encapsulation 5: Radio
+        </label>
+      </fieldset>
+
+      <h2>Title Attribute</h2>
+
+      <div>
+        <div class="label">
+          Title 1: TextBox
+          <input id="control-31"
+                type="checbox"
+                title="Title 1: TextBox"
+                data-label="Title 1: TextBox"
+                data-desc="">
+        </div>
+      </div>
+
+      <div>
+        <div class="label">
+          Title 2: Select
+          <select id="control-32"
+                  title="Title 2: Select"
+                  data-label="Title 2: Select"
+                  data-desc="">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset id="fieldset-3" data-label="Legend 1: Radio Group">
+        <legend>Legend 1: Radio Group</legend>
+        <div class="label">
+          <input id="control-33"
+                name="test"
+                type="radio"
+                title="Title 3: Radio"
+                data-label="Title 3: Radio"
+                data-desc="">
+          Title 3: Radio
+        </div>
+        <div class="label">
+          <input id="control-34"
+                name="test"
+                type="radio"
+                title="Title 4: Radio"
+                data-label="Title 4: Radio"
+                data-desc="">
+          Title 4: Radio
+        </div>
+        <div class="label">
+          <input id="control-35"
+                name="test"
+                type="radio"
+                title="Title 5: Radio"
+                data-label="Title 5: Radio"
+                data-desc="">
+          Title 5: Radio
+        </div>
+      </fieldset>
+
+
+      <h2><code>aria-label</code></h2>
+
+      <div>
+        <label>
+          <code>aria-label 1</code>: TextBox
+          <input type="checbox"
+                 id="control-41"
+                 aria-label="aria-label 1 textbox label, overrides label encapsulation"
+                 data-label="aria-label 1 textbox label, overrides label encapsulation">
+        </label>
+      </div>
+
+      <div>
+        <label>2: Select
+          <select id="control-42"
+                  aria-label="aria-label 1 textbox label, overrides label encapsulation"
+                  data-label="aria-label 1 textbox label, overrides label encapsulation">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset id="fieldset-4" data-label="aria-label legend, overrides legend text content">
+        <legend aria-label="aria-label legend, overrides legend text content">Legend 1: Radio Group</legend>
+        <label>
+          <input name="test"
+                 type="radio"
+                 id="control-43"
+                 aria-label="aria-label 3 radio label, overrides label encapsulation"
+                 data-label="aria-label 3 radio label, overrides label encapsulation">
+          <code>aria-label</code>  3: Radio
+        </label>
+        <label>
+          <input name="test"
+                 type="radio"
+                 id="control-44"
+                 aria-label="aria-label 4 radio label, overrides label encapsulation"
+                 data-label="aria-label 4 radio label, overrides label encapsulation">
+          <code>aria-label</code>  4: Radio
+        </label>
+        <label>
+          <input name="test"
+                 type="radio"
+                 id="control-45"
+                 aria-label="aria-label 4 radio label, overrides label encapsulation"
+                 data-label="aria-label 4 radio label, overrides label encapsulation">
+          <code>aria-label</code>  5: Radio
+        </label>
+      </fieldset>
+
+
+      <h2><code>aria-labelledby</code></h2>
+
+      <div>
+        <label>
+          <code>aria-labelledby</code> 1: TextBox
+          <input type="checbox"
+                 id="control-51"
+                 aria-labelledby="textbox-51-ref"
+                 data-label="aria-labelledy A textbox label, overrides label encapsulation">
+        </label>
+        <div id="textbox-51-ref">aria-labelledy A textbox label, overrides label encapsulation</div>
+      </div>
+
+      <div>
+        <label><code>aria-labelledby</code> 2: Select
+          <select id="control-52"
+                  aria-labelledby="select-52-ref"
+                  data-label="aria-labelledy B select label, overrides label encapsulation">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+        <div id="select-52-ref">  aria-labelledy B select label,  overrides label  encapsulation  </div>
+      </div>
+
+      <fieldset>
+        <legend aria-labellby="legend-c">Legend 1: Radio Group</legend>
+        <div id="legend-c">aria-labelledy C legend, overrides legend text content"</div>
+        <label>
+          <input name="test" type="radio" aria-labelledby="radio-d"/>
+          Label Encapsulation 3: Radio
+        </label>
+         <div id="radio-d">aria-labelledy D radio label, overrides label encapsulation"</div>
+        <label>
+          <input name="test" type="radio" aria-labelledby="radio-e"/>
+          Label Encapsulation 4: Radio
+        </label>
+         <div id="radio-e">aria-labelledy E radio label, overrides label encapsulation"</div>
+        <label>
+          <input name="test" type="radio" aria-labelledby="radio-f"/>
+          Label Encapsulation 5: Radio
+        </label>
+         <div id="radio-f">aria-labelledy F radio label, overrides label encapsulation"</div>
+      </fieldset>
+
+     <h2><code>title</code> attribute for description</h2>
+
+      <div>
+        <label>
+          Label Encapsulation 1: TextBox
+          <input type="checbox" title="title description A: Textbox"/>
+        </label>
+      </div>
+
+      <div>
+        <label>Label Encapsulation 2: Select
+          <select title="title description B: Select">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend>Legend 1: Radio Group</legend>
+        <label>
+          <input name="test" type="radio" title="title description C: Radio"/>
+          Label Encapsulation 3: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" title="title description D: Radio"/>
+          Label Encapsulation 4: Radio
+        </label>
+        <label>
+          <input name="test" type="radio" title="title description E: Radio"/>
+          Label Encapsulation 5: Radio
+        </label>
+      </fieldset>
+
+     <h2><code>aria-describedby</code> for description</h2>
+
+      <div>
+        <label>
+          Label Encapsulation 1: TextBox
+          <input type="checbox" aria-describedby="textbox-d-a"/>
+        </label>
+        <div id="textbox-d-a">aria-describedby description A: TextBox</div>
+      </div>
+
+      <div>
+        <label>Label Encapsulation 2: Select
+          <select aria-describedby="select-d-b">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+        <div id="select-d-b">aria-describedby description B: Select</div>
+      </div>
+
+      <fieldset>
+        <legend>Legend 1: Radio Group</legend>
+        <label>
+          <input name="test" type="radio" aria-describedby="radio-d-c"/>
+          Label Encapsulation 3: Radio
+        </label>
+        <div id="radio-d-c">aria-describedby description C: Radio</div>
+        <label>
+          <input name="test" type="radio" aria-describedby="radio-d-d"/>
+          Label Encapsulation 4: Radio
+        </label>
+        <div id="radio-d-d">aria-describedby description D: Radio</div>
+        <label>
+          <input name="test" type="radio" aria-describedby="radio-d-e"/>
+          Label Encapsulation 5: Radio
+        </label>
+        <div id="radio-d-e">aria-describedby description E: Radio</div>
+      </fieldset>
+
+     <h2><code>aria-errormessage</code></h2>
+
+      <div>
+        <label>
+          Label Encapsulation 1: TextBox
+          <input type="checbox" aria-errormessage="textbox-e-a"/>
+        </label>
+        <div id="textbox-e-a">aria-errormessage message A: TextBox</div>
+      </div>
+
+      <div>
+        <label>Label Encapsulation 2: Select
+          <select aria-errormessage="select-e-b">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Green</option>
+          </select>
+        </label>
+        <div id="select-e-b">aria-errormessage message B: Select</div>
+      </div>
+
+      <fieldset>
+        <legend>Legend 1: Radio Group</legend>
+        <label>
+          <input name="test" type="radio" aria-errormessage="radio-e-c"/>
+          Label Encapsulation 3: Radio
+        </label>
+        <div id="radio-e-c">aria-errormessage message C: Radio</div>
+        <label>
+          <input name="test" type="radio" aria-errormessage="radio-e-d"/>
+          Label Encapsulation 4: Radio
+        </label>
+        <div id="radio-e-d">aria-errormessage message D: Radio</div>
+        <label>
+          <input name="test" type="radio" aria-errormessage="radio-e-e"/>
+          Label Encapsulation 5: Radio
+        </label>
+        <div id="radio-e-e">aria-errormessage message E: Radio</div>
+      </fieldset>
+
+    </main>
+
+  </body>
+</html>
