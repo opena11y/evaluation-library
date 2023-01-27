@@ -81,7 +81,7 @@ export default class DOMElement {
     this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(doc, elementNode, this.ariaInfo.nameFromContent);
+    this.accName        = getAccessibleName(doc, elementNode);
     this.accDescription = getAccessibleDesc(doc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(doc, elementNode);
 

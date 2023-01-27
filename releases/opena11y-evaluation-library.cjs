@@ -2230,11 +2230,12 @@ const propertyDataTypes = {
     type: 'nmtokens',
     values: [
       'additions',
+      'additions',
       'all',
       'removals',
       'text'
     ],
-    defaultValue: 'additions text',
+    defaultValue: 'additions',
     deprecated: false,
     idlAttribute: ''
   },
@@ -4516,6 +4517,7 @@ const designPatterns = {
     inheritedProps: [
       'aria-atomic',
       'aria-busy',
+      'aria-checked',
       'aria-controls',
       'aria-current',
       'aria-describedby',
@@ -4546,9 +4548,7 @@ const designPatterns = {
     ],
     supportedProps: [],
     hasRange: false,
-    requiredProps: [
-      'aria-checked'
-    ],
+    requiredProps: [],
     nameRequired: true,
     nameFromContent: true,
     nameProhibited: false,
@@ -9427,6 +9427,27 @@ const noAccName = {
   source: 'none'
 };
 
+// These roles are based on the ARAI 1.2 specification
+const  rolesThatAllowNameFromContents = ['button',
+'cell',
+'checkbox',
+'columnheader',
+'gridcell',
+'heading',
+'link',
+'menuitem',
+'menuitemcheckbox',
+'menuitemradio',
+'option',
+'radio',
+'row',
+'rowheader',
+'sectionhead',
+'switch',
+'tab',
+'tooltip',
+'treeitem'];
+
 /*
 *   @function getAccessibleName
 *
@@ -9439,14 +9460,13 @@ const noAccName = {
 *
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
-*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (doc, element, nameFromContent=false) {
+function getAccessibleName (doc, element) {
   let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(doc, element, nameFromContent);
+  if (accName === null) accName = nameFromNativeSemantics(doc, element);
   if (accName === null) accName = noAccName;
   return accName;
 }
@@ -9503,11 +9523,10 @@ function getErrMessage (doc, element) {
 *
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
-*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function nameFromNativeSemantics (doc, element, nameFromContent) {
+function nameFromNativeSemantics (doc, element) {
   let tagName = element.tagName.toLowerCase(),
       accName = null;
 
@@ -9632,8 +9651,9 @@ function nameFromNativeSemantics (doc, element, nameFromContent) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (nameFromContent)
+      if (doesRoleAllowNameFromContents(element)) {
         accName = nameFromContents(element);
+      }
       break;
   }
 
@@ -9701,6 +9721,22 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
   return null;
 }
 
+
+/*
+*   @function doesRoleAllowNameFromContents
+*
+*   @desc Returns true if role allows name from contents, otherwise false
+*
+*   @desc (Object)  element  -  DOM node of element to compute name
+*
+*   @return (Boolean) see @desc
+*/
+
+function doesRoleAllowNameFromContents (element) {
+  const role = element.getAttribute('role');
+  return role && rolesThatAllowNameFromContents.includes(role);
+}
+
 /* domElement.js */
 
 /* Constants */
@@ -9766,7 +9802,7 @@ class DOMElement {
     this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(doc, elementNode, this.ariaInfo.nameFromContent);
+    this.accName        = getAccessibleName(doc, elementNode);
     this.accDescription = getAccessibleDesc(doc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(doc, elementNode);
 

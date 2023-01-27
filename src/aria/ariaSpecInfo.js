@@ -4879,5 +4879,26 @@ export const ariaInfo = {
     'aria-invalid',
     'aria-checked',
     'aria-selected'
+  ],
+  rolesThatAllowNameFromContents: [
+    'button',
+    'cell',
+    'checkbox',
+    'columnheader',
+    'gridcell',
+    'heading',
+    'link',
+    'menuitem',
+    'menuitemcheckbox',
+    'menuitemradio',
+    'option',
+    'radio',
+    'row',
+    'rowheader',
+    'sectionhead',
+    'switch',
+    'tab',
+    'tooltip',
+    'treeitem'
   ]
 };

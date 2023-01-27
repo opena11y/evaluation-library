@@ -377,11 +377,12 @@
             "type": "nmtokens",
             "values": [
                 "additions",
+                "additions",
                 "all",
                 "removals",
                 "text"
             ],
-            "defaultValue": "additions text",
+            "defaultValue": "additions",
             "deprecated": false,
             "idlAttribute": ""
         },
@@ -4654,7 +4655,7 @@
             "requiredParents": [],
             "requiredChildren": [],
             "roleType": "abstract",
-                
+            "isAbstract": true
         },
         "window": {
             "inheritedProps": [
@@ -4877,5 +4878,26 @@
         "aria-invalid",
         "aria-checked",
         "aria-selected"
+    ],
+    "rolesThatAllowNameFromContents": [
+        "button",
+        "cell",
+        "checkbox",
+        "columnheader",
+        "gridcell",
+        "heading",
+        "link",
+        "menuitem",
+        "menuitemcheckbox",
+        "menuitemradio",
+        "option",
+        "radio",
+        "row",
+        "rowheader",
+        "sectionhead",
+        "switch",
+        "tab",
+        "tooltip",
+        "treeitem"
     ]
 }

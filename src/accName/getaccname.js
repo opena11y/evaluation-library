@@ -39,6 +39,27 @@ const noAccName = {
   source: 'none'
 };
 
+// These roles are based on the ARAI 1.2 specification
+const  rolesThatAllowNameFromContents = ['button',
+'cell',
+'checkbox',
+'columnheader',
+'gridcell',
+'heading',
+'link',
+'menuitem',
+'menuitemcheckbox',
+'menuitemradio',
+'option',
+'radio',
+'row',
+'rowheader',
+'sectionhead',
+'switch',
+'tab',
+'tooltip',
+'treeitem'];
+
 /*
 *   @function getAccessibleName
 *
@@ -51,14 +72,13 @@ const noAccName = {
 *
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
-*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function getAccessibleName (doc, element, nameFromContent=false) {
+function getAccessibleName (doc, element) {
   let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
-  if (accName === null) accName = nameFromNativeSemantics(doc, element, nameFromContent);
+  if (accName === null) accName = nameFromNativeSemantics(doc, element);
   if (accName === null) accName = noAccName;
   return accName;
 }
@@ -133,11 +153,10 @@ function getGroupingLabels (element) {
 *
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
-*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */
-function nameFromNativeSemantics (doc, element, nameFromContent) {
+function nameFromNativeSemantics (doc, element) {
   let tagName = element.tagName.toLowerCase(),
       accName = null;
 
@@ -262,8 +281,9 @@ function nameFromNativeSemantics (doc, element, nameFromContent) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (nameFromContent)
+      if (doesRoleAllowNameFromContents(element)) {
         accName = nameFromContents(element);
+      }
       break;
   }
 
@@ -368,3 +388,20 @@ function getFieldsetLegendLabels (element) {
   getLabelsRec(element, arrayOfStrings);
   return arrayOfStrings;
 }
+
+
+/*
+*   @function doesRoleAllowNameFromContents
+*
+*   @desc Returns true if role allows name from contents, otherwise false
+*
+*   @desc (Object)  element  -  DOM node of element to compute name
+*
+*   @return (Boolean) see @desc
+*/
+
+function doesRoleAllowNameFromContents (element) {
+  const role = element.getAttribute('role');
+  return role && rolesThatAllowNameFromContents.includes(role);
+}
+

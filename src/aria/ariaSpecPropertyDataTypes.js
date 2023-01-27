@@ -374,11 +374,12 @@ export const propertyDataTypes = {
     type: 'nmtokens',
     values: [
       'additions',
+      'additions',
       'all',
       'removals',
       'text'
     ],
-    defaultValue: 'additions text',
+    defaultValue: 'additions',
     deprecated: false,
     idlAttribute: ''
   },

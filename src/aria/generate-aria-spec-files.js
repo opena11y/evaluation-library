@@ -92,7 +92,7 @@ function hasValue(value, elemNode, selector) {
   return false;
 }
 
-function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents, rolesWithNameProhibited, rolesWithDeprecatedAttributes, attributesThatMaybeDeprecated) {
+function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParents, rolesWithNameProhibited, rolesWithDeprecatedAttributes, attributesThatMaybeDeprecated, rolesThatAllowNameFromContents) {
 
   let elems = dom.querySelectorAll('section.role');
 
@@ -125,9 +125,7 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
     roles[role].roleType = getRoleType(elem);
     roles[role].isAbstract = isAbstract(elem);
 
-
     console.log('[role]: ' + role + ' (' + roles[role].roleType + ') ' + (roles[role].isAbstract ? 'ABSTRACT' : ''));
-
 
     let ariaAttributeNodes = dom.querySelectorAll('#' + role + ' .role-inherited li');
 
@@ -148,9 +146,6 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
 
     if (roles[role].deprecatedProps.length) {
       rolesWithDeprecatedAttributes.push(role);
-
-
-
     }
 
     ariaAttributeNodes = dom.querySelectorAll(`#${role} .role-required-properties li`);
@@ -204,6 +199,11 @@ function getRoles(dom, roles, rolesWithRequiredChildren, rolesWithRequiredParent
     }
 
     roles[role].nameFromContent = hasValue ('content', dom, '#' + role + ' .role-namefrom');
+
+    if (roles[role].nameFromContent) {
+      rolesThatAllowNameFromContents.push(role)
+    }
+
     roles[role].nameProhibited = hasValue ('prohibited', dom, '#' + role + ' .role-namefrom');
     if (roles[role].nameProhibited) {
       rolesWithNameProhibited.push(role);
@@ -420,8 +420,9 @@ function getAriaInformation(dom) {
   ariaInfo.rolesWithNameProhibited = [];
   ariaInfo.rolesWithDeprecatedAttributes = [];
   ariaInfo.attributesThatMaybeDeprecated = [];
+  ariaInfo.rolesThatAllowNameFromContents = [];
 
-  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent, ariaInfo.rolesWithNameProhibited, ariaInfo.rolesWithDeprecatedAttributes, ariaInfo.attributesThatMaybeDeprecated);
+  getRoles(dom, ariaInfo.designPatterns, ariaInfo.rolesWithRequiredChildren, ariaInfo.rolesWithRequiredParent, ariaInfo.rolesWithNameProhibited, ariaInfo.rolesWithDeprecatedAttributes, ariaInfo.attributesThatMaybeDeprecated, ariaInfo.rolesThatAllowNameFromContents);
 
   ariaInfo.designPatterns['none'] = ariaInfo.designPatterns['presentation'];
   ariaInfo.rolesWithNameProhibited.push('none');

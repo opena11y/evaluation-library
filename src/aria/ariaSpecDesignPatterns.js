@@ -2162,6 +2162,7 @@ export const designPatterns = {
     inheritedProps: [
       'aria-atomic',
       'aria-busy',
+      'aria-checked',
       'aria-controls',
       'aria-current',
       'aria-describedby',
@@ -2192,9 +2193,7 @@ export const designPatterns = {
     ],
     supportedProps: [],
     hasRange: false,
-    requiredProps: [
-      'aria-checked'
-    ],
+    requiredProps: [],
     nameRequired: true,
     nameFromContent: true,
     nameProhibited: false,

@@ -16,14 +16,14 @@
       import testAccname from '../scripts/testaccname.js';
       window.addEventListener('load', (event) => {
 
-        testAccname('Accessible Name', 'ID_IFRAME_1A', 'data-label', 'accName');
-        testAccname('Accessible Description', 'ID_IFRAME_1A', 'data-desc', 'accDescription');
+        testAccname('Accessible Name',        'ID_IFRAME_1A', 'data-label', 'accName');
+        testAccname('Accessible Description', 'ID_IFRAME_1A', 'data-desc',  'accDescription');
+        testAccname('Error Description',      'ID_IFRAME_1A', 'data-error', 'errMessage');
 
-        testAccname('Accessible Name and CSS properties',    'ID_IFRAME_1B', 'data-label', 'accName');
-//        testAccname('Accessible Description and CSS properties', 'ID_IFRAME_1B', 'data-desc', 'accDescription');
+        testAccname('Accessible Name and CSS properties',   'ID_IFRAME_1B', 'data-label', 'accName');
+        testAccname('Accessible Name and embedded controls','ID_IFRAME_1C', 'data-label', 'accName');
+        testAccname('Accessible Name from contents',        'ID_IFRAME_1D', 'data-label', 'accName');
 
-        testAccname('Accessible Name and embedded controls', 'ID_IFRAME_1C', 'data-label', 'accName');
-//        testAccname('Accessible Description and embedded controls', 'ID_IFRAME_1C', 'data-desc', 'accDescription');
       });
       window.addEventListener('load', (event) => {
       });
@@ -33,6 +33,7 @@
     <iframe id="ID_IFRAME_1A" src="accname/accname.html"></iframe>
     <iframe id="ID_IFRAME_1B" src="accname/accname-css.html"></iframe>
     <iframe id="ID_IFRAME_1C" src="accname/accname-embedded.html"></iframe>
+    <iframe id="ID_IFRAME_1D" src="accname/accname-from-contents.html"></iframe>
   </body>
 
 </html>
