@@ -1240,621 +1240,7 @@ class ControlInfo {
   }
 }
 
-/* colorContrast.js */
-
-/* Constants */
-const debug$t = new DebugLogging('colorContrast', false);
-const defaultFontSize = 16; // In pixels (px)
-const fontWeightBold = 300; 
-
-/**
- * @class ColorContrast
- *
- * @desc Identifies the text properties used to determine WCAG color contrast 
- *       requirements including computing the color contrast ratio based on 
- *       text and background colors
- *
- * @param  {Object}  parentDomElement - Parent DomElement containing ancestor style information
- * @param  {Object}  elementNode      - dom element node 
- */
-
-class ColorContrast {
-  constructor (parentDomElement, elementNode) {
-    let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
-    let style = window.getComputedStyle(elementNode, null);
-
-    if (debug$t.flag) {
-      debug$t.separator();
-      debug$t.tag(elementNode);
-    }
-
-    this.opacity            = this.normalizeOpacity(style, parentColorContrast);
-
-    this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
-    this.color              = style.getPropertyValue("color");
-    this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
-
-    this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
-    this.backgroundRepeat   = style.getPropertyValue("background-repeat");
-    this.backgroundPosition = style.getPropertyValue("background-position");
-    this.hasBackgroundImage = this.backgroundImage !== 'none';
-
-    this.fontFamily = style.getPropertyValue("font-family");
-    this.fontSize   = this.normalizeFontSize(style, parentColorContrast);
-    this.fontWeight = this.normalizeFontWeight(style, parentColorContrast);
-    this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
-
-    const L1 = this.getLuminance(this.colorHex);
-    const L2 = this.getLuminance(this.backgroundColorHex);
-    this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
-
-    if (debug$t.flag) {
-      debug$t.log(`[                    opacity]: ${this.opacity}`);
-      debug$t.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$t.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$t.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
-    }
-  }
-
-  /**
-   * @method normalizeOpacity
-   *
-   * @desc Normalizes opacity to a number 
-   *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
-   *                                         DomElement
-   *
-   * @return {Number}  Returns a number representing the opacity
-   */
-
-  normalizeOpacity (style, parentColorContrast) {
-    let opacity = style.getPropertyValue("opacity");
-    let parentOpacity = 1.0;
-
-    if (parentColorContrast) {
-      parentOpacity = parentColorContrast.opacity;
-    }
-
-    if (isNaN(opacity)) {
-      opacity = opacity.toLowerCase();
-
-      switch (opacity) {
-        case 'inherit':
-        case 'unset':
-          opacity = parentOpacity;
-          break;
-
-        case 'initial':
-        case 'revert':
-          opacity = 1.0;
-          break;
-
-        default:
-          if (opacity.indexOf('%')) {
-            opacity = parseInt(opacity.split('%')[0]);
-            if (isNaN(opacity)) {
-              opacity = parentOpacity;
-            } else {
-              opacity = parentOpacity * (opacity / 100);
-            }
-          }
-          else {
-            opacity = parseFloat(opacity) * parentOpacity;
-            if (isNaN(opacity)) {
-              opacity = 1.0;
-            }
-          }
-          break;
-      }  // end switch
-    } else {
-      opacity = parseFloat(opacity) * parentOpacity;
-      if (isNaN(opacity)) {
-        opacity = 1.0;
-      }
-
-    }
-
-    // Make sure opacity is between 0 and 1
-    opacity = Math.max(Math.min(opacity, 1.0), 0.0);
-
-    return opacity;
-  }  
-
-  /**
-   * @method normalizeBackgroundColor
-   *
-   * @desc Normalizes background color
-   *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
-   *                                         DomElement
-   *
-   * @return {String}  Returns the background color
-   */
-
-  normalizeBackgroundColor (style, parentColorContrast) {
-    let backgroundColor = style.getPropertyValue("background-color");
-    if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
-        (backgroundColor == 'transparent') ||
-        (backgroundColor == 'inherit')) {
-
-      if (parentColorContrast) {
-        backgroundColor   = parentColorContrast.backgroundColor;
-      }
-      else {
-        // This is an edge case test typcially for body elements and frames
-        backgroundColor = 'rgb(255,255,255)';
-      }
-    }
-    return backgroundColor;
-  }
-
-  /**
-   * @method normalizeBackgroundImage
-   *
-   * @desc Normalizes background image 
-   *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
-   *                                         DomElement
-   *
-   * @return {String}  Returns a reference to a background image URL or none
-   */
-
-  normalizeBackgroundImage (style, parentColorContrast) {
-    let backgroundImage = style.getPropertyValue("background-image").toLowerCase();
-
-    if ((backgroundImage === 'inherit') ||
-        (backgroundImage === 'none') ||
-        (backgroundImage === '')) {
-      if (parentColorContrast) {
-        backgroundImage = parentColorContrast.backgroundImage;
-      }
-      else {
-        backgroundImage = 'none';
-      }
-    }
-    return backgroundImage;
-  }
-
-  /**
-   * @method normalizeFontSize
-   *
-   * @desc Normalizes font size to a number 
-   *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
-   *                                         DomElement
-   *
-   * @return {Number}  Returns a number representing font size value in pixels (px)
-   */
-
-  normalizeFontSize (style, parentColorContrast) {
-    let fontSize = style.getPropertyValue("font-size");
-    if (isNaN(fontSize)) {
-      if (fontSize.toLowerCase() == 'inherit') {
-        if (parentColorContrast) {
-          fontSize = parentColorContrast.fontSize;
-        }
-        else {
-          fontSize = defaultFontSize;
-        }
-      } else {
-        fontSize = parseInt(fontSize, 10);
-        if (isNaN(fontSize)) {
-          fontSize = defaultFontSize;
-        }
-      }
-    } 
-    return fontSize;
-  }
-
-  /**
-   * @method normalizeFontWeight
-   *
-   * @desc Normalizes font weight to a number 
-   *
-   * @param {Object}  style                - Computed style object for an element node 
-   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
-   *                                         DomElement
-   *
-   * @return {Number}  Returns a number representing font weight value
-   */
-
-  normalizeFontWeight (style, parentColorContrast) {
-    let fontWeight = style.getPropertyValue("font-weight");
-
-    if (isNaN(fontWeight)) {
-      switch (fontWeight.toLowerCase()) {
-      case 'bold':
-        fontWeight = 700;
-        break;
-
-      case 'normal':
-        fontWeight = 400;
-        break;
-
-      case 'inherit':
-        if (parentColorContrast) {
-          fontWeight = parentColorContrast.fontWeight;
-        }
-        else {
-          fontWeight = 400;
-        }
-        break;
-
-      case 'bolder':
-        fontWeight = 700;
-        break;
-
-      default:
-        fontWeight = 400;
-        break;
-
-      }
-    }
-    else {
-      fontWeight = parseInt(fontWeight, 10);
-    }    
-    return fontWeight;
-  }
-
-  /**
-   * @method getLuminance
-   *
-   * @desc Get the luminance value of a hex encoded color
-   *
-   * @param {String}  color    - Hex representation of a color value
-   *
-   * @return {Number}  Returns a number representing the limnance value
-   */
-
-  getLuminance (color) {
-
-    // Get decimal values
-    const R8bit = parseInt(color.substring(0,2),16);
-    const G8bit = parseInt(color.substring(2,4),16);
-    const B8bit = parseInt(color.substring(4,6),16);
-
-    // Get sRGB values
-    const RsRGB = R8bit/255;
-    const GsRGB = G8bit/255;
-    const BsRGB = B8bit/255;
-    // Calculate luminance
-    const R = (RsRGB <= 0.03928) ? RsRGB/12.92 : Math.pow(((RsRGB + 0.055)/1.055), 2.4);
-    const G = (GsRGB <= 0.03928) ? GsRGB/12.92 : Math.pow(((GsRGB + 0.055)/1.055), 2.4);
-    const B = (BsRGB <= 0.03928) ? BsRGB/12.92 : Math.pow(((BsRGB + 0.055)/1.055), 2.4);
-
-    return (0.2126 * R + 0.7152 * G + 0.0722 * B);
-
-  }
-
-  /**
-  * @function rgbToHex
-  *
-  * @desc Converts an RGB color to Hex values
-  *
-  * @param {String} colorRGB       - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
-  * @param {String} backgroundHex  - Background color as a hex value
-  * @param {Number}  opacity       - A number between 0 and 1 representing CSS value
-  *                                  default value is 1.0
-  *
-  * @return  {String}  - Hex version of the RGB color
-  */
-
-  rgbToHex ( colorRGB, backgroundHex, opacity=1.0 ) {
-
-    function hexToString(d) {
-      let hex = Number(d).toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
-    }
-
-    if (!colorRGB) return "000000";
-
-    colorRGB = colorRGB.replace('"', '');
-    colorRGB = colorRGB.split(')')[0];
-    colorRGB = colorRGB.split('(')[1];
-    const parts = colorRGB.split(',');
-    let r1 = parseFloat(parts[0]);
-    let g1 = parseFloat(parts[1]);
-    let b1 = parseFloat(parts[2]);
-    const o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
-
-    if (typeof backgroundHex !== 'string' || backgroundHex.length !== 6) {
-      backgroundHex = 'FFFFFF';
-    }
-
-    const r2 = parseInt(backgroundHex.substring(0,2), 16);
-    const g2 = parseInt(backgroundHex.substring(2,4), 16);
-    const b2 = parseInt(backgroundHex.substring(4,6), 16);
-
-    const min = 0.0001;
-
-    if (o1 < min) {
-      return backgroundHex;
-    }
-    else {
-      if (o1 < 1.0) {
-        r1 = Math.round(r1 * o1 + r2 * (1 - o1));
-        g1 = Math.round(g1 * o1 + g2 * (1 - o1));
-        b1 = Math.round(b1 * o1 + b2 * (1 - o1));
-      }
-    }
-
-    if (typeof opacity === 'string') {
-      opacity = parseFloat(opacity);
-    }
-
-    if ((opacity === Number.NaN) || (opacity < 0.0) || (opacity > 1.0)) {
-      opacity = 1.0;
-    }
-
-    if (opacity < 1.0) {
-      r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
-      g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
-      b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
-    }
-
-    return hexToString(r1) + hexToString(g1) + hexToString(b1);
-  }
-
-  /**
-   * @method getLargeFont
-   *
-   * @desc Returns a boolean indiciating if the fontis considered large
-   *
-   * @param {Number}  fontSize    - font size of the element in pixels
-   * @param {Number}  fontWeight  - Numberical value of the font wieght (100-900)
-   *
-   * @return {Boolean}  Returns true if considered a large font, otherwise fals
-   */
-
-  getLargeFont (fontSize, fontWeight) {
-    let isSizeReallyBig = fontSize > (1.2 * defaultFontSize);
-    let isSizeBig       = fontSize > defaultFontSize;
-    let isBold          = fontWeight >= fontWeightBold;
-
-    return isSizeReallyBig || (isSizeBig && isBold);
-  }
-}
-
-/* eventInfo.js */
-
-/* Constants */
-const debug$s = new DebugLogging('EventInfo', false);
-
-/**
- * @class EventInfo
- *
- * @desc Collects information on the links in a web page
- */
-
-class EventInfo {
-  constructor (node) {
-    this.hasClick  = node.hasAttribute('onclick');
-    this.hasChange = node.hasAttribute('onchange');
-
-    if (debug$s.flag) {
-      console.log(`[hasClick ]: ${this.hasClick}`);
-      console.log(`[hasChange]: ${this.hasChange}`);
-    }
-  }
-}
-
-/* visibility.js */
-
-/* Constants */
-const debug$r = new DebugLogging('visibility', false);
-
-/**
- * @class Visibility
- *
- * @desc Identifies the properties used to determine the visibility of the element
- *       for both the graphical rendering and assistive technologies
- *
- * @param  {Object}  parentDomElement - Parent DomElement containing ancestor style information
- * @param  {Object}  elementNode      - dom element node 
- */
-
-class Visibility {
-  constructor (parentDomElement, elementNode) {
-    let parentVisibility = parentDomElement ? parentDomElement.visibility : false;
-    let style = window.getComputedStyle(elementNode, null);
-    let tagName = elementNode.tagName ? elementNode.tagName : '';
-
-    this.isHidden           = this.normalizeHidden (elementNode, parentVisibility);
-    this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
-    this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
-    this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
-    this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
-    this.isSmallFont        = this.getFontSize(style);
-
-    // Set default values for visibility
-    this.isVisibleOnScreen = true;
-    this.isVisibleToAT     = true; // AT -> Assistive Technology
-
-    if (this.isHidden ||
-        this.isDisplayNone ||
-        this.isVisibilityHidden) {
-
-      if (tagName !== 'area') {
-        this.isVisibleOnScreen = false;
-        this.isVisibleToAT     = false;
-      }
-    }
-
-    if (this.isSmallHeight ||
-        this.isSmallFont) {
-      this.isVisibleOnScreen = false;
-    }
-
-    if (this.isAriaHidden) {
-      this.isVisibleToAT = false;
-    }
-
-    if (debug$r.flag) {
-      debug$r.separator();
-      debug$r.tag(elementNode);
-      debug$r.log('[          isHidden]: ' + this.isHidden);
-      debug$r.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$r.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$r.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$r.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$r.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$r.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$r.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
-    }
-  }
-
-  /**
-   * @method normalizeHidden
-   *
-   * @desc Determine if the hidden attribute is set on this element
-   *       or one of its ancestors 
-   *
-   * @param {Object}  node              - dom element node
-   * @param {Object}  parentVisibility  - Computed visibility information for parent
-   *                                      DomElement
-   *
-   * @return {Boolean}  Returns true if element or one of its ancestors has the 
-   *                    hidden attribute 
-   */
-
-  normalizeHidden (node, parentVisibility) {
-    let hidden = node.getAttribute('hidden');
-    hidden = hidden ? true : false;
-    if (parentVisibility &&
-        parentVisibility.hidden)  {
-      hidden = true;
-    }
-    return hidden;
-  }
-
-  /**
-   * @method normalizeAriaHidden
-   *
-   * @desc Determine if the aria-hidden attribute is set to true on this element
-   *       or one of its ancestors 
-   *
-   * @param {Object}  node              - dom element node
-   * @param {Object}  parentVisibility  - Computed visibility information for parent
-   *                                      DomElement
-   *
-   * @return {Boolean}  Returns true if element or one of its ancestors has the 
-   *                    aria-hidden attribute set to true 
-   */
-
-  normalizeAriaHidden (node, parentVisibility) {
-    let hidden = false;
-    let ariaHidden = node.getAttribute('aria-hidden');
-    if (ariaHidden) {
-      ariaHidden = ariaHidden.trim().toLowerCase();
-      hidden = (ariaHidden === 'true') ? true : false;
-    }
-    if (parentVisibility &&
-        parentVisibility.isAriaHidden)  {
-      hidden = true;
-    }
-    return hidden;
-  }
-
-  /**
-   * @method normalizeDisplay
-   *
-   * @desc Computes a boolean value to indicate whether the content or its
-   *       ancestor that results in content not being displayed based on 
-   *       the CSS display property
-   *
-   * @param {Object}  style             - Computed style object for an element node
-   * @param {Object}  parentVisibility  - Computed visibility information for parent
-   *                                      DomElement
-   *
-   * @return {Boolean}  Returns a true if content is visible
-   */
-
-  normalizeDisplay (style, parentVisibility) {
-    let display = style.getPropertyValue("display");
-    let isDisplayNone = false;
-
-    if ((display === 'none') || 
-        (parentVisibility && parentVisibility.isDisplayNone)) {
-      isDisplayNone = true;
-    }
-
-    return isDisplayNone;
-  }
-
-  /**
-   * @method normalizeVisibility
-   *
-   * @desc Computes a boolean value to indicate whether the content or its
-   *       ancestor that results in content not being displayed based on 
-   *       the CSS visibility property
-   *
-   * @param {Object}  style             - Computed style object for an element node
-   * @param {Object}  parentVisibility  - Computed visibility information for parent
-   *                                      DomElement
-   *
-   * @return {Boolean}  Returns a true if content is visible
-   */
-
-  normalizeVisibility (style, parentVisibility) {
-    let visibility = style.getPropertyValue("visibility");
-    let isVisibilityHidden =  parentVisibility.isVisibilityHidden; 
-
-    if ((visibility === 'collapse') ||
-        (visibility === 'hidden')) {
-        isVisibilityHidden = true;
-    }
-    else {
-      if (visibility === 'visible') {
-        isVisibilityHidden = false;        
-      }
-    }
-    return isVisibilityHidden;
-  }
-
-  /**
-   * @method normalizeHeight
-   *
-   * @desc Computes a boolean value to indicate whether the content or its
-   *       ancestor that results in content not being displayed based on
-   *       the CSS height and overflow properties
-   *
-   * @param {Object}  style             - Computed style object for an element node
-   * @param {Object}  parentVisibility  - Computed visibility information for parent
-   *                                      DomElement
-   *
-   * @return {Boolean}  Returns a true if content is visible
-   */
-
-  normalizeHeight (style, parentVisibility) {
-    const height   = parseFloat(style.getPropertyValue("height"));
-    const overflow = style.getPropertyValue("overflow");
-    return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
-  }
-
-  /**
-   * @method getFontSize
-   *
-   * @desc Computes a boolean value to indicate whether the content or its
-   *       ancestor that results in content not being displayed based on
-   *       the CSS height and overflow properties
-   *
-   * @param {Object}  style             - Computed style object for an element node
-   *
-   * @return {Boolean}  Returns a true if content is small
-   */
-
-  getFontSize (style) {
-    const fontSize = parseFloat(style.getPropertyValue("font-size"));
-    return fontSize <= 1;
-  }
-}
-
-/* ariaSpecPropertyDataTypes.js is a generated file, use "npm run aria" */
+/* gen-aria-property-data-types.js is a generated file, see https://github.com/opena11y/aria-to-code */
 const propertyDataTypes = {
   'aria-activedescendant': {
     propType: 'property',
@@ -2353,7 +1739,7 @@ const propertyDataTypes = {
   }
 };
 
-/* ariaSpecDesignPatterns.js is a generated file, use "npm run aria" */
+/* gen-aria-role-design-patterns.js is a generated file, see https://github.com/opena11y/aria-to-code */
 const designPatterns = {
   alert: {
     inheritedProps: [
@@ -6599,7 +5985,7 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$q = new DebugLogging('AriaInfo', false);
+const debug$t = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6749,15 +6135,15 @@ class AriaInfo {
     }
 
 
-    if (debug$q.flag) {
-      node.attributes.length && debug$q.log(`${node.outerHTML}`, 1);
-      debug$q.log(`[         isWidget]: ${this.isWidget}`);
-      debug$q.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$q.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$q.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$q.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$q.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$q.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$t.flag) {
+      node.attributes.length && debug$t.log(`${node.outerHTML}`, 1);
+      debug$t.log(`[         isWidget]: ${this.isWidget}`);
+      debug$t.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$t.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$t.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$t.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$t.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$t.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6851,7 +6237,7 @@ class AriaInfo {
             }
           } catch (error) {
             refInfo.invalidIds.push(id);
-            debug$q.log(`[checkForInvalidReferences][error]: ${error}`);
+            debug$t.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {
@@ -6958,13 +6344,414 @@ class AriaInfo {
   }
 }
 
-/* generated file, use npm run aria-in-html */
+/* colorContrast.js */
+
+/* Constants */
+const debug$s = new DebugLogging('colorContrast', false);
+const defaultFontSize = 16; // In pixels (px)
+const fontWeightBold = 300; 
+
+/**
+ * @class ColorContrast
+ *
+ * @desc Identifies the text properties used to determine WCAG color contrast 
+ *       requirements including computing the color contrast ratio based on 
+ *       text and background colors
+ *
+ * @param  {Object}  parentDomElement - Parent DomElement containing ancestor style information
+ * @param  {Object}  elementNode      - dom element node 
+ */
+
+class ColorContrast {
+  constructor (parentDomElement, elementNode) {
+    let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
+    let style = window.getComputedStyle(elementNode, null);
+
+    if (debug$s.flag) {
+      debug$s.separator();
+      debug$s.tag(elementNode);
+    }
+
+    this.opacity            = this.normalizeOpacity(style, parentColorContrast);
+
+    this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
+    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+    this.color              = style.getPropertyValue("color");
+    this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
+
+    this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
+    this.backgroundRepeat   = style.getPropertyValue("background-repeat");
+    this.backgroundPosition = style.getPropertyValue("background-position");
+    this.hasBackgroundImage = this.backgroundImage !== 'none';
+
+    this.fontFamily = style.getPropertyValue("font-family");
+    this.fontSize   = this.normalizeFontSize(style, parentColorContrast);
+    this.fontWeight = this.normalizeFontWeight(style, parentColorContrast);
+    this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
+
+    const L1 = this.getLuminance(this.colorHex);
+    const L2 = this.getLuminance(this.backgroundColorHex);
+    this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
+
+    if (debug$s.flag) {
+      debug$s.log(`[                    opacity]: ${this.opacity}`);
+      debug$s.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$s.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$s.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    }
+  }
+
+  /**
+   * @method normalizeOpacity
+   *
+   * @desc Normalizes opacity to a number 
+   *
+   * @param {Object}  style                - Computed style object for an element node 
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
+   *                                         DomElement
+   *
+   * @return {Number}  Returns a number representing the opacity
+   */
+
+  normalizeOpacity (style, parentColorContrast) {
+    let opacity = style.getPropertyValue("opacity");
+    let parentOpacity = 1.0;
+
+    if (parentColorContrast) {
+      parentOpacity = parentColorContrast.opacity;
+    }
+
+    if (isNaN(opacity)) {
+      opacity = opacity.toLowerCase();
+
+      switch (opacity) {
+        case 'inherit':
+        case 'unset':
+          opacity = parentOpacity;
+          break;
+
+        case 'initial':
+        case 'revert':
+          opacity = 1.0;
+          break;
+
+        default:
+          if (opacity.indexOf('%')) {
+            opacity = parseInt(opacity.split('%')[0]);
+            if (isNaN(opacity)) {
+              opacity = parentOpacity;
+            } else {
+              opacity = parentOpacity * (opacity / 100);
+            }
+          }
+          else {
+            opacity = parseFloat(opacity) * parentOpacity;
+            if (isNaN(opacity)) {
+              opacity = 1.0;
+            }
+          }
+          break;
+      }  // end switch
+    } else {
+      opacity = parseFloat(opacity) * parentOpacity;
+      if (isNaN(opacity)) {
+        opacity = 1.0;
+      }
+
+    }
+
+    // Make sure opacity is between 0 and 1
+    opacity = Math.max(Math.min(opacity, 1.0), 0.0);
+
+    return opacity;
+  }  
+
+  /**
+   * @method normalizeBackgroundColor
+   *
+   * @desc Normalizes background color
+   *
+   * @param {Object}  style                - Computed style object for an element node 
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
+   *                                         DomElement
+   *
+   * @return {String}  Returns the background color
+   */
+
+  normalizeBackgroundColor (style, parentColorContrast) {
+    let backgroundColor = style.getPropertyValue("background-color");
+    if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
+        (backgroundColor == 'transparent') ||
+        (backgroundColor == 'inherit')) {
+
+      if (parentColorContrast) {
+        backgroundColor   = parentColorContrast.backgroundColor;
+      }
+      else {
+        // This is an edge case test typcially for body elements and frames
+        backgroundColor = 'rgb(255,255,255)';
+      }
+    }
+    return backgroundColor;
+  }
+
+  /**
+   * @method normalizeBackgroundImage
+   *
+   * @desc Normalizes background image 
+   *
+   * @param {Object}  style                - Computed style object for an element node 
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
+   *                                         DomElement
+   *
+   * @return {String}  Returns a reference to a background image URL or none
+   */
+
+  normalizeBackgroundImage (style, parentColorContrast) {
+    let backgroundImage = style.getPropertyValue("background-image").toLowerCase();
+
+    if ((backgroundImage === 'inherit') ||
+        (backgroundImage === 'none') ||
+        (backgroundImage === '')) {
+      if (parentColorContrast) {
+        backgroundImage = parentColorContrast.backgroundImage;
+      }
+      else {
+        backgroundImage = 'none';
+      }
+    }
+    return backgroundImage;
+  }
+
+  /**
+   * @method normalizeFontSize
+   *
+   * @desc Normalizes font size to a number 
+   *
+   * @param {Object}  style                - Computed style object for an element node 
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
+   *                                         DomElement
+   *
+   * @return {Number}  Returns a number representing font size value in pixels (px)
+   */
+
+  normalizeFontSize (style, parentColorContrast) {
+    let fontSize = style.getPropertyValue("font-size");
+    if (isNaN(fontSize)) {
+      if (fontSize.toLowerCase() == 'inherit') {
+        if (parentColorContrast) {
+          fontSize = parentColorContrast.fontSize;
+        }
+        else {
+          fontSize = defaultFontSize;
+        }
+      } else {
+        fontSize = parseInt(fontSize, 10);
+        if (isNaN(fontSize)) {
+          fontSize = defaultFontSize;
+        }
+      }
+    } 
+    return fontSize;
+  }
+
+  /**
+   * @method normalizeFontWeight
+   *
+   * @desc Normalizes font weight to a number 
+   *
+   * @param {Object}  style                - Computed style object for an element node 
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
+   *                                         DomElement
+   *
+   * @return {Number}  Returns a number representing font weight value
+   */
+
+  normalizeFontWeight (style, parentColorContrast) {
+    let fontWeight = style.getPropertyValue("font-weight");
+
+    if (isNaN(fontWeight)) {
+      switch (fontWeight.toLowerCase()) {
+      case 'bold':
+        fontWeight = 700;
+        break;
+
+      case 'normal':
+        fontWeight = 400;
+        break;
+
+      case 'inherit':
+        if (parentColorContrast) {
+          fontWeight = parentColorContrast.fontWeight;
+        }
+        else {
+          fontWeight = 400;
+        }
+        break;
+
+      case 'bolder':
+        fontWeight = 700;
+        break;
+
+      default:
+        fontWeight = 400;
+        break;
+
+      }
+    }
+    else {
+      fontWeight = parseInt(fontWeight, 10);
+    }    
+    return fontWeight;
+  }
+
+  /**
+   * @method getLuminance
+   *
+   * @desc Get the luminance value of a hex encoded color
+   *
+   * @param {String}  color    - Hex representation of a color value
+   *
+   * @return {Number}  Returns a number representing the limnance value
+   */
+
+  getLuminance (color) {
+
+    // Get decimal values
+    const R8bit = parseInt(color.substring(0,2),16);
+    const G8bit = parseInt(color.substring(2,4),16);
+    const B8bit = parseInt(color.substring(4,6),16);
+
+    // Get sRGB values
+    const RsRGB = R8bit/255;
+    const GsRGB = G8bit/255;
+    const BsRGB = B8bit/255;
+    // Calculate luminance
+    const R = (RsRGB <= 0.03928) ? RsRGB/12.92 : Math.pow(((RsRGB + 0.055)/1.055), 2.4);
+    const G = (GsRGB <= 0.03928) ? GsRGB/12.92 : Math.pow(((GsRGB + 0.055)/1.055), 2.4);
+    const B = (BsRGB <= 0.03928) ? BsRGB/12.92 : Math.pow(((BsRGB + 0.055)/1.055), 2.4);
+
+    return (0.2126 * R + 0.7152 * G + 0.0722 * B);
+
+  }
+
+  /**
+  * @function rgbToHex
+  *
+  * @desc Converts an RGB color to Hex values
+  *
+  * @param {String} colorRGB       - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
+  * @param {String} backgroundHex  - Background color as a hex value
+  * @param {Number}  opacity       - A number between 0 and 1 representing CSS value
+  *                                  default value is 1.0
+  *
+  * @return  {String}  - Hex version of the RGB color
+  */
+
+  rgbToHex ( colorRGB, backgroundHex, opacity=1.0 ) {
+
+    function hexToString(d) {
+      let hex = Number(d).toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }
+
+    if (!colorRGB) return "000000";
+
+    colorRGB = colorRGB.replace('"', '');
+    colorRGB = colorRGB.split(')')[0];
+    colorRGB = colorRGB.split('(')[1];
+    const parts = colorRGB.split(',');
+    let r1 = parseFloat(parts[0]);
+    let g1 = parseFloat(parts[1]);
+    let b1 = parseFloat(parts[2]);
+    const o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+
+    if (typeof backgroundHex !== 'string' || backgroundHex.length !== 6) {
+      backgroundHex = 'FFFFFF';
+    }
+
+    const r2 = parseInt(backgroundHex.substring(0,2), 16);
+    const g2 = parseInt(backgroundHex.substring(2,4), 16);
+    const b2 = parseInt(backgroundHex.substring(4,6), 16);
+
+    const min = 0.0001;
+
+    if (o1 < min) {
+      return backgroundHex;
+    }
+    else {
+      if (o1 < 1.0) {
+        r1 = Math.round(r1 * o1 + r2 * (1 - o1));
+        g1 = Math.round(g1 * o1 + g2 * (1 - o1));
+        b1 = Math.round(b1 * o1 + b2 * (1 - o1));
+      }
+    }
+
+    if (typeof opacity === 'string') {
+      opacity = parseFloat(opacity);
+    }
+
+    if ((opacity === Number.NaN) || (opacity < 0.0) || (opacity > 1.0)) {
+      opacity = 1.0;
+    }
+
+    if (opacity < 1.0) {
+      r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
+      g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
+      b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
+    }
+
+    return hexToString(r1) + hexToString(g1) + hexToString(b1);
+  }
+
+  /**
+   * @method getLargeFont
+   *
+   * @desc Returns a boolean indiciating if the fontis considered large
+   *
+   * @param {Number}  fontSize    - font size of the element in pixels
+   * @param {Number}  fontWeight  - Numberical value of the font wieght (100-900)
+   *
+   * @return {Boolean}  Returns true if considered a large font, otherwise fals
+   */
+
+  getLargeFont (fontSize, fontWeight) {
+    let isSizeReallyBig = fontSize > (1.2 * defaultFontSize);
+    let isSizeBig       = fontSize > defaultFontSize;
+    let isBold          = fontWeight >= fontWeightBold;
+
+    return isSizeReallyBig || (isSizeBig && isBold);
+  }
+}
+
+/* eventInfo.js */
+
+/* Constants */
+const debug$r = new DebugLogging('EventInfo', false);
+
+/**
+ * @class EventInfo
+ *
+ * @desc Collects information on the links in a web page
+ */
+
+class EventInfo {
+  constructor (node) {
+    this.hasClick  = node.hasAttribute('onclick');
+    this.hasChange = node.hasAttribute('onchange');
+
+    if (debug$r.flag) {
+      console.log(`[hasClick ]: ${this.hasClick}`);
+      console.log(`[hasChange]: ${this.hasChange}`);
+    }
+  }
+}
+
+/* generated file, see https://github.com/opena11y/aria-in-html-to-code */
 const ariaInHTMLInfo = {
   title: 'ARIA in HTML',
-  status: 'W3C Recommendation 09 December 2021',
+  status: 'W3C Recommendation 15 February 2023',
   reference: 'https://www.w3.org/TR/html-aria/',
-  anyRoleAllowed: false,
-  noRoleAllowed: false,
   elementInfo: {
     'a[href]': {
       tagName: 'a',
@@ -6981,7 +6768,8 @@ const ariaInHTMLInfo = {
         'radio',
         'switch',
         'tab',
-        'treeitem'
+        'treeitem',
+        'link'
       ],
       attr1: 'href',
       id: 'a[href]'
@@ -7002,7 +6790,7 @@ const ariaInHTMLInfo = {
     },
     address: {
       tagName: 'address',
-      defaultRole: 'generic',
+      defaultRole: 'group',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'address'
@@ -7018,8 +6806,14 @@ const ariaInHTMLInfo = {
     area: {
       tagName: 'area',
       defaultRole: 'generic',
-      noRoleAllowed: true,
+      noRoleAllowed: false,
       anyRoleAllowed: false,
+      allowedRoles: [
+        'button',
+        'link',
+        'generic',
+        'generic'
+      ],
       id: 'area'
     },
     article: {
@@ -7034,7 +6828,8 @@ const ariaInHTMLInfo = {
         'main',
         'none',
         'presentation',
-        'region'
+        'region',
+        'article'
       ],
       id: 'article'
     },
@@ -7049,7 +6844,8 @@ const ariaInHTMLInfo = {
         'note',
         'presentation',
         'region',
-        'search'
+        'search',
+        'complementary'
       ],
       id: 'aside'
     },
@@ -7073,9 +6869,8 @@ const ariaInHTMLInfo = {
     base: {
       tagName: 'base',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'base'
     },
     bdi: {
@@ -7094,7 +6889,7 @@ const ariaInHTMLInfo = {
     },
     blockquote: {
       tagName: 'blockquote',
-      defaultRole: 'generic',
+      defaultRole: 'blockquote',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'blockquote'
@@ -7112,8 +6907,8 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'br'
     },
@@ -7124,6 +6919,7 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'checkbox',
+        'combobox',
         'link',
         'menuitem',
         'menuitemcheckbox',
@@ -7131,7 +6927,8 @@ const ariaInHTMLInfo = {
         'option',
         'radio',
         'switch',
-        'tab'
+        'tab',
+        'button'
       ],
       id: 'button'
     },
@@ -7144,7 +6941,7 @@ const ariaInHTMLInfo = {
     },
     caption: {
       tagName: 'caption',
-      defaultRole: 'generic',
+      defaultRole: 'caption',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'caption'
@@ -7158,7 +6955,7 @@ const ariaInHTMLInfo = {
     },
     code: {
       tagName: 'code',
-      defaultRole: 'generic',
+      defaultRole: 'code',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'code'
@@ -7166,17 +6963,15 @@ const ariaInHTMLInfo = {
     col: {
       tagName: 'col',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'col'
     },
     colgroup: {
       tagName: 'colgroup',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'colgroup'
     },
     data: {
@@ -7195,24 +6990,17 @@ const ariaInHTMLInfo = {
     },
     dd: {
       tagName: 'dd',
-      defaultRole: 'definition',
+      defaultRole: 'generic',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'dd'
     },
     del: {
       tagName: 'del',
-      defaultRole: 'generic',
+      defaultRole: 'deletion',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'del'
-    },
-    dfn: {
-      tagName: 'dfn',
-      defaultRole: 'term',
-      noRoleAllowed: false,
-      anyRoleAllowed: true,
-      id: 'dfn'
     },
     details: {
       tagName: 'details',
@@ -7221,13 +7009,21 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       id: 'details'
     },
+    dfn: {
+      tagName: 'dfn',
+      defaultRole: 'term',
+      noRoleAllowed: false,
+      anyRoleAllowed: true,
+      id: 'dfn'
+    },
     dialog: {
       tagName: 'dialog',
       defaultRole: 'dialog',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'alertdialog'
+        'alertdialog',
+        'dialog'
       ],
       id: 'dialog'
     },
@@ -7246,14 +7042,14 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'group',
         'list',
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'dl'
     },
     dt: {
       tagName: 'dt',
-      defaultRole: 'term',
+      defaultRole: 'generic',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -7263,7 +7059,7 @@ const ariaInHTMLInfo = {
     },
     em: {
       tagName: 'em',
-      defaultRole: 'generic',
+      defaultRole: 'emphasis',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'em'
@@ -7277,8 +7073,8 @@ const ariaInHTMLInfo = {
         'application',
         'document',
         'img',
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'embed'
     },
@@ -7290,7 +7086,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'radiogroup'
+        'radiogroup',
+        'group'
       ],
       id: 'fieldset'
     },
@@ -7301,8 +7098,8 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'group',
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'figcaption'
     },
@@ -7328,8 +7125,21 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'group',
+        'presentation',
         'none',
-        'presentation'
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       isLandmark: true,
       id: 'footer[contentinfo]'
@@ -7341,8 +7151,21 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'group',
+        'presentation',
         'none',
-        'presentation'
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       id: 'footer'
     },
@@ -7352,9 +7175,10 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'search',
         'none',
-        'presentation'
+        'presentation',
+        'search',
+        'form'
       ],
       id: 'form'
     },
@@ -7366,7 +7190,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h1'
     },
@@ -7378,7 +7203,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h2'
     },
@@ -7390,7 +7216,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h3'
     },
@@ -7402,7 +7229,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h4'
     },
@@ -7414,7 +7242,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h5'
     },
@@ -7426,16 +7255,16 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h6'
     },
     head: {
       tagName: 'head',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'head'
     },
     'header[banner]': {
@@ -7446,7 +7275,20 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'group',
         'none',
-        'presentation'
+        'presentation',
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       isLandmark: true,
       id: 'header[banner]'
@@ -7459,7 +7301,20 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'group',
         'none',
-        'presentation'
+        'presentation',
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       id: 'header'
     },
@@ -7477,16 +7332,16 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'none',
-        'presentation'
+        'presentation',
+        'separator'
       ],
       id: 'hr'
     },
     html: {
       tagName: 'html',
       defaultRole: 'document',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'html'
     },
     i: {
@@ -7524,12 +7379,14 @@ const ariaInHTMLInfo = {
         'menuitemradio',
         'option',
         'progressbar',
+        'radio',
         'scrollbar',
         'separator',
         'slider',
         'switch',
         'tab',
-        'treeitem'
+        'treeitem',
+        'img'
       ],
       hasAccname: true,
       id: 'img[accname]'
@@ -7548,12 +7405,14 @@ const ariaInHTMLInfo = {
         'menuitemradio',
         'option',
         'progressbar',
+        'radio',
         'scrollbar',
         'separator',
         'slider',
         'switch',
         'tab',
-        'treeitem'
+        'treeitem',
+        'img'
       ],
       attr1: 'alt',
       id: 'img[alt]'
@@ -7579,6 +7438,8 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
+        'checkbox',
+        'combobox',
         'link',
         'menuitem',
         'menuitemcheckbox',
@@ -7586,7 +7447,8 @@ const ariaInHTMLInfo = {
         'option',
         'radio',
         'switch',
-        'tab'
+        'tab',
+        'button'
       ],
       attr1: 'type=button',
       id: 'input[type=button]'
@@ -7600,7 +7462,8 @@ const ariaInHTMLInfo = {
         'menuitemcheckbox',
         'option',
         'switch',
-        'button'
+        'button',
+        'checkbox'
       ],
       attr1: 'type=checkbox',
       id: 'input[type=checkbox]'
@@ -7657,9 +7520,8 @@ const ariaInHTMLInfo = {
     'input[type=hidden]': {
       tagName: 'input',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       attr1: 'type=hidden',
       id: 'input[type=hidden]'
     },
@@ -7674,7 +7536,8 @@ const ariaInHTMLInfo = {
         'menuitemcheckbox',
         'menuitemradio',
         'radio',
-        'switch'
+        'switch',
+        'button'
       ],
       attr1: 'type=image',
       id: 'input[type=image]'
@@ -7709,7 +7572,8 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'menuitemradio'
+        'menuitemradio',
+        'radio'
       ],
       attr1: 'type=radio',
       id: 'input[type=radio]'
@@ -7789,7 +7653,8 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'combobox',
         'searchbox',
-        'spinbutton'
+        'spinbutton',
+        'textbox'
       ],
       attr1: 'type=text',
       id: 'input[type=text]'
@@ -7829,7 +7694,7 @@ const ariaInHTMLInfo = {
     },
     ins: {
       tagName: 'ins',
-      defaultRole: 'generic',
+      defaultRole: 'insertion',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'ins'
@@ -7870,16 +7735,16 @@ const ariaInHTMLInfo = {
         'radio',
         'separator',
         'tab',
-        'treeitem'
+        'treeitem',
+        'listitem'
       ],
       id: 'li'
     },
     link: {
       tagName: 'link',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'link'
     },
     main: {
@@ -7892,17 +7757,9 @@ const ariaInHTMLInfo = {
     map: {
       tagName: 'map',
       defaultRole: 'generic',
-      noRoleAllowed: false,
-      anyRoleAllowed: false,
-      allowedRoles: [],
-      id: 'map'
-    },
-    math: {
-      tagName: 'math',
-      defaultRole: 'math',
       noRoleAllowed: true,
       anyRoleAllowed: false,
-      id: 'math'
+      id: 'map'
     },
     mark: {
       tagName: 'mark',
@@ -7911,13 +7768,19 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: true,
       id: 'mark'
     },
+    math: {
+      tagName: 'math',
+      defaultRole: 'math',
+      noRoleAllowed: true,
+      anyRoleAllowed: false,
+      id: 'math'
+    },
     menu: {
       tagName: 'menu',
       defaultRole: 'list',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'directory',
         'group',
         'listbox',
         'menu',
@@ -7927,21 +7790,21 @@ const ariaInHTMLInfo = {
         'radiogroup',
         'tablist',
         'toolbar',
-        'tree'
+        'tree',
+        'list'
       ],
       id: 'menu'
     },
     meta: {
       tagName: 'meta',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'meta'
     },
     meter: {
       tagName: 'meter',
-      defaultRole: 'generic',
+      defaultRole: 'meter',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'meter'
@@ -7954,16 +7817,18 @@ const ariaInHTMLInfo = {
       allowedRoles: [
         'menu',
         'menubar',
-        'tablist'
+        'none',
+        'presentation',
+        'tablist',
+        'navigation'
       ],
       id: 'nav'
     },
     noscript: {
       tagName: 'noscript',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'noscript'
     },
     object: {
@@ -7984,7 +7849,6 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'directory',
         'group',
         'listbox',
         'menu',
@@ -7994,7 +7858,8 @@ const ariaInHTMLInfo = {
         'radiogroup',
         'tablist',
         'toolbar',
-        'tree'
+        'tree',
+        'list'
       ],
       id: 'ol'
     },
@@ -8021,7 +7886,7 @@ const ariaInHTMLInfo = {
     },
     p: {
       tagName: 'p',
-      defaultRole: 'generic',
+      defaultRole: 'paragraph',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'p'
@@ -8029,17 +7894,15 @@ const ariaInHTMLInfo = {
     param: {
       tagName: 'param',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'param'
     },
     picture: {
       tagName: 'picture',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'picture'
     },
     pre: {
@@ -8101,9 +7964,8 @@ const ariaInHTMLInfo = {
     script: {
       tagName: 'script',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'script'
     },
     'section[accname]': {
@@ -8121,6 +7983,7 @@ const ariaInHTMLInfo = {
         'dialog',
         'document',
         'feed',
+        'group',
         'log',
         'main',
         'marquee',
@@ -8130,7 +7993,9 @@ const ariaInHTMLInfo = {
         'presentation',
         'search',
         'status',
-        'tabpanel'
+        'tabpanel',
+        'section',
+        'role=region'
       ],
       hasAccname: true,
       id: 'section[accname]'
@@ -8150,6 +8015,7 @@ const ariaInHTMLInfo = {
         'dialog',
         'document',
         'feed',
+        'group',
         'log',
         'main',
         'marquee',
@@ -8159,7 +8025,9 @@ const ariaInHTMLInfo = {
         'presentation',
         'search',
         'status',
-        'tabpanel'
+        'tabpanel',
+        'section',
+        'role=region'
       ],
       id: 'section'
     },
@@ -8169,7 +8037,8 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'menu'
+        'menu',
+        'combobox'
       ],
       id: 'select'
     },
@@ -8184,9 +8053,8 @@ const ariaInHTMLInfo = {
     slot: {
       tagName: 'slot',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'slot'
     },
     small: {
@@ -8199,9 +8067,8 @@ const ariaInHTMLInfo = {
     source: {
       tagName: 'source',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'source'
     },
     span: {
@@ -8213,7 +8080,7 @@ const ariaInHTMLInfo = {
     },
     strong: {
       tagName: 'strong',
-      defaultRole: 'generic',
+      defaultRole: 'strong',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'strong'
@@ -8221,28 +8088,27 @@ const ariaInHTMLInfo = {
     style: {
       tagName: 'style',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'style'
     },
     sub: {
       tagName: 'sub',
-      defaultRole: 'generic',
+      defaultRole: 'subscript',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'sub'
     },
     summary: {
       tagName: 'summary',
-      defaultRole: 'button',
+      defaultRole: 'summary',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'summary'
     },
     sup: {
       tagName: 'sup',
-      defaultRole: 'generic',
+      defaultRole: 'superscript',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'sup'
@@ -8271,9 +8137,8 @@ const ariaInHTMLInfo = {
     template: {
       tagName: 'template',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'template'
     },
     textarea: {
@@ -8299,7 +8164,7 @@ const ariaInHTMLInfo = {
     },
     time: {
       tagName: 'time',
-      defaultRole: 'generic',
+      defaultRole: 'time',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'time'
@@ -8307,9 +8172,8 @@ const ariaInHTMLInfo = {
     title: {
       tagName: 'title',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'title'
     },
     'td[cell]': {
@@ -8390,9 +8254,8 @@ const ariaInHTMLInfo = {
     track: {
       tagName: 'track',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'track'
     },
     u: {
@@ -8408,7 +8271,6 @@ const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'directory',
         'group',
         'listbox',
         'menu',
@@ -8418,7 +8280,8 @@ const ariaInHTMLInfo = {
         'radiogroup',
         'tablist',
         'toolbar',
-        'tree'
+        'tree',
+        'list'
       ],
       id: 'ul'
     },
@@ -8443,7 +8306,11 @@ const ariaInHTMLInfo = {
       tagName: 'wbr',
       defaultRole: 'generic',
       noRoleAllowed: false,
-      anyRoleAllowed: true,
+      anyRoleAllowed: false,
+      allowedRoles: [
+        'none',
+        'presentation'
+      ],
       id: 'wbr'
     }
   }
@@ -8452,7 +8319,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$p = new DebugLogging('ariaInHtml', false);
+const debug$q = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8644,11 +8511,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$p.flag) {
+  if (debug$q.flag) {
     if (tagName === 'h2') {
-      debug$p.tag(node);
+      debug$q.tag(node);
     }
-    debug$p.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$q.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8740,6 +8607,217 @@ function isCellInLayoutTable  (node) {
     node = node.parentNode;
   }
   return false;
+}
+
+/* visibility.js */
+
+/* Constants */
+const debug$p = new DebugLogging('visibility', false);
+
+/**
+ * @class Visibility
+ *
+ * @desc Identifies the properties used to determine the visibility of the element
+ *       for both the graphical rendering and assistive technologies
+ *
+ * @param  {Object}  parentDomElement - Parent DomElement containing ancestor style information
+ * @param  {Object}  elementNode      - dom element node 
+ */
+
+class Visibility {
+  constructor (parentDomElement, elementNode) {
+    let parentVisibility = parentDomElement ? parentDomElement.visibility : false;
+    let style = window.getComputedStyle(elementNode, null);
+    let tagName = elementNode.tagName ? elementNode.tagName : '';
+
+    this.isHidden           = this.normalizeHidden (elementNode, parentVisibility);
+    this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
+    this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);
+    this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
+    this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
+    this.isSmallFont        = this.getFontSize(style);
+
+    // Set default values for visibility
+    this.isVisibleOnScreen = true;
+    this.isVisibleToAT     = true; // AT -> Assistive Technology
+
+    if (this.isHidden ||
+        this.isDisplayNone ||
+        this.isVisibilityHidden) {
+
+      if (tagName !== 'area') {
+        this.isVisibleOnScreen = false;
+        this.isVisibleToAT     = false;
+      }
+    }
+
+    if (this.isSmallHeight ||
+        this.isSmallFont) {
+      this.isVisibleOnScreen = false;
+    }
+
+    if (this.isAriaHidden) {
+      this.isVisibleToAT = false;
+    }
+
+    if (debug$p.flag) {
+      debug$p.separator();
+      debug$p.tag(elementNode);
+      debug$p.log('[          isHidden]: ' + this.isHidden);
+      debug$p.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$p.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$p.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$p.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$p.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$p.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$p.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    }
+  }
+
+  /**
+   * @method normalizeHidden
+   *
+   * @desc Determine if the hidden attribute is set on this element
+   *       or one of its ancestors 
+   *
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns true if element or one of its ancestors has the 
+   *                    hidden attribute 
+   */
+
+  normalizeHidden (node, parentVisibility) {
+    let hidden = node.getAttribute('hidden');
+    hidden = hidden ? true : false;
+    if (parentVisibility &&
+        parentVisibility.hidden)  {
+      hidden = true;
+    }
+    return hidden;
+  }
+
+  /**
+   * @method normalizeAriaHidden
+   *
+   * @desc Determine if the aria-hidden attribute is set to true on this element
+   *       or one of its ancestors 
+   *
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns true if element or one of its ancestors has the 
+   *                    aria-hidden attribute set to true 
+   */
+
+  normalizeAriaHidden (node, parentVisibility) {
+    let hidden = false;
+    let ariaHidden = node.getAttribute('aria-hidden');
+    if (ariaHidden) {
+      ariaHidden = ariaHidden.trim().toLowerCase();
+      hidden = (ariaHidden === 'true') ? true : false;
+    }
+    if (parentVisibility &&
+        parentVisibility.isAriaHidden)  {
+      hidden = true;
+    }
+    return hidden;
+  }
+
+  /**
+   * @method normalizeDisplay
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on 
+   *       the CSS display property
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+  normalizeDisplay (style, parentVisibility) {
+    let display = style.getPropertyValue("display");
+    let isDisplayNone = false;
+
+    if ((display === 'none') || 
+        (parentVisibility && parentVisibility.isDisplayNone)) {
+      isDisplayNone = true;
+    }
+
+    return isDisplayNone;
+  }
+
+  /**
+   * @method normalizeVisibility
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on 
+   *       the CSS visibility property
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+  normalizeVisibility (style, parentVisibility) {
+    let visibility = style.getPropertyValue("visibility");
+    let isVisibilityHidden =  parentVisibility.isVisibilityHidden; 
+
+    if ((visibility === 'collapse') ||
+        (visibility === 'hidden')) {
+        isVisibilityHidden = true;
+    }
+    else {
+      if (visibility === 'visible') {
+        isVisibilityHidden = false;        
+      }
+    }
+    return isVisibilityHidden;
+  }
+
+  /**
+   * @method normalizeHeight
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on
+   *       the CSS height and overflow properties
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean}  Returns a true if content is visible
+   */
+
+  normalizeHeight (style, parentVisibility) {
+    const height   = parseFloat(style.getPropertyValue("height"));
+    const overflow = style.getPropertyValue("overflow");
+    return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
+  }
+
+  /**
+   * @method getFontSize
+   *
+   * @desc Computes a boolean value to indicate whether the content or its
+   *       ancestor that results in content not being displayed based on
+   *       the CSS height and overflow properties
+   *
+   * @param {Object}  style             - Computed style object for an element node
+   *
+   * @return {Boolean}  Returns a true if content is small
+   */
+
+  getFontSize (style) {
+    const fontSize = parseFloat(style.getPropertyValue("font-size"));
+    return fontSize <= 1;
+  }
 }
 
 /*
@@ -9382,8 +9460,12 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
-  if (prefix !== 'none') result = prefix.replaceAll('"', '') + result;
-  if (suffix !== 'none') result = result + suffix.replaceAll('"', '');
+ if (prefix !== 'none') {
+    result = prefix.replaceAll('"', '') + result;
+  }
+  if (suffix !== 'none') {
+    result = result + suffix.replaceAll('"', '');
+  }
 
   return result;
 }

@@ -1,17 +1,14 @@
-#!/usr/bin/env node
-/*
- *   This content is licensed according to the W3C Software License at
- *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
- *
- *   File:   reference-tables.js
- */
+/* generate-aria-in-html-test-page.js */
 
 var require = require || {};
 
 const fs = require('fs');
 const path = require('path');
 
-let aria12Info = {};
+const filenameAriaInfo = path.join('.', 'aria-info', 'gen-aria-info.json');
+const filenameAriaInHtmlInfo = path.join('.', 'aria-info', 'gen-aria-in-html-info.json');
+
+let ariaInfo = {};
 let ariaInHTMLInfo = {};
 let notAllowedTagNames = ' bdo body br datalist details head iframe math optgroup rp ruby rt summary track ';
 
@@ -55,7 +52,7 @@ function generateTestItems(testId, infoItem, spaces, childContent) {
 
   let id;
 
-  for (let ariaRole in aria12Info.designPatterns) {
+  for (let ariaRole in ariaInfo.designPatterns) {
 
     id = 'id="test-' + testId + '-' + roleCount + '"';
 
@@ -156,7 +153,7 @@ function generateTableTestItems(testId, infoItem, spaces) {
 
   let html = '';
 
-  for (let ariaRole in aria12Info.designPatterns) {
+  for (let ariaRole in ariaInfo.designPatterns) {
 
     let result = getResult(infoItem, ariaRole);
 
@@ -374,7 +371,7 @@ function createTestCases(name, testItems) {
 </html>
         `
 
-  let fname = path.join('..', 'testsuite', 'rules', 'html', 'html_3_aria_in_html_' + name + '.html');
+  let fname = path.join('.', 'testsuite', 'rules', 'html', 'html_3_aria_in_html_' + name + '.html');
 
   console.log('[fanme]: ' + fname);
 
@@ -387,18 +384,18 @@ function createTestCases(name, testItems) {
   });
 }
 
-fs.readFile('aria12.json', 'utf-8', (err, data) => {
+fs.readFile(filenameAriaInfo, 'utf-8', (err, data) => {
 
   if (err) {
-    console.log('Error reading "aria12.json" file from disk: ${err}');
+    console.log(`Error reading ${filenameAriaInfo} file from disk: ${err}`);
   } else {
 
-    aria12Info = JSON.parse(data);
+    ariaInfo = JSON.parse(data);
 
-    fs.readFile('aria-in-html.json', 'utf-8', (err, data) => {
+    fs.readFile(filenameAriaInHtmlInfo, 'utf-8', (err, data) => {
 
       if (err) {
-        console.log('Error reading "aria-in-html.json" file from disk: ${err}');
+        console.log(`Error reading ${filenameAriaInHtmlInfo} file from disk: ${err}`);
       } else {
 
         ariaInHTMLInfo = JSON.parse(data);
@@ -464,10 +461,12 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
         createTestCases('no_role_allowed', noRoleItems);
 
         let anyRoleItems = [];
-        for(let item in ariaInHTMLInfo.elementInfo && (completedItems.indexOf(item) < 0)) {
-          if (ariaInHTMLInfo.elementInfo[item].anyRoleAllowed) {
-            anyRoleItems.push(item)
-            completedItems.push(item);
+        for(let item in ariaInHTMLInfo.elementInfo) {
+          if (completedItems.indexOf(item) < 0) {
+            if (ariaInHTMLInfo.elementInfo[item].anyRoleAllowed) {
+              anyRoleItems.push(item)
+              completedItems.push(item);
+            }
           }
         }
         createTestCases('any_role_allowed', anyRoleItems);

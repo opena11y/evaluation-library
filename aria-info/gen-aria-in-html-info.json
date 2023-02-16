@@ -1,9 +1,7 @@
 {
     "title": "ARIA in HTML",
-    "status": "W3C Recommendation 09 December 2021",
+    "status": "W3C Recommendation 15 February 2023",
     "reference": "https://www.w3.org/TR/html-aria/",
-    "anyRoleAllowed": false,
-    "noRoleAllowed": false,
     "elementInfo": {
         "a[href]": {
             "tagName": "a",
@@ -20,7 +18,8 @@
                 "radio",
                 "switch",
                 "tab",
-                "treeitem"
+                "treeitem",
+                "link"
             ],
             "attr1": "href",
             "id": "a[href]"
@@ -41,7 +40,7 @@
         },
         "address": {
             "tagName": "address",
-            "defaultRole": "generic",
+            "defaultRole": "group",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "address"
@@ -57,8 +56,14 @@
         "area": {
             "tagName": "area",
             "defaultRole": "generic",
-            "noRoleAllowed": true,
+            "noRoleAllowed": false,
             "anyRoleAllowed": false,
+            "allowedRoles": [
+                "button",
+                "link",
+                "generic",
+                "generic"
+            ],
             "id": "area"
         },
         "article": {
@@ -73,7 +78,8 @@
                 "main",
                 "none",
                 "presentation",
-                "region"
+                "region",
+                "article"
             ],
             "id": "article"
         },
@@ -88,7 +94,8 @@
                 "note",
                 "presentation",
                 "region",
-                "search"
+                "search",
+                "complementary"
             ],
             "id": "aside"
         },
@@ -112,9 +119,8 @@
         "base": {
             "tagName": "base",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "base"
         },
         "bdi": {
@@ -133,7 +139,7 @@
         },
         "blockquote": {
             "tagName": "blockquote",
-            "defaultRole": "generic",
+            "defaultRole": "blockquote",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "blockquote"
@@ -151,8 +157,8 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "presentation",
-                "none"
+                "none",
+                "presentation"
             ],
             "id": "br"
         },
@@ -163,6 +169,7 @@
             "anyRoleAllowed": false,
             "allowedRoles": [
                 "checkbox",
+                "combobox",
                 "link",
                 "menuitem",
                 "menuitemcheckbox",
@@ -170,7 +177,8 @@
                 "option",
                 "radio",
                 "switch",
-                "tab"
+                "tab",
+                "button"
             ],
             "id": "button"
         },
@@ -183,7 +191,7 @@
         },
         "caption": {
             "tagName": "caption",
-            "defaultRole": "generic",
+            "defaultRole": "caption",
             "noRoleAllowed": true,
             "anyRoleAllowed": false,
             "id": "caption"
@@ -197,7 +205,7 @@
         },
         "code": {
             "tagName": "code",
-            "defaultRole": "generic",
+            "defaultRole": "code",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "code"
@@ -205,17 +213,15 @@
         "col": {
             "tagName": "col",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "col"
         },
         "colgroup": {
             "tagName": "colgroup",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "colgroup"
         },
         "data": {
@@ -234,24 +240,17 @@
         },
         "dd": {
             "tagName": "dd",
-            "defaultRole": "definition",
+            "defaultRole": "generic",
             "noRoleAllowed": true,
             "anyRoleAllowed": false,
             "id": "dd"
         },
         "del": {
             "tagName": "del",
-            "defaultRole": "generic",
+            "defaultRole": "deletion",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "del"
-        },
-        "dfn": {
-            "tagName": "dfn",
-            "defaultRole": "term",
-            "noRoleAllowed": false,
-            "anyRoleAllowed": true,
-            "id": "dfn"
         },
         "details": {
             "tagName": "details",
@@ -260,13 +259,21 @@
             "anyRoleAllowed": false,
             "id": "details"
         },
+        "dfn": {
+            "tagName": "dfn",
+            "defaultRole": "term",
+            "noRoleAllowed": false,
+            "anyRoleAllowed": true,
+            "id": "dfn"
+        },
         "dialog": {
             "tagName": "dialog",
             "defaultRole": "dialog",
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "alertdialog"
+                "alertdialog",
+                "dialog"
             ],
             "id": "dialog"
         },
@@ -285,14 +292,14 @@
             "allowedRoles": [
                 "group",
                 "list",
-                "presentation",
-                "none"
+                "none",
+                "presentation"
             ],
             "id": "dl"
         },
         "dt": {
             "tagName": "dt",
-            "defaultRole": "term",
+            "defaultRole": "generic",
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
@@ -302,7 +309,7 @@
         },
         "em": {
             "tagName": "em",
-            "defaultRole": "generic",
+            "defaultRole": "emphasis",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "em"
@@ -316,8 +323,8 @@
                 "application",
                 "document",
                 "img",
-                "presentation",
-                "none"
+                "none",
+                "presentation"
             ],
             "id": "embed"
         },
@@ -329,7 +336,8 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "radiogroup"
+                "radiogroup",
+                "group"
             ],
             "id": "fieldset"
         },
@@ -340,8 +348,8 @@
             "anyRoleAllowed": false,
             "allowedRoles": [
                 "group",
-                "presentation",
-                "none"
+                "none",
+                "presentation"
             ],
             "id": "figcaption"
         },
@@ -367,8 +375,21 @@
             "anyRoleAllowed": false,
             "allowedRoles": [
                 "group",
+                "presentation",
                 "none",
-                "presentation"
+                "article",
+                "aside",
+                "main",
+                "nav",
+                "section",
+                "role=article",
+                "complementary",
+                "main",
+                "navigation",
+                "region",
+                "role=contentinfo",
+                "role=generic",
+                "generic"
             ],
             "isLandmark": true,
             "id": "footer[contentinfo]"
@@ -380,8 +401,21 @@
             "anyRoleAllowed": false,
             "allowedRoles": [
                 "group",
+                "presentation",
                 "none",
-                "presentation"
+                "article",
+                "aside",
+                "main",
+                "nav",
+                "section",
+                "role=article",
+                "complementary",
+                "main",
+                "navigation",
+                "region",
+                "role=contentinfo",
+                "role=generic",
+                "generic"
             ],
             "id": "footer"
         },
@@ -391,9 +425,10 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "search",
                 "none",
-                "presentation"
+                "presentation",
+                "search",
+                "form"
             ],
             "id": "form"
         },
@@ -405,7 +440,8 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "tab"
+                "tab",
+                "heading"
             ],
             "id": "h1"
         },
@@ -417,7 +453,8 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "tab"
+                "tab",
+                "heading"
             ],
             "id": "h2"
         },
@@ -429,7 +466,8 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "tab"
+                "tab",
+                "heading"
             ],
             "id": "h3"
         },
@@ -441,7 +479,8 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "tab"
+                "tab",
+                "heading"
             ],
             "id": "h4"
         },
@@ -453,7 +492,8 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "tab"
+                "tab",
+                "heading"
             ],
             "id": "h5"
         },
@@ -465,16 +505,16 @@
             "allowedRoles": [
                 "none",
                 "presentation",
-                "tab"
+                "tab",
+                "heading"
             ],
             "id": "h6"
         },
         "head": {
             "tagName": "head",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "head"
         },
         "header[banner]": {
@@ -485,7 +525,20 @@
             "allowedRoles": [
                 "group",
                 "none",
-                "presentation"
+                "presentation",
+                "article",
+                "aside",
+                "main",
+                "nav",
+                "section",
+                "role=article",
+                "complementary",
+                "main",
+                "navigation",
+                "region",
+                "role=contentinfo",
+                "role=generic",
+                "generic"
             ],
             "isLandmark": true,
             "id": "header[banner]"
@@ -498,7 +551,20 @@
             "allowedRoles": [
                 "group",
                 "none",
-                "presentation"
+                "presentation",
+                "article",
+                "aside",
+                "main",
+                "nav",
+                "section",
+                "role=article",
+                "complementary",
+                "main",
+                "navigation",
+                "region",
+                "role=contentinfo",
+                "role=generic",
+                "generic"
             ],
             "id": "header"
         },
@@ -516,16 +582,16 @@
             "anyRoleAllowed": false,
             "allowedRoles": [
                 "none",
-                "presentation"
+                "presentation",
+                "separator"
             ],
             "id": "hr"
         },
         "html": {
             "tagName": "html",
             "defaultRole": "document",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "html"
         },
         "i": {
@@ -563,12 +629,14 @@
                 "menuitemradio",
                 "option",
                 "progressbar",
+                "radio",
                 "scrollbar",
                 "separator",
                 "slider",
                 "switch",
                 "tab",
-                "treeitem"
+                "treeitem",
+                "img"
             ],
             "hasAccname": true,
             "id": "img[accname]"
@@ -587,12 +655,14 @@
                 "menuitemradio",
                 "option",
                 "progressbar",
+                "radio",
                 "scrollbar",
                 "separator",
                 "slider",
                 "switch",
                 "tab",
-                "treeitem"
+                "treeitem",
+                "img"
             ],
             "attr1": "alt",
             "id": "img[alt]"
@@ -618,6 +688,8 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
+                "checkbox",
+                "combobox",
                 "link",
                 "menuitem",
                 "menuitemcheckbox",
@@ -625,7 +697,8 @@
                 "option",
                 "radio",
                 "switch",
-                "tab"
+                "tab",
+                "button"
             ],
             "attr1": "type=button",
             "id": "input[type=button]"
@@ -639,7 +712,8 @@
                 "menuitemcheckbox",
                 "option",
                 "switch",
-                "button"
+                "button",
+                "checkbox"
             ],
             "attr1": "type=checkbox",
             "id": "input[type=checkbox]"
@@ -696,9 +770,8 @@
         "input[type=hidden]": {
             "tagName": "input",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "attr1": "type=hidden",
             "id": "input[type=hidden]"
         },
@@ -713,7 +786,8 @@
                 "menuitemcheckbox",
                 "menuitemradio",
                 "radio",
-                "switch"
+                "switch",
+                "button"
             ],
             "attr1": "type=image",
             "id": "input[type=image]"
@@ -748,7 +822,8 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "menuitemradio"
+                "menuitemradio",
+                "radio"
             ],
             "attr1": "type=radio",
             "id": "input[type=radio]"
@@ -828,7 +903,8 @@
             "allowedRoles": [
                 "combobox",
                 "searchbox",
-                "spinbutton"
+                "spinbutton",
+                "textbox"
             ],
             "attr1": "type=text",
             "id": "input[type=text]"
@@ -868,7 +944,7 @@
         },
         "ins": {
             "tagName": "ins",
-            "defaultRole": "generic",
+            "defaultRole": "insertion",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "ins"
@@ -909,16 +985,16 @@
                 "radio",
                 "separator",
                 "tab",
-                "treeitem"
+                "treeitem",
+                "listitem"
             ],
             "id": "li"
         },
         "link": {
             "tagName": "link",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "link"
         },
         "main": {
@@ -931,17 +1007,9 @@
         "map": {
             "tagName": "map",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
-            "anyRoleAllowed": false,
-            "allowedRoles": [],
-            "id": "map"
-        },
-        "math": {
-            "tagName": "math",
-            "defaultRole": "math",
             "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "id": "math"
+            "id": "map"
         },
         "mark": {
             "tagName": "mark",
@@ -950,13 +1018,19 @@
             "anyRoleAllowed": true,
             "id": "mark"
         },
+        "math": {
+            "tagName": "math",
+            "defaultRole": "math",
+            "noRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "id": "math"
+        },
         "menu": {
             "tagName": "menu",
             "defaultRole": "list",
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "directory",
                 "group",
                 "listbox",
                 "menu",
@@ -966,21 +1040,21 @@
                 "radiogroup",
                 "tablist",
                 "toolbar",
-                "tree"
+                "tree",
+                "list"
             ],
             "id": "menu"
         },
         "meta": {
             "tagName": "meta",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "meta"
         },
         "meter": {
             "tagName": "meter",
-            "defaultRole": "generic",
+            "defaultRole": "meter",
             "noRoleAllowed": true,
             "anyRoleAllowed": false,
             "id": "meter"
@@ -993,16 +1067,18 @@
             "allowedRoles": [
                 "menu",
                 "menubar",
-                "tablist"
+                "none",
+                "presentation",
+                "tablist",
+                "navigation"
             ],
             "id": "nav"
         },
         "noscript": {
             "tagName": "noscript",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "noscript"
         },
         "object": {
@@ -1023,7 +1099,6 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "directory",
                 "group",
                 "listbox",
                 "menu",
@@ -1033,7 +1108,8 @@
                 "radiogroup",
                 "tablist",
                 "toolbar",
-                "tree"
+                "tree",
+                "list"
             ],
             "id": "ol"
         },
@@ -1060,7 +1136,7 @@
         },
         "p": {
             "tagName": "p",
-            "defaultRole": "generic",
+            "defaultRole": "paragraph",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "p"
@@ -1068,17 +1144,15 @@
         "param": {
             "tagName": "param",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "param"
         },
         "picture": {
             "tagName": "picture",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "picture"
         },
         "pre": {
@@ -1140,9 +1214,8 @@
         "script": {
             "tagName": "script",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "script"
         },
         "section[accname]": {
@@ -1160,6 +1233,7 @@
                 "dialog",
                 "document",
                 "feed",
+                "group",
                 "log",
                 "main",
                 "marquee",
@@ -1169,7 +1243,9 @@
                 "presentation",
                 "search",
                 "status",
-                "tabpanel"
+                "tabpanel",
+                "section",
+                "role=region"
             ],
             "hasAccname": true,
             "id": "section[accname]"
@@ -1189,6 +1265,7 @@
                 "dialog",
                 "document",
                 "feed",
+                "group",
                 "log",
                 "main",
                 "marquee",
@@ -1198,7 +1275,9 @@
                 "presentation",
                 "search",
                 "status",
-                "tabpanel"
+                "tabpanel",
+                "section",
+                "role=region"
             ],
             "id": "section"
         },
@@ -1208,7 +1287,8 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "menu"
+                "menu",
+                "combobox"
             ],
             "id": "select"
         },
@@ -1223,9 +1303,8 @@
         "slot": {
             "tagName": "slot",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "slot"
         },
         "small": {
@@ -1238,9 +1317,8 @@
         "source": {
             "tagName": "source",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "source"
         },
         "span": {
@@ -1252,7 +1330,7 @@
         },
         "strong": {
             "tagName": "strong",
-            "defaultRole": "generic",
+            "defaultRole": "strong",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "strong"
@@ -1260,28 +1338,27 @@
         "style": {
             "tagName": "style",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "style"
         },
         "sub": {
             "tagName": "sub",
-            "defaultRole": "generic",
+            "defaultRole": "subscript",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "sub"
         },
         "summary": {
             "tagName": "summary",
-            "defaultRole": "button",
+            "defaultRole": "summary",
             "noRoleAllowed": true,
             "anyRoleAllowed": false,
             "id": "summary"
         },
         "sup": {
             "tagName": "sup",
-            "defaultRole": "generic",
+            "defaultRole": "superscript",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "sup"
@@ -1310,9 +1387,8 @@
         "template": {
             "tagName": "template",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "template"
         },
         "textarea": {
@@ -1338,7 +1414,7 @@
         },
         "time": {
             "tagName": "time",
-            "defaultRole": "generic",
+            "defaultRole": "time",
             "noRoleAllowed": false,
             "anyRoleAllowed": true,
             "id": "time"
@@ -1346,9 +1422,8 @@
         "title": {
             "tagName": "title",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "title"
         },
         "td[cell]": {
@@ -1429,9 +1504,8 @@
         "track": {
             "tagName": "track",
             "defaultRole": "generic",
-            "noRoleAllowed": false,
+            "noRoleAllowed": true,
             "anyRoleAllowed": false,
-            "allowedRoles": [],
             "id": "track"
         },
         "u": {
@@ -1447,7 +1521,6 @@
             "noRoleAllowed": false,
             "anyRoleAllowed": false,
             "allowedRoles": [
-                "directory",
                 "group",
                 "listbox",
                 "menu",
@@ -1457,7 +1530,8 @@
                 "radiogroup",
                 "tablist",
                 "toolbar",
-                "tree"
+                "tree",
+                "list"
             ],
             "id": "ul"
         },
@@ -1482,7 +1556,11 @@
             "tagName": "wbr",
             "defaultRole": "generic",
             "noRoleAllowed": false,
-            "anyRoleAllowed": true,
+            "anyRoleAllowed": false,
+            "allowedRoles": [
+                "none",
+                "presentation"
+            ],
             "id": "wbr"
         }
     }

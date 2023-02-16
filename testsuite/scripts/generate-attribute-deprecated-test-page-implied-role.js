@@ -1,23 +1,21 @@
-#!/usr/bin/env node
-/*
- *   This content is licensed according to the W3C Software License at
- *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
- *
- *   File:   reference-tables.js
- */
+/*  generate-attribute-deprecated-test-page-implied-role.js */
 
 var require = require || {};
 
 const fs = require('fs');
 const path = require('path');
 
-let aria12Info = {};
+const filenameAriaInfo       = path.join('.', 'aria-info', 'gen-aria-info.json');
+const filenameAriaInHtmlInfo = path.join('.', 'aria-info', 'gen-aria-in-html-info.json');
+const filenameTestCase       = path.join('.', 'testsuite', 'rules', 'widgets', 'widget_15_deprecated_aria_attributes_implicit_roles.html');
+
+let ariaInfo = {};
 let ariaInHTMLInfo = {};
 
 let allowedElements = " a article b blockquote code div dd dl dt em i ol span strong table td th tr ul li "
 
 function getPropValue(prop)  {
-  let propInfo = aria12Info.propertyDataTypes[prop];
+  let propInfo = ariaInfo.propertyDataTypes[prop];
 
   if (propInfo.defaultValue) {
     return propInfo.defaultValue;
@@ -26,26 +24,26 @@ function getPropValue(prop)  {
   return 'ID_MSG';
 }
 
-fs.readFile('aria12.json', 'utf-8', (err, data) => {
+fs.readFile(filenameAriaInfo, 'utf-8', (err, data) => {
 
   if (err) {
-    console.log('Error reading "aria12.json" file from disk: ${err}');
+    console.log(`Error reading ${filenameAriaInfo} file from disk: ${err}`);
   } else {
 
-    aria12Info = JSON.parse(data);
+    ariaInfo = JSON.parse(data);
 
-    fs.readFile('aria-in-html.json', 'utf-8', (err, data) => {
+    fs.readFile(filenameAriaInHtmlInfo, 'utf-8', (err, data) => {
 
       if (err) {
-        console.log('Error reading "aria-in-html.json" file from disk: ${err}');
+        console.log(`Error reading ${filenameAriaInHtmlInfo} file from disk: ${err}`);
       } else {
 
         ariaInHTMLInfo = JSON.parse(data);
 
         let body = '';
 
-        for (let ariaRole in aria12Info.designPatterns) {
-          let dp = aria12Info.designPatterns[ariaRole];
+        for (let ariaRole in ariaInfo.designPatterns) {
+          let dp = ariaInfo.designPatterns[ariaRole];
           let depProps = dp.deprecatedProps;
           if (depProps.length) {
             console.log('[role]: ' + ariaRole + ' (' + depProps.length + ')');
@@ -141,13 +139,11 @@ fs.readFile('aria12.json', 'utf-8', (err, data) => {
   </body>
   </html>
           `
-        let fname = path.join('..', 'testsuite', 'rules', 'widgets', 'widget_15_deprecated_aria_attributes_implicit_roles.html');
-
-        fs.writeFile(fname, html, (err) => {
+        fs.writeFile(filenameTestCase, html, (err) => {
           if (err) {
-            console.log('Error reading file from disk: ${err}');
+            console.log(`Error reading file ${filenameTestCase}from disk: ${err}`);
           } else {
-            console.log('WIDGET 15 rule test file created: ' + fname);
+            console.log('WIDGET 15 rule test file created: ' + filenameTestCase);
           }
         });
 

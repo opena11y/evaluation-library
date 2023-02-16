@@ -539,8 +539,12 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
-  if (prefix !== 'none') result = prefix.replaceAll('"', '') + result;
-  if (suffix !== 'none') result = result + suffix.replaceAll('"', '');
+ if (prefix !== 'none') {
+    result = prefix.replaceAll('"', '') + result;
+  }
+  if (suffix !== 'none') {
+    result = result + suffix.replaceAll('"', '');
+  }
 
   return result;
 }

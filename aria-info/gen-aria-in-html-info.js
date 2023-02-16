@@ -1,10 +1,8 @@
-/* generated file, use npm run aria-in-html */
+/* generated file, see https://github.com/opena11y/aria-in-html-to-code */
 export const ariaInHTMLInfo = {
   title: 'ARIA in HTML',
-  status: 'W3C Recommendation 09 December 2021',
+  status: 'W3C Recommendation 15 February 2023',
   reference: 'https://www.w3.org/TR/html-aria/',
-  anyRoleAllowed: false,
-  noRoleAllowed: false,
   elementInfo: {
     'a[href]': {
       tagName: 'a',
@@ -21,7 +19,8 @@ export const ariaInHTMLInfo = {
         'radio',
         'switch',
         'tab',
-        'treeitem'
+        'treeitem',
+        'link'
       ],
       attr1: 'href',
       id: 'a[href]'
@@ -42,7 +41,7 @@ export const ariaInHTMLInfo = {
     },
     address: {
       tagName: 'address',
-      defaultRole: 'generic',
+      defaultRole: 'group',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'address'
@@ -58,8 +57,14 @@ export const ariaInHTMLInfo = {
     area: {
       tagName: 'area',
       defaultRole: 'generic',
-      noRoleAllowed: true,
+      noRoleAllowed: false,
       anyRoleAllowed: false,
+      allowedRoles: [
+        'button',
+        'link',
+        'generic',
+        'generic'
+      ],
       id: 'area'
     },
     article: {
@@ -74,7 +79,8 @@ export const ariaInHTMLInfo = {
         'main',
         'none',
         'presentation',
-        'region'
+        'region',
+        'article'
       ],
       id: 'article'
     },
@@ -89,7 +95,8 @@ export const ariaInHTMLInfo = {
         'note',
         'presentation',
         'region',
-        'search'
+        'search',
+        'complementary'
       ],
       id: 'aside'
     },
@@ -113,9 +120,8 @@ export const ariaInHTMLInfo = {
     base: {
       tagName: 'base',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'base'
     },
     bdi: {
@@ -134,7 +140,7 @@ export const ariaInHTMLInfo = {
     },
     blockquote: {
       tagName: 'blockquote',
-      defaultRole: 'generic',
+      defaultRole: 'blockquote',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'blockquote'
@@ -152,8 +158,8 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'br'
     },
@@ -164,6 +170,7 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'checkbox',
+        'combobox',
         'link',
         'menuitem',
         'menuitemcheckbox',
@@ -171,7 +178,8 @@ export const ariaInHTMLInfo = {
         'option',
         'radio',
         'switch',
-        'tab'
+        'tab',
+        'button'
       ],
       id: 'button'
     },
@@ -184,7 +192,7 @@ export const ariaInHTMLInfo = {
     },
     caption: {
       tagName: 'caption',
-      defaultRole: 'generic',
+      defaultRole: 'caption',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'caption'
@@ -198,7 +206,7 @@ export const ariaInHTMLInfo = {
     },
     code: {
       tagName: 'code',
-      defaultRole: 'generic',
+      defaultRole: 'code',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'code'
@@ -206,17 +214,15 @@ export const ariaInHTMLInfo = {
     col: {
       tagName: 'col',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'col'
     },
     colgroup: {
       tagName: 'colgroup',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'colgroup'
     },
     data: {
@@ -235,24 +241,17 @@ export const ariaInHTMLInfo = {
     },
     dd: {
       tagName: 'dd',
-      defaultRole: 'definition',
+      defaultRole: 'generic',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'dd'
     },
     del: {
       tagName: 'del',
-      defaultRole: 'generic',
+      defaultRole: 'deletion',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'del'
-    },
-    dfn: {
-      tagName: 'dfn',
-      defaultRole: 'term',
-      noRoleAllowed: false,
-      anyRoleAllowed: true,
-      id: 'dfn'
     },
     details: {
       tagName: 'details',
@@ -261,13 +260,21 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       id: 'details'
     },
+    dfn: {
+      tagName: 'dfn',
+      defaultRole: 'term',
+      noRoleAllowed: false,
+      anyRoleAllowed: true,
+      id: 'dfn'
+    },
     dialog: {
       tagName: 'dialog',
       defaultRole: 'dialog',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'alertdialog'
+        'alertdialog',
+        'dialog'
       ],
       id: 'dialog'
     },
@@ -286,14 +293,14 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'group',
         'list',
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'dl'
     },
     dt: {
       tagName: 'dt',
-      defaultRole: 'term',
+      defaultRole: 'generic',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -303,7 +310,7 @@ export const ariaInHTMLInfo = {
     },
     em: {
       tagName: 'em',
-      defaultRole: 'generic',
+      defaultRole: 'emphasis',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'em'
@@ -317,8 +324,8 @@ export const ariaInHTMLInfo = {
         'application',
         'document',
         'img',
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'embed'
     },
@@ -330,7 +337,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'radiogroup'
+        'radiogroup',
+        'group'
       ],
       id: 'fieldset'
     },
@@ -341,8 +349,8 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'group',
-        'presentation',
-        'none'
+        'none',
+        'presentation'
       ],
       id: 'figcaption'
     },
@@ -368,8 +376,21 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'group',
+        'presentation',
         'none',
-        'presentation'
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       isLandmark: true,
       id: 'footer[contentinfo]'
@@ -381,8 +402,21 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'group',
+        'presentation',
         'none',
-        'presentation'
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       id: 'footer'
     },
@@ -392,9 +426,10 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'search',
         'none',
-        'presentation'
+        'presentation',
+        'search',
+        'form'
       ],
       id: 'form'
     },
@@ -406,7 +441,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h1'
     },
@@ -418,7 +454,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h2'
     },
@@ -430,7 +467,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h3'
     },
@@ -442,7 +480,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h4'
     },
@@ -454,7 +493,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h5'
     },
@@ -466,16 +506,16 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'none',
         'presentation',
-        'tab'
+        'tab',
+        'heading'
       ],
       id: 'h6'
     },
     head: {
       tagName: 'head',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'head'
     },
     'header[banner]': {
@@ -486,7 +526,20 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'group',
         'none',
-        'presentation'
+        'presentation',
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       isLandmark: true,
       id: 'header[banner]'
@@ -499,7 +552,20 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'group',
         'none',
-        'presentation'
+        'presentation',
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic',
+        'generic'
       ],
       id: 'header'
     },
@@ -517,16 +583,16 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: false,
       allowedRoles: [
         'none',
-        'presentation'
+        'presentation',
+        'separator'
       ],
       id: 'hr'
     },
     html: {
       tagName: 'html',
       defaultRole: 'document',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'html'
     },
     i: {
@@ -564,12 +630,14 @@ export const ariaInHTMLInfo = {
         'menuitemradio',
         'option',
         'progressbar',
+        'radio',
         'scrollbar',
         'separator',
         'slider',
         'switch',
         'tab',
-        'treeitem'
+        'treeitem',
+        'img'
       ],
       hasAccname: true,
       id: 'img[accname]'
@@ -588,12 +656,14 @@ export const ariaInHTMLInfo = {
         'menuitemradio',
         'option',
         'progressbar',
+        'radio',
         'scrollbar',
         'separator',
         'slider',
         'switch',
         'tab',
-        'treeitem'
+        'treeitem',
+        'img'
       ],
       attr1: 'alt',
       id: 'img[alt]'
@@ -619,6 +689,8 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
+        'checkbox',
+        'combobox',
         'link',
         'menuitem',
         'menuitemcheckbox',
@@ -626,7 +698,8 @@ export const ariaInHTMLInfo = {
         'option',
         'radio',
         'switch',
-        'tab'
+        'tab',
+        'button'
       ],
       attr1: 'type=button',
       id: 'input[type=button]'
@@ -640,7 +713,8 @@ export const ariaInHTMLInfo = {
         'menuitemcheckbox',
         'option',
         'switch',
-        'button'
+        'button',
+        'checkbox'
       ],
       attr1: 'type=checkbox',
       id: 'input[type=checkbox]'
@@ -697,9 +771,8 @@ export const ariaInHTMLInfo = {
     'input[type=hidden]': {
       tagName: 'input',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       attr1: 'type=hidden',
       id: 'input[type=hidden]'
     },
@@ -714,7 +787,8 @@ export const ariaInHTMLInfo = {
         'menuitemcheckbox',
         'menuitemradio',
         'radio',
-        'switch'
+        'switch',
+        'button'
       ],
       attr1: 'type=image',
       id: 'input[type=image]'
@@ -749,7 +823,8 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'menuitemradio'
+        'menuitemradio',
+        'radio'
       ],
       attr1: 'type=radio',
       id: 'input[type=radio]'
@@ -829,7 +904,8 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'combobox',
         'searchbox',
-        'spinbutton'
+        'spinbutton',
+        'textbox'
       ],
       attr1: 'type=text',
       id: 'input[type=text]'
@@ -869,7 +945,7 @@ export const ariaInHTMLInfo = {
     },
     ins: {
       tagName: 'ins',
-      defaultRole: 'generic',
+      defaultRole: 'insertion',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'ins'
@@ -910,16 +986,16 @@ export const ariaInHTMLInfo = {
         'radio',
         'separator',
         'tab',
-        'treeitem'
+        'treeitem',
+        'listitem'
       ],
       id: 'li'
     },
     link: {
       tagName: 'link',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'link'
     },
     main: {
@@ -932,17 +1008,9 @@ export const ariaInHTMLInfo = {
     map: {
       tagName: 'map',
       defaultRole: 'generic',
-      noRoleAllowed: false,
-      anyRoleAllowed: false,
-      allowedRoles: [],
-      id: 'map'
-    },
-    math: {
-      tagName: 'math',
-      defaultRole: 'math',
       noRoleAllowed: true,
       anyRoleAllowed: false,
-      id: 'math'
+      id: 'map'
     },
     mark: {
       tagName: 'mark',
@@ -951,13 +1019,19 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: true,
       id: 'mark'
     },
+    math: {
+      tagName: 'math',
+      defaultRole: 'math',
+      noRoleAllowed: true,
+      anyRoleAllowed: false,
+      id: 'math'
+    },
     menu: {
       tagName: 'menu',
       defaultRole: 'list',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'directory',
         'group',
         'listbox',
         'menu',
@@ -967,21 +1041,21 @@ export const ariaInHTMLInfo = {
         'radiogroup',
         'tablist',
         'toolbar',
-        'tree'
+        'tree',
+        'list'
       ],
       id: 'menu'
     },
     meta: {
       tagName: 'meta',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'meta'
     },
     meter: {
       tagName: 'meter',
-      defaultRole: 'generic',
+      defaultRole: 'meter',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'meter'
@@ -994,16 +1068,18 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'menu',
         'menubar',
-        'tablist'
+        'none',
+        'presentation',
+        'tablist',
+        'navigation'
       ],
       id: 'nav'
     },
     noscript: {
       tagName: 'noscript',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'noscript'
     },
     object: {
@@ -1024,7 +1100,6 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'directory',
         'group',
         'listbox',
         'menu',
@@ -1034,7 +1109,8 @@ export const ariaInHTMLInfo = {
         'radiogroup',
         'tablist',
         'toolbar',
-        'tree'
+        'tree',
+        'list'
       ],
       id: 'ol'
     },
@@ -1061,7 +1137,7 @@ export const ariaInHTMLInfo = {
     },
     p: {
       tagName: 'p',
-      defaultRole: 'generic',
+      defaultRole: 'paragraph',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'p'
@@ -1069,17 +1145,15 @@ export const ariaInHTMLInfo = {
     param: {
       tagName: 'param',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'param'
     },
     picture: {
       tagName: 'picture',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'picture'
     },
     pre: {
@@ -1141,9 +1215,8 @@ export const ariaInHTMLInfo = {
     script: {
       tagName: 'script',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'script'
     },
     'section[accname]': {
@@ -1161,6 +1234,7 @@ export const ariaInHTMLInfo = {
         'dialog',
         'document',
         'feed',
+        'group',
         'log',
         'main',
         'marquee',
@@ -1170,7 +1244,9 @@ export const ariaInHTMLInfo = {
         'presentation',
         'search',
         'status',
-        'tabpanel'
+        'tabpanel',
+        'section',
+        'role=region'
       ],
       hasAccname: true,
       id: 'section[accname]'
@@ -1190,6 +1266,7 @@ export const ariaInHTMLInfo = {
         'dialog',
         'document',
         'feed',
+        'group',
         'log',
         'main',
         'marquee',
@@ -1199,7 +1276,9 @@ export const ariaInHTMLInfo = {
         'presentation',
         'search',
         'status',
-        'tabpanel'
+        'tabpanel',
+        'section',
+        'role=region'
       ],
       id: 'section'
     },
@@ -1209,7 +1288,8 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'menu'
+        'menu',
+        'combobox'
       ],
       id: 'select'
     },
@@ -1224,9 +1304,8 @@ export const ariaInHTMLInfo = {
     slot: {
       tagName: 'slot',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'slot'
     },
     small: {
@@ -1239,9 +1318,8 @@ export const ariaInHTMLInfo = {
     source: {
       tagName: 'source',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'source'
     },
     span: {
@@ -1253,7 +1331,7 @@ export const ariaInHTMLInfo = {
     },
     strong: {
       tagName: 'strong',
-      defaultRole: 'generic',
+      defaultRole: 'strong',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'strong'
@@ -1261,28 +1339,27 @@ export const ariaInHTMLInfo = {
     style: {
       tagName: 'style',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'style'
     },
     sub: {
       tagName: 'sub',
-      defaultRole: 'generic',
+      defaultRole: 'subscript',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'sub'
     },
     summary: {
       tagName: 'summary',
-      defaultRole: 'button',
+      defaultRole: 'summary',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'summary'
     },
     sup: {
       tagName: 'sup',
-      defaultRole: 'generic',
+      defaultRole: 'superscript',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'sup'
@@ -1311,9 +1388,8 @@ export const ariaInHTMLInfo = {
     template: {
       tagName: 'template',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'template'
     },
     textarea: {
@@ -1339,7 +1415,7 @@ export const ariaInHTMLInfo = {
     },
     time: {
       tagName: 'time',
-      defaultRole: 'generic',
+      defaultRole: 'time',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'time'
@@ -1347,9 +1423,8 @@ export const ariaInHTMLInfo = {
     title: {
       tagName: 'title',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'title'
     },
     'td[cell]': {
@@ -1430,9 +1505,8 @@ export const ariaInHTMLInfo = {
     track: {
       tagName: 'track',
       defaultRole: 'generic',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [],
       id: 'track'
     },
     u: {
@@ -1448,7 +1522,6 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
-        'directory',
         'group',
         'listbox',
         'menu',
@@ -1458,7 +1531,8 @@ export const ariaInHTMLInfo = {
         'radiogroup',
         'tablist',
         'toolbar',
-        'tree'
+        'tree',
+        'list'
       ],
       id: 'ul'
     },
@@ -1483,7 +1557,11 @@ export const ariaInHTMLInfo = {
       tagName: 'wbr',
       defaultRole: 'generic',
       noRoleAllowed: false,
-      anyRoleAllowed: true,
+      anyRoleAllowed: false,
+      allowedRoles: [
+        'none',
+        'presentation'
+      ],
       id: 'wbr'
     }
   }

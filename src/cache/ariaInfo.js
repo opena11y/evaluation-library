@@ -2,9 +2,10 @@
 
 /* Imports */
 import DebugLogging        from '../debug.js';
-import {propertyDataTypes} from './ariaSpecPropertyDataTypes.js';
-import {designPatterns}    from './ariaSpecDesignPatterns.js';
 import {hasCheckedState}   from '../utils.js'
+
+import {propertyDataTypes} from '../../aria-info/gen-aria-property-data-types.js';
+import {designPatterns}    from '../../aria-info/gen-aria-role-design-patterns.js';
 
 /* Constants */
 const debug = new DebugLogging('AriaInfo', false);

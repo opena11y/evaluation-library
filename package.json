@@ -19,11 +19,12 @@
   },
   "homepage": "https://github.com/opena11y/evaluation-library#readme",
   "scripts": {
-    "build": "npm run eslint && npm run bundle",
+    "build": "gulp",
     "eslint": "eslint src/*.js",
-    "bundle": "rollup -c",
-    "aria-spec": "node src/aria/generate-aria-spec-files.js",
-    "aria-in-html": "node src/aria-in-html/generate-aria-in-html.js"
+    "testcase-1": "node testsuite/scripts/generate-attribute-deprecated-test-page.js",
+    "testcase-2": "node testsuite/scripts/generate-attribute-deprecated-test-page-implied-role.js",
+    "testcase-3": "node testsuite/scripts/generate-aria-in-html-test-page.js",
+    "testcases": "npm run testcase-1 && nom run testcase-2 && npm run testcase-3"
   },
   "devDependencies": {
     "eslint": "^8.11.0",

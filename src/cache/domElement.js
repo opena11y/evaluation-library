@@ -1,12 +1,12 @@
 /* domElement.js */
 
 /* Imports */
+import AriaInfo          from './ariaInfo.js';
 import ColorContrast     from './colorContrast.js';
-import EventInfo         from './eventInfo.js';
-import Visibility        from './visibility.js';
 import DebugLogging      from '../debug.js';
-import AriaInfo          from '../aria/ariaInfo.js';
-import getAriaInHTMLInfo from '../aria-in-html/ariaInHtml.js';
+import EventInfo         from './eventInfo.js';
+import getAriaInHTMLInfo from './ariaInHtml.js';
+import Visibility        from './visibility.js';
 import {
   hasInvalidState,
   hasCheckedState,
