@@ -30,6 +30,7 @@ export {
 
 import DebugLogging        from '../debug.js';
 const debug = new DebugLogging('nameFrom', false);
+debug.flag = true;
 
 /*
 *   @function isLabelableElement
@@ -539,11 +540,11 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
- if (prefix !== 'none') {
-    result = prefix.replaceAll('"', '') + result;
+ if (prefix[0] === '"') {
+    result = prefix.substring(1, (prefix.length-1)) + result;
   }
-  if (suffix !== 'none') {
-    result = result + suffix.replaceAll('"', '');
+ if (suffix[0] === '"') {
+    result = result + suffix.substring(1, (suffix.length-1)) ;
   }
 
   return result;

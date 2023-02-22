@@ -60,6 +60,23 @@ const  rolesThatAllowNameFromContents = ['button',
 'tooltip',
 'treeitem'];
 
+// These elements that allow name from content
+const  elementsThatAllowNameFromContents = [
+'a',
+'button',
+'h1',
+'h2',
+'h3',
+'h4',
+'h5',
+'h6',
+'summary'
+];
+
+import DebugLogging        from '../debug.js';
+const debug = new DebugLogging('getAccName', false);
+debug.flag = true;
+
 /*
 *   @function getAccessibleName
 *
@@ -281,7 +298,7 @@ function nameFromNativeSemantics (doc, element) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (doesRoleAllowNameFromContents(element)) {
+      if (doesElementAllowNameFromContents(element)) {
         accName = nameFromContents(element);
       }
       break;
@@ -391,17 +408,22 @@ function getFieldsetLegendLabels (element) {
 
 
 /*
-*   @function doesRoleAllowNameFromContents
+*   @function doesElementAllowNameFromContents
 *
-*   @desc Returns true if role allows name from contents, otherwise false
+*   @desc Returns true if tag name or role allows name from contents, otherwise false
 *
 *   @desc (Object)  element  -  DOM node of element to compute name
 *
 *   @return (Boolean) see @desc
 */
 
-function doesRoleAllowNameFromContents (element) {
+function doesElementAllowNameFromContents (element) {
   const role = element.getAttribute('role');
-  return role && rolesThatAllowNameFromContents.includes(role);
+  if (role) {
+    return rolesThatAllowNameFromContents.includes(role.toLowerCase());
+  }
+  else {
+    return elementsThatAllowNameFromContents.includes(element.tagName.toLowerCase());
+  }
 }
 

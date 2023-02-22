@@ -18,9 +18,10 @@
 
 
     <main>
-      <h1>Accessible Name and Description Calculations</h1>
+      <h1 id="h1"  data-label="Accessible Name and Description Calculations">Accessible Name and Description Calculations</h1>
 
-      <h2>Label Reference</h2>
+
+      <h2 id="h2-A" data-label="Label Reference">Label Reference</h2>
 
       <div>
         <label for="control-11">Label Reference 1: TextBox</label>
@@ -44,7 +45,7 @@
         <div id="control-12-desc">WXYZ</div>
       </div>
 
-      <h2>Label Encapsulation</h2>
+      <h2 id="h2-B" data-label="Label Encapsulation">Label Encapsulation</h2>
 
       <div>
         <label>
@@ -82,7 +83,7 @@
         </label>
       </fieldset>
 
-      <h2>Title Attribute</h2>
+      <h2 id="h2-C" data-label="title Attribute"><code>title</code> Attribute</h2>
 
       <div>
         <div class="label">
@@ -140,8 +141,71 @@
         </div>
       </fieldset>
 
+      <h2 id="h2-D" data-label="From Content">From Content</h2>
 
-      <h2><code>aria-label</code></h2>
+      <h3 id="h3-D" data-label="a elements"><code>a</code> elements</h3>
+      <ul>
+        <li><a href="#" id="link-1" data-label="Test 1">Test 1</a></li>
+        <li>
+          <a href="#" id="link-2" data-label="Test 1 Test 2">
+            Test 1
+            <span>Test 2</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="link-3" data-label="Test 1 Test 2 Test 3">
+            Test 1
+            <span>
+              <span>Test 2</span>
+              <span>Test 3</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="link-4" data-label="Test 1 Test 2 Test 3 Test 4">
+            Test 1
+            <span>
+              <span>Test 2</span>
+              <span>
+                <span>Test 3</span>
+                <span>Test 4</span>
+              </span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="link-5" data-label="Test 1 Test 2 Test 3 Test 4 Test 5">
+            Test 1
+            <span>
+              <span>Test 2</span>
+              <span>
+                <span>Test 3</span>
+                <span>Test 4</span>
+                <img src="../images/black.png" alt=" Test 5 ">
+              </span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="link-6" data-label="Test 1 Test 2 Test 6">
+            Test 1
+            <span>
+              <span>Test 2</span>
+              <span aria-label="Test 6">
+                <span>Test 3</span>
+                <span>Test 4</span>
+                <img src="../images/black.png" alt=" Test 5 ">
+              </span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a hrer="#" id="link-7" data-label="Test 5"><img src="../images/black.png" alt=" Test 5 "></a></li>
+        </li>
+      </ul>
+
+
+      <h2 id="h2-E" data-label="aria-label attribute"><code>aria-label</code> attribute</h2>
 
       <div>
         <label>

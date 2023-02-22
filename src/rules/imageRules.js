@@ -38,7 +38,10 @@ export const imageRules = [
     dom_cache.imageInfo.allImageElements.forEach(ie => {
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
-        if (de.accName.source === 'none') {
+        if (de.accName.name.length) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.source]);
+        }
+        else {
           if ((de.role === 'none') ||
               (de.role === 'presentation')) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role]);
@@ -50,9 +53,6 @@ export const imageRules = [
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
             }
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.source]);
         }
       }
       else {
@@ -183,21 +183,21 @@ export const imageRules = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
-      if (de.accName.name.length === 0) {
-        if (de.visibility.isVisibleToAT) {
+      if (de.visibility.isVisibleToAT) {
+        if (de.accName.name.length === 0) {
           if (de.tagName === 'img') {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);          
           }
           else {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);          
           }
-        } else {
-          if (de.tagName === 'img') {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
-          }
+        }
+      } else {
+        if (de.tagName === 'img') {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
         }
       }
     });

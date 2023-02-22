@@ -32,6 +32,9 @@ export default function textAccname(label, IFRAME_ID, htmlAttr, nameProp) {
       }
       else {
         failures += 1;
+        console.log(`[FAIL]: ${elem.tagName} ${elem.id}`);
+        console.log(`[FAIL][name]: ${domElem[nameProp].name}`);
+        console.log(`[FAIL][data]: ${data}`);
       }
 
     });

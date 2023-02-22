@@ -142,7 +142,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$v = new DebugLogging('constants', false);
+const debug$w = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -561,13 +561,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$v.flag && debug$v.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$w.flag && debug$w.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$v.flag && debug$v.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$w.flag && debug$w.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -863,7 +863,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$u = new DebugLogging('ControlInfo', true);
+const debug$v = new DebugLogging('ControlInfo', true);
 
 /**
  * @class ControlElement
@@ -1003,7 +1003,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$u.domElement(ce.domElement, prefix);
+      debug$v.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1224,15 +1224,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$u.flag) {
-      debug$u.log('== Control Tree ==', 1);
+    if (debug$v.flag) {
+      debug$v.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$u.domElement(ce.domElement);
+        debug$v.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$u.log('== Forms ==', 1);
+      debug$v.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$u.domElement(ce.domElement);
+        debug$v.domElement(ce.domElement);
       });
     }
   }
@@ -5983,7 +5983,7 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$t = new DebugLogging('AriaInfo', false);
+const debug$u = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6133,15 +6133,15 @@ class AriaInfo {
     }
 
 
-    if (debug$t.flag) {
-      node.attributes.length && debug$t.log(`${node.outerHTML}`, 1);
-      debug$t.log(`[         isWidget]: ${this.isWidget}`);
-      debug$t.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$t.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$t.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$t.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$t.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$t.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$u.flag) {
+      node.attributes.length && debug$u.log(`${node.outerHTML}`, 1);
+      debug$u.log(`[         isWidget]: ${this.isWidget}`);
+      debug$u.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$u.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$u.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$u.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$u.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$u.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6235,7 +6235,7 @@ class AriaInfo {
             }
           } catch (error) {
             refInfo.invalidIds.push(id);
-            debug$t.log(`[checkForInvalidReferences][error]: ${error}`);
+            debug$u.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {
@@ -6345,7 +6345,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$s = new DebugLogging('colorContrast', false);
+const debug$t = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6365,9 +6365,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$s.flag) {
-      debug$s.separator();
-      debug$s.tag(elementNode);
+    if (debug$t.flag) {
+      debug$t.separator();
+      debug$t.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6391,11 +6391,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$s.flag) {
-      debug$s.log(`[                    opacity]: ${this.opacity}`);
-      debug$s.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$s.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$s.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$t.flag) {
+      debug$t.log(`[                    opacity]: ${this.opacity}`);
+      debug$t.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$t.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$t.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6725,7 +6725,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$r = new DebugLogging('EventInfo', false);
+const debug$s = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6738,7 +6738,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$r.flag) {
+    if (debug$s.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8317,7 +8317,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$q = new DebugLogging('ariaInHtml', false);
+const debug$r = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8509,11 +8509,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$q.flag) {
+  if (debug$r.flag) {
     if (tagName === 'h2') {
-      debug$q.tag(node);
+      debug$r.tag(node);
     }
-    debug$q.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$r.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8610,7 +8610,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$p = new DebugLogging('visibility', false);
+const debug$q = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8658,17 +8658,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$p.flag) {
-      debug$p.separator();
-      debug$p.tag(elementNode);
-      debug$p.log('[          isHidden]: ' + this.isHidden);
-      debug$p.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$p.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$p.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$p.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$p.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$p.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$p.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$q.flag) {
+      debug$q.separator();
+      debug$q.tag(elementNode);
+      debug$q.log('[          isHidden]: ' + this.isHidden);
+      debug$q.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$q.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$q.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$q.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$q.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$q.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$q.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -8981,7 +8981,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$o = new DebugLogging('nameFrom', false);
+const debug$p = new DebugLogging('nameFrom', false);
+debug$p.flag = true;
 
 /*
 *   @function getElementContents
@@ -9127,7 +9128,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$o.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$p.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9458,11 +9459,11 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
- if (prefix !== 'none') {
-    result = prefix.replaceAll('"', '') + result;
+ if (prefix[0] === '"') {
+    result = prefix.substring(1, (prefix.length-1)) + result;
   }
-  if (suffix !== 'none') {
-    result = result + suffix.replaceAll('"', '');
+ if (suffix[0] === '"') {
+    result = result + suffix.substring(1, (suffix.length-1)) ;
   }
 
   return result;
@@ -9527,6 +9528,21 @@ const  rolesThatAllowNameFromContents = ['button',
 'tab',
 'tooltip',
 'treeitem'];
+
+// These elements that allow name from content
+const  elementsThatAllowNameFromContents = [
+'a',
+'button',
+'h1',
+'h2',
+'h3',
+'h4',
+'h5',
+'h6',
+'summary'
+];
+const debug$o = new DebugLogging('getAccName', false);
+debug$o.flag = true;
 
 /*
 *   @function getAccessibleName
@@ -9731,7 +9747,7 @@ function nameFromNativeSemantics (doc, element) {
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:
-      if (doesRoleAllowNameFromContents(element)) {
+      if (doesElementAllowNameFromContents(element)) {
         accName = nameFromContents(element);
       }
       break;
@@ -9803,18 +9819,23 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
 
 
 /*
-*   @function doesRoleAllowNameFromContents
+*   @function doesElementAllowNameFromContents
 *
-*   @desc Returns true if role allows name from contents, otherwise false
+*   @desc Returns true if tag name or role allows name from contents, otherwise false
 *
 *   @desc (Object)  element  -  DOM node of element to compute name
 *
 *   @return (Boolean) see @desc
 */
 
-function doesRoleAllowNameFromContents (element) {
+function doesElementAllowNameFromContents (element) {
   const role = element.getAttribute('role');
-  return role && rolesThatAllowNameFromContents.includes(role);
+  if (role) {
+    return rolesThatAllowNameFromContents.includes(role.toLowerCase());
+  }
+  else {
+    return elementsThatAllowNameFromContents.includes(element.tagName.toLowerCase());
+  }
 }
 
 /* domElement.js */
@@ -12818,7 +12839,10 @@ const imageRules$1 = [
     dom_cache.imageInfo.allImageElements.forEach(ie => {
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
-        if (de.accName.source === 'none') {
+        if (de.accName.name.length) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.source]);
+        }
+        else {
           if ((de.role === 'none') ||
               (de.role === 'presentation')) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role]);
@@ -12830,9 +12854,6 @@ const imageRules$1 = [
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
             }
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.accName.source]);
         }
       }
       else {
@@ -12963,21 +12984,21 @@ const imageRules$1 = [
   validate            : function (dom_cache, rule_result) {
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
-      if (de.accName.name.length === 0) {
-        if (de.visibility.isVisibleToAT) {
+      if (de.visibility.isVisibleToAT) {
+        if (de.accName.name.length === 0) {
           if (de.tagName === 'img') {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);          
           }
           else {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);          
           }
-        } else {
-          if (de.tagName === 'img') {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
-          }
+        }
+      } else {
+        if (de.tagName === 'img') {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
         }
       }
     });
