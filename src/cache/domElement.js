@@ -55,7 +55,9 @@ const requireAccessibleNames = ['region', 'form'];
 export default class DOMElement {
   constructor (parentInfo, elementNode, ordinalPosition) {
     const parentDomElement = parentInfo.domElement;
-    const doc              = parentInfo.document;
+    const accNameDoc       = parentInfo.useParentDocForName ?
+                             parentInfo.parentDocument :
+                             parentInfo.document;
 
     this.ordinalPosition  = ordinalPosition;
     this.parentInfo       = parentInfo;
@@ -78,12 +80,12 @@ export default class DOMElement {
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(accNameDoc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(doc, elementNode);
-    this.accDescription = getAccessibleDesc(doc, elementNode, (this.accName.source !== 'title'));
-    this.errMessage     = getErrMessage(doc, elementNode);
+    this.accName        = getAccessibleName(accNameDoc, elementNode);
+    this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
+    this.errMessage     = getErrMessage(accNameDoc, elementNode);
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);

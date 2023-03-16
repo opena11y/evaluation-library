@@ -144,7 +144,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$w = new DebugLogging('constants', false);
+const debug$x = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -563,13 +563,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$w.flag && debug$w.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$x.flag && debug$x.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$w.flag && debug$w.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$x.flag && debug$x.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -865,7 +865,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$v = new DebugLogging('ControlInfo', true);
+const debug$w = new DebugLogging('ControlInfo', true);
 
 /**
  * @class ControlElement
@@ -1005,7 +1005,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$v.domElement(ce.domElement, prefix);
+      debug$w.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1226,15 +1226,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$v.flag) {
-      debug$v.log('== Control Tree ==', 1);
+    if (debug$w.flag) {
+      debug$w.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$v.domElement(ce.domElement);
+        debug$w.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$v.log('== Forms ==', 1);
+      debug$w.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$v.domElement(ce.domElement);
+        debug$w.domElement(ce.domElement);
       });
     }
   }
@@ -5985,7 +5985,7 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$u = new DebugLogging('AriaInfo', false);
+const debug$v = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6135,15 +6135,15 @@ class AriaInfo {
     }
 
 
-    if (debug$u.flag) {
-      node.attributes.length && debug$u.log(`${node.outerHTML}`, 1);
-      debug$u.log(`[         isWidget]: ${this.isWidget}`);
-      debug$u.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$u.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$u.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$u.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$u.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$u.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$v.flag) {
+      node.attributes.length && debug$v.log(`${node.outerHTML}`, 1);
+      debug$v.log(`[         isWidget]: ${this.isWidget}`);
+      debug$v.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$v.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$v.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$v.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$v.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$v.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6237,7 +6237,7 @@ class AriaInfo {
             }
           } catch (error) {
             refInfo.invalidIds.push(id);
-            debug$u.log(`[checkForInvalidReferences][error]: ${error}`);
+            debug$v.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {
@@ -6347,7 +6347,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$t = new DebugLogging('colorContrast', false);
+const debug$u = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6367,9 +6367,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$t.flag) {
-      debug$t.separator();
-      debug$t.tag(elementNode);
+    if (debug$u.flag) {
+      debug$u.separator();
+      debug$u.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6393,11 +6393,11 @@ class ColorContrast {
     const L2 = this.getLuminance(this.backgroundColorHex);
     this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 
-    if (debug$t.flag) {
-      debug$t.log(`[                    opacity]: ${this.opacity}`);
-      debug$t.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$t.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$t.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$u.flag) {
+      debug$u.log(`[                    opacity]: ${this.opacity}`);
+      debug$u.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$u.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$u.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6484,11 +6484,14 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
+      debug$u.flag && debug$u.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+
       if (parentColorContrast) {
+        debug$u.flag && debug$u.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
-        // This is an edge case test typcially for body elements and frames
+        // This is an edge case test typically for body elements and frames
         backgroundColor = 'rgb(255,255,255)';
       }
     }
@@ -6727,7 +6730,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$s = new DebugLogging('EventInfo', false);
+const debug$t = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6740,7 +6743,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$s.flag) {
+    if (debug$t.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8319,7 +8322,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$r = new DebugLogging('ariaInHtml', false);
+const debug$s = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8511,11 +8514,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$r.flag) {
+  if (debug$s.flag) {
     if (tagName === 'h2') {
-      debug$r.tag(node);
+      debug$s.tag(node);
     }
-    debug$r.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$s.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8612,7 +8615,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$q = new DebugLogging('visibility', false);
+const debug$r = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8660,17 +8663,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$q.flag) {
-      debug$q.separator();
-      debug$q.tag(elementNode);
-      debug$q.log('[          isHidden]: ' + this.isHidden);
-      debug$q.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$q.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$q.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$q.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$q.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$q.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$q.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$r.flag) {
+      debug$r.separator();
+      debug$r.tag(elementNode);
+      debug$r.log('[          isHidden]: ' + this.isHidden);
+      debug$r.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$r.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$r.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$r.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$r.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$r.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$r.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -8983,8 +8986,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$p = new DebugLogging('nameFrom', false);
-debug$p.flag = true;
+const debug$q = new DebugLogging('nameFrom', false);
+debug$q.flag = true;
 
 /*
 *   @function getElementContents
@@ -9130,7 +9133,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$p.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$q.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9543,8 +9546,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$o = new DebugLogging('getAccName', false);
-debug$o.flag = true;
+const debug$p = new DebugLogging('getAccName', false);
+debug$p.flag = true;
 
 /*
 *   @function getAccessibleName
@@ -9843,8 +9846,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$n = new DebugLogging('DOMElement', false);
-debug$n.flag = true;
+const debug$o = new DebugLogging('DOMElement', false);
+debug$o.flag = true;
 
 const elementsWithContent = [
   'area',
@@ -9879,7 +9882,9 @@ const requireAccessibleNames = ['region', 'form'];
 class DOMElement {
   constructor (parentInfo, elementNode, ordinalPosition) {
     const parentDomElement = parentInfo.domElement;
-    const doc              = parentInfo.document;
+    const accNameDoc       = parentInfo.useParentDocForName ?
+                             parentInfo.parentDocument :
+                             parentInfo.document;
 
     this.ordinalPosition  = ordinalPosition;
     this.parentInfo       = parentInfo;
@@ -9902,12 +9907,12 @@ class DOMElement {
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
 
-    this.ariaInfo  = new AriaInfo(doc, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(accNameDoc, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
-    this.accName        = getAccessibleName(doc, elementNode);
-    this.accDescription = getAccessibleDesc(doc, elementNode, (this.accName.source !== 'title'));
-    this.errMessage     = getErrMessage(doc, elementNode);
+    this.accName        = getAccessibleName(accNameDoc, elementNode);
+    this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
+    this.errMessage     = getErrMessage(accNameDoc, elementNode);
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
@@ -10155,12 +10160,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$n.flag) {
+    if (debug$o.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$n.domText(domItem, prefix);
+          debug$o.domText(domItem, prefix);
         } else {
-          debug$n.domElement(domItem, prefix);
+          debug$o.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10253,7 +10258,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$m = new DebugLogging('domText', false);
+const debug$n = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10272,8 +10277,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$m.flag) {
-      debug$m.log(`[text]: ${this.text}`);
+    if (debug$n.flag) {
+      debug$n.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10336,7 +10341,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$l = new DebugLogging('iframeInfo', false);
+const debug$m = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10354,9 +10359,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$l.flag) {
-      debug$l.log(`[          src]: ${this.src}`);
-      debug$l.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$m.flag) {
+      debug$m.log(`[          src]: ${this.src}`);
+      debug$m.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10392,8 +10397,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$l.flag) {
-      debug$l.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$m.flag) {
+      debug$m.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10404,7 +10409,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$k = new DebugLogging('idInfo', false);
+const debug$l = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10447,10 +10452,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$k.flag) {
-      debug$k.log('== All Links ==', 1);
+    if (debug$l.flag) {
+      debug$l.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$k.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$l.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10459,7 +10464,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$j = new DebugLogging('imageInfo', false);
+const debug$k = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10652,22 +10657,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$j.flag) {
-      debug$j.log('== All Image elements ==', 1);
+    if (debug$k.flag) {
+      debug$k.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$j.log(`[fileName]: ${ie.fileName}`, true);
-        debug$j.log(`[    role]: ${ie.domElement.role}`);
-        debug$j.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$j.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$j.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$k.log(`[fileName]: ${ie.fileName}`, true);
+        debug$k.log(`[    role]: ${ie.domElement.role}`);
+        debug$k.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$k.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$k.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$j.log('== All SVG domElements  ==', 1);
+      debug$k.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$j.domElement(de);
+        debug$k.domElement(de);
       });
-      debug$j.log('== All MapElements ==', 1);
+      debug$k.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$j.domElement(me.domElement);
+        debug$k.domElement(me.domElement);
       });
     }
   }
@@ -10676,7 +10681,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$i = new DebugLogging('linkInfo', false);
+const debug$j = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10722,10 +10727,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$i.flag) {
-      debug$i.log('== All Links ==', 1);
+    if (debug$j.flag) {
+      debug$j.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$i.domElement(de);
+        debug$j.domElement(de);
       });
     }
   }
@@ -10734,7 +10739,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$h = new DebugLogging('ListInfo', false);
+const debug$i = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10755,8 +10760,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$h.flag) {
-      debug$h.log('');
+    if (debug$i.flag) {
+      debug$i.log('');
     }
   }
 
@@ -10781,9 +10786,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$h.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$i.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$h.domElement(le.domElement, prefix);
+      debug$i.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -10891,16 +10896,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$h.flag) {
-      debug$h.log('== All ListElements ==', 1);
-      debug$h.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$i.flag) {
+      debug$i.log('== All ListElements ==', 1);
+      debug$i.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$h.domElement(le.domElement);
+        debug$i.domElement(le.domElement);
       });
-      debug$h.log('== List Tree ==', 1);
-      debug$h.log(`[linkCount]: ${this.linkCount}`);
+      debug$i.log('== List Tree ==', 1);
+      debug$i.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$h.domElement(le.domElement);
+        debug$i.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -10910,7 +10915,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$g = new DebugLogging('structureInfo', false);
+const debug$h = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -10949,11 +10954,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$g.domElement(le.domElement, prefix);
+      debug$h.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$g.domElement(h, prefix);
+      debug$h.domElement(h, prefix);
     });
   }
 
@@ -11077,27 +11082,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$g.flag) {
-      debug$g.log('== All Headings ==', 1);
+    if (debug$h.flag) {
+      debug$h.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$g.domElement(h);
+        debug$h.domElement(h);
       });
-      debug$g.log('== All Landmarks ==', 1);
+      debug$h.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$h.domElement(le.domElement);
       });
-      debug$g.log('== Landmarks By Doc ==', 1);
+      debug$h.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$g.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$h.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$g.domElement(le.domElement);
+            debug$h.domElement(le.domElement);
           });
         }
       });
-      debug$g.log('== Structure Tree ==', 1);
+      debug$h.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$g.domElement(le.domElement);
+        debug$h.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -11107,7 +11112,7 @@ class StructureInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$f = new DebugLogging('domCache', false);
+const debug$g = new DebugLogging('domCache', false);
 
 const skipableElements = [
   'base',
@@ -11135,6 +11140,8 @@ class ParentInfo {
   constructor (info) {
     this.controlElement  = null;
     this.document        = null;
+    this.parentDocument  = null;
+    this.useParentDocForName = false;
     this.documentIndex   = 0;
     this.domElement      = null;
     this.landmarkElement = null;
@@ -11144,6 +11151,8 @@ class ParentInfo {
     if (info) {
       this.controlElement  = info.controlElement;
       this.document        = info.document;
+      this.parentDocument  = info.parentDocument;
+      this.useParentDocForName = info.useParentDocForName;
       this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
@@ -11179,7 +11188,8 @@ class DOMCache {
     this.allDomTexts    = [];
 
     const parentInfo = new ParentInfo();
-    parentInfo.document = startingDoc;
+    parentInfo.document        = startingDoc;
+    parentInfo.accNameDocument = startingDoc;
 
     this.controlInfo   = new ControlInfo();
     this.idInfo        = new IdInfo();
@@ -11203,7 +11213,7 @@ class DOMCache {
     this.transverseDOM(parentInfo, startingElement);
 
     // Debug features
-    if (debug$f.flag) {
+    if (debug$g.flag) {
       this.showDomElementTree();
 
       this.controlInfo.showControlInfo();
@@ -11255,7 +11265,7 @@ class DOMCache {
    */
 
   transverseDOM(parentInfo, startingNode) {
-    let tagName;
+    let tagName, newParentInfo;
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
@@ -11286,41 +11296,51 @@ class DOMCache {
           if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content
             if (this.isSlotElement(node)) {
-                // if no slotted elements, check for default slotted content
-              const assignedNodes = node.assignedNodes().length ?
+              // if no slotted elements, check for default slotted content
+              const isSlotContent = node.assignedNodes().length > 0;
+
+              const assignedNodes = isSlotContent ?
                                     node.assignedNodes() :
                                     node.assignedNodes({ flatten: true });
-              // 2022-08-30 review this code for improvements and qaulity                      
+
               for (let i = 0; i < assignedNodes.length; i += 1) {
                 const assignedNode = assignedNodes[i];
-                switch (assignedNode.nodeType) {
-
-                  case Node.TEXT_NODE:
-                    domItem = new DOMText(parentDomElement, assignedNode);
-                    // Check to see if text node has any renderable content
-                    if (domItem.hasContent) {
-                      // Merge text nodes in to a single DomText node if sibling text nodes
-                      if (parentDomElement) {
-                        parentDomElement.hasContent = true;
-                        // if last child node of parent is a DomText node merge text content
-                        if (parentDomElement.isLastChildDomText) {
-                          parentDomElement.addTextToLastChild(domItem.text);
-                        } else {
-                          parentDomElement.addChild(domItem);
-                          this.allDomTexts.push(domItem);
-                        }
+                if (assignedNode.nodeType === Node.TEXT_NODE) {
+                  debug$g.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
+/*                  domItem = new DOMText(parentDomElement, node);
+                  // Check to see if text node has any renderable content
+                  if (domItem.hasContent) {
+                    // Merge text nodes in to a single DomText node if sibling text nodes
+                    if (parentDomElement) {
+                      parentDomElement.hasContent = true;
+                      // if last child node of parent is a DomText node merge text content
+                      if (parentDomElement.isLastChildDomText) {
+                        parentDomElement.addTextToLastChild(domItem.text);
+                      } else {
+                        parentDomElement.addChild(domItem);
+                        this.allDomTexts.push(domItem);
                       }
                     }
-                    break;
+                  }
+*/
+                }
 
-                  case Node.ELEMENT_NODE:
-                    domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
-                    this.ordinalPosition += 1;
-                    this.allDomElements.push(domItem);
-                    if (parentDomElement) {
-                      parentDomElement.addChild(domItem);
-                    }
-                    break;
+                if (assignedNode.nodeType === Node.ELEMENT_NODE) {
+                  debug$g.log(`[assignedNode][ELEMENT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
+
+                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition);
+
+                  this.ordinalPosition += 1;
+                  this.allDomElements.push(domItem);
+
+                  if (parentDomElement) {
+                    parentDomElement.addChild(domItem);
+                  }
+
+                  newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
+                  newParentInfo.useParentDocForName = isSlotContent;
+
+                  this.transverseDOM(newParentInfo, assignedNode);
                 }
               }
             } else {
@@ -11331,12 +11351,13 @@ class DOMCache {
               if (parentDomElement) {
                 parentDomElement.addChild(domItem);
               }
-              const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
+              newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
-                  newParentInfo.document = node.shadowRoot;
+                  newParentInfo.parentDocument  = newParentInfo.document;
+                  newParentInfo.document        = node.shadowRoot;
                   this.documentIndex += 1;
                   newParentInfo.documentIndex = this.documentIndex;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
@@ -11373,9 +11394,8 @@ class DOMCache {
    *
    * @desc  Updates page level collections of elements for landmarks, headings and controls
    *
-   * @param {Object}  parentinfo  - Parent DomElement associated DOMElement
-   * @param {Object}  domElement  - The dom element to start transversing the
-   *                                      dom
+   * @param {Object}  parentInfo       - Parent DomElement associated DOMElement
+   * @param {Object}  domElement       - The dom element to start transversing the dom
    *
    * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
    */
@@ -11408,27 +11428,28 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    debug$f.log(' === AllDomElements ===', true);
+    debug$g.log(' === AllDomElements ===', true);
     this.allDomElements.forEach( de => {
-      debug$f.domElement(de);
+      debug$g.domElement(de);
     });
 
-    debug$f.log(' === AllDomTexts ===', true);
+    debug$g.log(' === AllDomTexts ===', true);
     this.allDomTexts.forEach( dt => {
-      debug$f.domText(dt);
+      debug$g.domText(dt);
     });
 
-    debug$f.log(' === DOMCache Tree ===', true);
-    debug$f.domElement(this.startingDomElement);
+    debug$g.log(' === DOMCache Tree ===', true);
+    debug$g.domElement(this.startingDomElement);
     this.startingDomElement.showDomElementTree(' ');
   }
 }
 
 /* colorRules.js */
-// import DebugLogging  from '../debug.js';
 
 /* Constants */
-// const debug = new DebugLogging('Color Rules', false);
+const debug$f = new DebugLogging('Color Rules', false);
+debug$f.flag = false;
+
 
 /*
  * OpenA11y Alliance Rules
@@ -11453,8 +11474,21 @@ const colorRules$1 = [
     target_resources    : ['text content'],
     validate            : function (dom_cache, rule_result) {
 
+      let index = 0;
+      function checkResult(domElement, result) {
+        const node    = domElement.node;
+        const tagName = node.tagName;
+        const id      = node.id ? `[id=${node.id}]` : '';
+        const cc      = domElement.colorContrast;
+        const crr     = cc.colorContrastRatio;
+        debug$f.flag && debug$f.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+      }
+
+
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
+
+      debug$f.flag && debug$f.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -11466,18 +11500,22 @@ const colorRules$1 = [
             if (ccr >= MIN_CCR_LARGE_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
               }
               else {
+                checkResult(de, 'PASS');
                 rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
               }
             }
             else {
               // Fails color contrast requirements
               if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
               }
               else {
+                checkResult(de, 'FAIL');
                 rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
               }
             }
@@ -11486,23 +11524,28 @@ const colorRules$1 = [
             if (ccr >= MIN_CCR_NORMAL_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
               }
               else {
+                checkResult(de, 'PASS');
                 rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
               }
             }
             else {
               // Fails color contrast requirements
               if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
               }
               else {
+                checkResult(de, 'FAIL');
                 rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
               }
             }
           }
         } else {
+          checkResult(de, 'HIDDEN');
           rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
         }
       });

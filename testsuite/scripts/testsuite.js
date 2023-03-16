@@ -6,7 +6,6 @@ var evaluator = new EvaluationLibrary();
 
 function getCount(iframe, class_name) {
 
-   let i;
    let item_count = 0
  
    const doc = iframe.contentDocument || iframe.document;
@@ -22,15 +21,37 @@ function getCount(iframe, class_name) {
      
    }
 
-   const frames = doc.getElementsByTagName('frame');
-   for (i = 0; i < frames.length; i++) item_count += getCount(frames[i], class_name);
-
    const iframes = doc.getElementsByTagName('iframe');
-   for (i = 0; i < iframes.length; i++) item_count += getCount(iframes[i], class_name);
+   for (let i = 0; i < iframes.length; i++) item_count += getCount(iframes[i], class_name);
    
    
    return item_count;
 
+}
+
+function getData(iframe, name) {
+  let item_count = 0
+
+  const doc = iframe.contentDocument || iframe.document;
+
+  if (!doc) return 0;
+
+  const items = doc.querySelectorAll(`[data-${name}]`);
+
+  for (let i = 0; i < items.length; i += 1) {
+    const item = items[i];
+    const value = parseInt(item.getAttribute(`data-${name}`));
+    if (Number.isInteger(value)) {
+       item_count += value;
+    }
+  }
+
+  const iframes = doc.getElementsByTagName('iframe');
+  for (let i = 0; i < iframes.length; i++) {
+    item_count += getData(iframes[i], name);
+  }
+
+  return item_count;
 }
  
  
@@ -48,10 +69,10 @@ export default function executeTest(label, IFRAME_ID, RULE_ID) {
     const evaluationResult = evaluator.evaluate(doc, title, url);
     const resultSummary = evaluationResult.getRuleResult(RULE_ID).getResultsSummary();
 
-    const f  = getCount(iframe, RULE_ID + '_FAIL');
-    const p  = getCount(iframe, RULE_ID + '_PASS');
-    const mc = getCount(iframe, RULE_ID + '_MC');
-    const h  = getCount(iframe, RULE_ID + '_HIDDEN');
+    const f  = getCount(iframe, RULE_ID + '_FAIL')   + getData(iframe, 'fail');
+    const p  = getCount(iframe, RULE_ID + '_PASS')   + getData(iframe, 'pass');
+    const mc = getCount(iframe, RULE_ID + '_MC')     + getData(iframe, 'mc');
+    const h  = getCount(iframe, RULE_ID + '_HIDDEN') + getData(iframe, 'hidden');
 
     function getFailures(ers) {
       return ers.violations + ers.warnings;
@@ -72,6 +93,7 @@ export default function executeTest(label, IFRAME_ID, RULE_ID) {
     QUnit.test(`We expect hidden to be ${h}`, function(assert) {
       assert.equal(resultSummary.hidden, h);
     });
+
   });
   
 };

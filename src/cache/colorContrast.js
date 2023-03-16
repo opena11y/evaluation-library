@@ -141,11 +141,14 @@ export default class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
+      debug.flag && debug.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+
       if (parentColorContrast) {
+        debug.flag && debug.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
-        // This is an edge case test typcially for body elements and frames
+        // This is an edge case test typically for body elements and frames
         backgroundColor = 'rgb(255,255,255)';
       }
     }

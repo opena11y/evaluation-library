@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Color Contrast Computations for iframes and custom elements | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <link href="color.css" rel="stylesheet" type="text/css"/>
+    <script src="../testsuite/rules/color/color-contrast.js" type="module"></script>
+  </head>
+  <body style="background-color: #eee">
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Color Contrast Computations for web components</h1>
+
+      <color-contrast class="COLOR_1_PASS"></color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content">
+          <div style="background-color: #224466">
+            <p style="color: rgb(255, 255, 255); opacity: 0.7">Web Component 1: Opacity 0.7</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content">
+          <div style="background-color: #224466">
+            <p style="color: rgb(255, 255, 255); opacity: 0.6">Web Component 2: Opacity 0.6</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_FAIL">
+        <div slot="content">
+          <div style="background-color: #224466">
+            <p style="color: rgb(255, 255, 255); opacity: 0.5">Web Component 3: Opacity 0.5</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_FAIL">
+        <div slot="content">
+          <div style="background-color: #224466">
+            <p style="color: rgb(255, 255, 255); opacity: 0.4">Web Component 4: Opacity 0.4</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.7">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.6">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_FAIL"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.5">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_FAIL"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.5">
+      </color-contrast>
+
+    </main>
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

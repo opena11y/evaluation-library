@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="HEADING_1_FAIL">
+  <head>
+    <title>Color 1C: Color Contrast Ratios</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <script src="color-contrast.js" type="module"></script>
+
+  </head>
+
+  <body>
+    <div role="main">
+
+      <h2 class="COLOR_1_PASS">Web Component Color Contrast</h2>
+      <color-contrast class="COLOR_1_PASS"></color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content" id="cc-1-slot-A">
+          <div style="background-color: #224466" id="cc-1-div-A">
+            <p style="color: rgb(255, 255, 255); opacity: 1.0" id="cc-1-p-C">Web Component 1: Opacity 1.0</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content" id="cc-2-slot-A">
+          <div style="background-color: #224466" id="cc-2-div-B">
+            <p style="color: rgb(255, 255, 255); opacity: 0.9" id="cc-2-p-C">Web Component 2: Opacity 0.9</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content" id="cc-3-slot-A">
+          <div style="background-color: #224466" id="cc-3div-B">
+            <p style="color: rgb(255, 255, 255); opacity: 0.8" id="cc-3-p-C">Web Component 3: Opacity 0.8</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content" id="cc-4-slot-A">
+          <div style="background-color: #224466" id="cc-4-div-B">
+            <p style="color: rgb(255, 255, 255); opacity: 0.7" id="cc-4-p-C">Web Component 4: Opacity 0.7</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast class="COLOR_1_PASS">
+        <div slot="content" id="cc-5-div-A">
+          <div style="background-color: #224466" id="cc-5-div-B">
+            <p style="color: rgb(255, 255, 255); opacity: 0.6"  id="cc-5-p-C">Web Component 5: Opacity 0.6</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast data-fail="1">
+        <div slot="content" id="cc-6-div-F">
+          <div style="background-color: #224466" id="cc-6-div-B">
+            <p style="color: rgb(255, 255, 255); opacity: 0.5"  id="cc-6-p-C">Web Component 6: Opacity 0.5</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast data-fail="1">
+        <div slot="content" id="cc-7-div-G">
+          <div style="background-color: #224466" id="cc-7-div-B">
+            <p style="color: rgb(255, 255, 255); opacity: 0.4" id="cc-7-p-C">Web Component 7: Opacity 0.4</p>
+          </div>
+        </div>
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="1.0">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.9">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.8">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.7">
+      </color-contrast>
+      <color-contrast
+        class="COLOR_1_PASS"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.6">
+      </color-contrast>
+      <color-contrast
+        data-fail="1"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.5">
+      </color-contrast>
+      <color-contrast
+        data-fail="1"
+        backgroundColor="#224466"
+        color="white"
+        opacity="0.4">
+      </color-contrast>
+
+      <h2 class="COLOR_1_PASS">Color Contrast 1</h2>
+
+      <color-contrast-1  data-pass="1" data-fail="1"></color-contrast-1>
+
+      <color-contrast-1 data-pass="1" data-fail="1">
+        <div slot="content">
+          <color-contrast
+            backgroundColor="#224466"
+            color="white"
+            opacity="0.6">
+          </color-contrast>
+          <color-contrast
+            backgroundColor="#224466"
+            color="white"
+            opacity="0.5">
+          </color-contrast>
+        </div>
+      </color-contrast-1>
+
+      <color-contrast-1  data-pass="1" data-fail="1">
+        <div slot="content">
+          <color-contrast>
+            <div slot="content" id="cc-8-div-A">
+              <div style="background-color: #224466" id="cc-8-div-B">
+                <p style="color: rgb(255, 255, 255); opacity: 0.6"  id="cc-5-p-C">Web Component 8: Opacity 0.6</p>
+              </div>
+            </div>
+          </color-contrast>
+          <color-contrast>
+            <div slot="content" id="cc-9-div-F">
+              <div style="background-color: #224466" id="cc-9-div-B">
+                <p style="color: rgb(255, 255, 255); opacity: 0.5"  id="cc-6-p-C">Web Component 9: Opacity 0.5</p>
+              </div>
+            </div>
+          </color-contrast>
+        </div>
+      </color-contrast-1>
+
+
+    </div>
+    
+  </body>
+</html>
+
+

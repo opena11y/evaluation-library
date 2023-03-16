@@ -41,6 +41,8 @@ class ParentInfo {
   constructor (info) {
     this.controlElement  = null;
     this.document        = null;
+    this.parentDocument  = null;
+    this.useParentDocForName = false;
     this.documentIndex   = 0;
     this.domElement      = null;
     this.landmarkElement = null;
@@ -50,6 +52,8 @@ class ParentInfo {
     if (info) {
       this.controlElement  = info.controlElement;
       this.document        = info.document;
+      this.parentDocument  = info.parentDocument;
+      this.useParentDocForName = info.useParentDocForName;
       this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.landmarkElement = info.landmarkElement;
@@ -85,7 +89,8 @@ export default class DOMCache {
     this.allDomTexts    = [];
 
     const parentInfo = new ParentInfo();
-    parentInfo.document = startingDoc;
+    parentInfo.document        = startingDoc;
+    parentInfo.accNameDocument = startingDoc;
 
     this.controlInfo   = new ControlInfo();
     this.idInfo        = new IdInfo();
@@ -161,7 +166,7 @@ export default class DOMCache {
    */
 
   transverseDOM(parentInfo, startingNode) {
-    let tagName;
+    let tagName, newParentInfo;
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
     for (let node = startingNode.firstChild; node !== null; node = node.nextSibling ) {
@@ -192,44 +197,51 @@ export default class DOMCache {
           if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content
             if (this.isSlotElement(node)) {
-                // if no slotted elements, check for default slotted content
-              const assignedNodes = node.assignedNodes().length ?
+              // if no slotted elements, check for default slotted content
+              const isSlotContent = node.assignedNodes().length > 0;
+
+              const assignedNodes = isSlotContent ?
                                     node.assignedNodes() :
                                     node.assignedNodes({ flatten: true });
-              // 2022-08-30 review this code for improvements and qaulity                      
+
               for (let i = 0; i < assignedNodes.length; i += 1) {
                 const assignedNode = assignedNodes[i];
-                switch (assignedNode.nodeType) {
-
-                  case Node.TEXT_NODE:
-                    domItem = new DOMText(parentDomElement, assignedNode);
-                    // Check to see if text node has any renderable content
-                    if (domItem.hasContent) {
-                      // Merge text nodes in to a single DomText node if sibling text nodes
-                      if (parentDomElement) {
-                        parentDomElement.hasContent = true;
-                        // if last child node of parent is a DomText node merge text content
-                        if (parentDomElement.isLastChildDomText) {
-                          parentDomElement.addTextToLastChild(domItem.text);
-                        } else {
-                          parentDomElement.addChild(domItem);
-                          this.allDomTexts.push(domItem);
-                        }
+                if (assignedNode.nodeType === Node.TEXT_NODE) {
+                  debug.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
+/*                  domItem = new DOMText(parentDomElement, node);
+                  // Check to see if text node has any renderable content
+                  if (domItem.hasContent) {
+                    // Merge text nodes in to a single DomText node if sibling text nodes
+                    if (parentDomElement) {
+                      parentDomElement.hasContent = true;
+                      // if last child node of parent is a DomText node merge text content
+                      if (parentDomElement.isLastChildDomText) {
+                        parentDomElement.addTextToLastChild(domItem.text);
+                      } else {
+                        parentDomElement.addChild(domItem);
+                        this.allDomTexts.push(domItem);
                       }
                     }
-                    break;
+                  }
+*/
+                }
 
-                  case Node.ELEMENT_NODE:
-                    domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
-                    this.ordinalPosition += 1;
-                    this.allDomElements.push(domItem);
-                    if (parentDomElement) {
-                      parentDomElement.addChild(domItem);
-                    }
-                    break;
+                if (assignedNode.nodeType === Node.ELEMENT_NODE) {
+                  debug.log(`[assignedNode][ELEMENT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
 
-                  default:
-                    break;
+                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition);
+
+                  this.ordinalPosition += 1;
+                  this.allDomElements.push(domItem);
+
+                  if (parentDomElement) {
+                    parentDomElement.addChild(domItem);
+                  }
+
+                  newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
+                  newParentInfo.useParentDocForName = isSlotContent;
+
+                  this.transverseDOM(newParentInfo, assignedNode);
                 }
               }
             } else {
@@ -240,12 +252,13 @@ export default class DOMCache {
               if (parentDomElement) {
                 parentDomElement.addChild(domItem);
               }
-              const newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
+              newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
 
               // check for custom elements
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
-                  newParentInfo.document = node.shadowRoot;
+                  newParentInfo.parentDocument  = newParentInfo.document;
+                  newParentInfo.document        = node.shadowRoot;
                   this.documentIndex += 1;
                   newParentInfo.documentIndex = this.documentIndex;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
@@ -285,9 +298,8 @@ export default class DOMCache {
    *
    * @desc  Updates page level collections of elements for landmarks, headings and controls
    *
-   * @param {Object}  parentinfo  - Parent DomElement associated DOMElement
-   * @param {Object}  domElement  - The dom element to start transversing the
-   *                                      dom
+   * @param {Object}  parentInfo       - Parent DomElement associated DOMElement
+   * @param {Object}  domElement       - The dom element to start transversing the dom
    *
    * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
    */
