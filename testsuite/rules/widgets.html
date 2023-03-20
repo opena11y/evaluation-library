@@ -27,15 +27,11 @@
         executeTest('WIDGET_4: ARIA values named token values must be valid', 'ID_IFRAME_4A',  'WIDGET_4');
         executeTest('WIDGET_4: ARIA values numeric values must be valid', 'ID_IFRAME_4B',  'WIDGET_4');
         executeTest('WIDGET_5: ARIA attributes must be valid', 'ID_IFRAME_5',  'WIDGET_5');
-
         executeTest('WIDGET_6: Widgets must have required properties', 'ID_IFRAME_6',  'WIDGET_6');
+        executeTest('WIDGET_7: Widgets must have required owned elements', 'ID_IFRAME_7',  'WIDGET_7');
       });
 
       /*
-
-      test( "WIDGET_7: Widgets must have required owned elements", function() {
-        executeTest('ID_IFRAME_7', 'WIDGET_7');
-      });
 
       test( "WIDGET_8: Widgets must have required parent roles", function() {
         executeTest('ID_IFRAME_8', 'WIDGET_8');
@@ -127,7 +123,6 @@
 
     <h2>Widget 7: Must have required child roles</h2>
     <iframe id="ID_IFRAME_7"  src="widgets/widget_7_child_roles.html"></iframe>
-
 
     <h2>Widget 8: Widgets must have required parent roles</h2>
     <iframe id="ID_IFRAME_8"  src="widgets/widget_8_parent.html"></iframe>

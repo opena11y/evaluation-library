@@ -6060,7 +6060,22 @@ class AriaInfo {
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProhibited;
+
     this.requiredParents  = designPattern.requiredParents;
+    this.hasRequiredParents  = designPattern.requiredParents.length > 0;
+
+    this.requiredChildren  = designPattern.requiredChildren;
+    this.hasRequiredChildren = designPattern.requiredChildren.length > 0;
+    this.isBusy = node.hasAttribute('aria-busy') ?
+                  node.getAttribute('aria-busy').toLowerCase() === 'true':
+                  false;
+
+    this.hasAriaOwns = node.hasAttribute('aria-owns');
+    this.ariaOwnsIds = this.hasAriaOwns ?
+                       node.getAttribute('aria-owns').split(' ') :
+                       [];
+    this.ownedElements   = [];
+    this.ownedByElements = [];
 
     this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
                       (designPattern.roleType.indexOf('widget') >= 0)  ||
@@ -6070,8 +6085,6 @@ class AriaInfo {
     this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
-
-    this.hasRequiredParents = designPattern.requiredParents.length > 0;
 
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);
@@ -11211,6 +11224,7 @@ class DOMCache {
     this.resultsManualChecks = [];
 
     this.transverseDOM(parentInfo, startingElement);
+    this.computeAriaOwnsRefs();
 
     // Debug features
     if (debug$g.flag) {
@@ -11225,6 +11239,10 @@ class DOMCache {
       this.structureInfo.showStructureInfo();
     }
 
+  }
+
+  getDomElementById(id) {
+    return this.allDomElements.find( de => de.id === id);
   }
 
   // Tests if a tag name can be skipped
@@ -11400,7 +11418,7 @@ class DOMCache {
    * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
    */
 
-  updateDOMElementInformation (parentInfo, domElement) {
+  updateDOMElementInformation(parentInfo, domElement) {
     const documentIndex   = parentInfo.documentIndex;
 
     const controlElement   = parentInfo.controlElement;
@@ -11419,6 +11437,31 @@ class DOMCache {
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
 
     return newParentInfo;
+  }
+
+  /**
+   * @method showDomElementTree
+   *
+   * @desc  Used for debugging the DOMElement tree
+   */
+
+  computeAriaOwnsRefs() {
+
+    for (let i = 0; i < this.allDomElements.length; i += 1) {
+      const de = this.allDomElements[i];
+      if (de.ariaInfo.hasAriaOwns) {
+        for (let j = 0; j < de.ariaInfo.ariaOwnsIds.length; j += 1) {
+          const id = de.ariaInfo.ariaOwnsIds[j];
+          if (id) {
+            const ode = this.getDomElementById(id);
+            if (ode) {
+              de.ariaInfo.ownedElements.push(ode);
+              ode.ariaInfo.ownedByElements.push(de);
+            }
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -14489,67 +14532,50 @@ const widgetRules$1 = [
 
     debug$d.flag && debug$d.log(`[WIDGET 7] ${dom_cache} ${rule_result}`);
 
-/*
+    function getRequiredChildrenCount(de, requiredChildren) {
+      let count = 0;
+      const ai = de.ariaInfo;
+      de.children.forEach( cde => {
+        if (cde.isDomElement) {
+          if (requiredChildren.includes(cde.role)) {
+            count += 1;
+          }
+          count += getRequiredChildrenCount(cde, requiredChildren);
+        }
+      });
+      ai.ownedElements.forEach( oe => {
+        if (requiredChildren.includes(oe.role)) {
+          count += 1;
+        }
+        count += getRequiredChildrenCount(oe, requiredChildren);
+      });
 
-     function getRequiredChildRolesString(required_children) {
+      return count;
+    }
 
-       var str = "";
-       var required_children_max = required_children.length - 1;
-
-       for (var i = 0; i < required_children.length; i++ ) {
-         str += required_children[i];
-         if (i !== required_children_max) str += ", ";
-       }
-
-       return str;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
-
-     if (widget_elements && widget_elements) {
-
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
-
-         var required_child_roles = de.role_info.requiredChildren;
-
-         if (required_child_roles && required_child_roles.length) {
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             if (we.aria_busy) {
-               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.role]);
-             } else {
-               var flag = false;
-
-               for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
-                 flag = we.hasRequiredChildRole(required_child_roles[j]);
-               }
-
-               var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
-
-               if (flag) {
-                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
-               } else {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
-              }
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+       if (de.ariaInfo.hasRequiredChildren) {
+        const rc = de.ariaInfo.requiredChildren;
+        if (de.visibility.isVisibleToAT) {
+          if (de.ariaInfo.isBusy) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+          }
+          else {
+            const count = getRequiredChildrenCount(de, rc);
+            if (count) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, rc.join(', ')]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, rc.join(', ')]);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role, rc.join(', ')]);
+        }
+      }
+    });
    } // end validation function
 },
 
@@ -18451,7 +18477,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18529,7 +18555,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18606,7 +18632,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18679,7 +18705,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18761,7 +18787,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18839,7 +18865,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18919,7 +18945,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -18991,7 +19017,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19066,7 +19092,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19133,7 +19159,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         }
       ]
   },
@@ -19188,7 +19214,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19251,7 +19277,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19322,7 +19348,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19380,7 +19406,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19452,7 +19478,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19521,7 +19547,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19597,7 +19623,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19675,7 +19701,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -19749,7 +19775,7 @@ const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -20157,14 +20183,16 @@ const widgetRules = {
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add required child element to the widget.',
           FAIL_P:   'Add required child elements for the %N_F out of %N_T widgets missing required child elements.',
+          MANUAL_CHECK_S: 'Verify the widget with @aria-busy=true@ children are being populated with required child elements.',
+          MANUAL_CHECK_P: 'Verify the %N_MC widgets with @aria-busy=true@ children are being populated with required child elements.',
           HIDDEN_S: 'The widget with requires child elements that is is hidden and was not evaluated.',
           HIDDEN_P: '%N_H hidden widgets that require child elements were not evaluated.',
           NOT_APPLICABLE:  'No widgets with required child elements on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element: @%2@.',
-          ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to contain required owned elements.',
-          ELEMENT_FAIL_1:  '@%1@ widget does not contain one or more of following required owned elements: @%2@.',
+          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element with the role of: @%2@.',
+          ELEMENT_MC_1:      'When @aria-busy@ is set to @true@, verify for the child nodes are being populated.',
+          ELEMENT_FAIL_1:    '@%1@ widget does not contain one or more of following required owned elements with  a role of: @%2@.',
           ELEMENT_HIDDEN_1:  'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
         },
         PURPOSES: [

@@ -386,14 +386,16 @@ export const widgetRules = {
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add required child element to the widget.',
           FAIL_P:   'Add required child elements for the %N_F out of %N_T widgets missing required child elements.',
+          MANUAL_CHECK_S: 'Verify the widget with @aria-busy=true@ children are being populated with required child elements.',
+          MANUAL_CHECK_P: 'Verify the %N_MC widgets with @aria-busy=true@ children are being populated with required child elements.',
           HIDDEN_S: 'The widget with requires child elements that is is hidden and was not evaluated.',
           HIDDEN_P: '%N_H hidden widgets that require child elements were not evaluated.',
           NOT_APPLICABLE:  'No widgets with required child elements on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element: @%2@.',
-          ELEMENT_PASS_2:    'When @aria-busy@ is set to @true@, the @%1@ widget is not required to contain required owned elements.',
-          ELEMENT_FAIL_1:  '@%1@ widget does not contain one or more of following required owned elements: @%2@.',
+          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element with the role of: @%2@.',
+          ELEMENT_MC_1:      'When @aria-busy@ is set to @true@, verify for the child nodes are being populated.',
+          ELEMENT_FAIL_1:    '@%1@ widget does not contain one or more of following required owned elements with  a role of: @%2@.',
           ELEMENT_HIDDEN_1:  'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
         },
         PURPOSES: [

@@ -112,6 +112,7 @@ export default class DOMCache {
     this.resultsManualChecks = [];
 
     this.transverseDOM(parentInfo, startingElement);
+    this.computeAriaOwnsRefs();
 
     // Debug features
     if (debug.flag) {
@@ -126,6 +127,10 @@ export default class DOMCache {
       this.structureInfo.showStructureInfo();
     }
 
+  }
+
+  getDomElementById(id) {
+    return this.allDomElements.find( de => de.id === id);
   }
 
   // Tests if a tag name can be skipped
@@ -304,7 +309,7 @@ export default class DOMCache {
    * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
    */
 
-  updateDOMElementInformation (parentInfo, domElement) {
+  updateDOMElementInformation(parentInfo, domElement) {
     const documentIndex   = parentInfo.documentIndex;
 
     const controlElement   = parentInfo.controlElement;
@@ -323,6 +328,31 @@ export default class DOMCache {
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
 
     return newParentInfo;
+  }
+
+  /**
+   * @method showDomElementTree
+   *
+   * @desc  Used for debugging the DOMElement tree
+   */
+
+  computeAriaOwnsRefs() {
+
+    for (let i = 0; i < this.allDomElements.length; i += 1) {
+      const de = this.allDomElements[i];
+      if (de.ariaInfo.hasAriaOwns) {
+        for (let j = 0; j < de.ariaInfo.ariaOwnsIds.length; j += 1) {
+          const id = de.ariaInfo.ariaOwnsIds[j];
+          if (id) {
+            const ode = this.getDomElementById(id);
+            if (ode) {
+              de.ariaInfo.ownedElements.push(ode);
+              ode.ariaInfo.ownedByElements.push(de);
+            }
+          }
+        }
+      }
+    }
   }
 
   /**

@@ -23,6 +23,7 @@
         testAccname('Accessible Name and CSS properties',   'ID_IFRAME_1B', 'data-label', 'accName');
         testAccname('Accessible Name and embedded controls','ID_IFRAME_1C', 'data-label', 'accName');
         testAccname('Accessible Name from contents',        'ID_IFRAME_1D', 'data-label', 'accName');
+        testAccname('Accessible Name from web components',  'ID_IFRAME_1E', 'data-label', 'accName');
 
       });
       window.addEventListener('load', (event) => {
@@ -34,6 +35,7 @@
     <iframe id="ID_IFRAME_1B" src="accname/accname-css.html"></iframe>
     <iframe id="ID_IFRAME_1C" src="accname/accname-embedded.html"></iframe>
     <iframe id="ID_IFRAME_1D" src="accname/accname-from-contents.html"></iframe>
+    <iframe id="ID_IFRAME_1E" src="accname/accname-web-components.html"></iframe>
   </body>
 
 </html>

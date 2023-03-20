@@ -8,7 +8,7 @@ import {headingRules}   from './headingRules.js';
 import {imageRules}     from './imageRules.js';
 import {linkRules}      from './linkRules.js';
 import {landmarkRules}  from './landmarkRules.js';
-import {widgetRules}      from './widgetRules.js';
+import {widgetRules}    from './widgetRules.js';
 
 import Rule             from './rule.js';
 import DebugLogging     from '../debug.js';

@@ -318,7 +318,7 @@ function isDisplayNone (node) {
     }
 
     // aria-hidden attribute with the value "true" is an same as
-    // setting the hidden attribute for name calcuation
+    // setting the hidden attribute for name calculation
     if (node.hasAttribute('aria-hidden')) {
       if (node.getAttribute('aria-hidden').toLowerCase()  === 'true') {
         return true;

@@ -59,7 +59,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -137,7 +137,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -214,7 +214,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -287,7 +287,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -369,7 +369,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -447,7 +447,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -527,7 +527,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -599,7 +599,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -674,7 +674,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -741,7 +741,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         }
       ]
   },
@@ -796,7 +796,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -859,7 +859,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -930,7 +930,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -988,7 +988,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -1060,7 +1060,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -1129,7 +1129,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -1205,7 +1205,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -1283,7 +1283,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -1357,7 +1357,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmark Example',
-          url:   'https://w3c.github.io/aria-practices/examples/landmarks/'
+          url:   'https://w3c.github.io/aria-practices/patterns/landmarks/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',

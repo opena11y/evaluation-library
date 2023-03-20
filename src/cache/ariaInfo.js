@@ -83,7 +83,22 @@ export default class AriaInfo {
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProhibited;
+
     this.requiredParents  = designPattern.requiredParents;
+    this.hasRequiredParents  = designPattern.requiredParents.length > 0;
+
+    this.requiredChildren  = designPattern.requiredChildren;
+    this.hasRequiredChildren = designPattern.requiredChildren.length > 0;
+    this.isBusy = node.hasAttribute('aria-busy') ?
+                  node.getAttribute('aria-busy').toLowerCase() === 'true':
+                  false;
+
+    this.hasAriaOwns = node.hasAttribute('aria-owns');
+    this.ariaOwnsIds = this.hasAriaOwns ?
+                       node.getAttribute('aria-owns').split(' ') :
+                       [];
+    this.ownedElements   = [];
+    this.ownedByElements = [];
 
     this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
                       (designPattern.roleType.indexOf('widget') >= 0)  ||
@@ -93,8 +108,6 @@ export default class AriaInfo {
     this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
-
-    this.hasRequiredParents = designPattern.requiredParents.length > 0;
 
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);

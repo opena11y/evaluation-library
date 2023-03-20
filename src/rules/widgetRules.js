@@ -440,67 +440,50 @@ export const widgetRules = [
 
     debug.flag && debug.log(`[WIDGET 7] ${dom_cache} ${rule_result}`);
 
-/*
+    function getRequiredChildrenCount(de, requiredChildren) {
+      let count = 0;
+      const ai = de.ariaInfo;
+      de.children.forEach( cde => {
+        if (cde.isDomElement) {
+          if (requiredChildren.includes(cde.role)) {
+            count += 1;
+          }
+          count += getRequiredChildrenCount(cde, requiredChildren);
+        }
+      });
+      ai.ownedElements.forEach( oe => {
+        if (requiredChildren.includes(oe.role)) {
+          count += 1;
+        }
+        count += getRequiredChildrenCount(oe, requiredChildren);
+      });
 
-     function getRequiredChildRolesString(required_children) {
+      return count;
+    }
 
-       var str = "";
-       var required_children_max = required_children.length - 1;
-
-       for (var i = 0; i < required_children.length; i++ ) {
-         str += required_children[i];
-         if (i !== required_children_max) str += ", ";
-       }
-
-       return str;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
-
-     if (widget_elements && widget_elements) {
-
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
-
-         var required_child_roles = de.role_info.requiredChildren;
-
-         if (required_child_roles && required_child_roles.length) {
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             if (we.aria_busy) {
-               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.role]);
-             } else {
-               var flag = false;
-
-               for (var j = 0; (j < required_child_roles.length) && !flag; j++) {
-                 flag = we.hasRequiredChildRole(required_child_roles[j]);
-               }
-
-               var required_child_roles_string = getRequiredChildRolesString(required_child_roles);
-
-               if (flag) {
-                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, required_child_roles_string]);
-               } else {
-                rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, required_child_roles_string]);
-              }
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+       if (de.ariaInfo.hasRequiredChildren) {
+        const rc = de.ariaInfo.requiredChildren;
+        if (de.visibility.isVisibleToAT) {
+          if (de.ariaInfo.isBusy) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+          }
+          else {
+            const count = getRequiredChildrenCount(de, rc);
+            if (count) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, rc.join(', ')]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, rc.join(', ')]);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role, rc.join(', ')]);
+        }
+      }
+    });
    } // end validation function
 },
 
