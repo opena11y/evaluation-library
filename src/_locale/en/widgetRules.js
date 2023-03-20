@@ -198,7 +198,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -313,7 +313,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -366,7 +366,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -424,7 +424,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -478,7 +478,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -528,7 +528,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -580,7 +580,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices: Communicating Value and Limits for Range Widgets',
-            url:   'https://w3c.github.io/aria-practices/#range_related_properties'
+            url:   'https://www.w3.org/WAI/ARIA/apg/#range_related_properties'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
@@ -685,7 +685,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'MDN Web Docs: ARIA ',
@@ -814,7 +814,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           }
         ]
     },
@@ -933,7 +933,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           }
         ]
     },
@@ -986,7 +986,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
-            url:   'https://w3c.github.io/aria-practices/'
+            url:   'https://www.w3.org/WAI/ARIA/apg/'
           }
         ]
     }
