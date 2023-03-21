@@ -110,11 +110,14 @@ export default class DebugLogging {
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
 
-      if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos})`);
-      } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
-      }
+      const childPos = `children: ${count} position: ${pos}`;
+      const name  = accName.name.length ? `[${domElement.role}]: ${accName.name} (src: ${accName.source})` : ``;
+      let ownsInfo = domElement.ariaInfo.hasAriaOwns ? domElement.ariaInfo.ariaOwnsIds : '';
+      ownsInfo += domElement.ariaInfo.ownedByDomElements.length ?
+                  'ownedby: ' + domElement.ariaInfo.ownedByDomElements.join('; ') :
+                  '';
+
+      this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${name} ${childPos} ${ownsInfo}`);
 
 //      this.log(`${prefix}[${domElement.tagName}][            tabIndex]: ${domElement.tabIndex}`);
 //      this.log(`${prefix}[${domElement.tagName}][           isTabStop]: ${domElement.isTabStop}`);

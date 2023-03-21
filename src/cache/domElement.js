@@ -321,7 +321,7 @@ export default class DOMElement {
       id = `[id=${this.node.id}]`;
     }
 
-    return `${this.tagName}${type}${id}[${this.role}]`;
+    return `(${this.ordinalPosition}): ${this.tagName}${type}${id}[${this.role}]`;
   }
 
   /**

@@ -112,11 +112,14 @@ class DebugLogging {
       const count   = domElement.children.length;
       const pos     = domElement.ordinalPosition;
 
-      if (accName.name.length) {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${accName.name} (src: ${accName.source}) children: ${count} position: ${pos})`);
-      } else {
-        this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: children: ${count} position: ${pos}`);
-      }
+      const childPos = `children: ${count} position: ${pos}`;
+      const name  = accName.name.length ? `[${domElement.role}]: ${accName.name} (src: ${accName.source})` : ``;
+      let ownsInfo = domElement.ariaInfo.hasAriaOwns ? domElement.ariaInfo.ariaOwnsIds : '';
+      ownsInfo += domElement.ariaInfo.ownedByDomElements.length ?
+                  'ownedby: ' + domElement.ariaInfo.ownedByDomElements.join('; ') :
+                  '';
+
+      this.log(`${prefix}[${domElement.tagName}][${domElement.role}]: ${name} ${childPos} ${ownsInfo}`);
 
 //      this.log(`${prefix}[${domElement.tagName}][            tabIndex]: ${domElement.tabIndex}`);
 //      this.log(`${prefix}[${domElement.tagName}][           isTabStop]: ${domElement.isTabStop}`);
@@ -6074,8 +6077,8 @@ class AriaInfo {
     this.ariaOwnsIds = this.hasAriaOwns ?
                        node.getAttribute('aria-owns').split(' ') :
                        [];
-    this.ownedElements   = [];
-    this.ownedByElements = [];
+    this.ownedDomElements   = [];
+    this.ownedByDomElements = [];
 
     this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
                       (designPattern.roleType.indexOf('widget') >= 0)  ||
@@ -6355,6 +6358,7 @@ class AriaInfo {
     }
     return 0;
   }
+
 }
 
 /* colorContrast.js */
@@ -10161,7 +10165,7 @@ class DOMElement {
       id = `[id=${this.node.id}]`;
     }
 
-    return `${this.tagName}${type}${id}[${this.role}]`;
+    return `(${this.ordinalPosition}): ${this.tagName}${type}${id}[${this.role}]`;
   }
 
   /**
@@ -11126,6 +11130,7 @@ class StructureInfo {
 
 /* Constants */
 const debug$g = new DebugLogging('domCache', false);
+debug$g.flag = true;
 
 const skipableElements = [
   'base',
@@ -11213,7 +11218,6 @@ class DOMCache {
     this.iframeInfo    = new IframeInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
-    parentInfo.domElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -11446,7 +11450,6 @@ class DOMCache {
    */
 
   computeAriaOwnsRefs() {
-
     for (let i = 0; i < this.allDomElements.length; i += 1) {
       const de = this.allDomElements[i];
       if (de.ariaInfo.hasAriaOwns) {
@@ -11455,8 +11458,8 @@ class DOMCache {
           if (id) {
             const ode = this.getDomElementById(id);
             if (ode) {
-              de.ariaInfo.ownedElements.push(ode);
-              ode.ariaInfo.ownedByElements.push(de);
+              de.ariaInfo.ownedDomElements.push(ode);
+              ode.ariaInfo.ownedByDomElements.push(de);
             }
           }
         }
@@ -14508,7 +14511,7 @@ const widgetRules$1 = [
  */
 
 { rule_id             : 'WIDGET_7',
-  last_updated        : '2021-07-02',
+  last_updated        : '2023-03-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -14530,12 +14533,10 @@ const widgetRules$1 = [
                          '[treegrid]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`[WIDGET 7] ${dom_cache} ${rule_result}`);
-
-    function getRequiredChildrenCount(de, requiredChildren) {
+    function getRequiredChildrenCount(domElement, requiredChildren) {
       let count = 0;
-      const ai = de.ariaInfo;
-      de.children.forEach( cde => {
+      const ai = domElement.ariaInfo;
+      domElement.children.forEach( cde => {
         if (cde.isDomElement) {
           if (requiredChildren.includes(cde.role)) {
             count += 1;
@@ -14543,7 +14544,7 @@ const widgetRules$1 = [
           count += getRequiredChildrenCount(cde, requiredChildren);
         }
       });
-      ai.ownedElements.forEach( oe => {
+      ai.ownedDomElements.forEach( oe => {
         if (requiredChildren.includes(oe.role)) {
           count += 1;
         }
@@ -14586,7 +14587,7 @@ const widgetRules$1 = [
  */
 
 { rule_id             : 'WIDGET_8',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-03-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -14610,75 +14611,58 @@ const widgetRules$1 = [
                       ],
   validate            : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`[WIDGET 8] ${dom_cache} ${rule_result}`);
 
-/*
-     function getRequiredRolesString(required_roles) {
+    function checkForRequiredParent(domElement, requiredParents) {
+      if (!domElement || !domElement.ariaInfo) {
+        return '';
+      }
+      const ai = domElement.ariaInfo;
+      const obdes = ai.ownedByDomElements;
+      const pde = domElement.parentInfo.domElement;
 
-       var str = "";
-       var required_roles_max = required_roles.length - 1;
+      // Check for aria-owns relationships
+      for (let i = 0; i < obdes.length; i += 1) {
+        const obde = obdes[i];
+        if (requiredParents.includes(obde.role)) {
+          return obde.role;
+        }
+        else {
+          return checkForRequiredParent(obde.parentInfo.domElement, requiredParents);
+        }
+      }
 
-       for (var i = 0; i < required_roles.length; i++ ) {
-         if (i > 0) {
-          if ( i === required_roles_max) {
-            str += "@ or @" + required_roles[i];
-          } else {
-            str += "@, @" + required_roles[i];
-;
+      // Check parent dom element
+      if (pde) {
+        if (requiredParents.includes(pde.role)) {
+          return pde.role;
+        }
+        else {
+          return checkForRequiredParent(pde, requiredParents);
+        }
+      }
+      return '';
+    }
+
+    dom_cache.allDomElements.forEach( de => {
+       if (de.ariaInfo.hasRequiredParents) {
+        const rp = de.ariaInfo.requiredParents;
+        if (de.visibility.isVisibleToAT) {
+          const result = checkForRequiredParent(de, rp);
+          if (result) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, result]);
           }
-         } else {
-           str += required_roles[i];
-         }
-       }
-
-       return str;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
-
-     if (widget_elements && widget_elements) {
-
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
-
-         var required_parent_roles = de.role_info.requiredParents;
-
-         if (required_parent_roles && required_parent_roles.length) {
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             var flag = false;
-
-             for (var j = 0; (j < required_parent_roles.length) && !flag; j++) {
-                var role = required_parent_roles[j];
-                flag = we.isOwnedByRole(role);
-             }
-
-             var required_roles_string = getRequiredRolesString(required_parent_roles);
-
-             if (flag) {
-               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
-             } else {
-               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, rp.join(', ')]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role, rp.join(', ')]);
+        }
+      }
+    });
    } // end validation function
 },
+
 /**
  * @object WIDGET_9
  *
@@ -20239,8 +20223,8 @@ const widgetRules = {
         SUMMARY:               'Role must have parent',
         TARGET_RESOURCES_DESC: 'Role with required parent role',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Add required parent role to the widget.',
-          FAIL_P:   'Add required parent role to the %N_F of the %N_T widgets that require a parent role.',
+          FAIL_S:   'Update the parent/child structure of the page so the element descends from a required parent role.',
+          FAIL_P:   'Update the parent/child structure of the page so the %N_F elements descend from a required parent role.',
           HIDDEN_S: 'The role that requires a parent role that is hidden and was not evaluated.',
           HIDDEN_P: '%N_H widgets that require a parent roles that are hidden were not evaluated.',
           NOT_APPLICABLE:  'No widgets with required parent role on this page'

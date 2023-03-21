@@ -442,8 +442,8 @@ export const widgetRules = {
         SUMMARY:               'Role must have parent',
         TARGET_RESOURCES_DESC: 'Role with required parent role',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Add required parent role to the widget.',
-          FAIL_P:   'Add required parent role to the %N_F of the %N_T widgets that require a parent role.',
+          FAIL_S:   'Update the parent/child structure of the page so the element descends from a required parent role.',
+          FAIL_P:   'Update the parent/child structure of the page so the %N_F elements descend from a required parent role.',
           HIDDEN_S: 'The role that requires a parent role that is hidden and was not evaluated.',
           HIDDEN_P: '%N_H widgets that require a parent roles that are hidden were not evaluated.',
           NOT_APPLICABLE:  'No widgets with required parent role on this page'

@@ -97,8 +97,8 @@ export default class AriaInfo {
     this.ariaOwnsIds = this.hasAriaOwns ?
                        node.getAttribute('aria-owns').split(' ') :
                        [];
-    this.ownedElements   = [];
-    this.ownedByElements = [];
+    this.ownedDomElements   = [];
+    this.ownedByDomElements = [];
 
     this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
                       (designPattern.roleType.indexOf('widget') >= 0)  ||
@@ -381,4 +381,5 @@ export default class AriaInfo {
     }
     return 0;
   }
+
 }

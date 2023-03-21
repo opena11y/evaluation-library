@@ -14,6 +14,7 @@ import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
+debug.flag = true;
 
 const skipableElements = [
   'base',
@@ -101,7 +102,6 @@ export default class DOMCache {
     this.iframeInfo    = new IFrameInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
-    parentInfo.domElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -337,7 +337,6 @@ export default class DOMCache {
    */
 
   computeAriaOwnsRefs() {
-
     for (let i = 0; i < this.allDomElements.length; i += 1) {
       const de = this.allDomElements[i];
       if (de.ariaInfo.hasAriaOwns) {
@@ -346,8 +345,8 @@ export default class DOMCache {
           if (id) {
             const ode = this.getDomElementById(id);
             if (ode) {
-              de.ariaInfo.ownedElements.push(ode);
-              ode.ariaInfo.ownedByElements.push(de);
+              de.ariaInfo.ownedDomElements.push(ode);
+              ode.ariaInfo.ownedByDomElements.push(de);
             }
           }
         }

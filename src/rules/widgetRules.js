@@ -416,7 +416,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_7',
-  last_updated        : '2021-07-02',
+  last_updated        : '2023-03-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -438,12 +438,10 @@ export const widgetRules = [
                          '[treegrid]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 7] ${dom_cache} ${rule_result}`);
-
-    function getRequiredChildrenCount(de, requiredChildren) {
+    function getRequiredChildrenCount(domElement, requiredChildren) {
       let count = 0;
-      const ai = de.ariaInfo;
-      de.children.forEach( cde => {
+      const ai = domElement.ariaInfo;
+      domElement.children.forEach( cde => {
         if (cde.isDomElement) {
           if (requiredChildren.includes(cde.role)) {
             count += 1;
@@ -451,7 +449,7 @@ export const widgetRules = [
           count += getRequiredChildrenCount(cde, requiredChildren);
         }
       });
-      ai.ownedElements.forEach( oe => {
+      ai.ownedDomElements.forEach( oe => {
         if (requiredChildren.includes(oe.role)) {
           count += 1;
         }
@@ -494,7 +492,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_8',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-03-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -518,75 +516,58 @@ export const widgetRules = [
                       ],
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 8] ${dom_cache} ${rule_result}`);
 
-/*
-     function getRequiredRolesString(required_roles) {
+    function checkForRequiredParent(domElement, requiredParents) {
+      if (!domElement || !domElement.ariaInfo) {
+        return '';
+      }
+      const ai = domElement.ariaInfo;
+      const obdes = ai.ownedByDomElements;
+      const pde = domElement.parentInfo.domElement;
 
-       var str = "";
-       var required_roles_max = required_roles.length - 1;
+      // Check for aria-owns relationships
+      for (let i = 0; i < obdes.length; i += 1) {
+        const obde = obdes[i];
+        if (requiredParents.includes(obde.role)) {
+          return obde.role;
+        }
+        else {
+          return checkForRequiredParent(obde.parentInfo.domElement, requiredParents);
+        }
+      }
 
-       for (var i = 0; i < required_roles.length; i++ ) {
-         if (i > 0) {
-          if ( i === required_roles_max) {
-            str += "@ or @" + required_roles[i];
-          } else {
-            str += "@, @" + required_roles[i];
-;
+      // Check parent dom element
+      if (pde) {
+        if (requiredParents.includes(pde.role)) {
+          return pde.role;
+        }
+        else {
+          return checkForRequiredParent(pde, requiredParents);
+        }
+      }
+      return '';
+    }
+
+    dom_cache.allDomElements.forEach( de => {
+       if (de.ariaInfo.hasRequiredParents) {
+        const rp = de.ariaInfo.requiredParents;
+        if (de.visibility.isVisibleToAT) {
+          const result = checkForRequiredParent(de, rp);
+          if (result) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, result]);
           }
-         } else {
-           str += required_roles[i];
-         }
-       }
-
-       return str;
-
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widget_elements     = dom_cache.controls_cache.widget_elements;
-     var widget_elements_len = widget_elements.length;
-
-     if (widget_elements && widget_elements) {
-
-       for (var i = 0; i < widget_elements_len; i++) {
-         var we = widget_elements[i];
-         var de = we.dom_element;
-         var style = de.computed_style;
-
-         var required_parent_roles = de.role_info.requiredParents;
-
-         if (required_parent_roles && required_parent_roles.length) {
-
-           if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-
-             var flag = false;
-
-             for (var j = 0; (j < required_parent_roles.length) && !flag; j++) {
-                var role = required_parent_roles[j];
-                flag = we.isOwnedByRole(role);
-             }
-
-             var required_roles_string = getRequiredRolesString(required_parent_roles);
-
-             if (flag) {
-               rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, role]);
-             } else {
-               rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [required_roles_string, de.role]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role, rp.join(', ')]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role, rp.join(', ')]);
+        }
+      }
+    });
    } // end validation function
 },
+
 /**
  * @object WIDGET_9
  *
