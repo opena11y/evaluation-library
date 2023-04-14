@@ -331,12 +331,23 @@ export default class DOMCache {
   }
 
   /**
-   * @method showDomElementTree
+   * @method computeAriaOwnsRefs
    *
-   * @desc  Used for debugging the DOMElement tree
+   * @desc  If aria-owns is defined, identify parent child relationships
    */
 
   computeAriaOwnsRefs() {
+
+    function addOwenedByRefToDescendants(ownerDomElement, domElement) {
+      domElement.ariaInfo.ownedByDomElements.push(ownerDomElement);
+      for (let i = 0; i < domElement.children.length; i += 1) {
+        const child = domElement.children[i];
+        if (child.isDomElement) {
+          addOwenedByRefToDescendants(ownerDomElement, child);
+        }
+      }
+    }
+
     for (let i = 0; i < this.allDomElements.length; i += 1) {
       const de = this.allDomElements[i];
       if (de.ariaInfo.hasAriaOwns) {
@@ -346,7 +357,7 @@ export default class DOMCache {
             const ode = this.getDomElementById(id);
             if (ode) {
               de.ariaInfo.ownedDomElements.push(ode);
-              ode.ariaInfo.ownedByDomElements.push(de);
+              addOwenedByRefToDescendants(de, ode);
             }
           }
         }

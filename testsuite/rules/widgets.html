@@ -30,15 +30,13 @@
         executeTest('WIDGET_6: Widgets must have required properties', 'ID_IFRAME_6',  'WIDGET_6');
         executeTest('WIDGET_7: Widgets must have required owned elements', 'ID_IFRAME_7',  'WIDGET_7');
         executeTest('WIDGET_8: Widgets must have required parent roles', 'ID_IFRAME_8',  'WIDGET_8');
+        executeTest('WIDGET_9: Widgets cannot be owned by more than one widget', 'ID_IFRAME_9',  'WIDGET_9');
+        executeTest('WIDGET_10: Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax', 'ID_IFRAME_10',  'WIDGET_10');
       });
 
       /*
 
-      test( "WIDGET_9: Widgets cannot be owned by more than one widget", function() {
-        executeTest('ID_IFRAME_9', 'WIDGET_9');
-      });
-
-      test( "WIDGET_10: Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax", function() {
+      test( "WIDGET_10: Range widgets with aria-valuenow mut be in range of aria-valuemin and aria-valuemax", function() {
         executeTest('ID_IFRAME_10', 'WIDGET_10');
       });
 

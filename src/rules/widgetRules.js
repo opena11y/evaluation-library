@@ -440,28 +440,32 @@ export const widgetRules = [
 
     function getRequiredChildrenCount(domElement, requiredChildren) {
       let count = 0;
+      let i;
       const ai = domElement.ariaInfo;
-      domElement.children.forEach( cde => {
+      const cdes = domElement.children;
+      const odes = ai.ownedDomElements;
+      for(i = 0; i < cdes.length; i += 1) {
+        const cde = cdes[i];
         if (cde.isDomElement) {
           if (requiredChildren.includes(cde.role)) {
-            count += 1;
+            return 1;
           }
           count += getRequiredChildrenCount(cde, requiredChildren);
         }
-      });
-      ai.ownedDomElements.forEach( oe => {
-        if (requiredChildren.includes(oe.role)) {
-          count += 1;
-        }
-        count += getRequiredChildrenCount(oe, requiredChildren);
-      });
+      }
 
+      for(i = 0; i < odes.length; i += 1) {
+        const ode = odes[i];
+        if (requiredChildren.includes(ode.role)) {
+          return 1;
+        }
+        count += getRequiredChildrenCount(ode, requiredChildren);
+      }
       return count;
     }
 
-    dom_cache.controlInfo.allControlElements.forEach( ce => {
-      const de = ce.domElement;
-       if (de.ariaInfo.hasRequiredChildren) {
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.hasRequiredChildren) {
         const rc = de.ariaInfo.requiredChildren;
         if (de.visibility.isVisibleToAT) {
           if (de.ariaInfo.isBusy) {
@@ -469,7 +473,7 @@ export const widgetRules = [
           }
           else {
             const count = getRequiredChildrenCount(de, rc);
-            if (count) {
+            if (count > 0) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, rc.join(', ')]);
             }
             else {
@@ -525,7 +529,7 @@ export const widgetRules = [
       const obdes = ai.ownedByDomElements;
       const pde = domElement.parentInfo.domElement;
 
-      // Check for aria-owns relationships
+      // Check first for aria-owns relationships
       for (let i = 0; i < obdes.length; i += 1) {
         const obde = obdes[i];
         if (requiredParents.includes(obde.role)) {
@@ -536,7 +540,7 @@ export const widgetRules = [
         }
       }
 
-      // Check parent dom element
+      // Check parent domElement
       if (pde) {
         if (requiredParents.includes(pde.role)) {
           return pde.role;
@@ -549,7 +553,7 @@ export const widgetRules = [
     }
 
     dom_cache.allDomElements.forEach( de => {
-       if (de.ariaInfo.hasRequiredParents) {
+      if (de.ariaInfo.hasRequiredParents) {
         const rp = de.ariaInfo.requiredParents;
         if (de.visibility.isVisibleToAT) {
           const result = checkForRequiredParent(de, rp);
@@ -575,7 +579,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_9',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-05',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -585,39 +589,24 @@ export const widgetRules = [
   target_resources    : ['[aria-owns]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 9] ${dom_cache} ${rule_result}`);
-
-/*
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-     var we;
-
-     for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-
-        if (de.owned_by.length === 1) {
-          we = de.owned_by[0];
-          rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
-        } else {
-          if (de.owned_by.length > 1) {
-            for (var j = 0; j < de.owned_by.length; j += 1) {
-              we = de.owned_by[j];
-              rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
-            } // end loop
-          }
+    dom_cache.allDomElements.forEach( de => {
+      const ownedByCount = de.ariaInfo.ownedByDomElements.length;
+      if (ownedByCount > 0) {
+        if (ownedByCount === 1) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
         }
-     } // end loop
-*/
-
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, ownedByCount]);
+        }
+      }
+    });
    } // end validation function
 },
 
 /**
  * @object WIDGET_10
  *
- * @desc Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax
+ * @desc Range widgets with aria-valuenow mut be in range of aria-valuemin and aria-valuemax
  */
 
 { rule_id             : 'WIDGET_10',
@@ -635,7 +624,53 @@ export const widgetRules = [
                          '[role="spinbutton"]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 10] ${dom_cache} ${rule_result}`);
+
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isRange) {
+        const ai = de.ariaInfo;
+        if (de.visibility.isVisibleToAT) {
+          const now  = ai.valueNow;
+          const min  = ai.valueMin;
+          const max  = ai.valueMax;
+          const text = ai.valueText;
+          if (ai.hasValueNow) {
+            if (ai.validValueNow) {
+              if (ai.validValueMin && ai.validValueMax) {
+                if ((now >= min) && (now <= max)) {
+                  if (text) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, text, now]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName, now, min, max]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [now, min, max]);
+                }
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [now]);
+            }
+          }
+          else {
+            if (ai.isValueNowRequired) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de.elemName]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName]);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+
+
+      }
+    });
 
 /*
      var VISIBILITY  = VISIBILITY;
@@ -1194,7 +1229,7 @@ export const widgetRules = [
 /**
  * @object WIDGET_16
  *
- * @desc     Web compnents require manual check
+ * @desc     Web components require manual check
  */
 { rule_id             : 'WIDGET_16',
   last_updated        : '2021-09-12',

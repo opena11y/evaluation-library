@@ -100,14 +100,56 @@ export default class AriaInfo {
     this.ownedDomElements   = [];
     this.ownedByDomElements = [];
 
-    this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
-                      (designPattern.roleType.indexOf('widget') >= 0)  ||
+    this.isRange    = designPattern.roleType.indexOf('range') >= 0;
+    this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
                       (designPattern.roleType.indexOf('window') >= 0);
 
     this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
     this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
+
+    // for range widgets
+
+    if (this.isRange) {
+      this.isValueNowRequired = designPattern.requiredProps.includes('aria-valuenow');
+
+      this.hasValueNow = node.hasAttribute('aria-valuenow');
+      if (this.hasValueNow) {
+        this.valueNow = node.getAttribute('aria-valuenow');
+        this.valueNow = isNaN(parseFloat(this.valueNow)) ? this.valueNow : parseFloat(this.valueNow);
+        this.validValueNow = !isNaN(this.valueNow);
+      }
+      else {
+        this.valueNow = 'undefined';
+        this.validValueNow = false;
+      }
+
+      this.hasValueMin = node.hasAttribute('aria-valuemin');
+      if (this.hasValueMin) {
+        this.valueMin = node.getAttribute('aria-valuemin');
+        this.valueMin = isNaN(parseFloat(this.valueMin)) ? this.valueMin : parseFloat(this.valueMin);
+        this.validValueMin = !isNaN(this.valueMin);
+      }
+      else {
+        this.valueMin = 0;
+        this.validValueMin = true;
+      }
+
+      this.hasValueMax = node.hasAttribute('aria-valuemax');
+      if (this.hasValueMax) {
+        this.valueMax = node.getAttribute('aria-valuemax');
+        this.valueMax = isNaN(parseFloat(this.valueMax)) ? this.valueMax : parseFloat(this.valueMax);
+        this.validValueMax = !isNaN(this.valueMax);
+      }
+      else {
+        this.valueMax = 100;
+        this.validValueMax = true;
+      }
+
+      this.valueText = node.hasAttribute('aria-valuetext') ? node.getAttribute('aria-valuetext') : '';
+
+    }
 
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);

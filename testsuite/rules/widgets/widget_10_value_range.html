@@ -19,7 +19,10 @@
         <h2>meter</h2>
         <div role="meter" aria-label="Meter 1: Pass" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">meter pass</div>
 
-        <div role="meter" aria-label="Meter 2: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="2" aria-valuenow="3">meter fail</div>
+        <div role="meter" aria-label="Meter 2: Fail out of range" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="2" aria-valuenow="3">meter fail</div>
+
+        <div role="meter" aria-label="Meter 2: Fail  invalid min and max values" class="WIDGET_10_FAIL" aria-valuemin="aaa" aria-valuemax="bbb" aria-valuenow="3">meter fail</div>
+
 
         <div hidden role="meter" aria-label="Meter 3: hidden" class="WIDGET_10_HIDDEN" aria-valuemin="1" aria-valuemax="2" aria-valuenow="3">meter hidden</div>
 
@@ -31,39 +34,46 @@
 
         <div role="progressbar" aria-label="Progress 3: Pass" class="WIDGET_10_PASS">progressbar pass</div>
 
-        <div role="progressbar" aria-label="Progress 4: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="20" aria-valuenow="50">progressbar fail</div>
+        <div role="progressbar" aria-label="Progress 4: Fail out of range " class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="20" aria-valuenow="50">progressbar fail </div>
+
+        <div role="progressbar" aria-label="Progress 5: Fail invalid min and max values" class="WIDGET_10_FAIL" aria-valuemin="aa" aria-valuenow="50">progressbar </div>
+
+        <div role="progressbar" aria-label="Progress 6: Fail" class="WIDGET_10_FAIL" aria-valuemax="bb" aria-valuenow="50">progressbar fail</div>
+
 
         <div role="progressbar" aria-label="Progress 5: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="20" aria-valuenow="-1">progressbar fail</div>
 
-        <div role="progressbar" aria-label="Progress 6: Fail" class="WIDGET_10_FAIL" aria-valuenow="101">progressbar fail</div>
+        <div role="progressbar" aria-label="Progress 6: Fail out of range" class="WIDGET_10_FAIL" aria-valuenow="101">progressbar fail</div>
 
-        <div role="progressbar" aria-label="Progress 7: Fail" class="WIDGET_10_FAIL" aria-valuenow="-1">progressbar fail</div>
+        <div role="progressbar" aria-label="Progress 7: Fail out of range" class="WIDGET_10_FAIL" aria-valuenow="-1">progressbar fail</div>
 
-        <div style="display: none" role="progressbar" aria-label="Progress 7: hidden" class="WIDGET_10_HIDDEN" aria-valuenow="-1">progressbar hidden</div>
+        <div style="display: none" role="progressbar" aria-label="Progress 8: hidden" class="WIDGET_10_HIDDEN" aria-valuenow="-1">progressbar hidden</div>
 
 
         <h2>scrollbar</h2>
         <div role="scrollbar" aria-label="Scrollbar 1: Pass" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">scrollbar pass</div>
 
-        <div role="scrollbar" aria-label="Scrollbar 2: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar fail</div>
+        <div role="scrollbar" aria-label="Scrollbar 2: Fail" class="WIDGET_10_FAIL out of range" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar fail</div>
 
         <div style="visibility: hidden" role="scrollbar" aria-label="Scrollbar 2: Hidden" class="WIDGET_10_HIDDEN" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar hidden</div>
 
 
         <h2>slider</h2>
-        <div role="slider" aria-label="Slider 1: Pass" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">slider pass</div>
+        <div role="slider" aria-label="Slider 1: Pass" class="WIDGET_10_PASS"  aria-valuenow="50">slider pass</div>
 
-        <div role="slider" aria-label="Slider 2: Pass" class="WIDGET_10_PASS" aria-valuetext="one" aria-valuemax="100" aria-valuenow="50">slider pass</div>
+        <div role="slider" aria-label="Slider 2: Pass" class="WIDGET_10_PASS" aria-valuetext="one" aria-valuenow="1"  aria-valuemax="100" aria-valuenow="50">slider pass</div>
 
-        <div role="slider" aria-label="Slider 3: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">slider fail</div>
+        <div role="slider" aria-label="Slider 3: Fail out of range" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">slider fail</div>
 
-        <div role="slider" aria-label="Slider 4: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="x10" aria-valuenow="5">slider fail</div>
+        <div role="slider" aria-label="Slider 4: Fail invalid max value" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="x10" aria-valuenow="5">slider fail</div>
 
-        <div role="slider" aria-label="Slider 5: Fail" class="WIDGET_10_FAIL" aria-valuemin="x" aria-valuemax="10" aria-valuenow="5">slider fail</div>
+        <div role="slider" aria-label="Slider 5: Fail invalid min value" class="WIDGET_10_FAIL" aria-valuemin="x1" aria-valuenow="5">slider fail</div>
 
-        <div role="slider" aria-label="Slider 6: Fail" class="WIDGET_10_FAIL" aria-valuemin="x" aria-valuemax="x" aria-valuenow="5">slider fail</div>
+        <div role="slider" aria-label="Slider 6: Fail missing value now" class="WIDGET_10_FAIL" aria-valuetext="fifty">slider fail</div>
 
-        <div role="slider" aria-label="Slider 7: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="x">slider fail</div>
+        <div role="slider" aria-label="Slider 7: Fail invalid min and max value" class="WIDGET_10_FAIL" aria-valuemin="x" aria-valuemax="x" aria-valuenow="5">slider fail</div>
+
+        <div role="slider" aria-label="Slider 8: Fail invalid now value" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="x">slider fail</div>
 
 
 

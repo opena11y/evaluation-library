@@ -6078,14 +6078,56 @@ class AriaInfo {
     this.ownedDomElements   = [];
     this.ownedByDomElements = [];
 
-    this.isWidget   = (designPattern.roleType.indexOf('range') >= 0) || 
-                      (designPattern.roleType.indexOf('widget') >= 0)  ||
+    this.isRange    = designPattern.roleType.indexOf('range') >= 0;
+    this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
                       (designPattern.roleType.indexOf('window') >= 0);
 
     this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
     this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
+
+    // for range widgets
+
+    if (this.isRange) {
+      this.isValueNowRequired = designPattern.requiredProps.includes('aria-valuenow');
+
+      this.hasValueNow = node.hasAttribute('aria-valuenow');
+      if (this.hasValueNow) {
+        this.valueNow = node.getAttribute('aria-valuenow');
+        this.valueNow = isNaN(parseFloat(this.valueNow)) ? this.valueNow : parseFloat(this.valueNow);
+        this.validValueNow = !isNaN(this.valueNow);
+      }
+      else {
+        this.valueNow = 'undefined';
+        this.validValueNow = false;
+      }
+
+      this.hasValueMin = node.hasAttribute('aria-valuemin');
+      if (this.hasValueMin) {
+        this.valueMin = node.getAttribute('aria-valuemin');
+        this.valueMin = isNaN(parseFloat(this.valueMin)) ? this.valueMin : parseFloat(this.valueMin);
+        this.validValueMin = !isNaN(this.valueMin);
+      }
+      else {
+        this.valueMin = 0;
+        this.validValueMin = true;
+      }
+
+      this.hasValueMax = node.hasAttribute('aria-valuemax');
+      if (this.hasValueMax) {
+        this.valueMax = node.getAttribute('aria-valuemax');
+        this.valueMax = isNaN(parseFloat(this.valueMax)) ? this.valueMax : parseFloat(this.valueMax);
+        this.validValueMax = !isNaN(this.valueMax);
+      }
+      else {
+        this.valueMax = 100;
+        this.validValueMax = true;
+      }
+
+      this.valueText = node.hasAttribute('aria-valuetext') ? node.getAttribute('aria-valuetext') : '';
+
+    }
 
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);
@@ -9915,7 +9957,6 @@ class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
-
     // used for button and form control related rules
     this.typeAttr = elementNode.getAttribute('type');
 
@@ -9956,6 +9997,11 @@ class DOMElement {
     this.resultsViolations   = [];
     this.resultsWarnings     = [];
     this.resultsManualChecks = [];
+
+    // A name that can be used in rule results to identify the element
+    this.elemName = this.tagName;
+    this.elemName += (this.role && this.role !== 'generic') ? `[role=${this.role}]` : '';
+    this.elemName += this.id ? `[id=${this.id}]` : '';
 
   }
 
@@ -11442,12 +11488,23 @@ class DOMCache {
   }
 
   /**
-   * @method showDomElementTree
+   * @method computeAriaOwnsRefs
    *
-   * @desc  Used for debugging the DOMElement tree
+   * @desc  If aria-owns is defined, identify parent child relationships
    */
 
   computeAriaOwnsRefs() {
+
+    function addOwenedByRefToDescendants(ownerDomElement, domElement) {
+      domElement.ariaInfo.ownedByDomElements.push(ownerDomElement);
+      for (let i = 0; i < domElement.children.length; i += 1) {
+        const child = domElement.children[i];
+        if (child.isDomElement) {
+          addOwenedByRefToDescendants(ownerDomElement, child);
+        }
+      }
+    }
+
     for (let i = 0; i < this.allDomElements.length; i += 1) {
       const de = this.allDomElements[i];
       if (de.ariaInfo.hasAriaOwns) {
@@ -11457,7 +11514,7 @@ class DOMCache {
             const ode = this.getDomElementById(id);
             if (ode) {
               de.ariaInfo.ownedDomElements.push(ode);
-              ode.ariaInfo.ownedByDomElements.push(de);
+              addOwenedByRefToDescendants(de, ode);
             }
           }
         }
@@ -14533,28 +14590,32 @@ const widgetRules$1 = [
 
     function getRequiredChildrenCount(domElement, requiredChildren) {
       let count = 0;
+      let i;
       const ai = domElement.ariaInfo;
-      domElement.children.forEach( cde => {
+      const cdes = domElement.children;
+      const odes = ai.ownedDomElements;
+      for(i = 0; i < cdes.length; i += 1) {
+        const cde = cdes[i];
         if (cde.isDomElement) {
           if (requiredChildren.includes(cde.role)) {
-            count += 1;
+            return 1;
           }
           count += getRequiredChildrenCount(cde, requiredChildren);
         }
-      });
-      ai.ownedDomElements.forEach( oe => {
-        if (requiredChildren.includes(oe.role)) {
-          count += 1;
-        }
-        count += getRequiredChildrenCount(oe, requiredChildren);
-      });
+      }
 
+      for(i = 0; i < odes.length; i += 1) {
+        const ode = odes[i];
+        if (requiredChildren.includes(ode.role)) {
+          return 1;
+        }
+        count += getRequiredChildrenCount(ode, requiredChildren);
+      }
       return count;
     }
 
-    dom_cache.controlInfo.allControlElements.forEach( ce => {
-      const de = ce.domElement;
-       if (de.ariaInfo.hasRequiredChildren) {
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.hasRequiredChildren) {
         const rc = de.ariaInfo.requiredChildren;
         if (de.visibility.isVisibleToAT) {
           if (de.ariaInfo.isBusy) {
@@ -14562,7 +14623,7 @@ const widgetRules$1 = [
           }
           else {
             const count = getRequiredChildrenCount(de, rc);
-            if (count) {
+            if (count > 0) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, rc.join(', ')]);
             }
             else {
@@ -14618,7 +14679,7 @@ const widgetRules$1 = [
       const obdes = ai.ownedByDomElements;
       const pde = domElement.parentInfo.domElement;
 
-      // Check for aria-owns relationships
+      // Check first for aria-owns relationships
       for (let i = 0; i < obdes.length; i += 1) {
         const obde = obdes[i];
         if (requiredParents.includes(obde.role)) {
@@ -14629,7 +14690,7 @@ const widgetRules$1 = [
         }
       }
 
-      // Check parent dom element
+      // Check parent domElement
       if (pde) {
         if (requiredParents.includes(pde.role)) {
           return pde.role;
@@ -14642,7 +14703,7 @@ const widgetRules$1 = [
     }
 
     dom_cache.allDomElements.forEach( de => {
-       if (de.ariaInfo.hasRequiredParents) {
+      if (de.ariaInfo.hasRequiredParents) {
         const rp = de.ariaInfo.requiredParents;
         if (de.visibility.isVisibleToAT) {
           const result = checkForRequiredParent(de, rp);
@@ -14668,7 +14729,7 @@ const widgetRules$1 = [
  */
 
 { rule_id             : 'WIDGET_9',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-05',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -14678,39 +14739,24 @@ const widgetRules$1 = [
   target_resources    : ['[aria-owns]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`[WIDGET 9] ${dom_cache} ${rule_result}`);
-
-/*
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-     var we;
-
-     for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-
-        if (de.owned_by.length === 1) {
-          we = de.owned_by[0];
-          rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [we, de]);
-        } else {
-          if (de.owned_by.length > 1) {
-            for (var j = 0; j < de.owned_by.length; j += 1) {
-              we = de.owned_by[j];
-              rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [we, de]);
-            } // end loop
-          }
+    dom_cache.allDomElements.forEach( de => {
+      const ownedByCount = de.ariaInfo.ownedByDomElements.length;
+      if (ownedByCount > 0) {
+        if (ownedByCount === 1) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
         }
-     } // end loop
-*/
-
+        else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, ownedByCount]);
+        }
+      }
+    });
    } // end validation function
 },
 
 /**
  * @object WIDGET_10
  *
- * @desc Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax
+ * @desc Range widgets with aria-valuenow mut be in range of aria-valuemin and aria-valuemax
  */
 
 { rule_id             : 'WIDGET_10',
@@ -14728,7 +14774,53 @@ const widgetRules$1 = [
                          '[role="spinbutton"]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`[WIDGET 10] ${dom_cache} ${rule_result}`);
+
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isRange) {
+        const ai = de.ariaInfo;
+        if (de.visibility.isVisibleToAT) {
+          const now  = ai.valueNow;
+          const min  = ai.valueMin;
+          const max  = ai.valueMax;
+          const text = ai.valueText;
+          if (ai.hasValueNow) {
+            if (ai.validValueNow) {
+              if (ai.validValueMin && ai.validValueMax) {
+                if ((now >= min) && (now <= max)) {
+                  if (text) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, text, now]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName, now, min, max]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [now, min, max]);
+                }
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [now]);
+            }
+          }
+          else {
+            if (ai.isValueNowRequired) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de.elemName]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName]);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+
+
+      }
+    });
 
 /*
      var VISIBILITY  = VISIBILITY;
@@ -15287,7 +15379,7 @@ const widgetRules$1 = [
 /**
  * @object WIDGET_16
  *
- * @desc     Web compnents require manual check
+ * @desc     Web components require manual check
  */
 { rule_id             : 'WIDGET_16',
   last_updated        : '2021-09-12',
@@ -20172,10 +20264,10 @@ const widgetRules = {
           NOT_APPLICABLE:  'No widgets with required child elements on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element with the role of: @%2@.',
-          ELEMENT_MC_1:      'When @aria-busy@ is set to @true@, verify for the child nodes are being populated.',
-          ELEMENT_FAIL_1:    '@%1@ widget does not contain one or more of following required owned elements with  a role of: @%2@.',
-          ELEMENT_HIDDEN_1:  'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
+          ELEMENT_PASS_1:   '@%1@ widget contains at least one required owned element with the role of: @%2@.',
+          ELEMENT_MC_1:     'When @aria-busy@ is set to @true@, verify for the child nodes are being populated.',
+          ELEMENT_FAIL_1:   '@%1@ widget does not contain one or more of following required owned elements with a role of: @%2@.',
+          ELEMENT_HIDDEN_1: 'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
         },
         PURPOSES: [
           'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
@@ -20228,8 +20320,8 @@ const widgetRules = {
           NOT_APPLICABLE:  'No widgets with required parent role on this page'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   '@%1@ role is a child of the a @%2@ role.',
-          ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes identifies a required parent role.',
+          ELEMENT_PASS_1:   '@%1@ role is a descendant of the a @%2@ role.',
+          ELEMENT_FAIL_1:   'The @%1@ role requires a ancestor role of "@%2@", check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes identifies a required parent role.',
           ELEMENT_HIDDEN_1: 'Required parent role was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
         },
         PURPOSES: [
@@ -20271,17 +20363,17 @@ const widgetRules = {
     },
  WIDGET_9: {
         ID:                    'Widget 9',
-        DEFINITION:            'Elements must be owned by only one widget.',
+        DEFINITION:            'Elements must be owned by only one parent role.',
         SUMMARY:               'Only one owner',
-        TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
+        TARGET_RESOURCES_DESC: 'Roles with required parent roles',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Update widgets with aria-owns to make sure a element is only referenced once.',
-          FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a element only once.',
+          FAIL_S:   'Update elements with aria-owns to make sure elements are only referenced once.',
+          FAIL_P:   'Update %N_F out of %N_T elements with aria-owns to make sure they reference an element only once.',
           NOT_APPLICABLE:  'No elements are referenced using aria-owns on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   '@%2@ element is referenced only by @%1@ container element using aria-owns.',
-          ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ element so it is only referenced by one container element.',
+          ELEMENT_PASS_1: '@%1@ element is referenced only by one container element using aria-owns.',
+          ELEMENT_FAIL_1: '@%1@ element is referenced only by %2 container elements using aria-owns.',
         },
         PURPOSES: [
           'ARIA container elements  have require child elements.',
@@ -20321,7 +20413,7 @@ const widgetRules = {
     },
  WIDGET_10: {
         ID:                    'Widget 10',
-        DEFINITION:            'Range widget %s have value between minimum and maximum values, or have an indeterminate state.',
+        DEFINITION:            'Range widget must have value between minimum and maximum values, or have an indeterminate state.',
         SUMMARY:               'Value in range',
         TARGET_RESOURCES_DESC: 'Range widgets',
         RULE_RESULT_MESSAGES: {
@@ -20332,18 +20424,18 @@ const widgetRules = {
           NOT_APPLICABLE:  'No @range@ widgets on the page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:  '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
-          ELEMENT_PASS_2:  '@%1@ widget value of %2 is in the range %3 and %4.',
-          ELEMENT_PASS_3:  '@%1@ widget has no @aria-valuenow@ attribute and the value is considered indeterminate.',
-          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is in range.',
-          ELEMENT_FAIL_2:  'Update the numeric values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) so the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
-          ELEMENT_FAIL_3:  'Update the @%1@ widget values for @aria-valuemin@ ("%2") and/or @aria-valuemax@ ("%3") attributes to be valid numbers.',
-          ELEMENT_FAIL_4:  '@%1@ widget is missing or has an invalid value for @aria-valuenow@.',
+          ELEMENT_PASS_1:  '@%1@ is using @aria-valuetext@ attribute with a value of @%2@ which should provide a better description of the value than the @aria-valuenow@ of @%3@.',
+          ELEMENT_PASS_2:  '@%1@ has a value of %2 is in the range %3 and %4.',
+          ELEMENT_PASS_3:  '@%1@ has no @aria-valuenow@ value and is considered an indeterminate.',
+          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is between the minimum and maximum values.',
+          ELEMENT_FAIL_2:  'Update the values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) to be numeric values, make sure the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
+          ELEMENT_FAIL_3:  'Update the value of @aria-valuenow@ (%1) to be a valid numeric value.',
+          ELEMENT_FAIL_4:  '@%1@ is missing the @aria-valuenow@ attribute.',
           ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
-          'Screen readers typcially render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
+          'Screen readers typically render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
           '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
           'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
         ],

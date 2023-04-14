@@ -393,10 +393,10 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No widgets with required child elements on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:    '@%1@ widget contains at least one required owned element with the role of: @%2@.',
-          ELEMENT_MC_1:      'When @aria-busy@ is set to @true@, verify for the child nodes are being populated.',
-          ELEMENT_FAIL_1:    '@%1@ widget does not contain one or more of following required owned elements with  a role of: @%2@.',
-          ELEMENT_HIDDEN_1:  'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
+          ELEMENT_PASS_1:   '@%1@ widget contains at least one required owned element with the role of: @%2@.',
+          ELEMENT_MC_1:     'When @aria-busy@ is set to @true@, verify for the child nodes are being populated.',
+          ELEMENT_FAIL_1:   '@%1@ widget does not contain one or more of following required owned elements with a role of: @%2@.',
+          ELEMENT_HIDDEN_1: 'Required owned elements was not tested because the @%1@ widget is hidden from assistive technologies and not visible on screen.'
         },
         PURPOSES: [
           'ARIA roles, properties and states describes the features of interactive widgets to users of assistive technologies, especially screen reader users.',
@@ -449,8 +449,8 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No widgets with required parent role on this page'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   '@%1@ role is a child of the a @%2@ role.',
-          ELEMENT_FAIL_1:   'The @%2@ role requires a parent @%1@ role, check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes identifies a required parent role.',
+          ELEMENT_PASS_1:   '@%1@ role is a descendant of the a @%2@ role.',
+          ELEMENT_FAIL_1:   'The @%1@ role requires a ancestor role of "@%2@", check your HTML DOM structure to ensure an ancestor element or an @aria-owns@ attributes identifies a required parent role.',
           ELEMENT_HIDDEN_1: 'Required parent role was not tested because the @%1@ widget is hidden from assistive technologies and/or not visible on screen.'
         },
         PURPOSES: [
@@ -492,17 +492,17 @@ export const widgetRules = {
     },
  WIDGET_9: {
         ID:                    'Widget 9',
-        DEFINITION:            'Elements must be owned by only one widget.',
+        DEFINITION:            'Elements must be owned by only one parent role.',
         SUMMARY:               'Only one owner',
-        TARGET_RESOURCES_DESC: 'Widgets with required parent roles',
+        TARGET_RESOURCES_DESC: 'Roles with required parent roles',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Update widgets with aria-owns to make sure a element is only referenced once.',
-          FAIL_P:   'Update %N_F out of %N_T widgets with aria-owns to make sure they reference a element only once.',
+          FAIL_S:   'Update elements with aria-owns to make sure elements are only referenced once.',
+          FAIL_P:   'Update %N_F out of %N_T elements with aria-owns to make sure they reference an element only once.',
           NOT_APPLICABLE:  'No elements are referenced using aria-owns on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   '@%2@ element is referenced only by @%1@ container element using aria-owns.',
-          ELEMENT_FAIL_1: 'Check the @%1@ @aria-owns@ reference to @%2@ element so it is only referenced by one container element.',
+          ELEMENT_PASS_1: '@%1@ element is referenced only by one container element using aria-owns.',
+          ELEMENT_FAIL_1: '@%1@ element is referenced only by %2 container elements using aria-owns.',
         },
         PURPOSES: [
           'ARIA container elements  have require child elements.',
@@ -542,7 +542,7 @@ export const widgetRules = {
     },
  WIDGET_10: {
         ID:                    'Widget 10',
-        DEFINITION:            'Range widget %s have value between minimum and maximum values, or have an indeterminate state.',
+        DEFINITION:            'Range widget must have value between minimum and maximum values, or have an indeterminate state.',
         SUMMARY:               'Value in range',
         TARGET_RESOURCES_DESC: 'Range widgets',
         RULE_RESULT_MESSAGES: {
@@ -553,18 +553,18 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No @range@ widgets on the page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:  '@%1@ widget is using @aria-valuetext@ attribute which overrides the @aria-valuenow@ attribute for describing the value of the range.',
-          ELEMENT_PASS_2:  '@%1@ widget value of %2 is in the range %3 and %4.',
-          ELEMENT_PASS_3:  '@%1@ widget has no @aria-valuenow@ attribute and the value is considered indeterminate.',
-          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is in range.',
-          ELEMENT_FAIL_2:  'Update the numeric values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) so the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
-          ELEMENT_FAIL_3:  'Update the @%1@ widget values for @aria-valuemin@ ("%2") and/or @aria-valuemax@ ("%3") attributes to be valid numbers.',
-          ELEMENT_FAIL_4:  '@%1@ widget is missing or has an invalid value for @aria-valuenow@.',
+          ELEMENT_PASS_1:  '@%1@ is using @aria-valuetext@ attribute with a value of @%2@ which should provide a better description of the value than the @aria-valuenow@ of @%3@.',
+          ELEMENT_PASS_2:  '@%1@ has a value of %2 is in the range %3 and %4.',
+          ELEMENT_PASS_3:  '@%1@ has no @aria-valuenow@ value and is considered an indeterminate.',
+          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is between the minimum and maximum values.',
+          ELEMENT_FAIL_2:  'Update the values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) to be numeric values, make sure the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
+          ELEMENT_FAIL_3:  'Update the value of @aria-valuenow@ (%1) to be a valid numeric value.',
+          ELEMENT_FAIL_4:  '@%1@ is missing the @aria-valuenow@ attribute.',
           ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
-          'Screen readers typcially render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
+          'Screen readers typically render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
           '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
           'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
         ],

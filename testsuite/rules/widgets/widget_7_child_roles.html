@@ -17,8 +17,8 @@
         <h1>WIDGET 7: Widgets must have child roles</h1>
 
         <h2>menu</h2>
-        <div role="menu" class="WIDGET_7_PASS">menu pass
-          <div role="menuitem"></div>
+        <div role="menu" class="WIDGET_7_PASS">
+          <div role="menuitem">menuitem</div>
         </div>
 
         <div role="menu" class="WIDGET_7_PASS" aria-owns="ID_OWNED_MENU_1">
@@ -26,7 +26,7 @@
         </div>
 
         <div id="ID_OWNED_MENU_1">
-          <div role="menuitem">menuitem 1</div>
+          <div role="menuitem">menuitem</div>
         </div>
 
         <div role="menu" class="WIDGET_7_FAIL" aria-owns="ID_OWNED_MENU_2">
@@ -132,6 +132,37 @@
         </div>
 
 
+        <h2>Referencing Problems</h2>
+
+        <div role="menu" aria-owns="ID_ITEM_1 ID_ITEM_2 ID_ITEM_3"  class="WIDGET_7_PASS">
+          <div>
+            <div id="ID_ITEM_1" role="menuitem">menuitem fail</div>
+            <div id="ID_ITEM_2" role="menuitemcheckbox">menuitemcheckbox fail</div>
+            <div id="ID_ITEM_3" role="menuitemradio">menuitemradio fail</div>
+          </div>
+        </div>
+
+        <div role="menu" aria-owns="ID_ITEM_4 ID_ITEM_5" class="WIDGET_7_PASS"></div>
+
+        <div id="ID_ITEM_4" aria-owns="ID_ITEM_5">
+          <div role="menuitem" >menuitem pass</div>
+          <div role="menuitemcheckbox">menuitemcheckbox</div>
+          <div role="menuitemradio">menuitemradio</div>
+        </div>
+
+        <div id="ID_ITEM_5" aria-owns="ID_ITEM_4">
+          <div role="menuitem">menuitem</div>
+          <div role="menuitemcheckbox">menuitemcheckbox</div>
+          <div role="menuitemradio">menuitemradio</div>
+        </div>
+
+        <div role="menu" aria-owns="ID_ITEM_6" class="WIDGET_7_FAIL"></div>
+
+        <div id="ID_ITEM_6">
+          <div role="listitem">listitem</div>
+          <div role="menu" class="WIDGET_7_FAIL">menu</div>
+          <div role="listitem">listitem</div>
+        </div>
 
       </main>
       
