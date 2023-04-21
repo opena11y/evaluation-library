@@ -688,12 +688,12 @@ export const widgetRules = {
     },
     WIDGET_12: {
         ID:         'Widget 12',
-        DEFINITION: 'The label for elements with a widget roles on a page %s sufficiently describe its purpose.',
-        SUMMARY:    'Widget labels %s be descriptive',
-        TARGET_RESOURCES_DESC: 'Elements with widget roles on a page',
+        DEFINITION: 'The accessible name for elements with a widget roles on a page must sufficiently describe its purpose.',
+        SUMMARY:    'Widget accessible names must be descriptive',
+        TARGET_RESOURCES_DESC: 'Elements with widget roles',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'To the element with widget role missing a label, add a label that describes its purpose.',
-          FAIL_P:   'To each of the %N_F element with widget roles missing labels, add a label that uniquely describes its purpose.',
+          FAIL_S:   'To the element with widget role missing a accessible name, add an accessible name that describes its purpose.',
+          FAIL_P:   'To each of the %N_F element with widget roles missing accessible name, add an accessible name that uniquely describes its purpose.',
           MANUAL_CHECK_S: 'Verify that the label uniquely describes the purpose of the element with widget role.',
           MANUAL_CHECK_P: 'Verify that the label for each of the %N_MC element with widget roles uniquely describes its purpose.',
           HIDDEN_S: 'The control element that is hidden was not evaluated.',
@@ -701,9 +701,9 @@ export const widgetRules = {
           NOT_APPLICABLE: 'No element with widget roles on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_MC_1:     'Verify the label "%1" for the @%2@ element with @%3@ widget role describes its purpose.',
+          ELEMENT_MC_1:     'Verify the accessible name "%1" for the @%2@ element describes its purpose.',
           ELEMENT_MC_2:     'Verify the @%1@ element with @%2@ widget role does not need a label, a label is only needed  if it clarifies the purpose of the widget on the page.',
-          ELEMENT_FAIL_1:   'Add a label to the @%1@ element with @%2@ widget role.',
+          ELEMENT_FAIL_1:   'Add an accessible name to the @%1@ element with @%2@ widget role.',
           ELEMENT_HIDDEN_1: '@%1@ element with the %2@ widget role was not evaluated because it is hidden from assistive technologies.'
         },
         PURPOSES: [
@@ -766,7 +766,7 @@ export const widgetRules = {
     },
     WIDGET_13: {
         ID:                    'Widget 13',
-        DEFINITION:            'ARIA roles that prohibit accessible names %s not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
+        DEFINITION:            'ARIA roles that prohibit accessible names should not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
         SUMMARY:               'Role does not support accessible name.',
         TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
         RULE_RESULT_MESSAGES: {
@@ -777,10 +777,8 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element with role @%2@.',
-          ELEMENT_FAIL_2:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
-          ELEMENT_HIDDEN_1:  'Element @%1[role="%2"]@ was not tested because it is hidden from assistive technologies.',
-          ELEMENT_HIDDEN_2:  'Element @%1@ was not tested because it is hidden from assistive technologies.'
+          ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
+          ELEMENT_HIDDEN_1:  'Element @%%2@ was not tested because it is hidden from assistive technologies.',
         },
         PURPOSES: [
           'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
@@ -881,7 +879,7 @@ export const widgetRules = {
     },
     WIDGET_15: {
         ID:                    'Widget 15',
-        DEFINITION:            'ARIA attributes that have been deprecated for a role %s be removed.',
+        DEFINITION:            'ARIA attributes that have been deprecated for a role should be removed.',
         SUMMARY:               'Remove deprecated ARIA attributes.',
         TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are deprecated.',
         RULE_RESULT_MESSAGES: {

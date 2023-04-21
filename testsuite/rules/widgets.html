@@ -33,37 +33,19 @@
         executeTest('WIDGET_9: Widgets cannot be owned by more than one widget', 'ID_IFRAME_9',  'WIDGET_9');
         executeTest('WIDGET_10: Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax', 'ID_IFRAME_10',  'WIDGET_10');
         executeTest('WIDGET_11: Verify range widgets using aria-valuetext', 'ID_IFRAME_11',  'WIDGET_11');
-      });
+        executeTest('WIDGET_12: Button, radio, and checkbox widgets labels are descriptive', 'ID_IFRAME_12A',  'WIDGET_12');
+        executeTest('WIDGET_12: Menu, tree, and grid labels are descriptive', 'ID_IFRAME_12B',  'WIDGET_12');
+        executeTest('WIDGET_12: Tab, tabpanel, and tablist labels are descriptive', 'ID_IFRAME_12C',  'WIDGET_12');
+        executeTest('WIDGET_12: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12D',  'WIDGET_12');
+        executeTest('WIDGET_12: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12E',  'WIDGET_12');
+        executeTest('WIDGET_12: Progressbar, scrollbar, and spinbutton labels are descriptive', 'ID_IFRAME_12F',  'WIDGET_12');
+
+        executeTest('WIDGET_13: Prohibit accessible name', 'ID_IFRAME_13',  'WIDGET_13');
+
+
+       });
 
       /*
-
-      test( "WIDGET_12: Button, radio, and checkbox widgets labels are descriptive", function() {
-        executeTest('ID_IFRAME_12A', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Alert, alertdialog, dialog, and status labels are descriptive", function() {
-        executeTest('ID_IFRAME_12B', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Menu, tree, and grid labels are descriptive", function() {
-        executeTest('ID_IFRAME_12C', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Tab, tabpanel, and tablist labels are descriptive", function() {
-        executeTest('ID_IFRAME_12D', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Link, log, marquee, and slider labels are descriptive", function() {
-        executeTest('ID_IFRAME_12E', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Progressbar, scrollbar, and spinbutton labels are descriptive", function() {
-        executeTest('ID_IFRAME_12F', 'WIDGET_12');
-      });
-
-      test( "WIDGET_13: Prohibit accessible name", function() {
-        executeTest('ID_IFRAME_13A', 'WIDGET_13');
-      });
 
       test( "WIDGET_14: Veerify live region", function() {
         executeTest('ID_IFRAME_14A', 'WIDGET_14');
@@ -133,7 +115,7 @@
     <iframe id="ID_IFRAME_12F"  src="widgets/widget_12_progressbar_scrollbar_spinbutton.html"></iframe> 
     
     <h2>Widget 13: Remove Widget Roles</h2>
-    <iframe id="ID_IFRAME_13A"  src="widgets/widget_13_prohibit_accname.html"></iframe>
+    <iframe id="ID_IFRAME_13"  src="widgets/widget_13_prohibit_accname.html"></iframe>
 
     <h2>Widget 14: verify live regions</h2>
     <iframe id="ID_IFRAME_14A"  src="widgets/widget_14_live_regions.html"></iframe>

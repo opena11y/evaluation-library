@@ -731,44 +731,28 @@ export const widgetRules = [
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[Widget roles'],
   validate            : function (dom_cache, rule_result) {
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isWidget) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.accName.name, de.elemName]);
+          }
+          else {
+            if (de.ariaInfo.isNameRequired) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, de.role]);
+            }
+            else {
+             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName, de.role]);
 
-    debug.flag && debug.log(`[WIDGET 12] ${dom_cache} ${rule_result}`);
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widgets     = dom_cache.controls_cache.widget_elements;
-     var widgets_len = widgets.length;
-
-     // Check to see if valid cache reference
-     if (widgets && widgets_len) {
-
-       for (var i = 0; i < widgets_len; i++) {
-         var we = widgets[i];
-         var de = we.dom_element;
-
-         if (de.is_widget) {
-
-           if (de.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-             if (we.computed_label && we.computed_label.length) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [we.computed_label, de.tag_name, de.role]);
-             }
-             else {
-               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
-               else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
-   } // end validation function
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
+  } // end validation function
 },
 
 /**
@@ -798,56 +782,16 @@ export const widgetRules = [
                           "subscript",
                           "superscript"],
   validate            : function (dom_cache, rule_result) {
-
-    debug.flag && debug.log(`[WIDGET 13] ${dom_cache} ${rule_result}`);
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-
-     for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-        var style = de.computed_style;
-        var implicit_role = '';
-
-        if (de.element_aria_info) {
-          implicit_role = de.element_aria_info.defaultRole;
+    dom_cache.allDomElements.forEach( de => {
+      if (!de.ariaInfo.isNameRequired && de.accName.name) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
         }
-
-        if (de.has_aria_label || de.has_aria_labelledby) {
-
-          if (de.role &&
-              aria.designPatterns[de.role] &&
-              aria.designPatterns[de.role].nameProhibited) {
-            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-            } else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-            }
-          } else {
-            if (!de.role &&
-                implicit_role &&
-                aria.designPatterns[implicit_role] &&
-                aria.designPatterns[implicit_role].nameProhibited) {
-              if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-                if (de.tag_name === 'a') {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
-                } else {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
-                }
-              } else {
-                rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-              }
-            }
-          }
-        } // end loop
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
       }
-
-      */
-
+    });
    } // end validation function
 },
 

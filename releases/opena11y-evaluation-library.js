@@ -14885,44 +14885,28 @@ const widgetRules$1 = [
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[Widget roles'],
   validate            : function (dom_cache, rule_result) {
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isWidget) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.accName.name, de.elemName]);
+          }
+          else {
+            if (de.ariaInfo.isNameRequired) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, de.role]);
+            }
+            else {
+             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName, de.role]);
 
-    debug$d.flag && debug$d.log(`[WIDGET 12] ${dom_cache} ${rule_result}`);
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var widgets     = dom_cache.controls_cache.widget_elements;
-     var widgets_len = widgets.length;
-
-     // Check to see if valid cache reference
-     if (widgets && widgets_len) {
-
-       for (var i = 0; i < widgets_len; i++) {
-         var we = widgets[i];
-         var de = we.dom_element;
-
-         if (de.is_widget) {
-
-           if (de.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-             if (we.computed_label && we.computed_label.length) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [we.computed_label, de.tag_name, de.role]);
-             }
-             else {
-               if (!de.role_info.nameRequired) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_2', [de.tag_name, de.role]);
-               else rule_result.addResult(TEST_RESULT.FAIL, we, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-           }
-         }
-       } // end loop
-     }
-     */
-
-   } // end validation function
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
+  } // end validation function
 },
 
 /**
@@ -14952,56 +14936,16 @@ const widgetRules$1 = [
                           "subscript",
                           "superscript"],
   validate            : function (dom_cache, rule_result) {
-
-    debug$d.flag && debug$d.log(`[WIDGET 13] ${dom_cache} ${rule_result}`);
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-
-     for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-        var style = de.computed_style;
-        var implicit_role = '';
-
-        if (de.element_aria_info) {
-          implicit_role = de.element_aria_info.defaultRole;
+    dom_cache.allDomElements.forEach( de => {
+      if (!de.ariaInfo.isNameRequired && de.accName.name) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
         }
-
-        if (de.has_aria_label || de.has_aria_labelledby) {
-
-          if (de.role &&
-              aria.designPatterns[de.role] &&
-              aria.designPatterns[de.role].nameProhibited) {
-            if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-              rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.role]);
-            } else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.role]);
-            }
-          } else {
-            if (!de.role &&
-                implicit_role &&
-                aria.designPatterns[implicit_role] &&
-                aria.designPatterns[implicit_role].nameProhibited) {
-              if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-                if (de.tag_name === 'a') {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
-                } else {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tag_name]);
-                }
-              } else {
-                rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-              }
-            }
-          }
-        } // end loop
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
       }
-
-      */
-
+    });
    } // end validation function
 },
 
@@ -20467,12 +20411,12 @@ const widgetRules = {
     },
     WIDGET_12: {
         ID:         'Widget 12',
-        DEFINITION: 'The label for elements with a widget roles on a page %s sufficiently describe its purpose.',
-        SUMMARY:    'Widget labels %s be descriptive',
-        TARGET_RESOURCES_DESC: 'Elements with widget roles on a page',
+        DEFINITION: 'The accessible name for elements with a widget roles on a page must sufficiently describe its purpose.',
+        SUMMARY:    'Widget accessible names must be descriptive',
+        TARGET_RESOURCES_DESC: 'Elements with widget roles',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'To the element with widget role missing a label, add a label that describes its purpose.',
-          FAIL_P:   'To each of the %N_F element with widget roles missing labels, add a label that uniquely describes its purpose.',
+          FAIL_S:   'To the element with widget role missing a accessible name, add an accessible name that describes its purpose.',
+          FAIL_P:   'To each of the %N_F element with widget roles missing accessible name, add an accessible name that uniquely describes its purpose.',
           MANUAL_CHECK_S: 'Verify that the label uniquely describes the purpose of the element with widget role.',
           MANUAL_CHECK_P: 'Verify that the label for each of the %N_MC element with widget roles uniquely describes its purpose.',
           HIDDEN_S: 'The control element that is hidden was not evaluated.',
@@ -20480,9 +20424,9 @@ const widgetRules = {
           NOT_APPLICABLE: 'No element with widget roles on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_MC_1:     'Verify the label "%1" for the @%2@ element with @%3@ widget role describes its purpose.',
+          ELEMENT_MC_1:     'Verify the accessible name "%1" for the @%2@ element describes its purpose.',
           ELEMENT_MC_2:     'Verify the @%1@ element with @%2@ widget role does not need a label, a label is only needed  if it clarifies the purpose of the widget on the page.',
-          ELEMENT_FAIL_1:   'Add a label to the @%1@ element with @%2@ widget role.',
+          ELEMENT_FAIL_1:   'Add an accessible name to the @%1@ element with @%2@ widget role.',
           ELEMENT_HIDDEN_1: '@%1@ element with the %2@ widget role was not evaluated because it is hidden from assistive technologies.'
         },
         PURPOSES: [
@@ -20545,7 +20489,7 @@ const widgetRules = {
     },
     WIDGET_13: {
         ID:                    'Widget 13',
-        DEFINITION:            'ARIA roles that prohibit accessible names %s not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
+        DEFINITION:            'ARIA roles that prohibit accessible names should not have an accessible name defined using @aria-label@ or @aria-labelledby@ attributes.',
         SUMMARY:               'Role does not support accessible name.',
         TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
         RULE_RESULT_MESSAGES: {
@@ -20556,10 +20500,8 @@ const widgetRules = {
           NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element with role @%2@.',
-          ELEMENT_FAIL_2:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
-          ELEMENT_HIDDEN_1:  'Element @%1[role="%2"]@ was not tested because it is hidden from assistive technologies.',
-          ELEMENT_HIDDEN_2:  'Element @%1@ was not tested because it is hidden from assistive technologies.'
+          ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
+          ELEMENT_HIDDEN_1:  'Element @%%2@ was not tested because it is hidden from assistive technologies.',
         },
         PURPOSES: [
           'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
@@ -20660,7 +20602,7 @@ const widgetRules = {
     },
     WIDGET_15: {
         ID:                    'Widget 15',
-        DEFINITION:            'ARIA attributes that have been deprecated for a role %s be removed.',
+        DEFINITION:            'ARIA attributes that have been deprecated for a role should be removed.',
         SUMMARY:               'Remove deprecated ARIA attributes.',
         TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are deprecated.',
         RULE_RESULT_MESSAGES: {
