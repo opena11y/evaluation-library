@@ -107,13 +107,11 @@ export default class AriaInfo {
                       (designPattern.roleType.indexOf('window') >= 0);
 
     this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
-    this.isLive     = designPattern.roleType.indexOf('live') >= 0;     
+
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
 
     // for range widgets
-
-
     if (this.isRange || isFocusableSeparator) {
       this.isValueNowRequired =  isFocusableSeparator || designPattern.requiredProps.includes('aria-valuenow');
 
@@ -153,6 +151,14 @@ export default class AriaInfo {
       this.valueText = node.hasAttribute('aria-valuetext') ? node.getAttribute('aria-valuetext') : '';
 
     }
+
+    // for live regions
+
+    this.ariaLive = node.hasAttribute('aria-live') ? node.getAttribute('aria-live').toLowerCase() : '';
+    this.isLive     = designPattern.roleType.indexOf('live') >= 0 ||
+                      this.ariaLive === 'polite' ||
+                      this.ariaLive === 'assertive';
+
 
     // Used for heading
     this.headingLevel = this.getHeadingLevel(role, node);

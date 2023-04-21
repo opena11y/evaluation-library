@@ -811,8 +811,6 @@ export const widgetRules = {
         SUMMARY:               'Verify appropriate use of live region',
         TARGET_RESOURCES_DESC: 'Elements with @alert@, @log@ or @status@ roles or the @aria-live@ attribute',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:          'One element identified as a live region has a conflict between the implied attribute values of the role and the defined attribute values.',
-          FAIL_P:          'The %N_F elements identified as live regions have conflicts between the implied attribute values of their roles and the defined attribute values.',
           HIDDEN_S:        'One element identified as a live region is hidden and was not evaluated.',
           MANUAL_CHECK_S:  'Verify the element identified as a live region has the appropriate ARIA markup for the type of informational change that can occur.',
           MANUAL_CHECK_P:  'Verify the %N_MC elements identified as live regions have the appropriate ARIA markup for the type of informational changes that can occur in those regions.',
@@ -820,12 +818,10 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No elements were identified as live regions on the page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:     'The @aria-live@ attribute value of @%1@ conflicts with the default value of @%2@ for the @aria-live@ property of the @%3@ role.',
-          ELEMENT_FAIL_2:     'The @aria-atomic@ attribute value of @false@ conflicts with the default value of @true@ for the @aria-atomic@ property of the @%1@ role.',
           ELEMENT_MC_1:       'Verify the @aria-live@ attribute value of @%1@ is appropriate for the type of informational change that can occur in the region.',
           ELEMENT_MC_2:       'Verify the @alert@ role identifies a live region with critical time-sensitive information.',
           ELEMENT_MC_3:       'Verify the @log@ role identifies a live region where new information added and deleted in a meaningful order.',
-          ELEMENT_MC_4:       'Verify the @alert@ role identifies a live region with advisory information.',
+          ELEMENT_MC_4:       'Verify the @status@ role identifies a live region with advisory information.',
           ELEMENT_HIDDEN_1:   '@%1[arial-live="%2"]@ was not evaluated because it is hidden from assistive technologies.',
           ELEMENT_HIDDEN_2:   '@%1[role="%2"]@ was not evaluated because it is hidden from assistive technologies.'
         },
@@ -890,10 +886,8 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No elements with deprecated ARIA attributes found.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element with role @%3@.',
-          ELEMENT_FAIL_2:    'Remove @%1@ attribute from @%2@ element which has an implicit role of "@%3@".',
-          ELEMENT_HIDDEN_1:  'The @%1@ attribute on the @%2[role="%3"]@ element was not tested because it is hidden from assistive technologies.',
-          ELEMENT_HIDDEN_2:  'The @%1@ attribute on the @%2@ element which has the implicit role of "@%3@"" was not tested because it is hidden from assistive technologies.'
+          ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element.',
+          ELEMENT_HIDDEN_1:  'The @%1@ attribute on the @%2@ element was not tested because it is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Not all ARIA properties and states are useful on every ARIA role and starting with ARIA 1.2 certain states and properties that were once considered global have been deprecated on specific roles.',

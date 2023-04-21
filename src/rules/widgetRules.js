@@ -11,7 +11,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('ARIA Rules', false);
-
+debug.flag = false;
 
 /*
  * OpenA11y Rules
@@ -722,7 +722,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_12',
-  last_updated        : '2015-08-10',
+  last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -762,7 +762,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_13',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -783,7 +783,9 @@ export const widgetRules = [
                           "superscript"],
   validate            : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (!de.ariaInfo.isNameRequired && de.accName.name) {
+      if (!de.ariaInfo.isNameRequired &&
+           de.accName.name &&
+           de.accName.source.includes('aria-label')) {
         if (de.visibility.isVisibleToAT) {
           rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
         }
@@ -801,7 +803,7 @@ export const widgetRules = [
  * @desc     Verify live regions are being used properly
  */
 { rule_id             : 'WIDGET_14',
-  last_updated        : '2017-02-08',
+  last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -811,109 +813,37 @@ export const widgetRules = [
   target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
   validate          : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`[WIDGET 14] ${dom_cache} ${rule_result}`);
-
-/*
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
-
-    var dom_elements     = dom_cache.element_cache.dom_elements;
-    var dom_elements_len = dom_elements.length;
-
-
-    for (var i = 0; i < dom_elements_len; i++ ) {
-
-      var de =dom_elements[i];
-
-      if (de.type != Node.ELEMENT_NODE || !de.is_live || (de.aria_live === 'off')) continue;
-
-      var has_failure = false;
-
-      var has_live_role =  de.role && de.role.length && (" alert log status".indexOf(de.role) > 0);
-
-
-      if (de.has_aria_live) {
-        if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.aria_live]);
-        }
-        else {
-          if (has_live_role) {
-
-            switch (de.role) {
-
-              case 'alert':
-                if (de.aria_live === 'polite') {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', ['polite', 'assertive',  de.role]);
-                  has_failure = true;
-                }
-                break;
-
-              case 'log':
-              case 'status':
-                if (de.aria_live === 'assertive') {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', ['assertive', 'polite', de.role]);
-                  has_failure = true;
-                }
-                break;
-
-              default:
-                break;
-
-            }
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isLive) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.ariaInfo.ariaLive) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.ariaLive]);
           }
           else {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name, de.aria_live]);
+            if (de.role === 'alert') {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            }
+            else {
+              if (de.role === 'log') {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', []);
+              }
+              else {
+                // Status role
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', []);
+              }
+            }
+          }
+        }
+        else {
+          if (de.ariaInfo.ariaLive) {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.ariaLive]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.role]);
           }
         }
       }
-
-      if (de.has_aria_atomic && has_live_role && (de.role === 'alert' || de.role === 'status')) {
-
-        if (de.aria_atomic === 'false') {
-          rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.role]);
-          has_failure = true;
-        }
-
-      }
-
-      if(has_live_role && !has_failure) {
-
-        switch (de.role) {
-
-          case 'alert':
-            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tag_name]);
-            }
-            break;
-
-          case 'log':
-            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tag_name]);
-            }
-            break;
-
-          case 'status':
-            if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tag_name, de.role]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tag_name]);
-            }
-            break;
-
-          default:
-            break;
-        }
-      }
-    }
-    */
-
+    });
   } // end validation function
 },
 
@@ -923,7 +853,7 @@ export const widgetRules = [
  * @desc     Roles with deprecated ARIA attributes
  */
 { rule_id             : 'WIDGET_15',
-  last_updated        : '2021-08-10',
+  last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -1016,61 +946,21 @@ export const widgetRules = [
         "widget",
         "window"
     ],
-  validate          : function (dom_cache, rule_result) {
-
-    debug.flag && debug.log(`[WIDGET 15] ${dom_cache} ${rule_result}`);
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-
-     for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-        var style = de.computed_style;
-        var role = de.role;
-        var implicit_role = '';
-        var deprecatedProps = [];
-
-        if (!de.has_role && de.element_aria_info) {
-          implicit_role = de.element_aria_info.defaultRole;
+  validate : function (dom_cache, rule_result) {
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.deprecatedAttrs) {
+        if (de.visibility.isVisibleToAT) {
+          de.ariaInfo.deprecatedAttrs.forEach( attr => {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr, de.elemName]);
+          });
         }
-
-        if (de.has_role && aria.designPatterns[role]) {
-          deprecatedProps = aria.designPatterns[role].deprecatedProps;
-        } else {
-          if (implicit_role && aria.designPatterns[implicit_role]) {
-            deprecatedProps = aria.designPatterns[implicit_role].deprecatedProps;
-          }
-        }
-
-        if (deprecatedProps.length) {
-          for (var j = 0; j < deprecatedProps.length; j += 1) {
-            var prop = deprecatedProps[j];
-
-            if (de.node.hasAttribute(prop)) {
-
-              if (role) {
-                if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [prop, de.tag_name, role]);
-                } else {
-                  rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [prop, de.tag_name, role]);
-                }
-              } else {
-                if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-                  rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [prop, de.tag_name, implicit_role]);
-                } else {
-                  rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [prop, de.tag_name, implicit_role]);
-                }
-              }
-            }
-          }
+        else {
+          de.ariaInfo.deprecatedAttrs.forEach( attr => {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr, de.elemName]);
+          });
         }
       }
-      */
-
+    });
   } // end validation function
 },
 
@@ -1080,7 +970,7 @@ export const widgetRules = [
  * @desc     Web components require manual check
  */
 { rule_id             : 'WIDGET_16',
-  last_updated        : '2021-09-12',
+  last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -1089,32 +979,16 @@ export const widgetRules = [
   wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
   target_resources    : ["Custom elements using web component APIs"],
   validate          : function (dom_cache, rule_result) {
-
-    debug.flag && debug.log(`[WIDGET 16] ${dom_cache} ${rule_result}`);
-
-/*
-    var VISIBILITY  = VISIBILITY;
-    var TEST_RESULT = TEST_RESULT;
-
-    var dom_elements     = dom_cache.element_cache.dom_elements;
-    var dom_elements_len = dom_elements.length;
-
-    for (var i = 0; i < dom_elements_len; i++) {
-      var de = dom_elements[i];
-      var style = de.computed_style;
-
-      if (de.tag_name.indexOf('-') >= 0) {
-        if (!de.node.shadowRoot) {
-          if (style.is_visible_to_at == VISIBILITY.VISIBLE || style.is_visible_onscreen == VISIBILITY.VISIBLE ) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name]);
-          } else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
-          }
+    dom_cache.allDomElements.forEach( de => {
+      if (de.tagName.includes('-') && de.isShadowClosed) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
       }
-    }
-    */
-
+    });
   } // end validation function
 }
 

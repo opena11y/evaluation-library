@@ -262,11 +262,15 @@ export default class DOMCache {
               // check for custom elements
               if (this.isCustomElement(tagName)) {
                 if (node.shadowRoot) {
+                  domItem.isShadowClosed = false;
                   newParentInfo.parentDocument  = newParentInfo.document;
                   newParentInfo.document        = node.shadowRoot;
                   this.documentIndex += 1;
                   newParentInfo.documentIndex = this.documentIndex;
                   this.transverseDOM(newParentInfo, node.shadowRoot);
+                }
+                else {
+                  domItem.isShadowClosed = true;
                 }
               } else {
                 // Check for iframe tag
