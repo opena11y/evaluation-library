@@ -11,7 +11,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('ARIA Rules', false);
-debug.flag = false;
+debug.flag = true;
 
 /*
  * OpenA11y Rules
@@ -951,12 +951,12 @@ export const widgetRules = [
       if (de.ariaInfo.deprecatedAttrs) {
         if (de.visibility.isVisibleToAT) {
           de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr, de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
           });
         }
         else {
           de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr, de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, de.elemName]);
           });
         }
       }

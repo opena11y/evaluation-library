@@ -14177,7 +14177,7 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 
 /* Constants */
 const debug$d = new DebugLogging('ARIA Rules', false);
-debug$d.flag = false;
+debug$d.flag = true;
 
 /*
  * OpenA11y Rules
@@ -15117,12 +15117,12 @@ const widgetRules$1 = [
       if (de.ariaInfo.deprecatedAttrs) {
         if (de.visibility.isVisibleToAT) {
           de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr, de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
           });
         }
         else {
           de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr, de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, de.elemName]);
           });
         }
       }
