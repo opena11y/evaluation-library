@@ -48,6 +48,13 @@
       <div id="control-2d" role="slider"      data-label="">ABCD</div>
       <div id="control-2e" role="combobox"    data-label="">ABCD</div>
 
+      <h2>CSS Issue with Firefox and Image in Content</h2>
+
+      <h3 id="header-1a" data-label="ABCD"><img src="../images/blue.png" alt="">ABCD</h2>
+      <h3 id="header-1b" data-label="ABCD"><img src="../images/blue.png" alt="AB">CD</h2>
+      <h3 id="header-1c" data-label="ABCD"><span><img src="../images/blue.png" alt=""></span><span>ABCD</span></h2>
+      <h3 id="header-1d" data-label="AB CD"><span><img src="../images/blue.png" alt="AB"></span><span>CD</span></h2>
+
     </main>
   </body>
 </html>

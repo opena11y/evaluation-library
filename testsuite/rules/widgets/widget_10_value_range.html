@@ -53,7 +53,7 @@
         <h2>scrollbar</h2>
         <div role="scrollbar" aria-label="Scrollbar 1: Pass" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">scrollbar pass</div>
 
-        <div role="scrollbar" aria-label="Scrollbar 2: Fail" class="WIDGET_10_FAIL out of range" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar fail</div>
+        <div role="scrollbar" aria-label="Scrollbar 2: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar fail</div>
 
         <div style="visibility: hidden" role="scrollbar" aria-label="Scrollbar 2: Hidden" class="WIDGET_10_HIDDEN" aria-valuemin="1" aria-valuemax="10" aria-valuenow="200">scrollbar hidden</div>
 
@@ -76,8 +76,6 @@
         <div role="slider" aria-label="Slider 8: Fail invalid now value" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="10" aria-valuenow="x">slider fail</div>
 
 
-
-
         <h2>spinbutton</h2>
         <div role="spinbutton"  aria-label="Spinbutton 1: Pass" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">spinbutton pass</div>
 
@@ -85,6 +83,15 @@
 
         <div role="spinbutton" aria-label="Spinbutton 3: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="2" aria-valuenow="3">spinbutton fail</div>
 
+         <h2>separator</h2>
+
+        <div role="separator" aria-label="Separator 1: ignored">separator ignored</div>
+
+        <div role="separator" tabindex="0" aria-label="Separator 2: Pass" class="WIDGET_10_PASS" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">separator pass</div>
+
+        <div role="separator" tabindex="0"  aria-label="Separator 3: Pass" class="WIDGET_10_PASS" aria-valuenow="50">separator pass</div>
+
+        <div role="separator" tabindex="0" aria-label="Separator 4: Fail" class="WIDGET_10_FAIL" aria-valuemin="1" aria-valuemax="2" aria-valuenow="3">separator fail</div>
 
 
 

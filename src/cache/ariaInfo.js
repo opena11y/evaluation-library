@@ -100,7 +100,9 @@ export default class AriaInfo {
     this.ownedDomElements   = [];
     this.ownedByDomElements = [];
 
-    this.isRange    = designPattern.roleType.indexOf('range') >= 0;
+    const isFocusableSeparator =  (role === 'separator') && (node.tabIndex >= 0);
+
+    this.isRange    = (designPattern.roleType.indexOf('range') >= 0) || isFocusableSeparator;
     this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
                       (designPattern.roleType.indexOf('window') >= 0);
 
@@ -111,8 +113,9 @@ export default class AriaInfo {
 
     // for range widgets
 
-    if (this.isRange) {
-      this.isValueNowRequired = designPattern.requiredProps.includes('aria-valuenow');
+
+    if (this.isRange || isFocusableSeparator) {
+      this.isValueNowRequired =  isFocusableSeparator || designPattern.requiredProps.includes('aria-valuenow');
 
       this.hasValueNow = node.hasAttribute('aria-valuenow');
       if (this.hasValueNow) {

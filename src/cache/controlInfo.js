@@ -5,7 +5,7 @@ import {isLabelable, usesARIALabeling} from '../utils.js';
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('ControlInfo', true);
+const debug = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement

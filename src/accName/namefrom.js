@@ -540,10 +540,11 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
- if (prefix[0] === '"') {
+  if ((prefix[0] === '"') && !prefix.toLowerCase().includes('moz-')) {
     result = prefix.substring(1, (prefix.length-1)) + result;
   }
- if (suffix[0] === '"') {
+
+  if ((suffix[0] === '"') && !suffix.toLowerCase().includes('moz-')) {
     result = result + suffix.substring(1, (suffix.length-1)) ;
   }
 

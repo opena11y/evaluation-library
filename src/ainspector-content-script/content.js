@@ -9,7 +9,7 @@ import {getElementResultsInfo} from './getElementResultsInfo.js';
 import {highlightModule}       from './highlightModule.js';
 import {highlightElements}     from './highlightElements.js';
 
-const debug = true;
+const debug = false;
 
 /*
 **  Connect to panel.js script and set up listener/handler

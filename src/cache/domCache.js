@@ -14,7 +14,7 @@ import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
-debug.flag = true;
+debug.flag = false;
 
 const skipableElements = [
   'base',

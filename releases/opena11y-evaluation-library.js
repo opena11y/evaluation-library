@@ -866,7 +866,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$w = new DebugLogging('ControlInfo', true);
+const debug$w = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -6078,7 +6078,9 @@ class AriaInfo {
     this.ownedDomElements   = [];
     this.ownedByDomElements = [];
 
-    this.isRange    = designPattern.roleType.indexOf('range') >= 0;
+    const isFocusableSeparator =  (role === 'separator') && (node.tabIndex >= 0);
+
+    this.isRange    = (designPattern.roleType.indexOf('range') >= 0) || isFocusableSeparator;
     this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
                       (designPattern.roleType.indexOf('window') >= 0);
 
@@ -6089,8 +6091,9 @@ class AriaInfo {
 
     // for range widgets
 
-    if (this.isRange) {
-      this.isValueNowRequired = designPattern.requiredProps.includes('aria-valuenow');
+
+    if (this.isRange || isFocusableSeparator) {
+      this.isValueNowRequired =  isFocusableSeparator || designPattern.requiredProps.includes('aria-valuenow');
 
       this.hasValueNow = node.hasAttribute('aria-valuenow');
       if (this.hasValueNow) {
@@ -9521,10 +9524,11 @@ function addCssGeneratedContent (element, contents) {
       prefix = getComputedStyle(element, ':before').content,
       suffix = getComputedStyle(element, ':after').content;
 
- if (prefix[0] === '"') {
+  if ((prefix[0] === '"') && !prefix.toLowerCase().includes('moz-')) {
     result = prefix.substring(1, (prefix.length-1)) + result;
   }
- if (suffix[0] === '"') {
+
+  if ((suffix[0] === '"') && !suffix.toLowerCase().includes('moz-')) {
     result = result + suffix.substring(1, (suffix.length-1)) ;
   }
 
@@ -9904,7 +9908,7 @@ function doesElementAllowNameFromContents (element) {
 
 /* Constants */
 const debug$o = new DebugLogging('DOMElement', false);
-debug$o.flag = true;
+debug$o.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -11174,7 +11178,7 @@ class StructureInfo {
 
 /* Constants */
 const debug$g = new DebugLogging('domCache', false);
-debug$g.flag = true;
+debug$g.flag = false;
 
 const skipableElements = [
   'base',
@@ -20427,15 +20431,16 @@ const widgetRules = {
           ELEMENT_PASS_1:  '@%1@ is using @aria-valuetext@ attribute with a value of @%2@ which should provide a better description of the value than the @aria-valuenow@ of @%3@.',
           ELEMENT_PASS_2:  '@%1@ has a value of %2 is in the range %3 and %4.',
           ELEMENT_PASS_3:  '@%1@ has no @aria-valuenow@ value and is considered an indeterminate.',
-          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ (%1), @aria-valuemin@ (%2) and @aria-valuemax@ (%3) so the @aria-valuenow@ value is between the minimum and maximum values.',
-          ELEMENT_FAIL_2:  'Update the values of @aria-valuemin@ (%1) and @aria-valuemax@ (%2) to be numeric values, make sure the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
-          ELEMENT_FAIL_3:  'Update the value of @aria-valuenow@ (%1) to be a valid numeric value.',
+          ELEMENT_FAIL_1:  'Update the numeric values of @aria-valuenow@ ("%1"), @aria-valuemin@ ("%2") and @aria-valuemax@ ("%3") so the @aria-valuenow@ value is between the minimum and maximum values.',
+          ELEMENT_FAIL_2:  'Update the values of @aria-valuemin@ ("%1") and @aria-valuemax@ ("%2") to be numeric values, make sure the @aria-valuemin@ value is less than the @aria-valuemax@ value.',
+          ELEMENT_FAIL_3:  'Update the value of @aria-valuenow@ ("%1") to be a valid numeric value.',
           ELEMENT_FAIL_4:  '@%1@ is missing the @aria-valuenow@ attribute.',
           ELEMENT_HIDDEN_1:  'Widget range values were not tested because the @%1@ range widget is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
           'Screen readers typically render the value of a range widget as a percentage of the total range defined by the minimum and maximum values.',
+          'Elements with the role @separator@ that are focusable (e.r. @tabindex=0@) are considered a range role with the same requirements as a @scrollbar@.',
           '@aria-valuetext@ can be used to render an alternative to the percentage when a numerical values and/or a units of measure are more descriptive.',
           'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
         ],
@@ -20464,6 +20469,10 @@ const widgetRules = {
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
             url:   'https://www.w3.org/TR/wai-aria-1.2/#scollbar'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Separator',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#separator'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
