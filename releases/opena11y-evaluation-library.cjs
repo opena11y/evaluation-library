@@ -14766,7 +14766,7 @@ const widgetRules$1 = [
  */
 
 { rule_id             : 'WIDGET_10',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -14776,11 +14776,10 @@ const widgetRules$1 = [
   target_resources    : ['[role="meter"]',
                          '[role="progress"]',
                          '[role="scrollbar"]',
+                         '[role="separator"][tabindex=0]',
                          '[role="slider"]',
                          '[role="spinbutton"]'],
   validate            : function (dom_cache, rule_result) {
-
-
     dom_cache.allDomElements.forEach( de => {
       if (de.ariaInfo.isRange) {
         const ai = de.ariaInfo;
@@ -14827,144 +14826,49 @@ const widgetRules$1 = [
 
       }
     });
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-
-     if (dom_elements && dom_elements) {
-
-       for (var i = 0; i < dom_elements_len; i++) {
-         var de = dom_elements[i];
-         var style = de.computed_style;
-
-         if (de.is_range) {
-
-            if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-              var is_value_required = !('progressbar spinbutton'.indexOf(de.role) >= 0);
-
-              var valuetext          = de.getAttributeValue('aria-valuetext');
-              var is_valuetext_valid = de.isAttributeValueValid('aria-valuetext', valuetext);
-
-              var min          = de.getAttributeValue('aria-valuemin');
-              var is_min_valid = de.isAttributeValueValid('aria-valuemin', min);
-
-              var max          = de.getAttributeValue('aria-valuemax');
-              var is_max_valid = de.isAttributeValueValid('aria-valuemax', max);
-
-              var value          = de.getAttributeValue('aria-valuenow');
-              var is_value_valid = de.isAttributeValueValid('aria-valuenow', value);
-
-              if (is_valuetext_valid) {
-                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de, valuetext]);
-              } else {
-                if (is_value_valid) {
-                  if (is_max_valid && is_min_valid) {
-                    if (min < max) {
-                      if ((min <= value) && (value <= max)) {
-                        rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de, value, min, max]);
-                      } else {
-                        rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [value, min, max]);
-                      }
-                    } else {
-                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
-                    }
-                  } else {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de, min, max]);
-                  }
-                } else {
-                  if (is_value_required) {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de]);
-                  } else {
-                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de]);
-                  }
-                }
-              }
-            } else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de]);
-            }
-         }
-       } // end loop
-     }
-     */
-   } // end validation function
+ } // end validation function
 },
 
 /**
  * @object WIDGET_11
  *
- * @desc Elements with mouse down, mouse move and mouse up events must have roles
+ * @desc Verify range elements with aria-valuetext attribute
  */
 
 { rule_id             : 'WIDGET_11',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[onmousedown]', '[onmouseup]', '[onmousemove]', '[onkeydown]', '[onkeyup]', '[onkeypress]', '[onclick]', '[ondbclick]', '[ondrag]', '[ondragstart]', '[ondragend]', '[ondragover]', '[onenter]', '[ondragleave]', '[ondrop]'],
+  target_resources    : ['[role="meter"]',
+                         '[role="progress"]',
+                         '[role="scrollbar"]',
+                         '[role="separator"][tabindex=0]',
+                         '[role="slider"]',
+                         '[role="spinbutton"]'],
   validate            : function (dom_cache, rule_result) {
-
-    debug$d.flag && debug$d.log(`[WIDGET 11] ${dom_cache} ${rule_result}`);
-
-/*
-     function getUIEvents(dom_element) {
-
-        var events = dom_element.getMouseEvents();
-        events += dom_element.getClickEvents();
-        events += dom_element.getDragEvents();
-        events += dom_element.getKeyboardEvents();
-
-        return events;
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements_with_events     = dom_cache.controls_cache.elements_with_events;
-     var dom_elements_with_events_len = dom_elements_with_events.length;
-
-     if (dom_elements_with_events_len) {
-
-       for (var i = 0; i < dom_elements_with_events_len; i++) {
-         var de = dom_elements_with_events[i];
-
-         var style = de.computed_style;
-         var events = getUIEvents(de);
-
-         if (events.length &&
-             (de.tag_name !== 'embed') &&
-             (de.tag_name !== 'applet') &&
-             (de.tag_name !== 'object') &&
-             (de.tag_name !== 'video') &&
-             (de.tag_name !== 'audio')) {
-
-           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-             if (de.is_widget) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_1', [de.role, events]);
-             }
-             else {
-               if (de.is_interactive) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_2', [de.tag_name, events]);
-               else if (de.containsInteractiveElements()) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_3', [de.tag_name, events]);
-               else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, events]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
-           }
-         }
-       } // end loop
-     }
-     */
-
-   } // end validation function
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isRange && de.ariaInfo.valueText) {
+        const ai = de.ariaInfo;
+        if (de.visibility.isVisibleToAT) {
+          const now  = ai.valueNow;
+          const text = ai.valueText;
+          if (ai.hasValueNow) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [text, now]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
+  }
 },
 /**
  * @object WIDGET_12
@@ -20447,8 +20351,8 @@ const widgetRules = {
           'Some range roles (e.g. @progress@ and @spinbutton@) allow an unknown current value indicating indeterminate or no current value.'
         ],
         TECHNIQUES: [
-          'Use the @aria-valuenow@ attributes numerical value must be in the range defined by @aria-valuemin@ and @aria-valuemax@.',
-          'Screen reader typically render the slider value as a percentage, requiring a valid @aria-valuenow@ attribute.',
+          'Use the numerical value of the @aria-valuenow@ attribute must be in the range defined by @aria-valuemin@ and @aria-valuemax@.',
+          'Screen readers typically render the range value as a percentage, requiring a valid @aria-valuenow@ attribute.',
           'Use the @aria-valuetext@ to provide an alternative to the percentage typically spoken by assistive technologies (e.g. "32 dollars", "78 degrees")',
           'For most range roles, if @aria-valuemin@ is not defined it\'s default value is 0.',
           'For most range roles, if @aria-valuemax@ is not defined it\'s default value is 100.'
@@ -20496,86 +20400,70 @@ const widgetRules = {
     },
  WIDGET_11: {
         ID:                    'Widget 11',
-        DEFINITION:            'Elements with UI event handlers %s have widget roles that accurately describe the options and actions available to the user upon interacting with the element.',
-        SUMMARY:               'Elements with event handlers %s have roles',
-        TARGET_RESOURCES_DESC: 'Elements with event handlers',
+        DEFINITION:            'Verify that @aria-valuetext@ describes the value of a range control.',
+        SUMMARY:               'Verify @aria-valuetext@ value.',
+        TARGET_RESOURCES_DESC: 'Range widgets using @aria-valuetext@',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:          'Add an ARIA widget role to the interactive element, or to its descendants, to describe the user interactions associated with the event handler or handlers on the element.',
-          FAIL_P:          'Add ARIA widget roles to the %N_F interactive elements, or to their descendants, to describe the user interactions associated with the event handlers on those elements.',
-          MANUAL_CHECK_S:  'Verify the user interactions associated with the interactive element with one or more event handlers are accurately described by the element\'s widget role and/or those of its descendants.',
-          MANUAL_CHECK_P:  'Verify the user interactions associated with the %N_MC interactive elements with one or more event handlers are accurately described by each element\'s widget role and/or their descendants.',
-          HIDDEN_S:        'The hidden interactive element with event handlers was not evaluated.',
-          HIDDEN_P:        'The %N_H interactive elements with event handlers were not evaluated.',
-          NOT_APPLICABLE:  'No interactive elements with event handlers found on this page.'
+          FAIL_S:          'Add @aria-valuenow@ to the range widgets using @aria-valuetext@.',
+          FAIL_P:          'Add @aria-valuenow@ to the %N_F range widgets using @aria-valuetext@.',
+          MANUAL_CHECK_S:  'Verify range widget using @aria-valuetext@ describes the value of the widget.',
+          MANUAL_CHECK_P:  'Verify %N_MC range widgets using @aria-valuetext@ describe the value of the widget.',
+          HIDDEN_S:        'The hidden range widgets using @aria-valuetext@ was not evaluated.',
+          HIDDEN_P:        'The %N_H hidden range widgets using @aria-valuetext@ were not evaluated.',
+          NOT_APPLICABLE:  'No range widgets using @aria-valuetext@ were found on this page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_MANUAL_CHECK_1:  'Verify the user options and actions available through the "@%2@" event handler(s) are accurately described by the @%1@ widget role.',
-          ELEMENT_MANUAL_CHECK_2:  'Verify the user options and actions available through the "@%2@" event handler(s) are accurately described by native role semantics of the @%1@ element.',
-          ELEMENT_MANUAL_CHECK_3:  'Verify the user options and actions available through the "@%2@" event handler(s) are accurately described by the descendant elements with widget roles or the native role semantics of the interactive elements.',
-          ELEMENT_FAIL_1:   'Add widget role(s) to the element and/or its descendants that accurately describe the user options and actions of the @%1@ element with the following event handlers: %2.',
-          ELEMENT_HIDDEN_1: 'Roles for interactive elements was not tested because the %1 element is hidden from assistive technologies with following event handlers: %2'
+          ELEMENT_MC_1:     'Verify the @aria-valuetext@ value ("%1") is a better description of the value of the range control than just the @aria-valuenow@ value ("%2").',
+          ELEMENT_FAIL_1:   'The @aria-valuetext@ attribute must be used in conjunction with the @aria-valuenow@ attribute.',
+          ELEMENT_HIDDEN_1: 'The range widget with @aria-valuetext@ attribute was not tested because the %1 element is hidden from assistive technologies.'
         },
         PURPOSES: [
-          'ARIA widget roles describe the user options and actions, or more generally, the expected behavior, of interactive elements to users of assistive technologies.',
-          'Standard HTML form controls and links have default widget roles that describe their behavior.',
-          'When UI event handlers are used to create user options and actions that change the expected behavior of an interactive element, ensure that the appropriate widget role is assigned to the element.',
-          'Conversely, ensure that the event handlers are adding appropriate behaviors that align with the ARIA widget role.'
+          'Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. @scrollbar@, @slider@ or @spinbutton@).',
+          'When @aria-valuetext@ is used in conjunction with @aria-valuenow@, screen readers render the value of @aria-valuetext@.',
+          'The advantage of using @aria-valuetext@ is providing a better description of the value, for example a media player control could define the time position in a video (e.g. 2 minutes and 20 seconds).'
         ],
         TECHNIQUES: [
-          'Use the @role@ attribute with an ARIA widget role value to describe the user options, actions and expected behavior of custom interactive elements.',
-          'Use ARIA property and state attributes to describe the features of each widget role. Note that some widget roles have required properties and states.',
-          'Ensure that all options and actions of interactive elements are available through keyboard-only interaction.'
+          'The @aria-valuetext@ attribute must be used in conjunction with the @aria-valuenow@ attribute.',
+          'Use the @aria-valuetext@ to provide an alternative to the percentage typically spoken by assistive technologies (e.g. "32 dollars", "78 degrees")'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
-          { type: REFERENCES.SPECIFICATION,
-            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Communicating Value and Limits for Range Widgets',
+            url:   'https://www.w3.org/WAI/ARIA/apg/#range_related_properties'
           },
           { type: REFERENCES.SPECIFICATION,
-            title: 'HTML5: INPUT element widget role semantics',
-            url:   'https://www.w3.org/TR/html51/sec-forms.html#state-of-the-type-attribute'
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#meter'
           },
           { type: REFERENCES.SPECIFICATION,
-            title: 'HTML5: SELECT element widget role semantics',
-            url:   'https://www.w3.org/TR/html51/sec-forms.html#the-select-element'
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#progress'
           },
           { type: REFERENCES.SPECIFICATION,
-            title: 'HTML5: TEXTAREA element widget role semantics',
-            url:   'https://www.w3.org/TR/html51/sec-forms.html#the-textarea-element'
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#scollbar'
           },
           { type: REFERENCES.SPECIFICATION,
-            title: 'HTML5: BUTTON element widget role semantics',
-            url:   'https://www.w3.org/TR/html51/sec-forms.html#the-button-element'
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Separator',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#separator'
           },
           { type: REFERENCES.SPECIFICATION,
-            title: 'HTML5: A element widget role semantics',
-            url:   'https://www.w3.org/TR/html51/textlevel-semantics.html#the-a-element'
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#slider'
           },
           { type: REFERENCES.SPECIFICATION,
-            title: 'UI Events Specification',
-            url:   'https://www.w3.org/TR/DOM-Level-3-Events/'
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#spinbutton'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
-            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
+            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
             url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
-            title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.',
-            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
-          },
-          { type: REFERENCES.EXAMPLE,
-            title: 'ARIA Authoring Practices',
-            url:   'https://www.w3.org/WAI/ARIA/apg/'
-          },
-          { type: REFERENCES.EXAMPLE,
-            title: 'MDN Web Docs: ARIA ',
-            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA'
-          },
-          { type: REFERENCES.EXAMPLE,
-            title: 'Web Fundamentals: Introduction to ARIA',
-            url:   'https://developers.google.com/web/fundamentals/accessibility/semantics-aria'
+            title: 'ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html'
           }
         ]
     },

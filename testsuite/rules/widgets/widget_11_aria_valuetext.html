@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>WIDGET 11: Verify aria-valuetext descriptions</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 11 test case</div>
+      </header>
+      
+      <main>
+
+        <h1>WIDGET 11: Verify aria-valuetext descriptions</h1>
+
+       <h2>slider</h2>
+        <div role="slider" aria-label="Slider 1: Pass" class="WIDGET_11_MC"  aria-valuenow="50" aria-valuetext="50 dollars">slider pass</div>
+
+        <div role="slider" aria-label="Slider 2: Fail out of range" class="WIDGET_11_FAIL"  aria-valuetext="50 dollars">slider fail</div>
+
+        <div hidden role="slider" aria-label="Slider 3: Hidden" class="WIDGET_11_HIDDEN" aria-valuetext="50 dollars">slider fail</div>
+
+        <div role="slider" aria-label="Slider 4: ignored no aria-valuetext attribute"  aria-valuenow="50">slider fail</div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 11 test case</div>
+      </footer>
+    
+  </body>
+</html>
+

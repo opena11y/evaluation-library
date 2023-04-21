@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Elements with event handlers %s have roles | OpenA11y Evaluation Library 2.0</title>
+        <title>Verify &lt;code&gt;aria-valuetext&lt;/code&gt; value. | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
@@ -46,14 +46,14 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Elements with event handlers %s have roles</li>
+          <li class="breadcrumb-item active">Verify <code>aria-valuetext</code> value.</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Elements with event handlers %s have roles</h1>
+            <h1 id="h1-title">Rule: Verify <code>aria-valuetext</code> value.</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -66,7 +66,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Elements with UI event handlers %s have widget roles that accurately describe the options and actions available to the user upon interacting with the element.</td>
+  <td>Verify that <code>aria-valuetext</code> describes the value of a range control.</td>
 </tr>
 
                   
@@ -75,13 +75,11 @@
   <td>
     <ul>
       
-      <li>ARIA widget roles describe the user options and actions, or more generally, the expected behavior, of interactive elements to users of assistive technologies.</li>
+      <li>Range roles identify a value between a minimum or maximum value and whether the value can be changed by the user (e.g. <code>scrollbar</code>, <code>slider</code> or <code>spinbutton</code>).</li>
       
-      <li>Standard HTML form controls and links have default widget roles that describe their behavior.</li>
+      <li>When <code>aria-valuetext</code> is used in conjunction with <code>aria-valuenow</code>, screen readers render the value of <code>aria-valuetext</code>.</li>
       
-      <li>When UI event handlers are used to create user options and actions that change the expected behavior of an interactive element, ensure that the appropriate widget role is assigned to the element.</li>
-      
-      <li>Conversely, ensure that the event handlers are adding appropriate behaviors that align with the ARIA widget role.</li>
+      <li>The advantage of using <code>aria-valuetext</code> is providing a better description of the value, for example a media player control could define the time position in a video (e.g. 2 minutes and 20 seconds).</li>
       
     </ul>
   </td>
@@ -141,11 +139,9 @@
   <td>
     <ul>
       
-      <li>Use the <code>role</code> attribute with an ARIA widget role value to describe the user options, actions and expected behavior of custom interactive elements.</li>
+      <li>The <code>aria-valuetext</code> attribute must be used in conjunction with the <code>aria-valuenow</code> attribute.</li>
       
-      <li>Use ARIA property and state attributes to describe the features of each widget role. Note that some widget roles have required properties and states.</li>
-      
-      <li>Ensure that all options and actions of interactive elements are available through keyboard-only interaction.</li>
+      <li>Use the <code>aria-valuetext</code> to provide an alternative to the percentage typically spoken by assistive technologies (e.g. "32 dollars", "78 degrees")</li>
       
     </ul>
   </td>
@@ -157,29 +153,23 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#widget_roles">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/#range_related_properties">ARIA Authoring Practices: Communicating Value and Limits for Range Widgets</a></li>
       
-      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#state-of-the-type-attribute">HTML5: INPUT element widget role semantics</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#meter">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter</a></li>
       
-      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#the-select-element">HTML5: SELECT element widget role semantics</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#progress">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress</a></li>
       
-      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#the-textarea-element">HTML5: TEXTAREA element widget role semantics</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#scollbar">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar</a></li>
       
-      <li><a href="https://www.w3.org/TR/html51/sec-forms.html#the-button-element">HTML5: BUTTON element widget role semantics</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#separator">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Separator</a></li>
       
-      <li><a href="https://www.w3.org/TR/html51/textlevel-semantics.html#the-a-element">HTML5: A element widget role semantics</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#slider">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider</a></li>
       
-      <li><a href="https://www.w3.org/TR/DOM-Level-3-Events/">UI Events Specification</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#spinbutton">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes.</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices</a></li>
-      
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN Web Docs: ARIA </a></li>
-      
-      <li><a href="https://developers.google.com/web/fundamentals/accessibility/semantics-aria">Web Fundamentals: Introduction to ARIA</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html">ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component</a></li>
       
     </ul>
   </td>

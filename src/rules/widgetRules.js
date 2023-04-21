@@ -610,7 +610,7 @@ export const widgetRules = [
  */
 
 { rule_id             : 'WIDGET_10',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
@@ -620,11 +620,10 @@ export const widgetRules = [
   target_resources    : ['[role="meter"]',
                          '[role="progress"]',
                          '[role="scrollbar"]',
+                         '[role="separator"][tabindex=0]',
                          '[role="slider"]',
                          '[role="spinbutton"]'],
   validate            : function (dom_cache, rule_result) {
-
-
     dom_cache.allDomElements.forEach( de => {
       if (de.ariaInfo.isRange) {
         const ai = de.ariaInfo;
@@ -671,144 +670,49 @@ export const widgetRules = [
 
       }
     });
-
-/*
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements     = dom_cache.element_cache.dom_elements;
-     var dom_elements_len = dom_elements.length;
-
-     if (dom_elements && dom_elements) {
-
-       for (var i = 0; i < dom_elements_len; i++) {
-         var de = dom_elements[i];
-         var style = de.computed_style;
-
-         if (de.is_range) {
-
-            if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-              var is_value_required = !('progressbar spinbutton'.indexOf(de.role) >= 0);
-
-              var valuetext          = de.getAttributeValue('aria-valuetext');
-              var is_valuetext_valid = de.isAttributeValueValid('aria-valuetext', valuetext);
-
-              var min          = de.getAttributeValue('aria-valuemin');
-              var is_min_valid = de.isAttributeValueValid('aria-valuemin', min);
-
-              var max          = de.getAttributeValue('aria-valuemax');
-              var is_max_valid = de.isAttributeValueValid('aria-valuemax', max);
-
-              var value          = de.getAttributeValue('aria-valuenow');
-              var is_value_valid = de.isAttributeValueValid('aria-valuenow', value);
-
-              if (is_valuetext_valid) {
-                rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de, valuetext]);
-              } else {
-                if (is_value_valid) {
-                  if (is_max_valid && is_min_valid) {
-                    if (min < max) {
-                      if ((min <= value) && (value <= max)) {
-                        rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de, value, min, max]);
-                      } else {
-                        rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [value, min, max]);
-                      }
-                    } else {
-                      rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [min, max]);
-                    }
-                  } else {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de, min, max]);
-                  }
-                } else {
-                  if (is_value_required) {
-                    rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de]);
-                  } else {
-                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de]);
-                  }
-                }
-              }
-            } else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de]);
-            }
-         }
-       } // end loop
-     }
-     */
-   } // end validation function
+ } // end validation function
 },
 
 /**
  * @object WIDGET_11
  *
- * @desc Elements with mouse down, mouse move and mouse up events must have roles
+ * @desc Verify range elements with aria-valuetext attribute
  */
 
 { rule_id             : 'WIDGET_11',
-  last_updated        : '2021-07-07',
+  last_updated        : '2023-04-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[onmousedown]', '[onmouseup]', '[onmousemove]', '[onkeydown]', '[onkeyup]', '[onkeypress]', '[onclick]', '[ondbclick]', '[ondrag]', '[ondragstart]', '[ondragend]', '[ondragover]', '[onenter]', '[ondragleave]', '[ondrop]'],
+  target_resources    : ['[role="meter"]',
+                         '[role="progress"]',
+                         '[role="scrollbar"]',
+                         '[role="separator"][tabindex=0]',
+                         '[role="slider"]',
+                         '[role="spinbutton"]'],
   validate            : function (dom_cache, rule_result) {
-
-    debug.flag && debug.log(`[WIDGET 11] ${dom_cache} ${rule_result}`);
-
-/*
-     function getUIEvents(dom_element) {
-
-        var events = dom_element.getMouseEvents();
-        events += dom_element.getClickEvents();
-        events += dom_element.getDragEvents();
-        events += dom_element.getKeyboardEvents();
-
-        return events;
-     }
-
-     var VISIBILITY  = VISIBILITY;
-     var TEST_RESULT = TEST_RESULT;
-
-     var dom_elements_with_events     = dom_cache.controls_cache.elements_with_events;
-     var dom_elements_with_events_len = dom_elements_with_events.length;
-
-     if (dom_elements_with_events_len) {
-
-       for (var i = 0; i < dom_elements_with_events_len; i++) {
-         var de = dom_elements_with_events[i];
-
-         var style = de.computed_style;
-         var events = getUIEvents(de);
-
-         if (events.length &&
-             (de.tag_name !== 'embed') &&
-             (de.tag_name !== 'applet') &&
-             (de.tag_name !== 'object') &&
-             (de.tag_name !== 'video') &&
-             (de.tag_name !== 'audio')) {
-
-           if (style.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-             if (de.is_widget) {
-               rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_1', [de.role, events]);
-             }
-             else {
-               if (de.is_interactive) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_2', [de.tag_name, events]);
-               else if (de.containsInteractiveElements()) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MANUAL_CHECK_3', [de.tag_name, events]);
-               else rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, events]);
-             }
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
-           }
-         }
-       } // end loop
-     }
-     */
-
-   } // end validation function
+    dom_cache.allDomElements.forEach( de => {
+      if (de.ariaInfo.isRange && de.ariaInfo.valueText) {
+        const ai = de.ariaInfo;
+        if (de.visibility.isVisibleToAT) {
+          const now  = ai.valueNow;
+          const text = ai.valueText;
+          if (ai.hasValueNow) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [text, now]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
+  }
 },
 /**
  * @object WIDGET_12

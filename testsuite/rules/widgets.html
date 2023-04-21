@@ -32,17 +32,10 @@
         executeTest('WIDGET_8: Widgets must have required parent roles', 'ID_IFRAME_8',  'WIDGET_8');
         executeTest('WIDGET_9: Widgets cannot be owned by more than one widget', 'ID_IFRAME_9',  'WIDGET_9');
         executeTest('WIDGET_10: Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax', 'ID_IFRAME_10',  'WIDGET_10');
+        executeTest('WIDGET_11: Verify range widgets using aria-valuetext', 'ID_IFRAME_11',  'WIDGET_11');
       });
 
       /*
-
-      test( "WIDGET_10: Range widgets with aria-valuenow mut be in range of aria-valuemin and aria-valuemax", function() {
-        executeTest('ID_IFRAME_10', 'WIDGET_10');
-      });
-
-      test( "WIDGET_11: Keyboard/mouse/drag events must have roles", function() {
-        executeTest('ID_IFRAME_11A', 'WIDGET_11');
-      });
 
       test( "WIDGET_12: Button, radio, and checkbox widgets labels are descriptive", function() {
         executeTest('ID_IFRAME_12A', 'WIDGET_12');
@@ -129,7 +122,7 @@
     <iframe id="ID_IFRAME_10"  src="widgets/widget_10_value_range.html"></iframe>
 
     <h2>Widget 11: Keyboard/mouse/drag events must have roles</h2>
-    <iframe id="ID_IFRAME_11A"  src="widgets/widget_11_event_roles.html"></iframe>
+    <iframe id="ID_IFRAME_11"  src="widgets/widget_11_aria_valuetext.html"></iframe>
 
     <h2>Widget 12: Widgets labels must be descriptive</h2>
     <iframe id="ID_IFRAME_12A"  src="widgets/widget_12_button_radio_checkbox.html"></iframe>
