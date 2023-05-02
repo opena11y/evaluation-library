@@ -23,5 +23,7 @@ export const common = {
     'NOT_APPLICABLE': 'Not applicable'
   },
   required: 'Required',
-  recommended: 'Recommended'
+  recommended: 'Recommended',
+  tableType: ['undefined', 'Unknown', 'Layout', 'Data', 'Complex', 'ARIA Table', 'Grid', 'Tree Grid'],
+  headerSource: ['undefined', 'none', 'headers attribute', 'row and column']
 }

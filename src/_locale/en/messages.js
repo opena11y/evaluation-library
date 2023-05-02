@@ -12,6 +12,7 @@ import {headingRules}  from './headingRules.js';
 import {imageRules}    from './imageRules.js';
 import {linkRules}     from './linkRules.js';
 import {landmarkRules} from './landmarkRules.js';
+import {tableRules}    from './tableRules.js';
 import {widgetRules}   from './widgetRules.js';
 
 export const messages = {
@@ -29,4 +30,5 @@ messages.rules = Object.assign(messages.rules, headingRules);
 messages.rules = Object.assign(messages.rules, imageRules);
 messages.rules = Object.assign(messages.rules, linkRules);
 messages.rules = Object.assign(messages.rules, landmarkRules);
+messages.rules = Object.assign(messages.rules, tableRules);
 messages.rules = Object.assign(messages.rules, widgetRules);

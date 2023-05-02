@@ -10,7 +10,7 @@ import {
 import DebugLogging  from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('ARIA Rules', false);
+const debug = new DebugLogging('Widget Rules', false);
 debug.flag = true;
 
 /*

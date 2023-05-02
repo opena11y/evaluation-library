@@ -224,16 +224,8 @@ function nameFromNativeSemantics (doc, element) {
       break;
 
     // FORM ELEMENTS: OTHER
-    case 'button':
-      accName = nameFromContents(element);
-      break;
-
     case 'fieldset':
       accName = nameFromLegendElement(doc, element);
-      break;
-
-    case 'label':
-      accName = nameFromContents(element);
       break;
 
     case 'keygen':
@@ -280,10 +272,6 @@ function nameFromNativeSemantics (doc, element) {
       break;
 
     // OTHER ELEMENTS
-    case 'a':
-      accName = nameFromContents(element);
-      break;
-
     case 'details':
       accName = nameFromDetailsOrSummary(element);
       break;
@@ -295,6 +283,24 @@ function nameFromNativeSemantics (doc, element) {
     case 'table':
       accName = nameFromDescendant(element, 'caption');
       break;
+
+    // Elements that allow name from contents
+    case 'a':
+      if (element.hasAttribute('href')) {
+        accName = nameFromContents(element);
+      }
+      break;
+
+    case 'button':
+    case 'dd':
+    case 'dt':
+    case 'label':
+    case 'li':
+    case 'td':
+    case 'th':
+      accName = nameFromContents(element);
+      break;
+
 
     // ELEMENTS NOT SPECIFIED ABOVE
     default:

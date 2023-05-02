@@ -9,7 +9,7 @@ const debug = new DebugLogging('structureInfo', false);
 /**
  * @class LandmarkElement
  *
- * @desc Idenifies a DOM element as being a landmark and relationships to other landmarks and headings.
+ * @desc Identifies a DOM element as being a landmark and relationships to other landmarks and headings.
  *
  * @param  {Object}  domElement   - Structural Information
  */

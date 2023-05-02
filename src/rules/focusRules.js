@@ -7,10 +7,12 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-// import DebugLogging  from '../debug.js';
+
+import DebugLogging  from '../debug.js';
 
 /* Constants */
-// const debug = new DebugLogging('Focus Rules', true);
+const debug = new DebugLogging('Focus Rules', false);
+debug.flag = false;
 
 /*
  * OpenA11y Alliance Rules

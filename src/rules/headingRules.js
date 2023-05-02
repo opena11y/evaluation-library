@@ -7,10 +7,12 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-// import DebugLogging      from '../debug.js';
+
+import DebugLogging      from '../debug.js';
 
 /* Constants */
-// const debug = new DebugLogging('Heading Rules', false);
+const debug = new DebugLogging('Heading Rules', false);
+debug.flag = false;
 
 /*
  * OpenA11y Rules

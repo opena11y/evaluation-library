@@ -8,6 +8,7 @@ import {headingRules}   from './headingRules.js';
 import {imageRules}     from './imageRules.js';
 import {linkRules}      from './linkRules.js';
 import {landmarkRules}  from './landmarkRules.js';
+import {tableRules}     from './tableRules.js';
 import {widgetRules}    from './widgetRules.js';
 
 import Rule             from './rule.js';
@@ -31,6 +32,7 @@ addToArray(headingRules);
 addToArray(imageRules);
 addToArray(linkRules);
 addToArray(landmarkRules);
+addToArray(tableRules);
 addToArray(widgetRules);
 
 

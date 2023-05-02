@@ -7,6 +7,7 @@ const debug = new DebugLogging('constants', false)
 
 export {
   RESULT_VALUE,
+  HEADER_SOURCE,
   IMPLEMENTATION_VALUE,
   REFERENCES,
   RESULT_TYPE,
@@ -14,6 +15,7 @@ export {
   RULE_CATEGORIES,
   RULE_RESULT_VALUE,
   RULE_SCOPE,
+  TABLE_TYPE,
   TEST_RESULT,
   VERSION,
   WCAG_PRINCIPLE,
@@ -359,6 +361,34 @@ const WCAG_SUCCESS_CRITERION = {
   SC_4_1_2          : 0x4102,
   SC_4_1_3          : 0x4103
 }
+
+/**
+ * @constant TABLE_TYPE
+ * @type Number
+ * @desc Constants for TABLE_TYPE table cache elements
+ * @example
+ * TABLE_TYPE.UNKNOWN
+ * TABLE_TYPE.LAYOUT
+ * TABLE_TYPE.DATA
+ * TABLE_TYPE.COMPLEX
+*/
+
+const TABLE_TYPE =  {
+  UNKNOWN        : 1,
+  LAYOUT         : 2,
+  DATA           : 3,
+  COMPLEX        : 4,
+  ARIA_TABLE     : 5,
+  ARIA_GRID      : 6,
+  ARIA_TREEGRID  : 7,
+}
+
+const HEADER_SOURCE = {
+  NONE         : 1,
+  HEADERS_ATTR : 2,
+  ROW_COLUMN   : 3
+}
+
 
 /**
  * @constant REFERENCES

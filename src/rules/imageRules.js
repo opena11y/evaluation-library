@@ -7,10 +7,12 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-// import DebugLogging  from '../debug.js';
+
+import DebugLogging  from '../debug.js';
 
 /* Constants */
-// const debug = new DebugLogging('Image Rules', true);
+const debug = new DebugLogging('Image Rules', false);
+debug.flag = false;
 
 /*
  * OpenA11y Alliance Rules

@@ -10,11 +10,15 @@ import ImageInfo        from './imageInfo.js';
 import LinkInfo         from './linkInfo.js';
 import ListInfo         from './listInfo.js';
 import StructureInfo    from './structureInfo.js';
+import TableInfo        from './tableInfo.js';
 import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
-debug.flag = false;
+debug.flag = true;
+debug.showDomTexts = false;
+debug.showDomElems = false;
+debug.showTree = false;
 
 const skipableElements = [
   'base',
@@ -49,6 +53,8 @@ class ParentInfo {
     this.landmarkElement = null;
     this.listElement     = null;
     this.mapElement      = null;
+    this.tableElement    = null;
+    this.tableRowGroup   = null;
 
     if (info) {
       this.controlElement  = info.controlElement;
@@ -60,6 +66,8 @@ class ParentInfo {
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
       this.mapElement      = info.mapElement;
+      this.tableElement    = info.tableElement;
+      this.tableRowGroup   = info.tableRowGroup;
     }
   }
 }
@@ -99,6 +107,7 @@ export default class DOMCache {
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
     this.structureInfo = new StructureInfo();
+    this.tableInfo     = new TableInfo();
     this.iframeInfo    = new IFrameInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
@@ -113,20 +122,8 @@ export default class DOMCache {
 
     this.transverseDOM(parentInfo, startingElement);
     this.computeAriaOwnsRefs();
-
-    // Debug features
-    if (debug.flag) {
-      this.showDomElementTree();
-
-      this.controlInfo.showControlInfo();
-      this.iframeInfo.showIFrameInfo();
-      this.idInfo.showIdInfo();
-      this.imageInfo.showImageInfo();
-      this.linkInfo.showLinkInfo();
-      this.listInfo.showListInfo();
-      this.structureInfo.showStructureInfo();
-    }
-
+    this.tableInfo.computeTableTypes();
+    this.tableInfo.computeHeaders(this);
   }
 
   getDomElementById(id) {
@@ -313,13 +310,15 @@ export default class DOMCache {
    * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
    */
 
-  updateDOMElementInformation(parentInfo, domElement) {
+  updateDOMElementInformation (parentInfo, domElement) {
     const documentIndex   = parentInfo.documentIndex;
 
-    const controlElement   = parentInfo.controlElement;
+    const controlElement  = parentInfo.controlElement;
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
-    const mapElement     = parentInfo.mapElement;
+    const mapElement      = parentInfo.mapElement;
+    const tableElement    = parentInfo.tableElement;
+    const tableRowGroup   = parentInfo.tableRowGroup;
 
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
@@ -330,7 +329,7 @@ export default class DOMCache {
     this.linkInfo.update(domElement);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
-
+    [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
     return newParentInfo;
   }
 
@@ -376,18 +375,26 @@ export default class DOMCache {
    */
 
   showDomElementTree () {
-    debug.log(' === AllDomElements ===', true);
-    this.allDomElements.forEach( de => {
-      debug.domElement(de);
-    });
+    if (debug.flag) {
+      if (debug.showDomElems) {
+        debug.log(' === AllDomElements ===', true);
+        this.allDomElements.forEach( de => {
+          debug.domElement(de);
+        });
+      }
 
-    debug.log(' === AllDomTexts ===', true);
-    this.allDomTexts.forEach( dt => {
-      debug.domText(dt);
-    });
+      if (debug.showDomTexts) {
+        debug.log(' === AllDomTexts ===', true);
+        this.allDomTexts.forEach( dt => {
+          debug.domText(dt);
+        });
+      }
 
-    debug.log(' === DOMCache Tree ===', true);
-    debug.domElement(this.startingDomElement);
-    this.startingDomElement.showDomElementTree(' ');
+      if (debug.showTree) {
+        debug.log(' === DOMCache Tree ===', true);
+        debug.domElement(this.startingDomElement);
+        this.startingDomElement.showDomElementTree(' ');
+      }
+    }
   }
 }

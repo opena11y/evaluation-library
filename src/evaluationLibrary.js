@@ -11,6 +11,8 @@ import DebugLogging      from './debug.js';
 
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false)
+debug.flag = true;
+debug.json = false;
 
 /**
  * @class EvaluateLibrary
@@ -41,8 +43,20 @@ export default class EvaluationLibrary {
   evaluate (startingDoc, title='', url='') {
     let domCache = new DOMCache(startingDoc);
     let evaluationResult = new EvaluationResult(allRules, domCache, title, url);
+
+    // Debug features
     if (debug.flag) {
-      debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON()}`);
+      domCache.showDomElementTree();
+      domCache.controlInfo.showControlInfo();
+      domCache.iframeInfo.showIFrameInfo();
+      domCache.idInfo.showIdInfo();
+      domCache.imageInfo.showImageInfo();
+      domCache.linkInfo.showLinkInfo();
+      domCache.listInfo.showListInfo();
+      domCache.tableInfo.showTableInfo();
+      domCache.structureInfo.showStructureInfo();
+
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON()}`);
     }
     return evaluationResult;
   }
