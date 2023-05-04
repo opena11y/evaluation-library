@@ -15759,12 +15759,8 @@ const tableRules$1 = {
         NOT_APPLICABLE:   'No data tables found on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'Accessible name defined using the @caption@ element: \'%1\'.',
-        ELEMENT_PASS_2:   'Accessible name defined using the @summary@ attribute with content: \'%1\'.',
-        ELEMENT_PASS_3:   'Accessible name defined using the @aria-label@ attribute with content: \'%1\'.',
-        ELEMENT_PASS_4:   'Accessible name defined using the @aria-labelledby@ attribute with content: \'%1\'.',
-        ELEMENT_PASS_5:   'Accessible name defined using the @title@ attribute with content: \'%1\'.',
-        ELEMENT_FAIL_1:   'Add accessible name using either the @caption@ element; or one of the following @table@ element attributes: @summary@, @title@ @aria-label@ or @aria-labelledby@ attribute.',
+        ELEMENT_PASS_1:   'The @%1@ element\'s accessible name defined using: @%2@.',
+        ELEMENT_FAIL_1:   'Add accessible name using either the @caption@ element; or one of the following @table@ element attributes: @aria-label@ or @aria-labelledby@.',
         ELEMENT_HIDDEN_1: 'The @table@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -15773,7 +15769,6 @@ const tableRules$1 = {
       ],
       TECHNIQUES: [
         'Use @caption@ element to provide an accessible name for a data table.',
-        'Use @summary@ attribute to provide an accessible name for a data table.',
         'Use @title@ attribute to provide an accessible name for a data table.',
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
@@ -15785,12 +15780,12 @@ const tableRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+          title: 'HTML Specification: 4.9.1 The table element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-table-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: summary attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+          title: 'HTML Specification: 4.9.1 The caption element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-caption-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -15819,10 +15814,6 @@ const tableRules$1 = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
-        },
-        { type:  REFERENCES.EXAMPLE,
-          title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-          url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
         }
       ]
   },
@@ -15839,12 +15830,11 @@ const tableRules$1 = {
         NOT_APPLICABLE: 'No data tables on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @table@ element has an accessible description through the @summary@ attribute.',
-        ELEMENT_PASS_2:   'The @table@ element has an accessible description through the @aria-describedby@ reference.',
-        ELEMENT_PASS_3:   'The @table@ element has an accessible description through the @title@ attribute.',
-        ELEMENT_MC_1:     'This is a simple table, consider adding a @summary@ or @aria-describedby@ attribute to provide a accessible description (e.g. a summary) of the content of the table.',
-        ELEMENT_MC_2:     'This is a complex table, it is highly recommended to add a @summary@ or @aria-describedby@ attribute to provide a accessible description (e.g. a summary) of the content of the table.',
-        ELEMENT_HIDDEN_1: 'The @table@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   'The @%1@ element has an accessible description through the @aria-describedby@ reference.',
+        ELEMENT_PASS_2:   'The @%1@ element has an accessible description through the @title@ attribute.',
+        ELEMENT_MC_1:     'The @%1@ element is a simple table, consider adding a @summary@ or @aria-describedby@ attribute to reference a accessible description (e.g. a summary) of the content of the table.',
+        ELEMENT_MC_2:     'The @%1@ element a complex table, it is highly recommended to add a @aria-describedby@ attribute to reference a accessible description (e.g. a summary) of the content of the table.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'Complex data tables are defined as tables with row and/or column spans, or more than one header cell (e.g. @th@ element) in any row or column of the table.',
@@ -15852,17 +15842,16 @@ const tableRules$1 = {
         'An accessible description that includes a synopsis of the authors intended conclusions of viewing the content of a table make it easier for people using assistive technologies to understand importance of why the author provided the data table.'
         ],
       TECHNIQUES: [
-        'Use the  @summary@ attribute to provide a accessible description of the information in a data table.',
-        'Use the  @title@ attribute to provide a accessible description of the information in a data table.',
-        'Use the  @aria-describedby@ attribute to provide a reference to an accessible description of the information in a data table.'
+        'Use the  @aria-describedby@ attribute to provide a reference to an accessible description of the information in a data table.',
+        'Use the  @title@ attribute to provide a accessible description of the information in a data table.'
       ],
       MANUAL_CHECKS: [
         'Verify the content of the accessible description accurately summarizes the organization, numerical information in the table or authors intended conclusions from viewing the table.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: summary attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+          title: 'HTML Specification: 4.9.1 The table element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-table-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
@@ -15875,10 +15864,6 @@ const tableRules$1 = {
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
           url:   'https://www.w3.org/WAI/tutorials/tables/'
-        },
-        { type:  REFERENCES.EXAMPLE,
-          title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-          url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
         }
       ]
   },
@@ -17648,11 +17633,11 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 
 /* Constants */
 const debug$m = new DebugLogging('tableInfo', false);
-debug$m.flag = true;
+debug$m.flag = false;
 debug$m.rows = true;
 debug$m.cells = true;
 debug$m.tableTree = true;
-debug$m.headerCalc = true;
+debug$m.headerCalc = false;
 
 /**
  * @class TableElement
@@ -21194,7 +21179,7 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 
 /* Constants */
 const debug$d = new DebugLogging('Table Rules', false);
-debug$d.flag = true;
+debug$d.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21219,27 +21204,19 @@ const tableRules = [
   target_resources    : ['td'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 1 Rule`);
-    debug$d.flag && debug$d.log(` TABLE_TYPE: ${TABLE_TYPE.UNKNOWN}`);
-
     dom_cache.tableInfo.allTableElements.forEach(te => {
       te.cells.forEach( cell => {
-        debug$d.log(`[cell]: ${cell} ${cell.isHeader}`);
         const de = cell.domElement;
-        if (cell.isHeader) {
-          if (!de.accName.name) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+        if (de.visibility.isVisibleToAT) {
+          if (cell.isHeader) {
+            if (!de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
           }
-        }
-        else {
-          debug$d.log(`[visibility]: ${de.visibility.isVisibleToAT}`);
-          if (de.visibility.isVisibleToAT) {
-            debug$d.log(`[accName]: ${de.accName.name}`);
+          else {
             if (de.accName.name) {
               const headerCount = cell.headers.length;
               const headerStr = cell.headers.join (' | ');
-              debug$d.log(`[headerCount]: ${headerCount}`);
-              debug$d.log(`[  headerStr]: ${headerStr}`);
               if (headerCount) {
                 if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
                   if (headerCount === 1) {
@@ -21266,9 +21243,9 @@ const tableRules = [
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
             }
           }
-          else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
       });
     });
@@ -21281,7 +21258,7 @@ const tableRules = [
  * @desc Data table %s have an accessible name
  */
 { rule_id             : 'TABLE_2',
-  last_updated        : '2023-04-21',
+  last_updated        : '2023-05-03',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.MORE,
@@ -21290,89 +21267,23 @@ const tableRules = [
   wcag_related_ids    : ['1.3.1'],
   target_resources    : ['table', 'caption'],
   validate            : function (dom_cache, rule_result) {
-
-    debug$d.flag && debug$d.log(`TABLE 2 Rule ${dom_cache} ${rule_result}`);
-
-/*
-
-    var TEST_RESULT = TEST_RESULT;
-    var SOURCE      = SOURCE;
-    var VISIBILITY  = VISIBILITY;
-
-    var table_elements     = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-    var data_tables = [];
-    var visible_data_tables = 0;
-
-    var i, te, de, cs;
-
-//     logger.debug("[Table Rule 2] Number of tables: " + table_elements_len);
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (i = 0; i < table_elements_len; i++) {
-        te = table_elements[i];
-        de = te.dom_element;
-        cs = de.computed_style;
-
-        if ((te.table_role === TABLE_ROLE.DATA) ||
-            (te.table_role === TABLE_ROLE.COMPLEX)) {
-          data_tables.push(te);
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) visible_data_tables += 1;
-        }
-      } // end loop
-
-      if (visible_data_tables > 0) {
-
-        for (i = 0; i < data_tables.length; i++) {
-          te = table_elements[i];
-          de = te.dom_element;
-          cs = de.computed_style;
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-            if (te.accessible_name.length > 0) {
-
-               switch (te.accessible_name_source) {
-
-               case SOURCE.TABLE_CAPTION:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', [te.accessible_name]);
-                  break;
-
-               case SOURCE.TABLE_SUMMARY:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', [te.aaccessible_name]);
-                  break;
-
-               case SOURCE.ARIA_LABEL:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_3', [te.accessible_name]);
-                  break;
-
-               case SOURCE.ARIA_LABELLEDBY:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_4', [te.accessible_name]);
-                  break;
-
-               case SOURCE.TITLE_ATTRIBUTE:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_5', [te.accessible_name]);
-                  break;
-               default:
-
-                  break;
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', []);
-            }
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if ((te.tableType === TABLE_TYPE.DATA) ||
+            (te.tableType === TABLE_TYPE.COMPLEX)) {
+          if (de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.source]);
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
           }
-        } // end loop
+        }
       }
-    }
-    */
-
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
   } // end validation function
  },
 
@@ -21383,7 +21294,7 @@ const tableRules = [
  */
 
 { rule_id             : 'TABLE_3',
-  last_updated        : '2023-04-21',
+  last_updated        : '2023-05-03',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.MORE,
@@ -21393,7 +21304,32 @@ const tableRules = [
   target_resources    : ['table'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 3 Rule ${dom_cache} ${rule_result}`);
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if ((te.tableType === TABLE_TYPE.DATA) || (te.tableType === TABLE_TYPE.COMPLEX)) {
+          if (de.accDescription.name) {
+            if (de.accDescription.source === 'aria-describedby') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+            }
+          }
+          else {
+            if (te.tableType === TABLE_TYPE.DATA){
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
+          }
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
 
 /*
 

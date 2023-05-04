@@ -10,11 +10,17 @@ import {
   TEST_RESULT
 } from '../constants.js';
 
+/*
+import {
+  getCommonMessage
+} from '../_locale/locale.js';
+*/
+
 import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('Table Rules', false);
-debug.flag = true;
+debug.flag = false;
 
 /*
  * OpenA11y Rules
@@ -39,27 +45,19 @@ export const tableRules = [
   target_resources    : ['td'],
   validate          : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`TABLE 1 Rule`);
-    debug.flag && debug.log(` TABLE_TYPE: ${TABLE_TYPE.UNKNOWN}`);
-
     dom_cache.tableInfo.allTableElements.forEach(te => {
       te.cells.forEach( cell => {
-        debug.log(`[cell]: ${cell} ${cell.isHeader}`);
         const de = cell.domElement;
-        if (cell.isHeader) {
-          if (!de.accName.name) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+        if (de.visibility.isVisibleToAT) {
+          if (cell.isHeader) {
+            if (!de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
           }
-        }
-        else {
-          debug.log(`[visibility]: ${de.visibility.isVisibleToAT}`)
-          if (de.visibility.isVisibleToAT) {
-            debug.log(`[accName]: ${de.accName.name}`)
+          else {
             if (de.accName.name) {
               const headerCount = cell.headers.length;
               const headerStr = cell.headers.join (' | ');
-              debug.log(`[headerCount]: ${headerCount}`)
-              debug.log(`[  headerStr]: ${headerStr}`)
               if (headerCount) {
                 if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
                   if (headerCount === 1) {
@@ -86,9 +84,9 @@ export const tableRules = [
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
             }
           }
-          else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
       });
     });
@@ -101,7 +99,7 @@ export const tableRules = [
  * @desc Data table %s have an accessible name
  */
 { rule_id             : 'TABLE_2',
-  last_updated        : '2023-04-21',
+  last_updated        : '2023-05-03',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.MORE,
@@ -110,89 +108,23 @@ export const tableRules = [
   wcag_related_ids    : ['1.3.1'],
   target_resources    : ['table', 'caption'],
   validate            : function (dom_cache, rule_result) {
-
-    debug.flag && debug.log(`TABLE 2 Rule ${dom_cache} ${rule_result}`);
-
-/*
-
-    var TEST_RESULT = TEST_RESULT;
-    var SOURCE      = SOURCE;
-    var VISIBILITY  = VISIBILITY;
-
-    var table_elements     = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-    var data_tables = [];
-    var visible_data_tables = 0;
-
-    var i, te, de, cs;
-
-//     logger.debug("[Table Rule 2] Number of tables: " + table_elements_len);
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (i = 0; i < table_elements_len; i++) {
-        te = table_elements[i];
-        de = te.dom_element;
-        cs = de.computed_style;
-
-        if ((te.table_role === TABLE_ROLE.DATA) ||
-            (te.table_role === TABLE_ROLE.COMPLEX)) {
-          data_tables.push(te);
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) visible_data_tables += 1;
-        }
-      } // end loop
-
-      if (visible_data_tables > 0) {
-
-        for (i = 0; i < data_tables.length; i++) {
-          te = table_elements[i];
-          de = te.dom_element;
-          cs = de.computed_style;
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-            if (te.accessible_name.length > 0) {
-
-               switch (te.accessible_name_source) {
-
-               case SOURCE.TABLE_CAPTION:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', [te.accessible_name]);
-                  break;
-
-               case SOURCE.TABLE_SUMMARY:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', [te.aaccessible_name]);
-                  break;
-
-               case SOURCE.ARIA_LABEL:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_3', [te.accessible_name]);
-                  break;
-
-               case SOURCE.ARIA_LABELLEDBY:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_4', [te.accessible_name]);
-                  break;
-
-               case SOURCE.TITLE_ATTRIBUTE:
-                  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_5', [te.accessible_name]);
-                  break;
-               default:
-
-                  break;
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', []);
-            }
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if ((te.tableType === TABLE_TYPE.DATA) ||
+            (te.tableType === TABLE_TYPE.COMPLEX)) {
+          if (de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.source]);
           }
           else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
           }
-        } // end loop
+        }
       }
-    }
-    */
-
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
   } // end validation function
  },
 
@@ -203,7 +135,7 @@ export const tableRules = [
  */
 
 { rule_id             : 'TABLE_3',
-  last_updated        : '2023-04-21',
+  last_updated        : '2023-05-03',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.MORE,
@@ -213,7 +145,32 @@ export const tableRules = [
   target_resources    : ['table'],
   validate          : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`TABLE 3 Rule ${dom_cache} ${rule_result}`);
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if ((te.tableType === TABLE_TYPE.DATA) || (te.tableType === TABLE_TYPE.COMPLEX)) {
+          if (de.accDescription.name) {
+            if (de.accDescription.source === 'aria-describedby') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+            }
+          }
+          else {
+            if (te.tableType === TABLE_TYPE.DATA){
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
+          }
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
 
 /*
 
