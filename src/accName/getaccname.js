@@ -292,8 +292,10 @@ function nameFromNativeSemantics (doc, element) {
       break;
 
     case 'button':
+    case 'caption':
     case 'dd':
     case 'dt':
+    case 'figcaption':
     case 'label':
     case 'li':
     case 'td':

@@ -9843,8 +9843,10 @@ function nameFromNativeSemantics (doc, element) {
       break;
 
     case 'button':
+    case 'caption':
     case 'dd':
     case 'dt':
+    case 'figcaption':
     case 'label':
     case 'li':
     case 'td':
@@ -15676,47 +15678,53 @@ const landmarkRules$1 = {
 const tableRules$1 = {
   TABLE_1: {
       ID:                    'Table 1',
-      DEFINITION:            'Data cells in data tables must have row and/or column header cells.',
+      DEFINITION:            'Data cells in data tables must have row and/or column header cells or use the @headers@ attribute.',
       SUMMARY:               'Data cells must have row/column headers',
       TARGET_RESOURCES_DESC: '@td@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:         'Add @th@ elements to the first row or column of the data table.',
-        FAIL_P:         'Add @th@ elements to the first row or column of the data table.',
+        FAIL_S:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
+        FAIL_P:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
         MANUAL_CHECK_S: 'The @td@ element does not have any text content. Verify that this cell is being used for formatting and does not need row or column headers.',
         MANUAL_CHECK_P: '%N_F @td@ elements do not have any text content. Verify that these cells are being used for formatting and do not need row or column headers.',
         HIDDEN_S:       'One @td@ element that is hidden was not evaluated.',
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables and/or @td@ cells on the page.'
       },
-      NODE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @td@ element has row and/or column headers.',
-        ELEMENT_FAIL_1:   'Add text content to the row and/or column header cells.',
-        ELEMENT_FAIL_2:   'Add header cells using row and/or column headers.',
-        ELEMENT_MC_1:     'The @td@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need row or column headers.',
-        ELEMENT_HIDDEN_1: 'The @td@ element was not evaluated because it is hidden from assistive technologies.'
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'The @%1@ element has one header defined using row and/or column headers cells, header content: "%2".',
+        ELEMENT_PASS_2:   'The @%1@ element has %2 headers defined using row and/or column headers cells, header content: "%3".',
+        ELEMENT_PASS_3:   'The @%1@ element has one header defined using the @header@ attribute, header content: "%2".',
+        ELEMENT_PASS_4:   'The @%1@ element has %2 headers defined using the @header@ attribute, header content: "%3".',
+        ELEMENT_FAIL_1:   'Add table cells to be used as header cells for the @%1@ element using either row/column headers or the @headers@ attribute.',
+        ELEMENT_MC_1:     'The @%1@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need headers.',
+        ELEMENT_MC_2:     'The @%1@ element does not have any text content.  Verify it is not being used for identifying the context of a data cell.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'When @th@ (table header) elements are used as the first cell in each row and/or column of a data table, assistive technologies can infer the header-to-data-cell relationships for those rows and columns, making the header information programmatically available to screen reader users from any data cell.',
-        'By providing a representation that is functionally equivalent to the visual relationships of data cells to row and column headers that sighted users rely upon, screen reader users are able to maintain orientation and comprehension as they traverse the data table.',
-        'When solitary row and/or column headers are not sufficient to describe a data cell, use the @headers@ attribute to identify the appropriate header cells.'
+        'For screen reader users to understand the the context or meaning of the content in a data cell, the headings for the cell must be identified',
+        'When header cells are properly identified, screen reader users can distinguish between header and data table cells.'
       ],
       TECHNIQUES: [
         'Use a @th@ element as the first cell in each row and/or column to define row and column headers in simple data tables.',
-        'Use @th@ element for row and column header cells.',
         'While not recommended, it is also valid to use @td@ element with a @scope@ attribute as a header cell.',
-        'Avoid using empty rows and columns for formatting data tables. Use CSS instead.'
+        'Avoid using empty rows and columns for formatting data tables. Use CSS instead.',
+        'When row and/or column headers are not sufficient to describe a data cell, use the @header@ attribute to identify the appropriate header cells.  For example, when a data cell spans more than one column or row the column and row headers.'
       ],
       MANUAL_CHECKS: [
         'Verify that empty @td@ and @th@ elements do not need table headers.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: 4.9.1 The table element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-table-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: scope attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-scope'
+          title: 'HTML Specification: headers attribute',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#attr-tdth-headers'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: scope attribute',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#attr-th-scope'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H51: Using table markup to present tabular information',
@@ -15727,8 +15735,12 @@ const tableRules$1 = {
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
         },
         { type:  REFERENCES.EXAMPLE,
-          title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-          url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
+          title: 'MDN: The Table element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table'
+        },
+        { type:  REFERENCES.EXAMPLE,
+          title: 'IBM Accessibility Requirements: 502.3.3 Row, Column and Headers',
+          url:   'https://www.ibm.com/able/requirements/requirements/#502_3_3'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -15748,7 +15760,7 @@ const tableRules$1 = {
         HIDDEN_P:         '%N_H data tables that are hidden were not evaluated.',
         NOT_APPLICABLE:   'No data tables found on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'Accessible name defined using the @caption@ element: \'%1\'.',
         ELEMENT_PASS_2:   'Accessible name defined using the @summary@ attribute with content: \'%1\'.',
         ELEMENT_PASS_3:   'Accessible name defined using the @aria-label@ attribute with content: \'%1\'.',
@@ -15828,7 +15840,7 @@ const tableRules$1 = {
         HIDDEN_P:       'The %N_H data @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @table@ element has an accessible description through the @summary@ attribute.',
         ELEMENT_PASS_2:   'The @table@ element has an accessible description through the @aria-describedby@ reference.',
         ELEMENT_PASS_3:   'The @table@ element has an accessible description through the @title@ attribute.',
@@ -15884,7 +15896,7 @@ const tableRules$1 = {
         HIDDEN_P:       '%N_H @table@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'Multiple data tables were not found on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The accessible name for the data table is unique: \'%1\'.',
         ELEMENT_FAIL_1:   'Change the accessible name for the data table to be unique on the page: \'%1\'.',
         ELEMENT_FAIL_2:   'Add a accessible name to the data table.',
@@ -15962,7 +15974,7 @@ const tableRules$1 = {
         HIDDEN_P: '%N_H @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No table markup found on this page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @table@ is considered a data table, since it has header cells or an accessible name.',
         ELEMENT_PASS_2:   'The @table@ is considered a layout table, since it has @role="presentation"@.',
         ELEMENT_PASS_3:   'The @table@ is considered a complex data table, since it has colums/row spans or multiple headers in a row or column.',
@@ -16035,7 +16047,7 @@ const tableRules$1 = {
         HIDDEN_P: '%N_H @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No td[scope]@ elements on the page'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @th@ element is used for header cell',
         ELEMENT_FAIL_1:   'Change the @td[scope]@ element to a @th@ element',
         ELEMENT_HIDDEN_1: 'The @th@ element was not evaluated because it is hidden from assistive technologies.'
@@ -16088,7 +16100,7 @@ const tableRules$1 = {
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No complex data tables on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The header comes from the @headers@ attribute with the following ids: \'%1\'.',
         ELEMENT_FAIL_1:   'Add header cells using the @headers@ attribute, since this table is a complex data table.',
         ELEMENT_FAIL_2:   'Add text content to the header cells with the following ids: \'%1\'.',
@@ -16136,7 +16148,7 @@ const tableRules$1 = {
         HIDDEN_P:       '%N_H @table@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables with both an accessible name and description on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'Accessible name and description are different.',
         ELEMENT_FAIL_1:   'Change the accessible name and/or accessible description, make sure the accessible name identifies the content of the table and the description provides a summary of the content.',
         ELEMENT_MC_1:     'Verify the data table with an accessible name that is longer than the accessible description is actually providing a useful summary of the contents of the data table.',
@@ -17659,6 +17671,7 @@ class TableElement {
     this.parentTableElement = parentTableElement;
 
     this.tableType = TABLE_TYPE.UNKNOWN;
+    this.hasCaption = false;
 
     this.children = [];
 
@@ -17666,37 +17679,31 @@ class TableElement {
     this.row = null;
     this.rowCount = 0;
 
-    this.theadCount = 0;
-    this.tbodyCount = 0;
+    this.cells = [];
 
+    this.rowGroupCount = 0;
     this.cellCount = 0;
-    this.cellHeaderCount = 0;
+    this.headerCellCount = 0;
 
     this.spannedCells = 0;
 
     this.currentParent = this;
   }
 
-  addCaption (domElement) {
-    this.captionDomElement = domElement;
+  addCaption (rowGroup, domElement) {
+    this.hasCaption = true;
+    const caption = new TableCaption(domElement);
+    rowGroup.children.push(caption);
   }
 
-  addTHead (rowGroup, domElement) {
-    this.theadCount += 1;
-    const newRowGroup = new TableRowGroup(domElement);
-    rowGroup.children.push(newRowGroup);
-    return newRowGroup;
-  }
-
-  addTBody (rowGroup, domElement) {
-    this.tbodyCount += 1;
+  addRowGroup (rowGroup, domElement) {
+    this.rowGroupCount += 1;
     const newRowGroup = new TableRowGroup(domElement);
     rowGroup.children.push(newRowGroup);
     return newRowGroup;
   }
 
   addRow (rowGroup, domElement) {
-    debug$m.log(`[addRow][rowGroup]: ${rowGroup}`);
     this.rowCount += 1;
     this.row = this.getRow(this.rowCount, domElement);
     rowGroup.children.push(this.row);
@@ -17719,13 +17726,15 @@ class TableElement {
     rowSpan = isNaN(rowSpan) ? 1 : rowSpan;
     colSpan = isNaN(colSpan) ? 1 : colSpan;
     let row = this.getRow(this.rowCount);
+
     const column = row.getNextEmptyColumn();
     const cell = new TableCell(domElement, row.rowNumber, column, rowSpan, colSpan);
+    this.cells.push(cell);
     row.setCell(column, cell);
 
     this.cellCount += 1;
     if (cell.isHeader) {
-      this.cellHeaderCount += 1;
+      this.headerCellCount += 1;
     }
 
     if (colSpan > 1) {
@@ -17757,10 +17766,11 @@ class TableElement {
   }
 
   getCell(rowNumber, columnNumber) {
-    const row = this.getRow(rowNumber);
-    for (let i = 0; i < row.cells.length; i += 1) {
-      const cell = row.cells[i];
-      if ((columnNumber >= cell.startColumn ) &&
+    for (let i = 0; i < this.cells.length; i += 1) {
+      const cell = this.cells[i];
+      if ((rowNumber >= cell.startRow) &&
+          (rowNumber <= cell.endRow) &&
+          (columnNumber >= cell.startColumn ) &&
           (columnNumber <= cell.endColumn )) {
         return  cell;
       }
@@ -17794,7 +17804,9 @@ class TableElement {
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
                 debug$m.headerCalc && debug$m.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
-                if (hc && hc.isHeader && (!hc.hasScope || hc.isScopeColumn)) {
+                if (hc && hc.isHeader &&
+                    (!hc.hasScope || hc.isScopeColumn) &&
+                    hc.domElement.accName.name) {
                   cell.headers.push(hc.domElement.accName.name);
                 }
               }
@@ -17803,7 +17815,9 @@ class TableElement {
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
                 debug$m.headerCalc && debug$m.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
-                if (hc && hc.isHeader && (!hc.hasScope || hc.isScopeRow)) {
+                if (hc && hc.isHeader &&
+                    (!hc.hasScope || hc.isScopeRow) &&
+                    hc.domElement.accName.name) {
                   cell.headers.push(hc.domElement.accName.name);
                 }
               }
@@ -17823,6 +17837,7 @@ class TableElement {
     const role = this.domElement.role;
 
     if ((role === 'none') ||
+        (role === 'presentation') ||
         (this.rows.length === 1)) {
       return TABLE_TYPE.LAYOUT;
     }
@@ -17842,13 +17857,15 @@ class TableElement {
     return `[TableElement][type=${getCommonMessage('tableType', this.tableType)}][role=${this.domElement.role}]: ${this.children.length} children ${this.rows.length} rows`;
   }
 
-  debugRowGroup (prefix, rowGroup) {
-    debug$m.log(`${prefix}${rowGroup}`);
-    rowGroup.children.forEach( child => {
-      if (child.isGroup) {
-        this.debugRowGroup(prefix + '  ', child);
-      }
-    });
+  debugRowGroup (prefix, item) {
+    debug$m.log(`${prefix}${item}`);
+    if (item.isGroup) {
+      item.children.forEach( child => {
+        if (child) {
+          this.debugRowGroup(prefix + '  ', child);
+        }
+      });
+    }
   }
 
   debug () {
@@ -17856,15 +17873,42 @@ class TableElement {
       debug$m.log(`${this}`);
       if (debug$m.tableTree) {
         this.children.forEach( child => {
-          if (child.isGroup) {
-            this.debugRowGroup('  ', child);
-          }
+          this.debugRowGroup('  ', child);
         });
       }
+      debug$m.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
     }
+  }
+}
+
+/**
+ * @class TableCaption
+ *
+ * @desc Identifies a DOM element as caption (e.g. CAPTION) in a table
+ *
+ * @param  {Object}  domElement - Structural Information
+ */
+
+class TableCaption {
+  constructor (domElement) {
+    if (domElement) {
+      this.domElement   = domElement;
+    }
+  }
+
+  get isGroup () {
+    return false;
+  }
+
+  get isRow () {
+    return false;
+  }
+
+  toString() {
+    return `[TableCaption]: ${this.domElement.accName.name}`;
   }
 }
 
@@ -17881,7 +17925,6 @@ class TableRowGroup {
     if (domElement) {
       this.domElement   = domElement;
     }
-
     this.children = [];
   }
 
@@ -18044,33 +18087,43 @@ class TableInfo {
     let te = tableElement;
     let rg = rowGroup;
 
-    switch (domElement.role) {
+    switch (domElement.tagName) {
 
       case 'table':
         te = new TableElement(te, domElement);
-        rg = te;
         this.allTableElements.push(te);
+        rg = te;
         break;
 
       case 'caption':
-        te.addCaption(domElement);
+        if (te) {
+          te.addCaption(rg, domElement);
+        }
         break;
 
       case 'thead':
-        rg = te.addTHead(rg, domElement);
+        if (te) {
+          rg = te.addRowGroup(rg, domElement);
+        }
         break;
 
       case 'tbody':
-        rg= te.addTBody(rg, domElement);
+        if (te) {
+          rg= te.addRowGroup(rg, domElement);
+        }
         break;
 
       case 'tr':
-        te.addRow(rowGroup, domElement);
+        if (te) {
+          te.addRow(rg, domElement);
+        }
         break;
 
       case 'th':
       case 'td':
-        te.addCell(domElement);
+        if (te) {
+          te.addCell(domElement);
+        }
         break;
 
       default:
@@ -18081,23 +18134,29 @@ class TableInfo {
 
           case 'table':
             te = new TableElement(te, domElement);
-            rowGroup = te;
             this.allTableElements.push(te);
+            rg = te;
             break;
 
           case 'row':
-            te.addRow(rowGroup, domElement);
+            if (te) {
+              te.addRow(rg, domElement);
+            }
             break;
 
           case 'rowgroup':
-            rg = te.addTHead(rg, domElement);
+            if (te) {
+              rg = te.addRowGroup(rg, domElement);
+            }
             break;
 
           case 'rowheader':
           case 'colheader':
           case 'cell':
           case 'gridcell':
-            te.addCell(domElement);
+            if (te) {
+              te.addCell(domElement);
+            }
             break;
 
         }
@@ -21137,7 +21196,7 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 
 /* Constants */
 const debug$d = new DebugLogging('Table Rules', false);
-debug$d.flag = false;
+debug$d.flag = true;
 
 /*
  * OpenA11y Rules
@@ -21162,91 +21221,59 @@ const tableRules = [
   target_resources    : ['td'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 1 Rule ${dom_cache} ${rule_result}`);
-    debug$d.flag && debug$d.log(`TEST_RESULT: ${TEST_RESULT}`);
+    debug$d.flag && debug$d.log(`TABLE 1 Rule`);
     debug$d.flag && debug$d.log(` TABLE_TYPE: ${TABLE_TYPE.UNKNOWN}`);
 
-/*
-
-    function allReadyDone(span_cell) {
-
-      var span_cells_len = span_cells.length;
-
-      for (var i = 0; i < span_cells_len; i++) {
-        if (span_cell === span_cells[i]) return true;
-      }
-
-      span_cells.push(span_cell);
-      return false;
-    }
-
-    var TEST_RESULT   = TEST_RESULT;
-    var HEADER_SOURCE = HEADER_SOURCE;
-    var VISIBILITY    = VISIBILITY;
-    var TABLE_ROLE    = TABLE_ROLE;
-
-    var span_cells = [];
-
-    var table_elements   = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-//     logger.debug("[Table Rule 1] Table Elements on page: " + table_elements_len);
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (var i=0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-//         logger.debug("[Table Rule 1] Table Element: " + te + "   is data table: " + te.table_role);
-
-        if (te.table_role === TABLE_ROLE.DATA) {
-
-          var max_row    = te.max_row;
-          var max_column = te.max_column;
-          var cells      = te.cells;
-
-          for (var r = 0; r < max_row; r++) {
-            for (var c = 0; c < max_column; c++) {
-
-              var cell = cells[r][c];
-
-              if (cell &&
-                  (cell.table_type === TABLE.TD_ELEMENT)) {
-
-                if (is_visible_to_at == VISIBILITY.VISIBLE) {
-
-                  if(cell.has_spans && allReadyDone(cell)) continue;
-
-                  if (!cell.has_content) {
-                    rule_result.addResult(TEST_RESULT.MANUAL_CHECK, cell, 'ELEMENT_MC_1', []);
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      te.cells.forEach( cell => {
+        debug$d.log(`[cell]: ${cell} ${cell.isHeader}`);
+        const de = cell.domElement;
+        if (cell.isHeader) {
+          if (!de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+        }
+        else {
+          debug$d.log(`[visibility]: ${de.visibility.isVisibleToAT}`);
+          if (de.visibility.isVisibleToAT) {
+            debug$d.log(`[accName]: ${de.accName.name}`);
+            if (de.accName.name) {
+              const headerCount = cell.headers.length;
+              const headerStr = cell.headers.join (' | ');
+              debug$d.log(`[headerCount]: ${headerCount}`);
+              debug$d.log(`[  headerStr]: ${headerStr}`);
+              if (headerCount) {
+                if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
+                  if (headerCount === 1) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, headerStr]);
                   }
                   else {
-                    if (cell.header_content.length > 0) {
-                      rule_result.addResult(TEST_RESULT.PASS, cell, 'ELEMENT_PASS_1', []);
-                    }
-                    else {
-                      if (cell.header_source === HEADER_SOURCE.ROW_OR_COLUMN_HEADERS) {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_1', []);
-                      }
-                      else {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_2', []);
-                      }
-                    }
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName, headerCount, headerStr]);
                   }
                 }
                 else {
-                 rule_result.addResult(TEST_RESULT.HIDDEN, cell, 'ELEMENT_HIDDEN_1', []);
+                  if (headerCount === 1) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName, headerStr]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.elemName, headerCount, headerStr]);
+                  }
                 }
               }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
             }
           }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
-      } // end loop
-    }
-    */
-
+      });
+    });
   } // end validation function
  },
 

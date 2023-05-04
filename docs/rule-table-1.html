@@ -66,7 +66,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Data cells in data tables must have row and/or column header cells.</td>
+  <td>Data cells in data tables must have row and/or column header cells or use the <code>headers</code> attribute.</td>
 </tr>
 
                   
@@ -75,11 +75,9 @@
   <td>
     <ul>
       
-      <li>When <code>th</code> (table header) elements are used as the first cell in each row and/or column of a data table, assistive technologies can infer the header-to-data-cell relationships for those rows and columns, making the header information programmatically available to screen reader users from any data cell.</li>
+      <li>For screen reader users to understand the the context or meaning of the content in a data cell, the headings for the cell must be identified</li>
       
-      <li>By providing a representation that is functionally equivalent to the visual relationships of data cells to row and column headers that sighted users rely upon, screen reader users are able to maintain orientation and comprehension as they traverse the data table.</li>
-      
-      <li>When solitary row and/or column headers are not sufficient to describe a data cell, use the <code>headers</code> attribute to identify the appropriate header cells.</li>
+      <li>When header cells are properly identified, screen reader users can distinguish between header and data table cells.</li>
       
     </ul>
   </td>
@@ -135,11 +133,11 @@
       
       <li>Use a <code>th</code> element as the first cell in each row and/or column to define row and column headers in simple data tables.</li>
       
-      <li>Use <code>th</code> element for row and column header cells.</li>
-      
       <li>While not recommended, it is also valid to use <code>td</code> element with a <code>scope</code> attribute as a header cell.</li>
       
       <li>Avoid using empty rows and columns for formatting data tables. Use CSS instead.</li>
+      
+      <li>When row and/or column headers are not sufficient to describe a data cell, use the <code>header</code> attribute to identify the appropriate header cells.  For example, when a data cell spans more than one column or row the column and row headers.</li>
       
     </ul>
   </td>
@@ -151,15 +149,19 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/html4/struct/tables.html#edef-TD">HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements</a></li>
+      <li><a href="https://html.spec.whatwg.org/multipage/tables.html#the-table-element">HTML Specification: 4.9.1 The table element</a></li>
       
-      <li><a href="https://www.w3.org/TR/html4/struct/tables.html#adef-scope">HTML 4.01 Specification: scope attribute</a></li>
+      <li><a href="https://html.spec.whatwg.org/multipage/tables.html#attr-tdth-headers">HTML Specification: headers attribute</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/tables.html#attr-th-scope">HTML Specification: scope attribute</a></li>
       
       <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H51">H51: Using table markup to present tabular information</a></li>
       
       <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H63">H63: Using the scope attribute to associate header cells and data cells in data tables</a></li>
       
-      <li><a href="https://www-03.ibm.com/able/guidelines/web/webtableheaders.html">IBM Web checklist Checkpoint 1.3e: Tables</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table">MDN: The Table element</a></li>
+      
+      <li><a href="https://www.ibm.com/able/requirements/requirements/#502_3_3">IBM Accessibility Requirements: 502.3.3 Row, Column and Headers</a></li>
       
       <li><a href="https://www.w3.org/WAI/tutorials/tables/">W3C Web Accessibility Tutorials: Tables</a></li>
       

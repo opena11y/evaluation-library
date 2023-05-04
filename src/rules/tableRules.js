@@ -2,6 +2,7 @@
 
 /* Imports */
 import {
+  HEADER_SOURCE,
   RULESET,
   RULE_SCOPE,
   RULE_CATEGORIES,
@@ -13,7 +14,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('Table Rules', false);
-debug.flag = false;
+debug.flag = true;
 
 /*
  * OpenA11y Rules
@@ -38,91 +39,59 @@ export const tableRules = [
   target_resources    : ['td'],
   validate          : function (dom_cache, rule_result) {
 
-    debug.flag && debug.log(`TABLE 1 Rule ${dom_cache} ${rule_result}`);
-    debug.flag && debug.log(`TEST_RESULT: ${TEST_RESULT}`);
+    debug.flag && debug.log(`TABLE 1 Rule`);
     debug.flag && debug.log(` TABLE_TYPE: ${TABLE_TYPE.UNKNOWN}`);
 
-/*
-
-    function allReadyDone(span_cell) {
-
-      var span_cells_len = span_cells.length;
-
-      for (var i = 0; i < span_cells_len; i++) {
-        if (span_cell === span_cells[i]) return true;
-      }
-
-      span_cells.push(span_cell);
-      return false;
-    }
-
-    var TEST_RESULT   = TEST_RESULT;
-    var HEADER_SOURCE = HEADER_SOURCE;
-    var VISIBILITY    = VISIBILITY;
-    var TABLE_ROLE    = TABLE_ROLE;
-
-    var span_cells = [];
-
-    var table_elements   = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-//     logger.debug("[Table Rule 1] Table Elements on page: " + table_elements_len);
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (var i=0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-//         logger.debug("[Table Rule 1] Table Element: " + te + "   is data table: " + te.table_role);
-
-        if (te.table_role === TABLE_ROLE.DATA) {
-
-          var max_row    = te.max_row;
-          var max_column = te.max_column;
-          var cells      = te.cells;
-
-          for (var r = 0; r < max_row; r++) {
-            for (var c = 0; c < max_column; c++) {
-
-              var cell = cells[r][c];
-
-              if (cell &&
-                  (cell.table_type === TABLE.TD_ELEMENT)) {
-
-                if (is_visible_to_at == VISIBILITY.VISIBLE) {
-
-                  if(cell.has_spans && allReadyDone(cell)) continue;
-
-                  if (!cell.has_content) {
-                    rule_result.addResult(TEST_RESULT.MANUAL_CHECK, cell, 'ELEMENT_MC_1', []);
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      te.cells.forEach( cell => {
+        debug.log(`[cell]: ${cell} ${cell.isHeader}`);
+        const de = cell.domElement;
+        if (cell.isHeader) {
+          if (!de.accName.name) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+        }
+        else {
+          debug.log(`[visibility]: ${de.visibility.isVisibleToAT}`)
+          if (de.visibility.isVisibleToAT) {
+            debug.log(`[accName]: ${de.accName.name}`)
+            if (de.accName.name) {
+              const headerCount = cell.headers.length;
+              const headerStr = cell.headers.join (' | ');
+              debug.log(`[headerCount]: ${headerCount}`)
+              debug.log(`[  headerStr]: ${headerStr}`)
+              if (headerCount) {
+                if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
+                  if (headerCount === 1) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, headerStr]);
                   }
                   else {
-                    if (cell.header_content.length > 0) {
-                      rule_result.addResult(TEST_RESULT.PASS, cell, 'ELEMENT_PASS_1', []);
-                    }
-                    else {
-                      if (cell.header_source === HEADER_SOURCE.ROW_OR_COLUMN_HEADERS) {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_1', []);
-                      }
-                      else {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_2', []);
-                      }
-                    }
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName, headerCount, headerStr]);
                   }
                 }
                 else {
-                 rule_result.addResult(TEST_RESULT.HIDDEN, cell, 'ELEMENT_HIDDEN_1', []);
+                  if (headerCount === 1) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName, headerStr]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.elemName, headerCount, headerStr]);
+                  }
                 }
               }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
             }
           }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
-      } // end loop
-    }
-    */
-
+      });
+    });
   } // end validation function
  },
 

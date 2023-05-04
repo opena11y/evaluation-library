@@ -9,47 +9,53 @@ import {REFERENCES} from '../../constants.js';
 export const tableRules = {
   TABLE_1: {
       ID:                    'Table 1',
-      DEFINITION:            'Data cells in data tables must have row and/or column header cells.',
+      DEFINITION:            'Data cells in data tables must have row and/or column header cells or use the @headers@ attribute.',
       SUMMARY:               'Data cells must have row/column headers',
       TARGET_RESOURCES_DESC: '@td@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:         'Add @th@ elements to the first row or column of the data table.',
-        FAIL_P:         'Add @th@ elements to the first row or column of the data table.',
+        FAIL_S:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
+        FAIL_P:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
         MANUAL_CHECK_S: 'The @td@ element does not have any text content. Verify that this cell is being used for formatting and does not need row or column headers.',
         MANUAL_CHECK_P: '%N_F @td@ elements do not have any text content. Verify that these cells are being used for formatting and do not need row or column headers.',
         HIDDEN_S:       'One @td@ element that is hidden was not evaluated.',
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables and/or @td@ cells on the page.'
       },
-      NODE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @td@ element has row and/or column headers.',
-        ELEMENT_FAIL_1:   'Add text content to the row and/or column header cells.',
-        ELEMENT_FAIL_2:   'Add header cells using row and/or column headers.',
-        ELEMENT_MC_1:     'The @td@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need row or column headers.',
-        ELEMENT_HIDDEN_1: 'The @td@ element was not evaluated because it is hidden from assistive technologies.'
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'The @%1@ element has one header defined using row and/or column headers cells, header content: "%2".',
+        ELEMENT_PASS_2:   'The @%1@ element has %2 headers defined using row and/or column headers cells, header content: "%3".',
+        ELEMENT_PASS_3:   'The @%1@ element has one header defined using the @header@ attribute, header content: "%2".',
+        ELEMENT_PASS_4:   'The @%1@ element has %2 headers defined using the @header@ attribute, header content: "%3".',
+        ELEMENT_FAIL_1:   'Add table cells to be used as header cells for the @%1@ element using either row/column headers or the @headers@ attribute.',
+        ELEMENT_MC_1:     'The @%1@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need headers.',
+        ELEMENT_MC_2:     'The @%1@ element does not have any text content.  Verify it is not being used for identifying the context of a data cell.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'When @th@ (table header) elements are used as the first cell in each row and/or column of a data table, assistive technologies can infer the header-to-data-cell relationships for those rows and columns, making the header information programmatically available to screen reader users from any data cell.',
-        'By providing a representation that is functionally equivalent to the visual relationships of data cells to row and column headers that sighted users rely upon, screen reader users are able to maintain orientation and comprehension as they traverse the data table.',
-        'When solitary row and/or column headers are not sufficient to describe a data cell, use the @headers@ attribute to identify the appropriate header cells.'
+        'For screen reader users to understand the the context or meaning of the content in a data cell, the headings for the cell must be identified',
+        'When header cells are properly identified, screen reader users can distinguish between header and data table cells.'
       ],
       TECHNIQUES: [
         'Use a @th@ element as the first cell in each row and/or column to define row and column headers in simple data tables.',
-        'Use @th@ element for row and column header cells.',
         'While not recommended, it is also valid to use @td@ element with a @scope@ attribute as a header cell.',
-        'Avoid using empty rows and columns for formatting data tables. Use CSS instead.'
+        'Avoid using empty rows and columns for formatting data tables. Use CSS instead.',
+        'When row and/or column headers are not sufficient to describe a data cell, use the @header@ attribute to identify the appropriate header cells.  For example, when a data cell spans more than one column or row the column and row headers.'
       ],
       MANUAL_CHECKS: [
         'Verify that empty @td@ and @th@ elements do not need table headers.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: 4.9.1 The table element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-table-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: scope attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-scope'
+          title: 'HTML Specification: headers attribute',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#attr-tdth-headers'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: scope attribute',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#attr-th-scope'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H51: Using table markup to present tabular information',
@@ -60,8 +66,12 @@ export const tableRules = {
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
         },
         { type:  REFERENCES.EXAMPLE,
-          title: 'IBM Web checklist Checkpoint 1.3e: Tables',
-          url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
+          title: 'MDN: The Table element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table'
+        },
+        { type:  REFERENCES.EXAMPLE,
+          title: 'IBM Accessibility Requirements: 502.3.3 Row, Column and Headers',
+          url:   'https://www.ibm.com/able/requirements/requirements/#502_3_3'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -81,7 +91,7 @@ export const tableRules = {
         HIDDEN_P:         '%N_H data tables that are hidden were not evaluated.',
         NOT_APPLICABLE:   'No data tables found on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'Accessible name defined using the @caption@ element: \'%1\'.',
         ELEMENT_PASS_2:   'Accessible name defined using the @summary@ attribute with content: \'%1\'.',
         ELEMENT_PASS_3:   'Accessible name defined using the @aria-label@ attribute with content: \'%1\'.',
@@ -161,7 +171,7 @@ export const tableRules = {
         HIDDEN_P:       'The %N_H data @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @table@ element has an accessible description through the @summary@ attribute.',
         ELEMENT_PASS_2:   'The @table@ element has an accessible description through the @aria-describedby@ reference.',
         ELEMENT_PASS_3:   'The @table@ element has an accessible description through the @title@ attribute.',
@@ -217,7 +227,7 @@ export const tableRules = {
         HIDDEN_P:       '%N_H @table@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'Multiple data tables were not found on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The accessible name for the data table is unique: \'%1\'.',
         ELEMENT_FAIL_1:   'Change the accessible name for the data table to be unique on the page: \'%1\'.',
         ELEMENT_FAIL_2:   'Add a accessible name to the data table.',
@@ -295,7 +305,7 @@ export const tableRules = {
         HIDDEN_P: '%N_H @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No table markup found on this page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @table@ is considered a data table, since it has header cells or an accessible name.',
         ELEMENT_PASS_2:   'The @table@ is considered a layout table, since it has @role="presentation"@.',
         ELEMENT_PASS_3:   'The @table@ is considered a complex data table, since it has colums/row spans or multiple headers in a row or column.',
@@ -368,7 +378,7 @@ export const tableRules = {
         HIDDEN_P: '%N_H @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No td[scope]@ elements on the page'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @th@ element is used for header cell',
         ELEMENT_FAIL_1:   'Change the @td[scope]@ element to a @th@ element',
         ELEMENT_HIDDEN_1: 'The @th@ element was not evaluated because it is hidden from assistive technologies.'
@@ -421,7 +431,7 @@ export const tableRules = {
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No complex data tables on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The header comes from the @headers@ attribute with the following ids: \'%1\'.',
         ELEMENT_FAIL_1:   'Add header cells using the @headers@ attribute, since this table is a complex data table.',
         ELEMENT_FAIL_2:   'Add text content to the header cells with the following ids: \'%1\'.',
@@ -469,7 +479,7 @@ export const tableRules = {
         HIDDEN_P:       '%N_H @table@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables with both an accessible name and description on the page.'
       },
-      NODE_RESULT_MESSAGES: {
+      BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'Accessible name and description are different.',
         ELEMENT_FAIL_1:   'Change the accessible name and/or accessible description, make sure the accessible name identifies the content of the table and the description provides a summary of the content.',
         ELEMENT_MC_1:     'Verify the data table with an accessible name that is longer than the accessible description is actually providing a useful summary of the contents of the data table.',

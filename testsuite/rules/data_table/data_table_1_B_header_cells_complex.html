@@ -25,26 +25,26 @@
     <table>
       <caption>4 by 4 complex data table with no headers</caption>
       <tr> 
-        <td colspan="2">Data Cell 11</td>
-        <td >Data Cell 13</td>
-        <td >Data Cell 14</td>
+        <td class="TABLE_1_FAIL" colspan="2">Data Cell 11</td>
+        <td class="TABLE_1_FAIL">Data Cell 13</td>
+        <td class="TABLE_1_FAIL">Data Cell 14</td>
       </tr>
       <tr> 
-        <td  rowspan="2">Data Cell 21</td>
-        <td >Data Cell 22</td>
-        <td >Data Cell 23</td>
-        <td >Data Cell 24</td>
+        <td class="TABLE_1_FAIL"rowspan="2">Data Cell 21</td>
+        <td class="TABLE_1_FAIL">Data Cell 22</td>
+        <td class="TABLE_1_FAIL">Data Cell 23</td>
+        <td class="TABLE_1_FAIL">Data Cell 24</td>
       </tr>
       <tr> 
-        <td >Data Cell 32</td> 
-        <td >Data Cell 33</td> 
-        <td >Data Cell 34</td> 
+        <td class="TABLE_1_FAIL">Data Cell 32</td>
+        <td class="TABLE_1_FAIL">Data Cell 33</td>
+        <td class="TABLE_1_FAIL">Data Cell 34</td>
       </tr>
       <tr> 
-        <td >Data Cell 41</td> 
-        <td >Data Cell 42</td> 
-        <td >Data Cell 43</td> 
-        <td >Data Cell 44</td> 
+        <td class="TABLE_1_FAIL">Data Cell 41</td>
+        <td class="TABLE_1_FAIL">Data Cell 42</td>
+        <td class="TABLE_1_FAIL">Data Cell 43</td>
+        <td class="TABLE_1_FAIL">Data Cell 44</td>
       </tr>
     </table>
     
@@ -62,26 +62,26 @@
         </tr>
       </thead>
       <tr> 
-        <td  colspan="2" headers="t2_h1">Data Cell 11</td>
-        <td  headers="t2_h3">Data Cell 13</td>
-        <td  headers="t2_h4">Data Cell 14</td>
+        <td class="TABLE_1_PASS" colspan="2" headers="t2_h1">Data Cell 11</td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 13</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 14</td>
       </tr>
       <tr> 
-        <td  rowspan="2" headers="t2_h1">Data Cell 21</td>
-        <td  headers="t2_h2">Data Cell 22</td>
-        <td  headers="t2_h3">Data Cell 23</td>
-        <td  headers="t2_h4">Data Cell 24</td>
+        <td class="TABLE_1_PASS" rowspan="2" headers="t2_h1">Data Cell 21</td>
+        <td class="TABLE_1_PASS" headers="t2_h2">Data Cell 22</td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 23</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 24</td>
       </tr>
       <tr> 
-        <td  headers="t2_h2">Data Cell 32</td> 
-        <td  headers="t2_h3">Data Cell 33</td> 
-        <td  headers="t2_h4">Data Cell 34</td> 
+        <td class="TABLE_1_PASS" headers="t2_h2">Data Cell 32</td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 33</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 34</td>
       </tr>
       <tr> 
-        <td  headers="t2_h1">Data Cell 41</td> 
-        <td  headers="t2_h2">Data Cell 42</td> 
-        <td  headers="t2_h3">Data Cell 43</td> 
-        <td  headers="t2_h4">Data Cell 44</td> 
+        <td class="TABLE_1_PASS" headers="t2_h1">Data Cell 41</td>
+        <td class="TABLE_1_PASS" headers="t2_h2">Data Cell 42</td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 43</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 44</td>
       </tr>
     </table>
     
@@ -89,35 +89,35 @@
     <h2> Table 3: Complex Data Table with some headers </h2>
     
     <table>
-      <caption>4 by 4 complex data table with some headers</caption>
+      <caption>4 by 4 complex data table with some headers and incorrect use of scope</caption>
       <thead>
         <tr>
-          <th id="t3_h1">Header 1</th>
-          <th id="t3_h2">Header 2</th>
-          <th id="t3_h3">Header 3</th>
+          <td scope="row" id="t3_h1">Header 1</td>
+          <td scope="row" id="t3_h2">Header 2</td>
+          <td scope="row" id="t3_h3">Header 3</td>
         </tr>
       </thead>
       <tr> 
-        <td  colspan="2" headers="t3_h1">Data Cell 11</td>
-        <td  headers="t3_h3">Data Cell 13</td>
-        <td  headers="t3_h4">Data Cell 14</td>
+        <td class="TABLE_1_PASS" colspan="2" headers="t3_h1">Data Cell 11</td>
+        <td class="TABLE_1_PASS" headers="t3_h3">Data Cell 13</td>
+        <td class="TABLE_1_FAIL" headers="t3_h4">Data Cell 14</td>
       </tr>
       <tr> 
-        <td  rowspan="2" headers="t3_h1">Data Cell 21</td>
-        <td  headers="t3_h2">Data Cell 22</td>
-        <td  headers="t3_h3">Data Cell 23</td>
-        <td  headers="t3_h4">Data Cell 24</td>
+        <td class="TABLE_1_PASS" rowspan="2" headers="t3_h1">Data Cell 21</td>
+        <td class="TABLE_1_PASS" headers="t3_h2">Data Cell 22</td>
+        <td class="TABLE_1_PASS" headers="t3_h3">Data Cell 23</td>
+        <td class="TABLE_1_FAIL" headers="t3_h4">Data Cell 24</td>
       </tr>
       <tr> 
-        <td  headers="t3_h2">Data Cell 32</td> 
-        <td  headers="t3_h3">Data Cell 33</td> 
-        <td  headers="t3_h4">Data Cell 34</td> 
+        <td class="TABLE_1_PASS" headers="t3_h2">Data Cell 32</td>
+        <td class="TABLE_1_PASS" headers="t3_h3">Data Cell 33</td>
+        <td class="TABLE_1_FAIL" headers="t3_h4">Data Cell 34</td>
       </tr>
       <tr> 
-        <td  headers="t3_h1">Data Cell 41</td> 
-        <td  headers="t3_h2">Data Cell 42</td> 
-        <td  >Data Cell 43</td> 
-        <td  headers="t3_h4">Data Cell 44</td> 
+        <td class="TABLE_1_PASS" headers="t3_h1">Data Cell 41</td>
+        <td class="TABLE_1_PASS" headers="t3_h2">Data Cell 42</td>
+        <td class="TABLE_1_FAIL" >Data Cell 43</td>
+        <td class="TABLE_1_FAIL" headers="t3_h4">Data Cell 44</td>
       </tr>
     </table>
     
@@ -129,43 +129,43 @@
         <tr>
           <th id="t2_h1">Header 1</th>
           <th id="t2_h2">Header 2</th>
-          <td ></td>
+          <td class="TABLE_1_MC" ></td>
           <th id="t2_h3">Header 3</th>
           <th id="t2_h4">Header 4</th>          
         </tr>
       </thead>
       <tr> 
-        <td  colspan="2" headers="t2_h1">Data Cell 11</td>
-        <td ></td>
-        <td  headers="t2_h3">Data Cell 13</td>
-        <td  headers="t2_h4">Data Cell 14</td>
+        <td class="TABLE_1_PASS" colspan="2" headers="t2_h1">Data Cell 11</td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 13</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 14</td>
       </tr>
       <tr> 
-        <td  rowspan="2" headers="t2_h1">Data Cell 21</td>
-        <td  headers="t2_h2">Data Cell 22</td>
-        <td ></td>
-        <td  headers="t2_h3">Data Cell 23</td>
-        <td  headers="t2_h4">Data Cell 24</td>
+        <td class="TABLE_1_PASS" rowspan="2" headers="t2_h1">Data Cell 21</td>
+        <td class="TABLE_1_PASS" headers="t2_h2">Data Cell 22</td>
+        <td class="TABLE_1_MC" ></td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 23</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 24</td>
       </tr>
       <tr> 
-        <td  headers="t2_h2">Data Cell 32</td> 
-        <td ></td>
-        <td  headers="t2_h3">Data Cell 33</td> 
-        <td  headers="t2_h4">Data Cell 34</td> 
+        <td class="TABLE_1_PASS" headers="t2_h2">Data Cell 32</td>
+        <td class="TABLE_1_MC" ></td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 33</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 34</td>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>        
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_MC"></td>
       </tr>
       <tr> 
-        <td  headers="t2_h1">Data Cell 41</td> 
-        <td  headers="t2_h2">Data Cell 42</td> 
-        <td></td>
-        <td  headers="t2_h3">Data Cell 43</td> 
-        <td  headers="t2_h4">Data Cell 44</td> 
+        <td class="TABLE_1_PASS" headers="t2_h1">Data Cell 41</td>
+        <td class="TABLE_1_PASS" headers="t2_h2">Data Cell 42</td>
+        <td class="TABLE_1_MC"></td>
+        <td class="TABLE_1_PASS" headers="t2_h3">Data Cell 43</td>
+        <td class="TABLE_1_PASS" headers="t2_h4">Data Cell 44</td>
       </tr>
     </table>
     

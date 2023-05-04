@@ -35,6 +35,7 @@ class TableElement {
     this.parentTableElement = parentTableElement;
 
     this.tableType = TABLE_TYPE.UNKNOWN;
+    this.hasCaption = false;
 
     this.children = [];
 
@@ -42,37 +43,31 @@ class TableElement {
     this.row = null;
     this.rowCount = 0;
 
-    this.theadCount = 0;
-    this.tbodyCount = 0;
+    this.cells = [];
 
+    this.rowGroupCount = 0;
     this.cellCount = 0;
-    this.cellHeaderCount = 0;
+    this.headerCellCount = 0;
 
     this.spannedCells = 0;
 
     this.currentParent = this;
   }
 
-  addCaption (domElement) {
-    this.captionDomElement = domElement;
+  addCaption (rowGroup, domElement) {
+    this.hasCaption = true;
+    const caption = new TableCaption(domElement);
+    rowGroup.children.push(caption);
   }
 
-  addTHead (rowGroup, domElement) {
-    this.theadCount += 1;
-    const newRowGroup = new TableRowGroup(domElement);
-    rowGroup.children.push(newRowGroup);
-    return newRowGroup;
-  }
-
-  addTBody (rowGroup, domElement) {
-    this.tbodyCount += 1;
+  addRowGroup (rowGroup, domElement) {
+    this.rowGroupCount += 1;
     const newRowGroup = new TableRowGroup(domElement);
     rowGroup.children.push(newRowGroup);
     return newRowGroup;
   }
 
   addRow (rowGroup, domElement) {
-    debug.log(`[addRow][rowGroup]: ${rowGroup}`);
     this.rowCount += 1;
     this.row = this.getRow(this.rowCount, domElement);
     rowGroup.children.push(this.row);
@@ -95,13 +90,15 @@ class TableElement {
     rowSpan = isNaN(rowSpan) ? 1 : rowSpan;
     colSpan = isNaN(colSpan) ? 1 : colSpan;
     let row = this.getRow(this.rowCount);
+
     const column = row.getNextEmptyColumn();
     const cell = new TableCell(domElement, row.rowNumber, column, rowSpan, colSpan);
+    this.cells.push(cell);
     row.setCell(column, cell);
 
     this.cellCount += 1;
     if (cell.isHeader) {
-      this.cellHeaderCount += 1;
+      this.headerCellCount += 1;
     }
 
     if (colSpan > 1) {
@@ -133,10 +130,11 @@ class TableElement {
   }
 
   getCell(rowNumber, columnNumber) {
-    const row = this.getRow(rowNumber);
-    for (let i = 0; i < row.cells.length; i += 1) {
-      const cell = row.cells[i];
-      if ((columnNumber >= cell.startColumn ) &&
+    for (let i = 0; i < this.cells.length; i += 1) {
+      const cell = this.cells[i];
+      if ((rowNumber >= cell.startRow) &&
+          (rowNumber <= cell.endRow) &&
+          (columnNumber >= cell.startColumn ) &&
           (columnNumber <= cell.endColumn )) {
         return  cell;
       }
@@ -170,7 +168,9 @@ class TableElement {
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
                 debug.headerCalc && debug.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`)
-                if (hc && hc.isHeader && (!hc.hasScope || hc.isScopeColumn)) {
+                if (hc && hc.isHeader &&
+                    (!hc.hasScope || hc.isScopeColumn) &&
+                    hc.domElement.accName.name) {
                   cell.headers.push(hc.domElement.accName.name);
                 }
               }
@@ -179,7 +179,9 @@ class TableElement {
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
                 debug.headerCalc && debug.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`)
-                if (hc && hc.isHeader && (!hc.hasScope || hc.isScopeRow)) {
+                if (hc && hc.isHeader &&
+                    (!hc.hasScope || hc.isScopeRow) &&
+                    hc.domElement.accName.name) {
                   cell.headers.push(hc.domElement.accName.name);
                 }
               }
@@ -199,6 +201,7 @@ class TableElement {
     const role = this.domElement.role;
 
     if ((role === 'none') ||
+        (role === 'presentation') ||
         (this.rows.length === 1)) {
       return TABLE_TYPE.LAYOUT;
     }
@@ -218,13 +221,15 @@ class TableElement {
     return `[TableElement][type=${getCommonMessage('tableType', this.tableType)}][role=${this.domElement.role}]: ${this.children.length} children ${this.rows.length} rows`;
   }
 
-  debugRowGroup (prefix, rowGroup) {
-    debug.log(`${prefix}${rowGroup}`);
-    rowGroup.children.forEach( child => {
-      if (child.isGroup) {
-        this.debugRowGroup(prefix + '  ', child);
-      }
-    });
+  debugRowGroup (prefix, item) {
+    debug.log(`${prefix}${item}`);
+    if (item.isGroup) {
+      item.children.forEach( child => {
+        if (child) {
+          this.debugRowGroup(prefix + '  ', child);
+        }
+      });
+    }
   }
 
   debug () {
@@ -232,15 +237,42 @@ class TableElement {
       debug.log(`${this}`);
       if (debug.tableTree) {
         this.children.forEach( child => {
-          if (child.isGroup) {
-            this.debugRowGroup('  ', child);
-          }
+          this.debugRowGroup('  ', child);
         });
       }
+      debug.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
     }
+  }
+}
+
+/**
+ * @class TableCaption
+ *
+ * @desc Identifies a DOM element as caption (e.g. CAPTION) in a table
+ *
+ * @param  {Object}  domElement - Structural Information
+ */
+
+class TableCaption {
+  constructor (domElement) {
+    if (domElement) {
+      this.domElement   = domElement;
+    }
+  }
+
+  get isGroup () {
+    return false;
+  }
+
+  get isRow () {
+    return false;
+  }
+
+  toString() {
+    return `[TableCaption]: ${this.domElement.accName.name}`;
   }
 }
 
@@ -257,7 +289,6 @@ class TableRowGroup {
     if (domElement) {
       this.domElement   = domElement;
     }
-
     this.children = [];
   }
 
@@ -420,33 +451,43 @@ export default class TableInfo {
     let te = tableElement;
     let rg = rowGroup;
 
-    switch (domElement.role) {
+    switch (domElement.tagName) {
 
       case 'table':
         te = new TableElement(te, domElement);
-        rg = te;
         this.allTableElements.push(te);
+        rg = te;
         break;
 
       case 'caption':
-        te.addCaption(domElement);
+        if (te) {
+          te.addCaption(rg, domElement);
+        }
         break;
 
       case 'thead':
-        rg = te.addTHead(rg, domElement);
+        if (te) {
+          rg = te.addRowGroup(rg, domElement);
+        }
         break;
 
       case 'tbody':
-        rg= te.addTBody(rg, domElement);
+        if (te) {
+          rg= te.addRowGroup(rg, domElement);
+        }
         break;
 
       case 'tr':
-        te.addRow(rowGroup, domElement);
+        if (te) {
+          te.addRow(rg, domElement);
+        }
         break;
 
       case 'th':
       case 'td':
-        te.addCell(domElement);
+        if (te) {
+          te.addCell(domElement);
+        }
         break;
 
       default:
@@ -457,23 +498,29 @@ export default class TableInfo {
 
           case 'table':
             te = new TableElement(te, domElement);
-            rowGroup = te;
             this.allTableElements.push(te);
+            rg = te;
             break;
 
           case 'row':
-            te.addRow(rowGroup, domElement);
+            if (te) {
+              te.addRow(rg, domElement);
+            }
             break;
 
           case 'rowgroup':
-            rg = te.addTHead(rg, domElement);
+            if (te) {
+              rg = te.addRowGroup(rg, domElement);
+            }
             break;
 
           case 'rowheader':
           case 'colheader':
           case 'cell':
           case 'gridcell':
-            te.addCell(domElement);
+            if (te) {
+              te.addCell(domElement);
+            }
             break;
 
           default:
