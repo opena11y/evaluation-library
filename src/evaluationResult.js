@@ -20,6 +20,7 @@ import {
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
+debug.flag = false;
 
 export default class EvaluationResult {
   constructor (allRules, domCache, title, url) {

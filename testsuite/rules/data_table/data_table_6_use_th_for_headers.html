@@ -71,25 +71,49 @@
 
       <h2>TD[scope] elements used for headers in a hidden table</h2>
       
-      <table style="visibility: hidden">
+      <table>
         <thead>
           <tr>
             <td></td>
-            <td scope="col" class="TABLE_6_HIDDEN">Header 1</td>
-            <th scope="col" class="TABLE_6_HIDDEN">Header 2</th>
+            <td scope="col" class="TABLE_6_HIDDEN"  style="visibility: hidden">Header 1</td>
+            <th scope="col" class="TABLE_6_HIDDEN"  style="visibility: hidden">Header 2</th>
           </tr>
         </thead>
         <tbody>
           <tr> 
-            <th scope="row" class="TABLE_6_HIDDEN">Header 3</th>
+            <th scope="row" class="TABLE_6_HIDDEN"  style="visibility: hidden">Header 3</th>
             <td>Data Cell 11</td>
             <td>Data Cell 12</td>
           </tr>
           <tr> 
-            <th scope="row" class="TABLE_6_HIDDEN">Header 4</th>
+            <th scope="row" class="TABLE_6_HIDDEN"  style="visibility: hidden">Header 4</th>
             <td>Data Cell 21</td>
             <td>Data Cell 22</td>
           </tr>          
+        </tbody>
+      </table>
+
+      <h2>TD[scope] elements used for headers in a hidden table</h2>
+
+      <table class="TABLE_6_HIDDEN" style="visibility: hidden">
+        <thead>
+          <tr>
+            <td></td>
+            <td scope="col" >Header 1</td>
+            <th scope="col" >Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" >Header 3</th>
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr>
+            <th scope="row">Header 4</th>
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>
         </tbody>
       </table>
       

@@ -8,6 +8,7 @@ import DebugLogging   from './debug.js';
 /* Constants */
 
 const debug = new DebugLogging('ElementResult', false);
+debug.flag = false;
 
 /**
  * @class ElementResult
@@ -215,6 +216,42 @@ export default class ElementResult extends BaseResult {
         info.background_repeat     = cc.backgroundRepeat;
         info.background_position   = cc.backgroundPosition;
       }
+    }
+    return info;
+  }
+
+  /**
+  * @method getTableInfo
+  *
+  * @desc Gets table information
+  *
+  * @return {Object} Object with keys and values
+  */
+  getTableInfo () {
+    const info = {};
+    const te = this.domElement.tableElement;
+    if (te) {
+      info.type         = te.tableType;
+      info.cell_count   = te.cellCount;
+      info.header_count = te.headerCellCount;
+    }
+    return info;
+  }
+
+  /**
+  * @method getTableCellHeaderInfo
+  *
+  * @desc Gets table header information for data cells
+  *
+  * @return {Object} Object with header keys and values
+  */
+  getTableCellHeaderInfo () {
+    const info = {};
+    const tableCell = this.domElement.tableCell;
+    if (tableCell) {
+      info.count   = tableCell.headers.length;
+      info.headers = tableCell.headers.join(' | ');
+      info.source  = tableCell.headerSource;
     }
     return info;
   }

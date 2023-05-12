@@ -10046,8 +10046,13 @@ class DOMElement {
 
     // A name that can be used in rule results to identify the element
     this.elemName = this.tagName;
-    this.elemName += (this.role && this.role !== 'generic') ? `[role=${this.role}]` : '';
-    this.elemName += this.id ? `[id=${this.id}]` : '';
+    this.elemName += this.id ? `#${this.id}` : '';
+    this.elemName += this.hasRole ? `[role=${this.role}]` : '';
+
+    // Potential references to other cache objects
+
+    this.tableCell = null;
+    this.tableElement = null;
 
   }
 
@@ -15880,10 +15885,9 @@ const tableRules$1 = {
         NOT_APPLICABLE: 'Multiple data tables were not found on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The accessible name for the data table is unique: \'%1\'.',
-        ELEMENT_FAIL_1:   'Change the accessible name for the data table to be unique on the page: \'%1\'.',
-        ELEMENT_FAIL_2:   'Add a accessible name to the data table.',
-        ELEMENT_HIDDEN_1: 'The @table@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   'The table\'s accessible name "%1" for @%2@ element is unique on the page.',
+        ELEMENT_FAIL_1:   'The table\'s accessible name "%1" is not unique on the page for the @%2@ element, update the accessible table names to be unique and descriptive of the table content.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'Data tables that share the same accessible name make it difficult to users of assistive technologies to differentiate the differences in content of the data tables on the same page.',
@@ -15902,12 +15906,12 @@ const tableRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+          title: 'HTML Specification: 4.9.1 The table element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-table-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: summary attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+          title: 'HTML Specification: 4.9.1 The caption element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-caption-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -15949,8 +15953,8 @@ const tableRules$1 = {
       SUMMARY:               'Identify table markup as data or layout',
       TARGET_RESOURCES_DESC: '@table@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'The table without headers or @role="presentation"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
-        FAIL_P:   'For the %N_F tables without headers or @role=presentation"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
         MANUAL_CHECK_S: 'Verify the @table@ element that only has one row or column is used only only for layout.',
         MANUAL_CHECK_P: 'Verify the %N_H @table@ elements that only have one row or column are used only only for layout.',
         HIDDEN_S: 'One @table@ element that is hidden was not evaluated.',
@@ -15958,13 +15962,16 @@ const tableRules$1 = {
         NOT_APPLICABLE:  'No table markup found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @table@ is considered a data table, since it has header cells or an accessible name.',
-        ELEMENT_PASS_2:   'The @table@ is considered a layout table, since it has @role="presentation"@.',
-        ELEMENT_PASS_3:   'The @table@ is considered a complex data table, since it has colums/row spans or multiple headers in a row or column.',
-        ELEMENT_MC_1:     'Verify the table with only one row is only used for layout purposes.',
-        ELEMENT_MC_2:     'Verify the table with only one column is only used for layout purposes.',
-        ELEMENT_FAIL_1:   'Define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table element if the table is being used to layout content.',
-        ELEMENT_HIDDEN_1: 'The @table@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   'The @%1@ element is a layout table, since it has @role="%2"@.',
+        ELEMENT_PASS_2:   'The @%1@ element is a simple data table, since it has header cells and/or an accessible name.',
+        ELEMENT_PASS_3:   'The @%1@ element is a complex data table, since it has columns/row spans or multiple headers in a row or column.',
+        ELEMENT_PASS_4:   'The @%1@ element is table, since it is using @role=table@.',
+        ELEMENT_PASS_5:   'The @%1@ element is grid, since it is using @role=grid@.',
+        ELEMENT_PASS_6:   'The @%1@ element is treegrid, since it is using @role=treegrid@.',
+        ELEMENT_MC_1:     'Verify the @%1@ element with only one row is only used for layout purposes, if so add the @role@ attribute with a value of @none@.',
+        ELEMENT_MC_2:     'Verify the @%1@ element with only one column is only used for layout purposes, if so add the @role@ attribute with a value of @none@.',
+        ELEMENT_FAIL_1:   'Define the purpose of the @%1@ element by adding header cells if the table is being used for tabular data or use @role="none"@ on the table element if the table is being used to layout content.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'The @table@ element is designed for representing tabular data in a web page, but table markup has also been used by web developers as a means to layout content in rows and columns.',
@@ -16032,8 +16039,9 @@ const tableRules$1 = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @th@ element is used for header cell',
-        ELEMENT_FAIL_1:   'Change the @td[scope]@ element to a @th@ element',
-        ELEMENT_HIDDEN_1: 'The @th@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1:   'Change the @td[scope]@ element to a @th[scope]@ element',
+        ELEMENT_HIDDEN_1: 'The cells of the table were not evaluated because the table is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         '@th@ element is the web standards way to identify header cells in a table, and makes the data table source code easier to read and debug for accessibility problems.'
@@ -17650,6 +17658,7 @@ debug$m.headerCalc = false;
 
 class TableElement {
   constructor (parentTableElement, domElement) {
+    domElement.tableElement = this;
     this.domElement = domElement;
     this.parentTableElement = parentTableElement;
 
@@ -17661,6 +17670,7 @@ class TableElement {
     this.rows = [];
     this.row = null;
     this.rowCount = 0;
+    this.colCount = 0;
 
     this.cells = [];
 
@@ -17733,6 +17743,11 @@ class TableElement {
       }
     }
 
+    return column;
+  }
+
+  updateColumnCount (col) {
+    this.colCount = Math.max(this.colCount, col);
   }
 
   getRow(rowNumber, domElement=null) {
@@ -17817,16 +17832,31 @@ class TableElement {
   }
 
   getTableType () {
-    const role = this.domElement.role;
 
-    if ((role === 'none') ||
-        (role === 'presentation') ||
-        (this.rows.length === 1)) {
-      return TABLE_TYPE.LAYOUT;
+    const de = this.domElement;
+
+    if (de.hasRole) {
+      switch (de.role) {
+        case 'none':
+        case 'presentation':
+          return TABLE_TYPE.LAYOUT;
+
+        case 'grid':
+          return TABLE_TYPE.ARIA_GRID;
+
+        case 'table':
+          return TABLE_TYPE.ARIA_TABLE;
+
+        case 'treegrid':
+          return TABLE_TYPE.ARIA_TREEGRID;
+      }
     }
 
-    if (this.headerCellCount) {
-      if (this.spannedDataCells) {
+    if (((this.headerCellCount > 0) ||
+         (this.domElement.accName.name)) &&
+       (this.rowCount > 1) &&
+       (this.colCount > 1)) {
+      if (this.spannedDataCells > 0) {
         return TABLE_TYPE.COMPLEX;
       }
       else {
@@ -17939,7 +17969,6 @@ class TableRow {
     if (domElement) {
       this.domElement   = domElement;
     }
-
     this.cells = [];
     this.rowNumber = rowNumber;
   }
@@ -18004,6 +18033,9 @@ class TableRow {
 
 class TableCell {
   constructor (domElement, rowNumber, columnNumber, rowSpan=1, columnSpan=1) {
+    // Provide a reference for elementResult object to get information about table cells
+    domElement.tableCell = this;
+
     this.domElement   = domElement;
 
     const node    = domElement.node;
@@ -18105,7 +18137,7 @@ class TableInfo {
       case 'th':
       case 'td':
         if (te) {
-          te.addCell(domElement);
+          te.updateColumnCount(te.addCell(domElement));
         }
         break;
 
@@ -21330,63 +21362,6 @@ const tableRules = [
         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
       }
     });
-
-/*
-
-    var TEST_RESULT        = TEST_RESULT;
-    var VISIBILITY         = VISIBILITY;
-    var DESCRIPTION_SOURCE = DESCRIPTION_SOURCE;
-    var TABLE_ROLE         = TABLE_ROLE;
-
-    var table_elements     = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (var i = 0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-        if ((te.table_role === TABLE_ROLE.DATA) ||
-            (te.table_role === TABLE_ROLE.COMPLEX)) {
-
-          if (is_visible_to_at == VISIBILITY.VISIBLE) {
-
-            if (te.accessible_description.length > 0) {
-
-              switch (te.accessible_description_source) {
-
-              case DESCRIPTION_SOURCE.TABLE_SUMMARY:
-                rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
-                break;
-
-              case DESCRIPTION_SOURCE.ARIA_DESCRIBEDBY:
-                rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', []);
-                break;
-
-              default:
-                rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_3', []);
-                break;
-              }
-            }
-            else {
-              if (te.table_role === TABLE_ROLE.COMPLEX) {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_2', []);
-              }
-              else {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_1', []);
-              }
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-          }
-        }
-      } // end loop
-    }
-    */
-
   } // end validation function
  },
 
@@ -21407,72 +21382,43 @@ const tableRules = [
   target_resources    : ['table'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 4 Rule ${dom_cache} ${rule_result}`);
+    const visibleDataTables = [];
 
-/*
-
-    var TEST_RESULT   = TEST_RESULT;
-    var VISIBILITY    = VISIBILITY;
-
-    var table_elements   = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-    var table_visible = [];
-    var i;
-    var j;
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (i = 0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-        if (((te.table_role === TABLE_ROLE.DATA) ||
-             (te.table_role === TABLE_ROLE.COMPLEX)) &&
-             te.accessible_name_length) {
-          if (is_visible_to_at == VISIBILITY.VISIBLE) {
-            if (te.accessible_name_for_comparison.length) {
-              table_visible.push(te);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_2', []);
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-          }
-        }
-      } // end loop
-
-
-      for (i = 0; i < table_visible.length; i++) {
-        var te1 = table_visible[i];
-        var count = 0;
-
-        for(j = 0; j < table_visible.length; j++) {
-
-          var te2 = table_visible[j];
-
-
-          if (te1.accessible_name_for_comparison === te2.accessible_name_for_comparison) {
-            count += 1;
-            if (count > 1) break;
-          }
-        }
-
-//        logger.debug("[Table Rule 4]: " + te1.accessible_name + " '" + te1.accessible_name_for_comparison + "' " + te1.accessible_name_for_comparison.length + " "+ count);
-
-        if (count < 2) {
-          rule_result.addResult(TEST_RESULT.PASS, te1, 'ELEMENT_PASS_1', [te1.accessible_name]);
-        }
-        else {
-            rule_result.addResult(TEST_RESULT.FAIL, te1, 'ELEMENT_FAIL_1', [te1.accessible_name]);
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if (te.tableType > TABLE_TYPE.LAYOUT) {
+          visibleDataTables.push(te);
         }
       }
-    }
-*/
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
 
+    visibleDataTables.forEach(te1 => {
+      let count = 0;
+      const de = te1.domElement;
+      const accName1 = te1.domElement.accName.name;
+      if (accName1) {
+        visibleDataTables.forEach(te2 => {
+          if (te1 !== te2) {
+            const accName2 = te2.domElement.accName.name;
+            if (accName2) {
+              if (accName1.toLowerCase() === accName2.toLowerCase()) {
+                count += 1;
+              }
+            }
+          }
+        });
+        if (count) {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [accName1, de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [accName1, de.elemName]);
+        }
+      }
+    });
   } // end validation function
 },
 
@@ -21493,38 +21439,54 @@ const tableRules = [
   target_resources    : ['table'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 5 Rule ${dom_cache} ${rule_result}`);
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        switch (te.tableType) {
+          case TABLE_TYPE.LAYOUT:
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.role]);
+            break;
 
-/*
+          case TABLE_TYPE.DATA:
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+            break;
 
-    var TEST_RESULT = TEST_RESULT;
-    var VISIBILITY  = VISIBILITY;
+          case TABLE_TYPE.COMPLEX:
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName]);
+            break;
 
-    var table_elements     = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
+          case TABLE_TYPE.ARIA_TABLE:
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.elemName]);
+            break;
 
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
+          case TABLE_TYPE.ARIA_GRID:
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_5', [de.elemName]);
+            break;
 
-      for (var i = 0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
+          case TABLE_TYPE.ARIA_TREEGRID:
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_6', [de.elemName]);
+            break;
 
-        if (is_visible_to_at == VISIBILITY.VISIBLE) {
+          default:
 
-          if (te.table_role === TABLE_ROLE.DATA) rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
-          else if (te.table_role === TABLE_ROLE.COMPLEX) rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_3', []);
-          else if (te.table_role === TABLE_ROLE.LAYOUT)  rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', []);
-          else if (te.max_row    < 2) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_1', []);
-          else if (te.max_column < 2) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_2', []);
-          else rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', []);
+            if (te.rowCount === 1) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+            }
+            else {
+              if (te.colCount === 1) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+              }
+            }
+            break;
         }
-        else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-        }
-      } // end loop
-    }
-    */
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
   } // end validation function
  },
 
@@ -21539,75 +21501,36 @@ const tableRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.ALL,
-  rule_required       : true,
+  rule_required       : false,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
   target_resources    : ['td[scope]'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 6 Rule ${dom_cache} ${rule_result}`);
-
-/*
-
-    function allReadyDone(span_cell) {
-
-      var span_cells_len = span_cells.length;
-
-      for (var i = 0; i < span_cells_len; i++) {
-        if (span_cell === span_cells[i]) return true;
-      }
-
-      span_cells.push(span_cell);
-      return false;
-    }
-
-    var TEST_RESULT   = TEST_RESULT;
-    var VISIBILITY    = VISIBILITY;
-
-    var span_cells = [];
-
-    var table_elements   = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (var i=0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-        if ((te.table_role === TABLE_ROLE.DATA) ||
-            (te.table_role === TABLE_ROLE.COMPLEX)) {
-
-          var max_row    = te.max_row;
-          var max_column = te.max_column;
-          var cells      = te.cells;
-
-          for (var r = 0; r < max_row; r++) {
-            for (var c = 0; c < max_column; c++) {
-
-              var cell = cells[r][c];
-
-              if (cell && cell.table_type  === TABLE.TH_ELEMENT) {
-
-                if (is_visible_to_at == VISIBILITY.VISIBLE) {
-
-                  if(cell.has_spans && allReadyDone(cell)) continue;
-
-                  if(cell.dom_element.tag_name === 'th') rule_result.addResult(TEST_RESULT.PASS, cell, 'ELEMENT_PASS_1', []);
-                  else rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_1', []);
-
-                }
-                else {
-                 rule_result.addResult(TEST_RESULT.HIDDEN, cell, 'ELEMENT_HIDDEN_1', []);
-                }
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (de.visibility.isVisibleToAT) {
+        te.cells.forEach( cell => {
+          const cde = cell.domElement;
+          if (cde.visibility.isVisibleToAT) {
+            if (cell.isHeader) {
+              if (cde.tagName === 'td') {
+                rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_1', [cde.elemName]);
               }
             }
           }
-        }
-      } // end loop
-    }
-    */
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, cde, 'ELEMENT_HIDDEN_2', [cde.elemName]);
+          }
+        });
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
   } // end validation function
 },
 
@@ -23875,6 +23798,7 @@ class BaseResult {
 /* Constants */
 
 const debug$6 = new DebugLogging('ElementResult', false);
+debug$6.flag = false;
 
 /**
  * @class ElementResult
@@ -24082,6 +24006,42 @@ class ElementResult extends BaseResult {
         info.background_repeat     = cc.backgroundRepeat;
         info.background_position   = cc.backgroundPosition;
       }
+    }
+    return info;
+  }
+
+  /**
+  * @method getTableInfo
+  *
+  * @desc Gets table information
+  *
+  * @return {Object} Object with keys and values
+  */
+  getTableInfo () {
+    const info = {};
+    const te = this.domElement.tableElement;
+    if (te) {
+      info.type         = te.tableType;
+      info.cell_count   = te.cellCount;
+      info.header_count = te.headerCellCount;
+    }
+    return info;
+  }
+
+  /**
+  * @method getTableCellHeaderInfo
+  *
+  * @desc Gets table header information for data cells
+  *
+  * @return {Object} Object with header keys and values
+  */
+  getTableCellHeaderInfo () {
+    const info = {};
+    const tableCell = this.domElement.tableCell;
+    if (tableCell) {
+      info.count   = tableCell.headers.length;
+      info.headers = tableCell.headers.join(' | ');
+      info.source  = tableCell.headerSource;
     }
     return info;
   }
@@ -24346,6 +24306,7 @@ class WebsiteResult extends BaseResult {
 
 /* constants */
 const debug$2 = new DebugLogging('ruleResult', false);
+debug$2.flag = false;
 
  /**
  * @class RuleResult
@@ -24389,8 +24350,6 @@ class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
-
-    debug$2.flag && debug$2.log('');
   }
 
   /**
@@ -24945,6 +24904,7 @@ class RuleResult {
 
 /* Constants */
 const debug$1 = new DebugLogging('EvaluationResult', false);
+debug$1.flag = false;
 
 class EvaluationResult {
   constructor (allRules, domCache, title, url) {
@@ -25211,7 +25171,7 @@ class EvaluationLibrary {
       domCache.tableInfo.showTableInfo();
       domCache.structureInfo.showStructureInfo();
 
-      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON()}`);
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
     }
     return evaluationResult;
   }

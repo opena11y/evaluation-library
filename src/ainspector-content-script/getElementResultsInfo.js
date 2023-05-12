@@ -78,11 +78,13 @@ function getElementResultInfo(ruleResult) {
 
   function addElementResult(index, elementResult) {
 
-    let accNameInfo    = JSON.stringify(elementResult.getAccessibleNameInfo());
-    let ccrInfo        = JSON.stringify(elementResult.getColorContrastInfo());
-    let visibilityInfo = JSON.stringify(elementResult.getVisibilityInfo());
-    let htmlAttrInfo   = JSON.stringify(elementResult.getHTMLAttributes());
-    let ariaAttrInfo   = JSON.stringify(elementResult.getAriaAttributes());
+    let accNameInfo     = JSON.stringify(elementResult.getAccessibleNameInfo());
+    let ccrInfo         = JSON.stringify(elementResult.getColorContrastInfo());
+    let headerInfo      = JSON.stringify(elementResult.getTableCellHeaderInfo());
+    let tableInfo       = JSON.stringify(elementResult.getTableInfo());
+    let visibilityInfo  = JSON.stringify(elementResult.getVisibilityInfo());
+    let htmlAttrInfo    = JSON.stringify(elementResult.getHTMLAttributes());
+    let ariaAttrInfo    = JSON.stringify(elementResult.getAriaAttributes());
 
     const item = {
       'index'            : (index + 1).toString(),
@@ -99,6 +101,8 @@ function getElementResultInfo(ruleResult) {
       'resultType'       : elementResult.getResultType(),
       'accNameInfo'      : accNameInfo,
       'ccrInfo'          : ccrInfo,
+      'headerInfo'       : headerInfo,
+      'tableInfo'        : tableInfo,
       'visibilityInfo'   : visibilityInfo,
       'htmlAttrInfo'     : htmlAttrInfo,
       'ariaAttrInfo'     : ariaAttrInfo,

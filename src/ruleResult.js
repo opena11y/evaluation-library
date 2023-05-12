@@ -23,6 +23,7 @@ import {
 
 /* constants */
 const debug = new DebugLogging('ruleResult', false);
+debug.flag = false;
 
  /**
  * @class RuleResult
@@ -66,8 +67,6 @@ export default class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
-
-    debug.flag && debug.log('');
   }
 
   /**

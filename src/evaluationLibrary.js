@@ -56,7 +56,7 @@ export default class EvaluationLibrary {
       domCache.tableInfo.showTableInfo();
       domCache.structureInfo.showStructureInfo();
 
-      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON()}`);
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
     }
     return evaluationResult;
   }

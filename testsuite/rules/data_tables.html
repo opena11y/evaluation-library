@@ -19,40 +19,21 @@
         executeTest('TABLE_1A: Data tables must have row/column header cells', 'ID_IFRAME_1A',  'TABLE_1');
         executeTest('TABLE_1B: Data tables must have row/column header cells', 'ID_IFRAME_1B',  'TABLE_1');
 
-       executeTest('TABLE_2A: Accessible Name (more than one data table)', 'ID_IFRAME_2A',  'TABLE_2');
-       executeTest('TABLE_2B: Accessible Name (1 data table)', 'ID_IFRAME_2B',  'TABLE_2');
+        executeTest('TABLE_2A: Accessible Name (more than one data table)', 'ID_IFRAME_2A',  'TABLE_2');
+        executeTest('TABLE_2B: Accessible Name (1 data table)', 'ID_IFRAME_2B',  'TABLE_2');
 
-      executeTest('TABLE_3: Accessible Description for complex tables', 'ID_IFRAME_3',  'TABLE_3');
+        executeTest('TABLE_3: Accessible Description for complex tables', 'ID_IFRAME_3',  'TABLE_3');
+
+        executeTest('TABLE 4A: Unique accessible names', 'ID_IFRAME_4A',  'TABLE_4');
+        executeTest('TABLE 4B: Unique accessible names', 'ID_IFRAME_4B',  'TABLE_4');
+
+        executeTest('TABLE 5: Table role defined', 'ID_IFRAME_5',  'TABLE_5');
+
+        executeTest('TABLE 6: Table role defined', 'ID_IFRAME_6',  'TABLE_6');
 
       });
 
 /*
-
-
-      test( "TABLE 4: Unique accessible names", function() {
-
-        executeTest('ID_IFRAME_4A', 'TABLE_4');
-        
-      });
-
-
-      test( "TABLE 4: Unique accessible names", function() {
-
-        executeTest('ID_IFRAME_4B', 'TABLE_4');
-        
-      });
-      
-      test( "TABLE_5: Table role defined", function() {
-
-        executeTest('ID_IFRAME_5', 'TABLE_5');
-        
-      });
- 
-      test( "TABLE 6: Use TH elements instead of TD[SCOPE] for data table headers", function() {
-
-        executeTest('ID_IFRAME_6', 'TABLE_6');
-        
-      });
 
       test( "TABLE 7:  Data cells in complex data tables must use headers", function() {
 

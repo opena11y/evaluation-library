@@ -213,10 +213,9 @@ export const tableRules = {
         NOT_APPLICABLE: 'Multiple data tables were not found on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The accessible name for the data table is unique: \'%1\'.',
-        ELEMENT_FAIL_1:   'Change the accessible name for the data table to be unique on the page: \'%1\'.',
-        ELEMENT_FAIL_2:   'Add a accessible name to the data table.',
-        ELEMENT_HIDDEN_1: 'The @table@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   'The table\'s accessible name "%1" for @%2@ element is unique on the page.',
+        ELEMENT_FAIL_1:   'The table\'s accessible name "%1" is not unique on the page for the @%2@ element, update the accessible table names to be unique and descriptive of the table content.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'Data tables that share the same accessible name make it difficult to users of assistive technologies to differentiate the differences in content of the data tables on the same page.',
@@ -235,12 +234,12 @@ export const tableRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+          title: 'HTML Specification: 4.9.1 The table element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-table-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: summary attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
+          title: 'HTML Specification: 4.9.1 The caption element',
+          url:   'https://html.spec.whatwg.org/multipage/tables.html#the-caption-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -282,8 +281,8 @@ export const tableRules = {
       SUMMARY:               'Identify table markup as data or layout',
       TARGET_RESOURCES_DESC: '@table@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'The table without headers or @role="presentation"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
-        FAIL_P:   'For the %N_F tables without headers or @role=presentation"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
         MANUAL_CHECK_S: 'Verify the @table@ element that only has one row or column is used only only for layout.',
         MANUAL_CHECK_P: 'Verify the %N_H @table@ elements that only have one row or column are used only only for layout.',
         HIDDEN_S: 'One @table@ element that is hidden was not evaluated.',
@@ -291,13 +290,16 @@ export const tableRules = {
         NOT_APPLICABLE:  'No table markup found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @table@ is considered a data table, since it has header cells or an accessible name.',
-        ELEMENT_PASS_2:   'The @table@ is considered a layout table, since it has @role="presentation"@.',
-        ELEMENT_PASS_3:   'The @table@ is considered a complex data table, since it has colums/row spans or multiple headers in a row or column.',
-        ELEMENT_MC_1:     'Verify the table with only one row is only used for layout purposes.',
-        ELEMENT_MC_2:     'Verify the table with only one column is only used for layout purposes.',
-        ELEMENT_FAIL_1:   'Define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table element if the table is being used to layout content.',
-        ELEMENT_HIDDEN_1: 'The @table@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   'The @%1@ element is a layout table, since it has @role="%2"@.',
+        ELEMENT_PASS_2:   'The @%1@ element is a simple data table, since it has header cells and/or an accessible name.',
+        ELEMENT_PASS_3:   'The @%1@ element is a complex data table, since it has columns/row spans or multiple headers in a row or column.',
+        ELEMENT_PASS_4:   'The @%1@ element is table, since it is using @role=table@.',
+        ELEMENT_PASS_5:   'The @%1@ element is grid, since it is using @role=grid@.',
+        ELEMENT_PASS_6:   'The @%1@ element is treegrid, since it is using @role=treegrid@.',
+        ELEMENT_MC_1:     'Verify the @%1@ element with only one row is only used for layout purposes, if so add the @role@ attribute with a value of @none@.',
+        ELEMENT_MC_2:     'Verify the @%1@ element with only one column is only used for layout purposes, if so add the @role@ attribute with a value of @none@.',
+        ELEMENT_FAIL_1:   'Define the purpose of the @%1@ element by adding header cells if the table is being used for tabular data or use @role="none"@ on the table element if the table is being used to layout content.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'The @table@ element is designed for representing tabular data in a web page, but table markup has also been used by web developers as a means to layout content in rows and columns.',
@@ -365,8 +367,9 @@ export const tableRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @th@ element is used for header cell',
-        ELEMENT_FAIL_1:   'Change the @td[scope]@ element to a @th@ element',
-        ELEMENT_HIDDEN_1: 'The @th@ element was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1:   'Change the @td[scope]@ element to a @th[scope]@ element',
+        ELEMENT_HIDDEN_1: 'The cells of the table were not evaluated because the table is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         '@th@ element is the web standards way to identify header cells in a table, and makes the data table source code easier to read and debug for accessibility problems.'

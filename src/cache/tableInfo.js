@@ -31,6 +31,7 @@ debug.headerCalc = false;
 
 class TableElement {
   constructor (parentTableElement, domElement) {
+    domElement.tableElement = this;
     this.domElement = domElement;
     this.parentTableElement = parentTableElement;
 
@@ -42,6 +43,7 @@ class TableElement {
     this.rows = [];
     this.row = null;
     this.rowCount = 0;
+    this.colCount = 0;
 
     this.cells = [];
 
@@ -114,6 +116,11 @@ class TableElement {
       }
     }
 
+    return column;
+  }
+
+  updateColumnCount (col) {
+    this.colCount = Math.max(this.colCount, col);
   }
 
   getRow(rowNumber, domElement=null) {
@@ -198,16 +205,34 @@ class TableElement {
   }
 
   getTableType () {
-    const role = this.domElement.role;
 
-    if ((role === 'none') ||
-        (role === 'presentation') ||
-        (this.rows.length === 1)) {
-      return TABLE_TYPE.LAYOUT;
+    const de = this.domElement;
+
+    if (de.hasRole) {
+      switch (de.role) {
+        case 'none':
+        case 'presentation':
+          return TABLE_TYPE.LAYOUT;
+
+        case 'grid':
+          return TABLE_TYPE.ARIA_GRID;
+
+        case 'table':
+          return TABLE_TYPE.ARIA_TABLE;
+
+        case 'treegrid':
+          return TABLE_TYPE.ARIA_TREEGRID;
+
+        default:
+          break;
+      }
     }
 
-    if (this.headerCellCount) {
-      if (this.spannedDataCells) {
+    if (((this.headerCellCount > 0) ||
+         (this.domElement.accName.name)) &&
+       (this.rowCount > 1) &&
+       (this.colCount > 1)) {
+      if (this.spannedDataCells > 0) {
         return TABLE_TYPE.COMPLEX;
       }
       else {
@@ -320,7 +345,6 @@ class TableRow {
     if (domElement) {
       this.domElement   = domElement;
     }
-
     this.cells = [];
     this.rowNumber = rowNumber;
   }
@@ -385,6 +409,9 @@ class TableRow {
 
 class TableCell {
   constructor (domElement, rowNumber, columnNumber, rowSpan=1, columnSpan=1) {
+    // Provide a reference for elementResult object to get information about table cells
+    domElement.tableCell = this;
+
     this.domElement   = domElement;
 
     const node    = domElement.node;
@@ -486,7 +513,7 @@ export default class TableInfo {
       case 'th':
       case 'td':
         if (te) {
-          te.addCell(domElement);
+          te.updateColumnCount(te.addCell(domElement));
         }
         break;
 
