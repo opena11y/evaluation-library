@@ -109,7 +109,7 @@ export default class BaseResult {
    *
    * @desc Returns the result type: element, page or website
    *
-   * @return {Object} see @desc
+   * @return {String} see @desc
    */
   getResultType () {
     return getCommonMessage('resultType', this.result_type);

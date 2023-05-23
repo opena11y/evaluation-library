@@ -2,14 +2,21 @@
 *   content.js
 */
 
+import {evaluate}              from './evaluate.js';
 import {viewId}                from './panelConstants.js';
 import {getSummaryInfo}        from './getSummaryInfo.js';
 import {getRuleResultsInfo}    from './getRuleResultsInfo.js';
 import {getElementResultsInfo} from './getElementResultsInfo.js';
-import {highlightModule}       from './highlightModule.js';
-import {highlightElements}     from './highlightElements.js';
+import {
+  addHighlightStyle,
+  clearHighlights,
+  highlightElements
+} from './highlight.js';
+import DebugLogging from '../debug.js';
 
-const debug = false;
+
+const debug = new DebugLogging('Content', false);
+debug.flag = false;
 
 /*
 **  Connect to panel.js script and set up listener/handler
@@ -34,20 +41,21 @@ function messageHandler (message) {
 function getEvaluationInfo(panelPort) {
 
   // NOTE: infoAInspectorEvaluation is a global variable in the page
-  const aiInfo     = infoAInspectorEvaluation; // eslint-disable-line 
-  const ruleResult = ainspectorSidebarRuleResult; // eslint-disable-line
+  const aiInfo   = infoAInspectorEvaluation;    // eslint-disable-line
+  let ruleResult = ainspectorSidebarRuleResult; // eslint-disable-line
 
-  if (debug) {
-    console.log(`[getEvaluationInfo][           view]: ${aiInfo.view}`);
-    console.log(`[getEvaluationInfo][      groupType]: ${aiInfo.groupType}`);
-    console.log(`[getEvaluationInfo][        groupId]: ${aiInfo.groupId}`);
-    console.log(`[getEvaluationInfo][         ruleId]: ${aiInfo.ruleId}`);
-    console.log(`[getEvaluationInfo][      rulesetId]: ${aiInfo.rulesetId}`);
-    console.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
-    console.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
-    console.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
-    console.log(`[getEvaluationInfo][removeHighlight]: ${aiInfo.removeHighlight}`);
-    console.log(`[ainspectorSidebarRuleResult][ruleId]: ${(ruleResult && ruleResult.rule) ? ruleResult.rule.getId() : 'none'}`);
+  if (debug.flag) {
+    debug.log(`[getEvaluationInfo][           view]: ${aiInfo.view}`);
+    debug.log(`[getEvaluationInfo][      groupType]: ${aiInfo.groupType}`);
+    debug.log(`[getEvaluationInfo][        groupId]: ${aiInfo.groupId}`);
+    debug.log(`[getEvaluationInfo][         ruleId]: ${aiInfo.ruleId}`);
+    debug.log(`[getEvaluationInfo][      rulesetId]: ${aiInfo.rulesetId}`);
+    debug.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
+    debug.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
+    debug.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
+    debug.log(`[getEvaluationInfo][removeHighlight]: ${aiInfo.removeHighlight}`);
+    debug.log(`[ainspectorSidebarRuleResult][ruleId]: ${(ruleResult && ruleResult.rule) ? ruleResult.rule.getId() : 'none'}`);
+    debug.log(`[ainspectorSidebarRuleResult][length]: ${(ruleResult && ruleResult.rule) ? ruleResult.getAllResultsArray().length : 'none'}`);
   }
 
   let info = {};
@@ -58,22 +66,30 @@ function getEvaluationInfo(panelPort) {
 
   switch(aiInfo.view) {
     case viewId.summary:
-      highlightModule.removeHighlight(document);
+      clearHighlights();
       info.infoSummary = getSummaryInfo();
+      window.ainspectorAllResultsArray = false;
       break;
 
     case viewId.ruleResults:
-      highlightModule.removeHighlight(document);
+      clearHighlights();
       info.infoRuleResults = getRuleResultsInfo(aiInfo.groupType, aiInfo.groupId);
+      window.ainspectorAllResultsArray = false;
       break;
 
     case viewId.elementResults:
+      clearHighlights();
+      addHighlightStyle();
       if (aiInfo.highlightOnly) {
-        info.infoHighlight = highlightElements(aiInfo.highlight, aiInfo.position);
+        if (ruleResult.getAllResultsArray) {
+          highlightElements(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+          info.infoHighlight = true;
+        }
       } else {
-        highlightModule.removeHighlight(document);
-        info.infoElementResults = getElementResultsInfo(aiInfo.ruleId, aiInfo.highlight, aiInfo.position);
-        highlightElements(aiInfo.highlight, aiInfo.position);
+        const evaluationResult  = evaluate();
+        ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
+        info.infoElementResults = getElementResultsInfo(ruleResult);
+        highlightElements(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
       }
       break;
 
@@ -93,6 +109,6 @@ browser.runtime.onMessage.addListener(request => {  // eslint-disable-line
   // to be executed on receiving messages from the panel
   if ((request.option    === 'highlight') &&
       (request.highlight === 'none')) {
-//    highlightModule.removeHighlight(document);
+    clearHighlights();
   }
 });

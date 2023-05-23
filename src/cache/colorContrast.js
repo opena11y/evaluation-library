@@ -8,6 +8,41 @@ const debug = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
+  /**
+   * @function getLuminance
+   *
+   * @desc Get the luminance value of a hex encoded color
+   *
+   * @param {String}  color    - Hex representation of a color value
+   *
+   * @return {Number}  Returns a number representing the limnance value
+   */
+
+  function getLuminance (color) {
+
+    // Get decimal values
+    const R8bit = parseInt(color.substring(0,2),16);
+    const G8bit = parseInt(color.substring(2,4),16);
+    const B8bit = parseInt(color.substring(4,6),16);
+
+    // Get sRGB values
+    const RsRGB = R8bit/255;
+    const GsRGB = G8bit/255;
+    const BsRGB = B8bit/255;
+    // Calculate luminance
+    const R = (RsRGB <= 0.03928) ? RsRGB/12.92 : Math.pow(((RsRGB + 0.055)/1.055), 2.4);
+    const G = (GsRGB <= 0.03928) ? GsRGB/12.92 : Math.pow(((GsRGB + 0.055)/1.055), 2.4);
+    const B = (BsRGB <= 0.03928) ? BsRGB/12.92 : Math.pow(((BsRGB + 0.055)/1.055), 2.4);
+
+    return (0.2126 * R + 0.7152 * G + 0.0722 * B);
+  }
+
+export function computeCCR (hex1, hex2) {
+    const L1 = getLuminance(hex1);
+    const L2 = getLuminance(hex2);
+    return Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
+}
+
 /**
  * @class ColorContrast
  *
@@ -46,9 +81,7 @@ export default class ColorContrast {
     this.fontWeight = this.normalizeFontWeight(style, parentColorContrast);
     this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
 
-    const L1 = this.getLuminance(this.colorHex);
-    const L2 = this.getLuminance(this.backgroundColorHex);
-    this.colorContrastRatio = Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
+    this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
     if (debug.flag) {
       debug.log(`[                    opacity]: ${this.opacity}`);
@@ -263,36 +296,6 @@ export default class ColorContrast {
       fontWeight = parseInt(fontWeight, 10);
     }    
     return fontWeight;
-  }
-
-  /**
-   * @method getLuminance
-   *
-   * @desc Get the luminance value of a hex encoded color
-   *
-   * @param {String}  color    - Hex representation of a color value
-   *
-   * @return {Number}  Returns a number representing the limnance value
-   */
-
-  getLuminance (color) {
-
-    // Get decimal values
-    const R8bit = parseInt(color.substring(0,2),16);
-    const G8bit = parseInt(color.substring(2,4),16);
-    const B8bit = parseInt(color.substring(4,6),16);
-
-    // Get sRGB values
-    const RsRGB = R8bit/255;
-    const GsRGB = G8bit/255;
-    const BsRGB = B8bit/255;
-    // Calculate luminance
-    const R = (RsRGB <= 0.03928) ? RsRGB/12.92 : Math.pow(((RsRGB + 0.055)/1.055), 2.4);
-    const G = (GsRGB <= 0.03928) ? GsRGB/12.92 : Math.pow(((GsRGB + 0.055)/1.055), 2.4);
-    const B = (BsRGB <= 0.03928) ? BsRGB/12.92 : Math.pow(((BsRGB + 0.055)/1.055), 2.4);
-
-    return (0.2126 * R + 0.7152 * G + 0.0722 * B);
-
   }
 
   /**

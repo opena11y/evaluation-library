@@ -5,6 +5,10 @@ import {RESULT_TYPE}  from './constants.js';
 import BaseResult     from './baseResult.js';
 import DebugLogging   from './debug.js';
 
+import {
+  getCommonMessage
+} from './_locale/locale.js';
+
 /* Constants */
 
 const debug = new DebugLogging('ElementResult', false);
@@ -68,6 +72,19 @@ export default class ElementResult extends BaseResult {
                         de.tagName;
     return identifier;
   }
+
+  /**
+   * @method getNode
+   *
+   * @desc Gets the dom node
+   *
+   * @return {Object} see description
+   */
+
+  getNode () {
+    return this.domElement.node;
+  }
+
 
   /**
    * @method getTagName
@@ -231,9 +248,12 @@ export default class ElementResult extends BaseResult {
     const info = {};
     const te = this.domElement.tableElement;
     if (te) {
-      info.type         = te.tableType;
-      info.cell_count   = te.cellCount;
-      info.header_count = te.headerCellCount;
+      info.type     = getCommonMessage('tableType', te.tableType);
+      info.rows     = te.rowCount;
+      info.columns  = te.colCount;
+      info.header_cells     = te.headerCellCount;
+      info.data_cells       = te.cellCount - te.headerCellCount;
+      info.cells_with_spans = te.spannedCells;
     }
     return info;
   }

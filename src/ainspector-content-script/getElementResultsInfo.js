@@ -1,6 +1,5 @@
  /* getRuleResultInfo.js */
 
-import {evaluate}         from './evaluate.js';
 import {getDetailsAction} from './getDetailsAction.js';
 import {
   RESULT_VALUE
@@ -14,10 +13,8 @@ import {
 *   (2) return result objec for the rule view in the sidebar;
 */
 
-export function getElementResultsInfo(ruleId) {
+export function getElementResultsInfo(ruleResult) {
 
-  const evaluationResult  = evaluate();
-  const ruleResult = evaluationResult.getRuleResult(ruleId);
   const elemSummaryResult = ruleResult.getResultsSummary();
 
   const rule = ruleResult.getRule();
@@ -37,7 +34,7 @@ export function getElementResultsInfo(ruleId) {
   info.detailsAction  = getDetailsAction(ruleResult);
   info.ruleResult     = getRuleResultInfo(ruleResult);
   info.elementResults = getElementResultInfo(ruleResult);
-  info.otherResult = getPageOrWebsiteResultInfo(ruleResult);
+  info.otherResult    = getPageOrWebsiteResultInfo(ruleResult);
 
   // get JSON with element result details
   info.json = ruleResult.toJSON('', true);

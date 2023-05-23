@@ -26,7 +26,7 @@ gulp.task('build', () => {
     .then(bundle => {
       return bundle.write({
         file: './releases/opena11y-evaluation-library.js',
-        format: 'es',
+        format: 'es'
       });
     });
 });
@@ -37,7 +37,7 @@ gulp.task('build', () => {
 gulp.task('buildcjs', () => {
   return rollup
     .rollup({
-      input: './src/evaluationLibrary.js'
+      input: './src/evaluationLibrary.js',
     })
     .then(bundle => {
       return bundle.write({

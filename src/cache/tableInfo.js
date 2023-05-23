@@ -424,11 +424,15 @@ class TableCell {
     this.isScopeRow    = (scope === 'row') || (role == 'rowheader');
     this.isScopeColumn = (scope === 'col') || (role == 'columnheader');
     this.hasScope = this.isScopeRow || this.isScopeColumn;
+    this.isParentTHead = node.parentNode ?
+                         node.parentNode.tagName.toLowerCase() === 'thead' :
+                         false;
 
     this.isHeader = (tagName === 'th') ||
                     (role == 'columnheader') ||
                     (role == 'rowheader') ||
-                    this.hasScope;
+                    this.hasScope ||
+                    this.isParentTHead;
 
 
     this.startRow    = rowNumber;
