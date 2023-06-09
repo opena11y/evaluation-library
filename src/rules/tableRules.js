@@ -96,7 +96,7 @@ export const tableRules = [
 /**
  * @object TABLE_2
  *
- * @desc Data table %s have an accessible name
+ * @desc Data table have an accessible name
  */
 { rule_id             : 'TABLE_2',
   last_updated        : '2023-05-03',
@@ -346,11 +346,11 @@ export const tableRules = [
 /**
  * @object TABLE_7
  *
- * @desc  Data cells in complex table must use headers attributes
+ * @desc  Spanned data cells in complex table must use headers attributes
  */
 
 { rule_id             : 'TABLE_7',
-  last_updated        : '2023-04-21',
+  last_updated        : '2023-05-08',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.MORE,
@@ -359,8 +359,39 @@ export const tableRules = [
   wcag_related_ids    : ['2.4.6'],
   target_resources    : ['td'],
   validate          : function (dom_cache, rule_result) {
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (te.tableType > TABLE_TYPE.DATA) {
+        if (de.visibility.isVisibleToAT) {
+          te.cells.forEach( cell => {
+            const cde = cell.domElement;
+            if (cde.visibility.isVisibleToAT) {
+              if (!cell.isHeader &&
+                 ((cell.rowSpan > 1) || (cell.columnSpan > 1))) {
+                if (cell.headerSource === HEADER_SOURCE.HEADERS_ATTR) {
+                  if (cell.headers.length == 1) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_1', [cell.headers[0]]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_2', [cell.headers.length, cell.headers.join(' | ')]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+                }
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, cde, 'ELEMENT_HIDDEN_2', [cde.elemName]);
+            }
+          });
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
 
-    debug.flag && debug.log(`TABLE 7 Rule ${dom_cache} ${rule_result}`);
 
 /*
     function allReadyDone(span_cell) {

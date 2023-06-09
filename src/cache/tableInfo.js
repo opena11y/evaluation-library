@@ -14,7 +14,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('tableInfo', false);
-debug.flag = false;
+debug.flag = true;
 debug.rows = true;
 debug.cells = true;
 debug.tableTree = true;
@@ -96,24 +96,21 @@ class TableElement {
     const column = row.getNextEmptyColumn();
     const cell = new TableCell(domElement, row.rowNumber, column, rowSpan, colSpan);
     this.cells.push(cell);
-    row.setCell(column, cell);
 
     this.cellCount += 1;
     if (cell.isHeader) {
       this.headerCellCount += 1;
     }
 
-    if (colSpan > 1) {
-      for (let i = 1; i < colSpan; i += 1) {
-        row.setCell((column+i), cell);
+    for (let i = column; i < (column + colSpan); i++) {
+      for (let j = 0; j < rowSpan; j++) {
+        row = this.getRow(this.rowCount + j);
+        row.setCell(i, cell);
       }
     }
 
-    if (rowSpan > 1) {
-      for (let i = 1; i < rowSpan; i += 1) {
-        row = this.getRow(this.rowCount + i);
-        row.setCell(column, cell);
-      }
+    if (cell.rowSpan || cell.colSpan) {
+      this.spannedCells += 1;
     }
 
     return column;
@@ -140,9 +137,9 @@ class TableElement {
     for (let i = 0; i < this.cells.length; i += 1) {
       const cell = this.cells[i];
       if ((rowNumber >= cell.startRow) &&
-          (rowNumber <= cell.endRow) &&
+          (rowNumber < cell.endRow) &&
           (columnNumber >= cell.startColumn ) &&
-          (columnNumber <= cell.endColumn )) {
+          (columnNumber < cell.endColumn )) {
         return  cell;
       }
     }
@@ -232,7 +229,7 @@ class TableElement {
          (this.domElement.accName.name)) &&
        (this.rowCount > 1) &&
        (this.colCount > 1)) {
-      if (this.spannedDataCells > 0) {
+      if (this.spannedCells > 0) {
         return TABLE_TYPE.COMPLEX;
       }
       else {
@@ -434,16 +431,27 @@ class TableCell {
                     this.hasScope ||
                     this.isParentTHead;
 
-
     this.startRow    = rowNumber;
     this.startColumn = columnNumber;
 
-    this.endRow    = rowNumber    + rowSpan    - 1;
-    this.endColumn = columnNumber + columnSpan - 1;
+    this.endRow    = rowNumber    + rowSpan;
+    this.endColumn = columnNumber + columnSpan;
 
     this.headers = [];
     this.headersSource = HEADER_SOURCE.NONE;
 
+  }
+
+  get columnSpan () {
+    let span = this.endColumn - this.startColumn;
+    span = isNaN(span) ? 1 : span;
+    return span;
+  }
+
+  get rowSpan () {
+    let span = this.endRow - this.startRow;
+    span = isNaN(span) ? 1 : span;
+    return span;
   }
 
   toString () {
@@ -464,7 +472,6 @@ class TableCell {
   }
 
 }
-
 
 /**
  * @class TableInfo

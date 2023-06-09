@@ -6480,7 +6480,7 @@ function computeCCR (hex1, hex2) {
     return Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 }
 
-/**
+/*
  * @class ColorContrast
  *
  * @desc Identifies the text properties used to determine WCAG color contrast 
@@ -6653,7 +6653,7 @@ class ColorContrast {
     return backgroundImage;
   }
 
-  /**
+  /*
    * @method normalizeFontSize
    *
    * @desc Normalizes font size to a number 
@@ -6685,7 +6685,7 @@ class ColorContrast {
     return fontSize;
   }
 
-  /**
+  /*
    * @method normalizeFontWeight
    *
    * @desc Normalizes font weight to a number 
@@ -11271,7 +11271,7 @@ const ruleCategories = [
   },
   {
     id           : RULE_CATEGORIES.STYLES_READABILITY,
-    title        : 'Styles/Content',
+    title        : 'Color/Content',
     url          : '',
     description  : 'Use proper HTML markup to identify the semantics and language of text content. Ensure that text is readable by adhering to color contrast guidelines, and that information is not conveyed solely by the use of color, shape, location or sound.'
   },
@@ -15697,9 +15697,9 @@ const tableRules$1 = {
         NOT_APPLICABLE: 'No data tables and/or @td@ cells on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @%1@ element has one header defined using row and/or column headers cells, header content: "%2".',
+        ELEMENT_PASS_1:   'The @%1@ element has 1 header defined using row and/or column headers cells, header content: "%2".',
         ELEMENT_PASS_2:   'The @%1@ element has %2 headers defined using row and/or column headers cells, header content: "%3".',
-        ELEMENT_PASS_3:   'The @%1@ element has one header defined using the @header@ attribute, header content: "%2".',
+        ELEMENT_PASS_3:   'The @%1@ element has 1 header defined using the @header@ attribute, header content: "%2".',
         ELEMENT_PASS_4:   'The @%1@ element has %2 headers defined using the @header@ attribute, header content: "%3".',
         ELEMENT_FAIL_1:   'Add table cells to be used as header cells for the @%1@ element using either row/column headers or the @headers@ attribute.',
         ELEMENT_MC_1:     'The @%1@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need headers.',
@@ -16088,19 +16088,16 @@ const tableRules$1 = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:         'Add a @headers@ attribute to the data cell to identify the header cells for the data cell.',
         FAIL_P:         'Add %N_F data cells use the @headers@ attribute to identify the header cells for the data cell.',
-        MANUAL_CHECK_S: 'The @td@ element does not have any text content and it does not have any header cells, verify that this cell is being used for formatting and does not need headers.',
-        MANUAL_CHECK_P: 'There are %N_MC @td@ elements that do not have any text content and do not have any header cells, verify that thess cells are being used for formatting and do not need headers.',
         HIDDEN_S:       'One @td@ element that is hidden was not evaluated.',
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No complex data tables on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The header comes from the @headers@ attribute with the following ids: \'%1\'.',
-        ELEMENT_FAIL_1:   'Add header cells using the @headers@ attribute, since this table is a complex data table.',
-        ELEMENT_FAIL_2:   'Add text content to the header cells with the following ids: \'%1\'.',
-        ELEMENT_FAIL_3:   'Change the idrefs \'%1\' in the @headers@ attribute to valid ids.',
-        ELEMENT_MC_1:     'The @td@ element does not have any text content and it does not have any header cells, verify that this cell is being used for formatting and does not need headers.',
-        ELEMENT_HIDDEN_1: 'Data cell was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   '@headers@ attribute references the following header: \'%1\'.',
+        ELEMENT_PASS_2:   '@headers@ attribute references the following %1 headers: \'%2\'.',
+        ELEMENT_FAIL_1:   'Add header cells using the @headers@ attribute, since the cell spans more than one row and/or column table.',
+        ELEMENT_HIDDEN_1: 'The cells of the table were not evaluated because the table is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'Data cell was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'The data cells in complex data tables need to use the @headers@ attribute to identify the appropriate header cells, since simple row/column relationships cannot be relied upon to provide header information.',
@@ -17644,7 +17641,7 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 
 /* Constants */
 const debug$m = new DebugLogging('tableInfo', false);
-debug$m.flag = false;
+debug$m.flag = true;
 debug$m.rows = true;
 debug$m.cells = true;
 debug$m.tableTree = true;
@@ -17726,24 +17723,21 @@ class TableElement {
     const column = row.getNextEmptyColumn();
     const cell = new TableCell(domElement, row.rowNumber, column, rowSpan, colSpan);
     this.cells.push(cell);
-    row.setCell(column, cell);
 
     this.cellCount += 1;
     if (cell.isHeader) {
       this.headerCellCount += 1;
     }
 
-    if (colSpan > 1) {
-      for (let i = 1; i < colSpan; i += 1) {
-        row.setCell((column+i), cell);
+    for (let i = column; i < (column + colSpan); i++) {
+      for (let j = 0; j < rowSpan; j++) {
+        row = this.getRow(this.rowCount + j);
+        row.setCell(i, cell);
       }
     }
 
-    if (rowSpan > 1) {
-      for (let i = 1; i < rowSpan; i += 1) {
-        row = this.getRow(this.rowCount + i);
-        row.setCell(column, cell);
-      }
+    if (cell.rowSpan || cell.colSpan) {
+      this.spannedCells += 1;
     }
 
     return column;
@@ -17770,9 +17764,9 @@ class TableElement {
     for (let i = 0; i < this.cells.length; i += 1) {
       const cell = this.cells[i];
       if ((rowNumber >= cell.startRow) &&
-          (rowNumber <= cell.endRow) &&
+          (rowNumber < cell.endRow) &&
           (columnNumber >= cell.startColumn ) &&
-          (columnNumber <= cell.endColumn )) {
+          (columnNumber < cell.endColumn )) {
         return  cell;
       }
     }
@@ -17859,7 +17853,7 @@ class TableElement {
          (this.domElement.accName.name)) &&
        (this.rowCount > 1) &&
        (this.colCount > 1)) {
-      if (this.spannedDataCells > 0) {
+      if (this.spannedCells > 0) {
         return TABLE_TYPE.COMPLEX;
       }
       else {
@@ -18061,16 +18055,27 @@ class TableCell {
                     this.hasScope ||
                     this.isParentTHead;
 
-
     this.startRow    = rowNumber;
     this.startColumn = columnNumber;
 
-    this.endRow    = rowNumber    + rowSpan    - 1;
-    this.endColumn = columnNumber + columnSpan - 1;
+    this.endRow    = rowNumber    + rowSpan;
+    this.endColumn = columnNumber + columnSpan;
 
     this.headers = [];
     this.headersSource = HEADER_SOURCE.NONE;
 
+  }
+
+  get columnSpan () {
+    let span = this.endColumn - this.startColumn;
+    span = isNaN(span) ? 1 : span;
+    return span;
+  }
+
+  get rowSpan () {
+    let span = this.endRow - this.startRow;
+    span = isNaN(span) ? 1 : span;
+    return span;
   }
 
   toString () {
@@ -18091,7 +18096,6 @@ class TableCell {
   }
 
 }
-
 
 /**
  * @class TableInfo
@@ -21294,7 +21298,7 @@ const tableRules = [
 /**
  * @object TABLE_2
  *
- * @desc Data table %s have an accessible name
+ * @desc Data table have an accessible name
  */
 { rule_id             : 'TABLE_2',
   last_updated        : '2023-05-03',
@@ -21544,11 +21548,11 @@ const tableRules = [
 /**
  * @object TABLE_7
  *
- * @desc  Data cells in complex table must use headers attributes
+ * @desc  Spanned data cells in complex table must use headers attributes
  */
 
 { rule_id             : 'TABLE_7',
-  last_updated        : '2023-04-21',
+  last_updated        : '2023-05-08',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.TABLES,
   ruleset             : RULESET.MORE,
@@ -21557,8 +21561,39 @@ const tableRules = [
   wcag_related_ids    : ['2.4.6'],
   target_resources    : ['td'],
   validate          : function (dom_cache, rule_result) {
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (te.tableType > TABLE_TYPE.DATA) {
+        if (de.visibility.isVisibleToAT) {
+          te.cells.forEach( cell => {
+            const cde = cell.domElement;
+            if (cde.visibility.isVisibleToAT) {
+              if (!cell.isHeader &&
+                 ((cell.rowSpan > 1) || (cell.columnSpan > 1))) {
+                if (cell.headerSource === HEADER_SOURCE.HEADERS_ATTR) {
+                  if (cell.headers.length == 1) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_1', [cell.headers[0]]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_2', [cell.headers.length, cell.headers.join(' | ')]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+                }
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, cde, 'ELEMENT_HIDDEN_2', [cde.elemName]);
+            }
+          });
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
 
-    debug$d.flag && debug$d.log(`TABLE 7 Rule ${dom_cache} ${rule_result}`);
 
 /*
     function allReadyDone(span_cell) {

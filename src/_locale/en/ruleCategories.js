@@ -17,7 +17,7 @@ export const ruleCategories = [
   },
   {
     id           : RULE_CATEGORIES.STYLES_READABILITY,
-    title        : 'Styles/Content',
+    title        : 'Color/Content',
     url          : '',
     description  : 'Use proper HTML markup to identify the semantics and language of text content. Ensure that text is readable by adhering to color contrast guidelines, and that information is not conveyed solely by the use of color, shape, location or sound.'
   },

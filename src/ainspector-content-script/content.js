@@ -68,20 +68,20 @@ function getEvaluationInfo(panelPort) {
     case viewId.summary:
       clearHighlights();
       info.infoSummary = getSummaryInfo();
-      window.ainspectorAllResultsArray = false;
+      ruleResult = false;
       break;
 
     case viewId.ruleResults:
       clearHighlights();
       info.infoRuleResults = getRuleResultsInfo(aiInfo.groupType, aiInfo.groupId);
-      window.ainspectorAllResultsArray = false;
+      ruleResult = false;
       break;
 
     case viewId.elementResults:
-      clearHighlights();
       addHighlightStyle();
+      clearHighlights();
       if (aiInfo.highlightOnly) {
-        if (ruleResult.getAllResultsArray) {
+        if (ruleResult && ruleResult.getAllResultsArray) {
           highlightElements(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
           info.infoHighlight = true;
         }

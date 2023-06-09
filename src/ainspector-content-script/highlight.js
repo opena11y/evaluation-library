@@ -1,5 +1,7 @@
 /*
 *   highlight.js
+*   Code is based on highlight.js module developed by
+*   Nicholas Hoyt for page structure extension
 */
 
 import {RESULT_VALUE} from '../constants.js'
@@ -9,7 +11,7 @@ import {computeCCR} from '../cache/colorContrast.js';
 export { addHighlightStyle, highlightElements, clearHighlights };
 
 const debug = new DebugLogging('highlight', false);
-debug.flag = true;
+debug.flag = false;
 
 const dataAttrResult     = 'data-ai-result';
 const dataAttrSelected   = 'data-ai-selected';
@@ -124,9 +126,23 @@ styleTemplate.innerHTML = `
 function addHighlightStyle () {
   if (document.querySelector(`style[title="${styleName}"]`) === null) {
     document.body.appendChild(styleTemplate.content.cloneNode(true));
-    if (debug) { console.debug(`Added style element (${styleName}) to document`); }
+    if (debug.flag) {debug.log(`Added style element (${styleName}) to document`); }
   }
 }
+
+/*
+ *  @function  highlightElements
+ *
+ *  @desc  Iterates the current element results in the sidebar
+ *         and highlights the positions of each element result
+ *         based on the result value, the currently selected
+ *         element result is receives an additional highlight border
+ *
+ *  @param  {Object}  allResuls  -  Array of results shown in the sidebar
+ *  @param  {String}  option     -  Page highlighting option
+ *  @param  {String}  position   -  The ordinal position of the selected
+ *                                  element result
+ */
 
 function highlightElements (allResults, option, position) {
   let count = 0;
@@ -135,6 +151,7 @@ function highlightElements (allResults, option, position) {
     if (r.isElementResult) {
       const resultValue = r.getResultValue();
       const node = r.getNode();
+      // Use backgroung colors from parent element for styling selected element
       const parentDomElement = r.domElement.parentDomElement;
       const cc = parentDomElement ?
                  parentDomElement.colorContrast :
@@ -161,6 +178,7 @@ function highlightElements (allResults, option, position) {
         }
       }
 
+      // Highlight selected element
       if ((option !== 'selected') &&
           (r.getOrdinalPosition() === parseInt(position))) {
         // use the best contrast color for the outline of the selection
@@ -178,6 +196,17 @@ function highlightElements (allResults, option, position) {
   return count;
 }
 
+/*
+ *  @function  highlightSelected
+ *
+ *  @desc  Create an overlay element that appears as a highlighted border
+ *         around element to visually identifying the selected element in the
+ *         sidebar.
+ *
+ *  @param  {Object}  element  -  DOM element node to highlight
+ *  @param  {String}  style    -  CSS selector for light or dark border
+ *  @param  {String}  style    -  The page highlighting option
+ */
 function highlightSelected (element, style, option) {
 
   if (element === null) {
@@ -194,9 +223,15 @@ function highlightSelected (element, style, option) {
 }
 
 /*
-*   highlightElement: Use bounding client rectangle and offsets to create an element
-*   that appears as a highlighted border around element corresponding to 'rect'.
-*/
+ *  @function  highlightElement
+ *
+ *  @desc  Create an overlay element that appears as a highlighted border
+ *         around element to visually identifying it's location and the
+ *         result value (e.h. pass, violation, etc.).
+ *
+ *  @param  {Object}  element     -  DOM element node to highlight
+ *  @param  {Number}  resultValue -  Used to determine the styling and icon
+ */
 function highlightElement (element, resultValue) {
 
   if (element === null) {
@@ -236,9 +271,14 @@ function highlightElement (element, resultValue) {
 }
 
 /*
-*   getOverlayElement: Use bounding client rectangle and offsets to create an element
-*   that appears as a highlighted border around element.
-*/
+ *  @function  getOverlayElement
+ *
+ *  @desc  Create an overlay element and set its position on the page.
+ *
+ *  @param  {Object}  element  -  DOM element node to highlight
+ *
+ *  @returns {Object} DOM node element used for the Overlay
+ */
 
 function getOverlayElement (element) {
 
@@ -261,6 +301,13 @@ function getOverlayElement (element) {
 *   clearHighlights: Utilize 'highlightClass' to remove highlight overlays created
 *   by previous calls to 'addHighlightBox'.
 */
+
+/*
+ *  @function  clearHighlights
+ *
+ *  @desc  Utilize 'highlightClass' to remove highlight overlays created
+ *   by previous calls to 'addHighlightBox'.
+ */
 
 function clearHighlights () {
   const selector = `div.${highlightClass}`;

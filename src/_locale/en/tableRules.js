@@ -22,9 +22,9 @@ export const tableRules = {
         NOT_APPLICABLE: 'No data tables and/or @td@ cells on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @%1@ element has one header defined using row and/or column headers cells, header content: "%2".',
+        ELEMENT_PASS_1:   'The @%1@ element has 1 header defined using row and/or column headers cells, header content: "%2".',
         ELEMENT_PASS_2:   'The @%1@ element has %2 headers defined using row and/or column headers cells, header content: "%3".',
-        ELEMENT_PASS_3:   'The @%1@ element has one header defined using the @header@ attribute, header content: "%2".',
+        ELEMENT_PASS_3:   'The @%1@ element has 1 header defined using the @header@ attribute, header content: "%2".',
         ELEMENT_PASS_4:   'The @%1@ element has %2 headers defined using the @header@ attribute, header content: "%3".',
         ELEMENT_FAIL_1:   'Add table cells to be used as header cells for the @%1@ element using either row/column headers or the @headers@ attribute.',
         ELEMENT_MC_1:     'The @%1@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need headers.',
@@ -413,19 +413,16 @@ export const tableRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:         'Add a @headers@ attribute to the data cell to identify the header cells for the data cell.',
         FAIL_P:         'Add %N_F data cells use the @headers@ attribute to identify the header cells for the data cell.',
-        MANUAL_CHECK_S: 'The @td@ element does not have any text content and it does not have any header cells, verify that this cell is being used for formatting and does not need headers.',
-        MANUAL_CHECK_P: 'There are %N_MC @td@ elements that do not have any text content and do not have any header cells, verify that thess cells are being used for formatting and do not need headers.',
         HIDDEN_S:       'One @td@ element that is hidden was not evaluated.',
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No complex data tables on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The header comes from the @headers@ attribute with the following ids: \'%1\'.',
-        ELEMENT_FAIL_1:   'Add header cells using the @headers@ attribute, since this table is a complex data table.',
-        ELEMENT_FAIL_2:   'Add text content to the header cells with the following ids: \'%1\'.',
-        ELEMENT_FAIL_3:   'Change the idrefs \'%1\' in the @headers@ attribute to valid ids.',
-        ELEMENT_MC_1:     'The @td@ element does not have any text content and it does not have any header cells, verify that this cell is being used for formatting and does not need headers.',
-        ELEMENT_HIDDEN_1: 'Data cell was not evaluated because it is hidden from assistive technologies.'
+        ELEMENT_PASS_1:   '@headers@ attribute references the following header: \'%1\'.',
+        ELEMENT_PASS_2:   '@headers@ attribute references the following %1 headers: \'%2\'.',
+        ELEMENT_FAIL_1:   'Add header cells using the @headers@ attribute, since the cell spans more than one row and/or column table.',
+        ELEMENT_HIDDEN_1: 'The cells of the table were not evaluated because the table is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'Data cell was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'The data cells in complex data tables need to use the @headers@ attribute to identify the appropriate header cells, since simple row/column relationships cannot be relied upon to provide header information.',

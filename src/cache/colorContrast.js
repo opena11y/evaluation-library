@@ -43,7 +43,7 @@ export function computeCCR (hex1, hex2) {
     return Math.round((Math.max(L1, L2) + 0.05)/(Math.min(L1, L2) + 0.05)*10)/10;
 }
 
-/**
+/*
  * @class ColorContrast
  *
  * @desc Identifies the text properties used to determine WCAG color contrast 
@@ -216,7 +216,7 @@ export default class ColorContrast {
     return backgroundImage;
   }
 
-  /**
+  /*
    * @method normalizeFontSize
    *
    * @desc Normalizes font size to a number 
@@ -248,7 +248,7 @@ export default class ColorContrast {
     return fontSize;
   }
 
-  /**
+  /*
    * @method normalizeFontWeight
    *
    * @desc Normalizes font weight to a number 
