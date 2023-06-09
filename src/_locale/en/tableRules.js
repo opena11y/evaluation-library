@@ -476,13 +476,12 @@ export const tableRules = {
         'Accessible description is designed to provide a longer summary of the table, this could include author intended conclusions of the data.'
       ],
       TECHNIQUES: [
-        'Accessible name is typically defined using the @caption@ element, but the @summary@, @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
-        'Accessible description is typically defined using the @summary@ attribute, but the @title@ and @aria-describedby@ attribute can also be used.',
-        'The accessible name is defined before the accessible description, so if using the @summary@ and/or @title@ attribute for the accessible name will require a different technique to add an accessible description.'
+        'Accessible name is typically defined using the @caption@ element, but the @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
+        'Accessible description is typically defined using the @aria-describedby@ attribute, but the @title@ attribute can also be used.'
       ],
       MANUAL_CHECKS: [
-        'Verify the accessible name clearly identifies the table.',
-        'Verify the summary accurately summarizes the table.'
+        'Verify the accessible name clearly identifies the purpose of the table.',
+        'Verify the description summarizes the content of the table.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,

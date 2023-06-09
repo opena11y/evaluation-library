@@ -179,8 +179,7 @@ function highlightElements (allResults, option, position) {
       }
 
       // Highlight selected element
-      if ((option !== 'selected') &&
-          (r.getOrdinalPosition() === parseInt(position))) {
+      if (r.getOrdinalPosition() === parseInt(position)) {
         // use the best contrast color for the outline of the selection
         const ccr1 = computeCCR(selectedColorDark, cc.backgroundColorHex);
         const ccr2 = computeCCR(selectedColorLight, cc.backgroundColorHex);

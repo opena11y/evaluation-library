@@ -16151,13 +16151,12 @@ const tableRules$1 = {
         'Accessible description is designed to provide a longer summary of the table, this could include author intended conclusions of the data.'
       ],
       TECHNIQUES: [
-        'Accessible name is typically defined using the @caption@ element, but the @summary@, @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
-        'Accessible description is typically defined using the @summary@ attribute, but the @title@ and @aria-describedby@ attribute can also be used.',
-        'The accessible name is defined before the accessible description, so if using the @summary@ and/or @title@ attribute for the accessible name will require a different technique to add an accessible description.'
+        'Accessible name is typically defined using the @caption@ element, but the @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
+        'Accessible description is typically defined using the @aria-describedby@ attribute, but the @title@ attribute can also be used.'
       ],
       MANUAL_CHECKS: [
-        'Verify the accessible name clearly identifies the table.',
-        'Verify the summary accurately summarizes the table.'
+        'Verify the accessible name clearly identifies the purpose of the table.',
+        'Verify the description summarizes the content of the table.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -21593,96 +21592,6 @@ const tableRules = [
         }
       }
     });
-
-
-/*
-    function allReadyDone(span_cell) {
-
-      var span_cells_len = span_cells.length;
-
-      for (var i = 0; i < span_cells_len; i++) {
-        if (span_cell === span_cells[i]) return true;
-      }
-
-      span_cells.push(span_cell);
-      return false;
-    }
-
-    var TEST_RESULT   = TEST_RESULT;
-    var HEADER_SOURCE = HEADER_SOURCE;
-    var VISIBILITY    = VISIBILITY;
-    var TABLE_ROLE    = TABLE_ROLE;
-
-    var span_cells = [];
-
-    var table_elements   = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-//     logger.debug("[Table Rule 7] Table Elements on page: " + table_elements_len);
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (var i=0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-//         logger.debug("[Table Rule 1] Table Element: " + te + "   is data table: " + te.table_role);
-
-        if (te.table_role === TABLE_ROLE.COMPLEX) {
-
-          var max_row    = te.max_row;
-          var max_column = te.max_column;
-          var cells      = te.cells;
-
-//         logger.debug("[Table Rule 1] Cell: " + cell + " headers: " + cell.headers);
-
-
-          for (var r = 0; r < max_row; r++) {
-            for (var c = 0; c < max_column; c++) {
-
-              var cell = cells[r][c];
-
-              if (cell &&
-                  (cell.table_type === TABLE.TD_ELEMENT)) {
-
-                if (is_visible_to_at == VISIBILITY.VISIBLE) {
-
-                  if(cell.has_spans && allReadyDone(cell)) continue;
-
-                  if (!cell.has_content) {
-                    rule_result.addResult(TEST_RESULT.MANUAL_CHECK, cell, 'ELEMENT_MC_1', []);
-                  }
-                  else {
-                    if (cell.header_source === HEADER_SOURCE.HEADERS_ATTRIBUTE) {
-                      if (cell.has_content) {
-                        rule_result.addResult(TEST_RESULT.PASS, cell, 'ELEMENT_PASS_1', [cell.headers]);
-                      }
-                      else {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_1', [cell.headers]);
-                      }
-                    }
-                    else {
-                      if (cell.headers && cell.headers.length > 0) {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_5', [cell.headers]);
-                      }
-                      else {
-                        rule_result.addResult(TEST_RESULT.FAIL, cell, 'ELEMENT_FAIL_1', []);
-                      }
-                    }
-                  }
-                }
-                else {
-                 rule_result.addResult(TEST_RESULT.HIDDEN, cell, 'ELEMENT_HIDDEN_1', []);
-                }
-              }
-            }
-          }
-        }
-      } // end loop
-    }
-    */
-
   }
 },
 
@@ -21700,55 +21609,35 @@ const tableRules = [
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
-  target_resources    : ['caption', 'table[summary]', 'table[title]'],
+  target_resources    : ['caption', 'table[aria-label]', 'table[aria-labelledby]', 'table[aria-describedby]', 'table[title]'],
   validate          : function (dom_cache, rule_result) {
 
-    debug$d.flag && debug$d.log(`TABLE 8 Rule ${dom_cache} ${rule_result}`);
-
-/*
-    var TEST_RESULT   = TEST_RESULT;
-    var VISIBILITY    = VISIBILITY;
-    var TABLE_ROLE    = TABLE_ROLE;
-
-    var table_elements   = dom_cache.tables_cache.table_elements;
-    var table_elements_len = table_elements.length;
-
-    // Check to see if valid cache reference
-    if (table_elements && table_elements_len) {
-
-      for (var i=0; i < table_elements_len; i++) {
-        var te = table_elements[i];
-        var is_visible_to_at = te.dom_element.computed_style.is_visible_to_at;
-
-//        logger.debug("[Table Rule 8]          Table Element: " + te);
-//        logger.debug("[Table Rule 8]        Accessible Name: " + te.accessible_name_for_comparison);
-//        logger.debug("[Table Rule 8] Accessible Description: " + te.accessible_description_for_comparison);
-
-        if (((te.table_role === TABLE_ROLE.DATA) ||
-             (te.table_role === TABLE_ROLE.COMPLEX)) &&
-            te.accessible_name_for_comparison.length &&
-            te.accessible_description_for_comparison.length) {
-
-          if (is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (te.accessible_name_for_comparison === te.accessible_description_for_comparison ) {
-              rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', []);
+   dom_cache.tableInfo.allTableElements.forEach(te => {
+      const de = te.domElement;
+      if (te.tableType > TABLE_TYPE.DATA) {
+        if (de.visibility.isVisibleToAT) {
+          const de = te.domElement;
+          if (de.accName.name && de.accDescription.name) {
+            if (de.accName.name.toLowerCase() ===  de.accDescription.name.toLowerCase()) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
             }
             else {
-              if (te.accessible_name_for_comparison.length >= te.accessible_description_for_comparison.length) {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_1', []);
+              if (de.accName.name.length < de.accDescription.name.length) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
               }
               else {
-                rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
               }
             }
           }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
       }
-    }
-    */
+    });
+
+
 
   } // end validation function
 }
