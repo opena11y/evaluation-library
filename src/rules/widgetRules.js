@@ -15,7 +15,7 @@ debug.flag = true;
 
 /*
  * OpenA11y Rules
- * Rule group: Widget Rules
+ * Rule Category: Widget Rules
  */
 
 export const widgetRules = [

@@ -14,10 +14,10 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('tableInfo', false);
-debug.flag = true;
-debug.rows = true;
-debug.cells = true;
-debug.tableTree = true;
+debug.flag = false;
+debug.rows = false;
+debug.cells = false;
+debug.tableTree = false;
 debug.headerCalc = false;
 
 /**

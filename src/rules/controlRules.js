@@ -16,7 +16,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Form Control Rules
+ * Rule Category: Form Control Rules
  */
 
 export const controlRules = [

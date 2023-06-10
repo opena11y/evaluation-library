@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$E = new DebugLogging('constants', false);
+const debug$H = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -592,13 +592,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$E.flag && debug$E.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$H.flag && debug$H.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$E.flag && debug$E.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$H.flag && debug$H.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -894,7 +894,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$D = new DebugLogging('ControlInfo', false);
+const debug$G = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -1034,7 +1034,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$D.domElement(ce.domElement, prefix);
+      debug$G.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1255,15 +1255,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$D.flag) {
-      debug$D.log('== Control Tree ==', 1);
+    if (debug$G.flag) {
+      debug$G.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$D.domElement(ce.domElement);
+        debug$G.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$D.log('== Forms ==', 1);
+      debug$G.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$D.domElement(ce.domElement);
+        debug$G.domElement(ce.domElement);
       });
     }
   }
@@ -6014,7 +6014,7 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$C = new DebugLogging('AriaInfo', false);
+const debug$F = new DebugLogging('AriaInfo', false);
 
 /* Debug helper functions */
 
@@ -6228,15 +6228,15 @@ class AriaInfo {
     }
 
 
-    if (debug$C.flag) {
-      node.attributes.length && debug$C.log(`${node.outerHTML}`, 1);
-      debug$C.log(`[         isWidget]: ${this.isWidget}`);
-      debug$C.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$C.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$C.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$C.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$C.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$C.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$F.flag) {
+      node.attributes.length && debug$F.log(`${node.outerHTML}`, 1);
+      debug$F.log(`[         isWidget]: ${this.isWidget}`);
+      debug$F.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$F.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$F.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$F.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$F.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$F.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6330,7 +6330,7 @@ class AriaInfo {
             }
           } catch (error) {
             refInfo.invalidIds.push(id);
-            debug$C.log(`[checkForInvalidReferences][error]: ${error}`);
+            debug$F.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {
@@ -6441,7 +6441,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$B = new DebugLogging('colorContrast', false);
+const debug$E = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6496,9 +6496,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$B.flag) {
-      debug$B.separator();
-      debug$B.tag(elementNode);
+    if (debug$E.flag) {
+      debug$E.separator();
+      debug$E.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6520,11 +6520,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$B.flag) {
-      debug$B.log(`[                    opacity]: ${this.opacity}`);
-      debug$B.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$B.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$B.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$E.flag) {
+      debug$E.log(`[                    opacity]: ${this.opacity}`);
+      debug$E.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$E.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$E.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6611,10 +6611,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$B.flag && debug$B.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$E.flag && debug$E.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$B.flag && debug$B.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$E.flag && debug$E.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6827,7 +6827,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$A = new DebugLogging('EventInfo', false);
+const debug$D = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6840,7 +6840,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$A.flag) {
+    if (debug$D.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8419,7 +8419,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$z = new DebugLogging('ariaInHtml', false);
+const debug$C = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8611,11 +8611,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$z.flag) {
+  if (debug$C.flag) {
     if (tagName === 'h2') {
-      debug$z.tag(node);
+      debug$C.tag(node);
     }
-    debug$z.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$C.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8712,7 +8712,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$y = new DebugLogging('visibility', false);
+const debug$B = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8760,17 +8760,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$y.flag) {
-      debug$y.separator();
-      debug$y.tag(elementNode);
-      debug$y.log('[          isHidden]: ' + this.isHidden);
-      debug$y.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$y.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$y.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$y.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$y.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$y.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$y.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$B.flag) {
+      debug$B.separator();
+      debug$B.tag(elementNode);
+      debug$B.log('[          isHidden]: ' + this.isHidden);
+      debug$B.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$B.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$B.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$B.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$B.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$B.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$B.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9083,8 +9083,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$x = new DebugLogging('nameFrom', false);
-debug$x.flag = true;
+const debug$A = new DebugLogging('nameFrom', false);
+debug$A.flag = true;
 
 /*
 *   @function getElementContents
@@ -9230,7 +9230,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$x.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$A.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9644,8 +9644,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$w = new DebugLogging('getAccName', false);
-debug$w.flag = true;
+const debug$z = new DebugLogging('getAccName', false);
+debug$z.flag = true;
 
 /*
 *   @function getAccessibleName
@@ -9952,8 +9952,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$v = new DebugLogging('DOMElement', false);
-debug$v.flag = false;
+const debug$y = new DebugLogging('DOMElement', false);
+debug$y.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10275,12 +10275,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$v.flag) {
+    if (debug$y.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$v.domText(domItem, prefix);
+          debug$y.domText(domItem, prefix);
         } else {
-          debug$v.domElement(domItem, prefix);
+          debug$y.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10373,7 +10373,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$u = new DebugLogging('domText', false);
+const debug$x = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10392,8 +10392,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$u.flag) {
-      debug$u.log(`[text]: ${this.text}`);
+    if (debug$x.flag) {
+      debug$x.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10456,7 +10456,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$t = new DebugLogging('iframeInfo', false);
+const debug$w = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10474,9 +10474,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$t.flag) {
-      debug$t.log(`[          src]: ${this.src}`);
-      debug$t.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$w.flag) {
+      debug$w.log(`[          src]: ${this.src}`);
+      debug$w.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10512,8 +10512,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$t.flag) {
-      debug$t.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$w.flag) {
+      debug$w.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10524,7 +10524,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$s = new DebugLogging('idInfo', false);
+const debug$v = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10567,10 +10567,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$s.flag) {
-      debug$s.log('== All Links ==', 1);
+    if (debug$v.flag) {
+      debug$v.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$s.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$v.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10579,7 +10579,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$r = new DebugLogging('imageInfo', false);
+const debug$u = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10772,22 +10772,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$r.flag) {
-      debug$r.log('== All Image elements ==', 1);
+    if (debug$u.flag) {
+      debug$u.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$r.log(`[fileName]: ${ie.fileName}`, true);
-        debug$r.log(`[    role]: ${ie.domElement.role}`);
-        debug$r.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$r.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$r.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$u.log(`[fileName]: ${ie.fileName}`, true);
+        debug$u.log(`[    role]: ${ie.domElement.role}`);
+        debug$u.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$u.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$u.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$r.log('== All SVG domElements  ==', 1);
+      debug$u.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$r.domElement(de);
+        debug$u.domElement(de);
       });
-      debug$r.log('== All MapElements ==', 1);
+      debug$u.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$r.domElement(me.domElement);
+        debug$u.domElement(me.domElement);
       });
     }
   }
@@ -10796,7 +10796,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$q = new DebugLogging('linkInfo', false);
+const debug$t = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10842,10 +10842,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$q.flag) {
-      debug$q.log('== All Links ==', 1);
+    if (debug$t.flag) {
+      debug$t.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$q.domElement(de);
+        debug$t.domElement(de);
       });
     }
   }
@@ -10854,7 +10854,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$p = new DebugLogging('ListInfo', false);
+const debug$s = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10875,8 +10875,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$p.flag) {
-      debug$p.log('');
+    if (debug$s.flag) {
+      debug$s.log('');
     }
   }
 
@@ -10901,9 +10901,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$p.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$s.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$p.domElement(le.domElement, prefix);
+      debug$s.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11011,18 +11011,281 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$p.flag) {
-      debug$p.log('== All ListElements ==', 1);
-      debug$p.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$s.flag) {
+      debug$s.log('== All ListElements ==', 1);
+      debug$s.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$p.domElement(le.domElement);
+        debug$s.domElement(le.domElement);
       });
-      debug$p.log('== List Tree ==', 1);
-      debug$p.log(`[linkCount]: ${this.linkCount}`);
+      debug$s.log('== List Tree ==', 1);
+      debug$s.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$p.domElement(le.domElement);
+        debug$s.domElement(le.domElement);
         le.showListInfo('  ');
       });
+    }
+  }
+}
+
+/* listInfo.js */
+
+/* Constants */
+const debug$r = new DebugLogging('MediaInfo', false);
+debug$r.flag = false;
+
+/**
+ * @class MediaElement
+ *
+ * @desc Identifies a DOM element as an audio or video element.
+ *
+ * @param  {Object}  domElement   - DOM element object
+ */
+
+class MediaElement {
+  constructor (domElement) {
+    this.domElement = domElement;
+    this.tracks = [];
+    this.hasAutoPlay = domElement.node.hasAttribute('autoplay');
+  }
+
+  get allowsTracks () {
+    return true;
+  }
+
+  get isObject () {
+    return false;
+  }
+
+  get hasCaptionTrack () {
+    return this.checkForTrackKind('captions');
+  }
+
+  get hasDescriptionTrack () {
+    return this.checkForTrackKind('descriptions');
+  }
+
+  get hasSubtitleTrack () {
+    return this.checkForTrackKind('subtitles');
+  }
+
+  get hasChaptersTrack () {
+    return this.checkForTrackKind('chapters');
+  }
+
+  checkForTrackKind (type) {
+    for (let i = 0; i < this.tracks.length; i += 1) {
+      if (this.tracks[i].kind.includes(type)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  toString() {
+    return `[MediaElement]: ${this.domElement}`;
+  }
+}
+
+/**
+ * @class TrackElement
+ *
+ * @desc Identifies a DOM element as a track element.
+ *
+ * @param  {Object}  domElement   - DOM element object
+ */
+
+class TrackElement {
+  constructor (domElement) {
+    const node = domElement.node;
+    this.domElement = domElement;
+    this.kind = node.hasAttribute('kind') ? node.kind.toLowerCase() : '';
+  }
+
+  toString() {
+    return `[TrackElement]: ${this.domElement}`;
+  }
+}
+
+
+/**
+ * @class ObjectElement
+ *
+ * @desc Identifies a DOM element as an object element.
+ *
+ * @param  {Object}  domElement   - DOM element object
+ */
+
+class ObjectElement {
+  constructor (domElement) {
+    const node = domElement.node;
+    this.domElement = domElement;
+    this.params = [];
+    this.type = node.hasAttribute('type') ? node.type.toLowerCase() : '';
+  }
+  get allowsTracks () {
+    return false;
+  }
+
+  get isObject () {
+    return true;
+  }
+
+  get isAudio () {
+    return this.type.includes('audio');
+  }
+
+  get isVideo () {
+    return this.type.includes('video');
+  }
+
+  toString() {
+    return `[ObjectElement]: ${this.domElement}`;
+  }
+}
+
+/**
+ * @class ParamElement
+ *
+ * @desc Identifies a DOM element as a param element.
+ *
+ * @param  {Object}  domElement   - DOM element object
+ */
+
+class ParamElement {
+  constructor (domElement) {
+    this.domElement = domElement;
+  }
+
+  toString() {
+    return `[ParamElement]: ${this.domElement}`;
+  }
+
+}
+
+/**
+ * @class EmbedElement
+ *
+ * @desc Identifies a DOM element as an embed element.
+ *
+ * @param  {Object}  domElement   - DOM element object
+ */
+
+class EmbedElement {
+  constructor (domElement) {
+    const node = domElement.node;
+    this.domElement = domElement;
+    this.type = node.hasAttribute('type') ? node.type.toLowerCase() : '';
+  }
+
+  get allowsTracks () {
+    return false;
+  }
+
+  get isAudio () {
+    return this.type.includes('audio');
+  }
+
+ get isVideo () {
+    return this.type.includes('video');
+  }
+
+  get isObject () {
+    return false;
+  }
+
+  toString() {
+    return `[EmbedElement]: ${this.domElement}`;
+  }
+}
+
+/**
+ * @class MediaInfo
+ *
+ * @desc Collects information on the media elements on a web page for use in
+ *       rules
+ */
+
+class MediaInfo {
+  constructor () {
+    this.audioElements  = [];
+    this.embedElements  = [];
+    this.objectElements = [];
+    this.videoElements  = [];
+  }
+
+  update (mediaElement, domElement) {
+
+    switch (domElement.tagName) {
+
+      case 'audio':
+        mediaElement = new MediaElement(domElement);
+        this.audioElements.push(mediaElement);
+        break;
+
+      case 'embed':
+        mediaElement = new EmbedElement(domElement);
+        this.embedElements.push(mediaElement);
+        break;
+
+      case 'object':
+        mediaElement = new ObjectElement(domElement);
+        this.objectElements.push(mediaElement);
+        break;
+
+      case 'param':
+        if (mediaElement && mediaElement.isObject) {
+          const param = new ParamElement(domElement);
+          mediaElement.params.push(param);
+        }
+        break;
+
+      case 'track':
+        if (mediaElement &&
+            mediaElement.allowsTracks) {
+          const track = new TrackElement(domElement);
+          mediaElement.tracks.push(track);
+        }
+        break;
+
+      case 'video':
+        mediaElement = new MediaElement(domElement);
+        this.videoElements.push(mediaElement);
+        break;
+
+    }
+
+    return mediaElement;
+  }
+
+  /**
+   * @method showMediaInfo
+   *
+   * @desc showMediaInfo is used for debugging the MediaInfo and other media objects
+   */
+
+  showListInfo () {
+    if (debug$r.flag) {
+      debug$r.log('== Audio Elements ==', 1);
+      this.audioElements.forEach( ae => {
+        debug$r.log(ae);
+      });
+
+      debug$r.log('== Video Elements ==', 1);
+      this.videoElements.forEach( ve => {
+        debug$r.log(ve);
+      });
+
+      debug$r.log('== Object Elements ==', 1);
+      this.objectElements.forEach( oe => {
+        debug$r.log(oe);
+      });
+
+      debug$r.log('== Embed Elements ==', 1);
+      this.embedElements.forEach( ee => {
+        debug$r.log(ee);
+      });
+
+
     }
   }
 }
@@ -11030,7 +11293,7 @@ class ListInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$o = new DebugLogging('structureInfo', false);
+const debug$q = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11069,11 +11332,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$o.domElement(le.domElement, prefix);
+      debug$q.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$o.domElement(h, prefix);
+      debug$q.domElement(h, prefix);
     });
   }
 
@@ -11197,27 +11460,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$o.flag) {
-      debug$o.log('== All Headings ==', 1);
+    if (debug$q.flag) {
+      debug$q.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$o.domElement(h);
+        debug$q.domElement(h);
       });
-      debug$o.log('== All Landmarks ==', 1);
+      debug$q.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$o.domElement(le.domElement);
+        debug$q.domElement(le.domElement);
       });
-      debug$o.log('== Landmarks By Doc ==', 1);
+      debug$q.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$o.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$q.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$o.domElement(le.domElement);
+            debug$q.domElement(le.domElement);
           });
         }
       });
-      debug$o.log('== Structure Tree ==', 1);
+      debug$q.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$o.domElement(le.domElement);
+        debug$q.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -12370,6 +12633,227 @@ const wcag = {
         }
       }
     }
+  }
+};
+
+/* audioRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const audioRules$1 = {
+  AUDIO_1: {
+    ID:                    'Audio 1',
+    DEFINITION:            '@audio@ elements must have caption or text transcription of the audio content.',
+    SUMMARY:               '@audio@ must have alternative',
+    TARGET_RESOURCES_DESC: '@audio@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:         'Add caption or text transcript to @audio@ element',
+      FAIL_P:         'Add a caption or text transcript to each of the %N_F the @audio@ elements with out captions or transcripts.',
+      MANUAL_CHECK_S: 'Verify the @audio@ element has either a caption or text transcript of the audio content.',
+      MANUAL_CHECK_P: 'Verify the %N_MC @audio@ elements are audio only have either a caption or text transcript of the audio.',
+      HIDDEN_S:       'The @audio@ element that is hidden was not analyzed for accessible audio.',
+      HIDDEN_P:       'The %N_H @audio@ elements that are hidden were not analyzed for accessible audio.',
+      NOT_APPLICABLE: 'No @audio@ elements found on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:    '@audio@ element has caption.',
+      ELEMENT_PASS_2:    '@audio@ element has a text transcript.',
+      ELEMENT_FAIL_1:    'Add caption or text transcript to @audio@ element.',
+      ELEMENT_MC_1:      'Verify the @audio@ element has captions or text transcript.',
+      ELEMENT_HIDDEN_1:  'The @audio@ element is hidden and was not evaluated.'
+    },
+    PURPOSES: [
+      'Captions and text transcripts provide a means for people cannot hear the audio to understand the audio content.',
+      'Some types of learning disabilities affect speech perception, captions and text transcripts provide an alternative way to understand the audio content.',
+      'When the language of the audio is different than the native language of the listener, captions and text transcripts support the listener in understanding the audio content.'
+    ],
+    TECHNIQUES: [
+      'Use the @track@ element to add captioning to the audio content.',
+      'Use WebVTT to encode the timed stamped captioning information for the audio content.',
+      'Use @aria-describedby@ to reference a text transcript of the audio content.'
+    ],
+    MANUAL_CHECKS: [
+      'When captions are enabled on the media player, check to make sure the captions visible.',
+      'If there is a caption make sure the captions accurately represents the audio content.',
+      'If there is a text transcript make sure the transcript accurately represents the audio content.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HMTL: The audio element',
+        url:   'https://html.spec.whatwg.org/multipage/media.html#the-audio-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HMTL: The track element',
+        url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'WebVTT: The Web Video Text Tracks Format',
+        url:   'https://www.w3.org/TR/webvtt1/'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+        url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'University of Washington: Creating Accessible Videos',
+        url:   'https://www.washington.edu/accessibility/videos/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+        url:   'https://webaim.org/techniques/captions/'
+      }
+    ]
+  },
+  AUDIO_2: {
+    ID:                    'Audio 2',
+    DEFINITION:            '@object@ elements used for audio only must have caption or text transcription of the audio content.',
+    SUMMARY:               '@object@ for audio must have alternative',
+    TARGET_RESOURCES_DESC: '@object@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Add caption or text transcript to @object@ element.',
+      FAIL_P:   'Add a caption or text transcript to each of the %N_F the @object@ elements with out captions or transcripts.',
+      MANUAL_CHECK_S:     'Check if the @object@ element is audio only content.  If it is audio only make sure it has either a caption or text transcript of the audio content.',
+      MANUAL_CHECK_P:     'Check if any of the %N_MC @object@ elements are audio only. If any are audio only make sure they have either a caption or text transcript of the audio.',
+      HIDDEN_S: 'The @object@ element that is hidden was not analyzed for accessible audio.',
+      HIDDEN_P: 'The %N_H @object@ elements that are hidden were not analyzed for accessible audio.',
+      NOT_APPLICABLE:  'No @embed@ elements found on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   '@object@ element references text transcript.',
+      ELEMENT_FAIL_1:   'Add captions or text transcript to @object@ element.',
+      ELEMENT_MC_1:     'Verify the @object@ element has synchronous captions.',
+      ELEMENT_MC_2:     'Verify the @object@ element only renders audio only, if it is audio only verify that it has captions or text transcript.',
+      ELEMENT_HIDDEN_1: 'The @object@ element is hidden and was not evaluated.'
+    },
+    PURPOSES: [
+      'Captions and text transcripts provide a means for people cannot hear the audio to understand the audio content.',
+      'Some types of learning disabilities affect speech perception, captions and text transcripts provide an alternative way to understand the audio content.',
+      'When the language of the audio is different than the native language of the listener, captions and text transcripts support the listener in understanding the audio content.'
+    ],
+    TECHNIQUES: [
+      'Use the @audio@ element instead of the @object@ element for audio only content, since the @audio@ element provides better support for captions and text transcripts.',
+      'Use @aria-describedby@ attribute to point to a text description of the audio only content.'
+    ],
+    MANUAL_CHECKS: [
+      'Check the web page for a link to a text transcript of the audio, or if the transcript is part of the page rendering the audio.',
+      'Check the media player for a button to turn on and off captions.',
+      'When captions are enabled on the media player, check to make sure the captions visible and represent the speech and sounds heard on the audio.',
+      'In some cases "open" captions might be used, this means the captions are always "on" as part of the video.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HMTL: The object element',
+        url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+        url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'University of Washington: Creating Accessible Videos',
+        url:   'https://www.washington.edu/accessibility/videos/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+        url:   'https://webaim.org/techniques/captions/'
+      }
+    ]
+  },
+  AUDIO_3: {
+    ID:                    'Audio 3',
+    DEFINITION:            '@embed@ elements used for audio only must have caption or text transcription of the audio content.',
+    SUMMARY:               '@embed@ for audio must have alternative',
+    TARGET_RESOURCES_DESC: '@embed@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:          'Add caption or text transcript to @embed@ element.',
+      FAIL_P:          'Add a caption or text transcript to each of the %N_F @embed@ elements without captions or transcripts.',
+      MANUAL_CHECK_S:  'Check if the @embed@ element is audio only content.  If it is audio only make sure it has either a caption or text transcript of the audio content.',
+      MANUAL_CHECK_P:  'Check if any of the %N_MC @embed@ elements are audio only. If any are audio only make sure they have either a caption or text transcript of the audio.',
+      HIDDEN_S:        'The @embed@ element that is hidden was not analyzed for accessible audio.',
+      HIDDEN_P:        'The %N_H @embed@ elements that are hidden were not analyzed for accessibile audio.',
+      NOT_APPLICABLE:  'No @embed@ elements found on this page'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   '@embed@ element references text transcript.',
+      ELEMENT_FAIL_1:   'Add captions or text transcript to @embed@ element.',
+      ELEMENT_MC_1:     'Verify the @embed@ element has synchronous captions.',
+      ELEMENT_MC_2:     'Verify the @embed@ element only renders audio only, if it is audio only verify that it has captions or text transcript.',
+      ELEMENT_HIDDEN_1: 'The @object@ element is hidden and was not evaluated.'
+    },
+    PURPOSES: [
+      'Captions and text transcripts provide a means for people cannot hear the audio to understand the audio content.',
+      'Some types of learning disabilities affect speech perception, captions and text transcripts provide an alternative way to understand the audio content.',
+      'When the language of the audio is different than the native language of the listener, captions and text transcripts support the listener in understanding the audio content.'
+    ],
+    TECHNIQUES: [
+      'Use the @audio@ element instead of the @embed@ element for audio only content, since the @audio@ element provides better support for captions and text transcripts.',
+      'Use @aria-describedby@ attribute to point to a text description of the audio only content.'
+    ],
+    MANUAL_CHECKS: [
+      'Check the web page for a link to a text transcript of the audio, or if the transcript is part of the page rendering the audio.',
+      'Check the media player for a button to turn on and off captions',
+      'When captions are enabled on the media player, check to make sure the captions visible and represent the speech and sounds heard on the audio.',
+      'In some cases "open" captions might be used, this means the captions are always "on" as part of the video.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HMTL: The embed element',
+        url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+        url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'University of Washington: Creating Accessible Videos',
+        url:   'https://www.washington.edu/accessibility/videos/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+        url:   'https://webaim.org/techniques/captions/'
+      }
+    ]
+  },
+  AUDIO_4: {
+    ID:                    'Audio 4',
+    DEFINITION:            'Media content with audio that automatically starts playing when the page loads and lasts longer than 3 seconds must provide a means for the user able to stop, pause or mute the audio content.',
+    SUMMARY:               'Pause, stop or mute audio',
+    TARGET_RESOURCES_DESC: 'Content that is used to auto play media that includes audio content',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S:     'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.',
+      MANUAL_CHECK_P:     'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.'
+    },
+    BASE_RESULT_MESSAGES: {
+      PAGE_MC_1:   'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.'
+    },
+    PURPOSES:        [ 'Audio content interferes with people using speech based assistive technologies like screen readers.'
+                    ],
+    TECHNIQUES:     [ 'Remove or disable the auto playing of media that includes audio content.',
+                      'Provide a means to pause, stop or mute the audio content.',
+                      'Use cookies to preserve the user preference of pausing, stopping or muting the audio content.'
+                    ],
+    MANUAL_CHECKS:  [ 'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.'
+                    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.1 Success Criterion 1.4.2 Audio Control',
+        url:   'https://www.w3.org/TR/WCAG21/#audio-control'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'How to meet Success Criterion 1.4.2 Audio Control',
+        url:   'https://www.w3.org/WAI/WCAG21/quickref/#audio-control'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'University of Washington: Creating Accessible Videos',
+        url:   'https://www.washington.edu/accessibility/videos/'
+      },
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+        url:   'https://webaim.org/techniques/captions/'
+      }
+    ]
   }
 };
 
@@ -14155,147 +14639,6 @@ const imageRules$1 = {
   }
 };
 
-/* linkRules.js */
-
-/* --------------------------------------------------------------------------- */
-/*       OpenA11y Rules Localized Language Support (NLS): English      */
-/* --------------------------------------------------------------------------- */
-
-const linkRules$1 = {
-
-  LINK_1: {
-    ID:                    'Link 1',
-    DEFINITION:            'The accessible name of a link must accurately describe the target or purpose of the link.',
-    SUMMARY:               'Link text must describe the link target',
-    TARGET_RESOURCES_DESC: '@a@ and @area@ elements and elements with @role="link"@ attribute',
-    RULE_RESULT_MESSAGES: {
-      MANUAL_CHECK_S: 'Verify the accessible name of the @a@, @area@ or @[role=link]@ element describes the target of the link.',
-      MANUAL_CHECK_P: 'Verify the accessible name of each of the %N_MC @a@, @area@ or @[role=link]@ elements describes the target of the link.',
-      FAIL_S:         'Add text content to the empty link that describes the target of the link.',
-      FAIL_P:         'Add text content to the %N_F empty links that describes the target of each link.',
-      HIDDEN_S:       'One hidden link was not evaluated.',
-      HIDDEN_P:       '%N_H hidden links were not evaluated.',
-      NOT_APPLICABLE: 'No @a@, @area@ or @[role=link]@ elements on the page.'
-    },
-    BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1:     '@%1@ element has accessible name "%2". Verify that the name accurately describes the target of the link, or if not, change the accessible name to be more descriptive.',
-      ELEMENT_MC_2:     '@%1@ element has accessible name "%2" with text content "%3". Verify that the name and text content, along with its surrounding context, each accurately describes the target of the link, or if not, change the accessible name, text content and/or context so that they are more descriptive.',
-      ELEMENT_FAIL_1:   'The @%1@ element does NOT have an accessible name. Add text content to the link or use an ARIA labeling technique so that the accessible name describes the target of the link.',
-      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
-    },
-    PURPOSES: [
-      'When the accessible name of a link does not describe its target or purpose, users will not have the information they need to determine the usefulness of the target resources.',
-      'Following links to target resources that do not provide the expected informational value is inefficient and potentially frustrating.'
-    ],
-    TECHNIQUES: [
-      'The text content of a link, which is its default accessible name, should uniquely describe the target or purpose of the link.',
-      'Use @aria-label@, @aria-labelledby@ or the @title@ attribute to provide a more descriptive accessible name when the text content of the link cannot be changed.',
-      'Use @aria-describedby@ to provide additional information for links that share the same accessible name but have different contexts to allow users to differentiate among them.',
-      'If the content of a link includes an @img@ element, the accessible name for the link will incorporate the text alternative specified for the image.'
-    ],
-    MANUAL_CHECKS: [
-      'Read the accessible name for each link aloud and make sure that it describes the target or purpose of the link.'
-    ],
-    INFORMATIONAL_LINKS: [
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 12.2 The A element',
-        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @title@ attribute',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
-      },
-      { type:  REFERENCES.WCAG_TECHNIQUE,
-        title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
-      },
-      { type:  REFERENCES.EXAMPLE,
-        title: 'OAA Example 44 - Using aria-describedby to satisfy WCAG 2.4.4 Link Purpose in Context',
-        url:   'https://oaa-accessibility.org/example/44/'
-      }
-    ]
-  },
-
-  LINK_2: {
-    ID:                    'Link 2',
-    DEFINITION:            'Links with different @href@s should have unique accessible names or descriptions.',
-    SUMMARY:               'Link text should be unique',
-    TARGET_RESOURCES_DESC: '@a@ and @area@ elements and elements with @role="link"@',
-    RULE_RESULT_MESSAGES: {
-      FAIL_P:   'Change the accessible names or add @aria-describedby@ attributes to the %N_F @a@, @area@ or @[role=link]@ elements to provide additional information that makes each accessible name or description unique.',
-      NOT_APPLICABLE:  'No @a@, @area@ or @[role=link]@ elements on the page share the same accessible name.'
-    },
-    BASE_RESULT_MESSAGES: {
-      ELEMENT_PASS_1: 'There is one other link that shares the same accessible name and @href@ value.',
-      ELEMENT_PASS_2: 'There are %1 other links that share the same accessible name and @href@ value.',
-      ELEMENT_PASS_3: 'The link shares has same accessible name anoother link with different @href@ value, but has a different accessible description.',
-      ELEMENT_PASS_4: 'The link shares has same accessible name as %1 other links with different @href@ values, but has a different accessible description.',
-      ELEMENT_FAIL_1: 'Update the accessible names of the %1 link elements that share the same accessible name, but have different @href@ values to clearly indicate the target of the links.'
-    },
-    PURPOSES: [
-      'Screen reader programs provide commands that list all links on a page by their accessible names. When links are taken out of their page context and placed in the context of such a list, links with the same accessible name appear to refer to the same informational resource.',
-      'When links that point to different URLs have the same accessible name or description, screen reader users may be unable to determine which link among them references the information they are seeking.'
-    ],
-    TECHNIQUES: [
-      'The link text (i.e. its accessible name and/or description) should uniquely describe the target of a link.',
-      'Use the @aria-label@, @aria-labelledby@ or @title@ attribute to provide a more descriptive accessible name when the text content of the link cannot be changed.',
-      'Use @aria-describedby@ to provide additional information for links that share the same accessible name but have different contexts to allow users to differentiate among them.'
-    ],
-    MANUAL_CHECKS: [
-    ],
-    INFORMATIONAL_LINKS: [
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 12.2 The A element',
-        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
-      },
-      { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @title@ attribute',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
-      },
-      { type:  REFERENCES.WCAG_TECHNIQUE,
-        title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
-        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
-      },
-      { type:  REFERENCES.WCAG_TECHNIQUE,
-        title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
-        url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
-      },
-      { type:  REFERENCES.WCAG_TECHNIQUE,
-        title: 'ARIA7: Using aria-labelledby for link purpose',
-        url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA7'
-      },
-      { type:  REFERENCES.WCAG_TECHNIQUE,
-        title: 'ARIA8: Using aria-label for link purpose',
-        url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA8'
-      }
-    ]
-  }
-};
-
 /* landmarkRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -15675,6 +16018,147 @@ const landmarkRules$1 = {
   }
 };
 
+/* linkRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const linkRules$1 = {
+
+  LINK_1: {
+    ID:                    'Link 1',
+    DEFINITION:            'The accessible name of a link must accurately describe the target or purpose of the link.',
+    SUMMARY:               'Link text must describe the link target',
+    TARGET_RESOURCES_DESC: '@a@ and @area@ elements and elements with @role="link"@ attribute',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'Verify the accessible name of the @a@, @area@ or @[role=link]@ element describes the target of the link.',
+      MANUAL_CHECK_P: 'Verify the accessible name of each of the %N_MC @a@, @area@ or @[role=link]@ elements describes the target of the link.',
+      FAIL_S:         'Add text content to the empty link that describes the target of the link.',
+      FAIL_P:         'Add text content to the %N_F empty links that describes the target of each link.',
+      HIDDEN_S:       'One hidden link was not evaluated.',
+      HIDDEN_P:       '%N_H hidden links were not evaluated.',
+      NOT_APPLICABLE: 'No @a@, @area@ or @[role=link]@ elements on the page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1:     '@%1@ element has accessible name "%2". Verify that the name accurately describes the target of the link, or if not, change the accessible name to be more descriptive.',
+      ELEMENT_MC_2:     '@%1@ element has accessible name "%2" with text content "%3". Verify that the name and text content, along with its surrounding context, each accurately describes the target of the link, or if not, change the accessible name, text content and/or context so that they are more descriptive.',
+      ELEMENT_FAIL_1:   'The @%1@ element does NOT have an accessible name. Add text content to the link or use an ARIA labeling technique so that the accessible name describes the target of the link.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'When the accessible name of a link does not describe its target or purpose, users will not have the information they need to determine the usefulness of the target resources.',
+      'Following links to target resources that do not provide the expected informational value is inefficient and potentially frustrating.'
+    ],
+    TECHNIQUES: [
+      'The text content of a link, which is its default accessible name, should uniquely describe the target or purpose of the link.',
+      'Use @aria-label@, @aria-labelledby@ or the @title@ attribute to provide a more descriptive accessible name when the text content of the link cannot be changed.',
+      'Use @aria-describedby@ to provide additional information for links that share the same accessible name but have different contexts to allow users to differentiate among them.',
+      'If the content of a link includes an @img@ element, the accessible name for the link will incorporate the text alternative specified for the image.'
+    ],
+    MANUAL_CHECKS: [
+      'Read the accessible name for each link aloud and make sure that it describes the target or purpose of the link.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 12.2 The A element',
+        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: The @title@ attribute',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
+      },
+      { type:  REFERENCES.EXAMPLE,
+        title: 'OAA Example 44 - Using aria-describedby to satisfy WCAG 2.4.4 Link Purpose in Context',
+        url:   'https://oaa-accessibility.org/example/44/'
+      }
+    ]
+  },
+
+  LINK_2: {
+    ID:                    'Link 2',
+    DEFINITION:            'Links with different @href@s should have unique accessible names or descriptions.',
+    SUMMARY:               'Link text should be unique',
+    TARGET_RESOURCES_DESC: '@a@ and @area@ elements and elements with @role="link"@',
+    RULE_RESULT_MESSAGES: {
+      FAIL_P:   'Change the accessible names or add @aria-describedby@ attributes to the %N_F @a@, @area@ or @[role=link]@ elements to provide additional information that makes each accessible name or description unique.',
+      NOT_APPLICABLE:  'No @a@, @area@ or @[role=link]@ elements on the page share the same accessible name.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1: 'There is one other link that shares the same accessible name and @href@ value.',
+      ELEMENT_PASS_2: 'There are %1 other links that share the same accessible name and @href@ value.',
+      ELEMENT_PASS_3: 'The link shares has same accessible name anoother link with different @href@ value, but has a different accessible description.',
+      ELEMENT_PASS_4: 'The link shares has same accessible name as %1 other links with different @href@ values, but has a different accessible description.',
+      ELEMENT_FAIL_1: 'Update the accessible names of the %1 link elements that share the same accessible name, but have different @href@ values to clearly indicate the target of the links.'
+    },
+    PURPOSES: [
+      'Screen reader programs provide commands that list all links on a page by their accessible names. When links are taken out of their page context and placed in the context of such a list, links with the same accessible name appear to refer to the same informational resource.',
+      'When links that point to different URLs have the same accessible name or description, screen reader users may be unable to determine which link among them references the information they are seeking.'
+    ],
+    TECHNIQUES: [
+      'The link text (i.e. its accessible name and/or description) should uniquely describe the target of a link.',
+      'Use the @aria-label@, @aria-labelledby@ or @title@ attribute to provide a more descriptive accessible name when the text content of the link cannot be changed.',
+      'Use @aria-describedby@ to provide additional information for links that share the same accessible name but have different contexts to allow users to differentiate among them.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: 12.2 The A element',
+        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML 4.01 Specification: The @title@ attribute',
+        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H30'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'ARIA7: Using aria-labelledby for link purpose',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA7'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'ARIA8: Using aria-label for link purpose',
+        url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA8'
+      }
+    ]
+  }
+};
+
 /* tableRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -16166,6 +16650,481 @@ const tableRules$1 = {
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
           url:   'https://www.w3.org/WAI/tutorials/tables/'
+        }
+      ]
+  }
+};
+
+/* audioRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const videoRules$1 = {
+  VIDEO_1: {
+      ID:                    'Video 1',
+      DEFINITION:            '@video@ elements used for prerecorded video only content must have text or audio description of the video content.',
+      SUMMARY:               '@video@ for video only must have alternative',
+      TARGET_RESOURCES_DESC: '@video@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @video@ element with the @aria-describedby@ attributes is used for video only content.   If so, verify the text description reference using the @aria-describedby@ describes the video only content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @video@ elements with the @aria-describedby@ attributes are used for video only content.   If so, verify the text description reference using the @aria-describedby@ describes the video only content.',
+        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:    '@video@ element has audio description track',
+        ELEMENT_MC_1:      'Verify the @video@ element is used for video only content.   If so, verify the text description reference using the @aria-describedby@ describes the video only content.',
+        ELEMENT_MC_2:      'Verify the @video@ element is used for video only content provides an audio track to describe the video content or text description of the video.',
+        ELEMENT_HIDDEN_1:  'The @video@ element is hidden and therefore not evaluated.'
+      },
+      PURPOSES: [
+        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'
+      ],
+      TECHNIQUES: [
+        'Use the @track@ element to add audio descriptions to the video content.',
+        'Use @aria-describedby@ to reference a text description of the video content.',
+        'Include an audio sound track that describes the video content.'
+      ],
+      MANUAL_CHECKS: [
+        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
+        'If there is a audio description make sure the description accurately describes the video content.',
+        'If there is a text description make sure the description accurately describes the video content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The video element',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The track element',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+          url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_2: {
+      ID:                    'Video 2',
+      DEFINITION:            '@object@ elements used for prerecorded video only content must have text or audio descriptions of the video content.',
+      SUMMARY:               '@object@ for video only must have alternative',
+      TARGET_RESOURCES_DESC: '@object@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @object@ element is used for prerecorded video only content.  If it is used for video only, verify it has either a text or audio description of the video content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @object@ elements are used for prerecorded video only content.  If any are used for video only, verify they have either a text or audio description of the video content.',
+        HIDDEN_S: 'The @object@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @object@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @object@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify the @object@ element with @video@ in its @type@ attrbute is used for video only content.  If so verify the @aria-describedby@ references a text description of the video only content.',
+        ELEMENT_MC_2: 'Verify the @object@ element with @video@ in its @type@ attrbute is used for video only content.  If so verify the video only content has a text or audio descriptions.',
+        ELEMENT_MC_3: 'Verify if the @object@ element is used for video only content.  If so verify the @aria-describedby@ references a text description of the video only content.',
+        ELEMENT_MC_4: 'Verify if the @object@ element is used for video only content.  If so verify the video only content has a text or audio description.',
+        ELEMENT_HIDDEN_1:       'The @object@ element is hidden and cannot render video content.'
+      },
+      PURPOSES: [
+        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'
+      ],
+      TECHNIQUES: [
+        'Use the @video@ element instead of the @object@ element for video only content, since the @video@ element provides better support for audio description tracks.',
+        'Include an audio track in the video that describes the video content.',
+        'Use @aria-describedby@ attribute to point to a text description of the video only content.'
+      ],
+      MANUAL_CHECKS: [
+        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
+        'If there is a audio description make sure the description accurately describes the video content.',
+        'If there is a text description make sure the description accurately describes the video content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The object element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+          url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_3: {
+      ID:                    'Video 3',
+      DEFINITION:            '@embed@ elements used for video only content must have caption or text transcription of the audio content.',
+      SUMMARY:               '@embed@ for video only must have alternative',
+      TARGET_RESOURCES_DESC: '@embed@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @embed@ element is used for prerecorded video only content.  If it is used for video only, verify it has either a text or audio description of the video content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @embed@ elements are used for prerecorded video only content.  If any are used for video only, verify they have either a text or audio description of the video content.',
+        HIDDEN_S: 'The @embed@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @embed@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @embed@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify the @embed@ element with @video@ in its @type@ attribute is used for video only content.  If so verify the @aria-describedby@ references a text description of the video only content.',
+        ELEMENT_MC_2: 'Verify the @embed@ element with @video@ in its @type@ attribute is used for video only content.  If so verify the video only content has a text or audio description.',
+        ELEMENT_MC_3: 'Verify if the @embed@ element is used for video only content.  If so verify the @aria-describedby@ references a text description of the video only content.',
+        ELEMENT_MC_4: 'Verify if the @embed@ element is used for video only content.  If so verify the video only content has a text or audio description.',
+        ELEMENT_HIDDEN_1:       'The @embed@ element is hidden and cannot render video content.'
+      },
+      PURPOSES: [
+        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'
+      ],
+      TECHNIQUES: [
+        'Use the @video@ element instead of the @embed@ element for video only content, since the @video@ element provides better support for audio description tracks.',
+        'Include an audio track in the video that describes the video content.',
+        'Use @aria-describedby@ attribute to point to a text description of the video only content.'
+      ],
+      MANUAL_CHECKS: [
+        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
+        'If there is a audio description make sure the description accurately describes the video content.',
+        'If there is a text description make sure the description accurately describes the video content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The embed element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+          url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_4: {
+      ID:                    'Video 4',
+      DEFINITION:            'Live and prerecorded video with synchronized audio (i.e. a movie, lecture) using the @video@ element must have synchronized captions.',
+      SUMMARY:               '@video@ must have caption',
+      TARGET_RESOURCES_DESC: '@video@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Add caption @track@ element to the @video@ element.',
+        FAIL_P:   'Add caption @track@ element to each of the %N_F @video@ elements with out caption tracks.',
+        MANUAL_CHECK_S:     'Verify that the @video@ element without a caption track has open captions.',
+        MANUAL_CHECK_P:     'Verify that the %N_MC @video@ elements without caption tracks have open captions.',
+        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:         '@video@ element has caption track.',
+        ELEMENT_FAIL_1:       'Add caption @track@ element to @video@ element.',
+        ELEMENT_MC_1: 'Verify the video content includes open captions.',
+        ELEMENT_HIDDEN_1:       'The @video@ element is hidden and cannot render content.'
+      },
+      PURPOSES: [
+        'Synchronized captions provide a means for people who cannot hear the audio content of a video to understand the audio content of the video.',
+        'Some types of learning disabilities affect auditory processing, captions provide an alternative way to understand the audio content of a video.',
+        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.2 and 1.2.4, and therefore covers both live and prerecorded video content.'
+       ],
+      TECHNIQUES: [
+        'Use the @track@ element to add a caption track to the video content.',
+        'Use open captions to include the captions as part of the video.',
+        'If closed captions are not support, use open captioning to include captions as part of the video.',
+        'Open captioning is the only way to insure that captions are available on most cells phones and tablet computers connecting through wireless services.'
+      ],
+      MANUAL_CHECKS: [
+        'When captions are enabled on the media player, verify the captions are visible.',
+        'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The video element',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The track element',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_5: {
+      ID:                    'Video 5',
+      DEFINITION:            'Live and prerecorded video with synchronized audio (i.e. a movie, lecture) using the @object@ element must have synchronized captions.',
+      SUMMARY:               '@object@ for video must have captions',
+      TARGET_RESOURCES_DESC: '@object@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @object@ element is used for video content with synchronized audio (i.e movie, lecture).  If it is video with synchronized audio, verify it has open or closed captioning of the audio content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @object@ elements are used for video content with synchronized audio (i.e movie, lecture).  If any are used for video with synchronized audio, verify it has open or closed captioning of the audio content.',
+        HIDDEN_S: 'The @object@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @object@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @object@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify the @object@ element with @video@ in its @type@ attribute has synchronized audio (i.e. movie, lecture).  If so, verify there is open or closed captioning of the audio content.',
+        ELEMENT_MC_2: 'Verify the @object@ element renders video content with synchronized audio (i.e. movie, lecture).  If so, verify there is open or closed captioning of the audio content.',
+        ELEMENT_HIDDEN_1: 'The @object@ element is hidden and cannot render video content.'
+      },
+      PURPOSES: [
+        'Synchronized captions provide a means for people who cannot hear the audio content of a video to have access to the speech and sounds of the video.',
+        'Some types of learning disabilities effect auditory processing, captions provide an alternative way to understand the audio content of a video.',
+        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.2 and 1.2.4, and therefore covers both live and prerecorded content.'
+      ],
+      TECHNIQUES: [
+        'Consider using the @video@ element instead of the @object@ element for video containing synchronized audio.  The @video@ element has better support for adding caption tracks.',
+        'Use video authoring tools and player technologies that support captioning.  Use the features of the authoring system and player to add open or closed captions to the video.',
+        'If closed captions are not support, use open captioning to include captions as part of the video.',
+        'Open captioning is the only way to insure that captions are available on most cells phones and tablet computers.'
+      ],
+      MANUAL_CHECKS: [
+        'When captions are enabled on the media player, verify the captions are visible.',
+        'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL 5: The object element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_6: {
+      ID:                    'Video 6',
+      DEFINITION:            'Live and prerecorded video with synchronized audio (i.e. a movie, lecture) using the @embed@ element must have synchronized captions.',
+      SUMMARY:               '@embed@ for video must have captions',
+      TARGET_RESOURCES_DESC: '@embed@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @embed@ element is used for video content with synchronized audio (i.e movie, lecture).  If it is video with synchronized audio, verify it has captions of the audio content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @embed@ elements are used for video content with synchronized audio (i.e movie, lecture).  If any are used for video with synchronized audio, verify it has captions of the audio content.',
+        HIDDEN_S: 'The @embed@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @embed@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @embed@ elements found on this page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify the @embed@ element with @video@ in its @type@ attribute has synchronized audio (i.e. movie, lecture).  If so, verify their are captions avialble for the audio content.',
+        ELEMENT_MC_2: 'Verify the @embed@ element renders video content with synchronized audio (i.e. movie, lecture).  If so, verify their are captions avialble for the audio content.',
+        ELEMENT_HIDDEN_1:       'The @embed@ element is hidden and cannot render video content.'
+      },
+      PURPOSES: [
+        'Synchronized captions provide a means for people who cannot hear the audio content of a video to have access to the speech and sounds of the video.',
+        'Some types of learning disabilities effect auditory processing, captoins provide an alternative way to understand the audio content of a video.',
+        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.2 and 1.2.4, and therefore covers both live and prerecorded content.'
+      ],
+      TECHNIQUES: [
+        'Consider using the @video@ element instead of the @object@ element for video containing synchronized audio.  The @video@ element has better support for adding caption tracks.',
+        'Use video authoring tools and player technologies that support captioning.  Use the features of the authoring system and player to add open or closed captions to the video.',
+        'If closed captions are not support, use open captioning to include captions as part of the video.',
+        'Open captioning is the only way to insure that captions are available on most cells phones and tablet computers.'
+      ],
+      MANUAL_CHECKS: [
+        'When captions are enabled on the media player, verify the captions are visible.',
+        'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The embed element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_7: {
+      ID:                    'Video 7',
+      DEFINITION:            '@video@ elements used for prerecorded video with synchronized audio (i.e. a movie, archived lecture) must have an audio description of the video content.',
+      SUMMARY:               '@video@ element must have audio description.',
+      TARGET_RESOURCES_DESC: '@video@ elements.',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Add audio description track to @video@ element without an audio description track.',
+        FAIL_P:   'Add audio description track to each of the %N_F the @video@ elements without audio description tracks.',
+        MANUAL_CHECK_S:     'Verify the @video@ element with is used for prerecorded video with synchronized audio.   If so, verify the video includes an audio description of the video content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @video@ elements are used for prerecorded video with synchronized audio.   If so, verify each of the videos includes an audio description of the video content.',
+        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:         '@video@ element has audio description track.',
+        ELEMENT_FAIL_1:       'Add audio description track to @video@ element.',
+        ELEMENT_MC_1: 'Verify an audio description of the video content is included in the audio track of the video.',
+        ELEMENT_HIDDEN_1:       'The @video@ element is hidden and cannot render content.'
+      },
+      PURPOSES: [
+        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.',
+        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.'
+      ],
+      TECHNIQUES: [
+        'Use the @track@ element to add audio descriptions to the video content.',
+        'Use @aria-describedby@ to reference a text description of the video content.'
+      ],
+      MANUAL_CHECKS: [
+        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
+        'If there is a audio description make sure the description accurately describes the video content.',
+        'If there is a text description make sure the description accurately describes the video content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The video element',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The track element',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_8: {
+      ID:                    'Video 8',
+      DEFINITION:            '@object@ elements used for prerecorded video with synchronized audio (i.e. a movie, archived lecture) must have an audio description of the video content.',
+      SUMMARY:               '@object@ for video must have audio description.',
+      TARGET_RESOURCES_DESC: '@object@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @object@ element is used for prerecorded video with synchronized audio (i.e. a movie, archived lecture).  If so, verify the video includes an audio description of the video content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @object@ elements are used for prerecorded video with synchronized audio (i.e. a movie, archived lecture).  If so, verify each video includes an audio description of the video content.',
+        HIDDEN_S: 'The @object@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @object@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @object@ elements found on this page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify the @object@ element with @video@ in its @type@ attrbute is used for prerecorded video with synchronized audio (i.e. a movie, archived lecture).  If so verify an audio description of the video content is available.',
+        ELEMENT_MC_2: 'Verify if the @object@ element is used for prerecorded video with synchronized audio (i.e. a movie, archived lecture).  If so verify an audio description of the video content is available.',
+        ELEMENT_HIDDEN_1:       'The @object@ element is hidden and cannot render video content.'
+      },
+      PURPOSES: [
+        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.',
+        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.'
+      ],
+      TECHNIQUES: [
+        'Use the @video@ element instead of the @object@ element for video only content, since the @video@ element provides better support for audio description tracks.',
+        'Include an audio track in the video that describes the video content.',
+        'Use @aria-describedby@ attribute to point to a text description of the video only content.'
+      ],
+      MANUAL_CHECKS: [
+        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
+        'If there is a audio description make sure the description accurately describes the video content.',
+        'If there is a text description make sure the description accurately describes the video content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL 5: The object element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
+        }
+      ]
+  },
+  VIDEO_9: {
+      ID:                    'Video 9',
+      DEFINITION:            '@embed@ elements used for prerecorded video with synchronized audio (i.e. a movie, archived lecture) must have audio description of the video content.',
+      SUMMARY:               '@embed@ for video must have audio description',
+      TARGET_RESOURCES_DESC: '@embed@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the @embed@ element is used for prerecorded video with synchronized audio (i.e. a movie, archived lecture).   If so, verify the video includes an audio description of the video content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @embed@ elements are used for prerecorded video with synchronized audio (i.e. a movie, archived lecture).   If so, verify each of the videos include an audio description of the video content.',
+        HIDDEN_S: 'The @embed@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @embed@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No @embed@ elements found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify the @embed@ element with @video@ in its @type@ attrbute is used for video with synchronized audio (i.e. a movie, archived lecture).  If so, verify the video includes an audio description of the video content.',
+        ELEMENT_MC_2: 'Verify if the @embed@ element is used for video with synchronized audio (i.e. a movie, archived lecture).  If so, verify the video includes an audio description of the video content.',
+        ELEMENT_HIDDEN_1:       'The @embed@ element is hidden and cannot render video content.'
+      },
+      PURPOSES: [
+        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.',
+        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.'
+      ],
+      TECHNIQUES: [
+        'Use the @video@ element instead of the @embed@ element for video only content, since the @video@ element provides better support for audio description tracks.',
+        'Include an audio track in the video that describes the video content.',
+        'Use @aria-describedby@ attribute to point to a text description of the video only content.'
+      ],
+      MANUAL_CHECKS: [
+        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
+        'If there is a audio description make sure the description accurately describes the video content.',
+        'If there is a text description make sure the description accurately describes the video content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HMTL: The embed element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby',
+          url:   'https://www.w3.org/TR/wai-aria/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'University of Washington: Creating Accessible Videos',
+          url:   'https://www.washington.edu/accessibility/videos/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebAIM: Captions, Transcripts, and Audio Descriptions',
+          url:   'https://webaim.org/techniques/captions/'
         }
       ]
   }
@@ -17154,20 +18113,34 @@ const messages$1 = {
   rules: {}
 };
 
+messages$1.rules = Object.assign(messages$1.rules, audioRules$1);
+// messages.rules = Object.assign(messages.rules, bypassRules);
 messages$1.rules = Object.assign(messages$1.rules, colorRules$1);
+// messages.rules = Object.assign(messages.rules, errorRules);
+// messages.rules = Object.assign(messages.rules, frameRules);
 messages$1.rules = Object.assign(messages$1.rules, focusRules$1);
 messages$1.rules = Object.assign(messages$1.rules, controlRules$1);
 messages$1.rules = Object.assign(messages$1.rules, headingRules$1);
+// messages.rules = Object.assign(messages.rules, htmlRules);
 messages$1.rules = Object.assign(messages$1.rules, imageRules$1);
-messages$1.rules = Object.assign(messages$1.rules, linkRules$1);
+// messages.rules = Object.assign(messages.rules, keyboardRules);
 messages$1.rules = Object.assign(messages$1.rules, landmarkRules$1);
+// messages.rules = Object.assign(messages.rules, layoutRules);
+messages$1.rules = Object.assign(messages$1.rules, linkRules$1);
+// messages.rules = Object.assign(messages.rules, listsRules);
+// messages.rules = Object.assign(messages.rules, navigationRules);
+// messages.rules = Object.assign(messages.rules, readingOrderRules);
+// messages.rules = Object.assign(messages.rules, resizeRules);
+// messages.rules = Object.assign(messages.rules, sensoryRules);
 messages$1.rules = Object.assign(messages$1.rules, tableRules$1);
+// messages.rules = Object.assign(messages.rules, timingRules);
+messages$1.rules = Object.assign(messages$1.rules, videoRules$1);
 messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 
 /* locale.js */
 
 /* Constants */
-const debug$n = new DebugLogging('locale', false);
+const debug$p = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -17211,7 +18184,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$n.flag && debug$n.log(`[${id}][${value}]: ${message}`);
+  debug$p.flag && debug$p.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -17298,7 +18271,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$n.flag && debug$n.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$p.flag && debug$p.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -17308,7 +18281,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$n.flag && debug$n.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$p.flag && debug$p.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   return null;
 }
 
@@ -17336,7 +18309,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$n.flag && debug$n.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$p.flag && debug$p.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -17348,7 +18321,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$n.flag && debug$n.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$p.flag && debug$p.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -17368,7 +18341,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$n.flag && debug$n.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$p.flag && debug$p.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -17415,7 +18388,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$n.flag && debug$n.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$p.flag && debug$p.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -17430,7 +18403,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$n.flag && debug$n.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$p.flag && debug$p.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -17445,7 +18418,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$n.flag && debug$n.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$p.flag && debug$p.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -17464,7 +18437,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$n.flag && debug$n.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$p.flag && debug$p.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -17483,7 +18456,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$n.flag && debug$n.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$p.flag && debug$p.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -17511,8 +18484,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$n.flag && debug$n.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$n.flag && debug$n.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$p.flag && debug$p.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$p.flag && debug$p.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -17532,7 +18505,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$n.flag && debug$n.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$p.flag && debug$p.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -17551,7 +18524,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$n.flag && debug$n.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$p.flag && debug$p.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -17571,7 +18544,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$n.flag && debug$n.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$p.flag && debug$p.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -17639,12 +18612,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$m = new DebugLogging('tableInfo', false);
-debug$m.flag = true;
-debug$m.rows = true;
-debug$m.cells = true;
-debug$m.tableTree = true;
-debug$m.headerCalc = false;
+const debug$o = new DebugLogging('tableInfo', false);
+debug$o.flag = false;
+debug$o.rows = false;
+debug$o.cells = false;
+debug$o.tableTree = false;
+debug$o.headerCalc = false;
 
 /**
  * @class TableElement
@@ -17776,13 +18749,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$m.headerCalc && debug$m.log(`${cell}`, 1);
+        debug$o.headerCalc && debug$o.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$m.headesCalc && debug$m.log(`[headers]: ${ids.join(' ')}`);
+              debug$o.headesCalc && debug$o.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -17797,7 +18770,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$m.headerCalc && debug$m.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$o.headerCalc && debug$o.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -17808,7 +18781,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$m.headerCalc && debug$m.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$o.headerCalc && debug$o.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -17820,7 +18793,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$m.headerCalc && debug$m.log(`${cell}`);
+            debug$o.headerCalc && debug$o.log(`${cell}`);
           }
         }
       });
@@ -17867,7 +18840,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$m.log(`${prefix}${item}`);
+    debug$o.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -17878,14 +18851,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$m.flag) {
-      debug$m.log(`${this}`);
-      if (debug$m.tableTree) {
+    if (debug$o.flag) {
+      debug$o.log(`${this}`);
+      if (debug$o.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$m.separator();
+      debug$o.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -18000,15 +18973,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$m.flag && debug$m.rows) {
-      debug$m.log(`${prefix}${this}`);
+    if (debug$o.flag && debug$o.rows) {
+      debug$o.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$m.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$o.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -18089,8 +19062,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$m.flag) {
-      debug$m.log(`${prefix}${this}`);
+    if (debug$o.flag) {
+      debug$o.log(`${prefix}${this}`);
     }
   }
 
@@ -18211,8 +19184,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$m.flag) {
-      debug$m.log('== All Tables ==', 1);
+    if (debug$o.flag) {
+      debug$o.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -18223,11 +19196,11 @@ class TableInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$l = new DebugLogging('domCache', false);
-debug$l.flag = true;
-debug$l.showDomTexts = false;
-debug$l.showDomElems = false;
-debug$l.showTree = false;
+const debug$n = new DebugLogging('domCache', false);
+debug$n.flag = true;
+debug$n.showDomTexts = false;
+debug$n.showDomElems = false;
+debug$n.showTree = false;
 
 const skipableElements = [
   'base',
@@ -18262,6 +19235,7 @@ class ParentInfo {
     this.landmarkElement = null;
     this.listElement     = null;
     this.mapElement      = null;
+    this.mediaElement    = null;
     this.tableElement    = null;
     this.tableRowGroup   = null;
 
@@ -18275,6 +19249,7 @@ class ParentInfo {
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
       this.mapElement      = info.mapElement;
+      this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
     }
@@ -18315,6 +19290,7 @@ class DOMCache {
     this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
+    this.mediaInfo      = new MediaInfo();
     this.structureInfo = new StructureInfo();
     this.tableInfo     = new TableInfo();
     this.iframeInfo    = new IframeInfo();
@@ -18418,7 +19394,7 @@ class DOMCache {
               for (let i = 0; i < assignedNodes.length; i += 1) {
                 const assignedNode = assignedNodes[i];
                 if (assignedNode.nodeType === Node.TEXT_NODE) {
-                  debug$l.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
+                  debug$n.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
 /*                  domItem = new DOMText(parentDomElement, node);
                   // Check to see if text node has any renderable content
                   if (domItem.hasContent) {
@@ -18438,7 +19414,7 @@ class DOMCache {
                 }
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-                  debug$l.log(`[assignedNode][ELEMENT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
+                  debug$n.log(`[assignedNode][ELEMENT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
 
                   domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition);
 
@@ -18523,6 +19499,7 @@ class DOMCache {
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
     const mapElement      = parentInfo.mapElement;
+    const mediaElement    = parentInfo.mediaElement;
     const tableElement    = parentInfo.tableElement;
     const tableRowGroup   = parentInfo.tableRowGroup;
 
@@ -18534,6 +19511,7 @@ class DOMCache {
     this.idInfo.update(documentIndex, domElement);
     this.linkInfo.update(domElement);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
+    newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
     return newParentInfo;
@@ -18581,40 +19559,193 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$l.flag) {
-      if (debug$l.showDomElems) {
-        debug$l.log(' === AllDomElements ===', true);
+    if (debug$n.flag) {
+      if (debug$n.showDomElems) {
+        debug$n.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$l.domElement(de);
+          debug$n.domElement(de);
         });
       }
 
-      if (debug$l.showDomTexts) {
-        debug$l.log(' === AllDomTexts ===', true);
+      if (debug$n.showDomTexts) {
+        debug$n.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$l.domText(dt);
+          debug$n.domText(dt);
         });
       }
 
-      if (debug$l.showTree) {
-        debug$l.log(' === DOMCache Tree ===', true);
-        debug$l.domElement(this.startingDomElement);
+      if (debug$n.showTree) {
+        debug$n.log(' === DOMCache Tree ===', true);
+        debug$n.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
   }
 }
 
+/* audioRules.js */
+
+/* Constants */
+const debug$m = new DebugLogging('Audio Rules', false);
+debug$m.flag = false;
+
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Audio Rules
+ */
+
+const audioRules = [
+
+  /**
+   * @object AUDIO_1
+   *
+   * @desc Audio elements must have captions or text transcripts
+   */
+
+  { rule_id             : 'AUDIO_1',
+    last_updated        : '2014-11-21',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.1',
+    wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
+    target_resources    : ['audio', 'track'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.audioElements.forEach( ae => {
+        const de = ae.domElement;
+        if (de.visibility.isVisibleToAT || ae.hasAutoPlay) {
+          if (ae.tracks.length) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          }
+          else {
+            if (de.accDescription.name) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object AUDIO_2
+   *
+   * @desc If object element is used for audio only, object must have captions or text transcript
+   */
+
+  { rule_id             : 'AUDIO_2',
+    last_updated        : '2014-11-21',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.1',
+    wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
+    target_resources    : ['object', 'param'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.objectElements.forEach( oe => {
+        const de = oe.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (de.accDescription.name) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          }
+          else {
+            if (oe.type.includes('audio')) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object AUDIO_3
+   *
+   * @desc If embed element is used for audio only, embed  must have captions or text transcript
+   */
+
+  { rule_id             : 'AUDIO_3',
+    last_updated        : '2014-11-21',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.1',
+    wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
+    target_resources    : ['embed'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.embedElements.forEach( ee => {
+        const de = ee.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (de.accDescription.name) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          }
+          else {
+            if (ee.type.includes('audio')) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+    /**
+     * @object AUDIO_4
+     *
+     * @desc  Audio automatically starts
+     */
+
+  { rule_id             : 'AUDIO_4',
+    last_updated        : '2014-11-21',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    wcag_primary_id     : '1.4.2',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate            : function (dom_cache, rule_result) {
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+
+    } // end validate function
+  }
+
+];
+
 /* colorRules.js */
 
 /* Constants */
-const debug$k = new DebugLogging('Color Rules', false);
-debug$k.flag = false;
+const debug$l = new DebugLogging('Color Rules', false);
+debug$l.flag = false;
 
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Color Rules
+ * Rule Category: Color Rules
  */
 
 const colorRules = [
@@ -18642,14 +19773,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$k.flag && debug$k.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$l.flag && debug$l.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      debug$k.flag && debug$k.log(`===== COLOR 1 ====`);
+      debug$l.flag && debug$l.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -18739,12 +19870,12 @@ const colorRules = [
 /* focusRules.js */
 
 /* Constants */
-const debug$j = new DebugLogging('Focus Rules', false);
-debug$j.flag = false;
+const debug$k = new DebugLogging('Focus Rules', false);
+debug$k.flag = false;
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Focus Rules
+ * Rule Category: Focus Rules
  */
 
 const focusRules = [
@@ -19038,13 +20169,13 @@ const focusRules = [
 /* controlRules.js */
 
 /* Constants */
-const debug$i = new DebugLogging('Control Rules', false);
-debug$i.flag = false;
+const debug$j = new DebugLogging('Control Rules', false);
+debug$j.flag = false;
 
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Form Control Rules
+ * Rule Category: Form Control Rules
  */
 
 const controlRules = [
@@ -19619,12 +20750,12 @@ const controlRules = [
 /* headingRules.js */
 
 /* Constants */
-const debug$h = new DebugLogging('Heading Rules', false);
-debug$h.flag = false;
+const debug$i = new DebugLogging('Heading Rules', false);
+debug$i.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Heading Rules
+ * Rule Category: Heading Rules
  */
 
 const headingRules = [
@@ -20016,12 +21147,12 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
 /* imageRules.js */
 
 /* Constants */
-const debug$g = new DebugLogging('Image Rules', false);
-debug$g.flag = false;
+const debug$h = new DebugLogging('Image Rules', false);
+debug$h.flag = false;
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Color Rules
+ * Rule Category: Image Rules
  */
 
 const imageRules = [
@@ -20290,142 +21421,15 @@ const imageRules = [
 }
 ];
 
-/* linkRules.js */
-
-/* Constants */
-const debug$f = new DebugLogging('Link Rules', false);
-debug$f.flag = false;
-
-/*
- * OpenA11y Rules
- * Rule group: Link Rules
- */
-
-const linkRules = [
-
-  /**
-   * @object LINK_1
-   *
-   * @desc Link should describe the target of a link
-   */
-
-  { rule_id             : 'LINK_1',
-    last_updated        : '2022-05-23',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.LINKS,
-    ruleset             : RULESET.MORE,
-    rule_required       : true,
-    wcag_primary_id     : '2.4.4',
-    wcag_related_ids    : ['2.4.9'],
-    target_resources    : ['a', 'area', '[role=link]'],
-    validate            : function (dom_cache, rule_result) {
-      dom_cache.linkInfo.allLinkDomElements.forEach (de => {
-        if (de.visibility.isVisibleToAT) {
-          const name = de.accName.name;
-          const desc = de.accDescription.name;
-          if (name.length) {
-            if (desc.length) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName, name, desc]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, name]);
-            }
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
-    } // end valifdation function
-  },
-
-  /**
-   * @object LINK_2
-   *
-   * @desc Links with the different HREFs should have the unique accessible names
-   */
-
-  { rule_id             : 'LINK_2',
-    last_updated        : '2022-05-23',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.LINKS,
-    ruleset             : RULESET.MORE,
-    rule_required       : false,
-    wcag_primary_id     : '2.4.4',
-    wcag_related_ids    : ['2.4.9'],
-    target_resources    : ['a', 'area', '[role=link]'],
-    validate            : function (dom_cache, rule_result) {
-
-      // array of visible DOM elements identified as links
-      const visibleLinks = [];
-
-      dom_cache.linkInfo.allLinkDomElements.forEach ( de => {
-        if (de.visibility.isVisibleToAT) {
-          visibleLinks.push(de);
-        }
-      });
-
-      visibleLinks.forEach( (de1, index1) => {
-        let differentHrefSameDescription      = 0;
-        let differentHrefDifferentDescription = 0;
-        let sameHref = 0;
-        visibleLinks.forEach( (de2, index2) => {
-          if (index1 !== index2) {
-            if (accNamesTheSame(de1.accName, de2.accName)) {
-              if (de1.node.href === de2.node.href) {
-                sameHref += 1;
-              }
-              else {
-                if (accNamesTheSame(de1.accDescription, de2.accDescription)) {
-                  differentHrefSameDescription += 1;
-                }
-                else {
-                  differentHrefDifferentDescription += 1;
-                }
-              }
-            }
-          }
-        });
-
-        if (differentHrefSameDescription) {
-          rule_result.addElementResult(TEST_RESULT.FAIL, de1,  'ELEMENT_FAIL_1', [(differentHrefSameDescription + 1)]);
-        } else {
-          if (differentHrefDifferentDescription) {
-            if (differentHrefDifferentDescription === 1) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_3', []);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_4', [differentHrefDifferentDescription]);
-            }
-          } else {
-            if (sameHref) {
-              if (sameHref === 1) {
-                rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_1', []);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_2', [sameHref]);
-              }
-            }
-          }
-        }
-      });
-
-    } // end validate function
-  }
-];
-
 /* landmarkRules.js */
 
 /* Constants */
-const debug$e = new DebugLogging('Landmark Rules', false);
-debug$e.flag = false;
+const debug$g = new DebugLogging('Landmark Rules', false);
+debug$g.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Landmark Rules
+ * Rule Category: Landmark Rules
  */
 
 const landmarkRules = [
@@ -21217,15 +22221,142 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
   }
 }
 
-/* tableRules.js */
+/* linkRules.js */
 
 /* Constants */
-const debug$d = new DebugLogging('Table Rules', false);
-debug$d.flag = false;
+const debug$f = new DebugLogging('Link Rules', false);
+debug$f.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Table Rules
+ * Rule Category: Link Rules
+ */
+
+const linkRules = [
+
+  /**
+   * @object LINK_1
+   *
+   * @desc Link should describe the target of a link
+   */
+
+  { rule_id             : 'LINK_1',
+    last_updated        : '2022-05-23',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.4',
+    wcag_related_ids    : ['2.4.9'],
+    target_resources    : ['a', 'area', '[role=link]'],
+    validate            : function (dom_cache, rule_result) {
+      dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+        if (de.visibility.isVisibleToAT) {
+          const name = de.accName.name;
+          const desc = de.accDescription.name;
+          if (name.length) {
+            if (desc.length) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName, name, desc]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, name]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      });
+    } // end valifdation function
+  },
+
+  /**
+   * @object LINK_2
+   *
+   * @desc Links with the different HREFs should have the unique accessible names
+   */
+
+  { rule_id             : 'LINK_2',
+    last_updated        : '2022-05-23',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    ruleset             : RULESET.MORE,
+    rule_required       : false,
+    wcag_primary_id     : '2.4.4',
+    wcag_related_ids    : ['2.4.9'],
+    target_resources    : ['a', 'area', '[role=link]'],
+    validate            : function (dom_cache, rule_result) {
+
+      // array of visible DOM elements identified as links
+      const visibleLinks = [];
+
+      dom_cache.linkInfo.allLinkDomElements.forEach ( de => {
+        if (de.visibility.isVisibleToAT) {
+          visibleLinks.push(de);
+        }
+      });
+
+      visibleLinks.forEach( (de1, index1) => {
+        let differentHrefSameDescription      = 0;
+        let differentHrefDifferentDescription = 0;
+        let sameHref = 0;
+        visibleLinks.forEach( (de2, index2) => {
+          if (index1 !== index2) {
+            if (accNamesTheSame(de1.accName, de2.accName)) {
+              if (de1.node.href === de2.node.href) {
+                sameHref += 1;
+              }
+              else {
+                if (accNamesTheSame(de1.accDescription, de2.accDescription)) {
+                  differentHrefSameDescription += 1;
+                }
+                else {
+                  differentHrefDifferentDescription += 1;
+                }
+              }
+            }
+          }
+        });
+
+        if (differentHrefSameDescription) {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de1,  'ELEMENT_FAIL_1', [(differentHrefSameDescription + 1)]);
+        } else {
+          if (differentHrefDifferentDescription) {
+            if (differentHrefDifferentDescription === 1) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_3', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_4', [differentHrefDifferentDescription]);
+            }
+          } else {
+            if (sameHref) {
+              if (sameHref === 1) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_1', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de1,  'ELEMENT_PASS_2', [sameHref]);
+              }
+            }
+          }
+        }
+      });
+
+    } // end validate function
+  }
+];
+
+/* tableRules.js */
+
+/* Constants */
+const debug$e = new DebugLogging('Table Rules', false);
+debug$e.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Table Rules
  */
 
 const tableRules = [
@@ -21643,6 +22774,342 @@ const tableRules = [
 }
 ];
 
+/* videoRules.js */
+
+/* Constants */
+const debug$d = new DebugLogging('Audio Rules', false);
+debug$d.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Video Rules
+ */
+
+const videoRules = [
+
+  /**
+   * @object VIDEO_1
+   *
+   * @desc Video elements used for prerecorded video only content using the video element must have text or audio description
+   */
+
+  { rule_id             : 'VIDEO_1',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.1',
+    wcag_related_ids    : ['1.2.2', '1.2.4'],
+    target_resources    : ['video', 'track'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.videoElements.forEach( ve => {
+        const de = ve.domElement;
+        if (de.visibility.isVisibleToAT || ve.hasAutoPlay) {
+          if (ve.tracks.length) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          }
+          else {
+            if (de.accDescription.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_2
+   *
+   * @desc Video elements used for prerecorded video only content using the object element must have text or audio description
+   */
+
+  { rule_id             : 'VIDEO_2',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.1',
+    wcag_related_ids    : ['1.2.2', '1.2.4'],
+    target_resources    : ['object', 'param'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.objectElements.forEach( oe => {
+        const de = oe.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (oe.isVideo) {
+            if (de.accDescription.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            }
+          }
+          else {
+            if (de.accDescription.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', []);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_3
+   *
+   * @desc Video elements used for prerecorded video only content using the embed element must have text or audio description
+   */
+
+  { rule_id             : 'VIDEO_3',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.1',
+    wcag_related_ids    : ['1.2.2', '1.2.4'],
+    target_resources    : ['embed'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.embedElements.forEach( ee => {
+        const de = ee.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (ee.isVideo) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_4
+   *
+   * @desc Live and prerecorded video with synchronized audio (i.e. movie, lecture) using the video element must have captions
+   */
+
+  { rule_id             : 'VIDEO_4',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.2',
+    wcag_related_ids    : ['1.2.4'],
+    target_resources    : ['video', 'track'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.videoElements.forEach( ve => {
+        const de = ve.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (ve.hasCaptionTrack || ve.hasSubtitleTrack) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_5
+   *
+   * @desc Live and prerecorded video with synchronized audio (i.e. movie, lecture) using the object element must have captions
+   */
+
+  { rule_id             : 'VIDEO_5',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.2',
+    wcag_related_ids    : ['1.2.4'],
+    target_resources    : ['object', 'param'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.objectElements.forEach( oe => {
+        const de = oe.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (oe.isVideo) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_6
+   *
+   * @desc Live and prerecorded video with synchronized audio (i.e. movie, lecture) using the embed element must have captions
+   */
+
+  { rule_id             : 'VIDEO_6',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.2',
+    wcag_related_ids    : ['1.2.1', '1.2.4'],
+    target_resources    : ['embed'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.embedElements.forEach( ee => {
+        const de = ee.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (ee.isVideo) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_7
+   *
+   * @desc Prerecorded video with synchronized audio (i.e. movie) using the video element must have audio description
+   */
+
+  { rule_id             : 'VIDEO_7',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.3',
+    wcag_related_ids    : ['1.2.5'],
+    target_resources    : ['video', 'track'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.videoElements.forEach( ve => {
+        const de = ve.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (ve.hasDescriptionTrack) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_8
+   *
+   * @desc Prerecorded video with synchronized audio (i.e. movie) using the object element must have audio description
+   */
+
+  { rule_id             : 'VIDEO_8',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.3',
+    wcag_related_ids    : ['1.2.1', '1.2.5'],
+    target_resources    : ['object', 'param'],
+    validate          : function (dom_cache, rule_result) {
+
+
+      dom_cache.mediaInfo.objectElements.forEach( oe => {
+        const de = oe.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (oe.isVideo) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  },
+
+  /**
+   * @object VIDEO_9
+   *
+   * @desc Prerecorded video with synchronized audio (i.e. movie) using the embed element must have audio description
+   */
+
+  { rule_id             : 'VIDEO_9',
+    last_updated        : '2014-11-28',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    ruleset             : RULESET.MORE,
+    wcag_primary_id     : '1.2.3',
+    wcag_related_ids    : ['1.2.1', '1.2.5'],
+    target_resources    : ['embed'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.mediaInfo.embedElements.forEach( ee => {
+        const de = ee.domElement;
+        if (de.visibility.isVisibleToAT) {
+          if (ee.isVideo) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+
+    } // end validate function
+  }
+];
+
 /* widgetRules.js */
 
 /* Constants */
@@ -21651,7 +23118,7 @@ debug$c.flag = true;
 
 /*
  * OpenA11y Rules
- * Rule group: Widget Rules
+ * Rule Category: Widget Rules
  */
 
 const widgetRules = [
@@ -23036,7 +24503,7 @@ class Rule {
 /* allRules.js */
 
 /* Constants */
-const debug$a = new DebugLogging('Rules', false);
+const debug$a = new DebugLogging('All Rules', false);
 
 const allRules = [];
 
@@ -23046,14 +24513,28 @@ function addToArray (ruleArray) {
   });
 }
 
+addToArray(audioRules);
+// addToArray(bypassRules);
 addToArray(colorRules);
+// addToArray(errorRules);
+// addToArray(frameRules);
 addToArray(focusRules);
 addToArray(controlRules);
 addToArray(headingRules);
+// addToArray(htmlRules);
 addToArray(imageRules);
-addToArray(linkRules);
+// addToArray(keyboardRules);
 addToArray(landmarkRules);
+// addToArray(layoutRules);
+addToArray(linkRules);
+// addToArray(listRules);
+// addToArray(navigationRules);
+// addToArray(readingOrderRules);
+// addToArray(resizeRules);
+// addToArray(sensoryRules);
 addToArray(tableRules);
+// addToArray(timingRules);
+addToArray(videoRules);
 addToArray(widgetRules);
 
 

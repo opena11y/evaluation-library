@@ -9,6 +9,7 @@ import IdInfo           from './idInfo.js';
 import ImageInfo        from './imageInfo.js';
 import LinkInfo         from './linkInfo.js';
 import ListInfo         from './listInfo.js';
+import MediaInfo         from './mediaInfo.js';
 import StructureInfo    from './structureInfo.js';
 import TableInfo        from './tableInfo.js';
 import DebugLogging     from '../debug.js';
@@ -53,6 +54,7 @@ class ParentInfo {
     this.landmarkElement = null;
     this.listElement     = null;
     this.mapElement      = null;
+    this.mediaElement    = null;
     this.tableElement    = null;
     this.tableRowGroup   = null;
 
@@ -66,6 +68,7 @@ class ParentInfo {
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
       this.mapElement      = info.mapElement;
+      this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
     }
@@ -106,6 +109,7 @@ export default class DOMCache {
     this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
+    this.mediaInfo      = new MediaInfo();
     this.structureInfo = new StructureInfo();
     this.tableInfo     = new TableInfo();
     this.iframeInfo    = new IFrameInfo();
@@ -317,6 +321,7 @@ export default class DOMCache {
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
     const mapElement      = parentInfo.mapElement;
+    const mediaElement    = parentInfo.mediaElement;
     const tableElement    = parentInfo.tableElement;
     const tableRowGroup   = parentInfo.tableRowGroup;
 
@@ -328,6 +333,7 @@ export default class DOMCache {
     this.idInfo.update(documentIndex, domElement);
     this.linkInfo.update(domElement);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
+    newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
     return newParentInfo;

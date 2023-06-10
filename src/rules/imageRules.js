@@ -16,7 +16,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Color Rules
+ * Rule Category: Image Rules
  */
 
 export const imageRules = [

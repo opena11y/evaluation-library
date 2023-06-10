@@ -16,7 +16,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Alliance Rules
- * Rule group: Focus Rules
+ * Rule Category: Focus Rules
  */
 
 export const focusRules = [

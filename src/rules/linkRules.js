@@ -17,7 +17,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Link Rules
+ * Rule Category: Link Rules
  */
 
 export const linkRules = [

@@ -10,12 +10,6 @@ import {
   TEST_RESULT
 } from '../constants.js';
 
-/*
-import {
-  getCommonMessage
-} from '../_locale/locale.js';
-*/
-
 import DebugLogging  from '../debug.js';
 
 /* Constants */
@@ -24,7 +18,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Table Rules
+ * Rule Category: Table Rules
  */
 
 export const tableRules = [

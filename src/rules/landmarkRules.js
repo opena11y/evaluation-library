@@ -17,7 +17,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Landmark Rules
+ * Rule Category: Landmark Rules
  */
 
 export const landmarkRules = [

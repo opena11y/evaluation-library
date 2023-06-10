@@ -114,8 +114,12 @@ outputFile('about.html', htmlAbout);
 
 // Create rule files
 console.log(`\n === Rule Files ===`)
+let count = 0;
 allRulesInfo.forEach( ruleInfo => {
   console.log(`[${ruleInfo.id}] ${ruleInfo.summary} => ${ruleInfo.filename}`);
   const htmlRule = nunjucks.render('./src-docs/templates/content-rule.njk', {title: ruleInfo.summary, ruleInfo: ruleInfo});
   outputFile(ruleInfo.filename, htmlRule);
+  count += 1;
 });
+
+console.log(`Total Rules: ${count}`);

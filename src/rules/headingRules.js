@@ -16,7 +16,7 @@ debug.flag = false;
 
 /*
  * OpenA11y Rules
- * Rule group: Heading Rules
+ * Rule Category: Heading Rules
  */
 
 export const headingRules = [
