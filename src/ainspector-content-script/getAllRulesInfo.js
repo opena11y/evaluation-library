@@ -43,7 +43,7 @@ function getRuleCategoryResults (evalResult) {
 
   let rcResults = [];
   rcIds.forEach ((id) => {
-    let summary = evalResult.getRuleResultsByCategory(id).getRuleResultsSummary();
+    const summary = evalResult.getRuleResultsByCategory(id).getRuleResultsSummary();
     rcResults.push(getSummaryItem(summary, id));
   });
   return rcResults;
@@ -68,7 +68,7 @@ function getGuidelineResults (evalResult) {
 
   let glResults = [];
   glIds.forEach ((id) => {
-    let summary = evalResult.getRuleResultsByGuideline(id).getRuleResultsSummary();
+    const summary = evalResult.getRuleResultsByGuideline(id).getRuleResultsSummary();
     glResults.push(getSummaryItem(summary, id));
   });
   return glResults;
@@ -76,13 +76,18 @@ function getGuidelineResults (evalResult) {
 
 function getScopeResults (evalResult) {
 
-  const scopeResults = {
-    website: getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.WEBSITE).getRuleResultsSummary(), 'scope-website'),
-    page:    getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.PAGE).getRuleResultsSummary(), 'scope-page'),
-    element: getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.ELEMENT).getRuleResultsSummary(), 'scope-element')
-  }
+  const scIds = [
+    RULE_SCOPE.ELEMENT,
+    RULE_SCOPE.PAGE,
+    RULE_SCOPE.WEBSITE
+  ];
 
-  return scopeResults;
+  let scResults = [];
+  scIds.forEach ((id) => {
+    const summary = evalResult.getRuleResultsByScope(id).getRuleResultsSummary();
+    scResults.push(getSummaryItem(summary, id));
+  });
+  return scResults;
 }
 
 /*
@@ -107,9 +112,9 @@ export default function getAllRulesInfo () {
   info.manual_checks = ruleSummaryResult.manual_checks;
   info.passed        = ruleSummaryResult.passed;
 
-  info.rcResults    = getRuleCategoryResults(evaluationResult);
-  info.glResults    = getGuidelineResults(evaluationResult);
-  info.scopeResults = getScopeResults(evaluationResult);
+  info.rcResults = getRuleCategoryResults(evaluationResult);
+  info.glResults = getGuidelineResults(evaluationResult);
+  info.scResults = getScopeResults(evaluationResult);
   info.json = evaluationResult.toJSON();
 
   info.allRuleResults = [];

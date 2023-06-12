@@ -155,6 +155,7 @@ function getRuleScopeInfo(scopeId) {
   const ruleScopes = messages[locale].ruleScopes;
   for (let i = 0; i < ruleScopes.length; i +=1) {
     let rs = ruleScopes[i];
+    console.log(`[getRuleScopeInfo][rs.id]: ${rs.id}  [scopeId]: ${scopeId}`);
     if (rs.id === scopeId) {
       return rs;
     }

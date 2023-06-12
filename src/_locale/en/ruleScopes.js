@@ -17,7 +17,7 @@ export const ruleScopes = [
   },
   {
     id           : RULE_SCOPE.WEBSITE,
-    title        : 'Page',
+    title        : 'Website',
     url          : '',
     description  : 'Accessibility requirements that apply to the pages in a website.'
   }

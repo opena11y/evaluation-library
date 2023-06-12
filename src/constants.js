@@ -99,10 +99,12 @@ const RULE_CATEGORIES = {
  */
 
 const RULE_SCOPE =  {
-  UNKNOWN : 0,
-  ELEMENT : 1,
-  PAGE    : 2,
-  WEBSITE : 4
+  UNDEFINED  : 0x0000,
+  ELEMENT    : 0x0001,
+  PAGE       : 0x0002,
+  WEBSITE    : 0x0004,
+  // Composite scopes
+  ALL        : 0x0007
 };
 
 /**

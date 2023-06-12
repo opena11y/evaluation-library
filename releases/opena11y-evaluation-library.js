@@ -220,10 +220,12 @@ const RULE_CATEGORIES = {
  */
 
 const RULE_SCOPE =  {
-  UNKNOWN : 0,
-  ELEMENT : 1,
-  PAGE    : 2,
-  WEBSITE : 4
+  UNDEFINED  : 0x0000,
+  ELEMENT    : 0x0001,
+  PAGE       : 0x0002,
+  WEBSITE    : 0x0004,
+  // Composite scopes
+  ALL        : 0x0007
 };
 
 /**
@@ -11618,7 +11620,7 @@ const ruleScopes = [
   },
   {
     id           : RULE_SCOPE.WEBSITE,
-    title        : 'Page',
+    title        : 'Website',
     url          : '',
     description  : 'Accessibility requirements that apply to the pages in a website.'
   }
@@ -18426,6 +18428,7 @@ function getRuleScopeInfo(scopeId) {
   const ruleScopes = messages[locale].ruleScopes;
   for (let i = 0; i < ruleScopes.length; i +=1) {
     let rs = ruleScopes[i];
+    console.log(`[getRuleScopeInfo][rs.id]: ${rs.id}  [scopeId]: ${scopeId}`);
     if (rs.id === scopeId) {
       return rs;
     }
@@ -26896,7 +26899,9 @@ class EvaluationResult {
    */
 
   getRuleResultsByScope (scopeId, ruleset=RULESET.ALL) {
+    console.log(`[getRuleResultsByScope][scopeId]: ${scopeId}`);
     const scopeInfo = getRuleScopeInfo(scopeId);
+    console.log(`[getRuleResultsByScope][scopeInfo]: ${scopeInfo}`);
     const rgr = new RuleGroupResult(this, scopeInfo.title, scopeInfo.url, scopeInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
