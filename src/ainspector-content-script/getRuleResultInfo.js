@@ -8,12 +8,12 @@ import {
 /* Constants */
 
 /*
-*   getElementResultsInfo
+*   getRuleResultInfo
 *   (1) Run evlauation library;
 *   (2) return result objec for the rule view in the sidebar;
 */
 
-export function getElementResultsInfo(ruleResult) {
+export default function getRuleResultInfo(ruleResult) {
 
   const elemSummaryResult = ruleResult.getResultsSummary();
 
@@ -32,7 +32,7 @@ export function getElementResultsInfo(ruleResult) {
   info.hidden         = elemSummaryResult.hidden;
 
   info.detailsAction  = getDetailsAction(ruleResult);
-  info.ruleResult     = getRuleResultInfo(ruleResult);
+  info.ruleResult     = getResultInfo(ruleResult);
   info.elementResults = getElementResultInfo(ruleResult);
   info.otherResult    = getPageOrWebsiteResultInfo(ruleResult);
 
@@ -49,7 +49,7 @@ export function getElementResultsInfo(ruleResult) {
 // Rule Result functions
 // ----------------------
 
-function getRuleResultInfo(ruleResult) {
+function getResultInfo(ruleResult) {
 
   let rule   = ruleResult.getRule()
 

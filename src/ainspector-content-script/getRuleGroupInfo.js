@@ -8,7 +8,7 @@ import {getRuleResultsItem} from './getRuleResultsItem.js';
 *   (1) Run evlauation library;
 *   (2) return result objec for the group view in the sidebar;
 */
-export function getRuleResultsInfo (groupType, groupId) {
+export default function getRuleGroupInfo (groupType, groupId) {
 
   let info = {};
 

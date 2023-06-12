@@ -8,7 +8,7 @@ import {
 } from '../constants.js';
 
 // ----------------------
-// Summary Result functions
+// All Rules Result functions
 // ----------------------
 
 function getSummaryItem (summary, id) {
@@ -74,11 +74,11 @@ function getGuidelineResults (evalResult) {
 }
 
 /*
-*   getSummaryInfo
+*   getAllRulesInfo
 *   (1) Run evlauation library;
 *   (2) return result objec for the summary view in the sidebar;
 */
-export function getSummaryInfo () {
+export default function getAllRulesInfo () {
 
   const info = {};
 

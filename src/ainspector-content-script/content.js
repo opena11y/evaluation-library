@@ -2,11 +2,11 @@
 *   content.js
 */
 
-import {evaluate}              from './evaluate.js';
-import {viewId}                from './panelConstants.js';
-import {getSummaryInfo}        from './getSummaryInfo.js';
-import {getRuleResultsInfo}    from './getRuleResultsInfo.js';
-import {getElementResultsInfo} from './getElementResultsInfo.js';
+import {evaluate}         from './evaluate.js';
+import {viewId}           from './panelConstants.js';
+import getAllRulesInfo    from './getAllRulesInfo.js';
+import getRuleGroupInfo   from './getRuleGroupInfo.js';
+import getRuleResultInfo  from './getRuleResultInfo.js';
 import {
   addHighlightStyle,
   clearHighlights,
@@ -16,7 +16,7 @@ import DebugLogging from '../debug.js';
 
 
 const debug = new DebugLogging('Content', false);
-debug.flag = false;
+debug.flag = true;
 
 /*
 **  Connect to panel.js script and set up listener/handler
@@ -65,19 +65,19 @@ function getEvaluationInfo(panelPort) {
   info.ruleset  = aiInfo.rulesetId;
 
   switch(aiInfo.view) {
-    case viewId.summary:
+    case viewId.allRules:
       clearHighlights();
-      info.infoSummary = getSummaryInfo();
+      info.infoAllRules = getAllRulesInfo();
       ruleResult = false;
       break;
 
-    case viewId.ruleResults:
+    case viewId.ruleGroup:
       clearHighlights();
-      info.infoRuleResults = getRuleResultsInfo(aiInfo.groupType, aiInfo.groupId);
+      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId);
       ruleResult = false;
       break;
 
-    case viewId.elementResults:
+    case viewId.ruleResult:
       addHighlightStyle();
       clearHighlights();
       if (aiInfo.highlightOnly) {
@@ -88,7 +88,7 @@ function getEvaluationInfo(panelPort) {
       } else {
         const evaluationResult  = evaluate();
         ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
-        info.infoElementResults = getElementResultsInfo(ruleResult);
+        info.infoRuleResult = getRuleResultInfo(ruleResult);
         highlightElements(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
       }
       break;
