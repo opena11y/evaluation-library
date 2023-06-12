@@ -4,7 +4,8 @@ import {evaluate}           from './evaluate.js';
 import {getRuleResultsItem} from './getRuleResultsItem.js';
 import {
   RULE_CATEGORIES,
-  WCAG_GUIDELINE
+  WCAG_GUIDELINE,
+  RULE_SCOPE
 } from '../constants.js';
 
 // ----------------------
@@ -74,13 +75,6 @@ function getGuidelineResults (evalResult) {
 }
 
 function getScopeResults (evalResult) {
-
-  const RULE_SCOPE =  {
-    UNKNOWN : 0,
-    ELEMENT : 1,
-    PAGE    : 2,
-    WEBSITE : 3
-  };
 
   const scopeResults = {
     website: getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.WEBSITE).getRuleResultsSummary(), 'scope-website'),

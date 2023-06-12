@@ -225,7 +225,7 @@ const RULE_SCOPE =  {
   UNKNOWN : 0,
   ELEMENT : 1,
   PAGE    : 2,
-  WEBSITE : 3
+  WEBSITE : 4
 };
 
 /**
