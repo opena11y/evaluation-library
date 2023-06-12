@@ -11603,6 +11603,29 @@ const ruleCategories = [
   }
 ];
 
+/* ruleScope.js */
+
+const ruleScopes = [
+  {
+    id           : RULE_SCOPE.ELEMENT,
+    title        : 'Element',
+    url          : '',
+    description  : 'Accessibility requirements that apply to an element.'
+  },
+  {
+    id           : RULE_SCOPE.PAGE,
+    title        : 'Page',
+    url          : '',
+    description  : 'Accessibility requirements that apply to a web page.'
+  },
+  {
+    id           : RULE_SCOPE.WEBSITE,
+    title        : 'Page',
+    url          : '',
+    description  : 'Accessibility requirements that apply to the pages in a website.'
+  }
+];
+
 /* ruleCategories.js */
 
 const rulesets = [
@@ -18267,6 +18290,7 @@ const widgetRules$1 = {
 const messages$1 = {
   common: common,
   ruleCategories: ruleCategories,
+  ruleScopes: ruleScopes,
   rulesets: rulesets,
   wcag: wcag,
   rules: {}
@@ -18370,7 +18394,7 @@ function getImplementationValue(implementationId) {
  *       'url'
  *       'description'
  *
- * @param {Integer} categoryId - Used to idenitify the rule category
+ * @param {Integer} categoryId - Used to identify the rule category
  * 
  * @return {Object}  see @desc
  */
@@ -18381,6 +18405,31 @@ function getRuleCategoryInfo(categoryId) {
     let rc = ruleCategories[i];
     if (rc.id === categoryId) {
       return rc;
+    }
+  }
+  return null;
+}
+
+/**
+ * @function getRuleScopeInfo
+ *
+ * @desc Gets a object with keys into strings with scope information,
+ *       keys are:
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Integer} categoryId - Used to identify the rule scope
+ *
+ * @return {Object}  see @desc
+ */
+
+function getRuleScopeInfo(scopeId) {
+  const ruleScopes = messages[locale].ruleScopes;
+  for (let i = 0; i < ruleScopes.length; i +=1) {
+    let rs = ruleScopes[i];
+    if (rs.id === scopeId) {
+      return rs;
     }
   }
   return null;
@@ -26835,6 +26884,31 @@ class EvaluationResult {
     });
     return rgr;
   }
+
+  /**
+   * @method getRuleResultsByScope
+   *
+   * @desc Returns an object containing the rule results based on rule scope
+   *
+   * @param {Integer}  scope Id  -  Number of the scope
+   * @param {Integer}  ruleset   - Numerical constant that specifies the ruleset
+   *                               By default all rules are included
+   *
+   * @return {RuleGroupResult}  see description
+   */
+
+  getRuleResultsByScope (scopeId, ruleset=RULESET.ALL) {
+    const scopeInfo = getRuleScopeInfo(scopeId);
+    const rgr = new RuleGroupResult(this, scopeInfo.title, scopeInfo.url, scopeInfo.description, ruleset);
+
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getScope() & scopeId) {
+        rgr.addRuleResult(rr);
+      }
+    });
+    return rgr;
+  }
+
 
   /**
    * @method getDataForJSON

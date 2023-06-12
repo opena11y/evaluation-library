@@ -2,6 +2,7 @@
 
 import {common}             from './common.js';
 import {ruleCategories}     from './ruleCategories.js';
+import {ruleScopes}         from './ruleScopes.js';
 import {rulesets}           from './rulesets.js';
 import {wcag}               from './wcag.js';
 
@@ -32,6 +33,7 @@ import {widgetRules}        from './widgetRules.js';
 export const messages = {
   common: common,
   ruleCategories: ruleCategories,
+  ruleScopes: ruleScopes,
   rulesets: rulesets,
   wcag: wcag,
   rules: {}

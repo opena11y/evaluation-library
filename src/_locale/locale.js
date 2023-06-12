@@ -21,6 +21,7 @@ export {
   getRuleSummary,
   getRulesetInfo,
   getScope,
+  getRuleScopeInfo,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
   getTargetResourcesDesc,
@@ -120,7 +121,7 @@ function getImplementationValue(implementationId) {
  *       'url'
  *       'description'
  *
- * @param {Integer} categoryId - Used to idenitify the rule category
+ * @param {Integer} categoryId - Used to identify the rule category
  * 
  * @return {Object}  see @desc
  */
@@ -131,6 +132,31 @@ function getRuleCategoryInfo(categoryId) {
     let rc = ruleCategories[i];
     if (rc.id === categoryId) {
       return rc;
+    }
+  }
+  return null;
+}
+
+/**
+ * @function getRuleScopeInfo
+ *
+ * @desc Gets a object with keys into strings with scope information,
+ *       keys are:
+ *       'title'
+ *       'url'
+ *       'description'
+ *
+ * @param {Integer} categoryId - Used to identify the rule scope
+ *
+ * @return {Object}  see @desc
+ */
+
+function getRuleScopeInfo(scopeId) {
+  const ruleScopes = messages[locale].ruleScopes;
+  for (let i = 0; i < ruleScopes.length; i +=1) {
+    let rs = ruleScopes[i];
+    if (rs.id === scopeId) {
+      return rs;
     }
   }
   return null;

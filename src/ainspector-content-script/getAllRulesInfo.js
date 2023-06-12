@@ -73,6 +73,24 @@ function getGuidelineResults (evalResult) {
   return glResults;
 }
 
+function getScopeResults (evalResult) {
+
+  const RULE_SCOPE =  {
+    UNKNOWN : 0,
+    ELEMENT : 1,
+    PAGE    : 2,
+    WEBSITE : 3
+  };
+
+  const scopeResults = {
+    website: getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.WEBSITE).getRuleResultsSummary(), 'scope-website'),
+    page:    getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.PAGE).getRuleResultsSummary(), 'scope-page'),
+    element: getSummaryItem(evalResult.getRuleResultsByScope(RULE_SCOPE.ELEMENT).getRuleResultsSummary(), 'scope-element')
+  }
+
+  return scopeResults;
+}
+
 /*
 *   getAllRulesInfo
 *   (1) Run evlauation library;
@@ -95,8 +113,9 @@ export default function getAllRulesInfo () {
   info.manual_checks = ruleSummaryResult.manual_checks;
   info.passed        = ruleSummaryResult.passed;
 
-  info.rcResults = getRuleCategoryResults(evaluationResult);
-  info.glResults = getGuidelineResults(evaluationResult);
+  info.rcResults    = getRuleCategoryResults(evaluationResult);
+  info.glResults    = getGuidelineResults(evaluationResult);
+  info.scopeResults = getScopeResults(evaluationResult);
   info.json = evaluationResult.toJSON();
 
   info.allRuleResults = [];

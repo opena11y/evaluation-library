@@ -15,7 +15,8 @@ import RuleResult from './ruleResult.js';
 import {
   getCommonMessage,
   getGuidelineInfo,
-  getRuleCategoryInfo
+  getRuleCategoryInfo,
+  getRuleScopeInfo
 } from './_locale/locale.js';
 
 /* Constants */
@@ -186,6 +187,31 @@ export default class EvaluationResult {
     });
     return rgr;
   }
+
+  /**
+   * @method getRuleResultsByScope
+   *
+   * @desc Returns an object containing the rule results based on rule scope
+   *
+   * @param {Integer}  scope Id  -  Number of the scope
+   * @param {Integer}  ruleset   - Numerical constant that specifies the ruleset
+   *                               By default all rules are included
+   *
+   * @return {RuleGroupResult}  see description
+   */
+
+  getRuleResultsByScope (scopeId, ruleset=RULESET.ALL) {
+    const scopeInfo = getRuleScopeInfo(scopeId);
+    const rgr = new RuleGroupResult(this, scopeInfo.title, scopeInfo.url, scopeInfo.description, ruleset);
+
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getScope() & scopeId) {
+        rgr.addRuleResult(rr);
+      }
+    });
+    return rgr;
+  }
+
 
   /**
    * @method getDataForJSON
