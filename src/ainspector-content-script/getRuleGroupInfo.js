@@ -13,9 +13,10 @@ export default function getRuleGroupInfo (groupType, groupId) {
   let info = {};
 
   const evaluationResult  = evaluate();
-  const ruleGroupResult =  (groupType === 'gl') ? 
+  const ruleGroupResult = (groupType === 'gl') ?
                           evaluationResult.getRuleResultsByGuideline(groupId) :
-                          evaluationResult.getRuleResultsByCategory(groupId);
+                          (groupType === 'rc') ? evaluationResult.getRuleResultsByCategory(groupId) :
+                          evaluationResult.getRuleResultsByScope(groupId);
 
   const ruleGroupInfo     = ruleGroupResult.getRuleGroupInfo();
   const ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();

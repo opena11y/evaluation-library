@@ -8,15 +8,18 @@ import {RESULT_VALUE} from '../constants.js'
 import DebugLogging from '../debug.js';
 import {computeCCR} from '../cache/colorContrast.js';
 
-export { addHighlightStyle, highlightElements, clearHighlights };
+export { addHighlightStyle, highlightResults, clearHighlights };
 
 const debug = new DebugLogging('highlight', false);
 debug.flag = false;
 
-const dataAttrResult     = 'data-ai-result';
-const dataAttrSelected   = 'data-ai-selected';
-const highlightClass     = 'ainspector-highlight';
-const styleName          = 'ainspector-styles';
+const dataAttrResult    = 'data-ai-result';
+const dataAttrSelected  = 'data-ai-selected';
+const highlightClass    = 'ainspector-highlight';
+const elementClass      = 'element';
+const pageClass         = 'page';
+const websiteClass      = 'website';
+const styleName         = 'ainspector-styles';
 
 const violationColor   = 'hsl(0, 100%, 50%)';
 const warningColor     = 'hsl(49, 100%, 50%)';
@@ -29,6 +32,22 @@ const violationId   = 'v';
 const warningId     = 'w';
 const passId        = 'p';
 const manualCheckId = 'mc';
+
+const elementViolationLabel   = 'V';
+const elementWarningLabel     = 'W';
+const elementPassLabel        = 'P';
+const elementManualCheckLabel = 'MC';
+
+const pageViolationLabel   = 'Page Violation';
+const pageWarningLabel     = 'Page Warning';
+const pagePassLabel        = 'Page Pass';
+const pageManualCheckLabel = 'Page Manual Check';
+
+const websiteViolationLabel   = 'Website Violation';
+const websiteWarningLabel     = 'Website Warning';
+const websitePassLabel        = 'Website Pass';
+const websiteManualCheckLabel = 'Website Manual Check';
+
 
 const selectedDark  = 'dark';
 const selectedLight = 'light';
@@ -49,6 +68,8 @@ styleTemplate.innerHTML = `
     pointer-events: none;
     z-index: 10000;
   }
+
+  .${highlightClass}:before,
   .${highlightClass}:after {
     color: white;
     font-family: sans-serif;
@@ -58,6 +79,15 @@ styleTemplate.innerHTML = `
     position: absolute;
     overflow: visible;
     top: 3px;
+  }
+
+  .${highlightClass}:before {
+    left: 0;
+    padding-left: 3px
+    z-index: 20000;
+  }
+
+  .${highlightClass}:after {
     right: 0;
     padding-right: 3px
     z-index: 20000;
@@ -66,37 +96,90 @@ styleTemplate.innerHTML = `
   .${highlightClass}[${dataAttrResult}=${manualCheckId}] {
     box-shadow: inset 0 0 0 3px ${manualCheckColor}, inset 0 0 0 5px white;
   }
+
+  .${highlightClass}[${dataAttrResult}=${manualCheckId}]:before,
   .${highlightClass}[${dataAttrResult}=${manualCheckId}]:after {
-    content: 'MC';
     background-color: ${manualCheckColor};
     padding: 2px 7px 2px 8px;
+  }
+
+  .${highlightClass}.${elementClass}[${dataAttrResult}=${manualCheckId}]:after {
+    content: '${elementManualCheckLabel}';
+  }
+
+  .${highlightClass}.${pageClass}[${dataAttrResult}=${manualCheckId}]:before {
+    content: '${pageManualCheckLabel}';
+  }
+
+  .${highlightClass}.${websiteClass}[${dataAttrResult}=${manualCheckId}]:before {
+    content: '${websiteManualCheckLabel}';
   }
 
   .${highlightClass}[${dataAttrResult}=${passId}] {
     box-shadow: inset 0 0 0 3px ${passColor}, inset 0 0 0 5px white;
   }
+
+  .${highlightClass}[${dataAttrResult}=${passId}]:before,
   .${highlightClass}[${dataAttrResult}=${passId}]:after {
-    content: 'P';
     background-color: ${passColor};
     padding: 2px 7px 2px 8px;
+  }
+
+  .${highlightClass}.${elementClass}[${dataAttrResult}=${passId}]:after {
+    content: '${elementPassLabel}';
+  }
+
+  .${highlightClass}.${pageClass}[${dataAttrResult}=${passId}]:before {
+    content: '${pagePassLabel}';
+  }
+
+  .${highlightClass}.${websiteClass}[${dataAttrResult}=${passId}]:before {
+    content: '${websitePassLabel}';
   }
 
   .${highlightClass}[${dataAttrResult}=${violationId}] {
     box-shadow: inset 0 0 0 3px ${violationColor}, inset 0 0 0 5px white;
   }
+
+  .${highlightClass}[${dataAttrResult}=${violationId}]:before,
   .${highlightClass}[${dataAttrResult}=${violationId}]:after {
-    content: 'V';
     background-color: ${violationColor};
     padding: 2px 7px 2px 8px;
+  }
+
+  .${highlightClass}.${elementClass}[${dataAttrResult}=${violationId}]:after {
+    content: '${elementViolationLabel}';
+  }
+
+
+  .${highlightClass}.${pageClass}[${dataAttrResult}=${violationId}]:before {
+    content: '${pageViolationLabel}';
+  }
+
+  .${highlightClass}.${websiteClass}[${dataAttrResult}=${violationId}]:before {
+    content: '${websiteViolationLabel}';
   }
 
   .${highlightClass}[${dataAttrResult}=${warningId}] {
     box-shadow: inset 0 0 0 3px ${warningColor}, inset 0 0 0 5px white;
   }
+
+  .${highlightClass}[${dataAttrResult}=${warningId}]:before,
   .${highlightClass}[${dataAttrResult}=${warningId}]:after {
-    content: 'W';
     background-color: ${warningColor};
     padding: 2px 7px 2px 8px;
+  }
+
+  .${highlightClass}.${elementClass}[${dataAttrResult}=${warningId}]:after {
+    content: '${elementWarningLabel}';
+  }
+
+  .${highlightClass}.${pageClass}[${dataAttrResult}=${warningId}]:before {
+    content: '${pageWarningLabel}';
+  }
+
+  .${highlightClass}.${websiteClass}[${dataAttrResult}=${warningId}]:before {
+    content: '${websiteWarningLabel}';
   }
 
   .${highlightClass}[${dataAttrSelected}=${selectedLight}] {
@@ -131,11 +214,11 @@ function addHighlightStyle () {
 }
 
 /*
- *  @function  highlightElements
+ *  @function  highlightResults
  *
- *  @desc  Iterates the current element results in the sidebar
- *         and highlights the positions of each element result
- *         based on the result value, the currently selected
+ *  @desc  Iterates the current element, page and website results
+ *         in the sidebar and highlights the positions of each element
+ *         result based on the result value, the currently selected
  *         element result is receives an additional highlight border
  *
  *  @param  {Object}  allResuls  -  Array of results shown in the sidebar
@@ -144,21 +227,22 @@ function addHighlightStyle () {
  *                                  element result
  */
 
-function highlightElements (allResults, option, position) {
+function highlightResults (allResults, option, position) {
   let count = 0;
   clearHighlights();
+  const pos = parseInt(position);
   allResults.forEach( r => {
+    const resultValue = r.getResultValue();
     if (r.isElementResult) {
-      const resultValue = r.getResultValue();
       const node = r.getNode();
-      // Use backgroung colors from parent element for styling selected element
+      // Use background colors from parent element for styling selected element
       const parentDomElement = r.domElement.parentDomElement;
       const cc = parentDomElement ?
                  parentDomElement.colorContrast :
                  r.domElement.colorContrast;
 
       if (option === 'selected') {
-        if (r.getOrdinalPosition() === parseInt(position)) {
+        if (r.getOrdinalPosition() === position) {
           highlightElement(node, resultValue);
           count += 1;
         }
@@ -179,15 +263,49 @@ function highlightElements (allResults, option, position) {
       }
 
       // Highlight selected element
-      if (r.getOrdinalPosition() === parseInt(position)) {
+      if (r.getOrdinalPosition() === pos) {
         // use the best contrast color for the outline of the selection
         const ccr1 = computeCCR(selectedColorDark, cc.backgroundColorHex);
         const ccr2 = computeCCR(selectedColorLight, cc.backgroundColorHex);
         if (ccr1 > ccr2) {
-          highlightSelected(node, selectedDark, option);
+          highlightSelectedElement(node, selectedDark, option);
         }
         else {
-          highlightSelected(node, selectedLight, option);
+          highlightSelectedElement(node, selectedLight, option);
+        }
+      }
+    }
+    else {
+      if (r.isPageResult) {
+        if ((position === -1)) {
+          if (option !== 'none') {
+            highlightPage(resultValue, pageClass);
+          }
+          highlightSelectedPage(selectedDark);
+        }
+        else {
+          if ((option === 'vw') &&
+              ((resultValue === RESULT_VALUE.VIOLATION) ||
+               (resultValue === RESULT_VALUE.WARNING)) ||
+              (option === 'all')) {
+           highlightPage(resultValue, pageClass);
+          }
+        }
+      }
+      else {
+        if ((position === -1)) {
+          if (option !== 'none') {
+           highlightPage(resultValue, websiteClass);
+          }
+          highlightSelectedPage(selectedDark);
+        }
+        else {
+          if ((option === 'vw') &&
+              ((resultValue === RESULT_VALUE.VIOLATION) ||
+               (resultValue === RESULT_VALUE.WARNING)) ||
+              (option === 'all')) {
+           highlightPage(resultValue, websiteClass);
+          }
         }
       }
     }
@@ -196,7 +314,7 @@ function highlightElements (allResults, option, position) {
 }
 
 /*
- *  @function  highlightSelected
+ *  @function  highlightSelectedElement
  *
  *  @desc  Create an overlay element that appears as a highlighted border
  *         around element to visually identifying the selected element in the
@@ -204,9 +322,9 @@ function highlightElements (allResults, option, position) {
  *
  *  @param  {Object}  element  -  DOM element node to highlight
  *  @param  {String}  style    -  CSS selector for light or dark border
- *  @param  {String}  style    -  The page highlighting option
+ *  @param  {String}  option   -  The page highlighting option
  */
-function highlightSelected (element, style, option) {
+function highlightSelectedElement (element, style, option) {
 
   if (element === null) {
     console.warn(`Unable highlight selected element`);
@@ -219,6 +337,23 @@ function highlightSelected (element, style, option) {
   div.setAttribute(`${dataAttrSelected}`, selectedStyle);
   document.body.appendChild(div);
   element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/*
+ *  @function  highlightSelectedPage
+ *
+ *  @desc  Create an overlay element that appears as a highlighted border
+ *         around the page.
+ *
+ *  @param  {String}  style    -  CSS selector for light or dark border
+ */
+function highlightSelectedPage (style) {
+
+  const div = getOverlayPage();
+  div.setAttribute(`${dataAttrSelected}`, style);
+  document.body.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  console.log(style);
 }
 
 /*
@@ -274,7 +409,7 @@ function highlightElement (element, resultValue) {
  *
  *  @desc  Create an overlay element and set its position on the page.
  *
- *  @param  {Object}  element  -  DOM element node to highlight
+ *  @param  {Object}  element          -  DOM element node to highlight
  *
  *  @returns {Object} DOM node element used for the Overlay
  */
@@ -284,7 +419,9 @@ function getOverlayElement (element) {
   const rect = element.getBoundingClientRect();
   const overlayElem = document.createElement('div');
 
-  overlayElem.setAttribute('class', highlightClass);
+  overlayElem.classList.add(highlightClass);
+  overlayElem.classList.add(elementClass);
+
   overlayElem.style.setProperty('border-radius', radius + 'px');
 
   overlayElem.style.left   = Math.round(rect.left - offset + window.scrollX) + 'px';
@@ -292,6 +429,78 @@ function getOverlayElement (element) {
 
   overlayElem.style.width  = Math.max(rect.width  + offset * 2, minWidth)  + 'px';
   overlayElem.style.height = Math.max(rect.height + offset * 2, minHeight) + 'px';
+
+  return overlayElem;
+}
+
+/*
+ *  @function  highlightPage
+ *
+ *  @desc  Create an overlay element that appears as a highlighted border
+ *         around the page of show the result value (e.h. pass, violation, etc.).
+ *
+ *  @param  {Number}  resultValue -  Used to determine the styling and icon
+ *  @param  {String}  classValue  -  Identifies page or website result
+ */
+function highlightPage (resultValue, classValue) {
+
+  const div = getOverlayPage(classValue);
+
+  switch (resultValue) {
+    case RESULT_VALUE.MANUAL_CHECK:
+      div.setAttribute(dataAttrResult, manualCheckId);
+      break;
+
+    case RESULT_VALUE.PASS:
+      div.setAttribute(dataAttrResult, passId);
+      break;
+
+    case RESULT_VALUE.VIOLATION:
+      div.setAttribute(dataAttrResult, violationId);
+      break;
+
+    case RESULT_VALUE.WARNING:
+      div.setAttribute(dataAttrResult, warningId);
+      break;
+
+    case 'selected-light':
+    case 'selected-dark':
+      div.setAttribute(dataAttrResult, resultValue);
+      break;
+
+    default:
+      break;
+  }
+
+  document.body.appendChild(div);
+}
+
+/*
+ *  @function  getOverlayPage
+ *
+ *  @desc  Create an overlay for the page.
+ *
+ *  @param  {String}  resultTypeClass  -  Identifies the type of result
+ *                                        page | website
+ *
+ *  @returns {Object} DOM node element used for the Overlay
+ */
+
+function getOverlayPage (resultTypeClass) {
+
+  const overlayElem = document.createElement('div');
+
+  overlayElem.classList.add(highlightClass);
+  if (resultTypeClass) {
+    overlayElem.classList.add(resultTypeClass);
+  }
+  overlayElem.style.setProperty('border-radius', radius + 'px');
+
+  overlayElem.style.left   = Math.round(offset + window.scrollX) + 'px';
+  overlayElem.style.top    = Math.round(offset + window.scrollY) + 'px';
+
+  overlayElem.style.width  = Math.round(window.innerWidth  - (offset * 2))  + 'px';
+  overlayElem.style.height = Math.round(window.innerHeight - (offset * 2)) + 'px';
 
   return overlayElem;
 }

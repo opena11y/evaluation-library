@@ -8,6 +8,7 @@ export const common = {
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
   ruleScopes: ['undefined', 'element', 'page', 'website'],
   allRuleResults: 'All Rule Results',
+  allRules: 'All Rules',
   implementationValue: [
     'undefined',
     'Not Applicable',

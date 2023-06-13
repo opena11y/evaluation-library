@@ -155,7 +155,6 @@ function getRuleScopeInfo(scopeId) {
   const ruleScopes = messages[locale].ruleScopes;
   for (let i = 0; i < ruleScopes.length; i +=1) {
     let rs = ruleScopes[i];
-    console.log(`[getRuleScopeInfo][rs.id]: ${rs.id}  [scopeId]: ${scopeId}`);
     if (rs.id === scopeId) {
       return rs;
     }
@@ -197,7 +196,7 @@ function getRulesetInfo (rulesetId) {
  *       'url'
  *       'description'
  *
- * @param {Integer} categoryId - Used to idenitify the WCAG guideline
+ * @param {Integer} categoryId - Used to identify the WCAG guideline
  */
 
 function getGuidelineInfo(guidelineId) {
@@ -218,7 +217,12 @@ function getGuidelineInfo(guidelineId) {
     }
   }
   debug.flag && debug.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
-  return null;
+  // Assume all rules
+  return {
+    title: messages[locale].common.allRules,
+    url: '',
+    description: ''
+  };
 }
 
 /**

@@ -5,7 +5,7 @@
 import {RESULT_VALUE} from '../constants.js'
 import DebugLogging from '../debug.js';
 
-export { addHighlightStyle, highlightElements, clearHighlights };
+export { addHighlightStyle, highlightResults, clearHighlights };
 
 const debug = new DebugLogging('highlight', false);
 debug.flag = true;
@@ -85,7 +85,7 @@ function addHighlightStyle () {
   }
 }
 
-function highlightElements (elementResults, option, position) {
+function highlightResults (elementResults, option, position) {
 
   clearHighlights();
 

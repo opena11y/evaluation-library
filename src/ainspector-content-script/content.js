@@ -10,7 +10,7 @@ import getRuleResultInfo  from './getRuleResultInfo.js';
 import {
   addHighlightStyle,
   clearHighlights,
-  highlightElements
+  highlightResults
 } from './highlight.js';
 import DebugLogging from '../debug.js';
 
@@ -82,14 +82,14 @@ function getEvaluationInfo(panelPort) {
       clearHighlights();
       if (aiInfo.highlightOnly) {
         if (ruleResult && ruleResult.getAllResultsArray) {
-          highlightElements(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+          highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
           info.infoHighlight = true;
         }
       } else {
         const evaluationResult  = evaluate();
         ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
         info.infoRuleResult = getRuleResultInfo(ruleResult);
-        highlightElements(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+        highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
       }
       break;
 

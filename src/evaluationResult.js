@@ -201,9 +201,7 @@ export default class EvaluationResult {
    */
 
   getRuleResultsByScope (scopeId, ruleset=RULESET.ALL) {
-    console.log(`[getRuleResultsByScope][scopeId]: ${scopeId}`);
     const scopeInfo = getRuleScopeInfo(scopeId);
-    console.log(`[getRuleResultsByScope][scopeInfo]: ${scopeInfo}`);
     const rgr = new RuleGroupResult(this, scopeInfo.title, scopeInfo.url, scopeInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {

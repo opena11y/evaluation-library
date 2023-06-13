@@ -11499,6 +11499,7 @@ const common = {
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
   ruleScopes: ['undefined', 'element', 'page', 'website'],
   allRuleResults: 'All Rule Results',
+  allRules: 'All Rules',
   implementationValue: [
     'undefined',
     'Not Applicable',
@@ -11623,6 +11624,13 @@ const ruleScopes = [
     title        : 'Website',
     url          : '',
     description  : 'Accessibility requirements that apply to the pages in a website.'
+  },
+  // Composite rule categories
+  {
+    id           : RULE_SCOPE.ALL,
+    title        : 'All Rules',
+    url          : '',
+    description  : 'Includes all rules in the ruleset and provides a way to sort and compare the results of all the rules.'
   }
 ];
 
@@ -18428,7 +18436,6 @@ function getRuleScopeInfo(scopeId) {
   const ruleScopes = messages[locale].ruleScopes;
   for (let i = 0; i < ruleScopes.length; i +=1) {
     let rs = ruleScopes[i];
-    console.log(`[getRuleScopeInfo][rs.id]: ${rs.id}  [scopeId]: ${scopeId}`);
     if (rs.id === scopeId) {
       return rs;
     }
@@ -18470,7 +18477,7 @@ function getRulesetInfo (rulesetId) {
  *       'url'
  *       'description'
  *
- * @param {Integer} categoryId - Used to idenitify the WCAG guideline
+ * @param {Integer} categoryId - Used to identify the WCAG guideline
  */
 
 function getGuidelineInfo(guidelineId) {
@@ -18491,7 +18498,12 @@ function getGuidelineInfo(guidelineId) {
     }
   }
   debug$q.flag && debug$q.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
-  return null;
+  // Assume all rules
+  return {
+    title: messages[locale].common.allRules,
+    url: '',
+    description: ''
+  };
 }
 
 /**
@@ -26899,9 +26911,7 @@ class EvaluationResult {
    */
 
   getRuleResultsByScope (scopeId, ruleset=RULESET.ALL) {
-    console.log(`[getRuleResultsByScope][scopeId]: ${scopeId}`);
     const scopeInfo = getRuleScopeInfo(scopeId);
-    console.log(`[getRuleResultsByScope][scopeInfo]: ${scopeInfo}`);
     const rgr = new RuleGroupResult(this, scopeInfo.title, scopeInfo.url, scopeInfo.description, ruleset);
 
     this.allRuleResults.forEach( rr => {
