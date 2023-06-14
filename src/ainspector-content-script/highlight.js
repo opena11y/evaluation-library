@@ -260,7 +260,8 @@ function highlightResults (allResults, option, position) {
         else {
           if ((option === 'vw') &&
               ((resultValue === RESULT_VALUE.VIOLATION) ||
-               (resultValue === RESULT_VALUE.WARNING))) {
+               (resultValue === RESULT_VALUE.WARNING) ||
+               (r.getOrdinalPosition() === pos))) {
             highlightElement(node, resultValue);
             count += 1;
           }
