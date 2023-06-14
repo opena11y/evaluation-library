@@ -8,6 +8,9 @@ import {RESULT_VALUE} from '../constants.js'
 import DebugLogging from '../debug.js';
 import {computeCCR} from '../cache/colorContrast.js';
 
+import {getCommonMessage} from '../_locale/locale.js';
+
+
 export { addHighlightStyle, highlightResults, clearHighlights };
 
 const debug = new DebugLogging('highlight', false);
@@ -33,20 +36,23 @@ const warningId     = 'w';
 const passId        = 'p';
 const manualCheckId = 'mc';
 
-const elementViolationLabel   = 'V';
-const elementWarningLabel     = 'W';
-const elementPassLabel        = 'P';
-const elementManualCheckLabel = 'MC';
+const msg = {
+  elementViolationLabel:   getCommonMessage('elementViolationLabel'),
+  elementWarningLabel:     getCommonMessage('elementWarningLabel'),
+  elementPassLabel:        getCommonMessage('elementPassLabel'),
+  elementManualCheckLabel: getCommonMessage('elementManualCheckLabel'),
 
-const pageViolationLabel   = 'Page Violation';
-const pageWarningLabel     = 'Page Warning';
-const pagePassLabel        = 'Page Pass';
-const pageManualCheckLabel = 'Page Manual Check';
+  pageViolationLabel:   getCommonMessage('pageViolationLabel'),
+  pageWarningLabel:     getCommonMessage('pageWarningLabel'),
+  pagePassLabel:        getCommonMessage('pagePassLabel'),
+  pageManualCheckLabel: getCommonMessage('pageManualCheckLabel'),
 
-const websiteViolationLabel   = 'Website Violation';
-const websiteWarningLabel     = 'Website Warning';
-const websitePassLabel        = 'Website Pass';
-const websiteManualCheckLabel = 'Website Manual Check';
+  websiteViolationLabel:   getCommonMessage('websiteViolationLabel'),
+  websiteWarningLabel:     getCommonMessage(' websiteWarningLabel'),
+  websitePassLabel:        getCommonMessage('websitePassLabel'),
+  websiteManualCheckLabel: getCommonMessage('websiteManualCheckLabel')
+
+}
 
 
 const selectedDark  = 'dark';
@@ -104,15 +110,15 @@ styleTemplate.innerHTML = `
   }
 
   .${highlightClass}.${elementClass}[${dataAttrResult}=${manualCheckId}]:after {
-    content: '${elementManualCheckLabel}';
+    content: '${msg.elementManualCheckLabel}';
   }
 
   .${highlightClass}.${pageClass}[${dataAttrResult}=${manualCheckId}]:before {
-    content: '${pageManualCheckLabel}';
+    content: '${msg.pageManualCheckLabel}';
   }
 
   .${highlightClass}.${websiteClass}[${dataAttrResult}=${manualCheckId}]:before {
-    content: '${websiteManualCheckLabel}';
+    content: '${msg.websiteManualCheckLabel}';
   }
 
   .${highlightClass}[${dataAttrResult}=${passId}] {
@@ -126,15 +132,15 @@ styleTemplate.innerHTML = `
   }
 
   .${highlightClass}.${elementClass}[${dataAttrResult}=${passId}]:after {
-    content: '${elementPassLabel}';
+    content: '${msg.elementPassLabel}';
   }
 
   .${highlightClass}.${pageClass}[${dataAttrResult}=${passId}]:before {
-    content: '${pagePassLabel}';
+    content: '${msg.pagePassLabel}';
   }
 
   .${highlightClass}.${websiteClass}[${dataAttrResult}=${passId}]:before {
-    content: '${websitePassLabel}';
+    content: '${msg.websitePassLabel}';
   }
 
   .${highlightClass}[${dataAttrResult}=${violationId}] {
@@ -148,16 +154,15 @@ styleTemplate.innerHTML = `
   }
 
   .${highlightClass}.${elementClass}[${dataAttrResult}=${violationId}]:after {
-    content: '${elementViolationLabel}';
+    content: '${msg.elementViolationLabel}';
   }
 
-
   .${highlightClass}.${pageClass}[${dataAttrResult}=${violationId}]:before {
-    content: '${pageViolationLabel}';
+    content: '${msg.pageViolationLabel}';
   }
 
   .${highlightClass}.${websiteClass}[${dataAttrResult}=${violationId}]:before {
-    content: '${websiteViolationLabel}';
+    content: '${msg.websiteViolationLabel}';
   }
 
   .${highlightClass}[${dataAttrResult}=${warningId}] {
@@ -171,15 +176,15 @@ styleTemplate.innerHTML = `
   }
 
   .${highlightClass}.${elementClass}[${dataAttrResult}=${warningId}]:after {
-    content: '${elementWarningLabel}';
+    content: '${msg.elementWarningLabel}';
   }
 
   .${highlightClass}.${pageClass}[${dataAttrResult}=${warningId}]:before {
-    content: '${pageWarningLabel}';
+    content: '${msg.pageWarningLabel}';
   }
 
   .${highlightClass}.${websiteClass}[${dataAttrResult}=${warningId}]:before {
-    content: '${websiteWarningLabel}';
+    content: '${msg.websiteWarningLabel}';
   }
 
   .${highlightClass}[${dataAttrSelected}=${selectedLight}] {

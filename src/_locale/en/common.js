@@ -26,5 +26,21 @@ export const common = {
   required: 'Required',
   recommended: 'Recommended',
   tableType: ['undefined', 'Unknown', 'Layout', 'Data', 'Complex', 'ARIA Table', 'Grid', 'Tree Grid'],
-  headerSource: ['undefined', 'none', 'headers attribute', 'row and column']
+  headerSource: ['undefined', 'none', 'headers attribute', 'row and column'],
+
+  elementViolationLabel:   'V',
+  elementWarningLabel:     'W',
+  elementPassLabel:        'P',
+  elementManualCheckLabel: 'MC',
+
+  pageViolationLabel:   'Page Violation',
+  pageWarningLabel:     'Page Warning',
+  pagePassLabel:        'Page Pass',
+  pageManualCheckLabel: 'Page Manual Check',
+
+  websiteViolationLabel:   'Website Violation',
+  websiteWarningLabel:     'Website Warning',
+  websitePassLabel:        'Website Pass',
+  websiteManualCheckLabel: 'Website Manual Check'
+
 }
