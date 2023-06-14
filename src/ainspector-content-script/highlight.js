@@ -81,7 +81,6 @@ styleTemplate.innerHTML = `
     font-family: sans-serif;
     font-size: 0.9em;
     font-weight: bold;
-    font-style: italic;
     position: absolute;
     overflow: visible;
     top: 3px;

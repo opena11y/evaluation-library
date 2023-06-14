@@ -57,6 +57,7 @@ function getResultInfo(ruleResult) {
     'ruleId'        : rule.getId(),
     'scope'         : rule.getScopeNLS(),
     'summary'       : ruleResult.getRuleSummary(),
+    'definition'    : ruleResult.getRuleDefinition(),
     'required'      : ruleResult.isRuleRequired(),
     'wcag'          : ruleResult.getRule().getPrimarySuccessCriterionInfo().id,
     'result'        : ruleResult.getResultValueNLS(),
