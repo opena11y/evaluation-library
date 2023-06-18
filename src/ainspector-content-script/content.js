@@ -16,7 +16,7 @@ import DebugLogging from '../debug.js';
 
 
 const debug = new DebugLogging('Content', false);
-debug.flag = false;
+debug.flag = true;
 
 /*
 **  Connect to panel.js script and set up listener/handler
@@ -49,7 +49,9 @@ function getEvaluationInfo(panelPort) {
     debug.log(`[getEvaluationInfo][      groupType]: ${aiInfo.groupType}`);
     debug.log(`[getEvaluationInfo][        groupId]: ${aiInfo.groupId}`);
     debug.log(`[getEvaluationInfo][         ruleId]: ${aiInfo.ruleId}`);
-    debug.log(`[getEvaluationInfo][      rulesetId]: ${aiInfo.rulesetId}`);
+    debug.log(`[getEvaluationInfo][        ruleset]: ${aiInfo.ruleset}`);
+    debug.log(`[getEvaluationInfo][    scopeFilter]: ${aiInfo.scopeFilter}`);
+    debug.log(`[getEvaluationInfo][ firstStepRules]: ${aiInfo.firstStepRules} (${aiInfo.firstStepRules.length})` );
     debug.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
     debug.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
     debug.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
@@ -67,7 +69,7 @@ function getEvaluationInfo(panelPort) {
   switch(aiInfo.view) {
     case viewId.allRules:
       clearHighlights();
-      info.infoAllRules = getAllRulesInfo();
+      info.infoAllRules = getAllRulesInfo(aiInfo.ruleset, aiInfo.scopeFilter, aiInfo.firstStepRules);
       ruleResult = false;
       break;
 

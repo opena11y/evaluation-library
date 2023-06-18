@@ -2,11 +2,15 @@
 
 import EvaluationLibrary from '../evaluationLibrary.js';
 
-export function evaluate () {
+export function evaluate (ruleset="AA", scopeFilter="ALL", ruleFilter=[]) {
+
+  console.log(`[eveluate][    ruleset]: ${ruleset}`);
+  console.log(`[evaluate][scopeFilter]: ${scopeFilter}`);
+  console.log(`[evaluate][ ruleFilter]: ${ruleFilter}`);
 
   // evaluation script
   let doc = window.document;
   let evaluationLibrary = new EvaluationLibrary();
-  let evaluationResult  = evaluationLibrary.evaluate(doc, doc.title, doc.location.href);
+  let evaluationResult  = evaluationLibrary.evaluate(doc, doc.title, doc.location.href, ruleset, scopeFilter, ruleFilter);
   return evaluationResult;
 }

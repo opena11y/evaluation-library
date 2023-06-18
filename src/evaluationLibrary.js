@@ -11,7 +11,7 @@ import DebugLogging      from './debug.js';
 
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false)
-debug.flag = true;
+debug.flag = false;
 debug.json = false;
 
 /**
@@ -38,11 +38,18 @@ export default class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  ruleset     - Set of rules to evaluate (values: "FIRST-STEP" | "A" | "AA" | "AAA")
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluate (startingDoc, title='', url='') {
+  evaluate (startingDoc, title='', url='', ruleset='AA', scopeFilter='ALL', ruleFilter = []) {
+
+    debug.log(`[    ruleset]: ${ruleset}`);
+    debug.log(`[scopeFilter]: ${scopeFilter}`);
+    debug.log(`[ ruleFilter]: ${ruleFilter}`);
+
     let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(allRules, domCache, title, url);
+    let evaluationResult = new EvaluationResult(allRules, domCache, title, url, ruleset, scopeFilter, ruleFilter);
 
     // Debug features
     if (debug.flag) {

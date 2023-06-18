@@ -1,7 +1,8 @@
 /* rule.js */
 
 import {
-  getGuidelineId
+  getGuidelineId,
+  RULE_SCOPE
 } from '../constants.js';
 
 import {
@@ -81,6 +82,30 @@ export default class Rule {
     this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
     debug.flag && this.toJSON();
+  }
+
+  get isLevelA () {
+    return this.wcag_level === 'A';
+  }
+
+  get isLevelAA () {
+    return this.wcag_level === 'AA';
+  }
+
+  get isLevelAAA () {
+    return this.wcag_level === 'AAA';
+  }
+
+  get isScopeElement () {
+    return this.rule_scope_id === RULE_SCOPE.ELEMENT;
+  }
+
+  get isScopePage () {
+    return this.rule_scope_id === RULE_SCOPE.PAGE;
+  }
+
+  get isScopeWebsite () {
+    return this.rule_scope_id === RULE_SCOPE.WEBSITE;
   }
 
   /**

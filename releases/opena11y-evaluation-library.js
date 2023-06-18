@@ -19434,7 +19434,7 @@ class TableInfo {
 
 /* Constants */
 const debug$o = new DebugLogging('domCache', false);
-debug$o.flag = true;
+debug$o.flag = false;
 debug$o.showDomTexts = false;
 debug$o.showDomElems = false;
 debug$o.showTree = false;
@@ -19630,29 +19630,9 @@ class DOMCache {
 
               for (let i = 0; i < assignedNodes.length; i += 1) {
                 const assignedNode = assignedNodes[i];
-                if (assignedNode.nodeType === Node.TEXT_NODE) {
-                  debug$o.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
-/*                  domItem = new DOMText(parentDomElement, node);
-                  // Check to see if text node has any renderable content
-                  if (domItem.hasContent) {
-                    // Merge text nodes in to a single DomText node if sibling text nodes
-                    if (parentDomElement) {
-                      parentDomElement.hasContent = true;
-                      // if last child node of parent is a DomText node merge text content
-                      if (parentDomElement.isLastChildDomText) {
-                        parentDomElement.addTextToLastChild(domItem.text);
-                      } else {
-                        parentDomElement.addChild(domItem);
-                        this.allDomTexts.push(domItem);
-                      }
-                    }
-                  }
-*/
-                }
+                if (assignedNode.nodeType === Node.TEXT_NODE) ;
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-                  debug$o.log(`[assignedNode][ELEMENT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
-
                   domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition);
 
                   this.ordinalPosition += 1;
@@ -20082,7 +20062,7 @@ const colorRules = [
   },
 
   /**
-   * @object COLOR_1
+   * @object COLOR_2
    *
    * @desc  Use of color
    */
@@ -24571,6 +24551,30 @@ class Rule {
     debug$b.flag && this.toJSON();
   }
 
+  get isLevelA () {
+    return this.wcag_level === 'A';
+  }
+
+  get isLevelAA () {
+    return this.wcag_level === 'AA';
+  }
+
+  get isLevelAAA () {
+    return this.wcag_level === 'AAA';
+  }
+
+  get isScopeElement () {
+    return this.rule_scope_id === RULE_SCOPE.ELEMENT;
+  }
+
+  get isScopePage () {
+    return this.rule_scope_id === RULE_SCOPE.PAGE;
+  }
+
+  get isScopeWebsite () {
+    return this.rule_scope_id === RULE_SCOPE.WEBSITE;
+  }
+
   /**
    * @method getId
    *
@@ -26750,7 +26754,8 @@ const debug$1 = new DebugLogging('EvaluationResult', false);
 debug$1.flag = false;
 
 class EvaluationResult {
-  constructor (allRules, domCache, title, url) {
+  constructor (allRules, domCache, title, url,  ruleset="AA", scopeFilter="ALL", ruleFilter=[]) {
+
     this.title = title;
     this.url = url;
     this.date = getFormattedDate();
@@ -26759,13 +26764,24 @@ class EvaluationResult {
     this.allRuleResults = [];
 
     const startTime = new Date();
-    debug$1.flag && debug$1.log(`[title]: ${this.title}`);
+    debug$1.flag && debug$1.log(`[ruleset]: ${this.ruleset}`);
+    debug$1.flag && debug$1.log(`[scopeFilter]: ${this.scopeFilter}`);
 
     allRules.forEach (rule => {
-      const ruleResult = new RuleResult(rule);
-      debug$1.flag && debug$1.log(`[validate]: ${ruleResult.rule.getId()}`);
-      ruleResult.validate(domCache);
-      this.allRuleResults.push(ruleResult);
+      if (((ruleset === 'A')  && (rule.isLevelA)) ||
+          ((ruleset === 'AA') && (rule.isLevelA || rule.isLevelAA)) ||
+           (ruleset === 'AAA') ||
+          ((ruleset === 'FILTER') && ruleFilter.includes(rule.getId()))) {
+
+        if ((scopeFilter === 'ALL') ||
+            ((scopeFilter === 'PAGE')    && rule.isScopePage) ||
+            ((scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
+          const ruleResult = new RuleResult(rule);
+          debug$1.flag && debug$1.log(`[validate]: ${ruleResult.rule.getId()}`);
+          ruleResult.validate(domCache);
+          this.allRuleResults.push(ruleResult);
+        }
+      }
     });
 
     const json = this.toJSON(true);
@@ -26994,7 +27010,7 @@ class EvaluationResult {
 
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false);
-debug.flag = true;
+debug.flag = false;
 debug.json = false;
 
 /**
@@ -27021,11 +27037,18 @@ class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  ruleset     - Set of rules to evaluate (values: "FIRST-STEP" | "A" | "AA" | "AAA")
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluate (startingDoc, title='', url='') {
+  evaluate (startingDoc, title='', url='', ruleset='AA', scopeFilter='ALL', ruleFilter = []) {
+
+    debug.log(`[    ruleset]: ${ruleset}`);
+    debug.log(`[scopeFilter]: ${scopeFilter}`);
+    debug.log(`[ ruleFilter]: ${ruleFilter}`);
+
     let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(allRules, domCache, title, url);
+    let evaluationResult = new EvaluationResult(allRules, domCache, title, url, ruleset, scopeFilter, ruleFilter);
 
     // Debug features
     if (debug.flag) {

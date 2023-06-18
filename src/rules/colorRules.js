@@ -116,7 +116,7 @@ export const colorRules = [
   },
 
   /**
-   * @object COLOR_1
+   * @object COLOR_2
    *
    * @desc  Use of color
    */

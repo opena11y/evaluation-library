@@ -24,7 +24,8 @@ const debug = new DebugLogging('EvaluationResult', false)
 debug.flag = false;
 
 export default class EvaluationResult {
-  constructor (allRules, domCache, title, url) {
+  constructor (allRules, domCache, title, url,  ruleset="AA", scopeFilter="ALL", ruleFilter=[]) {
+
     this.title = title;
     this.url = url;
     this.date = getFormattedDate();
@@ -33,13 +34,24 @@ export default class EvaluationResult {
     this.allRuleResults = [];
 
     const startTime = new Date();
-    debug.flag && debug.log(`[title]: ${this.title}`);
+    debug.flag && debug.log(`[ruleset]: ${this.ruleset}`);
+    debug.flag && debug.log(`[scopeFilter]: ${this.scopeFilter}`);
 
     allRules.forEach (rule => {
-      const ruleResult = new RuleResult(rule);
-      debug.flag && debug.log(`[validate]: ${ruleResult.rule.getId()}`);
-      ruleResult.validate(domCache);
-      this.allRuleResults.push(ruleResult);
+      if (((ruleset === 'A')  && (rule.isLevelA)) ||
+          ((ruleset === 'AA') && (rule.isLevelA || rule.isLevelAA)) ||
+           (ruleset === 'AAA') ||
+          ((ruleset === 'FILTER') && ruleFilter.includes(rule.getId()))) {
+
+        if ((scopeFilter === 'ALL') ||
+            ((scopeFilter === 'PAGE')    && rule.isScopePage) ||
+            ((scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
+          const ruleResult = new RuleResult(rule);
+          debug.flag && debug.log(`[validate]: ${ruleResult.rule.getId()}`);
+          ruleResult.validate(domCache);
+          this.allRuleResults.push(ruleResult);
+        }
+      }
     });
 
     const json = this.toJSON(true);

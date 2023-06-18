@@ -16,7 +16,7 @@ import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
-debug.flag = true;
+debug.flag = false;
 debug.showDomTexts = false;
 debug.showDomElems = false;
 debug.showTree = false;
@@ -213,7 +213,7 @@ export default class DOMCache {
               for (let i = 0; i < assignedNodes.length; i += 1) {
                 const assignedNode = assignedNodes[i];
                 if (assignedNode.nodeType === Node.TEXT_NODE) {
-                  debug.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
+//                  debug.log(`[assignedNode][TEXT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
 /*                  domItem = new DOMText(parentDomElement, node);
                   // Check to see if text node has any renderable content
                   if (domItem.hasContent) {
@@ -233,8 +233,6 @@ export default class DOMCache {
                 }
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-                  debug.log(`[assignedNode][ELEMENT][${i} of ${assignedNodes.length}]: ${assignedNode.tagName}`);
-
                   domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition);
 
                   this.ordinalPosition += 1;

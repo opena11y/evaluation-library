@@ -93,13 +93,17 @@ function getScopeResults (evalResult) {
 /*
 *   getAllRulesInfo
 *   (1) Run evlauation library;
-*   (2) return result objec for the summary view in the sidebar;
+*   (2) return result object for the all rules view in the sidebar;
 */
-export default function getAllRulesInfo () {
+export default function getAllRulesInfo (ruleset, scopeFilter, firstStepRules) {
+
+  console.log(`[getAllRulesInfo][    ruleset]: ${ruleset}`);
+  console.log(`[getAllRulesInfo][scopeFilter]: ${scopeFilter}`);
+  console.log(`[getAllRulesInfo][ ruleFilter]: ${firstStepRules}`);
 
   const info = {};
 
-  const evaluationResult  = evaluate();
+  const evaluationResult  = evaluate(ruleset, scopeFilter, firstStepRules);
   const ruleGroupResult   = evaluationResult.getRuleResultsAll();
   const ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
   const ruleResults       = ruleGroupResult.getRuleResultsArray();
