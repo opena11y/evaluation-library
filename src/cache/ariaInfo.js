@@ -9,6 +9,7 @@ import {designPatterns}    from '../../aria-info/gen-aria-role-design-patterns.j
 
 /* Constants */
 const debug = new DebugLogging('AriaInfo', false);
+debug.flag = true;
 
 /* Debug helper functions */
 
@@ -69,8 +70,15 @@ export default class AriaInfo {
     const level = parseInt(node.getAttribute('aria-level'));
 
     let designPattern = designPatterns[role];
-    this.isValidRole  = typeof designPattern === 'object';
 
+    // Separator role is a special case of a role that can be interactive
+    if (role === 'separator' &&
+        node.hasAttribute('tabindex') &&
+        node.tabIndex >= 0) {
+      designPattern = designPatterns['separatorFocusable'];
+    }
+
+    this.isValidRole  = typeof designPattern === 'object';
     this.isAbstractRole = false;
 
 
@@ -80,6 +88,15 @@ export default class AriaInfo {
     } else {
       this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
     }
+
+    if (!designPattern) {
+      designPattern = designPatterns['generic'];
+    }
+
+
+    debug.log(`\n[     tagName]: ${tagName}`);
+    debug.log(`[        role]: ${role} (${defaultRole})`);
+    debug.log(`[designPattern]: ${typeof designPattern}`);
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProhibited;
@@ -100,9 +117,7 @@ export default class AriaInfo {
     this.ownedDomElements   = [];
     this.ownedByDomElements = [];
 
-    const isFocusableSeparator =  (role === 'separator') && (node.tabIndex >= 0);
-
-    this.isRange    = (designPattern.roleType.indexOf('range') >= 0) || isFocusableSeparator;
+    this.isRange    = (designPattern.roleType.indexOf('range') >= 0);
     this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
                       (designPattern.roleType.indexOf('window') >= 0);
 
@@ -112,8 +127,8 @@ export default class AriaInfo {
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
 
     // for range widgets
-    if (this.isRange || isFocusableSeparator) {
-      this.isValueNowRequired =  isFocusableSeparator || designPattern.requiredProps.includes('aria-valuenow');
+    if (this.isRange) {
+      this.isValueNowRequired = designPattern.requiredProps.includes('aria-valuenow');
 
       this.hasValueNow = node.hasAttribute('aria-valuenow');
       if (this.hasValueNow) {

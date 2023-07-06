@@ -34,7 +34,7 @@ const landmarkRoles = [
 * @desc Uses the ARIA in HTML specification to identify a default role and provide
 *       role restriction information
 *
-* @param  {Object}  node        - Element node from a berowser DOM
+* @param  {Object}  node        - Element node from a browser DOM
 */
 
 export default function getAriaInHTMLInfo (node) {
@@ -146,6 +146,15 @@ export default function getAriaInHTMLInfo (node) {
 
       break;
 
+    case 'li':
+      if (isListitemInList(node)) {
+        elemInfo = elementInfo[`${tagName}[listitem]`];
+      } else {
+        elemInfo = elementInfo[`${tagName}`];
+      }
+      break;
+
+
     case 'section':
       if (node.hasAttribute('aria-label') ||
         node.hasAttribute('aria-labelledby')||
@@ -234,7 +243,7 @@ function getString (value) {
 *       elements with default landmark roles or is the descendant
 *       of an element with a defined landmark role
 *
-* @param  {Object}  node        - Element node from a berowser DOM
+* @param  {Object}  node        - Element node from a browser DOM
 */
 
 function isTopLevel (node) {
@@ -252,12 +261,35 @@ function isTopLevel (node) {
   return true;
 }
 
+
+/**
+* @function isListiemInList
+*
+* @desc Returns true if the listitem is a descendant of OL, UL or MENU element
+*
+* @param  {Object}  node - Element node from a browser DOM
+*
+* @return {Boolean} see @desc
+*/
+
+function isListitemInList  (node) {
+  node = node && node.parentNode;
+  while (node && (node.nodeType === Node.ELEMENT_NODE)) {
+    const tagName = getString(node.tagName);
+    if (['menu', 'ol', 'ul'].includes(tagName)) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+}
+
 /**
 * @function isCellInGrid
 *
 * @desc Tests the table cell is part of a grid widget
 *
-* @param  {Object}  node - Element node from a berowser DOM
+* @param  {Object}  node - Element node from a browser DOM
 */
 
 function isCellInGrid  (node) {
@@ -281,7 +313,7 @@ function isCellInGrid  (node) {
 * @desc Tests the table cell is part of a table that
 *       has been identified as being used for layout
 *
-* @param  {Object}  node - Element node from a berowser DOM
+* @param  {Object}  node - Element node from a browser DOM
 */
 
 function isCellInLayoutTable  (node) {

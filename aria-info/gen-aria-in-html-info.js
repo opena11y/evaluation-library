@@ -1,7 +1,7 @@
 /* generated file, see https://github.com/opena11y/aria-in-html-to-code */
 export const ariaInHTMLInfo = {
   title: 'ARIA in HTML',
-  status: 'W3C Recommendation 15 February 2023',
+  status: 'W3C Recommendation 05 July 2023',
   reference: 'https://www.w3.org/TR/html-aria/',
   elementInfo: {
     'a[href]': {
@@ -34,7 +34,7 @@ export const ariaInHTMLInfo = {
     },
     abbr: {
       tagName: 'abbr',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'abbr'
@@ -62,7 +62,6 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'button',
         'link',
-        'generic',
         'generic'
       ],
       id: 'area'
@@ -102,7 +101,7 @@ export const ariaInHTMLInfo = {
     },
     audio: {
       tagName: 'audio',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -119,7 +118,7 @@ export const ariaInHTMLInfo = {
     },
     base: {
       tagName: 'base',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'base'
@@ -154,7 +153,7 @@ export const ariaInHTMLInfo = {
     },
     br: {
       tagName: 'br',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -171,21 +170,24 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'checkbox',
         'combobox',
+        'gridcell',
         'link',
         'menuitem',
         'menuitemcheckbox',
         'menuitemradio',
         'option',
         'radio',
+        'slider',
         'switch',
         'tab',
+        'treeitem',
         'button'
       ],
       id: 'button'
     },
     canvas: {
       tagName: 'canvas',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'canvas'
@@ -199,7 +201,7 @@ export const ariaInHTMLInfo = {
     },
     cite: {
       tagName: 'cite',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'cite'
@@ -213,14 +215,14 @@ export const ariaInHTMLInfo = {
     },
     col: {
       tagName: 'col',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'col'
     },
     colgroup: {
       tagName: 'colgroup',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'colgroup'
@@ -241,7 +243,7 @@ export const ariaInHTMLInfo = {
     },
     dd: {
       tagName: 'dd',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'dd'
@@ -287,7 +289,7 @@ export const ariaInHTMLInfo = {
     },
     dl: {
       tagName: 'dl',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -300,7 +302,7 @@ export const ariaInHTMLInfo = {
     },
     dt: {
       tagName: 'dt',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -317,7 +319,7 @@ export const ariaInHTMLInfo = {
     },
     embed: {
       tagName: 'embed',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -344,7 +346,7 @@ export const ariaInHTMLInfo = {
     },
     figcaption: {
       tagName: 'figcaption',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -389,8 +391,7 @@ export const ariaInHTMLInfo = {
         'navigation',
         'region',
         'role=contentinfo',
-        'role=generic',
-        'generic'
+        'role=generic'
       ],
       isLandmark: true,
       id: 'footer[contentinfo]'
@@ -415,8 +416,7 @@ export const ariaInHTMLInfo = {
         'navigation',
         'region',
         'role=contentinfo',
-        'role=generic',
-        'generic'
+        'role=generic'
       ],
       id: 'footer'
     },
@@ -513,7 +513,7 @@ export const ariaInHTMLInfo = {
     },
     head: {
       tagName: 'head',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'head'
@@ -538,8 +538,7 @@ export const ariaInHTMLInfo = {
         'navigation',
         'region',
         'role=contentinfo',
-        'role=generic',
-        'generic'
+        'role=generic'
       ],
       isLandmark: true,
       id: 'header[banner]'
@@ -564,8 +563,7 @@ export const ariaInHTMLInfo = {
         'navigation',
         'region',
         'role=contentinfo',
-        'role=generic',
-        'generic'
+        'role=generic'
       ],
       id: 'header'
     },
@@ -604,7 +602,7 @@ export const ariaInHTMLInfo = {
     },
     iframe: {
       tagName: 'iframe',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -691,14 +689,17 @@ export const ariaInHTMLInfo = {
       allowedRoles: [
         'checkbox',
         'combobox',
+        'gridcell',
         'link',
         'menuitem',
         'menuitemcheckbox',
         'menuitemradio',
         'option',
         'radio',
+        'slider',
         'switch',
         'tab',
+        'treeitem',
         'button'
       ],
       attr1: 'type=button',
@@ -721,7 +722,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=color]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=color',
@@ -729,7 +730,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=date]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=date',
@@ -737,7 +738,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=datetime-local]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=datetime-local',
@@ -762,7 +763,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=file]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=file',
@@ -770,7 +771,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=hidden]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=hidden',
@@ -782,20 +783,26 @@ export const ariaInHTMLInfo = {
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
+        'button',
+        'checkbox',
+        'gridcell',
         'link',
         'menuitem',
         'menuitemcheckbox',
         'menuitemradio',
+        'option',
         'radio',
+        'slider',
         'switch',
-        'button'
+        'tab',
+        'treeitem'
       ],
       attr1: 'type=image',
       id: 'input[type=image]'
     },
     'input[type=month]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=month',
@@ -811,7 +818,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=password]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=password',
@@ -840,8 +847,9 @@ export const ariaInHTMLInfo = {
     'input[type=reset]': {
       tagName: 'input',
       defaultRole: 'button',
-      noRoleAllowed: true,
+      noRoleAllowed: false,
       anyRoleAllowed: false,
+      allowedRoles: [],
       attr1: 'type=reset',
       id: 'input[type=reset]'
     },
@@ -865,8 +873,9 @@ export const ariaInHTMLInfo = {
     'input[type=submit]': {
       tagName: 'input',
       defaultRole: 'button',
-      noRoleAllowed: true,
+      noRoleAllowed: false,
       anyRoleAllowed: false,
+      allowedRoles: [],
       attr1: 'type=submit',
       id: 'input[type=submit]'
     },
@@ -912,7 +921,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=time]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=time',
@@ -937,7 +946,7 @@ export const ariaInHTMLInfo = {
     },
     'input[type=week]': {
       tagName: 'input',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       attr1: 'type=week',
@@ -952,48 +961,45 @@ export const ariaInHTMLInfo = {
     },
     kbd: {
       tagName: 'kbd',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'kbd'
     },
     label: {
       tagName: 'label',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'label'
     },
     legend: {
       tagName: 'legend',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'legend'
     },
-    li: {
+    'li[listitem]': {
       tagName: 'li',
       defaultRole: 'listitem',
-      noRoleAllowed: false,
+      noRoleAllowed: true,
       anyRoleAllowed: false,
-      allowedRoles: [
-        'menuitem',
-        'menuitemcheckbox',
-        'menuitemradio',
-        'option',
-        'none',
-        'presentation',
-        'radio',
-        'separator',
-        'tab',
-        'treeitem',
-        'listitem'
-      ],
+      ownedbyOL: true,
+      ownedbyUL: true,
+      ownedbyMenu: true,
+      id: 'li[listitem]'
+    },
+    li: {
+      tagName: 'li',
+      defaultRole: 'generic',
+      noRoleAllowed: false,
+      anyRoleAllowed: true,
       id: 'li'
     },
     link: {
       tagName: 'link',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'link'
@@ -1007,14 +1013,14 @@ export const ariaInHTMLInfo = {
     },
     map: {
       tagName: 'map',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'map'
     },
     mark: {
       tagName: 'mark',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'mark'
@@ -1048,7 +1054,7 @@ export const ariaInHTMLInfo = {
     },
     meta: {
       tagName: 'meta',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'meta'
@@ -1077,14 +1083,14 @@ export const ariaInHTMLInfo = {
     },
     noscript: {
       tagName: 'noscript',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'noscript'
     },
     object: {
       tagName: 'object',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -1144,14 +1150,14 @@ export const ariaInHTMLInfo = {
     },
     param: {
       tagName: 'param',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'param'
     },
     picture: {
       tagName: 'picture',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'picture'
@@ -1179,28 +1185,28 @@ export const ariaInHTMLInfo = {
     },
     rp: {
       tagName: 'rp',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'rp'
     },
     rt: {
       tagName: 'rt',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'rt'
     },
     ruby: {
       tagName: 'ruby',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'ruby'
     },
     s: {
       tagName: 's',
-      defaultRole: 'generic',
+      defaultRole: 'deletion',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 's'
@@ -1214,10 +1220,25 @@ export const ariaInHTMLInfo = {
     },
     script: {
       tagName: 'script',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'script'
+    },
+    search: {
+      tagName: 'search',
+      defaultRole: 'search',
+      noRoleAllowed: false,
+      anyRoleAllowed: false,
+      allowedRoles: [
+        'form',
+        'group',
+        'none',
+        'presentation',
+        'region',
+        'search'
+      ],
+      id: 'search'
     },
     'section[accname]': {
       tagName: 'section',
@@ -1245,8 +1266,8 @@ export const ariaInHTMLInfo = {
         'search',
         'status',
         'tabpanel',
-        'section',
-        'role=region'
+        'role=region',
+        'role=generic'
       ],
       hasAccname: true,
       id: 'section[accname]'
@@ -1277,8 +1298,8 @@ export const ariaInHTMLInfo = {
         'search',
         'status',
         'tabpanel',
-        'section',
-        'role=region'
+        'role=region',
+        'role=generic'
       ],
       id: 'section'
     },
@@ -1303,7 +1324,7 @@ export const ariaInHTMLInfo = {
     },
     slot: {
       tagName: 'slot',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'slot'
@@ -1317,7 +1338,7 @@ export const ariaInHTMLInfo = {
     },
     source: {
       tagName: 'source',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'source'
@@ -1338,7 +1359,7 @@ export const ariaInHTMLInfo = {
     },
     style: {
       tagName: 'style',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'style'
@@ -1354,7 +1375,7 @@ export const ariaInHTMLInfo = {
       tagName: 'summary',
       defaultRole: 'summary',
       noRoleAllowed: true,
-      anyRoleAllowed: false,
+      anyRoleAllowed: true,
       id: 'summary'
     },
     sup: {
@@ -1387,7 +1408,7 @@ export const ariaInHTMLInfo = {
     },
     template: {
       tagName: 'template',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'template'
@@ -1422,7 +1443,7 @@ export const ariaInHTMLInfo = {
     },
     title: {
       tagName: 'title',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'title'
@@ -1504,7 +1525,7 @@ export const ariaInHTMLInfo = {
     },
     track: {
       tagName: 'track',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'track'
@@ -1538,14 +1559,14 @@ export const ariaInHTMLInfo = {
     },
     var: {
       tagName: 'var',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'var'
     },
     video: {
       tagName: 'video',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [
@@ -1555,7 +1576,7 @@ export const ariaInHTMLInfo = {
     },
     wbr: {
       tagName: 'wbr',
-      defaultRole: 'generic',
+      defaultRole: '',
       noRoleAllowed: false,
       anyRoleAllowed: false,
       allowedRoles: [

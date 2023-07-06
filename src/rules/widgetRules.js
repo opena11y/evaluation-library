@@ -606,7 +606,7 @@ export const widgetRules = [
 /**
  * @object WIDGET_10
  *
- * @desc Range widgets with aria-valuenow mut be in range of aria-valuemin and aria-valuemax
+ * @desc Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax
  */
 
 { rule_id             : 'WIDGET_10',
@@ -783,9 +783,9 @@ export const widgetRules = [
                           "superscript"],
   validate            : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (!de.ariaInfo.isNameRequired &&
-           de.accName.name &&
-           de.accName.source.includes('aria-label')) {
+      if (de.ariaInfo.isNameProhibited &&
+          de.accName.name &&
+          de.accName.source.includes('aria-label')) {
         if (de.visibility.isVisibleToAT) {
           rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
         }
