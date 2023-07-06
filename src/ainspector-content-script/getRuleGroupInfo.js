@@ -8,11 +8,11 @@ import {getRuleResultsItem} from './getRuleResultsItem.js';
 *   (1) Run evlauation library;
 *   (2) return result objec for the group view in the sidebar;
 */
-export default function getRuleGroupInfo (groupType, groupId) {
+export default function getRuleGroupInfo (groupType, groupId, ruleset, scopeFilter, firstStepRules) {
 
   let info = {};
 
-  const evaluationResult  = evaluate();
+  const evaluationResult  = evaluate(ruleset, scopeFilter, firstStepRules);
   const ruleGroupResult = (groupType === 'gl') ?
                           evaluationResult.getRuleResultsByGuideline(groupId) :
                           (groupType === 'rc') ? evaluationResult.getRuleResultsByCategory(groupId) :

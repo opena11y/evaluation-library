@@ -75,7 +75,7 @@ function getEvaluationInfo(panelPort) {
 
     case viewId.ruleGroup:
       clearHighlights();
-      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId);
+      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId, aiInfo.ruleset, aiInfo.scopeFilter, aiInfo.firstStepRules);
       ruleResult = false;
       break;
 
@@ -88,7 +88,7 @@ function getEvaluationInfo(panelPort) {
           info.infoHighlight = true;
         }
       } else {
-        const evaluationResult  = evaluate();
+        const evaluationResult  = evaluate(aiInfo.ruleset, aiInfo.scopeFilter, aiInfo.firstStepRules);
         ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
         info.infoRuleResult = getRuleResultInfo(ruleResult);
         highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);

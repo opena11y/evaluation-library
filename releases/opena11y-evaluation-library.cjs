@@ -24222,7 +24222,7 @@ const widgetRules = [
 /**
  * @object WIDGET_10
  *
- * @desc Range widgets with aria-valuenow mut be in range of aria-valuemin and aria-valuemax
+ * @desc Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax
  */
 
 { rule_id             : 'WIDGET_10',
