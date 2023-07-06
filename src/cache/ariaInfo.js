@@ -9,7 +9,7 @@ import {designPatterns}    from '../../aria-info/gen-aria-role-design-patterns.j
 
 /* Constants */
 const debug = new DebugLogging('AriaInfo', false);
-debug.flag = true;
+debug.flag = false;
 
 /* Debug helper functions */
 
@@ -92,11 +92,6 @@ export default class AriaInfo {
     if (!designPattern) {
       designPattern = designPatterns['generic'];
     }
-
-
-    debug.log(`\n[     tagName]: ${tagName}`);
-    debug.log(`[        role]: ${role} (${defaultRole})`);
-    debug.log(`[designPattern]: ${typeof designPattern}`);
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProhibited;
@@ -342,7 +337,6 @@ export default class AriaInfo {
             }
           } catch (error) {
             refInfo.invalidIds.push(id);
-            debug.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {

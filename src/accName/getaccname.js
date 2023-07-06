@@ -75,7 +75,7 @@ const  elementsThatAllowNameFromContents = [
 
 import DebugLogging        from '../debug.js';
 const debug = new DebugLogging('getAccName', false);
-debug.flag = true;
+debug.flag = false;
 
 /*
 *   @function getAccessibleName

@@ -11,7 +11,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('Widget Rules', false);
-debug.flag = true;
+debug.flag = false;
 
 /*
  * OpenA11y Rules

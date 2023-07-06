@@ -8,7 +8,7 @@ import DebugLogging from '../debug.js';
 export { addHighlightStyle, highlightResults, clearHighlights };
 
 const debug = new DebugLogging('highlight', false);
-debug.flag = true;
+debug.flag = false;
 
 const dataAttrName     = 'data-ainspector';
 const highlightClass   = 'ainspector-highlight';

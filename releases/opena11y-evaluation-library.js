@@ -6065,7 +6065,7 @@ const designPatterns = {
 
 /* Constants */
 const debug$G = new DebugLogging('AriaInfo', false);
-debug$G.flag = true;
+debug$G.flag = false;
 
 /* Debug helper functions */
 
@@ -6148,11 +6148,6 @@ class AriaInfo {
     if (!designPattern) {
       designPattern = designPatterns['generic'];
     }
-
-
-    debug$G.log(`\n[     tagName]: ${tagName}`);
-    debug$G.log(`[        role]: ${role} (${defaultRole})`);
-    debug$G.log(`[designPattern]: ${typeof designPattern}`);
 
     this.isNameRequired     = designPattern.nameRequired;
     this.isNameProhibited   = designPattern.nameProhibited;
@@ -6395,7 +6390,6 @@ class AriaInfo {
             }
           } catch (error) {
             refInfo.invalidIds.push(id);
-            debug$G.log(`[checkForInvalidReferences][error]: ${error}`);
           }
         });
         if (refInfo.invalidIds.length) {
@@ -9202,7 +9196,7 @@ function isSelectElement (element) {
 *   namefrom.js
 */
 const debug$B = new DebugLogging('nameFrom', false);
-debug$B.flag = true;
+debug$B.flag = false;
 
 /*
 *   @function getElementContents
@@ -9763,7 +9757,7 @@ const  elementsThatAllowNameFromContents = [
 'summary'
 ];
 const debug$A = new DebugLogging('getAccName', false);
-debug$A.flag = true;
+debug$A.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -13031,8 +13025,8 @@ const audioRules$1 = {
 const colorRules$1 = {
   COLOR_1: {
       ID:                    'Color 1',
-      DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
-      SUMMARY:               'Text must exceed CCR threshold',
+      DEFINITION:            'Text content must exceed minimum Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
+      SUMMARY:               'Text must exceed minimum CCR threshold',
       TARGET_RESOURCES_DESC: 'All elements with text content',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
@@ -13064,12 +13058,12 @@ const colorRules$1 = {
                         'Verify the range of colors that could be part of the background of text is have a CCR > 4.5.'
       ],
       INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
-                         title: 'WCAG 2.0 Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1',
-                         url:   'https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast'
+                         title: 'WCAG Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, with exceptions',
+                         url:   'https://www.w3.org/TR/WCAG/#contrast-minimum'
                        },
                        { type:  REFERENCES.WCAG_TECHNIQUE,
-                         title: 'How to meet Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1',
-                         url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast'
+                         title: 'How to meet Success Criterion 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, with exceptions',
+                         url:   'https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum'
                        },
                       { type:  REFERENCES.WCAG_TECHNIQUE,
                         title: 'G17: Ensuring that a contrast ratio of at least 7:1 exists between text (and images of text) and background behind the text',
@@ -13119,6 +13113,66 @@ const colorRules$1 = {
                       { type:  REFERENCES.WCAG_TECHNIQUE,
                         title: 'G14: Ensuring that information conveyed by color differences is also available in text',
                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G14'
+                      }
+                      ]
+  },
+  COLOR_3: {
+      ID:                    'Color 3',
+      DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 4.5 for large and/or bolded text and 7.1 for any other size or style of text.',
+      SUMMARY:               'Text must exceed enhanced CCR threshold',
+      TARGET_RESOURCES_DESC: 'All elements with text content',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
+        FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
+        MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold to the use of a background image.',
+        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR thrshold to the use of background images.',
+        HIDDEN_S: 'The element with text content that is hidden was not analyzed for color contrast accessibility.',
+        HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
+        NOT_APPLICABLE:  'No visible text content on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'CCR of %1 exceeds 7.1.',
+        ELEMENT_PASS_2:   'CCR of %1 exceeds 4.5 for large or bolded text.',
+        ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to exceed 7.1.',
+        ELEMENT_FAIL_2:   'CCR of %1 for large or bolded text, adjust foreground and background colors to exceed 4.5.',
+        ELEMENT_MC_1:     'CCR of %1 is greater than 7.1, but background image may reduce color contrast.',
+        ELEMENT_MC_2:     'CCR of %1 is less than or equal to 7.1, but background image may improve color contrast.',
+        ELEMENT_MC_3:     'CCR of %1 is greater than 4.5 for large or bolded text, but background image may reduce color contrast.',
+        ELEMENT_MC_4:     'CCR of %1 is less than or equal to 4.5 for large and bolded text, but background image may improve color contrast.',
+        ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
+      },
+      PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
+                      ],
+      TECHNIQUES:     [ 'Change the foreground color to a more complementary color to the background color.',
+                        'Change the background color to a more complementary color to the foreground color.',
+                        'Remove background images or verify they do not compromise color contrast requirements.'
+                      ],
+      MANUAL_CHECKS:  [ 'Use graphic editing tools to analyze the color(s) of the background image and then recacluate the CCR with the range of colors in the background image.',
+                        'Verify the range of colors that could be part of the background of text is have a CCR > 7.1.'
+      ],
+      INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
+                         title: 'WCAG 2.0 Success Criterion 1.4.6 Contrast (Enhanced): The visual presentation of text and images of text has a contrast ratio of at least 7.1:1, with exceptions',
+                         url:   'https://www.w3.org/TR/WCAG/#contrast-enhanced'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'How to meet Success Criterion 1.4.6 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 7.1:1, with exceptions',
+                         url:   'https://www.w3.org/WAI/WCAG21/quickref/#contrast-enhanced'
+                       },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G17: Ensuring that a contrast ratio of at least 7:1 exists between text (and images of text) and background behind the text',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G17'
+                      },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G18: Ensuring that a contrast ratio of at least 4.5:1 exists between text (and images of text) and background behind the text',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G18'
+                      },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G148: Not specifying background color, not specifying text color, and not using technology features that change those default',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G148'
+                      },
+                      { type:  REFERENCES.WCAG_TECHNIQUE,
+                        title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
+                        url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                       }
                       ]
   }
@@ -18576,31 +18630,6 @@ function getRuleScopeInfo(scopeId) {
 }
 
 /**
- * @function getRulesetInfo
- *
- * @desc Gets a object with keys into strings with ruleset information,
- *       keys are:
- *       'title'
- *       'url'
- *       'description'
- *
- * @param {Integer} rulesetId - Used to idenitify the ruleset
- * 
- * @return {Object}  see @desc
- */
-
-function getRulesetInfo (rulesetId) {
-  const rulesets = messages[locale].rulesets;
-  for (let i = 0; i < rulesets.length; i +=1) {
-    let rs = rulesets[i];
-    if (rs.id === rulesetId) {
-      return rs;
-    }
-  }
-  return null;
-}
-
-/**
  * @function getGuidelineInfo
  *
  * @desc Gets a object with keys into strings with WCAG Guideline information,
@@ -20092,7 +20121,6 @@ const colorRules = [
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
-    ruleset             : RULESET.TRIAGE,
     rule_required       : true,
     wcag_primary_id     : '1.4.3',
     wcag_related_ids    : ['1.4.1','1.4.6'],
@@ -20187,7 +20215,6 @@ const colorRules = [
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
-    ruleset             : RULESET.TRIAGE,
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
     target_resources    : [],
@@ -20196,7 +20223,101 @@ const colorRules = [
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validate function
-  }
+  },
+
+  /**
+   * @object COLOR_3
+   *
+   * @desc  Color contrast ratio must be > 4.5 for normal text, or > 3.1 for large text
+   */
+
+  { rule_id             : 'COLOR_3',
+    last_updated        : '2022-07-04',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required        : true,
+    wcag_primary_id     : '1.4.6',
+    wcag_related_ids    : ['1.4.1','1.4.3'],
+    target_resources    : ['text content'],
+    validate            : function (dom_cache, rule_result) {
+
+      let index = 0;
+      function checkResult(domElement, result) {
+        const node    = domElement.node;
+        const tagName = node.tagName;
+        const id      = node.id ? `[id=${node.id}]` : '';
+        const cc      = domElement.colorContrast;
+        const crr     = cc.colorContrastRatio;
+        debug$m.flag && debug$m.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+      }
+
+
+      const MIN_CCR_NORMAL_FONT = 7.1;
+      const MIN_CCR_LARGE_FONT  = 4.5;
+
+      debug$m.flag && debug$m.log(`===== COLOR 3 ====`);
+
+      dom_cache.allDomTexts.forEach( domText => {
+        const de  = domText.parentDomElement;
+        const cc  = de.colorContrast;
+        const ccr = cc.colorContrastRatio;
+
+        if (de.visibility.isVisibleOnScreen) {
+          if (cc.isLargeFont) {
+            if (ccr >= MIN_CCR_LARGE_FONT) {
+              // Passes color contrast requirements
+              if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
+              }
+              else {
+                checkResult(de, 'PASS');
+                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+              }
+            }
+            else {
+              // Fails color contrast requirements
+              if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
+              }
+              else {
+                checkResult(de, 'FAIL');
+                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+              }
+            }
+          }
+          else {
+            if (ccr >= MIN_CCR_NORMAL_FONT) {
+              // Passes color contrast requirements
+              if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
+              }
+              else {
+                checkResult(de, 'PASS');
+                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+              }
+            }
+            else {
+              // Fails color contrast requirements
+              if (cc.hasBackgroundImage) {
+                checkResult(de, 'MC');
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
+              }
+              else {
+                checkResult(de, 'FAIL');
+                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+              }
+            }
+          }
+        } else {
+          checkResult(de, 'HIDDEN');
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+    } // end validate function
+  },
 
 ];
 
@@ -23625,7 +23746,7 @@ const videoRules = [
 
 /* Constants */
 const debug$c = new DebugLogging('Widget Rules', false);
-debug$c.flag = true;
+debug$c.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24634,7 +24755,6 @@ class Rule {
     this.rule_required       = rule_item.rule_required; // Boolean
     this.rule_scope_id       = rule_item.rule_scope; // Integer
     this.rule_category_id    = rule_item.rule_category; // Integer
-    this.ruleset_id          = rule_item.ruleset; // Integer
     this.last_updated        = rule_item.last_updated; // String
     this.target_resources    = rule_item.target_resources; // array of strings
     this.wcag_primary_id     = rule_item.wcag_primary_id;  // String (P.G.SC)
@@ -24645,7 +24765,6 @@ class Rule {
     // Rule information that is locale dependent
     this.rule_category_info  = getRuleCategoryInfo(this.rule_category_id); // Object with keys to strings
     this.guideline_info      = getGuidelineInfo(this.wcag_guideline_id); // Object with keys to strings
-    this.ruleset_info        = getRulesetInfo(this.ruleset_id); // Object with keys to strings
     this.rule_scope          = getScope(this.rule_scope_id); // String
     this.wcag_primary        = getSuccessCriterionInfo(this.wcag_primary_id);
     this.wcag_related        = getSuccessCriteriaInfo(this.wcag_related_ids);
@@ -24761,30 +24880,6 @@ class Rule {
 
   getCategoryInfo () {
     return this.rule_category_info;
-  }
-
-  /**
-   * @method getRuleset
-   *
-   * @desc Get a numerical constant representing the ruleset
-   *
-   * @return {Integer}  see @desc
-   */
-
-  getRuleset () {
-    return this.ruleset_id;
-  }
-
-  /**
-   * @method getRulesetInfo
-   *
-   * @desc Get a localized title, url and description of the ruleset
-   *
-   * @return {Object}  see @desc
-   */
-
-  getRulesetInfo () {
-    return this.ruleset_info;
   }
 
   /**
@@ -25006,9 +25101,6 @@ class Rule {
       rule_category_id:   this.rule_category_id,
       rule_category_info: this.rule_category_info,
       
-      ruleset_id:   this.ruleset_id,
-      ruleset_info: this.ruleset_info,
-      
       wcag_guideline_id:  this.wcag_guideline_id,
       guideline_info:     this.guideline_info,
 
@@ -25106,7 +25198,6 @@ class RuleInformation {
     ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
     ruleInfo.last_updated  = rule.last_updated;
 
-    ruleInfo.ruleset          = getRulesetInfo(rule.ruleset);
     ruleInfo.rule_scope       = rule.rule_scope;
     ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);
     ruleInfo.rule_category_id = rule.rule_category_id;
@@ -25323,9 +25414,6 @@ const debug$8 = new DebugLogging('ruleGroupResult', false);
  * @param  {String}  url       - URL to more information on the group
  * @param  {String}  desc      - Description of the group
  *
- * @param  {Integer} ruleset - Numerical constant that specifies the ruleset
- *                             By default all rules ar included
- * 
  * @property  {Object}  rule_group_information - Information on rules in the group
  * @property  {Array}   rule_results           - List of rule result objects in the group
  *
@@ -25339,7 +25427,7 @@ const debug$8 = new DebugLogging('ruleGroupResult', false);
 
 
 class RuleGroupResult {
-  constructor (evaluationResult, title, url, desc, ruleset=RULESET.ALL) {
+  constructor (evaluationResult, title, url, desc) {
     this.evaluation_result = evaluationResult;
 
     this.rule_group_information = {};
@@ -25350,8 +25438,6 @@ class RuleGroupResult {
 
     this.rule_group_information.rules_required    = 0;
     this.rule_group_information.rules_recommended = 0;
-
-    this.ruleset = ruleset;
 
     this.rule_results = [];
     this.rule_results_summary = new RuleResultsSummary();
@@ -25484,16 +25570,14 @@ class RuleGroupResult {
    */
 
   addRuleResult (rule_result) {
-    if (rule_result.rule.getRuleset() <= this.ruleset) {
-      this.rule_results.push(rule_result);
-      this.rule_results_summary.updateSummary(rule_result);
+    this.rule_results.push(rule_result);
+    this.rule_results_summary.updateSummary(rule_result);
 
-      if (rule_result.isRuleRequired()) {
-        this.rule_group_information.rules_required += 1;
-      }
-      else {
-        this.rule_group_information.rules_recommended += 1;
-      }
+    if (rule_result.isRuleRequired()) {
+      this.rule_group_information.rules_required += 1;
+    }
+    else {
+      this.rule_group_information.rules_recommended += 1;
     }
   }
 
@@ -26801,9 +26885,6 @@ class RuleResult {
 
       rule_scope_code_nls: this.rule.getScopeNLS(),
       rule_scope_code:     this.rule.getScope(),
-
-      ruleset_nls:  this.rule.getRulesetInfo(),
-      ruleset_code: this.rule.getRuleset(),
 
       result_value_nls: this.getResultValueNLS(),
       result_value:     this.getResultValue(),

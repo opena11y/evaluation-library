@@ -27,9 +27,6 @@ const debug = new DebugLogging('ruleGroupResult', false)
  * @param  {String}  url       - URL to more information on the group
  * @param  {String}  desc      - Description of the group
  *
- * @param  {Integer} ruleset - Numerical constant that specifies the ruleset
- *                             By default all rules ar included
- * 
  * @property  {Object}  rule_group_information - Information on rules in the group
  * @property  {Array}   rule_results           - List of rule result objects in the group
  *
@@ -43,7 +40,7 @@ const debug = new DebugLogging('ruleGroupResult', false)
 
 
 export default class RuleGroupResult {
-  constructor (evaluationResult, title, url, desc, ruleset=RULESET.ALL) {
+  constructor (evaluationResult, title, url, desc) {
     this.evaluation_result = evaluationResult;
 
     this.rule_group_information = {};
@@ -54,8 +51,6 @@ export default class RuleGroupResult {
 
     this.rule_group_information.rules_required    = 0;
     this.rule_group_information.rules_recommended = 0;
-
-    this.ruleset = ruleset;
 
     this.rule_results = [];
     this.rule_results_summary = new RuleResultsSummary();
@@ -188,16 +183,14 @@ export default class RuleGroupResult {
    */
 
   addRuleResult (rule_result) {
-    if (rule_result.rule.getRuleset() <= this.ruleset) {
-      this.rule_results.push(rule_result);
-      this.rule_results_summary.updateSummary(rule_result);
+    this.rule_results.push(rule_result);
+    this.rule_results_summary.updateSummary(rule_result);
 
-      if (rule_result.isRuleRequired()) {
-        this.rule_group_information.rules_required += 1;
-      }
-      else {
-        this.rule_group_information.rules_recommended += 1;
-      }
+    if (rule_result.isRuleRequired()) {
+      this.rule_group_information.rules_required += 1;
+    }
+    else {
+      this.rule_group_information.rules_recommended += 1;
     }
   }
 

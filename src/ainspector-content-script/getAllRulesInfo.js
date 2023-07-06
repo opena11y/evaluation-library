@@ -8,6 +8,11 @@ import {
   RULE_SCOPE
 } from '../constants.js';
 
+import DebugLogging from '../debug.js';
+
+const debug = new DebugLogging('getAllRuleInfo', false);
+debug.flag = true;
+
 // ----------------------
 // All Rules Result functions
 // ----------------------
@@ -97,9 +102,9 @@ function getScopeResults (evalResult) {
 */
 export default function getAllRulesInfo (ruleset, scopeFilter, firstStepRules) {
 
-  console.log(`[getAllRulesInfo][    ruleset]: ${ruleset}`);
-  console.log(`[getAllRulesInfo][scopeFilter]: ${scopeFilter}`);
-  console.log(`[getAllRulesInfo][ ruleFilter]: ${firstStepRules}`);
+  debug.flag && debug.log(`[    ruleset]: ${ruleset}`);
+  debug.flag && debug.log(`[scopeFilter]: ${scopeFilter}`);
+  debug.flag && debug.log(`[ ruleFilter]: ${firstStepRules}`);
 
   const info = {};
 

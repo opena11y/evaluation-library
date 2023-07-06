@@ -3,6 +3,12 @@
 import {evaluate}           from './evaluate.js';
 import {getRuleResultsItem} from './getRuleResultsItem.js';
 
+import DebugLogging from '../debug.js';
+
+const debug = new DebugLogging('getRuleGroupInfo', false);
+debug.flag = false;
+
+
 /*
 *   getRuleResultsInfo
 *   (1) Run evlauation library;

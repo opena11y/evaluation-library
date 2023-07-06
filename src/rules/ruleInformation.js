@@ -11,7 +11,6 @@ import {
   getRuleDefinition,
   getRuleId,
   getRuleSummary,
-  getRulesetInfo,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
   getTechniques
@@ -46,7 +45,6 @@ export default class RuleInformation {
     ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
     ruleInfo.last_updated  = rule.last_updated;
 
-    ruleInfo.ruleset          = getRulesetInfo(rule.ruleset);
     ruleInfo.rule_scope       = rule.rule_scope;
     ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);
     ruleInfo.rule_category_id = rule.rule_category_id;

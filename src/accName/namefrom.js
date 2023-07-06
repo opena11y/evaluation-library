@@ -30,7 +30,7 @@ export {
 
 import DebugLogging        from '../debug.js';
 const debug = new DebugLogging('nameFrom', false);
-debug.flag = true;
+debug.flag = false;
 
 /*
 *   @function isLabelableElement

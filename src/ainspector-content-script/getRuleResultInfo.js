@@ -4,8 +4,12 @@ import {getDetailsAction} from './getDetailsAction.js';
 import {
   RESULT_VALUE
 } from '../constants.js';
+import DebugLogging from '../debug.js';
 
 /* Constants */
+const debug = new DebugLogging('getAllResultInfo', false);
+debug.flag = true;
+
 
 /*
 *   getRuleResultInfo

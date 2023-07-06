@@ -559,9 +559,6 @@ export default class RuleResult {
       rule_scope_code_nls: this.rule.getScopeNLS(),
       rule_scope_code:     this.rule.getScope(),
 
-      ruleset_nls:  this.rule.getRulesetInfo(),
-      ruleset_code: this.rule.getRuleset(),
-
       result_value_nls: this.getResultValueNLS(),
       result_value:     this.getResultValue(),
       result_message:   this.getResultMessage(),
