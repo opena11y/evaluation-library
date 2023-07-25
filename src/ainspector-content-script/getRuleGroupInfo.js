@@ -14,11 +14,11 @@ debug.flag = false;
 *   (1) Run evlauation library;
 *   (2) return result objec for the group view in the sidebar;
 */
-export default function getRuleGroupInfo (groupType, groupId, ruleset, scopeFilter, firstStepRules) {
+export default function getRuleGroupInfo (groupType, groupId, ruleset, level, scopeFilter, firstStepRules) {
 
   let info = {};
 
-  const evaluationResult  = evaluate(ruleset, scopeFilter, firstStepRules);
+  const evaluationResult  = evaluate(ruleset, level, scopeFilter, firstStepRules);
   const ruleGroupResult = (groupType === 'gl') ?
                           evaluationResult.getRuleResultsByGuideline(groupId) :
                           (groupType === 'rc') ? evaluationResult.getRuleResultsByCategory(groupId) :

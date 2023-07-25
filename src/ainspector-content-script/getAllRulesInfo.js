@@ -100,21 +100,19 @@ function getScopeResults (evalResult) {
 *   (1) Run evlauation library;
 *   (2) return result object for the all rules view in the sidebar;
 */
-export default function getAllRulesInfo (ruleset, scopeFilter, firstStepRules) {
+export default function getAllRulesInfo (ruleset, level, scopeFilter, firstStepRules) {
 
   debug.flag && debug.log(`[    ruleset]: ${ruleset}`);
+  debug.flag && debug.log(`[      level]: ${level}`);
   debug.flag && debug.log(`[scopeFilter]: ${scopeFilter}`);
   debug.flag && debug.log(`[ ruleFilter]: ${firstStepRules}`);
 
-  const info = {};
-
-  const evaluationResult  = evaluate(ruleset, scopeFilter, firstStepRules);
+  const evaluationResult  = evaluate(ruleset, level, scopeFilter, firstStepRules);
   const ruleGroupResult   = evaluationResult.getRuleResultsAll();
   const ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
   const ruleResults       = ruleGroupResult.getRuleResultsArray();
 
-
-  info.ruleset  = 'ARIA_STRICT';
+  const info = {};
 
   info.violations    = ruleSummaryResult.violations;
   info.warnings      = ruleSummaryResult.warnings;

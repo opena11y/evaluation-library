@@ -241,15 +241,6 @@ function nameFromNativeSemantics (doc, element) {
       if (accName === null) accName = nameFromAttribute(element, 'placeholder');
       break;
 
-    // EMBEDDED ELEMENTS
-    case 'audio': // if 'controls' attribute is present
-      accName = { name: 'NOT YET IMPLEMENTED', source: '' };
-      break;
-
-    case 'embed':
-      accName = { name: 'NOT YET IMPLEMENTED', source: '' };
-      break;
-
     case 'iframe':
       accName = nameFromAttribute(element, 'title');
       break;
@@ -259,16 +250,8 @@ function nameFromNativeSemantics (doc, element) {
       accName = nameFromAltAttribute(element);
       break;
 
-    case 'object':
-      accName = { name: 'NOT YET IMPLEMENTED', source: '' };
-      break;
-
     case 'svg': // added
       accName = nameFromDescendant(element, 'title');
-      break;
-
-    case 'video': // if 'controls' attribute is present
-      accName = { name: 'NOT YET IMPLEMENTED', source: '' };
       break;
 
     // OTHER ELEMENTS

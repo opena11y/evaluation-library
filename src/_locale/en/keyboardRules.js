@@ -9,7 +9,7 @@ import {REFERENCES} from '../../constants.js';
 export const keyboardRules = {
   KEYBOARD_1: {
     ID:                    'Keyboard 1',
-    DEFINITION:            'Elements with ARIA widget roles must have event handlers that support the keyboard interactions required by those roles.',
+    DEFINITION:            'Elements with ARIA widget roles must support the keyboard interactions required by those roles.',
     SUMMARY:               'Widget roles require keyboard support',
     TARGET_RESOURCES_DESC: 'Elements with ARIA widget roles',
     RULE_RESULT_MESSAGES: {
@@ -83,8 +83,8 @@ export const keyboardRules = {
       PAGE_PASS_1:       'The interactive element on the page does not have an explicit @tabindex@ value or added event handlers that might change its default functionality or ARIA role.',
       PAGE_PASS_2:       'The @%1@ interactive elements on the page do not have explicit @tabindex@ values or added event handlers that might change their default functionalities or ARIA roles.',
       ELEMENT_PASS_1:    'The @%1@ element does not have an explicit @tabindex@ value or added event handlers that might change its default functionality or ARIA role.',
-      PAGE_MC_1:         'Verify that the functionality provided by the added event handler or explicitly defined @tabindex@ value on the interactive element has the corresponding keyboard support.',
-      PAGE_MC_2:         'Verify that the functionality provided by the added event handlers or explicitly defined @tabindex@ values on the %1 interactive elements has the corresponding keyboard support.',
+      PAGE_MC_1:         'Verify that the functionality associated with the @tabindex@ value on the interactive element has the corresponding keyboard support.',
+      PAGE_MC_2:         'Verify that the functionality associated with the @tabindex@ values on the %1 interactive elements has the corresponding keyboard support.',
       ELEMENT_MC_1:      'Verify that the functionality provided by the added event handlers on the @%1@ element have the corresponding keyboard support.',
       ELEMENT_MC_2:      'Verify that the functionality that results from assigning @tabindex=%1@ on the @%2@ element has the corresponding keyboard support.',
       ELEMENT_MC_3:      'Verify that the functionality provided by the @%1@ element has the corresponding keyboard support.',

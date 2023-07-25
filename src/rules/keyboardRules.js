@@ -2,7 +2,6 @@
 
 /* Imports */
 import {
-  RULESET,
   RULE_SCOPE,
   RULE_CATEGORIES,
   TEST_RESULT
@@ -32,7 +31,6 @@ export const keyboardRules = [
     last_updated        : '2023-06-10',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
-    ruleset             : RULESET.TRIAGE,
     wcag_primary_id     : '2.1.1',
     wcag_related_ids    : ['4.1.2'],
     target_resources    : ['widgets'],
@@ -62,7 +60,6 @@ export const keyboardRules = [
     last_updated        : '2023-06-10',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
-    ruleset             : RULESET.TRIAGE,
     wcag_primary_id     : '2.1.1',
     wcag_related_ids    : ['2.1.2', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['Page', 'object', 'widgets'],
@@ -143,7 +140,6 @@ export const keyboardRules = [
     last_updated        : '2023-06-10',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
-    ruleset             : RULESET.TRIAGE,
     wcag_primary_id     : '2.1.2',
     wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['object'],

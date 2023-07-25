@@ -50,6 +50,7 @@ function getEvaluationInfo(panelPort) {
     debug.log(`[getEvaluationInfo][        groupId]: ${aiInfo.groupId}`);
     debug.log(`[getEvaluationInfo][         ruleId]: ${aiInfo.ruleId}`);
     debug.log(`[getEvaluationInfo][        ruleset]: ${aiInfo.ruleset}`);
+    debug.log(`[getEvaluationInfo][          level]: ${aiInfo.level}`);
     debug.log(`[getEvaluationInfo][    scopeFilter]: ${aiInfo.scopeFilter}`);
     debug.log(`[getEvaluationInfo][ firstStepRules]: ${aiInfo.firstStepRules} (${aiInfo.firstStepRules.length})` );
     debug.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
@@ -61,21 +62,23 @@ function getEvaluationInfo(panelPort) {
   }
 
   let info = {};
-  info.id       = 'info';
-  info.title    = document.title;
-  info.location = document.location.href
-  info.ruleset  = aiInfo.rulesetId;
+  info.id          = 'info';
+  info.title       = document.title;
+  info.location    = document.location.href
+  info.ruleset     = aiInfo.ruleset;
+  info.level       = aiInfo.level;
+  info.scopeFilter = aiInfo.scopeFilter;
 
   switch(aiInfo.view) {
     case viewId.allRules:
       clearHighlights();
-      info.infoAllRules = getAllRulesInfo(aiInfo.ruleset, aiInfo.scopeFilter, aiInfo.firstStepRules);
+      info.infoAllRules = getAllRulesInfo(aiInfo.ruleset, info.level, aiInfo.scopeFilter, aiInfo.firstStepRules);
       ruleResult = false;
       break;
 
     case viewId.ruleGroup:
       clearHighlights();
-      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId, aiInfo.ruleset, aiInfo.scopeFilter, aiInfo.firstStepRules);
+      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId, aiInfo.ruleset, info.level, aiInfo.scopeFilter, aiInfo.firstStepRules);
       ruleResult = false;
       break;
 
@@ -88,7 +91,7 @@ function getEvaluationInfo(panelPort) {
           info.infoHighlight = true;
         }
       } else {
-        const evaluationResult  = evaluate(aiInfo.ruleset, aiInfo.scopeFilter, aiInfo.firstStepRules);
+        const evaluationResult  = evaluate(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter, aiInfo.firstStepRules);
         ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
         info.infoRuleResult = getRuleResultInfo(ruleResult);
         highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);

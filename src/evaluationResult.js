@@ -21,27 +21,90 @@ import {
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
-debug.flag = false;
+debug.flag = true;
+
+/* helper functions */
+
+function isWCAG(ruleset, level, rule) {
+
+  switch (ruleset.toUpperCase()) {
+    case 'WCAG20':
+      if (!rule.isWCAG20) {
+        return false;
+      }
+      break;
+
+    case 'WCAG21':
+      if (!rule.isWCAG21) {
+        return false;
+      }
+      break;
+
+    case 'WCAG22':
+      if (!rule.isWCAG22) {
+        return false;
+      }
+      break;
+
+    default:
+      return false;
+
+
+  }
+
+  switch (level.toUpperCase()) {
+    case 'A':
+      if (!rule.isLevelA) {
+        return false;
+      }
+      break;
+
+    case 'AA':
+      if (!rule.isLevelA && !rule.isLevelAA) {
+        return false;
+      }
+      break;
+
+    case 'AAA':
+      return true;
+      break;
+
+    default:
+      return false;
+  }
+
+  return true;
+
+}
+
+function isFilter(ruleset, ruleFilter, ruleId) {
+  return (ruleset.toUpperCase() === 'FILTER') && ruleFilter.includes(ruleId);
+}
 
 export default class EvaluationResult {
-  constructor (allRules, domCache, title, url,  ruleset="AA", scopeFilter="ALL", ruleFilter=[]) {
+  constructor (allRules, domCache, title, url, ruleset='WCAG21', level='AA', scopeFilter='ALL', ruleFilter=[]) {
 
     this.title = title;
     this.url = url;
+    this.ruleset = ruleset;
+    this.level = level;
+    this.scopeFilter = scopeFilter;
+
     this.date = getFormattedDate();
     this.version = VERSION;
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
     const startTime = new Date();
-    debug.flag && debug.log(`[ruleset]: ${this.ruleset}`);
-    debug.flag && debug.log(`[scopeFilter]: ${this.scopeFilter}`);
+    debug.flag && debug.log(`[    ruleset]: ${ruleset}`);
+    debug.flag && debug.log(`[      level]: ${level}`);
+    debug.flag && debug.log(`[scopeFilter]: ${scopeFilter}`);
 
     allRules.forEach (rule => {
-      if (((ruleset === 'A')  && (rule.isLevelA)) ||
-          ((ruleset === 'AA') && (rule.isLevelA || rule.isLevelAA)) ||
-           (ruleset === 'AAA') ||
-          ((ruleset === 'FILTER') && ruleFilter.includes(rule.getId()))) {
+      debug.flag && debug.log(`[version]: ${rule.wcag_primary_id} ${rule.wcag_version} ${rule.isWCAG20} ${rule.isWCAG21} ${rule.isWCAG22}`);
+
+      if (isFilter(ruleset, ruleFilter, rule.getId()) ||
+          isWCAG(ruleset, level, rule)) {
 
         if ((scopeFilter === 'ALL') ||
             ((scopeFilter === 'PAGE')    && rule.isScopePage) ||

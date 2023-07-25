@@ -29,6 +29,51 @@ import DebugLogging from '../debug.js';
 /* Constants */
 const debug = new DebugLogging('Rule', false);
 
+const wcag21_SC = [
+  '1.3.4',
+  '1.3.5',
+  '1.3.6',
+  '1.4.10',
+  '1.4.11',
+  '1.4.12',
+  '1.4.13',
+  '2.1.4',
+  '2.2.6',
+  '2.3.3',
+  '2.5.1',
+  '2.5.2',
+  '2.5.3',
+  '2.5.4',
+  '2.5.5',
+  '2.5.6',
+  '4.1.3'
+];
+
+const wcag22_SC = [
+  '2.4.11',
+  '2.4.12',
+  '2.4.13',
+  '2.5.7',
+  '2.5.8',
+  '3.2.6',
+  '3.3.7',
+  '3.3.8',
+  '3.3.9'
+  ];
+
+/* helper functions */
+
+function getWCAGVersion (primaryId) {
+  if (wcag21_SC.includes(primaryId)) {
+    return 'WCAG21';
+  }
+  if (wcag22_SC.includes(primaryId)) {
+    return 'WCAG22';
+  }
+  return 'WCAG20';
+}
+
+
 /* ----------------------------------------------------------------   */
 /*                             Rule                                   */
 /* ----------------------------------------------------------------   */
@@ -64,6 +109,7 @@ export default class Rule {
     this.wcag_primary        = getSuccessCriterionInfo(this.wcag_primary_id);
     this.wcag_related        = getSuccessCriteriaInfo(this.wcag_related_ids);
     this.wcag_level          = getCommonMessage('level', this.wcag_primary.level);
+    this.wcag_version        = getWCAGVersion(this.wcag_primary_id);
 
     this.rule_nls_id           = getRuleId(this.rule_id); // String
     this.summary               = getRuleSummary(this.rule_id); // String
@@ -79,6 +125,18 @@ export default class Rule {
     this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
     debug.flag && this.toJSON();
+  }
+
+  get isWCAG20 () {
+    return this.wcag_version === 'WCAG20';
+  }
+
+  get isWCAG21 () {
+    return this.isWCAG20 || this.wcag_version === 'WCAG21';
+  }
+
+  get isWCAG22 () {
+    return this.isWCAG20 || this.isWCAG21 || this.wcag_version === 'WCAG22';
   }
 
   get isLevelA () {

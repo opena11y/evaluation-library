@@ -667,6 +667,28 @@ export const wcag = {
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#section-headings',
               references: {
               }
+            },
+            '2.4.11': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_11,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.4.11 Focus Not Obscured (Minimum)',
+              description: 'When a user interface component receives keyboard focus, the component is not entirely hidden due to author-created content.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#focus-not-obscured-minimum',
+              references: {
+              }
+            },
+            '2.4.12': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_12,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.4.12 Focus Not Obscured (Enhanced)',
+              description: 'When a user interface component receives keyboard focus, no part of the component is hidden by author-created content.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#focus-not-obscured-enhanced',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance',
+              references: {
+              }
             }
           }
         },
