@@ -11,39 +11,6 @@ const el = new EvaluationLibrary(true);
 
 /* Constants */
 
-const RULE_CATEGORIES = el.CONSTANTS.RULE_CATEGORIES;
-const WCAG_GUIDELINE  = el.CONSTANTS.WCAG_GUIDELINE;
-
-const ruleCategories = [
-  RULE_CATEGORIES.LANDMARKS,
-  RULE_CATEGORIES.HEADINGS,
-  RULE_CATEGORIES.STYLES_READABILITY,
-  RULE_CATEGORIES.IMAGES,
-  RULE_CATEGORIES.LINKS,
-  RULE_CATEGORIES.TABLES,
-  RULE_CATEGORIES.FORMS,
-  RULE_CATEGORIES.WIDGETS_SCRIPTS,
-  RULE_CATEGORIES.AUDIO_VIDEO,
-  RULE_CATEGORIES.KEYBOARD_SUPPORT,
-  RULE_CATEGORIES.TIMING,
-  RULE_CATEGORIES.SITE_NAVIGATION
-];
-
-const wcagGuidelines = [
-  WCAG_GUIDELINE.G_1_1,
-  WCAG_GUIDELINE.G_1_2,
-  WCAG_GUIDELINE.G_1_3,
-  WCAG_GUIDELINE.G_1_4,
-  WCAG_GUIDELINE.G_2_1,
-  WCAG_GUIDELINE.G_2_2,
-  WCAG_GUIDELINE.G_2_3,
-  WCAG_GUIDELINE.G_2_4,
-  WCAG_GUIDELINE.G_2_5,
-  WCAG_GUIDELINE.G_3_1,
-  WCAG_GUIDELINE.G_3_2,
-  WCAG_GUIDELINE.G_3_3,
-  WCAG_GUIDELINE.G_4_1
-]
 
 const outputDirectory = './docs/';
 
@@ -60,31 +27,62 @@ function outputFile(fname, data) {
   })
 }
 
-
-const allRulesInfo = el.getRuleInfo.getRulesByCategory(RULE_CATEGORIES.ALL);
-
 const allRuleCategories = [];
 const allGuidelines = [];
 
 // Create data for creating index and rule files
 
-ruleCategories.forEach( rc => {
-  const rcInfo = el.getRuleInfo.getRuleCategoryInfo(rc);
-  rcInfo.rules = el.getRuleInfo.getRulesByCategory(rc);
+el.getRuleCategories.forEach( rc => {
+  const rcInfo = Object.assign(rc);
+
+  rcInfo.rules = [];
+
+  el.getAllRules.forEach( r => {
+    const ruleInfo = el.getRuleInfo(r);
+    if (r.rule_category_id === rcInfo.id) {
+      rcInfo.rules.push(ruleInfo);
+    }
+  });
 
   console.log(`[RC]: ${rcInfo.title} (${rcInfo.rules.length})`);
 
   allRuleCategories.push(rcInfo);
 });
 
-wcagGuidelines.forEach( gl => {
-  const glInfo =  el.getRuleInfo.getGuidelineInfo(gl);
-  glInfo.rules =  el.getRuleInfo.getRulesByGuideline(glInfo.num);
+for(const p in el.getWCAG.principles) {
+  console.log(`[Principle]: ${p})`);
+  const guidelines = el.getWCAG.principles[p].guidelines;
+  for (const g in guidelines) {
+    console.log(`[Guideline]: ${g})`);
 
-  console.log(`[GL]: ${glInfo.title} (${glInfo.rules.length})`);
+    const glInfo = Object.assign(guidelines[g]);
+    glInfo.successCriteria = [];
 
-  allGuidelines.push(glInfo);
-});
+    const success_criteria = guidelines[g].success_criteria;
+    for(const sc in success_criteria) {
+
+      scInfo = Object.assign(success_criteria[sc]);
+      scInfo.id = sc;
+      scInfo.rules =  [];
+
+      console.log(`[Success Criteria]: ${scInfo.id} level=${scInfo.level} )`);
+
+      if (scInfo.level > 1) {
+
+        el.getAllRules.forEach( r => {
+          const ruleInfo = el.getRuleInfo(r);
+          if (r.wcag_primary.id === scInfo.id) {
+            scInfo.rules.push(ruleInfo);
+          }
+        });
+
+        glInfo.successCriteria.push(scInfo);
+      }
+    }
+    allGuidelines.push(glInfo);
+  }
+};
+
 
 // Create index file
 
@@ -111,15 +109,18 @@ outputFile('apis.html', htmlAPIs);
 const htmlAbout = nunjucks.render('./src-docs/templates/content-about.njk', {title: 'About'});
 outputFile('about.html', htmlAbout);
 
-
 // Create rule files
 console.log(`\n === Rule Files ===`)
 let count = 0;
-allRulesInfo.forEach( ruleInfo => {
+el.getAllRules.forEach( rule => {
+  const ruleInfo = el.getRuleInfo(rule);
   console.log(`[${ruleInfo.id}] ${ruleInfo.summary} => ${ruleInfo.filename}`);
   const htmlRule = nunjucks.render('./src-docs/templates/content-rule.njk', {title: ruleInfo.summary, ruleInfo: ruleInfo});
   outputFile(ruleInfo.filename, htmlRule);
   count += 1;
 });
 
+
 console.log(`Total Rules: ${count}`);
+
+console.log(`wcag: ${el.getWCAG.abbreviation}`);

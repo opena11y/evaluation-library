@@ -8,9 +8,9 @@ import {
 } from '../../constants.js';
 
 export const wcag = {
-  abbreviation: 'WCAG 2.1',
-  title: 'Web Content Accessibility Guidelines (WCAG) 2.1',
-  url: 'https://www.w3.org/TR/WCAG21/',
+  abbreviation: 'WCAG 2.2',
+  title: 'Web Content Accessibility Guidelines (WCAG) 2.2',
+  url: 'https://www.w3.org/TR/WCAG22/',
   status: 'W3C Recommendation 05 June 2018',
   level: 'Level ',
   levels: ['Undefined',  'AAA',  'AA',  '',  'A'  ],
@@ -689,6 +689,17 @@ export const wcag = {
               url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance',
               references: {
               }
+            },
+            '2.4.13': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_13,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.4.13 Focus Appearance',
+              description: 'When the keyboard focus indicator is visible, an area of the focus indicator is at least as large as the area of a 2 CSS pixel thick perimeter of the unfocused component or sub-component, and has a contrast ratio of at least 3:1 between the same pixels in the focused and unfocused states. NOTE: some exceptions',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#focus-appearance',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance',
+              references: {
+              }
             }
           }
         },
@@ -761,6 +772,28 @@ export const wcag = {
               url_spec: 'https://www.w3.org/TR/WCAG21/#concurrent-input-mechanisms',
               url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/concurrent-input-mechanisms.html',
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#concurrent-input-mechanisms',
+              references: {
+              }
+            },
+            '2.5.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_7,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.5.7 Dragging Movements',
+              description: 'All functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, unless dragging is essential or the functionality is determined by the user agent and not modified by the author.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#dragging-movements',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#dragging-movements',
+              references: {
+              }
+            },
+            '2.5.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_8,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.5.8 Target Size (Minimum)',
+              description: 'The size of the target for pointer inputs is at least 24 by 24 CSS pixels. NOTE: There are five exceptions.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#target-size-minimum',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#target-size-minimum',
               references: {
               }
             }
@@ -908,6 +941,17 @@ export const wcag = {
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#change-on-request',
               references: {
               }
+            },
+            '3.2.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_6,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.2.6 Consistent Help',
+              description: 'If a Web page contains Human contact details, Human contact mechanism, Self-help option.and/or a fully automated contact mechanisms, and at least one of the mechanisms are repeated on multiple Web pages within a set of Web pages, they occur in the same order relative to other page content, unless a change is initiated by the user',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#consistent-help',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#consistent-help',
+              references: {
+              }
             }
           }
         },
@@ -980,6 +1024,39 @@ export const wcag = {
               url_spec: 'https://www.w3.org/TR/WCAG21/#error-prevention-all',
               url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-all.html',
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#error-prevention-all',
+              references: {
+              }
+            },
+            '3.3.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_7,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.3.7 Redundant Entry',
+              description: 'Information previously entered by or provided to the user that is required to be entered again in the same process is either auto-populated or available for the user to select. NOTE: There are exceptions',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#redundant-entry',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#redundant-entry',
+              references: {
+              }
+            },
+            '3.3.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_8,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.3.8 Accessible Authentication (Minimum)',
+              description: 'A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of the following: another authentication method that does not rely on a cognitive function test, a mechanism is available to assist the user in completing the cognitive function test, the cognitive function test is to recognize objects and/or the cognitive function test is to identify non-text content the user provided to the Web site.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#accessible-authentication-minimum',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-minimum',
+              references: {
+              }
+            },
+            '3.3.9': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_9,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.3.9 Accessible Authentication (Enhanced)',
+              description: 'A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of the following: another authentication method that does not rely on a cognitive function test and/or a mechanism is available to assist the user in completing the cognitive function test.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#accessible-authentication-enhanced',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-enhanced',
               references: {
               }
             }

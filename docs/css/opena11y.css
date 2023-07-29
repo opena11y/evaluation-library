@@ -34,3 +34,7 @@ a[href]:hover {
 .navbar-dark .navbar-nav .nav-link:focus {
   color: rgba(255, 255, 255, 1.0);
 }
+
+.tab-pane {
+  margin-top: 1em;
+}

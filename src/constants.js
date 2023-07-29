@@ -30,22 +30,19 @@ const VERSION = '2.0.beta1';
 
 /**
  * @constant RULESET
- * @type Integer
- * @desc Constants related to the priority of learning a rule
- *       For example people new to accessibility would start
- *       with understanding TRIAGE rules and then moving to MORE
- *       and as they gain experience can use ALL
+ * @type String
+ * @desc Constants identify the current versions of WCAG
  *
  * @example
- * RULESET.TRIAGE
- * RULESET.MORE
- * RULESET.ALL
+ * RULESET.WCAG20
+ * RULESET.WCAG21
+ * RULESET.WCAG22
  */
 
 const RULESET =  {
-  TRIAGE: 1,
-  MORE: 2,
-  ALL: 3
+  WCAG20: 'WCAG20',
+  WCAG21: 'WCAG21',
+  WCAG22: 'WCAG22'
 }
 
 /**

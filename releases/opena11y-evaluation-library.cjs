@@ -153,22 +153,19 @@ const VERSION = '2.0.beta1';
 
 /**
  * @constant RULESET
- * @type Integer
- * @desc Constants related to the priority of learning a rule
- *       For example people new to accessibility would start
- *       with understanding TRIAGE rules and then moving to MORE
- *       and as they gain experience can use ALL
+ * @type String
+ * @desc Constants identify the current versions of WCAG
  *
  * @example
- * RULESET.TRIAGE
- * RULESET.MORE
- * RULESET.ALL
+ * RULESET.WCAG20
+ * RULESET.WCAG21
+ * RULESET.WCAG22
  */
 
 const RULESET =  {
-  TRIAGE: 1,
-  MORE: 2,
-  ALL: 3
+  WCAG20: 'WCAG20',
+  WCAG21: 'WCAG21',
+  WCAG22: 'WCAG22'
 };
 
 /**
@@ -11780,9 +11777,9 @@ const rulesets = [
 /* ruleCategories.js */
 
 const wcag = {
-  abbreviation: 'WCAG 2.1',
-  title: 'Web Content Accessibility Guidelines (WCAG) 2.1',
-  url: 'https://www.w3.org/TR/WCAG21/',
+  abbreviation: 'WCAG 2.2',
+  title: 'Web Content Accessibility Guidelines (WCAG) 2.2',
+  url: 'https://www.w3.org/TR/WCAG22/',
   status: 'W3C Recommendation 05 June 2018',
   level: 'Level ',
   levels: ['Undefined',  'AAA',  'AA',  '',  'A'  ],
@@ -12461,6 +12458,17 @@ const wcag = {
               url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance',
               references: {
               }
+            },
+            '2.4.13': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_4_13,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 2.4.13 Focus Appearance',
+              description: 'When the keyboard focus indicator is visible, an area of the focus indicator is at least as large as the area of a 2 CSS pixel thick perimeter of the unfocused component or sub-component, and has a contrast ratio of at least 3:1 between the same pixels in the focused and unfocused states. NOTE: some exceptions',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#focus-appearance',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#focus-appearance',
+              references: {
+              }
             }
           }
         },
@@ -12533,6 +12541,28 @@ const wcag = {
               url_spec: 'https://www.w3.org/TR/WCAG21/#concurrent-input-mechanisms',
               url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/concurrent-input-mechanisms.html',
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#concurrent-input-mechanisms',
+              references: {
+              }
+            },
+            '2.5.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_7,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.5.7 Dragging Movements',
+              description: 'All functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, unless dragging is essential or the functionality is determined by the user agent and not modified by the author.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#dragging-movements',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#dragging-movements',
+              references: {
+              }
+            },
+            '2.5.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_2_5_8,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 2.5.8 Target Size (Minimum)',
+              description: 'The size of the target for pointer inputs is at least 24 by 24 CSS pixels. NOTE: There are five exceptions.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#target-size-minimum',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#target-size-minimum',
               references: {
               }
             }
@@ -12680,6 +12710,17 @@ const wcag = {
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#change-on-request',
               references: {
               }
+            },
+            '3.2.6': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_2_6,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.2.6 Consistent Help',
+              description: 'If a Web page contains Human contact details, Human contact mechanism, Self-help option.and/or a fully automated contact mechanisms, and at least one of the mechanisms are repeated on multiple Web pages within a set of Web pages, they occur in the same order relative to other page content, unless a change is initiated by the user',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#consistent-help',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#consistent-help',
+              references: {
+              }
             }
           }
         },
@@ -12752,6 +12793,39 @@ const wcag = {
               url_spec: 'https://www.w3.org/TR/WCAG21/#error-prevention-all',
               url_understand: 'https://www.w3.org/WAI/WCAG21/Understanding/error-prevention-all.html',
               url_meet: 'https://www.w3.org/WAI/WCAG21/quickref/#error-prevention-all',
+              references: {
+              }
+            },
+            '3.3.7': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_7,
+              level: WCAG_LEVEL.A,
+              title: 'Success Criterion 3.3.7 Redundant Entry',
+              description: 'Information previously entered by or provided to the user that is required to be entered again in the same process is either auto-populated or available for the user to select. NOTE: There are exceptions',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#redundant-entry',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#redundant-entry',
+              references: {
+              }
+            },
+            '3.3.8': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_8,
+              level: WCAG_LEVEL.AA,
+              title: 'Success Criterion 3.3.8 Accessible Authentication (Minimum)',
+              description: 'A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of the following: another authentication method that does not rely on a cognitive function test, a mechanism is available to assist the user in completing the cognitive function test, the cognitive function test is to recognize objects and/or the cognitive function test is to identify non-text content the user provided to the Web site.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#accessible-authentication-minimum',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-minimum',
+              references: {
+              }
+            },
+            '3.3.9': {
+              id: WCAG_SUCCESS_CRITERION.SC_3_3_9,
+              level: WCAG_LEVEL.AAA,
+              title: 'Success Criterion 3.3.9 Accessible Authentication (Enhanced)',
+              description: 'A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of the following: another authentication method that does not rely on a cognitive function test and/or a mechanism is available to assist the user in completing the cognitive function test.',
+              url_spec: 'https://www.w3.org/TR/WCAG22/#accessible-authentication-enhanced',
+              url_understand: 'https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-enhanced.html',
+              url_meet: 'https://www.w3.org/WAI/WCAG22/quickref/#accessible-authentication-enhanced',
               references: {
               }
             }
@@ -18558,6 +18632,18 @@ function setUseCodeTags(value=false) {
 }
 
 /**
+ * @function getWCAG
+ *
+ * @desc Get reference to localized version of WCAG requirements object
+ *
+ * @param {Object} @desc
+ */
+
+function getWCAG() {
+  return messages[locale].wcag;
+}
+
+/**
  * @function getCommonMessage
  *
  * @desc Gets a string associated with strings in the common messages
@@ -18593,6 +18679,19 @@ function getCommonMessage(id, value=0) {
 function getImplementationValue(implementationId) {
   let message = messages[locale].common.implementationValues[implementationId];
   return message;
+}
+
+
+/**
+ * @function getRuleCategories
+ *
+ * @desc Gets localized rule categories object
+ *
+ * @return {Object}  see @desc
+ */
+
+function getRuleCategories() {
+  return messages[locale].ruleCategories;
 }
 
 /**
@@ -25241,97 +25340,6 @@ if (debug$a.flag) {
   console.log('All rules loaded');
 }
 
-/*  ruleInformation.js */
-
-/**
- * @class RuleInformation
- *
- * @desc Provides APIs to access rule informatino without have to do an evaluation
- */
-
-class RuleInformation {
-  constructor () {
-
-  }
-
-  getRuleCategoryInfo (rc) {
-    return getRuleCategoryInfo(rc);
-  }
-
-  getGuidelineInfo (rc) {
-    return getGuidelineInfo(rc);
-  }
-
-  getRuleInfo(rule) {
-    const ruleInfo = {};
-    const id = rule.rule_id;
-
-    ruleInfo.id            = getRuleId(id);
-    ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
-    ruleInfo.last_updated  = rule.last_updated;
-
-    ruleInfo.rule_scope       = rule.rule_scope;
-    ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);
-    ruleInfo.rule_category_id = rule.rule_category_id;
-    ruleInfo.conformance      = rule.rule_required ? getCommonMessage('required') : getCommonMessage('recommended');
-
-    ruleInfo.primary_id = rule.wcag_primary_id;
-    ruleInfo.primary    = getSuccessCriterionInfo(rule.wcag_primary_id);
-    ruleInfo.related    = getSuccessCriteriaInfo(rule.wcag_related_ids);
-
-    ruleInfo.target_resources = rule.target_resources;
-
-    ruleInfo.definition = getRuleDefinition(id);
-    ruleInfo.summary    = getRuleSummary(id);
-    ruleInfo.purposes   = getPurposes(id);
-
-    ruleInfo.techniques = getTechniques(id);
-    ruleInfo.information_links = getInformationLinks(id);
-
-    return ruleInfo;
-  }
-
-  getRulesByCategory(rc) {
-    const rules = [];
-    allRules.forEach( rule => {
-      if (rule.rule_category_id & rc) {
-        rules.push(this.getRuleInfo(rule));
-      }
-    });
-    return rules;
-  }
-
-  getRulesByGuideline(gl) {
-    const rules = [];
-    allRules.forEach( rule => {
-      if (rule.wcag_primary_id.indexOf(gl) === 0) {
-        rules.push(this.getRuleInfo(rule));
-      }
-    });
-
-    rules.sort( (a, b) => {
-      const aParts = a.primary_id.split('.');
-      const bParts = b.primary_id.split('.');
-
-      const p  = parseInt(aParts[0]) - parseInt(bParts[0]);
-      const g  = parseInt(aParts[1]) - parseInt(bParts[1]);
-      const sc = parseInt(aParts[2]) - parseInt(bParts[2]);
-
-      if (p === 0) {
-        if (g === 0) {
-          return sc;
-        }
-        else {
-          return g;
-        }
-      }
-      return p;
-    });
-
-    return rules;
-  }
-}
-
 /* resultSummary.js */
 
 const debug$9 = new DebugLogging('ruleResultSummary', false);
@@ -27353,7 +27361,6 @@ debug.json = false;
 
 class EvaluationLibrary {
   constructor (codeTags = false) {
-    this.ruleInfo = new RuleInformation();
     this.constants = new Constants();
     // setUseCodeTags sets if localized strings using the @ character to identify 
     // code items in the string return <code> tags or capitalization  
@@ -27400,17 +27407,6 @@ class EvaluationLibrary {
   }
 
   /**
-   * @method getRuleInfo
-   * 
-   * @desc Provides information on the current rules used in the evaluation library, 
-   *       including localized strings
-   */
-
-  get getRuleInfo () {
-    return this.ruleInfo;
-  }
-
-  /**
    * @method CONSTANTS
    * 
    * @desc Provides access to the Constants used in the evaluation library
@@ -27419,6 +27415,72 @@ class EvaluationLibrary {
   get CONSTANTS () {
     return this.constants;
   }
+
+  /**
+   * @method getRuleCategories
+   *
+   * @desc Provides access to the localized Rule Categories object from evaluation library
+   */
+
+  get getRuleCategories () {
+    return getRuleCategories();
+  }
+
+  /**
+   * @method getWCAG
+   *
+   * @desc Provides access to the localized WCAG object from evaluation library
+   */
+
+  get getWCAG () {
+    return getWCAG();
+  }
+
+  /**
+   * @method getAllRules
+   *
+   * @desc Provides access to the rules in evaluation library
+   */
+
+  get getAllRules () {
+    return allRules;
+  }
+
+  /**
+   * @method getRuleInfo
+   *
+   * @desc Provides access to localized rule information
+   */
+
+  getRuleInfo(rule) {
+    const ruleInfo = {};
+    const id = rule.rule_id;
+
+    ruleInfo.id            = getRuleId(id);
+    ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
+    ruleInfo.last_updated  = rule.last_updated;
+
+    ruleInfo.rule_scope       = rule.rule_scope;
+    ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);
+    ruleInfo.rule_category_id = rule.rule_category_id;
+    ruleInfo.conformance      = rule.rule_required ? getCommonMessage('required') : getCommonMessage('recommended');
+
+    ruleInfo.wcag_primary_id = rule.wcag_primary_id;
+    ruleInfo.wcag_primary    = getSuccessCriterionInfo(rule.wcag_primary_id);
+    ruleInfo.wcag_related    = getSuccessCriteriaInfo(rule.wcag_related_ids);
+
+    ruleInfo.target_resources = rule.target_resources;
+
+    ruleInfo.definition = getRuleDefinition(id);
+    ruleInfo.summary    = getRuleSummary(id);
+    ruleInfo.purposes   = getPurposes(id);
+
+    ruleInfo.techniques = getTechniques(id);
+    ruleInfo.information_links = getInformationLinks(id);
+
+    return ruleInfo;
+  }
+
 
 }
 

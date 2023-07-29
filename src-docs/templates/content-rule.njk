@@ -69,6 +69,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
           <li class="breadcrumb-item active">{{title | safe}}</li>
         </ol>
       </nav>
@@ -84,7 +85,7 @@
                   {{ infoItem('Definition', ruleInfo.definition) }}
                   {{ infoItems('Purpose',   ruleInfo.purposes) }}
                   {{ infoItem('Conformance',   ruleInfo.conformance) }}
-                  {{ infoWCAG('WCAG Success Criteria', ruleInfo.primary, ruleInfo.related) }}
+                  {{ infoWCAG('WCAG Success Criteria', ruleInfo.wcag_primary, ruleInfo.wcag_related) }}
                   {{ infoItem('Rule Category', ruleInfo.rule_category.title) }}
                   {{ infoItem('Rule Scope',    ruleInfo.rule_scope) }}
                   {{ infoItems('Techniques',    ruleInfo.techniques) }}

@@ -14,6 +14,7 @@ export {
   getImplementationValue,
   getManualChecks,
   getPurposes,
+  getRuleCategories,
   getRuleCategoryInfo,
   getRuleDefinition,
   getRuleId,
@@ -26,6 +27,7 @@ export {
   getSuccessCriterionInfo,
   getTargetResourcesDesc,
   getTechniques,
+  getWCAG,
   setLocale,
   setUseCodeTags,
   transformElementMarkup
@@ -56,6 +58,17 @@ function setUseCodeTags(value=false) {
   globalUseCodeTags = (value === true) ? true : false;
 }
 
+/**
+ * @function getWCAG
+ *
+ * @desc Get reference to localized version of WCAG requirements object
+ *
+ * @param {Object} @desc
+ */
+
+function getWCAG() {
+  return messages[locale].wcag;
+}
 
 /**
  * @function setLocale
@@ -110,6 +123,19 @@ function getCommonMessage(id, value=0) {
 function getImplementationValue(implementationId) {
   let message = messages[locale].common.implementationValues[implementationId];
   return message;
+}
+
+
+/**
+ * @function getRuleCategories
+ *
+ * @desc Gets localized rule categories object
+ *
+ * @return {Object}  see @desc
+ */
+
+function getRuleCategories() {
+  return messages[locale].ruleCategories;
 }
 
 /**
