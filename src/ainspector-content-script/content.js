@@ -8,7 +8,7 @@ import getAllRulesInfo    from './getAllRulesInfo.js';
 import getRuleGroupInfo   from './getRuleGroupInfo.js';
 import getRuleResultInfo  from './getRuleResultInfo.js';
 import {
-  getEvaluationLabel
+  getRulesetLabel
 } from '../_locale/locale.js';
 import {
   addHighlightStyle,
@@ -71,7 +71,7 @@ function getEvaluationInfo(panelPort) {
   info.ruleset     = aiInfo.ruleset;
   info.level       = aiInfo.level;
   info.scopeFilter = aiInfo.scopeFilter;
-  info.evaluationLabel = getEvaluationLabel(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter);
+  info.evaluationLabel = getRulesetLabel(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter);
 
   switch(aiInfo.view) {
     case viewId.allRules:

@@ -9,7 +9,6 @@ export {
   getBaseResultMessages,
   getBaseResultMessage,
   getCommonMessage,
-  getEvaluationLabel,
   getGuidelineInfo,
   getInformationLinks,
   getImplementationValue,
@@ -22,6 +21,7 @@ export {
   getRuleResultMessages,
   getRuleSummary,
   getRulesetInfo,
+  getRulesetLabel,
   getScope,
   getRuleScopeInfo,
   getSuccessCriteriaInfo,
@@ -215,7 +215,7 @@ function getRulesetInfo (rulesetId) {
 }
 
 /**
- * @function getEvaluationLabel
+ * @function getRulesetLabel
  *
  * @desc Retuns a localize string describing the options
  *       used in the evaluation
@@ -227,7 +227,7 @@ function getRulesetInfo (rulesetId) {
  * @return {String}  see @desc
  */
 
-function getEvaluationLabel(rulesetId, level, scopeFilter) {
+function getRulesetLabel(rulesetId, level, scopeFilter) {
 
   function addLevel () {
     switch (level) {
