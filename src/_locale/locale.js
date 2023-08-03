@@ -266,11 +266,11 @@ function getEvaluationLabel(rulesetId, level, scopeFilter) {
 
   switch (scopeFilter) {
     case 'PAGE':
-      label += ', Page only';
+      label += ', Page scope only';
       break;
 
     case 'WEBSITE':
-      label += ', Website only';
+      label += ', Website scope only';
       break;
 
   }
