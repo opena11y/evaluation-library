@@ -232,13 +232,13 @@ function getRulesetLabel(rulesetId, level, scopeFilter) {
     function addLevel () {
       switch (level) {
         case 'A':
-          return 'Level A only';
+          return messages[locale].common.rulesetLevelA;
 
         case 'AA':
-          return 'Levels A and AA';
+          return messages[locale].common.rulesetLevelAA;
 
         case 'AAA':
-          return 'Levels A, AA and enhanced CCR';
+          return messages[locale].common.rulesetLevelAAA;
       }
       return '';
     }
@@ -248,29 +248,33 @@ function getRulesetLabel(rulesetId, level, scopeFilter) {
     switch (rulesetId) {
 
       case 'FILTER':
-        label = 'First Step rules';
+        label = messages[locale].common.rulesetFilter;
         break;
 
       case 'WCAG22':
-        label = 'WCAG 2.2, ' + addLevel();
+        label = messages[locale].common.rulesetWCAG22 + addLevel();
         break;
 
       case 'WCAG21':
-        label = 'WCAG 2.1, ' + addLevel();
+        label = messages[locale].common.rulesetWCAG21 + addLevel();
         break;
 
       default:
-        label = 'WCAG 2.0, ' + addLevel();
+        label = messages[locale].common.rulesetWCAG20 + addLevel();
         break;
     }
 
     switch (scopeFilter) {
+      case 'ELEMENT':
+        label += messages[locale].common.scopeFilterElement;
+        break;
+
       case 'PAGE':
-        label += ', Page scope only';
+        label += messages[locale].common.scopeFilterPage;
         break;
 
       case 'WEBSITE':
-        label += ', Website scope only';
+        label += messages[locale].common.scopeFilterWebsite;
         break;
 
     }

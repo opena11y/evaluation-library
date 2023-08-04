@@ -11631,7 +11631,20 @@ const common = {
   websiteViolationLabel:   'Website Violation',
   websiteWarningLabel:     'Website Warning',
   websitePassLabel:        'Website Pass',
-  websiteManualCheckLabel: 'Website Manual Check'
+  websiteManualCheckLabel: 'Website Manual Check',
+
+  rulesetLevelA:   'Level A only',
+  rulesetLevelAA:  'Levels A and AA',
+  rulesetLevelAAA: 'Levels A, AA and enhanced CCR',
+
+  rulesetFilter: 'First Step rules',
+  rulesetWCAG22: 'WCAG 2.2, ',
+  rulesetWCAG21: 'WCAG 2.1, ',
+  rulesetWCAG20: 'WCAG 2.0, ',
+
+  scopeFilterElement: ', Element scope only',
+  scopeFilterPage:    ', Page scope only',
+  scopeFilterWebsite: ', Website scope only'
 
 };
 
