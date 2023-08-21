@@ -15,6 +15,8 @@
       <main>
         <h1>KEYBOARD Rule 2: Some elements pass</h1>
 
+        <div class="KEYBOARD_2_MC"></div>
+
         <div><a href="link1.html" class="KEYBOARD_2_PASS">Link 1</a></div>
         <div><a href="link2.html" class="KEYBOARD_2_PASS">Link 2</a></div>
         <div><a href="link3.html" tabindex="1" class="KEYBOARD_2_MC">Link 3 (tabindex=1)</a></div>
@@ -34,20 +36,20 @@
         <div style="display: none"><input type="text" class="KEYBOARD_2_HIDDEN"></div>
         
       
-        <div onmousedown="mouseDown()" class="KEYBOARD_2_MC">mouse down event 1</div>
+        <div tabindex="0" class="KEYBOARD_2_MC">mouse down event 1</div>
         <div tabindex="-1">tabindex -1</div>
         <div tabindex="0" class="KEYBOARD_2_MC">tabindex 0</div>
         <div tabindex="2" class="KEYBOARD_2_MC">tabindex 2</div>        
-        <button tabindex="-1" class="KEYBOARD_2_MC">tabindex -1 on button element</button>
         <div hidden tabindex="3" class="KEYBOARD_2_HIDDEN">tabindex 3</div>
 
+<!--
         <object  class="KEYBOARD_2_MC"></object>
         <embed  class="KEYBOARD_2_MC"></embed>
-        <embed style="display: none" class="KEYBOARD_2_HIDDEN"></embed>
+        <embed style="display: none"></embed>
         
         <video class="KEYBOARD_2_MC"></video>
         <audio class="KEYBOARD_2_MC" src="audio-test.mp3" controls></audio>
-        
+-->
         
       </main>
       

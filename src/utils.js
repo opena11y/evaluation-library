@@ -16,7 +16,7 @@ export {
   usesARIALabeling
 }
 /* constants */
-const labelableElements = ['input', 'meter', 'option', 'output', 'progress', 'select', 'textarea'];
+const labelableElements = ['input', 'meter', 'output', 'progress', 'select', 'textarea'];
 const elementsWithInvalid = ['form', 'fieldset', 'input', 'legend'];
 const inputsWithChecked   = ['checkbox', 'radio'];
 

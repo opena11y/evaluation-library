@@ -185,6 +185,7 @@ export default class MediaInfo {
     this.embedElements  = [];
     this.objectElements = [];
     this.videoElements  = [];
+    this.allMediaElements = [];
   }
 
   update (mediaElement, domElement) {
@@ -194,16 +195,19 @@ export default class MediaInfo {
       case 'audio':
         mediaElement = new MediaElement(domElement);
         this.audioElements.push(mediaElement);
+        this.allMediaElements.push(mediaElement);
         break;
 
       case 'embed':
         mediaElement = new EmbedElement(domElement);
         this.embedElements.push(mediaElement);
+        this.allMediaElements.push(mediaElement);
         break;
 
       case 'object':
         mediaElement = new ObjectElement(domElement);
         this.objectElements.push(mediaElement);
+        this.allMediaElements.push(mediaElement);
         break;
 
       case 'param':
@@ -224,6 +228,7 @@ export default class MediaInfo {
       case 'video':
         mediaElement = new MediaElement(domElement);
         this.videoElements.push(mediaElement);
+        this.allMediaElements.push(mediaElement);
         break;
 
       default:

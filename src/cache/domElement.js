@@ -430,7 +430,7 @@ function checkIsTabStop (node) {
  *
  * @param  {Object}  node - DOM node
  *
- * @return Returns value of tabindex if defined
+ * @return see @desc
  */
 
 function checkTabIndex (node) {

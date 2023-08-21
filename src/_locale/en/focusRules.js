@@ -36,7 +36,7 @@ export const focusRules = {
       TECHNIQUES: [
         'Use document order to place related interactive items in a meaningful sequence.',
         'The @tabindex@ atttribute value (i.e. values greater than 0) can be used to change the sequence of focusable elements in a web page or make non-interactive elements part of the "tab" order of the page.',
-        'A @tabindex@ values of less than 0 remove redundent interactive elements from the sequential focus order.'
+        'A @tabindex@ values of less than 0 remove an interactive element form the tab sequence of the page and is commonly used for widgets with child elemnts (e.g. menus, treegrids..).'
       ],
       MANUAL_CHECKS: [
         'Use the "tab" key to move focus through the links, form controls, embedded applications and widgets on the page.',

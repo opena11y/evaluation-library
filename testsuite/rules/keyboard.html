@@ -16,8 +16,8 @@
 
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', () => {
-        executeTest('KEYBOARD_1: All widgets have keyboard event handlers',  'ID_IFRAME_1A', 'KEYBOARD_1');
-        executeTest('KEYBOARD_1: Some widgets have keyboard event handlers', 'ID_IFRAME_1B', 'KEYBOARD_1');
+        executeTest('KEYBOARD_1: ARIA widgets have keyboard support PART A', 'ID_IFRAME_1A', 'KEYBOARD_1');
+        executeTest('KEYBOARD_1: ARIA widgets have keyboard support PART B', 'ID_IFRAME_1B', 'KEYBOARD_1');
 
         executeTest('KEYBOARD_2: All functionality operable through the keyboard alone (all pass)', 'ID_IFRAME_2A', 'KEYBOARD_2');
         executeTest('KEYBOARD_2: All functionality operable through the keyboard alone (some pass)', 'ID_IFRAME_2B', 'KEYBOARD_2');
@@ -29,8 +29,8 @@
     </script>
 
     <h2>KEYBOARD_1: Widget elements must have keyboard event handlers</h2>
-    <iframe id="ID_IFRAME_1A" src="keyboard/keyboard_1_all_widgets_have_kb_handlers.html"></iframe>
-    <iframe id="ID_IFRAME_1B" src="keyboard/keyboard_1_some_widgets_have_kb_handlers.html"></iframe>
+    <iframe id="ID_IFRAME_1A" src="keyboard/keyboard_1_aria_widgets_part_a.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="keyboard/keyboard_1_aria_widgets_part_b.html"></iframe>
 
     <h2>KEYBOARD_2: All functionality operable through the keyboard alone</h2>
     <iframe id="ID_IFRAME_2A" src="keyboard/keyboard_2_all_pass.html"></iframe>

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Interactive functionality must be keyboard operable | OpenA11y Evaluation Library 2.0</title>
+        <title>Sequential tab order must be meaningful | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Interactive functionality must be keyboard operable</li>
+          <li class="breadcrumb-item active">Sequential tab order must be meaningful</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Interactive functionality must be keyboard operable</h1>
+            <h1 id="h1-title">Rule: Sequential tab order must be meaningful</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -69,7 +69,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>All functionality provided by the interactive elements on the page must be operable through the keyboard interface.</td>
+  <td>The sequential tab order of links, form controls, and widgets must be meaningful.</td>
 </tr>
 
                   
@@ -78,13 +78,15 @@
   <td>
     <ul>
       
-      <li>Many users are unable to use the mouse, either because of visual impairments, which make it difficult or impossible for them to see the pointer, or motor skill impairments, which prevent them from being able to accurately position the mouse pointer.</li>
+      <li>Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.</li>
       
-      <li>This requirement is not intended to discourage support for mouse behaviors, but rather to make sure there is an equivalent way of using the keyboard for all interactive tasks that can be performed using the mouse.</li>
+      <li>Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.</li>
       
-      <li>The recommended and most efficient way to include keyboard support for interactive elements is to follow computing platform conventions. This will make it it easier for all users to benefit from keyboard support, since the keystrokes and shortcuts will be easier to discover and familiar to the greatest number of users.</li>
+      <li>When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the <code>tabindex</code> attribute value in managing keyboard focus.</li>
       
-      <li>Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.</li>
+      <li>The ARIA Authoring Practices Guide identifies how to use <code>tabindex</code> to help manage keyboard focus for widget roles.</li>
+      
+      <li>NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.</li>
       
     </ul>
   </td>
@@ -156,13 +158,19 @@
   <td>
     <ul>
       
-      <li>Use the WAI-ARIA 1.0 Authoring Practices to determine the keyboard support that is appropriate for common widget types.</li>
+      <li>HTML form controls and link elements do not need a <code>tabindex</code> valuable to be part of the sequential tab order, assigning a <code>tabindex</code> value to one of these elements means you intend to change their default behavior.</li>
       
-      <li>Use keyboard event handers to implement keyboard support for interactive behaviors defined on the page.</li>
+      <li>Setting <code>tabindex</code> attribute to <code>0</code> allows an element to become focusable and makes it part of the tab sequence of the page</li>
+      
+      <li>Setting <code>tabindex</code> attribute to <code>-1</code> allows an element to become focusable through related keyboard event handlers through scripting</li>
+      
+      <li>Use the ARIA Authoring Practices to define keyboard support that is appropriate for widget roles.</li>
+      
+      <li>Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.</li>
       
       <li>Avoid using <code>object</code> and <code>embed</code> elements due to the difficulty in providing the corresponding keyboard support for all of their inherent interactive behaviors.</li>
       
-      <li>Avoid using <code>tabindex</code> values greater than 0 to change tabbing order, since tabbing behavior is inconsistent and therefore unpredictable across web browsers.</li>
+      <li>Avoid using <code>tabindex</code> values greater than 0 to change tabbing order, since tab sequence for values greater than 0 is inconsistent and therefore can be unpredictable across web browsers.</li>
       
     </ul>
   </td>
