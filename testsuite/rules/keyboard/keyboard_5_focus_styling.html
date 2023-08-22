@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Keyboard Rule 5: Styling Keyboard Focus</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      
+    <style type="text/css">
+      
+      label {
+        display: block; 
+      }
+      
+      div > label { 
+        margin-top: 1em;
+      }
+
+      fieldset {
+        margin-top: 1em;
+      }
+    </style>  
+  </head>
+
+  <body class="KEYBOARD_2_MC">
+    
+    <header>
+      <h1>Focus Rules</h1>
+    </header>
+
+    <div role="main">
+      
+      <h1>Keyboard Rule 5: Styling Keyboard Focus</h1>
+
+      <div><a name="test"><code>a[name]</code> element used as reference, not part of tab sequence</a></div>
+      <div><a href="test.html"  class="KEYBOARD_2_MC"><code>a[href]</code> element with <code>href</code>, part of tab sequence</a></div>
+
+      <button class="KEYBOARD_2_MC">Test button 1</button>
+      <div role="button"  class="KEYBOARD_2_MC">Test Button 2: no tabindex</div>
+      <div role="button" tabindex="0"   class="KEYBOARD_2_MC">Test Button 3: tabindex=0</div>
+      <div role="button" tabindex="-1"  class="KEYBOARD_2_MC">Test Button 4: tabindex=-1</div>
+      <div role="button" id="button5"   class="KEYBOARD_2_MC">Test Button 5: tabindex=0</div>
+      <div role="button" id="button6"   class="KEYBOARD_2_MC">Test Button 6: tabindex=0</div>
+
+      <script>
+        document.getElementById('button5').setAttribute('tabIndex', '0');
+        document.getElementById('button6').tabIndex = 0;
+      </script>
+
+      <label for="input1">Textbox 1</label>
+      <input id="input1"  class="KEYBOARD_2_MC">
+      <input class="KEYBOARD_2_MC">
+
+      <input type="checkbox" tabindex="-1" class="KEYBOARD_2_MC">
+
+      <label for="select1">Select with onchange event</label>
+      <select id="select1" onchange="onSelectChangeEvent()" class="KEYBOARD_2_MC">
+        <option class="KEYBOARD_2_MC">Option 1</option>
+        <option class="KEYBOARD_2_MC">Option 2</option>
+        <option class="KEYBOARD_2_MC">Option 3</option>
+        <option class="KEYBOARD_2_MC">Option 4</option>
+      </select>
+
+      <div role="menu" class="KEYBOARD_2_MC">
+        <div role="menuitem" class="KEYBOARD_2_MC">Item 1</div>
+        <div role="menuitem" class="KEYBOARD_2_MC">Item 2</div>
+        <div role="menuitem" class="KEYBOARD_2_MC">Item 3</div>
+        <div role="menuitem" class="KEYBOARD_2_MC">Item 4</div>
+      </div>
+
+  </body>
+</html>
+
+

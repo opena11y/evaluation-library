@@ -14151,6 +14151,57 @@ const controlRules$1 = {
           url:   'https://html.spec.whatwg.org/multipage/forms.html#the-form-element'
         },
       ]
+  },
+
+  CONTROL_12: {
+      ID:         'Control 12',
+      DEFINITION: 'Forms must use @input[type="submit"]@ or other form control buttons for submitting forms.',
+      SUMMARY:    'Forms submitted using buttons',
+      TARGET_RESOURCES_DESC: '@input[type="submit"]@, @input[type="button"]@, @input[type="image"]@, @button@, @[role="button"]@',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that the form has uses a button to submit the form.',
+        MANUAL_CHECK_P: 'Verify that each of the %N_MC forms has a button used to submit the form.',
+        FAIL_S:    'No button elements found for submitting the form.',
+        FAIL_P:    'No button elements found for submitting %N_MC forms.',
+        HIDDEN_S:  'The form that is hidden was not evaluated.',
+        HIDDEN_P:  'The %N_H forms that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'No form controls on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1: 'The form has an @input[type="submit"]@.',
+        ELEMENT_PASS_2: '@input[type="submit"]@ is used for form submission.',
+        ELEMENT_FAIL_1: 'The form has no button elements.',
+        ELEMENT_MC_1: 'Verify that the button element contained in the form can be used for form submission.',
+        ELEMENT_MC_2: 'Verify that at least one of the %1 button elements contained in the form can be used for form submission.',
+        ELEMENT_MC_3: 'Verify if the @input[type="%1"]@ element can be used to  submit the form.',
+        ELEMENT_MC_4: 'Verify if the @button@ element can be used to  submit the form.',
+        ELEMENT_MC_5: 'Verify if the @%1[role="button"]@ element can be used to  submit the form.',
+        ELEMENT_HIDDEN_1: '@form@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@input[type="submit"]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_3: '@input[type="%1"]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_4: '@button@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_5: '@%1[role="button"]@ element was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Using a submit button allows users to easily identify and control how to  submit form information to a server for processing.  Forms that are submitted through changes in focus or selection may result in users prematurely submitting the form or not being aware they submitted the form.'
+      ],
+      TECHNIQUES: [
+        'The preferred technique for submitting forms is with the use of the input[type="submit"] form control.',
+        'An alternative techniques include using other HTML form control elements, including @input[type="button"]@, @input[type="image"]@ or @button@ elements with an accessible name indicating that the button is for submitting form information.',
+        'In the case when a non-form control element (e.g. @a@ or @div@ element) is being used to submit the form, the element can use ARIA [role="button"] attribute with the accessible name indicating that the button is for submitting form information.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
+          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H32: Providing submit buttons',
+          url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+        }
+      ]
   }
 };
 
@@ -15125,7 +15176,191 @@ const keyboardRules$1 = {
         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
       }
     ]
+  },
+
+  KEYBOARD_4: {
+    ID:                    'Keyboard 4',
+    DEFINITION:            'Avoid @tabindex@ values greater than 0.',
+    SUMMARY:               'Avoid @tabindex@ > 0',
+    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements, and elements with widget roles with @tabindex@ values',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the element with @tabindex@ greater than 0 is consistent across browsers and operating systems.',
+      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex@ greater than 0 is consistent across browsers and operating systems.',
+      HIDDEN_S:           'The link, form control, or widget element that is hidden does not need to be tested for focus order.',
+      HIDDEN_P:           'The %N_H links, form controls and/or widgets that are hidden do not need to be tested for focus order.',
+      NOT_APPLICABLE:     'No elements with @tabindex@ value greater than 0'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1:      'Verify the @%1@ element with the @tabindex@ value of %2 is consistently in he same sequential order across browsers and operating systemsx.',
+      ELEMENT_HIDDEN_1:  'The @%1@ element with the @tabindex=%2@ was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
+      'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
+      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the @tabindex@ attribute value in managing keyboard focus.',
+      'The ARIA Authoring Practices Guide identifies how to use @tabindex@ to help manage keyboard focus for widget roles.',
+      'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
+    ],
+    TECHNIQUES: [
+      'Avoid using @tabindex@ values greater than 0 to change tabbing order, since tab sequence for values greater than 0 is inconsistent and therefore can be unpredictable across web browsers.',
+      'HTML form controls and link elements do not need a @tabindex@ valuable to be part of the sequential tab order, assigning a @tabindex@ value to one of these elements means you intend to change their default behavior.',
+      'Setting @tabindex@ attribute to @0@ allows an element to become focusable and makes it part of the tab sequence of the page',
+      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers through scripting',
+      'Use the ARIA Authoring Practices to define keyboard support that is appropriate for widget roles.',
+      'Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.'
+    ],
+    MANUAL_CHECKS: [
+      'Use the tab key to verify the tab sequence of interactive elements of the page is in a logical.',
+      'Make sure the elements with @tabindex@ > 0 make sense in the tab sequence of the page.',
+      'Test on both Windows, macOS, Android and iOS using more than one browser to make sure there is consistent keyboard navigation support.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML: Focus',
+        url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
+        url:   'https://www.w3.org/TR/wai-aria-1.2/#managingfocus'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C ARIA Authoring Practices: Design Patterns',
+        url:   'https://www.w3.org/WAI/ARIA/apg/patterns/'
+      }
+    ]
+  },
+
+  KEYBOARD_5: {
+      ID:                    'Keyboard 5',
+      DEFINITION:            'The element with keyboard focus must have a visible focus style that is different from the non-focus state.',
+      SUMMARY:               'Focus must be visible',
+      TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements and elements with widget roles with @tabindex@ values',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Use the "tab" key to move focus between links, form controls, embedded apps and widgets and check the visibility of focus styling for each element as it receives focus.',
+        MANUAL_CHECK_P:     'Use the "tab" key to move focus between links, form controls, embedded apps and widgets and check the visibility of focus styling for each element as it receives focus.',
+        HIDDEN_S: 'The link, form control, embedded app or widget element that is hidden does not need to be tested for focus order.',
+        HIDDEN_P: 'The %N_H links, form controls, embedded apps and/or widgets that are hidden do not need to be tested for focus order.',
+        NOT_APPLICABLE:  'No focusable elements on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...).',
+        PAGE_MC_2:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 interactive elements are hidden.',
+        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1[role="%2"]@ element includes a solid discernable focus border at least 2 pixels in width.',
+        ELEMENT_MC_2:     'Verify the visual focus styling of the @%1@ element includes a solid discernable focus border at least 2 pixels in width.',
+        ELEMENT_HIDDEN_1: '%1[@role@="%2"] element is hidden, so is not visible for observing focus styling.',
+        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for observing the focus styling.'
+      },
+      PURPOSES: [
+        'Many browsers don\'t provide a prominent or consistent visible keyboard focus styling for interactive elements, making it difficult for users to identify and track the element with keyboard focus.',
+        'Author defined visible keyboard focus style makes it easier for users to know which interactive element has keyboard focus and provides more consistent user experience between browsers and operating systems.'
+      ],
+      TECHNIQUES: [
+        'Use CSS psuedo element selector @:focus@ to change the styling of elements with keyboard focus to include a 2 pixel border.',
+        'Use @focus@ and @blur@ event handlers on checkboxes and radio buttons to change the styling of not only the form control, but also its label text to make it easier to see.',
+        'Styling changes should include creating at least a 2 pixel border around the interactive element and its label, typically using the CSS @border@ or @outline@ properties.',
+        'For consistent look and feel to the website it is often useful for the focus and hover styles to be the same or similar.'
+      ],
+      MANUAL_CHECKS: [
+        'Use the the keyboard (i.e. typically he "tab" key, but in the case of widgets other keys) to move focus through the links, form controls, embedded applications and widgets on the page.',
+        'Check if the element with keyboard focus is clearly visible for all focusable elements on the page as you move focus between elements, and that it changes more than just color (i.e. border/outline around element with focus).',
+        'Test keyboard focus styling using more than one browser and operating system, since there is a wide varability of between operating systems and browsers for styling keyboard focus.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C15: Using CSS to change the presentation of a user interface component when it receives focus ',
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/C15'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G195: Using an author-supplied, highly visible focus indicator',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
+        }
+      ]
+  },
+
+  KEYBOARD_6: {
+      ID:                    'Keyboard 6',
+      DEFINITION:            'The target of a link should result in focus in the content the window if the target results in more than one window opening.',
+      SUMMARY:               'Target focus should be in content window',
+      TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Check the link to make sure that if the link opens more than one window that the focus is in the content window.',
+        MANUAL_CHECK_P:     'Check the %N_MC links to make sure that if any of the links opens more than one window that the focus is in the content window.',
+        HIDDEN_S: 'The link element that is hidden does not need to be tested for content focus.',
+        HIDDEN_P: 'The %N_H link elements that are hidden do not need to be tested for content focus.',
+        NOT_APPLICABLE:  'No link elements on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'If the target of the link opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
+        ELEMENT_HIDDEN_1: 'The link is hidden, so cannot open any new windows.'
+      },
+      PURPOSES: [
+        'User\'s can become disoriented if the focus causes unpredictable actions, including new URLs and popup windows for advertisements or promotions.'
+      ],
+      TECHNIQUES: [
+        'Do not link to URLs that open multiple windows and do not manage the focus to be in the content windoow the user was expecting by following the link.'
+      ],
+      MANUAL_CHECKS: [
+        'After selecting a link and if it opens multiple windows, make sure the keyboard focus is in the content window.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G200: Opening new windows and tabs from a link only when necessary',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G201: Giving users advanced warning when opening a new window',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
+        }
+      ]
+  },
+
+  KEYBOARD_7: {
+      ID:                    'Keyboard 7',
+      DEFINITION:            '@select@ elements with @onchange@ or other event handlers must not automatically change the user\'s context when keyboard focus moves between options.',
+      SUMMARY:               '@select@ must not change context',
+      TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Check the @select@ element to make sure that when keyboard focus moves between options does not cause a change in context (e.g. moving to a new URL or focus being moved from the @select@ element).',
+        MANUAL_CHECK_P:     'Check the %N_MC @select@ elements to make sure that when keyboard focus moves between options in each control does not cause a change in context (e.g. moving to a new URL or focus being moved from the @select@ element).',
+        HIDDEN_S: 'The @select@ element that is hidden does not need to be tested for automatically changing user context.',
+        HIDDEN_P: 'The %N_H @select@ elements that are hidden do not need to be tested for automatically changing user context.',
+        NOT_APPLICABLE:  'No @select@ elements on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Check to make sure moving keyboard focus between options in the @select@ box does not move focus from the list of options.',
+        ELEMENT_HIDDEN_1: '@select@ element is hidden and therefore not operable by any user.'
+      },
+      PURPOSES: [
+        'User\'s can become disoriented if the focus changes cause unpredicatable actions.',
+        'When the user is using the kyboard to explore @select@ box options, the focus must stay on the options, until the user selects one of the options.'
+      ],
+      TECHNIQUES: [
+        'Do not use @onchange@ event handlers on @select@ elements.',
+        'Use selections should be made using the enter key.'
+      ],
+      MANUAL_CHECKS: [
+        'Move focus to the @selection@ box and use the keyboard to move the focus between options, check to make sure the focus changes are not causing the context to change (i.e. focus movig to a new window or focus moving from the current option in the select box).'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G200: Opening new windows and tabs from a link only when necessary',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G201: Giving users advanced warning when opening a new window',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
+        }
+      ]
   }
+
 };
 
 /* landmarkRules.js */
@@ -21036,6 +21271,120 @@ const controlRules = [
       });
     }
   } // end validate function
+},
+
+/**
+ * @object CONTROL_12
+ *
+ * @desc Form include a submit button
+ *
+ */
+
+{ rule_id             : 'CONTROL_12',
+  last_updated        : '2023-08-22',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  wcag_primary_id     : '3.2.2',
+  wcag_related_ids    : [],
+  target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug$k.log(`[Control 12]: ${dom_cache} ${rule_result}`);
+
+/*
+
+    function getChildButtonDomElements (ce) {
+      let buttonDomElements = [];
+
+      ce.childControlElements.forEach( cce => {
+        const de = cce.domElement;
+        if (de.role === 'button') {
+          buttonDomElements.push(de);
+        }
+        buttonDomElements = buttonDomElements.concat(getChildButtonDomElements(cce));
+      });
+
+      return buttonDomElements;
+    }
+
+    dom_cache.controlInfo.allFormElements.forEach( fce => {
+      const de = fce.domElement;
+      if (de.visibility.isVisibleOnScreen) {
+        const buttonDomElements = getChildButtonDomElements(fce);
+        let submitButtons = 0;
+        let otherButtons  = 0;
+
+        buttonDomElements.forEach( b => {
+          if (b.tagName === 'input') {
+            const type = b.node.getAttribute('type');
+            if (type === 'submit') {
+              if (b.visibility.isVisibleOnScreen) {
+                submitButtons += 1;
+                rule_result.addElementResult(TEST_RESULT.PASS, b, 'ELEMENT_PASS_2', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_2', []);
+              }
+            }
+            else {
+              if ((type === 'button') || (type === "image")) {
+               if (b.visibility.isVisibleOnScreen) {
+                  otherButtons += 1;
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_3', [type]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_3', [type]);
+                }
+              }
+            }
+          }
+          else {
+            if (b.tagName === 'button') {
+             if (b.visibility.isVisibleOnScreen) {
+                otherButtons += 1;
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_4', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_4', []);
+              }
+            } else {
+              if (b.role === 'button') {
+               if (b.visibility.isVisibleOnScreen) {
+                  otherButtons += 1;
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_5', [b.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_5', [b.tagName]);
+                }
+              }
+            }
+          }
+        });
+
+        if (submitButtons > 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+        }
+        else {
+          if (otherButtons > 0) {
+            if (otherButtons === 1) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [otherButtons]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+      }
+    });
+
+    */
+  } // end validation function
 }
 
 ];
@@ -21720,6 +22069,17 @@ const imageRules = [
 const debug$h = new DebugLogging('Keyboard Rules', false);
 debug$h.flag = true;
 
+/* helper functions */
+
+
+function isNativeTabStop (domElement) {
+  return domElement.isLabelable || ['a', 'area', 'button'].includes(domElement.tagName);
+}
+
+function isTabStop (domElement) {
+  return isNativeTabStop(domElement) ||
+         ((typeof domElement.tabIndex === 'number') && (domElement.tabIndex >= 0));
+}
 
 /*
  * OpenA11y Rules
@@ -21775,15 +22135,6 @@ const keyboardRules = [
 
       let mcCount = 0;
       let passCount = 0;
-
-      function isNativeTabStop (domElement) {
-        return domElement.isLabelable || ['a', 'area', 'button'].includes(domElement.tagName);
-      }
-
-      function isTabStop (domElement) {
-        return isNativeTabStop(domElement) ||
-               ((typeof domElement.tabIndex === 'number') && (domElement.tabIndex >= 0));
-      }
 
       dom_cache.allDomElements.forEach( de => {
         if (isTabStop(de)) {
@@ -21862,7 +22213,161 @@ const keyboardRules = [
         }
       });
      } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_4
+   *
+   * @desc Check elements with tabindex > 0
+   */
+
+  { rule_id             : 'KEYBOARD_4',
+    last_updated        : '2023-08-21',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    wcag_primary_id     : '2.1.2',
+    wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
+    target_resources    : ['object'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+        if (isTabStop(de)) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.tabIndex > 0 ) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
+          }
+        }
+      });
+     } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_5
+   *
+   * @desc Focus style
+   */
+
+  { rule_id             : 'KEYBOARD_5',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    wcag_primary_id     : '2.4.7',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
+    target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$h.log(`[KEYBOARD 5]: ${dom_cache} ${rule_result}`);
+
+/*
+      let controlCount = 0
+      let hiddenCount = 0;
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+        if (de.isInteractiveElement ||
+            de.ariaInfo.isWidget) {
+          if (de.visibility.isVisibleOnScreen) {
+            controlCount += 1;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+            }
+          }
+          else {
+            hiddenCount += 1;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+            }
+          }
+        }
+      });
+
+      if (controlCount > 1) {
+        if (hiddenCount == 0) {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+        }
+        else {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
+        }
+      }
+      */
+    } // end validation function
+
+  },
+
+  /**
+   * @object KEYBOARD_6
+   *
+   * @desc Target of a link does not go to a page with popup windows
+   */
+
+  { rule_id             : 'KEYBOARD_6',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    wcag_primary_id     : '3.2.1',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+    target_resources    : ['a', 'area', 'select'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$h.log(`[KEYBOARD 6]: ${dom_cache} ${rule_result}`);
+
+/*
+      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+        if (de.visibility.isVisibleOnScreen) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+      */
+     } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_7
+   *
+   * @desc Select elements with onchange events
+   */
+
+  { rule_id             : 'KEYBOARD_7',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    wcag_primary_id     : '3.2.2',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+    target_resources    : ['select'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$h.log(`[KEYBOARD 7]: ${dom_cache} ${rule_result}`);
+
+/*
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+        if (de.tagName === 'select') {
+          if (de.visibility.isVisibleOnScreen) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+      */
+
+     } // end validation function
   }
+
 ];
 
 /* landmarkRules.js */
@@ -26393,8 +26898,8 @@ class RuleResult {
     else {
       if (failures > 0) {
         prefix =  this.isRuleRequired() ?
-                  getCommonMessage('ruleResult', RESULT_VALUE.VIOLATION) :
-                  getCommonMessage('ruleResult', RESULT_VALUE.WARNING);
+                  getCommonMessage('baseResult', RESULT_VALUE.VIOLATION) :
+                  getCommonMessage('baseResult', RESULT_VALUE.WARNING);
 
         message = (failures === 1) ?
                   this.getMessage('FAIL_S') :
@@ -26403,7 +26908,7 @@ class RuleResult {
       }
 
       if (summary.manual_checks > 0) {
-        prefix = getCommonMessage('ruleResult', RESULT_VALUE.MANUAL_CHECK);
+        prefix = getCommonMessage('baseResult', RESULT_VALUE.MANUAL_CHECK);
         message = (summary.manual_checks === 1) ?
                   this.getMessage('MANUAL_CHECK_S') :
                   this.getMessage('MANUAL_CHECK_P');
@@ -26412,7 +26917,7 @@ class RuleResult {
     }
 
     if (summary.hidden > 0) {
-        prefix = getCommonMessage('ruleResult', RESULT_VALUE.HIDDEN);
+        prefix = getCommonMessage('baseResult', RESULT_VALUE.HIDDEN);
       message = (summary.hidden === 1) ?
                 this.getMessage('HIDDEN_S') :
                 this.getMessage('HIDDEN_P');

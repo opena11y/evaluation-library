@@ -283,8 +283,8 @@ export default class RuleResult {
     else {
       if (failures > 0) {
         prefix =  this.isRuleRequired() ?
-                  getCommonMessage('ruleResult', RESULT_VALUE.VIOLATION) :
-                  getCommonMessage('ruleResult', RESULT_VALUE.WARNING);
+                  getCommonMessage('baseResult', RESULT_VALUE.VIOLATION) :
+                  getCommonMessage('baseResult', RESULT_VALUE.WARNING);
 
         message = (failures === 1) ?
                   this.getMessage('FAIL_S') :
@@ -293,7 +293,7 @@ export default class RuleResult {
       }
 
       if (summary.manual_checks > 0) {
-        prefix = getCommonMessage('ruleResult', RESULT_VALUE.MANUAL_CHECK);
+        prefix = getCommonMessage('baseResult', RESULT_VALUE.MANUAL_CHECK);
         message = (summary.manual_checks === 1) ?
                   this.getMessage('MANUAL_CHECK_S') :
                   this.getMessage('MANUAL_CHECK_P');
@@ -302,7 +302,7 @@ export default class RuleResult {
     }
 
     if (summary.hidden > 0) {
-        prefix = getCommonMessage('ruleResult', RESULT_VALUE.HIDDEN);
+        prefix = getCommonMessage('baseResult', RESULT_VALUE.HIDDEN);
       message = (summary.hidden === 1) ?
                 this.getMessage('HIDDEN_S') :
                 this.getMessage('HIDDEN_P');

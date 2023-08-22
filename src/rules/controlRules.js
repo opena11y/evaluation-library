@@ -584,6 +584,120 @@ export const controlRules = [
       });
     }
   } // end validate function
+},
+
+/**
+ * @object CONTROL_12
+ *
+ * @desc Form include a submit button
+ *
+ */
+
+{ rule_id             : 'CONTROL_12',
+  last_updated        : '2023-08-22',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  wcag_primary_id     : '3.2.2',
+  wcag_related_ids    : [],
+  target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug.log(`[Control 12]: ${dom_cache} ${rule_result}`);
+
+/*
+
+    function getChildButtonDomElements (ce) {
+      let buttonDomElements = [];
+
+      ce.childControlElements.forEach( cce => {
+        const de = cce.domElement;
+        if (de.role === 'button') {
+          buttonDomElements.push(de);
+        }
+        buttonDomElements = buttonDomElements.concat(getChildButtonDomElements(cce));
+      });
+
+      return buttonDomElements;
+    }
+
+    dom_cache.controlInfo.allFormElements.forEach( fce => {
+      const de = fce.domElement;
+      if (de.visibility.isVisibleOnScreen) {
+        const buttonDomElements = getChildButtonDomElements(fce);
+        let submitButtons = 0;
+        let otherButtons  = 0;
+
+        buttonDomElements.forEach( b => {
+          if (b.tagName === 'input') {
+            const type = b.node.getAttribute('type');
+            if (type === 'submit') {
+              if (b.visibility.isVisibleOnScreen) {
+                submitButtons += 1;
+                rule_result.addElementResult(TEST_RESULT.PASS, b, 'ELEMENT_PASS_2', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_2', []);
+              }
+            }
+            else {
+              if ((type === 'button') || (type === "image")) {
+               if (b.visibility.isVisibleOnScreen) {
+                  otherButtons += 1;
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_3', [type]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_3', [type]);
+                }
+              }
+            }
+          }
+          else {
+            if (b.tagName === 'button') {
+             if (b.visibility.isVisibleOnScreen) {
+                otherButtons += 1;
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_4', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_4', []);
+              }
+            } else {
+              if (b.role === 'button') {
+               if (b.visibility.isVisibleOnScreen) {
+                  otherButtons += 1;
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, b, 'ELEMENT_MC_5', [b.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.HIDDEN, b, 'ELEMENT_HIDDEN_5', [b.tagName]);
+                }
+              }
+            }
+          }
+        });
+
+        if (submitButtons > 0) {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+        }
+        else {
+          if (otherButtons > 0) {
+            if (otherButtons === 1) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [otherButtons]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+      }
+    });
+
+    */
+  } // end validation function
 }
 
 ];

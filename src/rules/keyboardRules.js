@@ -12,6 +12,17 @@ import DebugLogging  from '../debug.js';
 const debug = new DebugLogging('Keyboard Rules', false);
 debug.flag = true;
 
+/* helper functions */
+
+
+function isNativeTabStop (domElement) {
+  return domElement.isLabelable || ['a', 'area', 'button'].includes(domElement.tagName);
+}
+
+function isTabStop (domElement) {
+  return isNativeTabStop(domElement) ||
+         ((typeof domElement.tabIndex === 'number') && (domElement.tabIndex >= 0));
+}
 
 /*
  * OpenA11y Rules
@@ -67,15 +78,6 @@ export const keyboardRules = [
 
       let mcCount = 0;
       let passCount = 0;
-
-      function isNativeTabStop (domElement) {
-        return domElement.isLabelable || ['a', 'area', 'button'].includes(domElement.tagName);
-      }
-
-      function isTabStop (domElement) {
-        return isNativeTabStop(domElement) ||
-               ((typeof domElement.tabIndex === 'number') && (domElement.tabIndex >= 0));
-      }
 
       dom_cache.allDomElements.forEach( de => {
         if (isTabStop(de)) {
@@ -154,7 +156,161 @@ export const keyboardRules = [
         }
       });
      } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_4
+   *
+   * @desc Check elements with tabindex > 0
+   */
+
+  { rule_id             : 'KEYBOARD_4',
+    last_updated        : '2023-08-21',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    wcag_primary_id     : '2.1.2',
+    wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
+    target_resources    : ['object'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+        if (isTabStop(de)) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.tabIndex > 0 ) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
+          }
+        }
+      });
+     } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_5
+   *
+   * @desc Focus style
+   */
+
+  { rule_id             : 'KEYBOARD_5',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    wcag_primary_id     : '2.4.7',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
+    target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[KEYBOARD 5]: ${dom_cache} ${rule_result}`);
+
+/*
+      let controlCount = 0
+      let hiddenCount = 0;
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+        if (de.isInteractiveElement ||
+            de.ariaInfo.isWidget) {
+          if (de.visibility.isVisibleOnScreen) {
+            controlCount += 1;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+            }
+          }
+          else {
+            hiddenCount += 1;
+            if (de.hasRole) {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+            }
+          }
+        }
+      });
+
+      if (controlCount > 1) {
+        if (hiddenCount == 0) {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+        }
+        else {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
+        }
+      }
+      */
+    } // end validation function
+
+  },
+
+  /**
+   * @object KEYBOARD_6
+   *
+   * @desc Target of a link does not go to a page with popup windows
+   */
+
+  { rule_id             : 'KEYBOARD_6',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    wcag_primary_id     : '3.2.1',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+    target_resources    : ['a', 'area', 'select'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[KEYBOARD 6]: ${dom_cache} ${rule_result}`);
+
+/*
+      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+        if (de.visibility.isVisibleOnScreen) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+        }
+      });
+      */
+     } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_7
+   *
+   * @desc Select elements with onchange events
+   */
+
+  { rule_id             : 'KEYBOARD_7',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    wcag_primary_id     : '3.2.2',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+    target_resources    : ['select'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[KEYBOARD 7]: ${dom_cache} ${rule_result}`);
+
+/*
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+        if (de.tagName === 'select') {
+          if (de.visibility.isVisibleOnScreen) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+      */
+
+     } // end validation function
   }
+
 ];
 
 

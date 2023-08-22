@@ -25,6 +25,17 @@
 
         executeTest('KEYBOARD_3: Keyboard Trap', 'ID_IFRAME_3', 'KEYBOARD_3');
 
+        executeTest('KEYBOARD_4: Avoid tabindex > 0', 'ID_IFRAME_4', 'KEYBOARD_4');
+
+/*
+        executeTest('KEYBOARD_5: Focus styling', 'ID_IFRAME_5', 'KEYBOARD_5');
+
+        executeTest('KEYBOARD_6: Link Focus context', 'ID_IFRAME_6', 'KEYBOARD_6');
+
+        executeTest('KEYBOARD_7: Select controls with onchange events', 'ID_IFRAME_7', 'KEYBOARD_7');
+
+*/
+
       });
     </script>
 
@@ -39,7 +50,19 @@
 
     <h2>KEYBOARD_3: Keyboard Trap</h2>
     <iframe id="ID_IFRAME_3" src="keyboard/keyboard_3_keyboard_trap.html"></iframe>
+
+    <h2>KEYBOARD_4: Aviod <code>tabindex</code> > 0</h2>
+    <iframe id="ID_IFRAME_4" src="keyboard/keyboard_4_tabindex_gt_0.html"></iframe>
     
+    <h2>KEYBOARD_5: Focus styling</h2>
+    <iframe id="ID_IFRAME_5" src="keyboard/keyboard_5_focus_styling.html"></iframe>
+
+    <h2>KEYBOARD_6: Link Focus context</h2>
+    <iframe id="ID_IFRAME_6" src="keyboard/keyboard_6_link_focus.html"></iframe>
+
+    <h2>KEYBOARD_7: Select controls with onchange events</h2>
+    <iframe id="ID_IFRAME_7" src="keyboard/keyboard_7_select_with_onchange_event.html"></iframe>
+
   </body>
 
 </html>

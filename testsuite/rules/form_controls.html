@@ -28,6 +28,11 @@
         executeTest('CONTROL_10: Form controls should have unique labels',              'ID_IFRAME_10A',  'CONTROL_10');
         executeTest('CONTROL_10: Form controls should have unique labels (Tab Panels)', 'ID_IFRAME_10B',  'CONTROL_10');
         executeTest('CONTROL_11: Submit and reset buttons must be unique',              'ID_IFRAME_11',  'CONTROL_11');
+
+/*
+        executeTest('FOCUS 12A: Submit forms with buttons',                      'ID_IFRAME_12A', 'KEYBOARD_12');
+        executeTest('FOCUS 12B: Submit forms with buttons (no visible buttons)', 'ID_IFRAME_12B', 'KEYBOARD_12');
+*/
       });
     </script>
 
@@ -65,6 +70,11 @@
 
     <h2>Submit and reset buttons must be unique</h2>
     <iframe id="ID_IFRAME_11" src="form_controls/form_controls_11_submit_reset_accessible_labels.html"></iframe>
+
+    <h2>Forms submitted with buttons</h2>
+    <iframe id="ID_IFRAME_12A" src="form_controls/form_control_12_submit_forms_with_buttons.html"></iframe>
+    <iframe id="ID_IFRAME_12B" src="form_controls/form_control_12_submit_forms_with_buttons_no_visible_controls.html"></iframe>
+
 
   </body>
 

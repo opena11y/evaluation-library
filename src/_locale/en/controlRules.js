@@ -634,5 +634,56 @@ export const controlRules = {
           url:   'https://html.spec.whatwg.org/multipage/forms.html#the-form-element'
         },
       ]
+  },
+
+  CONTROL_12: {
+      ID:         'Control 12',
+      DEFINITION: 'Forms must use @input[type="submit"]@ or other form control buttons for submitting forms.',
+      SUMMARY:    'Forms submitted using buttons',
+      TARGET_RESOURCES_DESC: '@input[type="submit"]@, @input[type="button"]@, @input[type="image"]@, @button@, @[role="button"]@',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that the form has uses a button to submit the form.',
+        MANUAL_CHECK_P: 'Verify that each of the %N_MC forms has a button used to submit the form.',
+        FAIL_S:    'No button elements found for submitting the form.',
+        FAIL_P:    'No button elements found for submitting %N_MC forms.',
+        HIDDEN_S:  'The form that is hidden was not evaluated.',
+        HIDDEN_P:  'The %N_H forms that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'No form controls on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1: 'The form has an @input[type="submit"]@.',
+        ELEMENT_PASS_2: '@input[type="submit"]@ is used for form submission.',
+        ELEMENT_FAIL_1: 'The form has no button elements.',
+        ELEMENT_MC_1: 'Verify that the button element contained in the form can be used for form submission.',
+        ELEMENT_MC_2: 'Verify that at least one of the %1 button elements contained in the form can be used for form submission.',
+        ELEMENT_MC_3: 'Verify if the @input[type="%1"]@ element can be used to  submit the form.',
+        ELEMENT_MC_4: 'Verify if the @button@ element can be used to  submit the form.',
+        ELEMENT_MC_5: 'Verify if the @%1[role="button"]@ element can be used to  submit the form.',
+        ELEMENT_HIDDEN_1: '@form@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: '@input[type="submit"]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_3: '@input[type="%1"]@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_4: '@button@ element was not evaluated because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_5: '@%1[role="button"]@ element was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Using a submit button allows users to easily identify and control how to  submit form information to a server for processing.  Forms that are submitted through changes in focus or selection may result in users prematurely submitting the form or not being aware they submitted the form.'
+      ],
+      TECHNIQUES: [
+        'The preferred technique for submitting forms is with the use of the input[type="submit"] form control.',
+        'An alternative techniques include using other HTML form control elements, including @input[type="button"]@, @input[type="image"]@ or @button@ elements with an accessible name indicating that the button is for submitting form information.',
+        'In the case when a non-form control element (e.g. @a@ or @div@ element) is being used to submit the form, the element can use ARIA [role="button"] attribute with the accessible name indicating that the button is for submitting form information.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
+          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H32: Providing submit buttons',
+          url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+        }
+      ]
   }
 };
