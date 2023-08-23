@@ -230,10 +230,8 @@ export const keyboardRules = {
       BASE_RESULT_MESSAGES: {
         PAGE_MC_1:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...).',
         PAGE_MC_2:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 interactive elements are hidden.',
-        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1[role="%2"]@ element includes a solid discernable focus border at least 2 pixels in width.',
-        ELEMENT_MC_2:     'Verify the visual focus styling of the @%1@ element includes a solid discernable focus border at least 2 pixels in width.',
-        ELEMENT_HIDDEN_1: '%1[@role@="%2"] element is hidden, so is not visible for observing focus styling.',
-        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for observing the focus styling.'
+        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1@ element includes a solid discernible focus border at least 2 pixels in width.',
+        ELEMENT_HIDDEN_1: '%1 element is hidden, so is not visible for observing the focus styling.'
       },
       PURPOSES: [
         'Many browsers don\'t provide a prominent or consistent visible keyboard focus styling for interactive elements, making it difficult for users to identify and track the element with keyboard focus.',
@@ -253,11 +251,19 @@ export const keyboardRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C15: Using CSS to change the presentation of a user interface component when it receives focus ',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/C15'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C15.html'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G195: Using an author-supplied, highly visible focus indicator',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G149: Using user interface components that are highlighted by the user agent when they receive focus ',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G149.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G165: Using the default focus indicator for the platform so that high visibility default focus indicators will carry over ',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G165.html'
         }
       ]
   },

@@ -174,11 +174,9 @@ export const keyboardRules = [
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
-        if (isTabStop(de)) {
+        if (isTabStop(de) && de.tabIndex > 0) {
           if (de.visibility.isVisibleToAT) {
-            if (de.tabIndex > 0 ) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
-            }
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
           }
           else {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
@@ -203,32 +201,18 @@ export const keyboardRules = [
     target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[KEYBOARD 5]: ${dom_cache} ${rule_result}`);
-
-/*
-      let controlCount = 0
+      let controlCount = 0;
       let hiddenCount = 0;
 
-      dom_cache.controlInfo.allControlElements.forEach( ce => {
-        const de = ce.domElement;
-        if (de.isInteractiveElement ||
-            de.ariaInfo.isWidget) {
-          if (de.visibility.isVisibleOnScreen) {
+      dom_cache.allDomElements.forEach( de => {
+        if (de.ariaInfo.isWidget) {
+          if (de.visibility.isVisibleToAT) {
             controlCount += 1;
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
-            } else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-            }
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
           else {
             hiddenCount += 1;
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
-            }
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
         }
       });
@@ -241,9 +225,8 @@ export const keyboardRules = [
           rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
         }
       }
-      */
-    } // end validation function
 
+    } // end validation function
   },
 
   /**

@@ -15014,10 +15014,8 @@ const keyboardRules$1 = {
       BASE_RESULT_MESSAGES: {
         PAGE_MC_1:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...).',
         PAGE_MC_2:        'Use keyboard commands to check the keyboard focus styling of the %1 interactive elements on the page (i.e. links, form controls, ...); NOTE: %2 interactive elements are hidden.',
-        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1[role="%2"]@ element includes a solid discernable focus border at least 2 pixels in width.',
-        ELEMENT_MC_2:     'Verify the visual focus styling of the @%1@ element includes a solid discernable focus border at least 2 pixels in width.',
-        ELEMENT_HIDDEN_1: '%1[@role@="%2"] element is hidden, so is not visible for observing focus styling.',
-        ELEMENT_HIDDEN_2: '%1 element is hidden, so is not visible for observing the focus styling.'
+        ELEMENT_MC_1:     'Verify the visual focus styling of the @%1@ element includes a solid discernible focus border at least 2 pixels in width.',
+        ELEMENT_HIDDEN_1: '%1 element is hidden, so is not visible for observing the focus styling.'
       },
       PURPOSES: [
         'Many browsers don\'t provide a prominent or consistent visible keyboard focus styling for interactive elements, making it difficult for users to identify and track the element with keyboard focus.',
@@ -15037,11 +15035,19 @@ const keyboardRules$1 = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C15: Using CSS to change the presentation of a user interface component when it receives focus ',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/C15'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C15.html'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G195: Using an author-supplied, highly visible focus indicator',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G149: Using user interface components that are highlighted by the user agent when they receive focus ',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G149.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G165: Using the default focus indicator for the platform so that high visibility default focus indicators will carry over ',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G165.html'
         }
       ]
   },
@@ -21999,11 +22005,9 @@ const keyboardRules = [
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
-        if (isTabStop(de)) {
+        if (isTabStop(de) && de.tabIndex > 0) {
           if (de.visibility.isVisibleToAT) {
-            if (de.tabIndex > 0 ) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
-            }
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
           }
           else {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
@@ -22028,32 +22032,18 @@ const keyboardRules = [
     target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$h.log(`[KEYBOARD 5]: ${dom_cache} ${rule_result}`);
-
-/*
-      let controlCount = 0
+      let controlCount = 0;
       let hiddenCount = 0;
 
-      dom_cache.controlInfo.allControlElements.forEach( ce => {
-        const de = ce.domElement;
-        if (de.isInteractiveElement ||
-            de.ariaInfo.isWidget) {
-          if (de.visibility.isVisibleOnScreen) {
+      dom_cache.allDomElements.forEach( de => {
+        if (de.ariaInfo.isWidget) {
+          if (de.visibility.isVisibleToAT) {
             controlCount += 1;
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
-            } else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-            }
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
           else {
             hiddenCount += 1;
-            if (de.hasRole) {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.role]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
-            }
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
         }
       });
@@ -22066,9 +22056,8 @@ const keyboardRules = [
           rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
         }
       }
-      */
-    } // end validation function
 
+    } // end validation function
   },
 
   /**
