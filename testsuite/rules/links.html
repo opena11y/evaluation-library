@@ -15,17 +15,22 @@
     <script type="module">
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', (event) => {
-        executeTest('LINK_1: Link text must be descriptive', 'ID_IFRAME_1A', 'LINK_1');
-        executeTest('LINK_2: Links with different accessible names must have different url', 'ID_IFRAME_2A', 'LINK_2');
+        executeTest('LINK_1: Link text must be descriptive', 'ID_IFRAME_1', 'LINK_1');
+        executeTest('LINK_2: Links with different accessible names must have different url', 'ID_IFRAME_2', 'LINK_2');
+        executeTest('LINK_3: Target focus should be in content window', 'ID_IFRAME_3', 'LINK_3');
       });
     </script>
 
 
     <h2>Link 1: Links with the same url must have the same accessible name</h2>
-    <iframe id="ID_IFRAME_1A" src="links/link_1_links_share_url_and_name.html"></iframe>
+    <iframe id="ID_IFRAME_1" src="links/link_1_links_share_url_and_name.html"></iframe>
     
     <h2>Link 2: Links with different urls must have different accessible names</h2>
-    <iframe id="ID_IFRAME_2A" src="links/link_2_different_urls_should_have_different_names.html"></iframe>
+    <iframe id="ID_IFRAME_2" src="links/link_2_different_urls_should_have_different_names.html"></iframe>
+
+    <h2>Link 3: Target focus should be in content window</h2>
+    <iframe id="ID_IFRAME_3" src="links/link_3_link_focus.html"></iframe>
+
 
   </body>
 

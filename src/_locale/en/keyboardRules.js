@@ -270,47 +270,6 @@ export const keyboardRules = {
 
   KEYBOARD_6: {
       ID:                    'Keyboard 6',
-      DEFINITION:            'The target of a link should result in focus in the content the window if the target results in more than one window opening.',
-      SUMMARY:               'Target focus should be in content window',
-      TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',
-      RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:     'Check the link to make sure that if the link opens more than one window that the focus is in the content window.',
-        MANUAL_CHECK_P:     'Check the %N_MC links to make sure that if any of the links opens more than one window that the focus is in the content window.',
-        HIDDEN_S: 'The link element that is hidden does not need to be tested for content focus.',
-        HIDDEN_P: 'The %N_H link elements that are hidden do not need to be tested for content focus.',
-        NOT_APPLICABLE:  'No link elements on the page.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_MC_1: 'If the target of the @%1@ element opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
-        ELEMENT_HIDDEN_1: 'The @%1@ element is hidden, so cannot open any new windows.'
-      },
-      PURPOSES: [
-        'User\'s can become disoriented if the focus causes unpredictable actions, including new URLs and popup windows for advertisements or promotions.'
-      ],
-      TECHNIQUES: [
-        'Do not link to URLs that open multiple windows and do not manage the focus to be in the content windoow the user was expecting by following the link.'
-      ],
-      MANUAL_CHECKS: [
-        'After selecting a link and if it opens multiple windows, make sure the keyboard focus is in the content window.'
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G200: Opening new windows and tabs from a link only when necessary',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G200'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'G201: Giving users advanced warning when opening a new window',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G201'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F52'
-        }
-      ]
-  },
-
-  KEYBOARD_7: {
-      ID:                    'Keyboard 7',
       DEFINITION:            '@select@ elements with @onchange@ or other event handlers must not automatically change the user\'s context when keyboard focus moves between options.',
       SUMMARY:               '@select@ must not change context',
       TARGET_RESOURCES_DESC: '@a@, @area@ and @role="link"@ elements',

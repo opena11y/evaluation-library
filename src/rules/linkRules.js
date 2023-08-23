@@ -130,7 +130,34 @@ export const linkRules = [
       });
 
     } // end validate function
-  }
+  },
+
+  /**
+   * @object LINK_3
+   *
+   * @desc Target of a link does not go to a page with popup windows
+   */
+
+  { rule_id             : 'LINK_3',
+    last_updated        : '2023-08-22',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    rule_required       : true,
+    wcag_primary_id     : '3.2.1',
+    wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
+    target_resources    : ['a', 'area', 'select'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
+    } // end validation function
+  },
 ];
 
 
