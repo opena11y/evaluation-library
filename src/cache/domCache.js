@@ -12,6 +12,7 @@ import ListInfo         from './listInfo.js';
 import MediaInfo         from './mediaInfo.js';
 import StructureInfo    from './structureInfo.js';
 import TableInfo        from './tableInfo.js';
+import TimingInfo        from './timingInfo.js';
 import DebugLogging     from '../debug.js';
 
 /* Constants */
@@ -112,6 +113,7 @@ export default class DOMCache {
     this.mediaInfo      = new MediaInfo();
     this.structureInfo = new StructureInfo();
     this.tableInfo     = new TableInfo();
+    this.timingInfo    = new TimingInfo();
     this.iframeInfo    = new IFrameInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
@@ -334,6 +336,9 @@ export default class DOMCache {
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
+
+    this.timingInfo.update(domElement);
+
     return newParentInfo;
   }
 

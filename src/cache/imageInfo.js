@@ -63,7 +63,7 @@ class MapElement {
 /**
  * @class ImageInfo
  *
- * @desc Collects information on the landmarks or headings on a web page for use in
+ * @desc Collects information on the image elements on a web page for use in
  *       rules
  */
 

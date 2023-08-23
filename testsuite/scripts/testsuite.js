@@ -61,6 +61,10 @@ export default function executeTest(label, IFRAME_ID, RULE_ID) {
 
     const iframe = document.getElementById(IFRAME_ID);
 
+    if (!iframe || !iframe.contentWindow) {
+      return;
+    }
+
     const win    = iframe.contentWindow;
     const doc    = iframe.contentDocument;
     const title  = doc.title;

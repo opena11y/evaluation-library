@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$H = new DebugLogging('constants', false);
+const debug$M = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -600,13 +600,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$H.flag && debug$H.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$M.flag && debug$M.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$H.flag && debug$H.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$M.flag && debug$M.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -902,7 +902,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$G = new DebugLogging('ControlInfo', false);
+const debug$L = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -1042,7 +1042,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$G.domElement(ce.domElement, prefix);
+      debug$L.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1263,15 +1263,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$G.flag) {
-      debug$G.log('== Control Tree ==', 1);
+    if (debug$L.flag) {
+      debug$L.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$G.domElement(ce.domElement);
+        debug$L.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$G.log('== Forms ==', 1);
+      debug$L.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$G.domElement(ce.domElement);
+        debug$L.domElement(ce.domElement);
       });
     }
   }
@@ -6070,8 +6070,8 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$F = new DebugLogging('AriaInfo', false);
-debug$F.flag = false;
+const debug$K = new DebugLogging('AriaInfo', false);
+debug$K.flag = false;
 
 /* Debug helper functions */
 
@@ -6294,15 +6294,15 @@ class AriaInfo {
     }
 
 
-    if (debug$F.flag) {
-      node.attributes.length && debug$F.log(`${node.outerHTML}`, 1);
-      debug$F.log(`[         isWidget]: ${this.isWidget}`);
-      debug$F.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$F.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$F.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$F.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$F.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$F.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$K.flag) {
+      node.attributes.length && debug$K.log(`${node.outerHTML}`, 1);
+      debug$K.log(`[         isWidget]: ${this.isWidget}`);
+      debug$K.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$K.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$K.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$K.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$K.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$K.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6506,7 +6506,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$E = new DebugLogging('colorContrast', false);
+const debug$J = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6561,9 +6561,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$E.flag) {
-      debug$E.separator();
-      debug$E.tag(elementNode);
+    if (debug$J.flag) {
+      debug$J.separator();
+      debug$J.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6585,11 +6585,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$E.flag) {
-      debug$E.log(`[                    opacity]: ${this.opacity}`);
-      debug$E.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$E.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$E.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$J.flag) {
+      debug$J.log(`[                    opacity]: ${this.opacity}`);
+      debug$J.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$J.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$J.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6676,10 +6676,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$E.flag && debug$E.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$J.flag && debug$J.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$E.flag && debug$E.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$J.flag && debug$J.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6892,7 +6892,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$D = new DebugLogging('EventInfo', false);
+const debug$I = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6905,7 +6905,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$D.flag) {
+    if (debug$I.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8505,7 +8505,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$C = new DebugLogging('ariaInHtml', false);
+const debug$H = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8706,11 +8706,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$C.flag) {
+  if (debug$H.flag) {
     if (tagName === 'h2') {
-      debug$C.tag(node);
+      debug$H.tag(node);
     }
-    debug$C.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$H.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8830,7 +8830,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$B = new DebugLogging('visibility', false);
+const debug$G = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8878,17 +8878,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$B.flag) {
-      debug$B.separator();
-      debug$B.tag(elementNode);
-      debug$B.log('[          isHidden]: ' + this.isHidden);
-      debug$B.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$B.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$B.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$B.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$B.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$B.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$B.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$G.flag) {
+      debug$G.separator();
+      debug$G.tag(elementNode);
+      debug$G.log('[          isHidden]: ' + this.isHidden);
+      debug$G.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$G.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$G.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$G.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$G.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$G.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$G.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9201,8 +9201,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$A = new DebugLogging('nameFrom', false);
-debug$A.flag = false;
+const debug$F = new DebugLogging('nameFrom', false);
+debug$F.flag = false;
 
 /*
 *   @function getElementContents
@@ -9348,7 +9348,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$A.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$F.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9762,8 +9762,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$z = new DebugLogging('getAccName', false);
-debug$z.flag = false;
+const debug$E = new DebugLogging('getAccName', false);
+debug$E.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -10053,8 +10053,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$y = new DebugLogging('DOMElement', false);
-debug$y.flag = false;
+const debug$D = new DebugLogging('DOMElement', false);
+debug$D.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10376,12 +10376,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$y.flag) {
+    if (debug$D.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$y.domText(domItem, prefix);
+          debug$D.domText(domItem, prefix);
         } else {
-          debug$y.domElement(domItem, prefix);
+          debug$D.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10474,7 +10474,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$x = new DebugLogging('domText', false);
+const debug$C = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10493,8 +10493,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$x.flag) {
-      debug$x.log(`[text]: ${this.text}`);
+    if (debug$C.flag) {
+      debug$C.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10557,7 +10557,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$w = new DebugLogging('iframeInfo', false);
+const debug$B = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10575,9 +10575,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$w.flag) {
-      debug$w.log(`[          src]: ${this.src}`);
-      debug$w.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$B.flag) {
+      debug$B.log(`[          src]: ${this.src}`);
+      debug$B.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10613,8 +10613,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$w.flag) {
-      debug$w.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$B.flag) {
+      debug$B.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10625,7 +10625,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$v = new DebugLogging('idInfo', false);
+const debug$A = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10668,10 +10668,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$v.flag) {
-      debug$v.log('== All Links ==', 1);
+    if (debug$A.flag) {
+      debug$A.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$v.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$A.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10680,7 +10680,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$u = new DebugLogging('imageInfo', false);
+const debug$z = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10739,7 +10739,7 @@ class MapElement {
 /**
  * @class ImageInfo
  *
- * @desc Collects information on the landmarks or headings on a web page for use in
+ * @desc Collects information on the image elements on a web page for use in
  *       rules
  */
 
@@ -10873,22 +10873,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$u.flag) {
-      debug$u.log('== All Image elements ==', 1);
+    if (debug$z.flag) {
+      debug$z.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$u.log(`[fileName]: ${ie.fileName}`, true);
-        debug$u.log(`[    role]: ${ie.domElement.role}`);
-        debug$u.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$u.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$u.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$z.log(`[fileName]: ${ie.fileName}`, true);
+        debug$z.log(`[    role]: ${ie.domElement.role}`);
+        debug$z.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$z.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$z.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$u.log('== All SVG domElements  ==', 1);
+      debug$z.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$u.domElement(de);
+        debug$z.domElement(de);
       });
-      debug$u.log('== All MapElements ==', 1);
+      debug$z.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$u.domElement(me.domElement);
+        debug$z.domElement(me.domElement);
       });
     }
   }
@@ -10897,7 +10897,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$t = new DebugLogging('linkInfo', false);
+const debug$y = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10943,10 +10943,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$t.flag) {
-      debug$t.log('== All Links ==', 1);
+    if (debug$y.flag) {
+      debug$y.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$t.domElement(de);
+        debug$y.domElement(de);
       });
     }
   }
@@ -10955,7 +10955,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$s = new DebugLogging('ListInfo', false);
+const debug$x = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10976,8 +10976,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$s.flag) {
-      debug$s.log('');
+    if (debug$x.flag) {
+      debug$x.log('');
     }
   }
 
@@ -11002,9 +11002,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$s.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$x.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$s.domElement(le.domElement, prefix);
+      debug$x.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11112,16 +11112,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$s.flag) {
-      debug$s.log('== All ListElements ==', 1);
-      debug$s.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$x.flag) {
+      debug$x.log('== All ListElements ==', 1);
+      debug$x.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$s.domElement(le.domElement);
+        debug$x.domElement(le.domElement);
       });
-      debug$s.log('== List Tree ==', 1);
-      debug$s.log(`[linkCount]: ${this.linkCount}`);
+      debug$x.log('== List Tree ==', 1);
+      debug$x.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$s.domElement(le.domElement);
+        debug$x.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -11131,8 +11131,8 @@ class ListInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$r = new DebugLogging('MediaInfo', false);
-debug$r.flag = false;
+const debug$w = new DebugLogging('MediaInfo', false);
+debug$w.flag = false;
 
 /**
  * @class MediaElement
@@ -11370,25 +11370,25 @@ class MediaInfo {
    */
 
   showListInfo () {
-    if (debug$r.flag) {
-      debug$r.log('== Audio Elements ==', 1);
+    if (debug$w.flag) {
+      debug$w.log('== Audio Elements ==', 1);
       this.audioElements.forEach( ae => {
-        debug$r.log(ae);
+        debug$w.log(ae);
       });
 
-      debug$r.log('== Video Elements ==', 1);
+      debug$w.log('== Video Elements ==', 1);
       this.videoElements.forEach( ve => {
-        debug$r.log(ve);
+        debug$w.log(ve);
       });
 
-      debug$r.log('== Object Elements ==', 1);
+      debug$w.log('== Object Elements ==', 1);
       this.objectElements.forEach( oe => {
-        debug$r.log(oe);
+        debug$w.log(oe);
       });
 
-      debug$r.log('== Embed Elements ==', 1);
+      debug$w.log('== Embed Elements ==', 1);
       this.embedElements.forEach( ee => {
-        debug$r.log(ee);
+        debug$w.log(ee);
       });
 
 
@@ -11399,7 +11399,7 @@ class MediaInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$q = new DebugLogging('structureInfo', false);
+const debug$v = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11438,11 +11438,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$q.domElement(le.domElement, prefix);
+      debug$v.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$q.domElement(h, prefix);
+      debug$v.domElement(h, prefix);
     });
   }
 
@@ -11566,27 +11566,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$q.flag) {
-      debug$q.log('== All Headings ==', 1);
+    if (debug$v.flag) {
+      debug$v.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$q.domElement(h);
+        debug$v.domElement(h);
       });
-      debug$q.log('== All Landmarks ==', 1);
+      debug$v.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$q.domElement(le.domElement);
+        debug$v.domElement(le.domElement);
       });
-      debug$q.log('== Landmarks By Doc ==', 1);
+      debug$v.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$q.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$v.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$q.domElement(le.domElement);
+            debug$v.domElement(le.domElement);
           });
         }
       });
-      debug$q.log('== Structure Tree ==', 1);
+      debug$v.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$q.domElement(le.domElement);
+        debug$v.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -13281,6 +13281,101 @@ const colorRules$1 = {
                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                       }
                       ]
+  }
+};
+
+/* frameRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const frameRules$1 = {
+
+  FRAME_1: {
+    ID:                    'Frame 1',
+    DEFINITION:            '@frame@ element must have an accessible name to support screen reader navigation.',
+    SUMMARY:               '@frame@ must have accessible name',
+    TARGET_RESOURCES_DESC: '@frame@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Add a @title@ attribute to the @frame@ element that describes the contents of the frame.',
+      FAIL_P:   'Add a @title@ attribute to the %N_F @frame@ elements that describes the contents of the frame.',
+      MANUAL_CHECK_S:  'Verify the @frame@ element with empty accessible name (e.g. @title=""@ attribute) does not contain visible content.',
+      MANUAL_CHECK_M:  'Verify the %N_MC @frame@ elements with empty accessible names (e.g. @title=""@ attribute) do not contain visible content.',
+      HIDDEN_S: 'The @frame@ element that is hidden was not evaluated.',
+      HIDDEN_P: 'The %N_H @frame@ elements that are hidden were not evaluated.',
+      NOT_APPLICABLE:  'No visible @frame@ elements on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   '@frame@ element has the accessible name: %1.',
+      ELEMENT_FAIL_1:   'Add a @title@ attribute to the @frame@ element describing the contents of the frame.',
+      ELEMENT_MC_1:     'Verify the @frame@ element with empty accessible name (e.g. @title=""@) is not intended to be a frame navigation target.',
+      ELEMENT_HIDDEN_1: '@frame@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES:        [ 'Screen readers provide a means to navigate web page content using @frame@ elements.',
+                      'The accessible name of the @frame@ element (the @title@ attribute value) must describe the contents of the frame.',
+                      'The accessible name helps users decide whether they want to navigate to a frame.'
+                    ],
+    TECHNIQUES:     [ 'Use the @title@ attribute to provide an accessible name for a @frame@ element.',
+                      'Accessible names should be short and describe the contents of the @frame@ element to help users to decide whether to navigate to a @frame@.',
+                      'For @frame@s with no visible content, explicitly identify the @frame@ as having no information for the user (e.g. @title="No content"@).'
+                    ],
+    MANUAL_CHECKS:  [ 'View the accessible names of the frames in the document to verify that they help users identify the contents of each frame.'
+    ],
+    INFORMATIONAL_LINKS: [
+                     { type:  REFERENCES.SPECIFICATION,
+                       title: 'WCAG 2.0 Success Criterion 2.4.1 Bypass Blocks: A mechanism is available to bypass blocks of content that are repeated on multiple Web pages',
+                       url:   'https://www.w3.org/TR/WCAG20/#navigation-mechanisms-skip'
+                     },
+                     { type:  REFERENCES.WCAG_TECHNIQUE,
+                       title: 'H64: Using the title attribute of the frame and iframe elements',
+                       url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
+                     }
+                    ]
+  },
+
+  FRAME_2: {
+    ID:                    'Frame 2',
+    DEFINITION:            '@iframe@ element must have an accessible name to support screen reader navigation.',
+    SUMMARY:               '@iframe@ must have accessible name',
+    TARGET_RESOURCES_DESC: '@iframe@ elements',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:   'Add an accessible name to @iframe@ element that describes the contents of the frame.',
+      FAIL_P:   'Add accessible names to %N_F @iframe@ elements that describe the contents of the frame.',
+      MANUAL_CHECK_S:  'Verify the @iframe@ elements with empty accessible name (e.g. @title=""@ attribute) does not contain visible content.',
+      MANUAL_CHECK_M:  'Verify the %N_MC @iframe@ elements with empty accessible names (e.g. @title=""@ attribute) do not contain visible content.',
+      HIDDEN_S: 'The @iframe@ element that is hidden was not evaluated.',
+      HIDDEN_P: 'The %N_H @iframe@ elements that are hidden were not evaluated.',
+      NOT_APPLICABLE:  'No visible @iframe@ elements on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_PASS_1:   '@iframe@ element has accessible name.',
+      ELEMENT_FAIL_1:   'Add an accessible name to the @iframe@ element describing the contents of the @iframe@.',
+      ELEMENT_MC_1:     'Verify the @iframe@ element with empty accessible name (e.g. @title=""@) does not contain visible content.',
+      ELEMENT_HIDDEN_1: '@iframe@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES:        [ 'Screen readers provide a means to navigate web page content using @iframe@ elements.',
+                      'The accessible name of the @iframe@ element must describe the contents of the @iframe@.',
+                      'The accessible name helps users to decide whether they want to navigate to a @iframe@.'
+    ],
+    TECHNIQUES:     [ 'Use the @title@ attribute to define an accessible name for an @iframe@ element.',
+                      'Use the @aria-label@ attribute to define an accessible name for an @iframe@ element.',
+                      'Use the @aria-labelledby@ attribute to define an accessible name for an @iframe@ element.',
+                      'Accessible names should be short and describe the contents of the @iframe@ element to help users to decide whether to navigate to the @iframe@.',
+                      'For @iframe@s with no visible content, explicitly identify the @iframe@ as having no information for the user (e.g. @title="No content"@).'
+    ],
+    MANUAL_CHECKS:  [ 'View the accessible names of the @iframe@s in the page to verify that they help users identify the contents of each frame.'
+    ],
+    INFORMATIONAL_LINKS: [
+                    { type:  REFERENCES.SPECIFICATION,
+                      title: 'WCAG 2.0 Success Criterion 2.4.1 Bypass Blocks: A mechanism is available to bypass blocks of content that are repeated on multiple Web pages',
+                      url:   'https://www.w3.org/TR/WCAG20/#navigation-mechanisms-skip'
+                    },
+                    { type:  REFERENCES.WCAG_TECHNIQUE,
+                      title: 'H64: Using the title attribute of the frame and iframe elements',
+                      url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
+                    }
+    ]
   }
 };
 
@@ -16656,6 +16751,396 @@ const linkRules$1 = {
   }
 };
 
+/* listRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const listRules$1 = {
+
+  LIST_1: {
+      ID:                    'List 1',
+      DEFINITION:            'Page must use semantic markup for lists: to identify the type of list container (ordered, unordered or description list) and to group its related list item elements.',
+      SUMMARY:               'Use semantic markup for lists',
+      TARGET_RESOURCES_DESC: '@ul@, @ol@, @li@, @dl@, @dt@ and @dd@ elements, @[role="list"]@, @[role="group"]@ and @[role="listitem"]@',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:   'Verify the list element is used semantically.',
+        MANUAL_CHECK_P:   'Verify the %N_MC list elements are used semantically.',
+        HIDDEN_S:         'The hidden list element was not evaluated.',
+        HIDDEN_P:         'The %N_H hidden list elements were not evaluated.',
+        NOT_APPLICABLE:   'No list elements found on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:         'Verify the %1 list elements are used semantically and that list markup was not omitted.',
+        ELEMENT_MC_1:      'Verify the @%1@ element identifies a container element for a related group of list items.',
+        ELEMENT_MC_2:      'Verify the @%1@ element identifies a list item element in a meaningfully grouped list of items.',
+        ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
+      },
+      PURPOSES: [
+        'When list markup is used semantically, assistive technologies are able to convey information to users as they navigate to and within lists, such as the total number of items and the relative position of each item in the list.',
+        'Assistive technologies also provide additional navigation commands for lists, such as "Go to next list item" and "Go to next list".',
+        'Concision of list item content is important for accessibility, since assistive technologies read the entire content of each list item when users navigate through lists.',
+        'When list markup is used in ways that violate the semantics of lists, it will be confusing to users of assistive technologies and diminish the accessibility of the page.'
+      ],
+      TECHNIQUES: [
+        'Ensure that list item content is concise.',
+        'You can use ARIA labeling techniques to give a list container element a descriptive label.',
+        'Use @ol@ as a container element for an ordered list of items.',
+        'Use @ul@ as a container element for an unordered list of items.',
+        'Use @li@ elements to identify items in ordered (@ol@) and unordered (@ul@) lists.',
+        'Use @dl@ as a container element for a description list (a.k.a. definition list) that contains contiguous groupings of terms and their associated descriptions or definitions.',
+        'Use @dt@ elements to identify terms being described or defined in a description list (@dl@).',
+        'Use @dd@ elements to identify descriptions or definitions for a term in a description list (@dl@).',
+        'For repairing existing content that does not use list elements, you can use the ARIA @role@ attributes with value @[role="list"]@ or @[role="group"]to identify list container elements and @[role="listitem"]@ to identify list item elements.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: ol element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: ul element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: li element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-li-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dl element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dt element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dt-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dd element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dd-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#list'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: listitem role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#listitem'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-posinset',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-posinset'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-setsize',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-setsize'
+        }
+      ]
+  },
+  LIST_2: {
+      ID:                    'List 2',
+      DEFINITION:            'When appropriate, a list container element (@ul@, @ol@, @dl@, @[role="list"]@, @[role="group"]@) must include a label that describes the purpose or contents of the list.',
+      SUMMARY:               'Provide list labels when appropriate',
+      TARGET_RESOURCES_DESC: '@ul@, @ol@ and @dl@ elements, container elements with @[role="list"]@, @[role="group"]@',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:   'Determine whether the container element benefits from a label and, if so, verify that it accurately describes the contents of the list.',
+        MANUAL_CHECK_P:   'Determine whether the %N_MC list container elements benefit from labels and, if so, verify that each accurately describes the contents of the list.',
+        HIDDEN_S:         'The hidden list element was not evaluated.',
+        HIDDEN_P:         'The %N_H hidden list elements were not evaluated.',
+        NOT_APPLICABLE:   'No list elements elements found on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:      'Verify the label "%1" accurately describes the contents of the list.',
+        ELEMENT_MC_2:      'Verify the @%1@ list container element does not benefit from a label, or add a label that describes the contents of the list.',
+        ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
+      },
+      PURPOSES: [
+        'Assistive technologies use labels on @ul@, @ol@ and @dl@ elements, and elements with @[role="list"]@ and @[role="group"]@ attributes to help screen reader users understand the purpose or contents of lists.'
+      ],
+      TECHNIQUES: [
+        'Use the @aria-labelledby@ attribute to add a label to a list container element to reference the @id@(s) of one or more elements on the page that describe its contents.',
+        'Use the @aria-label@ attribute to add a label to a list container element to provide an explicit text description of its contents.',
+        'The @title@ attribute can also be used to add a label to a list container element to provide an explicit text description of its contents.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: ol element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ol-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: ul element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dl element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#list'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML 4.01 Specification: The @title@ attribute',
+          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+        }
+      ]
+  }
+};
+
+/* navigationRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const navigationRules$1 = {
+
+  NAVIGATION_1: {
+      ID:         'Navigation 1',
+      DEFINITION: 'At least two of the following features %s be provided for finding content in a website: a website search feature; a list of links on the home page to all pages in the website; a list of links on each page for navigation between pages; bread crumb links on each page for hierarchical navigation of the website and/or a dedicated page that serves as a site map of all the pages in the website.',
+      SUMMARY:    'At least two ways of finding content',
+      TARGET_RESOURCES_DESC: 'Website navigational links and search form controls',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that this page can be found from other pages in the website using at least two of the following features: a website search feature; a list of links for navigation from at least one other page in the website and/or from a page in the web site that serves as a site map.',
+        MANUAL_CHECK_P: 'Verify that this page can be found from other pages in the website using at least two of the following features: a website search feature; a list of links for navigation from at least one other page in the website and/or from a page in the web site that serves as a site map.',
+        NOT_APPLICABLE: 'Single page web resource: no other pages to link to or to search from.'
+      },
+      BASE_RESULT_MESSAGES: {
+        WEBSITE_MC_1: 'This page has both @navigation@ and @search@ landmarks. Verify that they provide links for navigating and the ability to search for content in this website.',
+        WEBSITE_MC_2: 'Verify that this page can be found from at least two of the following website features: a website search feature; a list of links for navigation from at least one other page in the website and/or from a page in the web site that serves as a site map.',
+        ELEMENT_MC_1: 'Verify that this @navigation@ landmark can be used for navigation of the content in this website.',
+        ELEMENT_MC_2: 'Verify that this @search@ landmark can be used to search for content in this website.'
+      },
+      PURPOSES: [
+        'One of the fundamental features of the web is the provision of easy access to useful information. By providing multiple ways to find information within a website, people with disabilities are able to locate content in a manner that best meets their needs.'
+      ],
+      TECHNIQUES: [
+        'Website search feature identified by the @search@ landmark.',
+        'A list of links for navigation between pages using the @navigation@ landmark.',
+        'Sandtrail/bread crumb links for hierarchical navigation of the website using the @navigation@ landmark.',
+        'A dedicated page that serves as a site map of all the pages in the website.'
+      ],
+      MANUAL_CHECKS: [
+        'Verify that at least two of the techniques are implemented for finding content on this page.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G63: Providing a site map',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G63'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G64: Providing a Table of Contents',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G64'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G125: Providing links to navigate to related Web pages',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G125'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G126: Providing a list of links to all other Web pages',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G126'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G161: Providing a search function to help users find content',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G161'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G185: Linking to all of the pages on the site from the home page',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G185'
+        }
+      ]
+  },
+  NAVIGATION_2: {
+      ID:         'Navigation 2',
+      DEFINITION: 'Consistent ordering of @main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other shared landmarks used across all pages in a website.',
+      SUMMARY:    'Consistent ordering of landmarks',
+      TARGET_RESOURCES_DESC: '@main@, @navigation@, @search@, @banner@ and @contentinfo@ landmarks',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that this page uses the same ordering of@main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other shared landmarks as other pages within the website.',
+        MANUAL_CHECK_P: 'Verify that this page uses the same ordering of @main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other shared landmarks as other pages within the website.',
+        NOT_APPLICABLE: 'No landmarks found on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        WEBSITE_MC_1:   'Verify that this page uses the same ordering of the following landmarks as other pages in the website: %1.',
+        ELEMENT_MC_1:   'Verify that the ordering of the @main@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
+        ELEMENT_MC_2:   'Verify that the ordering of the @navigation@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
+        ELEMENT_MC_3:   'Verify that the ordering of the @banner@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
+        ELEMENT_MC_4:   'Verify that the ordering of the @contentinfo@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
+        ELEMENT_MC_5:   'Verify that the ordering of the @search@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
+        ELEMENT_MC_6:   'Verify that the ordering of the @complementary@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.'
+      },
+      PURPOSES: [
+        'One of the fundamental features of the web is the provision of easy access to useful information. Providing consistent ordering of landmarks across all pages of a website will make it easier for people to find the information they are seeking and to navigate between and within pages.'
+      ],
+      TECHNIQUES: [
+        'Include the basic @main@, @navigation@, @banner@ and @contentinfo@ landmarks in your page templates for the website.',
+        'If the page includes a website search form, use the @search@ landmark.',
+        'Use consistent ordering of the @main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other landmarks that are a part of each page within a website.'
+      ],
+      MANUAL_CHECKS: [
+        'Verify that the ordering of the @main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other landmarks that are part of each page is consistent with the ordering of these landmarks on other pages.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G61: Presenting repeated components in the same relative order each time they appear',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
+        }
+      ]
+  },
+  NAVIGATION_3: {
+      ID:         'Navigation 3',
+      DEFINITION: 'Consistent ordering of @h1@ and @h2@ elements that label recurring page sections common across all pages in a website.',
+      SUMMARY:    'Consistent ordering of @h1@ and @h2@ labels',
+      TARGET_RESOURCES_DESC: '@h1@ and @h2@ elements used to identify recurring sections of pages within a website',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that this page uses the same ordering of @h1@ and @h2@ elements used to mark recurring page sections as the ordering used on the other pages within the website.',
+        MANUAL_CHECK_P: 'Verify that this page uses the same ordering of @h1@ and @h2@ elements used to mark recurring page sections as the ordering used on the other pages within the website.',
+        FAIL_S:         'No @h1@ or @h2@ elements found on the page.',
+        FAIL_P:         'No @h1@ or @h2@ elements found on the page.',
+        NOT_APPLICABLE: 'Single page web resource: consistent ordering of @h1@ and @h2@ does not apply.'
+      },
+      BASE_RESULT_MESSAGES: {
+        WEBSITE_FAIL_1: 'No @h1@ or @h2@ elements found on the page.',
+        WEBSITE_MC_1:   'Verify that the ordering of @h1@ and @h2@ elements used to mark recurring page sections on this page is the same as the ordering used on the other pages within the website.',
+        ELEMENT_MC_1:   'Verify that if this @h1@ heading is used to identify the main content of the page, it is in the same order relative to any @h2@ elements that identify recurring page sections as the ordering used on the other pages within the website.',
+        ELEMENT_MC_2:   'Verify that if this @h2@ heading is used to identify a recurring page section, it is in the same order relative to other comparable @h2@ elements as the ordering used on the other pages within the website.'
+      },
+      PURPOSES: [
+        'One of the fundamental features of the web is the provision of easy access to useful information. Consistent ordering of @h1@ and @h2@ elements used to identify recurring page sections common across all pages in the website will make it easier for people to find information they are seeking and to navigate between and within pages.'
+      ],
+      TECHNIQUES: [
+        'Use an @h1@ element to identify the main content within a page.',
+        'Use @h2@ elements to identify other recurring page sections such as navigation bars, web site search forms, footer information, etc.'
+      ],
+      MANUAL_CHECKS: [
+        'View the @h1@ and @h2@ heading structure of the page, and verify that it has the same or a similar structure as other pages within the website, especially with respect to recurring page sections.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G61: Presenting repeated components in the same relative order each time they appear',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
+        }
+      ]
+  },
+  NAVIGATION_4: {
+      ID:         'Navigation 4',
+      DEFINITION: 'Consistent labeling of landmarks across all pages in a website.',
+      SUMMARY:    'Consistent labeling of landmarks',
+      TARGET_RESOURCES_DESC: '@main@, @navigation@, @search@, @banner@, @complementary@ and @contentinfo@ landmarks',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that the labeling of the @main@, @navigation@, @search@, @banner@, @complementary@ and @contentinfo@ landmarks on this page is consistent with the labeling of all comparable landmarks on all other pages within the website.',
+        MANUAL_CHECK_P: 'Verify that the labeling of the @main@, @navigation@, @search@, @banner@, @complementary@ and @contentinfo@ landmarks on this page is consistent with the labeling of all comparable landmarks on all other pages within the website.',
+        NOT_APPLICABLE:  'No landmarks found on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        WEBSITE_MC_1: 'Verify that the labeling of landmarks on this page is consistent with the labeling of comparable landmarks on all other pages within the website.',
+        ELEMENT_MC_1: 'Verify that the labeling of the @main@ landmark on this page is consistent with the labeling of comparable @main@ landmarks on all other pages within the website.',
+        ELEMENT_MC_2: 'Verify that the labeling of the @navigation@ landmark on this page is consistent with the labeling of comparable @navigation@ landmarks on all other pages within the website.',
+        ELEMENT_MC_3: 'Verify that the labeling of the @banner@ landmark on this page is consistent with the labeling of comparable @banner@ landmarks on all other pages within the website.',
+        ELEMENT_MC_4: 'Verify that the labeling of the @contentinfo@ landmark on this page is consistent with the labeling of comparable @contentinfo@ landmarks on all other pages within the website.',
+        ELEMENT_MC_5: 'Verify that the labeling of the @search@ landmark on this page is consistent with the labeling of comparable @search@ landmarks on all other pages within the website.',
+        ELEMENT_MC_6: 'Verify that the labeling of the @complementary@ landmark on this page is consistent with the labeling of comparable @complementary@ landmarks on all other pages within the website.'
+      },
+      PURPOSES: [
+        'One of the fundamental features of the web is the provision of easy access to useful information. Consistent labeling of comparable landmark-identified content across all pages of a website will make it easier for people to find information they are seeking and to navigate between and within pages.'
+      ],
+      TECHNIQUES: [
+        'Most pages have sections associated with the @main@, @navigation@, @banner@ and @contentinfo@ landmarks in your page templates for the website.',
+        'If the page includes a website search form, use the @search@ landmark.',
+        'Landmarks only need labels (using @aria-label@ or @aria-labelledby@) if there is more than one landmark of the same type on a page.',
+        'If landmarks have labels, use consistent labeling of the landmarks across all pages within the website.'
+      ],
+      MANUAL_CHECKS: [
+        'Verify that the main content of the page is contained within the @main@ landmark.',
+        'Verify that recurring content at the top of each page is contained within a @banner@ landmark.',
+        'Verify that website navigational links are contained within @navigation@ landmarks.',
+        'Verify that recurring content at the bottom of each page is contained within a @contentinfo@ landmark.',
+        'Verify that if a landmark has a label and there are comparable landmarks on other pages in the website, the labels are the same on each page.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G61: Presenting repeated components in the same relative order each time they appear',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
+        }
+      ]
+  },
+  NAVIGATION_5: {
+      ID:         'Navigation 5',
+      DEFINITION: 'Consistent accessible names for @h1@ and @h2@ elements that identify recurring page sections common across all pages in a website.',
+      SUMMARY:    'Consistent @h1@ and @h2@ page section labels',
+      TARGET_RESOURCES_DESC: '@h1@ and @h2@ elements used to identify recurring page sections within a website',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Verify that the accessible names of @h1@ and @h2@ elements used to identify recurring page sections are consistent with those on all other pages within the website.',
+        MANUAL_CHECK_P: 'Verify that the accessible names of @h1@ and @h2@ elements used to identify recurring page sections are consistent with those on all other pages within the website.',
+        FAIL_S: 'No @h1@ or @h2@ elements found on the page.',
+        FAIL_P: 'No @h1@ or @h2@ elements found on the page.',
+        NOT_APPLICABLE: 'Single page web resource: consistency of accessible names does not apply.'
+      },
+      BASE_RESULT_MESSAGES: {
+        WEBSITE_FAIL_1: 'No @h1@ or @h2@ elements found on the page',
+        WEBSITE_MC_1:   'Verify that the accessible names of @h1@ and @h2@ elements used to identify recurring page sections are the same as those of comparable @h1@ and @h2@ elements found on the other pages within the website.',
+        ELEMENT_MC_1:   'Verify that if this @h1@ heading is used to identify the main content of the page, it has the same accessible name as comparable @h1@ elements on the other pages within the website.',
+        ELEMENT_MC_2:   'Verify that if this @h2@ heading is used to identify a recurring page section, it has the same accessible name as comparable @h2@ elements on the other pages within the website.'
+      },
+      PURPOSES: [
+        'One of the fundamental features of the web is the provision of easy access to useful information. Consistent accessible names of @h1@ and @h2@ elements used to identify recurring page sections common across all pages in the website will make it easier for people to find information they are seeking and to navigate between and within pages.'
+      ],
+      TECHNIQUES: [
+        'Use @h1@ elements to identify the main content within a page.',
+        'Use @h2@ elements to identify other major sections within pages, e.g. navigation bars, web site search forms, footer information, etc.'
+      ],
+      MANUAL_CHECKS: [
+        'View the @h1@ and @h2@ heading structure of the page, and verify that it has the same relative order as other pages within the website'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G61: Presenting repeated components in the same relative order each time they appear',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G61'
+        }
+      ]
+  }
+};
+
 /* tableRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -17147,6 +17632,111 @@ const tableRules$1 = {
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
           url:   'https://www.w3.org/WAI/tutorials/tables/'
+        }
+      ]
+  }
+};
+
+/* timingRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English              */
+/* --------------------------------------------------------------------------- */
+
+const timingRules$1 = {
+  TIMING_1: {
+      ID:                    'Timing 1',
+      DEFINITION:            'A page that contains time limits for user interaction or viewing content must provide a way to turn off, adjust or extend the time limits.',
+      SUMMARY:               'Control time limits',
+      TARGET_RESOURCES_DESC: 'Pages with scripting or other embedded technologies to control the response time for input or the amount of time to view content',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:  'If the page contains time limits, verify that there is a way to turn off, adjust or extend the time limits; or that one of the three exceptions applies.'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:      'If the page contains time limits, verify that there is a way to turn off, adjust or extend the time limits; or that one of the three exceptions applies.'
+      },
+      PURPOSES: [
+        'People with physical disabilities may need more time to respond to web sites with time limits for selecting an option.',
+        'People with visual impairments and visual processing learning disabilities may need more time to read material if the rendering of the material is automatically removed or obscured after a time period.',
+        'Providing adjustable time periods in line with the persons capabilities makes it possible for people to complete the tasks associated with the website.'
+      ],
+      TECHNIQUES: [
+        'Turn off: The user is allowed to turn off the time limit before encountering it.',
+        'Adjust: The user is allowed to adjust the time limit before encountering it over a wide range that is at least ten times the length of the default setting.',
+        'Extend: The user is warned before time expires and given at least 20 seconds to extend the time limit with a simple action (for example, "press the space bar"), and the user is allowed to extend the time limit at least ten time.',
+        'Real-time Exception: The time limit is a required part of a real-time event (for example, an auction), and no alternative to the time limit is possible.',
+        'Essential Exception: The time limit is essential and extending it would invalidate the activity.',
+        '20 Hour Exception: The time limit is longer than 20 hours.'
+      ],
+      MANUAL_CHECKS: [
+        'If the page contains time limits, verify that there is a way to turn off, adjust or extend the time limits; or that one of the three exceptions applies.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Understanding 2.2.1 Timing Adjustable',
+          url:   'https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html'
+        }
+      ]
+  },
+  TIMING_2: {
+      ID:                    'Timing 2',
+      DEFINITION:            'A page that includes moving, blinking, scrolling or auto-updating content that starts automatically and lasts more than 5 seconds must have a mechanism to pause, stop, or hide such content.',
+      SUMMARY:               'Control moving, blinking or auto-updating content',
+      TARGET_RESOURCES_DESC: 'Canvas, SVG and image animations; moving, blinking, scrolling or auto-updating text content; and embedded applications',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
+        MANUAL_CHECK_P:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:     'If the %1 element includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
+        ELEMENT_HIDDEN_1: 'The %1 element has not evaluated for moving, blinking, scrolling or auto-updating content',
+        PAGE_MC_1:        'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.'
+      },
+      PURPOSES: [
+        'People with visual impairments and visual processing learning disabilities may not be able to read or understand content that is blinking, scrolling or auto updating'
+      ],
+      TECHNIQUES: [
+        'Pause/Resume: Through configuration or controls on the page, enable the user to pause and resume the moving, blinking, scrolling or auto-updating content.',
+        'Stop: Through configuration or controls on the page, enable the user to stop the moving, blinking, scrolling or auto-updating content and see all of the content at one time.',
+        'Hide: Through configuration or controls on the page, enable the user to hide the moving, blinking, scrolling or auto-updating content if it is not essential for the activity.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Understanding 2.2.2 Pause, Stop, Hide',
+          url:   'https://www.w3.org/WAI/WCAG21/Understanding/pause-stop-hide.html'
+        }
+      ]
+  },
+  TIMING_3: {
+      ID:                    'Timing 3',
+      DEFINITION:            'A page must not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
+      SUMMARY:               'Flashing limits',
+      TARGET_RESOURCES_DESC: 'Canvas, SVG and image animations; flashing text content; video; and embedded applications',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
+        MANUAL_CHECK_P:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:     'Verify the %1 element does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
+        ELEMENT_HIDDEN_1: 'The %1 element has not evaluated for moving, blinking, scrolling or auto-updating content',
+        PAGE_MC_1:        'Verify the page does not include any content that flashes more than three times in one second, unless below general flash and red flash thresholds.'
+      },
+      PURPOSES: [
+        'People who have photosensitive seizure disorders can have a seizure triggered by content that flashes at certain frequencies for more than a few flashes.',
+        'People are even more sensitive to red flashing than to other colors.',
+        'NOTE: This flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
+      ],
+      TECHNIQUES: [
+        'There is no remedication technique, the content must be removed or disabled from flashing.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Understanding 2.3.1 Three Flashes or Below Threshold',
+          url:   'https://www.w3.org/WAI/WCAG20/Understanding/three-flashes-or-below-threshold'
         }
       ]
   }
@@ -18615,7 +19205,7 @@ messages$1.rules = Object.assign(messages$1.rules, audioRules$1);
 // messages.rules = Object.assign(messages.rules, bypassRules);
 messages$1.rules = Object.assign(messages$1.rules, colorRules$1);
 // messages.rules = Object.assign(messages.rules, errorRules);
-// messages.rules = Object.assign(messages.rules, frameRules);
+messages$1.rules = Object.assign(messages$1.rules, frameRules$1);
 messages$1.rules = Object.assign(messages$1.rules, controlRules$1);
 messages$1.rules = Object.assign(messages$1.rules, headingRules$1);
 // messages.rules = Object.assign(messages.rules, htmlRules);
@@ -18624,20 +19214,20 @@ messages$1.rules = Object.assign(messages$1.rules, keyboardRules$1);
 messages$1.rules = Object.assign(messages$1.rules, landmarkRules$1);
 // messages.rules = Object.assign(messages.rules, layoutRules);
 messages$1.rules = Object.assign(messages$1.rules, linkRules$1);
-// messages.rules = Object.assign(messages.rules, listsRules);
-// messages.rules = Object.assign(messages.rules, navigationRules);
+messages$1.rules = Object.assign(messages$1.rules, listRules$1);
+messages$1.rules = Object.assign(messages$1.rules, navigationRules$1);
 // messages.rules = Object.assign(messages.rules, readingOrderRules);
 // messages.rules = Object.assign(messages.rules, resizeRules);
 // messages.rules = Object.assign(messages.rules, sensoryRules);
 messages$1.rules = Object.assign(messages$1.rules, tableRules$1);
-// messages.rules = Object.assign(messages.rules, timingRules);
+messages$1.rules = Object.assign(messages$1.rules, timingRules$1);
 messages$1.rules = Object.assign(messages$1.rules, videoRules$1);
 messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 
 /* locale.js */
 
 /* Constants */
-const debug$p = new DebugLogging('locale', false);
+const debug$u = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -18693,7 +19283,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$p.flag && debug$p.log(`[${id}][${value}]: ${message}`);
+  debug$u.flag && debug$u.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -18793,7 +19383,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$p.flag && debug$p.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$u.flag && debug$u.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -18803,7 +19393,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$p.flag && debug$p.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$u.flag && debug$u.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   // Assume all rules
   return {
     title: messages[locale].common.allRules,
@@ -18836,7 +19426,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$p.flag && debug$p.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$u.flag && debug$u.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -18848,7 +19438,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$p.flag && debug$p.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$u.flag && debug$u.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -18868,7 +19458,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$p.flag && debug$p.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$u.flag && debug$u.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -18915,7 +19505,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$p.flag && debug$p.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$u.flag && debug$u.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -18930,7 +19520,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$p.flag && debug$p.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$u.flag && debug$u.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -18945,7 +19535,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$p.flag && debug$p.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$u.flag && debug$u.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -18964,7 +19554,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$p.flag && debug$p.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$u.flag && debug$u.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -18983,7 +19573,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$p.flag && debug$p.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$u.flag && debug$u.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -19011,8 +19601,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$p.flag && debug$p.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$p.flag && debug$p.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$u.flag && debug$u.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$u.flag && debug$u.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -19032,7 +19622,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$p.flag && debug$p.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$u.flag && debug$u.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -19051,7 +19641,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$p.flag && debug$p.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$u.flag && debug$u.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19071,7 +19661,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$p.flag && debug$p.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$u.flag && debug$u.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19139,12 +19729,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$o = new DebugLogging('tableInfo', false);
-debug$o.flag = false;
-debug$o.rows = false;
-debug$o.cells = false;
-debug$o.tableTree = false;
-debug$o.headerCalc = false;
+const debug$t = new DebugLogging('tableInfo', false);
+debug$t.flag = false;
+debug$t.rows = false;
+debug$t.cells = false;
+debug$t.tableTree = false;
+debug$t.headerCalc = false;
 
 /**
  * @class TableElement
@@ -19276,13 +19866,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$o.headerCalc && debug$o.log(`${cell}`, 1);
+        debug$t.headerCalc && debug$t.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$o.headesCalc && debug$o.log(`[headers]: ${ids.join(' ')}`);
+              debug$t.headesCalc && debug$t.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -19297,7 +19887,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$o.headerCalc && debug$o.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$t.headerCalc && debug$t.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -19308,7 +19898,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$o.headerCalc && debug$o.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$t.headerCalc && debug$t.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -19320,7 +19910,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$o.headerCalc && debug$o.log(`${cell}`);
+            debug$t.headerCalc && debug$t.log(`${cell}`);
           }
         }
       });
@@ -19367,7 +19957,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$o.log(`${prefix}${item}`);
+    debug$t.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -19378,14 +19968,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$o.flag) {
-      debug$o.log(`${this}`);
-      if (debug$o.tableTree) {
+    if (debug$t.flag) {
+      debug$t.log(`${this}`);
+      if (debug$t.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$o.separator();
+      debug$t.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -19500,15 +20090,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$o.flag && debug$o.rows) {
-      debug$o.log(`${prefix}${this}`);
+    if (debug$t.flag && debug$t.rows) {
+      debug$t.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$o.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$t.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -19589,8 +20179,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$o.flag) {
-      debug$o.log(`${prefix}${this}`);
+    if (debug$t.flag) {
+      debug$t.log(`${prefix}${this}`);
     }
   }
 
@@ -19711,8 +20301,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$o.flag) {
-      debug$o.log('== All Tables ==', 1);
+    if (debug$t.flag) {
+      debug$t.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -19720,14 +20310,77 @@ class TableInfo {
   }
 }
 
+/* timingInfo.js */
+
+/* Constants */
+const debug$s = new DebugLogging('TimingInfo', false);
+
+/**
+ * @class TimingInfo
+ *
+ * @desc Collects information on the elements with possible animations on a web page
+ *       for use in rules
+ */
+
+class TimingInfo {
+  constructor () {
+    this.allTimingElements  = [];
+  }
+
+  /**
+   * @method isTimingElement
+   *
+   * @desc Tests if a domElement for being a possible element with visual animations
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isTimingElement (domElement) {
+    return (domElement.tagName === 'canvas') ||
+           (domElement.tagName === 'embed') ||
+           (domElement.tagName === 'img') ||
+           (domElement.tagName === 'object') ||
+           (domElement.tagName === 'svg');
+  }
+
+  /**
+   * @method update
+   *
+   * @desc Checks to see if the domElement could be an animation, if so save reference
+   *
+   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   */
+
+  update (domElement) {
+    if (this.isTimingElement(domElement)) {
+      this.allTimingElements.push(domElement);
+    }
+  }
+
+  /**
+   * @method showImageInfo
+   *
+   * @desc showImageInfo is used for debugging the ImageInfo, ImageElement and MapElement objects
+   */
+
+  showTimingInfo () {
+    if (debug$s.flag) {
+      debug$s.log('== All Timing elements ==', 1);
+      this.allTimingElements.forEach( de => {
+        debug$s.log(`[fileName]: ${de.tagName}`, true);
+      });
+    }
+  }
+}
+
 /* domCache.js */
 
 /* Constants */
-const debug$n = new DebugLogging('domCache', false);
-debug$n.flag = false;
-debug$n.showDomTexts = false;
-debug$n.showDomElems = false;
-debug$n.showTree = false;
+const debug$r = new DebugLogging('domCache', false);
+debug$r.flag = false;
+debug$r.showDomTexts = false;
+debug$r.showDomElems = false;
+debug$r.showTree = false;
 
 const skipableElements = [
   'base',
@@ -19820,6 +20473,7 @@ class DOMCache {
     this.mediaInfo      = new MediaInfo();
     this.structureInfo = new StructureInfo();
     this.tableInfo     = new TableInfo();
+    this.timingInfo    = new TimingInfo();
     this.iframeInfo    = new IframeInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
@@ -20021,6 +20675,9 @@ class DOMCache {
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
+
+    this.timingInfo.update(domElement);
+
     return newParentInfo;
   }
 
@@ -20066,24 +20723,24 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$n.flag) {
-      if (debug$n.showDomElems) {
-        debug$n.log(' === AllDomElements ===', true);
+    if (debug$r.flag) {
+      if (debug$r.showDomElems) {
+        debug$r.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$n.domElement(de);
+          debug$r.domElement(de);
         });
       }
 
-      if (debug$n.showDomTexts) {
-        debug$n.log(' === AllDomTexts ===', true);
+      if (debug$r.showDomTexts) {
+        debug$r.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$n.domText(dt);
+          debug$r.domText(dt);
         });
       }
 
-      if (debug$n.showTree) {
-        debug$n.log(' === DOMCache Tree ===', true);
-        debug$n.domElement(this.startingDomElement);
+      if (debug$r.showTree) {
+        debug$r.log(' === DOMCache Tree ===', true);
+        debug$r.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
@@ -20093,8 +20750,8 @@ class DOMCache {
 /* audioRules.js */
 
 /* Constants */
-const debug$m = new DebugLogging('Audio Rules', false);
-debug$m.flag = false;
+const debug$q = new DebugLogging('Audio Rules', false);
+debug$q.flag = false;
 
 
 /*
@@ -20247,8 +20904,8 @@ const audioRules = [
 /* colorRules.js */
 
 /* Constants */
-const debug$l = new DebugLogging('Color Rules', false);
-debug$l.flag = false;
+const debug$p = new DebugLogging('Color Rules', false);
+debug$p.flag = false;
 
 
 /*
@@ -20280,14 +20937,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$l.flag && debug$l.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$p.flag && debug$p.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      debug$l.flag && debug$l.log(`===== COLOR 1 ====`);
+      debug$p.flag && debug$p.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -20395,14 +21052,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$l.flag && debug$l.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$p.flag && debug$p.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 7.1;
       const MIN_CCR_LARGE_FONT  = 4.5;
 
-      debug$l.flag && debug$l.log(`===== COLOR 3 ====`);
+      debug$p.flag && debug$p.log(`===== COLOR 3 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -20468,11 +21125,166 @@ const colorRules = [
 
 ];
 
+/* frameRules.js */
+
+/* Constants */
+const debug$o = new DebugLogging('Frame Rules', false);
+debug$o.flag = false;
+
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Frame Rules
+ */
+
+const frameRules = [
+
+  /**
+   * @object FRAME_1
+   *
+   * @desc  Evaluate frame elements for a title attribute
+   */
+
+  { rule_id             : 'FRAME_1',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : [],
+    target_resources    : ['frame'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+        if (de.tagName === 'frame' && de.node.src) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            }
+          }
+          else {
+           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+
+/*
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var frame_elements     = dom_cache.frames_cache.frame_elements;
+      var frame_elements_len = frame_elements.length;
+
+      // Check to see if valid cache reference
+      if (frame_elements && frame_elements_len) {
+
+        for (var i = 0; i < frame_elements_len; i++) {
+          var fe = frame_elements[i];
+          var de = fe.dom_element;
+          var cs = de.computed_style;
+
+          // if no content in frame ignore
+          if (fe.src.length === 0) continue;
+
+          if ((cs.is_visible_to_at === VISIBILITY.VISIBLE) &&
+              (cs.is_visible_onscreen === VISIBILITY.VISIBLE)){
+
+            if (de.has_title && de.title.length) {
+              rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', [de.title]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
+            }
+
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
+          }
+        } // end loop
+      }
+*/
+
+    } // end validate function
+  },
+
+  /**
+   * @object FRAME_2
+   *
+   * @desc  Evaluate iframe elements for an accessible name
+   */
+
+  { rule_id             : 'FRAME_2',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : [],
+    target_resources    : ['iframe'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+        if (de.tagName === 'iframe' && de.node.src) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            }
+          }
+          else {
+           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+/*
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var iframe_elements     = dom_cache.frames_cache.iframe_elements;
+      var iframe_elements_len = iframe_elements.length;
+
+      // Check to see if valid cache reference
+      if (iframe_elements && iframe_elements_len) {
+
+        for (var i = 0; i < iframe_elements_len; i++) {
+          var fe = iframe_elements[i];
+
+          // if no content in frame ignore
+          if (fe.src.length === 0) continue;
+
+          if ((fe.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) &&
+              (fe.dom_element.computed_style.is_visible_onscreen === VISIBILITY.VISIBLE)){
+
+            if (fe.computed_label.length) {
+              rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', [fe.computed_label]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
+            }
+
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
+          }
+        } // end loop
+      }
+
+*/
+    } // end validate function
+  }
+
+];
+
 /* controlRules.js */
 
 /* Constants */
-const debug$k = new DebugLogging('Control Rules', false);
-debug$k.flag = false;
+const debug$n = new DebugLogging('Control Rules', false);
+debug$n.flag = false;
 
 
 /*
@@ -21056,7 +21868,7 @@ const controlRules = [
   target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug$k.log(`[Control 12]: ${dom_cache} ${rule_result}`);
+    debug$n.log(`[Control 12]: ${dom_cache} ${rule_result}`);
 
     function getChildButtonDomElements (ce) {
       let buttonDomElements = [];
@@ -21156,8 +21968,8 @@ const controlRules = [
 /* headingRules.js */
 
 /* Constants */
-const debug$j = new DebugLogging('Heading Rules', false);
-debug$j.flag = false;
+const debug$m = new DebugLogging('Heading Rules', false);
+debug$m.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21547,8 +22359,8 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
 /* imageRules.js */
 
 /* Constants */
-const debug$i = new DebugLogging('Image Rules', false);
-debug$i.flag = false;
+const debug$l = new DebugLogging('Image Rules', false);
+debug$l.flag = false;
 
 /*
  * OpenA11y Alliance Rules
@@ -21817,8 +22629,8 @@ const imageRules = [
 /* keyboardRules.js */
 
 /* Constants */
-const debug$h = new DebugLogging('Keyboard Rules', false);
-debug$h.flag = true;
+const debug$k = new DebugLogging('Keyboard Rules', false);
+debug$k.flag = true;
 
 /* helper functions */
 
@@ -22078,8 +22890,8 @@ const keyboardRules = [
 /* landmarkRules.js */
 
 /* Constants */
-const debug$g = new DebugLogging('Landmark Rules', false);
-debug$g.flag = false;
+const debug$j = new DebugLogging('Landmark Rules', false);
+debug$j.flag = false;
 
 /*
  * OpenA11y Rules
@@ -22859,8 +23671,8 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 /* linkRules.js */
 
 /* Constants */
-const debug$f = new DebugLogging('Link Rules', false);
-debug$f.flag = false;
+const debug$i = new DebugLogging('Link Rules', false);
+debug$i.flag = false;
 
 /*
  * OpenA11y Rules
@@ -23008,11 +23820,542 @@ const linkRules = [
   },
 ];
 
+/* listRules.js */
+
+/* Constants */
+const debug$h = new DebugLogging('List Rules', false);
+debug$h.flag = false;
+
+
+/*
+ * OpenA11y Rules
+ * Rule Category: List Rules
+ */
+
+const listRules = [
+
+  /**
+   * @object LIST_1
+   *
+   * @desc Verify list elements are used semantically
+  */
+
+  { rule_id             : 'LIST_1',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : [],
+    target_resources    : ['ul', 'ol', 'li', 'dl', 'dt', 'dd', '[role="list"]', '[role="listitem"]', '[role="group"]'],
+    validate            : function (dom_cache, rule_result) {
+
+     debug$h.log(`[LIST 1]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
+
+/*
+
+        var TEST_RESULT = TEST_RESULT;
+        var VISIBILITY  = VISIBILITY;
+
+        var page_element = dom_cache.keyboard_focus_cache.page_element;
+
+        var list_elements     = dom_cache.lists_cache.list_elements;
+        var list_elements_len = list_elements.length; // loop control
+
+        for (var i = 0; i < list_elements_len; i++) {
+          var le = list_elements[i];
+          var de = le.dom_element;
+          var cs = de.computed_style;
+
+          var tag_name = de.tag_name;
+          if (de.has_role) tag_name += '[role=' + de.role + ']';
+
+          if (cs.is_visible_to_at  === VISIBILITY.VISIBLE) {
+            if (le.list_type === LIST.CONTAINER) {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [tag_name]);
+            }
+            else  {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', [tag_name]);
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [tag_name]);
+          }
+
+        } // end loop
+
+        if (list_elements_len > 0) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [list_elements_len]);
+        }
+
+*/
+
+      } // end validate function
+    },
+  /**
+   * @object LIST_2
+   *
+   * @desc Verify list benefits from an accessible name
+  */
+
+  { rule_id             : 'LIST_2',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.6',
+    wcag_related_ids    : ['1.3.1'],
+    target_resources    : ['ul', 'ol', '[role="list"]', '[role="group"]'],
+    validate            : function (dom_cache, rule_result) {
+
+     debug$h.log(`[LIST 2]: ${dom_cache} ${rule_result}`);
+
+/*
+
+        var TEST_RESULT = TEST_RESULT;
+        var VISIBILITY  = VISIBILITY;
+
+        var container_elements     = dom_cache.lists_cache.container_elements;
+        var container_elements_len = container_elements.length; // loop control
+
+        for (var i = 0; i < container_elements_len; i++) {
+          var le = container_elements[i];
+          var de = le.dom_element;
+          var cs = de.computed_style;
+
+          var tag_name = de.tag_name;
+          if (de.has_role) tag_name += '[role=' + de.role + ']';
+
+          if (cs.is_visible_to_at  === VISIBILITY.VISIBLE) {
+            if (le.accessible_name.length) {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [le.accessible_name]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', [tag_name]);
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [tag_name]);
+          }
+
+        } // end loop
+
+        */
+
+      } // end validate function
+    }
+];
+
+/* navigationRules.js */
+
+/* Constants */
+const debug$g = new DebugLogging('Navigation Rules', false);
+debug$g.flag = false;
+
+
+/*
+ * OpenA11y Rules
+ * Rule Category: List Rules
+ */
+
+const navigationRules = [
+
+  /**
+   * @object NAVIGATION_1
+   *
+   * @desc Page has at least two of the following resources: table of contents, site map,
+   *       search, navigation links, sand trail
+   */
+
+  { rule_id             : 'NAVIGATION_1',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.WEBSITE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.5',
+    wcag_related_ids    : [],
+    target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\''],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$g.log(`[NAVIGATION 1]: ${dom_cache} ${rule_result}`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
+      var landmark_elements_len = landmark_elements.length;
+
+      var page_element = dom_cache.headings_landmarks_cache.page_element;
+
+      var navigation_count = 0;
+      var search_count     = 0;
+
+      for (var i = 0; i < landmark_elements_len; i++ ) {
+        var le = landmark_elements[i];
+
+        if (le.role === 'navigation') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', []);
+            navigation_count++;
+          }
+        }
+
+        if (le.role === 'search') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', []);
+            search_count++;
+          }
+        }
+
+      }
+
+      if (page_element) {
+        if ((navigation_count > 0) && (search_count > 0)) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
+        else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_2', []);
+      }
+
+*/
+
+    } // end validation function
+  },
+
+  /**
+   * @object NAVIGATION_2
+   *
+   * @desc  Landmarks are in the same relative order when used to identify sections of web pages within the same website
+   *
+   */
+
+  { rule_id             : 'NAVIGATION_2',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.WEBSITE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '3.2.3',
+    wcag_related_ids    : ['3.2.4'],
+    target_resources    : ['Website', 'role=\'main\'', 'role=\'navigation\'', 'role=\'banner\'', 'role=\'contentinfo\'','role=\'search\''],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$g.log(`[NAVIGATION 2]: ${dom_cache} ${rule_result}  ${TEST_RESULT}`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
+      var landmark_elements_len = landmark_elements.length;
+
+      var page_element = dom_cache.headings_landmarks_cache.page_element;
+
+      var main_count          = 0;
+      var navigation_count    = 0;
+      var banner_count        = 0;
+      var contentinfo_count   = 0;
+      var search_count        = 0;
+      var complementary_count = 0;
+
+      var landmark_count    = 0;
+
+      var les = [];
+
+      for (var i = 0; i < landmark_elements_len; i++ ) {
+        var le = landmark_elements[i];
+
+        if (le.role === 'main') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', []);
+
+            if (main_count === 0) les.push('main');
+
+            main_count += 1;
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'navigation') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', []);
+
+            if (navigation_count === 0) les.push('navigation');
+
+            navigation_count += 1;
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'banner') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_3', []);
+
+            if (banner_count === 0) les.push('banner');
+
+            banner_count += 1;
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'contentinfo') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_4', []);
+
+            if (contentinfo_count === 0) les.push('contentinfo');
+
+            contentinfo_count += 1;
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'search') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_5', []);
+
+            if (search_count === 0) les.push('search');
+
+            search_count += 1;
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'complementary') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_6', []);
+
+            if (complementary_count === 0) les.push('complementary');
+
+            complementary_count += 1;
+            landmark_count += 1;
+          }
+        }
+
+
+      }
+
+      if (page_element) {
+        if (landmark_count > 0) {
+
+          var last = les.length - 1;
+          var landmark_list = les[0];
+
+          for (i = 1; i < les.length; i++) {
+            if (i === last) landmark_list += " and " + les[i];
+            else landmark_list += ", " + les[i];
+          }
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', [landmark_list]);
+        }
+      }
+      */
+    } // end validation function
+  },
+
+  /**
+   * @object NAVIGATION_3
+   *
+   * @desc  h2 elements are in the same relative order when used to identify sections of web pages within the same website
+   *
+   */
+
+  { rule_id             : 'NAVIGATION_3',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.WEBSITE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '3.2.3',
+    wcag_related_ids    : ['3.2.4'],
+    target_resources    : ['Website', 'h2'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$g.log(`[NAVIGATION 3]: ${dom_cache} ${rule_result}`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
+      var heading_elements_len = heading_elements.length;
+
+      var page_element = dom_cache.headings_landmarks_cache.page_element;
+
+      var heading_count = 0;
+
+      for (var i = 0; i < heading_elements_len; i++ ) {
+        var he = heading_elements[i];
+
+        if ((he.level === 1) &&
+           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_1', []);
+            heading_count += 1;
+        }
+
+        if ((he.level === 2) &&
+           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_2', []);
+            heading_count += 1;
+        }
+      }
+
+      if (page_element) {
+         if (heading_count) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
+         else rule_result.addResult(TEST_RESULT.FAIL, page_element, 'WEBSITE_FAIL_1', []);
+      }
+
+*/
+
+    } // end validation function
+  },
+
+  /**
+   * @object NAVIGATION_4
+   *
+   * @desc  landmarks identifying the same sections in a website have the same accessible name
+   *
+   */
+
+  { rule_id             : 'NAVIGATION_4',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.WEBSITE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '3.2.4',
+    wcag_related_ids    : ['3.2.3'],
+    target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\'', 'role=\'main\'', 'role=\'banner\'', 'role=\'contentinfo\'', 'h2'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$g.log(`[NAVIGATION 4]: ${dom_cache} ${rule_result}`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
+      var landmark_elements_len = landmark_elements.length;
+
+      var page_element = dom_cache.headings_landmarks_cache.page_element;
+
+      var landmark_count = 0;
+
+      for (var i = 0; i < landmark_elements_len; i++ ) {
+        var le = landmark_elements[i];
+
+        if (le.role === 'main') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', []);
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'navigation') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', []);
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'search') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_3', []);
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'banner') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_4', []);
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'contentinfo') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_5', []);
+            landmark_count += 1;
+          }
+        }
+
+        if (le.role === 'complementary') {
+          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_6', []);
+            landmark_count += 1;
+          }
+        }
+
+      }
+
+      if (page_element  && landmark_count) {
+        rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
+      }
+
+*/
+
+    } // end validation function
+  },
+
+  /**
+   * @object NAVIGATION_5
+   *
+   * @desc  h2 elements used to identify sections of web pages within the same accessible name
+   *
+   */
+
+  { rule_id             : 'NAVIGATION_5',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.WEBSITE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '3.2.4',
+    wcag_related_ids    : ['3.2.3'],
+    target_resources    : ['Website', 'h2'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$g.log(`[NAVIGATION 5]: ${dom_cache} ${rule_result}`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
+      var heading_elements_len = heading_elements.length;
+
+      var page_element = dom_cache.headings_landmarks_cache.page_element;
+
+      var heading_count = 0;
+
+      for (var i = 0; i < heading_elements_len; i++ ) {
+        var he = heading_elements[i];
+
+        if ((he.level === 1) &&
+           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_1', []);
+            heading_count += 1;
+        }
+
+        if ((he.level === 2) &&
+           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_2', []);
+            heading_count += 1;
+        }
+      }
+
+      if (page_element) {
+         if (heading_count) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
+         else rule_result.addResult(TEST_RESULT.FAIL, page_element, 'WEBSITE_FAIL_1', []);
+      }
+*/
+
+    } // end validation function
+  }
+];
+
 /* tableRules.js */
 
 /* Constants */
-const debug$e = new DebugLogging('Table Rules', false);
-debug$e.flag = false;
+const debug$f = new DebugLogging('Table Rules', false);
+debug$f.flag = false;
 
 /*
  * OpenA11y Rules
@@ -23424,6 +24767,132 @@ const tableRules = [
 
   } // end validation function
 }
+];
+
+/* timingRules.js */
+
+/* Constants */
+const debug$e = new DebugLogging('Timing Rules', false);
+debug$e.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Timing Rules
+ */
+
+const timingRules = [
+
+  /**
+   * @object TIMING_1
+   *
+   * @desc Timing adjustable for pages with interactive elements
+   */
+
+  { rule_id             : 'TIMING_1',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TIMING,
+    rule_required       : true,
+    wcag_primary_id     : '2.2.1',
+    wcag_related_ids    : [],
+    target_resources    : ['a', 'input', 'button', 'wdiget'],
+    validate          : function (dom_cache, rule_result) {
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+
+    } // end validate function
+  },
+
+  /**
+   * @object TIMING_2
+   *
+   * @desc Stop, pause or hide content that is moving, scrolling, flashing or auto updating
+   */
+
+  { rule_id             : 'TIMING_2',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TIMING,
+    rule_required       : true,
+    wcag_primary_id     : '2.2.2',
+    wcag_related_ids    : [],
+    target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
+    validate          : function (dom_cache, rule_result) {
+
+     debug$e.log(`[TIMING 2]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var timing_elements     = dom_cache.timing_cache.timing_elements;
+      var timing_elements_len = timing_elements.length;
+
+      var page_element = dom_cache.timing_cache.page_element;
+
+      for (var i = 0; i < timing_elements_len; i++) {
+        var mbe = timing_elements[i];
+        var de = mbe.dom_element;
+        var cs = de.computed_style;
+
+        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, mbe, 'ELEMENT_MC_1', [de.tag_name]);
+        }
+        else {
+         rule_result.addResult(TEST_RESULT.HIDDEN, mbe, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+        }
+      }
+
+      rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+*/
+    } // end validate function
+  },
+
+  /**
+   * @object TIMING_3
+   *
+   * @desc Web pages do not contain anything that flashes more than three times in any one second period
+   */
+
+  { rule_id             : 'TIMING_3',
+    last_updated        : '2023-08-24',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.TIMING,
+    rule_required       : true,
+    wcag_primary_id     : '2.3.1',
+    wcag_related_ids    : [],
+    target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
+    validate          : function (dom_cache, rule_result) {
+
+     debug$e.log(`[TIMING 3]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
+
+/*
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY  = VISIBILITY;
+
+      var timing_elements     = dom_cache.timing_cache.timing_elements;
+      var timing_elements_len = timing_elements.length;
+
+      var page_element = dom_cache.timing_cache.page_element;
+
+      for (var i = 0; i < timing_elements_len; i++) {
+        var mbe = timing_elements[i];
+        var de = mbe.dom_element;
+        var cs = de.computed_style;
+
+        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, mbe, 'ELEMENT_MC_1', [de.tag_name]);
+        }
+        else {
+         rule_result.addResult(TEST_RESULT.HIDDEN, mbe, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+        }
+      }
+
+      rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+*/
+    } // end validate function
+  }
 ];
 
 /* videoRules.js */
@@ -25207,7 +26676,7 @@ addToArray(audioRules);
 // addToArray(bypassRules);
 addToArray(colorRules);
 // addToArray(errorRules);
-// addToArray(frameRules);
+addToArray(frameRules);
 addToArray(controlRules);
 addToArray(headingRules);
 // addToArray(htmlRules);
@@ -25216,13 +26685,13 @@ addToArray(keyboardRules);
 addToArray(landmarkRules);
 // addToArray(layoutRules);
 addToArray(linkRules);
-// addToArray(listRules);
-// addToArray(navigationRules);
+addToArray(listRules);
+addToArray(navigationRules);
 // addToArray(readingOrderRules);
 // addToArray(resizeRules);
 // addToArray(sensoryRules);
 addToArray(tableRules);
-// addToArray(timingRules);
+addToArray(timingRules);
 addToArray(videoRules);
 addToArray(widgetRules);
 
