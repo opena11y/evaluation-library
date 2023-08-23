@@ -58,11 +58,6 @@ export default class EvaluationLibrary {
 
   evaluate (startingDoc, title='', url='', ruleset='WCAG21', level='AA', scopeFilter='ALL', ruleFilter = []) {
 
-    debug.log(`[    ruleset]: ${ruleset}`);
-    debug.log(`[      level]: ${level}`);
-    debug.log(`[scopeFilter]: ${scopeFilter}`);
-    debug.log(`[ ruleFilter]: ${ruleFilter}`);
-
     let domCache = new DOMCache(startingDoc);
     let evaluationResult = new EvaluationResult(allRules, domCache, title, url, ruleset, level, scopeFilter, ruleFilter);
 

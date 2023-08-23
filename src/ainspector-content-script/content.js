@@ -19,7 +19,7 @@ import DebugLogging from '../debug.js';
 
 
 const debug = new DebugLogging('Content', false);
-debug.flag = true;
+debug.flag = false;
 
 /*
 **  Connect to panel.js script and set up listener/handler

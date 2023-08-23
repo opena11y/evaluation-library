@@ -11,7 +11,7 @@ import {
 import DebugLogging from '../debug.js';
 
 const debug = new DebugLogging('getAllRuleInfo', false);
-debug.flag = true;
+debug.flag = false;
 
 // ----------------------
 // All Rules Result functions
