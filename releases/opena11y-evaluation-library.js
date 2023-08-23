@@ -13966,7 +13966,7 @@ const controlRules$1 = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H32: Providing submit buttons',
-          url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+          url:   'https://www.w3.org/TR/2016/NOTE-WCAG20-TECHS-20161007/H32'
         }
       ]
   }
@@ -20898,6 +20898,9 @@ const controlRules = [
 
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
+      if (de1.role === 'option') {
+        return;
+      }
       let count;
       if (de1.ariaInfo.isNameRequired) {
         if (de1.visibility.isVisibleToAT) {
@@ -21055,8 +21058,6 @@ const controlRules = [
 
     debug$k.log(`[Control 12]: ${dom_cache} ${rule_result}`);
 
-/*
-
     function getChildButtonDomElements (ce) {
       let buttonDomElements = [];
 
@@ -21147,7 +21148,6 @@ const controlRules = [
       }
     });
 
-    */
   } // end validation function
 }
 
@@ -22058,14 +22058,10 @@ const keyboardRules = [
     target_resources    : ['select'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$h.log(`[KEYBOARD 6]: ${dom_cache} ${rule_result}`);
-
-/*
-
-      dom_cache.controlInfo.allControlElements.forEach( ce => {
+     dom_cache.controlInfo.allControlElements.forEach(ce => {
         const de = ce.domElement;
         if (de.tagName === 'select') {
-          if (de.visibility.isVisibleOnScreen) {
+          if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
           }
           else {
@@ -22073,9 +22069,8 @@ const keyboardRules = [
           }
         }
       });
-      */
 
-     } // end validation function
+    } // end validation function
   }
 
 ];

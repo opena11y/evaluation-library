@@ -436,6 +436,9 @@ export const controlRules = [
 
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
+      if (de1.role === 'option') {
+        return;
+      }
       let count;
       if (de1.ariaInfo.isNameRequired) {
         if (de1.visibility.isVisibleToAT) {
@@ -593,8 +596,6 @@ export const controlRules = [
 
     debug.log(`[Control 12]: ${dom_cache} ${rule_result}`);
 
-/*
-
     function getChildButtonDomElements (ce) {
       let buttonDomElements = [];
 
@@ -685,7 +686,6 @@ export const controlRules = [
       }
     });
 
-    */
   } // end validation function
 }
 

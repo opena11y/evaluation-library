@@ -682,7 +682,7 @@ export const controlRules = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H32: Providing submit buttons',
-          url:   'https://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H32'
+          url:   'https://www.w3.org/TR/2016/NOTE-WCAG20-TECHS-20161007/H32'
         }
       ]
   }

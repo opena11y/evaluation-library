@@ -250,14 +250,10 @@ export const keyboardRules = [
     target_resources    : ['select'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[KEYBOARD 6]: ${dom_cache} ${rule_result}`);
-
-/*
-
-      dom_cache.controlInfo.allControlElements.forEach( ce => {
+     dom_cache.controlInfo.allControlElements.forEach(ce => {
         const de = ce.domElement;
         if (de.tagName === 'select') {
-          if (de.visibility.isVisibleOnScreen) {
+          if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
           }
           else {
@@ -265,9 +261,8 @@ export const keyboardRules = [
           }
         }
       });
-      */
 
-     } // end validation function
+    } // end validation function
   }
 
 ];
