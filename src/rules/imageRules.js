@@ -2,7 +2,6 @@
 
 /* Imports */
 import {
-  RULESET,
   RULE_SCOPE,
   RULE_CATEGORIES,
   TEST_RESULT
@@ -31,7 +30,6 @@ export const imageRules = [
   last_updated        : '2014-11-28',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.TRIAGE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -73,7 +71,6 @@ export const imageRules = [
   last_updated        : '2015-09-11',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -111,7 +108,6 @@ export const imageRules = [
   last_updated        : '2014-11-28',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -143,7 +139,6 @@ export const imageRules = [
   last_updated        : '2014-11-28',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -177,7 +172,6 @@ export const imageRules = [
   last_updated        : '2015-09-11',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -215,7 +209,6 @@ export const imageRules = [
   last_updated        : '2014-11-28',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -254,7 +247,6 @@ export const imageRules = [
   last_updated        : '2015-09-15',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
-  ruleset             : RULESET.MORE,
   rule_required       : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],

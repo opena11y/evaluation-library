@@ -42,6 +42,7 @@ export const keyboardRules = [
     last_updated        : '2023-06-10',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
     wcag_primary_id     : '2.1.1',
     wcag_related_ids    : ['4.1.2'],
     target_resources    : ['widgets'],
@@ -71,6 +72,7 @@ export const keyboardRules = [
     last_updated        : '2023-08-17',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
     wcag_primary_id     : '2.1.1',
     wcag_related_ids    : ['2.1.2', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['links', 'controls', 'widgets'],
@@ -141,6 +143,7 @@ export const keyboardRules = [
     last_updated        : '2023-08-17',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
     wcag_primary_id     : '2.1.2',
     wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['object'],
@@ -168,6 +171,7 @@ export const keyboardRules = [
     last_updated        : '2023-08-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
     wcag_primary_id     : '2.1.2',
     wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['object'],
@@ -196,6 +200,7 @@ export const keyboardRules = [
     last_updated        : '2023-08-22',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
     wcag_primary_id     : '2.4.7',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
     target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
@@ -239,24 +244,21 @@ export const keyboardRules = [
     last_updated        : '2023-08-22',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
+    rule_required       : true,
     wcag_primary_id     : '3.2.1',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
     target_resources    : ['a', 'area', 'select'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[KEYBOARD 6]: ${dom_cache} ${rule_result}`);
-
-/*
-      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
-        if (de.visibility.isVisibleOnScreen) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+      dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
       });
-      */
-     } // end validation function
+    } // end validation function
   },
 
   /**
@@ -269,10 +271,20 @@ export const keyboardRules = [
     last_updated        : '2023-08-22',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : true,
     wcag_primary_id     : '3.2.2',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
     target_resources    : ['select'],
     validate            : function (dom_cache, rule_result) {
+
+      dom_cache.controlInfo.allDomElements.forEach (de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
 
       debug.log(`[KEYBOARD 7]: ${dom_cache} ${rule_result}`);
 

@@ -2,7 +2,6 @@
 
 /* Imports */
 import {
-  RULESET,
   RULE_SCOPE,
   RULE_CATEGORIES,
   TEST_RESULT
@@ -31,7 +30,7 @@ export const audioRules = [
     last_updated        : '2014-11-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
-    ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
     target_resources    : ['audio', 'track'],
@@ -70,7 +69,7 @@ export const audioRules = [
     last_updated        : '2014-11-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
-    ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
     target_resources    : ['object', 'param'],
@@ -109,7 +108,7 @@ export const audioRules = [
     last_updated        : '2014-11-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
-    ruleset             : RULESET.MORE,
+    rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
     target_resources    : ['embed'],
@@ -148,6 +147,7 @@ export const audioRules = [
     last_updated        : '2014-11-21',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
+    rule_required       : true,
     wcag_primary_id     : '1.4.2',
     wcag_related_ids    : [],
     target_resources    : [],

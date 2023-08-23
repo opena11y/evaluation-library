@@ -2,7 +2,6 @@
 
 /* Imports */
 import {
-  RULESET,
   RULE_SCOPE,
   RULE_CATEGORIES,
   TEST_RESULT
@@ -32,7 +31,6 @@ export const linkRules = [
     last_updated        : '2022-05-23',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
-    ruleset             : RULESET.MORE,
     rule_required       : true,
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],
@@ -71,7 +69,6 @@ export const linkRules = [
     last_updated        : '2022-05-23',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
-    ruleset             : RULESET.MORE,
     rule_required       : false,
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],

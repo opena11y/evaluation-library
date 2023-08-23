@@ -123,6 +123,7 @@ export const colorRules = [
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
     target_resources    : [],

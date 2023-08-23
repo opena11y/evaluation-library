@@ -246,7 +246,7 @@ export const keyboardRules = {
       MANUAL_CHECKS: [
         'Use the the keyboard (i.e. typically he "tab" key, but in the case of widgets other keys) to move focus through the links, form controls, embedded applications and widgets on the page.',
         'Check if the element with keyboard focus is clearly visible for all focusable elements on the page as you move focus between elements, and that it changes more than just color (i.e. border/outline around element with focus).',
-        'Test keyboard focus styling using more than one browser and operating system, since there is a wide varability of between operating systems and browsers for styling keyboard focus.'
+        'Test keyboard focus styling using more than one browser and operating system, since there is a wide variability of between operating systems and browsers for styling keyboard focus.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -281,8 +281,8 @@ export const keyboardRules = {
         NOT_APPLICABLE:  'No link elements on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_MC_1: 'If the target of the link opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
-        ELEMENT_HIDDEN_1: 'The link is hidden, so cannot open any new windows.'
+        ELEMENT_MC_1: 'If the target of the @%1@ element opens multiple windows (i.e. typically advertisements or other promotional information) make sure keyboard focus is on the content window.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element is hidden, so cannot open any new windows.'
       },
       PURPOSES: [
         'User\'s can become disoriented if the focus causes unpredictable actions, including new URLs and popup windows for advertisements or promotions.'
