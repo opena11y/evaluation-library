@@ -15,7 +15,7 @@ const debug = new DebugLogging('TimingInfo', false);
 
 export default class TimingInfo {
   constructor () {
-    this.allTimingElements  = [];
+    this.allTimingDomElements  = [];
   }
 
   /**
@@ -28,8 +28,8 @@ export default class TimingInfo {
 
   isTimingElement (domElement) {
     return (domElement.tagName === 'canvas') ||
-           (domElement.tagName === 'embed') ||
-           (domElement.tagName === 'img') ||
+           (domElement.tagName === 'embed')  ||
+           (domElement.tagName === 'img')    ||
            (domElement.tagName === 'object') ||
            (domElement.tagName === 'svg');
   }
@@ -44,7 +44,7 @@ export default class TimingInfo {
 
   update (domElement) {
     if (this.isTimingElement(domElement)) {
-      this.allTimingElements.push(domElement);
+      this.allTimingDomElements.push(domElement);
     }
   }
 
@@ -57,7 +57,7 @@ export default class TimingInfo {
   showTimingInfo () {
     if (debug.flag) {
       debug.log('== All Timing elements ==', 1);
-      this.allTimingElements.forEach( de => {
+      this.allTimingDomElements.forEach( de => {
         debug.log(`[fileName]: ${de.tagName}`, true);
       });
     }

@@ -16,6 +16,7 @@ import {headingRules}       from './headingRules.js';
 // import {htmlRules}          from './htmlRules.js';
 import {imageRules}         from './imageRules.js';
 import {keyboardRules}      from './keyboardRules.js';
+//import {languageRules}      from './languageRules.js';
 import {landmarkRules}      from './landmarkRules.js';
 // import {layoutRules}        from './layoutRules.js';
 import {linkRules}          from './linkRules.js';

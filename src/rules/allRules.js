@@ -12,6 +12,7 @@ import {headingRules}       from './headingRules.js';
 import {imageRules}         from './imageRules.js';
 import {keyboardRules}      from './keyboardRules.js';
 import {landmarkRules}      from './landmarkRules.js';
+// import {languageRules}      from './languageRules.js';
 // import {layoutRules}        from './layoutRules.js';
 import {linkRules}          from './linkRules.js';
 import {listRules}          from './listRules.js';
@@ -21,6 +22,7 @@ import {navigationRules}    from './navigationRules.js';
 // import {sensoryRules}       from './sensoryRules.js';
 import {tableRules}         from './tableRules.js';
 import {timingRules}        from './timingRules.js';
+// import {titleRules}       from './titleRules.js';
 import {videoRules}         from './videoRules.js';
 import {widgetRules}        from './widgetRules.js';
 

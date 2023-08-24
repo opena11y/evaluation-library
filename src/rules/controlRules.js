@@ -594,8 +594,6 @@ export const controlRules = [
   target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.log(`[Control 12]: ${dom_cache} ${rule_result}`);
-
     function getChildButtonDomElements (ce) {
       let buttonDomElements = [];
 

@@ -33,10 +33,40 @@ export const listRules = [
     rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : [],
-    target_resources    : ['ul', 'ol', 'li', 'dl', 'dt', 'dd', '[role="list"]', '[role="listitem"]', '[role="group"]'],
+    target_resources    : ['ul', 'ol', 'li', '[role="list"]', '[role="listitem"]'],
     validate            : function (dom_cache, rule_result) {
 
-     debug.log(`[LIST 1]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
+      let listCount = 0;
+
+      dom_cache.listInfo.allListElements.forEach ( le => {
+        const de = le.domElement;
+
+        if (de.role === 'list') {
+          if (de.visibility.isVisibleToAT) {
+            listCount += 1;
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+       if (de.role === 'listitem') {
+          if (de.visibility.isVisibleToAT) {
+            listCount += 1;
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+      });
+
+      if (listCount) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [listCount]);
+      }
+
 
 /*
 
@@ -91,10 +121,28 @@ export const listRules = [
     rule_required       : true,
     wcag_primary_id     : '2.4.6',
     wcag_related_ids    : ['1.3.1'],
-    target_resources    : ['ul', 'ol', '[role="list"]', '[role="group"]'],
+    target_resources    : ['ul', 'ol', '[role="list"]'],
     validate            : function (dom_cache, rule_result) {
 
-     debug.log(`[LIST 2]: ${dom_cache} ${rule_result}`);
+      dom_cache.listInfo.allListElements.forEach ( le => {
+        const de = le.domElement;
+
+        if (de.role === 'list') {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.accName.name]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+      });
+
 
 /*
 

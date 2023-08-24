@@ -12,7 +12,7 @@ export const listRules = {
       ID:                    'List 1',
       DEFINITION:            'Page must use semantic markup for lists: to identify the type of list container (ordered, unordered or description list) and to group its related list item elements.',
       SUMMARY:               'Use semantic markup for lists',
-      TARGET_RESOURCES_DESC: '@ul@, @ol@, @li@, @dl@, @dt@ and @dd@ elements, @[role="list"]@, @[role="group"]@ and @[role="listitem"]@',
+      TARGET_RESOURCES_DESC: '@ul@, @ol@ and @li@ elements, and elements with @[role="list"]@ and @[role="listitem"]@',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:   'Verify the list element is used semantically.',
         MANUAL_CHECK_P:   'Verify the %N_MC list elements are used semantically.',
@@ -94,9 +94,9 @@ export const listRules = {
   },
   LIST_2: {
       ID:                    'List 2',
-      DEFINITION:            'When appropriate, a list container element (@ul@, @ol@, @dl@, @[role="list"]@, @[role="group"]@) must include a label that describes the purpose or contents of the list.',
+      DEFINITION:            'When appropriate, a list container element (@ul@, @ol@, @[role="list"]@ should include a label that describes the purpose or contents of the list.',
       SUMMARY:               'Provide list labels when appropriate',
-      TARGET_RESOURCES_DESC: '@ul@, @ol@ and @dl@ elements, container elements with @[role="list"]@, @[role="group"]@',
+      TARGET_RESOURCES_DESC: '@ul@ and @ol@ elements, and container elements with @[role="list"]@',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:   'Determine whether the container element benefits from a label and, if so, verify that it accurately describes the contents of the list.',
         MANUAL_CHECK_P:   'Determine whether the %N_MC list container elements benefit from labels and, if so, verify that each accurately describes the contents of the list.',
@@ -110,7 +110,7 @@ export const listRules = {
         ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
       },
       PURPOSES: [
-        'Assistive technologies use labels on @ul@, @ol@ and @dl@ elements, and elements with @[role="list"]@ and @[role="group"]@ attributes to help screen reader users understand the purpose or contents of lists.'
+        'Assistive technologies use labels on @ul@ and @ol@ elements, and elements with @[role="list"]@ attributes to help screen reader users understand the purpose or contents of lists.'
       ],
       TECHNIQUES: [
         'Use the @aria-labelledby@ attribute to add a label to a list container element to reference the @id@(s) of one or more elements on the page that describe its contents.',
@@ -127,14 +127,6 @@ export const listRules = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: ul element',
           url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: dl element',
-          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',

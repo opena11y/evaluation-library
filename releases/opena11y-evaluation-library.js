@@ -16763,7 +16763,7 @@ const listRules$1 = {
       ID:                    'List 1',
       DEFINITION:            'Page must use semantic markup for lists: to identify the type of list container (ordered, unordered or description list) and to group its related list item elements.',
       SUMMARY:               'Use semantic markup for lists',
-      TARGET_RESOURCES_DESC: '@ul@, @ol@, @li@, @dl@, @dt@ and @dd@ elements, @[role="list"]@, @[role="group"]@ and @[role="listitem"]@',
+      TARGET_RESOURCES_DESC: '@ul@, @ol@ and @li@ elements, and elements with @[role="list"]@ and @[role="listitem"]@',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:   'Verify the list element is used semantically.',
         MANUAL_CHECK_P:   'Verify the %N_MC list elements are used semantically.',
@@ -16845,9 +16845,9 @@ const listRules$1 = {
   },
   LIST_2: {
       ID:                    'List 2',
-      DEFINITION:            'When appropriate, a list container element (@ul@, @ol@, @dl@, @[role="list"]@, @[role="group"]@) must include a label that describes the purpose or contents of the list.',
+      DEFINITION:            'When appropriate, a list container element (@ul@, @ol@, @[role="list"]@ should include a label that describes the purpose or contents of the list.',
       SUMMARY:               'Provide list labels when appropriate',
-      TARGET_RESOURCES_DESC: '@ul@, @ol@ and @dl@ elements, container elements with @[role="list"]@, @[role="group"]@',
+      TARGET_RESOURCES_DESC: '@ul@ and @ol@ elements, and container elements with @[role="list"]@',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:   'Determine whether the container element benefits from a label and, if so, verify that it accurately describes the contents of the list.',
         MANUAL_CHECK_P:   'Determine whether the %N_MC list container elements benefit from labels and, if so, verify that each accurately describes the contents of the list.',
@@ -16861,7 +16861,7 @@ const listRules$1 = {
         ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
       },
       PURPOSES: [
-        'Assistive technologies use labels on @ul@, @ol@ and @dl@ elements, and elements with @[role="list"]@ and @[role="group"]@ attributes to help screen reader users understand the purpose or contents of lists.'
+        'Assistive technologies use labels on @ul@ and @ol@ elements, and elements with @[role="list"]@ attributes to help screen reader users understand the purpose or contents of lists.'
       ],
       TECHNIQUES: [
         'Use the @aria-labelledby@ attribute to add a label to a list container element to reference the @id@(s) of one or more elements on the page that describe its contents.',
@@ -16878,14 +16878,6 @@ const listRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: ul element',
           url:   'https://www.w3.org/TR/html5/grouping-content.html#the-ul-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: dl element',
-          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
@@ -20314,7 +20306,7 @@ const debug$s = new DebugLogging('TimingInfo', false);
 
 class TimingInfo {
   constructor () {
-    this.allTimingElements  = [];
+    this.allTimingDomElements  = [];
   }
 
   /**
@@ -20327,8 +20319,8 @@ class TimingInfo {
 
   isTimingElement (domElement) {
     return (domElement.tagName === 'canvas') ||
-           (domElement.tagName === 'embed') ||
-           (domElement.tagName === 'img') ||
+           (domElement.tagName === 'embed')  ||
+           (domElement.tagName === 'img')    ||
            (domElement.tagName === 'object') ||
            (domElement.tagName === 'svg');
   }
@@ -20343,7 +20335,7 @@ class TimingInfo {
 
   update (domElement) {
     if (this.isTimingElement(domElement)) {
-      this.allTimingElements.push(domElement);
+      this.allTimingDomElements.push(domElement);
     }
   }
 
@@ -20356,7 +20348,7 @@ class TimingInfo {
   showTimingInfo () {
     if (debug$s.flag) {
       debug$s.log('== All Timing elements ==', 1);
-      this.allTimingElements.forEach( de => {
+      this.allTimingDomElements.forEach( de => {
         debug$s.log(`[fileName]: ${de.tagName}`, true);
       });
     }
@@ -21785,8 +21777,6 @@ const controlRules = [
   wcag_related_ids    : [],
   target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
   validate            : function (dom_cache, rule_result) {
-
-    debug$n.log(`[Control 12]: ${dom_cache} ${rule_result}`);
 
     function getChildButtonDomElements (ce) {
       let buttonDomElements = [];
@@ -23765,10 +23755,40 @@ const listRules = [
     rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : [],
-    target_resources    : ['ul', 'ol', 'li', 'dl', 'dt', 'dd', '[role="list"]', '[role="listitem"]', '[role="group"]'],
+    target_resources    : ['ul', 'ol', 'li', '[role="list"]', '[role="listitem"]'],
     validate            : function (dom_cache, rule_result) {
 
-     debug$h.log(`[LIST 1]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
+      let listCount = 0;
+
+      dom_cache.listInfo.allListElements.forEach ( le => {
+        const de = le.domElement;
+
+        if (de.role === 'list') {
+          if (de.visibility.isVisibleToAT) {
+            listCount += 1;
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+       if (de.role === 'listitem') {
+          if (de.visibility.isVisibleToAT) {
+            listCount += 1;
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+      });
+
+      if (listCount) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [listCount]);
+      }
+
 
 /*
 
@@ -23823,10 +23843,28 @@ const listRules = [
     rule_required       : true,
     wcag_primary_id     : '2.4.6',
     wcag_related_ids    : ['1.3.1'],
-    target_resources    : ['ul', 'ol', '[role="list"]', '[role="group"]'],
+    target_resources    : ['ul', 'ol', '[role="list"]'],
     validate            : function (dom_cache, rule_result) {
 
-     debug$h.log(`[LIST 2]: ${dom_cache} ${rule_result}`);
+      dom_cache.listInfo.allListElements.forEach ( le => {
+        const de = le.domElement;
+
+        if (de.role === 'list') {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.name) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.accName.name]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+      });
+
 
 /*
 
@@ -24560,7 +24598,9 @@ const timingRules = [
     target_resources    : ['a', 'input', 'button', 'wdiget'],
     validate          : function (dom_cache, rule_result) {
 
+    if (dom_cache.controlInfo.allControlElements.length) {
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    }
 
     } // end validate function
   },
@@ -24581,33 +24621,18 @@ const timingRules = [
     target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
     validate          : function (dom_cache, rule_result) {
 
-     debug$e.log(`[TIMING 2]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var timing_elements     = dom_cache.timing_cache.timing_elements;
-      var timing_elements_len = timing_elements.length;
-
-      var page_element = dom_cache.timing_cache.page_element;
-
-      for (var i = 0; i < timing_elements_len; i++) {
-        var mbe = timing_elements[i];
-        var de = mbe.dom_element;
-        var cs = de.computed_style;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, mbe, 'ELEMENT_MC_1', [de.tag_name]);
+      dom_cache.timingInfo.allTimingDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, mbe, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
-      }
+      });
 
-      rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-*/
+      if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
     } // end validate function
   },
 
@@ -24619,7 +24644,7 @@ const timingRules = [
 
   { rule_id             : 'TIMING_3',
     last_updated        : '2023-08-24',
-    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.TIMING,
     rule_required       : true,
     wcag_primary_id     : '2.3.1',
@@ -24627,32 +24652,19 @@ const timingRules = [
     target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
     validate          : function (dom_cache, rule_result) {
 
-     debug$e.log(`[TIMING 3]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
-
-/*
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var timing_elements     = dom_cache.timing_cache.timing_elements;
-      var timing_elements_len = timing_elements.length;
-
-      var page_element = dom_cache.timing_cache.page_element;
-
-      for (var i = 0; i < timing_elements_len; i++) {
-        var mbe = timing_elements[i];
-        var de = mbe.dom_element;
-        var cs = de.computed_style;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, mbe, 'ELEMENT_MC_1', [de.tag_name]);
+      dom_cache.timingInfo.allTimingDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, mbe, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
+      });
+
+      if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
 
-      rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-*/
     } // end validate function
   }
 ];
@@ -26662,7 +26674,7 @@ class RuleGroupResult {
   /**
    * @method getEvaluationResult
    *
-   * @memberOf OpenAjax.a11y.RuleGroupResult
+   * @memberOf RuleGroupResult
    *
    * @desc Returns the evaluation result the rule group result is a part of
    *
@@ -26676,7 +26688,7 @@ class RuleGroupResult {
   /**
    * @method getImplementationScore
    *
-   * @memberOf OpenAjax.a11y.RuleGroupResult
+   * @memberOf RuleGroupResult
    *
    * @desc Return a numerical value between (0-100) indicated
    *

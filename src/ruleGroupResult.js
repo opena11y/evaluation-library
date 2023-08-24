@@ -73,7 +73,7 @@ export default class RuleGroupResult {
   /**
    * @method getEvaluationResult
    *
-   * @memberOf OpenAjax.a11y.RuleGroupResult
+   * @memberOf RuleGroupResult
    *
    * @desc Returns the evaluation result the rule group result is a part of
    *
@@ -87,7 +87,7 @@ export default class RuleGroupResult {
   /**
    * @method getImplementationScore
    *
-   * @memberOf OpenAjax.a11y.RuleGroupResult
+   * @memberOf RuleGroupResult
    *
    * @desc Return a numerical value between (0-100) indicated
    *

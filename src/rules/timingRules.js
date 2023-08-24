@@ -36,7 +36,9 @@ export const timingRules = [
     target_resources    : ['a', 'input', 'button', 'wdiget'],
     validate          : function (dom_cache, rule_result) {
 
+    if (dom_cache.controlInfo.allControlElements.length) {
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    }
 
     } // end validate function
   },
@@ -57,33 +59,18 @@ export const timingRules = [
     target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
     validate          : function (dom_cache, rule_result) {
 
-     debug.log(`[TIMING 2]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var timing_elements     = dom_cache.timing_cache.timing_elements;
-      var timing_elements_len = timing_elements.length;
-
-      var page_element = dom_cache.timing_cache.page_element;
-
-      for (var i = 0; i < timing_elements_len; i++) {
-        var mbe = timing_elements[i];
-        var de = mbe.dom_element;
-        var cs = de.computed_style;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, mbe, 'ELEMENT_MC_1', [de.tag_name]);
+      dom_cache.timingInfo.allTimingDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, mbe, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
-      }
+      });
 
-      rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-*/
+      if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
     } // end validate function
   },
 
@@ -95,7 +82,7 @@ export const timingRules = [
 
   { rule_id             : 'TIMING_3',
     last_updated        : '2023-08-24',
-    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.TIMING,
     rule_required       : true,
     wcag_primary_id     : '2.3.1',
@@ -103,32 +90,19 @@ export const timingRules = [
     target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
     validate          : function (dom_cache, rule_result) {
 
-     debug.log(`[TIMING 3]: ${dom_cache} ${rule_result} ${TEST_RESULT}`);
-
-/*
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var timing_elements     = dom_cache.timing_cache.timing_elements;
-      var timing_elements_len = timing_elements.length;
-
-      var page_element = dom_cache.timing_cache.page_element;
-
-      for (var i = 0; i < timing_elements_len; i++) {
-        var mbe = timing_elements[i];
-        var de = mbe.dom_element;
-        var cs = de.computed_style;
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, mbe, 'ELEMENT_MC_1', [de.tag_name]);
+      dom_cache.timingInfo.allTimingDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
-         rule_result.addResult(TEST_RESULT.HIDDEN, mbe, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
+      });
+
+      if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
 
-      rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-*/
     } // end validate function
   }
 ];
