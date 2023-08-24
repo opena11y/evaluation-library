@@ -16982,18 +16982,13 @@ const navigationRules$1 = {
       SUMMARY:    'Consistent ordering of landmarks',
       TARGET_RESOURCES_DESC: '@main@, @navigation@, @search@, @banner@ and @contentinfo@ landmarks',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S: 'Verify that this page uses the same ordering of@main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other shared landmarks as other pages within the website.',
+        MANUAL_CHECK_S: 'Verify that this page uses the same ordering of @main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other shared landmarks as other pages within the website.',
         MANUAL_CHECK_P: 'Verify that this page uses the same ordering of @main@, @navigation@, @search@, @banner@, @contentinfo@, @complementary@ and any other shared landmarks as other pages within the website.',
         NOT_APPLICABLE: 'No landmarks found on the page.'
       },
       BASE_RESULT_MESSAGES: {
         WEBSITE_MC_1:   'Verify that this page uses the same ordering of the following landmarks as other pages in the website: %1.',
-        ELEMENT_MC_1:   'Verify that the ordering of the @main@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
-        ELEMENT_MC_2:   'Verify that the ordering of the @navigation@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
-        ELEMENT_MC_3:   'Verify that the ordering of the @banner@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
-        ELEMENT_MC_4:   'Verify that the ordering of the @contentinfo@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
-        ELEMENT_MC_5:   'Verify that the ordering of the @search@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
-        ELEMENT_MC_6:   'Verify that the ordering of the @complementary@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.'
+        ELEMENT_MC_1:   'Verify that the ordering of the @%1@ landmark relative to other landmarks on this page is the same as the ordering used on the other pages in this website.',
       },
       PURPOSES: [
         'One of the fundamental features of the web is the provision of easy access to useful information. Providing consistent ordering of landmarks across all pages of a website will make it easier for people to find the information they are seeking and to navigate between and within pages.'
@@ -17068,12 +17063,7 @@ const navigationRules$1 = {
       },
       BASE_RESULT_MESSAGES: {
         WEBSITE_MC_1: 'Verify that the labeling of landmarks on this page is consistent with the labeling of comparable landmarks on all other pages within the website.',
-        ELEMENT_MC_1: 'Verify that the labeling of the @main@ landmark on this page is consistent with the labeling of comparable @main@ landmarks on all other pages within the website.',
-        ELEMENT_MC_2: 'Verify that the labeling of the @navigation@ landmark on this page is consistent with the labeling of comparable @navigation@ landmarks on all other pages within the website.',
-        ELEMENT_MC_3: 'Verify that the labeling of the @banner@ landmark on this page is consistent with the labeling of comparable @banner@ landmarks on all other pages within the website.',
-        ELEMENT_MC_4: 'Verify that the labeling of the @contentinfo@ landmark on this page is consistent with the labeling of comparable @contentinfo@ landmarks on all other pages within the website.',
-        ELEMENT_MC_5: 'Verify that the labeling of the @search@ landmark on this page is consistent with the labeling of comparable @search@ landmarks on all other pages within the website.',
-        ELEMENT_MC_6: 'Verify that the labeling of the @complementary@ landmark on this page is consistent with the labeling of comparable @complementary@ landmarks on all other pages within the website.'
+        ELEMENT_MC_1: 'Verify that the labeling of the @%1@ landmark on this page is consistent with the labeling of comparable @main@ landmarks on all other pages within the website.',
       },
       PURPOSES: [
         'One of the fundamental features of the web is the provision of easy access to useful information. Consistent labeling of comparable landmark-identified content across all pages of a website will make it easier for people to find information they are seeking and to navigate between and within pages.'
@@ -21156,7 +21146,6 @@ const frameRules = [
     wcag_related_ids    : [],
     target_resources    : ['frame'],
     validate            : function (dom_cache, rule_result) {
-
       dom_cache.allDomElements.forEach( de => {
         if (de.tagName === 'frame' && de.node.src) {
           if (de.visibility.isVisibleToAT) {
@@ -21172,43 +21161,6 @@ const frameRules = [
           }
         }
       });
-
-/*
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var frame_elements     = dom_cache.frames_cache.frame_elements;
-      var frame_elements_len = frame_elements.length;
-
-      // Check to see if valid cache reference
-      if (frame_elements && frame_elements_len) {
-
-        for (var i = 0; i < frame_elements_len; i++) {
-          var fe = frame_elements[i];
-          var de = fe.dom_element;
-          var cs = de.computed_style;
-
-          // if no content in frame ignore
-          if (fe.src.length === 0) continue;
-
-          if ((cs.is_visible_to_at === VISIBILITY.VISIBLE) &&
-              (cs.is_visible_onscreen === VISIBILITY.VISIBLE)){
-
-            if (de.has_title && de.title.length) {
-              rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', [de.title]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
-            }
-
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
-          }
-        } // end loop
-      }
-*/
-
     } // end validate function
   },
 
@@ -21227,8 +21179,8 @@ const frameRules = [
     wcag_related_ids    : [],
     target_resources    : ['iframe'],
     validate            : function (dom_cache, rule_result) {
-
-      dom_cache.allDomElements.forEach( de => {
+      dom_cache.iframeInfo.allIFrameElements.forEach( ife => {
+        const de = ife.domElement;
         if (de.tagName === 'iframe' && de.node.src) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
@@ -21243,40 +21195,6 @@ const frameRules = [
           }
         }
       });
-/*
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var iframe_elements     = dom_cache.frames_cache.iframe_elements;
-      var iframe_elements_len = iframe_elements.length;
-
-      // Check to see if valid cache reference
-      if (iframe_elements && iframe_elements_len) {
-
-        for (var i = 0; i < iframe_elements_len; i++) {
-          var fe = iframe_elements[i];
-
-          // if no content in frame ignore
-          if (fe.src.length === 0) continue;
-
-          if ((fe.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) &&
-              (fe.dom_element.computed_style.is_visible_onscreen === VISIBILITY.VISIBLE)){
-
-            if (fe.computed_label.length) {
-              rule_result.addResult(TEST_RESULT.PASS, fe, 'ELEMENT_PASS_1', [fe.computed_label]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.FAIL, fe, 'ELEMENT_FAIL_1', []);
-            }
-
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, fe, 'ELEMENT_HIDDEN_1', []);
-          }
-        } // end loop
-      }
-
-*/
     } // end validate function
   }
 
@@ -23955,6 +23873,20 @@ const debug$g = new DebugLogging('Navigation Rules', false);
 debug$g.flag = false;
 
 
+/* Helper Functions */
+
+function isHeadingLevelOne (domElement) {
+  return ((domElement.tagName == 'h1')  ||
+          ((domElement.role='heading') &&
+          (domElement.ariaInfo.ariaLevel === 1)));
+}
+
+function isHeadingLevelTwo (domElement) {
+  return ((domElement.tagName == 'h2')  ||
+          ((domElement.role='heading') &&
+          (domElement.ariaInfo.ariaLevel === 2)));
+}
+
 /*
  * OpenA11y Rules
  * Rule Category: List Rules
@@ -23979,46 +23911,32 @@ const navigationRules = [
     target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\''],
     validate            : function (dom_cache, rule_result) {
 
-      debug$g.log(`[NAVIGATION 1]: ${dom_cache} ${rule_result}`);
+      let navigationCount = 0;
+      let searchCount = 0;
 
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
-      var landmark_elements_len = landmark_elements.length;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      var navigation_count = 0;
-      var search_count     = 0;
-
-      for (var i = 0; i < landmark_elements_len; i++ ) {
-        var le = landmark_elements[i];
-
-        if (le.role === 'navigation') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', []);
-            navigation_count++;
+      dom_cache.structureInfo.allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        if (de.role === 'navigation') {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            navigationCount += 1;
           }
         }
 
-        if (le.role === 'search') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', []);
-            search_count++;
+        if (de.role === 'search') {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            searchCount += 1;
           }
         }
+      });
 
+      if ((navigationCount > 0) && (searchCount > 0)) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
       }
-
-      if (page_element) {
-        if ((navigation_count > 0) && (search_count > 0)) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
-        else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_2', []);
+      else {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_2', []);
       }
-
-*/
 
     } // end validation function
   },
@@ -24040,115 +23958,29 @@ const navigationRules = [
     target_resources    : ['Website', 'role=\'main\'', 'role=\'navigation\'', 'role=\'banner\'', 'role=\'contentinfo\'','role=\'search\''],
     validate            : function (dom_cache, rule_result) {
 
-      debug$g.log(`[NAVIGATION 2]: ${dom_cache} ${rule_result}  ${TEST_RESULT}`);
+      const landmarkRoles = [
+        'banner',
+        'complementary',
+        'contentinfo',
+        'main',
+        'navigation',
+        'search'];
 
-/*
+      let landmarks = [];
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
-      var landmark_elements_len = landmark_elements.length;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      var main_count          = 0;
-      var navigation_count    = 0;
-      var banner_count        = 0;
-      var contentinfo_count   = 0;
-      var search_count        = 0;
-      var complementary_count = 0;
-
-      var landmark_count    = 0;
-
-      var les = [];
-
-      for (var i = 0; i < landmark_elements_len; i++ ) {
-        var le = landmark_elements[i];
-
-        if (le.role === 'main') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', []);
-
-            if (main_count === 0) les.push('main');
-
-            main_count += 1;
-            landmark_count += 1;
+      dom_cache.structureInfo.allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        if (landmarkRoles.includes(de.role)) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+            landmarks.push(de.role);
           }
         }
+      });
 
-        if (le.role === 'navigation') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', []);
-
-            if (navigation_count === 0) les.push('navigation');
-
-            navigation_count += 1;
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'banner') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_3', []);
-
-            if (banner_count === 0) les.push('banner');
-
-            banner_count += 1;
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'contentinfo') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_4', []);
-
-            if (contentinfo_count === 0) les.push('contentinfo');
-
-            contentinfo_count += 1;
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'search') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_5', []);
-
-            if (search_count === 0) les.push('search');
-
-            search_count += 1;
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'complementary') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_6', []);
-
-            if (complementary_count === 0) les.push('complementary');
-
-            complementary_count += 1;
-            landmark_count += 1;
-          }
-        }
-
-
+      if ((landmarks.length > 0)) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', [landmarks.join(', ')]);
       }
-
-      if (page_element) {
-        if (landmark_count > 0) {
-
-          var last = les.length - 1;
-          var landmark_list = les[0];
-
-          for (i = 1; i < les.length; i++) {
-            if (i === last) landmark_list += " and " + les[i];
-            else landmark_list += ", " + les[i];
-          }
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', [landmark_list]);
-        }
-      }
-      */
     } // end validation function
   },
 
@@ -24169,42 +24001,28 @@ const navigationRules = [
     target_resources    : ['Website', 'h2'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$g.log(`[NAVIGATION 3]: ${dom_cache} ${rule_result}`);
+      let headingCount = 0;
 
-/*
+      dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          if (isHeadingLevelOne(de)) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            headingCount += 1;
+          }
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
-      var heading_elements_len = heading_elements.length;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      var heading_count = 0;
-
-      for (var i = 0; i < heading_elements_len; i++ ) {
-        var he = heading_elements[i];
-
-        if ((he.level === 1) &&
-           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_1', []);
-            heading_count += 1;
+          if (isHeadingLevelTwo(de)) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            headingCount += 1;
+          }
         }
+      });
 
-        if ((he.level === 2) &&
-           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_2', []);
-            heading_count += 1;
-        }
+      if ((headingCount > 0)) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
       }
-
-      if (page_element) {
-         if (heading_count) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
-         else rule_result.addResult(TEST_RESULT.FAIL, page_element, 'WEBSITE_FAIL_1', []);
+      else {
+        rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
       }
-
-*/
 
     } // end validation function
   },
@@ -24226,72 +24044,29 @@ const navigationRules = [
     target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\'', 'role=\'main\'', 'role=\'banner\'', 'role=\'contentinfo\'', 'h2'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$g.log(`[NAVIGATION 4]: ${dom_cache} ${rule_result}`);
+      const landmarkRoles = [
+        'banner',
+        'complementary',
+        'contentinfo',
+        'main',
+        'navigation',
+        'search'];
 
-/*
+      let landmarks = [];
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var landmark_elements     = dom_cache.headings_landmarks_cache.landmark_elements;
-      var landmark_elements_len = landmark_elements.length;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      var landmark_count = 0;
-
-      for (var i = 0; i < landmark_elements_len; i++ ) {
-        var le = landmark_elements[i];
-
-        if (le.role === 'main') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', []);
-            landmark_count += 1;
+      dom_cache.structureInfo.allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        if (landmarkRoles.includes(de.role)) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+            landmarks.push(de.role);
           }
         }
+      });
 
-        if (le.role === 'navigation') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', []);
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'search') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_3', []);
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'banner') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_4', []);
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'contentinfo') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_5', []);
-            landmark_count += 1;
-          }
-        }
-
-        if (le.role === 'complementary') {
-          if (le.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_6', []);
-            landmark_count += 1;
-          }
-        }
-
+      if ((landmarks.length > 0)) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', [landmarks.join(', ')]);
       }
-
-      if (page_element  && landmark_count) {
-        rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
-      }
-
-*/
 
     } // end validation function
   },
@@ -24313,41 +24088,28 @@ const navigationRules = [
     target_resources    : ['Website', 'h2'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$g.log(`[NAVIGATION 5]: ${dom_cache} ${rule_result}`);
+      let headingCount = 0;
 
-/*
+      dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          if (isHeadingLevelOne(de)) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            headingCount += 1;
+          }
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var heading_elements     = dom_cache.headings_landmarks_cache.heading_elements;
-      var heading_elements_len = heading_elements.length;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      var heading_count = 0;
-
-      for (var i = 0; i < heading_elements_len; i++ ) {
-        var he = heading_elements[i];
-
-        if ((he.level === 1) &&
-           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_1', []);
-            heading_count += 1;
+          if (isHeadingLevelTwo(de)) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
+            headingCount += 1;
+          }
         }
+      });
 
-        if ((he.level === 2) &&
-           (he.dom_element.computed_style.is_visible_to_at === VISIBILITY.VISIBLE)) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, he, 'ELEMENT_MC_2', []);
-            heading_count += 1;
-        }
+      if ((headingCount > 0)) {
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
       }
-
-      if (page_element) {
-         if (heading_count) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'WEBSITE_MC_1', []);
-         else rule_result.addResult(TEST_RESULT.FAIL, page_element, 'WEBSITE_FAIL_1', []);
+      else {
+        rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
       }
-*/
 
     } // end validation function
   }

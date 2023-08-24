@@ -68,7 +68,8 @@ export const frameRules = [
     wcag_related_ids    : [],
     target_resources    : ['iframe'],
     validate            : function (dom_cache, rule_result) {
-      dom_cache.allDomElements.forEach( de => {
+      dom_cache.iframeInfo.allIFrameElements.forEach( ife => {
+        const de = ife.domElement;
         if (de.tagName === 'iframe' && de.node.src) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
