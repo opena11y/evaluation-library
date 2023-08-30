@@ -6,7 +6,6 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-//import {accNamesTheSame} from '../utils.js';
 
 import DebugLogging      from '../debug.js';
 
@@ -37,105 +36,83 @@ export const bypassRules = [
     target_resources    : ['a'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Bypass 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      const bypassTargets = [
+        'content',
+        'content-main',
+        'main',
+        'maincontent',
+        'main-content',
+        'site-content'
+        ];
 
-/*
+      const domElements     = dom_cache.allDomElements;
+      const linkDomElements = dom_cache.linkInfo.allLinkDomElements;
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
+      let de;
+      let hasSkipToButton = false;
+      let hasBypassLink = false;
+      let linkDomElem = false;
+      let targetDomElem = false;
 
-      var link_elements     = dom_cache.links_cache.link_elements;
-      var link_elements_len = link_elements.length;
-
-      var control_elements     = dom_cache.controls_cache.control_elements;
-      var control_elements_len = control_elements.length;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      var bypass_links = [];
-      var bypass_link = false;
-      var skipto_link = false;
-      var focusable   = false;
-      var missing     = false;
-
-      var i, ce, cs, de, le, id;
-
-      for (i = 0; i < control_elements_len; i++) {
-
-        ce = control_elements[i];
-        de = ce.dom_element;
-
-        if ((de.role === 'button') && (de.class_name !== '') && (de.class_name.toLowerCase().indexOf('skipto') >= 0)) {
-          bypass_links.push(ce);
-          rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', []);
-          skipto_link = true;
-          break;
+      // Check for SkipTo.js page script button
+      for (let i = 0; (i < domElements.length) && !hasSkipToButton; i += 1) {
+        de = domElements[i];
+        if (de.id === 'id-skip-to') {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          hasSkipToButton = true;
         }
       }
 
-      for (i = 0; (!skipto_link && (i < link_elements_len) && (i < 2)); i++) {
+      // Check for bypass block links
+      for (let i = 0; (i < linkDomElements.length) && !hasSkipToButton && !hasBypassLink; i += 1) {
+        linkDomElem = linkDomElements[i];
 
-        le = link_elements[i];
-        de = le.dom_element;
-        cs = de.computed_style;
+        let href = linkDomElem.node.href;
 
-        if (le.href && le.href.length && (le.href.indexOf('#') >= 0 )) {
-          id = le.href.substring((le.href.indexOf('#')+1), le.href.length);
+        if (href.indexOf('#') >= 0) {
+          let  targetId = href.slice(href.indexOf('#')+1);
+          debug.log(`[BYPASS 1][targetId]: ${targetId}`);
 
-          if (id.length) {
-            bypass_link = true;
+          if (bypassTargets.includes(targetId)) {
+            hasBypassLink = true;
 
-            // check for id first
-            de = dom_cache.element_with_id_cache.getDOMElementById(id);
-
-            // check for name second
-            if (!de) de = dom_cache.element_cache.getDOMElementByName(id);
-
-            if (de) {
-              if (cs.is_visible_to_at == VISIBILITY.VISIBLE) {
-                if ((de.tab_index >= 0) || de.has_tabindex || de.is_interactive) {
-                  bypass_links.push(le);
-                  rule_result.addResult(TEST_RESULT.PASS, le, 'ELEMENT_PASS_2', []);
-
-  //                logger.debug("[BYPASS 1] tag: " + de.tag_name + " tabindex: " + de.tab_index  + " has tabindex: " + de.has_tabindex + " has href: " + de.has_href );
-
-                  if ((de.tag_name !== 'a') ||
-                      (de.tab_index < 0) ||
-                      (de.tab_index > 0) ||
-                       de.has_href) {
-                    focusable = true;
-                    rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []);
-                  }
-                  else {
-                    rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-                  }
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.PASS, le, 'ELEMENT_PASS_2', [id]);
-                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-                }
+            for (let i = 0; (i < domElements.length) && (!targetDomElem); i += 1) {
+              de = domElements[i];
+              if ((de.id === targetId) || (de.name === targetId)) {
+                targetDomElem = de;
               }
-              else {
-                rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', []);
-              }
+            }
+
+            if (targetDomElem) {
+              rule_result.addElementResult(TEST_RESULT.PASS, linkDomElem, 'ELEMENT_PASS_2', []);
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, targetDomElem, 'ELEMENT_MC_1', []);
             }
             else {
-              missing = true;
-              rule_result.addResult(TEST_RESULT.FAIL, le, 'ELEMENT_FAIL_1', [id]);
+              rule_result.addElementResult(TEST_RESULT.FAIL, linkDomElem,   'ELEMENT_FAIL_1', []);
             }
+
           }
+
         }
+
       }
 
-      if (skipto_link || (bypass_link && focusable)) {
-        rule_result.addResult(TEST_RESULT.PASS, page_element, 'PAGE_PASS_1', []);
+      if (hasSkipToButton) {
+        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
       }
       else {
-        if (missing) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_1', []);
-        else if (bypass_link) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-        else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', []);
+        if (hasBypassLink) {
+          if (targetDomElem) {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          }
+          else {
+            rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+          }
+        }
+        else {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', []);
+        }
       }
-*/
     } // end validation function  }
   }
 ];

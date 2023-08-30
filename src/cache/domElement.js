@@ -89,7 +89,8 @@ export default class DOMElement {
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
 
-    this.id         = elementNode.id        ? elementNode.id : '';
+    this.id         = elementNode.id        ? elementNode.id   : '';
+    this.name       = elementNode.name      ? elementNode.name : '';
     this.className  = elementNode.className ? elementNode.className : '';
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);

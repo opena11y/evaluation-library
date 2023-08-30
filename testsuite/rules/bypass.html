@@ -1,57 +1,35 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <title>QUNIT: Bypass Block Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <title>QUNIT: Bypass Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
 
-  <body>  
+  <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
 
-      test( "BYPASS_1: internal link", function() {
-        executeTest('ID_IFRAME_1A', 'BYPASS_1');
+    <script type="module">
+
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', () => {
+        executeTest('BYPASS_1A: Bypass link',                           'ID_IFRAME_1A', 'BYPASS_1');
+        executeTest('BYPASS_1B: SkipTo page script',                    'ID_IFRAME_1B', 'BYPASS_1');
+        executeTest('BYPASS_1C: No bypass link or SkipTo script',       'ID_IFRAME_1C', 'BYPASS_1');
+        executeTest('BYPASS_1D: Missing target link',                   'ID_IFRAME_1D', 'BYPASS_1');
+        executeTest('BYPASS_1E: Bypass link references name attribute', 'ID_IFRAME_1E', 'BYPASS_1');
+        executeTest('BYPASS_1F: internal ref (no ink)',                 'ID_IFRAME_1F', 'BYPASS_1');
       });
 
-      test( "BYPASS_1: Skipto script", function() {
-        executeTest('ID_IFRAME_1B', 'BYPASS_1');
-      });
-
-      test( "BYPASS_1: no skip to link or script", function() {
-        executeTest('ID_IFRAME_1C', 'BYPASS_1');
-      });
-
-      test( "BYPASS_1: missing target link", function() {
-        executeTest('ID_IFRAME_1D', 'BYPASS_1');
-      });
-
-      test( "BYPASS_1: internal link (name attribute)", function() {
-        executeTest('ID_IFRAME_1E', 'BYPASS_1');
-      });
-
+/*
       test( "BYPASS_1: internal reference (no link)", function() {
         executeTest('ID_IFRAME_1F', 'BYPASS_1');
       });
 
-      test( "BYPASS_1: h1 element", function() {
-        executeTest('ID_IFRAME_1G', 'BYPASS_1');
-      });
-
-      test( "BYPASS_1: h1 element (no tabindex)", function() {
-        executeTest('ID_IFRAME_1H', 'BYPASS_1');
-      });
-
-
+*/
     </script>
 
     <h2>Bypass Blocks 1: Internal link to main content</h2>
@@ -71,15 +49,7 @@
     
     <h2>Bypass Blocks 1: internal ref (no ink)</h2>
     <iframe id="ID_IFRAME_1F" src="bypass/bypass_1_internal_reference.html"></iframe>
-    
-    <h2>Bypass Blocks 1: h1 element</h2>
-    <iframe id="ID_IFRAME_1G" src="bypass/bypass_1_h1_element.html"></iframe>
-    
-    <h2>Bypass Blocks 1:h1 element (no tabindex)</h2>
-    <iframe id="ID_IFRAME_1H" src="bypass/bypass_1_h1_element_no_tabindex.html"></iframe>
-    
-    
-    
+
   </body>
 
 </html>

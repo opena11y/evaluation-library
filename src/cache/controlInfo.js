@@ -250,6 +250,7 @@ export default class ControlInfo {
     this.allControlElements      = [];
     this.childControlElements    = [];
     this.allFormElements  = [];
+    this.allButtonElements = [];
   }
 
   /**
@@ -306,6 +307,11 @@ export default class ControlInfo {
     } else {
       this.childControlElements.push(ce);
     }
+
+    if (domElement.role === 'button') {
+      this.allButtonElements.push(ce);
+    }
+
     return ce;
   }
 

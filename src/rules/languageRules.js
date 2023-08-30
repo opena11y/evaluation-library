@@ -6,7 +6,6 @@ import {
   RULE_CATEGORIES,
   TEST_RESULT
 } from '../constants.js';
-// import {accNamesTheSame} from '../utils.js';
 
 import DebugLogging      from '../debug.js';
 

@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$M = new DebugLogging('constants', false);
+const debug$N = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -600,13 +600,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$M.flag && debug$M.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$N.flag && debug$N.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$M.flag && debug$M.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$N.flag && debug$N.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -902,7 +902,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$L = new DebugLogging('ControlInfo', false);
+const debug$M = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -1042,7 +1042,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$L.domElement(ce.domElement, prefix);
+      debug$M.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1147,6 +1147,7 @@ class ControlInfo {
     this.allControlElements      = [];
     this.childControlElements    = [];
     this.allFormElements  = [];
+    this.allButtonElements = [];
   }
 
   /**
@@ -1203,6 +1204,11 @@ class ControlInfo {
     } else {
       this.childControlElements.push(ce);
     }
+
+    if (domElement.role === 'button') {
+      this.allButtonElements.push(ce);
+    }
+
     return ce;
   }
 
@@ -1263,15 +1269,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$L.flag) {
-      debug$L.log('== Control Tree ==', 1);
+    if (debug$M.flag) {
+      debug$M.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$L.domElement(ce.domElement);
+        debug$M.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$L.log('== Forms ==', 1);
+      debug$M.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$L.domElement(ce.domElement);
+        debug$M.domElement(ce.domElement);
       });
     }
   }
@@ -6070,8 +6076,8 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$K = new DebugLogging('AriaInfo', false);
-debug$K.flag = false;
+const debug$L = new DebugLogging('AriaInfo', false);
+debug$L.flag = false;
 
 /* Debug helper functions */
 
@@ -6294,15 +6300,15 @@ class AriaInfo {
     }
 
 
-    if (debug$K.flag) {
-      node.attributes.length && debug$K.log(`${node.outerHTML}`, 1);
-      debug$K.log(`[         isWidget]: ${this.isWidget}`);
-      debug$K.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$K.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$K.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$K.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$K.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$K.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$L.flag) {
+      node.attributes.length && debug$L.log(`${node.outerHTML}`, 1);
+      debug$L.log(`[         isWidget]: ${this.isWidget}`);
+      debug$L.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$L.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$L.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$L.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$L.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$L.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6506,7 +6512,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$J = new DebugLogging('colorContrast', false);
+const debug$K = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6561,9 +6567,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$J.flag) {
-      debug$J.separator();
-      debug$J.tag(elementNode);
+    if (debug$K.flag) {
+      debug$K.separator();
+      debug$K.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6585,11 +6591,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$J.flag) {
-      debug$J.log(`[                    opacity]: ${this.opacity}`);
-      debug$J.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$J.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$J.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$K.flag) {
+      debug$K.log(`[                    opacity]: ${this.opacity}`);
+      debug$K.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$K.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$K.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6676,10 +6682,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$J.flag && debug$J.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$K.flag && debug$K.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$J.flag && debug$J.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$K.flag && debug$K.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6892,7 +6898,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$I = new DebugLogging('EventInfo', false);
+const debug$J = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6905,7 +6911,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$I.flag) {
+    if (debug$J.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8505,7 +8511,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$H = new DebugLogging('ariaInHtml', false);
+const debug$I = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8706,11 +8712,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$H.flag) {
+  if (debug$I.flag) {
     if (tagName === 'h2') {
-      debug$H.tag(node);
+      debug$I.tag(node);
     }
-    debug$H.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$I.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8830,7 +8836,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$G = new DebugLogging('visibility', false);
+const debug$H = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8878,17 +8884,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$G.flag) {
-      debug$G.separator();
-      debug$G.tag(elementNode);
-      debug$G.log('[          isHidden]: ' + this.isHidden);
-      debug$G.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$G.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$G.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$G.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$G.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$G.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$G.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$H.flag) {
+      debug$H.separator();
+      debug$H.tag(elementNode);
+      debug$H.log('[          isHidden]: ' + this.isHidden);
+      debug$H.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$H.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$H.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$H.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$H.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$H.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$H.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9201,8 +9207,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$F = new DebugLogging('nameFrom', false);
-debug$F.flag = false;
+const debug$G = new DebugLogging('nameFrom', false);
+debug$G.flag = false;
 
 /*
 *   @function getElementContents
@@ -9348,7 +9354,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$F.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$G.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9762,8 +9768,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$E = new DebugLogging('getAccName', false);
-debug$E.flag = false;
+const debug$F = new DebugLogging('getAccName', false);
+debug$F.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -10053,8 +10059,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$D = new DebugLogging('DOMElement', false);
-debug$D.flag = false;
+const debug$E = new DebugLogging('DOMElement', false);
+debug$E.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10123,7 +10129,8 @@ class DOMElement {
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
 
-    this.id         = elementNode.id        ? elementNode.id : '';
+    this.id         = elementNode.id        ? elementNode.id   : '';
+    this.name       = elementNode.name      ? elementNode.name : '';
     this.className  = elementNode.className ? elementNode.className : '';
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
@@ -10376,12 +10383,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$D.flag) {
+    if (debug$E.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$D.domText(domItem, prefix);
+          debug$E.domText(domItem, prefix);
         } else {
-          debug$D.domElement(domItem, prefix);
+          debug$E.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10474,7 +10481,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$C = new DebugLogging('domText', false);
+const debug$D = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10493,8 +10500,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$C.flag) {
-      debug$C.log(`[text]: ${this.text}`);
+    if (debug$D.flag) {
+      debug$D.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10557,7 +10564,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$B = new DebugLogging('iframeInfo', false);
+const debug$C = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10575,9 +10582,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$B.flag) {
-      debug$B.log(`[          src]: ${this.src}`);
-      debug$B.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$C.flag) {
+      debug$C.log(`[          src]: ${this.src}`);
+      debug$C.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10613,8 +10620,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$B.flag) {
-      debug$B.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$C.flag) {
+      debug$C.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10625,7 +10632,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$A = new DebugLogging('idInfo', false);
+const debug$B = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10668,10 +10675,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$A.flag) {
-      debug$A.log('== All Links ==', 1);
+    if (debug$B.flag) {
+      debug$B.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$A.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$B.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10680,7 +10687,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$z = new DebugLogging('imageInfo', false);
+const debug$A = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10873,22 +10880,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$z.flag) {
-      debug$z.log('== All Image elements ==', 1);
+    if (debug$A.flag) {
+      debug$A.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$z.log(`[fileName]: ${ie.fileName}`, true);
-        debug$z.log(`[    role]: ${ie.domElement.role}`);
-        debug$z.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$z.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$z.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$A.log(`[fileName]: ${ie.fileName}`, true);
+        debug$A.log(`[    role]: ${ie.domElement.role}`);
+        debug$A.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$A.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$A.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$z.log('== All SVG domElements  ==', 1);
+      debug$A.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$z.domElement(de);
+        debug$A.domElement(de);
       });
-      debug$z.log('== All MapElements ==', 1);
+      debug$A.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$z.domElement(me.domElement);
+        debug$A.domElement(me.domElement);
       });
     }
   }
@@ -10897,7 +10904,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$y = new DebugLogging('linkInfo', false);
+const debug$z = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10943,10 +10950,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$y.flag) {
-      debug$y.log('== All Links ==', 1);
+    if (debug$z.flag) {
+      debug$z.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$y.domElement(de);
+        debug$z.domElement(de);
       });
     }
   }
@@ -10955,7 +10962,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$x = new DebugLogging('ListInfo', false);
+const debug$y = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10976,8 +10983,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$x.flag) {
-      debug$x.log('');
+    if (debug$y.flag) {
+      debug$y.log('');
     }
   }
 
@@ -11002,9 +11009,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$x.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$y.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$x.domElement(le.domElement, prefix);
+      debug$y.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11112,16 +11119,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$x.flag) {
-      debug$x.log('== All ListElements ==', 1);
-      debug$x.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$y.flag) {
+      debug$y.log('== All ListElements ==', 1);
+      debug$y.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$x.domElement(le.domElement);
+        debug$y.domElement(le.domElement);
       });
-      debug$x.log('== List Tree ==', 1);
-      debug$x.log(`[linkCount]: ${this.linkCount}`);
+      debug$y.log('== List Tree ==', 1);
+      debug$y.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$x.domElement(le.domElement);
+        debug$y.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -11131,8 +11138,8 @@ class ListInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$w = new DebugLogging('MediaInfo', false);
-debug$w.flag = false;
+const debug$x = new DebugLogging('MediaInfo', false);
+debug$x.flag = false;
 
 /**
  * @class MediaElement
@@ -11370,25 +11377,25 @@ class MediaInfo {
    */
 
   showListInfo () {
-    if (debug$w.flag) {
-      debug$w.log('== Audio Elements ==', 1);
+    if (debug$x.flag) {
+      debug$x.log('== Audio Elements ==', 1);
       this.audioElements.forEach( ae => {
-        debug$w.log(ae);
+        debug$x.log(ae);
       });
 
-      debug$w.log('== Video Elements ==', 1);
+      debug$x.log('== Video Elements ==', 1);
       this.videoElements.forEach( ve => {
-        debug$w.log(ve);
+        debug$x.log(ve);
       });
 
-      debug$w.log('== Object Elements ==', 1);
+      debug$x.log('== Object Elements ==', 1);
       this.objectElements.forEach( oe => {
-        debug$w.log(oe);
+        debug$x.log(oe);
       });
 
-      debug$w.log('== Embed Elements ==', 1);
+      debug$x.log('== Embed Elements ==', 1);
       this.embedElements.forEach( ee => {
-        debug$w.log(ee);
+        debug$x.log(ee);
       });
 
 
@@ -11399,7 +11406,7 @@ class MediaInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$v = new DebugLogging('structureInfo', false);
+const debug$w = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11438,11 +11445,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$v.domElement(le.domElement, prefix);
+      debug$w.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$v.domElement(h, prefix);
+      debug$w.domElement(h, prefix);
     });
   }
 
@@ -11566,27 +11573,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$v.flag) {
-      debug$v.log('== All Headings ==', 1);
+    if (debug$w.flag) {
+      debug$w.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$v.domElement(h);
+        debug$w.domElement(h);
       });
-      debug$v.log('== All Landmarks ==', 1);
+      debug$w.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$v.domElement(le.domElement);
+        debug$w.domElement(le.domElement);
       });
-      debug$v.log('== Landmarks By Doc ==', 1);
+      debug$w.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$v.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$w.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$v.domElement(le.domElement);
+            debug$w.domElement(le.domElement);
           });
         }
       });
-      debug$v.log('== Structure Tree ==', 1);
+      debug$w.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$v.domElement(le.domElement);
+        debug$w.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -13119,6 +13126,70 @@ const audioRules$1 = {
         url:   'https://webaim.org/techniques/captions/'
       }
     ]
+  }
+};
+
+/* bypassRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const bypassRules$1 = {
+  BYPASS_1: {
+        ID:                    'Bypass 1',
+        DEFINITION:            'Provide a keyboard-supported means of bypassing blocks of content, such as navigation menus and page headers, to get to the main content of the page.',
+        SUMMARY:               'Skip to main content link',
+        TARGET_RESOURCES_DESC: '@a@ and @a[button]@',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S :         'Provide a valid target for the "skip to main content" link.',
+          FAIL_P :         'Provide a valid target for the "skip to main content" link.',
+          MANUAL_CHECK_S:  'Verify that the first link on the page is a "skip to main content" link and that the target of the skip link is a focusable element and is at the start of the main content.',
+          MANUAL_CHECK_P:  'Verify that the first link on the page is a "skip to main content" link and that the target of the skip link is a focusable element and is at the start of the main content.',
+          HIDDEN_S:        'One link that is hidden was not evaluated.',
+          HIDDEN_P:        '%N_H links that are hidden were not evaluated.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1:   '"SkipTo" menu button provides navigation to main and navigation landmarks and headings on the page.',
+          ELEMENT_PASS_2:   'Link references a target on the page; verify that the target is the first focusable element on the page.',
+          ELEMENT_MC_1:     'Target of link; verify that it is at the start of the main content of the page and is focusable.',
+          ELEMENT_FAIL_1:   'Link does not reference a valid target on the page.',
+          PAGE_PASS_1:      'Page includes "SkipTo" page script that provides a means of skipping to the structural landmarks and headings of the page.',
+          PAGE_PASS_2:      'Page includes "SkipTo" link that provides a means of skipping to the main content of the page.',
+          PAGE_FAIL_1:      'Link does not reference a valid target on the page.',
+          PAGE_MC_1:        'Verify that that the target of the "skip to main content" link is focusable.',
+          PAGE_MC_2:        'Verify that the page provides a link or other means of skipping to the main content of the page.'
+        },
+        PURPOSES: [
+          'Most pages of websites typically have navigation menus, page headers and other repeated content before the main content of the page.',
+          'For keyboard-only and screen reader users, a link or other means of skipping these types of content blocks makes it easy to go directly to the main content of the page, without first having to tab through the repeated content.'
+        ],
+        TECHNIQUES: [
+          'Make the first link on the page an internal link that references a valid target element at the beginning of the main content of the page.',
+          'The @id@ attribute is preferred method to identify the target element for the "Skip to main content" link.',
+          'To make any target element focusable, add @tabindex="-1"@ to the element. If the target is an @a@ element, adding @tabindex="-1"@ will remove it from the tab order.',
+          'If you use an @h1[id="main"]@ element as the target of the "Skip to main content" link, most screen readers will read the heading level and content when the user activates the skip to link.',
+          'The "SkipTo" script automates the skip feature by providing a dynamically generated landmark regions and headings (H1-H2) based on the structural content of the page.'
+        ],
+        MANUAL_CHECKS: [
+          'Using only the keyboard, use the link or "SkipTo" menu to move focus to the main content of the page.',
+          'After moving focus to the main content, the next tab should move you to the first link, form control or other interactive element after the main content.'
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'WAI-ARIA Authoring Practices: Developing a Keyboard Interface',
+            url:   'https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'SkipTo Page Script',
+            url:   'https://github.com/skipto-landmarks-headings/page-script-5/blob/main/README.md'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'WebAIM: Skip Navigation Links',
+            url:   'https://webaim.org/techniques/skipnav/'
+          }
+
+        ]
   }
 };
 
@@ -19184,7 +19255,7 @@ const messages$1 = {
 };
 
 messages$1.rules = Object.assign(messages$1.rules, audioRules$1);
-// messages.rules = Object.assign(messages.rules, bypassRules);
+messages$1.rules = Object.assign(messages$1.rules, bypassRules$1);
 messages$1.rules = Object.assign(messages$1.rules, colorRules$1);
 // messages.rules = Object.assign(messages.rules, errorRules);
 messages$1.rules = Object.assign(messages$1.rules, frameRules$1);
@@ -19209,7 +19280,7 @@ messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 /* locale.js */
 
 /* Constants */
-const debug$u = new DebugLogging('locale', false);
+const debug$v = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -19265,7 +19336,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$u.flag && debug$u.log(`[${id}][${value}]: ${message}`);
+  debug$v.flag && debug$v.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -19365,7 +19436,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$u.flag && debug$u.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$v.flag && debug$v.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -19375,7 +19446,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$u.flag && debug$u.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$v.flag && debug$v.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   // Assume all rules
   return {
     title: messages[locale].common.allRules,
@@ -19408,7 +19479,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$u.flag && debug$u.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$v.flag && debug$v.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -19420,7 +19491,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$u.flag && debug$u.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$v.flag && debug$v.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -19440,7 +19511,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$u.flag && debug$u.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$v.flag && debug$v.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -19487,7 +19558,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$u.flag && debug$u.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$v.flag && debug$v.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -19502,7 +19573,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$u.flag && debug$u.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$v.flag && debug$v.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -19517,7 +19588,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$u.flag && debug$u.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$v.flag && debug$v.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -19536,7 +19607,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$u.flag && debug$u.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$v.flag && debug$v.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -19555,7 +19626,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$u.flag && debug$u.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$v.flag && debug$v.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -19583,8 +19654,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$u.flag && debug$u.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$u.flag && debug$u.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$v.flag && debug$v.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$v.flag && debug$v.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -19604,7 +19675,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$u.flag && debug$u.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$v.flag && debug$v.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -19623,7 +19694,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$u.flag && debug$u.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$v.flag && debug$v.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19643,7 +19714,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$u.flag && debug$u.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$v.flag && debug$v.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19711,12 +19782,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$t = new DebugLogging('tableInfo', false);
-debug$t.flag = false;
-debug$t.rows = false;
-debug$t.cells = false;
-debug$t.tableTree = false;
-debug$t.headerCalc = false;
+const debug$u = new DebugLogging('tableInfo', false);
+debug$u.flag = false;
+debug$u.rows = false;
+debug$u.cells = false;
+debug$u.tableTree = false;
+debug$u.headerCalc = false;
 
 /**
  * @class TableElement
@@ -19848,13 +19919,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$t.headerCalc && debug$t.log(`${cell}`, 1);
+        debug$u.headerCalc && debug$u.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$t.headesCalc && debug$t.log(`[headers]: ${ids.join(' ')}`);
+              debug$u.headesCalc && debug$u.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -19869,7 +19940,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$t.headerCalc && debug$t.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$u.headerCalc && debug$u.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -19880,7 +19951,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$t.headerCalc && debug$t.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$u.headerCalc && debug$u.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -19892,7 +19963,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$t.headerCalc && debug$t.log(`${cell}`);
+            debug$u.headerCalc && debug$u.log(`${cell}`);
           }
         }
       });
@@ -19939,7 +20010,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$t.log(`${prefix}${item}`);
+    debug$u.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -19950,14 +20021,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$t.flag) {
-      debug$t.log(`${this}`);
-      if (debug$t.tableTree) {
+    if (debug$u.flag) {
+      debug$u.log(`${this}`);
+      if (debug$u.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$t.separator();
+      debug$u.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -20072,15 +20143,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$t.flag && debug$t.rows) {
-      debug$t.log(`${prefix}${this}`);
+    if (debug$u.flag && debug$u.rows) {
+      debug$u.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$t.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$u.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -20161,8 +20232,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$t.flag) {
-      debug$t.log(`${prefix}${this}`);
+    if (debug$u.flag) {
+      debug$u.log(`${prefix}${this}`);
     }
   }
 
@@ -20283,8 +20354,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$t.flag) {
-      debug$t.log('== All Tables ==', 1);
+    if (debug$u.flag) {
+      debug$u.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -20295,7 +20366,7 @@ class TableInfo {
 /* timingInfo.js */
 
 /* Constants */
-const debug$s = new DebugLogging('TimingInfo', false);
+const debug$t = new DebugLogging('TimingInfo', false);
 
 /**
  * @class TimingInfo
@@ -20346,10 +20417,10 @@ class TimingInfo {
    */
 
   showTimingInfo () {
-    if (debug$s.flag) {
-      debug$s.log('== All Timing elements ==', 1);
+    if (debug$t.flag) {
+      debug$t.log('== All Timing elements ==', 1);
       this.allTimingDomElements.forEach( de => {
-        debug$s.log(`[fileName]: ${de.tagName}`, true);
+        debug$t.log(`[fileName]: ${de.tagName}`, true);
       });
     }
   }
@@ -20358,11 +20429,11 @@ class TimingInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$r = new DebugLogging('domCache', false);
-debug$r.flag = false;
-debug$r.showDomTexts = false;
-debug$r.showDomElems = false;
-debug$r.showTree = false;
+const debug$s = new DebugLogging('domCache', false);
+debug$s.flag = false;
+debug$s.showDomTexts = false;
+debug$s.showDomElems = false;
+debug$s.showTree = false;
 
 const skipableElements = [
   'base',
@@ -20436,6 +20507,8 @@ class DOMCache {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
+
+    this.document = startingDoc;
 
     this.ordinalPosition = 2;
     this.documentIndex = 0;
@@ -20705,24 +20778,24 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$r.flag) {
-      if (debug$r.showDomElems) {
-        debug$r.log(' === AllDomElements ===', true);
+    if (debug$s.flag) {
+      if (debug$s.showDomElems) {
+        debug$s.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$r.domElement(de);
+          debug$s.domElement(de);
         });
       }
 
-      if (debug$r.showDomTexts) {
-        debug$r.log(' === AllDomTexts ===', true);
+      if (debug$s.showDomTexts) {
+        debug$s.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$r.domText(dt);
+          debug$s.domText(dt);
         });
       }
 
-      if (debug$r.showTree) {
-        debug$r.log(' === DOMCache Tree ===', true);
-        debug$r.domElement(this.startingDomElement);
+      if (debug$s.showTree) {
+        debug$s.log(' === DOMCache Tree ===', true);
+        debug$s.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
@@ -20732,8 +20805,8 @@ class DOMCache {
 /* audioRules.js */
 
 /* Constants */
-const debug$q = new DebugLogging('Audio Rules', false);
-debug$q.flag = false;
+const debug$r = new DebugLogging('Audio Rules', false);
+debug$r.flag = false;
 
 
 /*
@@ -20881,6 +20954,116 @@ const audioRules = [
     } // end validate function
   }
 
+];
+
+/* bypassRules.js */
+
+/* Constants */
+const debug$q = new DebugLogging('Bypass Rules', false);
+debug$q.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Bypass Rules
+ */
+
+const bypassRules = [
+
+  /**
+   * @object BYPASS_1
+   *
+   * @desc Looking for links or that support bypassing blocks of content
+  */
+
+  { rule_id             : 'BYPASS_1',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.1',
+    wcag_related_ids    : ['2.4.4'],
+    target_resources    : ['a'],
+    validate            : function (dom_cache, rule_result) {
+
+      const bypassTargets = [
+        'content',
+        'content-main',
+        'main',
+        'maincontent',
+        'main-content',
+        'site-content'
+        ];
+
+      const domElements     = dom_cache.allDomElements;
+      const linkDomElements = dom_cache.linkInfo.allLinkDomElements;
+
+      let de;
+      let hasSkipToButton = false;
+      let hasBypassLink = false;
+      let linkDomElem = false;
+      let targetDomElem = false;
+
+      // Check for SkipTo.js page script button
+      for (let i = 0; (i < domElements.length) && !hasSkipToButton; i += 1) {
+        de = domElements[i];
+        if (de.id === 'id-skip-to') {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+          hasSkipToButton = true;
+        }
+      }
+
+      // Check for bypass block links
+      for (let i = 0; (i < linkDomElements.length) && !hasSkipToButton && !hasBypassLink; i += 1) {
+        linkDomElem = linkDomElements[i];
+
+        let href = linkDomElem.node.href;
+
+        if (href.indexOf('#') >= 0) {
+          let  targetId = href.slice(href.indexOf('#')+1);
+          debug$q.log(`[BYPASS 1][targetId]: ${targetId}`);
+
+          if (bypassTargets.includes(targetId)) {
+            hasBypassLink = true;
+
+            for (let i = 0; (i < domElements.length) && (!targetDomElem); i += 1) {
+              de = domElements[i];
+              if ((de.id === targetId) || (de.name === targetId)) {
+                targetDomElem = de;
+              }
+            }
+
+            if (targetDomElem) {
+              rule_result.addElementResult(TEST_RESULT.PASS, linkDomElem, 'ELEMENT_PASS_2', []);
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, targetDomElem, 'ELEMENT_MC_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, linkDomElem,   'ELEMENT_FAIL_1', []);
+            }
+
+          }
+
+        }
+
+      }
+
+      if (hasSkipToButton) {
+        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+      }
+      else {
+        if (hasBypassLink) {
+          if (targetDomElem) {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          }
+          else {
+            rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+          }
+        }
+        else {
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', []);
+        }
+      }
+    } // end validation function  }
+  }
 ];
 
 /* colorRules.js */
@@ -26447,7 +26630,7 @@ function addToArray (ruleArray) {
 }
 
 addToArray(audioRules);
-// addToArray(bypassRules);
+addToArray(bypassRules);
 addToArray(colorRules);
 // addToArray(errorRules);
 addToArray(frameRules);

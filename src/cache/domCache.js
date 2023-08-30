@@ -95,6 +95,8 @@ export default class DOMCache {
       startingElement = startingDoc.body;
     }
 
+    this.document = startingDoc;
+
     this.ordinalPosition = 2;
     this.documentIndex = 0;
 

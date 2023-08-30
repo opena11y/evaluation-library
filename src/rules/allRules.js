@@ -2,7 +2,7 @@
 
 /* Imports */
 import {audioRules}         from './audioRules.js';
-// import {bypassRules}        from './bypassRules.js';
+import {bypassRules}        from './bypassRules.js';
 import {colorRules}         from './colorRules.js';
 // import {errorRules}         from './errorRules.js';
 import {frameRules}         from './frameRules.js';
@@ -41,7 +41,7 @@ function addToArray (ruleArray) {
 }
 
 addToArray(audioRules);
-// addToArray(bypassRules);
+addToArray(bypassRules);
 addToArray(colorRules);
 // addToArray(errorRules);
 addToArray(frameRules);
