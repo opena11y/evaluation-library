@@ -69,8 +69,8 @@ export const errorRules = {
   },
   ERROR_2: {
       ID:                    'Error 2',
-      DEFINITION:            'If user input is required for a form control the @required@ or @aria-required@ attribute must must used.',
-      SUMMARY:               'Using @aria-required@ to identify required form controls',
+      DEFINITION:            'If user input is required for a form control or custom widget the @required@ or @aria-required@ attribute must must used.',
+      SUMMARY:               'Using @aria-required@ to identify required form controls and widgets',
       TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA widgets',
       RULE_RESULT_MESSAGES: {
         FAIL_S:         'Update the form control with @aria-required="false"@ and the @required@ attributes to indicate the true required state of the control.',
@@ -113,40 +113,6 @@ export const errorRules = {
   },
   ERROR_3: {
       ID:                    'Error 3',
-      DEFINITION:            'If user input is required for a widget the @aria-required@ attribute must must used.',
-      SUMMARY:               'Using @aria-required@ with widget roles',
-      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
-      RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S: 'If the widget is required use @aria-required="true"@ attribute.',
-        MANUAL_CHECK_P: 'If any of the %N_F widgets are required, use the @aria-required="true"@ attribute.',
-        HIDDEN_S:       'The widget that is hidden does not need to be tested for being required.',
-        HIDDEN_P:       'The %N_H widget elements that are hidden do not need to be tested for being required.',
-        NOT_APPLICABLE: 'No widgets on this page that need testing for being required.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @%1[role="%2"]@ widget is identified as required though the use of @aria-required="true"@ attribute.',
-        ELEMENT_MC_1:     'If the @%1[role="%2"]@ widget is a required, add the @aria-required="true"@ attribute to the control.',
-        ELEMENT_HIDDEN_1: 'The @%1[role="%2"]@ element was not tested because it is hidden from assistive technologies.'
-      },
-      PURPOSES: [
-        'Users benefit from information being informed if a input to a widget is required for form submission or task completion.'
-      ],
-      TECHNIQUES: [
-        'To identify a required widget, add the ARIA @aria-required="true"@ attribute to the widget.',
-        'Use the @aria-required@ attribute as the CSS selector for visually styling the widget as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.',
-        'Note the the HTML5 @required@ attribute CANNOT be used to indicate that a widget is required, the @requiured@ attribute can only be used on HTML5 defined form controls.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
-        }
-      ]
-  },
-  ERROR_4: {
-      ID:                    'Error 4',
       DEFINITION:            'When input error is automatically detected and suggestions are automatically known, the suggestions must be provided to the user (some exceptions).',
       SUMMARY:               'Error correction suggestions',
       TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
@@ -158,18 +124,14 @@ export const errorRules = {
         NOT_APPLICABLE: 'No form controls or widgets on this page that typically can provide suggestions.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_MC_1:     'If the @input[type="%1"]@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
-        ELEMENT_MC_2:     'If the @%1@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
-        ELEMENT_MC_3:     'If the @%1@ widget can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
-        ELEMENT_HIDDEN_1: 'The @input[type="%1"]@ element was not tested because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: 'The @%1@ element was not tested because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_3: 'The @%1@ widget was not tested because it is hidden from assistive technologies.'
+        ELEMENT_MC_1:     'If the @%1@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested because it is hidden from assistive technologies.',
       },
       PURPOSES: [
         'Users benefit from being informed of invalid input and on how to correct invalid input.'
       ],
       TECHNIQUES: [
-        'Add @aria-describedby@ reference on the form control or widget to the suggestion information.',
+        'Add @aria-describedby@ reference on the form control or widget to reference suggestion information.',
         'Use a popup list to provide suggested values for valid input.'
       ],
       MANUAL_CHECKS: [
@@ -196,8 +158,8 @@ export const errorRules = {
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19'
         }             ]
   },
-  ERROR_5: {
-      ID:                    'Error 5',
+  ERROR_4: {
+      ID:                    'Error 4',
       DEFINITION:            'To prevent errors when input includes legal and/or financial transactions (e.g. online shopping, banking), the user must be able to either reverse, check or confirm the data before the transaction is finalized.',
       SUMMARY:               'Prevent errors',
       TARGET_RESOURCES_DESC: 'Forms that contain legal or financial transactions including online purchases',

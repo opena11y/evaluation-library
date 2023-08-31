@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Using &lt;code&gt;aria-required&lt;/code&gt; with widget roles | OpenA11y Evaluation Library 2.0</title>
+        <title>Error correction suggestions | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Using <code>aria-required</code> with widget roles</li>
+          <li class="breadcrumb-item active">Error correction suggestions</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Using <code>aria-required</code> with widget roles</h1>
+            <h1 id="h1-title">Rule: Error correction suggestions</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -69,7 +69,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>If user input is required for a widget the <code>aria-required</code> attribute must must used.</td>
+  <td>When input error is automatically detected and suggestions are automatically known, the suggestions must be provided to the user (some exceptions).</td>
 </tr>
 
                   
@@ -78,7 +78,7 @@
   <td>
     <ul>
       
-      <li>Users benefit from information being informed if a input to a widget is required for form submission or task completion.</li>
+      <li>Users benefit from being informed of invalid input and on how to correct invalid input.</li>
       
     </ul>
   </td>
@@ -111,7 +111,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Widgets/Scripts</td>
+  <td>Forms</td>
 </tr>
 
                   
@@ -126,11 +126,9 @@
   <td>
     <ul>
       
-      <li>To identify a required widget, add the ARIA <code>aria-required="true"</code> attribute to the widget.</li>
+      <li>Add <code>aria-describedby</code> reference on the form control or widget to reference suggestion information.</li>
       
-      <li>Use the <code>aria-required</code> attribute as the CSS selector for visually styling the widget as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.</li>
-      
-      <li>Note the the HTML5 <code>required</code> attribute CANNOT be used to indicate that a widget is required, the <code>requiured</code> attribute can only be used on HTML5 defined form controls.</li>
+      <li>Use a popup list to provide suggested values for valid input.</li>
       
     </ul>
   </td>
@@ -142,7 +140,15 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-required">Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required</a></li>
+      <li><a href="https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL">HTML 4.01 Specification: The <code>label</code> element</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-invalid">Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1">ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19">ARIA19: Using ARIA role=alert or Live Regions to Identify Errors</a></li>
       
     </ul>
   </td>

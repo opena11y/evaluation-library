@@ -13460,8 +13460,8 @@ const errorRules$1 = {
   },
   ERROR_2: {
       ID:                    'Error 2',
-      DEFINITION:            'If user input is required for a form control the @required@ or @aria-required@ attribute must must used.',
-      SUMMARY:               'Using @aria-required@ to identify required form controls',
+      DEFINITION:            'If user input is required for a form control or custom widget the @required@ or @aria-required@ attribute must must used.',
+      SUMMARY:               'Using @aria-required@ to identify required form controls and widgets',
       TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA widgets',
       RULE_RESULT_MESSAGES: {
         FAIL_S:         'Update the form control with @aria-required="false"@ and the @required@ attributes to indicate the true required state of the control.',
@@ -13504,40 +13504,6 @@ const errorRules$1 = {
   },
   ERROR_3: {
       ID:                    'Error 3',
-      DEFINITION:            'If user input is required for a widget the @aria-required@ attribute must must used.',
-      SUMMARY:               'Using @aria-required@ with widget roles',
-      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
-      RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S: 'If the widget is required use @aria-required="true"@ attribute.',
-        MANUAL_CHECK_P: 'If any of the %N_F widgets are required, use the @aria-required="true"@ attribute.',
-        HIDDEN_S:       'The widget that is hidden does not need to be tested for being required.',
-        HIDDEN_P:       'The %N_H widget elements that are hidden do not need to be tested for being required.',
-        NOT_APPLICABLE: 'No widgets on this page that need testing for being required.'
-      },
-      BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'The @%1[role="%2"]@ widget is identified as required though the use of @aria-required="true"@ attribute.',
-        ELEMENT_MC_1:     'If the @%1[role="%2"]@ widget is a required, add the @aria-required="true"@ attribute to the control.',
-        ELEMENT_HIDDEN_1: 'The @%1[role="%2"]@ element was not tested because it is hidden from assistive technologies.'
-      },
-      PURPOSES: [
-        'Users benefit from information being informed if a input to a widget is required for form submission or task completion.'
-      ],
-      TECHNIQUES: [
-        'To identify a required widget, add the ARIA @aria-required="true"@ attribute to the widget.',
-        'Use the @aria-required@ attribute as the CSS selector for visually styling the widget as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.',
-        'Note the the HTML5 @required@ attribute CANNOT be used to indicate that a widget is required, the @requiured@ attribute can only be used on HTML5 defined form controls.'
-      ],
-      MANUAL_CHECKS: [
-      ],
-      INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
-        }
-      ]
-  },
-  ERROR_4: {
-      ID:                    'Error 4',
       DEFINITION:            'When input error is automatically detected and suggestions are automatically known, the suggestions must be provided to the user (some exceptions).',
       SUMMARY:               'Error correction suggestions',
       TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
@@ -13549,18 +13515,14 @@ const errorRules$1 = {
         NOT_APPLICABLE: 'No form controls or widgets on this page that typically can provide suggestions.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_MC_1:     'If the @input[type="%1"]@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
-        ELEMENT_MC_2:     'If the @%1@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
-        ELEMENT_MC_3:     'If the @%1@ widget can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
-        ELEMENT_HIDDEN_1: 'The @input[type="%1"]@ element was not tested because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: 'The @%1@ element was not tested because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_3: 'The @%1@ widget was not tested because it is hidden from assistive technologies.'
+        ELEMENT_MC_1:     'If the @%1@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested because it is hidden from assistive technologies.',
       },
       PURPOSES: [
         'Users benefit from being informed of invalid input and on how to correct invalid input.'
       ],
       TECHNIQUES: [
-        'Add @aria-describedby@ reference on the form control or widget to the suggestion information.',
+        'Add @aria-describedby@ reference on the form control or widget to reference suggestion information.',
         'Use a popup list to provide suggested values for valid input.'
       ],
       MANUAL_CHECKS: [
@@ -13587,8 +13549,8 @@ const errorRules$1 = {
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19'
         }             ]
   },
-  ERROR_5: {
-      ID:                    'Error 5',
+  ERROR_4: {
+      ID:                    'Error 4',
       DEFINITION:            'To prevent errors when input includes legal and/or financial transactions (e.g. online shopping, banking), the user must be able to either reverse, check or confirm the data before the transaction is finalized.',
       SUMMARY:               'Prevent errors',
       TARGET_RESOURCES_DESC: 'Forms that contain legal or financial transactions including online purchases',
@@ -21708,7 +21670,6 @@ const errorRules = [
 
         if (ce.isInteractive) {
           const de = ce.domElement;
-          debug$p.log(`[ERROR 2][${de.elemName}]: ${ce.hasRequired} ${ce.hasAriaRequired} ${ce.ariaRequired}`);
           if (ce.hasRequired || ce.hasAriaRequired) {
             if (de.visibility.isVisibleToAT) {
               if (ce.hasRequired && ce.hasAriaRequired && !ce.ariaRequired) {
@@ -21729,154 +21690,17 @@ const errorRules = [
           }
         }
       });
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY = VISIBILITY;
-
-      var control_elements   = dom_cache.controls_cache.control_elements;
-      var control_elements_len = control_elements.length;
-
-      // collect all the visible controls
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        var control_type = ce.control_type;
-
-        if (control_type === CONTROL_TYPE.CHECKBOX  ||
-            control_type === CONTROL_TYPE.DATE      ||
-            control_type === CONTROL_TYPE.EMAIL     ||
-            control_type === CONTROL_TYPE.FILE      ||
-            control_type === CONTROL_TYPE.NUMBER    ||
-            control_type === CONTROL_TYPE.PASSWORD  ||
-            control_type === CONTROL_TYPE.RADIO     ||
-            control_type === CONTROL_TYPE.TEL       ||
-            control_type === CONTROL_TYPE.TEXT      ||
-            control_type === CONTROL_TYPE.URL ) {
-
-          var input_type = de.node.getAttribute('type');
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (de.has_required || de.has_aria_required) {
-              if (de.has_required && de.has_aria_required && !de.aria_required) {
-                rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [input_type]);
-              }
-              else {
-                if (de.has_required) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [input_type]);
-                else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [input_type]);
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [input_type]);
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [input_type]);
-          }
-        }
-        else {
-          if ((control_type === CONTROL_TYPE.TEXTAREA) ||
-              (control_type === CONTROL_TYPE.SELECT)) {
-
-            var tag_name = de.tag_name;
-
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (de.has_required || de.has_aria_required) {
-                if (de.has_required && de.has_aria_required && !de.aria_required) {
-                  rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [tag_name]);
-                }
-                else {
-                  if (de.has_required) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_3', [tag_name]);
-                  else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_4', [tag_name]);
-                }
-              }
-              else {
-                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [tag_name]);
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_2', [de.tag_name]);
-            }
-          }
-        }
-      }
-*/
-
     } // end validate function
   },
 
   /**
    * @object ERROR_3
    *
-   * @desc Use aria-required attribute widgets
-   *
-   */
-
-  { rule_id             : 'ERROR_3',
-    last_updated        : '2023-08-25',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
-    rule_required       : true,
-    wcag_primary_id     : '3.3.3',
-    wcag_related_ids    : [],
-    target_resources    : ['widgets'],
-    validate            : function (dom_cache, rule_result) {
-
-      debug$p.log(`[Error 3: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY = VISIBILITY;
-
-      var widget_elements     = dom_cache.controls_cache.widget_elements;
-      var widget_elements_len = widget_elements.length;
-
-      // collect all the visible controls
-      for (var i = 0; i < widget_elements_len; i++) {
-        var we = widget_elements[i];
-        var de = we.dom_element;
-        var cs = de.computed_style;
-
-        var role = de.role;
-
-        if (role === 'combobox'     ||
-            role === 'gridcell'     ||
-            role === 'listbox'      ||
-            role === 'radiogroup'   ||
-            role === 'spinbutton'   ||
-            role === 'textarea'     ||
-            role === 'tree'         ||
-            role === 'textbox'    ||
-            role === 'treegrid') {
-
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-            if (de.has_aria_required) {
-              rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, role]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, role]);
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, role]);
-          }
-        }
-      }
-      */
-    } // end validate function
-  },
-
-  /**
-   * @object ERROR_4
-   *
    * @desc Provide correction suggestions
    *
    */
 
-  { rule_id             : 'ERROR_4',
+  { rule_id             : 'ERROR_3',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.FORMS,
@@ -21886,63 +21710,32 @@ const errorRules = [
     target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', '[role="textbox"]', '[role="combobox"]', '[role="gridcell"]'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$p.log(`[Error 4: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      const suggestionRoles = ['textbox', 'select', 'slider', 'spinbutton'];
 
-/*
+        dom_cache.controlInfo.allControlElements.forEach( ce => {
+          const de = ce.domElement;
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY = VISIBILITY;
-
-      var control_elements   = dom_cache.controls_cache.control_elements;
-      var control_elements_len = control_elements.length;
-
-      // collect all the visible controls
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-        var control_type = ce.control_type;
-
-        if (control_type === CONTROL_TYPE.DATE        ||
-              control_type === CONTROL_TYPE.EMAIL     ||
-              control_type === CONTROL_TYPE.FILE      ||
-              control_type === CONTROL_TYPE.NUMBER    ||
-              control_type === CONTROL_TYPE.PASSWORD  ||
-              control_type === CONTROL_TYPE.TEL       ||
-              control_type === CONTROL_TYPE.TEXT      ||
-              control_type === CONTROL_TYPE.URL ) {
-          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.node.getAttribute('type')]);
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.node.getAttribute('type')]);
-          }
-        }
-        else {
-          if ((control_type === CONTROL_TYPE.TEXTAREA) ||
-              (control_type === CONTROL_TYPE.SELECT)) {
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [de.tag_name]);
+          if (suggestionRoles.includes(de.role)) {
+            if (de.visibility.isVisibleToAT) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
             }
             else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
             }
           }
-        }
-      }
-*/
+      });
+
     } // end validate function
   },
 
   /**
-   * @object ERROR_5
+   * @object ERROR_4
    *
    * @desc Provide error prevention
    *
    */
 
-  { rule_id             : 'ERROR_5',
+  { rule_id             : 'ERROR_4',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.FORMS,
@@ -21952,39 +21745,33 @@ const errorRules = [
     target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', '[role="textbox"]', '[role="combobox"]', '[role="gridcell"]'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$p.log(`[Error 5: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      const excludeRoles = ['group',
+                            'listitem',
+                            'menuitem',
+                            'menuitemradio',
+                            'menuitemcheckbox',
+                            'option',
+                            'scrollbar'];
 
-/*
+      let count = 0;
 
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY = VISIBILITY;
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
 
-      var control_elements     = dom_cache.controls_cache.control_elements;
-      var control_elements_len = control_elements.length;
-
-      var control_count = 0;
-
-      for (var i = 0; i < control_elements_len; i++) {
-        var ce = control_elements[i];
-        var de = ce.dom_element;
-        var cs = de.computed_style;
-
-  //      console.log('[ERROR_5][tag]: ' + de.tag_name + ' [role]: ' + de.role + ' [isWidget]: ' + de.is_widget);
-
-        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.node.getAttribute('type')]);
-          control_count += 1;
+        if (ce.isInteractive && !excludeRoles.includes(de.role)) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+            count += 1;
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
-        else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.node.getAttribute('type')]);
-        }
-      }
+      });
 
-      if (control_elements_len) {
-        var page_element = dom_cache.headings_landmarks_cache.page_element;
-        if (page_element && control_count) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+      if (count) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
-*/
     } // end validate function
   }
 ];

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Error correction suggestions | OpenA11y Evaluation Library 2.0</title>
+        <title>Prevent errors | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Error correction suggestions</li>
+          <li class="breadcrumb-item active">Prevent errors</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Error correction suggestions</h1>
+            <h1 id="h1-title">Rule: Prevent errors</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -69,7 +69,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>When input error is automatically detected and suggestions are automatically known, the suggestions must be provided to the user (some exceptions).</td>
+  <td>To prevent errors when input includes legal and/or financial transactions (e.g. online shopping, banking), the user must be able to either reverse, check or confirm the data before the transaction is finalized.</td>
 </tr>
 
                   
@@ -78,7 +78,7 @@
   <td>
     <ul>
       
-      <li>Users benefit from being informed of invalid input and on how to correct invalid input.</li>
+      <li>The intent of this rule is to help users with disabilities avoid serious consequences as the result of a mistake when performing an action that cannot be reversed. For example, purchasing non-refundable airline tickets or submitting an order to purchase stock in a brokerage account are financial transactions with serious consequences.</li>
       
     </ul>
   </td>
@@ -95,8 +95,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#error-suggestion" target="_spec">
-        Success Criterion 3.3.3 Error Suggestion
+      <a href="https://www.w3.org/TR/WCAG21/#error-prevention-legal-financial-data" target="_spec">
+        Success Criterion 3.3.4 Error Prevention (Legal, Financial, Data)
       </a>
     </p>
     <p class="related">
@@ -117,7 +117,7 @@
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>page</td>
 </tr>
 
                   
@@ -126,9 +126,11 @@
   <td>
     <ul>
       
-      <li>Add <code>aria-describedby</code> reference on the form control or widget to the suggestion information.</li>
+      <li>Provide a confirmation page showing all the user inputs before for final submission of the information for modification of user controlled data on a server.</li>
       
-      <li>Use a popup list to provide suggested values for valid input.</li>
+      <li>Provide a means for the user to review previous submissions and give them the ability to cancel or modify previous submissions of legal or financial information.</li>
+      
+      <li>Use a confirmation checkbox in addition to the submit button, to require the user to confirm the data is valid before submission.</li>
       
     </ul>
   </td>
@@ -140,15 +142,23 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL">HTML 4.01 Specification: The <code>label</code> element</a></li>
+      <li><a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/minimize-error-reversible.html">Understanding SC 3.3.4 Error Prevention (Legal, Financial, Data.)</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-invalid">Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G164">G164: Providing a stated time within which an online request (or transaction) may be amended or canceled by the user after making the request.</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G98">G98: Providing the ability for the user to review and correct answers before submitting.</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1">ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G155">G155: Providing a checkbox in addition to a submit button.</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19">ARIA19: Using ARIA role=alert or Live Regions to Identify Errors</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G99">G99: Providing the ability to recover deleted information.</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G168">G168: Requesting confirmation to continue with selected action.</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G155">G155: Providing a checkbox in addition to a submit button.</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G98">G98: Providing the ability for the user to review and correct answers before submitting.</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G168"> G168: Requesting confirmation to continue with selected action.</a></li>
       
     </ul>
   </td>

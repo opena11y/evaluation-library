@@ -23,22 +23,12 @@
 
         executeTest('ERROR 2: Required on Standard Form Controls and widgets', 'ID_IFRAME_2', 'ERROR_2');
 
+        executeTest('ERROR 3: Suggestions', 'ID_IFRAME_3', 'ERROR_3');
+
+        executeTest('ERROR 4: Prevention', 'ID_IFRAME_4', 'ERROR_4');
+
       });
 
-/*
-      test( "ERROR 3: Required Widgets", function() {
-        executeTest('ID_IFRAME_3', 'ERROR_3');
-      });
-         
-      test( "ERROR 4: Suggestions", function() {
-        executeTest('ID_IFRAME_4', 'ERROR_4');
-      });
-         
-      test( "ERROR 5: Prevention", function() {
-        executeTest('ID_IFRAME_5', 'ERROR_5');
-      });
-         
- */
     </script>
 
     <h2>ERROR 1: Use invalid or aria-invalid to mark a form control value as invalid</h2>
@@ -47,14 +37,11 @@
     <h2>ERROR 2: Required Standard Form Controls and Widgets</h2>
     <iframe id="ID_IFRAME_2" src="error_feedback/error_feedback_2_required.html"></iframe>
     
-    <h2>ERROR 3: Required Widgets</h2>
-    <iframe id="ID_IFRAME_3" src="error_feedback/error_feedback_3_required_widgets.html"></iframe>
-
-    <h2>ERROR 4: Suggestions</h2>
-    <iframe id="ID_IFRAME_4" src="error_feedback/error_feedback_4_suggestions.html"></iframe>
+    <h2>ERROR 3: Suggestions</h2>
+    <iframe id="ID_IFRAME_3" src="error_feedback/error_feedback_3_suggestions.html"></iframe>
     
-    <h2>ERROR 5: Prevent</h2>
-    <iframe id="ID_IFRAME_5" src="error_feedback/error_feedback_5_prevent.html"></iframe>
+    <h2>ERROR 4: Prevent</h2>
+    <iframe id="ID_IFRAME_4" src="error_feedback/error_feedback_4_prevent.html"></iframe>
     
     
   </body>
