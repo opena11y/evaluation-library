@@ -10,7 +10,7 @@ export const errorRules = {
 
   ERROR_1: {
       ID:                    'Error 1',
-      DEFINITION:            'Form controls with invalid values must provide information to assitive technologies that the values are invalid.',
+      DEFINITION:            'Form controls with invalid values must provide information to assisive technologies that the values are invalid.',
       SUMMARY:               'Information on invalid values',
       TARGET_RESOURCES_DESC: '@textarea@, @select@ and @input@ elements',
       RULE_RESULT_MESSAGES: {
@@ -23,22 +23,27 @@ export const errorRules = {
         NOT_APPLICABLE:  'No form controls on this page'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_FAIL_1:       '@%1@ is invalid (i.e. validity.valid property of the control is "false") change the value of "@aria-invalid@ attribute from @false@ to @true@.',
-        ELEMENT_FAIL_2:       '@%1@ is valid (i.e. validity.valid property of the control is "true") change the value of "@aria-invalid@ attribute from @true@ to @false@.',
-        ELEMENT_MC_1: '@%1@ is invalid (i.e. validity.valid property of the control is "false"), verify the label contains information on the value being invalid or add the @aria-invalid="true"@ attribute to the control.',
-        ELEMENT_MC_2: '@%1@ is being tested for validity (i.e. @pattern@ attribute is present), verify the label contains information on the validity or add the @aria-invalid@ attribute to inidcate the state of validity of the control.',
-        ELEMENT_MC_3: 'Verify if the @%1@ is being validated, if it is being validated verify it implements a technique to indicate the state of validity.',
-        ELEMENT_PASS_1:         '@%1@ is invalid (i.e. validity.valid property of the control is "false") and the "@aria-invalid=true@" has been set.',
-        ELEMENT_PASS_2:         '@%1@ is valid (i.e. validity.valid property of the control is "true") and the "@aria-invalid=false@" has been set.',
-        ELEMENT_HIDDEN_1:       '%1 form control was not tested for indicating invalid values because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1:   '@%1@ is invalid (i.e. validity.valid property of the control is "false") change the value of "@aria-invalid@ attribute from @false@ to @true@.',
+        ELEMENT_FAIL_2:   '@%1@ is valid (i.e. validity.valid property of the control is "true") change the value of "@aria-invalid@ attribute from @true@ to @false@.',
+        ELEMENT_MC_1:     '@%1@ is invalid (i.e. validity.valid property of the control is "false"), verify the label contains information on the value being invalid or add the @aria-invalid="true"@ attribute to the control.',
+        ELEMENT_MC_2:     '@%1@ is being tested for validity (i.e. @pattern@ attribute is present), verify the label contains information on the validity or add the @aria-invalid@ attribute to inidcate the state of validity of the control.',
+        ELEMENT_MC_3:     'Verify if the @%1@ is being validated. If it is being validated verify it implements a technique to indicate the state of validity to assistive technologies.',
+        ELEMENT_MC_4:     '@%1@ has set @aria-invalid@, verify the value represents the validity of the controls value.',
+        ELEMENT_PASS_1:   '@%1@ is invalid (i.e. validity.valid property of the control is "false") and the "@aria-invalid=true@" has been set.',
+        ELEMENT_PASS_2:   '@%1@ is valid (i.e. validity.valid property of the control is "true") and the "@aria-invalid=false@" has been set.',
+        ELEMENT_HIDDEN_1: '%1 form control was not tested for indicating invalid values because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'Users must be able to identify form control values which are invalid in order to successfully correct the values and submit the form.'
+        'Users must be able to identify form control values which are invalid in order to successfully correct the values and submit the form.',
+        'Native HTML form controls have a support for many types of validity testing, these features should be used before using @aria-invalid@ attribute.',
+        'For custom ARIA widgets or when native HTML form control validation is not sufficient, the @aria-invalid@ attribute can used to identify invalid values.',
+        'NOTE: Native form controls with with validity testing should avoid using @aria-valid@ property, if the @aria-invalid@ is used it must be synchronized with the browsers computed validity value.'
       ],
       TECHNIQUES: [
+        'When available, use the native to validation features to idenitfy invalid values of HTML form controls.',
+        'Use @aria-invalid@ attribute to indicate the form control has an invalid value.',
         'Add the text "invalid" to the label of the form control, the text can be placed off screen using CSS.',
-        'Add the image to the label.  The image should be visible indicating an invalid value with the alt text \'invalid\'.',
-        'Use @aria-invalid@ attribute to indicate the form control is invalid.'
+        'Add the image to the label.  The image should be visible indicating an invalid value with the alt text \'invalid\'.'
       ],
       MANUAL_CHECKS: [
         'Enter invalid values into form controls that are validated and activate the validation event (i.e. form submission, change of focus...).',

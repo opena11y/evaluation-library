@@ -9,7 +9,7 @@ import {wcag}               from './wcag.js';
 import {audioRules}         from './audioRules.js';
 import {bypassRules}        from './bypassRules.js';
 import {colorRules}         from './colorRules.js';
-// import {errorRules}         from './errorRules.js';
+import {errorRules}         from './errorRules.js';
 import {frameRules}         from './frameRules.js';
 import {controlRules}       from './controlRules.js';
 import {headingRules}       from './headingRules.js';
@@ -42,7 +42,7 @@ export const messages = {
 messages.rules = Object.assign(messages.rules, audioRules);
 messages.rules = Object.assign(messages.rules, bypassRules);
 messages.rules = Object.assign(messages.rules, colorRules);
-// messages.rules = Object.assign(messages.rules, errorRules);
+messages.rules = Object.assign(messages.rules, errorRules);
 messages.rules = Object.assign(messages.rules, frameRules);
 messages.rules = Object.assign(messages.rules, controlRules);
 messages.rules = Object.assign(messages.rules, headingRules);

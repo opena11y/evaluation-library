@@ -28,6 +28,18 @@ class ControlElement {
     this.typeAttr = node.type ? node.type : '';
     this.childControlElements = [];
     this.nameForComparision = this.getNameForComparison(domElement, parentControlElement);
+
+    this.hasPattern = node.hasAttribute('pattern');
+
+    this.hasValidityState = node.validity && (typeof node.validity.valid === 'boolean');
+    this.isValid = this.hasValidityState ? node.validity.valid : true;
+
+    this.hasAriaInvalid = node.hasAttribute('aria-invalid');
+    this.ariaInvalid = this.hasAriaInvalid ?
+                       (node.getAttribute('aria-invalid').toLowerCase() === 'true') :
+                       false;
+
+
   }
 
   get isButton () {
@@ -46,6 +58,9 @@ class ControlElement {
     return false;
   }
 
+  get isInteractive () {
+    return true;
+  }
 
   addChildControlElement (controlElement) {
     this.childControlElements.push(controlElement);
@@ -184,6 +199,11 @@ class FieldsetElement extends ControlElement {
     return true;
   }
 
+  get isInteractive () {
+    return false;
+  }
+
+
 }
 
 class LabelElement extends ButtonElement {
@@ -202,6 +222,10 @@ class LabelElement extends ButtonElement {
 
   get isLabel () {
     return true;
+  }
+
+  get isInteractive () {
+    return false;
   }
 
   getLabelForAttribute (node) {
@@ -233,6 +257,11 @@ class LegendElement extends ButtonElement {
   get isLegend () {
     return true;
   }
+
+  get isInteractive () {
+    return false;
+  }
+
 }
 
 

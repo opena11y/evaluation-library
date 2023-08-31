@@ -2,29 +2,27 @@
 <html>
   <head>
     <title>QUNIT: Error Feedback Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
 
-  <body>  
+  <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
-      // Test case for labeling form controls
 
+    <script type="module">
 
-      test( "ERROR 1: Use invalid or aria-invalid to indicate a form controls value is invalid", function() {
-        executeTest('ID_IFRAME_1', 'ERROR_1');
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', () => {
+
+        // Test case for labeling form controls
+
+        executeTest('ERROR_1: Use invalid or aria-invalid to indicate a form controls value is invalid', 'ID_IFRAME_1', 'ERROR_1');
       });
 
+/*
       test( "ERROR 2: Required Standard Form Controls", function() {
         executeTest('ID_IFRAME_2', 'ERROR_2');
       });
@@ -41,7 +39,7 @@
         executeTest('ID_IFRAME_5', 'ERROR_5');
       });
          
-         
+ */
     </script>
 
     <h2>ERROR 1: Use invalid or aria-invalid to mark a form control value as invalid</h2>

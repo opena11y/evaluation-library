@@ -34,10 +34,76 @@ export const errorRules = [
     rule_required       : true,
     wcag_primary_id     : '3.3.1',
     wcag_related_ids    : [],
-    target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
+    target_resources    : ['input[type="checkbox"]',
+                           'input[type="date"]',
+                           'input[type="file"]',
+                           'input[type="radio"]',
+                           'input[type="number"]',
+                           'input[type="password"]',
+                           'input[type="tel"]' ,
+                           'input[type="text"]',
+                           'input[type="url"]',
+                           'select',
+                           'textarea',
+                           'meter',
+                           'progress',
+                           'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Error 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+
+        if (ce.isInteractive) {
+          const de = ce.domElement;
+
+          if (de.visibility.isVisibleToAT) {
+            if (ce.hasValidityState) {
+              if (!ce.isValid) {
+                if (ce.hasAriaInvalid) {
+                 debug.log(`[ERROR 1][A]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`)
+                  if (ce.ariaInvalid) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+                }
+              }
+              else {
+                 debug.log(`[ERROR 1][B]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`)
+                 if (ce.hasAriaInvalid) {
+                  if (de.ariaInvalid) {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.elemName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+                  }
+                }
+                else {
+                  if (ce.hasPattern) {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+                  }
+                }
+              }
+            }
+            else {
+              if (ce.hasAriaInvalid) {
+                debug.log(`[ERROR 1][C]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`)
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.elemName]);
+              }
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+
+        }
+      });
 
 /*
 

@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$N = new DebugLogging('constants', false);
+const debug$O = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -600,13 +600,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$N.flag && debug$N.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$O.flag && debug$O.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$N.flag && debug$N.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$O.flag && debug$O.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -902,7 +902,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$M = new DebugLogging('ControlInfo', false);
+const debug$N = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -925,6 +925,18 @@ class ControlElement {
     this.typeAttr = node.type ? node.type : '';
     this.childControlElements = [];
     this.nameForComparision = this.getNameForComparison(domElement, parentControlElement);
+
+    this.hasPattern = node.hasAttribute('pattern');
+
+    this.hasValidityState = node.validity && (typeof node.validity.valid === 'boolean');
+    this.isValid = this.hasValidityState ? node.validity.valid : true;
+
+    this.hasAriaInvalid = node.hasAttribute('aria-invalid');
+    this.ariaInvalid = this.hasAriaInvalid ?
+                       (node.getAttribute('aria-invalid').toLowerCase() === 'true') :
+                       false;
+
+
   }
 
   get isButton () {
@@ -943,6 +955,9 @@ class ControlElement {
     return false;
   }
 
+  get isInteractive () {
+    return true;
+  }
 
   addChildControlElement (controlElement) {
     this.childControlElements.push(controlElement);
@@ -1042,7 +1057,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$M.domElement(ce.domElement, prefix);
+      debug$N.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1081,6 +1096,11 @@ class FieldsetElement extends ControlElement {
     return true;
   }
 
+  get isInteractive () {
+    return false;
+  }
+
+
 }
 
 class LabelElement extends ButtonElement {
@@ -1099,6 +1119,10 @@ class LabelElement extends ButtonElement {
 
   get isLabel () {
     return true;
+  }
+
+  get isInteractive () {
+    return false;
   }
 
   getLabelForAttribute (node) {
@@ -1130,6 +1154,11 @@ class LegendElement extends ButtonElement {
   get isLegend () {
     return true;
   }
+
+  get isInteractive () {
+    return false;
+  }
+
 }
 
 
@@ -1269,15 +1298,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$M.flag) {
-      debug$M.log('== Control Tree ==', 1);
+    if (debug$N.flag) {
+      debug$N.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$M.domElement(ce.domElement);
+        debug$N.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$M.log('== Forms ==', 1);
+      debug$N.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$M.domElement(ce.domElement);
+        debug$N.domElement(ce.domElement);
       });
     }
   }
@@ -6076,8 +6105,8 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$L = new DebugLogging('AriaInfo', false);
-debug$L.flag = false;
+const debug$M = new DebugLogging('AriaInfo', false);
+debug$M.flag = false;
 
 /* Debug helper functions */
 
@@ -6300,15 +6329,15 @@ class AriaInfo {
     }
 
 
-    if (debug$L.flag) {
-      node.attributes.length && debug$L.log(`${node.outerHTML}`, 1);
-      debug$L.log(`[         isWidget]: ${this.isWidget}`);
-      debug$L.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$L.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$L.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$L.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$L.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$L.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$M.flag) {
+      node.attributes.length && debug$M.log(`${node.outerHTML}`, 1);
+      debug$M.log(`[         isWidget]: ${this.isWidget}`);
+      debug$M.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$M.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$M.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$M.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$M.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$M.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6512,7 +6541,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$K = new DebugLogging('colorContrast', false);
+const debug$L = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6567,9 +6596,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$K.flag) {
-      debug$K.separator();
-      debug$K.tag(elementNode);
+    if (debug$L.flag) {
+      debug$L.separator();
+      debug$L.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6591,11 +6620,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$K.flag) {
-      debug$K.log(`[                    opacity]: ${this.opacity}`);
-      debug$K.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$K.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$K.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$L.flag) {
+      debug$L.log(`[                    opacity]: ${this.opacity}`);
+      debug$L.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$L.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$L.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6682,10 +6711,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$K.flag && debug$K.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$L.flag && debug$L.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$K.flag && debug$K.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$L.flag && debug$L.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6898,7 +6927,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$J = new DebugLogging('EventInfo', false);
+const debug$K = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6911,7 +6940,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$J.flag) {
+    if (debug$K.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8511,7 +8540,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$I = new DebugLogging('ariaInHtml', false);
+const debug$J = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8712,11 +8741,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$I.flag) {
+  if (debug$J.flag) {
     if (tagName === 'h2') {
-      debug$I.tag(node);
+      debug$J.tag(node);
     }
-    debug$I.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$J.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8836,7 +8865,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$H = new DebugLogging('visibility', false);
+const debug$I = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8884,17 +8913,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$H.flag) {
-      debug$H.separator();
-      debug$H.tag(elementNode);
-      debug$H.log('[          isHidden]: ' + this.isHidden);
-      debug$H.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$H.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$H.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$H.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$H.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$H.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$H.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$I.flag) {
+      debug$I.separator();
+      debug$I.tag(elementNode);
+      debug$I.log('[          isHidden]: ' + this.isHidden);
+      debug$I.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$I.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$I.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$I.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$I.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$I.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$I.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9207,8 +9236,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$G = new DebugLogging('nameFrom', false);
-debug$G.flag = false;
+const debug$H = new DebugLogging('nameFrom', false);
+debug$H.flag = false;
 
 /*
 *   @function getElementContents
@@ -9354,7 +9383,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$G.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$H.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9768,8 +9797,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$F = new DebugLogging('getAccName', false);
-debug$F.flag = false;
+const debug$G = new DebugLogging('getAccName', false);
+debug$G.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -10059,8 +10088,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$E = new DebugLogging('DOMElement', false);
-debug$E.flag = false;
+const debug$F = new DebugLogging('DOMElement', false);
+debug$F.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10383,12 +10412,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$E.flag) {
+    if (debug$F.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$E.domText(domItem, prefix);
+          debug$F.domText(domItem, prefix);
         } else {
-          debug$E.domElement(domItem, prefix);
+          debug$F.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10481,7 +10510,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$D = new DebugLogging('domText', false);
+const debug$E = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10500,8 +10529,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$D.flag) {
-      debug$D.log(`[text]: ${this.text}`);
+    if (debug$E.flag) {
+      debug$E.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10564,7 +10593,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$C = new DebugLogging('iframeInfo', false);
+const debug$D = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10582,9 +10611,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$C.flag) {
-      debug$C.log(`[          src]: ${this.src}`);
-      debug$C.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$D.flag) {
+      debug$D.log(`[          src]: ${this.src}`);
+      debug$D.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10620,8 +10649,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$C.flag) {
-      debug$C.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$D.flag) {
+      debug$D.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10632,7 +10661,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$B = new DebugLogging('idInfo', false);
+const debug$C = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10675,10 +10704,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$B.flag) {
-      debug$B.log('== All Links ==', 1);
+    if (debug$C.flag) {
+      debug$C.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$B.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$C.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10687,7 +10716,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$A = new DebugLogging('imageInfo', false);
+const debug$B = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10880,22 +10909,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$A.flag) {
-      debug$A.log('== All Image elements ==', 1);
+    if (debug$B.flag) {
+      debug$B.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$A.log(`[fileName]: ${ie.fileName}`, true);
-        debug$A.log(`[    role]: ${ie.domElement.role}`);
-        debug$A.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$A.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$A.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$B.log(`[fileName]: ${ie.fileName}`, true);
+        debug$B.log(`[    role]: ${ie.domElement.role}`);
+        debug$B.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$B.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$B.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$A.log('== All SVG domElements  ==', 1);
+      debug$B.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$A.domElement(de);
+        debug$B.domElement(de);
       });
-      debug$A.log('== All MapElements ==', 1);
+      debug$B.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$A.domElement(me.domElement);
+        debug$B.domElement(me.domElement);
       });
     }
   }
@@ -10904,7 +10933,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$z = new DebugLogging('linkInfo', false);
+const debug$A = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10950,10 +10979,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$z.flag) {
-      debug$z.log('== All Links ==', 1);
+    if (debug$A.flag) {
+      debug$A.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$z.domElement(de);
+        debug$A.domElement(de);
       });
     }
   }
@@ -10962,7 +10991,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$y = new DebugLogging('ListInfo', false);
+const debug$z = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -10983,8 +11012,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$y.flag) {
-      debug$y.log('');
+    if (debug$z.flag) {
+      debug$z.log('');
     }
   }
 
@@ -11009,9 +11038,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$y.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$z.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$y.domElement(le.domElement, prefix);
+      debug$z.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11119,16 +11148,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$y.flag) {
-      debug$y.log('== All ListElements ==', 1);
-      debug$y.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$z.flag) {
+      debug$z.log('== All ListElements ==', 1);
+      debug$z.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$y.domElement(le.domElement);
+        debug$z.domElement(le.domElement);
       });
-      debug$y.log('== List Tree ==', 1);
-      debug$y.log(`[linkCount]: ${this.linkCount}`);
+      debug$z.log('== List Tree ==', 1);
+      debug$z.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$y.domElement(le.domElement);
+        debug$z.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -11138,8 +11167,8 @@ class ListInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$x = new DebugLogging('MediaInfo', false);
-debug$x.flag = false;
+const debug$y = new DebugLogging('MediaInfo', false);
+debug$y.flag = false;
 
 /**
  * @class MediaElement
@@ -11377,25 +11406,25 @@ class MediaInfo {
    */
 
   showListInfo () {
-    if (debug$x.flag) {
-      debug$x.log('== Audio Elements ==', 1);
+    if (debug$y.flag) {
+      debug$y.log('== Audio Elements ==', 1);
       this.audioElements.forEach( ae => {
-        debug$x.log(ae);
+        debug$y.log(ae);
       });
 
-      debug$x.log('== Video Elements ==', 1);
+      debug$y.log('== Video Elements ==', 1);
       this.videoElements.forEach( ve => {
-        debug$x.log(ve);
+        debug$y.log(ve);
       });
 
-      debug$x.log('== Object Elements ==', 1);
+      debug$y.log('== Object Elements ==', 1);
       this.objectElements.forEach( oe => {
-        debug$x.log(oe);
+        debug$y.log(oe);
       });
 
-      debug$x.log('== Embed Elements ==', 1);
+      debug$y.log('== Embed Elements ==', 1);
       this.embedElements.forEach( ee => {
-        debug$x.log(ee);
+        debug$y.log(ee);
       });
 
 
@@ -11406,7 +11435,7 @@ class MediaInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$w = new DebugLogging('structureInfo', false);
+const debug$x = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11445,11 +11474,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$w.domElement(le.domElement, prefix);
+      debug$x.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$w.domElement(h, prefix);
+      debug$x.domElement(h, prefix);
     });
   }
 
@@ -11573,27 +11602,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$w.flag) {
-      debug$w.log('== All Headings ==', 1);
+    if (debug$x.flag) {
+      debug$x.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$w.domElement(h);
+        debug$x.domElement(h);
       });
-      debug$w.log('== All Landmarks ==', 1);
+      debug$x.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$w.domElement(le.domElement);
+        debug$x.domElement(le.domElement);
       });
-      debug$w.log('== Landmarks By Doc ==', 1);
+      debug$x.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$w.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$x.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$w.domElement(le.domElement);
+            debug$x.domElement(le.domElement);
           });
         }
       });
-      debug$w.log('== Structure Tree ==', 1);
+      debug$x.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$w.domElement(le.domElement);
+        debug$x.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -13352,6 +13381,278 @@ const colorRules$1 = {
                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                       }
                       ]
+  }
+};
+
+/* errorRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const errorRules$1 = {
+
+  ERROR_1: {
+      ID:                    'Error 1',
+      DEFINITION:            'Form controls with invalid values must provide information to assisive technologies that the values are invalid.',
+      SUMMARY:               'Information on invalid values',
+      TARGET_RESOURCES_DESC: '@textarea@, @select@ and @input@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Change the value of @aria-invalid@ property to @true@, on form control that is invalid and @aria-invalid="false"@.',
+        FAIL_P:   'Change the value of @aria-invalid@ property to @true@, on %N_F form controls that are invalid and @aria-invalid="false"@.',
+        MANUAL_CHECK_S:     'If the form control can be validated make sure it indicates invalid values when invalid.',
+        MANUAL_CHECK_P:     'If the %N_MC form controls can be validated make sure they indicates invalid values when invalid.',
+        HIDDEN_S: 'The control element that is hidden does not need to be tested for indicating invalid values.',
+        HIDDEN_P: 'The %N_H control elements that are hidden do not need to be tested for indicating invalid values.',
+        NOT_APPLICABLE:  'No form controls on this page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_FAIL_1:   '@%1@ is invalid (i.e. validity.valid property of the control is "false") change the value of "@aria-invalid@ attribute from @false@ to @true@.',
+        ELEMENT_FAIL_2:   '@%1@ is valid (i.e. validity.valid property of the control is "true") change the value of "@aria-invalid@ attribute from @true@ to @false@.',
+        ELEMENT_MC_1:     '@%1@ is invalid (i.e. validity.valid property of the control is "false"), verify the label contains information on the value being invalid or add the @aria-invalid="true"@ attribute to the control.',
+        ELEMENT_MC_2:     '@%1@ is being tested for validity (i.e. @pattern@ attribute is present), verify the label contains information on the validity or add the @aria-invalid@ attribute to inidcate the state of validity of the control.',
+        ELEMENT_MC_3:     'Verify if the @%1@ is being validated. If it is being validated verify it implements a technique to indicate the state of validity to assistive technologies.',
+        ELEMENT_MC_4:     '@%1@ has set @aria-invalid@, verify the value represents the validity of the controls value.',
+        ELEMENT_PASS_1:   '@%1@ is invalid (i.e. validity.valid property of the control is "false") and the "@aria-invalid=true@" has been set.',
+        ELEMENT_PASS_2:   '@%1@ is valid (i.e. validity.valid property of the control is "true") and the "@aria-invalid=false@" has been set.',
+        ELEMENT_HIDDEN_1: '%1 form control was not tested for indicating invalid values because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Users must be able to identify form control values which are invalid in order to successfully correct the values and submit the form.',
+        'Native HTML form controls have a support for many types of validity testing, these features should be used before using @aria-invalid@ attribute.',
+        'For custom ARIA widgets or when native HTML form control validation is not sufficient, the @aria-invalid@ attribute can used to identify invalid values.',
+        'NOTE: Native form controls with with validity testing should avoid using @aria-valid@ property, if the @aria-invalid@ is used it must be synchronized with the browsers computed validity value.'
+      ],
+      TECHNIQUES: [
+        'When available, use the native to validation features to idenitfy invalid values of HTML form controls.',
+        'Use @aria-invalid@ attribute to indicate the form control has an invalid value.',
+        'Add the text "invalid" to the label of the form control, the text can be placed off screen using CSS.',
+        'Add the image to the label.  The image should be visible indicating an invalid value with the alt text \'invalid\'.'
+      ],
+      MANUAL_CHECKS: [
+        'Enter invalid values into form controls that are validated and activate the validation event (i.e. form submission, change of focus...).',
+        'For the form controls with invalid values check to make sure the technique for indicating the invalid value is present.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML 4.01 Specification: The @label@ element',
+          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-invalid'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H44: Using label elements to associate text labels with form controls',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA21: Using Aria-invalid to Indicate An Error Field',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA21'
+        }
+      ]
+  },
+  ERROR_2: {
+      ID:                    'Error 2',
+      DEFINITION:            'If user input is required for a form control the @required@ or @aria-required@ attribute must must used.',
+      SUMMARY:               'Required form controls',
+      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:         'Update the form control with @aria-required="false"@ and the @required@ attributes to indicate the true required state of the control.',
+        FAUL_P:         'Update the %N_F form controls with @aria-required="false"@ and the @required@ attributes to indicate the true required state of the control.',
+        MANUAL_CHECK_S: 'If the form control is required, add the @required@ attribute or if HTML4 compatibility is required the @aria-required="true"@ attribute.',
+        MANUAL_CHECK_P: 'If any of the %N_F form controls are required, add the @required@ attribute or if HTML4 compatibility is required the @aria-required="true"@ attribute.',
+        HIDDEN_S:       'The form control element that is hidden does not need to be tested for being required.',
+        HIDDEN_P:       'The %N_H form control elements that are hidden do not need to be tested for being required.',
+        NOT_APPLICABLE: 'No form controls on this page that need testing for being required.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_FAIL_1:   'If the @input[type="%1"]@ element with the attribute @aria-required="false"@ which conflicts with presence of the @required@ attribute.',
+        ELEMENT_PASS_1:   'If the @input[type="%1"]@ element has the @required@ attribute.',
+        ELEMENT_PASS_2:   'If the @input[type="%1"]@ element has the @aria-required@ attribute.',
+        ELEMENT_PASS_3:   'If the %1 element has the @required@ attribute.',
+        ELEMENT_PASS_4:   'If the %1 element has @aria-required@.',
+        ELEMENT_MC_1:     'If the @input[type="%1"]@ element is a required, add the @required@ attribute to the control.',
+        ELEMENT_MC_2:     'If the %1 element is a required, add the @required@ attribute to the control.',
+        ELEMENT_HIDDEN_1: 'The @input[type="%1"]@ element was not tested because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'The @%1@ element was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Users benefit from information being informed if a input to a control is required for form submission or task completion.'
+      ],
+      TECHNIQUES: [
+        'To identify a required form control, add the HTML5 @required@ attribute to the standard form controls.',
+        'If compatibility with HTML4 standards or legacy browsers and assistve technologies, you can also use @aria-required="true"@ to indicate a form control is required.',
+        'Use the @required@ attribute (or the @aria-required@ if used) as the CSS selector for visually styling the form control as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.',
+        'The only reason to support both @required@ and @aria-required@ on the same form control is to support legacy browsers and assistive technologies.  This required extra care to make sure the two values do not conflict.  If they do conflict the @required@ attribute will override the @aria-required@ property value.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: required attribute',
+          url:   'https://www.w3.org/TR/html5/forms.html#attr-input-required'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA2: Identifying a required field with the aria-required property',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA2'
+        }
+      ]
+  },
+  ERROR_3: {
+      ID:                    'Error 3',
+      DEFINITION:            'If user input is required for a widget the @aria-required@ attribute must must used.',
+      SUMMARY:               'Required widgets',
+      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'If the widget is required use @aria-required="true"@ attribute.',
+        MANUAL_CHECK_P: 'If any of the %N_F widgets are required, use the @aria-required="true"@ attribute.',
+        HIDDEN_S:       'The widget that is hidden does not need to be tested for being required.',
+        HIDDEN_P:       'The %N_H widget elements that are hidden do not need to be tested for being required.',
+        NOT_APPLICABLE: 'No widgets on this page that need testing for being required.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'The @%1[role="%2"]@ widget is identified as required though the use of @aria-required="true"@ attribute.',
+        ELEMENT_MC_1:     'If the @%1[role="%2"]@ widget is a required, add the @aria-required="true"@ attribute to the control.',
+        ELEMENT_HIDDEN_1: 'The @%1[role="%2"]@ element was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Users benefit from information being informed if a input to a widget is required for form submission or task completion.'
+      ],
+      TECHNIQUES: [
+        'To identify a required widget, add the ARIA @aria-required="true"@ attribute to the widget.',
+        'Use the @aria-required@ attribute as the CSS selector for visually styling the widget as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.',
+        'Note the the HTML5 @required@ attribute CANNOT be used to indicate that a widget is required, the @requiured@ attribute can only be used on HTML5 defined form controls.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
+        }
+      ]
+  },
+  ERROR_4: {
+      ID:                    'Error 4',
+      DEFINITION:            'When input error is automatically detected and suggestions are automatically known, the suggestions must be provided to the user (some exceptions).',
+      SUMMARY:               'Error correction suggestions',
+      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'If the form control element or widget can automatically detect errors and suggest corrections, make sure that at least one accessible technique is used to present the suggestion to the user.',
+        MANUAL_CHECK_P: 'If the %N_MC form control elements and/or widgets can automatically detect errors and suggest corrections, make sure that at least one accessible technique is used to present the suggestion to the user.',
+        HIDDEN_S:       'The form control element and/or widget that is hidden does not need to be tested for accessible suggestions.',
+        HIDDEN_P:       'The %N_H form control elements and/or widgets that are hidden does not need to be tested for accessible suggestions.',
+        NOT_APPLICABLE: 'No form controls or widgets on this page that typically can provide suggestions.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:     'If the @input[type="%1"]@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
+        ELEMENT_MC_2:     'If the @%1@ element can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
+        ELEMENT_MC_3:     'If the @%1@ widget can automatically detect errors and suggest corrections, use at least one accessible technique to provide the information to users.',
+        ELEMENT_HIDDEN_1: 'The @input[type="%1"]@ element was not tested because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_2: 'The @%1@ element was not tested because it is hidden from assistive technologies.',
+        ELEMENT_HIDDEN_3: 'The @%1@ widget was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Users benefit from being informed of invalid input and on how to correct invalid input.'
+      ],
+      TECHNIQUES: [
+        'Add @aria-describedby@ reference on the form control or widget to the suggestion information.',
+        'Use a popup list to provide suggested values for valid input.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML 4.01 Specification: The @label@ element',
+          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-invalid'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H44: Using label elements to associate text labels with form controls',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA1: Using the aria-describedby property to provide a descriptive label for user interface controls',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA1'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'ARIA19: Using ARIA role=alert or Live Regions to Identify Errors',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA19'
+        }             ]
+  },
+  ERROR_5: {
+      ID:                    'Error 5',
+      DEFINITION:            'To prevent errors when input includes legal and/or financial transactions (e.g. online shopping, banking), the user must be able to either reverse, check or confirm the data before the transaction is finalized.',
+      SUMMARY:               'Prevent errors',
+      TARGET_RESOURCES_DESC: 'Forms that contain legal or financial transactions including online purchases',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'If the form control or widget on this page are used for legal and/or financial transactions, make sure the actions are either reversible or requires the user to confirm the information before the transaction is finalized.',
+        MANUAL_CHECK_P: 'If the %N_MC form controls and widgets on this page are used for legal and/or financial transactions, make sure the actions are either reversible or requires the user to confirm the information before the transaction is finalized.',
+        HIDDEN_S:       'The form control element and/or widget that is hidden does not need to be tested for accessible suggestions.',
+        HIDDEN_P:       'The %N_H form control elements and/or widgets that are hidden does not need to be tested for accessible suggestions.',
+        NOT_APPLICABLE: 'No form controls or widgets on this page that typically can provide suggestions.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:     'If the form control or widget is used as part of a legal and/or financial transaction, make sure the information this control provides can be changed and/or confirmed before the transaction is finalized.',
+        PAGE_MC_1:        'If form controls and widgets on this page are used for legal and/or financial transactions, make sure the actions are either reversible or requires the user to confirm the information before the transaction is finalized.',
+        ELEMENT_HIDDEN_1: 'The form control or widget was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'The intent of this rule is to help users with disabilities avoid serious consequences as the result of a mistake when performing an action that cannot be reversed. For example, purchasing non-refundable airline tickets or submitting an order to purchase stock in a brokerage account are financial transactions with serious consequences.'
+      ],
+      TECHNIQUES: [
+        'Provide a confirmation page showing all the user inputs before for final submission of the information for modification of user controlled data on a server.',
+        'Provide a means for the user to review previous submissions and give them the ability to cancel or modify previous submissions of legal or financial information.',
+        'Use a confirmation checkbox in addition to the submit button, to require the user to confirm the data is valid before submission.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Understanding SC 3.3.4 Error Prevention (Legal, Financial, Data.)',
+          url:   'https://www.w3.org/TR/UNDERSTANDING-WCAG20/minimize-error-reversible.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G164: Providing a stated time within which an online request (or transaction) may be amended or canceled by the user after making the request.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G164'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G98: Providing the ability for the user to review and correct answers before submitting.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G98'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G155: Providing a checkbox in addition to a submit button.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G155'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G99: Providing the ability to recover deleted information.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G99'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G168: Requesting confirmation to continue with selected action.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G168'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G155: Providing a checkbox in addition to a submit button.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G155'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G98: Providing the ability for the user to review and correct answers before submitting.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G98'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: ' G168: Requesting confirmation to continue with selected action.',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G168'
+        }
+      ]
   }
 };
 
@@ -19257,7 +19558,7 @@ const messages$1 = {
 messages$1.rules = Object.assign(messages$1.rules, audioRules$1);
 messages$1.rules = Object.assign(messages$1.rules, bypassRules$1);
 messages$1.rules = Object.assign(messages$1.rules, colorRules$1);
-// messages.rules = Object.assign(messages.rules, errorRules);
+messages$1.rules = Object.assign(messages$1.rules, errorRules$1);
 messages$1.rules = Object.assign(messages$1.rules, frameRules$1);
 messages$1.rules = Object.assign(messages$1.rules, controlRules$1);
 messages$1.rules = Object.assign(messages$1.rules, headingRules$1);
@@ -19280,7 +19581,7 @@ messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 /* locale.js */
 
 /* Constants */
-const debug$v = new DebugLogging('locale', false);
+const debug$w = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -19336,7 +19637,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$v.flag && debug$v.log(`[${id}][${value}]: ${message}`);
+  debug$w.flag && debug$w.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -19436,7 +19737,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$v.flag && debug$v.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$w.flag && debug$w.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -19446,7 +19747,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$v.flag && debug$v.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$w.flag && debug$w.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   // Assume all rules
   return {
     title: messages[locale].common.allRules,
@@ -19479,7 +19780,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$v.flag && debug$v.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$w.flag && debug$w.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -19491,7 +19792,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$v.flag && debug$v.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$w.flag && debug$w.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -19511,7 +19812,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$v.flag && debug$v.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$w.flag && debug$w.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -19558,7 +19859,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$v.flag && debug$v.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$w.flag && debug$w.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -19573,7 +19874,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$v.flag && debug$v.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$w.flag && debug$w.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -19588,7 +19889,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$v.flag && debug$v.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$w.flag && debug$w.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -19607,7 +19908,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$v.flag && debug$v.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$w.flag && debug$w.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -19626,7 +19927,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$v.flag && debug$v.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$w.flag && debug$w.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -19654,8 +19955,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$v.flag && debug$v.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$v.flag && debug$v.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$w.flag && debug$w.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$w.flag && debug$w.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -19675,7 +19976,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$v.flag && debug$v.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$w.flag && debug$w.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -19694,7 +19995,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$v.flag && debug$v.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$w.flag && debug$w.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19714,7 +20015,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$v.flag && debug$v.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$w.flag && debug$w.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19782,12 +20083,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$u = new DebugLogging('tableInfo', false);
-debug$u.flag = false;
-debug$u.rows = false;
-debug$u.cells = false;
-debug$u.tableTree = false;
-debug$u.headerCalc = false;
+const debug$v = new DebugLogging('tableInfo', false);
+debug$v.flag = false;
+debug$v.rows = false;
+debug$v.cells = false;
+debug$v.tableTree = false;
+debug$v.headerCalc = false;
 
 /**
  * @class TableElement
@@ -19919,13 +20220,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$u.headerCalc && debug$u.log(`${cell}`, 1);
+        debug$v.headerCalc && debug$v.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$u.headesCalc && debug$u.log(`[headers]: ${ids.join(' ')}`);
+              debug$v.headesCalc && debug$v.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -19940,7 +20241,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$u.headerCalc && debug$u.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$v.headerCalc && debug$v.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -19951,7 +20252,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$u.headerCalc && debug$u.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$v.headerCalc && debug$v.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -19963,7 +20264,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$u.headerCalc && debug$u.log(`${cell}`);
+            debug$v.headerCalc && debug$v.log(`${cell}`);
           }
         }
       });
@@ -20010,7 +20311,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$u.log(`${prefix}${item}`);
+    debug$v.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -20021,14 +20322,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$u.flag) {
-      debug$u.log(`${this}`);
-      if (debug$u.tableTree) {
+    if (debug$v.flag) {
+      debug$v.log(`${this}`);
+      if (debug$v.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$u.separator();
+      debug$v.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -20143,15 +20444,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$u.flag && debug$u.rows) {
-      debug$u.log(`${prefix}${this}`);
+    if (debug$v.flag && debug$v.rows) {
+      debug$v.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$u.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$v.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -20232,8 +20533,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$u.flag) {
-      debug$u.log(`${prefix}${this}`);
+    if (debug$v.flag) {
+      debug$v.log(`${prefix}${this}`);
     }
   }
 
@@ -20354,8 +20655,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$u.flag) {
-      debug$u.log('== All Tables ==', 1);
+    if (debug$v.flag) {
+      debug$v.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -20366,7 +20667,7 @@ class TableInfo {
 /* timingInfo.js */
 
 /* Constants */
-const debug$t = new DebugLogging('TimingInfo', false);
+const debug$u = new DebugLogging('TimingInfo', false);
 
 /**
  * @class TimingInfo
@@ -20417,10 +20718,10 @@ class TimingInfo {
    */
 
   showTimingInfo () {
-    if (debug$t.flag) {
-      debug$t.log('== All Timing elements ==', 1);
+    if (debug$u.flag) {
+      debug$u.log('== All Timing elements ==', 1);
       this.allTimingDomElements.forEach( de => {
-        debug$t.log(`[fileName]: ${de.tagName}`, true);
+        debug$u.log(`[fileName]: ${de.tagName}`, true);
       });
     }
   }
@@ -20429,11 +20730,11 @@ class TimingInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$s = new DebugLogging('domCache', false);
-debug$s.flag = false;
-debug$s.showDomTexts = false;
-debug$s.showDomElems = false;
-debug$s.showTree = false;
+const debug$t = new DebugLogging('domCache', false);
+debug$t.flag = false;
+debug$t.showDomTexts = false;
+debug$t.showDomElems = false;
+debug$t.showTree = false;
 
 const skipableElements = [
   'base',
@@ -20778,24 +21079,24 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$s.flag) {
-      if (debug$s.showDomElems) {
-        debug$s.log(' === AllDomElements ===', true);
+    if (debug$t.flag) {
+      if (debug$t.showDomElems) {
+        debug$t.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$s.domElement(de);
+          debug$t.domElement(de);
         });
       }
 
-      if (debug$s.showDomTexts) {
-        debug$s.log(' === AllDomTexts ===', true);
+      if (debug$t.showDomTexts) {
+        debug$t.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$s.domText(dt);
+          debug$t.domText(dt);
         });
       }
 
-      if (debug$s.showTree) {
-        debug$s.log(' === DOMCache Tree ===', true);
-        debug$s.domElement(this.startingDomElement);
+      if (debug$t.showTree) {
+        debug$t.log(' === DOMCache Tree ===', true);
+        debug$t.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
@@ -20805,8 +21106,8 @@ class DOMCache {
 /* audioRules.js */
 
 /* Constants */
-const debug$r = new DebugLogging('Audio Rules', false);
-debug$r.flag = false;
+const debug$s = new DebugLogging('Audio Rules', false);
+debug$s.flag = false;
 
 
 /*
@@ -20959,8 +21260,8 @@ const audioRules = [
 /* bypassRules.js */
 
 /* Constants */
-const debug$q = new DebugLogging('Bypass Rules', false);
-debug$q.flag = false;
+const debug$r = new DebugLogging('Bypass Rules', false);
+debug$r.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21020,7 +21321,7 @@ const bypassRules = [
 
         if (href.indexOf('#') >= 0) {
           let  targetId = href.slice(href.indexOf('#')+1);
-          debug$q.log(`[BYPASS 1][targetId]: ${targetId}`);
+          debug$r.log(`[BYPASS 1][targetId]: ${targetId}`);
 
           if (bypassTargets.includes(targetId)) {
             hasBypassLink = true;
@@ -21069,8 +21370,8 @@ const bypassRules = [
 /* colorRules.js */
 
 /* Constants */
-const debug$p = new DebugLogging('Color Rules', false);
-debug$p.flag = false;
+const debug$q = new DebugLogging('Color Rules', false);
+debug$q.flag = false;
 
 
 /*
@@ -21102,14 +21403,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$p.flag && debug$p.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$q.flag && debug$q.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      debug$p.flag && debug$p.log(`===== COLOR 1 ====`);
+      debug$q.flag && debug$q.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21217,14 +21518,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$p.flag && debug$p.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$q.flag && debug$q.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 7.1;
       const MIN_CCR_LARGE_FONT  = 4.5;
 
-      debug$p.flag && debug$p.log(`===== COLOR 3 ====`);
+      debug$q.flag && debug$q.log(`===== COLOR 3 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21288,6 +21589,432 @@ const colorRules = [
     } // end validate function
   },
 
+];
+
+/* errorRules.js */
+
+/* Constants */
+const debug$p = new DebugLogging('Error Rules', false);
+debug$p.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Error Rules
+ */
+
+const errorRules = [
+
+  /**
+   * @object ERROR_1
+   *
+   * @desc Identify form controls with invalid values
+   *
+   */
+
+  { rule_id             : 'ERROR_1',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : true,
+    wcag_primary_id     : '3.3.1',
+    wcag_related_ids    : [],
+    target_resources    : ['input[type="checkbox"]',
+                           'input[type="date"]',
+                           'input[type="file"]',
+                           'input[type="radio"]',
+                           'input[type="number"]',
+                           'input[type="password"]',
+                           'input[type="tel"]' ,
+                           'input[type="text"]',
+                           'input[type="url"]',
+                           'select',
+                           'textarea',
+                           'meter',
+                           'progress',
+                           'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+
+        if (ce.isInteractive) {
+          const de = ce.domElement;
+
+          if (de.visibility.isVisibleToAT) {
+            if (ce.hasValidityState) {
+              if (!ce.isValid) {
+                if (ce.hasAriaInvalid) {
+                 debug$p.log(`[ERROR 1][A]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`);
+                  if (ce.ariaInvalid) {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+                }
+              }
+              else {
+                 debug$p.log(`[ERROR 1][B]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`);
+                 if (ce.hasAriaInvalid) {
+                  if (de.ariaInvalid) {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.elemName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+                  }
+                }
+                else {
+                  if (ce.hasPattern) {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+                  }
+                }
+              }
+            }
+            else {
+              if (ce.hasAriaInvalid) {
+                debug$p.log(`[ERROR 1][C]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.elemName]);
+              }
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+
+        }
+      });
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY = VISIBILITY;
+
+      var control_elements   = dom_cache.controls_cache.control_elements;
+      var control_elements_len = control_elements.length;
+
+      // Check to see if valid cache reference
+      if (control_elements && control_elements_len) {
+
+        // collect all the visible controls
+        for (var i = 0; i < control_elements_len; i++) {
+          var ce = control_elements[i];
+          var de = ce.dom_element;
+          var cs = de.computed_style;
+
+          if (ce.has_validity) {
+            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (!ce.is_valid) {
+                if (de.has_aria_invalid) {
+                  if (de.aria_invalid) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [ce.toString()]);
+                  else rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [ce.toString()]);
+                }
+                else {
+                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [ce.toString()]);
+                }
+              }
+              else {
+                if (de.has_aria_invalid) {
+                  if (de.aria_invalid) rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [ce.toString()]);
+                  else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [ce.toString()]);
+                }
+                else {
+                  if (ce.has_pattern) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [ce.toString()]);
+                  else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', [ce.toString()]);
+                }
+              }
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [ce].toString());
+            }
+          }
+        } // end loop
+      }
+      */
+    } // end validate function
+  },
+
+  /**
+   * @object ERROR_2
+   *
+   * @desc Use required attribute on required standard form controls
+   *
+   */
+
+  { rule_id             : 'ERROR_2',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : true,
+    wcag_primary_id     : '3.3.3',
+    wcag_related_ids    : [],
+    target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$p.log(`[Error 2: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY = VISIBILITY;
+
+      var control_elements   = dom_cache.controls_cache.control_elements;
+      var control_elements_len = control_elements.length;
+
+      // collect all the visible controls
+      for (var i = 0; i < control_elements_len; i++) {
+        var ce = control_elements[i];
+        var de = ce.dom_element;
+        var cs = de.computed_style;
+
+        var control_type = ce.control_type;
+
+        if (control_type === CONTROL_TYPE.CHECKBOX  ||
+            control_type === CONTROL_TYPE.DATE      ||
+            control_type === CONTROL_TYPE.EMAIL     ||
+            control_type === CONTROL_TYPE.FILE      ||
+            control_type === CONTROL_TYPE.NUMBER    ||
+            control_type === CONTROL_TYPE.PASSWORD  ||
+            control_type === CONTROL_TYPE.RADIO     ||
+            control_type === CONTROL_TYPE.TEL       ||
+            control_type === CONTROL_TYPE.TEXT      ||
+            control_type === CONTROL_TYPE.URL ) {
+
+          var input_type = de.node.getAttribute('type');
+
+          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (de.has_required || de.has_aria_required) {
+              if (de.has_required && de.has_aria_required && !de.aria_required) {
+                rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [input_type]);
+              }
+              else {
+                if (de.has_required) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [input_type]);
+                else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [input_type]);
+              }
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [input_type]);
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [input_type]);
+          }
+        }
+        else {
+          if ((control_type === CONTROL_TYPE.TEXTAREA) ||
+              (control_type === CONTROL_TYPE.SELECT)) {
+
+            var tag_name = de.tag_name;
+
+            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (de.has_required || de.has_aria_required) {
+                if (de.has_required && de.has_aria_required && !de.aria_required) {
+                  rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [tag_name]);
+                }
+                else {
+                  if (de.has_required) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_3', [tag_name]);
+                  else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_4', [tag_name]);
+                }
+              }
+              else {
+                rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [tag_name]);
+              }
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+            }
+          }
+        }
+      }
+*/
+
+    } // end validate function
+  },
+
+  /**
+   * @object ERROR_3
+   *
+   * @desc Use aria-required attribute widgets
+   *
+   */
+
+  { rule_id             : 'ERROR_3',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+    rule_required       : true,
+    wcag_primary_id     : '3.3.3',
+    wcag_related_ids    : [],
+    target_resources    : ['widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$p.log(`[Error 3: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY = VISIBILITY;
+
+      var widget_elements     = dom_cache.controls_cache.widget_elements;
+      var widget_elements_len = widget_elements.length;
+
+      // collect all the visible controls
+      for (var i = 0; i < widget_elements_len; i++) {
+        var we = widget_elements[i];
+        var de = we.dom_element;
+        var cs = de.computed_style;
+
+        var role = de.role;
+
+        if (role === 'combobox'     ||
+            role === 'gridcell'     ||
+            role === 'listbox'      ||
+            role === 'radiogroup'   ||
+            role === 'spinbutton'   ||
+            role === 'textarea'     ||
+            role === 'tree'         ||
+            role === 'textbox'    ||
+            role === 'treegrid') {
+
+          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+            if (de.has_aria_required) {
+              rule_result.addResult(TEST_RESULT.PASS, we, 'ELEMENT_PASS_1', [de.tag_name, role]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, we, 'ELEMENT_MC_1', [de.tag_name, role]);
+            }
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, we, 'ELEMENT_HIDDEN_1', [de.tag_name, role]);
+          }
+        }
+      }
+      */
+    } // end validate function
+  },
+
+  /**
+   * @object ERROR_4
+   *
+   * @desc Provide correction suggestions
+   *
+   */
+
+  { rule_id             : 'ERROR_4',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : true,
+    wcag_primary_id     : '3.3.3',
+    wcag_related_ids    : [],
+    target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', '[role="textbox"]', '[role="combobox"]', '[role="gridcell"]'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$p.log(`[Error 4: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY = VISIBILITY;
+
+      var control_elements   = dom_cache.controls_cache.control_elements;
+      var control_elements_len = control_elements.length;
+
+      // collect all the visible controls
+      for (var i = 0; i < control_elements_len; i++) {
+        var ce = control_elements[i];
+        var de = ce.dom_element;
+        var cs = de.computed_style;
+
+        var control_type = ce.control_type;
+
+        if (control_type === CONTROL_TYPE.DATE        ||
+              control_type === CONTROL_TYPE.EMAIL     ||
+              control_type === CONTROL_TYPE.FILE      ||
+              control_type === CONTROL_TYPE.NUMBER    ||
+              control_type === CONTROL_TYPE.PASSWORD  ||
+              control_type === CONTROL_TYPE.TEL       ||
+              control_type === CONTROL_TYPE.TEXT      ||
+              control_type === CONTROL_TYPE.URL ) {
+          if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+           rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.node.getAttribute('type')]);
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.node.getAttribute('type')]);
+          }
+        }
+        else {
+          if ((control_type === CONTROL_TYPE.TEXTAREA) ||
+              (control_type === CONTROL_TYPE.SELECT)) {
+            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [de.tag_name]);
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_2', [de.tag_name]);
+            }
+          }
+        }
+      }
+*/
+    } // end validate function
+  },
+
+  /**
+   * @object ERROR_5
+   *
+   * @desc Provide error prevention
+   *
+   */
+
+  { rule_id             : 'ERROR_5',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : true,
+    wcag_primary_id     : '3.3.4',
+    wcag_related_ids    : [],
+    target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', '[role="textbox"]', '[role="combobox"]', '[role="gridcell"]'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$p.log(`[Error 5: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+
+/*
+
+      var TEST_RESULT = TEST_RESULT;
+      var VISIBILITY = VISIBILITY;
+
+      var control_elements     = dom_cache.controls_cache.control_elements;
+      var control_elements_len = control_elements.length;
+
+      var control_count = 0;
+
+      for (var i = 0; i < control_elements_len; i++) {
+        var ce = control_elements[i];
+        var de = ce.dom_element;
+        var cs = de.computed_style;
+
+  //      console.log('[ERROR_5][tag]: ' + de.tag_name + ' [role]: ' + de.role + ' [isWidget]: ' + de.is_widget);
+
+        if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [de.node.getAttribute('type')]);
+          control_count += 1;
+        }
+        else {
+          rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [de.node.getAttribute('type')]);
+        }
+      }
+
+      if (control_elements_len) {
+        var page_element = dom_cache.headings_landmarks_cache.page_element;
+        if (page_element && control_count) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+      }
+*/
+    } // end validate function
+  }
 ];
 
 /* frameRules.js */
@@ -26632,7 +27359,7 @@ function addToArray (ruleArray) {
 addToArray(audioRules);
 addToArray(bypassRules);
 addToArray(colorRules);
-// addToArray(errorRules);
+addToArray(errorRules);
 addToArray(frameRules);
 addToArray(controlRules);
 addToArray(headingRules);

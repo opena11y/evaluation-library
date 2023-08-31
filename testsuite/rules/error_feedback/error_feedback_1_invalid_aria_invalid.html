@@ -53,18 +53,18 @@
         
         <fieldset>
           <legend>Pick one response 1</legend>
-          <label><input type="radio" name="group1" /> Response 1</label>
-          <label><input type="radio" name="group1" /> Response 2</label>
-          <label><input type="radio" name="group1" /> Response 3</label>
-          <label><input type="radio" name="group1" /> Response 4</label>
+          <label><input type="radio" name="group1" class="ERROR_1_MC"  /> Response 1</label>
+          <label><input type="radio" name="group1" class="ERROR_1_MC" /> Response 2</label>
+          <label><input type="radio" name="group1" class="ERROR_1_MC" /> Response 3</label>
+          <label><input type="radio" name="group1" class="ERROR_1_MC" /> Response 4</label>
         </fieldset>
 
         <fieldset>
           <legend>Pick more than one response 1</legend>
-          <label><input type="checkbox" /> Response 1</label>
-          <label><input type="checkbox" /> Response 2</label>
-          <label><input type="checkbox" /> Response 3</label>
-          <label><input type="checkbox" /> Response 4</label>
+          <label><input type="checkbox" class="ERROR_1_MC" /> Response 1</label>
+          <label><input type="checkbox" class="ERROR_1_MC" /> Response 2</label>
+          <label><input type="checkbox" class="ERROR_1_MC" /> Response 3</label>
+          <label><input type="checkbox" class="ERROR_1_MC" /> Response 4</label>
         </fieldset>
 
         <fieldset>
@@ -73,7 +73,7 @@
           <label><input type="url"   class="ERROR_1_MC" value=""/> URL response</label>
           <label><input type="email" class="ERROR_1_MC" value=""/> e-mail response</label>
           <label><input type="date"  class="ERROR_1_MC" value=""/> date response</label>
-          <label><input type="range" value=""/> range response</label>
+          <label><input type="range" class="ERROR_1_MC" value=""/> range response</label>
         </fieldset>
 
         <script type="text/javascript">
@@ -101,7 +101,7 @@
           <legend>Numerical calculaton elements 1</legend>
           <input name="g1_n1" id="g1_n1" value="0" type="number" pattern="\d{1,45}" aria-label="first number to add" class="ERROR_1_MC"/> + 
           <input name="g1_n2" id="g1_n2" value="0" type="number" pattern="\d{1,45}" aria-label="second number to add" class="ERROR_1_MC"/> =
-          <output id="g1_o" name="g1_o" pattern="\d{1,45}" for="g1_n1 g1_n2">--</output>
+          <output id="g1_o" name="g1_o" pattern="\d{1,45}" for="g1_n1 g1_n2" class="ERROR_1_MC">--</output>
           <label>Validity 1: <input id="g1_error1" type="text" size="30" class="ERROR_1_MC"/></label>
           <label>Validity 2: <input id="g1_error2" type="text" size="30" class="ERROR_1_MC"/></label>
         </fieldset>
@@ -127,8 +127,8 @@
             var v3 = parseInt(num3.value);
             var v4 = parseInt(num4.value);
             
-            err3.value = "v1: " + num3.validity.valid; 
-            err4.value = "v1: " + num4.validity.valid; 
+            err3.value = "v21: " + num3.validity.valid;
+            err4.value = "v22: " + num4.validity.valid;
                         
           
           }
@@ -138,14 +138,21 @@
       <form>
         <div>
           <label  for="g2_text_1">Number 21</label>
-          <input  id="g2_text_1" type="number" class="ERROR_1_PASS" pattern="/d{1,45}/" value="not a number" aria-invalid="true"  oninput="calc2()"/>           
+          <input  id="g2_text_1" type="number" class="ERROR_1_PASS" min="0" max="10" value="12" aria-invalid="true"  oninput="calc2()"/>
           <label>Validity 3: <input id="g2_error1" type="text" size="30"  class="ERROR_1_MC"/></label>
         </div>
         <div>
           <label  for="g2_text_2">Number 22</label>
-          <input  id="g2_text_2" type="number" class="ERROR_1_FAIL" pattern="/d{1,45}/" value="not a number" aria-invalid="false" oninput="calc2()"/>           
+          <input  id="g2_text_2" type="number" class="ERROR_1_FAIL" min="0" max="10" value="12"  aria-invalid="false" oninput="calc2()"/>
           <label>Validity 4: <input id="g2_error2" type="text" size="30" class="ERROR_1_MC"/></label>
         </div>
+
+        <div>
+          <div role="textbox" aria-invalid="true" aria-label="Number 23" class="ERROR_1_MC"></div>
+          <div role="spinbutton" aria-invalid="false" aria-label="Number 24" class="ERROR_1_MC"></div>
+          <div role="spinbutton" aria-invalid="false" value-now="0" aria-label="Progress 23" class="ERROR_1_MC"></div>
+        </div>
+
       </form>       
       
     </div>
