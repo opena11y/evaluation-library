@@ -32,22 +32,10 @@ export const sensoryRules = [
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
     wcag_primary_id     : '1.3.3',
-    wcag_related_ids    : [''],
+    wcag_related_ids    : [],
     target_resources    : ['button', 'link'],
     validate          : function (dom_cache, rule_result) {
-
-      debug.log(`[Sensory 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      if (page_element) {
-        rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MANUAL_CHECK_1', []);
-      }
-      */
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
     } // end validate function
   }
 

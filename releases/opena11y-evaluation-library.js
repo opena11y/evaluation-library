@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$O = new DebugLogging('constants', false);
+const debug$Q = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -600,13 +600,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$O.flag && debug$O.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$Q.flag && debug$Q.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$O.flag && debug$O.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$Q.flag && debug$Q.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -902,7 +902,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$N = new DebugLogging('ControlInfo', false);
+const debug$P = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -1062,7 +1062,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$N.domElement(ce.domElement, prefix);
+      debug$P.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1303,15 +1303,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$N.flag) {
-      debug$N.log('== Control Tree ==', 1);
+    if (debug$P.flag) {
+      debug$P.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$N.domElement(ce.domElement);
+        debug$P.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$N.log('== Forms ==', 1);
+      debug$P.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$N.domElement(ce.domElement);
+        debug$P.domElement(ce.domElement);
       });
     }
   }
@@ -6110,8 +6110,8 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$M = new DebugLogging('AriaInfo', false);
-debug$M.flag = false;
+const debug$O = new DebugLogging('AriaInfo', false);
+debug$O.flag = false;
 
 /* Debug helper functions */
 
@@ -6334,15 +6334,15 @@ class AriaInfo {
     }
 
 
-    if (debug$M.flag) {
-      node.attributes.length && debug$M.log(`${node.outerHTML}`, 1);
-      debug$M.log(`[         isWidget]: ${this.isWidget}`);
-      debug$M.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$M.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$M.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$M.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$M.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$M.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$O.flag) {
+      node.attributes.length && debug$O.log(`${node.outerHTML}`, 1);
+      debug$O.log(`[         isWidget]: ${this.isWidget}`);
+      debug$O.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$O.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$O.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$O.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$O.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$O.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6546,7 +6546,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$L = new DebugLogging('colorContrast', false);
+const debug$N = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6601,9 +6601,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$L.flag) {
-      debug$L.separator();
-      debug$L.tag(elementNode);
+    if (debug$N.flag) {
+      debug$N.separator();
+      debug$N.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6625,11 +6625,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$L.flag) {
-      debug$L.log(`[                    opacity]: ${this.opacity}`);
-      debug$L.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$L.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$L.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$N.flag) {
+      debug$N.log(`[                    opacity]: ${this.opacity}`);
+      debug$N.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$N.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$N.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6716,10 +6716,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$L.flag && debug$L.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$N.flag && debug$N.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$L.flag && debug$L.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$N.flag && debug$N.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6932,7 +6932,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$K = new DebugLogging('EventInfo', false);
+const debug$M = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6945,7 +6945,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$K.flag) {
+    if (debug$M.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8545,7 +8545,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$J = new DebugLogging('ariaInHtml', false);
+const debug$L = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8746,11 +8746,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$J.flag) {
+  if (debug$L.flag) {
     if (tagName === 'h2') {
-      debug$J.tag(node);
+      debug$L.tag(node);
     }
-    debug$J.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$L.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8870,7 +8870,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$I = new DebugLogging('visibility', false);
+const debug$K = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8918,17 +8918,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$I.flag) {
-      debug$I.separator();
-      debug$I.tag(elementNode);
-      debug$I.log('[          isHidden]: ' + this.isHidden);
-      debug$I.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$I.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$I.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$I.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$I.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$I.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$I.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$K.flag) {
+      debug$K.separator();
+      debug$K.tag(elementNode);
+      debug$K.log('[          isHidden]: ' + this.isHidden);
+      debug$K.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$K.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$K.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$K.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$K.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$K.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$K.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9241,8 +9241,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$H = new DebugLogging('nameFrom', false);
-debug$H.flag = false;
+const debug$J = new DebugLogging('nameFrom', false);
+debug$J.flag = false;
 
 /*
 *   @function getElementContents
@@ -9388,7 +9388,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$H.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$J.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9802,8 +9802,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$G = new DebugLogging('getAccName', false);
-debug$G.flag = false;
+const debug$I = new DebugLogging('getAccName', false);
+debug$I.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -10093,8 +10093,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$F = new DebugLogging('DOMElement', false);
-debug$F.flag = false;
+const debug$H = new DebugLogging('DOMElement', false);
+debug$H.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10417,12 +10417,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$F.flag) {
+    if (debug$H.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$F.domText(domItem, prefix);
+          debug$H.domText(domItem, prefix);
         } else {
-          debug$F.domElement(domItem, prefix);
+          debug$H.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10515,7 +10515,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$E = new DebugLogging('domText', false);
+const debug$G = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10534,8 +10534,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$E.flag) {
-      debug$E.log(`[text]: ${this.text}`);
+    if (debug$G.flag) {
+      debug$G.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10598,7 +10598,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$D = new DebugLogging('iframeInfo', false);
+const debug$F = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10616,9 +10616,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$D.flag) {
-      debug$D.log(`[          src]: ${this.src}`);
-      debug$D.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$F.flag) {
+      debug$F.log(`[          src]: ${this.src}`);
+      debug$F.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10654,8 +10654,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$D.flag) {
-      debug$D.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$F.flag) {
+      debug$F.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10666,7 +10666,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$C = new DebugLogging('idInfo', false);
+const debug$E = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10709,10 +10709,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$C.flag) {
-      debug$C.log('== All Links ==', 1);
+    if (debug$E.flag) {
+      debug$E.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$C.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$E.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10721,7 +10721,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$B = new DebugLogging('imageInfo', false);
+const debug$D = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10914,22 +10914,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$B.flag) {
-      debug$B.log('== All Image elements ==', 1);
+    if (debug$D.flag) {
+      debug$D.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$B.log(`[fileName]: ${ie.fileName}`, true);
-        debug$B.log(`[    role]: ${ie.domElement.role}`);
-        debug$B.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$B.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$B.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$D.log(`[fileName]: ${ie.fileName}`, true);
+        debug$D.log(`[    role]: ${ie.domElement.role}`);
+        debug$D.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$D.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$D.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$B.log('== All SVG domElements  ==', 1);
+      debug$D.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$B.domElement(de);
+        debug$D.domElement(de);
       });
-      debug$B.log('== All MapElements ==', 1);
+      debug$D.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$B.domElement(me.domElement);
+        debug$D.domElement(me.domElement);
       });
     }
   }
@@ -10938,7 +10938,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$A = new DebugLogging('linkInfo', false);
+const debug$C = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10984,10 +10984,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$A.flag) {
-      debug$A.log('== All Links ==', 1);
+    if (debug$C.flag) {
+      debug$C.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$A.domElement(de);
+        debug$C.domElement(de);
       });
     }
   }
@@ -10996,7 +10996,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$z = new DebugLogging('ListInfo', false);
+const debug$B = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -11017,8 +11017,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$z.flag) {
-      debug$z.log('');
+    if (debug$B.flag) {
+      debug$B.log('');
     }
   }
 
@@ -11043,9 +11043,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$z.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$B.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$z.domElement(le.domElement, prefix);
+      debug$B.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11153,16 +11153,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$z.flag) {
-      debug$z.log('== All ListElements ==', 1);
-      debug$z.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$B.flag) {
+      debug$B.log('== All ListElements ==', 1);
+      debug$B.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$z.domElement(le.domElement);
+        debug$B.domElement(le.domElement);
       });
-      debug$z.log('== List Tree ==', 1);
-      debug$z.log(`[linkCount]: ${this.linkCount}`);
+      debug$B.log('== List Tree ==', 1);
+      debug$B.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$z.domElement(le.domElement);
+        debug$B.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -11172,8 +11172,8 @@ class ListInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$y = new DebugLogging('MediaInfo', false);
-debug$y.flag = false;
+const debug$A = new DebugLogging('MediaInfo', false);
+debug$A.flag = false;
 
 /**
  * @class MediaElement
@@ -11411,25 +11411,25 @@ class MediaInfo {
    */
 
   showListInfo () {
-    if (debug$y.flag) {
-      debug$y.log('== Audio Elements ==', 1);
+    if (debug$A.flag) {
+      debug$A.log('== Audio Elements ==', 1);
       this.audioElements.forEach( ae => {
-        debug$y.log(ae);
+        debug$A.log(ae);
       });
 
-      debug$y.log('== Video Elements ==', 1);
+      debug$A.log('== Video Elements ==', 1);
       this.videoElements.forEach( ve => {
-        debug$y.log(ve);
+        debug$A.log(ve);
       });
 
-      debug$y.log('== Object Elements ==', 1);
+      debug$A.log('== Object Elements ==', 1);
       this.objectElements.forEach( oe => {
-        debug$y.log(oe);
+        debug$A.log(oe);
       });
 
-      debug$y.log('== Embed Elements ==', 1);
+      debug$A.log('== Embed Elements ==', 1);
       this.embedElements.forEach( ee => {
-        debug$y.log(ee);
+        debug$A.log(ee);
       });
 
 
@@ -11440,7 +11440,7 @@ class MediaInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$x = new DebugLogging('structureInfo', false);
+const debug$z = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11479,11 +11479,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$x.domElement(le.domElement, prefix);
+      debug$z.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$x.domElement(h, prefix);
+      debug$z.domElement(h, prefix);
     });
   }
 
@@ -11607,27 +11607,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$x.flag) {
-      debug$x.log('== All Headings ==', 1);
+    if (debug$z.flag) {
+      debug$z.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$x.domElement(h);
+        debug$z.domElement(h);
       });
-      debug$x.log('== All Landmarks ==', 1);
+      debug$z.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$x.domElement(le.domElement);
+        debug$z.domElement(le.domElement);
       });
-      debug$x.log('== Landmarks By Doc ==', 1);
+      debug$z.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$x.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$z.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$x.domElement(le.domElement);
+            debug$z.domElement(le.domElement);
           });
         }
       });
-      debug$x.log('== Structure Tree ==', 1);
+      debug$z.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$x.domElement(le.domElement);
+        debug$z.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -17454,6 +17454,86 @@ const navigationRules$1 = {
   }
 };
 
+/* resizeRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const resizeRules$1 = {
+
+  RESIZE_1: {
+      ID:                    'Resize 1',
+      DEFINITION:            'When the text of a page is resized the text content must reflow to fill available view and all text content should remain visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
+      SUMMARY:               'Resize text content',
+      TARGET_RESOURCES_DESC: 'All pages',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:      'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+      },
+      PURPOSES: [
+        'People with visual impairments may increase the size of text and the text should reflow to fit the available viewing area to make it easier to read.',
+        'If text is clipped by limits on iframe sizes or CSS overflow properties some text content will be impossible to view.'
+      ],
+      TECHNIQUES: [
+        'Use relative CSS sized like @em@ and @percentage@ rather than pixels and point sizes.',
+        'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'How to meet 1.4.4 Resize Text',
+          url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-scale'
+        }
+      ]
+  }
+};
+
+/* sensoryRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const sensoryRules$1 = {
+
+  SENSORY_1: {
+    ID:                    'Sensory 1',
+    DEFINITION:            'Understanding and operating on content on the page must not rely solely on the shape, size, visual location, orientation, or sound.',
+    SUMMARY:               'Not only shape, size and location',
+    TARGET_RESOURCES_DESC: 'Images used for links and controls',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S:     'Verify that understanding the content, navigation of links and operation of controls and widgets does not depend solely on the shape, size, visual location, orientation, or sound.'
+    },
+    BASE_RESULT_MESSAGES: {
+      PAGE_MC_1: 'Verify that understanding the content, navigation of links and operation of controls and widgets does not depend solely on the shape, size, visual location, orientation, or sound.'
+    },
+    PURPOSES: [
+      'People with visual impairments and learning disabilities that affect the visual processing of information may not be able to perceive the content or identify the purpose of links and controls.',
+      'People with hearing impairments and learning disabilities that affect the auditory processing of information may not be able to perceive the content or identify the purpose of links and controls.'
+    ],
+    TECHNIQUES: [
+      'Provide redundant text labels and references in addition to references to shape, size, visual location or sound.'
+    ],
+    MANUAL_CHECKS: [
+      'Verify that understanding the content, navigation of links and operation of controls and widgets does not depend solely on the shape, size, visual location, orientation, or sound.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.0 Success Criterion 1.3.3 Sensory Characteristics',
+        url:   'https://www.w3.org/TR/WCAG20/#content-structure-separation-understanding'
+      },
+      { type:  REFERENCES.WCAG_TECHNIQUE,
+        title: 'How to meet Success Criterion 1.3.3 Sensory Characteristics',
+        url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-content-structure-separation-understanding'
+      }
+    ]
+}
+};
+
 /* tableRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -19530,8 +19610,8 @@ messages$1.rules = Object.assign(messages$1.rules, linkRules$1);
 messages$1.rules = Object.assign(messages$1.rules, listRules$1);
 messages$1.rules = Object.assign(messages$1.rules, navigationRules$1);
 // messages.rules = Object.assign(messages.rules, readingOrderRules);
-// messages.rules = Object.assign(messages.rules, resizeRules);
-// messages.rules = Object.assign(messages.rules, sensoryRules);
+messages$1.rules = Object.assign(messages$1.rules, resizeRules$1);
+messages$1.rules = Object.assign(messages$1.rules, sensoryRules$1);
 messages$1.rules = Object.assign(messages$1.rules, tableRules$1);
 messages$1.rules = Object.assign(messages$1.rules, timingRules$1);
 messages$1.rules = Object.assign(messages$1.rules, videoRules$1);
@@ -19540,7 +19620,7 @@ messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 /* locale.js */
 
 /* Constants */
-const debug$w = new DebugLogging('locale', false);
+const debug$y = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -19596,7 +19676,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$w.flag && debug$w.log(`[${id}][${value}]: ${message}`);
+  debug$y.flag && debug$y.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -19696,7 +19776,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$w.flag && debug$w.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$y.flag && debug$y.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -19706,7 +19786,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$w.flag && debug$w.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$y.flag && debug$y.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   // Assume all rules
   return {
     title: messages[locale].common.allRules,
@@ -19739,7 +19819,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$w.flag && debug$w.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$y.flag && debug$y.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -19751,7 +19831,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$w.flag && debug$w.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$y.flag && debug$y.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -19771,7 +19851,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$w.flag && debug$w.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$y.flag && debug$y.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -19818,7 +19898,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$w.flag && debug$w.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$y.flag && debug$y.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -19833,7 +19913,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$w.flag && debug$w.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$y.flag && debug$y.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -19848,7 +19928,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$w.flag && debug$w.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$y.flag && debug$y.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -19867,7 +19947,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$w.flag && debug$w.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$y.flag && debug$y.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -19886,7 +19966,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$w.flag && debug$w.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$y.flag && debug$y.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -19914,8 +19994,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$w.flag && debug$w.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$w.flag && debug$w.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$y.flag && debug$y.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$y.flag && debug$y.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -19935,7 +20015,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$w.flag && debug$w.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$y.flag && debug$y.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -19954,7 +20034,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$w.flag && debug$w.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$y.flag && debug$y.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -19974,7 +20054,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$w.flag && debug$w.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$y.flag && debug$y.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -20042,12 +20122,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$v = new DebugLogging('tableInfo', false);
-debug$v.flag = false;
-debug$v.rows = false;
-debug$v.cells = false;
-debug$v.tableTree = false;
-debug$v.headerCalc = false;
+const debug$x = new DebugLogging('tableInfo', false);
+debug$x.flag = false;
+debug$x.rows = false;
+debug$x.cells = false;
+debug$x.tableTree = false;
+debug$x.headerCalc = false;
 
 /**
  * @class TableElement
@@ -20179,13 +20259,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$v.headerCalc && debug$v.log(`${cell}`, 1);
+        debug$x.headerCalc && debug$x.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$v.headesCalc && debug$v.log(`[headers]: ${ids.join(' ')}`);
+              debug$x.headesCalc && debug$x.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -20200,7 +20280,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$v.headerCalc && debug$v.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$x.headerCalc && debug$x.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -20211,7 +20291,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$v.headerCalc && debug$v.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$x.headerCalc && debug$x.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -20223,7 +20303,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$v.headerCalc && debug$v.log(`${cell}`);
+            debug$x.headerCalc && debug$x.log(`${cell}`);
           }
         }
       });
@@ -20270,7 +20350,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$v.log(`${prefix}${item}`);
+    debug$x.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -20281,14 +20361,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$v.flag) {
-      debug$v.log(`${this}`);
-      if (debug$v.tableTree) {
+    if (debug$x.flag) {
+      debug$x.log(`${this}`);
+      if (debug$x.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$v.separator();
+      debug$x.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -20403,15 +20483,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$v.flag && debug$v.rows) {
-      debug$v.log(`${prefix}${this}`);
+    if (debug$x.flag && debug$x.rows) {
+      debug$x.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$v.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$x.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -20492,8 +20572,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$v.flag) {
-      debug$v.log(`${prefix}${this}`);
+    if (debug$x.flag) {
+      debug$x.log(`${prefix}${this}`);
     }
   }
 
@@ -20614,8 +20694,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$v.flag) {
-      debug$v.log('== All Tables ==', 1);
+    if (debug$x.flag) {
+      debug$x.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -20626,7 +20706,7 @@ class TableInfo {
 /* timingInfo.js */
 
 /* Constants */
-const debug$u = new DebugLogging('TimingInfo', false);
+const debug$w = new DebugLogging('TimingInfo', false);
 
 /**
  * @class TimingInfo
@@ -20677,10 +20757,10 @@ class TimingInfo {
    */
 
   showTimingInfo () {
-    if (debug$u.flag) {
-      debug$u.log('== All Timing elements ==', 1);
+    if (debug$w.flag) {
+      debug$w.log('== All Timing elements ==', 1);
       this.allTimingDomElements.forEach( de => {
-        debug$u.log(`[fileName]: ${de.tagName}`, true);
+        debug$w.log(`[fileName]: ${de.tagName}`, true);
       });
     }
   }
@@ -20689,11 +20769,11 @@ class TimingInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$t = new DebugLogging('domCache', false);
-debug$t.flag = false;
-debug$t.showDomTexts = false;
-debug$t.showDomElems = false;
-debug$t.showTree = false;
+const debug$v = new DebugLogging('domCache', false);
+debug$v.flag = false;
+debug$v.showDomTexts = false;
+debug$v.showDomElems = false;
+debug$v.showTree = false;
 
 const skipableElements = [
   'base',
@@ -21038,24 +21118,24 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$t.flag) {
-      if (debug$t.showDomElems) {
-        debug$t.log(' === AllDomElements ===', true);
+    if (debug$v.flag) {
+      if (debug$v.showDomElems) {
+        debug$v.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$t.domElement(de);
+          debug$v.domElement(de);
         });
       }
 
-      if (debug$t.showDomTexts) {
-        debug$t.log(' === AllDomTexts ===', true);
+      if (debug$v.showDomTexts) {
+        debug$v.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$t.domText(dt);
+          debug$v.domText(dt);
         });
       }
 
-      if (debug$t.showTree) {
-        debug$t.log(' === DOMCache Tree ===', true);
-        debug$t.domElement(this.startingDomElement);
+      if (debug$v.showTree) {
+        debug$v.log(' === DOMCache Tree ===', true);
+        debug$v.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
@@ -21065,8 +21145,8 @@ class DOMCache {
 /* audioRules.js */
 
 /* Constants */
-const debug$s = new DebugLogging('Audio Rules', false);
-debug$s.flag = false;
+const debug$u = new DebugLogging('Audio Rules', false);
+debug$u.flag = false;
 
 
 /*
@@ -21219,8 +21299,8 @@ const audioRules = [
 /* bypassRules.js */
 
 /* Constants */
-const debug$r = new DebugLogging('Bypass Rules', false);
-debug$r.flag = false;
+const debug$t = new DebugLogging('Bypass Rules', false);
+debug$t.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21278,9 +21358,9 @@ const bypassRules = [
 
         let href = linkDomElem.node.href;
 
-        if (href.indexOf('#') >= 0) {
+        if ((typeof href === 'string') && href.indexOf('#') >= 0) {
           let  targetId = href.slice(href.indexOf('#')+1);
-          debug$r.log(`[BYPASS 1][targetId]: ${targetId}`);
+          debug$t.log(`[BYPASS 1][targetId]: ${targetId}`);
 
           if (bypassTargets.includes(targetId)) {
             hasBypassLink = true;
@@ -21329,8 +21409,8 @@ const bypassRules = [
 /* colorRules.js */
 
 /* Constants */
-const debug$q = new DebugLogging('Color Rules', false);
-debug$q.flag = false;
+const debug$s = new DebugLogging('Color Rules', false);
+debug$s.flag = false;
 
 
 /*
@@ -21362,14 +21442,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$q.flag && debug$q.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$s.flag && debug$s.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      debug$q.flag && debug$q.log(`===== COLOR 1 ====`);
+      debug$s.flag && debug$s.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21477,14 +21557,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$q.flag && debug$q.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$s.flag && debug$s.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 7.1;
       const MIN_CCR_LARGE_FONT  = 4.5;
 
-      debug$q.flag && debug$q.log(`===== COLOR 3 ====`);
+      debug$s.flag && debug$s.log(`===== COLOR 3 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21553,8 +21633,8 @@ const colorRules = [
 /* errorRules.js */
 
 /* Constants */
-const debug$p = new DebugLogging('Error Rules', false);
-debug$p.flag = false;
+const debug$r = new DebugLogging('Error Rules', false);
+debug$r.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21777,8 +21857,8 @@ const errorRules = [
 /* frameRules.js */
 
 /* Constants */
-const debug$o = new DebugLogging('Frame Rules', false);
-debug$o.flag = false;
+const debug$q = new DebugLogging('Frame Rules', false);
+debug$q.flag = false;
 
 
 /*
@@ -21860,8 +21940,8 @@ const frameRules = [
 /* controlRules.js */
 
 /* Constants */
-const debug$n = new DebugLogging('Control Rules', false);
-debug$n.flag = false;
+const debug$p = new DebugLogging('Control Rules', false);
+debug$p.flag = false;
 
 
 /*
@@ -22543,8 +22623,8 @@ const controlRules = [
 /* headingRules.js */
 
 /* Constants */
-const debug$m = new DebugLogging('Heading Rules', false);
-debug$m.flag = false;
+const debug$o = new DebugLogging('Heading Rules', false);
+debug$o.flag = false;
 
 /*
  * OpenA11y Rules
@@ -22934,8 +23014,8 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
 /* imageRules.js */
 
 /* Constants */
-const debug$l = new DebugLogging('Image Rules', false);
-debug$l.flag = false;
+const debug$n = new DebugLogging('Image Rules', false);
+debug$n.flag = false;
 
 /*
  * OpenA11y Alliance Rules
@@ -23204,8 +23284,8 @@ const imageRules = [
 /* keyboardRules.js */
 
 /* Constants */
-const debug$k = new DebugLogging('Keyboard Rules', false);
-debug$k.flag = true;
+const debug$m = new DebugLogging('Keyboard Rules', false);
+debug$m.flag = true;
 
 /* helper functions */
 
@@ -23465,8 +23545,8 @@ const keyboardRules = [
 /* landmarkRules.js */
 
 /* Constants */
-const debug$j = new DebugLogging('Landmark Rules', false);
-debug$j.flag = false;
+const debug$l = new DebugLogging('Landmark Rules', false);
+debug$l.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24246,8 +24326,8 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 /* linkRules.js */
 
 /* Constants */
-const debug$i = new DebugLogging('Link Rules', false);
-debug$i.flag = false;
+const debug$k = new DebugLogging('Link Rules', false);
+debug$k.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24398,8 +24478,8 @@ const linkRules = [
 /* listRules.js */
 
 /* Constants */
-const debug$h = new DebugLogging('List Rules', false);
-debug$h.flag = false;
+const debug$j = new DebugLogging('List Rules', false);
+debug$j.flag = false;
 
 
 /*
@@ -24572,8 +24652,8 @@ const listRules = [
 /* navigationRules.js */
 
 /* Constants */
-const debug$g = new DebugLogging('Navigation Rules', false);
-debug$g.flag = false;
+const debug$i = new DebugLogging('Navigation Rules', false);
+debug$i.flag = false;
 
 
 /* Helper Functions */
@@ -24816,6 +24896,73 @@ const navigationRules = [
 
     } // end validation function
   }
+];
+
+/* resizeRules.js */
+
+/* Constants */
+const debug$h = new DebugLogging('Resize Rules', false);
+debug$h.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Resize Rules
+ */
+
+const resizeRules = [
+
+  /**
+   * @object RESIZE_1
+   *
+   * @desc Resize content
+   */
+
+  { rule_id             : 'RESIZE_1',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.4',
+    wcag_related_ids    : [],
+    target_resources    : ['content'],
+    validate          : function (dom_cache, rule_result) {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    } // end validate function
+  }
+];
+
+/* sensoryRules.js */
+
+/* Constants */
+const debug$g = new DebugLogging('Sensory Rules', false);
+debug$g.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Sensory Rules
+ */
+
+const sensoryRules = [
+
+    /**
+     * @object SENSORY_1
+     *
+     * @desc Content does not rely solely on sensory characteristics
+     */
+
+  { rule_id             : 'SENSORY_1',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.3',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'link'],
+    validate          : function (dom_cache, rule_result) {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    } // end validate function
+  }
+
 ];
 
 /* tableRules.js */
@@ -27129,8 +27276,8 @@ addToArray(linkRules);
 addToArray(listRules);
 addToArray(navigationRules);
 // addToArray(readingOrderRules);
-// addToArray(resizeRules);
-// addToArray(sensoryRules);
+addToArray(resizeRules);
+addToArray(sensoryRules);
 addToArray(tableRules);
 addToArray(timingRules);
 addToArray(videoRules);

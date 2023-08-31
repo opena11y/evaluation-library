@@ -69,7 +69,7 @@ export const bypassRules = [
 
         let href = linkDomElem.node.href;
 
-        if (href.indexOf('#') >= 0) {
+        if ((typeof href === 'string') && href.indexOf('#') >= 0) {
           let  targetId = href.slice(href.indexOf('#')+1);
           debug.log(`[BYPASS 1][targetId]: ${targetId}`);
 

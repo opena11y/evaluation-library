@@ -17,7 +17,7 @@ export const sensoryRules = {
       MANUAL_CHECK_S:     'Verify that understanding the content, navigation of links and operation of controls and widgets does not depend solely on the shape, size, visual location, orientation, or sound.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1: 'Verify that understanding the content, navigation of links and operation of controls and widgets does not depend solely on the shape, size, visual location, orientation, or sound.'
+      PAGE_MC_1: 'Verify that understanding the content, navigation of links and operation of controls and widgets does not depend solely on the shape, size, visual location, orientation, or sound.'
     },
     PURPOSES: [
       'People with visual impairments and learning disabilities that affect the visual processing of information may not be able to perceive the content or identify the purpose of links and controls.',

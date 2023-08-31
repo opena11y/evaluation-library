@@ -35,21 +35,7 @@ export const resizeRules = [
     wcag_related_ids    : [],
     target_resources    : ['content'],
     validate          : function (dom_cache, rule_result) {
-
-      debug.log(`[Resize 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-
-      var page_element = dom_cache.timing_cache.page_element;
-
-  //    logger.debug("  [Resize 1][page_element][dom_element]: " + page_element.dom_element);
-
-      if (page_element) {
-        rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-      }
-*/
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
     } // end validate function
   }
 ];
