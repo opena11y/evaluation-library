@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Required form controls | OpenA11y Evaluation Library 2.0</title>
+        <title>Using &lt;code&gt;aria-required&lt;/code&gt; to identify required form controls | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Required form controls</li>
+          <li class="breadcrumb-item active">Using <code>aria-required</code> to identify required form controls</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Required form controls</h1>
+            <h1 id="h1-title">Rule: Using <code>aria-required</code> to identify required form controls</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -128,11 +128,11 @@
       
       <li>To identify a required form control, add the HTML5 <code>required</code> attribute to the standard form controls.</li>
       
-      <li>If compatibility with HTML4 standards or legacy browsers and assistve technologies, you can also use <code>aria-required="true"</code> to indicate a form control is required.</li>
+      <li>For custom ARIA widgets use the <code>aria-required</code> attribute to identify widgets with required values to users.</li>
       
       <li>Use the <code>required</code> attribute (or the <code>aria-required</code> if used) as the CSS selector for visually styling the form control as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.</li>
       
-      <li>The only reason to support both <code>required</code> and <code>aria-required</code> on the same form control is to support legacy browsers and assistive technologies.  This required extra care to make sure the two values do not conflict.  If they do conflict the <code>required</code> attribute will override the <code>aria-required</code> property value.</li>
+      <li>NOTE: Avoid using <code>aria-required</code> attribute on elements that support the <code>required</code> attribute, since the <code>required</code> attribute value will override the <code>aria-required</code> value.</li>
       
     </ul>
   </td>

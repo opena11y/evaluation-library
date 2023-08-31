@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Information on invalid values | OpenA11y Evaluation Library 2.0</title>
+        <title>Using &lt;code&gt;aria-invalid&lt;/code&gt; to identify the validity of control values. | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Information on invalid values</li>
+          <li class="breadcrumb-item active">Using <code>aria-invalid</code> to identify the validity of control values.</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Information on invalid values</h1>
+            <h1 id="h1-title">Rule: Using <code>aria-invalid</code> to identify the validity of control values.</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -79,12 +79,6 @@
     <ul>
       
       <li>Users must be able to identify form control values which are invalid in order to successfully correct the values and submit the form.</li>
-      
-      <li>Native HTML form controls have a support for many types of validity testing, these features should be used before using <code>aria-invalid</code> attribute.</li>
-      
-      <li>For custom ARIA widgets or when native HTML form control validation is not sufficient, the <code>aria-invalid</code> attribute can used to identify invalid values.</li>
-      
-      <li>NOTE: Native form controls with with validity testing should avoid using <code>aria-valid</code> property, if the <code>aria-invalid</code> is used it must be synchronized with the browsers computed validity value.</li>
       
     </ul>
   </td>
@@ -132,13 +126,17 @@
   <td>
     <ul>
       
-      <li>When available, use the native to validation features to idenitfy invalid values of HTML form controls.</li>
+      <li>Native HTML form controls have a support for many types of validity testing, these features should be used before using <code>aria-invalid</code> attribute.</li>
+      
+      <li>For custom ARIA widgets or when native HTML form control validation is not sufficient, the <code>aria-invalid</code> attribute can used to identify invalid values.</li>
       
       <li>Use <code>aria-invalid</code> attribute to indicate the form control has an invalid value.</li>
       
       <li>Add the text "invalid" to the label of the form control, the text can be placed off screen using CSS.</li>
       
       <li>Add the image to the label.  The image should be visible indicating an invalid value with the alt text 'invalid'.</li>
+      
+      <li>NOTE: Native form controls with with validity testing should avoid using <code>aria-valid</code> property, if the <code>aria-invalid</code> is used it must be synchronized with the browsers computed validity value.</li>
       
     </ul>
   </td>

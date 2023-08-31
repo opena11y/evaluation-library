@@ -936,6 +936,11 @@ class ControlElement {
                        (node.getAttribute('aria-invalid').toLowerCase() === 'true') :
                        false;
 
+    this.hasRequired = typeof node.required === 'boolean' ? node.required : false;
+    this.hasAriaRequired = node.hasAttribute('aria-required');
+    this.ariaRequired = this.hasAriaRequired ?
+                       (node.getAttribute('aria-required').toLowerCase() === 'true') :
+                       false;
 
   }
 
@@ -13395,7 +13400,7 @@ const errorRules$1 = {
   ERROR_1: {
       ID:                    'Error 1',
       DEFINITION:            'Form controls with invalid values must provide information to assisive technologies that the values are invalid.',
-      SUMMARY:               'Information on invalid values',
+      SUMMARY:               'Using @aria-invalid@ to identify the validity of control values.',
       TARGET_RESOURCES_DESC: '@textarea@, @select@ and @input@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the value of @aria-invalid@ property to @true@, on form control that is invalid and @aria-invalid="false"@.',
@@ -13418,16 +13423,15 @@ const errorRules$1 = {
         ELEMENT_HIDDEN_1: '%1 form control was not tested for indicating invalid values because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'Users must be able to identify form control values which are invalid in order to successfully correct the values and submit the form.',
-        'Native HTML form controls have a support for many types of validity testing, these features should be used before using @aria-invalid@ attribute.',
-        'For custom ARIA widgets or when native HTML form control validation is not sufficient, the @aria-invalid@ attribute can used to identify invalid values.',
-        'NOTE: Native form controls with with validity testing should avoid using @aria-valid@ property, if the @aria-invalid@ is used it must be synchronized with the browsers computed validity value.'
+        'Users must be able to identify form control values which are invalid in order to successfully correct the values and submit the form.'
       ],
       TECHNIQUES: [
-        'When available, use the native to validation features to idenitfy invalid values of HTML form controls.',
+        'Native HTML form controls have a support for many types of validity testing, these features should be used before using @aria-invalid@ attribute.',
+        'For custom ARIA widgets or when native HTML form control validation is not sufficient, the @aria-invalid@ attribute can used to identify invalid values.',
         'Use @aria-invalid@ attribute to indicate the form control has an invalid value.',
         'Add the text "invalid" to the label of the form control, the text can be placed off screen using CSS.',
-        'Add the image to the label.  The image should be visible indicating an invalid value with the alt text \'invalid\'.'
+        'Add the image to the label.  The image should be visible indicating an invalid value with the alt text \'invalid\'.',
+        'NOTE: Native form controls with with validity testing should avoid using @aria-valid@ property, if the @aria-invalid@ is used it must be synchronized with the browsers computed validity value.'
       ],
       MANUAL_CHECKS: [
         'Enter invalid values into form controls that are validated and activate the validation event (i.e. form submission, change of focus...).',
@@ -13455,36 +13459,29 @@ const errorRules$1 = {
   ERROR_2: {
       ID:                    'Error 2',
       DEFINITION:            'If user input is required for a form control the @required@ or @aria-required@ attribute must must used.',
-      SUMMARY:               'Required form controls',
-      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
+      SUMMARY:               'Using @aria-required@ to identify required form controls',
+      TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA widgets',
       RULE_RESULT_MESSAGES: {
         FAIL_S:         'Update the form control with @aria-required="false"@ and the @required@ attributes to indicate the true required state of the control.',
         FAUL_P:         'Update the %N_F form controls with @aria-required="false"@ and the @required@ attributes to indicate the true required state of the control.',
-        MANUAL_CHECK_S: 'If the form control is required, add the @required@ attribute or if HTML4 compatibility is required the @aria-required="true"@ attribute.',
-        MANUAL_CHECK_P: 'If any of the %N_F form controls are required, add the @required@ attribute or if HTML4 compatibility is required the @aria-required="true"@ attribute.',
         HIDDEN_S:       'The form control element that is hidden does not need to be tested for being required.',
         HIDDEN_P:       'The %N_H form control elements that are hidden do not need to be tested for being required.',
         NOT_APPLICABLE: 'No form controls on this page that need testing for being required.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_FAIL_1:   'If the @input[type="%1"]@ element with the attribute @aria-required="false"@ which conflicts with presence of the @required@ attribute.',
-        ELEMENT_PASS_1:   'If the @input[type="%1"]@ element has the @required@ attribute.',
-        ELEMENT_PASS_2:   'If the @input[type="%1"]@ element has the @aria-required@ attribute.',
-        ELEMENT_PASS_3:   'If the %1 element has the @required@ attribute.',
-        ELEMENT_PASS_4:   'If the %1 element has @aria-required@.',
-        ELEMENT_MC_1:     'If the @input[type="%1"]@ element is a required, add the @required@ attribute to the control.',
-        ELEMENT_MC_2:     'If the %1 element is a required, add the @required@ attribute to the control.',
-        ELEMENT_HIDDEN_1: 'The @input[type="%1"]@ element was not tested because it is hidden from assistive technologies.',
-        ELEMENT_HIDDEN_2: 'The @%1@ element was not tested because it is hidden from assistive technologies.'
+        ELEMENT_FAIL_1:   'The @%1@ element with the attribute @aria-required="false"@ which conflicts with presence of the @required@ attribute.',
+        ELEMENT_PASS_1:   'The @%1@ element has the @required@ attribute.',
+        ELEMENT_PASS_2:   'The @%1@ element has the @aria-required@ attribute.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested because it is hidden from assistive technologies.'
       },
       PURPOSES: [
         'Users benefit from information being informed if a input to a control is required for form submission or task completion.'
       ],
       TECHNIQUES: [
         'To identify a required form control, add the HTML5 @required@ attribute to the standard form controls.',
-        'If compatibility with HTML4 standards or legacy browsers and assistve technologies, you can also use @aria-required="true"@ to indicate a form control is required.',
+        'For custom ARIA widgets use the @aria-required@ attribute to identify widgets with required values to users.',
         'Use the @required@ attribute (or the @aria-required@ if used) as the CSS selector for visually styling the form control as required.  This ensures that the visual state stays synchronized with the accessibility API state used by assistive technologies.',
-        'The only reason to support both @required@ and @aria-required@ on the same form control is to support legacy browsers and assistive technologies.  This required extra care to make sure the two values do not conflict.  If they do conflict the @required@ attribute will override the @aria-required@ property value.'
+        'NOTE: Avoid using @aria-required@ attribute on elements that support the @required@ attribute, since the @required@ attribute value will override the @aria-required@ value.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -13506,7 +13503,7 @@ const errorRules$1 = {
   ERROR_3: {
       ID:                    'Error 3',
       DEFINITION:            'If user input is required for a widget the @aria-required@ attribute must must used.',
-      SUMMARY:               'Required widgets',
+      SUMMARY:               'Using @aria-required@ with widget roles',
       TARGET_RESOURCES_DESC: '@textarea@ and @input[type="text"]@ elements, and ARIA textbox, gridcell and combobox widgets',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S: 'If the widget is required use @aria-required="true"@ attribute.',
@@ -21643,7 +21640,6 @@ const errorRules = [
             if (ce.hasValidityState) {
               if (!ce.isValid) {
                 if (ce.hasAriaInvalid) {
-                 debug$p.log(`[ERROR 1][A]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`);
                   if (ce.ariaInvalid) {
                     rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
                   }
@@ -21656,7 +21652,6 @@ const errorRules = [
                 }
               }
               else {
-                 debug$p.log(`[ERROR 1][B]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`);
                  if (ce.hasAriaInvalid) {
                   if (de.ariaInvalid) {
                     rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.elemName]);
@@ -21677,7 +21672,6 @@ const errorRules = [
             }
             else {
               if (ce.hasAriaInvalid) {
-                debug$p.log(`[ERROR 1][C]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`);
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.elemName]);
               }
             }
@@ -21688,53 +21682,6 @@ const errorRules = [
 
         }
       });
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY = VISIBILITY;
-
-      var control_elements   = dom_cache.controls_cache.control_elements;
-      var control_elements_len = control_elements.length;
-
-      // Check to see if valid cache reference
-      if (control_elements && control_elements_len) {
-
-        // collect all the visible controls
-        for (var i = 0; i < control_elements_len; i++) {
-          var ce = control_elements[i];
-          var de = ce.dom_element;
-          var cs = de.computed_style;
-
-          if (ce.has_validity) {
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (!ce.is_valid) {
-                if (de.has_aria_invalid) {
-                  if (de.aria_invalid) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [ce.toString()]);
-                  else rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [ce.toString()]);
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [ce.toString()]);
-                }
-              }
-              else {
-                if (de.has_aria_invalid) {
-                  if (de.aria_invalid) rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [ce.toString()]);
-                  else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [ce.toString()]);
-                }
-                else {
-                  if (ce.has_pattern) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [ce.toString()]);
-                  else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', [ce.toString()]);
-                }
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [ce].toString());
-            }
-          }
-        } // end loop
-      }
-      */
     } // end validate function
   },
 
@@ -21755,8 +21702,31 @@ const errorRules = [
     target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$p.log(`[Error 2: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+        dom_cache.controlInfo.allControlElements.forEach( ce => {
 
+        if (ce.isInteractive) {
+          const de = ce.domElement;
+          debug$p.log(`[ERROR 2][${de.elemName}]: ${ce.hasRequired} ${ce.hasAriaRequired} ${ce.ariaRequired}`);
+          if (ce.hasRequired || ce.hasAriaRequired) {
+            if (de.visibility.isVisibleToAT) {
+              if (ce.hasRequired && ce.hasAriaRequired && !ce.ariaRequired) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+              }
+              else {
+                if (de.hasRequired) {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+                }
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+            }
+          }
+        }
+      });
 /*
 
       var TEST_RESULT = TEST_RESULT;

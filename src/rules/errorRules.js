@@ -59,7 +59,6 @@ export const errorRules = [
             if (ce.hasValidityState) {
               if (!ce.isValid) {
                 if (ce.hasAriaInvalid) {
-                 debug.log(`[ERROR 1][A]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`)
                   if (ce.ariaInvalid) {
                     rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
                   }
@@ -72,7 +71,6 @@ export const errorRules = [
                 }
               }
               else {
-                 debug.log(`[ERROR 1][B]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`)
                  if (ce.hasAriaInvalid) {
                   if (de.ariaInvalid) {
                     rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.elemName]);
@@ -93,7 +91,6 @@ export const errorRules = [
             }
             else {
               if (ce.hasAriaInvalid) {
-                debug.log(`[ERROR 1][C]: ${de.elemName}: ${ce.hasValidityState} ${ce.isValid} ${ce.hasAriaInvalid} ${ce.ariaInvalid}`)
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.elemName]);
               }
             }
@@ -104,53 +101,6 @@ export const errorRules = [
 
         }
       });
-
-/*
-
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY = VISIBILITY;
-
-      var control_elements   = dom_cache.controls_cache.control_elements;
-      var control_elements_len = control_elements.length;
-
-      // Check to see if valid cache reference
-      if (control_elements && control_elements_len) {
-
-        // collect all the visible controls
-        for (var i = 0; i < control_elements_len; i++) {
-          var ce = control_elements[i];
-          var de = ce.dom_element;
-          var cs = de.computed_style;
-
-          if (ce.has_validity) {
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (!ce.is_valid) {
-                if (de.has_aria_invalid) {
-                  if (de.aria_invalid) rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_1', [ce.toString()]);
-                  else rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_1', [ce.toString()]);
-                }
-                else {
-                  rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_1', [ce.toString()]);
-                }
-              }
-              else {
-                if (de.has_aria_invalid) {
-                  if (de.aria_invalid) rule_result.addResult(TEST_RESULT.FAIL, ce, 'ELEMENT_FAIL_2', [ce.toString()]);
-                  else rule_result.addResult(TEST_RESULT.PASS, ce, 'ELEMENT_PASS_2', [ce.toString()]);
-                }
-                else {
-                  if (ce.has_pattern) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_2', [ce.toString()]);
-                  else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, ce, 'ELEMENT_MC_3', [ce.toString()]);
-                }
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, ce, 'ELEMENT_HIDDEN_1', [ce].toString());
-            }
-          }
-        } // end loop
-      }
-      */
     } // end validate function
   },
 
@@ -171,8 +121,31 @@ export const errorRules = [
     target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Error 2: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+        dom_cache.controlInfo.allControlElements.forEach( ce => {
 
+        if (ce.isInteractive) {
+          const de = ce.domElement;
+          debug.log(`[ERROR 2][${de.elemName}]: ${ce.hasRequired} ${ce.hasAriaRequired} ${ce.ariaRequired}`);
+          if (ce.hasRequired || ce.hasAriaRequired) {
+            if (de.visibility.isVisibleToAT) {
+              if (ce.hasRequired && ce.hasAriaRequired && !ce.ariaRequired) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+              }
+              else {
+                if (de.hasRequired) {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+                }
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+            }
+          }
+        }
+      });
 /*
 
       var TEST_RESULT = TEST_RESULT;

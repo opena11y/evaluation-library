@@ -20,13 +20,12 @@
         // Test case for labeling form controls
 
         executeTest('ERROR_1: Use invalid or aria-invalid to indicate a form controls value is invalid', 'ID_IFRAME_1', 'ERROR_1');
+
+        executeTest('ERROR 2: Required on Standard Form Controls and widgets', 'ID_IFRAME_2', 'ERROR_2');
+
       });
 
 /*
-      test( "ERROR 2: Required Standard Form Controls", function() {
-        executeTest('ID_IFRAME_2', 'ERROR_2');
-      });
-
       test( "ERROR 3: Required Widgets", function() {
         executeTest('ID_IFRAME_3', 'ERROR_3');
       });
@@ -45,7 +44,7 @@
     <h2>ERROR 1: Use invalid or aria-invalid to mark a form control value as invalid</h2>
     <iframe id="ID_IFRAME_1" src="error_feedback/error_feedback_1_invalid_aria_invalid.html"></iframe>
 
-    <h2>ERROR 2: Required Standard Form Controls</h2>
+    <h2>ERROR 2: Required Standard Form Controls and Widgets</h2>
     <iframe id="ID_IFRAME_2" src="error_feedback/error_feedback_2_required.html"></iframe>
     
     <h2>ERROR 3: Required Widgets</h2>
