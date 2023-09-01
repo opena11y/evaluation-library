@@ -28,6 +28,8 @@ export const resizeRules = {
         'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.'
       ],
       MANUAL_CHECKS: [
+        'Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.',
+        'Verify that font sizes are descreases content reflows to fill the width of the screen.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,

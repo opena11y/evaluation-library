@@ -147,7 +147,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$Q = new DebugLogging('constants', false);
+const debug$T = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -602,13 +602,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$Q.flag && debug$Q.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$T.flag && debug$T.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$Q.flag && debug$Q.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$T.flag && debug$T.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -904,7 +904,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$P = new DebugLogging('ControlInfo', false);
+const debug$S = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -1064,7 +1064,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$P.domElement(ce.domElement, prefix);
+      debug$S.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1305,15 +1305,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$P.flag) {
-      debug$P.log('== Control Tree ==', 1);
+    if (debug$S.flag) {
+      debug$S.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$P.domElement(ce.domElement);
+        debug$S.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$P.log('== Forms ==', 1);
+      debug$S.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$P.domElement(ce.domElement);
+        debug$S.domElement(ce.domElement);
       });
     }
   }
@@ -6112,8 +6112,8 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$O = new DebugLogging('AriaInfo', false);
-debug$O.flag = false;
+const debug$R = new DebugLogging('AriaInfo', false);
+debug$R.flag = false;
 
 /* Debug helper functions */
 
@@ -6336,15 +6336,15 @@ class AriaInfo {
     }
 
 
-    if (debug$O.flag) {
-      node.attributes.length && debug$O.log(`${node.outerHTML}`, 1);
-      debug$O.log(`[         isWidget]: ${this.isWidget}`);
-      debug$O.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$O.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$O.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$O.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$O.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$O.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$R.flag) {
+      node.attributes.length && debug$R.log(`${node.outerHTML}`, 1);
+      debug$R.log(`[         isWidget]: ${this.isWidget}`);
+      debug$R.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$R.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$R.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$R.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$R.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$R.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6548,7 +6548,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$N = new DebugLogging('colorContrast', false);
+const debug$Q = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6603,9 +6603,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$N.flag) {
-      debug$N.separator();
-      debug$N.tag(elementNode);
+    if (debug$Q.flag) {
+      debug$Q.separator();
+      debug$Q.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6627,11 +6627,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$N.flag) {
-      debug$N.log(`[                    opacity]: ${this.opacity}`);
-      debug$N.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$N.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$N.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$Q.flag) {
+      debug$Q.log(`[                    opacity]: ${this.opacity}`);
+      debug$Q.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$Q.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$Q.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6718,10 +6718,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$N.flag && debug$N.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$Q.flag && debug$Q.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$N.flag && debug$N.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$Q.flag && debug$Q.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6934,7 +6934,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$M = new DebugLogging('EventInfo', false);
+const debug$P = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6947,7 +6947,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$M.flag) {
+    if (debug$P.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8547,7 +8547,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$L = new DebugLogging('ariaInHtml', false);
+const debug$O = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8748,11 +8748,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$L.flag) {
+  if (debug$O.flag) {
     if (tagName === 'h2') {
-      debug$L.tag(node);
+      debug$O.tag(node);
     }
-    debug$L.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$O.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8872,7 +8872,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$K = new DebugLogging('visibility', false);
+const debug$N = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8920,17 +8920,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$K.flag) {
-      debug$K.separator();
-      debug$K.tag(elementNode);
-      debug$K.log('[          isHidden]: ' + this.isHidden);
-      debug$K.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$K.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$K.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$K.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$K.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$K.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$K.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$N.flag) {
+      debug$N.separator();
+      debug$N.tag(elementNode);
+      debug$N.log('[          isHidden]: ' + this.isHidden);
+      debug$N.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$N.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$N.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$N.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$N.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$N.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$N.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9243,8 +9243,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$J = new DebugLogging('nameFrom', false);
-debug$J.flag = false;
+const debug$M = new DebugLogging('nameFrom', false);
+debug$M.flag = false;
 
 /*
 *   @function getElementContents
@@ -9390,7 +9390,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$J.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$M.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9804,8 +9804,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$I = new DebugLogging('getAccName', false);
-debug$I.flag = false;
+const debug$L = new DebugLogging('getAccName', false);
+debug$L.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -10095,8 +10095,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$H = new DebugLogging('DOMElement', false);
-debug$H.flag = false;
+const debug$K = new DebugLogging('DOMElement', false);
+debug$K.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10181,6 +10181,18 @@ class DOMElement {
     this.isLink      = this.role === 'link';
     this.isLandmark  = this.checkForLandamrk();
     this.isHeading   = this.role === 'heading';
+
+    // CSS Position property and size information
+
+    const cssStyle = window.getComputedStyle(elementNode, null);
+    const elemRect = elementNode.getBoundingClientRect();
+
+    this.cssPosition = cssStyle.getPropertyValue('position');
+
+    this.top      = window.scrollY + elemRect.top;
+    this.left     = window.scrollX + elemRect.left;
+    this.height   = elemRect.height;
+    this.width    = elemRect.width;
 
     this.children = [];
 
@@ -10419,12 +10431,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$H.flag) {
+    if (debug$K.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$H.domText(domItem, prefix);
+          debug$K.domText(domItem, prefix);
         } else {
-          debug$H.domElement(domItem, prefix);
+          debug$K.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10517,7 +10529,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$G = new DebugLogging('domText', false);
+const debug$J = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10536,8 +10548,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$G.flag) {
-      debug$G.log(`[text]: ${this.text}`);
+    if (debug$J.flag) {
+      debug$J.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10600,7 +10612,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$F = new DebugLogging('iframeInfo', false);
+const debug$I = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10618,9 +10630,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$F.flag) {
-      debug$F.log(`[          src]: ${this.src}`);
-      debug$F.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$I.flag) {
+      debug$I.log(`[          src]: ${this.src}`);
+      debug$I.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10656,8 +10668,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$F.flag) {
-      debug$F.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$I.flag) {
+      debug$I.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10668,7 +10680,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$E = new DebugLogging('idInfo', false);
+const debug$H = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10711,10 +10723,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$E.flag) {
-      debug$E.log('== All Links ==', 1);
+    if (debug$H.flag) {
+      debug$H.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$E.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$H.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10723,7 +10735,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$D = new DebugLogging('imageInfo', false);
+const debug$G = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10916,22 +10928,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$D.flag) {
-      debug$D.log('== All Image elements ==', 1);
+    if (debug$G.flag) {
+      debug$G.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$D.log(`[fileName]: ${ie.fileName}`, true);
-        debug$D.log(`[    role]: ${ie.domElement.role}`);
-        debug$D.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$D.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$D.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$G.log(`[fileName]: ${ie.fileName}`, true);
+        debug$G.log(`[    role]: ${ie.domElement.role}`);
+        debug$G.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$G.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$G.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$D.log('== All SVG domElements  ==', 1);
+      debug$G.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$D.domElement(de);
+        debug$G.domElement(de);
       });
-      debug$D.log('== All MapElements ==', 1);
+      debug$G.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$D.domElement(me.domElement);
+        debug$G.domElement(me.domElement);
       });
     }
   }
@@ -10940,7 +10952,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$C = new DebugLogging('linkInfo', false);
+const debug$F = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10986,10 +10998,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$C.flag) {
-      debug$C.log('== All Links ==', 1);
+    if (debug$F.flag) {
+      debug$F.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$C.domElement(de);
+        debug$F.domElement(de);
       });
     }
   }
@@ -10998,7 +11010,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$B = new DebugLogging('ListInfo', false);
+const debug$E = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -11019,8 +11031,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$B.flag) {
-      debug$B.log('');
+    if (debug$E.flag) {
+      debug$E.log('');
     }
   }
 
@@ -11045,9 +11057,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$B.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$E.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$B.domElement(le.domElement, prefix);
+      debug$E.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11155,16 +11167,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$B.flag) {
-      debug$B.log('== All ListElements ==', 1);
-      debug$B.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$E.flag) {
+      debug$E.log('== All ListElements ==', 1);
+      debug$E.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$B.domElement(le.domElement);
+        debug$E.domElement(le.domElement);
       });
-      debug$B.log('== List Tree ==', 1);
-      debug$B.log(`[linkCount]: ${this.linkCount}`);
+      debug$E.log('== List Tree ==', 1);
+      debug$E.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$B.domElement(le.domElement);
+        debug$E.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -11174,8 +11186,8 @@ class ListInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$A = new DebugLogging('MediaInfo', false);
-debug$A.flag = false;
+const debug$D = new DebugLogging('MediaInfo', false);
+debug$D.flag = false;
 
 /**
  * @class MediaElement
@@ -11413,25 +11425,25 @@ class MediaInfo {
    */
 
   showListInfo () {
-    if (debug$A.flag) {
-      debug$A.log('== Audio Elements ==', 1);
+    if (debug$D.flag) {
+      debug$D.log('== Audio Elements ==', 1);
       this.audioElements.forEach( ae => {
-        debug$A.log(ae);
+        debug$D.log(ae);
       });
 
-      debug$A.log('== Video Elements ==', 1);
+      debug$D.log('== Video Elements ==', 1);
       this.videoElements.forEach( ve => {
-        debug$A.log(ve);
+        debug$D.log(ve);
       });
 
-      debug$A.log('== Object Elements ==', 1);
+      debug$D.log('== Object Elements ==', 1);
       this.objectElements.forEach( oe => {
-        debug$A.log(oe);
+        debug$D.log(oe);
       });
 
-      debug$A.log('== Embed Elements ==', 1);
+      debug$D.log('== Embed Elements ==', 1);
       this.embedElements.forEach( ee => {
-        debug$A.log(ee);
+        debug$D.log(ee);
       });
 
 
@@ -11442,7 +11454,7 @@ class MediaInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$z = new DebugLogging('structureInfo', false);
+const debug$C = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11481,11 +11493,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$z.domElement(le.domElement, prefix);
+      debug$C.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$z.domElement(h, prefix);
+      debug$C.domElement(h, prefix);
     });
   }
 
@@ -11609,27 +11621,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$z.flag) {
-      debug$z.log('== All Headings ==', 1);
+    if (debug$C.flag) {
+      debug$C.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$z.domElement(h);
+        debug$C.domElement(h);
       });
-      debug$z.log('== All Landmarks ==', 1);
+      debug$C.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$z.domElement(le.domElement);
+        debug$C.domElement(le.domElement);
       });
-      debug$z.log('== Landmarks By Doc ==', 1);
+      debug$C.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$z.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$C.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$z.domElement(le.domElement);
+            debug$C.domElement(le.domElement);
           });
         }
       });
-      debug$z.log('== Structure Tree ==', 1);
+      debug$C.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$z.domElement(le.domElement);
+        debug$C.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -14740,6 +14752,56 @@ const headingRules$1 = {
   }
 };
 
+/* htmlRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const htmlRules$1 = {
+
+  HTML_1: {
+      ID:                    'HTML 1',
+      DEFINITION:            '@marquee@ elements must be removed to improve readability of content.',
+      SUMMARY:               'Replace @marquee@ elements',
+      TARGET_RESOURCES_DESC: '@marquee@ element',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Replace the @marquee@ element with a standard HTML element. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        FAIL_P:   'Replace the %N_F @marquee@ elements with standard HTML elements. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        HIDDEN_S: 'If the hidden @marquee@ element becomes visible, it must be changed to a standard HTML element.  Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        HIDDEN_P: 'If any of the %N_H hidden @marquee@ elements become visible, they must be changed to standard HTML elements. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        NOT_APPLICABLE:  'No @marquee@ elements found on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_FAIL_1: 'Change the @marquee@ element to a standard HTML element. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        ELEMENT_HIDDEN_1: '@marquee@ element is hidden, but should be changed to a standard HTML element, in case it becomes visible. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.'
+      },
+      PURPOSES: [
+        'Automatically moving text cannot be read by many people with visual impairments or by people with learning disabilities that affect reading.'
+      ],
+      TECHNIQUES: [
+        'Replace the @marquee@ element with a standard HTML element and use CSS techniques to style the content.',
+        'By default, when the page loads, the marquee should be paused.',
+        'Use Javascript to provide buttons that start and stop the scrolling of content in the marquee.',
+        'Provide a means to see all of the content in the marquee at one time.'
+      ],
+      MANUAL_CHECKS: [
+        'Verify that when the page loads, the content is not scrolling.',
+        'Verify that there are start and pause buttons that start and stop the scrolling of content.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The Marquee element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'W3C Schools: The Marquee element',
+          url:   'https://www.w3schools.in/html/marquee-tag'
+        }
+      ]
+  }
+};
+
 /* imageRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -17456,6 +17518,57 @@ const navigationRules$1 = {
   }
 };
 
+/* readingOrderRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const readingOrderRules$1 = {
+
+  ORDER_1: {
+    ID:                    'Order 1',
+    DEFINITION:            'Elements positioned using CSS @absolute@, @relative@ or @fixed@ must maintain a meaningful reading order of content.',
+    SUMMARY:               'Reading order: CSS positioning',
+    TARGET_RESOURCES_DESC: '@article@, @aside@, @div@, @footer@, @header@, @main@, @nav@, @section@, @table[role="presentation"]@',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S:   'Verify the element positioned with CSS maintains a reading order meaningful to users of assistive technologies.',
+      MANUAL_CHECK_P:   'Verify the %N_MC elements positioned with CSS maintain a reading order meaningful to users of assistive technologies.',
+      HIDDEN_S:         'The element positioned with CSS that is hidden was not evaluated.',
+      HIDDEN_P:         '%N_H elements positioned with CSS that are hidden were not evaluated.'
+      },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1:     'Verify the @%1@ element with @position: %2@ maintains a meaningful reading order with other content on the page.',
+      ELEMENT_HIDDEN_1: 'The @%1@ element with @position: %2@ was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'If the reading order of text content on the page is presented to users of assistive technologies in an order that does not match the intension of the author, reading comprehension will be affected. In worst-case scenarios, the meaning of the out-of-order content may contradict or bear little resemblance to the intended meaning.',
+      'Assistive technologies render web page content based upon the sequence of the DOM elements within the HTML document.',
+      'Web page designs that rely upon @table@ markup for layout or advanced CSS positioning techniques and JavaScript to rearrange content may result in a visual rendering of content that differs in reading order from the actual DOM ordering used by assistive technologies. Thus while the visual rendering may appear to have the correct or desired reading order, when rendered by assistive technologies such as screen readers, the actual reading order will be incorrect and correspondingly illogical.',
+      'The relationship of the DOM order of content to the intended reading order is therefore very important for ensuring that information is logically presented to users of assistive technologies.'
+    ],
+    TECHNIQUES: [
+      'Minimize the use of CSS @position@ values of @absolute@,  @relative@ and @fixed@.',
+      'Make sure related content moves as a block when repositioning content on a page.'
+    ],
+    MANUAL_CHECKS: [
+      'Disable layout tables (e.g. table[role="presentation"]) and CSS to make sure the content rendered has a meaningful sequence.'
+    ],
+    INFORMATIONAL_LINKS: [
+      {
+        type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.0 Success Criterion 1.3.2 Meaningful Sequence',
+        url:   'https://www.w3.org/TR/WCAG20/#content-structure-separation-sequence'
+      },
+      {
+        type:  REFERENCES.SPECIFICATION,
+        title: 'Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification: position property',
+        url:   'https://www.w3.org/TR/CSS2/visuren.html#propdef-position'
+      }
+    ]
+  }
+};
+
 /* resizeRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -17484,6 +17597,8 @@ const resizeRules$1 = {
         'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.'
       ],
       MANUAL_CHECKS: [
+        'Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.',
+        'Verify that font sizes are descreases content reflows to fill the width of the screen.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -18135,6 +18250,112 @@ const timingRules$1 = {
         }
       ]
   }
+};
+
+/* titleRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const titleRules$1 = {
+
+    TITLE_1: {
+        ID:            'Title 1',
+        DEFINITION:    '@title@ element must identify both the website and page content.',
+        SUMMARY:       '@title@ must identify website and page',
+        TARGET_RESOURCES_DESC: '@title@',
+        RULE_RESULT_MESSAGES: {
+          MANUAL_CHECK_S: 'Verify that the @title@ element identifies both the website (if applicable) and the page content.',
+          FAIL_S: 'Add a @title@ element to the @head@ element section with text content that identifies both the website (if applicable) and the page content.'
+        },
+        BASE_RESULT_MESSAGES: {
+          PAGE_MC_1:   'Verify that the @title@ element identifies both the website (if applicable) and the page content.',
+          PAGE_FAIL_1: 'Add content to the @title@ element that identifies both the website (if applicable) and the page content.',
+          PAGE_FAIL_2: 'Add a @title@ element to the page that identifies both the website (if applicable) and the page content.'
+        },
+        PURPOSES: [
+          'The @title@ element content can be accessed by assistive technologies to orient the user to the website and page content.'
+        ],
+        TECHNIQUES: [
+          'Use a @title@ element to identify the website and page content.',
+          'If the page is part of a sequence of web pages, include the sequence number and total number of steps in the @title@ element.'
+        ],
+        MANUAL_CHECKS: [
+          'If applicable, verify that the title of the page identifies the website to which it belongs.',
+          'Verify that the title of the page also identifies the page content.',
+          'If the page is part of a sequence of web pages, verify that the title describes which step it is in the sequence.'
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'HTML TITLE Element Specification',
+            url:   'https://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
+          },
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'G88: Providing descriptive titles for Web pages',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G88'
+          },
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'H25: Providing a title using the title element',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H25'
+          }
+        ]
+    },
+    TITLE_2: {
+        ID:            'Title 2',
+        DEFINITION:    '@h1@ elements must match part of the @title@ element content.',
+        SUMMARY:       '@h1@ %s match part of the @title@',
+        TARGET_RESOURCES_DESC: '@title@ and @h1@',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S: 'The page has missing, hidden or empty @title@ and/or @h1@ elements or the @h1@ element content is not similar to the @title@ content.',
+          FAIL_P: 'The page has missing, hidden or empty @title@ and/or @h1@ elements or the content of the @h1@ elements is not similar to the @title@ content.',
+          MANUAL_CHECK_S: 'Verify that both the @title@ and @h1@ elements describe the purpose or content of the page and @h1@ elements are use to identify and describe the major sections of the page.',
+          MANUAL_CHECK_P: 'Verify that both the @title@ and @h1@ elements describe the purpose or content of the page and @h1@ elements are use to identify and describe the major sections of the page.',
+          HIDDEN_S: 'The page has a hidden @h1@ element that was not evaluated.',
+          HIDDEN_P: 'The page has %N_H hidden @h1@ elements that were not evaluated.'
+        },
+        BASE_RESULT_MESSAGES: {
+          PAGE_MC_1:   'The @h1@ element has the same or similar content as the @title@ element.',
+          PAGE_PASS_1: 'The @h1@ element has the same or similar content as the @title@ element.',
+          PAGE_PASS_2: 'The @h1@ elements have the same or similar content as the @title@ element.',
+          PAGE_FAIL_1: 'Add a @title@ element to the page to enable the evaluation of @h1@ elements for similarity.',
+          PAGE_FAIL_2: 'Add an @h1@ element to the page at the beginning of the main content.',
+          PAGE_FAIL_3: 'Update the @h1@ element to have the same or similar content as the @title@ element.',
+          PAGE_FAIL_4: 'Update the @h1@ elements to have the same or similar content as the @title@ element.',
+          ELEMENT_MC_1:   'Verify @h1@ element identifies and describes a major section of the page.',
+          ELEMENT_PASS_1: 'The @h1@ element has the same or similar content as the @title@ element.',
+          ELEMENT_FAIL_1: 'The @h1@ element does NOT have the same or similar content as the @title@ element.',
+          ELEMENT_FAIL_2: 'Add content to the @h1@ element, or remove it from the page.',
+          ELEMENT_HIDDEN_1: 'The @h1@ element is hidden from assistive technology and therefore does not describe the purpose or content of the page.'
+        },
+        PURPOSES: [
+          '@h1@ elements can be accessed by assistive technologies to identify the page content and to orient users within the website. The @h1@ element may also be used to identify the website.'
+        ],
+        TECHNIQUES: [
+          'Use the @h1@ element to identify the page content in the same or similar way as the @title@ element.',
+          'The @h1@ element may also be used to identify the website in the same or similar way as the @title@ element.',
+          'If the page is part of a sequence of web pages, the @h1@ element should indicate the step in the sequence.'
+        ],
+        MANUAL_CHECKS: [
+          'Verify that the @h1@ content identifies the page content.',
+          'If applicable, verify that the @h1@ content of the page identifies the website to which it belongs.',
+          'If the web page is part of a sequence of web pages, verify that the @h1@ content indicates the step number of the sequence.'
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'HTML TITLE Element Specification',
+            url:   'https://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
+          },
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'G88: Providing descriptive titles for Web pages',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G88'
+          },
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'H25: Providing a title using the title element',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H25'
+          }
+        ]
+    }
 };
 
 /* audioRules.js */
@@ -19603,26 +19824,28 @@ messages$1.rules = Object.assign(messages$1.rules, errorRules$1);
 messages$1.rules = Object.assign(messages$1.rules, frameRules$1);
 messages$1.rules = Object.assign(messages$1.rules, controlRules$1);
 messages$1.rules = Object.assign(messages$1.rules, headingRules$1);
-// messages.rules = Object.assign(messages.rules, htmlRules);
+messages$1.rules = Object.assign(messages$1.rules, htmlRules$1);
 messages$1.rules = Object.assign(messages$1.rules, imageRules$1);
 messages$1.rules = Object.assign(messages$1.rules, keyboardRules$1);
 messages$1.rules = Object.assign(messages$1.rules, landmarkRules$1);
+// messages.rules = Object.assign(messages.rules, languageRules);
 // messages.rules = Object.assign(messages.rules, layoutRules);
 messages$1.rules = Object.assign(messages$1.rules, linkRules$1);
 messages$1.rules = Object.assign(messages$1.rules, listRules$1);
 messages$1.rules = Object.assign(messages$1.rules, navigationRules$1);
-// messages.rules = Object.assign(messages.rules, readingOrderRules);
+messages$1.rules = Object.assign(messages$1.rules, readingOrderRules$1);
 messages$1.rules = Object.assign(messages$1.rules, resizeRules$1);
 messages$1.rules = Object.assign(messages$1.rules, sensoryRules$1);
 messages$1.rules = Object.assign(messages$1.rules, tableRules$1);
 messages$1.rules = Object.assign(messages$1.rules, timingRules$1);
+messages$1.rules = Object.assign(messages$1.rules, titleRules$1);
 messages$1.rules = Object.assign(messages$1.rules, videoRules$1);
 messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 
 /* locale.js */
 
 /* Constants */
-const debug$y = new DebugLogging('locale', false);
+const debug$B = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -19678,7 +19901,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$y.flag && debug$y.log(`[${id}][${value}]: ${message}`);
+  debug$B.flag && debug$B.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -19778,7 +20001,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$y.flag && debug$y.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$B.flag && debug$B.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -19788,7 +20011,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$y.flag && debug$y.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$B.flag && debug$B.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   // Assume all rules
   return {
     title: messages[locale].common.allRules,
@@ -19821,7 +20044,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$y.flag && debug$y.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$B.flag && debug$B.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -19833,7 +20056,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$y.flag && debug$y.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$B.flag && debug$B.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -19853,7 +20076,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$y.flag && debug$y.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$B.flag && debug$B.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -19900,7 +20123,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$y.flag && debug$y.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$B.flag && debug$B.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -19915,7 +20138,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$y.flag && debug$y.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$B.flag && debug$B.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -19930,7 +20153,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$y.flag && debug$y.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$B.flag && debug$B.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -19949,7 +20172,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$y.flag && debug$y.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$B.flag && debug$B.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -19968,7 +20191,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$y.flag && debug$y.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$B.flag && debug$B.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -19996,8 +20219,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$y.flag && debug$y.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$y.flag && debug$y.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$B.flag && debug$B.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$B.flag && debug$B.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -20017,7 +20240,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$y.flag && debug$y.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$B.flag && debug$B.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -20036,7 +20259,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$y.flag && debug$y.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$B.flag && debug$B.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -20056,7 +20279,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$y.flag && debug$y.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$B.flag && debug$B.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -20124,12 +20347,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$x = new DebugLogging('tableInfo', false);
-debug$x.flag = false;
-debug$x.rows = false;
-debug$x.cells = false;
-debug$x.tableTree = false;
-debug$x.headerCalc = false;
+const debug$A = new DebugLogging('tableInfo', false);
+debug$A.flag = false;
+debug$A.rows = false;
+debug$A.cells = false;
+debug$A.tableTree = false;
+debug$A.headerCalc = false;
 
 /**
  * @class TableElement
@@ -20261,13 +20484,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$x.headerCalc && debug$x.log(`${cell}`, 1);
+        debug$A.headerCalc && debug$A.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$x.headesCalc && debug$x.log(`[headers]: ${ids.join(' ')}`);
+              debug$A.headesCalc && debug$A.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -20282,7 +20505,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$x.headerCalc && debug$x.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$A.headerCalc && debug$A.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -20293,7 +20516,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$x.headerCalc && debug$x.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$A.headerCalc && debug$A.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -20305,7 +20528,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$x.headerCalc && debug$x.log(`${cell}`);
+            debug$A.headerCalc && debug$A.log(`${cell}`);
           }
         }
       });
@@ -20352,7 +20575,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$x.log(`${prefix}${item}`);
+    debug$A.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -20363,14 +20586,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$x.flag) {
-      debug$x.log(`${this}`);
-      if (debug$x.tableTree) {
+    if (debug$A.flag) {
+      debug$A.log(`${this}`);
+      if (debug$A.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$x.separator();
+      debug$A.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -20485,15 +20708,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$x.flag && debug$x.rows) {
-      debug$x.log(`${prefix}${this}`);
+    if (debug$A.flag && debug$A.rows) {
+      debug$A.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$x.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$A.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -20574,8 +20797,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$x.flag) {
-      debug$x.log(`${prefix}${this}`);
+    if (debug$A.flag) {
+      debug$A.log(`${prefix}${this}`);
     }
   }
 
@@ -20696,8 +20919,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$x.flag) {
-      debug$x.log('== All Tables ==', 1);
+    if (debug$A.flag) {
+      debug$A.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -20708,7 +20931,7 @@ class TableInfo {
 /* timingInfo.js */
 
 /* Constants */
-const debug$w = new DebugLogging('TimingInfo', false);
+const debug$z = new DebugLogging('TimingInfo', false);
 
 /**
  * @class TimingInfo
@@ -20759,10 +20982,10 @@ class TimingInfo {
    */
 
   showTimingInfo () {
-    if (debug$w.flag) {
-      debug$w.log('== All Timing elements ==', 1);
+    if (debug$z.flag) {
+      debug$z.log('== All Timing elements ==', 1);
       this.allTimingDomElements.forEach( de => {
-        debug$w.log(`[fileName]: ${de.tagName}`, true);
+        debug$z.log(`[fileName]: ${de.tagName}`, true);
       });
     }
   }
@@ -20771,11 +20994,11 @@ class TimingInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$v = new DebugLogging('domCache', false);
-debug$v.flag = false;
-debug$v.showDomTexts = false;
-debug$v.showDomElems = false;
-debug$v.showTree = false;
+const debug$y = new DebugLogging('domCache', false);
+debug$y.flag = false;
+debug$y.showDomTexts = false;
+debug$y.showDomElems = false;
+debug$y.showTree = false;
 
 const skipableElements = [
   'base',
@@ -21120,24 +21343,24 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$v.flag) {
-      if (debug$v.showDomElems) {
-        debug$v.log(' === AllDomElements ===', true);
+    if (debug$y.flag) {
+      if (debug$y.showDomElems) {
+        debug$y.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$v.domElement(de);
+          debug$y.domElement(de);
         });
       }
 
-      if (debug$v.showDomTexts) {
-        debug$v.log(' === AllDomTexts ===', true);
+      if (debug$y.showDomTexts) {
+        debug$y.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$v.domText(dt);
+          debug$y.domText(dt);
         });
       }
 
-      if (debug$v.showTree) {
-        debug$v.log(' === DOMCache Tree ===', true);
-        debug$v.domElement(this.startingDomElement);
+      if (debug$y.showTree) {
+        debug$y.log(' === DOMCache Tree ===', true);
+        debug$y.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
@@ -21147,8 +21370,8 @@ class DOMCache {
 /* audioRules.js */
 
 /* Constants */
-const debug$u = new DebugLogging('Audio Rules', false);
-debug$u.flag = false;
+const debug$x = new DebugLogging('Audio Rules', false);
+debug$x.flag = false;
 
 
 /*
@@ -21301,8 +21524,8 @@ const audioRules = [
 /* bypassRules.js */
 
 /* Constants */
-const debug$t = new DebugLogging('Bypass Rules', false);
-debug$t.flag = false;
+const debug$w = new DebugLogging('Bypass Rules', false);
+debug$w.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21362,7 +21585,7 @@ const bypassRules = [
 
         if ((typeof href === 'string') && href.indexOf('#') >= 0) {
           let  targetId = href.slice(href.indexOf('#')+1);
-          debug$t.log(`[BYPASS 1][targetId]: ${targetId}`);
+          debug$w.log(`[BYPASS 1][targetId]: ${targetId}`);
 
           if (bypassTargets.includes(targetId)) {
             hasBypassLink = true;
@@ -21411,8 +21634,8 @@ const bypassRules = [
 /* colorRules.js */
 
 /* Constants */
-const debug$s = new DebugLogging('Color Rules', false);
-debug$s.flag = false;
+const debug$v = new DebugLogging('Color Rules', false);
+debug$v.flag = false;
 
 
 /*
@@ -21444,14 +21667,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$s.flag && debug$s.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$v.flag && debug$v.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      debug$s.flag && debug$s.log(`===== COLOR 1 ====`);
+      debug$v.flag && debug$v.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21559,14 +21782,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$s.flag && debug$s.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$v.flag && debug$v.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 7.1;
       const MIN_CCR_LARGE_FONT  = 4.5;
 
-      debug$s.flag && debug$s.log(`===== COLOR 3 ====`);
+      debug$v.flag && debug$v.log(`===== COLOR 3 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21635,8 +21858,8 @@ const colorRules = [
 /* errorRules.js */
 
 /* Constants */
-const debug$r = new DebugLogging('Error Rules', false);
-debug$r.flag = false;
+const debug$u = new DebugLogging('Error Rules', false);
+debug$u.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21859,8 +22082,8 @@ const errorRules = [
 /* frameRules.js */
 
 /* Constants */
-const debug$q = new DebugLogging('Frame Rules', false);
-debug$q.flag = false;
+const debug$t = new DebugLogging('Frame Rules', false);
+debug$t.flag = false;
 
 
 /*
@@ -21942,8 +22165,8 @@ const frameRules = [
 /* controlRules.js */
 
 /* Constants */
-const debug$p = new DebugLogging('Control Rules', false);
-debug$p.flag = false;
+const debug$s = new DebugLogging('Control Rules', false);
+debug$s.flag = false;
 
 
 /*
@@ -22625,8 +22848,8 @@ const controlRules = [
 /* headingRules.js */
 
 /* Constants */
-const debug$o = new DebugLogging('Heading Rules', false);
-debug$o.flag = false;
+const debug$r = new DebugLogging('Heading Rules', false);
+debug$r.flag = false;
 
 /*
  * OpenA11y Rules
@@ -23013,11 +23236,77 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
   return nestingErrors;
 }
 
+/* htmlRules.js */
+
+/* Constants */
+const debug$q = new DebugLogging('HTML Rules', false);
+debug$q.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: HTML Rules
+ */
+
+const htmlRules = [
+
+  /**
+   * @object HTML_1
+   *
+   * @desc Change marquee elements to use accessible techniques
+   */
+
+  { rule_id             : 'HTML_1',
+    last_updated        : '2023-09-01',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '2.3.1',
+    wcag_related_ids    : ['2.2.2', '4.1.1'],
+    target_resources    : ['marquee'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+
+        if (de.tagName === 'marquee') {
+          if (de.visibility.isVisibleToAT) {
+             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+
+/*
+
+      var TEST_RESULT    = TEST_RESULT;
+      var VISIBILITY     = VISIBILITY;
+
+      var dom_elements     = dom_cache.element_cache.dom_elements;
+      var dom_elements_len = dom_elements.length;
+
+      for (var i = 0; i < dom_elements_len; i++) {
+        var de = dom_elements[i];
+
+        if (de.tag_name === 'marquee') {
+          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
+             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.lang]);
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.lang]);
+          }
+        }
+      }
+*/
+    } // end validate function
+  }
+];
+
 /* imageRules.js */
 
 /* Constants */
-const debug$n = new DebugLogging('Image Rules', false);
-debug$n.flag = false;
+const debug$p = new DebugLogging('Image Rules', false);
+debug$p.flag = false;
 
 /*
  * OpenA11y Alliance Rules
@@ -23286,8 +23575,8 @@ const imageRules = [
 /* keyboardRules.js */
 
 /* Constants */
-const debug$m = new DebugLogging('Keyboard Rules', false);
-debug$m.flag = true;
+const debug$o = new DebugLogging('Keyboard Rules', false);
+debug$o.flag = true;
 
 /* helper functions */
 
@@ -23547,8 +23836,8 @@ const keyboardRules = [
 /* landmarkRules.js */
 
 /* Constants */
-const debug$l = new DebugLogging('Landmark Rules', false);
-debug$l.flag = false;
+const debug$n = new DebugLogging('Landmark Rules', false);
+debug$n.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24328,8 +24617,8 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 /* linkRules.js */
 
 /* Constants */
-const debug$k = new DebugLogging('Link Rules', false);
-debug$k.flag = false;
+const debug$m = new DebugLogging('Link Rules', false);
+debug$m.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24480,8 +24769,8 @@ const linkRules = [
 /* listRules.js */
 
 /* Constants */
-const debug$j = new DebugLogging('List Rules', false);
-debug$j.flag = false;
+const debug$l = new DebugLogging('List Rules', false);
+debug$l.flag = false;
 
 
 /*
@@ -24654,8 +24943,8 @@ const listRules = [
 /* navigationRules.js */
 
 /* Constants */
-const debug$i = new DebugLogging('Navigation Rules', false);
-debug$i.flag = false;
+const debug$k = new DebugLogging('Navigation Rules', false);
+debug$k.flag = false;
 
 
 /* Helper Functions */
@@ -24900,11 +25189,62 @@ const navigationRules = [
   }
 ];
 
+/* readingOrderRules.js */
+
+/* Constants */
+const debug$j = new DebugLogging('Reading Order Rules', false);
+debug$j.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Reading Order Rules
+ */
+
+const readingOrderRules = [
+
+    /**
+     * @object ORDER_1
+     *
+     * @desc Reading order is meaningful when content is positioned using CSS
+     */
+
+  { rule_id             : 'ORDER_1',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.2',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate          : function (dom_cache, rule_result) {
+
+      const positionValues = [
+        'absolute',
+        'relative',
+        'fixed'];
+
+      dom_cache.allDomElements.forEach( de => {
+
+        debug$j.log(`[ORDER 1]: ${de.elemName} ${de.cssPosition}`);
+
+        if (positionValues.includes(de.cssPosition)) {
+          if (de.visibility.isVisibleToAT) {
+             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.position]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.position]);
+          }
+        }
+      });
+    } // end validate function
+  }
+];
+
 /* resizeRules.js */
 
 /* Constants */
-const debug$h = new DebugLogging('Resize Rules', false);
-debug$h.flag = false;
+const debug$i = new DebugLogging('Resize Rules', false);
+debug$i.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24936,8 +25276,8 @@ const resizeRules = [
 /* sensoryRules.js */
 
 /* Constants */
-const debug$g = new DebugLogging('Sensory Rules', false);
-debug$g.flag = false;
+const debug$h = new DebugLogging('Sensory Rules', false);
+debug$h.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24970,8 +25310,8 @@ const sensoryRules = [
 /* tableRules.js */
 
 /* Constants */
-const debug$f = new DebugLogging('Table Rules', false);
-debug$f.flag = false;
+const debug$g = new DebugLogging('Table Rules', false);
+debug$g.flag = false;
 
 /*
  * OpenA11y Rules
@@ -25388,8 +25728,8 @@ const tableRules = [
 /* timingRules.js */
 
 /* Constants */
-const debug$e = new DebugLogging('Timing Rules', false);
-debug$e.flag = false;
+const debug$f = new DebugLogging('Timing Rules', false);
+debug$f.flag = false;
 
 /*
  * OpenA11y Rules
@@ -25484,6 +25824,184 @@ const timingRules = [
     } // end validate function
   }
 ];
+
+/* titleRules.js */
+
+/* Constants */
+const debug$e = new DebugLogging('Title Rules', false);
+debug$e.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Title Rules
+ */
+
+const titleRules = [
+
+  /**
+   * @object TITLE_1
+   *
+   * @desc the title element text content must describe the purpose or content of the page
+   */
+
+  { rule_id             : 'TITLE_1',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.2',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['Page', 'title'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$e.log(`[Title 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+
+/*
+
+        var TEST_RESULT = TEST_RESULT;
+
+        var title_element  = dom_cache.headings_landmarks_cache.title_element;
+
+        if (dom_cache.document_has_title) {
+
+          if (title_element.name_for_comparison.length) {
+            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, title_element, 'PAGE_MC_1', []);
+          }
+          else {
+            rule_result.addResult(TEST_RESULT.FAIL, title_element, 'PAGE_FAIL_1', []);
+          }
+        }
+        else {
+          rule_result.addResult(TEST_RESULT.FAIL, title_element, 'PAGE_FAIL_2', []);
+        }
+*/
+      } // end validate function
+  },
+
+  /**
+   * @object TITLE_2
+   *
+   * @desc The words in the @h1@ content must be part of the title element text content.
+   *
+   */
+
+  { rule_id             : 'TITLE_2',
+    last_updated        : '2023-08-25',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.2',
+    wcag_related_ids    : ['1.3.1', '2.4.6'],
+    target_resources    : ['Page', 'title', 'h1'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug$e.log(`[Title 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+
+/*
+
+        function compareTextContent(s1, s2) {
+
+          var words = s2.split(' ');
+          var words_len = words.length;
+          var words_match = 0;
+          var words_not_matched = 0;
+          var characters_match = 0;
+          var characters_not_matched = 0;
+
+  //        logger.debug("Comparison: " + s1 + "/" + s2);
+
+          for (var i = 0; i < words_len; i++) {
+            var w = words[i];
+            if (s1.indexOf(w) >= 0) {
+              characters_match += w.length;
+              words_match++;
+            }
+            else {
+              characters_not_matched += w.length;
+              words_not_matched++;
+            }
+          }
+
+  //        logger.debug("Match Information: " + (characters_match * words_match) + "/" + (characters_not_matched * words_not_matched));
+
+          if (characters_not_matched === 0) return true;
+
+          var p = (100 * characters_match * words_match) / ((characters_match  * words_match) + (characters_not_matched * words_not_matched ));
+
+  //        logger.debug("Match Percentage: " + p);
+
+          if (p > 80) return true;
+
+          return false;
+        }
+
+        var TEST_RESULT = TEST_RESULT;
+        var VISIBILITY  = VISIBILITY;
+
+        var title_element  = dom_cache.headings_landmarks_cache.title_element;
+        var page_element   = dom_cache.headings_landmarks_cache.page_element;
+        var h1_elements    = dom_cache.headings_landmarks_cache.h1_elements;
+        var visible_h1_element_count = 0;
+        var passed_h1_element_count  = 0;
+        var i, h1, de, cs;
+
+  //      logger.debug('[RULE][TITLE 2] Title: ' + title_element.name_for_comparison + '(' + title_element.name_for_comparison.length + ')');
+
+        if (title_element.name_for_comparison.length === 0) {
+          rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_1', []);
+        }
+        else {
+
+          var h1_count = h1_elements.length;
+
+          for(i = 0; i < h1_count; i++) {
+            h1 = h1_elements[i];
+            de = h1.dom_element;
+            cs = de.computed_style;
+            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) visible_h1_element_count += 1;
+          }
+
+          for(i = 0; i < h1_count; i++) {
+            h1 = h1_elements[i];
+            de = h1.dom_element;
+            cs = de.computed_style;
+
+  //          logger.debug('[RULE][TITLE 2] H1: ' + h1.name_for_comparison + '(' + h1.name_for_comparison.length + ')');
+
+            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
+              if (h1.name_for_comparison.length) {
+                if (compareTextContent(title_element.name_for_comparison, h1.name_for_comparison)) {
+                  rule_result.addResult(TEST_RESULT.PASS, h1, 'ELEMENT_PASS_1', []);
+                  passed_h1_element_count++;
+                }
+                else {
+                  if (visible_h1_element_count > 2) {
+                    rule_result.addResult(TEST_RESULT.MANUAL_CHECK, h1, 'ELEMENT_MC_1', []);
+                  }
+                  else {
+                    rule_result.addResult(TEST_RESULT.FAIL, h1, 'ELEMENT_FAIL_1', []);
+                  }
+                }
+              }
+              else {
+                rule_result.addResult(TEST_RESULT.FAIL, h1, 'ELEMENT_FAIL_2', []);
+              }
+            }
+            else {
+              rule_result.addResult(TEST_RESULT.HIDDEN, h1, 'ELEMENT_HIDDEN_1', []);
+            }
+          }
+
+          if (visible_h1_element_count === 0) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_2', []);
+          else if (visible_h1_element_count > 2) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
+          else if (visible_h1_element_count !== passed_h1_element_count) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_4', []);
+          else if (visible_h1_element_count === 1) rule_result.addResult(TEST_RESULT.PASS, page_element, 'PAGE_PASS_1', []);
+          else rule_result.addResult(TEST_RESULT.PASS, page_element, 'PAGE_PASS_2', []);
+        }
+        */
+      } // end validate function
+    }
+ ];
 
 /* videoRules.js */
 
@@ -27269,18 +27787,20 @@ addToArray(errorRules);
 addToArray(frameRules);
 addToArray(controlRules);
 addToArray(headingRules);
-// addToArray(htmlRules);
+addToArray(htmlRules);
 addToArray(imageRules);
 addToArray(keyboardRules);
 addToArray(landmarkRules);
+// addToArray(languageRules);
 // addToArray(layoutRules);
 addToArray(linkRules);
 addToArray(listRules);
 addToArray(navigationRules);
-// addToArray(readingOrderRules);
+addToArray(readingOrderRules);
 addToArray(resizeRules);
 addToArray(sensoryRules);
 addToArray(tableRules);
+addToArray(titleRules);
 addToArray(timingRules);
 addToArray(videoRules);
 addToArray(widgetRules);

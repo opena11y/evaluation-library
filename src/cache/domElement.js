@@ -106,6 +106,18 @@ export default class DOMElement {
     this.isLandmark  = this.checkForLandamrk();
     this.isHeading   = this.role === 'heading';
 
+    // CSS Position property and size information
+
+    const cssStyle = window.getComputedStyle(elementNode, null);
+    const elemRect = elementNode.getBoundingClientRect();
+
+    this.cssPosition = cssStyle.getPropertyValue('position');
+
+    this.top      = window.scrollY + elemRect.top;
+    this.left     = window.scrollX + elemRect.left;
+    this.height   = elemRect.height;
+    this.width    = elemRect.width;
+
     this.children = [];
 
     // Information on rule results associated with this element

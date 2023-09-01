@@ -1,4 +1,4 @@
-/* languageRules.js */
+/* titleRules.js */
 
 import {REFERENCES} from '../../constants.js';
 
@@ -6,7 +6,7 @@ import {REFERENCES} from '../../constants.js';
 /*       OpenA11y Rules Localized Language Support (NLS): English      */
 /* --------------------------------------------------------------------------- */
 
-export const languageRules = {
+export const titleRules = {
 
     TITLE_1: {
         ID:            'Title 1',
