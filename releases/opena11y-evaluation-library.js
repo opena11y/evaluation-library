@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$U = new DebugLogging('constants', false);
+const debug$V = new DebugLogging('constants', false);
 
 const VERSION = '2.0.beta1';
 
@@ -600,13 +600,13 @@ class Constants {
  */
 
 function getGuidelineId(sc) {
-  debug$U.flag && debug$U.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$V.flag && debug$V.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$U.flag && debug$U.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$V.flag && debug$V.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -902,7 +902,7 @@ function  usesARIALabeling (node) {
 /* controlInfo.js */
 
 /* Constants */
-const debug$T = new DebugLogging('ControlInfo', false);
+const debug$U = new DebugLogging('ControlInfo', false);
 
 /**
  * @class ControlElement
@@ -1062,7 +1062,7 @@ class ControlElement {
       prefix = '';
     }
     this.childControlElements.forEach( ce => {
-      debug$T.domElement(ce.domElement, prefix);
+      debug$U.domElement(ce.domElement, prefix);
       ce.showControlInfo(prefix + '  ');
     });
   }
@@ -1303,15 +1303,15 @@ class ControlInfo {
    */
 
   showControlInfo () {
-    if (debug$T.flag) {
-      debug$T.log('== Control Tree ==', 1);
+    if (debug$U.flag) {
+      debug$U.log('== Control Tree ==', 1);
       this.childControlElements.forEach( ce => {
-        debug$T.domElement(ce.domElement);
+        debug$U.domElement(ce.domElement);
         ce.showControlInfo('  ');
       });
-      debug$T.log('== Forms ==', 1);
+      debug$U.log('== Forms ==', 1);
       this.allFormElements.forEach( ce => {
-        debug$T.domElement(ce.domElement);
+        debug$U.domElement(ce.domElement);
       });
     }
   }
@@ -6110,8 +6110,8 @@ const designPatterns = {
 /* ariaInfo.js */
 
 /* Constants */
-const debug$S = new DebugLogging('AriaInfo', false);
-debug$S.flag = false;
+const debug$T = new DebugLogging('AriaInfo', false);
+debug$T.flag = false;
 
 /* Debug helper functions */
 
@@ -6221,7 +6221,11 @@ class AriaInfo {
     this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
 
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
-    this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
+    this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;
+
+    this.flowTo = node.hasAttribute('aria-flowto') ?
+                  node.getAttribute('aria-flowto') :
+                  '';
 
     // for range widgets
     if (this.isRange) {
@@ -6334,15 +6338,15 @@ class AriaInfo {
     }
 
 
-    if (debug$S.flag) {
-      node.attributes.length && debug$S.log(`${node.outerHTML}`, 1);
-      debug$S.log(`[         isWidget]: ${this.isWidget}`);
-      debug$S.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
-      debug$S.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
-      debug$S.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
-      debug$S.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
-      debug$S.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
-      debug$S.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
+    if (debug$T.flag) {
+      node.attributes.length && debug$T.log(`${node.outerHTML}`, 1);
+      debug$T.log(`[         isWidget]: ${this.isWidget}`);
+      debug$T.log(`[invalidAttrValues]: ${debugAttrs(this.invalidAttrValues)}`);
+      debug$T.log(`[      invalidRefs]: ${debugRefs(this.invalidRefs)}`);
+      debug$T.log(`[ unsupportedAttrs]: ${debugAttrs(this.unsupportedAttrs)}`);
+      debug$T.log(`[  deprecatedAttrs]: ${debugAttrs(this.deprecatedAttrs)}`);
+      debug$T.log(`[    requiredAttrs]: ${debugAttrs(this.requiredAttrs)} (${Array.isArray(this.requiredAttrs)})`);
+      debug$T.log(`[     invalidAttrs]: ${debugAttrs(this.invalidAttrs)}`);
     }
   }
 
@@ -6546,7 +6550,7 @@ class AriaInfo {
 /* colorContrast.js */
 
 /* Constants */
-const debug$R = new DebugLogging('colorContrast', false);
+const debug$S = new DebugLogging('colorContrast', false);
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -6601,9 +6605,9 @@ class ColorContrast {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
     let style = window.getComputedStyle(elementNode, null);
 
-    if (debug$R.flag) {
-      debug$R.separator();
-      debug$R.tag(elementNode);
+    if (debug$S.flag) {
+      debug$S.separator();
+      debug$S.tag(elementNode);
     }
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -6625,11 +6629,11 @@ class ColorContrast {
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
-    if (debug$R.flag) {
-      debug$R.log(`[                    opacity]: ${this.opacity}`);
-      debug$R.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug$R.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
-      debug$R.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
+    if (debug$S.flag) {
+      debug$S.log(`[                    opacity]: ${this.opacity}`);
+      debug$S.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug$S.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug$S.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
 
@@ -6716,10 +6720,10 @@ class ColorContrast {
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
 
-      debug$R.flag && debug$R.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
+      debug$S.flag && debug$S.log(`[normalizeBackgroundColor][parentColorContrast]: ${parentColorContrast}`);
 
       if (parentColorContrast) {
-        debug$R.flag && debug$R.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
+        debug$S.flag && debug$S.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
       }
       else {
@@ -6932,7 +6936,7 @@ class ColorContrast {
 /* eventInfo.js */
 
 /* Constants */
-const debug$Q = new DebugLogging('EventInfo', false);
+const debug$R = new DebugLogging('EventInfo', false);
 
 /**
  * @class EventInfo
@@ -6945,7 +6949,7 @@ class EventInfo {
     this.hasClick  = node.hasAttribute('onclick');
     this.hasChange = node.hasAttribute('onchange');
 
-    if (debug$Q.flag) {
+    if (debug$R.flag) {
       console.log(`[hasClick ]: ${this.hasClick}`);
       console.log(`[hasChange]: ${this.hasChange}`);
     }
@@ -8545,7 +8549,7 @@ const ariaInHTMLInfo = {
 /* ariaInHtml.js */
 
 /* Constants */
-const debug$P = new DebugLogging('ariaInHtml', false);
+const debug$Q = new DebugLogging('ariaInHtml', false);
 const higherLevelElements = [
   'article',
   'aside',
@@ -8746,11 +8750,11 @@ function getAriaInHTMLInfo (node) {
     };
   }
 
-  if (debug$P.flag) {
+  if (debug$Q.flag) {
     if (tagName === 'h2') {
-      debug$P.tag(node);
+      debug$Q.tag(node);
     }
-    debug$P.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
+    debug$Q.log(`[elemInfo][id]: ${elemInfo.id} (${tagName})`);
   }
 
   return elemInfo;
@@ -8870,7 +8874,7 @@ function isCellInLayoutTable  (node) {
 /* visibility.js */
 
 /* Constants */
-const debug$O = new DebugLogging('visibility', false);
+const debug$P = new DebugLogging('visibility', false);
 
 /**
  * @class Visibility
@@ -8918,17 +8922,17 @@ class Visibility {
       this.isVisibleToAT = false;
     }
 
-    if (debug$O.flag) {
-      debug$O.separator();
-      debug$O.tag(elementNode);
-      debug$O.log('[          isHidden]: ' + this.isHidden);
-      debug$O.log('[      isAriaHidden]: ' + this.isAriaHidden);
-      debug$O.log('[     isDisplayNone]: ' + this.isDisplayNone);
-      debug$O.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
-      debug$O.log('[     isSmallHeight]: ' + this.isSmallHeight);
-      debug$O.log('[       isSmallFont]: ' + this.isSmallFont);
-      debug$O.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
-      debug$O.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
+    if (debug$P.flag) {
+      debug$P.separator();
+      debug$P.tag(elementNode);
+      debug$P.log('[          isHidden]: ' + this.isHidden);
+      debug$P.log('[      isAriaHidden]: ' + this.isAriaHidden);
+      debug$P.log('[     isDisplayNone]: ' + this.isDisplayNone);
+      debug$P.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
+      debug$P.log('[     isSmallHeight]: ' + this.isSmallHeight);
+      debug$P.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$P.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
+      debug$P.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
   }
 
@@ -9241,8 +9245,8 @@ function isSelectElement (element) {
 /*
 *   namefrom.js
 */
-const debug$N = new DebugLogging('nameFrom', false);
-debug$N.flag = false;
+const debug$O = new DebugLogging('nameFrom', false);
+debug$O.flag = false;
 
 /*
 *   @function getElementContents
@@ -9388,7 +9392,7 @@ function nameFromLabelElement (doc, element) {
         if (name.length) return { name: normalize(name), source: 'label reference' };
       }
     } catch (error) {
-      debug$N.log(`[nameFromLabelElement][error]: ${error}`);
+      debug$O.log(`[nameFromLabelElement][error]: ${error}`);
     }
   }
 
@@ -9802,8 +9806,8 @@ const  elementsThatAllowNameFromContents = [
 'h6',
 'summary'
 ];
-const debug$M = new DebugLogging('getAccName', false);
-debug$M.flag = false;
+const debug$N = new DebugLogging('getAccName', false);
+debug$N.flag = false;
 
 /*
 *   @function getAccessibleName
@@ -10093,8 +10097,8 @@ function doesElementAllowNameFromContents (element) {
 /* domElement.js */
 
 /* Constants */
-const debug$L = new DebugLogging('DOMElement', false);
-debug$L.flag = false;
+const debug$M = new DebugLogging('DOMElement', false);
+debug$M.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -10432,12 +10436,12 @@ class DOMElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    if (debug$L.flag) {
+    if (debug$M.flag) {
       this.children.forEach( domItem => {
         if (domItem.isDomText) {
-          debug$L.domText(domItem, prefix);
+          debug$M.domText(domItem, prefix);
         } else {
-          debug$L.domElement(domItem, prefix);
+          debug$M.domElement(domItem, prefix);
           domItem.showDomElementTree(prefix + '   ');
         }
       });
@@ -10530,7 +10534,7 @@ function checkTabIndex (node) {
 /* domText.js */
 
 /* Constants */
-const debug$K = new DebugLogging('domText', false);
+const debug$L = new DebugLogging('domText', false);
 
 /**
  * @class DOMText
@@ -10549,8 +10553,8 @@ class DOMText {
   constructor (parentDomElement, textNode) {
     this.parentDomElement = parentDomElement;
     this.text = textNode.textContent.trim();
-    if (debug$K.flag) {
-      debug$K.log(`[text]: ${this.text}`);
+    if (debug$L.flag) {
+      debug$L.log(`[text]: ${this.text}`);
     }
   }
 
@@ -10613,7 +10617,7 @@ class DOMText {
 /* iframeInfo.js */
 
 /* Constants */
-const debug$J = new DebugLogging('iframeInfo', false);
+const debug$K = new DebugLogging('iframeInfo', false);
 
 /**
  * @class IFrameElement
@@ -10631,9 +10635,9 @@ class IFrameElement {
   }
 
   showInfo () {
-    if (debug$J.flag) {
-      debug$J.log(`[          src]: ${this.src}`);
-      debug$J.log(`[isCrossDomain]: ${this.isCrossDomain}`);
+    if (debug$K.flag) {
+      debug$K.log(`[          src]: ${this.src}`);
+      debug$K.log(`[isCrossDomain]: ${this.isCrossDomain}`);
     }
   }
 }
@@ -10669,8 +10673,8 @@ class IframeInfo {
    */
 
   showIFrameInfo () {
-    if (debug$J.flag) {
-      debug$J.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
+    if (debug$K.flag) {
+      debug$K.log(`== ${this.allIFrameElements.length} IFrames ==`, 1);
       this.allIFrameElements.forEach( ife => {
         ife.showInfo();
       });
@@ -10681,7 +10685,7 @@ class IframeInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$I = new DebugLogging('idInfo', false);
+const debug$J = new DebugLogging('idInfo', false);
 
 /**
  * @class idInfo
@@ -10724,10 +10728,10 @@ class IdInfo {
    */
 
   showIdInfo () {
-    if (debug$I.flag) {
-      debug$I.log('== All Links ==', 1);
+    if (debug$J.flag) {
+      debug$J.log('== All Links ==', 1);
       this.idCounts.for( id => {
-        debug$I.log(`[${id}]: ${this.idCounts[id]}`);
+        debug$J.log(`[${id}]: ${this.idCounts[id]}`);
       });
     }
   }
@@ -10736,7 +10740,7 @@ class IdInfo {
 /* imageInfo.js */
 
 /* Constants */
-const debug$H = new DebugLogging('imageInfo', false);
+const debug$I = new DebugLogging('imageInfo', false);
 
 /**
  * @class ImageElement
@@ -10929,22 +10933,22 @@ class ImageInfo {
    */
 
   showImageInfo () {
-    if (debug$H.flag) {
-      debug$H.log('== All Image elements ==', 1);
+    if (debug$I.flag) {
+      debug$I.log('== All Image elements ==', 1);
       this.allImageElements.forEach( ie => {
-        debug$H.log(`[fileName]: ${ie.fileName}`, true);
-        debug$H.log(`[    role]: ${ie.domElement.role}`);
-        debug$H.log(`[    name]: ${ie.domElement.accName.name}`);
-        debug$H.log(`[  source]: ${ie.domElement.accName.source}`);
-        debug$H.log(`[  length]: ${ie.domElement.accName.name.length}`);
+        debug$I.log(`[fileName]: ${ie.fileName}`, true);
+        debug$I.log(`[    role]: ${ie.domElement.role}`);
+        debug$I.log(`[    name]: ${ie.domElement.accName.name}`);
+        debug$I.log(`[  source]: ${ie.domElement.accName.source}`);
+        debug$I.log(`[  length]: ${ie.domElement.accName.name.length}`);
       });
-      debug$H.log('== All SVG domElements  ==', 1);
+      debug$I.log('== All SVG domElements  ==', 1);
       this.allSVGDomElements.forEach( de => {
-        debug$H.domElement(de);
+        debug$I.domElement(de);
       });
-      debug$H.log('== All MapElements ==', 1);
+      debug$I.log('== All MapElements ==', 1);
       this.allMapElements.forEach( me => {
-        debug$H.domElement(me.domElement);
+        debug$I.domElement(me.domElement);
       });
     }
   }
@@ -10953,7 +10957,7 @@ class ImageInfo {
 /* linkInfo.js */
 
 /* Constants */
-const debug$G = new DebugLogging('linkInfo', false);
+const debug$H = new DebugLogging('linkInfo', false);
 
 /**
  * @class LinkInfo
@@ -10999,10 +11003,10 @@ class LinkInfo {
    */
 
   showLinkInfo () {
-    if (debug$G.flag) {
-      debug$G.log('== All Links ==', 1);
+    if (debug$H.flag) {
+      debug$H.log('== All Links ==', 1);
       this.allLinkDomElements.forEach( de => {
-        debug$G.domElement(de);
+        debug$H.domElement(de);
       });
     }
   }
@@ -11011,7 +11015,7 @@ class LinkInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$F = new DebugLogging('ListInfo', false);
+const debug$G = new DebugLogging('ListInfo', false);
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
@@ -11032,8 +11036,8 @@ class ListElement {
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
 
-    if (debug$F.flag) {
-      debug$F.log('');
+    if (debug$G.flag) {
+      debug$G.log('');
     }
   }
 
@@ -11058,9 +11062,9 @@ class ListElement {
     if (typeof prefix !== 'string') {
       prefix = '';
     }
-    debug$F.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
+    debug$G.log(`${prefix}[List Count]: ${this.childListElements.length} [Link Count]: ${this.linkCount}`);
     this.childListElements.forEach( le => {
-      debug$F.domElement(le.domElement, prefix);
+      debug$G.domElement(le.domElement, prefix);
       le.showListInfo(prefix + '  ');
     });
   }
@@ -11168,16 +11172,16 @@ class ListInfo {
    */
 
   showListInfo () {
-    if (debug$F.flag) {
-      debug$F.log('== All ListElements ==', 1);
-      debug$F.log(`[linkCount]: ${this.linkCount}`);
+    if (debug$G.flag) {
+      debug$G.log('== All ListElements ==', 1);
+      debug$G.log(`[linkCount]: ${this.linkCount}`);
       this.allListElements.forEach( le => {
-        debug$F.domElement(le.domElement);
+        debug$G.domElement(le.domElement);
       });
-      debug$F.log('== List Tree ==', 1);
-      debug$F.log(`[linkCount]: ${this.linkCount}`);
+      debug$G.log('== List Tree ==', 1);
+      debug$G.log(`[linkCount]: ${this.linkCount}`);
       this.childListElements.forEach( le => {
-        debug$F.domElement(le.domElement);
+        debug$G.domElement(le.domElement);
         le.showListInfo('  ');
       });
     }
@@ -11187,8 +11191,8 @@ class ListInfo {
 /* listInfo.js */
 
 /* Constants */
-const debug$E = new DebugLogging('MediaInfo', false);
-debug$E.flag = false;
+const debug$F = new DebugLogging('MediaInfo', false);
+debug$F.flag = false;
 
 /**
  * @class MediaElement
@@ -11426,25 +11430,25 @@ class MediaInfo {
    */
 
   showListInfo () {
-    if (debug$E.flag) {
-      debug$E.log('== Audio Elements ==', 1);
+    if (debug$F.flag) {
+      debug$F.log('== Audio Elements ==', 1);
       this.audioElements.forEach( ae => {
-        debug$E.log(ae);
+        debug$F.log(ae);
       });
 
-      debug$E.log('== Video Elements ==', 1);
+      debug$F.log('== Video Elements ==', 1);
       this.videoElements.forEach( ve => {
-        debug$E.log(ve);
+        debug$F.log(ve);
       });
 
-      debug$E.log('== Object Elements ==', 1);
+      debug$F.log('== Object Elements ==', 1);
       this.objectElements.forEach( oe => {
-        debug$E.log(oe);
+        debug$F.log(oe);
       });
 
-      debug$E.log('== Embed Elements ==', 1);
+      debug$F.log('== Embed Elements ==', 1);
       this.embedElements.forEach( ee => {
-        debug$E.log(ee);
+        debug$F.log(ee);
       });
 
 
@@ -11455,7 +11459,7 @@ class MediaInfo {
 /* structureInfo.js */
 
 /* Constants */
-const debug$D = new DebugLogging('structureInfo', false);
+const debug$E = new DebugLogging('structureInfo', false);
 
 /**
  * @class LandmarkElement
@@ -11494,11 +11498,11 @@ class LandmarkElement {
       prefix = '';
     }
     this.childLandmarkElements.forEach( le => {
-      debug$D.domElement(le.domElement, prefix);
+      debug$E.domElement(le.domElement, prefix);
       le.showLandmarkInfo(prefix + '  ');
     });
     this.childHeadingDomElements.forEach( h => {
-      debug$D.domElement(h, prefix);
+      debug$E.domElement(h, prefix);
     });
   }
 
@@ -11628,27 +11632,27 @@ class StructureInfo {
    */
 
   showStructureInfo () {
-    if (debug$D.flag) {
-      debug$D.log('== All Headings ==', 1);
+    if (debug$E.flag) {
+      debug$E.log('== All Headings ==', 1);
       this.allHeadingDomElements.forEach( h => {
-        debug$D.domElement(h);
+        debug$E.domElement(h);
       });
-      debug$D.log('== All Landmarks ==', 1);
+      debug$E.log('== All Landmarks ==', 1);
       this.allLandmarkElements.forEach( le => {
-        debug$D.domElement(le.domElement);
+        debug$E.domElement(le.domElement);
       });
-      debug$D.log('== Landmarks By Doc ==', 1);
+      debug$E.log('== Landmarks By Doc ==', 1);
       this.landmarkElementsByDoc.forEach( (les, index) => {
-        debug$D.log(`Document Index: ${index} (${Array.isArray(les)})`);
+        debug$E.log(`Document Index: ${index} (${Array.isArray(les)})`);
         if (Array.isArray(les)) {
           les.forEach(le => {
-            debug$D.domElement(le.domElement);
+            debug$E.domElement(le.domElement);
           });
         }
       });
-      debug$D.log('== Structure Tree ==', 1);
+      debug$E.log('== Structure Tree ==', 1);
       this.childLandmarkElements.forEach( le => {
-        debug$D.domElement(le.domElement);
+        debug$E.domElement(le.domElement);
         le.showLandmarkInfo('  ');
       });
     }
@@ -17073,6 +17077,184 @@ const languageRules$1 = {
     }
 };
 
+/* layoutRules.js */
+
+/* --------------------------------------------------------------------------- */
+/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/* --------------------------------------------------------------------------- */
+
+const layoutRules$1 = {
+  LAYOUT_1: {
+      ID:                    'Layout 1',
+      DEFINITION:            'Layout tables must organize content in a meaningful sequence.',
+      SUMMARY:               'Layout tables must have meaningful sequence',
+      TARGET_RESOURCES_DESC: '@table@ elements used for layout',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:    'Verify document has a meaningful sequence when layout table markup is disabled.  If content does not have a meaningful sequence, reorganize content on the page to have a meaningful sequence when layout tables are disabled.',
+        MANUAL_CHECK_P:    'Verify document has a meaningful sequence when layout table markup is disabled.  If content does not have a meaningful sequence, reorganize content on the page to have a meaningful sequence when layout tables are disabled.',
+        HIDDEN_S:          'One @table@ element that is hidden was not evaluated.',
+        HIDDEN_P:          '%N_H @table@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'No layout tables found on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_PASS_1:      'Page does not have any tables or layout tables are only one column wide.',
+        PAGE_MC_1:        '%1 tables being used for layout were found, verify the page has a meaningful sequence of content when table markup is disabled.',
+        ELEMENT_PASS_1:   'Table is one column wide, and will have the same document sequence when table markup is disabled.',
+        ELEMENT_MC_1:     'Verify document has a meaningful sequence of content when layout table markup is disabled.',
+        ELEMENT_MC_2:     'Verify the content in the %1x%2 layout table has a meaningful sequence of content when table markup is disabled, if the table is actually a data table add data table markup to give the table an effective caption and the data tables headings.',
+        ELEMENT_MC_3:     'Verify the nesting of tables for layout of content maintains a meaningful sequence of content when table markup is disabled.',
+        ELEMENT_HIDDEN_1: 'Meaningful sequence was not tested The layout @table@ is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'The sequence of the content (i.e. reading order) in a web page affects the conveyed meaning, especially for users of assistive technologies who cannot see the relationships between sections of content as provided by the visual cues in a graphical layout.',
+        'Using table markup for page layout is one way in which the DOM order of web content can be altered such that it makes sense visually, but the reading order rendered by assistive technologies is no longer meaningful.'
+      ],
+      TECHNIQUES: [
+        'Use CSS and web standards techniques for the coding of content, and the graphical styling and positioning of content.',
+        'Avoid using table markup for graphical layout, if you do use tables for layout make sure the content still is meaningful when the table markup is disabled.',
+        'Avoid using nested tables for layout, the deeper the level of nesting the more chance there of having a confusing sequence of content.',
+        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="presentation"@ attribute to clearly indicate the table markup is being used for layout.'
+      ],
+      MANUAL_CHECKS: [
+        'Use browser developer tools to disable table markup or enable a user stylesheet to change table cells to be rendered as block level elements.',
+        'With layout tables disabled, view the content to make sure the reading order and structure of the document makes sense.'
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification: Visual formatting model',
+          url:   'https://www.w3.org/TR/CSS21/visuren.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G57: Ordering the content in a meaningful sequence',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G57'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C6: Positioning content based on structural markup',
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/C6'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C8: Using CSS letter-spacing to control spacing within a word',
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/C8'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C27: Making the DOM order match the visual order',
+          url:   'https://www.w3.org/TR/WCAG20-TECHS/C27'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F1: Failure of Success Criterion 1.3.2 due to changing the meaning of content by positioning information with CSS',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F1'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F33'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F34: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to format tables in plain text content',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F34'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F49'
+        },
+        { type:  REFERENCES.OTHER,
+          title: 'Web Standards Group',
+          url:   'https://webstandardsgroup.org/standards/'
+        },
+        { type:  REFERENCES.OTHER,
+          title: 'W3C Standards',
+          url:   'https://www.w3.org/standards/'
+        }
+      ]
+  },
+  LAYOUT_2: {
+      ID:                    'Layout 2',
+      DEFINITION:            'Tables must not be nested for layout of content.',
+      SUMMARY:               'Do not nest layout tables',
+      TARGET_RESOURCES_DESC: '@table@ elements used for layout',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Update the markup and CSS on this page to remove the nesting of the layout table that is nested.',
+        FAIL_P:   'Update the markup and CSS on this page to remove the nesting of %N_F layout tables that are nested.',
+        HIDDEN_S: 'One table element that is hidden was not evaluated.',
+        HIDDEN_P: '%N_H table elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No table elements used for layout.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:    'Table is not nested with another layout table.',
+        ELEMENT_PASS_2:    'Table is one column wide, and will have the same document sequence when table markup is disabled.',
+        ELEMENT_FAIL_1:  'Update the markup and CSS on this page to remove the nesting of this layout table.',
+        ELEMENT_HIDDEN_1:  'Table nesting was not tested beacuse the @table@ is hidden from assistive technology.'
+      },
+      PURPOSES: [
+        'The sequence of content (i.e. order) in the document code affects its meaning, nesting layout tables often makes the sequence of content less understandable.'
+      ],
+      TECHNIQUES: [
+        'Use CSS and web standards techniques for the coding of content, and the graphical styling and positioning of content.',
+        'Avoid using table markup for graphical layout, if you do use tables for layout make sure the content still is meaningful when the table markup is disabled.',
+        'Avoid using nested tables for layout, the deeper the level of nesting the more chance there of having a confusing sequence of content.',
+        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="presentation"@ attribute to clearly indicate the table markup is being used for layout.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification: Visual formatting model',
+          url:   'https://www.w3.org/TR/CSS21/visuren.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F33: Failure of Success Criterion 1.3.1 and 1.3.2 due to using white space characters to create multiple columns in plain text content',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F33'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F49'
+        },
+        { type:  REFERENCES.OTHER,
+          title: 'Web Standards Group',
+          url:   'https://webstandardsgroup.org/standards/'
+        },
+        { type:  REFERENCES.OTHER,
+          title: 'W3C Standards',
+          url:   'https://www.w3.org/standards/'
+        }
+      ]
+  },
+  LAYOUT_3: {
+      ID:                    'Layout 3',
+      DEFINITION:            'Verify that the use of the @aria-flowto@ attribute supports the intended reading order of content on the page.',
+      SUMMARY:               'Verify @aria-flowto@ supports reading order',
+      TARGET_RESOURCES_DESC: 'Elements with @aria-flowto@ attribute',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:    'Verify the element with the @aria-flowto@ attribute contributes to the intended reading order of content on the page.',
+        MANUAL_CHECK_P:    'Verify the %N_MC elements with the @aria-flowto@ attributes contribute to the intended reading order of content on the page.',
+        HIDDEN_S:          'One element with @aria-flowto@ attribute that is hidden was not evaluated.',
+        HIDDEN_P:          '%N_H elements with @aria-flowto@ attribute that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No elements with @aria-flowto@ attribute found.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:     'Verify the @%1@ element with an @aria-reflow@ value of @%2@ on the defines a meaningful reading order.',
+        ELEMENT_HIDDEN_1: '@%1@ element with @aria-flowto@ value of @%2@ was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'The reading order of content on the page can, in some cases, be made easier to understand by users of assistive technology with the use of @aria-flowto@.',
+        'By default the reading order used by assistive technologies is the same as the DOM ordering of content.',
+        'When the DOM order of content is interspersed with unrelated content, @aria-flowto@ can be used to keep related content together.  For example a multi-column newspaper where an article spans several columns, @aria-flowto@ can be used to make it look like one continuous column to assistive technology.',
+        'The @aria-flowto@ reorganizes the content by changing the order of how the content is represented in accessibility Application Programming Interfaces (APIs) used by operating systems to communicate to screen readers.'
+      ],
+      TECHNIQUES: [
+        'The @aria-flowto@ attribute value contains a sequence of @idrefs@ that changes the reading order of content on the page as rendered by assistive technologies.',
+        'Since @aria-flowto@ changes reading order to assistive technologies, it is important to read the page with a screen reader to verify the content affected by the @aria-flowto@ places related information in the proper sequence.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: flowto property',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-flowto'
+        }
+      ]
+  }
+};
+
 /* linkRules.js */
 
 /* --------------------------------------------------------------------------- */
@@ -19945,7 +20127,7 @@ messages$1.rules = Object.assign(messages$1.rules, imageRules$1);
 messages$1.rules = Object.assign(messages$1.rules, keyboardRules$1);
 messages$1.rules = Object.assign(messages$1.rules, landmarkRules$1);
 messages$1.rules = Object.assign(messages$1.rules, languageRules$1);
-// messages.rules = Object.assign(messages.rules, layoutRules);
+messages$1.rules = Object.assign(messages$1.rules, layoutRules$1);
 messages$1.rules = Object.assign(messages$1.rules, linkRules$1);
 messages$1.rules = Object.assign(messages$1.rules, listRules$1);
 messages$1.rules = Object.assign(messages$1.rules, navigationRules$1);
@@ -19961,7 +20143,7 @@ messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 /* locale.js */
 
 /* Constants */
-const debug$C = new DebugLogging('locale', false);
+const debug$D = new DebugLogging('locale', false);
 
 var globalUseCodeTags = false;
 
@@ -20017,7 +20199,7 @@ function getCommonMessage(id, value=0) {
   if (!message) {
     message = `[common][error]: id="${id}"`;
   }
-  debug$C.flag && debug$C.log(`[${id}][${value}]: ${message}`);
+  debug$D.flag && debug$D.log(`[${id}][${value}]: ${message}`);
   return message;
 }
 
@@ -20117,7 +20299,7 @@ function getGuidelineInfo(guidelineId) {
     for (const g in principle.guidelines) {
       const guideline = principle.guidelines[g];
       if (guideline.id === guidelineId) {
-        debug$C.flag && debug$C.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+        debug$D.flag && debug$D.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
         return {
           num: g,
           title: guideline.title,
@@ -20127,7 +20309,7 @@ function getGuidelineInfo(guidelineId) {
       }
     }
   }
-  debug$C.flag && debug$C.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+  debug$D.flag && debug$D.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
   // Assume all rules
   return {
     title: messages[locale].common.allRules,
@@ -20160,7 +20342,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       for (const sc in guideline.success_criteria) {
         const success_criterion = guideline.success_criteria[sc];
         if (sc === successCriterionId) {
-          debug$C.flag && debug$C.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+          debug$D.flag && debug$D.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
           return {
             id: successCriterionId,
             level: success_criterion.level,
@@ -20172,7 +20354,7 @@ function getSuccessCriterionInfo(successCriterionId) {
       }
     }
   }
-  debug$C.flag && debug$C.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+  debug$D.flag && debug$D.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
   return null;
 }
 
@@ -20192,7 +20374,7 @@ function getSuccessCriterionInfo(successCriterionId) {
  */
 
 function getSuccessCriteriaInfo(successCriteriaIds) {
-  debug$C.flag && debug$C.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+  debug$D.flag && debug$D.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
   const scInfoArray = [];
   successCriteriaIds.forEach( sc => {
     scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -20239,7 +20421,7 @@ function getRuleId (ruleId) {
  */
 
 function getRuleDefinition (ruleId) {
-  debug$C.flag && debug$C.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+  debug$D.flag && debug$D.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
   return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
 }
 
@@ -20254,7 +20436,7 @@ function getRuleDefinition (ruleId) {
  */
 
 function getRuleSummary (ruleId) {
-  debug$C.flag && debug$C.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+  debug$D.flag && debug$D.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
   return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
 }
 
@@ -20269,7 +20451,7 @@ function getRuleSummary (ruleId) {
  */
 
 function getTargetResourcesDesc (ruleId) {
-  debug$C.flag && debug$C.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+  debug$D.flag && debug$D.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
   return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
 }
 
@@ -20288,7 +20470,7 @@ function getPurposes (ruleId) {
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
     purposes.push(transformElementMarkup(p));
   });
-  debug$C.flag && debug$C.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+  debug$D.flag && debug$D.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
 }
 
@@ -20307,7 +20489,7 @@ function getTechniques (ruleId) {
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
     techniques.push(transformElementMarkup(t));
   });
-  debug$C.flag && debug$C.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+  debug$D.flag && debug$D.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
 }
 
@@ -20335,8 +20517,8 @@ function getInformationLinks (ruleId) {
         url: infoLink.url
       }
     );
-    debug$C.flag && debug$C.log(`[infoLink][title]: ${infoLink.title}`);
-    debug$C.flag && debug$C.log(`[infoLink][  url]: ${infoLink.url}`);
+    debug$D.flag && debug$D.log(`[infoLink][title]: ${infoLink.title}`);
+    debug$D.flag && debug$D.log(`[infoLink][  url]: ${infoLink.url}`);
   });
   return infoLinks;
 }
@@ -20356,7 +20538,7 @@ function getManualChecks (ruleId) {
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
     manualChecks.push(transformElementMarkup(mc));
   });
-  debug$C.flag && debug$C.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+  debug$D.flag && debug$D.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
 }
 
@@ -20375,7 +20557,7 @@ function getRuleResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$C.flag && debug$C.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$D.flag && debug$D.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -20395,7 +20577,7 @@ function getBaseResultMessages (ruleId) {
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
     resultMessages[key] = transformElementMarkup(msgs[key]);
-    debug$C.flag && debug$C.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+    debug$D.flag && debug$D.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
 }
@@ -20463,12 +20645,12 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
 /* tableInfo.js */
 
 /* Constants */
-const debug$B = new DebugLogging('tableInfo', false);
-debug$B.flag = false;
-debug$B.rows = false;
-debug$B.cells = false;
-debug$B.tableTree = false;
-debug$B.headerCalc = false;
+const debug$C = new DebugLogging('tableInfo', false);
+debug$C.flag = false;
+debug$C.rows = false;
+debug$C.cells = false;
+debug$C.tableTree = false;
+debug$C.headerCalc = false;
 
 /**
  * @class TableElement
@@ -20487,6 +20669,10 @@ class TableElement {
 
     this.tableType = TABLE_TYPE.UNKNOWN;
     this.hasCaption = false;
+
+    this.nestingLevel = parentTableElement ?
+                        parentTableElement.nestingLevel + 1 :
+                        0;
 
     this.children = [];
 
@@ -20600,13 +20786,13 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
-        debug$B.headerCalc && debug$B.log(`${cell}`, 1);
+        debug$C.headerCalc && debug$C.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
             const node = cell.domElement.node;
             if (node.hasAttribute('headers')) {
               const ids = node.getAttribute('headers').split(' ');
-              debug$B.headesCalc && debug$B.log(`[headers]: ${ids.join(' ')}`);
+              debug$C.headesCalc && debug$C.log(`[headers]: ${ids.join(' ')}`);
               for (let i = 0; i < ids.length; i += 1) {
                 const de = domCache.getDomElementById(ids[i]);
                 if (de && de.accName.name) {
@@ -20621,7 +20807,7 @@ class TableElement {
               // get Column Headers
               for (let i = 1; i < row.rowNumber; i += 1) {
                 const hc = tableElement.getCell(i, cell.startColumn);
-                debug$B.headerCalc && debug$B.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
+                debug$C.headerCalc && debug$C.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
                     hc.domElement.accName.name) {
@@ -20632,7 +20818,7 @@ class TableElement {
               // get Row Headers
               for (let i = 1; i < cell.startColumn; i += 1) {
                 const hc = tableElement.getCell(row.rowNumber, i);
-                debug$B.headerCalc && debug$B.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
+                debug$C.headerCalc && debug$C.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
                     hc.domElement.accName.name) {
@@ -20644,7 +20830,7 @@ class TableElement {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
               }
             }
-            debug$B.headerCalc && debug$B.log(`${cell}`);
+            debug$C.headerCalc && debug$C.log(`${cell}`);
           }
         }
       });
@@ -20691,7 +20877,7 @@ class TableElement {
   }
 
   debugRowGroup (prefix, item) {
-    debug$B.log(`${prefix}${item}`);
+    debug$C.log(`${prefix}${item}`);
     if (item.isGroup) {
       item.children.forEach( child => {
         if (child) {
@@ -20702,14 +20888,14 @@ class TableElement {
   }
 
   debug () {
-    if (debug$B.flag) {
-      debug$B.log(`${this}`);
-      if (debug$B.tableTree) {
+    if (debug$C.flag) {
+      debug$C.log(`${this}`);
+      if (debug$C.tableTree) {
         this.children.forEach( child => {
           this.debugRowGroup('  ', child);
         });
       }
-      debug$B.separator();
+      debug$C.separator();
       for (let i = 0; i < this.rows.length; i += 1) {
         this.rows[i].debug('  ');
       }
@@ -20824,15 +21010,15 @@ class TableRow {
   }
 
   debug (prefix='') {
-    if (debug$B.flag && debug$B.rows) {
-      debug$B.log(`${prefix}${this}`);
+    if (debug$C.flag && debug$C.rows) {
+      debug$C.log(`${prefix}${this}`);
       for (let i = 0; i < this.cells.length; i += 1) {
         const cell = this.cells[i];
         if (cell) {
           cell.debug(prefix + '  ');
         }
         else {
-          debug$B.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
+          debug$C.log(`${prefix}[${this.rowNumber}][${i+1}]: undefined`);
         }
       }
     }
@@ -20913,8 +21099,8 @@ class TableCell {
   }
 
   debug (prefix='') {
-    if (debug$B.flag) {
-      debug$B.log(`${prefix}${this}`);
+    if (debug$C.flag) {
+      debug$C.log(`${prefix}${this}`);
     }
   }
 
@@ -21035,8 +21221,8 @@ class TableInfo {
    */
 
   showTableInfo () {
-    if (debug$B.flag) {
-      debug$B.log('== All Tables ==', 1);
+    if (debug$C.flag) {
+      debug$C.log('== All Tables ==', 1);
         this.allTableElements.forEach( te => {
           te.debug();
         });
@@ -21047,7 +21233,7 @@ class TableInfo {
 /* timingInfo.js */
 
 /* Constants */
-const debug$A = new DebugLogging('TimingInfo', false);
+const debug$B = new DebugLogging('TimingInfo', false);
 
 /**
  * @class TimingInfo
@@ -21098,10 +21284,10 @@ class TimingInfo {
    */
 
   showTimingInfo () {
-    if (debug$A.flag) {
-      debug$A.log('== All Timing elements ==', 1);
+    if (debug$B.flag) {
+      debug$B.log('== All Timing elements ==', 1);
       this.allTimingDomElements.forEach( de => {
-        debug$A.log(`[fileName]: ${de.tagName}`, true);
+        debug$B.log(`[fileName]: ${de.tagName}`, true);
       });
     }
   }
@@ -21110,11 +21296,11 @@ class TimingInfo {
 /* domCache.js */
 
 /* Constants */
-const debug$z = new DebugLogging('domCache', false);
-debug$z.flag = false;
-debug$z.showDomTexts = false;
-debug$z.showDomElems = false;
-debug$z.showTree = false;
+const debug$A = new DebugLogging('domCache', false);
+debug$A.flag = false;
+debug$A.showDomTexts = false;
+debug$A.showDomElems = false;
+debug$A.showTree = false;
 
 const skipableElements = [
   'base',
@@ -21468,24 +21654,24 @@ class DOMCache {
    */
 
   showDomElementTree () {
-    if (debug$z.flag) {
-      if (debug$z.showDomElems) {
-        debug$z.log(' === AllDomElements ===', true);
+    if (debug$A.flag) {
+      if (debug$A.showDomElems) {
+        debug$A.log(' === AllDomElements ===', true);
         this.allDomElements.forEach( de => {
-          debug$z.domElement(de);
+          debug$A.domElement(de);
         });
       }
 
-      if (debug$z.showDomTexts) {
-        debug$z.log(' === AllDomTexts ===', true);
+      if (debug$A.showDomTexts) {
+        debug$A.log(' === AllDomTexts ===', true);
         this.allDomTexts.forEach( dt => {
-          debug$z.domText(dt);
+          debug$A.domText(dt);
         });
       }
 
-      if (debug$z.showTree) {
-        debug$z.log(' === DOMCache Tree ===', true);
-        debug$z.domElement(this.startingDomElement);
+      if (debug$A.showTree) {
+        debug$A.log(' === DOMCache Tree ===', true);
+        debug$A.domElement(this.startingDomElement);
         this.startingDomElement.showDomElementTree(' ');
       }
     }
@@ -21495,8 +21681,8 @@ class DOMCache {
 /* audioRules.js */
 
 /* Constants */
-const debug$y = new DebugLogging('Audio Rules', false);
-debug$y.flag = false;
+const debug$z = new DebugLogging('Audio Rules', false);
+debug$z.flag = false;
 
 
 /*
@@ -21649,8 +21835,8 @@ const audioRules = [
 /* bypassRules.js */
 
 /* Constants */
-const debug$x = new DebugLogging('Bypass Rules', false);
-debug$x.flag = false;
+const debug$y = new DebugLogging('Bypass Rules', false);
+debug$y.flag = false;
 
 /*
  * OpenA11y Rules
@@ -21758,8 +21944,8 @@ const bypassRules = [
 /* colorRules.js */
 
 /* Constants */
-const debug$w = new DebugLogging('Color Rules', false);
-debug$w.flag = false;
+const debug$x = new DebugLogging('Color Rules', false);
+debug$x.flag = false;
 
 
 /*
@@ -21791,14 +21977,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$w.flag && debug$w.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$x.flag && debug$x.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3.1;
 
-      debug$w.flag && debug$w.log(`===== COLOR 1 ====`);
+      debug$x.flag && debug$x.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21906,14 +22092,14 @@ const colorRules = [
         const id      = node.id ? `[id=${node.id}]` : '';
         const cc      = domElement.colorContrast;
         const crr     = cc.colorContrastRatio;
-        debug$w.flag && debug$w.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
+        debug$x.flag && debug$x.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
       }
 
 
       const MIN_CCR_NORMAL_FONT = 7.1;
       const MIN_CCR_LARGE_FONT  = 4.5;
 
-      debug$w.flag && debug$w.log(`===== COLOR 3 ====`);
+      debug$x.flag && debug$x.log(`===== COLOR 3 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
         const de  = domText.parentDomElement;
@@ -21982,8 +22168,8 @@ const colorRules = [
 /* errorRules.js */
 
 /* Constants */
-const debug$v = new DebugLogging('Error Rules', false);
-debug$v.flag = false;
+const debug$w = new DebugLogging('Error Rules', false);
+debug$w.flag = false;
 
 /*
  * OpenA11y Rules
@@ -22206,8 +22392,8 @@ const errorRules = [
 /* frameRules.js */
 
 /* Constants */
-const debug$u = new DebugLogging('Frame Rules', false);
-debug$u.flag = false;
+const debug$v = new DebugLogging('Frame Rules', false);
+debug$v.flag = false;
 
 
 /*
@@ -22289,8 +22475,8 @@ const frameRules = [
 /* controlRules.js */
 
 /* Constants */
-const debug$t = new DebugLogging('Control Rules', false);
-debug$t.flag = false;
+const debug$u = new DebugLogging('Control Rules', false);
+debug$u.flag = false;
 
 
 /*
@@ -22972,8 +23158,8 @@ const controlRules = [
 /* headingRules.js */
 
 /* Constants */
-const debug$s = new DebugLogging('Heading Rules', false);
-debug$s.flag = false;
+const debug$t = new DebugLogging('Heading Rules', false);
+debug$t.flag = false;
 
 /*
  * OpenA11y Rules
@@ -23363,8 +23549,8 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
 /* htmlRules.js */
 
 /* Constants */
-const debug$r = new DebugLogging('HTML Rules', false);
-debug$r.flag = false;
+const debug$s = new DebugLogging('HTML Rules', false);
+debug$s.flag = false;
 
 /*
  * OpenA11y Rules
@@ -23429,8 +23615,8 @@ const htmlRules = [
 /* imageRules.js */
 
 /* Constants */
-const debug$q = new DebugLogging('Image Rules', false);
-debug$q.flag = false;
+const debug$r = new DebugLogging('Image Rules', false);
+debug$r.flag = false;
 
 /*
  * OpenA11y Alliance Rules
@@ -23699,8 +23885,8 @@ const imageRules = [
 /* keyboardRules.js */
 
 /* Constants */
-const debug$p = new DebugLogging('Keyboard Rules', false);
-debug$p.flag = true;
+const debug$q = new DebugLogging('Keyboard Rules', false);
+debug$q.flag = true;
 
 /* helper functions */
 
@@ -23960,8 +24146,8 @@ const keyboardRules = [
 /* landmarkRules.js */
 
 /* Constants */
-const debug$o = new DebugLogging('Landmark Rules', false);
-debug$o.flag = false;
+const debug$p = new DebugLogging('Landmark Rules', false);
+debug$p.flag = false;
 
 /*
  * OpenA11y Rules
@@ -24741,8 +24927,8 @@ function validateUniqueAccessibleNames(dom_cache, rule_result, role) {
 /* languageRules.js */
 
 /* Constants */
-const debug$n = new DebugLogging('Language Rules', false);
-debug$n.flag = false;
+const debug$o = new DebugLogging('Language Rules', false);
+debug$o.flag = false;
 
 const LANGUAGE_CODES = {
   subtags : "aa ab ae af ak am an ar as av ay az ba be bg bh bi bm bn bo br bs ca ce ch co cr cs cu cv cy da de dv dz ee el en eo es et eu fa ff fi fj fo fr fy ga gd gl gn gu gv ha he hi ho hr ht hu hy hz ia id ie ig ii ik in io is it iu iw ja ji jv jw ka kg ki kj kk kl km kn ko kr ks ku kv kw ky la lb lg li ln lo lt lu lv mg mh mi mk ml mn mo mr ms mt my na nb nd ne ng nl nn no nr nv ny oc oj om or os pa pi pl ps pt qu rm rn ro ru rw sa sc sd se sg sh si sk sl sm sn so sq sr ss st su sv sw ta te tg th ti tk tl tn to tr ts tt tw ty ug uk ur uz ve vi vo wa wo xh yi yo za zh zu aaa aab aac aad aae aaf aag aah aai aak aal aam aan aao aap aaq aas aat aau aav aaw aax aaz aba abb abc abd abe abf abg abh abi abj abl abm abn abo abp abq abr abs abt abu abv abw abx aby abz aca acb acd ace acf ach aci ack acl acm acn acp acq acr acs act acu acv acw acx acy acz ada adb add ade adf adg adh adi adj adl adn ado adp adq adr ads adt adu adw adx ady adz aea aeb aec aed aee aek ael aem aen aeq aer aes aeu aew aey aez afa afb afd afe afg afh afi afk afn afo afp afs aft afu afz aga agb agc agd age agf agg agh agi agj agk agl agm agn ago agp agq agr ags agt agu agv agw agx agy agz aha ahb ahg ahh ahi ahk ahl ahm ahn aho ahp ahr ahs aht aia aib aic aid aie aif aig aih aii aij aik ail aim ain aio aip aiq air ais ait aiw aix aiy aja ajg aji ajn ajp ajt aju ajw ajz akb akc akd ake akf akg akh aki akj akk akl akm ako akp akq akr aks akt aku akv akw akx aky akz ala alc ald ale alf alg alh ali alj alk all alm aln alo alp alq alr als alt alu alv alw alx aly alz ama amb amc ame amf amg ami amj amk aml amm amn amo amp amq amr ams amt amu amv amw amx amy amz ana anb anc and ane anf ang anh ani anj ank anl anm ann ano anp anq anr ans ant anu anv anw anx any anz aoa aob aoc aod aoe aof aog aoh aoi aoj aok aol aom aon aor aos aot aou aox aoz apa apb apc apd ape apf apg aph api apj apk apl apm apn apo app apq apr aps apt apu apv apw apx apy apz aqa aqc aqd aqg aql aqm aqn aqp aqr aqz arb arc ard are arh ari arj ark arl arn aro arp arq arr ars art aru arv arw arx ary arz asa asb asc asd ase asf asg ash asi asj ask asl asn aso asp asq asr ass ast asu asv asw asx asy asz ata atb atc atd ate atg ath ati atj atk atl atm atn ato atp atq atr ats att atu atv atw atx aty atz aua aub auc aud aue auf aug auh aui auj auk aul aum aun auo aup auq aur aus aut auu auw aux auy auz avb avd avi avk avl avm avn avo avs avt avu avv awa awb awc awd awe awg awh awi awk awm awn awo awr aws awt awu awv aww awx awy axb axe axg axk axl axm axx aya ayb ayc ayd aye ayg ayh ayi ayk ayl ayn ayo ayp ayq ayr ays ayt ayu ayx ayy ayz aza azb azc azd azg azj azm azn azo azt azz baa bab bac bad bae baf bag bah bai baj bal ban bao bap bar bas bat bau bav baw bax bay baz bba bbb bbc bbd bbe bbf bbg bbh bbi bbj bbk bbl bbm bbn bbo bbp bbq bbr bbs bbt bbu bbv bbw bbx bby bbz bca bcb bcc bcd bce bcf bcg bch bci bcj bck bcl bcm bcn bco bcp bcq bcr bcs bct bcu bcv bcw bcy bcz bda bdb bdc bdd bde bdf bdg bdh bdi bdj bdk bdl bdm bdn bdo bdp bdq bdr bds bdt bdu bdv bdw bdx bdy bdz bea beb bec bed bee bef beg beh bei bej bek bem beo bep beq ber bes bet beu bev bew bex bey bez bfa bfb bfc bfd bfe bff bfg bfh bfi bfj bfk bfl bfm bfn bfo bfp bfq bfr bfs bft bfu bfw bfx bfy bfz bga bgb bgc bgd bge bgf bgg bgi bgj bgk bgl bgm bgn bgo bgp bgq bgr bgs bgt bgu bgv bgw bgx bgy bgz bha bhb bhc bhd bhe bhf bhg bhh bhi bhj bhk bhl bhm bhn bho bhp bhq bhr bhs bht bhu bhv bhw bhx bhy bhz bia bib bic bid bie bif big bij bik bil bim bin bio bip biq bir bit biu biv biw bix biy biz bja bjb bjc bjd bje bjf bjg bjh bji bjj bjk bjl bjm bjn bjo bjp bjq bjr bjs bjt bju bjv bjw bjx bjy bjz bka bkb bkc bkd bkf bkg bkh bki bkj bkk bkl bkm bkn bko bkp bkq bkr bks bkt bku bkv bkw bkx bky bkz bla blb blc bld ble blf blg blh bli blj blk bll blm bln blo blp blq blr bls blt blv blw blx bly blz bma bmb bmc bmd bme bmf bmg bmh bmi bmj bmk bml bmm bmn bmo bmp bmq bmr bms bmt bmu bmv bmw bmx bmy bmz bna bnb bnc bnd bne bnf bng bni bnj bnk bnl bnm bnn bno bnp bnq bnr bns bnt bnu bnv bnw bnx bny bnz boa bob boe bof bog boh boi boj bok bol bom bon boo bop boq bor bot bou bov bow box boy boz bpa bpb bpd bpg bph bpi bpj bpk bpl bpm bpn bpo bpp bpq bpr bps bpt bpu bpv bpw bpx bpy bpz bqa bqb bqc bqd bqf bqg bqh bqi bqj bqk bql bqm bqn bqo bqp bqq bqr bqs bqt bqu bqv bqw bqx bqy bqz bra brb brc brd brf brg brh bri brj brk brl brm brn bro brp brq brr brs brt bru brv brw brx bry brz bsa bsb bsc bse bsf bsg bsh bsi bsj bsk bsl bsm bsn bso bsp bsq bsr bss bst bsu bsv bsw bsx bsy bta btb btc btd bte btf btg bth bti btj btk btl btm btn bto btp btq btr bts btt btu btv btw btx bty btz bua bub buc bud bue buf bug buh bui buj buk bum bun buo bup buq bus but buu buv buw bux buy buz bva bvb bvc bvd bve bvf bvg bvh bvi bvj bvk bvl bvm bvn bvo bvp bvq bvr bvt bvu bvv bvw bvx bvy bvz bwa bwb bwc bwd bwe bwf bwg bwh bwi bwj bwk bwl bwm bwn bwo bwp bwq bwr bws bwt bwu bww bwx bwy bwz bxa bxb bxc bxd bxe bxf bxg bxh bxi bxj bxk bxl bxm bxn bxo bxp bxq bxr bxs bxu bxv bxw bxx bxz bya byb byc byd bye byf byg byh byi byj byk byl bym byn byo byp byq byr bys byt byv byw byx byy byz bza bzb bzc bzd bze bzf bzg bzh bzi bzj bzk bzl bzm bzn bzo bzp bzq bzr bzs bzt bzu bzv bzw bzx bzy bzz caa cab cac cad cae caf cag cah cai caj cak cal cam can cao cap caq car cas cau cav caw cax cay caz cba cbb cbc cbd cbe cbg cbh cbi cbj cbk cbl cbn cbo cbr cbs cbt cbu cbv cbw cby cca ccc ccd cce ccg cch ccj ccl ccm ccn cco ccp ccq ccr ccs cda cdc cdd cde cdf cdg cdh cdi cdj cdm cdn cdo cdr cds cdy cdz cea ceb ceg cek cel cen cet cfa cfd cfg cfm cga cgc cgg cgk chb chc chd chf chg chh chj chk chl chm chn cho chp chq chr cht chw chx chy chz cia cib cic cid cie cih cik cim cin cip cir ciw ciy cja cje cjh cji cjk cjm cjn cjo cjp cjr cjs cjv cjy cka ckb ckh ckl ckn cko ckq ckr cks ckt cku ckv ckx cky ckz cla clc cld cle clh cli clj clk cll clm clo clt clu clw cly cma cmc cme cmg cmi cmk cml cmm cmn cmo cmr cms cmt cna cnb cnc cng cnh cni cnk cnl cno cns cnt cnu cnw cnx coa cob coc cod coe cof cog coh coj cok col com con coo cop coq cot cou cov cow cox coy coz cpa cpb cpc cpe cpf cpg cpi cpn cpo cpp cps cpu cpx cpy cqd cqu cra crb crc crd crf crg crh cri crj crk crl crm crn cro crp crq crr crs crt crv crw crx cry crz csa csb csc csd cse csf csg csh csi csj csk csl csm csn cso csq csr css cst csu csv csw csy csz cta ctc ctd cte ctg cth ctl ctm ctn cto ctp cts ctt ctu ctz cua cub cuc cug cuh cui cuj cuk cul cum cuo cup cuq cur cus cut cuu cuv cuw cux cvg cvn cwa cwb cwd cwe cwg cwt cya cyb cyo czh czk czn czo czt daa dac dad dae daf dag dah dai daj dak dal dam dao dap daq dar das dau dav daw dax day daz dba dbb dbd dbe dbf dbg dbi dbj dbl dbm dbn dbo dbp dbq dbr dbt dbu dbv dbw dby dcc dcr dda ddd dde ddg ddi ddj ddn ddo ddr dds ddw dec ded dee def deg deh dei dek del dem den dep deq der des dev dez dga dgb dgc dgd dge dgg dgh dgi dgk dgl dgn dgo dgr dgs dgt dgu dgw dgx dgz dha dhd dhg dhi dhl dhm dhn dho dhr dhs dhu dhv dhw dhx dia dib dic did dif dig dih dii dij dik dil dim din dio dip diq dir dis dit diu diw dix diy diz dja djb djc djd dje djf dji djj djk djl djm djn djo djr dju djw dka dkk dkl dkr dks dkx dlg dlk dlm dln dma dmb dmc dmd dme dmg dmk dml dmm dmn dmo dmr dms dmu dmv dmw dmx dmy dna dnd dne dng dni dnj dnk dnn dnr dnt dnu dnv dnw dny doa dob doc doe dof doh doi dok dol don doo dop doq dor dos dot dov dow dox doy doz dpp dra drb drc drd dre drg drh dri drl drn dro drq drr drs drt dru drw dry dsb dse dsh dsi dsl dsn dso dsq dta dtb dtd dth dti dtk dtm dto dtp dtr dts dtt dtu dty dua dub duc dud due duf dug duh dui duj duk dul dum dun duo dup duq dur dus duu duv duw dux duy duz dva dwa dwl dwr dws dww dya dyb dyd dyg dyi dym dyn dyo dyu dyy dza dzd dze dzg dzl dzn eaa ebg ebk ebo ebr ebu ecr ecs ecy eee efa efe efi ega egl ego egx egy ehu eip eit eiv eja eka ekc eke ekg eki ekk ekl ekm eko ekp ekr eky ele elh eli elk elm elo elp elu elx ema emb eme emg emi emk emm emn emo emp ems emu emw emx emy ena enb enc end enf enh enm enn eno enq enr enu env enw eot epi era erg erh eri erk ero err ers ert erw ese esh esi esk esl esm esn eso esq ess esu esx etb etc eth etn eto etr ets ett etu etx etz euq eve evh evn ewo ext eya eyo eza eze faa fab fad faf fag fah fai faj fak fal fam fan fap far fat fau fax fay faz fbl fcs fer ffi ffm fgr fia fie fil fip fir fit fiu fiw fkk fkv fla flh fli fll fln flr fly fmp fmu fng fni fod foi fom fon for fos fox fpe fqs frc frd frk frm fro frp frq frr frs frt fse fsl fss fub fuc fud fue fuf fuh fui fuj fum fun fuq fur fut fuu fuv fuy fvr fwa fwe gaa gab gac gad gae gaf gag gah gai gaj gak gal gam gan gao gap gaq gar gas gat gau gav gaw gax gay gaz gba gbb gbc gbd gbe gbf gbg gbh gbi gbj gbk gbl gbm gbn gbo gbp gbq gbr gbs gbu gbv gbw gbx gby gbz gcc gcd gce gcf gcl gcn gcr gct gda gdb gdc gdd gde gdf gdg gdh gdi gdj gdk gdl gdm gdn gdo gdq gdr gds gdt gdu gdx gea geb gec ged geg geh gei gej gek gel gem geq ges gew gex gey gez gfk gft gfx gga ggb ggd gge ggg ggk ggl ggn ggo ggr ggt ggu ggw gha ghc ghe ghh ghk ghl ghn gho ghr ghs ght gia gib gic gid gig gih gil gim gin gio gip giq gir gis git giu giw gix giy giz gji gjk gjm gjn gju gka gke gkn gko gkp glc gld glh gli glj glk gll glo glr glu glw gly gma gmb gmd gme gmh gml gmm gmn gmq gmu gmv gmw gmx gmy gmz gna gnb gnc gnd gne gng gnh gni gnk gnl gnm gnn gno gnq gnr gnt gnu gnw gnz goa gob goc god goe gof gog goh goi goj gok gol gom gon goo gop goq gor gos got gou gow gox goy goz gpa gpe gpn gqa gqi gqn gqr gqu gra grb grc grd grg grh gri grj grk grm gro grq grr grs grt gru grv grw grx gry grz gse gsg gsl gsm gsn gso gsp gss gsw gta gti gtu gua gub guc gud gue guf gug guh gui guk gul gum gun guo gup guq gur gus gut guu guv guw gux guz gva gvc gve gvf gvj gvl gvm gvn gvo gvp gvr gvs gvy gwa gwb gwc gwd gwe gwf gwg gwi gwj gwm gwn gwr gwt gwu gww gwx gxx gya gyb gyd gye gyf gyg gyi gyl gym gyn gyr gyy gza gzi gzn haa hab hac had hae haf hag hah hai haj hak hal ham han hao hap haq har has hav haw hax hay haz hba hbb hbn hbo hbu hca hch hdn hds hdy hea hed heg heh hei hem hgm hgw hhi hhr hhy hia hib hid hif hig hih hii hij hik hil him hio hir hit hiw hix hji hka hke hkk hks hla hlb hld hle hlt hlu hma hmb hmc hmd hme hmf hmg hmh hmi hmj hmk hml hmm hmn hmp hmq hmr hms hmt hmu hmv hmw hmx hmy hmz hna hnd hne hnh hni hnj hnn hno hns hnu hoa hob hoc hod hoe hoh hoi hoj hok hol hom hoo hop hor hos hot hov how hoy hoz hpo hps hra hrc hre hrk hrm hro hrp hrr hrt hru hrw hrx hrz hsb hsh hsl hsn hss hti hto hts htu htx hub huc hud hue huf hug huh hui huj huk hul hum huo hup huq hur hus hut huu huv huw hux huy huz hvc hve hvk hvn hvv hwa hwc hwo hya hyx iai ian iap iar iba ibb ibd ibe ibg ibi ibl ibm ibn ibr ibu iby ica ich icl icr ida idb idc idd ide idi idr ids idt idu ifa ifb ife iff ifk ifm ifu ify igb ige igg igl igm ign igo igs igw ihb ihi ihp ihw iin iir ijc ije ijj ijn ijo ijs ike iki ikk ikl iko ikp ikr ikt ikv ikw ikx ikz ila ilb ilg ili ilk ill ilo ils ilu ilv ilw ima ime imi iml imn imo imr ims imy inb inc ine ing inh inj inl inm inn ino inp ins int inz ior iou iow ipi ipo iqu iqw ira ire irh iri irk irn iro irr iru irx iry isa isc isd ise isg ish isi isk ism isn iso isr ist isu itb itc ite iti itk itl itm ito itr its itt itv itw itx ity itz ium ivb ivv iwk iwm iwo iws ixc ixl iya iyo iyx izh izi izr izz jaa jab jac jad jae jaf jah jaj jak jal jam jan jao jaq jar jas jat jau jax jay jaz jbe jbi jbj jbk jbn jbo jbr jbt jbu jbw jcs jct jda jdg jdt jeb jee jeg jeh jei jek jel jen jer jet jeu jgb jge jgk jgo jhi jhs jia jib jic jid jie jig jih jii jil jim jio jiq jit jiu jiv jiy jjr jkm jko jkp jkr jku jle jls jma jmb jmc jmd jmi jml jmn jmr jms jmw jmx jna jnd jng jni jnj jnl jns job jod jor jos jow jpa jpr jpx jqr jra jrb jrr jrt jru jsl jua jub juc jud juh jui juk jul jum jun juo jup jur jus jut juu juw juy jvd jvn jwi jya jye jyy kaa kab kac kad kae kaf kag kah kai kaj kak kam kao kap kaq kar kav kaw kax kay kba kbb kbc kbd kbe kbf kbg kbh kbi kbj kbk kbl kbm kbn kbo kbp kbq kbr kbs kbt kbu kbv kbw kbx kby kbz kca kcb kcc kcd kce kcf kcg kch kci kcj kck kcl kcm kcn kco kcp kcq kcr kcs kct kcu kcv kcw kcx kcy kcz kda kdc kdd kde kdf kdg kdh kdi kdj kdk kdl kdm kdn kdo kdp kdq kdr kdt kdu kdv kdw kdx kdy kdz kea keb kec ked kee kef keg keh kei kej kek kel kem ken keo kep keq ker kes ket keu kev kew kex key kez kfa kfb kfc kfd kfe kff kfg kfh kfi kfj kfk kfl kfm kfn kfo kfp kfq kfr kfs kft kfu kfv kfw kfx kfy kfz kga kgb kgc kgd kge kgf kgg kgh kgi kgj kgk kgl kgm kgn kgo kgp kgq kgr kgs kgt kgu kgv kgw kgx kgy kha khb khc khd khe khf khg khh khi khj khk khl khn kho khp khq khr khs kht khu khv khw khx khy khz kia kib kic kid kie kif kig kih kii kij kil kim kio kip kiq kis kit kiu kiv kiw kix kiy kiz kja kjb kjc kjd kje kjf kjg kjh kji kjj kjk kjl kjm kjn kjo kjp kjq kjr kjs kjt kju kjx kjy kjz kka kkb kkc kkd kke kkf kkg kkh kki kkj kkk kkl kkm kkn kko kkp kkq kkr kks kkt kku kkv kkw kkx kky kkz kla klb klc kld kle klf klg klh kli klj klk kll klm kln klo klp klq klr kls klt klu klv klw klx kly klz kma kmb kmc kmd kme kmf kmg kmh kmi kmj kmk kml kmm kmn kmo kmp kmq kmr kms kmt kmu kmv kmw kmx kmy kmz kna knb knc knd kne knf kng kni knj knk knl knm knn kno knp knq knr kns knt knu knv knw knx kny knz koa koc kod koe kof kog koh koi koj kok kol koo kop koq kos kot kou kov kow kox koy koz kpa kpb kpc kpd kpe kpf kpg kph kpi kpj kpk kpl kpm kpn kpo kpp kpq kpr kps kpt kpu kpv kpw kpx kpy kpz kqa kqb kqc kqd kqe kqf kqg kqh kqi kqj kqk kql kqm kqn kqo kqp kqq kqr kqs kqt kqu kqv kqw kqx kqy kqz kra krb krc krd kre krf krh kri krj krk krl krm krn kro krp krr krs krt kru krv krw krx kry krz ksa ksb ksc ksd kse ksf ksg ksh ksi ksj ksk ksl ksm ksn kso ksp ksq ksr kss kst ksu ksv ksw ksx ksy ksz kta ktb ktc ktd kte ktf ktg kth kti ktj ktk ktl ktm ktn kto ktp ktq ktr kts ktt ktu ktv ktw ktx kty ktz kub kuc kud kue kuf kug kuh kui kuj kuk kul kum kun kuo kup kuq kus kut kuu kuv kuw kux kuy kuz kva kvb kvc kvd kve kvf kvg kvh kvi kvj kvk kvl kvm kvn kvo kvp kvq kvr kvs kvt kvu kvv kvw kvx kvy kvz kwa kwb kwc kwd kwe kwf kwg kwh kwi kwj kwk kwl kwm kwn kwo kwp kwq kwr kws kwt kwu kwv kww kwx kwy kwz kxa kxb kxc kxd kxe kxf kxh kxi kxj kxk kxl kxm kxn kxo kxp kxq kxr kxs kxt kxu kxv kxw kxx kxy kxz kya kyb kyc kyd kye kyf kyg kyh kyi kyj kyk kyl kym kyn kyo kyp kyq kyr kys kyt kyu kyv kyw kyx kyy kyz kza kzb kzc kzd kze kzf kzg kzh kzi kzj kzk kzl kzm kzn kzo kzp kzq kzr kzs kzt kzu kzv kzw kzx kzy kzz laa lab lac lad lae laf lag lah lai laj lak lal lam lan lap laq lar las lau law lax lay laz lba lbb lbc lbe lbf lbg lbi lbj lbk lbl lbm lbn lbo lbq lbr lbs lbt lbu lbv lbw lbx lby lbz lcc lcd lce lcf lch lcl lcm lcp lcq lcs lda ldb ldd ldg ldh ldi ldj ldk ldl ldm ldn ldo ldp ldq lea leb lec led lee lef leg leh lei lej lek lel lem len leo lep leq ler les let leu lev lew lex ley lez lfa lfn lga lgb lgg lgh lgi lgk lgl lgm lgn lgq lgr lgt lgu lgz lha lhh lhi lhl lhm lhn lhp lhs lht lhu lia lib lic lid lie lif lig lih lii lij lik lil lio lip liq lir lis liu liv liw lix liy liz lja lje lji ljl ljp ljw ljx lka lkb lkc lkd lke lkh lki lkj lkl lkm lkn lko lkr lks lkt lku lky lla llb llc lld lle llf llg llh lli llj llk lll llm lln llo llp llq lls llu llx lma lmb lmc lmd lme lmf lmg lmh lmi lmj lmk lml lmm lmn lmo lmp lmq lmr lmu lmv lmw lmx lmy lmz lna lnb lnd lng lnh lni lnj lnl lnm lnn lno lns lnu lnw lnz loa lob loc loe lof log loh loi loj lok lol lom lon loo lop loq lor los lot lou lov low lox loy loz lpa lpe lpn lpo lpx lra lrc lre lrg lri lrk lrl lrm lrn lro lrr lrt lrv lrz lsa lsd lse lsg lsh lsi lsl lsm lso lsp lsr lss lst lsy ltc ltg lti ltn lto lts ltu lua luc lud lue luf lui luj luk lul lum lun luo lup luq lur lus lut luu luv luw luy luz lva lvk lvs lvu lwa lwe lwg lwh lwl lwm lwo lwt lwu lww lya lyg lyn lzh lzl lzn lzz maa mab mad mae maf mag mai maj mak mam man map maq mas mat mau mav maw max maz mba mbb mbc mbd mbe mbf mbh mbi mbj mbk mbl mbm mbn mbo mbp mbq mbr mbs mbt mbu mbv mbw mbx mby mbz mca mcb mcc mcd mce mcf mcg mch mci mcj mck mcl mcm mcn mco mcp mcq mcr mcs mct mcu mcv mcw mcx mcy mcz mda mdb mdc mdd mde mdf mdg mdh mdi mdj mdk mdl mdm mdn mdp mdq mdr mds mdt mdu mdv mdw mdx mdy mdz mea meb mec med mee mef meg meh mei mej mek mel mem men meo mep meq mer mes met meu mev mew mey mez mfa mfb mfc mfd mfe mff mfg mfh mfi mfj mfk mfl mfm mfn mfo mfp mfq mfr mfs mft mfu mfv mfw mfx mfy mfz mga mgb mgc mgd mge mgf mgg mgh mgi mgj mgk mgl mgm mgn mgo mgp mgq mgr mgs mgt mgu mgv mgw mgx mgy mgz mha mhb mhc mhd mhe mhf mhg mhh mhi mhj mhk mhl mhm mhn mho mhp mhq mhr mhs mht mhu mhw mhx mhy mhz mia mib mic mid mie mif mig mih mii mij mik mil mim min mio mip miq mir mis mit miu miw mix miy miz mja mjc mjd mje mjg mjh mji mjj mjk mjl mjm mjn mjo mjp mjq mjr mjs mjt mju mjv mjw mjx mjy mjz mka mkb mkc mke mkf mkg mkh mki mkj mkk mkl mkm mkn mko mkp mkq mkr mks mkt mku mkv mkw mkx mky mkz mla mlb mlc mld mle mlf mlh mli mlj mlk mll mlm mln mlo mlp mlq mlr mls mlu mlv mlw mlx mlz mma mmb mmc mmd mme mmf mmg mmh mmi mmj mmk mml mmm mmn mmo mmp mmq mmr mmt mmu mmv mmw mmx mmy mmz mna mnb mnc mnd mne mnf mng mnh mni mnj mnk mnl mnm mnn mno mnp mnq mnr mns mnt mnu mnv mnw mnx mny mnz moa moc mod moe mof mog moh moi moj mok mom moo mop moq mor mos mot mou mov mow mox moy moz mpa mpb mpc mpd mpe mpg mph mpi mpj mpk mpl mpm mpn mpo mpp mpq mpr mps mpt mpu mpv mpw mpx mpy mpz mqa mqb mqc mqe mqf mqg mqh mqi mqj mqk mql mqm mqn mqo mqp mqq mqr mqs mqt mqu mqv mqw mqx mqy mqz mra mrb mrc mrd mre mrf mrg mrh mrj mrk mrl mrm mrn mro mrp mrq mrr mrs mrt mru mrv mrw mrx mry mrz msb msc msd mse msf msg msh msi msj msk msl msm msn mso msp msq msr mss mst msu msv msw msx msy msz mta mtb mtc mtd mte mtf mtg mth mti mtj mtk mtl mtm mtn mto mtp mtq mtr mts mtt mtu mtv mtw mtx mty mua mub muc mud mue mug muh mui muj muk mul mum mun muo mup muq mur mus mut muu muv mux muy muz mva mvb mvd mve mvf mvg mvh mvi mvk mvl mvm mvn mvo mvp mvq mvr mvs mvt mvu mvv mvw mvx mvy mvz mwa mwb mwc mwd mwe mwf mwg mwh mwi mwj mwk mwl mwm mwn mwo mwp mwq mwr mws mwt mwu mwv mww mwx mwy mwz mxa mxb mxc mxd mxe mxf mxg mxh mxi mxj mxk mxl mxm mxn mxo mxp mxq mxr mxs mxt mxu mxv mxw mxx mxy mxz myb myc myd mye myf myg myh myi myj myk myl mym myn myo myp myq myr mys myt myu myv myw myx myy myz mza mzb mzc mzd mze mzg mzh mzi mzj mzk mzl mzm mzn mzo mzp mzq mzr mzs mzt mzu mzv mzw mzx mzy mzz naa nab nac nad nae naf nag nah nai naj nak nal nam nan nao nap naq nar nas nat naw nax nay naz nba nbb nbc nbd nbe nbf nbg nbh nbi nbj nbk nbm nbn nbo nbp nbq nbr nbs nbt nbu nbv nbw nbx nby nca ncb ncc ncd nce ncf ncg nch nci ncj nck ncl ncm ncn nco ncp ncr ncs nct ncu ncx ncz nda ndb ndc ndd ndf ndg ndh ndi ndj ndk ndl ndm ndn ndp ndq ndr nds ndt ndu ndv ndw ndx ndy ndz nea neb nec ned nee nef neg neh nei nej nek nem nen neo neq ner nes net neu nev new nex ney nez nfa nfd nfl nfr nfu nga ngb ngc ngd nge ngf ngg ngh ngi ngj ngk ngl ngm ngn ngo ngp ngq ngr ngs ngt ngu ngv ngw ngx ngy ngz nha nhb nhc nhd nhe nhf nhg nhh nhi nhk nhm nhn nho nhp nhq nhr nht nhu nhv nhw nhx nhy nhz nia nib nic nid nie nif nig nih nii nij nik nil nim nin nio niq nir nis nit niu niv niw nix niy niz nja njb njd njh nji njj njl njm njn njo njr njs njt nju njx njy njz nka nkb nkc nkd nke nkf nkg nkh nki nkj nkk nkm nkn nko nkp nkq nkr nks nkt nku nkv nkw nkx nkz nla nlc nle nlg nli nlj nlk nll nln nlo nlq nlr nlu nlv nlw nlx nly nlz nma nmb nmc nmd nme nmf nmg nmh nmi nmj nmk nml nmm nmn nmo nmp nmq nmr nms nmt nmu nmv nmw nmx nmy nmz nna nnb nnc nnd nne nnf nng nnh nni nnj nnk nnl nnm nnn nnp nnq nnr nns nnt nnu nnv nnw nnx nny nnz noa noc nod noe nof nog noh noi noj nok nol nom non noo nop noq nos not nou nov now noy noz npa npb npg nph npi npl npn npo nps npu npy nqg nqk nqm nqn nqo nqq nqy nra nrb nrc nre nrg nri nrk nrl nrm nrn nrp nrr nrt nru nrx nrz nsa nsc nsd nse nsf nsg nsh nsi nsk nsl nsm nsn nso nsp nsq nsr nss nst nsu nsv nsw nsx nsy nsz nte ntg nti ntj ntk ntm nto ntp ntr nts ntu ntw ntx nty ntz nua nub nuc nud nue nuf nug nuh nui nuj nuk nul num nun nuo nup nuq nur nus nut nuu nuv nuw nux nuy nuz nvh nvm nvo nwa nwb nwc nwe nwg nwi nwm nwo nwr nwx nwy nxa nxd nxe nxg nxi nxk nxl nxm nxn nxq nxr nxu nxx nyb nyc nyd nye nyf nyg nyh nyi nyj nyk nyl nym nyn nyo nyp nyq nyr nys nyt nyu nyv nyw nyx nyy nza nzb nzi nzk nzm nzs nzu nzy nzz oaa oac oar oav obi obk obl obm obo obr obt obu oca och oco ocu oda odk odt odu ofo ofs ofu ogb ogc oge ogg ogo ogu oht ohu oia oin ojb ojc ojg ojp ojs ojv ojw oka okb okd oke okg okh oki okj okk okl okm okn oko okr oks oku okv okx ola old ole olk olm olo olr oma omb omc ome omg omi omk oml omn omo omp omq omr omt omu omv omw omx ona onb one ong oni onj onk onn ono onp onr ons ont onu onw onx ood oog oon oor oos opa opk opm opo opt opy ora orc ore org orh orn oro orr ors ort oru orv orw orx ory orz osa osc osi oso osp ost osu osx ota otb otd ote oti otk otl otm otn oto otq otr ots ott otu otw otx oty otz oua oub oue oui oum oun owi owl oyb oyd oym oyy ozm paa pab pac pad pae paf pag pah pai pak pal pam pao pap paq par pas pat pau pav paw pax pay paz pbb pbc pbe pbf pbg pbh pbi pbl pbn pbo pbp pbr pbs pbt pbu pbv pby pbz pca pcb pcc pcd pce pcf pcg pch pci pcj pck pcl pcm pcn pcp pcr pcw pda pdc pdi pdn pdo pdt pdu pea peb ped pee pef peg peh pei pej pek pel pem peo pep peq pes pev pex pey pez pfa pfe pfl pga pgg pgi pgk pgl pgn pgs pgu pgy pha phd phg phh phi phk phl phm phn pho phq phr pht phu phv phw pia pib pic pid pie pif pig pih pii pij pil pim pin pio pip pir pis pit piu piv piw pix piy piz pjt pka pkb pkc pkg pkh pkn pko pkp pkr pks pkt pku pla plb plc pld ple plf plg plh plj plk pll pln plo plp plq plr pls plt plu plv plw ply plz pma pmb pmc pmd pme pmf pmh pmi pmj pmk pml pmm pmn pmo pmq pmr pms pmt pmu pmw pmx pmy pmz pna pnb pnc pne png pnh pni pnj pnk pnl pnm pnn pno pnp pnq pnr pns pnt pnu pnv pnw pnx pny pnz poc pod poe pof pog poh poi pok pom pon poo pop poq pos pot pov pow pox poy poz ppa ppe ppi ppk ppl ppm ppn ppo ppp ppq ppr pps ppt ppu pqa pqe pqm pqw pra prb prc prd pre prf prg prh pri prk prl prm prn pro prp prq prr prs prt pru prw prx pry prz psa psc psd pse psg psh psi psl psm psn pso psp psq psr pss pst psu psw psy pta pth pti ptn pto ptp ptr ptt ptu ptv ptw pty pua pub puc pud pue puf pug pui puj puk pum puo pup puq pur put puu puw pux puy puz pwa pwb pwg pwi pwm pwn pwo pwr pww pxm pye pym pyn pys pyu pyx pyy pzn qaa..qtz qua qub quc qud quf qug quh qui quk qul qum qun qup quq qur qus quv quw qux quy quz qva qvc qve qvh qvi qvj qvl qvm qvn qvo qvp qvs qvw qvy qvz qwa qwc qwe qwh qwm qws qwt qxa qxc qxh qxl qxn qxo qxp qxq qxr qxs qxt qxu qxw qya qyp raa rab rac rad raf rag rah rai raj rak ral ram ran rao rap raq rar ras rat rau rav raw rax ray raz rbb rbk rbl rbp rcf rdb rea reb ree reg rei rej rel rem ren rer res ret rey rga rge rgk rgn rgr rgs rgu rhg rhp ria rie rif ril rim rin rir rit riu rjg rji rjs rka rkb rkh rki rkm rkt rkw rma rmb rmc rmd rme rmf rmg rmh rmi rmk rml rmm rmn rmo rmp rmq rmr rms rmt rmu rmv rmw rmx rmy rmz rna rnd rng rnl rnn rnp rnr rnw roa rob roc rod roe rof rog rol rom roo rop ror rou row rpn rpt rri rro rrt rsb rsi rsl rtc rth rtm rtw rub ruc rue ruf rug ruh rui ruk ruo rup ruq rut ruu ruy ruz rwa rwk rwm rwo rwr rxd rxw ryn rys ryu saa sab sac sad sae saf sah sai saj sak sal sam sao sap saq sar sas sat sau sav saw sax say saz sba sbb sbc sbd sbe sbf sbg sbh sbi sbj sbk sbl sbm sbn sbo sbp sbq sbr sbs sbt sbu sbv sbw sbx sby sbz sca scb sce scf scg sch sci sck scl scn sco scp scq scs scu scv scw scx sda sdb sdc sde sdf sdg sdh sdj sdk sdl sdm sdn sdo sdp sdr sds sdt sdu sdv sdx sdz sea seb sec sed see sef seg seh sei sej sek sel sem sen seo sep seq ser ses set seu sev sew sey sez sfb sfe sfm sfs sfw sga sgb sgc sgd sge sgg sgh sgi sgj sgk sgl sgm sgn sgo sgp sgr sgs sgt sgu sgw sgx sgy sgz sha shb shc shd she shg shh shi shj shk shl shm shn sho shp shq shr shs sht shu shv shw shx shy shz sia sib sid sie sif sig sih sii sij sik sil sim sio sip siq sir sis sit siu siv siw six siy siz sja sjb sjd sje sjg sjk sjl sjm sjn sjo sjp sjr sjs sjt sju sjw ska skb skc skd ske skf skg skh ski skj skk skm skn sko skp skq skr sks skt sku skv skw skx sky skz sla slc sld sle slf slg slh sli slj sll slm sln slp slq slr sls slt slu slw slx sly slz sma smb smc smd smf smg smh smi smj smk sml smm smn smp smq smr sms smt smu smv smw smx smy smz snb snc sne snf sng snh sni snj snk snl snm snn sno snp snq snr sns snu snv snw snx sny snz soa sob soc sod soe sog soh soi soj sok sol son soo sop soq sor sos sou sov sow sox soy soz spb spc spd spe spg spi spk spl spm spo spp spq spr sps spt spu spv spx spy sqa sqh sqj sqk sqm sqn sqo sqq sqr sqs sqt squ sra srb src sre srf srg srh sri srk srl srm srn sro srq srr srs srt sru srv srw srx sry srz ssa ssb ssc ssd sse ssf ssg ssh ssi ssj ssk ssl ssm ssn sso ssp ssq ssr sss sst ssu ssv ssx ssy ssz sta stb std ste stf stg sth sti stj stk stl stm stn sto stp stq str sts stt stu stv stw sty sua sub suc sue sug sui suj suk sul sum suq sur sus sut suv suw sux suy suz sva svb svc sve svk svm svr svs svx swb swc swf swg swh swi swj swk swl swm swn swo swp swq swr sws swt swu swv sww swx swy sxb sxc sxe sxg sxk sxl sxm sxn sxo sxr sxs sxu sxw sya syb syc syd syi syk syl sym syn syo syr sys syw syy sza szb szc szd sze szg szl szn szp szv szw taa tab tac tad tae taf tag tai taj tak tal tan tao tap taq tar tas tau tav taw tax tay taz tba tbb tbc tbd tbe tbf tbg tbh tbi tbj tbk tbl tbm tbn tbo tbp tbq tbr tbs tbt tbu tbv tbw tbx tby tbz tca tcb tcc tcd tce tcf tcg tch tci tck tcl tcm tcn tco tcp tcq tcs tct tcu tcw tcx tcy tcz tda tdb tdc tdd tde tdf tdg tdh tdi tdj tdk tdl tdn tdo tdq tdr tds tdt tdu tdv tdx tdy tea teb tec ted tee tef teg teh tei tek tem ten teo tep teq ter tes tet teu tev tew tex tey tfi tfn tfo tfr tft tga tgb tgc tgd tge tgf tgg tgh tgi tgj tgn tgo tgp tgq tgr tgs tgt tgu tgv tgw tgx tgy tgz thc thd the thf thh thi thk thl thm thn thp thq thr ths tht thu thv thw thx thy thz tia tic tid tie tif tig tih tii tij tik til tim tin tio tip tiq tis tit tiu tiv tiw tix tiy tiz tja tjg tji tjl tjm tjn tjo tjs tju tjw tka tkb tkd tke tkf tkg tkk tkl tkm tkn tkp tkq tkr tks tkt tku tkw tkx tkz tla tlb tlc tld tlf tlg tlh tli tlj tlk tll tlm tln tlo tlp tlq tlr tls tlt tlu tlv tlw tlx tly tma tmb tmc tmd tme tmf tmg tmh tmi tmj tmk tml tmm tmn tmo tmp tmq tmr tms tmt tmu tmv tmw tmy tmz tna tnb tnc tnd tne tnf tng tnh tni tnk tnl tnm tnn tno tnp tnq tnr tns tnt tnu tnv tnw tnx tny tnz tob toc tod toe tof tog toh toi toj tol tom too top toq tor tos tou tov tow tox toy toz tpa tpc tpe tpf tpg tpi tpj tpk tpl tpm tpn tpo tpp tpq tpr tpt tpu tpv tpw tpx tpy tpz tqb tql tqm tqn tqo tqp tqq tqr tqt tqu tqw tra trb trc trd tre trf trg trh tri trj trk trl trm trn tro trp trq trr trs trt tru trv trw trx try trz tsa tsb tsc tsd tse tsf tsg tsh tsi tsj tsk tsl tsm tsp tsq tsr tss tst tsu tsv tsw tsx tsy tsz tta ttb ttc ttd tte ttf ttg tth tti ttj ttk ttl ttm ttn tto ttp ttq ttr tts ttt ttu ttv ttw tty ttz tua tub tuc tud tue tuf tug tuh tui tuj tul tum tun tuo tup tuq tus tut tuu tuv tuw tux tuy tuz tva tvd tve tvk tvl tvm tvn tvo tvs tvt tvu tvw tvy twa twb twc twd twe twf twg twh twl twm twn two twp twq twr twt twu tww twx twy txa txb txc txe txg txh txi txm txn txo txq txr txs txt txu txx txy tya tye tyh tyi tyj tyl tyn typ tyr tys tyt tyu tyv tyx tyz tza tzh tzj tzl tzm tzn tzo tzx uam uan uar uba ubi ubl ubr ubu uby uda ude udg udi udj udl udm udu ues ufi uga ugb uge ugn ugo ugy uha uhn uis uiv uji uka ukg ukh ukl ukp ukq uks uku ukw uky ula ulb ulc ule ulf uli ulk ull ulm uln ulu ulw uma umb umc umd umg umi umm umn umo ump umr ums umu una und une ung unk unm unn unp unr unu unx unz uok upi upv ura urb urc ure urf urg urh uri urj urk url urm urn uro urp urr urt uru urv urw urx ury urz usa ush usi usk usp usu uta ute utp utr utu uum uun uur uuu uve uvh uvl uwa uya uzn uzs vaa vae vaf vag vah vai vaj val vam van vao vap var vas vau vav vay vbb vbk vec ved vel vem veo vep ver vgr vgt vic vid vif vig vil vin vis vit viv vka vki vkj vkk vkl vkm vko vkp vkt vku vlp vls vma vmb vmc vmd vme vmf vmg vmh vmi vmj vmk vml vmm vmp vmq vmr vms vmu vmv vmw vmx vmy vmz vnk vnm vnp vor vot vra vro vrs vrt vsi vsl vsv vto vum vun vut vwa waa wab wac wad wae waf wag wah wai waj wak wal wam wan wao wap waq war was wat wau wav waw wax way waz wba wbb wbe wbf wbh wbi wbj wbk wbl wbm wbp wbq wbr wbt wbv wbw wca wci wdd wdg wdj wdk wdu wdy wea wec wed weg weh wei wem wen weo wep wer wes wet weu wew wfg wga wgb wgg wgi wgo wgu wgw wgy wha whg whk whu wib wic wie wif wig wih wii wij wik wil wim win wir wit wiu wiv wiw wiy wja wji wka wkb wkd wkl wku wkw wky wla wlc wle wlg wli wlk wll wlm wlo wlr wls wlu wlv wlw wlx wly wma wmb wmc wmd wme wmh wmi wmm wmn wmo wms wmt wmw wmx wnb wnc wnd wne wng wni wnk wnm wnn wno wnp wnu wnw wny woa wob woc wod woe wof wog woi wok wom won woo wor wos wow woy wpc wra wrb wrd wrg wrh wri wrk wrl wrm wrn wro wrp wrr wrs wru wrv wrw wrx wry wrz wsa wsi wsk wsr wss wsu wsv wtf wth wti wtk wtm wtw wua wub wud wuh wul wum wun wur wut wuu wuv wux wuy wwa wwb wwo wwr www wxa wxw wya wyb wyi wym wyr wyy xaa xab xac xad xae xag xai xal xam xan xao xap xaq xar xas xat xau xav xaw xay xba xbb xbc xbd xbe xbg xbi xbj xbm xbn xbo xbp xbr xbw xbx xby xcb xcc xce xcg xch xcl xcm xcn xco xcr xct xcu xcv xcw xcy xda xdc xdk xdm xdy xeb xed xeg xel xem xep xer xes xet xeu xfa xga xgb xgd xgf xgg xgi xgl xgm xgn xgr xgu xgw xha xhc xhd xhe xhr xht xhu xhv xia xib xii xil xin xip xir xiv xiy xjb xjt xka xkb xkc xkd xke xkf xkg xkh xki xkj xkk xkl xkn xko xkp xkq xkr xks xkt xku xkv xkw xkx xky xkz xla xlb xlc xld xle xlg xli xln xlo xlp xls xlu xly xma xmb xmc xmd xme xmf xmg xmh xmj xmk xml xmm xmn xmo xmp xmq xmr xms xmt xmu xmv xmw xmx xmy xmz xna xnb xnd xng xnh xni xnk xnn xno xnr xns xnt xnu xny xnz xoc xod xog xoi xok xom xon xoo xop xor xow xpa xpc xpe xpg xpi xpj xpk xpm xpn xpo xpp xpq xpr xps xpt xpu xpy xqa xqt xra xrb xrd xre xrg xri xrm xrn xrq xrr xrt xru xrw xsa xsb xsc xsd xse xsh xsi xsj xsl xsm xsn xso xsp xsq xsr xss xsu xsv xsy xta xtb xtc xtd xte xtg xth xti xtj xtl xtm xtn xto xtp xtq xtr xts xtt xtu xtv xtw xty xtz xua xub xud xug xuj xul xum xun xuo xup xur xut xuu xve xvi xvn xvo xvs xwa xwc xwd xwe xwg xwj xwk xwl xwo xwr xwt xww xxb xxk xxm xxr xxt xya xyb xyj xyk xyl xyt xyy xzh xzm xzp yaa yab yac yad yae yaf yag yah yai yaj yak yal yam yan yao yap yaq yar yas yat yau yav yaw yax yay yaz yba ybb ybd ybe ybh ybi ybj ybk ybl ybm ybn ybo ybx yby ych ycl ycn ycp yda ydd yde ydg ydk yds yea yec yee yei yej yel yen yer yes yet yeu yev yey yga ygi ygl ygm ygp ygr ygu ygw yha yhd yhl yia yif yig yih yii yij yik yil yim yin yip yiq yir yis yit yiu yiv yix yiy yiz yka ykg yki ykk ykl ykm ykn yko ykr ykt yku yky yla ylb yle ylg yli yll ylm yln ylo ylr ylu yly yma ymb ymc ymd yme ymg ymh ymi ymk yml ymm ymn ymo ymp ymq ymr yms ymt ymx ymz yna ynd yne yng ynh ynk ynl ynn yno ynq yns ynu yob yog yoi yok yol yom yon yos yot yox yoy ypa ypb ypg yph ypk ypm ypn ypo ypp ypz yra yrb yre yri yrk yrl yrm yrn yrs yrw yry ysc ysd ysg ysl ysn yso ysp ysr yss ysy yta ytl ytp ytw yty yua yub yuc yud yue yuf yug yui yuj yuk yul yum yun yup yuq yur yut yuu yuw yux yuy yuz yva yvt ywa ywg ywl ywn ywq ywr ywt ywu yww yxa yxg yxl yxm yxu yxy yyr yyu yyz yzg yzk zaa zab zac zad zae zaf zag zah zai zaj zak zal zam zao zap zaq zar zas zat zau zav zaw zax zay zaz zbc zbe zbl zbt zbw zca zch zdj zea zeg zeh zen zga zgb zgh zgm zgn zgr zhb zhd zhi zhn zhw zhx zia zib zik zil zim zin zir ziw ziz zka zkb zkd zkg zkh zkk zkn zko zkp zkr zkt zku zkv zkz zle zlj zlm zln zlq zls zlw zma zmb zmc zmd zme zmf zmg zmh zmi zmj zmk zml zmm zmn zmo zmp zmq zmr zms zmt zmu zmv zmw zmx zmy zmz zna znd zne zng znk zns zoc zoh zom zoo zoq zor zos zpa zpb zpc zpd zpe zpf zpg zph zpi zpj zpk zpl zpm zpn zpo zpp zpq zpr zps zpt zpu zpv zpw zpx zpy zpz zqe zra zrg zrn zro zrp zrs zsa zsk zsl zsm zsr zsu zte ztg ztl ztm ztn ztp ztq zts ztt ztu ztx zty zua zuh zum zun zuy zwa zxx zyb zyg zyj zyn zyp zza zzj aao abh abv acm acq acw acx acy adf ads aeb aec aed aen afb afg ajp apc apd arb arq ars ary arz ase asf asp asq asw auz avl ayh ayl ayn ayp bbz bfi bfk bjn bog bqn bqy btj bve bvl bvu bzs cdo cds cjy cmn coa cpx csc csd cse csf csg csl csn csq csr czh czo doq dse dsl dup ecs esl esn eso eth fcs fse fsl fss gan gds gom gse gsg gsm gss gus hab haf hak hds hji hks hos hps hsh hsl hsn icl ils inl ins ise isg isr jak jax jcs jhs jls jos jsl jus kgi knn kvb kvk kvr kxd lbs lce lcf liw lls lsg lsl lso lsp lst lsy ltg lvs lzh max mdl meo mfa mfb mfs min mnp mqg mre msd msi msr mui mzc mzg mzy nan nbs ncs nsi nsl nsp nsr nzs okl orn ors pel pga pks prl prz psc psd pse psg psl pso psp psr pys rms rsi rsl sdl sfb sfs sgg sgx shu slf sls sqk sqs ssh ssp ssr svk swc swh swl syy tmw tse tsm tsq tss tsy tza ugn ugy ukl uks urk uzn uzs vgt vkk vkt vsi vsl vsv wuu xki xml xmm xms yds ysl yue zib zlm zmi zsl zsm afak aghb arab armi armn avst bali bamu bass batk beng blis bopo brah brai bugi buhd cakm cans cari cham cher cirt copt cprt cyrl cyrs deva dsrt dupl egyd egyh egyp elba ethi geok geor glag goth gran grek gujr guru hang hani hano hans hant hebr hira hluw hmng hrkt hung inds ital java jpan jurc kali kana khar khmr khoj knda kore kpel kthi lana laoo latf latg latn lepc limb lina linb lisu loma lyci lydi mahj mand mani maya mend merc mero mlym mong moon mroo mtei mymr narb nbat nkgb nkoo nshu ogam olck orkh orya osma palm perm phag phli phlp phlv phnx plrd prti qaaa..qabx rjng roro runr samr sara sarb saur sgnw shaw shrd sind sinh sora sund sylo syrc syre syrj syrn tagb takr tale talu taml tang tavt telu teng tfng tglg thaa thai tibt tirh ugar vaii visp wara wole xpeo xsux yiii zinh zmth zsym zxxx zyyy zzzz aa ac ad ae af ag ai al am an ao aq ar as at au aw ax az ba bb bd be bf bg bh bi bj bl bm bn bo bq br bs bt bu bv bw by bz ca cc cd cf cg ch ci ck cl cm cn co cp cr cs cu cv cw cx cy cz dd de dg dj dk dm do dz ea ec ee eg eh er es et eu fi fj fk fm fo fr fx ga gb gd ge gf gg gh gi gl gm gn gp gq gr gs gt gu gw gy hk hm hn hr ht hu ic id ie il im in io iq ir is it je jm jo jp ke kg kh ki km kn kp kr kw ky kz la lb lc li lk lr ls lt lu lv ly ma mc md me mf mg mh mk ml mm mn mo mp mq mr ms mt mu mv mw mx my mz na nc ne nf ng ni nl no np nr nt nu nz om pa pe pf pg ph pk pl pm pn pr ps pt pw py qa qm..qz re ro rs ru rw sa sb sc sd se sg sh si sj sk sl sm sn so sr ss st su sv sx sy sz ta tc td tf tg th tj tk tl tm tn to tp tr tt tv tw tz ua ug um us uy uz va vc ve vg vi vn vu wf ws xa..xz yd ye yt yu za zm zr zw zz 001 002 003 005 009 011 013 014 015 017 018 019 021 029 030 034 035 039 053 054 057 061 142 143 145 150 151 154 155 419 1606nict 1694acad 1901 1959acad 1994 1996 alalc97 aluku arevela arevmda baku1926 bauddha biscayan biske bohoric boont dajnko emodeng fonipa fonupa fonxsamp hepburn heploc hognorsk itihasa jauer jyutping kkcor kscor laukika lipaw luna1918 metelko monoton ndyuka nedis njiva nulik osojs pamaka petr1708 pinyin polyton puter rigik rozaj rumgr scotland scouse solba surmiran sursilv sutsilv tarask uccor ucrcor ulster unifon vaidika valencia vallader wadegile ",
@@ -24799,7 +24985,7 @@ const languageRules = [
    */
 
   { rule_id             : 'LANGUAGE_1',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
@@ -24828,7 +25014,7 @@ const languageRules = [
    */
 
   { rule_id             : 'LANGUAGE_2',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
@@ -24864,52 +25050,193 @@ const languageRules = [
       else if (passCount > 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [passCount]);
       else rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_3', []);
 
-/*
-
-      var TEST_RESULT    = TEST_RESULT;
-      var VISIBILITY     = VISIBILITY;
-
-      var dom_elements     = dom_cache.languages_cache.dom_elements;
-      var dom_elements_len = dom_elements.length;
-
-  //
-  //    logger.debug("[Language Rule 2]  Language 2: " + dom_elements_len);
-      var fail_count = 0;
-      var pass_count = 0;
-
-      for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-
-        if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-
-           if (util.validLanguageCode(de.lang)) {
-             rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tag_name, de.lang]);
-             pass_count++;
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.lang]);
-             fail_count++;
-           }
-
-        }
-        else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.lang]);
-        }
-      }
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      if (page_element) {
-        if (fail_count === 1) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_1', []);
-        else if (fail_count > 1) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_2', [fail_count]);
-        else if (pass_count === 1) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-        else if (pass_count > 1) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [pass_count]);
-        else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_3', []);
-      }
-*/
     } // end validation function
   }
 
+];
+
+/* layoutRules.js */
+
+/* Constants */
+
+
+const debug$n = new DebugLogging('Layout Rules', false);
+debug$n.flag = false;
+
+/*
+ * OpenA11y Rules
+ * Rule Category: Layout Rules
+ */
+
+const layoutRules = [
+
+  /**
+   * @object LAYOUT_1
+   *
+   * @desc     Make sure content is in a meaningful sequence
+   *           tables used for layout must be checked for
+   *           maintaining meaningful sequence
+   */
+  { rule_id             : 'LAYOUT_1',
+    last_updated        : '2023-09-06',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.2',
+    wcag_related_ids    : ['1.3.1'],
+    target_resources    : ['Page', 'table'],
+    validate            : function (dom_cache, rule_result) {
+
+      let layoutPass = 0;
+      let layoutManualCheck = 0;
+
+      dom_cache.tableInfo.allTableElements.forEach( te => {
+        const de = te.domElement;
+
+        if (te.tableType === TABLE_TYPE.LAYOUT) {
+          if (de.visibility.isVisibleToAT) {
+            if (te.colCount === 1)  {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              layoutPass += 1;
+            }
+            else {
+              if (te.nestinglevel === 0) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [te.rowCount, te.colCount]);
+                layoutManualCheck += 1;
+              }
+              else {
+                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [te.nestingLevel]);
+                 layoutManualCheck += 1;
+              }
+            }
+          }
+          else {
+           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+
+      if (layoutManualCheck) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [layoutManualCheck]);
+      }
+      else {
+        if (layoutPass) {
+          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+        }
+      }
+    }  // end validation function
+  },
+
+  /**
+   * @object LAYOUT_2
+   *
+   * @desc     Do not use nested tables more than 1 column wide for positioning content
+   *           Fails with one or more one levels of nesting.
+   */
+  { rule_id             : 'LAYOUT_2',
+    last_updated        : '2023-09-06',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.2',
+    wcag_related_ids    : [],
+    target_resources    : ['table'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.tableInfo.allTableElements.forEach( te => {
+        const de = te.domElement;
+
+        if (te.tableType === TABLE_TYPE.LAYOUT) {
+          if (de.visibility.isVisibleToAT) {
+
+            if (te.colCount > 1) {
+              if (te.nestingLevel > 0) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [te.rowCount, te.colCount, te.nestingLevel]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            }
+          }
+          else {
+           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+
+/*
+       var TEST_RESULT   = TEST_RESULT;
+       var VISIBILITY    = VISIBILITY;
+
+       var i;
+       var te;
+
+       var table_elements     = dom_cache.tables_cache.table_elements;
+       var table_elements_len = table_elements.length;
+
+
+       // Check to see if valid cache reference
+       if (table_elements && table_elements_len) {
+
+         for (i=0; i < table_elements_len; i++) {
+
+           te = table_elements[i];
+
+           if (te.table_role === TABLE_ROLE.LAYOUT) {
+
+             if (te.dom_element.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
+
+               if (te.max_column > 1) {
+
+                 if (te.nesting_level > 0) rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', [te.max_row, te.max_column, te.nesting_level]);
+                 else rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
+               }
+               else {
+                 rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', []);
+               }
+             }
+             else {
+               rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
+             }
+           }
+         } // end loop
+       }
+       */
+    } // end validation function
+  },
+
+  /**
+   * @object LAYOUT_3
+   *
+   * @desc    Verify if the aria-flow to property ordering makes sense to AT users.
+   */
+  { rule_id             : 'LAYOUT_3',
+    last_updated        : '2023-09-06',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.2',
+    wcag_related_ids    : [],
+    target_resources    : ['[aria_flowto]'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+
+        if (de.ariaInfo.flowTo) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.flowTo]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.flowTo]);
+          }
+        }
+
+      });
+    } // end validation function
+  }
 ];
 
 /* linkRules.js */
@@ -26140,7 +26467,7 @@ const titleRules = [
    */
 
   { rule_id             : 'TITLE_1',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-04',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,
@@ -26165,7 +26492,7 @@ const titleRules = [
    */
 
   { rule_id             : 'TITLE_2',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-04',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,
@@ -28158,7 +28485,7 @@ addToArray(imageRules);
 addToArray(keyboardRules);
 addToArray(landmarkRules);
 addToArray(languageRules);
-// addToArray(layoutRules);
+addToArray(layoutRules);
 addToArray(linkRules);
 addToArray(listRules);
 addToArray(navigationRules);

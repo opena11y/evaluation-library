@@ -68,7 +68,7 @@ export const languageRules = [
    */
 
   { rule_id             : 'LANGUAGE_1',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
@@ -97,7 +97,7 @@ export const languageRules = [
    */
 
   { rule_id             : 'LANGUAGE_2',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
@@ -133,49 +133,6 @@ export const languageRules = [
       else if (passCount > 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [passCount]);
       else rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_3', []);
 
-/*
-
-      var TEST_RESULT    = TEST_RESULT;
-      var VISIBILITY     = VISIBILITY;
-
-      var dom_elements     = dom_cache.languages_cache.dom_elements;
-      var dom_elements_len = dom_elements.length;
-
-  //
-  //    logger.debug("[Language Rule 2]  Language 2: " + dom_elements_len);
-      var fail_count = 0;
-      var pass_count = 0;
-
-      for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-
-        if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-
-           if (util.validLanguageCode(de.lang)) {
-             rule_result.addResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tag_name, de.lang]);
-             pass_count++;
-           }
-           else {
-             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.lang]);
-             fail_count++;
-           }
-
-        }
-        else {
-          rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.lang]);
-        }
-      }
-
-      var page_element = dom_cache.headings_landmarks_cache.page_element;
-
-      if (page_element) {
-        if (fail_count === 1) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_1', []);
-        else if (fail_count > 1) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_2', [fail_count]);
-        else if (pass_count === 1) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-        else if (pass_count > 1) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_2', [pass_count]);
-        else rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_3', []);
-      }
-*/
     } // end validation function
   }
 

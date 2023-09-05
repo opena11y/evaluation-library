@@ -27,7 +27,7 @@ export const titleRules = [
    */
 
   { rule_id             : 'TITLE_1',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-04',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,
@@ -52,7 +52,7 @@ export const titleRules = [
    */
 
   { rule_id             : 'TITLE_2',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-04',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,

@@ -119,7 +119,11 @@ export default class AriaInfo {
     this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
 
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
-    this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;     
+    this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;
+
+    this.flowTo = node.hasAttribute('aria-flowto') ?
+                  node.getAttribute('aria-flowto') :
+                  '';
 
     // for range widgets
     if (this.isRange) {

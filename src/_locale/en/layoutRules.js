@@ -14,6 +14,7 @@ export const layoutRules = {
       TARGET_RESOURCES_DESC: '@table@ elements used for layout',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:    'Verify document has a meaningful sequence when layout table markup is disabled.  If content does not have a meaningful sequence, reorganize content on the page to have a meaningful sequence when layout tables are disabled.',
+        MANUAL_CHECK_P:    'Verify document has a meaningful sequence when layout table markup is disabled.  If content does not have a meaningful sequence, reorganize content on the page to have a meaningful sequence when layout tables are disabled.',
         HIDDEN_S:          'One @table@ element that is hidden was not evaluated.',
         HIDDEN_P:          '%N_H @table@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No layout tables found on this page.'
@@ -152,13 +153,13 @@ export const layoutRules = {
         HIDDEN_P:          '%N_H elements with @aria-flowto@ attribute that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No elements with @aria-flowto@ attribute found.'
       },
-      NODE_RESULT_MESSAGES: {
-        ELEMENT_MC_1:     'Verify the content reflow defined by the @aria-flowto@ attribute on the  @%1@ element creates a meaningful reading order.',
-        ELEMENT_HIDDEN_1: '@%1@ element with @aria-flowto@ attribute was not evaluated because it is hidden from assistive technologies.'
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:     'Verify the @%1@ element with an @aria-reflow@ value of @%2@ on the defines a meaningful reading order.',
+        ELEMENT_HIDDEN_1: '@%1@ element with @aria-flowto@ value of @%2@ was not evaluated because it is hidden from assistive technologies.'
       },
-      PURPOSE: [
+      PURPOSES: [
         'The reading order of content on the page can, in some cases, be made easier to understand by users of assistive technology with the use of @aria-flowto@.',
-        'By default the reading order used by assisitive technologies is the same as the DOM ordering of content.',
+        'By default the reading order used by assistive technologies is the same as the DOM ordering of content.',
         'When the DOM order of content is interspersed with unrelated content, @aria-flowto@ can be used to keep related content together.  For example a multi-column newspaper where an article spans several columns, @aria-flowto@ can be used to make it look like one continuous column to assistive technology.',
         'The @aria-flowto@ reorganizes the content by changing the order of how the content is represented in accessibility Application Programming Interfaces (APIs) used by operating systems to communicate to screen readers.'
       ],

@@ -2,14 +2,19 @@
 
 /* Imports */
 import {
+//  HEADER_SOURCE,
   RULE_SCOPE,
   RULE_CATEGORIES,
+  TABLE_TYPE,
   TEST_RESULT
 } from '../constants.js';
+
 
 import DebugLogging      from '../debug.js';
 
 /* Constants */
+
+
 const debug = new DebugLogging('Layout Rules', false);
 debug.flag = false;
 
@@ -25,10 +30,10 @@ export const layoutRules = [
    *
    * @desc     Make sure content is in a meaningful sequence
    *           tables used for layout must be checked for
-   *           maintaining meanful sequence
+   *           maintaining meaningful sequence
    */
   { rule_id             : 'LAYOUT_1',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.TABLES,
     rule_required       : true,
@@ -37,86 +42,45 @@ export const layoutRules = [
     target_resources    : ['Page', 'table'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Layout 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      let layoutPass = 0;
+      let layoutManualCheck = 0;
 
-/*
-       function getNestingLevel(table_element, level) {
+      dom_cache.tableInfo.allTableElements.forEach( te => {
+        const de = te.domElement;
 
-         var l = level;
-         var pte = table_element.parent_table_element;
+        if (te.tableType === TABLE_TYPE.LAYOUT) {
+          if (de.visibility.isVisibleToAT) {
+            if (te.colCount === 1)  {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              layoutPass += 1;
+            }
+            else {
+              if (te.nestinglevel === 0) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [te.rowCount, te.colCount]);
+                layoutManualCheck += 1;
+              }
+              else {
+                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [te.nestingLevel]);
+                 layoutManualCheck += 1;
+              }
+            }
+          }
+          else {
+           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
 
-         if (pte) {
-           if ((pte.table_role === TABLE_ROLE.DATA) || pte.max_column == 1) {
-             l = getNestingLevel(pte, level);
-           }
-           else {
-             l = getNestingLevel(pte, (level+1));
-           }
-         }
-         return l;
-       }
-
-       var TEST_RESULT   = TEST_RESULT;
-       var VISIBILITY    = VISIBILITY;
-
-       var table_elements     = dom_cache.tables_cache.table_elements;
-       var table_elements_len = table_elements.length;
-
-       var page_element = dom_cache.headings_landmarks_cache.page_element;
-       var layout_pass = 0;
-       var layout_mc   = 0;
-
-       // Check to see if valid cache reference
-       if (table_elements && table_elements_len) {
-
-         for (var i = 0; i < table_elements_len; i++) {
-
-           var te = table_elements[i];
-           var de = te.dom_element;
-           var cs = de.computed_style;
-
-           if (te.table_role === TABLE_ROLE.LAYOUT) {
-
-             if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-
-               var nesting_level = getNestingLevel(te, 0);
-
-               te.nesting_level = nesting_level;
-
-               if (te.max_column === 1)  {
-                 rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
-                 layout_pass++;
-               }
-               else {
-
-                 if (nesting_level === 0) {
-                   rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_2', [te.max_row, te.max_column]);
-                   layout_mc++;
-                 }
-                 else {
-                   rule_result.addResult(TEST_RESULT.MANUAL_CHECK, te, 'ELEMENT_MC_3', [te.nesting_level]);
-                   layout_mc++;
-                 }
-               }
-             }
-             else {
-               rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-             }
-           }
-         } // end loop
-       }
-
-       if (layout_mc) {
-         rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-       }
-       else {
-         if (layout_pass) {
-           rule_result.addResult(TEST_RESULT.PASS, page_element, 'PAGE_PASS_1', []);
-         }
-       }
-*/
-     }  // end validation function
-   },
+      if (layoutManualCheck) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [layoutManualCheck]);
+      }
+      else {
+        if (layoutPass) {
+          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+        }
+      }
+    }  // end validation function
+  },
 
   /**
    * @object LAYOUT_2
@@ -125,7 +89,7 @@ export const layoutRules = [
    *           Fails with one or more one levels of nesting.
    */
   { rule_id             : 'LAYOUT_2',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
@@ -134,7 +98,29 @@ export const layoutRules = [
     target_resources    : ['table'],
     validate          : function (dom_cache, rule_result) {
 
-      debug.log(`[Language 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      dom_cache.tableInfo.allTableElements.forEach( te => {
+        const de = te.domElement;
+
+        if (te.tableType === TABLE_TYPE.LAYOUT) {
+          if (de.visibility.isVisibleToAT) {
+
+            if (te.colCount > 1) {
+              if (te.nestingLevel > 0) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [te.rowCount, te.colCount, te.nestingLevel]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+            }
+          }
+          else {
+           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
 
 /*
        var TEST_RESULT   = TEST_RESULT;
@@ -180,10 +166,10 @@ export const layoutRules = [
   /**
    * @object LAYOUT_3
    *
-   * @desc     Check to see if aria-flowto property ordering makes sense to AT users.
+   * @desc    Verify if the aria-flow to property ordering makes sense to AT users.
    */
   { rule_id             : 'LAYOUT_3',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
     rule_required       : true,
@@ -192,33 +178,18 @@ export const layoutRules = [
     target_resources    : ['[aria_flowto]'],
     validate          : function (dom_cache, rule_result) {
 
-      debug.log(`[Language 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      dom_cache.allDomElements.forEach( de => {
 
-/*
-      var TEST_RESULT = TEST_RESULT;
-      var VISIBILITY  = VISIBILITY;
-
-      var dom_elements     = dom_cache.element_cache.dom_elements;
-      var dom_elements_len = dom_elements.length;
-
-      for (var i = 0; i < dom_elements_len; i++ ) {
-
-        var de =dom_elements[i];
-
-        if (de.type != Node.ELEMENT_NODE) continue;
-
-  //      logger.debug('[RULE][LAYOUT 3]: ' + de.tag_name + ' (' + de.has_aria_flowto + ')');
-
-        if (de.has_aria_flowto) {
-          if (de.computed_style.is_visible_to_at === VISIBILITY.HIDDEN) {
-            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name]);
+        if (de.ariaInfo.flowTo) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.flowTo]);
           }
           else {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tag_name]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.flowTo]);
           }
         }
-      }
-      */
+
+      });
     } // end validation function
   }
 ];

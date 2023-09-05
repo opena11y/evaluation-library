@@ -38,6 +38,10 @@ class TableElement {
     this.tableType = TABLE_TYPE.UNKNOWN;
     this.hasCaption = false;
 
+    this.nestingLevel = parentTableElement ?
+                        parentTableElement.nestingLevel + 1 :
+                        0;
+
     this.children = [];
 
     this.rows = [];
