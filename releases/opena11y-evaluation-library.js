@@ -17130,15 +17130,15 @@ const layoutRules$1 = {
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C6: Positioning content based on structural markup',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/C6'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C6'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C8: Using CSS letter-spacing to control spacing within a word',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/C8'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C8'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'C27: Making the DOM order match the visual order',
-          url:   'https://www.w3.org/TR/WCAG20-TECHS/C27'
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C27'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'F1: Failure of Success Criterion 1.3.2 due to changing the meaning of content by positioning information with CSS',
@@ -17155,14 +17155,6 @@ const layoutRules$1 = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F49'
-        },
-        { type:  REFERENCES.OTHER,
-          title: 'Web Standards Group',
-          url:   'https://webstandardsgroup.org/standards/'
-        },
-        { type:  REFERENCES.OTHER,
-          title: 'W3C Standards',
-          url:   'https://www.w3.org/standards/'
         }
       ]
   },
@@ -17207,14 +17199,6 @@ const layoutRules$1 = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'F49: Failure of Success Criterion 1.3.2 due to using an HTML layout table that does not make sense when linearized',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F49'
-        },
-        { type:  REFERENCES.OTHER,
-          title: 'Web Standards Group',
-          url:   'https://webstandardsgroup.org/standards/'
-        },
-        { type:  REFERENCES.OTHER,
-          title: 'W3C Standards',
-          url:   'https://www.w3.org/standards/'
         }
       ]
   },
@@ -17248,8 +17232,8 @@ const layoutRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: flowto property',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-flowto'
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: flowto property',
+          url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-flowto'
         }
       ]
   }
