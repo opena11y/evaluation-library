@@ -2,46 +2,28 @@
 <html>
   <head>
     <title>QUNIT: Language Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
 
-  <body>  
+  <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
-      // Test case for labeling form controls
 
-      test( "LANGUAGE_1: HTML element has lang attribute", function() {
-        executeTest('ID_IFRAME_1A', 'LANGUAGE_1');
+    <script type="module">
+
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', () => {
+        executeTest('LANGUAGE_1A: HTML element has lang attribute',         'ID_IFRAME_1A', 'LANGUAGE_1');
+        executeTest('LANGUAGE_1B: HTML element has NO lang attribute',      'ID_IFRAME_1B', 'LANGUAGE_1');
+        executeTest('LANGUAGE_1C: HTML element has invalid lang attribute', 'ID_IFRAME_1C', 'LANGUAGE_1');
+
+        executeTest('LANGUAGE_2A: Elements have all valid lang attribute values',    'ID_IFRAME_2A', 'LANGUAGE_2');
+        executeTest('LANGUAGE_2B: Elements have some invalid lang attribute values', 'ID_IFRAME_2B', 'LANGUAGE_2');
       });
 
-
-      test( "LANGUAGE_1: HTML element has NO lang attribute", function() {
-        executeTest('ID_IFRAME_1B', 'LANGUAGE_1');
-      });
-
-      test( "LANGUAGE_1: HTML element has invalid lang attribute", function() {
-        executeTest('ID_IFRAME_1C', 'LANGUAGE_1');
-      });
-      
-      test( "LANGUAGE 2: Elements have all valid lang attribute values", function() {
-        executeTest('ID_IFRAME_2A', 'LANGUAGE_2');
-      });      
-
-      test( "LANGUAGE 2: Elements have some invalid lang attribute values", function() {
-        executeTest('ID_IFRAME_2B', 'LANGUAGE_2');
-      });      
-
-       
     </script>
 
     <h2>Page must national language support </h2>

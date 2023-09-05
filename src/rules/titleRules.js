@@ -35,29 +35,13 @@ export const titleRules = [
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['Page', 'title'],
     validate            : function (dom_cache, rule_result) {
-
-      debug.log(`[Title 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
-
-/*
-
-        var TEST_RESULT = TEST_RESULT;
-
-        var title_element  = dom_cache.headings_landmarks_cache.title_element;
-
-        if (dom_cache.document_has_title) {
-
-          if (title_element.name_for_comparison.length) {
-            rule_result.addResult(TEST_RESULT.MANUAL_CHECK, title_element, 'PAGE_MC_1', []);
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.FAIL, title_element, 'PAGE_FAIL_1', []);
-          }
-        }
-        else {
-          rule_result.addResult(TEST_RESULT.FAIL, title_element, 'PAGE_FAIL_2', []);
-        }
-*/
-      } // end validate function
+      if (dom_cache.hasTitle) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [dom_cache.title]);
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+      }
+    } // end validate function
   },
 
   /**
@@ -77,7 +61,94 @@ export const titleRules = [
     target_resources    : ['Page', 'title', 'h1'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Title 1: ${dom_cache} ${rule_result} ${TEST_RESULT}]`);
+      function similiarContent (title, h1) {
+        if (typeof title !== 'string') {
+          title = '';
+        }
+        if (typeof h1 !== 'string') {
+          h1 = '';
+        }
+        title = title.toLowerCase();
+        h1 = h1.toLowerCase();
+
+        const wordsTitle = title.split(' ');
+        const wordsH1 = h1.split(' ');
+
+        let count = 0;
+        wordsH1.forEach( word => {
+          if (wordsTitle.includes(word)) {
+            count += 1;
+          }
+        });
+
+        return count > ((wordsH1.length * 8) / 10);
+      }
+
+      const visibleH1Elements = [];
+      let passedH1Count = 0;
+
+      if (dom_cache.hasTitle) {
+
+        // Get h1s visible to AT
+        dom_cache.structureInfo.allH1DomElements.forEach( de => {
+          if (de.visibility.isVisibleToAT) {
+            visibleH1Elements.push(de);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        })
+
+        const visibleH1Count = visibleH1Elements.length;
+
+        visibleH1Elements.forEach( de => {
+
+          if (de.accName.name) {
+            if (similiarContent(dom_cache.title, de.accName.name)) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              passedH1Count += 1;
+            }
+            else {
+              if (visibleH1Count > 2) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              }
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, dom_cache, 'ELEMENT_FAIL_2', []);
+          }
+        });
+
+        if (visibleH1Count === 0) {
+          rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_2', []);
+        }
+        else {
+          if (visibleH1Count > 2) {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          }
+          else {
+            if (visibleH1Count !== passedH1Count) {
+              rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_4', []);
+            }
+            else {
+              if (visibleH1Count === 1) {
+                rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+              }
+              else {
+                rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', []);
+              }
+            }
+          }
+        }
+      }
+      else {
+        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+      }
+
+
 
 /*
 

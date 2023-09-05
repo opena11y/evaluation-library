@@ -32,24 +32,20 @@ export const languageRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML4: Specifying the language of content: the lang attribute',
-            url:   'https://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
-          },
-          { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML5: The lang and xml:lang attributes',
-            url:   'https://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
+            title: 'HTML: The lang and xml:lang attributes',
+            url:   'https://html.spec.whatwg.org/multipage/dom.html#attr-lang'
           },
           { type:  REFERENCES.OTHER,
-            title: 'W3C Internationalization: Language tags in HTML and XML',
-            url:   'https://www.w3.org/International/articles/language-tags/'
+            title: 'W3 Schools: HTML lang Attribute',
+            url:   'https://www.w3schools.com/tags/att_global_lang.asp'
           },
           { type:  REFERENCES.OTHER,
-            title: 'W3C Internationalization: Choosing a Language Tag',
-            url:   'https://www.w3.org/International/questions/qa-choosing-language-tags'
+            title: 'MDN: lang attribute',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang'
           },
           { type:  REFERENCES.WCAG_TECHNIQUE,
-            title: 'H57: Using language attributes on the html element',
-            url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H57'
+            title: 'H58: Using language attributes to identify changes in the human language',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H58'
           }
         ]
     },
@@ -70,8 +66,8 @@ export const languageRules = {
           PAGE_MC_1: 'One change in language was found on the page. Review the page for any other text content in languages that are different than the principal language of the page. If any more changes in language are found, use the @lang@ attribute to identify them.',
           PAGE_MC_2: '%1 changes in language were found on the page. Review the page for any other text content in languages that are different than the principal language of the page. If any more changes in language are found, use the @lang@ attribute to identify them.',
           PAGE_MC_3: 'Review the page for any text content in a languages that are different than the principal language of the page. If any changes in language are found, use the @lang@ attribute to identify them.',
-          ELEMENT_PASS_1: 'The @%1@ element has the valid language code of \'%2\'',
-          ELEMENT_FAIL_1: 'Change the value \'%2\' defined for the @lang@ attribute on the @%1@ element to a valid IANA language code.',
+          ELEMENT_PASS_1: 'The @%1@ element has the valid language value of \'%2\'',
+          ELEMENT_FAIL_1: 'Change the @lang@ attribute value \'%2\' on the @%1@ element to a valid IANA language code.',
           ELEMENT_HIDDEN_1: 'The @%1@ element with the language code \'%2\' is hidden'
         },
         PURPOSES: [
@@ -87,65 +83,20 @@ export const languageRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML4: Specifying the language of content: the lang attribute',
-            url:   'https://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
-          },
-          { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML5: The lang and xml:lang attributes',
-            url:   'https://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
+            title: 'HTML: The lang and xml:lang attributes',
+            url:   'https://html.spec.whatwg.org/multipage/dom.html#attr-lang'
           },
           { type:  REFERENCES.OTHER,
-            title: 'W3C Internationalization: Language tags in HTML and XML',
-            url:   'https://www.w3.org/International/articles/language-tags/'
+            title: 'W3 Schools: HTML lang Attribute',
+            url:   'https://www.w3schools.com/tags/att_global_lang.asp'
           },
           { type:  REFERENCES.OTHER,
-            title: 'W3C Internationalization: Choosing a Language Tag',
-            url:   'https://www.w3.org/International/questions/qa-choosing-language-tags'
+            title: 'MDN: lang attribute',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang'
           },
           { type:  REFERENCES.WCAG_TECHNIQUE,
             title: 'H58: Using language attributes to identify changes in the human language',
             url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H58'
-          }
-        ]
-    },
-    LANGUAGE_3: {
-        ID:                    'Language 3',
-        DEFINITION:            'Elements with @lang@ attribute must have valid IANA language codes.',
-        SUMMARY:               'Valid IANA language codes',
-        TARGET_RESOURCES_DESC: 'Elements with lang attributes',
-        RULE_RESULT_MESSAGES: {
-          NOT_APPLICABLE: 'No elements with @lang@ attribute defined'
-        },
-        BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1:   'The @%1@ element defines the \'%2\' language code.',
-          ELEMENT_FAIL_1: 'Change the language code \'%2\' defined in the @lang@ attribute of the @%1@ element to a valid IANA language code.',
-          ELEMENT_HIDDEN_1: 'The @%1@ element with the language code \'%2\' is hidden.'
-        },
-        PURPOSES: [
-          'Assistive technologies like screen readers and other speech output technologies need to know the language of the characters of an element in order to speak the text content correctly.'
-        ],
-        TECHNIQUES: [
-          'Use the @lang@ attribute to define the IANA language of the text content of the element.',
-          'Use the IANA codes to identify the language of the text in the element (e.g. en, fr, ...).'
-        ],
-        MANUAL_CHECKS: [
-        ],
-        INFORMATIONAL_LINKS: [
-          { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML4: Specifying the language of content: the lang attribute',
-            url:   'https://www.w3.org/TR/html4/struct/dirlang.html#adef-lang'
-          },
-          { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML5: The lang and xml:lang attributes',
-            url:   'https://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes'
-          },
-          { type:  REFERENCES.OTHER,
-            title: 'W3C Internationalization: Language tags in HTML and XML',
-            url:   'https://www.w3.org/International/articles/language-tags/'
-          },
-          { type:  REFERENCES.OTHER,
-            title: 'W3C Internationalization: Choosing a Language Tag',
-            url:   'https://www.w3.org/International/questions/qa-choosing-language-tags'
           }
         ]
     }

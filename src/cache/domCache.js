@@ -95,6 +95,15 @@ export default class DOMCache {
       startingElement = startingDoc.body;
     }
 
+    this.hasTitle = startingDoc.title.trim().length > 0;
+    this.title = startingDoc.title;
+    try {
+      this.lang = startingDoc.documentElement.getAttribute('lang');
+    }
+    catch (error) {
+      this.lang = '';
+    }
+
     this.document = startingDoc;
 
     this.ordinalPosition = 2;

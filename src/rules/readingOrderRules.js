@@ -42,15 +42,12 @@ export const readingOrderRules = [
         'fixed']
 
       dom_cache.allDomElements.forEach( de => {
-
-        debug.log(`[ORDER 1]: ${de.elemName} ${de.cssPosition}`);
-
         if (positionValues.includes(de.cssPosition)) {
           if (de.visibility.isVisibleToAT) {
-             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.position]);
+             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.cssPosition]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.position]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.cssPosition]);
           }
         }
       });

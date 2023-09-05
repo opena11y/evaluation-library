@@ -64,6 +64,9 @@ export default class DOMElement {
     this.node             = elementNode;
     this.tagName          = elementNode.tagName.toLowerCase();
     this.isLabelable      = isLabelable(elementNode);
+    this.lang             = elementNode.hasAttribute('lang') ?
+                            elementNode.getAttribute('lang') :
+                            '';
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
     const defaultRole = this.ariaInHTMLInfo.defaultRole;

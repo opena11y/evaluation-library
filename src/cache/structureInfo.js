@@ -81,6 +81,7 @@ export default class StructureInfo {
     this.hasMainLandmark = false;
     this.allLandmarkElements = [];
     this.allHeadingDomElements = [];
+    this.allH1DomElements = [];
     this.childLandmarkElements = [];
     this.landmarkElementsByDoc = [];
   }
@@ -132,6 +133,11 @@ export default class StructureInfo {
 
   addChildHeading (domElement, parentLandmarkElement) {
     this.allHeadingDomElements.push(domElement);
+
+    if (domElement.ariaInfo.ariaLevel === 1) {
+      this.allH1DomElements.push(domElement);
+    }
+
     if (parentLandmarkElement) {
       parentLandmarkElement.addChildHeading(domElement)
     }

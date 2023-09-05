@@ -18,9 +18,8 @@ export const titleRules = {
           FAIL_S: 'Add a @title@ element to the @head@ element section with text content that identifies both the website (if applicable) and the page content.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1:   'Verify that the @title@ element identifies both the website (if applicable) and the page content.',
-          PAGE_FAIL_1: 'Add content to the @title@ element that identifies both the website (if applicable) and the page content.',
-          PAGE_FAIL_2: 'Add a @title@ element to the page that identifies both the website (if applicable) and the page content.'
+          PAGE_MC_1:   'Verify that the @title@ content "%1" identifies both the website (if applicable) and the page content.',
+          PAGE_FAIL_1: 'Add content to the @title@ element in the @head@ element of the document to identify both the website (if applicable) and the page content.',
         },
         PURPOSES: [
           'The @title@ element content can be accessed by assistive technologies to orient the user to the website and page content.'
@@ -36,8 +35,12 @@ export const titleRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML TITLE Element Specification',
-            url:   'https://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
+            title: 'HTML: TITLE Element Specification',
+            url:   'https://html.spec.whatwg.org/multipage/semantics.html#the-title-element'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN: TITLE Element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title'
           },
           { type:  REFERENCES.WCAG_TECHNIQUE,
             title: 'G88: Providing descriptive titles for Web pages',
@@ -52,7 +55,7 @@ export const titleRules = {
     TITLE_2: {
         ID:            'Title 2',
         DEFINITION:    '@h1@ elements must match part of the @title@ element content.',
-        SUMMARY:       '@h1@ %s match part of the @title@',
+        SUMMARY:       '@h1@ must match part of the @title@',
         TARGET_RESOURCES_DESC: '@title@ and @h1@',
         RULE_RESULT_MESSAGES: {
           FAIL_S: 'The page has missing, hidden or empty @title@ and/or @h1@ elements or the @h1@ element content is not similar to the @title@ content.',
@@ -91,8 +94,12 @@ export const titleRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'HTML TITLE Element Specification',
-            url:   'https://www.w3.org/TR/html4/struct/global.html#edef-TITLE'
+            title: 'HTML: TITLE Element Specification',
+            url:   'https://html.spec.whatwg.org/multipage/semantics.html#the-title-element'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN: TITLE Element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title'
           },
           { type:  REFERENCES.WCAG_TECHNIQUE,
             title: 'G88: Providing descriptive titles for Web pages',

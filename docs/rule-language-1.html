@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;title&lt;/code&gt; must identify website and page | OpenA11y Evaluation Library 2.0</title>
+        <title>Page must use language code | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,27 +49,27 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>title</code> must identify website and page</li>
+          <li class="breadcrumb-item active">Page must use language code</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>title</code> must identify website and page</h1>
+            <h1 id="h1-title">Rule: Page must use language code</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Title 1</td>
+  <td>Language 1</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td><code>title</code> element must identify both the website and page content.</td>
+  <td>Page must define the language of its principal content using a valid IANA language code.</td>
 </tr>
 
                   
@@ -78,7 +78,7 @@
   <td>
     <ul>
       
-      <li>The <code>title</code> element content can be accessed by assistive technologies to orient the user to the website and page content.</li>
+      <li>Assistive technologies like screen readers and other speech output technologies need to know the languages represented by the characters in order to speak the text content correctly.</li>
       
     </ul>
   </td>
@@ -95,26 +95,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#page-titled" target="_spec">
-        Success Criterion 2.4.2 Page Titled
+      <a href="https://www.w3.org/TR/WCAG21/#language-of-page" target="_spec">
+        Success Criterion 3.1.1 Language of Page
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#info-and-relationships" target="_spec">
-          Success Criterion 1.3.1 Info and Relationships
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
-          Success Criterion 2.4.6 Headings and Labels
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -123,7 +111,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Site Navigation</td>
+  <td>Color/Content</td>
 </tr>
 
                   
@@ -138,9 +126,9 @@
   <td>
     <ul>
       
-      <li>Use a <code>title</code> element to identify the website and page content.</li>
+      <li>Use the <code>lang</code> attribute on the <code>html</code> or <code>xhtml</code> element to define the principal language of the web page.</li>
       
-      <li>If the page is part of a sequence of web pages, include the sequence number and total number of steps in the <code>title</code> element.</li>
+      <li>Use the IANA codes to identify the principal language (e.g. en, fr, ...).</li>
       
     </ul>
   </td>
@@ -152,13 +140,13 @@
   <td>
     <ul>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-title-element">HTML: TITLE Element Specification</a></li>
+      <li><a href="https://html.spec.whatwg.org/multipage/dom.html#attr-lang">HTML: The lang and xml:lang attributes</a></li>
       
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title">MDN: TITLE Element</a></li>
+      <li><a href="https://www.w3schools.com/tags/att_global_lang.asp">W3 Schools: HTML lang Attribute</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G88">G88: Providing descriptive titles for Web pages</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang">MDN: lang attribute</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H25">H25: Providing a title using the title element</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H58">H58: Using language attributes to identify changes in the human language</a></li>
       
     </ul>
   </td>

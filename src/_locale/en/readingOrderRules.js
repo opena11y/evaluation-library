@@ -12,7 +12,7 @@ export const readingOrderRules = {
     ID:                    'Order 1',
     DEFINITION:            'Elements positioned using CSS @absolute@, @relative@ or @fixed@ must maintain a meaningful reading order of content.',
     SUMMARY:               'Reading order: CSS positioning',
-    TARGET_RESOURCES_DESC: '@article@, @aside@, @div@, @footer@, @header@, @main@, @nav@, @section@, @table[role="presentation"]@',
+    TARGET_RESOURCES_DESC: 'Elements with absolute, relative and fixed position values',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S:   'Verify the element positioned with CSS maintains a reading order meaningful to users of assistive technologies.',
       MANUAL_CHECK_P:   'Verify the %N_MC elements positioned with CSS maintain a reading order meaningful to users of assistive technologies.',
