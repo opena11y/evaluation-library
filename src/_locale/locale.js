@@ -222,12 +222,11 @@ function getRulesetInfo (rulesetId) {
  *
  * @param {String} rulesetId    - Used to identify the ruleset
  * @param {String} level        - Used to identify the WCAG level
- * @param {String} scopeFilter  - Used to identify rule scope filters
  *
  * @return {String}  see @desc
  */
 
-function getRulesetLabel(rulesetId, level, scopeFilter) {
+function getRulesetLabel(rulesetId, level) {
 
     function addLevel () {
       switch (level) {
@@ -262,21 +261,6 @@ function getRulesetLabel(rulesetId, level, scopeFilter) {
       default:
         label = messages[locale].common.rulesetWCAG20 + addLevel();
         break;
-    }
-
-    switch (scopeFilter) {
-      case 'ELEMENT':
-        label += messages[locale].common.scopeFilterElement;
-        break;
-
-      case 'PAGE':
-        label += messages[locale].common.scopeFilterPage;
-        break;
-
-      case 'WEBSITE':
-        label += messages[locale].common.scopeFilterWebsite;
-        break;
-
     }
 
   return label;

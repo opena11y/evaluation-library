@@ -71,7 +71,7 @@ function getEvaluationInfo(panelPort) {
   info.ruleset     = aiInfo.ruleset;
   info.level       = aiInfo.level;
   info.scopeFilter = aiInfo.scopeFilter;
-  info.evaluationLabel = getRulesetLabel(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter);
+  info.evaluationLabel = getRulesetLabel(aiInfo.ruleset, aiInfo.level);
 
   switch(aiInfo.view) {
     case viewId.allRules:
