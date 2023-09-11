@@ -25,7 +25,7 @@ export const common = {
   },
   required: 'Required',
   recommended: 'Recommended',
-  tableType: ['undefined', 'Unknown', 'Layout', 'Data', 'Complex', 'ARIA Table', 'Grid', 'Tree Grid'],
+  tableType: ['undefined', 'Unknown', 'Layout', 'Simple Data', 'Complex Data', 'ARIA Table', 'Grid', 'Tree Grid'],
   headerSource: ['undefined', 'none', 'headers attribute', 'row and column'],
 
   elementViolationLabel:   'V',
@@ -54,6 +54,8 @@ export const common = {
 
   scopeFilterElement: ', Element scope only',
   scopeFilterPage:    ', Page scope only',
-  scopeFilterWebsite: ', Website scope only'
+  scopeFilterWebsite: ', Website scope only',
+
+  headerSource: ['none', 'none', 'Headers Attribute', 'Row/Column Headers']
 
 }

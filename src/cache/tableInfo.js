@@ -55,7 +55,7 @@ class TableElement {
     this.cellCount = 0;
     this.headerCellCount = 0;
 
-    this.spannedCells = 0;
+    this.spannedDataCells = 0;
 
     this.currentParent = this;
   }
@@ -113,8 +113,9 @@ class TableElement {
       }
     }
 
-    if (cell.rowSpan || cell.colSpan) {
-      this.spannedCells += 1;
+    if (!cell.isHeader &&
+        ((cell.rowSpan > 1) || (cell.colSpan > 1))) {
+      this.spannedDataCells += 1;
     }
 
     return column;
@@ -233,7 +234,7 @@ class TableElement {
          (this.domElement.accName.name)) &&
        (this.rowCount > 1) &&
        (this.colCount > 1)) {
-      if (this.spannedCells > 0) {
+      if (this.spannedDataCells > 0) {
         return TABLE_TYPE.COMPLEX;
       }
       else {

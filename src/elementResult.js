@@ -253,25 +253,26 @@ export default class ElementResult extends BaseResult {
       info.columns  = te.colCount;
       info.header_cells     = te.headerCellCount;
       info.data_cells       = te.cellCount - te.headerCellCount;
-      info.cells_with_spans = te.spannedCells;
+      info.spanned_data_cells = te.spannedDataCells;
     }
     return info;
   }
 
   /**
-  * @method getTableCellHeaderInfo
+  * @method getTableCellInfo
   *
   * @desc Gets table header information for data cells
   *
   * @return {Object} Object with header keys and values
   */
-  getTableCellHeaderInfo () {
+  getTableCellInfo () {
     const info = {};
     const tableCell = this.domElement.tableCell;
     if (tableCell) {
-      info.count   = tableCell.headers.length;
       info.headers = tableCell.headers.join(' | ');
-      info.source  = tableCell.headerSource;
+      info.headers_source  = getCommonMessage('headerSource', tableCell.headerSource);
+      info.rowspan = tableCell.rowSpan;
+      info.colspan = tableCell.columnSpan;
     }
     return info;
   }

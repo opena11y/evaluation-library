@@ -82,7 +82,7 @@ function getElementResultInfo(ruleResult) {
 
     let accNameInfo     = JSON.stringify(elementResult.getAccessibleNameInfo());
     let ccrInfo         = JSON.stringify(elementResult.getColorContrastInfo());
-    let headerInfo      = JSON.stringify(elementResult.getTableCellHeaderInfo());
+    let tableCellInfo   = JSON.stringify(elementResult.getTableCellInfo());
     let tableInfo       = JSON.stringify(elementResult.getTableInfo());
     let visibilityInfo  = JSON.stringify(elementResult.getVisibilityInfo());
     let htmlAttrInfo    = JSON.stringify(elementResult.getHTMLAttributes());
@@ -103,7 +103,7 @@ function getElementResultInfo(ruleResult) {
       'resultType'       : elementResult.getResultType(),
       'accNameInfo'      : accNameInfo,
       'ccrInfo'          : ccrInfo,
-      'headerInfo'       : headerInfo,
+      'tableCellInfo'    : tableCellInfo,
       'tableInfo'        : tableInfo,
       'visibilityInfo'   : visibilityInfo,
       'htmlAttrInfo'     : htmlAttrInfo,

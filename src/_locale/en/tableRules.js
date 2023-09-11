@@ -85,8 +85,8 @@ export const tableRules = {
       SUMMARY:               'Data tables must have name',
       TARGET_RESOURCES_DESC: '@table@',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:           'Add an accessible name for the data table using either the @caption@ element; or one of the following @table@ element attributes: @summary@, @title@, @aria-label@ or @aria-labelledby@.',
-        FAIL_P:           'Add an accessible name to each of the %N_F out of %N_T data tables using either the @caption@ element; or one of the following @table@ element attributes: @summary@, @title@, @aria-label@ or @aria-labelledby@.',
+        FAIL_S:           'Add an accessible name for the data table using either the @caption@ element; or one of the following @table@ element attributes: @aria-label@ or @aria-labelledby@.',
+        FAIL_P:           'Add an accessible name to each of the %N_F out of %N_T data tables using either the @caption@ element; or one of the following @table@ element attributes: @aria-label@ or @aria-labelledby@.',
         HIDDEN_S:         'One data table that is hidden was not evaluated.',
         HIDDEN_P:         '%N_H data tables that are hidden were not evaluated.',
         NOT_APPLICABLE:   'No data tables found on the page.'
@@ -141,10 +141,6 @@ export const tableRules = {
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F46'
         }
@@ -154,10 +150,10 @@ export const tableRules = {
       ID:                    'Table 3',
       DEFINITION:            'Some data tables may have an accessible description (e.g. summary) of contents of the table.',
       SUMMARY:               'Data tables may have description',
-      TARGET_RESOURCES_DESC: '@table[summary]@,  @table[title]@ or @aria-describedby@ attribute',
+      TARGET_RESOURCES_DESC: '@table[title]@ or @aria-describedby@ attribute',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S: 'For the data table without a summary, consider adding an @summary@, @title@ or @aria-describedby@ attribute to point to a summary of the information in the simple table.',
-        MANUAL_CHECK_P: 'For the %N_F data tables without summary, consider adding an @summary@, @title@ or @aria-describedby@ attribute to point to a summary of the information in each simple table.',
+        MANUAL_CHECK_S: 'For the data table without a summary, consider adding a @aria-describedby@ attribute to reference summary content on the page or adding additional information to the @caption@ element to the table.',
+        MANUAL_CHECK_P: 'For the %N_F data tables without summary, consider adding an @aria-describedby@ attribute to reference summary content on the page or adding additional information to the @caption@ element in each table.',
         HIDDEN_S:       'One data @table@ element that is hidden was not evaluated.',
         HIDDEN_P:       'The %N_H data @table@ elements elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables on the page.'
@@ -165,7 +161,7 @@ export const tableRules = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   'The @%1@ element has an accessible description through the @aria-describedby@ reference.',
         ELEMENT_PASS_2:   'The @%1@ element has an accessible description through the @title@ attribute.',
-        ELEMENT_MC_1:     'The @%1@ element is a simple table, consider adding a @summary@ or @aria-describedby@ attribute to reference a accessible description (e.g. a summary) of the content of the table.',
+        ELEMENT_MC_1:     'The @%1@ element is a simple table, consider adding a @aria-describedby@ attribute to reference a accessible description (e.g. a summary) of the content of the table.',
         ELEMENT_MC_2:     'The @%1@ element a complex table, it is highly recommended to add a @aria-describedby@ attribute to reference a accessible description (e.g. a summary) of the content of the table.',
         ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
@@ -176,7 +172,8 @@ export const tableRules = {
         ],
       TECHNIQUES: [
         'Use the  @aria-describedby@ attribute to provide a reference to an accessible description of the information in a data table.',
-        'Use the  @title@ attribute to provide a accessible description of the information in a data table.'
+        'Use the  @title@ attribute to provide a accessible description of the information in a data table.',
+        'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or descriptions.'
       ],
       MANUAL_CHECKS: [
         'Verify the content of the accessible description accurately summarizes the organization, numerical information in the table or authors intended conclusions from viewing the table.'
@@ -223,11 +220,11 @@ export const tableRules = {
       ],
       TECHNIQUES: [
         'Use @caption@ element to provide an accessible name for a data table.',
-        'Use @summary@ attribute to provide an accessible name for a data table.',
-        'Use @title@ attribute to provide an accessible name for a data table.',
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.'
+        'Use @title@ attribute to provide an accessible name for a data table.',
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.',
+        'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
       ],
       MANUAL_CHECKS: [
         'Verify the accessible names for tables are unique and identify the content in the data tables.'
@@ -250,8 +247,8 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -260,10 +257,6 @@ export const tableRules = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H39: Using caption elements to associate data table captions with data tables',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H39'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'H73: Using the summary attribute of the table element to give an overview of data tables',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H73'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'F46: Failure of Success Criterion 1.3.1 due to using th elements, caption elements, or non-empty summary attributes in layout tables',
@@ -310,7 +303,8 @@ export const tableRules = {
       ],
       TECHNIQUES: [
         'Use @th@ elements in the first row and/or first column to identify a table as a data table.',
-        'Use @caption@ element; @summary@, @title@, @aria-label@, @aria-labelledby@ or @aria-describedby@ attribute to add an accessible name or description to a @table@ element.',
+        'Use @caption@ element; @aria-label@ or @aria-labelledby@ attribute to add an accessible name to a @table@ element.',
+        'Use the @aria-describedby@ attribute to add an accessible description to a @table@ element.',
         'Use @role="presentation"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
         'Layout tables must only use the @tr@ and @td@ table elements for layout content and must NOT have an accessible name or description.'
       ],
@@ -330,10 +324,6 @@ export const tableRules = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
           url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: summary attribute',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#adef-summary'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
