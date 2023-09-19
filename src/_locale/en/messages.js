@@ -64,3 +64,4 @@ messages.rules = Object.assign(messages.rules, timingRules);
 messages.rules = Object.assign(messages.rules, titleRules);
 messages.rules = Object.assign(messages.rules, videoRules);
 messages.rules = Object.assign(messages.rules, widgetRules);
+

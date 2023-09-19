@@ -48,7 +48,7 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="id-rc" role="tabpanel" aria-labelledby="id-rc-tab">
               {% for rc in allRuleCategories %}
-                <h2 id="rc-{{rc.rule_category_id}}">{{rc.title}}</h2>
+                <h2 id="rc-{{rc.rule_category_id}}" class="rules">{{rc.title}}</h2>
                 <table class="table table-striped" aria-labelledby="rc-{{rc.rule_category_id}}">
                   <thead>
                     <th>ID</th>
@@ -74,11 +74,12 @@
               {% endfor %}
             </div>
 
-            <div class="tab-pane fade show active" id="rc" role="tabpanel" aria-labelledby="gl-tab">
+            <div class="tab-pane fade show active" id="id-gl" role="tabpanel" aria-labelledby="gl-tab">
               {% for gl in allGuidelines %}
-                <h2 id="gl-{{gl.id}}">{{gl.title}}</h2>
+                <h2 id="gl-{{gl.id}}" class="rules">{{gl.title}}</h2>
                 {% for sc in gl.successCriteria %}
-                  <h3 id="sc-{{sc.id}}">{{sc.title}}</h3>
+                  {% if sc.level > 1 %}
+                  <h3 id="sc-{{sc.id}}" class="rules">{{sc.title}}</h3>
                   <table class="table table-striped" aria-labelledby="sc-{{gl.id}}">
                     <thead>
                       <th>ID</th>
@@ -101,6 +102,7 @@
                     {% endfor %}
                     </tbody>
                   </table>
+                  {% endif %}
                 {% endfor %}
               {% endfor %}
             </div>

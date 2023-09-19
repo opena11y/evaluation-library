@@ -180,8 +180,8 @@ const RULESET =  {
  * RULE_CATEGORIES.LINKS
  * RULE_CATEGORIES.LANDMARKS
  * RULE_CATEGORIES.SITE_NAVIGATION
- * RULE_CATEGORIES.STYLES_READABILITY
- * RULE_CATEGORIES.TABLES
+ * RULE_CATEGORIES.COLOR_CONTENT
+ * RULE_CATEGORIES.TABLES_LAYOUT
  * RULE_CATEGORIES.TIMING
  * RULE_CATEGORIES.WIDGETS_SCRIPTS
  */
@@ -190,10 +190,10 @@ const RULE_CATEGORIES = {
   UNDEFINED              : 0x0000,
   LANDMARKS              : 0x0001,
   HEADINGS               : 0x0002,
-  STYLES_READABILITY     : 0x0004,
+  COLOR_CONTENT          : 0x0004,
   IMAGES                 : 0x0008,
   LINKS                  : 0x0010,
-  TABLES                 : 0x0020,
+  TABLES_LAYOUT          : 0x0020,
   FORMS                  : 0x0040,
   WIDGETS_SCRIPTS        : 0x0080,
   AUDIO_VIDEO            : 0x0100,
@@ -920,8 +920,21 @@ class ControlElement {
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
     this.isGroup = domElement.role === 'group';
+    this.isInputTypeText   = this.isInputType(node, 'date') ||
+                             this.isInputType(node, 'number') ||
+                             this.isInputType(node, 'tel') ||
+                             this.isInputType(node, 'time') ||
+                             this.isInputType(node, 'text') ||
+                             this.isInputType(node, 'url');
+
+    this.nameAttr = node.hasAttribute('name') ?
+                    node.getAttribute('name') :
+                    '';
+
     this.isInputTypeImage  = this.isInputType(node, 'image');
+
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
+
     this.typeAttr = node.type ? node.type : '';
     this.childControlElements = [];
     this.nameForComparision = this.getNameForComparison(domElement, parentControlElement);
@@ -11737,7 +11750,7 @@ const ruleCategories = [
     description  : 'Use heading elements (H1-H6) to provide appropriate labels for landmarks, and to identify subsections of content within landmarks.'
   },
   {
-    id           : RULE_CATEGORIES.STYLES_READABILITY,
+    id           : RULE_CATEGORIES.COLOR_CONTENT,
     title        : 'Color/Content',
     url          : '',
     description  : 'Use proper HTML markup to identify the semantics and language of text content. Ensure that text is readable by adhering to color contrast guidelines, and that information is not conveyed solely by the use of color, shape, location or sound.'
@@ -11755,10 +11768,10 @@ const ruleCategories = [
     description  : 'Use link text that properly describes the target of each link. Ensure consistency and uniqueness for links that are usable, predictable and understandable.'
   },
   {
-    id           : RULE_CATEGORIES.TABLES,
-    title        : 'Tables',
+    id           : RULE_CATEGORIES.TABLES_LAYOUT,
+    title        : 'Tables/Layout',
     url          : '',
-    description  : 'Provide table captions or other meta-information as needed. Provide row and column header references for data cells of data tables. Ensure that tables used for layout properly linearize text content.'
+    description  : 'Provide table captions or other meta-information as needed. Provide row and column header references for data cells of data tables. Ensure that tables used for layout properly linearize text content and other layout related rules'
   },
   {
     id           : RULE_CATEGORIES.FORMS,
@@ -14420,6 +14433,62 @@ const controlRules$1 = {
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H32: Providing submit buttons',
           url:   'https://www.w3.org/TR/2016/NOTE-WCAG20-TECHS-20161007/H32'
+        }
+      ]
+  },
+ CONTROL_13: {
+      ID:         'Control 13',
+      DEFINITION: 'For @input@ elements use the @name@ attribute to define inputs that support auto fill.',
+      SUMMARY:    '@name@ attribute supports auto fill',
+      TARGET_RESOURCES_DESC: '@input@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:   'Determine if users would benefit if the @input@ element could be auto filled, if the would use the @name@ attribute.',
+        MANUAL_CHECK_P:   'Determine if users would benefit if any of the %N_MC @input@ elements could be auto filled, if the would use the @name@ attribute.',
+        NOT_APPLICABLE: 'No @input@ elements on the page.',
+        HIDDEN_S: 'The @input@ element that is hidden was not evaluated.',
+        HIDDEN_P: '%N_H @input@ elements that are hidden were not evaluated.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:   'Determine if users would benefit if the @%1@ element would benefit from ',
+        ELEMENT_PASS_1:   'The @%1@ element has the @name@ attribute value of @%2@.x',
+        ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'People with language and memory related disabilities or disabilities that affects executive function and decision-making benefit from the browser auto-filling personal information (such as name or address) when the autocomplete attribute is used to meet this Success Criterion, which means information does not need to be remembered by the user.',
+        'People with cerebral palsy, stroke, head injury, motor neuron disease or learning disability sometimes prefer images for communication. They can employ assistive technology which adds icons to input fields to communicate the purpose of the fields visually.',
+        'People with motor impairments also benefit from reducing the need for manual input when filling out forms.'
+      ],
+      TECHNIQUES: [
+        'Use the @name@ attribute to support auto-fill for @input@ elements.'
+      ],
+      MANUAL_CHECKS: [
+        'Determine of the user would benefit from supporting auto-fill',
+        'If the user could benefit, use the @name@ attribute and one of the predefined auto-fill values to support auto-fill for the control.',
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_SPECIFICATION,
+          title: 'Understanding SC 1.3.5: Identify Input Purpose',
+          url:   'https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html'
+        },
+        { type:  REFERENCES.WCAG_SPECIFICATION,
+          title: 'WCAG 2.1 Section 7. Input Purposes for User Interface Componentse',
+          url:   'https://www.w3.org/TR/WCAG21/#input-purposes'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'How to Create Autofill Forms',
+          url:   'https://www.mightyforms.com/blog/how-to-create-autofill-forms'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'web.dev: Autofill',
+          url:   'https://web.dev/learn/forms/autofill/'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Technique H98:Using HTML 5.2 autocomplete attributes',
+          url: 'https://www.w3.org/WAI/WCAG21/Techniques/html/H98'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Technique F107: Failure of Success Criterion 1.3.5 due to incorrect autocomplete attribute values',
+          url: 'https://www.w3.org/WAI/WCAG21/Techniques/failures/F107'
         }
       ]
   }
@@ -17238,6 +17307,33 @@ const layoutRules$1 = {
           url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-flowto'
         }
       ]
+  },
+  LAYOUT_4: {
+    ID:                    'Layout 4',
+    DEFINITION:            'Do not restrict view or operation to a single display orientation, such as portrait or landscape.',
+    SUMMARY:               'Do not restrict view or operation.',
+    TARGET_RESOURCES_DESC: 'page',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'Verify the page can be viewed or operated in either portrait or landscape orientations.',
+    },
+    BASE_RESULT_MESSAGES: {
+      PAGE_MC_1:      'Verify the page can be viewed or operated in either portrait or landscape orientations.',
+    },
+    PURPOSES: [
+      'Users with dexterity impairments, who have a mounted device will be able to use the content in their fixed orientation.',
+      'Users with low-vision will be able to view content in the orientation that works best for them, for example to increase the text size by viewing content in landscape.'
+    ],
+    TECHNIQUES: [
+      'Create views and user experiences that can adapt to either portrait or landscape operation.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Understanding Success Criteria 1.3.4: Orientation',
+        url:   'https://www.w3.org/WAI/WCAG21/Understanding/orientation.html'
+      }
+    ]
   }
 };
 
@@ -21676,7 +21772,7 @@ const audioRules = [
    */
 
   { rule_id             : 'AUDIO_1',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -21715,7 +21811,7 @@ const audioRules = [
    */
 
   { rule_id             : 'AUDIO_2',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -21754,7 +21850,7 @@ const audioRules = [
    */
 
   { rule_id             : 'AUDIO_3',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -21793,7 +21889,7 @@ const audioRules = [
      */
 
   { rule_id             : 'AUDIO_4',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -21940,7 +22036,7 @@ const colorRules = [
   { rule_id             : 'COLOR_1',
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.4.3',
     wcag_related_ids    : ['1.4.1','1.4.6'],
@@ -22034,7 +22130,7 @@ const colorRules = [
   { rule_id             : 'COLOR_2',
     last_updated        : '2022-04-21',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.4.1',
     wcag_related_ids    : [],
@@ -22055,7 +22151,7 @@ const colorRules = [
   { rule_id             : 'COLOR_3',
     last_updated        : '2022-07-04',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required        : true,
     wcag_primary_id     : '1.4.6',
     wcag_related_ids    : ['1.4.1','1.4.3'],
@@ -22389,7 +22485,7 @@ const frameRules = [
   { rule_id             : 'FRAME_1',
     last_updated        : '2023-08-24',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : [],
@@ -22422,7 +22518,7 @@ const frameRules = [
   { rule_id             : 'FRAME_2',
     last_updated        : '2023-08-24',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : [],
@@ -22454,6 +22550,62 @@ const frameRules = [
 /* Constants */
 const debug$u = new DebugLogging('Control Rules', false);
 debug$u.flag = false;
+
+const autoFillValues = [
+  'name',
+  'honorific-prefix',
+  'given-name',
+  'additional-name',
+  'family-name',
+  'honorific-suffix',
+  'nickname',
+  'organization-title',
+  'username',
+  'new-password',
+  'current-password',
+  'organization',
+  'street-address',
+  'address-line1',
+  'address-line2',
+  'address-line3',
+  'address-level4',
+  'address-level3',
+  'address-level2',
+  'address-level1',
+  'country',
+  'country-name',
+  'postal-code',
+  'cc-name',
+  'cc-given-name',
+  'cc-additional-name',
+  'cc-family-name',
+  'cc-number',
+  'cc-exp',
+  'cc-exp-month',
+  'cc-exp-year',
+  'cc-csc',
+  'cc-type',
+  'transaction-currency',
+  'transaction-amount',
+  'language',
+  'bday',
+  'bday-day',
+  'bday-month',
+  'bday-year',
+  'sex',
+  'url',
+  'photo',
+  'tel',
+  'tel-country-code',
+  'tel-national',
+  'tel-area-code',
+  'tel-local',
+  'tel-local-prefix',
+  'tel-local-suffix',
+  'tel-extension',
+  'email',
+  'impp',
+];
 
 
 /*
@@ -23128,6 +23280,40 @@ const controlRules = [
     });
 
   } // end validation function
+},
+
+/**
+ * @object CONTROL_13
+ *
+ * @desc Use names that support autocomplete
+ *
+ */
+
+{ rule_id             : 'CONTROL_13',
+  last_updated        : '2023-09-18',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '1.3.5',
+  wcag_related_ids    : ['3.3.2', '2.4.6'],
+  target_resources    : ['input[type="text"]'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.isInputTypeText) {
+        if (de.visibility.isVisibleToAT) {
+          if (autoFillValues.includes(ce.nameAttr)) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, ce.nameAttr]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
+  } // end validation function
 }
 
 ];
@@ -23545,7 +23731,7 @@ const htmlRules = [
   { rule_id             : 'HTML_1',
     last_updated        : '2023-09-01',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '2.3.1',
     wcag_related_ids    : ['2.2.2', '4.1.1'],
@@ -24964,7 +25150,7 @@ const languageRules = [
   { rule_id             : 'LANGUAGE_1',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '3.1.1',
     wcag_related_ids    : [],
@@ -24993,7 +25179,7 @@ const languageRules = [
   { rule_id             : 'LANGUAGE_2',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '3.1.2',
     wcag_related_ids    : ['3.1.1'],
@@ -25057,7 +25243,7 @@ const layoutRules = [
   { rule_id             : 'LAYOUT_1',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.TABLES,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : ['1.3.1'],
@@ -25113,7 +25299,7 @@ const layoutRules = [
   { rule_id             : 'LAYOUT_2',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
@@ -25144,44 +25330,6 @@ const layoutRules = [
         }
       });
 
-/*
-       var TEST_RESULT   = TEST_RESULT;
-       var VISIBILITY    = VISIBILITY;
-
-       var i;
-       var te;
-
-       var table_elements     = dom_cache.tables_cache.table_elements;
-       var table_elements_len = table_elements.length;
-
-
-       // Check to see if valid cache reference
-       if (table_elements && table_elements_len) {
-
-         for (i=0; i < table_elements_len; i++) {
-
-           te = table_elements[i];
-
-           if (te.table_role === TABLE_ROLE.LAYOUT) {
-
-             if (te.dom_element.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-               if (te.max_column > 1) {
-
-                 if (te.nesting_level > 0) rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', [te.max_row, te.max_column, te.nesting_level]);
-                 else rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
-               }
-               else {
-                 rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', []);
-               }
-             }
-             else {
-               rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-             }
-           }
-         } // end loop
-       }
-       */
     } // end validation function
   },
 
@@ -25193,7 +25341,7 @@ const layoutRules = [
   { rule_id             : 'LAYOUT_3',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
@@ -25213,6 +25361,26 @@ const layoutRules = [
 
       });
     } // end validation function
+  },
+
+  /**
+   * @object LAYOUT_4
+   *
+   * @desc    Verify if the page support both port
+   */
+  { rule_id             : 'LAYOUT_4',
+    last_updated        : '2023-09-14',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.4',
+    wcag_related_ids    : [],
+    target_resources    : ['page'],
+    validate          : function (dom_cache, rule_result) {
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+
+    } // end validate function
   }
 ];
 
@@ -25391,7 +25559,7 @@ const listRules = [
   { rule_id             : 'LIST_1',
     last_updated        : '2023-08-24',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : [],
@@ -25479,7 +25647,7 @@ const listRules = [
   { rule_id             : 'LIST_2',
     last_updated        : '2023-08-24',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '2.4.6',
     wcag_related_ids    : ['1.3.1'],
@@ -25813,7 +25981,7 @@ const readingOrderRules = [
   { rule_id             : 'ORDER_1',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
@@ -25861,7 +26029,7 @@ const resizeRules = [
   { rule_id             : 'RESIZE_1',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.4.4',
     wcag_related_ids    : [],
@@ -25894,7 +26062,7 @@ const sensoryRules = [
   { rule_id             : 'SENSORY_1',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.3.3',
     wcag_related_ids    : [],
@@ -25927,7 +26095,7 @@ const tableRules = [
 { rule_id             : 'TABLE_1',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -25990,7 +26158,7 @@ const tableRules = [
 { rule_id             : 'TABLE_2',
   last_updated        : '2023-05-03',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1'],
@@ -26025,7 +26193,7 @@ const tableRules = [
 { rule_id             : 'TABLE_3',
   last_updated        : '2023-05-03',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -26070,7 +26238,7 @@ const tableRules = [
 { rule_id             : 'TABLE_4',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -26126,7 +26294,7 @@ const tableRules = [
  { rule_id             : 'TABLE_5',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -26193,7 +26361,7 @@ const tableRules = [
 { rule_id             : 'TABLE_6',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : false,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -26236,7 +26404,7 @@ const tableRules = [
 { rule_id             : 'TABLE_7',
   last_updated        : '2023-05-08',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -26286,7 +26454,7 @@ const tableRules = [
 { rule_id             : 'TABLE_8',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.TABLES,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -26478,6 +26646,8 @@ const titleRules = [
     target_resources    : ['Page', 'title', 'h1'],
     validate            : function (dom_cache, rule_result) {
 
+      debug$e.log(`[TITLE 2][Start]`);
+
       function similiarContent (title, h1) {
         if (typeof title !== 'string') {
           title = '';
@@ -26519,7 +26689,6 @@ const titleRules = [
         const visibleH1Count = visibleH1Elements.length;
 
         visibleH1Elements.forEach( de => {
-
           if (de.accName.name) {
             if (similiarContent(dom_cache.title, de.accName.name)) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
@@ -26535,7 +26704,7 @@ const titleRules = [
             }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, dom_cache, 'ELEMENT_FAIL_2', []);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
           }
         });
 
@@ -26565,113 +26734,9 @@ const titleRules = [
         rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
       }
 
-
-
-/*
-
-        function compareTextContent(s1, s2) {
-
-          var words = s2.split(' ');
-          var words_len = words.length;
-          var words_match = 0;
-          var words_not_matched = 0;
-          var characters_match = 0;
-          var characters_not_matched = 0;
-
-  //        logger.debug("Comparison: " + s1 + "/" + s2);
-
-          for (var i = 0; i < words_len; i++) {
-            var w = words[i];
-            if (s1.indexOf(w) >= 0) {
-              characters_match += w.length;
-              words_match++;
-            }
-            else {
-              characters_not_matched += w.length;
-              words_not_matched++;
-            }
-          }
-
-  //        logger.debug("Match Information: " + (characters_match * words_match) + "/" + (characters_not_matched * words_not_matched));
-
-          if (characters_not_matched === 0) return true;
-
-          var p = (100 * characters_match * words_match) / ((characters_match  * words_match) + (characters_not_matched * words_not_matched ));
-
-  //        logger.debug("Match Percentage: " + p);
-
-          if (p > 80) return true;
-
-          return false;
-        }
-
-        var TEST_RESULT = TEST_RESULT;
-        var VISIBILITY  = VISIBILITY;
-
-        var title_element  = dom_cache.headings_landmarks_cache.title_element;
-        var page_element   = dom_cache.headings_landmarks_cache.page_element;
-        var h1_elements    = dom_cache.headings_landmarks_cache.h1_elements;
-        var visible_h1_element_count = 0;
-        var passed_h1_element_count  = 0;
-        var i, h1, de, cs;
-
-  //      logger.debug('[RULE][TITLE 2] Title: ' + title_element.name_for_comparison + '(' + title_element.name_for_comparison.length + ')');
-
-        if (title_element.name_for_comparison.length === 0) {
-          rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_1', []);
-        }
-        else {
-
-          var h1_count = h1_elements.length;
-
-          for(i = 0; i < h1_count; i++) {
-            h1 = h1_elements[i];
-            de = h1.dom_element;
-            cs = de.computed_style;
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) visible_h1_element_count += 1;
-          }
-
-          for(i = 0; i < h1_count; i++) {
-            h1 = h1_elements[i];
-            de = h1.dom_element;
-            cs = de.computed_style;
-
-  //          logger.debug('[RULE][TITLE 2] H1: ' + h1.name_for_comparison + '(' + h1.name_for_comparison.length + ')');
-
-            if (cs.is_visible_to_at === VISIBILITY.VISIBLE) {
-              if (h1.name_for_comparison.length) {
-                if (compareTextContent(title_element.name_for_comparison, h1.name_for_comparison)) {
-                  rule_result.addResult(TEST_RESULT.PASS, h1, 'ELEMENT_PASS_1', []);
-                  passed_h1_element_count++;
-                }
-                else {
-                  if (visible_h1_element_count > 2) {
-                    rule_result.addResult(TEST_RESULT.MANUAL_CHECK, h1, 'ELEMENT_MC_1', []);
-                  }
-                  else {
-                    rule_result.addResult(TEST_RESULT.FAIL, h1, 'ELEMENT_FAIL_1', []);
-                  }
-                }
-              }
-              else {
-                rule_result.addResult(TEST_RESULT.FAIL, h1, 'ELEMENT_FAIL_2', []);
-              }
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.HIDDEN, h1, 'ELEMENT_HIDDEN_1', []);
-            }
-          }
-
-          if (visible_h1_element_count === 0) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_2', []);
-          else if (visible_h1_element_count > 2) rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', []);
-          else if (visible_h1_element_count !== passed_h1_element_count) rule_result.addResult(TEST_RESULT.FAIL, page_element, 'PAGE_FAIL_4', []);
-          else if (visible_h1_element_count === 1) rule_result.addResult(TEST_RESULT.PASS, page_element, 'PAGE_PASS_1', []);
-          else rule_result.addResult(TEST_RESULT.PASS, page_element, 'PAGE_PASS_2', []);
-        }
-        */
-      } // end validate function
-    }
- ];
+    } // end validate function
+  }
+];
 
 /* videoRules.js */
 
@@ -26693,7 +26758,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_1',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26732,7 +26797,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_2',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26776,7 +26841,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_3',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26810,7 +26875,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_4',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26844,7 +26909,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_5',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26878,7 +26943,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_6',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26912,7 +26977,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_7',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26946,7 +27011,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_8',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -26981,7 +27046,7 @@ const videoRules = [
    */
 
   { rule_id             : 'VIDEO_9',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -30169,7 +30234,7 @@ class RuleResult {
 
 /* Constants */
 const debug$1 = new DebugLogging('EvaluationResult', false);
-debug$1.flag = false;
+debug$1.flag = true;
 
 /* helper functions */
 

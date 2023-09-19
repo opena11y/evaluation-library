@@ -1,3 +1,11 @@
+h2.rules {
+  font-size: 1.5em;
+}
+
+h3.rules {
+  font-size: 1.1em;
+}
+
 #main-section {
   margin-top: 60px;
 }

@@ -35,7 +35,7 @@ export const layoutRules = [
   { rule_id             : 'LAYOUT_1',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.TABLES,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : ['1.3.1'],
@@ -91,7 +91,7 @@ export const layoutRules = [
   { rule_id             : 'LAYOUT_2',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
@@ -122,44 +122,6 @@ export const layoutRules = [
         }
       });
 
-/*
-       var TEST_RESULT   = TEST_RESULT;
-       var VISIBILITY    = VISIBILITY;
-
-       var i;
-       var te;
-
-       var table_elements     = dom_cache.tables_cache.table_elements;
-       var table_elements_len = table_elements.length;
-
-
-       // Check to see if valid cache reference
-       if (table_elements && table_elements_len) {
-
-         for (i=0; i < table_elements_len; i++) {
-
-           te = table_elements[i];
-
-           if (te.table_role === TABLE_ROLE.LAYOUT) {
-
-             if (te.dom_element.computed_style.is_visible_to_at == VISIBILITY.VISIBLE) {
-
-               if (te.max_column > 1) {
-
-                 if (te.nesting_level > 0) rule_result.addResult(TEST_RESULT.FAIL, te, 'ELEMENT_FAIL_1', [te.max_row, te.max_column, te.nesting_level]);
-                 else rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_1', []);
-               }
-               else {
-                 rule_result.addResult(TEST_RESULT.PASS, te, 'ELEMENT_PASS_2', []);
-               }
-             }
-             else {
-               rule_result.addResult(TEST_RESULT.HIDDEN, te, 'ELEMENT_HIDDEN_1', []);
-             }
-           }
-         } // end loop
-       }
-       */
     } // end validation function
   },
 
@@ -171,7 +133,7 @@ export const layoutRules = [
   { rule_id             : 'LAYOUT_3',
     last_updated        : '2023-09-06',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
@@ -191,5 +153,25 @@ export const layoutRules = [
 
       });
     } // end validation function
+  },
+
+  /**
+   * @object LAYOUT_4
+   *
+   * @desc    Verify if the page support both port
+   */
+  { rule_id             : 'LAYOUT_4',
+    last_updated        : '2023-09-14',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+    rule_required       : true,
+    wcag_primary_id     : '1.3.4',
+    wcag_related_ids    : [],
+    target_resources    : ['page'],
+    validate          : function (dom_cache, rule_result) {
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [])
+
+    } // end validate function
   }
 ];

@@ -29,7 +29,7 @@ export const htmlRules = [
   { rule_id             : 'HTML_1',
     last_updated        : '2023-09-01',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '2.3.1',
     wcag_related_ids    : ['2.2.2', '4.1.1'],

@@ -27,7 +27,7 @@ export const audioRules = [
    */
 
   { rule_id             : 'AUDIO_1',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -66,7 +66,7 @@ export const audioRules = [
    */
 
   { rule_id             : 'AUDIO_2',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -105,7 +105,7 @@ export const audioRules = [
    */
 
   { rule_id             : 'AUDIO_3',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -144,7 +144,7 @@ export const audioRules = [
      */
 
   { rule_id             : 'AUDIO_4',
-    last_updated        : '2014-11-21',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,

@@ -29,7 +29,7 @@ export const resizeRules = [
   { rule_id             : 'RESIZE_1',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.4.4',
     wcag_related_ids    : [],

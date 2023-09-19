@@ -26,7 +26,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_1',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -65,7 +65,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_2',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -109,7 +109,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_3',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -143,7 +143,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_4',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -177,7 +177,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_5',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -211,7 +211,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_6',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -245,7 +245,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_7',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -279,7 +279,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_8',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
@@ -314,7 +314,7 @@ export const videoRules = [
    */
 
   { rule_id             : 'VIDEO_9',
-    last_updated        : '2014-11-28',
+    last_updated        : '2023-08-11',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,

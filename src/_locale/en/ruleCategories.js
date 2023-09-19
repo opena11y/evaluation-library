@@ -16,7 +16,7 @@ export const ruleCategories = [
     description  : 'Use heading elements (H1-H6) to provide appropriate labels for landmarks, and to identify subsections of content within landmarks.'
   },
   {
-    id           : RULE_CATEGORIES.STYLES_READABILITY,
+    id           : RULE_CATEGORIES.COLOR_CONTENT,
     title        : 'Color/Content',
     url          : '',
     description  : 'Use proper HTML markup to identify the semantics and language of text content. Ensure that text is readable by adhering to color contrast guidelines, and that information is not conveyed solely by the use of color, shape, location or sound.'
@@ -34,10 +34,10 @@ export const ruleCategories = [
     description  : 'Use link text that properly describes the target of each link. Ensure consistency and uniqueness for links that are usable, predictable and understandable.'
   },
   {
-    id           : RULE_CATEGORIES.TABLES,
-    title        : 'Tables',
+    id           : RULE_CATEGORIES.TABLES_LAYOUT,
+    title        : 'Tables/Layout',
     url          : '',
-    description  : 'Provide table captions or other meta-information as needed. Provide row and column header references for data cells of data tables. Ensure that tables used for layout properly linearize text content.'
+    description  : 'Provide table captions or other meta-information as needed. Provide row and column header references for data cells of data tables. Ensure that tables used for layout properly linearize text content and other layout related rules'
   },
   {
     id           : RULE_CATEGORIES.FORMS,

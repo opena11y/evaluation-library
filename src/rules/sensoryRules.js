@@ -29,7 +29,7 @@ export const sensoryRules = [
   { rule_id             : 'SENSORY_1',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.STYLES_READABILITY,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '1.3.3',
     wcag_related_ids    : [],

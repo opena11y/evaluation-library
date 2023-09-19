@@ -31,6 +31,7 @@
 
         executeTest('CONTROL 12A: Submit forms with buttons',                    'ID_IFRAME_12A', 'CONTROL_12');
         executeTest('FOCUS 12B: Submit forms with buttons (no visible buttons)', 'ID_IFRAME_12B', 'CONTROL_12');
+        executeTest('FOCUS 13: Use name attribute for auto-fill', 'ID_IFRAME_13', 'CONTROL_13');
       });
     </script>
 
@@ -72,6 +73,9 @@
     <h2>Forms submitted with buttons</h2>
     <iframe id="ID_IFRAME_12A" src="form_controls/form_controls_12_submit_forms_with_buttons.html"></iframe>
     <iframe id="ID_IFRAME_12B" src="form_controls/form_controls_12_submit_forms_with_buttons_no_visible_controls.html"></iframe>
+
+    <h2>Name attribute to support auto-fill</h2>
+    <iframe id="ID_IFRAME_13" src="form_controls/form_controls_13_auto_fill.html"></iframe>
 
 
   </body>

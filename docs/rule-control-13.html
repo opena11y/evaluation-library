@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;label&lt;/code&gt; must reference control | OpenA11y Evaluation Library 2.0</title>
+        <title>&lt;code&gt;name&lt;/code&gt; attribute supports auto fill | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,27 +49,27 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>label</code> must reference control</li>
+          <li class="breadcrumb-item active"><code>name</code> attribute supports auto fill</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>label</code> must reference control</h1>
+            <h1 id="h1-title">Rule: <code>name</code> attribute supports auto fill</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Control 6</td>
+  <td>Control 13</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td>Each <code>label</code> element using the <code>for</code> attribute must reference a form control on the page.</td>
+  <td>For <code>input</code> elements use the <code>name</code> attribute to define inputs that support auto fill.</td>
 </tr>
 
                   
@@ -78,7 +78,11 @@
   <td>
     <ul>
       
-      <li><code>label</code> elements are useful for accessibility only when they reference or encapsulate form controls.</li>
+      <li>People with language and memory related disabilities or disabilities that affects executive function and decision-making benefit from the browser auto-filling personal information (such as name or address) when the autocomplete attribute is used to meet this Success Criterion, which means information does not need to be remembered by the user.</li>
+      
+      <li>People with cerebral palsy, stroke, head injury, motor neuron disease or learning disability sometimes prefer images for communication. They can employ assistive technology which adds icons to input fields to communicate the purpose of the fields visually.</li>
+      
+      <li>People with motor impairments also benefit from reducing the need for manual input when filling out forms.</li>
       
     </ul>
   </td>
@@ -95,8 +99,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
-        Success Criterion 3.3.2 Labels or Instructions
+      <a href="https://www.w3.org/TR/WCAG21/#identify-input-purpose" target="_spec">
+        Success Criterion 1.3.5 Identify Input Purpose
       </a>
     </p>
     <p class="related">
@@ -105,8 +109,8 @@
     <ul class="related">
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG21/#info-and-relationships" target="_spec">
-          Success Criterion 1.3.1 Info and Relationships
+        <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
+          Success Criterion 3.3.2 Labels or Instructions
         </a>
       </li>
       
@@ -138,7 +142,7 @@
   <td>
     <ul>
       
-      <li>For a <code>label</code> element to properly reference a form control, ensure that the <code>for</code> attribute value on the <code>label</code> element exactly matches the <code>id</code> attribute value on the form control.</li>
+      <li>Use the <code>name</code> attribute to support auto-fill for <code>input</code> elements.</li>
       
     </ul>
   </td>
@@ -150,11 +154,17 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/html4/interact/forms.html#adef-for">HTML 4.01 Specification: The <code>label</code> element FOR attribute</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html">Understanding SC 1.3.5: Identify Input Purpose</a></li>
       
-      <li><a href="https://www.w3.org/WAI/tutorials/forms/">W3C WAI Accessibility Tutorials: Forms Concepts</a></li>
+      <li><a href="https://www.w3.org/TR/WCAG21/#input-purposes">WCAG 2.1 Section 7. Input Purposes for User Interface Componentse</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
+      <li><a href="https://www.mightyforms.com/blog/how-to-create-autofill-forms">How to Create Autofill Forms</a></li>
+      
+      <li><a href="https://web.dev/learn/forms/autofill/">web.dev: Autofill</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H98">Technique H98:Using HTML 5.2 autocomplete attributes</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F107">Technique F107: Failure of Success Criterion 1.3.5 due to incorrect autocomplete attribute values</a></li>
       
     </ul>
   </td>

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;label&lt;/code&gt; must reference control | OpenA11y Evaluation Library 2.0</title>
+        <title>Do not restrict view or operation. | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,27 +49,27 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>label</code> must reference control</li>
+          <li class="breadcrumb-item active">Do not restrict view or operation.</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>label</code> must reference control</h1>
+            <h1 id="h1-title">Rule: Do not restrict view or operation.</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Control 6</td>
+  <td>Layout 4</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td>Each <code>label</code> element using the <code>for</code> attribute must reference a form control on the page.</td>
+  <td>Do not restrict view or operation to a single display orientation, such as portrait or landscape.</td>
 </tr>
 
                   
@@ -78,7 +78,9 @@
   <td>
     <ul>
       
-      <li><code>label</code> elements are useful for accessibility only when they reference or encapsulate form controls.</li>
+      <li>Users with dexterity impairments, who have a mounted device will be able to use the content in their fixed orientation.</li>
+      
+      <li>Users with low-vision will be able to view content in the orientation that works best for them, for example to increase the text size by viewing content in landscape.</li>
       
     </ul>
   </td>
@@ -95,26 +97,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
-        Success Criterion 3.3.2 Labels or Instructions
+      <a href="https://www.w3.org/TR/WCAG21/#orientation" target="_spec">
+        Success Criterion 1.3.4 Orientation
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#info-and-relationships" target="_spec">
-          Success Criterion 1.3.1 Info and Relationships
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
-          Success Criterion 2.4.6 Headings and Labels
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -123,13 +113,13 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Forms</td>
+  <td>Tables/Layout</td>
 </tr>
 
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>page</td>
 </tr>
 
                   
@@ -138,7 +128,7 @@
   <td>
     <ul>
       
-      <li>For a <code>label</code> element to properly reference a form control, ensure that the <code>for</code> attribute value on the <code>label</code> element exactly matches the <code>id</code> attribute value on the form control.</li>
+      <li>Create views and user experiences that can adapt to either portrait or landscape operation.</li>
       
     </ul>
   </td>
@@ -150,11 +140,7 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/html4/interact/forms.html#adef-for">HTML 4.01 Specification: The <code>label</code> element FOR attribute</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/tutorials/forms/">W3C WAI Accessibility Tutorials: Forms Concepts</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/orientation.html">Understanding Success Criteria 1.3.4: Orientation</a></li>
       
     </ul>
   </td>

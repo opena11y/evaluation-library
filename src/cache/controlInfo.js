@@ -23,8 +23,21 @@ class ControlElement {
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
     this.isGroup = domElement.role === 'group';
+    this.isInputTypeText   = this.isInputType(node, 'date') ||
+                             this.isInputType(node, 'number') ||
+                             this.isInputType(node, 'tel') ||
+                             this.isInputType(node, 'time') ||
+                             this.isInputType(node, 'text') ||
+                             this.isInputType(node, 'url');
+
+    this.nameAttr = node.hasAttribute('name') ?
+                    node.getAttribute('name') :
+                    '';
+
     this.isInputTypeImage  = this.isInputType(node, 'image');
+
     this.isInputTypeRadio  = this.isInputType(node, 'radio');
+
     this.typeAttr = node.type ? node.type : '';
     this.childControlElements = [];
     this.nameForComparision = this.getNameForComparison(domElement, parentControlElement);

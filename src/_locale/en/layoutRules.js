@@ -159,5 +159,32 @@ export const layoutRules = {
           url:   'https://www.w3.org/TR/wai-aria/states_and_properties#aria-flowto'
         }
       ]
+  },
+  LAYOUT_4: {
+    ID:                    'Layout 4',
+    DEFINITION:            'Do not restrict view or operation to a single display orientation, such as portrait or landscape.',
+    SUMMARY:               'Do not restrict view or operation.',
+    TARGET_RESOURCES_DESC: 'page',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S: 'Verify the page can be viewed or operated in either portrait or landscape orientations.',
+    },
+    BASE_RESULT_MESSAGES: {
+      PAGE_MC_1:      'Verify the page can be viewed or operated in either portrait or landscape orientations.',
+    },
+    PURPOSES: [
+      'Users with dexterity impairments, who have a mounted device will be able to use the content in their fixed orientation.',
+      'Users with low-vision will be able to view content in the orientation that works best for them, for example to increase the text size by viewing content in landscape.'
+    ],
+    TECHNIQUES: [
+      'Create views and user experiences that can adapt to either portrait or landscape operation.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Understanding Success Criteria 1.3.4: Orientation',
+        url:   'https://www.w3.org/WAI/WCAG21/Understanding/orientation.html'
+      }
+    ]
   }
 }

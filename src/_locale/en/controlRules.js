@@ -685,5 +685,63 @@ export const controlRules = {
           url:   'https://www.w3.org/TR/2016/NOTE-WCAG20-TECHS-20161007/H32'
         }
       ]
+  },
+ CONTROL_13: {
+      ID:         'Control 13',
+      DEFINITION: 'For @input@ elements use the @name@ attribute to define inputs that support auto fill.',
+      SUMMARY:    '@name@ attribute supports auto fill',
+      TARGET_RESOURCES_DESC: '@input@ elements',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:   'Determine if users would benefit if the @input@ element could be auto filled, if the would use the @name@ attribute.',
+        MANUAL_CHECK_P:   'Determine if users would benefit if any of the %N_MC @input@ elements could be auto filled, if the would use the @name@ attribute.',
+        NOT_APPLICABLE: 'No @input@ elements on the page.',
+        HIDDEN_S: 'The @input@ element that is hidden was not evaluated.',
+        HIDDEN_P: '%N_H @input@ elements that are hidden were not evaluated.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1:   'Determine if users would benefit if the @%1@ element would benefit from ',
+        ELEMENT_PASS_1:   'The @%1@ element has the @name@ attribute value of @%2@.x',
+        ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'People with language and memory related disabilities or disabilities that affects executive function and decision-making benefit from the browser auto-filling personal information (such as name or address) when the autocomplete attribute is used to meet this Success Criterion, which means information does not need to be remembered by the user.',
+        'People with cerebral palsy, stroke, head injury, motor neuron disease or learning disability sometimes prefer images for communication. They can employ assistive technology which adds icons to input fields to communicate the purpose of the fields visually.',
+        'People with motor impairments also benefit from reducing the need for manual input when filling out forms.'
+      ],
+      TECHNIQUES: [
+        'Use the @name@ attribute to support auto-fill for @input@ elements.'
+      ],
+      MANUAL_CHECKS: [
+        'Determine of the user would benefit from supporting auto-fill',
+        'If the user could benefit, use the @name@ attribute and one of the predefined auto-fill values to support auto-fill for the control.',
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_SPECIFICATION,
+          title: 'Understanding SC 1.3.5: Identify Input Purpose',
+          url:   'https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html'
+        },
+        { type:  REFERENCES.WCAG_SPECIFICATION,
+          title: 'WCAG 2.1 Section 7. Input Purposes for User Interface Componentse',
+          url:   'https://www.w3.org/TR/WCAG21/#input-purposes'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'How to Create Autofill Forms',
+          url:   'https://www.mightyforms.com/blog/how-to-create-autofill-forms'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'web.dev: Autofill',
+          url:   'https://web.dev/learn/forms/autofill/'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Technique H98:Using HTML 5.2 autocomplete attributes',
+          url: 'https://www.w3.org/WAI/WCAG21/Techniques/html/H98'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Technique F107: Failure of Success Criterion 1.3.5 due to incorrect autocomplete attribute values',
+          url: 'https://www.w3.org/WAI/WCAG21/Techniques/failures/F107'
+        }
+      ]
   }
 };
+
+

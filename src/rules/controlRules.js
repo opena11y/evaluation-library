@@ -12,6 +12,62 @@ import DebugLogging  from '../debug.js';
 const debug = new DebugLogging('Control Rules', false);
 debug.flag = false;
 
+const autoFillValues = [
+  'name',
+  'honorific-prefix',
+  'given-name',
+  'additional-name',
+  'family-name',
+  'honorific-suffix',
+  'nickname',
+  'organization-title',
+  'username',
+  'new-password',
+  'current-password',
+  'organization',
+  'street-address',
+  'address-line1',
+  'address-line2',
+  'address-line3',
+  'address-level4',
+  'address-level3',
+  'address-level2',
+  'address-level1',
+  'country',
+  'country-name',
+  'postal-code',
+  'cc-name',
+  'cc-given-name',
+  'cc-additional-name',
+  'cc-family-name',
+  'cc-number',
+  'cc-exp',
+  'cc-exp-month',
+  'cc-exp-year',
+  'cc-csc',
+  'cc-type',
+  'transaction-currency',
+  'transaction-amount',
+  'language',
+  'bday',
+  'bday-day',
+  'bday-month',
+  'bday-year',
+  'sex',
+  'url',
+  'photo',
+  'tel',
+  'tel-country-code',
+  'tel-national',
+  'tel-area-code',
+  'tel-local',
+  'tel-local-prefix',
+  'tel-local-suffix',
+  'tel-extension',
+  'email',
+  'impp',
+];
+
 
 /*
  * OpenA11y Alliance Rules
@@ -684,6 +740,40 @@ export const controlRules = [
       }
     });
 
+  } // end validation function
+},
+
+/**
+ * @object CONTROL_13
+ *
+ * @desc Use names that support autocomplete
+ *
+ */
+
+{ rule_id             : 'CONTROL_13',
+  last_updated        : '2023-09-18',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '1.3.5',
+  wcag_related_ids    : ['3.3.2', '2.4.6'],
+  target_resources    : ['input[type="text"]'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (ce.isInputTypeText) {
+        if (de.visibility.isVisibleToAT) {
+          if (autoFillValues.includes(ce.nameAttr)) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, ce.nameAttr]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+    });
   } // end validation function
 }
 
