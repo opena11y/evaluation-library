@@ -72,7 +72,7 @@ export const keyboardRules = {
     ID:                    'Keyboard 2',
     DEFINITION:            'The sequential tab order of all links, form controls, and ARIA widgets on the page must be meaningful.',
     SUMMARY:               'Sequential tab order of focusable elements must be meaningful',
-    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@, and @select@ elements; elements with an ARIA widget role; elements with a @tabindex@ value',
+    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@, and @select@ elements, and elements with a @tabindex@ value greater than or equal to 0',
     RULE_RESULT_MESSAGES: {
       PASS_S:             'Only one link or form control element on the page and no other elements with ARIA widget roles or @tabindex@ values, so no issues with sequential tab order.',
       PASS_P:             '%N_P link and/or form control elements on the page and no other elements with ARIA widget roles or @tabindex@ values, so no issues with sequential tab order.',
