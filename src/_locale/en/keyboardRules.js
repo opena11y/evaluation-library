@@ -10,31 +10,31 @@ export const keyboardRules = {
   KEYBOARD_1: {
     ID:                    'Keyboard 1',
     DEFINITION:            'Elements with ARIA widget roles must support the keyboard interactions required by those roles.',
-    SUMMARY:               'Widget role requires specific keyboard support',
+    SUMMARY:               'ARIA widget role requires specific keyboard support',
     TARGET_RESOURCES_DESC: 'Elements with ARIA widget roles',
     RULE_RESULT_MESSAGES: {
-      MANUAL_CHECK_S:  'Verify the element with the widget role has the keyboard interactions required by its role.',
-      MANUAL_CHECK_P:  'Verify the %N_MC elements with widget roles have the keyboard interactions required by their roles.',
-      HIDDEN_S:        'One hidden element with a widget role was not evaluated.',
-      HIDDEN_P:        '%N_H hidden elements with widget roles were not evaluated.',
-      NOT_APPLICABLE:  'No elements with widget roles on the page'
+      MANUAL_CHECK_S:  'Verify the element with the ARIA widget role implements the keyboard interactions required by its role.',
+      MANUAL_CHECK_P:  'Verify the %N_MC elements with ARIA widget roles implement the keyboard interactions required by their roles.',
+      HIDDEN_S:        'One hidden element with an ARIA widget role was not evaluated.',
+      HIDDEN_P:        '%N_H hidden elements with ARIA widget roles were not evaluated.',
+      NOT_APPLICABLE:  'No elements with ARIA widget roles on the page'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1:     'Verify the keyboard interaction required by the @%1@ role.',
-      ELEMENT_HIDDEN_1: 'Element with @%1@ widget role was not evaluated because it is hidden.'
+      ELEMENT_MC_1:     'Verify that the keyboard interactions required by the ARIA @%1@ role are properly implemented.',
+      ELEMENT_HIDDEN_1: 'Element with ARIA @%1@ widget role was not evaluated because it is hidden.'
     },
     PURPOSES: [
       'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
       'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
-      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding the keyboard interaction expected for the elements role.',
+      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding the specific keyboard interactions required by the element\'s ARIA role.',
       'The ARIA Authoring Practices Guide identifies the keyboard interaction patterns that users expect and can rely upon, based on each ARIA widget role.',
       'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
     ],
     TECHNIQUES: [
-      'Use the ARIA Authoring Practices guide to identify the keyboard interaction support needed for each ARIA Widget role being used.',
+      'Use the ARIA Authoring Practices guide to identify the keyboard interaction support needed for each ARIA widget role being used.',
       'Add custom @keydown@, @keypress@ and/or @keyup@ event handlers to support the keyboard interactions required by the ARIA widget role.',
       'Verify that keyboard interactions are consistent among browsers and devices (e.g., desktop computers and mobile devices using Bluetooth keyboards).'
-    ],
+      ],
     MANUAL_CHECKS: [
     ],
     INFORMATIONAL_LINKS: [
@@ -70,43 +70,43 @@ export const keyboardRules = {
   },
   KEYBOARD_2: {
     ID:                    'Keyboard 2',
-    DEFINITION:            'The sequential tab order of links, form controls, and widgets must be meaningful.',
-    SUMMARY:               'Sequential tab order must be meaningful',
-    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements, and elements with widget roles with @tabindex@ values',
+    DEFINITION:            'The sequential tab order of all links, form controls, and ARIA widgets on the page must be meaningful.',
+    SUMMARY:               'Sequential tab order of focusable elements must be meaningful',
+    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@, and @select@ elements; elements with an ARIA widget role; elements with a @tabindex@ value',
     RULE_RESULT_MESSAGES: {
-      PASS_S:             'Only one link or form control element on the page and no other elements with @tabindex@ values, so no issues with sequential tab order.',
-      PASS_P:             '%N_P link and/or form control elements on the page and no other elements with @tabindex@ values, so no issues with sequential tab order.',
-      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
-      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+      PASS_S:             'Only one link or form control element on the page and no other elements with ARIA widget roles or @tabindex@ values, so no issues with sequential tab order.',
+      PASS_P:             '%N_P link and/or form control elements on the page and no other elements with ARIA widget roles or @tabindex@ values, so no issues with sequential tab order.',
+      MANUAL_CHECK_S:     'Verify that the sequential order of traversing all focusable elements on the page using only the tab key is meaningful.',
+      MANUAL_CHECK_P:     'Verify that the sequential order of traversing all focusable elements on the page using only the tab key is meaningful.',
       HIDDEN_S:           'The link, form control, or widget element that is hidden does not need to be tested for focus order.',
       HIDDEN_P:           'The %N_H links, form controls and/or widgets that are hidden do not need to be tested for focus order.',
-      NOT_APPLICABLE:     'No or only one focusable element on the page'
+      NOT_APPLICABLE:     'Only one or no focusable elements on the page'
     },
     BASE_RESULT_MESSAGES: {
-      PAGE_PASS_1:       'No elements on the page using @tabindex@ attribute that might affect sequential tab navigation.',
+      PAGE_PASS_1:       'No elements on the page are using @tabindex@ attribute that might affect sequential tab traversal.',
       PAGE_MC_1:         'Use the "tab" key to verify the sequential focus order of the %1 interactive elements on the page (i.e. links, form controls, widgets ...).',
-      ELEMENT_PASS_1:    'The @%1@ element does not have a @tabindex@ value, so no change in sequential tab navigation of the element.',
-      ELEMENT_MC_1:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: @tabindex@ value greater than 0 should be avoided to inconsistency of browser implementation.',
+      ELEMENT_PASS_1:    'The @%1@ element does not have a @tabindex@ value, so it effects no change in sequential tab traveral on the page.',
+      ELEMENT_MC_1:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: @tabindex@ values greater than 0 should be avoided due to inconsistencies with browser implementations.',
       ELEMENT_MC_2:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: The element by default is part of the tab sequence of the page, there is no need to set @tabindex=0@.',
       ELEMENT_MC_3:      'Verify the @%1@ element should be part of the sequential tab order of the page.',
       ELEMENT_MC_4:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: It is unusual for a non-widget role to be part of the tab sequence of the page.',
       ELEMENT_HIDDEN_1:  'The @%1@ element with the @tabindex=%2@ was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [
-      'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
-      'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
-      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the @tabindex@ attribute value in managing keyboard focus.',
+      'Support for tab key traversal of focusable elements is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
+      'Native HTML4 and HTML5 link and form control elements have default keyboard support for tab key traversal that are built-in and standardized among browsers.',
+      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding how the @tabindex@ attribute can be used for managing keyboard focus.',
       'The ARIA Authoring Practices Guide identifies how to use @tabindex@ to help manage keyboard focus for widget roles.',
       'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
     ],
     TECHNIQUES: [
-      'HTML form controls and link elements do not need a @tabindex@ valuable to be part of the sequential tab order, assigning a @tabindex@ value to one of these elements means you intend to change their default behavior.',
+      'HTML form controls and link elements do not need an explicit @tabindex@ value to be part of the sequential tab order; assigning a @tabindex@ value to one of these elements means you intend to change its default behavior.',
       'Setting @tabindex@ attribute to @0@ allows an element to become focusable and makes it part of the tab sequence of the page',
-      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers through scripting',
-      'Use the ARIA Authoring Practices to define keyboard support that is appropriate for widget roles.',
+      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers and scripting',
+      'Use the ARIA Authoring Practices Guide to define keyboard support that is appropriate for particular widget roles.',
       'Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.',
       'Avoid using @object@ and @embed@ elements due to the difficulty in providing the corresponding keyboard support for all of their inherent interactive behaviors.',
-      'Avoid using @tabindex@ values greater than 0 to change tabbing order, since tab sequence for values greater than 0 is inconsistent and therefore can be unpredictable across web browsers.'
+      'Avoid using @tabindex@ values greater than 0 to change the tabbing order, since tab sequence implementations for values greater than 0 are inconsistent and their associated behaviors can be unpredictable across web browsers.'
     ],
     MANUAL_CHECKS: [
       'Use the tab key to verify the tab sequence of interactive elements of the page is in a logical.',
