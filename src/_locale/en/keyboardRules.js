@@ -74,8 +74,8 @@ export const keyboardRules = {
     SUMMARY:               'Sequential tab order of focusable elements must be meaningful',
     TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@, and @select@ elements, and elements with a @tabindex@ value greater than or equal to 0',
     RULE_RESULT_MESSAGES: {
-      PASS_S:             'Only one link or form control element on the page and no other elements with ARIA widget roles or @tabindex@ values, so no issues with sequential tab order.',
-      PASS_P:             '%N_P link and/or form control elements on the page and no other elements with ARIA widget roles or @tabindex@ values, so no issues with sequential tab order.',
+      PASS_S:             'Only one link or form control element on the page and no other elements with @tabindex@ values greater than or equal to 0, so no issues with sequential tab order.',
+      PASS_P:             '%N_P link and/or form control elements on the page and no other elements with @tabindex@ values greater than or equal to 0, so no issues with sequential tab order.',
       MANUAL_CHECK_S:     'Verify that the sequential order of traversing all focusable elements on the page using only the tab key is meaningful.',
       MANUAL_CHECK_P:     'Verify that the sequential order of traversing all focusable elements on the page using only the tab key is meaningful.',
       HIDDEN_S:           'The link, form control, or widget element that is hidden does not need to be tested for focus order.',
@@ -94,7 +94,7 @@ export const keyboardRules = {
     },
     PURPOSES: [
       'Support for tab key traversal of focusable elements is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
-      'Native HTML4 and HTML5 link and form control elements have default keyboard support for tab key traversal that are built-in and standardized among browsers.',
+      'Native HTML links and form control elements have default keyboard support for tab key traversal that are built-in and standardized among browsers.',
       'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding how the @tabindex@ attribute can be used for managing keyboard focus.',
       'The ARIA Authoring Practices Guide identifies how to use @tabindex@ to help manage keyboard focus for widget roles.',
       'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
@@ -102,8 +102,8 @@ export const keyboardRules = {
     TECHNIQUES: [
       'HTML form controls and link elements do not need an explicit @tabindex@ value to be part of the sequential tab order; assigning a @tabindex@ value to one of these elements means you intend to change its default behavior.',
       'Setting @tabindex@ attribute to @0@ allows an element to become focusable and makes it part of the tab sequence of the page',
-      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers and scripting',
-      'Use the ARIA Authoring Practices Guide to define keyboard support that is appropriate for particular widget roles.',
+      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers / scripting',
+      'Use the ARIA Authoring Practices Guide to define keyboard support that is appropriate for particular ARIA widget roles.',
       'Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.',
       'Avoid using @object@ and @embed@ elements due to the difficulty in providing the corresponding keyboard support for all of their inherent interactive behaviors.',
       'Avoid using @tabindex@ values greater than 0 to change the tabbing order, since tab sequence implementations for values greater than 0 are inconsistent and their associated behaviors can be unpredictable across web browsers.'
