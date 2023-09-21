@@ -10,8 +10,8 @@ export const colorRules = {
   COLOR_1: {
       ID:                    'Color 1',
       DEFINITION:            'Text content must exceed minimum Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
-      SUMMARY:               'Text must exceed minimum CCR threshold',
-      TARGET_RESOURCES_DESC: 'All elements with text content',
+      SUMMARY:               'Color contrast of text: Minimum',
+      TARGET_RESOURCES_DESC: 'Text content',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
         FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
@@ -103,7 +103,7 @@ export const colorRules = {
   COLOR_3: {
       ID:                    'Color 3',
       DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 4.5 for large and/or bolded text and 7.1 for any other size or style of text.',
-      SUMMARY:               'Text must exceed enhanced CCR threshold',
+      SUMMARY:               'Color contrast of text: Enhanced',
       TARGET_RESOURCES_DESC: 'All elements with text content',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
@@ -158,6 +158,78 @@ export const colorRules = {
                         title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                       }
+                      ]
+  },
+  COLOR_4: {
+      ID:                    'Color 4',
+      DEFINITION:            'Color contrast of non-text content in user interface controls.',
+      SUMMARY:               'Color contrast of user interface controls',
+      TARGET_RESOURCES_DESC: 'User interface controls',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
+        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
+
+      },
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
+                      ],
+      TECHNIQUES:     [ '',
+                        ''
+                      ],
+      MANUAL_CHECKS:  [
+                      ],
+      INFORMATIONAL_LINKS: [
+                      { type:  REFERENCES.SPECIFICATION,
+                        title: 'Understanding SC 1.4.11: Non-text Contrast',
+                        url:   'https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G195: Using an author-supplied, visible focus indicator',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
+                       }
+                      ]
+  },
+  COLOR_5: {
+      ID:                    'Color 5',
+      DEFINITION:            'Color contrast of non-text content in graphical objects.',
+      SUMMARY:               'Color contrast of graphics',
+      TARGET_RESOURCES_DESC: 'Graphical objects',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
+        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
+        ELEMENT_MC_2: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
+
+      },
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
+                      ],
+      TECHNIQUES:     [ '',
+                        ''
+                      ],
+      MANUAL_CHECKS:  [
+                      ],
+      INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
+                         title: 'Understanding SC 1.4.11: Non-text Contrast',
+                         url:   'https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G207: Ensuring that a contrast ratio of 3:1 is provided for icons',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G207'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G209: Provide sufficient contrast at the boundaries between adjoining colors',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G209'
+                       }
                       ]
   }
 }

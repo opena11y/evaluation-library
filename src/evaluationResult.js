@@ -21,7 +21,7 @@ import {
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
-debug.flag = true;
+debug.flag = false;
 
 /* helper functions */
 

@@ -951,6 +951,11 @@ class ControlElement {
                        (node.getAttribute('aria-invalid').toLowerCase() === 'true') :
                        false;
 
+    this.isDisabled = node.disabled ||
+                      (node.hasAttribute('aria-disabled') ?
+                      (node.getAttribute('aria-invalid').toLowerCase() === 'true') :
+                      false);
+
     this.hasRequired = typeof node.required === 'boolean' ? node.required : false;
     this.hasAriaRequired = node.hasAttribute('aria-required');
     this.ariaRequired = this.hasAriaRequired ?
@@ -13279,8 +13284,8 @@ const colorRules$1 = {
   COLOR_1: {
       ID:                    'Color 1',
       DEFINITION:            'Text content must exceed minimum Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
-      SUMMARY:               'Text must exceed minimum CCR threshold',
-      TARGET_RESOURCES_DESC: 'All elements with text content',
+      SUMMARY:               'Color contrast of text: Minimum',
+      TARGET_RESOURCES_DESC: 'Text content',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
         FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
@@ -13372,7 +13377,7 @@ const colorRules$1 = {
   COLOR_3: {
       ID:                    'Color 3',
       DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 4.5 for large and/or bolded text and 7.1 for any other size or style of text.',
-      SUMMARY:               'Text must exceed enhanced CCR threshold',
+      SUMMARY:               'Color contrast of text: Enhanced',
       TARGET_RESOURCES_DESC: 'All elements with text content',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
@@ -13427,6 +13432,78 @@ const colorRules$1 = {
                         title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
                         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
                       }
+                      ]
+  },
+  COLOR_4: {
+      ID:                    'Color 4',
+      DEFINITION:            'Color contrast of non-text content in user interface controls.',
+      SUMMARY:               'Color contrast of user interface controls',
+      TARGET_RESOURCES_DESC: 'User interface controls',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
+        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
+
+      },
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
+                      ],
+      TECHNIQUES:     [ '',
+                        ''
+                      ],
+      MANUAL_CHECKS:  [
+                      ],
+      INFORMATIONAL_LINKS: [
+                      { type:  REFERENCES.SPECIFICATION,
+                        title: 'Understanding SC 1.4.11: Non-text Contrast',
+                        url:   'https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G195: Using an author-supplied, visible focus indicator',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G195'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G174: Providing a control with a sufficient contrast ratio that allows users to switch to a presentation that uses sufficient contrast',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G174'
+                       }
+                      ]
+  },
+  COLOR_5: {
+      ID:                    'Color 5',
+      DEFINITION:            'Color contrast of non-text content in graphical objects.',
+      SUMMARY:               'Color contrast of graphics',
+      TARGET_RESOURCES_DESC: 'Graphical objects',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
+        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
+        ELEMENT_MC_2: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
+
+      },
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
+                      ],
+      TECHNIQUES:     [ '',
+                        ''
+                      ],
+      MANUAL_CHECKS:  [
+                      ],
+      INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
+                         title: 'Understanding SC 1.4.11: Non-text Contrast',
+                         url:   'https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G207: Ensuring that a contrast ratio of 3:1 is provided for icons',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G207'
+                       },
+                       { type:  REFERENCES.WCAG_TECHNIQUE,
+                         title: 'G209: Provide sufficient contrast at the boundaries between adjoining colors',
+                         url: 'https://www.w3.org/WAI/WCAG21/Techniques/general/G209'
+                       }
                       ]
   }
 };
@@ -17679,7 +17756,7 @@ const navigationRules$1 = {
 
   NAVIGATION_1: {
       ID:         'Navigation 1',
-      DEFINITION: 'At least two of the following features %s be provided for finding content in a website: a website search feature; a list of links on the home page to all pages in the website; a list of links on each page for navigation between pages; bread crumb links on each page for hierarchical navigation of the website and/or a dedicated page that serves as a site map of all the pages in the website.',
+      DEFINITION: 'At least two of the following features must be provided for finding content in a website: a website search feature; a list of links on the home page to all pages in the website; a list of links on each page for navigation between pages; bread crumb links on each page for hierarchical navigation of the website and/or a dedicated page that serves as a site map of all the pages in the website.',
       SUMMARY:    'At least two ways of finding content',
       TARGET_RESOURCES_DESC: 'Website navigational links and search form controls',
       RULE_RESULT_MESSAGES: {
@@ -17952,11 +18029,11 @@ const readingOrderRules$1 = {
 
 const resizeRules$1 = {
 
-  RESIZE_1: {
+ RESIZE_1: {
       ID:                    'Resize 1',
       DEFINITION:            'When the text of a page is resized the text content must reflow to fill available view and all text content should remain visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
       SUMMARY:               'Resize text content',
-      TARGET_RESOURCES_DESC: 'All pages',
+      TARGET_RESOURCES_DESC: 'Page',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
       },
@@ -17969,11 +18046,11 @@ const resizeRules$1 = {
       ],
       TECHNIQUES: [
         'Use relative CSS sized like @em@ and @percentage@ rather than pixels and point sizes.',
-        'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.'
-      ],
-      MANUAL_CHECKS: [
+        'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.',
         'Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.',
         'Verify that font sizes are descreases content reflows to fill the width of the screen.'
+      ],
+      MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -17981,7 +18058,61 @@ const resizeRules$1 = {
           url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-scale'
         }
       ]
+  },
+
+  RESIZE_2: {
+      ID:                    'Resize 2',
+      DEFINITION:            'Content is viewable without scrolling for window dimensions as small as 320 x 256 pixels.',
+      SUMMARY:               'Support small screen dimensions',
+      TARGET_RESOURCES_DESC: 'Page',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S: 'Resize the screen to 320 x 256 CSS pixels and check to make sure content is viewable without using horizontal or vertical scrolling.'
+      },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:  'Resize the screen to the equivalent of 320 x 256 CSS pixels by either adjusting the window size or using the browser\'s zoom features and check to make sure content is viewable without using horizontal or vertical scrolling.'
+      },
+      PURPOSES: [
+        'People with visual impairments using the browser zoom features benefit when content on the site reflows to fit the screen without scrolling.'
+      ],
+      TECHNIQUES: [
+        'Use CSS media queries or flexbox code to reflow content based on screen width and height.',
+        'No vertical scrolling required when the window width is the equivalent to 320 CSS pixels.',
+        'No horizontal scrolling required when the window width is the equivalent to 256 CSS pixels.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_SPECIFICATION,
+          title: 'How to meet 1.4.10 Reflow',
+          url:   'https://www.w3.org/TR/WCAG21/#reflow'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C32: Using media queries and grid CSS to reflow columns',
+          url:   'https://www.w3.org/WAI/WCAG21/Understanding/reflow.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C31: Using CSS Flexbox to reflow content',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C31'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C33: Allowing for Reflow with Long URLs and Strings of Text',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C33'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'C38: Using CSS width, max-width and flexbox to fit labels and inputs',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C38'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'SCR34: Calculating size and position in a way that scales with text size',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR34'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'G206: Providing options within the content to switch to a layout that does not require the user to scroll horizontally to read a line of text',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G206'
+        }
+      ]
   }
+
 };
 
 /* sensoryRules.js */
@@ -18039,10 +18170,10 @@ const tableRules$1 = {
       SUMMARY:               'Data cells must have row/column headers',
       TARGET_RESOURCES_DESC: '@td@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
-        FAIL_P:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
+        FAIL_S:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute to provide headers to the data cell without headers.',
+        FAIL_P:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute to provide headers to the %N_F data cells in the table without headers.',
         MANUAL_CHECK_S: 'The @td@ element does not have any text content. Verify that this cell is being used for formatting and does not need row or column headers.',
-        MANUAL_CHECK_P: '%N_F @td@ elements do not have any text content. Verify that these cells are being used for formatting and do not need row or column headers.',
+        MANUAL_CHECK_P: '%N_MC @td@ elements do not have any text content. Verify that these cells are being used for formatting and do not need row or column headers.',
         HIDDEN_S:       'One @td@ element that is hidden was not evaluated.',
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables and/or @td@ cells on the page.'
@@ -20125,7 +20256,7 @@ const widgetRules$1 = {
     },
     WIDGET_16: {
         ID:                    'Widget 16',
-        DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs %s be manually checked for accessibility requirements.',
+        DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs must be manually checked for accessibility requirements.',
         SUMMARY:               'Closed shadow DOM requires manual check.',
         TARGET_RESOURCES_DESC: 'Custom elements created using web components API with closed shadow DOM.',
         RULE_RESULT_MESSAGES: {
@@ -22238,6 +22369,77 @@ const colorRules = [
     } // end validate function
   },
 
+  /**
+   * @object COLOR_4
+   *
+   * @desc  Non-text Contrast for user interface controls
+   */
+
+  { rule_id             : 'COLOR_4',
+    last_updated        : '2023-09-19',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.11',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate            : function (dom_cache, rule_result) {
+
+      console.log(`[COLOR 4]: ${dom_cache} ${rule_result}`);
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+        if (!ce.isDisabled) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+      });
+
+
+    } // end validate function
+  },
+
+  /**
+   * @object COLOR_5
+   *
+   * @desc  Non-text Contrast for graphical object
+   */
+
+  { rule_id             : 'COLOR_5',
+    last_updated        : '2023-09-19',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.11',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.imageInfo.allImageElements.forEach( ie => {
+        const de = ie.domElement;
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
+
+      dom_cache.imageInfo.allSVGDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
+
+    } // end validate function
+  }
 ];
 
 /* errorRules.js */
@@ -26030,8 +26232,8 @@ const resizeRules = [
 
   { rule_id             : 'RESIZE_1',
     last_updated        : '2023-08-25',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.4.4',
     wcag_related_ids    : [],
@@ -26039,7 +26241,27 @@ const resizeRules = [
     validate          : function (dom_cache, rule_result) {
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
     } // end validate function
+  },
+
+ /**
+   * @object RESIZE_1
+   *
+   * @desc Resize content
+   */
+
+  { rule_id             : 'RESIZE_2',
+    last_updated        : '2023-09-19',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.10',
+    wcag_related_ids    : [],
+    target_resources    : ['content'],
+    validate          : function (dom_cache, rule_result) {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    } // end validate function
   }
+
 ];
 
 /* sensoryRules.js */
@@ -26647,8 +26869,6 @@ const titleRules = [
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['Page', 'title', 'h1'],
     validate            : function (dom_cache, rule_result) {
-
-      debug$e.log(`[TITLE 2][Start]`);
 
       function similiarContent (title, h1) {
         if (typeof title !== 'string') {
@@ -30236,7 +30456,7 @@ class RuleResult {
 
 /* Constants */
 const debug$1 = new DebugLogging('EvaluationResult', false);
-debug$1.flag = true;
+debug$1.flag = false;
 
 /* helper functions */
 

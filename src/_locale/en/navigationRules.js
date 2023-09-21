@@ -10,7 +10,7 @@ export const navigationRules = {
 
   NAVIGATION_1: {
       ID:         'Navigation 1',
-      DEFINITION: 'At least two of the following features %s be provided for finding content in a website: a website search feature; a list of links on the home page to all pages in the website; a list of links on each page for navigation between pages; bread crumb links on each page for hierarchical navigation of the website and/or a dedicated page that serves as a site map of all the pages in the website.',
+      DEFINITION: 'At least two of the following features must be provided for finding content in a website: a website search feature; a list of links on the home page to all pages in the website; a list of links on each page for navigation between pages; bread crumb links on each page for hierarchical navigation of the website and/or a dedicated page that serves as a site map of all the pages in the website.',
       SUMMARY:    'At least two ways of finding content',
       TARGET_RESOURCES_DESC: 'Website navigational links and search form controls',
       RULE_RESULT_MESSAGES: {

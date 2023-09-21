@@ -13,10 +13,10 @@ export const tableRules = {
       SUMMARY:               'Data cells must have row/column headers',
       TARGET_RESOURCES_DESC: '@td@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
-        FAIL_P:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute.',
+        FAIL_S:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute to provide headers to the data cell without headers.',
+        FAIL_P:         'Add @th@ elements to the first row and/or column of the data table or use the @header@ attribute to provide headers to the %N_F data cells in the table without headers.',
         MANUAL_CHECK_S: 'The @td@ element does not have any text content. Verify that this cell is being used for formatting and does not need row or column headers.',
-        MANUAL_CHECK_P: '%N_F @td@ elements do not have any text content. Verify that these cells are being used for formatting and do not need row or column headers.',
+        MANUAL_CHECK_P: '%N_MC @td@ elements do not have any text content. Verify that these cells are being used for formatting and do not need row or column headers.',
         HIDDEN_S:       'One @td@ element that is hidden was not evaluated.',
         HIDDEN_P:       '%N_H @td@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE: 'No data tables and/or @td@ cells on the page.'

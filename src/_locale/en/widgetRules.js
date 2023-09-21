@@ -920,7 +920,7 @@ export const widgetRules = {
     },
     WIDGET_16: {
         ID:                    'Widget 16',
-        DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs %s be manually checked for accessibility requirements.',
+        DEFINITION:            'Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs must be manually checked for accessibility requirements.',
         SUMMARY:               'Closed shadow DOM requires manual check.',
         TARGET_RESOURCES_DESC: 'Custom elements created using web components API with closed shadow DOM.',
         RULE_RESULT_MESSAGES: {

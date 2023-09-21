@@ -61,8 +61,6 @@ export const titleRules = [
     target_resources    : ['Page', 'title', 'h1'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[TITLE 2][Start]`);
-
       function similiarContent (title, h1) {
         if (typeof title !== 'string') {
           title = '';

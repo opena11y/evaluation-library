@@ -228,6 +228,77 @@ export const colorRules = [
     } // end validate function
   },
 
+  /**
+   * @object COLOR_4
+   *
+   * @desc  Non-text Contrast for user interface controls
+   */
+
+  { rule_id             : 'COLOR_4',
+    last_updated        : '2023-09-19',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.11',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate            : function (dom_cache, rule_result) {
+
+      console.log(`[COLOR 4]: ${dom_cache} ${rule_result}`);
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+        if (!ce.isDisabled) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+      });
+
+
+    } // end validate function
+  },
+
+  /**
+   * @object COLOR_5
+   *
+   * @desc  Non-text Contrast for graphical object
+   */
+
+  { rule_id             : 'COLOR_5',
+    last_updated        : '2023-09-19',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.11',
+    wcag_related_ids    : [],
+    target_resources    : [],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.imageInfo.allImageElements.forEach( ie => {
+        const de = ie.domElement;
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
+
+      dom_cache.imageInfo.allSVGDomElements.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      });
+
+    } // end validate function
+  }
 ];
 
 

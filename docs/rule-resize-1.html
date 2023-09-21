@@ -113,13 +113,13 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Color/Content</td>
+  <td>Tables/Layout</td>
 </tr>
 
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>page</td>
 </tr>
 
                   
@@ -131,6 +131,10 @@
       <li>Use relative CSS sized like <code>em</code> and <code>percentage</code> rather than pixels and point sizes.</li>
       
       <li>If using the CSS overflow property, <code>iframe</code> or <code>frame</code> check to make sure content reflows and is not clipped by changes in zoom levels.</li>
+      
+      <li>Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.</li>
+      
+      <li>Verify that font sizes are descreases content reflows to fill the width of the screen.</li>
       
     </ul>
   </td>

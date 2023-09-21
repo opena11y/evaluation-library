@@ -28,8 +28,8 @@ export const resizeRules = [
 
   { rule_id             : 'RESIZE_1',
     last_updated        : '2023-08-25',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
     rule_required       : true,
     wcag_primary_id     : '1.4.4',
     wcag_related_ids    : [],
@@ -37,5 +37,25 @@ export const resizeRules = [
     validate          : function (dom_cache, rule_result) {
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
     } // end validate function
+  },
+
+ /**
+   * @object RESIZE_1
+   *
+   * @desc Resize content
+   */
+
+  { rule_id             : 'RESIZE_2',
+    last_updated        : '2023-09-19',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.10',
+    wcag_related_ids    : [],
+    target_resources    : ['content'],
+    validate          : function (dom_cache, rule_result) {
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+    } // end validate function
   }
+
 ];
