@@ -497,7 +497,7 @@ export const controlRules = {
       ID:         'Control 10',
       DEFINITION: 'Each standard HTML form control and ARIA widget role must have an accessible name that is unique on the page.',
       SUMMARY:    'Accessible name must be unique',
-      TARGET_RESOURCES_DESC: '@select@, @textarea@ and @input@ elements of type @text@, @password@, @checkbox@, @radio@, @file@ and aria widget roles',
+      TARGET_RESOURCES_DESC: '@select@, @textarea@ and @input@ elements of type @text@, @password@, @checkbox@, @radio@, @file@ and ARIA widget roles',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Update the accessible name for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
         FAIL_P:   'Update the accessible names for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',

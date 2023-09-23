@@ -13443,13 +13443,14 @@ const colorRules$1 = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
-        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is not visible in the graphical rendering.'
 
       },
       PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
                       ],
-      TECHNIQUES:     [ '',
-                        ''
+      TECHNIQUES:     [ 'Identify each user-interface component (link, button, form control) on the page',
+                        'Identify the visual (non-text) indicators of the component that are required to identify that a control exists, and indicate the current state.',
+                        'Test the visual indicator contrast in each state.'
                       ],
       MANUAL_CHECKS:  [
                       ],
@@ -13474,19 +13475,19 @@ const colorRules$1 = {
       SUMMARY:               'Color contrast of graphics',
       TARGET_RESOURCES_DESC: 'Graphical objects',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
-        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+        MANUAL_CHECK_S:     'Verify the colors used in the graphic have a color contrast ratio of at least 3:1 against adjacent color(s).',
+        MANUAL_CHECK_P:     'Verify the non-text content of the %N_MC graphics have a contrast ratio of at least 3:1 against adjacent color(s).'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
-        ELEMENT_MC_2: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
-        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
-
+        ELEMENT_MC_1:     'Verify the colors used in the @%1@ image have sufficient contrast for the meaning of the image to be conveyed to users.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is not visible in the graphical rendering.'
       },
-      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences in the grphic.'
                       ],
-      TECHNIQUES:     [ '',
-                        ''
+      TECHNIQUES:     [ 'Identify each graphic on the page that includes information required for understanding the content (i.e. excluding graphics which have visible text for the same information, or are decorative).',
+                        'Check the contrast of the graphical object against its adjacent colors',
+                        'If there are multiple colors and/or a gradient, choose the least contrasting area to test',
+                        'If the least-contrasting area is less than 3:1, assume that area is invisible, and determine if the graphical object still understandable.',
                       ],
       MANUAL_CHECKS:  [
                       ],
@@ -14324,7 +14325,7 @@ const controlRules$1 = {
       ID:         'Control 10',
       DEFINITION: 'Each standard HTML form control and ARIA widget role must have an accessible name that is unique on the page.',
       SUMMARY:    'Accessible name must be unique',
-      TARGET_RESOURCES_DESC: '@select@, @textarea@ and @input@ elements of type @text@, @password@, @checkbox@, @radio@, @file@ and aria widget roles',
+      TARGET_RESOURCES_DESC: '@select@, @textarea@ and @input@ elements of type @text@, @password@, @checkbox@, @radio@, @file@ and ARIA widget roles',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Update the accessible name for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
         FAIL_P:   'Update the accessible names for the %N_F form controls and ARIA widgets with duplicate names to uniquely identify the purpose of each control on the page.',
@@ -15441,31 +15442,31 @@ const keyboardRules$1 = {
   KEYBOARD_1: {
     ID:                    'Keyboard 1',
     DEFINITION:            'Elements with ARIA widget roles must support the keyboard interactions required by those roles.',
-    SUMMARY:               'Widget role requires specific keyboard support',
+    SUMMARY:               'ARIA widget role requires specific keyboard support',
     TARGET_RESOURCES_DESC: 'Elements with ARIA widget roles',
     RULE_RESULT_MESSAGES: {
-      MANUAL_CHECK_S:  'Verify the element with the widget role has the keyboard interactions required by its role.',
-      MANUAL_CHECK_P:  'Verify the %N_MC elements with widget roles have the keyboard interactions required by their roles.',
-      HIDDEN_S:        'One hidden element with a widget role was not evaluated.',
-      HIDDEN_P:        '%N_H hidden elements with widget roles were not evaluated.',
-      NOT_APPLICABLE:  'No elements with widget roles on the page'
+      MANUAL_CHECK_S:  'Verify the element with the ARIA widget role implements the keyboard interactions required by its role.',
+      MANUAL_CHECK_P:  'Verify the %N_MC elements with ARIA widget roles implement the keyboard interactions required by their roles.',
+      HIDDEN_S:        'One hidden element with an ARIA widget role was not evaluated.',
+      HIDDEN_P:        '%N_H hidden elements with ARIA widget roles were not evaluated.',
+      NOT_APPLICABLE:  'No elements with ARIA widget roles on the page'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1:     'Verify the keyboard interaction required by the @%1@ role.',
-      ELEMENT_HIDDEN_1: 'Element with @%1@ widget role was not evaluated because it is hidden.'
+      ELEMENT_MC_1:     'Verify that the keyboard interactions required by the ARIA @%1@ role are properly implemented.',
+      ELEMENT_HIDDEN_1: 'Element with ARIA @%1@ widget role was not evaluated because it is hidden.'
     },
     PURPOSES: [
       'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
       'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
-      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding the keyboard interaction expected for the elements role.',
+      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding the specific keyboard interactions required by the element\'s ARIA role.',
       'The ARIA Authoring Practices Guide identifies the keyboard interaction patterns that users expect and can rely upon, based on each ARIA widget role.',
       'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
     ],
     TECHNIQUES: [
-      'Use the ARIA Authoring Practices guide to identify the keyboard interaction support needed for each ARIA Widget role being used.',
+      'Use the ARIA Authoring Practices guide to identify the keyboard interaction support needed for each ARIA widget role being used.',
       'Add custom @keydown@, @keypress@ and/or @keyup@ event handlers to support the keyboard interactions required by the ARIA widget role.',
       'Verify that keyboard interactions are consistent among browsers and devices (e.g., desktop computers and mobile devices using Bluetooth keyboards).'
-    ],
+      ],
     MANUAL_CHECKS: [
     ],
     INFORMATIONAL_LINKS: [
@@ -15501,43 +15502,43 @@ const keyboardRules$1 = {
   },
   KEYBOARD_2: {
     ID:                    'Keyboard 2',
-    DEFINITION:            'The sequential tab order of links, form controls, and widgets must be meaningful.',
-    SUMMARY:               'Sequential tab order must be meaningful',
-    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements, and elements with widget roles with @tabindex@ values',
+    DEFINITION:            'The sequential tab order of all links, form controls, and ARIA widgets on the page must be meaningful.',
+    SUMMARY:               'Sequential tab order of focusable elements must be meaningful',
+    TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@, and @select@ elements, and elements with a @tabindex@ value greater than or equal to 0',
     RULE_RESULT_MESSAGES: {
-      PASS_S:             'Only one link or form control element on the page and no other elements with @tabindex@ values, so no issues with sequential tab order.',
-      PASS_P:             '%N_P link and/or form control elements on the page and no other elements with @tabindex@ values, so no issues with sequential tab order.',
-      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
-      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page to make sure the sequence of focusable elements is meaningful.',
+      PASS_S:             'Only one link or form control element on the page and no other elements with @tabindex@ values greater than or equal to 0, so no issues with sequential tab order.',
+      PASS_P:             '%N_P link and/or form control elements on the page and no other elements with @tabindex@ values greater than or equal to 0, so no issues with sequential tab order.',
+      MANUAL_CHECK_S:     'Verify that the sequential order of traversing all focusable elements on the page using only the tab key is meaningful.',
+      MANUAL_CHECK_P:     'Verify that the sequential order of traversing all focusable elements on the page using only the tab key is meaningful.',
       HIDDEN_S:           'The link, form control, or widget element that is hidden does not need to be tested for focus order.',
       HIDDEN_P:           'The %N_H links, form controls and/or widgets that are hidden do not need to be tested for focus order.',
-      NOT_APPLICABLE:     'No or only one focusable element on the page'
+      NOT_APPLICABLE:     'Only one or no focusable elements on the page'
     },
     BASE_RESULT_MESSAGES: {
-      PAGE_PASS_1:       'No elements on the page using @tabindex@ attribute that might affect sequential tab navigation.',
+      PAGE_PASS_1:       'No elements on the page are using @tabindex@ attribute that might affect sequential tab traversal.',
       PAGE_MC_1:         'Use the "tab" key to verify the sequential focus order of the %1 interactive elements on the page (i.e. links, form controls, widgets ...).',
-      ELEMENT_PASS_1:    'The @%1@ element does not have a @tabindex@ value, so no change in sequential tab navigation of the element.',
-      ELEMENT_MC_1:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: @tabindex@ value greater than 0 should be avoided to inconsistency of browser implementation.',
+      ELEMENT_PASS_1:    'The @%1@ element does not have a @tabindex@ value, so it effects no change in sequential tab traveral on the page.',
+      ELEMENT_MC_1:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: @tabindex@ values greater than 0 should be avoided due to inconsistencies with browser implementations.',
       ELEMENT_MC_2:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: The element by default is part of the tab sequence of the page, there is no need to set @tabindex=0@.',
       ELEMENT_MC_3:      'Verify the @%1@ element should be part of the sequential tab order of the page.',
       ELEMENT_MC_4:      'Verify the @%1@ element should be part of the sequential tab order of the page. NOTE: It is unusual for a non-widget role to be part of the tab sequence of the page.',
       ELEMENT_HIDDEN_1:  'The @%1@ element with the @tabindex=%2@ was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [
-      'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
-      'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
-      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the @tabindex@ attribute value in managing keyboard focus.',
+      'Support for tab key traversal of focusable elements is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
+      'Native HTML links and form control elements have default keyboard support for tab key traversal that are built-in and standardized among browsers.',
+      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding how the @tabindex@ attribute can be used for managing keyboard focus.',
       'The ARIA Authoring Practices Guide identifies how to use @tabindex@ to help manage keyboard focus for widget roles.',
       'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
     ],
     TECHNIQUES: [
-      'HTML form controls and link elements do not need a @tabindex@ valuable to be part of the sequential tab order, assigning a @tabindex@ value to one of these elements means you intend to change their default behavior.',
+      'HTML form controls and link elements do not need an explicit @tabindex@ value to be part of the sequential tab order; assigning a @tabindex@ value to one of these elements means you intend to change its default behavior.',
       'Setting @tabindex@ attribute to @0@ allows an element to become focusable and makes it part of the tab sequence of the page',
-      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers through scripting',
-      'Use the ARIA Authoring Practices to define keyboard support that is appropriate for widget roles.',
+      'Setting @tabindex@ attribute to @-1@ allows an element to become focusable through related keyboard event handlers / scripting',
+      'Use the ARIA Authoring Practices Guide to define keyboard support that is appropriate for particular ARIA widget roles.',
       'Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.',
       'Avoid using @object@ and @embed@ elements due to the difficulty in providing the corresponding keyboard support for all of their inherent interactive behaviors.',
-      'Avoid using @tabindex@ values greater than 0 to change tabbing order, since tab sequence for values greater than 0 is inconsistent and therefore can be unpredictable across web browsers.'
+      'Avoid using @tabindex@ values greater than 0 to change the tabbing order, since tab sequence implementations for values greater than 0 are inconsistent and their associated behaviors can be unpredictable across web browsers.'
     ],
     MANUAL_CHECKS: [
       'Use the tab key to verify the tab sequence of interactive elements of the page is in a logical.',
@@ -19343,17 +19344,17 @@ const videoRules$1 = {
 const widgetRules$1 = {
     WIDGET_1: {
         ID:                    'Widget 1',
-        DEFINITION:            'Widget roles must have an accessible name.',
-        SUMMARY:               'Widget roles must have an accessible name',
+        DEFINITION:            'ARIA Widget roles must have an accessible name.',
+        SUMMARY:               'ARIA Widget roles must have an accessible name',
         TARGET_RESOURCES_DESC: 'Elements with widget roles that allow accessible names',
         RULE_RESULT_MESSAGES: {
           FAIL_S:         'Add an accessible name to the element with a widget role that requires an accessible name.',
           FAIL_P:         'Add accessible names to the %N_F elements with widget roles that require an accessible name.',
           MANUAL_CHECK_S: 'Check the element with a role that may need an accessible name.',
           MANUAL_CHECK_P: 'Check the %N_MC elements with widget roles that may need an accessible name.',
-          HIDDEN_S:       'An element with a widget role that allows an accessible name is hidden and was not evaluated.',
-          HIDDEN_P:       '%N_H elements with widget roles that allow an accessible name are hidden and were not evaluated.',
-          NOT_APPLICABLE: 'No elements with widget roles that allow an accessible name'
+          HIDDEN_S:       'An element with a ARIA widget role that allows an accessible name is hidden and was not evaluated.',
+          HIDDEN_P:       '%N_H elements with ARIA widget roles that allow an accessible name are hidden and were not evaluated.',
+          NOT_APPLICABLE: 'No elements with ARIA widget roles that allow an accessible name'
         },
         BASE_RESULT_MESSAGES: {
           ELEMENT_PASS_1: '@%1[role=%2]@ element has the accessible name: %3.',
@@ -19363,18 +19364,18 @@ const widgetRules$1 = {
         },
         PURPOSES: [
           'An accessible name identifies the purpose or action of a widget on the page.',
-          'For example when a widget role receives keyboard focus, both the role and the accessible name is spoken by screen readers.',
+          'For example when a ARIA widget role receives keyboard focus, both the role and the accessible name is spoken by screen readers.',
           'This rule does not test HTML form controls and links, since the accessible name requirement for them is covered in other rules.'
         ],
         TECHNIQUES: [
           'Some ARIA roles allow child text content and @alt@ attribute content from descendant image elements to be used for the accessible name.',
           'Use the @aria-labelledby@ attribute to reference the id(s) of visible content on the page to define an accessible name.',
           'Use the @aria-label@ attribute to provide an explicit accessible name for an element.',
-          'Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the element'
+          'Elements with ARIA grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the element'
         ],
         MANUAL_CHECKS: [
           'Good labels are both concise and descriptive of the element with widget role purpose.',
-          'If element with widget roles are arranged in groups, make sure labels include grouping information.',
+          'If element with ARIA widget roles are arranged in groups, make sure labels include grouping information.',
           'Consider using @aria-describedby@ to provide references to instructions or error information.',
           'When there is more than one widget of the same type on a page, they need an label for users to uniquely identify the form control.'
         ],
@@ -19423,8 +19424,8 @@ const widgetRules$1 = {
         SUMMARY:               '@onClick@ event handlers must have widget role',
         TARGET_RESOURCES_DESC: 'Elements with @onClick@ event handler values that are defined as widgets',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Add widget role name to element.',
-          FAIL_P:   'Add widget roles to each of the %N_F elements.',
+          FAIL_S:   'Add ARIA widget role name to element.',
+          FAIL_P:   'Add ARIA widget roles to each of the %N_F elements.',
           MANUAL_CHECK_S:     'Verify that any child elements that can respond to element with an @onclick@ event handler are a link, form control or has a widget role, and can be accessed with the keyboard alone.',
           MANUAL_CHECK_P:     'Verify that any child elements that can respond to %N_MC elements with an @onclick@ event handler are a link, form control or has a widget role, and can be accessed with the keyboard alone.',
           HIDDEN_S: 'The element with an @onClick@ event handler that is hidden and was not evaluated.',
@@ -20026,13 +20027,13 @@ const widgetRules$1 = {
         SUMMARY:    'Widget accessible names must be descriptive',
         TARGET_RESOURCES_DESC: 'Elements with widget roles',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'To the element with widget role missing a accessible name, add an accessible name that describes its purpose.',
-          FAIL_P:   'To each of the %N_F element with widget roles missing accessible name, add an accessible name that uniquely describes its purpose.',
+          FAIL_S:   'To the element with ARIA widget role missing a accessible name, add an accessible name that describes its purpose.',
+          FAIL_P:   'To each of the %N_F element with ARIA widget roles missing accessible name, add an accessible name that uniquely describes its purpose.',
           MANUAL_CHECK_S: 'Verify that the label uniquely describes the purpose of the element with widget role.',
           MANUAL_CHECK_P: 'Verify that the label for each of the %N_MC element with widget roles uniquely describes its purpose.',
           HIDDEN_S: 'The control element that is hidden was not evaluated.',
           HIDDEN_P: 'The %N_H control elements that are hidden were not evaluated.',
-          NOT_APPLICABLE: 'No element with widget roles on this page.'
+          NOT_APPLICABLE: 'No element with ARIA widget roles on this page.'
         },
         BASE_RESULT_MESSAGES: {
           ELEMENT_MC_1:     'Verify the accessible name "%1" for the @%2@ element describes its purpose.',
@@ -20045,8 +20046,8 @@ const widgetRules$1 = {
         ],
         TECHNIQUES: [
           'In some cases the child text nodes and @alt@ from descendant image elements will be used as the label for elements with widget roles.',
-          'Use @aria-labelledby@ attribute to reference the id(s) of the elements on the page to label elements with widget roles.',
-          'Use @aria-label@ attribute to provide a explicit label for an element with a widget role.',
+          'Use @aria-labelledby@ attribute to reference the id(s) of the elements on the page to label elements with ARIA widget roles.',
+          'Use @aria-label@ attribute to provide a explicit label for an element with a ARIA widget role.',
           'Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the widget'
         ],
         MANUAL_CHECKS: [
@@ -20106,7 +20107,7 @@ const widgetRules$1 = {
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
           FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
-          HIDDEN_S: 'The element with an widget role that is hidden and was not evaluated.',
+          HIDDEN_S: 'The element with an ARIA widget role that is hidden and was not evaluated.',
           HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
           NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
         },
@@ -22387,8 +22388,8 @@ const colorRules = [
 
       dom_cache.controlInfo.allControlElements.forEach( ce => {
         const de = ce.domElement;
-        if (!ce.isDisabled) {
-          if (de.visibility.isVisibleToAT) {
+        if (!ce.isDisabled && de.ariaInfo.isWidget) {
+          if (de.visibility.isVisibleOnScreen) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
           else {
@@ -22419,17 +22420,20 @@ const colorRules = [
 
       dom_cache.imageInfo.allImageElements.forEach( ie => {
         const de = ie.domElement;
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        // check if image is decorative
+        if (de.accName.name) {
+          if (de.visibility.isVisibleOnScreen) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       });
 
       dom_cache.imageInfo.allSVGDomElements.forEach( de => {
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+        if (de.visibility.isVisibleOnScreen) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
@@ -28005,7 +28009,7 @@ const widgetRules = [
   rule_required       : true,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[Widget roles'],
+  target_resources    : ['[ARIA widget roles'],
   validate            : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
       if (de.ariaInfo.isWidget) {

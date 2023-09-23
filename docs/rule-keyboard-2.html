@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Sequential tab order must be meaningful | OpenA11y Evaluation Library 2.0</title>
+        <title>Sequential tab order of focusable elements must be meaningful | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Sequential tab order must be meaningful</li>
+          <li class="breadcrumb-item active">Sequential tab order of focusable elements must be meaningful</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Sequential tab order must be meaningful</h1>
+            <h1 id="h1-title">Rule: Sequential tab order of focusable elements must be meaningful</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -69,7 +69,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>The sequential tab order of links, form controls, and widgets must be meaningful.</td>
+  <td>The sequential tab order of all links, form controls, and ARIA widgets on the page must be meaningful.</td>
 </tr>
 
                   
@@ -78,11 +78,11 @@
   <td>
     <ul>
       
-      <li>Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.</li>
+      <li>Support for tab key traversal of focusable elements is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.</li>
       
-      <li>Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.</li>
+      <li>Native HTML links and form control elements have default keyboard support for tab key traversal that are built-in and standardized among browsers.</li>
       
-      <li>When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the <code>tabindex</code> attribute value in managing keyboard focus.</li>
+      <li>When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding how the <code>tabindex</code> attribute can be used for managing keyboard focus.</li>
       
       <li>The ARIA Authoring Practices Guide identifies how to use <code>tabindex</code> to help manage keyboard focus for widget roles.</li>
       
@@ -158,19 +158,19 @@
   <td>
     <ul>
       
-      <li>HTML form controls and link elements do not need a <code>tabindex</code> valuable to be part of the sequential tab order, assigning a <code>tabindex</code> value to one of these elements means you intend to change their default behavior.</li>
+      <li>HTML form controls and link elements do not need an explicit <code>tabindex</code> value to be part of the sequential tab order; assigning a <code>tabindex</code> value to one of these elements means you intend to change its default behavior.</li>
       
       <li>Setting <code>tabindex</code> attribute to <code>0</code> allows an element to become focusable and makes it part of the tab sequence of the page</li>
       
-      <li>Setting <code>tabindex</code> attribute to <code>-1</code> allows an element to become focusable through related keyboard event handlers through scripting</li>
+      <li>Setting <code>tabindex</code> attribute to <code>-1</code> allows an element to become focusable through related keyboard event handlers / scripting</li>
       
-      <li>Use the ARIA Authoring Practices to define keyboard support that is appropriate for widget roles.</li>
+      <li>Use the ARIA Authoring Practices Guide to define keyboard support that is appropriate for particular ARIA widget roles.</li>
       
       <li>Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.</li>
       
       <li>Avoid using <code>object</code> and <code>embed</code> elements due to the difficulty in providing the corresponding keyboard support for all of their inherent interactive behaviors.</li>
       
-      <li>Avoid using <code>tabindex</code> values greater than 0 to change tabbing order, since tab sequence for values greater than 0 is inconsistent and therefore can be unpredictable across web browsers.</li>
+      <li>Avoid using <code>tabindex</code> values greater than 0 to change the tabbing order, since tab sequence implementations for values greater than 0 are inconsistent and their associated behaviors can be unpredictable across web browsers.</li>
       
     </ul>
   </td>

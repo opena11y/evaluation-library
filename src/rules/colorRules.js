@@ -248,8 +248,8 @@ export const colorRules = [
 
       dom_cache.controlInfo.allControlElements.forEach( ce => {
         const de = ce.domElement;
-        if (!ce.isDisabled) {
-          if (de.visibility.isVisibleToAT) {
+        if (!ce.isDisabled && de.ariaInfo.isWidget) {
+          if (de.visibility.isVisibleOnScreen) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
           else {
@@ -280,17 +280,20 @@ export const colorRules = [
 
       dom_cache.imageInfo.allImageElements.forEach( ie => {
         const de = ie.domElement;
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        // check if image is decorative
+        if (de.accName.name) {
+          if (de.visibility.isVisibleOnScreen) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       });
 
       dom_cache.imageInfo.allSVGDomElements.forEach( de => {
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+        if (de.visibility.isVisibleOnScreen) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
         else {
           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);

@@ -717,7 +717,7 @@ export const widgetRules = [
   rule_required       : true,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
-  target_resources    : ['[Widget roles'],
+  target_resources    : ['[ARIA widget roles'],
   validate            : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
       if (de.ariaInfo.isWidget) {

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Widget role requires specific keyboard support | OpenA11y Evaluation Library 2.0</title>
+        <title>ARIA widget role requires specific keyboard support | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +49,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Widget role requires specific keyboard support</li>
+          <li class="breadcrumb-item active">ARIA widget role requires specific keyboard support</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Widget role requires specific keyboard support</h1>
+            <h1 id="h1-title">Rule: ARIA widget role requires specific keyboard support</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -82,7 +82,7 @@
       
       <li>Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.</li>
       
-      <li>When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding the keyboard interaction expected for the elements role.</li>
+      <li>When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding the specific keyboard interactions required by the element's ARIA role.</li>
       
       <li>The ARIA Authoring Practices Guide identifies the keyboard interaction patterns that users expect and can rely upon, based on each ARIA widget role.</li>
       
@@ -140,7 +140,7 @@
   <td>
     <ul>
       
-      <li>Use the ARIA Authoring Practices guide to identify the keyboard interaction support needed for each ARIA Widget role being used.</li>
+      <li>Use the ARIA Authoring Practices guide to identify the keyboard interaction support needed for each ARIA widget role being used.</li>
       
       <li>Add custom <code>keydown</code>, <code>keypress</code> and/or <code>keyup</code> event handlers to support the keyboard interactions required by the ARIA widget role.</li>
       

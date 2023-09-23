@@ -171,13 +171,14 @@ export const colorRules = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
-        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is not visible in the graphical rendering.'
 
       },
       PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
                       ],
-      TECHNIQUES:     [ '',
-                        ''
+      TECHNIQUES:     [ 'Identify each user-interface component (link, button, form control) on the page',
+                        'Identify the visual (non-text) indicators of the component that are required to identify that a control exists, and indicate the current state.',
+                        'Test the visual indicator contrast in each state.'
                       ],
       MANUAL_CHECKS:  [
                       ],
@@ -202,19 +203,19 @@ export const colorRules = {
       SUMMARY:               'Color contrast of graphics',
       TARGET_RESOURCES_DESC: 'Graphical objects',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
-        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+        MANUAL_CHECK_S:     'Verify the colors used in the graphic have a color contrast ratio of at least 3:1 against adjacent color(s).',
+        MANUAL_CHECK_P:     'Verify the non-text content of the %N_MC graphics have a contrast ratio of at least 3:1 against adjacent color(s).'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
-        ELEMENT_MC_2: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
-        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is hidden from assistive technologies.'
-
+        ELEMENT_MC_1:     'Verify the colors used in the @%1@ image have sufficient contrast for the meaning of the image to be conveyed to users.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not tested since it is not visible in the graphical rendering.'
       },
-      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences.'
+      PURPOSES:       [ 'For people with color blindness and other forms of visual impairments will not be able to see colors or color differences in the grphic.'
                       ],
-      TECHNIQUES:     [ '',
-                        ''
+      TECHNIQUES:     [ 'Identify each graphic on the page that includes information required for understanding the content (i.e. excluding graphics which have visible text for the same information, or are decorative).',
+                        'Check the contrast of the graphical object against its adjacent colors',
+                        'If there are multiple colors and/or a gradient, choose the least contrasting area to test',
+                        'If the least-contrasting area is less than 3:1, assume that area is invisible, and determine if the graphical object still understandable.',
                       ],
       MANUAL_CHECKS:  [
                       ],

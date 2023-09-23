@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Color 5: Color Contrast of graphics</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+
+  </head>
+
+  <body>
+    <main>
+      <h1>Color 5: Color Contrast of graphics</h1>
+
+        <div>Image 1: <img src="../images/img1.png"  alt="Image 1" class="COLOR_5_MC"/></div>
+        <div>Image 2 <img src="../images/img1.png"  alt="" /></div>
+
+        <div style="display: none">
+            <div>Image 3: <img src="../images/img1.png"  alt="Image 1" class="COLOR_5_HIDDEN"/></div>
+            <div>Image 4 <img src="../images/img1.png"  alt="" /></div>
+        </div>
+
+        <svg height="100" width="100" class="COLOR_5_MC">
+          <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+        </svg>
+
+        <svg height="100" width="100" class="COLOR_5_HIDDEN" style="visibility: hidden">
+          <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+        </svg>
+
+    </main>
+    
+  </body>
+</html>
+
+
