@@ -47,9 +47,9 @@ export const ruleCategories = [
   },
   {
     id           : RULE_CATEGORIES.WIDGETS_SCRIPTS,
-    title        : 'Widgets/Scripts',
+    title        : 'ARIA Widgets',
     url          : '',
-    description  : 'Use appropriate event handlers on elements to support native interactivity using JavaScript. Ensure that custom widgets created using JavaScript support keyboard interaction and include ARIA markup to describe their roles, properties and states.'
+    description  : 'Use appropriate ARIA markup to describe their roles, properties and states.'
   },
   {
     id           : RULE_CATEGORIES.AUDIO_VIDEO,
