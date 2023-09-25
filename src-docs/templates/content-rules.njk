@@ -74,7 +74,7 @@
               {% endfor %}
             </div>
 
-            <div class="tab-pane fade show active" id="id-gl" role="tabpanel" aria-labelledby="gl-tab">
+            <div class="tab-pane fade" id="id-gl" role="tabpanel" aria-labelledby="gl-tab">
               {% for gl in allGuidelines %}
                 <h2 id="gl-{{gl.id}}" class="rules">{{gl.title}}</h2>
                 {% for sc in gl.successCriteria %}
