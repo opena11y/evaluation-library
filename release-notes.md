@@ -8,7 +8,10 @@ Version 2.0 Overview
 * Updated evaluation library APIs
 * Rules Changes
   * CONTORL_4: Updated purpose and test for using text content for elements with role=button, to support OS and browser color and size adjustments of graphically rendered labels
+  * KEYBOARD_1: Support ARIA Authoring Practices guidance for keyboard support of ARIA widget roles
   * KEYBOARD_2: Updated for testing event handlers to verifying tabindex values
+  * Adding rules for new WCAG 2.1 Single-A and Double-A Success Criteria (in process)
+  * Adding rules for new WCAG 2.2 Single-A and Double-A Success Criteria (in process)
 
 
 Version 1.3.1 Overview
