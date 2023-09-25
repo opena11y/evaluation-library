@@ -1,0 +1,2991 @@
+<html lang="en-us">
+  <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Rules | OpenA11y Evaluation Library 2.0</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./css/opena11y.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </head>
+
+  </head>
+  <body>
+            <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="concepts.html">Concepts and Terms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="rules.html">Rules</a></li>
+                        <li class="nav-item"><a class="nav-link" href="apis.html">APIs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Rules</li>
+        </ol>
+      </nav>
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          
+          <h1>Rules</h1>
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active"
+                      id="id-rc-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#id-rc"
+                      aria-controls="id-rc"
+                      type="button"
+                      role="tab"
+                      aria-selected="true">
+                Rule Categories
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link"
+                      id="gl-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#id-gl"
+                      aria-controls="id-gl"
+                      type="button"
+                      role="tab"
+                      aria-selected="false">
+                WCAG Guidelines
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="id-rc" role="tabpanel" aria-labelledby="id-rc-tab">
+              
+                <h2 id="rc-" class="rules">Landmarks</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Landmark 1</td>
+                      <td><a href="rule-landmark-1.html"><code>main</code> landmark: at least one</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 2</td>
+                      <td><a href="rule-landmark-2.html">All content must be contained in landmarks</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 3</td>
+                      <td><a href="rule-landmark-3.html"><code>navigation</code> landmark: at least one</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 4</td>
+                      <td><a href="rule-landmark-4.html"><code>banner</code> landmark: identifies branding content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 5</td>
+                      <td><a href="rule-landmark-5.html"><code>banner</code> landmark: no more than one</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 6</td>
+                      <td><a href="rule-landmark-6.html"><code>contentinfo</code> landmark: identifies admin content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 7</td>
+                      <td><a href="rule-landmark-7.html"><code>contentinfo</code> landmark: no more than one</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 8</td>
+                      <td><a href="rule-landmark-8.html"><code>banner</code> landmark: must be top-level</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 9</td>
+                      <td><a href="rule-landmark-9.html"><code>banner</code> landmark: restrictions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 10</td>
+                      <td><a href="rule-landmark-10.html"><code>navigation</code> landmark: restrictions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 11</td>
+                      <td><a href="rule-landmark-11.html"><code>main</code> landmark: must be top-level</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 12</td>
+                      <td><a href="rule-landmark-12.html"><code>contentinfo</code> landmark: must be top-level</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 13</td>
+                      <td><a href="rule-landmark-13.html"><code>contentinfo</code> landmark: restrictions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 14</td>
+                      <td><a href="rule-landmark-14.html"><code>search</code> landmark: restrictions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 15</td>
+                      <td><a href="rule-landmark-15.html"><code>form</code> landmark: restrictions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 16</td>
+                      <td><a href="rule-landmark-16.html"><code>region</code> landmark must have accessible name</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 17</td>
+                      <td><a href="rule-landmark-17.html">Landmarks must be uniquely identifiable</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 18</td>
+                      <td><a href="rule-landmark-18.html">Landmarks must identify content regions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Landmark 19</td>
+                      <td><a href="rule-landmark-19.html"><code>complementary</code> landmark: must be top level</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Headings</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Heading 1</td>
+                      <td><a href="rule-heading-1.html">Page should have <code>h1</code> element</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Heading 2</td>
+                      <td><a href="rule-heading-2.html"><code>h1</code> should be in <code>main</code> or <code>banner</code> landmark</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Heading 3</td>
+                      <td><a href="rule-heading-3.html">Sibling headings should be unique</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Heading 5</td>
+                      <td><a href="rule-heading-5.html">Headings must be properly nested</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Heading 6</td>
+                      <td><a href="rule-heading-6.html">Headings should have text content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Heading 7</td>
+                      <td><a href="rule-heading-7.html">First landmark heading <code>h2</code></a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Color/Content</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Color 1</td>
+                      <td><a href="rule-color-1.html">Color contrast of text: Minimum</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.4.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Color 2</td>
+                      <td><a href="rule-color-2.html">Use of color</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Color 3</td>
+                      <td><a href="rule-color-3.html">Color contrast of text: Enhanced</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Color 4</td>
+                      <td><a href="rule-color-4.html">Color contrast of user interface controls</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.4.11</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Color 5</td>
+                      <td><a href="rule-color-5.html">Color contrast of graphics</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.4.11</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Frame 1</td>
+                      <td><a href="rule-frame-1.html"><code>frame</code> must have accessible name</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Frame 2</td>
+                      <td><a href="rule-frame-2.html"><code>iframe</code> must have accessible name</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>HTML 1</td>
+                      <td><a href="rule-html-1.html">Replace <code>marquee</code> elements</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Language 1</td>
+                      <td><a href="rule-language-1.html">Page must use language code</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Language 2</td>
+                      <td><a href="rule-language-2.html">Identify language changes</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>List 1</td>
+                      <td><a href="rule-list-1.html">Use semantic markup for lists</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>List 2</td>
+                      <td><a href="rule-list-2.html">Provide list labels when appropriate</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Order 1</td>
+                      <td><a href="rule-order-1.html">Reading order: CSS positioning</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Sensory 1</td>
+                      <td><a href="rule-sensory-1.html">Not only shape, size and location</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.3</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Images</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Image 1</td>
+                      <td><a href="rule-image-1.html">Images must have alt text</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Image 2</td>
+                      <td><a href="rule-image-2.html">Alt text must summarize purpose</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Image 3</td>
+                      <td><a href="rule-image-3.html">Alt text must not include filename</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Image 4 (English)</td>
+                      <td><a href="rule-image-4_en.html">Alt text no more than 100 characters</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Image 5</td>
+                      <td><a href="rule-image-5.html">Verify image is decorative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Image 6</td>
+                      <td><a href="rule-image-6.html">Long description for complex images</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Image 7</td>
+                      <td><a href="rule-image-7.html">Use MathJax for mathematical expressions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.1.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Links</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Link 1</td>
+                      <td><a href="rule-link-1.html">Link text must describe the link target</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Link 2</td>
+                      <td><a href="rule-link-2.html">Link text should be unique</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Link 3</td>
+                      <td><a href="rule-link-3.html">Target focus should be in content window</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.2.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Tables/Layout</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Layout 1</td>
+                      <td><a href="rule-layout-1.html">Layout tables must have meaningful sequence</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Layout 2</td>
+                      <td><a href="rule-layout-2.html">Do not nest layout tables</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Layout 3</td>
+                      <td><a href="rule-layout-3.html">Verify <code>aria-flowto</code> supports reading order</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Layout 4</td>
+                      <td><a href="rule-layout-4.html">Do not restrict view or operation.</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.3.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Resize 1</td>
+                      <td><a href="rule-resize-1.html">Resize text content</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.4.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Resize 2</td>
+                      <td><a href="rule-resize-2.html">Support small screen dimensions</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.4.10</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 1</td>
+                      <td><a href="rule-table-1.html">Data cells must have row/column headers</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 2</td>
+                      <td><a href="rule-table-2.html">Data tables must have name</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 3</td>
+                      <td><a href="rule-table-3.html">Data tables may have description</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 4</td>
+                      <td><a href="rule-table-4.html">Data tables should have unique names</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 5</td>
+                      <td><a href="rule-table-5.html">Identify table markup as data or layout</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 6</td>
+                      <td><a href="rule-table-6.html">Header cells should be <code>th</code> elements</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 7</td>
+                      <td><a href="rule-table-7.html">Data cells must use <code>headers</code> attribute</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Table 8</td>
+                      <td><a href="rule-table-8.html">Name must be different than description</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.3.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Forms</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Error 1</td>
+                      <td><a href="rule-error-1.html">Using <code>aria-invalid</code> to identify the validity of control values.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Error 2</td>
+                      <td><a href="rule-error-2.html">Using <code>aria-required</code> to identify required form controls and widgets</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.3.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Error 3</td>
+                      <td><a href="rule-error-3.html">Error correction suggestions</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.3.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Error 4</td>
+                      <td><a href="rule-error-4.html">Prevent errors</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.3.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 1</td>
+                      <td><a href="rule-control-1.html">Form controls must have labels</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 2</td>
+                      <td><a href="rule-control-2.html">Image button must have alt. content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 3</td>
+                      <td><a href="rule-control-3.html">Radio buttons must have grouping label</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 4</td>
+                      <td><a href="rule-control-4.html"><code>button</code>s should have text content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 5</td>
+                      <td><a href="rule-control-5.html"><code>id</code> must be unique</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 6</td>
+                      <td><a href="rule-control-6.html"><code>label</code> must reference control</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 7</td>
+                      <td><a href="rule-control-7.html"><code>label</code> must have content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 8</td>
+                      <td><a href="rule-control-8.html"><code>fieldset</code> must have one <code>legend</code></a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 9</td>
+                      <td><a href="rule-control-9.html">Verify <code>title</code> is the label.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.3.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 10</td>
+                      <td><a href="rule-control-10.html">Accessible name must be unique</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 11</td>
+                      <td><a href="rule-control-11.html">Submit and reset button labels must be unique</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 12</td>
+                      <td><a href="rule-control-12.html">Forms submitted using buttons</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.2.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Control 13</td>
+                      <td><a href="rule-control-13.html"><code>name</code> attribute supports auto fill</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">1.3.5</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Keyboard 6</td>
+                      <td><a href="rule-keyboard-6.html"><code>select</code> must not change context</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">3.2.2</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">ARIA Widgets</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Widget 1</td>
+                      <td><a href="rule-widget-1.html">Accessible name is required</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 2</td>
+                      <td><a href="rule-widget-2.html"><code>onClick</code> event handlers must have widget role</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 3</td>
+                      <td><a href="rule-widget-3.html"><code>role</code> must be valid</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 4</td>
+                      <td><a href="rule-widget-4.html">Values must be valid</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 5</td>
+                      <td><a href="rule-widget-5.html">Attributes that start with <code>aria-</code> must be defined.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 6</td>
+                      <td><a href="rule-widget-6.html">Widgets must set properties</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 7</td>
+                      <td><a href="rule-widget-7.html">Widgets must have owned elements</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 8</td>
+                      <td><a href="rule-widget-8.html">Role must have parent</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 9</td>
+                      <td><a href="rule-widget-9.html">Only one owner</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 10</td>
+                      <td><a href="rule-widget-10.html">Value in range</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 11</td>
+                      <td><a href="rule-widget-11.html">Verify <code>aria-valuetext</code> value.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 12</td>
+                      <td><a href="rule-widget-12.html">Accessible name is descriptive</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.6</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 13</td>
+                      <td><a href="rule-widget-13.html">Role does not support accessible name.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 14</td>
+                      <td><a href="rule-widget-14.html">Live regions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 15</td>
+                      <td><a href="rule-widget-15.html">Remove deprecated ARIA attributes.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">4.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Widget 16</td>
+                      <td><a href="rule-widget-16.html">Closed shadow DOM requires manual check.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.1.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Audio/Video</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Audio 1</td>
+                      <td><a href="rule-audio-1.html"><code>audio</code> must have alternative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Audio 2</td>
+                      <td><a href="rule-audio-2.html"><code>object</code> for audio must have alternative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Audio 3</td>
+                      <td><a href="rule-audio-3.html"><code>embed</code> for audio must have alternative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Audio 4</td>
+                      <td><a href="rule-audio-4.html">Pause, stop or mute audio</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.4.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 1</td>
+                      <td><a href="rule-video-1.html"><code>video</code> for video only must have alternative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 2</td>
+                      <td><a href="rule-video-2.html"><code>object</code> for video only must have alternative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 3</td>
+                      <td><a href="rule-video-3.html"><code>embed</code> for video only must have alternative</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 4</td>
+                      <td><a href="rule-video-4.html"><code>video</code> must have caption</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 5</td>
+                      <td><a href="rule-video-5.html"><code>object</code> for video must have captions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 6</td>
+                      <td><a href="rule-video-6.html"><code>embed</code> for video must have captions</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 7</td>
+                      <td><a href="rule-video-7.html"><code>video</code> element must have audio description.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 8</td>
+                      <td><a href="rule-video-8.html"><code>object</code> for video must have audio description.</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Video 9</td>
+                      <td><a href="rule-video-9.html"><code>embed</code> for video must have audio description</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">1.2.3</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Keyboard Support</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Bypass 1</td>
+                      <td><a href="rule-bypass-1.html">Skip to main content link</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Keyboard 1</td>
+                      <td><a href="rule-keyboard-1.html">ARIA widget role requires specific keyboard support</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Keyboard 2</td>
+                      <td><a href="rule-keyboard-2.html">Sequential tab order of focusable elements must be meaningful</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.1.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Keyboard 3</td>
+                      <td><a href="rule-keyboard-3.html">No keyboard trap</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Keyboard 4</td>
+                      <td><a href="rule-keyboard-4.html">Avoid <code>tabindex</code> > 0</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.1.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Keyboard 5</td>
+                      <td><a href="rule-keyboard-5.html">Focus must be visible</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.7</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Timing</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Timing 1</td>
+                      <td><a href="rule-timing-1.html">Control time limits</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.2.1</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Timing 2</td>
+                      <td><a href="rule-timing-2.html">Control moving, blinking or auto-updating content</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.2.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Timing 3</td>
+                      <td><a href="rule-timing-3.html">Flashing limits</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.3.1</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">Site Navigation</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>Navigation 1</td>
+                      <td><a href="rule-navigation-1.html">At least two ways of finding content</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">2.4.5</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Navigation 2</td>
+                      <td><a href="rule-navigation-2.html">Consistent ordering of landmarks</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.2.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Navigation 3</td>
+                      <td><a href="rule-navigation-3.html">Consistent ordering of <code>h1</code> and <code>h2</code> labels</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.2.3</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Navigation 4</td>
+                      <td><a href="rule-navigation-4.html">Consistent labeling of landmarks</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.2.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Navigation 5</td>
+                      <td><a href="rule-navigation-5.html">Consistent <code>h1</code> and <code>h2</code> page section labels</a></td>
+                      <td>AA</td>
+                      <td><a href="" target="_spec">3.2.4</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Title 1</td>
+                      <td><a href="rule-title-1.html"><code>title</code> must identify website and page</a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.2</a></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Title 2</td>
+                      <td><a href="rule-title-2.html"><code>h1</code> must match part of the <code>title</code></a></td>
+                      <td>A</td>
+                      <td><a href="" target="_spec">2.4.2</a></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+                <h2 id="rc-" class="rules">All Rules</h2>
+                <table class="table table-striped" aria-labelledby="rc-">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td colspan="4"><em>no rules</em></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              
+            </div>
+
+            <div class="tab-pane fade show active" id="id-gl" role="tabpanel" aria-labelledby="gl-tab">
+              
+                <h2 id="gl-16" class="rules">Guideline 1.1 Text Alternatives</h2>
+                
+                  
+                  <h3 id="sc-1.1.1" class="rules">Success Criterion 1.1.1 Non-text Content</h3>
+                  <table class="table table-striped" aria-labelledby="sc-16">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Image 1</td>
+                        <td><a href="rule-image-1.html">Images must have alt text</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Image 2</td>
+                        <td><a href="rule-image-2.html">Alt text must summarize purpose</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Image 3</td>
+                        <td><a href="rule-image-3.html">Alt text must not include filename</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Image 4 (English)</td>
+                        <td><a href="rule-image-4_en.html">Alt text no more than 100 characters</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Image 5</td>
+                        <td><a href="rule-image-5.html">Verify image is decorative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Image 6</td>
+                        <td><a href="rule-image-6.html">Long description for complex images</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Image 7</td>
+                        <td><a href="rule-image-7.html">Use MathJax for mathematical expressions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-32" class="rules">Guideline 1.2 Time-based Media</h2>
+                
+                  
+                  <h3 id="sc-1.2.1" class="rules">Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Audio 1</td>
+                        <td><a href="rule-audio-1.html"><code>audio</code> must have alternative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Audio 2</td>
+                        <td><a href="rule-audio-2.html"><code>object</code> for audio must have alternative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Audio 3</td>
+                        <td><a href="rule-audio-3.html"><code>embed</code> for audio must have alternative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 1</td>
+                        <td><a href="rule-video-1.html"><code>video</code> for video only must have alternative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 2</td>
+                        <td><a href="rule-video-2.html"><code>object</code> for video only must have alternative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 3</td>
+                        <td><a href="rule-video-3.html"><code>embed</code> for video only must have alternative</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.2.2" class="rules">Success Criterion 1.2.2 Captions (Prerecorded)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Video 4</td>
+                        <td><a href="rule-video-4.html"><code>video</code> must have caption</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 5</td>
+                        <td><a href="rule-video-5.html"><code>object</code> for video must have captions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 6</td>
+                        <td><a href="rule-video-6.html"><code>embed</code> for video must have captions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.2.3" class="rules">Success Criterion 1.2.3 Audio Description or Media Alternative (Prerecorded)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Video 7</td>
+                        <td><a href="rule-video-7.html"><code>video</code> element must have audio description.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 8</td>
+                        <td><a href="rule-video-8.html"><code>object</code> for video must have audio description.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Video 9</td>
+                        <td><a href="rule-video-9.html"><code>embed</code> for video must have audio description</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.2.4" class="rules">Success Criterion 1.2.4 Captions (Live)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.2.5" class="rules">Success Criterion 1.2.5 Audio Description (Prerecorded)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-64" class="rules">Guideline 1.3 Adaptable</h2>
+                
+                  
+                  <h3 id="sc-1.3.1" class="rules">Success Criterion 1.3.1 Info and Relationships</h3>
+                  <table class="table table-striped" aria-labelledby="sc-64">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Heading 5</td>
+                        <td><a href="rule-heading-5.html">Headings must be properly nested</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Heading 6</td>
+                        <td><a href="rule-heading-6.html">Headings should have text content</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Heading 7</td>
+                        <td><a href="rule-heading-7.html">First landmark heading <code>h2</code></a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 2</td>
+                        <td><a href="rule-landmark-2.html">All content must be contained in landmarks</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 8</td>
+                        <td><a href="rule-landmark-8.html"><code>banner</code> landmark: must be top-level</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 9</td>
+                        <td><a href="rule-landmark-9.html"><code>banner</code> landmark: restrictions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 10</td>
+                        <td><a href="rule-landmark-10.html"><code>navigation</code> landmark: restrictions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 11</td>
+                        <td><a href="rule-landmark-11.html"><code>main</code> landmark: must be top-level</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 12</td>
+                        <td><a href="rule-landmark-12.html"><code>contentinfo</code> landmark: must be top-level</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 13</td>
+                        <td><a href="rule-landmark-13.html"><code>contentinfo</code> landmark: restrictions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 14</td>
+                        <td><a href="rule-landmark-14.html"><code>search</code> landmark: restrictions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 15</td>
+                        <td><a href="rule-landmark-15.html"><code>form</code> landmark: restrictions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 16</td>
+                        <td><a href="rule-landmark-16.html"><code>region</code> landmark must have accessible name</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 17</td>
+                        <td><a href="rule-landmark-17.html">Landmarks must be uniquely identifiable</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 18</td>
+                        <td><a href="rule-landmark-18.html">Landmarks must identify content regions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 19</td>
+                        <td><a href="rule-landmark-19.html"><code>complementary</code> landmark: must be top level</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>List 1</td>
+                        <td><a href="rule-list-1.html">Use semantic markup for lists</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 1</td>
+                        <td><a href="rule-table-1.html">Data cells must have row/column headers</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 3</td>
+                        <td><a href="rule-table-3.html">Data tables may have description</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 4</td>
+                        <td><a href="rule-table-4.html">Data tables should have unique names</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 5</td>
+                        <td><a href="rule-table-5.html">Identify table markup as data or layout</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 6</td>
+                        <td><a href="rule-table-6.html">Header cells should be <code>th</code> elements</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 7</td>
+                        <td><a href="rule-table-7.html">Data cells must use <code>headers</code> attribute</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 8</td>
+                        <td><a href="rule-table-8.html">Name must be different than description</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.3.2" class="rules">Success Criterion 1.3.2 Meaningful Sequence</h3>
+                  <table class="table table-striped" aria-labelledby="sc-64">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Layout 1</td>
+                        <td><a href="rule-layout-1.html">Layout tables must have meaningful sequence</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Layout 2</td>
+                        <td><a href="rule-layout-2.html">Do not nest layout tables</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Layout 3</td>
+                        <td><a href="rule-layout-3.html">Verify <code>aria-flowto</code> supports reading order</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Order 1</td>
+                        <td><a href="rule-order-1.html">Reading order: CSS positioning</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.3.3" class="rules">Success Criterion 1.3.3 Sensory Characteristics</h3>
+                  <table class="table table-striped" aria-labelledby="sc-64">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Sensory 1</td>
+                        <td><a href="rule-sensory-1.html">Not only shape, size and location</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.3.4" class="rules">Success Criterion 1.3.4 Orientation</h3>
+                  <table class="table table-striped" aria-labelledby="sc-64">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Layout 4</td>
+                        <td><a href="rule-layout-4.html">Do not restrict view or operation.</a></td>
+                        <td>AA</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.3.5" class="rules">Success Criterion 1.3.5 Identify Input Purpose</h3>
+                  <table class="table table-striped" aria-labelledby="sc-64">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Control 13</td>
+                        <td><a href="rule-control-13.html"><code>name</code> attribute supports auto fill</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-128" class="rules">Guideline 1.4 Distinguishable</h2>
+                
+                  
+                  <h3 id="sc-1.4.1" class="rules">Success Criterion 1.4.1 Use of Color</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Color 2</td>
+                        <td><a href="rule-color-2.html">Use of color</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.2" class="rules">Success Criterion 1.4.2 Audio Control</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Audio 4</td>
+                        <td><a href="rule-audio-4.html">Pause, stop or mute audio</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.3" class="rules">Success Criterion 1.4.3 Contrast (Minimum)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Color 1</td>
+                        <td><a href="rule-color-1.html">Color contrast of text: Minimum</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.4" class="rules">Success Criterion 1.4.4 Resize text</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Resize 1</td>
+                        <td><a href="rule-resize-1.html">Resize text content</a></td>
+                        <td>AA</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.5" class="rules">Success Criterion 1.4.5 Images of Text</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.10" class="rules">Success Criterion 1.4.10 Reflow</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Resize 2</td>
+                        <td><a href="rule-resize-2.html">Support small screen dimensions</a></td>
+                        <td>AA</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.11" class="rules">Success Criterion 1.4.11 Non-text Contrast</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Color 4</td>
+                        <td><a href="rule-color-4.html">Color contrast of user interface controls</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Color 5</td>
+                        <td><a href="rule-color-5.html">Color contrast of graphics</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.12" class="rules">Success Criterion 1.4.12 Text Spacing</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-1.4.13" class="rules">Success Criterion 1.4.13 Content on Hover or Focus</h3>
+                  <table class="table table-striped" aria-labelledby="sc-128">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-256" class="rules">Guideline 2.1 Keyboard Accessible</h2>
+                
+                  
+                  <h3 id="sc-2.1.1" class="rules">Success Criterion 2.1.1 Keyboard</h3>
+                  <table class="table table-striped" aria-labelledby="sc-256">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Keyboard 1</td>
+                        <td><a href="rule-keyboard-1.html">ARIA widget role requires specific keyboard support</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Keyboard 2</td>
+                        <td><a href="rule-keyboard-2.html">Sequential tab order of focusable elements must be meaningful</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 16</td>
+                        <td><a href="rule-widget-16.html">Closed shadow DOM requires manual check.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.1.2" class="rules">Success Criterion 2.1.2 No Keyboard Trap</h3>
+                  <table class="table table-striped" aria-labelledby="sc-256">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Keyboard 3</td>
+                        <td><a href="rule-keyboard-3.html">No keyboard trap</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Keyboard 4</td>
+                        <td><a href="rule-keyboard-4.html">Avoid <code>tabindex</code> > 0</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.1.4" class="rules">Success Criterion 2.1.4 Character Key Shortcuts</h3>
+                  <table class="table table-striped" aria-labelledby="sc-256">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-512" class="rules">Guideline 2.2 Enough Time</h2>
+                
+                  
+                  <h3 id="sc-2.2.1" class="rules">Success Criterion 2.2.1 Timing Adjustable</h3>
+                  <table class="table table-striped" aria-labelledby="sc-512">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Timing 1</td>
+                        <td><a href="rule-timing-1.html">Control time limits</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.2.2" class="rules">Success Criterion 2.2.2 Pause, Stop, Hide</h3>
+                  <table class="table table-striped" aria-labelledby="sc-512">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Timing 2</td>
+                        <td><a href="rule-timing-2.html">Control moving, blinking or auto-updating content</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-1024" class="rules">Guideline 2.3 Seizures and Physical Reactions</h2>
+                
+                  
+                  <h3 id="sc-2.3.1" class="rules">Success Criterion 2.3.1 Three Flashes or Below Threshold</h3>
+                  <table class="table table-striped" aria-labelledby="sc-1024">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>HTML 1</td>
+                        <td><a href="rule-html-1.html">Replace <code>marquee</code> elements</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Timing 3</td>
+                        <td><a href="rule-timing-3.html">Flashing limits</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-2048" class="rules">Guideline 2.4 Navigable</h2>
+                
+                  
+                  <h3 id="sc-2.4.1" class="rules">Success Criterion 2.4.1 Bypass Blocks</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Bypass 1</td>
+                        <td><a href="rule-bypass-1.html">Skip to main content link</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Frame 1</td>
+                        <td><a href="rule-frame-1.html"><code>frame</code> must have accessible name</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Frame 2</td>
+                        <td><a href="rule-frame-2.html"><code>iframe</code> must have accessible name</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Heading 1</td>
+                        <td><a href="rule-heading-1.html">Page should have <code>h1</code> element</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 1</td>
+                        <td><a href="rule-landmark-1.html"><code>main</code> landmark: at least one</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 3</td>
+                        <td><a href="rule-landmark-3.html"><code>navigation</code> landmark: at least one</a></td>
+                        <td>A</td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 4</td>
+                        <td><a href="rule-landmark-4.html"><code>banner</code> landmark: identifies branding content</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 5</td>
+                        <td><a href="rule-landmark-5.html"><code>banner</code> landmark: no more than one</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 6</td>
+                        <td><a href="rule-landmark-6.html"><code>contentinfo</code> landmark: identifies admin content</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Landmark 7</td>
+                        <td><a href="rule-landmark-7.html"><code>contentinfo</code> landmark: no more than one</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.2" class="rules">Success Criterion 2.4.2 Page Titled</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Title 1</td>
+                        <td><a href="rule-title-1.html"><code>title</code> must identify website and page</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Title 2</td>
+                        <td><a href="rule-title-2.html"><code>h1</code> must match part of the <code>title</code></a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.3" class="rules">Success Criterion 2.4.3 Focus Order</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.4" class="rules">Success Criterion 2.4.4 Link Purpose (In Context)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Link 1</td>
+                        <td><a href="rule-link-1.html">Link text must describe the link target</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Link 2</td>
+                        <td><a href="rule-link-2.html">Link text should be unique</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.5" class="rules">Success Criterion 2.4.5 Multiple Ways</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Navigation 1</td>
+                        <td><a href="rule-navigation-1.html">At least two ways of finding content</a></td>
+                        <td>AA</td>
+                        <td></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.6" class="rules">Success Criterion 2.4.6 Headings and Labels</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Control 10</td>
+                        <td><a href="rule-control-10.html">Accessible name must be unique</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 11</td>
+                        <td><a href="rule-control-11.html">Submit and reset button labels must be unique</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Heading 2</td>
+                        <td><a href="rule-heading-2.html"><code>h1</code> should be in <code>main</code> or <code>banner</code> landmark</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Heading 3</td>
+                        <td><a href="rule-heading-3.html">Sibling headings should be unique</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>List 2</td>
+                        <td><a href="rule-list-2.html">Provide list labels when appropriate</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Table 2</td>
+                        <td><a href="rule-table-2.html">Data tables must have name</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 12</td>
+                        <td><a href="rule-widget-12.html">Accessible name is descriptive</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.7" class="rules">Success Criterion 2.4.7 Focus Visible</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Keyboard 5</td>
+                        <td><a href="rule-keyboard-5.html">Focus must be visible</a></td>
+                        <td>AA</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.4.11" class="rules">Success Criterion 2.4.11 Focus Not Obscured (Minimum)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-2048">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-4096" class="rules">Guideline 2.5 Input Modalities</h2>
+                
+                  
+                  <h3 id="sc-2.5.1" class="rules">Success Criterion 2.5.1 Pointer Gestures</h3>
+                  <table class="table table-striped" aria-labelledby="sc-4096">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.5.2" class="rules">Success Criterion 2.5.2 Pointer Cancellation</h3>
+                  <table class="table table-striped" aria-labelledby="sc-4096">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.5.3" class="rules">Success Criterion 2.5.3 Label in Name</h3>
+                  <table class="table table-striped" aria-labelledby="sc-4096">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.5.4" class="rules">Success Criterion 2.5.4 Motion Actuation</h3>
+                  <table class="table table-striped" aria-labelledby="sc-4096">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.5.7" class="rules">Success Criterion 2.5.7 Dragging Movements</h3>
+                  <table class="table table-striped" aria-labelledby="sc-4096">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-2.5.8" class="rules">Success Criterion 2.5.8 Target Size (Minimum)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-4096">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-8192" class="rules">Guideline 3.1 Readable</h2>
+                
+                  
+                  <h3 id="sc-3.1.1" class="rules">Success Criterion 3.1.1 Language of Page</h3>
+                  <table class="table table-striped" aria-labelledby="sc-8192">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Language 1</td>
+                        <td><a href="rule-language-1.html">Page must use language code</a></td>
+                        <td>A</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.1.2" class="rules">Success Criterion 3.1.2 Language of Parts</h3>
+                  <table class="table table-striped" aria-labelledby="sc-8192">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Language 2</td>
+                        <td><a href="rule-language-2.html">Identify language changes</a></td>
+                        <td>AA</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-16384" class="rules">Guideline 3.2 Predictable</h2>
+                
+                  
+                  <h3 id="sc-3.2.1" class="rules">Success Criterion 3.2.1 On Focus</h3>
+                  <table class="table table-striped" aria-labelledby="sc-16384">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Link 3</td>
+                        <td><a href="rule-link-3.html">Target focus should be in content window</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.2.2" class="rules">Success Criterion 3.2.2 On Input</h3>
+                  <table class="table table-striped" aria-labelledby="sc-16384">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Control 12</td>
+                        <td><a href="rule-control-12.html">Forms submitted using buttons</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Keyboard 6</td>
+                        <td><a href="rule-keyboard-6.html"><code>select</code> must not change context</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.2.3" class="rules">Success Criterion 3.2.3 Consistent Navigation</h3>
+                  <table class="table table-striped" aria-labelledby="sc-16384">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Navigation 2</td>
+                        <td><a href="rule-navigation-2.html">Consistent ordering of landmarks</a></td>
+                        <td>AA</td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Navigation 3</td>
+                        <td><a href="rule-navigation-3.html">Consistent ordering of <code>h1</code> and <code>h2</code> labels</a></td>
+                        <td>AA</td>
+                        <td></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.2.4" class="rules">Success Criterion 3.2.4 Consistent Identification</h3>
+                  <table class="table table-striped" aria-labelledby="sc-16384">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Navigation 4</td>
+                        <td><a href="rule-navigation-4.html">Consistent labeling of landmarks</a></td>
+                        <td>AA</td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Navigation 5</td>
+                        <td><a href="rule-navigation-5.html">Consistent <code>h1</code> and <code>h2</code> page section labels</a></td>
+                        <td>AA</td>
+                        <td></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.2.6" class="rules">Success Criterion 3.2.6 Consistent Help</h3>
+                  <table class="table table-striped" aria-labelledby="sc-16384">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-32768" class="rules">Guideline 3.3 Input Assistance</h2>
+                
+                  
+                  <h3 id="sc-3.3.1" class="rules">Success Criterion 3.3.1 Error Identification</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32768">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Error 1</td>
+                        <td><a href="rule-error-1.html">Using <code>aria-invalid</code> to identify the validity of control values.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.3.2" class="rules">Success Criterion 3.3.2 Labels or Instructions</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32768">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Control 1</td>
+                        <td><a href="rule-control-1.html">Form controls must have labels</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 2</td>
+                        <td><a href="rule-control-2.html">Image button must have alt. content</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 3</td>
+                        <td><a href="rule-control-3.html">Radio buttons must have grouping label</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 4</td>
+                        <td><a href="rule-control-4.html"><code>button</code>s should have text content</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 6</td>
+                        <td><a href="rule-control-6.html"><code>label</code> must reference control</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 7</td>
+                        <td><a href="rule-control-7.html"><code>label</code> must have content</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 8</td>
+                        <td><a href="rule-control-8.html"><code>fieldset</code> must have one <code>legend</code></a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Control 9</td>
+                        <td><a href="rule-control-9.html">Verify <code>title</code> is the label.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.3.3" class="rules">Success Criterion 3.3.3 Error Suggestion</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32768">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Error 2</td>
+                        <td><a href="rule-error-2.html">Using <code>aria-required</code> to identify required form controls and widgets</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Error 3</td>
+                        <td><a href="rule-error-3.html">Error correction suggestions</a></td>
+                        <td>AA</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.3.4" class="rules">Success Criterion 3.3.4 Error Prevention (Legal, Financial, Data)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32768">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Error 4</td>
+                        <td><a href="rule-error-4.html">Prevent errors</a></td>
+                        <td>AA</td>
+                        <td>page</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.3.7" class="rules">Success Criterion 3.3.7 Redundant Entry</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32768">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-3.3.8" class="rules">Success Criterion 3.3.8 Accessible Authentication (Minimum)</h3>
+                  <table class="table table-striped" aria-labelledby="sc-32768">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+                <h2 id="gl-65536" class="rules">Guideline 4.1 Compatible</h2>
+                
+                  
+                  <h3 id="sc-4.1.1" class="rules">Success Criterion 4.1.1 Parsing</h3>
+                  <table class="table table-striped" aria-labelledby="sc-65536">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Control 5</td>
+                        <td><a href="rule-control-5.html"><code>id</code> must be unique</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 15</td>
+                        <td><a href="rule-widget-15.html">Remove deprecated ARIA attributes.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-4.1.2" class="rules">Success Criterion 4.1.2 Name, Role, Value</h3>
+                  <table class="table table-striped" aria-labelledby="sc-65536">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td>Widget 1</td>
+                        <td><a href="rule-widget-1.html">Accessible name is required</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 2</td>
+                        <td><a href="rule-widget-2.html"><code>onClick</code> event handlers must have widget role</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 3</td>
+                        <td><a href="rule-widget-3.html"><code>role</code> must be valid</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 4</td>
+                        <td><a href="rule-widget-4.html">Values must be valid</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 5</td>
+                        <td><a href="rule-widget-5.html">Attributes that start with <code>aria-</code> must be defined.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 6</td>
+                        <td><a href="rule-widget-6.html">Widgets must set properties</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 7</td>
+                        <td><a href="rule-widget-7.html">Widgets must have owned elements</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 8</td>
+                        <td><a href="rule-widget-8.html">Role must have parent</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 9</td>
+                        <td><a href="rule-widget-9.html">Only one owner</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 10</td>
+                        <td><a href="rule-widget-10.html">Value in range</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 11</td>
+                        <td><a href="rule-widget-11.html">Verify <code>aria-valuetext</code> value.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 13</td>
+                        <td><a href="rule-widget-13.html">Role does not support accessible name.</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                      <tr>
+                        <td>Widget 14</td>
+                        <td><a href="rule-widget-14.html">Live regions</a></td>
+                        <td>A</td>
+                        <td>element</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+                  
+                  <h3 id="sc-4.1.3" class="rules">Success Criterion 4.1.3 Status Messages</h3>
+                  <table class="table table-striped" aria-labelledby="sc-65536">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                  
+                
+              
+            </div>
+
+          </div>
+
+          
+
+        </div>
+      </main>
+    </nav>
+            <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+        </footer>
+
+
+            <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- OpenA11y JS -->
+        <script src="js/opena11y.js"></script>
+        <!-- SkipTo.js -->
+        <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
+
+  </body>
+</html>
+

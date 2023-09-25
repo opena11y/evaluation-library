@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Event handler test page | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <script src="webComponent.js" type="module"></script>
+
+    <script>
+      function clickEvent(event) {
+        document.getElementById('output').textContent = event.currentTarget.id;
+      }
+
+    </script>
+
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Event Handler Test Page</h1>
+      <div id="click-1" onclick="clickEvent(event)">Click 1</div>
+      <div id="click-2">Click 2</div>
+
+
+      <select id="select-1" onchange="clickEvent(event)">
+        <option id="option-1">Option 1</option>
+        <option id="option-2">Option 2</option>
+        <option id="option-3">Option 3</option>
+      </select>
+
+      <label>Event: <output id="output"></output></label>
+
+    </main>
+
+    <script>
+      document.getElementById('click-2').addEventListener('click', clickEvent);
+    </script>
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

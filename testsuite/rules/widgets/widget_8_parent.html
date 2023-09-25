@@ -16,7 +16,6 @@
 
         <h1>WIDGET 8: Widgets must have parent</h1>
 
-
         <h2>menuitem, menuitemcheckbox, menuitemradio
         <div role="menu">
           <div role="menuitem" class="WIDGET_8_PASS">menuitem pass</div>
@@ -110,7 +109,28 @@
           </div>
         </div>
 
-      </main>
+        <h2>Referencing Problems</h2>
+
+        <div role="menu" aria-owns="ID_ITEM_1 ID_ITEM_2 ID_ITEM_3">
+          <div>
+            <div id="ID_ITEM_1" role="menuitem" class="WIDGET_8_PASS">menuitem fail</div>
+            <div id="ID_ITEM_2" role="menuitemcheckbox" class="WIDGET_8_PASS">menuitemcheckbox fail</div>
+            <div id="ID_ITEM_3" role="menuitemradio" class="WIDGET_8_PASS">menuitemradio fail</div>
+          </div>
+        </div>
+
+        <div id="ID_ITEM_4" aria-owns="ID_ITEM_5">
+          <div role="menuitem" class="WIDGET_8_FAIL">menuitem pass</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_FAIL">menuitemcheckbox pass</div>
+          <div role="menuitemradio" class="WIDGET_8_FAIL">menuitemradio pass</div>
+        </div>
+
+        <div id="ID_ITEM_5" aria-owns="ID_ITEM_4">
+          <div role="menuitem" class="WIDGET_8_FAIL">menuitem pass</div>
+          <div role="menuitemcheckbox" class="WIDGET_8_FAIL">menuitemcheckbox pass</div>
+          <div role="menuitemradio" class="WIDGET_8_FAIL">menuitemradio pass</div>
+        </div>
+
       
       <footer role="contentinfo">
         <div>Widget 8 test case</div>

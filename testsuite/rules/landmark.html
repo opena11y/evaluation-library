@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>QUNIT: Landmark Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <meta charset="utf-8" />
   </head>
@@ -10,199 +10,82 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
 
-      test( "LANDMARK_1 no main landmark", function() {
-        executeTest('ID_IFRAME_1A', 'LANDMARK_1');
-      });
-      
-      test( "LANDMARK_1 one main landmark", function() {
-        executeTest('ID_IFRAME_1B', 'LANDMARK_1');
-      });
 
-      test( "LANDMARK_1 more than one main landmark", function() {
-        executeTest('ID_IFRAME_1C', 'LANDMARK_1');
-      });
-      
-      test( "LANDMARK_1 one main element", function() {
-        executeTest('ID_IFRAME_1D', 'LANDMARK_1');
-      });
+      window.addEventListener('load', (event) => {
 
-      test( "LANDMARK_1 more than one main element", function() {
-        executeTest('ID_IFRAME_1E', 'LANDMARK_1');
-      });
-      
-      test( "LANDMARK_2 elements with content must be in a landmark", function() {
-        executeTest('ID_IFRAME_2A', 'LANDMARK_2');
-      });
-      
-      test( "LANDMARK 3: no navigation landmark", function() {
-        executeTest('ID_IFRAME_3A', 'LANDMARK_3');
-      });
-      
-      test( "LANDMARK 3: has navigation landmark", function() {
-        executeTest('ID_IFRAME_3B', 'LANDMARK_3');
-      });
+        executeTest('LANDMARK_1 no main landmark',            'ID_IFRAME_1A', 'LANDMARK_1');
+        executeTest('LANDMARK_1 one main landmark',           'ID_IFRAME_1B', 'LANDMARK_1');
+        executeTest('LANDMARK_1 more than one main landmark', 'ID_IFRAME_1C', 'LANDMARK_1');
+        executeTest('LANDMARK_1 one main element',            'ID_IFRAME_1D', 'LANDMARK_1');
+        executeTest('LANDMARK_1 more than one main element',  'ID_IFRAME_1E', 'LANDMARK_1');
 
-      test( "LANDMARK 3: No navigation landmark or nav element but has links", function() {
-        executeTest('ID_IFRAME_3C', 'LANDMARK_3');
-      });
-      
-      test( "LANDMARK 3: has nav element", function() {
-        executeTest('ID_IFRAME_3D', 'LANDMARK_3');
-      });
+        executeTest('LANDMARK_2 elements with content must be in a landmark', 'ID_IFRAME_2A', 'LANDMARK_2');
 
-      test( "LANDMARK_4 no banner landmark", function() {
-        executeTest('ID_IFRAME_4A', 'LANDMARK_4');
-      });
-      
-      test( "LANDMARK_4 has banner landmark", function() {
-        executeTest('ID_IFRAME_4B', 'LANDMARK_4');
-      });
+        executeTest('LANDMARK 3: no navigation landmark',     'ID_IFRAME_3A', 'LANDMARK_3');
+        executeTest('LANDMARK 3: has navigation landmark',    'ID_IFRAME_3B', 'LANDMARK_3');
+        executeTest('LANDMARK 3: No navigation landmark or nav element but has links', 'ID_IFRAME_3C', 'LANDMARK_3');
+        executeTest('LANDMARK 3: has nav element',            'ID_IFRAME_3D', 'LANDMARK_3');
 
-      test( "LANDMARK_4 has header element", function() {
-        executeTest('ID_IFRAME_4E', 'LANDMARK_4');
-      });
-      
-      test( "LANDMARK_5 has two banner landmarks", function() {
-        executeTest('ID_IFRAME_5A', 'LANDMARK_5');
-      });
-      
-      test( "LANDMARK_5 has one banner landmark", function() {
-        executeTest('ID_IFRAME_5B', 'LANDMARK_5');
-      });
-      
-      test( "LANDMARK_5 has two header elements", function() {
-        executeTest('ID_IFRAME_5C', 'LANDMARK_5');
-      });
-      
-      test( "LANDMARK_6 no contentinfo landmark", function() {
-        executeTest('ID_IFRAME_6A', 'LANDMARK_6');
-      });
-      
-      test( "LANDMARK_6 has contentinfo landmark", function() {
-        executeTest('ID_IFRAME_6B', 'LANDMARK_6');
-      });
+        executeTest('LANDMARK_4 no banner landmark',  'ID_IFRAME_4A', 'LANDMARK_4');
+        executeTest('LANDMARK_4 has banner landmark', 'ID_IFRAME_4B', 'LANDMARK_4');
+        executeTest('LANDMARK_4 has header element',  'ID_IFRAME_4E', 'LANDMARK_4');
 
-      test( "LANDMARK_6 has footer element", function() {
-        executeTest('ID_IFRAME_6C', 'LANDMARK_6');
-      });
+        executeTest('LANDMARK_5 has two banner landmarks', 'ID_IFRAME_5A', 'LANDMARK_5');
+        executeTest('LANDMARK_5 has one banner landmark',  'ID_IFRAME_5B', 'LANDMARK_5');
+        executeTest('LANDMARK_5 has two header elements',  'ID_IFRAME_5C', 'LANDMARK_5');
+        executeTest('LANDMARK_5 has two header elements',  'ID_IFRAME_5D', 'LANDMARK_5');
 
-      test( "LANDMARK_7 has two contentinfo landmarks", function() {
-        executeTest('ID_IFRAME_7A', 'LANDMARK_7');
-      });
-      
-      test( "LANDMARK_7 has two footer elements", function() {
-        executeTest('ID_IFRAME_7B', 'LANDMARK_7');
-      });
-      
-      test( "LANDMARK_8 top level banner landmarks and header elements", function() {
-        executeTest('ID_IFRAME_8A', 'LANDMARK_8');
-        executeTest('ID_IFRAME_8B', 'LANDMARK_8');
-        executeTest('ID_IFRAME_8C', 'LANDMARK_8');
-      });
+        executeTest('LANDMARK_6 no contentinfo landmark',  'ID_IFRAME_6A', 'LANDMARK_6');
+        executeTest('LANDMARK_6 has contentinfo landmark', 'ID_IFRAME_6B', 'LANDMARK_6');
+        executeTest('LANDMARK_6 has footer element',       'ID_IFRAME_6C', 'LANDMARK_6');
 
-      test( "LANDMARK 9 Banner contains no landmarks", function() {
-        executeTest('ID_IFRAME_9A', 'LANDMARK_9');
-      });
-      
-      test( "LANDMARK 9 Banner contains navigation and region", function() {
-        executeTest('ID_IFRAME_9B', 'LANDMARK_9');
-      });
-      
-      test( "LANDMARK 9 Banner contains main and contentinfo", function() {
-        executeTest('ID_IFRAME_9C', 'LANDMARK_9');
-      });
-      
-      test( "LANDMARK 9 No banner landmark", function() {
-        executeTest('ID_IFRAME_9D', 'LANDMARK_9');
-      });
-      
-      test( "LANDMARK 10 Navigation landmarks can only contain region landmarks", function() {
-        executeTest('ID_IFRAME_10A', 'LANDMARK_10');
-      });
-      
-      test( "LANDMARK 11 Main landmarks must be top level", function() {
-        executeTest('ID_IFRAME_11A', 'LANDMARK_11');
-        executeTest('ID_IFRAME_11B', 'LANDMARK_11');
-      });
-      
-      test( "LANDMARK 11 Main elements must be top level", function() {
-        executeTest('ID_IFRAME_11C', 'LANDMARK_11');
-      });
-      
-      test( "LANDMARK 12 Contentinfo landmarks must be top level", function() {
-        executeTest('ID_IFRAME_12A', 'LANDMARK_12');
-        executeTest('ID_IFRAME_12B', 'LANDMARK_12');
-      });
-      
-      test( "LANDMARK 12 footer elements must be top level", function() {
-        executeTest('ID_IFRAME_12C', 'LANDMARK_12');
-      });
-      
-     test( "LANDMARK 13 contentinfo contains no landmarks", function() {
-        executeTest('ID_IFRAME_13A', 'LANDMARK_13');
-      });
-      
-      test( "LANDMARK 13 contentinfo contains navigation and region", function() {
-        executeTest('ID_IFRAME_13B', 'LANDMARK_13');
-      });
-      
-      test( "LANDMARK 13 contentinfo contains main and contentinfo", function() {
-        executeTest('ID_IFRAME_13C', 'LANDMARK_13');
-      });
-      
-      test( "LANDMARK 13 No contentinfo landmark", function() {
-        executeTest('ID_IFRAME_13D', 'LANDMARK_13');
-      });
-      
-      
-      test( "LANDMARK 14 Search landmark only contains region landmarks", function() {
-        executeTest('ID_IFRAME_14A', 'LANDMARK_14');
-      });
-      
-      test( "LANDMARK 15 Form landmark only contains region landmarks", function() {
-        executeTest('ID_IFRAME_15A', 'LANDMARK_15');
-      });
-      
-      test( "LANDMARK 15 Form element only contains region landmarks", function() {
-        executeTest('ID_IFRAME_15B', 'LANDMARK_15');
-      });
-      
-      test( "LANDMARK 16 Region landmark must have label", function() {
-        executeTest('ID_IFRAME_16A', 'LANDMARK_16');
-      });
+        executeTest('LANDMARK_7 has two contentinfo landmarks', 'ID_IFRAME_7A', 'LANDMARK_7');
+        executeTest('LANDMARK_7 has two footer elements',       'ID_IFRAME_7B', 'LANDMARK_7');
 
-      test( "LANDMARK 16 Section element must have label", function() {
-        executeTest('ID_IFRAME_16B', 'LANDMARK_16');
-      });
-      
-      
-      test( "LANDMARK 17 Landmark must have unique label", function() {
-        executeTest('ID_IFRAME_17A', 'LANDMARK_17');
-      });
-      
-      test( "LANDMARK 18 Landmark must be descriptive", function() {
-        executeTest('ID_IFRAME_18A', 'LANDMARK_18');
-      });
+        executeTest('LANDMARK_8 top level banner landmarks and header elements', 'ID_IFRAME_8A', 'LANDMARK_8');
+        executeTest('LANDMARK_8 top level banner landmarks and header elements', 'ID_IFRAME_8B', 'LANDMARK_8');
+        executeTest('LANDMARK_8 top level banner landmarks and header elements', 'ID_IFRAME_8C', 'LANDMARK_8');
 
-      test( "LANDMARK 19 Complementary landmarks must be top level", function() {
-        executeTest('ID_IFRAME_19A', 'LANDMARK_19');
-        executeTest('ID_IFRAME_19B', 'LANDMARK_19');
-      });
-      
-      test( "LANDMARK 19 aside elements must be top level", function() {
-        executeTest('ID_IFRAME_19C', 'LANDMARK_19');
-      });
-      
+        executeTest('LANDMARK 9 Banner contains no landmarks',          'ID_IFRAME_9A', 'LANDMARK_9');
+        executeTest('LANDMARK 9 Banner contains navigation and region', 'ID_IFRAME_9B', 'LANDMARK_9');
+        executeTest('LANDMARK 9 Banner contains main and contentinfo',  'ID_IFRAME_9C', 'LANDMARK_9');
+        executeTest('LANDMARK 9 No banner landmark',                    'ID_IFRAME_9D', 'LANDMARK_9');
 
+        executeTest('LANDMARK 10 Navigation landmarks can only contain region landmarks', 'ID_IFRAME_10A', 'LANDMARK_10');
+
+        executeTest('LANDMARK 11 Main landmarks must be top level', 'ID_IFRAME_11A', 'LANDMARK_11');
+        executeTest('LANDMARK 11 Main landmarks must be top level', 'ID_IFRAME_11B', 'LANDMARK_11');
+        executeTest('LANDMARK 11 Main elements must be top level',  'ID_IFRAME_11C', 'LANDMARK_11');
+
+        executeTest('LANDMARK 12 Contentinfo landmarks must be top level', 'ID_IFRAME_12A', 'LANDMARK_12');
+        executeTest('LANDMARK 12 Contentinfo landmarks must be top level', 'ID_IFRAME_12B', 'LANDMARK_12');
+        executeTest('LANDMARK 12 footer elements must be top level',       'ID_IFRAME_12C', 'LANDMARK_12');
+
+        executeTest('LANDMARK 13 contentinfo contains no landmarks',          'ID_IFRAME_13A', 'LANDMARK_13');
+        executeTest('LANDMARK 13 contentinfo contains navigation and region', 'ID_IFRAME_13B', 'LANDMARK_13');
+        executeTest('LANDMARK 13 contentinfo contains main and contentinfo',  'ID_IFRAME_13C', 'LANDMARK_13');
+        executeTest('LANDMARK 13 No contentinfo landmark',                    'ID_IFRAME_13D', 'LANDMARK_13');
+
+        executeTest('LANDMARK 14 Search landmark only contains region landmarks', 'ID_IFRAME_14A', 'LANDMARK_14');
+
+        executeTest('LANDMARK 15 Form landmark only contains region landmarks', 'ID_IFRAME_15A', 'LANDMARK_15');
+
+        executeTest('LANDMARK 15 Form element only contains region landmarks',  'ID_IFRAME_15B', 'LANDMARK_15');
+
+        executeTest('LANDMARK 16 Region landmark must have label', 'ID_IFRAME_16A', 'LANDMARK_16');
+
+        executeTest('LANDMARK 17 Landmark must have unique label', 'ID_IFRAME_17A', 'LANDMARK_17');
+
+        executeTest('LANDMARK 18 Landmark must be descriptive', 'ID_IFRAME_18A', 'LANDMARK_18');
+
+        executeTest('LANDMARK 19 Complementary landmarks must be top level', 'ID_IFRAME_19A', 'LANDMARK_19');
+        executeTest('LANDMARK 19 Complementary landmarks must be top level', 'ID_IFRAME_19B', 'LANDMARK_19');
+        executeTest('LANDMARK 19 aside elements must be top level',          'ID_IFRAME_19C', 'LANDMARK_19');
+      });
     </script>
     <!-- Not behaving correctly-->
     <h2>Landmark 1: A page must have main landmark</h2>
@@ -231,11 +114,13 @@
     <iframe id="ID_IFRAME_5A" src="landmark/landmark_5_A_has_two_banner_landmarks.html"></iframe>
     <iframe id="ID_IFRAME_5B" src="landmark/landmark_5_B_has_one_banner_landmark.html"></iframe>
     <iframe id="ID_IFRAME_5C" src="landmark/landmark_5_C_has_two_header_elements.html"></iframe>
+    <iframe id="ID_IFRAME_5D" src="landmark/landmark_5_D_more_than_one_banner_landmark.html"></iframe>
     
     <h2>Landmark 6: A page must have an contentinfo landmark</h2>
     <iframe id="ID_IFRAME_6A" src="landmark/landmark_6_A_no_info_landmark.html"></iframe>
     <iframe id="ID_IFRAME_6B" src="landmark/landmark_6_B_has_info_landmark.html"></iframe>
     <iframe id="ID_IFRAME_6C" src="landmark/landmark_6_E_has_footer_element.html"></iframe>
+    <iframe id="ID_IFRAME_6F" src="landmark/landmark_6_F_more_than_one_info_landmark.html"></iframe>
     
     <h2>Landmark 7: A page must not have more than one contentinfo landmark</h2>
     <iframe id="ID_IFRAME_7A" src="landmark/landmark_7_A_two_info_landmarks.html"></iframe>
@@ -277,22 +162,18 @@
     <h2>Landmark 15: Form Landmark restrictions</h2>
     <iframe id="ID_IFRAME_15A" src="landmark/landmark_15_A_form_landmark_only_region.html"></iframe>
     <iframe id="ID_IFRAME_15B" src="landmark/landmark_15_B_form_element_only_region.html"></iframe>
-        
+
     <h2>Landmark 16: Region Landmark has label</h2>
     <iframe id="ID_IFRAME_16A" src="landmark/landmark_16_A_region_landmark_must_have_name.html"></iframe>
-    <iframe id="ID_IFRAME_16B" src="landmark/landmark_16_B_section_element_must_have_name.html"></iframe>
 
     <h2>Landmark 17: Landmark has unique label</h2>
     <iframe id="ID_IFRAME_17A" src="landmark/landmark_17_landmark_must_have_unique_label_A.html"></iframe>
-               
-     <h2>Landmark 18: Landmarks must be descriptive</h2>
+              <h2>Landmark 18: Landmarks must be descriptive</h2>
     <iframe id="ID_IFRAME_18A" src="landmark/landmark_18_landmark_descriptive.html"></iframe>
 
     <h2>Landmark 19: Complementary landmarks must be top level</h2>
     <iframe id="ID_IFRAME_19A" src="landmark/landmark_19_A_complementary_landmark_top_level.html"></iframe>
     <iframe id="ID_IFRAME_19B" src="landmark/landmark_19_B_complementary_landmark_top_level.html"></iframe>
     <iframe id="ID_IFRAME_19C" src="landmark/landmark_19_C_aside_element_top_level.html"></iframe>
-                              
   </body>
-
 </html>

@@ -1,0 +1,198 @@
+
+
+
+
+
+
+
+
+<html lang="en-us">
+  <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Data cells must have row/column headers | OpenA11y Evaluation Library 2.0</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./css/opena11y.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </head>
+
+  </head>
+  <body>
+            <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="concepts.html">Concepts and Terms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="rules.html">Rules</a></li>
+                        <li class="nav-item"><a class="nav-link" href="apis.html">APIs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
+          <li class="breadcrumb-item active">Data cells must have row/column headers</li>
+        </ol>
+      </nav>
+      <div class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          <main id="rule">
+            
+            <h1 id="h1-title">Rule: Data cells must have row/column headers</h1>
+            
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  
+<tr>
+  <th>Rule ID</th>
+  <td>Table 1</td>
+</tr>
+
+                  
+<tr>
+  <th>Definition</th>
+  <td>Data cells in data tables must have row and/or column header cells or use the <code>headers</code> attribute.</td>
+</tr>
+
+                  
+<tr>
+  <th>Purpose</th>
+  <td>
+    <ul>
+      
+      <li>For screen reader users to understand the the context or meaning of the content in a data cell, the headings for the cell must be identified</li>
+      
+      <li>When header cells are properly identified, screen reader users can distinguish between header and data table cells.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Conformance</th>
+  <td>Required</td>
+</tr>
+
+                  
+<tr>
+  <th>WCAG Success Criteria</th>
+  <td>
+    <p class="primary">
+      <a href="https://www.w3.org/TR/WCAG21/#info-and-relationships" target="_spec">
+        Success Criterion 1.3.1 Info and Relationships
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
+          Success Criterion 2.4.6 Headings and Labels
+        </a>
+      </li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Category</th>
+  <td>Tables/Layout</td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Scope</th>
+  <td>element</td>
+</tr>
+
+                  
+<tr>
+  <th>Techniques</th>
+  <td>
+    <ul>
+      
+      <li>Use a <code>th</code> element as the first cell in each row and/or column to define row and column headers in simple data tables.</li>
+      
+      <li>While not recommended, it is also valid to use <code>td</code> element with a <code>scope</code> attribute as a header cell.</li>
+      
+      <li>Avoid using empty rows and columns for formatting data tables. Use CSS instead.</li>
+      
+      <li>When row and/or column headers are not sufficient to describe a data cell, use the <code>header</code> attribute to identify the appropriate header cells.  For example, when a data cell spans more than one column or row the column and row headers.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Information Links</th>
+  <td>
+    <ul>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/tables.html#the-table-element">HTML Specification: 4.9.1 The table element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/tables.html#attr-tdth-headers">HTML Specification: headers attribute</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/tables.html#attr-th-scope">HTML Specification: scope attribute</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H51">H51: Using table markup to present tabular information</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H63">H63: Using the scope attribute to associate header cells and data cells in data tables</a></li>
+      
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table">MDN: The Table element</a></li>
+      
+      <li><a href="https://www.ibm.com/able/requirements/requirements/#502_3_3">IBM Accessibility Requirements: 502.3.3 Row, Column and Headers</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/tutorials/tables/">W3C Web Accessibility Tutorials: Tables</a></li>
+      
+    </ul>
+  </td>
+</tr>
+
+                </tbody>
+              </table>
+          </main>
+        </div>
+      </div>
+    </div>
+            <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+        </footer>
+
+
+            <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- OpenA11y JS -->
+        <script src="js/opena11y.js"></script>
+        <!-- SkipTo.js -->
+        <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
+
+
+  </body>
+</html>

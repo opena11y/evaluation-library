@@ -21,7 +21,7 @@
     
     <h2> Table 1: Simple Data Table is 4x4 table with column headers </h2>
     
-    <table class="TABLE_5_PASS">
+    <table id="t1" class="TABLE_5_PASS">
         <caption>4 by 4 data table column headers</caption>
         <thead>
           <tr>
@@ -59,30 +59,30 @@
 
     <h2> Table 2: Layout Table is 4x4</h2>
     
-    <table class="TABLE_5_PASS" role="presentation">
-      <tr role="presentation"> 
-        <td role="presentation">Layout 11</td>
-        <td role="presentation">Layout 12</td>
-        <td role="presentation">Layout 13</td>
-        <td role="presentation">Layout 14</td>
+    <table id="t2" class="TABLE_5_PASS" role="none">
+      <tr>
+        <td >Layout 11</td>
+        <td >Layout 12</td>
+        <td >Layout 13</td>
+        <td >Layout 14</td>
       </tr>
-      <tr role="presentation"> 
-        <td role="presentation">Layout 21</td>
-        <td role="presentation">Layout 22</td>
-        <td role="presentation">Layout 23</td>
-        <td role="presentation">Layout 24</td>
+      <tr >
+        <td >Layout 21</td>
+        <td >Layout 22</td>
+        <td >Layout 23</td>
+        <td >Layout 24</td>
       </tr>
       <tr> 
-        <td role="presentation">Layout 31</td> 
-        <td role="presentation">Layout 32</td> 
-        <td role="presentation">Layout 33</td> 
-        <td role="presentation">Layout 34</td> 
+        <td >Layout 31</td>
+        <td >Layout 32</td>
+        <td >Layout 33</td>
+        <td >Layout 34</td>
       </tr>
     </table>
     
-    <h2> Table 3: Ambiguous 4x4 Table</h2>
+    <h2 id="h3"> Table 3: Ambiguous 4x4 Table</h2>
     
-    <table class="TABLE_5_FAIL">
+    <table id="t3" class="TABLE_5_FAIL">
       <tr> 
         <td>Cell 11</td>
         <td>Cell 12</td>
@@ -109,9 +109,9 @@
       </tr>
     </table>
 
-    <h2> Table 4: 1 row</h2>
+    <h2 id="h4"> Table 4: 1 row</h2>
     
-    <table class="TABLE_5_MC">
+    <table id="h4" class="TABLE_5_MC"  aria-labelledby="h4">
       <tr> 
         <td>Cell 11</td>
         <td>Cell 12</td>
@@ -120,9 +120,9 @@
       </tr>
     </table>
 
-    <h2> Table 5: 1 column</h2>
+    <h2 id="h5"> Table 5: 1 column</h2>
     
-    <table class="TABLE_5_MC">
+    <table id="t5" class="TABLE_5_MC" aria-labelledby="h5">
       <tr> 
         <td>Cell 11</td>
       </tr>
@@ -140,6 +140,93 @@
       </tr>
     </table>
     
-    
+    <h2 id="h6"> Table 6: 1x4 Grid</h2>
+
+    <table id="t6" class="TABLE_5_PASS" role="grid"  aria-labelledby="h6">
+      <tr>
+        <td >gridcell 11</td>
+        <td >g  ridcell 12</td>
+        <td >gridcell 13</td>
+        <td >gridcell 14</td>
+      </tr>
+    </table>
+
+    <h2 id="h7"> Table 7: 4x1 Treegrid</h2>
+
+    <table id="t7" class="TABLE_5_PASS" role="treegrid" aria-labelledby="h7">
+      <tr>
+        <td>gridcell 11</td>
+      </tr>
+      <tr>
+        <td>gridcell 21</td>
+      </tr>
+      <tr>
+        <td>gridcell 31</td>
+      </tr>
+      <tr>
+        <td>gridcell 41</td>
+      </tr>
+      <tr>
+        <td>gridcell 51</td>
+      </tr>
+    </table>
+
+    <h2 id="h8"> Table 8: 1x4 ARIA Table</h2>
+
+    <div id="t8" class="TABLE_5_PASS" role="table" aria-labelledby="h8">
+      <div role="row">
+        <div role="cell">gridcell 11</div>
+        <div role="cell">gridcell 12</div>
+        <div role="cell">gridcell 13</div>
+        <div role="cell">gridcell 14</div>
+      </div>
+    </table>
+
+    <h2 id="h9"> Table 9: 4x4 table with accessible name</h2>
+
+    <table id="t9" class="TABLE_5_PASS" aria-labelledby="h9">
+      <tr>
+        <td >Cell 11</td>
+        <td >Cell 12</td>
+        <td >Cell 13</td>
+        <td >Cell 14</td>
+      </tr>
+      <tr >
+        <td >Cell 21</td>
+        <td >Cell 22</td>
+        <td >Cell 23</td>
+        <td >Cell 24</td>
+      </tr>
+      <tr>
+        <td >Cell 31</td>
+        <td >Cell 32</td>
+        <td >Cell 33</td>
+        <td >Cell 34</td>
+      </tr>
+    </table>
+
+
+    <h2 id="h10"> Table 9: Hidden 4x4 table with accessible name</h2>
+
+    <table id="t10" class="TABLE_5_HIDDEN" aria-labelledby="h10" hidden>
+      <tr>
+        <td >Cell 11</td>
+        <td >Cell 12</td>
+        <td >Cell 13</td>
+        <td >Cell 14</td>
+      </tr>
+      <tr >
+        <td >Cell 21</td>
+        <td >Cell 22</td>
+        <td >Cell 23</td>
+        <td >Cell 24</td>
+      </tr>
+      <tr>
+        <td >Cell 31</td>
+        <td >Cell 32</td>
+        <td >Cell 33</td>
+        <td >Cell 34</td>
+      </tr>
+    </table>
   </body>
 </html>

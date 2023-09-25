@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Accessible Name Calculation</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script type="module">
+      import testAccname from '../scripts/testaccname.js';
+      window.addEventListener('load', (event) => {
+
+        testAccname('Accessible Name',        'ID_IFRAME_1A', 'data-label', 'accName');
+        testAccname('Accessible Description', 'ID_IFRAME_1A', 'data-desc',  'accDescription');
+        testAccname('Error Description',      'ID_IFRAME_1A', 'data-error', 'errMessage');
+
+        testAccname('Accessible Name and CSS properties',   'ID_IFRAME_1B', 'data-label', 'accName');
+        testAccname('Accessible Name and embedded controls','ID_IFRAME_1C', 'data-label', 'accName');
+        testAccname('Accessible Name from contents',        'ID_IFRAME_1D', 'data-label', 'accName');
+        testAccname('Accessible Name from web components',  'ID_IFRAME_1E', 'data-label', 'accName');
+
+      });
+      window.addEventListener('load', (event) => {
+      });
+    </script>
+
+    <h2>Accessible Name Calculation</h2>
+    <iframe id="ID_IFRAME_1A" src="accname/accname.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="accname/accname-css.html"></iframe>
+    <iframe id="ID_IFRAME_1C" src="accname/accname-embedded.html"></iframe>
+    <iframe id="ID_IFRAME_1D" src="accname/accname-from-contents.html"></iframe>
+    <iframe id="ID_IFRAME_1E" src="accname/accname-web-components.html"></iframe>
+  </body>
+
+</html>

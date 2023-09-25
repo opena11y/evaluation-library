@@ -1,18 +1,42 @@
 {
-  "name": "a11y-evaluation-library",
-  "version": "1.2.0",
+  "name": "evaluation-library",
+  "version": "2.0.1",
   "description": "Javascript library for evaluating WCAG and ARIA conformance",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ainspector/a11y-evaluation-library.git"
+    "url": "git+https://github.com/opena11y/evaluation-library.git"
   },
-  "keywords": ["evalution library", "accessibility", "wcag", "aria"],
+  "keywords": [
+    "evalution library",
+    "accessibility",
+    "wcag",
+    "aria"
+  ],
   "author": "Jon Gunderson",
   "license": "Apache License, Version 2.0",
   "bugs": {
-    "url": "https://github.com/ainspector/a11y-evaluation-library/issues"
+    "url": "https://github.com/opena11y/evaluation-library/issues"
   },
-  "homepage": "https://github.com/ainspector/a11y-evaluation-library#readme",
-  "eslintConfig": {
+  "homepage": "https://github.com/opena11y/evaluation-library#readme",
+  "scripts": {
+    "build": "gulp",
+    "eslint": "eslint src/*.js",
+    "testcase-1": "node testsuite/scripts/generate-attribute-deprecated-test-page.js",
+    "testcase-2": "node testsuite/scripts/generate-attribute-deprecated-test-page-implied-role.js",
+    "testcase-3": "node testsuite/scripts/generate-aria-in-html-test-page.js",
+    "testcases": "npm run testcase-1 && nom run testcase-2 && npm run testcase-3"
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "gulp": "^4.0.2",
+    "node-fetch": "^2.6.7",
+    "node-html-parser": "^3.3.6",
+    "rollup": "^2.70.1",
+    "rollup-plugin-polyfill-node": "^0.10.2"
+  },
+  "dependencies": {
+    "gulp-eslint": "^6.0.0",
+    "nunjucks": "^3.2.3",
+    "promise": "^8.1.0"
   }
 }

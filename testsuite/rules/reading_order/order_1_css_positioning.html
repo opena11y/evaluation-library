@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reading Order Rule 1: CSS Positioning and Reading Order</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <header>
+      Reading Order Rules
+    </header>
+    
+    <main>
+      
+      <h1>Reading Order Rule 1: CSS Positioning and Reading Order</h1>
+
+      <div>
+        Some content with no positioning
+      </div>
+      
+      <div style="position: absolute" class="ORDER_1_MC">
+        Some content positioned absolute
+      </div>
+
+      <div style="position: relative" class="ORDER_1_MC">
+        Some content positioned relative
+      </div>
+
+      <div style="position: fixed" class="ORDER_1_MC">
+        Some content positioned fixed
+      </div>
+
+      <div hidden>
+        <div style="position: absolute" class="ORDER_1_HIDDEN">
+          Some content positioned absolute
+        </div>
+
+        <div style="position: relative" class="ORDER_1_HIDDEN">
+          Some content positioned relative
+        </div>
+
+        <div style="position: fixed" class="ORDER_1_HIDDEN">
+          Some content positioned fixed
+        </div>
+
+      </div>
+
+
+    </main>
+  </body>
+</html>

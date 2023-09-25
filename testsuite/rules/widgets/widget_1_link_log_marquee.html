@@ -15,20 +15,18 @@
       <main>
         <h1>WIDGET_1: Link, log, marquee, and slider must have accessible name</h1>
 
-        <h2>Link Role</h2>
-        <div role="link" class="WIDGET_1_PASS">Link 1: Content</div>
+        <h2>Link Role (should be ignored by this rule)</h2>
+        <div role="link">Link 1: Content</div>
 
-        <div role="link" class="WIDGET_1_PASS" aria-label="Link 2: Aria-label">Link 2: aria-label</div>
+        <div role="link" aria-label="Link 2: Aria-label">Link 2: aria-label</div>
 
         <div id="ID_LINK_3">Link 3: Aria-labelledby</div>
-        <div role="link" class="WIDGET_1_PASS" aria-labelledby="ID_LINK_3">Link 3</div>
+        <div role="link" aria-labelledby="ID_LINK_3">Link 3</div>
 
-        <div style="display:none" role="link" class="WIDGET_1_HIDDEN" aria-label="Link 4: Hidden"></div>
+        <div style="display:none" role="link" aria-label="Link 4: Hidden"></div>
 
         <div>Link 5: Fail</div>
-        <div role="link" class="WIDGET_1_FAIL"></div>
-
-
+        <div role="link"></div>
 
         <h2>Log Role</h2>
         <div role="log" class="WIDGET_1_PASS" aria-label="Log 1: Aria-label"></div>
@@ -53,7 +51,6 @@
         <div>Marquee 4: Fail</div>
         <div role="marquee" class="WIDGET_1_FAIL"></div>
 
-
         <h2>Slider Role</h2>
         <div role="slider" class="WIDGET_1_PASS" aria-label="Slider 1: Aria-label"></div>
 
@@ -64,7 +61,7 @@
 
         <div>Slider 4: Fail</div>
         <div role="slider" class="WIDGET_1_FAIL"></div>
-
+                
       </main>
       
       <footer role="contentinfo">

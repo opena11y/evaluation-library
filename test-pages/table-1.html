@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Table Markup | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <link href="color.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+      table.test,
+      table.test th,
+      table.test td {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body style="background-color: #eee">
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Table Markup</h1>
+
+      <h2>Simple Table</h2>
+
+      <table class="test">
+        <caption>Simple Table</caption>
+        <tr>
+          <td></td>
+          <th scope="col">A</th>
+          <th scope="col">B</th>
+          <th scope="col">C</th>
+          <th scope="col">D</th>
+          <th scope="col">E</th>
+          <th scope="col">F</th>
+        </tr>
+        <tr>
+          <th scope="row">L</th>
+          <td>Cell 11</td>
+          <td>Cell 12</td>
+          <td>Cell 13</td>
+          <td>Cell 14</td>
+          <td>Cell 15</td>
+          <td>Cell 16</td>
+        </tr>
+        <tr>
+          <th scope="row">M</th>
+          <td>Cell 21</td>
+          <td>Cell 22</td>
+          <td>Cell 23</td>
+          <td>Cell 24</td>
+          <td>Cell 25</td>
+          <td>Cell 26</td>
+        </tr>
+        <tr>
+          <th scope="row">N</th>
+          <td>Cell 31</td>
+          <td>Cell 32</td>
+          <td>Cell 33</td>
+          <td>Cell 34</td>
+          <td>Cell 35</td>
+          <td>Cell 36</td>
+        </tr>
+        <tr>
+          <th scope="row">O</th>
+          <td>Cell 41</td>
+          <td>Cell 42</td>
+          <td>Cell 43</td>
+          <td>Cell 44</td>
+          <td>Cell 45</td>
+          <td>Cell 46</td>
+        </tr>
+      </table>
+
+      <table class="test">
+        <caption>Row and Column Span Table</caption>
+        <tr>
+          <td></td>
+          <th id="t2a" scope="col">A</th>
+          <th id="t2b" scope="col">B</th>
+          <th id="t2c" scope="col">C</th>
+          <th id="t2d" scope="col">D</th>
+          <th id="t2e" scope="col">E</th>
+          <th id="t2f" scope="col">F</th>
+        </tr>
+        <tr>
+          <th id="t2l" scope="row">L</th>
+          <td>Cell 11</td>
+          <td>Cell 12</td>
+          <td>Cell 13</td>
+          <td rowspan="4" headers="t2d t2m">Cell 14</td>
+          <td>Cell 15</td>
+          <td>Cell 16</td>
+        </tr>
+        <tr>
+          <th id="t2m" scope="row">M</th>
+          <td>Cell 21</td>
+          <td>Cell 22</td>
+          <td>Cell 23</td>
+          <td colspan="2" header="t2m t2f">Cell 24</td>
+        </tr>
+        <tr>
+          <th id="t2n" scope="row">N</th>
+          <td>Cell 31</td>
+          <td>Cell 32</td>
+          <td>Cell 33</td>
+          <td>Cell 34</td>
+          <td>Cell 35</td>
+        </tr>
+        <tr>
+          <th id="t2o" scope="row">O</th>
+          <td>Cell 41</td>
+          <td>Cell 42</td>
+          <td>Cell 43</td>
+          <td>Cell 44</td>
+          <td>Cell 45</td>
+        </tr>
+      </table>
+
+
+    </main>
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

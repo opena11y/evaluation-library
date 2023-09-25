@@ -8,7 +8,7 @@
 
   <body>
 
-    <div role="banner" class="LANDMARK_17_PASS">
+    <div role="banner">
       <p>Landmark 17: Landmark must have unique label</p>
     </div>
 
@@ -29,8 +29,22 @@
         <li><a href="link6.html">Link 6</a></li>
       </ul>
     </nav>
-    
-    
+
+    <div role="search" aria-label="Search 1" class="LANDMARK_17_PASS">
+    </div>
+
+    <div role="search" aria-label="Search 2" class="LANDMARK_17_PASS">
+    </div>
+
+    <div role="search" aria-label="Search 3" class="LANDMARK_17_PASS">
+    </div>
+
+    <div role="search" aria-label="Search 4" class="LANDMARK_17_FAIL">
+    </div>
+
+    <div role="search" aria-label="Search 4" class="LANDMARK_17_FAIL">
+    </div>
+
     <div role="form"  class="LANDMARK_17_PASS" aria-labelledby="id_form_1">
     
       <h2 id="id_form_1">Form 1</h2>
@@ -45,7 +59,7 @@
          <h2 id="reg2">Region 2</h2>
       </section> 
 
-        <div role="region" class="LANDMARK_17_HIDDEN" style="display: none">
+        <div role="region" class="LANDMARK_17_HIDDEN" aria-label="Region 3" style="display: none">
          <h2>Region 3</h2>
           <ul>
             <li><a href="link4.html">Link 4</a></li>
@@ -57,11 +71,11 @@
     </div>
 
     
-    <div role="main" class="LANDMARK_17_PASS">
+    <div role="main">
       <h1>Landmark 17: Landmark must have unique label</h1>
 
-      <div role="form" class="LANDMARK_17_PASS">
-        <h2>Form 2</h2>
+      <div role="form" aria-labelledby="form2" class="LANDMARK_17_PASS">
+        <h2 id="form2">Form 2</h2>
     
         <label>Text 4: <input type="text"></label>
 
@@ -70,7 +84,7 @@
           Region 4 content
         </div>
 
-        <div role="region" class="LANDMARK_17_HIDDEN" hidden>
+        <div role="region" aria-label="Same label" hidden class="LANDMARK_17_HIDDEN">
           <h2>Region 5</h2>
           Region 5 content
         </div>
@@ -102,7 +116,7 @@
       <h2>Complementary 1</h2>
     </aside>
 
-    <footer role="contentinfo" class="LANDMARK_17_PASS">
+    <footer role="contentinfo">
       <h2>Contentinfo 1</h2>
     </footer>
 

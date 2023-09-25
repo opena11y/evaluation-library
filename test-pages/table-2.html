@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Table Markup | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <link href="color.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+      table.test,
+      table.test th,
+      table.test td {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body style="background-color: #eee">
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Table Markup</h1>
+
+      <h2>Simple Table with Headers</h2>
+
+      <table class="test">
+        <caption>Simple Table</caption>
+        <thead>
+            <tr>
+              <td></td>
+              <th id="a" scope="col">A</th>
+              <th id="b" scope="col">B</th>
+              <th id="c" scope="col">C</th>
+              <th id="d" scope="col">D</th>
+              <th id="e" scope="col">E</th>
+              <th id="f" scope="col">F</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th id="l" scope="row">L</th>
+            <td>Cell 11</td>
+            <td colspan="2" header="l d">Cell 12</td>
+            <td>Cell 14</td>
+            <td>Cell 15</td>
+            <td>Cell 16</td>
+          </tr>
+          <tr>
+            <th id="m" scope="row">M</th>
+            <td>Cell 21</td>
+            <td>Cell 22</td>
+            <td>Cell 23</td>
+            <td rowspan="2" headers="d n">Cell 24</td>
+            <td>Cell 25</td>
+            <td>Cell 26</td>
+          </tr>
+          <tr>
+            <th id="n" scope="row">N</th>
+            <td>Cell 31</td>
+            <td>Cell 32</td>
+            <td>Cell 33</td>
+            <td>Cell 35</td>
+            <td>Cell 36</td>
+          </tr>
+          <tr>
+            <th id="o" scope="row">O</th>
+            <td>Cell 41</td>
+            <td>Cell 42</td>
+            <td>Cell 43</td>
+            <td>Cell 44</td>
+            <td>Cell 45</td>
+            <td>Cell 46</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Simple Table missing row/column Headers</h2>
+
+      <table class="test">
+        <caption>Simple Table</caption>
+        <thead>
+            <tr>
+              <td></td>
+              <td id="a">A</td>
+              <td id="b">B</td>
+              <td id="c">C</td>
+              <td></td>
+              <td id="d">D</td>
+              <td id="e">E</td>
+              <td id="f">F</td>
+              <th id="g" hidden>G</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="l">L</td>
+            <td>Cell 11</td>
+            <td colspan="2" header="l">Cell 12</td>
+            <td></td>
+            <td>Cell 14</td>
+            <td>Cell 15</td>
+            <td>Cell 16</td>
+          </tr>
+          <tr>
+            <td id="m" scope="row">M</td>
+            <td>Cell 21</td>
+            <td>Cell 22</td>
+            <td>Cell 23</td>
+            <td></td>
+            <td rowspan="2" headers="d">Cell 24</td>
+            <td>Cell 25</td>
+            <td>Cell 26</td>
+          </tr>
+          <tr>
+            <th id="n" scope="row">N</th>
+            <td>Cell 31</td>
+            <td>Cell 32</td>
+            <td>Cell 33</td>
+            <td></td>
+            <td>Cell 35</td>
+            <td>Cell 36</td>
+          </tr>
+          <tr>
+            <th id="o" scope="row">O</th>
+            <td>Cell 41</td>
+            <td>Cell 42</td>
+            <td>Cell 43</td>
+            <td></td>
+            <td>Cell 44</td>
+            <td>Cell 45</td>
+            <td>Cell 46</td>
+          </tr>
+          <tr hidden>
+            <th id="p" scope="row">P</th>
+            <td>Cell 51</td>
+            <td>Cell 52</td>
+            <td>Cell 53</td>
+            <td></td>
+            <td>Cell 54</td>
+            <td>Cell 55</td>
+            <td>Cell 56</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </main>
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

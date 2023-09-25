@@ -2,62 +2,46 @@
 <html>
   <head>
     <title>QUNIT: Error Feedback Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
 
-  <body>  
+  <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
-      // Test case for labeling form controls
 
+    <script type="module">
 
-      test( "ERROR 1: Use invalid or aria-invalid to indicate a form controls value is invalid", function() {
-        executeTest('ID_IFRAME_1', 'ERROR_1');
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', () => {
+
+        // Test case for labeling form controls
+
+        executeTest('ERROR_1: Use invalid or aria-invalid to indicate a form controls value is invalid', 'ID_IFRAME_1', 'ERROR_1');
+
+        executeTest('ERROR 2: Required on Standard Form Controls and widgets', 'ID_IFRAME_2', 'ERROR_2');
+
+        executeTest('ERROR 3: Suggestions', 'ID_IFRAME_3', 'ERROR_3');
+
+        executeTest('ERROR 4: Prevention', 'ID_IFRAME_4', 'ERROR_4');
+
       });
 
-      test( "ERROR 2: Required Standard Form Controls", function() {
-        executeTest('ID_IFRAME_2', 'ERROR_2');
-      });
-
-      test( "ERROR 3: Required Widgets", function() {
-        executeTest('ID_IFRAME_3', 'ERROR_3');
-      });
-         
-      test( "ERROR 4: Suggestions", function() {
-        executeTest('ID_IFRAME_4', 'ERROR_4');
-      });
-         
-      test( "ERROR 5: Prevention", function() {
-        executeTest('ID_IFRAME_5', 'ERROR_5');
-      });
-         
-         
     </script>
 
     <h2>ERROR 1: Use invalid or aria-invalid to mark a form control value as invalid</h2>
     <iframe id="ID_IFRAME_1" src="error_feedback/error_feedback_1_invalid_aria_invalid.html"></iframe>
 
-    <h2>ERROR 2: Required Standard Form Controls</h2>
+    <h2>ERROR 2: Required Standard Form Controls and Widgets</h2>
     <iframe id="ID_IFRAME_2" src="error_feedback/error_feedback_2_required.html"></iframe>
     
-    <h2>ERROR 3: Required Widgets</h2>
-    <iframe id="ID_IFRAME_3" src="error_feedback/error_feedback_3_required_widgets.html"></iframe>
-
-    <h2>ERROR 4: Suggestions</h2>
-    <iframe id="ID_IFRAME_4" src="error_feedback/error_feedback_4_suggestions.html"></iframe>
+    <h2>ERROR 3: Suggestions</h2>
+    <iframe id="ID_IFRAME_3" src="error_feedback/error_feedback_3_suggestions.html"></iframe>
     
-    <h2>ERROR 5: Prevent</h2>
-    <iframe id="ID_IFRAME_5" src="error_feedback/error_feedback_5_prevent.html"></iframe>
+    <h2>ERROR 4: Prevent</h2>
+    <iframe id="ID_IFRAME_4" src="error_feedback/error_feedback_4_prevent.html"></iframe>
     
     
   </body>

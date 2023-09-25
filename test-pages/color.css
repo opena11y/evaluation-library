@@ -1,0 +1,20 @@
+.large {
+  font-size: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.opacity {
+  color: #fff;
+  background-color: #000;
+}
+
+.background-image-1 {
+  background: url('./images/blue.png');
+}
+
+.background-image-2 {
+  background: content-box radial-gradient(crimson, skyblue);
+}

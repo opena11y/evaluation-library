@@ -34,18 +34,18 @@
       <form>
         <div>
           <label  for="id_text_1">Text 1</label>
-          <input  id="id_text_1" type="text" class="ERROR_2_MC"/>          
+          <input  id="id_text_1" type="text" />
 
         </div>
         
         <div>
           <label  for="id_textarea_1">Textarea 1</label>
-          <textarea id="id_textarea_1" class="ERROR_2_MC" rows="4" cols="40"></textarea>          
+          <textarea id="id_textarea_1"  rows="4" cols="40"></textarea>
         </div>
         
         <div>
           <label  for="id_select_1">Select 1</label>
-          <select id="id_select_1"   class="ERROR_2_MC">
+          <select id="id_select_1"   >
             <option>Option 1</option>
             <option>Option 2</option>
           </select>          
@@ -53,36 +53,36 @@
         
         <fieldset>
           <legend>Pick one response 1</legend>
-          <label><input type="radio" name="group1" class="ERROR_2_MC" /> Response 1</label>
-          <label><input type="radio" name="group1" class="ERROR_2_MC" /> Response 2</label>
-          <label><input type="radio" name="group1" class="ERROR_2_MC" /> Response 3</label>
-          <label><input type="radio" name="group1" class="ERROR_2_MC" /> Response 4</label>
+          <label><input type="radio" name="group1"  /> Response 1</label>
+          <label><input type="radio" name="group1"  /> Response 2</label>
+          <label><input type="radio" name="group1"  /> Response 3</label>
+          <label><input type="radio" name="group1"  /> Response 4</label>
         </fieldset>
 
         <fieldset>
           <legend>Pick more than one response 1</legend>
-          <label><input type="checkbox"  class="ERROR_2_MC"/> Response 1</label>
-          <label><input type="checkbox"  class="ERROR_2_MC"/> Response 2</label>
-          <label><input type="checkbox"  class="ERROR_2_MC"/> Response 3</label>
-          <label><input type="checkbox"  class="ERROR_2_MC"/> Response 4</label>
+          <label><input type="checkbox"  /> Response 1</label>
+          <label><input type="checkbox"  /> Response 2</label>
+          <label><input type="checkbox"  /> Response 3</label>
+          <label><input type="checkbox"  /> Response 4</label>
         </fieldset>
 
         <fieldset>
           <legend>Specialized <code>input</code> elements 1</legend>
-          <label><input type="tel"   class="ERROR_2_MC" value=""/> Telephone number response</label>
-          <label><input type="url"   class="ERROR_2_MC" value=""/> URL response</label>
-          <label><input type="email" class="ERROR_2_MC" value=""/> e-mail response</label>
-          <label><input type="date"  class="ERROR_2_MC" value=""/> date response</label>
+          <label><input type="tel"    value=""/> Telephone number response</label>
+          <label><input type="url"    value=""/> URL response</label>
+          <label><input type="email"  value=""/> e-mail response</label>
+          <label><input type="date"   value=""/> date response</label>
           <label><input type="range" value=""/> range response</label>
         </fieldset>
 
         <fieldset>
           <legend>Numerical calculaton elements 1</legend>
-          <input name="g1_n1" id="g1_n1" value="0" type="number" pattern="\d{1,45}" aria-label="first number to add" class="ERROR_2_MC"/> + 
-          <input name="g1_n2" id="g1_n2" value="0" type="number" pattern="\d{1,45}" aria-label="second number to add" class="ERROR_2_MC"/> =
+          <input name="g1_n1" id="g1_n1" value="0" type="number" pattern="\d{1,45}" aria-label="first number to add" /> +
+          <input name="g1_n2" id="g1_n2" value="0" type="number" pattern="\d{1,45}" aria-label="second number to add" /> =
           <output id="g1_o" name="g1_o" pattern="\d{1,45}" for="g1_n1 g1_n2">--</output>
-          <label>Validity 1: <input id="g1_error1" type="text" size="30" class="ERROR_2_MC"/></label>
-          <label>Validity 2: <input id="g1_error2" type="text" size="30" class="ERROR_2_MC"/></label>
+          <label>Validity 1: <input id="g1_error1" type="text" size="30" /></label>
+          <label>Validity 2: <input id="g1_error2" type="text" size="30" /></label>
         </fieldset>
         
         
@@ -131,8 +131,8 @@
 
         <fieldset hidden>
           <legend>Numerical calculaton elements 1</legend>
-          <input name="g1_n1" id="g3_n1" value="0" type="number" pattern="\d{1,45}" aria-label="first number to add" class="ERROR_2_HIDDEN"/> + 
-          <input name="g1_n2" id="g3_n2" value="0" type="number" pattern="\d{1,45}" aria-label="second number to add" class="ERROR_2_HIDDEN"/> =
+          <input name="g1_n1" required id="g3_n1" value="0" type="number" pattern="\d{1,45}" aria-label="first number to add" class="ERROR_2_HIDDEN"/> +
+          <input name="g1_n2" id="g3_n2" value="0" type="number" pattern="\d{1,45}" aria-label="second number to add" aria-required="true" class="ERROR_2_HIDDEN"/> =
           <output id="g3_o" name="g1_o" pattern="\d{1,45}" for="g1_n1 g1_n2">--</output>
         </fieldset>
 

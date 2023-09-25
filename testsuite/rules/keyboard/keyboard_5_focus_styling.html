@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Keyboard Rule 5: Styling Keyboard Focus</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+      
+    <style type="text/css">
+      
+      label {
+        display: block; 
+      }
+      
+      div > label { 
+        margin-top: 1em;
+      }
+
+      fieldset {
+        margin-top: 1em;
+      }
+    </style>  
+  </head>
+
+  <body class="KEYBOARD_5_MC">
+    
+    <header>
+      <h1>Focus Rules</h1>
+    </header>
+
+    <div role="main">
+      
+      <h1>Keyboard Rule 5: Styling Keyboard Focus</h1>
+
+      <div><a name="test"><code>a[name]</code> element used as reference, not part of tab sequence</a></div>
+      <div><a href="test.html"  class="KEYBOARD_5_MC"><code>a[href]</code> element with <code>href</code>, part of tab sequence</a></div>
+
+      <a href="link1.html" class="KEYBOARD_5_MC">Link 1</a>
+      <a href="link2.html" class="KEYBOARD_5_MC">Link 2</a>
+      <a href="link3.html" class="KEYBOARD_5_MC">Link 3</a>
+      <a href="link4.html" class="KEYBOARD_5_MC">Link 4</a>
+
+      <button class="KEYBOARD_5_MC">Test button 1</button>
+      <div role="button"  class="KEYBOARD_5_MC">Test Button 2: no tabindex</div>
+      <div role="button" tabindex="0"   class="KEYBOARD_5_MC">Test Button 3: tabindex=0</div>
+      <div role="button" tabindex="-1"  class="KEYBOARD_5_MC">Test Button 4: tabindex=-1</div>
+      <div role="button" id="button5"   class="KEYBOARD_5_MC">Test Button 5: tabindex=0</div>
+      <div role="button" id="button6"   class="KEYBOARD_5_MC">Test Button 6: tabindex=0</div>
+
+      <script>
+        document.getElementById('button5').setAttribute('tabIndex', '0');
+        document.getElementById('button6').tabIndex = 0;
+      </script>
+
+      <label for="input1">Textbox 1</label>
+      <input id="input1"  class="KEYBOARD_5_MC">
+      <input class="KEYBOARD_5_MC">
+
+      <input type="checkbox" tabindex="-1" class="KEYBOARD_5_MC">
+
+      <label for="select1">Select with onchange event</label>
+      <select id="select1" onchange="onSelectChangeEvent()" class="KEYBOARD_5_MC">
+        <option class="KEYBOARD_5_MC">Option 1</option>
+        <option class="KEYBOARD_5_MC">Option 2</option>
+        <option class="KEYBOARD_5_MC">Option 3</option>
+        <option class="KEYBOARD_5_MC">Option 4</option>
+      </select>
+
+      <div role="menu" class="KEYBOARD_5_MC">
+        <div role="menuitem" class="KEYBOARD_5_MC">Item 1</div>
+        <div role="menuitem" class="KEYBOARD_5_MC">Item 2</div>
+        <div role="menuitem" class="KEYBOARD_5_MC">Item 3</div>
+        <div role="menuitem" class="KEYBOARD_5_MC">Item 4</div>
+      </div>
+
+      <div role="menu" class="KEYBOARD_5_HIDDEN" hidden>
+        <div role="menuitem" class="KEYBOARD_5_HIDDEN">Item 1</div>
+        <div role="menuitem" class="KEYBOARD_5_HIDDEN">Item 2</div>
+        <div role="menuitem" class="KEYBOARD_5_HIDDEN">Item 3</div>
+        <div role="menuitem" class="KEYBOARD_5_HIDDEN">Item 4</div>
+      </div>
+
+      <a href="link3.html" class="KEYBOARD_5_HIDDEN" style="display: none">Link 5</a>
+      <a href="link4.html" class="KEYBOARD_5_HIDDEN" style="display: none">Link 6</a>
+
+
+  </body>
+</html>
+
+

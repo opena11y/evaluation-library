@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Accessible Name and Description Calculations with CSS display, hidden, ::before, ::after and ARIA aria-hidden properties | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <style>
+      label {
+        display: block;
+      }
+      code {
+        display: inline-block;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+        background: #ddd;
+      }
+      .css-content::before {
+        content: 'A';
+      }
+      .css-content::after {
+        content: 'D';
+      }
+      .css-radio::before {
+        content: 'RADIO';
+      }
+      .css-1::after {
+        content: '1';
+      }
+      .css-2::after {
+        content: '2';
+      }
+      .css-3::after {
+        content: '3';
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Accessible Name Calculation with CSS <code>display</code>, <code>visibility</code>, <code>::before</code>, <code>::after</code> and ARIA <code>aria-hidden</code> properties</h1>
+
+      <h2>Label Reference</h2>
+
+      <h3>No CSS</h3>
+      <label for="label-ref-11">ABCD</label>
+      <input id="label-ref-11" type="text" data-label="ABCD">
+
+      <label for="label-ref-12">ABCD</label>
+      <select data-label="ABCD" id="label-ref-12">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3>CSS <code>display: none</code> on label</h3>
+      <label for="label-ref-21" style="display: none">ABCD</label>
+      <input id="label-ref-21" type="text" data-label="">
+
+      <label for="label-ref-22" style="display: none">ABCD</label>
+      <select data-label="" id="label-ref-22">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3>CSS <code>display: none</code> on child</h3>
+      <label for="label-ref-31">AB<div style="display: none"> X </div>CD</label>
+      <input id="label-ref-31" type="text" data-label="ABCD">
+
+      <label for="label-ref-32">AB<span style="display: none"> X </span>CD</label>
+      <select data-label="ABCD" id="label-ref-32">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3>CSS <code>visibility: hidden</code> on label</h3>
+      <label for="label-ref-41" style="visibility:hidden">ABCD</label>
+      <input id="label-ref-41" type="text" aria-label="">
+
+      <label for="label-ref-42" style="visibility:hidden">ABCD</label>
+      <select id="label-ref-42" aria-label="">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3>CSS <code>visibility: hidden</code> on child</h3>
+      <label for="label-ref-51">ABC<span style="visibility:hidden"> X </span>D</label>
+      <input id="label-ref-51" type="text" data-label="ABCD">
+
+      <label for="label-ref-52">ABC<span style="visibility:hidden"> X </span>D</label>
+      <select id="label-ref-52" data-label="ABCD">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3><code>aria-hidden=true</code> on label</h3>
+      <label for="label-ref-61"  aria-hidden="true">ABCD</label>
+      <input id="label-ref-61" type="text">
+
+      <label for="label-ref-62"  aria-hidden="true">ABCD</label>
+      <select id="label-ref-62">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3><code>aria-hidden=true</code> on child</h3>
+      <label for="label-ref-71">ABC<span aria-hidden="true"> X </span>D</label>
+      <input id="label-ref-71" type="text" data-label="ABCD">
+
+      <label for="label-ref-72">ABC<span aria-hidden="true"> X </span>D</label>
+      <select id="label-ref-72" data-label="ABCD">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3><code>aria-hidden=false</code> on child</h3>
+      <label for="label-ref-81">ABC<span aria-hidden="false" style="display: none">D</span></label>
+      <input id="label-ref-81" type="text" data-label="ABC">
+
+      <label for="label-ref-82">ABC<span aria-hidden="false" style="display: none">D</span></label>
+      <select id="label-ref-82" data-label="ABC">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h3>CSS <code>::before</code> and <code>::after</code></h3>
+      <label for="label-ref-91" class="css-content">BC</label>
+      <input id="label-ref-91" type="text" data-label="ABCD">
+
+      <label for="label-ref-92" class="css-content">BC</label>
+      <select id="label-ref-92"  data-label="ABCD">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <h2>Label Encapsulation</h2>
+
+      <h3>No CSS</h3>
+      <label>
+        ABCD
+        <input id="label-encapsulate-11" type="text" data-label="ABCD">
+      </label>
+
+      <label>
+        ABCD
+        <select id="label-encapsulate-12" data-label="ABCD">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="label-encapsulate-13" data-label="ABCD">
+        <legend>ABCD</legend>
+        <label>
+          <input id="label-encapsulate-14" name="test" type="radio" data-label="RADIO 1"/>
+          RADIO 1
+        </label>
+        <label>
+          <input id="label-encapsulate-15" name="test" type="radio" data-label="RADIO 2"/>
+          RADIO 2
+        </label>
+        <label>
+          <input id="label-encapsulate-16" name="test" type="radio" data-label="RADIO 3"/>
+          RADIO 3
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>display: none</code> on child</h3>
+      <label>
+        A<span style="display: none">X</span>BCD
+        <input id="label-encapsulate-21" type="text" data-label="ABCD">
+      </label>
+
+      <label>
+        A<span style="display: none">X</span>BCD
+        <select data-label="ABCD" data-label="ABCD" id="label-encapsulate-22">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="label-encapsulate-23">
+        <legend>ABC<span style="display: none">X</span>D</legend>
+        <label>
+          <input id="label-encapsulate-24" name="test" type="radio" data-label="RADIO 1"/>
+          RA<span style="display: none">X</span>DIO 1
+        </label>
+        <label>
+          <input id="label-encapsulate-25" name="test" type="radio" data-label="RADIO 2"/>
+          RADI<span style="display: none">X</span>O 2
+        </label>
+        <label>
+          <input id="label-encapsulate-26" name="test" type="radio" data-label="RADIO 3"/>
+          RADIO <span style="display: none">X</span>3
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>visibility: hidden</code> on child</h3>
+      <label>
+        A<span style="visibility: hidden">X</span>BCD
+        <input id="label-encapsulate-31" type="text" data-label="ABCD">
+      </label>
+
+      <label>
+        A<span style="visibility: hidden">X</span>BCD
+        <select data-label="ABCD" id="label-encapsulate-32">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="label-encapsulate-33">
+        <legend>ABC<span style="visibility: hidden">X</span>D</legend>
+        <label>
+          <input id="label-encapsulate-34" name="test" type="radio" data-label="RADIO 1"/>
+          RA<span style="visibility: hidden">X</span>DIO 1
+        </label>
+        <label>
+          <input id="label-encapsulate-35" name="test" type="radio" data-label="RADIO 2"/>
+          RADI<span style="visibility: hidden">X</span>O 2
+        </label>
+        <label>
+          <input id="label-encapsulate-36" name="test" type="radio" data-label="RADIO 3"/>
+          RADIO <span style="visibility: hidden">X</span>3
+        </label>
+      </fieldset>
+
+      <h3><code>aria-hidden=true</code> on child</h3>
+     <label>
+        A<span aria-hidden="true">X</span>BCD
+        <input id="label-encapsulate-41" type="text" data-label="ABCD">
+      </label>
+
+      <label>
+        A<span aria-hidden="true">X</span>BCD
+        <select data-label="ABCD" id="label-encapsulate-42">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="label-encapsulate-43">
+        <legend>ABC<span aria-hidden="true">X</span>D</legend>
+        <label>
+          <input id="label-encapsulate-44" name="test" type="radio" data-label="RADIO 1"/>
+          RA<span aria-hidden="true">X</span>DIO 1
+        </label>
+        <label>
+          <input id="label-encapsulate-45" name="test" type="radio" data-label="RADIO 2"/>
+          RADI<span aria-hidden="true">X</span>O 2
+        </label>
+        <label>
+          <input id="label-encapsulate-46" name="test" type="radio" data-label="RADIO 3"/>
+          RADIO <span aria-hidden="true">X</span>3
+        </label>
+      </fieldset>
+
+      <h3><code>aria-hidden=false</code> on child</h3>
+     <label>
+        AB<span aria-hidden="false" style="visibility: hidden">X</span>CD
+        <input id="label-encapsulate-51" type="text" data-label="ABCD">
+      </label>
+
+      <label>
+        AB<span aria-hidden="false" style="visibility: hidden">X</span>CD
+        <select data-label="ABCD" id="label-encapsulate-52">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="label-encapsulate-53">
+        <legend>ABC<span aria-hidden="false" style="visibility: hidden">X</span>D</legend>
+        <label>
+          <input id="label-encapsulate-54" name="test" type="radio" data-label="RADIO 1"/>
+          RA<span aria-hidden="false" style="visibility: hidden">X</span>DIO 1
+        </label>
+        <label>
+          <input id="label-encapsulate-55" name="test" type="radio" data-label="RADIO 2"/>
+          RADIO<span aria-hidden="false" style="visibility: hidden">X</span> 2
+        </label>
+        <label>
+          <input id="label-encapsulate-56" name="test" type="radio" data-label="RADIO 3"/>
+          RADIO <span aria-hidden="false" style="visibility: hidden">X</span>3
+        </label>
+      </fieldset>
+
+      <h2><code>aria-label</code></h2>
+
+      <h2><code>aria-label</code> on control</h2>
+      <label>
+        XXXX
+        <input id="aria-label-11" type="text" data-label="ABCD" aria-label="ABCD">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-label-12" aria-label="ABCD">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="aria-label-13" aria-label="ABCD">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-label-14" name="test" type="radio" data-label="RADIO 1" aria-label="RADIO 1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-label-15" name="test" type="radio" data-label="RADIO 2" aria-label="RADIO 2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-label-16" name="test" type="radio" data-label="RADIO 3" aria-label="RADIO 3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h2><code>aria-label</code> on <code>label</code> element</h2>
+      <label for="aria-label-21" aria-label="ABCD">XXXX</label>
+      <input id="aria-label-21" type="text" data-label="ABCD">
+
+      <label for="aria-label-22" aria-label="ABCD">XXXX</label>
+      <select data-label="ABCD" id="aria-label-22">
+        <option>OPTION A</option>
+        <option>OPTION B</option>
+        <option>OPTION C</option>
+      </select>
+
+      <fieldset data-label="ABCD" id="aria-label-23">
+        <legend aria-label="ABCD">XXXX</legend>
+        <label  aria-label="RADIO 1">
+          <input id="aria-label-24" name="test" type="radio" data-label="RADIO 1"/>
+          RADIO X
+        </label>
+        <label aria-label="RADIO 2">
+          <input id="aria-label-25" name="test" type="radio" data-label="RADIO 2"/>
+          RADIO X
+        </label>
+        <label aria-label="RADIO 3">
+          <input id="aria-label-26" name="test" type="radio" data-label="RADIO 3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h2><code>aria-label</code> on reference element</h2>
+
+      <div id="aria-label-3-abcd" aria-label="ABCD">XXXX</div>
+      <div id="aria-label-3-radio-1" aria-label="RADIO 1">RADIO X</div>
+      <div id="aria-label-3-radio-2" aria-label="RADIO 2">RADIO X</div>
+      <div id="aria-label-3-radio-3" aria-label="RADIO 3">RADIO X</div>
+
+      <label>
+        XXXX
+        <input id="aria-label-31" type="text" data-label="ABCD" aria-labelledby="aria-label-3-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-label-32" aria-labelledby="aria-label-3-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="aria-label-33" aria-labelledby="aria-labelledby-3-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-label-34" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-3-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-35" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-3-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-36" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-3-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h2><code>aria-label</code> on child of reference element</h2>
+
+      <div id="aria-label-4-abcd"><span aria-label="AB">XX</span><span aria-label="CD">XX</span></div>
+      <div id="aria-label-4-radio-1"><span aria-label="RADIO">XXXX</span><span aria-label="1"> X</span></div>
+      <div id="aria-label-4-radio-2"><span aria-label="RADIO">XXXX</span><span aria-label="2"> X</span></div>
+      <div id="aria-label-4-radio-3"><span aria-label="RADIO">XXXX</span><span aria-label="3"> X</span></div>
+
+      <label>
+        XXXX
+        <input id="aria-label-41" type="text" data-label="AB CD" aria-labelledby="aria-label-4-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="AB CD" id="aria-label-42" aria-labelledby="aria-label-4-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="AB CD" id="aria-label-43" aria-labelledby="aria-label-4-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-label-44" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-label-4-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-label-45" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-label-4-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-label-46" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-label-4-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h2><code>aria-labelledby</code></h2>
+
+      <h3>No CSS</h3>
+
+      <div id="aria-labelledby-1-abcd">ABCD</div>
+      <div id="aria-labelledby-1-radio-1">RADIO 1</div>
+      <div id="aria-labelledby-1-radio-2">RADIO 2</div>
+      <div id="aria-labelledby-1-radio-3">RADIO 3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-11" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-1-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-12" aria-labelledby="aria-labelledby-1-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="aria-labelledby-13" aria-labelledby="aria-labelledby-1-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-14" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-1-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-15" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-1-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-16" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-1-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>display: none</code> on reference</h3>
+
+      <div id="aria-labelledby-2-abcd" style="display: none">ABCD</div>
+      <div id="aria-labelledby-2-radio-1" style="display: none">RADIO 1</div>
+      <div id="aria-labelledby-2-radio-2" style="display: none">RADIO 2</div>
+      <div id="aria-labelledby-2-radio-3" style="display: none">RADIO 3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-21" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-2-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-22" aria-labelledby="aria-labelledby-2-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset data-label="ABCD" id="aria-labelledby-23" aria-labelledby="aria-labelledby-2-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-24" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-2-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-25" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-2-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-26" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-2-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+
+      <h3>CSS <code>display: none</code> on child</h3>
+
+      <div id="aria-labelledby-3-abcd">AB<span  style="display: none">X</span>CD</div>
+      <div id="aria-labelledby-3-radio-1">RADIO <span  style="display: none">X</span>1</div>
+      <div id="aria-labelledby-3-radio-2">RA<span  style="display: none">X</span>DIO 2</div>
+      <div id="aria-labelledby-3-radio-3">RADI<span  style="display: none">X</span>O 3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-31" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-3-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-32" aria-labelledby="aria-labelledby-3-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset id="aria-labelledby-33" aria-labelledby="aria-labelledby-3-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-34" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-3-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-35" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-3-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-36" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-3-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>visibility: hidden</code> on reference</h3>
+
+      <div id="aria-labelledby-4-abcd" style="visibility: hidden">ABCD</div>
+      <div id="aria-labelledby-4-radio-1" style="visibility: hidden">RADIO 1</div>
+      <div id="aria-labelledby-4-radio-2" style="visibility: hidden">RADIO 2</div>
+      <div id="aria-labelledby-4-radio-3" style="visibility: hidden">RADIO 3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-41" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-4-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-42" aria-labelledby="aria-labelledby-4-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset id="aria-labelledby-43" aria-labelledby="aria-labelledby-4-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-44" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-4-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-45" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-4-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-46" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-4-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+
+      <h3>CSS <code>visibility: hidden</code> on child</h3>
+
+      <div id="aria-labelledby-5-abcd">AB<span  style="visibility: hidden">X</span>CD</div>
+      <div id="aria-labelledby-5-radio-1">RADIO <span  style="visibility: hidden">X</span>1</div>
+      <div id="aria-labelledby-5-radio-2">RA<span  style="visibility: hidden">X</span>DIO 2</div>
+      <div id="aria-labelledby-5-radio-3">RADI<span  style="visibility: hidden">X</span>O 3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-51" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-5-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-52" aria-labelledby="aria-labelledby-5-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset id="aria-labelledby-53" aria-labelledby="aria-labelledby-5-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-54" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-5-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-55" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-5-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-56" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-5-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>aria-hidden=true</code> on child</h3>
+
+      <div id="aria-labelledby-6-abcd">AB<span aria-hidden="true">X</span>CD</div>
+      <div id="aria-labelledby-6-radio-1">RADIO <span aria-hidden="true">X</span>1</div>
+      <div id="aria-labelledby-6-radio-2">RA<span aria-hidden="true">X</span>DIO 2</div>
+      <div id="aria-labelledby-6-radio-3">RADI<span aria-hidden="true">X</span>O 3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-61" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-6-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-62" aria-labelledby="aria-labelledby-6-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset id="aria-labelledby-63" aria-labelledby="aria-labelledby-6-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-64" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-6-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-65" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-6-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-66" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-6-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>aria-hidden=false</code> on child</h3>
+
+      <div id="aria-labelledby-7-abcd">AB<span aria-hidden="false" style="display: none">X</span>CD</div>
+      <div id="aria-labelledby-7-radio-1">RADIO <span aria-hidden="false" style="display: none">X</span>1</div>
+      <div id="aria-labelledby-7-radio-2">RADIO <span aria-hidden="false" style="display: none">X</span>2</div>
+      <div id="aria-labelledby-7-radio-3">RADIO <span aria-hidden="false" style="display: none">X</span>3</div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-71" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-7-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-72" aria-labelledby="aria-labelledby-7-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset id="aria-labelledby-73" aria-labelledby="aria-labelledby-7-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-74" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-7-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-75" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-7-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-76" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-7-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+      <h3>CSS <code>::before</code> and <code>::after</code></h3>
+
+      <div id="aria-labelledby-8-abcd" class="css-content">BC</div>
+      <div id="aria-labelledby-8-radio-1" class="css-radio css-1"> </div>
+      <div id="aria-labelledby-8-radio-2" class="css-radio css-2"> </div>
+      <div id="aria-labelledby-8-radio-3" class="css-radio css-3"> </div>
+
+      <label>
+        XXXX
+        <input id="aria-labelledby-81" type="text" data-label="ABCD" aria-labelledby="aria-labelledby-8-abcd">
+      </label>
+
+      <label>
+        XXXX
+        <select data-label="ABCD" id="aria-labelledby-82" aria-labelledby="aria-labelledby-8-abcd">
+          <option>OPTION A</option>
+          <option>OPTION B</option>
+          <option>OPTION C</option>
+        </select>
+      </label>
+
+      <fieldset id="aria-labelledby-83" aria-labelledby="aria-labelledby-8-abcd">
+        <legend>XXXX</legend>
+        <label>
+          <input id="aria-labelledby-84" name="test" type="radio" data-label="RADIO 1" aria-labelledby="aria-labelledby-8-radio-1"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-85" name="test" type="radio" data-label="RADIO 2" aria-labelledby="aria-labelledby-8-radio-2"/>
+          RADIO X
+        </label>
+        <label>
+          <input id="aria-labelledby-86" name="test" type="radio" data-label="RADIO 3" aria-labelledby="aria-labelledby-8-radio-3"/>
+          RADIO X
+        </label>
+      </fieldset>
+
+    </main>
+
+<!--
+    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
+-->
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

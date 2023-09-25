@@ -19,9 +19,9 @@
             <button value="val" class="CONTROL_4_PASS">Button 11</button>
             <button value="val" class="CONTROL_4_PASS">Button 12</button>
             <button value="val" class="CONTROL_4_PASS">Button 13</button>
-            <button value="val" class="CONTROL_4_PASS" aria-label="Button 14">    </button>
-            <button value="val" class="CONTROL_4_PASS" title="Button 15">    </button>
-            <button value="val" class="CONTROL_4_PASS" aria-labelledby="id_16">   </button>
+            <button value="val" class="CONTROL_4_FAIL" aria-label="Button 14">    </button>
+            <button value="val" class="CONTROL_4_FAIL" title="Button 15">    </button>
+            <button value="val" class="CONTROL_4_FAIL" aria-labelledby="id_16">   </button>
             <div id="id_16">Button 16</div>
           </fieldset>
         </form>
@@ -41,26 +41,69 @@
             <button class="CONTROL_4_PASS">Button 31</button>
             <button class="CONTROL_4_PASS">Button 32</button>
             <button class="CONTROL_4_HIDDEN" hidden>Button 33</button>
-            <button class="CONTROL_4_HIDDEN" aria-hidden="true">Button 34</button>
+            <button class="CONTROL_4_PASS" aria-hidden="true">Button 34</button>
             <button class="CONTROL_4_HIDDEN" style="visibility: hidden">Button 35</button>
+            <button class="CONTROL_4_FAIL" aria-hidden="true"></button>
           </fieldset>
         </form>
         
-      <h2>Group 4: Buttons with no value and no text</h2>
+        <h2>Group 4: Buttons with no value and no text</h2>
+        <form>
+          <input type="button" class="CONTROL_4_PASS" value="Button 41"/>
+          <input type="button" class="CONTROL_4_FAIL" value=""/>
+          <input type="button" class="CONTROL_4_FAIL" />
+        </form>
+
         <form>
           <fieldset>
-            <input type="button" class="CONTROL_4_PASS" value="Button 41"/>
-            <input type="button" class="CONTROL_4_FAIL" value=""/>
-            <input type="button" class="CONTROL_4_FAIL"/>
+            <legend>Button Group 5</legend>
+            <div role="button" value="val" class="CONTROL_4_PASS">Button 51</div>
+            <div role="button" value="val" class="CONTROL_4_PASS">Button 52</div>
+            <div role="button" value="val" class="CONTROL_4_PASS">Button 53</div>
+            <div role="button" value="val" class="CONTROL_4_FAIL" aria-label="Button 54">    </div>
+            <div role="button" value="val" class="CONTROL_4_FAIL" title="Button 55">    </div>
+            <div role="button" value="val" class="CONTROL_4_FAIL" aria-labelledby="id_56">   </div>
+            <div id="id_56">Button 56</div>
           </fieldset>
         </form>
+
+      <h2>Group 6: Buttons with SVG (Manual Check)</h2>
+        <button class="CONTROL_4_MC" aria-label="Text 61">
+          <svg width="42" height="34" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <rect class="background" x="2" y="2" rx="5" ry="5" width="38" height="24"></rect>
+            <rect class="border" x="4" y="4" rx="5" ry="5" width="34" height="20"></rect>
+            <polygon points="9 11 21 11 21 8 33 14 21 20 21 17 9 17"></polygon>
+          </svg>        
+       </button>
+
+        <div role="button" class="CONTROL_4_MC" aria-label="Text 62">
+          <svg width="42" height="34" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <rect class="background" x="2" y="2" rx="5" ry="5" width="38" height="24"></rect>
+            <rect class="border" x="4" y="4" rx="5" ry="5" width="34" height="20"></rect>
+            <polygon points="9 11 21 11 21 8 33 14 21 20 21 17 9 17"></polygon>
+          </svg>        
+       </div>
+
+        <div role="button" class="CONTROL_4_PASS">
+          Text 63
+          <svg width="42" height="34" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <rect class="background" x="2" y="2" rx="5" ry="5" width="38" height="24"></rect>
+            <rect class="border" x="4" y="4" rx="5" ry="5" width="34" height="20"></rect>
+            <polygon points="9 11 21 11 21 8 33 14 21 20 21 17 9 17"></polygon>
+          </svg>        
+       </div>
+
+        <h2>Group 7: input[type=image]</h2>
+        <form>
+          <input type="image" class="CONTROL_4_FAIL" src="image.png" alt="Text 71"/>
+        </form>
         
-      <h2>Group 5: Hidden buttons</h2>
+      <h2>Group 8: Hidden buttons</h2>
         <form>
           <fieldset>
             <button hidden class="CONTROL_4_HIDDEN"></button>
             <button style="display:none" class="CONTROL_4_HIDDEN"></button>
-            <button style="visibility: hidden" class="CONTROL_4_HIDDEN">button 53</button>
+            <button style="visibility: hidden" class="CONTROL_4_HIDDEN">button 83</button>
           </fieldset>
         </form>  
         

@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>QUNIT: Color Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,38 +11,37 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
 
-      test( "Color_1A: Color contrast ratio", function() {
-        executeTest('ID_IFRAME_1A', 'COLOR_1');
-      });
+    <script type="module">
 
-      test( "Color_1B: Color contrast ratio", function() {
-        executeTest('ID_IFRAME_1B', 'COLOR_1');
-      });
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', () => {
+        executeTest('Color 1A: Color contrast ratio: Foreground/Background', 'ID_IFRAME_1A', 'COLOR_1');
+        executeTest('Color 1B: Color contrast ratio: Background Colors', 'ID_IFRAME_1B', 'COLOR_1');
+        executeTest('Color 1C: Color contrast ratio: Web Components', 'ID_IFRAME_1C', 'COLOR_1');
+        executeTest('Color 2: Use of color', 'ID_IFRAME_2A', 'COLOR_2');
 
-      test( "Color_2: Use of color", function() {
-        executeTest('ID_IFRAME_2A', 'COLOR_2');
+        executeTest('Color 4: Color Contrast user interface elements', 'ID_IFRAME_4', 'COLOR_4');
+        executeTest('Color 5: Color Contrast graphics', 'ID_IFRAME_5', 'COLOR_5');
+
       });
-      
-      
     </script>
 
     <h2>Color contrast ratio </h2>
     <iframe id="ID_IFRAME_1A" src="color/color_1A_contrast_ratio.html"></iframe>
     <iframe id="ID_IFRAME_1B" src="color/color_1B_contrast_ratio.html"></iframe>
+    <iframe id="ID_IFRAME_1C" width="300px" height="400px" src="color/color_1C_contrast_ratio.html"></iframe>
 
     <h2>Use of color </h2>
     <iframe id="ID_IFRAME_2A" src="color/color_2_use_of_color.html"></iframe>    
-    
-    
+
+    <h2>Color Contrast user interface elements </h2>
+    <iframe id="ID_IFRAME_4" src="color/color_4_user_interface.html"></iframe>
+
+    <h2>Color Contrast graphics </h2>
+    <iframe id="ID_IFRAME_5" src="color/color_5_graphics.html"></iframe>
+
+
   </body>
 
 </html>

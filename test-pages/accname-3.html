@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Accessible Name Calculation with control values in the label | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <style>
+      label {
+        display: block;
+      }
+      code {
+        display: inline-block;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+        background: #ddd;
+      }
+      .css-content::before {
+        content: 'A';
+      }
+      .css-content::after {
+        content: 'D';
+      }
+      .css-radio::before {
+        content: 'RADIO';
+      }
+      .css-1::after {
+        content: '1';
+      }
+      .css-2::after {
+        content: '2';
+      }
+      .css-3::after {
+        content: '3';
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Accessible Name Calculation with control values in the label</h1>
+
+      <h2>Label Reference</h2>
+
+      <h3><code>input[type=text]</code> in label </h3>
+      <label for="label-ref-11">A<input type="text" value="BC">D</label>
+      <input id="label-ref-11" type="text" data-label="A BC D">
+
+      <h3><code>select</code> in label </h3>
+      <label for="label-ref-12">A<select><option>XX</option><option selected>BC</option><option>XX</option></select>D</label>
+      <input id="label-ref-12" type="text" data-label="A BC D">
+
+      <h3><code>range</code> in label </h3>
+      <label for="label-ref-13">1<input type="range" value="23" min="0" max="100">4</label>
+      <input id="label-ref-13" type="text" data-label="1 23 4">
+
+      <h3><code>slider (aria-valuenow)</code> in label </h3>
+      <label for="label-ref-14">1<div role="slider" aria-valuenow="23"></div>4</label>
+      <input id="label-ref-14" type="text" data-label="1 23 4">
+
+      <h3><code>slider (aria-valuetext)</code> in label </h3>
+      <label for="label-ref-15">1<div role="slider" aria-valuetext="23"></div>4</label>
+      <input id="label-ref-15" type="text" data-label="1 23 4">
+
+      <h2><code>aria-labelledby</code> in reference</h2>
+
+      <h3><code>input[type=text]</code> in label </h3>
+      <div id="aria-labelledby-1-abcd">A<input type="text" value="BC">D</div>
+      <input id="aria-labelledbby-21" type="text" aria-labelledby="aria-labelledby-1-abcd" data-label="A BC D">
+
+      <h3><code>select</code> in reference </h3>
+      <div id="aria-labelledby-2-abcd">A<select><option>XX</option><option selected>BC</option><option>XX</option></select>D</div>
+      <input id="aria-labelledbby-22" type="text" aria-labelledby="aria-labelledby-2-abcd" data-label="A BC D">
+
+      <h3><code>range</code> in reference </h3>
+      <div id="aria-labelledby-3-1234">1<input type="range" value="23" min="0" max="100">4</div>
+      <input id="aria-labelledbby-23" type="text" aria-labelledby="aria-labelledby-3-1234" data-label="1 23 4">
+
+      <h3><code>slider (aria-valuenow)</code> in reference </h3>
+      <div id="aria-labelledby-4-1234">1<div role="slider" aria-valuenow="23" ></div>4</div>
+      <input id="aria-labelledbby-24" type="text" aria-labelledby="aria-labelledby-4-1234" data-label="1 23 4">
+
+      <h3><code>slider (aria-valuetext)</code> in reference </h3>
+      <div id="aria-labelledby-5-1234">1<div role="slider" aria-valuetext="23" ></div>4</div>
+      <input id="aria-labelledbby-25" type="text" aria-labelledby="aria-labelledby-5-1234" data-label="1 23 4">
+
+    </main>
+
+<!--
+    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
+-->
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>QUNIT: Widget Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,127 +11,41 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
 
-      test( "WIDGET_1: Button, radio, and checkbox widgets must have accessible name", function() {
-        executeTest('ID_IFRAME_1A', 'WIDGET_1');
-      });
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
 
-      test( "WIDGET_1: Alert, alertdialog, dialog, and status must have accessible name", function() {
-        executeTest('ID_IFRAME_1B', 'WIDGET_1');
-      });
+        executeTest('WIDGET_1: Button, radio, and checkbox widgets must have accessible name', 'ID_IFRAME_1A',  'WIDGET_1');
+        executeTest('WIDGET_1: Alert, alertdialog, dialog, and status must have accessible name', 'ID_IFRAME_1B',  'WIDGET_1');
+        executeTest('WIDGET_1: Menu, tree, and grid must have accessible name', 'ID_IFRAME_1C',  'WIDGET_1');
+        executeTest('WIDGET_1: Tab, tabpanel, and tablist must have accessible name', 'ID_IFRAME_1D',  'WIDGET_1');
+        executeTest('WIDGET_1: Link, log, marquee, and slider must have accessible name', 'ID_IFRAME_1E',  'WIDGET_1');
+        executeTest('WIDGET_1: Progressbar, scrollbar, and spinbutton must have accessible name', 'ID_IFRAME_1F',  'WIDGET_1');
+        executeTest('WIDGET_2: onClick must have role', 'ID_IFRAME_2A',  'WIDGET_2');
+        executeTest('WIDGET_3: Role must be valid', 'ID_IFRAME_3A',  'WIDGET_3');
+        executeTest('WIDGET_4: ARIA values named token values must be valid', 'ID_IFRAME_4A',  'WIDGET_4');
+        executeTest('WIDGET_4: ARIA values numeric values must be valid', 'ID_IFRAME_4B',  'WIDGET_4');
+        executeTest('WIDGET_5: ARIA attributes must be valid', 'ID_IFRAME_5',  'WIDGET_5');
+        executeTest('WIDGET_6: Widgets must have required properties', 'ID_IFRAME_6',  'WIDGET_6');
+        executeTest('WIDGET_7: Widgets must have required owned elements', 'ID_IFRAME_7',  'WIDGET_7');
+        executeTest('WIDGET_8: Widgets must have required parent roles', 'ID_IFRAME_8',  'WIDGET_8');
+        executeTest('WIDGET_9: Widgets cannot be owned by more than one widget', 'ID_IFRAME_9',  'WIDGET_9');
+        executeTest('WIDGET_10: Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax', 'ID_IFRAME_10',  'WIDGET_10');
+        executeTest('WIDGET_11: Verify range widgets using aria-valuetext', 'ID_IFRAME_11',  'WIDGET_11');
+        executeTest('WIDGET_12: Button, radio, and checkbox widgets labels are descriptive', 'ID_IFRAME_12A',  'WIDGET_12');
+        executeTest('WIDGET_12: Menu, tree, and grid labels are descriptive', 'ID_IFRAME_12B',  'WIDGET_12');
+        executeTest('WIDGET_12: Tab, tabpanel, and tablist labels are descriptive', 'ID_IFRAME_12C',  'WIDGET_12');
+        executeTest('WIDGET_12: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12D',  'WIDGET_12');
+        executeTest('WIDGET_12: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12E',  'WIDGET_12');
+        executeTest('WIDGET_12: Progressbar, scrollbar, and spinbutton labels are descriptive', 'ID_IFRAME_12F',  'WIDGET_12');
+        executeTest('WIDGET_13: Prohibit accessible name', 'ID_IFRAME_13',  'WIDGET_13');
+        executeTest('WIDGET_14: Verify live region', 'ID_IFRAME_14',  'WIDGET_14');
+        executeTest('WIDGET_15: Roles with deprecated ARIA attributes',                  'ID_IFRAME_15A',  'WIDGET_15');
+        executeTest('WIDGET_15: Roles with deprecated ARIA attributes (implicit roles)', 'ID_IFRAME_15B',  'WIDGET_15');
+        executeTest('WIDGET_16: Web Components', 'ID_IFRAME_16',  'WIDGET_16');
 
-      test( "WIDGET_1: Menu, tree, and grid must have accessible name", function() {
-        executeTest('ID_IFRAME_1C', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Tab, tabpanel, and tablist must have accessible name", function() {
-        executeTest('ID_IFRAME_1D', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Link, log, marquee, and slider must have accessible name", function() {
-        executeTest('ID_IFRAME_1E', 'WIDGET_1');
-      });
-
-      test( "WIDGET_1: Progressbar, scrollbar, and spinbutton must have accessible name", function() {
-        executeTest('ID_IFRAME_1F', 'WIDGET_1');
-      });
-
-      test( "WIDGET_2: onClick must have role", function() {
-        executeTest('ID_IFRAME_2A', 'WIDGET_2');
-      });
-
-      test( "WIDGET_3: Role must be valid", function() {
-        executeTest('ID_IFRAME_3A', 'WIDGET_3');
-      });
-
-      test( "WIDGET_4: ARIA values named token values must be valid", function() {
-        executeTest('ID_IFRAME_4A', 'WIDGET_4');
-      });
-
-      test( "WIDGET_4: ARIA values numeric values must be valid", function() {
-        executeTest('ID_IFRAME_4B', 'WIDGET_4');
-      });
-
-      test( "WIDGET_5: ARIA attributes must be defined", function() {
-        executeTest('ID_IFRAME_5', 'WIDGET_5');
-      });
-
-      test( "WIDGET_6: Widgets must have required properties", function() {
-        executeTest('ID_IFRAME_6', 'WIDGET_6');
-      });
-
-      test( "WIDGET_7: Widgets must have required owned elements", function() {
-        executeTest('ID_IFRAME_7', 'WIDGET_7');
-      });
-
-      test( "WIDGET_8: Widgets must have required parent roles", function() {
-        executeTest('ID_IFRAME_8', 'WIDGET_8');
-      });
-
-      test( "WIDGET_9: Widgets cannot be owned by more than one widget", function() {
-        executeTest('ID_IFRAME_9', 'WIDGET_9');
-      });
-
-      test( "WIDGET_10: Range widgets with ariavaluenow mut be in range of aria-valuemin and aria-valuemax", function() {
-        executeTest('ID_IFRAME_10', 'WIDGET_10');
-      });
-
-      test( "WIDGET_11: Keyboard/mouse/drag events must have roles", function() {
-        executeTest('ID_IFRAME_11A', 'WIDGET_11');
-      });
-
-      test( "WIDGET_12: Button, radio, and checkbox widgets labels are descriptive", function() {
-        executeTest('ID_IFRAME_12A', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Alert, alertdialog, dialog, and status labels are descriptive", function() {
-        executeTest('ID_IFRAME_12B', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Menu, tree, and grid labels are descriptive", function() {
-        executeTest('ID_IFRAME_12C', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Tab, tabpanel, and tablist labels are descriptive", function() {
-        executeTest('ID_IFRAME_12D', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Link, log, marquee, and slider labels are descriptive", function() {
-        executeTest('ID_IFRAME_12E', 'WIDGET_12');
-      });
-
-      test( "WIDGET_12: Progressbar, scrollbar, and spinbutton labels are descriptive", function() {
-        executeTest('ID_IFRAME_12F', 'WIDGET_12');
-      });
-
-      test( "WIDGET_13: Prohibit accessible name", function() {
-        executeTest('ID_IFRAME_13A', 'WIDGET_13');
-      });
-
-      test( "WIDGET_14: Veerify live region", function() {
-        executeTest('ID_IFRAME_14A', 'WIDGET_14');
-      });
-
-      test( "WIDGET_15: Roles with deprecated ARIA attributes", function() {
-        executeTest('ID_IFRAME_15A', 'WIDGET_15');
-      });
-
-      test( "WIDGET_15: Roles with deprecated ARIA attributes (implicit roles)", function() {
-        executeTest('ID_IFRAME_15B', 'WIDGET_15');
-      });
-
-      test( "WIDGET_16: Web components", function() {
-        executeTest('ID_IFRAME_16', 'WIDGET_16');
-      });
-
+       });
 
     </script>
 
@@ -143,7 +58,7 @@
     <iframe id="ID_IFRAME_1F"  src="widgets/widget_1_progressbar_scrollbar_spinbutton.html"></iframe> 
 
     <h2>Widget 2: onClick must have role</h2>
-    <iframe id="ID_IFRAME_2A"  src="widgets/widget_2_static_elements.html"></iframe>
+    <iframe id="ID_IFRAME_2A"  src="widgets/widget_2_onclick_elements.html"></iframe>
 
     <h2>Widget 3: Role must be valid</h2>
     <iframe id="ID_IFRAME_3A"  src="widgets/widget_3_valid_role.html"></iframe>
@@ -152,7 +67,7 @@
     <iframe id="ID_IFRAME_4A"  src="widgets/widget_4_A_valid_aria.html"></iframe>
     <iframe id="ID_IFRAME_4B"  src="widgets/widget_4_B_valid_aria.html"></iframe>
 
-    <h2>Widget 5: ARIA attributes must be defined</h2>
+    <h2>Widget 5: ARIA attributes must be valid</h2>
     <iframe id="ID_IFRAME_5"  src="widgets/widget_5_define_aria.html"></iframe>
 
     <h2>Widget 6: Widget must have required properties</h2>
@@ -160,7 +75,6 @@
 
     <h2>Widget 7: Must have required child roles</h2>
     <iframe id="ID_IFRAME_7"  src="widgets/widget_7_child_roles.html"></iframe>
-
 
     <h2>Widget 8: Widgets must have required parent roles</h2>
     <iframe id="ID_IFRAME_8"  src="widgets/widget_8_parent.html"></iframe>
@@ -172,7 +86,7 @@
     <iframe id="ID_IFRAME_10"  src="widgets/widget_10_value_range.html"></iframe>
 
     <h2>Widget 11: Keyboard/mouse/drag events must have roles</h2>
-    <iframe id="ID_IFRAME_11A"  src="widgets/widget_11_event_roles.html"></iframe>
+    <iframe id="ID_IFRAME_11"  src="widgets/widget_11_aria_valuetext.html"></iframe>
 
     <h2>Widget 12: Widgets labels must be descriptive</h2>
     <iframe id="ID_IFRAME_12A"  src="widgets/widget_12_button_radio_checkbox.html"></iframe>
@@ -183,10 +97,10 @@
     <iframe id="ID_IFRAME_12F"  src="widgets/widget_12_progressbar_scrollbar_spinbutton.html"></iframe> 
     
     <h2>Widget 13: Remove Widget Roles</h2>
-    <iframe id="ID_IFRAME_13A"  src="widgets/widget_13_prohibit_accname.html"></iframe>
+    <iframe id="ID_IFRAME_13"  src="widgets/widget_13_prohibit_accname.html"></iframe>
 
     <h2>Widget 14: verify live regions</h2>
-    <iframe id="ID_IFRAME_14A"  src="widgets/widget_14_live_regions.html"></iframe>
+    <iframe id="ID_IFRAME_14"  src="widgets/widget_14_live_regions.html"></iframe>
 
     <h2>Widget 15: Roles with deprecated ARIA attributes</h2>
     <iframe id="ID_IFRAME_15A"  src="widgets/widget_15_deprecated_aria_attributes.html"></iframe>

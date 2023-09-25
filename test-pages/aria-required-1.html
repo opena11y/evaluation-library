@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>Required ARIA attribute validation test page | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <script src="webComponentAriaRef.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>Required ARIA attribute validation test page</h1>
+
+      <h2><code>combobox</code> Role</h2>
+      <label>
+        <input role="combobox" type="text" aria-controls="listbox-1" aria-expanded="false"/>
+          Combobox 1: aria-controls aria-expanded
+      </label>
+      <div id="listbox-1" role="listbox" aria-label="Listbox 1" aria-busy="true"></div>
+
+      <label>
+        <input role="combobox" type="text" aria-controls="listbox-2"/>
+          Combobox 2: aria-controls (Invalid)
+      </label>
+      <div id="listbox-2" role="listbox" aria-label="Listbox 2" aria-busy="true"></div>
+
+      <label>
+        <input role="combobox" type="text" aria-expanded="false"/>
+          Combobox 3: aria-expanded (Invalid)
+      </label>
+
+      <label>
+        <input role="combobox" type="text"/>
+          Combobox 4: aria-expanded (Invalid)
+      </label>
+
+      <h2><code>slider</code> Role</h2>
+      <div role="slider"
+        aria-label="Slider 1"
+        aria-valuemin="20"
+        aria-valuemax="80"
+        aria-valuenow="50">
+        Slider 1: aria-valuenow
+      </div>
+      <div role="slider"
+        aria-label="Slider 2"
+        aria-valuenow="50"
+        aria-valuetext="50 degrees">
+        Slider 2: aria-valuetext
+      </div>
+      <div role="slider"
+        aria-label="Slider 3"
+        aria-valuenow="50"
+        aria-valuetext="50 degrees">
+        Slider 3: aria-valuetext
+      </div>
+      <div role="slider"
+        aria-label="Slider 4"
+        aria-valuetext="50 degrees">
+        Slider 4: aria-valuetext (Invalid)
+      </div>
+
+      <h2><code>switch</code> Role</h2>
+      <div role="switch"
+        aria-label="Switch 1"
+        aria-checked="false">
+        Switch 1: aria-checked
+      </div>
+      <div role="switch"
+        aria-label="Switch 2">
+        Switch 2: <em>no aria-checked</em> (Invalid)
+      </div>
+      <label>
+        <input type="checkbox" role="switch"/>
+        Switch 3: input[type=checkbox]
+      </label>
+      <label>
+        <input role="switch"/>
+        Switch 4: input (Invalid)
+      </label>
+
+
+    </main>
+
+<!--
+    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
+-->
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

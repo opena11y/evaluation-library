@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>IFRAME: ARIA Attributes using IDREFs text page | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <script src="webComponentAriaRef.js" type="module"></script>
+  </head>
+  <body>
+
+    <section>
+      <h1>IFRAME: ARIA Attributes using IDREFs test page</h1>
+
+      <div role="menu" aria-labelledby="valid-iframe-ref-1 invalid-iframe-ref-A valid-iframe-ref-2 invalid-iframe-ref-B">
+      </div>
+
+      <div id="valid-iframe-ref-1">Menu Label 1: iframe</div>
+      <div id="valid-iframe-ref-2">Menu Label 2: iframe</div>
+
+      <table aria-label="tabl with invalid IDREFs" aria-describedby="valid-iframe-ref-3 invalid-iframe-ref-C valid-iframe-ref-4 invalid-iframe-ref-D"">
+      </table>
+
+      <div id="valid-iframe-ref-3">Table Description 3: iframe</div>
+      <div id="valid-iframe-ref-4">Table Description 4: iframe</div>
+
+      <aria-ref-webcomponent></aria-ref-webcomponent>
+
+  </body>
+</html>

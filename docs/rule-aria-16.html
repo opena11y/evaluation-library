@@ -1,0 +1,251 @@
+
+
+
+
+
+
+
+
+<html lang="en-us">
+  <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Closed shadow DOM requires manual check. | OpenA11y Evaluation Library 2.0</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/opena11y.css" rel="stylesheet" />
+    </head>
+
+  </head>
+  <body>
+            <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="concepts.html">Concepts and Terms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="rules.html">Rules</a></li>
+                        <li class="nav-item"><a class="nav-link" href="apis.html">APIs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Closed shadow DOM requires manual check.</li>
+        </ol>
+      </nav>
+      <div class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          <main id="rule">
+            
+            <h1 id="h1-title">Rule: Closed shadow DOM requires manual check.</h1>
+            
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  
+<tr>
+  <th>Rule ID</th>
+  <td>Widget 16</td>
+</tr>
+
+                  
+<tr>
+  <th>Definition</th>
+  <td>Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs %s be manually checked for accessibility requirements.</td>
+</tr>
+
+                  
+<tr>
+  <th>Purpose</th>
+  <td>
+    <ul>
+      
+      <li>Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.</li>
+      
+      <li>Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they can only be accessed by the evaluation library for programmatic checking of accessibility features when the shadow DOM is "open".</li>
+      
+      <li>The evaluation library is unable to analyze custom elements created with "closed" shadow DOMs. In the case of the "closed" shadow DOM all accessibility requirements require manual checks, possibly by using other DOM inspection tools to identify accessibility issues and features.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Conformance</th>
+  <td>Required</td>
+</tr>
+
+                  
+<tr>
+  <th>WCAG Success Criteria</th>
+  <td>
+    <p class="primary">
+      <a href="https://www.w3.org/TR/WCAG21/#keyboard" target="_spec">
+        Success Criterion 2.1.1 Keyboard
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#non-text-content" target="_spec">
+          Success Criterion 1.1.1 Non-text Content
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#use-of-color" target="_spec">
+          Success Criterion 1.4.1 Use of Color
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#contrast-minimum" target="_spec">
+          Success Criterion 1.4.3 Contrast (Minimum)
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#resize-text" target="_spec">
+          Success Criterion 1.4.4 Resize text
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#no-keyboard-trap" target="_spec">
+          Success Criterion 2.1.2 No Keyboard Trap
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#timing-adjustable" target="_spec">
+          Success Criterion 2.2.1 Timing Adjustable
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#pause-stop-hide" target="_spec">
+          Success Criterion 2.2.2 Pause, Stop, Hide
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#focus-order" target="_spec">
+          Success Criterion 2.4.3 Focus Order
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#labels-or-instructions" target="_spec">
+          Success Criterion 3.3.2 Labels or Instructions
+        </a>
+      </li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Category</th>
+  <td>Widgets/Scripts</td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Scope</th>
+  <td>element</td>
+</tr>
+
+                  
+<tr>
+  <th>Techniques</th>
+  <td>
+    <ul>
+      
+      <li>In evaluating custom elements with "closed" shadow DOMs that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.</li>
+      
+      <li>Test with screen readers to verify functionality is operable by a screen reader user.</li>
+      
+      <li>Test the graphical rendering in operating system using high contrast settings to verify content is perceivable by people with visual impairments.</li>
+      
+      <li>Use accessibility tools in browser DOM inspectors to assist with manual inspection, since the DOM inspector of most  browsers allows access to the Shadow DOM of the custom element.</li>
+      
+      <li>You can use the accessibility rules in this tool to help guide your manual testing procedures.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Information Links</th>
+  <td>
+    <ul>
+      
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">MDN: Web Components</a></li>
+      
+      <li><a href="https://www.webcomponents.org/introduction">WebComponents.org: Introduction</a></li>
+      
+      <li><a href="https://www.w3.org/TR/WCAG/">Web Content Accessibility Guidelines (WCAG)</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification</a></li>
+      
+      <li><a href="https://w3c.github.io/aria-practices/">ARIA Authoring Practices</a></li>
+      
+    </ul>
+  </td>
+</tr>
+
+                </tbody>
+              </table>
+          </main>
+        </div>
+      </div>
+    </div>
+            <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2022</p></div>
+        </footer>
+
+
+            <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- OpenA11y JS -->
+        <script src="js/opena11y.js"></script>
+
+
+  </body>
+</html>

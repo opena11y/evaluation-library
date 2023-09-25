@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>ARIA Attribute Values test page | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <script src="webComponentAriaRef.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>ARIA Attribute Values test page</h1>
+
+      <h2><code>aria-checked</code> (tristate)</h2>
+      <div role="checkbox" aria-checked="false">aria-checked: false</div>
+      <div role="checkbox" aria-checked="true">aria-checked: true</div>
+      <div role="checkbox" aria-checked="mixed">aria-checked: mixed</div>
+      <div role="checkbox" aria-checked="on"> aria-checked: on (invalid)</div>
+      <div role="checkbox" aria-checked="off">aria-checked: off (invalid)</div>
+      <div role="checkbox" aria-checked="">aria-checked: EMPTY (invalid)</div>
+
+      <h2><code>aria-atomic</code> (boolean)</h2>
+      <div aria-live="polite" aria-atomic="false">aria-atomic: false</div>
+      <div aria-live="polite" aria-atomic="true">aria-atomic: true</div>
+      <div aria-live="polite" aria-atomic="on">aria-atomic: on (invalid)</div>
+      <div aria-live="polite" aria-atomic="">aria-atomic: EMPTY (invalid)</div>
+
+      <h2><code>aria-level</code> (integer)</h2>
+      <div aria-level="10">aria-level: 10</div>
+      <div aria-level="1">aria-level: 1</div>
+      <div aria-level="0">aria-level: 0 (invalid)</div>
+      <div aria-level="-1">aria-level: -1 (invalid)</div>
+      <div aria-level="x">aria-level: x (invalid)</div>
+      <div aria-level="">aria-level: EMPTY (invalid)</div>
+
+      <h2><code>aria-live</code> (nmtoken)</h2>
+      <div aria-live="assertive">aria-live: assertive</div>
+      <div aria-live="off">aria-live: off</div>
+      <div aria-live="polite">aria-live: polite</div>
+      <div aria-live="on">aria-live: on (invalid)</div>
+      <div aria-live="">aria-live: EMPTY (invalid)</div>
+
+      <h2><code>aria-relevant</code> (nmtokens)</h2>
+      <div aria-relevant="additions">aria-relevant: additions</div>
+      <div aria-relevant="all">aria-relevant: all</div>
+      <div aria-relevant="removals">aria-relevant: removals</div>
+      <div aria-relevant="text">aria-relevant: text</div>
+      <div aria-relevant="additions text">aria-relevant: additions text</div>
+      <div aria-relevant="additions removals text">aria-relevant: additions removals text</div>
+      <div aria-relevant="additions removals test">aria-relevant: additions removals test (Invalid)</div>
+      <div aria-relevant="addtions rmovals al test">aria-relevant: addtions rmovals al test (Invalid)</div>
+
+      <h2><code>aria-valuenow</code> (number)</h2>
+      <div role="slider" aria-valuenow="10.1">aria-valuenow: 10.1</div>
+      <div role="slider" aria-valuenow="1">aria-valuenow: 1</div>
+      <div role="slider" aria-valuenow="0">aria-valuenow: 0</div>
+      <div role="slider" aria-valuenow="-20.5">aria-valuenow: -20.5</div>
+      <div role="slider" aria-valuenow="">aria-valuenow: EMPTY (invalid)</div>
+      <div role="slider" aria-valuenow="ten">aria-valuenow: ten (invalid)</div>
+
+
+
+    </main>
+
+<!--
+    <script src="../releases/opena11y-evaluation-library.js" type="module"></script>
+-->
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluate(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

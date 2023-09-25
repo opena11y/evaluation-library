@@ -1,0 +1,210 @@
+
+
+
+
+
+
+
+
+<html lang="en-us">
+  <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Page should have &lt;code&gt;h1&lt;/code&gt; element | OpenA11y Evaluation Library 2.0</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./css/opena11y.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </head>
+
+  </head>
+  <body>
+            <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="concepts.html">Concepts and Terms</a></li>
+                        <li class="nav-item"><a class="nav-link" href="rules.html">Rules</a></li>
+                        <li class="nav-item"><a class="nav-link" href="apis.html">APIs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
+          <li class="breadcrumb-item active">Page should have <code>h1</code> element</li>
+        </ol>
+      </nav>
+      <div class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          <main id="rule">
+            
+            <h1 id="h1-title">Rule: Page should have <code>h1</code> element</h1>
+            
+              <table class="table table-striped rule-info" aria-labelledby="h1-title">
+                <tbody>
+                  
+<tr>
+  <th>Rule ID</th>
+  <td>Heading 1</td>
+</tr>
+
+                  
+<tr>
+  <th>Definition</th>
+  <td>The page should contain at least one <code>h1</code> element identifying and describing the main content of the page.</td>
+</tr>
+
+                  
+<tr>
+  <th>Purpose</th>
+  <td>
+    <ul>
+      
+      <li>An <code>h1</code> heading provides an important navigation point for users of assistive technologies, allowing them to easily find the main content of the page.</li>
+      
+      <li>An <code>h1</code> heading is often also used in the banner of a web page to identify and describe the website.</li>
+      
+      <li>Home pages of websites often have a variety of "main" sections (e.g. navigation links, news, calendars, ...) that could be considered having somewhat equal potential interest by a visitor, these sections could each be identified using <code>h1</code> headings.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Conformance</th>
+  <td>Recommended</td>
+</tr>
+
+                  
+<tr>
+  <th>WCAG Success Criteria</th>
+  <td>
+    <p class="primary">
+      <a href="https://www.w3.org/TR/WCAG21/#bypass-blocks" target="_spec">
+        Success Criterion 2.4.1 Bypass Blocks
+      </a>
+    </p>
+    <p class="related">
+      Other Related Success Criterion:
+    </p>
+    <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#info-and-relationships" target="_spec">
+          Success Criterion 1.3.1 Info and Relationships
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#page-titled" target="_spec">
+          Success Criterion 2.4.2 Page Titled
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#headings-and-labels" target="_spec">
+          Success Criterion 2.4.6 Headings and Labels
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/#section-headings" target="_spec">
+          Success Criterion 2.4.10 Section Headings
+        </a>
+      </li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Category</th>
+  <td>Headings</td>
+</tr>
+
+                  
+<tr>
+  <th>Rule Scope</th>
+  <td>page</td>
+</tr>
+
+                  
+<tr>
+  <th>Techniques</th>
+  <td>
+    <ul>
+      
+      <li>Include an <code>h1</code> element at the beginning of the main content.</li>
+      
+      <li>The accessible name of the <code>h1</code> element should describe the main content of the page.</li>
+      
+      <li>The accessible name of the <code>h1</code> element in the banner of the page, should identify and describe the website.</li>
+      
+      <li>The <code>h1</code> element should be visible graphically and to assistive technologies. It should not be hidden using CSS techniques.</li>
+      
+    </ul>
+  </td>
+</tr>
+
+                  
+<tr>
+  <th>Information Links</th>
+  <td>
+    <ul>
+      
+      <li><a href="https://www.w3.org/TR/html4/struct/global.html#edef-H1">HTML 4.01 Specification: The <code>h1</code> element</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G130">G130: Providing descriptive headings</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G141">G141: Organizing a page using headings</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/tutorials/page-structure/headings/">W3C Web Accessibility Tutorials: Headings</a></li>
+      
+    </ul>
+  </td>
+</tr>
+
+                </tbody>
+              </table>
+          </main>
+        </div>
+      </div>
+    </div>
+            <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+        </footer>
+
+
+            <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- OpenA11y JS -->
+        <script src="js/opena11y.js"></script>
+        <!-- SkipTo.js -->
+        <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
+
+
+  </body>
+</html>

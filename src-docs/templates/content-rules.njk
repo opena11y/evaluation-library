@@ -1,0 +1,121 @@
+<html lang="en-us">
+  <head>
+    {% include "./head.njk" %}
+  </head>
+  <body>
+    {% include "./header.njk" %}
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">{{title | safe}}</li>
+        </ol>
+      </nav>
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          {% block content %}
+          <h1>{{title}}</h1>
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active"
+                      id="id-rc-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#id-rc"
+                      aria-controls="id-rc"
+                      type="button"
+                      role="tab"
+                      aria-selected="true">
+                Rule Categories
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link"
+                      id="gl-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#id-gl"
+                      aria-controls="id-gl"
+                      type="button"
+                      role="tab"
+                      aria-selected="false">
+                WCAG Guidelines
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="id-rc" role="tabpanel" aria-labelledby="id-rc-tab">
+              {% for rc in allRuleCategories %}
+                <h2 id="rc-{{rc.rule_category_id}}" class="rules">{{rc.title}}</h2>
+                <table class="table table-striped" aria-labelledby="rc-{{rc.rule_category_id}}">
+                  <thead>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Level</th>
+                    <th>SC</th>
+                  </thead>
+                  <tbody>
+                  {% for r in rc.rules %}
+                    <tr>
+                      <td>{{r.id}}</td>
+                      <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
+                      <td>{% if r.wcag_primary.level === 4 %}A{% else %}AA{% endif %}</td>
+                      <td><a href="{{r.primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
+                    </tr>
+                  {% else %}
+                    <tr>
+                      <td colspan="4"><em>no rules</em></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              {% endfor %}
+            </div>
+
+            <div class="tab-pane fade show active" id="id-gl" role="tabpanel" aria-labelledby="gl-tab">
+              {% for gl in allGuidelines %}
+                <h2 id="gl-{{gl.id}}" class="rules">{{gl.title}}</h2>
+                {% for sc in gl.successCriteria %}
+                  {% if sc.level > 1 %}
+                  <h3 id="sc-{{sc.id}}" class="rules">{{sc.title}}</h3>
+                  <table class="table table-striped" aria-labelledby="sc-{{gl.id}}">
+                    <thead>
+                      <th>ID</th>
+                      <th>Summary</th>
+                      <th>Level</th>
+                      <th>Scope</th>
+                    </thead>
+                    <tbody>
+                    {% for r in sc.rules %}
+                      <tr>
+                        <td>{{r.id}}</td>
+                        <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
+                        <td>{% if r.wcag_primary.level === 4 %}A{% else %}AA{% endif %}</td>
+                        <td>{{r.rule_scope}}</td>
+                      </tr>
+                    {% else %}
+                      <tr>
+                        <td colspan="4"><em>no rules</em></td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+
+          </div>
+
+          {% endblock %}
+
+        </div>
+      </main>
+    </nav>
+    {% include "./footer.njk" %}
+    {% include "./scripts.njk" %}
+  </body>
+</html>
+

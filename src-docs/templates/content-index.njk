@@ -1,0 +1,42 @@
+<html lang="en-us">
+  <head>
+    {% include "./head.njk" %}
+  </head>
+  <body>
+    {% include "./header.njk" %}
+    <!-- Header-->
+    <header class="bg-primary bg-gradient text-white">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder">Welcome to OpenA11y Evaluation Library</h1>
+            <p class="lead">Javascript Library for Evaluating WCAG 2.1 Accessibility Requirements.</p>
+        </div>
+    </header>
+
+    <!-- Main section-->
+    <main class="container px-4">
+      <div class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          {% block content %}
+          <div id="home">
+            <h2>Purpose</h2>
+            <p>The purpose of the OpenA11y Evaluation libary is to support accessible design for implementation of <a href="https://www.w3.org/TR/WCAG">W3C Web Content Accessibility Guidelines</a> level A and AA requirements by creating rules that are based on the following W3C documents:</p>
+            <ul>
+              <li><a href="https://www.w3.org/TR/wai-aria/">W3C Accessible Rich Internet Application (ARIA) specification.</a></li>
+              <li><a href="https://www.w3.org/TR/html-aria/">W3C ARIA in HTML specification.</a></li>
+              <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices Guide</a></li>
+            </ul>
+          </div>
+
+            <h2>Open Source</h2>
+            <p>The code OpenA11y Evaluation Library is open source and free for anyone to use.  The library is distributed using the <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License 2.0</a>.   The source code is available from <a href="https://github.com/opena11y/evaluation-library">OpenA11y Evaluation Library</a> respository.
+
+
+          {% endblock %}
+        </div>
+      </div>
+    </main>
+    {% include "./footer.njk" %}
+    {% include "./scripts.njk" %}
+
+  </body>
+</html>

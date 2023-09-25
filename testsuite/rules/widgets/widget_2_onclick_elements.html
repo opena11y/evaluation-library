@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>WIDGET 2: onClick must have role</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <div>Widget 1 test case</div>
+      </header>
+      
+      <main>
+        <h1>WIDGET 2: onClick must have role</h1>
+
+        <script type="text/javascript">
+          function handleOnClick(event) {
+          
+          alert(event.currentTarget.tagName + " " + event.currentTarget.className);
+          
+          }
+
+        </script>
+
+        <div role="button" onclick="handleOnClick(event)" tabindex="0" class="WIDGET_2_PASS">onClick 1: div button Pass</div>
+
+        <div role="button" onclick="handleOnClick(event)" class="WIDGET_2_PASS">onClick 2: div button Pass</div>
+
+        <div><span role="link" onclick="handleOnClick(event)" tabindex="-1" class="WIDGET_2_PASS">onClick 3: span link Pass</span></div>
+
+        <div><span role="link" onclick="handleOnClick(event)" class="WIDGET_2_PASS">onClick 4: span link Pass</span></div>
+
+        <div><input onclick="handleOnClick(event)" class="WIDGET_2_PASS">onClick 5: input Pass</input></div>
+
+        <div><select onclick="handleOnClick(event)" class="WIDGET_2_PASS">onClick 6: select Pass</select></div>
+
+        <div><textarea onclick="handleOnClick(event)" class="WIDGET_2_PASS">onClick 7: textarea Pass</textarea></div>
+
+        <div><object onclick="handleOnClick(event)" class="WIDGET_2_FAIL">onClick 8: object ignore</object></div>
+      
+        <div><a onclick="handleOnClick(event)" class="WIDGET_2_FAIL"> onClick 10: div a Pass</a></div>
+
+        <div onclick="handleOnClick(event)" class="WIDGET_2_FAIL"><a> onClick 11: div a manual check</a></div>
+
+        <div onclick="handleOnClick(event)" class="WIDGET_2_MC"><span role="link">onClick 12: span link manual check</span></div>
+
+        <div onclick="handleOnClick(event)" class="WIDGET_2_FAIL">onClick 15: div Fail</div>
+
+      </main>
+      
+      <footer role="contentinfo">
+        <div>Widget 2 test case</div>
+      </footer>
+    
+  </body>
+</html>

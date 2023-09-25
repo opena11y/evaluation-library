@@ -6,21 +6,31 @@
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
 
-  <body>
-    
+  <body class="LANDMARK_2_FAIL">
+    This content is in the scope of body.
     <h1 class="LANDMARK_2_FAIL">Landmark 2: All rendered content should be in a landmark </h1>
     <div  role="main">
       <p class="LANDMARK_2_PASS">This is a paragraph in a main landmark.</p>
       <h1 class="LANDMARK_2_PASS">This is a h1 element in a main landmark. </h1>
       <div class="LANDMARK_2_PASS" >
+        This is text content in a div element.
         <p class="LANDMARK_2_PASS">This is a paragraph contained in a div element contained in a main landmark.</p>
       </div>
     </div>
 
+    <main class="LANDMARK_2_PASS">
+      This is some text content in a main landmark.
+
+      <section class="LANDMARK_2_PASS" aria-label="my region 1">
+        This is some text content in a region landmark.
+      </section>
+
+    </main>
+
     <main>
       <p class="LANDMARK_2_PASS">This is a paragraph in a main element.</p>
       <h1 class="LANDMARK_2_PASS">This is a h1 element in a main element. </h1>
-      <div class="LANDMARK_2_PASS" >
+      <div>
         <p class="LANDMARK_2_PASS">This is a paragraph contained in a div element contained in a main element.</p>
       </div>
 
@@ -29,17 +39,18 @@
     
     <div  role="navigation">
       <p class="LANDMARK_2_PASS"> this is a paragraph contained in a navigation landmark, below is an image contained in the same landmark</p>
-      <img class="LANDMARK_2_PASS" src="img1.png"/>
+      <img class="LANDMARK_2_PASS" src="img1.png" alt="test"/>
     </div>
 
     <nav>
-      <p class="LANDMARK_2_PASS"> this is a paragraph contained in a navigation element, below is an image contained in the same landmark</p>
+      <p>
       <img class="LANDMARK_2_PASS" src="img1.png"/>
+      </p>
     </nav>
     
     
 
-    <div  role="contentinfo">
+    <div role="contentinfo">
       <table>
         <tr>
           <td class="LANDMARK_2_PASS">This is a table contained in a information landmark</td>
@@ -61,19 +72,29 @@
     <div  role="banner">
       <form>
         <button class="LANDMARK_2_PASS">this is a button inside of a banner landmark</button>
-        <input type="text" class="LANDMARK_2_PASS">This is a textbox inside of a banner landmark</input>
+        <twextarea class="LANDMARK_2_PASS">This is a textarea inside of a banner landmark</textarea>
+        <input class="LANDMARK_2_PASS" type="text" value="input inside a banner element"/>
       </form>
       <p><embed class="LANDMARK_2_PASS"></embed></p>
-      <p><object class="LANDMARK_2_PASS"></object></p>
+      <p class="LANDMARK_2_PASS">
+        Test in p elment.
+        <object class="LANDMARK_2_PASS"></object>
+      </p>
     </div>
 
     <header>
       <form>
         <button class="LANDMARK_2_PASS">this is a button inside of a header element</button>
-        <input type="text" class="LANDMARK_2_PASS">This is a textbox inside of a header element</input>
+        <textarea class="LANDMARK_2_PASS">This is a textarea inside of a header element</textarea>
+        <input class="LANDMARK_2_PASS" type="text" value="input inside a header element"/>
       </form>
-      <p><embed class="LANDMARK_2_PASS"></embed></p>
-      <p><object class="LANDMARK_2_PASS"></object></p>
+      <p class="LANDMARK_2_PASS">
+        Text in a p element
+        <embed class="LANDMARK_2_PASS"></embed>
+      </p>
+      <p>
+        <object class="LANDMARK_2_PASS"></object>
+      </p>
     </header>
     
     <aside>
@@ -91,7 +112,7 @@
       <a class="LANDMARK_2_FAIL">This is an anchor not in a landmark</a>
       <p><embed class="LANDMARK_2_MC"></embed></p>
       <p><object class="LANDMARK_2_MC"></object></p>
-      <div>
+    </div>
 
 
     <div>
@@ -99,7 +120,7 @@
       <p class="LANDMARK_2_HIDDEN" hidden>hidden paragraph</p>
       <div class="LANDMARK_2_HIDDEN" style="display: none">hidden div</div>
       <a class="LANDMARK_2_HIDDEN" style="visibility: hidden">hidden link </a>
-    <div>
+    </div>
 
       <input type="hidden" value="0">
       <input type="hidden" value="2">

@@ -1,0 +1,61 @@
+body {
+	margin: 0.5em;
+	padding: 0;
+	border: #ddd solid 1px;
+}
+
+header {
+	background-color: #ddd;
+	padding: 0.5em;
+}
+
+header .title {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+main {
+	padding: 0.5em;
+}
+
+iframe {
+	border: double green 2px;
+}
+
+heading-webcomponent {
+	display: block;
+	padding: 0;
+	margin: 0.25em;
+	border: dashed green 2px;
+}
+
+.custom-header {
+	display: block;
+	padding: 0.25em;
+	background: darkgreen;
+	color: white;
+	font-family: monospace;
+}
+
+.content {
+	padding: 0.25em;
+}
+
+.center {
+	text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid darkblue;
+}
+
+table thead th {
+	padding: 0.25em 1em;
+  background-color: darkblue;
+  color:  white;
+}
+
+table tbody td {
+	padding: 0.25em 1em;
+}

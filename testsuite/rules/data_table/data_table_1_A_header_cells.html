@@ -19,37 +19,48 @@
     </style>
     <h1>Data table Rule 1: Header cells</h1>
     
-    <h2> Table A: Simple Table is 4x4 table with column headers </h2>
+    <h2> Table A: Simple Table is 6x6 table with row and column headers </h2>
     
       <table>
-        <caption>4 by 4 data table column headers</caption>
+        <caption>6 by 6 data table with row and column headers</caption>
         <thead>
           <tr>
-            <th>Header A1</th>
-            <th>Header A2</th>
-            <th>Header A3</th>
-            <th>Header A4</th>
+            <th class="TABLE_1_MC" rowspan="2" colspan="2"></th>
+            <th colspan="2">Header A12</th>
+            <th colspan="2">Header A34</th>
+          </tr>
+          <tr>
+            <th>Header B1</th>
+            <th>Header B2</th>
+            <th>Header B3</th>
+            <th>Header B4</th>
           </tr>
         </thead>
         <tr> 
+          <td rowspan="2" scope="row">C12</td>
+          <td scope="row">D1</td>
           <td class="TABLE_1_PASS">Data Cell A11</td>
           <td class="TABLE_1_PASS">Data Cell A12</td>
           <td class="TABLE_1_PASS">Data Cell A13</td>
           <td class="TABLE_1_PASS">Data Cell A14</td>
         </tr>
         <tr> 
+          <td scope="row">D2</td>
           <td class="TABLE_1_PASS">Data Cell A21</td>
           <td class="TABLE_1_PASS">Data Cell A22</td>
           <td class="TABLE_1_PASS">Data Cell A23</td>
           <td class="TABLE_1_PASS">Data Cell A24</td>
         </tr>
         <tr> 
+          <td rowspan="2" scope="row">C34</td>
+          <td scope="row">D3</td>
           <td class="TABLE_1_PASS">Data Cell A31</td> 
           <td class="TABLE_1_PASS">Data Cell A32</td> 
           <td class="TABLE_1_PASS">Data Cell A33</td> 
           <td class="TABLE_1_PASS">Data Cell A34</td> 
         </tr>
         <tr> 
+          <td scope="row">D4</td>
           <td class="TABLE_1_PASS">Data Cell A41</td> 
           <td class="TABLE_1_PASS">Data Cell A42</td> 
           <td class="TABLE_1_PASS">Data Cell A43</td> 
@@ -122,50 +133,50 @@
     </table>
 
     <h2> Table D: Simple Table is 4x4 data table with some headers </h2>
-    
+
     <table>
       <caption>4 by 4 data table some headers</caption>
       <thead>
         <tr>
-          <th></th>
+          <th class="TABLE_1_MC"></th>
           <th>Header D1c</th>
           <th>Header D2c</th>
           <th>Header D3c</th>
-          <th></th>
+          <th class="TABLE_1_MC"></th>
         </tr>
       </thead>
-      <tr> 
+      <tr>
         <th>Header D1r</th>
         <td class="TABLE_1_PASS">Data Cell D11</td>
         <td class="TABLE_1_PASS">Data Cell D12</td>
         <td class="TABLE_1_PASS">Data Cell D13</td>
         <td class="TABLE_1_PASS">Data Cell D14</td>
       </tr>
-      <tr> 
+      <tr>
         <th>Header D2r</th>
         <td class="TABLE_1_PASS">Data Cell D21</td>
         <td class="TABLE_1_PASS">Data Cell D22</td>
         <td class="TABLE_1_PASS">Data Cell D23</td>
         <td class="TABLE_1_PASS">Data Cell D24</td>
       </tr>
-      <tr> 
-        <th></th>
-        <td class="TABLE_1_PASS">Data Cell D31</td> 
-        <td class="TABLE_1_PASS">Data Cell D32</td> 
-        <td class="TABLE_1_PASS">Data Cell D33</td> 
-        <td class="TABLE_1_FAIL">Data Cell D34</td> 
+      <tr>
+        <th class="TABLE_1_MC"></th>
+        <td class="TABLE_1_PASS">Data Cell D31</td>
+        <td class="TABLE_1_PASS">Data Cell D32</td>
+        <td class="TABLE_1_PASS">Data Cell D33</td>
+        <td class="TABLE_1_FAIL">Data Cell D34</td>
       </tr>
-      <tr> 
+      <tr>
         <th>Header D4r</th>
-        <td class="TABLE_1_PASS">Data Cell D41</td> 
-        <td class="TABLE_1_PASS">Data Cell D42</td> 
-        <td class="TABLE_1_PASS">Data Cell D43</td> 
-        <td class="TABLE_1_PASS">Data Cell D44</td> 
+        <td class="TABLE_1_PASS">Data Cell D41</td>
+        <td class="TABLE_1_PASS">Data Cell D42</td>
+        <td class="TABLE_1_PASS">Data Cell D43</td>
+        <td class="TABLE_1_PASS">Data Cell D44</td>
       </tr>
     </table>
-    
+
     <h2>Table E: Simple Table with empty rows and columns</h2>
-    
+
     <table>
       <caption>Simple table with empty rows and columns</caption>
       <thead>
@@ -177,45 +188,45 @@
           <th>Header E4</th>
         </tr>
       </thead>
-      <tr> 
+      <tr>
         <td class="TABLE_1_PASS">Data Cell E11</td>
         <td class="TABLE_1_PASS">Data Cell E12</td>
         <td class="TABLE_1_MC"></td>
         <td class="TABLE_1_PASS">Data Cell E13</td>
         <td class="TABLE_1_PASS">Data Cell E14</td>
       </tr>
-      <tr> 
+      <tr>
         <td class="TABLE_1_PASS">Data Cell E21</td>
         <td class="TABLE_1_PASS">Data Cell E22</td>
         <td class="TABLE_1_MC"></td>
         <td class="TABLE_1_PASS">Data Cell E23</td>
         <td class="TABLE_1_PASS">Data Cell E24</td>
       </tr>
-      <tr> 
-        <td class="TABLE_1_PASS">Data Cell E31</td> 
-        <td class="TABLE_1_PASS">Data Cell E32</td> 
+      <tr>
+        <td class="TABLE_1_PASS">Data Cell E31</td>
+        <td class="TABLE_1_PASS">Data Cell E32</td>
         <td class="TABLE_1_MC"></td>
-        <td class="TABLE_1_PASS">Data Cell E33</td> 
-        <td class="TABLE_1_PASS">Data Cell E34</td> 
+        <td class="TABLE_1_PASS">Data Cell E33</td>
+        <td class="TABLE_1_PASS">Data Cell E34</td>
       </tr>
-      <tr> 
+      <tr>
         <td class="TABLE_1_MC"></td>
         <td class="TABLE_1_MC"></td>
         <td class="TABLE_1_MC"></td>
         <td class="TABLE_1_MC"></td>
         <td class="TABLE_1_MC"></td>
       </tr>
-      <tr> 
-        <td class="TABLE_1_PASS">Data Cell E41</td> 
-        <td class="TABLE_1_PASS">Data Cell E42</td> 
+      <tr>
+        <td class="TABLE_1_PASS">Data Cell E41</td>
+        <td class="TABLE_1_PASS">Data Cell E42</td>
         <td class="TABLE_1_MC"></td>
-        <td class="TABLE_1_PASS">Data Cell E43</td> 
-        <td class="TABLE_1_PASS">Data Cell E44</td> 
+        <td class="TABLE_1_PASS">Data Cell E43</td>
+        <td class="TABLE_1_PASS">Data Cell E44</td>
       </tr>
     </table>
 
     <h2> Table F: Simple Table is 4x4 table with column/row headers and empty cell</h2>
-    
+
       <table>
         <caption>4 by 4 data table column headers</caption>
         <thead>
@@ -226,25 +237,25 @@
             <th>Header A3</th>
           </tr>
         </thead>
-        <tr> 
+        <tr>
           <th>Header B1</th>
           <td class="TABLE_1_PASS">Data Cell B1 A1</td>
           <td class="TABLE_1_PASS">Data Cell B1 A2</td>
           <td class="TABLE_1_PASS">Data Cell B1 A3</td>
         </tr>
-        <tr> 
+        <tr>
           <th>Header B2</th>
           <td class="TABLE_1_PASS">Data Cell B2 A1</td>
           <td class="TABLE_1_PASS">Data Cell B2 A2</td>
           <td class="TABLE_1_PASS">Data Cell B2 A3</td>
         </tr>
-        <tr> 
+        <tr>
           <th>Header B3</th>
           <td class="TABLE_1_PASS">Data Cell B3 A1</td>
           <td class="TABLE_1_PASS">Data Cell B3 A2</td>
           <td class="TABLE_1_PASS">Data Cell B3 A3</td>
         </tr>
-        <tr> 
+        <tr>
           <th>Header B4</th>
           <td class="TABLE_1_PASS">Data Cell B4 A1</td>
           <td class="TABLE_1_PASS">Data Cell B4 A2</td>
@@ -252,6 +263,6 @@
         </tr>
       </table>
 
-    
+
   </body>
 </html>

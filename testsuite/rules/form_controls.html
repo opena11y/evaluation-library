@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>QUNIT: Form Control Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,72 +11,35 @@
   <body>  
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
-      // Test case for labeling form controls
 
-      test( "CONTROL_1: Forms must have labels", function() {
-        executeTest('ID_IFRAME_1', 'CONTROL_1');
-      });
-      
-      test( "CONTROL_2: Image inputs must have alts or a title", function() {
-        executeTest('ID_IFRAME_2', 'CONTROL_2');
-      });
-      
-      test( "CONTROL_3: Radio Buttons must be in a legend and fieldset", function() {
-        executeTest('ID_IFRAME_3A', 'CONTROL_3');
-        executeTest('ID_IFRAME_3B', 'CONTROL_3');
-      });
-      // Test case for fieldset/legend
-      
-      test( "CONTROL_4: Buttons must have a val and text", function() {
-        executeTest('ID_IFRAME_4', 'CONTROL_4');
-      });
-      
-      test( "CONTROL_5: Unique Ids", function() {
-        executeTest('ID_IFRAME_5', 'CONTROL_5');
-      });
-      
-      test( "CONTROL_6: Label references", function() {
-        executeTest('ID_IFRAME_6', 'CONTROL_6');
-      });
-      
-      test( "CONTROL_7: Labels and legends must have text", function() {
-        executeTest('ID_IFRAME_7', 'CONTROL_7');
-      });
-      
-      test( "CONTROL_8: Fieldset should contain exactly one legend element", function() {
-        executeTest('ID_IFRAME_8', 'CONTROL_8');
-      });
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
+        executeTest('CONTROL_1: Forms must have labels',                       'ID_IFRAME_1A',  'CONTROL_1');
+        executeTest('CONTROL_2: input[type=image] must have alt or a title',   'ID_IFRAME_2',  'CONTROL_2');
+        executeTest('CONTROL_3: Radio Buttons must use fieldset/legend',       'ID_IFRAME_3A', 'CONTROL_3');
+        executeTest('CONTROL_3: Radio Buttons must use group label',           'ID_IFRAME_3B', 'CONTROL_3');
+        executeTest('CONTROL_4: Buttons must have text content',               'ID_IFRAME_4',  'CONTROL_4');
+        executeTest('CONTROL_5: Unique Ids',                                   'ID_IFRAME_5',  'CONTROL_5');
+        executeTest('CONTROL_6: Valid Label references',                       'ID_IFRAME_6',  'CONTROL_6');
+        executeTest('CONTROL_7: Labels and legends must have text',            'ID_IFRAME_7',  'CONTROL_7');
+        executeTest('CONTROL_8: Fieldset should have only one legend element', 'ID_IFRAME_8',  'CONTROL_8');
+        executeTest('CONTROL_9: Verify title attribute is a good accessible name',      'ID_IFRAME_9',  'CONTROL_9');
 
-      test( "CONTROL_9: Form controls should not be labelled with the title attribute", function() {
-        executeTest('ID_IFRAME_9', 'CONTROL_9');
-      });
-         
-      test( "CONTROL_10: Form controls should have unique labels", function() {
-        executeTest('ID_IFRAME_10A', 'CONTROL_10');
-      });
-         
-      test( "CONTROL_10: Form controls should have unique labels (Tab Panels)", function() {
-        executeTest('ID_IFRAME_10B', 'CONTROL_10');
-      });
+        executeTest('CONTROL_10A: Form controls should have unique labels','ID_IFRAME_10A',  'CONTROL_10');
+        executeTest('CONTROL_10B: Form controls should have unique labels (Tab Panels)', 'ID_IFRAME_10B',  'CONTROL_10');
 
-      test( "CONTROL_11: Submit and reset buttons must be unique", function() {
-        executeTest('ID_IFRAME_11', 'CONTROL_11');
-      });
+        executeTest('CONTROL_11: Submit and reset buttons must be unique', 'ID_IFRAME_11',  'CONTROL_11');
 
-         
-                  
+        executeTest('CONTROL 12A: Submit forms with buttons',                    'ID_IFRAME_12A', 'CONTROL_12');
+        executeTest('FOCUS 12B: Submit forms with buttons (no visible buttons)', 'ID_IFRAME_12B', 'CONTROL_12');
+
+        executeTest('FOCUS 13: Use name attribute for auto-fill', 'ID_IFRAME_13', 'CONTROL_13');
+      });
     </script>
 
     <h2>Labels</h2>
-    <iframe id="ID_IFRAME_1" src="form_controls/form_controls_1_controls_must_have_legends.html"></iframe>
+    <iframe id="ID_IFRAME_1A" src="form_controls/form_controls_1_controls_must_have_legends.html"></iframe>
     
     <h2>Images</h2>
     <iframe id="ID_IFRAME_2" src="form_controls/form_controls_2_images_have_alt_or_title.html"></iframe>
@@ -108,6 +72,14 @@
 
     <h2>Submit and reset buttons must be unique</h2>
     <iframe id="ID_IFRAME_11" src="form_controls/form_controls_11_submit_reset_accessible_labels.html"></iframe>
+
+    <h2>Forms submitted with buttons</h2>
+    <iframe id="ID_IFRAME_12A" src="form_controls/form_controls_12_submit_forms_with_buttons.html"></iframe>
+    <iframe id="ID_IFRAME_12B" src="form_controls/form_controls_12_submit_forms_with_buttons_no_visible_controls.html"></iframe>
+
+    <h2>Name attribute to support auto-fill</h2>
+    <iframe id="ID_IFRAME_13" src="form_controls/form_controls_13_auto_fill.html"></iframe>
+
 
   </body>
 

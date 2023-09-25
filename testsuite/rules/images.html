@@ -2,64 +2,36 @@
 <html>
   <head>
     <title>QUNIT: Image Rules</title>
-    <link rel="stylesheet" href="../qunit/qunit-1.11.0.css"/>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
 
-  <body>  
+  <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../qunit/qunit-1.11.0.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_evaluation.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rules.js"></script>
-    <script src="../../openajax_a11y/export/scripts/oaa_a11y_rulesets.js"></script>
-    <script src="../scripts/testsuite.js"></script>
-    
-    <script>
-      
-      // Test case for seeing if Images have descriptors
 
-      // Test case for description
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
 
-      test( "IMAGE_1: Images must have accessible names for img", function() {
-        executeTest('ID_IFRAME_1A', 'IMAGE_1');
-      });
-        
-      test( "IMAGE_1: Images must have accessible names for area", function() {
-        executeTest('ID_IFRAME_1B', 'IMAGE_1');
-      });
-      
-      test( "IMAGE_1: Images must have accessible names for role img", function() {
-        executeTest('ID_IFRAME_1C', 'IMAGE_1');
-      });
-      
-      test( "IMAGE_2: Text alternatives are meaningful", function() {
-        executeTest('ID_IFRAME_2A', 'IMAGE_2');
-      });
+        // Test case for seeing if Images have descriptors
 
-      //tests that accessible name does not contain file name
-      test( "IMAGE_3: Accessible name must not contain file name for Image", function() {
-        executeTest('ID_IFRAME_3A', 'IMAGE_3');
-      });
-      
-      
-      test( "IMAGE_4: Accessible name length must be less than 100 characters for Image", function() {
-        executeTest('ID_IFRAME_4A', 'IMAGE_4_EN');
-      });
-      
-      test( "IMAGE_4: Accessible name length must be less than 100 characters for Area", function() {
-        executeTest('ID_IFRAME_4B', 'IMAGE_4_EN');
-      });
-      
-      test( "IMAGE_5: Verify images are decorative", function() {
-        executeTest('ID_IFRAME_5A', 'IMAGE_5');
-      });
+        executeTest('IMAGE_1: Images must have accessible names for img', 'ID_IFRAME_1A', 'IMAGE_1');
+        executeTest('IMAGE_1: Images must have accessible names for area', 'ID_IFRAME_1B', 'IMAGE_1');
+        executeTest('IMAGE_1: Images must have accessible names for role img', 'ID_IFRAME_1C', 'IMAGE_1');
 
-      test( "IMAGE_6: long text alternatives", function() {
-        executeTest('ID_IFRAME_6A', 'IMAGE_6');
+        executeTest('IMAGE_2: Text alternatives are meaningful', 'ID_IFRAME_2A', 'IMAGE_2');
+
+        executeTest('IMAGE_3: Accessible name must not contain file name for Image', 'ID_IFRAME_3A', 'IMAGE_3');
+        executeTest('IMAGE_4: Accessible name length must be less than 100 characters for Image', 'ID_IFRAME_4A', 'IMAGE_4_EN');
+
+        executeTest('IMAGE_5: Verify images are decorative', 'ID_IFRAME_5A', 'IMAGE_5');
+
+        executeTest('IMAGE_6: long text alternatives', 'ID_IFRAME_6A', 'IMAGE_6');
+
       });
-           
     </script>
 
     <h2>Tests the image for an accessible name</h2>
@@ -73,12 +45,10 @@
     <iframe id="ID_IFRAME_2A" src="images/image_2_text_alternatives.html"></iframe>
 
     <h2>Image accessible name does not contain file name</h2>
-    <iframe id="ID_IFRAME_3A" src="images/image_3_accessible_name_doesn't_contain_file_name_for_img.html"></iframe>
-    <iframe id="ID_IFRAME_3B" src="images/image_3_accessible_name_doesn't_contain_file_name_for_role_img.html"></iframe>
+    <iframe id="ID_IFRAME_3A" src="images/image_3_accessible_name_does_not_contain_file_name_for_img.html"></iframe>
     
     <h2>Tests that accessible image name is less than 100 characters</h2>
     <iframe id="ID_IFRAME_4A" src="images/image_4_accessible_name_length_for_img.html"></iframe>
-    <iframe id="ID_IFRAME_4B" src="images/image_4_accessible_name_length_for_area.html"></iframe>
     
     <h2>Verify images are decorative</h2>
     <iframe id="ID_IFRAME_5A" src="images/image_5_decorative_images.html"></iframe>
