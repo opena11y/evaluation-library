@@ -244,8 +244,6 @@ export const colorRules = [
     target_resources    : [],
     validate            : function (dom_cache, rule_result) {
 
-      console.log(`[COLOR 4]: ${dom_cache} ${rule_result}`);
-
       dom_cache.controlInfo.allControlElements.forEach( ce => {
         const de = ce.domElement;
         if (!ce.isDisabled && de.ariaInfo.isWidget) {

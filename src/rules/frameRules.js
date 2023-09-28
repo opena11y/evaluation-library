@@ -37,16 +37,18 @@ export const frameRules = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach( de => {
         if (de.tagName === 'frame' && de.node.src) {
-          if (de.visibility.isVisibleToAT) {
-            if (de.accName.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
+          if ((de.role !== 'none') && (de.role !== 'presentation')) {
+            if (de.visibility.isVisibleToAT) {
+              if (de.accName.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
             }
-          }
-          else {
-           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
           }
         }
       });
@@ -70,7 +72,10 @@ export const frameRules = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.iframeInfo.allIFrameElements.forEach( ife => {
         const de = ife.domElement;
-        if (de.tagName === 'iframe' && de.node.src) {
+        if ((de.tagName === 'iframe') &&
+            (de.role !== 'none') &&
+            (de.role !== 'presentation') &&
+            de.node.src) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
