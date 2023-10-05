@@ -775,7 +775,82 @@ export const controlRules = [
       }
     });
   } // end validation function
+},
+
+/**
+ * @object CONTROL_14
+ *
+ * @desc   HTML form controls must use native properties and states
+ */
+{ rule_id             : 'CONTROL_14',
+  last_updated        : '2023-09-30',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : [],
+  target_resources    : ["input", "option", "select", "textarea"],
+  validate          : function (dom_cache, rule_result) {
+
+    function checkForNativeStates (domElement, ariaAttr, htmlAttr, result='fail') {
+
+      if (domElement.node.hasAttribute(ariaAttr)) {
+        if (domElement.visibility.isVisibleToAT) {
+          if (result === 'fail') {
+            rule_result.addElementResult(TEST_RESULT.FAIL, domElement, 'ELEMENT_FAIL_1', [htmlAttr, ariaAttr, domElement.elemName]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domElement, 'ELEMENT_MC_1', [htmlAttr, ariaAttr, domElement.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, domElement, 'ELEMENT_HIDDEN_1', [ariaAttr, domElement.elemName]);
+        }
+      }
+    }
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      switch (de.tagName) {
+        case 'button':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          break;
+
+        case 'fieldset':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          break;
+
+        case 'input':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          checkForNativeStates(de, 'aria-invalid',  'invalid');
+          checkForNativeStates(de, 'aria-required', 'required');
+          if ((de.typeAttr === 'checkbox') || (de.typeAttr === 'radio')) {
+            checkForNativeStates(de, 'aria-checked', 'checked');
+          }
+          break;
+
+        case 'option':
+          checkForNativeStates(de, 'aria-disabled', 'disabled');
+          checkForNativeStates(de, 'aria-selected', 'selected');
+          break;
+
+        case 'select':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          checkForNativeStates(de, 'aria-invalid',  'invalid');
+          checkForNativeStates(de, 'aria-required', 'required');
+          checkForNativeStates(de, 'aria-multiselectable', 'multiple');
+          break;
+
+        case 'textarea':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          checkForNativeStates(de, 'aria-invalid',  'invalid');
+          checkForNativeStates(de, 'aria-required', 'required');
+          break;
+      }
+    });
+
+  } // end validation function
 }
+
 
 ];
 

@@ -10,6 +10,7 @@ import Visibility        from './visibility.js';
 import {
   hasInvalidState,
   hasCheckedState,
+  hasSelectedState,
   isLabelable
 } from '../utils.js'
 import {
@@ -81,8 +82,9 @@ export default class DOMElement {
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
+    this.hasNativeSelectedState = hasSelectedState(elementNode);
 
-    this.ariaInfo  = new AriaInfo(accNameDoc, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
     this.accName        = getAccessibleName(accNameDoc, elementNode);

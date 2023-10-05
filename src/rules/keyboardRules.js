@@ -243,7 +243,7 @@ export const keyboardRules = [
   { rule_id             : 'KEYBOARD_6',
     last_updated        : '2023-08-22',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     wcag_primary_id     : '3.2.2',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],

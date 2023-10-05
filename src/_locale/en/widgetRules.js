@@ -971,4 +971,5 @@ export const widgetRules = {
           }
         ]
     }
+
 }
