@@ -975,7 +975,6 @@ export const widgetRules = [
     });
   } // end validation function
 }
-
 ];
 
 

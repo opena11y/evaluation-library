@@ -66,7 +66,7 @@ const radius = 3;
 
 const styleTemplate = document.createElement('template');
 styleTemplate.innerHTML = `
-<style title="${styleName}">
+<style id="${styleName}">
   .${highlightClass} {
     position: absolute;
     overflow: hidden;
@@ -211,8 +211,8 @@ styleTemplate.innerHTML = `
 
 // Add highlighting stylesheet to document if not already there
 function addHighlightStyle () {
-  if (document.querySelector(`style[title="${styleName}"]`) === null) {
-    document.body.appendChild(styleTemplate.content.cloneNode(true));
+  if (document.querySelector(`style[id="${styleName}"]`) === null) {
+    document.head.appendChild(styleTemplate.content.cloneNode(true));
     if (debug.flag) {debug.log(`Added style element (${styleName}) to document`); }
   }
 }

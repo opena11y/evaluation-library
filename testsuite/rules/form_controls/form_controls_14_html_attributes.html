@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Control: Native Attributes </title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+
+    <style>
+      label {
+        display: block;
+        margin: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Form Control: Native Attributes</h1>
+
+      <label>Input 11 <input aria-disabled="true"  type="text" name="name1" class="CONTROL_14_MC"></label>
+      <label>Input 13 <input aria-disabled="false" type="text" name="name2" class="CONTROL_14_MC"></label>
+      <label>Input 14 <input aria-invalid="false"  type="number" name="postal-code1" class="CONTROL_14_FAIL"></label>
+      <label>Input 15 <input aria-invalid="true" type="range" class="CONTROL_14_FAIL" /></label>
+      <label>Input 16 <input aria-required="false" type="date" name="bday1" class="CONTROL_14_FAIL"></label>
+      <label>Input 17 <input aria-required="true" type="tel" name="tel1" class="CONTROL_14_FAIL"></label>
+
+      <label>Input 18 <input type="text" name="name3"></label>
+
+      <fieldset aria-disabled="false" class="CONTROL_14_MC">
+        <legend>Ragio Group 1</legend>
+          <label><input type="radio" name="group1" aria-disabled="true" class="CONTROL_14_MC">Radio 1A</label>
+          <label><input type="radio" name="group1" aria-invalid="true" class="CONTROL_14_FAIL">Radio 1B</label>
+          <label><input type="radio" name="group1" aria-checked="true" class="CONTROL_14_FAIL">Radio 1C</label>
+          <label style="display: none"><input type="radio" name="group1" aria-disabled="true" class="CONTROL_14_HIDDEN">Radio 1D</label>
+      </fieldset>
+
+      <fieldset aria-disabled="true" class="CONTROL_14_MC">
+        <legend>Checkbox Group 2</legend>
+          <label><input type="checkbox" aria-disabled="true" class="CONTROL_14_MC">Checkbox 2A</label>
+          <label><input type="checkbox" aria-invalid="true" class="CONTROL_14_FAIL">Checkbox 2B</label>
+          <label><input type=checkbox aria-checked="true" class="CONTROL_14_FAIL">Checkbox 2C</label>
+          <label style="display: none"><input type="checkbox" aria-disabled="true" class="CONTROL_14_HIDDEN">Checkbox 2D</label>
+      </fieldset>
+
+      <label for="textarea1">Comment 1</label>
+      <textarea id="textarea1" rows="4" cols="40" aria-required="false" class="CONTROL_14_FAIL"></textarea>
+
+      <label for="select1">Options</label>
+      <select aria-multiselectable="true" class="CONTROL_14_FAIL">
+        <option aria-selected="true" class="CONTROL_14_FAIL">Option 1</option>
+        <option>Option 2</option>
+        <option aria-selected="true" class="CONTROL_14_HIDDEN" hidden>Option 3</option>
+        <option aria-disabled="true" class="CONTROL_14_FAIL">Option 4</option>
+        <option>Option 5</option>
+      </select>
+
+      <button>Button 1</button>
+      <button aria-disabled="false" class="CONTROL_14_MC">Button 2</button>
+
+      <div hidden>
+        <label>Input 21 <input aria-disabled="true"  type="text" name="name4" class="CONTROL_14_HIDDEN"></label>
+        <label>Input 23 <input aria-disabled="false" type="text" name="name5" class="CONTROL_14_HIDDEN"></label>
+        <label>Input 24 <input aria-invalid="false"  type="number" name="postal-code2" class="CONTROL_14_HIDDEN"></label>
+        <label>Input 25 <input aria-invalid="true" type="range" class="CONTROL_14_HIDDEN"/></label>
+        <label>Input 26 <input aria-required="false" type="date" name="bday2" class="CONTROL_14_HIDDEN"></label>
+        <label>Input 27 <input aria-required="true" type="tel" name="tel2" class="CONTROL_14_HIDDEN"></label>
+
+        <label>Input 28 <input  type="text" name="name6"></label>
+
+      </div>
+    </div>
+  </body>
+</html>

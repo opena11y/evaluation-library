@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;select&lt;/code&gt; must not change context | OpenA11y Evaluation Library 2.0</title>
+        <title>Use native HTML attributes when available | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,27 +49,27 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>select</code> must not change context</li>
+          <li class="breadcrumb-item active">Use native HTML attributes when available</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>select</code> must not change context</h1>
+            <h1 id="h1-title">Rule: Use native HTML attributes when available</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Keyboard 6</td>
+  <td>Control 14</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td><code>select</code> elements with <code>onchange</code> or other event handlers must not automatically change the user's context when keyboard focus moves between options.</td>
+  <td><code>button</code>, <code>fieldset</code>, <code>input</code>, <code>option</code>, <code>select</code> and <code>textarea</code> form controls must use native HTML attribute, instead of related ARIA attributes, when available.</td>
 </tr>
 
                   
@@ -78,9 +78,13 @@
   <td>
     <ul>
       
-      <li>User's can become disoriented if the focus changes cause unpredicatable actions.</li>
+      <li>The native HTML form control attributes, including <code>checked</code>, <code>disabled</code>, <code>invalid</code>, <code>multple</code> and <code>required</code> are related to the ARIA attributes <code>aria-checked</code>, <code>aria-disabled</code>, <code>aria-invalid</code>, <code>aria-multiselectable</code> and <code>aria-required</code> attributes since they communicate the same information to assistive technologies.</li>
       
-      <li>When the user is using the kyboard to explore <code>select</code> box options, the focus must stay on the options, until the user selects one of the options.</li>
+      <li>If both are used on a HTML form control there is the possibility they might provide conflicting information to the assistive technology, for example the <code>checked</code> attribute is <code>true</code> and the <code>aria-checked</code> attribute is set to <code>false</code>.</li>
+      
+      <li>The native HTML form attributes also effect browser behavior, where the ARIA attributes only effect information communicated to assistive technologies. For example, using the <code>disabled</code> attribute removes the form control from the tab sequence of the page, where setting <code>aria-disabled=true</code> does not effect tab sequence.</li>
+      
+      <li>Browsers are required by the ARIA specification to always communicate the native HTML attribute information to assistive technologies when their is conflicting information. </li>
       
     </ul>
   </td>
@@ -97,38 +101,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#on-input" target="_spec">
-        Success Criterion 3.2.2 On Input
+      <a href="https://www.w3.org/TR/WCAG21/#name-role-value" target="_spec">
+        Success Criterion 4.1.2 Name, Role, Value
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#keyboard" target="_spec">
-          Success Criterion 2.1.1 Keyboard
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#no-keyboard-trap" target="_spec">
-          Success Criterion 2.1.2 No Keyboard Trap
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#focus-order" target="_spec">
-          Success Criterion 2.4.3 Focus Order
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#focus-visible" target="_spec">
-          Success Criterion 2.4.7 Focus Visible
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -137,7 +117,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Keyboard Support</td>
+  <td>Forms</td>
 </tr>
 
                   
@@ -152,9 +132,17 @@
   <td>
     <ul>
       
-      <li>Do not use <code>onchange</code> event handlers on <code>select</code> elements.</li>
+      <li>To avoid conflicting information to assistive technologies, use native HTML attributes, instead of related ARIA attributes.</li>
       
-      <li>Use selections should be made using the enter key.</li>
+      <li>Use <code>checked</code> attribute, instead of <code>aria-checked</code>, for the for <code>input[type=checkbox]</code> and <code>input[type=radio</code> elements.</li>
+      
+      <li>Use <code>disabled</code> attribute, instead of <code>aria-disabled</code>, for the for <code>button</code>, <code>fieldset</code>, <code>input</code>, <code>option</code>, <code>select</code> and <code>textarea</code> elements.</li>
+      
+      <li>Use <code>invalid</code> attribute, instead of <code>aria-invalid</code>, for the for <code>button</code>, <code>fieldset</code>, <code>input</code>, <code>option</code>, <code>select</code> and <code>textarea</code> elements.</li>
+      
+      <li>Use <code>mutiple</code> attribute, instead of <code>aria-multiselectable</code>, for the for the <code>select</code> element.</li>
+      
+      <li>Use <code>required</code> attribute, instead of <code>aria-required</code>, for the for <code>button</code>, <code>fieldset</code>, <code>input</code>, <code>option</code>, <code>select</code> and <code>textarea</code> elements.</li>
       
     </ul>
   </td>
@@ -166,11 +154,19 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G200">G200: Opening new windows and tabs from a link only when necessary</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria/#host_general_conflict">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Conflicts with Host Language Semantics</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G201">G201: Giving users advanced warning when opening a new window</a></li>
+      <li><a href="https://html.spec.whatwg.org/#the-button-element">HTML: Button Element</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F52">F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded</a></li>
+      <li><a href="https://html.spec.whatwg.org/#the-fieldset-element">HTML: Fieldset Element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/#the-input-element">HTML: Input Element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/#the-option-element">HTML: Option Element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/#the-select-element">HTML: Select Element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/#the-textarea-element">HTML: Textara Element</a></li>
       
     </ul>
   </td>

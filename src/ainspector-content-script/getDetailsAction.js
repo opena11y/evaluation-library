@@ -35,13 +35,14 @@ export function getDetailsAction(ruleResult) {
     return items;
   }
 
-  let rule       = ruleResult.getRule();
-  let required   = ruleResult.isRuleRequired()
+  const rule       = ruleResult.getRule();
+  const required   = ruleResult.isRuleRequired()
 
   let primarySC = {};
   let wcag = [];
-  primarySC.title    = rule.getPrimarySuccessCriterionInfo().title + ' (Primary)';
-  primarySC.url_spec = rule.getPrimarySuccessCriterionInfo().url_spec;
+  const sc = rule.getPrimarySuccessCriterionInfo();
+  primarySC.title = sc.title + ' (Primary)';
+  primarySC.url   = sc.url;
   wcag.push(primarySC);
   wcag = wcag.concat(rule.getRelatedSuccessCriteriaInfo());
 

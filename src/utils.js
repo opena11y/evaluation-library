@@ -9,6 +9,7 @@ export {
   hasEmptyAltText,
   hasInvalidState,
   hasCheckedState,
+  hasSelectedState,
   isLabelable,
   normalize,
   normalizeLeadingAndTrailingSpace,
@@ -69,7 +70,6 @@ function normalizeLeadingAndTrailingSpace (s) {
   return n;
 }
 
-
 /*
 *   getAttributeValue: Return attribute value if present on element,
 *   otherwise return empty string.
@@ -123,6 +123,21 @@ function hasCheckedState (node) {
   let flag = node.tagName.toLowerCase() === 'input';
   flag = flag && inputsWithChecked.includes(node.type.toLowerCase());
   return flag;
+}
+
+/**
+ * @function hasSeelctedState
+ *
+ * @desc Identifies elements with the selected state, that would overide
+ *       or replace the use of aria-selected attribute
+ *
+ * @param  {Object}  node   - DOM element node
+ *
+ * @returns {Boolean} true it element has a selected state, otherwise false
+ */
+
+function hasSelectedState (node) {
+  return node.tagName.toLowerCase() === 'option';
 }
 
 /**

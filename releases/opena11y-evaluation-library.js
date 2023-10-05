@@ -702,7 +702,6 @@ function normalizeLeadingAndTrailingSpace (s) {
   return n;
 }
 
-
 /*
 *   getAttributeValue: Return attribute value if present on element,
 *   otherwise return empty string.
@@ -742,6 +741,21 @@ function hasCheckedState (node) {
   let flag = node.tagName.toLowerCase() === 'input';
   flag = flag && inputsWithChecked.includes(node.type.toLowerCase());
   return flag;
+}
+
+/**
+ * @function hasSeelctedState
+ *
+ * @desc Identifies elements with the selected state, that would overide
+ *       or replace the use of aria-selected attribute
+ *
+ * @param  {Object}  node   - DOM element node
+ *
+ * @returns {Boolean} true it element has a selected state, otherwise false
+ */
+
+function hasSelectedState (node) {
+  return node.tagName.toLowerCase() === 'option';
 }
 
 /**
@@ -6178,14 +6192,17 @@ class RefInfo {
 /**
  * @class AriaInfo
  *
- * @desc Aria information for a dom node
+ * @desc Aria information for a element node
  *
- * @param  {String}  role  - ARIA role for the element
- * @param  {Object}  node  - dom element node
+ * @param  {Object}   doc          - Document object reference
+ * @param  {Boolean}  hasRole      - True if node has explicit role definition
+ * @param  {String}   role         - ARIA role for the element
+ * @param  {String}   defaultRole  - Default role of element if no role is defined
+ * @param  {Object}   node         - dom element node
  */
 
 class AriaInfo {
-  constructor (doc, role, defaultRole, node) {
+  constructor (doc, hasRole, role, defaultRole, node) {
     const tagName = node.tagName.toLowerCase();
     const level = parseInt(node.getAttribute('aria-level'));
 
@@ -6281,9 +6298,7 @@ class AriaInfo {
         this.valueMax = 100;
         this.validValueMax = true;
       }
-
       this.valueText = node.hasAttribute('aria-valuetext') ? node.getAttribute('aria-valuetext') : '';
-
     }
 
     // for live regions
@@ -6321,9 +6336,14 @@ class AriaInfo {
 
     this.invalidAttrValues  = this.checkForInvalidAttributeValue(this.validAttrs);
     this.invalidRefs        = this.checkForInvalidReferences(doc, this.validAttrs);
+
     this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
-    this.requiredAttrs      = this.checkForRequiredAttributes(this.validAttrs, designPattern, node);
+    if (hasRole) {
+      this.requiredAttrs      = this.checkForRequiredAttributes(this.validAttrs, designPattern, node);
+    } else {
+      this.requiredAttrs      = [];
+    }
 
     switch (tagName) {
       case 'h1':
@@ -6505,7 +6525,7 @@ class AriaInfo {
   }
 
   // checks for required aria attributes for a specific role
-  // In some cased native HTML semanitics like "checked' property of
+  // In some cased native HTML semantics like "checked' property of
   // an input element can be used to satisfy the requirement
   checkForRequiredAttributes(attrs, designPattern, node) {
     let requiredAttrs = [];
@@ -6516,7 +6536,8 @@ class AriaInfo {
         name: reqAttr,
         hasDefaultValue: (defaultValue !== '') && (defaultValue !== 'undefined'),
         defaultValue: defaultValue,
-        isDefined: (reqAttr === 'aria-checked') && hasCheckedState(node),
+        isDefined: ((reqAttr === 'aria-checked')  && hasCheckedState(node)) ||
+                   ((reqAttr === 'aria-selected') && hasSelectedState(node)),
         value: ''
       };
 
@@ -10177,8 +10198,9 @@ class DOMElement {
 
     this.hasNativeCheckedState  = hasCheckedState(elementNode);
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
+    this.hasNativeSelectedState = hasSelectedState(elementNode);
 
-    this.ariaInfo  = new AriaInfo(accNameDoc, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode);
     this.eventInfo = new EventInfo(elementNode);
 
     this.accName        = getAccessibleName(accNameDoc, elementNode);
@@ -14569,7 +14591,73 @@ const controlRules$1 = {
           url: 'https://www.w3.org/WAI/WCAG21/Techniques/failures/F107'
         }
       ]
-  }
+  },
+  CONTROL_14: {
+        ID:                    'Control 14',
+        DEFINITION:            '@button@, @fieldset@, @input@, @option@, @select@ and @textarea@ form controls must use native HTML attribute, instead of related ARIA attributes, when available.',
+        SUMMARY:               'Use native HTML attributes when available',
+        TARGET_RESOURCES_DESC: '@button@, @fieldset@, @input@, @option@, @select@ and @textarea@',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'For the form element use a native HTML attribute instead of the related ARIA attribute.',
+          FAIL_P:   'For the %N_F form elements use native HTML attributes instead of the related ARIA attributes.',
+          MANUAL_CHECK_S:   'Verify for the form control that you do not want the native disabled behavior of the form control when using @aria-disabled@ attribute, instead of the @disabled@ attribute.',
+          MANUAL_CHECK_P:   'Verify for the %N_MC form controls that you do not want the native disabled behavior of the form control when using @aria-disabled@ attribute, instead of the @disabled@ attribute.',
+          HIDDEN_S: 'The form control is hidden and was not evaluated.',
+          HIDDEN_P: 'The %N_H form controls are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No form controls related ARIA attributes.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:   'Use the @%1@ attribute instead of @%2@ attribute on the @%3@ element.',
+          ELEMENT_MC_1:     'Verify the use of the @%1@ attribute instead of the native @%2@ attribute on the @%3@ element.',
+          ELEMENT_HIDDEN_1: 'The @%1@ element with the @%2@ attribute was not tested because it is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'The native HTML form control attributes, including @checked@, @disabled@, @invalid@, @multple@ and @required@ are related to the ARIA attributes @aria-checked@, @aria-disabled@, @aria-invalid@, @aria-multiselectable@ and @aria-required@ attributes since they communicate the same information to assistive technologies.',
+          'If both are used on a HTML form control there is the possibility they might provide conflicting information to the assistive technology, for example the @checked@ attribute is @true@ and the @aria-checked@ attribute is set to @false@.',
+          'The native HTML form attributes also effect browser behavior, where the ARIA attributes only effect information communicated to assistive technologies. For example, using the @disabled@ attribute removes the form control from the tab sequence of the page, where setting @aria-disabled=true@ does not effect tab sequence.',
+          'Browsers are required by the ARIA specification to always communicate the native HTML attribute information to assistive technologies when their is conflicting information. '
+        ],
+        TECHNIQUES: [
+          'To avoid conflicting information to assistive technologies, use native HTML attributes, instead of related ARIA attributes.',
+          'Use @checked@ attribute, instead of @aria-checked@, for the for @input[type=checkbox]@ and @input[type=radio@ elements.',
+          'Use @disabled@ attribute, instead of @aria-disabled@, for the for @button@, @fieldset@, @input@, @option@, @select@ and @textarea@ elements.',
+          'Use @invalid@ attribute, instead of @aria-invalid@, for the for @button@, @fieldset@, @input@, @option@, @select@ and @textarea@ elements.',
+          'Use @mutiple@ attribute, instead of @aria-multiselectable@, for the for the @select@ element.',
+          'Use @required@ attribute, instead of @aria-required@, for the for @button@, @fieldset@, @input@, @option@, @select@ and @textarea@ elements.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Conflicts with Host Language Semantics',
+            url:   'https://www.w3.org/TR/wai-aria/#host_general_conflict'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Button Element',
+            url:   'https://html.spec.whatwg.org/#the-button-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Fieldset Element',
+            url:   'https://html.spec.whatwg.org/#the-fieldset-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Input Element',
+            url:   'https://html.spec.whatwg.org/#the-input-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Option Element',
+            url:   'https://html.spec.whatwg.org/#the-option-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Select Element',
+            url:   'https://html.spec.whatwg.org/#the-select-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Textara Element',
+            url:   'https://html.spec.whatwg.org/#the-textarea-element'
+          }
+        ]
+    }
 };
 
 /* headingRules.js */
@@ -20306,6 +20394,7 @@ const widgetRules$1 = {
           }
         ]
     }
+
 };
 
 /* messages.js for English messages */
@@ -22384,8 +22473,6 @@ const colorRules = [
     target_resources    : [],
     validate            : function (dom_cache, rule_result) {
 
-      console.log(`[COLOR 4]: ${dom_cache} ${rule_result}`);
-
       dom_cache.controlInfo.allControlElements.forEach( ce => {
         const de = ce.domElement;
         if (!ce.isDisabled && de.ariaInfo.isWidget) {
@@ -22698,7 +22785,7 @@ const frameRules = [
     target_resources    : ['frame'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach( de => {
-        if (de.tagName === 'frame' && de.node.src) {
+        if (de.tagName === 'frame' && de.node.src && !de.hasRole) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
@@ -22732,7 +22819,9 @@ const frameRules = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.iframeInfo.allIFrameElements.forEach( ife => {
         const de = ife.domElement;
-        if (de.tagName === 'iframe' && de.node.src) {
+        if ((de.tagName === 'iframe') &&
+             !de.hasRole &&
+            de.node.src) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
@@ -23520,7 +23609,82 @@ const controlRules = [
       }
     });
   } // end validation function
+},
+
+/**
+ * @object CONTROL_14
+ *
+ * @desc   HTML form controls must use native properties and states
+ */
+{ rule_id             : 'CONTROL_14',
+  last_updated        : '2023-09-30',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : [],
+  target_resources    : ["input", "option", "select", "textarea"],
+  validate          : function (dom_cache, rule_result) {
+
+    function checkForNativeStates (domElement, ariaAttr, htmlAttr, result='fail') {
+
+      if (domElement.node.hasAttribute(ariaAttr)) {
+        if (domElement.visibility.isVisibleToAT) {
+          if (result === 'fail') {
+            rule_result.addElementResult(TEST_RESULT.FAIL, domElement, 'ELEMENT_FAIL_1', [htmlAttr, ariaAttr, domElement.elemName]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domElement, 'ELEMENT_MC_1', [htmlAttr, ariaAttr, domElement.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, domElement, 'ELEMENT_HIDDEN_1', [ariaAttr, domElement.elemName]);
+        }
+      }
+    }
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      switch (de.tagName) {
+        case 'button':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          break;
+
+        case 'fieldset':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          break;
+
+        case 'input':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          checkForNativeStates(de, 'aria-invalid',  'invalid');
+          checkForNativeStates(de, 'aria-required', 'required');
+          if ((de.typeAttr === 'checkbox') || (de.typeAttr === 'radio')) {
+            checkForNativeStates(de, 'aria-checked', 'checked');
+          }
+          break;
+
+        case 'option':
+          checkForNativeStates(de, 'aria-disabled', 'disabled');
+          checkForNativeStates(de, 'aria-selected', 'selected');
+          break;
+
+        case 'select':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          checkForNativeStates(de, 'aria-invalid',  'invalid');
+          checkForNativeStates(de, 'aria-required', 'required');
+          checkForNativeStates(de, 'aria-multiselectable', 'multiple');
+          break;
+
+        case 'textarea':
+          checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
+          checkForNativeStates(de, 'aria-invalid',  'invalid');
+          checkForNativeStates(de, 'aria-required', 'required');
+          break;
+      }
+    });
+
+  } // end validation function
 }
+
 
 ];
 
@@ -24490,7 +24654,7 @@ const keyboardRules = [
   { rule_id             : 'KEYBOARD_6',
     last_updated        : '2023-08-22',
     rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     wcag_primary_id     : '3.2.2',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
@@ -28269,7 +28433,6 @@ const widgetRules = [
     });
   } // end validation function
 }
-
 ];
 
 /* rule.js */

@@ -36,7 +36,7 @@ export const frameRules = [
     target_resources    : ['frame'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.allDomElements.forEach( de => {
-        if (de.tagName === 'frame' && de.node.src) {
+        if (de.tagName === 'frame' && de.node.src && !de.hasRole) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);
@@ -70,7 +70,9 @@ export const frameRules = [
     validate            : function (dom_cache, rule_result) {
       dom_cache.iframeInfo.allIFrameElements.forEach( ife => {
         const de = ife.domElement;
-        if (de.tagName === 'iframe' && de.node.src) {
+        if ((de.tagName === 'iframe') &&
+             !de.hasRole &&
+            de.node.src) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.accName.name]);

@@ -741,7 +741,73 @@ export const controlRules = {
           url: 'https://www.w3.org/WAI/WCAG21/Techniques/failures/F107'
         }
       ]
-  }
+  },
+  CONTROL_14: {
+        ID:                    'Control 14',
+        DEFINITION:            '@button@, @fieldset@, @input@, @option@, @select@ and @textarea@ form controls must use native HTML attribute, instead of related ARIA attributes, when available.',
+        SUMMARY:               'Use native HTML attributes when available',
+        TARGET_RESOURCES_DESC: '@button@, @fieldset@, @input@, @option@, @select@ and @textarea@',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'For the form element use a native HTML attribute instead of the related ARIA attribute.',
+          FAIL_P:   'For the %N_F form elements use native HTML attributes instead of the related ARIA attributes.',
+          MANUAL_CHECK_S:   'Verify for the form control that you do not want the native disabled behavior of the form control when using @aria-disabled@ attribute, instead of the @disabled@ attribute.',
+          MANUAL_CHECK_P:   'Verify for the %N_MC form controls that you do not want the native disabled behavior of the form control when using @aria-disabled@ attribute, instead of the @disabled@ attribute.',
+          HIDDEN_S: 'The form control is hidden and was not evaluated.',
+          HIDDEN_P: 'The %N_H form controls are hidden were not evaluated.',
+          NOT_APPLICABLE:  'No form controls related ARIA attributes.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:   'Use the @%1@ attribute instead of @%2@ attribute on the @%3@ element.',
+          ELEMENT_MC_1:     'Verify the use of the @%1@ attribute instead of the native @%2@ attribute on the @%3@ element.',
+          ELEMENT_HIDDEN_1: 'The @%1@ element with the @%2@ attribute was not tested because it is hidden from assistive technologies and/or not visible on screen.'
+        },
+        PURPOSES: [
+          'The native HTML form control attributes, including @checked@, @disabled@, @invalid@, @multple@ and @required@ are related to the ARIA attributes @aria-checked@, @aria-disabled@, @aria-invalid@, @aria-multiselectable@ and @aria-required@ attributes since they communicate the same information to assistive technologies.',
+          'If both are used on a HTML form control there is the possibility they might provide conflicting information to the assistive technology, for example the @checked@ attribute is @true@ and the @aria-checked@ attribute is set to @false@.',
+          'The native HTML form attributes also effect browser behavior, where the ARIA attributes only effect information communicated to assistive technologies. For example, using the @disabled@ attribute removes the form control from the tab sequence of the page, where setting @aria-disabled=true@ does not effect tab sequence.',
+          'Browsers are required by the ARIA specification to always communicate the native HTML attribute information to assistive technologies when their is conflicting information. '
+        ],
+        TECHNIQUES: [
+          'To avoid conflicting information to assistive technologies, use native HTML attributes, instead of related ARIA attributes.',
+          'Use @checked@ attribute, instead of @aria-checked@, for the for @input[type=checkbox]@ and @input[type=radio@ elements.',
+          'Use @disabled@ attribute, instead of @aria-disabled@, for the for @button@, @fieldset@, @input@, @option@, @select@ and @textarea@ elements.',
+          'Use @invalid@ attribute, instead of @aria-invalid@, for the for @button@, @fieldset@, @input@, @option@, @select@ and @textarea@ elements.',
+          'Use @mutiple@ attribute, instead of @aria-multiselectable@, for the for the @select@ element.',
+          'Use @required@ attribute, instead of @aria-required@, for the for @button@, @fieldset@, @input@, @option@, @select@ and @textarea@ elements.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Conflicts with Host Language Semantics',
+            url:   'https://www.w3.org/TR/wai-aria/#host_general_conflict'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Button Element',
+            url:   'https://html.spec.whatwg.org/#the-button-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Fieldset Element',
+            url:   'https://html.spec.whatwg.org/#the-fieldset-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Input Element',
+            url:   'https://html.spec.whatwg.org/#the-input-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Option Element',
+            url:   'https://html.spec.whatwg.org/#the-option-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Select Element',
+            url:   'https://html.spec.whatwg.org/#the-select-element'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'HTML: Textara Element',
+            url:   'https://html.spec.whatwg.org/#the-textarea-element'
+          }
+        ]
+    }
 };
 
 

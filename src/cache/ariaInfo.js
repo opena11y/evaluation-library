@@ -2,7 +2,8 @@
 
 /* Imports */
 import DebugLogging        from '../debug.js';
-import {hasCheckedState}   from '../utils.js'
+import {hasCheckedState}   from '../utils.js';
+import {hasSelectedState}  from '../utils.js';
 
 import {propertyDataTypes} from '../../aria-info/gen-aria-property-data-types.js';
 import {designPatterns}    from '../../aria-info/gen-aria-role-design-patterns.js';
@@ -58,14 +59,17 @@ class RefInfo {
 /**
  * @class AriaInfo
  *
- * @desc Aria information for a dom node
+ * @desc Aria information for a element node
  *
- * @param  {String}  role  - ARIA role for the element
- * @param  {Object}  node  - dom element node
+ * @param  {Object}   doc          - Document object reference
+ * @param  {Boolean}  hasRole      - True if node has explicit role definition
+ * @param  {String}   role         - ARIA role for the element
+ * @param  {String}   defaultRole  - Default role of element if no role is defined
+ * @param  {Object}   node         - dom element node
  */
 
 export default class AriaInfo {
-  constructor (doc, role, defaultRole, node) {
+  constructor (doc, hasRole, role, defaultRole, node) {
     const tagName = node.tagName.toLowerCase();
     const level = parseInt(node.getAttribute('aria-level'));
 
@@ -161,9 +165,7 @@ export default class AriaInfo {
         this.valueMax = 100;
         this.validValueMax = true;
       }
-
       this.valueText = node.hasAttribute('aria-valuetext') ? node.getAttribute('aria-valuetext') : '';
-
     }
 
     // for live regions
@@ -201,9 +203,14 @@ export default class AriaInfo {
 
     this.invalidAttrValues  = this.checkForInvalidAttributeValue(this.validAttrs);
     this.invalidRefs        = this.checkForInvalidReferences(doc, this.validAttrs);
+
     this.unsupportedAttrs   = this.checkForUnsupportedAttribute(this.validAttrs, designPattern);
     this.deprecatedAttrs    = this.checkForDeprecatedAttribute(this.validAttrs, designPattern);
-    this.requiredAttrs      = this.checkForRequiredAttributes(this.validAttrs, designPattern, node);
+    if (hasRole) {
+      this.requiredAttrs      = this.checkForRequiredAttributes(this.validAttrs, designPattern, node);
+    } else {
+      this.requiredAttrs      = [];
+    }
 
     switch (tagName) {
       case 'h1':
@@ -388,7 +395,7 @@ export default class AriaInfo {
   }
 
   // checks for required aria attributes for a specific role
-  // In some cased native HTML semanitics like "checked' property of
+  // In some cased native HTML semantics like "checked' property of
   // an input element can be used to satisfy the requirement
   checkForRequiredAttributes(attrs, designPattern, node) {
     let requiredAttrs = [];
@@ -399,7 +406,8 @@ export default class AriaInfo {
         name: reqAttr,
         hasDefaultValue: (defaultValue !== '') && (defaultValue !== 'undefined'),
         defaultValue: defaultValue,
-        isDefined: (reqAttr === 'aria-checked') && hasCheckedState(node),
+        isDefined: ((reqAttr === 'aria-checked')  && hasCheckedState(node)) ||
+                   ((reqAttr === 'aria-selected') && hasSelectedState(node)),
         value: ''
       };
 
