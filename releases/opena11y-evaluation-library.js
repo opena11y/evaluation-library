@@ -28011,7 +28011,6 @@ const widgetRules = [
         }
         if (de.visibility.isVisibleToAT) {
           const result = checkForRequiredParent(de, rp);
-          debug$c.log(`[de]: ${de.elemName} ${rp} ${result}`);
           if (result) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, result]);
           }

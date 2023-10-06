@@ -111,7 +111,7 @@
       </div>
 
       <fieldset id="fieldset-3" data-label="Legend 3: Radio Group">
-        <legend>Legend 3: Radio Group</legend>
+        <legend >Legend 3: Radio Group</legend>
         <div class="label">
           <input id="control-33"
                 name="test"
@@ -200,7 +200,10 @@
           </a>
         </li>
         <li>
-          <a hrer="#" id="link-7" data-label="Test 5"><img src="../images/black.png" alt=" Test 5 "></a></li>
+          <a href="#" id="link-7" data-label="Test 5">
+            <img src="../images/black.png" alt=" Test 5 ">
+          </a>
+        </li>
         </li>
       </ul>
 
@@ -222,9 +225,9 @@
           <select id="control-42"
                   aria-label="aria-label 1 textbox label, overrides label encapsulation"
                   data-label="aria-label 1 textbox label, overrides label encapsulation">
-            <option>Red</option>
-            <option>Yellow</option>
-            <option>Green</option>
+            <option id="option-1" data-label="Red">Red</option>
+            <option id="option-2" data-label="Yellow">Yellow</option>
+            <option id="option-3" data-label="Green">Green</option>
           </select>
         </label>
       </div>
@@ -276,16 +279,16 @@
           <select id="control-52"
                   aria-labelledby="select-52-ref"
                   data-label="aria-labelledy B select label, overrides label encapsulation">
-            <option>Red</option>
-            <option>Yellow</option>
-            <option>Green</option>
+            <option id="option-52-1" data-label="Red">Red</option>
+            <option id="option-52-2" data-label="Yellow">Yellow</option>
+            <option id="option-52-3" data-label="Green">Green</option>
           </select>
         </label>
         <div id="select-52-ref">  aria-labelledy B select label,  overrides label  encapsulation  </div>
       </div>
 
       <fieldset id="fieldset-5" data-label="Legend 5: Radio Group">
-        <legend aria-labellby="legend-c">Legend 5: Radio Group</legend>
+        <legend aria-labelledby="legend-c">Legend 5: Radio Group</legend>
         <div id="legend-c">aria-labelledy C legend, overrides legend text content</div>
         <label>
           <input id="control-53" name="test" type="radio" aria-labelledby="radio-53-ref" data-label="aria-labelledy D radio label, overrides label encapsulation">
