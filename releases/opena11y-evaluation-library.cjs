@@ -10036,6 +10036,7 @@ function nameFromNativeSemantics (doc, element) {
     case 'figcaption':
     case 'label':
     case 'li':
+    case 'option':
     case 'td':
     case 'th':
       accName = nameFromContents(element);
@@ -10507,7 +10508,7 @@ function checkForInteractiveElement (node) {
   const tagName     = node.tagName.toLowerCase();
   const hasHref     = node.hasAttribute('href');
   const hasControls = node.hasAttribute('controls');
-  const type        = node.hasAttribute('type') ? node.getAttribute('type') : '';
+  const type        = node.hasAttribute('type') ? node.getAttribute('type') : 'text';
 
   switch (tagName ) {
     case 'a':
@@ -28006,9 +28007,13 @@ const widgetRules = [
 
     dom_cache.allDomElements.forEach( de => {
       if (de.ariaInfo.hasRequiredParents) {
-        const rp = de.ariaInfo.requiredParents;
+        const rp = [...(de.ariaInfo.requiredParents)];
+        if (de.tagName === 'option') {
+          rp.push('combobox');
+        }
         if (de.visibility.isVisibleToAT) {
           const result = checkForRequiredParent(de, rp);
+          debug$c.log(`[de]: ${de.elemName} ${rp} ${result}`);
           if (result) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, result]);
           }

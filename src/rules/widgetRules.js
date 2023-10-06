@@ -546,9 +546,13 @@ export const widgetRules = [
 
     dom_cache.allDomElements.forEach( de => {
       if (de.ariaInfo.hasRequiredParents) {
-        const rp = de.ariaInfo.requiredParents;
+        const rp = [...(de.ariaInfo.requiredParents)];
+        if (de.tagName === 'option') {
+          rp.push('combobox');
+        }
         if (de.visibility.isVisibleToAT) {
           const result = checkForRequiredParent(de, rp);
+          debug.log(`[de]: ${de.elemName} ${rp} ${result}`);
           if (result) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, result]);
           }

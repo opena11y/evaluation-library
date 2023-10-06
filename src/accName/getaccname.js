@@ -281,6 +281,7 @@ function nameFromNativeSemantics (doc, element) {
     case 'figcaption':
     case 'label':
     case 'li':
+    case 'option':
     case 'td':
     case 'th':
       accName = nameFromContents(element);

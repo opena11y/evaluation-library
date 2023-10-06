@@ -389,7 +389,7 @@ function checkForInteractiveElement (node) {
   const tagName     = node.tagName.toLowerCase();
   const hasHref     = node.hasAttribute('href');
   const hasControls = node.hasAttribute('controls');
-  const type        = node.hasAttribute('type') ? node.getAttribute('type') : '';
+  const type        = node.hasAttribute('type') ? node.getAttribute('type') : 'text';
 
   switch (tagName ) {
     case 'a':
