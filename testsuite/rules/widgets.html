@@ -16,33 +16,40 @@
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', (event) => {
 
-        executeTest('WIDGET_1: Button, radio, and checkbox widgets must have accessible name', 'ID_IFRAME_1A',  'WIDGET_1');
-        executeTest('WIDGET_1: Alert, alertdialog, dialog, and status must have accessible name', 'ID_IFRAME_1B',  'WIDGET_1');
-        executeTest('WIDGET_1: Menu, tree, and grid must have accessible name', 'ID_IFRAME_1C',  'WIDGET_1');
-        executeTest('WIDGET_1: Tab, tabpanel, and tablist must have accessible name', 'ID_IFRAME_1D',  'WIDGET_1');
-        executeTest('WIDGET_1: Link, log, marquee, and slider must have accessible name', 'ID_IFRAME_1E',  'WIDGET_1');
-        executeTest('WIDGET_1: Progressbar, scrollbar, and spinbutton must have accessible name', 'ID_IFRAME_1F',  'WIDGET_1');
-        executeTest('WIDGET_2: onClick must have role', 'ID_IFRAME_2A',  'WIDGET_2');
-        executeTest('WIDGET_3: Role must be valid', 'ID_IFRAME_3A',  'WIDGET_3');
-        executeTest('WIDGET_4: ARIA values named token values must be valid', 'ID_IFRAME_4A',  'WIDGET_4');
-        executeTest('WIDGET_4: ARIA values numeric values must be valid', 'ID_IFRAME_4B',  'WIDGET_4');
-        executeTest('WIDGET_5: ARIA attributes must be valid', 'ID_IFRAME_5',  'WIDGET_5');
-        executeTest('WIDGET_6: Widgets must have required properties', 'ID_IFRAME_6',  'WIDGET_6');
+        executeTest('WIDGET 1A: Button, radio, and checkbox widgets must have accessible name', 'ID_IFRAME_1A',  'WIDGET_1');
+        executeTest('WIDGET 1B: Alert, alertdialog, dialog, and status must have accessible name', 'ID_IFRAME_1B',  'WIDGET_1');
+        executeTest('WIDGET 1C: Menu, tree, and grid must have accessible name', 'ID_IFRAME_1C',  'WIDGET_1');
+        executeTest('WIDGET 1D: Tab, tabpanel, and tablist must have accessible name', 'ID_IFRAME_1D',  'WIDGET_1');
+        executeTest('WIDGET 1E: Link, log, marquee, and slider must have accessible name', 'ID_IFRAME_1E',  'WIDGET_1');
+        executeTest('WIDGET 1F: Progressbar, scrollbar, and spinbutton must have accessible name', 'ID_IFRAME_1F',  'WIDGET_1');
+
+        executeTest('WIDGET 2: onClick must have role', 'ID_IFRAME_2A',  'WIDGET_2');
+        executeTest('WIDGET 3: Role must be valid', 'ID_IFRAME_3A',  'WIDGET_3');
+
+        executeTest('WIDGET 4A: ARIA values named token values must be valid', 'ID_IFRAME_4A',  'WIDGET_4');
+        executeTest('WIDGET 4B: ARIA values numeric values must be valid', 'ID_IFRAME_4B',  'WIDGET_4');
+
+        executeTest('WIDGET 5: ARIA attributes must be valid', 'ID_IFRAME_5',  'WIDGET_5');
+        executeTest('WIDGET 6: Widgets must have required properties', 'ID_IFRAME_6',  'WIDGET_6');
         executeTest('WIDGET_7: Widgets must have required owned elements', 'ID_IFRAME_7',  'WIDGET_7');
-        executeTest('WIDGET_8: Widgets must have required parent roles', 'ID_IFRAME_8',  'WIDGET_8');
-        executeTest('WIDGET_9: Widgets cannot be owned by more than one widget', 'ID_IFRAME_9',  'WIDGET_9');
+        executeTest('WIDGET 8: Widgets must have required parent roles', 'ID_IFRAME_8',  'WIDGET_8');
+        executeTest('WIDGET 9: Widgets cannot be owned by more than one widget', 'ID_IFRAME_9',  'WIDGET_9');
         executeTest('WIDGET_10: Range widgets with aria-valuenow must be in range of aria-valuemin and aria-valuemax', 'ID_IFRAME_10',  'WIDGET_10');
         executeTest('WIDGET_11: Verify range widgets using aria-valuetext', 'ID_IFRAME_11',  'WIDGET_11');
-        executeTest('WIDGET_12: Button, radio, and checkbox widgets labels are descriptive', 'ID_IFRAME_12A',  'WIDGET_12');
-        executeTest('WIDGET_12: Menu, tree, and grid labels are descriptive', 'ID_IFRAME_12B',  'WIDGET_12');
-        executeTest('WIDGET_12: Tab, tabpanel, and tablist labels are descriptive', 'ID_IFRAME_12C',  'WIDGET_12');
-        executeTest('WIDGET_12: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12D',  'WIDGET_12');
-        executeTest('WIDGET_12: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12E',  'WIDGET_12');
-        executeTest('WIDGET_12: Progressbar, scrollbar, and spinbutton labels are descriptive', 'ID_IFRAME_12F',  'WIDGET_12');
+
+        executeTest('WIDGET_12A: Button, radio, and checkbox widgets labels are descriptive', 'ID_IFRAME_12A',  'WIDGET_12');
+        executeTest('WIDGET_12B: Menu, tree, and grid labels are descriptive', 'ID_IFRAME_12B',  'WIDGET_12');
+        executeTest('WIDGET_12C: Tab, tabpanel, and tablist labels are descriptive', 'ID_IFRAME_12C',  'WIDGET_12');
+        executeTest('WIDGET_12D: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12D',  'WIDGET_12');
+        executeTest('WIDGET_12E: Link, log, marquee, and slider labels are descriptive', 'ID_IFRAME_12E',  'WIDGET_12');
+        executeTest('WIDGET_12F: Progressbar, scrollbar, and spinbutton labels are descriptive', 'ID_IFRAME_12F',  'WIDGET_12');
+
         executeTest('WIDGET_13: Prohibit accessible name', 'ID_IFRAME_13',  'WIDGET_13');
         executeTest('WIDGET_14: Verify live region', 'ID_IFRAME_14',  'WIDGET_14');
-        executeTest('WIDGET_15: Roles with deprecated ARIA attributes',                  'ID_IFRAME_15A',  'WIDGET_15');
-        executeTest('WIDGET_15: Roles with deprecated ARIA attributes (implicit roles)', 'ID_IFRAME_15B',  'WIDGET_15');
+
+        executeTest('WIDGET_15A: Roles with deprecated ARIA attributes',                  'ID_IFRAME_15A',  'WIDGET_15');
+        executeTest('WIDGET_15B: Roles with deprecated ARIA attributes (implicit roles)', 'ID_IFRAME_15B',  'WIDGET_15');
+
         executeTest('WIDGET_16: Web Components', 'ID_IFRAME_16',  'WIDGET_16');
 
        });
