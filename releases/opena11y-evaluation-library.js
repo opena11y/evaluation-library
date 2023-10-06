@@ -147,7 +147,7 @@ class DebugLogging {
 /* Constants */
 const debug$V = new DebugLogging('constants', false);
 
-const VERSION = '2.0.beta1';
+const VERSION = '2.0.beta2';
 
 /**
  * @constant RULESET
