@@ -4,7 +4,7 @@
 
 | WCAG Version  | SC      | Description | 
 | ------------- | ------- | ----------- | 
-| 2.1          | 1.4.5     | Images of text | 
+| 2.0          | 1.4.5     | Images of text |
 | 2.1          | 1.4.12    | Text Spacing | 
 | 2.1          | 1.4.13    | Content on Hover or Focus |  
 | 2.1          | 2.1.4     | Character Key Shortcuts | 
@@ -14,6 +14,7 @@
 | 2.1          | 2.5.2     | Pointer Cancellation | 
 | 2.1          | 2.5.3     | Label in Name |  
 | 2.1          | 2.5.4     | Motion Actuation | 
+| 2.1          | 2.5.5 (AAA) | Target size |
 | 2.2          | 2.5.7     | Dragging Movements |
 | 2.2          | 2.5.8     | Target Size (Minimum) |
 | 2.2          | 3.2.6     | Consistent Help |
