@@ -2,13 +2,6 @@
 
 ## Rule Development
 
-| Command             | Description |
-| ------------------- | ----------- |
-| npm run eslint      | Uses `eslint` to validate Javascript files in the `src` directory |
-| npm run build       | runs `eslint` and then gulp to build the execution file  |
-
-
-
 | WCAG Version | SC        | Description | ID | Result | Status |
 | :----------- | :-------: | :----------- |  |  |  |
 | 2.1          | 1.4.5     | Images of text |  |  |  |
