@@ -3,7 +3,7 @@
 ## Rule Development
 
 | WCAG Version | SC        | Description | ID | Result | Status |
-| ------------ | --------- | ------------ |  |  |  |
+| :----------- | :-------: | :----------- |  |  |  |
 | 2.1          | 1.4.5     | Images of text |  |  |  |
 | 2.1          | 1.4.12    | Text Spacing |  |  |  |
 | 2.1          | 1.4.13    | Content on Hover or Focus |  |  |  |
