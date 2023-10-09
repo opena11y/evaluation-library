@@ -2,6 +2,10 @@
 
 ## Rule Development
 
+| A | B |
+| -- | -- |
+| C | D |
+
 | WCAG Version | SC        | Description | ID | Result | Status |
 | :----------- | :-------: | :----------- |  |  |  |
 | 2.1          | 1.4.5     | Images of text |  |  |  |
