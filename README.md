@@ -3,6 +3,8 @@ Javascript library for evaluating WCAG and ARIA conformance.  The library is des
 
 [Evaluation Library Documentation](https://opena11y.github.io/evaluation-library/)
 
+[Current To DO List for Version 2.0](TODOLIST.md)
+
 [release-notes](release-notes.md)
 
 # NPM development commands
