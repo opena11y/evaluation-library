@@ -14,7 +14,7 @@
 | 2.1          | 2.5.2    | A     | Pointer Cancellation |
 | 2.1          | 2.5.3    | A     | Label in Name |
 | 2.1          | 2.5.4    | A     | Motion Actuation |
-| 2.1          | 2.5.5    | AAA   | Target size |
+| 2.1          | 2.5.5    | AAA   | Target size (Enhanced) |
 | 2.2          | 2.5.7    | AA    | Dragging Movements |
 | 2.2          | 2.5.8    | AA    | Target Size (Minimum) |
 | 2.2          | 3.2.6    | A     | Consistent Help |
