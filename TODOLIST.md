@@ -14,7 +14,7 @@
 | 2.1          | 2.5.2    | A     | Pointer Cancellation |  MC | Page |
 | 2.1          | 2.5.3    | A     | Label in Name | MC | Element |
 | 2.1          | 2.5.4    | A     | Motion Actuation | MC | Page |
-| 2.1          | 2.5.5    | AAA   | Target size (Enhanced) | Pass or Fail : Element |
+| 2.1          | 2.5.5    | AAA   | Target size (Enhanced) | Pass or Fail | Element |
 | 2.2          | 2.5.7    | AA    | Dragging Movements | MC | Page |
 | 2.2          | 2.5.8    | AA    | Target Size (Minimum) | Pass or Fail | Element |
 | 2.2          | 3.2.6    | A     | Consistent Help | MC | Page |
