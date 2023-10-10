@@ -16,7 +16,7 @@
 | 2.1          | 2.5.4    | A     | Motion Actuation | MC | Page |
 | 2.1          | 2.5.5    | AAA   | Target size (Enhanced) | P/F : Element |
 | 2.2          | 2.5.7    | AA    | Dragging Movements | MC | Page |
-| 2.2          | 2.5.8    | AA    | Target Size (Minimum) | P/F | Element |
+| 2.2          | 2.5.8    | AA    | Target Size (Minimum) | Pass or Fail | Element |
 | 2.2          | 3.2.6    | A     | Consistent Help | MC | Page |
 | 2.2          | 3.3.7    | A     | Redundant Entry | MC/P | Page |
 | 2.2          | 3.3.8    | AA    | Accessible Authentication (Minimum) | MC | Page |
