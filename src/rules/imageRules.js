@@ -276,6 +276,35 @@ export const imageRules = [
       }
     });
   } // end validation function
-}
+},
+
+/**
+ * @object IMAGE_8
+ *
+ * @desc Images of text
+ */
+
+{ rule_id             : 'IMAGE_8',
+  last_updated        : '2023-10-17',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  rule_required       : true,
+  wcag_primary_id     : '1.4.5',
+  wcag_related_ids    : [],
+  target_resources    : ['img', 'area', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.imageInfo.allImageElements.forEach(ie => {
+      const de = ie.domElement;
+      if (de.accName.name.length) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.accName.source]);
+          }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });
+  } // end validation function
+},
 ];
 

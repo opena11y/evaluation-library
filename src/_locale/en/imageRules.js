@@ -467,6 +467,59 @@ export const imageRules = {
         url:   'https://www.w3.org/Math/wiki/Tools'
       }
     ]
+  },
+  IMAGE_8: {
+    ID:         'Image 8',
+    DEFINITION: 'When an image is used to represent stylized text, replace the image with text content and use CSS to style text.',
+    SUMMARY:    'Use CSS to stylize text',
+    TARGET_RESOURCES_DESC: '@img@ and [role="img"]',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S:   'If the image is used to stylize text, replace the image with text content styled with CSS.',
+      MANUAL_CHECK_P:   'If any of the %N_MC images are used to stylize text, replace the image with text content styled with CSS.',
+      HIDDEN_S: 'One image element with an accessible name was not evaluated.',
+      HIDDEN_P: '%N_H image elements with accessible names that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@, @area@ or @[role="img"]@ elements found on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1: 'If the image is used to represent stylized text, replace the image with text and use CSS to style text.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'To enable people with visual impairments who require a particular visual presentation of text to be able to adjust the text presentation as needed.',
+      'Adjustments include the use of a particular font size, foreground and background color, font family, line spacing or alignment.'
+    ],
+    TECHNIQUES: [
+      'Replace the image of text with text content that is styled using Cascading Style Sheets (CSS).'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      {type:  REFERENCES.SPECIFICATION,
+        title: 'W3C Understanding Images of Text',
+        url:   'https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html'
+      },
+      {type:  REFERENCES.SPECIFICATION,
+        title: 'W3C CSS Snapshot',
+        url:   'https://www.w3.org/TR/css/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'MDN Cascading Style Sheets',
+        url:   'https://developer.mozilla.org/en-US/docs/Web/CSS'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: '22: Using CSS to control visual presentation of text',
+        url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C22'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'C30: Using CSS to replace text with images of text and providing user interface controls to switch',
+        url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C30'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'G140: Separating information and structure from presentation to enable different presentations',
+        url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G140'
+      }
+    ]
   }
 }
+
 

@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;embed&lt;/code&gt; for video must have audio description | OpenA11y Evaluation Library 2.0</title>
+        <title>Use CSS to stylize text | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,27 +49,27 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>embed</code> for video must have audio description</li>
+          <li class="breadcrumb-item active">Use CSS to stylize text</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>embed</code> for video must have audio description</h1>
+            <h1 id="h1-title">Rule: Use CSS to stylize text</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Video 9</td>
+  <td>Image 8</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td><code>embed</code> elements used for prerecorded video with synchronized audio (i.e. a movie, archived lecture) must have audio description of the video content.</td>
+  <td>When an image is used to represent stylized text, replace the image with text content and use CSS to style text.</td>
 </tr>
 
                   
@@ -78,11 +78,9 @@
   <td>
     <ul>
       
-      <li>Text and audio descriptions provide a means for people who cannot see the video to understand the video content.</li>
+      <li>To enable people with visual impairments who require a particular visual presentation of text to be able to adjust the text presentation as needed.</li>
       
-      <li>Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.</li>
-      
-      <li>This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.</li>
+      <li>Adjustments include the use of a particular font size, foreground and background color, font family, line spacing or alignment.</li>
       
     </ul>
   </td>
@@ -99,26 +97,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG21/#audio-description-or-media-alternative-prerecorded" target="_spec">
-        Success Criterion 1.2.3 Audio Description or Media Alternative (Prerecorded)
+      <a href="https://www.w3.org/TR/WCAG21/#images-of-text" target="_spec">
+        Success Criterion 1.4.5 Images of Text
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#audio-only-and-video-only-prerecorded" target="_spec">
-          Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG21/#audio-description-prerecorded" target="_spec">
-          Success Criterion 1.2.5 Audio Description (Prerecorded)
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -127,7 +113,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Audio/Video</td>
+  <td>Images</td>
 </tr>
 
                   
@@ -142,11 +128,7 @@
   <td>
     <ul>
       
-      <li>Use the <code>video</code> element instead of the <code>embed</code> element for video only content, since the <code>video</code> element provides better support for audio description tracks.</li>
-      
-      <li>Include an audio track in the video that describes the video content.</li>
-      
-      <li>Use <code>aria-describedby</code> attribute to point to a text description of the video only content.</li>
+      <li>Replace the image of text with text content that is styled using Cascading Style Sheets (CSS).</li>
       
     </ul>
   </td>
@@ -158,15 +140,17 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html">W3C Understanding Images of Text</a></li>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element">HMTL: The embed element</a></li>
+      <li><a href="https://www.w3.org/TR/css/">W3C CSS Snapshot</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria/#aria-describedby">Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN Cascading Style Sheets</a></li>
       
-      <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/css/C22">22: Using CSS to control visual presentation of text</a></li>
       
-      <li><a href="https://webaim.org/techniques/captions/">WebAIM: Captions, Transcripts, and Audio Descriptions</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/css/C30">C30: Using CSS to replace text with images of text and providing user interface controls to switch</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G140">G140: Separating information and structure from presentation to enable different presentations</a></li>
       
     </ul>
   </td>

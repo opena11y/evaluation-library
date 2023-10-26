@@ -13054,6 +13054,10 @@ const audioRules$1 = {
       'If there is a text transcript make sure the transcript accurately represents the audio content.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HMTL: The audio element',
         url:   'https://html.spec.whatwg.org/multipage/media.html#the-audio-element'
@@ -13117,6 +13121,10 @@ const audioRules$1 = {
       'In some cases "open" captions might be used, this means the captions are always "on" as part of the video.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HMTL: The object element',
         url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -13172,6 +13180,10 @@ const audioRules$1 = {
       'In some cases "open" captions might be used, this means the captions are always "on" as part of the video.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HMTL: The embed element',
         url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -13211,6 +13223,10 @@ const audioRules$1 = {
     MANUAL_CHECKS:  [ 'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.'
                     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'WCAG 2.1 Success Criterion 1.4.2 Audio Control',
         url:   'https://www.w3.org/TR/WCAG21/#audio-control'
@@ -15516,6 +15532,58 @@ const imageRules$1 = {
       {type:  REFERENCES.REFERENCE,
         title: 'W3C Math Wiki: MathML Tools',
         url:   'https://www.w3.org/Math/wiki/Tools'
+      }
+    ]
+  },
+  IMAGE_8: {
+    ID:         'Image 8',
+    DEFINITION: 'When an image is used to represent stylized text, replace the image with text content and use CSS to style text.',
+    SUMMARY:    'Use CSS to stylize text',
+    TARGET_RESOURCES_DESC: '@img@ and [role="img"]',
+    RULE_RESULT_MESSAGES: {
+      MANUAL_CHECK_S:   'If the image is used to stylize text, replace the image with text content styled with CSS.',
+      MANUAL_CHECK_P:   'If any of the %N_MC images is used to stylize text, replace the image with text content styled with CSS.',
+      HIDDEN_S: 'One image element with an accessible name was not evaluated.',
+      HIDDEN_P: '%N_H image elements with accessible names that are hidden were not evaluated.',
+      NOT_APPLICABLE: 'No @img@, @area@ or @[role="img"]@ elements found on this page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_MC_1: 'If the image is used to represent stylized text, replace the image with text and use CSS to style text.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'To enable people with visual impairments who require a particular visual presentation of text to be able to adjust the text presentation as needed.',
+      'Adjustments include the use of a particular font size, foreground and background color, font family, line spacing or alignment.'
+    ],
+    TECHNIQUES: [
+      'Replace the image of text with text content that is styled using Cascading Style Sheets (CSS).'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      {type:  REFERENCES.SPECIFICATION,
+        title: 'W3C Understanding Images of Text',
+        url:   'https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html'
+      },
+      {type:  REFERENCES.SPECIFICATION,
+        title: 'W3C CSS Snapshot',
+        url:   'https://www.w3.org/TR/css/'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'MDN Cascading Style Sheets',
+        url:   'https://developer.mozilla.org/en-US/docs/Web/CSS'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: '22: Using CSS to control visual presentation of text',
+        url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C22'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'C30: Using CSS to replace text with images of text and providing user interface controls to switch',
+        url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C30'
+      },
+      {type:  REFERENCES.REFERENCE,
+        title: 'G140: Separating information and structure from presentation to enable different presentations',
+        url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G140'
       }
     ]
   }
@@ -18989,6 +19057,10 @@ const videoRules$1 = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
@@ -19045,6 +19117,10 @@ const videoRules$1 = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The object element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -19097,6 +19173,10 @@ const videoRules$1 = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The embed element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -19151,6 +19231,10 @@ const videoRules$1 = {
         'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
@@ -19202,6 +19286,10 @@ const videoRules$1 = {
         'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL 5: The object element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -19249,6 +19337,10 @@ const videoRules$1 = {
         'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The embed element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -19298,6 +19390,10 @@ const videoRules$1 = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
@@ -19353,6 +19449,10 @@ const videoRules$1 = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL 5: The object element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -19404,6 +19504,10 @@ const videoRules$1 = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The embed element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -24415,7 +24519,36 @@ const imageRules = [
       }
     });
   } // end validation function
-}
+},
+
+/**
+ * @object IMAGE_8
+ *
+ * @desc Images of text
+ */
+
+{ rule_id             : 'IMAGE_8',
+  last_updated        : '2023-10-17',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  rule_required       : true,
+  wcag_primary_id     : '1.4.5',
+  wcag_related_ids    : [],
+  target_resources    : ['img', 'area', '[role="img"]'],
+  validate            : function (dom_cache, rule_result) {
+    dom_cache.imageInfo.allImageElements.forEach(ie => {
+      const de = ie.domElement;
+      if (de.accName.name.length) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.accName.source]);
+          }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      }
+    });
+  } // end validation function
+},
 ];
 
 /* keyboardRules.js */
@@ -24481,12 +24614,12 @@ const keyboardRules = [
    */
 
   { rule_id             : 'KEYBOARD_2',
-    last_updated        : '2023-08-17',
+    last_updated        : '2023-10-08',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
-    wcag_primary_id     : '2.1.1',
-    wcag_related_ids    : ['2.1.2', '2.4.3',  '2.4.7', '3.2.1'],
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
     target_resources    : ['links', 'controls', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
