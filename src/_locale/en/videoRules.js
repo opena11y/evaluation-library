@@ -40,6 +40,10 @@ export const videoRules = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
@@ -96,6 +100,10 @@ export const videoRules = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The object element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -148,6 +156,10 @@ export const videoRules = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The embed element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -202,6 +214,10 @@ export const videoRules = {
         'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
@@ -253,6 +269,10 @@ export const videoRules = {
         'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL 5: The object element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -300,6 +320,10 @@ export const videoRules = {
         'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The embed element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -349,6 +373,10 @@ export const videoRules = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
@@ -404,6 +432,10 @@ export const videoRules = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL 5: The object element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -455,6 +487,10 @@ export const videoRules = {
         'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The embed element',
           url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'

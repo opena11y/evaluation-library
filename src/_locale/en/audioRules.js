@@ -44,6 +44,10 @@ export const audioRules = {
       'If there is a text transcript make sure the transcript accurately represents the audio content.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HMTL: The audio element',
         url:   'https://html.spec.whatwg.org/multipage/media.html#the-audio-element'
@@ -107,6 +111,10 @@ export const audioRules = {
       'In some cases "open" captions might be used, this means the captions are always "on" as part of the video.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HMTL: The object element',
         url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element'
@@ -162,6 +170,10 @@ export const audioRules = {
       'In some cases "open" captions might be used, this means the captions are always "on" as part of the video.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HMTL: The embed element',
         url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element'
@@ -201,6 +213,10 @@ export const audioRules = {
     MANUAL_CHECKS:  [ 'Verify that there is no media content that plays automatically and includes audio content that lasts longer than 3 seconds.  If the audio content lasts longer than 3 seconds, verify the user can pause, stop or mute the audio.'
                     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.TECHNIQUE,
+        title: 'W3C: Making Audio and Video Media Accessible',
+        url:   'https://www.w3.org/WAI/media/av/'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'WCAG 2.1 Success Criterion 1.4.2 Audio Control',
         url:   'https://www.w3.org/TR/WCAG21/#audio-control'

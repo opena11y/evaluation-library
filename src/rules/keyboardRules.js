@@ -69,12 +69,12 @@ export const keyboardRules = [
    */
 
   { rule_id             : 'KEYBOARD_2',
-    last_updated        : '2023-08-17',
+    last_updated        : '2023-10-08',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
-    wcag_primary_id     : '2.1.1',
-    wcag_related_ids    : ['2.1.2', '2.4.3',  '2.4.7', '3.2.1'],
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
     target_resources    : ['links', 'controls', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
