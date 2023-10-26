@@ -18,6 +18,6 @@
 | 2.2          | 2.5.7    | AA    | Dragging Movements | MC | Page | not started |
 | 2.2          | 2.5.8    | AA    | Target Size (Minimum) | Pass or Fail | Element | not started |
 | 2.2          | 3.2.6    | A     | Consistent Help | MC | Page | not started |
-| 2.2          | 3.3.7    | A     | Redundant Entry | MC/P | Page | not started |
+| 2.2          | 3.3.7    | A     | Redundant Entry | MC or Pass | Page | not started |
 | 2.2          | 3.3.8    | AA    | Accessible Authentication (Minimum) | MC | Page | not started |
 | 2.1          | 4.1.3    | AA    | Status Messages | MC | Page |  not started |
