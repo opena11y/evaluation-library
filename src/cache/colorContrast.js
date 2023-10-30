@@ -5,6 +5,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('colorContrast', false);
+debug.flag = false;
 const defaultFontSize = 16; // In pixels (px)
 const fontWeightBold = 300; 
 
@@ -84,6 +85,8 @@ export default class ColorContrast {
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
 
     if (debug.flag) {
+      debug.log(`[                      color]: ${this.color}`);
+      debug.log(`[           background color]: ${this.backgroundColor}`);
       debug.log(`[                    opacity]: ${this.opacity}`);
       debug.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
       debug.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);

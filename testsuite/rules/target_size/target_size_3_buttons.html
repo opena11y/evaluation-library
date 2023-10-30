@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Target Size 3: Target Size of Buttons (minimum)</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <style>
+      button {
+        display: block;
+        margin: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Target Size 3: Target Size of Buttons (minimum)</h1>
+
+      <h2><code>button</code> Element</h2>
+
+      <button  class="TARGET_SIZE_4_PASS" style="font-size: 200%">Button 1</button>
+
+      <button class="TARGET_SIZE_4_FAIL" style="width: 23px">Button 2F</button>
+      <button class="TARGET_SIZE_4_FAIL" style="height: 23px">Button 3F</button>
+
+      <button class="TARGET_SIZE_4_PASS" style="width: 5em; height: 5em">Button 4P</button>
+      <button class="TARGET_SIZE_4_FAIL" style="width: 1em; height: 1em">Button 5P</button>
+
+      <h2><code>input[type=button]</code> Element</h2>
+
+      <input type="button"  class="TARGET_SIZE_4_PASS" value="Button 6P"/>
+
+      <input type="button"  class="TARGET_SIZE_4_FAIL" value="Button 7F" style="width: 23px"/>
+
+      <input type="button"  class="TARGET_SIZE_4_FAIL" value="Button 8F" style="height: 23px"/>
+
+
+
+  </body>
+</html>

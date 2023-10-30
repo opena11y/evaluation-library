@@ -1,0 +1,44 @@
+<ul>
+                  
+                  <li><a href="https://developer.apple.com/ios/human-interface-guidelines/visual-design/layout/">Apple touch target size recommendations</a></li>
+                  
+                  <li><a href="https://docs.microsoft.com/en-us/windows/uwp/design/input/guidelines-for-targeting">Windows UWP Guidelines for touch targets</a></li>
+                  
+                  <li><a href="https://material.io/design/layout/spacing-methods.html#touch-targets">Google Material Design Touch targets</a></li>
+                  
+                  <li><a href="https://web.dev/accessible-tap-targets/"></a></li>
+                  
+                  <li><a href=""></a></li>
+                  
+                  <li><a href=""></a></li>
+                  
+                  <li><a href=""></a></li>
+                  </ul>
+
+
+
+        { type:  REFERENCES.REFERENCE,
+          title: 'Windows UWP Guidelines for touch targets',
+          url:   'https://docs.microsoft.com/en-us/windows/uwp/design/input/guidelines-for-targeting'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Google Material Design Touch targets',
+          url:   'https://material.io/design/layout/spacing-methods.html#touch-targets'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'web.dev Accessible tap targets',
+          url:   '"https://web.dev/accessible-tap-targets/'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Human Fingertips to Investigate the Mechanics of Tactile Sense (PDF)',
+          url:   'http://touchlab.mit.edu/publications/2003_009.pdf'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'One-Handed Thumb Use on Small Touchscreen Devices',
+          url:   'http://www.cs.umd.edu/hcil/trs/2006-11/2006-11.htm'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Microsoft Guidelines for Building Touch Friendly Sites',
+          url:   'https://learn.microsoft.com/en-us/windows/apps/design/input/guidelines-for-targeting'
+        }
+

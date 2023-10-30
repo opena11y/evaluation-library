@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Target Size 1: Target Size of Links (minimum)</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Target Size 1: Target Size of Links (minimum)</h1>
+
+      <ul>
+        <li><a href="#small" style="font-size: 26px">AP</a></li>
+        <li><a href="#small" style="font-size: 24px">BP</a></li>
+        <li><a href="#small" style="font-size: 22px">CP</a></li>
+        <li><a href="#small" style="font-size: 20px">DP</a></li>
+        <li><a href="#small" style="left: 21px; font-size: 20px">EP</a></li>
+        <li><a href="#small" style="right: 21px;font-size: 20px">FP</a></li>
+        <li><a href="#small" style="top: 21px; font-size: 20px">GP</a></li>
+        <li><a href="#small" style="bottom: 21; font-size: 20px">HP</a></li>
+        <li><a href="#small" class="TARGET_SIZE_1_FAIL" style="width: 23px">AF</a></li>
+        <li><a href="#small" class="TARGET_SIZE_1_FAIL" style="height: 22px">BF</a></li>
+        <li><a href="#small" class="TARGET_SIZE_1_FAIL" style="left: 26px; right: 26px">CF</a></li>
+        <li><a href="#small" class="TARGET_SIZE_1_FAIL" style="top: 26px; bottom: 26px">DF</a></li>
+      </ul>        
+
+      <p><a href="#small" style="width: 23px">link 1P</a></p>
+
+      <p>
+        paragraph content 21
+        <a href="#small" style="height: 23px">link 2P</a>
+        paragraph content 22
+        <a href="#small" style="left: 26px; right: 26pxleft: 26px; right: 26px">link 3P</a>
+        paragraph content 23
+        <a href="#small" style="left: 26px; right: 26px">link 4P</a>
+        paragraph content 24
+    </p>
+
+    <div>
+        <a class="TARGET_SIZE_1_FAIL" href="#small" style="height: 23px">link 5F</a>
+        <a class="TARGET_SIZE_1_FAIL" href="#small" style="left: 26px; right: 26pxleft: 26px; right: 26px">link 6F</a>
+        <a class="TARGET_SIZE_1_FAIL" href="#small" style="left: 26px; right: 26px">link 7F</a>
+    </div>
+
+    <div>
+        <a class="TARGET_SIZE_1_FAIL" href="#small" style="display: block; height: 23px">link 8F</a>
+        <a class="TARGET_SIZE_1_FAIL" href="#small" style="display: block; width: 23px">link 9F</a>
+    </div>
+
+    <div>
+        <a class="TARGET_SIZE_1_PASS" href="#small" style="display: block; height: 24px">link 10P</a>
+        <a class="TARGET_SIZE_1_PASS" href="#small" style="display: block; width: 24px">link 11P</a>
+    </div>
+
+    <div hidden>
+        <a class="TARGET_SIZE_1_HIDDEN" href="#small" style="display: block; height: 23px">link 8F</a>
+        <a class="TARGET_SIZE_1_HIDDEN" href="#small" style="display: block; width: 23px">link 9F</a>
+    </div>
+
+  </body>
+</html>

@@ -120,8 +120,24 @@ export default class DOMElement {
 
     this.top      = window.scrollY + elemRect.top;
     this.left     = window.scrollX + elemRect.left;
-    this.height   = elemRect.height;
-    this.width    = elemRect.width;
+    this.height   = Math.round(10 * elemRect.height, 1) / 10;
+    this.width    = Math.round(10 * elemRect.width, 1) / 10;
+
+    this.authorWidth    = cssStyle.getPropertyValue('width');
+    this.authorHeight   = cssStyle.getPropertyValue('height');
+    this.authorLeft     = cssStyle.getPropertyValue('left');
+    this.authorRight    = cssStyle.getPropertyValue('right');
+    this.authorTop      = cssStyle.getPropertyValue('top');
+    this.authorBottom   = cssStyle.getPropertyValue('bottom');
+    this.authorDisplay  = cssStyle.getPropertyValue('display');
+    this.authorPosition = cssStyle.getPropertyValue('position');
+
+    this.authorSizing = (this.authorWidth  !== 'auto') ||
+                        (this.authorHeight !== 'auto') ||
+                        ((this.authorLeft   !== 'auto') &&
+                         (this.authorRight  !== 'auto')) ||
+                        ((this.authorTop    !== 'auto') &&
+                         (this.authorBottom !== 'auto'));
 
     this.children = [];
 
@@ -134,6 +150,7 @@ export default class DOMElement {
 
     // A name that can be used in rule results to identify the element
     this.elemName = this.tagName;
+    this.elemName += elementNode.type ? `[type=${elementNode.type}]` : '';
     this.elemName += this.id ? `#${this.id}` : '';
     this.elemName += this.hasRole ? `[role=${this.role}]` : '';
 

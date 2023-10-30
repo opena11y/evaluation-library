@@ -303,6 +303,7 @@ export default class ControlInfo {
     this.childControlElements    = [];
     this.allFormElements  = [];
     this.allButtonElements = [];
+    this.allRadioAndCheckboxElements = [];
   }
 
   /**

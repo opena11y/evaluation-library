@@ -67,7 +67,7 @@ for(const p in el.getWCAG.principles) {
 
       console.log(`[Success Criteria]: ${scInfo.id} level=${scInfo.level} )`);
 
-      if (scInfo.level > 1) {
+      if (scInfo.level > 0) {
 
         el.getAllRules.forEach( r => {
           const ruleInfo = el.getRuleInfo(r);

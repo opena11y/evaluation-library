@@ -59,6 +59,9 @@ class ParentInfo {
     this.tableElement    = null;
     this.tableRowGroup   = null;
 
+    this.inLink          = false;
+    this.inParagraph     = false;
+
     if (info) {
       this.controlElement  = info.controlElement;
       this.document        = info.document;
@@ -72,6 +75,8 @@ class ParentInfo {
       this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
+      this.inLink          = info.inLink;
+      this.inParagraph     = info.inParagraph;
     }
   }
 }
@@ -207,6 +212,13 @@ export default class DOMCache {
                 this.allDomTexts.push(domItem);
               }
             }
+
+            if (parentInfo.listElement) {
+              parentInfo.listElement.textContent += domItem.text.length;
+              if (parentInfo.inLink) {
+                parentInfo.listElement.linkTextContent += domItem.text.length;
+              }
+            }
           }
           break;
 
@@ -320,7 +332,7 @@ export default class DOMCache {
    * @desc  Updates page level collections of elements for landmarks, headings and controls
    *
    * @param {Object}  parentInfo       - Parent DomElement associated DOMElement
-   * @param {Object}  domElement       - The dom element to start transversing the dom
+   * @param {Object}  domElement       - The DOM element to start transversal of the DOM
    *
    * @returns {Object} ParentInfo  - updated ParentInfo object for use in the transversal
    */
@@ -341,13 +353,15 @@ export default class DOMCache {
 
     newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
     newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
-    this.idInfo.update(documentIndex, domElement);
-    this.linkInfo.update(domElement);
+    newParentInfo.inLink          = this.linkInfo.update(domElement, parentInfo.inLink);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
     [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
 
+    newParentInfo.inParagraph = domElement.tagName === 'p' ? true : parentInfo.inParagraph;
+
+    this.idInfo.update(documentIndex, domElement);
     this.timingInfo.update(domElement);
 
     return newParentInfo;

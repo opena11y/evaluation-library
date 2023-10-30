@@ -61,7 +61,7 @@
                     <tr>
                       <td>{{r.id}}</td>
                       <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
-                      <td>{% if r.wcag_primary.level === 4 %}A{% else %}AA{% endif %}</td>
+                      <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
                       <td><a href="{{r.primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
                     </tr>
                   {% else %}
@@ -78,8 +78,8 @@
               {% for gl in allGuidelines %}
                 <h2 id="gl-{{gl.id}}" class="rules">{{gl.title}}</h2>
                 {% for sc in gl.successCriteria %}
-                  {% if sc.level > 1 %}
-                  <h3 id="sc-{{sc.id}}" class="rules">{{sc.title}}</h3>
+                  {% if (sc.level > 1) or (sc.id === '1.4.6') or (sc.id === '2.5.5') %}
+                  <h3 id="sc-{{sc.id}}" class="rules">{{sc.title}} ({{sc.id}})</h3>
                   <table class="table table-striped" aria-labelledby="sc-{{gl.id}}">
                     <thead>
                       <th>ID</th>
@@ -92,7 +92,7 @@
                       <tr>
                         <td>{{r.id}}</td>
                         <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
-                        <td>{% if r.wcag_primary.level === 4 %}A{% else %}AA{% endif %}</td>
+                        <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
                         <td>{{r.rule_scope}}</td>
                       </tr>
                     {% else %}

@@ -5,13 +5,14 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('ListInfo', false);
+debug.flag = false;
 const allListitemRoles = ['list', 'listitem', 'menu', 'menuitem', 'menuitemcheckbox', 'menuitemradio'];
 const listRoles = ['list', 'menu'];
 
 /**
  * @class ListElement
  *
- * @desc Idenifies a DOM element as being a container for a list of items.
+ * @desc Identifies a DOM element as being a container for a list items.
  *
  * @param  {Object}  domElement   - Structural Information
  */
@@ -24,10 +25,8 @@ class ListElement {
     this.childListElements = [];
     this.isListRole = this.isList(domElement);
     this.linkCount = 0;  // Used in determining if a list is for navigation
-
-    if (debug.flag) {
-      debug.log('')
-    }
+    this.textContent = 0;
+    this.linkTextContent = 0;
   }
 
   /**
@@ -165,11 +164,15 @@ export default class ListInfo {
       debug.log('== All ListElements ==', 1);
       debug.log(`[linkCount]: ${this.linkCount}`)
       this.allListElements.forEach( le => {
+        debug.log(`[textContent]: ${le.textContent}`)
+        debug.log(`[linkTextContent]: ${le.linkTextContent}`)
         debug.domElement(le.domElement);
       });
       debug.log('== List Tree ==', 1);
       debug.log(`[linkCount]: ${this.linkCount}`)
       this.childListElements.forEach( le => {
+        debug.log(`[textContent]: ${le.textContent}`)
+        debug.log(`[linkTextContent]: ${le.linkTextContent}`)
         debug.domElement(le.domElement);
         le.showListInfo('  ');
       });

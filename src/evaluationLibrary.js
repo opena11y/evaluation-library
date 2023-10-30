@@ -56,7 +56,7 @@ export default class EvaluationLibrary {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluate (startingDoc, title='', url='', ruleset='WCAG21', level='AA', scopeFilter='ALL', ruleFilter = []) {
+  evaluate (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ruleFilter = []) {
 
     let domCache = new DOMCache(startingDoc);
     let evaluationResult = new EvaluationResult(allRules, domCache, title, url, ruleset, level, scopeFilter, ruleFilter);

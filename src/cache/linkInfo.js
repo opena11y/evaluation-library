@@ -34,13 +34,16 @@ export default class LinkInfo {
    *
    * @desc Checks to see if the domElement has a role of "link"
    *
-   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   * @param  {Object}  domElement  - DOMElement object representing an element in the DOM
+   * @param  {Boolean} inLink      - True if element is a descendant of a link, otherwise false
    */
 
-  update (domElement) {
+  update (domElement, inLink) {
     if (this.isLink(domElement)) {
       this.allLinkDomElements.push(domElement);
+      return true;
     }
+    return inLink;
   }
 
   /**

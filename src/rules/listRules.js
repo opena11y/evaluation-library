@@ -67,47 +67,8 @@ export const listRules = [
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [listCount]);
       }
 
-
-/*
-
-        var TEST_RESULT = TEST_RESULT;
-        var VISIBILITY  = VISIBILITY;
-
-        var page_element = dom_cache.keyboard_focus_cache.page_element;
-
-        var list_elements     = dom_cache.lists_cache.list_elements;
-        var list_elements_len = list_elements.length; // loop control
-
-        for (var i = 0; i < list_elements_len; i++) {
-          var le = list_elements[i];
-          var de = le.dom_element;
-          var cs = de.computed_style;
-
-          var tag_name = de.tag_name;
-          if (de.has_role) tag_name += '[role=' + de.role + ']';
-
-          if (cs.is_visible_to_at  === VISIBILITY.VISIBLE) {
-            if (le.list_type === LIST.CONTAINER) {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [tag_name]);
-            }
-            else  {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', [tag_name]);
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [tag_name]);
-          }
-
-        } // end loop
-
-        if (list_elements_len > 0) {
-          rule_result.addResult(TEST_RESULT.MANUAL_CHECK, page_element, 'PAGE_MC_1', [list_elements_len]);
-        }
-
-*/
-
-      } // end validate function
-    },
+    } // end validate function
+  },
   /**
    * @object LIST_2
    *
@@ -142,41 +103,7 @@ export const listRules = [
         }
 
       });
-
-
-/*
-
-        var TEST_RESULT = TEST_RESULT;
-        var VISIBILITY  = VISIBILITY;
-
-        var container_elements     = dom_cache.lists_cache.container_elements;
-        var container_elements_len = container_elements.length; // loop control
-
-        for (var i = 0; i < container_elements_len; i++) {
-          var le = container_elements[i];
-          var de = le.dom_element;
-          var cs = de.computed_style;
-
-          var tag_name = de.tag_name;
-          if (de.has_role) tag_name += '[role=' + de.role + ']';
-
-          if (cs.is_visible_to_at  === VISIBILITY.VISIBLE) {
-            if (le.accessible_name.length) {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_1', [le.accessible_name]);
-            }
-            else {
-              rule_result.addResult(TEST_RESULT.MANUAL_CHECK, le, 'ELEMENT_MC_2', [tag_name]);
-            }
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, le, 'ELEMENT_HIDDEN_1', [tag_name]);
-          }
-
-        } // end loop
-
-        */
-
-      } // end validate function
-    }
+    } // end validate function
+  }
 ];
 

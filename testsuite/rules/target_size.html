@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Target Size</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
+
+        executeTest('Target Size 1: Links at least 24x24 in size', 'ID_IFRAME_1', 'TARGET_SIZE_1');
+        executeTest('Target Size 2: Links at least 44x44 in size', 'ID_IFRAME_2', 'TARGET_SIZE_2');
+
+        executeTest('Target Size 3: Buttons at least 24x24 in size', 'ID_IFRAME_3', 'TARGET_SIZE_4');
+        executeTest('Target Size 4: Buttons at least 44x44 in size', 'ID_IFRAME_4', 'TARGET_SIZE_4');
+
+      });
+    </script>
+
+    <h2>Target Size 1: Links at least 24x24 in size</h2>
+    <iframe id="ID_IFRAME_1" src="target_size/target_size_1_links.html"></iframe>
+
+    <h2>Target Size 2: Links at least 44x44 in size</h2>
+    <iframe id="ID_IFRAME_2" src="target_size/target_size_2_links.html"></iframe>
+
+    <h2>Target Size 3: Buttons at least 24x24 in size</h2>
+    <iframe id="ID_IFRAME_3" src="target_size/target_size_3_buttons.html"></iframe>
+
+    <h2>Target Size 4: Buttons at least 44x44 in size</h2>
+    <iframe id="ID_IFRAME_4" src="target_size/target_size_4_buttons.html"></iframe>
+
+
+
+  </body>
+
+</html>

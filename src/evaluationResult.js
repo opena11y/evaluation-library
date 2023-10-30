@@ -105,12 +105,12 @@ export default class EvaluationResult {
 
       if (isFilter(ruleset, ruleFilter, rule.getId()) ||
           isWCAG(ruleset, level, rule)) {
-
         if ((scopeFilter === 'ALL') ||
             ((scopeFilter === 'PAGE')    && rule.isScopePage) ||
             ((scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
           const ruleResult = new RuleResult(rule);
           debug.flag && debug.log(`[validate]: ${ruleResult.rule.getId()}`);
+
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
         }
