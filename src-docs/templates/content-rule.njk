@@ -5,6 +5,13 @@
 </tr>
 {% endmacro %}
 
+{% macro infoItemRequired(item) %}
+<tr>
+  <th>Conformance</th>
+  <td>{% if item %}Required{% else %}Recommended{% endif %}</td>
+</tr>
+{% endmacro %}
+
 {% macro infoItems(name, items) %}
 <tr>
   <th>{{name}}</th>
@@ -82,6 +89,7 @@
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   {{ infoItem('Rule ID',    ruleInfo.id) }}
+                  {{ infoItemRequired(ruleInfo.rule_required) }}
                   {{ infoItem('Definition', ruleInfo.definition) }}
                   {{ infoItems('Purpose',   ruleInfo.purposes) }}
                   {{ infoItem('Conformance',   ruleInfo.conformance) }}

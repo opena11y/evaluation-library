@@ -22,11 +22,14 @@ export {
   WCAG_GUIDELINE,
   WCAG_SUCCESS_CRITERION,
   WCAG_LEVEL,
+  WCAG21_SC,
+  WCAG22_SC,
   getGuidelineId,
   getResultValue
 }
 
 const VERSION = '2.0.beta2';
+
 
 /**
  * @constant RULESET
@@ -465,6 +468,52 @@ export class Constants {
     this.WCAG_SUCCESS_CRITERION = WCAG_SUCCESS_CRITERION;
   }
 } 
+
+/**
+ * @constant WCAG21_SC
+ * @type String
+ * @desc Constants identify the success criteria in WCAG 2.1
+ *
+ */
+
+const WCAG21_SC = [
+  '1.3.4',
+  '1.3.5',
+  '1.3.6',
+  '1.4.10',
+  '1.4.11',
+  '1.4.12',
+  '1.4.13',
+  '2.1.4',
+  '2.2.6',
+  '2.3.3',
+  '2.5.1',
+  '2.5.2',
+  '2.5.3',
+  '2.5.4',
+  '2.5.5',
+  '2.5.6',
+  '4.1.3'
+];
+
+/**
+ * @constant WCAG22_SC
+ * @type String
+ * @desc Constants identify the success criteria in WCAG 2.2
+ *
+ */
+
+const WCAG22_SC = [
+  '2.4.11',
+  '2.4.12',
+  '2.4.13',
+  '2.5.7',
+  '2.5.8',
+  '3.2.6',
+  '3.3.7',
+  '3.3.8',
+  '3.3.9'
+  ];
 
 /*  Constant helper functions */
 

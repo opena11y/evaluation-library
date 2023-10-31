@@ -1,3 +1,12 @@
+{% macro wcagVersion(id) %}
+  {% if id === 'WCAG21' %}
+    (new in WCAG 2.1)
+  {% endif %}
+  {% if id === 'WCAG22' %}
+    (new in WCAG 2.2)
+  {% endif %}
+{% endmacro %}
+
 <html lang="en-us">
   <head>
     {% include "./head.njk" %}
@@ -54,6 +63,7 @@
                     <th>ID</th>
                     <th>Summary</th>
                     <th>Level</th>
+                    <th>Conformance</th>
                     <th>SC</th>
                   </thead>
                   <tbody>
@@ -62,6 +72,7 @@
                       <td>{{r.id}}</td>
                       <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
                       <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
+                      <td>{% if r.rule_required %}Required{% else %}<em>Recommended</em>{% endif %}</td>
                       <td><a href="{{r.primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
                     </tr>
                   {% else %}
@@ -79,12 +90,13 @@
                 <h2 id="gl-{{gl.id}}" class="rules">{{gl.title}}</h2>
                 {% for sc in gl.successCriteria %}
                   {% if (sc.level > 1) or (sc.id === '1.4.6') or (sc.id === '2.5.5') %}
-                  <h3 id="sc-{{sc.id}}" class="rules">{{sc.title}} ({{sc.id}})</h3>
+                  <h3 id="sc-{{sc.id}}" class="rules">{{sc.title}} {{ wcagVersion(sc.wcagVersion) }}</h3>
                   <table class="table table-striped" aria-labelledby="sc-{{gl.id}}">
                     <thead>
                       <th>ID</th>
                       <th>Summary</th>
                       <th>Level</th>
+                      <th>Conformance</th>
                       <th>Scope</th>
                     </thead>
                     <tbody>
@@ -93,11 +105,12 @@
                         <td>{{r.id}}</td>
                         <td><a href="{{r.filename | safe}}">{{r.summary | safe}}</a></td>
                         <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
+                        <td>{% if r.rule_required %}Required{% else %}<em>Recommended</em>{% endif %}</td>
                         <td>{{r.rule_scope}}</td>
                       </tr>
                     {% else %}
                       <tr>
-                        <td colspan="4"><em>no rules</em></td>
+                        <td colspan="5"><em>no rules at this time</em></td>
                       </tr>
                     {% endfor %}
                     </tbody>

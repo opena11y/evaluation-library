@@ -6,6 +6,8 @@
 
 
 
+
+
 <html lang="en-us">
   <head>
         <head>
@@ -13,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Author sizing of buttons (Minimum) | OpenA11y Evaluation Library 2.0</title>
+        <title>Button target size (Minimum) | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,14 +51,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Author sizing of buttons (Minimum)</li>
+          <li class="breadcrumb-item active">Button target size (Minimum)</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Author sizing of buttons (Minimum)</h1>
+            <h1 id="h1-title">Rule: Button target size (Minimum)</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -68,8 +70,14 @@
 
                   
 <tr>
+  <th>Conformance</th>
+  <td>Recommended</td>
+</tr>
+
+                  
+<tr>
   <th>Definition</th>
-  <td>Author sizing of buttons have at least the dimensions of 24 by 24 CSS pixels, unless it meets one of the three exceptions for buttons.</td>
+  <td>Button dimensions are at least 24 by 24 CSS pixels.</td>
 </tr>
 
                   
@@ -82,12 +90,6 @@
       
       <li>Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.</li>
       
-      <li>EXCEPTION (common) User Agent Control: If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 24 by 24 CSS pixels.</li>
-      
-      <li>EXCEPTION (uncommon) Equivalent Target Exception: If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 24 by 24 CSS pixels.</li>
-      
-      <li>EXCEPTION (uncommon) Essential Exception: If the target is required to be a particular target size and cannot be provided in another way.</li>
-      
     </ul>
   </td>
 </tr>
@@ -95,7 +97,7 @@
                   
 <tr>
   <th>Conformance</th>
-  <td>Required</td>
+  <td>Recommended</td>
 </tr>
 
                   
@@ -134,7 +136,7 @@
   <td>
     <ul>
       
-      <li>If the button does not meet one of the exceptions, use CSS to increase the dimensions of the button to at least 24 by 24 pixels.</li>
+      <li>Use CSS to increase the dimensions of the button to at least 24 by 24 pixels.</li>
       
     </ul>
   </td>

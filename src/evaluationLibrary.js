@@ -19,6 +19,7 @@ import {
   getSuccessCriterionInfo,
   getTechniques,
   getWCAG,
+  getWCAGVersion,
   setUseCodeTags
 }  from './_locale/locale.js'
 
@@ -119,6 +120,20 @@ export default class EvaluationLibrary {
   }
 
   /**
+   * @method getWCAGVersion
+   *
+   * @desc Get version of WCAG a success criteria first appeared
+   *
+   * @param {String}  csID  - Id of the success criteria (e.g. 1.4.5)
+   *
+   * @returns {String}  WCAG20 | WCAG21 | WCAG22
+   */
+
+  getWCAGVersion (scID) {
+    return getWCAGVersion(scID);
+  }
+
+  /**
    * @method getRuleInfo
    *
    * @desc Provides access to localized rule information
@@ -131,6 +146,8 @@ export default class EvaluationLibrary {
     ruleInfo.id            = getRuleId(id);
     ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
     ruleInfo.last_updated  = rule.last_updated;
+
+    ruleInfo.rule_required    = rule.rule_required;
 
     ruleInfo.rule_scope       = rule.rule_scope;
     ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);

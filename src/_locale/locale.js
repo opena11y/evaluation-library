@@ -5,6 +5,11 @@ import {messages as enMessages} from './en/messages.js';
 import DebugLogging        from '../debug.js';
 import {filterTextContent} from '../utils.js';
 
+import {
+  WCAG21_SC,
+  WCAG22_SC
+} from '../constants.js';
+
 export {
   getBaseResultMessages,
   getBaseResultMessage,
@@ -29,6 +34,7 @@ export {
   getTargetResourcesDesc,
   getTechniques,
   getWCAG,
+  getWCAGVersion,
   setLocale,
   setUseCodeTags,
   transformElementMarkup
@@ -626,6 +632,19 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
     }
   }
   return newStr;
+}
+
+
+/* helper functions */
+
+function getWCAGVersion (primaryId) {
+  if (WCAG21_SC.includes(primaryId)) {
+    return 'WCAG21';
+  }
+  if (WCAG22_SC.includes(primaryId)) {
+    return 'WCAG22';
+  }
+  return 'WCAG20';
 }
 
 

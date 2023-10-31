@@ -45,8 +45,9 @@ el.getRuleCategories.forEach( rc => {
   });
 
   console.log(`[RC]: ${rcInfo.title} (${rcInfo.rules.length})`);
-
-  allRuleCategories.push(rcInfo);
+  if (rcInfo.rules.length) {
+    allRuleCategories.push(rcInfo);
+  }
 });
 
 for(const p in el.getWCAG.principles) {
@@ -63,21 +64,20 @@ for(const p in el.getWCAG.principles) {
 
       scInfo = Object.assign(success_criteria[sc]);
       scInfo.id = sc;
+      scInfo.wcagVersion = el.getWCAGVersion(sc);
       scInfo.rules =  [];
 
       console.log(`[Success Criteria]: ${scInfo.id} level=${scInfo.level} )`);
 
-      if (scInfo.level > 0) {
+      el.getAllRules.forEach( r => {
+        const ruleInfo = el.getRuleInfo(r);
+        if (r.wcag_primary.id === scInfo.id) {
+          scInfo.rules.push(ruleInfo);
+        }
+      });
 
-        el.getAllRules.forEach( r => {
-          const ruleInfo = el.getRuleInfo(r);
-          if (r.wcag_primary.id === scInfo.id) {
-            scInfo.rules.push(ruleInfo);
-          }
-        });
+      glInfo.successCriteria.push(scInfo);
 
-        glInfo.successCriteria.push(scInfo);
-      }
     }
     allGuidelines.push(glInfo);
   }

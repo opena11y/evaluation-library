@@ -137,8 +137,8 @@ export const targetSizeRules = {
 
   TARGET_SIZE_3: {
       ID:                    'Target Size 3',
-      DEFINITION:            'Author sizing of buttons have at least the dimensions of 24 by 24 CSS pixels, unless it meets one of the three exceptions for buttons.',
-      SUMMARY:               'Author sizing of buttons (Minimum)',
+      DEFINITION:            'Button dimensions are at least 24 by 24 CSS pixels.',
+      SUMMARY:               'Button target size (Minimum)',
       TARGET_RESOURCES_DESC: 'buttons',
       RULE_RESULT_MESSAGES: {
         FAIL_S:  'Use CSS to increase the size of the area to activate the undersized button to at least 24 by 24 CSS pixels.',
@@ -154,13 +154,10 @@ export const targetSizeRules = {
       },
       PURPOSES: [
         'The intent of this success criterion is to help users who may have trouble activating a small target because of hand tremors, limited dexterity or other reasons. If the target is too small, it may be difficult to aim at the target.',
-        'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.',
-        'EXCEPTION (common) User Agent Control: If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 24 by 24 CSS pixels.',
-        'EXCEPTION (uncommon) Equivalent Target Exception: If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 24 by 24 CSS pixels.',
-        'EXCEPTION (uncommon) Essential Exception: If the target is required to be a particular target size and cannot be provided in another way.'
+        'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
       ],
       TECHNIQUES: [
-        'If the button does not meet one of the exceptions, use CSS to increase the dimensions of the button to at least 24 by 24 pixels.'
+        'Use CSS to increase the dimensions of the button to at least 24 by 24 pixels.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -196,11 +193,10 @@ export const targetSizeRules = {
       ]
   },
 
-
  TARGET_SIZE_4: {
       ID:                    'Target Size 4',
-      DEFINITION:            'Author sizing of buttons have at least the dimensions of 44 by 44 CSS pixels, unless it meets one of the three exceptions for buttons.',
-      SUMMARY:               'Author sizing of buttons (Enhanced)',
+      DEFINITION:            'Button dimensions are at least 44 by 44 CSS pixels.',
+      SUMMARY:               'Button target size (Enhanced)',
       TARGET_RESOURCES_DESC: 'buttons',
       RULE_RESULT_MESSAGES: {
         FAIL_S:  'Use CSS to increase the size of the area to activate the undersized button to at least 44 by 44 CSS pixels.',
@@ -216,13 +212,10 @@ export const targetSizeRules = {
       },
       PURPOSES: [
         'The intent of this success criterion is to help users who may have trouble activating a small target because of hand tremors, limited dexterity or other reasons. If the target is too small, it may be difficult to aim at the target.',
-        'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.',
-        'EXCEPTION (common) User Agent Control: If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.',
-        'EXCEPTION (uncommon) Equivalent Target Exception: If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.',
-        'EXCEPTION (uncommon) Essential Exception: If the target is required to be a particular target size and cannot be provided in another way.'
+        'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
       ],
       TECHNIQUES: [
-        'If the button does not meet one of the exceptions, use CSS to increase the dimensions of the button to at least 44 by 44 pixels.'
+        'Use CSS to increase the dimensions of the button to at least 44 by 44 pixels.'
       ],
       MANUAL_CHECKS: [
       ],
