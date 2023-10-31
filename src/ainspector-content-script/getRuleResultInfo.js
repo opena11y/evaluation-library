@@ -88,6 +88,7 @@ function getElementResultInfo(ruleResult) {
     let htmlAttrInfo    = JSON.stringify(elementResult.getHTMLAttributes());
     let ariaAttrInfo    = JSON.stringify(elementResult.getAriaAttributes());
 
+
     const item = {
       'index'            : (index + 1).toString(),
       'tagName'          : elementResult.getTagName(),

@@ -202,6 +202,43 @@ export default class ElementResult extends BaseResult {
       name_source:     this.domElement.accName.source,
       name_required:   this.domElement.ariaInfo.isNameRequired,
       name_prohibited: this.domElement.ariaInfo.isNameProhibited,
+
+      desc: this.domElement.accDescription.name,
+      desc_source: this.domElement.accDescription.source,
+
+      error: this.domElement.errMessage.name,
+      error_source: this.domElement.errMessage.source
+
+    }
+    return info;
+  }
+
+ /**
+ * @method getAccessibleDescriptionInfo
+ *
+ * @desc Gets accessible description information
+ *
+ * @return {Object}
+ */
+  getAccessibleDescriptionInfo () {
+    const info = {
+      name:            this.domElement.accDescription.name,
+      name_source:     this.domElement.accDescription.source,
+    }
+    return info;
+  }
+
+ /**
+ * @method getAccessibleErrorMessageInfo
+ *
+ * @desc Gets accessible error information
+ *
+ * @return {Object}
+ */
+  getAccessibleErrorMessageInfo () {
+    const info = {
+      name:            this.domElement.errMessage.name,
+      name_source:     this.domElement.errMessage.source,
     }
     return info;
   }

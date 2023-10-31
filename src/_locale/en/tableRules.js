@@ -467,7 +467,8 @@ export const tableRules = {
       ],
       TECHNIQUES: [
         'Accessible name is typically defined using the @caption@ element, but the @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
-        'Accessible description is typically defined using the @aria-describedby@ attribute, but the @title@ attribute can also be used.'
+        'Accessible description is typically defined using the @aria-describedby@ attribute, but the @title@ attribute can also be used.',
+        'NOTE: The @summary@ attribute is no longer supported in HTML.'
       ],
       MANUAL_CHECKS: [
         'Verify the accessible name clearly identifies the purpose of the table.',
