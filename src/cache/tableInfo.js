@@ -445,6 +445,8 @@ class TableCell {
     this.headers = [];
     this.headersSource = HEADER_SOURCE.NONE;
 
+    this.hasContent = (node.textContent.trim().length > 0) || (node.firstElementChild !== null);
+
   }
 
   get columnSpan () {

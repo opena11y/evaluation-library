@@ -26,8 +26,9 @@
       <caption>4 by 4 complex data table with no headers</caption>
       <tr> 
         <td class="TABLE_7_FAIL" colspan="2">Data Cell 11</td>
-        <td>Data Cell 13</td>
-        <td>Data Cell 14</td>
+        <td colspan="2">
+
+        </td>
       </tr>
       <tr> 
         <td class="TABLE_7_FAIL" rowspan="2">Data Cell 21</td>
@@ -38,13 +39,14 @@
       <tr> 
         <td>Data Cell 32</td>
         <td>Data Cell 33</td>
-        <td>Data Cell 34</td>
+        <td rowspan="2">
+
+        </td>
       </tr>
       <tr> 
         <td>Data Cell 41</td>
         <td>Data Cell 42</td>
         <td>Data Cell 43</td>
-        <td>Data Cell 44</td>
       </tr>
     </table>
     
@@ -127,10 +129,16 @@
       <caption>5 by 5 complex data table with empty rows and columns</caption>
       <thead>
         <tr>
-          <td></td>
+          <td rowspan="2">
+
+          </td>
+          <th id="t4_hA" colspan="2">Header A</th>
+          <td rowspan="2"></td>
+          <th id="t4_hB" colspan="2">Header B</th>
+        </tr>
+        <tr>
           <th id="t4_h1">Header 1</th>
           <th id="t4_h2">Header 2</th>
-          <td></td>
           <th id="t4_h3">Header 3</th>
           <th id="t4_h4">Header 4</th>
         </tr>
@@ -139,23 +147,21 @@
         <th id="t4_t5">Header 5</th>
         <td class="TABLE_7_PASS" colspan="2" headers="t4_t5 t4_h1 t4_h2">Data Cell 11</td>
         <td></td>
-        <td headers="t4_t5 t4_h3 t4_h4">Data Cell 13</td>
-        <td headers="t4_t5 t4_h4 t4_h3">Data Cell 14</td>
+        <td headers="t4_hB t4_t5 t4_h3 t4_h4">Data Cell 13</td>
+        <td headers="t4_hB t4_t5 t4_h4 t4_h3">Data Cell 14</td>
       </tr>
       <tr> 
         <th id="t4_t6">Header 6</th>
-        <td class="TABLE_7_PASS" rowspan="2" headers="t4_t6 t4_h1 t4_h2">Data Cell 21</td>
-        <td headers="t4_t6 t4_h2">Data Cell 22</td>
+        <td class="TABLE_7_PASS" rowspan="2" headers="t4_hA t4_t6 t4_h1 t4_h2">Data Cell 21</td>
+        <td headers="t4_hA t4_t6 t4_h2">Data Cell 22</td>
         <td></td>
-        <td headers="t4_t6 t4_h3">Data Cell 23</td>
-        <td headers="t4_t6 t4_h4">Data Cell 24</td>
+        <td headers="t4_hB t4_t6 t4_h3">Data Cell 23</td>
+        <td headers="t4_hB t4_t6 t4_h4">Data Cell 24</td>
       </tr>
       <tr> 
         <th id="t4_t7">Header 7</th>
-        <td headers="t4_t7 t4_h2">Data Cell 32</td>
-        <td></td>
-        <td headers="t4_t7 t4_h3">Data Cell 33</td>
-        <td headers="t4_t7 t4_h4">Data Cell 34</td>
+        <td class="TABLE_7_PASS" headers="t4_hA t4_t7 t4_h2" colspan="3"></td>
+        <td headers="t4_hB t4_t7 t4_h4">Data Cell 34</td>
       </tr>
       <tr>
         <td></td>

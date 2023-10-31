@@ -363,7 +363,9 @@ export const tableRules = [
                   }
                 }
                 else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+                  if (cell.hasContent) {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+                  }
                 }
               }
             }
