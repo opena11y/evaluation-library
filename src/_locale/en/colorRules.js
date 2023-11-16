@@ -16,20 +16,20 @@ export const colorRules = {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
         FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
         MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold to the use of a background image.',
-        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR thrshold to the use of background images.',
+        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR threshold to the use of background images.',
         HIDDEN_S: 'The element with text content that is hidden was not analyzed for color contrast accessibility.',
         HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
         NOT_APPLICABLE:  'No visible text content on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'CCR of %1 exceeds 4.5.',
-        ELEMENT_PASS_2:   'CCR of %1 exceeds 3.1 for large or bolded text.',
-        ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to exceed 4.5.',
-        ELEMENT_FAIL_2:   'CCR of %1 for large or bolded text, adjust foreground and background colors to exceed 3.1.',
-        ELEMENT_MC_1:     'CCR of %1 is greater than 4.5, but background image may reduce color contrast.',
-        ELEMENT_MC_2:     'CCR of %1 is less than or equal to 4.5, but background image may improve color contrast.',
-        ELEMENT_MC_3:     'CCR of %1 is greater than 3.1 for large or bolded text, but background image may reduce color contrast.',
-        ELEMENT_MC_4:     'CCR of %1 is less than or equal to 3.1 for large and bolded text, but background image may improve color contrast.',
+        ELEMENT_PASS_1:   'CCR of %1 meets or exceeds 4.5.',
+        ELEMENT_PASS_2:   'CCR of %1 meets or exceeds 3 for large or bolded text.',
+        ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to meets or exceeds 4.5.',
+        ELEMENT_FAIL_2:   'CCR of %1 for large or bolded text, adjust foreground and background colors to meet or exceed 3.',
+        ELEMENT_MC_1:     'CCR of %1 is is equal to or greater than 4.5, but background image may reduce color contrast.',
+        ELEMENT_MC_2:     'CCR of %1 is less than 4.5, but background image may improve color contrast.',
+        ELEMENT_MC_3:     'CCR of %1 is equal to or greater than 3 for large or bolded text, but background image may reduce color contrast.',
+        ELEMENT_MC_4:     'CCR of %1 is less than 3 for large and bolded text, but background image may improve color contrast.',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
       PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
@@ -115,14 +115,14 @@ export const colorRules = {
         NOT_APPLICABLE:  'No visible text content on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   'CCR of %1 exceeds 7.1.',
-        ELEMENT_PASS_2:   'CCR of %1 exceeds 4.5 for large or bolded text.',
-        ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to exceed 7.1.',
-        ELEMENT_FAIL_2:   'CCR of %1 for large or bolded text, adjust foreground and background colors to exceed 4.5.',
-        ELEMENT_MC_1:     'CCR of %1 is greater than 7.1, but background image may reduce color contrast.',
-        ELEMENT_MC_2:     'CCR of %1 is less than or equal to 7.1, but background image may improve color contrast.',
-        ELEMENT_MC_3:     'CCR of %1 is greater than 4.5 for large or bolded text, but background image may reduce color contrast.',
-        ELEMENT_MC_4:     'CCR of %1 is less than or equal to 4.5 for large and bolded text, but background image may improve color contrast.',
+        ELEMENT_PASS_1:   'CCR of %1 meets or exceeds 7.',
+        ELEMENT_PASS_2:   'CCR of %1 meets or exceeds 4.5 for large or bolded text.',
+        ELEMENT_FAIL_1:   'CCR of %1, adjust foreground and background colors to meet or exceed 7.',
+        ELEMENT_FAIL_2:   'CCR of %1 for large or bolded text, adjust foreground and background colors to meet or exceed 4.5.',
+        ELEMENT_MC_1:     'CCR of %1 is equal to or greater than 7, but background image may reduce color contrast.',
+        ELEMENT_MC_2:     'CCR of %1 is less than 7, but background image may improve color contrast.',
+        ELEMENT_MC_3:     'CCR of %1 is equal to or greater than 4.5 for large or bolded text, but background image may reduce color contrast.',
+        ELEMENT_MC_4:     'CCR of %1 is less than 4.5 for large and bolded text, but background image may improve color contrast.',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
       PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
@@ -132,14 +132,14 @@ export const colorRules = {
                         'Remove background images or verify they do not compromise color contrast requirements.'
                       ],
       MANUAL_CHECKS:  [ 'Use graphic editing tools to analyze the color(s) of the background image and then recacluate the CCR with the range of colors in the background image.',
-                        'Verify the range of colors that could be part of the background of text is have a CCR > 7.1.'
+                        'Verify the range of colors that could be part of the background of text is have a CCR >= 7.'
       ],
       INFORMATIONAL_LINKS: [{ type:  REFERENCES.SPECIFICATION,
-                         title: 'WCAG 2.0 Success Criterion 1.4.6 Contrast (Enhanced): The visual presentation of text and images of text has a contrast ratio of at least 7.1:1, with exceptions',
+                         title: 'WCAG 2.0 Success Criterion 1.4.6 Contrast (Enhanced): The visual presentation of text and images of text has a contrast ratio of at least 7:1, with exceptions',
                          url:   'https://www.w3.org/TR/WCAG/#contrast-enhanced'
                        },
                        { type:  REFERENCES.WCAG_TECHNIQUE,
-                         title: 'How to meet Success Criterion 1.4.6 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 7.1:1, with exceptions',
+                         title: 'How to meet Success Criterion 1.4.6 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 7:1, with exceptions',
                          url:   'https://www.w3.org/WAI/WCAG21/quickref/#contrast-enhanced'
                        },
                       { type:  REFERENCES.WCAG_TECHNIQUE,
