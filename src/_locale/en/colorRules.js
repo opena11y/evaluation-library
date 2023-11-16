@@ -9,7 +9,7 @@ import {REFERENCES} from '../../constants.js';
 export const colorRules = {
   COLOR_1: {
       ID:                    'Color 1',
-      DEFINITION:            'Text content must exceed minimum Color Contrast Ratio (CCR) of 3.1 for large and/or bolded text and 4.5 for any other size or style of text.',
+      DEFINITION:            'Text content must exceed minimum Color Contrast Ratio (CCR) of 3 for large and/or bolded text and 4.5 for any other size or style of text.',
       SUMMARY:               'Color contrast of text: Minimum',
       TARGET_RESOURCES_DESC: 'Text content',
       RULE_RESULT_MESSAGES: {
@@ -102,7 +102,7 @@ export const colorRules = {
   },
   COLOR_3: {
       ID:                    'Color 3',
-      DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 4.5 for large and/or bolded text and 7.1 for any other size or style of text.',
+      DEFINITION:            'Text content must exceed Color Contrast Ratio (CCR) of 4.5 for large and/or bolded text and 7 for any other size or style of text.',
       SUMMARY:               'Color contrast of text: Enhanced',
       TARGET_RESOURCES_DESC: 'All elements with text content',
       RULE_RESULT_MESSAGES: {
