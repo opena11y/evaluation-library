@@ -172,7 +172,7 @@ export const colorRules = [
         const ccr = cc.colorContrastRatio;
 
         if (de.visibility.isVisibleOnScreen) {
-          if (cc.isLargeFont) {
+          if (cc.isLargeFont || cc.isBoldedFont) {
             if (ccr >= MIN_CCR_LARGE_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {

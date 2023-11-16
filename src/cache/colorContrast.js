@@ -6,8 +6,10 @@ import DebugLogging  from '../debug.js';
 /* Constants */
 const debug = new DebugLogging('colorContrast', false);
 debug.flag = false;
-const defaultFontSize = 16; // In pixels (px)
-const fontWeightBold = 300; 
+const defaultFontSize = 16;    // In pixels (px)
+const biggerFontSize  = 18.66; // In pixels (px)
+const largeFontSize   = 24;    // In pixels (px)
+const fontWeightBold  = 300;
 
   /**
    * @function getLuminance
@@ -382,11 +384,12 @@ export default class ColorContrast {
    */
 
   getLargeFont (fontSize, fontWeight) {
-    let isSizeReallyBig = fontSize > (1.2 * defaultFontSize);
-    let isSizeBig       = fontSize > defaultFontSize;
-    let isBold          = fontWeight >= fontWeightBold;
+    const isSizeLarge   = fontSize >= largeFontSize;
+    const isSizeBigger  = fontSize >= biggerFontSize;
+    const isBold        = fontWeight >= fontWeightBold;
 
-    return isSizeReallyBig || (isSizeBig && isBold);
+
+    return isSizeLarge || (isSizeBigger && isBold);
   }
 }
 

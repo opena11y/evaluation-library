@@ -5,12 +5,86 @@
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
 
+    <style>
+      div[class] {
+        margin: 0.5em;
+        padding: 0.25em;
+      }
+    </style>
+
   </head>
 
   <body>
     <div role="main">
       <h1 class="COLOR_1_PASS">Color 1: Text elements must have a high color contrast ration</h1>
-      <!--Color Contrast Tool http://leaverou.github.io/contrast-ratio -->
+
+      <h2 class="COLOR_1_PASS">Regular size text</h2>
+
+      <div style="background-color: #FFFFFF" class="COLOR_1_PASS">Pass A</div>
+      <div style="background-color: #EEEEEE" class="COLOR_1_PASS">Pass B</div>
+      <div style="background-color: #DDDDDD" class="COLOR_1_PASS">Pass C</div>
+      <div style="background-color: #CCCCCC" class="COLOR_1_PASS">Pass D</div>
+      <div style="background-color: #BBBBBB" class="COLOR_1_PASS">Pass E</div>
+      <div style="background-color: #AAAAAA" class="COLOR_1_PASS">Pass F</div>
+      <div style="background-color: #999999" class="COLOR_1_PASS">Pass G</div>
+      <div style="background-color: #888888" class="COLOR_1_PASS">Pass H</div>
+      <div style="background-color: #777777" class="COLOR_1_FAIL">Fail I</div>
+      <div style="background-color: #666666" class="COLOR_1_FAIL">Fail J</div>
+      <div style="background-color: #555555" class="COLOR_1_FAIL">Fail K</div>
+      <div style="background-color: #444444" class="COLOR_1_FAIL">Fail L</div>
+      <div style="background-color: #333333" class="COLOR_1_FAIL">Fail M</div>
+      <div style="background-color: #222222" class="COLOR_1_FAIL">Fail N</div>
+      <div style="background-color: #111111" class="COLOR_1_FAIL">Fail O</div>
+      <div style="background-color: #000000" class="COLOR_1_FAIL">Fail P</div>
+
+      <h2 class="COLOR_1_PASS">Bolded text</h2>
+
+      <div style="font-weight: bold; background-color: #FFFFFF" class="COLOR_1_PASS">Pass A Bold</div>
+      <div style="font-weight: bold; background-color: #EEEEEE" class="COLOR_1_PASS">Pass B Bold</div>
+      <div style="font-weight: bold; background-color: #DDDDDD" class="COLOR_1_PASS">Pass C Bold</div>
+      <div style="font-weight: bold; background-color: #CCCCCC" class="COLOR_1_PASS">Pass D Bold</div>
+      <div style="font-weight: bold; background-color: #BBBBBB" class="COLOR_1_PASS">Pass E Bold</div>
+      <div style="font-weight: bold; background-color: #AAAAAA" class="COLOR_1_PASS">Pass F Bold</div>
+      <div style="font-weight: bold; background-color: #999999" class="COLOR_1_PASS">Pass G Bold</div>
+      <div style="font-weight: bold; background-color: #888888" class="COLOR_1_PASS">Pass H Bold</div>
+      <div style="font-weight: bold; background-color: #777777" class="COLOR_1_PASS">Pass I Bold</div>
+      <div style="font-weight: bold; background-color: #666666" class="COLOR_1_PASS">PASS J Bold</div>
+      <div style="font-weight: bold; background-color: #555555" class="COLOR_1_FAIL">Fail K Bold</div>
+      <div style="font-weight: bold; background-color: #444444" class="COLOR_1_FAIL">Fail L Bold</div>
+      <div style="font-weight: bold; background-color: #333333" class="COLOR_1_FAIL">Fail M Bold</div>
+      <div style="font-weight: bold; background-color: #222222" class="COLOR_1_FAIL">Fail N Bold</div>
+      <div style="font-weight: bold; background-color: #111111" class="COLOR_1_FAIL">Fail O Bold</div>
+      <div style="font-weight: bold; background-color: #000000" class="COLOR_1_FAIL">Fail P Bold</div>
+
+      <h2 class="COLOR_1_PASS">Large text</h2>
+
+      <div style="font-size: large; background-color: #FFFFFF" class="COLOR_1_PASS">Pass A Large</div>
+      <div style="font-size: large; background-color: #EEEEEE" class="COLOR_1_PASS">Pass B Large</div>
+      <div style="font-size: large; background-color: #DDDDDD" class="COLOR_1_PASS">Pass C Large</div>
+      <div style="font-size: large; background-color: #CCCCCC" class="COLOR_1_PASS">Pass D Large</div>
+      <div style="font-size: large; background-color: #BBBBBB" class="COLOR_1_PASS">Pass E Large</div>
+      <div style="font-size: large; background-color: #AAAAAA" class="COLOR_1_PASS">Pass F Large</div>
+      <div style="font-size: large; background-color: #999999" class="COLOR_1_PASS">Pass G Large</div>
+      <div style="font-size: large; background-color: #888888" class="COLOR_1_PASS">Pass H Large</div>
+      <div style="font-size: large; background-color: #777777" class="COLOR_1_PASS">Pass I Large</div>
+      <div style="font-size: large; background-color: #666666" class="COLOR_1_PASS">Pass J Large</div>
+      <div style="font-size: large; background-color: #555555" class="COLOR_1_FAIL">Fail K Large</div>
+      <div style="font-size: large; background-color: #444444" class="COLOR_1_FAIL">Fail L Large</div>
+      <div style="font-size: large; background-color: #333333" class="COLOR_1_FAIL">Fail M Large</div>
+      <div style="font-size: large; background-color: #222222" class="COLOR_1_FAIL">Fail N Large</div>
+      <div style="font-size: large; background-color: #111111" class="COLOR_1_FAIL">Fail O Large</div>
+      <div style="font-size: large; background-color: #000000" class="COLOR_1_FAIL">Fail P Large</div>
+
+
+      <h2 class="COLOR_1_PASS">Edge Case</h2>
+
+      <div style="color: #FFFFFF; background-color: #ed7007" class="COLOR_1_FAIL">Fail Edge</div>
+
+      <div style="font-size: 19px; font-weight: bold; color: #FFFFFF; background-color: #ed7007" class="COLOR_1_PASS">Pass Edge Blod</div>
+
+      <div style="font-size: 24px; color: #FFFFFF; background-color: #ed7007" class="COLOR_1_PASS">Pass Edge Large</div>
+
+
       <h2 class="COLOR_1_PASS">Group 1: Background color, low color contrast ratio</h2>
       <div style="background-color: red; height: 100px; width: 100px">
         <h4 style="color: orange" class="COLOR_1_FAIL">Heading 11 </h4>
