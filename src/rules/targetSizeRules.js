@@ -98,7 +98,7 @@ export const targetSizeRules = [
   /**
    * @object TARGET_SIZE_3
    *
-   * @desc Link target size minimum
+   * @desc button target size minimum
    */
 
   { rule_id             : 'TARGET_SIZE_3',
@@ -183,6 +183,60 @@ export const targetSizeRules = [
       });
 
     } // end validate function
+  },
+
+ /**
+   * @object TARGET_SIZE_5
+   *
+   * @desc Checkbox and radio button target size
+   */
+
+  { rule_id             : 'TARGET_SIZE_5',
+    last_updated        : '2023-10-31',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : true,
+    wcag_primary_id     : '2.5.8',
+    wcag_related_ids    : [],
+    target_resources    : ['input[type=checkbox]', 'input[type=radio]', '[role=radio]', '[role=checkbox]]'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+
+        if (de.role === 'radio' || de.role === 'checkbox') {
+          if (de.visibility.isVisibleOnScreen) {
+            let h = de.height;
+            let w = de.width;
+            if (( h < 24) || ( w < 24)) {
+              if (ce.hasLabel) {
+                h = ce.labelHeight;
+                w = ce.labelWidth;
+                if (( h < 24) || (w < 24)) {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [h, w]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [h, w]);
+                }
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, h, w]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, h, w]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+
+      });
+
+    } // end validate function
   }
+
 
 ];

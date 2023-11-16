@@ -146,6 +146,7 @@ export default class DOMCache {
     this.computeAriaOwnsRefs();
     this.tableInfo.computeTableTypes();
     this.tableInfo.computeHeaders(this);
+    this.controlInfo.updateLabelForReferences();
   }
 
   getDomElementById(id) {

@@ -63,6 +63,17 @@ class ControlElement {
                        (node.getAttribute('aria-required').toLowerCase() === 'true') :
                        false;
 
+    this.labelElement = this.checkForLabelEncapsulation(parentControlElement);
+    if (this.labelElement) {
+      this.hasLabel = true;
+      this.labelWidth  = this.labelElement.domElement.width;
+      this.labelHeight = this.labelElement.domElement.height
+    }
+    else {
+      this.hasLabel = false;
+      this.labelWidth = 0;
+      this.labelHeight = 0;
+    }
   }
 
   get isButton () {
@@ -83,6 +94,16 @@ class ControlElement {
 
   get isInteractive () {
     return true;
+  }
+
+  checkForLabelEncapsulation (parentControlElement) {
+    while (parentControlElement) {
+      if (parentControlElement.isLabel) {
+        return parentControlElement;
+      }
+      parentControlElement = parentControlElement.parentControlElement;
+    }
+    return false;
   }
 
   addChildControlElement (controlElement) {
@@ -304,6 +325,32 @@ export default class ControlInfo {
     this.allFormElements  = [];
     this.allButtonElements = [];
     this.allRadioAndCheckboxElements = [];
+    this.allLabelElements = [];
+  }
+
+  /**
+   * @method updateLabelForReferences
+   *
+   * @desc Updates controls with label[for] references
+   *
+   */
+
+  updateLabelForReferences () {
+    this.allLabelElements.forEach (le => {
+      const id = le.for;
+      if (id) {
+        for (let i = 0; this.allControlElements.length; i += 1) {
+          const ce = this.allControlElements[i];
+          if (ce.domElement.id === id) {
+            ce.labelElement = le;
+            ce.hasLabel = true;
+            ce.labelWidth  = ce.domElement.width;
+            ce.labelHeight = ce.domElement.height;
+            break;
+          }
+        }
+      }
+    });
   }
 
   /**
@@ -333,6 +380,7 @@ export default class ControlInfo {
 
       case 'label':
         ce = new LabelElement(domElement, parentControlElement);
+        this.allLabelElements.push(ce);
         break;
 
       case 'legend':

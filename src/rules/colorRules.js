@@ -22,7 +22,7 @@ export const colorRules = [
   /**
    * @object COLOR_1
    *
-   * @desc  Color contrast ratio must be > 4.5 for normal text, or > 3.1 for large text
+   * @desc  Color contrast ratio must be > 4.5 for normal text, or > 3 for large text
    */
 
   { rule_id             : 'COLOR_1',
@@ -47,7 +47,7 @@ export const colorRules = [
 
 
       const MIN_CCR_NORMAL_FONT = 4.5;
-      const MIN_CCR_LARGE_FONT  = 3.1;
+      const MIN_CCR_LARGE_FONT  = 3;
 
       debug.flag && debug.log(`===== COLOR 1 ====`);
 
@@ -161,7 +161,7 @@ export const colorRules = [
       }
 
 
-      const MIN_CCR_NORMAL_FONT = 7.1;
+      const MIN_CCR_NORMAL_FONT = 7;
       const MIN_CCR_LARGE_FONT  = 4.5;
 
       debug.flag && debug.log(`===== COLOR 3 ====`);
