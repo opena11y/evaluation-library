@@ -110,6 +110,9 @@ export default class DOMElement {
     this.isLink      = this.role === 'link';
     this.isLandmark  = this.checkForLandamrk();
     this.isHeading   = this.role === 'heading';
+    this.isInDialog  = this.tagName === 'dialog' ||
+                       this.role === 'dialog' ||
+                       parentInfo.inDialog;
 
     // CSS Position property and size information
 
@@ -122,6 +125,7 @@ export default class DOMElement {
     this.left     = window.scrollX + elemRect.left;
     this.height   = Math.round(10 * elemRect.height, 1) / 10;
     this.width    = Math.round(10 * elemRect.width, 1) / 10;
+    this.area     = this.height * this.width;
 
     this.authorWidth    = cssStyle.getPropertyValue('width');
     this.authorHeight   = cssStyle.getPropertyValue('height');

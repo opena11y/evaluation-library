@@ -59,8 +59,9 @@ class ParentInfo {
     this.tableElement    = null;
     this.tableRowGroup   = null;
 
-    this.inLink          = false;
-    this.inParagraph     = false;
+    this.inLink      = false;
+    this.inParagraph = false;
+    this.inDialog    = false;
 
     if (info) {
       this.controlElement  = info.controlElement;
@@ -75,8 +76,10 @@ class ParentInfo {
       this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
-      this.inLink          = info.inLink;
-      this.inParagraph     = info.inParagraph;
+
+      this.inLink       = info.inLink;
+      this.inParagraph  = info.inParagraph;
+      this.inDialog     = info.inDialog;
     }
   }
 }
@@ -361,6 +364,7 @@ export default class DOMCache {
     [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
 
     newParentInfo.inParagraph = domElement.tagName === 'p' ? true : parentInfo.inParagraph;
+    newParentInfo.inDialog    = domElement.isInDialog;
 
     this.idInfo.update(documentIndex, domElement);
     this.timingInfo.update(domElement);

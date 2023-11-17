@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Target Size 6: Target Size of Radio buttons and checkboxes (enhanced)</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <style>
+      label {
+        display: inline-block;
+      }
+      label:not([for]) {
+        display: block;
+      }
+
+      div[role] {
+        display: block;
+        margin: 0.75em;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Target Size 6: Target Size of Radio buttons and checkboxes (enhanced)</h1>
+
+      <h2><code>input[type=radio]</code> Element</h2>
+
+      <fieldset>
+        <legend>Group 1: Radio buttons that pass target size</legend>
+        <label style="height: 44px"><input type="radio" name="group1" class="TARGET_SIZE_6_PASS" >Item 1A</label>
+        <label style="height: 44px"><input type="radio" name="group1" class="TARGET_SIZE_6_PASS">Item 1B</label>
+       <label style="display: none; height: 44px"><input type="radio" name="group1" class="TARGET_SIZE_6_HIDDEN">Item 1B</label>
+
+        <label style="height: 44px"><input type="checkbox" class="TARGET_SIZE_6_PASS">Item 1D</label>
+
+       </fieldset>
+
+      <fieldset>
+        <legend>Group 2: Radio buttons that fail target size</legend>
+        <label style="height: 43px"><input type="radio" name="group2" class="TARGET_SIZE_6_FAIL">Item 2A</label>
+        <label style="height: 43px"><input type="radio" name="group2" class="TARGET_SIZE_6_FAIL">Item 2B</label>
+        <label style="display: none; height: 43px"><input type="radio" name="group2" class="TARGET_SIZE_6_HIDDEN">Item 2C</label>
+
+        <label style="height: 43px"><input type="checkbox" class="TARGET_SIZE_6_FAIL">Item 2D</label>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Group 3: Radio buttons that pass target size</legend>
+        <div>
+          <input id="g3a" type="radio" name="group3" class="TARGET_SIZE_6_PASS">
+          <label for="g3a" style="height: 44px">Item 3A</label>
+        </div>
+        <div>
+          <input id="g3b" type="radio" name="group3" class="TARGET_SIZE_6_PASS">
+          <label for="g3b" style="height: 44px">Item 3B</label>
+        </div>
+        <div hidden>
+          <input id="g3c" type="radio" name="group3" class="TARGET_SIZE_6_HIDDEN">
+          <label for="g3c" style="height: 44px">Item 3C</label>
+        </div>
+
+        <div>
+          <input id="g3d" type="checkbox" class="TARGET_SIZE_6_PASS">
+          <label for="g3d" style="height: 44px">Item 3D</label>
+        </div>
+
+       </fieldset>
+
+      <fieldset>
+        <legend>Group 4: Radio buttons that fail target size</legend>
+        <div>
+          <input id="g4a" type="radio" name="group4" class="TARGET_SIZE_6_FAIL">
+          <label for="g4a" style="height: 43px">Item 4A</label>
+        </div>
+        <div>
+          <input id="g4b" type="radio" name="group4" class="TARGET_SIZE_6_FAIL">
+          <label for="g4b" style="height: 43px">Item 4B</label>
+        </div>
+        <div hidden>
+          <input id="g4c" type="radio" name="group4" class="TARGET_SIZE_6_HIDDEN">
+          <label for="g4c" style="height: 43px">Item 4C</label>
+        </div>
+
+        <div>
+          <input id="g4d" type="checkbox" class="TARGET_SIZE_6_FAIL">
+          <label for="g4d" style="height: 43px">Item 4B</label>
+        </div>
+
+      </fieldset>
+
+      <div role="group" aria-labelledby="g5">
+        <div id="g5">Group 5: <code>role="radio"</code> and <code>role="checkbox"</code></div>
+
+        <div role="radio" style="height: 44px" class="TARGET_SIZE_6_PASS">Item 5A</div>
+        <div role="radio" style="height: 43px" class="TARGET_SIZE_6_FAIL">Item 5B</div>
+
+        <div role="checkbox" style="height: 44px" class="TARGET_SIZE_6_PASS">Item 5C</div>
+        <div role="checkbox" style="height: 43px" class="TARGET_SIZE_6_FAIL">Item 5D</div>
+
+      </div>
+
+ </body>
+</html>

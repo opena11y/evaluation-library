@@ -57,7 +57,7 @@ export const landmarkRules = [
       dom_cache.allDomElements.forEach ( de => {
         const parentLandmark = de.parentInfo.landmarkElement;
         const isLandmark = de.isLandmark;
-        if ((de.hasContent || de.mayHaveContent)) {
+        if (!de.isInDialog && (de.hasContent || de.mayHaveContent)) {
           if (de.visibility.isVisibleToAT) {
             if ( isLandmark || parentLandmark ) {
               const role = isLandmark ? de.role : parentLandmark.domElement.role;

@@ -17,74 +17,74 @@
 
       window.addEventListener('load', (event) => {
 
-        executeTest('LANDMARK_1 no main landmark',            'ID_IFRAME_1A', 'LANDMARK_1');
-        executeTest('LANDMARK_1 one main landmark',           'ID_IFRAME_1B', 'LANDMARK_1');
-        executeTest('LANDMARK_1 more than one main landmark', 'ID_IFRAME_1C', 'LANDMARK_1');
-        executeTest('LANDMARK_1 one main element',            'ID_IFRAME_1D', 'LANDMARK_1');
-        executeTest('LANDMARK_1 more than one main element',  'ID_IFRAME_1E', 'LANDMARK_1');
+        executeTest('LANDMARK 1A: no main landmark',            'ID_IFRAME_1A', 'LANDMARK_1');
+        executeTest('LANDMARK 1B: one main landmark',           'ID_IFRAME_1B', 'LANDMARK_1');
+        executeTest('LANDMARK 1C: more than one main landmark', 'ID_IFRAME_1C', 'LANDMARK_1');
+        executeTest('LANDMARK 1D: one main element',            'ID_IFRAME_1D', 'LANDMARK_1');
+        executeTest('LANDMARK 1E: more than one main element',  'ID_IFRAME_1E', 'LANDMARK_1');
 
-        executeTest('LANDMARK_2 elements with content must be in a landmark', 'ID_IFRAME_2A', 'LANDMARK_2');
+        executeTest('LANDMARK 2: elements with content must be in a landmark', 'ID_IFRAME_2A', 'LANDMARK_2');
 
-        executeTest('LANDMARK 3: no navigation landmark',     'ID_IFRAME_3A', 'LANDMARK_3');
-        executeTest('LANDMARK 3: has navigation landmark',    'ID_IFRAME_3B', 'LANDMARK_3');
-        executeTest('LANDMARK 3: No navigation landmark or nav element but has links', 'ID_IFRAME_3C', 'LANDMARK_3');
-        executeTest('LANDMARK 3: has nav element',            'ID_IFRAME_3D', 'LANDMARK_3');
+        executeTest('LANDMARK 3A: no navigation landmark',     'ID_IFRAME_3A', 'LANDMARK_3');
+        executeTest('LANDMARK 3B: has navigation landmark',    'ID_IFRAME_3B', 'LANDMARK_3');
+        executeTest('LANDMARK 3C: No navigation landmark or nav element but has links', 'ID_IFRAME_3C', 'LANDMARK_3');
+        executeTest('LANDMARK 3D: has nav element',            'ID_IFRAME_3D', 'LANDMARK_3');
 
-        executeTest('LANDMARK_4 no banner landmark',  'ID_IFRAME_4A', 'LANDMARK_4');
-        executeTest('LANDMARK_4 has banner landmark', 'ID_IFRAME_4B', 'LANDMARK_4');
-        executeTest('LANDMARK_4 has header element',  'ID_IFRAME_4E', 'LANDMARK_4');
+        executeTest('LANDMARK 4A: no banner landmark',  'ID_IFRAME_4A', 'LANDMARK_4');
+        executeTest('LANDMARK 4B: has banner landmark', 'ID_IFRAME_4B', 'LANDMARK_4');
+        executeTest('LANDMARK 4E: has header element',  'ID_IFRAME_4E', 'LANDMARK_4');
 
-        executeTest('LANDMARK_5 has two banner landmarks', 'ID_IFRAME_5A', 'LANDMARK_5');
-        executeTest('LANDMARK_5 has one banner landmark',  'ID_IFRAME_5B', 'LANDMARK_5');
-        executeTest('LANDMARK_5 has two header elements',  'ID_IFRAME_5C', 'LANDMARK_5');
-        executeTest('LANDMARK_5 has two header elements',  'ID_IFRAME_5D', 'LANDMARK_5');
+        executeTest('LANDMARK 5A: has two banner landmarks', 'ID_IFRAME_5A', 'LANDMARK_5');
+        executeTest('LANDMARK 5B: has one banner landmark',  'ID_IFRAME_5B', 'LANDMARK_5');
+        executeTest('LANDMARK 5C: has two header elements',  'ID_IFRAME_5C', 'LANDMARK_5');
+        executeTest('LANDMARK 5D: has two header elements',  'ID_IFRAME_5D', 'LANDMARK_5');
 
-        executeTest('LANDMARK_6 no contentinfo landmark',  'ID_IFRAME_6A', 'LANDMARK_6');
-        executeTest('LANDMARK_6 has contentinfo landmark', 'ID_IFRAME_6B', 'LANDMARK_6');
-        executeTest('LANDMARK_6 has footer element',       'ID_IFRAME_6C', 'LANDMARK_6');
+        executeTest('LANDMARK 6A: no contentinfo landmark',  'ID_IFRAME_6A', 'LANDMARK_6');
+        executeTest('LANDMARK 6B: has contentinfo landmark', 'ID_IFRAME_6B', 'LANDMARK_6');
+        executeTest('LANDMARK 6C: has footer element',       'ID_IFRAME_6C', 'LANDMARK_6');
 
-        executeTest('LANDMARK_7 has two contentinfo landmarks', 'ID_IFRAME_7A', 'LANDMARK_7');
-        executeTest('LANDMARK_7 has two footer elements',       'ID_IFRAME_7B', 'LANDMARK_7');
+        executeTest('LANDMARK 7A: has two contentinfo landmarks', 'ID_IFRAME_7A', 'LANDMARK_7');
+        executeTest('LANDMARK 7B: has two footer elements',       'ID_IFRAME_7B', 'LANDMARK_7');
 
-        executeTest('LANDMARK_8 top level banner landmarks and header elements', 'ID_IFRAME_8A', 'LANDMARK_8');
-        executeTest('LANDMARK_8 top level banner landmarks and header elements', 'ID_IFRAME_8B', 'LANDMARK_8');
-        executeTest('LANDMARK_8 top level banner landmarks and header elements', 'ID_IFRAME_8C', 'LANDMARK_8');
+        executeTest('LANDMARK 8A: top level banner landmarks and header elements', 'ID_IFRAME_8A', 'LANDMARK_8');
+        executeTest('LANDMARK 8B: top level banner landmarks and header elements', 'ID_IFRAME_8B', 'LANDMARK_8');
+        executeTest('LANDMARK 8C: top level banner landmarks and header elements', 'ID_IFRAME_8C', 'LANDMARK_8');
 
-        executeTest('LANDMARK 9 Banner contains no landmarks',          'ID_IFRAME_9A', 'LANDMARK_9');
-        executeTest('LANDMARK 9 Banner contains navigation and region', 'ID_IFRAME_9B', 'LANDMARK_9');
-        executeTest('LANDMARK 9 Banner contains main and contentinfo',  'ID_IFRAME_9C', 'LANDMARK_9');
-        executeTest('LANDMARK 9 No banner landmark',                    'ID_IFRAME_9D', 'LANDMARK_9');
+        executeTest('LANDMARK 9A: Banner contains no landmarks',          'ID_IFRAME_9A', 'LANDMARK_9');
+        executeTest('LANDMARK 9B: Banner contains navigation and region', 'ID_IFRAME_9B', 'LANDMARK_9');
+        executeTest('LANDMARK 9C: Banner contains main and contentinfo',  'ID_IFRAME_9C', 'LANDMARK_9');
+        executeTest('LANDMARK 9D: No banner landmark',                    'ID_IFRAME_9D', 'LANDMARK_9');
 
-        executeTest('LANDMARK 10 Navigation landmarks can only contain region landmarks', 'ID_IFRAME_10A', 'LANDMARK_10');
+        executeTest('LANDMARK 10: Navigation landmarks can only contain region landmarks', 'ID_IFRAME_10A', 'LANDMARK_10');
 
-        executeTest('LANDMARK 11 Main landmarks must be top level', 'ID_IFRAME_11A', 'LANDMARK_11');
-        executeTest('LANDMARK 11 Main landmarks must be top level', 'ID_IFRAME_11B', 'LANDMARK_11');
-        executeTest('LANDMARK 11 Main elements must be top level',  'ID_IFRAME_11C', 'LANDMARK_11');
+        executeTest('LANDMARK 11A: Main landmarks must be top level', 'ID_IFRAME_11A', 'LANDMARK_11');
+        executeTest('LANDMARK 11B: Main landmarks must be top level', 'ID_IFRAME_11B', 'LANDMARK_11');
+        executeTest('LANDMARK 11C: Main elements must be top level',  'ID_IFRAME_11C', 'LANDMARK_11');
 
-        executeTest('LANDMARK 12 Contentinfo landmarks must be top level', 'ID_IFRAME_12A', 'LANDMARK_12');
-        executeTest('LANDMARK 12 Contentinfo landmarks must be top level', 'ID_IFRAME_12B', 'LANDMARK_12');
-        executeTest('LANDMARK 12 footer elements must be top level',       'ID_IFRAME_12C', 'LANDMARK_12');
+        executeTest('LANDMARK 12A: Contentinfo landmarks must be top level', 'ID_IFRAME_12A', 'LANDMARK_12');
+        executeTest('LANDMARK 12B: Contentinfo landmarks must be top level', 'ID_IFRAME_12B', 'LANDMARK_12');
+        executeTest('LANDMARK 12C: footer elements must be top level',       'ID_IFRAME_12C', 'LANDMARK_12');
 
-        executeTest('LANDMARK 13 contentinfo contains no landmarks',          'ID_IFRAME_13A', 'LANDMARK_13');
-        executeTest('LANDMARK 13 contentinfo contains navigation and region', 'ID_IFRAME_13B', 'LANDMARK_13');
-        executeTest('LANDMARK 13 contentinfo contains main and contentinfo',  'ID_IFRAME_13C', 'LANDMARK_13');
-        executeTest('LANDMARK 13 No contentinfo landmark',                    'ID_IFRAME_13D', 'LANDMARK_13');
+        executeTest('LANDMARK 13A: contentinfo contains no landmarks',          'ID_IFRAME_13A', 'LANDMARK_13');
+        executeTest('LANDMARK 13B: contentinfo contains navigation and region', 'ID_IFRAME_13B', 'LANDMARK_13');
+        executeTest('LANDMARK 13C: contentinfo contains main and contentinfo',  'ID_IFRAME_13C', 'LANDMARK_13');
+        executeTest('LANDMARK 13D: No contentinfo landmark',                    'ID_IFRAME_13D', 'LANDMARK_13');
 
-        executeTest('LANDMARK 14 Search landmark only contains region landmarks', 'ID_IFRAME_14A', 'LANDMARK_14');
+        executeTest('LANDMARK 14: Search landmark only contains region landmarks', 'ID_IFRAME_14A', 'LANDMARK_14');
 
-        executeTest('LANDMARK 15 Form landmark only contains region landmarks', 'ID_IFRAME_15A', 'LANDMARK_15');
+        executeTest('LANDMARK 15A: Form landmark only contains region landmarks', 'ID_IFRAME_15A', 'LANDMARK_15');
 
-        executeTest('LANDMARK 15 Form element only contains region landmarks',  'ID_IFRAME_15B', 'LANDMARK_15');
+        executeTest('LANDMARK 15B: Form element only contains region landmarks',  'ID_IFRAME_15B', 'LANDMARK_15');
 
-        executeTest('LANDMARK 16 Region landmark must have label', 'ID_IFRAME_16A', 'LANDMARK_16');
+        executeTest('LANDMARK 16: Region landmark must have label', 'ID_IFRAME_16A', 'LANDMARK_16');
 
-        executeTest('LANDMARK 17 Landmark must have unique label', 'ID_IFRAME_17A', 'LANDMARK_17');
+        executeTest('LANDMARK 17: Landmark must have unique label', 'ID_IFRAME_17A', 'LANDMARK_17');
 
-        executeTest('LANDMARK 18 Landmark must be descriptive', 'ID_IFRAME_18A', 'LANDMARK_18');
+        executeTest('LANDMARK 18: Landmark must be descriptive', 'ID_IFRAME_18A', 'LANDMARK_18');
 
-        executeTest('LANDMARK 19 Complementary landmarks must be top level', 'ID_IFRAME_19A', 'LANDMARK_19');
-        executeTest('LANDMARK 19 Complementary landmarks must be top level', 'ID_IFRAME_19B', 'LANDMARK_19');
-        executeTest('LANDMARK 19 aside elements must be top level',          'ID_IFRAME_19C', 'LANDMARK_19');
+        executeTest('LANDMARK 19A: Complementary landmarks must be top level', 'ID_IFRAME_19A', 'LANDMARK_19');
+        executeTest('LANDMARK 19B: Complementary landmarks must be top level', 'ID_IFRAME_19B', 'LANDMARK_19');
+        executeTest('LANDMARK 19C: aside elements must be top level',          'ID_IFRAME_19C', 'LANDMARK_19');
       });
     </script>
     <!-- Not behaving correctly-->

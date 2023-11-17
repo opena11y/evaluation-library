@@ -10,8 +10,8 @@ import {
 import DebugLogging      from '../debug.js';
 
 /* Constants */
-const debug = new DebugLogging('Target Size Rules', false);
-debug.flag = true;
+const debug = new DebugLogging('Size', false);
+debug.flag = false;
 
 /*
  * OpenA11y Rules
@@ -68,7 +68,7 @@ export const targetSizeRules = [
     last_updated        : '2023-10-26',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
-    rule_required       : true,
+    rule_required       : false,
     wcag_primary_id     : '2.5.5',
     wcag_related_ids    : [],
     target_resources    : ['links'],
@@ -105,7 +105,7 @@ export const targetSizeRules = [
     last_updated        : '2023-10-29',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.FORMS,
-    rule_required       : false,
+    rule_required       : true,
     wcag_primary_id     : '2.5.8',
     wcag_related_ids    : [],
     target_resources    : ['button', 'input[type=button]', 'input[type=image]', 'input[type=reset]', 'input[type=submit]', '[role=button]'],
@@ -147,8 +147,6 @@ export const targetSizeRules = [
     target_resources    : ['button', 'input[type=button]', 'input[type=image]', 'input[type=reset]', 'input[type=submit]', '[role=button]'],
     validate          : function (dom_cache, rule_result) {
 
-      debug.log(`[TARGET_SIZE_4]`);
-
       dom_cache.controlInfo.allButtonElements.forEach( be => {
         const de = be.domElement;
         const h = de.height;
@@ -188,11 +186,11 @@ export const targetSizeRules = [
  /**
    * @object TARGET_SIZE_5
    *
-   * @desc Checkbox and radio button target size
+   * @desc Checkbox and radio button target size minimum
    */
 
   { rule_id             : 'TARGET_SIZE_5',
-    last_updated        : '2023-10-31',
+    last_updated        : '2023-11-17',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
@@ -236,7 +234,61 @@ export const targetSizeRules = [
       });
 
     } // end validate function
+  },
+
+ /**
+   * @object TARGET_SIZE_6
+   *
+   * @desc Checkbox and radio button target size enhanced
+   */
+
+  { rule_id             : 'TARGET_SIZE_6',
+    last_updated        : '2023-11-17',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.FORMS,
+    rule_required       : false,
+    wcag_primary_id     : '2.5.5',
+    wcag_related_ids    : [],
+    target_resources    : ['input[type=checkbox]', 'input[type=radio]', '[role=radio]', '[role=checkbox]]'],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.controlInfo.allControlElements.forEach( ce => {
+        const de = ce.domElement;
+
+        if (de.role === 'radio' || de.role === 'checkbox') {
+          if (de.visibility.isVisibleOnScreen) {
+            let h = de.height;
+            let w = de.width;
+            if (( h < 44) || ( w < 44)) {
+              if (ce.hasLabel) {
+                h = ce.labelHeight;
+                w = ce.labelWidth;
+                if (( h < 44) || (w < 44)) {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [h, w]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [h, w]);
+                }
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, h, w]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, h, w]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+
+
+      });
+
+    } // end validate function
   }
+
 
 
 ];

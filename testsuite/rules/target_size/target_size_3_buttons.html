@@ -5,7 +5,8 @@
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
     <style>
-      button {
+      button,
+      input[type=button] {
         display: block;
         margin: 1em;
       }
@@ -20,22 +21,37 @@
 
       <h2><code>button</code> Element</h2>
 
-      <button  class="TARGET_SIZE_4_PASS" style="font-size: 200%">Button 1</button>
+      <button  class="TARGET_SIZE_3_PASS" style="font-size: 24px">Button 1 Pass</button>
 
-      <button class="TARGET_SIZE_4_FAIL" style="width: 23px">Button 2F</button>
-      <button class="TARGET_SIZE_4_FAIL" style="height: 23px">Button 3F</button>
+      <button class="TARGET_SIZE_3_FAIL" style="width: 23px">Button 2 Fail</button>
+      <button class="TARGET_SIZE_3_FAIL" style="height: 23px">Button 3 Fail</button>
 
-      <button class="TARGET_SIZE_4_PASS" style="width: 5em; height: 5em">Button 4P</button>
-      <button class="TARGET_SIZE_4_FAIL" style="width: 1em; height: 1em">Button 5P</button>
+      <button class="TARGET_SIZE_3_PASS" style="width: 24px; height: 24px">Button 4 Pass</button>
+      <button class="TARGET_SIZE_3_FAIL" style="width: 24px; height: 23px">Button 5 Fail</button>
+      <button class="TARGET_SIZE_3_FAIL" style="width: 23px; height: 24px">Button 6 Fail</button>
 
       <h2><code>input[type=button]</code> Element</h2>
 
-      <input type="button"  class="TARGET_SIZE_4_PASS" value="Button 6P"/>
+      <input type="button"  class="TARGET_SIZE_3_PASS" value="Button 7 Pass"style="height: 24px"/>
 
-      <input type="button"  class="TARGET_SIZE_4_FAIL" value="Button 7F" style="width: 23px"/>
+      <input type="button"  class="TARGET_SIZE_3_FAIL" value="Button 8 Fail" style="width: 23px"/>
 
-      <input type="button"  class="TARGET_SIZE_4_FAIL" value="Button 8F" style="height: 23px"/>
+      <input type="button"  class="TARGET_SIZE_3_FAIL" value="Button 9 Fail" style="height: 23px"/>
 
+      <button hidden class="TARGET_SIZE_3_HIDDEN" style="visibility: hidden; width: 23px; height: 24px">Button 10 Hidden</button>
+
+      <input type="button" class="TARGET_SIZE_3_HIDDEN" value="Button 11 Hidden" style="height: 23px; display: none"/>
+
+      <h2><code>button</code> role</h2>
+
+      <div role="button" tabindex="0" class="TARGET_SIZE_3_PASS" style="font-size: 24px">Button 1 Pass</div>
+
+      <div role="button" tabindex="0"  class="TARGET_SIZE_3_FAIL" style="width: 23px">Button 2 Fail</div>
+      <div role="button" tabindex="0"  class="TARGET_SIZE_3_FAIL" style="height: 23px">Button 3 Fail</div>
+
+      <div role="button" tabindex="0"  class="TARGET_SIZE_3_PASS" style="width: 24px; height: 24px">Button 4 Pass</div>
+      <div role="button" tabindex="0"  class="TARGET_SIZE_3_FAIL" style="width: 24px; height: 23px">Button 5 Fail</div>
+      <div role="button" tabindex="0" class="TARGET_SIZE_3_FAIL" style="width: 23px; height: 24px">Button 6 Fail</div>
 
 
   </body>

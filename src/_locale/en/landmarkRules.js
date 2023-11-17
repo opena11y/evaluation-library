@@ -109,14 +109,15 @@ export const landmarkRules = {
       },
       PURPOSES: [
         'Landmarks provide a way to organize the various types of content on a page for users of assistive technologies. The organization of content regions using landmarks is functionally similar to the way visual designers organize information for people who rely on a graphical rendering of the content.',
-        'When content is not contained in a landmark, it will be unreachable using landmark navigation, which is an important feature provided by assistive technologies such as screen readers.'
+        'When content is not contained in a landmark, it will be unreachable using landmark navigation, which is an important feature provided by assistive technologies such as screen readers.',
+        'EXCEPTION: Dialog content is not required to be in a landmark.'
       ],
       TECHNIQUES: [
         'Use the appropriate landmarks to identify the different regions of content on a web page.',
         'The most important landmark roles are @main@ and @navigation@, as nearly every page will include at least those regions.',
         'Other commonly used landmark roles include @banner@, @contentinfo@, @complementary@ and @search@.',
-        'Use HTML5 sectioning elements that have a default ARIA landmark role: @main@ (@main@), @nav@ (@navigation@), @aside@ (@complementary@) and in some situations @header@ (@banner@) and @footer@ (@contentinfo@). When using these elements, the @role@ attribute should NOT be defined.',
-        'In HTML4 and XHTML 1.0 documents, a landmark can be created using a @div@ element with a @role@ attribute and the appropriate ARIA landmark role value (e.g., @role="main"@).',
+        'Use HTML sectioning elements that have a default ARIA landmark role: @main@ (@main@), @nav@ (@navigation@), @aside@ (@complementary@) and in some situations @header@ (@banner@) and @footer@ (@contentinfo@). When using these elements, the @role@ attribute should NOT be defined.',
+        'A landmark can be created using a @div@ element with a @role@ attribute and the appropriate ARIA landmark role value (e.g., @role="main"@).',
         'The @search@ role is typically placed on a @form@ element or a @div@ that surrounds the search form.'
       ],
       MANUAL_CHECKS: [
@@ -128,8 +129,8 @@ export const landmarkRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: Sections',
-          url:   'https://www.w3.org/TR/html5/sections.html#sections'
+          title: 'HTML: Sections',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
@@ -661,12 +662,12 @@ export const landmarkRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: The HEADER element',
-          url:   'https://www.w3.org/TR/html5/sections.html#the-header-element'
+          title: 'HTML: The HEADER element',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html#the-header-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: Sections',
-          url:   'https://www.w3.org/TR/html5/sections.html#sections'
+          title: 'HTML: Sections',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
@@ -913,12 +914,12 @@ export const landmarkRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: The FOOTER element',
-          url:   'https://www.w3.org/TR/html5/sections.html#the-footer-element'
+          title: 'HTML: The FOOTER element',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html#the-footer-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: Sections',
-          url:   'https://www.w3.org/TR/html5/sections.html#sections'
+          title: 'HTML: Sections',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
@@ -1196,8 +1197,8 @@ export const landmarkRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: Sections',
-          url:   'https://www.w3.org/TR/html5/sections.html#sections'
+          title: 'HTML: Sections',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
@@ -1274,8 +1275,8 @@ export const landmarkRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: Sections',
-          url:   'https://www.w3.org/TR/html5/sections.html#sections'
+          title: 'HTML: Sections',
+          url:   'https://html.spec.whatwg.org/multipage/sections.html'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',

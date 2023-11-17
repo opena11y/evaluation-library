@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>All content must be contained in landmarks | OpenA11y Evaluation Library 2.0</title>
+        <title>Radio button and checkbox target size (Enhanced) | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -51,33 +51,33 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">All content must be contained in landmarks</li>
+          <li class="breadcrumb-item active">Radio button and checkbox target size (Enhanced)</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: All content must be contained in landmarks</h1>
+            <h1 id="h1-title">Rule: Radio button and checkbox target size (Enhanced)</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Landmark 2</td>
+  <td>Target Size 6</td>
 </tr>
 
                   
 <tr>
   <th>Conformance</th>
-  <td>Required</td>
+  <td>Recommended</td>
 </tr>
 
                   
 <tr>
   <th>Definition</th>
-  <td>All rendered content must be placed inside of container elements with appropriate ARIA landmark roles.</td>
+  <td>Radio button and checkbox activation areas are at least 44 by 44 CSS pixels.</td>
 </tr>
 
                   
@@ -86,11 +86,9 @@
   <td>
     <ul>
       
-      <li>Landmarks provide a way to organize the various types of content on a page for users of assistive technologies. The organization of content regions using landmarks is functionally similar to the way visual designers organize information for people who rely on a graphical rendering of the content.</li>
+      <li>The intent of this success criterion is to help users who may have trouble activating a small target because of hand tremors, limited dexterity or other reasons. If the target is too small, it may be difficult to aim at the target.</li>
       
-      <li>When content is not contained in a landmark, it will be unreachable using landmark navigation, which is an important feature provided by assistive technologies such as screen readers.</li>
-      
-      <li>EXCEPTION: Dialog content is not required to be in a landmark.</li>
+      <li>Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.</li>
       
     </ul>
   </td>
@@ -99,7 +97,7 @@
                   
 <tr>
   <th>Conformance</th>
-  <td>Required</td>
+  <td>Recommended</td>
 </tr>
 
                   
@@ -107,32 +105,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">
-        Success Criterion 1.3.1 Info and Relationships
+      <a href="https://www.w3.org/TR/WCAG22/#target-size" target="_spec">
+        Success Criterion 2.5.5 Target Size
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">
-          Success Criterion 2.4.1 Bypass Blocks
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">
-          Success Criterion 2.4.6 Headings and Labels
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#section-headings" target="_spec">
-          Success Criterion 2.4.10 Section Headings
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -141,7 +121,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Landmarks</td>
+  <td>Forms</td>
 </tr>
 
                   
@@ -156,17 +136,7 @@
   <td>
     <ul>
       
-      <li>Use the appropriate landmarks to identify the different regions of content on a web page.</li>
-      
-      <li>The most important landmark roles are <code>main</code> and <code>navigation</code>, as nearly every page will include at least those regions.</li>
-      
-      <li>Other commonly used landmark roles include <code>banner</code>, <code>contentinfo</code>, <code>complementary</code> and <code>search</code>.</li>
-      
-      <li>Use HTML sectioning elements that have a default ARIA landmark role: <code>main</code> (<code>main</code>), <code>nav</code> (<code>navigation</code>), <code>aside</code> (<code>complementary</code>) and in some situations <code>header</code> (<code>banner</code>) and <code>footer</code> (<code>contentinfo</code>). When using these elements, the <code>role</code> attribute should NOT be defined.</li>
-      
-      <li>A landmark can be created using a <code>div</code> element with a <code>role</code> attribute and the appropriate ARIA landmark role value (e.g., <code>role="main"</code>).</li>
-      
-      <li>The <code>search</code> role is typically placed on a <code>form</code> element or a <code>div</code> that surrounds the search form.</li>
+      <li>Use CSS to increase the dimensions of the radio buttons or checkbox or the associated label elements to at least 44 by 44 pixels.</li>
       
     </ul>
   </td>
@@ -178,21 +148,19 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#landmark_roles">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html">WCAG Understanding Target Size (Minimum)</a></li>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/sections.html">HTML: Sections</a></li>
+      <li><a href="https://docs.microsoft.com/en-us/windows/uwp/design/input/guidelines-for-targeting">Windows UWP Guidelines for touch targets</a></li>
       
-      <li><a href="https://www.w3.org/WAI/ARIA/apg/#aria_landmark">WAI-ARIA Authoring Practices 1.2: Landmarks</a></li>
+      <li><a href="https://material.io/design/layout/spacing-methods.html#touch-targets">Google Material Design Touch targets</a></li>
       
-      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/">WAI-ARIA Authoring Practices 1.2: Landmark Example</a></li>
+      <li><a href="https://web.dev/accessible-tap-targets/">web.dev Accessible tap targets</a></li>
       
-      <li><a href="https://www.w3.org/WAI/tutorials/page-structure/">W3C Web Accessibility Tutorials: Page Structure</a></li>
+      <li><a href="http://touchlab.mit.edu/publications/2003_009.pdf">Human Fingertips to Investigate the Mechanics of Tactile Sense (PDF)</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11">ARIA11: Using ARIA landmarks to identify regions of a page</a></li>
+      <li><a href="http://www.cs.umd.edu/hcil/trs/2006-11/2006-11.htm">One-Handed Thumb Use on Small Touchscreen Devices</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA13">ARIA13: Using aria-labelledby to name regions and landmarks</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA14">ARIA14: Using aria-label to provide an invisible label where a visible label cannot be used</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/windows/apps/design/input/guidelines-for-targeting">Microsoft Guidelines for Building Touch Friendly Sites</a></li>
       
     </ul>
   </td>

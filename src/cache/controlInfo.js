@@ -6,6 +6,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('ControlInfo', false);
+debug.flag = false;
 
 /**
  * @class ControlElement
@@ -64,6 +65,7 @@ class ControlElement {
                        false;
 
     this.labelElement = this.checkForLabelEncapsulation(parentControlElement);
+
     if (this.labelElement) {
       this.hasLabel = true;
       this.labelWidth  = this.labelElement.domElement.width;
@@ -337,15 +339,25 @@ export default class ControlInfo {
 
   updateLabelForReferences () {
     this.allLabelElements.forEach (le => {
-      const id = le.for;
+      const id = le.labelForAttr;
       if (id) {
         for (let i = 0; this.allControlElements.length; i += 1) {
           const ce = this.allControlElements[i];
           if (ce.domElement.id === id) {
-            ce.labelElement = le;
-            ce.hasLabel = true;
-            ce.labelWidth  = ce.domElement.width;
-            ce.labelHeight = ce.domElement.height;
+            if (ce.labelElement) {
+              // pick largest label for size calculations
+              if (ce.labelElement.area < le.domElement.area) {
+                ce.labelElement = le;
+                ce.labelWidth  = le.domElement.width;
+                ce.labelHeight = le.domElement.height;
+              }
+            }
+            else {
+              ce.labelElement = le;
+              ce.hasLabel = true;
+              ce.labelWidth  = le.domElement.width;
+              ce.labelHeight = le.domElement.height;
+            }
             break;
           }
         }

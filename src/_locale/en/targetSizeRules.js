@@ -258,7 +258,7 @@ export const targetSizeRules = {
       TARGET_RESOURCES_DESC: 'radio buttons and checkboxes',
       RULE_RESULT_MESSAGES: {
         FAIL_S:  'Use CSS to increase the size of the area to activate the undersized radio button or checkbox to at least 24 by 24 CSS pixels.',
-        FAIL_P:  'Use CSS to increase the size of the area to activate the %N_F undersized radio buttons and chackboxes to at least 24 by 24 CSS pixel.',
+        FAIL_P:  'Use CSS to increase the size of the area to activate the %N_F undersized radio buttons and checkboxes to at least 24 by 24 CSS pixel.',
         HIDDEN_S:  'One undersized radio button or checkbox was not evaluated because it is not visible.',
         HIDDEN_P:  '%N_H undersized radio buttons or checkboxes were not evaluated because they are not visible.',
         NOT_APPLICABLE:  'No undersized radio buttons or checkboxes found on the page'
@@ -309,5 +309,66 @@ export const targetSizeRules = {
           url:   'https://learn.microsoft.com/en-us/windows/apps/design/input/guidelines-for-targeting'
         }
       ]
+  },
+
+  TARGET_SIZE_6: {
+      ID:                    'Target Size 6',
+      DEFINITION:            'Radio button and checkbox activation areas are at least 44 by 44 CSS pixels.',
+      SUMMARY:               'Radio button and checkbox target size (Enhanced)',
+      TARGET_RESOURCES_DESC: 'radio buttons and checkboxes',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:  'Use CSS to increase the size of the area to activate the undersized radio button or checkbox to at least 44 by 44 CSS pixels.',
+        FAIL_P:  'Use CSS to increase the size of the area to activate the %N_F undersized radio buttons and checkboxes to at least 44 by 44 CSS pixel.',
+        HIDDEN_S:  'One undersized radio button or checkbox was not evaluated because it is not visible.',
+        HIDDEN_P:  '%N_H undersized radio buttons or checkboxes were not evaluated because they are not visible.',
+        NOT_APPLICABLE:  'No undersized radio buttons or checkboxes found on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'The current dimensions of the @%1@ element is %2 by %3 and meet the target size requirement',
+        ELEMENT_FAIL_1:   'The current dimensions of the @%1@ element is %2 by %3, use CSS to increase the button dimensions to at least 44 x 44 CSS pixels.',
+        ELEMENT_PASS_2:   'The current dimensions of the associated @label@ element is %1 by %2 and meet the target size requirement',
+        ELEMENT_FAIL_2:   'The current dimensions of the associated @label@ element is %1 by %2, use CSS to increase the button dimensions to at least 44 x 44 CSS pixels.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element is visually hidden and is not tested for target size.'
+      },
+      PURPOSES: [
+        'The intent of this success criterion is to help users who may have trouble activating a small target because of hand tremors, limited dexterity or other reasons. If the target is too small, it may be difficult to aim at the target.',
+        'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
+      ],
+      TECHNIQUES: [
+        'Use CSS to increase the dimensions of the radio buttons or checkbox or the associated label elements to at least 44 by 44 pixels.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type: REFERENCES.WCAG_SPECIFICATION,
+          title: 'WCAG Understanding Target Size (Minimum)',
+          url: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Windows UWP Guidelines for touch targets',
+          url:   'https://docs.microsoft.com/en-us/windows/uwp/design/input/guidelines-for-targeting'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Google Material Design Touch targets',
+          url:   'https://material.io/design/layout/spacing-methods.html#touch-targets'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'web.dev Accessible tap targets',
+          url:   'https://web.dev/accessible-tap-targets/'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Human Fingertips to Investigate the Mechanics of Tactile Sense (PDF)',
+          url:   'http://touchlab.mit.edu/publications/2003_009.pdf'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'One-Handed Thumb Use on Small Touchscreen Devices',
+          url:   'http://www.cs.umd.edu/hcil/trs/2006-11/2006-11.htm'
+        },
+        { type:  REFERENCES.REFERENCE,
+          title: 'Microsoft Guidelines for Building Touch Friendly Sites',
+          url:   'https://learn.microsoft.com/en-us/windows/apps/design/input/guidelines-for-targeting'
+        }
+      ]
   }
 }
+

@@ -137,14 +137,14 @@ export const colorRules = [
   /**
    * @object COLOR_3
    *
-   * @desc  Color contrast ratio must be > 4.5 for normal text, or > 3.1 for large text
+   * @desc  Color contrast ratio must be >= 7 for normal text, or >= 4.5 for large text
    */
 
   { rule_id             : 'COLOR_3',
     last_updated        : '2022-07-04',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
-    rule_required        : true,
+    rule_required        : false,
     wcag_primary_id     : '1.4.6',
     wcag_related_ids    : ['1.4.1','1.4.3'],
     target_resources    : ['text content'],
