@@ -57,8 +57,8 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="id-rc" role="tabpanel" aria-labelledby="id-rc-tab">
               {% for rc in allRuleCategories %}
-                <h2 id="rc-{{rc.rule_category_id}}" class="rules">{{rc.title}}</h2>
-                <table class="table table-striped" aria-labelledby="rc-{{rc.rule_category_id}}">
+                <h2 id="rc-{{rc.id}}" class="rules">{{rc.title}}</h2>
+                <table class="table table-striped" aria-labelledby="rc-{{rc.id}}">
                   <thead>
                     <th>ID</th>
                     <th>Summary</th>
