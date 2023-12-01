@@ -68,8 +68,9 @@ export const titleRules = [
         if (typeof h1 !== 'string') {
           h1 = '';
         }
-        title = title.toLowerCase();
-        h1 = h1.toLowerCase();
+        // Replace special characters and '_' with spaces
+        title = title.toLowerCase().replace(/\W+/g, ' ').replace('_', ' ');
+        h1 = h1.toLowerCase().replace(/\W+/g, ' ').replace('_', ' ');
 
         const wordsTitle = title.split(' ');
         const wordsH1 = h1.split(' ');

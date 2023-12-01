@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$W = new DebugLogging('constants', false);
 
-const VERSION = '2.0.beta2';
+const VERSION = '2.0';
 
 
 /**
@@ -14519,8 +14519,8 @@ const controlRules$1 = {
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: 'Accessible name is unique.',
-        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[role=%2]@ element, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
-        ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ element, consider using @fieldset@ and @legend@ elements to providie grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_FAIL_1: 'Change the accessible name of the @%1[role=%2]@ element, consider using @fieldset@ and @legend@ elements to provide grouping label or an ARIA technique to make the accessible name unique on the page.',
+        ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ element, consider using @fieldset@ and @legend@ elements to provide grouping label or an ARIA technique to make the accessible name unique on the page.',
         ELEMENT_MC_1:   'Verify the accessible name of the @%1[role=%2]@ element accurately describes the action of the button, since it shares the same name as other buttons.',
         ELEMENT_MC_2:   'Verify the accessible name of the @%1@ element accurately describes the action of the button, since it shares the same name as other buttons',
         ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
@@ -27943,8 +27943,9 @@ const titleRules = [
         if (typeof h1 !== 'string') {
           h1 = '';
         }
-        title = title.toLowerCase();
-        h1 = h1.toLowerCase();
+        // Replace special characters and '_' with spaces
+        title = title.toLowerCase().replace(/\W+/g, ' ').replace('_', ' ');
+        h1 = h1.toLowerCase().replace(/\W+/g, ' ').replace('_', ' ');
 
         const wordsTitle = title.split(' ');
         const wordsH1 = h1.split(' ');

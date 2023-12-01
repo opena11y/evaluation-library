@@ -19,51 +19,14 @@
         executeTest('TITLE 1B: Empty title', 'ID_IFRAME_1B', 'TITLE_1');
         executeTest('TITLE 1C: Has title',   'ID_IFRAME_1C', 'TITLE_1');
 
-      });
+        executeTest('TITLE 2A: No title',         'ID_IFRAME_2A', 'TITLE_2');
+        executeTest('TITLE 2B: Has title',        'ID_IFRAME_2B', 'TITLE_2');
+        executeTest('TITLE 2C: No h1',            'ID_IFRAME_2C', 'TITLE_2');
+        executeTest('TITLE 2D: Hidden h1',        'ID_IFRAME_2D', 'TITLE_2');
+        executeTest('TITLE 2E: More tham two h1', 'ID_IFRAME_2E', 'TITLE_2');
+        executeTest('TITLE 2F: h1 different from title', 'ID_IFRAME_2F', 'TITLE_2');
 
-/*
-      // Test cases for titling rules      
-
-      test( "TITLE_1: Pages must have a title", function() {
-        executeTest('ID_IFRAME_1A', 'TITLE_1');
       });
-      
-      
-      test( "TITLE_1: Pages must have a title", function() {
-        executeTest('ID_IFRAME_1B', 'TITLE_1');
-      });
-      
-      
-      test( "TITLE_1: Pages must have a title", function() {
-        executeTest('ID_IFRAME_1C', 'TITLE_1');
-      });
-      
-      test( "TITLE_2: No title element", function() {
-        executeTest('ID_IFRAME_2A', 'TITLE_2');
-      });
-      
-      
-      test( "TITLE_2: Title and h1 element", function() {
-        executeTest('ID_IFRAME_2B', 'TITLE_2');
-      });
-      
-      test( "TITLE_2: No h1 element", function() {
-        executeTest('ID_IFRAME_2C', 'TITLE_2');
-      });
-
-      test( "TITLE_2: hidden h1 element", function() {
-        executeTest('ID_IFRAME_2D', 'TITLE_2');
-      });
-      
-      test( "TITLE_2: more than 2 h1 elements", function() {
-        executeTest('ID_IFRAME_2E', 'TITLE_2');
-      });
-      
-      test( "TITLE_2: h1 different title", function() {
-        executeTest('ID_IFRAME_2F', 'TITLE_2');
-      });      
-
-*/
 
     </script>
     
