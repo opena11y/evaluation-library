@@ -807,7 +807,78 @@ export const controlRules = {
             url:   'https://html.spec.whatwg.org/#the-textarea-element'
           }
         ]
+    },
+
+    CONTROL_15: {
+        ID:                    'Control 15',
+        DEFINITION:            'add definition',
+        SUMMARY:               'Label in Name',
+        TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
+        RULE_RESULT_MESSAGES: {
+          MANUAL_CHECK_S:  '',
+        },
+        BASE_RESULT_MESSAGES: {
+          PAGE_MC_1: '',
+        },
+        PURPOSES: [
+          'add purpose',
+          ''
+        ],
+        TECHNIQUES: [
+          'ass technique',
+          ''
+        ],
+        MANUAL_CHECKS: [
+          '',
+          ''
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'add specification',
+            url:   ''
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'add technique',
+            url:   ''
+          }
+        ]
+    },
+
+    CONTROL_16: {
+        ID:                    'Control 16',
+        DEFINITION:            'add definition',
+        SUMMARY:               'Redundant Entry',
+        TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
+        RULE_RESULT_MESSAGES: {
+          MANUAL_CHECK_S:  '',
+        },
+        BASE_RESULT_MESSAGES: {
+          PAGE_MC_1: '',
+        },
+        PURPOSES: [
+          'add purpose',
+          ''
+        ],
+        TECHNIQUES: [
+          'ass technique',
+          ''
+        ],
+        MANUAL_CHECKS: [
+          '',
+          ''
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'add specification',
+            url:   ''
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'add technique',
+            url:   ''
+          }
+        ]
     }
+
 };
 
 

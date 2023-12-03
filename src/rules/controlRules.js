@@ -849,7 +849,50 @@ export const controlRules = [
     });
 
   } // end validation function
+},
+
+/**
+ * @object CONTROL_15
+ *
+ * @desc   Label in Name
+ */
+
+{ rule_id             : 'CONTROL_15',
+  last_updated        : '2023-12-01',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '2.5.3',
+  wcag_related_ids    : [],
+  target_resources    : ["input", "output", "select", "textarea", "widgets"],
+  validate          : function (dom_cache, rule_result) {
+
+    debug.log(`[CONTROL_15]: ${dom_cache} ${rule_result}`);
+
+  } // end validation function
+},
+
+/**
+ * @object CONTROL_16
+ *
+ * @desc   Redundant Entry
+ */
+
+{ rule_id             : 'CONTROL_16',
+  last_updated        : '2023-12-01',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '3.3.7',
+  wcag_related_ids    : [],
+  target_resources    : ["input", "select", "textarea"],
+  validate          : function (dom_cache, rule_result) {
+
+    debug.log(`[CONTROL_16]: ${dom_cache} ${rule_result}`);
+
+  } // end validation function
 }
+
 
 
 ];

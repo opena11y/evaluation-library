@@ -124,6 +124,8 @@ export default class DOMCache {
     parentInfo.document        = startingDoc;
     parentInfo.accNameDocument = startingDoc;
 
+    this.hasScripting = false;
+
     this.controlInfo   = new ControlInfo();
     this.idInfo        = new IdInfo();
     this.imageInfo     = new ImageInfo();
@@ -158,6 +160,9 @@ export default class DOMCache {
 
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
+    if (tagName === 'script') {
+      this.hasScripting = true;
+    }
     const elemSelector = (tagName === 'input') && (typeof type === 'string') ? 
                          `${tagName}[type=${type}]` :
                          tagName;
