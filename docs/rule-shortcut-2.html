@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Flashing limits | OpenA11y Evaluation Library 2.0</title>
+        <title>Avoid using &lt;code&gt;accesskey&lt;/code&gt; for shortcuts | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -51,21 +51,21 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Flashing limits</li>
+          <li class="breadcrumb-item active">Avoid using <code>accesskey</code> for shortcuts</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Flashing limits</h1>
+            <h1 id="h1-title">Rule: Avoid using <code>accesskey</code> for shortcuts</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Timing 3</td>
+  <td>Shortcut 2</td>
 </tr>
 
                   
@@ -77,7 +77,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>A page must not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.</td>
+  <td>Avoid using <code>accesskey</code> attribute for shortcuts due to potential conflicts with browser and assistive technology shortcuts.</td>
 </tr>
 
                   
@@ -86,11 +86,13 @@
   <td>
     <ul>
       
-      <li>People who have photosensitive seizure disorders can have a seizure triggered by content that flashes at certain frequencies for more than a few flashes.</li>
+      <li>An <code>accesskey</code> value can conflict with a system or browser keyboard shortcut, or assistive technology functionality. What may work for one combination of operating system, assistive technology, and browser may not work with other combinations.</li>
       
-      <li>People are even more sensitive to red flashing than to other colors.</li>
+      <li>Certain <code>accesskey</code> values may not be present on certain keyboards, especially when internationalization is a concern. So adapting to specific languages could cause further problems.</li>
       
-      <li>NOTE: This flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).</li>
+      <li><code>accesskey</code> values that rely on numbers may be confusing to individuals experiencing cognitive concerns, where the number doesn't have a logical association with the functionality it triggers.</li>
+      
+      <li>Informing the user that <code>accesskey</code>s are present, so that they are aware of the functionality. If the system lacks a method of notifying the user about this feature, the user might accidentally activate <code>accesskey</code>s.</li>
       
     </ul>
   </td>
@@ -107,8 +109,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold" target="_spec">
-        Success Criterion 2.3.1 Three Flashes or Below Threshold
+      <a href="https://www.w3.org/TR/WCAG22/#character-key-shortcuts" target="_spec">
+        Success Criterion 2.1.4 Character Key Shortcuts
       </a>
     </p>
     <p class="related">
@@ -123,13 +125,13 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Timing/Live Regions</td>
+  <td>Keyboard Support</td>
 </tr>
 
                   
 <tr>
   <th>Rule Scope</th>
-  <td>page</td>
+  <td>element</td>
 </tr>
 
                   
@@ -138,7 +140,9 @@
   <td>
     <ul>
       
-      <li>There is no remedication technique, the content must be removed or disabled from flashing.</li>
+      <li>Remove the use of the <code>accesskey</code> attribute.</li>
+      
+      <li>Use scripting instead of <code>accesskey</code> attribute to define shortcuts.  The scripting must meet the WCAG 2.1.4 requirements for shortcuts.</li>
       
     </ul>
   </td>
@@ -150,7 +154,11 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/WCAG20/Understanding/three-flashes-or-below-threshold">Understanding 2.3.1 Three Flashes or Below Threshold</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/character-key-shortcuts.html">W3C Understanding Character Key Shortcuts </a></li>
+      
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey">MDN: accesskey</a></li>
+      
+      <li><a href="https://webaim.org/techniques/keyboard/accesskey#spec">WebAIM: Accesskey</a></li>
       
     </ul>
   </td>

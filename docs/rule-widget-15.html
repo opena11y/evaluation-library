@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Remove deprecated ARIA attributes. | OpenA11y Evaluation Library 2.0</title>
+        <title>Closed shadow DOM requires manual check. | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -51,14 +51,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
-          <li class="breadcrumb-item active">Remove deprecated ARIA attributes.</li>
+          <li class="breadcrumb-item active">Closed shadow DOM requires manual check.</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Remove deprecated ARIA attributes.</h1>
+            <h1 id="h1-title">Rule: Closed shadow DOM requires manual check.</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -77,7 +77,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>ARIA attributes that have been deprecated for a role should be removed.</td>
+  <td>Custom elements (HTML elements created using the Web Components APIs) with closed Shadow DOMs must be manually checked for accessibility requirements.</td>
 </tr>
 
                   
@@ -86,11 +86,11 @@
   <td>
     <ul>
       
-      <li>Not all ARIA properties and states are useful on every ARIA role and starting with ARIA 1.2 certain states and properties that were once considered global have been deprecated on specific roles.</li>
+      <li>Custom elements, defined using the Web Components APIs of HTML 5, are typically used for creating interactive widgets on a web page. A custom element effectively creates a self-scoped package of HTML, CSS and JavaScript that uses the Shadow DOM to insulate itself from other CSS and JavaScript defined by the parent document.</li>
       
-      <li>The ARIA in HTML specification defines implicit roles for most HTML elememnts.</li>
+      <li>Because custom elements use the Shadow DOM and thus are not part of the legacy DOM, they can only be accessed by the evaluation library for programmatic checking of accessibility features when the shadow DOM is "open".</li>
       
-      <li>The same ARIA property and state restrictions on explicit roles apply to implicit roles.</li>
+      <li>The evaluation library is unable to analyze custom elements created with "closed" shadow DOMs. In the case of the "closed" shadow DOM all accessibility requirements require manual checks, possibly by using other DOM inspection tools to identify accessibility issues and features.</li>
       
     </ul>
   </td>
@@ -107,8 +107,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#parsing" target="_spec">
-        Success Criterion 4.1.1 Parsing
+      <a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">
+        Success Criterion 2.1.1 Keyboard
       </a>
     </p>
     <p class="related">
@@ -117,8 +117,68 @@
     <ul class="related">
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">
-          Success Criterion 4.1.2 Name, Role, Value
+        <a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">
+          Success Criterion 1.1.1 Non-text Content
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#use-of-color" target="_spec">
+          Success Criterion 1.4.1 Use of Color
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_spec">
+          Success Criterion 1.4.3 Contrast (Minimum)
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#resize-text" target="_spec">
+          Success Criterion 1.4.4 Resize text
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
+          Success Criterion 2.1.2 No Keyboard Trap
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#timing-adjustable" target="_spec">
+          Success Criterion 2.2.1 Timing Adjustable
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#pause-stop-hide" target="_spec">
+          Success Criterion 2.2.2 Pause, Stop, Hide
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
+          Success Criterion 2.4.3 Focus Order
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">
+          Success Criterion 3.3.2 Labels or Instructions
         </a>
       </li>
       
@@ -144,7 +204,15 @@
   <td>
     <ul>
       
-      <li>Remove the deprecated ARIA attribute from the element.</li>
+      <li>In evaluating custom elements with "closed" shadow DOMs that render as interactive widgets, the most important manual checks involve keyboard navigation and operability, and focus styling, which are related to the various ways a user may interact with the widget.</li>
+      
+      <li>Test with screen readers to verify functionality is operable by a screen reader user.</li>
+      
+      <li>Test the graphical rendering in operating system using high contrast settings to verify content is perceivable by people with visual impairments.</li>
+      
+      <li>Use accessibility tools in browser DOM inspectors to assist with manual inspection, since the DOM inspector of most  browsers allows access to the Shadow DOM of the custom element.</li>
+      
+      <li>You can use the accessibility rules in this tool to help guide your manual testing procedures.</li>
       
     </ul>
   </td>
@@ -156,11 +224,13 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#widget_roles">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">MDN: Web Components</a></li>
       
-      <li><a href="https://www.w3.org/TR/html-aria/">ARIA in HTML</a></li>
+      <li><a href="https://www.webcomponents.org/introduction">WebComponents.org: Introduction</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes</a></li>
+      <li><a href="https://www.w3.org/TR/WCAG/">Web Content Accessibility Guidelines (WCAG)</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification</a></li>
       
       <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices</a></li>
       

@@ -64,10 +64,10 @@ export const ruleCategories = [
     description  : 'Provide logical and sequential keyboard navigation among interactive elements such as links and form controls. Use standard models of keyboard interaction for custom widgets.'
   },
   {
-    id           : RULE_CATEGORIES.TIMING,
-    title        : 'Timing',
+    id           : RULE_CATEGORIES.TIMING_LIVE,
+    title        : 'Timing/Live Regions',
     url          : '',
-    description  : 'Eliminate accessibility problems caused by time limits on input and by content that moves, scrolls, flashes or auto-updates.'
+    description  : 'Eliminate accessibility problems caused by time limits on input and by content that moves, scrolls, flashes or auto-updates.   Live regions provide information on status changes, and for reporting errors and other asynchronous important changes in content.'
   },
   {
     id           : RULE_CATEGORIES.SITE_NAVIGATION,

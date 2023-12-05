@@ -790,58 +790,9 @@ export const widgetRules = [
 /**
  * @object WIDGET_14
  *
- * @desc     Verify live regions are being used properly
- */
-{ rule_id             : 'WIDGET_14',
-  last_updated        : '2023-04-21',
-  rule_scope          : RULE_SCOPE.ELEMENT,
-  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
-  rule_required       : true,
-  wcag_primary_id     : '4.1.2',
-  wcag_related_ids    : [],
-  target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
-  validate          : function (dom_cache, rule_result) {
-
-    dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.isLive) {
-        if (de.visibility.isVisibleToAT) {
-          if (de.ariaInfo.ariaLive) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.ariaLive]);
-          }
-          else {
-            if (de.role === 'alert') {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-            }
-            else {
-              if (de.role === 'log') {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', []);
-              }
-              else {
-                // Status role
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', []);
-              }
-            }
-          }
-        }
-        else {
-          if (de.ariaInfo.ariaLive) {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.ariaLive]);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.role]);
-          }
-        }
-      }
-    });
-  } // end validation function
-},
-
-/**
- * @object WIDGET_15
- *
  * @desc     Roles with deprecated ARIA attributes
  */
-{ rule_id             : 'WIDGET_15',
+{ rule_id             : 'WIDGET_14',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
@@ -953,11 +904,11 @@ export const widgetRules = [
 },
 
 /**
- * @object WIDGET_16
+ * @object WIDGET_15
  *
  * @desc     Web components require manual check
  */
-{ rule_id             : 'WIDGET_16',
+{ rule_id             : 'WIDGET_15',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,

@@ -77,6 +77,8 @@ export default class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
+    this.accesskey = elementNode.hasAttribute('accesskey') ? elementNode.getAttribute('accesskey') : '';
+
     // used for button and form control related rules
     this.typeAttr = elementNode.getAttribute('type');
 
