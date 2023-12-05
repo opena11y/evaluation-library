@@ -77,7 +77,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>add definition</td>
+  <td>Verify all functionality that uses multi-touch or tracing a path with a pointer for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.</td>
 </tr>
 
                   
@@ -86,9 +86,9 @@
   <td>
     <ul>
       
-      <li>add purpose</li>
+      <li>Alternatives to multi-touch and path specific movements is required to ensure that content can be controlled with a range of pointing devices, abilities, and assistive technologies. Some people cannot perform gestures in a precise manner, or they may use a specialized or adapted input device such as a head pointer, eye-gaze system, or speech-controlled mouse emulator. Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.</li>
       
-      <li></li>
+      <li>A path-based gesture involves an interaction where not just the endpoints matter. If going through an intermediate point (usually near the start of the gesture) also affects its meaning then it is a path-based gesture. The user engages a pointer (starting point), carries out a movement that goes through at least one intermediate-point before disengaging the pointer (end point). The intermediate point defines the gesture as requiring a specific path, even if the complete path is not defined.</li>
       
     </ul>
   </td>
@@ -136,9 +136,15 @@
   <td>
     <ul>
       
-      <li>ass technique</li>
+      <li>Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. User interface controls offer the operation using plus and minus buttons to zoom in and out. </li>
       
-      <li></li>
+      <li>Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. As an single-pointer alternative, the map also allows users to double-tap, hold, and then move the pointer up or down to zoom in or out. </li>
+      
+      <li>Example: A news site has a horizontal content slider with hidden news teasers that can moved into the viewport via a fast horizontal swipe/flicking motion. It also offers forward and backward arrow buttons for single-point activation to navigate to adjacent slider content. </li>
+      
+      <li>Example: A kanban widget with several vertical areas representing states in a defined process allows the user to right- or left-swipe elements to move them to an adjacent silo. The user can also accomplish this by selecting the element with a single tap or click, and then activating an arrow button to move the selected element. </li>
+      
+      <li>Example: A custom slider requires movement in a strict left/right direction when operated by dragging the thumb control. Buttons on both sides of the slider increment and decrement the selected value and update the thumb position. </li>
       
     </ul>
   </td>
@@ -150,9 +156,13 @@
   <td>
     <ul>
       
-      <li><a href="">add specification</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html">W3C WCAG: Understanding Pointer Gestures</a></li>
       
-      <li><a href="">add technique</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G215">G215: Providing controls to achieve the same result as path based or multipoint gestures</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G216">G216: Providing single point activation for a control slider</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F105">F105: Failure of Success Criterion 2.5.1 due to providing functionality via a path-based gesture without simple pointer alternative</a></li>
       
     </ul>
   </td>

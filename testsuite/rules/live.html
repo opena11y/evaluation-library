@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Live Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
+        executeTest('Live 1: Verify live regions', 'ID_IFRAME_1', 'LIVE_1');
+      });
+    </script>
+
+    <h2>Live 1: Verify live regions on a page</h2>
+    <iframe id="ID_IFRAME_1" src="live/live_1_live_regions.html"></iframe>
+    
+  </body>
+
+</html>

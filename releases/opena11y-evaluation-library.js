@@ -15240,35 +15240,34 @@ const headingRules$1 = {
 const helpRules$1 = {
   HELP_1: {
         ID:                    'Help 1',
-        DEFINITION:            'add definition',
+        DEFINITION:            'Verify the consistent placement of help and contact information on web pages within a website.',
         SUMMARY:               'Consistent Help',
-        TARGET_RESOURCES_DESC: 'Page',
+        TARGET_RESOURCES_DESC: 'Pages in a website',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  '',
+          MANUAL_CHECK_S:  'Verify the consistent placement of help and contact information on web pages within a website.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          PAGE_MC_1: 'Verify the consistent placement of help and contact information on web pages within a website.',
         },
         PURPOSES: [
-          'add purpose',
-          ''
+          'The intent of this Success Criterion is to ensure users can find help for completing tasks on a Web site, when it is available. When the placement of the help mechanism is kept consistent across a set of pages, users looking for help will find it easier to identify. This is distinct from interface-level help, such as contextual help, features like spell checkers, and instructional text in a form. ',
+          'ocating the help mechanism in a consistent location across pages makes it easier for users to find it.'
         ],
         TECHNIQUES: [
-          'ass technique',
-          ''
+          'Example: On-line job application: Some of the application questions may be hard for new job seekers to understand even after reading the contextual help. For example, the form may request their identification number, but they may have several and not know which one to enter. Consistently located contact information will enable them to use phone or email so they can get an answer to their question. ',
+          'Example: Medical appointment scheduling form: When the service a patient is trying to book is not easily findable within the interface, they may need human help. A consistently located messaging option (chat client) enables them to quickly interact with a staff person that can help, without requiring them to manage a second interface. ',
+          'Example: Finding a specific policy or procedure: An employee who needs to complete a work task may have difficulty locating the specific policy or procedure document on their employer\'s Web site. A consistently located "How Do I" page may include the information that enables them to independently complete this task. '
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'add specification',
-            url:   ''
+            title: 'W3C WCAG Understanding Consistent Help',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/consistent-help.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'add technique',
-            url:   ''
+            title: 'G220: Provide a contact-us link in a consistent location',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G220'
           }
         ]
   }
@@ -18247,35 +18246,41 @@ const liveRules$1 = {
 const motionRules$1 = {
   MOTION_1: {
         ID:                    'Motion 1',
-        DEFINITION:            'add definition',
+        DEFINITION:            'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
         SUMMARY:               'Motion Actuation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  '',
+          MANUAL_CHECK_S:  'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          PAGE_MC_1: 'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
         },
         PURPOSES: [
-          'add purpose',
-          ''
+          'The intent of this success criterion is to ensure that functions triggered by moving a device (for example, shaking or tilting) or by gesturing towards the device (so that sensors like a camera can pick up and interpret the gesturing), can also be operated by more conventional user interface components.',
+          'Alternatives to motion activation helps people who may be unable to perform particular motions (such as tilting, shaking, or gesturing) because the device may be mounted or users may be physically unable to perform the necessary movement. This success criterion ensures that users can still operate all functionality by other means such as touch or via assistive technologies. ',
+          'All users benefit when they are in situations where they are unable to move their devices.'
         ],
         TECHNIQUES: [
-          'ass technique',
-          ''
+          'Example: A user can choose an application setting which turns off Shake to Undo and other motion-activated features. ',
+          'Example: After text is input in a field, shaking a device shows a dialog offering users to undo the input. A cancel button next to the text field offers the same functionality.',
+          'Example: A user can tilt a device to advance to the next or a previous page. Buttons are also provided to perform the same function. ',
+          'Example: A user can move or pan a device to change the view in an interactive photo. A control is also available to perform these same functions. ',
+          'Example: A user can gesture towards the device to navigate content. Controls are also available to navigate. '
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'add specification',
-            url:   ''
+            title: 'W3C WCAG Understanding Motion Actuation',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/motion-actuation.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'add technique',
-            url:   ''
+            title: 'G213: Provide conventional controls and an application setting for motion activated input',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G213'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F106: Failure due to inability to deactivate motion actuation',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F106'
           }
         ]
   }
@@ -18514,70 +18519,90 @@ const navigationRules$1 = {
 const pointerRules$1 = {
   POINTER_1: {
         ID:                    'Pointer 1',
-        DEFINITION:            'add definition',
+        DEFINITION:            'Verify all functionality that uses multi-touch or tracing a path with a pointer for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
         SUMMARY:               'Pointer Gestures',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  '',
+          MANUAL_CHECK_S:  'Verify all functionality that uses multi-touch or tracing a path with a pointer for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
         },
         PURPOSES: [
-          'add purpose',
-          ''
+          'Alternatives to multi-touch and path specific movements is required to ensure that content can be controlled with a range of pointing devices, abilities, and assistive technologies. Some people cannot perform gestures in a precise manner, or they may use a specialized or adapted input device such as a head pointer, eye-gaze system, or speech-controlled mouse emulator. Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.',
+          'A path-based gesture involves an interaction where not just the endpoints matter. If going through an intermediate point (usually near the start of the gesture) also affects its meaning then it is a path-based gesture. The user engages a pointer (starting point), carries out a movement that goes through at least one intermediate-point before disengaging the pointer (end point). The intermediate point defines the gesture as requiring a specific path, even if the complete path is not defined.'
         ],
         TECHNIQUES: [
-          'ass technique',
-          ''
-        ],
+          'Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. User interface controls offer the operation using plus and minus buttons to zoom in and out. ',
+          'Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. As an single-pointer alternative, the map also allows users to double-tap, hold, and then move the pointer up or down to zoom in or out. ',
+          'Example: A news site has a horizontal content slider with hidden news teasers that can moved into the viewport via a fast horizontal swipe/flicking motion. It also offers forward and backward arrow buttons for single-point activation to navigate to adjacent slider content. ',
+          'Example: A kanban widget with several vertical areas representing states in a defined process allows the user to right- or left-swipe elements to move them to an adjacent silo. The user can also accomplish this by selecting the element with a single tap or click, and then activating an arrow button to move the selected element. ',
+          'Example: A custom slider requires movement in a strict left/right direction when operated by dragging the thumb control. Buttons on both sides of the slider increment and decrement the selected value and update the thumb position. '        ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'add specification',
-            url:   ''
+            title: 'W3C WCAG: Understanding Pointer Gestures',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'add technique',
-            url:   ''
+            title: 'G215: Providing controls to achieve the same result as path based or multipoint gestures',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G215'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G216: Providing single point activation for a control slider',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G216'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F105: Failure of Success Criterion 2.5.1 due to providing functionality via a path-based gesture without simple pointer alternative',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F105'
           }
         ]
   },
 
   POINTER_2: {
         ID:                    'Pointer 2',
-        DEFINITION:            'add definition',
+        DEFINITION:            'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
         SUMMARY:               'Pointer Cancellation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  '',
+          MANUAL_CHECK_S:  'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          PAGE_MC_1: 'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
         },
         PURPOSES: [
-          'add purpose',
-          ''
+          'Pointer events that can be cancelled make it easier for users to prevent accidental or erroneous pointer input. People with various disabilities can inadvertently initiate touch or mouse events with unwanted results.',
+          'Makes it easier for all users to recover from hitting the wrong target.',
+          'Helps people with visual disabilities, cognitive limitations, and motor impairments by reducing the chance that a control will be accidentally activated or an action will occur unexpectedly, and also ensures that where complex controls are activated, a means of Undoing or Aborting the action is available. ',
+          'Individuals who are unable to detect changes of context are less likely to become disoriented while navigating a site. '
         ],
         TECHNIQUES: [
-          'ass technique',
-          ''
+          'No Down-Event: The down-event of the pointer is not used to execute any part of the function',
+          'Abort or Undo: Completion of the function is on the up-event, and a mechanism is available to abort the function before completion or to undo the function after completion.',
+          'Up Reversal: The up-event reverses any outcome of the preceding down-event.',
+          'Essential: Completing the function on the down-event is essential.',
+          'Example: For interface elements that have a single tap or long press as input, the corresponding event is triggered when the finger is lifted inside that element. ',
+          'Example: A drag-and-drop interface allows users to sort vertically stacked cards by picking up one card with the pointer (down-event), move it to a new position, and insert it at the new location when the pointer is released (up-event). Releasing the pointer outside the drop target area reverts the action, i.e., it moves the card back to the old position before the interaction started.'
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'add specification',
-            url:   ''
+            title: 'W3C WCAG: Understanding Pointer Cancellation',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'add technique',
-            url:   ''
+            title: 'G210: Ensuring that drag-and-drop actions can be cancelled',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G210'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G212: Using native controls to ensure functionality is triggered on the up-event.',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G212'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F101: Failure of Success Criterion 2.5.2 due to activating a control on the down-event',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F101'
           }
         ]
   }
@@ -22673,8 +22698,6 @@ class DOMCache {
     parentInfo.document        = startingDoc;
     parentInfo.accNameDocument = startingDoc;
 
-    this.hasScripting = false;
-
     this.controlInfo   = new ControlInfo();
     this.idInfo        = new IdInfo();
     this.imageInfo     = new ImageInfo();
@@ -22701,6 +22724,8 @@ class DOMCache {
     this.tableInfo.computeTableTypes();
     this.tableInfo.computeHeaders(this);
     this.controlInfo.updateLabelForReferences();
+
+    this.hasScripting = startingDoc.querySelector('script') ? true : false;
   }
 
   getDomElementById(id) {
@@ -22709,9 +22734,6 @@ class DOMCache {
 
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
-    if (tagName === 'script') {
-      this.hasScripting = true;
-    }
     const elemSelector = (tagName === 'input') && (typeof type === 'string') ? 
                          `${tagName}[type=${type}]` :
                          tagName;
@@ -22782,6 +22804,10 @@ class DOMCache {
 
         case Node.ELEMENT_NODE:
           tagName = node.tagName.toLowerCase();
+
+          if (tagName === 'script') {
+            this.hasScripting = true;
+          }
 
           if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content
@@ -25142,7 +25168,7 @@ const helpRules = [
 
   { rule_id             : 'HELP_1',
     last_updated        : '2023-12-03',
-    rule_scope          : RULE_SCOPE.PAGE,
+    rule_scope          : RULE_SCOPE.WEBSITE,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '3.2.6',
@@ -25150,9 +25176,7 @@ const helpRules = [
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$y.log(`[HELP 1]: ${dom_cache} ${rule_result}`);
-
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
    } // end validation function  }
   }
@@ -27219,8 +27243,6 @@ const motionRules = [
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$o.log(`[MOTION_1]: ${dom_cache} ${rule_result}`);
-
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
@@ -27508,8 +27530,6 @@ const pointerRules = [
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$m.log(`[POINTER_1]: ${dom_cache} ${rule_result}`);
-
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
@@ -27520,7 +27540,7 @@ const pointerRules = [
   /**
    * @object POINTER_2
    *
-   * @desc
+   * @desc Pointer Cancellation
   */
 
   { rule_id             : 'POINTER_2',
@@ -27532,8 +27552,6 @@ const pointerRules = [
     wcag_related_ids    : [],
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
-
-      debug$m.log(`[POINTER_2]: ${dom_cache} ${rule_result}`);
 
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);

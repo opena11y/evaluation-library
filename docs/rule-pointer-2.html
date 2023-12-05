@@ -77,7 +77,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>add definition</td>
+  <td>Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.</td>
 </tr>
 
                   
@@ -86,9 +86,13 @@
   <td>
     <ul>
       
-      <li>add purpose</li>
+      <li>Pointer events that can be cancelled make it easier for users to prevent accidental or erroneous pointer input. People with various disabilities can inadvertently initiate touch or mouse events with unwanted results.</li>
       
-      <li></li>
+      <li>Makes it easier for all users to recover from hitting the wrong target.</li>
+      
+      <li>Helps people with visual disabilities, cognitive limitations, and motor impairments by reducing the chance that a control will be accidentally activated or an action will occur unexpectedly, and also ensures that where complex controls are activated, a means of Undoing or Aborting the action is available. </li>
+      
+      <li>Individuals who are unable to detect changes of context are less likely to become disoriented while navigating a site. </li>
       
     </ul>
   </td>
@@ -136,9 +140,17 @@
   <td>
     <ul>
       
-      <li>ass technique</li>
+      <li>No Down-Event: The down-event of the pointer is not used to execute any part of the function</li>
       
-      <li></li>
+      <li>Abort or Undo: Completion of the function is on the up-event, and a mechanism is available to abort the function before completion or to undo the function after completion.</li>
+      
+      <li>Up Reversal: The up-event reverses any outcome of the preceding down-event.</li>
+      
+      <li>Essential: Completing the function on the down-event is essential.</li>
+      
+      <li>Example: For interface elements that have a single tap or long press as input, the corresponding event is triggered when the finger is lifted inside that element. </li>
+      
+      <li>Example: A drag-and-drop interface allows users to sort vertically stacked cards by picking up one card with the pointer (down-event), move it to a new position, and insert it at the new location when the pointer is released (up-event). Releasing the pointer outside the drop target area reverts the action, i.e., it moves the card back to the old position before the interaction started.</li>
       
     </ul>
   </td>
@@ -150,9 +162,13 @@
   <td>
     <ul>
       
-      <li><a href="">add specification</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/pointer-cancellation.html">W3C WCAG: Understanding Pointer Cancellation</a></li>
       
-      <li><a href="">add technique</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G210">G210: Ensuring that drag-and-drop actions can be cancelled</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G212">G212: Using native controls to ensure functionality is triggered on the up-event.</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F101">F101: Failure of Success Criterion 2.5.2 due to activating a control on the down-event</a></li>
       
     </ul>
   </td>

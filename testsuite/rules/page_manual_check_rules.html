@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Page Manual Check Rules Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+
+      window.addEventListener('load', (event) => {
+        executeTest('Help 1: Consistent Help', 'ID_IFRAME_1', 'HELP_1');
+      });
+
+      window.addEventListener('load', (event) => {
+        executeTest('Motion 1: Pointer Cancellation', 'ID_IFRAME_2', 'MOTION_1');
+      });
+
+      window.addEventListener('load', (event) => {
+        executeTest('Pointer 1: Pointer Gestures',    'ID_IFRAME_3', 'POINTER_1');
+      });
+
+      window.addEventListener('load', (event) => {
+        executeTest('Pointer 2: Pointer Cancellation', 'ID_IFRAME_4', 'POINTER_2');
+      });
+
+    </script>
+
+    <h1>Page Manual Check Rules Rules</h1>
+
+    <h2>Help 1: Consistent Help</h2>
+    <iframe id="ID_IFRAME_1" src="page/help_1.html"></iframe>
+
+
+    <h2>Motion 1: Motion Actuation</h2>
+    <iframe id="ID_IFRAME_2" src="page/motion_1.html"></iframe>
+
+    <h2>Pointer 1: Pointer Gestures</h2>
+    <iframe id="ID_IFRAME_3" src="page/pointer_1.html"></iframe>
+
+    <h2>Pointer 2: Pointer Cancellation</h2>
+    <iframe id="ID_IFRAME_4" src="page/pointer_2.html"></iframe>
+    
+  </body>
+
+</html>

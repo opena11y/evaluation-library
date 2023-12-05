@@ -36,8 +36,6 @@ export const pointerRules = [
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[POINTER_1]: ${dom_cache} ${rule_result}`);
-
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
@@ -48,7 +46,7 @@ export const pointerRules = [
   /**
    * @object POINTER_2
    *
-   * @desc
+   * @desc Pointer Cancellation
   */
 
   { rule_id             : 'POINTER_2',
@@ -60,8 +58,6 @@ export const pointerRules = [
     wcag_related_ids    : [],
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
-
-      debug.log(`[POINTER_2]: ${dom_cache} ${rule_result}`);
 
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);

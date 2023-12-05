@@ -124,8 +124,6 @@ export default class DOMCache {
     parentInfo.document        = startingDoc;
     parentInfo.accNameDocument = startingDoc;
 
-    this.hasScripting = false;
-
     this.controlInfo   = new ControlInfo();
     this.idInfo        = new IdInfo();
     this.imageInfo     = new ImageInfo();
@@ -152,6 +150,8 @@ export default class DOMCache {
     this.tableInfo.computeTableTypes();
     this.tableInfo.computeHeaders(this);
     this.controlInfo.updateLabelForReferences();
+
+    this.hasScripting = startingDoc.querySelector('script') ? true : false;
   }
 
   getDomElementById(id) {
@@ -160,9 +160,6 @@ export default class DOMCache {
 
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
-    if (tagName === 'script') {
-      this.hasScripting = true;
-    }
     const elemSelector = (tagName === 'input') && (typeof type === 'string') ? 
                          `${tagName}[type=${type}]` :
                          tagName;
@@ -233,6 +230,10 @@ export default class DOMCache {
 
         case Node.ELEMENT_NODE:
           tagName = node.tagName.toLowerCase();
+
+          if (tagName === 'script') {
+            this.hasScripting = true;
+          }
 
           if (!this.isSkipableElement(tagName, node.getAttribute('type'))) {
             // check for slotted content

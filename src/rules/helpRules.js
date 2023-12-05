@@ -28,7 +28,7 @@ export const helpRules = [
 
   { rule_id             : 'HELP_1',
     last_updated        : '2023-12-03',
-    rule_scope          : RULE_SCOPE.PAGE,
+    rule_scope          : RULE_SCOPE.WEBSITE,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     wcag_primary_id     : '3.2.6',
@@ -36,9 +36,7 @@ export const helpRules = [
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[HELP 1]: ${dom_cache} ${rule_result}`);
-
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
    } // end validation function  }
   }

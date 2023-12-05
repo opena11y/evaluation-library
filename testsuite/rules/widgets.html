@@ -45,12 +45,11 @@
         executeTest('WIDGET_12F: Progressbar, scrollbar, and spinbutton labels are descriptive', 'ID_IFRAME_12F',  'WIDGET_12');
 
         executeTest('WIDGET_13: Prohibit accessible name', 'ID_IFRAME_13',  'WIDGET_13');
-        executeTest('WIDGET_14: Verify live region', 'ID_IFRAME_14',  'WIDGET_14');
 
-        executeTest('WIDGET_15A: Roles with deprecated ARIA attributes',                  'ID_IFRAME_15A',  'WIDGET_15');
-        executeTest('WIDGET_15B: Roles with deprecated ARIA attributes (implicit roles)', 'ID_IFRAME_15B',  'WIDGET_15');
+        executeTest('WIDGET_14A: Roles with deprecated ARIA attributes',                  'ID_IFRAME_14A',  'WIDGET_14');
+        executeTest('WIDGET_14B: Roles with deprecated ARIA attributes (implicit roles)', 'ID_IFRAME_14B',  'WIDGET_14');
 
-        executeTest('WIDGET_16: Web Components', 'ID_IFRAME_16',  'WIDGET_16');
+        executeTest('WIDGET_15: Web Components', 'ID_IFRAME_15',  'WIDGET_15');
 
        });
 
@@ -106,15 +105,12 @@
     <h2>Widget 13: Remove Widget Roles</h2>
     <iframe id="ID_IFRAME_13"  src="widgets/widget_13_prohibit_accname.html"></iframe>
 
-    <h2>Widget 14: verify live regions</h2>
-    <iframe id="ID_IFRAME_14"  src="widgets/widget_14_live_regions.html"></iframe>
+    <h2>Widget 14: Roles with deprecated ARIA attributes</h2>
+    <iframe id="ID_IFRAME_14A"  src="widgets/widget_14_deprecated_aria_attributes.html"></iframe>
+    <iframe id="ID_IFRAME_14B"  src="widgets/widget_14_deprecated_aria_attributes_implicit_roles.html"></iframe>
 
-    <h2>Widget 15: Roles with deprecated ARIA attributes</h2>
-    <iframe id="ID_IFRAME_15A"  src="widgets/widget_15_deprecated_aria_attributes.html"></iframe>
-    <iframe id="ID_IFRAME_15B"  src="widgets/widget_15_deprecated_aria_attributes_implicit_roles.html"></iframe>
-
-    <h2>Widget 16: Web components</h2>
-    <iframe id="ID_IFRAME_16"  src="widgets/widget_16_web_components.html"></iframe>
+    <h2>Widget 15: Web components</h2>
+    <iframe id="ID_IFRAME_15"  src="widgets/widget_15_web_components.html"></iframe>
 
   </body>
 

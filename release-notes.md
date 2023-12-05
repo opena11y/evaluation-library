@@ -12,6 +12,9 @@ Version 2.0 Overview
   * KEYBOARD_2: Updated for testing event handlers to verifying tabindex values
   * Adding rules for new WCAG 2.1 Single-A and Double-A Success Criteria (in process)
   * Adding rules for new WCAG 2.2 Single-A and Double-A Success Criteria (in process)
+  * Created a rule to avoid using accesskey attribute
+  * Moved CONTROL_14 to LIVE_1
+
 
 
 Version 1.3.1 Overview
