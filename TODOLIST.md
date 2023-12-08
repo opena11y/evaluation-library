@@ -4,6 +4,7 @@
 
 | WCAG Version  | SC      | Level | Description               | Result Types | Scope | Status |
 | ------------- | ------- | :---: | -----------               | ------------ | ----- | ------ |
+| 2.0          | 3.3.2    | A     | Avoid label encapsulation | F    | Element | not started |
 | 2.1          | 2.5.3    | A     | Label in Name             | MC/P | Element | started |
 | 2.2          | 3.3.7    | A     | Redundant Entry           | MC/P | Element | started |
 | 2.1          | 1.4.12   | AA    | Text Spacing              | MC   | Page    | not started |

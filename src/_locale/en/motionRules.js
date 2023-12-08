@@ -13,7 +13,7 @@ export const motionRules = {
         SUMMARY:               'Motion Actuation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.'
         },
         BASE_RESULT_MESSAGES: {
           PAGE_MC_1: 'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',

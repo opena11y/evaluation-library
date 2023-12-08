@@ -13,7 +13,7 @@ export const shortcutRules = {
         SUMMARY:               'Character Key Shortcuts',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  ' If the page has author defined keyboard shortcuts, verify the user has control over the use the shortcuts',
+          MANUAL_CHECK_S:  ' The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
         },
         BASE_RESULT_MESSAGES: {
           PAGE_MC_1: 'Verify if the page has author defined keyboard shortcuts, if the page does support shortcuts, verify the user can disable or remap each shortcut, or a shortcut is only available when a specific component has focus.',

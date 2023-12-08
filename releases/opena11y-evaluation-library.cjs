@@ -9413,24 +9413,29 @@ debug$U.flag = false;
 *   @parm {Object}  element     - DOM node of element
 *   @parm {Object}  forElement  - DOM node of element being labelled
 *
-*   @returns {String}  @desc
+*   @returns {[String, Boolean]}  Returns a string and a boolean indicating
+*                                 the name includes some image content
 */
 function getElementContents (element, forElement) {
   let result = '';
+  let includesAlt       = false;
+  let includesAriaLabel = false;
 
   if (element.hasChildNodes()) {
     let children = element.childNodes,
         arrayOfStrings = [];
 
     for (let i = 0; i < children.length; i++) {
-      let contents = getNodeContents(children[i], forElement);
-      if (contents.length) arrayOfStrings.push(contents);
+      const [contents, inclAlt, inclAriaLabel] = getNodeContents(children[i], forElement);
+      if (contents && contents.length) arrayOfStrings.push(contents);
+      includesAlt       = includesAlt       || inclAlt;
+      includesAriaLabel = includesAriaLabel || inclAriaLabel;
     }
 
     result = (arrayOfStrings.length) ? arrayOfStrings.join('') : '';
   }
 
-  return addCssGeneratedContent(element, result);
+  return [addCssGeneratedContent(element, result), includesAlt, includesAriaLabel];
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -9449,8 +9454,12 @@ function nameFromAttribute (element, attribute) {
   let name;
 
   name = getAttributeValue(element, attribute);
-  if (name.length) return { name: normalize(name), source: attribute };
-
+  if (name.length) return { name: normalize(name),
+                            source: attribute,
+                            includesAlt: false,
+                            includesAriaLabel: attribute === 'aria=label',
+                            nameIsNotVisible: true
+                           };
   return null;
 }
 
@@ -9469,7 +9478,12 @@ function nameFromAltAttribute (element) {
   // Attribute is present
   if (name !== null) {
     name = normalize(name);
-    return { name: name, source: 'alt' };
+    return { name: name,
+             source: 'alt',
+             includesAlt: true,
+             includesAriaLabel: false,
+             nameIsNotVisible: false
+           };
   }
 
   // Attribute not present
@@ -9485,11 +9499,14 @@ function nameFromAltAttribute (element) {
 *   @returns {Object}  @desc
 */
 function nameFromContents (element) {
-  let name;
 
-  name = getElementContents(element);
-  if (name.length) return { name: normalize(name), source: 'contents' };
-
+  const [name, inclAlt, inclAriaLabel] = getElementContents(element);
+  if (name.length) return { name: normalize(name),
+                            source: 'contents',
+                            includesAlt: inclAlt,
+                            includesAriaLabel: inclAriaLabel,
+                            nameIsNotVisible: false
+                          };
   return null;
 }
 
@@ -9502,7 +9519,12 @@ function nameFromContents (element) {
 *   @returns {Object}  @desc
 */
 function nameFromDefault (name) {
-  return name.length ? { name: name, source: 'default' } : null;
+  return name.length ? { name: name,
+                         source: 'default',
+                         includesAlt: false,
+                         includesAriaLabel: false,
+                         nameIsNotVisible: false
+                       } : null;
 }
 
 /*
@@ -9516,10 +9538,15 @@ function nameFromDefault (name) {
 function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
   if (descendant) {
-    let name = descendant.hasAttribute('aria-label') ?
-               descendant.getAttribute('aria-label') :
+    let [name, incAlt, incAriaLabel] = descendant.hasAttribute('aria-label') ?
+               [descendant.getAttribute('aria-label'), false, true] :
                getElementContents(descendant);
-    if (name.length) return { name: normalize(name), source: tagName + ' element' };
+    if (name.length) return { name: normalize(name),
+                              source: tagName + ' element',
+                              includesAlt: incAlt,
+                              includesAriaLabel: incAriaLabel,
+                              nameIsNotVisible: isDisplayNone(descendant) || isVisibilityHidden(descendant)
+                            };
   }
 
   return null;
@@ -9535,16 +9562,21 @@ function nameFromDescendant (element, tagName) {
 *   @returns {Object}  @desc
 */
 function nameFromLabelElement (doc, element) {
-  let label, name;
+  let label, name, inclAlt, inclAriaLabel, notVisible;
   // label [for=id]
   if (element.id) {
     try {
       label = doc.querySelector('[for="' + element.id + '"]');
       if (label) {
-        name = label.hasAttribute('aria-label') ?
-               label.getAttribute('aria-label') :
+        [name, inclAlt, inclAriaLabel, notVisible] = label.hasAttribute('aria-label') ?
+               [label.getAttribute('aria-label'), false, true, true] :
                getElementContents(label, element);
-        if (name.length) return { name: normalize(name), source: 'label reference' };
+        if (name.length) return { name: normalize(name),
+                                  source: 'label reference',
+                                  includeAlt: inclAlt,
+                                  includeAriaLabel: inclAriaLabel,
+                                  nameIsNotVisibile: notVisible
+                                 };
       }
     } catch (error) {
       debug$U.log(`[nameFromLabelElement][error]: ${error}`);
@@ -9555,10 +9587,14 @@ function nameFromLabelElement (doc, element) {
   if (typeof element.closest === 'function') {
     label = element.closest('label');
     if (label) {
-      name = label.hasAttribute('aria-label') ?
-             label.getAttribute('aria-label') :
+      [name, inclAlt, inclAriaLabel] = label.hasAttribute('aria-label') ?
+             [label.getAttribute('aria-label'), false, true] :
              getElementContents(label, element);
-      if (name.length) return { name: normalize(name), source: 'label encapsulation' };
+      if (name.length) return { name: normalize(name),
+                                source: 'label encapsulation',
+                                includesAlt: inclAlt,
+                                includesAriaLabel: inclAriaLabel
+                            };
     }
   }
 
@@ -9576,16 +9612,20 @@ function nameFromLabelElement (doc, element) {
 *   @returns {Object}  @desc
 */
 function nameFromLegendElement (doc, element) {
-  let name, legend;
+  let name, legend, inclAlt, inclAriaLabel;
 
   // legend
   if (element) {
     legend = element.querySelector('legend');
     if (legend) {
-      name = legend.hasAttribute('aria-label') ?
-             legend.getAttribute('aria-label') :
+      [name, inclAlt, inclAriaLabel] = legend.hasAttribute('aria-label') ?
+             [legend.getAttribute('aria-label'), false, true] :
              getElementContents(legend, element);
-    if (name.length) return { name: normalize(name), source: 'legend' };
+    if (name.length) return { name: normalize(name),
+                              source: 'legend',
+                              includesAlt: inclAlt,
+                              includesAriaLabel: inclAriaLabel
+                          };
     }
   }
   return null;
@@ -9606,23 +9646,32 @@ function nameFromLegendElement (doc, element) {
 */
 
 function nameFromDetailsOrSummary (element) {
-  let name, summary;
+  let name, summary, inclAlt = false, inclAriaLabel = false;
 
   function isExpanded (elem) { return elem.hasAttribute('open'); }
 
   // At minimum, always use summary contents
   summary = element.querySelector('summary');
-  if (summary) name = getElementContents(summary);
+  if (summary) [name, inclAlt, inclAriaLabel] = getElementContents(summary);
 
   // Return either summary + details (non-summary) or summary only
   if (isExpanded(element)) {
     name += getContentsOfChildNodes(element, function (elem) {
       return elem.tagName.toLowerCase() !== 'summary';
     });
-    if (name.length) return { name: normalize(name), source: 'contents' };
+    if (name.length) return { name: normalize(name),
+                              source: 'contents',
+                              includesAlt : inclAlt,
+                              includesAriaLabel: inclAriaLabel
+                            };
   }
   else {
-    if (name.length) return { name: normalize(name), source: 'summary element' };
+    if (name.length) return { name: normalize(name),
+                              source: 'summary element',
+                              includesAlt : inclAlt,
+                              includesAriaLabel: inclAriaLabel
+                            };
+
   }
 
   return null;
@@ -9775,18 +9824,23 @@ function includeContentInName(node) {
 *   @param  {Object}   node     -  DOM node
 *   @param  {Object}   forElem  -  DOM node the name is being computed for
 *
-*   @return  see @desc
+*   @returns {[String, Boolean, Boolean]}  Returns a string and two boolean values
+*                                          indicating the name includes alt text
+*                                          and content from aria-label
 */
 
 function getNodeContents (node, forElem, alwaysInclude=false) {
   let contents = '';
   let nc;
   let arr = [];
+  let includesAlt = false;
+  let includesAriaLabel = false;
+  let nInclAlt, nInclAriaLabel;
 
   // Cannot recursively use the element
   // in computing it's accessible name
   if (node === forElem) {
-    return '';
+    return ['', false, false];
   }
 
   switch (node.nodeType) {
@@ -9797,6 +9851,7 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
       if (node.hasAttribute('aria-label')) {
         if (includeContentInName(node) || alwaysInclude ) {
           contents = node.getAttribute('aria-label');
+          includesAriaLabel = true;
         }
       }
       else {
@@ -9804,13 +9859,16 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
           // if no slotted elements, check for default slotted content
           const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
           assignedNodes.forEach( assignedNode => {
-            nc = getNodeContents(assignedNode, forElem);
-            if (nc.length) arr.push(nc);
+            [nc, nInclAlt, nInclAriaLabel] = getNodeContents(assignedNode, forElem);
+            if (nc && nc.length) arr.push(nc);
+            includesAlt = includesAlt       || nInclAlt;
+            includesAlt = includesAriaLabel || nInclAriaLabel;
           });
           contents = (arr.length) ? arr.join('') : '';
         } else {
           if (couldHaveAltText(node) && (includeContentInName(node) || alwaysInclude)) {
             contents = getAttributeValue(node, 'alt');
+            includesAlt = true;
           }
           else {
             if (isEmbeddedControl(node) && (includeContentInName(node) || alwaysInclude)) {
@@ -9820,8 +9878,10 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
               if (node.hasChildNodes()) {
                 let children = Array.from(node.childNodes);
                 children.forEach( child => {
-                  nc = getNodeContents(child, forElem);
-                  if (nc.length) arr.push(nc);
+                  [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, forElem);
+                  if (nc && nc.length) arr.push(nc);
+                  includesAlt = includesAlt       || nInclAlt;
+                  includesAlt = includesAriaLabel || nInclAriaLabel;
                 });
                 contents = (arr.length) ? arr.join('') : '';
               }
@@ -9843,7 +9903,7 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
       break;
   }
 
-  return contents;
+  return [contents, includesAlt, includesAriaLabel];
 }
 
 /*
@@ -9900,7 +9960,7 @@ function getContentsOfChildNodes (element, predicate) {
     switch (node.nodeType) {
       case (Node.ELEMENT_NODE):
         if (predicate(node)) {
-          content = getElementContents(node);
+          content = getElementContents(node)[0];
           if (content.length) arr.push(content);
         }
         break;
@@ -9925,29 +9985,34 @@ function getContentsOfChildNodes (element, predicate) {
 
 const noAccName = {
   name: '',
-  source: 'none'
+  source: 'none',
+  includesAlt: false,
+  includesAriaLabel: false,
+  nameIsNotVisible: false,
 };
 
 // These roles are based on the ARAI 1.2 specification
-const  rolesThatAllowNameFromContents = ['button',
-'cell',
-'checkbox',
-'columnheader',
-'gridcell',
-'heading',
-'link',
-'menuitem',
-'menuitemcheckbox',
-'menuitemradio',
-'option',
-'radio',
-'row',
-'rowheader',
-'sectionhead',
-'switch',
-'tab',
-'tooltip',
-'treeitem'];
+const  rolesThatAllowNameFromContents = [
+  'button',
+  'cell',
+  'checkbox',
+  'columnheader',
+  'gridcell',
+  'heading',
+  'link',
+  'menuitem',
+  'menuitemcheckbox',
+  'menuitemradio',
+  'option',
+  'radio',
+  'row',
+  'rowheader',
+  'sectionhead',
+  'switch',
+  'tab',
+  'tooltip',
+  'treeitem'
+];
 
 // These elements that allow name from content
 const  elementsThatAllowNameFromContents = [
@@ -9962,7 +10027,17 @@ const  elementsThatAllowNameFromContents = [
 'summary'
 ];
 const debug$T = new DebugLogging('getAccName', false);
-debug$T.flag = false;
+debug$T.flag = true;
+function debugAccName (accName) {
+  if (accName.name) {
+    debug$T.log(`====================`);
+    debug$T.log(`[             name]: ${accName.name}`);
+    debug$T.log(`[           source]: ${accName.source}`);
+    debug$T.log(`[      includesAlt]: ${accName.includesAlt}`);
+    debug$T.log(`[includesAriaLabel]: ${accName.includesAriaLabel}`);
+    debug$T.log(`[ nameIsNotVisible]: ${accName.nameIsNotVisible}`);
+  }
+}
 
 /*
 *   @function getAccessibleName
@@ -9977,13 +10052,19 @@ debug$T.flag = false;
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
 *
-*   @returns {Object} Returns a object with an 'name' and 'source' property
+*   @returns {Object} Returns a object with the following properties:
+*                     'name' {String}
+*                     'source' {String}
+*                     'includesAlt' {Boolean}
+*                     'includesAriaLabel' {Boolean}
+*                     'nameIsNotVisible' {Boolean}
 */
 function getAccessibleName (doc, element) {
   let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
   if (accName === null) accName = nameFromNativeSemantics(doc, element);
   if (accName === null) accName = noAccName;
+  debug$T.flag && debugAccName(accName);
   return accName;
 }
 
@@ -9999,7 +10080,12 @@ function getAccessibleName (doc, element) {
 *   @desc (Object)  element     -  DOM node of element to compute description
 *   @desc (Boolean) allowTitle  -  Allow title as accessible description
 *
-*   @returns {Object} Returns a object with an 'name' and 'source' property
+*   @returns {Object} Returns a object with the following properties:
+*                     'name' {String}
+*                     'source' {String}
+*                     'includesAlt' {Boolean}
+*                     'includesAriaLabel' {Boolean}
+*                     'nameIsNotVisible' {Boolean}
 */
 function getAccessibleDesc (doc, element, allowTitle=true) {
   let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
@@ -10018,7 +10104,12 @@ function getAccessibleDesc (doc, element, allowTitle=true) {
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute error message
 *
-*   @returns {Object} Returns a object with an 'name' and 'source' property
+*   @returns {Object} Returns a object with the following properties:
+*                     'name' {String}
+*                     'source' {String}
+*                     'includesAlt' {Boolean}
+*                     'includesAriaLabel' {Boolean}
+*                     'nameIsNotVisible' {Boolean}
 */
 function getErrMessage (doc, element) {
   let errMessage = null;
@@ -10191,6 +10282,9 @@ function nameFromNativeSemantics (doc, element) {
 function nameFromAttributeIdRefs (doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, name, names, arr = [];
+  let includesAlt = false;
+  let includesAriaLabel = false;
+  let refNotVisible = false;
 
   if (value.length) {
     idRefs = value.split(' ');
@@ -10200,16 +10294,20 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
       if (refElement) {
         if (refElement.hasAttribute('aria-label')) {
           name = refElement.getAttribute('aria-label');
+          includesAriaLabel = true;
         }
         else {
           if (refElement.hasChildNodes()) {
+            refNotVisible = refNotVisible || isDisplayNone(refElement) || isVisibilityHidden(refElement);
             names = [];
             let children = Array.from(refElement.childNodes);
             children.forEach( child => {
               // Need to ignore CSS display: none and visibility: hidden for referenced
               // elements, but not their child elements
-              const nc = getNodeContents(child, refElement, true);
+              const [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, refElement, true);
               if (nc.length) names.push(nc);
+              includesAlt       = includesAlt || nInclAlt;
+              includesAriaLabel = includesAriaLabel || nInclAriaLabel;
             });
             name = (names.length) ? names.join('') : '';
           }
@@ -10224,7 +10322,12 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
   }
 
   if (arr.length)
-    return { name: normalize(arr.join(' ')), source: attribute };
+    return { name: normalize(arr.join(' ')),
+             source: attribute,
+             includesAlt: includesAlt,
+             includesAriaLabel: includesAriaLabel,
+             nameIsNotVisible: refNotVisible
+           };
 
   return null;
 }
@@ -14830,19 +14933,23 @@ const controlRules$1 = {
           MANUAL_CHECK_S:  '',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          ELEMENT_MC_1: '',
+          ELEMENT_MC_2: '',
+          ELEMENT_MC_3: '',
+          ELEMENT_HIDDEN_1: '',
+          ELEMENT_HIDDEN_2: '',
+          ELEMENT_HIDDEN_3: '',
+          PAGE_MC_1: ''
         },
         PURPOSES: [
           'add purpose',
           ''
         ],
         TECHNIQUES: [
-          'ass technique',
+          'add techniques',
           ''
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
@@ -14865,19 +14972,19 @@ const controlRules$1 = {
           MANUAL_CHECK_S:  '',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          ELEMENT_PASS_1: '',
+          ELEMENT_MC_1: '',
+          ELEMENT_HIDDEN_1: ''
         },
         PURPOSES: [
           'add purpose',
           ''
         ],
         TECHNIQUES: [
-          'ass technique',
+          'add technique',
           ''
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
@@ -18252,7 +18359,7 @@ const motionRules$1 = {
         SUMMARY:               'Motion Actuation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.'
         },
         BASE_RESULT_MESSAGES: {
           PAGE_MC_1: 'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
@@ -18525,7 +18632,7 @@ const pointerRules$1 = {
         SUMMARY:               'Pointer Gestures',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'Verify all functionality that uses multi-touch or tracing a path with a pointer for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
         },
         BASE_RESULT_MESSAGES: {
           PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
@@ -18568,7 +18675,7 @@ const pointerRules$1 = {
         SUMMARY:               'Pointer Cancellation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
         },
         BASE_RESULT_MESSAGES: {
           PAGE_MC_1: 'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
@@ -18810,7 +18917,7 @@ const shortcutRules$1 = {
         SUMMARY:               'Character Key Shortcuts',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  ' If the page has author defined keyboard shortcuts, verify the user has control over the use the shortcuts',
+          MANUAL_CHECK_S:  ' The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
         },
         BASE_RESULT_MESSAGES: {
           PAGE_MC_1: 'Verify if the page has author defined keyboard shortcuts, if the page does support shortcuts, verify the user can disable or remap each shortcut, or a shortcut is only available when a specific component has focus.',
@@ -23955,6 +24062,7 @@ const controlRules = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
   validate            : function (dom_cache, rule_result) {
+
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (!ce.isInputTypeImage) {
@@ -24728,7 +24836,41 @@ const controlRules = [
   target_resources    : ["input", "output", "select", "textarea", "widgets"],
   validate          : function (dom_cache, rule_result) {
 
-    debug$A.log(`[CONTROL_15]: ${dom_cache} ${rule_result}`);
+    debug$A.log('[Control 15]');
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+
+      if (de.accName.includesAlt) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+      else {
+        if (de.accName.includesAriaLabel) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
+          }
+        }
+        else {
+          if (de.accName.nameIsNotVisible) {
+            if (de.visibility.isVisibleToAT) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+            }
+          }
+
+        }
+      }
+    });
 
   } // end validation function
 },
@@ -24749,7 +24891,26 @@ const controlRules = [
   target_resources    : ["input", "select", "textarea"],
   validate          : function (dom_cache, rule_result) {
 
-    debug$A.log(`[CONTROL_16]: ${dom_cache} ${rule_result}`);
+        debug$A.log('[Control 16]');
+
+
+    const includeTags = ['form', 'input', 'select', 'textarea'];
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (includeTags.includes(de.tagName)) {
+        if (de.visibility.isVisibleToAT) {
+          if (autoFillValues.includes(de.id)) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.id]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+   });
 
   } // end validation function
 }

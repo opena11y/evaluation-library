@@ -23,7 +23,9 @@ import {
   nameFromDescendant,
   nameFromLabelElement,
   nameFromLegendElement,
-  nameFromDetailsOrSummary
+  nameFromDetailsOrSummary,
+  isDisplayNone,
+  isVisibilityHidden
 } from './namefrom';
 
 export {
@@ -36,29 +38,34 @@ export {
 
 const noAccName = {
   name: '',
-  source: 'none'
+  source: 'none',
+  includesAlt: false,
+  includesAriaLabel: false,
+  nameIsNotVisible: false,
 };
 
 // These roles are based on the ARAI 1.2 specification
-const  rolesThatAllowNameFromContents = ['button',
-'cell',
-'checkbox',
-'columnheader',
-'gridcell',
-'heading',
-'link',
-'menuitem',
-'menuitemcheckbox',
-'menuitemradio',
-'option',
-'radio',
-'row',
-'rowheader',
-'sectionhead',
-'switch',
-'tab',
-'tooltip',
-'treeitem'];
+const  rolesThatAllowNameFromContents = [
+  'button',
+  'cell',
+  'checkbox',
+  'columnheader',
+  'gridcell',
+  'heading',
+  'link',
+  'menuitem',
+  'menuitemcheckbox',
+  'menuitemradio',
+  'option',
+  'radio',
+  'row',
+  'rowheader',
+  'sectionhead',
+  'switch',
+  'tab',
+  'tooltip',
+  'treeitem'
+];
 
 // These elements that allow name from content
 const  elementsThatAllowNameFromContents = [
@@ -75,7 +82,17 @@ const  elementsThatAllowNameFromContents = [
 
 import DebugLogging        from '../debug.js';
 const debug = new DebugLogging('getAccName', false);
-debug.flag = false;
+debug.flag = true;
+function debugAccName (accName) {
+  if (accName.name) {
+    debug.log(`====================`);
+    debug.log(`[             name]: ${accName.name}`);
+    debug.log(`[           source]: ${accName.source}`);
+    debug.log(`[      includesAlt]: ${accName.includesAlt}`);
+    debug.log(`[includesAriaLabel]: ${accName.includesAriaLabel}`);
+    debug.log(`[ nameIsNotVisible]: ${accName.nameIsNotVisible}`);
+  }
+}
 
 /*
 *   @function getAccessibleName
@@ -90,13 +107,19 @@ debug.flag = false;
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
 *
-*   @returns {Object} Returns a object with an 'name' and 'source' property
+*   @returns {Object} Returns a object with the following properties:
+*                     'name' {String}
+*                     'source' {String}
+*                     'includesAlt' {Boolean}
+*                     'includesAriaLabel' {Boolean}
+*                     'nameIsNotVisible' {Boolean}
 */
 function getAccessibleName (doc, element) {
   let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
   if (accName === null) accName = nameFromNativeSemantics(doc, element);
   if (accName === null) accName = noAccName;
+  debug.flag && debugAccName(accName);
   return accName;
 }
 
@@ -112,7 +135,12 @@ function getAccessibleName (doc, element) {
 *   @desc (Object)  element     -  DOM node of element to compute description
 *   @desc (Boolean) allowTitle  -  Allow title as accessible description
 *
-*   @returns {Object} Returns a object with an 'name' and 'source' property
+*   @returns {Object} Returns a object with the following properties:
+*                     'name' {String}
+*                     'source' {String}
+*                     'includesAlt' {Boolean}
+*                     'includesAriaLabel' {Boolean}
+*                     'nameIsNotVisible' {Boolean}
 */
 function getAccessibleDesc (doc, element, allowTitle=true) {
   let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
@@ -131,7 +159,12 @@ function getAccessibleDesc (doc, element, allowTitle=true) {
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute error message
 *
-*   @returns {Object} Returns a object with an 'name' and 'source' property
+*   @returns {Object} Returns a object with the following properties:
+*                     'name' {String}
+*                     'source' {String}
+*                     'includesAlt' {Boolean}
+*                     'includesAriaLabel' {Boolean}
+*                     'nameIsNotVisible' {Boolean}
 */
 function getErrMessage (doc, element) {
   let errMessage = null;
@@ -322,6 +355,9 @@ function nameFromNativeSemantics (doc, element) {
 function nameFromAttributeIdRefs (doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
   let idRefs, i, refElement, name, names, arr = [];
+  let includesAlt = false;
+  let includesAriaLabel = false;
+  let refNotVisible = false;
 
   if (value.length) {
     idRefs = value.split(' ');
@@ -331,16 +367,20 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
       if (refElement) {
         if (refElement.hasAttribute('aria-label')) {
           name = refElement.getAttribute('aria-label');
+          includesAriaLabel = true;
         }
         else {
           if (refElement.hasChildNodes()) {
+            refNotVisible = refNotVisible || isDisplayNone(refElement) || isVisibilityHidden(refElement);
             names = [];
             let children = Array.from(refElement.childNodes);
             children.forEach( child => {
               // Need to ignore CSS display: none and visibility: hidden for referenced
               // elements, but not their child elements
-              const nc = getNodeContents(child, refElement, true);
+              const [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, refElement, true);
               if (nc.length) names.push(nc);
+              includesAlt       = includesAlt || nInclAlt;
+              includesAriaLabel = includesAriaLabel || nInclAriaLabel;
             });
             name = (names.length) ? names.join('') : '';
           }
@@ -355,7 +395,12 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
   }
 
   if (arr.length)
-    return { name: normalize(arr.join(' ')), source: attribute };
+    return { name: normalize(arr.join(' ')),
+             source: attribute,
+             includesAlt: includesAlt,
+             includesAriaLabel: includesAriaLabel,
+             nameIsNotVisible: refNotVisible
+           };
 
   return null;
 }
@@ -384,9 +429,14 @@ function getFieldsetLegendLabels (element) {
     if (fieldset) {
       let legend = fieldset.querySelector('legend');
       if (legend) {
-        let text = getElementContents(legend);
+        let [text, inclAlt, inclAriaLabel] = getElementContents(legend);
         if (text.length){
-          arr.push({ name: text, source: 'fieldset/legend' });
+          arr.push({ name: text,
+                     source: 'fieldset/legend',
+                     includesAlt: inclAlt,
+                     includesAriaLabel: inclAriaLabel,
+                     nameIsNotVisible: isDisplayNone(legend) || isVisibilityHidden(legend)
+                   });
         }
       }
       // process ancestors

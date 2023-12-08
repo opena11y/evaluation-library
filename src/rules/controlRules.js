@@ -94,6 +94,7 @@ export const controlRules = [
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
   validate            : function (dom_cache, rule_result) {
+
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (!ce.isInputTypeImage) {
@@ -867,7 +868,41 @@ export const controlRules = [
   target_resources    : ["input", "output", "select", "textarea", "widgets"],
   validate          : function (dom_cache, rule_result) {
 
-    debug.log(`[CONTROL_15]: ${dom_cache} ${rule_result}`);
+    debug.log('[Control 15]');
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+
+      if (de.accName.includesAlt) {
+        if (de.visibility.isVisibleToAT) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+      else {
+        if (de.accName.includesAriaLabel) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
+          }
+        }
+        else {
+          if (de.accName.nameIsNotVisible) {
+            if (de.visibility.isVisibleToAT) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+            }
+          }
+
+        }
+      }
+    });
 
   } // end validation function
 },
@@ -888,7 +923,26 @@ export const controlRules = [
   target_resources    : ["input", "select", "textarea"],
   validate          : function (dom_cache, rule_result) {
 
-    debug.log(`[CONTROL_16]: ${dom_cache} ${rule_result}`);
+        debug.log('[Control 16]');
+
+
+    const includeTags = ['form', 'input', 'select', 'textarea']
+
+    dom_cache.controlInfo.allControlElements.forEach( ce => {
+      const de = ce.domElement;
+      if (includeTags.includes(de.tagName)) {
+        if (de.visibility.isVisibleToAT) {
+          if (autoFillValues.includes(de.id)) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.id]);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+   });
 
   } // end validation function
 }

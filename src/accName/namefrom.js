@@ -25,7 +25,9 @@ export {
   nameFromDescendant,
   nameFromLabelElement,
   nameFromLegendElement,
-  nameFromDetailsOrSummary
+  nameFromDetailsOrSummary,
+  isDisplayNone,
+  isVisibilityHidden
 };
 
 import DebugLogging        from '../debug.js';
@@ -72,24 +74,29 @@ function isLabelableElement (element) {
 *   @parm {Object}  element     - DOM node of element
 *   @parm {Object}  forElement  - DOM node of element being labelled
 *
-*   @returns {String}  @desc
+*   @returns {[String, Boolean]}  Returns a string and a boolean indicating
+*                                 the name includes some image content
 */
 function getElementContents (element, forElement) {
   let result = '';
+  let includesAlt       = false;
+  let includesAriaLabel = false;
 
   if (element.hasChildNodes()) {
     let children = element.childNodes,
         arrayOfStrings = [];
 
     for (let i = 0; i < children.length; i++) {
-      let contents = getNodeContents(children[i], forElement);
-      if (contents.length) arrayOfStrings.push(contents);
+      const [contents, inclAlt, inclAriaLabel] = getNodeContents(children[i], forElement);
+      if (contents && contents.length) arrayOfStrings.push(contents);
+      includesAlt       = includesAlt       || inclAlt;
+      includesAriaLabel = includesAriaLabel || inclAriaLabel;
     }
 
     result = (arrayOfStrings.length) ? arrayOfStrings.join('') : '';
   }
 
-  return addCssGeneratedContent(element, result);
+  return [addCssGeneratedContent(element, result), includesAlt, includesAriaLabel];
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -108,8 +115,12 @@ function nameFromAttribute (element, attribute) {
   let name;
 
   name = getAttributeValue(element, attribute);
-  if (name.length) return { name: normalize(name), source: attribute };
-
+  if (name.length) return { name: normalize(name),
+                            source: attribute,
+                            includesAlt: false,
+                            includesAriaLabel: attribute === 'aria=label',
+                            nameIsNotVisible: true
+                           };
   return null;
 }
 
@@ -128,7 +139,12 @@ function nameFromAltAttribute (element) {
   // Attribute is present
   if (name !== null) {
     name = normalize(name);
-    return { name: name, source: 'alt' };
+    return { name: name,
+             source: 'alt',
+             includesAlt: true,
+             includesAriaLabel: false,
+             nameIsNotVisible: false
+           };
   }
 
   // Attribute not present
@@ -144,11 +160,14 @@ function nameFromAltAttribute (element) {
 *   @returns {Object}  @desc
 */
 function nameFromContents (element) {
-  let name;
 
-  name = getElementContents(element);
-  if (name.length) return { name: normalize(name), source: 'contents' };
-
+  const [name, inclAlt, inclAriaLabel] = getElementContents(element);
+  if (name.length) return { name: normalize(name),
+                            source: 'contents',
+                            includesAlt: inclAlt,
+                            includesAriaLabel: inclAriaLabel,
+                            nameIsNotVisible: false
+                          };
   return null;
 }
 
@@ -161,7 +180,12 @@ function nameFromContents (element) {
 *   @returns {Object}  @desc
 */
 function nameFromDefault (name) {
-  return name.length ? { name: name, source: 'default' } : null;
+  return name.length ? { name: name,
+                         source: 'default',
+                         includesAlt: false,
+                         includesAriaLabel: false,
+                         nameIsNotVisible: false
+                       } : null;
 }
 
 /*
@@ -175,10 +199,15 @@ function nameFromDefault (name) {
 function nameFromDescendant (element, tagName) {
   let descendant = element.querySelector(tagName);
   if (descendant) {
-    let name = descendant.hasAttribute('aria-label') ?
-               descendant.getAttribute('aria-label') :
+    let [name, incAlt, incAriaLabel] = descendant.hasAttribute('aria-label') ?
+               [descendant.getAttribute('aria-label'), false, true] :
                getElementContents(descendant);
-    if (name.length) return { name: normalize(name), source: tagName + ' element' };
+    if (name.length) return { name: normalize(name),
+                              source: tagName + ' element',
+                              includesAlt: incAlt,
+                              includesAriaLabel: incAriaLabel,
+                              nameIsNotVisible: isDisplayNone(descendant) || isVisibilityHidden(descendant)
+                            };
   }
 
   return null;
@@ -194,16 +223,21 @@ function nameFromDescendant (element, tagName) {
 *   @returns {Object}  @desc
 */
 function nameFromLabelElement (doc, element) {
-  let label, name;
+  let label, name, inclAlt, inclAriaLabel, notVisible;
   // label [for=id]
   if (element.id) {
     try {
       label = doc.querySelector('[for="' + element.id + '"]');
       if (label) {
-        name = label.hasAttribute('aria-label') ?
-               label.getAttribute('aria-label') :
+        [name, inclAlt, inclAriaLabel, notVisible] = label.hasAttribute('aria-label') ?
+               [label.getAttribute('aria-label'), false, true, true] :
                getElementContents(label, element);
-        if (name.length) return { name: normalize(name), source: 'label reference' };
+        if (name.length) return { name: normalize(name),
+                                  source: 'label reference',
+                                  includeAlt: inclAlt,
+                                  includeAriaLabel: inclAriaLabel,
+                                  nameIsNotVisibile: notVisible
+                                 };
       }
     } catch (error) {
       debug.log(`[nameFromLabelElement][error]: ${error}`);
@@ -214,10 +248,14 @@ function nameFromLabelElement (doc, element) {
   if (typeof element.closest === 'function') {
     label = element.closest('label');
     if (label) {
-      name = label.hasAttribute('aria-label') ?
-             label.getAttribute('aria-label') :
+      [name, inclAlt, inclAriaLabel] = label.hasAttribute('aria-label') ?
+             [label.getAttribute('aria-label'), false, true] :
              getElementContents(label, element);
-      if (name.length) return { name: normalize(name), source: 'label encapsulation' };
+      if (name.length) return { name: normalize(name),
+                                source: 'label encapsulation',
+                                includesAlt: inclAlt,
+                                includesAriaLabel: inclAriaLabel
+                            };
     }
   }
 
@@ -235,16 +273,20 @@ function nameFromLabelElement (doc, element) {
 *   @returns {Object}  @desc
 */
 function nameFromLegendElement (doc, element) {
-  let name, legend;
+  let name, legend, inclAlt, inclAriaLabel;
 
   // legend
   if (element) {
     legend = element.querySelector('legend');
     if (legend) {
-      name = legend.hasAttribute('aria-label') ?
-             legend.getAttribute('aria-label') :
+      [name, inclAlt, inclAriaLabel] = legend.hasAttribute('aria-label') ?
+             [legend.getAttribute('aria-label'), false, true] :
              getElementContents(legend, element);
-    if (name.length) return { name: normalize(name), source: 'legend' };
+    if (name.length) return { name: normalize(name),
+                              source: 'legend',
+                              includesAlt: inclAlt,
+                              includesAriaLabel: inclAriaLabel
+                          };
     }
   }
   return null;
@@ -265,23 +307,32 @@ function nameFromLegendElement (doc, element) {
 */
 
 function nameFromDetailsOrSummary (element) {
-  let name, summary;
+  let name, summary, inclAlt = false, inclAriaLabel = false;
 
   function isExpanded (elem) { return elem.hasAttribute('open'); }
 
   // At minimum, always use summary contents
   summary = element.querySelector('summary');
-  if (summary) name = getElementContents(summary);
+  if (summary) [name, inclAlt, inclAriaLabel] = getElementContents(summary);
 
   // Return either summary + details (non-summary) or summary only
   if (isExpanded(element)) {
     name += getContentsOfChildNodes(element, function (elem) {
       return elem.tagName.toLowerCase() !== 'summary';
     });
-    if (name.length) return { name: normalize(name), source: 'contents' };
+    if (name.length) return { name: normalize(name),
+                              source: 'contents',
+                              includesAlt : inclAlt,
+                              includesAriaLabel: inclAriaLabel
+                            };
   }
   else {
-    if (name.length) return { name: normalize(name), source: 'summary element' };
+    if (name.length) return { name: normalize(name),
+                              source: 'summary element',
+                              includesAlt : inclAlt,
+                              includesAriaLabel: inclAriaLabel
+                            };
+
   }
 
   return null;
@@ -434,18 +485,23 @@ function includeContentInName(node) {
 *   @param  {Object}   node     -  DOM node
 *   @param  {Object}   forElem  -  DOM node the name is being computed for
 *
-*   @return  see @desc
+*   @returns {[String, Boolean, Boolean]}  Returns a string and two boolean values
+*                                          indicating the name includes alt text
+*                                          and content from aria-label
 */
 
 function getNodeContents (node, forElem, alwaysInclude=false) {
   let contents = '';
   let nc;
   let arr = [];
+  let includesAlt = false;
+  let includesAriaLabel = false;
+  let nInclAlt, nInclAriaLabel;
 
   // Cannot recursively use the element
   // in computing it's accessible name
   if (node === forElem) {
-    return '';
+    return ['', false, false];
   }
 
   switch (node.nodeType) {
@@ -456,6 +512,7 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
       if (node.hasAttribute('aria-label')) {
         if (includeContentInName(node) || alwaysInclude ) {
           contents = node.getAttribute('aria-label');
+          includesAriaLabel = true;
         }
       }
       else {
@@ -463,13 +520,16 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
           // if no slotted elements, check for default slotted content
           const assignedNodes = node.assignedNodes().length ? node.assignedNodes() : node.assignedNodes({ flatten: true });
           assignedNodes.forEach( assignedNode => {
-            nc = getNodeContents(assignedNode, forElem);
-            if (nc.length) arr.push(nc);
+            [nc, nInclAlt, nInclAriaLabel] = getNodeContents(assignedNode, forElem);
+            if (nc && nc.length) arr.push(nc);
+            includesAlt = includesAlt       || nInclAlt;
+            includesAlt = includesAriaLabel || nInclAriaLabel;
           });
           contents = (arr.length) ? arr.join('') : '';
         } else {
           if (couldHaveAltText(node) && (includeContentInName(node) || alwaysInclude)) {
             contents = getAttributeValue(node, 'alt');
+            includesAlt = true;
           }
           else {
             if (isEmbeddedControl(node) && (includeContentInName(node) || alwaysInclude)) {
@@ -479,8 +539,10 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
               if (node.hasChildNodes()) {
                 let children = Array.from(node.childNodes);
                 children.forEach( child => {
-                  nc = getNodeContents(child, forElem);
-                  if (nc.length) arr.push(nc);
+                  [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, forElem);
+                  if (nc && nc.length) arr.push(nc);
+                  includesAlt = includesAlt       || nInclAlt;
+                  includesAlt = includesAriaLabel || nInclAriaLabel;
                 });
                 contents = (arr.length) ? arr.join('') : '';
               }
@@ -505,7 +567,7 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
       break;  
   }
 
-  return contents;
+  return [contents, includesAlt, includesAriaLabel];
 }
 
 /*
@@ -562,7 +624,7 @@ function getContentsOfChildNodes (element, predicate) {
     switch (node.nodeType) {
       case (Node.ELEMENT_NODE):
         if (predicate(node)) {
-          content = getElementContents(node);
+          content = getElementContents(node)[0];
           if (content.length) arr.push(content);
         }
         break;

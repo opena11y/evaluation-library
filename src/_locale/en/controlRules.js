@@ -818,19 +818,23 @@ export const controlRules = {
           MANUAL_CHECK_S:  '',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          ELEMENT_MC_1: '',
+          ELEMENT_MC_2: '',
+          ELEMENT_MC_3: '',
+          ELEMENT_HIDDEN_1: '',
+          ELEMENT_HIDDEN_2: '',
+          ELEMENT_HIDDEN_3: '',
+          PAGE_MC_1: ''
         },
         PURPOSES: [
           'add purpose',
           ''
         ],
         TECHNIQUES: [
-          'ass technique',
+          'add techniques',
           ''
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
@@ -853,19 +857,19 @@ export const controlRules = {
           MANUAL_CHECK_S:  '',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: '',
+          ELEMENT_PASS_1: '',
+          ELEMENT_MC_1: '',
+          ELEMENT_HIDDEN_1: ''
         },
         PURPOSES: [
           'add purpose',
           ''
         ],
         TECHNIQUES: [
-          'ass technique',
+          'add technique',
           ''
         ],
         MANUAL_CHECKS: [
-          '',
-          ''
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
