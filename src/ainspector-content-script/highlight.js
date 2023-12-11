@@ -8,7 +8,7 @@ import {RESULT_VALUE} from '../constants.js'
 import DebugLogging from '../debug.js';
 import {computeCCR} from '../cache/colorContrast.js';
 
-import {getCommonMessage} from '../_locale/locale.js';
+import {getCommonMessage} from '../locale/locale.js';
 
 
 export { addHighlightStyle, highlightResults, clearHighlights };

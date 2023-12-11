@@ -17,7 +17,7 @@ import {
   getGuidelineInfo,
   getRuleCategoryInfo,
   getRuleScopeInfo
-} from './_locale/locale.js';
+} from './locale/locale.js';
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)

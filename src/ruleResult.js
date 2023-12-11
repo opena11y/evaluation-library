@@ -18,7 +18,7 @@ import WebsiteResult  from './websiteResult.js';
 import {
   getCommonMessage,
   transformElementMarkup
-} from './_locale/locale.js';
+} from './locale/locale.js';
 
 
 /* constants */

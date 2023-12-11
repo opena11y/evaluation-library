@@ -9,7 +9,7 @@ import {
 import {
   getCommonMessage,
   getBaseResultMessage
-} from './_locale/locale.js'
+} from './locale/locale.js'
 
 /* constants */
 const debug = new DebugLogging('baseResult', false);

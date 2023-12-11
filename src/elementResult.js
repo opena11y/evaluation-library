@@ -7,7 +7,7 @@ import DebugLogging   from './debug.js';
 
 import {
   getCommonMessage
-} from './_locale/locale.js';
+} from './locale/locale.js';
 
 /* Constants */
 

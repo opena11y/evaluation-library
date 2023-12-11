@@ -9,7 +9,7 @@ import getRuleGroupInfo   from './getRuleGroupInfo.js';
 import getRuleResultInfo  from './getRuleResultInfo.js';
 import {
   getRulesetLabel
-} from '../_locale/locale.js';
+} from '../locale/locale.js';
 import {
   addHighlightStyle,
   clearHighlights,

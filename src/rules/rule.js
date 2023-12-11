@@ -23,7 +23,7 @@ import {
   getTechniques,
   getScope,
   getWCAGVersion
-} from '../_locale/locale.js';
+} from '../locale/locale.js';
 
 import DebugLogging from '../debug.js';
 

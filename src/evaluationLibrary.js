@@ -21,7 +21,7 @@ import {
   getWCAG,
   getWCAGVersion,
   setUseCodeTags
-}  from './_locale/locale.js'
+}  from './locale/locale.js'
 
 import DebugLogging      from './debug.js';
 

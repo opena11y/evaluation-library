@@ -3,7 +3,7 @@
 /* Imports */
 import DebugLogging       from './debug.js';
 import RuleResultsSummary from './ruleResultSummary.js';
-import {getImplementationValue} from './_locale/locale.js';
+import {getImplementationValue} from './locale/locale.js';
 import {cleanForUTF8}     from './utils.js';
 import {
   VERSION,
