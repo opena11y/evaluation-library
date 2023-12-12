@@ -341,9 +341,10 @@ export default class ControlInfo {
     this.allLabelElements.forEach (le => {
       const id = le.labelForAttr;
       if (id) {
-        for (let i = 0; this.allControlElements.length; i += 1) {
+        for (let i = 0; i < this.allControlElements.length; i += 1) {
           const ce = this.allControlElements[i];
-          if (ce.domElement.id === id) {
+          const de = ce.domElement;
+          if (de.id === id) {
             if (ce.labelElement) {
               // pick largest label for size calculations
               if (ce.labelElement.area < le.domElement.area) {
@@ -379,7 +380,7 @@ export default class ControlInfo {
   addChildControlElement (domElement, parentControlElement) {
     const tagName = domElement.tagName;
     const role = domElement.role; 
-    let ce;
+    let ce = null;
 
     switch (tagName) {
       case 'button':

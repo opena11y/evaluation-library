@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Control: Label in Name </title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+
+    <style>
+      label {
+        display: block;
+        margin: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Control 15: Label in Name</h1>
+
+      <label>
+        Input 11
+        <input type="text" name="name1">
+      </label>
+
+      <label>
+        Input 13
+        <img src="image.jpeg" alt="test">
+        <input type="text" name="name2" class="CONTROL_15_MC">
+      </label>
+
+      <label aria-label="Input 14A">
+        Input 14
+        <input type="number" name="postal-code1" class="CONTROL_15_MC">
+      </label>
+
+      <div>
+        Input 15
+        <input aria-label="Input 15A" type="range" class="CONTROL_15_MC" />
+      </div>
+
+      <label>
+        Input 16
+        <input aria-labelledby="id-16a id-16b" type="date" name="bday1" class="CONTROL_15_MC">
+      </label>
+
+      <div>
+        <span id="id-16a">Input </span>
+        <span aria-label="16B" id="id-16b">16A</span>
+      </div>
+
+      <label>
+        Input 17
+        <input aria-labelledby="id-17a id-17b" type="date" name="bday2" class="CONTROL_15_MC">
+      </label>
+
+      <div>
+        <span id="id-17a">Input </span>
+        <span hidden id="id-17b">17A</span>
+      </div>
+
+      <h2>Hidden Controls</h2>
+
+      <div hidden>
+
+        <label>
+          Input 11H
+          <input type="text" name="name1h">
+        </label>
+
+        <label>
+          Input 13
+          <img src="image.jpeg" alt="test">
+          <input type="text" name="name2h" class="CONTROL_15_HIDDEN">
+        </label>
+
+        <label aria-label="Input 14A">
+          Input 14
+          <input type="number" name="postal-code1-h" class="CONTROL_15_HIDDEN">
+        </label>
+
+      </div>
+
+
+      </div>
+    </div>
+  </body>
+</html>

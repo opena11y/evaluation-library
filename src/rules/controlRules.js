@@ -868,40 +868,41 @@ export const controlRules = [
   target_resources    : ["input", "output", "select", "textarea", "widgets"],
   validate          : function (dom_cache, rule_result) {
 
-    debug.log('[Control 15]');
-
     dom_cache.controlInfo.allControlElements.forEach( ce => {
       const de = ce.domElement;
 
-      if (de.accName.includesAlt) {
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
-      }
-      else {
-        if (de.accName.includesAriaLabel) {
+      if (ce.isInteractive) {
+        if (de.accName.includesAlt) {
           if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
         }
         else {
-          if (de.accName.nameIsNotVisible) {
+          if (de.accName.includesAriaLabel) {
             if (de.visibility.isVisibleToAT) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
             }
           }
+          else {
+            if (de.accName.nameIsNotVisible) {
+              if (de.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+              }
+            }
 
+          }
         }
       }
+
     });
 
   } // end validation function

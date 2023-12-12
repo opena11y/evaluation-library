@@ -1301,9 +1301,10 @@ class ControlInfo {
     this.allLabelElements.forEach (le => {
       const id = le.labelForAttr;
       if (id) {
-        for (let i = 0; this.allControlElements.length; i += 1) {
+        for (let i = 0; i < this.allControlElements.length; i += 1) {
           const ce = this.allControlElements[i];
-          if (ce.domElement.id === id) {
+          const de = ce.domElement;
+          if (de.id === id) {
             if (ce.labelElement) {
               // pick largest label for size calculations
               if (ce.labelElement.area < le.domElement.area) {
@@ -1339,7 +1340,7 @@ class ControlInfo {
   addChildControlElement (domElement, parentControlElement) {
     const tagName = domElement.tagName;
     const role = domElement.role; 
-    let ce;
+    let ce = null;
 
     switch (tagName) {
       case 'button':
@@ -14144,7 +14145,7 @@ const controlRules$1 = {
       ],
       TECHNIQUES: [
         'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-        'An alternative technique is to use the @label@ element to encapsulate the form control element.',
+        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
         'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
@@ -14421,7 +14422,7 @@ const controlRules$1 = {
         ELEMENT_HIDDEN_1: 'The @label@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        '@label@ elements are useful for accessibility only when they reference or encapsulate form controls.'
+        '@label@ elements are useful for accessibility only when they reference form controls.  The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.'
       ],
       TECHNIQUES: [
         'For a @label@ element to properly reference a form control, ensure that the @for@ attribute value on the @label@ element exactly matches the @id@ attribute value on the form control.'
@@ -14580,7 +14581,7 @@ const controlRules$1 = {
       ],
       TECHNIQUES: [
         'The preferred technique for labeling form controls is to use the @label@ element and its @for@ attribute to reference the @id@ attribute value of the form control element.',
-        'An alternative technique is to use the @label@ element to encapsulate the form control element.',
+        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
         'The @title@ attribute will be used as the last resort to provide a label for the form control.'
@@ -14637,7 +14638,7 @@ const controlRules$1 = {
       ],
       TECHNIQUES: [
         'The preferred technique for labeling standard HTML form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-        'An alternative technique for standard HTML form controls is to use the @label@ element to encapsulate the form control element.',
+        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'The @fieldset@ and @legend@ elements can be used add a grouping label to the form controls contained in the @fieldeset@ element.',
         'For ARIA widgets and special cases of standard HTML form controls, the @aria-labelledby@ attribute can be used to reference the id(s) of the elements on the page that describe its purpose.',
         'For ARIA widgets and special cases of standard HTML form controls, the @aria-label@ attribute can be used to provide an explicit text description of its purpose.',
@@ -14926,39 +14927,61 @@ const controlRules$1 = {
 
     CONTROL_15: {
         ID:                    'Control 15',
-        DEFINITION:            'add definition',
+        DEFINITION:            'Verify labels that include images of text, @aria-label@ and/or references to hidden content contains the same text as the visually render label associated with the control.',
         SUMMARY:               'Label in Name',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  '',
+          MANUAL_CHECK_S:  'Verify the control with images, @aria-label@ and/or references to hidden content contain the same text associated with the visually rendered label associated with the control.',
+          MANUAL_CHECK_P:  'Verify tha each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
+          HIDDEN_S:  'One control with images, @aria-label@ and/or references to hidden content was not tested because it is hidden form assistive technologies',
+          HIDDEN_P:  '%N_H controls with images, @aria-label@ and/or references were not tested because they are hidden from assistive technologies',
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_MC_1: '',
-          ELEMENT_MC_2: '',
-          ELEMENT_MC_3: '',
-          ELEMENT_HIDDEN_1: '',
-          ELEMENT_HIDDEN_2: '',
-          ELEMENT_HIDDEN_3: '',
-          PAGE_MC_1: ''
+          ELEMENT_MC_1: 'Verify the image @alt@ text contains any text represented in the image.',
+          ELEMENT_MC_2: 'Verify the @aria-label@ contains the same text associated the visually rendered label associated with the control.',
+          ELEMENT_MC_3: 'Verify the computed name of all the referenced content, contains the same text associated the visually rendered label associated with the control.',
+          ELEMENT_HIDDEN_1: 'The hidden control with an accessible name that includes image content was not tested.',
+          ELEMENT_HIDDEN_2: 'The hidden control with an accessible name with @aria-label@ content was not tested.',
+          ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.',
+          PAGE_MC_1: 'The pages contains '
         },
         PURPOSES: [
-          'add purpose',
-          ''
+          'Voice recognition users can directly activate controls on a page with fewer surprising changes of focus.',
+          'Screen reader users will have a better experience because the labels that they hear match the visible text labels that they see on the screen.',
+          'In general avoid using images and hidden text for defining accessible names whenever possible.'
         ],
         TECHNIQUES: [
-          'add techniques',
-          ''
+          'If images of text that are part of an accessible name (e.g. label), the alt text must be the same as the text of the image.',
+          'If @aria-label@ is used as part of an accessible name (e.g. label), the @aria-label@ contains the same text associated the visually rendered content associated with the control.',
+          'If a hidden @aria-labelledby@ reference is used as part of the accessible name (e.g. label), verify the computed name of all the referenced contain has the same text associated the visually rendered label associated with the control.',
+          'Accessible names may contain additional information useful to people using assistive technologies, but should start with the visible text associated with the control.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'add specification',
-            url:   ''
+            title: 'W3C WCAG UNderstanding Label in Name',
+            url:   'https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'add technique',
-            url:   ''
+            title: 'W3C Accessible Name and Description Computation 1.1',
+            url:   'https://www.w3.org/TR/accname-1.1/'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G208: Including the text of the visible label as part of the accessible name',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G208'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G211: Matching the accessible name to the visible label',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G211'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G162: Positioning labels to maximize predictability of relationships',
+            url:   'https://www.w3.org/WAI/GL/2016/WD-WCAG20-TECHS-20160105/G162'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F96: Failure due to the accessible name not containing the visible label text',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F96'
           }
         ]
     },
@@ -24836,40 +24859,41 @@ const controlRules = [
   target_resources    : ["input", "output", "select", "textarea", "widgets"],
   validate          : function (dom_cache, rule_result) {
 
-    debug$A.log('[Control 15]');
-
     dom_cache.controlInfo.allControlElements.forEach( ce => {
       const de = ce.domElement;
 
-      if (de.accName.includesAlt) {
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
-      }
-      else {
-        if (de.accName.includesAriaLabel) {
+      if (ce.isInteractive) {
+        if (de.accName.includesAlt) {
           if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
         }
         else {
-          if (de.accName.nameIsNotVisible) {
+          if (de.accName.includesAriaLabel) {
             if (de.visibility.isVisibleToAT) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
             }
           }
+          else {
+            if (de.accName.nameIsNotVisible) {
+              if (de.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+              }
+            }
 
+          }
         }
       }
+
     });
 
   } // end validation function
