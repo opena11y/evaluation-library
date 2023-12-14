@@ -77,7 +77,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>add definition</td>
+  <td>Use <code>autocomplete</code> attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions.</td>
 </tr>
 
                   
@@ -86,9 +86,13 @@
   <td>
     <ul>
       
-      <li>add purpose</li>
+      <li>To ensure that users can successfully complete multi-step processes.</li>
       
-      <li></li>
+      <li>Users with cognitive disabilities experience short-term, working memory difficulty. Not having to repeatedly remember particular information reduces stress and the likelihood of mistakes.</li>
+      
+      <li>Users who experience difficulty forming new memories, recalling information, and other functions related to cognition can complete processes without having to unnecessarily rely on their memory.</li>
+      
+      <li>Users with mobility impairments, for example using switch control or voice input, benefit from a reduced need for text entry.</li>
       
     </ul>
   </td>
@@ -136,9 +140,15 @@
   <td>
     <ul>
       
-      <li>add technique</li>
+      <li>Add an <code>autocomplete</code> attribute to the form control that would support auto-populating the form control from previously entered information.</li>
       
-      <li></li>
+      <li>There are many other programmatic techniques to support auto-population, that are too numerous to discuss here.</li>
+      
+      <li>EXCEPTION: Essential uses of input re-entry for things like memory games which would be invalidated if the previous answers were supplied.</li>
+      
+      <li>EXCEPTION: Security measures such as preventing a password string from being shown or copied. When creating a password, it should be a unique and complex string and therefore cannot be validated by the author. If the system requires the user to manually create a password that is not displayed, having users re-validate their new string is allowed as an exception.</li>
+      
+      <li>EXCEPTION: When the previously entered information is no longer valid, it can be requested that the user enter that information again.</li>
       
     </ul>
   </td>
@@ -150,9 +160,11 @@
   <td>
     <ul>
       
-      <li><a href="">add specification</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html">W3C ARIA Universtanding Redundant Entry</a></li>
       
-      <li><a href="">add technique</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete">MDN HTML attribute: autocomplete</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G221">G221: Provide data from a previous step in a process</a></li>
       
     </ul>
   </td>

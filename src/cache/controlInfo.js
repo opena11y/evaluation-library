@@ -31,6 +31,7 @@ class ControlElement {
                              this.isInputType(node, 'text') ||
                              this.isInputType(node, 'url');
 
+
     this.nameAttr = node.hasAttribute('name') ?
                     node.getAttribute('name') :
                     '';
@@ -63,6 +64,8 @@ class ControlElement {
     this.ariaRequired = this.hasAriaRequired ?
                        (node.getAttribute('aria-required').toLowerCase() === 'true') :
                        false;
+
+    this.autocomplete = node.getAttribute('autocomplete');
 
     this.labelElement = this.checkForLabelEncapsulation(parentControlElement);
 

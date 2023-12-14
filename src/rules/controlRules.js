@@ -924,23 +924,30 @@ export const controlRules = [
   target_resources    : ["input", "select", "textarea"],
   validate          : function (dom_cache, rule_result) {
 
-        debug.log('[Control 16]');
-
-
     const includeTags = ['form', 'input', 'select', 'textarea']
 
     dom_cache.controlInfo.allControlElements.forEach( ce => {
       const de = ce.domElement;
       if (includeTags.includes(de.tagName)) {
         if (de.visibility.isVisibleToAT) {
-          if (autoFillValues.includes(de.id)) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.id]);
+          if (autoFillValues.includes(ce.autocomplete)) {
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, ce.autocomplete]);
           } else {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
         }
         else {
           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
+      }
+      else {
+        if (de.isInteractive && (de.ariaInfo.equiredParents.length === 0)) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       }
    });

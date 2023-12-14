@@ -817,7 +817,7 @@ export const controlRules = {
         RULE_RESULT_MESSAGES: {
           MANUAL_CHECK_S:  'Verify the control with images, @aria-label@ and/or references to hidden content contain the same text associated with the visually rendered label associated with the control.',
           MANUAL_CHECK_P:  'Verify tha each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
-          HIDDEN_S:  'One control with images, @aria-label@ and/or references to hidden content was not tested because it is hidden form assistive technologies',
+          HIDDEN_S:  'One control with images, @aria-label@ and/or references to hidden content was not tested because it is hidden from assistive technologies',
           HIDDEN_P:  '%N_H controls with images, @aria-label@ and/or references were not tested because they are hidden from assistive technologies',
         },
         BASE_RESULT_MESSAGES: {
@@ -872,35 +872,48 @@ export const controlRules = {
 
     CONTROL_16: {
         ID:                    'Control 16',
-        DEFINITION:            'add definition',
+        DEFINITION:            'Use @autocomplete@ attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions.',
         SUMMARY:               'Redundant Entry',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  '',
+          MANUAL_CHECK_S:  'Verify if the user benefits from the control supporting auto population.',
+          MANUAL_CHECK_P:  'Verify if the user benefits from the any of the %N_MC controls supporting auto population.',
+          HIDDEN_S:  'One control was not tested for auto-population because it is hidden from assistive technologies.',
+          HIDDEN_P:  '%N_H controls were not tested for auto-population because they are hidden from assistive technologies.',
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_PASS_1: '',
-          ELEMENT_MC_1: '',
-          ELEMENT_HIDDEN_1: ''
+          ELEMENT_PASS_1: 'The @autocomplete=%1@ supports auto-populating the form control.',
+          ELEMENT_MC_1: 'Verify if the @%1@ element would benefit users by using an @autocomplete@ attribute or other programmatic techniques that supports auto-populating the form control.',
+          ELEMENT_MC_2: 'Verify if the @%1@ element would benefit users by using a programmatic techniques that supports auto-populating the form control.',
+          ELEMENT_HIDDEN_1: 'The @%1% element is hidden and was not tested for auto-population.'
         },
         PURPOSES: [
-          'add purpose',
-          ''
+          'To ensure that users can successfully complete multi-step processes.',
+          'Users with cognitive disabilities experience short-term, working memory difficulty. Not having to repeatedly remember particular information reduces stress and the likelihood of mistakes.',
+          'Users who experience difficulty forming new memories, recalling information, and other functions related to cognition can complete processes without having to unnecessarily rely on their memory.',
+          'Users with mobility impairments, for example using switch control or voice input, benefit from a reduced need for text entry.'
         ],
         TECHNIQUES: [
-          'add technique',
-          ''
+          'Add an @autocomplete@ attribute to the form control that would support auto-populating the form control from previously entered information.',
+          'There are many other programmatic techniques to support auto-population, that are too numerous to discuss here.',
+          'EXCEPTION: Essential uses of input re-entry for things like memory games which would be invalidated if the previous answers were supplied.',
+          'EXCEPTION: Security measures such as preventing a password string from being shown or copied. When creating a password, it should be a unique and complex string and therefore cannot be validated by the author. If the system requires the user to manually create a password that is not displayed, having users re-validate their new string is allowed as an exception.',
+          'EXCEPTION: When the previously entered information is no longer valid, it can be requested that the user enter that information again.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'add specification',
-            url:   ''
+            title: 'W3C ARIA Universtanding Redundant Entry',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'add technique',
-            url:   ''
+            title: 'MDN HTML attribute: autocomplete',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G221: Provide data from a previous step in a process',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G221'
           }
         ]
     }
