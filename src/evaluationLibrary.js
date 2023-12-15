@@ -144,6 +144,7 @@ export default class EvaluationLibrary {
     const id = rule.rule_id;
 
     ruleInfo.id            = getRuleId(id);
+    ruleInfo.htmlId        = rule.rule_id.toLowerCase().replace('_', '-');
     ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
     ruleInfo.last_updated  = rule.last_updated;
 

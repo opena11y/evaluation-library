@@ -89,13 +89,21 @@ for(const p in el.getWCAG.principles) {
 const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk', {title: 'OpenA11y Evaluation Library'});
 outputFile('index.html', htmlIndex);
 
-// Create rule index
-const htmlRuleIndex = nunjucks.render('./src-docs/templates/content-rules.njk',
-  {title: 'Rules',
+// Create rule indexes
+const htmlRuleRCIndex = nunjucks.render('./src-docs/templates/content-rules-rc.njk',
+  {title: 'Rules by Rule Categories',
   allRuleCategories: allRuleCategories,
   allGuidelines: allGuidelines
 });
-outputFile('rules.html', htmlRuleIndex);
+outputFile('rules-rc.html', htmlRuleRCIndex);
+
+// Create rule indexes
+const htmlRuleGLIndex = nunjucks.render('./src-docs/templates/content-rules-gl.njk',
+  {title: 'Rules by WCAG Guidelines',
+  allRuleCategories: allRuleCategories,
+  allGuidelines: allGuidelines
+});
+outputFile('rules-gl.html', htmlRuleGLIndex);
 
 // Create concepts and terms file
 const htmlConcepts = nunjucks.render('./src-docs/templates/content-concepts.njk', {title: 'Concepts and Terms'});

@@ -167,7 +167,9 @@ export const colorRules = {
       TARGET_RESOURCES_DESC: 'User interface controls',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
-        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).',
+        HIDDEN_S: 'The interactive element with non-text content that is hidden was not analyzed for color contrast accessibility.',
+        HIDDEN_P: 'The %N_H interactive elements with non-text content that are hidden were not analyzed for color contrast accessibility.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
@@ -204,7 +206,9 @@ export const colorRules = {
       TARGET_RESOURCES_DESC: 'Graphical objects',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify the colors used in the graphic have a color contrast ratio of at least 3:1 against adjacent color(s).',
-        MANUAL_CHECK_P:     'Verify the non-text content of the %N_MC graphics have a contrast ratio of at least 3:1 against adjacent color(s).'
+        MANUAL_CHECK_P:     'Verify the non-text content of the %N_MC graphics have a contrast ratio of at least 3:1 against adjacent color(s).',
+        HIDDEN_S: 'The graphical object that is hidden was not evaluated for color contrast accessibility.',
+        HIDDEN_P: 'The %N_H graphical objects that are hidden were not evaluated for color contrast accessibility.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1:     'Verify the colors used in the @%1@ image have sufficient contrast for the meaning of the image to be conveyed to users.',

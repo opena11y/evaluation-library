@@ -76,7 +76,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
+          <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
           <li class="breadcrumb-item active">{{title | safe}}</li>
         </ol>
       </nav>
@@ -106,6 +106,22 @@
     </div>
     {% include "./footer.njk" %}
     {% include "./scripts.njk" %}
+
+    <script>
+      (function() {
+        const node = document.querySelector("#id-breadcrumb-rules");
+
+        console.log(`[node]: ${node}`);
+        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
+
+        if (window.location.href.indexOf("#gl") > 0) {
+          node.href= "rules-gl.html#{{ruleInfo.htmlId}}";
+        }
+        else {
+          node.href= "rules-rc.html#{{ruleInfo.htmlId}}";
+        }
+      })()
+    </script>
 
   </body>
 </html>

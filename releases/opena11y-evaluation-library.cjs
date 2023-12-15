@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$$ = new DebugLogging('constants', false);
 
-const VERSION = '2.0';
+const VERSION = '2.0.beta3';
 
 
 /**
@@ -13730,7 +13730,9 @@ const colorRules$1 = {
       TARGET_RESOURCES_DESC: 'User interface controls',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) has a contrast ratio of at least 3:1 against adjacent color(s).',
-        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).'
+        MANUAL_CHECK_P:     'Verify the non-text content of an interactive element (e.g. icons for indicating state) have a contrast ratio of at least 3:1 against adjacent color(s).',
+        HIDDEN_S: 'The interactive element with non-text content that is hidden was not analyzed for color contrast accessibility.',
+        HIDDEN_P: 'The %N_H interactive elements with non-text content that are hidden were not analyzed for color contrast accessibility.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1: 'Verify color of non-text content (e.g. icons for indicating state) of the @%1@ element has a contrast ratio of at least 3:1 against adjacent color(s).',
@@ -13767,7 +13769,9 @@ const colorRules$1 = {
       TARGET_RESOURCES_DESC: 'Graphical objects',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify the colors used in the graphic have a color contrast ratio of at least 3:1 against adjacent color(s).',
-        MANUAL_CHECK_P:     'Verify the non-text content of the %N_MC graphics have a contrast ratio of at least 3:1 against adjacent color(s).'
+        MANUAL_CHECK_P:     'Verify the non-text content of the %N_MC graphics have a contrast ratio of at least 3:1 against adjacent color(s).',
+        HIDDEN_S: 'The graphical object that is hidden was not evaluated for color contrast accessibility.',
+        HIDDEN_P: 'The %N_H graphical objects that are hidden were not evaluated for color contrast accessibility.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1:     'Verify the colors used in the @%1@ image have sufficient contrast for the meaning of the image to be conveyed to users.',
@@ -19922,7 +19926,6 @@ const timingRules$1 = {
         '20 Hour Exception: The time limit is longer than 20 hours.'
       ],
       MANUAL_CHECKS: [
-        'If the page contains time limits, verify that there is a way to turn off, adjust or extend the time limits; or that one of the three exceptions applies.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -19938,7 +19941,9 @@ const timingRules$1 = {
       TARGET_RESOURCES_DESC: 'Canvas, SVG and image animations; moving, blinking, scrolling or auto-updating text content; and embedded applications',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
-        MANUAL_CHECK_P:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.'
+        MANUAL_CHECK_P:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
+        HIDDEN_S:  'One timing element was not tested, since it is hidden from assistive technologies.',
+        HIDDEN_P:  '%N_H timing elements were not tested, since, they are hidden from assistive technologies.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1:     'If the %1 element includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
@@ -19969,8 +19974,10 @@ const timingRules$1 = {
       TARGET_RESOURCES_DESC: 'Canvas, SVG and image animations; flashing text content; video; and embedded applications',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
-        MANUAL_CHECK_P:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.'
-      },
+        MANUAL_CHECK_P:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
+        HIDDEN_S:  'One potential element that could flash was not tested, since it is hidden from assistive technologies.',
+        HIDDEN_P:  '%N_H potential elements that could flash were not tested, since they are hidden from assistive technologies.'
+       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1:     'Verify the %1 element does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
         ELEMENT_HIDDEN_1: 'The %1 element has not evaluated for moving, blinking, scrolling or auto-updating content',
@@ -19979,10 +19986,10 @@ const timingRules$1 = {
       PURPOSES: [
         'People who have photosensitive seizure disorders can have a seizure triggered by content that flashes at certain frequencies for more than a few flashes.',
         'People are even more sensitive to red flashing than to other colors.',
-        'NOTE: This flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
+        'NOTE: The WCAG flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
       ],
       TECHNIQUES: [
-        'There is no remedication technique, the content must be removed or disabled from flashing.'
+        'There is no remediation technique, the content must be removed or disabled from flashing.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -32809,6 +32816,7 @@ class EvaluationLibrary {
     const id = rule.rule_id;
 
     ruleInfo.id            = getRuleId(id);
+    ruleInfo.htmlId        = rule.rule_id.toLowerCase().replace('_', '-');
     ruleInfo.filename      = 'rule-' + rule.rule_id.toLowerCase().replace('_', '-') + '.html';
     ruleInfo.last_updated  = rule.last_updated;
 

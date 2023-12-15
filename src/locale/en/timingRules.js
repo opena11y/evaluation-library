@@ -32,7 +32,6 @@ export const timingRules = {
         '20 Hour Exception: The time limit is longer than 20 hours.'
       ],
       MANUAL_CHECKS: [
-        'If the page contains time limits, verify that there is a way to turn off, adjust or extend the time limits; or that one of the three exceptions applies.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.WCAG_TECHNIQUE,
@@ -48,7 +47,9 @@ export const timingRules = {
       TARGET_RESOURCES_DESC: 'Canvas, SVG and image animations; moving, blinking, scrolling or auto-updating text content; and embedded applications',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
-        MANUAL_CHECK_P:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.'
+        MANUAL_CHECK_P:     'If the page includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
+        HIDDEN_S:  'One timing element was not tested, since it is hidden from assistive technologies.',
+        HIDDEN_P:  '%N_H timing elements were not tested, since, they are hidden from assistive technologies.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1:     'If the %1 element includes moving, blinking, scrolling or auto-updating content, verify there has a mechanism to pause, stop, or hide the information.',
@@ -79,8 +80,10 @@ export const timingRules = {
       TARGET_RESOURCES_DESC: 'Canvas, SVG and image animations; flashing text content; video; and embedded applications',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
-        MANUAL_CHECK_P:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.'
-      },
+        MANUAL_CHECK_P:     'Verify the page does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
+        HIDDEN_S:  'One potential element that could flash was not tested, since it is hidden from assistive technologies.',
+        HIDDEN_P:  '%N_H potential elements that could flash were not tested, since they are hidden from assistive technologies.'
+       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_MC_1:     'Verify the %1 element does not include content that flashes more than three times in one second, unless below general flash and red flash thresholds.',
         ELEMENT_HIDDEN_1: 'The %1 element has not evaluated for moving, blinking, scrolling or auto-updating content',
@@ -89,10 +92,10 @@ export const timingRules = {
       PURPOSES: [
         'People who have photosensitive seizure disorders can have a seizure triggered by content that flashes at certain frequencies for more than a few flashes.',
         'People are even more sensitive to red flashing than to other colors.',
-        'NOTE: This flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
+        'NOTE: The WCAG flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
       ],
       TECHNIQUES: [
-        'There is no remedication technique, the content must be removed or disabled from flashing.'
+        'There is no remediation technique, the content must be removed or disabled from flashing.'
       ],
       MANUAL_CHECKS: [
       ],

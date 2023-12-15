@@ -20,25 +20,53 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="./css/opena11y.css" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
     </head>
 
   </head>
   <body>
             <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="concepts.html">Concepts and Terms</a></li>
-                        <li class="nav-item"><a class="nav-link" href="rules.html">Rules</a></li>
-                        <li class="nav-item"><a class="nav-link" href="apis.html">APIs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="concepts.html">Concepts and Terms</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Rules
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                          </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="apis.html">APIs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+
+
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -50,7 +78,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="rules.html">Rules</a></li>
+          <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
           <li class="breadcrumb-item active">Data cells must have row/column headers</li>
         </ol>
       </nav>
@@ -192,15 +220,35 @@
         </footer>
 
 
+
             <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
         <!-- OpenA11y JS -->
         <script src="js/opena11y.js"></script>
+
         <!-- SkipTo.js -->
         <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
 
+
+    <script>
+      (function() {
+        const node = document.querySelector("#id-breadcrumb-rules");
+
+        console.log(`[node]: ${node}`);
+        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
+
+        if (window.location.href.indexOf("#gl") > 0) {
+          node.href= "rules-gl.html#table-1";
+        }
+        else {
+          node.href= "rules-rc.html#table-1";
+        }
+      })()
+    </script>
 
   </body>
 </html>
