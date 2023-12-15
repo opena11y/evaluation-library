@@ -32827,9 +32827,9 @@ class EvaluationLibrary {
     ruleInfo.rule_category_id = rule.rule_category_id;
     ruleInfo.conformance      = rule.rule_required ? getCommonMessage('required') : getCommonMessage('recommended');
 
-    ruleInfo.wcag_primary_id = rule.wcag_primary_id;
-    ruleInfo.wcag_primary    = getSuccessCriterionInfo(rule.wcag_primary_id);
-    ruleInfo.wcag_related    = getSuccessCriteriaInfo(rule.wcag_related_ids);
+    ruleInfo.wcag_primary_id  = rule.wcag_primary_id;
+    ruleInfo.wcag_primary     = getSuccessCriterionInfo(rule.wcag_primary_id);
+    ruleInfo.wcag_related     = getSuccessCriteriaInfo(rule.wcag_related_ids);
 
     ruleInfo.target_resources = rule.target_resources;
 

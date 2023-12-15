@@ -47,7 +47,7 @@
                   <td><a href="{{r.filename | safe}}#rc">{{r.summary | safe}}</a></td>
                   <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
                   <td>{% if r.rule_required %}Required{% else %}<em>Recommended</em>{% endif %}</td>
-                  <td><a href="{{r.primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
+                  <td><a href="{{r.wcag_primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
                 </tr>
               {% else %}
                 <tr>
