@@ -916,8 +916,74 @@ export const controlRules = {
             url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G221'
           }
         ]
-    }
+    },
 
+  CONTROL_17: {
+      ID:                    'Control 17',
+      DEFINITION:            'Add description.',
+      SUMMARY:               'Avoid label encapsulation',
+      TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Add a label to the form control element that is unlabelled.',
+        FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
+        HIDDEN_S: 'One form control element that is hidden was not evaluated.',
+        HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   '@%1@ control is labeled using %2',
+        ELEMENT_FAIL_1:   'Add a @for@ attribute to the label and @id@ to the form cotnrol',
+        ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'A label associated with a form control ensures that information about the form control is spoken by screen readers when it receives focus.'
+      ],
+      TECHNIQUES: [
+        'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
+        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
+        'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
+        'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
+        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
+      ],
+      MANUAL_CHECKS: [
+        'Good labels are both concise and descriptive of the control elements purpose.',
+        'If control elements are arranged in groups, use @fieldset/legend@ elements@ to provide a grouping label.',
+        'Consider using @aria-describedby@ to provide references to instructions or error information related to the form control.',
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/multipage/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
+          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute'
+        },
+        {type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
+          url: 'https://www.w3.org/WAI/tutorials/forms/'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H44: Using label elements to associate text labels with form controls',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
+        }
+      ]
+  }
 };
 
 

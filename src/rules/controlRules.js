@@ -953,6 +953,46 @@ export const controlRules = [
    });
 
   } // end validation function
+},
+
+/**
+ * @object CONTROL_17
+ *
+ * @desc   Avoid label encapsulation
+ */
+
+{ rule_id             : 'CONTROL_17',
+  last_updated        : '2023-12-16',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  wcag_primary_id     : '3.3.2',
+  wcag_related_ids    : [],
+  target_resources    : ["input", 'output', "select", "textarea"],
+  validate          : function (dom_cache, rule_result) {
+
+    debug.log(`[COntrol 17]: Avoid label encapsulation`);
+
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (!ce.isInputTypeImage) {
+        if (de.isLabelable) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.source.indexOf('encapsulation') < 0) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+          }
+        }
+      }
+    });
+
+  } // end validation function
 }
 
 

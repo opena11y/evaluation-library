@@ -95,6 +95,40 @@ export const pointerRules = {
             url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F101'
           }
         ]
+  },
+
+  POINTER_3: {
+        ID:                    'Pointer 3',
+        DEFINITION:            'Add description.',
+        SUMMARY:               'Dragging Movements',
+        TARGET_RESOURCES_DESC: 'Page',
+        RULE_RESULT_MESSAGES: {
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports ....'
+        },
+        BASE_RESULT_MESSAGES: {
+          PAGE_MC_1: 'Verify...'
+        },
+        PURPOSES: [
+          'add purpose 1',
+          'add purpose 2'
+        ],
+        TECHNIQUES: [
+          'add technique 1',
+          'add technique 2',
+          'add technique 3'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'W3C WCAG: Understanding ',
+            url:   ''
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: '',
+            url:   ''
+          }
+        ]
   }
 }
 

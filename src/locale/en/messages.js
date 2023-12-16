@@ -7,6 +7,7 @@ import {rulesets}           from './rulesets.js';
 import {wcag}               from './wcag.js';
 
 import {audioRules}         from './audioRules.js';
+import {authorizationRules} from './authorizationRules.js';
 import {bypassRules}        from './bypassRules.js';
 import {colorRules}         from './colorRules.js';
 import {errorRules}         from './errorRules.js';
@@ -30,6 +31,7 @@ import {readingOrderRules}  from './readingOrderRules.js';
 import {resizeRules}        from './resizeRules.js';
 import {sensoryRules}       from './sensoryRules.js';
 import {shortcutRules}      from './shortcutRules.js';
+import {spacingRules}      from './spacingRules.js';
 import {tableRules}         from './tableRules.js';
 import {targetSizeRules}    from './targetSizeRules.js';
 import {timingRules}        from './timingRules.js';
@@ -47,6 +49,7 @@ export const messages = {
 }
 
 messages.rules = Object.assign(messages.rules, audioRules);
+messages.rules = Object.assign(messages.rules, authorizationRules);
 messages.rules = Object.assign(messages.rules, bypassRules);
 messages.rules = Object.assign(messages.rules, colorRules);
 messages.rules = Object.assign(messages.rules, errorRules);
@@ -70,6 +73,7 @@ messages.rules = Object.assign(messages.rules, readingOrderRules);
 messages.rules = Object.assign(messages.rules, resizeRules);
 messages.rules = Object.assign(messages.rules, sensoryRules);
 messages.rules = Object.assign(messages.rules, shortcutRules);
+messages.rules = Object.assign(messages.rules, spacingRules);
 messages.rules = Object.assign(messages.rules, tableRules);
 messages.rules = Object.assign(messages.rules, targetSizeRules);
 messages.rules = Object.assign(messages.rules, timingRules);

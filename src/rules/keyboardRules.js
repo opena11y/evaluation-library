@@ -263,6 +263,81 @@ export const keyboardRules = [
       });
 
     } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_7
+   *
+   * @desc Content on Hover or Focus
+   */
+
+  { rule_id             : 'KEYBOARD_7',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    wcag_primary_id     : '1.4.13',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[Keyboard 7]: Content on Hover or Focus`);
+
+      if (dom_cache.hasScripting) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
+
+    } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_8
+   *
+   * @desc Focus Order
+   */
+
+  { rule_id             : 'KEYBOARD_8',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[Keyboard 8]: Focus Order`);
+
+      if (dom_cache.hasScripting) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
+
+    } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_9
+   *
+   * @desc Focus Not Obscured (Minimum)
+   */
+
+  { rule_id             : 'KEYBOARD_9',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    wcag_primary_id     : '2.4.11',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[Keyboard 9]: Focus Not Obscured`);
+
+      if (dom_cache.hasScripting) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
+
+    } // end validation function
   }
 
 ];

@@ -33,7 +33,7 @@ export const pointerRules = [
     rule_required       : true,
     wcag_primary_id     : '2.5.1',
     wcag_related_ids    : [],
-    target_resources    : ['page'],
+    target_resources    : ['widgets'],
     validate            : function (dom_cache, rule_result) {
 
       if (dom_cache.hasScripting) {
@@ -56,7 +56,7 @@ export const pointerRules = [
     rule_required       : true,
     wcag_primary_id     : '2.5.2',
     wcag_related_ids    : [],
-    target_resources    : ['page'],
+    target_resources    : ['widgets'],
     validate            : function (dom_cache, rule_result) {
 
       if (dom_cache.hasScripting) {
@@ -65,6 +65,31 @@ export const pointerRules = [
 
    } // end validation function  }
   },
+
+  /**
+   * @object POINTER_3
+   *
+   * @desc Dragging Movements
+  */
+
+  { rule_id             : 'POINTER_3',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+    rule_required       : true,
+    wcag_primary_id     : '2.5.7',
+    wcag_related_ids    : [],
+    target_resources    : ['widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      debug.log(`[POINTER 3]: Dragging Movements`);
+
+      if (dom_cache.hasScripting) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
+
+   } // end validation function  }
+  }
 
 ];
 
