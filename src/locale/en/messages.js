@@ -31,7 +31,7 @@ import {readingOrderRules}  from './readingOrderRules.js';
 import {resizeRules}        from './resizeRules.js';
 import {sensoryRules}       from './sensoryRules.js';
 import {shortcutRules}      from './shortcutRules.js';
-import {spacingRules}      from './spacingRules.js';
+import {spacingRules}       from './spacingRules.js';
 import {tableRules}         from './tableRules.js';
 import {targetSizeRules}    from './targetSizeRules.js';
 import {timingRules}        from './timingRules.js';

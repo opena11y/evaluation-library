@@ -28,6 +28,7 @@ export {
   getRulesetInfo,
   getRulesetLabel,
   getScope,
+  getRuleScopes,
   getRuleScopeInfo,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
@@ -168,6 +169,18 @@ function getRuleCategoryInfo(categoryId) {
     }
   }
   return null;
+}
+
+/**
+ * @function getRuleScopes
+ *
+ * @desc Gets localized rule scope object
+ *
+ * @return {Object}  see @desc
+ */
+
+function getRuleScopes() {
+  return messages[locale].ruleScopes;
 }
 
 /**

@@ -22008,6 +22008,18 @@ function getRuleCategoryInfo(categoryId) {
 }
 
 /**
+ * @function getRuleScopes
+ *
+ * @desc Gets localized rule scope object
+ *
+ * @return {Object}  see @desc
+ */
+
+function getRuleScopes() {
+  return messages[locale].ruleScopes;
+}
+
+/**
  * @function getRuleScopeInfo
  *
  * @desc Gets a object with keys into strings with scope information,
@@ -33295,6 +33307,17 @@ class EvaluationLibrary {
   }
 
   /**
+   * @method getRuleScopes
+   *
+   * @desc Provides access to the localized Rule Scopes object from evaluation library
+   */
+
+  get getRuleScopes () {
+    return getRuleScopes();
+  }
+
+
+  /**
    * @method getAllRules
    *
    * @desc Provides access to the rules in evaluation library
@@ -33343,6 +33366,7 @@ class EvaluationLibrary {
     ruleInfo.wcag_primary_id  = rule.wcag_primary_id;
     ruleInfo.wcag_primary     = getSuccessCriterionInfo(rule.wcag_primary_id);
     ruleInfo.wcag_related     = getSuccessCriteriaInfo(rule.wcag_related_ids);
+    ruleInfo.wcag_version     = getWCAGVersion(ruleInfo.wcag_primary_id);
 
     ruleInfo.target_resources = rule.target_resources;
 

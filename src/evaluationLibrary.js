@@ -14,6 +14,7 @@ import {
   getRuleCategoryInfo,
   getRuleDefinition,
   getRuleId,
+  getRuleScopes,
   getRuleSummary,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
@@ -110,6 +111,17 @@ export default class EvaluationLibrary {
   }
 
   /**
+   * @method getRuleScopes
+   *
+   * @desc Provides access to the localized Rule Scopes object from evaluation library
+   */
+
+  get getRuleScopes () {
+    return getRuleScopes();
+  }
+
+
+  /**
    * @method getAllRules
    *
    * @desc Provides access to the rules in evaluation library
@@ -158,6 +170,7 @@ export default class EvaluationLibrary {
     ruleInfo.wcag_primary_id  = rule.wcag_primary_id;
     ruleInfo.wcag_primary     = getSuccessCriterionInfo(rule.wcag_primary_id);
     ruleInfo.wcag_related     = getSuccessCriteriaInfo(rule.wcag_related_ids);
+    ruleInfo.wcag_version     = getWCAGVersion(ruleInfo.wcag_primary_id);
 
     ruleInfo.target_resources = rule.target_resources;
 

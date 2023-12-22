@@ -48,10 +48,16 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rules-sum.html">Rule Summary</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-sc.html">Rule Scopes</a>
                             </li>
                           </ul>
                         </li>
@@ -228,7 +234,7 @@
     </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 
@@ -257,7 +263,12 @@
           node.href= "rules-gl.html#image-2";
         }
         else {
-          node.href= "rules-rc.html#image-2";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#image-2";
+          }
+          else {
+            node.href= "rules-rc.html#image-2";
+          }
         }
       })()
     </script>

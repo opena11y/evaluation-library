@@ -1,0 +1,146 @@
+<html lang="en-us">
+  <head>
+    {% include "./head.njk" %}
+    <style>
+      table.table {
+        margin-bottom: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "./header.njk" %}
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">{{title | safe}}</li>
+        </ol>
+      </nav>
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-8">
+          {% block content %}
+
+          <h1>{{title}}</h1>
+
+          <p><a href="rules-rc.html">View Rules by Rule Categories</a> | <a href="rules-gl.html">View Rules by WCAG Guidelines</a> | <a href="rules-rs.html">View Rules by Rule Scopes</a></p>
+
+          <h2 id="id-wcag">WCAG Version</h2>
+          <table class="table table-striped" aria-labelledby="id-wcag">
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th class="text-end">Level A</th>
+                <th class="text-end">Level AA</th>
+                <th class="text-end">Level AAA</th>
+                <th class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>WCAG 2.0</th>
+                <td class="text-end">{{wcag20.aCount}}</td>
+                <td class="text-end">{{wcag20.aaCount}}</td>
+                <td class="text-end">{{wcag20.aaaCount}}</td>
+                <td class="text-end">{{wcag20.totalCount}}</td>
+              </tr>
+              <tr>
+                <th>WCAG 2.1</th>
+                <td class="text-end">{{wcag21.aCount}}</td>
+                <td class="text-end">{{wcag21.aaCount}}</td>
+                <td class="text-end">{{wcag21.aaaCount}}</td>
+                <td class="text-end">{{wcag21.totalCount}}</td>
+              </tr>
+              <tr>
+                <th>WCAG 2.2</th>
+                <td class="text-end">{{wcag22.aCount}}</td>
+                <td class="text-end">{{wcag22.aaCount}}</td>
+                <td class="text-end">{{wcag22.aaaCount}}</td>
+                <td class="text-end">{{wcag22.totalCount}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 id="id-gl">WCAG Guidelines</h2>
+          <table class="table table-striped" aria-labelledby="id-gl">
+            <thead>
+              <tr>
+                <th>Guideline</th>
+                <th class="text-end">Level A</th>
+                <th class="text-end">Level AA</th>
+                <th class="text-end">Level AAA</th>
+                <th class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tbody>
+              {% for gl in allGuidelines %}
+              <tr>
+                <th>{{gl.title}}</th>
+                <td class="text-end">{{gl.aCount}}</td>
+                <td class="text-end">{{gl.aaCount}}</td>
+                <td class="text-end">{{gl.aaaCount}}</td>
+                <td class="text-end">{{gl.totalCount}}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+
+          <h2 id="id-rc">Rule Categories Summary</h2>
+          <table class="table table-striped" aria-labelledby="id-rc">
+            <thead>
+              <tr>
+                <th>Rule Category</th>
+                <th class="text-end">Level A</th>
+                <th class="text-end">Level AA</th>
+                <th class="text-end">Level AAA</th>
+                <th class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for rc in allRuleCategories %}
+              <tr>
+                <th>{{rc.title}}</th>
+                <td class="text-end">{{rc.aCount}}</td>
+                <td class="text-end">{{rc.aaCount}}</td>
+                <td class="text-end">{{rc.aaaCount}}</td>
+                <td class="text-end">{{rc.rules.length}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <h2 id="id-rs">Rule Scope Summary</h2>
+          <table class="table table-striped"aria-labelledby="id-rs">
+            <thead>
+              <tr>
+                <th>Rule Scope</th>
+                <th class="text-end">Level A</th>
+                <th class="text-end">Level AA</th>
+                <th class="text-end">Level AAA</th>
+                <th class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for rs in allRuleScopes | reverse %}
+              <tr>
+                <th>{{rs.title}}</th>
+                <td class="text-end">{{rs.aCount}}</td>
+                <td class="text-end">{{rs.aaCount}}</td>
+                <td class="text-end">{{rs.aaaCount}}</td>
+                <td class="text-end">{{rs.rules.length}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endblock %}
+      </main>
+    </nav>
+    {% include "./footer.njk" %}
+    {% include "./scripts.njk" %}
+  </body>
+</html>
+

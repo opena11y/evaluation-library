@@ -1,12 +1,3 @@
-{% macro wcagVersion(id) %}
-  {% if id === 'WCAG21' %}
-    (new in WCAG 2.1)
-  {% endif %}
-  {% if id === 'WCAG22' %}
-    (new in WCAG 2.2)
-  {% endif %}
-{% endmacro %}
-
 <html lang="en-us">
   <head>
     {% include "./head.njk" %}
@@ -28,11 +19,11 @@
 
           <h1>{{title}}</h1>
 
-          <p><a href="rules-sum.html">Rule Summary</a> | <a href="rules-gl.html">View Rules by WCAG Guidelines</a> | <a href="rules-rs.html">View Rules by Rule Scopes</a></p>
+          <p><a href="rules-sum.html">Rule Summary</a> | <a href="rules-rc.html">View Rules by Rule Categories</a> | <a href="rules-gl.html">View Rules by WCAG Guidelines</a></p>
 
-          {% for rc in allRuleCategories %}
-            <h2 id="rc-{{rc.id}}" class="rules">{{rc.title}}</h2>
-            <table class="table table-striped" aria-labelledby="rc-{{rc.id}}">
+          {% for rs in allRuleScopes | reverse %}
+            <h2 id="rs-{{rs.id}}" class="rules">{{rs.title}}</h2>
+            <table class="table table-striped" aria-labelledby="sc-{{gl.id}}">
               <thead>
                 <th>ID</th>
                 <th>Summary</th>
@@ -41,17 +32,17 @@
                 <th>SC</th>
               </thead>
               <tbody>
-              {% for r in rc.rules %}
+              {% for r in rs.rules %}
                 <tr id="{{r.htmlId}}">
                   <td>{{r.id}}</td>
-                  <td><a href="{{r.filename | safe}}#rc">{{r.summary | safe}}</a></td>
+                  <td><a href="{{r.filename | safe}}#rs">{{r.summary | safe}}</a></td>
                   <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
                   <td>{% if r.rule_required %}Required{% else %}<em>Recommended</em>{% endif %}</td>
                   <td><a href="{{r.wcag_primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
                 </tr>
               {% else %}
                 <tr>
-                  <td colspan="4"><em>no rules</em></td>
+                  <td colspan="5"><em>no rules at this time</em></td>
                 </tr>
               {% endfor %}
               </tbody>

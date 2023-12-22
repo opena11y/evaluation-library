@@ -118,7 +118,12 @@
           node.href= "rules-gl.html#{{ruleInfo.htmlId}}";
         }
         else {
-          node.href= "rules-rc.html#{{ruleInfo.htmlId}}";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#{{ruleInfo.htmlId}}";
+          }
+          else {
+            node.href= "rules-rc.html#{{ruleInfo.htmlId}}";
+          }
         }
       })()
     </script>
