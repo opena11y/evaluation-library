@@ -19,7 +19,7 @@
 
           <h1>{{title}}</h1>
 
-          <p><a href="rules-sum.html">Rule Summary</a> | <a href="rules-rc.html">View Rules by Rule Categories</a> | <a href="rules-gl.html">View Rules by WCAG Guidelines</a></p>
+          {% include "./nav-rules.njk" %}
 
           {% for rs in allRuleScopes | reverse %}
             <h2 id="rs-{{rs.id}}" class="rules">{{rs.title}}</h2>

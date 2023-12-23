@@ -111,7 +111,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Add description.</td>
+  <td>Verify when pointer hover or keyboard focus triggers additional content to become visible and then hidden, the content is dismissible, hoverable and persistent, there are some exceptions.</td>
 </tr>
 
                   
@@ -120,9 +120,13 @@
   <td>
     <ul>
       
-      <li>add purpose 1</li>
+      <li>Users with low vision who view content under magnification will be better able to view content on hover or focus without reducing their desired magnification.</li>
       
-      <li>add purpose 2</li>
+      <li>Users who increase the size of mouse cursors via platform settings or assistive technology will be able to employ a technique to view obscured content on hover.</li>
+      
+      <li>Users with low vision or cognitive disabilities will have adequate time to perceive additional content appearing on hover or focus and to view the trigger content with less distraction.</li>
+      
+      <li>Users with low pointer accuracy will be able to more easily dismiss unintentionally-triggered additional content.</li>
       
     </ul>
   </td>
@@ -170,11 +174,13 @@
   <td>
     <ul>
       
-      <li>add technique 1</li>
+      <li>Dismissible: Make sure content does not interfere with viewing other content on the page by making sure it does not obscure any other content or that the content can be easily dismissed using the pointer or a keyboard command like the escape key.</li>
       
-      <li>add technique 2</li>
+      <li>Hoverable: When content appears it remains visible if the user hovers over it with their pointer.</li>
       
-      <li>add technique 3</li>
+      <li>Persistent: COntent remains visible until the user removes hover or focus form the trigger and the additional content, the user activates a command to hide the information, or the information ois not longer vaild (e.g. a busy message).</li>
+      
+      <li>Exceptions: There are some exceptions, for example error messages.  Please read the requirements carefully for exceptions.</li>
       
     </ul>
   </td>
@@ -186,9 +192,11 @@
   <td>
     <ul>
       
-      <li><a href="">W3C WCAG: Understanding </a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html">W3C WCAG: Understanding Content on Hover or Focus</a></li>
       
-      <li><a href=""></a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/client-side-script/SCR39">SCR39: Making content on focus or hover hoverable, dismissible, and persistent</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F95">F95: Failure of Success Criterion 1.4.13 due to content shown on hover not being hoverable</a></li>
       
     </ul>
   </td>

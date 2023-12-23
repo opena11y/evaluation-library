@@ -84,7 +84,26 @@
 
           <h1>Rules by Rule Categories</h1>
 
-          <p><a href="rules-sum.html">Rule Summary</a> | <a href="rules-gl.html">View Rules by WCAG Guidelines</a> | <a href="rules-rs.html">View Rules by Rule Scopes</a></p>
+                    <nav class="rules" aria-label="Rule Information">
+            <a href="rules-sum.html">Rule Summary</a>  |
+            <a href="rules-rc.html">Rule Categories</a> |
+            <a href="rules-gl.html">WCAG Guidelines</a> |
+            <a href="rules-rs.html">Rule Scopes</a>
+          </nav>
+
+          <script>
+
+            const links = document.querySelectorAll('nav.rules a');
+            const href = window.location.href;
+
+            for (let i = 0; i < links.length; i += 1) {
+              if (href.includes(links[i].href)) {
+                links[i].setAttribute('aria-current', 'page');
+              }
+            }
+
+          </script>
+
 
           
             <h2 id="rc-1" class="rules">Landmarks</h2>
@@ -1306,7 +1325,7 @@
               
                 <tr id="keyboard-9">
                   <td>Keyboard 9</td>
-                  <td><a href="rule-keyboard-9.html#rc">Focus Not Obscured (Minimum)</a></td>
+                  <td><a href="rule-keyboard-9.html#rc">Focus is not obscured (Minimum)</a></td>
                   <td>AA</td>
                   <td>Required</td>
                   <td><a href="https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum" target="_spec">2.4.11</a></td>

@@ -281,8 +281,6 @@ export const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Keyboard 7]: Content on Hover or Focus`);
-
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
@@ -306,11 +304,7 @@ export const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Keyboard 8]: Focus Order`);
-
-      if (dom_cache.hasScripting) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-      }
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
   },
@@ -331,11 +325,7 @@ export const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[Keyboard 9]: Focus Not Obscured`);
-
-      if (dom_cache.hasScripting) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-      }
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
   }

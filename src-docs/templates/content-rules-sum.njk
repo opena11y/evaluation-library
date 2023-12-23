@@ -1,11 +1,6 @@
 <html lang="en-us">
   <head>
     {% include "./head.njk" %}
-    <style>
-      table.table {
-        margin-bottom: 1.5em;
-      }
-    </style>
   </head>
   <body>
     {% include "./header.njk" %}
@@ -24,10 +19,13 @@
 
           <h1>{{title}}</h1>
 
-          <p><a href="rules-rc.html">View Rules by Rule Categories</a> | <a href="rules-gl.html">View Rules by WCAG Guidelines</a> | <a href="rules-rs.html">View Rules by Rule Scopes</a></p>
+          {% include "./nav-rules.njk" %}
 
-          <h2 id="id-wcag">WCAG Version</h2>
-          <table class="table table-striped" aria-labelledby="id-wcag">
+          <h2 class="rules" id="id-wcag">WCAG Version</h2>
+          <div class="desc" id="id-wcag-desc">Number of rules by WCAG level</div>
+          <table class="table table-striped"
+                 aria-labelledby="id-wcag"
+                 aria-describedby="id-wcag-desc">
             <thead>
               <tr>
                 <th>Version</th>
@@ -62,8 +60,11 @@
             </tbody>
           </table>
 
-          <h2 id="id-gl">WCAG Guidelines</h2>
-          <table class="table table-striped" aria-labelledby="id-gl">
+          <h2 class="rules" id="id-gl">WCAG Guidelines</h2>
+          <div class="desc" id="id-gl-desc">Number of rules by WCAG level</div>
+          <table class="table table-striped"
+                 aria-labelledby="id-gl"
+                 aria-describedby="id-gl-desc">
             <thead>
               <tr>
                 <th>Guideline</th>
@@ -88,8 +89,11 @@
             </tbody>
           </table>
 
-          <h2 id="id-rc">Rule Categories Summary</h2>
-          <table class="table table-striped" aria-labelledby="id-rc">
+          <h2 class="rules" id="id-rc">Rule Categories Summary</h2>
+          <div class="desc" id="id-rc-desc">Number of rules by WCAG level</div>
+          <table class="table table-striped"
+                aria-labelledby="id-rc"
+                aria-describedby="id-rc-desc">
             <thead>
               <tr>
                 <th>Rule Category</th>
@@ -112,8 +116,11 @@
             </tbody>
           </table>
 
-          <h2 id="id-rs">Rule Scope Summary</h2>
-          <table class="table table-striped"aria-labelledby="id-rs">
+          <h2 class="rules" id="id-rs">Rule Scope Summary</h2>
+          <div class="desc" id="id-rc-desc">Number of rules by WCAG level</div>
+          <table class="table table-striped"
+                 aria-labelledby="id-rs"
+                 aria-describedby="id-rs-desc">
             <thead>
               <tr>
                 <th>Rule Scope</th>

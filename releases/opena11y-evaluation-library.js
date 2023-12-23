@@ -16431,100 +16431,139 @@ const keyboardRules$1 = {
   },
   KEYBOARD_7: {
         ID:                    'Keyboard 7',
-        DEFINITION:            'Add description.',
+        DEFINITION:            'Verify when pointer hover or keyboard focus triggers additional content to become visible and then hidden, the content is dismissible, hoverable and persistent, there are some exceptions.',
         SUMMARY:               'Content on Hover or Focus',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports ....'
+          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the rquirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify...'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the rquirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'Users with low vision who view content under magnification will be better able to view content on hover or focus without reducing their desired magnification.',
+          'Users who increase the size of mouse cursors via platform settings or assistive technology will be able to employ a technique to view obscured content on hover.',
+          'Users with low vision or cognitive disabilities will have adequate time to perceive additional content appearing on hover or focus and to view the trigger content with less distraction.',
+          'Users with low pointer accuracy will be able to more easily dismiss unintentionally-triggered additional content.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'Dismissible: Make sure content does not interfere with viewing other content on the page by making sure it does not obscure any other content or that the content can be easily dismissed using the pointer or a keyboard command like the escape key.',
+          'Hoverable: When content appears it remains visible if the user hovers over it with their pointer.',
+          'Persistent: COntent remains visible until the user removes hover or focus form the trigger and the additional content, the user activates a command to hide the information, or the information ois not longer vaild (e.g. a busy message).',
+          'Exceptions: There are some exceptions, for example error messages.  Please read the requirements carefully for exceptions.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG: Understanding ',
-            url:   ''
+            title: 'W3C WCAG: Understanding Content on Hover or Focus',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: '',
-            url:   ''
+            title: 'SCR39: Making content on focus or hover hoverable, dismissible, and persistent',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/client-side-script/SCR39'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F95: Failure of Success Criterion 1.4.13 due to content shown on hover not being hoverable',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F95'
           }
         ]
   },
   KEYBOARD_8: {
         ID:                    'Keyboard 8',
-        DEFINITION:            'Add description.',
+        DEFINITION:            'Verify users can navigate use the keyboard to sequentially navigate through content in a logical and meaningful way.',
         SUMMARY:               'Focus Order',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports ....'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify...'
+          PAGE_MC_1: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'People with mobility impairments who must rely on keyboard access for operating a page benefit from a logical, usable focus order.',
+          'People with disabilities that make reading difficult can become disoriented when tabbing takes focus someplace unexpected. They benefit from a logical focus order.',
+          'People with visual impairments can become disoriented when tabbing takes focus someplace unexpected or when they cannot easily find the content surrounding an interactive element.',
+          'Only a small portion of the page may be visible to an individual using a screen magnifier at a high level of magnification. Such a user may interpret a field in the wrong context if the focus order is not logical.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'Example: On a web page that contains a tree of interactive controls, the user can use the up and down arrow keys to move from tree node to tree node. Pressing the right arrow key expands a node, then using the down arrow key moves into the newly expanded nodes.',
+          'Example: A Web page implements modeless dialogs via scripting. When the trigger button is activated, a dialog opens. The interactive elements in the dialog are inserted in the focus order immediately after the button. When the dialog is open, the focus order goes from the button to the elements of the dialog, then to the interactive element following the button. When the dialog is closed, the focus order goes from the button to the following element.',
+          'Example: A Web page implements modal dialogs via scripting. When the trigger button is activated, a dialog opens and focus is set within the dialog. As long as the dialog is open, focus is limited to the elements of the dialog. When the dialog is dismissed, focus returns to the button or the element following the button.',
+          'Example: An HTML Web page is created with the left hand navigation occurring in the HTML after the main body content, and styled with CSS to appear on the left hand side of the page. This is done to allow focus to move to the main body content first without requiring tabIndex attributes or JavaScript.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG: Understanding ',
-            url:   ''
+            title: 'W3C WCAG: Understanding Focus Order',
+            url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: '',
-            url:   ''
+            title: 'G59: Placing the interactive elements in an order that follows sequences and relationships within the content',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G59'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'C27: Making the DOM order match the visual order',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/css/C27'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'SCR26: Inserting dynamic content into the Document Object Model immediately following its trigger element',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'SCR37: Creating Custom Dialogs in a Device Independent Way',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR37'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'SCR27: Reordering page sections using the Document Object Model',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR27'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F44: Failure of Success Criterion 2.4.3 due to using tabindex to create a tab order that does not preserve meaning and operability',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F44'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F85: Failure of Success Criterion 2.4.3 due to using dialogs or menus that are not adjacent to their trigger control in the sequential navigation order',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F85'
           }
         ]
   },
   KEYBOARD_9: {
         ID:                    'Keyboard 9',
-        DEFINITION:            'Add description.',
-        SUMMARY:               'Focus Not Obscured (Minimum)',
+        DEFINITION:            'Verify when a control or link receives keyboard focus it is at least partially visible and not hidden by other content.',
+        SUMMARY:               'Focus is not obscured (Minimum)',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports ....'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify...'
+          PAGE_MC_1: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'Sighted users who rely on a keyboard interface to operate the page will be able to see the component which gets keyboard focus. Such users include those who rely on a keyboard or on devices which use the keyboard interface, including speech input, sip-and-puff software, onscreen keyboards, scanning software, and a variety of assistive technologies and alternate keyboards.',
+          'People with limited or low vision, who may primarily user a pointer for screen orientation and repositioning, nonetheless benefit from a visible indication of the current point of keyboard interaction, especially where magnification reduces the overall viewing portion of the screen.',
+          'People with attention limitations, short term memory limitations, or limitations in executive processes benefit by being able to discover where the focus is located.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'Example: A page has a sticky footer (attached to the bottom of the viewport). When tabbing down the page the focused item is not completely hidden by the footer because content in the viewport scrolls up to always display the item with keyboard focus using scroll padding.',
+          'Example: A page has a full-width cookie approval dialog. The dialog is modal, preventing access to the other controls in the page until it has been dismissed. Focus is not obscured because the major portion of the cookie approval dialog remains on screen (until selections are made and submitted), and so the major portion of the keyboard focus indicator remains visible.',
+          'Example: A notification is implemented as a sticky header and the keyboard focus is moved to the notification so at least part of the focus indicator is in view. The notification disappears when it loses focus so it does not obscure any other controls, and part of the prior keyboard focus indicator is visible.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG: Understanding ',
-            url:   ''
+            title: 'W3C WCAG: Understanding Focus Not Obscured (Minimum)',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: '',
-            url:   ''
+            title: 'C43: Using CSS scroll-padding to un-obscure content',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C43'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F110: Failure of Success Criterion 2.4.12 Focus Not Obscured (Minimum) due to a sticky footer or header completely hiding focused elements',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F110'
           }
         ]
   }
@@ -18984,34 +19023,40 @@ const pointerRules$1 = {
 
   POINTER_3: {
         ID:                    'Pointer 3',
-        DEFINITION:            'Add description.',
+        DEFINITION:            'Verify all functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, There are exceptions.',
         SUMMARY:               'Dragging Movements',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports ....'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify...'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'Users who struggle with performing dragging movements can still operate an interface with a pointer interface.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'Example: A map allows users to drag the view of the map around, and the map has up/down/left/right buttons to move the view as well.',
+          'Example: A sortable list of elements may, after tapping or clicking on a list element, provide adjacent controls for moving the element up or down in the list by simply tapping or clicking on those controls.',
+          'Example: A taskboard that allows users to drag and drop items between columns also provides an additional pop-up menu after tapping or clicking on items for moving the selected element to another column by tapping or clicking on pop-up menu entries.',
+          'Example: A radial control widget (color wheel) where the value can be set by dragging the marker for the currently selected color to another position, also allows picking another color value by tapping or clicking on another place in the color wheel.',
+          'Example: A linear slider control widget, where the value can be set by dragging the visual indicator (thumb) showing the current value, allows tapping or clicking on any point of the slider track to change the value and set the thumb to that position.',
+          'Example: A widget where you can drag a gift to one person in a photo of a group of people also has a menu alternative where users can select the person that should receive the gift from the menu.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG: Understanding ',
-            url:   ''
+            title: 'W3C WCAG: Understanding Dragging Movements',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: '',
-            url:   ''
+            title: 'G219: Ensuring that an alternative is available for dragging movements that operate on content',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G219'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F108: Failure of Success Criterion 2.5.7 Dragging Movements due to not providing a single pointer method for the user to operate a function that does not require a dragging movement',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F108'
           }
         ]
   }
@@ -26426,8 +26471,6 @@ const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$w.log(`[Keyboard 7]: Content on Hover or Focus`);
-
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
@@ -26451,11 +26494,7 @@ const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$w.log(`[Keyboard 8]: Focus Order`);
-
-      if (dom_cache.hasScripting) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-      }
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
   },
@@ -26476,11 +26515,7 @@ const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug$w.log(`[Keyboard 9]: Focus Not Obscured`);
-
-      if (dom_cache.hasScripting) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-      }
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
   }
@@ -28251,8 +28286,6 @@ const pointerRules = [
     wcag_related_ids    : [],
     target_resources    : ['widgets'],
     validate            : function (dom_cache, rule_result) {
-
-      debug$n.log(`[POINTER 3]: Dragging Movements`);
 
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);

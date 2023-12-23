@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Focus Not Obscured (Minimum) | OpenA11y Evaluation Library 2.0</title>
+        <title>Focus is not obscured (Minimum) | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -85,14 +85,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">Focus Not Obscured (Minimum)</li>
+          <li class="breadcrumb-item active">Focus is not obscured (Minimum)</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-8">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Focus Not Obscured (Minimum)</h1>
+            <h1 id="h1-title">Rule: Focus is not obscured (Minimum)</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -111,7 +111,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Add description.</td>
+  <td>Verify when a control or link receives keyboard focus it is at least partially visible and not hidden by other content.</td>
 </tr>
 
                   
@@ -120,9 +120,11 @@
   <td>
     <ul>
       
-      <li>add purpose 1</li>
+      <li>Sighted users who rely on a keyboard interface to operate the page will be able to see the component which gets keyboard focus. Such users include those who rely on a keyboard or on devices which use the keyboard interface, including speech input, sip-and-puff software, onscreen keyboards, scanning software, and a variety of assistive technologies and alternate keyboards.</li>
       
-      <li>add purpose 2</li>
+      <li>People with limited or low vision, who may primarily user a pointer for screen orientation and repositioning, nonetheless benefit from a visible indication of the current point of keyboard interaction, especially where magnification reduces the overall viewing portion of the screen.</li>
+      
+      <li>People with attention limitations, short term memory limitations, or limitations in executive processes benefit by being able to discover where the focus is located.</li>
       
     </ul>
   </td>
@@ -170,11 +172,11 @@
   <td>
     <ul>
       
-      <li>add technique 1</li>
+      <li>Example: A page has a sticky footer (attached to the bottom of the viewport). When tabbing down the page the focused item is not completely hidden by the footer because content in the viewport scrolls up to always display the item with keyboard focus using scroll padding.</li>
       
-      <li>add technique 2</li>
+      <li>Example: A page has a full-width cookie approval dialog. The dialog is modal, preventing access to the other controls in the page until it has been dismissed. Focus is not obscured because the major portion of the cookie approval dialog remains on screen (until selections are made and submitted), and so the major portion of the keyboard focus indicator remains visible.</li>
       
-      <li>add technique 3</li>
+      <li>Example: A notification is implemented as a sticky header and the keyboard focus is moved to the notification so at least part of the focus indicator is in view. The notification disappears when it loses focus so it does not obscure any other controls, and part of the prior keyboard focus indicator is visible.</li>
       
     </ul>
   </td>
@@ -186,9 +188,11 @@
   <td>
     <ul>
       
-      <li><a href="">W3C WCAG: Understanding </a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html">W3C WCAG: Understanding Focus Not Obscured (Minimum)</a></li>
       
-      <li><a href=""></a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/css/C43">C43: Using CSS scroll-padding to un-obscure content</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F110">F110: Failure of Success Criterion 2.4.12 Focus Not Obscured (Minimum) due to a sticky footer or header completely hiding focused elements</a></li>
       
     </ul>
   </td>

@@ -99,34 +99,40 @@ export const pointerRules = {
 
   POINTER_3: {
         ID:                    'Pointer 3',
-        DEFINITION:            'Add description.',
+        DEFINITION:            'Verify all functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, There are exceptions.',
         SUMMARY:               'Dragging Movements',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports ....'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify...'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'Users who struggle with performing dragging movements can still operate an interface with a pointer interface.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'Example: A map allows users to drag the view of the map around, and the map has up/down/left/right buttons to move the view as well.',
+          'Example: A sortable list of elements may, after tapping or clicking on a list element, provide adjacent controls for moving the element up or down in the list by simply tapping or clicking on those controls.',
+          'Example: A taskboard that allows users to drag and drop items between columns also provides an additional pop-up menu after tapping or clicking on items for moving the selected element to another column by tapping or clicking on pop-up menu entries.',
+          'Example: A radial control widget (color wheel) where the value can be set by dragging the marker for the currently selected color to another position, also allows picking another color value by tapping or clicking on another place in the color wheel.',
+          'Example: A linear slider control widget, where the value can be set by dragging the visual indicator (thumb) showing the current value, allows tapping or clicking on any point of the slider track to change the value and set the thumb to that position.',
+          'Example: A widget where you can drag a gift to one person in a photo of a group of people also has a menu alternative where users can select the person that should receive the gift from the menu.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG: Understanding ',
-            url:   ''
+            title: 'W3C WCAG: Understanding Dragging Movements',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: '',
-            url:   ''
+            title: 'G219: Ensuring that an alternative is available for dragging movements that operate on content',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G219'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F108: Failure of Success Criterion 2.5.7 Dragging Movements due to not providing a single pointer method for the user to operate a function that does not require a dragging movement',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F108'
           }
         ]
   }

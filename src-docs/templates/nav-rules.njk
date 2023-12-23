@@ -1,0 +1,19 @@
+          <nav class="rules" aria-label="Rule Information">
+            <a href="rules-sum.html">Rule Summary</a>  |
+            <a href="rules-rc.html">Rule Categories</a> |
+            <a href="rules-gl.html">WCAG Guidelines</a> |
+            <a href="rules-rs.html">Rule Scopes</a>
+          </nav>
+
+          <script>
+
+            const links = document.querySelectorAll('nav.rules a');
+            const href = window.location.href;
+
+            for (let i = 0; i < links.length; i += 1) {
+              if (href.includes(links[i].href)) {
+                links[i].setAttribute('aria-current', 'page');
+              }
+            }
+
+          </script>

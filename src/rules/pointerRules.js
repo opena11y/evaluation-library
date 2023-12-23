@@ -82,8 +82,6 @@ export const pointerRules = [
     target_resources    : ['widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      debug.log(`[POINTER 3]: Dragging Movements`);
-
       if (dom_cache.hasScripting) {
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }

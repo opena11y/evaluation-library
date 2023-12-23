@@ -111,7 +111,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Add description.</td>
+  <td>Verify users can navigate use the keyboard to sequentially navigate through content in a logical and meaningful way.</td>
 </tr>
 
                   
@@ -120,9 +120,13 @@
   <td>
     <ul>
       
-      <li>add purpose 1</li>
+      <li>People with mobility impairments who must rely on keyboard access for operating a page benefit from a logical, usable focus order.</li>
       
-      <li>add purpose 2</li>
+      <li>People with disabilities that make reading difficult can become disoriented when tabbing takes focus someplace unexpected. They benefit from a logical focus order.</li>
+      
+      <li>People with visual impairments can become disoriented when tabbing takes focus someplace unexpected or when they cannot easily find the content surrounding an interactive element.</li>
+      
+      <li>Only a small portion of the page may be visible to an individual using a screen magnifier at a high level of magnification. Such a user may interpret a field in the wrong context if the focus order is not logical.</li>
       
     </ul>
   </td>
@@ -170,11 +174,13 @@
   <td>
     <ul>
       
-      <li>add technique 1</li>
+      <li>Example: On a web page that contains a tree of interactive controls, the user can use the up and down arrow keys to move from tree node to tree node. Pressing the right arrow key expands a node, then using the down arrow key moves into the newly expanded nodes.</li>
       
-      <li>add technique 2</li>
+      <li>Example: A Web page implements modeless dialogs via scripting. When the trigger button is activated, a dialog opens. The interactive elements in the dialog are inserted in the focus order immediately after the button. When the dialog is open, the focus order goes from the button to the elements of the dialog, then to the interactive element following the button. When the dialog is closed, the focus order goes from the button to the following element.</li>
       
-      <li>add technique 3</li>
+      <li>Example: A Web page implements modal dialogs via scripting. When the trigger button is activated, a dialog opens and focus is set within the dialog. As long as the dialog is open, focus is limited to the elements of the dialog. When the dialog is dismissed, focus returns to the button or the element following the button.</li>
+      
+      <li>Example: An HTML Web page is created with the left hand navigation occurring in the HTML after the main body content, and styled with CSS to appear on the left hand side of the page. This is done to allow focus to move to the main body content first without requiring tabIndex attributes or JavaScript.</li>
       
     </ul>
   </td>
@@ -186,9 +192,21 @@
   <td>
     <ul>
       
-      <li><a href="">W3C WCAG: Understanding </a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html">W3C WCAG: Understanding Focus Order</a></li>
       
-      <li><a href=""></a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G59">G59: Placing the interactive elements in an order that follows sequences and relationships within the content</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/css/C27">C27: Making the DOM order match the visual order</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26">SCR26: Inserting dynamic content into the Document Object Model immediately following its trigger element</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR37">SCR37: Creating Custom Dialogs in a Device Independent Way</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR27">SCR27: Reordering page sections using the Document Object Model</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F44">F44: Failure of Success Criterion 2.4.3 due to using tabindex to create a tab order that does not preserve meaning and operability</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F85">F85: Failure of Success Criterion 2.4.3 due to using dialogs or menus that are not adjacent to their trigger control in the sequential navigation order</a></li>
       
     </ul>
   </td>

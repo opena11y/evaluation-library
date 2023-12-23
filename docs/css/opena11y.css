@@ -14,6 +14,19 @@ h3.rules {
   margin-top:  2em;
 }
 
+.desc {
+  font-style: italic;
+}
+
+nav.rules {
+  margin-bottom: 2em;
+}
+
+nav.rules [aria-current] {
+  text-decoration: none;
+  color: black;
+}
+
 nav ol.breadcrumb {
   padding-left:  0;
 }
@@ -24,6 +37,10 @@ table.rule-info th {
 
 table.rule-info td ul {
   padding-left: 1.1em;
+}
+
+table.table {
+  margin-bottom: 1.5em;
 }
 
 footer {
