@@ -1289,6 +1289,7 @@ class ControlInfo {
     this.allButtonElements = [];
     this.allRadioAndCheckboxElements = [];
     this.allLabelElements = [];
+    this.hasTextInput = false;
   }
 
   /**
@@ -1368,6 +1369,7 @@ class ControlInfo {
         }
         else {
           ce = new ControlElement(domElement, parentControlElement);
+          this.hasTextInput = this.hasTextInput || ce.isInputTypeText;
         }
         break;
     }
@@ -11958,7 +11960,7 @@ const common = {
   baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
   resultType: ['base','element','page','website'],
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
-  ruleScopes: ['undefined', 'element', 'page', 'website'],
+  ruleScopes: ['undefined', 'Element', 'Page', 'undefined', 'Website'],
   allRuleResults: 'All Rule Results',
   allRules: 'All Rules',
   implementationValue: [
@@ -13506,50 +13508,47 @@ const audioRules$1 = {
 const authorizationRules$1 = {
   AUTHORIZATION_1: {
         ID:                    'Authorization 1',
-        DEFINITION:            'Add description.',
+        DEFINITION:            'A cognitive function test (such as remembering a password or solving a puzzle) is not required for any step in an authentication process unless that step provides at least one of four ways of completing the test.',
         SUMMARY:               'Accessible Authorization (Minimum) ',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports text spacing requirements.  Use a browser add-on or assistive technology that supports changes in text spacing to verify support for this requirements.'
+          MANUAL_CHECK_S:  'The evaluation cannot automatically verfiy if the page does not require remembering a password or solving a puzzle to login to an online resource. Verify the form controls on this page are for authentication, if they are make sure the authorization requirements are met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.'
+          PAGE_MC_1: 'Verify the form controls on this page are for authentication, if they are make sure the authorization requirements are met.'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'People with cognitive issues relating to memory, reading (for example, dyslexia), numbers (for example, dyscalculia), or perception-processing limitations will be able to authenticate irrespective of the level of their cognitive abilities.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'Email link authentication',
+          'Providing properly marked up email and password inputs',
+          'Providing WebAuthn as an alternative to username/password',
+          'Providing a 3rd party login using OAuth',
+          'Using two techniques to provide 2 factor authentication'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG: Understanding Text Spacing',
-            url:   'https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html'
+            title: 'W3C WCAG: Understanding Accessible Authentication (Minimum)',
+            url:   'https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'C36:Allowing for text spacing override',
-            url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C36'
+            title: 'G218: Email link authentication',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G218'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'C35: Allowing for text spacing without wrapping',
-            url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C35'
+            title: 'H100: Providing properly marked up email and password inputs',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/html/H100'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'C8: Using CSS letter-spacing to control spacing within a word ',
-            url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C8'
+            title: 'F109: Failure of Success Criterion 3.3.8 and 3.3.9 due to preventing password or code re-entry in the same format',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F109'
           },
           { type:  REFERENCES.TECHNIQUE,
-            title: 'C21: Specifying line spacing in CSS',
-            url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C21'
-          },
-          { type:  REFERENCES.TECHNIQUE,
-            title: 'C28:Specifying the size of text containers using em units',
-            url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C21'
+            title: 'OAuth 2.0 Specficiation',
+            url:   'https://oauth.net/'
           }
         ]
   }
@@ -14990,7 +14989,7 @@ const controlRules$1 = {
 
     CONTROL_15: {
         ID:                    'Control 15',
-        DEFINITION:            'Verify labels that include images of text, @aria-label@ and/or references to hidden content contains the same text as the visually render label associated with the control.',
+        DEFINITION:            'The labels for controls and widgets that include text or images of text, the name contains the text that is presented visually.',
         SUMMARY:               'Label in Name',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
@@ -15514,14 +15513,14 @@ const headingRules$1 = {
 const helpRules$1 = {
   HELP_1: {
         ID:                    'Help 1',
-        DEFINITION:            'Verify the consistent placement of help and contact information on web pages within a website.',
-        SUMMARY:               'Consistent Help',
+        DEFINITION:            'Help and contact information occurs in the same order relative to other page content within a website.  Exceptions for websites that do not contain help or contact information or if the user initiated a change in ordering.',
+        SUMMARY:               'Consistent ordering of help',
         TARGET_RESOURCES_DESC: 'Pages in a website',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'Verify the consistent placement of help and contact information on web pages within a website.',
+          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if a page contains help or contact information and if it does, it\'s order on the page.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through inspection of the page if the ordering requirements have been met.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify the consistent placement of help and contact information on web pages within a website.',
+          PAGE_MC_1: 'Verify the consistent ordering of help and contact information on web pages within a website.',
         },
         PURPOSES: [
           'The intent of this Success Criterion is to ensure users can find help for completing tasks on a Web site, when it is available. When the placement of the help mechanism is kept consistent across a set of pages, users looking for help will find it easier to identify. This is distinct from interface-level help, such as contextual help, features like spell checkers, and instructional text in a form. ',
@@ -15825,7 +15824,7 @@ const imageRules$1 = {
   },
 
   IMAGE_4_EN: {
-    ID:         'Image 4 (English)',
+    ID:         'Image 4',
     DEFINITION: 'The text alternative  for an image should be no more than 100 characters in length.',
     SUMMARY:    'Alt text no more than 100 characters',
     TARGET_RESOURCES_DESC: '@img@, @area@ and @[role="img"]@ elements',
@@ -15874,8 +15873,8 @@ const imageRules$1 = {
 
   IMAGE_5: {
     ID:         'Image 5',
-    DEFINITION: 'Verify an image with @[alt=""]@ or @[role="presentation"]@ is only being used for purely decorative, spacing or stylistic purposes.',
-    SUMMARY:    'Verify image is decorative',
+    DEFINITION: 'Images with @[alt=""]@ or @[role="presentation"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
+    SUMMARY:    'Image is decorative',
     TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="presentation"]@, @[role="img"]@ with an empty text alternative',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S: 'Verify the image is being used purely for decorative, spacing or styling purposes.',
@@ -16431,14 +16430,14 @@ const keyboardRules$1 = {
   },
   KEYBOARD_7: {
         ID:                    'Keyboard 7',
-        DEFINITION:            'Verify when pointer hover or keyboard focus triggers additional content to become visible and then hidden, the content is dismissible, hoverable and persistent, there are some exceptions.',
+        DEFINITION:            'When pointer hover or keyboard focus triggers additional content to become visible and then hidden, the content is dismissible, hoverable and persistent, there are some exceptions.',
         SUMMARY:               'Content on Hover or Focus',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the rquirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
+          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the rquirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         PURPOSES: [
           'Users with low vision who view content under magnification will be better able to view content on hover or focus without reducing their desired magnification.',
@@ -16471,14 +16470,14 @@ const keyboardRules$1 = {
   },
   KEYBOARD_8: {
         ID:                    'Keyboard 8',
-        DEFINITION:            'Verify users can navigate use the keyboard to sequentially navigate through content in a logical and meaningful way.',
+        DEFINITION:            'If a web page can be navigated sequentially and the navigation sequences affect meaning or operation, focusable components receive focus in an order that preserves meaning and operability.',
         SUMMARY:               'Focus Order',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the focus order requirements are met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          PAGE_MC_1: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the focus order requirements are met.'
         },
         PURPOSES: [
           'People with mobility impairments who must rely on keyboard access for operating a page benefit from a logical, usable focus order.',
@@ -16531,14 +16530,14 @@ const keyboardRules$1 = {
   },
   KEYBOARD_9: {
         ID:                    'Keyboard 9',
-        DEFINITION:            'Verify when a control or link receives keyboard focus it is at least partially visible and not hidden by other content.',
+        DEFINITION:            'When a user interface component receives keyboard focus, the component is not entirely hidden due to author-created content.',
         SUMMARY:               'Focus is not obscured (Minimum)',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure that controls receive focus they are not obscured.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          PAGE_MC_1: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure that controls receive focus they are not obscured.'
         },
         PURPOSES: [
           'Sighted users who rely on a keyboard interface to operate the page will be able to see the component which gets keyboard focus. Such users include those who rely on a keyboard or on devices which use the keyboard interface, including speech input, sip-and-puff software, onscreen keyboards, scanning software, and a variety of assistive technologies and alternate keyboards.',
@@ -18181,8 +18180,8 @@ const layoutRules$1 = {
   },
   LAYOUT_3: {
       ID:                    'Layout 3',
-      DEFINITION:            'Verify that the use of the @aria-flowto@ attribute supports the intended reading order of content on the page.',
-      SUMMARY:               'Verify @aria-flowto@ supports reading order',
+      DEFINITION:            'The @aria-flowto@ attribute changes the reading order of content on the page from the DOM order of content for screen readers.',
+      SUMMARY:               '@aria-flowto@ changes reading order',
       TARGET_RESOURCES_DESC: 'Elements with @aria-flowto@ attribute',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:    'Verify the element with the @aria-flowto@ attribute contributes to the intended reading order of content on the page.',
@@ -18582,7 +18581,7 @@ const listRules$1 = {
 const liveRules$1 = {
     LIVE_1: {
         ID:                    'Live 1',
-        DEFINITION:            'Verify the live regions have the appropriate ARIA markup to indicate whether or how the screen reader will interrupt the user with a change in a status or error message.',
+        DEFINITION:            'Live regions identify how and when regions on a page will be automatically announced when changes occur in content, for example status or error messages.',
         SUMMARY:               'Live regions for status and error messages',
         TARGET_RESOURCES_DESC: 'Elements with @alert@, @log@ or @status@ roles or the @aria-live@ attribute',
         RULE_RESULT_MESSAGES: {
@@ -18660,14 +18659,14 @@ const liveRules$1 = {
 const motionRules$1 = {
   MOTION_1: {
         ID:                    'Motion 1',
-        DEFINITION:            'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
+        DEFINITION:            'Functionality that can be operated by device motion or user motion can also be operated by user interface components and responding to the motion can be disabled to prevent accidental actuation.  There are some exceptions.',
         SUMMARY:               'Motion Actuation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.'
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the motions requirements apply to this page or if one of the exceptions is met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the motions requirements apply to this page or if one of the exceptions is met.',
         },
         PURPOSES: [
           'The intent of this success criterion is to ensure that functions triggered by moving a device (for example, shaking or tilting) or by gesturing towards the device (so that sensors like a camera can pick up and interpret the gesturing), can also be operated by more conventional user interface components.',
@@ -18933,14 +18932,14 @@ const navigationRules$1 = {
 const pointerRules$1 = {
   POINTER_1: {
         ID:                    'Pointer 1',
-        DEFINITION:            'Verify all functionality that uses multi-touch or tracing a path with a pointer for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
+        DEFINITION:            'All functionality that uses multipoint or path-based gestures for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
         SUMMARY:               'Pointer Gestures',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page or the exception is met.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page or the exception is met.',
         },
         PURPOSES: [
           'Alternatives to multi-touch and path specific movements is required to ensure that content can be controlled with a range of pointing devices, abilities, and assistive technologies. Some people cannot perform gestures in a precise manner, or they may use a specialized or adapted input device such as a head pointer, eye-gaze system, or speech-controlled mouse emulator. Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.',
@@ -18976,14 +18975,14 @@ const pointerRules$1 = {
 
   POINTER_2: {
         ID:                    'Pointer 2',
-        DEFINITION:            'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
+        DEFINITION:            'For functionality that can be operated using a single pointer, at least one of the following is true: "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
         SUMMARY:               'Pointer Cancellation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if using a single pointer requirements apply to this page, if they do verify at least one of the following is true: "No Down-Event", "abort or undo", "up Reversal" techniques; or the essential exception is met.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if using a single pointer requirements apply to this page, if they do verify at least one of the following is true: "No Down-Event", "abort or undo", "up Reversal" techniques; or the essential exception is met.',
         },
         PURPOSES: [
           'Pointer events that can be cancelled make it easier for users to prevent accidental or erroneous pointer input. People with various disabilities can inadvertently initiate touch or mouse events with unwanted results.',
@@ -19023,14 +19022,14 @@ const pointerRules$1 = {
 
   POINTER_3: {
         ID:                    'Pointer 3',
-        DEFINITION:            'Verify all functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, There are exceptions.',
+        DEFINITION:            'All functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, unless dragging is essential or the functionality is determined by the user agent and not modified by the author.',
         SUMMARY:               'Dragging Movements',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
         },
         PURPOSES: [
           'Users who struggle with performing dragging movements can still operate an interface with a pointer interface.'
@@ -19258,14 +19257,14 @@ const sensoryRules$1 = {
 const shortcutRules$1 = {
   SHORTCUT_1: {
         ID:                    'Shortcut 1',
-        DEFINITION:            'If the page has author defined keyboard shortcuts, verify the user has control over the use the shortcuts',
+        DEFINITION:            'When a keyboard shortcut is implemented in content using only letter, punctuation, number, or symbol characters, then users should be able to either turn off the shortcuts, change the characters or the shortcuts only activate in the context a specific widget.',
         SUMMARY:               'Character Key Shortcuts',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  ' The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if there are any keyboard shortcut and if their are that the user can either turn off the shortcuts, change the characters or the shortcuts only activate in the context a specific widget.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify if the page has author defined keyboard shortcuts, if the page does support shortcuts, verify the user can disable or remap each shortcut, or a shortcut is only available when a specific component has focus.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if there are any keyboard shortcut and if their are that the user can either turn off the shortcuts, change the characters or the shortcuts only activate in the context a specific widget.',
         },
         PURPOSES: [
           'Screen reader users will be able to turn off single-key shortcuts so they can avoid accidentally firing batches of them at once. This will allow speech users to make full use of programs that offer single-key shortcuts to keyboard users.',
@@ -21975,6 +21974,19 @@ function getWCAG() {
 }
 
 /**
+ * @function getWCAGLevel
+ *
+ * @desc Get string representing the WCAG Level
+ *
+ * @param {Object} @desc
+ */
+
+function getWCAGLevel(primaryId) {
+  const csInfo = getSuccessCriterionInfo(primaryId);
+  return messages[locale].common.level[csInfo.level];
+}
+
+/**
  * @function getCommonMessage
  *
  * @desc Gets a string associated with strings in the common messages
@@ -22449,6 +22461,55 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
   return newStr;
 }
 
+function getHasManualChecks (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_MC')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getHasFailures (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_FAIL')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getHasPass (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_PASS')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getHasHidden (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_HIDDEN')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getManualCheckMessage (ruleId) {
+  const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('MANUAL_CHECK')) {
+      return messages[locale].rules[ruleId].RULE_RESULT_MESSAGES[key];
+    }
+  }
+  return 'not found';
+}
 
 /* helper functions */
 
@@ -23683,7 +23744,7 @@ const audioRules = [
 /* authorizationRules.js */
 
 /* Constants */
-const debug$G = new DebugLogging('Authorizatiom Rules', false);
+const debug$G = new DebugLogging('Authorization Rules', false);
 debug$G.flag = false;
 
 /*
@@ -23702,16 +23763,16 @@ const authorizationRules = [
   { rule_id             : 'AUTHORIZATION_1',
     last_updated        : '2023-12-16',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+    rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
     wcag_primary_id     : '3.3.8',
     wcag_related_ids    : [],
     target_resources    : ['widgets'],
     validate          : function (dom_cache, rule_result) {
 
-      debug$G.log(`AUTHORIZATINO 1]: Accessible Authorization (Minimum)`);
-
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      if (dom_cache.controlInfo.hasTextInput) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
 
     } // end validate function
   }
@@ -26067,6 +26128,7 @@ const imageRules = [
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
+
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
@@ -33395,9 +33457,15 @@ class EvaluationLibrary {
     ruleInfo.conformance      = rule.rule_required ? getCommonMessage('required') : getCommonMessage('recommended');
 
     ruleInfo.wcag_primary_id  = rule.wcag_primary_id;
+    ruleInfo.wcag_level       = getWCAGLevel(rule.wcag_primary_id);
     ruleInfo.wcag_primary     = getSuccessCriterionInfo(rule.wcag_primary_id);
     ruleInfo.wcag_related     = getSuccessCriteriaInfo(rule.wcag_related_ids);
     ruleInfo.wcag_version     = getWCAGVersion(ruleInfo.wcag_primary_id);
+    ruleInfo.has_failures       = getHasFailures(id);
+    ruleInfo.has_hidden         = getHasHidden(id);
+    ruleInfo.has_manual_checks  = getHasManualChecks(id);
+    ruleInfo.has_pass           = getHasPass(id);
+    ruleInfo.mc_message         = getManualCheckMessage(id);
 
     ruleInfo.target_resources = rule.target_resources;
 

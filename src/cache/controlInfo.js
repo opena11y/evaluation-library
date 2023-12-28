@@ -331,6 +331,7 @@ export default class ControlInfo {
     this.allButtonElements = [];
     this.allRadioAndCheckboxElements = [];
     this.allLabelElements = [];
+    this.hasTextInput = false;
   }
 
   /**
@@ -410,6 +411,7 @@ export default class ControlInfo {
         }
         else {
           ce = new ControlElement(domElement, parentControlElement);
+          this.hasTextInput = this.hasTextInput || ce.isInputTypeText;
         }
         break;
     }

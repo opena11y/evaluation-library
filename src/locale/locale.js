@@ -15,9 +15,14 @@ export {
   getBaseResultMessage,
   getCommonMessage,
   getGuidelineInfo,
+  getHasFailures,
+  getHasHidden,
+  getHasManualChecks,
+  getHasPass,
   getInformationLinks,
   getImplementationValue,
   getManualChecks,
+  getManualCheckMessage,
   getPurposes,
   getRuleCategories,
   getRuleCategoryInfo,
@@ -35,6 +40,7 @@ export {
   getTargetResourcesDesc,
   getTechniques,
   getWCAG,
+  getWCAGLevel,
   getWCAGVersion,
   setLocale,
   setUseCodeTags,
@@ -76,6 +82,19 @@ function setUseCodeTags(value=false) {
 
 function getWCAG() {
   return messages[locale].wcag;
+}
+
+/**
+ * @function getWCAGLevel
+ *
+ * @desc Get string representing the WCAG Level
+ *
+ * @param {Object} @desc
+ */
+
+function getWCAGLevel(primaryId) {
+  const csInfo = getSuccessCriterionInfo(primaryId);
+  return messages[locale].common.level[csInfo.level];
 }
 
 /**
@@ -647,6 +666,55 @@ function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
   return newStr;
 }
 
+function getHasManualChecks (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_MC')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getHasFailures (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_FAIL')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getHasPass (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_PASS')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getHasHidden (ruleId) {
+  const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('_HIDDEN')) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getManualCheckMessage (ruleId) {
+  const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
+  for ( const key in msgs ) {
+    if (key.includes('MANUAL_CHECK')) {
+      return messages[locale].rules[ruleId].RULE_RESULT_MESSAGES[key];
+    }
+  }
+  return 'not found';
+}
 
 /* helper functions */
 

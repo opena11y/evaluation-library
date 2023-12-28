@@ -9,14 +9,14 @@ import {REFERENCES} from '../../constants.js';
 export const shortcutRules = {
   SHORTCUT_1: {
         ID:                    'Shortcut 1',
-        DEFINITION:            'If the page has author defined keyboard shortcuts, verify the user has control over the use the shortcuts',
+        DEFINITION:            'When a keyboard shortcut is implemented in content using only letter, punctuation, number, or symbol characters, then users should be able to either turn off the shortcuts, change the characters or the shortcuts only activate in the context a specific widget.',
         SUMMARY:               'Character Key Shortcuts',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  ' The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if there are any keyboard shortcut and if their are that the user can either turn off the shortcuts, change the characters or the shortcuts only activate in the context a specific widget.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify if the page has author defined keyboard shortcuts, if the page does support shortcuts, verify the user can disable or remap each shortcut, or a shortcut is only available when a specific component has focus.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by keyboard shortcuts defined by the page author, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if there are any keyboard shortcut and if their are that the user can either turn off the shortcuts, change the characters or the shortcuts only activate in the context a specific widget.',
         },
         PURPOSES: [
           'Screen reader users will be able to turn off single-key shortcuts so they can avoid accidentally firing batches of them at once. This will allow speech users to make full use of programs that offer single-key shortcuts to keyboard users.',

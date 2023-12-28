@@ -43,6 +43,12 @@ table.table {
   margin-bottom: 1.5em;
 }
 
+table.table-striped > tbody > tr.total th,
+table.table-striped > tbody > tr.total td {
+  border-top-color: #aaa;
+  border-top-width: 2px;
+}
+
 footer {
   margin-top: 40px;
 }

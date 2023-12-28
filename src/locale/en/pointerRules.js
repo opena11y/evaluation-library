@@ -9,14 +9,14 @@ import {REFERENCES} from '../../constants.js';
 export const pointerRules = {
   POINTER_1: {
         ID:                    'Pointer 1',
-        DEFINITION:            'Verify all functionality that uses multi-touch or tracing a path with a pointer for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
+        DEFINITION:            'All functionality that uses multipoint or path-based gestures for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
         SUMMARY:               'Pointer Gestures',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page or the exception is met.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page or the exception is met.',
         },
         PURPOSES: [
           'Alternatives to multi-touch and path specific movements is required to ensure that content can be controlled with a range of pointing devices, abilities, and assistive technologies. Some people cannot perform gestures in a precise manner, or they may use a specialized or adapted input device such as a head pointer, eye-gaze system, or speech-controlled mouse emulator. Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.',
@@ -52,14 +52,14 @@ export const pointerRules = {
 
   POINTER_2: {
         ID:                    'Pointer 2',
-        DEFINITION:            'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
+        DEFINITION:            'For functionality that can be operated using a single pointer, at least one of the following is true: "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
         SUMMARY:               'Pointer Cancellation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.',
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if using a single pointer requirements apply to this page, if they do verify at least one of the following is true: "No Down-Event", "abort or undo", "up Reversal" techniques; or the essential exception is met.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify users can cancel pointer events using either "No Down-Event", "abort or undo", "up Reversal" techniques, unless completing the function is essential.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by pointer interaction, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if using a single pointer requirements apply to this page, if they do verify at least one of the following is true: "No Down-Event", "abort or undo", "up Reversal" techniques; or the essential exception is met.',
         },
         PURPOSES: [
           'Pointer events that can be cancelled make it easier for users to prevent accidental or erroneous pointer input. People with various disabilities can inadvertently initiate touch or mouse events with unwanted results.',
@@ -99,14 +99,14 @@ export const pointerRules = {
 
   POINTER_3: {
         ID:                    'Pointer 3',
-        DEFINITION:            'Verify all functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, There are exceptions.',
+        DEFINITION:            'All functionality that uses a dragging movement for operation can be achieved by a single pointer without dragging, unless dragging is essential or the functionality is determined by the user agent and not modified by the author.',
         SUMMARY:               'Dragging Movements',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements and then interacting with the page with a pointer o make sure the requirements are met'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
         },
         PURPOSES: [
           'Users who struggle with performing dragging movements can still operate an interface with a pointer interface.'

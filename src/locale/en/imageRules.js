@@ -228,7 +228,7 @@ export const imageRules = {
   },
 
   IMAGE_4_EN: {
-    ID:         'Image 4 (English)',
+    ID:         'Image 4',
     DEFINITION: 'The text alternative  for an image should be no more than 100 characters in length.',
     SUMMARY:    'Alt text no more than 100 characters',
     TARGET_RESOURCES_DESC: '@img@, @area@ and @[role="img"]@ elements',
@@ -277,8 +277,8 @@ export const imageRules = {
 
   IMAGE_5: {
     ID:         'Image 5',
-    DEFINITION: 'Verify an image with @[alt=""]@ or @[role="presentation"]@ is only being used for purely decorative, spacing or stylistic purposes.',
-    SUMMARY:    'Verify image is decorative',
+    DEFINITION: 'Images with @[alt=""]@ or @[role="presentation"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
+    SUMMARY:    'Image is decorative',
     TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="presentation"]@, @[role="img"]@ with an empty text alternative',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S: 'Verify the image is being used purely for decorative, spacing or styling purposes.',

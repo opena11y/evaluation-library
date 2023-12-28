@@ -23,7 +23,7 @@
         </ol>
       </nav>
       <main class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           {% block content %}
 
           <h1>{{title}}</h1>
@@ -34,24 +34,31 @@
             <h2 id="rc-{{rc.id}}" class="rules">{{rc.title}}</h2>
             <table class="table table-striped" aria-labelledby="rc-{{rc.id}}">
               <thead>
-                <th>ID</th>
+                <th>Rule ID</th>
                 <th>Summary</th>
                 <th>Level</th>
                 <th>Conformance</th>
                 <th>SC</th>
+                <th>Scope</th>
+                <th colspan="4">Result Values</th>
               </thead>
               <tbody>
               {% for r in rc.rules %}
                 <tr id="{{r.htmlId}}">
                   <td>{{r.id}}</td>
                   <td><a href="{{r.filename | safe}}#rc">{{r.summary | safe}}</a></td>
-                  <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
+                  <td>{{ r.wcag_level }}</td>
                   <td>{% if r.rule_required %}Required{% else %}<em>Recommended</em>{% endif %}</td>
                   <td><a href="{{r.wcag_primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
+                  <td>{{ r.rule_scope }}</td>
+                  <td>{% if r.has_failures %}<abbr title="Failures">F</abbr>{% endif %}</td>
+                  <td>{% if r.has_manual_checks %}<abbr title="Manual Checks">MC</abbr>{% endif %}</td>
+                  <td>{% if r.has_pass %}<abbr title="Passed">P</abbr>{% endif %}</td>
+                  <td>{% if r.has_hidden %}<abbr title="Hidden">H</abbr>{% endif %}</td>
                 </tr>
               {% else %}
                 <tr>
-                  <td colspan="4"><em>no rules</em></td>
+                  <td colspan="8"><em>no rules</em></td>
                 </tr>
               {% endfor %}
               </tbody>

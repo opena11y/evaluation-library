@@ -9,14 +9,14 @@ import {REFERENCES} from '../../constants.js';
 export const motionRules = {
   MOTION_1: {
         ID:                    'Motion 1',
-        DEFINITION:            'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
+        DEFINITION:            'Functionality that can be operated by device motion or user motion can also be operated by user interface components and responding to the motion can be disabled to prevent accidental actuation.  There are some exceptions.',
         SUMMARY:               'Motion Actuation',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page.'
+          MANUAL_CHECK_S:  'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the motions requirements apply to this page or if one of the exceptions is met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify there are alternatives to motion activation, unless the motion is essential for the function and doing so would invalidate the activity.',
+          PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the motions requirements apply to this page or if one of the exceptions is met.',
         },
         PURPOSES: [
           'The intent of this success criterion is to ensure that functions triggered by moving a device (for example, shaking or tilting) or by gesturing towards the device (so that sensors like a camera can pick up and interpret the gesturing), can also be operated by more conventional user interface components.',

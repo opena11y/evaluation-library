@@ -75,7 +75,6 @@
               </tr>
             </thead>
             <tbody>
-            <tbody>
               {% for gl in allGuidelines %}
               <tr>
                 <th>{{gl.title}}</th>
@@ -85,7 +84,13 @@
                 <td class="text-end">{{gl.totalCount}}</td>
               </tr>
               {% endfor %}
-
+              <tr class="total">
+                <th>Totals</th>
+                <td class="text-end">{{wcag22.aCount}}</td>
+                <td class="text-end">{{wcag22.aaCount}}</td>
+                <td class="text-end">{{wcag22.aaaCount}}</td>
+                <td class="text-end">{{wcag22.totalCount}}</td>
+              </tr>
             </tbody>
           </table>
 
@@ -113,6 +118,13 @@
                 <td class="text-end">{{rc.rules.length}}</td>
               </tr>
               {% endfor %}
+              <tr class="total">
+                <th>Totals</th>
+                <td class="text-end">{{wcag22.aCount}}</td>
+                <td class="text-end">{{wcag22.aaCount}}</td>
+                <td class="text-end">{{wcag22.aaaCount}}</td>
+                <td class="text-end">{{wcag22.totalCount}}</td>
+              </tr>
             </tbody>
           </table>
 
@@ -140,7 +152,13 @@
                 <td class="text-end">{{rs.rules.length}}</td>
               </tr>
               {% endfor %}
-            </tbody>
+              <tr class="total">
+                <th>Totals</th>
+                <td class="text-end">{{wcag22.aCount}}</td>
+                <td class="text-end">{{wcag22.aaCount}}</td>
+                <td class="text-end">{{wcag22.aaaCount}}</td>
+                <td class="text-end">{{wcag22.totalCount}}</td>
+              </tr>
           </table>
         </div>
         {% endblock %}

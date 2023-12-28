@@ -312,14 +312,14 @@ export const keyboardRules = {
   },
   KEYBOARD_7: {
         ID:                    'Keyboard 7',
-        DEFINITION:            'Verify when pointer hover or keyboard focus triggers additional content to become visible and then hidden, the content is dismissible, hoverable and persistent, there are some exceptions.',
+        DEFINITION:            'When pointer hover or keyboard focus triggers additional content to become visible and then hidden, the content is dismissible, hoverable and persistent, there are some exceptions.',
         SUMMARY:               'Content on Hover or Focus',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the rquirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
+          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the rquirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         PURPOSES: [
           'Users with low vision who view content under magnification will be better able to view content on hover or focus without reducing their desired magnification.',
@@ -352,14 +352,14 @@ export const keyboardRules = {
   },
   KEYBOARD_8: {
         ID:                    'Keyboard 8',
-        DEFINITION:            'Verify users can navigate use the keyboard to sequentially navigate through content in a logical and meaningful way.',
+        DEFINITION:            'If a web page can be navigated sequentially and the navigation sequences affect meaning or operation, focusable components receive focus in an order that preserves meaning and operability.',
         SUMMARY:               'Focus Order',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the focus order requirements are met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          PAGE_MC_1: 'The evaluation library can not automatically verify logical focus order.  Verification requires understanding the requirements and then interacting with the page to make sure the focus order requirements are met.'
         },
         PURPOSES: [
           'People with mobility impairments who must rely on keyboard access for operating a page benefit from a logical, usable focus order.',
@@ -412,14 +412,14 @@ export const keyboardRules = {
   },
   KEYBOARD_9: {
         ID:                    'Keyboard 9',
-        DEFINITION:            'Verify when a control or link receives keyboard focus it is at least partially visible and not hidden by other content.',
+        DEFINITION:            'When a user interface component receives keyboard focus, the component is not entirely hidden due to author-created content.',
         SUMMARY:               'Focus is not obscured (Minimum)',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          MANUAL_CHECK_S: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure that controls receive focus they are not obscured.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure the requirements are met'
+          PAGE_MC_1: 'The evaluation library can not automatically verify verify if a control or link with keyboard focus is obscured.  Verification requires understanding the requirements and then interacting with the page to make sure that controls receive focus they are not obscured.'
         },
         PURPOSES: [
           'Sighted users who rely on a keyboard interface to operate the page will be able to see the component which gets keyboard focus. Such users include those who rely on a keyboard or on devices which use the keyboard interface, including speech input, sip-and-puff software, onscreen keyboards, scanning software, and a variety of assistive technologies and alternate keyboards.',

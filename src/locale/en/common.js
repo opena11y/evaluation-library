@@ -6,7 +6,7 @@ export const common = {
   baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
   resultType: ['base','element','page','website'],
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
-  ruleScopes: ['undefined', 'element', 'page', 'website'],
+  ruleScopes: ['undefined', 'Element', 'Page', 'undefined', 'Website'],
   allRuleResults: 'All Rule Results',
   allRules: 'All Rules',
   implementationValue: [

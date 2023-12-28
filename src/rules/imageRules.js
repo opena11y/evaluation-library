@@ -179,6 +179,7 @@ export const imageRules = [
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
+
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {

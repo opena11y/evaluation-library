@@ -811,7 +811,7 @@ export const controlRules = {
 
     CONTROL_15: {
         ID:                    'Control 15',
-        DEFINITION:            'Verify labels that include images of text, @aria-label@ and/or references to hidden content contains the same text as the visually render label associated with the control.',
+        DEFINITION:            'The labels for controls and widgets that include text or images of text, the name contains the text that is presented visually.',
         SUMMARY:               'Label in Name',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {

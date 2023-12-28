@@ -61,6 +61,12 @@ const wcag22 = {
 
 // Create data for creating index and rule files
 
+const allRules = [];
+
+el.getAllRules.forEach( r => {
+  allRules.push(el.getRuleInfo(r));
+});
+
 el.getRuleCategories.forEach( rc => {
   const rcInfo = Object.assign(rc);
 
@@ -183,7 +189,7 @@ for(const p in el.getWCAG.principles) {
             }
             else {
               glInfo.aaaCount += 1;
-              wcag22.aCount +=1;
+              wcag22.aaaCount +=1;
               wcag22.totalCount +=1;
               if (ruleInfo.wcag_version !== 'WCAG22') {
                 wcag21.aaaCount +=1;
@@ -268,6 +274,13 @@ outputFile('apis.html', htmlAPIs);
 // Create about file
 const htmlAbout = nunjucks.render('./src-docs/templates/content-about.njk', {title: 'About'});
 outputFile('about.html', htmlAbout);
+
+// Quality assurance page
+const htmlQA = nunjucks.render('./src-docs/templates/content-rules-qa.njk',
+  {title: 'Quality Assurance',
+   allRules: allRules
+ });
+outputFile('rules-qa.html', htmlQA);
 
 // Create rule files
 console.log(`\n === Rule Files ===`)

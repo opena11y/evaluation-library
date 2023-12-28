@@ -8,7 +8,12 @@ import EvaluationResult  from './evaluationResult.js';
 import {
   getCommonMessage,
   getGuidelineInfo,
+  getHasFailures,
+  getHasHidden,
+  getHasManualChecks,
+  getHasPass,
   getInformationLinks,
+  getManualCheckMessage,
   getPurposes,
   getRuleCategories,
   getRuleCategoryInfo,
@@ -20,6 +25,7 @@ import {
   getSuccessCriterionInfo,
   getTechniques,
   getWCAG,
+  getWCAGLevel,
   getWCAGVersion,
   setUseCodeTags
 }  from './locale/locale.js'
@@ -168,9 +174,15 @@ export default class EvaluationLibrary {
     ruleInfo.conformance      = rule.rule_required ? getCommonMessage('required') : getCommonMessage('recommended');
 
     ruleInfo.wcag_primary_id  = rule.wcag_primary_id;
+    ruleInfo.wcag_level       = getWCAGLevel(rule.wcag_primary_id);
     ruleInfo.wcag_primary     = getSuccessCriterionInfo(rule.wcag_primary_id);
     ruleInfo.wcag_related     = getSuccessCriteriaInfo(rule.wcag_related_ids);
     ruleInfo.wcag_version     = getWCAGVersion(ruleInfo.wcag_primary_id);
+    ruleInfo.has_failures       = getHasFailures(id);
+    ruleInfo.has_hidden         = getHasHidden(id);
+    ruleInfo.has_manual_checks  = getHasManualChecks(id);
+    ruleInfo.has_pass           = getHasPass(id);
+    ruleInfo.mc_message         = getManualCheckMessage(id);
 
     ruleInfo.target_resources = rule.target_resources;
 

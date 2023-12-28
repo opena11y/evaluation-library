@@ -127,8 +127,8 @@ export const layoutRules = {
   },
   LAYOUT_3: {
       ID:                    'Layout 3',
-      DEFINITION:            'Verify that the use of the @aria-flowto@ attribute supports the intended reading order of content on the page.',
-      SUMMARY:               'Verify @aria-flowto@ supports reading order',
+      DEFINITION:            'The @aria-flowto@ attribute changes the reading order of content on the page from the DOM order of content for screen readers.',
+      SUMMARY:               '@aria-flowto@ changes reading order',
       TARGET_RESOURCES_DESC: 'Elements with @aria-flowto@ attribute',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:    'Verify the element with the @aria-flowto@ attribute contributes to the intended reading order of content on the page.',

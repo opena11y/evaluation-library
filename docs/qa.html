@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
 <html lang="en-us">
   <head>
         <head>
@@ -15,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Widgets must set properties | OpenA11y Evaluation Library 2.0</title>
+        <title>Quality Assurance | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -87,142 +79,49 @@
         </nav>
 
 
-
     <!-- Main section-->
     <div id="main-section" class="container px-4">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">Widgets must set properties</li>
+          <li class="breadcrumb-item active">Quality Assurance</li>
         </ol>
       </nav>
-      <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
-          <main id="rule">
-            
-            <h1 id="h1-title">Rule: Widgets must set properties</h1>
-            
-              <table class="table table-striped rule-info" aria-labelledby="h1-title">
-                <tbody>
-                  
-<tr>
-  <th>Rule ID</th>
-  <td>Widget 6</td>
-</tr>
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-10">
+          
 
-                  
-<tr>
-  <th>Conformance</th>
-  <td>Required</td>
-</tr>
+          <h1>Quality Assurance</h1>
 
-                  
-<tr>
-  <th>Definition</th>
-  <td>Elements with ARIA widget roles must set required properties and states.</td>
-</tr>
+                    <nav class="rules" aria-label="Rule Information">
+            <a href="rules-sum.html">Rule Summary</a>  |
+            <a href="rules-rc.html">Rule Categories</a> |
+            <a href="rules-gl.html">WCAG Guidelines</a> |
+            <a href="rules-rs.html">Rule Scopes</a>
+          </nav>
 
-                  
-<tr>
-  <th>Purpose</th>
-  <td>
-    <ul>
-      
-      <li>ARIA roles, properties and states describe the features and options of widgets to users of assistive technologies, especially screen reader users.</li>
-      
-    </ul>
-  </td>
-</tr>
+          <script>
 
-                  
-<tr>
-  <th>Conformance</th>
-  <td>Required</td>
-</tr>
+            const links = document.querySelectorAll('nav.rules a');
+            const href = window.location.href;
 
-                  
-<tr>
-  <th>WCAG Success Criteria</th>
-  <td>
-    <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">
-        Success Criterion 4.1.2 Name, Role, Value
-      </a>
-    </p>
-    <p class="related">
-      Other Related Success Criterion:
-    </p>
-    <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">
-          Success Criterion 1.3.1 Info and Relationships
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">
-          Success Criterion 3.3.2 Labels or Instructions
-        </a>
-      </li>
-      
-    </ul>
-  </td>
-</tr>
+            for (let i = 0; i < links.length; i += 1) {
+              if (href.includes(links[i].href)) {
+                links[i].setAttribute('aria-current', 'page');
+              }
+            }
 
-                  
-<tr>
-  <th>Rule Category</th>
-  <td>ARIA Widgets</td>
-</tr>
+          </script>
 
-                  
-<tr>
-  <th>Rule Scope</th>
-  <td>Element</td>
-</tr>
 
-                  
-<tr>
-  <th>Techniques</th>
-  <td>
-    <ul>
-      
-      <li>Required ARIA properties and states are needed accurately describe the features and options of a widget.</li>
-      
-    </ul>
-  </td>
-</tr>
+          
 
-                  
-<tr>
-  <th>Information Links</th>
-  <td>
-    <ul>
-      
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#widget_roles">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html">ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices</a></li>
-      
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN Web Docs: ARIA </a></li>
-      
-      <li><a href="https://developers.google.com/web/fundamentals/accessibility/semantics-aria">Web Fundamentals: Introduction to ARIA</a></li>
-      
-    </ul>
-  </td>
-</tr>
 
-                </tbody>
-              </table>
-          </main>
+          
+
         </div>
-      </div>
-    </div>
+      </main>
+    </nav>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
@@ -242,27 +141,6 @@
         <!-- SkipTo.js -->
         <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
 
-
-    <script>
-      (function() {
-        const node = document.querySelector("#id-breadcrumb-rules");
-
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
-        if (window.location.href.indexOf("#gl") > 0) {
-          node.href= "rules-gl.html#widget-6";
-        }
-        else {
-          if (window.location.href.indexOf("#rs") > 0) {
-            node.href= "rules-rs.html#widget-6";
-          }
-          else {
-            node.href= "rules-rc.html#widget-6";
-          }
-        }
-      })()
-    </script>
-
   </body>
 </html>
+
