@@ -13907,8 +13907,8 @@ const errorRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/#the-label-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
@@ -13995,8 +13995,8 @@ const errorRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-LABEL'
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/#the-label-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
@@ -14198,7 +14198,7 @@ const controlRules$1 = {
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   '@%1@ control has the label: \'%2\'',
+        ELEMENT_PASS_1:   '@%1@ control has the label: "%2"',
         ELEMENT_FAIL_1:   'Add label to @%1@ control.',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
@@ -14283,8 +14283,8 @@ const controlRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @input[type=image]@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-type-INPUT'
+          title: 'HTML Specification: The @input[type=image]@ element',
+          url:   'https://html.spec.whatwg.org/#image-button-state-(type=image)'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -14295,8 +14295,8 @@ const controlRules$1 = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -14493,8 +14493,8 @@ const controlRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element FOR attribute',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-for'
+          title: 'HTML Specification: The @label@ element @for@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-label-for'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -14855,8 +14855,8 @@ const controlRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+          title: 'HTML Specification: The @input[type="submit"]@ element',
+          url:   'https://html.spec.whatwg.org/#submit-button-state-(type=submit)'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H32: Providing submit buttons',
@@ -15098,68 +15098,43 @@ const controlRules$1 = {
 
   CONTROL_17: {
       ID:                    'Control 17',
-      DEFINITION:            'Add description.',
+      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the control when label encapsulation is used for labeling.',
       SUMMARY:               'Avoid label encapsulation',
       TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add a label to the form control element that is unlabelled.',
+        FAIL_S:   'Add a an @id@ to the control and use the @ a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
         HIDDEN_S: 'One form control element that is hidden was not evaluated.',
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1@ control is labeled using %2',
-        ELEMENT_FAIL_1:   'Add a @for@ attribute to the label and @id@ to the form cotnrol',
+        ELEMENT_FAIL_1:   'Add a @for@ attribute to the @label@ element to reference an @id@ on the associated @%1@ control',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'A label associated with a form control ensures that information about the form control is spoken by screen readers when it receives focus.'
+        'Speech input and other assistive technologies cannot reliably use the label encapsulation method for identifying a label with it\'s associated form control.',
+        'Speech input uses the label as part of commands to move focus or change the state of form controls.  Examples of speech input commands include: "click first name" for moving focus to a textbox, "click thick crust" to select a radio button associated with a pizza crust selection.'
       ],
       TECHNIQUES: [
-        'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
-        'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
-        'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
-        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
+        'When using the @label@ element include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.'
       ],
       MANUAL_CHECKS: [
-        'Good labels are both concise and descriptive of the control elements purpose.',
-        'If control elements are arranged in groups, use @fieldset/legend@ elements@ to provide a grouping label.',
-        'Consider using @aria-describedby@ to provide references to instructions or error information related to the form control.',
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML Specification: The @label@ element',
           url:   'https://html.spec.whatwg.org/multipage/forms.html#the-label-element'
         },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML Specification: The @title@ attribute',
-          url:   'https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute'
-        },
-        {type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
-          url: 'https://www.w3.org/WAI/tutorials/forms/'
-        },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
+          title: 'W3C ARIA Authoring Practices Issue: Naming Form Controls with the Label Element',
+          url:   'https://github.com/w3c/aria-practices/issues/2870'
         }
+
       ]
   }
 };
@@ -15205,8 +15180,8 @@ const headingRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @h1@ element',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G130: Providing descriptive headings',
@@ -15257,8 +15232,8 @@ const headingRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @h1@ element',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
@@ -15301,8 +15276,8 @@ const headingRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G130: Providing descriptive headings',
@@ -15357,8 +15332,8 @@ const headingRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G130: Providing descriptive headings',
@@ -15403,8 +15378,8 @@ const headingRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'C22: Using CSS to control visual presentation of text',
@@ -15451,8 +15426,8 @@ const headingRules$1 = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H2 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       }
     ]
   },
@@ -15653,8 +15628,8 @@ const imageRules$1 = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -15737,8 +15712,8 @@ const imageRules$1 = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -15805,8 +15780,8 @@ const imageRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
@@ -15853,8 +15828,8 @@ const imageRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
@@ -15969,8 +15944,8 @@ const imageRules$1 = {
         url:   'https://www.w3.org/TR/html-longdesc/'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -18285,8 +18260,8 @@ const linkRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 12.2 The A element',
-        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
+        title: 'HTML Specification: The A element',
+        url:   'https://html.spec.whatwg.org/#the-a-element'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -18301,8 +18276,8 @@ const linkRules$1 = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @title@ attribute',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+        title: 'HTML Specification: The @title@ attribute',
+        url:   'https://html.spec.whatwg.org/#attr-title'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
@@ -18344,8 +18319,8 @@ const linkRules$1 = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 12.2 The A element',
-        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
+        title: 'HTML Specification: The A element',
+        url:   'https://html.spec.whatwg.org/#the-a-element'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -18360,8 +18335,8 @@ const linkRules$1 = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @title@ attribute',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+        title: 'HTML Specification: The @title@ attribute',
+        url:   'https://html.spec.whatwg.org/#attr-title'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
@@ -18565,8 +18540,8 @@ const listRules$1 = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         }
       ]
   }
@@ -19345,7 +19320,7 @@ const shortcutRules$1 = {
 const spacingRules$1 = {
   SPACING_1: {
         ID:                    'Spacing 1',
-        DEFINITION:            'Add description.',
+        DEFINITION:            'No loss of content or functionality occurs by users adjusting any of the following text styling properties: line height (line spacing), paragraph spacing, letter spacing and word spacing.  There are some exceptions for some languages and scripts.',
         SUMMARY:               'Text Spacing',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
@@ -19355,13 +19330,16 @@ const spacingRules$1 = {
           PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.'
         },
         PURPOSES: [
-          'add purpose 1',
-          'add purpose 2'
+          'People with low vision who require increased space between lines, words, and letters are able to read text.',
+          'People with dyslexia may increase space between lines, words, and letters to increase reading speed.',
+          'White space between blocks of text can help people with cognitive disabilities discern sections and call out boxes.'
         ],
         TECHNIQUES: [
-          'add technique 1',
-          'add technique 2',
-          'add technique 3'
+          'This requirement does not require authors to set any of their content to a specified metric, nor does it intend to imply that all users will adjust the specified metrics. Rather, it specifies that should a user choose to set any of these metrics they can do so without any loss of content or functionality. The author requirement is both to not interfere with a user\'s ability to override the author settings, and to ensure that modified content is not visually distorted within the adjustment ranges of the requirement.',
+          'Range: Line height (line spacing) to at least 1.5 times the font size.',
+          'Range: Spacing following paragraphs to at least 2 times the font size.',
+          'Range: Letter spacing (tracking) to at least 0.12 times the font size.',
+          'Range: Word spacing to at least 0.16 times the font size.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -19369,6 +19347,18 @@ const spacingRules$1 = {
           { type:  REFERENCES.SPECIFICATION,
             title: 'W3C WCAG: Understanding Text Spacing',
             url:   'https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'Chrome Extension: Text Spacing Editor',
+            url:   'https://chromewebstore.google.com/detail/text-spacing-editor/amnelgbfbdlfjeaobejkfmjjnmeddaoj'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'Firefox Extension: Text Spacing Editor',
+            url:   'https://addons.mozilla.org/en-US/firefox/addon/text-spacing-editor-actum/'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'HOLISTICA11Y: Text Spacing Bookmarklet',
+            url:   'https://holistica11y.com/text-spacing-bookmarklet-for-accessibility-testing/'
           },
           { type:  REFERENCES.TECHNIQUE,
             title: 'C36:Allowing for text spacing override',
@@ -19389,6 +19379,10 @@ const spacingRules$1 = {
           { type:  REFERENCES.TECHNIQUE,
             title: 'C28:Specifying the size of text containers using em units',
             url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C21'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F104: Failure of Success Criterion 1.4.12 due to clipped or overlapped content when text spacing is adjusted',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F104'
           }
         ]
   }
@@ -19523,8 +19517,8 @@ const tableRules$1 = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -19582,8 +19576,8 @@ const tableRules$1 = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -19712,12 +19706,16 @@ const tableRules$1 = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The CAPTION element',
+          url:   'https://html.spec.whatwg.org/#the-caption-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -19768,8 +19766,12 @@ const tableRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -19821,8 +19823,12 @@ const tableRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -19870,8 +19876,12 @@ const tableRules$1 = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -23451,6 +23461,7 @@ class DOMCache {
                 }
                 else {
                   domItem.isShadowClosed = true;
+                  this.transverseDOM(newParentInfo, node);
                 }
               } else {
                 // Check for iframe tag
@@ -25457,27 +25468,24 @@ const controlRules = [
   target_resources    : ["input", 'output', "select", "textarea"],
   validate          : function (dom_cache, rule_result) {
 
-    debug$B.log(`[COntrol 17]: Avoid label encapsulation`);
-
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (!ce.isInputTypeImage) {
         if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.source.indexOf('encapsulation') < 0) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.name]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
             }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
         }
       }
     });
-
   } // end validation function
 }
 
@@ -25746,15 +25754,17 @@ const headingRules = [
       rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [nestingErrors]);
     }
     else {
-      if (manualChecks > 0) {
-        if (manualChecks === 1) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      if (dom_cache.structureInfo.allHeadingDomElements.length > 0) {
+        if (manualChecks > 0) {
+          if (manualChecks === 1) {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          }
+          else {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
+          }
+        } else {
+          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
         }
-        else {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
-        }
-      } else {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
       }
     }
 
@@ -28589,8 +28599,6 @@ const spacingRules = [
     wcag_related_ids    : [],
     target_resources    : ['text'],
     validate          : function (dom_cache, rule_result) {
-
-      debug$i.log(`[SPACING 1]: TO DO`);
 
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 

@@ -20,7 +20,7 @@ export const controlRules = {
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   '@%1@ control has the label: \'%2\'',
+        ELEMENT_PASS_1:   '@%1@ control has the label: "%2"',
         ELEMENT_FAIL_1:   'Add label to @%1@ control.',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
@@ -105,8 +105,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @input[type=image]@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-type-INPUT'
+          title: 'HTML Specification: The @input[type=image]@ element',
+          url:   'https://html.spec.whatwg.org/#image-button-state-(type=image)'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -117,8 +117,8 @@ export const controlRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -315,8 +315,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element FOR attribute',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-for'
+          title: 'HTML Specification: The @label@ element @for@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-label-for'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -677,8 +677,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+          title: 'HTML Specification: The @input[type="submit"]@ element',
+          url:   'https://html.spec.whatwg.org/#submit-button-state-(type=submit)'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H32: Providing submit buttons',
@@ -920,68 +920,43 @@ export const controlRules = {
 
   CONTROL_17: {
       ID:                    'Control 17',
-      DEFINITION:            'Add description.',
+      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the control when label encapsulation is used for labeling.',
       SUMMARY:               'Avoid label encapsulation',
       TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add a label to the form control element that is unlabelled.',
+        FAIL_S:   'Add a an @id@ to the control and use the @ a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
         HIDDEN_S: 'One form control element that is hidden was not evaluated.',
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1@ control is labeled using %2',
-        ELEMENT_FAIL_1:   'Add a @for@ attribute to the label and @id@ to the form cotnrol',
+        ELEMENT_FAIL_1:   'Add a @for@ attribute to the @label@ element to reference an @id@ on the associated @%1@ control',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        'A label associated with a form control ensures that information about the form control is spoken by screen readers when it receives focus.'
+        'Speech input and other assistive technologies cannot reliably use the label encapsulation method for identifying a label with it\'s associated form control.',
+        'Speech input uses the label as part of commands to move focus or change the state of form controls.  Examples of speech input commands include: "click first name" for moving focus to a textbox, "click thick crust" to select a radio button associated with a pizza crust selection.'
       ],
       TECHNIQUES: [
-        'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
-        'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
-        'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
-        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
+        'When using the @label@ element include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.'
       ],
       MANUAL_CHECKS: [
-        'Good labels are both concise and descriptive of the control elements purpose.',
-        'If control elements are arranged in groups, use @fieldset/legend@ elements@ to provide a grouping label.',
-        'Consider using @aria-describedby@ to provide references to instructions or error information related to the form control.',
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML Specification: The @label@ element',
           url:   'https://html.spec.whatwg.org/multipage/forms.html#the-label-element'
         },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML Specification: The @title@ attribute',
-          url:   'https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute'
-        },
-        {type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
-          url: 'https://www.w3.org/WAI/tutorials/forms/'
-        },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'H65: Using the title attribute to identify form controls when the label element cannot be used',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H65'
-        },
-        { type:  REFERENCES.WCAG_TECHNIQUE,
-          title: 'H71: Providing a description for groups of form controls using fieldset and legend elements',
-          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H71'
+          title: 'W3C ARIA Authoring Practices Issue: Naming Form Controls with the Label Element',
+          url:   'https://github.com/w3c/aria-practices/issues/2870'
         }
+
       ]
   }
 };

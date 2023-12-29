@@ -120,7 +120,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Add description.</td>
+  <td>Some assistive technologies, including speech input, do not reliably associate labels with the control when label encapsulation is used for labeling.</td>
 </tr>
 
                   
@@ -129,7 +129,9 @@
   <td>
     <ul>
       
-      <li>A label associated with a form control ensures that information about the form control is spoken by screen readers when it receives focus.</li>
+      <li>Speech input and other assistive technologies cannot reliably use the label encapsulation method for identifying a label with it's associated form control.</li>
+      
+      <li>Speech input uses the label as part of commands to move focus or change the state of form controls.  Examples of speech input commands include: "click first name" for moving focus to a textbox, "click thick crust" to select a radio button associated with a pizza crust selection.</li>
       
     </ul>
   </td>
@@ -177,15 +179,7 @@
   <td>
     <ul>
       
-      <li>The preferred technique for labeling form controls is by reference: First, include an <code>id</code> attribute on the form control to be labeled; then use the <code>label</code> element with a <code>for</code> attribute value that references the <code>id</code> value of the control.</li>
-      
-      <li>NOTE: The alternative technique of using the <code>label</code> element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.</li>
-      
-      <li>In special cases, the <code>aria-labelledby</code> attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.</li>
-      
-      <li>In special cases, the <code>aria-label</code> attribute can be used on the form control element to provide an explicit text description of its purpose.</li>
-      
-      <li>In special cases, the <code>title</code> attribute on the form control element can be used to provide an explicit text description of its purpose.</li>
+      <li>When using the <code>label</code> element include an <code>id</code> attribute on the form control to be labeled; then use the <code>label</code> element with a <code>for</code> attribute value that references the <code>id</code> value of the control.</li>
       
     </ul>
   </td>
@@ -199,19 +193,9 @@
       
       <li><a href="https://html.spec.whatwg.org/multipage/forms.html#the-label-element">HTML Specification: The <code>label</code> element</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-label">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-label</code> attribute</a></li>
-      
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby">Accessible Rich Internet Applications (WAI-ARIA) 1.2: The <code>aria-labelledby</code> attribute</a></li>
-      
-      <li><a href="https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute">HTML Specification: The <code>title</code> attribute</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/tutorials/forms/">W3C WAI Accessibility Tutorials: Forms Concepts</a></li>
-      
       <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H44">H44: Using label elements to associate text labels with form controls</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H65">H65: Using the title attribute to identify form controls when the label element cannot be used</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H71">H71: Providing a description for groups of form controls using fieldset and legend elements</a></li>
+      <li><a href="https://github.com/w3c/aria-practices/issues/2870">W3C ARIA Authoring Practices Issue: Naming Form Controls with the Label Element</a></li>
       
     </ul>
   </td>

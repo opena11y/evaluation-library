@@ -43,8 +43,8 @@ export const linkRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 12.2 The A element',
-        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
+        title: 'HTML Specification: The A element',
+        url:   'https://html.spec.whatwg.org/#the-a-element'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -59,8 +59,8 @@ export const linkRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @title@ attribute',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+        title: 'HTML Specification: The @title@ attribute',
+        url:   'https://html.spec.whatwg.org/#attr-title'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'H30: Providing link text that describes the purpose of a link for anchor elements',
@@ -102,8 +102,8 @@ export const linkRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 12.2 The A element',
-        url:   'https://www.w3.org/TR/html4/struct/links.html#edef-A'
+        title: 'HTML Specification: The A element',
+        url:   'https://html.spec.whatwg.org/#the-a-element'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -118,8 +118,8 @@ export const linkRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @title@ attribute',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+        title: 'HTML Specification: The @title@ attribute',
+        url:   'https://html.spec.whatwg.org/#attr-title'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'H30: Providing link text that describes the purpose of a link for anchor elements',

@@ -971,27 +971,24 @@ export const controlRules = [
   target_resources    : ["input", 'output', "select", "textarea"],
   validate          : function (dom_cache, rule_result) {
 
-    debug.log(`[COntrol 17]: Avoid label encapsulation`);
-
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (!ce.isInputTypeImage) {
         if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.source.indexOf('encapsulation') < 0) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.name]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
             }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.role]);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
         }
       }
     });
-
   } // end validation function
 }
 

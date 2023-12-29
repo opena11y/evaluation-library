@@ -141,8 +141,8 @@ export const listRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         }
       ]
   }

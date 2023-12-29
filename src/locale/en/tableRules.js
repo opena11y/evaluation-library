@@ -129,8 +129,8 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -188,8 +188,8 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -318,12 +318,16 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The CAPTION element',
+          url:   'https://html.spec.whatwg.org/#the-caption-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -374,8 +378,12 @@ export const tableRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -427,8 +435,12 @@ export const tableRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -476,8 +488,12 @@ export const tableRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',

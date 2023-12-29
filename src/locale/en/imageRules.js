@@ -57,8 +57,8 @@ export const imageRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -141,8 +141,8 @@ export const imageRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -209,8 +209,8 @@ export const imageRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
@@ -257,8 +257,8 @@ export const imageRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
@@ -373,8 +373,8 @@ export const imageRules = {
         url:   'https://www.w3.org/TR/html-longdesc/'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',

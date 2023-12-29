@@ -305,6 +305,7 @@ export default class DOMCache {
                 }
                 else {
                   domItem.isShadowClosed = true;
+                  this.transverseDOM(newParentInfo, node);
                 }
               } else {
                 // Check for iframe tag
