@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Control: Encapsulated Labeling </title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+
+    <style>
+      label {
+        display: block;
+        margin: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Control 17: Encapsulated Labeling</h1>
+
+      <label>
+        Input 1F
+        <input type="text" name="name1" class="CONTROL_17_FAIL">
+      </label>
+
+      <label for="i2">
+        Input 2P
+        <input id="i2" type="text" name="name1" class="CONTROL_17_PASS"/>
+      </label>
+
+      <h2>Hidden Controls</h2>
+
+      <div hidden>
+
+        <label>
+          Input 13H
+          <img src="image.jpeg" alt="test">
+          <input type="text" name="name2h" class="CONTROL_17_HIDDEN">
+        </label>
+
+        <label aria-label="Input 14A">
+          Input 14H
+          <input type="number" name="postal-code1-h" class="CONTROL_17_HIDDEN">
+        </label>
+
+      </div>
+
+
+      </div>
+    </div>
+  </body>
+</html>

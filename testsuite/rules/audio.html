@@ -17,16 +17,12 @@
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', () => {
         executeTest('AUDIO_1: Audio elements must have an equivalent', 'ID_IFRAME_1', 'AUDIO_1');
-        executeTest('AUDIO_2: Object elements used for audio only content must have an equivalent', 'ID_IFRAME_2', 'AUDIO_2');
-        executeTest('AUDIO_3: Embed elements used for audio only content must have equivalent', 'ID_IFRAME_3', 'AUDIO_3');
       });
     </script>
 
 
     <h2>Audio must have alternative</h2>
-    <iframe id="ID_IFRAME_1" src="audio/audio_element_must_have_equivalent.html"></iframe>
-    <iframe id="ID_IFRAME_2" src="audio/object_element_must_have_equivalent.html"></iframe>
-    <iframe id="ID_IFRAME_3" src="audio/embed_element_must_have_equivalent.html"></iframe>
+    <iframe id="ID_IFRAME_1" src="audio/media_element_must_have_equivalent.html"></iframe>
     
   </body>
 

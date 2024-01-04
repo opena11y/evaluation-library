@@ -920,7 +920,7 @@ export const controlRules = {
 
   CONTROL_17: {
       ID:                    'Control 17',
-      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the control when label encapsulation is used for labeling.',
+      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the controls when label encapsulation is used for labeling.',
       SUMMARY:               'Avoid label encapsulation',
       TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
       RULE_RESULT_MESSAGES: {
@@ -930,7 +930,7 @@ export const controlRules = {
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   '@%1@ control is labeled using %2',
+        ELEMENT_PASS_1:   '@%1@ control is labeled using: %2',
         ELEMENT_FAIL_1:   'Add a @for@ attribute to the @label@ element to reference an @id@ on the associated @%1@ control',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },

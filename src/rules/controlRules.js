@@ -977,7 +977,7 @@ export const controlRules = [
         if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.source.indexOf('encapsulation') < 0) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.name]);
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.source]);
             }
             else {
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);

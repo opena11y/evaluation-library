@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;video&lt;/code&gt; must have caption | OpenA11y Evaluation Library 2.0</title>
+        <title>Captions (Live) | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -94,14 +94,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>video</code> must have caption</li>
+          <li class="breadcrumb-item active">Captions (Live)</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>video</code> must have caption</h1>
+            <h1 id="h1-title">Rule: Captions (Live)</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -120,7 +120,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Live and prerecorded video with synchronized audio (i.e. a movie, lecture) using the <code>video</code> element must have synchronized captions.</td>
+  <td>Captions are provided for all live audio content in synchronized media.</td>
 </tr>
 
                   
@@ -129,11 +129,11 @@
   <td>
     <ul>
       
-      <li>Synchronized captions provide a means for people who cannot hear the audio content of a video to understand the audio content of the video.</li>
+      <li>Text and audio descriptions provide a means for people who cannot see the video to understand the video content.</li>
       
-      <li>Some types of learning disabilities affect auditory processing, captions provide an alternative way to understand the audio content of a video.</li>
+      <li>Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.</li>
       
-      <li>This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.2 and 1.2.4, and therefore covers both live and prerecorded video content.</li>
+      <li>This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.</li>
       
     </ul>
   </td>
@@ -150,8 +150,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded" target="_spec">
-        Success Criterion 1.2.2 Captions (Prerecorded)
+      <a href="https://www.w3.org/TR/WCAG22/#captions-live" target="_spec">
+        Success Criterion 1.2.4 Captions (Live)
       </a>
     </p>
     <p class="related">
@@ -160,8 +160,8 @@
     <ul class="related">
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#captions-live" target="_spec">
-          Success Criterion 1.2.4 Captions (Live)
+        <a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded" target="_spec">
+          Success Criterion 1.2.2 Captions (Prerecorded)
         </a>
       </li>
       
@@ -187,13 +187,9 @@
   <td>
     <ul>
       
-      <li>Use the <code>track</code> element to add a caption track to the video content.</li>
+      <li>Use the <code>track</code> element to add audio descriptions to the video content.</li>
       
-      <li>Use open captions to include the captions as part of the video.</li>
-      
-      <li>If closed captions are not support, use open captioning to include captions as part of the video.</li>
-      
-      <li>Open captioning is the only way to insure that captions are available on most cells phones and tablet computers connecting through wireless services.</li>
+      <li>Use <code>aria-describedby</code> to reference a text description of the video content.</li>
       
     </ul>
   </td>
@@ -210,6 +206,8 @@
       <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">HMTL: The video element</a></li>
       
       <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-track-element">HMTL: The track element</a></li>
+      
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-describedby">Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby</a></li>
       
       <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
       

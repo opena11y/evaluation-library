@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;video&lt;/code&gt; for video only must have alternative | OpenA11y Evaluation Library 2.0</title>
+        <title>Video-only (Prerecorded) | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -94,14 +94,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>video</code> for video only must have alternative</li>
+          <li class="breadcrumb-item active">Video-only (Prerecorded)</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>video</code> for video only must have alternative</h1>
+            <h1 id="h1-title">Rule: Video-only (Prerecorded)</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -120,7 +120,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td><code>video</code> elements used for prerecorded video only content must have text or audio description of the video content.</td>
+  <td>Prerecorded video-only media must have either a text based alternative or an audio description track that presents equivalent information for prerecorded video-only content.</td>
 </tr>
 
                   
@@ -129,9 +129,17 @@
   <td>
     <ul>
       
-      <li>Text and audio descriptions provide a means for people who cannot see the video to understand the video content.</li>
+      <li>This Success Criterion helps people who have difficulty perceiving visual content.</li>
       
-      <li>Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.</li>
+      <li>Assistive technology can read text alternatives aloud, present them visually, or convert them to braille.</li>
+      
+      <li>Alternatives for timed-based media that are text based may help some people who have difficulty understanding the meaning of prerecorded video content.</li>
+      
+      <li>People who are deaf, are hard of hearing, or who are having trouble understanding audio information for any reason can read the text presentation. Research is ongoing regarding automatic translation of text into sign language.</li>
+      
+      <li>People who are deaf-blind can read the text in braille.</li>
+      
+      <li>Additionally, text supports the ability to search for non-text content and to repurpose content in a variety of ways.</li>
       
     </ul>
   </td>
@@ -207,13 +215,25 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html">W3C WCAG Understanding SC 1.2.1: Audio-only and Video-only (Prerecorded)</a></li>
       
       <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">HMTL: The video element</a></li>
       
       <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-track-element">HMTL: The track element</a></li>
       
       <li><a href="https://www.w3.org/TR/wai-aria/#aria-describedby">Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G159">G159: Providing an alternative for time-based media for video-only content</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G166">G166: Providing audio that describes the important video content and describing it as such</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/html/H96">H96: Using the track element to provide audio descriptions</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F30">F30: Failure of Success Criterion 1.1.1 and 1.2.1 due to using text alternatives that are not alternatives (e.g., filenames or placeholder text)</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F67">F67: Failure of Success Criterion 1.1.1 and 1.2.1 due to providing long descriptions for non-text content that does not serve the same purpose or does not present the same information</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
       
       <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
       

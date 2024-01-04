@@ -9,14 +9,14 @@ import {REFERENCES} from '../../constants.js';
 export const spacingRules = {
   SPACING_1: {
         ID:                    'Spacing 1',
-        DEFINITION:            'No loss of content or functionality occurs by users adjusting any of the following text styling properties: line height (line spacing), paragraph spacing, letter spacing and word spacing.  There are some exceptions for some languages and scripts.',
+        DEFINITION:            'No loss of content or functionality occurs by users adjusting any of the following text styling properties within a limited range: line height (line spacing), paragraph spacing, letter spacing and word spacing.  There are some exceptions for some languages and scripts.',
         SUMMARY:               'Text Spacing',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
           MANUAL_CHECK_S:  'The evaluation can not automatically determine if the page supports text spacing requirements.  Use a browser add-on or assistive technology that supports changes in text spacing to verify support for this requirements.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify all functionality that uses multi-touch or tracing a path for operation can be operated with a single pointer without a path-based gesture, unless a multipoint or path-based gesture is essential.'
+          PAGE_MC_1:  'The evaluation can not automatically determine if the page supports text spacing requirements.  Use a browser add-on or assistive technology that supports changes in text spacing to verify support for this requirements.'
         },
         PURPOSES: [
           'People with low vision who require increased space between lines, words, and letters are able to read text.',
@@ -28,7 +28,8 @@ export const spacingRules = {
           'Range: Line height (line spacing) to at least 1.5 times the font size.',
           'Range: Spacing following paragraphs to at least 2 times the font size.',
           'Range: Letter spacing (tracking) to at least 0.12 times the font size.',
-          'Range: Word spacing to at least 0.16 times the font size.'
+          'Range: Word spacing to at least 0.16 times the font size.',
+          ''
         ],
         MANUAL_CHECKS: [
         ],

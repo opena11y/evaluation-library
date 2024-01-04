@@ -305,6 +305,7 @@ export default class DOMCache {
                 }
                 else {
                   domItem.isShadowClosed = true;
+                  // check for descendants of the custom element
                   this.transverseDOM(newParentInfo, node);
                 }
               } else {
