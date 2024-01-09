@@ -50,7 +50,7 @@ export {
 /* Constants */
 const debug = new DebugLogging('locale', false);
 
-var globalUseCodeTags = false;
+var globalUseCodeTags = true;
 
 export const messages = {
   en: enMessages
@@ -641,9 +641,9 @@ function getBaseResultMessage (msg, msgArgs) {
  * @desc Converts element markup identified in strings with '@' characters will be capitalized text
  *       or encapsulated within a code element.
  *
- * @param {String}   elemStr     - Element result message to convert content inside '@' to caps
+ * @param {String}   elemStr     - Element result message to convert content inside '@' to caps or <code>
  * @param {Boolean}  useCodeTags - If true content between '@' characters will be encapsulated
- *                                 in either a code element or if false or ommitted capitalized
+ *                                 in either a code element or if false or omitted capitalized
  * @return  String
  */
 

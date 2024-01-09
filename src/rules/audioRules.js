@@ -33,66 +33,45 @@ export const audioRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
-    target_resources    : ['audio', 'track'],
+    target_resources    : ['audio', 'embed', 'object', 'track'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.audioElements.forEach( ae => {
-        const de = ae.domElement;
-        if (de.visibility.isVisibleToAT || ae.hasAutoPlay) {
-          if (ae.tracks.length) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
-      });
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
 
-     dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (de.accDescription.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-          }
-          else {
-            if (oe.type.includes('audio')) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
+        if (me.isAudio || !me.isVideo) {
+          const de = me.domElement;
 
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (de.accDescription.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-          }
-          else {
-            if (ee.type.includes('audio')) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.tracks.length) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+                }
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              if (de.accDescription.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+              }
+              else {
+                if (me.isAudio) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
+              }
             }
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       });
 

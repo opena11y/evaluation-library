@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Video 1</title>
+    <title>Video 4: Must Have Caption (live)</title>
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
   </head>
@@ -10,7 +10,9 @@
     
     <div role="main">
       
-      <h1>Video 4 Rule Test</h1>
+      <h1>Video 4: Must Have Caption (live)</h1>
+
+      <h2><code>video</code> Element</h2>
       
       <video height="640" width="400" class="VIDEO_4_PASS"  type="video/mpeg">
         <source src=""/>
@@ -22,7 +24,8 @@
         <track kind="descriptions"></track>          
       </video>
 
-      <video height="640" width="400" class="VIDEO_4_PASS" aria-describedby="desc">
+
+      <video height="640" width="400" class="VIDEO_4_MC" aria-describedby="desc">
         <source src=""/>
         <track kind="subtitles"></track>          
         <track kind="descriptions"></track>          
@@ -38,7 +41,41 @@
       <video height="640" width="400" class="VIDEO_4_HIDDEN" hidden src="video2.ogg">
         <track kind="has source"></track>                  
       </video>
+
+      <h2><code>object</code> element</h2>
+
+     <object height="640" width="400" class="VIDEO_4_MC" aria-describedby="desc" type="video/ogg">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_4_MC" type="video/ogg">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_4_MC" aria-describedby="desc">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_4_MC">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_4_HIDDEN" style="display: none">
+      </object>
+
+      <h2><code>embed</code> element</h2>
       
+      <embed height="640" width="400" class="VIDEO_4_MC" aria-describedby="desc" type="video/ogg">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_4_MC" type="video/ogg">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_4_MC" aria-describedby="desc">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_4_MC">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_4_HIDDEN" style="visibility: hidden">
+
+
     </div>
   </body>
 </html>

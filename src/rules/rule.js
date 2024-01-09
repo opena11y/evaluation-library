@@ -294,7 +294,7 @@ export default class Rule {
   /**
    * @method getManualCheckProcedures
    *
-   * @desc Gets manual checking proceedures for evaluating the rule
+   * @desc Gets manual checking procedures for evaluating the rule
    *       requirements
    *
    * @return  {Array}  Array of InformationalLinkInfo objects

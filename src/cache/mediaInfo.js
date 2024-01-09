@@ -17,17 +17,35 @@ debug.flag = false;
 
 class MediaElement {
   constructor (domElement) {
+    const node = domElement.node;
+    const type = node.getAttribute('type');
+
     this.domElement = domElement;
     this.tracks = [];
+    this.params = [];
+
     this.hasAutoPlay = domElement.node.hasAttribute('autoplay');
+    this.type = (typeof type === 'string') ? type.toLowerCase() : '';
+  }
+
+  get isAudio () {
+    return this.type.includes('audio') || this.domElement.tagName === 'audio';
+  }
+
+  get isVideo () {
+    return this.type.includes('video') || this.domElement.tagName === 'video';
   }
 
   get allowsTracks () {
-    return true;
+    return ['audio', 'video'].includes(this.domElement.tagName);
+  }
+
+  get isEmbed () {
+    return this.domElement.tagName === 'embed';
   }
 
   get isObject () {
-    return false;
+    return this.domElement.tagName === 'object';
   }
 
   get hasCaptionTrack () {
@@ -36,14 +54,6 @@ class MediaElement {
 
   get hasDescriptionTrack () {
     return this.checkForTrackKind('descriptions');
-  }
-
-  get hasSubtitleTrack () {
-    return this.checkForTrackKind('subtitles');
-  }
-
-  get hasChaptersTrack () {
-    return this.checkForTrackKind('chapters');
   }
 
   checkForTrackKind (type) {
@@ -80,43 +90,6 @@ class TrackElement {
   }
 }
 
-
-/**
- * @class ObjectElement
- *
- * @desc Identifies a DOM element as an object element.
- *
- * @param  {Object}  domElement   - DOM element object
- */
-
-class ObjectElement {
-  constructor (domElement) {
-    const node = domElement.node;
-    this.domElement = domElement;
-    this.params = [];
-    this.type = node.hasAttribute('type') ? node.type.toLowerCase() : '';
-  }
-  get allowsTracks () {
-    return false;
-  }
-
-  get isObject () {
-    return true;
-  }
-
-  get isAudio () {
-    return this.type.includes('audio');
-  }
-
-  get isVideo () {
-    return this.type.includes('video');
-  }
-
-  toString() {
-    return `[ObjectElement]: ${this.domElement}`;
-  }
-}
-
 /**
  * @class ParamElement
  *
@@ -136,41 +109,6 @@ class ParamElement {
 
 }
 
-/**
- * @class EmbedElement
- *
- * @desc Identifies a DOM element as an embed element.
- *
- * @param  {Object}  domElement   - DOM element object
- */
-
-class EmbedElement {
-  constructor (domElement) {
-    const node = domElement.node;
-    this.domElement = domElement;
-    this.type = node.hasAttribute('type') ? node.type.toLowerCase() : '';
-  }
-
-  get allowsTracks () {
-    return false;
-  }
-
-  get isAudio () {
-    return this.type.includes('audio');
-  }
-
- get isVideo () {
-    return this.type.includes('video');
-  }
-
-  get isObject () {
-    return false;
-  }
-
-  toString() {
-    return `[EmbedElement]: ${this.domElement}`;
-  }
-}
 
 /**
  * @class MediaInfo
@@ -181,10 +119,6 @@ class EmbedElement {
 
 export default class MediaInfo {
   constructor () {
-    this.audioElements  = [];
-    this.embedElements  = [];
-    this.objectElements = [];
-    this.videoElements  = [];
     this.allMediaElements = [];
   }
 
@@ -194,19 +128,16 @@ export default class MediaInfo {
 
       case 'audio':
         mediaElement = new MediaElement(domElement);
-        this.audioElements.push(mediaElement);
         this.allMediaElements.push(mediaElement);
         break;
 
       case 'embed':
-        mediaElement = new EmbedElement(domElement);
-        this.embedElements.push(mediaElement);
+        mediaElement = new MediaElement(domElement);
         this.allMediaElements.push(mediaElement);
         break;
 
       case 'object':
-        mediaElement = new ObjectElement(domElement);
-        this.objectElements.push(mediaElement);
+        mediaElement = new MediaElement(domElement);
         this.allMediaElements.push(mediaElement);
         break;
 
@@ -227,7 +158,6 @@ export default class MediaInfo {
 
       case 'video':
         mediaElement = new MediaElement(domElement);
-        this.videoElements.push(mediaElement);
         this.allMediaElements.push(mediaElement);
         break;
 
@@ -247,26 +177,10 @@ export default class MediaInfo {
 
   showListInfo () {
     if (debug.flag) {
-      debug.log('== Audio Elements ==', 1);
-      this.audioElements.forEach( ae => {
-        debug.log(ae);
+      debug.log('== Media Elements ==', 1);
+      this.allElements.forEach( me => {
+        debug.log(me);
       });
-
-      debug.log('== Video Elements ==', 1);
-      this.videoElements.forEach( ve => {
-        debug.log(ve);
-      });
-
-      debug.log('== Object Elements ==', 1);
-      this.objectElements.forEach( oe => {
-        debug.log(oe);
-      });
-
-      debug.log('== Embed Elements ==', 1);
-      this.embedElements.forEach( ee => {
-        debug.log(ee);
-      });
-
 
     }
   }

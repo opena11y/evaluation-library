@@ -1,9 +1,9 @@
-/* audioRules.js */
+/* video-onlyRules.js */
 
 import {REFERENCES} from '../../constants.js';
 
 /* --------------------------------------------------------------------------- */
-/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/*       OpenA11y Rules Localized Language Support (NLS): English              */
 /* --------------------------------------------------------------------------- */
 
 export const audioRules = {
@@ -21,9 +21,9 @@ export const audioRules = {
       HIDDEN_P:       'The %N_H media elements that are hidden were not analyzed for accessible audio.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_PASS_1:    '@audio@ element has caption.',
-      ELEMENT_PASS_2:    '@audio@ element has a text transcript.',
-      ELEMENT_FAIL_1:    'Provide a text transcript for @audio@ element content.',
+      ELEMENT_PASS_1:    '@%1@ element has caption track.',
+      ELEMENT_PASS_2:    '@%1@ element has a text transcript.',
+      ELEMENT_FAIL_1:    'Provide a text transcript for @%1@ element content.',
       ELEMENT_MC_1:      'Verify the audio media content has a text transcript.',
       ELEMENT_MC_2:      'Verify the @%1@ element is providing audio-only content, and if it is audio-only that is has captions or text transcript.',
       ELEMENT_HIDDEN_1:  'The @%1@ element is hidden and was not evaluated.'
@@ -34,7 +34,7 @@ export const audioRules = {
       'Additionally, text transcripts support the ability to search for non-text content and to repurpose content in a variety of ways.'
     ],
     TECHNIQUES: [
-      'Use the @track@ element to add captioning to the audio content.',
+      'For the @audio@ eleemnt use the @track@ element to add captioning to the audio content.',
       'Use WebVTT to encode the timed stamped captioning information for the audio content.',
       'Use @aria-describedby@ to reference an equivalent text description of the audio content.'
     ],

@@ -120,7 +120,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>An alternative for time-based media or audio description of the prerecorded video content is provided for synchronized media, except when the media is a media alternative for text and is clearly labeled as such.</td>
+  <td>An audio description (preferred) or alternative for time-based media of the prerecorded video content is provided for synchronized media, except when the media is a media alternative for text and is clearly labeled as such.</td>
 </tr>
 
                   
@@ -129,11 +129,7 @@
   <td>
     <ul>
       
-      <li>Text and audio descriptions provide a means for people who cannot see the video to understand the video content.</li>
-      
-      <li>Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.</li>
-      
-      <li>This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.</li>
+      <li>This Success Criterion may help some people who have difficulty watching video or other synchronized media content, including people who have difficulty perceiving or understanding moving images.</li>
       
     </ul>
   </td>
@@ -187,9 +183,11 @@
   <td>
     <ul>
       
-      <li>Use the <code>track</code> element to add audio descriptions to the video content.</li>
+      <li>For the <code>video</code> eleemnt use the <code>track</code> element to add audio descriptions to the video content.</li>
       
       <li>Use <code>aria-describedby</code> to reference a text description of the video content.</li>
+      
+      <li>NOTE: Audio descriptions are preferred over other alternatives since WCAG Success Criteria 1.2.5 (AA) requires the use of audio descriptions and legal requirements for accessibility include WCAG AA requirements.</li>
       
     </ul>
   </td>
@@ -201,13 +199,21 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
+      <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">W3C WCAG Understanding SC 1.2.3: Audio Description or Media Alternative (Prerecorded)</a></li>
       
       <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">HMTL: The video element</a></li>
       
       <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-track-element">HMTL: The track element</a></li>
       
       <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-describedby">Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G69">G69: Providing an alternative for time based media</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G78">G78: Providing a second, user-selectable, audio track that includes audio descriptions</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/html/H96">H96: Using the track element to provide audio descriptions</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
       
       <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
       

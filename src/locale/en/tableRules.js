@@ -105,11 +105,11 @@ export const tableRules = {
         'Use @title@ attribute to provide an accessible name for a data table.',
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.'
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.'
       ],
       MANUAL_CHECKS: [
         'Make sure the the accessible name accurately and succinctly identifies the purpose of the data table.',
-        'If the table markup is actually being used for laying out content in rows or columns, use @role="presentation"@ on the @table@ element.'
+        'If the table markup is actually being used for laying out content in rows or columns, use @role="none"@ on the @table@ element.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -223,7 +223,7 @@ export const tableRules = {
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @title@ attribute to provide an accessible name for a data table.',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.',
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.',
         'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
       ],
       MANUAL_CHECKS: [
@@ -274,8 +274,8 @@ export const tableRules = {
       SUMMARY:               'Identify table markup as data or layout',
       TARGET_RESOURCES_DESC: '@table@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
-        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="none"@ on the table elements if the table is being used to layout content.',
+        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="none"@ on the table elements if the table is being used to layout content.',
         MANUAL_CHECK_S: 'Verify the @table@ element that only has one row or column is used only only for layout.',
         MANUAL_CHECK_P: 'Verify the %N_H @table@ elements that only have one row or column are used only only for layout.',
         HIDDEN_S: 'One @table@ element that is hidden was not evaluated.',
@@ -297,7 +297,7 @@ export const tableRules = {
       PURPOSES: [
         'The @table@ element is designed for representing tabular data in a web page, but table markup has also been used by web developers as a means to layout content in rows and columns.',
         'Users of assistive technology are confused when the purpose of table markup is not clearly identified (i.e. layout or for tabular data).',
-        'Use @role="presentation"@ on the @table@ element to clearly identify a table markup for layout.',
+        'Use @role="none"@ on the @table@ element to clearly identify a table markup for layout.',
         'Adding an accessible name and/or description to a @table@ element identifies table markup as a data table (e.g. layout tables must not have an accessible name or description).',
         'The use header cells (e.g. @th@ or @td[scope]@ elements) identifies a @table@ element as a data table.'
       ],
@@ -305,7 +305,7 @@ export const tableRules = {
         'Use @th@ elements in the first row and/or first column to identify a table as a data table.',
         'Use @caption@ element; @aria-label@ or @aria-labelledby@ attribute to add an accessible name to a @table@ element.',
         'Use the @aria-describedby@ attribute to add an accessible description to a @table@ element.',
-        'Use @role="presentation"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
+        'Use @role="none"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
         'Layout tables must only use the @tr@ and @td@ table elements for layout content and must NOT have an accessible name or description.'
       ],
       MANUAL_CHECKS: [

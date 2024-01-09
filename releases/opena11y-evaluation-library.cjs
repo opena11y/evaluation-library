@@ -11499,17 +11499,35 @@ debug$N.flag = false;
 
 class MediaElement {
   constructor (domElement) {
+    const node = domElement.node;
+    const type = node.getAttribute('type');
+
     this.domElement = domElement;
     this.tracks = [];
+    this.params = [];
+
     this.hasAutoPlay = domElement.node.hasAttribute('autoplay');
+    this.type = (typeof type === 'string') ? type.toLowerCase() : '';
+  }
+
+  get isAudio () {
+    return this.type.includes('audio') || this.domElement.tagName === 'audio';
+  }
+
+  get isVideo () {
+    return this.type.includes('video') || this.domElement.tagName === 'video';
   }
 
   get allowsTracks () {
-    return true;
+    return ['audio', 'video'].includes(this.domElement.tagName);
+  }
+
+  get isEmbed () {
+    return this.domElement.tagName === 'embed';
   }
 
   get isObject () {
-    return false;
+    return this.domElement.tagName === 'object';
   }
 
   get hasCaptionTrack () {
@@ -11518,14 +11536,6 @@ class MediaElement {
 
   get hasDescriptionTrack () {
     return this.checkForTrackKind('descriptions');
-  }
-
-  get hasSubtitleTrack () {
-    return this.checkForTrackKind('subtitles');
-  }
-
-  get hasChaptersTrack () {
-    return this.checkForTrackKind('chapters');
   }
 
   checkForTrackKind (type) {
@@ -11562,43 +11572,6 @@ class TrackElement {
   }
 }
 
-
-/**
- * @class ObjectElement
- *
- * @desc Identifies a DOM element as an object element.
- *
- * @param  {Object}  domElement   - DOM element object
- */
-
-class ObjectElement {
-  constructor (domElement) {
-    const node = domElement.node;
-    this.domElement = domElement;
-    this.params = [];
-    this.type = node.hasAttribute('type') ? node.type.toLowerCase() : '';
-  }
-  get allowsTracks () {
-    return false;
-  }
-
-  get isObject () {
-    return true;
-  }
-
-  get isAudio () {
-    return this.type.includes('audio');
-  }
-
-  get isVideo () {
-    return this.type.includes('video');
-  }
-
-  toString() {
-    return `[ObjectElement]: ${this.domElement}`;
-  }
-}
-
 /**
  * @class ParamElement
  *
@@ -11618,41 +11591,6 @@ class ParamElement {
 
 }
 
-/**
- * @class EmbedElement
- *
- * @desc Identifies a DOM element as an embed element.
- *
- * @param  {Object}  domElement   - DOM element object
- */
-
-class EmbedElement {
-  constructor (domElement) {
-    const node = domElement.node;
-    this.domElement = domElement;
-    this.type = node.hasAttribute('type') ? node.type.toLowerCase() : '';
-  }
-
-  get allowsTracks () {
-    return false;
-  }
-
-  get isAudio () {
-    return this.type.includes('audio');
-  }
-
- get isVideo () {
-    return this.type.includes('video');
-  }
-
-  get isObject () {
-    return false;
-  }
-
-  toString() {
-    return `[EmbedElement]: ${this.domElement}`;
-  }
-}
 
 /**
  * @class MediaInfo
@@ -11663,10 +11601,6 @@ class EmbedElement {
 
 class MediaInfo {
   constructor () {
-    this.audioElements  = [];
-    this.embedElements  = [];
-    this.objectElements = [];
-    this.videoElements  = [];
     this.allMediaElements = [];
   }
 
@@ -11676,19 +11610,16 @@ class MediaInfo {
 
       case 'audio':
         mediaElement = new MediaElement(domElement);
-        this.audioElements.push(mediaElement);
         this.allMediaElements.push(mediaElement);
         break;
 
       case 'embed':
-        mediaElement = new EmbedElement(domElement);
-        this.embedElements.push(mediaElement);
+        mediaElement = new MediaElement(domElement);
         this.allMediaElements.push(mediaElement);
         break;
 
       case 'object':
-        mediaElement = new ObjectElement(domElement);
-        this.objectElements.push(mediaElement);
+        mediaElement = new MediaElement(domElement);
         this.allMediaElements.push(mediaElement);
         break;
 
@@ -11709,7 +11640,6 @@ class MediaInfo {
 
       case 'video':
         mediaElement = new MediaElement(domElement);
-        this.videoElements.push(mediaElement);
         this.allMediaElements.push(mediaElement);
         break;
 
@@ -11726,26 +11656,10 @@ class MediaInfo {
 
   showListInfo () {
     if (debug$N.flag) {
-      debug$N.log('== Audio Elements ==', 1);
-      this.audioElements.forEach( ae => {
-        debug$N.log(ae);
+      debug$N.log('== Media Elements ==', 1);
+      this.allElements.forEach( me => {
+        debug$N.log(me);
       });
-
-      debug$N.log('== Video Elements ==', 1);
-      this.videoElements.forEach( ve => {
-        debug$N.log(ve);
-      });
-
-      debug$N.log('== Object Elements ==', 1);
-      this.objectElements.forEach( oe => {
-        debug$N.log(oe);
-      });
-
-      debug$N.log('== Embed Elements ==', 1);
-      this.embedElements.forEach( ee => {
-        debug$N.log(ee);
-      });
-
 
     }
   }
@@ -13264,10 +13178,10 @@ const wcag = {
   }
 };
 
-/* audioRules.js */
+/* video-onlyRules.js */
 
 /* --------------------------------------------------------------------------- */
-/*       OpenA11y Rules Localized Language Support (NLS): English      */
+/*       OpenA11y Rules Localized Language Support (NLS): English              */
 /* --------------------------------------------------------------------------- */
 
 const audioRules$1 = {
@@ -13285,9 +13199,9 @@ const audioRules$1 = {
       HIDDEN_P:       'The %N_H media elements that are hidden were not analyzed for accessible audio.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_PASS_1:    '@audio@ element has caption.',
-      ELEMENT_PASS_2:    '@audio@ element has a text transcript.',
-      ELEMENT_FAIL_1:    'Provide a text transcript for @audio@ element content.',
+      ELEMENT_PASS_1:    '@%1@ element has caption track.',
+      ELEMENT_PASS_2:    '@%1@ element has a text transcript.',
+      ELEMENT_FAIL_1:    'Provide a text transcript for @%1@ element content.',
       ELEMENT_MC_1:      'Verify the audio media content has a text transcript.',
       ELEMENT_MC_2:      'Verify the @%1@ element is providing audio-only content, and if it is audio-only that is has captions or text transcript.',
       ELEMENT_HIDDEN_1:  'The @%1@ element is hidden and was not evaluated.'
@@ -13298,7 +13212,7 @@ const audioRules$1 = {
       'Additionally, text transcripts support the ability to search for non-text content and to repurpose content in a variety of ways.'
     ],
     TECHNIQUES: [
-      'Use the @track@ element to add captioning to the audio content.',
+      'For the @audio@ eleemnt use the @track@ element to add captioning to the audio content.',
       'Use WebVTT to encode the timed stamped captioning information for the audio content.',
       'Use @aria-describedby@ to reference an equivalent text description of the audio content.'
     ],
@@ -15510,7 +15424,7 @@ const imageRules$1 = {
     },
     PURPOSES: [
       'A text alternative for an image, usually specified with an @alt@ attribute, provides a summary of the purpose of the image for people with visual impairments, enabling them to understand the content or purpose of the image on the page.',
-      'An image with a text alternative that is an empty string or that has @role="presentation"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
+      'An image with a text alternative that is an empty string or that has @role="none"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
     ],
     TECHNIQUES: [
       'A text alternative should summarize the purpose of an image as succinctly as possible (preferably with no more than 100 characters).',
@@ -15518,7 +15432,7 @@ const imageRules$1 = {
       'The @aria-labelledby@ attribute can be used to provide a text alternative when an image can be described using text already associated with the image, or for elements with @role="img"@.',
       'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute. Use the @alt@ attribute for @img@ and @area@ elements.',
       'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.',
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
     ],
@@ -15601,7 +15515,7 @@ const imageRules$1 = {
       'The @aria-labelledby@ attribute can be used to provide a text alternative when images can be described using text already associated with the image, such as a visible caption, or for elements with @role="img"@.',
       'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute.',
       'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.  NOTE: Using the @title@ attribute will also generate a tooltip in some browsers.',
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
       'Find each image on the page and verify that it is only being used decoratively or is redundant with other information on the page.'
@@ -15760,9 +15674,9 @@ const imageRules$1 = {
 
   IMAGE_5: {
     ID:         'Image 5',
-    DEFINITION: 'Images with @[alt=""]@ or @[role="presentation"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
+    DEFINITION: 'Images with @[alt=""]@ or @[role="none"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
     SUMMARY:    'Image is decorative',
-    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="presentation"]@, @[role="img"]@ with an empty text alternative',
+    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="none"]@, @[role="img"]@ with an empty text alternative',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S: 'Verify the image is being used purely for decorative, spacing or styling purposes.',
       MANUAL_CHECK_P: 'Verify the %N_MC images are being used purely for decorative, spacing or styling purposes.',
@@ -15781,7 +15695,7 @@ const imageRules$1 = {
       'If an image contains information, but is mistakenly identified as decorative, users of assistive technologies will not have access to the information.'
     ],
     TECHNIQUES: [
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
     ],
@@ -17976,7 +17890,7 @@ const layoutRules$1 = {
         'Use CSS and web standards techniques for the coding of content, and the graphical styling and positioning of content.',
         'Avoid using table markup for graphical layout, if you do use tables for layout make sure the content still is meaningful when the table markup is disabled.',
         'Avoid using nested tables for layout, the deeper the level of nesting the more chance there of having a confusing sequence of content.',
-        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="presentation"@ attribute to clearly indicate the table markup is being used for layout.'
+        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="none"@ attribute to clearly indicate the table markup is being used for layout.'
       ],
       MANUAL_CHECKS: [
         'Use browser developer tools to disable table markup or enable a user stylesheet to change table cells to be rendered as block level elements.',
@@ -18046,7 +17960,7 @@ const layoutRules$1 = {
         'Use CSS and web standards techniques for the coding of content, and the graphical styling and positioning of content.',
         'Avoid using table markup for graphical layout, if you do use tables for layout make sure the content still is meaningful when the table markup is disabled.',
         'Avoid using nested tables for layout, the deeper the level of nesting the more chance there of having a confusing sequence of content.',
-        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="presentation"@ attribute to clearly indicate the table markup is being used for layout.'
+        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="none"@ attribute to clearly indicate the table markup is being used for layout.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -18982,7 +18896,7 @@ const readingOrderRules$1 = {
       'Make sure related content moves as a block when repositioning content on a page.'
     ],
     MANUAL_CHECKS: [
-      'Disable layout tables (e.g. table[role="presentation"]) and CSS to make sure the content rendered has a meaningful sequence.'
+      'Disable layout tables (e.g. table[role="none"]) and CSS to make sure the content rendered has a meaningful sequence.'
     ],
     INFORMATIONAL_LINKS: [
       {
@@ -19406,11 +19320,11 @@ const tableRules$1 = {
         'Use @title@ attribute to provide an accessible name for a data table.',
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.'
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.'
       ],
       MANUAL_CHECKS: [
         'Make sure the the accessible name accurately and succinctly identifies the purpose of the data table.',
-        'If the table markup is actually being used for laying out content in rows or columns, use @role="presentation"@ on the @table@ element.'
+        'If the table markup is actually being used for laying out content in rows or columns, use @role="none"@ on the @table@ element.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -19524,7 +19438,7 @@ const tableRules$1 = {
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @title@ attribute to provide an accessible name for a data table.',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.',
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.',
         'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
       ],
       MANUAL_CHECKS: [
@@ -19575,8 +19489,8 @@ const tableRules$1 = {
       SUMMARY:               'Identify table markup as data or layout',
       TARGET_RESOURCES_DESC: '@table@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
-        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="none"@ on the table elements if the table is being used to layout content.',
+        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="none"@ on the table elements if the table is being used to layout content.',
         MANUAL_CHECK_S: 'Verify the @table@ element that only has one row or column is used only only for layout.',
         MANUAL_CHECK_P: 'Verify the %N_H @table@ elements that only have one row or column are used only only for layout.',
         HIDDEN_S: 'One @table@ element that is hidden was not evaluated.',
@@ -19598,7 +19512,7 @@ const tableRules$1 = {
       PURPOSES: [
         'The @table@ element is designed for representing tabular data in a web page, but table markup has also been used by web developers as a means to layout content in rows and columns.',
         'Users of assistive technology are confused when the purpose of table markup is not clearly identified (i.e. layout or for tabular data).',
-        'Use @role="presentation"@ on the @table@ element to clearly identify a table markup for layout.',
+        'Use @role="none"@ on the @table@ element to clearly identify a table markup for layout.',
         'Adding an accessible name and/or description to a @table@ element identifies table markup as a data table (e.g. layout tables must not have an accessible name or description).',
         'The use header cells (e.g. @th@ or @td[scope]@ elements) identifies a @table@ element as a data table.'
       ],
@@ -19606,7 +19520,7 @@ const tableRules$1 = {
         'Use @th@ elements in the first row and/or first column to identify a table as a data table.',
         'Use @caption@ element; @aria-label@ or @aria-labelledby@ attribute to add an accessible name to a @table@ element.',
         'Use the @aria-describedby@ attribute to add an accessible description to a @table@ element.',
-        'Use @role="presentation"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
+        'Use @role="none"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
         'Layout tables must only use the @tr@ and @td@ table elements for layout content and must NOT have an accessible name or description.'
       ],
       MANUAL_CHECKS: [
@@ -20410,29 +20324,21 @@ const videoRules$1 = {
       SUMMARY:               'Video-only (Prerecorded)',
       TARGET_RESOURCES_DESC: '@video@, @object@ and @embed@ elements',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:     'Verify the media element with the @aria-describedby@ attributes is used for video only content.   If so, verify the text description reference using the @aria-describedby@ describes the video only content.',
-        MANUAL_CHECK_P:     'Verify if any of the %N_MC media elements with the @aria-describedby@ attributes are used for video only content.   If so, verify the text description reference using the @aria-describedby@ describes the video only content.',
+        MANUAL_CHECK_S:     'Verify the media element with the @aria-describedby@ attributes is used for video-only content.   If so, verify the text description reference using the @aria-describedby@ describes the video-only content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC media elements with the @aria-describedby@ attributes are used for video-only content.   If so, verify the text description reference using the @aria-describedby@ describes the video-only content.',
         HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
         HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No @video@ elements found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:    '@video@ element has audio description track',
-
-        ELEMENT_MC_1:      'Verify the @%1@ element is used for video only content.   If so, verify the text description reference using the @aria-describedby@ describes the video only content.',
-        ELEMENT_MC_2:      'Verify the @%1@ element is used for video-only content provides an audio track to describe the video content or text description of the video.',
-
-        ELEMENT_MC_3: 'Verify the @%1@ element with @video@ in its @type@ attrbute is used for video only content.  If so verify the @aria-describedby@ references a text description of the video only content.',
-        ELEMENT_MC_4: 'Verify the @%1@ element with @video@ in its @type@ attrbute is used for video only content.  If so verify the video only content has a text or audio descriptions.',
-        ELEMENT_MC_5: 'Verify if the @%1@ element is used for video only content.  If so verify the @aria-describedby@ references a text description of the video only content.',
-        ELEMENT_MC_6: 'Verify if the @%1@ element is used for video only content.  If so verify the video only content has a text or audio description.',
-
-
-
+        ELEMENT_PASS_1: '@%1@ element has audio description track',
+        ELEMENT_MC_1: 'Verify the @%1@ element is used for video-only content.   If so, verify the text description reference using the @aria-describedby@ describes the video-only content.',
+        ELEMENT_MC_2: 'Verify the @%1@ element is used for video-only content provides an audio track to describe the video content or text description of the video.',
+        ELEMENT_MC_3: 'Verify the @%1@ element with @video@ in its @type@ attrbute is used for video-only content.  If so verify the @aria-describedby@ references a text description of the video-only content.',
+        ELEMENT_MC_4: 'Verify the @%1@ element with @video@ in its @type@ attrbute is used for video-only content.  If so verify the video-only content has a text or audio descriptions.',
+        ELEMENT_MC_5: 'Verify if the @%1@ element is used for video-only content.  If so verify the @aria-describedby@ references a text description of the video-only content.',
+        ELEMENT_MC_6: 'Verify if the @%1@ element is used for video-only content.  If so verify the video-only content has a text or audio description.',
         ELEMENT_HIDDEN_1:  'The @%1@ element is hidden and therefore not evaluated.'
-
-
-
       },
       PURPOSES: [
         'This Success Criterion helps people who have difficulty perceiving visual content.',
@@ -20440,10 +20346,10 @@ const videoRules$1 = {
         'Alternatives for timed-based media that are text based may help some people who have difficulty understanding the meaning of prerecorded video content.',
         'People who are deaf, are hard of hearing, or who are having trouble understanding audio information for any reason can read the text presentation. Research is ongoing regarding automatic translation of text into sign language.',
         'People who are deaf-blind can read the text in braille.',
-        'Additionally, text supports the ability to search for non-text content and to repurpose content in a variety of ways.'
+        'Additionally, text supports the ability to search for non-text content and to re-purpose content in a variety of ways.'
       ],
       TECHNIQUES: [
-        'Use the @track@ element to add audio descriptions to the video content.',
+        'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
         'Use @aria-describedby@ to reference a text description of the video content.',
         'Include an audio sound track that describes the video content.'
       ],
@@ -20507,39 +20413,33 @@ const videoRules$1 = {
       SUMMARY:               'Captions (Prerecorded)',
       TARGET_RESOURCES_DESC: '@video@, @object@ and @embed@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add caption @track@ element to the @video@ element.',
-        FAIL_P:   'Add caption @track@ element to each of the %N_F @video@ elements with out caption tracks.',
-        MANUAL_CHECK_S:     'Verify that the @video@ element without a caption track has open captions.',
-        MANUAL_CHECK_P:     'Verify that the %N_MC @video@ elements without caption tracks have open captions.',
-        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+        MANUAL_CHECK_S:     'Verify that the media element has video with synchronized audio, if so verify the video includes captioning.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC media elements are video with synchronized audio, if so verify each video includes captioning.',
+        HIDDEN_S: 'The media element that is hidden was not evaluated for captions.',
+        HIDDEN_P: 'The %N_H media elements that are hidden were not evaluated for captions.',
+        NOT_APPLICABLE:  'No media elements found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:         '@video@ element has caption track.',
-        ELEMENT_FAIL_1:       'Add caption @track@ element to @video@ element.',
-        ELEMENT_MC_1: 'Verify the video content includes open captions.',
-        ELEMENT_HIDDEN_1:       'The @video@ element is hidden and cannot render content.'
+        ELEMENT_PASS_1: '@%1@ element has caption track.',
+        ELEMENT_MC_1: 'Verify the @%1@ element is used for video with synchronized audio content.   If so, verify the the video includes open captioning or a caption track.',
+        ELEMENT_MC_2: 'Verify the @%1@ element with @video@ in its @type@ attribute is used for video with synchronized audio content.  If so verify the video has open captioning or support a caption track.',
+        ELEMENT_MC_3: 'Verify the @%1@ element is being used for video with synchronized audio content provides open captioning or a caption track.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element is hidden and is not tested for captions.'
       },
       PURPOSES: [
-        'Synchronized captions provide a means for people who cannot hear the audio content of a video to understand the audio content of the video.',
-        'Some types of learning disabilities affect auditory processing, captions provide an alternative way to understand the audio content of a video.',
-        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.2 and 1.2.4, and therefore covers both live and prerecorded video content.'
+        'People who are deaf or have a hearing loss can access the auditory information in the synchronized media content through captions.'
        ],
       TECHNIQUES: [
-        'Use the @track@ element to add a caption track to the video content.',
+        'For the @video@ eleemnt use the @track@ element to add a caption track to the video content.',
         'Use open captions to include the captions as part of the video.',
-        'If closed captions are not support, use open captioning to include captions as part of the video.',
-        'Open captioning is the only way to insure that captions are available on most cells phones and tablet computers connecting through wireless services.'
+        'If closed captions are not supported, use open captioning to include captions as part of the video.'
       ],
       MANUAL_CHECKS: [
-        'When captions are enabled on the media player, verify the captions are visible.',
-        'Verify that the captions accurately represent and are synchronized with the speech and sounds in the video.'
       ],
       INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.TECHNIQUE,
-          title: 'W3C: Making Audio and Video Media Accessible',
-          url:   'https://www.w3.org/WAI/media/av/'
+     { type:  REFERENCES.SPECIFICATION,
+          title: 'W3C WCAG Understanding SC 1.2.2: Captions (Prerecorded)',
+          url:   'https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
@@ -20548,6 +20448,22 @@ const videoRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The track element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'G93: Providing open (always visible) captions',
+          url:   'https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'G87: Providing closed captions',
+          url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G87'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'G87: Providing closed captions',
+          url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G87'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'University of Washington: Creating Accessible Videos',
@@ -20561,42 +20477,37 @@ const videoRules$1 = {
   },
   VIDEO_3: {
       ID:                    'Video 3',
-      DEFINITION:            'An alternative for time-based media or audio description of the prerecorded video content is provided for synchronized media, except when the media is a media alternative for text and is clearly labeled as such.',
+      DEFINITION:            'An audio description (preferred) or alternative for time-based media of the prerecorded video content is provided for synchronized media, except when the media is a media alternative for text and is clearly labeled as such.',
       SUMMARY:               'Audio Description or Media Alternative (Prerecorded)',
       TARGET_RESOURCES_DESC: '@video@, @object@ and @embed@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add audio description track to @video@ element without an audio description track.',
-        FAIL_P:   'Add audio description track to each of the %N_F the @video@ elements without audio description tracks.',
-        MANUAL_CHECK_S:     'Verify the @video@ element with is used for prerecorded video with synchronized audio.   If so, verify the video includes an audio description of the video content.',
-        MANUAL_CHECK_P:     'Verify if any of the %N_MC @video@ elements are used for prerecorded video with synchronized audio.   If so, verify each of the videos includes an audio description of the video content.',
-        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+        MANUAL_CHECK_S:     'Verify the @video@ element is used for prerecorded video with synchronized audio.   If so, verify the video includes an audio description or media alternative of the video content.',
+        MANUAL_CHECK_P:     'Verify if any of the %N_MC @video@ elements are used for prerecorded video with synchronized audio.   If so, verify each of the videos includes an audio description or the media alternative of the video content.',
+        HIDDEN_S: 'The media element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H media elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No media elements found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:         '@video@ element has audio description track.',
-        ELEMENT_FAIL_1:       'Add audio description track to @video@ element.',
-        ELEMENT_MC_1: 'Verify an audio description of the video content is included in the audio track of the video.',
-        ELEMENT_HIDDEN_1:       'The @video@ element is hidden and cannot render content.'
+        ELEMENT_PASS_1: '@%1@ element has audio description track.',
+        ELEMENT_MC_1: 'Verify the @%1@ element is used for video with synchronized audio content.   If so, verify the the video includes audio descriptions or media alternative.',
+        ELEMENT_MC_2: 'Verify the @%1@ element with @video@ in its @type@ attribute is used for video with synchronized audio content.  If so verify the video has audio descriptions or media alternative.',
+        ELEMENT_MC_3: 'Verify the @%1@ element is being used for video with synchronized audio content has an audio description or media alternative.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element is hidden and is not tested for audio descriptions.'
       },
       PURPOSES: [
-        'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
-        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.',
-        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.'
+        'This Success Criterion may help some people who have difficulty watching video or other synchronized media content, including people who have difficulty perceiving or understanding moving images.'
       ],
       TECHNIQUES: [
-        'Use the @track@ element to add audio descriptions to the video content.',
-        'Use @aria-describedby@ to reference a text description of the video content.'
+        'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
+        'Use @aria-describedby@ to reference a text description of the video content.',
+        'NOTE: Audio descriptions are preferred over other alternatives since WCAG Success Criteria 1.2.5 (AA) requires the use of audio descriptions and legal requirements for accessibility include WCAG AA requirements.'
       ],
       MANUAL_CHECKS: [
-        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
-        'If there is a audio description make sure the description accurately describes the video content.',
-        'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
-        { type:  REFERENCES.TECHNIQUE,
-          title: 'W3C: Making Audio and Video Media Accessible',
-          url:   'https://www.w3.org/WAI/media/av/'
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'W3C WCAG Understanding SC 1.2.3: Audio Description or Media Alternative (Prerecorded)',
+          url:   'https://html.spec.whatwg.org/multipage/media.html#the-video-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The video element',
@@ -20609,6 +20520,22 @@ const videoRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'G69: Providing an alternative for time based media',
+          url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G69'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'G78: Providing a second, user-selectable, audio track that includes audio descriptions',
+          url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G78'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'H96: Using the track element to provide audio descriptions',
+          url:   'https://www.w3.org/WAI/WCAG22/Techniques/html/H96'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'W3C: Making Audio and Video Media Accessible',
+          url:   'https://www.w3.org/WAI/media/av/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'University of Washington: Creating Accessible Videos',
@@ -20626,33 +20553,28 @@ const videoRules$1 = {
       SUMMARY:               'Captions (Live)',
       TARGET_RESOURCES_DESC: '@video@, @object@ and @embed@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add audio description track to @video@ element without an audio description track.',
-        FAIL_P:   'Add audio description track to each of the %N_F the @video@ elements without audio description tracks.',
-        MANUAL_CHECK_S:     'Verify the @video@ element with is used for prerecorded video with synchronized audio.   If so, verify the video includes an audio description of the video content.',
-        MANUAL_CHECK_P:     'Verify if any of the %N_MC @video@ elements are used for prerecorded video with synchronized audio.   If so, verify each of the videos includes an audio description of the video content.',
-        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+        MANUAL_CHECK_S: 'Verify that the media element has video with synchronized audio, if so verify the video includes captioning.',
+        MANUAL_CHECK_P: 'Verify if any of the %N_MC media elements are video with synchronized audio, if so verify each video includes captioning.',
+        HIDDEN_S:       'The media element that is hidden was not evaluated for captions.',
+        HIDDEN_P:       'The %N_H media elements that are hidden were not evaluated for captions.',
+        NOT_APPLICABLE: 'No media elements found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:         '@video@ element has audio description track.',
-        ELEMENT_FAIL_1:       'Add audio description track to @video@ element.',
-        ELEMENT_MC_1: 'Verify an audio description of the video content is included in the audio track of the video.',
-        ELEMENT_HIDDEN_1:       'The @video@ element is hidden and cannot render content.'
+        ELEMENT_PASS_1: '@%1@ element has caption track.',
+        ELEMENT_MC_1:   'Verify the @%1@ element is used for video with synchronized audio content.   If so, verify the the video includes open captioning or a caption track.',
+        ELEMENT_MC_2:   'Verify the @%1@ element with @video@ in its @type@ attribute is used for video with synchronized audio content.  If so verify the video has open captioning or support a caption track.',
+        ELEMENT_MC_3:   'Verify the @%1@ element is being used for video with synchronized audio content provides open captioning or a caption track.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element is hidden and is not tested for captions.'
       },
       PURPOSES: [
         'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
-        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.',
-        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.'
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'
       ],
       TECHNIQUES: [
-        'Use the @track@ element to add audio descriptions to the video content.',
+        'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
         'Use @aria-describedby@ to reference a text description of the video content.'
       ],
       MANUAL_CHECKS: [
-        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
-        'If there is a audio description make sure the description accurately describes the video content.',
-        'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.TECHNIQUE,
@@ -20687,33 +20609,27 @@ const videoRules$1 = {
       SUMMARY:               'Audio Description (Prerecorded)',
       TARGET_RESOURCES_DESC: '@video@, @object@ and @embed@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Add audio description track to @video@ element without an audio description track.',
-        FAIL_P:   'Add audio description track to each of the %N_F the @video@ elements without audio description tracks.',
-        MANUAL_CHECK_S:     'Verify the @video@ element with is used for prerecorded video with synchronized audio.   If so, verify the video includes an audio description of the video content.',
+        MANUAL_CHECK_S:     'Verify the @video@ element is used for prerecorded video with synchronized audio.   If so, verify the video includes an audio description of the video content.',
         MANUAL_CHECK_P:     'Verify if any of the %N_MC @video@ elements are used for prerecorded video with synchronized audio.   If so, verify each of the videos includes an audio description of the video content.',
-        HIDDEN_S: 'The @video@ element that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H @video@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE:  'No @video@ elements found on this page.'
+        HIDDEN_S: 'The media element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H media elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No media elements found on this page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:         '@video@ element has audio description track.',
-        ELEMENT_FAIL_1:       'Add audio description track to @video@ element.',
-        ELEMENT_MC_1: 'Verify an audio description of the video content is included in the audio track of the video.',
-        ELEMENT_HIDDEN_1:       'The @video@ element is hidden and cannot render content.'
+        ELEMENT_PASS_1: '@%1@ element has audio description track.',
+        ELEMENT_MC_1: 'Verify the @%1@ element is used for video with synchronized audio content.   If so, verify the the video includes audio descriptions.',
+        ELEMENT_MC_2: 'Verify the @%1@ element with @video@ in its @type@ attribute is used for video with synchronized audio content.  If so verify the video has audio descriptions.',
+        ELEMENT_MC_3: 'Verify the @%1@ element is being used for video with synchronized audio content has an audio description.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element is hidden and is not tested for audio descriptions.'
       },
       PURPOSES: [
         'Text and audio descriptions provide a means for people who cannot see the video to understand the video content.',
-        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.',
-        'This rule covers the requirements of both WCAG 2.0 Success Criteria 1.2.3 and 1.2.5, that is why a text description of the video content cannot be used to satisfy this rule.'
-      ],
+        'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'      ],
       TECHNIQUES: [
-        'Use the @track@ element to add audio descriptions to the video content.',
+        'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
         'Use @aria-describedby@ to reference a text description of the video content.'
       ],
       MANUAL_CHECKS: [
-        'When audio descriptions are enabled on the media player, check to make sure the audio description can be heard.',
-        'If there is a audio description make sure the description accurately describes the video content.',
-        'If there is a text description make sure the description accurately describes the video content.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.TECHNIQUE,
@@ -21698,7 +21614,7 @@ messages$1.rules = Object.assign(messages$1.rules, widgetRules$1);
 /* Constants */
 const debug$L = new DebugLogging('locale', false);
 
-var globalUseCodeTags = false;
+var globalUseCodeTags = true;
 
 const messages = {
   en: messages$1
@@ -22195,9 +22111,9 @@ function getBaseResultMessage (msg, msgArgs) {
  * @desc Converts element markup identified in strings with '@' characters will be capitalized text
  *       or encapsulated within a code element.
  *
- * @param {String}   elemStr     - Element result message to convert content inside '@' to caps
+ * @param {String}   elemStr     - Element result message to convert content inside '@' to caps or <code>
  * @param {Boolean}  useCodeTags - If true content between '@' characters will be encapsulated
- *                                 in either a code element or if false or ommitted capitalized
+ *                                 in either a code element or if false or omitted capitalized
  * @return  String
  */
 
@@ -23375,66 +23291,45 @@ const audioRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
-    target_resources    : ['audio', 'track'],
+    target_resources    : ['audio', 'embed', 'object', 'track'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.audioElements.forEach( ae => {
-        const de = ae.domElement;
-        if (de.visibility.isVisibleToAT || ae.hasAutoPlay) {
-          if (ae.tracks.length) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
-      });
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
 
-     dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (de.accDescription.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-          }
-          else {
-            if (oe.type.includes('audio')) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
+        if (me.isAudio || !me.isVideo) {
+          const de = me.domElement;
 
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (de.accDescription.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
-          }
-          else {
-            if (ee.type.includes('audio')) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.tracks.length) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+                }
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              if (de.accDescription.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+              }
+              else {
+                if (me.isAudio) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
+              }
             }
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       });
 
@@ -29282,7 +29177,7 @@ const videoRules = [
   /**
    * @object VIDEO_1
    *
-   * @desc Pre-recorded video only must have
+   * @desc Pre-recorded video only must have description
    */
 
   { rule_id             : 'VIDEO_1',
@@ -29292,76 +29187,51 @@ const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT || ve.hasAutoPlay) {
-          if (ve.tracks.length) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
 
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tagName]);
-            }
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_5', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_6', [de.tagName]);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
 
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasDescriptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tagName]);
+              if (me.isVideo) {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tagName]);
+                }
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_5', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_6', [de.tagName]);
+                }
+              }
+
             }
           }
           else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_5', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_6', [de.tagName]);
-            }
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
       });
 
@@ -29371,7 +29241,7 @@ const videoRules = [
   /**
    * @object VIDEO_2
    *
-   * @desc Live and prerecorded video with synchronized audio (i.e. movie, lecture) using the video element must have captions
+   * @desc Prerecorded video with synchronized audio (i.e. movie, lecture) must have captions
    */
 
   { rule_id             : 'VIDEO_2',
@@ -29381,52 +29251,33 @@ const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.2',
     wcag_related_ids    : ['1.2.4'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasCaptionTrack || ve.hasSubtitleTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasCaptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -29446,51 +29297,33 @@ const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.3',
     wcag_related_ids    : ['1.2.5'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasDescriptionTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+       dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasDescriptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -29510,51 +29343,33 @@ const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.4',
     wcag_related_ids    : ['1.2.2'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasDescriptionTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasCaptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -29574,51 +29389,33 @@ const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.5',
     wcag_related_ids    : ['1.2.3'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasDescriptionTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+       dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasDescriptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -30387,7 +30184,7 @@ const widgetRules = [
                           "insertion",
                           "none",
                           "paragraph",
-                          "presentation",
+                          "none",
                           "strong",
                           "subscript",
                           "superscript"],
@@ -30469,7 +30266,7 @@ const widgetRules = [
         "note",
         "option",
         "paragraph",
-        "presentation",
+        "none",
         "progressbar",
         "radio",
         "radiogroup",
@@ -30820,7 +30617,7 @@ class Rule {
   /**
    * @method getManualCheckProcedures
    *
-   * @desc Gets manual checking proceedures for evaluating the rule
+   * @desc Gets manual checking procedures for evaluating the rule
    *       requirements
    *
    * @return  {Array}  Array of InformationalLinkInfo objects

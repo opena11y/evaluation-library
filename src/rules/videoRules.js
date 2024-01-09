@@ -22,7 +22,7 @@ export const videoRules = [
   /**
    * @object VIDEO_1
    *
-   * @desc Pre-recorded video only must have
+   * @desc Pre-recorded video only must have description
    */
 
   { rule_id             : 'VIDEO_1',
@@ -32,76 +32,51 @@ export const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT || ve.hasAutoPlay) {
-          if (ve.tracks.length) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
 
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tagName]);
-            }
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_5', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_6', [de.tagName]);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
-        }
-      });
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
 
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasDescriptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tagName]);
+              if (me.isVideo) {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_4', [de.tagName]);
+                }
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_5', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_6', [de.tagName]);
+                }
+              }
+
             }
           }
           else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_5', [de.tagName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_6', [de.tagName]);
-            }
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
       });
 
@@ -111,7 +86,7 @@ export const videoRules = [
   /**
    * @object VIDEO_2
    *
-   * @desc Live and prerecorded video with synchronized audio (i.e. movie, lecture) using the video element must have captions
+   * @desc Prerecorded video with synchronized audio (i.e. movie, lecture) must have captions
    */
 
   { rule_id             : 'VIDEO_2',
@@ -121,52 +96,33 @@ export const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.2',
     wcag_related_ids    : ['1.2.4'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasCaptionTrack || ve.hasSubtitleTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasCaptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -186,51 +142,33 @@ export const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.3',
     wcag_related_ids    : ['1.2.5'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasDescriptionTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+       dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasDescriptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -250,51 +188,33 @@ export const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.4',
     wcag_related_ids    : ['1.2.2'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasDescriptionTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasCaptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -314,51 +234,33 @@ export const videoRules = [
     rule_required       : true,
     wcag_primary_id     : '1.2.5',
     wcag_related_ids    : ['1.2.3'],
-    target_resources    : ['embed', 'object', 'video', 'track'],
+    target_resources    : ['embed', 'object', 'track', 'video'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.videoElements.forEach( ve => {
-        const de = ve.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ve.hasDescriptionTrack) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+       dom_cache.mediaInfo.allMediaElements.forEach( me => {
+        if (me.isVideo || !me.isAudio) {
+          const de = me.domElement;
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.hasDescriptionTrack) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+              }
+            }
+            else {
+              if (me.isVideo) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.tagName]);
+              }
+            }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (oe.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (ee.isVideo) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 

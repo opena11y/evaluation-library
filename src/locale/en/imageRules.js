@@ -27,7 +27,7 @@ export const imageRules = {
     },
     PURPOSES: [
       'A text alternative for an image, usually specified with an @alt@ attribute, provides a summary of the purpose of the image for people with visual impairments, enabling them to understand the content or purpose of the image on the page.',
-      'An image with a text alternative that is an empty string or that has @role="presentation"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
+      'An image with a text alternative that is an empty string or that has @role="none"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
     ],
     TECHNIQUES: [
       'A text alternative should summarize the purpose of an image as succinctly as possible (preferably with no more than 100 characters).',
@@ -35,7 +35,7 @@ export const imageRules = {
       'The @aria-labelledby@ attribute can be used to provide a text alternative when an image can be described using text already associated with the image, or for elements with @role="img"@.',
       'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute. Use the @alt@ attribute for @img@ and @area@ elements.',
       'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.',
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
     ],
@@ -118,7 +118,7 @@ export const imageRules = {
       'The @aria-labelledby@ attribute can be used to provide a text alternative when images can be described using text already associated with the image, such as a visible caption, or for elements with @role="img"@.',
       'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute.',
       'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.  NOTE: Using the @title@ attribute will also generate a tooltip in some browsers.',
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
       'Find each image on the page and verify that it is only being used decoratively or is redundant with other information on the page.'
@@ -277,9 +277,9 @@ export const imageRules = {
 
   IMAGE_5: {
     ID:         'Image 5',
-    DEFINITION: 'Images with @[alt=""]@ or @[role="presentation"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
+    DEFINITION: 'Images with @[alt=""]@ or @[role="none"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
     SUMMARY:    'Image is decorative',
-    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="presentation"]@, @[role="img"]@ with an empty text alternative',
+    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="none"]@, @[role="img"]@ with an empty text alternative',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S: 'Verify the image is being used purely for decorative, spacing or styling purposes.',
       MANUAL_CHECK_P: 'Verify the %N_MC images are being used purely for decorative, spacing or styling purposes.',
@@ -298,7 +298,7 @@ export const imageRules = {
       'If an image contains information, but is mistakenly identified as decorative, users of assistive technologies will not have access to the information.'
     ],
     TECHNIQUES: [
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
     ],

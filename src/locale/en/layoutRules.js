@@ -36,7 +36,7 @@ export const layoutRules = {
         'Use CSS and web standards techniques for the coding of content, and the graphical styling and positioning of content.',
         'Avoid using table markup for graphical layout, if you do use tables for layout make sure the content still is meaningful when the table markup is disabled.',
         'Avoid using nested tables for layout, the deeper the level of nesting the more chance there of having a confusing sequence of content.',
-        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="presentation"@ attribute to clearly indicate the table markup is being used for layout.'
+        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="none"@ attribute to clearly indicate the table markup is being used for layout.'
       ],
       MANUAL_CHECKS: [
         'Use browser developer tools to disable table markup or enable a user stylesheet to change table cells to be rendered as block level elements.',
@@ -106,7 +106,7 @@ export const layoutRules = {
         'Use CSS and web standards techniques for the coding of content, and the graphical styling and positioning of content.',
         'Avoid using table markup for graphical layout, if you do use tables for layout make sure the content still is meaningful when the table markup is disabled.',
         'Avoid using nested tables for layout, the deeper the level of nesting the more chance there of having a confusing sequence of content.',
-        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="presentation"@ attribute to clearly indicate the table markup is being used for layout.'
+        'Tables that are used for layout should use only @tr@ and @td@ elements, and the @table@, @tr@ and @td@ elements should have a @role="none"@ attribute to clearly indicate the table markup is being used for layout.'
       ],
       MANUAL_CHECKS: [
       ],

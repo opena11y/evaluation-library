@@ -34,7 +34,7 @@ export const readingOrderRules = {
       'Make sure related content moves as a block when repositioning content on a page.'
     ],
     MANUAL_CHECKS: [
-      'Disable layout tables (e.g. table[role="presentation"]) and CSS to make sure the content rendered has a meaningful sequence.'
+      'Disable layout tables (e.g. table[role="none"]) and CSS to make sure the content rendered has a meaningful sequence.'
     ],
     INFORMATIONAL_LINKS: [
       {
