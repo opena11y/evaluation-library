@@ -248,7 +248,6 @@ export default class RuleResult {
       message = replaceAll(message, "%N_T",  (total + summary.manual_checks).toString());
       message = replaceAll(message, "%N_MC", summary.manual_checks.toString());
       message = replaceAll(message, "%N_H",  summary.hidden.toString());
-      message = transformElementMarkup(message);
     }
     return message;
   }

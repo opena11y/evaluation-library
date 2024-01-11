@@ -26,8 +26,7 @@ import {
   getTechniques,
   getWCAG,
   getWCAGLevel,
-  getWCAGVersion,
-  setUseCodeTags
+  getWCAGVersion
 }  from './locale/locale.js'
 
 import DebugLogging      from './debug.js';
@@ -47,9 +46,6 @@ debug.json = false;
 export default class EvaluationLibrary {
   constructor (codeTags = false) {
     this.constants = new Constants();
-    // setUseCodeTags sets if localized strings using the @ character to identify 
-    // code items in the string return <code> tags or capitalization  
-    setUseCodeTags(codeTags);
   }
 
   /**
@@ -186,11 +182,11 @@ export default class EvaluationLibrary {
 
     ruleInfo.target_resources = rule.target_resources;
 
-    ruleInfo.definition = getRuleDefinition(id);
-    ruleInfo.summary    = getRuleSummary(id);
-    ruleInfo.purposes   = getPurposes(id);
+    ruleInfo.definition = getRuleDefinition(id, true);
+    ruleInfo.summary    = getRuleSummary(id, true);
+    ruleInfo.purposes   = getPurposes(id, true);
 
-    ruleInfo.techniques = getTechniques(id);
+    ruleInfo.techniques = getTechniques(id, true);
     ruleInfo.information_links = getInformationLinks(id);
 
     return ruleInfo;

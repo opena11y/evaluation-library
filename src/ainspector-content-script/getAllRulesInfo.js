@@ -65,6 +65,7 @@ function getGuidelineResults (evalResult) {
     WCAG_GUIDELINE.G_2_2,
     WCAG_GUIDELINE.G_2_3,
     WCAG_GUIDELINE.G_2_4,
+    WCAG_GUIDELINE.G_2_5,
     WCAG_GUIDELINE.G_3_1,
     WCAG_GUIDELINE.G_3_2,
     WCAG_GUIDELINE.G_3_3,

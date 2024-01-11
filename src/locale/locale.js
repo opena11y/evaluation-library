@@ -42,15 +42,13 @@ export {
   getWCAG,
   getWCAGLevel,
   getWCAGVersion,
-  setLocale,
-  setUseCodeTags,
-  transformElementMarkup
+  setLocale
 }
 
 /* Constants */
 const debug = new DebugLogging('locale', false);
 
-var globalUseCodeTags = true;
+// const globalUseCodeTags = true;
 
 export const messages = {
   en: enMessages
@@ -58,19 +56,6 @@ export const messages = {
 
 // Default language is 'en' for English
 var locale = 'en';
-
-/**
- * @function setUseCodeTags
- *
- * @desc Set the global default for transformating markup with code segments
- *       identified with opening and closing '@' characters
- *
- * @param {Boolen} value - If true use code tags
- */
-
-function setUseCodeTags(value=false) {
-  globalUseCodeTags = (value === true) ? true : false;
-}
 
 /**
  * @function getWCAG
@@ -440,13 +425,16 @@ function getRuleId (ruleId) {
  * @desc Gets a localize string for a rule definition
  *
  * @param {String} ruleId - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {String} see @desc
  */
 
-function getRuleDefinition (ruleId) {
+function getRuleDefinition (ruleId, transform=false) {
   debug.flag && debug.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
-  return transformElementMarkup(messages[locale].rules[ruleId].DEFINITION);
+  let m = messages[locale].rules[ruleId].DEFINITION;
+  if (transform) m = transformToCode(m);
+  return m;
 }
 
 /**
@@ -454,14 +442,17 @@ function getRuleDefinition (ruleId) {
  *
  * @desc Gets a localize string for a rule summary
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String}  ruleId    - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {String} see @desc
  */
 
-function getRuleSummary (ruleId) {
+function getRuleSummary (ruleId, transform=false) {
   debug.flag && debug.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
-  return transformElementMarkup(messages[locale].rules[ruleId].SUMMARY);
+  let m = messages[locale].rules[ruleId].SUMMARY;
+  if (transform) m = transformToCode(m);
+  return m;
 }
 
 /**
@@ -469,14 +460,17 @@ function getRuleSummary (ruleId) {
  *
  * @desc Gets a description of the target resources
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String}  ruleId    - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {String} see @desc
  */
 
-function getTargetResourcesDesc (ruleId) {
+function getTargetResourcesDesc (ruleId, transform=false) {
   debug.flag && debug.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
-  return transformElementMarkup(messages[locale].rules[ruleId].TARGET_RESOURCES_DESC);
+  let m = messages[locale].rules[ruleId].TARGET_RESOURCES_DESC;
+  if (transform) m = transformToCode(m);
+  return m;
 }
 
 /**
@@ -484,15 +478,17 @@ function getTargetResourcesDesc (ruleId) {
  *
  * @desc Gets an array of localized strings describing the purpose of the rule
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String} ruleId     - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {Array of Strings} see @desc
  */
 
-function getPurposes (ruleId) {
+function getPurposes (ruleId, transform=false) {
   const purposes = [];
   messages[locale].rules[ruleId].PURPOSES.forEach ( p => {
-    purposes.push(transformElementMarkup(p));
+    if (transform) p = transformToCode(p);
+    purposes.push(p);
   })
   debug.flag && debug.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
   return purposes;
@@ -503,15 +499,17 @@ function getPurposes (ruleId) {
  *
  * @desc Gets an array of localized strings describing the techniques to implement the rule requirements
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String}  ruleId    - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {Array of Strings} see @desc
  */
 
-function getTechniques (ruleId) {
+function getTechniques (ruleId, transform=false) {
   const techniques = [];
   messages[locale].rules[ruleId].TECHNIQUES.forEach ( t => {
-    techniques.push(transformElementMarkup(t));
+    if (transform) t = transformToCode(t);
+    techniques.push(t);
   })
   debug.flag && debug.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
   return techniques;
@@ -527,17 +525,18 @@ function getTechniques (ruleId) {
  *       'url' : String
  *
  * @param {String} ruleId - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {Array} see @desc
  */
 
-function getInformationLinks (ruleId) {
+function getInformationLinks (ruleId, transform=false) {
   const infoLinks = [];
   messages[locale].rules[ruleId].INFORMATIONAL_LINKS.forEach( infoLink => {
     infoLinks.push(
       {
         type: infoLink.type,
-        title: transformElementMarkup(infoLink.title),
+        title: transform ? transformToCode(infoLink.title) : infoLink.title,
         url: infoLink.url
       }
     );
@@ -552,15 +551,17 @@ function getInformationLinks (ruleId) {
  *
  * @desc Gets an array of localized strings describing manual checks for verifying rule requirements
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String}  ruleId    - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {Array of Strings} see @desc
  */
 
-function getManualChecks (ruleId) {
+function getManualChecks (ruleId, transform=false) {
   const manualChecks = [];
   messages[locale].rules[ruleId].MANUAL_CHECKS.forEach ( mc => {
-    manualChecks.push(transformElementMarkup(mc));
+    if (transform) mc = transformToCode(mc);
+    manualChecks.push(mc);
   })
   debug.flag && debug.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
   return manualChecks;
@@ -571,16 +572,17 @@ function getManualChecks (ruleId) {
  *
  * @desc Gets an array of localized strings for rule results
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String}  ruleId    - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {Array of Strings} see @desc
  */
 
-function getRuleResultMessages (ruleId) {
+function getRuleResultMessages (ruleId, transform=false) {
   const resultMessages = {};
   const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
   for ( const key in msgs ) {
-    resultMessages[key] = transformElementMarkup(msgs[key]);
+    resultMessages[key] = transform ? transformToCode(msgs[key]) : msgs[key];
     debug.flag && debug.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
@@ -591,16 +593,17 @@ function getRuleResultMessages (ruleId) {
  *
  * @desc Gets an array of localized strings for element results
  *
- * @param {String} ruleId - String id associated with the rule
+ * @param {String}  ruleId    - String id associated with the rule
+ * @param {Boolean} transform - Transform @ to <code> tags
  *
  * @returns {Array of Strings} see @desc
  */
 
-function getBaseResultMessages (ruleId) {
+function getBaseResultMessages (ruleId, transform=false) {
   const resultMessages = {};
   const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
   for ( const key in msgs ) {
-    resultMessages[key] = transformElementMarkup(msgs[key]);
+    resultMessages[key] = transform ? transformToCode(msgs[key]) : msgs[key];
     debug.flag && debug.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
   }
   return resultMessages;
@@ -632,38 +635,7 @@ function getBaseResultMessage (msg, msgArgs) {
     }
     message = message.replace(argId, arg);
   });
-  return transformElementMarkup(message);
-}
-
-/**
- * @function transformElementMarkup
- *
- * @desc Converts element markup identified in strings with '@' characters will be capitalized text
- *       or encapsulated within a code element.
- *
- * @param {String}   elemStr     - Element result message to convert content inside '@' to caps or <code>
- * @param {Boolean}  useCodeTags - If true content between '@' characters will be encapsulated
- *                                 in either a code element or if false or omitted capitalized
- * @return  String
- */
-
-function transformElementMarkup (elemStr, useCodeTags=globalUseCodeTags) {
-  let newStr = "";
-  let transform_flag = false;
-
-  if (typeof elemStr === 'string') {
-    for (let c of elemStr) {
-      if (c === '@') {
-        transform_flag = !transform_flag;
-        if (useCodeTags) {
-          newStr += (transform_flag ? '<code>' : '</code>');
-        }
-        continue;
-      }
-      newStr += (transform_flag && !useCodeTags) ? c.toUpperCase() : c;
-    }
-  }
-  return newStr;
+  return message;
 }
 
 function getHasManualChecks (ruleId) {
@@ -728,4 +700,31 @@ function getWCAGVersion (primaryId) {
   return 'WCAG20';
 }
 
+function transformToCode (content) {
+
+  let c = '';
+  let i = content.indexOf('@');
+  let j = 0;
+
+  while (i >= 0) {
+    c += content.substring(j, i);
+
+    j = content.indexOf('@', (i+1));
+    if (j < 0) {
+      j = content.length - 1;
+    }
+    c += '<code>';
+    c += content.substring(i+1, j);
+    c += '</code>';
+    j += 1;
+
+    i = content.indexOf('@', j);
+  }
+
+  if (j < content.length) {
+    c += content.substring(j);
+  }
+
+  return c;
+}
 
