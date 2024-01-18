@@ -40,45 +40,47 @@ export const tableRules = [
     dom_cache.tableInfo.allTableElements.forEach(te => {
       te.cells.forEach( cell => {
         const de = cell.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (cell.isHeader) {
-            if (!de.accName.name) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
-            }
-          }
-          else {
-            if (de.accName.name) {
-              const headerCount = cell.headers.length;
-              const headerStr = cell.headers.join (' | ');
-              if (headerCount) {
-                if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
-                  if (headerCount === 1) {
-                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, headerStr]);
-                  }
-                  else {
-                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName, headerCount, headerStr]);
-                  }
-                }
-                else {
-                  if (headerCount === 1) {
-                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName, headerStr]);
-                  }
-                  else {
-                    rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.elemName, headerCount, headerStr]);
-                  }
-                }
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+        if ((de.role === 'cell') || (de.role === 'gridcell')) {
+          if (de.visibility.isVisibleToAT) {
+            if (cell.isHeader) {
+              if (!de.accName.name) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
               }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+              if (de.accName.name) {
+                const headerCount = cell.headers.length;
+                const headerStr = cell.headers.join (' | ');
+                if (headerCount) {
+                  if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
+                    if (headerCount === 1) {
+                      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, headerStr]);
+                    }
+                    else {
+                      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName, headerCount, headerStr]);
+                    }
+                  }
+                  else {
+                    if (headerCount === 1) {
+                      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', [de.elemName, headerStr]);
+                    }
+                    else {
+                      rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_4', [de.elemName, headerCount, headerStr]);
+                    }
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+                }
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+              }
             }
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       });
     });
@@ -137,28 +139,30 @@ export const tableRules = [
 
     dom_cache.tableInfo.allTableElements.forEach(te => {
       const de = te.domElement;
-      if (de.visibility.isVisibleToAT) {
-        if ((te.tableType === TABLE_TYPE.DATA) || (te.tableType === TABLE_TYPE.COMPLEX)) {
-          if (de.accDescription.name) {
-            if (de.accDescription.source === 'aria-describedby') {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+      if ((de.role === 'cell') || (de.role === 'gridcell')) {
+        if (de.visibility.isVisibleToAT) {
+          if ((te.tableType === TABLE_TYPE.DATA) || (te.tableType === TABLE_TYPE.COMPLEX)) {
+            if (de.accDescription.name) {
+              if (de.accDescription.source === 'aria-describedby') {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
-            }
-          }
-          else {
-            if (te.tableType === TABLE_TYPE.DATA){
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+              if (te.tableType === TABLE_TYPE.DATA){
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+              }
             }
           }
         }
-      }
-      else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+        }
       }
     });
   } // end validation function
@@ -347,37 +351,37 @@ export const tableRules = [
   validate          : function (dom_cache, rule_result) {
     dom_cache.tableInfo.allTableElements.forEach(te => {
       const de = te.domElement;
-      if (te.tableType > TABLE_TYPE.DATA) {
-        if (de.visibility.isVisibleToAT) {
-          te.cells.forEach( cell => {
-            const cde = cell.domElement;
-            if (cde.visibility.isVisibleToAT) {
-              if (!cell.isHeader &&
-                 ((cell.rowSpan > 1) || (cell.columnSpan > 1))) {
-                if (cell.headerSource === HEADER_SOURCE.HEADERS_ATTR) {
-                  if (cell.headers.length == 1) {
-                    rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_1', [cell.headers[0]]);
+        if (te.tableType > TABLE_TYPE.DATA) {
+          if (de.visibility.isVisibleToAT) {
+            te.cells.forEach( cell => {
+              const cde = cell.domElement;
+              if (cde.visibility.isVisibleToAT) {
+                if (!cell.isHeader &&
+                   ((cell.rowSpan > 1) || (cell.columnSpan > 1))) {
+                  if (cell.headerSource === HEADER_SOURCE.HEADERS_ATTR) {
+                    if (cell.headers.length == 1) {
+                      rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_1', [cell.headers[0]]);
+                    }
+                    else {
+                      rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_2', [cell.headers.length, cell.headers.join(' | ')]);
+                    }
                   }
                   else {
-                    rule_result.addElementResult(TEST_RESULT.PASS, cde, 'ELEMENT_PASS_2', [cell.headers.length, cell.headers.join(' | ')]);
-                  }
-                }
-                else {
-                  if (cell.hasContent) {
-                    rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+                    if (cell.hasContent) {
+                      rule_result.addElementResult(TEST_RESULT.FAIL, cde, 'ELEMENT_FAIL_1', [cde.elemName]);
+                    }
                   }
                 }
               }
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, cde, 'ELEMENT_HIDDEN_2', [cde.elemName]);
-            }
-          });
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, cde, 'ELEMENT_HIDDEN_2', [cde.elemName]);
+              }
+            });
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
-      }
     });
   }
 },

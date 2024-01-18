@@ -941,7 +941,7 @@ export const controlRules = [
         }
       }
       else {
-        if (de.isInteractive && (de.ariaInfo.equiredParents.length === 0)) {
+        if (de.isInteractive && (de.ariaInfo.requiredParents.length === 0)) {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
           }
