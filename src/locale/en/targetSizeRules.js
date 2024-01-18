@@ -275,7 +275,7 @@ export const targetSizeRules = {
         'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
       ],
       TECHNIQUES: [
-        'Use CSS to increase the dimensions of the radio buttons or checkbox or the associated label elements to at least 24 by 24 pixels.'
+        'Use CSS to increase the dimensions of the radio buttons and/or checkbox or the associated label elements to at least 24 by 24 pixels.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -335,7 +335,7 @@ export const targetSizeRules = {
         'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
       ],
       TECHNIQUES: [
-        'Use CSS to increase the dimensions of the radio buttons or checkbox or the associated label elements to at least 44 by 44 pixels.'
+        'Use CSS to increase the dimensions of the radio buttons and/or checkbox or the associated label elements to at least 44 by 44 pixels.'
       ],
       MANUAL_CHECKS: [
       ],

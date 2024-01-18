@@ -13,10 +13,10 @@ export const helpRules = {
         SUMMARY:               'Consistent ordering of help',
         TARGET_RESOURCES_DESC: 'Pages in a website',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if a page contains help or contact information and if it does, it\'s order on the page.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through inspection of the page if the ordering requirements have been met.',
+          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if a page contains help or contact information and if it does, it\'s order on the page.  Verification requires understanding the requirements, determining if the the requirement applies to a page and then verifying through inspection of the page if the ordering requirements have been met.',
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'Verify the consistent ordering of help and contact information on web pages within a website.',
+          PAGE_MC_1: 'The evaluation library can not automatically determine if a page contains help or contact information and if it does, it\'s order on the page.  Verification requires understanding the requirements, determining if the the requirement applies to a page and then verifying through inspection of the page if the ordering requirements have been met.',
         },
         PURPOSES: [
           'The intent of this Success Criterion is to ensure users can find help for completing tasks on a Web site, when it is available. When the placement of the help mechanism is kept consistent across a set of pages, users looking for help will find it easier to identify. This is distinct from interface-level help, such as contextual help, features like spell checkers, and instructional text in a form. ',

@@ -29,7 +29,7 @@ export const helpRules = [
   { rule_id             : 'HELP_1',
     last_updated        : '2023-12-03',
     rule_scope          : RULE_SCOPE.WEBSITE,
-    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,
     wcag_primary_id     : '3.2.6',
     wcag_related_ids    : [],

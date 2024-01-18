@@ -19,8 +19,8 @@ export const pointerRules = {
           PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by multi-touch or tracing a path with a pointer, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the requirements apply to this page or the exception is met.',
         },
         PURPOSES: [
-          'Alternatives to multi-touch and path specific movements is required to ensure that content can be controlled with a range of pointing devices, abilities, and assistive technologies. Some people cannot perform gestures in a precise manner, or they may use a specialized or adapted input device such as a head pointer, eye-gaze system, or speech-controlled mouse emulator. Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.',
-          'A path-based gesture involves an interaction where not just the endpoints matter. If going through an intermediate point (usually near the start of the gesture) also affects its meaning then it is a path-based gesture. The user engages a pointer (starting point), carries out a movement that goes through at least one intermediate-point before disengaging the pointer (end point). The intermediate point defines the gesture as requiring a specific path, even if the complete path is not defined.'
+          'Some people cannot perform gestures in a precise manner, or they may use a specialized or adapted input device such as a head pointer, eye-gaze system, or speech-controlled mouse emulator.',
+          'Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.'
         ],
         TECHNIQUES: [
           'Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. User interface controls offer the operation using plus and minus buttons to zoom in and out. ',
@@ -103,10 +103,10 @@ export const pointerRules = {
         SUMMARY:               'Dragging Movements',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
+          MANUAL_CHECK_S: 'The evaluation library cannot automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
+          PAGE_MC_1: 'The evaluation library cannot automatically determine if any dragging operations exist on a page and if they do if the operation can be completed with a single pointer without dragging.  Verification requires understanding the requirements to see if they apply to the page and if they do interacting with the page with a single pointer to verify the requirement is met or that essential exception applies.'
         },
         PURPOSES: [
           'Users who struggle with performing dragging movements can still operate an interface with a pointer interface.'

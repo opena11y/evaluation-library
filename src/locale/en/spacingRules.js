@@ -29,7 +29,7 @@ export const spacingRules = {
           'Range: Spacing following paragraphs to at least 2 times the font size.',
           'Range: Letter spacing (tracking) to at least 0.12 times the font size.',
           'Range: Word spacing to at least 0.16 times the font size.',
-          ''
+          'Test: Use a browser extension or bookmrklet to test your content.'
         ],
         MANUAL_CHECKS: [
         ],

@@ -139,30 +139,28 @@ export const tableRules = [
 
     dom_cache.tableInfo.allTableElements.forEach(te => {
       const de = te.domElement;
-      if ((de.role === 'cell') || (de.role === 'gridcell')) {
-        if (de.visibility.isVisibleToAT) {
-          if ((te.tableType === TABLE_TYPE.DATA) || (te.tableType === TABLE_TYPE.COMPLEX)) {
-            if (de.accDescription.name) {
-              if (de.accDescription.source === 'aria-describedby') {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
-              }
+      if (de.visibility.isVisibleToAT) {
+        if ((te.tableType === TABLE_TYPE.DATA) || (te.tableType === TABLE_TYPE.COMPLEX)) {
+          if (de.accDescription.name) {
+            if (de.accDescription.source === 'aria-describedby') {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName]);
             }
             else {
-              if (te.tableType === TABLE_TYPE.DATA){
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
-              }
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.elemName]);
+            }
+          }
+          else {
+            if (te.tableType === TABLE_TYPE.DATA){
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
             }
           }
         }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
       }
     });
   } // end validation function

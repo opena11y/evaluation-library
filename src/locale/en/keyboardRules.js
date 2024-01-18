@@ -218,7 +218,7 @@ export const keyboardRules = {
   KEYBOARD_5: {
       ID:                    'Keyboard 5',
       DEFINITION:            'The element with keyboard focus must have a visible focus style that is different from the non-focus state.',
-      SUMMARY:               'Focus must be visible',
+      SUMMARY:               'Focus must be discernible',
       TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements and elements with widget roles with @tabindex@ values',
       RULE_RESULT_MESSAGES: {
         MANUAL_CHECK_S:     'Use the "tab" key to move focus between links, form controls, embedded apps and widgets and check the visibility of focus styling for each element as it receives focus.',
@@ -316,10 +316,10 @@ export const keyboardRules = {
         SUMMARY:               'Content on Hover or Focus',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {
-          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
+          MANUAL_CHECK_S:  'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining if the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining of the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
+          PAGE_MC_1: 'The evaluation library can not automatically determine if content becomes visible and then hidden based on pointer or keyboard actions.  Verification requires understanding the requirements, determining if the the requirement applies to a page and then verifying through interaction with the page if the requirements have been met.'
         },
         PURPOSES: [
           'Users with low vision who view content under magnification will be better able to view content on hover or focus without reducing their desired magnification.',
@@ -352,7 +352,7 @@ export const keyboardRules = {
   },
   KEYBOARD_8: {
         ID:                    'Keyboard 8',
-        DEFINITION:            'If a web page can be navigated sequentially and the navigation sequences affect meaning or operation, focusable components receive focus in an order that preserves meaning and operability.',
+        DEFINITION:            'Focusable components receive focus in an order that preserves their meaning and operability.',
         SUMMARY:               'Focus Order',
         TARGET_RESOURCES_DESC: 'Page',
         RULE_RESULT_MESSAGES: {

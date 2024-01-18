@@ -471,7 +471,7 @@ export const imageRules = {
   IMAGE_8: {
     ID:         'Image 8',
     DEFINITION: 'When an image is used to represent stylized text, replace the image with text content and use CSS to style text.',
-    SUMMARY:    'Use CSS to stylize text',
+    SUMMARY:    'Images of text',
     TARGET_RESOURCES_DESC: '@img@ and [role="img"]',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S:   'If the image is used to stylize text, replace the image with text content styled with CSS.',

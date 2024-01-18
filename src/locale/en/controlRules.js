@@ -872,7 +872,7 @@ export const controlRules = {
 
     CONTROL_16: {
         ID:                    'Control 16',
-        DEFINITION:            'Use @autocomplete@ attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions.',
+        DEFINITION:            'Use @autocomplete@ attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions related to gaming, security or data validity.',
         SUMMARY:               'Redundant Entry',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
@@ -895,10 +895,7 @@ export const controlRules = {
         ],
         TECHNIQUES: [
           'Add an @autocomplete@ attribute to the form control that would support auto-populating the form control from previously entered information.',
-          'There are many other programmatic techniques to support auto-population, that are too numerous to discuss here.',
-          'EXCEPTION: Essential uses of input re-entry for things like memory games which would be invalidated if the previous answers were supplied.',
-          'EXCEPTION: Security measures such as preventing a password string from being shown or copied. When creating a password, it should be a unique and complex string and therefore cannot be validated by the author. If the system requires the user to manually create a password that is not displayed, having users re-validate their new string is allowed as an exception.',
-          'EXCEPTION: When the previously entered information is no longer valid, it can be requested that the user enter that information again.'
+          'There are many other programmatic techniques to support auto-population, including but not limited to the use of cookies, HTTP session variables and server side stored information.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -920,7 +917,7 @@ export const controlRules = {
 
   CONTROL_17: {
       ID:                    'Control 17',
-      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the controls when label encapsulation is used for labeling.',
+      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the controls when only label encapsulation is used for labeling.',
       SUMMARY:               'Avoid label encapsulation',
       TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
       RULE_RESULT_MESSAGES: {

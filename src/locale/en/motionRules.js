@@ -19,7 +19,6 @@ export const motionRules = {
           PAGE_MC_1: 'The evaluation can not automatically determine if their is any functionality activated by motion, but there is scripting on the page so it is possible.  Please review the WCAG requirements for accessibility and determine if the motions requirements apply to this page or if one of the exceptions is met.',
         },
         PURPOSES: [
-          'The intent of this success criterion is to ensure that functions triggered by moving a device (for example, shaking or tilting) or by gesturing towards the device (so that sensors like a camera can pick up and interpret the gesturing), can also be operated by more conventional user interface components.',
           'Alternatives to motion activation helps people who may be unable to perform particular motions (such as tilting, shaking, or gesturing) because the device may be mounted or users may be physically unable to perform the necessary movement. This success criterion ensures that users can still operate all functionality by other means such as touch or via assistive technologies. ',
           'All users benefit when they are in situations where they are unable to move their devices.'
         ],
