@@ -23,11 +23,11 @@ export const pointerRules = {
           'Some pointing methods lack the capability or accuracy to perform multipoint or path-based gestures.'
         ],
         TECHNIQUES: [
-          'Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. User interface controls offer the operation using plus and minus buttons to zoom in and out. ',
-          'Example: A web site includes a map view that supports the pinch gesture to zoom into the map content. As an single-pointer alternative, the map also allows users to double-tap, hold, and then move the pointer up or down to zoom in or out. ',
-          'Example: A news site has a horizontal content slider with hidden news teasers that can moved into the viewport via a fast horizontal swipe/flicking motion. It also offers forward and backward arrow buttons for single-point activation to navigate to adjacent slider content. ',
-          'Example: A kanban widget with several vertical areas representing states in a defined process allows the user to right- or left-swipe elements to move them to an adjacent silo. The user can also accomplish this by selecting the element with a single tap or click, and then activating an arrow button to move the selected element. ',
-          'Example: A custom slider requires movement in a strict left/right direction when operated by dragging the thumb control. Buttons on both sides of the slider increment and decrement the selected value and update the thumb position. '        ],
+          '^Example:^ A web site includes a map view that supports the pinch gesture to zoom into the map content. User interface controls offer the operation using plus and minus buttons to zoom in and out. ',
+          '^Example:^ A web site includes a map view that supports the pinch gesture to zoom into the map content. As an single-pointer alternative, the map also allows users to double-tap, hold, and then move the pointer up or down to zoom in or out. ',
+          '^Example:^ A news site has a horizontal content slider with hidden news teasers that can moved into the viewport via a fast horizontal swipe/flicking motion. It also offers forward and backward arrow buttons for single-point activation to navigate to adjacent slider content. ',
+          '^Example:^ A kanban widget with several vertical areas representing states in a defined process allows the user to right- or left-swipe elements to move them to an adjacent silo. The user can also accomplish this by selecting the element with a single tap or click, and then activating an arrow button to move the selected element. ',
+          '^Example:^ A custom slider requires movement in a strict left/right direction when operated by dragging the thumb control. Buttons on both sides of the slider increment and decrement the selected value and update the thumb position. '        ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
@@ -68,12 +68,12 @@ export const pointerRules = {
           'Individuals who are unable to detect changes of context are less likely to become disoriented while navigating a site. '
         ],
         TECHNIQUES: [
-          'No Down-Event: The down-event of the pointer is not used to execute any part of the function',
-          'Abort or Undo: Completion of the function is on the up-event, and a mechanism is available to abort the function before completion or to undo the function after completion.',
-          'Up Reversal: The up-event reverses any outcome of the preceding down-event.',
-          'Essential: Completing the function on the down-event is essential.',
-          'Example: For interface elements that have a single tap or long press as input, the corresponding event is triggered when the finger is lifted inside that element. ',
-          'Example: A drag-and-drop interface allows users to sort vertically stacked cards by picking up one card with the pointer (down-event), move it to a new position, and insert it at the new location when the pointer is released (up-event). Releasing the pointer outside the drop target area reverts the action, i.e., it moves the card back to the old position before the interaction started.'
+          '^No Down-Event:^ The down-event of the pointer is not used to execute any part of the function',
+          '^Abort or Undo:^ Completion of the function is on the up-event, and a mechanism is available to abort the function before completion or to undo the function after completion.',
+          '^Up Reversal:^ The up-event reverses any outcome of the preceding down-event.',
+          '^Essential:^ Completing the function on the down-event is essential.',
+          '^Example:^ For interface elements that have a single tap or long press as input, the corresponding event is triggered when the finger is lifted inside that element. ',
+          '^Example:^ A drag-and-drop interface allows users to sort vertically stacked cards by picking up one card with the pointer (down-event), move it to a new position, and insert it at the new location when the pointer is released (up-event). Releasing the pointer outside the drop target area reverts the action, i.e., it moves the card back to the old position before the interaction started.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -112,12 +112,12 @@ export const pointerRules = {
           'Users who struggle with performing dragging movements can still operate an interface with a pointer interface.'
         ],
         TECHNIQUES: [
-          'Example: A map allows users to drag the view of the map around, and the map has up/down/left/right buttons to move the view as well.',
-          'Example: A sortable list of elements may, after tapping or clicking on a list element, provide adjacent controls for moving the element up or down in the list by simply tapping or clicking on those controls.',
-          'Example: A taskboard that allows users to drag and drop items between columns also provides an additional pop-up menu after tapping or clicking on items for moving the selected element to another column by tapping or clicking on pop-up menu entries.',
-          'Example: A radial control widget (color wheel) where the value can be set by dragging the marker for the currently selected color to another position, also allows picking another color value by tapping or clicking on another place in the color wheel.',
-          'Example: A linear slider control widget, where the value can be set by dragging the visual indicator (thumb) showing the current value, allows tapping or clicking on any point of the slider track to change the value and set the thumb to that position.',
-          'Example: A widget where you can drag a gift to one person in a photo of a group of people also has a menu alternative where users can select the person that should receive the gift from the menu.'
+          '^Example:^ A map allows users to drag the view of the map around, and the map has up/down/left/right buttons to move the view as well.',
+          '^Example:^ A sortable list of elements may, after tapping or clicking on a list element, provide adjacent controls for moving the element up or down in the list by simply tapping or clicking on those controls.',
+          '^Example:^ A taskboard that allows users to drag and drop items between columns also provides an additional pop-up menu after tapping or clicking on items for moving the selected element to another column by tapping or clicking on pop-up menu entries.',
+          '^Example:^ A radial control widget (color wheel) where the value can be set by dragging the marker for the currently selected color to another position, also allows picking another color value by tapping or clicking on another place in the color wheel.',
+          '^Example:^ A linear slider control widget, where the value can be set by dragging the visual indicator (thumb) showing the current value, allows tapping or clicking on any point of the slider track to change the value and set the thumb to that position.',
+          '^Example:^ A widget where you can drag a gift to one person in a photo of a group of people also has a menu alternative where users can select the person that should receive the gift from the menu.'
         ],
         MANUAL_CHECKS: [
         ],

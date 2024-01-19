@@ -23,9 +23,9 @@ export const helpRules = {
           'ocating the help mechanism in a consistent location across pages makes it easier for users to find it.'
         ],
         TECHNIQUES: [
-          'Example: On-line job application: Some of the application questions may be hard for new job seekers to understand even after reading the contextual help. For example, the form may request their identification number, but they may have several and not know which one to enter. Consistently located contact information will enable them to use phone or email so they can get an answer to their question. ',
-          'Example: Medical appointment scheduling form: When the service a patient is trying to book is not easily findable within the interface, they may need human help. A consistently located messaging option (chat client) enables them to quickly interact with a staff person that can help, without requiring them to manage a second interface. ',
-          'Example: Finding a specific policy or procedure: An employee who needs to complete a work task may have difficulty locating the specific policy or procedure document on their employer\'s Web site. A consistently located "How Do I" page may include the information that enables them to independently complete this task. '
+          '^Example:^ On-line job application: Some of the application questions may be hard for new job seekers to understand even after reading the contextual help. For example, the form may request their identification number, but they may have several and not know which one to enter. Consistently located contact information will enable them to use phone or email so they can get an answer to their question. ',
+          '^Example:^ Medical appointment scheduling form: When the service a patient is trying to book is not easily findable within the interface, they may need human help. A consistently located messaging option (chat client) enables them to quickly interact with a staff person that can help, without requiring them to manage a second interface. ',
+          '^Example:^ Finding a specific policy or procedure: An employee who needs to complete a work task may have difficulty locating the specific policy or procedure document on their employer\'s Web site. A consistently located "How Do I" page may include the information that enables them to independently complete this task. '
         ],
         MANUAL_CHECKS: [
         ],

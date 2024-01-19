@@ -166,11 +166,6 @@ export const navigationRules = {
         'If landmarks have labels, use consistent labeling of the landmarks across all pages within the website.'
       ],
       MANUAL_CHECKS: [
-        'Verify that the main content of the page is contained within the @main@ landmark.',
-        'Verify that recurring content at the top of each page is contained within a @banner@ landmark.',
-        'Verify that website navigational links are contained within @navigation@ landmarks.',
-        'Verify that recurring content at the bottom of each page is contained within a @contentinfo@ landmark.',
-        'Verify that if a landmark has a label and there are comparable landmarks on other pages in the website, the labels are the same on each page.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,

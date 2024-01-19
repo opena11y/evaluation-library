@@ -173,7 +173,7 @@ export const tableRules = {
       TECHNIQUES: [
         'Use the  @aria-describedby@ attribute to provide a reference to an accessible description of the information in a data table.',
         'Use the  @title@ attribute to provide a accessible description of the information in a data table.',
-        'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or descriptions.'
+        '^Note:^ The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or descriptions.'
       ],
       MANUAL_CHECKS: [
         'Verify the content of the accessible description accurately summarizes the organization, numerical information in the table or authors intended conclusions from viewing the table.'
@@ -224,10 +224,9 @@ export const tableRules = {
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @title@ attribute to provide an accessible name for a data table.',
         'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.',
-        'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
+        '^Note:^ The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
       ],
       MANUAL_CHECKS: [
-        'Verify the accessible names for tables are unique and identify the content in the data tables.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -309,8 +308,6 @@ export const tableRules = {
         'Layout tables must only use the @tr@ and @td@ table elements for layout content and must NOT have an accessible name or description.'
       ],
       MANUAL_CHECKS: [
-        'If a table is used for layout verify the order of content still makes sense when the table markup is disabled.',
-        'If a table is used for data tables, verify the each data cell has header cells that clearly identify the meaning of the content of the data cell.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -374,7 +371,6 @@ export const tableRules = {
         'Use @th@ element for cells used as header cells in the table.'
       ],
       MANUAL_CHECKS: [
-        'Verify the each data cell has header cells that clearly identify the meaning of the content of the data cell.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -430,8 +426,6 @@ export const tableRules = {
         'Use @headers@ attribute on each @td@ element used as a data cell to identify header information in complex data tables.'
       ],
       MANUAL_CHECKS: [
-        'Verify the each data cell has header cells that clearly identify the meaning of the content of the data cell.',
-        'Verify that empty @td@ and @th@ elements and does not need table headers.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -480,11 +474,9 @@ export const tableRules = {
       TECHNIQUES: [
         'Accessible name is typically defined using the @caption@ element, but the @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
         'Accessible description is typically defined using the @aria-describedby@ attribute, but the @title@ attribute can also be used.',
-        'NOTE: The @summary@ attribute is no longer supported in HTML.'
+        '^Note:^ The @summary@ attribute is no longer supported in HTML.'
       ],
       MANUAL_CHECKS: [
-        'Verify the accessible name clearly identifies the purpose of the table.',
-        'Verify the description summarizes the content of the table.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,

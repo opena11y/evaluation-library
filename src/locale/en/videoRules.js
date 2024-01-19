@@ -189,7 +189,7 @@ export const videoRules = {
       TECHNIQUES: [
         'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
         'Use @aria-describedby@ to reference a text description of the video content.',
-        'NOTE: Audio descriptions are preferred over other alternatives since WCAG Success Criteria 1.2.5 (AA) requires the use of audio descriptions and legal requirements for accessibility include WCAG AA requirements.'
+        '^Note:^ Audio descriptions are preferred over other alternatives since WCAG Success Criteria 1.2.5 (AA) requires the use of audio descriptions and legal requirements for accessibility include WCAG AA requirements.'
       ],
       MANUAL_CHECKS: [
       ],

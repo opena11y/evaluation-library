@@ -29,9 +29,6 @@ export const titleRules = {
           'If the page is part of a sequence of web pages, include the sequence number and total number of steps in the @title@ element.'
         ],
         MANUAL_CHECKS: [
-          'If applicable, verify that the title of the page identifies the website to which it belongs.',
-          'Verify that the title of the page also identifies the page content.',
-          'If the page is part of a sequence of web pages, verify that the title describes which step it is in the sequence.'
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,

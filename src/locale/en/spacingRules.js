@@ -25,11 +25,11 @@ export const spacingRules = {
         ],
         TECHNIQUES: [
           'This requirement does not require authors to set any of their content to a specified metric, nor does it intend to imply that all users will adjust the specified metrics. Rather, it specifies that should a user choose to set any of these metrics they can do so without any loss of content or functionality. The author requirement is both to not interfere with a user\'s ability to override the author settings, and to ensure that modified content is not visually distorted within the adjustment ranges of the requirement.',
-          'Range: Line height (line spacing) to at least 1.5 times the font size.',
-          'Range: Spacing following paragraphs to at least 2 times the font size.',
-          'Range: Letter spacing (tracking) to at least 0.12 times the font size.',
-          'Range: Word spacing to at least 0.16 times the font size.',
-          'Test: Use a browser extension or bookmrklet to test your content.'
+          '^Range:^ Line height (line spacing) to at least 1.5 times the font size.',
+          '^Range:^ Spacing following paragraphs to at least 2 times the font size.',
+          '^Range:^ Letter spacing (tracking) to at least 0.12 times the font size.',
+          '^Range:^ Word spacing to at least 0.16 times the font size.',
+          '^Test:^ Use a browser extension or bookmrklet to test your content.'
         ],
         MANUAL_CHECKS: [
         ],

@@ -23,11 +23,11 @@ export const motionRules = {
           'All users benefit when they are in situations where they are unable to move their devices.'
         ],
         TECHNIQUES: [
-          'Example: A user can choose an application setting which turns off Shake to Undo and other motion-activated features. ',
-          'Example: After text is input in a field, shaking a device shows a dialog offering users to undo the input. A cancel button next to the text field offers the same functionality.',
-          'Example: A user can tilt a device to advance to the next or a previous page. Buttons are also provided to perform the same function. ',
-          'Example: A user can move or pan a device to change the view in an interactive photo. A control is also available to perform these same functions. ',
-          'Example: A user can gesture towards the device to navigate content. Controls are also available to navigate. '
+          '^Example:^ A user can choose an application setting which turns off Shake to Undo and other motion-activated features. ',
+          '^Example:^ After text is input in a field, shaking a device shows a dialog offering users to undo the input. A cancel button next to the text field offers the same functionality.',
+          '^Example:^ A user can tilt a device to advance to the next or a previous page. Buttons are also provided to perform the same function. ',
+          '^Example:^ A user can move or pan a device to change the view in an interactive photo. A control is also available to perform these same functions. ',
+          '^Example:^ A user can gesture towards the device to navigate content. Controls are also available to navigate. '
         ],
         MANUAL_CHECKS: [
         ],

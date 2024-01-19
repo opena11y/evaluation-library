@@ -24,12 +24,12 @@ export const timingRules = {
         'Providing adjustable time periods in line with the persons capabilities makes it possible for people to complete the tasks associated with the website.'
       ],
       TECHNIQUES: [
-        'Turn off: The user is allowed to turn off the time limit before encountering it.',
-        'Adjust: The user is allowed to adjust the time limit before encountering it over a wide range that is at least ten times the length of the default setting.',
-        'Extend: The user is warned before time expires and given at least 20 seconds to extend the time limit with a simple action (for example, "press the space bar"), and the user is allowed to extend the time limit at least ten time.',
-        'Real-time Exception: The time limit is a required part of a real-time event (for example, an auction), and no alternative to the time limit is possible.',
-        'Essential Exception: The time limit is essential and extending it would invalidate the activity.',
-        '20 Hour Exception: The time limit is longer than 20 hours.'
+        '^Turn off:^ The user is allowed to turn off the time limit before encountering it.',
+        '^Adjust:^ The user is allowed to adjust the time limit before encountering it over a wide range that is at least ten times the length of the default setting.',
+        '^Extend:^ The user is warned before time expires and given at least 20 seconds to extend the time limit with a simple action (for example, "press the space bar"), and the user is allowed to extend the time limit at least ten time.',
+        '^Real-time Exception:^ The time limit is a required part of a real-time event (for example, an auction), and no alternative to the time limit is possible.',
+        '^Essential Exception:^ The time limit is essential and extending it would invalidate the activity.',
+        '^20 Hour Exception:^ The time limit is longer than 20 hours.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -60,9 +60,9 @@ export const timingRules = {
         'People with visual impairments and visual processing learning disabilities may not be able to read or understand content that is blinking, scrolling or auto updating'
       ],
       TECHNIQUES: [
-        'Pause/Resume: Through configuration or controls on the page, enable the user to pause and resume the moving, blinking, scrolling or auto-updating content.',
-        'Stop: Through configuration or controls on the page, enable the user to stop the moving, blinking, scrolling or auto-updating content and see all of the content at one time.',
-        'Hide: Through configuration or controls on the page, enable the user to hide the moving, blinking, scrolling or auto-updating content if it is not essential for the activity.'
+        '^Pause/Resume:^ Through configuration or controls on the page, enable the user to pause and resume the moving, blinking, scrolling or auto-updating content.',
+        '^Stop:^ Through configuration or controls on the page, enable the user to stop the moving, blinking, scrolling or auto-updating content and see all of the content at one time.',
+        '^Hide:^ Through configuration or controls on the page, enable the user to hide the moving, blinking, scrolling or auto-updating content if it is not essential for the activity.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -92,7 +92,7 @@ export const timingRules = {
       PURPOSES: [
         'People who have photosensitive seizure disorders can have a seizure triggered by content that flashes at certain frequencies for more than a few flashes.',
         'People are even more sensitive to red flashing than to other colors.',
-        'NOTE: The WCAG flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
+        '^Note:^ The WCAG flashing requirements was adapted from the broadcasting industry standards (e.g. content is viewed from a closer distance and using a larger angle of vision).'
       ],
       TECHNIQUES: [
         'There is no remediation technique, the content must be removed or disabled from flashing.'

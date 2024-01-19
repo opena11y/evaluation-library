@@ -704,21 +704,38 @@ function transformToCode (content) {
 
   let c = '';
   let i = content.indexOf('@');
+  let k = content.indexOf('^');
   let j = 0;
 
-  while (i >= 0) {
-    c += content.substring(j, i);
+  while ((i >= 0) || (k >= 0)) {
+    if (i > k) {
+      c += content.substring(j, i);
 
-    j = content.indexOf('@', (i+1));
-    if (j < 0) {
-      j = content.length - 1;
+      j = content.indexOf('@', (i+1));
+      if (j < 0) {
+        j = content.length - 1;
+      }
+      c += '<code>';
+      c += content.substring(i+1, j);
+      c += '</code>';
+      j += 1;
+
+      i = content.indexOf('@', j);
     }
-    c += '<code>';
-    c += content.substring(i+1, j);
-    c += '</code>';
-    j += 1;
+    else {
+      c += content.substring(j, k);
 
-    i = content.indexOf('@', j);
+      j = content.indexOf('^', (k+1));
+      if (j < 0) {
+        j = content.length - 1;
+      }
+      c += '<b>';
+      c += content.substring(k+1, j);
+      c += '</b>';
+      j += 1;
+
+      k = content.indexOf('^', j);
+    }
   }
 
   if (j < content.length) {
