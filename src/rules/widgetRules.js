@@ -790,7 +790,7 @@ export const widgetRules = [
 /**
  * @object WIDGET_14
  *
- * @desc     Roles with deprecated ARIA attributes
+ * @desc     Roles with unsupported or deprecated ARIA attributes
  */
 { rule_id             : 'WIDGET_14',
   last_updated        : '2023-04-21',
@@ -887,16 +887,17 @@ export const widgetRules = [
     ],
   validate : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.deprecatedAttrs) {
+      if (de.ariaInfo.deprecatedAttrs || de.ariaInfo.unsupportedAttrs) {
         if (de.visibility.isVisibleToAT) {
           de.ariaInfo.deprecatedAttrs.forEach( attr => {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
           });
+          de.ariaInfo.unsupportedAttrs.forEach( attr => {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, de.elemName]);
+          });
         }
         else {
-          de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, de.elemName]);
-          });
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
         }
       }
     });

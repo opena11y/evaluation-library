@@ -36,7 +36,7 @@ export const audioRules = {
     TECHNIQUES: [
       'For the @audio@ eleemnt use the @track@ element to add captioning to the audio content.',
       'Use WebVTT to encode the timed stamped captioning information for the audio content.',
-      'Use @aria-describedby@ to reference an equivalent text description of the audio content.'
+      'For @object@ and @embed@ elements use @aria-describedby@ to reference a text description of the video content.'
     ],
     MANUAL_CHECKS: [
     ],

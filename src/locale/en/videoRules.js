@@ -39,7 +39,7 @@ export const videoRules = {
       ],
       TECHNIQUES: [
         'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
-        'Use @aria-describedby@ to reference a text description of the video content.',
+        'For @object@ and @embed@ elements use @aria-describedby@ to reference a text description of the video content.',
         'Include an audio sound track that describes the video content.'
       ],
       MANUAL_CHECKS: [
@@ -119,7 +119,8 @@ export const videoRules = {
         'People who are deaf or have a hearing loss can access the auditory information in the synchronized media content through captions.'
        ],
       TECHNIQUES: [
-        'For the @video@ eleemnt use the @track@ element to add a caption track to the video content.',
+        'For the @video@ element use the @track@ element to add a caption track to the video content.',
+        'Use WebVTT to encode the timed stamped captioning information for the audio content.',
         'Use open captions to include the captions as part of the video.',
         'If closed captions are not supported, use open captioning to include captions as part of the video.'
       ],
@@ -137,6 +138,10 @@ export const videoRules = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The track element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebVTT: The Web Video Text Tracks Format',
+          url:   'https://www.w3.org/TR/webvtt1/'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'G93: Providing open (always visible) captions',
@@ -187,8 +192,8 @@ export const videoRules = {
         'This Success Criterion may help some people who have difficulty watching video or other synchronized media content, including people who have difficulty perceiving or understanding moving images.'
       ],
       TECHNIQUES: [
-        'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
-        'Use @aria-describedby@ to reference a text description of the video content.',
+        'For the @video@ element use the @track@ element to add audio descriptions to the video content.',
+        'For @object@ and @embed@ elements use @aria-describedby@ to reference a text description of the video content.',
         '^Note:^ Audio descriptions are preferred over other alternatives since WCAG Success Criteria 1.2.5 (AA) requires the use of audio descriptions and legal requirements for accessibility include WCAG AA requirements.'
       ],
       MANUAL_CHECKS: [
@@ -260,8 +265,9 @@ export const videoRules = {
         'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'
       ],
       TECHNIQUES: [
-        'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
-        'Use @aria-describedby@ to reference a text description of the video content.'
+        'For the @video@ element use the @track@ element to add audio descriptions to the video content.',
+        'Use WebVTT to encode the timed stamped captioning information for the audio content.',
+        'For @object@ and @embed@ elements use @aria-describedby@ to reference a text description of the video content.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -277,6 +283,14 @@ export const videoRules = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HMTL: The track element',
           url:   'https://html.spec.whatwg.org/multipage/media.html#the-track-element'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebVTT: The Web Video Text Tracks Format',
+          url:   'https://www.w3.org/TR/webvtt1/'
+        },
+        { type:  REFERENCES.TECHNIQUE,
+          title: 'WebVTT: The Web Video Text Tracks Format',
+          url:   'https://www.w3.org/TR/webvtt1/'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
@@ -316,7 +330,7 @@ export const videoRules = {
         'Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.'      ],
       TECHNIQUES: [
         'For the @video@ eleemnt use the @track@ element to add audio descriptions to the video content.',
-        'Use @aria-describedby@ to reference a text description of the video content.'
+        'For @object@ and @embed@ elements use @aria-describedby@ to reference a text description of the video content.'
       ],
       MANUAL_CHECKS: [
       ],

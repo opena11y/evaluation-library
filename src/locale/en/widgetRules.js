@@ -807,19 +807,20 @@ export const widgetRules = {
     },
     WIDGET_14: {
         ID:                    'Widget 14',
-        DEFINITION:            'ARIA attributes that have been deprecated for a role should be removed.',
-        SUMMARY:               'Remove deprecated ARIA attributes.',
-        TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are deprecated.',
+        DEFINITION:            'ARIA attributes that are unsuppoorted or deprecated for a role should be removed.',
+        SUMMARY:               'Unsupported and deprecated ARIA attributes.',
+        TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are unsupported or deprecated.',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Remove the deprecated ARIA attribute from the element.',
-          FAIL_P:   'Remove the deprecated ARIA attributes from the %N_F elements.',
-          HIDDEN_S: 'The element with deprecated ARIA attribute that is hidden and was not evaluated.',
-          HIDDEN_P: '%N_H elements with deprecated ARIA attributes that are hidden were not evaluated.',
+          FAIL_S:   'Remove the unsupported or deprecated ARIA attribute from the element.',
+          FAIL_P:   'Remove the unsupported or deprecated ARIA attributes from the %N_F elements.',
+          HIDDEN_S: 'The element with unsupported or deprecated ARIA attribute that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H elements with unsupported or deprecated ARIA attributes that are hidden were not evaluated.',
           NOT_APPLICABLE:  'No elements with deprecated ARIA attributes found.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element.',
-          ELEMENT_HIDDEN_1:  'The @%1@ attribute on the @%2@ element was not tested because it is hidden from assistive technologies.'
+          ELEMENT_FAIL_1:    'Remove the deprecated @%1@ attribute from @%2@ element.',
+          ELEMENT_FAIL_2:    'Remove the unsupported @%1@ attribute from @%2@ element.',
+          ELEMENT_HIDDEN_1:  'The @%2@ element was not tested because it is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Not all ARIA properties and states are useful on every ARIA role and starting with ARIA 1.2 certain states and properties that were once considered global have been deprecated on specific roles.',
@@ -827,7 +828,7 @@ export const widgetRules = {
           'The same ARIA property and state restrictions on explicit roles apply to implicit roles.'
         ],
         TECHNIQUES: [
-          'Remove the deprecated ARIA attribute from the element.'
+          'Remove the unsupported or deprecated ARIA attribute from the element.'
         ],
         MANUAL_CHECKS: [
         ],
