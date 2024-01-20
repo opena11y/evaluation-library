@@ -140,7 +140,12 @@ export const widgetRules = [
       if (de.hasRole) {
         if (de.visibility.isVisibleToAT) {
           if (!de.ariaInfo.isValidRole) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            if (de.ariaInfo.isDPUBRole) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            }
           }
           else {
             if (de.ariaInfo.isAbstractRole) {
@@ -887,7 +892,7 @@ export const widgetRules = [
     ],
   validate : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.deprecatedAttrs || de.ariaInfo.unsupportedAttrs) {
+      if (de.ariaInfo.deprecatedAttrs.length || de.ariaInfo.unsupportedAttrs.length) {
         if (de.visibility.isVisibleToAT) {
           de.ariaInfo.deprecatedAttrs.forEach( attr => {
             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);

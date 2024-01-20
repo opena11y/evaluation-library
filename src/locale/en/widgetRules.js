@@ -152,11 +152,14 @@ export const widgetRules = {
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add a valid widget, section, landmark or live region role value to the element.',
           FAIL_P:   'Add a valid widget, section, landmark or live region role values to %N_F out of %N_T elements with @role@ attributes.',
+          MANUAL_CHECK_S:   'Verify the element with the DPUB role is valid and appropriate for the web page.',
+          MANUAL_CHECK_P:   'Verify the %N_MC elements with DPUB roles are valid and appropriate for the web page.',
           HIDDEN_S: 'The element with a role that is hidden and was not evaluated.',
           HIDDEN_P: '%N_H elements with a role that are hidden were not evaluated.',
           NOT_APPLICABLE:  'No elements with @role@ attribute on this page'
         },
         BASE_RESULT_MESSAGES: {
+          ELEMENT_MC_1:     'Verify if the @%1@ role is a valid DPUB role.',
           ELEMENT_PASS_1:   '@%1@ is a widget role.',
           ELEMENT_PASS_2:   '@%1@ is a landmark role.',
           ELEMENT_PASS_3:   '@%1@ is a live region role.',
@@ -820,7 +823,7 @@ export const widgetRules = {
         BASE_RESULT_MESSAGES: {
           ELEMENT_FAIL_1:    'Remove the deprecated @%1@ attribute from @%2@ element.',
           ELEMENT_FAIL_2:    'Remove the unsupported @%1@ attribute from @%2@ element.',
-          ELEMENT_HIDDEN_1:  'The @%2@ element was not tested because it is hidden from assistive technologies.'
+          ELEMENT_HIDDEN_1:  'The @%1@ element was not tested because it is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Not all ARIA properties and states are useful on every ARIA role and starting with ARIA 1.2 certain states and properties that were once considered global have been deprecated on specific roles.',
