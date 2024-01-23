@@ -778,7 +778,8 @@ export const widgetRules = [
                           "superscript"],
   validate            : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.isNameProhibited &&
+      if (!de.ariaInfo.isDPUBRole &&
+          de.ariaInfo.isNameProhibited &&
           de.accName.name &&
           de.accName.source.includes('aria-label')) {
         if (de.visibility.isVisibleToAT) {
@@ -892,17 +893,19 @@ export const widgetRules = [
     ],
   validate : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.deprecatedAttrs.length || de.ariaInfo.unsupportedAttrs.length) {
-        if (de.visibility.isVisibleToAT) {
-          de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
-          });
-          de.ariaInfo.unsupportedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, de.elemName]);
-          });
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      if (!de.ariaInfo.isDPUBRole) {
+        if (de.ariaInfo.deprecatedAttrs.length || de.ariaInfo.unsupportedAttrs.length) {
+          if (de.visibility.isVisibleToAT) {
+            de.ariaInfo.deprecatedAttrs.forEach( attr => {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
+            });
+            de.ariaInfo.unsupportedAttrs.forEach( attr => {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, de.elemName]);
+            });
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       }
     });

@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Pause, stop or mute audio | OpenA11y Evaluation Library 2.0</title>
+        <title>Label in name for links | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -94,21 +94,21 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">Pause, stop or mute audio</li>
+          <li class="breadcrumb-item active">Label in name for links</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-12">
+        <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Pause, stop or mute audio</h1>
+            <h1 id="h1-title">Rule: Label in name for links</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
 <tr>
   <th>Rule ID</th>
-  <td>Audio 4</td>
+  <td>Link 4</td>
 </tr>
 
                   
@@ -120,7 +120,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Media content with audio that automatically starts playing when the page loads and lasts longer than 3 seconds must provide a means for the user able to stop, pause or mute the audio content.</td>
+  <td>The labels (e.g. accessible name) for links that include text or images of text, the name contains the text that is presented visually.</td>
 </tr>
 
                   
@@ -129,7 +129,11 @@
   <td>
     <ul>
       
-      <li>Audio content interferes with people using speech based assistive technologies like screen readers.</li>
+      <li>Voice recognition users can directly activate controls on a page with fewer surprising changes of focus.</li>
+      
+      <li>Screen reader users will have a better experience because the labels that they hear match the visible text labels that they see on the screen.</li>
+      
+      <li>In general avoid using images and hidden text for defining accessible names whenever possible.</li>
       
     </ul>
   </td>
@@ -146,8 +150,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#audio-control" target="_spec">
-        Success Criterion 1.4.2 Audio Control
+      <a href="https://www.w3.org/TR/WCAG22/#label-in-name" target="_spec">
+        Success Criterion 2.5.3 Label in Name
       </a>
     </p>
     <p class="related">
@@ -162,13 +166,13 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Audio/Video</td>
+  <td>Links</td>
 </tr>
 
                   
 <tr>
   <th>Rule Scope</th>
-  <td>Page</td>
+  <td>Element</td>
 </tr>
 
                   
@@ -177,11 +181,13 @@
   <td>
     <ul>
       
-      <li>Remove or disable the auto playing of media that includes audio content.</li>
+      <li>If images of text that are part of an accessible name (e.g. label), the alt text must be the same as the text of the image.</li>
       
-      <li>Provide a means to pause, stop or mute the audio content.</li>
+      <li>If <code>aria-label</code> is used as part of an accessible name (e.g. label), the <code>aria-label</code> contains the same text associated the visually rendered content associated with the control.</li>
       
-      <li>Use cookies to preserve the user preference of pausing, stopping or muting the audio content.</li>
+      <li>If a hidden <code>aria-labelledby</code> reference is used as part of the accessible name (e.g. label), verify the computed name of all the referenced contain has the same text associated the visually rendered label associated with the control.</li>
+      
+      <li>Accessible names may contain additional information useful to people using assistive technologies, but should start with the visible text associated with the control.</li>
       
     </ul>
   </td>
@@ -193,15 +199,17 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html">W3C WCAG Understanding Label in Name</a></li>
       
-      <li><a href="https://www.w3.org/TR/WCAG21/#audio-control">WCAG 2.1 Success Criterion 1.4.2 Audio Control</a></li>
+      <li><a href="https://www.w3.org/TR/accname-1.1/">W3C Accessible Name and Description Computation 1.1</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/quickref/#audio-control">How to meet Success Criterion 1.4.2 Audio Control</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G208">G208: Including the text of the visible label as part of the accessible name</a></li>
       
-      <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G211">G211: Matching the accessible name to the visible label</a></li>
       
-      <li><a href="https://webaim.org/techniques/captions/">WebAIM: Captions, Transcripts, and Audio Descriptions</a></li>
+      <li><a href="https://www.w3.org/WAI/GL/2016/WD-WCAG20-TECHS-20160105/G162">G162: Positioning labels to maximize predictability of relationships</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F96">F96: Failure due to the accessible name not containing the visible label text</a></li>
       
     </ul>
   </td>
@@ -241,14 +249,14 @@
         console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
 
         if (window.location.href.indexOf("#gl") > 0) {
-          node.href= "rules-gl.html#audio-4";
+          node.href= "rules-gl.html#link-4";
         }
         else {
           if (window.location.href.indexOf("#rs") > 0) {
-            node.href= "rules-rs.html#audio-4";
+            node.href= "rules-rs.html#link-4";
           }
           else {
-            node.href= "rules-rc.html#audio-4";
+            node.href= "rules-rc.html#link-4";
           }
         }
       })()

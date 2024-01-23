@@ -493,7 +493,7 @@ export const controlRules = [
 
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
-      if (de1.role === 'option') {
+      if (de1.ariaInfo.isDPUBRole || de1.role === 'option') {
         return;
       }
       let count;

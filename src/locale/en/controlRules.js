@@ -811,12 +811,12 @@ export const controlRules = {
 
     CONTROL_15: {
         ID:                    'Control 15',
-        DEFINITION:            'The labels for controls and widgets that include text or images of text, the name contains the text that is presented visually.',
-        SUMMARY:               'Label in Name',
+        DEFINITION:            'The labels (e.g. accessible name) for controls and widgets that include text or images of text, the name contains the text that is presented visually.',
+        SUMMARY:               'Label in name for controls',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
           MANUAL_CHECK_S:  'Verify the control with images, @aria-label@ and/or references to hidden content contain the same text associated with the visually rendered label associated with the control.',
-          MANUAL_CHECK_P:  'Verify tha each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
+          MANUAL_CHECK_P:  'Verify that each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
           HIDDEN_S:  'One control with images, @aria-label@ and/or references to hidden content was not tested because it is hidden from assistive technologies',
           HIDDEN_P:  '%N_H controls with images, @aria-label@ and/or references were not tested because they are hidden from assistive technologies',
         },
@@ -844,7 +844,7 @@ export const controlRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG UNderstanding Label in Name',
+            title: 'W3C WCAG Understanding Label in Name',
             url:   'https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html'
           },
           { type:  REFERENCES.TECHNIQUE,

@@ -159,7 +159,7 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No elements with @role@ attribute on this page'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_MC_1:     'Verify if the @%1@ role is a valid DPUB role.',
+          ELEMENT_MC_1:     'Verify if the @%1@ role is a valid DPUB role, and add the functionality to the page that you intended by testing with assistive technologies that support DPUB.',
           ELEMENT_PASS_1:   '@%1@ is a widget role.',
           ELEMENT_PASS_2:   '@%1@ is a landmark role.',
           ELEMENT_PASS_3:   '@%1@ is a live region role.',
@@ -174,7 +174,8 @@ export const widgetRules = {
         ],
         TECHNIQUES: [
           'Use ARIA landmark roles to describe the sections of a web page.',
-          'Use ARIA widget roles to describe interactive elements on a web page'
+          'Use ARIA widget roles to describe interactive elements on a web page',
+          '^Note:^ DPUB roles are designed to be used for digital books and not the web. If you use DPUB roles on your web pages verify that they add the functionality you intend by testing with the assistive technologies that support DPUB.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -186,6 +187,10 @@ export const widgetRules = {
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
             url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'W3C Digital Publishing WAI-ARIA Module 1.1',
+            url:   'https://www.w3.org/TR/dpub-aria-1.1/'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -277,7 +282,7 @@ export const widgetRules = {
   },
   WIDGET_5: {
         ID:                    'Widget 5',
-        DEFINITION:            'Elements with the attributes that start with @aria-@must be a valid ARIA property or state.',
+        DEFINITION:            'Elements with the attributes that start with @aria-@ must be a valid ARIA property or state.',
         SUMMARY:               'Attributes that start with @aria-@ must be defined.',
         TARGET_RESOURCES_DESC: 'Elements with aria attributes',
         RULE_RESULT_MESSAGES: {
@@ -810,7 +815,7 @@ export const widgetRules = {
     },
     WIDGET_14: {
         ID:                    'Widget 14',
-        DEFINITION:            'ARIA attributes that are unsuppoorted or deprecated for a role should be removed.',
+        DEFINITION:            'ARIA attributes that are unsupported or deprecated for a role should be removed.',
         SUMMARY:               'Unsupported and deprecated ARIA attributes.',
         TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are unsupported or deprecated.',
         RULE_RESULT_MESSAGES: {

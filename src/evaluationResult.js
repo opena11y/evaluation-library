@@ -10,8 +10,11 @@ import {
   getFormattedDate,
   cleanForUTF8
 } from './utils.js';
+import DOMCache        from './cache/domCache.js';
 import RuleGroupResult from './ruleGroupResult.js';
-import RuleResult from './ruleResult.js';
+import RuleResult      from './ruleResult.js';
+import {allRules}      from './rules/allRules.js';
+
 import {
   getCommonMessage,
   getGuidelineInfo,
@@ -67,7 +70,6 @@ function isWCAG(ruleset, level, rule) {
 
     case 'AAA':
       return true;
-      break;
 
     default:
       return false;
@@ -77,39 +79,67 @@ function isWCAG(ruleset, level, rule) {
 
 }
 
-function isFilter(ruleset, ruleFilter, ruleId) {
-  return (ruleset.toUpperCase() === 'FILTER') && ruleFilter.includes(ruleId);
-}
+/**
+ * @class EvaluateResult
+ *
+ * @desc Creates an evaluation result object based on the ruleset and other rule filters
+ *
+ * @param  {Object} domCache    -
+ * @param  {String} title       -
+ * @param  {String} url         -
+ *
+ * @return see @desc
+ */
 
 export default class EvaluationResult {
-  constructor (allRules, domCache, title, url, ruleset='WCAG21', level='AA', scopeFilter='ALL', ruleFilter=[]) {
+  constructor (startingDoc, title, url) {
 
-    this.title = title;
-    this.url = url;
-    this.ruleset = ruleset;
-    this.level = level;
-    this.scopeFilter = scopeFilter;
+    this.startingDoc = startingDoc
+    this.title       = title;
+    this.url         = url;
+    this.ruleset     = '';
+    this.level       = '';
+    this.scopeFilter = '';
 
     this.date = getFormattedDate();
     this.version = VERSION;
+    this.allDomElements = [];
+    this.allRuleResults = [];
+
+  }
+
+  /**
+   * @method evaluateWCAG
+   *
+   * @desc Evaluates a document based on WCAG version, level and scope of a rule
+   *
+   * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
+   * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
+   */
+
+  evaluateWCAG (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
+
+    const startTime = new Date();
+    debug.flag && debug.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
+    debug.flag && debug.log(`[evaluateWCAG][      level]: ${level}`);
+    debug.flag && debug.log(`[evaluateWCAG][scopeFilter]: ${scopeFilter}`);
+
+    this.ruleset     =ruleset;
+    this.level       = level;
+    this.scopeFilter = scopeFilter;
+
+    const domCache = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
-    const startTime = new Date();
-    debug.flag && debug.log(`[    ruleset]: ${ruleset}`);
-    debug.flag && debug.log(`[      level]: ${level}`);
-    debug.flag && debug.log(`[scopeFilter]: ${scopeFilter}`);
-
     allRules.forEach (rule => {
-      debug.flag && debug.log(`[version]: ${rule.wcag_primary_id} ${rule.wcag_version} ${rule.isWCAG20} ${rule.isWCAG21} ${rule.isWCAG22}`);
 
-      if (isFilter(ruleset, ruleFilter, rule.getId()) ||
-          isWCAG(ruleset, level, rule)) {
+      if (isWCAG(ruleset, level, rule)) {
         if ((scopeFilter === 'ALL') ||
             ((scopeFilter === 'PAGE')    && rule.isScopePage) ||
             ((scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
           const ruleResult = new RuleResult(rule);
-          debug.flag && debug.log(`[validate]: ${ruleResult.rule.getId()}`);
 
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
@@ -117,12 +147,38 @@ export default class EvaluationResult {
       }
     });
 
-    const json = this.toJSON(true);
-    debug.flag && debug.log(`[JSON]: ${json}`);
+    const endTime = new Date();
+    debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
+  }
+
+  /**
+   * @method evaluateRuleList
+   *
+   * @desc Evaluates a document with a specific set of rules
+   *
+   * @param  {Array}   ruleList  - Array of rule id to include in the evaluation
+   */
+
+  evaluateRuleList (ruleList) {
+    const startTime = new Date();
+    debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
+
+    const domCache = new DOMCache(this.startingDoc);
+    this.allDomElements = domCache.allDomElements;
+    this.allRuleResults = [];
+
+    allRules.forEach (rule => {
+
+      if (ruleList.includes(rule.getId())) {
+        const ruleResult = new RuleResult(rule);
+        ruleResult.validate(domCache);
+        this.allRuleResults.push(ruleResult);
+      }
+    });
 
     const endTime = new Date();
-    debug.flag && debug.log(`[Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
-
+    debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
   }
 

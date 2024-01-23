@@ -2,12 +2,10 @@
 
 /* Imports */
 import {Constants}       from './constants.js';
-import DOMCache          from './cache/domCache.js';
-import {allRules}        from './rules/allRules.js';
 import EvaluationResult  from './evaluationResult.js';
+import {allRules}        from './rules/allRules.js';
 import {
   getCommonMessage,
-  getGuidelineInfo,
   getHasFailures,
   getHasHidden,
   getHasManualChecks,
@@ -44,26 +42,68 @@ debug.json = false;
  */
 
 export default class EvaluationLibrary {
-  constructor (codeTags = false) {
+  constructor () {
     this.constants = new Constants();
   }
 
   /**
-   * @method evaluate
+   * @method evaluateRuleList
+   *
+   * @desc Evaluate a document using the OpenA11y ruleset and return an evaluation object
+   *
+   * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
+   * @param  {String}  title       - Title of document being analyzed
+   * @param  {String}  url         - URL of document being analyzed
+   * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
+   */
+
+  evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
+
+    debug.log(`[evaluateRuleList][startingDoc]: ${startingDoc}`);
+    debug.log(`[evaluateRuleList][      title]: ${title}`);
+    debug.log(`[evaluateRuleList][        url]: ${url}`);
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.evaluateRuleList(ruleList);
+
+    // Debug features
+    if (debug.flag) {
+      domCache.showDomElementTree();
+      domCache.controlInfo.showControlInfo();
+      domCache.iframeInfo.showIFrameInfo();
+      domCache.idInfo.showIdInfo();
+      domCache.imageInfo.showImageInfo();
+      domCache.linkInfo.showLinkInfo();
+      domCache.listInfo.showListInfo();
+      domCache.tableInfo.showTableInfo();
+      domCache.structureInfo.showStructureInfo();
+
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
+    }
+    return evaluationResult;
+  }
+
+ /**
+   * @method evaluateRuleWCAG
    *
    * @desc Evaluate a document using the OpenA11y ruleset and return an evaluation object
    *
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
-   * @param  {String}  ruleset     - Set of rules to evaluate (values: "FIRST-STEP" | "A" | "AA" | "AAA")
+   * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
+   * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluate (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ruleFilter = []) {
+  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
 
-    let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(allRules, domCache, title, url, ruleset, level, scopeFilter, ruleFilter);
+    debug.log(`[evaluateWCAG][startingDoc]: ${startingDoc}`);
+    debug.log(`[evaluateWCAG][      title]: ${title}`);
+    debug.log(`[evaluateWCAG][        url]: ${url}`);
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.evaluateWCAG(ruleset, level, scopeFilter);
 
     // Debug features
     if (debug.flag) {
