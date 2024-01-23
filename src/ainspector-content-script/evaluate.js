@@ -35,6 +35,10 @@ export function evaluate (ruleset="WCAG21", level="AA", scopeFilter="ALL", ruleL
       evaluationResult = evaluationLibrary.evaluateRuleList(doc, doc.title, doc.location.href, ruleList);
       break;
 
+    case 'FIRSTSTEP':
+      evaluationResult = evaluationLibrary.evaluateFirstStepRules(doc, doc.title, doc.location.href);
+      break;
+
     default:
       break;
 

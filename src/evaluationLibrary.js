@@ -122,6 +122,42 @@ export default class EvaluationLibrary {
     return evaluationResult;
   }
 
+ /**
+   * @method evaluateFirstStepRules
+   *
+   * @desc Evaluate a document using first step rules
+   *
+   * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
+   * @param  {String}  title       - Title of document being analyzed
+   * @param  {String}  url         - url of document being analyzed
+   */
+
+  evaluateFirstStepRules (startingDoc, title='', url='') {
+
+    debug.log(`[evaluateFirstStepRules][startingDoc]: ${startingDoc}`);
+    debug.log(`[evaluateFirstStepRules][      title]: ${title}`);
+    debug.log(`[evaluateFirstStepRules][        url]: ${url}`);
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.evaluateFirstStepRules();
+
+    // Debug features
+    if (debug.flag) {
+      domCache.showDomElementTree();
+      domCache.controlInfo.showControlInfo();
+      domCache.iframeInfo.showIFrameInfo();
+      domCache.idInfo.showIdInfo();
+      domCache.imageInfo.showImageInfo();
+      domCache.linkInfo.showLinkInfo();
+      domCache.listInfo.showListInfo();
+      domCache.tableInfo.showTableInfo();
+      domCache.structureInfo.showStructureInfo();
+
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
+    }
+    return evaluationResult;
+  }
+
   /**
    * @method CONSTANTS
    * 

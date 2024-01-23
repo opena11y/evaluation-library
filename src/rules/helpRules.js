@@ -31,6 +31,7 @@ export const helpRules = [
     rule_scope          : RULE_SCOPE.WEBSITE,
     rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '3.2.6',
     wcag_related_ids    : [],
     target_resources    : ['page'],

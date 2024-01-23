@@ -54,6 +54,7 @@ export default class Rule {
     this.rule_category_id    = rule_item.rule_category; // Integer
     this.last_updated        = rule_item.last_updated; // String
     this.target_resources    = rule_item.target_resources; // array of strings
+    this.first_step          = rule_item.first_step; // Boolean
     this.wcag_primary_id     = rule_item.wcag_primary_id  // String (P.G.SC)
     this.wcag_related_ids    = rule_item.wcag_related_ids // Array of Strings (P.G.SC)
     this.wcag_guideline_id   = getGuidelineId(rule_item.wcag_primary_id); // Integer
@@ -118,6 +119,10 @@ export default class Rule {
 
   get isScopeWebsite () {
     return this.rule_scope_id === RULE_SCOPE.WEBSITE;
+  }
+
+  get isFirstStep () {
+    return this.first_step === true;
   }
 
   /**

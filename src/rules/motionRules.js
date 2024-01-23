@@ -31,6 +31,7 @@ export const motionRules = [
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '2.5.4',
     wcag_related_ids    : [],
     target_resources    : ['page'],

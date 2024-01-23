@@ -82,11 +82,13 @@ function isWCAG(ruleset, level, rule) {
 /**
  * @class EvaluateResult
  *
- * @desc Creates an evaluation result object based on the ruleset and other rule filters
+ * @desc Creates an evaluation result object
  *
- * @param  {Object} domCache    -
- * @param  {String} title       -
- * @param  {String} url         -
+ * @param  {Object} startingDoc  - A reference to a DOM element to start the evaluation
+ *                                 (typically body element)
+ * @param  {String} title        - A title of the evaluation
+ *                                 (typically the title of the document)
+ * @param  {String} url          - The URL to the document
  *
  * @return see @desc
  */
@@ -101,8 +103,8 @@ export default class EvaluationResult {
     this.level       = '';
     this.scopeFilter = '';
 
-    this.date = getFormattedDate();
-    this.version = VERSION;
+    this.date           = getFormattedDate();
+    this.version        = VERSION;
     this.allDomElements = [];
     this.allRuleResults = [];
 
@@ -111,7 +113,7 @@ export default class EvaluationResult {
   /**
    * @method evaluateWCAG
    *
-   * @desc Evaluates a document based on WCAG version, level and scope of a rule
+   * @desc Updates rule results array with results from a WCAG features
    *
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
@@ -129,7 +131,7 @@ export default class EvaluationResult {
     this.level       = level;
     this.scopeFilter = scopeFilter;
 
-    const domCache = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -155,16 +157,16 @@ export default class EvaluationResult {
   /**
    * @method evaluateRuleList
    *
-   * @desc Evaluates a document with a specific set of rules
+   * @desc Updates rule results array with results from a specific set of rules
    *
-   * @param  {Array}   ruleList  - Array of rule id to include in the evaluation
+   * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
   evaluateRuleList (ruleList) {
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
-    const domCache = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -182,6 +184,34 @@ export default class EvaluationResult {
 
   }
 
+ /**
+   * @method evaluateFirstStepRules
+   *
+   * @desc Updates rule results array with results first step rules
+   */
+
+  evaluateFirstStepRules () {
+    const startTime = new Date();
+
+    const domCache      = new DOMCache(this.startingDoc);
+    this.allDomElements = domCache.allDomElements;
+    this.allRuleResults = [];
+
+    allRules.forEach (rule => {
+
+      debug.log(`[rule][id]: ${rule.getId()} (${rule.isFirstStep})`);
+
+      if (rule.isFirstStep) {
+        const ruleResult = new RuleResult(rule);
+        ruleResult.validate(domCache);
+        this.allRuleResults.push(ruleResult);
+      }
+    });
+
+    const endTime = new Date();
+    debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
+  }
   /**
    * @method getTitle
    *

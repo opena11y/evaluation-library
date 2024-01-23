@@ -31,6 +31,7 @@ export const sensoryRules = [
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '1.3.3',
     wcag_related_ids    : [],
     target_resources    : ['button', 'link'],

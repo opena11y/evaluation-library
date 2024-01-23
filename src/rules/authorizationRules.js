@@ -31,6 +31,7 @@ export const authorizationRules = [
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '3.3.8',
     wcag_related_ids    : [],
     target_resources    : ['widgets'],

@@ -31,6 +31,7 @@ export const readingOrderRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
     target_resources    : [],
