@@ -19,7 +19,7 @@
 
           <h1>{{title}}</h1>
 
-          {% include "./nav-rules.njk" %}
+          {% include "./nav-rulesets.njk" %}
 
           {% for rs in allRuleScopes | reverse %}
             <h2 id="rs-{{rs.id}}" class="rules">{{rs.title}}</h2>

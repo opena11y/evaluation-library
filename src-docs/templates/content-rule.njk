@@ -66,6 +66,7 @@
 <html lang="en-us">
   <head>
     {% include "./head.njk" %}
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
     {% include "./header.njk" %}
@@ -86,6 +87,7 @@
             {% block title %}
             <h1 id="h1-title">Rule: {{title | safe}}</h1>
             {% endblock %}
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   {{ infoItem('Rule ID',    ruleInfo.id) }}

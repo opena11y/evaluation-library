@@ -35,6 +35,11 @@ const allGuidelines = [];
 const allRuleScopes = [];
 const ruleSummary = {};
 
+const allRuleLinksByGuidelines = [];
+const allRuleLinksByRuleCategories = [];
+const allRuleLinksByScope = [];
+const allRuleLinksByFirstStepRules = [];
+
 const wcag20 = {
   title: 'WCAG 2.0',
   aCount: 0,
@@ -327,6 +332,14 @@ el.getAllRules.forEach( rule => {
   outputFile(ruleInfo.filename, htmlRule);
   count += 1;
 });
+
+const jsRuleLinks = nunjucks.render('./src-docs/templates/js-rulelinks.njk',
+  { allRuleLinksByGuidelines: allRuleLinksByGuidelines,
+    allRuleLinksByRuleCategories: allRuleLinksByRuleCategories,
+    allRuleLinksByScope: allRuleLinksByScope,
+    allRuleLinksByFirstStepRules: allRuleLinksByFirstStepRules
+});
+outputFile('rulelinks.js', jsRuleLinks);
 
 
 console.log(`Total Rules: ${count}`);

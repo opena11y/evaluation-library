@@ -27,6 +27,10 @@ nav.rules [aria-current] {
   color: black;
 }
 
+nav.rules a:disabled {
+  color: gray;
+}
+
 nav ol.breadcrumb {
   padding-left:  0;
 }
