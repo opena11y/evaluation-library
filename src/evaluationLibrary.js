@@ -59,12 +59,8 @@ export default class EvaluationLibrary {
 
   evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
 
-    debug.log(`[evaluateRuleList][startingDoc]: ${startingDoc}`);
-    debug.log(`[evaluateRuleList][      title]: ${title}`);
-    debug.log(`[evaluateRuleList][        url]: ${url}`);
-
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.evaluateRuleList(ruleList);
+    evaluationResult.runRuleListRules(ruleList);
 
     // Debug features
     if (debug.flag) {
@@ -98,12 +94,8 @@ export default class EvaluationLibrary {
 
   evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
 
-    debug.log(`[evaluateWCAG][startingDoc]: ${startingDoc}`);
-    debug.log(`[evaluateWCAG][      title]: ${title}`);
-    debug.log(`[evaluateWCAG][        url]: ${url}`);
-
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.evaluateWCAG(ruleset, level, scopeFilter);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter);
 
     // Debug features
     if (debug.flag) {
@@ -134,12 +126,8 @@ export default class EvaluationLibrary {
 
   evaluateFirstStepRules (startingDoc, title='', url='') {
 
-    debug.log(`[evaluateFirstStepRules][startingDoc]: ${startingDoc}`);
-    debug.log(`[evaluateFirstStepRules][      title]: ${title}`);
-    debug.log(`[evaluateFirstStepRules][        url]: ${url}`);
-
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.evaluateFirstStepRules();
+    evaluationResult.runFirstStepRules();
 
     // Debug features
     if (debug.flag) {
@@ -239,6 +227,7 @@ export default class EvaluationLibrary {
     ruleInfo.last_updated  = rule.last_updated;
 
     ruleInfo.rule_required    = rule.rule_required;
+    ruleInfo.first_step       = rule.first_step;
 
     ruleInfo.rule_scope       = rule.rule_scope;
     ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);

@@ -1,0 +1,65 @@
+<html lang="en-us">
+  <head>
+    {% include "./head.njk" %}
+  </head>
+  <body>
+    {% include "./header.njk" %}
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">{{title | safe}}</li>
+        </ol>
+      </nav>
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-10">
+          {% block content %}
+
+          <h1 id="h1-title">{{title}}</h1>
+
+          <p>The “First Step” Ruleset is designed to help people new to accessibility and identifies 27 rules as a stating point for meeting WCAG requirements.</p>
+
+          {% include "./nav-rules.njk" %}
+
+            <table class="table table-striped" aria-labelledby="h1-title">
+              <thead>
+                <th>Rule ID</th>
+                <th>Summary</th>
+                <th>Conformance</th>
+                <th>Level</th>
+                <th>SC</th>
+                <th colspan="4">Result Values</th>
+              </thead>
+              <tbody>
+              {% for r in firstStepRules %}
+                <tr id="{{r.htmlId}}">
+                  <td>{{r.id}}</td>
+                  <td><a href="{{r.filename | safe}}#fs">{{r.summary | safe}}</a></td>
+                  <td>{% if r.wcag_primary.level === 4 %}A{% else %}{% if r.wcag_primary.level === 2 %}AA{% else %}AAA{% endif %}{% endif %}</td>
+                  <td>{% if r.rule_required %}Required{% else %}<em>Recommended</em>{% endif %}</td>
+                  <td><a href="{{r.wcag_primary.url | safe}}" target="_spec">{{r.wcag_primary_id}}</a></td>
+                  <td>{% if r.has_failures %}<abbr title="Failures">F</abbr>{% endif %}</td>
+                  <td>{% if r.has_manual_checks %}<abbr title="Manual Checks">MC</abbr>{% endif %}</td>
+                  <td>{% if r.has_pass %}<abbr title="Passed">P</abbr>{% endif %}</td>
+                  <td>{% if r.has_hidden %}<abbr title="Hidden">H</abbr>{% endif %}</td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td colspan="5"><em>no rules at this time</em></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+
+          {% endblock %}
+
+        </div>
+      </main>
+    </nav>
+    {% include "./footer.njk" %}
+    {% include "./scripts.njk" %}
+  </body>
+</html>
+

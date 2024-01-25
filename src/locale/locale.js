@@ -269,8 +269,8 @@ function getRulesetLabel(rulesetId, level) {
 
     switch (rulesetId) {
 
-      case 'FILTER':
-        label = messages[locale].common.rulesetFilter;
+      case 'FIRSTSTEP':
+        label = messages[locale].common.rulesetFirstStep;
         break;
 
       case 'WCAG22':

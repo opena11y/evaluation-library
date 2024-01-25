@@ -922,7 +922,7 @@ function getFormattedDate() {
 
 function cleanForUTF8 (str) {
   if (typeof str !== 'string') {
-    return "[cleanForUTF8]: Not a string";
+    return `[cleanForUTF8]: Not a string (${typeof str})`;
   }
   let nstr = '';
   str.split().forEach( c => {
@@ -11945,10 +11945,10 @@ const common = {
   rulesetLevelAA:  'Levels A and AA',
   rulesetLevelAAA: 'Levels A, AA and enhanced CCR',
 
-  rulesetFilter: 'First Step rules',
-  rulesetWCAG22: 'WCAG 2.2, ',
-  rulesetWCAG21: 'WCAG 2.1, ',
-  rulesetWCAG20: 'WCAG 2.0, ',
+  rulesetFirstStep: 'First Step Rules',
+  rulesetWCAG22:    'WCAG 2.2, ',
+  rulesetWCAG21:    'WCAG 2.1, ',
+  rulesetWCAG20:    'WCAG 2.0, ',
 
   scopeFilterElement: ', Element scope only',
   scopeFilterPage:    ', Page scope only',
@@ -15954,7 +15954,7 @@ const keyboardRules$1 = {
   KEYBOARD_1: {
     ID:                    'Keyboard 1',
     DEFINITION:            'Elements with ARIA widget roles must support the keyboard interactions required by those roles.',
-    SUMMARY:               'ARIA widget role requires specific keyboard support',
+    SUMMARY:               'ARIA widget keyboard support',
     TARGET_RESOURCES_DESC: 'Elements with ARIA widget roles',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S:  'Verify the element with the ARIA widget role implements the keyboard interactions required by its role.',
@@ -27804,7 +27804,7 @@ const keyboardRules = [
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
-        if (de.hasRole && de.ariaInfo.isWidget) {
+        if (de.hasRole && de.ariaInfo.isWidget && !de.ariaInfo.isDPUBRole) {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
           }
@@ -32942,10 +32942,13 @@ class EvaluationResult {
     this.allDomElements = [];
     this.allRuleResults = [];
 
+    debug$1.flag && debug$1.log(`[title]: ${this.title}`);
+    debug$1.flag && debug$1.log(`[  url]: ${this.url}`);
+
   }
 
   /**
-   * @method evaluateWCAG
+   * @method runWCAGRules
    *
    * @desc Updates rule results array with results from a WCAG features
    *
@@ -32954,14 +32957,14 @@ class EvaluationResult {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluateWCAG (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
+  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
 
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][      level]: ${level}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][scopeFilter]: ${scopeFilter}`);
 
-    this.ruleset     =ruleset;
+    this.ruleset     = ruleset;
     this.level       = level;
     this.scopeFilter = scopeFilter;
 
@@ -32989,16 +32992,18 @@ class EvaluationResult {
   }
 
   /**
-   * @method evaluateRuleList
+   * @method runRuleListRules
    *
    * @desc Updates rule results array with results from a specific set of rules
    *
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
-  evaluateRuleList (ruleList) {
+  runRuleListRules (ruleList) {
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
+
+    this.ruleset     = 'RULELIST';
 
     const domCache      = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
@@ -33019,21 +33024,21 @@ class EvaluationResult {
   }
 
  /**
-   * @method evaluateFirstStepRules
+   * @method runFirstStepRules
    *
    * @desc Updates rule results array with results first step rules
    */
 
-  evaluateFirstStepRules () {
+  runFirstStepRules () {
     const startTime = new Date();
+
+    this.ruleset     = 'FIRSTSTEP';
 
     const domCache      = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
     allRules.forEach (rule => {
-
-      debug$1.log(`[rule][id]: ${rule.getId()} (${rule.isFirstStep})`);
 
       if (rule.isFirstStep) {
         const ruleResult = new RuleResult(rule);
@@ -33221,16 +33226,19 @@ class EvaluationResult {
 
   getDataForJSON (flag=false) {
 
+    const thisRef = this;
+
     const data = {
-      eval_url: cleanForUTF8(this.url),
-      eval_url_encoded: encodeURI(this.url),
-      eval_title: cleanForUTF8(this.title),
+      eval_url: cleanForUTF8(thisRef.url),
+      eval_url_encoded: encodeURI(thisRef.url),
+      eval_title: cleanForUTF8(thisRef.title),
 
       // For compatibility with previous versions of the library
-      ruleset_id:     'ARIA_STRICT',
-      ruleset_title:  'HTML and ARIA Techniques',
-      ruleset_abbrev: 'HTML5+ARIA',
-      ruleset_version: VERSION,
+      ruleset:      thisRef.ruleset,
+      wcag_level:   thisRef.relevel,
+      scope_filter: thisRef.scopeFilter,
+      version:      thisRef.version,
+      date:         thisRef.date.toString(),
 
       rule_results: []
     };
@@ -33291,12 +33299,8 @@ class EvaluationLibrary {
 
   evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
 
-    debug.log(`[evaluateRuleList][startingDoc]: ${startingDoc}`);
-    debug.log(`[evaluateRuleList][      title]: ${title}`);
-    debug.log(`[evaluateRuleList][        url]: ${url}`);
-
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.evaluateRuleList(ruleList);
+    evaluationResult.runRuleListRules(ruleList);
 
     // Debug features
     if (debug.flag) {
@@ -33330,12 +33334,8 @@ class EvaluationLibrary {
 
   evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
 
-    debug.log(`[evaluateWCAG][startingDoc]: ${startingDoc}`);
-    debug.log(`[evaluateWCAG][      title]: ${title}`);
-    debug.log(`[evaluateWCAG][        url]: ${url}`);
-
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.evaluateWCAG(ruleset, level, scopeFilter);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter);
 
     // Debug features
     if (debug.flag) {
@@ -33366,12 +33366,8 @@ class EvaluationLibrary {
 
   evaluateFirstStepRules (startingDoc, title='', url='') {
 
-    debug.log(`[evaluateFirstStepRules][startingDoc]: ${startingDoc}`);
-    debug.log(`[evaluateFirstStepRules][      title]: ${title}`);
-    debug.log(`[evaluateFirstStepRules][        url]: ${url}`);
-
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.evaluateFirstStepRules();
+    evaluationResult.runFirstStepRules();
 
     // Debug features
     if (debug.flag) {
@@ -33471,6 +33467,7 @@ class EvaluationLibrary {
     ruleInfo.last_updated  = rule.last_updated;
 
     ruleInfo.rule_required    = rule.rule_required;
+    ruleInfo.first_step       = rule.first_step;
 
     ruleInfo.rule_scope       = rule.rule_scope;
     ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);

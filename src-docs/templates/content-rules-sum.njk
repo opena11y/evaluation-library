@@ -21,7 +21,7 @@
 
           {% include "./nav-rules.njk" %}
 
-          <h2 class="rules" id="id-wcag">WCAG Version</h2>
+          <h2 class="rules" id="id-wcag">Rulesets</h2>
           <div class="desc" id="id-wcag-desc">Number of rules by WCAG level</div>
           <table class="table table-striped"
                  aria-labelledby="id-wcag"
@@ -37,25 +37,32 @@
             </thead>
             <tbody>
               <tr>
-                <th>WCAG 2.0</th>
+                <th><a href="https://www.w3.org/TR/WCAG20/" target="_spec">WCAG 2.0</a> (2008)</th>
                 <td class="text-end">{{wcag20.aCount}}</td>
                 <td class="text-end">{{wcag20.aaCount}}</td>
                 <td class="text-end">{{wcag20.aaaCount}}</td>
                 <td class="text-end">{{wcag20.totalCount}}</td>
               </tr>
               <tr>
-                <th>WCAG 2.1</th>
+                <th><a href="https://www.w3.org/TR/WCAG21/" target="_spec">WCAG 2.1</a> (2018)</th>
                 <td class="text-end">{{wcag21.aCount}}</td>
                 <td class="text-end">{{wcag21.aaCount}}</td>
                 <td class="text-end">{{wcag21.aaaCount}}</td>
                 <td class="text-end">{{wcag21.totalCount}}</td>
               </tr>
               <tr>
-                <th>WCAG 2.2</th>
+                <th><a href="https://www.w3.org/TR/WCAG22/" target="_spec">WCAG 2.2</a> (2023)</th>
                 <td class="text-end">{{wcag22.aCount}}</td>
                 <td class="text-end">{{wcag22.aaCount}}</td>
                 <td class="text-end">{{wcag22.aaaCount}}</td>
                 <td class="text-end">{{wcag22.totalCount}}</td>
+              </tr>
+              <tr>
+                <th>First Step Rules</th>
+                <td class="text-end">{{firstStep.aCount}}</td>
+                <td class="text-end">{{firstStep.aaCount}}</td>
+                <td class="text-end">{{firstStep.aaaCount}}</td>
+                <td class="text-end">{{firstStep.totalCount}}</td>
               </tr>
             </tbody>
           </table>

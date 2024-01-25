@@ -70,7 +70,7 @@ export default function executeTest(label, IFRAME_ID, RULE_ID) {
     const title  = doc.title;
     const url    = win.location.href;
 
-    const evaluationResult = evaluator.evaluate(doc, title, url);
+    const evaluationResult = evaluator.evaluateWCAG(doc, title, url);
     const resultSummary = evaluationResult.getRuleResult(RULE_ID).getResultsSummary();
 
     const f  = getCount(iframe, RULE_ID + '_FAIL')   + getData(iframe, 'fail');

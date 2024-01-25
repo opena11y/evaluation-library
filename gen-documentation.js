@@ -59,6 +59,14 @@ const wcag22 = {
   totalCount: 0
 }
 
+const firstStep = {
+  title: 'First Step Rules',
+  aCount: 0,
+  aaCount: 0,
+  aaaCount: 0,
+  totalCount: 0
+}
+
 // Create data for creating index and rule files
 
 const allRules = [];
@@ -213,15 +221,34 @@ for(const p in el.getWCAG.principles) {
       });
 
       glInfo.successCriteria.push(scInfo);
-
-
-
-
     }
     allGuidelines.push(glInfo);
   }
 };
 
+firstStepRules = [];
+
+el.getAllRules.forEach( r => {
+  if (r.first_step) {
+    const ruleInfo = el.getRuleInfo(r);
+    firstStepRules.push(ruleInfo);
+
+    if (ruleInfo.wcag_primary.level == levelA) {
+      firstStep.aCount += 1;
+      firstStep.totalCount += 1;
+    }
+    else {
+      if (ruleInfo.wcag_primary.level == levelAA) {
+        firstStep.aaCount += 1;
+        firstStep.totalCount += 1;
+      }
+      else {
+        firstStep.aaaCount += 1;
+        firstStep.totalCount += 1;
+      }
+    }
+  }
+});
 
 // Create index file
 
@@ -251,12 +278,20 @@ const htmlRuleRS = nunjucks.render('./src-docs/templates/content-rules-rs.njk',
 });
 outputFile('rules-rs.html', htmlRuleRS);
 
+// First Step Rules
+const htmlRuleFS = nunjucks.render('./src-docs/templates/content-rules-fs.njk',
+  {title: 'First Step Ruleset',
+  firstStepRules: firstStepRules
+});
+outputFile('rules-fs.html', htmlRuleFS);
+
 // Rule summary
 const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rules-sum.njk',
-  {title: 'Rule Summary',
+  {title: 'Rulesets and Rule Summaries',
   wcag20: wcag20,
   wcag21: wcag21,
   wcag22: wcag22,
+  firstStep: firstStep,
   allRuleCategories: allRuleCategories,
   allGuidelines: allGuidelines,
   allRuleScopes: allRuleScopes

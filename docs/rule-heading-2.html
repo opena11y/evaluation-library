@@ -57,7 +57,7 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <a class="dropdown-item" href="rules-sum.html">Rule Summary</a>
+                                <a class="dropdown-item" href="rules-sum.html">Rulesets</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
@@ -67,6 +67,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -267,9 +270,6 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#heading-2";
         }
@@ -278,7 +278,12 @@
             node.href= "rules-rs.html#heading-2";
           }
           else {
-            node.href= "rules-rc.html#heading-2";
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#heading-2";
+            }
+            else {
+              node.href= "rules-fs.html#heading-2";
+            }
           }
         }
       })()

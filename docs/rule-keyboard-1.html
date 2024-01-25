@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ARIA widget role requires specific keyboard support | OpenA11y Evaluation Library 2.0</title>
+        <title>ARIA widget keyboard support | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -57,7 +57,7 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <a class="dropdown-item" href="rules-sum.html">Rule Summary</a>
+                                <a class="dropdown-item" href="rules-sum.html">Rulesets</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
@@ -67,6 +67,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -94,14 +97,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">ARIA widget role requires specific keyboard support</li>
+          <li class="breadcrumb-item active">ARIA widget keyboard support</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: ARIA widget role requires specific keyboard support</h1>
+            <h1 id="h1-title">Rule: ARIA widget keyboard support</h1>
             
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
@@ -255,9 +258,6 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#keyboard-1";
         }
@@ -266,7 +266,12 @@
             node.href= "rules-rs.html#keyboard-1";
           }
           else {
-            node.href= "rules-rc.html#keyboard-1";
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#keyboard-1";
+            }
+            else {
+              node.href= "rules-fs.html#keyboard-1";
+            }
           }
         }
       })()

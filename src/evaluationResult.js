@@ -108,10 +108,13 @@ export default class EvaluationResult {
     this.allDomElements = [];
     this.allRuleResults = [];
 
+    debug.flag && debug.log(`[title]: ${this.title}`);
+    debug.flag && debug.log(`[  url]: ${this.url}`);
+
   }
 
   /**
-   * @method evaluateWCAG
+   * @method runWCAGRules
    *
    * @desc Updates rule results array with results from a WCAG features
    *
@@ -120,14 +123,14 @@ export default class EvaluationResult {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluateWCAG (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
+  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
 
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
     debug.flag && debug.log(`[evaluateWCAG][      level]: ${level}`);
     debug.flag && debug.log(`[evaluateWCAG][scopeFilter]: ${scopeFilter}`);
 
-    this.ruleset     =ruleset;
+    this.ruleset     = ruleset;
     this.level       = level;
     this.scopeFilter = scopeFilter;
 
@@ -155,16 +158,18 @@ export default class EvaluationResult {
   }
 
   /**
-   * @method evaluateRuleList
+   * @method runRuleListRules
    *
    * @desc Updates rule results array with results from a specific set of rules
    *
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
-  evaluateRuleList (ruleList) {
+  runRuleListRules (ruleList) {
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
+
+    this.ruleset     = 'RULELIST';
 
     const domCache      = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
@@ -185,21 +190,21 @@ export default class EvaluationResult {
   }
 
  /**
-   * @method evaluateFirstStepRules
+   * @method runFirstStepRules
    *
    * @desc Updates rule results array with results first step rules
    */
 
-  evaluateFirstStepRules () {
+  runFirstStepRules () {
     const startTime = new Date();
+
+    this.ruleset     = 'FIRSTSTEP';
 
     const domCache      = new DOMCache(this.startingDoc);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
     allRules.forEach (rule => {
-
-      debug.log(`[rule][id]: ${rule.getId()} (${rule.isFirstStep})`);
 
       if (rule.isFirstStep) {
         const ruleResult = new RuleResult(rule);
@@ -387,16 +392,19 @@ export default class EvaluationResult {
 
   getDataForJSON (flag=false) {
 
+    const thisRef = this;
+
     const data = {
-      eval_url: cleanForUTF8(this.url),
-      eval_url_encoded: encodeURI(this.url),
-      eval_title: cleanForUTF8(this.title),
+      eval_url: cleanForUTF8(thisRef.url),
+      eval_url_encoded: encodeURI(thisRef.url),
+      eval_title: cleanForUTF8(thisRef.title),
 
       // For compatibility with previous versions of the library
-      ruleset_id:     'ARIA_STRICT',
-      ruleset_title:  'HTML and ARIA Techniques',
-      ruleset_abbrev: 'HTML5+ARIA',
-      ruleset_version: VERSION,
+      ruleset:      thisRef.ruleset,
+      wcag_level:   thisRef.relevel,
+      scope_filter: thisRef.scopeFilter,
+      version:      thisRef.version,
+      date:         thisRef.date.toString(),
 
       rule_results: []
     }

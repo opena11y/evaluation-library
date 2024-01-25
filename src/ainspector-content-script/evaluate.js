@@ -30,7 +30,6 @@ export function evaluate (ruleset="WCAG21", level="AA", scopeFilter="ALL", ruleL
       evaluationResult = evaluationLibrary.evaluateWCAG(doc, doc.title, doc.location.href, ruleset, level, scopeFilter);
       break;
 
-    case 'FILTER':
     case 'LIST':
       evaluationResult = evaluationLibrary.evaluateRuleList(doc, doc.title, doc.location.href, ruleList);
       break;

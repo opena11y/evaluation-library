@@ -10,7 +10,7 @@ export const keyboardRules = {
   KEYBOARD_1: {
     ID:                    'Keyboard 1',
     DEFINITION:            'Elements with ARIA widget roles must support the keyboard interactions required by those roles.',
-    SUMMARY:               'ARIA widget role requires specific keyboard support',
+    SUMMARY:               'ARIA widget keyboard support',
     TARGET_RESOURCES_DESC: 'Elements with ARIA widget roles',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S:  'Verify the element with the ARIA widget role implements the keyboard interactions required by its role.',

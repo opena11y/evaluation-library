@@ -50,7 +50,7 @@ export const keyboardRules = [
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
-        if (de.hasRole && de.ariaInfo.isWidget) {
+        if (de.hasRole && de.ariaInfo.isWidget && !de.ariaInfo.isDPUBRole) {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
           }
