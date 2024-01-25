@@ -256,7 +256,7 @@ function getFormattedDate() {
 
 function cleanForUTF8 (str) {
   if (typeof str !== 'string') {
-    return "[cleanForUTF8]: Not a string";
+    return `[cleanForUTF8]: Not a string (${typeof str})`;
   }
   let nstr = '';
   str.split().forEach( c => {

@@ -2,25 +2,29 @@
 
 /* Imports */
 import {Constants}       from './constants.js';
-import DOMCache          from './cache/domCache.js';
-import {allRules}        from './rules/allRules.js';
 import EvaluationResult  from './evaluationResult.js';
+import {allRules}        from './rules/allRules.js';
 import {
   getCommonMessage,
-  getGuidelineInfo,
+  getHasFailures,
+  getHasHidden,
+  getHasManualChecks,
+  getHasPass,
   getInformationLinks,
+  getManualCheckMessage,
   getPurposes,
   getRuleCategories,
   getRuleCategoryInfo,
   getRuleDefinition,
   getRuleId,
+  getRuleScopes,
   getRuleSummary,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
   getTechniques,
   getWCAG,
-  getWCAGVersion,
-  setUseCodeTags
+  getWCAGLevel,
+  getWCAGVersion
 }  from './locale/locale.js'
 
 import DebugLogging      from './debug.js';
@@ -38,29 +42,92 @@ debug.json = false;
  */
 
 export default class EvaluationLibrary {
-  constructor (codeTags = false) {
+  constructor () {
     this.constants = new Constants();
-    // setUseCodeTags sets if localized strings using the @ character to identify 
-    // code items in the string return <code> tags or capitalization  
-    setUseCodeTags(codeTags);
   }
 
   /**
-   * @method evaluate
+   * @method evaluateRuleList
+   *
+   * @desc Evaluate a document using the OpenA11y ruleset and return an evaluation object
+   *
+   * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
+   * @param  {String}  title       - Title of document being analyzed
+   * @param  {String}  url         - URL of document being analyzed
+   * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
+   */
+
+  evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.runRuleListRules(ruleList);
+
+    // Debug features
+    if (debug.flag) {
+      domCache.showDomElementTree();
+      domCache.controlInfo.showControlInfo();
+      domCache.iframeInfo.showIFrameInfo();
+      domCache.idInfo.showIdInfo();
+      domCache.imageInfo.showImageInfo();
+      domCache.linkInfo.showLinkInfo();
+      domCache.listInfo.showListInfo();
+      domCache.tableInfo.showTableInfo();
+      domCache.structureInfo.showStructureInfo();
+
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
+    }
+    return evaluationResult;
+  }
+
+ /**
+   * @method evaluateRuleWCAG
    *
    * @desc Evaluate a document using the OpenA11y ruleset and return an evaluation object
    *
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
-   * @param  {String}  ruleset     - Set of rules to evaluate (values: "FIRST-STEP" | "A" | "AA" | "AAA")
+   * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
+   * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    */
 
-  evaluate (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ruleFilter = []) {
+  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
 
-    let domCache = new DOMCache(startingDoc);
-    let evaluationResult = new EvaluationResult(allRules, domCache, title, url, ruleset, level, scopeFilter, ruleFilter);
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter);
+
+    // Debug features
+    if (debug.flag) {
+      domCache.showDomElementTree();
+      domCache.controlInfo.showControlInfo();
+      domCache.iframeInfo.showIFrameInfo();
+      domCache.idInfo.showIdInfo();
+      domCache.imageInfo.showImageInfo();
+      domCache.linkInfo.showLinkInfo();
+      domCache.listInfo.showListInfo();
+      domCache.tableInfo.showTableInfo();
+      domCache.structureInfo.showStructureInfo();
+
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
+    }
+    return evaluationResult;
+  }
+
+ /**
+   * @method evaluateFirstStepRules
+   *
+   * @desc Evaluate a document using first step rules
+   *
+   * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
+   * @param  {String}  title       - Title of document being analyzed
+   * @param  {String}  url         - url of document being analyzed
+   */
+
+  evaluateFirstStepRules (startingDoc, title='', url='') {
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.runFirstStepRules();
 
     // Debug features
     if (debug.flag) {
@@ -110,6 +177,17 @@ export default class EvaluationLibrary {
   }
 
   /**
+   * @method getRuleScopes
+   *
+   * @desc Provides access to the localized Rule Scopes object from evaluation library
+   */
+
+  get getRuleScopes () {
+    return getRuleScopes();
+  }
+
+
+  /**
    * @method getAllRules
    *
    * @desc Provides access to the rules in evaluation library
@@ -149,6 +227,7 @@ export default class EvaluationLibrary {
     ruleInfo.last_updated  = rule.last_updated;
 
     ruleInfo.rule_required    = rule.rule_required;
+    ruleInfo.first_step       = rule.first_step;
 
     ruleInfo.rule_scope       = rule.rule_scope;
     ruleInfo.rule_category    = getRuleCategoryInfo(rule.rule_category_id);
@@ -156,16 +235,23 @@ export default class EvaluationLibrary {
     ruleInfo.conformance      = rule.rule_required ? getCommonMessage('required') : getCommonMessage('recommended');
 
     ruleInfo.wcag_primary_id  = rule.wcag_primary_id;
+    ruleInfo.wcag_level       = getWCAGLevel(rule.wcag_primary_id);
     ruleInfo.wcag_primary     = getSuccessCriterionInfo(rule.wcag_primary_id);
     ruleInfo.wcag_related     = getSuccessCriteriaInfo(rule.wcag_related_ids);
+    ruleInfo.wcag_version     = getWCAGVersion(ruleInfo.wcag_primary_id);
+    ruleInfo.has_failures       = getHasFailures(id);
+    ruleInfo.has_hidden         = getHasHidden(id);
+    ruleInfo.has_manual_checks  = getHasManualChecks(id);
+    ruleInfo.has_pass           = getHasPass(id);
+    ruleInfo.mc_message         = getManualCheckMessage(id);
 
     ruleInfo.target_resources = rule.target_resources;
 
-    ruleInfo.definition = getRuleDefinition(id);
-    ruleInfo.summary    = getRuleSummary(id);
-    ruleInfo.purposes   = getPurposes(id);
+    ruleInfo.definition = getRuleDefinition(id, true);
+    ruleInfo.summary    = getRuleSummary(id, true);
+    ruleInfo.purposes   = getPurposes(id, true);
 
-    ruleInfo.techniques = getTechniques(id);
+    ruleInfo.techniques = getTechniques(id, true);
     ruleInfo.information_links = getInformationLinks(id);
 
     return ruleInfo;

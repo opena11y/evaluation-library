@@ -32,6 +32,7 @@ export const linkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : true,
+    first_step          : true,
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],
     target_resources    : ['a', 'area', '[role=link]'],
@@ -70,6 +71,7 @@ export const linkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : false,
+    first_step          : false,
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],
     target_resources    : ['a', 'area', '[role=link]'],
@@ -143,6 +145,7 @@ export const linkRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '3.2.1',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
     target_resources    : ['a', 'area', 'select'],
@@ -158,6 +161,54 @@ export const linkRules = [
       });
     } // end validation function
   },
+
+  { rule_id             : 'LINK_4',
+    last_updated        : '2024-01-20',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    rule_required       : true,
+    first_step          : false,
+    wcag_primary_id     : '2.5.3',
+    wcag_related_ids    : [],
+    target_resources    : ["a", "[role=link]"],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+
+        if (de.accName.includesAlt) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+        else {
+          if (de.accName.includesAriaLabel) {
+            if (de.visibility.isVisibleToAT) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.elemName]);
+            }
+          }
+          else {
+            if (de.accName.nameIsNotVisible) {
+              if (de.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_3', [de.elemName]);
+              }
+            }
+
+          }
+        }
+
+      });
+
+    } // end validation function
+  }
 ];
 
 

@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;object&lt;/code&gt; for video only must have alternative | OpenA11y Evaluation Library 2.0</title>
+        <title>Captions (Prerecorded) | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -26,14 +26,24 @@
 
     </head>
 
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
             <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -48,10 +58,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -79,15 +98,16 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>object</code> for video only must have alternative</li>
+          <li class="breadcrumb-item active">Captions (Prerecorded)</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>object</code> for video only must have alternative</h1>
+            <h1 id="h1-title">Rule: Captions (Prerecorded)</h1>
             
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
@@ -105,7 +125,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td><code>object</code> elements used for prerecorded video only content must have text or audio descriptions of the video content.</td>
+  <td>Captions are provided for all prerecorded audio content in synchronized media, except when the media is a media alternative for text and is clearly labeled as such.</td>
 </tr>
 
                   
@@ -114,9 +134,7 @@
   <td>
     <ul>
       
-      <li>Text and audio descriptions provide a means for people who cannot see the video to understand the video content.</li>
-      
-      <li>Some types of learning disabilities affect visual processing, text and audio descriptions provide an alternative way to understand the video content.</li>
+      <li>People who are deaf or have a hearing loss can access the auditory information in the synchronized media content through captions.</li>
       
     </ul>
   </td>
@@ -133,20 +151,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#audio-only-and-video-only-prerecorded" target="_spec">
-        Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)
+      <a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded" target="_spec">
+        Success Criterion 1.2.2 Captions (Prerecorded)
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded" target="_spec">
-          Success Criterion 1.2.2 Captions (Prerecorded)
-        </a>
-      </li>
       
       <li>
         <a href="https://www.w3.org/TR/WCAG22/#captions-live" target="_spec">
@@ -167,7 +179,7 @@
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>Element</td>
 </tr>
 
                   
@@ -176,11 +188,13 @@
   <td>
     <ul>
       
-      <li>Use the <code>video</code> element instead of the <code>object</code> element for video only content, since the <code>video</code> element provides better support for audio description tracks.</li>
+      <li>For the <code>video</code> element use the <code>track</code> element to add a caption track to the video content.</li>
       
-      <li>Include an audio track in the video that describes the video content.</li>
+      <li>Use WebVTT to encode the timed stamped captioning information for the audio content.</li>
       
-      <li>Use <code>aria-describedby</code> attribute to point to a text description of the video only content.</li>
+      <li>Use open captions to include the captions as part of the video.</li>
+      
+      <li>If closed captions are not supported, use open captioning to include captions as part of the video.</li>
       
     </ul>
   </td>
@@ -192,11 +206,21 @@
   <td>
     <ul>
       
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html">W3C WCAG Understanding SC 1.2.2: Captions (Prerecorded)</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">HMTL: The video element</a></li>
+      
+      <li><a href="https://html.spec.whatwg.org/multipage/media.html#the-track-element">HMTL: The track element</a></li>
+      
+      <li><a href="https://www.w3.org/TR/webvtt1/">WebVTT: The Web Video Text Tracks Format</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded">G93: Providing open (always visible) captions</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G87">G87: Providing closed captions</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G87">G87: Providing closed captions</a></li>
+      
       <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
-      
-      <li><a href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element">HMTL: The object element</a></li>
-      
-      <li><a href="https://www.w3.org/TR/wai-aria/#aria-describedby">Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby</a></li>
       
       <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
       
@@ -214,7 +238,7 @@
     </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 
@@ -236,14 +260,21 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#video-2";
         }
         else {
-          node.href= "rules-rc.html#video-2";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#video-2";
+          }
+          else {
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#video-2";
+            }
+            else {
+              node.href= "rules-fs.html#video-2";
+            }
+          }
         }
       })()
     </script>

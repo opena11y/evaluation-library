@@ -1,0 +1,65 @@
+{% macro wcagVersion(id) %}
+  {% if id === 'WCAG21' %}
+    (new in WCAG 2.1)
+  {% endif %}
+  {% if id === 'WCAG22' %}
+    (new in WCAG 2.2)
+  {% endif %}
+{% endmacro %}
+
+<html lang="en-us">
+  <head>
+    {% include "./head.njk" %}
+  </head>
+  <body>
+    {% include "./header.njk" %}
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-12">
+          {% block content %}
+
+          <h1>{{title}}</h1>
+
+          <table class="table table-striped">
+            <thead>
+              <th>Rule ID</th>
+              <th>Scope</th>
+              <th>Summary</th>
+              <th>Description</th>
+            </thead>
+            <tbody>
+            {% for r in allRules %}
+              {% if r.has_manual_checks and 'erify' in r.definition %}
+              <tr id="{{r.htmlId}}">
+                <td>{{r.id}}</td>
+                <td>{{r.rule_scope}}</td>
+                <td><a href="{{r.filename | safe}}#gl">{{r.summary | safe}}</a></td>
+                <td>
+                  <div>
+                    <b {% if 'erify' in r.definition %}style="color: red; font-size: 120%"{% endif %}>Definition:</b>
+                    {{r.definition | safe}}
+                  </div>
+                  <div style="margin-top: 1em">
+                    <b>Manual Check:</b>
+                    {{r.mc_message | safe}}
+                  </div>
+                </td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+            </tbody>
+          </table>
+
+          {% endblock %}
+
+        </div>
+      </main>
+    </nav>
+    {% include "./footer.njk" %}
+    {% include "./scripts.njk" %}
+  </body>
+</html>
+

@@ -29,6 +29,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['ARIA Widget roles'],
@@ -72,6 +73,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['Elements with onclick events'],
@@ -131,6 +133,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[role]'],
@@ -140,7 +143,12 @@ export const widgetRules = [
       if (de.hasRole) {
         if (de.visibility.isVisibleToAT) {
           if (!de.ariaInfo.isValidRole) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            if (de.ariaInfo.isDPUBRole) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+            }
           }
           else {
             if (de.ariaInfo.isAbstractRole) {
@@ -189,6 +197,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[aria-atomic]',
@@ -302,6 +311,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[aria-atomic]',
@@ -370,6 +380,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[checkbox]',
@@ -414,6 +425,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[feed]',
@@ -493,6 +505,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : [ "caption",
@@ -578,6 +591,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[aria-owns]'],
@@ -608,6 +622,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[role="meter"]',
@@ -677,6 +692,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[role="meter"]',
@@ -718,6 +734,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[ARIA widget roles'],
@@ -757,6 +774,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['2.4.6'],
   target_resources    : [ "caption",
@@ -767,13 +785,14 @@ export const widgetRules = [
                           "insertion",
                           "none",
                           "paragraph",
-                          "presentation",
+                          "none",
                           "strong",
                           "subscript",
                           "superscript"],
   validate            : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.isNameProhibited &&
+      if (!de.ariaInfo.isDPUBRole &&
+          de.ariaInfo.isNameProhibited &&
           de.accName.name &&
           de.accName.source.includes('aria-label')) {
         if (de.visibility.isVisibleToAT) {
@@ -790,13 +809,14 @@ export const widgetRules = [
 /**
  * @object WIDGET_14
  *
- * @desc     Roles with deprecated ARIA attributes
+ * @desc     Roles with unsupported or deprecated ARIA attributes
  */
 { rule_id             : 'WIDGET_14',
   last_updated        : '2023-04-21',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['4.1.2'],
   target_resources    : [
@@ -849,7 +869,7 @@ export const widgetRules = [
         "note",
         "option",
         "paragraph",
-        "presentation",
+        "none",
         "progressbar",
         "radio",
         "radiogroup",
@@ -887,16 +907,19 @@ export const widgetRules = [
     ],
   validate : function (dom_cache, rule_result) {
     dom_cache.allDomElements.forEach( de => {
-      if (de.ariaInfo.deprecatedAttrs) {
-        if (de.visibility.isVisibleToAT) {
-          de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
-          });
-        }
-        else {
-          de.ariaInfo.deprecatedAttrs.forEach( attr => {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [attr.name, de.elemName]);
-          });
+      if (!de.ariaInfo.isDPUBRole) {
+        if (de.ariaInfo.deprecatedAttrs.length || de.ariaInfo.unsupportedAttrs.length) {
+          if (de.visibility.isVisibleToAT) {
+            de.ariaInfo.deprecatedAttrs.forEach( attr => {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [attr.name, de.elemName]);
+            });
+            de.ariaInfo.unsupportedAttrs.forEach( attr => {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [attr.name, de.elemName]);
+            });
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
         }
       }
     });
@@ -913,6 +936,7 @@ export const widgetRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '2.1.1',
   wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
   target_resources    : ["Custom elements using web component APIs"],

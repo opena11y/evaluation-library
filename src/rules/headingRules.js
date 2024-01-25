@@ -30,6 +30,7 @@ export const headingRules = [
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.HEADINGS,
     rule_required       : false,
+    first_step          : true,
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
     target_resources    : ['h1'],
@@ -74,6 +75,7 @@ export const headingRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.HEADINGS,
     rule_required       : false,
+    first_step          : false,
     wcag_primary_id     : '2.4.6',
     wcag_related_ids    : ['1.3.1', '2.4.1', '2.4.2', '2.4.10'],
     target_resources    : ['h1'],
@@ -271,15 +273,17 @@ export const headingRules = [
       rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [nestingErrors]);
     }
     else {
-      if (manualChecks > 0) {
-        if (manualChecks === 1) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      if (dom_cache.structureInfo.allHeadingDomElements.length > 0) {
+        if (manualChecks > 0) {
+          if (manualChecks === 1) {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          }
+          else {
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
+          }
+        } else {
+          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
         }
-        else {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
-        }
-      } else {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
       }
     }
 

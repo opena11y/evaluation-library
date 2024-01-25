@@ -26,14 +26,24 @@
 
     </head>
 
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
             <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -48,10 +58,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -83,11 +102,12 @@
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
             <h1 id="h1-title">Rule: <code>fieldset</code> must have one <code>legend</code></h1>
             
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
@@ -171,7 +191,7 @@
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>Element</td>
 </tr>
 
                   
@@ -192,9 +212,9 @@
   <td>
     <ul>
       
-      <li><a href="https://html.spec.whatwg.org/dev/form-elements.html#the-fieldset-element">HTML Specification: The <code>fieldset</code> element</a></li>
+      <li><a href="https://html.spec.whatwg.org/dev/form-elements.html#the-fieldset-element">HTML Specification: The @fieldset@ element</a></li>
       
-      <li><a href="https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element">HTML Specification: The <code>legend</code> element</a></li>
+      <li><a href="https://html.spec.whatwg.org/dev/form-elements.html#the-legend-element">HTML Specification: The @legend@ element</a></li>
       
       <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend">MDN <legend>: The Field Set Legend element</a></li>
       
@@ -216,7 +236,7 @@
     </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 
@@ -238,14 +258,21 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#control-8";
         }
         else {
-          node.href= "rules-rc.html#control-8";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#control-8";
+          }
+          else {
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#control-8";
+            }
+            else {
+              node.href= "rules-fs.html#control-8";
+            }
+          }
         }
       })()
     </script>

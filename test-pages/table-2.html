@@ -147,6 +147,139 @@
         </tbody>
       </table>
 
+      <h2>Ambiguous Table</h2>
+
+      <table class="test">
+        <thead>
+            <tr>
+              <td></td>
+              <td id="a">A</td>
+              <td id="b">B</td>
+              <td id="c">C</td>
+              <td id="d">D</td>
+              <td id="e">E</td>
+              <td id="f">F</td>
+              <td id="g">G</td>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="l">L</td>
+            <td>Cell 11</td>
+            <td>Cell 12</td>
+            <td>Cell 13</td>
+            <td>Cell 14</td>
+            <td>Cell 15</td>
+            <td>Cell 16</td>
+            <td>Cell 17</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>Cell 21</td>
+            <td>Cell 22</td>
+            <td>Cell 23</td>
+            <td>Cell 24</td>
+            <td>Cell 25</td>
+            <td>Cell 26</td>
+            <td>Cell 27</td>
+          </tr>
+          <tr>
+            <td>N</td>
+            <td>Cell 31</td>
+            <td>Cell 32</td>
+            <td>Cell 33</td>
+            <td>Cell 35</td>
+            <td>Cell 36</td>
+            <td>Cell 37</td>
+          </tr>
+          <tr>
+            <td>O</td>
+            <td>Cell 41</td>
+            <td>Cell 42</td>
+            <td>Cell 43</td>
+            <td>Cell 44</td>
+            <td>Cell 45</td>
+            <td>Cell 46</td>
+            <td>Cell 47</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Complex Data Table</h2>
+
+      <table class="test">
+        <caption>Complex Data Table</caption>
+        <thead>
+            <tr>
+              <td></td>
+              <th colspan="3" id="aa">AA</th>
+              <td></td>
+              <th colspan="3" id="bb">BB</th>
+              <th id="g" hidden>G</th>
+            </tr>
+            <tr>
+              <td></td>
+              <th id="a">A</th>
+              <th id="b">B</th>
+              <th id="c">C</th>
+              <td></td>
+              <th id="d">D</th>
+              <th id="e">E</th>
+              <th id="f">F</th>
+              <th id="g" hidden>G</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th id="l">L</th>
+            <td>Cell 11</td>
+            <td colspan="2" header="l">Cell 12</td>
+            <td></td>
+            <td>Cell 14</td>
+            <td>Cell 15</td>
+            <td>Cell 16</td>
+          </tr>
+          <tr>
+            <th id="m">M</th>
+            <td>Cell 21</td>
+            <td>Cell 22</td>
+            <td>Cell 23</td>
+            <td></td>
+            <td rowspan="2" headers="d">Cell 24</td>
+            <td>Cell 25</td>
+            <td>Cell 26</td>
+          </tr>
+          <tr>
+            <th id="n" scope="row">N</th>
+            <td>Cell 31</td>
+            <td>Cell 32</td>
+            <td>Cell 33</td>
+            <td></td>
+            <td>Cell 35</td>
+            <td>Cell 36</td>
+          </tr>
+          <tr>
+            <th id="o" scope="row">O</th>
+            <td>Cell 41</td>
+            <td>Cell 42</td>
+            <td>Cell 43</td>
+            <td></td>
+            <td>Cell 44</td>
+            <td>Cell 45</td>
+            <td>Cell 46</td>
+          </tr>
+          <tr hidden>
+            <th id="p" scope="row">P</th>
+            <td>Cell 51</td>
+            <td>Cell 52</td>
+            <td>Cell 53</td>
+            <td></td>
+            <td>Cell 54</td>
+            <td>Cell 55</td>
+            <td>Cell 56</td>
+          </tr>
+        </tbody>
+      </table>
 
 
     </main>

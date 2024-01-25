@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Consistent Help | OpenA11y Evaluation Library 2.0</title>
+        <title>Consistent ordering of help | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -26,14 +26,24 @@
 
     </head>
 
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
             <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -48,10 +58,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -79,15 +98,16 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">Consistent Help</li>
+          <li class="breadcrumb-item active">Consistent ordering of help</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Consistent Help</h1>
+            <h1 id="h1-title">Rule: Consistent ordering of help</h1>
             
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
@@ -105,7 +125,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Verify the consistent placement of help and contact information on web pages within a website.</td>
+  <td>Help and contact information occurs in the same order relative to other page content within a website.  Exceptions for websites that do not contain help or contact information or if the user initiated a change in ordering.</td>
 </tr>
 
                   
@@ -149,13 +169,13 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Color/Content</td>
+  <td>Site Navigation</td>
 </tr>
 
                   
 <tr>
   <th>Rule Scope</th>
-  <td></td>
+  <td>Website</td>
 </tr>
 
                   
@@ -164,11 +184,11 @@
   <td>
     <ul>
       
-      <li>Example: On-line job application: Some of the application questions may be hard for new job seekers to understand even after reading the contextual help. For example, the form may request their identification number, but they may have several and not know which one to enter. Consistently located contact information will enable them to use phone or email so they can get an answer to their question. </li>
+      <li><b>Example:</b> On-line job application: Some of the application questions may be hard for new job seekers to understand even after reading the contextual help. For example, the form may request their identification number, but they may have several and not know which one to enter. Consistently located contact information will enable them to use phone or email so they can get an answer to their question. </li>
       
-      <li>Example: Medical appointment scheduling form: When the service a patient is trying to book is not easily findable within the interface, they may need human help. A consistently located messaging option (chat client) enables them to quickly interact with a staff person that can help, without requiring them to manage a second interface. </li>
+      <li><b>Example:</b> Medical appointment scheduling form: When the service a patient is trying to book is not easily findable within the interface, they may need human help. A consistently located messaging option (chat client) enables them to quickly interact with a staff person that can help, without requiring them to manage a second interface. </li>
       
-      <li>Example: Finding a specific policy or procedure: An employee who needs to complete a work task may have difficulty locating the specific policy or procedure document on their employer's Web site. A consistently located "How Do I" page may include the information that enables them to independently complete this task. </li>
+      <li><b>Example:</b> Finding a specific policy or procedure: An employee who needs to complete a work task may have difficulty locating the specific policy or procedure document on their employer's Web site. A consistently located "How Do I" page may include the information that enables them to independently complete this task. </li>
       
     </ul>
   </td>
@@ -196,7 +216,7 @@
     </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 
@@ -218,14 +238,21 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#help-1";
         }
         else {
-          node.href= "rules-rc.html#help-1";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#help-1";
+          }
+          else {
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#help-1";
+            }
+            else {
+              node.href= "rules-fs.html#help-1";
+            }
+          }
         }
       })()
     </script>

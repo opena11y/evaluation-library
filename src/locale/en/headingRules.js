@@ -41,8 +41,8 @@ export const headingRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @h1@ element',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G130: Providing descriptive headings',
@@ -93,8 +93,8 @@ export const headingRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: The @h1@ element',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
@@ -137,8 +137,8 @@ export const headingRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G130: Providing descriptive headings',
@@ -193,8 +193,8 @@ export const headingRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G130: Providing descriptive headings',
@@ -239,8 +239,8 @@ export const headingRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H1, H2, H3, H4, H5, H6 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H1'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'C22: Using CSS to control visual presentation of text',
@@ -287,8 +287,8 @@ export const headingRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: Headings: The H2 elements',
-        url:   'https://www.w3.org/TR/html4/struct/global.html#edef-H2'
+        title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
+        url:   'https://html.spec.whatwg.org/#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'
       }
     ]
   },

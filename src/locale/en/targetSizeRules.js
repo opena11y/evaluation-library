@@ -28,10 +28,10 @@ export const targetSizeRules = {
       PURPOSES: [
         'The intent of this success criterion is to help users who may have trouble activating a small target because of hand tremors, limited dexterity or other reasons. If the target is too small, it may be difficult to aim at the target.',
         'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.',
-        'EXCEPTION (common) Inline: When links are in sentences (e.g. part of a paragraph), the target size requirement does not apply, unless the author has specifically defined the width or height using CSS.',
-        'EXCEPTION (common) User Agent Control: If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.',
-        'EXCEPTION (uncommon) Equivalent Target Exception: If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.',
-        'EXCEPTION (uncommon) Essential Exception: If the target is required to be a particular target size and cannot be provided in another way.'
+        '^Exception (common) Inline:^ When links are in sentences (e.g. part of a paragraph), the target size requirement does not apply, unless the author has specifically defined the width or height using CSS.',
+        '^Exception (common) User Agent Control:^ If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.',
+        '^Exception (uncommon) Equivalent Target Exception:^ If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.',
+        '^Exception (uncommon) Essential Exception:^ If the target is required to be a particular target size and cannot be provided in another way.'
       ],
       TECHNIQUES: [
         'Remove author styling of the rendered size of the link, allowing the browser to render the link using the preferences of the user.',
@@ -92,10 +92,10 @@ export const targetSizeRules = {
       PURPOSES: [
         'The intent of this success criterion is to help users who may have trouble activating a small target because of hand tremors, limited dexterity or other reasons. If the target is too small, it may be difficult to aim at the target.',
         'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.',
-        'EXCEPTION (common) Inline: When links are in sentences (e.g. part of a paragraph), the target size requirement does not apply, unless the author has specifically defined the width or height using CSS.',
-        'EXCEPTION (common) User Agent Control: If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.',
-        'EXCEPTION (uncommon) Equivalent Target Exception: If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.',
-        'EXCEPTION (uncommon) Essential Exception: If the target is required to be a particular target size and cannot be provided in another way.'
+        '^Exception (common) Inline:^ When links are in sentences (e.g. part of a paragraph), the target size requirement does not apply, unless the author has specifically defined the width or height using CSS.',
+        '^Exception(common) User Agent Control:^ If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.',
+        '^Exception (uncommon) Equivalent Target Exception:^ If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.',
+        '^Exception (uncommon) Essential Exception:^ If the target is required to be a particular target size and cannot be provided in another way.'
       ],
       TECHNIQUES: [
         'Remove author styling of the rendered size of the link, allowing the browser to render the link using the preferences of the user.',
@@ -275,7 +275,7 @@ export const targetSizeRules = {
         'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
       ],
       TECHNIQUES: [
-        'Use CSS to increase the dimensions of the radio buttons or checkbox or the associated label elements to at least 24 by 24 pixels.'
+        'Use CSS to increase the dimensions of the radio buttons and/or checkbox or the associated label elements to at least 24 by 24 pixels.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -335,7 +335,7 @@ export const targetSizeRules = {
         'Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.'
       ],
       TECHNIQUES: [
-        'Use CSS to increase the dimensions of the radio buttons or checkbox or the associated label elements to at least 44 by 44 pixels.'
+        'Use CSS to increase the dimensions of the radio buttons and/or checkbox or the associated label elements to at least 44 by 44 pixels.'
       ],
       MANUAL_CHECKS: [
       ],

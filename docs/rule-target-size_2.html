@@ -26,14 +26,24 @@
 
     </head>
 
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
             <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -48,10 +58,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -83,11 +102,12 @@
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
             <h1 id="h1-title">Rule: Author sizing of links (Enhanced)</h1>
             
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
@@ -118,13 +138,13 @@
       
       <li>Mice and similar pointing devices can be hard to use for these users, and a larger target will help them greatly in having positive outcomes on the web page.</li>
       
-      <li>EXCEPTION (common) Inline: When links are in sentences (e.g. part of a paragraph), the target size requirement does not apply, unless the author has specifically defined the width or height using CSS.</li>
+      <li><b>Exception (common) Inline:</b> When links are in sentences (e.g. part of a paragraph), the target size requirement does not apply, unless the author has specifically defined the width or height using CSS.</li>
       
-      <li>EXCEPTION (common) User Agent Control: If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.</li>
+      <li><b>Exception(common) User Agent Control:</b> If the size of the target is not modified by the author through CSS or other size properties, then the target does not need to meet the target size of 44 by 44 CSS pixels.</li>
       
-      <li>EXCEPTION (uncommon) Equivalent Target Exception: If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.</li>
+      <li><b>Exception (uncommon) Equivalent Target Exception:</b> If there is more than one target on a screen that performs the same action, only one of the targets need to meet the target size of 44 by 44 CSS pixels.</li>
       
-      <li>EXCEPTION (uncommon) Essential Exception: If the target is required to be a particular target size and cannot be provided in another way.</li>
+      <li><b>Exception (uncommon) Essential Exception:</b> If the target is required to be a particular target size and cannot be provided in another way.</li>
       
     </ul>
   </td>
@@ -163,7 +183,7 @@
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>Element</td>
 </tr>
 
                   
@@ -212,7 +232,7 @@
     </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 
@@ -234,14 +254,21 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#target-size_2";
         }
         else {
-          node.href= "rules-rc.html#target-size_2";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#target-size_2";
+          }
+          else {
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#target-size_2";
+            }
+            else {
+              node.href= "rules-fs.html#target-size_2";
+            }
+          }
         }
       })()
     </script>

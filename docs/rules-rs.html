@@ -1,0 +1,1920 @@
+<html lang="en-us">
+  <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Rules by Rule Scope | OpenA11y Evaluation Library 2.0</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./css/opena11y.css" rel="stylesheet" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+    </head>
+
+  </head>
+  <body>
+            <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                  <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="concepts.html">Concepts and Terms</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Rules
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
+                            </li>
+                          </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="apis.html">APIs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+    <!-- Main section-->
+    <div id="main-section" class="container px-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Rules by Rule Scope</li>
+        </ol>
+      </nav>
+      <main class="row gx-4 justify-content-center">
+        <div class="col-lg-10">
+          
+
+          <h1>Rules by Rule Scope</h1>
+
+                    <nav class="rules" aria-label="Rulesets">
+            <a href="rulesets.html">Rulesets</a>  |
+            <a href="rules-rc.html">Rule Categories</a> |
+            <a href="rules-gl.html">WCAG Guidelines</a> |
+            <a href="rules-rs.html">Rule Scopes</a> |
+            <a href="rules-fs.html">First Step</a>
+          </nav>
+
+          <script>
+
+            const links = document.querySelectorAll('nav.rules a');
+            const href = window.location.href;
+
+            for (let i = 0; i < links.length; i += 1) {
+              if (href.includes(links[i].href)) {
+                links[i].setAttribute('aria-current', 'page');
+              }
+            }
+
+          </script>
+
+
+          
+            <h2 id="rs-4" class="rules">Website</h2>
+            <table class="table table-striped" aria-labelledby="sc-">
+              <thead>
+                <th>Rule ID</th>
+                <th>Summary</th>
+                <th>Level</th>
+                <th>Conformance</th>
+                <th>SC</th>
+                <th colspan="4">Result Values</th>
+              </thead>
+              <tbody>
+              
+                <tr id="help-1">
+                  <td>Help 1</td>
+                  <td><a href="rule-help-1.html#rs">Consistent ordering of help</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#consistent-help" target="_spec">3.2.6</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="landmark-3">
+                  <td>Landmark 3</td>
+                  <td><a href="rule-landmark-3.html#rs"><code>navigation</code> landmark: at least one</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="navigation-1">
+                  <td>Navigation 1</td>
+                  <td><a href="rule-navigation-1.html#rs">At least two ways of finding content</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#multiple-ways" target="_spec">2.4.5</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="navigation-2">
+                  <td>Navigation 2</td>
+                  <td><a href="rule-navigation-2.html#rs">Consistent ordering of landmarks</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#consistent-navigation" target="_spec">3.2.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="navigation-3">
+                  <td>Navigation 3</td>
+                  <td><a href="rule-navigation-3.html#rs">Consistent ordering of <code>h1</code> and <code>h2</code> labels</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#consistent-navigation" target="_spec">3.2.3</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="navigation-4">
+                  <td>Navigation 4</td>
+                  <td><a href="rule-navigation-4.html#rs">Consistent labeling of landmarks</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#consistent-identification" target="_spec">3.2.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="navigation-5">
+                  <td>Navigation 5</td>
+                  <td><a href="rule-navigation-5.html#rs">Consistent <code>h1</code> and <code>h2</code> page section labels</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#consistent-identification" target="_spec">3.2.4</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+              </tbody>
+            </table>
+          
+            <h2 id="rs-2" class="rules">Page</h2>
+            <table class="table table-striped" aria-labelledby="sc-">
+              <thead>
+                <th>Rule ID</th>
+                <th>Summary</th>
+                <th>Level</th>
+                <th>Conformance</th>
+                <th>SC</th>
+                <th colspan="4">Result Values</th>
+              </thead>
+              <tbody>
+              
+                <tr id="audio-2">
+                  <td>Audio 2</td>
+                  <td><a href="rule-audio-2.html#rs">Audio Control</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#audio-control" target="_spec">1.4.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="authorization-1">
+                  <td>Authorization 1</td>
+                  <td><a href="rule-authorization-1.html#rs">Accessible Authorization (Minimum) </a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#accessible-authentication-minimum" target="_spec">3.3.8</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="bypass-1">
+                  <td>Bypass 1</td>
+                  <td><a href="rule-bypass-1.html#rs">Skip to main content link</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="color-2">
+                  <td>Color 2</td>
+                  <td><a href="rule-color-2.html#rs">Use of color</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#use-of-color" target="_spec">1.4.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="error-4">
+                  <td>Error 4</td>
+                  <td><a href="rule-error-4.html#rs">Prevent errors</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#error-prevention-legal-financial-data" target="_spec">3.3.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="heading-1">
+                  <td>Heading 1</td>
+                  <td><a href="rule-heading-1.html#rs">Page should have <code>h1</code> element</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="heading-5">
+                  <td>Heading 5</td>
+                  <td><a href="rule-heading-5.html#rs">Headings must be properly nested</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-2">
+                  <td>Keyboard 2</td>
+                  <td><a href="rule-keyboard-2.html#rs">Sequential tab order of focusable elements must be meaningful</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">2.4.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-5">
+                  <td>Keyboard 5</td>
+                  <td><a href="rule-keyboard-5.html#rs">Focus must be discernible</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">2.4.7</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-7">
+                  <td>Keyboard 7</td>
+                  <td><a href="rule-keyboard-7.html#rs">Content on Hover or Focus</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#content-on-hover-or-focus" target="_spec">1.4.13</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="keyboard-8">
+                  <td>Keyboard 8</td>
+                  <td><a href="rule-keyboard-8.html#rs">Focus Order</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">2.4.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="keyboard-9">
+                  <td>Keyboard 9</td>
+                  <td><a href="rule-keyboard-9.html#rs">Focus is not obscured (Minimum)</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum" target="_spec">2.4.11</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="landmark-1">
+                  <td>Landmark 1</td>
+                  <td><a href="rule-landmark-1.html#rs"><code>main</code> landmark: at least one</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-4">
+                  <td>Landmark 4</td>
+                  <td><a href="rule-landmark-4.html#rs"><code>banner</code> landmark: identifies branding content</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-5">
+                  <td>Landmark 5</td>
+                  <td><a href="rule-landmark-5.html#rs"><code>banner</code> landmark: no more than one</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-6">
+                  <td>Landmark 6</td>
+                  <td><a href="rule-landmark-6.html#rs"><code>contentinfo</code> landmark: identifies admin content</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-7">
+                  <td>Landmark 7</td>
+                  <td><a href="rule-landmark-7.html#rs"><code>contentinfo</code> landmark: no more than one</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="language-1">
+                  <td>Language 1</td>
+                  <td><a href="rule-language-1.html#rs">Page must use language code</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#language-of-page" target="_spec">3.1.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="language-2">
+                  <td>Language 2</td>
+                  <td><a href="rule-language-2.html#rs">Identify language changes</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#language-of-parts" target="_spec">3.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="layout-1">
+                  <td>Layout 1</td>
+                  <td><a href="rule-layout-1.html#rs">Layout tables must have meaningful sequence</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#meaningful-sequence" target="_spec">1.3.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="layout-4">
+                  <td>Layout 4</td>
+                  <td><a href="rule-layout-4.html#rs">Do not restrict view or operation.</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#orientation" target="_spec">1.3.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="list-1">
+                  <td>List 1</td>
+                  <td><a href="rule-list-1.html#rs">Use semantic markup for lists</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="live-1">
+                  <td>Live 1</td>
+                  <td><a href="rule-live-1.html#rs">Live regions for status and error messages</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#status-messages" target="_spec">4.1.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="motion-1">
+                  <td>Motion 1</td>
+                  <td><a href="rule-motion-1.html#rs">Motion Actuation</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#motion-actuation" target="_spec">2.5.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="pointer-1">
+                  <td>Pointer 1</td>
+                  <td><a href="rule-pointer-1.html#rs">Pointer Gestures</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#pointer-gestures" target="_spec">2.5.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="pointer-2">
+                  <td>Pointer 2</td>
+                  <td><a href="rule-pointer-2.html#rs">Pointer Cancellation</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#pointer-cancellation" target="_spec">2.5.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="pointer-3">
+                  <td>Pointer 3</td>
+                  <td><a href="rule-pointer-3.html#rs">Dragging Movements</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#dragging-movements" target="_spec">2.5.7</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="resize-1">
+                  <td>Resize 1</td>
+                  <td><a href="rule-resize-1.html#rs">Resize text content</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#resize-text" target="_spec">1.4.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="resize-2">
+                  <td>Resize 2</td>
+                  <td><a href="rule-resize-2.html#rs">Support small screen dimensions</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#reflow" target="_spec">1.4.10</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="sensory-1">
+                  <td>Sensory 1</td>
+                  <td><a href="rule-sensory-1.html#rs">Not only shape, size and location</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#sensory-characteristics" target="_spec">1.3.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="shortcut-1">
+                  <td>Shortcut 1</td>
+                  <td><a href="rule-shortcut-1.html#rs">Character Key Shortcuts</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#character-key-shortcuts" target="_spec">2.1.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="spacing-1">
+                  <td>Spacing 1</td>
+                  <td><a href="rule-spacing-1.html#rs">Text Spacing</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#text-spacing" target="_spec">1.4.12</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="title-1">
+                  <td>Title 1</td>
+                  <td><a href="rule-title-1.html#rs"><code>title</code> must identify website and page</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#page-titled" target="_spec">2.4.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="title-2">
+                  <td>Title 2</td>
+                  <td><a href="rule-title-2.html#rs"><code>h1</code> must match part of the <code>title</code></a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#page-titled" target="_spec">2.4.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="timing-1">
+                  <td>Timing 1</td>
+                  <td><a href="rule-timing-1.html#rs">Control time limits</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#timing-adjustable" target="_spec">2.2.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="timing-2">
+                  <td>Timing 2</td>
+                  <td><a href="rule-timing-2.html#rs">Control moving, blinking or auto-updating content</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#pause-stop-hide" target="_spec">2.2.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="timing-3">
+                  <td>Timing 3</td>
+                  <td><a href="rule-timing-3.html#rs">Flashing limits</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold" target="_spec">2.3.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+              </tbody>
+            </table>
+          
+            <h2 id="rs-1" class="rules">Element</h2>
+            <table class="table table-striped" aria-labelledby="sc-">
+              <thead>
+                <th>Rule ID</th>
+                <th>Summary</th>
+                <th>Level</th>
+                <th>Conformance</th>
+                <th>SC</th>
+                <th colspan="4">Result Values</th>
+              </thead>
+              <tbody>
+              
+                <tr id="audio-1">
+                  <td>Audio 1</td>
+                  <td><a href="rule-audio-1.html#rs">Audio-only  (Prerecorded)</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#audio-only-and-video-only-prerecorded" target="_spec">1.2.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="color-1">
+                  <td>Color 1</td>
+                  <td><a href="rule-color-1.html#rs">Color contrast of text: Minimum</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_spec">1.4.3</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="color-3">
+                  <td>Color 3</td>
+                  <td><a href="rule-color-3.html#rs">Color contrast of text: Enhanced</a></td>
+                  <td>AAA</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" target="_spec">1.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="color-4">
+                  <td>Color 4</td>
+                  <td><a href="rule-color-4.html#rs">Color contrast of user interface controls</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" target="_spec">1.4.11</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="color-5">
+                  <td>Color 5</td>
+                  <td><a href="rule-color-5.html#rs">Color contrast of graphics</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" target="_spec">1.4.11</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="error-1">
+                  <td>Error 1</td>
+                  <td><a href="rule-error-1.html#rs">Using <code>aria-invalid</code> to identify the validity of control values.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#error-identification" target="_spec">3.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="error-2">
+                  <td>Error 2</td>
+                  <td><a href="rule-error-2.html#rs">Using <code>aria-required</code> to identify required form controls and widgets</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#error-suggestion" target="_spec">3.3.3</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="error-3">
+                  <td>Error 3</td>
+                  <td><a href="rule-error-3.html#rs">Error correction suggestions</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#error-suggestion" target="_spec">3.3.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="frame-1">
+                  <td>Frame 1</td>
+                  <td><a href="rule-frame-1.html#rs"><code>frame</code> must have accessible name</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="frame-2">
+                  <td>Frame 2</td>
+                  <td><a href="rule-frame-2.html#rs"><code>iframe</code> must have accessible name</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#bypass-blocks" target="_spec">2.4.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-1">
+                  <td>Control 1</td>
+                  <td><a href="rule-control-1.html#rs">Form controls must have labels</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-2">
+                  <td>Control 2</td>
+                  <td><a href="rule-control-2.html#rs">Image button must have alt. content</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-3">
+                  <td>Control 3</td>
+                  <td><a href="rule-control-3.html#rs">Radio buttons must have grouping label</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-4">
+                  <td>Control 4</td>
+                  <td><a href="rule-control-4.html#rs"><code>button</code>s should have text content</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-5">
+                  <td>Control 5</td>
+                  <td><a href="rule-control-5.html#rs"><code>id</code> must be unique</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#parsing" target="_spec">4.1.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="control-6">
+                  <td>Control 6</td>
+                  <td><a href="rule-control-6.html#rs"><code>label</code> must reference control</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-7">
+                  <td>Control 7</td>
+                  <td><a href="rule-control-7.html#rs"><code>label</code> must have content</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-8">
+                  <td>Control 8</td>
+                  <td><a href="rule-control-8.html#rs"><code>fieldset</code> must have one <code>legend</code></a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-9">
+                  <td>Control 9</td>
+                  <td><a href="rule-control-9.html#rs">Verify <code>title</code> is the label.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-10">
+                  <td>Control 10</td>
+                  <td><a href="rule-control-10.html#rs">Accessible name must be unique</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-11">
+                  <td>Control 11</td>
+                  <td><a href="rule-control-11.html#rs">Submit and reset button labels must be unique</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-12">
+                  <td>Control 12</td>
+                  <td><a href="rule-control-12.html#rs">Forms submitted using buttons</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#on-input" target="_spec">3.2.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-13">
+                  <td>Control 13</td>
+                  <td><a href="rule-control-13.html#rs"><code>name</code> attribute supports auto fill</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#identify-input-purpose" target="_spec">1.3.5</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-14">
+                  <td>Control 14</td>
+                  <td><a href="rule-control-14.html#rs">Use native HTML attributes when available</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-15">
+                  <td>Control 15</td>
+                  <td><a href="rule-control-15.html#rs">Label in name for controls</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#label-in-name" target="_spec">2.5.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-16">
+                  <td>Control 16</td>
+                  <td><a href="rule-control-16.html#rs">Redundant Entry</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#redundant-entry" target="_spec">3.3.7</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="control-17">
+                  <td>Control 17</td>
+                  <td><a href="rule-control-17.html#rs">Avoid label encapsulation</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">3.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="heading-2">
+                  <td>Heading 2</td>
+                  <td><a href="rule-heading-2.html#rs"><code>h1</code> should be in <code>main</code> or <code>banner</code> landmark</a></td>
+                  <td>AA</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="heading-3">
+                  <td>Heading 3</td>
+                  <td><a href="rule-heading-3.html#rs">Sibling headings should be unique</a></td>
+                  <td>AA</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="heading-6">
+                  <td>Heading 6</td>
+                  <td><a href="rule-heading-6.html#rs">Headings should have text content</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="heading-7">
+                  <td>Heading 7</td>
+                  <td><a href="rule-heading-7.html#rs">First landmark heading <code>h2</code></a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="html-1">
+                  <td>HTML 1</td>
+                  <td><a href="rule-html-1.html#rs">Replace <code>marquee</code> elements</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold" target="_spec">2.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-1">
+                  <td>Image 1</td>
+                  <td><a href="rule-image-1.html#rs">Images must have alt text</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-2">
+                  <td>Image 2</td>
+                  <td><a href="rule-image-2.html#rs">Alt text must summarize purpose</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-3">
+                  <td>Image 3</td>
+                  <td><a href="rule-image-3.html#rs">Alt text must not include filename</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-4_en">
+                  <td>Image 4</td>
+                  <td><a href="rule-image-4_en.html#rs">Alt text no more than 100 characters</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-5">
+                  <td>Image 5</td>
+                  <td><a href="rule-image-5.html#rs">Image is decorative</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-6">
+                  <td>Image 6</td>
+                  <td><a href="rule-image-6.html#rs">Long description for complex images</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-7">
+                  <td>Image 7</td>
+                  <td><a href="rule-image-7.html#rs">Use MathJax for mathematical expressions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">1.1.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="image-8">
+                  <td>Image 8</td>
+                  <td><a href="rule-image-8.html#rs">Images of text</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#images-of-text" target="_spec">1.4.5</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-1">
+                  <td>Keyboard 1</td>
+                  <td><a href="rule-keyboard-1.html#rs">ARIA widget keyboard support</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">2.1.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-3">
+                  <td>Keyboard 3</td>
+                  <td><a href="rule-keyboard-3.html#rs">No keyboard trap</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">2.1.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-4">
+                  <td>Keyboard 4</td>
+                  <td><a href="rule-keyboard-4.html#rs">Avoid <code>tabindex</code> > 0</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">2.1.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="keyboard-6">
+                  <td>Keyboard 6</td>
+                  <td><a href="rule-keyboard-6.html#rs"><code>select</code> must not change context</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#on-input" target="_spec">3.2.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-2">
+                  <td>Landmark 2</td>
+                  <td><a href="rule-landmark-2.html#rs">All content must be contained in landmarks</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-8">
+                  <td>Landmark 8</td>
+                  <td><a href="rule-landmark-8.html#rs"><code>banner</code> landmark: must be top-level</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-9">
+                  <td>Landmark 9</td>
+                  <td><a href="rule-landmark-9.html#rs"><code>banner</code> landmark: restrictions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-10">
+                  <td>Landmark 10</td>
+                  <td><a href="rule-landmark-10.html#rs"><code>navigation</code> landmark: restrictions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-11">
+                  <td>Landmark 11</td>
+                  <td><a href="rule-landmark-11.html#rs"><code>main</code> landmark: must be top-level</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-12">
+                  <td>Landmark 12</td>
+                  <td><a href="rule-landmark-12.html#rs"><code>contentinfo</code> landmark: must be top-level</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-13">
+                  <td>Landmark 13</td>
+                  <td><a href="rule-landmark-13.html#rs"><code>contentinfo</code> landmark: restrictions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-14">
+                  <td>Landmark 14</td>
+                  <td><a href="rule-landmark-14.html#rs"><code>search</code> landmark: restrictions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-15">
+                  <td>Landmark 15</td>
+                  <td><a href="rule-landmark-15.html#rs"><code>form</code> landmark: restrictions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-16">
+                  <td>Landmark 16</td>
+                  <td><a href="rule-landmark-16.html#rs"><code>region</code> landmark must have accessible name</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-17">
+                  <td>Landmark 17</td>
+                  <td><a href="rule-landmark-17.html#rs">Landmarks must be uniquely identifiable</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-18">
+                  <td>Landmark 18</td>
+                  <td><a href="rule-landmark-18.html#rs">Landmarks must identify content regions</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="landmark-19">
+                  <td>Landmark 19</td>
+                  <td><a href="rule-landmark-19.html#rs"><code>complementary</code> landmark: must be top level</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="layout-2">
+                  <td>Layout 2</td>
+                  <td><a href="rule-layout-2.html#rs">Do not nest layout tables</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#meaningful-sequence" target="_spec">1.3.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="layout-3">
+                  <td>Layout 3</td>
+                  <td><a href="rule-layout-3.html#rs"><code>aria-flowto</code> changes reading order</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#meaningful-sequence" target="_spec">1.3.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="link-1">
+                  <td>Link 1</td>
+                  <td><a href="rule-link-1.html#rs">Link text must describe the link target</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#link-purpose-in-context" target="_spec">2.4.4</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="link-2">
+                  <td>Link 2</td>
+                  <td><a href="rule-link-2.html#rs">Link text should be unique</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#link-purpose-in-context" target="_spec">2.4.4</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="link-3">
+                  <td>Link 3</td>
+                  <td><a href="rule-link-3.html#rs">Target focus should be in content window</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#on-focus" target="_spec">3.2.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="link-4">
+                  <td>Link 4</td>
+                  <td><a href="rule-link-4.html#rs">Label in name for links</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#label-in-name" target="_spec">2.5.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="list-2">
+                  <td>List 2</td>
+                  <td><a href="rule-list-2.html#rs">Provide list labels when appropriate</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="order-1">
+                  <td>Order 1</td>
+                  <td><a href="rule-order-1.html#rs">Reading order: CSS positioning</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#meaningful-sequence" target="_spec">1.3.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="shortcut-2">
+                  <td>Shortcut 2</td>
+                  <td><a href="rule-shortcut-2.html#rs">Avoid using <code>accesskey</code> for shortcuts</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#character-key-shortcuts" target="_spec">2.1.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-1">
+                  <td>Table 1</td>
+                  <td><a href="rule-table-1.html#rs">Data cells must have row/column headers</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-2">
+                  <td>Table 2</td>
+                  <td><a href="rule-table-2.html#rs">Data tables must have name</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-3">
+                  <td>Table 3</td>
+                  <td><a href="rule-table-3.html#rs">Data tables may have description</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-4">
+                  <td>Table 4</td>
+                  <td><a href="rule-table-4.html#rs">Data tables should have unique names</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-5">
+                  <td>Table 5</td>
+                  <td><a href="rule-table-5.html#rs">Identify table markup as data or layout</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-6">
+                  <td>Table 6</td>
+                  <td><a href="rule-table-6.html#rs">Header cells should be <code>th</code> elements</a></td>
+                  <td>A</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-7">
+                  <td>Table 7</td>
+                  <td><a href="rule-table-7.html#rs">Data cells must use <code>headers</code> attribute</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="table-8">
+                  <td>Table 8</td>
+                  <td><a href="rule-table-8.html#rs">Name must be different than description</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">1.3.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="target-size_1">
+                  <td>Target Size 1</td>
+                  <td><a href="rule-target-size_1.html#rs">Author sizing of links (Minimum)</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#target-size-minimum" target="_spec">2.5.8</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="target-size_2">
+                  <td>Target Size 2</td>
+                  <td><a href="rule-target-size_2.html#rs">Author sizing of links (Enhanced)</a></td>
+                  <td>AAA</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#target-size" target="_spec">2.5.5</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="target-size_3">
+                  <td>Target Size 3</td>
+                  <td><a href="rule-target-size_3.html#rs">Button target size (Minimum)</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#target-size-minimum" target="_spec">2.5.8</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="target-size_4">
+                  <td>Target Size 4</td>
+                  <td><a href="rule-target-size_4.html#rs">Button target size (Enhanced)</a></td>
+                  <td>AAA</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#target-size" target="_spec">2.5.5</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="target-size_5">
+                  <td>Target Size 5</td>
+                  <td><a href="rule-target-size_5.html#rs">Radio button and checkbox target size (Minimum)</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#target-size-minimum" target="_spec">2.5.8</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="target-size_6">
+                  <td>Target Size 6</td>
+                  <td><a href="rule-target-size_6.html#rs">Radio button and checkbox target size (Enhanced)</a></td>
+                  <td>AAA</td>
+                  <td><em>Recommended</em></td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#target-size" target="_spec">2.5.5</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="video-1">
+                  <td>Video 1</td>
+                  <td><a href="rule-video-1.html#rs">Video-only (Prerecorded)</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#audio-only-and-video-only-prerecorded" target="_spec">1.2.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="video-2">
+                  <td>Video 2</td>
+                  <td><a href="rule-video-2.html#rs">Captions (Prerecorded)</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded" target="_spec">1.2.2</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="video-3">
+                  <td>Video 3</td>
+                  <td><a href="rule-video-3.html#rs">Audio Description or Media Alternative (Prerecorded)</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#audio-description-or-media-alternative-prerecorded" target="_spec">1.2.3</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="video-4">
+                  <td>Video 4</td>
+                  <td><a href="rule-video-4.html#rs">Captions (Live)</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#captions-live" target="_spec">1.2.4</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="video-5">
+                  <td>Video 5</td>
+                  <td><a href="rule-video-5.html#rs">Audio Description (Prerecorded)</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#audio-description-prerecorded" target="_spec">1.2.5</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-1">
+                  <td>Widget 1</td>
+                  <td><a href="rule-widget-1.html#rs">Accessible name is required</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-2">
+                  <td>Widget 2</td>
+                  <td><a href="rule-widget-2.html#rs"><code>onClick</code> event handlers must have widget role</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-3">
+                  <td>Widget 3</td>
+                  <td><a href="rule-widget-3.html#rs"><code>role</code> must be valid</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-4">
+                  <td>Widget 4</td>
+                  <td><a href="rule-widget-4.html#rs">Values must be valid</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-5">
+                  <td>Widget 5</td>
+                  <td><a href="rule-widget-5.html#rs">Attributes that start with <code>aria-</code> must be defined.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-6">
+                  <td>Widget 6</td>
+                  <td><a href="rule-widget-6.html#rs">Widgets must set properties</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-7">
+                  <td>Widget 7</td>
+                  <td><a href="rule-widget-7.html#rs">Widgets must have owned elements</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-8">
+                  <td>Widget 8</td>
+                  <td><a href="rule-widget-8.html#rs">Role must have parent</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-9">
+                  <td>Widget 9</td>
+                  <td><a href="rule-widget-9.html#rs">Only one owner</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td></td>
+                </tr>
+              
+                <tr id="widget-10">
+                  <td>Widget 10</td>
+                  <td><a href="rule-widget-10.html#rs">Value in range</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td><abbr title="Passed">P</abbr></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-11">
+                  <td>Widget 11</td>
+                  <td><a href="rule-widget-11.html#rs">Verify <code>aria-valuetext</code> value.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-12">
+                  <td>Widget 12</td>
+                  <td><a href="rule-widget-12.html#rs">Accessible name is descriptive</a></td>
+                  <td>AA</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">2.4.6</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-13">
+                  <td>Widget 13</td>
+                  <td><a href="rule-widget-13.html#rs">Role does not support accessible name.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">4.1.2</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-14">
+                  <td>Widget 14</td>
+                  <td><a href="rule-widget-14.html#rs">Unsupported and deprecated ARIA attributes.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#parsing" target="_spec">4.1.1</a></td>
+                  <td><abbr title="Failures">F</abbr></td>
+                  <td></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+                <tr id="widget-15">
+                  <td>Widget 15</td>
+                  <td><a href="rule-widget-15.html#rs">Closed shadow DOM requires manual check.</a></td>
+                  <td>A</td>
+                  <td>Required</td>
+                  <td><a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">2.1.1</a></td>
+                  <td></td>
+                  <td><abbr title="Manual Checks">MC</abbr></td>
+                  <td></td>
+                  <td><abbr title="Hidden">H</abbr></td>
+                </tr>
+              
+              </tbody>
+            </table>
+          
+
+          
+
+        </div>
+      </main>
+    </nav>
+            <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
+        </footer>
+
+
+
+            <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+        <!-- OpenA11y JS -->
+        <script src="js/opena11y.js"></script>
+
+        <!-- SkipTo.js -->
+        <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
+
+  </body>
+</html>
+

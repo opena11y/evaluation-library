@@ -9,7 +9,7 @@ import {REFERENCES} from '../../constants.js';
 export const liveRules = {
     LIVE_1: {
         ID:                    'Live 1',
-        DEFINITION:            'Verify the live regions have the appropriate ARIA markup to indicate whether or how the screen reader will interrupt the user with a change in a status or error message.',
+        DEFINITION:            'Live regions identify how and when regions on a page will be automatically announced when changes occur in content, for example status or error messages.',
         SUMMARY:               'Live regions for status and error messages',
         TARGET_RESOURCES_DESC: 'Elements with @alert@, @log@ or @status@ roles or the @aria-live@ attribute',
         RULE_RESULT_MESSAGES: {

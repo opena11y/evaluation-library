@@ -66,6 +66,7 @@
 <html lang="en-us">
   <head>
     {% include "./head.njk" %}
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
     {% include "./header.njk" %}
@@ -81,11 +82,12 @@
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             {% block title %}
             <h1 id="h1-title">Rule: {{title | safe}}</h1>
             {% endblock %}
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   {{ infoItem('Rule ID',    ruleInfo.id) }}
@@ -111,14 +113,21 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#{{ruleInfo.htmlId}}";
         }
         else {
-          node.href= "rules-rc.html#{{ruleInfo.htmlId}}";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#{{ruleInfo.htmlId}}";
+          }
+          else {
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#{{ruleInfo.htmlId}}";
+            }
+            else {
+              node.href= "rules-fs.html#{{ruleInfo.htmlId}}";
+            }
+          }
         }
       })()
     </script>

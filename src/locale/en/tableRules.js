@@ -105,11 +105,11 @@ export const tableRules = {
         'Use @title@ attribute to provide an accessible name for a data table.',
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.'
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.'
       ],
       MANUAL_CHECKS: [
         'Make sure the the accessible name accurately and succinctly identifies the purpose of the data table.',
-        'If the table markup is actually being used for laying out content in rows or columns, use @role="presentation"@ on the @table@ element.'
+        'If the table markup is actually being used for laying out content in rows or columns, use @role="none"@ on the @table@ element.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -129,8 +129,8 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -173,7 +173,7 @@ export const tableRules = {
       TECHNIQUES: [
         'Use the  @aria-describedby@ attribute to provide a reference to an accessible description of the information in a data table.',
         'Use the  @title@ attribute to provide a accessible description of the information in a data table.',
-        'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or descriptions.'
+        '^Note:^ The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or descriptions.'
       ],
       MANUAL_CHECKS: [
         'Verify the content of the accessible description accurately summarizes the organization, numerical information in the table or authors intended conclusions from viewing the table.'
@@ -188,8 +188,8 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -223,11 +223,10 @@ export const tableRules = {
         'Use @aria-label@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @aria-labelledby@ attribute to provide an accessible name for a data table (NOTE: inconsistent browser/AT support).',
         'Use @title@ attribute to provide an accessible name for a data table.',
-        'If the table is not used for tabular data, but instead for layout of content, use the @role="presentation"@ on the @table@ element.',
-        'NOTE: The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
+        'If the table is not used for tabular data, but instead for layout of content, use the @role="none"@ on the @table@ element.',
+        '^Note:^ The @summary@ attribute is no longer supported by HTML specifications, and there for should no longer be used for accessible names or desciptions.'
       ],
       MANUAL_CHECKS: [
-        'Verify the accessible names for tables are unique and identify the content in the data tables.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -274,8 +273,8 @@ export const tableRules = {
       SUMMARY:               'Identify table markup as data or layout',
       TARGET_RESOURCES_DESC: '@table@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
-        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="presentation"@ on the table elements if the table is being used to layout content.',
+        FAIL_S:   'The table without headers or @role="none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="none"@ on the table elements if the table is being used to layout content.',
+        FAIL_P:   'For the %N_F tables without headers or @role=none"@, define the purpose of the table by adding header cells if the table is being used for tabular data or use @role="none"@ on the table elements if the table is being used to layout content.',
         MANUAL_CHECK_S: 'Verify the @table@ element that only has one row or column is used only only for layout.',
         MANUAL_CHECK_P: 'Verify the %N_H @table@ elements that only have one row or column are used only only for layout.',
         HIDDEN_S: 'One @table@ element that is hidden was not evaluated.',
@@ -297,7 +296,7 @@ export const tableRules = {
       PURPOSES: [
         'The @table@ element is designed for representing tabular data in a web page, but table markup has also been used by web developers as a means to layout content in rows and columns.',
         'Users of assistive technology are confused when the purpose of table markup is not clearly identified (i.e. layout or for tabular data).',
-        'Use @role="presentation"@ on the @table@ element to clearly identify a table markup for layout.',
+        'Use @role="none"@ on the @table@ element to clearly identify a table markup for layout.',
         'Adding an accessible name and/or description to a @table@ element identifies table markup as a data table (e.g. layout tables must not have an accessible name or description).',
         'The use header cells (e.g. @th@ or @td[scope]@ elements) identifies a @table@ element as a data table.'
       ],
@@ -305,12 +304,10 @@ export const tableRules = {
         'Use @th@ elements in the first row and/or first column to identify a table as a data table.',
         'Use @caption@ element; @aria-label@ or @aria-labelledby@ attribute to add an accessible name to a @table@ element.',
         'Use the @aria-describedby@ attribute to add an accessible description to a @table@ element.',
-        'Use @role="presentation"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
+        'Use @role="none"@ on the @table@ element to identify a table and its child table elements (e.g. @tr@ and @td@ elements) are being used for layout.',
         'Layout tables must only use the @tr@ and @td@ table elements for layout content and must NOT have an accessible name or description.'
       ],
       MANUAL_CHECKS: [
-        'If a table is used for layout verify the order of content still makes sense when the table markup is disabled.',
-        'If a table is used for data tables, verify the each data cell has header cells that clearly identify the meaning of the content of the data cell.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -318,12 +315,16 @@ export const tableRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.2 Table Captions: The CAPTION element',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#h-11.2.2'
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The CAPTION element',
+          url:   'https://html.spec.whatwg.org/#the-caption-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -370,12 +371,15 @@ export const tableRules = {
         'Use @th@ element for cells used as header cells in the table.'
       ],
       MANUAL_CHECKS: [
-        'Verify the each data cell has header cells that clearly identify the meaning of the content of the data cell.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -422,13 +426,15 @@ export const tableRules = {
         'Use @headers@ attribute on each @td@ element used as a data cell to identify header information in complex data tables.'
       ],
       MANUAL_CHECKS: [
-        'Verify the each data cell has header cells that clearly identify the meaning of the content of the data cell.',
-        'Verify that empty @td@ and @th@ elements and does not need table headers.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
@@ -468,16 +474,18 @@ export const tableRules = {
       TECHNIQUES: [
         'Accessible name is typically defined using the @caption@ element, but the @title@, @aria-label@ and @aria-labelledby@ attribute can also be used.',
         'Accessible description is typically defined using the @aria-describedby@ attribute, but the @title@ attribute can also be used.',
-        'NOTE: The @summary@ attribute is no longer supported in HTML.'
+        '^Note:^ The @summary@ attribute is no longer supported in HTML.'
       ],
       MANUAL_CHECKS: [
-        'Verify the accessible name clearly identifies the purpose of the table.',
-        'Verify the description summarizes the content of the table.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: 11.2.6 Table cells: The TH and TD elements',
-          url:   'https://www.w3.org/TR/html4/struct/tables.html#edef-TD'
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
         },
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',

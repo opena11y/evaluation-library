@@ -20,7 +20,7 @@ export const controlRules = {
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_PASS_1:   '@%1@ control has the label: \'%2\'',
+        ELEMENT_PASS_1:   '@%1@ control has the label: "%2"',
         ELEMENT_FAIL_1:   'Add label to @%1@ control.',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
@@ -29,7 +29,7 @@ export const controlRules = {
       ],
       TECHNIQUES: [
         'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-        'NOTE: The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
+        '^NOTE:^ The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
         'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
@@ -105,8 +105,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @input[type=image]@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-type-INPUT'
+          title: 'HTML Specification: The @input[type=image]@ element',
+          url:   'https://html.spec.whatwg.org/#image-button-state-(type=image)'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
@@ -117,8 +117,8 @@ export const controlRules = {
           url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @title@ attribute',
-          url:   'https://www.w3.org/TR/html4/struct/global.html#adef-title'
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-title'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -315,8 +315,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @label@ element FOR attribute',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#adef-for'
+          title: 'HTML Specification: The @label@ element @for@ attribute',
+          url:   'https://html.spec.whatwg.org/#attr-label-for'
         },
         {type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'W3C WAI Accessibility Tutorials: Forms Concepts',
@@ -677,8 +677,8 @@ export const controlRules = {
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML 4.01 Specification: The @input[type="submit"]@ element',
-          url:   'https://www.w3.org/TR/html4/interact/forms.html#edef-INPUT'
+          title: 'HTML Specification: The @input[type="submit"]@ element',
+          url:   'https://html.spec.whatwg.org/#submit-button-state-(type=submit)'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H32: Providing submit buttons',
@@ -811,12 +811,12 @@ export const controlRules = {
 
     CONTROL_15: {
         ID:                    'Control 15',
-        DEFINITION:            'Verify labels that include images of text, @aria-label@ and/or references to hidden content contains the same text as the visually render label associated with the control.',
-        SUMMARY:               'Label in Name',
+        DEFINITION:            'The labels (e.g. accessible name) for controls and widgets that include text or images of text, the name contains the text that is presented visually.',
+        SUMMARY:               'Label in name for controls',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
           MANUAL_CHECK_S:  'Verify the control with images, @aria-label@ and/or references to hidden content contain the same text associated with the visually rendered label associated with the control.',
-          MANUAL_CHECK_P:  'Verify tha each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
+          MANUAL_CHECK_P:  'Verify that each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
           HIDDEN_S:  'One control with images, @aria-label@ and/or references to hidden content was not tested because it is hidden from assistive technologies',
           HIDDEN_P:  '%N_H controls with images, @aria-label@ and/or references were not tested because they are hidden from assistive technologies',
         },
@@ -844,7 +844,7 @@ export const controlRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
-            title: 'W3C WCAG UNderstanding Label in Name',
+            title: 'W3C WCAG Understanding Label in Name',
             url:   'https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html'
           },
           { type:  REFERENCES.TECHNIQUE,
@@ -872,7 +872,7 @@ export const controlRules = {
 
     CONTROL_16: {
         ID:                    'Control 16',
-        DEFINITION:            'Use @autocomplete@ attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions.',
+        DEFINITION:            'Use @autocomplete@ attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions related to gaming, security or data validity.',
         SUMMARY:               'Redundant Entry',
         TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
@@ -895,10 +895,7 @@ export const controlRules = {
         ],
         TECHNIQUES: [
           'Add an @autocomplete@ attribute to the form control that would support auto-populating the form control from previously entered information.',
-          'There are many other programmatic techniques to support auto-population, that are too numerous to discuss here.',
-          'EXCEPTION: Essential uses of input re-entry for things like memory games which would be invalidated if the previous answers were supplied.',
-          'EXCEPTION: Security measures such as preventing a password string from being shown or copied. When creating a password, it should be a unique and complex string and therefore cannot be validated by the author. If the system requires the user to manually create a password that is not displayed, having users re-validate their new string is allowed as an exception.',
-          'EXCEPTION: When the previously entered information is no longer valid, it can be requested that the user enter that information again.'
+          'There are many other programmatic techniques to support auto-population, including but not limited to the use of cookies, HTTP session variables and server side stored information.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -916,8 +913,49 @@ export const controlRules = {
             url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G221'
           }
         ]
-    }
+    },
 
+  CONTROL_17: {
+      ID:                    'Control 17',
+      DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the controls when only label encapsulation is used for labeling.',
+      SUMMARY:               'Avoid label encapsulation',
+      TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Add a an @id@ to the control and use the @ a label to the form control element that is unlabelled.',
+        FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
+        HIDDEN_S: 'One form control element that is hidden was not evaluated.',
+        HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   '@%1@ control is labeled using: %2',
+        ELEMENT_FAIL_1:   'Add a @for@ attribute to the @label@ element to reference an @id@ on the associated @%1@ control',
+        ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Speech input and other assistive technologies cannot reliably use the label encapsulation method for identifying a label with it\'s associated form control.',
+        'Speech input uses the label as part of commands to move focus or change the state of form controls.  Examples of speech input commands include: "click first name" for moving focus to a textbox, "click thick crust" to select a radio button associated with a pizza crust selection.'
+      ],
+      TECHNIQUES: [
+        'When using the @label@ element include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @label@ element',
+          url:   'https://html.spec.whatwg.org/multipage/forms.html#the-label-element'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H44: Using label elements to associate text labels with form controls',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H44'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'W3C ARIA Authoring Practices Issue: Naming Form Controls with the Label Element',
+          url:   'https://github.com/w3c/aria-practices/issues/2870'
+        }
+
+      ]
+  }
 };
 
 

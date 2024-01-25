@@ -1,0 +1,57 @@
+          <nav class="rules" aria-label="Rules">
+            <a id="previous-rule" href="#" disabled>Previous Rule</a>  |
+            <a id="next-rule" href="#"     disabled>Next Rule</a>
+          </nav>
+
+          <script>
+
+            let allRuleLinks = [];
+
+            const prevLink = document.querySelector('#previous-rule');
+            const nextLink = document.querySelector('#next-rule');
+
+            console.log(`[prevLink]: ${prevLink.disabled}`);
+
+            const url = new URL(document.location.href);
+            const parts = url.pathname.split('/');
+            let currentLink = '';
+            if (parts.length) {
+              currentLink = parts[parts.length-1];
+            }
+
+            console.log(`[Current Link]: ${currentLink}`);
+
+            if (window.location.href.indexOf("#gl") > 0) {
+              allRuleLinks = allRuleLinksByGuidelines;
+            }
+            else {
+              if (window.location.href.indexOf("#rs") > 0) {
+                allRuleLinks = allRuleLinksByScope;
+              }
+              else {
+                if (window.location.href.indexOf("#rc") > 0) {
+                  allRuleLinks = allRuleLinksByRuleCategories;
+                }
+                else {
+                  allRuleLinks = allRuleLinksByFirstStepRules;
+                }
+              }
+            }
+
+            if (allRuleLinks) {
+              const index = allRuleLinks.indexOf(currentLink);
+              if (index >= 0) {
+                if (index > 0) {
+                  prevLink.href = allRuleLinks[i-1];
+                  prevLink.disabled = false;
+                }
+
+                if (index < (allRuleLinks.length - 1)) {
+                  nextLink.href = allRuleLinks[i+1];
+                  nextLink.disabled = false;
+                }
+              }
+            }
+
+
+          </script>

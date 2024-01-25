@@ -110,7 +110,7 @@ export default class DOMElement {
     this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.isLink      = this.role === 'link';
-    this.isLandmark  = this.checkForLandamrk();
+    this.isLandmark  = this.checkIsLandamrk();
     this.isHeading   = this.role === 'heading';
     this.isInDialog  = this.tagName === 'dialog' ||
                        this.role === 'dialog' ||
@@ -194,14 +194,14 @@ export default class DOMElement {
   }
 
   /**
-   * @method checkForLandamrk
+   * @method checkIsLandamrk
    *
-   * @desc Tests if a domElement is a landmark
+   * @desc Returns true if the domElement has a landmark role, otherwise false
    *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   * @returns  {Boolean}  see @desc
    */
 
-  checkForLandamrk () {
+  checkIsLandamrk () {
     let flag = false;
     const role = this.role || this.defaultRole;
     const name = this.accName.name;

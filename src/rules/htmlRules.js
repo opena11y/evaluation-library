@@ -31,6 +31,7 @@ export const htmlRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '2.3.1',
     wcag_related_ids    : ['2.2.2', '4.1.1'],
     target_resources    : ['marquee'],
@@ -47,28 +48,6 @@ export const htmlRules = [
           }
         }
       });
-
-/*
-
-      var TEST_RESULT    = TEST_RESULT;
-      var VISIBILITY     = VISIBILITY;
-
-      var dom_elements     = dom_cache.element_cache.dom_elements;
-      var dom_elements_len = dom_elements.length;
-
-      for (var i = 0; i < dom_elements_len; i++) {
-        var de = dom_elements[i];
-
-        if (de.tag_name === 'marquee') {
-          if (de.computed_style.is_visible_to_at === VISIBILITY.VISIBLE ) {
-             rule_result.addResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tag_name, de.lang]);
-          }
-          else {
-            rule_result.addResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tag_name, de.lang]);
-          }
-        }
-      }
-*/
     } // end validate function
   }
 ];

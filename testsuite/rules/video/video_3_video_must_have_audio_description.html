@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video 3: Audio Descriptions or Media Alternatives</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Video 3: Audio Descriptions or Media Alternatives</h1>
+
+      <h2><code>video</code> element</h2>
+      
+      <video height="640" width="400" class="VIDEO_3_PASS">
+        <source src=""/>
+        <track kind="descriptions"></track>          
+      </video>
+      
+      <video height="640" width="400" class="VIDEO_3_MC" aria-describedby="desc">
+        <source src=""/>
+        <track kind="captions"></track>          
+        <track kind="subtitles"></track>          
+      </video>
+
+      <p id="desc">Description</p>
+
+      <video height="640" width="400" class="VIDEO_3_MC">
+        <source src=""/>
+        <track kind="chapters"/>
+      </video>
+      
+      <video height="640" width="400" class="VIDEO_3_HIDDEN" hidden>
+        <source src=""/>
+      </video>
+      
+      <h2><code>object</code> element</h2>
+
+     <object height="640" width="400" class="VIDEO_3_MC" aria-describedby="desc" type="video/ogg">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_3_MC" type="video/ogg">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_3_MC" aria-describedby="desc">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_3_MC">
+      </object>
+
+      <object height="640" width="400" class="VIDEO_3_HIDDEN" style="display: none">
+      </object>
+
+      <h2><code>embed</code> element</h2>
+
+      <embed height="640" width="400" class="VIDEO_3_MC" aria-describedby="desc" type="video/ogg">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_3_MC" type="video/ogg">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_3_MC" aria-describedby="desc">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_3_MC">
+      </embed>
+
+      <embed height="640" width="400" class="VIDEO_3_HIDDEN" style="visibility: hidden">
+      </embed>
+
+    </div>
+  </body>
+</html>

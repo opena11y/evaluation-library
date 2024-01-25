@@ -31,6 +31,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', 'area', '[role="img"]'],
@@ -72,6 +73,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
@@ -109,6 +111,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
@@ -142,6 +145,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', 'area'],
@@ -175,10 +179,12 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
   validate            : function (dom_cache, rule_result) {
+
     dom_cache.imageInfo.allImageElements.forEach( ie => {
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
@@ -212,6 +218,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
@@ -250,6 +257,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', '[role="img"]'],
@@ -289,6 +297,7 @@ export const imageRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.4.5',
   wcag_related_ids    : [],
   target_resources    : ['img', 'area', '[role="img"]'],

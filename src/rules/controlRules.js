@@ -90,6 +90,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
@@ -127,6 +128,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="image"]'],
@@ -165,6 +167,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="radio"]'],
@@ -215,6 +218,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : false,
+  first_step          : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['button'],
@@ -295,6 +299,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['3.3.2', '1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="radio"]', 'input[type="text"]', 'input[type="password"]', 'input[type="file"]', 'select', 'textarea'],
@@ -328,6 +333,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label'],
@@ -366,6 +372,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label', 'legend'],
@@ -404,6 +411,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6', '4.1.1'],
   target_resources    : ['fieldset'],
@@ -455,6 +463,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['4.1.1'],
   target_resources    : ['input', 'select', 'textarea'],
@@ -486,6 +495,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['input[type="checkbox"]', 'input[type="radio"]', 'input[type="text"]', 'input[type="password"]', 'input[type="file"]', 'select', 'textarea'],
@@ -493,7 +503,7 @@ export const controlRules = [
 
     dom_cache.controlInfo.allControlElements.forEach(ce1 => {
       const de1 = ce1.domElement;
-      if (de1.role === 'option') {
+      if (de1.ariaInfo.isDPUBRole || de1.role === 'option') {
         return;
       }
       let count;
@@ -563,6 +573,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['input[type="submit"]', 'input[type="reset"]','button[type="submit"]', 'button[type="reset"]'],
@@ -646,6 +657,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : true,
   wcag_primary_id     : '3.2.2',
   wcag_related_ids    : [],
   target_resources    : ['form', 'input[type="submit"]', 'input[type="button"]', 'input[type="image"]', 'button', '[role="button"]'],
@@ -756,6 +768,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '1.3.5',
   wcag_related_ids    : ['3.3.2', '2.4.6'],
   target_resources    : ['input[type="text"]'],
@@ -788,6 +801,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : [],
   target_resources    : ["input", "option", "select", "textarea"],
@@ -863,6 +877,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '2.5.3',
   wcag_related_ids    : [],
   target_resources    : ["input", "output", "select", "textarea", "widgets"],
@@ -919,6 +934,7 @@ export const controlRules = [
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
+  first_step          : false,
   wcag_primary_id     : '3.3.7',
   wcag_related_ids    : [],
   target_resources    : ["input", "select", "textarea"],
@@ -941,7 +957,7 @@ export const controlRules = [
         }
       }
       else {
-        if (de.isInteractive && (de.ariaInfo.equiredParents.length === 0)) {
+        if (de.isInteractive && (de.ariaInfo.requiredParents.length === 0)) {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
           }
@@ -952,6 +968,44 @@ export const controlRules = [
       }
    });
 
+  } // end validation function
+},
+
+/**
+ * @object CONTROL_17
+ *
+ * @desc   Avoid label encapsulation
+ */
+
+{ rule_id             : 'CONTROL_17',
+  last_updated        : '2023-12-16',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.FORMS,
+  rule_required       : true,
+  first_step          : false,
+  wcag_primary_id     : '3.3.2',
+  wcag_related_ids    : [],
+  target_resources    : ["input", 'output', "select", "textarea"],
+  validate          : function (dom_cache, rule_result) {
+
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      const de = ce.domElement;
+      if (!ce.isInputTypeImage) {
+        if (de.isLabelable) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.accName.source.indexOf('encapsulation') < 0) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.elemName, de.accName.source]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
+      }
+    });
   } // end validation function
 }
 

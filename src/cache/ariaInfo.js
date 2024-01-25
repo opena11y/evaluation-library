@@ -38,6 +38,26 @@ function debugAttrs (attrs) {
   return s;
 }
 
+function isInGrid (node) {
+  while (node.parentNode) {
+    if (node.role && (node.role.toLowerCase() === 'grid')) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+}
+
+function isInTreegrid (node) {
+  while (node.parentNode) {
+    if (node.role && (node.role.toLowerCase() === 'treegrid')) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+}
+
 /**
  * @class RefInfo
  *
@@ -83,6 +103,8 @@ export default class AriaInfo {
     }
 
     this.isValidRole  = typeof designPattern === 'object';
+    this.isDPUBRole = role.indexOf('doc-') >= 0;
+
     this.isAbstractRole = false;
 
 
@@ -117,10 +139,17 @@ export default class AriaInfo {
     this.ownedByDomElements = [];
 
     this.isRange    = (designPattern.roleType.indexOf('range') >= 0);
-    this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
-                      (designPattern.roleType.indexOf('window') >= 0);
 
-    this.isLandark  = designPattern.roleType.indexOf('landmark') >= 0;     
+    if (role === 'row') {
+      this.inGrid     = isInGrid(node);
+      this.inTreegrid = isInTreegrid(node);
+      this.isWidget   = this.inGrid || this.inTreegrid;
+    }
+    else {
+      this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
+                        (designPattern.roleType.indexOf('window') >= 0);
+    }
+    this.isLandmark  = designPattern.roleType.indexOf('landmark') >= 0;
 
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     
     this.isAbstractRole  = designPattern.roleType.indexOf('abstract') >= 0;

@@ -152,11 +152,14 @@ export const widgetRules = {
         RULE_RESULT_MESSAGES: {
           FAIL_S:   'Add a valid widget, section, landmark or live region role value to the element.',
           FAIL_P:   'Add a valid widget, section, landmark or live region role values to %N_F out of %N_T elements with @role@ attributes.',
+          MANUAL_CHECK_S:   'Verify the element with the DPUB role is valid and appropriate for the web page.',
+          MANUAL_CHECK_P:   'Verify the %N_MC elements with DPUB roles are valid and appropriate for the web page.',
           HIDDEN_S: 'The element with a role that is hidden and was not evaluated.',
           HIDDEN_P: '%N_H elements with a role that are hidden were not evaluated.',
           NOT_APPLICABLE:  'No elements with @role@ attribute on this page'
         },
         BASE_RESULT_MESSAGES: {
+          ELEMENT_MC_1:     'Verify if the @%1@ role is a valid DPUB role, and add the functionality to the page that you intended by testing with assistive technologies that support DPUB.',
           ELEMENT_PASS_1:   '@%1@ is a widget role.',
           ELEMENT_PASS_2:   '@%1@ is a landmark role.',
           ELEMENT_PASS_3:   '@%1@ is a live region role.',
@@ -171,7 +174,8 @@ export const widgetRules = {
         ],
         TECHNIQUES: [
           'Use ARIA landmark roles to describe the sections of a web page.',
-          'Use ARIA widget roles to describe interactive elements on a web page'
+          'Use ARIA widget roles to describe interactive elements on a web page',
+          '^Note:^ DPUB roles are designed to be used for digital books and not the web. If you use DPUB roles on your web pages verify that they add the functionality you intend by testing with the assistive technologies that support DPUB.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -183,6 +187,10 @@ export const widgetRules = {
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
             url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'W3C Digital Publishing WAI-ARIA Module 1.1',
+            url:   'https://www.w3.org/TR/dpub-aria-1.1/'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -274,7 +282,7 @@ export const widgetRules = {
   },
   WIDGET_5: {
         ID:                    'Widget 5',
-        DEFINITION:            'Elements with the attributes that start with @aria-@must be a valid ARIA property or state.',
+        DEFINITION:            'Elements with the attributes that start with @aria-@ must be a valid ARIA property or state.',
         SUMMARY:               'Attributes that start with @aria-@ must be defined.',
         TARGET_RESOURCES_DESC: 'Elements with aria attributes',
         RULE_RESULT_MESSAGES: {
@@ -807,19 +815,20 @@ export const widgetRules = {
     },
     WIDGET_14: {
         ID:                    'Widget 14',
-        DEFINITION:            'ARIA attributes that have been deprecated for a role should be removed.',
-        SUMMARY:               'Remove deprecated ARIA attributes.',
-        TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are deprecated.',
+        DEFINITION:            'ARIA attributes that are unsupported or deprecated for a role should be removed.',
+        SUMMARY:               'Unsupported and deprecated ARIA attributes.',
+        TARGET_RESOURCES_DESC: 'Roles where ARIA attributes are unsupported or deprecated.',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Remove the deprecated ARIA attribute from the element.',
-          FAIL_P:   'Remove the deprecated ARIA attributes from the %N_F elements.',
-          HIDDEN_S: 'The element with deprecated ARIA attribute that is hidden and was not evaluated.',
-          HIDDEN_P: '%N_H elements with deprecated ARIA attributes that are hidden were not evaluated.',
+          FAIL_S:   'Remove the unsupported or deprecated ARIA attribute from the element.',
+          FAIL_P:   'Remove the unsupported or deprecated ARIA attributes from the %N_F elements.',
+          HIDDEN_S: 'The element with unsupported or deprecated ARIA attribute that is hidden and was not evaluated.',
+          HIDDEN_P: '%N_H elements with unsupported or deprecated ARIA attributes that are hidden were not evaluated.',
           NOT_APPLICABLE:  'No elements with deprecated ARIA attributes found.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element.',
-          ELEMENT_HIDDEN_1:  'The @%1@ attribute on the @%2@ element was not tested because it is hidden from assistive technologies.'
+          ELEMENT_FAIL_1:    'Remove the deprecated @%1@ attribute from @%2@ element.',
+          ELEMENT_FAIL_2:    'Remove the unsupported @%1@ attribute from @%2@ element.',
+          ELEMENT_HIDDEN_1:  'The @%1@ element was not tested because it is hidden from assistive technologies.'
         },
         PURPOSES: [
           'Not all ARIA properties and states are useful on every ARIA role and starting with ARIA 1.2 certain states and properties that were once considered global have been deprecated on specific roles.',
@@ -827,7 +836,7 @@ export const widgetRules = {
           'The same ARIA property and state restrictions on explicit roles apply to implicit roles.'
         ],
         TECHNIQUES: [
-          'Remove the deprecated ARIA attribute from the element.'
+          'Remove the unsupported or deprecated ARIA attribute from the element.'
         ],
         MANUAL_CHECKS: [
         ],

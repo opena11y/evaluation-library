@@ -22,8 +22,17 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -38,10 +47,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -65,7 +83,7 @@
     <header class="bg-primary bg-gradient text-white">
         <div class="container px-4 text-center">
             <h1 class="fw-bolder">Welcome to OpenA11y Evaluation Library</h1>
-            <p class="lead">Javascript Library for Evaluating WCAG 2.1 Accessibility Requirements.</p>
+            <p class="lead">Javascript Library for Evaluating WCAG 2.2 Accessibility Requirements.</p>
         </div>
     </header>
 
@@ -78,9 +96,14 @@
             <h2>Purpose</h2>
             <p>The purpose of the OpenA11y Evaluation libary is to support accessible design for implementation of <a href="https://www.w3.org/TR/WCAG">W3C Web Content Accessibility Guidelines</a> level A and AA requirements by creating rules that are based on the following W3C documents:</p>
             <ul>
-              <li><a href="https://www.w3.org/TR/wai-aria/">W3C Accessible Rich Internet Application (ARIA) specification.</a></li>
+              <li><a href="https://www.w3.org/TR/WCAG20/">W3C WAI Web Content Accessibility Guidelines 2.0 (WCAG 2.0).</a></li>
+              <li><a href="https://www.w3.org/TR/WCAG21/">W3C WAI Web Content Accessibility Guidelines 2.1 (WCAG 2.1).</a></li>
+              <li><a href="https://www.w3.org/TR/WCAG22/">W3C WAI Web Content Accessibility Guidelines 2.2 (WCAG 2.2).</a></li>
+
+              <li><a href="https://www.w3.org/TR/wai-aria/">W3C WAI Accessible Rich Internet Application (ARIA) specification.</a></li>
               <li><a href="https://www.w3.org/TR/html-aria/">W3C ARIA in HTML specification.</a></li>
-              <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices Guide</a></li>
+              <li><a href="https://www.w3.org/WAI/ARIA/apg/">W3C ARIA Authoring Practices Guide</a></li>
+              <li><a href="https://www.w3.org/TR/accname-1.2/">W3C Accessible Name and Description Computation</a></li>
             </ul>
           </div>
 
@@ -94,7 +117,7 @@
     </main>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 

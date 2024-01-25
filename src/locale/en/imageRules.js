@@ -27,7 +27,7 @@ export const imageRules = {
     },
     PURPOSES: [
       'A text alternative for an image, usually specified with an @alt@ attribute, provides a summary of the purpose of the image for people with visual impairments, enabling them to understand the content or purpose of the image on the page.',
-      'An image with a text alternative that is an empty string or that has @role="presentation"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
+      'An image with a text alternative that is an empty string or that has @role="none"@ is ignored by assistive technologies. Such markup indicates that the image is being used for decoration, spacing or other stylistic purposes rather than meaningful content.'
     ],
     TECHNIQUES: [
       'A text alternative should summarize the purpose of an image as succinctly as possible (preferably with no more than 100 characters).',
@@ -35,7 +35,7 @@ export const imageRules = {
       'The @aria-labelledby@ attribute can be used to provide a text alternative when an image can be described using text already associated with the image, or for elements with @role="img"@.',
       'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute. Use the @alt@ attribute for @img@ and @area@ elements.',
       'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.',
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and one that should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
     ],
@@ -57,8 +57,8 @@ export const imageRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -118,7 +118,7 @@ export const imageRules = {
       'The @aria-labelledby@ attribute can be used to provide a text alternative when images can be described using text already associated with the image, such as a visible caption, or for elements with @role="img"@.',
       'The @aria-label@ attribute should only be used to provide a text alternative in the special case when an element has a @role="img"@ attribute.',
       'The @title@ attribute will be used by assistive technologies to provide a text alternative if no other specification technique is found.  NOTE: Using the @title@ attribute will also generate a tooltip in some browsers.',
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
       'Find each image on the page and verify that it is only being used decoratively or is redundant with other information on the page.'
@@ -141,8 +141,8 @@ export const imageRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -209,8 +209,8 @@ export const imageRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
@@ -228,7 +228,7 @@ export const imageRules = {
   },
 
   IMAGE_4_EN: {
-    ID:         'Image 4 (English)',
+    ID:         'Image 4',
     DEFINITION: 'The text alternative  for an image should be no more than 100 characters in length.',
     SUMMARY:    'Alt text no more than 100 characters',
     TARGET_RESOURCES_DESC: '@img@, @area@ and @[role="img"]@ elements',
@@ -257,8 +257,8 @@ export const imageRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G94: Providing text alternative for non-text content that serves the same purpose and presents the same information as the non-text content',
@@ -277,9 +277,9 @@ export const imageRules = {
 
   IMAGE_5: {
     ID:         'Image 5',
-    DEFINITION: 'Verify an image with @[alt=""]@ or @[role="presentation"]@ is only being used for purely decorative, spacing or stylistic purposes.',
-    SUMMARY:    'Verify image is decorative',
-    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="presentation"]@, @[role="img"]@ with an empty text alternative',
+    DEFINITION: 'Images with @[alt=""]@ or @[role="none"]@ must only be used to identify purely decorative images, spacing or stylistic purposes.',
+    SUMMARY:    'Image is decorative',
+    TARGET_RESOURCES_DESC: '@img[alt=""]@, @img[role="none"]@, @[role="img"]@ with an empty text alternative',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S: 'Verify the image is being used purely for decorative, spacing or styling purposes.',
       MANUAL_CHECK_P: 'Verify the %N_MC images are being used purely for decorative, spacing or styling purposes.',
@@ -298,7 +298,7 @@ export const imageRules = {
       'If an image contains information, but is mistakenly identified as decorative, users of assistive technologies will not have access to the information.'
     ],
     TECHNIQUES: [
-      'Use the attributes @alt=""@, @role="presentation"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
+      'Use the attributes @alt=""@, @role="none"@ or include the image as a CSS @background-image@ to identify it as being used purely for stylistic or decorative purposes and that it should be ignored by people using assistive technologies.'
     ],
     MANUAL_CHECKS: [
     ],
@@ -373,8 +373,8 @@ export const imageRules = {
         url:   'https://www.w3.org/TR/html-longdesc/'
       },
       { type:  REFERENCES.SPECIFICATION,
-        title: 'HTML 4.01 Specification: 13.8 How to specify alternate text',
-        url:   'https://www.w3.org/TR/html4/struct/objects.html#adef-alt'
+        title: 'HTML Specification: IMG element ALT Attribute',
+        url:   'https://html.spec.whatwg.org/#attr-img-alt'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'Web Accessibility Tutorials : Images',
@@ -471,7 +471,7 @@ export const imageRules = {
   IMAGE_8: {
     ID:         'Image 8',
     DEFINITION: 'When an image is used to represent stylized text, replace the image with text content and use CSS to style text.',
-    SUMMARY:    'Use CSS to stylize text',
+    SUMMARY:    'Images of text',
     TARGET_RESOURCES_DESC: '@img@ and [role="img"]',
     RULE_RESULT_MESSAGES: {
       MANUAL_CHECK_S:   'If the image is used to stylize text, replace the image with text content styled with CSS.',

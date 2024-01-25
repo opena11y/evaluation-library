@@ -65,6 +65,7 @@ function getGuidelineResults (evalResult) {
     WCAG_GUIDELINE.G_2_2,
     WCAG_GUIDELINE.G_2_3,
     WCAG_GUIDELINE.G_2_4,
+    WCAG_GUIDELINE.G_2_5,
     WCAG_GUIDELINE.G_3_1,
     WCAG_GUIDELINE.G_3_2,
     WCAG_GUIDELINE.G_3_3,
@@ -100,14 +101,13 @@ function getScopeResults (evalResult) {
 *   (1) Run evlauation library;
 *   (2) return result object for the all rules view in the sidebar;
 */
-export default function getAllRulesInfo (ruleset, level, scopeFilter, firstStepRules) {
+export default function getAllRulesInfo (ruleset, level, scopeFilter) {
 
   debug.flag && debug.log(`[    ruleset]: ${ruleset}`);
   debug.flag && debug.log(`[      level]: ${level}`);
   debug.flag && debug.log(`[scopeFilter]: ${scopeFilter}`);
-  debug.flag && debug.log(`[ ruleFilter]: ${firstStepRules}`);
 
-  const evaluationResult  = evaluate(ruleset, level, scopeFilter, firstStepRules);
+  const evaluationResult  = evaluate(ruleset, level, scopeFilter);
   const ruleGroupResult   = evaluationResult.getRuleResultsAll();
   const ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
   const ruleResults       = ruleGroupResult.getRuleResultsArray();

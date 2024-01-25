@@ -43,13 +43,14 @@ export const keyboardRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
+    first_step          : true,
     wcag_primary_id     : '2.1.1',
     wcag_related_ids    : ['4.1.2'],
     target_resources    : ['widgets'],
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
-        if (de.hasRole && de.ariaInfo.isWidget) {
+        if (de.hasRole && de.ariaInfo.isWidget && !de.ariaInfo.isDPUBRole) {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
           }
@@ -73,6 +74,7 @@ export const keyboardRules = [
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
+    first_step          : true,
     wcag_primary_id     : '2.4.3',
     wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
     target_resources    : ['links', 'controls', 'widgets'],
@@ -144,6 +146,7 @@ export const keyboardRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
+    first_step          : true,
     wcag_primary_id     : '2.1.2',
     wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['object'],
@@ -172,6 +175,7 @@ export const keyboardRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '2.1.2',
     wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
     target_resources    : ['object'],
@@ -201,6 +205,7 @@ export const keyboardRules = [
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '2.4.7',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '3.2.1'],
     target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
@@ -245,6 +250,7 @@ export const keyboardRules = [
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '3.2.2',
     wcag_related_ids    : ['2.1.1', '2.1.2',  '2.4.3', '2.4.7'],
     target_resources    : ['select'],
@@ -261,6 +267,74 @@ export const keyboardRules = [
           }
         }
       });
+
+    } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_7
+   *
+   * @desc Content on Hover or Focus
+   */
+
+  { rule_id             : 'KEYBOARD_7',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    first_step          : false,
+    wcag_primary_id     : '1.4.13',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      if (dom_cache.hasScripting) {
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      }
+
+    } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_8
+   *
+   * @desc Focus Order
+   */
+
+  { rule_id             : 'KEYBOARD_8',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    first_step          : false,
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+
+    } // end validation function
+  },
+
+  /**
+   * @object KEYBOARD_9
+   *
+   * @desc Focus Not Obscured (Minimum)
+   */
+
+  { rule_id             : 'KEYBOARD_9',
+    last_updated        : '2023-12-16',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    first_step          : false,
+    wcag_primary_id     : '2.4.11',
+    wcag_related_ids    : [],
+    target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
+    validate            : function (dom_cache, rule_result) {
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
   }

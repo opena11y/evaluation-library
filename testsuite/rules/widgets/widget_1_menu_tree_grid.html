@@ -15,139 +15,139 @@
       <main>
         <h1>WIDGET 1: Menu, tree, and grid must have accessible name</h1>
 
-        <div role="menubar" class="WIDGET_1_MC">
-          <div role="menu" class="WIDGET_1_PASS" aria-label="Menu 1: Content">
-            <div role="menuitem" class="WIDGET_1_PASS">Menu item 1</div>
-            <div role="menuitemcheckbox" class="WIDGET_1_PASS">Menu item checkbox 1</div>
-            <div role="menuitemradio" class="WIDGET_1_PASS">Menu item radio 1</div>
+        <div role="menubar" class="WIDGET_1_MC" id="mc1">
+          <div role="menu" class="WIDGET_1_PASS" id="p1" aria-label="Menu 1: Content">
+            <div role="menuitem" class="WIDGET_1_PASS" id="p2">Menu item 1</div>
+            <div role="menuitemcheckbox" class="WIDGET_1_PASS" id="p3">Menu item checkbox 1</div>
+            <div role="menuitemradio" class="WIDGET_1_PASS" id="p4">Menu item radio 1</div>
           </div>
         </div>
 
-        <div role="menubar" class="WIDGET_1_MC">
-          <div role="menu" class="WIDGET_1_PASS" aria-label="Menu 2: aria-label">
-            <div role="menuitem" class="WIDGET_1_PASS" aria-label="Menu item 2"></div>
-            <div role="menuitemcheckbox" class="WIDGET_1_PASS" aria-label="Menu item checkbox 2"></div>
-            <div role="menuitemradio" class="WIDGET_1_PASS">Menu item radio 2</div>
+        <div role="menubar" class="WIDGET_1_MC" id="mc2">
+          <div role="menu" class="WIDGET_1_PASS" id="p5" aria-label="Menu 2: aria-label">
+            <div role="menuitem" class="WIDGET_1_PASS" id="p6" aria-label="Menu item 2"></div>
+            <div role="menuitemcheckbox" class="WIDGET_1_PASS" id="p7" aria-label="Menu item checkbox 2"></div>
+            <div role="menuitemradio" class="WIDGET_1_PASS" id="p8">Menu item radio 2</div>
           </div>
         </div>
 
-        <div role="menubar" class="WIDGET_1_MC">
+        <div role="menubar" class="WIDGET_1_MC" id="mc3">
           <div id="ID_MENU_3">Menu 3: Aria-labelledby</div>
-          <div role="menu" class="WIDGET_1_PASS" aria-labelledby="ID_MENU_3">
+          <div role="menu" class="WIDGET_1_PASS"  id="p9" aria-labelledby="ID_MENU_3">
             <div id="ID_MENUITEM_31">Menu item 31</div>
-            <div role="menuitem" class="WIDGET_1_PASS" aria-labelledby="ID_MENUITEM_31"></div>
+            <div role="menuitem" class="WIDGET_1_PASS" id="p10" aria-labelledby="ID_MENUITEM_31"></div>
             <div id="ID_MENUITEMCHECKBOX_3">Menu item checkbox 3</div>
-            <div role="menuitemcheckbox" class="WIDGET_1_PASS" aria-labelledby="ID_MENUITEMCHECKBOX_3"></div>
+            <div role="menuitemcheckbox" class="WIDGET_1_PASS" id="p11" aria-labelledby="ID_MENUITEMCHECKBOX_3"></div>
             <div id="ID_MENUITEMRADIO_3">Menu item radio 3</div>
-            <div role="menuitemradio" class="WIDGET_1_PASS" aria-labelledby="ID_MENUITEMRADIO_3"></div>
+            <div role="menuitemradio" class="WIDGET_1_PASS" id="p12" aria-labelledby="ID_MENUITEMRADIO_3"></div>
           </div>
         </div>
 
-        <div role="menubar" hidden class="WIDGET_1_HIDDEN">
+        <div role="menubar" hidden class="WIDGET_1_HIDDEN" id="h1">
           <div>Menu 4</div>
-          <div role="menu" class="WIDGET_1_HIDDEN" aria-label="Menu 4: Hidden">
-            <div role="menuitem" class="WIDGET_1_HIDDEN">Menu item 4</div>
-            <div role="menuitemcheckbox" class="WIDGET_1_HIDDEN">Menu item checkbox 4</div>
-            <div role="menuitemradio" class="WIDGET_1_HIDDEN">Menu item radio 4</div>
+          <div role="menu" class="WIDGET_1_HIDDEN" id="h2" aria-label="Menu 4: Hidden">
+            <div role="menuitem" class="WIDGET_1_HIDDEN" id="h3">Menu item 4</div>
+            <div role="menuitemcheckbox" class="WIDGET_1_HIDDEN" id="h4">Menu item checkbox 4</div>
+            <div role="menuitemradio" class="WIDGET_1_HIDDEN" id="h5">Menu item radio 4</div>
           </div>
         </div>
 
-        <div role="menubar" class="WIDGET_1_MC">
+        <div role="menubar" class="WIDGET_1_MC" id="mc4">
           <div>Menu 5</div>
-          <div role="menu" class="WIDGET_1_MC" >
-            <div role="menuitem" class="WIDGET_1_FAIL"><span aria-hidden="true">Menu item 5</span></div>
-            <div role="menuitemcheckbox" class="WIDGET_1_FAIL"><span hidden>Menu item checkbox 4</span></div>
-            <div role="menuitemradio" class="WIDGET_1_FAIL"><span style="display:  none">Menu item radio 4</span></div>
+          <div role="menu" class="WIDGET_1_MC"  id="mc5">
+            <div role="menuitem" class="WIDGET_1_FAIL" id="f1"><span aria-hidden="true">Menu item 5</span></div>
+            <div role="menuitemcheckbox" class="WIDGET_1_FAIL" id="f2"><span hidden>Menu item checkbox 4</span></div>
+            <div role="menuitemradio" class="WIDGET_1_FAIL" id="f3"><span style="display:  none">Menu item radio 4</span></div>
           </div>
         </div>
 
-       <div role="radiogroup" class="WIDGET_1_PASS" aria-label="Radiogroup 1: Content">
+       <div role="radiogroup" class="WIDGET_1_PASS" id="p13" aria-label="Radiogroup 1: Content">
           <input type="radio">Radio 1
         </div>
 
-        <div role="radiogroup" class="WIDGET_1_PASS" aria-label="Radiogroup 2: Aria-label">
+        <div role="radiogroup" class="WIDGET_1_PASS" id="p14" aria-label="Radiogroup 2: Aria-label">
           <input type="radio" aria-label="Radio 2">
         </div>
 
         <div id="ID_RADIOGROUP_3">Radiogroup 3: Aria-labelledby</div>
-        <div role="radiogroup" class="WIDGET_1_PASS" aria-labelledby="ID_RADIOGROUP_3">
+        <div role="radiogroup" class="WIDGET_1_PASS" id="p16" aria-labelledby="ID_RADIOGROUP_3">
           <div id="ID_RADIO_3">Radio 3</div>
           <input type="radio" aria-labelledby="ID_RADIO_3">
         </div>
 
-        <div role="radiogroup" class="WIDGET_1_HIDDEN" style="display:none" aria-label="Radiogroup 4: Hidden">
+        <div role="radiogroup" class="WIDGET_1_HIDDEN" id="h6" style="display:none" aria-label="Radiogroup 4: Hidden">
           <input type="radio" aria-label="Radio 4">
         </div>
 
-        <div role="tree" class="WIDGET_1_PASS" aria-label="Tree 1: Content"></div>
-          <div role="treeitem" class="WIDGET_1_PASS">Tree item 1</div>
+        <div role="tree" class="WIDGET_1_PASS" id="p16" aria-label="Tree 1: Content"></div>
+          <div role="treeitem" class="WIDGET_1_PASS" id="p17" >Tree item 1</div>
         </div>
 
-        <div role="tree" class="WIDGET_1_PASS" aria-label="Tree 2: aria-label"></div>
-          <div role="treeitem" class="WIDGET_1_PASS" aria-label="Tree item 2"></div>
+        <div role="tree" class="WIDGET_1_PASS"  id="p18" aria-label="Tree 2: aria-label"></div>
+          <div role="treeitem" class="WIDGET_1_PASS"  id="p19" aria-label="Tree item 2"></div>
         </div>
 
         <div aria-hidden="true" id="ID_TREE_3">Tree 3: aria-labelledby</div>
-        <div role="tree" class="WIDGET_1_PASS" aria-labelledby="ID_TREE_3"></div>
+        <div role="tree" class="WIDGET_1_PASS" id="p20" aria-labelledby="ID_TREE_3"></div>
           <div id="ID_TREEITEM_3">Tree item 3</div>
-          <div role="treeitem" class="WIDGET_1_PASS" aria-labelledby="ID_TREEITEM_3"></div>
+          <div role="treeitem" class="WIDGET_1_PASS" id="p21"  aria-labelledby="ID_TREEITEM_3"></div>
         </div>
 
-        <div role="tree" style="display:none" class="WIDGET_1_HIDDEN" aria-label="Tree 4: hidden"></div>
-          <div role="treeitem" style="display:none" class="WIDGET_1_HIDDEN" aria-label="Tree item 4"></div>
+        <div role="tree" style="display:none" class="WIDGET_1_HIDDEN" id="h7" aria-label="Tree 4: hidden"></div>
+          <div role="treeitem" style="display:none" class="WIDGET_1_HIDDEN" id="h8" aria-label="Tree item 4"></div>
         </div>
  
-        <div role="grid" aria-hidden="true" class="WIDGET_1_HIDDEN" aria-label="Grid 4: hidden">
-          <div role="row" class="WIDGET_1_HIDDEN" aria-label="Row 4">
-            <div role="rowheader" class="WIDGET_1_HIDDEN" aria-label="Header 4"></div>
-            <div role="gridcell" class="WIDGET_1_HIDDEN" aria-label="Gridcell 4"></div>
+        <div role="grid" aria-hidden="true" class="WIDGET_1_HIDDEN" id="h9" aria-label="Grid 4: hidden">
+          <div role="row" class="WIDGET_1_HIDDEN" id="h10" aria-label="Row 4">
+            <div role="rowheader" class="WIDGET_1_HIDDEN" id="h11" aria-label="Header 4"></div>
+            <div role="gridcell" class="WIDGET_1_HIDDEN" id="h12" aria-label="Gridcell 4"></div>
           </div>
         </div>
 
         <div>Grid 5: Fail</div>
-        <div role="grid" class="WIDGET_1_FAIL" ></div>
-        <div role="row" class="WIDGET_1_MC">
-            <div role="rowheader" class="WIDGET_1_FAIL"></div>
-            <div role="gridcell" class="WIDGET_1_MC"></div>
+        <div role="grid" class="WIDGET_1_FAIL" id="f4" >
+          <div role="row" class="WIDGET_1_MC" id="mc6">
+              <div role="rowheader" class="WIDGET_1_FAIL" id="f5"></div>
+              <div role="gridcell" class="WIDGET_1_MC" id="mc7"></div>
           </div>
         </div>
 
-        <div role="combobox" class="WIDGET_1_PASS" aria-label="Combobox 1:Content">
-          <div role="listbox" class="WIDGET_1_PASS" aria-label="Listbox 1">
-            <div role="option" class="WIDGET_1_PASS">Option 1</div>
+        <div role="combobox" class="WIDGET_1_PASS" id="p22"  aria-label="Combobox 1:Content">
+          <div role="listbox" class="WIDGET_1_PASS" id="p23"  aria-label="Listbox 1">
+            <div role="option">Option 1</div>
           </div>
-          <input type="text" role="textbox" aria-label="Textbox 1">
+          <input type="text" aria-label="Textbox 1" >
         </div>
 
-        <div role="combobox" class="WIDGET_1_PASS" aria-label="Combobox 2: Aria-label">
-          <div role="listbox" class="WIDGET_1_PASS" aria-label="Listbox 2">
-            <div role="option" class="WIDGET_1_PASS" aria-label="Option 2"></div>
+        <div role="combobox" class="WIDGET_1_PASS" id="p24" aria-label="Combobox 2: Aria-label">
+          <div role="listbox" class="WIDGET_1_PASS"id="p25"  aria-label="Listbox 2">
+            <div role="option" aria-label="Option 2"></div>
           </div>
           <input type="text" role="textbox"  aria-label="Textbox 2">
         </div>
 
         <div id="ID_COMBOBOX_3" style="visibility: hidden"><span style="visibility: visible">Combobox 3: Aria-labelledby</span></div>
-        <div role="combobox" class="WIDGET_1_PASS" aria-labelledby="ID_COMBOBOX_3">
+        <div role="combobox" class="WIDGET_1_PASS"id="p26" aria-labelledby="ID_COMBOBOX_3">
           <div id="ID_LISTBOX_3">Listbox 3</div>
-          <div role="listbox" class="WIDGET_1_PASS" aria-labelledby="ID_LISTBOX_3">
+          <div role="listbox" class="WIDGET_1_PASS"id="p27" aria-labelledby="ID_LISTBOX_3">
             <div id="ID_OPTION_3">Option 3</div>
-            <div role="option" class="WIDGET_1_PASS" aria-labelledby="ID_OPTION_3"></div>
+            <div role="option" aria-labelledby="ID_OPTION_3"></div>
           </div>
           <div aria-hidden="true" id="ID_TEXTBOX_3">Textbox 3</div>
           <input type="text" role="textbox" aria-labelledby="ID_TEXTBOX_3">
         </div>
 
-        <div role="combobox" class="WIDGET_1_PASS" aria-label="Combobox 4: Hidden">
-          <div role="listbox" hidden class="WIDGET_1_HIDDEN" aria-label="Listbox 4">
-            <div role="option" class="WIDGET_1_HIDDEN" aria-label="Option 2"></div>
+        <div role="combobox" class="WIDGET_1_PASS" id="p28" aria-label="Combobox 4: Hidden">
+          <div role="listbox" hidden class="WIDGET_1_HIDDEN" id="h13" aria-label="Listbox 4">
+            <div role="option" aria-label="Option 2"></div>
           </div>
           <input type="text" role="textbox" aria-hidden="true" aria-label="Textbox 3: Hidden">
         </div>
 
         <div>Combobox 5: Fail</div>
-        <div role="combobox" class="WIDGET_1_FAIL">
-          <div role="listbox" class="WIDGET_1_FAIL">
-            <div role="option" class="WIDGET_1_FAIL"></div>
+        <div role="combobox" class="WIDGET_1_FAIL" id="f6">
+          <div role="listbox" class="WIDGET_1_FAIL" id="f7">
+            <div role="option"></div>
           </div>
           <input type="text" role="textbox">
         </div>        

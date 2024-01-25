@@ -23,114 +23,56 @@ export const audioRules = [
   /**
    * @object AUDIO_1
    *
-   * @desc Audio elements must have captions or text transcripts
+   * @desc Provide text alternative for audio only
    */
 
   { rule_id             : 'AUDIO_1',
-    last_updated        : '2023-08-11',
+    last_updated        : '2024-01-04',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
+    first_step          : true,
     wcag_primary_id     : '1.2.1',
     wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
-    target_resources    : ['audio', 'track'],
+    target_resources    : ['audio', 'embed', 'object', 'track'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.mediaInfo.audioElements.forEach( ae => {
-        const de = ae.domElement;
-        if (de.visibility.isVisibleToAT || ae.hasAutoPlay) {
-          if (ae.tracks.length) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          }
-          else {
-            if (de.accDescription.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []);
+      dom_cache.mediaInfo.allMediaElements.forEach( me => {
+
+        if (me.isAudio || !me.isVideo) {
+          const de = me.domElement;
+
+          if (de.visibility.isVisibleToAT || me.hasAutoPlay) {
+            if (me.allowsTracks) {
+              if (me.tracks.length) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName]);
+              }
+              else {
+                if (de.accDescription.name) {
+                  rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
+                }
+              }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              if (de.accDescription.name) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName]);
+              }
+              else {
+                if (me.isAudio) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
+              }
             }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
-        }
-      });
-
-    } // end validate function
-  },
-
-  /**
-   * @object AUDIO_2
-   *
-   * @desc If object element is used for audio only, object must have captions or text transcript
-   */
-
-  { rule_id             : 'AUDIO_2',
-    last_updated        : '2023-08-11',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
-    rule_required       : true,
-    wcag_primary_id     : '1.2.1',
-    wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
-    target_resources    : ['object', 'param'],
-    validate          : function (dom_cache, rule_result) {
-
-      dom_cache.mediaInfo.objectElements.forEach( oe => {
-        const de = oe.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (de.accDescription.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
           }
           else {
-            if (oe.type.includes('audio')) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-            }
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
           }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-      });
-
-    } // end validate function
-  },
-
-  /**
-   * @object AUDIO_3
-   *
-   * @desc If embed element is used for audio only, embed  must have captions or text transcript
-   */
-
-  { rule_id             : 'AUDIO_3',
-    last_updated        : '2023-08-11',
-    rule_scope          : RULE_SCOPE.ELEMENT,
-    rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
-    rule_required       : true,
-    wcag_primary_id     : '1.2.1',
-    wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
-    target_resources    : ['embed'],
-    validate          : function (dom_cache, rule_result) {
-
-      dom_cache.mediaInfo.embedElements.forEach( ee => {
-        const de = ee.domElement;
-        if (de.visibility.isVisibleToAT) {
-          if (de.accDescription.name) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
-          }
-          else {
-            if (ee.type.includes('audio')) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
-            }
-            else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', []);
-            }
-          }
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
         }
       });
 
@@ -138,16 +80,17 @@ export const audioRules = [
   },
 
     /**
-     * @object AUDIO_4
+     * @object AUDIO_2
      *
      * @desc  Audio automatically starts
      */
 
-  { rule_id             : 'AUDIO_4',
-    last_updated        : '2023-08-11',
+  { rule_id             : 'AUDIO_2',
+    last_updated        : '2024-01-04',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
+    first_step          : false,
     wcag_primary_id     : '1.4.2',
     wcag_related_ids    : [],
     target_resources    : [],

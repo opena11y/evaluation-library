@@ -22,8 +22,17 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -38,10 +47,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -79,8 +97,8 @@
 
           <h2>Developers</h2>
           <ul>
-            <li>Jon Gunderson</li>
-            <li>Nicholas Hoyt</li>
+            <li>Jon Gunderson, Open Web Accessibility Consulting</li>
+            <li>Nicholas Hoyt, University of Illinois (retired)</li>
           </ul>
 
           <h2>Mission</h2>
@@ -91,6 +109,7 @@
                 <li><a href="https://www.w3.org/TR/wai-aria-1.2/">Accessible Rich Internet Application (ARIA) 1.2 Specification</a></li>
                 <li><a href="https://www.w3.org/TR/html-aria/">Accessible Name and Description Computation 1.1</a></li>
                 <li><a href="https://www.w3.org/TR/accname/">ARIA in HTML Specification</a></li>
+                <li><a href="https://www.w3.org/TR/WCAG20/">Web content Accessibility Guidelines 2.0</a></li>
                 <li><a href="https://www.w3.org/TR/WCAG21/">Web content Accessibility Guidelines 2.1</a></li>
                 <li><a href="https://www.w3.org/TR/WCAG22/">Web content Accessibility Guidelines 2.2</a></li>
               </ul>
@@ -101,7 +120,7 @@
 
           <h2>History</h2>
 
-          <p>The Evaluation library was otiginally developed as part of the OpenAjax project, but as that project was abandoned it was migrated to the OpenA11y GitHub organization.
+          <p>The Evaluation library was originally developed as part of the <a href="https://en.wikipedia.org/wiki/OpenAjax_Alliance">OpenAjax Alliance</a>, when the OpenAjax Alliance has ceased operations the accessibility evaluation library was rebranded as the <a href="https://github.com/opena11y/">OpenA11y GitHub organization</a>.
 
           <h3>Version 2.0 Overview</h3>
 
@@ -167,7 +186,7 @@
     </nav>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 

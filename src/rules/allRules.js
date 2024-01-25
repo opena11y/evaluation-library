@@ -2,6 +2,7 @@
 
 /* Imports */
 import {audioRules}         from './audioRules.js';
+import {authorizationRules} from './authorizationRules.js';
 import {bypassRules}        from './bypassRules.js';
 import {colorRules}         from './colorRules.js';
 import {errorRules}         from './errorRules.js';
@@ -25,6 +26,7 @@ import {readingOrderRules}  from './readingOrderRules.js';
 import {resizeRules}        from './resizeRules.js';
 import {sensoryRules}       from './sensoryRules.js';
 import {shortcutRules}      from './shortcutRules.js';
+import {spacingRules}      from './spacingRules.js';
 import {tableRules}         from './tableRules.js';
 import {targetSizeRules}    from './targetSizeRules.js';
 import {timingRules}        from './timingRules.js';
@@ -47,6 +49,7 @@ function addToArray (ruleArray) {
 }
 
 addToArray(audioRules);
+addToArray(authorizationRules);
 addToArray(bypassRules);
 addToArray(colorRules);
 addToArray(errorRules);
@@ -70,6 +73,7 @@ addToArray(readingOrderRules);
 addToArray(resizeRules);
 addToArray(sensoryRules);
 addToArray(shortcutRules);
+addToArray(spacingRules);
 addToArray(tableRules);
 addToArray(targetSizeRules);
 addToArray(titleRules);

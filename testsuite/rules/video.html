@@ -17,37 +17,30 @@
 
       import executeTest from '../scripts/testsuite.js';
       window.addEventListener('load', () => {
-        executeTest('VIDEO_1: Video only must have equivalents (video element)',  'ID_IFRAME_1', 'VIDEO_1');
-        executeTest('VIDEO_2: Video only must have equivalents (object element)', 'ID_IFRAME_2', 'VIDEO_2');
-        executeTest('VIDEO_3: Video only must have equivalents (embed element)',  'ID_IFRAME_3', 'VIDEO_3');
-
-        executeTest('VIDEO_4: Video must have captions (video element)',  'ID_IFRAME_4', 'VIDEO_4');
-        executeTest('VIDEO_5: Video must have captions (object element)', 'ID_IFRAME_5', 'VIDEO_5');
-        executeTest('VIDEO_6: Video must have captions (embed element)',  'ID_IFRAME_6', 'VIDEO_6');
-
-        executeTest('VIDEO_7: Video must audio descriptions (video element)',  'ID_IFRAME_7', 'VIDEO_7');
-        executeTest('VIDEO_8: Video must audio descriptions (object element)', 'ID_IFRAME_8', 'VIDEO_8');
-        executeTest('VIDEO_9: Video must audio descriptions (embed element)',  'ID_IFRAME_9', 'VIDEO_9');
-
+        executeTest('VIDEO 1: video-Only (Prerecorded)',         'ID_IFRAME_1', 'VIDEO_1');
+        executeTest('VIDEO 2: must have caption (pre-recorded)', 'ID_IFRAME_2', 'VIDEO_2');
+        executeTest('VIDEO 3: must have audio description or media alternative', 'ID_IFRAME_3', 'VIDEO_3');
+        executeTest('VIDEO 4: must have caption (live)',         'ID_IFRAME_4', 'VIDEO_4');
       });
+        executeTest('VIDEO 5: must have audio description',      'ID_IFRAME_5', 'VIDEO_5');
     </script>
 
-    <h2>Video 1, 2 and 3: Video only must have an alternative</h2>
+    <h2>Video 1: video-Only (Prerecorded)</h2>
     <iframe id="ID_IFRAME_1" src="video/video_1_video_only_must_have_alternative.html"></iframe>
-    <iframe id="ID_IFRAME_2" src="video/video_2_video_only_must_have_alternative.html"></iframe>
-    <iframe id="ID_IFRAME_3" src="video/video_3_video_only_must_have_alternative.html"></iframe>
 
-    <h2>Video 4, 5 and 6: Video must have caption</h2>
+    <h2>Video 2: Must have caption (Prerecorded)</h2>
+    <iframe id="ID_IFRAME_2" src="video/video_2_video_must_have_caption.html"></iframe>
+    
+    <h2>Video 3: Must have audio description or media alternative</h2>
+    <iframe id="ID_IFRAME_3" src="video/video_3_video_must_have_audio_description.html"></iframe>
+
+    <h2>Video 4: Must have caption (live)</h2>
     <iframe id="ID_IFRAME_4" src="video/video_4_video_must_have_caption.html"></iframe>
-    <iframe id="ID_IFRAME_5" src="video/video_5_video_must_have_caption.html"></iframe>
-    <iframe id="ID_IFRAME_6" src="video/video_6_video_must_have_caption.html"></iframe>
-    
-    <h2>Video 7, 8 and 9: Video must have audio description</h2>
-    <iframe id="ID_IFRAME_7" src="video/video_7_video_must_have_audio_description.html"></iframe>
-    <iframe id="ID_IFRAME_8" src="video/video_8_video_must_have_audio_description.html"></iframe>
-    <iframe id="ID_IFRAME_9" src="video/video_9_video_must_have_audio_description.html"></iframe>
-    
-    
+
+    <h2>Video 5: Must have audio description</h2>
+    <iframe id="ID_IFRAME_5" src="video/video_5_video_must_have_audio_description.html"></iframe>
+
+
   </body>
 
 </html>

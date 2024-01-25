@@ -149,7 +149,16 @@ export default class ElementResult extends BaseResult {
    */
 
   getRole () {
-    return this.domElement.role;
+    let role =this.domElement.role
+    if (this.domElement.role === 'row') {
+      if (this.domElement.ariaInfo.inGrid) {
+        role += ' (in grid)';
+      }
+      if (this.domElement.ariaInfo.inTreegrid) {
+        role += ' (in treerid)';
+      }
+    }
+    return role;
   }
 
   /**

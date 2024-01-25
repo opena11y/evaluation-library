@@ -263,6 +263,113 @@
         </tr>
       </table>
 
+     <h2>Table G: Layout Table</h2>
+
+      <table class="test" role="none">
+        <tr>
+          <td></td>
+          <td id="a">A</td>
+          <td id="b">B</td>
+          <td id="c">C</td>
+          <td id="d">D</td>
+          <td id="e">E</td>
+          <td id="f">F</td>
+          <td id="g">G</td>
+        </tr>
+        <tr>
+          <td>L</td>
+          <td>Cell 11</td>
+          <td>Cell 12</td>
+          <td>Cell 13</td>
+          <td>Cell 14</td>
+          <td>Cell 15</td>
+          <td>Cell 16</td>
+          <td>Cell 17</td>
+        </tr>
+        <tr>
+          <td>M</td>
+          <td>Cell 21</td>
+          <td>Cell 22</td>
+          <td>Cell 23</td>
+          <td>Cell 24</td>
+          <td>Cell 25</td>
+          <td>Cell 26</td>
+          <td>Cell 27</td>
+        </tr>
+        <tr>
+          <td>N</td>
+          <td>Cell 31</td>
+          <td>Cell 32</td>
+          <td>Cell 33</td>
+          <td>Cell 35</td>
+          <td>Cell 36</td>
+          <td>Cell 37</td>
+        </tr>
+        <tr>
+          <td>O</td>
+          <td>Cell 41</td>
+          <td>Cell 42</td>
+          <td>Cell 43</td>
+          <td>Cell 44</td>
+          <td>Cell 45</td>
+          <td>Cell 46</td>
+          <td>Cell 47</td>
+        </tr>
+      </table>
+
+     <h2>Table H: No TH elements</h2>
+
+      <table class="test">
+        <tr>
+          <td class="TABLE_1_MC"></td>
+          <td scope="col">A</td>
+          <td scope="col">B</td>
+          <td scope="col">C</td>
+          <td scope="col">D</td>
+          <td scope="col">E</td>
+          <td scope="col">F</td>
+          <td class="TABLE_1_FAIL">G</td>
+        </tr>
+        <tr>
+          <td scope="row">L</td>
+          <td class="TABLE_1_PASS">Cell 11</td>
+          <td class="TABLE_1_PASS">Cell 12</td>
+          <td class="TABLE_1_PASS">Cell 13</td>
+          <td class="TABLE_1_PASS">Cell 14</td>
+          <td class="TABLE_1_PASS">Cell 15</td>
+          <td class="TABLE_1_PASS">Cell 16</td>
+          <td class="TABLE_1_PASS">Cell 17</td>
+        </tr>
+        <tr>
+          <td scope="row">M</td>
+          <td class="TABLE_1_PASS">Cell 21</td>
+          <td class="TABLE_1_PASS">Cell 22</td>
+          <td class="TABLE_1_PASS">Cell 23</td>
+          <td class="TABLE_1_PASS">Cell 24</td>
+          <td class="TABLE_1_PASS">Cell 25</td>
+          <td class="TABLE_1_PASS">Cell 26</td>
+          <td class="TABLE_1_PASS">Cell 27</td>
+        </tr>
+        <tr>
+          <td scope="row">N</td>
+          <td class="TABLE_1_PASS">Cell 31</td>
+          <td class="TABLE_1_PASS">Cell 32</td>
+          <td class="TABLE_1_PASS">Cell 33</td>
+          <td class="TABLE_1_PASS">Cell 35</td>
+          <td class="TABLE_1_PASS">Cell 36</td>
+          <td class="TABLE_1_PASS">Cell 37</td>
+        </tr>
+        <tr>
+          <td class="TABLE_1_FAIL">O</td>
+          <td class="TABLE_1_PASS">Cell 41</td>
+          <td class="TABLE_1_PASS">Cell 42</td>
+          <td class="TABLE_1_PASS">Cell 43</td>
+          <td class="TABLE_1_PASS">Cell 44</td>
+          <td class="TABLE_1_PASS">Cell 45</td>
+          <td class="TABLE_1_PASS">Cell 46</td>
+          <td class="TABLE_1_FAIL">Cell 47</td>
+        </tr>
+      </table>
 
   </body>
 </html>

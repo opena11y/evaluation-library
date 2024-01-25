@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>&lt;code&gt;object&lt;/code&gt; for audio must have alternative | OpenA11y Evaluation Library 2.0</title>
+        <title>Audio Control | OpenA11y Evaluation Library 2.0</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -26,14 +26,24 @@
 
     </head>
 
+    <script src="ruleLinks.js"></script>
   </head>
   <body>
             <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
                 <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false" a
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                           <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
@@ -48,10 +58,19 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li class="nav-item">
+                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
                             </li>
                           </ul>
                         </li>
@@ -79,15 +98,16 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active"><code>object</code> for audio must have alternative</li>
+          <li class="breadcrumb-item active">Audio Control</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: <code>object</code> for audio must have alternative</h1>
+            <h1 id="h1-title">Rule: Audio Control</h1>
             
+
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>
                   
@@ -105,7 +125,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td><code>object</code> elements used for audio only must have caption or text transcription of the audio content.</td>
+  <td>Media content with audio that automatically starts playing when the page loads and lasts longer than 3 seconds must provide a means for the user able to stop, pause or mute the audio content.</td>
 </tr>
 
                   
@@ -114,11 +134,9 @@
   <td>
     <ul>
       
-      <li>Captions and text transcripts provide a means for people cannot hear the audio to understand the audio content.</li>
+      <li>Individuals who use screen reading technologies can hear the screen reader without other sounds playing. This is especially important for those who are hard of hearing and for those whose screen readers use the system volume (so they cannot turn sound down and screen reader up).</li>
       
-      <li>Some types of learning disabilities affect speech perception, captions and text transcripts provide an alternative way to understand the audio content.</li>
-      
-      <li>When the language of the audio is different than the native language of the listener, captions and text transcripts support the listener in understanding the audio content.</li>
+      <li>People who have difficulty focusing on visual content (including text) benefit when audio is playing.</li>
       
     </ul>
   </td>
@@ -135,32 +153,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#audio-only-and-video-only-prerecorded" target="_spec">
-        Success Criterion 1.2.1 Audio-only and Video-only (Prerecorded)
+      <a href="https://www.w3.org/TR/WCAG22/#audio-control" target="_spec">
+        Success Criterion 1.4.2 Audio Control
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded" target="_spec">
-          Success Criterion 1.2.2 Captions (Prerecorded)
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#captions-live" target="_spec">
-          Success Criterion 1.2.4 Captions (Live)
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#audio-only-live" target="_spec">
-          Success Criterion 1.2.9 Audio-only (Live)
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -175,7 +175,7 @@
                   
 <tr>
   <th>Rule Scope</th>
-  <td>element</td>
+  <td>Page</td>
 </tr>
 
                   
@@ -184,9 +184,11 @@
   <td>
     <ul>
       
-      <li>Use the <code>audio</code> element instead of the <code>object</code> element for audio only content, since the <code>audio</code> element provides better support for captions and text transcripts.</li>
+      <li>Remove or disable the auto playing of media that includes audio content.</li>
       
-      <li>Use <code>aria-describedby</code> attribute to point to a text description of the audio only content.</li>
+      <li>Provide a means to pause, stop or mute the audio content.</li>
+      
+      <li>Use cookies to preserve the user preference of pausing, stopping or muting the audio content.</li>
       
     </ul>
   </td>
@@ -198,11 +200,19 @@
   <td>
     <ul>
       
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/audio-control.html">WCAG Understanding 1.4.2 Audio Control</a></li>
+      
       <li><a href="https://www.w3.org/WAI/media/av/">W3C: Making Audio and Video Media Accessible</a></li>
       
-      <li><a href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element">HMTL: The object element</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G60">G60: Playing a sound that turns off automatically within three seconds</a></li>
       
-      <li><a href="https://www.w3.org/TR/wai-aria/#aria-describedby">Accessible Rich Internet Applications (ARIA) 1.2: aria-describedby</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G170">G170: Providing a control near the beginning of the Web page that turns off sounds that play automatically</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G171">G171: Playing sounds only on user request</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F23">F23: Failure of 1.4.2 due to playing a sound longer than 3 seconds where there is no mechanism to turn it off</a></li>
+      
+      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/failures/F93">F93: Failure of Success Criterion 1.4.2 for absence of a way to pause or stop an HTML5 media element that autoplays</a></li>
       
       <li><a href="https://www.washington.edu/accessibility/videos/">University of Washington: Creating Accessible Videos</a></li>
       
@@ -220,7 +230,7 @@
     </div>
             <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Github Organization 2023</p></div>
+            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2024</p></div>
         </footer>
 
 
@@ -242,14 +252,21 @@
       (function() {
         const node = document.querySelector("#id-breadcrumb-rules");
 
-        console.log(`[node]: ${node}`);
-        console.log(`[href]: ${window.location.href} ${window.location.href.indexOf("#gl")}`);
-
         if (window.location.href.indexOf("#gl") > 0) {
           node.href= "rules-gl.html#audio-2";
         }
         else {
-          node.href= "rules-rc.html#audio-2";
+          if (window.location.href.indexOf("#rs") > 0) {
+            node.href= "rules-rs.html#audio-2";
+          }
+          else {
+            if (window.location.href.indexOf("#rc") > 0) {
+              node.href= "rules-rc.html#audio-2";
+            }
+            else {
+              node.href= "rules-fs.html#audio-2";
+            }
+          }
         }
       })()
     </script>

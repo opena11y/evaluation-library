@@ -6,7 +6,7 @@ export const common = {
   baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
   resultType: ['base','element','page','website'],
   ruleResult: ['undefined', 'N/A', 'P', 'MC', 'W', 'V'],
-  ruleScopes: ['undefined', 'element', 'page', 'website'],
+  ruleScopes: ['undefined', 'Element', 'Page', 'undefined', 'Website'],
   allRuleResults: 'All Rule Results',
   allRules: 'All Rules',
   implementationValue: [
@@ -47,10 +47,10 @@ export const common = {
   rulesetLevelAA:  'Levels A and AA',
   rulesetLevelAAA: 'Levels A, AA and enhanced CCR',
 
-  rulesetFilter: 'First Step rules',
-  rulesetWCAG22: 'WCAG 2.2, ',
-  rulesetWCAG21: 'WCAG 2.1, ',
-  rulesetWCAG20: 'WCAG 2.0, ',
+  rulesetFirstStep: 'First Step Rules',
+  rulesetWCAG22:    'WCAG 2.2, ',
+  rulesetWCAG21:    'WCAG 2.1, ',
+  rulesetWCAG20:    'WCAG 2.0, ',
 
   scopeFilterElement: ', Element scope only',
   scopeFilterPage:    ', Page scope only',
