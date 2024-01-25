@@ -286,8 +286,8 @@ const htmlRuleFS = nunjucks.render('./src-docs/templates/content-rules-fs.njk',
 outputFile('rules-fs.html', htmlRuleFS);
 
 // Rule summary
-const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rules-sum.njk',
-  {title: 'Rulesets and Rule Summaries',
+const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rulesets.njk',
+  {title: 'Rulesets',
   wcag20: wcag20,
   wcag21: wcag21,
   wcag22: wcag22,
@@ -296,7 +296,7 @@ const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rules-sum.njk'
   allGuidelines: allGuidelines,
   allRuleScopes: allRuleScopes
 });
-outputFile('rules-sum.html', htmlRuleSum);
+outputFile('rulesets.html', htmlRuleSum);
 
 // Create concepts and terms file
 const htmlConcepts = nunjucks.render('./src-docs/templates/content-concepts.njk', {title: 'Concepts and Terms'});
