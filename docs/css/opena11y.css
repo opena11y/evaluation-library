@@ -27,8 +27,11 @@ nav.rules [aria-current] {
   color: black;
 }
 
-nav.rules a:disabled {
+nav.rules a.disabled {
   color: gray;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
 }
 
 nav ol.breadcrumb {

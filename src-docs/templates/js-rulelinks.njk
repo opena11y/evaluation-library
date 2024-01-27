@@ -1,8 +1,20 @@
 
-const allRuleLinksByGuidelines = [];
+const allRuleLinksByGuidelines = [
+{% for link in allRuleLinksByGuidelines %}{% if loop.last %}"{{link}}"{% else %}"{{link}}",
+{% endif %}{% endfor %}
+];
 
-const allRuleLinksByRuleCategories = [];
+const allRuleLinksByRuleCategories = [
+{% for link in allRuleLinksByRuleCategories %}{% if loop.last %}"{{link}}"{% else %}"{{link}}",
+{% endif %}{% endfor %}
+];
 
-const allRuleLinksByScope = [];
+const allRuleLinksByScope = [
+{% for link in allRuleLinksByScope %}{% if loop.last %}"{{link}}"{% else %}"{{link}}",
+{% endif %}{% endfor %}
+];
 
-const allRuleLinksByFirstStepRules = [];
+const allRuleLinksByFirstStepRules = [
+{% for link in allRuleLinksByFirstStepRules %}{% if loop.last %}"{{link}}"{% else %}"{{link}}",
+{% endif %}{% endfor %}
+];

@@ -107,6 +107,69 @@
             
             <h1 id="h1-title">Rule: Only one owner</h1>
             
+                      <nav class="rules" aria-label="Rules">
+            <a id="previous-rule" href="#">Previous Rule</a>  |
+            <a id="next-rule" href="#">Next Rule</a>
+          </nav>
+
+          <script>
+
+            let allRuleLinks = [];
+            let suffix = '#fs';
+
+            const prevLink = document.querySelector('#previous-rule');
+            const nextLink = document.querySelector('#next-rule');
+
+            const url = new URL(document.location.href);
+            const parts = url.pathname.split('/');
+            let currentLink = '';
+            if (parts.length) {
+              currentLink = parts[parts.length-1];
+            }
+
+            if (window.location.href.indexOf("#gl") > 0) {
+              allRuleLinks = allRuleLinksByGuidelines;
+              suffix = '#gl';
+            }
+            else {
+              if (window.location.href.indexOf("#rs") > 0) {
+                allRuleLinks = allRuleLinksByScope;
+                suffix = '#rs';
+              }
+              else {
+                if (window.location.href.indexOf("#rc") > 0) {
+                  allRuleLinks = allRuleLinksByRuleCategories;
+                  suffix = '#rc';
+                }
+                else {
+                  allRuleLinks = allRuleLinksByFirstStepRules;
+                }
+              }
+            }
+
+            console.log(`[allRuleLinks]: ${allRuleLinks.length}`);
+
+            prevLink.classList.add('disabled');
+            nextLink.classList.add('disabled');
+
+            if (allRuleLinks) {
+              const index = allRuleLinks.indexOf(currentLink);
+              if (index >= 0) {
+                if (index > 0) {
+                  prevLink.href = allRuleLinks[index-1] + suffix;
+                  prevLink.classList.remove('disabled');
+                }
+
+                if (index < (allRuleLinks.length - 1)) {
+                  nextLink.href = allRuleLinks[index+1] + suffix;
+                  nextLink.classList.remove('disabled');
+                }
+              }
+            }
+
+
+          </script>
+
 
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>

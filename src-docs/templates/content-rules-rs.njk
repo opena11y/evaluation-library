@@ -21,7 +21,7 @@
 
           {% include "./nav-rulesets.njk" %}
 
-          {% for rs in allRuleScopes | reverse %}
+          {% for rs in allRuleScopes %}
             <h2 id="rs-{{rs.id}}" class="rules">{{rs.title}}</h2>
             <table class="table table-striped" aria-labelledby="sc-{{gl.id}}">
               <thead>
