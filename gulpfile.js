@@ -33,7 +33,7 @@ gulp.task('build', () => {
     });
 });
 
-gulp.task('build', () => {
+gulp.task('build-bookmarklet', () => {
   return rollup
     .rollup({
       input: './src/bookmarklets/opena11y-bookmarklet-example.js'
@@ -102,12 +102,13 @@ gulp.task('compress-bookmarklets', function(cb) {
 });
 
 
-const ainspector    = task('ainspector');
-const build         = task('build');
-const buildcjs      = task('buildcjs');
-const documentation = task('documentation');
-const linting       = task('linting');
-const compressa     = task('compress');
-const compressb     = task('compress-bookmarklets');
+const ainspector       = task('ainspector');
+const build            = task('build');
+const buildcjs         = task('buildcjs');
+const buildBookmarklet = task('build-bookmarklet');
+const documentation    = task('documentation');
+const linting          = task('linting');
+const compressa        = task('compress');
+const compressb        = task('compress-bookmarklets');
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector), documentation, compressa, compressb);
+exports.default = series(linting, parallel( build, buildcjs, ainspector, buildBookmarklet), documentation, compressa, compressb);

@@ -33546,8 +33546,19 @@
 
   window.addEventListener("load", () => {
     console.log(`[OpenA11y Example]`);
-    const er = evaluate();
-    er.allRuleResults.forEach( rr => {
+
+    const evalResult = evaluate();
+
+    // Rule result summary
+    let str = 'Rule Summary\n';
+    str += `V: ${evalResult.results_summary.violations} `;
+    str += `W: ${evalResult.results_summary.warnings} `;
+    str += `MC: ${evalResult.results_summary.manual_checks} `;
+    str += `P: ${evalResult.results_summary.passed} `;
+    console.log(str);
+
+    // Rule results
+    evalResult.allRuleResults.forEach( rr => {
       let str = '';
       str += `${rr.rule.getIdNLS()}: ${rr.rule.getDefinition()}\n`;
       str += `V: ${rr.results_summary.violations} `;
