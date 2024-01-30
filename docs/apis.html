@@ -1,20 +1,19 @@
+<!DOCTYPE html>
 <html lang="en-us">
   <head>
-        <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Using the Evaluation Library | OpenA11y Evaluation Library 2.0</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Using the Evaluation Library | OpenA11y Evaluation Library 2.0</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/opena11y.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="./css/opena11y.css" rel="stylesheet" />
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
-    </head>
 
   </head>
   <body>
@@ -95,7 +94,30 @@
             <h1>Using the Evaluation Library</h1>
             
 
-            <p><em>Page is under development</em></p>
+            <p><em>APIs are still being reviewd and finalized</em></p>
+
+            <h2>Example Bookmarklets</h2>
+
+            <p>The bookmarklets demonstrate the APIs and send output to the browsers console.</p>
+
+            <table>
+              <caption>OpenA11y Example Bookmarklets</caption>
+              <thead>
+                <th>Link</th>
+                <th>Description</th>
+              </thead>
+              <tbody>
+                <td>
+                  <a href="javascript:if(window.opena11yExample){window.opena11yExample.run();}else{(function(){const%20script=document.createElement('script');script.type='text/javascript';script.src='./bookmarklets/opena11y-example.js';document.head.appendChild(script);})();}">
+                    OpenA11y Example 1
+                  </a>
+                </td>
+                <td>
+                  Evaluate document and output rule results to the console.
+                </td>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </main>

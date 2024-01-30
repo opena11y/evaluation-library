@@ -1,3 +1,8 @@
+Version 2.0.1 Overview
+=============================
+* Added rule navigation links to rules pages in documentation
+* Initial release of a bookmarklet example using the OpenA11y Library
+
 Version 2.0 Overview
 =============================
 * Completely rewrote evaluation library and rules to use modules and modern JS techniques

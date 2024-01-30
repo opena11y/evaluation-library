@@ -3,7 +3,9 @@ const exec         = require('child_process').exec;
 const rollup       = require('rollup');
 const {src, task}  = require('gulp');
 const {parallel, series}   = require('gulp');
-const eslint = require('gulp-eslint');
+const eslint       = require('gulp-eslint');
+const minify       = require('gulp-minify');
+const bookmarklet  = require('gulp-bookmarklet');
  
 task('linting', () => {
     return src(['src/*/*.js'])
@@ -27,6 +29,19 @@ gulp.task('build', () => {
       return bundle.write({
         file: './releases/opena11y-evaluation-library.js',
         format: 'es'
+      });
+    });
+});
+
+gulp.task('build-bookmarklet', () => {
+  return rollup
+    .rollup({
+      input: './src/bookmarklets/opena11y-example.js'
+    })
+    .then(bundle => {
+      return bundle.write({
+        file: './docs/bookmarklets/opena11y-example.js',
+        format: 'iife'
       });
     });
 });
@@ -68,10 +83,32 @@ gulp.task('documentation', function (cb) {
   });
 })
 
-const ainspector    = task('ainspector');
-const build         = task('build');
-const buildcjs      = task('buildcjs');
-const documentation = task('documentation');
-const linting       = task('linting');
+gulp.task('compress', function(cb) {
+  gulp.src(['./releases/*.js', './releases/*.cjs'])
+    .pipe(minify({
+        ignoreFiles: ['*-min.js', '*-min.mjs']
+    }))
+    .pipe(gulp.dest('releases'));
+    cb();
+});
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector), documentation);
+gulp.task('compress-bookmarklets', function(cb) {
+  gulp.src(['./docs/bookmarklets/*.js', './docs/bookmarklets/*.cjs'])
+    .pipe(minify({
+        ignoreFiles: ['*-min.js', '*-min.mjs']
+    }))
+    .pipe(gulp.dest('./docs/bookmarklets'));
+    cb();
+});
+
+
+const ainspector       = task('ainspector');
+const build            = task('build');
+const buildcjs         = task('buildcjs');
+const buildBookmarklet = task('build-bookmarklet');
+const documentation    = task('documentation');
+const linting          = task('linting');
+const compressa        = task('compress');
+const compressb        = task('compress-bookmarklets');
+
+exports.default = series(linting, parallel( build, buildcjs, ainspector, buildBookmarklet), documentation, compressa, compressb);

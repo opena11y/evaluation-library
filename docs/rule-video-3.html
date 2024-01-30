@@ -8,23 +8,22 @@
 
 
 
+<!DOCTYPE html>
 <html lang="en-us">
   <head>
-        <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Audio Description or Media Alternative (Prerecorded) | OpenA11y Evaluation Library 2.0</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Audio Description or Media Alternative (Prerecorded) | OpenA11y Evaluation Library 2.0</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/opena11y.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="./css/opena11y.css" rel="stylesheet" />
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
-    </head>
 
     <script src="ruleLinks.js"></script>
   </head>
@@ -107,6 +106,69 @@
             
             <h1 id="h1-title">Rule: Audio Description or Media Alternative (Prerecorded)</h1>
             
+                      <nav class="rules" aria-label="Rules">
+            <a id="previous-rule" href="#">Previous Rule</a>  |
+            <a id="next-rule" href="#">Next Rule</a>
+          </nav>
+
+          <script>
+
+            let allRuleLinks = [];
+            let suffix = '#fs';
+
+            const prevLink = document.querySelector('#previous-rule');
+            const nextLink = document.querySelector('#next-rule');
+
+            const url = new URL(document.location.href);
+            const parts = url.pathname.split('/');
+            let currentLink = '';
+            if (parts.length) {
+              currentLink = parts[parts.length-1];
+            }
+
+            if (window.location.href.indexOf("#gl") > 0) {
+              allRuleLinks = allRuleLinksByGuidelines;
+              suffix = '#gl';
+            }
+            else {
+              if (window.location.href.indexOf("#rs") > 0) {
+                allRuleLinks = allRuleLinksByScope;
+                suffix = '#rs';
+              }
+              else {
+                if (window.location.href.indexOf("#rc") > 0) {
+                  allRuleLinks = allRuleLinksByRuleCategories;
+                  suffix = '#rc';
+                }
+                else {
+                  allRuleLinks = allRuleLinksByFirstStepRules;
+                }
+              }
+            }
+
+            console.log(`[allRuleLinks]: ${allRuleLinks.length}`);
+
+            prevLink.classList.add('disabled');
+            nextLink.classList.add('disabled');
+
+            if (allRuleLinks) {
+              const index = allRuleLinks.indexOf(currentLink);
+              if (index >= 0) {
+                if (index > 0) {
+                  prevLink.href = allRuleLinks[index-1] + suffix;
+                  prevLink.classList.remove('disabled');
+                }
+
+                if (index < (allRuleLinks.length - 1)) {
+                  nextLink.href = allRuleLinks[index+1] + suffix;
+                  nextLink.classList.remove('disabled');
+                }
+              }
+            }
+
+
+          </script>
+
 
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
                 <tbody>

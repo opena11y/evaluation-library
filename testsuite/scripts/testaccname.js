@@ -15,7 +15,7 @@ export default function textAccname(label, IFRAME_ID, htmlAttr, nameProp) {
     const title  = doc.title;
     const url    = win.location.href;
 
-    const evaluationResult = evaluator.evaluate(doc, title, url);
+    const evaluationResult = evaluator.evaluateWCAG(doc, title, url);
 
     const elems = Array.from(doc.querySelectorAll(`[id][${htmlAttr}]`));
 

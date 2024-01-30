@@ -37,7 +37,7 @@ const ruleSummary = {};
 
 const allRuleLinksByGuidelines = [];
 const allRuleLinksByRuleCategories = [];
-const allRuleLinksByScope = [];
+let allRuleLinksByScope = [];
 const allRuleLinksByFirstStepRules = [];
 
 const wcag20 = {
@@ -92,6 +92,7 @@ el.getRuleCategories.forEach( rc => {
     const ruleInfo = el.getRuleInfo(r);
     if (r.rule_category_id === rcInfo.id) {
       rcInfo.rules.push(ruleInfo);
+      allRuleLinksByRuleCategories.push(ruleInfo.filename);
       if (ruleInfo.wcag_primary.level == levelA) {
         rcInfo.aCount += 1;
       }
@@ -116,14 +117,19 @@ el.getRuleScopes.forEach( rs => {
   const rsInfo = Object.assign(rs);
 
   rsInfo.rules = [];
+  rsInfo.allRuleLinks = [];
   rsInfo.aCount   = 0;
   rsInfo.aaCount  = 0;
   rsInfo.aaaCount = 0;
 
+
+
   el.getAllRules.forEach( r => {
     const ruleInfo = el.getRuleInfo(r);
+
     if (r.rule_scope_id === rsInfo.id) {
       rsInfo.rules.push(ruleInfo);
+      rsInfo.allRuleLinks.push(ruleInfo.filename);
       if (ruleInfo.wcag_primary.level == levelA) {
         rsInfo.aCount += 1;
       }
@@ -142,6 +148,12 @@ el.getRuleScopes.forEach( rs => {
   if (rsInfo.rules.length) {
     allRuleScopes.push(rsInfo);
   }
+});
+
+allRuleScopes.reverse();
+allRuleScopes.forEach( rs => {
+  console.log(`[rs.allRuleLinks]: ${rs.allRuleLinks}`);
+  allRuleLinksByScope = allRuleLinksByScope.concat(rs.allRuleLinks);
 });
 
 for(const p in el.getWCAG.principles) {
@@ -171,7 +183,7 @@ for(const p in el.getWCAG.principles) {
         const ruleInfo = el.getRuleInfo(r);
         if (r.wcag_primary.id === scInfo.id) {
           scInfo.rules.push(ruleInfo);
-
+          allRuleLinksByGuidelines.push(ruleInfo.filename);
           glInfo.totalCount += 1;
           if (ruleInfo.wcag_primary.level == levelA) {
             glInfo.aCount += 1;
@@ -215,14 +227,6 @@ for(const p in el.getWCAG.principles) {
             }
           }
         }
-
-        // Update WCAG Version information
-        console.log(`[wCAG VERSION]: ${ruleInfo.wcag_version}`);
-
-        if (ruleInfo.version === 'WCAG20') {
-
-        }
-
       });
 
       glInfo.successCriteria.push(scInfo);
@@ -237,6 +241,7 @@ el.getAllRules.forEach( r => {
   if (r.first_step) {
     const ruleInfo = el.getRuleInfo(r);
     firstStepRules.push(ruleInfo);
+    allRuleLinksByFirstStepRules.push(ruleInfo.filename);
 
     if (ruleInfo.wcag_primary.level == levelA) {
       firstStep.aCount += 1;
