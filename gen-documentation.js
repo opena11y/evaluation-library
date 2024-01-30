@@ -344,7 +344,7 @@ const jsRuleLinks = nunjucks.render('./src-docs/templates/js-rulelinks.njk',
     allRuleLinksByScope: allRuleLinksByScope,
     allRuleLinksByFirstStepRules: allRuleLinksByFirstStepRules
 });
-outputFile('rulelinks.js', jsRuleLinks);
+outputFile('js/rulelinks.js', jsRuleLinks);
 
 
 console.log(`Total Rules: ${count}`);
