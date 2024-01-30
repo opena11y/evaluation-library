@@ -262,7 +262,7 @@ el.getAllRules.forEach( r => {
 
 // Create index file
 
-const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk', {title: 'OpenA11y Evaluation Library'});
+const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk', {title: 'Welcome to the OpenA11y Evaluation Library'});
 outputFile('index.html', htmlIndex);
 
 // Create rule indexes

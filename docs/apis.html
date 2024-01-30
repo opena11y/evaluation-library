@@ -34,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="mainNavbar">
                   <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                          <a class="nav-link" aria-currentpage="true" href="index.html">Home</a>
+                          <a class="nav-link" aria-current="page" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="concepts.html">Concepts and Terms</a>
@@ -96,24 +96,23 @@
 
             <p><em>APIs are still being reviewd and finalized</em></p>
 
-            <h2>Example Bookmarklets</h2>
+            <h2 id="h2-ex">OpenA11y Example Bookmarklets</h2>
 
-            <p>The bookmarklets demonstrate the APIs and send output to the browsers console.</p>
+            <p>The bookmarklets demonstrate the OpenA11y APIs.  Just drag the link to your bookmarklets toolbar and you can use the bookmark on run the example on any web page.</p>
 
-            <table>
-              <caption>OpenA11y Example Bookmarklets</caption>
+            <table aria-labelledby="h2-ex">
               <thead>
                 <th>Link</th>
                 <th>Description</th>
               </thead>
               <tbody>
                 <td>
-                  <a href="javascript:if(window.opena11yExample){window.opena11yExample.run();}else{(function(){const%20script=document.createElement('script');script.type='text/javascript';script.src='./bookmarklets/opena11y-example.js';document.head.appendChild(script);})();}">
-                    OpenA11y Example 1
+                  <a href="javascript:if(window.opena11yExample){window.opena11yExample.run();}else{(function(){const%20script=document.createElement('script');script.type='text/javascript';script.src='https://opena11y.github.io/evaluation-library/bookmarklets/opena11y-example.js';document.head.appendChild(script);})();}">
+                    OpenA11y Example
                   </a>
                 </td>
                 <td>
-                  Evaluate document and output rule results to the console.
+                  Evaluate document using OpenA11y and output rule results to the console.
                 </td>
               </tbody>
             </table>
