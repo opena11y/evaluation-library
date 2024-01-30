@@ -94,7 +94,30 @@
             <h1>Using the Evaluation Library</h1>
             
 
-            <p><em>Page is under development</em></p>
+            <p><em>APIs are still being reviewd and finalized</em></p>
+
+            <h2>Example Bookmarklets</h2>
+
+            <p>The bookmarklets demonstrate the APIs and send output to the browsers console.</p>
+
+            <table>
+              <caption>OpenA11y Example Bookmarklets</caption>
+              <thead>
+                <th>Link</th>
+                <th>Description</th>
+              </thead>
+              <tbody>
+                <td>
+                  <a href="javascript:if(window.opena11yExample){window.opena11yExample.run();}else{(function(){const%20script=document.createElement('script');script.type='text/javascript';script.src='./bookmarklets/opena11y-example.js';document.head.appendChild(script);})();}">
+                    OpenA11y Example 1
+                  </a>
+                </td>
+                <td>
+                  Evaluate document and output rule results to the console.
+                </td>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </main>
@@ -117,9 +140,6 @@
 
         <!-- SkipTo.js -->
         <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
-
-        <!-- Testing Bookmarklet -->
-        <script src="./bookmarklets/opena11y-example.js"></script>
 
 
   </body>

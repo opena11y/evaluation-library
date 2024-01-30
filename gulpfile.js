@@ -36,7 +36,7 @@ gulp.task('build', () => {
 gulp.task('build-bookmarklet', () => {
   return rollup
     .rollup({
-      input: './src/bookmarklets/opena11y-bookmarklet-example.js'
+      input: './src/bookmarklets/opena11y-example.js'
     })
     .then(bundle => {
       return bundle.write({

@@ -21,7 +21,29 @@
             <h1>{{title}}</h1>
             {% endblock %}
 
-            <p><em>Page is under development</em></p>
+            <p><em>APIs are still being reviewd and finalized</em></p>
+
+            <h2 id="h2-ex">OpenA11y Example Bookmarklets</h2>
+
+            <p>The bookmarklets demonstrate the OpenA11y APIs.  Just drag the link to your bookmarklets toolbar and you can use the bookmark on run the example on any web page.</p>
+
+            <table aria-labelledby="h2-ex">
+              <thead>
+                <th>Link</th>
+                <th>Description</th>
+              </thead>
+              <tbody>
+                <td>
+                  <a href="javascript:if(window.opena11yExample){window.opena11yExample.run();}else{(function(){const%20script=document.createElement('script');script.type='text/javascript';script.src='https://opena11y.github.io/evaluation-library/bookmarklets/opena11y-example.js';document.head.appendChild(script);})();}">
+                    OpenA11y Example
+                  </a>
+                </td>
+                <td>
+                  Evaluate document using OpenA11y and output rule results to the console.
+                </td>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </main>

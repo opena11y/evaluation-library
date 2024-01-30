@@ -1,0 +1,12 @@
+if(window.opena11yExample) {
+  window.opena11yExample.run();
+} 
+else {
+  (function(){
+    document.getElementsByTagName('head')[0].appendChild(link);
+    const%20script=document.createElement('script');
+    script.type='text/javascript';
+    script.src='./bookmarklets/opena11y-example.js';
+    document.head.appendChild(script);
+  })();
+}
