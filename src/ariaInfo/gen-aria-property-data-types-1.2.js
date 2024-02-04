@@ -1,4 +1,4 @@
-/* gen-aria-property-data-types.js is a generated file, see https://github.com/opena11y/aria-to-code */
+/* gen-aria-property-data-types-1.2.js is a generated file, see https://github.com/opena11y/aria-to-code */
 export const propertyDataTypes = {
   'aria-activedescendant': {
     propType: 'property',

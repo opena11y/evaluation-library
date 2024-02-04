@@ -95,10 +95,12 @@ class ParentInfo {
  * @param  {Object}  startingDoc     - Browser document object model (DOM) to build cache
  * @param  {Object}  startingElement - DOM node to start evalution, if not defined use
  *                                     document.body
+ * @param  {String}  ariaVersion     - Version of ARIA to use for roles,
+ *                                     props and state info
  */
 
 export default class DOMCache {
-  constructor (startingDoc, startingElement) {
+  constructor (startingDoc, startingElement, ariaVersion='1.2') {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -113,6 +115,7 @@ export default class DOMCache {
     }
 
     this.document = startingDoc;
+    this.ariaVersion = ariaVersion;
 
     this.ordinalPosition = 2;
     this.documentIndex = 0;
@@ -135,7 +138,7 @@ export default class DOMCache {
     this.timingInfo    = new TimingInfo();
     this.iframeInfo    = new IFrameInfo();
 
-    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1);
+    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion);
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -268,7 +271,7 @@ export default class DOMCache {
                 }
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition);
+                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion);
 
                   this.ordinalPosition += 1;
                   this.allDomElements.push(domItem);
@@ -284,7 +287,7 @@ export default class DOMCache {
                 }
               }
             } else {
-              domItem = new DOMElement(parentInfo, node, this.ordinalPosition);
+              domItem = new DOMElement(parentInfo, node, this.ordinalPosition, this.ariaVersion);
               this.ordinalPosition += 1;
               this.allDomElements.push(domItem);
 

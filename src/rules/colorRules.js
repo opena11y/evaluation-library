@@ -36,17 +36,6 @@ export const colorRules = [
     target_resources    : ['text content'],
     validate            : function (dom_cache, rule_result) {
 
-      let index = 0;
-      function checkResult(domElement, result) {
-        const node    = domElement.node;
-        const tagName = node.tagName;
-        const id      = node.id ? `[id=${node.id}]` : '';
-        const cc      = domElement.colorContrast;
-        const crr     = cc.colorContrastRatio
-        debug.flag && debug.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
-      }
-
-
       const MIN_CCR_NORMAL_FONT = 4.5;
       const MIN_CCR_LARGE_FONT  = 3;
 
@@ -62,23 +51,29 @@ export const colorRules = [
             if (ccr >= MIN_CCR_LARGE_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
               }
               else {
-                checkResult(de, 'PASS');
-                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+                }
               }
             }
             else {
               // Fails color contrast requirements
               if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
               }
               else {
-                checkResult(de, 'FAIL');
-                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+                }
               }
             }
           }
@@ -86,28 +81,33 @@ export const colorRules = [
             if (ccr >= MIN_CCR_NORMAL_FONT) {
               // Passes color contrast requirements
               if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
               }
               else {
-                checkResult(de, 'PASS');
-                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+                }
               }
             }
             else {
               // Fails color contrast requirements
               if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
               }
               else {
-                checkResult(de, 'FAIL');
-                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+                }
               }
             }
           }
         } else {
-          checkResult(de, 'HIDDEN');
           rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
         }
       });
@@ -183,8 +183,12 @@ export const colorRules = [
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
               }
               else {
-                checkResult(de, 'PASS');
-                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+                }
               }
             }
             else {
@@ -194,8 +198,12 @@ export const colorRules = [
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
               }
               else {
-                checkResult(de, 'FAIL');
-                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+                }
               }
             }
           }
@@ -207,8 +215,12 @@ export const colorRules = [
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
               }
               else {
-                checkResult(de, 'PASS');
-                rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+                }
               }
             }
             else {
@@ -218,8 +230,12 @@ export const colorRules = [
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
               }
               else {
-                checkResult(de, 'FAIL');
-                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+                if (cc.isPositioned && cc.isTransparent) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+                }
               }
             }
           }

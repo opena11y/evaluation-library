@@ -89,12 +89,14 @@ function isWCAG(ruleset, level, rule) {
  * @param  {String} title        - A title of the evaluation
  *                                 (typically the title of the document)
  * @param  {String} url          - The URL to the document
+ * @param  {String}  ariaVersion - Version of ARIA to use for roles,
+ *                                 props and state info
  *
  * @return see @desc
  */
 
 export default class EvaluationResult {
-  constructor (startingDoc, title, url) {
+  constructor (startingDoc, title, url, ariaVersion='1.2') {
 
     this.startingDoc = startingDoc
     this.title       = title;
@@ -102,6 +104,7 @@ export default class EvaluationResult {
     this.ruleset     = '';
     this.level       = '';
     this.scopeFilter = '';
+    this.ariaVersion = ariaVersion;
 
     this.date           = getFormattedDate();
     this.version        = VERSION;
@@ -134,7 +137,7 @@ export default class EvaluationResult {
     this.level       = level;
     this.scopeFilter = scopeFilter;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 

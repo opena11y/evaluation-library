@@ -40,6 +40,9 @@ const fontWeightBold  = 300;
     return (0.2126 * R + 0.7152 * G + 0.0722 * B);
   }
 
+
+
+
 export function computeCCR (hex1, hex2) {
     const L1 = getLuminance(hex1);
     const L2 = getLuminance(hex2);
@@ -85,6 +88,9 @@ export default class ColorContrast {
     this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
 
     this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
+
+    this.isPositioned  = this.isPositioned(style, parentColorContrast);
+    this.isTransparent = this.isTransparent(this.backgroundColor);
 
     if (debug.flag) {
       debug.log(`[                      color]: ${this.color}`);
@@ -391,6 +397,49 @@ export default class ColorContrast {
 
     return isSizeLarge || (isSizeBigger && isBold);
   }
+
+  /**
+   * @method isPositioned
+   *
+    * @desc Returns true if element or it's ancestor is absolute positioning
+   *
+   * @param {Object}  style                - Computed style object for an element node
+   * @param {Object}  parentColorContrast  - Computed color contrast information for parent
+   *                                         DomElement
+   *
+   * @return {Boolean}  Returns a number representing font weight value
+   */
+
+  isPositioned (style, parentColorContrast) {
+    const position = style.getPropertyValue("position");
+
+    return parentColorContrast.isPositioned || (position === 'absolute');
+
+  }
+
+  /**
+   * @function isTransparent
+   *
+   * @desc Returns true if RGBA is transparent
+   *
+   * @return {Boolean}  see @desc
+   */
+
+   isTransparent (colorRGB) {
+
+    if (!colorRGB) {
+      return false;
+    }
+
+    colorRGB = colorRGB.replace('"', '');
+    colorRGB = colorRGB.split(')')[0];
+    colorRGB = colorRGB.split('(')[1];
+    const parts = colorRGB.split(',');
+    const opacity = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+
+    return opacity < .001;
+  }
+
 }
 
 

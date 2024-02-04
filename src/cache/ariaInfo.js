@@ -5,8 +5,14 @@ import DebugLogging        from '../debug.js';
 import {hasCheckedState}   from '../utils.js';
 import {hasSelectedState}  from '../utils.js';
 
-import {propertyDataTypes} from '../../aria-info/gen-aria-property-data-types.js';
-import {designPatterns}    from '../../aria-info/gen-aria-role-design-patterns.js';
+import {propertyDataTypes as propertyDataTypes2} from '../ariaInfo/gen-aria-property-data-types-1.2.js';
+import {designPatterns    as designPatterns2}    from '../ariaInfo/gen-aria-role-design-patterns-1.2.js';
+import {propertyDataTypes as propertyDataTypes3} from '../ariaInfo/gen-aria-property-data-types-1.3.js';
+import {designPatterns    as designPatterns3}    from '../ariaInfo/gen-aria-role-design-patterns-1.3.js';
+
+// global variables in module since they are in new object definitions
+let propertyDataTypes = propertyDataTypes2;
+let designPatterns    = designPatterns2;
 
 /* Constants */
 const debug = new DebugLogging('AriaInfo', false);
@@ -86,10 +92,20 @@ class RefInfo {
  * @param  {String}   role         - ARIA role for the element
  * @param  {String}   defaultRole  - Default role of element if no role is defined
  * @param  {Object}   node         - dom element node
+ * @param  {String}   ariaVersion  - Version of ARIA to use for roles, props and state info
  */
 
 export default class AriaInfo {
-  constructor (doc, hasRole, role, defaultRole, node) {
+  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='1.2') {
+    if (ariaVersion === `1.3`) {
+      propertyDataTypes = propertyDataTypes3;
+      designPatterns    = designPatterns3;
+    }
+    else {
+      propertyDataTypes = propertyDataTypes2;
+      designPatterns    = designPatterns2;
+    }
+
     const tagName = node.tagName.toLowerCase();
     const level = parseInt(node.getAttribute('aria-level'));
 
@@ -100,6 +116,24 @@ export default class AriaInfo {
         node.hasAttribute('tabindex') &&
         node.tabIndex >= 0) {
       designPattern = designPatterns['separatorFocusable'];
+    }
+
+    // Row role is a special case of a role that can be interactive
+    if (role === 'row') {
+      this.inGrid     = isInGrid(node);
+      this.inTreegrid = isInTreegrid(node);
+
+      if (this.inGrid) {
+        designPattern = designPatterns['rowGrid'];
+      }
+      else {
+        if (this.isinTreegrid) {
+          designPattern = designPatterns['rowTreegrid'];
+        }
+        else {
+          designPattern = designPatterns['row'];
+        }
+      }
     }
 
     this.isValidRole  = typeof designPattern === 'object';
@@ -140,15 +174,9 @@ export default class AriaInfo {
 
     this.isRange    = (designPattern.roleType.indexOf('range') >= 0);
 
-    if (role === 'row') {
-      this.inGrid     = isInGrid(node);
-      this.inTreegrid = isInTreegrid(node);
-      this.isWidget   = this.inGrid || this.inTreegrid;
-    }
-    else {
-      this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
-                        (designPattern.roleType.indexOf('window') >= 0);
-    }
+    this.isWidget   = (designPattern.roleType.indexOf('widget') >= 0)  ||
+                      (designPattern.roleType.indexOf('window') >= 0);
+
     this.isLandmark  = designPattern.roleType.indexOf('landmark') >= 0;
 
     this.isSection  = designPattern.roleType.indexOf('section') >= 0;     

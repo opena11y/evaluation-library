@@ -263,21 +263,23 @@ export default class ElementResult extends BaseResult {
     const info = {};
     const rule = this.rule_result.getRule();
 
-    if (rule && (rule.getId() === 'COLOR_1')) {
+    if (rule && ((rule.getId() === 'COLOR_1') || (rule.getId() === 'COLOR_3'))) {
       const cc = this.domElement.colorContrast;
       if (cc) {
-        info.color_contrast_ratio  = cc.colorContrastRatio;
-        info.color                 = cc.color;
-        info.color_hex             = '#' + cc.colorHex;
-        info.background_color      = cc.backgroundColor;
-        info.background_color_hex  = '#' + cc.backgroundColorHex;
-        info.font_family           = cc.fontFamily;
-        info.font_size             = cc.fontSize;
-        info.font_weight           = cc.fontWeight;
-        info.large_font            = cc.isLargeFont ? 'Yes' : 'no';
-        info.background_image      = cc.backgroundImage;
-        info.background_repeat     = cc.backgroundRepeat;
-        info.background_position   = cc.backgroundPosition;
+        info.color_contrast_ratio   = cc.colorContrastRatio;
+        info.color                  = cc.color;
+        info.color_hex              = '#' + cc.colorHex;
+        info.background_color       = cc.backgroundColor;
+        info.background_color_hex   = '#' + cc.backgroundColorHex;
+        info.background_transparent = cc.isTransparent;
+        info.font_family            = cc.fontFamily;
+        info.font_size              = cc.fontSize;
+        info.font_weight            = cc.fontWeight;
+        info.large_font             = cc.isLargeFont ? 'Yes' : 'no';
+        info.background_image       = cc.backgroundImage;
+        info.background_repeat      = cc.backgroundRepeat;
+        info.background_position    = cc.backgroundPosition;
+        info.is_positioned          = cc.isPositioned;
       }
     }
     return info;

@@ -51,10 +51,11 @@ const requireAccessibleNames = ['region', 'form'];
  *
  * @param  {Object}  parentInfo  - ParentInfo object (can be null for top level)
  * @param  {Object}  elementNode - dom element node to be represented
+ * @param  {String}  ariaVersion  - Version of ARIA to use for roles, props and state info
  */
 
 export default class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition) {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='1.2') {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
@@ -86,7 +87,7 @@ export default class DOMElement {
     this.hasNativeInvalidState  = hasInvalidState(elementNode);
     this.hasNativeSelectedState = hasSelectedState(elementNode);
 
-    this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode);
+    this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
     this.accName        = getAccessibleName(accNameDoc, elementNode);

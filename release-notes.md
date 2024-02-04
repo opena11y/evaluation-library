@@ -1,3 +1,8 @@
+Version 2.0.2 Overview
+=============================
+* Updated aria information for row role
+* Uodated CCR rules to include absolute positioned elements with transparent backgrounds to report a manual check
+
 Version 2.0.1 Overview
 =============================
 * Added rule navigation links to rules pages in documentation

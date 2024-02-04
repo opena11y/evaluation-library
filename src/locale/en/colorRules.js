@@ -15,8 +15,8 @@ export const colorRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
         FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
-        MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold to the use of a background image.',
-        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR threshold to the use of background images.',
+        MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold due to the use of a background image and/or author repositioning of text content with transparent backgrounds.',
+        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR threshold due to the use of background images and/or author repositioning of text content with transparent backgrounds.',
         HIDDEN_S: 'The element with text content that is hidden was not analyzed for color contrast accessibility.',
         HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
         NOT_APPLICABLE:  'No visible text content on this page.'
@@ -30,6 +30,7 @@ export const colorRules = {
         ELEMENT_MC_2:     'CCR of %1 is less than 4.5, but background image may improve color contrast.',
         ELEMENT_MC_3:     'CCR of %1 is equal to or greater than 3 for large or bolded text, but background image may reduce color contrast.',
         ELEMENT_MC_4:     'CCR of %1 is less than 3 for large and bolded text, but background image may improve color contrast.',
+        ELEMENT_MC_5:     'CCR cannot be reliably computed due to the repositioning of the text on the page by the author and the background of the text being transparent (e.g. no specific color).',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
       PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
@@ -108,8 +109,8 @@ export const colorRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Change the foreground and background colors of the text element to meet the CCR threshold.',
         FAIL_P:   'Change the foreground and background colors of the %N_F text elements to meet the CCR threshold.',
-        MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold to the use of a background image.',
-        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR thrshold to the use of background images.',
+        MANUAL_CHECK_S:     'One element requires manual checking for CCR threshold due to the use of a background image and/or author repositioning of text content with transparent backgrounds.',
+        MANUAL_CHECK_P:     '%N_MC elements require manual checking for CCR threshold due to the use of background images and/or author repositioning of text content with transparent backgrounds.',
         HIDDEN_S: 'The element with text content that is hidden was not analyzed for color contrast accessibility.',
         HIDDEN_P: 'The %N_H elements with text content that are hidden were not analyzed for color contrast accessibility.',
         NOT_APPLICABLE:  'No visible text content on this page.'
@@ -123,6 +124,7 @@ export const colorRules = {
         ELEMENT_MC_2:     'CCR of %1 is less than 7, but background image may improve color contrast.',
         ELEMENT_MC_3:     'CCR of %1 is equal to or greater than 4.5 for large or bolded text, but background image may reduce color contrast.',
         ELEMENT_MC_4:     'CCR of %1 is less than 4.5 for large and bolded text, but background image may improve color contrast.',
+        ELEMENT_MC_5:     'CCR cannot be reliably computed due to the repositioning of the text on the page by the author and the background of the text being transparent (e.g. no specific color).',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
       PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'

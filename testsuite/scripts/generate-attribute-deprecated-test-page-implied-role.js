@@ -5,7 +5,7 @@ var require = require || {};
 const fs = require('fs');
 const path = require('path');
 
-const filenameAriaInfo       = path.join('.', 'aria-info', 'gen-aria-info.json');
+const filenameAriaInfo       = path.join('.', 'aria-info', 'gen-aria-info-1.2.json');
 const filenameAriaInHtmlInfo = path.join('.', 'aria-info', 'gen-aria-in-html-info.json');
 const filenameTestCase       = path.join('.', 'testsuite', 'rules', 'widgets', 'widget_15_deprecated_aria_attributes_implicit_roles.html');
 
