@@ -1,6 +1,7 @@
 Version 2.0.2 Overview
 =============================
 * Updated aria information for row role
+* Added initial support for use of ARIA 1.3 features (currently ARIA 1.2)
 * Uodated CCR rules to include absolute positioned elements with transparent backgrounds to report a manual check
 
 Version 2.0.1 Overview
