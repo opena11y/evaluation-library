@@ -10,7 +10,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('Keyboard Rules', false);
-debug.flag = true;
+debug.flag = false;
 
 /* helper functions */
 

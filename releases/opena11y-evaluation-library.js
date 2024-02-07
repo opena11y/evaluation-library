@@ -12376,10 +12376,11 @@ class ColorContrast {
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
-    this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
-    this.color              = style.getPropertyValue("color");
-    this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
+    this.backgroundColorElem = style.getPropertyValue("background-color");
+    this.backgroundColor     = this.normalizeBackgroundColor(style, parentColorContrast);
+    this.backgroundColorHex  = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+    this.color               = style.getPropertyValue("color");
+    this.colorHex            = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
@@ -12494,10 +12495,6 @@ class ColorContrast {
       if (parentColorContrast) {
         debug$_.flag && debug$_.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
-      }
-      else {
-        // This is an edge case test typically for body elements and frames
-        backgroundColor = 'rgb(255,255,255)';
       }
     }
     return backgroundColor;
@@ -15747,6 +15744,7 @@ function getAccessibleName (doc, element) {
 */
 function getAccessibleDesc (doc, element, allowTitle=true) {
   let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+  if (accDesc === null) accDesc = nameFromAttribute(element, 'aria-description');
   if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
   return accDesc;
@@ -29829,11 +29827,12 @@ class ElementResult extends BaseResult {
       const cc = this.domElement.colorContrast;
       if (cc) {
         info.color_contrast_ratio   = cc.colorContrastRatio;
-        info.color                  = cc.color;
+        info.color_rgb              = cc.color;
         info.color_hex              = '#' + cc.colorHex;
-        info.background_color       = cc.backgroundColor;
+        info.background_color_rgb   = cc.backgroundColor;
         info.background_color_hex   = '#' + cc.backgroundColorHex;
         info.background_transparent = cc.isTransparent;
+        info.is_positioned          = cc.isPositioned;
         info.font_family            = cc.fontFamily;
         info.font_size              = cc.fontSize;
         info.font_weight            = cc.fontWeight;
@@ -29841,7 +29840,6 @@ class ElementResult extends BaseResult {
         info.background_image       = cc.backgroundImage;
         info.background_repeat      = cc.backgroundRepeat;
         info.background_position    = cc.backgroundPosition;
-        info.is_positioned          = cc.isPositioned;
       }
     }
     return info;
@@ -33412,7 +33410,7 @@ const imageRules = [
 
 /* Constants */
 const debug$o = new DebugLogging('Keyboard Rules', false);
-debug$o.flag = true;
+debug$o.flag = false;
 
 /* helper functions */
 

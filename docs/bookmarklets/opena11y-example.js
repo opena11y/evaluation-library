@@ -12379,10 +12379,11 @@
 
       this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
-      this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-      this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
-      this.color              = style.getPropertyValue("color");
-      this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
+      this.backgroundColorElem = style.getPropertyValue("background-color");
+      this.backgroundColor     = this.normalizeBackgroundColor(style, parentColorContrast);
+      this.backgroundColorHex  = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+      this.color               = style.getPropertyValue("color");
+      this.colorHex            = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
 
       this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
       this.backgroundRepeat   = style.getPropertyValue("background-repeat");
@@ -12497,10 +12498,6 @@
         if (parentColorContrast) {
           debug$$.flag && debug$$.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
           backgroundColor   = parentColorContrast.backgroundColor;
-        }
-        else {
-          // This is an edge case test typically for body elements and frames
-          backgroundColor = 'rgb(255,255,255)';
         }
       }
       return backgroundColor;
@@ -15750,6 +15747,7 @@
   */
   function getAccessibleDesc (doc, element, allowTitle=true) {
     let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+    if (accDesc === null) accDesc = nameFromAttribute(element, 'aria-description');
     if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
     if (accDesc === null) accDesc = noAccName;
     return accDesc;
@@ -29832,11 +29830,12 @@
         const cc = this.domElement.colorContrast;
         if (cc) {
           info.color_contrast_ratio   = cc.colorContrastRatio;
-          info.color                  = cc.color;
+          info.color_rgb              = cc.color;
           info.color_hex              = '#' + cc.colorHex;
-          info.background_color       = cc.backgroundColor;
+          info.background_color_rgb   = cc.backgroundColor;
           info.background_color_hex   = '#' + cc.backgroundColorHex;
           info.background_transparent = cc.isTransparent;
+          info.is_positioned          = cc.isPositioned;
           info.font_family            = cc.fontFamily;
           info.font_size              = cc.fontSize;
           info.font_weight            = cc.fontWeight;
@@ -29844,7 +29843,6 @@
           info.background_image       = cc.backgroundImage;
           info.background_repeat      = cc.backgroundRepeat;
           info.background_position    = cc.backgroundPosition;
-          info.is_positioned          = cc.isPositioned;
         }
       }
       return info;
@@ -33415,7 +33413,7 @@
 
   /* Constants */
   const debug$p = new DebugLogging('Keyboard Rules', false);
-  debug$p.flag = true;
+  debug$p.flag = false;
 
   /* helper functions */
 

@@ -27,7 +27,6 @@ Version 2.0 Overview
   * Moved CONTROL_14 to LIVE_1
 
 
-
 Version 1.3.1 Overview
 =============================
 * Fixed bug in inheriting background color

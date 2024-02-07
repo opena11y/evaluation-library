@@ -72,10 +72,11 @@ export default class ColorContrast {
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
-    this.backgroundColor    = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
-    this.color              = style.getPropertyValue("color");
-    this.colorHex           = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
+    this.backgroundColorElem = style.getPropertyValue("background-color");
+    this.backgroundColor     = this.normalizeBackgroundColor(style, parentColorContrast);
+    this.backgroundColorHex  = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+    this.color               = style.getPropertyValue("color");
+    this.colorHex            = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
@@ -193,7 +194,7 @@ export default class ColorContrast {
       }
       else {
         // This is an edge case test typically for body elements and frames
-        backgroundColor = 'rgb(255,255,255)';
+//        backgroundColor = 'rgb(255,255,255)';
       }
     }
     return backgroundColor;

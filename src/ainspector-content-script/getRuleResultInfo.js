@@ -8,7 +8,7 @@ import DebugLogging from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('getAllResultInfo', false);
-debug.flag = true;
+debug.flag = false;
 
 
 /*

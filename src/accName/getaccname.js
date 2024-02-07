@@ -144,6 +144,7 @@ function getAccessibleName (doc, element) {
 */
 function getAccessibleDesc (doc, element, allowTitle=true) {
   let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+  if (accDesc === null) accDesc = nameFromAttribute(element, 'aria-description');
   if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
   return accDesc;

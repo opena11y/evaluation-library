@@ -2,7 +2,7 @@
 
 /* Imports */
 import DebugLogging     from '../debug.js';
-import {ariaInHTMLInfo} from '../../aria-info/gen-aria-in-html-info.js';
+import {ariaInHTMLInfo} from '../ariaInfo/gen-aria-in-html-info.js';
 
 /* Constants */
 const debug = new DebugLogging('ariaInHtml', false);
