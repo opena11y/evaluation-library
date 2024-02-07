@@ -1,6 +1,6 @@
 Version 2.0.2 Overview
 =============================
-* Updated aria information for row role
+* Updated aria information for row role in the context of a table, grid and treegrid
 * Added initial support for use of ARIA 1.3 features (currently ARIA 1.2)
 * Uodated CCR rules to include absolute positioned elements with transparent backgrounds to report a manual check
 
