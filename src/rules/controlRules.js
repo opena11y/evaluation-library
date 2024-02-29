@@ -886,7 +886,7 @@ export const controlRules = [
     dom_cache.controlInfo.allControlElements.forEach( ce => {
       const de = ce.domElement;
 
-      if (ce.isInteractive) {
+      if (ce.isInteractive && !de.ariaInfo.isDPUBRole) {
         if (de.accName.includesAlt) {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);

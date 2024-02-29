@@ -823,7 +823,7 @@ export const controlRules = {
         BASE_RESULT_MESSAGES: {
           ELEMENT_MC_1: 'Verify the image @alt@ text contains any text represented in the image.',
           ELEMENT_MC_2: 'Verify the @aria-label@ contains the same text associated the visually rendered label associated with the control.',
-          ELEMENT_MC_3: 'Verify the computed name of all the referenced content, contains the same text associated the visually rendered label associated with the control.',
+          ELEMENT_MC_3: 'Verify that the computed name of the referenced content includes any rendered text for the control.',
           ELEMENT_HIDDEN_1: 'The hidden control with an accessible name that includes image content was not tested.',
           ELEMENT_HIDDEN_2: 'The hidden control with an accessible name with @aria-label@ content was not tested.',
           ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.',

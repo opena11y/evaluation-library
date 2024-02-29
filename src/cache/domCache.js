@@ -148,6 +148,7 @@ export default class DOMCache {
     this.resultsWarnings     = [];
     this.resultsManualChecks = [];
 
+    parentInfo.domElement = this.startingDomElement;
     this.transverseDOM(parentInfo, startingElement);
     this.computeAriaOwnsRefs();
     this.tableInfo.computeTableTypes();

@@ -162,6 +162,12 @@ export const linkRules = [
     } // end validation function
   },
 
+  /**
+   * @object LINK_4
+   *
+   * @desc Label in name for links
+   */
+
   { rule_id             : 'LINK_4',
     last_updated        : '2024-01-20',
     rule_scope          : RULE_SCOPE.ELEMENT,

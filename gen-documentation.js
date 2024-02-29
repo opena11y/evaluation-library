@@ -11,6 +11,7 @@ const el = new EvaluationLibrary(true);
 const levelA   = el.constants.WCAG_LEVEL.A;
 const levelAA  = el.constants.WCAG_LEVEL.AA;
 const levelAAA = el.constants.WCAG_LEVEL.AAA;
+const version  = el.constants.VERSION;
 
 /* Constants */
 
@@ -262,7 +263,10 @@ el.getAllRules.forEach( r => {
 
 // Create index file
 
-const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk', {title: 'Welcome to the OpenA11y Evaluation Library'});
+const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk',
+  {title: 'Welcome to the OpenA11y Evaluation Library',
+   version: version
+});
 outputFile('index.html', htmlIndex);
 
 // Create rule indexes
@@ -270,6 +274,7 @@ outputFile('index.html', htmlIndex);
 
 const htmlRuleRC = nunjucks.render('./src-docs/templates/content-rules-rc.njk',
   {title: 'Rules by Rule Categories',
+   version: version,
   allRuleCategories: allRuleCategories
 });
 outputFile('rules-rc.html', htmlRuleRC);
@@ -277,6 +282,7 @@ outputFile('rules-rc.html', htmlRuleRC);
 // Rules by WCAG guidelines
 const htmlRuleGL = nunjucks.render('./src-docs/templates/content-rules-gl.njk',
   {title: 'Rules by WCAG Guidelines',
+   version: version,
   allGuidelines: allGuidelines
 });
 outputFile('rules-gl.html', htmlRuleGL);
@@ -284,6 +290,7 @@ outputFile('rules-gl.html', htmlRuleGL);
 // Rules by scope
 const htmlRuleRS = nunjucks.render('./src-docs/templates/content-rules-rs.njk',
   {title: 'Rules by Rule Scope',
+   version: version,
   allRuleScopes: allRuleScopes
 });
 outputFile('rules-rs.html', htmlRuleRS);
@@ -291,6 +298,7 @@ outputFile('rules-rs.html', htmlRuleRS);
 // First Step Rules
 const htmlRuleFS = nunjucks.render('./src-docs/templates/content-rules-fs.njk',
   {title: 'First Step Ruleset',
+   version: version,
   firstStepRules: firstStepRules
 });
 outputFile('rules-fs.html', htmlRuleFS);
@@ -298,6 +306,7 @@ outputFile('rules-fs.html', htmlRuleFS);
 // Rule summary
 const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rulesets.njk',
   {title: 'Rulesets',
+   version: version,
   wcag20: wcag20,
   wcag21: wcag21,
   wcag22: wcag22,
@@ -309,20 +318,29 @@ const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rulesets.njk',
 outputFile('rulesets.html', htmlRuleSum);
 
 // Create concepts and terms file
-const htmlConcepts = nunjucks.render('./src-docs/templates/content-concepts.njk', {title: 'Concepts and Terms'});
+const htmlConcepts = nunjucks.render('./src-docs/templates/content-concepts.njk',
+  {title: 'Concepts and Terms',
+   version: version});
 outputFile('concepts.html', htmlConcepts);
 
 // Create apis file
-const htmlAPIs = nunjucks.render('./src-docs/templates/content-apis.njk', {title: 'Using the Evaluation Library'});
+const htmlAPIs = nunjucks.render('./src-docs/templates/content-apis.njk',
+  {title: 'Using the Evaluation Library',
+   version: version
+});
 outputFile('apis.html', htmlAPIs);
 
 // Create about file
-const htmlAbout = nunjucks.render('./src-docs/templates/content-about.njk', {title: 'About'});
+const htmlAbout = nunjucks.render('./src-docs/templates/content-about.njk',
+  {title: 'About',
+   version: version
+});
 outputFile('about.html', htmlAbout);
 
 // Quality assurance page
 const htmlQA = nunjucks.render('./src-docs/templates/content-rules-qa.njk',
   {title: 'Quality Assurance',
+   version: version,
    allRules: allRules
  });
 outputFile('rules-qa.html', htmlQA);
@@ -333,7 +351,10 @@ let count = 0;
 el.getAllRules.forEach( rule => {
   const ruleInfo = el.getRuleInfo(rule);
   console.log(`[${ruleInfo.id}] ${ruleInfo.summary} => ${ruleInfo.filename}`);
-  const htmlRule = nunjucks.render('./src-docs/templates/content-rule.njk', {title: ruleInfo.summary, ruleInfo: ruleInfo});
+  const htmlRule = nunjucks.render('./src-docs/templates/content-rule.njk',
+    { title: ruleInfo.summary,
+      version: version,
+      ruleInfo: ruleInfo});
   outputFile(ruleInfo.filename, htmlRule);
   count += 1;
 });
