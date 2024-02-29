@@ -12312,7 +12312,7 @@
 
   /* Constants */
   const debug$$ = new DebugLogging('colorContrast', false);
-  debug$$.flag = true;
+  debug$$.flag = false;
 
   const defaultFontSize = 16;    // In pixels (px)
   const biggerFontSize  = 18.66; // In pixels (px)
@@ -16019,7 +16019,7 @@
 
   /* Constants */
   const debug$V = new DebugLogging('DOMElement', false);
-  debug$V.flag = true;
+  debug$V.flag = false;
 
   const elementsWithContent = [
     'area',
@@ -28598,10 +28598,10 @@
 
   /* Constants */
   const debug$J = new DebugLogging('domCache', false);
-  debug$J.flag = true;
+  debug$J.flag = false;
   debug$J.showDomTexts = false;
   debug$J.showDomElems = false;
-  debug$J.showTree = true;
+  debug$J.showTree = false;
 
   const skipableElements = [
     'base',

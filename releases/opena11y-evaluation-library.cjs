@@ -12311,7 +12311,7 @@ class AriaInfo {
 
 /* Constants */
 const debug$_ = new DebugLogging('colorContrast', false);
-debug$_.flag = true;
+debug$_.flag = false;
 
 const defaultFontSize = 16;    // In pixels (px)
 const biggerFontSize  = 18.66; // In pixels (px)
@@ -16018,7 +16018,7 @@ function doesElementAllowNameFromContents (element) {
 
 /* Constants */
 const debug$U = new DebugLogging('DOMElement', false);
-debug$U.flag = true;
+debug$U.flag = false;
 
 const elementsWithContent = [
   'area',
@@ -28597,10 +28597,10 @@ class TimingInfo {
 
 /* Constants */
 const debug$I = new DebugLogging('domCache', false);
-debug$I.flag = true;
+debug$I.flag = false;
 debug$I.showDomTexts = false;
 debug$I.showDomElems = false;
-debug$I.showTree = true;
+debug$I.showTree = false;
 
 const skipableElements = [
   'base',

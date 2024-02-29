@@ -17,10 +17,10 @@ import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
-debug.flag = true;
+debug.flag = false;
 debug.showDomTexts = false;
 debug.showDomElems = false;
-debug.showTree = true;
+debug.showTree = false;
 
 const skipableElements = [
   'base',
