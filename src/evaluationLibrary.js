@@ -80,7 +80,7 @@ export default class EvaluationLibrary {
   }
 
  /**
-   * @method evaluateRuleWCAG
+   * @method evaluateWCAG
    *
    * @desc Evaluate a document using the OpenA11y ruleset and return an evaluation object
    *

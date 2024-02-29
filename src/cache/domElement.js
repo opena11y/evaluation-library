@@ -21,7 +21,7 @@ import {
 
 /* Constants */
 const debug = new DebugLogging('DOMElement', false);
-debug.flag = false;
+debug.flag = true;
 
 const elementsWithContent = [
   'area',

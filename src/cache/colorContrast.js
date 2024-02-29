@@ -5,7 +5,8 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('colorContrast', false);
-debug.flag = false;
+debug.flag = true;
+
 const defaultFontSize = 16;    // In pixels (px)
 const biggerFontSize  = 18.66; // In pixels (px)
 const largeFontSize   = 24;    // In pixels (px)
@@ -39,9 +40,6 @@ const fontWeightBold  = 300;
 
     return (0.2126 * R + 0.7152 * G + 0.0722 * B);
   }
-
-
-
 
 export function computeCCR (hex1, hex2) {
     const L1 = getLuminance(hex1);
@@ -94,8 +92,13 @@ export default class ColorContrast {
     this.isTransparent = this.isTransparent(this.backgroundColor);
 
     if (debug.flag) {
+
+      debug.log(`[               parent color]: ${parentColorContrast.color}`);
+      debug.log(`[    parent background color]: ${parentColorContrast.backgroundColor}`);
+
       debug.log(`[                      color]: ${this.color}`);
       debug.log(`[           background color]: ${this.backgroundColor}`);
+
       debug.log(`[                    opacity]: ${this.opacity}`);
       debug.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
       debug.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);

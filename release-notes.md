@@ -1,3 +1,8 @@
+Version 2.0.3 Overview
+=============================
+* Fixed bug in color contrast calculatio when background color is defined for the body element
+* Improved messaging for "Label in Name" rules and ignore elements with DPUB role in control 14 rule.
+
 Version 2.0.2 Overview
 =============================
 * Updated aria information for row role in the context of a table, grid and treegrid

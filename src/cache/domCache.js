@@ -17,10 +17,10 @@ import DebugLogging     from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domCache', false);
-debug.flag = false;
+debug.flag = true;
 debug.showDomTexts = false;
 debug.showDomElems = false;
-debug.showTree = false;
+debug.showTree = true;
 
 const skipableElements = [
   'base',
@@ -148,6 +148,7 @@ export default class DOMCache {
     this.resultsWarnings     = [];
     this.resultsManualChecks = [];
 
+    parentInfo.domElement = this.startingDomElement;
     this.transverseDOM(parentInfo, startingElement);
     this.computeAriaOwnsRefs();
     this.tableInfo.computeTableTypes();

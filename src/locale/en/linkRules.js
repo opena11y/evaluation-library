@@ -193,9 +193,9 @@ export const linkRules = {
           HIDDEN_P:  '%N_H linkss with images, @aria-label@ and/or references were not tested because they are hidden from assistive technologies',
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_MC_1: 'Verify the image @alt@ text contains any text represented in the image.',
-          ELEMENT_MC_2: 'Verify the @aria-label@ contains the same text associated the visually rendered label associated with the control.',
-          ELEMENT_MC_3: 'Verify the computed name of all the referenced content, contains the same text associated the visually rendered label associated with the control.',
+          ELEMENT_MC_1: 'Verify the @alt@ text of the image includes any text visually rendered by the image for use in the accessible name for the link.',
+          ELEMENT_MC_2: 'Verify the @aria-label@ contains the same text associated the visually rendered label associated with the link.',
+          ELEMENT_MC_3: 'Verify that the computed name of the referenced content includes the rendered text of the link.',
           ELEMENT_HIDDEN_1: 'The hidden control with an accessible name that includes image content was not tested.',
           ELEMENT_HIDDEN_2: 'The hidden control with an accessible name with @aria-label@ content was not tested.',
           ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.',

@@ -28,8 +28,7 @@ export {
   getResultValue
 }
 
-const VERSION = '2.0.beta3';
-
+const VERSION = '2.0.3';
 
 /**
  * @constant RULESET
@@ -463,6 +462,7 @@ export class Constants {
     this.RULE_CATEGORIES        = RULE_CATEGORIES;
     this.RULE_RESULT_VALUE      = RULE_RESULT_VALUE;
     this.RULE_SCOPE             = RULE_SCOPE;
+    this.VERSION                = VERSION;
     this.WCAG_GUIDELINE         = WCAG_GUIDELINE;
     this.WCAG_LEVEL             = WCAG_LEVEL;
     this.WCAG_PRINCIPLE         = WCAG_PRINCIPLE;
