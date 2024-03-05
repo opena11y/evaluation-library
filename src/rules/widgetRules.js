@@ -527,7 +527,9 @@ export const widgetRules = [
 
 
     function checkForRequiredParent(domElement, requiredParents) {
-      if (!domElement || !domElement.ariaInfo) {
+      if (!domElement ||
+          (domElement.parentInfo.domElement === domElement) ||
+          !domElement.ariaInfo) {
         return '';
       }
       const ai = domElement.ariaInfo;

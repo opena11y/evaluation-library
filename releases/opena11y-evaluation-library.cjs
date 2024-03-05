@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$11 = new DebugLogging('constants', false);
 
-const VERSION = '2.0.3';
+const VERSION = '2.0.4';
 
 /**
  * @constant RULESET
@@ -37616,7 +37616,9 @@ const widgetRules = [
 
 
     function checkForRequiredParent(domElement, requiredParents) {
-      if (!domElement || !domElement.ariaInfo) {
+      if (!domElement ||
+          (domElement.parentInfo.domElement === domElement) ||
+          !domElement.ariaInfo) {
         return '';
       }
       const ai = domElement.ariaInfo;

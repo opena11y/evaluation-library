@@ -1,3 +1,7 @@
+Version 2.0.4 Overview
+=============================
+* Fixed bug identifying parent widget roles
+
 Version 2.0.3 Overview
 =============================
 * Fixed bug in color contrast calculatio when background color is defined for the body element
