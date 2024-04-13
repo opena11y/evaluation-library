@@ -68,40 +68,37 @@ export default class BaseResult {
   /**
    * @getter isElementResult
    *
-   * @desc Returns true if the result type is element,
-   *       otherwise false
+   * @desc Returns false by default, override in ElementResult def
    *    
    * @return {Boolean} see @desc
    */
 
   get isElementResult () {
-    return this.result_type === RESULT_TYPE.ELEMENT;
+    return false;
   }
 
   /**
    * @getter isPageResult
    *
-   * @desc Returns true if the result type is page,
-   *       otherwise false
+   * @desc Returns false by default, override in PageResult def
    *
    * @return {Boolean} see @desc
    */
 
   get isPageResult () {
-    return this.result_type === RESULT_TYPE.PAGE;
+    return false;
   }
 
   /**
    * @getter isWebsiteResult
    *
-   * @desc Returns true if the result type is website,
-   *       otherwise false
+   * @desc Returns false by default, override in WebsiteResult def
    *
    * @return {Boolean} see @desc
    */
 
   get isWebsiteResult () {
-    return this.result_type === RESULT_TYPE.WEBSITE;
+    return false;
   }
 
   /**

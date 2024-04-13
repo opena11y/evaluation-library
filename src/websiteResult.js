@@ -36,15 +36,41 @@ const debug = new DebugLogging('PageResult', false);
  */
 
 export default class WebsiteResult extends BaseResult {
-  constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+  constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
     super(rule_result, result_value, message_id, message_arguments, 'website');
 
     this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.WEBSITE;
 
+    this.resultId = 'wr-' + resultIndex;
+
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
     }
+  }
+
+  /**
+   * @getter isWebsiteResult
+   *
+   * @desc Returns true, overrides default value for BaseResult
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isWebsiteResult () {
+    return true;
+  }
+
+  /**
+   * @method getResultId
+   *
+   * @desc A unique string ID for this website result
+   *
+   * @return {String} see description
+   */
+
+  getResultId () {
+    return this.resultId;
   }
 
 }

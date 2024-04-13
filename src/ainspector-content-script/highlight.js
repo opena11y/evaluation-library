@@ -227,16 +227,17 @@ function addHighlightStyle () {
  *
  *  @param  {Object}  allResuls  -  Array of results shown in the sidebar
  *  @param  {String}  option     -  Page highlighting option
- *  @param  {String}  position   -  The ordinal position of the selected
- *                                  element result
+ *  @param  {String}  resultId   -  Id of result object (e.g. elementResult,
+ *                                  pageResult, websitePage)
  */
 
-function highlightResults (allResults, option, position) {
+function highlightResults (allResults, option, resultId) {
+  console.log(`[highlightResults][resultId]: ${resultId}`);
   let count = 0;
   clearHighlights();
-  const pos = parseInt(position);
   allResults.forEach( r => {
     const resultValue = r.getResultValue();
+//    console.log(`[${r.getNode().tagName}][${r.getResultValue()}]: ${r.getResultId()}`);
     if (r.isElementResult) {
       const node = r.getNode();
       // Use background colors from parent element for styling selected element
@@ -246,7 +247,7 @@ function highlightResults (allResults, option, position) {
                  r.domElement.colorContrast;
 
       if (option === 'selected') {
-        if (r.getOrdinalPosition() === position) {
+        if (r.getResultId() === resultId) {
           highlightElement(node, resultValue);
           count += 1;
         }
@@ -260,7 +261,7 @@ function highlightResults (allResults, option, position) {
           if ((option === 'vw') &&
               ((resultValue === RESULT_VALUE.VIOLATION) ||
                (resultValue === RESULT_VALUE.WARNING) ||
-               (r.getOrdinalPosition() === pos))) {
+               (r.getResultId() === resultId))) {
             highlightElement(node, resultValue);
             count += 1;
           }
@@ -268,7 +269,7 @@ function highlightResults (allResults, option, position) {
       }
 
       // Highlight selected element
-      if (r.getOrdinalPosition() === pos) {
+      if (r.getResultId() === resultId) {
         // use the best contrast color for the outline of the selection
         const ccr1 = computeCCR(selectedColorDark, cc.backgroundColorHex);
         const ccr2 = computeCCR(selectedColorLight, cc.backgroundColorHex);
@@ -281,35 +282,31 @@ function highlightResults (allResults, option, position) {
       }
     }
     else {
+      const highlightClass = r.isPageResult ? pageClass : websiteClass;
+
       if (r.isPageResult) {
-        if ((position === -1)) {
-          if (option !== 'none') {
-            highlightPage(resultValue, pageClass);
+        if (option === 'selected') {
+          if (r.getResultId() === resultId) {
+            highlightPage(resultValue, highlightClass);
+            highlightSelectedPage(selectedDark);
+            count += 1;
           }
-          highlightSelectedPage(selectedDark);
         }
         else {
-          if ((option === 'vw') &&
-              ((resultValue === RESULT_VALUE.VIOLATION) ||
-               (resultValue === RESULT_VALUE.WARNING)) ||
-              (option === 'all')) {
-           highlightPage(resultValue, pageClass);
+          if (option === 'all') {
+            highlightPage(resultValue, highlightClass);
+            highlightSelectedPage(selectedDark);
+            count += 1;
           }
-        }
-      }
-      else {
-        if ((position === -1)) {
-          if (option !== 'none') {
-           highlightPage(resultValue, websiteClass);
-          }
-          highlightSelectedPage(selectedDark);
-        }
-        else {
-          if ((option === 'vw') &&
-              ((resultValue === RESULT_VALUE.VIOLATION) ||
-               (resultValue === RESULT_VALUE.WARNING)) ||
-              (option === 'all')) {
-           highlightPage(resultValue, websiteClass);
+          else {
+            if ((option === 'vw') &&
+                ((resultValue === RESULT_VALUE.VIOLATION) ||
+                 (resultValue === RESULT_VALUE.WARNING) ||
+                 (r.getResultId() === resultId))) {
+              highlightPage(resultValue, highlightClass);
+              highlightSelectedPage(selectedDark);
+              count += 1;
+            }
           }
         }
       }
@@ -358,7 +355,6 @@ function highlightSelectedPage (style) {
   div.setAttribute(`${dataAttrSelected}`, style);
   document.body.appendChild(div);
   div.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  console.log(style);
 }
 
 /*
@@ -525,7 +521,9 @@ function getOverlayPage (resultTypeClass) {
 function clearHighlights () {
   const selector = `div.${highlightClass}`;
   const elements = document.querySelectorAll(selector);
+//  console.log(`[clearHighlights]`);
   for (let i = 0; i < elements.length; i += 1) {
+//    console.log(`[${elements[i].tagName}]: ${elements[i].className}`);
     document.body.removeChild(elements[i]);
   }
 }

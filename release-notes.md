@@ -1,3 +1,8 @@
+Version 2.0.5 Overview
+=============================
+* Added element result id to element result information
+* Added manual check for form control labels when form is in a data table
+
 Version 2.0.4 Overview
 =============================
 * Fixed bug identifying parent widget roles

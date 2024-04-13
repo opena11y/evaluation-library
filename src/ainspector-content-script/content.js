@@ -56,7 +56,7 @@ function getEvaluationInfo(panelPort) {
     debug.log(`[getEvaluationInfo][          level]: ${aiInfo.level}`);
     debug.log(`[getEvaluationInfo][    scopeFilter]: ${aiInfo.scopeFilter}`);
     debug.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
-    debug.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
+    debug.log(`[getEvaluationInfo][       resultId]: ${aiInfo.resultId}`);
     debug.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
     debug.log(`[getEvaluationInfo][removeHighlight]: ${aiInfo.removeHighlight}`);
     debug.log(`[ainspectorSidebarRuleResult][ruleId]: ${(ruleResult && ruleResult.rule) ? ruleResult.rule.getId() : 'none'}`);
@@ -90,14 +90,14 @@ function getEvaluationInfo(panelPort) {
       clearHighlights();
       if (aiInfo.highlightOnly) {
         if (ruleResult && ruleResult.getAllResultsArray) {
-          highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+          highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.resultId);
           info.infoHighlight = true;
         }
       } else {
         const evaluationResult  = evaluate(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter);
         ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
         info.infoRuleResult = getRuleResultInfo(ruleResult);
-        highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+        highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.resultId);
       }
       break;
 

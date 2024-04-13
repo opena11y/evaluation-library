@@ -150,7 +150,7 @@
   /* Constants */
   const debug$12 = new DebugLogging('constants', false);
 
-  const VERSION = '2.0.4';
+  const VERSION = '2.0.5';
 
   /**
    * @constant RULESET
@@ -29424,40 +29424,37 @@
     /**
      * @getter isElementResult
      *
-     * @desc Returns true if the result type is element,
-     *       otherwise false
+     * @desc Returns false by default, override in ElementResult def
      *    
      * @return {Boolean} see @desc
      */
 
     get isElementResult () {
-      return this.result_type === RESULT_TYPE.ELEMENT;
+      return false;
     }
 
     /**
      * @getter isPageResult
      *
-     * @desc Returns true if the result type is page,
-     *       otherwise false
+     * @desc Returns false by default, override in PageResult def
      *
      * @return {Boolean} see @desc
      */
 
     get isPageResult () {
-      return this.result_type === RESULT_TYPE.PAGE;
+      return false;
     }
 
     /**
      * @getter isWebsiteResult
      *
-     * @desc Returns true if the result type is website,
-     *       otherwise false
+     * @desc Returns false by default, override in WebsiteResult def
      *
      * @return {Boolean} see @desc
      */
 
     get isWebsiteResult () {
-      return this.result_type === RESULT_TYPE.WEBSITE;
+      return false;
     }
 
     /**
@@ -29608,7 +29605,7 @@
    */
 
   class ElementResult extends BaseResult {
-    constructor (rule_result, result_value, domElement, message_id, message_arguments) {
+    constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
       super(rule_result,
             result_value,
             message_id,
@@ -29617,11 +29614,37 @@
 
       this.domElement = domElement;
       this.result_type    = RESULT_TYPE.ELEMENT;
+      this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
 
       if (debug$F.flag) {
         debug$F.log(`${this.result_value}: ${this.result_message}`);
       }
     }
+
+    /**
+     * @getter isElementResult
+     *
+     * @desc Returns true, overrides default value for BaseResult
+     *
+     * @return {Boolean} see @desc
+     */
+
+    get isElementResult () {
+      return true;
+    }
+
+    /**
+     * @method getResultId
+     *
+     * @desc A unique string ID for this element result that includes ordinal position information
+     *
+     * @return {String} see description
+     */
+
+    getResultId () {
+      return this.resultId;
+    }
+
     /**
      * @method getResultIdentifier
      *
@@ -30088,15 +30111,41 @@
    */
 
   class PageResult extends BaseResult {
-    constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+    constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
       super(rule_result, result_value, message_id, message_arguments, 'page');
 
       this.domCache     = domCache;
       this.result_type  = RESULT_TYPE.PAGE;
 
+      this.resultId = 'pr-' + resultIndex;
+
       if (debug$D.flag) {
         debug$D.log(`${this.result_value}: ${this.result_message}`);
       }
+    }
+
+    /**
+     * @getter isPageResult
+     *
+     * @desc Returns true, overrides default value for BaseResult
+     *
+     * @return {Boolean} see @desc
+     */
+
+    get isPageResult () {
+      return true;
+    }
+
+    /**
+     * @method getResultId
+     *
+     * @desc A unique string ID for this page result
+     *
+     * @return {String} see description
+     */
+
+    getResultId () {
+      return this.resultId;
     }
 
   }
@@ -30134,15 +30183,41 @@
    */
 
   class WebsiteResult extends BaseResult {
-    constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+    constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
       super(rule_result, result_value, message_id, message_arguments, 'website');
 
       this.domCache     = domCache;
       this.result_type  = RESULT_TYPE.WEBSITE;
 
+      this.resultId = 'wr-' + resultIndex;
+
       if (debug$C.flag) {
         debug$C.log(`${this.result_value}: ${this.result_message}`);
       }
+    }
+
+    /**
+     * @getter isWebsiteResult
+     *
+     * @desc Returns true, overrides default value for BaseResult
+     *
+     * @return {Boolean} see @desc
+     */
+
+    get isWebsiteResult () {
+      return true;
+    }
+
+    /**
+     * @method getResultId
+     *
+     * @desc A unique string ID for this website result
+     *
+     * @return {String} see description
+     */
+
+    getResultId () {
+      return this.resultId;
     }
 
   }
@@ -30196,6 +30271,10 @@
       this.results_hidden         = [];
 
       this.results_summary = new ResultsSummary();
+
+      this.elemResultIndex = 0;
+      this.pageResultIndex = 0;
+      this.websiteResultIndex = 0;
     }
 
     /**
@@ -30527,8 +30606,8 @@
     addElementResult (test_result, dom_item, message_id, message_arguments) {
       const dom_element = dom_item.isDomText ? dom_item.parentDomElement : dom_item;
       const result_value = getResultValue(test_result, this.isRuleRequired());
-      const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments);
-
+      const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments, this.elemResultIndex);
+      this.elemResultIndex += 1;
       this.updateResults(result_value, element_result, dom_element);
     }
 
@@ -30545,7 +30624,8 @@
 
     addPageResult (test_result, dom_cache, message_id, message_arguments) {
       const result_value = getResultValue(test_result, this.isRuleRequired());
-      const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments);
+      const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments, this.pageResultIndex);
+      this.pageResultIndex += 1;
 
       this.updateResults(result_value, page_result, dom_cache);
     }
@@ -30563,7 +30643,8 @@
 
     addWebsiteResult (test_result, dom_cache, message_id, message_arguments) {
       const result_value = getResultValue(test_result, this.isRuleRequired());
-      const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments);
+      const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments, this.websiteResultIndex);
+      this.websiteResultIndex += 1;
 
       this.updateResults(result_value, website_result, dom_cache);
     }
