@@ -15,6 +15,8 @@ export const controlRules = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
+        MANUAL_CHECK_S: 'Verify the visual rendering of the SVG content of the element with @role=button@ adapts to operating system and browser color and size settings.',
+        MANUAL_CHECK_P: 'Verify the visual rendering of the SVG content of the %N_MC elements with @role=button@ adapt to operating system and browser color and size settings.',
         NOT_APPLICABLE: 'No @input@, @select@, @textarea@, @progress@, @meter@ or @output@ elements on the page.',
         HIDDEN_S: 'One form control element that is hidden was not evaluated.',
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
@@ -22,6 +24,7 @@ export const controlRules = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1@ control has the label: "%2"',
         ELEMENT_FAIL_1:   'Add label to @%1@ control.',
+        ELEMENT_MC_1:     'Verify the table cell headers provide a descriptive label for the @%1@ control..',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -32,7 +35,8 @@ export const controlRules = {
         '^NOTE:^ The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
-        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
+        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.',
+        'When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
       ],
       MANUAL_CHECKS: [
         'Good labels are both concise and descriptive of the control elements purpose.',
@@ -513,6 +517,7 @@ export const controlRules = {
         ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ element, consider using @fieldset@ and @legend@ elements to provide grouping label or an ARIA technique to make the accessible name unique on the page.',
         ELEMENT_MC_1:   'Verify the accessible name of the @%1[role=%2]@ element accurately describes the action of the button, since it shares the same name as other buttons.',
         ELEMENT_MC_2:   'Verify the accessible name of the @%1@ element accurately describes the action of the button, since it shares the same name as other buttons',
+        ELEMENT_MC_3:   'Verify the cell headers of the cell containing the @%1@ element accurately describes the purpose of the control',
         ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ control was not evaluated because it is hidden from assistive technologies.'
       },
@@ -532,7 +537,8 @@ export const controlRules = {
         'For @input[type=image]@ the default label is defined using the @alt@ attribute.',
         'For @input[type=button]@ the default label is defined using the @value@ attribute.',
         'For the @button@ element, the child text content can be used to define its purpose.',
-        'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.'
+        'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.',
+        'When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
       ],
       MANUAL_CHECKS: [
       ],

@@ -181,7 +181,7 @@ export default class ElementResult extends BaseResult {
         role += ' (in grid)';
       }
       if (this.domElement.ariaInfo.inTreegrid) {
-        role += ' (in treerid)';
+        role += ' (in treegrid)';
       }
     }
     return role;

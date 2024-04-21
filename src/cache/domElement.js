@@ -90,6 +90,10 @@ export default class DOMElement {
     this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
+    this.tabIndex             = checkTabIndex(elementNode);
+    this.isTabStop            = checkIsTabStop(elementNode);
+    this.isInteractiveElement = checkForInteractiveElement(elementNode);
+
     this.accName        = getAccessibleName(accNameDoc, elementNode);
     this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(accNameDoc, elementNode);
@@ -106,9 +110,6 @@ export default class DOMElement {
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
-    this.tabIndex             = checkTabIndex(elementNode);
-    this.isTabStop            = checkIsTabStop(elementNode);
-    this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.isLink      = this.role === 'link';
     this.isLandmark  = this.checkIsLandamrk();
@@ -165,6 +166,12 @@ export default class DOMElement {
 
     this.tableCell = null;
     this.tableElement = null;
+    this.ControlElement = null;
+
+    if (parentInfo.tableCell &&
+        this.isInteractiveElement) {
+      parentInfo.tableCell.interactiveDomElements.push(this);
+    }
 
   }
 
@@ -481,5 +488,4 @@ function checkTabIndex (node) {
   }
   return node.hasAttribute('tabIndex') ? -1 : undefined;
 }
-
 

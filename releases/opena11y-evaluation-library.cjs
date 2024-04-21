@@ -984,6 +984,7 @@ class ControlElement {
 
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
+    domElement.controlElement = this;
     this.isGroup = domElement.role === 'group';
     this.isInputTypeText   = this.isInputType(node, 'date') ||
                              this.isInputType(node, 'number') ||
@@ -15649,6 +15650,7 @@ const noAccName = {
   includesAlt: false,
   includesAriaLabel: false,
   nameIsNotVisible: false,
+  cellHeaders: false
 };
 
 // These roles are based on the ARAI 1.2 specification
@@ -16087,6 +16089,10 @@ class DOMElement {
     this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
+    this.tabIndex             = checkTabIndex(elementNode);
+    this.isTabStop            = checkIsTabStop(elementNode);
+    this.isInteractiveElement = checkForInteractiveElement(elementNode);
+
     this.accName        = getAccessibleName(accNameDoc, elementNode);
     this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(accNameDoc, elementNode);
@@ -16103,9 +16109,6 @@ class DOMElement {
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
-    this.tabIndex             = checkTabIndex(elementNode);
-    this.isTabStop            = checkIsTabStop(elementNode);
-    this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.isLink      = this.role === 'link';
     this.isLandmark  = this.checkIsLandamrk();
@@ -16162,6 +16165,12 @@ class DOMElement {
 
     this.tableCell = null;
     this.tableElement = null;
+    this.ControlElement = null;
+
+    if (parentInfo.tableCell &&
+        this.isInteractiveElement) {
+      parentInfo.tableCell.interactiveDomElements.push(this);
+    }
 
   }
 
@@ -19677,6 +19686,8 @@ const controlRules$1 = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
+        MANUAL_CHECK_S: 'Verify the visual rendering of the SVG content of the element with @role=button@ adapts to operating system and browser color and size settings.',
+        MANUAL_CHECK_P: 'Verify the visual rendering of the SVG content of the %N_MC elements with @role=button@ adapt to operating system and browser color and size settings.',
         NOT_APPLICABLE: 'No @input@, @select@, @textarea@, @progress@, @meter@ or @output@ elements on the page.',
         HIDDEN_S: 'One form control element that is hidden was not evaluated.',
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
@@ -19684,6 +19695,7 @@ const controlRules$1 = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1@ control has the label: "%2"',
         ELEMENT_FAIL_1:   'Add label to @%1@ control.',
+        ELEMENT_MC_1:     'Verify the table cell headers provide a descriptive label for the @%1@ control..',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -19694,7 +19706,8 @@ const controlRules$1 = {
         '^NOTE:^ The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
-        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
+        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.',
+        'When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
       ],
       MANUAL_CHECKS: [
         'Good labels are both concise and descriptive of the control elements purpose.',
@@ -20175,6 +20188,7 @@ const controlRules$1 = {
         ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ element, consider using @fieldset@ and @legend@ elements to provide grouping label or an ARIA technique to make the accessible name unique on the page.',
         ELEMENT_MC_1:   'Verify the accessible name of the @%1[role=%2]@ element accurately describes the action of the button, since it shares the same name as other buttons.',
         ELEMENT_MC_2:   'Verify the accessible name of the @%1@ element accurately describes the action of the button, since it shares the same name as other buttons',
+        ELEMENT_MC_3:   'Verify the cell headers of the cell containing the @%1@ element accurately describes the purpose of the control',
         ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ control was not evaluated because it is hidden from assistive technologies.'
       },
@@ -20194,7 +20208,8 @@ const controlRules$1 = {
         'For @input[type=image]@ the default label is defined using the @alt@ attribute.',
         'For @input[type=button]@ the default label is defined using the @value@ attribute.',
         'For the @button@ element, the child text content can be used to define its purpose.',
-        'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.'
+        'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.',
+        'When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -28047,7 +28062,7 @@ class TableElement {
       this.spannedDataCells += 1;
     }
 
-    return column;
+    return cell;
   }
 
   updateColumnCount (col) {
@@ -28131,6 +28146,33 @@ class TableElement {
             debug$K.headerCalc && debug$K.log(`${cell}`);
           }
         }
+        cell.interactiveDomElements.forEach( de => {
+          const isButtonOrLink = (de.role === 'button') || (de.role === 'link');
+
+          if (cell.headers.length) {
+            const accNameHeaders = {
+              name: cell.headers.join (' | ') + ` (row ${cell.startRow})`,
+              source: 'cell headers',
+              includesAlt: false,
+              includesAriaLabel: false,
+              nameIsNotVisible: false,
+              cellHeaders: true
+            };
+
+            if (isButtonOrLink) {
+              if (!de.accDescription.name) {
+                de.accDescription = accNameHeaders;
+              }
+            }
+            else {
+              if (!de.accName.name) {
+                const ce = de.controlElement;
+                de.accName = accNameHeaders;
+                ce.nameForComparision = ce.getNameForComparison(de, ce.parentControlElement);
+              }
+            }
+          }
+        });
       });
     });
   }
@@ -28373,6 +28415,8 @@ class TableCell {
 
     this.hasContent = (node.textContent.trim().length > 0) || (node.firstElementChild !== null);
 
+    this.interactiveDomElements = [];
+
   }
 
   get columnSpan () {
@@ -28421,6 +28465,7 @@ class TableInfo {
 
     let te = tableElement;
     let rg = rowGroup;
+    let tc = null;
 
     switch (domElement.tagName) {
 
@@ -28457,7 +28502,8 @@ class TableInfo {
       case 'th':
       case 'td':
         if (te) {
-          te.updateColumnCount(te.addCell(domElement));
+          tc = te.addCell(domElement);
+          te.updateColumnCount(tc);
         }
         break;
 
@@ -28490,7 +28536,7 @@ class TableInfo {
           case 'cell':
           case 'gridcell':
             if (te) {
-              te.addCell(domElement);
+              tc = te.addCell(domElement);
             }
             break;
 
@@ -28498,7 +28544,7 @@ class TableInfo {
       break;
     }
 
-    return [te, rg];
+    return [te, rg, tc];
   }
 
   computeHeaders (domCache) {
@@ -28638,6 +28684,7 @@ class ParentInfo {
     this.mediaElement    = null;
     this.tableElement    = null;
     this.tableRowGroup   = null;
+    this.tableCell       = null;
 
     this.inLink      = false;
     this.inParagraph = false;
@@ -28932,7 +28979,9 @@ class DOMCache {
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
-    [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
+    [newParentInfo.tableElement,
+     newParentInfo.tableRowGroup,
+     newParentInfo.tableCell] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
 
     newParentInfo.inParagraph = domElement.tagName === 'p' ? true : parentInfo.inParagraph;
     newParentInfo.inDialog    = domElement.isInDialog;
@@ -29744,7 +29793,7 @@ class ElementResult extends BaseResult {
         role += ' (in grid)';
       }
       if (this.domElement.ariaInfo.inTreegrid) {
-        role += ' (in treerid)';
+        role += ' (in treegrid)';
       }
     }
     return role;
@@ -31795,7 +31844,12 @@ const controlRules = [
         if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              if (de.accName.cellHeaders) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              }
             }
             else {
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
@@ -32217,25 +32271,30 @@ const controlRules = [
             }
           });
           if (count === 0){
-            rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+            if (de1.accName.cellHeaders) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_3', [de1.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+            }
           } 
           else {
-            // Since their ar often duplicate button on pages, when two or more buttons share the same
+            // Since their are often duplicate button on pages, when two or more buttons share the same
             // name it should be a manual check
             if (de1.role === 'button') {
               if (de1.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_1', [de1.tagName, de1.role]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_1', [de1.elemName, de1.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_2', [de1.tagName]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_2', [de1.elemName]);
               }
             }
             else {
               if (de1.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.role]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.elemName, de1.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.tagName]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.elemName]);
               }
             }
           }

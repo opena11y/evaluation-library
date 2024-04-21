@@ -232,7 +232,6 @@ function addHighlightStyle () {
  */
 
 function highlightResults (allResults, option, resultId) {
-  console.log(`[highlightResults][resultId]: ${resultId}`);
   let count = 0;
   clearHighlights();
   allResults.forEach( r => {

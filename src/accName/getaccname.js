@@ -42,6 +42,7 @@ const noAccName = {
   includesAlt: false,
   includesAriaLabel: false,
   nameIsNotVisible: false,
+  cellHeaders: false
 };
 
 // These roles are based on the ARAI 1.2 specification

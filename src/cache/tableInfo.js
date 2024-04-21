@@ -118,7 +118,7 @@ class TableElement {
       this.spannedDataCells += 1;
     }
 
-    return column;
+    return cell;
   }
 
   updateColumnCount (col) {
@@ -202,6 +202,33 @@ class TableElement {
             debug.headerCalc && debug.log(`${cell}`);
           }
         }
+        cell.interactiveDomElements.forEach( de => {
+          const isButtonOrLink = (de.role === 'button') || (de.role === 'link');
+
+          if (cell.headers.length) {
+            const accNameHeaders = {
+              name: cell.headers.join (' | ') + ` (row ${cell.startRow})`,
+              source: 'cell headers',
+              includesAlt: false,
+              includesAriaLabel: false,
+              nameIsNotVisible: false,
+              cellHeaders: true
+            }
+
+            if (isButtonOrLink) {
+              if (!de.accDescription.name) {
+                de.accDescription = accNameHeaders;
+              }
+            }
+            else {
+              if (!de.accName.name) {
+                const ce = de.controlElement;
+                de.accName = accNameHeaders;
+                ce.nameForComparision = ce.getNameForComparison(de, ce.parentControlElement);
+              }
+            }
+          }
+        });
       });
     });
   }
@@ -447,6 +474,8 @@ class TableCell {
 
     this.hasContent = (node.textContent.trim().length > 0) || (node.firstElementChild !== null);
 
+    this.interactiveDomElements = [];
+
   }
 
   get columnSpan () {
@@ -495,6 +524,7 @@ export default class TableInfo {
 
     let te = tableElement;
     let rg = rowGroup;
+    let tc = null;
 
     switch (domElement.tagName) {
 
@@ -531,7 +561,8 @@ export default class TableInfo {
       case 'th':
       case 'td':
         if (te) {
-          te.updateColumnCount(te.addCell(domElement));
+          tc = te.addCell(domElement);
+          te.updateColumnCount(tc);
         }
         break;
 
@@ -564,7 +595,7 @@ export default class TableInfo {
           case 'cell':
           case 'gridcell':
             if (te) {
-              te.addCell(domElement);
+              tc = te.addCell(domElement);
             }
             break;
 
@@ -575,7 +606,7 @@ export default class TableInfo {
       break;
     }
 
-    return [te, rg];
+    return [te, rg, tc];
   }
 
   computeHeaders (domCache) {
