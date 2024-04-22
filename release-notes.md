@@ -2,6 +2,7 @@ Version 2.0.5 Overview
 =============================
 * Added element result id to element result information
 * Added manual check for form control labels when form is in a data table
+* Fixed bug in requiring an ARIA role for SVG elements
 
 Version 2.0.4 Overview
 =============================
@@ -9,7 +10,7 @@ Version 2.0.4 Overview
 
 Version 2.0.3 Overview
 =============================
-* Fixed bug in color contrast calculatio when background color is defined for the body element
+* Fixed bug in color contrast calculation when background color is defined for the body element
 * Improved messaging for "Label in Name" rules and ignore elements with DPUB role in control 14 rule.
 
 Version 2.0.2 Overview

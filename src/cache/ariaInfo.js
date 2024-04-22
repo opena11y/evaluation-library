@@ -137,7 +137,8 @@ export default class AriaInfo {
     }
 
     this.isValidRole  = typeof designPattern === 'object';
-    this.isDPUBRole = role.indexOf('doc-') >= 0;
+    this.isDPUBRole = role.includes('doc-');
+    this.isGraphicRole = role.includes('graphics-');
 
     this.isAbstractRole = false;
 

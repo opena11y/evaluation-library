@@ -11936,7 +11936,8 @@
       }
 
       this.isValidRole  = typeof designPattern === 'object';
-      this.isDPUBRole = role.indexOf('doc-') >= 0;
+      this.isDPUBRole = role.includes('doc-');
+      this.isGraphicRole = role.includes('graphics-');
 
       this.isAbstractRole = false;
 
@@ -14160,7 +14161,7 @@
         anyRoleAllowed: true,
         id: 'sup'
       },
-      SVG: {
+      svg: {
         tagName: 'SVG',
         defaultRole: 'graphics-document',
         noRoleAllowed: false,
@@ -19704,11 +19705,11 @@
         ],
         TECHNIQUES: [
           'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-          '^NOTE:^ The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
+          'NOTE: An alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
           'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
           'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
           'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.',
-          'When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
+          'EXCEPTION: When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
         ],
         MANUAL_CHECKS: [
           'Good labels are both concise and descriptive of the control elements purpose.',
@@ -20210,7 +20211,7 @@
           'For @input[type=button]@ the default label is defined using the @value@ attribute.',
           'For the @button@ element, the child text content can be used to define its purpose.',
           'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.',
-          'When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
+          'EXCEPTION: When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -26556,6 +26557,7 @@
             ELEMENT_PASS_5:   '@%1@ is a valid ARIA role.',
             ELEMENT_FAIL_1:   '@%1@ is not a defined ARIA role, change the @role@ attribute value to an appropriate widget, landmark, section or live region role.',
             ELEMENT_FAIL_2:   '@%1@ is an abstract ARIA role, change the role attribute to a widget, landmark or live region role.',
+            ELEMENT_FAIL_3:   'The @%1@ role is a Graphic role associated with @svg@ elements, since these roles are not well supported use valid ARIA roles to identify the purpose of the graphic in the document.  Common ARIA roles used with @svg@ include @none@ and @img@.',
             ELEMENT_HIDDEN_1: '@role@ attribute value was not validated because the %1 element is hidden from assistive technologies and/or not visible on screen.'
           },
           PURPOSES: [
@@ -26580,6 +26582,10 @@
             { type: REFERENCES.SPECIFICATION,
               title: 'W3C Digital Publishing WAI-ARIA Module 1.1',
               url:   'https://www.w3.org/TR/dpub-aria-1.1/'
+            },
+            { type: REFERENCES.SPECIFICATION,
+              title: 'W3C WAI-ARIA Graphics Module (Working Draft)',
+              url:   'https://www.w3.org/TR/graphics-aria-1.0/'
             },
             { type: REFERENCES.WCAG_TECHNIQUE,
               title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -28153,7 +28159,7 @@
             if (cell.headers.length) {
               const accNameHeaders = {
                 name: cell.headers.join (' | ') + ` (row ${cell.startRow})`,
-                source: 'cell headers',
+                source: 'implied by cell headers',
                 includesAlt: false,
                 includesAriaLabel: false,
                 nameIsNotVisible: false,
@@ -37370,14 +37376,19 @@
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach(de => {
-        if (de.hasRole) {
+        if (de.hasRole || de.role.includes('-')) {
           if (de.visibility.isVisibleToAT) {
             if (!de.ariaInfo.isValidRole) {
               if (de.ariaInfo.isDPUBRole) {
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+                if (de.ariaInfo.isGraphicRole) {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.role]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+                }
               }
             }
             else {

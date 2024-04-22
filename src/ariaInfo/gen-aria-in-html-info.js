@@ -1385,7 +1385,7 @@ export const ariaInHTMLInfo = {
       anyRoleAllowed: true,
       id: 'sup'
     },
-    SVG: {
+    svg: {
       tagName: 'SVG',
       defaultRole: 'graphics-document',
       noRoleAllowed: false,

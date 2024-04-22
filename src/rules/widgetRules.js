@@ -140,14 +140,19 @@ export const widgetRules = [
   validate            : function (dom_cache, rule_result) {
 
     dom_cache.allDomElements.forEach(de => {
-      if (de.hasRole) {
+      if (de.hasRole || de.role.includes('-')) {
         if (de.visibility.isVisibleToAT) {
           if (!de.ariaInfo.isValidRole) {
             if (de.ariaInfo.isDPUBRole) {
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+              if (de.ariaInfo.isGraphicRole) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.role]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+              }
             }
           }
           else {

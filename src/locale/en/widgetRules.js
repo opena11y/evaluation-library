@@ -167,6 +167,7 @@ export const widgetRules = {
           ELEMENT_PASS_5:   '@%1@ is a valid ARIA role.',
           ELEMENT_FAIL_1:   '@%1@ is not a defined ARIA role, change the @role@ attribute value to an appropriate widget, landmark, section or live region role.',
           ELEMENT_FAIL_2:   '@%1@ is an abstract ARIA role, change the role attribute to a widget, landmark or live region role.',
+          ELEMENT_FAIL_3:   'The @%1@ role is a Graphic role associated with @svg@ elements, since these roles are not well supported use valid ARIA roles to identify the purpose of the graphic in the document.  Common ARIA roles used with @svg@ include @none@ and @img@.',
           ELEMENT_HIDDEN_1: '@role@ attribute value was not validated because the %1 element is hidden from assistive technologies and/or not visible on screen.'
         },
         PURPOSES: [
@@ -191,6 +192,10 @@ export const widgetRules = {
           { type: REFERENCES.SPECIFICATION,
             title: 'W3C Digital Publishing WAI-ARIA Module 1.1',
             url:   'https://www.w3.org/TR/dpub-aria-1.1/'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'W3C WAI-ARIA Graphics Module (Working Draft)',
+            url:   'https://www.w3.org/TR/graphics-aria-1.0/'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',

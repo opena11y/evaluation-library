@@ -208,7 +208,7 @@ class TableElement {
           if (cell.headers.length) {
             const accNameHeaders = {
               name: cell.headers.join (' | ') + ` (row ${cell.startRow})`,
-              source: 'cell headers',
+              source: 'implied by cell headers',
               includesAlt: false,
               includesAriaLabel: false,
               nameIsNotVisible: false,
