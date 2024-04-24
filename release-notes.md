@@ -1,8 +1,9 @@
 Version 2.0.5 Overview
 =============================
-* Added element result id to element result information
+* Added a unique result id to element, page and website result information
 * Added manual check for form control labels when form is in a data table
 * Fixed bug in requiring an ARIA role for SVG elements
+* Fixed bug in data table column calculation
 
 Version 2.0.4 Overview
 =============================

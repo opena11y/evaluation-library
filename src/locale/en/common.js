@@ -1,6 +1,7 @@
 /* common.js */
 
 export const common = {
+  aria13: ' (ARIA 1.3)',
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
   baseResult: ['undefined','P','H','MC','W','V'],
   baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],

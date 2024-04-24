@@ -11891,11 +11891,12 @@ class RefInfo {
  * @param  {String}   defaultRole  - Default role of element if no role is defined
  * @param  {Object}   node         - dom element node
  * @param  {String}   ariaVersion  - Version of ARIA to use for roles, props and state info
+ *                                   (Values: "ARIA12" | "ARIA13")
  */
 
 class AriaInfo {
-  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='1.2') {
-    if (ariaVersion === `1.3`) {
+  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='ARIA12') {
+    if (ariaVersion === `ARIA13`) {
       propertyDataTypes = propertyDataTypes$1;
       designPatterns    = designPatterns$1;
     }
@@ -16055,7 +16056,7 @@ const requireAccessibleNames = ['region', 'form'];
  */
 
 class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='1.2') {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12') {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
@@ -17537,6 +17538,7 @@ class StructureInfo {
 /* common.js */
 
 const common = {
+  aria13: ' (ARIA 1.3)',
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
   baseResult: ['undefined','P','H','MC','W','V'],
   baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
@@ -28071,8 +28073,10 @@ class TableElement {
     return cell;
   }
 
-  updateColumnCount (col) {
-    this.colCount = Math.max(this.colCount, col);
+  updateColumnCount (endColumn) {
+    if (!isNaN(endColumn) && endColumn > 0) {
+      this.colCount = Math.max(this.colCount, endColumn-1);
+    }
   }
 
   getRow(rowNumber, domElement=null) {
@@ -28509,7 +28513,7 @@ class TableInfo {
       case 'td':
         if (te) {
           tc = te.addCell(domElement);
-          te.updateColumnCount(tc);
+          te.updateColumnCount(tc.endColumn);
         }
         break;
 
@@ -28733,7 +28737,7 @@ class ParentInfo {
  */
 
 class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='1.2') {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12') {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -38734,14 +38738,12 @@ function isWCAG(ruleset, level, rule) {
  * @param  {String} title        - A title of the evaluation
  *                                 (typically the title of the document)
  * @param  {String} url          - The URL to the document
- * @param  {String}  ariaVersion - Version of ARIA to use for roles,
- *                                 props and state info
  *
  * @return see @desc
  */
 
 class EvaluationResult {
-  constructor (startingDoc, title, url, ariaVersion='1.2') {
+  constructor (startingDoc, title, url) {
 
     this.startingDoc = startingDoc;
     this.title       = title;
@@ -38749,7 +38751,7 @@ class EvaluationResult {
     this.ruleset     = '';
     this.level       = '';
     this.scopeFilter = '';
-    this.ariaVersion = ariaVersion;
+    this.ariaVersion = '1.2';
 
     this.date           = getFormattedDate();
     this.version        = VERSION;
@@ -38769,18 +38771,22 @@ class EvaluationResult {
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 (values: 'ARIA12' | ARIA13")
    */
 
-  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
+  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='AR!A12') {
 
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][      level]: ${level}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][scopeFilter]: ${scopeFilter}`);
+    debug$1.flag && debug$1.log(`[evaluateWCAG][ariaVersion]: ${ariaVersion}`);
 
     this.ruleset     = ruleset;
     this.level       = level;
     this.scopeFilter = scopeFilter;
+    this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion);
     this.allDomElements = domCache.allDomElements;
@@ -38813,13 +38819,14 @@ class EvaluationResult {
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
-  runRuleListRules (ruleList) {
+  runRuleListRules (ruleList, ariaVersion='AR!A12') {
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
+    this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -38843,12 +38850,13 @@ class EvaluationResult {
    * @desc Updates rule results array with results first step rules
    */
 
-  runFirstStepRules () {
+  runFirstStepRules (ariaVersion='AR!A12') {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
+    this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -39109,12 +39117,14 @@ class EvaluationLibrary {
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - URL of document being analyzed
    * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
    */
 
-  evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
+  evaluateRuleList (startingDoc, title='', url='',  ruleList = [], ariaVersion='ARIA12') {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runRuleListRules(ruleList);
+    evaluationResult.runRuleListRules(ruleList, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -39144,12 +39154,14 @@ class EvaluationLibrary {
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
-   */
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+  */
 
-  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
+  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runWCAGRules(ruleset, level, scopeFilter);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -39176,12 +39188,14 @@ class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
-   */
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+  */
 
-  evaluateFirstStepRules (startingDoc, title='', url='') {
+  evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runFirstStepRules();
+    evaluationResult.runFirstStepRules(ariaVersion);
 
     // Debug features
     if (debug.flag) {

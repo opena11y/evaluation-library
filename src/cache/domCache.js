@@ -101,7 +101,7 @@ class ParentInfo {
  */
 
 export default class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='1.2') {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12') {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }

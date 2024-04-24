@@ -55,7 +55,7 @@ const requireAccessibleNames = ['region', 'form'];
  */
 
 export default class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='1.2') {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12') {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :

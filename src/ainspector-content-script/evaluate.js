@@ -8,13 +8,13 @@ const debug = new DebugLogging('ContentEvalaute', false);
 debug.flag = false;
 
 
-export function evaluate (ruleset="WCAG21", level="AA", scopeFilter="ALL", ruleList=[]) {
+export function evaluate (ruleset="WCAG21", level="AA", scopeFilter="ALL", ariaVersion="ARIA12") {
 
   if (debug.flag) {
     debug.log(`[eveluate][    ruleset]: ${ruleset}`);
     debug.log(`[eveluate][      level]: ${level}`);
     debug.log(`[evaluate][scopeFilter]: ${scopeFilter}`);
-    debug.log(`[evaluate][ ruleFilter]: ${ruleList}`);
+    debug.log(`[evaluate][ariaVersion]: ${ariaVersion}`);
   }
 
   // evaluation script
@@ -27,15 +27,11 @@ export function evaluate (ruleset="WCAG21", level="AA", scopeFilter="ALL", ruleL
     case 'WCAG20':
     case 'WCAG21':
     case 'WCAG22':
-      evaluationResult = evaluationLibrary.evaluateWCAG(doc, doc.title, doc.location.href, ruleset, level, scopeFilter);
-      break;
-
-    case 'LIST':
-      evaluationResult = evaluationLibrary.evaluateRuleList(doc, doc.title, doc.location.href, ruleList);
+      evaluationResult = evaluationLibrary.evaluateWCAG(doc, doc.title, doc.location.href, ruleset, level, scopeFilter, ariaVersion);
       break;
 
     case 'FIRSTSTEP':
-      evaluationResult = evaluationLibrary.evaluateFirstStepRules(doc, doc.title, doc.location.href);
+      evaluationResult = evaluationLibrary.evaluateFirstStepRules(doc, doc.title, doc.location.href, ariaVersion);
       break;
 
     default:

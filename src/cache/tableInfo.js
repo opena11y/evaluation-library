@@ -121,8 +121,10 @@ class TableElement {
     return cell;
   }
 
-  updateColumnCount (col) {
-    this.colCount = Math.max(this.colCount, col);
+  updateColumnCount (endColumn) {
+    if (!isNaN(endColumn) && endColumn > 0) {
+      this.colCount = Math.max(this.colCount, endColumn-1);
+    }
   }
 
   getRow(rowNumber, domElement=null) {
@@ -562,7 +564,7 @@ export default class TableInfo {
       case 'td':
         if (te) {
           tc = te.addCell(domElement);
-          te.updateColumnCount(tc);
+          te.updateColumnCount(tc.endColumn);
         }
         break;
 
