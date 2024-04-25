@@ -1,10 +1,20 @@
+Version 2.0.5 Overview
+=============================
+* Added a unique result id to element, page and website result information
+* Added manual check for form control labels when form is in a data table
+* Fixed bug in requiring an ARIA role for SVG elements
+* Fixed bug in data table column calculation
+* Added IMAGE_8 rule to require a ARIA role on an SVG element
+* Updated IMAGE_2 rule to be more efficient
+* Updated IMAGE_6 rule to ignore images with role=none and role=presentation
+
 Version 2.0.4 Overview
 =============================
 * Fixed bug identifying parent widget roles
 
 Version 2.0.3 Overview
 =============================
-* Fixed bug in color contrast calculatio when background color is defined for the body element
+* Fixed bug in color contrast calculation when background color is defined for the body element
 * Improved messaging for "Label in Name" rules and ignore elements with DPUB role in control 14 rule.
 
 Version 2.0.2 Overview

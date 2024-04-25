@@ -55,8 +55,9 @@ function getEvaluationInfo(panelPort) {
     debug.log(`[getEvaluationInfo][        ruleset]: ${aiInfo.ruleset}`);
     debug.log(`[getEvaluationInfo][          level]: ${aiInfo.level}`);
     debug.log(`[getEvaluationInfo][    scopeFilter]: ${aiInfo.scopeFilter}`);
+    debug.log(`[getEvaluationInfo][    ariaVersion]: ${aiInfo.ariaVersion}`);
     debug.log(`[getEvaluationInfo][      highlight]: ${aiInfo.highlight}`);
-    debug.log(`[getEvaluationInfo][       position]: ${aiInfo.position}`);
+    debug.log(`[getEvaluationInfo][       resultId]: ${aiInfo.resultId}`);
     debug.log(`[getEvaluationInfo][  highlightOnly]: ${aiInfo.highlightOnly}`);
     debug.log(`[getEvaluationInfo][removeHighlight]: ${aiInfo.removeHighlight}`);
     debug.log(`[ainspectorSidebarRuleResult][ruleId]: ${(ruleResult && ruleResult.rule) ? ruleResult.rule.getId() : 'none'}`);
@@ -70,18 +71,18 @@ function getEvaluationInfo(panelPort) {
   info.ruleset     = aiInfo.ruleset;
   info.level       = aiInfo.level;
   info.scopeFilter = aiInfo.scopeFilter;
-  info.evaluationLabel = getRulesetLabel(aiInfo.ruleset, aiInfo.level);
+  info.evaluationLabel = getRulesetLabel(aiInfo.ruleset, aiInfo.level, aiInfo.ariaVersion);
 
   switch(aiInfo.view) {
     case viewId.allRules:
       clearHighlights();
-      info.infoAllRules = getAllRulesInfo(aiInfo.ruleset, info.level, aiInfo.scopeFilter);
+      info.infoAllRules = getAllRulesInfo(aiInfo.ruleset, info.level, aiInfo.scopeFilter, aiInfo.ariaVersion);
       ruleResult = false;
       break;
 
     case viewId.ruleGroup:
       clearHighlights();
-      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId, aiInfo.ruleset, info.level, aiInfo.scopeFilter);
+      info.infoRuleGroup = getRuleGroupInfo(aiInfo.groupType, aiInfo.groupId, aiInfo.ruleset, info.level, aiInfo.scopeFilter, aiInfo.ariaVersion);
       ruleResult = false;
       break;
 
@@ -90,14 +91,14 @@ function getEvaluationInfo(panelPort) {
       clearHighlights();
       if (aiInfo.highlightOnly) {
         if (ruleResult && ruleResult.getAllResultsArray) {
-          highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+          highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.resultId);
           info.infoHighlight = true;
         }
       } else {
-        const evaluationResult  = evaluate(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter);
+        const evaluationResult  = evaluate(aiInfo.ruleset, aiInfo.level, aiInfo.scopeFilter, aiInfo.ariaVersion);
         ruleResult = evaluationResult.getRuleResult(aiInfo.ruleId);
         info.infoRuleResult = getRuleResultInfo(ruleResult);
-        highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.position);
+        highlightResults(ruleResult.getAllResultsArray(), aiInfo.highlight, aiInfo.resultId);
       }
       break;
 

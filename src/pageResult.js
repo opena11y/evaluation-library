@@ -36,15 +36,41 @@ const debug = new DebugLogging('PageResult', false);
  */
 
 export default class PageResult extends BaseResult {
-  constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+  constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
     super(rule_result, result_value, message_id, message_arguments, 'page');
 
     this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.PAGE;
 
+    this.resultId = 'pr-' + resultIndex;
+
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
     }
+  }
+
+  /**
+   * @getter isPageResult
+   *
+   * @desc Returns true, overrides default value for BaseResult
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isPageResult () {
+    return true;
+  }
+
+  /**
+   * @method getResultId
+   *
+   * @desc A unique string ID for this page result
+   *
+   * @return {String} see description
+   */
+
+  getResultId () {
+    return this.resultId;
   }
 
 }

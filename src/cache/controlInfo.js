@@ -23,6 +23,7 @@ class ControlElement {
 
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
+    domElement.controlElement = this;
     this.isGroup = domElement.role === 'group';
     this.isInputTypeText   = this.isInputType(node, 'date') ||
                              this.isInputType(node, 'number') ||

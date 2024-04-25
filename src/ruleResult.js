@@ -16,8 +16,7 @@ import PageResult     from './pageResult.js';
 import {replaceAll}   from './utils.js';
 import WebsiteResult  from './websiteResult.js';
 import {
-  getCommonMessage,
-  transformElementMarkup
+  getCommonMessage
 } from './locale/locale.js';
 
 
@@ -67,6 +66,10 @@ export default class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
+
+    this.elemResultIndex = 0;
+    this.pageResultIndex = 0;
+    this.websiteResultIndex = 0;
   }
 
   /**
@@ -401,8 +404,8 @@ export default class RuleResult {
   addElementResult (test_result, dom_item, message_id, message_arguments) {
     const dom_element = dom_item.isDomText ? dom_item.parentDomElement : dom_item;
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments);
-
+    const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments, this.elemResultIndex);
+    this.elemResultIndex += 1;
     this.updateResults(result_value, element_result, dom_element);
   }
 
@@ -419,7 +422,8 @@ export default class RuleResult {
 
   addPageResult (test_result, dom_cache, message_id, message_arguments) {
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments);
+    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments, this.pageResultIndex);
+    this.pageResultIndex += 1;
 
     this.updateResults(result_value, page_result, dom_cache);
   }
@@ -437,7 +441,8 @@ export default class RuleResult {
 
   addWebsiteResult (test_result, dom_cache, message_id, message_arguments) {
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments);
+    const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments, this.websiteResultIndex);
+    this.websiteResultIndex += 1;
 
     this.updateResults(result_value, website_result, dom_cache);
   }

@@ -55,12 +55,14 @@ export default class EvaluationLibrary {
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - URL of document being analyzed
    * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
    */
 
-  evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
+  evaluateRuleList (startingDoc, title='', url='',  ruleList = [], ariaVersion='ARIA12') {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runRuleListRules(ruleList);
+    evaluationResult.runRuleListRules(ruleList, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -90,12 +92,14 @@ export default class EvaluationLibrary {
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
-   */
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+  */
 
-  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
+  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runWCAGRules(ruleset, level, scopeFilter);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -122,12 +126,14 @@ export default class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
-   */
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+  */
 
-  evaluateFirstStepRules (startingDoc, title='', url='') {
+  evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runFirstStepRules();
+    evaluationResult.runFirstStepRules(ariaVersion);
 
     // Debug features
     if (debug.flag) {

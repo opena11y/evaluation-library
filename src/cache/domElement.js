@@ -55,7 +55,7 @@ const requireAccessibleNames = ['region', 'form'];
  */
 
 export default class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='1.2') {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12') {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
@@ -90,6 +90,10 @@ export default class DOMElement {
     this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
+    this.tabIndex             = checkTabIndex(elementNode);
+    this.isTabStop            = checkIsTabStop(elementNode);
+    this.isInteractiveElement = checkForInteractiveElement(elementNode);
+
     this.accName        = getAccessibleName(accNameDoc, elementNode);
     this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(accNameDoc, elementNode);
@@ -106,9 +110,6 @@ export default class DOMElement {
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
-    this.tabIndex             = checkTabIndex(elementNode);
-    this.isTabStop            = checkIsTabStop(elementNode);
-    this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.isLink      = this.role === 'link';
     this.isLandmark  = this.checkIsLandamrk();
@@ -158,13 +159,19 @@ export default class DOMElement {
     // A name that can be used in rule results to identify the element
     this.elemName = this.tagName;
     this.elemName += elementNode.type ? `[type=${elementNode.type}]` : '';
-    this.elemName += this.id ? `#${this.id}` : '';
     this.elemName += this.hasRole ? `[role=${this.role}]` : '';
+    this.elemName += this.id ? `#${this.id}` : '';
 
     // Potential references to other cache objects
 
     this.tableCell = null;
     this.tableElement = null;
+    this.ControlElement = null;
+
+    if (parentInfo.tableCell &&
+        this.isInteractiveElement) {
+      parentInfo.tableCell.interactiveDomElements.push(this);
+    }
 
   }
 
@@ -481,5 +488,4 @@ function checkTabIndex (node) {
   }
   return node.hasAttribute('tabIndex') ? -1 : undefined;
 }
-
 

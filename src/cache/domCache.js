@@ -58,6 +58,7 @@ class ParentInfo {
     this.mediaElement    = null;
     this.tableElement    = null;
     this.tableRowGroup   = null;
+    this.tableCell       = null;
 
     this.inLink      = false;
     this.inParagraph = false;
@@ -100,7 +101,7 @@ class ParentInfo {
  */
 
 export default class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='1.2') {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12') {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -373,7 +374,9 @@ export default class DOMCache {
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
-    [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
+    [newParentInfo.tableElement,
+     newParentInfo.tableRowGroup,
+     newParentInfo.tableCell] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
 
     newParentInfo.inParagraph = domElement.tagName === 'p' ? true : parentInfo.inParagraph;
     newParentInfo.inDialog    = domElement.isInDialog;

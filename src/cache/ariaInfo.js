@@ -93,11 +93,12 @@ class RefInfo {
  * @param  {String}   defaultRole  - Default role of element if no role is defined
  * @param  {Object}   node         - dom element node
  * @param  {String}   ariaVersion  - Version of ARIA to use for roles, props and state info
+ *                                   (Values: "ARIA12" | "ARIA13")
  */
 
 export default class AriaInfo {
-  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='1.2') {
-    if (ariaVersion === `1.3`) {
+  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='ARIA12') {
+    if (ariaVersion === `ARIA13`) {
       propertyDataTypes = propertyDataTypes3;
       designPatterns    = designPatterns3;
     }
@@ -137,7 +138,8 @@ export default class AriaInfo {
     }
 
     this.isValidRole  = typeof designPattern === 'object';
-    this.isDPUBRole = role.indexOf('doc-') >= 0;
+    this.isDPUBRole = role.includes('doc-');
+    this.isGraphicRole = role.includes('graphics-');
 
     this.isAbstractRole = false;
 

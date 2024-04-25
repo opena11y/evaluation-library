@@ -41,7 +41,7 @@ debug.flag = false;
  */
 
 export default class ElementResult extends BaseResult {
-  constructor (rule_result, result_value, domElement, message_id, message_arguments) {
+  constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
     super(rule_result,
           result_value,
           message_id,
@@ -50,11 +50,37 @@ export default class ElementResult extends BaseResult {
 
     this.domElement = domElement;
     this.result_type    = RESULT_TYPE.ELEMENT;
+    this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
 
     if (debug.flag) {
       debug.log(`${this.result_value}: ${this.result_message}`)
     }
   }
+
+  /**
+   * @getter isElementResult
+   *
+   * @desc Returns true, overrides default value for BaseResult
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isElementResult () {
+    return true;
+  }
+
+  /**
+   * @method getResultId
+   *
+   * @desc A unique string ID for this element result that includes ordinal position information
+   *
+   * @return {String} see description
+   */
+
+  getResultId () {
+    return this.resultId;
+  }
+
   /**
    * @method getResultIdentifier
    *
@@ -155,7 +181,7 @@ export default class ElementResult extends BaseResult {
         role += ' (in grid)';
       }
       if (this.domElement.ariaInfo.inTreegrid) {
-        role += ' (in treerid)';
+        role += ' (in treegrid)';
       }
     }
     return role;

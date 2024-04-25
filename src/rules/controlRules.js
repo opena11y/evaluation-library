@@ -102,7 +102,12 @@ export const controlRules = [
         if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              if (de.accName.cellHeaders) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              }
             }
             else {
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
@@ -524,25 +529,30 @@ export const controlRules = [
             }
           });
           if (count === 0){
-            rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+            if (de1.accName.cellHeaders) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_3', [de1.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+            }
           } 
           else {
-            // Since their ar often duplicate button on pages, when two or more buttons share the same
+            // Since their are often duplicate button on pages, when two or more buttons share the same
             // name it should be a manual check
             if (de1.role === 'button') {
               if (de1.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_1', [de1.tagName, de1.role]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_1', [de1.elemName, de1.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_2', [de1.tagName]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_2', [de1.elemName]);
               }
             }
             else {
               if (de1.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.role]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.elemName, de1.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.tagName]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.elemName]);
               }
             }
           }

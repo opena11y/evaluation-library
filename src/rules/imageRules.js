@@ -189,20 +189,10 @@ export const imageRules = [
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
         if (de.accName.name.length === 0) {
-          if (de.tagName === 'img') {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);          
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);          
-          }
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
       } else {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
-        }
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
       }
     });
   } // end validation function
@@ -227,7 +217,9 @@ export const imageRules = [
       const de   = ie.domElement;
       const accName = de.accName;
       const accDesc = de.accDescription;
-      if (accName.name.length > 0) {
+      if ((accName.name.length > 0) &&
+          ((de.role !== 'none') && (de.role !== 'presentation'))) {
+
         if (de.visibility.isVisibleToAT) {
           if (accDesc.name.length) {
            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [accDesc.source]);                    
@@ -293,26 +285,29 @@ export const imageRules = [
  */
 
 { rule_id             : 'IMAGE_8',
-  last_updated        : '2023-10-17',
+  last_updated        : '2024-04-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
   first_step          : false,
-  wcag_primary_id     : '1.4.5',
-  wcag_related_ids    : [],
-  target_resources    : ['img', 'area', '[role="img"]'],
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.1.1'],
+  target_resources    : ['svg'],
   validate            : function (dom_cache, rule_result) {
-    dom_cache.imageInfo.allImageElements.forEach(ie => {
-      const de = ie.domElement;
-      if (de.accName.name.length) {
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.accName.source]);
-          }
+
+    dom_cache.imageInfo.allSVGDomElements.forEach( de => {
+      if (de.visibility.isVisibleToAT) {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+        }
         else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
         }
       }
-    });
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+  });
   } // end validation function
 },
 ];

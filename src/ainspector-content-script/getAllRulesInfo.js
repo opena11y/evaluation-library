@@ -101,13 +101,13 @@ function getScopeResults (evalResult) {
 *   (1) Run evlauation library;
 *   (2) return result object for the all rules view in the sidebar;
 */
-export default function getAllRulesInfo (ruleset, level, scopeFilter) {
+export default function getAllRulesInfo (ruleset, level, scopeFilter, ariaVersion) {
 
   debug.flag && debug.log(`[    ruleset]: ${ruleset}`);
   debug.flag && debug.log(`[      level]: ${level}`);
   debug.flag && debug.log(`[scopeFilter]: ${scopeFilter}`);
 
-  const evaluationResult  = evaluate(ruleset, level, scopeFilter);
+  const evaluationResult  = evaluate(ruleset, level, scopeFilter, ariaVersion);
   const ruleGroupResult   = evaluationResult.getRuleResultsAll();
   const ruleSummaryResult = ruleGroupResult.getRuleResultsSummary();
   const ruleResults       = ruleGroupResult.getRuleResultsArray();

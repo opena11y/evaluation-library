@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Image Rule 8: SVG elements</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    
+    <div role="main">
+      
+      <h1>Image Rule 8: SVG Elements</h1>
+
+      <div>
+        <svg id="svg1" class="IMAGE_8_FAIL" version="1.1"  viewBox="0 0 240 30" xmlns="http://www.w3.org/2000/svg">
+          <text x="5" y="20">SVG element with no role.</text>
+        </svg>
+      </div>
+
+      <div>
+        <svg id="svg2" role="img" class="IMAGE_8_MC" version="1.1"  viewBox="0 0 240 30" xmlns="http://www.w3.org/2000/svg">
+          <title>Text description of SVG image</title>
+          <text x="5" y="20">SVG element with IMG role.</text>
+        </svg>
+      </div>
+
+      <div>
+        <svg id="svg3" role="none" class="IMAGE_8_MC" version="1.1"  viewBox="0 0 240 30" xmlns="http://www.w3.org/2000/svg">
+          <text x="5" y="20">SVG element with NONE role.</text>
+        </svg>
+      </div>
+
+      <div hidden>
+        <svg id="svg4" role="none" class="IMAGE_8_HIDDEN" version="1.1"  viewBox="0 0 240 30" xmlns="http://www.w3.org/2000/svg">
+          <text x="5" y="20">SVG element with NONE role.</text>
+        </svg>
+      </div>
+
+      <div>
+        <svg id="svg5" style="display: none" role="none" class="IMAGE_8_HIDDEN" version="1.1"  viewBox="0 0 240 30" xmlns="http://www.w3.org/2000/svg">
+          <text x="5" y="20">SVG element with NONE role.</text>
+        </svg>
+      </div>
+      
+    </div>
+  </body>
+</html>  

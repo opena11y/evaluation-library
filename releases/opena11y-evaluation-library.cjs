@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$11 = new DebugLogging('constants', false);
 
-const VERSION = '2.0.4';
+const VERSION = '2.0.5';
 
 /**
  * @constant RULESET
@@ -984,6 +984,7 @@ class ControlElement {
 
     this.parentControlElement = parentControlElement;
     this.domElement = domElement;
+    domElement.controlElement = this;
     this.isGroup = domElement.role === 'group';
     this.isInputTypeText   = this.isInputType(node, 'date') ||
                              this.isInputType(node, 'number') ||
@@ -11890,11 +11891,12 @@ class RefInfo {
  * @param  {String}   defaultRole  - Default role of element if no role is defined
  * @param  {Object}   node         - dom element node
  * @param  {String}   ariaVersion  - Version of ARIA to use for roles, props and state info
+ *                                   (Values: "ARIA12" | "ARIA13")
  */
 
 class AriaInfo {
-  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='1.2') {
-    if (ariaVersion === `1.3`) {
+  constructor (doc, hasRole, role, defaultRole, node, ariaVersion='ARIA12') {
+    if (ariaVersion === `ARIA13`) {
       propertyDataTypes = propertyDataTypes$1;
       designPatterns    = designPatterns$1;
     }
@@ -11934,7 +11936,8 @@ class AriaInfo {
     }
 
     this.isValidRole  = typeof designPattern === 'object';
-    this.isDPUBRole = role.indexOf('doc-') >= 0;
+    this.isDPUBRole = role.includes('doc-');
+    this.isGraphicRole = role.includes('graphics-');
 
     this.isAbstractRole = false;
 
@@ -14158,7 +14161,7 @@ const ariaInHTMLInfo = {
       anyRoleAllowed: true,
       id: 'sup'
     },
-    SVG: {
+    svg: {
       tagName: 'SVG',
       defaultRole: 'graphics-document',
       noRoleAllowed: false,
@@ -15649,6 +15652,7 @@ const noAccName = {
   includesAlt: false,
   includesAriaLabel: false,
   nameIsNotVisible: false,
+  cellHeaders: false
 };
 
 // These roles are based on the ARAI 1.2 specification
@@ -16052,7 +16056,7 @@ const requireAccessibleNames = ['region', 'form'];
  */
 
 class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='1.2') {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12') {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
@@ -16087,6 +16091,10 @@ class DOMElement {
     this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
+    this.tabIndex             = checkTabIndex(elementNode);
+    this.isTabStop            = checkIsTabStop(elementNode);
+    this.isInteractiveElement = checkForInteractiveElement(elementNode);
+
     this.accName        = getAccessibleName(accNameDoc, elementNode);
     this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(accNameDoc, elementNode);
@@ -16103,9 +16111,6 @@ class DOMElement {
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
-    this.tabIndex             = checkTabIndex(elementNode);
-    this.isTabStop            = checkIsTabStop(elementNode);
-    this.isInteractiveElement = checkForInteractiveElement(elementNode);
 
     this.isLink      = this.role === 'link';
     this.isLandmark  = this.checkIsLandamrk();
@@ -16155,13 +16160,19 @@ class DOMElement {
     // A name that can be used in rule results to identify the element
     this.elemName = this.tagName;
     this.elemName += elementNode.type ? `[type=${elementNode.type}]` : '';
-    this.elemName += this.id ? `#${this.id}` : '';
     this.elemName += this.hasRole ? `[role=${this.role}]` : '';
+    this.elemName += this.id ? `#${this.id}` : '';
 
     // Potential references to other cache objects
 
     this.tableCell = null;
     this.tableElement = null;
+    this.ControlElement = null;
+
+    if (parentInfo.tableCell &&
+        this.isInteractiveElement) {
+      parentInfo.tableCell.interactiveDomElements.push(this);
+    }
 
   }
 
@@ -16797,6 +16808,7 @@ class ImageInfo {
 
   isImage (domElement) {
     return (domElement.role === 'img') ||
+           (domElement.role === 'image') || // Support in ARIA 1.3
            (domElement.tagName === 'img');
   }
 
@@ -17527,6 +17539,7 @@ class StructureInfo {
 /* common.js */
 
 const common = {
+  aria13: ' (ARIA 1.3)',
   level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
   baseResult: ['undefined','P','H','MC','W','V'],
   baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
@@ -19677,6 +19690,8 @@ const controlRules$1 = {
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
+        MANUAL_CHECK_S: 'Verify the visual rendering of the SVG content of the element with @role=button@ adapts to operating system and browser color and size settings.',
+        MANUAL_CHECK_P: 'Verify the visual rendering of the SVG content of the %N_MC elements with @role=button@ adapt to operating system and browser color and size settings.',
         NOT_APPLICABLE: 'No @input@, @select@, @textarea@, @progress@, @meter@ or @output@ elements on the page.',
         HIDDEN_S: 'One form control element that is hidden was not evaluated.',
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
@@ -19684,6 +19699,7 @@ const controlRules$1 = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:   '@%1@ control has the label: "%2"',
         ELEMENT_FAIL_1:   'Add label to @%1@ control.',
+        ELEMENT_MC_1:     'Verify the table cell headers provide a descriptive label for the @%1@ control..',
         ELEMENT_HIDDEN_1: '@%1@ control was not tested because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -19691,10 +19707,11 @@ const controlRules$1 = {
       ],
       TECHNIQUES: [
         'The preferred technique for labeling form controls is by reference: First, include an @id@ attribute on the form control to be labeled; then use the @label@ element with a @for@ attribute value that references the @id@ value of the control.',
-        '^NOTE:^ The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
+        'NOTE: An alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.',
         'In special cases, the @aria-labelledby@ attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.',
         'In special cases, the @aria-label@ attribute can be used on the form control element to provide an explicit text description of its purpose.',
-        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.'
+        'In special cases, the @title@ attribute on the form control element can be used to provide an explicit text description of its purpose.',
+        'EXCEPTION: When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
       ],
       MANUAL_CHECKS: [
         'Good labels are both concise and descriptive of the control elements purpose.',
@@ -20175,6 +20192,7 @@ const controlRules$1 = {
         ELEMENT_FAIL_2: 'Change the accessible name of the @%1@ element, consider using @fieldset@ and @legend@ elements to provide grouping label or an ARIA technique to make the accessible name unique on the page.',
         ELEMENT_MC_1:   'Verify the accessible name of the @%1[role=%2]@ element accurately describes the action of the button, since it shares the same name as other buttons.',
         ELEMENT_MC_2:   'Verify the accessible name of the @%1@ element accurately describes the action of the button, since it shares the same name as other buttons',
+        ELEMENT_MC_3:   'Verify the cell headers of the cell containing the @%1@ element accurately describes the purpose of the control',
         ELEMENT_HIDDEN_1: '@%1[role=%2]@ control was not evaluated because it is hidden from assistive technologies.',
         ELEMENT_HIDDEN_2: '@%1@ control was not evaluated because it is hidden from assistive technologies.'
       },
@@ -20194,7 +20212,8 @@ const controlRules$1 = {
         'For @input[type=image]@ the default label is defined using the @alt@ attribute.',
         'For @input[type=button]@ the default label is defined using the @value@ attribute.',
         'For the @button@ element, the child text content can be used to define its purpose.',
-        'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.'
+        'For some ARIA widgets (e.g. @menuitem@, @tab@, @treeitem@), the child text content can be used to define its purpose.',
+        'EXCEPTION: When form controls are in a @table@, @grid@ or @treegrid@ the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.'
       ],
       MANUAL_CHECKS: [
       ],
@@ -21340,10 +21359,8 @@ const imageRules$1 = {
       NOT_APPLICABLE: 'No @img@ elements or elements with @[role="img"]@ on this page.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1: 'Verify that the @img@ element is used only for decorative, spacing or styling purposes.',
-      ELEMENT_MC_2: 'Verify that the @%1[role=img]@ element is used only for decorative, spacing or styling purposes.',
-      ELEMENT_HIDDEN_1: '@img@ element was not evaluated because it is hidden from assistive technologies.',
-      ELEMENT_HIDDEN_2: '@%1[role=img]@ element was not evaluated because it is hidden from assistive technologies.'
+      ELEMENT_MC_1: 'Verify that the @%1@ element is used only for decorative, spacing or styling purposes.',
+      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.',
     },
     PURPOSES: [
       'If an image is used purely for stylistic or decorative purposes, users of screen readers do not need to know that the image exists and no alternative is needed.',
@@ -21522,53 +21539,48 @@ const imageRules$1 = {
   },
   IMAGE_8: {
     ID:         'Image 8',
-    DEFINITION: 'When an image is used to represent stylized text, replace the image with text content and use CSS to style text.',
-    SUMMARY:    'Images of text',
-    TARGET_RESOURCES_DESC: '@img@ and [role="img"]',
+    DEFINITION: '@svg@ element must define an appropriate ARIA role that describes it\'s purpose.',
+    SUMMARY:    'Add role to @svg@ element',
+    TARGET_RESOURCES_DESC: '@svg@',
     RULE_RESULT_MESSAGES: {
-      MANUAL_CHECK_S:   'If the image is used to stylize text, replace the image with text content styled with CSS.',
-      MANUAL_CHECK_P:   'If any of the %N_MC images are used to stylize text, replace the image with text content styled with CSS.',
-      HIDDEN_S: 'One image element with an accessible name was not evaluated.',
-      HIDDEN_P: '%N_H image elements with accessible names that are hidden were not evaluated.',
-      NOT_APPLICABLE: 'No @img@, @area@ or @[role="img"]@ elements found on this page.'
+      MANUAL_CHECK_S:   'Verify the ARIA role for the @svg@ element accurately identifies the purpose.',
+      MANUAL_CHECK_P:   'Verify the ARIA role for each of the %N_F @svg@ elements with a defined role accurately identifies their purpose.',
+      FAIL_S:   'An @svg@ element does not have a defined role attribute.',
+      FAIL_P:   'An %N_MC @svg@ elements do not have a defined role attribute.',
+      HIDDEN_S: 'The @svg@ element was not evaluated because it is hidden from assistive technologies.',
+      HIDDEN_P: 'The %N_H @svg@ elements were not evaluated because they are hidden from assistive technologies.',
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1: 'If the image is used to represent stylized text, replace the image with text and use CSS to style text.',
-      ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'
+      ELEMENT_FAIL_1: 'Add an appropriate ARIA role to the @svg@ element, most often @img@ for descriptive images or @none@ if the image is decorative images, other roles should be used if more appropriate for the svg content.',
+      ELEMENT_MC_1:   'Verify @%1@ role the @svg@ element has the @%1@ role.',
+      ELEMENT_HIDDEN_1: '@svg@ element was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [
-      'To enable people with visual impairments who require a particular visual presentation of text to be able to adjust the text presentation as needed.',
-      'Adjustments include the use of a particular font size, foreground and background color, font family, line spacing or alignment.'
+      'An @svg@ element has the default role of @graphics-document@. The @graphics-*@ roles are not well implemented in browsers or assistive technologies at this time, so the role needs to be overrided by the author with a role that appropriately identifies the purpose of the @svg@ element.'
     ],
     TECHNIQUES: [
-      'Replace the image of text with text content that is styled using Cascading Style Sheets (CSS).'
+      'Add @role="img"@ attribute if the @svg@ element is a descriptive image (most likely).  When the @img@ role is used the svg @title@ element can be used to provide a text equivalent.',
+      'Add @role="none"@ attribute if the @svg@ element is a decorative image.',
+      'Add an appropriate ARIA role if the @svg@ is interactive or can be represented by some other document role.  For example a @table@ roles if the svg content represents tabular data.'
     ],
     MANUAL_CHECKS: [
     ],
     INFORMATIONAL_LINKS: [
       {type:  REFERENCES.SPECIFICATION,
-        title: 'W3C Understanding Images of Text',
-        url:   'https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html'
+        title: 'Scalable Vector Graphics (SVG) 2',
+        url:   'https://www.w3.org/TR/SVG/'
       },
       {type:  REFERENCES.SPECIFICATION,
-        title: 'W3C CSS Snapshot',
-        url:   'https://www.w3.org/TR/css/'
+        title: 'SVG Accessibility API Mappings',
+        url:   'https://www.w3.org/TR/svg-aam-1.0/'
       },
       {type:  REFERENCES.REFERENCE,
-        title: 'MDN Cascading Style Sheets',
-        url:   'https://developer.mozilla.org/en-US/docs/Web/CSS'
+        title: 'deque: Creating Accessible SVGs',
+        url:   'https://www.deque.com/blog/creating-accessible-svgs/'
       },
       {type:  REFERENCES.REFERENCE,
-        title: '22: Using CSS to control visual presentation of text',
-        url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C22'
-      },
-      {type:  REFERENCES.REFERENCE,
-        title: 'C30: Using CSS to replace text with images of text and providing user interface controls to switch',
-        url:   'https://www.w3.org/WAI/WCAG22/Techniques/css/C30'
-      },
-      {type:  REFERENCES.REFERENCE,
-        title: 'G140: Separating information and structure from presentation to enable different presentations',
-        url:   'https://www.w3.org/WAI/WCAG22/Techniques/general/G140'
+        title: 'A11Y-101: Accessible SVGs',
+        url:   'https://a11y-101.com/development/svg'
       }
     ]
   }
@@ -26540,6 +26552,7 @@ const widgetRules$1 = {
           ELEMENT_PASS_5:   '@%1@ is a valid ARIA role.',
           ELEMENT_FAIL_1:   '@%1@ is not a defined ARIA role, change the @role@ attribute value to an appropriate widget, landmark, section or live region role.',
           ELEMENT_FAIL_2:   '@%1@ is an abstract ARIA role, change the role attribute to a widget, landmark or live region role.',
+          ELEMENT_FAIL_3:   'The @%1@ role is a Graphic role associated with @svg@ elements, since these roles are not well supported use valid ARIA roles to identify the purpose of the graphic in the document.  Common ARIA roles used with @svg@ include @none@ and @img@.',
           ELEMENT_HIDDEN_1: '@role@ attribute value was not validated because the %1 element is hidden from assistive technologies and/or not visible on screen.'
         },
         PURPOSES: [
@@ -26564,6 +26577,10 @@ const widgetRules$1 = {
           { type: REFERENCES.SPECIFICATION,
             title: 'W3C Digital Publishing WAI-ARIA Module 1.1',
             url:   'https://www.w3.org/TR/dpub-aria-1.1/'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'W3C WAI-ARIA Graphics Module (Working Draft)',
+            url:   'https://www.w3.org/TR/graphics-aria-1.0/'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -28047,11 +28064,13 @@ class TableElement {
       this.spannedDataCells += 1;
     }
 
-    return column;
+    return cell;
   }
 
-  updateColumnCount (col) {
-    this.colCount = Math.max(this.colCount, col);
+  updateColumnCount (endColumn) {
+    if (!isNaN(endColumn) && endColumn > 0) {
+      this.colCount = Math.max(this.colCount, endColumn-1);
+    }
   }
 
   getRow(rowNumber, domElement=null) {
@@ -28131,6 +28150,33 @@ class TableElement {
             debug$K.headerCalc && debug$K.log(`${cell}`);
           }
         }
+        cell.interactiveDomElements.forEach( de => {
+          const isButtonOrLink = (de.role === 'button') || (de.role === 'link');
+
+          if (cell.headers.length) {
+            const accNameHeaders = {
+              name: cell.headers.join (' | ') + ` (row ${cell.startRow})`,
+              source: 'implied by cell headers',
+              includesAlt: false,
+              includesAriaLabel: false,
+              nameIsNotVisible: false,
+              cellHeaders: true
+            };
+
+            if (isButtonOrLink) {
+              if (!de.accDescription.name) {
+                de.accDescription = accNameHeaders;
+              }
+            }
+            else {
+              if (!de.accName.name) {
+                const ce = de.controlElement;
+                de.accName = accNameHeaders;
+                ce.nameForComparision = ce.getNameForComparison(de, ce.parentControlElement);
+              }
+            }
+          }
+        });
       });
     });
   }
@@ -28373,6 +28419,8 @@ class TableCell {
 
     this.hasContent = (node.textContent.trim().length > 0) || (node.firstElementChild !== null);
 
+    this.interactiveDomElements = [];
+
   }
 
   get columnSpan () {
@@ -28421,6 +28469,7 @@ class TableInfo {
 
     let te = tableElement;
     let rg = rowGroup;
+    let tc = null;
 
     switch (domElement.tagName) {
 
@@ -28457,7 +28506,8 @@ class TableInfo {
       case 'th':
       case 'td':
         if (te) {
-          te.updateColumnCount(te.addCell(domElement));
+          tc = te.addCell(domElement);
+          te.updateColumnCount(tc.endColumn);
         }
         break;
 
@@ -28490,7 +28540,7 @@ class TableInfo {
           case 'cell':
           case 'gridcell':
             if (te) {
-              te.addCell(domElement);
+              tc = te.addCell(domElement);
             }
             break;
 
@@ -28498,7 +28548,7 @@ class TableInfo {
       break;
     }
 
-    return [te, rg];
+    return [te, rg, tc];
   }
 
   computeHeaders (domCache) {
@@ -28638,6 +28688,7 @@ class ParentInfo {
     this.mediaElement    = null;
     this.tableElement    = null;
     this.tableRowGroup   = null;
+    this.tableCell       = null;
 
     this.inLink      = false;
     this.inParagraph = false;
@@ -28680,7 +28731,7 @@ class ParentInfo {
  */
 
 class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='1.2') {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12') {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -28932,7 +28983,9 @@ class DOMCache {
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
     newParentInfo.landmarkElement = this.structureInfo.update(landmarkElement, domElement, documentIndex);
-    [newParentInfo.tableElement, newParentInfo.tableRowGroup] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
+    [newParentInfo.tableElement,
+     newParentInfo.tableRowGroup,
+     newParentInfo.tableCell] = this.tableInfo.update(tableElement, tableRowGroup, domElement);
 
     newParentInfo.inParagraph = domElement.tagName === 'p' ? true : parentInfo.inParagraph;
     newParentInfo.inDialog    = domElement.isInDialog;
@@ -29423,40 +29476,37 @@ class BaseResult {
   /**
    * @getter isElementResult
    *
-   * @desc Returns true if the result type is element,
-   *       otherwise false
+   * @desc Returns false by default, override in ElementResult def
    *    
    * @return {Boolean} see @desc
    */
 
   get isElementResult () {
-    return this.result_type === RESULT_TYPE.ELEMENT;
+    return false;
   }
 
   /**
    * @getter isPageResult
    *
-   * @desc Returns true if the result type is page,
-   *       otherwise false
+   * @desc Returns false by default, override in PageResult def
    *
    * @return {Boolean} see @desc
    */
 
   get isPageResult () {
-    return this.result_type === RESULT_TYPE.PAGE;
+    return false;
   }
 
   /**
    * @getter isWebsiteResult
    *
-   * @desc Returns true if the result type is website,
-   *       otherwise false
+   * @desc Returns false by default, override in WebsiteResult def
    *
    * @return {Boolean} see @desc
    */
 
   get isWebsiteResult () {
-    return this.result_type === RESULT_TYPE.WEBSITE;
+    return false;
   }
 
   /**
@@ -29607,7 +29657,7 @@ debug$E.flag = false;
  */
 
 class ElementResult extends BaseResult {
-  constructor (rule_result, result_value, domElement, message_id, message_arguments) {
+  constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
     super(rule_result,
           result_value,
           message_id,
@@ -29616,11 +29666,37 @@ class ElementResult extends BaseResult {
 
     this.domElement = domElement;
     this.result_type    = RESULT_TYPE.ELEMENT;
+    this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
 
     if (debug$E.flag) {
       debug$E.log(`${this.result_value}: ${this.result_message}`);
     }
   }
+
+  /**
+   * @getter isElementResult
+   *
+   * @desc Returns true, overrides default value for BaseResult
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isElementResult () {
+    return true;
+  }
+
+  /**
+   * @method getResultId
+   *
+   * @desc A unique string ID for this element result that includes ordinal position information
+   *
+   * @return {String} see description
+   */
+
+  getResultId () {
+    return this.resultId;
+  }
+
   /**
    * @method getResultIdentifier
    *
@@ -29721,7 +29797,7 @@ class ElementResult extends BaseResult {
         role += ' (in grid)';
       }
       if (this.domElement.ariaInfo.inTreegrid) {
-        role += ' (in treerid)';
+        role += ' (in treegrid)';
       }
     }
     return role;
@@ -30087,15 +30163,41 @@ const debug$C = new DebugLogging('PageResult', false);
  */
 
 class PageResult extends BaseResult {
-  constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+  constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
     super(rule_result, result_value, message_id, message_arguments, 'page');
 
     this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.PAGE;
 
+    this.resultId = 'pr-' + resultIndex;
+
     if (debug$C.flag) {
       debug$C.log(`${this.result_value}: ${this.result_message}`);
     }
+  }
+
+  /**
+   * @getter isPageResult
+   *
+   * @desc Returns true, overrides default value for BaseResult
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isPageResult () {
+    return true;
+  }
+
+  /**
+   * @method getResultId
+   *
+   * @desc A unique string ID for this page result
+   *
+   * @return {String} see description
+   */
+
+  getResultId () {
+    return this.resultId;
   }
 
 }
@@ -30133,15 +30235,41 @@ const debug$B = new DebugLogging('PageResult', false);
  */
 
 class WebsiteResult extends BaseResult {
-  constructor (rule_result, result_value, domCache, message_id, message_arguments) {
+  constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
     super(rule_result, result_value, message_id, message_arguments, 'website');
 
     this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.WEBSITE;
 
+    this.resultId = 'wr-' + resultIndex;
+
     if (debug$B.flag) {
       debug$B.log(`${this.result_value}: ${this.result_message}`);
     }
+  }
+
+  /**
+   * @getter isWebsiteResult
+   *
+   * @desc Returns true, overrides default value for BaseResult
+   *
+   * @return {Boolean} see @desc
+   */
+
+  get isWebsiteResult () {
+    return true;
+  }
+
+  /**
+   * @method getResultId
+   *
+   * @desc A unique string ID for this website result
+   *
+   * @return {String} see description
+   */
+
+  getResultId () {
+    return this.resultId;
   }
 
 }
@@ -30195,6 +30323,10 @@ class RuleResult {
     this.results_hidden         = [];
 
     this.results_summary = new ResultsSummary();
+
+    this.elemResultIndex = 0;
+    this.pageResultIndex = 0;
+    this.websiteResultIndex = 0;
   }
 
   /**
@@ -30526,8 +30658,8 @@ class RuleResult {
   addElementResult (test_result, dom_item, message_id, message_arguments) {
     const dom_element = dom_item.isDomText ? dom_item.parentDomElement : dom_item;
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments);
-
+    const element_result = new ElementResult(this, result_value, dom_element, message_id, message_arguments, this.elemResultIndex);
+    this.elemResultIndex += 1;
     this.updateResults(result_value, element_result, dom_element);
   }
 
@@ -30544,7 +30676,8 @@ class RuleResult {
 
   addPageResult (test_result, dom_cache, message_id, message_arguments) {
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments);
+    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments, this.pageResultIndex);
+    this.pageResultIndex += 1;
 
     this.updateResults(result_value, page_result, dom_cache);
   }
@@ -30562,7 +30695,8 @@ class RuleResult {
 
   addWebsiteResult (test_result, dom_cache, message_id, message_arguments) {
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments);
+    const website_result = new WebsiteResult(this, result_value, dom_cache, message_id, message_arguments, this.websiteResultIndex);
+    this.websiteResultIndex += 1;
 
     this.updateResults(result_value, website_result, dom_cache);
   }
@@ -31714,7 +31848,12 @@ const controlRules = [
         if (de.isLabelable) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
-              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              if (de.accName.cellHeaders) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.role, de.accName.name]);
+              }
             }
             else {
               rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
@@ -32136,25 +32275,30 @@ const controlRules = [
             }
           });
           if (count === 0){
-            rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+            if (de1.accName.cellHeaders) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_3', [de1.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, de1, 'ELEMENT_PASS_1', []);
+            }
           } 
           else {
-            // Since their ar often duplicate button on pages, when two or more buttons share the same
+            // Since their are often duplicate button on pages, when two or more buttons share the same
             // name it should be a manual check
             if (de1.role === 'button') {
               if (de1.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_1', [de1.tagName, de1.role]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_1', [de1.elemName, de1.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_2', [de1.tagName]);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de1, 'ELEMENT_MC_2', [de1.elemName]);
               }
             }
             else {
               if (de1.hasRole) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.tagName, de1.role]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_1', [de1.elemName, de1.role]);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.tagName]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de1, 'ELEMENT_FAIL_2', [de1.elemName]);
               }
             }
           }
@@ -33284,20 +33428,10 @@ const imageRules = [
       const de = ie.domElement;
       if (de.visibility.isVisibleToAT) {
         if (de.accName.name.length === 0) {
-          if (de.tagName === 'img') {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);          
-          }
-          else {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);          
-          }
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
       } else {
-        if (de.tagName === 'img') {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
-        }
-        else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
-        }
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
       }
     });
   } // end validation function
@@ -33322,7 +33456,9 @@ const imageRules = [
       const de   = ie.domElement;
       const accName = de.accName;
       const accDesc = de.accDescription;
-      if (accName.name.length > 0) {
+      if ((accName.name.length > 0) &&
+          ((de.role !== 'none') && (de.role !== 'presentation'))) {
+
         if (de.visibility.isVisibleToAT) {
           if (accDesc.name.length) {
            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [accDesc.source]);                    
@@ -33388,26 +33524,29 @@ const imageRules = [
  */
 
 { rule_id             : 'IMAGE_8',
-  last_updated        : '2023-10-17',
+  last_updated        : '2024-04-20',
   rule_scope          : RULE_SCOPE.ELEMENT,
   rule_category       : RULE_CATEGORIES.IMAGES,
   rule_required       : true,
   first_step          : false,
-  wcag_primary_id     : '1.4.5',
-  wcag_related_ids    : [],
-  target_resources    : ['img', 'area', '[role="img"]'],
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.1.1'],
+  target_resources    : ['svg'],
   validate            : function (dom_cache, rule_result) {
-    dom_cache.imageInfo.allImageElements.forEach(ie => {
-      const de = ie.domElement;
-      if (de.accName.name.length) {
-        if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.accName.source]);
-          }
+
+    dom_cache.imageInfo.allSVGDomElements.forEach( de => {
+      if (de.visibility.isVisibleToAT) {
+        if (de.hasRole) {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
+        }
         else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
         }
       }
-    });
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+  });
   } // end validation function
 },
 ];
@@ -37229,14 +37368,19 @@ const widgetRules = [
   validate            : function (dom_cache, rule_result) {
 
     dom_cache.allDomElements.forEach(de => {
-      if (de.hasRole) {
+      if (de.hasRole || de.role.includes('-')) {
         if (de.visibility.isVisibleToAT) {
           if (!de.ariaInfo.isValidRole) {
             if (de.ariaInfo.isDPUBRole) {
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.role]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+              if (de.ariaInfo.isGraphicRole) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.role]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.role]);
+              }
             }
           }
           else {
@@ -38583,14 +38727,12 @@ function isWCAG(ruleset, level, rule) {
  * @param  {String} title        - A title of the evaluation
  *                                 (typically the title of the document)
  * @param  {String} url          - The URL to the document
- * @param  {String}  ariaVersion - Version of ARIA to use for roles,
- *                                 props and state info
  *
  * @return see @desc
  */
 
 class EvaluationResult {
-  constructor (startingDoc, title, url, ariaVersion='1.2') {
+  constructor (startingDoc, title, url) {
 
     this.startingDoc = startingDoc;
     this.title       = title;
@@ -38598,7 +38740,7 @@ class EvaluationResult {
     this.ruleset     = '';
     this.level       = '';
     this.scopeFilter = '';
-    this.ariaVersion = ariaVersion;
+    this.ariaVersion = '1.2';
 
     this.date           = getFormattedDate();
     this.version        = VERSION;
@@ -38618,18 +38760,22 @@ class EvaluationResult {
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 (values: 'ARIA12' | ARIA13")
    */
 
-  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
+  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='ARIA12') {
 
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][      level]: ${level}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][scopeFilter]: ${scopeFilter}`);
+    debug$1.flag && debug$1.log(`[evaluateWCAG][ariaVersion]: ${ariaVersion}`);
 
     this.ruleset     = ruleset;
     this.level       = level;
     this.scopeFilter = scopeFilter;
+    this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion);
     this.allDomElements = domCache.allDomElements;
@@ -38662,13 +38808,14 @@ class EvaluationResult {
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
-  runRuleListRules (ruleList) {
+  runRuleListRules (ruleList, ariaVersion='ARIA12') {
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
+    this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -38692,12 +38839,13 @@ class EvaluationResult {
    * @desc Updates rule results array with results first step rules
    */
 
-  runFirstStepRules () {
+  runFirstStepRules (ariaVersion='ARIA12') {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
+    this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -38958,12 +39106,14 @@ class EvaluationLibrary {
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - URL of document being analyzed
    * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
    */
 
-  evaluateRuleList (startingDoc, title='', url='',  ruleList = []) {
+  evaluateRuleList (startingDoc, title='', url='',  ruleList = [], ariaVersion='ARIA12') {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runRuleListRules(ruleList);
+    evaluationResult.runRuleListRules(ruleList, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -38993,12 +39143,14 @@ class EvaluationLibrary {
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
-   */
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+  */
 
-  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL') {
+  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runWCAGRules(ruleset, level, scopeFilter);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -39025,12 +39177,14 @@ class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
-   */
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+  */
 
-  evaluateFirstStepRules (startingDoc, title='', url='') {
+  evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runFirstStepRules();
+    evaluationResult.runFirstStepRules(ariaVersion);
 
     // Debug features
     if (debug.flag) {

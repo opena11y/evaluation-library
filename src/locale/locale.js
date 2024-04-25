@@ -243,13 +243,22 @@ function getRulesetInfo (rulesetId) {
  * @desc Retuns a localize string describing the options
  *       used in the evaluation
  *
- * @param {String} rulesetId    - Used to identify the ruleset
- * @param {String} level        - Used to identify the WCAG level
+ * @param {String} rulesetId      - Used to identify the ruleset
+ * @param {String} level          - Used to identify the WCAG level
+ * @param {String} ariaVersionId  - Used to identify the ARIA version
  *
  * @return {String}  see @desc
  */
 
-function getRulesetLabel(rulesetId, level) {
+function getRulesetLabel(rulesetId, level, ariaVersionId) {
+
+    function addAria () {
+      switch (ariaVersionId) {
+        case 'ARIA13':
+          return messages[locale].common.aria13;
+      }
+      return '';
+    }
 
     function addLevel () {
       switch (level) {
@@ -270,19 +279,19 @@ function getRulesetLabel(rulesetId, level) {
     switch (rulesetId) {
 
       case 'FIRSTSTEP':
-        label = messages[locale].common.rulesetFirstStep;
+        label = messages[locale].common.rulesetFirstStep + addAria();
         break;
 
       case 'WCAG22':
-        label = messages[locale].common.rulesetWCAG22 + addLevel();
+        label = messages[locale].common.rulesetWCAG22 + addLevel() + addAria();
         break;
 
       case 'WCAG21':
-        label = messages[locale].common.rulesetWCAG21 + addLevel();
+        label = messages[locale].common.rulesetWCAG21 + addLevel() + addAria();
         break;
 
       default:
-        label = messages[locale].common.rulesetWCAG20 + addLevel();
+        label = messages[locale].common.rulesetWCAG20 + addLevel() + addAria();
         break;
     }
 

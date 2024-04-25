@@ -89,14 +89,12 @@ function isWCAG(ruleset, level, rule) {
  * @param  {String} title        - A title of the evaluation
  *                                 (typically the title of the document)
  * @param  {String} url          - The URL to the document
- * @param  {String}  ariaVersion - Version of ARIA to use for roles,
- *                                 props and state info
  *
  * @return see @desc
  */
 
 export default class EvaluationResult {
-  constructor (startingDoc, title, url, ariaVersion='1.2') {
+  constructor (startingDoc, title, url) {
 
     this.startingDoc = startingDoc
     this.title       = title;
@@ -104,7 +102,7 @@ export default class EvaluationResult {
     this.ruleset     = '';
     this.level       = '';
     this.scopeFilter = '';
-    this.ariaVersion = ariaVersion;
+    this.ariaVersion = '1.2';
 
     this.date           = getFormattedDate();
     this.version        = VERSION;
@@ -124,18 +122,22 @@ export default class EvaluationResult {
    * @param  {String}  ruleset     - Set of rules to evaluate (values: A" | "AA" | "AAA")
    * @param  {String}  level       - WCAG Level (values: 'A', 'AA', 'AAA')
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 (values: 'ARIA12' | ARIA13")
    */
 
-  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL') {
+  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='ARIA12') {
 
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
     debug.flag && debug.log(`[evaluateWCAG][      level]: ${level}`);
     debug.flag && debug.log(`[evaluateWCAG][scopeFilter]: ${scopeFilter}`);
+    debug.flag && debug.log(`[evaluateWCAG][ariaVersion]: ${ariaVersion}`);
 
     this.ruleset     = ruleset;
     this.level       = level;
     this.scopeFilter = scopeFilter;
+    this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion);
     this.allDomElements = domCache.allDomElements;
@@ -168,13 +170,14 @@ export default class EvaluationResult {
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
-  runRuleListRules (ruleList) {
+  runRuleListRules (ruleList, ariaVersion='ARIA12') {
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
+    this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -198,12 +201,13 @@ export default class EvaluationResult {
    * @desc Updates rule results array with results first step rules
    */
 
-  runFirstStepRules () {
+  runFirstStepRules (ariaVersion='ARIA12') {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
+    this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 

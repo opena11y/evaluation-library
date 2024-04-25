@@ -90,6 +90,7 @@ function getElementResultInfo(ruleResult) {
 
 
     const item = {
+      'resultId'         : elementResult.getResultId(),
       'index'            : (index + 1).toString(),
       'tagName'          : elementResult.getTagName(),
       'id'               : elementResult.getId(),
@@ -148,6 +149,7 @@ function getPageOrWebsiteResultInfo(ruleResult) {
     const result = allResults[i];
     if (!result.isElementResult) {
       return  {
+        'resultId'         : result.getResultId(),
         'otherName'        : result.getResultIdentifier(),
         'position'         : 0,
         'result'           : result.getResultValueNLS(),

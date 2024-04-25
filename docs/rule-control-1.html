@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Form controls must have labels | OpenA11y Evaluation Library 2.0.4</title>
+    <title>Form controls must have labels | OpenA11y Evaluation Library 2.0.5</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -31,7 +31,7 @@
             <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
             <div class="container px-4">
-                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0.4</a>
+                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.0.5</a>
 
                 <button class="navbar-toggler"
                         type="button"
@@ -259,13 +259,15 @@
       
       <li>The preferred technique for labeling form controls is by reference: First, include an <code>id</code> attribute on the form control to be labeled; then use the <code>label</code> element with a <code>for</code> attribute value that references the <code>id</code> value of the control.</li>
       
-      <li>^NOTE:^ The alternative technique of using the <code>label</code>^NOTE:^ The alternative technique of using the @label@<b>NOTE:</b> The alternative technique of using the @label@ element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.</li>
+      <li>NOTE: An alternative technique of using the <code>label</code> element to encapsulate a the form control element does not fully support some assistve technologies, like speech input for activating the control.</li>
       
       <li>In special cases, the <code>aria-labelledby</code> attribute can be used on the form control element to reference the id(s) of the elements on the page that describe its purpose.</li>
       
       <li>In special cases, the <code>aria-label</code> attribute can be used on the form control element to provide an explicit text description of its purpose.</li>
       
       <li>In special cases, the <code>title</code> attribute on the form control element can be used to provide an explicit text description of its purpose.</li>
+      
+      <li>EXCEPTION: When form controls are in a <code>table</code>, <code>grid</code> or <code>treegrid</code> the row number and the header cells is a common practice to identify the purpose of the form control.  While this technique is widely used it has not been identified as a definitive way to meet WCAG labeling requirements.</li>
       
     </ul>
   </td>
