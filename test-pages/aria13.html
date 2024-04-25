@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <title>ARIA 1.3 Test Page | Evaluation Library Test Pages</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+    <link href="test.css" rel="stylesheet" type="text/css"/>
+    <link href="color.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body style="background-color: #eee">
+    <header>
+      <div class="title">Evaluation Library Test Pages</div>
+      <div><a href="index.html">All test pages</a></div>
+    </header>
+
+
+    <main>
+      <h1>ARIA 1.3 Test Page</h1>
+
+      <div id="test1" role="image" aria-label="test text equivalent 1">Test of <code>role="image"</code></div>
+
+      <div id="test2" role="image" aria-label="test text equivalent 2" aria-description="test description for image 2">Test of <code>aria-description</code> attribute</div>
+
+      <div id="test3" role="mark" >Test of <code>role="mark"</code></div>
+
+      <div >
+        Test of <code>role="suggestion"</code>
+        <span id="test4" role="suggestion">
+          <span role="deletion">cat</span>
+          <span role="insertion">dog</span>
+        </span>
+      </div>
+
+      <div>
+        <label for="test5">
+          Input with <code>aria-braillelabel</code> attribute
+        </label>
+      </div>
+      <input id="test5" type="text" size="20" aria-braillelabel="Braille label">
+
+      <div>
+      <label for="test6">
+        Input with <code>aria-brailleroledescription</code> attribute
+      </label>
+    </div>
+      <input id="test6" type="text" size="20" aria-brailleroledescription="Braille role description">
+
+    </main>
+
+    <script type="module">
+      import EvaluationLibrary from '../releases/opena11y-evaluation-library.js';
+
+      console.log('Running opena11y evaluation library script');
+      window.addEventListener('load', () => {
+        let doc = document;
+        let evalLibrary = new EvaluationLibrary();
+        let evalResult  = evalLibrary.evaluateWCAG(doc, doc.title, doc.location.href);
+      });
+    </script>
+  </body>
+</html>

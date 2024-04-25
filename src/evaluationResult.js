@@ -126,7 +126,7 @@ export default class EvaluationResult {
    *                                 (values: 'ARIA12' | ARIA13")
    */
 
-  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='AR!A12') {
+  runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='ARIA12') {
 
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
@@ -170,14 +170,14 @@ export default class EvaluationResult {
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    */
 
-  runRuleListRules (ruleList, ariaVersion='AR!A12') {
+  runRuleListRules (ruleList, ariaVersion='ARIA12') {
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, ariaVersion);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -201,13 +201,13 @@ export default class EvaluationResult {
    * @desc Updates rule results array with results first step rules
    */
 
-  runFirstStepRules (ariaVersion='AR!A12') {
+  runFirstStepRules (ariaVersion='ARIA12') {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, ariaVersion);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 

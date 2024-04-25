@@ -96,7 +96,7 @@ export default class EvaluationLibrary {
    *                                 Values: 'ARIA12' | 'ARIA13'
   */
 
-  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion) {
+  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
     evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion);
@@ -130,7 +130,7 @@ export default class EvaluationLibrary {
    *                                 Values: 'ARIA12' | 'ARIA13'
   */
 
-  evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion) {
+  evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
     evaluationResult.runFirstStepRules(ariaVersion);

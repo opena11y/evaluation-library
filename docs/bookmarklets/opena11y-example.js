@@ -38765,7 +38765,7 @@
      *                                 (values: 'ARIA12' | ARIA13")
      */
 
-    runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='AR!A12') {
+    runWCAGRules (ruleset='WCAG21', level='AA', scopeFilter='ALL', ariaVersion='ARIA12') {
 
       const startTime = new Date();
       debug$2.flag && debug$2.log(`[evaluateWCAG][    ruleset]: ${ruleset}`);
@@ -38809,7 +38809,7 @@
      * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
      */
 
-    runRuleListRules (ruleList, ariaVersion='AR!A12') {
+    runRuleListRules (ruleList, ariaVersion='ARIA12') {
       const startTime = new Date();
       debug$2.flag && debug$2.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
@@ -38840,13 +38840,13 @@
      * @desc Updates rule results array with results first step rules
      */
 
-    runFirstStepRules (ariaVersion='AR!A12') {
+    runFirstStepRules (ariaVersion='ARIA12') {
       const startTime = new Date();
 
       this.ruleset     = 'FIRSTSTEP';
       this.ariaVersion = ariaVersion;
 
-      const domCache      = new DOMCache(this.startingDoc, ariaVersion);
+      const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
       this.allDomElements = domCache.allDomElements;
       this.allRuleResults = [];
 
@@ -39148,7 +39148,7 @@
      *                                 Values: 'ARIA12' | 'ARIA13'
     */
 
-    evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion) {
+    evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion="ARIA12") {
 
       const evaluationResult = new EvaluationResult(startingDoc, title, url);
       evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion);
@@ -39182,7 +39182,7 @@
      *                                 Values: 'ARIA12' | 'ARIA13'
     */
 
-    evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion) {
+    evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
 
       const evaluationResult = new EvaluationResult(startingDoc, title, url);
       evaluationResult.runFirstStepRules(ariaVersion);
