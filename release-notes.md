@@ -4,6 +4,9 @@ Version 2.0.5 Overview
 * Added manual check for form control labels when form is in a data table
 * Fixed bug in requiring an ARIA role for SVG elements
 * Fixed bug in data table column calculation
+* Added IMAGE_8 rule to require a ARIA role on an SVG element
+* Updated IMAGE_2 rule to be more efficient
+* Updated IMAGE_6 rule to ignore images with role=none and role=presentation
 
 Version 2.0.4 Overview
 =============================

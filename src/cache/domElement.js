@@ -159,8 +159,8 @@ export default class DOMElement {
     // A name that can be used in rule results to identify the element
     this.elemName = this.tagName;
     this.elemName += elementNode.type ? `[type=${elementNode.type}]` : '';
-    this.elemName += this.id ? `#${this.id}` : '';
     this.elemName += this.hasRole ? `[role=${this.role}]` : '';
+    this.elemName += this.id ? `#${this.id}` : '';
 
     // Potential references to other cache objects
 

@@ -116,6 +116,7 @@ export default class ImageInfo {
 
   isImage (domElement) {
     return (domElement.role === 'img') ||
+           (domElement.role === 'image') || // Support in ARIA 1.3
            (domElement.tagName === 'img');
   }
 

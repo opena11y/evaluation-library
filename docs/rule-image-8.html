@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Images of text | OpenA11y Evaluation Library 2.0.5</title>
+    <title>Add role to &lt;code&gt;svg&lt;/code&gt; element | OpenA11y Evaluation Library 2.0.5</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -97,14 +97,14 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">Images of text</li>
+          <li class="breadcrumb-item active">Add role to <code>svg</code> element</li>
         </ol>
       </nav>
       <div class="row gx-4 justify-content-center">
         <div class="col-lg-10">
           <main id="rule">
             
-            <h1 id="h1-title">Rule: Images of text</h1>
+            <h1 id="h1-title">Rule: Add role to <code>svg</code> element</h1>
             
                       <nav class="rules" aria-label="Rules">
             <a id="previous-rule" href="#">Previous Rule</a>  |
@@ -188,7 +188,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>When an image is used to represent stylized text, replace the image with text content and use CSS to style text.</td>
+  <td><code>svg</code> element must define an appropriate ARIA role that describes it's purpose.</td>
 </tr>
 
                   
@@ -197,9 +197,7 @@
   <td>
     <ul>
       
-      <li>To enable people with visual impairments who require a particular visual presentation of text to be able to adjust the text presentation as needed.</li>
-      
-      <li>Adjustments include the use of a particular font size, foreground and background color, font family, line spacing or alignment.</li>
+      <li>An <code>svg</code> element has the default role of <code>graphics-document</code>. The <code>graphics-*</code> roles are not well implemented in browsers or assistive technologies at this time, so the role needs to be overrided by the author with a role that appropriately identifies the purpose of the <code>svg</code> element.</li>
       
     </ul>
   </td>
@@ -216,14 +214,20 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#images-of-text" target="_spec">
-        Success Criterion 1.4.5 Images of Text
+      <a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">
+        Success Criterion 4.1.2 Name, Role, Value
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">
+          Success Criterion 1.1.1 Non-text Content
+        </a>
+      </li>
       
     </ul>
   </td>
@@ -247,7 +251,11 @@
   <td>
     <ul>
       
-      <li>Replace the image of text with text content that is styled using Cascading Style Sheets (CSS).</li>
+      <li>Add <code>role="img"</code> attribute if the <code>svg</code> element is a descriptive image (most likely).  When the <code>img</code> role is used the svg <code>title</code> element can be used to provide a text equivalent.</li>
+      
+      <li>Add <code>role="none"</code> attribute if the <code>svg</code> element is a decorative image.</li>
+      
+      <li>Add an appropriate ARIA role if the <code>svg</code> is interactive or can be represented by some other document role.  For example a <code>table</code> roles if the svg content represents tabular data.</li>
       
     </ul>
   </td>
@@ -259,17 +267,13 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/images-of-text.html">W3C Understanding Images of Text</a></li>
+      <li><a href="https://www.w3.org/TR/SVG/">Scalable Vector Graphics (SVG) 2</a></li>
       
-      <li><a href="https://www.w3.org/TR/css/">W3C CSS Snapshot</a></li>
+      <li><a href="https://www.w3.org/TR/svg-aam-1.0/">SVG Accessibility API Mappings</a></li>
       
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN Cascading Style Sheets</a></li>
+      <li><a href="https://www.deque.com/blog/creating-accessible-svgs/">deque: Creating Accessible SVGs</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/css/C22">22: Using CSS to control visual presentation of text</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/css/C30">C30: Using CSS to replace text with images of text and providing user interface controls to switch</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G140">G140: Separating information and structure from presentation to enable different presentations</a></li>
+      <li><a href="https://a11y-101.com/development/svg">A11Y-101: Accessible SVGs</a></li>
       
     </ul>
   </td>
