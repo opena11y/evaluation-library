@@ -12,10 +12,10 @@ window.openA11yExample = {
   evaluate: function (ruleset="WCAG22", level="AA", scopeFilter="ALL", ruleList=[]) {
 
     if (debug.flag) {
-      debug.log(`[eveluate][    ruleset]: ${ruleset}`);
-      debug.log(`[eveluate][      level]: ${level}`);
+      debug.log(`[evaluate][    ruleset]: ${ruleset}`);
+      debug.log(`[evaluate][      level]: ${level}`);
       debug.log(`[evaluate][scopeFilter]: ${scopeFilter}`);
-      debug.log(`[evaluate][ ruleFilter]: ${ruleList}`);
+      debug.log(`[evaluate][   ruleList]: ${ruleList}`);
     }
 
     // evaluation script

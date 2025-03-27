@@ -38815,7 +38815,7 @@ class EvaluationResult {
     this.ruleset     = 'RULELIST';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, ariaVersion);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
