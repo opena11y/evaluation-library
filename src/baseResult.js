@@ -199,7 +199,7 @@ export default class BaseResult {
       result_value_nls:   this.result_value_nls,
       result_identifier:  this.result_identifier,
       message:            this.result_message
-    }
+    };
   }
 
   /**

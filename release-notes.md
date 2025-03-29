@@ -1,3 +1,9 @@
+Version 2.0.6 Overview
+=============================
+* Updated API documentation
+* Added support to access element information through API
+* Updated documentation on the SEARCH element creating a searchh landmark
+
 Version 2.0.5 Overview
 =============================
 * Added a unique result id to element, page and website result information

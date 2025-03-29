@@ -66,16 +66,6 @@ export default class EvaluationLibrary {
 
     // Debug features
     if (debug.flag) {
-      domCache.showDomElementTree();
-      domCache.controlInfo.showControlInfo();
-      domCache.iframeInfo.showIFrameInfo();
-      domCache.idInfo.showIdInfo();
-      domCache.imageInfo.showImageInfo();
-      domCache.linkInfo.showLinkInfo();
-      domCache.listInfo.showListInfo();
-      domCache.tableInfo.showTableInfo();
-      domCache.structureInfo.showStructureInfo();
-
       debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
     }
     return evaluationResult;
@@ -103,16 +93,6 @@ export default class EvaluationLibrary {
 
     // Debug features
     if (debug.flag) {
-      domCache.showDomElementTree();
-      domCache.controlInfo.showControlInfo();
-      domCache.iframeInfo.showIFrameInfo();
-      domCache.idInfo.showIdInfo();
-      domCache.imageInfo.showImageInfo();
-      domCache.linkInfo.showLinkInfo();
-      domCache.listInfo.showListInfo();
-      domCache.tableInfo.showTableInfo();
-      domCache.structureInfo.showStructureInfo();
-
       debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
     }
     return evaluationResult;
@@ -137,16 +117,6 @@ export default class EvaluationLibrary {
 
     // Debug features
     if (debug.flag) {
-      domCache.showDomElementTree();
-      domCache.controlInfo.showControlInfo();
-      domCache.iframeInfo.showIFrameInfo();
-      domCache.idInfo.showIdInfo();
-      domCache.imageInfo.showImageInfo();
-      domCache.linkInfo.showLinkInfo();
-      domCache.listInfo.showListInfo();
-      domCache.tableInfo.showTableInfo();
-      domCache.structureInfo.showStructureInfo();
-
       debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
     }
     return evaluationResult;

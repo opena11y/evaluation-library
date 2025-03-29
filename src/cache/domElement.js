@@ -484,7 +484,7 @@ function checkIsTabStop (node) {
 
 function checkTabIndex (node) {
   if (node.tabIndex >= 0) {
-    return node.tabIndex
+    return node.tabIndex;
   }
   return node.hasAttribute('tabIndex') ? -1 : undefined;
 }

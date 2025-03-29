@@ -54,8 +54,6 @@ export default class RuleGroupResult {
 
     this.rule_results = [];
     this.rule_results_summary = new RuleResultsSummary();
-
-    debug.flag && debug.log(`[title]: ${this.title} (${ruleset})`)
   }
 
   /**

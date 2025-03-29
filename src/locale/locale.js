@@ -323,7 +323,7 @@ function getGuidelineInfo(guidelineId) {
           title: guideline.title,
           url: guideline.url_spec,
           description: guideline.description
-        }
+        };
       }
     }
   }
@@ -367,7 +367,7 @@ function getSuccessCriterionInfo(successCriterionId) {
             title: success_criterion.title,
             url: success_criterion.url_spec,
             description: success_criterion.description
-          }
+          };
         }
       }
     }

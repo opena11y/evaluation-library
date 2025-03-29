@@ -75,6 +75,20 @@ gulp.task('ainspector', () => {
     });
 });
 
+gulp.task('toc-sidepanel', () => {
+  return rollup
+    .rollup({
+      input: './src/toc-sidepanel-content-script/content.js'
+    })
+    .then(bundle => {
+      return bundle.write({
+      file: '../toc-sidepanel/src/content.js',
+      format: 'iife'
+      });
+    });
+});
+
+
 gulp.task('documentation', function (cb) {
   exec('node ./gen-documentation.js', function (err, stdout, stderr) {
     console.log(stdout);
@@ -103,6 +117,7 @@ gulp.task('compress-bookmarklets', function(cb) {
 
 
 const ainspector       = task('ainspector');
+const tocSidepanel     = task('toc-sidepanel');
 const build            = task('build');
 const buildcjs         = task('buildcjs');
 const buildBookmarklet = task('build-bookmarklet');
@@ -111,4 +126,4 @@ const linting          = task('linting');
 const compressa        = task('compress');
 const compressb        = task('compress-bookmarklets');
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector, buildBookmarklet), documentation, compressa, compressb);
+exports.default = series(linting, parallel( build, buildcjs, ainspector, tocSidepanel, buildBookmarklet), documentation, compressa, compressb);

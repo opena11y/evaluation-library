@@ -150,7 +150,7 @@
   /* Constants */
   const debug$12 = new DebugLogging('constants', false);
 
-  const VERSION = '2.0.5';
+  const VERSION = '2.0.6';
 
   /**
    * @constant RULESET
@@ -16483,7 +16483,7 @@
 
   function checkTabIndex (node) {
     if (node.tabIndex >= 0) {
-      return node.tabIndex
+      return node.tabIndex;
     }
     return node.hasAttribute('tabIndex') ? -1 : undefined;
   }
@@ -17566,7 +17566,6 @@
     required: 'Required',
     recommended: 'Recommended',
     tableType: ['undefined', 'Unknown', 'Layout', 'Simple Data', 'Complex Data', 'ARIA Table', 'Grid', 'Tree Grid'],
-    headerSource: ['undefined', 'none', 'headers attribute', 'row and column'],
 
     elementViolationLabel:   'V',
     elementWarningLabel:     'W',
@@ -22156,7 +22155,7 @@
           'Use the appropriate landmarks to identify the different regions of content on a web page.',
           'The most important landmark roles are @main@ and @navigation@, as nearly every page will include at least those regions.',
           'Other commonly used landmark roles include @banner@, @contentinfo@, @complementary@ and @search@.',
-          'Use HTML sectioning elements that have a default ARIA landmark role: @main@ (@main@), @nav@ (@navigation@), @aside@ (@complementary@) and in some situations @header@ (@banner@) and @footer@ (@contentinfo@). When using these elements, the @role@ attribute should NOT be defined.',
+          'Use HTML sectioning elements that have a default ARIA landmark role: @main@ (@main@), @nav@ (@navigation@), @aside@ (@complementary@), @search@ (@search@) and in some situations @header@ (@banner@) and @footer@ (@contentinfo@). When using these elements, the @role@ attribute should NOT be defined.',
           'A landmark can be created using a @div@ element with a @role@ attribute and the appropriate ARIA landmark role value (e.g., @role="main"@).',
           'The @search@ role is typically placed on a @form@ element or a @div@ that surrounds the search form.'
         ],
@@ -22304,7 +22303,7 @@
           'A @banner@ landmark provides a way to identify organizational or company branding content, usually replicated across all pages and located at the top of each page.'
         ],
         TECHNIQUES: [
-          'The @header@ element defines a @banner@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@ or @section@.',
+          'The @header@ element defines a @banner@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@, @search@ or @section@.',
           'If the @header@ element technique is not being used, a @role="banner"@ attribute on the container element for the branding content can be used to define a @banner@ landmark.',
           'In websites that support mashups using @iframe@ or custom web components, a @banner@ landmark is allowed in each iframe or shadowRoot.',
           'If the page is part of a website supporting mashups, use the @aria-labelledby@ or @aria-label@ attribute to differentiate @banner@ landmarks in each frame.'
@@ -22386,7 +22385,7 @@
           'A banner landmark provides a way to identify redundant branding content, usually placed at the top of each web page.'
         ],
         TECHNIQUES: [
-          'The @header@ element defines a @banner@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@ or @section@.',
+          'The @header@ element defines a @banner@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@, @search@ or @section@.',
           'If the @header@ element technique is not being used, a @role="banner"@ attribute on the container element for the branding content can be used to define a @banner@ landmark.',
           'In websites that support mashups using @iframe@ or @frame@ elements, a @banner@ landmark is allowed in each frame.',
           'If the page is part of a website supporting mashups, use the @aria-labelledby@ or @aria-label@ attribute to differentiate @banner@ landmarks in each frame.'
@@ -22460,7 +22459,7 @@
           'The @contentinfo@ landmark typically includes information and/or links to copyright, contact info, privacy policies and other general information found on all pages in the website.'
         ],
         TECHNIQUES: [
-          'The @footer@ element defines a @contentinfo@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@ or @section@.',
+          'The @footer@ element defines a @contentinfo@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@, @search@ or @section@.',
           'If the @footer@ element technique is not being used, a @role="contentinfo"@ attribute on the container element for the administrative content can be used to define a @contentinfo@ landmark.',
           'In websites that support mashups using @iframe@ or @frame@ elements, a @contentinfo@ landmark is allowed in each frame.',
           'If the page is part of a website supporting mashups, use the @aria-labelledby@ or @aria-label@ attribute to differentiate possible @contentinfo@ landmarks in each frame.'
@@ -22544,7 +22543,7 @@
           'The @footer@ element that is NOT contained in an @section@ and @aside@ element has the default role of @contentinfo@ landmark.'
         ],
         TECHNIQUES: [
-          'The @footer@ element defines a @contentinfo@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@ or @section@.',
+          'The @footer@ element defines a @contentinfo@ landmark, except when it is a descendant of any of the following elements: @article@, @aside@, @main@, @nav@, @search@ or @section@.',
           'If the @footer@ element technique is not being used, a @role="contentinfo"@ attribute on the container element for the administrative content can be used to define a @contentinfo@ landmark.',
           'In websites that support mashups using @iframe@ or @frame@ elements, a @contentinfo@ landmark is allowed in each frame.',
           'If the page is part of a website supporting mashups, use the @aria-labelledby@ or @aria-label@ attribute to differentiate possible @contentinfo@ landmarks in each frame.'
@@ -23226,7 +23225,7 @@
           'Use the @aria-labelledby@ attribute to provide a unique accessible name by referencing the @id@ of a heading or other element on the page that describes the content of the landmark.',
           'Use the @aria-label@ attribute to provide a unique accessible name that describes the content of the landmark.',
           'The @title@ attribute may be used to provide a unique accessible name that describes the content of the landmark. Note, however, that many browsers will also generate a tooltip from the @title@ attribute value.',
-          'While ARIA landmarks may be defined using the @role@ attribute, some HTML5 sectioning elements have default landmark roles (e.g., @main@, @nav@, @aside@, and in some situations, @header@ and @footer@). Thus when multiple @nav@ elements, for example, are used on a page, define a unique accessible name for each of them.'
+          'While ARIA landmarks may be defined using the @role@ attribute, some HTML5 sectioning elements have default landmark roles (e.g., @main@, @nav@, @aside@, @search@ and in some situations, @header@ and @footer@). Thus when multiple @nav@ elements, for example, are used on a page, define a unique accessible name for each of them.'
                       ],
         MANUAL_CHECKS: [
           'Verify that the label describes the content of the landmark.'
@@ -27526,7 +27525,7 @@
             title: guideline.title,
             url: guideline.url_spec,
             description: guideline.description
-          }
+          };
         }
       }
     }
@@ -27570,7 +27569,7 @@
               title: success_criterion.title,
               url: success_criterion.url_spec,
               description: success_criterion.description
-            }
+            };
           }
         }
       }
@@ -29244,8 +29243,6 @@
 
       this.rule_results = [];
       this.rule_results_summary = new RuleResultsSummary();
-
-      debug$H.flag && debug$H.log(`[title]: ${this.title} (${ruleset})`);
     }
 
     /**
@@ -29608,7 +29605,7 @@
         result_value_nls:   this.result_value_nls,
         result_identifier:  this.result_identifier,
         message:            this.result_message
-      }
+      };
     }
 
     /**
@@ -39118,16 +39115,6 @@
 
       // Debug features
       if (debug$1.flag) {
-        domCache.showDomElementTree();
-        domCache.controlInfo.showControlInfo();
-        domCache.iframeInfo.showIFrameInfo();
-        domCache.idInfo.showIdInfo();
-        domCache.imageInfo.showImageInfo();
-        domCache.linkInfo.showLinkInfo();
-        domCache.listInfo.showListInfo();
-        domCache.tableInfo.showTableInfo();
-        domCache.structureInfo.showStructureInfo();
-
         debug$1.json && debug$1.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
       }
       return evaluationResult;
@@ -39155,16 +39142,6 @@
 
       // Debug features
       if (debug$1.flag) {
-        domCache.showDomElementTree();
-        domCache.controlInfo.showControlInfo();
-        domCache.iframeInfo.showIFrameInfo();
-        domCache.idInfo.showIdInfo();
-        domCache.imageInfo.showImageInfo();
-        domCache.linkInfo.showLinkInfo();
-        domCache.listInfo.showListInfo();
-        domCache.tableInfo.showTableInfo();
-        domCache.structureInfo.showStructureInfo();
-
         debug$1.json && debug$1.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
       }
       return evaluationResult;
@@ -39189,16 +39166,6 @@
 
       // Debug features
       if (debug$1.flag) {
-        domCache.showDomElementTree();
-        domCache.controlInfo.showControlInfo();
-        domCache.iframeInfo.showIFrameInfo();
-        domCache.idInfo.showIdInfo();
-        domCache.imageInfo.showImageInfo();
-        domCache.linkInfo.showLinkInfo();
-        domCache.listInfo.showListInfo();
-        domCache.tableInfo.showTableInfo();
-        domCache.structureInfo.showStructureInfo();
-
         debug$1.json && debug$1.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
       }
       return evaluationResult;

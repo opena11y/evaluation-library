@@ -25,7 +25,7 @@ debug.flag = false;
 **  Connect to panel.js script and set up listener/handler
 */
 // NOTE: browser is a global object 
-var panelPort = browser.runtime.connect({ name: 'content' }); // eslint-disable-line 
+var panelPort = browser.runtime.connect({ name: 'content' });
 
 panelPort.onMessage.addListener(messageHandler);
 

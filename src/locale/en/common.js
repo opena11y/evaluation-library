@@ -27,7 +27,6 @@ export const common = {
   required: 'Required',
   recommended: 'Recommended',
   tableType: ['undefined', 'Unknown', 'Layout', 'Simple Data', 'Complex Data', 'ARIA Table', 'Grid', 'Tree Grid'],
-  headerSource: ['undefined', 'none', 'headers attribute', 'row and column'],
 
   elementViolationLabel:   'V',
   elementWarningLabel:     'W',
