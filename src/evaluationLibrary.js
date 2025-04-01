@@ -39,6 +39,7 @@ debug.json = false;
  *
  * @desc Base class for APIs for using the evaluation library to evaluate a DOM 
  *       for WCAG requirements and provides access to descriptive rule information
+ *
  */
 
 export default class EvaluationLibrary {
@@ -57,12 +58,17 @@ export default class EvaluationLibrary {
    * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
+   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   *                                 on element nodes for use in navigation and highlighting
    */
 
-  evaluateRuleList (startingDoc, title='', url='',  ruleList = [], ariaVersion='ARIA12') {
+  evaluateRuleList (startingDoc, title='', url='',
+                    ruleList = [],
+                    ariaVersion='ARIA12',
+                    addAttrId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runRuleListRules(ruleList, ariaVersion);
+    evaluationResult.runRuleListRules(ruleList, ariaVersion, addAttrId);
 
     // Debug features
     if (debug.flag) {
@@ -84,12 +90,19 @@ export default class EvaluationLibrary {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
-  */
+   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   *                                 on element nodes for use in navigation and highlighting
+ */
 
-  evaluateWCAG (startingDoc, title='', url='', ruleset='WCAG22', level='AAA', scopeFilter='ALL', ariaVersion="ARIA12") {
+  evaluateWCAG (startingDoc, title='', url='',
+                ruleset='WCAG22',
+                level='AAA',
+                scopeFilter='ALL',
+                ariaVersion="ARIA12",
+                addAttrId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion, addAttrId);
 
     // Debug features
     if (debug.flag) {
@@ -108,12 +121,16 @@ export default class EvaluationLibrary {
    * @param  {String}  url         - url of document being analyzed
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
+   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   *                                 on element nodes for use in navigation and highlighting
   */
 
-  evaluateFirstStepRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+  evaluateFirstStepRules (startingDoc, title='', url='',
+                          ariaVersion="ARIA12",
+                          addAttrId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runFirstStepRules(ariaVersion);
+    evaluationResult.runFirstStepRules(ariaVersion, addAttrId);
 
     // Debug features
     if (debug.flag) {

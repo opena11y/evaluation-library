@@ -98,10 +98,12 @@ class ParentInfo {
  *                                     document.body
  * @param  {String}  ariaVersion     - Version of ARIA to use for roles,
  *                                     props and state info
+ * @param  {Boolean} addAttrId       - If true, create a data-opena11y-oridinal-position attribute
+ *                                     on element nodes for use in navigation and highlighting
  */
 
 export default class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='ARIA12') {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12', addAttrId=false) {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -125,6 +127,7 @@ export default class DOMCache {
     this.allDomTexts    = [];
 
     const parentInfo = new ParentInfo();
+    parentInfo.addAttrId       = addAttrId;  // If true add a data id to each DOM element
     parentInfo.document        = startingDoc;
     parentInfo.accNameDocument = startingDoc;
 

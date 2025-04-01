@@ -20,9 +20,9 @@ export default class IdInfo {
   /**
    * @method update
    *
-   * @desc Checks to see if the domElement has a role of "link"
+   * @desc Adds the id to the list of elements with a id
    *
-   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
    */
 
   update (documentIndex, domElement) {

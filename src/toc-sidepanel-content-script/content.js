@@ -24,7 +24,14 @@ browserRuntime.onMessage.addListener(
 
     const doc = window.document;
     const evaluationLibrary = new EvaluationLibrary();
-    const evaluationResult  = evaluationLibrary.evaluateWCAG(doc, doc.title, doc.location.href);
+    const evaluationResult  = evaluationLibrary.evaluateWCAG(doc,
+                              doc.title,
+                              doc.location.href,
+                              '',
+                              '',
+                              '',
+                              '',
+                              true);
 
     debug && console.log(`[content.js][EvalResult][title]: ${evaluationResult.getTitle()}`);
 

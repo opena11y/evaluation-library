@@ -70,6 +70,10 @@ export default class DOMElement {
                             elementNode.getAttribute('lang') :
                             '';
 
+    if (parentInfo.addAttrId && elementNode) {
+      elementNode.setAttribute('data-opena11y-ordinal-position', ordinalPosition);
+    }
+
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
     const defaultRole = this.ariaInHTMLInfo.defaultRole;
 
