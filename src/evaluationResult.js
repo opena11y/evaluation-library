@@ -10,6 +10,10 @@ import {
   getFormattedDate,
   cleanForUTF8
 } from './utils.js';
+import HeadingResults         from './results/headingResults.js';
+import LandmarkRegionResults  from './results/landmarkRegionResults.js';
+import LinkResults            from './results/linkResults.js';
+
 import DOMCache        from './cache/domCache.js';
 import RuleGroupResult from './ruleGroupResult.js';
 import RuleResult      from './ruleResult.js';
@@ -148,10 +152,27 @@ export default class EvaluationResult {
     this.allDomElements = [];
     this.allRuleResults = [];
 
+    this._headings        = new HeadingResults();
+    this._landmarkRegions = new LandmarkRegionResults();
+    this._links           = new LinkResults();
+
     debug.flag && debug.log(`[title]: ${this.title}`);
     debug.flag && debug.log(`[  url]: ${this.url}`);
 
   }
+
+  get headings () {
+    return this._headings;
+  }
+
+  get landmarkRegions () {
+    return this._landmarkRegions;
+  }
+
+  get links () {
+    return this._links;
+  }
+
 
   /**
    * @method runWCAGRules
@@ -205,6 +226,10 @@ export default class EvaluationResult {
       }
     });
 
+    this._headings.update(domCache);
+    this._landmarkRegions.update(domCache);
+    this._links.update(domCache, this.url);
+
     const endTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
@@ -244,6 +269,10 @@ export default class EvaluationResult {
       }
     });
 
+    this._headings.update(domCache.structureInfo);
+    this._landmarkRegions.update(domCache.structureInfo);
+    this._links.update(domCache.linkInfo, this.url);
+
     const endTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
@@ -278,6 +307,10 @@ export default class EvaluationResult {
         this.allRuleResults.push(ruleResult);
       }
     });
+
+    this._headings.update(domCache.structureInfo);
+    this._landmarkRegions.update(domCache.structureInfo);
+    this._links.update(domCache.linkInfo, this.url);
 
     const endTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);

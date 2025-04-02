@@ -148,7 +148,7 @@
   /* constants.js */
 
   /* Constants */
-  const debug$12 = new DebugLogging('constants', false);
+  const debug$15 = new DebugLogging('constants', false);
 
   const VERSION = '2.0.6';
 
@@ -651,13 +651,13 @@
    */
 
   function getGuidelineId(sc) {
-    debug$12.flag && debug$12.log(`[getGuidelineId][sc]: ${sc}`);
+    debug$15.flag && debug$15.log(`[getGuidelineId][sc]: ${sc}`);
     const parts = sc.split('.');
     const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
     if (!gl) {
       return 0;
     }
-    debug$12.flag && debug$12.log(`[getGuidelineId][gl]: ${gl}`);
+    debug$15.flag && debug$15.log(`[getGuidelineId][gl]: ${gl}`);
     return WCAG_GUIDELINE[gl];
   }
 
@@ -962,6 +962,195 @@
 
   function  usesARIALabeling (node) {
     return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
+  }
+
+  /* headingResults.js */
+
+  /* constants */
+  const debug$14 = new DebugLogging('headingResults', false);
+  debug$14.flag = false;
+
+  /**
+   * @class headingResults
+   *
+   * @desc Constructor for an object that contains information on headers
+   */
+
+  class HeadingResults {
+    constructor () {
+      this.headingData = [];
+    }
+
+    get data () {
+      return this.headingData;
+    }
+
+    update(domCache) {
+
+      this.headingData = [];
+
+      debug$14.flag && debug$14.log(`[        structureInfo]: ${domCache.structureInfo}`);
+      debug$14.flag && debug$14.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
+
+      domCache.structureInfo.allHeadingDomElements.forEach( de => {
+        debug$14.flag && debug$14.log(`[tagName]: ${de.tagName}`);
+
+        const dataItem = {
+          level: de.ariaInfo.ariaLevel,
+          accName: de.accName.name,
+          ordinalPosition: de.ordinalPosition
+        };
+
+        this.headingData.push(dataItem);
+      });
+
+    }
+
+    /**
+     * @method toJSON
+     *
+     * @desc Returns a JSON object describing the document headings
+     *
+     * @return {String} see @desc
+     */
+
+    toJSON () {
+      return JSON.stringify(this.headingData);
+    }
+  }
+
+  /* landmarkRegionResults.js */
+
+  /* constants */
+  const debug$13 = new DebugLogging('landmarkRegionResults', false);
+  debug$13.flag = false;
+
+  /**
+   * @class landmarkRegionResults
+   *
+   * @desc Constructor for an object that contains information on landmark regions
+   */
+
+  class LandmarkRegionResults {
+    constructor () {
+      this.regionData = [];
+    }
+
+    get data () {
+      return this.regionData;
+    }
+
+    update(domCache) {
+
+      debug$13.flag && debug$13.log(`[        structureInfo]: ${domCache.structureInfo}`);
+      debug$13.flag && debug$13.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
+
+      this.regionData = [];
+
+      domCache.structureInfo.allLandmarkElements.forEach( le => {
+        const de = le.domElement;
+        debug$13.flag && debug$13.log(`[role]: ${de.role}`);
+
+        const dataItem = {
+          role: de.role,
+          accName: de.accName.name,
+          ordinalPosition: de.ordinalPosition
+        };
+
+        this.regionData.push(dataItem);
+      });
+
+    }
+
+    /**
+     * @method toJSON
+     *
+     * @desc Returns a JSON object describing the document landmark regions
+     *
+     * @return {String} see @desc
+     */
+
+    toJSON () {
+      return JSON.stringify(this.regionData);
+    }
+  }
+
+  /* linkResults.js */
+
+  /* constants */
+  const debug$12 = new DebugLogging('linkResults', false);
+  debug$12.flag = false;
+
+  /**
+   * @class linkResults
+   *
+   * @desc Constructor for an object that contains information on links
+   */
+
+  class LinkResults {
+    constructor () {
+      this.linkData = [];
+    }
+
+    get data () {
+      return this.linkData;
+    }
+
+    update(domCache, url) {
+
+      const parsedURL =  URL.parse(url);
+
+      debug$12.flag && debug$12.log(`[parsedURL][hostname]: ${parsedURL.hostname}`);
+      debug$12.flag && debug$12.log(`[parsedURL][pathname]: ${parsedURL.pathname}`);
+
+      this.linkData = [];
+
+      domCache.linkInfo.allLinkDomElements.forEach( de => {
+
+        const parsedHREF = URL.parse(de.node.href);
+
+        debug$12.flag && debug$12.log(`[parsedHREF]: ${parsedHREF}`);
+
+        if (parsedHREF) {
+          debug$12.flag && debug$12.log(`[parsedHREF][    href]: ${parsedHREF.href}`);
+          debug$12.flag && debug$12.log(`[parsedHREF][hostname]: ${parsedHREF.hostname} (${parsedURL.hostname === parsedHREF.hostname})`);
+          debug$12.flag && debug$12.log(`[parsedHREF][pathname]: ${parsedHREF.pathname}`);
+          debug$12.flag && debug$12.log(`[parsedHREF][    hash]: ${parsedHREF.hash}`);
+          debug$12.flag && debug$12.log(`[parsedHREF][  origin]: ${parsedHREF.origin}`);
+
+          const sameHostname = parsedURL.hostname === parsedHREF.hostname;
+          const samePathname = parsedURL.pathname === parsedHREF.pathname;
+
+          const dataItem = {
+            href: de.node.href,
+            isInternal: sameHostname && samePathname,
+            isExternal: !sameHostname,
+            accName: de.accName.name,
+            ordinalPosition: de.ordinalPosition
+          };
+
+          this.linkData.push(dataItem);
+
+          debug$12.flag && debug$12.log(`[parsedHREF][isInternal]: ${dataItem.isInternal}`);
+          debug$12.flag && debug$12.log(`[parsedHREF][isExternal]: ${dataItem.isExternal}`);
+
+        }
+
+      });
+
+    }
+
+    /**
+     * @method toJSON
+     *
+     * @desc Returns a JSON object describing the document links
+     *
+     * @return {String} see @desc
+     */
+
+    toJSON () {
+      return JSON.stringify(this.linkData);
+    }
   }
 
   /* controlInfo.js */
@@ -38791,10 +38980,27 @@
       this.allDomElements = [];
       this.allRuleResults = [];
 
+      this._headings        = new HeadingResults();
+      this._landmarkRegions = new LandmarkRegionResults();
+      this._links           = new LinkResults();
+
       debug$2.flag && debug$2.log(`[title]: ${this.title}`);
       debug$2.flag && debug$2.log(`[  url]: ${this.url}`);
 
     }
+
+    get headings () {
+      return this._headings;
+    }
+
+    get landmarkRegions () {
+      return this._landmarkRegions;
+    }
+
+    get links () {
+      return this._links;
+    }
+
 
     /**
      * @method runWCAGRules
@@ -38848,6 +39054,10 @@
         }
       });
 
+      this._headings.update(domCache);
+      this._landmarkRegions.update(domCache);
+      this._links.update(domCache, this.url);
+
       const endTime = new Date();
       debug$2.flag && debug$2.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
@@ -38887,6 +39097,10 @@
         }
       });
 
+      this._headings.update(domCache.structureInfo);
+      this._landmarkRegions.update(domCache.structureInfo);
+      this._links.update(domCache.linkInfo, this.url);
+
       const endTime = new Date();
       debug$2.flag && debug$2.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
@@ -38921,6 +39135,10 @@
           this.allRuleResults.push(ruleResult);
         }
       });
+
+      this._headings.update(domCache.structureInfo);
+      this._landmarkRegions.update(domCache.structureInfo);
+      this._links.update(domCache.linkInfo, this.url);
 
       const endTime = new Date();
       debug$2.flag && debug$2.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);

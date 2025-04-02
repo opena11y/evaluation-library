@@ -34,48 +34,15 @@ browserRuntime.onMessage.addListener(
                               true);
 
     debug && console.log(`[content.js][EvalResult][title]: ${evaluationResult.getTitle()}`);
-
-    const headingNodes = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'));
-
-    const headingInfo = [];
-
-    headingNodes.forEach( (h) => {
-      console.log(`[heading][${h.tagName}]: ${h.textContent}`);
-
-      const tag = h.tagName;
-      const txt = h.textContent.trim();
-      headingInfo.push({
-        tagName: tag,
-        name: txt
-      });
-    });
-
-    const regionNodes = Array.from(
-      document.querySelectorAll(`
-        aside,
-        body > footer,
-        body > header,
-        form,
-        main,
-        nav,
-        search,
-        section[aria-label],
-        section[aria-labelledby]
-      `));
-
-    const regionInfo = [];
-
-    regionNodes.forEach( (r) => {
-      debug && console.log(`[region][${r.tagName}]`);
-
-      const tag = r.tagName.toLowerCase();
-      regionInfo.push({
-        tagName: tag
-      });
-    });
+    debug && console.log(`[content.js][EvalResult][headings]: ${evaluationResult.headings.toJSON()}`);
+    debug && console.log(`[content.js][EvalResult][ regions]: ${evaluationResult.landmarkRegions.toJSON()}`);
+    debug && console.log(`[content.js][EvalResult][   links]: ${evaluationResult.links.toJSON()}`);
 
     if(request.greeting) {
-      sendResponse({headings: headingInfo, regions: regionInfo});
+      sendResponse({title: evaluationResult.getTitle(),
+                    headings: evaluationResult.headings.data,
+                    regions: evaluationResult.landmarkRegions.data,
+                    links: evaluationResult.links.data});
     }
     return true;
   }
