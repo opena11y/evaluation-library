@@ -75,14 +75,14 @@ gulp.task('ainspector', () => {
     });
 });
 
-gulp.task('toc-sidepanel', () => {
+gulp.task('opena11y-for-toc', () => {
   return rollup
     .rollup({
-      input: './src/toc-sidepanel-content-script/content.js'
+      input: './src/opena11y-for-toc/opena11y-for-toc.js'
     })
     .then(bundle => {
       return bundle.write({
-      file: '../toc-sidepanel/src/content.js',
+      file: '../toc-sidepanel/src/opena11y-for-toc.js',
       format: 'iife'
       });
     });
@@ -117,7 +117,7 @@ gulp.task('compress-bookmarklets', function(cb) {
 
 
 const ainspector       = task('ainspector');
-const tocSidepanel     = task('toc-sidepanel');
+const toc              = task('opena11y-for-toc');
 const build            = task('build');
 const buildcjs         = task('buildcjs');
 const buildBookmarklet = task('build-bookmarklet');
@@ -126,4 +126,4 @@ const linting          = task('linting');
 const compressa        = task('compress');
 const compressb        = task('compress-bookmarklets');
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector, tocSidepanel, buildBookmarklet), documentation, compressa, compressb);
+exports.default = series(linting, parallel( build, buildcjs, ainspector, toc, buildBookmarklet), documentation, compressa, compressb);

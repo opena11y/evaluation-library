@@ -184,15 +184,16 @@ export default class EvaluationResult {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
-   *                                 on element nodes for use in navigation and highlighting
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-id attribute
+   *                                 on element nodes for use in navigation and
+   *                                 highlighting
    */
 
   runWCAGRules (ruleset='WCAG21',
                 level='AA',
                 scopeFilter='ALL',
                 ariaVersion='ARIA12',
-                addAttrId=false) {
+                addDataId=false) {
 
     const startTime = new Date();
 
@@ -200,15 +201,15 @@ export default class EvaluationResult {
     this.level       = validateLevel(level);
     this.scopeFilter = validateScopeFilter(scopeFilter);
     this.ariaVersion = validateAriaVersion(ariaVersion);
-    addAttrId = typeof addAttrId === 'boolean' ? addAttrId : false;
+    addDataId = typeof addDataId === 'boolean' ? addDataId : false;
 
     debug.flag && debug.log(`[evaluateWCAG][    ruleset]: ${this.ruleset}`);
     debug.flag && debug.log(`[evaluateWCAG][      level]: ${this.level}`);
     debug.flag && debug.log(`[evaluateWCAG][scopeFilter]: ${this.scopeFilter}`);
     debug.flag && debug.log(`[evaluateWCAG][ariaVersion]: ${this.ariaVersion}`);
-    debug.flag && debug.log(`[evaluateWCAG][  addAttrId]: ${addAttrId}`);
+    debug.flag && debug.log(`[evaluateWCAG][  addDataId]: ${addDataId}`);
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addAttrId);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -243,20 +244,20 @@ export default class EvaluationResult {
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
    */
 
   runRuleListRules (ruleList,
                     ariaVersion='ARIA12',
-                    addAttrId=false) {
+                    addDataId=false) {
     const startTime = new Date();
     debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addAttrId);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -284,18 +285,18 @@ export default class EvaluationResult {
    * @desc Updates rule results array with results first step rules
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
    */
 
   runFirstStepRules (ariaVersion='ARIA12',
-                     addAttrId=false) {
+                     addDataId=false) {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addAttrId);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 

@@ -98,12 +98,12 @@ class ParentInfo {
  *                                     document.body
  * @param  {String}  ariaVersion     - Version of ARIA to use for roles,
  *                                     props and state info
- * @param  {Boolean} addAttrId       - If true, create a data-opena11y-oridinal-position attribute
+ * @param  {Boolean} addDataId       - If true, create a data-opena11y-oridinal-position attribute
  *                                     on element nodes for use in navigation and highlighting
  */
 
 export default class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='ARIA12', addAttrId=false) {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12', addDataId=false) {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -127,7 +127,6 @@ export default class DOMCache {
     this.allDomTexts    = [];
 
     const parentInfo = new ParentInfo();
-    parentInfo.addAttrId       = addAttrId;  // If true add a data id to each DOM element
     parentInfo.document        = startingDoc;
     parentInfo.accNameDocument = startingDoc;
 
@@ -142,7 +141,7 @@ export default class DOMCache {
     this.timingInfo    = new TimingInfo();
     this.iframeInfo    = new IFrameInfo();
 
-    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion);
+    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion, addDataId);
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -153,7 +152,7 @@ export default class DOMCache {
     this.resultsManualChecks = [];
 
     parentInfo.domElement = this.startingDomElement;
-    this.transverseDOM(parentInfo, startingElement);
+    this.transverseDOM(parentInfo, startingElement, addDataId);
     this.computeAriaOwnsRefs();
     this.tableInfo.computeTableTypes();
     this.tableInfo.computeHeaders(this);
@@ -197,13 +196,15 @@ export default class DOMCache {
    *       that are used by the accessibility rules to test accessibility 
    *       requirements 
    *
-   * @param {Object}  parentinfo      - Parent DomElement associated with the
-   *                                    parent element node of the starting node
-   * @param {Object}  startingNode    - The dom element to start transversing the
-   *                                    dom
+   * @param {Object}  parentinfo    - Parent DomElement associated with the
+   *                                  parent element node of the starting node
+   * @param {Object}  startingNode  - The DOM element to start transversing the
+   *                                  DOM
+   * @param {Boolean} addDataId     - If true, add data attribute to DOM element
+   *                                  indicating its ordinal position
    */
 
-  transverseDOM(parentInfo, startingNode) {
+  transverseDOM(parentInfo, startingNode, addDataId) {
     let tagName, newParentInfo;
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
@@ -276,7 +277,7 @@ export default class DOMCache {
                 }
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion);
+                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion, addDataId);
 
                   this.ordinalPosition += 1;
                   this.allDomElements.push(domItem);
@@ -288,11 +289,11 @@ export default class DOMCache {
                   newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
                   newParentInfo.useParentDocForName = isSlotContent;
 
-                  this.transverseDOM(newParentInfo, assignedNode);
+                  this.transverseDOM(newParentInfo, assignedNode,addDataId);
                 }
               }
             } else {
-              domItem = new DOMElement(parentInfo, node, this.ordinalPosition, this.ariaVersion);
+              domItem = new DOMElement(parentInfo, node, this.ordinalPosition, this.ariaVersion, addDataId);
               this.ordinalPosition += 1;
               this.allDomElements.push(domItem);
 
@@ -309,12 +310,12 @@ export default class DOMCache {
                   newParentInfo.document        = node.shadowRoot;
                   this.documentIndex += 1;
                   newParentInfo.documentIndex = this.documentIndex;
-                  this.transverseDOM(newParentInfo, node.shadowRoot);
+                  this.transverseDOM(newParentInfo, node.shadowRoot, addDataId);
                 }
                 else {
                   domItem.isShadowClosed = true;
                   // check for descendants of the custom element
-                  this.transverseDOM(newParentInfo, node);
+                  this.transverseDOM(newParentInfo, node, addDataId);
                 }
               } else {
                 // Check for iframe tag
@@ -325,13 +326,13 @@ export default class DOMCache {
                     newParentInfo.document = doc;
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
-                    this.transverseDOM(newParentInfo, doc);
+                    this.transverseDOM(newParentInfo, doc, addDataId);
                   } catch (error) {
                     isCrossDomain = true;
                   }                    
                   this.iframeInfo.update(domItem, isCrossDomain);
                 } else {
-                  this.transverseDOM(newParentInfo, node);
+                  this.transverseDOM(newParentInfo, node, addDataId);
                 }
               }
             }

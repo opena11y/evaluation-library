@@ -49,13 +49,17 @@ const requireAccessibleNames = ['region', 'form'];
  * @desc Used to represent a dom element node with additional
  *       information useful for accessibility rules
  *
- * @param  {Object}  parentInfo  - ParentInfo object (can be null for top level)
- * @param  {Object}  elementNode - dom element node to be represented
- * @param  {String}  ariaVersion  - Version of ARIA to use for roles, props and state info
+ * @param  {Object}   parentInfo       - ParentInfo object (can be null for top level)
+ * @param  {Object}   elementNode      - dom element node to be represented
+ * @param  {Number}   ordinalPosition  - Number indicating the ordinal position of the element
+ *                                       in the DOM
+ * @param  {String}   ariaVersion      - Version of ARIA to use for roles, props and state info
+ * @param  {Boolean}  addDataId        - If true, add data attribute based on ordinal position
+ *                                       in the DOM
  */
 
 export default class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12') {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12', addDataId) {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
@@ -70,8 +74,8 @@ export default class DOMElement {
                             elementNode.getAttribute('lang') :
                             '';
 
-    if (parentInfo.addAttrId && elementNode) {
-      elementNode.setAttribute('data-opena11y-ordinal-position', ordinalPosition);
+    if (addDataId) {
+      elementNode.setAttribute('data-opena11y-id', ordinalPosition);
     }
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);

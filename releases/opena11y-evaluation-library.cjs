@@ -16239,13 +16239,17 @@ const requireAccessibleNames = ['region', 'form'];
  * @desc Used to represent a dom element node with additional
  *       information useful for accessibility rules
  *
- * @param  {Object}  parentInfo  - ParentInfo object (can be null for top level)
- * @param  {Object}  elementNode - dom element node to be represented
- * @param  {String}  ariaVersion  - Version of ARIA to use for roles, props and state info
+ * @param  {Object}   parentInfo       - ParentInfo object (can be null for top level)
+ * @param  {Object}   elementNode      - dom element node to be represented
+ * @param  {Number}   ordinalPosition  - Number indicating the ordinal position of the element
+ *                                       in the DOM
+ * @param  {String}   ariaVersion      - Version of ARIA to use for roles, props and state info
+ * @param  {Boolean}  addDataId        - If true, add data attribute based on ordinal position
+ *                                       in the DOM
  */
 
 class DOMElement {
-  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12') {
+  constructor (parentInfo, elementNode, ordinalPosition, ariaVersion='ARIA12', addDataId) {
     const parentDomElement = parentInfo.domElement;
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
@@ -16260,8 +16264,8 @@ class DOMElement {
                             elementNode.getAttribute('lang') :
                             '';
 
-    if (parentInfo.addAttrId && elementNode) {
-      elementNode.setAttribute('data-opena11y-ordinal-position', ordinalPosition);
+    if (addDataId) {
+      elementNode.setAttribute('data-opena11y-id', ordinalPosition);
     }
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
@@ -28920,12 +28924,12 @@ class ParentInfo {
  *                                     document.body
  * @param  {String}  ariaVersion     - Version of ARIA to use for roles,
  *                                     props and state info
- * @param  {Boolean} addAttrId       - If true, create a data-opena11y-oridinal-position attribute
+ * @param  {Boolean} addDataId       - If true, create a data-opena11y-oridinal-position attribute
  *                                     on element nodes for use in navigation and highlighting
  */
 
 class DOMCache {
-  constructor (startingDoc, startingElement, ariaVersion='ARIA12', addAttrId=false) {
+  constructor (startingDoc, startingElement, ariaVersion='ARIA12', addDataId=false) {
     if (typeof startingElement !== 'object') {
       startingElement = startingDoc.body;
     }
@@ -28949,7 +28953,6 @@ class DOMCache {
     this.allDomTexts    = [];
 
     const parentInfo = new ParentInfo();
-    parentInfo.addAttrId       = addAttrId;  // If true add a data id to each DOM element
     parentInfo.document        = startingDoc;
     parentInfo.accNameDocument = startingDoc;
 
@@ -28964,7 +28967,7 @@ class DOMCache {
     this.timingInfo    = new TimingInfo();
     this.iframeInfo    = new IframeInfo();
 
-    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion);
+    this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion, addDataId);
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -28975,7 +28978,7 @@ class DOMCache {
     this.resultsManualChecks = [];
 
     parentInfo.domElement = this.startingDomElement;
-    this.transverseDOM(parentInfo, startingElement);
+    this.transverseDOM(parentInfo, startingElement, addDataId);
     this.computeAriaOwnsRefs();
     this.tableInfo.computeTableTypes();
     this.tableInfo.computeHeaders(this);
@@ -29019,13 +29022,15 @@ class DOMCache {
    *       that are used by the accessibility rules to test accessibility 
    *       requirements 
    *
-   * @param {Object}  parentinfo      - Parent DomElement associated with the
-   *                                    parent element node of the starting node
-   * @param {Object}  startingNode    - The dom element to start transversing the
-   *                                    dom
+   * @param {Object}  parentinfo    - Parent DomElement associated with the
+   *                                  parent element node of the starting node
+   * @param {Object}  startingNode  - The DOM element to start transversing the
+   *                                  DOM
+   * @param {Boolean} addDataId     - If true, add data attribute to DOM element
+   *                                  indicating its ordinal position
    */
 
-  transverseDOM(parentInfo, startingNode) {
+  transverseDOM(parentInfo, startingNode, addDataId) {
     let tagName, newParentInfo;
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
@@ -29080,7 +29085,7 @@ class DOMCache {
                 if (assignedNode.nodeType === Node.TEXT_NODE) ;
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
-                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion);
+                  domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion, addDataId);
 
                   this.ordinalPosition += 1;
                   this.allDomElements.push(domItem);
@@ -29092,11 +29097,11 @@ class DOMCache {
                   newParentInfo = this.updateDOMElementInformation(parentInfo, domItem);
                   newParentInfo.useParentDocForName = isSlotContent;
 
-                  this.transverseDOM(newParentInfo, assignedNode);
+                  this.transverseDOM(newParentInfo, assignedNode,addDataId);
                 }
               }
             } else {
-              domItem = new DOMElement(parentInfo, node, this.ordinalPosition, this.ariaVersion);
+              domItem = new DOMElement(parentInfo, node, this.ordinalPosition, this.ariaVersion, addDataId);
               this.ordinalPosition += 1;
               this.allDomElements.push(domItem);
 
@@ -29113,12 +29118,12 @@ class DOMCache {
                   newParentInfo.document        = node.shadowRoot;
                   this.documentIndex += 1;
                   newParentInfo.documentIndex = this.documentIndex;
-                  this.transverseDOM(newParentInfo, node.shadowRoot);
+                  this.transverseDOM(newParentInfo, node.shadowRoot, addDataId);
                 }
                 else {
                   domItem.isShadowClosed = true;
                   // check for descendants of the custom element
-                  this.transverseDOM(newParentInfo, node);
+                  this.transverseDOM(newParentInfo, node, addDataId);
                 }
               } else {
                 // Check for iframe tag
@@ -29129,13 +29134,13 @@ class DOMCache {
                     newParentInfo.document = doc;
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
-                    this.transverseDOM(newParentInfo, doc);
+                    this.transverseDOM(newParentInfo, doc, addDataId);
                   } catch (error) {
                     isCrossDomain = true;
                   }                    
                   this.iframeInfo.update(domItem, isCrossDomain);
                 } else {
-                  this.transverseDOM(newParentInfo, node);
+                  this.transverseDOM(newParentInfo, node, addDataId);
                 }
               }
             }
@@ -39011,15 +39016,16 @@ class EvaluationResult {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
-   *                                 on element nodes for use in navigation and highlighting
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-id attribute
+   *                                 on element nodes for use in navigation and
+   *                                 highlighting
    */
 
   runWCAGRules (ruleset='WCAG21',
                 level='AA',
                 scopeFilter='ALL',
                 ariaVersion='ARIA12',
-                addAttrId=false) {
+                addDataId=false) {
 
     const startTime = new Date();
 
@@ -39027,15 +39033,15 @@ class EvaluationResult {
     this.level       = validateLevel(level);
     this.scopeFilter = validateScopeFilter(scopeFilter);
     this.ariaVersion = validateAriaVersion(ariaVersion);
-    addAttrId = typeof addAttrId === 'boolean' ? addAttrId : false;
+    addDataId = typeof addDataId === 'boolean' ? addDataId : false;
 
     debug$1.flag && debug$1.log(`[evaluateWCAG][    ruleset]: ${this.ruleset}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][      level]: ${this.level}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][scopeFilter]: ${this.scopeFilter}`);
     debug$1.flag && debug$1.log(`[evaluateWCAG][ariaVersion]: ${this.ariaVersion}`);
-    debug$1.flag && debug$1.log(`[evaluateWCAG][  addAttrId]: ${addAttrId}`);
+    debug$1.flag && debug$1.log(`[evaluateWCAG][  addDataId]: ${addDataId}`);
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addAttrId);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -39070,20 +39076,20 @@ class EvaluationResult {
    * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
    */
 
   runRuleListRules (ruleList,
                     ariaVersion='ARIA12',
-                    addAttrId=false) {
+                    addDataId=false) {
     const startTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addAttrId);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -39111,18 +39117,18 @@ class EvaluationResult {
    * @desc Updates rule results array with results first step rules
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
    */
 
   runFirstStepRules (ariaVersion='ARIA12',
-                     addAttrId=false) {
+                     addDataId=false) {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
     this.ariaVersion = ariaVersion;
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addAttrId);
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
 
@@ -39390,17 +39396,17 @@ class EvaluationLibrary {
    * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
    */
 
   evaluateRuleList (startingDoc, title='', url='',
                     ruleList = [],
                     ariaVersion='ARIA12',
-                    addAttrId=false) {
+                    addDataId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runRuleListRules(ruleList, ariaVersion, addAttrId);
+    evaluationResult.runRuleListRules(ruleList, ariaVersion, addDataId);
 
     // Debug features
     if (debug.flag) {
@@ -39422,7 +39428,7 @@ class EvaluationLibrary {
    * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
  */
 
@@ -39431,10 +39437,10 @@ class EvaluationLibrary {
                 level='AAA',
                 scopeFilter='ALL',
                 ariaVersion="ARIA12",
-                addAttrId=false) {
+                addDataId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion, addAttrId);
+    evaluationResult.runWCAGRules(ruleset, level, scopeFilter, ariaVersion, addDataId);
 
     // Debug features
     if (debug.flag) {
@@ -39453,16 +39459,16 @@ class EvaluationLibrary {
    * @param  {String}  url         - url of document being analyzed
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
-   * @param  {Boolean} addAttrId   - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
   */
 
   evaluateFirstStepRules (startingDoc, title='', url='',
                           ariaVersion="ARIA12",
-                          addAttrId=false) {
+                          addDataId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runFirstStepRules(ariaVersion, addAttrId);
+    evaluationResult.runFirstStepRules(ariaVersion, addDataId);
 
     // Debug features
     if (debug.flag) {
