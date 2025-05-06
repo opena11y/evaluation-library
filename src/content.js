@@ -2,8 +2,8 @@
 
 import EvaluationLibrary from '../evaluationLibrary.js';
 
-// Contsants
-const debug = true;
+// Constants
+const debug = false;
 
 const HIGHLIGHT_ELEMENT_NAME = 'opena11y-highlight-element';
 

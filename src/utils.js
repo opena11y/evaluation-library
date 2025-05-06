@@ -14,7 +14,9 @@ export {
   normalize,
   normalizeLeadingAndTrailingSpace,
   replaceAll,
-  usesARIALabeling
+  usesARIALabeling,
+  isAllowed,
+  cleanName
 }
 /* constants */
 const labelableElements = ['input', 'meter', 'output', 'progress', 'select', 'textarea'];
@@ -295,4 +297,40 @@ function  usesARIALabeling (node) {
   return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
 }
 
+/**
+ * @function isAllowed
+ *
+ * @desc Returns true if the character can be allowed in a name
+ *
+ * @param  {Charater}  char - Character from a string
+ *
+ * @return {Boolean} see @desc
+ */
+
+function isAllowed (char) {
+  const LETTER_EXPRESSION = /^\p{L}$/u; // Supported by ES6+, Some bugs in FF < 78
+  const OTHER_CHARS = /^[0-9.,!#\-+|?%$@&*():\s]+$/u;
+  return char && (LETTER_EXPRESSION.test(char) || OTHER_CHARS.test(char));
+};
+
+/**
+ * @function cleanName
+ *
+ * @desc Returns a string with only letters that can be in a words
+ *
+ * @param  {String}  name - Accessible name
+ *
+ * @return {String} see @desc
+ */
+
+function cleanName (name) {
+  let newName = '';
+  for (let i = 0; i < name.length; i += 1) {
+    const c = name[i];
+    if (isAllowed(c)) {
+      newName += c;
+    }
+  }
+  return newName;
+};
 

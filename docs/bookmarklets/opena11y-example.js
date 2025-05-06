@@ -964,6 +964,42 @@
     return node.hasAttribute('aria-label') || node.hasAttribute('aria-labelledby');
   }
 
+  /**
+   * @function isAllowed
+   *
+   * @desc Returns true if the character can be allowed in a name
+   *
+   * @param  {Charater}  char - Character from a string
+   *
+   * @return {Boolean} see @desc
+   */
+
+  function isAllowed (char) {
+    const LETTER_EXPRESSION = /^\p{L}$/u; // Supported by ES6+, Some bugs in FF < 78
+    const OTHER_CHARS = /^[0-9.,!#\-+|?%$@&*():\s]+$/u;
+    return char && (LETTER_EXPRESSION.test(char) || OTHER_CHARS.test(char));
+  }
+  /**
+   * @function cleanName
+   *
+   * @desc Returns a string with only letters that can be in a words
+   *
+   * @param  {String}  name - Accessible name
+   *
+   * @return {String} see @desc
+   */
+
+  function cleanName (name) {
+    let newName = '';
+    for (let i = 0; i < name.length; i += 1) {
+      const c = name[i];
+      if (isAllowed(c)) {
+        newName += c;
+      }
+    }
+    return newName;
+  }
+
   /* headingResults.js */
 
   /* constants */
@@ -996,9 +1032,11 @@
         debug$14.flag && debug$14.log(`[tagName]: ${de.tagName}`);
 
         const dataItem = {
-          level: de.ariaInfo.ariaLevel,
-          accName: de.accName.name,
-          ordinalPosition: de.ordinalPosition
+          level:             de.ariaInfo.ariaLevel,
+          name:              cleanName(de.accName.name),
+          ordinalPosition:   de.ordinalPosition,
+          isVisibleOnScreen: de.visibility.isVisibleOnScreen,
+          isVisibleToAT:     de.visibility.isVisibleToAT
         };
 
         this.headingData.push(dataItem);
@@ -1052,9 +1090,11 @@
         debug$13.flag && debug$13.log(`[role]: ${de.role}`);
 
         const dataItem = {
-          role: de.role,
-          accName: de.accName.name,
-          ordinalPosition: de.ordinalPosition
+          role:              de.role.toLowerCase(),
+          name:              cleanName(de.accName.name),
+          ordinalPosition:   de.ordinalPosition,
+          isVisibleOnScreen: de.visibility.isVisibleOnScreen,
+          isVisibleToAT:     de.visibility.isVisibleToAT
         };
 
         this.regionData.push(dataItem);
@@ -1081,7 +1121,55 @@
   const debug$12 = new DebugLogging('linkResults', false);
   debug$12.flag = false;
 
+  const allowedExtensions = [
+    'ai',    // Adobe Illustrator file'
+    'aif',   // AIF audio file
+    'bmp',   // Bitmap image
+    'cda',   // CD (Compact Disc) audio track file
+    'csv',   // Comma separated spaces
+    'doc',   // Microsoft Word Document
+    'docx',
+    'epub',  // Electronic book format
+    'ico',   // Icon file
+    'jpeg',  // JPEG (Joint Photographic Experts Group) image
+    'jpg',
+    'gif',   // GIF (Graphics Interchange Format) image
+    'mid',   // MIDI (Musical Instrument Digital Interface) audio file
+    'midi',
+    'mp3',   // MP3 audio file
+    'mpa',   // MPEG-2 audio file
+    'png',   // PNG (Portable Network Graphics) image
+    'odg',   // Open Document Graphics
+    'odp',   // Open Document Presentations
+    'ods',   // Open Document Spreadsheet
+    'odt',   // Open Document Text
+    'ogg',   // Ogg Vorbis audio file
+    'pdf',   // Protable document format
+    'ppt',   // Microsoft Powerpoint document
+    'pptx',
+    'ps',    // PostScript file
+    'psd',   // PSD (Photoshop document) image
+    'rtf',   // Rich text format
+    'rtfd',
+    'svg',   // Scalable Vector Graphics file
+    'tar',   // Linux / Unix tarball file archive
+    'gz',    // Tarball compressed file'
+    'tif',   // TIFF (Tagged Image File Format) image
+    'tiff',
+    'txt',   // Text file
+    'wav',   // WAV file
+    'webp',  // WebP image.
+    'wma',   // WMA (Windows Media Audio) audio file
+    'wpl',   // Windows Media Player playlist
+    'xls',   // Microsoft Spreadsheet document
+    'xlsx',
+    'zip',   // Comprerssed file format
+    '7z'     // 7-Zip compressed file
+  ];
+
+
   /**
+   *
    * @class linkResults
    *
    * @desc Constructor for an object that contains information on links
@@ -1121,18 +1209,29 @@
           const sameHostname = parsedURL.hostname === parsedHREF.hostname;
           const samePathname = parsedURL.pathname === parsedHREF.pathname;
 
+          const periodIndex   = parsedURL.pathname.lastIndexOf('.');
+          const extension     = periodIndex > 0 &&
+                                ((parsedURL.pathname - periodIndex) < 5) ?
+                                parsedURL.pathname.substring(periodIndex).trim().toLowerCase() :
+                                '';
+
+          const allowedExt    = allowedExtensions.includes(extension) ?
+                                extension :
+                                '';
+
           const dataItem = {
-            href: de.node.href,
-            isInternal: sameHostname && samePathname,
-            isExternal: !sameHostname,
-            accName: de.accName.name,
-            ordinalPosition: de.ordinalPosition
+            url:               de.node.href,
+            name:              cleanName(de.accName.name),
+            ordinalPosition:   de.ordinalPosition,
+            isInternal:        sameHostname && samePathname,
+            isExternal:        !sameHostname,
+            isSameDomain:      sameHostname && !samePathname,
+            extension:         allowedExt,
+            isVisibleOnScreen: de.visibility.isVisibleOnScreen,
+            isVisibleToAT:     de.visibility.isVisibleToAT
           };
 
           this.linkData.push(dataItem);
-
-          debug$12.flag && debug$12.log(`[parsedHREF][isInternal]: ${dataItem.isInternal}`);
-          debug$12.flag && debug$12.log(`[parsedHREF][isExternal]: ${dataItem.isExternal}`);
 
         }
 
@@ -39397,8 +39496,9 @@
      * @param  {Array}   ruleList    - Array of rule id to include in the evaluation
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 Values: 'ARIA12' | 'ARIA13'
-     * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-     *                                 on element nodes for use in navigation and highlighting
+     * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
+     *                                 the elements ordinal position for use in
+     *                                 navigation and highlighting
      */
 
     evaluateRuleList (startingDoc, title='', url='',
@@ -39429,8 +39529,9 @@
      * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 Values: 'ARIA12' | 'ARIA13'
-     * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-     *                                 on element nodes for use in navigation and highlighting
+     * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
+     *                                 the elements ordinal position for use in
+     *                                 navigation and highlighting
    */
 
     evaluateWCAG (startingDoc, title='', url='',
@@ -39460,8 +39561,9 @@
      * @param  {String}  url         - url of document being analyzed
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 Values: 'ARIA12' | 'ARIA13'
-     * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-     *                                 on element nodes for use in navigation and highlighting
+     * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
+     *                                 the elements ordinal position for use in
+     *                                 navigation and highlighting
     */
 
     evaluateFirstStepRules (startingDoc, title='', url='',

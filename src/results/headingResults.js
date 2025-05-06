@@ -2,6 +2,9 @@
 
 /* Imports */
 import DebugLogging from '../debug.js';
+import {
+  cleanName
+} from '../utils.js';
 
 /* constants */
 const debug = new DebugLogging('headingResults', false);
@@ -33,9 +36,11 @@ export default class HeadingResults {
       debug.flag && debug.log(`[tagName]: ${de.tagName}`);
 
       const dataItem = {
-        level: de.ariaInfo.ariaLevel,
-        accName: de.accName.name,
-        ordinalPosition: de.ordinalPosition
+        level:             de.ariaInfo.ariaLevel,
+        name:              cleanName(de.accName.name),
+        ordinalPosition:   de.ordinalPosition,
+        isVisibleOnScreen: de.visibility.isVisibleOnScreen,
+        isVisibleToAT:     de.visibility.isVisibleToAT
       };
 
       this.headingData.push(dataItem);

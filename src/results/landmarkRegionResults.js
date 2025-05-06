@@ -2,6 +2,9 @@
 
 /* Imports */
 import DebugLogging from '../debug.js';
+import {
+  cleanName
+} from '../utils.js';
 
 /* constants */
 const debug = new DebugLogging('landmarkRegionResults', false);
@@ -34,9 +37,11 @@ export default class LandmarkRegionResults {
       debug.flag && debug.log(`[role]: ${de.role}`);
 
       const dataItem = {
-        role: de.role,
-        accName: de.accName.name,
-        ordinalPosition: de.ordinalPosition
+        role:              de.role.toLowerCase(),
+        name:              cleanName(de.accName.name),
+        ordinalPosition:   de.ordinalPosition,
+        isVisibleOnScreen: de.visibility.isVisibleOnScreen,
+        isVisibleToAT:     de.visibility.isVisibleToAT
       };
 
       this.regionData.push(dataItem);

@@ -82,7 +82,7 @@ gulp.task('opena11y-for-toc', () => {
     })
     .then(bundle => {
       return bundle.write({
-      file: '../toc-sidepanel/src/opena11y-for-toc.js',
+      file: '../toc-sidepanel/src/js/opena11y-for-toc.js',
       format: 'iife'
       });
     });
