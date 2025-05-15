@@ -5,7 +5,7 @@ import EvaluationLibrary from '../evaluationLibrary.js';
 // Constants
 const debug = false;
 
-const HIGHLIGHT_ELEMENT_NAME = 'opena11y-highlight-element';
+const HIGHLIGHT_ELEMENT_NAME = 'toc-highlight';
 
 const browserRuntime = typeof browser === 'object' ?
               browser.runtime :
@@ -20,8 +20,8 @@ debug && console.log(`[content.js]: loading...`);
 
 const scriptNode = document.createElement('script');
 scriptNode.type = 'text/javascript';
-scriptNode.id = 'id-opena11y-element-highlight';
-scriptNode.src = browserRuntime.getURL('highlightElement.js');
+scriptNode.id = 'id-toc-highlight';
+scriptNode.src = browserRuntime.getURL('toc-highlight.js');
 document.body.appendChild(scriptNode);
 
 
@@ -33,19 +33,43 @@ browserRuntime.onMessage.addListener(
                 "[content.js]: from a content script:" + sender.tab.url :
                 "[content.js]: from the extension");
 
-    debug && console.log(`[content.js][request][runEvaluation    ]: ${request.runEvaluation}`);
-    debug && console.log(`[content.js][request][highlightPosition]: ${request.highlightPosition}`);
-
     // Highlight elements
-    if(request.highlightPosition) {
-      debug && console.log(`[content.js][highlightElement]: ${request.highlightPosition}`);
+    if(request.highlight) {
+      debug && console.log(`[content.js][highlight][position]: ${request.highlight.position}`);
+      debug && console.log(`[content.js][highlight][    info]: ${request.highlight.info}`);
 
       const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
       debug && console.log(`[content.js][he]: ${he}`);
 
       if (he) {
-        he.setAttribute('highlight-attr', 'data-opena11y-id');
-        he.setAttribute('highlight-value', request.highlightPosition);
+        he.setAttribute('data-attr', 'data-opena11y-id');
+        he.setAttribute('highlight-position', request.highlight.position + ';' + request.highlight.info);
+      }
+    }
+
+    // Update Highlight configuration
+    if(request.updateHighlightConfig) {
+      const hc = request.updateHighlightConfig;
+      debug && console.log(`[content.js][hc]: ${hc}`);
+
+      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
+      debug && console.log(`[content.js][he]: ${he}`);
+
+      if (he) {
+        he.setAttribute('highlight-config', `${hc.size} ${hc.style}`);
+      }
+    }
+
+    // Focus elements
+    if(request.focusPosition) {
+      debug && console.log(`[content.js][focusElement]: ${request.focusPosition}`);
+
+      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
+      debug && console.log(`[content.js][he]: ${he}`);
+
+      if (he) {
+        he.setAttribute('data-attr', 'data-opena11y-id');
+        he.setAttribute('focus-position', request.focusPosition);
       }
     }
 
