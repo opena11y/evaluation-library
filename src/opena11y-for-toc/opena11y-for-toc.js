@@ -47,6 +47,18 @@ browserRuntime.onMessage.addListener(
       }
     }
 
+    // Removed highlight
+    if(request.removeHighlight) {
+      console.log(`[content.js][removeHighlight]`);
+
+      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
+      console.log(`[content.js][he]: ${he}`);
+
+      if (he) {
+        he.setAttribute('highlight-position', '');
+      }
+    }
+
     // Update Highlight configuration
     if(request.updateHighlightConfig) {
       const hc = request.updateHighlightConfig;
@@ -99,4 +111,20 @@ browserRuntime.onMessage.addListener(
   }
 );
 
+// Check if side panel is open
 
+setInterval(() => {
+  chrome.runtime
+    .sendMessage({ ['toc-sidepanel-open']: true })
+    .then((msgRes) => {
+      if (msgRes !== true) {
+        console.log(`TOC Sidepanel Closed`);
+      }
+    })
+    .catch( () => {
+      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
+      if (he) {
+        he.setAttribute('highlight-position', '');
+      }
+    });
+}, 100);
