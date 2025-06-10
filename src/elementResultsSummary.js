@@ -4,6 +4,7 @@
 import DebugLogging  from './debug.js';
 
 const debug = new DebugLogging('ElementResultSummary', false);
+debug.flag = false;
 
 /* ---------------------------------------------------------------- */
 /*                             ResultSummary                        */

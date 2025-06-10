@@ -13,6 +13,7 @@ import {
 
 /* constants */
 const debug = new DebugLogging('baseResult', false);
+debug.flag = false;
 
 /**
  * @class baseResult

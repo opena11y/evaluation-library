@@ -68,6 +68,8 @@ export default class ColorContrast {
       debug.tag(elementNode);
     }
 
+    this.hasTextNodes = this.getHasTextNodes(elementNode);
+
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
     this.backgroundColorElem = style.getPropertyValue("background-color");
@@ -104,6 +106,30 @@ export default class ColorContrast {
       debug.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
       debug.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
+  }
+
+  /**
+   * @method getHasTextNodes
+   *
+   * @desc Returns true if the element node has text content, otherwise false
+   *       Analyzes node for text nodes
+   *
+   * @param {Object}  elemNode  - DOM element node
+   *
+   * @return {Number}  see @desc
+   */
+
+  getHasTextNodes (elemNode) {
+    let text = '';
+    let childNodes = elemNode.childNodes;
+
+    for (let i = 0; i < childNodes.length; i++) {
+      let node = childNodes[i];
+      if (node.nodeType === Node.TEXT_NODE) {
+        text += node.textContent.trim().replace(' ', '');
+      }
+    }
+    return text.length > 0;
   }
 
   /**

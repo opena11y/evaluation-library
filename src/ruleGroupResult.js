@@ -12,6 +12,7 @@ import {
 
 /* Constants */
 const debug = new DebugLogging('ruleGroupResult', false)
+debug.flag = false;
 
 /**
  * @class RuleGroupResult

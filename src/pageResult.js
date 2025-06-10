@@ -8,6 +8,7 @@ import DebugLogging   from './debug.js';
 /* Constants */
 
 const debug = new DebugLogging('PageResult', false);
+debug.flag = false;
 
 /**
  * @class PageResult

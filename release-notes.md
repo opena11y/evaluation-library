@@ -2,7 +2,9 @@ Version 2.0.6 Overview
 =============================
 * Updated API documentation
 * Added support to access element information through API
-* Updated documentation on the SEARCH element creating a searchh landmark
+* Updated documentation on the SEARCH element creating a search landmark
+* Added "isInClosedDetails" to visibility calculation
+* Updated accessible name calculation to include visibility for :before and :after content
 
 Version 2.0.5 Overview
 =============================

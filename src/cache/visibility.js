@@ -28,6 +28,7 @@ export default class Visibility {
     this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
     this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
     this.isSmallFont        = this.getFontSize(style);
+    this.isInClosedDetails  = this.normalizeInClosedDetails(elementNode, parentVisibility);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -35,7 +36,8 @@ export default class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden) {
+        this.isVisibilityHidden ||
+        this.isInClosedDetails) {
 
       if (tagName !== 'area') {
         this.isVisibleOnScreen = false;
@@ -61,9 +63,31 @@ export default class Visibility {
       debug.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
       debug.log('[     isSmallHeight]: ' + this.isSmallHeight);
       debug.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug.log('[ isInClosedDetails]: ' + this.isInClosedDetails);
       debug.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
       debug.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
+  }
+
+  /**
+   * @method normalizeInClosedDetails
+   *
+   * @desc Returns true if element is in a closed details eleemnt
+   *
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean} see @desc
+   */
+
+  normalizeInClosedDetails (node, parentVisibility) {
+    if (node.parentNode.tagName === 'DETAILS' &&
+        node.tagName !== 'SUMMARY' &&
+        !node.parentNode.open) {
+      return true;
+    }
+    return parentVisibility.isInClosedDetails;
   }
 
   /**

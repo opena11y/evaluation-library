@@ -10,6 +10,7 @@ import {
 } from './constants.js';
 
 const debug = new DebugLogging('ruleResultSummary', false);
+debug.flag = false;
 
 /* ---------------------------------------------------------------- */
 /*                             RuleResultsSummary                        */

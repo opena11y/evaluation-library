@@ -1118,15 +1118,32 @@ class LandmarkRegionResults {
 const debug$11 = new DebugLogging('linkResults', false);
 debug$11.flag = false;
 
-const allowedExtensions = [
-  'ai',    // Adobe Illustrator file'
-  'aif',   // AIF audio file
-  'bmp',   // Bitmap image
-  'cda',   // CD (Compact Disc) audio track file
+const pdfExtensions = [
+  'pdf'   // Protable document format
+];
+
+const docExtensions = [
   'csv',   // Comma separated spaces
   'doc',   // Microsoft Word Document
   'docx',
   'epub',  // Electronic book format
+  'odg',   // Open Document Graphics
+  'odp',   // Open Document Presentations
+  'ods',   // Open Document Spreadsheet
+  'odt',   // Open Document Text
+  'ppt',   // Microsoft Powerpoint document
+  'pptx',
+  'rtf',   // Rich text format
+  'rtfd',
+  'txt',   // Text file
+  'xls',   // Microsoft Spreadsheet document
+  'xlsx'
+];
+
+const mediaExtensions = [
+  'aif',   // AIF audio file
+  'bmp',   // Bitmap image
+  'cda',   // CD (Compact Disc) audio track file
   'ico',   // Icon file
   'jpeg',  // JPEG (Joint Photographic Experts Group) image
   'jpg',
@@ -1136,30 +1153,21 @@ const allowedExtensions = [
   'mp3',   // MP3 audio file
   'mpa',   // MPEG-2 audio file
   'png',   // PNG (Portable Network Graphics) image
-  'odg',   // Open Document Graphics
-  'odp',   // Open Document Presentations
-  'ods',   // Open Document Spreadsheet
-  'odt',   // Open Document Text
   'ogg',   // Ogg Vorbis audio file
-  'pdf',   // Protable document format
-  'ppt',   // Microsoft Powerpoint document
-  'pptx',
   'ps',    // PostScript file
   'psd',   // PSD (Photoshop document) image
-  'rtf',   // Rich text format
-  'rtfd',
   'svg',   // Scalable Vector Graphics file
-  'tar',   // Linux / Unix tarball file archive
-  'gz',    // Tarball compressed file'
   'tif',   // TIFF (Tagged Image File Format) image
   'tiff',
-  'txt',   // Text file
   'wav',   // WAV file
   'webp',  // WebP image.
   'wma',   // WMA (Windows Media Audio) audio file
-  'wpl',   // Windows Media Player playlist
-  'xls',   // Microsoft Spreadsheet document
-  'xlsx',
+  'wpl'   // Windows Media Player playlist
+];
+
+const zipExtensions = [
+  'tar',   // Linux / Unix tarball file archive
+  'gz',    // Tarball compressed file'
   'zip',   // Comprerssed file format
   '7z'     // 7-Zip compressed file
 ];
@@ -1183,47 +1191,62 @@ class LinkResults {
 
   update(domCache, url) {
 
-    const parsedURL =  URL.parse(url);
-
-    debug$11.flag && debug$11.log(`[parsedURL][hostname]: ${parsedURL.hostname}`);
-    debug$11.flag && debug$11.log(`[parsedURL][pathname]: ${parsedURL.pathname}`);
+    const parsedUrl   = URL.parse(url);
+    const partsUrl    = parsedUrl && parsedUrl.hostname ?
+                        parsedUrl.hostname.split('.') :
+                        '';
+    const partsUrlLen = parsedUrl && parsedUrl.hostname ?
+                        partsUrl.length :
+                        0;
 
     this.linkData = [];
 
     domCache.linkInfo.allLinkDomElements.forEach( de => {
 
-      const parsedHREF = URL.parse(de.node.href);
+      const parsedHref = URL.parse(de.node.href);
+      const partsHref  = parsedHref && parsedHref.hostname ?
+                         parsedHref.hostname.split('.') :
+                         '';
+      const partsHrefLen = parsedHref && parsedHref.hostname ?
+                           partsHref.length :
+                           0;
 
-      debug$11.flag && debug$11.log(`[parsedHREF]: ${parsedHREF}`);
+      if (parsedHref && parsedHref.hostname) {
 
-      if (parsedHREF) {
-        debug$11.flag && debug$11.log(`[parsedHREF][    href]: ${parsedHREF.href}`);
-        debug$11.flag && debug$11.log(`[parsedHREF][hostname]: ${parsedHREF.hostname} (${parsedURL.hostname === parsedHREF.hostname})`);
-        debug$11.flag && debug$11.log(`[parsedHREF][pathname]: ${parsedHREF.pathname}`);
-        debug$11.flag && debug$11.log(`[parsedHREF][    hash]: ${parsedHREF.hash}`);
-        debug$11.flag && debug$11.log(`[parsedHREF][  origin]: ${parsedHREF.origin}`);
+        const sameHostname = parsedUrl.hostname === parsedHref.hostname;
+        const sameDomain   = (partsUrlLen > 1 && partsHrefLen > 1) ?
+                             (partsUrl[partsUrlLen-1] === partsHref[partsHrefLen-1]) &&
+                             (partsUrl[partsUrlLen-2] === partsHref[partsHrefLen-2]) :
+                             false;
 
-        const sameHostname = parsedURL.hostname === parsedHREF.hostname;
-        const samePathname = parsedURL.pathname === parsedHREF.pathname;
+        const samePathname = parsedUrl.pathname === parsedHref.pathname;
 
-        const periodIndex   = parsedURL.pathname.lastIndexOf('.');
-        const extension     = periodIndex > 0 &&
-                              ((parsedURL.pathname - periodIndex) < 5) ?
-                              parsedURL.pathname.substring(periodIndex).trim().toLowerCase() :
+        const periodIndex   = parsedHref.pathname.lastIndexOf('.');
+        const extension     = periodIndex > 0 ?
+                              parsedHref.pathname.substring(periodIndex+1).trim().toLowerCase() :
                               '';
 
-        const allowedExt    = allowedExtensions.includes(extension) ?
-                              extension :
+        const extensionType = pdfExtensions.includes(extension) ?
+                              'pdf' :
+                              docExtensions.includes(extension) ?
+                              'doc' :
+                              mediaExtensions.includes(extension) ?
+                              'media' :
+                              zipExtensions.includes(extension) ?
+                              'zip' :
                               '';
 
         const dataItem = {
           url:               de.node.href,
           name:              cleanName(de.accName.name),
+          desc:              cleanName(de.accDescription.name),
           ordinalPosition:   de.ordinalPosition,
           isInternal:        sameHostname && samePathname,
-          isExternal:        !sameHostname,
-          isSameDomain:      sameHostname && !samePathname,
-          extension:         allowedExt,
+          isExternal:        !sameDomain,
+          isSameDomain:      sameDomain,
+          isSameSubDomain:   sameHostname,
+          extension:         extension,
+          extensionType:     extensionType,
           isVisibleOnScreen: de.visibility.isVisibleOnScreen,
           isVisibleToAT:     de.visibility.isVisibleToAT
         };
@@ -12663,6 +12686,8 @@ class ColorContrast {
       debug$_.tag(elementNode);
     }
 
+    this.hasTextNodes = this.getHasTextNodes(elementNode);
+
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
     this.backgroundColorElem = style.getPropertyValue("background-color");
@@ -12699,6 +12724,30 @@ class ColorContrast {
       debug$_.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
       debug$_.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
+  }
+
+  /**
+   * @method getHasTextNodes
+   *
+   * @desc Returns true if the element node has text content, otherwise false
+   *       Analyzes node for text nodes
+   *
+   * @param {Object}  elemNode  - DOM element node
+   *
+   * @return {Number}  see @desc
+   */
+
+  getHasTextNodes (elemNode) {
+    let text = '';
+    let childNodes = elemNode.childNodes;
+
+    for (let i = 0; i < childNodes.length; i++) {
+      let node = childNodes[i];
+      if (node.nodeType === Node.TEXT_NODE) {
+        text += node.textContent.trim().replace(' ', '');
+      }
+    }
+    return text.length > 0;
   }
 
   /**
@@ -15002,6 +15051,7 @@ class Visibility {
     this.isVisibilityHidden = this.normalizeVisibility (style, parentVisibility);
     this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
     this.isSmallFont        = this.getFontSize(style);
+    this.isInClosedDetails  = this.normalizeInClosedDetails(elementNode, parentVisibility);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -15009,7 +15059,8 @@ class Visibility {
 
     if (this.isHidden ||
         this.isDisplayNone ||
-        this.isVisibilityHidden) {
+        this.isVisibilityHidden ||
+        this.isInClosedDetails) {
 
       if (tagName !== 'area') {
         this.isVisibleOnScreen = false;
@@ -15035,9 +15086,31 @@ class Visibility {
       debug$X.log('[isVisibilityHidden]: ' + this.isVisibilityHidden);
       debug$X.log('[     isSmallHeight]: ' + this.isSmallHeight);
       debug$X.log('[       isSmallFont]: ' + this.isSmallFont);
+      debug$X.log('[ isInClosedDetails]: ' + this.isInClosedDetails);
       debug$X.log('[ isVisibleOnScreen]: ' + this.isVisibleOnScreen);
       debug$X.log('[     isVisibleToAT]: ' + this.isVisibleToAT);
     }
+  }
+
+  /**
+   * @method normalizeInClosedDetails
+   *
+   * @desc Returns true if element is in a closed details eleemnt
+   *
+   * @param {Object}  node              - dom element node
+   * @param {Object}  parentVisibility  - Computed visibility information for parent
+   *                                      DomElement
+   *
+   * @return {Boolean} see @desc
+   */
+
+  normalizeInClosedDetails (node, parentVisibility) {
+    if (node.parentNode.tagName === 'DETAILS' &&
+        node.tagName !== 'SUMMARY' &&
+        !node.parentNode.open) {
+      return true;
+    }
+    return parentVisibility.isInClosedDetails;
   }
 
   /**
@@ -15640,7 +15713,7 @@ function nameFromDetailsOrSummary (element) {
 *   @returns  {Boolean} see @desc
 */
 
-function isDisplayNone (node) {
+function isDisplayNone (node, psuedo=null) {
 
   if (!node) {
     return false;
@@ -15664,7 +15737,7 @@ function isDisplayNone (node) {
       }
     }
 
-    const style = window.getComputedStyle(node, null);
+    const style = window.getComputedStyle(node, psuedo);
 
     const display = style.getPropertyValue("display");
 
@@ -15686,7 +15759,7 @@ function isDisplayNone (node) {
 *   @return  see @desc
 */
 
-function isVisibilityHidden(node) {
+function isVisibilityHidden(node, psuedo=null) {
 
   if (!node) {
     return false;
@@ -15697,7 +15770,7 @@ function isVisibilityHidden(node) {
   }
 
   if (node.nodeType === Node.ELEMENT_NODE) {
-    const style = window.getComputedStyle(node, null);
+    const style = window.getComputedStyle(node, psuedo);
 
     const visibility = style.getPropertyValue("visibility");
     if (visibility) {
@@ -15883,9 +15956,37 @@ function couldHaveAltText (element) {
 *   values, the result cannot and will not be equal to 'none'.
 */
 function addCssGeneratedContent (element, contents) {
-  let result = contents,
-      prefix = getComputedStyle(element, ':before').content,
-      suffix = getComputedStyle(element, ':after').content;
+
+  function isVisible (style) {
+
+    let flag = true;
+
+    const display = style.getPropertyValue("display");
+    if (display) {
+      flag = flag && display !== 'none';
+    }
+
+    const visibility = style.getPropertyValue("visibility");
+    if (visibility) {
+      flag = flag && (visibility !== 'hidden') && (visibility !== 'collapse');
+    }
+    return flag;
+  }
+
+  let result = contents;
+  const styleBefore = getComputedStyle(element, ':before');
+  const styleAfter  = getComputedStyle(element, ':after');
+
+  const beforeVisible = isVisible(styleBefore);
+  const afterVisible  = isVisible(styleAfter);
+
+  const prefix = beforeVisible ?
+                 styleBefore.content :
+                 '';
+
+  const suffix = afterVisible ?
+                 styleAfter.content :
+                 '';
 
   if ((prefix[0] === '"') && !prefix.toLowerCase().includes('moz-')) {
     result = prefix.substring(1, (prefix.length-1)) + result;
@@ -16847,13 +16948,13 @@ class DOMText {
   /**
    * @method hasContent
    *
-   * @desc
+   * @desc Returns true if the DOMText has visiible content, otherwise false
    *
-   * @return {Boolean} Returns true if the DOMText has content, otherwise false
+   * @return {Boolean} see @desc
    */
 
   get hasContent () {
-    return this.text.length;
+    return this.text.length > 0;
   }
 
   addText (text) {
@@ -29362,6 +29463,7 @@ class DOMCache {
 /* resultSummary.js */
 
 const debug$H = new DebugLogging('ruleResultSummary', false);
+debug$H.flag = false;
 
 /* ---------------------------------------------------------------- */
 /*                             RuleResultsSummary                        */
@@ -29498,6 +29600,7 @@ class RuleResultsSummary  {
 
 /* Constants */
 const debug$G = new DebugLogging('ruleGroupResult', false);
+debug$G.flag = false;
 
 /**
  * @class RuleGroupResult
@@ -29716,6 +29819,7 @@ class RuleGroupResult {
 
 /* constants */
 const debug$F = new DebugLogging('baseResult', false);
+debug$F.flag = false;
 
 /**
  * @class baseResult
@@ -30288,6 +30392,7 @@ class ElementResult extends BaseResult {
 /* elementResultSummary.js */
 
 const debug$D = new DebugLogging('ElementResultSummary', false);
+debug$D.flag = false;
 
 /* ---------------------------------------------------------------- */
 /*                             ResultSummary                        */
@@ -30430,6 +30535,7 @@ class ResultsSummary {
 /* Constants */
 
 const debug$C = new DebugLogging('PageResult', false);
+debug$C.flag = false;
 
 /**
  * @class PageResult
@@ -30502,6 +30608,7 @@ class PageResult extends BaseResult {
 /* Constants */
 
 const debug$B = new DebugLogging('PageResult', false);
+debug$B.flag = false;
 
 /**
  * @class WebsiteResult

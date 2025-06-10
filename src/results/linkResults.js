@@ -11,15 +11,32 @@ import {
 const debug = new DebugLogging('linkResults', false);
 debug.flag = false;
 
-const allowedExtensions = [
-  'ai',    // Adobe Illustrator file'
-  'aif',   // AIF audio file
-  'bmp',   // Bitmap image
-  'cda',   // CD (Compact Disc) audio track file
+const pdfExtensions = [
+  'pdf'   // Protable document format
+]
+
+const docExtensions = [
   'csv',   // Comma separated spaces
   'doc',   // Microsoft Word Document
   'docx',
   'epub',  // Electronic book format
+  'odg',   // Open Document Graphics
+  'odp',   // Open Document Presentations
+  'ods',   // Open Document Spreadsheet
+  'odt',   // Open Document Text
+  'ppt',   // Microsoft Powerpoint document
+  'pptx',
+  'rtf',   // Rich text format
+  'rtfd',
+  'txt',   // Text file
+  'xls',   // Microsoft Spreadsheet document
+  'xlsx'
+]
+
+const mediaExtensions = [
+  'aif',   // AIF audio file
+  'bmp',   // Bitmap image
+  'cda',   // CD (Compact Disc) audio track file
   'ico',   // Icon file
   'jpeg',  // JPEG (Joint Photographic Experts Group) image
   'jpg',
@@ -29,30 +46,21 @@ const allowedExtensions = [
   'mp3',   // MP3 audio file
   'mpa',   // MPEG-2 audio file
   'png',   // PNG (Portable Network Graphics) image
-  'odg',   // Open Document Graphics
-  'odp',   // Open Document Presentations
-  'ods',   // Open Document Spreadsheet
-  'odt',   // Open Document Text
   'ogg',   // Ogg Vorbis audio file
-  'pdf',   // Protable document format
-  'ppt',   // Microsoft Powerpoint document
-  'pptx',
   'ps',    // PostScript file
   'psd',   // PSD (Photoshop document) image
-  'rtf',   // Rich text format
-  'rtfd',
   'svg',   // Scalable Vector Graphics file
-  'tar',   // Linux / Unix tarball file archive
-  'gz',    // Tarball compressed file'
   'tif',   // TIFF (Tagged Image File Format) image
   'tiff',
-  'txt',   // Text file
   'wav',   // WAV file
   'webp',  // WebP image.
   'wma',   // WMA (Windows Media Audio) audio file
-  'wpl',   // Windows Media Player playlist
-  'xls',   // Microsoft Spreadsheet document
-  'xlsx',
+  'wpl'   // Windows Media Player playlist
+]
+
+const zipExtensions = [
+  'tar',   // Linux / Unix tarball file archive
+  'gz',    // Tarball compressed file'
   'zip',   // Comprerssed file format
   '7z'     // 7-Zip compressed file
 ]
@@ -76,47 +84,62 @@ export default class LinkResults {
 
   update(domCache, url) {
 
-    const parsedURL =  URL.parse(url);
-
-    debug.flag && debug.log(`[parsedURL][hostname]: ${parsedURL.hostname}`);
-    debug.flag && debug.log(`[parsedURL][pathname]: ${parsedURL.pathname}`);
+    const parsedUrl   = URL.parse(url);
+    const partsUrl    = parsedUrl && parsedUrl.hostname ?
+                        parsedUrl.hostname.split('.') :
+                        '';
+    const partsUrlLen = parsedUrl && parsedUrl.hostname ?
+                        partsUrl.length :
+                        0;
 
     this.linkData = [];
 
     domCache.linkInfo.allLinkDomElements.forEach( de => {
 
-      const parsedHREF = URL.parse(de.node.href);
+      const parsedHref = URL.parse(de.node.href);
+      const partsHref  = parsedHref && parsedHref.hostname ?
+                         parsedHref.hostname.split('.') :
+                         '';
+      const partsHrefLen = parsedHref && parsedHref.hostname ?
+                           partsHref.length :
+                           0;
 
-      debug.flag && debug.log(`[parsedHREF]: ${parsedHREF}`);
+      if (parsedHref && parsedHref.hostname) {
 
-      if (parsedHREF) {
-        debug.flag && debug.log(`[parsedHREF][    href]: ${parsedHREF.href}`);
-        debug.flag && debug.log(`[parsedHREF][hostname]: ${parsedHREF.hostname} (${parsedURL.hostname === parsedHREF.hostname})`);
-        debug.flag && debug.log(`[parsedHREF][pathname]: ${parsedHREF.pathname}`);
-        debug.flag && debug.log(`[parsedHREF][    hash]: ${parsedHREF.hash}`);
-        debug.flag && debug.log(`[parsedHREF][  origin]: ${parsedHREF.origin}`);
+        const sameHostname = parsedUrl.hostname === parsedHref.hostname;
+        const sameDomain   = (partsUrlLen > 1 && partsHrefLen > 1) ?
+                             (partsUrl[partsUrlLen-1] === partsHref[partsHrefLen-1]) &&
+                             (partsUrl[partsUrlLen-2] === partsHref[partsHrefLen-2]) :
+                             false;
 
-        const sameHostname = parsedURL.hostname === parsedHREF.hostname;
-        const samePathname = parsedURL.pathname === parsedHREF.pathname;
+        const samePathname = parsedUrl.pathname === parsedHref.pathname;
 
-        const periodIndex   = parsedURL.pathname.lastIndexOf('.');
-        const extension     = periodIndex > 0 &&
-                              ((parsedURL.pathname - periodIndex) < 5) ?
-                              parsedURL.pathname.substring(periodIndex).trim().toLowerCase() :
+        const periodIndex   = parsedHref.pathname.lastIndexOf('.');
+        const extension     = periodIndex > 0 ?
+                              parsedHref.pathname.substring(periodIndex+1).trim().toLowerCase() :
                               '';
 
-        const allowedExt    = allowedExtensions.includes(extension) ?
-                              extension :
+        const extensionType = pdfExtensions.includes(extension) ?
+                              'pdf' :
+                              docExtensions.includes(extension) ?
+                              'doc' :
+                              mediaExtensions.includes(extension) ?
+                              'media' :
+                              zipExtensions.includes(extension) ?
+                              'zip' :
                               '';
 
         const dataItem = {
           url:               de.node.href,
           name:              cleanName(de.accName.name),
+          desc:              cleanName(de.accDescription.name),
           ordinalPosition:   de.ordinalPosition,
           isInternal:        sameHostname && samePathname,
-          isExternal:        !sameHostname,
-          isSameDomain:      sameHostname && !samePathname,
-          extension:         allowedExt,
+          isExternal:        !sameDomain,
+          isSameDomain:      sameDomain,
+          isSameSubDomain:   sameHostname,
+          extension:         extension,
+          extensionType:     extensionType,
           isVisibleOnScreen: de.visibility.isVisibleOnScreen,
           isVisibleToAT:     de.visibility.isVisibleToAT
         };

@@ -67,13 +67,13 @@ export default class DOMText {
   /**
    * @method hasContent
    *
-   * @desc
+   * @desc Returns true if the DOMText has visiible content, otherwise false
    *
-   * @return {Boolean} Returns true if the DOMText has content, otherwise false
+   * @return {Boolean} see @desc
    */
 
   get hasContent () {
-    return this.text.length;
+    return this.text.length > 0;
   }
 
   addText (text) {

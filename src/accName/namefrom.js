@@ -352,7 +352,7 @@ function nameFromDetailsOrSummary (element) {
 *   @returns  {Boolean} see @desc
 */
 
-function isDisplayNone (node) {
+function isDisplayNone (node, psuedo=null) {
 
   if (!node) {
     return false;
@@ -376,7 +376,7 @@ function isDisplayNone (node) {
       }
     }
 
-    const style = window.getComputedStyle(node, null);
+    const style = window.getComputedStyle(node, psuedo);
 
     const display = style.getPropertyValue("display");
 
@@ -398,7 +398,7 @@ function isDisplayNone (node) {
 *   @return  see @desc
 */
 
-function isVisibilityHidden(node) {
+function isVisibilityHidden(node, psuedo=null) {
 
   if (!node) {
     return false;
@@ -409,7 +409,7 @@ function isVisibilityHidden(node) {
   }
 
   if (node.nodeType === Node.ELEMENT_NODE) {
-    const style = window.getComputedStyle(node, null);
+    const style = window.getComputedStyle(node, psuedo);
 
     const visibility = style.getPropertyValue("visibility");
     if (visibility) {
@@ -598,9 +598,37 @@ function couldHaveAltText (element) {
 *   values, the result cannot and will not be equal to 'none'.
 */
 function addCssGeneratedContent (element, contents) {
-  let result = contents,
-      prefix = getComputedStyle(element, ':before').content,
-      suffix = getComputedStyle(element, ':after').content;
+
+  function isVisible (style) {
+
+    let flag = true;
+
+    const display = style.getPropertyValue("display");
+    if (display) {
+      flag = flag && display !== 'none';
+    }
+
+    const visibility = style.getPropertyValue("visibility");
+    if (visibility) {
+      flag = flag && (visibility !== 'hidden') && (visibility !== 'collapse');
+    }
+    return flag;
+  }
+
+  let result = contents;
+  const styleBefore = getComputedStyle(element, ':before');
+  const styleAfter  = getComputedStyle(element, ':after');
+
+  const beforeVisible = isVisible(styleBefore);
+  const afterVisible  = isVisible(styleAfter);
+
+  const prefix = beforeVisible ?
+                 styleBefore.content :
+                 '';
+
+  const suffix = afterVisible ?
+                 styleAfter.content :
+                 '';
 
   if ((prefix[0] === '"') && !prefix.toLowerCase().includes('moz-')) {
     result = prefix.substring(1, (prefix.length-1)) + result;
