@@ -38,8 +38,8 @@ function isLabelable (node) {
 }
 
 /*
-*   normalize: Trim leading and trailing whitespace and condense all
-*   internal sequences of whitespace to a single space. Adapted from
+*   normalize: Trim leading and trailing white space and condense all
+*   internal sequences of white space to a single space. Adapted from
 *   Mozilla documentation on String.prototype.trim polyfill. Handles
 *   BOM and NBSP characters.
 */

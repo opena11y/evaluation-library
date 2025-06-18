@@ -718,8 +718,8 @@ function isLabelable (node) {
 }
 
 /*
-*   normalize: Trim leading and trailing whitespace and condense all
-*   internal sequences of whitespace to a single space. Adapted from
+*   normalize: Trim leading and trailing white space and condense all
+*   internal sequences of white space to a single space. Adapted from
 *   Mozilla documentation on String.prototype.trim polyfill. Handles
 *   BOM and NBSP characters.
 */
@@ -15786,7 +15786,7 @@ function isVisibilityHidden(node, psuedo=null) {
 *   @function isAriaHiddenFalse
 *
 *   @desc Returns true if the node has the aria-hidden property set to
-*         "false", otherwise false.
+*         "true", otherwise false.
 *         NOTE: This function is important in the accessible name
 *               calculation, since content hidden with a CSS technique
 *               can be included in the accessible name calculation when
@@ -15797,7 +15797,7 @@ function isVisibilityHidden(node, psuedo=null) {
 *   @return  see @desc
 */
 
-function isAriaHiddenFalse(node) {
+function isAriaHiddenTrue(node) {
 
   if (!node) {
     return false;
@@ -15809,7 +15809,7 @@ function isAriaHiddenFalse(node) {
 
   if (node.nodeType === Node.ELEMENT_NODE) {
     return (node.hasAttribute('aria-hidden') &&
-        (node.getAttribute('aria-hidden').toLowerCase() === 'false'));
+        (node.getAttribute('aria-hidden').toLowerCase() === 'true'));
   }
 
   return false;
@@ -15832,18 +15832,14 @@ function isAriaHiddenFalse(node) {
 function includeContentInName(node) {
   // NOTE: Chrome is the only major browser using aria-hidden=false in
   //       accessible name computation
-  const flag = isAriaHiddenFalse(node) && false;
-  return flag || (!isVisibilityHidden(node) && !isDisplayNone(node));
+  const flag = isAriaHiddenTrue(node);
+  return !flag && (!isVisibilityHidden(node) && !isDisplayNone(node));
 }
 
 /*
-*   @function includeContentInName
+*   @function getNodeContents
 *
-*   @desc Checks the CSS display and hidden properties, and
-*         the aria-hidden property to see if the content
-*         should be included in the accessible name
-*        calculation.  Returns true if it should be
-*         included, otherwise false
+*   @desc Get text content from a node for a name or description
 *
 *   @param  {Object}   node     -  DOM node
 *   @param  {Object}   forElem  -  DOM node the name is being computed for
@@ -15899,7 +15895,7 @@ function getNodeContents (node, forElem, alwaysInclude=false) {
               contents = getEmbeddedControlValue(node);
             }
             else {
-              if (node.hasChildNodes()) {
+              if (!isAriaHiddenTrue(node) && node.hasChildNodes()) {
                 let children = Array.from(node.childNodes);
                 children.forEach( child => {
                   [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, forElem);
@@ -16488,6 +16484,10 @@ class DOMElement {
     this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
+    this.isInert   = elementNode.hasAttribute('inert') ?
+                     elementNode.inert :
+                     parentInfo.isInert;
+
     this.tabIndex             = checkTabIndex(elementNode);
     this.isTabStop            = checkIsTabStop(elementNode);
     this.isInteractiveElement = checkForInteractiveElement(elementNode);
@@ -16809,7 +16809,7 @@ class DOMElement {
  *
  * @desc Returns true if the element is natively interactive
  *
- * @param  {Object}  node - DOM node
+ * @param  {Object}   node    - DOM node
  *
  * @return Returns true if the elements is interactive, otherwise false
  */
@@ -29078,6 +29078,7 @@ class ParentInfo {
     this.useParentDocForName = false;
     this.documentIndex   = 0;
     this.domElement      = null;
+    this.isInert         = false;
     this.landmarkElement = null;
     this.listElement     = null;
     this.mapElement      = null;
@@ -29097,6 +29098,7 @@ class ParentInfo {
       this.useParentDocForName = info.useParentDocForName;
       this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
+      this.isInert         = info.isInert;
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
       this.mapElement      = info.mapElement;
@@ -29377,6 +29379,7 @@ class DOMCache {
     let newParentInfo = new ParentInfo(parentInfo);
     newParentInfo.domElement = domElement;
 
+    newParentInfo.isInert         = domElement.isInert;
     newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
     newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
     newParentInfo.inLink          = this.linkInfo.update(domElement, parentInfo.inLink);

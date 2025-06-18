@@ -98,6 +98,10 @@ export default class DOMElement {
     this.ariaInfo  = new AriaInfo(accNameDoc, this.hasRole, this.role, defaultRole, elementNode, ariaVersion);
     this.eventInfo = new EventInfo(elementNode);
 
+    this.isInert   = elementNode.hasAttribute('inert') ?
+                     elementNode.inert :
+                     parentInfo.isInert;
+
     this.tabIndex             = checkTabIndex(elementNode);
     this.isTabStop            = checkIsTabStop(elementNode);
     this.isInteractiveElement = checkForInteractiveElement(elementNode);
@@ -419,7 +423,7 @@ export default class DOMElement {
  *
  * @desc Returns true if the element is natively interactive
  *
- * @param  {Object}  node - DOM node
+ * @param  {Object}   node    - DOM node
  *
  * @return Returns true if the elements is interactive, otherwise false
  */
