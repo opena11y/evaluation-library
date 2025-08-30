@@ -7,6 +7,7 @@ Version 2.0.6 Overview
 * Updated accessible name calculation to include visibility for :before and :after content
 * Support inert attribute
 * Fixed support for aria-hidden=true attribute in accessible name calculation
+* Updated utility function for normalizing text to just remove control characters
 
 Version 2.0.5 Overview
 =============================

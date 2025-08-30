@@ -23,7 +23,8 @@ import {
   getCommonMessage,
   getGuidelineInfo,
   getRuleCategoryInfo,
-  getRuleScopeInfo
+  getRuleScopeInfo,
+  getRulesetLabel
 } from './locale/locale.js';
 
 /* Constants */
@@ -173,6 +174,53 @@ export default class EvaluationResult {
     return this._links;
   }
 
+  /**
+   * @method getTitle
+   *
+   * @desc Get the title of the evaluated document
+   *
+   * @return {String}  String representing the title
+   */
+
+  getTitle () {
+    return this.title;
+  }
+
+  /**
+   * @method getURL
+   *
+   * @desc Get the url of the evaluated document
+   *
+   * @return {String}  String representing the title
+   */
+
+  getURL () {
+    return this.url;
+  }
+
+  /**
+   * @method getDate
+   *
+   * @desc Get the date the document
+   *
+   * @return {String}  String representing the title
+   */
+
+  getDate () {
+    return this.date;
+  }
+
+  /**
+   * @method getRulesetLabel
+   *
+   * @desc Get the Ruleset information
+   *
+   * @return {String}  String representing the ruleset and levels
+   */
+
+  getRulesetLabel () {
+    return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);;
+  }
 
   /**
    * @method runWCAGRules
@@ -316,41 +364,6 @@ export default class EvaluationResult {
     const endTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
-  }
-  /**
-   * @method getTitle
-   *
-   * @desc Get the title of the evaluated document
-   *
-   * @return {String}  String representing the title
-   */
-
-  getTitle () {
-    return this.title;
-  }
-
-  /**
-   * @method getURL
-   *
-   * @desc Get the url of the evaluated document
-   *
-   * @return {String}  String representing the title
-   */
-
-  getURL () {
-    return this.url;
-  }
-
-  /**
-   * @method getDate
-   *
-   * @desc Get the date the document
-   *
-   * @return {String}  String representing the title
-   */
-
-  getDate () {
-    return this.date;
   }
 
   /**

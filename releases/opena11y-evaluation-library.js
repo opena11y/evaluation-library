@@ -717,12 +717,13 @@ function isLabelable (node) {
 
 /*
 *   normalize: Trim leading and trailing white space and condense all
-*   internal sequences of white space to a single space. Adapted from
-*   Mozilla documentation on String.prototype.trim polyfill. Handles
-*   BOM and NBSP characters.
+*   internal sequences of white space to a single space. Originally
+*   adapted from Mozilla documentation on String.prototype.trim polyfill.
+*   Handles BOM and NBSP characters.
 */
 function normalize (s) {
   const rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+//  const rtrim = /[\u0000-\u001F\u007F-\u009F]/g;
   return s.replace(rtrim, '').replace(/\s+/g, ' ');
 }
 
@@ -27895,6 +27896,67 @@ function getRuleScopeInfo(scopeId) {
 }
 
 /**
+ * @function getRulesetLabel
+ *
+ * @desc Retuns a localize string describing the options
+ *       used in the evaluation
+ *
+ * @param {String} rulesetId      - Used to identify the ruleset
+ * @param {String} level          - Used to identify the WCAG level
+ * @param {String} ariaVersionId  - Used to identify the ARIA version
+ *
+ * @return {String}  see @desc
+ */
+
+function getRulesetLabel(rulesetId, level, ariaVersionId) {
+
+    function addAria () {
+      switch (ariaVersionId) {
+        case 'ARIA13':
+          return messages[locale].common.aria13;
+      }
+      return '';
+    }
+
+    function addLevel () {
+      switch (level) {
+        case 'A':
+          return messages[locale].common.rulesetLevelA;
+
+        case 'AA':
+          return messages[locale].common.rulesetLevelAA;
+
+        case 'AAA':
+          return messages[locale].common.rulesetLevelAAA;
+      }
+      return '';
+    }
+
+    let label = '';
+
+    switch (rulesetId) {
+
+      case 'FIRSTSTEP':
+        label = messages[locale].common.rulesetFirstStep + addAria();
+        break;
+
+      case 'WCAG22':
+        label = messages[locale].common.rulesetWCAG22 + addLevel() + addAria();
+        break;
+
+      case 'WCAG21':
+        label = messages[locale].common.rulesetWCAG21 + addLevel() + addAria();
+        break;
+
+      default:
+        label = messages[locale].common.rulesetWCAG20 + addLevel() + addAria();
+        break;
+    }
+
+  return label;
+}
+
+/**
  * @function getGuidelineInfo
  *
  * @desc Gets a object with keys into strings with WCAG Guideline information,
@@ -39212,6 +39274,52 @@ class EvaluationResult {
     return this._links;
   }
 
+  /**
+   * @method getTitle
+   *
+   * @desc Get the title of the evaluated document
+   *
+   * @return {String}  String representing the title
+   */
+
+  getTitle () {
+    return this.title;
+  }
+
+  /**
+   * @method getURL
+   *
+   * @desc Get the url of the evaluated document
+   *
+   * @return {String}  String representing the title
+   */
+
+  getURL () {
+    return this.url;
+  }
+
+  /**
+   * @method getDate
+   *
+   * @desc Get the date the document
+   *
+   * @return {String}  String representing the title
+   */
+
+  getDate () {
+    return this.date;
+  }
+
+  /**
+   * @method getRulesetLabel
+   *
+   * @desc Get the Ruleset information
+   *
+   * @return {String}  String representing the ruleset and levels
+   */
+
+  getRulesetLabel () {
+    return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);  }
 
   /**
    * @method runWCAGRules
@@ -39355,41 +39463,6 @@ class EvaluationResult {
     const endTime = new Date();
     debug$1.flag && debug$1.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
 
-  }
-  /**
-   * @method getTitle
-   *
-   * @desc Get the title of the evaluated document
-   *
-   * @return {String}  String representing the title
-   */
-
-  getTitle () {
-    return this.title;
-  }
-
-  /**
-   * @method getURL
-   *
-   * @desc Get the url of the evaluated document
-   *
-   * @return {String}  String representing the title
-   */
-
-  getURL () {
-    return this.url;
-  }
-
-  /**
-   * @method getDate
-   *
-   * @desc Get the date the document
-   *
-   * @return {String}  String representing the title
-   */
-
-  getDate () {
-    return this.date;
   }
 
   /**

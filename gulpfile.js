@@ -75,14 +75,27 @@ gulp.task('ainspector', () => {
     });
 });
 
-gulp.task('opena11y-for-toc', () => {
+gulp.task('opena11y-for-h2l', () => {
   return rollup
     .rollup({
-      input: './src/opena11y-for-toc/opena11y-for-toc.js'
+      input: './src/opena11y-for-h2l/opena11y-for-h2l.js'
     })
     .then(bundle => {
       return bundle.write({
-      file: '../toc-sidepanel/src/js/opena11y-for-toc.js',
+      file: '../toc-sidepanel/src/js/opena11y-for-h2l.js',
+      format: 'iife'
+      });
+    });
+});
+
+gulp.task('opena11y-for-ainspector', () => {
+  return rollup
+    .rollup({
+      input: './src/opena11y-for-ainspector/opena11y-for-ainspector.js'
+    })
+    .then(bundle => {
+      return bundle.write({
+      file: '../ainspector/src/js/opena11y-for-ainspector.js',
       format: 'iife'
       });
     });
@@ -116,8 +129,9 @@ gulp.task('compress-bookmarklets', function(cb) {
 });
 
 
-const ainspector       = task('ainspector');
-const toc              = task('opena11y-for-toc');
+const ainspector3       = task('ainspector');
+const ainspector4       = task('opena11y-for-ainspector');
+const h2l              = task('opena11y-for-h2l');
 const build            = task('build');
 const buildcjs         = task('buildcjs');
 const buildBookmarklet = task('build-bookmarklet');
@@ -126,4 +140,4 @@ const linting          = task('linting');
 const compressa        = task('compress');
 const compressb        = task('compress-bookmarklets');
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector, toc, buildBookmarklet), documentation, compressa, compressb);
+exports.default = series(linting, parallel( build, buildcjs, ainspector3, ainspector4, h2l, buildBookmarklet), documentation, compressa, compressb);

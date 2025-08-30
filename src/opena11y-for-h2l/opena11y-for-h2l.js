@@ -1,11 +1,11 @@
-/* opena11y-for-toc.js */
+/* opena11y-for-h2l.js */
 
 import EvaluationLibrary from '../evaluationLibrary.js';
 
 // Constants
 const debug = false;
 
-const HIGHLIGHT_ELEMENT_NAME = 'toc-highlight';
+const HIGHLIGHT_ELEMENT_NAME = 'h2l-highlight';
 
 const browserRuntime = typeof browser === 'object' ?
               browser.runtime :
@@ -20,8 +20,8 @@ debug && console.log(`[content.js]: loading...`);
 
 const scriptNode = document.createElement('script');
 scriptNode.type = 'text/javascript';
-scriptNode.id = 'id-toc-highlight';
-scriptNode.src = browserRuntime.getURL('toc-highlight.js');
+scriptNode.id = 'id-h2l-highlight';
+scriptNode.src = browserRuntime.getURL('h2l-highlight.js');
 document.body.appendChild(scriptNode);
 
 
@@ -102,7 +102,7 @@ let openFlag = true;
 
 setInterval(() => {
   chrome.runtime
-    .sendMessage({ ['toc-sidepanel-open']: true })
+    .sendMessage({ ['h2l-sidepanel-open']: true })
     .then((msgRes) => {
       if (msgRes !== true && openFlag) {
         openFlag = false;
