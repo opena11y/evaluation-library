@@ -13,6 +13,7 @@ import {
 import HeadingResults         from './results/headingResults.js';
 import LandmarkRegionResults  from './results/landmarkRegionResults.js';
 import LinkResults            from './results/linkResults.js';
+import RuleResultsSummary     from './results/ruleResultsSummary.js';
 
 import DOMCache        from './cache/domCache.js';
 import RuleGroupResult from './ruleGroupResult.js';
@@ -153,9 +154,10 @@ export default class EvaluationResult {
     this.allDomElements = [];
     this.allRuleResults = [];
 
-    this._headings        = new HeadingResults();
-    this._landmarkRegions = new LandmarkRegionResults();
-    this._links           = new LinkResults();
+    this._headings           = new HeadingResults();
+    this._landmarkRegions    = new LandmarkRegionResults();
+    this._links              = new LinkResults();
+    this._ruleResultsSummary = new RuleResultsSummary();
 
     debug.flag && debug.log(`[title]: ${this.title}`);
     debug.flag && debug.log(`[  url]: ${this.url}`);
@@ -172,6 +174,10 @@ export default class EvaluationResult {
 
   get links () {
     return this._links;
+  }
+
+  get ruleResultSummary () {
+    return this._ruleResultsSummary;
   }
 
   /**
@@ -260,6 +266,7 @@ export default class EvaluationResult {
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
+    this._ruleResultsSummary.clear();
 
     allRules.forEach (rule => {
 
@@ -271,6 +278,7 @@ export default class EvaluationResult {
 
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
         }
       }
     });
@@ -308,6 +316,7 @@ export default class EvaluationResult {
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
+    this._ruleResultsSummary.clear();
 
     allRules.forEach (rule => {
 
@@ -315,6 +324,7 @@ export default class EvaluationResult {
         const ruleResult = new RuleResult(rule);
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
       }
     });
 
@@ -347,6 +357,7 @@ export default class EvaluationResult {
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
+    this._ruleResultsSummary.clear();
 
     allRules.forEach (rule => {
 
@@ -354,6 +365,7 @@ export default class EvaluationResult {
         const ruleResult = new RuleResult(rule);
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
       }
     });
 

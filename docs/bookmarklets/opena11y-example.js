@@ -148,7 +148,7 @@
   /* constants.js */
 
   /* Constants */
-  const debug$15 = new DebugLogging('constants', false);
+  const debug$16 = new DebugLogging('constants', false);
 
   const VERSION = '2.0.6';
 
@@ -651,13 +651,13 @@
    */
 
   function getGuidelineId(sc) {
-    debug$15.flag && debug$15.log(`[getGuidelineId][sc]: ${sc}`);
+    debug$16.flag && debug$16.log(`[getGuidelineId][sc]: ${sc}`);
     const parts = sc.split('.');
     const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
     if (!gl) {
       return 0;
     }
-    debug$15.flag && debug$15.log(`[getGuidelineId][gl]: ${gl}`);
+    debug$16.flag && debug$16.log(`[getGuidelineId][gl]: ${gl}`);
     return WCAG_GUIDELINE[gl];
   }
 
@@ -1004,8 +1004,8 @@
   /* headingResults.js */
 
   /* constants */
-  const debug$14 = new DebugLogging('headingResults', false);
-  debug$14.flag = false;
+  const debug$15 = new DebugLogging('headingResults', false);
+  debug$15.flag = false;
 
   /**
    * @class headingResults
@@ -1026,11 +1026,11 @@
 
       this.headingData = [];
 
-      debug$14.flag && debug$14.log(`[        structureInfo]: ${domCache.structureInfo}`);
-      debug$14.flag && debug$14.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
+      debug$15.flag && debug$15.log(`[        structureInfo]: ${domCache.structureInfo}`);
+      debug$15.flag && debug$15.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
 
       domCache.structureInfo.allHeadingDomElements.forEach( de => {
-        debug$14.flag && debug$14.log(`[tagName]: ${de.tagName}`);
+        debug$15.flag && debug$15.log(`[tagName]: ${de.tagName}`);
 
         const dataItem = {
           level:             de.ariaInfo.ariaLevel,
@@ -1061,8 +1061,8 @@
   /* landmarkRegionResults.js */
 
   /* constants */
-  const debug$13 = new DebugLogging('landmarkRegionResults', false);
-  debug$13.flag = false;
+  const debug$14 = new DebugLogging('landmarkRegionResults', false);
+  debug$14.flag = false;
 
   /**
    * @class landmarkRegionResults
@@ -1081,14 +1081,14 @@
 
     update(domCache) {
 
-      debug$13.flag && debug$13.log(`[        structureInfo]: ${domCache.structureInfo}`);
-      debug$13.flag && debug$13.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
+      debug$14.flag && debug$14.log(`[        structureInfo]: ${domCache.structureInfo}`);
+      debug$14.flag && debug$14.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
 
       this.regionData = [];
 
       domCache.structureInfo.allLandmarkElements.forEach( le => {
         const de = le.domElement;
-        debug$13.flag && debug$13.log(`[role]: ${de.role}`);
+        debug$14.flag && debug$14.log(`[role]: ${de.role}`);
 
         const dataItem = {
           role:              de.role.toLowerCase(),
@@ -1119,8 +1119,8 @@
   /* linkResults.js */
 
   /* constants */
-  const debug$12 = new DebugLogging('linkResults', false);
-  debug$12.flag = false;
+  const debug$13 = new DebugLogging('linkResults', false);
+  debug$13.flag = false;
 
   const pdfExtensions = [
     'pdf'   // Protable document format
@@ -1273,6 +1273,80 @@
 
     toJSON () {
       return JSON.stringify(this.linkData);
+    }
+  }
+
+  /* ruleResultsSummary.js */
+
+  /* constants */
+  const debug$12 = new DebugLogging('ruleResultsSummary', false);
+  debug$12.flag = false;
+
+  /**
+   * @class ruleResultsSummary
+   *
+   * @desc Constructor for an object that contains a summary of rule results
+   */
+
+  class ruleResultsSummary {
+    constructor () {
+      this.summary = {
+        violations:  0,
+        warnings:  0,
+        manual_checks: 0,
+        passed:  0,
+        not_applicable: 0
+      };
+    }
+
+    get data () {
+      return this.summary;
+    }
+
+    clear() {
+      this.summary.violations     = 0;
+      this.summary.warnings       = 0;
+      this.summary.manual_checks  = 0;
+      this.summary.passed         = 0;
+      this.summary.not_applicable = 0;
+    }
+
+    update(ruleResult) {
+      const rs = ruleResult.getResultsSummary();
+
+      if (rs.violations) {
+        this.summary.violations += 1;
+      }
+      else {
+        if (rs.warnings) {
+          this.summary.warnings += 1;
+        }
+        else {
+          if (rs.manual_checks) {
+            this.summary.manual_checks += 1;
+          }
+          else {
+            if (rs.passed) {
+              this.summary.passed += 1;
+            }
+            else {
+              this.summary.not_applicable += 1;
+            }
+          }
+        }
+      }
+    }
+
+    /**
+     * @method toJSON
+     *
+     * @desc Returns a JSON object describing the document headings
+     *
+     * @return {String} see @desc
+     */
+
+    toJSON () {
+      return JSON.stringify(this.headingData);
     }
   }
 
@@ -39256,9 +39330,10 @@
       this.allDomElements = [];
       this.allRuleResults = [];
 
-      this._headings        = new HeadingResults();
-      this._landmarkRegions = new LandmarkRegionResults();
-      this._links           = new LinkResults();
+      this._headings           = new HeadingResults();
+      this._landmarkRegions    = new LandmarkRegionResults();
+      this._links              = new LinkResults();
+      this._ruleResultsSummary = new ruleResultsSummary();
 
       debug$2.flag && debug$2.log(`[title]: ${this.title}`);
       debug$2.flag && debug$2.log(`[  url]: ${this.url}`);
@@ -39275,6 +39350,10 @@
 
     get links () {
       return this._links;
+    }
+
+    get ruleResultSummary () {
+      return this._ruleResultsSummary;
     }
 
     /**
@@ -39362,6 +39441,7 @@
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
       this.allDomElements = domCache.allDomElements;
       this.allRuleResults = [];
+      this._ruleResultsSummary.clear();
 
       allRules.forEach (rule => {
 
@@ -39373,6 +39453,7 @@
 
             ruleResult.validate(domCache);
             this.allRuleResults.push(ruleResult);
+            this._ruleResultsSummary.update(ruleResult);
           }
         }
       });
@@ -39410,6 +39491,7 @@
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
       this.allDomElements = domCache.allDomElements;
       this.allRuleResults = [];
+      this._ruleResultsSummary.clear();
 
       allRules.forEach (rule => {
 
@@ -39417,6 +39499,7 @@
           const ruleResult = new RuleResult(rule);
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
         }
       });
 
@@ -39449,6 +39532,7 @@
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
       this.allDomElements = domCache.allDomElements;
       this.allRuleResults = [];
+      this._ruleResultsSummary.clear();
 
       allRules.forEach (rule => {
 
@@ -39456,6 +39540,7 @@
           const ruleResult = new RuleResult(rule);
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
         }
       });
 

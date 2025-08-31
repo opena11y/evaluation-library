@@ -147,7 +147,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$14 = new DebugLogging('constants', false);
+const debug$15 = new DebugLogging('constants', false);
 
 const VERSION = '2.0.6';
 
@@ -650,13 +650,13 @@ const WCAG22_SC = [
  */
 
 function getGuidelineId(sc) {
-  debug$14.flag && debug$14.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$15.flag && debug$15.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$14.flag && debug$14.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$15.flag && debug$15.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -1003,8 +1003,8 @@ function cleanName (name) {
 /* headingResults.js */
 
 /* constants */
-const debug$13 = new DebugLogging('headingResults', false);
-debug$13.flag = false;
+const debug$14 = new DebugLogging('headingResults', false);
+debug$14.flag = false;
 
 /**
  * @class headingResults
@@ -1025,11 +1025,11 @@ class HeadingResults {
 
     this.headingData = [];
 
-    debug$13.flag && debug$13.log(`[        structureInfo]: ${domCache.structureInfo}`);
-    debug$13.flag && debug$13.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
+    debug$14.flag && debug$14.log(`[        structureInfo]: ${domCache.structureInfo}`);
+    debug$14.flag && debug$14.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
 
     domCache.structureInfo.allHeadingDomElements.forEach( de => {
-      debug$13.flag && debug$13.log(`[tagName]: ${de.tagName}`);
+      debug$14.flag && debug$14.log(`[tagName]: ${de.tagName}`);
 
       const dataItem = {
         level:             de.ariaInfo.ariaLevel,
@@ -1060,8 +1060,8 @@ class HeadingResults {
 /* landmarkRegionResults.js */
 
 /* constants */
-const debug$12 = new DebugLogging('landmarkRegionResults', false);
-debug$12.flag = false;
+const debug$13 = new DebugLogging('landmarkRegionResults', false);
+debug$13.flag = false;
 
 /**
  * @class landmarkRegionResults
@@ -1080,14 +1080,14 @@ class LandmarkRegionResults {
 
   update(domCache) {
 
-    debug$12.flag && debug$12.log(`[        structureInfo]: ${domCache.structureInfo}`);
-    debug$12.flag && debug$12.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
+    debug$13.flag && debug$13.log(`[        structureInfo]: ${domCache.structureInfo}`);
+    debug$13.flag && debug$13.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
 
     this.regionData = [];
 
     domCache.structureInfo.allLandmarkElements.forEach( le => {
       const de = le.domElement;
-      debug$12.flag && debug$12.log(`[role]: ${de.role}`);
+      debug$13.flag && debug$13.log(`[role]: ${de.role}`);
 
       const dataItem = {
         role:              de.role.toLowerCase(),
@@ -1118,8 +1118,8 @@ class LandmarkRegionResults {
 /* linkResults.js */
 
 /* constants */
-const debug$11 = new DebugLogging('linkResults', false);
-debug$11.flag = false;
+const debug$12 = new DebugLogging('linkResults', false);
+debug$12.flag = false;
 
 const pdfExtensions = [
   'pdf'   // Protable document format
@@ -1272,6 +1272,80 @@ class LinkResults {
 
   toJSON () {
     return JSON.stringify(this.linkData);
+  }
+}
+
+/* ruleResultsSummary.js */
+
+/* constants */
+const debug$11 = new DebugLogging('ruleResultsSummary', false);
+debug$11.flag = false;
+
+/**
+ * @class ruleResultsSummary
+ *
+ * @desc Constructor for an object that contains a summary of rule results
+ */
+
+class ruleResultsSummary {
+  constructor () {
+    this.summary = {
+      violations:  0,
+      warnings:  0,
+      manual_checks: 0,
+      passed:  0,
+      not_applicable: 0
+    };
+  }
+
+  get data () {
+    return this.summary;
+  }
+
+  clear() {
+    this.summary.violations     = 0;
+    this.summary.warnings       = 0;
+    this.summary.manual_checks  = 0;
+    this.summary.passed         = 0;
+    this.summary.not_applicable = 0;
+  }
+
+  update(ruleResult) {
+    const rs = ruleResult.getResultsSummary();
+
+    if (rs.violations) {
+      this.summary.violations += 1;
+    }
+    else {
+      if (rs.warnings) {
+        this.summary.warnings += 1;
+      }
+      else {
+        if (rs.manual_checks) {
+          this.summary.manual_checks += 1;
+        }
+        else {
+          if (rs.passed) {
+            this.summary.passed += 1;
+          }
+          else {
+            this.summary.not_applicable += 1;
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @method toJSON
+   *
+   * @desc Returns a JSON object describing the document headings
+   *
+   * @return {String} see @desc
+   */
+
+  toJSON () {
+    return JSON.stringify(this.headingData);
   }
 }
 
@@ -39255,9 +39329,10 @@ class EvaluationResult {
     this.allDomElements = [];
     this.allRuleResults = [];
 
-    this._headings        = new HeadingResults();
-    this._landmarkRegions = new LandmarkRegionResults();
-    this._links           = new LinkResults();
+    this._headings           = new HeadingResults();
+    this._landmarkRegions    = new LandmarkRegionResults();
+    this._links              = new LinkResults();
+    this._ruleResultsSummary = new ruleResultsSummary();
 
     debug$1.flag && debug$1.log(`[title]: ${this.title}`);
     debug$1.flag && debug$1.log(`[  url]: ${this.url}`);
@@ -39274,6 +39349,10 @@ class EvaluationResult {
 
   get links () {
     return this._links;
+  }
+
+  get ruleResultSummary () {
+    return this._ruleResultsSummary;
   }
 
   /**
@@ -39361,6 +39440,7 @@ class EvaluationResult {
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
+    this._ruleResultsSummary.clear();
 
     allRules.forEach (rule => {
 
@@ -39372,6 +39452,7 @@ class EvaluationResult {
 
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
         }
       }
     });
@@ -39409,6 +39490,7 @@ class EvaluationResult {
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
+    this._ruleResultsSummary.clear();
 
     allRules.forEach (rule => {
 
@@ -39416,6 +39498,7 @@ class EvaluationResult {
         const ruleResult = new RuleResult(rule);
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
       }
     });
 
@@ -39448,6 +39531,7 @@ class EvaluationResult {
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
+    this._ruleResultsSummary.clear();
 
     allRules.forEach (rule => {
 
@@ -39455,6 +39539,7 @@ class EvaluationResult {
         const ruleResult = new RuleResult(rule);
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
       }
     });
 

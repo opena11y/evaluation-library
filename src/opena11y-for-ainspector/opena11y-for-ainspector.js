@@ -12,7 +12,7 @@ const browserRuntime = typeof browser === 'object' ?
               chrome.runtime;
 
 const evaluationLibrary = new EvaluationLibrary();
-let evaluationResult;
+let er;
 
 debug && console.log(`[content.js]: loading...`);
 
@@ -65,26 +65,51 @@ browserRuntime.onMessage.addListener(
     if(request.aiRunEvaluation) {
       const r = request.aiRunEvaluation;
 
-      debug && console.log(`[.   ruleset]: ${r.ruleset}`);
-      debug && console.log(`[      level]: ${r.level}`);
-      debug && console.log(`[scopeFilter]: ${r.scopeFilter}`);
-      debug && console.log(`[ariaVersion]: ${r.ariaVersion}`);
-      debug && console.log(`[ resultView]: ${r.resultView}`);
+      debug && console.log(`[.    ruleset]: ${r.ruleset}`);
+      debug && console.log(`[       level]: ${r.level}`);
+      debug && console.log(`[scope_filter]: ${r.scope_filter}`);
+      debug && console.log(`[aria_version]: ${r.aria_version}`);
+      debug && console.log(`[ result_view]: ${r.result_view}`);
 
       const doc = window.document;
-      evaluationResult  = evaluationLibrary.evaluateWCAG(doc,
-                                doc.title,
-                                doc.location.href,
-                                r.ruleset,
-                                r.level,
-                                r.scopeFilter,
-                                r.ariaVersion,
-                                true);
+      er  = evaluationLibrary.evaluateWCAG(
+              doc,
+              doc.title,
+              doc.location.href,
+              r.ruleset,
+              r.level,
+              r.scope_filter,
+              r.aria_version,
+              true);
 
-      sendResponse({title:        evaluationResult.getTitle(),
-                    url:          evaluationResult.getURL(),
-                    rulesetLabel: evaluationResult.getRulesetLabel()
-                  });
+      let response = {
+        title:         er.getTitle(),
+        location:      er.getURL(),
+        ruleset_label: er.getRulesetLabel(),
+        result_view:   r.result_view
+      };
+      debug && console.log(`[response][            title]: ${response.title}`);
+      debug && console.log(`[response][         location]: ${response.location}`);
+      debug && console.log(`[response][      result_view]: ${response.result_view}`);
+      debug && console.log(`[response][ruleResultSummary]: ${er.ruleResultSummary}`);
+      debug && console.log(`[response][             data]: ${er.ruleResultSummary.data}`);
+
+      switch (response.result_view) {
+        case 'rules-all':
+          response.summary = er.ruleResultSummary.data;
+          debug && console.log(`[response][summary]: ${response.summary.violations}`);
+          debug && console.log(`[response][summary]: ${response.summary.warnings}`);
+          break;
+
+        case 'rules-group':
+          break;
+
+        case 'rule':
+          break;
+
+      }
+
+      sendResponse(response);
     }
     return true;
   }
