@@ -3,6 +3,15 @@
 /* Imports */
 import DebugLogging  from './debug.js';
 
+import {
+  RESULT_VALUE
+} from './constants.js';
+
+import {
+  getCommonMessage
+} from './locale/locale.js';
+
+
 const debug = new DebugLogging('ElementResultSummary', false);
 debug.flag = false;
 
@@ -128,6 +137,80 @@ export default class ResultsSummary {
       this.h += n;
     }
   }
+
+  /*
+   * @method getRuleResult
+   *
+   * @desc Returns the worst result
+
+   * @return  {Number}  Information about element summary
+   */
+
+  getRuleResultValue () {
+    if (this.v > 0) {
+      return RESULT_VALUE.VIOLATION;
+    }
+    else {
+      if (this.w > 0) {
+        return RESULT_VALUE.WARNING;
+      }
+      else {
+        if (this.mc > 0) {
+          return RESULT_VALUE.MANUAL_CHECK;
+        }
+        else {
+          if (this.p > 0) {
+            return RESULT_VALUE.PASSED;
+          }
+          else {
+            if (this.h > 0) {
+              return RESULT_VALUE.HIDDEN;
+            }
+          }
+        }
+      }
+    }
+    return RESULT_VALUE.UNDEFINED;
+  }
+
+  /*
+   * @method getRuleResultNLS
+   *
+   * @desc Returns the worst element result
+
+   * @return  {String}  Information about element summary
+   */
+
+  getRuleResultValueNLS () {
+    debug.log(`[getRuleResultValueNLS]`);
+    debug.log(`[getRuleResultValueNLS][getCommonMessage]: ${getCommonMessage}`);
+    debug.log(`[getRuleResultValueNLS][             msg]: ${getCommonMessage('elementViolationLabel')}`);
+    if (this.v > 0) {
+      return getCommonMessage('elementViolationLabel');
+    }
+    else {
+      if (this.w > 0) {
+        return getCommonMessage('elementWarningLabel');
+      }
+      else {
+        if (this.mc > 0) {
+          return getCommonMessage('elementManualCheckLabel');;
+        }
+        else {
+          if (this.p > 0) {
+            return getCommonMessage('elementPassLabel');;
+          }
+          else {
+            if (this.h > 0) {
+              return getCommonMessage('elementHiddenLabel');;
+            }
+          }
+        }
+      }
+    }
+    return getCommonMessage('elementNotAppliableLabel');
+  }
+
 
   /*
    * @method toString

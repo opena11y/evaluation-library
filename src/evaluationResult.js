@@ -2,18 +2,22 @@
 
 /* Imports */
 import DebugLogging  from './debug.js';
+
 import {
   VERSION,
   RULESET
 } from './constants.js';
+
 import {
   getFormattedDate,
   cleanForUTF8
 } from './utils.js';
+
 import HeadingResults         from './results/headingResults.js';
 import LandmarkRegionResults  from './results/landmarkRegionResults.js';
 import LinkResults            from './results/linkResults.js';
 import RuleResultsSummary     from './results/ruleResultsSummary.js';
+import RuleResultsGroup       from './results/ruleResultsGroup.js';
 
 import DOMCache        from './cache/domCache.js';
 import RuleGroupResult from './ruleGroupResult.js';
@@ -27,6 +31,11 @@ import {
   getRuleScopeInfo,
   getRulesetLabel
 } from './locale/locale.js';
+
+import {
+  RULE_CATEGORIES,
+  WCAG_GUIDELINE
+} from './constants.js';
 
 /* Constants */
 const debug = new DebugLogging('EvaluationResult', false)
@@ -158,6 +167,8 @@ export default class EvaluationResult {
     this._landmarkRegions    = new LandmarkRegionResults();
     this._links              = new LinkResults();
     this._ruleResultsSummary = new RuleResultsSummary();
+    this._rcRuleResultsGroup = new RuleResultsGroup(RULE_CATEGORIES);
+    this._glRuleResultsGroup = new RuleResultsGroup(WCAG_GUIDELINE);
 
     debug.flag && debug.log(`[title]: ${this.title}`);
     debug.flag && debug.log(`[  url]: ${this.url}`);
@@ -178,6 +189,14 @@ export default class EvaluationResult {
 
   get ruleResultSummary () {
     return this._ruleResultsSummary;
+  }
+
+  get rcRuleGroupResults () {
+    return this._rcRuleResultsGroup;
+  }
+
+  get glRuleGroupResults () {
+    return this._glRuleResultsGroup;
   }
 
   /**
@@ -267,6 +286,8 @@ export default class EvaluationResult {
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
     this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
 
     allRules.forEach (rule => {
 
@@ -279,6 +300,8 @@ export default class EvaluationResult {
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
           this._ruleResultsSummary.update(ruleResult);
+          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
         }
       }
     });
@@ -317,6 +340,8 @@ export default class EvaluationResult {
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
     this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
 
     allRules.forEach (rule => {
 
@@ -325,6 +350,8 @@ export default class EvaluationResult {
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
         this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
       }
     });
 
@@ -358,6 +385,8 @@ export default class EvaluationResult {
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
     this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
 
     allRules.forEach (rule => {
 
@@ -366,6 +395,8 @@ export default class EvaluationResult {
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
         this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
       }
     });
 
@@ -456,6 +487,33 @@ export default class EvaluationResult {
   }
 
   /**
+   * @method getRuleResultsByGuidelineWithSummary
+   *
+   * @desc Returns an object containing the rule results associated with a WCAG 2.0 Guideline
+   *       and a summary of rule results
+   *
+   * @param {Integer}  guidelineId  - Number representing the guideline id
+   *
+   * @return array [{RuleResultsSummary}, {RuleGroupResult}]  see description
+   */
+
+  getRuleResultsByGuidelineWithSummary (guidelineId) {
+    const glInfo  = getGuidelineInfo(guidelineId);
+    const glTitle = glInfo.title;
+
+    const summary = new RuleResultsSummary();
+    const rule_results = [];
+
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getCategory() & guidelineId) {
+        const result = this.getRuleResultInfo (rr);
+        rule_results.push(result);
+        summary.update(rr);
+      }
+    });
+    return [glTitle, summary, rule_results];
+  }
+  /**
    * @method getRuleResultsByCategory
    *
    * @desc Returns an object containing the rule results for the rules in a rule category
@@ -477,6 +535,43 @@ export default class EvaluationResult {
       }
     });
     return rgr;
+  }
+
+  getRuleResultInfo (rule_result) {
+    return {      id: rule_result.rule.getId(),
+             summary: rule_result.rule.getSummary(),
+              result: rule_result.getResultValueNLS(),
+        result_value: rule_result.getResultValue(),
+                  sc: rule_result.rule.getPrimarySuccessCriterionId(),
+               level: rule_result.rule.getWCAGLevel(),
+            required: rule_result.isRuleRequired()
+        };
+  }
+
+  /**
+   * @method getRuleResultsByCategoryWithSummary
+   *
+   * @desc Returns an object containing the rule results for the rules in a rule category
+   *       and a summary of rule results
+   *
+   * @param {Integer}  categoryId  -  Number of the rule category
+   *
+   * @return array [{RuleResultsSummary}, {array}, {object}]  see description
+   */
+
+  getRuleResultsByCategoryWithSummary (categoryId) {
+    const rcInfo = getRuleCategoryInfo(categoryId);
+    const summary = new RuleResultsSummary();
+    const rule_results = [];
+
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getCategory() & categoryId) {
+        const result = this.getRuleResultInfo (rr);
+        rule_results.push(result);
+        summary.update(rr);
+      }
+    });
+    return [rcInfo.title, summary, rule_results];
   }
 
   /**

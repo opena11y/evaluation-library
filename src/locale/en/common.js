@@ -28,10 +28,13 @@ export const common = {
   recommended: 'Recommended',
   tableType: ['undefined', 'Unknown', 'Layout', 'Simple Data', 'Complex Data', 'ARIA Table', 'Grid', 'Tree Grid'],
 
-  elementViolationLabel:   'V',
-  elementWarningLabel:     'W',
-  elementPassLabel:        'P',
-  elementManualCheckLabel: 'MC',
+  elementViolationLabel:     'V',
+  elementWarningLabel:       'W',
+  elementPassLabel:          'P',
+  elementManualCheckLabel:   'MC',
+  elementHiddenLabel:        'H',
+  elementInertLabel:         'I',
+  elementNotApplicableLabel: 'NA',
 
   pageViolationLabel:   'Page Violation',
   pageWarningLabel:     'Page Warning',

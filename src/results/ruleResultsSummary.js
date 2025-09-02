@@ -61,16 +61,4 @@ export default class ruleResultsSummary {
       }
     }
   }
-
-  /**
-   * @method toJSON
-   *
-   * @desc Returns a JSON object describing the document headings
-   *
-   * @return {String} see @desc
-   */
-
-  toJSON () {
-    return JSON.stringify(this.headingData);
-  }
 }

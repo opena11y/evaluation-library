@@ -145,7 +145,7 @@ class DebugLogging {
 /* constants.js */
 
 /* Constants */
-const debug$15 = new DebugLogging('constants', false);
+const debug$16 = new DebugLogging('constants', false);
 
 const VERSION = '2.0.6';
 
@@ -648,13 +648,13 @@ const WCAG22_SC = [
  */
 
 function getGuidelineId(sc) {
-  debug$15.flag && debug$15.log(`[getGuidelineId][sc]: ${sc}`);
+  debug$16.flag && debug$16.log(`[getGuidelineId][sc]: ${sc}`);
   const parts = sc.split('.');
   const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
   if (!gl) {
     return 0;
   }
-  debug$15.flag && debug$15.log(`[getGuidelineId][gl]: ${gl}`);
+  debug$16.flag && debug$16.log(`[getGuidelineId][gl]: ${gl}`);
   return WCAG_GUIDELINE[gl];
 }
 
@@ -1001,8 +1001,8 @@ function cleanName (name) {
 /* headingResults.js */
 
 /* constants */
-const debug$14 = new DebugLogging('headingResults', false);
-debug$14.flag = false;
+const debug$15 = new DebugLogging('headingResults', false);
+debug$15.flag = false;
 
 /**
  * @class headingResults
@@ -1023,11 +1023,11 @@ class HeadingResults {
 
     this.headingData = [];
 
-    debug$14.flag && debug$14.log(`[        structureInfo]: ${domCache.structureInfo}`);
-    debug$14.flag && debug$14.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
+    debug$15.flag && debug$15.log(`[        structureInfo]: ${domCache.structureInfo}`);
+    debug$15.flag && debug$15.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
 
     domCache.structureInfo.allHeadingDomElements.forEach( de => {
-      debug$14.flag && debug$14.log(`[tagName]: ${de.tagName}`);
+      debug$15.flag && debug$15.log(`[tagName]: ${de.tagName}`);
 
       const dataItem = {
         level:             de.ariaInfo.ariaLevel,
@@ -1058,8 +1058,8 @@ class HeadingResults {
 /* landmarkRegionResults.js */
 
 /* constants */
-const debug$13 = new DebugLogging('landmarkRegionResults', false);
-debug$13.flag = false;
+const debug$14 = new DebugLogging('landmarkRegionResults', false);
+debug$14.flag = false;
 
 /**
  * @class landmarkRegionResults
@@ -1078,14 +1078,14 @@ class LandmarkRegionResults {
 
   update(domCache) {
 
-    debug$13.flag && debug$13.log(`[        structureInfo]: ${domCache.structureInfo}`);
-    debug$13.flag && debug$13.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
+    debug$14.flag && debug$14.log(`[        structureInfo]: ${domCache.structureInfo}`);
+    debug$14.flag && debug$14.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
 
     this.regionData = [];
 
     domCache.structureInfo.allLandmarkElements.forEach( le => {
       const de = le.domElement;
-      debug$13.flag && debug$13.log(`[role]: ${de.role}`);
+      debug$14.flag && debug$14.log(`[role]: ${de.role}`);
 
       const dataItem = {
         role:              de.role.toLowerCase(),
@@ -1116,8 +1116,8 @@ class LandmarkRegionResults {
 /* linkResults.js */
 
 /* constants */
-const debug$12 = new DebugLogging('linkResults', false);
-debug$12.flag = false;
+const debug$13 = new DebugLogging('linkResults', false);
+debug$13.flag = false;
 
 const pdfExtensions = [
   'pdf'   // Protable document format
@@ -1276,8 +1276,8 @@ class LinkResults {
 /* ruleResultsSummary.js */
 
 /* constants */
-const debug$11 = new DebugLogging('ruleResultsSummary', false);
-debug$11.flag = false;
+const debug$12 = new DebugLogging('ruleResultsSummary', false);
+debug$12.flag = false;
 
 /**
  * @class ruleResultsSummary
@@ -1333,17 +1333,64 @@ class ruleResultsSummary {
       }
     }
   }
+}
 
-  /**
-   * @method toJSON
-   *
-   * @desc Returns a JSON object describing the document headings
-   *
-   * @return {String} see @desc
-   */
+/* ruleResultsGroup.js */
 
-  toJSON () {
-    return JSON.stringify(this.headingData);
+/* constants */
+const debug$11 = new DebugLogging('ruleResultsGroup', false);
+debug$11.flag = false;
+
+/**
+ * @class ruleResultsGroup
+ *
+ * @desc Constructor for an object that contains a summary of rule results for a group of rules
+ */
+
+class ruleResultsGroup {
+  constructor (ids) {
+    this.ruleGroups = [];
+
+    for(let id in ids) {
+      if (ids[id]) {
+        const ruleGroupItem = {
+          id: ids[id],
+          summary: new ruleResultsSummary()
+        };
+        this.ruleGroups.push(ruleGroupItem);
+      }
+    }
+  }
+
+  get data () {
+    const results = [];
+    this.ruleGroups.forEach( (item) => {
+      const result = {
+        id: item.id,
+        violations: item.summary.data.violations,
+        warnings: item.summary.data.warnings,
+        manual_checks: item.summary.data.manual_checks,
+        passed: item.summary.data.passed
+      };
+      results.push(result);
+    });
+
+    return results;
+  }
+
+  clear() {
+    this.ruleGroups.forEach( (rg) => {
+      rg.summary.clear();
+    });
+  }
+
+  update(id, ruleResult) {
+    const items = this.ruleGroups.filter( (item) => {
+      return item.id & id;
+    });
+    items.forEach( (item) => {
+      item.summary.update(ruleResult);
+    });
   }
 }
 
@@ -18036,10 +18083,13 @@ const common = {
   recommended: 'Recommended',
   tableType: ['undefined', 'Unknown', 'Layout', 'Simple Data', 'Complex Data', 'ARIA Table', 'Grid', 'Tree Grid'],
 
-  elementViolationLabel:   'V',
-  elementWarningLabel:     'W',
-  elementPassLabel:        'P',
-  elementManualCheckLabel: 'MC',
+  elementViolationLabel:     'V',
+  elementWarningLabel:       'W',
+  elementPassLabel:          'P',
+  elementManualCheckLabel:   'MC',
+  elementHiddenLabel:        'H',
+  elementInertLabel:         'I',
+  elementNotApplicableLabel: 'NA',
 
   pageViolationLabel:   'Page Violation',
   pageWarningLabel:     'Page Warning',
@@ -30530,6 +30580,7 @@ class ElementResult extends BaseResult {
 
 /* elementResultSummary.js */
 
+
 const debug$D = new DebugLogging('ElementResultSummary', false);
 debug$D.flag = false;
 
@@ -30655,6 +30706,77 @@ class ResultsSummary {
       this.h += n;
     }
   }
+
+  /*
+   * @method getRuleResult
+   *
+   * @desc Returns the worst result
+
+   * @return  {Number}  Information about element summary
+   */
+
+  getRuleResultValue () {
+    if (this.v > 0) {
+      return RESULT_VALUE.VIOLATION;
+    }
+    else {
+      if (this.w > 0) {
+        return RESULT_VALUE.WARNING;
+      }
+      else {
+        if (this.mc > 0) {
+          return RESULT_VALUE.MANUAL_CHECK;
+        }
+        else {
+          if (this.p > 0) {
+            return RESULT_VALUE.PASSED;
+          }
+          else {
+            if (this.h > 0) {
+              return RESULT_VALUE.HIDDEN;
+            }
+          }
+        }
+      }
+    }
+    return RESULT_VALUE.UNDEFINED;
+  }
+
+  /*
+   * @method getRuleResultNLS
+   *
+   * @desc Returns the worst element result
+
+   * @return  {String}  Information about element summary
+   */
+
+  getRuleResultValueNLS () {
+    debug$D.log(`[getRuleResultValueNLS]`);
+    debug$D.log(`[getRuleResultValueNLS][getCommonMessage]: ${getCommonMessage}`);
+    debug$D.log(`[getRuleResultValueNLS][             msg]: ${getCommonMessage('elementViolationLabel')}`);
+    if (this.v > 0) {
+      return getCommonMessage('elementViolationLabel');
+    }
+    else {
+      if (this.w > 0) {
+        return getCommonMessage('elementWarningLabel');
+      }
+      else {
+        if (this.mc > 0) {
+          return getCommonMessage('elementManualCheckLabel');        }
+        else {
+          if (this.p > 0) {
+            return getCommonMessage('elementPassLabel');          }
+          else {
+            if (this.h > 0) {
+              return getCommonMessage('elementHiddenLabel');            }
+          }
+        }
+      }
+    }
+    return getCommonMessage('elementNotAppliableLabel');
+  }
+
 
   /*
    * @method toString
@@ -39331,6 +39453,8 @@ class EvaluationResult {
     this._landmarkRegions    = new LandmarkRegionResults();
     this._links              = new LinkResults();
     this._ruleResultsSummary = new ruleResultsSummary();
+    this._rcRuleResultsGroup = new ruleResultsGroup(RULE_CATEGORIES);
+    this._glRuleResultsGroup = new ruleResultsGroup(WCAG_GUIDELINE);
 
     debug$1.flag && debug$1.log(`[title]: ${this.title}`);
     debug$1.flag && debug$1.log(`[  url]: ${this.url}`);
@@ -39351,6 +39475,14 @@ class EvaluationResult {
 
   get ruleResultSummary () {
     return this._ruleResultsSummary;
+  }
+
+  get rcRuleGroupResults () {
+    return this._rcRuleResultsGroup;
+  }
+
+  get glRuleGroupResults () {
+    return this._glRuleResultsGroup;
   }
 
   /**
@@ -39439,6 +39571,8 @@ class EvaluationResult {
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
     this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
 
     allRules.forEach (rule => {
 
@@ -39451,6 +39585,8 @@ class EvaluationResult {
           ruleResult.validate(domCache);
           this.allRuleResults.push(ruleResult);
           this._ruleResultsSummary.update(ruleResult);
+          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
         }
       }
     });
@@ -39489,6 +39625,8 @@ class EvaluationResult {
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
     this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
 
     allRules.forEach (rule => {
 
@@ -39497,6 +39635,8 @@ class EvaluationResult {
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
         this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
       }
     });
 
@@ -39530,6 +39670,8 @@ class EvaluationResult {
     this.allDomElements = domCache.allDomElements;
     this.allRuleResults = [];
     this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
 
     allRules.forEach (rule => {
 
@@ -39538,6 +39680,8 @@ class EvaluationResult {
         ruleResult.validate(domCache);
         this.allRuleResults.push(ruleResult);
         this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
       }
     });
 
@@ -39628,6 +39772,33 @@ class EvaluationResult {
   }
 
   /**
+   * @method getRuleResultsByGuidelineWithSummary
+   *
+   * @desc Returns an object containing the rule results associated with a WCAG 2.0 Guideline
+   *       and a summary of rule results
+   *
+   * @param {Integer}  guidelineId  - Number representing the guideline id
+   *
+   * @return array [{RuleResultsSummary}, {RuleGroupResult}]  see description
+   */
+
+  getRuleResultsByGuidelineWithSummary (guidelineId) {
+    const glInfo  = getGuidelineInfo(guidelineId);
+    const glTitle = glInfo.title;
+
+    const summary = new ruleResultsSummary();
+    const rule_results = [];
+
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getCategory() & guidelineId) {
+        const result = this.getRuleResultInfo (rr);
+        rule_results.push(result);
+        summary.update(rr);
+      }
+    });
+    return [glTitle, summary, rule_results];
+  }
+  /**
    * @method getRuleResultsByCategory
    *
    * @desc Returns an object containing the rule results for the rules in a rule category
@@ -39649,6 +39820,43 @@ class EvaluationResult {
       }
     });
     return rgr;
+  }
+
+  getRuleResultInfo (rule_result) {
+    return {      id: rule_result.rule.getId(),
+             summary: rule_result.rule.getSummary(),
+              result: rule_result.getResultValueNLS(),
+        result_value: rule_result.getResultValue(),
+                  sc: rule_result.rule.getPrimarySuccessCriterionId(),
+               level: rule_result.rule.getWCAGLevel(),
+            required: rule_result.isRuleRequired()
+        };
+  }
+
+  /**
+   * @method getRuleResultsByCategoryWithSummary
+   *
+   * @desc Returns an object containing the rule results for the rules in a rule category
+   *       and a summary of rule results
+   *
+   * @param {Integer}  categoryId  -  Number of the rule category
+   *
+   * @return array [{RuleResultsSummary}, {array}, {object}]  see description
+   */
+
+  getRuleResultsByCategoryWithSummary (categoryId) {
+    const rcInfo = getRuleCategoryInfo(categoryId);
+    const summary = new ruleResultsSummary();
+    const rule_results = [];
+
+    this.allRuleResults.forEach( rr => {
+      if (rr.getRule().getCategory() & categoryId) {
+        const result = this.getRuleResultInfo (rr);
+        rule_results.push(result);
+        summary.update(rr);
+      }
+    });
+    return [rcInfo.title, summary, rule_results];
   }
 
   /**
