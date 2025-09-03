@@ -39792,7 +39792,7 @@ class EvaluationResult {
     const rule_results = [];
 
     this.allRuleResults.forEach( rr => {
-      if (rr.getRule().getCategory() & guidelineId) {
+      if (rr.getRule().getGuideline() & guidelineId) {
         const result = this.getRuleResultInfo (rr);
         rule_results.push(result);
         summary.update(rr);

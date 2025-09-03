@@ -111,8 +111,6 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule-group':
-          debug.flag && debug.log(`group: ${parts[0]} id: $${parts[1]}`);
-
           if (parts[0] === 'rc') {
             [groupTitle, summary, rule_results] = er.getRuleResultsByCategoryWithSummary(id);
           }
@@ -124,7 +122,7 @@ browserRuntime.onMessage.addListener(
           response.summary      = summary.data;
           response.rule_results = rule_results;
 
-          debug && console.log(`[response][gl][     summary]: ${response.groupTitle}`);
+          debug && console.log(`[response][gl][  groupTitle]: ${response.groupTitle}`);
           debug && console.log(`[response][gl][     summary]: ${response.summary}`);
           debug && console.log(`[response][gl][rule_results]: ${response.rule_results}`);
 
