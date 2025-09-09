@@ -95,40 +95,55 @@ browserRuntime.onMessage.addListener(
       debug && console.log(`[response][   location]: ${response.location}`);
       debug && console.log(`[response][result_view]: ${response.result_view}`);
 
-      let groupTitle, summary, rule_results;
+      let groupTitle, rule_summary, rule_results, info_rules;
+      let ruleTitle, element_summary, element_results, info_elements;
 
       const parts = r.rule_group_id.split('-');
-      const id = parseInt(parts[1]);
+      const group_id = parseInt(parts[1]);
 
       switch (response.result_view) {
         case 'rules-all':
-          response.summary               = er.ruleResultSummary.data;
+          response.rule_summary          = er.ruleResultSummary.data;
           response.rc_rule_results_group = er.rcRuleGroupResults.data;
           response.gl_rule_results_group = er.glRuleGroupResults.data;
-          debug && console.log(`[response][    summary]: ${response.summary}`);
-          debug && console.log(`[response][     rcData]: ${response.rc_rule_results_group}`);
-          debug && console.log(`[response][     glData]: ${response.gl_rule_results_group}`);
+          debug && console.log(`[response][rule_summary]: ${response.rule_summary}`);
+          debug && console.log(`[response][      rcData]: ${response.rc_rule_results_group}`);
+          debug && console.log(`[response][      glData]: ${response.gl_rule_results_group}`);
           break;
 
         case 'rule-group':
           if (parts[0] === 'rc') {
-            [groupTitle, summary, rule_results] = er.getRuleResultsByCategoryWithSummary(id);
+            [groupTitle, rule_summary, rule_results, info_rules] = er.getRuleResultsByCategoryWithSummary(group_id);
           }
           else {
-            [groupTitle, summary, rule_results] = er.getRuleResultsByGuidelineWithSummary(id);
+            [groupTitle, rule_summary, rule_results, info_rules] = er.getRuleResultsByGuidelineWithSummary(group_id);
           }
 
           response.groupTitle   = groupTitle;
-          response.summary      = summary.data;
+          response.rule_summary = rule_summary.data;
           response.rule_results = rule_results;
+          response.info_rules   = info_rules;
 
-          debug && console.log(`[response][gl][  groupTitle]: ${response.groupTitle}`);
-          debug && console.log(`[response][gl][     summary]: ${response.summary}`);
-          debug && console.log(`[response][gl][rule_results]: ${response.rule_results}`);
+          debug && console.log(`[response][${parts[0]}][  groupTitle]: ${response.groupTitle}`);
+          debug && console.log(`[response][${parts[0]}][rule_summary]: ${response.rule_summary}`);
+          debug && console.log(`[response][${parts[0]}][rule_results]: ${response.rule_results}`);
+          debug && console.log(`[response][${parts[0]}][  info_rules]: ${response.info_rules}`);
 
           break;
 
         case 'rule':
+          [ruleTitle, element_summary, element_results, info_elements] = er.getRuleResultWithSummary(r.rule_id);
+
+          response.ruleTitle       = ruleTitle;
+          response.element_summary = element_summary;
+          response.element_results = element_results;
+          response.info_elements   = info_elements;
+
+          debug && console.log(`[response][      ruleTitle]: ${response.ruleTitle}`);
+          debug && console.log(`[response][element_summary]: ${response.element_summary.violations}`);
+          debug && console.log(`[response][element_results]: ${response.element_results}`);
+          debug && console.log(`[response][. info_elements]: ${response.info_elements}`);
+
           break;
 
       }

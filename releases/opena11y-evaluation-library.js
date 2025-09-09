@@ -38906,7 +38906,7 @@ class Rule {
     this.manual_checks         = getManualChecks(this.rule_id);  // Array of strings
     this.informational_links   = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
 
-    // Localized messsages for evaluation results
+    // Localized messages for evaluation results
     this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
     this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
@@ -39707,6 +39707,69 @@ class EvaluationResult {
     return this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
   }
 
+  /**
+   * @method getRuleResultWithSummary
+   *
+   * @desc Gets rule result object with the associated id and
+   *
+   * @param {String}  rule_id  - id of the rule associated with the rule result
+   *
+   * @return array [String, {RuleResultSummary}, {array}, {array}]  see description
+   */
+  getRuleResultWithSummary (rule_id) {
+    debug$1.log(`[getRuleResultWithSummary][rule_id]: ${rule_id}`);
+    const rule_result = this.allRuleResults.find( rr => rr.rule.rule_id === rule_id);
+
+    const ruleTitle       = rule_result.rule.getSummary();
+
+    const s = rule_result.getResultsSummary();
+    const element_summary = {
+            violations:    s.violations,
+            warnings:      s.warnings,
+            manual_checks: s.manual_checks,
+            passed:        s.passed,
+            hidden:        s.hidden
+          };
+
+    const element_results = [];
+
+    rule_result.getAllResultsArray().forEach( (er) => {
+      if (er.isElementResult) {
+        const element_result = {
+          id:            er.getResultId(),
+          element:       er.getResultIdentifier(),
+          result_value:  er.getResultValue(),
+          result_abbrev: er.getResultValueNLS(),
+          result_long:   er.getResultValueLongNLS(),
+          position:      er.getOrdinalPosition(),
+          action:        er.getResultMessage(),
+          definition:    getRuleDefinition(rule_id),
+          role:          er.domElement.role,
+          tag_name:      er.domElement.tagName,
+        };
+        element_results.push(element_result);
+      }
+
+      if (er.isPageResult || er.isWebsiteResult) {
+        const other_result = {
+          id:            er.getResultId(),
+          element:       er.getResultIdentifier(),
+          result_value:  er.getResultValue(),
+          result_abbrev: er.getResultValueNLS(),
+          result_long:   er.getResultValueLongNLS(),
+          action:        er.getResultMessage(),
+          definition:    getRuleDefinition(rule_id),
+          position:      '',
+        };
+        element_results.push(other_result);
+      }
+    });
+
+    return [ruleTitle, element_summary, element_results];
+
+  }
+
+
 
   /**
    * @method getDomElementById
@@ -39779,7 +39842,7 @@ class EvaluationResult {
    *
    * @param {Integer}  guidelineId  - Number representing the guideline id
    *
-   * @return array [{RuleResultsSummary}, {RuleGroupResult}]  see description
+   * @return array [String, {RuleResultsSummary}, {array}, {array}]  see description
    */
 
   getRuleResultsByGuidelineWithSummary (guidelineId) {
@@ -39788,15 +39851,20 @@ class EvaluationResult {
 
     const summary = new ruleResultsSummary();
     const rule_results = [];
+    const info_rules = [];
 
     this.allRuleResults.forEach( rr => {
       if (rr.getRule().getGuideline() & guidelineId) {
         const result = this.getRuleResultInfo (rr);
         rule_results.push(result);
+
+        const info = this.getRuleInfo(rr);
+        info_rules.push(info);
+
         summary.update(rr);
       }
     });
-    return [glTitle, summary, rule_results];
+    return [glTitle, summary, rule_results, info_rules];
   }
   /**
    * @method getRuleResultsByCategory
@@ -39833,6 +39901,32 @@ class EvaluationResult {
         };
   }
 
+  getRuleInfo (rule_result) {
+    const rule = rule_result.rule;
+    const id = rule.getId();
+    return {
+        id: id,
+        rule_category_info:    getRuleCategoryInfo(rule.rule_category_id), // Object with keys to strings
+        guideline_info:        getGuidelineInfo(rule.wcag_guideline_id), // Object with keys to strings
+        rule_scope:            getScope(rule.rule_scope_id), // String
+        wcag_primary:          getSuccessCriterionInfo(rule.wcag_primary_id),
+        wcag_related:          getSuccessCriteriaInfo(rule.wcag_related_ids),
+        wcag_level:            getCommonMessage('level', rule.wcag_primary.level),
+        wcag_version:          getWCAGVersion(rule.wcag_primary_id),
+
+        rule_nls_id:           getRuleId(id), // String
+        summary:               getRuleSummary(id), // String
+        definition:            getRuleDefinition(id), // String
+        targets:               getTargetResourcesDesc(id), // String
+        purposes:              getPurposes(id),  // Array of strings
+        techniques:            getTechniques(id),  // Array of strings
+        manual_checks:         getManualChecks(id),  // Array of strings
+        informational_links:   getInformationLinks(id),  // Array of objects with keys to strings
+
+        actions:       rule_result.getResultMessagesArray()
+      };
+  }
+
   /**
    * @method getRuleResultsByCategoryWithSummary
    *
@@ -39841,22 +39935,28 @@ class EvaluationResult {
    *
    * @param {Integer}  categoryId  -  Number of the rule category
    *
-   * @return array [{RuleResultsSummary}, {array}, {object}]  see description
+   * @return array [String, {RuleResultsSummary}, {array}, {array}]  see description
    */
 
   getRuleResultsByCategoryWithSummary (categoryId) {
     const rcInfo = getRuleCategoryInfo(categoryId);
     const summary = new ruleResultsSummary();
     const rule_results = [];
+    const info_rules = [];
 
     this.allRuleResults.forEach( rr => {
       if (rr.getRule().getCategory() & categoryId) {
+
         const result = this.getRuleResultInfo (rr);
         rule_results.push(result);
+
+        const info = this.getRuleInfo(rr);
+        info_rules.push(info);
+
         summary.update(rr);
       }
     });
-    return [rcInfo.title, summary, rule_results];
+    return [rcInfo.title, summary, rule_results, info_rules];
   }
 
   /**

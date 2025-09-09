@@ -78,7 +78,7 @@ export default class Rule {
     this.manual_checks         = getManualChecks(this.rule_id);  // Array of strings
     this.informational_links   = getInformationLinks(this.rule_id);  // Array of objects with keys to strings
 
-    // Localized messsages for evaluation results
+    // Localized messages for evaluation results
     this.rule_result_msgs = getRuleResultMessages(this.rule_id); // Object with keys to strings
     this.base_result_msgs = getBaseResultMessages(this.rule_id); // Object with keys to strings
 
