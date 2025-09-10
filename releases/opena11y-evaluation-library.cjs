@@ -39738,26 +39738,30 @@ class EvaluationResult {
             hidden:        s.hidden
           };
 
+    let page_result    = false;
+    let website_result = false;
+
     const element_results = [];
 
     rule_result.getAllResultsArray().forEach( (er) => {
       if (er.isElementResult) {
         const de = er.domElement;
         const element_result = {
-          id:                     er.getResultId(),
-          element:                er.getResultIdentifier(),
-          result_value:           er.getResultValue(),
-          result_abbrev:          er.getResultValueNLS(),
-          result_long:            er.getResultValueLongNLS(),
-          position:               er.getOrdinalPosition(),
-          action:                 er.getResultMessage(),
-          definition:             getRuleDefinition(rule_id),
-          implied_role:           !de.hasRole,
-          role:                   de.role,
-          role_description:       de.roleDescription,
-          tag_name:               de.elemName.includes('#') ?
-                                  de.elemName.split('#')[0] :
-                                  de.elemName,
+          id:               er.getResultId(),
+          element:          er.getResultIdentifier(),
+          scope:            er.getResultType(),
+          result_value:     er.getResultValue(),
+          result_abbrev:    er.getResultValueNLS(),
+          result_long:      er.getResultValueLongNLS(),
+          position:         er.getOrdinalPosition(),
+          action:           er.getResultMessage(),
+          definition:       getRuleDefinition(rule_id),
+          implied_role:     !de.hasRole,
+          role:             de.role,
+          role_description: de.roleDescription,
+          tag_name:         de.elemName.includes('#') ?
+                            de.elemName.split('#')[0] :
+                            de.elemName,
 
           accessible_name_required:   de.ariaInfo.isNameRequired,
           accessible_name_prohibited: de.ariaInfo.isNameProhibited,
@@ -39767,7 +39771,11 @@ class EvaluationResult {
           error_message:              de.errMessage,
 
           html_attributes:            de.html_attrs,
-          aria_attributes:            de.aria_attrs
+          aria_attributes:            de.aria_attrs,
+
+          is_element: true,
+          is_page: false,
+          is_website: false
         };
 
         // For color contrast rules add color contrast information
@@ -39833,22 +39841,43 @@ class EvaluationResult {
         element_results.push(element_result);
       }
 
-      if (er.isPageResult || er.isWebsiteResult) {
-        const other_result = {
+      if (er.isPageResult) {
+        page_result = {
           id:            er.getResultId(),
           element:       er.getResultIdentifier(),
+          scope:         er.getResultType(),
           result_value:  er.getResultValue(),
           result_abbrev: er.getResultValueNLS(),
           result_long:   er.getResultValueLongNLS(),
           action:        er.getResultMessage(),
           definition:    getRuleDefinition(rule_id),
           position:      '',
+          is_element: false,
+          is_page: true,
+          is_website: false
         };
-        element_results.unshift(other_result);
       }
+
+      if (er.isWebsiteResult) {
+        website_result = {
+          id:            er.getResultId(),
+          element:       er.getResultIdentifier(),
+          scope:         er.getResultType(),
+          result_value:  er.getResultValue(),
+          result_abbrev: er.getResultValueNLS(),
+          result_long:   er.getResultValueLongNLS(),
+          action:        er.getResultMessage(),
+          definition:    getRuleDefinition(rule_id),
+          position:      '',
+          is_element: false,
+          is_page: false,
+          is_website: true
+        };
+      }
+
     });
 
-    return [ruleTitle, element_summary, element_results];
+    return [ruleTitle, element_summary, website_result, page_result, element_results];
 
   }
 

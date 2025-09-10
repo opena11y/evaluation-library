@@ -96,7 +96,7 @@ browserRuntime.onMessage.addListener(
       debug && console.log(`[response][result_view]: ${response.result_view}`);
 
       let groupTitle, rule_summary, rule_results, info_rules;
-      let ruleTitle, element_summary, element_results, info_elements;
+      let ruleTitle, element_summary, website_result, page_result, element_results;
 
       const parts = r.rule_group_id.split('-');
       const group_id = parseInt(parts[1]);
