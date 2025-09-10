@@ -86,6 +86,10 @@ export default class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
+    this.roleDescription = elementNode.hasAttribute('aria-roledescription') ?
+                              elementNode.getAttribute('aria-roledescription') :
+                              '';
+
     this.accesskey = elementNode.hasAttribute('accesskey') ? elementNode.getAttribute('accesskey') : '';
 
     // used for button and form control related rules
@@ -109,6 +113,7 @@ export default class DOMElement {
     this.accName        = getAccessibleName(accNameDoc, elementNode);
     this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(accNameDoc, elementNode);
+
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);

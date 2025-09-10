@@ -132,17 +132,19 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule':
-          [ruleTitle, element_summary, element_results, info_elements] = er.getRuleResultWithSummary(r.rule_id);
+          [ruleTitle, element_summary, website_result, page_result, element_results] = er.getRuleResultWithSummary(r.rule_id);
 
           response.ruleTitle       = ruleTitle;
           response.element_summary = element_summary;
+          response.website_result  = website_result;
+          response.page_result     = page_result;
           response.element_results = element_results;
-          response.info_elements   = info_elements;
 
           debug && console.log(`[response][      ruleTitle]: ${response.ruleTitle}`);
           debug && console.log(`[response][element_summary]: ${response.element_summary.violations}`);
+          debug && console.log(`[response][ website_result]: ${response.website_result}`);
+          debug && console.log(`[response][    page_result]: ${response.page_result}`);
           debug && console.log(`[response][element_results]: ${response.element_results}`);
-          debug && console.log(`[response][. info_elements]: ${response.info_elements}`);
 
           break;
 
