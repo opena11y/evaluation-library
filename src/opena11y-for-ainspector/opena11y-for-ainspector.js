@@ -1,6 +1,11 @@
 /* opena11y-for-ainspector.js */
 
 import EvaluationLibrary from '../evaluationLibrary.js';
+import aiRuleResult      from '../results/aiRuleResult.js';
+import {
+  aiRuleResultsByCategory,
+  aiRuleResultsByGuideline
+} from '../results/aiRuleGroupResult.js';
 
 // Constants
 const debug = true;
@@ -84,6 +89,8 @@ browserRuntime.onMessage.addListener(
               r.aria_version,
               true);
 
+      debug && console.log(`[er]: ${er}`);
+
       let response = {
         title:         er.getTitle(),
         location:      er.getURL(),
@@ -95,8 +102,8 @@ browserRuntime.onMessage.addListener(
       debug && console.log(`[response][   location]: ${response.location}`);
       debug && console.log(`[response][result_view]: ${response.result_view}`);
 
-      let groupTitle, rule_summary, rule_results, info_rules;
-      let ruleTitle, element_summary, website_result, page_result, element_results;
+      let group_title, rule_summary, rule_results, info_rules;
+      let rule_title, element_summary, website_result, page_result, element_results;
 
       const parts = r.rule_group_id.split('-');
       const group_id = parseInt(parts[1]);
@@ -113,18 +120,18 @@ browserRuntime.onMessage.addListener(
 
         case 'rule-group':
           if (parts[0] === 'rc') {
-            [groupTitle, rule_summary, rule_results, info_rules] = er.getRuleResultsByCategoryWithSummary(group_id);
+            [group_title, rule_summary, rule_results, info_rules] = aiRuleResultsByCategory(er.allRuleResults, group_id);
           }
           else {
-            [groupTitle, rule_summary, rule_results, info_rules] = er.getRuleResultsByGuidelineWithSummary(group_id);
+            [group_title, rule_summary, rule_results, info_rules] = aiRuleResultsByGuideline(er.allRuleResults, group_id);
           }
 
-          response.groupTitle   = groupTitle;
+          response.group_title  = group_title;
           response.rule_summary = rule_summary.data;
           response.rule_results = rule_results;
           response.info_rules   = info_rules;
 
-          debug && console.log(`[response][${parts[0]}][  groupTitle]: ${response.groupTitle}`);
+          debug && console.log(`[response][${parts[0]}][ group_title]: ${response.group_title}`);
           debug && console.log(`[response][${parts[0]}][rule_summary]: ${response.rule_summary}`);
           debug && console.log(`[response][${parts[0]}][rule_results]: ${response.rule_results}`);
           debug && console.log(`[response][${parts[0]}][  info_rules]: ${response.info_rules}`);
@@ -132,15 +139,15 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule':
-          [ruleTitle, element_summary, website_result, page_result, element_results] = er.getRuleResultWithSummary(r.rule_id);
+          [rule_title, element_summary, website_result, page_result, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
 
-          response.ruleTitle       = ruleTitle;
+          response.rule_title      = rule_title;
           response.element_summary = element_summary;
           response.website_result  = website_result;
           response.page_result     = page_result;
           response.element_results = element_results;
 
-          debug && console.log(`[response][      ruleTitle]: ${response.ruleTitle}`);
+          debug && console.log(`[response][     rule_title]: ${response.rule_title}`);
           debug && console.log(`[response][element_summary]: ${response.element_summary.violations}`);
           debug && console.log(`[response][ website_result]: ${response.website_result}`);
           debug && console.log(`[response][    page_result]: ${response.page_result}`);
