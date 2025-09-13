@@ -9,15 +9,15 @@ import {REFERENCES} from '../../constants.js';
 export const controlRules = {
   CONTROL_1: {
       ID:         'Control 1',
-      DEFINITION: 'Each @input@, @select@, @textarea@, @progress@, @meter@ and @output@ element must have an accessible name using @label@ elements.',
+      DEFINITION: 'Each @input@, @select@, @textarea@, @progress@ and @meter@ element must have an accessible name using @label@ elements.',
       SUMMARY:    'Form controls must have labels',
-      TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
+      TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@ and @meter@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',
         MANUAL_CHECK_S: 'Verify the visual rendering of the SVG content of the element with @role=button@ adapts to operating system and browser color and size settings.',
         MANUAL_CHECK_P: 'Verify the visual rendering of the SVG content of the %N_MC elements with @role=button@ adapt to operating system and browser color and size settings.',
-        NOT_APPLICABLE: 'No @input@, @select@, @textarea@, @progress@, @meter@ or @output@ elements on the page.',
+        NOT_APPLICABLE: 'No @input@, @select@, @textarea@, @progress@ or @meter@ elements on the page.',
         HIDDEN_S: 'One form control element that is hidden was not evaluated.',
         HIDDEN_P: '%N_H form control elements that are hidden were not evaluated.'
       },
@@ -819,7 +819,7 @@ export const controlRules = {
         ID:                    'Control 15',
         DEFINITION:            'The labels (e.g. accessible name) for controls and widgets that include text or images of text, the name contains the text that is presented visually.',
         SUMMARY:               'Label in name for controls',
-        TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
+        TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
           MANUAL_CHECK_S:  'Verify the control with images, @aria-label@ and/or references to hidden content contain the same text associated with the visually rendered label associated with the control.',
           MANUAL_CHECK_P:  'Verify that each of the %N_MC controls with images, @aria-label@ and/or references to hidden content contain the same text associated with each of the visually rendered labels associated with each control.',
@@ -880,7 +880,7 @@ export const controlRules = {
         ID:                    'Control 16',
         DEFINITION:            'Use @autocomplete@ attributes or other programmatic techniques that support auto-populating form controls with information previously entered by the user, unless the content meets one of the exceptions related to gaming, security or data validity.',
         SUMMARY:               'Redundant Entry',
-        TARGET_RESOURCES_DESC: '@input@, @output@, @select@, @textarea@ and widgets',
+        TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@ and widgets',
         RULE_RESULT_MESSAGES: {
           MANUAL_CHECK_S:  'Verify if the user benefits from the control supporting auto population.',
           MANUAL_CHECK_P:  'Verify if the user benefits from the any of the %N_MC controls supporting auto population.',
@@ -925,7 +925,7 @@ export const controlRules = {
       ID:                    'Control 17',
       DEFINITION:            'Some assistive technologies, including speech input, do not reliably associate labels with the controls when only label encapsulation is used for labeling.',
       SUMMARY:               'Avoid label encapsulation',
-      TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@, @meter@ and @output@ elements',
+      TARGET_RESOURCES_DESC: '@input@, @select@, @textarea@, @progress@ and @meter@ elements',
       RULE_RESULT_MESSAGES: {
         FAIL_S:   'Add a an @id@ to the control and use the @ a label to the form control element that is unlabelled.',
         FAIL_P:   'Add labels to the %N_F form control elements that are unlabelled.',

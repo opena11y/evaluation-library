@@ -84,6 +84,7 @@ const  elementsThatAllowNameFromContents = [
 import DebugLogging        from '../debug.js';
 const debug = new DebugLogging('getAccName', false);
 debug.flag = false;
+
 function debugAccName (accName) {
   if (debug.flag && accName.name) {
     debug.log(`====================`);

@@ -3,6 +3,14 @@
 /* Imports */
 import DebugLogging  from '../debug.js';
 
+import {
+  getCommonMessage
+} from '../locale/locale.js';
+
+import {
+  isHex
+} from '../utils.js';
+
 /* Constants */
 const debug = new DebugLogging('colorContrast', false);
 debug.flag = false;
@@ -73,10 +81,11 @@ export default class ColorContrast {
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
 
     this.backgroundColorElem = style.getPropertyValue("background-color");
-    this.backgroundColor     = this.normalizeBackgroundColor(style, parentColorContrast);
-    this.backgroundColorHex  = this.rgbToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+    this.backgroundColor     = this.normalizeBackgroundColor(this.backgroundColorElem, parentColorContrast);
+    this.backgroundColorHex  = this.colorToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
+
     this.color               = style.getPropertyValue("color");
-    this.colorHex            = this.rgbToHex(this.color, this.backgroundColorHex, this.opacity);
+    this.colorHex            = this.colorToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
     this.backgroundRepeat   = style.getPropertyValue("background-repeat");
@@ -88,22 +97,33 @@ export default class ColorContrast {
     this.fontWeight = this.normalizeFontWeight(style, parentColorContrast);
     this.isLargeFont = this.getLargeFont(this.fontSize, this.fontWeight);
 
-    this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
+    if (isHex(this.colorHex) && isHex(this.backgroundColorHex)) {
+      this.colorContrastRatio = computeCCR(this.colorHex, this.backgroundColorHex);
+    }
+    else {
+      this.colorContrastRatio = '';
+      if (!isHex(this.colorHex)) {
+        this.colorHex = getCommonMessage('unsupported_color');
+      }
+      if (!isHex(this.backgroundColorHex)) {
+        this.backgroundColorHex = getCommonMessage('unsupported_color');
+      }
+    }
 
     this.isPositioned  = this.isPositioned(style, parentColorContrast);
     this.isTransparent = this.isTransparent(this.backgroundColor);
 
     if (debug.flag) {
 
-      debug.log(`[               parent color]: ${parentColorContrast.color}`);
-      debug.log(`[    parent background color]: ${parentColorContrast.backgroundColor}`);
+      debug.log(`[                 parent color]: ${parentColorContrast.color}`);
+      debug.log(`[      parent background color]: ${parentColorContrast.backgroundColor}`);
 
-      debug.log(`[                      color]: ${this.color}`);
-      debug.log(`[           background color]: ${this.backgroundColor}`);
+      debug.log(`[                        color]: ${this.color}`);
+      debug.log(`[             background color]: ${this.backgroundColor}`);
 
-      debug.log(`[                    opacity]: ${this.opacity}`);
-      debug.log(`[           Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
-      debug.log(`[ Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
+      debug.log(`[                      opacity]: ${this.opacity}`);
+      debug.log(`[             Background Image]: ${this.backgroundImage} (${this.hasBackgroundImage})`);
+      debug.log(`[   Family/Size/Weight/isLarge]: "${this.fontFamily}"/${this.fontSize}/${this.fontWeight}/${this.isLargeFont}`);
       debug.color(`[   CCR for Color/Background]: ${this.colorContrastRatio} for #${this.colorHex}/#${this.backgroundColorHex}`, this.color, this.backgroundColor);
     }
   }
@@ -209,8 +229,7 @@ export default class ColorContrast {
    * @return {String}  Returns the background color
    */
 
-  normalizeBackgroundColor (style, parentColorContrast) {
-    let backgroundColor = style.getPropertyValue("background-color");
+  normalizeBackgroundColor (backgroundColor, parentColorContrast) {
     if ((backgroundColor == 'rgba(0, 0, 0, 0)') ||
         (backgroundColor == 'transparent') ||
         (backgroundColor == 'inherit')) {
@@ -220,10 +239,6 @@ export default class ColorContrast {
       if (parentColorContrast) {
         debug.flag && debug.log(`[normalizeBackgroundColor][backgroundColor]: ${parentColorContrast.backgroundColor}`);
         backgroundColor   = parentColorContrast.backgroundColor;
-      }
-      else {
-        // This is an edge case test typically for body elements and frames
-//        backgroundColor = 'rgb(255,255,255)';
       }
     }
     return backgroundColor;
@@ -340,11 +355,11 @@ export default class ColorContrast {
   }
 
   /**
-  * @function rgbToHex
+  * @function colorToHex
   *
-  * @desc Converts an RGB color to Hex values
+  * @desc Tries to convert a colorto Hex values
   *
-  * @param {String} colorRGB       - RGB Color rgb(rr, gg, bb) or rgb(rr, gg, bb, aa)
+  * @param {String} color.         - RGB Color rgb(rr, gg, bb), rgb(rr, gg, bb, aa) or srgb( n n n)
   * @param {String} backgroundHex  - Background color as a hex value
   * @param {Number}  opacity       - A number between 0 and 1 representing CSS value
   *                                  default value is 1.0
@@ -352,25 +367,54 @@ export default class ColorContrast {
   * @return  {String}  - Hex version of the RGB color
   */
 
-  rgbToHex ( colorRGB, backgroundHex, opacity=1.0 ) {
+  colorToHex ( color, backgroundHex, opacity=1.0 ) {
+
+    function isRGB(c) {
+      return (c.includes('rgb') || c.includes('rgba')) && !isSRGB(c);
+    }
+
+    function isSRGB(c) {
+      return c.includes('srgb');
+    }
 
     function hexToString(d) {
-      let hex = Number(d).toString(16);
+      let hex = Math.round(d).toString(16);
       return hex.length === 1 ? '0' + hex : hex;
     }
 
-    if (!colorRGB) return "000000";
+    let c, parts, r1, g1, b1;
+    let o1 = 1.0;
 
-    colorRGB = colorRGB.replace('"', '');
-    colorRGB = colorRGB.split(')')[0];
-    colorRGB = colorRGB.split('(')[1];
-    const parts = colorRGB.split(',');
-    let r1 = parseFloat(parts[0]);
-    let g1 = parseFloat(parts[1]);
-    let b1 = parseFloat(parts[2]);
-    const o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+    if (isSRGB(color)) {
+      debug.log(`[color]: ${color} [isRGB]: ${isRGB(color)} [isSRGB]: ${isSRGB(color)}`);
+    }
 
-    if (typeof backgroundHex !== 'string' || backgroundHex.length !== 6) {
+    if (!isRGB(color) && !isSRGB(color)) return "";
+
+    if (isRGB(color)) {
+      c = color.replace('"', '');
+      c = c.split(')')[0];
+      c = c.split('(')[1];
+      parts = c.split(',');
+      r1 = parseFloat(parts[0]);
+      g1 = parseFloat(parts[1]);
+      b1 = parseFloat(parts[2]);
+      o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+    }
+    else {
+      // Assume srgb
+      c = color.split(')')[0];
+      c = c.split('srgb')[1].trim();
+      parts = c.split(' ');
+      r1 = parseFloat(parts[0]) * 255;
+      g1 = parseFloat(parts[1]) * 255;
+      b1 = parseFloat(parts[2]) * 255;
+      debug.log(`[srgb][r1]: ${r1}`);
+      debug.log(`[srgb][g1]: ${g1}`);
+      debug.log(`[srgb][c1]: ${b1}`);
+    }
+
+    if (!isHex(backgroundHex)) {
       backgroundHex = 'FFFFFF';
     }
 
@@ -403,6 +447,10 @@ export default class ColorContrast {
       r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
       g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
       b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
+    }
+
+    if (isSRGB(color)) {
+      debug.log(`[r1]: ${hexToString(r1)} [g1]: ${hexToString(g1)} [b1]: ${hexToString(b1)}`);
     }
 
     return hexToString(r1) + hexToString(g1) + hexToString(b1);

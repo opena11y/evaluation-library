@@ -30,7 +30,8 @@ export const colorRules = {
         ELEMENT_MC_2:     'CCR of %1 is less than 4.5, but background image may improve color contrast.',
         ELEMENT_MC_3:     'CCR of %1 is equal to or greater than 3 for large or bolded text, but background image may reduce color contrast.',
         ELEMENT_MC_4:     'CCR of %1 is less than 3 for large and bolded text, but background image may improve color contrast.',
-        ELEMENT_MC_5:     'CCR cannot be reliably computed due to the repositioning of the text on the page by the author and the background of the text being transparent (e.g. no specific color).',
+        ELEMENT_MC_5:     'CCR cannot be reliably computed due to the repositioning of the text on the page by the author and the background of the text being transparent (e.g. no specific color), you will need to use another method to verify the color contrast.',
+        ELEMENT_MC_6:     'CCR cannot be computed due the computed color format not supported for conversion to a hex number, you will need to use another method to verify the color contrast.',
         ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
       PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
@@ -124,8 +125,9 @@ export const colorRules = {
         ELEMENT_MC_2:     'CCR of %1 is less than 7, but background image may improve color contrast.',
         ELEMENT_MC_3:     'CCR of %1 is equal to or greater than 4.5 for large or bolded text, but background image may reduce color contrast.',
         ELEMENT_MC_4:     'CCR of %1 is less than 4.5 for large and bolded text, but background image may improve color contrast.',
-        ELEMENT_MC_5:     'CCR cannot be reliably computed due to the repositioning of the text on the page by the author and the background of the text being transparent (e.g. no specific color).',
-        ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
+        ELEMENT_MC_5:     'CCR cannot be reliably computed due to the repositioning of the text on the page by the author and the background of the text being transparent (e.g. no specific color), you will need to use another method to verify the color contrast.',
+        ELEMENT_MC_6:     'CCR cannot be computed due the computed color format not supported for conversion to a hex number, you will need to use another method to verify the color contrast.',
+       ELEMENT_HIDDEN_1: 'CCR was not tested since the text is hidden from assistive technologies.'
       },
       PURPOSES:       [ 'The higher the color contrast of text the more easy it is to read, especially for people with visual impairments.'
                       ],

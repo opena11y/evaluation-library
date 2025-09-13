@@ -30,10 +30,11 @@ debug.flag = false;
 /**
  * @function aiRuleResultsByCategory
  *
- * @desc Returns an object containing the rule results for the rules in a rule category
- *       and a summary of rule results
+ * @desc Returns an array of information containing the rule results for the rules
+ *       in a rule category and a summary of rule results
  *
- * @param {Integer}  categoryId  -  Number of the rule category
+ * @param {Array}    AllRuleResults  - Array of RuleResult objects from an EvaluationResult
+ * @param {Integer}  categoryId      - Number of the rule category
  *
  * @return array [String, {RuleResultsSummary}, {array}, {array}]  see description
  */
@@ -62,10 +63,11 @@ export function aiRuleResultsByCategory (allRuleResults, categoryId) {
 /**
  * @method aiRuleResultsByGuideline
  *
- * @desc Returns an object containing the rule results associated with a WCAG 2.0 Guideline
- *       and a summary of rule results
+ * @desc Returns an array of information containing the rule results associated
+ *       with a WCAG 2.0 Guidelinr and a summary of rule results
  *
- * @param {Integer}  guidelineId  - Number representing the guideline id
+ * @param {Array}    AllRuleResults  - Array of RuleResult objects from an EvaluationResult
+ * @param {Integer}  guidelineId     - Number representing the guideline id
  *
  * @return array [String, {RuleResultsSummary}, {array}, {array}]  see description
  */

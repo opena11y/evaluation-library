@@ -39,7 +39,7 @@ export const widgetRules = [
       const ai = de.ariaInfo;
       // There are other rules that check for accessible name for labelable controls, landmarks, headings and links
       // Ignore option role, since web developers are very sloppy about giving them content before they are made visible
-      if (ai.isWidget && !de.isLabelable && !de.isLink && (de.role !== 'option')) {
+      if (ai.isWidget && !de.isButton && !de.isLabelable && !de.isLink && (de.role !== 'option')) {
         if (de.visibility.isVisibleToAT) {
           if (de.accName.name) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role, de.accName.name]);

@@ -175,6 +175,7 @@ export default class EvaluationResult {
     this.date           = getFormattedDate();
     this.version        = VERSION;
     this.allDomElements = [];
+
     this._allRuleResults = [];
 
     this._headings           = new HeadingResults();

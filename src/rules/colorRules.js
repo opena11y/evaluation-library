@@ -12,6 +12,99 @@ import DebugLogging  from '../debug.js';
 const debug = new DebugLogging('Color Rules', false);
 debug.flag = false;
 
+/* Helper Functions */
+
+
+  /**
+   * @function checkColorContrast
+   *
+   * @desc Resolves color contrast rule results based on min CRR values,
+   *       this function is used by the two color contrast rules
+   *
+   * @param {Object}  rule_result         :  RuleResult object
+   * @param {Object}  domText             :  DOMText object
+   * @param {Number}  min_ccr_large_font  :  Minimum CCR for large font
+   * @param {Number}  min_ccr_normal_font :  Minimum CCR for normal font
+   *
+   */
+
+
+function  checkColorContrast(rule_result, domText, min_ccr_large_font, min_ccr_normal_font) {
+
+  const de  = domText.parentDomElement;
+  const cc  = de.colorContrast;
+  const ccr = cc.colorContrastRatio;
+
+  if (de.visibility.isVisibleOnScreen) {
+    if (ccr === '') {
+      rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_6', []);
+    }
+    else {
+      if (cc.isLargeFont) {
+        if (ccr >= min_ccr_large_font) {
+          // Passes color contrast requirements
+          if (cc.hasBackgroundImage) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
+          }
+          else {
+            if (cc.isPositioned && cc.isTransparent) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
+            }
+          }
+        }
+        else {
+          // Fails color contrast requirements
+          if (cc.hasBackgroundImage) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
+          }
+          else {
+            if (cc.isPositioned && cc.isTransparent) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+            }
+          }
+        }
+      }
+      else {
+        if (ccr >= min_ccr_normal_font) {
+          // Passes color contrast requirements
+          if (cc.hasBackgroundImage) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
+          }
+          else {
+            if (cc.isPositioned && cc.isTransparent) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
+            }
+          }
+        }
+        else {
+          // Fails color contrast requirements
+          if (cc.hasBackgroundImage) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
+          }
+          else {
+            if (cc.isPositioned && cc.isTransparent) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
+            }
+          }
+        }
+      }
+    }
+  } else {
+    rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
+  }
+}
 
 /*
  * OpenA11y Alliance Rules
@@ -36,80 +129,10 @@ export const colorRules = [
     target_resources    : ['text content'],
     validate            : function (dom_cache, rule_result) {
 
-      const MIN_CCR_NORMAL_FONT = 4.5;
-      const MIN_CCR_LARGE_FONT  = 3;
-
       debug.flag && debug.log(`===== COLOR 1 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
-        const de  = domText.parentDomElement;
-        const cc  = de.colorContrast;
-        const ccr = cc.colorContrastRatio;
-
-        if (de.visibility.isVisibleOnScreen) {
-          if (cc.isLargeFont) {
-            if (ccr >= MIN_CCR_LARGE_FONT) {
-              // Passes color contrast requirements
-              if (cc.hasBackgroundImage) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
-                }
-              }
-            }
-            else {
-              // Fails color contrast requirements
-              if (cc.hasBackgroundImage) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
-                }
-              }
-            }
-          }
-          else {
-            if (ccr >= MIN_CCR_NORMAL_FONT) {
-              // Passes color contrast requirements
-              if (cc.hasBackgroundImage) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
-                }
-              }
-            }
-            else {
-              // Fails color contrast requirements
-              if (cc.hasBackgroundImage) {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
-                }
-              }
-            }
-          }
-        } else {
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
-        }
+        checkColorContrast(rule_result, domText, 3, 4.5);
       });
     } // end validate function
   },
@@ -153,96 +176,10 @@ export const colorRules = [
     target_resources    : ['text content'],
     validate            : function (dom_cache, rule_result) {
 
-      let index = 0;
-      function checkResult(domElement, result) {
-        const node    = domElement.node;
-        const tagName = node.tagName;
-        const id      = node.id ? `[id=${node.id}]` : '';
-        const cc      = domElement.colorContrast;
-        const crr     = cc.colorContrastRatio
-        debug.flag && debug.log(`[${index += 1}][${result}][${tagName}]${id}: ${crr}`);
-      }
-
-
-      const MIN_CCR_NORMAL_FONT = 7;
-      const MIN_CCR_LARGE_FONT  = 4.5;
-
       debug.flag && debug.log(`===== COLOR 3 ====`);
 
       dom_cache.allDomTexts.forEach( domText => {
-        const de  = domText.parentDomElement;
-        const cc  = de.colorContrast;
-        const ccr = cc.colorContrastRatio;
-
-        if (de.visibility.isVisibleOnScreen) {
-          if (cc.isLargeFont || cc.isBoldedFont) {
-            if (ccr >= MIN_CCR_LARGE_FONT) {
-              // Passes color contrast requirements
-              if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_3', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_2', [ccr]);
-                }
-              }
-            }
-            else {
-              // Fails color contrast requirements
-              if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
-                }
-              }
-            }
-          }
-          else {
-            if (ccr >= MIN_CCR_NORMAL_FONT) {
-              // Passes color contrast requirements
-              if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_1', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.PASS, domText, 'ELEMENT_PASS_1', [ccr]);
-                }
-              }
-            }
-            else {
-              // Fails color contrast requirements
-              if (cc.hasBackgroundImage) {
-                checkResult(de, 'MC');
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_2', [ccr]);
-              }
-              else {
-                if (cc.isPositioned && cc.isTransparent) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
-                }
-                else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_1', [ccr]);
-                }
-              }
-            }
-          }
-        } else {
-          checkResult(de, 'HIDDEN');
-          rule_result.addElementResult(TEST_RESULT.HIDDEN, domText, 'ELEMENT_HIDDEN_1', []);
-        }
+        checkColorContrast(rule_result, domText, 4.5, 7);
       });
     } // end validate function
   },

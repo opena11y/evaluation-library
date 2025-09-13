@@ -8,6 +8,9 @@ Version 2.0.6 Overview
 * Support inert attribute
 * Fixed support for aria-hidden=true attribute in accessible name calculation
 * Updated utility function for normalizing text to just remove control characters
+* Updated CONTROL_1 rule to check to see if role requires an accessible name
+* Removed references to @output@ in control rule messaging
+* Fixed issue in accessible name calculation for content that is hidden from AT using aria-hidden
 
 Version 2.0.5 Overview
 =============================

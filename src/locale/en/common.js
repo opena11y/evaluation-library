@@ -59,6 +59,8 @@ export const common = {
   scopeFilterPage:    ', Page scope only',
   scopeFilterWebsite: ', Website scope only',
 
-  headerSource: ['none', 'none', 'Headers Attribute', 'Row/Column Headers']
+  headerSource: ['none', 'none', 'Headers Attribute', 'Row/Column Headers'],
+
+  unsupported_color: 'Unsupported computed color'
 
 }

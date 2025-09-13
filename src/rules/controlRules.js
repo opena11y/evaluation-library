@@ -99,7 +99,7 @@ export const controlRules = [
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (!ce.isInputTypeImage) {
-        if (de.isLabelable) {
+        if (de.isLabelable && de.ariaInfo.isNameRequired) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               if (de.accName.cellHeaders) {

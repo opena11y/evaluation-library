@@ -10,6 +10,7 @@ export {
   hasInvalidState,
   hasCheckedState,
   hasSelectedState,
+  isHex,
   isLabelable,
   normalize,
   normalizeLeadingAndTrailingSpace,
@@ -334,4 +335,21 @@ function cleanName (name) {
   }
   return newName;
 };
+
+
+/**
+ * @function isHex
+ *
+ * @desc Tests if string a 6 digit hex number
+ *
+ * @param {String}  test    - String to test for hex representation of a color value
+ *
+ * @return {Boolean}  True if a hex number, otherwise false
+ */
+
+function isHex (test) {
+  return typeof test === 'string' && test.length == 6;
+}
+
+
 

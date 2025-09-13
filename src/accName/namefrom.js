@@ -96,7 +96,9 @@ function getElementContents (element, forElement) {
     result = (arrayOfStrings.length) ? arrayOfStrings.join('') : '';
   }
 
-  return [addCssGeneratedContent(element, result), includesAlt, includesAriaLabel];
+  const name = normalize(addCssGeneratedContent(element, result));
+
+  return [name, includesAlt, includesAriaLabel];
 }
 
 // HIGHER-LEVEL FUNCTIONS THAT RETURN AN OBJECT WITH SOURCE PROPERTY
@@ -160,14 +162,17 @@ function nameFromAltAttribute (element) {
 *   @returns {Object}  @desc
 */
 function nameFromContents (element) {
-
   const [name, inclAlt, inclAriaLabel] = getElementContents(element);
-  if (name.length) return { name: normalize(name),
-                            source: 'contents',
-                            includesAlt: inclAlt,
-                            includesAriaLabel: inclAriaLabel,
-                            nameIsNotVisible: false
-                          };
+
+  if (name.length) {
+    return  { name: normalize(name),
+              source: 'contents',
+              includesAlt: inclAlt,
+              includesAriaLabel: inclAriaLabel,
+              nameIsNotVisible: false
+            };
+  }
+
   return null;
 }
 
@@ -368,7 +373,7 @@ function isDisplayNone (node, psuedo=null) {
       return true;
     }
 
-    // aria-hidden attribute with the value "true" is an same as
+    // aria-hidden attribute with the value "true" is the same as
     // setting the hidden attribute for name calculation
     if (node.hasAttribute('aria-hidden')) {
       if (node.getAttribute('aria-hidden').toLowerCase()  === 'true') {

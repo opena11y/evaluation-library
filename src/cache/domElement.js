@@ -128,7 +128,8 @@ export default class DOMElement {
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
 
-    this.isLink      = this.role === 'link';
+    this.isButton    = this.role === 'button' && this.tagName === 'button';
+    this.isLink      = this.role === 'link' && this.tagName === 'a';
     this.isLandmark  = this.checkIsLandamrk();
     this.isHeading   = this.role === 'heading';
     this.isInDialog  = this.tagName === 'dialog' ||
@@ -306,7 +307,7 @@ export default class DOMElement {
    *
    * @param {Object}  node  - DOM node element
    *
-   * @param {Array} array of objects with attribute name and value properties
+   * @param {Object} Object of attribute name as key to a value
    */
 
   getHtmlAttrs (node) {
