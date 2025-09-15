@@ -87,10 +87,11 @@ export default function aiRuleResult (all_rule_results, rule_id) {
                                                 '#' + cc.backgroundColorHex :
                                                 cc.backgroundColorHex;
         cc_result.color                  = cc.color;
-        cc_result.color_hex              = cc.colorHex;
         cc_result.color_hex              = isHex(cc.colorHex) ?
                                                 '#' + cc.colorHex :
                                                 cc.colorHex;
+
+        cc_result.opacity                = cc.opacity;
 
         cc_result.is_positioned          = cc.isPositioned;
 
@@ -113,27 +114,29 @@ export default function aiRuleResult (all_rule_results, rule_id) {
 
         tc_result.start_row       = tc.startRow;
         tc_result.start_column    = tc.startColumn;
-        tc_result.end_row         = tc.endRow;
-        tc_result.end_column      = tc.endColumn;
+        tc_result.row_span        = tc.endRow - tc.startRow;
+        tc_result.column_span     = tc.endColumn - tc.startColumn;
 
-        tc_result.headers         = tc.headers;
-        tc_result.headers_source  = tc.headersSource;
+        tc_result.headers         = tc.headers.join(' | ');
+        tc_result.headers_source  = tc.headersSourceNLS;
 
-        tc_result.has_content     = tc.hasContent;
+        tc_result.empty_cell      = !tc.hasContent;
       }
 
       // For table rules related to purpose, naming and size information
-      if ((rule_id.indexOf('TABLE') === 0) && (rule_id !== 'TABLE_1')){
+      if (de.tableElement &&
+          (rule_id.indexOf('TABLE') === 0) &&
+          (rule_id !== 'TABLE_1')){
         const te = de.tableElement;
         const te_result = element_result.table = {};
-        te_result.table_type         = te.tableType;
+        te_result.type_nls           = te.tableTypeNLS;
 
         te_result.rows               = te.rowCount;
         te_result.columns            = te.colCount;
         te_result.spanned_data_cells = te.spannedDataCells;
 
-        te_result.cell_count         = te.cellCoount;
-        te_result.header_cell_count  = te.headerCellCoount;
+        te_result.cell_count         = te.cellCount;
+        te_result.header_cell_count  = te.headerCellCount;
       }
 
       element_results.push(element_result);

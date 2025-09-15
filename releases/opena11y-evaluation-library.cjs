@@ -28637,7 +28637,8 @@ class TableElement {
     this.domElement = domElement;
     this.parentTableElement = parentTableElement;
 
-    this.tableType = TABLE_TYPE.UNKNOWN;
+    this.tableType    = TABLE_TYPE.UNKNOWN;
+    this.tableTypeNLS = getCommonMessage('tableType', this.tableType);
     this.hasCaption = false;
 
     this.nestingLevel = parentTableElement ?
@@ -28774,6 +28775,7 @@ class TableElement {
               }
               if (cell.headers.length) {
                 cell.headerSource = HEADER_SOURCE.HEADERS_ATTR;
+                cell.headersSourceNLS = getCommonMessage('headerSource', cell.headerSource);
               }
             }
             else {
@@ -28801,6 +28803,7 @@ class TableElement {
 
               if (cell.headers.length) {
                 cell.headerSource = HEADER_SOURCE.ROW_COLUMN;
+                cell.headersSourceNLS = getCommonMessage('headerSource', cell.headerSource);
               }
             }
             debug$K.headerCalc && debug$K.log(`${cell}`);
@@ -29072,6 +29075,7 @@ class TableCell {
 
     this.headers = [];
     this.headersSource = HEADER_SOURCE.NONE;
+    this.headersSourceNLS = getCommonMessage('headerSource', this.headerSource);
 
     this.hasContent = (node.textContent.trim().length > 0) || (node.firstElementChild !== null);
 
@@ -29215,7 +29219,8 @@ class TableInfo {
 
   computeTableTypes () {
     this.allTableElements.forEach( te => {
-      te.tableType = te.getTableType();
+      te.tableType    = te.getTableType();
+      te.tableTypeNLS = getCommonMessage('tableType', te.tableType);
     });
   }
 
