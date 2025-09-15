@@ -1,4 +1,3 @@
-/* common.js */
 
 export const common = {
   aria13: ' (ARIA 1.3)',

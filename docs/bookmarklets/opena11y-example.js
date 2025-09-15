@@ -12758,8 +12758,6 @@
 
   }
 
-  /* common.js */
-
   const common = {
     aria13: ' (ARIA 1.3)',
     level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],

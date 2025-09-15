@@ -8,7 +8,7 @@ import {
 } from '../results/aiRuleGroupResult.js';
 
 // Constants
-const debug = true;
+const debug = false;
 
 const HIGHLIGHT_ELEMENT_NAME = 'ai-highlight';
 

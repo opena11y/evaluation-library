@@ -16,13 +16,10 @@ const debug = new DebugLogging('aiRuleResult', false);
 debug.flag = false;
 
 export default function aiRuleResult (all_rule_results, rule_id) {
-  debug.log(`[aiRuleResult][rule_id]: ${rule_id}`);
 
   const rule_result = all_rule_results.find( (rr) => {
     return rr.rule.getId() === rule_id;
   });
-
-  debug.log(`[aiRuleResult][rule_result]: ${rule_result}`);
 
   const ruleTitle       = rule_result.rule.getSummary();
 
