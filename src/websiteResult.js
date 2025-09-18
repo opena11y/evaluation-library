@@ -74,4 +74,18 @@ export default class WebsiteResult extends BaseResult {
     return this.resultId;
   }
 
+ /**
+   * @method getResultIdentifier
+   *
+   * @desc Returns a string identifying the element as website level
+   *
+   * @return {String} see description
+   */
+
+  getResultIdentifier () {
+    return 'website';
+  }
+
+
+
 }

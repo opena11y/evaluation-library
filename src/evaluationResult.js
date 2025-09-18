@@ -462,6 +462,30 @@ export default class EvaluationResult {
   }
 
   /**
+   * @method getDomElementByPosition
+   * @desc Returns an DomElement object with the associated position
+   *
+   * @param  {Number}  position  -  Position of the element in the DOM
+   *
+   * @return {DomElement}  see @desc
+   */
+
+  getDomElementByPosition (position) {
+
+    if (typeof position !== 'number') {
+      position = parseInt(position);
+    }
+
+    for (let i = 0; i < this.allDomElements.length; i += 1) {
+      if (this.allDomElements[i].ordinalPosition === position) {
+        return this.allDomElements[i];
+      }
+    }
+    return null;
+  }
+
+
+  /**
    * @method getRuleResultsAll
    *
    * @desc Returns an object containing a set of all rule results

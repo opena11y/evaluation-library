@@ -149,7 +149,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_long:   er.getResultValueLongNLS(),
         action:        er.getResultMessage(),
         definition:    getRuleDefinition(rule_id),
-        position:      '',
+        position:      'page',
         is_element: false,
         is_page: true,
         is_website: false
@@ -159,6 +159,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
     if (er.isWebsiteResult) {
       website_result = {
         id:            er.getResultId(),
+        element:       er.getResultIdentifier(),
         result_type:   er.getResultIdentifier(),
         scope:         er.getResultType(),
         result_value:  er.getResultValue(),
@@ -166,7 +167,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_long:   er.getResultValueLongNLS(),
         action:        er.getResultMessage(),
         definition:    getRuleDefinition(rule_id),
-        position:      '',
+        position:      'website',
         is_element: false,
         is_page: false,
         is_website: true

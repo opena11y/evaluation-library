@@ -23619,10 +23619,6 @@
       let c, parts, r1, g1, b1;
       let o1 = 1.0;
 
-      if (isSRGB(color)) {
-        debug$_.log(`[color]: ${color} [isRGB]: ${isRGB(color)} [isSRGB]: ${isSRGB(color)}`);
-      }
-
       if (!isRGB(color) && !isSRGB(color)) return "";
 
       if (isRGB(color)) {
@@ -23643,9 +23639,6 @@
         r1 = parseFloat(parts[0]) * 255;
         g1 = parseFloat(parts[1]) * 255;
         b1 = parseFloat(parts[2]) * 255;
-        debug$_.log(`[srgb][r1]: ${r1}`);
-        debug$_.log(`[srgb][g1]: ${g1}`);
-        debug$_.log(`[srgb][c1]: ${b1}`);
       }
 
       if (!isHex(backgroundHex)) {
@@ -23681,10 +23674,6 @@
         r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
         g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
         b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
-      }
-
-      if (isSRGB(color)) {
-        debug$_.log(`[r1]: ${hexToString(r1)} [g1]: ${hexToString(g1)} [b1]: ${hexToString(b1)}`);
       }
 
       return hexToString(r1) + hexToString(g1) + hexToString(b1);
@@ -27133,7 +27122,7 @@
                               '';
 
       if (addDataId) {
-        elementNode.setAttribute('data-opena11y-id', ordinalPosition);
+        elementNode.dataset.opena11yPosition = ordinalPosition.toString();
       }
 
       this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
@@ -29390,7 +29379,7 @@
    *                                     document.body
    * @param  {String}  ariaVersion     - Version of ARIA to use for roles,
    *                                     props and state info
-   * @param  {Boolean} addDataId       - If true, create a data-opena11y-oridinal-position attribute
+   * @param  {Boolean} addDataId       - If true, create a data-opena11y-ordinal-position attribute
    *                                     on element nodes for use in navigation and highlighting
    */
 
@@ -30942,6 +30931,18 @@
       return this.resultId;
     }
 
+   /**
+     * @method getResultIdentifier
+     *
+     * @desc Returns a string identifying the element as page level
+     *
+     * @return {String} see description
+     */
+
+    getResultIdentifier () {
+      return 'page';
+    }
+
   }
 
   /* websiteResult.js */
@@ -31014,6 +31015,20 @@
     getResultId () {
       return this.resultId;
     }
+
+   /**
+     * @method getResultIdentifier
+     *
+     * @desc Returns a string identifying the element as website level
+     *
+     * @return {String} see description
+     */
+
+    getResultIdentifier () {
+      return 'website';
+    }
+
+
 
   }
 
@@ -39748,6 +39763,30 @@
       }
       return null;
     }
+
+    /**
+     * @method getDomElementByPosition
+     * @desc Returns an DomElement object with the associated position
+     *
+     * @param  {Number}  position  -  Position of the element in the DOM
+     *
+     * @return {DomElement}  see @desc
+     */
+
+    getDomElementByPosition (position) {
+
+      if (typeof position !== 'number') {
+        position = parseInt(position);
+      }
+
+      for (let i = 0; i < this.allDomElements.length; i += 1) {
+        if (this.allDomElements[i].ordinalPosition === position) {
+          return this.allDomElements[i];
+        }
+      }
+      return null;
+    }
+
 
     /**
      * @method getRuleResultsAll

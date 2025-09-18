@@ -10,8 +10,6 @@ import {
 // Constants
 const debug = false;
 
-const HIGHLIGHT_ELEMENT_NAME = 'ai-highlight';
-
 const browserRuntime = typeof browser === 'object' ?
               browser.runtime :
               chrome.runtime;
@@ -29,54 +27,113 @@ scriptNode.id = 'id-ai-highlight';
 scriptNode.src = browserRuntime.getURL('ai-highlight.js');
 document.body.appendChild(scriptNode);
 
-
+let lastEvaluationResult = false;
 
 // Listen for messages from side panel
 browserRuntime.onMessage.addListener(
   function(request, sender, sendResponse) {
 
-    // Highlight elements
+    const contentElem = document.body ?
+                        document.body :
+                        document.documentElement;
+
+    function removeHighlightElements () {
+      const hes = document.querySelectorAll('opena11y-ai-highlight');
+      hes.forEach( (he) => { he.remove(); });
+    }
+
+    function hightlightResults(evaluation_result, results, option) {
+      console.log(`[results]: ${results.length} [option]: ${option}`);
+
+      results.forEach( (r) => {
+        const he = document.createElement('opena11y-ai-highlight');
+        he.id = `opena11y-pos-${r.position}`;
+        he.setAttribute(`data-result`, r.result_abbrev);
+
+        if (r.isWebsite) {
+          he.setAttribute('set', `${r.result_abbrev} website false`);
+        }
+        else {
+          if (r.isPage) {
+            he.setAttribute('set', `${r.result_abbrev} page false`);
+          }
+          else {
+            const node =  evaluation_result.getDomElementByPosition(r.position);
+            if (node) {
+              const rect = node.getBoundingClientRect();
+              he.setAttribute('set', `${r.result_abbrev} element false ${Math.round(rect.left)} ${Math.round(rect.top)} ${Math.round(rect.width)} ${Math.round(rect.height)}`);
+            }
+          }
+        }
+
+        contentElem.appendChild(he);
+      });
+    }
+
+    let rect = {};
+    let de = false;
+
+    // Highlight result
     if(request.highlight) {
-      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
+      const isWebsite   = request.highlight.position === 'website';
+      const isPage      = request.highlight.position === 'page';
+      const position    = parseInt(request.highlight.position);
+      const result_type = request.highlight.result_type;
+      const option      = request.highlight.option;
+      const id          = request.highlight.id;
 
-      if (he) {
-        he.setAttribute('data-attr', 'data-opena11y-id');
-        he.setAttribute('highlight-position', request.highlight.position + ';' + request.highlight.info);
+      const focus       = option !== 'selected' && request.highlight.focus;
+
+      console.log(`[option]: ${option} [focus]: ${focus}`);
+
+      if (!isNaN(position)) {
+        de = lastEvaluationResult.getDomElementByPosition(position);
+      }
+
+      if (de && de.node) {
+        rect = de.node.getBoundingClientRect();
+      }
+
+      let he = document.querySelector(`opena11y-ai-highlight#${id}`);
+
+      if (option === 'selected' && !he) {
+        removeHighlightElements();
+      }
+
+      if (!he) {
+        he = document.createElement('opena11y-ai-highlight');
+        he.id = id;
+        he.setAttribute(`data-result`, result_type);
+        contentElem.appendChild(he);
+      }
+
+      if (option !== 'none' && he) {
+        if (isWebsite) {
+          he.setAttribute('set', `${result_type} website ${focus}`);
+        }
+        else {
+          if (isPage) {
+            he.setAttribute('set', `${result_type} page ${focus}`);
+          }
+          else {
+            he.setAttribute('set', `${result_type} element ${focus} ${Math.round(rect.left)} ${Math.round(rect.top)} ${Math.round(rect.width)} ${Math.round(rect.height)}`);
+          }
+        }
       }
     }
-
-    // Removed highlight
-    if(request.removeHighlight) {
-      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
-
-      if (he) {
-        he.setAttribute('highlight-position', '');
-      }
-    }
-
-    // Update Highlight configuration
-    if(request.updateHighlightConfig) {
-      const hc = request.updateHighlightConfig;
-
-      const he = document.querySelector(HIGHLIGHT_ELEMENT_NAME);
-
-      if (he) {
-        he.setAttribute('highlight-config', `${hc.size} ${hc.style}`);
-      }
-    }
-
 
     // Update heading, region and link information
     if(request.aiRunEvaluation) {
       const r = request.aiRunEvaluation;
 
-      debug && console.log(`[       ruleset]: ${r.ruleset}`);
-      debug && console.log(`[         level]: ${r.level}`);
-      debug && console.log(`[  scope_filter]: ${r.scope_filter}`);
-      debug && console.log(`[  aria_version]: ${r.aria_version}`);
-      debug && console.log(`[   result_view]: ${r.result_view}`);
-      debug && console.log(`[ rule_group_id]: ${r.rule_group_id}`);
-      debug && console.log(`[       rule_id]: ${r.rule_id}`);
+      debug && console.log(`[         ruleset]: ${r.ruleset}`);
+      debug && console.log(`[           level]: ${r.level}`);
+      debug && console.log(`[    scope_filter]: ${r.scope_filter}`);
+      debug && console.log(`[    aria_version]: ${r.aria_version}`);
+      debug && console.log(`[     result_view]: ${r.result_view}`);
+      debug && console.log(`[   rule_group_id]: ${r.rule_group_id}`);
+      debug && console.log(`[         rule_id]: ${r.rule_id}`);
+      debug && console.log(`[highlight_option]: ${r.highlight_option}`);
 
       const doc = window.document;
       er  = evaluationLibrary.evaluateWCAG(
@@ -87,9 +144,9 @@ browserRuntime.onMessage.addListener(
               r.level,
               r.scope_filter,
               r.aria_version,
-              true);
+              false);
 
-      debug && console.log(`[er]: ${er}`);
+      lastEvaluationResult = er;
 
       let response = {
         title:         er.getTitle(),
@@ -108,8 +165,12 @@ browserRuntime.onMessage.addListener(
       const parts = r.rule_group_id.split('-');
       const group_id = parseInt(parts[1]);
 
+      const results = [];
+
       switch (response.result_view) {
         case 'rules-all':
+          removeHighlightElements();
+
           response.rule_summary          = er.ruleResultSummary.data;
           response.rc_rule_results_group = er.rcRuleGroupResults.data;
           response.gl_rule_results_group = er.glRuleGroupResults.data;
@@ -119,6 +180,8 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule-group':
+          removeHighlightElements();
+
           if (parts[0] === 'rc') {
             [group_title, rule_summary, rule_results, info_rules] = aiRuleResultsByCategory(er.allRuleResults, group_id);
           }
@@ -139,6 +202,7 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule':
+          removeHighlightElements();
           [rule_title, element_summary, website_result, page_result, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
 
           response.rule_title      = rule_title;
@@ -146,6 +210,20 @@ browserRuntime.onMessage.addListener(
           response.website_result  = website_result;
           response.page_result     = page_result;
           response.element_results = element_results;
+
+          if (website_result) {
+            results.push(website_result);
+          }
+
+          if (page_result) {
+            results.push(website_result);
+          }
+
+          if (element_results) {
+            results.push(element_results);
+          }
+
+          hightlightResults(er, results, r.highlight_option);
 
           debug && console.log(`[response][     rule_title]: ${response.rule_title}`);
           debug && console.log(`[response][element_summary]: ${response.element_summary.violations}`);

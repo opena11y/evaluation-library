@@ -74,4 +74,16 @@ export default class PageResult extends BaseResult {
     return this.resultId;
   }
 
+ /**
+   * @method getResultIdentifier
+   *
+   * @desc Returns a string identifying the element as page level
+   *
+   * @return {String} see description
+   */
+
+  getResultIdentifier () {
+    return 'page';
+  }
+
 }

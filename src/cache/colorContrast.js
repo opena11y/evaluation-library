@@ -385,10 +385,6 @@ export default class ColorContrast {
     let c, parts, r1, g1, b1;
     let o1 = 1.0;
 
-    if (isSRGB(color)) {
-      debug.log(`[color]: ${color} [isRGB]: ${isRGB(color)} [isSRGB]: ${isSRGB(color)}`);
-    }
-
     if (!isRGB(color) && !isSRGB(color)) return "";
 
     if (isRGB(color)) {
@@ -409,9 +405,6 @@ export default class ColorContrast {
       r1 = parseFloat(parts[0]) * 255;
       g1 = parseFloat(parts[1]) * 255;
       b1 = parseFloat(parts[2]) * 255;
-      debug.log(`[srgb][r1]: ${r1}`);
-      debug.log(`[srgb][g1]: ${g1}`);
-      debug.log(`[srgb][c1]: ${b1}`);
     }
 
     if (!isHex(backgroundHex)) {
@@ -447,10 +440,6 @@ export default class ColorContrast {
       r1 = Math.round(r1 * opacity + r2 * (1 - opacity));
       g1 = Math.round(g1 * opacity + g2 * (1 - opacity));
       b1 = Math.round(b1 * opacity + b2 * (1 - opacity));
-    }
-
-    if (isSRGB(color)) {
-      debug.log(`[r1]: ${hexToString(r1)} [g1]: ${hexToString(g1)} [b1]: ${hexToString(b1)}`);
     }
 
     return hexToString(r1) + hexToString(g1) + hexToString(b1);

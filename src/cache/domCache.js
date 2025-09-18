@@ -100,7 +100,7 @@ class ParentInfo {
  *                                     document.body
  * @param  {String}  ariaVersion     - Version of ARIA to use for roles,
  *                                     props and state info
- * @param  {Boolean} addDataId       - If true, create a data-opena11y-oridinal-position attribute
+ * @param  {Boolean} addDataId       - If true, create a data-opena11y-ordinal-position attribute
  *                                     on element nodes for use in navigation and highlighting
  */
 

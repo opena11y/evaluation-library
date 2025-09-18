@@ -75,7 +75,7 @@ export default class DOMElement {
                             '';
 
     if (addDataId) {
-      elementNode.setAttribute('data-opena11y-id', ordinalPosition);
+      elementNode.dataset.opena11yPosition = ordinalPosition.toString();
     }
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
