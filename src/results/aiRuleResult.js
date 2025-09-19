@@ -48,6 +48,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_abbrev:    er.getResultValueNLS(),
         result_long:      er.getResultValueLongNLS(),
         position:         er.getOrdinalPosition(),
+        highlightId:      `opena11y-pos-${er.getOrdinalPosition()}`,
         action:           er.getResultMessage(),
         definition:       getRuleDefinition(rule_id),
         implied_role:     !de.hasRole,
@@ -150,6 +151,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         action:        er.getResultMessage(),
         definition:    getRuleDefinition(rule_id),
         position:      'page',
+        highlightId:   'opena11y-pos-page',
         is_element: false,
         is_page: true,
         is_website: false
@@ -168,6 +170,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         action:        er.getResultMessage(),
         definition:    getRuleDefinition(rule_id),
         position:      'website',
+        highlightId:   'opena11y-pos-website',
         is_element: false,
         is_page: false,
         is_website: true

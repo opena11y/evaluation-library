@@ -29309,7 +29309,9 @@ const skipableElements = [
   'style',
   'template',
   'shadow',
-  'title'
+  'title',
+  'h2l-highlight',
+  'opena11y-ai-highlight'
 ];
 
 /**
