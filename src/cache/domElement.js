@@ -106,6 +106,14 @@ export default class DOMElement {
                      elementNode.inert :
                      parentInfo.isInert;
 
+    const ariaDisabled = elementNode.hasAttribute('aria-disabled') ?
+                         elementNode.getAttribute('aria-disabled').toLowerCase() === 'true' :
+                        false;
+
+    const disabled =  elementNode.disabled === true;
+
+    this.isDisabled  = ariaDisabled || disabled ? true : parentInfo.isDisabled;
+
     this.tabIndex             = checkTabIndex(elementNode);
     this.isTabStop            = checkIsTabStop(elementNode);
     this.isInteractiveElement = checkForInteractiveElement(elementNode);

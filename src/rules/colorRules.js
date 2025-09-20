@@ -57,15 +57,20 @@ function  checkColorContrast(rule_result, domText, min_ccr_large_font, min_ccr_n
         }
         else {
           // Fails color contrast requirements
-          if (cc.hasBackgroundImage) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
+          if (de.isDisabled || de.isInert) {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_7', []);
           }
           else {
-            if (cc.isPositioned && cc.isTransparent) {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+            if (cc.hasBackgroundImage) {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_4', [ccr]);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+              if (cc.isPositioned && cc.isTransparent) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_5', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, domText, 'ELEMENT_FAIL_2', [ccr]);
+              }
             }
           }
         }

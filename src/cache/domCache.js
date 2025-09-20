@@ -75,6 +75,7 @@ class ParentInfo {
       this.documentIndex   = info.documentIndex;
       this.domElement      = info.domElement;
       this.isInert         = info.isInert;
+      this.isDisdabled     = info.isDisabled;
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
       this.mapElement      = info.mapElement;
@@ -377,6 +378,8 @@ export default class DOMCache {
     newParentInfo.domElement = domElement;
 
     newParentInfo.isInert         = domElement.isInert;
+    newParentInfo.isDisabled      = domElement.isDisabled;
+
     newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
     newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
     newParentInfo.inLink          = this.linkInfo.update(domElement, parentInfo.inLink);
