@@ -20,7 +20,8 @@ export const imageRules = {
       NOT_APPLICABLE: 'No @img@ or @[role="img"]@ elements found on this page.'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_PASS_1: '@%1@ element has a role of @%1@ attribute to define an accessible name.',
+      ELEMENT_PASS_1: '@%1@ element has a @%2@ attribute to define an accessible name.',
+      ELEMENT_PASS_2: '@%1@ element has a role of @%2@ to identify the image as decorative.',
       ELEMENT_FAIL_1: 'Use the  @alt@ attribute on the @%1@ element to add a text alternative, or to indentify the image as purley decorative set @alt=""@ attribute or change the image to a CSS @background-image@.',
       ELEMENT_FAIL_2: 'Use the @aria-labelledby@ or @aria-label@ attribute for the text alternative for @%1[role="img"]@ element, or change the role to @role="none"@ to identify the image as purely decorative.',
       ELEMENT_HIDDEN_1: '@%1@ element was not evaluated because it is hidden from assistive technologies.'

@@ -21,10 +21,11 @@ export default function aiRuleResult (all_rule_results, rule_id) {
     return rr.rule.getId() === rule_id;
   });
 
-  const ruleTitle       = rule_result.rule.getSummary();
+  const rule_title       = rule_result.rule.getSummary();
+  const rule_id_nls      = rule_result.rule.getIdNLS();
 
   const s = rule_result.getResultsSummary()
-  const element_summary = {
+  const result_summary = {
           violations:    s.violations,
           warnings:      s.warnings,
           manual_checks: s.manual_checks,
@@ -179,5 +180,5 @@ export default function aiRuleResult (all_rule_results, rule_id) {
 
   });
 
-  return [ruleTitle, element_summary, website_result, page_result, element_results];
+  return [rule_title, rule_id_nls, result_summary, website_result, page_result, element_results];
 }

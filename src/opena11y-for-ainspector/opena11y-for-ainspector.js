@@ -167,11 +167,15 @@ browserRuntime.onMessage.addListener(
 
       lastEvaluationResult = er;
 
+      const now = new Date();
+
       let response = {
         title:         er.getTitle(),
         location:      er.getURL(),
         ruleset_label: er.getRulesetLabel(),
-        result_view:   r.result_view
+        result_view:   r.result_view,
+        date:          now.toLocaleDateString(),
+        time:          now.toLocaleTimeString()
       };
 
       debug && console.log(`[response][      title]: ${response.title}`);
@@ -179,7 +183,7 @@ browserRuntime.onMessage.addListener(
       debug && console.log(`[response][result_view]: ${response.result_view}`);
 
       let group_title, rule_summary, rule_results, info_rules;
-      let rule_title, element_summary, website_result, page_result, element_results;
+      let rule_title, rule_id_nls, result_summary, website_result, page_result, element_results;
 
       const parts = r.rule_group_id.split('-');
       const group_id = parseInt(parts[1]);
@@ -222,10 +226,11 @@ browserRuntime.onMessage.addListener(
 
         case 'rule':
           hideHighlightElements();
-          [rule_title, element_summary, website_result, page_result, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
+          [rule_title, rule_id_nls, result_summary, website_result, page_result, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
 
           response.rule_title      = rule_title;
-          response.element_summary = element_summary;
+          response.rule_id_nls     = rule_id_nls;
+          response.result_summary  = result_summary;
           response.website_result  = website_result;
           response.page_result     = page_result;
           response.element_results = element_results;
@@ -270,13 +275,17 @@ let openFlag = false;
 
 setInterval(() => {
   chrome.runtime
-    .sendMessage({ ['h2l-sidepanel-open']: true })
-    .then(() => {
-        openFlag = true;
+    .sendMessage({ ['ai-sidepanel-open']: true })
+    .then((result) => {
+      if (openFlag && result !== true) {
+//        console.log(`Sidebar closed: ${openFlag}`);
+        hideHighlightElements();
+      }
+      openFlag = result === true;
     })
     .catch( () => {
       if (openFlag) {
-        console.log(`Sidebar closed: ${openFlag}`);
+//        console.log(`Sidebar closed: ${openFlag}`);
         hideHighlightElements();
         openFlag = false;
       }

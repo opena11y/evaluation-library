@@ -11,7 +11,12 @@ import {
 const debug = new DebugLogging('ruleResultsGroup', false);
 debug.flag = false;
 
-import RuleResultsSummary     from './ruleResultsSummary.js';
+import RuleResultsSummary from './ruleResultsSummary.js';
+
+import {
+  getRuleCategoryInfo,
+  getGuidelineInfo
+} from '../locale/locale.js';
 
 /**
  * @class ruleResultsGroup
@@ -20,13 +25,14 @@ import RuleResultsSummary     from './ruleResultsSummary.js';
  */
 
 export default class ruleResultsGroup {
-  constructor (ids) {
+  constructor (group, ids) {
     this.ruleGroups = [];
 
     for(let id in ids) {
       if (ids[id]) {
         const ruleGroupItem = {
           id: ids[id],
+          title: group === 'rc' ? getRuleCategoryInfo(ids[id]).title : getGuidelineInfo(ids[id]).title,
           summary: new RuleResultsSummary()
         }
         this.ruleGroups.push(ruleGroupItem);
@@ -39,6 +45,7 @@ export default class ruleResultsGroup {
     this.ruleGroups.forEach( (item) => {
       const result = {
         id: item.id,
+        title: item.title,
         violations: item.summary.data.violations,
         warnings: item.summary.data.warnings,
         manual_checks: item.summary.data.manual_checks,

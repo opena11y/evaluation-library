@@ -45,7 +45,7 @@ export const imageRules = [
         else {
           if ((de.role === 'none') ||
               (de.role === 'presentation')) {
-            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role]);
+            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [de.tagName, de.role]);
           }
           else {
             if ((de.tagName === 'img') || (de.tagName === 'area')) {

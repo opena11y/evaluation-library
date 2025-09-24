@@ -104,6 +104,7 @@ export function aiRuleResultsByGuideline (allRuleResults, guidelineId) {
 
 function getRuleResultInfo (rule_result) {
   return {      id: rule_result.rule.getId(),
+            id_nls: rule_result.rule.getIdNLS(),
            summary: rule_result.rule.getSummary(),
             result: rule_result.getResultValueNLS(),
       result_value: rule_result.getResultValue(),
@@ -126,6 +127,7 @@ function getRuleInfo (rule_result) {
   const id = rule.getId();
   return {
       id: id,
+      id_nls: rule.getIdNLS(),
       rule_category_info:    getRuleCategoryInfo(rule.rule_category_id), // Object with keys to strings
       guideline_info:        getGuidelineInfo(rule.wcag_guideline_id), // Object with keys to strings
       rule_scope:            getScope(rule.rule_scope_id), // String

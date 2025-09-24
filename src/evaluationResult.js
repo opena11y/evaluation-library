@@ -182,8 +182,8 @@ export default class EvaluationResult {
     this._landmarkRegions    = new LandmarkRegionResults();
     this._links              = new LinkResults();
     this._ruleResultsSummary = new RuleResultsSummary();
-    this._rcRuleResultsGroup = new RuleResultsGroup(RULE_CATEGORIES);
-    this._glRuleResultsGroup = new RuleResultsGroup(WCAG_GUIDELINE);
+    this._rcRuleResultsGroup = new RuleResultsGroup('rc', RULE_CATEGORIES);
+    this._glRuleResultsGroup = new RuleResultsGroup('gl', WCAG_GUIDELINE);
 
     debug.flag && debug.log(`[title]: ${this.title}`);
     debug.flag && debug.log(`[  url]: ${this.url}`);
