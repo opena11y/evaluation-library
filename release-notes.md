@@ -14,6 +14,7 @@ Version 2.0.6 Overview
 * Updated color contrast calcuation and rules to support srgb color format and support disabled controls
 * Ignore highlighting elements used in web page to identify content
 * Fixed bug in IMAGE_1 messaging
+* Fixed bug in table header calculation when headers have row and column spans
 
 Version 2.0.5 Overview
 =============================

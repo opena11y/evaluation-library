@@ -27142,6 +27142,11 @@
                                 elementNode.getAttribute('aria-roledescription') :
                                 '';
 
+      this.brailleRoleDescription = elementNode.hasAttribute('aria-brailleroledescription') ?
+                                    elementNode.getAttribute('aria-brailleroledescription') :
+                                    '';
+
+
       this.accesskey = elementNode.hasAttribute('accesskey') ? elementNode.getAttribute('accesskey') : '';
 
       // used for button and form control related rules
@@ -27173,6 +27178,10 @@
       this.accName        = getAccessibleName(accNameDoc, elementNode);
       this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
       this.errMessage     = getErrMessage(accNameDoc, elementNode);
+
+      this.brailleName    = elementNode.hasAttribute('aria-braillelabel') ?
+                            elementNode.getAttribute('aria-braillelabel') :
+                            '';
 
 
       this.colorContrast = new ColorContrast(parentDomElement, elementNode);
@@ -28761,6 +28770,7 @@
       const tableElement = this;
       this.rows.forEach( row => {
         row.cells.forEach( cell => {
+          const domElementsUsed = [];
           debug$L.headerCalc && debug$L.log(`${cell}`, 1);
           if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
             if (!cell.isHeader) {
@@ -28786,8 +28796,10 @@
                   debug$L.headerCalc && debug$L.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`);
                   if (hc && hc.isHeader &&
                       (!hc.hasScope || hc.isScopeColumn) &&
-                      hc.domElement.accName.name) {
+                      hc.domElement.accName.name &&
+                      !domElementsUsed.includes(hc.domElement)) {
                     cell.headers.push(hc.domElement.accName.name);
+                    domElementsUsed.push(hc.domElement);
                   }
                 }
 
@@ -28797,8 +28809,10 @@
                   debug$L.headerCalc && debug$L.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`);
                   if (hc && hc.isHeader &&
                       (!hc.hasScope || hc.isScopeRow) &&
-                      hc.domElement.accName.name) {
+                      hc.domElement.accName.name &&
+                      !domElementsUsed.includes(hc.domElement)) {
                     cell.headers.push(hc.domElement.accName.name);
+                    domElementsUsed.push(hc.domElement);
                   }
                 }
 
@@ -39737,6 +39751,7 @@
 
         if (rule.isFirstStep) {
           const ruleResult = new RuleResult(rule);
+
           ruleResult.validate(domCache);
           this._allRuleResults.push(ruleResult);
           this._ruleResultsSummary.update(ruleResult);
@@ -39745,9 +39760,9 @@
         }
       });
 
-      this._headings.update(domCache.structureInfo);
-      this._landmarkRegions.update(domCache.structureInfo);
-      this._links.update(domCache.linkInfo, this.url);
+      this._headings.update(domCache);
+      this._landmarkRegions.update(domCache);
+      this._links.update(domCache, this.url);
 
       const endTime = new Date();
       debug$2.flag && debug$2.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);

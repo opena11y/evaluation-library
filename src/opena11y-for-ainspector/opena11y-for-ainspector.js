@@ -155,15 +155,26 @@ browserRuntime.onMessage.addListener(
       debug && console.log(`[highlight_option]: ${r.highlight_option}`);
 
       const doc = window.document;
-      er  = evaluationLibrary.evaluateWCAG(
-              doc,
-              doc.title,
-              doc.location.href,
-              r.ruleset,
-              r.level,
-              r.scope_filter,
-              r.aria_version,
-              false);
+
+      if (r.ruleset === 'FIRSTSTEP') {
+        er  = evaluationLibrary.evaluateFirstStepRules(
+                doc,
+                doc.title,
+                doc.location.href,
+                r.aria_version,
+                false);
+      }
+      else {
+        er  = evaluationLibrary.evaluateWCAG(
+                doc,
+                doc.title,
+                doc.location.href,
+                r.ruleset,
+                r.level,
+                r.scope_filter,
+                r.aria_version,
+                false);
+      }
 
       lastEvaluationResult = er;
 

@@ -90,6 +90,11 @@ export default class DOMElement {
                               elementNode.getAttribute('aria-roledescription') :
                               '';
 
+    this.brailleRoleDescription = elementNode.hasAttribute('aria-brailleroledescription') ?
+                                  elementNode.getAttribute('aria-brailleroledescription') :
+                                  '';
+
+
     this.accesskey = elementNode.hasAttribute('accesskey') ? elementNode.getAttribute('accesskey') : '';
 
     // used for button and form control related rules
@@ -121,6 +126,10 @@ export default class DOMElement {
     this.accName        = getAccessibleName(accNameDoc, elementNode);
     this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
     this.errMessage     = getErrMessage(accNameDoc, elementNode);
+
+    this.brailleName    = elementNode.hasAttribute('aria-braillelabel') ?
+                          elementNode.getAttribute('aria-braillelabel') :
+                          '';
 
 
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);

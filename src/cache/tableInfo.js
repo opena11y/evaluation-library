@@ -158,6 +158,7 @@ class TableElement {
     const tableElement = this;
     this.rows.forEach( row => {
       row.cells.forEach( cell => {
+        const domElementsUsed = [];
         debug.headerCalc && debug.log(`${cell}`, 1);
         if (cell.headerSource === HEADER_SOURCE.HEADER_NONE) {
           if (!cell.isHeader) {
@@ -183,8 +184,10 @@ class TableElement {
                 debug.headerCalc && debug.log(`[columnHeaders][${i}][${cell.startColumn}]: ${hc}`)
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeColumn) &&
-                    hc.domElement.accName.name) {
+                    hc.domElement.accName.name &&
+                    !domElementsUsed.includes(hc.domElement)) {
                   cell.headers.push(hc.domElement.accName.name);
+                  domElementsUsed.push(hc.domElement);
                 }
               }
 
@@ -194,8 +197,10 @@ class TableElement {
                 debug.headerCalc && debug.log(`[rowHeaders][${row.rowNumber}][${i}]: ${hc}`)
                 if (hc && hc.isHeader &&
                     (!hc.hasScope || hc.isScopeRow) &&
-                    hc.domElement.accName.name) {
+                    hc.domElement.accName.name &&
+                    !domElementsUsed.includes(hc.domElement)) {
                   cell.headers.push(hc.domElement.accName.name);
+                  domElementsUsed.push(hc.domElement);
                 }
               }
 

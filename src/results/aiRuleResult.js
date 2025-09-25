@@ -4,7 +4,8 @@
 import DebugLogging from '../debug.js';
 
 import {
-  getRuleDefinition
+  getRuleDefinition,
+  getRuleId
 } from '../locale/locale.js';
 
 import {
@@ -44,6 +45,8 @@ export default function aiRuleResult (all_rule_results, rule_id) {
       const element_result = {
         id:               er.getResultId(),
         element:          er.getResultIdentifier(),
+        element_id:       er.getId(),
+        element_class:    er.getClassName(),
         result_type:      er.getResultType(),
         result_value:     er.getResultValue(),
         result_abbrev:    er.getResultValueNLS(),
@@ -51,10 +54,15 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         position:         er.getOrdinalPosition(),
         highlightId:      `opena11y-pos-${er.getOrdinalPosition()}`,
         action:           er.getResultMessage(),
+        rule_id:          rule_id,
+        rule_nls_id:      getRuleId(rule_id),
         definition:       getRuleDefinition(rule_id),
+
         implied_role:     !de.hasRole,
         role:             de.role,
         role_description: de.roleDescription,
+        braille_role_description: de.brailleRoleDescription,
+
         tag_name:         de.elemName.includes('#') ?
                           de.elemName.split('#')[0] :
                           de.elemName,
@@ -65,6 +73,8 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         accessible_name:            de.accName,
         accessible_description:     de.accDescription,
         error_message:              de.errMessage,
+
+        braille_name:               de.brailleName,
 
         html_attributes:            de.htmlAttrs,
         aria_attributes:            de.ariaAttrs,
@@ -163,8 +173,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
       website_result = {
         id:            er.getResultId(),
         element:       er.getResultIdentifier(),
-        result_type:   er.getResultIdentifier(),
-        scope:         er.getResultType(),
+        result_type:   er.getResultType(),
         result_value:  er.getResultValue(),
         result_abbrev: er.getResultValueNLS(),
         result_long:   er.getResultValueLongNLS(),

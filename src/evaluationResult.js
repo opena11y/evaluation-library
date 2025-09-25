@@ -411,6 +411,7 @@ export default class EvaluationResult {
 
       if (rule.isFirstStep) {
         const ruleResult = new RuleResult(rule);
+
         ruleResult.validate(domCache);
         this._allRuleResults.push(ruleResult);
         this._ruleResultsSummary.update(ruleResult);
@@ -419,9 +420,9 @@ export default class EvaluationResult {
       }
     });
 
-    this._headings.update(domCache.structureInfo);
-    this._landmarkRegions.update(domCache.structureInfo);
-    this._links.update(domCache.linkInfo, this.url);
+    this._headings.update(domCache);
+    this._landmarkRegions.update(domCache);
+    this._links.update(domCache, this.url);
 
     const endTime = new Date();
     debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
