@@ -37,7 +37,7 @@ debug.flag = false;
  */
 
 export default class BaseResult {
-  constructor (ruleResult, resultValue, msgId, msgArgs, result_identifier) {
+  constructor (ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
 
     const msg = ruleResult.rule.base_result_msgs[msgId];
 
@@ -48,7 +48,7 @@ export default class BaseResult {
     debug.flag && debug.log(`[    msg]: ${msg}`);
     debug.flag && debug.log(`[msgArgs]: ${msgArgs}`);
     this.result_message    = getBaseResultMessage(msg, msgArgs);
-    this.result_identifier = result_identifier;
+    this.result_identifier = resultIdentifier;
 
   }
 

@@ -22,8 +22,9 @@ export default function aiRuleResult (all_rule_results, rule_id) {
     return rr.rule.getId() === rule_id;
   });
 
-  const rule_title       = rule_result.rule.getSummary();
-  const rule_id_nls      = rule_result.rule.getIdNLS();
+  const rule_title  = rule_result.rule.getSummary();
+  const rule_id_nls = rule_result.rule.getIdNLS();
+  const rule_scope  = rule_result.rule.getScopeNLS();
 
   const s = rule_result.getResultsSummary()
   const result_summary = {
@@ -56,6 +57,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         action:           er.getResultMessage(),
         rule_id:          rule_id,
         rule_nls_id:      getRuleId(rule_id),
+        rule_scope:       rule_scope,
         definition:       getRuleDefinition(rule_id),
 
         implied_role:     !de.hasRole,
@@ -161,6 +163,9 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_long:   er.getResultValueLongNLS(),
         action:        er.getResultMessage(),
         definition:    getRuleDefinition(rule_id),
+        rule_id:       rule_id,
+        rule_nls_id:   getRuleId(rule_id),
+        rule_scope:    rule_scope,
         position:      'page',
         highlightId:   'opena11y-pos-page',
         is_element: false,
@@ -179,6 +184,9 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_long:   er.getResultValueLongNLS(),
         action:        er.getResultMessage(),
         definition:    getRuleDefinition(rule_id),
+        rule_id:       rule_id,
+        rule_nls_id:   getRuleId(rule_id),
+        rule_scope:    rule_scope,
         position:      'website',
         highlightId:   'opena11y-pos-website',
         is_element: false,

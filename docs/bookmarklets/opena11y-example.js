@@ -30133,7 +30133,7 @@
    */
 
   class BaseResult {
-    constructor (ruleResult, resultValue, msgId, msgArgs, result_identifier) {
+    constructor (ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
 
       const msg = ruleResult.rule.base_result_msgs[msgId];
 
@@ -30144,7 +30144,7 @@
       debug$G.flag && debug$G.log(`[    msg]: ${msg}`);
       debug$G.flag && debug$G.log(`[msgArgs]: ${msgArgs}`);
       this.result_message    = getBaseResultMessage(msg, msgArgs);
-      this.result_identifier = result_identifier;
+      this.result_identifier = resultIdentifier;
 
     }
 
