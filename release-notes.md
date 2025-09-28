@@ -1,3 +1,8 @@
+
+Version 2.1.0 Overview
+=============================
+* Added support for aXe and WebAIM rulesets
+
 Version 2.0.6 Overview
 =============================
 * Updated API documentation
