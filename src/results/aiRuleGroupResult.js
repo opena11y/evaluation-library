@@ -28,6 +28,25 @@ const debug = new DebugLogging('aiRuleGroupResult', false);
 debug.flag = false;
 
 /**
+ * @function aiAllRuleResults
+ *
+ * @desc Returns an array of information containing the rule results for the all the rules
+ * *
+ * @return {Array}  see description
+ */
+
+export function aiAllRuleResults (allRuleResults) {
+  const rule_results = [];
+
+  allRuleResults.forEach( rr => {
+    const result = getRuleResultInfo(rr);
+    rule_results.push(result);
+  });
+  return rule_results;
+}
+
+
+/**
  * @function aiRuleResultsByCategory
  *
  * @desc Returns an array of information containing the rule results for the rules
@@ -103,14 +122,42 @@ export function aiRuleResultsByGuideline (allRuleResults, guidelineId) {
  */
 
 function getRuleResultInfo (rule_result) {
-  return {      id: rule_result.rule.getId(),
-            id_nls: rule_result.rule.getIdNLS(),
-           summary: rule_result.rule.getSummary(),
-            result: rule_result.getResultValueNLS(),
-      result_value: rule_result.getResultValue(),
-                sc: rule_result.rule.getPrimarySuccessCriterionId(),
-             level: rule_result.rule.getWCAGLevel(),
-          required: rule_result.isRuleRequired()
+
+  const summary = rule_result.getResultsSummary();
+
+  return {                id: rule_result.rule.getId(),
+                      id_nls: rule_result.rule.getIdNLS(),
+                rule_summary: rule_result.rule.getSummary(),
+
+            result_value_nls: rule_result.getResultValueNLS(),
+                result_value: rule_result.getResultValue(),
+              result_message: rule_result.getResultMessage(),
+
+               guideline_nls: rule_result.rule.getGuidelineInfo().title,
+              guideline_code: rule_result.rule.getGuidelineInfo().id,
+
+        success_criteria_nls: rule_result.rule.getPrimarySuccessCriterionInfo().title,
+       success_criteria_code: rule_result.rule.getPrimarySuccessCriterionInfo().id,
+           rule_category_nls: rule_result.rule.getCategoryInfo().title,
+                  wcag_level: rule_result.rule.getWCAGLevel(),
+
+               rule_required: rule_result.isRuleRequired(),
+
+         rule_scope_code_nls: rule_result.rule.getScopeNLS(),
+             rule_scope_code: rule_result.rule.getScope(),
+
+        implementation_score: rule_result.getImplementationScore(),
+        implementation_value: rule_result.getImplementationValue(),
+          implementation_nls: rule_result.getImplementationValueNLS(),
+
+           results_violation: summary.violations,
+             results_warning: summary.warnings,
+             results_failure: summary.warnings + summary.violations,
+        results_manual_check: summary.manual_checks,
+              results_passed: summary.passed,
+              results_hidden: summary.hidden,
+
+                  has_hidden: rule_result.hasHiddenElementResults()
       };
 }
 

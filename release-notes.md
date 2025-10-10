@@ -1,7 +1,7 @@
 
-Version 2.1.0 Overview
+Version 2.0.7 Overview
 =============================
-* Added support for aXe and WebAIM rulesets
+* Updated information for AInspector export files
 
 Version 2.0.6 Overview
 =============================

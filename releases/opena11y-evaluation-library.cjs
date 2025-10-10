@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$16 = new DebugLogging('constants', false);
 
-const VERSION = '2.0.6';
+const VERSION = '2.0.7';
 
 /**
  * @constant RULESET
@@ -17942,7 +17942,7 @@ const designPatterns$1 = {
     supportedProps: [],
     hasRange: false,
     requiredProps: [],
-    nameRequired: true,
+    nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
     childrenPresentational: false,
@@ -18859,7 +18859,7 @@ const designPatterns$1 = {
     supportedProps: [],
     hasRange: false,
     requiredProps: [],
-    nameRequired: true,
+    nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
     childrenPresentational: false,
@@ -19128,7 +19128,7 @@ const designPatterns$1 = {
     supportedProps: [],
     hasRange: false,
     requiredProps: [],
-    nameRequired: true,
+    nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
     childrenPresentational: false,
@@ -19220,7 +19220,7 @@ const designPatterns$1 = {
     ],
     hasRange: false,
     requiredProps: [],
-    nameRequired: true,
+    nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
     childrenPresentational: false,
@@ -19390,7 +19390,7 @@ const designPatterns$1 = {
     roleType: 'structure',
     isAbstract: false
   },
-  img: {
+  image: {
     inheritedProps: [
       'aria-atomic',
       'aria-braillelabel',
@@ -19687,7 +19687,6 @@ const designPatterns$1 = {
       'aria-relevant',
       'aria-roledescription',
       'aria-errormessage',
-      'aria-expanded',
       'aria-invalid',
       'aria-multiselectable',
       'aria-readonly',
@@ -19698,7 +19697,6 @@ const designPatterns$1 = {
     ],
     supportedProps: [
       'aria-errormessage',
-      'aria-expanded',
       'aria-invalid',
       'aria-multiselectable',
       'aria-readonly',
@@ -20683,7 +20681,7 @@ const designPatterns$1 = {
     ],
     hasRange: false,
     requiredProps: [],
-    nameRequired: true,
+    nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
     childrenPresentational: false,
@@ -21111,6 +21109,7 @@ const designPatterns$1 = {
       'aria-braillelabel',
       'aria-brailleroledescription',
       'aria-busy',
+      'aria-controls',
       'aria-current',
       'aria-describedby',
       'aria-description',
@@ -21130,7 +21129,6 @@ const designPatterns$1 = {
       'aria-relevant',
       'aria-roledescription',
       'aria-valuetext',
-      'aria-controls',
       'aria-valuenow',
       'aria-disabled',
       'aria-orientation',
@@ -21150,7 +21148,6 @@ const designPatterns$1 = {
     ],
     hasRange: true,
     requiredProps: [
-      'aria-controls',
       'aria-valuenow'
     ],
     nameRequired: false,
@@ -21298,6 +21295,51 @@ const designPatterns$1 = {
     roleType: 'abstract',
     isAbstract: true
   },
+  sectionfooter: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-braillelabel',
+      'aria-brailleroledescription',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-description',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
+  },
   sectionhead: {
     inheritedProps: [
       'aria-atomic',
@@ -21342,6 +21384,51 @@ const designPatterns$1 = {
     requiredChildren: [],
     roleType: 'abstract',
     isAbstract: true
+  },
+  sectionheader: {
+    inheritedProps: [
+      'aria-atomic',
+      'aria-braillelabel',
+      'aria-brailleroledescription',
+      'aria-busy',
+      'aria-controls',
+      'aria-current',
+      'aria-describedby',
+      'aria-description',
+      'aria-details',
+      'aria-disabled',
+      'aria-dropeffect',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-grabbed',
+      'aria-haspopup',
+      'aria-hidden',
+      'aria-invalid',
+      'aria-keyshortcuts',
+      'aria-label',
+      'aria-labelledby',
+      'aria-live',
+      'aria-owns',
+      'aria-relevant',
+      'aria-roledescription'
+    ],
+    deprecatedProps: [
+      'aria-disabled',
+      'aria-errormessage',
+      'aria-haspopup',
+      'aria-invalid'
+    ],
+    supportedProps: [],
+    hasRange: false,
+    requiredProps: [],
+    nameRequired: false,
+    nameFromContent: false,
+    nameProhibited: false,
+    childrenPresentational: false,
+    requiredParents: [],
+    requiredChildren: [],
+    roleType: 'structure',
+    isAbstract: false
   },
   select: {
     inheritedProps: [
@@ -22016,7 +22103,7 @@ const designPatterns$1 = {
     ],
     hasRange: false,
     requiredProps: [],
-    nameRequired: true,
+    nameRequired: false,
     nameFromContent: false,
     nameProhibited: false,
     childrenPresentational: false,
@@ -22449,7 +22536,6 @@ const designPatterns$1 = {
     childrenPresentational: false,
     requiredParents: [],
     requiredChildren: [
-      'group',
       'treeitem'
     ],
     roleType: 'widget structure',
@@ -22696,7 +22782,7 @@ const designPatterns$1 = {
     roleType: 'structure',
     isAbstract: false
   },
-  image: {
+  img: {
     inheritedProps: [
       'aria-atomic',
       'aria-braillelabel',

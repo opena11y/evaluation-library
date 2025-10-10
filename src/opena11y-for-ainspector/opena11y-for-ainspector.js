@@ -4,7 +4,8 @@ import EvaluationLibrary from '../evaluationLibrary.js';
 import aiRuleResult      from '../results/aiRuleResult.js';
 import {
   aiRuleResultsByCategory,
-  aiRuleResultsByGuideline
+  aiRuleResultsByGuideline,
+  aiAllRuleResults
 } from '../results/aiRuleGroupResult.js';
 
 // Constants
@@ -186,7 +187,8 @@ browserRuntime.onMessage.addListener(
         ruleset_label: er.getRulesetLabel(),
         result_view:   r.result_view,
         date:          now.toLocaleDateString(),
-        time:          now.toLocaleTimeString()
+        time:          now.toLocaleTimeString(),
+        ainspector_version: ''
       };
 
       debug && console.log(`[response][      title]: ${response.title}`);
@@ -208,6 +210,7 @@ browserRuntime.onMessage.addListener(
           response.rule_summary          = er.ruleResultSummary.data;
           response.rc_rule_results_group = er.rcRuleGroupResults.data;
           response.gl_rule_results_group = er.glRuleGroupResults.data;
+          response.rule_results          = aiAllRuleResults(er.allRuleResults);
           debug && console.log(`[response][rule_summary]: ${response.rule_summary}`);
           debug && console.log(`[response][      rcData]: ${response.rc_rule_results_group}`);
           debug && console.log(`[response][      glData]: ${response.gl_rule_results_group}`);
