@@ -37,7 +37,7 @@ export const titleRules = [
     target_resources    : ['Page', 'title'],
     validate            : function (dom_cache, rule_result) {
       if (dom_cache.hasTitle) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [dom_cache.title]);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
       }
       else {
         rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
@@ -84,7 +84,9 @@ export const titleRules = [
           }
         });
 
-        return count > ((wordsH1.length * 8) / 10);
+        const result = count >= ((wordsH1.length * 8) / 10);
+
+        return [result, count, wordsH1.length];
       }
 
       const visibleH1Elements = [];
@@ -104,9 +106,12 @@ export const titleRules = [
 
         const visibleH1Count = visibleH1Elements.length;
 
+        let result, wordsInTitleCount, wordsInH1;
+
         visibleH1Elements.forEach( de => {
           if (de.accName.name) {
-            if (similiarContent(dom_cache.title, de.accName.name)) {
+            [result, wordsInTitleCount, wordsInH1] = similiarContent(dom_cache.title, de.accName.name);
+            if (result) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
               passedH1Count += 1;
             }
@@ -115,7 +120,7 @@ export const titleRules = [
                 rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [wordsInTitleCount, wordsInH1]);
               }
             }
           }

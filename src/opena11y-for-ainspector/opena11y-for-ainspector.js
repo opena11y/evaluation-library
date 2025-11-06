@@ -182,18 +182,20 @@ browserRuntime.onMessage.addListener(
       const now = new Date();
 
       let response = {
-        title:         er.getTitle(),
-        location:      er.getURL(),
-        ruleset_label: er.getRulesetLabel(),
-        result_view:   r.result_view,
-        date:          now.toLocaleDateString(),
-        time:          now.toLocaleTimeString(),
+        title:             er.getTitle(),
+        location:          er.getURL(),
+        ruleset_label:     er.getRulesetLabel(),
+        rule_scope_filter: er.getRuleScopeFilterLabel(),
+        result_view:       r.result_view,
+        date:              now.toLocaleDateString(),
+        time:              now.toLocaleTimeString(),
         ainspector_version: ''
       };
 
-      debug && console.log(`[response][      title]: ${response.title}`);
-      debug && console.log(`[response][   location]: ${response.location}`);
-      debug && console.log(`[response][result_view]: ${response.result_view}`);
+      debug && console.log(`[response][            title]: ${response.title}`);
+      debug && console.log(`[response][         location]: ${response.location}`);
+      debug && console.log(`[response][      result_view]: ${response.result_view}`);
+      debug && console.log(`[response][rule_scope_filter]: ${response.rule_scope_filter}`);
 
       let group_title, rule_summary, rule_results, info_rules;
       let rule_title, rule_id_nls, result_summary, website_result, page_result, element_results;
@@ -249,12 +251,19 @@ browserRuntime.onMessage.addListener(
           response.page_result     = page_result;
           response.element_results = element_results;
 
+          if (r.rule_id.includes('TITLE')) {
+            response.page_result.page_title = response.title;
+            response.element_results.forEach( (er) => {
+              er.page_title = response.title;
+            });
+          }
+
           if (website_result) {
             results.push(website_result);
           }
 
           if (page_result) {
-            results.push(website_result);
+            results.push(page_result);
           }
 
           if (element_results) {

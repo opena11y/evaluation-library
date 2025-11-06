@@ -150,7 +150,7 @@
   /* Constants */
   const debug$17 = new DebugLogging('constants', false);
 
-  const VERSION = '2.0.7';
+  const VERSION = '2.0.8';
 
   /**
    * @constant RULESET
@@ -1401,6 +1401,10 @@
     rulesetLevelA:   'Level A only',
     rulesetLevelAA:  'Levels A and AA',
     rulesetLevelAAA: 'Levels A, AA and enhanced CCR',
+
+    ruleScopeAll: "All rules",
+    ruleScopePage: "Page only rules",
+    ruleScopeWebsite: "Website only rules",
 
     rulesetFirstStep: 'First Step Rules',
     rulesetWCAG22:    'WCAG 2.2, ',
@@ -9753,7 +9757,7 @@
             FAIL_S: 'Add a @title@ element to the @head@ element section with text content that identifies both the website (if applicable) and the page content.'
           },
           BASE_RESULT_MESSAGES: {
-            PAGE_MC_1:   'Verify that the @title@ content "%1" identifies both the website (if applicable) and the page content.',
+            PAGE_MC_1:   'Verify that the @title@ content identifies both the website (if applicable) and the page content.',
             PAGE_FAIL_1: 'Add content to the @title@ element in the @head@ element of the document to identify both the website (if applicable) and the page content.',
           },
           PURPOSES: [
@@ -9804,11 +9808,11 @@
             PAGE_FAIL_1: 'Add a @title@ element to the page to enable the evaluation of @h1@ elements for similarity.',
             PAGE_FAIL_2: 'Add an @h1@ element to the page at the beginning of the main content.',
             PAGE_FAIL_3: 'Update the @h1@ element to have the same or similar content as the @title@ element.',
-            PAGE_FAIL_4: 'Update the @h1@ elements to have the same or similar content as the @title@ element.',
+            PAGE_FAIL_4: 'Update the @h1@ elements or the @title@ element so the content of the @h1@ element is included in the title.',
             ELEMENT_MC_1:   'Verify @h1@ element identifies and describes a major section of the page.',
-            ELEMENT_PASS_1: 'The @h1@ element has the same or similar content as the @title@ element.',
-            ELEMENT_FAIL_1: 'The @h1@ element does NOT have the same or similar content as the @title@ element.',
-            ELEMENT_FAIL_2: 'Add content to the @h1@ element, or remove it from the page.',
+            ELEMENT_PASS_1: 'The content of the @h1@ element is the same or similar to the @title@ element content.',
+            ELEMENT_FAIL_1: 'Only %1 of the %2 words in the @h1@ element are part of the @title@ element content.',
+            ELEMENT_FAIL_2: 'Add content to the @h1@ element the describes the content of the page, or remove it from the page.',
             ELEMENT_HIDDEN_1: 'The @h1@ element is hidden from assistive technology and therefore does not describe the purpose or content of the page.'
           },
           PURPOSES: [
@@ -11326,7 +11330,7 @@
   /**
    * @function getRulesetLabel
    *
-   * @desc Retuns a localize string describing the options
+   * @desc Returns a localize string describing the options
    *       used in the evaluation
    *
    * @param {String} rulesetId      - Used to identify the ruleset
@@ -11378,6 +11382,44 @@
 
         default:
           label = messages[locale].common.rulesetWCAG20 + addLevel() + addAria();
+          break;
+      }
+
+    return label;
+  }
+
+  /**
+   * @function getRuleScopeLabel
+   *
+   * @desc Returns a localize string describing the scope filter option
+   *
+   * @param {String} rulesetId      - Used to identify the ruleset
+   * @param {String} level          - Used to identify the WCAG level
+   * @param {String} ariaVersionId  - Used to identify the ARIA version
+   *
+   * @return {String}  see @desc
+   */
+
+  function getRuleScopeLabel(scopeFilter) {
+
+      let label = '';
+
+      switch (scopeFilter) {
+
+        case 'ALL':
+          label = messages[locale].common.ruleScopeAll;
+          break;
+
+        case 'PAGE':
+          label = messages[locale].common.ruleScopePage;
+          break;
+
+        case 'WEBSITE':
+          label = messages[locale].common.ruleScopeWebsite;
+          break;
+
+        default:
+          label = 'undefined';
           break;
       }
 
@@ -37668,7 +37710,7 @@
       target_resources    : ['Page', 'title'],
       validate            : function (dom_cache, rule_result) {
         if (dom_cache.hasTitle) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [dom_cache.title]);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
         }
         else {
           rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
@@ -37715,7 +37757,9 @@
             }
           });
 
-          return count > ((wordsH1.length * 8) / 10);
+          const result = count >= ((wordsH1.length * 8) / 10);
+
+          return [result, count, wordsH1.length];
         }
 
         const visibleH1Elements = [];
@@ -37735,9 +37779,12 @@
 
           const visibleH1Count = visibleH1Elements.length;
 
+          let result, wordsInTitleCount, wordsInH1;
+
           visibleH1Elements.forEach( de => {
             if (de.accName.name) {
-              if (similiarContent(dom_cache.title, de.accName.name)) {
+              [result, wordsInTitleCount, wordsInH1] = similiarContent(dom_cache.title, de.accName.name);
+              if (result) {
                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
                 passedH1Count += 1;
               }
@@ -37746,7 +37793,7 @@
                   rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', []);
                 }
                 else {
-                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [wordsInTitleCount, wordsInH1]);
                 }
               }
             }
@@ -39690,7 +39737,20 @@
      */
 
     getRulesetLabel () {
-      return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);  }
+      return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);
+    }
+
+    /**
+     * @method getRuleScopeFilterLabel
+     *
+     * @desc Get the rule scope filter
+     *
+     * @return {String}  String representing rule scope filter
+     */
+
+    getRuleScopeFilterLabel () {
+      return getRuleScopeLabel(this.scopeFilter);
+    }
 
     /**
      * @method runWCAGRules

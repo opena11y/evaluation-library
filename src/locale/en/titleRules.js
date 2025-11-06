@@ -18,7 +18,7 @@ export const titleRules = {
           FAIL_S: 'Add a @title@ element to the @head@ element section with text content that identifies both the website (if applicable) and the page content.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_MC_1:   'Verify that the @title@ content "%1" identifies both the website (if applicable) and the page content.',
+          PAGE_MC_1:   'Verify that the @title@ content identifies both the website (if applicable) and the page content.',
           PAGE_FAIL_1: 'Add content to the @title@ element in the @head@ element of the document to identify both the website (if applicable) and the page content.',
         },
         PURPOSES: [
@@ -69,11 +69,11 @@ export const titleRules = {
           PAGE_FAIL_1: 'Add a @title@ element to the page to enable the evaluation of @h1@ elements for similarity.',
           PAGE_FAIL_2: 'Add an @h1@ element to the page at the beginning of the main content.',
           PAGE_FAIL_3: 'Update the @h1@ element to have the same or similar content as the @title@ element.',
-          PAGE_FAIL_4: 'Update the @h1@ elements to have the same or similar content as the @title@ element.',
+          PAGE_FAIL_4: 'Update the @h1@ elements or the @title@ element so the content of the @h1@ element is included in the title.',
           ELEMENT_MC_1:   'Verify @h1@ element identifies and describes a major section of the page.',
-          ELEMENT_PASS_1: 'The @h1@ element has the same or similar content as the @title@ element.',
-          ELEMENT_FAIL_1: 'The @h1@ element does NOT have the same or similar content as the @title@ element.',
-          ELEMENT_FAIL_2: 'Add content to the @h1@ element, or remove it from the page.',
+          ELEMENT_PASS_1: 'The content of the @h1@ element is the same or similar to the @title@ element content.',
+          ELEMENT_FAIL_1: 'Only %1 of the %2 words in the @h1@ element are part of the @title@ element content.',
+          ELEMENT_FAIL_2: 'Add content to the @h1@ element the describes the content of the page, or remove it from the page.',
           ELEMENT_HIDDEN_1: 'The @h1@ element is hidden from assistive technology and therefore does not describe the purpose or content of the page.'
         },
         PURPOSES: [

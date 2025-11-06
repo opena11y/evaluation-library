@@ -1,6 +1,14 @@
 
+Version 2.1 Overview
+=============================
+* Improved Title 2 rule for h1 and title comparision
+* Updated information for AInspector export files
+* Added rule scope information to AInspector result
+
+
 Version 2.0.7 Overview
 =============================
+* Improved Title 2 rule for h1 and title comparision
 * Updated information for AInspector export files
 
 Version 2.0.6 Overview

@@ -62,19 +62,6 @@ gulp.task('buildcjs', () => {
     });
 });
 
-gulp.task('ainspector', () => {
-  return rollup
-    .rollup({
-      input: './src/ainspector-content-script/content.js'
-    })
-    .then(bundle => {
-      return bundle.write({
-	    file: '../ainspector-for-firefox/src/ainspector-content-script.js',
-	    format: 'iife'
-      });
-    });
-});
-
 gulp.task('opena11y-for-h2l', () => {
   return rollup
     .rollup({
@@ -129,7 +116,6 @@ gulp.task('compress-bookmarklets', function(cb) {
 });
 
 
-const ainspector3       = task('ainspector');
 const ainspector4       = task('opena11y-for-ainspector');
 const h2l              = task('opena11y-for-h2l');
 const build            = task('build');
@@ -140,4 +126,4 @@ const linting          = task('linting');
 const compressa        = task('compress');
 const compressb        = task('compress-bookmarklets');
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector3, ainspector4, h2l, buildBookmarklet), documentation, compressa, compressb);
+exports.default = series(linting, parallel( build, buildcjs, ainspector4, h2l, buildBookmarklet), documentation, compressa, compressb);

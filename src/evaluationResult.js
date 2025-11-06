@@ -37,6 +37,7 @@ import {
   getRuleId,
   getRuleDefinition,
   getRuleResultMessages,
+  getRuleScopeLabel,
   getRuleSummary,
   getSuccessCriteriaInfo,
   getSuccessCriterionInfo,
@@ -263,7 +264,19 @@ export default class EvaluationResult {
    */
 
   getRulesetLabel () {
-    return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);;
+    return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);
+  }
+
+  /**
+   * @method getRuleScopeFilterLabel
+   *
+   * @desc Get the rule scope filter
+   *
+   * @return {String}  String representing rule scope filter
+   */
+
+  getRuleScopeFilterLabel () {
+    return getRuleScopeLabel(this.scopeFilter);
   }
 
   /**

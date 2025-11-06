@@ -33,6 +33,7 @@ export {
   getRulesetInfo,
   getRulesetLabel,
   getScope,
+  getRuleScopeLabel,
   getRuleScopes,
   getRuleScopeInfo,
   getSuccessCriteriaInfo,
@@ -240,7 +241,7 @@ function getRulesetInfo (rulesetId) {
 /**
  * @function getRulesetLabel
  *
- * @desc Retuns a localize string describing the options
+ * @desc Returns a localize string describing the options
  *       used in the evaluation
  *
  * @param {String} rulesetId      - Used to identify the ruleset
@@ -292,6 +293,44 @@ function getRulesetLabel(rulesetId, level, ariaVersionId) {
 
       default:
         label = messages[locale].common.rulesetWCAG20 + addLevel() + addAria();
+        break;
+    }
+
+  return label;
+}
+
+/**
+ * @function getRuleScopeLabel
+ *
+ * @desc Returns a localize string describing the scope filter option
+ *
+ * @param {String} rulesetId      - Used to identify the ruleset
+ * @param {String} level          - Used to identify the WCAG level
+ * @param {String} ariaVersionId  - Used to identify the ARIA version
+ *
+ * @return {String}  see @desc
+ */
+
+function getRuleScopeLabel(scopeFilter) {
+
+    let label = '';
+
+    switch (scopeFilter) {
+
+      case 'ALL':
+        label = messages[locale].common.ruleScopeAll;
+        break;
+
+      case 'PAGE':
+        label = messages[locale].common.ruleScopePage;
+        break;
+
+      case 'WEBSITE':
+        label = messages[locale].common.ruleScopeWebsite;
+        break;
+
+      default:
+        label = 'undefined';
         break;
     }
 
