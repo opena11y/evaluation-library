@@ -30,6 +30,8 @@ export const liveRules = [
   rule_scope          : RULE_SCOPE.PAGE,
   rule_category       : RULE_CATEGORIES.TIMING_LIVE,
   rule_required       : true,
+  axe_id              : '',
+  wave_id             : '',
   wcag_primary_id     : '4.1.3',
   wcag_related_ids    : [],
   target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],

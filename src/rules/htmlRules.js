@@ -32,6 +32,8 @@ export const htmlRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
+    axe_id              : '',
+    wave_id             : '',
     wcag_primary_id     : '2.3.1',
     wcag_related_ids    : ['2.2.2', '4.1.1'],
     target_resources    : ['marquee'],

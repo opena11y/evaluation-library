@@ -32,6 +32,8 @@ export const helpRules = [
     rule_category       : RULE_CATEGORIES.SITE_NAVIGATION,
     rule_required       : true,
     first_step          : false,
+    axe_id              : '',
+    wave_id             : '',
     wcag_primary_id     : '3.2.6',
     wcag_related_ids    : [],
     target_resources    : ['page'],

@@ -32,6 +32,8 @@ export const bypassRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : true,
+    axe_id              : '',
+    wave_id             : '',
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['2.4.4'],
     target_resources    : ['a'],

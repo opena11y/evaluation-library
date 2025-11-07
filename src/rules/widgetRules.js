@@ -30,6 +30,8 @@ export const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : true,
+  axe_id              : '',
+  wave_id             : '',
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['ARIA Widget roles'],

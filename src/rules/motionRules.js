@@ -32,6 +32,8 @@ export const motionRules = [
     rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
     rule_required       : true,
     first_step          : false,
+    axe_id              : '',
+    wave_id             : '',
     wcag_primary_id     : '2.5.4',
     wcag_related_ids    : [],
     target_resources    : ['page'],

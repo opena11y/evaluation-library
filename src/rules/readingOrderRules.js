@@ -32,6 +32,8 @@ export const readingOrderRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
+    axe_id              : '',
+    wave_id             : '',
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : [],
     target_resources    : [],

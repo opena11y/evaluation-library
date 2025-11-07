@@ -49,9 +49,9 @@ export const common = {
   rulesetLevelAA:  'Levels A and AA',
   rulesetLevelAAA: 'Levels A, AA and enhanced CCR',
 
-  ruleScopeAll: "All rules",
-  ruleScopePage: "Page only rules",
-  ruleScopeWebsite: "Website only rules",
+  ruleScopeAll: "All Rules",
+  ruleScopePage: "Page Rules",
+  ruleScopeWebsite: "Website Rules",
 
   rulesetFirstStep: 'First Step Rules',
   rulesetWCAG22:    'WCAG 2.2, ',

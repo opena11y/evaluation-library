@@ -32,6 +32,8 @@ export const spacingRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
+    axe_id              : '',
+    wave_id             : '',
     wcag_primary_id     : '1.4.12',
     wcag_related_ids    : [],
     target_resources    : ['text'],
