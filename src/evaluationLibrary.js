@@ -27,7 +27,23 @@ import {
   getWCAGVersion
 }  from './locale/locale.js'
 
-import DebugLogging      from './debug.js';
+import {
+  getAxeRuleInfo
+} from './axeInfo/axeInfo.js';
+
+import {
+  getWaveRuleInfo
+} from './waveInfo/waveInfo.js';
+
+import {
+  axeInfo
+} from './axeInfo/gen-axe-rules.js';
+
+import {
+  waveInfo
+} from './waveInfo/gen-wave-rules.js';
+
+import DebugLogging from './debug.js';
 
 /* Constants */
 const debug   = new DebugLogging('EvaluationLibrary', false)
@@ -116,7 +132,7 @@ export default class EvaluationLibrary {
  /**
    * @method evaluateFirstStepRules
    *
-   * @desc Evaluate a document using first step rules
+   * @desc Returns an EvaluationResult object using first step rules
    *
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
@@ -126,6 +142,8 @@ export default class EvaluationLibrary {
    * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
    *                                 the elements ordinal position for use in
    *                                 navigation and highlighting
+   *
+   * @returns {Object}  see @desc
   */
 
   evaluateFirstStepRules (startingDoc, title='', url='',
@@ -134,6 +152,65 @@ export default class EvaluationLibrary {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
     evaluationResult.runFirstStepRules(ariaVersion, addDataId);
+
+    // Debug features
+    if (debug.flag) {
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
+    }
+    return evaluationResult;
+  }
+
+ /**
+   * @method evaluateAxeRules
+   *
+   * @desc Returns an EvaluationResult object using rule with aXe references
+   *
+   * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
+   * @param  {String}  title       - Title of document being analyzed
+   * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+   * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
+   *                                 the elements ordinal position for use in
+   *                                 navigation and highlighting
+   *
+   * @returns {Object}  see @desc
+  */
+
+  evaluateAxeRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.runAxeRules(ariaVersion);
+
+    // Debug features
+    if (debug.flag) {
+      debug.json && debug.log(`[evaluationResult][JSON]: ${evaluationResult.toJSON(true)}`);
+    }
+    return evaluationResult;
+  }
+
+
+ /**
+   * @method evaluateWaveRules
+   *
+   * @desc Returns an EvaluationResult object using rule with WAVE references
+   *
+   * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
+   * @param  {String}  title       - Title of document being analyzed
+   * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 Values: 'ARIA12' | 'ARIA13'
+   * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
+   *                                 the elements ordinal position for use in
+   *                                 navigation and highlighting
+   *
+   * @returns {Object}  see @desc
+  */
+
+  evaluateWaveRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+
+    const evaluationResult = new EvaluationResult(startingDoc, title, url);
+    evaluationResult.runWaveRules(ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -241,6 +318,12 @@ export default class EvaluationLibrary {
     ruleInfo.has_pass           = getHasPass(id);
     ruleInfo.mc_message         = getManualCheckMessage(id);
 
+    ruleInfo.has_axe            = rule.axe_refs.length !== 0;
+    ruleInfo.axe_rules          = getAxeRuleInfo(rule.axe_refs);
+
+    ruleInfo.has_wave           = rule.wave_refs.length !== 0;
+    ruleInfo.wave_rules         = getWaveRuleInfo(rule.wave_refs);
+
     ruleInfo.target_resources = rule.target_resources;
 
     ruleInfo.definition = getRuleDefinition(id, true);
@@ -253,6 +336,119 @@ export default class EvaluationLibrary {
     return ruleInfo;
   }
 
+
+  /**
+   * @method getAllAxeRules
+   *
+   * @desc Provides an array of aXe rule information
+   *
+   * @return see @desc
+   */
+
+  getAllAxeRules() {
+
+    const rules = [];
+    for (const id in axeInfo.rules) {
+      const r = axeInfo.rules[id];
+      const info = {};
+      info.title  = r.title;
+      info.url    = r.url
+      info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
+      info.impact = r.impact
+      rules.push(info);
+    }
+    return rules;
+  }
+
+  /**
+   * @method getUnmappedAxeRules
+   *
+   * @desc Provides an array of aXe rule information
+   *
+   * @return see @desc
+   */
+
+  getUnmappedAxeRules() {
+
+    const rules = [];
+    for (const id in axeInfo.rules) {
+      let flag = true;
+      for (let i = 0; i < allRules.length && flag; i += 1) {
+        const refs = allRules[i].axe_refs;
+        if (refs) {
+          if (refs.includes(id)) {
+            flag = false;
+          }
+        }
+      }
+      if (flag) {
+        const r = axeInfo.rules[id];
+        const info = {};
+        info.title  = r.title;
+        info.url    = r.url
+        info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
+        info.impact = r.impact
+        rules.push(info);
+      }
+    }
+    return rules;
+  }
+
+  /**
+   * @method getAllWaveRules
+   *
+   * @desc Provides an array of WAVE rule information
+   *
+   * @return see @desc
+   */
+
+  getAllWaveRules() {
+
+    const rules = [];
+
+    for (const rule in waveInfo.rules) {
+      const info = {};
+      info.title  = rule.title;
+      info.url    = rule.url;
+      info.type   = rule.error ? 'Error' : rule.contrast ? 'Contrast' : 'Alert';
+      rules.push(info);
+    }
+
+    return rules;
+  }
+
+  /**
+   * @method getUnmappedWaveRules
+   *
+   * @desc Provides an array of WAVE rule information
+   *
+   * @return see @desc
+   */
+
+  getUnmappedWaveRules() {
+
+    const rules = [];
+    for (const id in waveInfo.rules) {
+      let flag = true;
+      for (let i = 0; i < allRules.length && flag; i += 1) {
+        const refs = allRules[i].wave_refs;
+        if (refs) {
+          if (refs.includes(id)) {
+            flag = false;
+          }
+        }
+      }
+      if (flag) {
+        const r = waveInfo.rules[id];
+        const info = {};
+        info.title  = r.title;
+        info.url    = r.url
+        info.type   = r.error ? 'Error' : r.contrast ? 'Contrast' : 'Alert';
+        rules.push(info);
+      }
+    }
+    return rules;
+  }
 
 }
 

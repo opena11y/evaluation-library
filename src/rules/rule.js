@@ -55,10 +55,13 @@ export default class Rule {
     this.last_updated        = rule_item.last_updated; // String
     this.target_resources    = rule_item.target_resources; // array of strings
     this.first_step          = rule_item.first_step; // Boolean
+    this.axe_refs            = rule_item.axe_refs // axe rule ids
+    this.wave_refs           = rule_item.wave_refs // wave rule ids
     this.wcag_primary_id     = rule_item.wcag_primary_id  // String (P.G.SC)
     this.wcag_related_ids    = rule_item.wcag_related_ids // Array of Strings (P.G.SC)
     this.wcag_guideline_id   = getGuidelineId(rule_item.wcag_primary_id); // Integer
     this.validate            = rule_item.validate;  // function
+
 
     // Rule information that is locale dependent
     this.rule_category_info  = getRuleCategoryInfo(this.rule_category_id); // Object with keys to strings

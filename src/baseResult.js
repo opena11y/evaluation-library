@@ -11,6 +11,15 @@ import {
   getBaseResultMessage
 } from './locale/locale.js'
 
+import {
+  getAxeRuleInfo
+} from './axeInfo/axeInfo.js';
+
+import {
+  getWaveRuleInfo
+} from './waveInfo/waveInfo.js';
+
+
 /* constants */
 const debug = new DebugLogging('baseResult', false);
 debug.flag = false;
@@ -201,6 +210,29 @@ export default class BaseResult {
       result_identifier:  this.result_identifier,
       message:            this.result_message
     };
+  }
+
+
+  /**
+  * @method getAxeRuleInfo
+  *
+  * @desc Returns an array of related aXe rule information
+  *
+  * @return {Array} see @desc
+  */
+  getAxeRuleInfo () {
+    return this.rule_result.getAxeRuleInfo();
+  }
+
+  /**
+  * @method getWaveRuleInfo
+  *
+  * @desc Returns an array of related WAVErule information
+  *
+  * @return {Array} see @desc
+  */
+  getWaveRuleInfo () {
+    return this.rule_result.getWaveRuleInfo();
   }
 
   /**

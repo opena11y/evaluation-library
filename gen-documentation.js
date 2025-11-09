@@ -13,6 +13,8 @@ const levelAA  = el.constants.WCAG_LEVEL.AA;
 const levelAAA = el.constants.WCAG_LEVEL.AAA;
 const version  = el.constants.VERSION;
 
+const axeVersion = '4.1.1';
+
 /* Constants */
 
 
@@ -76,6 +78,10 @@ const firstStep = {
 // Create data for creating index and rule files
 
 const allRules = [];
+const allAxeRules = el.getAllAxeRules();
+const unmappedAxeRules = el.getUnmappedAxeRules();
+const allWaveRules = el.getAllWaveRules();
+const unmappedWaveRules = el.getUnmappedWaveRules();
 
 el.getAllRules.forEach( r => {
   allRules.push(el.getRuleInfo(r));
@@ -88,6 +94,8 @@ el.getRuleCategories.forEach( rc => {
   rcInfo.aCount   = 0;
   rcInfo.aaCount  = 0;
   rcInfo.aaaCount = 0;
+  rcInfo.hasAxeRules = false;
+  rcInfo.hasWaveRules = false;
 
   el.getAllRules.forEach( r => {
     const ruleInfo = el.getRuleInfo(r);
@@ -104,6 +112,14 @@ el.getRuleCategories.forEach( rc => {
         else {
           rcInfo.aaaCount += 1;
         }
+      }
+      if (ruleInfo.has_axe) {
+        console.log(`[${ruleInfo.id}][has_axe]`)
+        rcInfo.hasAxeRules = true;
+      }
+      if (ruleInfo.has_wave) {
+        console.log(`[${ruleInfo.id}][has_wave]`)
+        rcInfo.hasWaveRules = true;
       }
     }
   });
@@ -122,8 +138,6 @@ el.getRuleScopes.forEach( rs => {
   rsInfo.aCount   = 0;
   rsInfo.aaCount  = 0;
   rsInfo.aaaCount = 0;
-
-
 
   el.getAllRules.forEach( r => {
     const ruleInfo = el.getRuleInfo(r);
@@ -153,7 +167,6 @@ el.getRuleScopes.forEach( rs => {
 
 allRuleScopes.reverse();
 allRuleScopes.forEach( rs => {
-  console.log(`[rs.allRuleLinks]: ${rs.allRuleLinks}`);
   allRuleLinksByScope = allRuleLinksByScope.concat(rs.allRuleLinks);
 });
 
@@ -261,6 +274,8 @@ el.getAllRules.forEach( r => {
   }
 });
 
+
+
 // Create index file
 
 const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk',
@@ -302,6 +317,27 @@ const htmlRuleFS = nunjucks.render('./src-docs/templates/content-rules-fs.njk',
   firstStepRules: firstStepRules
 });
 outputFile('rules-fs.html', htmlRuleFS);
+
+const htmlRuleAXE = nunjucks.render('./src-docs/templates/content-rules-axe.njk',
+  {title: 'Deque aXe Rule Mapping',
+   version: version,
+   axeVersion: '4.1.1',
+  allRuleCategories: allRuleCategories,
+  allAxeRules: allAxeRules,
+  unmappedAxeRules: unmappedAxeRules
+});
+outputFile('rules-axe.html', htmlRuleAXE);
+
+const htmlRuleWAVE = nunjucks.render('./src-docs/templates/content-rules-wave.njk',
+  {title: 'WebAIM WAVE/popetech Rule Mapping',
+   version: version,
+  allRuleCategories: allRuleCategories,
+  allWaveRules: allWaveRules,
+  unmappedWaveRules: unmappedWaveRules
+});
+outputFile('rules-wave.html', htmlRuleWAVE);
+
+
 
 // Rule summary
 const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rulesets.njk',

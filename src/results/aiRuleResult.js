@@ -44,17 +44,18 @@ export default function aiRuleResult (all_rule_results, rule_id) {
     if (er.isElementResult) {
       const de = er.domElement;
       const element_result = {
-        id:               er.getResultId(),
-        element:          er.getResultIdentifier(),
-        element_id:       er.getId(),
-        element_class:    er.getClassName(),
-        result_type:      er.getResultType(),
-        result_value:     er.getResultValue(),
-        result_abbrev:    er.getResultValueNLS(),
-        result_long:      er.getResultValueLongNLS(),
-        position:         er.getOrdinalPosition(),
+        id:            er.getResultId(),
+        element:       er.getResultIdentifier(),
+        element_id:    er.getId(),
+        element_class: er.getClassName(),
+        result_type:   er.getResultType(),
+        result_value:  er.getResultValue(),
+        result_abbrev: er.getResultValueNLS(),
+        result_long:   er.getResultValueLongNLS(),
+        position:      er.getOrdinalPosition(),
+        action:        er.getResultMessage(),
+
         highlightId:      `opena11y-pos-${er.getOrdinalPosition()}`,
-        action:           er.getResultMessage(),
         rule_id:          rule_id,
         rule_nls_id:      getRuleId(rule_id),
         rule_scope:       rule_scope,
@@ -81,7 +82,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         html_attributes:            de.htmlAttrs,
         aria_attributes:            de.ariaAttrs,
 
-        is_element: true,
+          is_element: true,
         is_page: false,
         is_website: false
       }
@@ -162,6 +163,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_abbrev: er.getResultValueNLS(),
         result_long:   er.getResultValueLongNLS(),
         action:        er.getResultMessage(),
+
         definition:    getRuleDefinition(rule_id),
         rule_id:       rule_id,
         rule_nls_id:   getRuleId(rule_id),
@@ -170,7 +172,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         highlightId:   'opena11y-pos-page',
         is_element: false,
         is_page: true,
-        is_website: false
+        is_website: false,
       }
     }
 
@@ -183,15 +185,18 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         result_abbrev: er.getResultValueNLS(),
         result_long:   er.getResultValueLongNLS(),
         action:        er.getResultMessage(),
+
         definition:    getRuleDefinition(rule_id),
         rule_id:       rule_id,
         rule_nls_id:   getRuleId(rule_id),
         rule_scope:    rule_scope,
+
         position:      'website',
         highlightId:   'opena11y-pos-website',
         is_element: false,
         is_page: false,
         is_website: true
+
       }
     }
 

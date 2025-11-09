@@ -406,6 +406,10 @@ export default class ControlInfo {
         ce.updateLegendInfo(ce);
         break;
 
+      case 'summary':
+        ce = new ButtonElement(domElement, parentControlElement);
+        break;
+
       default:
         if ((tagName !== 'input') && (role === 'button')) {
           ce = new ButtonElement(domElement, parentControlElement);

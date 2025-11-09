@@ -53,7 +53,9 @@ export const common = {
   ruleScopePage: "Page Rules",
   ruleScopeWebsite: "Website Rules",
 
+  rulesetAxe:       'Related aXe Rules',
   rulesetFirstStep: 'First Step Rules',
+  rulesetWave:      'Related Wave Rules',
   rulesetWCAG22:    'WCAG 2.2, ',
   rulesetWCAG21:    'WCAG 2.1, ',
   rulesetWCAG20:    'WCAG 2.0, ',

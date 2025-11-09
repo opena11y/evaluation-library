@@ -182,6 +182,9 @@ function getRuleInfo (rule_result) {
       wcag_level:            getCommonMessage('level', rule.wcag_primary.level),
       wcag_version:          getWCAGVersion(rule.wcag_primary_id),
 
+      axe_rules:             rule_result.getAxeRuleInfo(),
+      wave_rules:            rule_result.getWaveRuleInfo(),
+
       rule_nls_id:           getRuleId(id), // String
       summary:               getRuleSummary(id), // String
       definition:            getRuleDefinition(id), // String

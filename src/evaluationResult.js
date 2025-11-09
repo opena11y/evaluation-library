@@ -366,7 +366,8 @@ export default class EvaluationResult {
     debug.flag && debug.log(`[evaluateRuleList][ruleList]: ${ruleList}`);
 
     this.ruleset     = 'RULELIST';
-    this.ariaVersion = ariaVersion;
+    this.scopeFilter = '';
+    this.ariaVersion = validateAriaVersion(ariaVersion);
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
     this.allDomElements = domCache.allDomElements;
@@ -400,6 +401,7 @@ export default class EvaluationResult {
    * @method runFirstStepRules
    *
    * @desc Updates rule results array with results first step rules
+   *
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
    * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
@@ -411,6 +413,7 @@ export default class EvaluationResult {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
+    this.scopeFilter = '';
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
@@ -423,6 +426,100 @@ export default class EvaluationResult {
     allRules.forEach (rule => {
 
       if (rule.isFirstStep) {
+        const ruleResult = new RuleResult(rule);
+
+        ruleResult.validate(domCache);
+        this._allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+      }
+    });
+
+    this._headings.update(domCache);
+    this._landmarkRegions.update(domCache);
+    this._links.update(domCache, this.url);
+
+    const endTime = new Date();
+    debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
+  }
+
+ /**
+   * @method runAxeRules
+   *
+   * @desc Updates rule results array with results using rules with aXe references
+   *
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 (values: 'ARIA12' | ARIA13")
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
+   *                                 on element nodes for use in navigation and highlighting
+   */
+
+  runAxeRules (ariaVersion='ARIA12') {
+    const startTime = new Date();
+
+    this.ruleset     = 'AXE';
+    this.scopeFilter = '';
+    this.ariaVersion = ariaVersion;
+
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
+    this.allDomElements = domCache.allDomElements;
+    this._allRuleResults = [];
+    this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
+
+    allRules.forEach (rule => {
+
+      if (rule.axe_refs.length) {
+        const ruleResult = new RuleResult(rule);
+
+        ruleResult.validate(domCache);
+        this._allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+      }
+    });
+
+    this._headings.update(domCache);
+    this._landmarkRegions.update(domCache);
+    this._links.update(domCache, this.url);
+
+    const endTime = new Date();
+    debug.flag && debug.log(`[evaluateWCAG][Run Time]: ${endTime.getTime() - startTime.getTime()} msecs`);
+
+  }
+
+ /**
+   * @method runWaveRules
+   *
+   * @desc Updates rule results array with results using rules with WAVE/popetech references
+   *
+   * @param  {String}  ariaVersion - Version of ARIA used for validation rules
+   *                                 (values: 'ARIA12' | ARIA13")
+   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
+   *                                 on element nodes for use in navigation and highlighting
+   */
+
+  runWaveRules (ariaVersion='ARIA12') {
+    const startTime = new Date();
+
+    this.ruleset     = 'WAVE';
+    this.scopeFilter = '';
+    this.ariaVersion = ariaVersion;
+
+    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
+    this.allDomElements = domCache.allDomElements;
+    this._allRuleResults = [];
+    this._ruleResultsSummary.clear();
+    this._rcRuleResultsGroup.clear();
+    this._glRuleResultsGroup.clear();
+
+    allRules.forEach (rule => {
+
+      if (rule.wave_refs.length) {
         const ruleResult = new RuleResult(rule);
 
         ruleResult.validate(domCache);

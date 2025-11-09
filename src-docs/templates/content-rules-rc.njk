@@ -42,6 +42,8 @@
                 <th>SC</th>
                 <th>Scope</th>
                 <th colspan="4">Result Values</th>
+                <th>aXe</th>
+                <th>WAVE</th>
               </thead>
               <tbody>
               {% for r in rc.rules %}
@@ -56,10 +58,12 @@
                   <td>{% if r.has_manual_checks %}<abbr title="Manual Checks">MC</abbr>{% endif %}</td>
                   <td>{% if r.has_pass %}<abbr title="Passed">P</abbr>{% endif %}</td>
                   <td>{% if r.has_hidden %}<abbr title="Hidden">H</abbr>{% endif %}</td>
+                  <td>{% if r.has_axe %}Yes{% endif %}</td>
+                  <td>{% if r.has_wave %}Yes{% endif %}</td>
                 </tr>
               {% else %}
                 <tr>
-                  <td colspan="8"><em>no rules</em></td>
+                  <td colspan="10"><em>no rules</em></td>
                 </tr>
               {% endfor %}
               </tbody>

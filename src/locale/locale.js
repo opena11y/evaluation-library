@@ -279,8 +279,16 @@ function getRulesetLabel(rulesetId, level, ariaVersionId) {
 
     switch (rulesetId) {
 
+      case 'AXE':
+        label = messages[locale].common.rulesetAxe + addAria();
+        break;
+
       case 'FIRSTSTEP':
         label = messages[locale].common.rulesetFirstStep + addAria();
+        break;
+
+      case 'WAVE':
+        label = messages[locale].common.rulesetWave + addAria();
         break;
 
       case 'WCAG22':
@@ -330,7 +338,6 @@ function getRuleScopeLabel(scopeFilter) {
         break;
 
       default:
-        label = 'undefined';
         break;
     }
 

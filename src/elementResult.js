@@ -111,7 +111,6 @@ export default class ElementResult extends BaseResult {
     return this.domElement.node;
   }
 
-
   /**
    * @method getTagName
    *
@@ -370,6 +369,5 @@ export default class ElementResult extends BaseResult {
     }
     return info;
   }
-
 
 }

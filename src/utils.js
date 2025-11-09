@@ -14,6 +14,7 @@ export {
   isLabelable,
   normalize,
   normalizeLeadingAndTrailingSpace,
+  convertRuleTitle,
   replaceAll,
   usesARIALabeling,
   isAllowed,
@@ -350,6 +351,27 @@ function cleanName (name) {
 function isHex (test) {
   return typeof test === 'string' && test.length == 6;
 }
+
+
+/**
+ * @function convertRuleTitle
+ *
+ * @desc Removes common entities for rendering as text
+ *
+ * @param {String}  str - String remove entities
+ *
+ * @return {String}  see @desc
+ */
+
+function convertRuleTitle (str) {
+  let newStr = str.replace('&lt;', '@');
+  newStr = newStr.replace('&gt;', '@');
+  newStr = newStr.replaceAll('&quot;', '"');
+  newStr = newStr.replaceAll('[', '@[');
+  newStr = newStr.replaceAll(']', ']@');
+  return newStr;
+}
+
 
 
 

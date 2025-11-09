@@ -5,6 +5,53 @@
 </tr>
 {% endmacro %}
 
+{% macro infoFirstStep(name, value) %}
+<tr>
+  <th>{{name}}</th>
+  {% if value %}
+  <td>Yes</td>
+  {% else %}
+  <td>no</td>
+  {% endif %}
+</tr>
+{% endmacro %}
+
+
+{% macro axeInfo(name, rules) %}
+<tr>
+  <th>{{name}}</th>
+  {% if rules %}
+  <td>
+    <ul>
+    {% for r in rules %}
+      <li><a href="{{r.url | safe}}">{{r.title | safe}}</a> ({{r.impact}}) </li>
+    {% endfor %}
+    </ul>
+  </td>
+  {% else %}
+  <td>none</td>
+  {% endif %}
+</tr>
+{% endmacro %}
+
+{% macro waveInfo(name, rules) %}
+<tr>
+  <th>{{name}}</th>
+  {% if rules %}
+  <td>
+    <ul>
+    {% for r in rules %}
+      <li><a href="{{r.url | safe}}">{{r.title | safe}}</a> ({{r.type}}) </li>
+    {% endfor %}
+    </ul>
+  </td>
+  {% else %}
+  <td>none</td>
+  {% endif %}
+</tr>
+{% endmacro %}
+
+
 {% macro infoItemRequired(item) %}
 <tr>
   <th>Conformance</th>
@@ -100,6 +147,9 @@
                   {{ infoWCAG('WCAG Success Criteria', ruleInfo.wcag_primary, ruleInfo.wcag_related) }}
                   {{ infoItem('Rule Category', ruleInfo.rule_category.title) }}
                   {{ infoItem('Rule Scope',    ruleInfo.rule_scope) }}
+                  {{ infoFirstStep('First Step',    ruleInfo.first_step) }}
+                  {{ axeInfo('aXe Rules',      ruleInfo.axe_rules) }}
+                  {{ waveInfo('Wave Rules',     ruleInfo.wave_rules) }}
                   {{ infoItems('Techniques',    ruleInfo.techniques) }}
                   {{ infoLinks('Information Links', ruleInfo.information_links) }}
                 </tbody>

@@ -13,11 +13,24 @@ import {
 import ElementResult  from './elementResult.js';
 import ResultsSummary from './elementResultsSummary.js';
 import PageResult     from './pageResult.js';
-import {replaceAll}   from './utils.js';
 import WebsiteResult  from './websiteResult.js';
+
+import {
+  replaceAll
+}   from './utils.js';
+
 import {
   getCommonMessage
 } from './locale/locale.js';
+
+import {
+  getAxeRuleInfo
+} from './axeInfo/axeInfo.js';
+
+import {
+  getWaveRuleInfo
+} from './waveInfo/waveInfo.js';
+
 
 
 /* constants */
@@ -532,6 +545,30 @@ export default class RuleResult {
   getRuleScopeNLS   () {
     return this.rule.getScopeNLS();
   }
+
+  /**
+  * @method getAxeRuleInfo
+  *
+  * @desc Returns an array of related aXe rule information
+  *
+  * @return {Array} see @desc
+  */
+  getAxeRuleInfo () {
+    return getAxeRuleInfo(this.rule.axe_refs, true);
+  }
+
+  /**
+  * @method getWaveRuleInfo
+  *
+  * @desc Returns an array of related WAVErule information
+  *
+  * @return {Array} see @desc
+  */
+  getWaveRuleInfo () {
+    return getWaveRuleInfo(this.rule.wave_refs, true);
+  }
+
+
 
   /**
    * @method getDataForJSON

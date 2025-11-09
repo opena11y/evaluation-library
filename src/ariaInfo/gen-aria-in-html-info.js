@@ -1373,7 +1373,7 @@ export const ariaInHTMLInfo = {
     },
     summary: {
       tagName: 'summary',
-      defaultRole: 'summary',
+      defaultRole: 'button',
       noRoleAllowed: true,
       anyRoleAllowed: true,
       id: 'summary'

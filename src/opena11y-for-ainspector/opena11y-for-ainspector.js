@@ -157,16 +157,35 @@ browserRuntime.onMessage.addListener(
 
       const doc = window.document;
 
-      if (r.ruleset === 'FIRSTSTEP') {
-        er  = evaluationLibrary.evaluateFirstStepRules(
-                doc,
-                doc.title,
-                doc.location.href,
-                r.aria_version,
-                false);
-      }
-      else {
-        er  = evaluationLibrary.evaluateWCAG(
+      switch (r.ruleset) {
+        case 'AXE':
+          er  = evaluationLibrary.evaluateAxeRules(
+                          doc,
+                          doc.title,
+                          doc.location.href,
+                          r.aria_version);
+          break;
+
+        case 'FIRSTSTEP':
+          er  = evaluationLibrary.evaluateFirstStepRules(
+                          doc,
+                          doc.title,
+                          doc.location.href,
+                          r.aria_version,
+                          false);
+          break;
+
+        case 'WAVE':
+          er  = evaluationLibrary.evaluateWaveRules(
+                          doc,
+                          doc.title,
+                          doc.location.href,
+                          r.aria_version);
+          break;
+
+
+        default:
+          er  = evaluationLibrary.evaluateWCAG(
                 doc,
                 doc.title,
                 doc.location.href,
@@ -175,6 +194,7 @@ browserRuntime.onMessage.addListener(
                 r.scope_filter,
                 r.aria_version,
                 false);
+          break;
       }
 
       lastEvaluationResult = er;
@@ -184,6 +204,7 @@ browserRuntime.onMessage.addListener(
       let response = {
         title:             er.getTitle(),
         location:          er.getURL(),
+        ruleset:           r.ruleset,
         ruleset_label:     er.getRulesetLabel(),
         rule_scope_filter: er.getRuleScopeFilterLabel(),
         result_view:       r.result_view,
