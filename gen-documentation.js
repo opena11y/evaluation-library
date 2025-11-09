@@ -75,6 +75,22 @@ const firstStep = {
   totalCount: 0
 }
 
+const axe = {
+  title: 'Related aXe Rules',
+  aCount: 0,
+  aaCount: 0,
+  aaaCount: 0,
+  totalCount: 0
+}
+
+const wave = {
+  title: 'Related WAVE/popetech Rules',
+  aCount: 0,
+  aaCount: 0,
+  aaaCount: 0,
+  totalCount: 0
+}
+
 // Create data for creating index and rule files
 
 const allRules = [];
@@ -252,8 +268,8 @@ for(const p in el.getWCAG.principles) {
 firstStepRules = [];
 
 el.getAllRules.forEach( r => {
+  const ruleInfo = el.getRuleInfo(r);
   if (r.first_step) {
-    const ruleInfo = el.getRuleInfo(r);
     firstStepRules.push(ruleInfo);
     allRuleLinksByFirstStepRules.push(ruleInfo.filename);
 
@@ -272,6 +288,43 @@ el.getAllRules.forEach( r => {
       }
     }
   }
+
+  if (r.axe_refs.length) {
+
+    if (ruleInfo.wcag_primary.level == levelA) {
+      axe.aCount += 1;
+      axe.totalCount += 1;
+    }
+    else {
+      if (ruleInfo.wcag_primary.level == levelAA) {
+        axe.aaCount += 1;
+        axe.totalCount += 1;
+      }
+      else {
+        axe.aaaCount += 1;
+        axe.totalCount += 1;
+      }
+    }
+  }
+
+  if (r.wave_refs.length) {
+
+    if (ruleInfo.wcag_primary.level == levelA) {
+      wave.aCount += 1;
+      wave.totalCount += 1;
+    }
+    else {
+      if (ruleInfo.wcag_primary.level == levelAA) {
+        wave.aaCount += 1;
+        wave.totalCount += 1;
+      }
+      else {
+        wave.aaaCount += 1;
+        wave.totalCount += 1;
+      }
+    }
+  }
+
 });
 
 
@@ -319,9 +372,9 @@ const htmlRuleFS = nunjucks.render('./src-docs/templates/content-rules-fs.njk',
 outputFile('rules-fs.html', htmlRuleFS);
 
 const htmlRuleAXE = nunjucks.render('./src-docs/templates/content-rules-axe.njk',
-  {title: 'Deque aXe Rule Mapping',
+  {title: 'Related aXe Rule Mapping',
    version: version,
-   axeVersion: '4.1.1',
+   axeVersion: axeVersion,
   allRuleCategories: allRuleCategories,
   allAxeRules: allAxeRules,
   unmappedAxeRules: unmappedAxeRules
@@ -329,7 +382,7 @@ const htmlRuleAXE = nunjucks.render('./src-docs/templates/content-rules-axe.njk'
 outputFile('rules-axe.html', htmlRuleAXE);
 
 const htmlRuleWAVE = nunjucks.render('./src-docs/templates/content-rules-wave.njk',
-  {title: 'WebAIM WAVE/popetech Rule Mapping',
+  {title: 'Related WAVE/popetech Rule Mapping',
    version: version,
   allRuleCategories: allRuleCategories,
   allWaveRules: allWaveRules,
@@ -347,6 +400,8 @@ const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rulesets.njk',
   wcag21: wcag21,
   wcag22: wcag22,
   firstStep: firstStep,
+  axe: axe,
+  wave: wave,
   allRuleCategories: allRuleCategories,
   allGuidelines: allGuidelines,
   allRuleScopes: allRuleScopes
