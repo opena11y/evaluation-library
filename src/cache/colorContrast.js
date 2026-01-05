@@ -398,13 +398,15 @@ export default class ColorContrast {
       o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
     }
     else {
-      // Assume srgb
-      c = color.split(')')[0];
-      c = c.split('srgb')[1].trim();
-      parts = c.split(' ');
-      r1 = parseFloat(parts[0]) * 255;
-      g1 = parseFloat(parts[1]) * 255;
-      b1 = parseFloat(parts[2]) * 255;
+      if (c.includes('srgb')) {
+        c = color.split(')')[0];
+        c = c.split('srgb')[1].trim();
+        parts = c.split(' ');
+        r1 = parseFloat(parts[0]) * 255;
+        g1 = parseFloat(parts[1]) * 255;
+        b1 = parseFloat(parts[2]) * 255;
+        o1 = parts.length === 5 ? parseFloat(parts[4]) : 1.0;
+      }
     }
 
     if (!isHex(backgroundHex)) {
@@ -468,7 +470,8 @@ export default class ColorContrast {
   /**
    * @method isPositioned
    *
-    * @desc Returns true if element or it's ancestor is absolute positioning
+   * @desc Returns true if element or it's ancestor is absolute, relative
+   *       fixed or sticky positioning
    *
    * @param {Object}  style                - Computed style object for an element node
    * @param {Object}  parentColorContrast  - Computed color contrast information for parent
@@ -480,7 +483,11 @@ export default class ColorContrast {
   isPositioned (style, parentColorContrast) {
     const position = style.getPropertyValue("position");
 
-    return parentColorContrast.isPositioned || (position === 'absolute');
+    return parentColorContrast.isPositioned ||
+           (position === 'absolute') ||
+           (position === 'relative') ||
+           (position === 'fixed') ||
+           (position === 'sticky');
 
   }
 

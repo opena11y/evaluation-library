@@ -7,29 +7,6 @@
   {% endif %}
 {% endmacro %}
 
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    {% include "./head.njk" %}
-  </head>
-  <body>
-    {% include "./header.njk" %}
-
-    <!-- Main section-->
-    <div id="main-section" class="container px-4">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">{{title | safe}}</li>
-        </ol>
-      </nav>
-      <main class="row gx-4 justify-content-center">
-        <div class="col-lg-10">
-          {% block content %}
-
-          <h1>{{title}}</h1>
-
-          {% include "./nav-rulesets.njk" %}
 
           {% for rc in allRuleCategories %}
             <h2 id="rc-{{rc.id}}" class="rules">{{rc.title}}</h2>
@@ -45,7 +22,7 @@
                   {% if r.wave_rules.length %}
                     <tr id="{{r.htmlId}}">
                       <td>{{r.id}}</td>
-                      <td><a href="{{r.filename | safe}}#rc">{{r.summary | safe}}</a></td>
+                      <td><a href="{{r.filename | safe}}#wave">{{r.summary | safe}}</a></td>
                       <td>
                         <ul>
                           {% for r in r.wave_rules %}
@@ -69,8 +46,6 @@
             </table>
           {% endfor %}
 
-          {% endblock %}
-
           <h2 id="wave-rules" class="rules">Unmapped WAVE/popetech Rules</h2>
           <p>{{unmappedWaveRules.length}} of {{allWaveRules.length}} WAVE/popetech rules are NOT mapped to OpenA11y rules.</p>
           <table class="table table-striped" aria-labelledby="wave-rules">
@@ -93,11 +68,4 @@
           </table>
 
 
-        </div>
-      </main>
-    </nav>
-    {% include "./footer.njk" %}
-    {% include "./scripts.njk" %}
-  </body>
-</html>
 

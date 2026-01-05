@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -7,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Related aXe Rule Mapping | OpenA11y Evaluation Library 2.1</title>
+    <title>aXe Rules | OpenA11y Evaluation Library 2.1</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -19,104 +18,136 @@
 
   </head>
   <body>
-            <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-            <div class="container px-4">
-                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.1</a>
+            <header>
+          <!-- Navigation-->
+          <nav class="navbar
+               navbar-expand-lg"
+               aria-label="Primary"
+               id="mainNav">
+              <div class="container px-4">
+                  <span class="brand">
+                    <span class="version">
+                      Version 2.1
+                    </span>
+                  </span>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar"
-                        aria-expanded="false" a
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                  <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="concepts.html">Concepts and Terms</a>
-                        </li>
+                  <button class="navbar-toggler"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#mainNavbar"
+                          aria-controls="mainNavbar"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto">
 
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rules
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
-                            </li>
-                          </ul>
-                        </li>
+                    
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="apis.html">APIs</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="concepts.html">Concepts</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">Rules</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li><li><a class="dropdown-item" href="rules-wave.html">WAVE Rules</a></li><li><a class="dropdown-item" href="rules-axe.html">aXe Rules</a></li>
+          </ul>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="apis.html">APIs</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">About</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li>
+          </ul>
+        </li>
+      
 
 
                     </ul>
-
-                </div>
+                  </div>
+              </div>
+          </nav>
+          <div class="tagline">
+            <div class="container px-4" >
+              OpenA11y Evaluation Library
             </div>
-        </nav>
+          </div>
+       </header>
 
 
     <!-- Main section-->
     <div id="main-section" class="container px-4">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Related aXe Rule Mapping</li>
-        </ol>
-      </nav>
-      <main class="row gx-4 justify-content-center">
-        <div class="col-lg-10">
-          
+      <main class="container px-4">
+        <div class="row gx-4 justify-content-center">
+          <div class="col-lg-10">
 
-          <h1>Related aXe Rule Mapping</h1>
+            
 
-                    <nav class="rules" aria-label="Rulesets">
-            <a href="rulesets.html">Rulesets</a>  |
-            <a href="rules-rc.html">Rule Categories</a> |
-            <a href="rules-gl.html">WCAG Guidelines</a> |
-            <a href="rules-rs.html">Rule Scopes</a> |
-            <a href="rules-fs.html">First Step</a> |
-            <a href="rules-axe.html">Related aXe</a> |
-            <a href="rules-wave.html">Related WAVE</a>
-          </nav>
+                
+                <nav class="second-level" aria-label="dropdownName">
+                  
+                    
+                    <a href="rulesets.html">Rulesets</a>
+                    
+                  
+                    
+                      
+                       | <a href="rules-rc.html">Rule Categories</a>
+                      
+                    
+                  
+                    
+                      
+                       | <a href="rules-gl.html">WCAG Guidelines</a>
+                      
+                    
+                  
+                    
+                      
+                       | <a href="rules-rs.html">Rule Scopes</a>
+                      
+                    
+                  
+                    
+                      
+                       | <a href="rules-fs.html">First Step</a>
+                      
+                    
+                  
+                    
+                      
+                       | <a href="rules-wave.html">WAVE Rules</a>
+                      
+                    
+                  
+                    
+                      
+                       | <a href="rules-axe.html">aXe Rules</a>
+                      
+                    
+                  
+                </nav>
+                
 
-          <script>
+                <h1>aXe Rules</h1>
 
-            const links = document.querySelectorAll('nav.rules a');
-            const href = window.location.href;
-
-            for (let i = 0; i < links.length; i += 1) {
-              if (href.includes(links[i].href)) {
-                links[i].setAttribute('aria-current', 'page');
-              }
-            }
-
-          </script>
+                
 
 
           
@@ -165,7 +196,7 @@
                   
                     <tr id="color-1">
                       <td>Color 1</td>
-                      <td><a href="rule-color-1.html#rc">Color contrast of text: Minimum</a></td>
+                      <td><a href="rule-color-1.html#axe">Color contrast of text: Minimum</a></td>
                       <td>
                         <ul>
                           
@@ -187,7 +218,7 @@
                   
                     <tr id="frame-1">
                       <td>Frame 1</td>
-                      <td><a href="rule-frame-1.html#rc"><code>frame</code> must have accessible name</a></td>
+                      <td><a href="rule-frame-1.html#axe"><code>frame</code> must have accessible name</a></td>
                       <td>
                         <ul>
                           
@@ -203,7 +234,7 @@
                   
                     <tr id="html-1">
                       <td>HTML 1</td>
-                      <td><a href="rule-html-1.html#rc">Replace <code>marquee</code> elements</a></td>
+                      <td><a href="rule-html-1.html#axe">Replace <code>marquee</code> elements</a></td>
                       <td>
                         <ul>
                           
@@ -217,7 +248,7 @@
                   
                     <tr id="language-1">
                       <td>Language 1</td>
-                      <td><a href="rule-language-1.html#rc">Page must use language code</a></td>
+                      <td><a href="rule-language-1.html#axe">Page must use language code</a></td>
                       <td>
                         <ul>
                           
@@ -235,7 +266,7 @@
                   
                     <tr id="list-1">
                       <td>List 1</td>
-                      <td><a href="rule-list-1.html#rc">Use semantic markup for lists</a></td>
+                      <td><a href="rule-list-1.html#axe">Use semantic markup for lists</a></td>
                       <td>
                         <ul>
                           
@@ -273,7 +304,7 @@
                   
                     <tr id="image-1">
                       <td>Image 1</td>
-                      <td><a href="rule-image-1.html#rc">Images must have alt text</a></td>
+                      <td><a href="rule-image-1.html#axe">Images must have alt text</a></td>
                       <td>
                         <ul>
                           
@@ -321,7 +352,7 @@
                   
                     <tr id="link-1">
                       <td>Link 1</td>
-                      <td><a href="rule-link-1.html#rc">Link text must describe the link target</a></td>
+                      <td><a href="rule-link-1.html#axe">Link text must describe the link target</a></td>
                       <td>
                         <ul>
                           
@@ -387,7 +418,7 @@
                   
                     <tr id="control-1">
                       <td>Control 1</td>
-                      <td><a href="rule-control-1.html#rc">Form controls must have labels</a></td>
+                      <td><a href="rule-control-1.html#axe">Form controls must have labels</a></td>
                       <td>
                         <ul>
                           
@@ -403,7 +434,7 @@
                   
                     <tr id="control-2">
                       <td>Control 2</td>
-                      <td><a href="rule-control-2.html#rc">Image button must have alt. content</a></td>
+                      <td><a href="rule-control-2.html#axe">Image button must have alt. content</a></td>
                       <td>
                         <ul>
                           
@@ -419,7 +450,7 @@
                   
                     <tr id="control-4">
                       <td>Control 4</td>
-                      <td><a href="rule-control-4.html#rc"><code>button</code>s should have text content</a></td>
+                      <td><a href="rule-control-4.html#axe"><code>button</code>s should have text content</a></td>
                       <td>
                         <ul>
                           
@@ -435,7 +466,7 @@
                   
                     <tr id="control-5">
                       <td>Control 5</td>
-                      <td><a href="rule-control-5.html#rc"><code>id</code> must be unique</a></td>
+                      <td><a href="rule-control-5.html#axe"><code>id</code> must be unique</a></td>
                       <td>
                         <ul>
                           
@@ -457,7 +488,7 @@
                   
                     <tr id="control-10">
                       <td>Control 10</td>
-                      <td><a href="rule-control-10.html#rc">Accessible name must be unique</a></td>
+                      <td><a href="rule-control-10.html#axe">Accessible name must be unique</a></td>
                       <td>
                         <ul>
                           
@@ -515,7 +546,7 @@
                   
                     <tr id="widget-1">
                       <td>Widget 1</td>
-                      <td><a href="rule-widget-1.html#rc">Accessible name is required</a></td>
+                      <td><a href="rule-widget-1.html#axe">Accessible name is required</a></td>
                       <td>
                         <ul>
                           
@@ -541,7 +572,7 @@
                   
                     <tr id="widget-3">
                       <td>Widget 3</td>
-                      <td><a href="rule-widget-3.html#rc"><code>role</code> must be valid</a></td>
+                      <td><a href="rule-widget-3.html#axe"><code>role</code> must be valid</a></td>
                       <td>
                         <ul>
                           
@@ -557,7 +588,7 @@
                   
                     <tr id="widget-4">
                       <td>Widget 4</td>
-                      <td><a href="rule-widget-4.html#rc">Values must be valid</a></td>
+                      <td><a href="rule-widget-4.html#axe">Values must be valid</a></td>
                       <td>
                         <ul>
                           
@@ -573,7 +604,7 @@
                   
                     <tr id="widget-5">
                       <td>Widget 5</td>
-                      <td><a href="rule-widget-5.html#rc">Attributes that start with <code>aria-</code> must be defined.</a></td>
+                      <td><a href="rule-widget-5.html#axe">Attributes that start with <code>aria-</code> must be defined.</a></td>
                       <td>
                         <ul>
                           
@@ -591,7 +622,7 @@
                   
                     <tr id="widget-6">
                       <td>Widget 6</td>
-                      <td><a href="rule-widget-6.html#rc">Widgets must set properties</a></td>
+                      <td><a href="rule-widget-6.html#axe">Widgets must set properties</a></td>
                       <td>
                         <ul>
                           
@@ -607,7 +638,7 @@
                   
                     <tr id="widget-7">
                       <td>Widget 7</td>
-                      <td><a href="rule-widget-7.html#rc">Widgets must have owned elements</a></td>
+                      <td><a href="rule-widget-7.html#axe">Widgets must have owned elements</a></td>
                       <td>
                         <ul>
                           
@@ -621,7 +652,7 @@
                   
                     <tr id="widget-8">
                       <td>Widget 8</td>
-                      <td><a href="rule-widget-8.html#rc">Role must have parent</a></td>
+                      <td><a href="rule-widget-8.html#axe">Role must have parent</a></td>
                       <td>
                         <ul>
                           
@@ -641,7 +672,7 @@
                   
                     <tr id="widget-12">
                       <td>Widget 12</td>
-                      <td><a href="rule-widget-12.html#rc">Accessible name is descriptive</a></td>
+                      <td><a href="rule-widget-12.html#axe">Accessible name is descriptive</a></td>
                       <td>
                         <ul>
                           
@@ -657,7 +688,7 @@
                   
                     <tr id="widget-14">
                       <td>Widget 14</td>
-                      <td><a href="rule-widget-14.html#rc">Unsupported and deprecated ARIA attributes.</a></td>
+                      <td><a href="rule-widget-14.html#axe">Unsupported and deprecated ARIA attributes.</a></td>
                       <td>
                         <ul>
                           
@@ -689,7 +720,7 @@
                   
                     <tr id="audio-2">
                       <td>Audio 2</td>
-                      <td><a href="rule-audio-2.html#rc">Audio Control</a></td>
+                      <td><a href="rule-audio-2.html#axe">Audio Control</a></td>
                       <td>
                         <ul>
                           
@@ -727,7 +758,7 @@
                   
                     <tr id="bypass-1">
                       <td>Bypass 1</td>
-                      <td><a href="rule-bypass-1.html#rc">Skip to main content link</a></td>
+                      <td><a href="rule-bypass-1.html#axe">Skip to main content link</a></td>
                       <td>
                         <ul>
                           
@@ -807,7 +838,7 @@
                   
                     <tr id="title-1">
                       <td>Title 1</td>
-                      <td><a href="rule-title-1.html#rc"><code>title</code> must identify website and page</a></td>
+                      <td><a href="rule-title-1.html#axe"><code>title</code> must identify website and page</a></td>
                       <td>
                         <ul>
                           
@@ -823,8 +854,6 @@
               
               </tbody>
             </table>
-          
-
           
 
           <h2 id="axe-rules" class="rules">Unmapped aXe Rules</h2>
@@ -1584,12 +1613,26 @@
             </tbody>
           </table>
 
+
+
+
+
+
+            
+          </div>
         </div>
       </main>
-    </nav>
-            <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2023, 2024, 2025</p></div>
+    </div>
+           <!-- Footer-->
+        <footer class="py-5">
+            <div class="feedback container px-4 text-center"><a href="about-privacy.html">Privacy Policy</a> | <a href="about-feedback.html">Feedback</a></div>
+
+            <div class="container px-4 text-center">Copyright (c) 2025, 2026; Licensed Mozilla Public License 2.0, All rights reserved</div>
+
+            <div class="container px-4 text-center"><a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License 2.0</a> allows for <em>Evaluation Library</em> to be freely used (e.g. no cost), copied or modified.</div>
+
+            <div class="container px-4 text-center">Website conformance to <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a> requirements supported using <a href="https://opena11y.github.io/ainspector">AInspector browser addon</a>.</div>
+
         </footer>
 
 
@@ -1609,6 +1652,6 @@
         <!-- SkipTo.js -->
         <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
 
+
   </body>
 </html>
-

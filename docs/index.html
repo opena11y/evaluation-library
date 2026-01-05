@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -17,83 +18,93 @@
 
   </head>
   <body>
-            <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-            <div class="container px-4">
-                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.1</a>
+            <header>
+          <!-- Navigation-->
+          <nav class="navbar
+               navbar-expand-lg"
+               aria-label="Primary"
+               id="mainNav">
+              <div class="container px-4">
+                  <span class="brand">
+                    <span class="version">
+                      Version 2.1
+                    </span>
+                  </span>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar"
-                        aria-expanded="false" a
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                  <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="concepts.html">Concepts and Terms</a>
-                        </li>
+                  <button class="navbar-toggler"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#mainNavbar"
+                          aria-controls="mainNavbar"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto">
 
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rules
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
-                            </li>
-                          </ul>
-                        </li>
+                    
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="apis.html">APIs</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="concepts.html">Concepts</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">Rules</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li>
+          </ul>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="apis.html">APIs</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">About</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li>
+          </ul>
+        </li>
+      
 
 
                     </ul>
-
-                </div>
+                  </div>
+              </div>
+          </nav>
+          <div class="tagline">
+            <div class="container px-4" >
+              OpenA11y Evaluation Library
             </div>
-        </nav>
+          </div>
+       </header>
 
-    <!-- Header-->
-    <header class="bg-primary bg-gradient text-white">
-        <div class="container px-4 text-center">
-            <h1 class="fw-bolder">Welcome to the OpenA11y Evaluation Library</h1>
-            <p class="lead">Javascript Library for Evaluating WCAG 2.2 Accessibility Requirements.</p>
-        </div>
-    </header>
 
     <!-- Main section-->
-    <main class="container px-4">
-      <div class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
+    <div id="main-section" class="container px-4">
+      <main class="container px-4">
+        <div class="row gx-4 justify-content-center">
+          <div class="col-lg-10">
 
-          
+            
+
+                
+
+                <h1>Welcome to the OpenA11y Evaluation Library</h1>
+
+                
           <div id="home">
-            <h1>Purpose</h1>
             <p>The purpose of the OpenA11y Evaluation libary is to support accessible design for implementation of <a href="https://www.w3.org/TR/WCAG">W3C Web Content Accessibility Guidelines</a> level A and AA requirements by creating rules that are based on the following W3C documents:</p>
             <ul>
               <li><a href="https://www.w3.org/TR/WCAG20/">W3C WAI Web Content Accessibility Guidelines 2.0 (WCAG 2.0).</a></li>
@@ -111,14 +122,26 @@
             <h2>Open Source</h2>
             <p>The code OpenA11y Evaluation Library is open source and free for anyone to use.  The library is distributed using the <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License 2.0</a>.   The source code is available from <a href="https://github.com/opena11y/evaluation-library">OpenA11y Evaluation Library</a> respository.
 
-
-          
         </div>
       </div>
-    </main>
-            <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2023, 2024, 2025</p></div>
+
+
+
+            
+          </div>
+        </div>
+      </main>
+    </div>
+           <!-- Footer-->
+        <footer class="py-5">
+            <div class="feedback container px-4 text-center"><a href="about-privacy.html">Privacy Policy</a> | <a href="about-feedback.html">Feedback</a></div>
+
+            <div class="container px-4 text-center">Copyright (c) 2025, 2026; Licensed Mozilla Public License 2.0, All rights reserved</div>
+
+            <div class="container px-4 text-center"><a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License 2.0</a> allows for <em>Evaluation Library</em> to be freely used (e.g. no cost), copied or modified.</div>
+
+            <div class="container px-4 text-center">Website conformance to <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a> requirements supported using <a href="https://opena11y.github.io/ainspector">AInspector browser addon</a>.</div>
+
         </footer>
 
 

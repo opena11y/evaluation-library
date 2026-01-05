@@ -469,3 +469,36 @@ const allRuleLinksByFirstStepRules = [
 "rule-widget-5.html",
 "rule-widget-12.html"
 ];
+
+allRuleLinksByWaveRules = [
+"rule-control-1.html",
+"rule-image-1.html",
+"rule-link-1.html"
+];
+
+allRuleLinksByAxeRules = [
+"rule-audio-2.html",
+"rule-bypass-1.html",
+"rule-color-1.html",
+"rule-frame-1.html",
+"rule-control-1.html",
+"rule-control-2.html",
+"rule-control-4.html",
+"rule-control-5.html",
+"rule-control-10.html",
+"rule-html-1.html",
+"rule-image-1.html",
+"rule-language-1.html",
+"rule-link-1.html",
+"rule-list-1.html",
+"rule-title-1.html",
+"rule-widget-1.html",
+"rule-widget-3.html",
+"rule-widget-4.html",
+"rule-widget-5.html",
+"rule-widget-6.html",
+"rule-widget-7.html",
+"rule-widget-8.html",
+"rule-widget-12.html",
+"rule-widget-14.html"
+];

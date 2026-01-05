@@ -7,18 +7,24 @@ const path = require('path');
 const nunjucks  = require('nunjucks');
 const EvaluationLibrary  = require('./releases/opena11y-evaluation-library.cjs');
 
+/* Constants */
+
 const el = new EvaluationLibrary(true);
 const levelA   = el.constants.WCAG_LEVEL.A;
 const levelAA  = el.constants.WCAG_LEVEL.AA;
 const levelAAA = el.constants.WCAG_LEVEL.AAA;
 const version  = el.constants.VERSION;
 
+const projectName = "Evaluation Library";
+const issuesURL   = "https://github.com/opena11y/evaluation-library/issues";
+const issuesEmail = "jongund@illinois.edu";
+const tagLineName = "OpenA11y Evaluation Library";
+
 const axeVersion = '4.1.1';
 
-/* Constants */
-
-
-const outputDirectory = './docs/';
+const outputDirectory   = './docs/';
+const websiteURL        = 'https://opena11y.github.io/evaluation-library/';
+const repositoryURL     = 'https://github.com/opena11y/evaluation-library/';
 
 // setUseCodeTags(true);
 
@@ -41,7 +47,13 @@ const ruleSummary = {};
 const allRuleLinksByGuidelines = [];
 const allRuleLinksByRuleCategories = [];
 let allRuleLinksByScope = [];
-const allRuleLinksByFirstStepRules = [];
+const allRuleLinksByFirstStepRules =[];
+const allRuleLinksByWaveRules = [];
+const allRuleLinksByAxeRules = [];
+
+const firstStepRules = [];
+const axeRules = [];
+const waveRules = [];
 
 const wcag20 = {
   title: 'WCAG 2.0',
@@ -265,8 +277,6 @@ for(const p in el.getWCAG.principles) {
   }
 };
 
-firstStepRules = [];
-
 el.getAllRules.forEach( r => {
   const ruleInfo = el.getRuleInfo(r);
   if (r.first_step) {
@@ -290,6 +300,8 @@ el.getAllRules.forEach( r => {
   }
 
   if (r.axe_refs.length) {
+    axeRules.push(ruleInfo);
+    allRuleLinksByAxeRules.push(ruleInfo.filename);
 
     if (ruleInfo.wcag_primary.level == levelA) {
       axe.aCount += 1;
@@ -308,6 +320,8 @@ el.getAllRules.forEach( r => {
   }
 
   if (r.wave_refs.length) {
+    waveRules.push(ruleInfo);
+    allRuleLinksByWaveRules.push(ruleInfo.filename);
 
     if (ruleInfo.wcag_primary.level == levelA) {
       wave.aCount += 1;
@@ -328,113 +342,185 @@ el.getAllRules.forEach( r => {
 });
 
 
+// Create main navigation pages
 
-// Create index file
+const mainPages = [
+  { content: 'content-home.njk',
+    title: 'Welcome to the OpenA11y Evaluation Library',
+    link: 'Home',
+    filename: 'index.html'
+  },
+  { content: 'content-concepts.njk',
+    title: 'Concepts and Terms',
+    link: 'Concepts',
+    filename: 'concepts.html'
+  },
+  {
+    dropdown: 'Rules',
+    pages: [
+      { content: 'content-rulesets.njk',
+        title: 'Rulesets',
+        link: 'Rulesets',
+        filename: 'rulesets.html'
+      },
+      { content: 'content-rules-rc.njk',
+        title: 'Rules by Rule Categories',
+        link: 'Rule Categories',
+        filename: 'rules-rc.html'
+      },
+      { content: 'content-rules-gl.njk',
+        title: 'Rules by WCAG Guidelines',
+        link: 'WCAG Guidelines',
+        filename: 'rules-gl.html'
+      },
+      { content: 'content-rules-rs.njk',
+        title: 'Rules by Rule Scopes',
+        link: 'Rule Scopes',
+        filename: 'rules-rs.html'
+      },
+      { content: 'content-rules-fs.njk',
+        title: 'First Step Rules',
+        link: 'First Step',
+        filename: 'rules-fs.html'
+      },
+      /*
+      { content: 'content-rules-wave.njk',
+        title: 'WAVE Rules',
+        link: 'WAVE Rules',
+        filename: 'rules-wave.html'
+      },
+      { content: 'content-rules-axe.njk',
+        title: 'aXe Rules',
+        link: 'aXe Rules',
+        filename: 'rules-axe.html'
+      }
+      */
+    ]
+  },
+  { content: 'content-apis.njk',
+    title: 'Using Evaluation Library',
+    link: 'APIs',
+    filename: 'apis.html'
+  },
+  {
+    dropdown: 'About',
+    pages: [
+      { content: 'content-about-history.njk',
+        title: 'History',
+        link: 'History',
+        filename: 'about-history.html'
+      },
+      { content: 'content-about-privacy.njk',
+        title: 'Privacy',
+        link: 'Privacy',
+        filename: 'about-privacy.html'
+      },
+      { content: 'content-about-feedback.njk',
+        title: 'Feedback',
+        link: 'Feedback',
+        filename: 'about-feedback.html'
+      }
+    ]
+  }
+];
 
-const htmlIndex = nunjucks.render('./src-docs/templates/content-index.njk',
-  {title: 'Welcome to the OpenA11y Evaluation Library',
-   version: version
-});
-outputFile('index.html', htmlIndex);
+function createNavigation(pages) {
+  console.log(`[create Navigation]`);
+  let html = '\n';
+  pages.forEach( item => {
+    console.log(`[create Navigation]: ${item.dropdown} ${item.filename}`);
+    if (item.dropdown) {
+      html += `
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">${item.dropdown}</a>
+          <ul class="dropdown-menu">`;
 
-// Create rule indexes
-// Rules by rule category
+      item.pages.forEach( p => {
+        console.log(`[dropdown][page]: ${p.filename}`);
+        if (p.filename) {
+          html += `<li><a class="dropdown-item" href="${p.filename}">${p.link}</a></li>`;
+        }
+        else {
+          html += `<li><hr class="dropdown-divider"></li>`;
+        }
+      });
 
-const htmlRuleRC = nunjucks.render('./src-docs/templates/content-rules-rc.njk',
-  {title: 'Rules by Rule Categories',
-   version: version,
-  allRuleCategories: allRuleCategories
-});
-outputFile('rules-rc.html', htmlRuleRC);
+      html += `
+          </ul>
+        </li>
+      `;
+    }
+    else {
+      html += `
+        <li class="nav-item">
+          <a class="nav-link" href="${item.filename}">${item.link}</a>
+        </li>
+      `;
+    }
+  });
+  html += '\n';
 
-// Rules by WCAG guidelines
-const htmlRuleGL = nunjucks.render('./src-docs/templates/content-rules-gl.njk',
-  {title: 'Rules by WCAG Guidelines',
-   version: version,
-  allGuidelines: allGuidelines
-});
-outputFile('rules-gl.html', htmlRuleGL);
+  return html;
+}
 
-// Rules by scope
-const htmlRuleRS = nunjucks.render('./src-docs/templates/content-rules-rs.njk',
-  {title: 'Rules by Rule Scope',
-   version: version,
-  allRuleScopes: allRuleScopes
-});
-outputFile('rules-rs.html', htmlRuleRS);
+const mainNav = createNavigation(mainPages);
 
-// First Step Rules
-const htmlRuleFS = nunjucks.render('./src-docs/templates/content-rules-fs.njk',
-  {title: 'First Step Ruleset',
-   version: version,
-  firstStepRules: firstStepRules
-});
-outputFile('rules-fs.html', htmlRuleFS);
+function createPage(page, mainNav, dropdownName='', dropdownPages=false) {
+  if (page.filename) {
+    console.log(`  ${page.title} => ${page.filename}`);
 
-const htmlRuleAXE = nunjucks.render('./src-docs/templates/content-rules-axe.njk',
-  {title: 'Related aXe Rule Mapping',
-   version: version,
-   axeVersion: axeVersion,
-  allRuleCategories: allRuleCategories,
-  allAxeRules: allAxeRules,
-  unmappedAxeRules: unmappedAxeRules
-});
-outputFile('rules-axe.html', htmlRuleAXE);
+    const content = nunjucks.render('./src-docs/templates/page.njk', {
+        content: page.content,
+        navigation: mainNav,
+        dropdownName: 'dropdownName',
+        dropdownPages: dropdownPages,
+        websiteURL: websiteURL,
+        repositoryURL: repositoryURL,
+        tagLineName: tagLineName,
+        projectName: projectName,
+        issuesURL: issuesURL,
+        issuesEmail: issuesEmail,
 
-const htmlRuleWAVE = nunjucks.render('./src-docs/templates/content-rules-wave.njk',
-  {title: 'Related WAVE/popetech Rule Mapping',
-   version: version,
-  allRuleCategories: allRuleCategories,
-  allWaveRules: allWaveRules,
-  unmappedWaveRules: unmappedWaveRules
-});
-outputFile('rules-wave.html', htmlRuleWAVE);
+        title: page.title,
+        version: version,
+        wcag20: wcag20,
+        wcag21: wcag21,
+        wcag22: wcag22,
+        firstStepRules: firstStepRules,
+        axeRules: axeRules,
+        waveRules: waveRules,
+        allRuleCategories: allRuleCategories,
+        allGuidelines: allGuidelines,
+        allRuleScopes: allRuleScopes,
+        allWaveRules: allWaveRules,
+        unmappedWaveRules: unmappedWaveRules,
+        allAxeRules: allAxeRules,
+        unmappedAxeRules: unmappedAxeRules
+      });
 
+    outputFile(page.filename, content);
+  }
+}
 
+function createPages(pages) {
+  console.log(`[create pages]`);
+  pages.forEach( item => {
+    if (item.dropdown) {
+      item.pages.forEach( p => {
+        createPage(p, mainNav, item.dropdown, item.pages);
+      });
+    }
+    else {
+      createPage(item, mainNav);
+    }
+  });
+}
 
-// Rule summary
-const htmlRuleSum = nunjucks.render('./src-docs/templates/content-rulesets.njk',
-  {title: 'Rulesets',
-   version: version,
-  wcag20: wcag20,
-  wcag21: wcag21,
-  wcag22: wcag22,
-  firstStep: firstStep,
-  axe: axe,
-  wave: wave,
-  allRuleCategories: allRuleCategories,
-  allGuidelines: allGuidelines,
-  allRuleScopes: allRuleScopes
-});
-outputFile('rulesets.html', htmlRuleSum);
-
-// Create concepts and terms file
-const htmlConcepts = nunjucks.render('./src-docs/templates/content-concepts.njk',
-  {title: 'Concepts and Terms',
-   version: version});
-outputFile('concepts.html', htmlConcepts);
-
-// Create apis file
-const htmlAPIs = nunjucks.render('./src-docs/templates/content-apis.njk',
-  {title: 'Using the Evaluation Library',
-   version: version
-});
-outputFile('apis.html', htmlAPIs);
-
-// Create about file
-const htmlAbout = nunjucks.render('./src-docs/templates/content-about.njk',
-  {title: 'About',
-   version: version
-});
-outputFile('about.html', htmlAbout);
-
-// Quality assurance page
-const htmlQA = nunjucks.render('./src-docs/templates/content-rules-qa.njk',
-  {title: 'Quality Assurance',
-   version: version,
-   allRules: allRules
- });
-outputFile('rules-qa.html', htmlQA);
+createPages(mainPages);
 
 // Create rule files
 console.log(`\n === Rule Files ===`)
@@ -442,11 +528,26 @@ let count = 0;
 el.getAllRules.forEach( rule => {
   const ruleInfo = el.getRuleInfo(rule);
   console.log(`[${ruleInfo.id}] ${ruleInfo.summary} => ${ruleInfo.filename}`);
-  const htmlRule = nunjucks.render('./src-docs/templates/content-rule.njk',
-    { title: ruleInfo.summary,
-      version: version,
-      ruleInfo: ruleInfo});
-  outputFile(ruleInfo.filename, htmlRule);
+
+    const content = nunjucks.render('./src-docs/templates/page.njk', {
+        content: 'content-rule.njk',
+        navigation: mainNav,
+        dropdownName: '',
+        dropdownPages: false,
+        websiteURL: websiteURL,
+        repositoryURL: repositoryURL,
+        tagLineName: tagLineName,
+        projectName: projectName,
+        issuesURL: issuesURL,
+        issuesEmail: issuesEmail,
+        version: version,
+        linkId: ruleInfo.htmlId,
+
+        title: ruleInfo.summary,
+        ruleInfo: ruleInfo
+      });
+
+  outputFile(ruleInfo.filename, content);
   count += 1;
 });
 
@@ -454,7 +555,9 @@ const jsRuleLinks = nunjucks.render('./src-docs/templates/js-rulelinks.njk',
   { allRuleLinksByGuidelines: allRuleLinksByGuidelines,
     allRuleLinksByRuleCategories: allRuleLinksByRuleCategories,
     allRuleLinksByScope: allRuleLinksByScope,
-    allRuleLinksByFirstStepRules: allRuleLinksByFirstStepRules
+    allRuleLinksByFirstStepRules: allRuleLinksByFirstStepRules,
+    allRuleLinksByWaveRules: allRuleLinksByWaveRules,
+    allRuleLinksByAxeRules: allRuleLinksByAxeRules
 });
 outputFile('js/rulelinks.js', jsRuleLinks);
 

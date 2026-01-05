@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    {% include "./head.njk" %}
-  </head>
-  <body>
-    {% include "./header.njk" %}
 
-    <!-- Main section-->
-    <div id="main-section" class="container px-4">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">{{title | safe}}</li>
-        </ol>
-      </nav>
-      <main class="row gx-4 justify-content-center">
-        <div class="col-lg-6">
-          {% block content %}
-
-          <h1>{{title}}</h1>
-
-          {% include "./nav-rulesets.njk" %}
 
           <h2 class="rules" id="id-rulesets">Rulesets</h2>
           <div class="desc" id="id-rulesets-desc">Number of rules by WCAG level</div>
@@ -65,6 +43,7 @@
                 <td class="text-end">{{firstStep.aaaCount}}</td>
                 <td class="text-end">{{firstStep.totalCount}}</td>
               </tr>
+              <!-- AXE/WAVE Rules
               <tr>
                 <th>Related <a href="https://dequeuniversity.com/rules/axe/4.11" target="_spec">aXe Rules</a></th>
                 <td class="text-end">{{axe.aCount}}</td>
@@ -79,6 +58,7 @@
                 <td class="text-end">{{wave.aaaCount}}</td>
                 <td class="text-end">{{wave.totalCount}}</td>
               </tr>
+              -->
             </tbody>
           </table>
 
@@ -185,11 +165,5 @@
         </div>
         <div class="col-lg-4">
         </div>
-        {% endblock %}
-      </main>
-    </nav>
-    {% include "./footer.njk" %}
-    {% include "./scripts.njk" %}
-  </body>
-</html>
+
 

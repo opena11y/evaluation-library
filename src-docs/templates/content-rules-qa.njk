@@ -7,23 +7,6 @@
   {% endif %}
 {% endmacro %}
 
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    {% include "./head.njk" %}
-  </head>
-  <body>
-    {% include "./header.njk" %}
-
-    <!-- Main section-->
-    <div id="main-section" class="container px-4">
-
-      <main class="row gx-4 justify-content-center">
-        <div class="col-lg-12">
-          {% block content %}
-
-          <h1>{{title}}</h1>
-
           <table class="table table-striped">
             <thead>
               <th>Rule ID</th>
@@ -57,10 +40,4 @@
           {% endblock %}
 
         </div>
-      </main>
-    </nav>
-    {% include "./footer.njk" %}
-    {% include "./scripts.njk" %}
-  </body>
-</html>
 

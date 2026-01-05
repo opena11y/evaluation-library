@@ -110,31 +110,6 @@
 </tr>
 {% endmacro %}
 
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    {% include "./head.njk" %}
-    <script src="ruleLinks.js"></script>
-  </head>
-  <body>
-    {% include "./header.njk" %}
-
-
-    <!-- Main section-->
-    <div id="main-section" class="container px-4">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">{{title | safe}}</li>
-        </ol>
-      </nav>
-      <div class="row gx-4 justify-content-center">
-        <div class="col-lg-10">
-          <main id="rule">
-            {% block title %}
-            <h1 id="h1-title">Rule: {{title | safe}}</h1>
-            {% endblock %}
             {% include "./nav-rules.njk" %}
 
               <table class="table table-striped rule-info" aria-labelledby="h1-title">
@@ -148,41 +123,11 @@
                   {{ infoItem('Rule Category', ruleInfo.rule_category.title) }}
                   {{ infoItem('Rule Scope',    ruleInfo.rule_scope) }}
                   {{ infoFirstStep('First Step',    ruleInfo.first_step) }}
+                  <!--
                   {{ axeInfo('aXe Rules',      ruleInfo.axe_rules) }}
                   {{ waveInfo('Wave Rules',     ruleInfo.wave_rules) }}
+                  -->
                   {{ infoItems('Techniques',    ruleInfo.techniques) }}
                   {{ infoLinks('Information Links', ruleInfo.information_links) }}
                 </tbody>
               </table>
-          </main>
-        </div>
-      </div>
-    </div>
-    {% include "./footer.njk" %}
-    {% include "./scripts.njk" %}
-
-    <script>
-      (function() {
-        const node = document.querySelector("#id-breadcrumb-rules");
-
-        if (window.location.href.indexOf("#gl") > 0) {
-          node.href= "rules-gl.html#{{ruleInfo.htmlId}}";
-        }
-        else {
-          if (window.location.href.indexOf("#rs") > 0) {
-            node.href= "rules-rs.html#{{ruleInfo.htmlId}}";
-          }
-          else {
-            if (window.location.href.indexOf("#rc") > 0) {
-              node.href= "rules-rc.html#{{ruleInfo.htmlId}}";
-            }
-            else {
-              node.href= "rules-fs.html#{{ruleInfo.htmlId}}";
-            }
-          }
-        }
-      })()
-    </script>
-
-  </body>
-</html>

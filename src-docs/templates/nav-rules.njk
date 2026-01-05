@@ -1,4 +1,5 @@
           <nav class="rules" aria-label="Rules">
+            <a id="all-rules">All Rules</a> |
             <a id="previous-rule" href="#">Previous Rule</a>  |
             <a id="next-rule" href="#">Next Rule</a>
           </nav>
@@ -9,8 +10,10 @@
               let allRuleLinks = [];
               let suffix = '#fs';
 
-              const prevLink = document.querySelector('#previous-rule');
-              const nextLink = document.querySelector('#next-rule');
+              const allLink     = document.querySelector('#all-rules');
+              const prevLink    = document.querySelector('#previous-rule');
+              const nextLink    = document.querySelector('#next-rule');
+
 
               const url = new URL(document.location.href);
               const parts = url.pathname.split('/');
@@ -21,20 +24,39 @@
 
               if (window.location.href.indexOf("#gl") > 0) {
                 allRuleLinks = allRuleLinksByGuidelines;
+                allLink.href = `rules-gl.html#{{linkId}}`;
                 suffix = '#gl';
               }
               else {
                 if (window.location.href.indexOf("#rs") > 0) {
                   allRuleLinks = allRuleLinksByScope;
+                  allLink.href = `rules-rs.html#{{linkId}}`;
                   suffix = '#rs';
                 }
                 else {
                   if (window.location.href.indexOf("#rc") > 0) {
                     allRuleLinks = allRuleLinksByRuleCategories;
+                    allLink.href = `rules-rc.html#{{linkId}}`;
                     suffix = '#rc';
                   }
                   else {
-                    allRuleLinks = allRuleLinksByFirstStepRules;
+                    if (window.location.href.indexOf("#fs") > 0) {
+                      allRuleLinks = allRuleLinksByFirstStepRules;
+                      allLink.href = `rules-fs.html#{{linkId}}`;
+                      suffix = '#fs';
+                    }
+                    else {
+                      if (window.location.href.indexOf("#wave") > 0) {
+                        allRuleLinks = allRuleLinksByWaveRules;
+                        allLink.href = `rules-wave.html#{{linkId}}`;
+                        suffix = '#wave';
+                      }
+                      else {
+                        allRuleLinks = allRuleLinksByAxeRules;
+                        allLink.href = `rules-axe.html#{{linkId}}`;
+                        suffix = '#axe';
+                      }
+                    }
                   }
                 }
               }

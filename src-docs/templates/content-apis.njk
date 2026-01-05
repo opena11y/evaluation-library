@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    {% include "./head.njk" %}
-  </head>
-  <body>
-    {% include "./header.njk" %}
-
-    <!-- Main section-->
-    <div id="main-section" class="container px-4">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">{{title | safe}}</li>
-        </ol>
-      </nav>
-      <main class="row gx-4 justify-content-center">
-        <div class="col-lg-8">
-          <div id="apis">
-            {% block title %}
-            <h1>{{title}}</h1>
-            {% endblock %}
 
             <h2>Basic API for an Evaluation</h2>
 
 
             <h3>Bookmarklet Example Code</h3>
 
-            <pre class="javascript">
-              <code>
+            <div class="language-html">
+              <pre class="javascript">
+                <code>
 /* opena11y-bookmarklet-example.js */
 
 import EvaluationLibrary from '../evaluationLibrary.js';
@@ -98,8 +77,9 @@ window.openA11yExample = {
 if (window.openA11yExample) {
   window.openA11yExample.run();
 }
-              </code>
-            </pre>
+                </code>
+              </pre>
+            </div>
 
 
             <h2 id="h2-ex">OpenA11y Example Bookmarklets</h2>
@@ -129,10 +109,4 @@ if (window.openA11yExample) {
 
           </div>
         </div>
-      </main>
-    </div>
-    {% include "./footer.njk" %}
-    {% include "./scripts.njk" %}
 
-  </body>
-</html>

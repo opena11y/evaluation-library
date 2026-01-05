@@ -1,21 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -33,88 +16,113 @@
 
 
 
-    <script src="ruleLinks.js"></script>
   </head>
   <body>
-            <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-            <div class="container px-4">
-                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library 2.1</a>
+            <header>
+          <!-- Navigation-->
+          <nav class="navbar
+               navbar-expand-lg"
+               aria-label="Primary"
+               id="mainNav">
+              <div class="container px-4">
+                  <span class="brand">
+                    <span class="version">
+                      Version 2.1
+                    </span>
+                  </span>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar"
-                        aria-expanded="false" a
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                  <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="concepts.html">Concepts and Terms</a>
-                        </li>
+                  <button class="navbar-toggler"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#mainNavbar"
+                          aria-controls="mainNavbar"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto">
 
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rules
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
-                            </li>
-                          </ul>
-                        </li>
+                    
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="apis.html">APIs</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="concepts.html">Concepts</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">Rules</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li>
+          </ul>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="apis.html">APIs</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">About</a>
+          <ul class="dropdown-menu"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li>
+          </ul>
+        </li>
+      
 
 
                     </ul>
-
-                </div>
+                  </div>
+              </div>
+          </nav>
+          <div class="tagline">
+            <div class="container px-4" >
+              OpenA11y Evaluation Library
             </div>
-        </nav>
-
+          </div>
+       </header>
 
 
     <!-- Main section-->
     <div id="main-section" class="container px-4">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item" ><a id="id-breadcrumb-rules" href="rules-rc.html">Rules</a></li>
-          <li class="breadcrumb-item active">Layout tables must have meaningful sequence</li>
-        </ol>
-      </nav>
-      <div class="row gx-4 justify-content-center">
-        <div class="col-lg-10">
-          <main id="rule">
+      <main class="container px-4">
+        <div class="row gx-4 justify-content-center">
+          <div class="col-lg-10">
+
             
-            <h1 id="h1-title">Rule: Layout tables must have meaningful sequence</h1>
-            
+
+                
+
+                <h1>Layout tables must have meaningful sequence</h1>
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                       <nav class="rules" aria-label="Rules">
+            <a id="all-rules">All Rules</a> |
             <a id="previous-rule" href="#">Previous Rule</a>  |
             <a id="next-rule" href="#">Next Rule</a>
           </nav>
@@ -125,8 +133,10 @@
               let allRuleLinks = [];
               let suffix = '#fs';
 
-              const prevLink = document.querySelector('#previous-rule');
-              const nextLink = document.querySelector('#next-rule');
+              const allLink     = document.querySelector('#all-rules');
+              const prevLink    = document.querySelector('#previous-rule');
+              const nextLink    = document.querySelector('#next-rule');
+
 
               const url = new URL(document.location.href);
               const parts = url.pathname.split('/');
@@ -137,20 +147,39 @@
 
               if (window.location.href.indexOf("#gl") > 0) {
                 allRuleLinks = allRuleLinksByGuidelines;
+                allLink.href = `rules-gl.html#layout-1`;
                 suffix = '#gl';
               }
               else {
                 if (window.location.href.indexOf("#rs") > 0) {
                   allRuleLinks = allRuleLinksByScope;
+                  allLink.href = `rules-rs.html#layout-1`;
                   suffix = '#rs';
                 }
                 else {
                   if (window.location.href.indexOf("#rc") > 0) {
                     allRuleLinks = allRuleLinksByRuleCategories;
+                    allLink.href = `rules-rc.html#layout-1`;
                     suffix = '#rc';
                   }
                   else {
-                    allRuleLinks = allRuleLinksByFirstStepRules;
+                    if (window.location.href.indexOf("#fs") > 0) {
+                      allRuleLinks = allRuleLinksByFirstStepRules;
+                      allLink.href = `rules-fs.html#layout-1`;
+                      suffix = '#fs';
+                    }
+                    else {
+                      if (window.location.href.indexOf("#wave") > 0) {
+                        allRuleLinks = allRuleLinksByWaveRules;
+                        allLink.href = `rules-wave.html#layout-1`;
+                        suffix = '#wave';
+                      }
+                      else {
+                        allRuleLinks = allRuleLinksByAxeRules;
+                        allLink.href = `rules-axe.html#layout-1`;
+                        suffix = '#axe';
+                      }
+                    }
                   }
                 }
               }
@@ -263,6 +292,7 @@
   
 </tr>
 
+                  <!--
                   
 <tr>
   <th>aXe Rules</th>
@@ -287,6 +317,7 @@
   
 </tr>
 
+                  -->
                   
 <tr>
   <th>Techniques</th>
@@ -335,13 +366,23 @@
 
                 </tbody>
               </table>
-          </main>
+
+
+            
+          </div>
         </div>
-      </div>
+      </main>
     </div>
-            <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; OpenA11y Organization 2023, 2024, 2025</p></div>
+           <!-- Footer-->
+        <footer class="py-5">
+            <div class="feedback container px-4 text-center"><a href="about-privacy.html">Privacy Policy</a> | <a href="about-feedback.html">Feedback</a></div>
+
+            <div class="container px-4 text-center">Copyright (c) 2025, 2026; Licensed Mozilla Public License 2.0, All rights reserved</div>
+
+            <div class="container px-4 text-center"><a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License 2.0</a> allows for <em>Evaluation Library</em> to be freely used (e.g. no cost), copied or modified.</div>
+
+            <div class="container px-4 text-center">Website conformance to <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a> requirements supported using <a href="https://opena11y.github.io/ainspector">AInspector browser addon</a>.</div>
+
         </footer>
 
 
@@ -361,29 +402,6 @@
         <!-- SkipTo.js -->
         <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
 
-
-    <script>
-      (function() {
-        const node = document.querySelector("#id-breadcrumb-rules");
-
-        if (window.location.href.indexOf("#gl") > 0) {
-          node.href= "rules-gl.html#layout-1";
-        }
-        else {
-          if (window.location.href.indexOf("#rs") > 0) {
-            node.href= "rules-rs.html#layout-1";
-          }
-          else {
-            if (window.location.href.indexOf("#rc") > 0) {
-              node.href= "rules-rc.html#layout-1";
-            }
-            else {
-              node.href= "rules-fs.html#layout-1";
-            }
-          }
-        }
-      })()
-    </script>
 
   </body>
 </html>

@@ -1,60 +1,37 @@
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-            <div class="container px-4">
-                <a class="navbar-brand" href="index.html">OpenA11y Evaluation Library {{version}}</a>
+        <header>
+          <!-- Navigation-->
+          <nav class="navbar
+               navbar-expand-lg"
+               aria-label="Primary"
+               id="mainNav">
+              <div class="container px-4">
+                  <span class="brand">
+                    <span class="version">
+                      Version {{version}}
+                    </span>
+                  </span>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar"
-                        aria-expanded="false" a
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                  <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="concepts.html">Concepts and Terms</a>
-                        </li>
+                  <button class="navbar-toggler"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#mainNavbar"
+                          aria-controls="mainNavbar"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto">
 
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rules
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rulesets.html">Rulesets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rc.html">Rule Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-rs.html">Rule Scopes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="rules-fs.html">First Step</a>
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="apis.html">APIs</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-
+                    {{ navigation | safe }}
 
                     </ul>
-
-                </div>
+                  </div>
+              </div>
+          </nav>
+          <div class="tagline">
+            <div class="container px-4" >
+              {{tagLineName}}
             </div>
-        </nav>
+          </div>
+       </header>
