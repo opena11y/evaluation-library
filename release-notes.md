@@ -1,3 +1,6 @@
+Version 2.1.1 Overview
+=============================
+* Fixed error in Control 14 on using native attributes when possible, there is no "invalid" attribute for form controls in html
 
 Version 2.1 Overview
 =============================

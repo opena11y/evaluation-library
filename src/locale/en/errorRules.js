@@ -10,7 +10,7 @@ export const errorRules = {
 
   ERROR_1: {
       ID:                    'Error 1',
-      DEFINITION:            'Form controls with invalid values must provide information to assisive technologies that the values are invalid.',
+      DEFINITION:            'Form controls with invalid values must provide information to assistive technologies that the values are invalid.',
       SUMMARY:               'Using @aria-invalid@ to identify the validity of control values.',
       TARGET_RESOURCES_DESC: '@textarea@, @select@ and @input@ elements',
       RULE_RESULT_MESSAGES: {

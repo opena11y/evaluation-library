@@ -876,7 +876,6 @@ export const controlRules = [
 
         case 'input':
           checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
-          checkForNativeStates(de, 'aria-invalid',  'invalid');
           checkForNativeStates(de, 'aria-required', 'required');
           if ((de.typeAttr === 'checkbox') || (de.typeAttr === 'radio')) {
             checkForNativeStates(de, 'aria-checked', 'checked');
@@ -890,14 +889,12 @@ export const controlRules = [
 
         case 'select':
           checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
-          checkForNativeStates(de, 'aria-invalid',  'invalid');
           checkForNativeStates(de, 'aria-required', 'required');
           checkForNativeStates(de, 'aria-multiselectable', 'multiple');
           break;
 
         case 'textarea':
           checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
-          checkForNativeStates(de, 'aria-invalid',  'invalid');
           checkForNativeStates(de, 'aria-required', 'required');
           break;
       }

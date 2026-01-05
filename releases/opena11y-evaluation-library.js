@@ -147,7 +147,7 @@ class DebugLogging {
 /* Constants */
 const debug$18 = new DebugLogging('constants', false);
 
-const VERSION = '2.1';
+const VERSION = '2.1.1';
 
 /**
  * @constant RULESET
@@ -3209,7 +3209,7 @@ const errorRules$1 = {
 
   ERROR_1: {
       ID:                    'Error 1',
-      DEFINITION:            'Form controls with invalid values must provide information to assisive technologies that the values are invalid.',
+      DEFINITION:            'Form controls with invalid values must provide information to assistive technologies that the values are invalid.',
       SUMMARY:               'Using @aria-invalid@ to identify the validity of control values.',
       TARGET_RESOURCES_DESC: '@textarea@, @select@ and @input@ elements',
       RULE_RESULT_MESSAGES: {
@@ -35130,7 +35130,6 @@ const controlRules = [
 
         case 'input':
           checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
-          checkForNativeStates(de, 'aria-invalid',  'invalid');
           checkForNativeStates(de, 'aria-required', 'required');
           if ((de.typeAttr === 'checkbox') || (de.typeAttr === 'radio')) {
             checkForNativeStates(de, 'aria-checked', 'checked');
@@ -35144,14 +35143,12 @@ const controlRules = [
 
         case 'select':
           checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
-          checkForNativeStates(de, 'aria-invalid',  'invalid');
           checkForNativeStates(de, 'aria-required', 'required');
           checkForNativeStates(de, 'aria-multiselectable', 'multiple');
           break;
 
         case 'textarea':
           checkForNativeStates(de, 'aria-disabled', 'disabled', 'mc');
-          checkForNativeStates(de, 'aria-invalid',  'invalid');
           checkForNativeStates(de, 'aria-required', 'required');
           break;
       }
