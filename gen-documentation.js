@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const nunjucks  = require('nunjucks');
-const EvaluationLibrary  = require('./releases/opena11y-evaluation-library.cjs');
+const EvaluationLibrary  = require('./docs/releases/opena11y-evaluation-library.cjs');
 
 /* Constants */
 

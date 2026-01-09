@@ -11,6 +11,8 @@ import {
   isHex
 } from '../utils.js';
 
+import Color from '../../libs/color.js';
+
 /* Constants */
 const debug = new DebugLogging('colorContrast', false);
 debug.flag = false;
@@ -204,11 +206,10 @@ export default class ColorContrast {
           break;
       }  // end switch
     } else {
-      opacity = parseFloat(opacity) * parentOpacity;
+      opacity = parseFloat(opacity);
       if (isNaN(opacity)) {
         opacity = 1.0;
       }
-
     }
 
     // Make sure opacity is between 0 and 1
@@ -385,8 +386,6 @@ export default class ColorContrast {
     let c, parts, r1, g1, b1;
     let o1 = 1.0;
 
-    if (!isRGB(color) && !isSRGB(color)) return "";
-
     if (isRGB(color)) {
       c = color.replace('"', '');
       c = c.split(')')[0];
@@ -398,7 +397,7 @@ export default class ColorContrast {
       o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
     }
     else {
-      if (c.includes('srgb')) {
+      if (isSRGB(color)) {
         c = color.split(')')[0];
         c = c.split('srgb')[1].trim();
         parts = c.split(' ');
@@ -406,6 +405,14 @@ export default class ColorContrast {
         g1 = parseFloat(parts[1]) * 255;
         b1 = parseFloat(parts[2]) * 255;
         o1 = parts.length === 5 ? parseFloat(parts[4]) : 1.0;
+      }
+      else {
+        c = new Color(color);
+        const cRGB  = new Color (c.to(`srgb`).toString());
+        r1 = parseInt(cRGB.r * 255);
+        g1 = parseInt(cRGB.g * 255);
+        b1 = parseInt(cRGB.b * 255);
+        o1 = cRGB.alpha;
       }
     }
 

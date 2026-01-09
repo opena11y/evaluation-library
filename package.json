@@ -37,7 +37,10 @@
     "rollup-plugin-polyfill-node": "^0.10.2"
   },
   "dependencies": {
+    "colorjs.io": "^0.6.0",
     "gulp-eslint": "^6.0.0",
+    "gulp-terser": "^2.1.0",
+    "gulp-uglify": "^3.0.2",
     "nunjucks": "^3.2.3",
     "promise": "^8.1.0"
   }

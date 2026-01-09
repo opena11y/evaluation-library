@@ -1,6 +1,6 @@
 /* testsuite.js */
 
-import EvaluationLibrary from '../../releases/opena11y-evaluation-library.js';
+import EvaluationLibrary from '../../docs/releases/opena11y-evaluation-library.js';
 
 var evaluator = new EvaluationLibrary();
 

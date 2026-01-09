@@ -4,7 +4,8 @@ const rollup       = require('rollup');
 const {src, task}  = require('gulp');
 const {parallel, series}   = require('gulp');
 const eslint       = require('gulp-eslint');
-const minify       = require('gulp-minify');
+// const minify       = require('gulp-minify');
+const terser       = require('gulp-terser');
 const bookmarklet  = require('gulp-bookmarklet');
  
 task('linting', () => {
@@ -27,7 +28,7 @@ gulp.task('build', () => {
     })
     .then(bundle => {
       return bundle.write({
-        file: './releases/opena11y-evaluation-library.js',
+        file: './docs/releases/opena11y-evaluation-library.js',
         format: 'es'
       });
     });
@@ -56,7 +57,7 @@ gulp.task('buildcjs', () => {
     })
     .then(bundle => {
       return bundle.write({
-        file: './releases/opena11y-evaluation-library.cjs',
+        file: './docs/releases/opena11y-evaluation-library.cjs',
         format: 'cjs',
       });
     });
@@ -97,24 +98,21 @@ gulp.task('documentation', function (cb) {
   });
 })
 
+/*
 gulp.task('compress', function(cb) {
   gulp.src(['./releases/*.js', './releases/*.cjs'])
-    .pipe(minify({
-        ignoreFiles: ['*-min.js', '*-min.mjs']
-    }))
+    .pipe(terser())
     .pipe(gulp.dest('releases'));
     cb();
 });
 
 gulp.task('compress-bookmarklets', function(cb) {
   gulp.src(['./docs/bookmarklets/*.js', './docs/bookmarklets/*.cjs'])
-    .pipe(minify({
-        ignoreFiles: ['*-min.js', '*-min.mjs']
-    }))
+    .pipe(terser())
     .pipe(gulp.dest('./docs/bookmarklets'));
     cb();
 });
-
+*/
 
 const ainspector4       = task('opena11y-for-ainspector');
 const h2l              = task('opena11y-for-h2l');
@@ -123,7 +121,12 @@ const buildcjs         = task('buildcjs');
 const buildBookmarklet = task('build-bookmarklet');
 const documentation    = task('documentation');
 const linting          = task('linting');
+
+/*
 const compressa        = task('compress');
 const compressb        = task('compress-bookmarklets');
+*/
 
-exports.default = series(linting, parallel( build, buildcjs, ainspector4, h2l, buildBookmarklet), documentation, compressa, compressb);
+// Using color.js library has broken the minify tasks
+// exports.default = series(linting, parallel( build, buildcjs, ainspector4, h2l, buildBookmarklet), documentation, compressa, compressb);
+exports.default = series(linting, parallel( build, buildcjs, ainspector4, h2l, buildBookmarklet), documentation);
