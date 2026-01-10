@@ -1,9 +1,9 @@
 Version 2.2 Overview
 =============================
-* Issue 17: Fixed error in Control 14 on using native attributes when possible, there is no "invalid" attribute for form controls in html
-* Use color.js to get rendered colors for color contrast calculations
-* No longer generating minified version of library or bookmarklet
-* Moved releases directory to doc directory to making available through the web
+* Issue #17: Fixed error in Control 14 on using native attributes when possible, there is no "invalid" attribute for form controls in html
+* Issue #14: Use color.js to get rendered colors for color contrast calculations
+* No longer generating minified version of library or bookmarklet example
+* Moved releases directory to doc directory to making available through the web and created links
 
 Version 2.1 Overview
 =============================
