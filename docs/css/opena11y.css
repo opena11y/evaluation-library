@@ -133,9 +133,10 @@ footer a:visited {
 .brand .icon img {
   padding: 0;
   margin: 0;
-  height: 32px;
+  height: 64px;
   border: 1px solid light-dark(var(--iconBlue), var(--iconBlueDark));
 }
+
 
 .brand .version {
   position: relative;
