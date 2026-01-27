@@ -419,6 +419,18 @@ const mainPages = [
         title: 'Feedback',
         link: 'Feedback',
         filename: 'about-feedback.html'
+      },
+      {
+        spacer: ''
+      },
+      { url: 'https://opena11y.github.io/ainspector/',
+        link: 'AInspector for WCAG'
+      },
+      { url: 'https://opena11y.github.io/h2l-side-panel/',
+        link: 'H2L Side Panel'
+      },
+      { url: 'https://skipto-landmarks-headings.github.io/page-script-5/',
+        link: 'SkipTo.js'
       }
     ]
   }
@@ -445,7 +457,12 @@ function createNavigation(pages) {
           html += `<li><a class="dropdown-item" href="${p.filename}">${p.link}</a></li>`;
         }
         else {
-          html += `<li><hr class="dropdown-divider"></li>`;
+          if (p.url) {
+          html += `<li><a class="dropdown-item" href="${p.url}">${p.link}</a></li>`;
+          }
+          else {
+            html += `<li><hr class="dropdown-divider"></li>`;
+          }
         }
       });
 
