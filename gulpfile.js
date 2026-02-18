@@ -70,7 +70,7 @@ gulp.task('opena11y-for-h2l', () => {
     })
     .then(bundle => {
       return bundle.write({
-      file: '../toc-sidepanel/src/js/opena11y-for-h2l.js',
+      file: '../h2l-sidepanel/src/js/opena11y-for-h2l.js',
       format: 'iife'
       });
     });
