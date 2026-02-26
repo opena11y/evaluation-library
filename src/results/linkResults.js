@@ -132,7 +132,9 @@ export default class LinkResults {
         const dataItem = {
           url:               de.node.href,
           name:              cleanName(de.accName.name),
+          nameSource:        de.accName.source,
           desc:              cleanName(de.accDescription.name),
+          descSource:        de.accDescription.source,
           ordinalPosition:   de.ordinalPosition,
           isInternal:        sameHostname && samePathname,
           isExternal:        !sameDomain,

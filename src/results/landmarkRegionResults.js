@@ -39,6 +39,7 @@ export default class LandmarkRegionResults {
       const dataItem = {
         role:              de.role.toLowerCase(),
         name:              cleanName(de.accName.name),
+        nameSource:        de.accName.source,
         ordinalPosition:   de.ordinalPosition,
         isVisibleOnScreen: de.visibility.isVisibleOnScreen,
         isVisibleToAT:     de.visibility.isVisibleToAT

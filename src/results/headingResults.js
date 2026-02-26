@@ -38,6 +38,7 @@ export default class HeadingResults {
       const dataItem = {
         level:             de.ariaInfo.ariaLevel,
         name:              cleanName(de.accName.name),
+        nameSource:        de.accName.source,
         ordinalPosition:   de.ordinalPosition,
         isVisibleOnScreen: de.visibility.isVisibleOnScreen,
         isVisibleToAT:     de.visibility.isVisibleToAT

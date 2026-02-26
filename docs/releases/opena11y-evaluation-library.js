@@ -1066,6 +1066,7 @@ class HeadingResults {
       const dataItem = {
         level:             de.ariaInfo.ariaLevel,
         name:              cleanName(de.accName.name),
+        nameSource:        de.accName.source,
         ordinalPosition:   de.ordinalPosition,
         isVisibleOnScreen: de.visibility.isVisibleOnScreen,
         isVisibleToAT:     de.visibility.isVisibleToAT
@@ -1124,6 +1125,7 @@ class LandmarkRegionResults {
       const dataItem = {
         role:              de.role.toLowerCase(),
         name:              cleanName(de.accName.name),
+        nameSource:        de.accName.source,
         ordinalPosition:   de.ordinalPosition,
         isVisibleOnScreen: de.visibility.isVisibleOnScreen,
         isVisibleToAT:     de.visibility.isVisibleToAT
@@ -1274,7 +1276,9 @@ class LinkResults {
         const dataItem = {
           url:               de.node.href,
           name:              cleanName(de.accName.name),
+          nameSource:        de.accName.source,
           desc:              cleanName(de.accDescription.name),
+          descSource:        de.accDescription.source,
           ordinalPosition:   de.ordinalPosition,
           isInternal:        sameHostname && samePathname,
           isExternal:        !sameDomain,
