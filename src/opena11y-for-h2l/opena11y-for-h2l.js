@@ -35,6 +35,12 @@ const highlightElements = [];
 
 // Helper functions
 
+function removeHighlightElements () {
+  while (highlightElements[0]) {
+    highlightElements.pop().remove();
+  }
+}
+
 function isZeroDimension (rect) {
   return rect.height === 0 && rect.width === 0;
 }
@@ -42,14 +48,19 @@ function isZeroDimension (rect) {
 // Some elements have zero height and width, so use their child element
 // sizes to determine dimensions
 
-function getPositionAndDimensions (elem) {
+function getPositionAndDimensions (elem, posElem, posValue='static') {
   let rect = elem.getBoundingClientRect();
+  let posRect = posElem ?
+                posElem.getBoundingClientRect() :
+                new DOMRect(0,0,0,0);
 
   const elemRect = {
-    top: rect.top,
-    right: rect.right,
+    top:    rect.top,
+    left:   rect.left,
     bottom: rect.bottom,
-    left: rect.left,
+    right:  rect.right,
+    height: rect.height,
+    width:  rect.width
   };
 
   if (isZeroDimension(rect)) {
@@ -58,24 +69,60 @@ function getPositionAndDimensions (elem) {
       const r = childElem.getBoundingClientRect();
 
       if (!isZeroDimension(r)) {
-        elemRect.top    = Math.min(r.top,   elemRect.top);
-        elemRect.right  = Math.max(r.right, elemRect.right);
-        elemRect.bottom = Math.max(r.right, elemRect.bottom);
-        elemRect.left   = Math.min(r.left,  elemRect.left);
+        elemRect.top    = Math.min(r.top,    elemRect.top);
+        elemRect.right  = Math.max(r.right,  elemRect.right);
+        elemRect.bottom = Math.max(r.bottom, elemRect.bottom);
+        elemRect.left   = Math.min(r.left,   elemRect.left);
       }
 
       childElem = childElem.nextElementSibling;
     }
+
+    elemRect.height = elemRect.bottom - elemRect.top;
+    elemRect.width  = elemRect.right  - elemRect.left;
   }
-  elemRect.width  = elemRect.right  - elemRect.left;
-  elemRect.height = elemRect.bottom - elemRect.top;
-  console.log(`[getPositionAndDimensions][${elem.tagName}]: ${elem.textContent}`);
-  console.log(`[getPositionAndDimensions][${elem.tagName}][ scrollTop]: ${elemRect.top} ${rect.top}`);
-  console.log(`[getPositionAndDimensions][${elem.tagName}][scrollLeft]: ${elemRect.left} ${rect.left}`);
-  console.log(`[getPositionAndDimensions][${elem.tagName}][       top]: ${elemRect.top} ${rect.top}`);
-  console.log(`[getPositionAndDimensions][${elem.tagName}][      left]: ${elemRect.left} ${rect.left}`);
-  console.log(`[getPositionAndDimensions][${elem.tagName}][    height]: ${elemRect.height} ${rect.height}`);
-  console.log(`[getPositionAndDimensions][${elem.tagName}][     width]: ${elemRect.width} ${rect.width}`);
+
+  console.log(`\n[getPositionAndDimensions][${elem.tagName}][ accName]: ${elem.textContent} (${posValue})`);
+  console.log(`[getPositionAndDimensions][ initial][elemRect][A] Top: ${elemRect.top} Left: ${elemRect.left} Bottom: ${elemRect.bottom} Right: ${elemRect.right}`);
+  if (!isZeroDimension(elemRect)) {
+    switch (posValue) {
+      case 'absolute':
+        elemRect.top   = elemRect.top  - posRect.top;
+        elemRect.left  = elemRect.left - posRect.left;
+        console.log(`[getPositionAndDimensions][absolute][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
+        break;
+
+      case 'fixed':
+        elemRect.top   = elemRect.top  - posRect.top;
+        elemRect.left  = elemRect.left - posRect.left;
+        console.log(`[getPositionAndDimensions][   fixed][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
+        break;
+
+      case 'overflow':
+        elemRect.top   = elemRect.top  - posRect.top;
+        elemRect.left  = elemRect.left - posRect.left;
+        console.log(`[getPositionAndDimensions][overflow][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
+        break;
+
+      case 'static':
+        elemRect.top   = elemRect.top  + window.scrollY;
+        elemRect.left  = elemRect.left + window.scrollX;
+        console.log(`[getPositionAndDimensions][scrollY]: ${window.scrollY} [scrollX]: ${scrollX}`);
+        break;
+
+      case 'sticky':
+        elemRect.top   = elemRect.top  - posRect.top;
+        elemRect.left  = elemRect.left - posRect.left;
+        console.log(`[getPositionAndDimensions][  sticky][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
+        break;
+
+    }
+
+    elemRect.bottom  = elemRect.top  + elemRect.height;
+    elemRect.right   = elemRect.left + elemRect.width;
+  }
+
+  console.log(`[getPositionAndDimensions][rendered][elemRect][C] Top: ${elemRect.top} Left: ${elemRect.left} Bottom: ${elemRect.bottom} Right: ${elemRect.right}`);
   return elemRect;
 }
 
@@ -85,12 +132,12 @@ browserRuntime.onMessage.addListener(
     // Highlight selected and/or all elements on a page
     if(request.highlightItems) {
 
+      removeHighlightElements();
+
 //      const selectedItem = request.highlightItems.selectedItem;
       const allItems     = request.highlightItems.allItems;
 
-      while (highlightElements.length) {
-        highlightElements.pop().remove();
-      }
+      debug && console.log(`[items][count]: ${request.highlightItems.allItems}`);
 
       allItems.forEach( (item) => {
 
@@ -99,12 +146,14 @@ browserRuntime.onMessage.addListener(
         const info = `${item.role}: ${item.name} (${item.namesrc})`;
 
         const de = evaluationResult.getDomElementByPosition(item.position);
+
         if (de) {
-          const rect = getPositionAndDimensions(de.node);
+          const pe = de.parentInfo.positionDomElement;
+          const rect = getPositionAndDimensions(de.node, pe.node, pe.colorContrast.positionValue);
 
           const he = document.createElement(HIGHLIGHT_ELEMENT_NAME);
           highlightElements.push(he);
-          de.node.appendChild(he);
+          pe.node.appendChild(he);
 
           let attrValue = `${Math.round(rect.left)};${Math.round(rect.top)};${Math.round(rect.width)};${Math.round(rect.height)}`;
           attrValue += info ?
@@ -127,9 +176,7 @@ browserRuntime.onMessage.addListener(
 
     // Remove highlights
     if(request.removeHighlight) {
-      while (highlightElements.length) {
-        highlightElements.pop().remove();
-      }
+      removeHighlightElements();
     }
 
     // Update Highlight configuration
@@ -144,14 +191,10 @@ browserRuntime.onMessage.addListener(
       });
     }
 
-    // Focus elements
-    if(request.focusPosition) {
-      debug && console.log(`[focusPosition]: ${request.focusPosition}`);
-    }
-
     // Update heading, region and link information
     if(request.runEvaluation) {
       debug && console.log(`[runEvaluation]`);
+      removeHighlightElements();
       const doc = window.document;
       evaluationResult  = evaluationLibrary.evaluateWCAG(doc,
                                 doc.title,
@@ -180,18 +223,16 @@ browserRuntime.onMessage.addListener(
 
 let openFlag = true;
 
+
 setInterval(() => {
-  chrome.runtime
-    .sendMessage({ ['h2l-sidepanel-open']: true })
+  browserRuntime.sendMessage({ ['h2l-sidepanel-open']: true })
     .then((msgRes) => {
       if (msgRes !== true && openFlag) {
         openFlag = false;
       }
     })
     .catch( () => {
-      while (highlightElements.length) {
-        highlightElements.pop().remove();
-      }
+      removeHighlightElements();
       openFlag = true;
   });
 }, 50);

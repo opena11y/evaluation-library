@@ -78,6 +78,23 @@ export default class ColorContrast {
       debug.tag(elementNode);
     }
 
+    this.display  = style.getPropertyValue("display")
+    this.position =  style.getPropertyValue("position").toLowerCase();
+    this.overflow =  style.getPropertyValue("overflow").toLowerCase();
+    this.isPosition = ['absolute', 'fixed', 'sticky'].includes(this.position);
+    this.isOverflow = ['auto', 'hidden'].includes(this.overflow);
+    this.isPositionRef = this.isPosition || this.isOverflow;
+
+    this.positionValue = 'static';
+    if (this.isPosition) {
+      this.positionValue = this.position;
+    }
+    else {
+      if (this.isOverflow) {
+        this.positionValue = 'overflow';
+      }
+    }
+
     this.hasTextNodes = this.getHasTextNodes(elementNode);
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);

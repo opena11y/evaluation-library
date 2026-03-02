@@ -131,7 +131,6 @@ export default class DOMElement {
                           elementNode.getAttribute('aria-braillelabel') :
                           '';
 
-
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
 

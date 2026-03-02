@@ -63,6 +63,8 @@ class ParentInfo {
     this.tableRowGroup   = null;
     this.tableCell       = null;
 
+    this.positionDomElement = null;
+
     this.inLink      = false;
     this.inParagraph = false;
     this.inDialog    = false;
@@ -82,6 +84,9 @@ class ParentInfo {
       this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
+      this.tableCell       = info.tableCell;
+
+      this.positionDomElement = info.positionDomElement;
 
       this.inLink       = info.inLink;
       this.inParagraph  = info.inParagraph;
@@ -147,6 +152,7 @@ export default class DOMCache {
     this.iframeInfo    = new IFrameInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion, addDataId);
+    parentInfo.positionDomElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -395,6 +401,10 @@ export default class DOMCache {
 
     this.idInfo.update(documentIndex, domElement);
     this.timingInfo.update(domElement);
+
+    newParentInfo.positionDomElement = domElement.colorContrast.isPositionRef ?
+                                    domElement :
+                                    parentInfo.positionDomElement;
 
     return newParentInfo;
   }

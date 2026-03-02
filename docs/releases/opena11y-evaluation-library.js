@@ -31372,6 +31372,23 @@ class ColorContrast {
       debug$$.tag(elementNode);
     }
 
+    this.display  = style.getPropertyValue("display");
+    this.position =  style.getPropertyValue("position").toLowerCase();
+    this.overflow =  style.getPropertyValue("overflow").toLowerCase();
+    this.isPosition = ['absolute', 'fixed', 'sticky'].includes(this.position);
+    this.isOverflow = ['auto', 'hidden'].includes(this.overflow);
+    this.isPositionRef = this.isPosition || this.isOverflow;
+
+    this.positionValue = 'static';
+    if (this.isPosition) {
+      this.positionValue = this.position;
+    }
+    else {
+      if (this.isOverflow) {
+        this.positionValue = 'overflow';
+      }
+    }
+
     this.hasTextNodes = this.getHasTextNodes(elementNode);
 
     this.opacity            = this.normalizeOpacity(style, parentColorContrast);
@@ -35252,7 +35269,6 @@ class DOMElement {
                           elementNode.getAttribute('aria-braillelabel') :
                           '';
 
-
     this.colorContrast = new ColorContrast(parentDomElement, elementNode);
     this.visibility    = new Visibility(parentDomElement, elementNode);
 
@@ -37438,6 +37454,8 @@ class ParentInfo {
     this.tableRowGroup   = null;
     this.tableCell       = null;
 
+    this.positionDomElement = null;
+
     this.inLink      = false;
     this.inParagraph = false;
     this.inDialog    = false;
@@ -37457,6 +37475,9 @@ class ParentInfo {
       this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
+      this.tableCell       = info.tableCell;
+
+      this.positionDomElement = info.positionDomElement;
 
       this.inLink       = info.inLink;
       this.inParagraph  = info.inParagraph;
@@ -37522,6 +37543,7 @@ class DOMCache {
     this.iframeInfo    = new IframeInfo();
 
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion, addDataId);
+    parentInfo.positionDomElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
 
     // Information on rule results associated with page
@@ -37749,6 +37771,10 @@ class DOMCache {
 
     this.idInfo.update(documentIndex, domElement);
     this.timingInfo.update(domElement);
+
+    newParentInfo.positionDomElement = domElement.colorContrast.isPositionRef ?
+                                    domElement :
+                                    parentInfo.positionDomElement;
 
     return newParentInfo;
   }
