@@ -15,9 +15,7 @@ const evaluationLibrary = new EvaluationLibrary();
 
 let evaluationResult = false;
 
-import {
-  getOptions
-} from '../../../h2l-sidepanel/src/js/storage.js';
+const highlightElements = [];
 
 // Load element highlight custom element
 
@@ -31,7 +29,6 @@ scriptNode.id = 'id-h2l-highlight';
 scriptNode.src = browserRuntime.getURL('h2l-highlight.js');
 document.body.appendChild(scriptNode);
 
-const highlightElements = [];
 
 // Helper functions
 
@@ -82,38 +79,31 @@ function getPositionAndDimensions (elem, posElem, posValue='static') {
     elemRect.width  = elemRect.right  - elemRect.left;
   }
 
-  console.log(`\n[getPositionAndDimensions][${elem.tagName}][ accName]: ${elem.textContent} (${posValue})`);
-  console.log(`[getPositionAndDimensions][ initial][elemRect][A] Top: ${elemRect.top} Left: ${elemRect.left} Bottom: ${elemRect.bottom} Right: ${elemRect.right}`);
   if (!isZeroDimension(elemRect)) {
     switch (posValue) {
       case 'absolute':
         elemRect.top   = elemRect.top  - posRect.top;
         elemRect.left  = elemRect.left - posRect.left;
-        console.log(`[getPositionAndDimensions][absolute][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
         break;
 
       case 'fixed':
         elemRect.top   = elemRect.top  - posRect.top;
         elemRect.left  = elemRect.left - posRect.left;
-        console.log(`[getPositionAndDimensions][   fixed][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
         break;
 
       case 'overflow':
         elemRect.top   = elemRect.top  - posRect.top;
         elemRect.left  = elemRect.left - posRect.left;
-        console.log(`[getPositionAndDimensions][overflow][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
         break;
 
       case 'static':
         elemRect.top   = elemRect.top  + window.scrollY;
         elemRect.left  = elemRect.left + window.scrollX;
-        console.log(`[getPositionAndDimensions][scrollY]: ${window.scrollY} [scrollX]: ${scrollX}`);
         break;
 
       case 'sticky':
         elemRect.top   = elemRect.top  - posRect.top;
         elemRect.left  = elemRect.left - posRect.left;
-        console.log(`[getPositionAndDimensions][  sticky][ posRect][B] Top: ${posRect.top} Left: ${posRect.left} Bottom: ${posRect.bottom} Right: ${posRect.right}`);
         break;
 
     }
@@ -121,8 +111,6 @@ function getPositionAndDimensions (elem, posElem, posValue='static') {
     elemRect.bottom  = elemRect.top  + elemRect.height;
     elemRect.right   = elemRect.left + elemRect.width;
   }
-
-  console.log(`[getPositionAndDimensions][rendered][elemRect][C] Top: ${elemRect.top} Left: ${elemRect.left} Bottom: ${elemRect.bottom} Right: ${elemRect.right}`);
   return elemRect;
 }
 
@@ -135,15 +123,14 @@ browserRuntime.onMessage.addListener(
       removeHighlightElements();
 
 //      const selectedItem = request.highlightItems.selectedItem;
-      const allItems     = request.highlightItems.allItems;
+      const allItems               = request.highlightItems.allItems;
+      const highlightSize          = request.highlightItems.highlightSize;
+      const highlightStyle         = request.highlightItems.highlightStyle;
+      const highlightStyleSelected = request.highlightItems.highlightStyleSelected;
 
-      debug && console.log(`[items][count]: ${request.highlightItems.allItems}`);
+      debug && console.log(`[highlightItems][count]: ${allItems}`);
 
       allItems.forEach( (item) => {
-
-        debug && console.log(`[item][${item.position}][role: ${item.role}][name: ${item.name}][src: ${item.namesrc}] (${item.msgHidden})`);
-
-        const info = `${item.role}: ${item.name} (${item.namesrc})`;
 
         const de = evaluationResult.getDomElementByPosition(item.position);
 
@@ -152,22 +139,33 @@ browserRuntime.onMessage.addListener(
           const rect = getPositionAndDimensions(de.node, pe.node, pe.colorContrast.positionValue);
 
           const he = document.createElement(HIGHLIGHT_ELEMENT_NAME);
+
+          const highlightConfig = he.hasAttribute('selected') ?
+                                `${highlightSize};${highlightStyleSelected}` :
+                                `${highlightSize};${highlightStyle}`;
+          debug && console.log(`[updateHighlightConfig]: ${highlightConfig}`);
+          he.setAttribute('highlight-config', highlightConfig);
+
           highlightElements.push(he);
           pe.node.appendChild(he);
 
-          let attrValue = `${Math.round(rect.left)};${Math.round(rect.top)};${Math.round(rect.width)};${Math.round(rect.height)}`;
-          attrValue += info ?
-                       `;${info}` :
-                       `;`;
-          attrValue += item.msgHidden ?
-                       `;${item.msgHidden}` :
-                       `;`;
+          he.setAttribute('position', item.position);
 
-          attrValue += `;none`;
+          he.setAttribute('elem-role',    item.elemRole);
+          he.setAttribute('name',         de.accName.name);
+          he.setAttribute('name-src',     de.accName.source);
+          he.setAttribute('name-has-alt', de.accName.includesAlt || de.accName.includesAriaLabel);
+          he.setAttribute('desc',         de.accDescription.name);
+          he.setAttribute('desc-src',     de.accDescription.source);
+          he.setAttribute('msg-hidden',   item.msgHidden);
+
+          let attrValue = `${Math.round(rect.left)}`;
+          attrValue += `;${Math.round(rect.top)}`;
+          attrValue += `;${Math.round(rect.width)}`;
+          attrValue += `;${Math.round(rect.height)}`;
+          attrValue += `;${item.scrollBehavior}`;
 
           he.setAttribute('highlight', attrValue);
-
-          he.setAttribute('position', item.position);
 
         }
       });
@@ -181,13 +179,16 @@ browserRuntime.onMessage.addListener(
 
     // Update Highlight configuration
     if(request.updateHighlightConfig) {
-      getOptions().then( (options) => {
-        highlightElements.forEach( (he) => {
-          const highlightConfig = he.hasAttribute('selected') ?
-                                  `${options.highlightSize};${options.highlightStyleSelected}` :
-                                  `${options.highlightSize};${options.highlightStyle}`;
-           he.setAttribute('highlight-config', highlightConfig);
-        });
+      debug && console.log(`[updateHighlightConfig][count]: ${highlightElements.length}`);
+
+      const config= request.updateHighlightConfig;
+
+      highlightElements.forEach( (he) => {
+        const highlightConfig = he.hasAttribute('selected') ?
+                                `${config.highlightSize};${config.highlightStyleSelected}` :
+                                `${config.highlightSize};${config.highlightStyle}`;
+         debug && console.log(`[updateHighlightConfig]: ${highlightConfig}`);
+         he.setAttribute('highlight-config', highlightConfig);
       });
     }
 
