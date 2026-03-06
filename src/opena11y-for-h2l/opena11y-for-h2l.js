@@ -114,62 +114,79 @@ function getPositionAndDimensions (elem, posElem, posValue='static') {
   return elemRect;
 }
 
+function highlightItems(dataObj) {
+
+  function highlightPosition(position, elemRole, selected) {
+
+    const de = evaluationResult.getDomElementByPosition(position);
+
+    if (de) {
+
+      const pe = de.parentInfo.positionDomElement;
+      const rect = getPositionAndDimensions(de.node, pe.node, pe.colorContrast.positionValue);
+
+      const he = document.createElement(HIGHLIGHT_ELEMENT_NAME);
+
+      const highlightConfig = selected ?
+                            `${highlightSize};${highlightStyleSelected}` :
+                            `${highlightSize};${highlightStyle}`;
+      debug && console.log(`[updateHighlightConfig]: ${highlightConfig}`);
+      he.setAttribute('highlight-config', highlightConfig);
+
+      highlightElements.push(he);
+      pe.node.appendChild(he);
+
+      he.setAttribute('position', position);
+
+      he.setAttribute('elem-role',    elemRole);
+      he.setAttribute('name',         de.accName.name);
+      he.setAttribute('name-src',     de.accName.source);
+      he.setAttribute('name-has-alt', de.accName.includesAlt || de.accName.includesAriaLabel);
+      he.setAttribute('desc',         de.accDescription.name);
+      he.setAttribute('desc-src',     de.accDescription.source);
+      he.setAttribute('msg-hidden',   msgHidden);
+
+      let attrValue = `${Math.round(rect.left)}`;
+      attrValue += `;${Math.round(rect.top)}`;
+      attrValue += `;${Math.round(rect.width)}`;
+      attrValue += `;${Math.round(rect.height)}`;
+      attrValue += `;${selected ? scrollBehavior : 'none'}`;
+
+      he.setAttribute('highlight', attrValue);
+    }
+  }
+
+  const selectedItem           = dataObj.selectedItem;
+  const allItems               = dataObj.allItems;
+  const highlightSize          = dataObj.highlightSize;
+  const highlightStyle         = dataObj.highlightStyle;
+  const highlightStyleSelected = dataObj.highlightStyleSelected;
+  const msgHidden              = dataObj.msgHidden;
+  const scrollBehavior         = dataObj.scrollBehavior;
+
+  removeHighlightElements();
+
+  debug && console.log(`[highlightItems][selectedItem]: ${selectedItem}`);
+  debug && console.log(`[highlightItems][       count]: ${allItems.count}`);
+
+  if (allItems.count) {
+    allItems.forEach( (item) => {
+      highlightPosition(item.position, item.elemRole, item.position === selectedItem.position);
+    });
+  }
+  else {
+    highlightPosition(selectedItem.position, selectedItem.elemRole, true);
+  }
+
+
+}
+
 // Listen for messages from side panel
 browserRuntime.onMessage.addListener(
   function(request, sender, sendResponse) {
     // Highlight selected and/or all elements on a page
     if(request.highlightItems) {
-
-      removeHighlightElements();
-
-//      const selectedItem = request.highlightItems.selectedItem;
-      const allItems               = request.highlightItems.allItems;
-      const highlightSize          = request.highlightItems.highlightSize;
-      const highlightStyle         = request.highlightItems.highlightStyle;
-      const highlightStyleSelected = request.highlightItems.highlightStyleSelected;
-
-      debug && console.log(`[highlightItems][count]: ${allItems}`);
-
-      allItems.forEach( (item) => {
-
-        const de = evaluationResult.getDomElementByPosition(item.position);
-
-        if (de) {
-          const pe = de.parentInfo.positionDomElement;
-          const rect = getPositionAndDimensions(de.node, pe.node, pe.colorContrast.positionValue);
-
-          const he = document.createElement(HIGHLIGHT_ELEMENT_NAME);
-
-          const highlightConfig = he.hasAttribute('selected') ?
-                                `${highlightSize};${highlightStyleSelected}` :
-                                `${highlightSize};${highlightStyle}`;
-          debug && console.log(`[updateHighlightConfig]: ${highlightConfig}`);
-          he.setAttribute('highlight-config', highlightConfig);
-
-          highlightElements.push(he);
-          pe.node.appendChild(he);
-
-          he.setAttribute('position', item.position);
-
-          he.setAttribute('elem-role',    item.elemRole);
-          he.setAttribute('name',         de.accName.name);
-          he.setAttribute('name-src',     de.accName.source);
-          he.setAttribute('name-has-alt', de.accName.includesAlt || de.accName.includesAriaLabel);
-          he.setAttribute('desc',         de.accDescription.name);
-          he.setAttribute('desc-src',     de.accDescription.source);
-          he.setAttribute('msg-hidden',   item.msgHidden);
-
-          let attrValue = `${Math.round(rect.left)}`;
-          attrValue += `;${Math.round(rect.top)}`;
-          attrValue += `;${Math.round(rect.width)}`;
-          attrValue += `;${Math.round(rect.height)}`;
-          attrValue += `;${item.scrollBehavior}`;
-
-          he.setAttribute('highlight', attrValue);
-
-        }
-      });
-
+      highlightItems(request.highlightItems);
     }
 
     // Remove highlights
