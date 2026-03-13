@@ -38,6 +38,12 @@ const highlightElements = [];
 
 // Helper functions
 
+function removeHighlightElements () {
+  while(highlightElements[0]) {
+    highlightElements.pop().remove();
+  }
+}
+
 function hideHighlightElements (option='none') {
   highlightElements.forEach( (he) => {
     if ((option === 'all') ||
@@ -228,7 +234,7 @@ browserRuntime.onMessage.addListener(
 
       switch (response.result_view) {
         case 'rules-all':
-          hideHighlightElements();
+          removeHighlightElements();
 
           response.rule_summary          = er.ruleResultSummary.data;
           response.rc_rule_results_group = er.rcRuleGroupResults.data;
@@ -240,7 +246,7 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule-group':
-          hideHighlightElements();
+          removeHighlightElements();
 
           if (parts[0] === 'rc') {
             [group_title, rule_summary, rule_results, info_rules] = aiRuleResultsByCategory(er.allRuleResults, group_id);
@@ -262,7 +268,7 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'rule':
-          hideHighlightElements();
+          removeHighlightElements();
           [rule_title, rule_id_nls, result_summary, website_result, page_result, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
 
           response.rule_title      = rule_title;
@@ -323,14 +329,14 @@ setInterval(() => {
     .then((result) => {
       if (openFlag && result !== true) {
 //        console.log(`Sidebar closed: ${openFlag}`);
-        hideHighlightElements();
+        removeHighlightElements();
       }
       openFlag = result === true;
     })
     .catch( () => {
       if (openFlag) {
 //        console.log(`Sidebar closed: ${openFlag}`);
-        hideHighlightElements();
+        removeHighlightElements();
         openFlag = false;
       }
   });
