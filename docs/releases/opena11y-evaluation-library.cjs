@@ -33802,6 +33802,7 @@ class Visibility {
     this.isSmallHeight      = this.normalizeHeight(style, parentVisibility);
     this.isSmallFont        = this.getFontSize(style);
     this.isInClosedDetails  = this.normalizeInClosedDetails(elementNode, parentVisibility);
+    this.zIndex             = this.normalizeZIndex(style, parentVisibility.zIndex);
 
     // Set default values for visibility
     this.isVisibleOnScreen = true;
@@ -33987,8 +33988,10 @@ class Visibility {
 
   normalizeHeight (style, parentVisibility) {
     const height   = parseFloat(style.getPropertyValue("height"));
-    const overflow = style.getPropertyValue("overflow");
-    return parentVisibility.isSmallHeight || ((height <= 1) && (overflow === 'hidden'));
+    const overflow  = (style.getPropertyValue("overflow") === 'hidden') ||
+                      (style.getPropertyValue("overflowX") === 'hidden') ||
+                      (style.getPropertyValue("overflowY") === 'hidden');
+    return parentVisibility.isSmallHeight || ((height <= 1) && overflow);
   }
 
   /**
@@ -34007,6 +34010,23 @@ class Visibility {
     const fontSize = parseFloat(style.getPropertyValue("font-size"));
     return fontSize <= 1;
   }
+
+  /**
+   * @method normalizedZIndex
+   *
+   * @desc Computes the zIndex of for the DOM element
+   *
+   * @param {Object}  style         - Computed style object for an element node
+   * @param {Object}  parentZIndex  - Computed zIndex of the parent
+   *
+   * @return {Number}  Returns numerical value for ZIndex
+   */
+
+  normalizeZIndex (style, parentZIndex) {
+    const zIndex = parseFloat(style.getPropertyValue("zIndex"));
+    return !isNaN(zIndex) ? zIndex : parentZIndex ? parentZIndex : 0;
+  }
+
 }
 
 /*

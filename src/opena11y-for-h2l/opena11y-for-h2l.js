@@ -139,6 +139,8 @@ function highlightItems(dataObj) {
       he.setAttribute('name-has-alt', de.accName.includesAlt || de.accName.includesAriaLabel);
       he.setAttribute('desc',         de.accDescription.name);
       he.setAttribute('desc-src',     de.accDescription.source);
+      he.setAttribute('z-index',      de.visibility.zIndex);
+      console.log(`[z-index]: ${de.visibility.zIndex} (${typeof de.visibility.zIndex})`);
       he.setAttribute('msg-hidden',   msgHidden);
       he.setAttribute('show-name',    showName);
       he.setAttribute('selected',     selected);
@@ -161,8 +163,6 @@ function highlightItems(dataObj) {
   const msgHidden              = dataObj.msgHidden;
   const scrollBehavior         = dataObj.scrollBehavior;
   const showName               = dataObj.showName;
-
-  console.log(`[showName]: ${showName}`);
 
   removeHighlightElements();
 
