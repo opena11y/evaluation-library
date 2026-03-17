@@ -140,7 +140,6 @@ function highlightItems(dataObj) {
       he.setAttribute('desc',         de.accDescription.name);
       he.setAttribute('desc-src',     de.accDescription.source);
       he.setAttribute('z-index',      de.visibility.zIndex);
-      console.log(`[z-index]: ${de.visibility.zIndex} (${typeof de.visibility.zIndex})`);
       he.setAttribute('msg-hidden',   msgHidden);
       he.setAttribute('show-name',    showName);
       he.setAttribute('selected',     selected);
