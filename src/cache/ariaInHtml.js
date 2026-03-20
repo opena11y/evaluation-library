@@ -10,12 +10,22 @@ const higherLevelElements = [
   'article',
   'aside',
   'footer',
+  'form',
   'header',
   'main',
+  'nav',
+  'section'
+  ];
+
+const asideHigherLevelElements = [
+  'article',
+  'aside',
+  'form',
   'nav',
   'region',
   'section'
   ];
+
 
 const landmarkRoles = [
   'banner',
@@ -57,6 +67,14 @@ export default function getAriaInHTMLInfo (node) {
         elemInfo = elementInfo['area[href]'];
       } else {
         elemInfo = elementInfo['area'];
+      }
+      break;
+
+    case 'aside':
+      if (isInContextForAside(node)) {
+        elemInfo = elementInfo['aside[complementary]'];
+      } else {
+        elemInfo = elementInfo['aside'];
       }
       break;
 
@@ -239,7 +257,7 @@ function getString (value) {
 /**
 * @function isTopLevel
 *
-* @desc Tests the node to see if it is in the content of any other
+* @desc Tests the node to see if it is in the context of any other
 *       elements with default landmark roles or is the descendant
 *       of an element with a defined landmark role
 *
@@ -254,6 +272,30 @@ function isTopLevel (node) {
 
     if (higherLevelElements.includes(tagName) ||
         landmarkRoles.includes(role)) {
+      return false;
+    }
+    node = node.parentNode;
+  }
+  return true;
+}
+
+
+/**
+* @function isInContextForAside
+*
+* @desc Tests the node to see if it is in the context of any other
+*       elements with default landmark roles or is the descendant
+*       of an element with a main landmark role
+*
+* @param  {Object}  node        - Element node from a browser DOM
+*/
+
+function isInContextForAside (node) {
+  node = node && node.parentNode;
+  while (node && (node.nodeType === Node.ELEMENT_NODE)) {
+    const tagName = getString(node.tagName);
+
+    if (asideHigherLevelElements.includes(tagName)) {
       return false;
     }
     node = node.parentNode;

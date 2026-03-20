@@ -1,3 +1,7 @@
+Version 2.2.1 Overview
+=============================
+* Fixed issue with aside element and complementary landmark calculation
+
 Version 2.2 Overview
 =============================
 * Issue #17: Fixed error in Control 14 on using native attributes when possible, there is no "invalid" attribute for form controls in html

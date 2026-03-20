@@ -74,14 +74,14 @@
 body {
   margin: 0;
   padding: 0;
-  color: light-dark(var(--textColor), var(--textColorDark)) !important;
-  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark)) !important;
+  color: light-dark(var(--textColor), var(--textColorDark));
+  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark));
   font-family: var(--font-family);
 }
 
 header,
 header nav {
-  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark)) !important;
+  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark));
 }
 
 .icon {
@@ -216,11 +216,11 @@ a[href] {
 
 a[href]:hover,
 a[href]:focus {
-  text-decoration: underline !important;
+  text-decoration: underline;
 }
 
 a[href]:focus {
-  outline: 3px solid light-dark(var(--linkColorFocus), var(--linkColorFocusDark)) !important;
+  outline: 3px solid light-dark(var(--linkColorFocus), var(--linkColorFocusDark));
 }
 
 .breadcrumb a[href],
@@ -247,8 +247,8 @@ nav.second-level a,
 }
 
 .dropdown-menu {
-  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark)) !important;
-  border-color: light-dark(var(--linkColor), var(--linkColorDark)) !important;
+  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark));
+  border-color: light-dark(var(--linkColor), var(--linkColorDark));
 }
 
 .breadcrumb a[aria-current],
@@ -263,8 +263,8 @@ nav.second-level a[aria-current],
 
 .dropdown-item:hover,
 .dropdown-item:focus-visible {
-  outline: 3px solid light-dark(var(--linkColorFocus), var(--linkColorFocusDark)) !important;
-  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark)) !important;
+  outline: 3px solid light-dark(var(--linkColorFocus), var(--linkColorFocusDark));
+  background-color: light-dark(var(--backgroundColor), var(--backgroundColorDark));
 }
 
 .nav-link:hover,

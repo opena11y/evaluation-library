@@ -83,7 +83,7 @@ export const ariaInHTMLInfo = {
       ],
       id: 'article'
     },
-    aside: {
+    'aside[complementary]': {
       tagName: 'aside',
       defaultRole: 'complementary',
       noRoleAllowed: false,
@@ -97,7 +97,31 @@ export const ariaInHTMLInfo = {
         'search',
         'complementary'
       ],
-      id: 'aside'
+      id: 'aside[complementary]'
+    },
+    aside: {
+      tagName: 'aside',
+      defaultRole: 'generic',
+      noRoleAllowed: false,
+      anyRoleAllowed: false,
+      allowedRoles: [
+        'group',
+        'none',
+        'presentation',
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic'
+      ],
+      id: 'header'
     },
     audio: {
       tagName: 'audio',

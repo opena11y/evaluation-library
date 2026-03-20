@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$18 = new DebugLogging('constants', false);
 
-const VERSION = '2.2.0';
+const VERSION = '2.2.1';
 
 /**
  * @constant RULESET
@@ -31944,7 +31944,7 @@ const ariaInHTMLInfo = {
       ],
       id: 'article'
     },
-    aside: {
+    'aside[complementary]': {
       tagName: 'aside',
       defaultRole: 'complementary',
       noRoleAllowed: false,
@@ -31958,7 +31958,31 @@ const ariaInHTMLInfo = {
         'search',
         'complementary'
       ],
-      id: 'aside'
+      id: 'aside[complementary]'
+    },
+    aside: {
+      tagName: 'aside',
+      defaultRole: 'generic',
+      noRoleAllowed: false,
+      anyRoleAllowed: false,
+      allowedRoles: [
+        'group',
+        'none',
+        'presentation',
+        'article',
+        'aside',
+        'main',
+        'nav',
+        'section',
+        'role=article',
+        'complementary',
+        'main',
+        'navigation',
+        'region',
+        'role=contentinfo',
+        'role=generic'
+      ],
+      id: 'header'
     },
     audio: {
       tagName: 'audio',
@@ -33457,12 +33481,22 @@ const higherLevelElements = [
   'article',
   'aside',
   'footer',
+  'form',
   'header',
   'main',
+  'nav',
+  'section'
+  ];
+
+const asideHigherLevelElements = [
+  'article',
+  'aside',
+  'form',
   'nav',
   'region',
   'section'
   ];
+
 
 const landmarkRoles$1 = [
   'banner',
@@ -33504,6 +33538,14 @@ function getAriaInHTMLInfo (node) {
         elemInfo = elementInfo['area[href]'];
       } else {
         elemInfo = elementInfo['area'];
+      }
+      break;
+
+    case 'aside':
+      if (isInContextForAside(node)) {
+        elemInfo = elementInfo['aside[complementary]'];
+      } else {
+        elemInfo = elementInfo['aside'];
       }
       break;
 
@@ -33683,7 +33725,7 @@ function getString (value) {
 /**
 * @function isTopLevel
 *
-* @desc Tests the node to see if it is in the content of any other
+* @desc Tests the node to see if it is in the context of any other
 *       elements with default landmark roles or is the descendant
 *       of an element with a defined landmark role
 *
@@ -33698,6 +33740,30 @@ function isTopLevel (node) {
 
     if (higherLevelElements.includes(tagName) ||
         landmarkRoles$1.includes(role)) {
+      return false;
+    }
+    node = node.parentNode;
+  }
+  return true;
+}
+
+
+/**
+* @function isInContextForAside
+*
+* @desc Tests the node to see if it is in the context of any other
+*       elements with default landmark roles or is the descendant
+*       of an element with a main landmark role
+*
+* @param  {Object}  node        - Element node from a browser DOM
+*/
+
+function isInContextForAside (node) {
+  node = node && node.parentNode;
+  while (node && (node.nodeType === Node.ELEMENT_NODE)) {
+    const tagName = getString(node.tagName);
+
+    if (asideHigherLevelElements.includes(tagName)) {
       return false;
     }
     node = node.parentNode;
@@ -37448,7 +37514,8 @@ const skipableElements = [
   'shadow',
   'title',
   'h2l-highlight',
-  'opena11y-ai-highlight'
+  'opena11y-ai-highlight',
+  'opena11y-h2l-highlight'
 ];
 
 /**

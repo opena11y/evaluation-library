@@ -35,7 +35,8 @@ const skipableElements = [
   'shadow',
   'title',
   'h2l-highlight',
-  'opena11y-ai-highlight'
+  'opena11y-ai-highlight',
+  'opena11y-h2l-highlight'
 ];
 
 /**
