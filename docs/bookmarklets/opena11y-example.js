@@ -33489,13 +33489,20 @@
     'section'
     ];
 
-  const asideHigherLevelElements = [
+  const asideNotAllowedContextElements = [
     'article',
     'aside',
     'form',
     'nav',
-    'region',
     'section'
+    ];
+
+  const asideNotAllowedContextRoles = [
+    'article',
+    'complementary',
+    'form',
+    'navigation',
+    'region',
     ];
 
 
@@ -33543,7 +33550,7 @@
         break;
 
       case 'aside':
-        if (isInContextForAside(node)) {
+        if (isInContextForComplementary(node)) {
           elemInfo = elementInfo['aside[complementary]'];
         } else {
           elemInfo = elementInfo['aside'];
@@ -33750,7 +33757,7 @@
 
 
   /**
-  * @function isInContextForAside
+  * @function isInContextForComplementary
   *
   * @desc Tests the node to see if it is in the context of any other
   *       elements with default landmark roles or is the descendant
@@ -33759,12 +33766,16 @@
   * @param  {Object}  node        - Element node from a browser DOM
   */
 
-  function isInContextForAside (node) {
+  function isInContextForComplementary (node) {
     node = node && node.parentNode;
     while (node && (node.nodeType === Node.ELEMENT_NODE)) {
       const tagName = getString(node.tagName);
+      const role = node.role ? node.role.toLowerCase().trim() : '';
+      if (role && asideNotAllowedContextRoles.includes(role)) {
+        return false;
+      }
 
-      if (asideHigherLevelElements.includes(tagName)) {
+      if (asideNotAllowedContextElements.includes(tagName)) {
         return false;
       }
       node = node.parentNode;
@@ -35373,7 +35384,7 @@
 
       this.isButton    = this.role === 'button' && this.tagName === 'button';
       this.isLink      = this.role === 'link' && this.tagName === 'a';
-      this.isLandmark  = this.checkIsLandamrk();
+      this.isLandmark  = this.checkIsLandamrk(this.role || this.defaultRole, this.accName.name);
       this.isHeading   = this.role === 'heading';
       this.isInDialog  = this.tagName === 'dialog' ||
                          this.role === 'dialog' ||
@@ -35470,11 +35481,8 @@
      * @returns  {Boolean}  see @desc
      */
 
-    checkIsLandamrk () {
+    checkIsLandamrk (role, name) {
       let flag = false;
-      const role = this.role || this.defaultRole;
-      const name = this.accName.name;
-
       if (landmarkRoles.includes(role)) {
         if (requireAccessibleNames.includes(role)) {
           flag = name && name.length;

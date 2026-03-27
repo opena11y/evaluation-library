@@ -146,7 +146,7 @@ export default class DOMElement {
 
     this.isButton    = this.role === 'button' && this.tagName === 'button';
     this.isLink      = this.role === 'link' && this.tagName === 'a';
-    this.isLandmark  = this.checkIsLandamrk();
+    this.isLandmark  = this.checkIsLandamrk(this.role || this.defaultRole, this.accName.name);
     this.isHeading   = this.role === 'heading';
     this.isInDialog  = this.tagName === 'dialog' ||
                        this.role === 'dialog' ||
@@ -243,11 +243,8 @@ export default class DOMElement {
    * @returns  {Boolean}  see @desc
    */
 
-  checkIsLandamrk () {
+  checkIsLandamrk (role, name) {
     let flag = false;
-    const role = this.role || this.defaultRole;
-    const name = this.accName.name;
-
     if (landmarkRoles.includes(role)) {
       if (requireAccessibleNames.includes(role)) {
         flag = name && name.length;

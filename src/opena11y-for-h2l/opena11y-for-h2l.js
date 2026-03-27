@@ -3,7 +3,7 @@
 import EvaluationLibrary from '../evaluationLibrary.js';
 
 // Constants and variables
-const debug = true;
+const debug = false;
 
 const HIGHLIGHT_ELEMENT_NAME = 'opena11y-h2l-highlight';
 
