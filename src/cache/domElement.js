@@ -7,12 +7,14 @@ import DebugLogging      from '../debug.js';
 import EventInfo         from './eventInfo.js';
 import getAriaInHTMLInfo from './ariaInHtml.js';
 import Visibility        from './visibility.js';
+
 import {
   hasInvalidState,
   hasCheckedState,
   hasSelectedState,
   isLabelable
 } from '../utils.js'
+
 import {
   getAccessibleName,
   getAccessibleDesc,
@@ -78,7 +80,9 @@ export default class DOMElement {
       elementNode.dataset.opena11yPosition = ordinalPosition.toString();
     }
 
-    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode);
+    this.accName        = getAccessibleName(accNameDoc, elementNode);
+
+    this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode, this.accName.name);
     const defaultRole = this.ariaInHTMLInfo.defaultRole;
 
     this.hasRole = elementNode.hasAttribute('role');

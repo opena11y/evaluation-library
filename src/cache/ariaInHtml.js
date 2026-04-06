@@ -18,19 +18,22 @@ const higherLevelElements = [
   ];
 
 const asideNotAllowedContextElements = [
-  'article',
-  'aside',
+  'footer',
   'form',
-  'nav',
-  'section'
+  'header'
   ];
 
 const asideNotAllowedContextRoles = [
+  'banner',
+  'contentinfo',
+  'form'
+  ];
+
+const sectioningElements = [
   'article',
-  'complementary',
-  'form',
-  'navigation',
-  'region',
+  'aside',
+  'nav',
+  'section'
   ];
 
 
@@ -52,9 +55,10 @@ const landmarkRoles = [
 *       role restriction information
 *
 * @param  {Object}  node        - Element node from a browser DOM
+* @param  {String}  name - Accessible name
 */
 
-export default function getAriaInHTMLInfo (node) {
+export default function getAriaInHTMLInfo (node, name) {
   let elemInfo, type, selector;
 
   let tagName = node.tagName.toLowerCase();
@@ -78,7 +82,7 @@ export default function getAriaInHTMLInfo (node) {
       break;
 
     case 'aside':
-      if (isInContextForComplementary(node)) {
+      if (isInContextForComplementary(node, name)) {
         elemInfo = elementInfo['aside[complementary]'];
       } else {
         elemInfo = elementInfo['aside'];
@@ -294,10 +298,11 @@ function isTopLevel (node) {
 *       elements with default landmark roles or is the descendant
 *       of an element with a main landmark role
 *
-* @param  {Object}  node        - Element node from a browser DOM
+* @param  {Object}  node - Element node from a browser DOM
+* @param  {String}  name - Accessible name
 */
 
-function isInContextForComplementary (node) {
+function isInContextForComplementary (node, name='') {
   node = node && node.parentNode;
   while (node && (node.nodeType === Node.ELEMENT_NODE)) {
     const tagName = getString(node.tagName);
@@ -309,6 +314,11 @@ function isInContextForComplementary (node) {
     if (asideNotAllowedContextElements.includes(tagName)) {
       return false;
     }
+
+    if (sectioningElements.includes(tagName)) {
+      return name.length ? true : false;
+    }
+
     node = node.parentNode;
   }
   return true;
