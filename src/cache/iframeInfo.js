@@ -5,6 +5,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('iframeInfo', false);
+debug.flag = false;
 
 /**
  * @class IFrameElement

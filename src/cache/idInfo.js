@@ -5,6 +5,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('idInfo', false);
+debug.flag = false;
 
 /**
  * @class idInfo

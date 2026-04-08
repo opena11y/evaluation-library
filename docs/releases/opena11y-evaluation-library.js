@@ -31838,6 +31838,7 @@ class ColorContrast {
 
 /* Constants */
 const debug$_ = new DebugLogging('EventInfo', false);
+debug$_.flag = false;
 
 /**
  * @class EventInfo
@@ -33475,6 +33476,8 @@ const ariaInHTMLInfo = {
 
 /* Constants */
 const debug$Z = new DebugLogging('ariaInHtml', false);
+debug$Z.flag = false;
+
 const higherLevelElements = [
   'article',
   'aside',
@@ -35768,6 +35771,7 @@ function checkTabIndex (node) {
 
 /* Constants */
 const debug$U = new DebugLogging('domText', false);
+debug$U.flag = false;
 
 /**
  * @class DOMText
@@ -35851,6 +35855,7 @@ class DOMText {
 
 /* Constants */
 const debug$T = new DebugLogging('iframeInfo', false);
+debug$T.flag = false;
 
 /**
  * @class IFrameElement
@@ -35919,6 +35924,7 @@ class IframeInfo {
 
 /* Constants */
 const debug$S = new DebugLogging('idInfo', false);
+debug$S.flag = false;
 
 /**
  * @class idInfo

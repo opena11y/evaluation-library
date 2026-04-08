@@ -6,6 +6,8 @@ import {ariaInHTMLInfo} from '../ariaInfo/gen-aria-in-html-info.js';
 
 /* Constants */
 const debug = new DebugLogging('ariaInHtml', false);
+debug.flag = false;
+
 const higherLevelElements = [
   'article',
   'aside',

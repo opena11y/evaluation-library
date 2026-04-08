@@ -5,6 +5,7 @@ import DebugLogging  from '../debug.js';
 
 /* Constants */
 const debug = new DebugLogging('domText', false)
+debug.flag = false;
 
 /**
  * @class DOMText

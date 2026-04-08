@@ -31841,6 +31841,7 @@
 
   /* Constants */
   const debug$$ = new DebugLogging('EventInfo', false);
+  debug$$.flag = false;
 
   /**
    * @class EventInfo
@@ -33478,6 +33479,8 @@
 
   /* Constants */
   const debug$_ = new DebugLogging('ariaInHtml', false);
+  debug$_.flag = false;
+
   const higherLevelElements = [
     'article',
     'aside',
@@ -35771,6 +35774,7 @@
 
   /* Constants */
   const debug$V = new DebugLogging('domText', false);
+  debug$V.flag = false;
 
   /**
    * @class DOMText
@@ -35854,6 +35858,7 @@
 
   /* Constants */
   const debug$U = new DebugLogging('iframeInfo', false);
+  debug$U.flag = false;
 
   /**
    * @class IFrameElement
@@ -35922,6 +35927,7 @@
 
   /* Constants */
   const debug$T = new DebugLogging('idInfo', false);
+  debug$T.flag = false;
 
   /**
    * @class idInfo
