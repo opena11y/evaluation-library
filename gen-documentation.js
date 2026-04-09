@@ -507,6 +507,7 @@ function createPage(page, mainNav, dropdownName='', dropdownPages=false) {
         wcag20: wcag20,
         wcag21: wcag21,
         wcag22: wcag22,
+        firstStep: firstStep,
         firstStepRules: firstStepRules,
         axeRules: axeRules,
         waveRules: waveRules,
