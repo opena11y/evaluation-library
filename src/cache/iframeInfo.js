@@ -52,6 +52,7 @@ export default class IframeInfo {
   update (domElement, isCrossDomain) {
     const ife = new IFrameElement(domElement, isCrossDomain);
     this.allIFrameElements.push(ife);
+    debug.flag && ife.showInfo();
   }
 
   /**

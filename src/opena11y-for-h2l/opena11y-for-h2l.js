@@ -19,140 +19,190 @@ const highlightElements = [];
 
 // Load element highlight custom element
 
-const scriptNode = document.createElement('script');
-scriptNode.type = 'text/javascript';
-scriptNode.id = 'id-h2l-highlight';
-scriptNode.src = browserRuntime.getURL('h2l-highlight.js');
-document.body.appendChild(scriptNode);
+const scriptElem = document.createElement('script');
+scriptElem.type  = 'text/javascript';
+scriptElem.id    = 'id-h2l-highlight';
+scriptElem.src   = browserRuntime.getURL('h2l-highlight.js');
+document.body.appendChild(scriptElem);
 
 
 // Helper functions
 
-function removeHighlightElements () {
-  while (highlightElements[0]) {
-    highlightElements.pop().remove();
+/*
+ *   @function removeHighlightElements
+ *
+ *   @desc  Removes highlight elements from web page
+ *
+ *   @param {Boolean} flag : If true leave last highlight element
+ */
+
+function removeHighlightElements (flag=false) {
+  while (highlightElements[flag ? 1 : 0]) {
+    const firstElem = highlightElements.shift();
+    firstElem.remove();
   }
 }
+
+/*
+ *   @function isZeroDimension
+ *
+ *   @desc  Returns true if element is not visible
+ *
+ *   @param {Object} rect : Rect of element to test height
+ *
+ *   @returns see @desc
+ */
 
 function isZeroDimension (rect) {
   return rect.height === 0 && rect.width === 0;
 }
 
-// Some elements have zero height and width, so use their child element
-// sizes to determine dimensions
+/*
+ *   @function isElementInViewport
+ *
+ *   @desc  Returns true if element is already visible in view port,
+ *          otherwise false
+ *
+ *   @param {Object} rect : Rect of element to highlight
+ *
+ *   @returns see @desc
+ */
 
-function getPositionAndDimensions (elem, posElem, posValue='static') {
-  let rect = elem.getBoundingClientRect();
-  let posRect = posElem ?
-                posElem.getBoundingClientRect() :
-                new DOMRect(0,0,0,0);
-
-  const elemRect = {
-    top:    rect.top,
-    left:   rect.left,
-    bottom: rect.bottom,
-    right:  rect.right,
-    height: rect.height,
-    width:  rect.width
-  };
-
-  if (isZeroDimension(rect)) {
-    let childElem = elem.firstElementChild;
-    while (childElem) {
-      const r = childElem.getBoundingClientRect();
-
-      if (!isZeroDimension(r)) {
-        elemRect.top    = Math.min(r.top,    elemRect.top);
-        elemRect.right  = Math.max(r.right,  elemRect.right);
-        elemRect.bottom = Math.max(r.bottom, elemRect.bottom);
-        elemRect.left   = Math.min(r.left,   elemRect.left);
-      }
-
-      childElem = childElem.nextElementSibling;
-    }
-
-    elemRect.height = elemRect.bottom - elemRect.top;
-    elemRect.width  = elemRect.right  - elemRect.left;
-  }
-
-  if (!isZeroDimension(elemRect)) {
-    switch (posValue) {
-      case 'absolute':
-        elemRect.top   = elemRect.top  - posRect.top;
-        elemRect.left  = elemRect.left - posRect.left;
-        break;
-
-      case 'fixed':
-        elemRect.top   = elemRect.top  - posRect.top;
-        elemRect.left  = elemRect.left - posRect.left;
-        break;
-
-      case 'overflow':
-        elemRect.top   = elemRect.top  - posRect.top;
-        elemRect.left  = elemRect.left - posRect.left;
-        break;
-
-      case 'static':
-        elemRect.top   = elemRect.top  + window.scrollY;
-        elemRect.left  = elemRect.left + window.scrollX;
-        break;
-
-      case 'sticky':
-        elemRect.top   = elemRect.top  - posRect.top;
-        elemRect.left  = elemRect.left - posRect.left;
-        break;
-
-    }
-
-    elemRect.bottom  = elemRect.top  + elemRect.height;
-    elemRect.right   = elemRect.left + elemRect.width;
-  }
-  return elemRect;
+function isElementInViewport(rect) {
+  return (
+    rect.top >= window.screenY &&
+    rect.left >= window.screenX &&
+    rect.bottom <= ((window.screenY + window.innerHeight) ||
+                    (window.screenY + document.documentElement.clientHeight)) &&
+    rect.right <= ((window.screenX + window.innerWidth) ||
+                   (window.screenX + document.documentElement.clientWidth)));
 }
+
+/*
+ *   @function isElementStartInViewport
+ *
+ *   @desc  Returns true if start of the element is already visible in view port,
+ *          otherwise false
+ *
+ *   @param {Object} rect : Rect of element to highlight
+ *
+ *   @returns see @desc
+ */
+
+function isElementStartInViewport(rect) {
+  return (
+      rect.top >= window.screenY &&
+      rect.top <= ((window.screenY + window.innerHeight) ||
+                   (window.screenY + document.documentElement.clientHeight)) &&
+      rect.left >= window.screenX &&
+      rect.left <= ((window.screenX + window.innerWidth) ||
+                   (window.screenX + document.documentElement.clientWidth)));
+}
+
+/*
+ *   @function isElementHeightLarge
+ *
+ *   @desc  Returns true if element client height is larger than clientHeight,
+ *          otheriwse false
+ *
+ *   @param {Object} rect : Bounding rect of element to highlight
+ *
+ *   @returns see @desc
+ */
+
+function isElementInHeightLarge(rect) {
+  return (1.2 * rect.height) > (window.innerHeight || document.documentElement.clientHeight);
+}
+
+// Main functions
 
 function highlightItems(dataObj) {
 
-  function highlightPosition(position, elemRole, selected, showName) {
+  function getRect (elem) {
+    let rect = elem.getBoundingClientRect();
+    if (isZeroDimension(rect)) {
+      rect = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        height: 0,
+        width: 0
+      };
+      let childElem = elem.firstElementChild;
+      while (childElem) {
+        const r = childElem.getBoundingClientRect();
 
-    const de = evaluationResult.getDomElementByPosition(position);
+        if (!isZeroDimension(r)) {
+          rect.top    = Math.min(r.top,    rect.top);
+          rect.right  = Math.max(r.right,  rect.right);
+          rect.bottom = Math.max(r.bottom, rect.bottom);
+          rect.left   = Math.min(r.left,   rect.left);
+        }
 
-    if (de) {
+        childElem = childElem.nextElementSibling;
+      }
 
-      const pe = de.parentInfo.positionDomElement;
-      const rect = getPositionAndDimensions(de.node, pe.node, pe.colorContrast.positionValue);
+      rect.height = rect.bottom - rect.top;
+      rect.width  = rect.right  - rect.left;
+    }
+    return rect;
+  } /* end getRect */
+
+
+  function highlightPosition(domPos, elemRole, selected, showName) {
+
+    const de = evaluationResult.getDomElementByPosition(domPos);
+
+    if (de && de.parentInfo && de.parentInfo.document) {
+
+      const rect = getRect(de.node);
 
       const he = document.createElement(HIGHLIGHT_ELEMENT_NAME);
 
-      const highlightConfig = selected ?
-                            `${highlightSize};${highlightStyleSelected}` :
-                            `${highlightSize};${highlightStyle}`;
-      he.setAttribute('highlight-config', highlightConfig);
+      const docElem = de.parentInfo.document ?
+                      de.parentInfo.document :
+                      window.document;
 
-      highlightElements.push(he);
-      pe.node.appendChild(he);
+      const attachElem = docElem.body ?
+                         docElem.body :
+                         docElem.documentElement;
 
-      he.setAttribute('position', position);
+      if (attachElem && attachElem.appendChild) {
+        // Append the highlight element to the document object that contains the DOM element
+        attachElem.appendChild(he);
+        highlightElements.push(he);
 
-      he.setAttribute('elem-role',    elemRole);
-      he.setAttribute('name',         de.accName.name);
-      he.setAttribute('name-src',     de.accName.source);
-      he.setAttribute('name-has-alt', de.accName.includesAlt || de.accName.includesAriaLabel);
-      he.setAttribute('desc',         de.accDescription.name);
-      he.setAttribute('desc-src',     de.accDescription.source);
-      he.setAttribute('z-index',      de.visibility.zIndex);
-      he.setAttribute('msg-hidden',   msgHidden);
-      he.setAttribute('show-name',    showName);
-      he.setAttribute('selected',     selected);
+        const highlightConfig = selected ?
+                              `${highlightSize};${highlightStyleSelected}` :
+                              `${highlightSize};${highlightStyle}`;
+        he.setAttribute('highlight-config', highlightConfig);
 
-      let attrValue = `${Math.round(rect.left)}`;
-      attrValue += `;${Math.round(rect.top)}`;
-      attrValue += `;${Math.round(rect.width)}`;
-      attrValue += `;${Math.round(rect.height)}`;
-      attrValue += `;${selected ? scrollBehavior : 'none'}`;
 
-      he.setAttribute('highlight', attrValue);
+        he.setAttribute('position', domPos);
+
+        he.setAttribute('elem-role',    elemRole);
+        he.setAttribute('name',         de.accName.name);
+        he.setAttribute('name-src',     de.accName.source);
+        he.setAttribute('name-has-alt', de.accName.includesAlt || de.accName.includesAriaLabel);
+        he.setAttribute('desc',         de.accDescription.name);
+        he.setAttribute('desc-src',     de.accDescription.source);
+        he.setAttribute('z-index',      de.visibility.zIndex);
+        he.setAttribute('msg-hidden',   msgHidden);
+        he.setAttribute('show-name',    showName);
+        he.setAttribute('selected',     selected);
+
+        let attrValue = `${Math.round(rect.left)}`;
+        attrValue += `;${Math.round(rect.top)}`;
+        attrValue += `;${Math.round(rect.width)}`;
+        attrValue += `;${Math.round(rect.height)}`;
+        attrValue += `;${de.colorContrast.positionValue}`;
+
+        he.setAttribute('highlight', attrValue);
+      }
+
     }
-  }
+  } /* end highlightPosition */
 
   const selectedItem           = dataObj.selectedItem;
   const allItems               = dataObj.allItems;
@@ -163,18 +213,44 @@ function highlightItems(dataObj) {
   const scrollBehavior         = dataObj.scrollBehavior;
   const showName               = dataObj.showName;
 
-  removeHighlightElements();
+  // If there is a selected item and scrollto enabled
+  const mediaQuery = window.matchMedia(`(prefers-reduced-motion: reduce)`);
+  const isReduced = !mediaQuery || mediaQuery.matches;
+
+  if (selectedItem.position && (scrollBehavior !== 'none') && !isReduced) {
+    const de = evaluationResult.getDomElementByPosition(selectedItem.position);
+    if (de && de.node) {
+      const deRect = getRect(de.node);
+
+      if (isElementInHeightLarge(deRect)) {
+        if (!isElementStartInViewport(deRect)) {
+          de.node.scrollIntoView({ behavior: scrollBehavior, block: 'start', inline: 'nearest' });
+        }
+      }
+      else {
+        if (!isElementInViewport(deRect)) {
+          de.node.scrollIntoView({ behavior: scrollBehavior, block: 'center', inline: 'nearest' });
+        }
+      }
+    }
+  }
 
   if (allItems.length) {
+    removeHighlightElements();
     allItems.forEach( (item) => {
       const selected = item.position == selectedItem.position;
       highlightPosition(item.position, item.elemRole, selected, showName || selected);
     });
   }
   else {
-    highlightPosition(selectedItem.position, selectedItem.elemRole, true, showName);
+    if (selectedItem.position) {
+      removeHighlightElements();
+      highlightPosition(selectedItem.position, selectedItem.elemRole, true, showName);
+    }
+    else {
+      removeHighlightElements(debug);
+    }
   }
-
 
 }
 

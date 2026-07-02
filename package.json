@@ -1,6 +1,6 @@
 {
   "name": "evaluation-library",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Javascript library for evaluating WCAG and ARIA conformance",
   "repository": {
     "type": "git",

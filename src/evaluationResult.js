@@ -314,8 +314,8 @@ export default class EvaluationResult {
     debug.flag && debug.log(`[evaluateWCAG][ariaVersion]: ${this.ariaVersion}`);
     debug.flag && debug.log(`[evaluateWCAG][  addDataId]: ${addDataId}`);
 
-    const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
-    this.allDomElements = domCache.allDomElements;
+    const domCache        = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
+    this.allDomElements   = domCache.allDomElements;
     this._allRuleResults = [];
     this._ruleResultsSummary.clear();
     this._rcRuleResultsGroup.clear();
@@ -686,7 +686,6 @@ export default class EvaluationResult {
     });
     return rgr;
   }
-
 
   /**
    * @method getDataForJSON

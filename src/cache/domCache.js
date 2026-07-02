@@ -134,8 +134,8 @@ export default class DOMCache {
     this.ordinalPosition = 2;
     this.documentIndex = 0;
 
-    this.allDomElements = [];
-    this.allDomTexts    = [];
+    this.allDomElements   = [];
+    this.allDomTexts      = [];
 
     const parentInfo = new ParentInfo();
     parentInfo.document        = startingDoc;
@@ -208,15 +208,15 @@ export default class DOMCache {
    *       that are used by the accessibility rules to test accessibility 
    *       requirements 
    *
-   * @param {Object}  parentinfo    - Parent DomElement associated with the
-   *                                  parent element node of the starting node
-   * @param {Object}  startingNode  - The DOM element to start transversing the
-   *                                  DOM
-   * @param {Boolean} addDataId     - If true, add data attribute to DOM element
-   *                                  indicating its ordinal position
+   * @param {Object}  parentinfo         - Parent DomElement associated with the
+   *                                       parent element node of the starting node
+   * @param {Object}  startingNode       - The DOM element to start transversing the
+   *                                       DOM
+   * @param {Boolean} addDataId          - If true, add data attribute to DOM element
+   *                                       indicating its ordinal position
    */
 
-  transverseDOM(parentInfo, startingNode, addDataId) {
+  transverseDOM(parentInfo, startingNode, addDataId=false) {
     let tagName, newParentInfo;
     let domItem = null;
     let parentDomElement = parentInfo.domElement;
@@ -290,7 +290,6 @@ export default class DOMCache {
 
                 if (assignedNode.nodeType === Node.ELEMENT_NODE) {
                   domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion, addDataId);
-
                   this.ordinalPosition += 1;
                   this.allDomElements.push(domItem);
 
@@ -335,7 +334,10 @@ export default class DOMCache {
                   let isCrossDomain = false;
                   try {
                     const doc = node.contentDocument || node.contentWindow.document;
+
                     newParentInfo.document = doc;
+                    newParentInfo.positionDomElement = doc;
+
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
                     this.transverseDOM(newParentInfo, doc, addDataId);
@@ -403,7 +405,7 @@ export default class DOMCache {
     this.idInfo.update(documentIndex, domElement);
     this.timingInfo.update(domElement);
 
-    newParentInfo.positionDomElement = domElement.colorContrast.isPositionRef ?
+    newParentInfo.positionDomElement = domElement.colorContrast.isPosition ?
                                     domElement :
                                     parentInfo.positionDomElement;
 

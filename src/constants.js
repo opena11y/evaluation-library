@@ -28,7 +28,7 @@ export {
   getResultValue
 }
 
-const VERSION = '2.2.1';
+const VERSION = '2.2.2';
 
 /**
  * @constant RULESET

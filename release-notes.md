@@ -1,3 +1,7 @@
+Version 2.2.2 Overview
+=============================
+* Fixed issue with highlighted items in iframe content for H2L Side Panel Extension
+
 Version 2.2.1 Overview
 =============================
 * Fixed issue with aside element and complementary landmark calculation

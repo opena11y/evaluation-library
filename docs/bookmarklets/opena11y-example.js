@@ -150,7 +150,7 @@
   /* Constants */
   const debug$19 = new DebugLogging('constants', false);
 
-  const VERSION = '2.2.1';
+  const VERSION = '2.2.2';
 
   /**
    * @constant RULESET
@@ -31375,22 +31375,16 @@
         debug$10.tag(elementNode);
       }
 
-      this.display  = style.getPropertyValue("display");
-      this.position =  style.getPropertyValue("position").toLowerCase();
-      this.overflow =  style.getPropertyValue("overflow").toLowerCase();
-      this.isPosition = ['absolute', 'fixed', 'sticky'].includes(this.position);
-      this.isOverflow = ['auto', 'hidden'].includes(this.overflow);
-      this.isPositionRef = this.isPosition || this.isOverflow;
+      this.display    = style.getPropertyValue("display");
+      this.position   =  style.getPropertyValue("position").toLowerCase();
 
-      this.positionValue = 'static';
-      if (this.isPosition) {
-        this.positionValue = this.position;
-      }
-      else {
-        if (this.isOverflow) {
-          this.positionValue = 'overflow';
-        }
-      }
+      this.isPosition = ['absolute', 'fixed', 'sticky'].includes(this.position);
+
+
+      this.positionValue = this.isPosition ? this.position :
+                           parentColorContrast.positionValue ?
+                           parentColorContrast.positionValue :
+                           'absolute';
 
       this.hasTextNodes = this.getHasTextNodes(elementNode);
 
@@ -35905,6 +35899,7 @@
     update (domElement, isCrossDomain) {
       const ife = new IFrameElement(domElement, isCrossDomain);
       this.allIFrameElements.push(ife);
+      debug$U.flag && ife.showInfo();
     }
 
     /**
@@ -37640,8 +37635,8 @@
       this.ordinalPosition = 2;
       this.documentIndex = 0;
 
-      this.allDomElements = [];
-      this.allDomTexts    = [];
+      this.allDomElements   = [];
+      this.allDomTexts      = [];
 
       const parentInfo = new ParentInfo();
       parentInfo.document        = startingDoc;
@@ -37714,15 +37709,15 @@
      *       that are used by the accessibility rules to test accessibility 
      *       requirements 
      *
-     * @param {Object}  parentinfo    - Parent DomElement associated with the
-     *                                  parent element node of the starting node
-     * @param {Object}  startingNode  - The DOM element to start transversing the
-     *                                  DOM
-     * @param {Boolean} addDataId     - If true, add data attribute to DOM element
-     *                                  indicating its ordinal position
+     * @param {Object}  parentinfo         - Parent DomElement associated with the
+     *                                       parent element node of the starting node
+     * @param {Object}  startingNode       - The DOM element to start transversing the
+     *                                       DOM
+     * @param {Boolean} addDataId          - If true, add data attribute to DOM element
+     *                                       indicating its ordinal position
      */
 
-    transverseDOM(parentInfo, startingNode, addDataId) {
+    transverseDOM(parentInfo, startingNode, addDataId=false) {
       let tagName, newParentInfo;
       let domItem = null;
       let parentDomElement = parentInfo.domElement;
@@ -37778,7 +37773,6 @@
 
                   if (assignedNode.nodeType === Node.ELEMENT_NODE) {
                     domItem = new DOMElement(parentInfo, assignedNode, this.ordinalPosition, this.ariaVersion, addDataId);
-
                     this.ordinalPosition += 1;
                     this.allDomElements.push(domItem);
 
@@ -37823,7 +37817,10 @@
                     let isCrossDomain = false;
                     try {
                       const doc = node.contentDocument || node.contentWindow.document;
+
                       newParentInfo.document = doc;
+                      newParentInfo.positionDomElement = doc;
+
                       this.documentIndex += 1;
                       newParentInfo.documentIndex = this.documentIndex;
                       this.transverseDOM(newParentInfo, doc, addDataId);
@@ -37888,7 +37885,7 @@
       this.idInfo.update(documentIndex, domElement);
       this.timingInfo.update(domElement);
 
-      newParentInfo.positionDomElement = domElement.colorContrast.isPositionRef ?
+      newParentInfo.positionDomElement = domElement.colorContrast.isPosition ?
                                       domElement :
                                       parentInfo.positionDomElement;
 
@@ -49764,8 +49761,8 @@
       debug$2.flag && debug$2.log(`[evaluateWCAG][ariaVersion]: ${this.ariaVersion}`);
       debug$2.flag && debug$2.log(`[evaluateWCAG][  addDataId]: ${addDataId}`);
 
-      const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
-      this.allDomElements = domCache.allDomElements;
+      const domCache        = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
+      this.allDomElements   = domCache.allDomElements;
       this._allRuleResults = [];
       this._ruleResultsSummary.clear();
       this._rcRuleResultsGroup.clear();
@@ -50136,7 +50133,6 @@
       });
       return rgr;
     }
-
 
     /**
      * @method getDataForJSON
