@@ -56,6 +56,7 @@ const allRuleLinksByGuidelines = [
 "rule-keyboard-7.html",
 "rule-keyboard-1.html",
 "rule-widget-15.html",
+"rule-widget-16.html",
 "rule-keyboard-3.html",
 "rule-keyboard-4.html",
 "rule-shortcut-1.html",
@@ -260,6 +261,7 @@ const allRuleLinksByRuleCategories = [
 "rule-widget-13.html",
 "rule-widget-14.html",
 "rule-widget-15.html",
+"rule-widget-16.html",
 "rule-audio-1.html",
 "rule-audio-2.html",
 "rule-video-1.html",
@@ -437,7 +439,8 @@ const allRuleLinksByScope = [
 "rule-widget-12.html",
 "rule-widget-13.html",
 "rule-widget-14.html",
-"rule-widget-15.html"
+"rule-widget-15.html",
+"rule-widget-16.html"
 ];
 
 const allRuleLinksByFirstStepRules = [

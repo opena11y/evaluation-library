@@ -6,6 +6,7 @@ export {
   filterTextContent,
   getAttributeValue,
   getFormattedDate,
+  getTagnameRoleFromId,
   hasEmptyAltText,
   hasInvalidState,
   hasCheckedState,
@@ -27,6 +28,25 @@ const inputsWithChecked   = ['checkbox', 'radio'];
 
 
 /* helper functions */
+
+function getTagnameRoleFromId (doc, id) {
+  let role = '';
+  let tagname = '';
+
+  if (id){
+    const elem = doc.getElementById(id);
+    if (elem) {
+      tagname = elem.tagName.toLowerCase();
+      if (elem.hasAttribute('role')) {
+        role = elem.getAttribute('role').toLowerCase().trim();
+      }
+    }
+  }
+
+  return [tagname, role];
+}
+
+
 
 function isLabelable (node) {
 

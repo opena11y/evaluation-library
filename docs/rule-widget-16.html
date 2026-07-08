@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Focus Order | OpenA11y Evaluation Library 2.3</title>
+    <title>&lt;code&gt;aria-haspopup&lt;/code&gt; references supported widgets | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -106,7 +106,7 @@
 
                 
 
-                <h1>Focus Order</h1>
+                <h1><code>aria-haspopup</code> references supported widgets</h1>
 
                 
 
@@ -152,36 +152,36 @@
 
               if (window.location.href.indexOf("#gl") > 0) {
                 allRuleLinks = allRuleLinksByGuidelines;
-                allLink.href = `rules-gl.html#keyboard-8`;
+                allLink.href = `rules-gl.html#widget-16`;
                 suffix = '#gl';
               }
               else {
                 if (window.location.href.indexOf("#rs") > 0) {
                   allRuleLinks = allRuleLinksByScope;
-                  allLink.href = `rules-rs.html#keyboard-8`;
+                  allLink.href = `rules-rs.html#widget-16`;
                   suffix = '#rs';
                 }
                 else {
                   if (window.location.href.indexOf("#rc") > 0) {
                     allRuleLinks = allRuleLinksByRuleCategories;
-                    allLink.href = `rules-rc.html#keyboard-8`;
+                    allLink.href = `rules-rc.html#widget-16`;
                     suffix = '#rc';
                   }
                   else {
                     if (window.location.href.indexOf("#fs") > 0) {
                       allRuleLinks = allRuleLinksByFirstStepRules;
-                      allLink.href = `rules-fs.html#keyboard-8`;
+                      allLink.href = `rules-fs.html#widget-16`;
                       suffix = '#fs';
                     }
                     else {
                       if (window.location.href.indexOf("#wave") > 0) {
                         allRuleLinks = allRuleLinksByWaveRules;
-                        allLink.href = `rules-wave.html#keyboard-8`;
+                        allLink.href = `rules-wave.html#widget-16`;
                         suffix = '#wave';
                       }
                       else {
                         allRuleLinks = allRuleLinksByAxeRules;
-                        allLink.href = `rules-axe.html#keyboard-8`;
+                        allLink.href = `rules-axe.html#widget-16`;
                         suffix = '#axe';
                       }
                     }
@@ -218,7 +218,7 @@
                   
 <tr>
   <th>Rule ID</th>
-  <td>Keyboard 8</td>
+  <td>Widget 16</td>
 </tr>
 
                   
@@ -230,7 +230,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Focusable components receive focus in an order that preserves their meaning and operability.</td>
+  <td><code>aria-haspopup</code> references a <code>dialog</code>, <code>grid</code>. <code>listbox</code>, <code>menu</code> or <code>tree</code> widget.</td>
 </tr>
 
                   
@@ -239,13 +239,7 @@
   <td>
     <ul>
       
-      <li>People with mobility impairments who must rely on keyboard access for operating a page benefit from a logical, usable focus order.</li>
-      
-      <li>People with disabilities that make reading difficult can become disoriented when tabbing takes focus someplace unexpected. They benefit from a logical focus order.</li>
-      
-      <li>People with visual impairments can become disoriented when tabbing takes focus someplace unexpected or when they cannot easily find the content surrounding an interactive element.</li>
-      
-      <li>Only a small portion of the page may be visible to an individual using a screen magnifier at a high level of magnification. Such a user may interpret a field in the wrong context if the focus order is not logical.</li>
+      <li>Add purposes</li>
       
     </ul>
   </td>
@@ -262,14 +256,80 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
-        Success Criterion 2.4.3 Focus Order
+      <a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">
+        Success Criterion 2.1.1 Keyboard
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">
+          Success Criterion 1.1.1 Non-text Content
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#use-of-color" target="_spec">
+          Success Criterion 1.4.1 Use of Color
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_spec">
+          Success Criterion 1.4.3 Contrast (Minimum)
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#resize-text" target="_spec">
+          Success Criterion 1.4.4 Resize text
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
+          Success Criterion 2.1.2 No Keyboard Trap
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#timing-adjustable" target="_spec">
+          Success Criterion 2.2.1 Timing Adjustable
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#pause-stop-hide" target="_spec">
+          Success Criterion 2.2.2 Pause, Stop, Hide
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
+          Success Criterion 2.4.3 Focus Order
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">
+          Success Criterion 3.3.2 Labels or Instructions
+        </a>
+      </li>
       
     </ul>
   </td>
@@ -278,13 +338,13 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Keyboard Support</td>
+  <td>ARIA Widgets</td>
 </tr>
 
                   
 <tr>
   <th>Rule Scope</th>
-  <td>Page</td>
+  <td>Element</td>
 </tr>
 
                   
@@ -327,13 +387,7 @@
   <td>
     <ul>
       
-      <li><b>Example:</b> On a web page that contains a tree of interactive controls, the user can use the up and down arrow keys to move from tree node to tree node. Pressing the right arrow key expands a node, then using the down arrow key moves into the newly expanded nodes.</li>
-      
-      <li><b>Example:</b> A Web page implements modeless dialogs via scripting. When the trigger button is activated, a dialog opens. The interactive elements in the dialog are inserted in the focus order immediately after the button. When the dialog is open, the focus order goes from the button to the elements of the dialog, then to the interactive element following the button. When the dialog is closed, the focus order goes from the button to the following element.</li>
-      
-      <li><b>Example:</b> A Web page implements modal dialogs via scripting. When the trigger button is activated, a dialog opens and focus is set within the dialog. As long as the dialog is open, focus is limited to the elements of the dialog. When the dialog is dismissed, focus returns to the button or the element following the button.</li>
-      
-      <li><b>Example:</b> An HTML Web page is created with the left hand navigation occurring in the HTML after the main body content, and styled with CSS to appear on the left hand side of the page. This is done to allow focus to move to the main body content first without requiring tabIndex attributes or JavaScript.</li>
+      <li>Add techniques</li>
       
     </ul>
   </td>
@@ -345,21 +399,17 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html">W3C WCAG: Understanding Focus Order</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-haspopup</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G59">G59: Placing the interactive elements in an order that follows sequences and relationships within the content</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">ARIA Authoring Practices: Dialog</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/css/C27">C27: Making the DOM order match the visual order</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/grid/">ARIA Authoring Practices: Grid</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26">SCR26: Inserting dynamic content into the Document Object Model immediately following its trigger element</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/">ARIA Authoring Practices: Listbox</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR37">SCR37: Creating Custom Dialogs in a Device Independent Way</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/">ARIA Authoring Practices: Menu Button</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR27">SCR27: Reordering page sections using the Document Object Model</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F44">F44: Failure of Success Criterion 2.4.3 due to using tabindex to create a tab order that does not preserve meaning and operability</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F85">F85: Failure of Success Criterion 2.4.3 due to using dialogs or menus that are not adjacent to their trigger control in the sequential navigation order</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/">ARIA Authoring Practices: Tree View</a></li>
       
     </ul>
   </td>

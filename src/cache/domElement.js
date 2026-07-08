@@ -12,6 +12,7 @@ import {
   hasInvalidState,
   hasCheckedState,
   hasSelectedState,
+  getTagnameRoleFromId,
   isLabelable
 } from '../utils.js'
 
@@ -144,9 +145,21 @@ export default class DOMElement {
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
+    // For Widget 16 rule on aria-haspopup
+    this.hasPopup     = elementNode.hasAttribute('aria-haspopup');
+    this.popupValue   = this.hasPopup ?
+                        elementNode.getAttribute('aria-haspopup').toLowerCase().trim() :
+                        '';
+    this.hasControls  = elementNode.hasAttribute('aria-controls');
+    this.controlsValue = this.hasControls ?
+                         elementNode.getAttribute('aria-controls') :
+                         '';
+    [this.controlsTagname, this.controlsRole] = this.controlsValue ?
+                        getTagnameRoleFromId(accNameDoc, elementNode.getAttribute('aria-controls')) :
+                        '';
+
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
-
 
     this.isButton    = this.role === 'button' && this.tagName === 'button';
     this.isLink      = this.role === 'link' && this.tagName === 'a';

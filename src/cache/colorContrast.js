@@ -98,6 +98,7 @@ export default class ColorContrast {
     this.backgroundColorHex  = this.colorToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
 
     this.color               = style.getPropertyValue("color");
+    debug.log(`[${elementNode.tagName}][color]: ${this.color} [background]: ${this.backgroundColorElem}`);
     this.colorHex            = this.colorToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
@@ -397,34 +398,44 @@ export default class ColorContrast {
     let c, parts, r1, g1, b1;
     let o1 = 1.0;
 
-    if (isRGB(color)) {
-      c = color.replace('"', '');
-      c = c.split(')')[0];
-      c = c.split('(')[1];
-      parts = c.split(',');
-      r1 = parseFloat(parts[0]);
-      g1 = parseFloat(parts[1]);
-      b1 = parseFloat(parts[2]);
-      o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
-    }
-    else {
-      if (isSRGB(color)) {
-        c = color.split(')')[0];
-        c = c.split('srgb')[1].trim();
-        parts = c.split(' ');
-        r1 = parseFloat(parts[0]) * 255;
-        g1 = parseFloat(parts[1]) * 255;
-        b1 = parseFloat(parts[2]) * 255;
-        o1 = parts.length === 5 ? parseFloat(parts[4]) : 1.0;
+    if (color) {
+      if (isRGB(color)) {
+        c = color.replace('"', '');
+        c = c.split(')')[0];
+        c = c.split('(')[1];
+        parts = c.split(',');
+        r1 = parseFloat(parts[0]);
+        g1 = parseFloat(parts[1]);
+        b1 = parseFloat(parts[2]);
+        o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
       }
       else {
-        c = new Color(color);
-        const cRGB  = new Color (c.to(`srgb`).toString());
-        r1 = parseInt(cRGB.r * 255);
-        g1 = parseInt(cRGB.g * 255);
-        b1 = parseInt(cRGB.b * 255);
-        o1 = cRGB.alpha;
+        if (isSRGB(color)) {
+          c = color.split(')')[0];
+          c = c.split('srgb')[1].trim();
+          parts = c.split(' ');
+          r1 = parseFloat(parts[0]) * 255;
+          g1 = parseFloat(parts[1]) * 255;
+          b1 = parseFloat(parts[2]) * 255;
+          o1 = parts.length === 5 ? parseFloat(parts[4]) : 1.0;
+        }
+        else {
+          c = new Color(color);
+          const cRGB  = new Color (c.to(`srgb`).toString());
+          r1 = parseInt(cRGB.r * 255);
+          g1 = parseInt(cRGB.g * 255);
+          b1 = parseInt(cRGB.b * 255);
+          o1 = cRGB.alpha;
+        }
       }
+    }
+    else {
+      c = new Color('rgba(0, 0, 0, 0)');
+      const cRGB  = new Color (c.to(`srgb`).toString());
+      r1 = parseInt(cRGB.r * 255);
+      g1 = parseInt(cRGB.g * 255);
+      b1 = parseInt(cRGB.b * 255);
+      o1 = cRGB.alpha;
     }
 
     if (!isHex(backgroundHex)) {

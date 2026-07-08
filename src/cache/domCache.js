@@ -33,6 +33,7 @@ const skipableElements = [
   'style',
   'template',
   'shadow',
+  'source',
   'title',
   'h2l-highlight',
   'opena11y-ai-highlight',

@@ -1,3 +1,7 @@
+Version 2.3.0 Overview
+=============================
+* Added mapping for aXe and Wave/PopeTech rules
+
 Version 2.2.2 Overview
 =============================
 * Fixed issue with highlighted items in iframe content for H2L Side Panel Extension

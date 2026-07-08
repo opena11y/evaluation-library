@@ -999,6 +999,54 @@ export const widgetRules = [
       }
     });
   } // end validation function
+},
+
+/**
+ * @object WIDGET_15
+ *
+ * @desc     Web components require manual check
+ */
+{ rule_id             : 'WIDGET_16',
+  last_updated        : '2026-07-08',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : [],
+  wave_refs           : [],
+  wcag_primary_id     : '2.1.1',
+  wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
+  target_resources    : ["aria-haspopup"],
+  validate          : function (dom_cache, rule_result) {
+    const supportedRoles = ['menu', 'listbox', 'tree', 'grid', 'dialog'];
+
+    dom_cache.allDomElements.forEach( de => {
+      if (de.hasPopup) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.hasControls) {
+            if (de.controlsRole) {
+              if (supportedRoles.includes(de.controlsRole)) {
+                if (de.popupValue === 'true' || (de.popupValue === de.controlsRole)) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.controlsTagname, de.controlsRole, de.controlsRole] );
+                } else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de.tagName, de.popupValue, de.controlsRole]);
+                }
+              } else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.popupValue, de.controlsRole]);
+              }
+            } else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName, de.popupValue, de.controlsValue]);
+            }
+          } else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, de.popupValue]);
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.popupValue ]);
+        }
+      }
+    });
+
+  } // end validation function
 }
 ];
 

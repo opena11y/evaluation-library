@@ -916,5 +916,62 @@ export const widgetRules = {
             url:   'https://www.w3.org/WAI/ARIA/apg/'
           }
         ]
+    },
+    WIDGET_16: {
+        ID:                    'Widget 16',
+        DEFINITION:            '@aria-haspopup@ references a @dialog@, @grid@. @listbox@, @menu@ or @tree@ widget.',
+        SUMMARY:               '@aria-haspopup@ references supported widgets',
+        TARGET_RESOURCES_DESC: 'aria-haspopup',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:  'Remove from the element the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+          FAIL_P:  'Remove from the $N_F elements the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+          MANUAL_CHECK_S:  'Verify behavior and markup of the widget reference associated with element with @aria-haspopup@ attribute.',
+          MANUAL_CHECK_P:  'Verify behavior and markup of the widget references associated with %N_MC elements with @aria-haspopup@ attribute.',
+          HIDDEN_S: 'The hidden element with @aria-haspopup@ was not evaluated.',
+          HIDDEN_P: 'The %N_H hidden elements with @aria-haspopup@ were not evaluated.',
+          NOT_APPLICABLE:  'No elements with @aria-haspopup@ found on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:    'The @%1[aria-haspopup="%2"]@ element does not have an associated @aria-controls@ reference, either remove the @aria-haspopup@ attribute or add a reference to a supported widget.',
+          ELEMENT_FAIL_2:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element does not reference a supported widget.',
+          ELEMENT_FAIL_3:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element attribute references an element with a @%3@ role, which is not supported by @aria-haspopup@ attribute.',
+          ELEMENT_FAIL_4:    'The @aria-haspopup="%2"@ attribute value is in conflict with the referenced widget role of @%3@.',
+          ELEMENT_MC_1:      'Verify the reference to the @%1[role="%2"]@ element has the required behavior and markup associated with the @%3@ widget.',
+          ELEMENT_HIDDEN_1:  'The @%1@ element with @aria-haspopup=%2@ is hidden from assistive technologies.',
+        },
+        PURPOSES: [
+          'Add purposes'
+        ],
+        TECHNIQUES: [
+          'Add techniques',
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-haspopup',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Dialog',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Grid',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/grid/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Listbox',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Menu Button',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Tree View',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/treeview/'
+          }
+        ]
     }
 }

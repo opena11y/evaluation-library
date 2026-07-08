@@ -149,7 +149,7 @@ class DebugLogging {
 /* Constants */
 const debug$18 = new DebugLogging('constants', false);
 
-const VERSION = '2.2.2';
+const VERSION = '2.3';
 
 /**
  * @constant RULESET
@@ -705,6 +705,25 @@ const inputsWithChecked   = ['checkbox', 'radio'];
 
 
 /* helper functions */
+
+function getTagnameRoleFromId (doc, id) {
+  let role = '';
+  let tagname = '';
+
+  if (id){
+    const elem = doc.getElementById(id);
+    if (elem) {
+      tagname = elem.tagName.toLowerCase();
+      if (elem.hasAttribute('role')) {
+        role = elem.getAttribute('role').toLowerCase().trim();
+      }
+    }
+  }
+
+  return [tagname, role];
+}
+
+
 
 function isLabelable (node) {
 
@@ -11151,6 +11170,63 @@ const widgetRules$1 = {
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
             url:   'https://www.w3.org/WAI/ARIA/apg/'
+          }
+        ]
+    },
+    WIDGET_16: {
+        ID:                    'Widget 16',
+        DEFINITION:            '@aria-haspopup@ references a @dialog@, @grid@. @listbox@, @menu@ or @tree@ widget.',
+        SUMMARY:               '@aria-haspopup@ references supported widgets',
+        TARGET_RESOURCES_DESC: 'aria-haspopup',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:  'Remove from the element the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+          FAIL_P:  'Remove from the $N_F elements the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+          MANUAL_CHECK_S:  'Verify behavior and markup of the widget reference associated with element with @aria-haspopup@ attribute.',
+          MANUAL_CHECK_P:  'Verify behavior and markup of the widget references associated with %N_MC elements with @aria-haspopup@ attribute.',
+          HIDDEN_S: 'The hidden element with @aria-haspopup@ was not evaluated.',
+          HIDDEN_P: 'The %N_H hidden elements with @aria-haspopup@ were not evaluated.',
+          NOT_APPLICABLE:  'No elements with @aria-haspopup@ found on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:    'The @%1[aria-haspopup="%2"]@ element does not have an associated @aria-controls@ reference, either remove the @aria-haspopup@ attribute or add a reference to a supported widget.',
+          ELEMENT_FAIL_2:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element does not reference a supported widget.',
+          ELEMENT_FAIL_3:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element attribute references an element with a @%3@ role, which is not supported by @aria-haspopup@ attribute.',
+          ELEMENT_FAIL_4:    'The @aria-haspopup="%2"@ attribute value is in conflict with the referenced widget role of @%3@.',
+          ELEMENT_MC_1:      'Verify the reference to the @%1[role="%2"]@ element has the required behavior and markup associated with the @%3@ widget.',
+          ELEMENT_HIDDEN_1:  'The @%1@ element with @aria-haspopup=%2@ is hidden from assistive technologies.',
+        },
+        PURPOSES: [
+          'Add purposes'
+        ],
+        TECHNIQUES: [
+          'Add techniques',
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-haspopup',
+            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Dialog',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Grid',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/grid/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Listbox',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Menu Button',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/'
+          },
+          { type: REFERENCES.EXAMPLE,
+            title: 'ARIA Authoring Practices: Tree View',
+            url:   'https://www.w3.org/WAI/ARIA/apg/patterns/treeview/'
           }
         ]
     }
@@ -31394,6 +31470,7 @@ class ColorContrast {
     this.backgroundColorHex  = this.colorToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
 
     this.color               = style.getPropertyValue("color");
+    debug$$.log(`[${elementNode.tagName}][color]: ${this.color} [background]: ${this.backgroundColorElem}`);
     this.colorHex            = this.colorToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
@@ -31693,34 +31770,44 @@ class ColorContrast {
     let c, parts, r1, g1, b1;
     let o1 = 1.0;
 
-    if (isRGB(color)) {
-      c = color.replace('"', '');
-      c = c.split(')')[0];
-      c = c.split('(')[1];
-      parts = c.split(',');
-      r1 = parseFloat(parts[0]);
-      g1 = parseFloat(parts[1]);
-      b1 = parseFloat(parts[2]);
-      o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
-    }
-    else {
-      if (isSRGB(color)) {
-        c = color.split(')')[0];
-        c = c.split('srgb')[1].trim();
-        parts = c.split(' ');
-        r1 = parseFloat(parts[0]) * 255;
-        g1 = parseFloat(parts[1]) * 255;
-        b1 = parseFloat(parts[2]) * 255;
-        o1 = parts.length === 5 ? parseFloat(parts[4]) : 1.0;
+    if (color) {
+      if (isRGB(color)) {
+        c = color.replace('"', '');
+        c = c.split(')')[0];
+        c = c.split('(')[1];
+        parts = c.split(',');
+        r1 = parseFloat(parts[0]);
+        g1 = parseFloat(parts[1]);
+        b1 = parseFloat(parts[2]);
+        o1 = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
       }
       else {
-        c = new Color(color);
-        const cRGB  = new Color (c.to(`srgb`).toString());
-        r1 = parseInt(cRGB.r * 255);
-        g1 = parseInt(cRGB.g * 255);
-        b1 = parseInt(cRGB.b * 255);
-        o1 = cRGB.alpha;
+        if (isSRGB(color)) {
+          c = color.split(')')[0];
+          c = c.split('srgb')[1].trim();
+          parts = c.split(' ');
+          r1 = parseFloat(parts[0]) * 255;
+          g1 = parseFloat(parts[1]) * 255;
+          b1 = parseFloat(parts[2]) * 255;
+          o1 = parts.length === 5 ? parseFloat(parts[4]) : 1.0;
+        }
+        else {
+          c = new Color(color);
+          const cRGB  = new Color (c.to(`srgb`).toString());
+          r1 = parseInt(cRGB.r * 255);
+          g1 = parseInt(cRGB.g * 255);
+          b1 = parseInt(cRGB.b * 255);
+          o1 = cRGB.alpha;
+        }
       }
+    }
+    else {
+      c = new Color('rgba(0, 0, 0, 0)');
+      const cRGB  = new Color (c.to(`srgb`).toString());
+      r1 = parseInt(cRGB.r * 255);
+      g1 = parseInt(cRGB.g * 255);
+      b1 = parseInt(cRGB.b * 255);
+      o1 = cRGB.alpha;
     }
 
     if (!isHex(backgroundHex)) {
@@ -35386,9 +35473,21 @@ class DOMElement {
     this.htmlAttrs  = this.getHtmlAttrs(elementNode);
     this.ariaAttrs  = this.getAriaAttrs(elementNode);
 
+    // For Widget 16 rule on aria-haspopup
+    this.hasPopup     = elementNode.hasAttribute('aria-haspopup');
+    this.popupValue   = this.hasPopup ?
+                        elementNode.getAttribute('aria-haspopup').toLowerCase().trim() :
+                        '';
+    this.hasControls  = elementNode.hasAttribute('aria-controls');
+    this.controlsValue = this.hasControls ?
+                         elementNode.getAttribute('aria-controls') :
+                         '';
+    [this.controlsTagname, this.controlsRole] = this.controlsValue ?
+                        getTagnameRoleFromId(accNameDoc, elementNode.getAttribute('aria-controls')) :
+                        '';
+
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
-
 
     this.isButton    = this.role === 'button' && this.tagName === 'button';
     this.isLink      = this.role === 'link' && this.tagName === 'a';
@@ -37533,6 +37632,7 @@ const skipableElements = [
   'style',
   'template',
   'shadow',
+  'source',
   'title',
   'h2l-highlight',
   'opena11y-ai-highlight',
@@ -49021,6 +49121,54 @@ const widgetRules = [
         }
       }
     });
+  } // end validation function
+},
+
+/**
+ * @object WIDGET_15
+ *
+ * @desc     Web components require manual check
+ */
+{ rule_id             : 'WIDGET_16',
+  last_updated        : '2026-07-08',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : [],
+  wave_refs           : [],
+  wcag_primary_id     : '2.1.1',
+  wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
+  target_resources    : ["aria-haspopup"],
+  validate          : function (dom_cache, rule_result) {
+    const supportedRoles = ['menu', 'listbox', 'tree', 'grid', 'dialog'];
+
+    dom_cache.allDomElements.forEach( de => {
+      if (de.hasPopup) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.hasControls) {
+            if (de.controlsRole) {
+              if (supportedRoles.includes(de.controlsRole)) {
+                if (de.popupValue === 'true' || (de.popupValue === de.controlsRole)) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.controlsTagname, de.controlsRole, de.controlsRole] );
+                } else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de.tagName, de.popupValue, de.controlsRole]);
+                }
+              } else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.popupValue, de.controlsRole]);
+              }
+            } else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName, de.popupValue, de.controlsValue]);
+            }
+          } else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName, de.popupValue]);
+          }
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.popupValue ]);
+        }
+      }
+    });
+
   } // end validation function
 }
 ];
