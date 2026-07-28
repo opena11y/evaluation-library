@@ -56,7 +56,6 @@ const allRuleLinksByGuidelines = [
 "rule-keyboard-7.html",
 "rule-keyboard-1.html",
 "rule-widget-15.html",
-"rule-widget-16.html",
 "rule-keyboard-3.html",
 "rule-keyboard-4.html",
 "rule-shortcut-1.html",
@@ -144,6 +143,7 @@ const allRuleLinksByGuidelines = [
 "rule-widget-10.html",
 "rule-widget-11.html",
 "rule-widget-13.html",
+"rule-widget-16.html",
 "rule-live-1.html"
 ];
 

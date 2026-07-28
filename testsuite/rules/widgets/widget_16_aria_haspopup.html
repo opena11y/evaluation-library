@@ -1,0 +1,131 @@
+
+  <!DOCTYPE html>
+  <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+      <title>WIDGET 16: aria-haspopup validation</title>
+      <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+      <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>WIDGET 16: <code>aria-haspopup</code> validation</h1>
+
+    <div>
+      <button aria-haspopup="true"
+              aria-controls="menu-1"
+              class="WIDGET_16_MC">
+        Button 1 (<code>true</code>)
+      </button>
+      <div id="menu-1"
+           role="menu">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="menu"
+              aria-controls="menu-2"
+              class="WIDGET_16_MC">
+        Button 2 (<code>menu</code>)
+      </button>
+      <div id="menu-2"
+           role="menu">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="tree"
+              aria-controls="tree-1"
+              class="WIDGET_16_MC">
+        Button 3 (<code>tree</code>)
+      </button>
+      <div id="tree-1"
+           role="tree">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="listbox"
+              aria-controls="listbox-1"
+              class="WIDGET_16_MC">
+        Button 4 (<code>listbox</code>)
+      </button>
+      <div id="listbox-1"
+           role="listbox">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="dialog"
+              aria-controls="dialog-1"
+              class="WIDGET_16_MC">
+        Button 5 (<code>dialog</code>)
+      </button>
+      <div id="dialog-1"
+           role="dialog">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="dialog"
+              aria-controls="menu-3"
+              class="WIDGET_16_FAIL">
+        Button 6 (<code>dialog</code>)
+      </button>
+      <div id="menu-3"
+           role="menu">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="dialog"
+              aria-controls="none-1"
+              class="WIDGET_16_FAIL">
+        Button 7 (<code>dialog</code>)
+      </button>
+      <div id="none-1">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="true"
+              class="WIDGET_16_FAIL">
+        Button 8 (<code>true</code>)
+      </button>
+    </div>
+
+    <div>
+      <button aria-haspopup="none"
+              aria-controls="none-2"
+              class="WIDGET_16_FAIL">
+        Button 9 (<code>none</code>)
+      </button>
+      <div id="none-2">
+      </div>
+    </div>
+
+    <div>
+      <button aria-haspopup="menu"
+              aria-controls="menu-4"
+              class="WIDGET_16_FAIL">
+        Button 10 (<code>menu</code>)
+      </button>
+      <div id="menu-4"></div>
+    </div>
+
+    <div>
+      <button aria-haspopup="false">
+        Button 11 (<code>false</code>)
+      </button>
+    </div>
+
+    <div hidden>
+      <button aria-haspopup="true"
+              class="WIDGET_16_HIDDEN">
+        Button 12 (<code>true</code>)
+      </button>
+    </div>
+
+
+
+  </body>
+</html>
+          

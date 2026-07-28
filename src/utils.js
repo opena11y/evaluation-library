@@ -6,7 +6,7 @@ export {
   filterTextContent,
   getAttributeValue,
   getFormattedDate,
-  getTagnameRoleFromId,
+  getTagnameAndRoleOfControlledElem,
   hasEmptyAltText,
   hasInvalidState,
   hasCheckedState,
@@ -29,17 +29,27 @@ const inputsWithChecked   = ['checkbox', 'radio'];
 
 /* helper functions */
 
-function getTagnameRoleFromId (doc, id) {
+function getTagnameAndRoleOfControlledElem(doc, elem) {
   let role = '';
   let tagname = '';
+  let controlledElem;
 
-  if (id){
-    const elem = doc.getElementById(id);
-    if (elem) {
-      tagname = elem.tagName.toLowerCase();
-      if (elem.hasAttribute('role')) {
-        role = elem.getAttribute('role').toLowerCase().trim();
-      }
+  if (elem.ariaControlsElements && elem.ariaControlsElements.length) {
+    controlledElem = elem.ariaControlsElements[0];
+  }
+
+  // For browsers that do not support ariaControlsElements
+  if (!controlledElem && elem.hasAttribute('aria-controls')) {
+    const id = elem.getAttribute('aria-controls').trim();
+    if (id) {
+      controlledElem = doc.getElementById(id)
+    }
+  }
+
+  if (controlledElem) {
+    tagname = controlledElem.tagName.toLowerCase();
+    if (controlledElem.hasAttribute('role')) {
+      role = controlledElem.getAttribute('role').toLowerCase().trim();
     }
   }
 

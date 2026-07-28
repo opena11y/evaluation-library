@@ -724,6 +724,7 @@ export const widgetRules = {
         ],
         TECHNIQUES: [
           'In some cases the child text nodes and @alt@ from descendant image elements will be used as the label for elements with widget roles.',
+          'Use @ariaLabelledByElements@ property to define an array of element nodes on the page to label elements with ARIA widget roles.',
           'Use @aria-labelledby@ attribute to reference the id(s) of the elements on the page to label elements with ARIA widget roles.',
           'Use @aria-label@ attribute to provide a explicit label for an element with a ARIA widget role.',
           'Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the widget'
@@ -783,15 +784,16 @@ export const widgetRules = {
         SUMMARY:               'Role does not support accessible name.',
         TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
-          FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
+          FAIL_S:   'Remove @aria-label@, @aria-labelledby@ or @aria-braillelabel@ from the element with a role that prohibits the use of naming techniques.',
+          FAIL_P:   'Remove @aria-label@, @aria-labelledby@ and/or @aria-braillelabel@  from the %N_F elements with roles that prohibit the use of naming techniques.',
           HIDDEN_S: 'The element with an ARIA widget role that is hidden and was not evaluated.',
           HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
           NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
-          ELEMENT_HIDDEN_1:  'Element @%%2@ was not tested because it is hidden from assistive technologies.',
+          ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element.',
+          ELEMENT_FAIL_2:    'Do not define the @%1@ property on the @%2@ element.',
+          ELEMENT_HIDDEN_1:  'Element @%1@ was not tested because it is hidden from assistive technologies.',
         },
         PURPOSES: [
           'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
@@ -919,12 +921,12 @@ export const widgetRules = {
     },
     WIDGET_16: {
         ID:                    'Widget 16',
-        DEFINITION:            '@aria-haspopup@ references a @dialog@, @grid@. @listbox@, @menu@ or @tree@ widget.',
-        SUMMARY:               '@aria-haspopup@ references supported widgets',
+        DEFINITION:            '@aria-haspopup@ references a @dialog@, @grid@, @listbox@, @menu@ or @tree@ widget.',
+        SUMMARY:               '@aria-haspopup@ references a supported widget',
         TARGET_RESOURCES_DESC: 'aria-haspopup',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:  'Remove from the element the @aria-haspopup@ attribute or provide a reference to a supported widget.',
-          FAIL_P:  'Remove from the $N_F elements the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+          FAIL_S:  'Remove from the element with the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+          FAIL_P:  'Remove from the $N_F elements with the @aria-haspopup@ attribute or provide a reference to a supported widget.',
           MANUAL_CHECK_S:  'Verify behavior and markup of the widget reference associated with element with @aria-haspopup@ attribute.',
           MANUAL_CHECK_P:  'Verify behavior and markup of the widget references associated with %N_MC elements with @aria-haspopup@ attribute.',
           HIDDEN_S: 'The hidden element with @aria-haspopup@ was not evaluated.',
@@ -932,25 +934,37 @@ export const widgetRules = {
           NOT_APPLICABLE:  'No elements with @aria-haspopup@ found on the page.'
         },
         BASE_RESULT_MESSAGES: {
-          ELEMENT_FAIL_1:    'The @%1[aria-haspopup="%2"]@ element does not have an associated @aria-controls@ reference, either remove the @aria-haspopup@ attribute or add a reference to a supported widget.',
-          ELEMENT_FAIL_2:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element does not reference a supported widget.',
-          ELEMENT_FAIL_3:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element attribute references an element with a @%3@ role, which is not supported by @aria-haspopup@ attribute.',
+          ELEMENT_FAIL_1:    'The @%1[aria-haspopup="%2"]@ element does not have a reference to a supported widget, either remove the @aria-haspopup@ attribute or add a reference to a supported widget.',
+          ELEMENT_FAIL_2:    'The @%1[aria-haspopup="%2"]@ element reference does not have a supported widget role.',
+          ELEMENT_FAIL_3:    'The @%1[aria-haspopup="%2"]@ element references an element with an unsupported @%3@ role.',
           ELEMENT_FAIL_4:    'The @aria-haspopup="%2"@ attribute value is in conflict with the referenced widget role of @%3@.',
           ELEMENT_MC_1:      'Verify the reference to the @%1[role="%2"]@ element has the required behavior and markup associated with the @%3@ widget.',
-          ELEMENT_HIDDEN_1:  'The @%1@ element with @aria-haspopup=%2@ is hidden from assistive technologies.',
+          ELEMENT_HIDDEN_1:  'The @%1[aria-haspopup="%2"]@ is hidden from assistive technologies.',
         },
         PURPOSES: [
-          'Add purposes'
+          'In ARIA, interactive menus, listboxes, trees, grids, and dialogs that appear on top of other content when triggered to appear are considered "popups".',
+          'These popups are triggered by one or more interactive elements on the page (e.g. @button@, @textbox@ ...)',
+          'The availability and type of popup the interactive element will trigger is identified with the @aria-haspopup@ value.',
+          'Screen readers often change from "reading" to "interactive" mode when an element with @aria-haspopup@ is triggered, since keyboard focus is expected to move to referenced widget.'
         ],
         TECHNIQUES: [
-          'Add techniques',
+          'If the trigger opens an ARIA defined @dialog@, set @aria-haspopup="dialog"@.',
+          'If the trigger opens an ARIA defined @grid@, set @aria-haspopup="grid"@.',
+          'If the trigger opens an ARIA defined @listbox@, set @aria-haspopup="listbox"@.',
+          'If the trigger opens an ARIA defined @menu@, set @aria-haspopup="menu"@.',
+          'If the trigger opens an ARIA defined @tree@, set @aria-haspopup="tree"@.',
+          'Remove the @aria-haspopup@ if the trigger is NOT associated with a ARIA defined @dialog@, @grid@, @listbox@, @menu@ and @tree@.  For example, the @aria-haspopup@ is often mistakenly used with disclosure buttons, since content often appears on the screen similar to the supported widgets.'
         ],
         MANUAL_CHECKS: [
         ],
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
-            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-haspopup',
+            title: 'ARIA 1.2 Specification: aria-haspopup',
             url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'MDN: aria-haspopup attribute',
+            url:   'ttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices: Dialog',

@@ -35,7 +35,7 @@ function  checkColorContrast(rule_result, domText, min_ccr_large_font, min_ccr_n
   const cc  = de.colorContrast;
   const ccr = cc.colorContrastRatio;
 
-  if (de.visibility.isVisibleOnScreen) {
+  if (de.visibility.isVisibleOnScreen && cc) {
     if (ccr === '') {
       rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_6', []);
     }

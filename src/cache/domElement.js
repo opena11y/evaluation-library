@@ -12,7 +12,7 @@ import {
   hasInvalidState,
   hasCheckedState,
   hasSelectedState,
-  getTagnameRoleFromId,
+  getTagnameAndRoleOfControlledElem,
   isLabelable
 } from '../utils.js'
 
@@ -136,7 +136,13 @@ export default class DOMElement {
                           elementNode.getAttribute('aria-braillelabel') :
                           '';
 
-    this.colorContrast = new ColorContrast(parentDomElement, elementNode);
+    try {
+      this.colorContrast = new ColorContrast(parentDomElement, elementNode);
+    }
+    catch (error) {
+      this.colorContrast = {};
+    }
+
     this.visibility    = new Visibility(parentDomElement, elementNode);
 
     this.id         = elementNode.id        ? elementNode.id   : '';
@@ -150,19 +156,16 @@ export default class DOMElement {
     this.popupValue   = this.hasPopup ?
                         elementNode.getAttribute('aria-haspopup').toLowerCase().trim() :
                         '';
-    this.hasControls  = elementNode.hasAttribute('aria-controls');
-    this.controlsValue = this.hasControls ?
-                         elementNode.getAttribute('aria-controls') :
-                         '';
-    [this.controlsTagname, this.controlsRole] = this.controlsValue ?
-                        getTagnameRoleFromId(accNameDoc, elementNode.getAttribute('aria-controls')) :
-                        '';
+    this.hasControlsRef  = elementNode.ariaControlsElements || elementNode.hasAttribute('aria-controls');
+    [this.controlsTagname, this.controlsRole] = this.hasControlsRef ?
+                        getTagnameAndRoleOfControlledElem(accNameDoc, elementNode) :
+                        ['',''];
 
     this.hasContent = elementsWithContent.includes(this.tagName);
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
-    this.isButton    = this.role === 'button' && this.tagName === 'button';
-    this.isLink      = this.role === 'link' && this.tagName === 'a';
+    this.isButton    = this.role === 'button' || this.tagName === 'button';
+    this.isLink      = this.role === 'link' || this.tagName === 'a';
     this.isLandmark  = this.checkIsLandamrk(this.role || this.defaultRole, this.accName.name);
     this.isHeading   = this.role === 'heading';
     this.isInDialog  = this.tagName === 'dialog' ||

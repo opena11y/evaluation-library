@@ -18,18 +18,6 @@ export default class LinkInfo {
   }
 
   /**
-   * @method isLink
-   *
-   * @desc Tests if a domElement for role of "link"
-   *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-   */
-
-  isLink (domElement) {
-    return domElement.role === 'link';
-  }
-
-  /**
    * @method update
    *
    * @desc Checks to see if the domElement has a role of "link"
@@ -39,7 +27,7 @@ export default class LinkInfo {
    */
 
   update (domElement, inLink) {
-    if (this.isLink(domElement)) {
+    if (domElement.isLink) {
       this.allLinkDomElements.push(domElement);
       return true;
     }

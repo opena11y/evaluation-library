@@ -33,7 +33,6 @@ const skipableElements = [
   'style',
   'template',
   'shadow',
-  'source',
   'title',
   'h2l-highlight',
   'opena11y-ai-highlight',
@@ -177,6 +176,11 @@ export default class DOMCache {
   getDomElementById(id) {
     return this.allDomElements.find( de => de.id === id);
   }
+
+  getDomElementByNode(node) {
+    return this.allDomElements.find( de => de.node === node);
+  }
+
 
   // Tests if a tag name can be skipped
   isSkipableElement(tagName, type) {
@@ -434,13 +438,25 @@ export default class DOMCache {
     for (let i = 0; i < this.allDomElements.length; i += 1) {
       const de = this.allDomElements[i];
       if (de.ariaInfo.hasAriaOwns) {
-        for (let j = 0; j < de.ariaInfo.ariaOwnsIds.length; j += 1) {
-          const id = de.ariaInfo.ariaOwnsIds[j];
-          if (id) {
-            const ode = this.getDomElementById(id);
+        const node = de.node;
+        if (node.ariaOwnsElements) {
+          node.ariaOwnsElements.forEach( (node) => {
+            const ode = this.getDomElementByNode(node);
             if (ode) {
               de.ariaInfo.ownedDomElements.push(ode);
               addOwenedByRefToDescendants(de, ode);
+            }
+          });
+        }
+        else {
+          for (let j = 0; j < de.ariaInfo.ariaOwnsIds.length; j += 1) {
+            const id = de.ariaInfo.ariaOwnsIds[j];
+            if (id) {
+              const ode = this.getDomElementById(id);
+              if (ode) {
+                de.ariaInfo.ownedDomElements.push(ode);
+                addOwenedByRefToDescendants(de, ode);
+              }
             }
           }
         }

@@ -102,31 +102,33 @@ export default function aiRuleResult (all_rule_results, rule_id) {
         // For color contrast rules add color contrast information
         if ((rule_id === 'COLOR_1') || (rule_id === 'COLOR_3')) {
           const cc = de.colorContrast;
-          const cc_result = element_result.color_contrast = {};
+          if (cc) {
+            const cc_result = element_result.color_contrast = {};
 
-          cc_result.ccr                    = cc.colorContrastRatio;
+            cc_result.ccr                    = cc.colorContrastRatio;
 
-          cc_result.background_color       = cc.backgroundColor;
-          cc_result.background_color_hex   = isHex(cc.backgroundColorHex) ?
-                                                  '#' + cc.backgroundColorHex :
-                                                  cc.backgroundColorHex;
-          cc_result.color                  = cc.color;
-          cc_result.color_hex              = isHex(cc.colorHex) ?
-                                                  '#' + cc.colorHex :
-                                                  cc.colorHex;
+            cc_result.background_color       = cc.backgroundColor;
+            cc_result.background_color_hex   = isHex(cc.backgroundColorHex) ?
+                                                    '#' + cc.backgroundColorHex :
+                                                    cc.backgroundColorHex;
+            cc_result.color                  = cc.color;
+            cc_result.color_hex              = isHex(cc.colorHex) ?
+                                                    '#' + cc.colorHex :
+                                                    cc.colorHex;
 
-          cc_result.opacity                = cc.opacity;
+            cc_result.opacity                = cc.opacity;
 
-          cc_result.is_positioned          = cc.isPositioned;
+            cc_result.is_positioned          = cc.isPositioned;
 
-          cc_result.font_family            = cc.fontFamily;
-          cc_result.font_size              = cc.fontSize;
-          cc_result.font_weight            = cc.fontWeight;
-          cc_result.is_large_font          = cc.is_large_font;
+            cc_result.font_family            = cc.fontFamily;
+            cc_result.font_size              = cc.fontSize;
+            cc_result.font_weight            = cc.fontWeight;
+            cc_result.is_large_font          = cc.is_large_font;
 
-          cc_result.background_image       = cc.backgroundImage;
-          cc_result.background_repeat      = cc.backgroundRepeat;
-          cc_result.background_position    = cc.backgroundPosition;
+            cc_result.background_image       = cc.backgroundImage;
+            cc_result.background_repeat      = cc.backgroundRepeat;
+            cc_result.background_position    = cc.backgroundPosition;
+          }
         }
 
         // For table cell header rule add table cell information

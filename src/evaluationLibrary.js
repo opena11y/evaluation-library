@@ -81,7 +81,7 @@ export default class EvaluationLibrary {
 
   evaluateRuleList (startingDoc, title='', url='',
                     ruleList = [],
-                    ariaVersion='ARIA12',
+                    ariaVersion='ARIA13',
                     addDataId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);

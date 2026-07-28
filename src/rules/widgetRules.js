@@ -836,10 +836,15 @@ export const widgetRules = [
     dom_cache.allDomElements.forEach( de => {
       if (!de.ariaInfo.isDPUBRole &&
           de.ariaInfo.isNameProhibited &&
-          de.accName.name &&
-          de.accName.source.includes('aria-label')) {
+          de.accName.name) {
+
         if (de.visibility.isVisibleToAT) {
-          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+          if (de.accName.source === 'ariaLabelledByElements') {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.accName.source, de.elemName]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.accName.source, de.elemName]);
+          }
         }
         else {
           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
@@ -1004,7 +1009,7 @@ export const widgetRules = [
 /**
  * @object WIDGET_15
  *
- * @desc     Web components require manual check
+ * @desc    Check for valid use of aria-haspopup
  */
 { rule_id             : 'WIDGET_16',
   last_updated        : '2026-07-08',
@@ -1014,16 +1019,16 @@ export const widgetRules = [
   first_step          : false,
   axe_refs            : [],
   wave_refs           : [],
-  wcag_primary_id     : '2.1.1',
-  wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '2.1.1'],
   target_resources    : ["aria-haspopup"],
   validate          : function (dom_cache, rule_result) {
     const supportedRoles = ['menu', 'listbox', 'tree', 'grid', 'dialog'];
 
     dom_cache.allDomElements.forEach( de => {
-      if (de.hasPopup) {
+      if (de.hasPopup && (de.popupValue !== 'false')) {
         if (de.visibility.isVisibleToAT) {
-          if (de.hasControls) {
+          if (de.hasControlsRef) {
             if (de.controlsRole) {
               if (supportedRoles.includes(de.controlsRole)) {
                 if (de.popupValue === 'true' || (de.popupValue === de.controlsRole)) {

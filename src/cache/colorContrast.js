@@ -71,6 +71,7 @@ export function computeCCR (hex1, hex2) {
 export default class ColorContrast {
   constructor (parentDomElement, elementNode) {
     let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
+
     let style = window.getComputedStyle(elementNode, null);
 
     if (debug.flag) {
@@ -98,7 +99,6 @@ export default class ColorContrast {
     this.backgroundColorHex  = this.colorToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
 
     this.color               = style.getPropertyValue("color");
-    debug.log(`[${elementNode.tagName}][color]: ${this.color} [background]: ${this.backgroundColorElem}`);
     this.colorHex            = this.colorToHex(this.color, this.backgroundColorHex, this.opacity);
 
     this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);

@@ -1,6 +1,6 @@
 /* testaccname.js */
 
-import EvaluationLibrary from '../../releases/opena11y-evaluation-library.js';
+import EvaluationLibrary from '../../src/evaluationLibrary.js';
 
 var evaluator = new EvaluationLibrary();
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>&lt;code&gt;aria-haspopup&lt;/code&gt; references supported widgets | OpenA11y Evaluation Library 2.3</title>
+    <title>&lt;code&gt;aria-haspopup&lt;/code&gt; references a supported widget | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -63,8 +63,9 @@
              data-bs-toggle="dropdown"
             href="#"
             role="button"
-            aria-expanded="false">Rules</a>
-          <ul class="dropdown-menu"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li>
+            aria-expanded="false"
+            aria-controls="id-rules">Rules</a>
+          <ul class="dropdown-menu" id="id-rules"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li>
           </ul>
         </li>
       
@@ -77,8 +78,9 @@
              data-bs-toggle="dropdown"
             href="#"
             role="button"
-            aria-expanded="false">About</a>
-          <ul class="dropdown-menu"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="https://opena11y.github.io/ainspector/">AInspector for WCAG</a></li><li><a class="dropdown-item" href="https://opena11y.github.io/h2l-side-panel/">H2L Side Panel</a></li><li><a class="dropdown-item" href="https://skipto-landmarks-headings.github.io/page-script-5/">SkipTo.js</a></li>
+            aria-expanded="false"
+            aria-controls="id-about">About</a>
+          <ul class="dropdown-menu" id="id-about"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="https://opena11y.github.io/ainspector/">AInspector for WCAG</a></li><li><a class="dropdown-item" href="https://opena11y.github.io/h2l-side-panel/">H2L Side Panel</a></li><li><a class="dropdown-item" href="https://skipto-landmarks-headings.github.io/page-script-5/">SkipTo.js</a></li>
           </ul>
         </li>
       
@@ -106,7 +108,7 @@
 
                 
 
-                <h1><code>aria-haspopup</code> references supported widgets</h1>
+                <h1><code>aria-haspopup</code> references a supported widget</h1>
 
                 
 
@@ -230,7 +232,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td><code>aria-haspopup</code> references a <code>dialog</code>, <code>grid</code>. <code>listbox</code>, <code>menu</code> or <code>tree</code> widget.</td>
+  <td><code>aria-haspopup</code> references a <code>dialog</code>, <code>grid</code>, <code>listbox</code>, <code>menu</code> or <code>tree</code> widget.</td>
 </tr>
 
                   
@@ -239,7 +241,13 @@
   <td>
     <ul>
       
-      <li>Add purposes</li>
+      <li>In ARIA, interactive menus, listboxes, trees, grids, and dialogs that appear on top of other content when triggered to appear are considered "popups".</li>
+      
+      <li>These popups are triggered by one or more interactive elements on the page (e.g. <code>button</code>, <code>textbox</code> ...)</li>
+      
+      <li>The availability and type of popup the interactive element will trigger is identified with the <code>aria-haspopup</code> value.</li>
+      
+      <li>Screen readers often change from "reading" to "interactive" mode when an element with <code>aria-haspopup</code> is triggered, since keyboard focus is expected to move to referenced widget.</li>
       
     </ul>
   </td>
@@ -256,8 +264,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">
-        Success Criterion 2.1.1 Keyboard
+      <a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">
+        Success Criterion 4.1.2 Name, Role, Value
       </a>
     </p>
     <p class="related">
@@ -266,68 +274,14 @@
     <ul class="related">
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#non-text-content" target="_spec">
-          Success Criterion 1.1.1 Non-text Content
+        <a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">
+          Success Criterion 1.3.1 Info and Relationships
         </a>
       </li>
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#use-of-color" target="_spec">
-          Success Criterion 1.4.1 Use of Color
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_spec">
-          Success Criterion 1.4.3 Contrast (Minimum)
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#resize-text" target="_spec">
-          Success Criterion 1.4.4 Resize text
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
-          Success Criterion 2.1.2 No Keyboard Trap
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#timing-adjustable" target="_spec">
-          Success Criterion 2.2.1 Timing Adjustable
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#pause-stop-hide" target="_spec">
-          Success Criterion 2.2.2 Pause, Stop, Hide
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
-          Success Criterion 2.4.7 Focus Visible
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
-          Success Criterion 2.4.3 Focus Order
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
-          Success Criterion 2.4.7 Focus Visible
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">
-          Success Criterion 3.3.2 Labels or Instructions
+        <a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">
+          Success Criterion 2.1.1 Keyboard
         </a>
       </li>
       
@@ -387,7 +341,17 @@
   <td>
     <ul>
       
-      <li>Add techniques</li>
+      <li>If the trigger opens an ARIA defined <code>dialog</code>, set <code>aria-haspopup="dialog"</code>.</li>
+      
+      <li>If the trigger opens an ARIA defined <code>grid</code>, set <code>aria-haspopup="grid"</code>.</li>
+      
+      <li>If the trigger opens an ARIA defined <code>listbox</code>, set <code>aria-haspopup="listbox"</code>.</li>
+      
+      <li>If the trigger opens an ARIA defined <code>menu</code>, set <code>aria-haspopup="menu"</code>.</li>
+      
+      <li>If the trigger opens an ARIA defined <code>tree</code>, set <code>aria-haspopup="tree"</code>.</li>
+      
+      <li>Remove the <code>aria-haspopup</code> if the trigger is NOT associated with a ARIA defined <code>dialog</code>, <code>grid</code>, <code>listbox</code>, <code>menu</code> and <code>tree</code>.  For example, the <code>aria-haspopup</code> is often mistakenly used with disclosure buttons, since content often appears on the screen similar to the supported widgets.</li>
       
     </ul>
   </td>
@@ -399,7 +363,9 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-haspopup</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup">ARIA 1.2 Specification: aria-haspopup</a></li>
+      
+      <li><a href="ttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup">MDN: aria-haspopup attribute</a></li>
       
       <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">ARIA Authoring Practices: Dialog</a></li>
       
@@ -427,7 +393,7 @@
            <!-- Footer-->
         <footer class="py-5">
             <div class="feedback container px-4 text-center">
-            <a href="https://opena11y.github.io/">All OpenA11y Projects</a> |
+            <a href="https://opena11y.github.io/">OpenA11y Projects</a> |
             <a href="about-privacy.html">Privacy Policy</a> |
             <a href="about-feedback.html">Feedback</a>
             </div>

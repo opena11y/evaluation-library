@@ -112,18 +112,6 @@ export default class ListInfo {
   }
 
   /**
-   * @method isLink
-   *
-   * @desc Tests if a domElement is a link
-   *
-   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-   */
-
-  isLink (domElement) {
-    return domElement.role === 'link';
-  }
-
-  /**
    * @method update
    *
    * @desc Checks to see if the domElement is a list item and if so adds the
@@ -140,7 +128,7 @@ export default class ListInfo {
     if (this.isListitem(domElement)) {
       listElement = this.addChildListitem(domElement, parentListElement);
     }
-    if (this.isLink(domElement)) {
+    if (domElement.isLink) {
       this.linkCount += 1;
       while (parentListElement) {
         if (parentListElement.isListRole) {

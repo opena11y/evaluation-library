@@ -117,7 +117,12 @@ function debugAccName (accName) {
 *                     'nameIsNotVisible' {Boolean}
 */
 function getAccessibleName (doc, element) {
-  let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
+  let accName = nameFromRefArray(element, 'ariaLabelledByElements');
+  if (accName && element.getAttribute('aria-labelledby') && element.getAttribute('aria-labelledby').length) {
+    accName.source = 'aria-labelledby';
+  }
+  // the next if is in case the array property is not supported by an older browser
+  if (accName === null) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
   if (accName === null) accName = nameFromAttribute(element, 'aria-label');
   if (accName === null) accName = nameFromNativeSemantics(doc, element);
   if (accName === null) accName = noAccName;
@@ -145,7 +150,17 @@ function getAccessibleName (doc, element) {
 *                     'nameIsNotVisible' {Boolean}
 */
 function getAccessibleDesc (doc, element, allowTitle=true) {
-  let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+  let accDesc = nameFromRefArray(element, 'ariaDescribedByElements');
+  if (accDesc) {
+    if (element.hasAttribute('aria-describedby')) {
+      accDesc.source = 'aria-describedby';
+    }
+    else {
+      accDesc.fromRefArray = true;
+    }
+  }
+  // the next if is in case the array property is not supported by an older browser
+  if (accDesc === null) accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
   if (accDesc === null) accDesc = nameFromAttribute(element, 'aria-description');
   if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
   if (accDesc === null) accDesc = noAccName;
@@ -170,9 +185,17 @@ function getAccessibleDesc (doc, element, allowTitle=true) {
 *                     'nameIsNotVisible' {Boolean}
 */
 function getErrMessage (doc, element) {
-  let errMessage = null;
-
-  errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
+  let errMessage = nameFromRefArray(element, 'ariaErrorMessageElements');
+  if (errMessage) {
+    if (element.hasAttribute('aria-errormessage')) {
+      errMessage.source = 'aria-errormessage';
+    }
+    else {
+      errMessage.fromRefArray = true;
+    }
+  }
+  // the next if is in case the array property is not supported by an older browser
+  if (errMessage === null) errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
   if (errMessage === null) errMessage = noAccName;
 
   return errMessage;
@@ -341,6 +364,73 @@ function nameFromNativeSemantics (doc, element) {
 // HELPER FUNCTIONS (NOT EXPORTED)
 
 /*
+*   @function nameFromRefArray
+*
+*   @desc Get the value of attrName on element reference array,
+*         visit each referenced element in the order it
+*         appears in the list and obtain its accessible name, and return an object
+*         with name property set to a string that is a space-separated concatenation
+*         of those results if any, otherwise return null.
+*
+*   @desc (Object)  element   -  DOM node of element to compute name
+*   @desc (String)  property  -  Property array for the element nodes
+*                                (e.g. ariaLabelledByElements, ariaDescribedByElements,
+*                                      ariaErrorMessageElements)
+*
+*   @returns {Object} Returns a object with an 'name' and 'source' property
+*/
+function nameFromRefArray (element, property) {
+  let name, names, arr = [];
+  let includesAlt = false;
+  let includesAriaLabel = false;
+  let refNotVisible = false;
+
+  if (element[property] && element[property].length) {
+
+    element[property].forEach( (refElement) => {
+      if (refElement) {
+        if (refElement.hasAttribute('aria-label')) {
+          name = refElement.getAttribute('aria-label');
+          includesAriaLabel = true;
+        }
+        else {
+          if (refElement.hasChildNodes()) {
+            refNotVisible = refNotVisible || isDisplayNone(refElement) || isVisibilityHidden(refElement);
+            names = [];
+            let children = Array.from(refElement.childNodes);
+            children.forEach( child => {
+              // Need to ignore CSS display: none and visibility: hidden for referenced
+              // elements, but not their child elements
+              const [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, refElement, true);
+              if (nc.length) names.push(nc);
+              includesAlt       = includesAlt || nInclAlt;
+              includesAriaLabel = includesAriaLabel || nInclAriaLabel;
+            });
+            name = (names.length) ? names.join('') : '';
+          }
+          else {
+            name = '';
+          }
+        }
+        name = addCssGeneratedContent(refElement, name);
+        if (name.length) arr.push(name);
+      }
+    });
+  }
+
+  if (arr.length)
+    return { name: normalize(arr.join(' ')),
+             source: property,
+             includesAlt: includesAlt,
+             includesAriaLabel: includesAriaLabel,
+             nameIsNotVisible: refNotVisible
+           };
+
+  return null;
+}
+
+
+/*
 *   @function nameFromAttributeIdRefs
 *
 *   @desc Get the value of attrName on element (a space-
@@ -351,7 +441,9 @@ function nameFromNativeSemantics (doc, element) {
 *
 *   @desc (Object)  doc              -  Parent document of element
 *   @desc (Object)  element          -  DOM node of element to compute name
-*   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
+*   @desc (String)  attribute        -  Identifies the naming attribute
+*                                       (e.g aria-labelledby, aria-describedby or
+*                                            aria-errormessage)
 *
 *   @returns {Object} Returns a object with an 'name' and 'source' property
 */

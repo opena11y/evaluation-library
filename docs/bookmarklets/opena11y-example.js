@@ -707,17 +707,27 @@
 
   /* helper functions */
 
-  function getTagnameRoleFromId (doc, id) {
+  function getTagnameAndRoleOfControlledElem(doc, elem) {
     let role = '';
     let tagname = '';
+    let controlledElem;
 
-    if (id){
-      const elem = doc.getElementById(id);
-      if (elem) {
-        tagname = elem.tagName.toLowerCase();
-        if (elem.hasAttribute('role')) {
-          role = elem.getAttribute('role').toLowerCase().trim();
-        }
+    if (elem.ariaControlsElements && elem.ariaControlsElements.length) {
+      controlledElem = elem.ariaControlsElements[0];
+    }
+
+    // For browsers that do not support ariaControlsElements
+    if (!controlledElem && elem.hasAttribute('aria-controls')) {
+      const id = elem.getAttribute('aria-controls').trim();
+      if (id) {
+        controlledElem = doc.getElementById(id);
+      }
+    }
+
+    if (controlledElem) {
+      tagname = controlledElem.tagName.toLowerCase();
+      if (controlledElem.hasAttribute('role')) {
+        role = controlledElem.getAttribute('role').toLowerCase().trim();
       }
     }
 
@@ -10981,6 +10991,7 @@
           ],
           TECHNIQUES: [
             'In some cases the child text nodes and @alt@ from descendant image elements will be used as the label for elements with widget roles.',
+            'Use @ariaLabelledByElements@ property to define an array of element nodes on the page to label elements with ARIA widget roles.',
             'Use @aria-labelledby@ attribute to reference the id(s) of the elements on the page to label elements with ARIA widget roles.',
             'Use @aria-label@ attribute to provide a explicit label for an element with a ARIA widget role.',
             'Elements with grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the widget'
@@ -11040,15 +11051,16 @@
           SUMMARY:               'Role does not support accessible name.',
           TARGET_RESOURCES_DESC: 'ARIA roles which prohibit an accessible name',
           RULE_RESULT_MESSAGES: {
-            FAIL_S:   'Remove @aria-label@ or @aria-labelledby@ from the element with a role that prohibits the use of naming techniques.',
-            FAIL_P:   'Remove @aria-label@ or @aria-labelledby@ from the %N_F elements with roles that prohibit the use of naming techniques.',
+            FAIL_S:   'Remove @aria-label@, @aria-labelledby@ or @aria-braillelabel@ from the element with a role that prohibits the use of naming techniques.',
+            FAIL_P:   'Remove @aria-label@, @aria-labelledby@ and/or @aria-braillelabel@  from the %N_F elements with roles that prohibit the use of naming techniques.',
             HIDDEN_S: 'The element with an ARIA widget role that is hidden and was not evaluated.',
             HIDDEN_P: '%N_H elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques.',
             NOT_APPLICABLE:  'No elements with @aria-label@ or @aria-labelledby@ that are on elements and/or have roles that prohibit the use of naming techniques where found.'
           },
           BASE_RESULT_MESSAGES: {
-            ELEMENT_FAIL_1:    'Remove @aria-label@ or @aria-labelledby@ attribute from @%1@ element.',
-            ELEMENT_HIDDEN_1:  'Element @%%2@ was not tested because it is hidden from assistive technologies.',
+            ELEMENT_FAIL_1:    'Remove @%1@ attribute from @%2@ element.',
+            ELEMENT_FAIL_2:    'Do not define the @%1@ property on the @%2@ element.',
+            ELEMENT_HIDDEN_1:  'Element @%1@ was not tested because it is hidden from assistive technologies.',
           },
           PURPOSES: [
             'Providing an accessible name for elements or roles provides a way for users to identify the purpose of each landmark, widget, link, table and form control on a web page.',
@@ -11176,12 +11188,12 @@
       },
       WIDGET_16: {
           ID:                    'Widget 16',
-          DEFINITION:            '@aria-haspopup@ references a @dialog@, @grid@. @listbox@, @menu@ or @tree@ widget.',
-          SUMMARY:               '@aria-haspopup@ references supported widgets',
+          DEFINITION:            '@aria-haspopup@ references a @dialog@, @grid@, @listbox@, @menu@ or @tree@ widget.',
+          SUMMARY:               '@aria-haspopup@ references a supported widget',
           TARGET_RESOURCES_DESC: 'aria-haspopup',
           RULE_RESULT_MESSAGES: {
-            FAIL_S:  'Remove from the element the @aria-haspopup@ attribute or provide a reference to a supported widget.',
-            FAIL_P:  'Remove from the $N_F elements the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+            FAIL_S:  'Remove from the element with the @aria-haspopup@ attribute or provide a reference to a supported widget.',
+            FAIL_P:  'Remove from the $N_F elements with the @aria-haspopup@ attribute or provide a reference to a supported widget.',
             MANUAL_CHECK_S:  'Verify behavior and markup of the widget reference associated with element with @aria-haspopup@ attribute.',
             MANUAL_CHECK_P:  'Verify behavior and markup of the widget references associated with %N_MC elements with @aria-haspopup@ attribute.',
             HIDDEN_S: 'The hidden element with @aria-haspopup@ was not evaluated.',
@@ -11189,25 +11201,37 @@
             NOT_APPLICABLE:  'No elements with @aria-haspopup@ found on the page.'
           },
           BASE_RESULT_MESSAGES: {
-            ELEMENT_FAIL_1:    'The @%1[aria-haspopup="%2"]@ element does not have an associated @aria-controls@ reference, either remove the @aria-haspopup@ attribute or add a reference to a supported widget.',
-            ELEMENT_FAIL_2:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element does not reference a supported widget.',
-            ELEMENT_FAIL_3:    'The @%1[aria-haspopup="%2"][aria-controls="%3"]@ element attribute references an element with a @%3@ role, which is not supported by @aria-haspopup@ attribute.',
+            ELEMENT_FAIL_1:    'The @%1[aria-haspopup="%2"]@ element does not have a reference to a supported widget, either remove the @aria-haspopup@ attribute or add a reference to a supported widget.',
+            ELEMENT_FAIL_2:    'The @%1[aria-haspopup="%2"]@ element reference does not have a supported widget role.',
+            ELEMENT_FAIL_3:    'The @%1[aria-haspopup="%2"]@ element references an element with an unsupported @%3@ role.',
             ELEMENT_FAIL_4:    'The @aria-haspopup="%2"@ attribute value is in conflict with the referenced widget role of @%3@.',
             ELEMENT_MC_1:      'Verify the reference to the @%1[role="%2"]@ element has the required behavior and markup associated with the @%3@ widget.',
-            ELEMENT_HIDDEN_1:  'The @%1@ element with @aria-haspopup=%2@ is hidden from assistive technologies.',
+            ELEMENT_HIDDEN_1:  'The @%1[aria-haspopup="%2"]@ is hidden from assistive technologies.',
           },
           PURPOSES: [
-            'Add purposes'
+            'In ARIA, interactive menus, listboxes, trees, grids, and dialogs that appear on top of other content when triggered to appear are considered "popups".',
+            'These popups are triggered by one or more interactive elements on the page (e.g. @button@, @textbox@ ...)',
+            'The availability and type of popup the interactive element will trigger is identified with the @aria-haspopup@ value.',
+            'Screen readers often change from "reading" to "interactive" mode when an element with @aria-haspopup@ is triggered, since keyboard focus is expected to move to referenced widget.'
           ],
           TECHNIQUES: [
-            'Add techniques',
+            'If the trigger opens an ARIA defined @dialog@, set @aria-haspopup="dialog"@.',
+            'If the trigger opens an ARIA defined @grid@, set @aria-haspopup="grid"@.',
+            'If the trigger opens an ARIA defined @listbox@, set @aria-haspopup="listbox"@.',
+            'If the trigger opens an ARIA defined @menu@, set @aria-haspopup="menu"@.',
+            'If the trigger opens an ARIA defined @tree@, set @aria-haspopup="tree"@.',
+            'Remove the @aria-haspopup@ if the trigger is NOT associated with a ARIA defined @dialog@, @grid@, @listbox@, @menu@ and @tree@.  For example, the @aria-haspopup@ is often mistakenly used with disclosure buttons, since content often appears on the screen similar to the supported widgets.'
           ],
           MANUAL_CHECKS: [
           ],
           INFORMATIONAL_LINKS: [
             { type: REFERENCES.SPECIFICATION,
-              title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-haspopup',
+              title: 'ARIA 1.2 Specification: aria-haspopup',
               url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup'
+            },
+            { type: REFERENCES.SPECIFICATION,
+              title: 'MDN: aria-haspopup attribute',
+              url:   'ttps://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup'
             },
             { type: REFERENCES.EXAMPLE,
               title: 'ARIA Authoring Practices: Dialog',
@@ -23141,8 +23165,8 @@
                     node.getAttribute('aria-busy').toLowerCase() === 'true':
                     false;
 
-      this.hasAriaOwns = node.hasAttribute('aria-owns');
-      this.ariaOwnsIds = this.hasAriaOwns ?
+      this.hasAriaOwns = node.ariaOwnsElements || node.hasAttribute('aria-owns');
+      this.ariaOwnsIds = node.hasAttribute('aria-owns') ?
                          node.getAttribute('aria-owns').split(' ') :
                          [];
       this.ownedDomElements   = [];
@@ -31444,6 +31468,7 @@
   class ColorContrast {
     constructor (parentDomElement, elementNode) {
       let parentColorContrast = parentDomElement ? parentDomElement.colorContrast : false;
+
       let style = window.getComputedStyle(elementNode, null);
 
       if (debug$10.flag) {
@@ -31471,7 +31496,6 @@
       this.backgroundColorHex  = this.colorToHex(this.backgroundColor, parentColorContrast.backgroundColorHex);
 
       this.color               = style.getPropertyValue("color");
-      debug$10.log(`[${elementNode.tagName}][color]: ${this.color} [background]: ${this.backgroundColorElem}`);
       this.colorHex            = this.colorToHex(this.color, this.backgroundColorHex, this.opacity);
 
       this.backgroundImage    = this.normalizeBackgroundImage(style, parentColorContrast);
@@ -35055,7 +35079,12 @@
   *                     'nameIsNotVisible' {Boolean}
   */
   function getAccessibleName (doc, element) {
-    let accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
+    let accName = nameFromRefArray(element, 'ariaLabelledByElements');
+    if (accName && element.getAttribute('aria-labelledby') && element.getAttribute('aria-labelledby').length) {
+      accName.source = 'aria-labelledby';
+    }
+    // the next if is in case the array property is not supported by an older browser
+    if (accName === null) accName = nameFromAttributeIdRefs(doc, element, 'aria-labelledby');
     if (accName === null) accName = nameFromAttribute(element, 'aria-label');
     if (accName === null) accName = nameFromNativeSemantics(doc, element);
     if (accName === null) accName = noAccName;
@@ -35083,7 +35112,17 @@
   *                     'nameIsNotVisible' {Boolean}
   */
   function getAccessibleDesc (doc, element, allowTitle=true) {
-    let accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
+    let accDesc = nameFromRefArray(element, 'ariaDescribedByElements');
+    if (accDesc) {
+      if (element.hasAttribute('aria-describedby')) {
+        accDesc.source = 'aria-describedby';
+      }
+      else {
+        accDesc.fromRefArray = true;
+      }
+    }
+    // the next if is in case the array property is not supported by an older browser
+    if (accDesc === null) accDesc = nameFromAttributeIdRefs(doc, element, 'aria-describedby');
     if (accDesc === null) accDesc = nameFromAttribute(element, 'aria-description');
     if (allowTitle && (accDesc === null)) accDesc = nameFromAttribute(element, 'title');
     if (accDesc === null) accDesc = noAccName;
@@ -35108,9 +35147,17 @@
   *                     'nameIsNotVisible' {Boolean}
   */
   function getErrMessage (doc, element) {
-    let errMessage = null;
-
-    errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
+    let errMessage = nameFromRefArray(element, 'ariaErrorMessageElements');
+    if (errMessage) {
+      if (element.hasAttribute('aria-errormessage')) {
+        errMessage.source = 'aria-errormessage';
+      }
+      else {
+        errMessage.fromRefArray = true;
+      }
+    }
+    // the next if is in case the array property is not supported by an older browser
+    if (errMessage === null) errMessage = nameFromAttributeIdRefs(doc, element, 'aria-errormessage');
     if (errMessage === null) errMessage = noAccName;
 
     return errMessage;
@@ -35261,6 +35308,73 @@
   // HELPER FUNCTIONS (NOT EXPORTED)
 
   /*
+  *   @function nameFromRefArray
+  *
+  *   @desc Get the value of attrName on element reference array,
+  *         visit each referenced element in the order it
+  *         appears in the list and obtain its accessible name, and return an object
+  *         with name property set to a string that is a space-separated concatenation
+  *         of those results if any, otherwise return null.
+  *
+  *   @desc (Object)  element   -  DOM node of element to compute name
+  *   @desc (String)  property  -  Property array for the element nodes
+  *                                (e.g. ariaLabelledByElements, ariaDescribedByElements,
+  *                                      ariaErrorMessageElements)
+  *
+  *   @returns {Object} Returns a object with an 'name' and 'source' property
+  */
+  function nameFromRefArray (element, property) {
+    let name, names, arr = [];
+    let includesAlt = false;
+    let includesAriaLabel = false;
+    let refNotVisible = false;
+
+    if (element[property] && element[property].length) {
+
+      element[property].forEach( (refElement) => {
+        if (refElement) {
+          if (refElement.hasAttribute('aria-label')) {
+            name = refElement.getAttribute('aria-label');
+            includesAriaLabel = true;
+          }
+          else {
+            if (refElement.hasChildNodes()) {
+              refNotVisible = refNotVisible || isDisplayNone(refElement) || isVisibilityHidden(refElement);
+              names = [];
+              let children = Array.from(refElement.childNodes);
+              children.forEach( child => {
+                // Need to ignore CSS display: none and visibility: hidden for referenced
+                // elements, but not their child elements
+                const [nc, nInclAlt, nInclAriaLabel] = getNodeContents(child, refElement, true);
+                if (nc.length) names.push(nc);
+                includesAlt       = includesAlt || nInclAlt;
+                includesAriaLabel = includesAriaLabel || nInclAriaLabel;
+              });
+              name = (names.length) ? names.join('') : '';
+            }
+            else {
+              name = '';
+            }
+          }
+          name = addCssGeneratedContent(refElement, name);
+          if (name.length) arr.push(name);
+        }
+      });
+    }
+
+    if (arr.length)
+      return { name: normalize(arr.join(' ')),
+               source: property,
+               includesAlt: includesAlt,
+               includesAriaLabel: includesAriaLabel,
+               nameIsNotVisible: refNotVisible
+             };
+
+    return null;
+  }
+
+
+  /*
   *   @function nameFromAttributeIdRefs
   *
   *   @desc Get the value of attrName on element (a space-
@@ -35271,7 +35385,9 @@
   *
   *   @desc (Object)  doc              -  Parent document of element
   *   @desc (Object)  element          -  DOM node of element to compute name
-  *   @desc (Boolean) nameFromContent  -  If true allow element content to be used as name
+  *   @desc (String)  attribute        -  Identifies the naming attribute
+  *                                       (e.g aria-labelledby, aria-describedby or
+  *                                            aria-errormessage)
   *
   *   @returns {Object} Returns a object with an 'name' and 'source' property
   */
@@ -35465,7 +35581,13 @@
                             elementNode.getAttribute('aria-braillelabel') :
                             '';
 
-      this.colorContrast = new ColorContrast(parentDomElement, elementNode);
+      try {
+        this.colorContrast = new ColorContrast(parentDomElement, elementNode);
+      }
+      catch (error) {
+        this.colorContrast = {};
+      }
+
       this.visibility    = new Visibility(parentDomElement, elementNode);
 
       this.id         = elementNode.id        ? elementNode.id   : '';
@@ -35479,19 +35601,16 @@
       this.popupValue   = this.hasPopup ?
                           elementNode.getAttribute('aria-haspopup').toLowerCase().trim() :
                           '';
-      this.hasControls  = elementNode.hasAttribute('aria-controls');
-      this.controlsValue = this.hasControls ?
-                           elementNode.getAttribute('aria-controls') :
-                           '';
-      [this.controlsTagname, this.controlsRole] = this.controlsValue ?
-                          getTagnameRoleFromId(accNameDoc, elementNode.getAttribute('aria-controls')) :
-                          '';
+      this.hasControlsRef  = elementNode.ariaControlsElements || elementNode.hasAttribute('aria-controls');
+      [this.controlsTagname, this.controlsRole] = this.hasControlsRef ?
+                          getTagnameAndRoleOfControlledElem(accNameDoc, elementNode) :
+                          ['',''];
 
       this.hasContent = elementsWithContent.includes(this.tagName);
       this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
-      this.isButton    = this.role === 'button' && this.tagName === 'button';
-      this.isLink      = this.role === 'link' && this.tagName === 'a';
+      this.isButton    = this.role === 'button' || this.tagName === 'button';
+      this.isLink      = this.role === 'link' || this.tagName === 'a';
       this.isLandmark  = this.checkIsLandamrk(this.role || this.defaultRole, this.accName.name);
       this.isHeading   = this.role === 'heading';
       this.isInDialog  = this.tagName === 'dialog' ||
@@ -36308,18 +36427,6 @@
     }
 
     /**
-     * @method isLink
-     *
-     * @desc Tests if a domElement for role of "link"
-     *
-     * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-     */
-
-    isLink (domElement) {
-      return domElement.role === 'link';
-    }
-
-    /**
      * @method update
      *
      * @desc Checks to see if the domElement has a role of "link"
@@ -36329,7 +36436,7 @@
      */
 
     update (domElement, inLink) {
-      if (this.isLink(domElement)) {
+      if (domElement.isLink) {
         this.allLinkDomElements.push(domElement);
         return true;
       }
@@ -36463,18 +36570,6 @@
     }
 
     /**
-     * @method isLink
-     *
-     * @desc Tests if a domElement is a link
-     *
-     * @param  {Object}  domElement - DOMElement object representing an element in the DOM
-     */
-
-    isLink (domElement) {
-      return domElement.role === 'link';
-    }
-
-    /**
      * @method update
      *
      * @desc Checks to see if the domElement is a list item and if so adds the
@@ -36491,7 +36586,7 @@
       if (this.isListitem(domElement)) {
         listElement = this.addChildListitem(domElement, parentListElement);
       }
-      if (this.isLink(domElement)) {
+      if (domElement.isLink) {
         this.linkCount += 1;
         while (parentListElement) {
           if (parentListElement.isListRole) {
@@ -37633,7 +37728,6 @@
     'style',
     'template',
     'shadow',
-    'source',
     'title',
     'h2l-highlight',
     'opena11y-ai-highlight',
@@ -37777,6 +37871,11 @@
     getDomElementById(id) {
       return this.allDomElements.find( de => de.id === id);
     }
+
+    getDomElementByNode(node) {
+      return this.allDomElements.find( de => de.node === node);
+    }
+
 
     // Tests if a tag name can be skipped
     isSkipableElement(tagName, type) {
@@ -38013,13 +38112,25 @@
       for (let i = 0; i < this.allDomElements.length; i += 1) {
         const de = this.allDomElements[i];
         if (de.ariaInfo.hasAriaOwns) {
-          for (let j = 0; j < de.ariaInfo.ariaOwnsIds.length; j += 1) {
-            const id = de.ariaInfo.ariaOwnsIds[j];
-            if (id) {
-              const ode = this.getDomElementById(id);
+          const node = de.node;
+          if (node.ariaOwnsElements) {
+            node.ariaOwnsElements.forEach( (node) => {
+              const ode = this.getDomElementByNode(node);
               if (ode) {
                 de.ariaInfo.ownedDomElements.push(ode);
                 addOwenedByRefToDescendants(de, ode);
+              }
+            });
+          }
+          else {
+            for (let j = 0; j < de.ariaInfo.ariaOwnsIds.length; j += 1) {
+              const id = de.ariaInfo.ariaOwnsIds[j];
+              if (id) {
+                const ode = this.getDomElementById(id);
+                if (ode) {
+                  de.ariaInfo.ownedDomElements.push(ode);
+                  addOwenedByRefToDescendants(de, ode);
+                }
               }
             }
           }
@@ -41839,7 +41950,7 @@
     const cc  = de.colorContrast;
     const ccr = cc.colorContrastRatio;
 
-    if (de.visibility.isVisibleOnScreen) {
+    if (de.visibility.isVisibleOnScreen && cc) {
       if (ccr === '') {
         rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, domText, 'ELEMENT_MC_6', []);
       }
@@ -48960,10 +49071,15 @@
       dom_cache.allDomElements.forEach( de => {
         if (!de.ariaInfo.isDPUBRole &&
             de.ariaInfo.isNameProhibited &&
-            de.accName.name &&
-            de.accName.source.includes('aria-label')) {
+            de.accName.name) {
+
           if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+            if (de.accName.source === 'ariaLabelledByElements') {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.accName.source, de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.accName.source, de.elemName]);
+            }
           }
           else {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
@@ -49128,7 +49244,7 @@
   /**
    * @object WIDGET_15
    *
-   * @desc     Web components require manual check
+   * @desc    Check for valid use of aria-haspopup
    */
   { rule_id             : 'WIDGET_16',
     last_updated        : '2026-07-08',
@@ -49138,16 +49254,16 @@
     first_step          : false,
     axe_refs            : [],
     wave_refs           : [],
-    wcag_primary_id     : '2.1.1',
-    wcag_related_ids    : ['1.1.1','1.4.1','1.4.3','1.4.4','2.1.2','2.2.1','2.2.2', '2.4.7','2.4.3','2.4.7','3.3.2'],
+    wcag_primary_id     : '4.1.2',
+    wcag_related_ids    : ['1.3.1', '2.1.1'],
     target_resources    : ["aria-haspopup"],
     validate          : function (dom_cache, rule_result) {
       const supportedRoles = ['menu', 'listbox', 'tree', 'grid', 'dialog'];
 
       dom_cache.allDomElements.forEach( de => {
-        if (de.hasPopup) {
+        if (de.hasPopup && (de.popupValue !== 'false')) {
           if (de.visibility.isVisibleToAT) {
-            if (de.hasControls) {
+            if (de.hasControlsRef) {
               if (de.controlsRole) {
                 if (supportedRoles.includes(de.controlsRole)) {
                   if (de.popupValue === 'true' || (de.popupValue === de.controlsRole)) {
@@ -50374,7 +50490,7 @@
 
     evaluateRuleList (startingDoc, title='', url='',
                       ruleList = [],
-                      ariaVersion='ARIA12',
+                      ariaVersion='ARIA13',
                       addDataId=false) {
 
       const evaluationResult = new EvaluationResult(startingDoc, title, url);

@@ -167,8 +167,8 @@ export default class AriaInfo {
                   node.getAttribute('aria-busy').toLowerCase() === 'true':
                   false;
 
-    this.hasAriaOwns = node.hasAttribute('aria-owns');
-    this.ariaOwnsIds = this.hasAriaOwns ?
+    this.hasAriaOwns = node.ariaOwnsElements || node.hasAttribute('aria-owns');
+    this.ariaOwnsIds = node.hasAttribute('aria-owns') ?
                        node.getAttribute('aria-owns').split(' ') :
                        [];
     this.ownedDomElements   = [];

@@ -1,6 +1,11 @@
 Version 2.3.0 Overview
 =============================
-* Added mapping for aXe and Wave/PopeTech rules
+* Added widget rule 16 for aria-haspopup
+* Updated widget rule 1 to fix support for ignoring link and button roles
+* Updated widget rule 13 to support ariaLabelledByElements property
+* Added 'source' html element to ignored tags
+* added support for element collections: ariaLabelledByElements, ariaDescribedByElements,
+        ariaErrorDescriptionElements, ariaControlsElements, ariaOwensElements.
 
 Version 2.2.2 Overview
 =============================

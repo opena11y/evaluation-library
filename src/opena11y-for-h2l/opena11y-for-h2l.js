@@ -196,7 +196,7 @@ function highlightItems(dataObj) {
         attrValue += `;${Math.round(rect.top)}`;
         attrValue += `;${Math.round(rect.width)}`;
         attrValue += `;${Math.round(rect.height)}`;
-        attrValue += `;${de.colorContrast.positionValue}`;
+        attrValue += `;${de.colorContrast ? de.colorContrast.positionValue : 'static'}`;
 
         he.setAttribute('highlight', attrValue);
       }

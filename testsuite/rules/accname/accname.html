@@ -24,13 +24,40 @@
       <h2 id="h2-A" data-label="Label Reference">Label Reference</h2>
 
       <div>
-        <label for="control-11">Label Reference 1: TextBox</label>
-        <input id="control-11"
+        <label for="control-11a">Label Reference 1A: TextBox</label>
+        <input id="control-11a"
                type="text"
-               data-label="Label Reference 1: TextBox"
+               data-label="Label Reference 1A: TextBox"
                title="WXYZ"
                data-desc="WXYZ">
       </div>
+
+      <div id="div-11b">
+        <script>
+          let divElem   = document.getElementById('div-11b');
+
+          const label11b  = 'Label Reference 1B: TextBox';
+          const desc11b   = 'Description Reference 1B: TextBox';
+
+          let labelElem = document.createElement('label');
+          labelElem.textContent = label11b;
+          divElem.appendChild(labelElem);
+
+          let descElem = document.createElement('div');
+          descElem.textContent = desc11b;
+
+          let inputElem = document.createElement('input');
+          inputElem.type = 'text';
+          inputElem.id = 'control-11b';
+          inputElem.setAttribute('data-label', label11b);
+          inputElem.setAttribute('data-desc', desc11b);
+          inputElem.ariaLabelledByElements =[labelElem];
+          inputElem.ariaDescribedByElements = [descElem];
+          divElem.appendChild(inputElem);
+          divElem.appendChild(descElem);
+        </script>
+      </div>
+
 
       <div>
         <label for="control-12">Label Reference 2: Select</label>
@@ -44,6 +71,39 @@
         </select>
         <div id="control-12-desc">WXYZ</div>
       </div>
+
+      <div id="div-12b">
+        <script>
+          divElem   = document.getElementById('div-12b');
+
+          const label12b  = 'Label Reference 2B: Select';
+          const desc12b   = 'Description Reference 2B: Select';
+
+          labelElem = document.createElement('label');
+          labelElem.textContent = label12b;
+          divElem.appendChild(labelElem);
+
+          descElem = document.createElement('div');
+          descElem.textContent = desc12b;
+
+          let selectElem = document.createElement('select');
+          selectElem.id = 'control-12b';
+          selectElem.setAttribute('data-label', label12b);
+          selectElem.setAttribute('data-desc', desc12b);
+          selectElem.ariaLabelledByElements =[labelElem];
+          selectElem.ariaDescribedByElements = [descElem];
+          divElem.appendChild(selectElem);
+
+          for(let i = 1; i < 5; i += 1) {
+            const optionElem = document.createElement('option');
+            optionElem.textContent = `Option ${i}`;
+            selectElem.appendChild(optionElem);
+          }
+
+          divElem.appendChild(descElem);
+        </script>
+      </div>
+
 
       <h2 id="h2-B" data-label="Label Encapsulation">Label Encapsulation</h2>
 
@@ -438,6 +498,41 @@
         </label>
         <div id="textbox-e-a">aria-errormessage message A: TextBox</div>
       </div>
+
+      <div id="div-81b">
+        <script>
+          divElem   = document.getElementById('div-81b');
+
+          const label81b  = 'Label Reference 1B: Textbox';
+          const desc81b   = 'Description Reference 1B: Textbox';
+          const error81b   = 'Error Reference 1B: Textbox';
+
+          labelElem = document.createElement('label');
+          labelElem.textContent = label81b;
+          divElem.appendChild(labelElem);
+
+          descElem = document.createElement('div');
+          descElem.textContent = desc81b;
+          divElem.appendChild(descElem);
+
+          let errorElem = document.createElement('div');
+          errorElem.textContent = error81b;
+          divElem.appendChild(errorElem);
+
+          inputElem = document.createElement('input');
+          inputElem.type = "text";
+          inputElem.id = 'control-81b';
+          inputElem.setAttribute('data-label', label81b);
+          inputElem.setAttribute('data-desc',  desc81b);
+          inputElem.setAttribute('data-error', error81b);
+          divElem.appendChild(inputElem);
+          inputElem.ariaLabelledByElements =[labelElem];
+          inputElem.ariaDescribedByElements = [descElem];
+          inputElem.ariaErrorMessageElements = [errorElem];
+
+        </script>
+      </div>
+
 
       <div>
         <label>Label Encapsulation 2: Select
