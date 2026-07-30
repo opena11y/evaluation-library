@@ -72,23 +72,23 @@ export const listRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#group'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#group'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#list'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#list'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: listitem role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#listitem'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#listitem'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-posinset',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-posinset'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-posinset'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-setsize',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-setsize'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-setsize'
         }
       ]
   },
@@ -130,15 +130,15 @@ export const listRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: list role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#list'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#list'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML Specification: The @title@ attribute',

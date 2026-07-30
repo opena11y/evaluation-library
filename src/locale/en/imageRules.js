@@ -47,15 +47,15 @@ export const imageRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#img'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML Specification: IMG element ALT Attribute',
@@ -131,15 +131,15 @@ export const imageRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#img'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML Specification: IMG element ALT Attribute',
@@ -308,7 +308,7 @@ export const imageRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @presentation@ role',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#presentation'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#presentation'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'CSS Backgrounds and Borders Module Level 3: The @background-image@ property',
@@ -361,11 +361,11 @@ export const imageRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @img@ role',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#img'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#img'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML5 Image Description Extension (longdesc)',

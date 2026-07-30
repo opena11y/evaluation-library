@@ -1,6 +1,8 @@
 Version 2.3.0 Overview
 =============================
 * Added widget rule 16 for aria-haspopup
+* Added widget rule 17 for aria-braillelabel
+* Added widget rule 18 for aria-brailleroledescription
 * Updated widget rule 1 to fix support for ignoring link and button roles
 * Updated widget rule 13 to support ariaLabelledByElements property
 * Added 'source' html element to ignored tags

@@ -152,7 +152,7 @@ function getAccessibleName (doc, element) {
 function getAccessibleDesc (doc, element, allowTitle=true) {
   let accDesc = nameFromRefArray(element, 'ariaDescribedByElements');
   if (accDesc) {
-    if (element.hasAttribute('aria-describedby')) {
+    if (element.getAttribute('aria-describedby') && element.getAttribute('aria-describedby').length) {
       accDesc.source = 'aria-describedby';
     }
     else {
@@ -187,11 +187,8 @@ function getAccessibleDesc (doc, element, allowTitle=true) {
 function getErrMessage (doc, element) {
   let errMessage = nameFromRefArray(element, 'ariaErrorMessageElements');
   if (errMessage) {
-    if (element.hasAttribute('aria-errormessage')) {
+    if (element.getAttribute('aria-errormessage') && element.getAttribute('aria-errormessage').length) {
       errMessage.source = 'aria-errormessage';
-    }
-    else {
-      errMessage.fromRefArray = true;
     }
   }
   // the next if is in case the array property is not supported by an older browser

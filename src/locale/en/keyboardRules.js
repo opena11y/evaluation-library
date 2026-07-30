@@ -44,7 +44,7 @@ export const keyboardRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#managingfocus'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Widget Roles',
@@ -120,7 +120,7 @@ export const keyboardRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#managingfocus'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'W3C ARIA Authoring Practices: Design Patterns',
@@ -206,7 +206,7 @@ export const keyboardRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#managingfocus'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'W3C ARIA Authoring Practices: Design Patterns',

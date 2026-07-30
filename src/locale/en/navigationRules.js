@@ -39,7 +39,7 @@ export const navigationRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G63: Providing a site map',
@@ -95,7 +95,7 @@ export const navigationRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G61: Presenting repeated components in the same relative order each time they appear',
@@ -134,7 +134,7 @@ export const navigationRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G61: Presenting repeated components in the same relative order each time they appear',
@@ -170,7 +170,7 @@ export const navigationRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G61: Presenting repeated components in the same relative order each time they appear',
@@ -209,7 +209,7 @@ export const navigationRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G61: Presenting repeated components in the same relative order each time they appear',

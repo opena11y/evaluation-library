@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WAVE Rules | OpenA11y Evaluation Library 2.1</title>
+    <title>WAVE Rules | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="./css/opena11y.css" rel="stylesheet" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
 
@@ -26,8 +27,12 @@
                id="mainNav">
               <div class="container px-4">
                   <span class="brand">
+                    <span class="icon larger">
+                      <img src="./images/eval-lib-icon-128.png"
+                      alt="Evaluation Library Logo">
+                    </span>
                     <span class="version">
-                      Version 2.1
+                      Version 2.3
                     </span>
                   </span>
 
@@ -58,8 +63,9 @@
              data-bs-toggle="dropdown"
             href="#"
             role="button"
-            aria-expanded="false">Rules</a>
-          <ul class="dropdown-menu"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li><li><a class="dropdown-item" href="rules-wave.html">WAVE Rules</a></li><li><a class="dropdown-item" href="rules-axe.html">aXe Rules</a></li>
+            aria-expanded="false"
+            aria-controls="id-rules">Rules</a>
+          <ul class="dropdown-menu" id="id-rules"><li><a class="dropdown-item" href="rulesets.html">Rulesets</a></li><li><a class="dropdown-item" href="rules-rc.html">Rule Categories</a></li><li><a class="dropdown-item" href="rules-gl.html">WCAG Guidelines</a></li><li><a class="dropdown-item" href="rules-rs.html">Rule Scopes</a></li><li><a class="dropdown-item" href="rules-fs.html">First Step</a></li><li><a class="dropdown-item" href="rules-wave.html">WAVE Rules</a></li><li><a class="dropdown-item" href="rules-axe.html">aXe Rules</a></li>
           </ul>
         </li>
       
@@ -72,8 +78,9 @@
              data-bs-toggle="dropdown"
             href="#"
             role="button"
-            aria-expanded="false">About</a>
-          <ul class="dropdown-menu"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li>
+            aria-expanded="false"
+            aria-controls="id-about">About</a>
+          <ul class="dropdown-menu" id="id-about"><li><a class="dropdown-item" href="about-history.html">History</a></li><li><a class="dropdown-item" href="about-privacy.html">Privacy</a></li><li><a class="dropdown-item" href="about-feedback.html">Feedback</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item" href="https://opena11y.github.io/ainspector/">AInspector for WCAG</a></li><li><a class="dropdown-item" href="https://opena11y.github.io/h2l-side-panel/">H2L Side Panel</a></li><li><a class="dropdown-item" href="https://skipto-landmarks-headings.github.io/page-script-5/">SkipTo.js</a></li>
           </ul>
         </li>
       
@@ -1431,7 +1438,11 @@
     </div>
            <!-- Footer-->
         <footer class="py-5">
-            <div class="feedback container px-4 text-center"><a href="about-privacy.html">Privacy Policy</a> | <a href="about-feedback.html">Feedback</a></div>
+            <div class="feedback container px-4 text-center">
+            <a href="https://opena11y.github.io/">OpenA11y Projects</a> |
+            <a href="about-privacy.html">Privacy Policy</a> |
+            <a href="about-feedback.html">Feedback</a>
+            </div>
 
             <div class="container px-4 text-center">Copyright (c) 2025, 2026; Licensed Mozilla Public License 2.0, All rights reserved</div>
 
@@ -1456,7 +1467,7 @@
         <script src="js/rulelinks.js"></script>
 
         <!-- SkipTo.js -->
-        <script data-skipto="displayOption: fixed; fontSize: 90%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
+        <script data-skipto="colorTheme:skipto; positionLeft: 30%" src="https://skipto-landmarks-headings.github.io/page-script-5/dist/skipto.min.js"></script>
 
 
   </body>

@@ -1007,7 +1007,7 @@ export const widgetRules = [
 },
 
 /**
- * @object WIDGET_15
+ * @object WIDGET_16
  *
  * @desc    Check for valid use of aria-haspopup
  */
@@ -1052,7 +1052,109 @@ export const widgetRules = [
     });
 
   } // end validation function
+},
+/**
+ * @object WIDGET_17
+ *
+ * @desc    Check for valid use of aria-braillelabel
+ */
+
+{ rule_id             : 'WIDGET_17',
+  last_updated        : '2026-07-28',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : ['aria-braille-equivalent'],
+  wave_refs           : [],
+  wcag_primary_id     : '2.4.6',
+  wcag_related_ids    : [],
+  target_resources    : ["aria-braillelabel"],
+  validate          : function (dom_cache, rule_result) {
+
+    dom_cache.allDomElements.forEach( de => {
+      if (de.hasBrailleLabel) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.accName.name) {
+            if (de.brailleLabel.length) {
+              if (de.brailleLabel.toLowerCase() != de.accName.name.toLowerCase()) {
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.brailleLabel, de.accName.name] );
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName, de.brailleLabel]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.elemName]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.elemName]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.brailleLabel ]);
+        }
+      }
+
+    });
+
+  } // end validation function
 }
+,
+/**
+ * @object WIDGET_18
+ *
+ * @desc    Check for valid use of aria-brailleroledescription
+ */
+
+{ rule_id             : 'WIDGET_18',
+  last_updated        : '2026-07-29',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : ['aria-braille-equivalent'],
+  wave_refs           : [],
+  wcag_primary_id     : '2.4.6',
+  wcag_related_ids    : [],
+  target_resources    : ["aria-brailleroledescription"],
+  validate          : function (dom_cache, rule_result) {
+
+    dom_cache.allDomElements.forEach( de => {
+      if (de.hasBrailleRoleDescription) {
+        if (de.visibility.isVisibleToAT) {
+          if (de.ariaInfo.isValidRole) {
+            if (de.brailleRoleDescription.length) {
+              if (de.brailleRoleDescription.toLowerCase() != de.roleDescription.toLowerCase()) {
+                if (de.brailleRoleDescription.toLowerCase() != de.role) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.brailleRoleDescription, de.role]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.brailleRoleDescription]);
+                }
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.brailleRoleDescription]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [de.role]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName, de.brailleRoleDescription ]);
+        }
+      }
+    });
+
+  } // end validation function
+}
+
 ];
 
 

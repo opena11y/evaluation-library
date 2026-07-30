@@ -384,7 +384,6 @@ const mainPages = [
         link: 'First Step',
         filename: 'rules-fs.html'
       },
-      /*
       { content: 'content-rules-wave.njk',
         title: 'WAVE Rules',
         link: 'WAVE Rules',
@@ -395,7 +394,6 @@ const mainPages = [
         link: 'aXe Rules',
         filename: 'rules-axe.html'
       }
-      */
     ]
   },
   { content: 'content-apis.njk',

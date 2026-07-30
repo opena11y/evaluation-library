@@ -1,0 +1,74 @@
+
+  <!DOCTYPE html>
+  <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+      <title>WIDGET 18: element with aria-brailleroledescription must aconform to authoring practices</title>
+      <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+      <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>WIDGET 18: element with <code>aria-brailleroledescription</code> must conform to authoring practices</h1>
+
+    <div>
+      <div role="region"
+           aria-label="Top stories"
+           aria-roledescription="Carousel"
+           aria-brailleroledescription="Crsl"
+              class="WIDGET_18_MC">
+        Carousel Content 1
+      </div>
+    </div>
+
+    <div>
+      <div role="region"
+           aria-label="Top stories"
+           aria-roledescription="Carousel"
+           aria-brailleroledescription="carousel"
+              class="WIDGET_18_FAIL">
+        Carousel Content 2 (Same as aria-roledescription)
+      </div>
+    </div>
+
+    <div>
+      <div role="region"
+           aria-label="Top stories"
+           aria-brailleroledescription="REGION"
+              class="WIDGET_18_FAIL">
+        Carousel Content 4 (Same as Role)
+      </div>
+    </div>
+
+
+    <div>
+      <div role="region"
+           aria-label="Top stories"
+           aria-brailleroledescription=""
+              class="WIDGET_18_FAIL">
+        Carousel Content 5 (empty)
+      </div>
+    </div>
+
+
+    <div>
+      <div role="reg"
+           aria-label="Top stories"
+           aria-brailleroledescription="carousel"
+              class="WIDGET_18_FAIL">
+        Carousel Content 6 (Invalid Role)
+      </div>
+    </div>
+
+
+    <div hidden>
+      <div role="region"
+           aria-label="Top stories"
+           aria-roledescription="Carousel"
+           aria-brailleroledescription="carousel"
+              class="WIDGET_18_HIDDEN">
+        Carousel Content 7
+      </div>
+    </div>
+
+  </body>
+</html>
+          

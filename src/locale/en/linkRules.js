@@ -48,15 +48,15 @@ export const linkRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML Specification: The @title@ attribute',
@@ -107,15 +107,15 @@ export const linkRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-describedby@ attribute',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-describedby'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML Specification: The @title@ attribute',

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Target focus should be in content window | OpenA11y Evaluation Library 2.3</title>
+    <title>&lt;code&gt;aria-braillelabel&lt;/code&gt; is more usable | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -108,7 +108,7 @@
 
                 
 
-                <h1>Target focus should be in content window</h1>
+                <h1><code>aria-braillelabel</code> is more usable</h1>
 
                 
 
@@ -154,36 +154,36 @@
 
               if (window.location.href.indexOf("#gl") > 0) {
                 allRuleLinks = allRuleLinksByGuidelines;
-                allLink.href = `rules-gl.html#link-3`;
+                allLink.href = `rules-gl.html#widget-17`;
                 suffix = '#gl';
               }
               else {
                 if (window.location.href.indexOf("#rs") > 0) {
                   allRuleLinks = allRuleLinksByScope;
-                  allLink.href = `rules-rs.html#link-3`;
+                  allLink.href = `rules-rs.html#widget-17`;
                   suffix = '#rs';
                 }
                 else {
                   if (window.location.href.indexOf("#rc") > 0) {
                     allRuleLinks = allRuleLinksByRuleCategories;
-                    allLink.href = `rules-rc.html#link-3`;
+                    allLink.href = `rules-rc.html#widget-17`;
                     suffix = '#rc';
                   }
                   else {
                     if (window.location.href.indexOf("#fs") > 0) {
                       allRuleLinks = allRuleLinksByFirstStepRules;
-                      allLink.href = `rules-fs.html#link-3`;
+                      allLink.href = `rules-fs.html#widget-17`;
                       suffix = '#fs';
                     }
                     else {
                       if (window.location.href.indexOf("#wave") > 0) {
                         allRuleLinks = allRuleLinksByWaveRules;
-                        allLink.href = `rules-wave.html#link-3`;
+                        allLink.href = `rules-wave.html#widget-17`;
                         suffix = '#wave';
                       }
                       else {
                         allRuleLinks = allRuleLinksByAxeRules;
-                        allLink.href = `rules-axe.html#link-3`;
+                        allLink.href = `rules-axe.html#widget-17`;
                         suffix = '#axe';
                       }
                     }
@@ -220,7 +220,7 @@
                   
 <tr>
   <th>Rule ID</th>
-  <td>Link 3</td>
+  <td>Widget 17</td>
 </tr>
 
                   
@@ -232,7 +232,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>The target of a link should result in focus in the content the window if the target results in more than one window opening.</td>
+  <td>Use <code>aria-braillelabel</code> attribute when there is more usable Braille label than accessible name.</td>
 </tr>
 
                   
@@ -241,7 +241,9 @@
   <td>
     <ul>
       
-      <li>User's can become disoriented if the focus causes unpredictable actions, including new URLs and popup windows for advertisements or promotions.</li>
+      <li>The <code>aria-braillelabel</code> property gives authors the ability to override how assistive technologies localize and express the accessible name of an element in Braille.</li>
+      
+      <li>Authors should limit use of <code>aria-braillelabel</code> to instances where the accessible name of an element when converted to Braille can cause confusion.</li>
       
     </ul>
   </td>
@@ -258,38 +260,14 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#on-focus" target="_spec">
-        Success Criterion 3.2.1 On Focus
+      <a href="https://www.w3.org/TR/WCAG22/#headings-and-labels" target="_spec">
+        Success Criterion 2.4.6 Headings and Labels
       </a>
     </p>
     <p class="related">
       Other Related Success Criterion:
     </p>
     <ul class="related">
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">
-          Success Criterion 2.1.1 Keyboard
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
-          Success Criterion 2.1.2 No Keyboard Trap
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
-          Success Criterion 2.4.3 Focus Order
-        </a>
-      </li>
-      
-      <li>
-        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
-          Success Criterion 2.4.7 Focus Visible
-        </a>
-      </li>
       
     </ul>
   </td>
@@ -298,7 +276,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Links</td>
+  <td>ARIA Widgets</td>
 </tr>
 
                   
@@ -321,6 +299,8 @@
   
   <td>
     <ul>
+    
+      <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent">Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent</a> (Serious) </li>
     
     </ul>
   </td>
@@ -345,7 +325,19 @@
   <td>
     <ul>
       
-      <li>Do not link to URLs that open multiple windows and do not manage the focus to be in the content windoow the user was expecting by following the link.</li>
+      <li><code>aria-braillelabel</code> attribute should only be used by experienced Braille readers or in close consultation with experienced Braille readers.</li>
+      
+      <li>The element to which <code>aria-braillelabel</code> is applied has a valid accessible name.</li>
+      
+      <li>The value of <code>aria-braillelabel</code> is not empty or does not contain only whitespace characters.</li>
+      
+      <li>The value of <code>aria-braillelabel</code> does not contain any characters in Unicode Braille Patterns or consists of only characters in Unicode Braille Patterns; the value does not only contain Braille Pattern dots-0.</li>
+      
+      <li>The value of <code>aria-braillelabel</code> is not identical to the element's accessible name.</li>
+      
+      <li>Important to test the <code>aria-braillelabel</code> with users to verify it improves the user experience.</li>
+      
+      <li>Author is responsible for internationalization of the Braille value</li>
       
     </ul>
   </td>
@@ -357,11 +349,9 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G200">G200: Opening new windows and tabs from a link only when necessary</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.3/#aria-braillelabel">ARIA Specification: aria-braillelabel</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G201">G201: Giving users advanced warning when opening a new window</a></li>
-      
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/failures/F52">F52: Failure of Success Criterion 3.2.1 and 3.2.5 due to opening a new window as soon as a new page is loaded</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-braillelabel">MDN: aria-braillelabel attribute</a></li>
       
     </ul>
   </td>

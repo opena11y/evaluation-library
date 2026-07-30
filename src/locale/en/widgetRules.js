@@ -34,6 +34,7 @@ export const widgetRules = {
         ],
         TECHNIQUES: [
           'Some ARIA roles allow child text content and @alt@ attribute content from descendant image elements to be used for the accessible name.',
+          'Use the @ariaLabelledByElements@ property to reference the element nodes of visible content on the page to define an accessible name.',
           'Use the @aria-labelledby@ attribute to reference the id(s) of visible content on the page to define an accessible name.',
           'Use the @aria-label@ attribute to provide an explicit accessible name for an element.',
           'Elements with ARIA grouping widget roles may not receive keyboard focus, but giving them a label provides users of assistive technologies a more accurate description of the purpose of the element'
@@ -51,15 +52,15 @@ export const widgetRules = {
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-labelledby',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-label',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Accessible Name (e.g. label) Calculation',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#namecalculation'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#namecalculation'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -116,7 +117,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#widget_roles'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'ARIA Authoring Practices:  Keyboard Navigation Inside Components',
@@ -183,11 +184,11 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#widget_roles'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'W3C Digital Publishing WAI-ARIA Module 1.1',
@@ -261,7 +262,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#states_and_properties'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -314,7 +315,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#states_and_properties'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#states_and_properties'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -367,7 +368,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#widget_roles'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -429,11 +430,11 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#dfn-owned-element'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-owns'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
@@ -483,11 +484,11 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#dfn-owned-element'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-owns'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
@@ -533,11 +534,11 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Owned Element definition',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#dfn-owned-element'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#dfn-owned-element'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-owns attribute',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-owns'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-owns'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
@@ -598,27 +599,27 @@ export const widgetRules = {
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#meter'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#meter'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#progress'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#progress'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#scollbar'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#scollbar'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Separator',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#separator'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#separator'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#slider'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#slider'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#spinbutton'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#spinbutton'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -667,27 +668,27 @@ export const widgetRules = {
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Meter',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#meter'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#meter'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Progress',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#progress'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#progress'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Scollbar',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#scollbar'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#scollbar'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Separator',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#separator'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#separator'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Slider',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#slider'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#slider'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Spinbutton',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#spinbutton'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#spinbutton'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -742,11 +743,11 @@ export const widgetRules = {
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-label@ attribute',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-label'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-label'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: The @aria-labelledby@ attribute',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-labelledby'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-labelledby'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'HTML Specification: The @title@ attribute',
@@ -808,7 +809,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#widget_roles'
           },
           { type: REFERENCES.WCAG_TECHNIQUE,
             title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
@@ -850,7 +851,7 @@ export const widgetRules = {
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Widget Roles',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#widget_roles'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#widget_roles'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'ARIA in HTML',
@@ -911,7 +912,7 @@ export const widgetRules = {
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/'
           },
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices',
@@ -959,8 +960,8 @@ export const widgetRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type: REFERENCES.SPECIFICATION,
-            title: 'ARIA 1.2 Specification: aria-haspopup',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-haspopup'
+            title: 'ARIA 1.3 Specification: aria-haspopup',
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-haspopup'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'MDN: aria-haspopup attribute',
@@ -985,6 +986,100 @@ export const widgetRules = {
           { type: REFERENCES.EXAMPLE,
             title: 'ARIA Authoring Practices: Tree View',
             url:   'https://www.w3.org/WAI/ARIA/apg/patterns/treeview/'
+          }
+        ]
+    },
+    WIDGET_17: {
+        ID:                    'Widget 17',
+        DEFINITION:            'Use @aria-braillelabel@ attribute when there is more usable Braille label than accessible name.',
+        SUMMARY:               '@aria-braillelabel@ is more usable',
+        TARGET_RESOURCES_DESC: 'aria-braillelabel',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:  'Update @aria-braillelabel@ attribute value to provide a more usable name than the accessible name when rendered in Braille, otherwise remove the attribute.',
+          FAIL_P:  'Update %N_F @aria-braillelablel@ attribute values to provide a more usable name than the accessible name when rendered in Braille, otherwise remove the attributes.',
+          MANUAL_CHECK_S:  'Verify @aria-braillelabel@ attribute value is more usable than the accessible name when rendered in Braille',
+          MANUAL_CHECK_P:  'Verify %N_MC @aria-braillelabel@ attribute values are more usable than the accessible name when rendered in Braille',
+          HIDDEN_S: 'The hidden element with @aria-braillelabel@ was not evaluated.',
+          HIDDEN_P: 'The %N_H hidden elements with @aria-braillelabel@ were not evaluated.',
+          NOT_APPLICABLE:  'No elements with @aria-brailllabel@ attribute found on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:    'The @aria-braillelabel@ attribute value is the same as the accessible name, either remove the @aria-braillelabel@ attribute or provide a Braille value that is more useful than the accessible name.',
+          ELEMENT_FAIL_2:    'The @aria-braillelabel@ attribute is empty, either remove the @aria-braillelabel@ attribute or provide a Braille value that is more useful than the accessible name.',
+          ELEMENT_FAIL_3:    'The @aria-braillelabel@ attribute is not allowed on elements without an accessible name.',
+          ELEMENT_MC_1:      'Verify @aria-braillelabel@ value "%1" is a more usable than the accessible name "%2".',
+          ELEMENT_HIDDEN_1:  'The @%1[aria-braillelabel="%2"]@ is hidden from assistive technologies.',
+        },
+        PURPOSES: [
+          'The @aria-braillelabel@ property gives authors the ability to override how assistive technologies localize and express the accessible name of an element in Braille.',
+          'Authors should limit use of @aria-braillelabel@ to instances where the accessible name of an element when converted to Braille can cause confusion.'
+        ],
+        TECHNIQUES: [
+          '@aria-braillelabel@ attribute should only be used by experienced Braille readers or in close consultation with experienced Braille readers.',
+          'The element to which @aria-braillelabel@ is applied has a valid accessible name.',
+          'The value of @aria-braillelabel@ is not empty or does not contain only whitespace characters.',
+          'The value of @aria-braillelabel@ does not contain any characters in Unicode Braille Patterns or consists of only characters in Unicode Braille Patterns; the value does not only contain Braille Pattern dots-0.',
+          'The value of @aria-braillelabel@ is not identical to the element\'s accessible name.',
+          'Important to test the @aria-braillelabel@ with users to verify it improves the user experience.',
+          'Author is responsible for internationalization of the Braille value'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'ARIA Specification: aria-braillelabel',
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-braillelabel'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'MDN: aria-braillelabel attribute',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-braillelabel'
+          }
+        ]
+    },
+    WIDGET_18: {
+        ID:                    'Widget 18',
+        DEFINITION:            'Use @aria-brailleroledescription@ attribute to provide an abbreviated description of a role for Braille rendering.',
+        SUMMARY:               '@aria-brailleroledescription@ abbreviated role description.',
+        TARGET_RESOURCES_DESC: 'aria-brailleroledescription',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:  'Update @aria-brailleroledescription@ attribute value to provide a Braille description of the role, otherwise remove the attribute.',
+          FAIL_P:  'Update %N_F @aria-brailleroledescription@ attribute values to provide a Braille description of the role, otherwise remove the attribute.',
+          MANUAL_CHECK_S:  'Verify @aria-brailleroledescription@ attribute value provides a concise description of the role',
+          MANUAL_CHECK_P:  'Verify %N_MC @aria-brailleroledescription@ attribute values provide a concise description of the role',
+          HIDDEN_S: 'The hidden element with @aria-brailleroledescription@ was not evaluated.',
+          HIDDEN_P: 'The %N_H hidden elements with @aria-brailleroledescription@ were not evaluated.',
+          NOT_APPLICABLE:  'No elements with @aria-brailleroledescription@ attribute found on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:    'The @aria-brailleroledescription@ value of "@%1@" is the same as the element\'s @role@, either remove the @aria-brailleroledescription@ attribute or provide a Braille description of the role.',
+          ELEMENT_FAIL_2:    'The @aria-brailleroledescription@ value of "@%1@" is the same as the element\'s @aria-roledescription@, either remove the @aria-brailleroledescription@ attribute or provide a Braille description of the role that is more concise then @aria-roledescription@.',
+          ELEMENT_FAIL_3:    'The @aria-brailleroledescription@ attribute is empty, either remove the @aria-brailleroledescription@ attribute or provide a Braille description of the role.',
+          ELEMENT_FAIL_4:    'The @%1@ role is invalid and @aria-brailleroledescription@ property is not allowed on elements with invalid WAI-ARIA roles.',
+          ELEMENT_MC_1:      'Verify @aria-brailleroledescription@ value "%1" is descriptive of the @%2@ role when rendered as Braille.',
+          ELEMENT_HIDDEN_1:  'The @%1[aria-brailleroledescription="%2"]@ is hidden from assistive technologies.',
+        },
+        PURPOSES: [
+          'The @aria-brailleroledescription@ property gives authors the ability to override how assistive technologies localize and describe the @role@ of an element in Braille.',
+          'Authors should limit use of @aria-brailleroledescription@ to instances where the a Braille description improves understanding of the @role@.'
+        ],
+        TECHNIQUES: [
+          '@aria-brailleroledescription@ should only be used by experienced Braille readers or in close consultation with experienced Braille readers.',
+          'The element to which @aria-brailleroledescription@ is applied has a valid WAI-ARIA role.',
+          'The value of @aria-brailleroledescription@ is not empty or does not contain only whitespace characters.',
+          'The value of @aria-brailleroledescription@ does not contain any characters in Unicode Braille Patterns or consists of only characters in Unicode Braille Patterns; the value does not only contain Braille Pattern dots-0.',
+          'The value of @aria-brailleroledescription@ is not identical to the element\'s @aria-roledescription@ or @role@ .',
+          'Important to test the @aria-brailleroledescription@ with users to verify it improves the user experience.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'ARIA Specification: aria-brailleroledescription',
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-brailleroledescription'
+          },
+          { type: REFERENCES.SPECIFICATION,
+            title: 'MDN: aria-brailleroledescription attribute',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-brailleroledescription'
           }
         ]
     }

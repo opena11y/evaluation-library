@@ -55,7 +55,7 @@ export const errorRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-invalid'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-invalid'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',
@@ -103,7 +103,7 @@ export const errorRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-required',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-required'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-required'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'ARIA2: Identifying a required field with the aria-required property',
@@ -143,7 +143,7 @@ export const errorRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-invalid',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-invalid'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-invalid'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'H44: Using label elements to associate text labels with form controls',

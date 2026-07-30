@@ -98,11 +98,11 @@ export const headingRules = {
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @main@ role',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#main'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: @banner@ role',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#banner'
       },
       { type:  REFERENCES.TECHNIQUE,
         title: 'W3C Web Accessibility Tutorials: Page Structure',
@@ -284,7 +284,7 @@ export const headingRules = {
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
         title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: landmark roles',
-        url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark'
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark'
       },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML Specification: The h1, h2, h3, h4, h5, and h6 elements',
@@ -330,7 +330,7 @@ export const headingRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.1 Specification: contentinfo role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#contentinfo'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'W3C Web Accessibility Tutorials: Page Structure',

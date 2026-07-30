@@ -47,7 +47,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: main role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#main'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The MAIN element',
@@ -126,7 +126,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: Sections',
@@ -203,7 +203,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: navigation role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#navigation'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#navigation'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The NAV element',
@@ -276,7 +276,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The FOOTER element',
@@ -358,7 +358,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The FOOTER element',
@@ -432,7 +432,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The FOOTER element',
@@ -516,7 +516,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The FOOTER element',
@@ -588,7 +588,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The HEADER element',
@@ -659,7 +659,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: banner role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#banner'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#banner'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: The HEADER element',
@@ -683,7 +683,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         }
       ]
   },
@@ -726,7 +726,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: navigation role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#navigation'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#navigation'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The NAV element',
@@ -785,7 +785,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: main role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#main'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#main'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The MAIN element',
@@ -848,7 +848,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The FOOTER element',
@@ -911,7 +911,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: contentinfo role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#contentinfo'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#contentinfo'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: The FOOTER element',
@@ -923,7 +923,7 @@ export const landmarkRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
@@ -981,7 +981,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: search role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#search'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#search'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
@@ -1053,7 +1053,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: form role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#form'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#form'
         },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'WAI-ARIA Authoring Practices 1.2: Landmarks',
@@ -1118,7 +1118,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The SECTION element',
@@ -1194,7 +1194,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: region role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#region'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#region'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: Sections',
@@ -1272,7 +1272,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Landmark Roles',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#landmark_roles'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#landmark_roles'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: Sections',
@@ -1346,7 +1346,7 @@ export const landmarkRules = {
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: complementary role',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#complementary'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#complementary'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: The ASIDE element',

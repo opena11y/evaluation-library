@@ -213,7 +213,7 @@ export const videoRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-describedby'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'G69: Providing an alternative for time based media',
@@ -294,7 +294,7 @@ export const videoRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-describedby'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'University of Washington: Creating Accessible Videos',
@@ -349,7 +349,7 @@ export const videoRules = {
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (ARIA) 1.0: aria-describedby',
-          url:   'https://www.w3.org/TR/wai-aria-1.2/#aria-describedby'
+          url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-describedby'
         },
         { type:  REFERENCES.TECHNIQUE,
           title: 'University of Washington: Creating Accessible Videos',

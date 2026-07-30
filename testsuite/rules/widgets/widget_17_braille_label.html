@@ -1,0 +1,50 @@
+
+  <!DOCTYPE html>
+  <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+      <title>WIDGET 17: element with aria-braillelabel must conform to authoring practices</title>
+      <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+      <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>WIDGET 17: element with <code>aria-braillelabel</code> must conform to authoring practics</h1>
+
+    <div>
+      <button aria-braillelabel="Btn 1"
+              class="WIDGET_17_MC">
+        Button 1: "Btn 1" <code>aria-braillelabel</code> value.
+      </button>
+    </div>
+
+    <div>
+      <button aria-braillelabel=""
+              class="WIDGET_17_FAIL">
+        Button 2: Empty <code>aria-braillelabel</code> value.
+      </button>
+    </div>
+
+    <div>
+      <button aria-braillelabel="Button 3"
+              class="WIDGET_17_FAIL">
+              Button 3
+      </button>
+    </div>
+
+    <div>
+      <div role="button"
+           aria-braillelabel="Button 4"
+           class="WIDGET_17_FAIL"></div>
+    </div>
+
+    <div hidden>
+      <button aria-braillelabel="Button 4"
+              class="WIDGET_17_HIDDEN">
+              Button 4
+      </button>
+    </div>
+
+
+
+  </body>
+</html>
+          

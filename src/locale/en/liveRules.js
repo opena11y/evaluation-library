@@ -52,27 +52,27 @@ export const liveRules = {
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Alert Role',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/roles#alert'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/roles#alert'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Log Role',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/roles#log'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/roles#log'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Status Role',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/roles#status'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/roles#status'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-live',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-live'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/states_and_properties#aria-live'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-atomic',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-atomic'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/states_and_properties#aria-atomic'
           },
           { type: REFERENCES.SPECIFICATION,
             title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: aria-relevant',
-            url:   'https://www.w3.org/TR/wai-aria-1.2/states_and_properties#aria-relevant'
+            url:   'https://www.w3.org/TR/wai-aria-1.3/states_and_properties#aria-relevant'
           }
         ]
     }

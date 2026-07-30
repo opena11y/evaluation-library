@@ -91,14 +91,20 @@ export default class DOMElement {
                    elementNode.getAttribute('role') :
                    defaultRole;
 
+    this.hasRoleDescription = elementNode.hasAttribute('aria-roledescription');
     this.roleDescription = elementNode.hasAttribute('aria-roledescription') ?
                               elementNode.getAttribute('aria-roledescription') :
                               '';
 
+    this.hasBrailleRoleDescription = elementNode.hasAttribute('aria-brailleroledescription');
     this.brailleRoleDescription = elementNode.hasAttribute('aria-brailleroledescription') ?
                                   elementNode.getAttribute('aria-brailleroledescription') :
                                   '';
 
+    this.hasBrailleLabel = elementNode.hasAttribute('aria-braillelabel');
+    this.brailleLabel = this.hasBrailleLabel ?
+                        elementNode.getAttribute('aria-braillelabel').trim() :
+                        false;
 
     this.accesskey = elementNode.hasAttribute('accesskey') ? elementNode.getAttribute('accesskey') : '';
 
