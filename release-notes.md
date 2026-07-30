@@ -1,8 +1,10 @@
 Version 2.3.0 Overview
 =============================
+* Added keyboard rule 10 related to tabindex on non-interactive roles
 * Added widget rule 16 for aria-haspopup
 * Added widget rule 17 for aria-braillelabel
-* Added widget rule 18 for aria-brailleroledescription
+* Added widget rule 18 for arfaile duplicate accesskey defintions
+* Updated keyboard rule 4 to fail elements tabindex values greater than 0
 * Updated widget rule 1 to fix support for ignoring link and button roles
 * Updated widget rule 13 to support ariaLabelledByElements property
 * Added 'source' html element to ignored tags
