@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Shortcut Rules</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script type="module">
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', (event) => {
+        executeTest('Shortcut 2: Avoid accesskeys', 'ID_IFRAME_2', 'SHORTCUT_2');
+      });
+    </script>
+
+    <h2>Shortcut 2: Avoid accesskeys</h2>
+    <iframe id="ID_IFRAME_2" src="shortcuts/shortcut_2_avoid_accesskeys.html"></iframe>
+    
+  </body>
+
+</html>

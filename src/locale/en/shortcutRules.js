@@ -51,10 +51,15 @@ export const shortcutRules = {
         SUMMARY:               'Avoid using @accesskey@ for shortcuts',
         TARGET_RESOURCES_DESC: 'Element',
         RULE_RESULT_MESSAGES: {
+          FAIL_S:          'Remove or change the accesskey so it does not interfere other accesskeys on the page.',
+          FAIL_P:          'Remove or change %N_MC accesskeys so they do not interfere with each other on the page.',
           MANUAL_CHECK_S:  'Verify the accesskey does not interfere with shortcuts used by the browser or assistive technologies.',
           MANUAL_CHECK_P:  'Verify none of the %N_MC accesskeys interfere with shortcuts used by the browser or assistive technologies.',
+          HIDDEN_S:        'The accesskey that is on a hidden element was not evaluated.',
+          HIDDEN_P:        'The accesskeys that is on %N_H hidden elements was not evaluated.',
         },
         BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:   'Change or remove the @%1@ accesskey so it does not conflict with other @accesskey@s defined on the page.',
           ELEMENT_MC_1:     'Verify the @%1@ accesskey does not interfere with shortcuts used by the browser or assistive technologies.',
           ELEMENT_HIDDEN_1: 'The @%1@ accesskey is on a hidden element and not tested for accessibility.',
         },
@@ -62,7 +67,8 @@ export const shortcutRules = {
           'An @accesskey@ value can conflict with a system or browser keyboard shortcut, or assistive technology functionality. What may work for one combination of operating system, assistive technology, and browser may not work with other combinations.',
           'Certain @accesskey@ values may not be present on certain keyboards, especially when internationalization is a concern. So adapting to specific languages could cause further problems.',
           '@accesskey@ values that rely on numbers may be confusing to individuals experiencing cognitive concerns, where the number doesn\'t have a logical association with the functionality it triggers.',
-          'Informing the user that @accesskey@s are present, so that they are aware of the functionality. If the system lacks a method of notifying the user about this feature, the user might accidentally activate @accesskey@s.'
+          'Informing the user that @accesskey@s are present, so that they are aware of the functionality. If the system lacks a method of notifying the user about this feature, the user might accidentally activate @accesskey@s.',
+          'Do not use the same @accesskey@ value on multiple elements.'
         ],
         TECHNIQUES: [
           'Remove the use of the @accesskey@ attribute.',

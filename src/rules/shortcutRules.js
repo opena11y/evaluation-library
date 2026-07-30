@@ -59,24 +59,48 @@ export const shortcutRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['accesskeys'],
     wcag_primary_id     : '2.1.4',
     wcag_related_ids    : [],
     target_resources    : ['a', 'input', 'output', 'select', 'textarea'],
     validate            : function (dom_cache, rule_result) {
 
+      const accesskeys = [];
+      const duplicateAccesskeys = [];
+      const domElementsWithAccesskeys = [];
+
       dom_cache.allDomElements.forEach( de => {
-        if (de.accesskey) {
-          if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.accesskey]);
+        const key = de.accesskey;
+        if (key) {
+          debug.log(`[key]: ${key}`);
+          domElementsWithAccesskeys.push(de);
+          if (accesskeys.includes(key)) {
+            duplicateAccesskeys.push(key);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.accesskey]);
+            accesskeys.push(key);
           }
         }
       });
 
-   } // end validation function  }
+      debug.log(`[         accesskeys]: ${accesskeys.join(' ')}`);
+      debug.log(`[duplicateAccesskeys]: ${duplicateAccesskeys.join(' ')}`);
+
+      domElementsWithAccesskeys.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          if (duplicateAccesskeys.includes(de.accesskey)) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.accesskey]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.accesskey]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.accesskey]);
+        }
+      });
+
+   } // end validation function
   }
 
 ];

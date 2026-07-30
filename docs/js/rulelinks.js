@@ -57,7 +57,6 @@ const allRuleLinksByGuidelines = [
 "rule-keyboard-1.html",
 "rule-widget-15.html",
 "rule-keyboard-3.html",
-"rule-keyboard-4.html",
 "rule-shortcut-1.html",
 "rule-shortcut-2.html",
 "rule-timing-1.html",
@@ -77,7 +76,9 @@ const allRuleLinksByGuidelines = [
 "rule-title-1.html",
 "rule-title-2.html",
 "rule-keyboard-2.html",
+"rule-keyboard-4.html",
 "rule-keyboard-8.html",
+"rule-keyboard-10.html",
 "rule-link-1.html",
 "rule-link-2.html",
 "rule-navigation-1.html",
@@ -283,6 +284,7 @@ const allRuleLinksByRuleCategories = [
 "rule-keyboard-7.html",
 "rule-keyboard-8.html",
 "rule-keyboard-9.html",
+"rule-keyboard-10.html",
 "rule-shortcut-1.html",
 "rule-shortcut-2.html",
 "rule-live-1.html",
@@ -388,6 +390,7 @@ const allRuleLinksByScope = [
 "rule-keyboard-3.html",
 "rule-keyboard-4.html",
 "rule-keyboard-6.html",
+"rule-keyboard-10.html",
 "rule-landmark-2.html",
 "rule-landmark-8.html",
 "rule-landmark-9.html",
@@ -482,7 +485,10 @@ const allRuleLinksByFirstStepRules = [
 allRuleLinksByWaveRules = [
 "rule-control-1.html",
 "rule-image-1.html",
-"rule-link-1.html"
+"rule-keyboard-4.html",
+"rule-keyboard-10.html",
+"rule-link-1.html",
+"rule-shortcut-2.html"
 ];
 
 allRuleLinksByAxeRules = [

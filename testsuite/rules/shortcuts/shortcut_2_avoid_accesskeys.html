@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shortcut 2: Avoid Accesskeys</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <main>
+      <h1>Shortcut 2: Avoid Accesskeys</h1>
+
+      <div>
+        <a href="#" accesskey="a" class="SHORTCUT_2_MC">Accesskey <kbd>a</kbd></a>
+      </div>
+      <div>
+        <a href="#" accesskey="0" class="SHORTCUT_2_MC">Accesskey <kbd>0</kbd></a>
+      </div>
+
+      <div>
+        <a href="#" accesskey="b" class="SHORTCUT_2_FAIL">Accesskey <kbd>b</kbd></a>
+      </div>
+      <div>
+        <a href="#" accesskey="b" class="SHORTCUT_2_FAIL">Accesskey <kbd>b</kbd></a>
+      </div>
+
+      <div hidden>
+        <a href="#" accesskey="c" class="SHORTCUT_2_HIDDEN">Accesskey <kbd>c</kbd></a>
+      </div>
+
+    </main>
+  </body>
+</html>

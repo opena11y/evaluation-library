@@ -165,21 +165,25 @@ export const keyboardRules = {
 
   KEYBOARD_4: {
     ID:                    'Keyboard 4',
-    DEFINITION:            'Avoid @tabindex@ values greater than 0.',
-    SUMMARY:               'Avoid @tabindex@ > 0',
+    DEFINITION:            'Do not set @tabindex@ to values greater than 0.',
+    SUMMARY:               'Do not set @tabindex@ > 0',
     TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements, and elements with widget roles with @tabindex@ values',
     RULE_RESULT_MESSAGES: {
-      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the element with @tabindex@ greater than 0 is consistent across browsers and operating systems.',
-      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex@ greater than 0 is consistent across browsers and operating systems.',
+      FAIL_S:             'Remove the @tabindex@ value greater than 0 from the page.',
+      FAIL_P:             'Remove the %N_F @tabindex@ values greater than 0 from the page.',
+      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the non-interative element with @tabindex@ equal to @0@ is important to be in the tab sequence of the page.',
+      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex@ equal to @0@ is important to be in the tab sequence of the page.',
       HIDDEN_S:           'The link, form control, or widget element that is hidden does not need to be tested for focus order.',
       HIDDEN_P:           'The %N_H links, form controls and/or widgets that are hidden do not need to be tested for focus order.',
       NOT_APPLICABLE:     'No elements with @tabindex@ value greater than 0'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1:      'Verify the @%1@ element with the @tabindex@ value of %2 is consistently in he same sequential order across browsers and operating systemsx.',
+      ELEMENT_FAIL_1:     'Remove the @tabindex@ value of "@%1@" from the @%2@ element to provide consistent sequential tabbing order across browsers and operating systems.',
+      ELEMENT_MC_1:       'Verify the sequential "tab" focus order of the page for the non-interative @%1@ element with @tabindex@ equal to @0@ is important to be in the tab sequence of the page.',
       ELEMENT_HIDDEN_1:  'The @%1@ element with the @tabindex=%2@ was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [
+      'Browser behavior related to @tabindex@ > 0 is not consistent and predictable which is confusing to keyboard users.',
       'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
       'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
       'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the @tabindex@ attribute value in managing keyboard focus.',
@@ -195,9 +199,6 @@ export const keyboardRules = {
       'Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.'
     ],
     MANUAL_CHECKS: [
-      'Use the tab key to verify the tab sequence of interactive elements of the page is in a logical.',
-      'Make sure the elements with @tabindex@ > 0 make sense in the tab sequence of the page.',
-      'Test on both Windows, macOS, Android and iOS using more than one browser to make sure there is consistent keyboard navigation support.'
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
@@ -447,6 +448,58 @@ export const keyboardRules = {
             url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F110'
           }
         ]
+  },
+
+  KEYBOARD_10: {
+    ID:                    'Keyboard 10',
+    DEFINITION:            'Verify @tabindex=0@ on elements with non-interactive @role@s are important for sequential "tab" focus order of the page.',
+    SUMMARY:               '@tabindex=0@ on non-interactive elments',
+    TARGET_RESOURCES_DESC: 'Elements with @tabindex=0@ and have a non-interactive @role@',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:             'Remove the @tabindex@ value form the element that is marked presentational (e.g. @role=none@).',
+      FAIL_P:             'Remove the @tabindex@ value form the %N_F elements that are marked presentationa (e.g. @role=none@)l.',
+      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the element @tabindex=0@ and has a non-interactive @role@ is important to be in the sequential "tab" focus order of the page.',
+      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex=0@ and have non-interactive @role@s are important to be in the sequential "tab" focus order of the page.',
+      HIDDEN_S:           'The hidden element does not need to be tested for sequential "tab" focus order.',
+      HIDDEN_P:           'The %N_H hidden elements do not need to be tested for sequential "tab" focus order.',
+      NOT_APPLICABLE:     'No non-interactive elements with @tabindex=0@ found on the page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_FAIL_1:     'The @%1@ element is presentational and cannot have a @tabindex@ value.',
+      ELEMENT_MC_1:       'Verify including the @%1@ element with a non-interactive "@%2@" role is important for sequential "tab" focus order of the page.',
+      ELEMENT_HIDDEN_1:   'The @%1@ element with the @tabindex=0@ was not evaluated because it is hidden.'
+    },
+    PURPOSES: [
+      'Adding @tabindex=0@ to non-interactive elements is a legacy accessibility technique to make elements containing instructions and error feedback more discoverable by assistive technology users.',
+      'There are more modern ways to make instructions and error feedback accessible to people using assistive technologies.'
+    ],
+    TECHNIQUES: [
+      'Adding @tabindex=0@ to the container elements for instructions or error feedback can make the information easier to discover by people using assistive technologies.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C WCAG: Focus Order',
+        url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C WCAG: Error Identification',
+        url:   'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C WCAG: Info and Relationships',
+        url:   'https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML: Focus',
+        url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
+      }
+    ]
   }
 
 

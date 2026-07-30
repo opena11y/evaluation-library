@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Attributes that start with &lt;code&gt;aria-&lt;/code&gt; must be defined. | OpenA11y Evaluation Library 2.3</title>
+    <title>&lt;code&gt;tabindex=0&lt;/code&gt; on non-interactive elments | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -108,7 +108,7 @@
 
                 
 
-                <h1>Attributes that start with <code>aria-</code> must be defined.</h1>
+                <h1><code>tabindex=0</code> on non-interactive elments</h1>
 
                 
 
@@ -154,36 +154,36 @@
 
               if (window.location.href.indexOf("#gl") > 0) {
                 allRuleLinks = allRuleLinksByGuidelines;
-                allLink.href = `rules-gl.html#widget-5`;
+                allLink.href = `rules-gl.html#keyboard-10`;
                 suffix = '#gl';
               }
               else {
                 if (window.location.href.indexOf("#rs") > 0) {
                   allRuleLinks = allRuleLinksByScope;
-                  allLink.href = `rules-rs.html#widget-5`;
+                  allLink.href = `rules-rs.html#keyboard-10`;
                   suffix = '#rs';
                 }
                 else {
                   if (window.location.href.indexOf("#rc") > 0) {
                     allRuleLinks = allRuleLinksByRuleCategories;
-                    allLink.href = `rules-rc.html#widget-5`;
+                    allLink.href = `rules-rc.html#keyboard-10`;
                     suffix = '#rc';
                   }
                   else {
                     if (window.location.href.indexOf("#fs") > 0) {
                       allRuleLinks = allRuleLinksByFirstStepRules;
-                      allLink.href = `rules-fs.html#widget-5`;
+                      allLink.href = `rules-fs.html#keyboard-10`;
                       suffix = '#fs';
                     }
                     else {
                       if (window.location.href.indexOf("#wave") > 0) {
                         allRuleLinks = allRuleLinksByWaveRules;
-                        allLink.href = `rules-wave.html#widget-5`;
+                        allLink.href = `rules-wave.html#keyboard-10`;
                         suffix = '#wave';
                       }
                       else {
                         allRuleLinks = allRuleLinksByAxeRules;
-                        allLink.href = `rules-axe.html#widget-5`;
+                        allLink.href = `rules-axe.html#keyboard-10`;
                         suffix = '#axe';
                       }
                     }
@@ -220,7 +220,7 @@
                   
 <tr>
   <th>Rule ID</th>
-  <td>Widget 5</td>
+  <td>Keyboard 10</td>
 </tr>
 
                   
@@ -232,7 +232,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Elements with the attributes that start with <code>aria-</code> must be a valid ARIA property or state.</td>
+  <td>Verify <code>tabindex=0</code> on elements with non-interactive <code>role</code>s are important for sequential "tab" focus order of the page.</td>
 </tr>
 
                   
@@ -241,7 +241,9 @@
   <td>
     <ul>
       
-      <li>ARIA attributes must be defined properties or states to accurately describe web content to users of assistive technologies, especially screen reader users</li>
+      <li>Adding <code>tabindex=0</code> to non-interactive elements is a legacy accessibility technique to make elements containing instructions and error feedback more discoverable by assistive technology users.</li>
+      
+      <li>There are more modern ways to make instructions and error feedback accessible to people using assistive technologies.</li>
       
     </ul>
   </td>
@@ -258,8 +260,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#name-role-value" target="_spec">
-        Success Criterion 4.1.2 Name, Role, Value
+      <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
+        Success Criterion 2.4.3 Focus Order
       </a>
     </p>
     <p class="related">
@@ -268,14 +270,26 @@
     <ul class="related">
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#info-and-relationships" target="_spec">
-          Success Criterion 1.3.1 Info and Relationships
+        <a href="https://www.w3.org/TR/WCAG22/#keyboard" target="_spec">
+          Success Criterion 2.1.1 Keyboard
         </a>
       </li>
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#labels-or-instructions" target="_spec">
-          Success Criterion 3.3.2 Labels or Instructions
+        <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
+          Success Criterion 2.1.2 No Keyboard Trap
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#focus-visible" target="_spec">
+          Success Criterion 2.4.7 Focus Visible
+        </a>
+      </li>
+      
+      <li>
+        <a href="https://www.w3.org/TR/WCAG22/#on-focus" target="_spec">
+          Success Criterion 3.2.1 On Focus
         </a>
       </li>
       
@@ -286,7 +300,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>ARIA Widgets</td>
+  <td>Keyboard Support</td>
 </tr>
 
                   
@@ -299,7 +313,7 @@
 <tr>
   <th>First Step</th>
   
-  <td>Yes</td>
+  <td>no</td>
   
 </tr>
 
@@ -309,8 +323,6 @@
   
   <td>
     <ul>
-    
-      <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr">Ensure attributes that begin with aria- are valid ARIA attributes</a> (Critical) </li>
     
     </ul>
   </td>
@@ -335,9 +347,7 @@
   <td>
     <ul>
       
-      <li>Use defined ARIA properties and states in the ARIA specification.</li>
-      
-      <li>Check W3C WAI Accessible Rich Internet Applications specifications for allowed values for ARIA attributes.</li>
+      <li>Adding <code>tabindex=0</code> to the container elements for instructions or error feedback can make the information easier to discover by people using assistive technologies.</li>
       
     </ul>
   </td>
@@ -349,17 +359,15 @@
   <td>
     <ul>
       
-      <li><a href="https://www.w3.org/TR/wai-aria-1.3/#states_and_properties">Accessible Rich Internet Applications (WAI-ARIA) 1.2 Specification: Supported Property and States</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html">W3C WCAG: Focus Order</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/general/G108">G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html">W3C WCAG: Error Identification</a></li>
       
-      <li><a href="https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA5.html">ARIA5: Using WAI-ARIA state and property attributes to expose the state of a user interface component</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html">W3C WCAG: Info and Relationships</a></li>
       
-      <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices</a></li>
+      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#focus">HTML: Focus</a></li>
       
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN Web Docs: ARIA </a></li>
-      
-      <li><a href="https://developers.google.com/web/fundamentals/accessibility/semantics-aria">Web Fundamentals: Introduction to ARIA</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.3/#managingfocus">Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation</a></li>
       
     </ul>
   </td>

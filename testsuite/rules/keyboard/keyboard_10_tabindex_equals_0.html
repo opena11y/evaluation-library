@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>KEYBOARD Rule 10: Tabindex 0 on non-interactive elements</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+      <header role="banner">
+        <h1>KEYBOARD Test Case</h1>
+      </header>
+      
+      <main>
+        <h1>Rulke 10: Tabindex 0 on non-interactive elements</h1>
+        
+        <div class="KEYBOARD_10_MC" tabindex="0">Instructions in a <code>DIV</code></div>
+        <aside class="KEYBOARD_10_MC" tabindex="0">Instructions in a <code>ASIDE</code></aside>
+        <aside role="none" class="KEYBOARD_10_FAIL" tabindex="0">Instructions (<code>role=none</code>)</aside>
+        <aside hidden role="none" class="KEYBOARD_10_HIDDEN" tabindex="0">Instructions (hidden)</aside>
+        
+      </main>
+      
+      <footer role="contentinfo">
+        <div>KEYBOARD Rule 10 test case</div>
+      </footer>
+    
+  </body>
+</html>

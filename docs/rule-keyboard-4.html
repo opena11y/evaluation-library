@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Avoid &lt;code&gt;tabindex&lt;/code&gt; &gt; 0 | OpenA11y Evaluation Library 2.3</title>
+    <title>Do not set &lt;code&gt;tabindex&lt;/code&gt; &gt; 0 | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -108,7 +108,7 @@
 
                 
 
-                <h1>Avoid <code>tabindex</code> > 0</h1>
+                <h1>Do not set <code>tabindex</code> > 0</h1>
 
                 
 
@@ -232,7 +232,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td>Avoid <code>tabindex</code> values greater than 0.</td>
+  <td>Do not set <code>tabindex</code> to values greater than 0.</td>
 </tr>
 
                   
@@ -240,6 +240,8 @@
   <th>Purpose</th>
   <td>
     <ul>
+      
+      <li>Browser behavior related to <code>tabindex</code> > 0 is not consistent and predictable which is confusing to keyboard users.</li>
       
       <li>Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.</li>
       
@@ -266,8 +268,8 @@
   <th>WCAG Success Criteria</th>
   <td>
     <p class="primary">
-      <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
-        Success Criterion 2.1.2 No Keyboard Trap
+      <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
+        Success Criterion 2.4.3 Focus Order
       </a>
     </p>
     <p class="related">
@@ -282,8 +284,8 @@
       </li>
       
       <li>
-        <a href="https://www.w3.org/TR/WCAG22/#focus-order" target="_spec">
-          Success Criterion 2.4.3 Focus Order
+        <a href="https://www.w3.org/TR/WCAG22/#no-keyboard-trap" target="_spec">
+          Success Criterion 2.1.2 No Keyboard Trap
         </a>
       </li>
       
@@ -341,6 +343,8 @@
   
   <td>
     <ul>
+    
+      <li><a href="https://wave.webaim.org/api/docs?format=html#tabindex">Tabindex - tabindex</a> (Alert) </li>
     
     </ul>
   </td>

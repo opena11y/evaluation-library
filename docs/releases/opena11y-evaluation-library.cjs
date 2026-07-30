@@ -5632,21 +5632,25 @@ const keyboardRules$1 = {
 
   KEYBOARD_4: {
     ID:                    'Keyboard 4',
-    DEFINITION:            'Avoid @tabindex@ values greater than 0.',
-    SUMMARY:               'Avoid @tabindex@ > 0',
+    DEFINITION:            'Do not set @tabindex@ to values greater than 0.',
+    SUMMARY:               'Do not set @tabindex@ > 0',
     TARGET_RESOURCES_DESC: '@a@, @area@, @input@, @textarea@ and @select@ elements, and elements with widget roles with @tabindex@ values',
     RULE_RESULT_MESSAGES: {
-      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the element with @tabindex@ greater than 0 is consistent across browsers and operating systems.',
-      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex@ greater than 0 is consistent across browsers and operating systems.',
+      FAIL_S:             'Remove the @tabindex@ value greater than 0 from the page.',
+      FAIL_P:             'Remove the %N_F @tabindex@ values greater than 0 from the page.',
+      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the non-interative element with @tabindex@ equal to @0@ is important to be in the tab sequence of the page.',
+      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex@ equal to @0@ is important to be in the tab sequence of the page.',
       HIDDEN_S:           'The link, form control, or widget element that is hidden does not need to be tested for focus order.',
       HIDDEN_P:           'The %N_H links, form controls and/or widgets that are hidden do not need to be tested for focus order.',
       NOT_APPLICABLE:     'No elements with @tabindex@ value greater than 0'
     },
     BASE_RESULT_MESSAGES: {
-      ELEMENT_MC_1:      'Verify the @%1@ element with the @tabindex@ value of %2 is consistently in he same sequential order across browsers and operating systemsx.',
+      ELEMENT_FAIL_1:     'Remove the @tabindex@ value of "@%1@" from the @%2@ element to provide consistent sequential tabbing order across browsers and operating systems.',
+      ELEMENT_MC_1:       'Verify the sequential "tab" focus order of the page for the non-interative @%1@ element with @tabindex@ equal to @0@ is important to be in the tab sequence of the page.',
       ELEMENT_HIDDEN_1:  'The @%1@ element with the @tabindex=%2@ was not evaluated because it is hidden from assistive technologies.'
     },
     PURPOSES: [
+      'Browser behavior related to @tabindex@ > 0 is not consistent and predictable which is confusing to keyboard users.',
       'Keyboard support is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
       'Native HTML4 and HTML5 link and form control elements have default keyboard interactions that are built-in and standardized among browsers.',
       'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and part of this support is understanding how the @tabindex@ attribute value in managing keyboard focus.',
@@ -5662,9 +5666,6 @@ const keyboardRules$1 = {
       'Use keyboard event handlers to implement keyboard support for interactive behaviors defined on the page.'
     ],
     MANUAL_CHECKS: [
-      'Use the tab key to verify the tab sequence of interactive elements of the page is in a logical.',
-      'Make sure the elements with @tabindex@ > 0 make sense in the tab sequence of the page.',
-      'Test on both Windows, macOS, Android and iOS using more than one browser to make sure there is consistent keyboard navigation support.'
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
@@ -5914,6 +5915,58 @@ const keyboardRules$1 = {
             url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F110'
           }
         ]
+  },
+
+  KEYBOARD_10: {
+    ID:                    'Keyboard 10',
+    DEFINITION:            'Verify @tabindex=0@ on elements with non-interactive @role@s are important for sequential "tab" focus order of the page.',
+    SUMMARY:               '@tabindex=0@ on non-interactive elments',
+    TARGET_RESOURCES_DESC: 'Elements with @tabindex=0@ and have a non-interactive @role@',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:             'Remove the @tabindex@ value form the element that is marked presentational (e.g. @role=none@).',
+      FAIL_P:             'Remove the @tabindex@ value form the %N_F elements that are marked presentationa (e.g. @role=none@)l.',
+      MANUAL_CHECK_S:     'Verify the sequential "tab" focus order of the page for the element @tabindex=0@ and has a non-interactive @role@ is important to be in the sequential "tab" focus order of the page.',
+      MANUAL_CHECK_P:     'Verify the sequential "tab" focus order of the page for the %N_MC elements with @tabindex=0@ and have non-interactive @role@s are important to be in the sequential "tab" focus order of the page.',
+      HIDDEN_S:           'The hidden element does not need to be tested for sequential "tab" focus order.',
+      HIDDEN_P:           'The %N_H hidden elements do not need to be tested for sequential "tab" focus order.',
+      NOT_APPLICABLE:     'No non-interactive elements with @tabindex=0@ found on the page.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_FAIL_1:     'The @%1@ element is presentational and cannot have a @tabindex@ value.',
+      ELEMENT_MC_1:       'Verify including the @%1@ element with a non-interactive "@%2@" role is important for sequential "tab" focus order of the page.',
+      ELEMENT_HIDDEN_1:   'The @%1@ element with the @tabindex=0@ was not evaluated because it is hidden.'
+    },
+    PURPOSES: [
+      'Adding @tabindex=0@ to non-interactive elements is a legacy accessibility technique to make elements containing instructions and error feedback more discoverable by assistive technology users.',
+      'There are more modern ways to make instructions and error feedback accessible to people using assistive technologies.'
+    ],
+    TECHNIQUES: [
+      'Adding @tabindex=0@ to the container elements for instructions or error feedback can make the information easier to discover by people using assistive technologies.'
+    ],
+    MANUAL_CHECKS: [
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C WCAG: Focus Order',
+        url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C WCAG: Error Identification',
+        url:   'https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C WCAG: Info and Relationships',
+        url:   'https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships.html'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML: Focus',
+        url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
+      }
+    ]
   }
 
 
@@ -8703,10 +8756,15 @@ const shortcutRules$1 = {
         SUMMARY:               'Avoid using @accesskey@ for shortcuts',
         TARGET_RESOURCES_DESC: 'Element',
         RULE_RESULT_MESSAGES: {
+          FAIL_S:          'Remove or change the accesskey so it does not interfere other accesskeys on the page.',
+          FAIL_P:          'Remove or change %N_MC accesskeys so they do not interfere with each other on the page.',
           MANUAL_CHECK_S:  'Verify the accesskey does not interfere with shortcuts used by the browser or assistive technologies.',
           MANUAL_CHECK_P:  'Verify none of the %N_MC accesskeys interfere with shortcuts used by the browser or assistive technologies.',
+          HIDDEN_S:        'The accesskey that is on a hidden element was not evaluated.',
+          HIDDEN_P:        'The accesskeys that is on %N_H hidden elements was not evaluated.',
         },
         BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:   'Change or remove the @%1@ accesskey so it does not conflict with other @accesskey@s defined on the page.',
           ELEMENT_MC_1:     'Verify the @%1@ accesskey does not interfere with shortcuts used by the browser or assistive technologies.',
           ELEMENT_HIDDEN_1: 'The @%1@ accesskey is on a hidden element and not tested for accessibility.',
         },
@@ -8714,7 +8772,8 @@ const shortcutRules$1 = {
           'An @accesskey@ value can conflict with a system or browser keyboard shortcut, or assistive technology functionality. What may work for one combination of operating system, assistive technology, and browser may not work with other combinations.',
           'Certain @accesskey@ values may not be present on certain keyboards, especially when internationalization is a concern. So adapting to specific languages could cause further problems.',
           '@accesskey@ values that rely on numbers may be confusing to individuals experiencing cognitive concerns, where the number doesn\'t have a logical association with the functionality it triggers.',
-          'Informing the user that @accesskey@s are present, so that they are aware of the functionality. If the system lacks a method of notifying the user about this feature, the user might accidentally activate @accesskey@s.'
+          'Informing the user that @accesskey@s are present, so that they are aware of the functionality. If the system lacks a method of notifying the user about this feature, the user might accidentally activate @accesskey@s.',
+          'Do not use the same @accesskey@ value on multiple elements.'
         ],
         TECHNIQUES: [
           'Remove the use of the @accesskey@ attribute.',
@@ -44656,22 +44715,22 @@ const keyboardRules = [
    */
 
   { rule_id             : 'KEYBOARD_4',
-    last_updated        : '2023-08-21',
+    last_updated        : '2026-07-30',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
-    wcag_primary_id     : '2.1.2',
-    wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
-    target_resources    : ['object'],
+    wave_refs           : ['tabindex'],
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
+    target_resources    : ['[tabindex]'],
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
         if (isTabStop(de) && de.tabIndex > 0) {
           if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tabIndex, de.elemName]);
           }
           else {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
@@ -44834,7 +44893,44 @@ const keyboardRules = [
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
-  }
+  },
+ /**
+   * @object KEYBOARD_10
+   *
+   * @desc Check non-interactive elements with tabindex=0
+   */
+
+  { rule_id             : 'KEYBOARD_10',
+    last_updated        : '2026-07-30',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    first_step          : false,
+    axe_refs            : [],
+    wave_refs           : ['presentation-role-conflict'],
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
+    target_resources    : ['[tabindex]'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+        if (!de.isInteractiveElement && de.tabIndex == 0) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.role == 'none' || de.role == 'presentation') {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
+          }
+        }
+      });
+     } // end validation function
+  },
+
 
 ];
 
@@ -46989,24 +47085,48 @@ const shortcutRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['accesskeys'],
     wcag_primary_id     : '2.1.4',
     wcag_related_ids    : [],
     target_resources    : ['a', 'input', 'output', 'select', 'textarea'],
     validate            : function (dom_cache, rule_result) {
 
+      const accesskeys = [];
+      const duplicateAccesskeys = [];
+      const domElementsWithAccesskeys = [];
+
       dom_cache.allDomElements.forEach( de => {
-        if (de.accesskey) {
-          if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.accesskey]);
+        const key = de.accesskey;
+        if (key) {
+          debug$b.log(`[key]: ${key}`);
+          domElementsWithAccesskeys.push(de);
+          if (accesskeys.includes(key)) {
+            duplicateAccesskeys.push(key);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.accesskey]);
+            accesskeys.push(key);
           }
         }
       });
 
-   } // end validation function  }
+      debug$b.log(`[         accesskeys]: ${accesskeys.join(' ')}`);
+      debug$b.log(`[duplicateAccesskeys]: ${duplicateAccesskeys.join(' ')}`);
+
+      domElementsWithAccesskeys.forEach( de => {
+        if (de.visibility.isVisibleToAT) {
+          if (duplicateAccesskeys.includes(de.accesskey)) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.accesskey]);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.accesskey]);
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.accesskey]);
+        }
+      });
+
+   } // end validation function
   }
 
 ];
@@ -48664,9 +48784,7 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : ['aria-allowed-attr',
-                         'aria-conditional-attr',
-                         'aria-prohibited-attr'],
+  axe_refs            : ['aria-valid-attr'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -49197,7 +49315,10 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['aria-deprecated-role'],
+  axe_refs            : ['aria-allowed-attr',
+                         'aria-conditional-attr',
+                         'aria-prohibited-attr',
+                         'aria-deprecated-role'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['4.1.2'],

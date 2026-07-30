@@ -177,22 +177,22 @@ export const keyboardRules = [
    */
 
   { rule_id             : 'KEYBOARD_4',
-    last_updated        : '2023-08-21',
+    last_updated        : '2026-07-30',
     rule_scope          : RULE_SCOPE.ELEMENT,
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
-    wcag_primary_id     : '2.1.2',
-    wcag_related_ids    : ['2.1.1', '2.4.3',  '2.4.7', '3.2.1'],
-    target_resources    : ['object'],
+    wave_refs           : ['tabindex'],
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
+    target_resources    : ['[tabindex]'],
     validate            : function (dom_cache, rule_result) {
 
       dom_cache.allDomElements.forEach( de => {
         if (isTabStop(de) && de.tabIndex > 0) {
           if (de.visibility.isVisibleToAT) {
-            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName, de.tabIndex]);
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tabIndex, de.elemName]);
           }
           else {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
@@ -355,7 +355,44 @@ export const keyboardRules = [
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
 
     } // end validation function
-  }
+  },
+ /**
+   * @object KEYBOARD_10
+   *
+   * @desc Check non-interactive elements with tabindex=0
+   */
+
+  { rule_id             : 'KEYBOARD_10',
+    last_updated        : '2026-07-30',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    first_step          : false,
+    axe_refs            : [],
+    wave_refs           : ['presentation-role-conflict'],
+    wcag_primary_id     : '2.4.3',
+    wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
+    target_resources    : ['[tabindex]'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.allDomElements.forEach( de => {
+        if (!de.isInteractiveElement && de.tabIndex == 0) {
+          if (de.visibility.isVisibleToAT) {
+            if (de.role == 'none' || de.role == 'presentation') {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName, de.role]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName, de.tabIndex]);
+          }
+        }
+      });
+     } // end validation function
+  },
+
 
 ];
 

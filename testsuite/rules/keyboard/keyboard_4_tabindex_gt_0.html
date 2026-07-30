@@ -15,16 +15,16 @@
       <main>
         <h1>KEYBOARD Rule 4: Avoid <code>tabindex<code> > 0</h1>
         
-        <div><a href="link1.html" tabindex="5" class="KEYBOARD_4_MC">Link 1</a></div>
+        <div><a href="link1.html" tabindex="5" class="KEYBOARD_4_FAIL">Link 1</a></div>
         <div><a href="link2.html">Link 2</a></div>
-        <div><a href="link3.html" tabindex="4" class="KEYBOARD_4_MC">Link 3 (tabindex=1)</a></div>
+        <div><a href="link3.html" tabindex="4" class="KEYBOARD_4_FAIL">Link 3 (tabindex=1)</a></div>
         <div><a href="link4.html" tabindex="3" hidden class="KEYBOARD_4_HIDDEN">Link 4</a></div>
         <div><a href="link4.html" hidden>Link 5</a></div>
 
-        <div><input type="text" tabindex="2" class="KEYBOARD_4_MC"></div>
+        <div><input type="text" tabindex="2" class="KEYBOARD_4_FAIL"></div>
         <div><input type="checkbox"></div>
         <div><input type="radio"></div>
-        <div><textarea rows="10" tabindex="1" cols="40"></textarea></div>
+        <div><textarea rows="10" tabindex="1" cols="40" class="KEYBOARD_4_FAIL"></textarea></div>
         <select>
           <option>Option 1</option>
           <option>Option 2</option>
@@ -36,10 +36,10 @@
         <div style="display: none"><input type="text"></div>
 
 
-        <div tabindex="9" class="KEYBOARD_4_MC">mouse down event 1</div>
+        <div tabindex="9" class="KEYBOARD_4_FAIL">mouse down event 1</div>
         <div tabindex="-1">tabindex -1</div>
-        <div tabindex="0" class="KEYBOARD_4_MC">tabindex 0</div>
-        <div tabindex="8" class="KEYBOARD_4_MC">tabindex 2</div>
+        <div tabindex="0">tabindex 0</div>
+        <div tabindex="8" class="KEYBOARD_4_FAIL">tabindex 2</div>
         <div hidden tabindex="7" class="KEYBOARD_4_HIDDEN">tabindex 3</div>
         
       </main>
