@@ -97,7 +97,7 @@ export const audioRules = [
     wave_refs           : [],
     wcag_primary_id     : '1.4.2',
     wcag_related_ids    : [],
-    target_resources    : [],
+    target_resources    : ['video', 'audio', 'embed', 'object'],
     validate            : function (dom_cache, rule_result) {
 
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);

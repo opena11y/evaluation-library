@@ -33,7 +33,7 @@ export const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : [],
+  axe_refs            : ['td-headers-attr'],
   wave_refs           : [],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],

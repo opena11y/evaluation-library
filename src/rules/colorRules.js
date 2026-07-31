@@ -180,7 +180,7 @@ export const colorRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required        : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['color-contrast-enhanced'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.6',
     wcag_related_ids    : ['1.4.1','1.4.3'],

@@ -58,8 +58,8 @@ export const shortcutRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
-    wave_refs           : ['accesskeys'],
+    axe_refs            : ['accesskeys'],
+    wave_refs           : [],
     wcag_primary_id     : '2.1.4',
     wcag_related_ids    : [],
     target_resources    : ['a', 'input', 'output', 'select', 'textarea'],
@@ -72,7 +72,6 @@ export const shortcutRules = [
       dom_cache.allDomElements.forEach( de => {
         const key = de.accesskey;
         if (key) {
-          debug.log(`[key]: ${key}`);
           domElementsWithAccesskeys.push(de);
           if (accesskeys.includes(key)) {
             duplicateAccesskeys.push(key);
@@ -82,9 +81,6 @@ export const shortcutRules = [
           }
         }
       });
-
-      debug.log(`[         accesskeys]: ${accesskeys.join(' ')}`);
-      debug.log(`[duplicateAccesskeys]: ${duplicateAccesskeys.join(' ')}`);
 
       domElementsWithAccesskeys.forEach( de => {
         if (de.visibility.isVisibleToAT) {

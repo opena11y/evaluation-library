@@ -75,7 +75,7 @@ export const linkRules = [
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['identical-links-same-purpose'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],

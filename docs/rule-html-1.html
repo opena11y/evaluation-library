@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Replace &lt;code&gt;marquee&lt;/code&gt; elements | OpenA11y Evaluation Library 2.3</title>
+    <title>Replace &lt;code&gt;marquee&lt;/code&gt; and &lt;code&gt;blink&lt;/code&gt; elements | OpenA11y Evaluation Library 2.3</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -108,7 +108,7 @@
 
                 
 
-                <h1>Replace <code>marquee</code> elements</h1>
+                <h1>Replace <code>marquee</code> and <code>blink</code> elements</h1>
 
                 
 
@@ -232,7 +232,7 @@
                   
 <tr>
   <th>Definition</th>
-  <td><code>marquee</code> elements must be removed to improve readability of content.</td>
+  <td><code>marquee</code> and <code>blink</code> elements must be removed to improve readability of content.</td>
 </tr>
 
                   
@@ -241,7 +241,9 @@
   <td>
     <ul>
       
-      <li>Automatically moving text cannot be read by many people with visual impairments or by people with learning disabilities that affect reading.</li>
+      <li>Automatically moving or blinking text cannot be read by many people with visual impairments or by people with learning disabilities that affect reading.</li>
+      
+      <li>Blinking content can trigger seizures.</li>
       
     </ul>
   </td>
@@ -312,6 +314,8 @@
     
       <li><a href="https://dequeuniversity.com/rules/axe/4.11/marquee">Ensure &lt;marquee&gt; elements are not used</a> (Serious) </li>
     
+      <li><a href="https://dequeuniversity.com/rules/axe/4.11/blink">Ensure &lt;blink&gt; elements are not used</a> (Serious) </li>
+    
     </ul>
   </td>
   
@@ -335,11 +339,13 @@
   <td>
     <ul>
       
-      <li>Replace the <code>marquee</code> element with a standard HTML element and use CSS techniques to style the content.</li>
+      <li>Replace the <code>marquee</code> or <code>blink</code> element with a standard HTML element and use CSS techniques to style the content.</li>
       
-      <li>By default, when the page loads, the marquee should be paused.</li>
+      <li>By default, when the page loads, the marquee should be paused and blinking content paused on visible.</li>
       
       <li>Use Javascript to provide buttons that start and stop the scrolling of content in the marquee.</li>
+      
+      <li>Use Javascript to provide buttons that start and stop the blinking content in the blinking content.</li>
       
       <li>Provide a means to see all of the content in the marquee at one time.</li>
       
@@ -356,6 +362,10 @@
       <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee">MDN: The Marquee element</a></li>
       
       <li><a href="https://www.w3schools.in/html/marquee-tag">W3C Schools: The Marquee element</a></li>
+      
+      <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/blink_element">MDN: The Blink element</a></li>
+      
+      <li><a href="https://www.w3schools.in/html/blink-tag">W3C Schools: The Blink element</a></li>
       
     </ul>
   </td>

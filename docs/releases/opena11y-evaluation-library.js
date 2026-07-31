@@ -4909,32 +4909,32 @@ const htmlRules$1 = {
 
   HTML_1: {
       ID:                    'HTML 1',
-      DEFINITION:            '@marquee@ elements must be removed to improve readability of content.',
-      SUMMARY:               'Replace @marquee@ elements',
+      DEFINITION:            '@marquee@ and @blink@ elements must be removed to improve readability of content.',
+      SUMMARY:               'Replace @marquee@ and @blink@ elements',
       TARGET_RESOURCES_DESC: '@marquee@ element',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Replace the @marquee@ element with a standard HTML element. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
-        FAIL_P:   'Replace the %N_F @marquee@ elements with standard HTML elements. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
-        HIDDEN_S: 'If the hidden @marquee@ element becomes visible, it must be changed to a standard HTML element.  Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
-        HIDDEN_P: 'If any of the %N_H hidden @marquee@ elements become visible, they must be changed to standard HTML elements. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
-        NOT_APPLICABLE:  'No @marquee@ elements found on the page.'
+        FAIL_S:   'Replace the @marquee@ or @blink@ element with a standard HTML element. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        FAIL_P:   'Replace the %N_F @marquee@ and/or @blink@ elements with standard HTML elements. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        HIDDEN_S: 'If the hidden @marquee@ or @blink@ element becomes visible, it must be changed to a standard HTML element.  Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        HIDDEN_P: 'If any of the %N_H hidden @marquee@ and/or @blink@ elements become visible, they must be changed to standard HTML elements. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
+        NOT_APPLICABLE:  'No @marquee@ or @blink@ elements found on the page.'
       },
       BASE_RESULT_MESSAGES: {
-        ELEMENT_FAIL_1: 'Change the @marquee@ element to a standard HTML element. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.',
-        ELEMENT_HIDDEN_1: '@marquee@ element is hidden, but should be changed to a standard HTML element, in case it becomes visible. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.'
+        ELEMENT_FAIL_1: 'Change the @%1@ element to a standard HTML element. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling or blinking.',
+        ELEMENT_HIDDEN_1: '@%1@ element is hidden, but should be changed to a standard HTML element, in case it becomes visible. Use CSS techniques to style the content, and JavaScript to provide controls that stop and start the scrolling.'
       },
       PURPOSES: [
-        'Automatically moving text cannot be read by many people with visual impairments or by people with learning disabilities that affect reading.'
+        'Automatically moving or blinking text cannot be read by many people with visual impairments or by people with learning disabilities that affect reading.',
+        'Blinking content can trigger seizures.'
       ],
       TECHNIQUES: [
-        'Replace the @marquee@ element with a standard HTML element and use CSS techniques to style the content.',
-        'By default, when the page loads, the marquee should be paused.',
+        'Replace the @marquee@ or @blink@ element with a standard HTML element and use CSS techniques to style the content.',
+        'By default, when the page loads, the marquee should be paused and blinking content paused on visible.',
         'Use Javascript to provide buttons that start and stop the scrolling of content in the marquee.',
+        'Use Javascript to provide buttons that start and stop the blinking content in the blinking content.',
         'Provide a means to see all of the content in the marquee at one time.'
       ],
       MANUAL_CHECKS: [
-        'Verify that when the page loads, the content is not scrolling.',
-        'Verify that there are start and pause buttons that start and stop the scrolling of content.'
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
@@ -4944,6 +4944,14 @@ const htmlRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'W3C Schools: The Marquee element',
           url:   'https://www.w3schools.in/html/marquee-tag'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The Blink element',
+          url:   'https://developer.mozilla.org/en-US/docs/Glossary/blink_element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'W3C Schools: The Blink element',
+          url:   'https://www.w3schools.in/html/blink-tag'
         }
       ]
   }
@@ -41912,7 +41920,7 @@ const audioRules = [
     wave_refs           : [],
     wcag_primary_id     : '1.4.2',
     wcag_related_ids    : [],
-    target_resources    : [],
+    target_resources    : ['video', 'audio', 'embed', 'object'],
     validate            : function (dom_cache, rule_result) {
 
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
@@ -42249,7 +42257,7 @@ const colorRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required        : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['color-contrast-enhanced'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.6',
     wcag_related_ids    : ['1.4.1','1.4.3'],
@@ -43745,7 +43753,7 @@ const headingRules = [
     rule_category       : RULE_CATEGORIES.HEADINGS,
     rule_required       : false,
     first_step          : true,
-    axe_refs            : [],
+    axe_refs            : ['page-has-heading-one'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
@@ -43956,7 +43964,7 @@ const headingRules = [
   rule_category       : RULE_CATEGORIES.HEADINGS,
   rule_required       : false,
   first_step          : false,
-  axe_refs            : [],
+  axe_refs            : ['heading-order'],
   wave_refs           : [],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6', '2.4.10'],
@@ -44187,7 +44195,7 @@ const htmlRules = [
   /**
    * @object HTML_1
    *
-   * @desc Change marquee elements to use accessible techniques
+   * @desc Change marquee and blink elements to use accessible techniques
    */
 
   { rule_id             : 'HTML_1',
@@ -44196,7 +44204,8 @@ const htmlRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['marquee'],
+    axe_refs            : ['marquee',
+                           'blink'],
     wave_refs           : [],
     wcag_primary_id     : '2.3.1',
     wcag_related_ids    : ['2.2.2', '4.1.1'],
@@ -44205,12 +44214,12 @@ const htmlRules = [
 
       dom_cache.allDomElements.forEach( de => {
 
-        if (de.tagName === 'marquee') {
+        if ((de.tagName === 'marquee') || (de.tagName === 'blink')) {
           if (de.visibility.isVisibleToAT) {
-             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
         }
       });
@@ -44246,7 +44255,8 @@ const imageRules = [
   axe_refs            : ['image-alt',
                          'area-alt',
                          'role-img-alt',
-                         'svg-img-alt'],
+                         'svg-img-alt',
+                         'object-alt'],
   wave_refs           : ['alt_missing'],
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
@@ -44718,8 +44728,8 @@ const keyboardRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
-    wave_refs           : ['tabindex'],
+    axe_refs            : ['tabindex'],
+    wave_refs           : [],
     wcag_primary_id     : '2.4.3',
     wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
     target_resources    : ['[tabindex]'],
@@ -44957,7 +44967,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : true,
-    axe_refs            : [],
+    axe_refs            : ['landmark-one-main',
+                           'landmark-no-duplicate-main'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -44978,7 +44989,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['region'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45089,7 +45100,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-no-duplicate-banner'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -45112,7 +45123,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-no-duplicate-banner'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -45134,7 +45145,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-no-duplicate-contentinfo'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -45156,7 +45167,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-no-duplicate-contentinfo'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -45177,7 +45188,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     required            : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-banner-is-top-level'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45232,7 +45243,7 @@ const landmarkRules = [
   /**
    * @object LANDMARK_11
    *
-   * @desc Main landmark must be a top level lanmark
+   * @desc Main landmark must be a top level landmark
    */
   { rule_id             : 'LANDMARK_11',
     last_updated        : '2022-05-06',
@@ -45240,7 +45251,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-main-is-top-level'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45261,7 +45272,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-contentinfo-is-top-level'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45381,7 +45392,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-unique'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45436,7 +45447,7 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['landmark-complementary-is-top-level'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45837,7 +45848,9 @@ const languageRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['html-has-lang',
-                           'html-lang-valid'],
+                           'html-lang-valid',
+                           'html-xml-lang-mismatch',
+                           'valid-lang'],
     wave_refs           : [],
     wcag_primary_id     : '3.1.1',
     wcag_related_ids    : [],
@@ -46153,7 +46166,7 @@ const linkRules = [
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['identical-links-same-purpose'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],
@@ -47082,8 +47095,8 @@ const shortcutRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
-    wave_refs           : ['accesskeys'],
+    axe_refs            : ['accesskeys'],
+    wave_refs           : [],
     wcag_primary_id     : '2.1.4',
     wcag_related_ids    : [],
     target_resources    : ['a', 'input', 'output', 'select', 'textarea'],
@@ -47096,7 +47109,6 @@ const shortcutRules = [
       dom_cache.allDomElements.forEach( de => {
         const key = de.accesskey;
         if (key) {
-          debug$b.log(`[key]: ${key}`);
           domElementsWithAccesskeys.push(de);
           if (accesskeys.includes(key)) {
             duplicateAccesskeys.push(key);
@@ -47106,9 +47118,6 @@ const shortcutRules = [
           }
         }
       });
-
-      debug$b.log(`[         accesskeys]: ${accesskeys.join(' ')}`);
-      debug$b.log(`[duplicateAccesskeys]: ${duplicateAccesskeys.join(' ')}`);
 
       domElementsWithAccesskeys.forEach( de => {
         if (de.visibility.isVisibleToAT) {
@@ -47191,7 +47200,7 @@ const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : [],
+  axe_refs            : ['td-headers-attr'],
   wave_refs           : [],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -47635,7 +47644,7 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['target-size'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.8',
     wcag_related_ids    : [],
@@ -47676,7 +47685,7 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['target-size'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.5',
     wcag_related_ids    : [],
@@ -47716,7 +47725,7 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['target-size'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.8',
     wcag_related_ids    : [],
@@ -47755,7 +47764,7 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['target-size'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.5',
     wcag_related_ids    : [],
@@ -48271,7 +48280,7 @@ const videoRules = [
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
     first_step          : true,
-    axe_refs            : [],
+    axe_refs            : ['video-caption'],
     wave_refs           : [],
     wcag_primary_id     : '1.2.2',
     wcag_related_ids    : ['1.2.4'],
@@ -48369,7 +48378,7 @@ const videoRules = [
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['video-caption'],
     wave_refs           : [],
     wcag_primary_id     : '1.2.4',
     wcag_related_ids    : ['1.2.2'],
@@ -48481,9 +48490,11 @@ const widgetRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : ['aria-command-name',
+                         'aria-dialog-name',
                          'aria-input-field-name',
                          'aria-meter-name',
                          'aria-progressbar-name',
+                         'aria-treeitem-name',
                          'aria-toggle-field-name',
                          'aria-tooltip-name'],
   wave_refs           : [],
@@ -48594,7 +48605,8 @@ const widgetRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : ['aria-deprecated-role',
-                         'aria-roles'],
+                         'aria-roles',
+                         'aria-allowed-role'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],

@@ -23,7 +23,7 @@ export const htmlRules = [
   /**
    * @object HTML_1
    *
-   * @desc Change marquee elements to use accessible techniques
+   * @desc Change marquee and blink elements to use accessible techniques
    */
 
   { rule_id             : 'HTML_1',
@@ -32,7 +32,8 @@ export const htmlRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['marquee'],
+    axe_refs            : ['marquee',
+                           'blink'],
     wave_refs           : [],
     wcag_primary_id     : '2.3.1',
     wcag_related_ids    : ['2.2.2', '4.1.1'],
@@ -41,12 +42,12 @@ export const htmlRules = [
 
       dom_cache.allDomElements.forEach( de => {
 
-        if (de.tagName === 'marquee') {
+        if ((de.tagName === 'marquee') || (de.tagName === 'blink')) {
           if (de.visibility.isVisibleToAT) {
-             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.tagName]);
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
         }
       });
