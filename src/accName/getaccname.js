@@ -446,7 +446,13 @@ function nameFromRefArray (element, property) {
 */
 function nameFromAttributeIdRefs (doc, element, attribute) {
   let value = getAttributeValue(element, attribute);
-  let idRefs, i, refElement, name, names, arr = [];
+  let idRefs;
+  let i;
+  let refElement;
+  let brokenRefs = [];
+  let name;
+  let names;
+  let arr = [];
   let includesAlt = false;
   let includesAriaLabel = false;
   let refNotVisible = false;
@@ -483,6 +489,9 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
         name = addCssGeneratedContent(refElement, name);
         if (name.length) arr.push(name);
       }
+      else {
+        brokenRefs.push(idRefs[i])
+      }
     }
   }
 
@@ -491,7 +500,8 @@ function nameFromAttributeIdRefs (doc, element, attribute) {
              source: attribute,
              includesAlt: includesAlt,
              includesAriaLabel: includesAriaLabel,
-             nameIsNotVisible: refNotVisible
+             nameIsNotVisible: refNotVisible,
+             brokenRefs: brokenRefs
            };
 
   return null;

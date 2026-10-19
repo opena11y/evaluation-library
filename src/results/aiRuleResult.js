@@ -94,7 +94,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
           html_attributes:            de.htmlAttrs,
           aria_attributes:            de.ariaAttrs,
 
-            is_element: true,
+          is_element: true,
           is_page: false,
           is_website: false
         }

@@ -31,7 +31,7 @@ export const liveRules = [
   rule_category       : RULE_CATEGORIES.TIMING_LIVE,
   rule_required       : true,
   axe_refs            : [],
-  wave_refs           : [],
+  wave_refs           : ['aria_live_region'],
   wcag_primary_id     : '4.1.3',
   wcag_related_ids    : [],
   target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],

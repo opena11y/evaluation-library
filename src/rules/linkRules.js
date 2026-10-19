@@ -35,7 +35,8 @@ export const linkRules = [
     first_step          : true,
     axe_refs            : ['link-name',
                            'aria-command-name'],
-    wave_refs           : ['alt_link_missing'],
+    wave_refs           : ['alt_link_missing',
+                           'link_empty'],
     wcag_primary_id     : '2.4.4',
     wcag_related_ids    : ['2.4.9'],
     target_resources    : ['a', 'area', '[role=link]'],
@@ -60,7 +61,7 @@ export const linkRules = [
           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
       });
-    } // end valifdation function
+    } // end validation function
   },
 
   /**
@@ -182,7 +183,7 @@ export const linkRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['alt_redundant'],
     wcag_primary_id     : '2.5.3',
     wcag_related_ids    : [],
     target_resources    : ["a", "[role=link]"],

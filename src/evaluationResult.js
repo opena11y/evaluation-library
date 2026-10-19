@@ -25,6 +25,7 @@ import RuleResult      from './ruleResult.js';
 import {allRules}      from './rules/allRules.js';
 
 import {
+  getAriaVersionLabel,
   getCommonMessage,
   getGuidelineInfo,
   getRuleCategoryInfo,
@@ -191,6 +192,18 @@ export default class EvaluationResult {
 
   }
 
+  get libraryVersion () {
+    return VERSION;
+  }
+
+  get wcagLevel () {
+    return this.level;
+  }
+
+  get evalRuleset () {
+    return this.ruleset;
+  }
+
   get headings () {
     return this._headings;
   }
@@ -264,8 +277,21 @@ export default class EvaluationResult {
    */
 
   getRulesetLabel () {
-    return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);
+    return getRulesetLabel(this.ruleset, this.level);
   }
+
+  /**
+   * @method getAriaVersionLabel
+   *
+   * @desc Get the Aria version information
+   *
+   * @return {String}  String representing the aria version
+   */
+
+  getAriaVersionLabel () {
+    return getAriaVersionLabel(this.ariaVersion);
+  }
+
 
   /**
    * @method getRuleScopeFilterLabel
@@ -352,7 +378,8 @@ export default class EvaluationResult {
    *
    * @desc Updates rule results array with results from a specific set of rules
    *
-   * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
+   * @param  {Array}   ruleList    - Array of rule IDs to include in the evaluation
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
    * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
@@ -402,18 +429,20 @@ export default class EvaluationResult {
    *
    * @desc Updates rule results array with results first step rules
    *
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
    * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
    *                                 on element nodes for use in navigation and highlighting
    */
 
-  runFirstStepRules (ariaVersion='ARIA12',
-                     addDataId=false) {
+  runFirstStepRules (scopeFilter='ALL',
+                    ariaVersion='ARIA12',
+                    addDataId=false) {
     const startTime = new Date();
 
     this.ruleset     = 'FIRSTSTEP';
-    this.scopeFilter = '';
+    this.scopeFilter = validateScopeFilter(scopeFilter);
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
@@ -426,13 +455,18 @@ export default class EvaluationResult {
     allRules.forEach (rule => {
 
       if (rule.isFirstStep) {
-        const ruleResult = new RuleResult(rule);
+        if ((this.scopeFilter === 'ALL') ||
+            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
+            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-        ruleResult.validate(domCache);
-        this._allRuleResults.push(ruleResult);
-        this._ruleResultsSummary.update(ruleResult);
-        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+          const ruleResult = new RuleResult(rule);
+
+          ruleResult.validate(domCache);
+          this._allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
+          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+        }
       }
     });
 
@@ -450,17 +484,17 @@ export default class EvaluationResult {
    *
    * @desc Updates rule results array with results using rules with aXe references
    *
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-   *                                 on element nodes for use in navigation and highlighting
    */
 
-  runAxeRules (ariaVersion='ARIA12') {
+  runAxeRules (scopeFilter='ALL',
+               ariaVersion='ARIA12') {
     const startTime = new Date();
 
     this.ruleset     = 'AXE';
-    this.scopeFilter = '';
+    this.scopeFilter = validateScopeFilter(scopeFilter);
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
@@ -473,13 +507,18 @@ export default class EvaluationResult {
     allRules.forEach (rule => {
 
       if (rule.axe_refs.length) {
-        const ruleResult = new RuleResult(rule);
+        if ((this.scopeFilter === 'ALL') ||
+            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
+            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-        ruleResult.validate(domCache);
-        this._allRuleResults.push(ruleResult);
-        this._ruleResultsSummary.update(ruleResult);
-        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+          const ruleResult = new RuleResult(rule);
+
+          ruleResult.validate(domCache);
+          this._allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
+          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+        }
       }
     });
 
@@ -497,17 +536,17 @@ export default class EvaluationResult {
    *
    * @desc Updates rule results array with results using rules with WAVE/popetech references
    *
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 (values: 'ARIA12' | ARIA13")
-   * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-   *                                 on element nodes for use in navigation and highlighting
    */
 
-  runWaveRules (ariaVersion='ARIA12') {
+  runWaveRules (scopeFilter='ALL',
+                ariaVersion='ARIA12') {
     const startTime = new Date();
 
     this.ruleset     = 'WAVE';
-    this.scopeFilter = '';
+    this.scopeFilter = validateScopeFilter(scopeFilter);
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
@@ -521,12 +560,16 @@ export default class EvaluationResult {
 
       if (rule.wave_refs.length) {
         const ruleResult = new RuleResult(rule);
+        if ((this.scopeFilter === 'ALL') ||
+            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
+            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-        ruleResult.validate(domCache);
-        this._allRuleResults.push(ruleResult);
-        this._ruleResultsSummary.update(ruleResult);
-        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+          ruleResult.validate(domCache);
+          this._allRuleResults.push(ruleResult);
+          this._ruleResultsSummary.update(ruleResult);
+          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+        }
       }
     });
 

@@ -9,10 +9,10 @@ import IdInfo           from './idInfo.js';
 import ImageInfo        from './imageInfo.js';
 import LinkInfo         from './linkInfo.js';
 import ListInfo         from './listInfo.js';
-import MediaInfo         from './mediaInfo.js';
+import MediaInfo        from './mediaInfo.js';
 import StructureInfo    from './structureInfo.js';
 import TableInfo        from './tableInfo.js';
-import TimingInfo        from './timingInfo.js';
+import TimingInfo       from './timingInfo.js';
 import DebugLogging     from '../debug.js';
 
 /* Constants */
@@ -116,7 +116,9 @@ class ParentInfo {
 export default class DOMCache {
   constructor (startingDoc, startingElement, ariaVersion='ARIA12', addDataId=false) {
     if (typeof startingElement !== 'object') {
-      startingElement = startingDoc.body;
+      startingElement = startingDoc.body ?
+                        startingDoc.body :
+                        startingDoc.documentElement;
     }
 
     this.hasTitle = startingDoc.title.trim().length > 0;
@@ -129,6 +131,12 @@ export default class DOMCache {
     }
 
     this.document = startingDoc;
+    this.bodyElem = startingDoc.body ?
+                    startingDoc.body :
+                    startingDoc.documentElement;
+
+    debug.log(`[bodyELem]: ${this.bodyElem}`);
+
     this.ariaVersion = ariaVersion;
 
     this.ordinalPosition = 2;

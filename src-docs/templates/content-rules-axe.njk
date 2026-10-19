@@ -26,7 +26,7 @@
                       <td>
                         <ul>
                           {% for r in r.axe_rules %}
-                            <li><a href="{{r.url | safe}}">{{r.title | safe}}</a> ({{r.impact}}) </li>
+                            <li><a href="{{r.url | safe}}" target="AXE">{{r.title | safe}}</a> ({{r.impact}}) </li>
                           {% endfor %}
                        </ul>
                       </td>
@@ -50,13 +50,17 @@
           <p>{{unmappedAxeRules.length}} of {{allAxeRules.length}} of aXe rules are NOT mapped to OpenA11y rules.</p>
           <table class="table table-striped" aria-labelledby="axe-rules">
             <thead>
-              <th>aXe Rule</th>
+              <th>aXe Reference</th>
+              <th>Description</th>
               <th>Type</th>
               <th>Impact</th>
             </thead>
             <tbody>
             {% for r in unmappedAxeRules %}
               <tr>
+                <td>
+                  {{r.ref}}
+                </td>
                 <td>
                   <a href="{{r.url | safe}}">{{r.title | safe}}</a>
                 </td>

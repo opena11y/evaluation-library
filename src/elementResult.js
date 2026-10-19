@@ -42,13 +42,13 @@ debug.flag = false;
 
 export default class ElementResult extends BaseResult {
   constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
-    super(rule_result,
+    super(domElement,
+          rule_result,
           result_value,
           message_id,
           message_arguments,
           domElement.getIdentifier());
 
-    this.domElement = domElement;
     this.result_type    = RESULT_TYPE.ELEMENT;
     this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
 

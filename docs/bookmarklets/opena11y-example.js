@@ -150,7 +150,7 @@
   /* Constants */
   const debug$19 = new DebugLogging('constants', false);
 
-  const VERSION = '2.3';
+  const VERSION = '3.0';
 
   /**
    * @constant RULESET
@@ -1406,7 +1406,8 @@
   }
 
   const common = {
-    aria13: ' (ARIA 1.3)',
+    aria12: 'ARIA 1.2',
+    aria13: 'ARIA 1.3',
     level: ['undefined', 'AAA', 'AA', 'undefined', 'A'],
     baseResult: ['undefined','P','H','MC','W','V'],
     baseResultLong: ['undefined','Pass','Hidden','Manual Check','Warning','Violation'],
@@ -3851,25 +3852,29 @@
         SUMMARY:    '@label@ must reference control',
         TARGET_RESOURCES_DESC: '@label@ elements',
         RULE_RESULT_MESSAGES: {
-          FAIL_S:   'Change the @label@ element to use the @for@ attribute to label its form control.',
-          FAIL_P:   'Change the %N_F @label@ elements to use the @for@ attribute to label their respective form controls.',
+          FAIL_S:   'Change the @label[for]@ element to use a valid @id@ reference to a form control or remove a @label[for]@ element if there is more than one @label[for]@ element referencing a control.',
+          FAIL_P:   'Change the %N_F @label[for]@ elements to use a valid #id@ reference to a form control or remove a @label[for]@ element if there is more than one @label[for]@ element referencing a control.',
           MANUAL_CHECK_S: 'There is one form control being labeled by more than one labeling technique.',
           MANUAL_CHECK_P: 'There are %N_MC form controls being labeled by more than one labeling technique.',
-          HIDDEN_S: 'The @label@ element that is hidden was not evaluated.',
-          HIDDEN_P: 'The %N_H @label@ elements that are hidden were not evaluated.',
-          NOT_APPLICABLE: 'No visible @label@ elements with invalid @for@ references on this page.'
+          HIDDEN_S: 'The @label[for]@ element that is hidden was not evaluated.',
+          HIDDEN_P: 'The %N_H @label[for]@ elements that are hidden were not evaluated.',
+          NOT_APPLICABLE: 'No visible @label[for]@ elements with invalid @for@ references on this page.'
         },
         BASE_RESULT_MESSAGES: {
           ELEMENT_PASS_1: '@label[for=%1]@ references a form control.',
           ELEMENT_FAIL_1: 'Change the @label@ element with the @for@ attribute value \'%1\' to reference a form control.',
-          ELEMENT_MC_1:   'The @label[for=%1]@ is being ingored as a label because the form control is being labeled with @aria-labelledby@ or @aria-label@ attribute.',
+          ELEMENT_FAIL_2: 'There is more than one @label[for="%1"]@ element referencing a form control. The form control should only be referenced by one @label[for=%2]@ element.',
+          ELEMENT_MC_1:   'The @label[for=%1]@ is being ignored as a label because the form control is being labeled with @aria-labelledby@ or @aria-label@ attribute.  Verify the ARIA labeling technique is an improvement over the visible label.',
           ELEMENT_HIDDEN_1: 'The @label@ element was not evaluated because it is hidden from assistive technologies.'
         },
         PURPOSES: [
-          '@label@ elements are useful for accessibility only when they reference form controls.  The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.'
+          '@label[for]@ elements are useful for accessibility only when they reference form controls.',
+          'Use only one @label[for]@ element per control, using more than one @label[for]@ element per control is not supported consistently between browsers.',
+          'The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.'
         ],
         TECHNIQUES: [
-          'For a @label@ element to properly reference a form control, ensure that the @for@ attribute value on the @label@ element exactly matches the @id@ attribute value on the form control.'
+          'For a @label[for]@ element to properly reference a form control, ensure that the @for@ attribute value on the @label@ element exactly matches the @id@ attribute value on the form control.',
+          'Define only one @label[for]@ element per form control.'
         ],
         MANUAL_CHECKS: [
         ],
@@ -11616,6 +11621,27 @@
   }
 
   /**
+   * @function getAriaVersionLabel
+   *
+   * @desc Returns a localize string describing the aria version
+   *
+   * @param {String} ariaVersionId  - Used to identify the ruleset
+   *
+   * @return {String}  see @desc
+   */
+
+  function getAriaVersionLabel(ariaVersionId) {
+    switch (ariaVersionId) {
+      case 'ARIA12':
+        return messages[locale].common.aria12;
+      case 'ARIA13':
+        return messages[locale].common.aria13;
+    }
+    return '??';
+  }
+
+
+  /**
    * @function getRulesetLabel
    *
    * @desc Returns a localize string describing the options
@@ -11623,20 +11649,11 @@
    *
    * @param {String} rulesetId      - Used to identify the ruleset
    * @param {String} level          - Used to identify the WCAG level
-   * @param {String} ariaVersionId  - Used to identify the ARIA version
    *
    * @return {String}  see @desc
    */
 
-  function getRulesetLabel(rulesetId, level, ariaVersionId) {
-
-      function addAria () {
-        switch (ariaVersionId) {
-          case 'ARIA13':
-            return messages[locale].common.aria13;
-        }
-        return '';
-      }
+  function getRulesetLabel(rulesetId, level) {
 
       function addLevel () {
         switch (level) {
@@ -11657,27 +11674,27 @@
       switch (rulesetId) {
 
         case 'AXE':
-          label = messages[locale].common.rulesetAxe + addAria();
+          label = messages[locale].common.rulesetAxe;
           break;
 
         case 'FIRSTSTEP':
-          label = messages[locale].common.rulesetFirstStep + addAria();
+          label = messages[locale].common.rulesetFirstStep;
           break;
 
         case 'WAVE':
-          label = messages[locale].common.rulesetWave + addAria();
+          label = messages[locale].common.rulesetWave ;
           break;
 
         case 'WCAG22':
-          label = messages[locale].common.rulesetWCAG22 + addLevel() + addAria();
+          label = messages[locale].common.rulesetWCAG22 + addLevel();
           break;
 
         case 'WCAG21':
-          label = messages[locale].common.rulesetWCAG21 + addLevel() + addAria();
+          label = messages[locale].common.rulesetWCAG21 + addLevel();
           break;
 
         default:
-          label = messages[locale].common.rulesetWCAG20 + addLevel() + addAria();
+          label = messages[locale].common.rulesetWCAG20 + addLevel();
           break;
       }
 
@@ -32164,7 +32181,7 @@
       },
       abbr: {
         tagName: 'abbr',
-        defaultRole: '',
+        defaultRole: 'generic',
         noRoleAllowed: false,
         anyRoleAllowed: true,
         id: 'abbr'
@@ -33115,21 +33132,21 @@
       },
       kbd: {
         tagName: 'kbd',
-        defaultRole: '',
+        defaultRole: 'generic',
         noRoleAllowed: false,
         anyRoleAllowed: true,
         id: 'kbd'
       },
       label: {
         tagName: 'label',
-        defaultRole: '',
+        defaultRole: 'generic',
         noRoleAllowed: true,
         anyRoleAllowed: false,
         id: 'label'
       },
       legend: {
         tagName: 'legend',
-        defaultRole: '',
+        defaultRole: 'generic',
         noRoleAllowed: true,
         anyRoleAllowed: false,
         id: 'legend'
@@ -33167,14 +33184,14 @@
       },
       map: {
         tagName: 'map',
-        defaultRole: '',
+        defaultRole: 'generic',
         noRoleAllowed: true,
         anyRoleAllowed: false,
         id: 'map'
       },
       mark: {
         tagName: 'mark',
-        defaultRole: '',
+        defaultRole: 'genric',
         noRoleAllowed: false,
         anyRoleAllowed: true,
         id: 'mark'
@@ -34720,21 +34737,19 @@
     let label, name, inclAlt, inclAriaLabel, notVisible;
     // label [for=id]
     if (element.id) {
-      try {
-        label = doc.querySelector('[for="' + element.id + '"]');
-        if (label) {
-          [name, inclAlt, inclAriaLabel, notVisible] = label.hasAttribute('aria-label') ?
-                 [label.getAttribute('aria-label'), false, true, true] :
-                 getElementContents(label, element);
-          if (name.length) return { name: normalize(name),
-                                    source: 'label reference',
-                                    includeAlt: inclAlt,
-                                    includeAriaLabel: inclAriaLabel,
-                                    nameIsNotVisibile: notVisible
-                                   };
-        }
-      } catch (error) {
-        debug$Y.log(`[nameFromLabelElement][error]: ${error}`);
+      const labels = doc.querySelectorAll('label[for="' + element.id + '"]');
+      if (labels && labels.length) {
+        label = labels[0];
+        [name, inclAlt, inclAriaLabel, notVisible] = label.hasAttribute('aria-label') ?
+               [label.getAttribute('aria-label'), false, true, true] :
+               getElementContents(label, element);
+        if (name.length) return { name: normalize(name),
+                                  source: 'label reference',
+                                  includeAlt: inclAlt,
+                                  includeAriaLabel: inclAriaLabel,
+                                  nameIsNotVisibile: notVisible,
+                                  labelCount: labels.length
+                                 };
       }
     }
 
@@ -35552,7 +35567,13 @@
   */
   function nameFromAttributeIdRefs (doc, element, attribute) {
     let value = getAttributeValue(element, attribute);
-    let idRefs, i, refElement, name, names, arr = [];
+    let idRefs;
+    let i;
+    let refElement;
+    let brokenRefs = [];
+    let name;
+    let names;
+    let arr = [];
     let includesAlt = false;
     let includesAriaLabel = false;
     let refNotVisible = false;
@@ -35589,6 +35610,9 @@
           name = addCssGeneratedContent(refElement, name);
           if (name.length) arr.push(name);
         }
+        else {
+          brokenRefs.push(idRefs[i]);
+        }
       }
     }
 
@@ -35597,7 +35621,8 @@
                source: attribute,
                includesAlt: includesAlt,
                includesAriaLabel: includesAriaLabel,
-               nameIsNotVisible: refNotVisible
+               nameIsNotVisible: refNotVisible,
+               brokenRefs: brokenRefs
              };
 
     return null;
@@ -35671,7 +35696,7 @@
       const accNameDoc       = parentInfo.useParentDocForName ?
                                parentInfo.parentDocument :
                                parentInfo.document;
-
+      this.doc              = parentInfo.document ? parentInfo.document : window.document;
       this.ordinalPosition  = ordinalPosition;
       this.parentInfo       = parentInfo;
       this.node             = elementNode;
@@ -35839,6 +35864,25 @@
 
     }
 
+    /**
+     * @method getBodyElement
+     *
+     * @desc Returns the DOM node to attach highlighting element for this DOM element
+     *
+     * @return {String} see description
+     */
+
+    getBodyElement () {
+      let bodyElem = this.doc.body ?
+                       this.doc.body :
+                       this.doc.documentElement;
+
+      if (!bodyElem) {
+        bodyElem = window.document;
+      }
+
+      return bodyElem;
+    }
 
     /**
      * @method isDomText
@@ -37976,7 +38020,9 @@
   class DOMCache {
     constructor (startingDoc, startingElement, ariaVersion='ARIA12', addDataId=false) {
       if (typeof startingElement !== 'object') {
-        startingElement = startingDoc.body;
+        startingElement = startingDoc.body ?
+                          startingDoc.body :
+                          startingDoc.documentElement;
       }
 
       this.hasTitle = startingDoc.title.trim().length > 0;
@@ -37989,6 +38035,12 @@
       }
 
       this.document = startingDoc;
+      this.bodyElem = startingDoc.body ?
+                      startingDoc.body :
+                      startingDoc.documentElement;
+
+      debug$L.log(`[bodyELem]: ${this.bodyElem}`);
+
       this.ariaVersion = ariaVersion;
 
       this.ordinalPosition = 2;
@@ -39412,6 +39464,7 @@
       const r = axeInfo.rules[ref];
       if (r) {
         const info = {};
+        info.ref    = ref;
         info.title  = convert ? convertRuleTitle(r.title) : r.title;
         info.url    = r.url;
         info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
@@ -40212,6 +40265,7 @@
       const r = waveInfo.rules[ref];
       if (r) {
         const info = {};
+        info.ref    = ref;
         info.title  = convert ? convertRuleTitle(r.title) : r.title;
         info.url    = r.url;
         info.type   = r.error ? 'Error' : r.contrast ? 'Contrast' : 'Alert';
@@ -40238,6 +40292,7 @@
    * @desc Constructor for an object that contains a the results of
    *          the evaluation of a rule on a element or page
    *
+   * @param  {Object}       domElement   - DomElement reference to element information used by this rule result
    * @param  {ResultRule}   ruleResult   - reference to the rule result object
    * @param  {Number}       resultValue  - Constant representing result value of the evaluation result
    * @param  {String}       msgId        - String reference to the message string in the NLS file
@@ -40254,10 +40309,11 @@
    */
 
   class BaseResult {
-    constructor (ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
+    constructor (domElement, ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
 
       const msg = ruleResult.rule.base_result_msgs[msgId];
 
+      this.domElement = domElement;
       this.result_type       = RESULT_TYPE.BASE;
       this.rule_result       = ruleResult;
       this.result_value      = resultValue;
@@ -40317,6 +40373,20 @@
 
     get isWebsiteResult () {
       return false;
+    }
+
+    /**
+     * @method getBodyElement
+     *
+     * @desc Returns the DOM node to attach highlighting element
+     *
+     * @return {String} see description
+     */
+
+    getBodyElement () {
+      const bodyElem = this.domElement.getBodyElement();
+      debug$G.log(`[getBodyElement][bodyElem]: ${bodyElem}`);
+      return bodyElem;
     }
 
     /**
@@ -40491,13 +40561,13 @@
 
   class ElementResult extends BaseResult {
     constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
-      super(rule_result,
+      super(domElement,
+            rule_result,
             result_value,
             message_id,
             message_arguments,
             domElement.getIdentifier());
 
-      this.domElement = domElement;
       this.result_type    = RESULT_TYPE.ELEMENT;
       this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
 
@@ -41049,7 +41119,7 @@
    *
    * @param  {ResultRule}   rule_result         - reference to the rule result object
    * @param  {Number}       result_value        - Constant representing result value of the evaluation result
-   * @param  {Object}       domCache            - DomCache reference to element information used by this rule result
+   * @param  {Object}       domElement          - DomElement of the body element of the document
    * @param  {String}       message_id          - String reference to the message string in the NLS file
    * @param  {Array}        message_arguments   - Array  array of values used in the message string
    * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -41068,10 +41138,14 @@
    */
 
   class PageResult extends BaseResult {
-    constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
-      super(rule_result, result_value, message_id, message_arguments, 'page');
+    constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
+      super(domElement,
+            rule_result,
+            result_value,
+            message_id,
+            message_arguments,
+            'page');
 
-      this.domCache     = domCache;
       this.result_type  = RESULT_TYPE.PAGE;
 
       this.resultId = 'pr-' + resultIndex;
@@ -41123,7 +41197,7 @@
 
   /* Constants */
 
-  const debug$C = new DebugLogging('PageResult', false);
+  const debug$C = new DebugLogging('websiteResult', false);
   debug$C.flag = false;
 
   /**
@@ -41134,7 +41208,7 @@
    *
    * @param  {ResultRule}   rule_result         - reference to the rule result object
    * @param  {Number}       result_value        - Constant representing result value of the evaluation result
-   * @param  {Object}       domCache            - DomCache reference to element information used by this rule result
+   * @param  {Object}       domElement          - DomElement of the body element of the document
    * @param  {String}       message_id          - String reference to the message string in the NLS file
    * @param  {Array}        message_arguments   - Array  array of values used in the message string
    * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -41153,10 +41227,14 @@
    */
 
   class WebsiteResult extends BaseResult {
-    constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
-      super(rule_result, result_value, message_id, message_arguments, 'website');
+    constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
+      super(domElement,
+            rule_result,
+            result_value,
+            message_id,
+            message_arguments,
+            'website');
 
-      this.domCache     = domCache;
       this.result_type  = RESULT_TYPE.WEBSITE;
 
       this.resultId = 'wr-' + resultIndex;
@@ -41859,7 +41937,8 @@
       rule_required       : true,
       first_step          : true,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['audio_video',
+                             'html5_video_audio'],
       wcag_primary_id     : '1.2.1',
       wcag_related_ids    : ['1.2.2', '1.2.4', '1.2.9'],
       target_resources    : ['audio', 'embed', 'object', 'track'],
@@ -42000,7 +42079,9 @@
       first_step          : true,
       axe_refs            : ['skip-link',
                              'bypass'],
-      wave_refs           : [],
+      wave_refs           : ['link_skip_broken',
+                             'link_skip',
+                             'link_skip_target'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['2.4.4'],
       target_resources    : ['a'],
@@ -42210,7 +42291,7 @@
       rule_required       : true,
       first_step          : true,
       axe_refs            : ['color-contrast'],
-      wave_refs           : [],
+      wave_refs           : ['contrast'],
       wcag_primary_id     : '1.4.3',
       wcag_related_ids    : ['1.4.1','1.4.6'],
       target_resources    : ['text content'],
@@ -42653,8 +42734,8 @@
       rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
       rule_required       : true,
       first_step          : false,
-      axe_refs            : [],
-      wave_refs           : [],
+      axe_refs            : ['frame-title'],
+      wave_refs           : ['iframe'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : [],
       target_resources    : ['iframe'],
@@ -42769,7 +42850,9 @@
     first_step          : true,
     axe_refs            : ['label',
                            'select-name'],
-    wave_refs           : ['label_missing'],
+    wave_refs           : ['label_missing',
+                           'label_title',
+                           'select_missing_label'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
@@ -42814,7 +42897,8 @@
     rule_required       : true,
     first_step          : true,
     axe_refs            : ['input-image-alt'],
-    wave_refs           : [],
+    wave_refs           : ['alt_input_missing',
+                           'label_title'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['input[type="image"]'],
@@ -42855,7 +42939,9 @@
     rule_required       : true,
     first_step          : true,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['fieldset_missing',
+                           'legend_missing',
+                           'fieldset'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['input[type="radio"]'],
@@ -42909,7 +42995,8 @@
     first_step          : false,
     axe_refs            : ['button-name',
                            'summary-name'],
-    wave_refs           : [],
+    wave_refs           : ['button_empty',
+                           'label_title'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['button'],
@@ -43027,12 +43114,39 @@
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
-    wave_refs           : [],
+    axe_refs            : ['form-field-multiple-labels'],
+    wave_refs           : ['label_orphaned',
+                           'label_multiple'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['label'],
     validate            : function (dom_cache, rule_result) {
+
+      const forRefs = [];
+      const multipleForRefs = [];
+
+      // Identify label for values that reference the same form control
+      dom_cache.controlInfo.allControlElements.forEach(ce => {
+        if (ce.isLabel && ce.labelForAttr) {
+          if (forRefs.includes(ce.labelForAttr)) {
+            multipleForRefs.push(ce.labelForAttr);
+          }
+          else {
+            forRefs.push(ce.labelForAttr);
+          }
+        }
+      });
+
+      // Mark labels that reference the same form control
+      dom_cache.controlInfo.allControlElements.forEach(ce => {
+        if (ce.isLabel && ce.labelForAttr) {
+          if (multipleForRefs.includes(ce.labelForAttr)) {
+            ce.isLabelForAttrValid  = false;
+            ce.multipleForRefs = true;
+          }
+        }
+      });
+
       dom_cache.controlInfo.allControlElements.forEach(ce => {
         const de = ce.domElement;
         if (ce.isLabel && ce.labelForAttr) {
@@ -43046,7 +43160,11 @@
               }
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.labelForAttr]);
+              if (ce.multipleForRefs) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [ce.labelForAttr, ce.labelForAttr]);
+              } else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.labelForAttr]);
+              }
             }
           } else {
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
@@ -43069,7 +43187,7 @@
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['label_empty'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['label', 'legend'],
@@ -43757,7 +43875,7 @@
       rule_required       : false,
       first_step          : true,
       axe_refs            : ['page-has-heading-one'],
-      wave_refs           : [],
+      wave_refs           : ['h1_missing'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
       target_resources    : ['h1'],
@@ -43857,7 +43975,12 @@
     rule_required       : false,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['h1',
+                           'h2',
+                           'h3',
+                           'h4',
+                           'h5',
+                           'h6'],
     wcag_primary_id     : '2.4.6',
     wcag_related_ids    : ['1.3.1', '2.4.10'],
     target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
@@ -43968,7 +44091,8 @@
     rule_required       : false,
     first_step          : false,
     axe_refs            : ['heading-order'],
-    wave_refs           : [],
+    wave_refs           : ['heading_missing',
+                           'heading_skipped'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.6', '2.4.10'],
     target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
@@ -44036,7 +44160,7 @@
     rule_required       : false,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['heading_empty'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.6', '2.4.10'],
     target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
@@ -44209,7 +44333,8 @@
       first_step          : false,
       axe_refs            : ['marquee',
                              'blink'],
-      wave_refs           : [],
+      wave_refs           : ['marquee',
+                             'blink'],
       wcag_primary_id     : '2.3.1',
       wcag_related_ids    : ['2.2.2', '4.1.1'],
       target_resources    : ['marquee'],
@@ -44260,7 +44385,10 @@
                            'role-img-alt',
                            'svg-img-alt',
                            'object-alt'],
-    wave_refs           : ['alt_missing'],
+    wave_refs           : ['alt_missing',
+                          'alt_spacer_missing',
+                          'alt_area_missing',
+                          'image_title'],
     wcag_primary_id     : '1.1.1',
     wcag_related_ids    : [],
     target_resources    : ['img', 'area', '[role="img"]'],
@@ -44344,7 +44472,7 @@
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['alt_suspicious'],
     wcag_primary_id     : '1.1.1',
     wcag_related_ids    : [],
     target_resources    : ['img', '[role="img"]'],
@@ -44380,7 +44508,7 @@
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['alt_long'],
     wcag_primary_id     : '1.1.1',
     wcag_related_ids    : [],
     target_resources    : ['img', 'area'],
@@ -44594,7 +44722,9 @@
       rule_required       : true,
       first_step          : true,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['aria_menu',
+                             'aria_menu_broken',
+                             'aria_button'],
       wcag_primary_id     : '2.1.1',
       wcag_related_ids    : ['4.1.2'],
       target_resources    : ['widgets'],
@@ -44627,7 +44757,7 @@
       rule_required       : true,
       first_step          : true,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['aria_tabindex'],
       wcag_primary_id     : '2.4.3',
       wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
       target_resources    : ['links', 'controls', 'widgets'],
@@ -44732,7 +44862,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['tabindex'],
-      wave_refs           : [],
+      wave_refs           : ['tabindex'],
       wcag_primary_id     : '2.4.3',
       wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
       target_resources    : ['[tabindex]'],
@@ -44917,8 +45047,8 @@
       rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
       rule_required       : true,
       first_step          : false,
-      axe_refs            : [],
-      wave_refs           : ['presentation-role-conflict'],
+      axe_refs            : ['presentation-role-conflict'],
+      wave_refs           : ['aria_tabindex'],
       wcag_primary_id     : '2.4.3',
       wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
       target_resources    : ['[tabindex]'],
@@ -44972,7 +45102,7 @@
       first_step          : true,
       axe_refs            : ['landmark-one-main',
                              'landmark-no-duplicate-main'],
-      wave_refs           : [],
+      wave_refs           : ['region_missing'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['main', '[role="main"]'],
@@ -45037,7 +45167,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['region_missing'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['nav', '[role="navigation"]'],
@@ -45104,7 +45234,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-no-duplicate-banner'],
-      wave_refs           : [],
+      wave_refs           : ['region_missing'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['header', '[role="banner"]'],
@@ -45854,7 +45984,8 @@
                              'html-lang-valid',
                              'html-xml-lang-mismatch',
                              'valid-lang'],
-      wave_refs           : [],
+      wave_refs           : ['language_missing',
+                             'lang'],
       wcag_primary_id     : '3.1.1',
       wcag_related_ids    : [],
       target_resources    : ['html'],
@@ -45953,7 +46084,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['table_layout'],
       wcag_primary_id     : '1.3.2',
       wcag_related_ids    : ['1.3.1'],
       target_resources    : ['Page', 'table'],
@@ -46129,7 +46260,8 @@
       first_step          : true,
       axe_refs            : ['link-name',
                              'aria-command-name'],
-      wave_refs           : ['alt_link_missing'],
+      wave_refs           : ['alt_link_missing',
+                             'link_empty'],
       wcag_primary_id     : '2.4.4',
       wcag_related_ids    : ['2.4.9'],
       target_resources    : ['a', 'area', '[role=link]'],
@@ -46154,7 +46286,7 @@
             rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
           }
         });
-      } // end valifdation function
+      } // end validation function
     },
 
     /**
@@ -46276,7 +46408,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['alt_redundant'],
       wcag_primary_id     : '2.5.3',
       wcag_related_ids    : [],
       target_resources    : ["a", "[role=link]"],
@@ -46348,7 +46480,9 @@
       first_step          : false,
       axe_refs            : ['list',
                              'listitem'],
-      wave_refs           : [],
+      wave_refs           : ['ol',
+                             'ul',
+                             'dl'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : [],
       target_resources    : ['ul', 'ol', 'li', '[role="list"]', '[role="listitem"]'],
@@ -46452,7 +46586,7 @@
     rule_category       : RULE_CATEGORIES.TIMING_LIVE,
     rule_required       : true,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['aria_live_region'],
     wcag_primary_id     : '4.1.3',
     wcag_related_ids    : [],
     target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
@@ -47099,7 +47233,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['accesskeys'],
-      wave_refs           : [],
+      wave_refs           : ['accesskey'],
       wcag_primary_id     : '2.1.4',
       wcag_related_ids    : [],
       target_resources    : ['a', 'input', 'output', 'select', 'textarea'],
@@ -47272,7 +47406,7 @@
     rule_required       : true,
     first_step          : true,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['table_caption_possible'],
     wcag_primary_id     : '2.4.6',
     wcag_related_ids    : ['1.3.1'],
     target_resources    : ['table', 'caption'],
@@ -47417,7 +47551,7 @@
     rule_required       : true,
     first_step          : true,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['table_layout'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.6'],
     target_resources    : ['table'],
@@ -48061,7 +48195,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['document-title'],
-      wave_refs           : [],
+      wave_refs           : ['title_invalid'],
       wcag_primary_id     : '2.4.2',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['Page', 'title'],
@@ -48217,7 +48351,8 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['audio_video',
+                             'html5_video_audio'],
       wcag_primary_id     : '1.2.1',
       wcag_related_ids    : ['1.2.2', '1.2.4'],
       target_resources    : ['embed', 'object', 'track', 'video'],
@@ -48284,7 +48419,8 @@
       rule_required       : true,
       first_step          : true,
       axe_refs            : ['video-caption'],
-      wave_refs           : [],
+      wave_refs           : ['audio_video',
+                             'html5_video_audio'],
       wcag_primary_id     : '1.2.2',
       wcag_related_ids    : ['1.2.4'],
       target_resources    : ['embed', 'object', 'track', 'video'],
@@ -48333,7 +48469,8 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['audio_video',
+                             'html5_video_audio'],
       wcag_primary_id     : '1.2.3',
       wcag_related_ids    : ['1.2.5'],
       target_resources    : ['embed', 'object', 'track', 'video'],
@@ -48382,7 +48519,8 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['video-caption'],
-      wave_refs           : [],
+      wave_refs           : ['audio_video',
+                             'html5_video_audio'],
       wcag_primary_id     : '1.2.4',
       wcag_related_ids    : ['1.2.2'],
       target_resources    : ['embed', 'object', 'track', 'video'],
@@ -48500,7 +48638,7 @@
                            'aria-treeitem-name',
                            'aria-toggle-field-name',
                            'aria-tooltip-name'],
-    wave_refs           : [],
+    wave_refs           : ['aria_label'],
     wcag_primary_id     : '4.1.2',
     wcag_related_ids    : ['1.3.1', '3.3.2'],
     target_resources    : ['ARIA Widget roles'],
@@ -48510,7 +48648,11 @@
         const ai = de.ariaInfo;
         // There are other rules that check for accessible name for labelable controls, landmarks, headings and links
         // Ignore option role, since web developers are very sloppy about giving them content before they are made visible
-        if (ai.isWidget && !de.isButton && !de.isLabelable && !de.isLink && (de.role !== 'option')) {
+        if (ai.isWidget &&
+            !de.isButton &&
+            !de.isLabelable &&
+            !de.isLink &&
+            !(de.role === 'option')) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name) {
               rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role, de.accName.name]);
@@ -48610,7 +48752,7 @@
     axe_refs            : ['aria-deprecated-role',
                            'aria-roles',
                            'aria-allowed-role'],
-    wave_refs           : [],
+    wave_refs           : ['aria'],
     wcag_primary_id     : '4.1.2',
     wcag_related_ids    : ['1.3.1', '3.3.2'],
     target_resources    : ['[role]'],
@@ -48682,7 +48824,7 @@
     first_step          : true,
     axe_refs            : ['aria-conditional-attr',
                            'aria-valid-attr-value'],
-    wave_refs           : [],
+    wave_refs           : ['aria'],
     wcag_primary_id     : '4.1.2',
     wcag_related_ids    : ['1.3.1', '3.3.2'],
     target_resources    : ['[aria-atomic]',
@@ -48798,7 +48940,7 @@
     rule_required       : true,
     first_step          : true,
     axe_refs            : ['aria-valid-attr'],
-    wave_refs           : [],
+    wave_refs           : ['aria'],
     wcag_primary_id     : '4.1.2',
     wcag_related_ids    : ['1.3.1', '3.3.2'],
     target_resources    : ['[aria-atomic]',
@@ -49299,6 +49441,8 @@
       dom_cache.allDomElements.forEach( de => {
         if (!de.ariaInfo.isDPUBRole &&
             de.ariaInfo.isNameProhibited &&
+            de.accName.source !== 'title' &&
+            de.accName.source !== 'contents' &&
             de.accName.name) {
 
           if (de.visibility.isVisibleToAT) {
@@ -49484,7 +49628,7 @@
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['aria_haspopup'],
     wcag_primary_id     : '4.1.2',
     wcag_related_ids    : ['1.3.1', '2.1.1'],
     target_resources    : ["aria-haspopup"],
@@ -50235,6 +50379,18 @@
 
     }
 
+    get libraryVersion () {
+      return VERSION;
+    }
+
+    get wcagLevel () {
+      return this.level;
+    }
+
+    get evalRuleset () {
+      return this.ruleset;
+    }
+
     get headings () {
       return this._headings;
     }
@@ -50308,8 +50464,21 @@
      */
 
     getRulesetLabel () {
-      return getRulesetLabel(this.ruleset, this.level, this.ariaVersion);
+      return getRulesetLabel(this.ruleset, this.level);
     }
+
+    /**
+     * @method getAriaVersionLabel
+     *
+     * @desc Get the Aria version information
+     *
+     * @return {String}  String representing the aria version
+     */
+
+    getAriaVersionLabel () {
+      return getAriaVersionLabel(this.ariaVersion);
+    }
+
 
     /**
      * @method getRuleScopeFilterLabel
@@ -50396,7 +50565,8 @@
      *
      * @desc Updates rule results array with results from a specific set of rules
      *
-     * @param  {Array}   ruleList  - Array of rule IDs to include in the evaluation
+     * @param  {Array}   ruleList    - Array of rule IDs to include in the evaluation
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 (values: 'ARIA12' | ARIA13")
      * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
@@ -50446,18 +50616,20 @@
      *
      * @desc Updates rule results array with results first step rules
      *
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 (values: 'ARIA12' | ARIA13")
      * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
      *                                 on element nodes for use in navigation and highlighting
      */
 
-    runFirstStepRules (ariaVersion='ARIA12',
-                       addDataId=false) {
+    runFirstStepRules (scopeFilter='ALL',
+                      ariaVersion='ARIA12',
+                      addDataId=false) {
       const startTime = new Date();
 
       this.ruleset     = 'FIRSTSTEP';
-      this.scopeFilter = '';
+      this.scopeFilter = validateScopeFilter(scopeFilter);
       this.ariaVersion = ariaVersion;
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
@@ -50470,13 +50642,18 @@
       allRules.forEach (rule => {
 
         if (rule.isFirstStep) {
-          const ruleResult = new RuleResult(rule);
+          if ((this.scopeFilter === 'ALL') ||
+              ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
+              ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-          ruleResult.validate(domCache);
-          this._allRuleResults.push(ruleResult);
-          this._ruleResultsSummary.update(ruleResult);
-          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+            const ruleResult = new RuleResult(rule);
+
+            ruleResult.validate(domCache);
+            this._allRuleResults.push(ruleResult);
+            this._ruleResultsSummary.update(ruleResult);
+            this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+            this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+          }
         }
       });
 
@@ -50494,17 +50671,17 @@
      *
      * @desc Updates rule results array with results using rules with aXe references
      *
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 (values: 'ARIA12' | ARIA13")
-     * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-     *                                 on element nodes for use in navigation and highlighting
      */
 
-    runAxeRules (ariaVersion='ARIA12') {
+    runAxeRules (scopeFilter='ALL',
+                 ariaVersion='ARIA12') {
       const startTime = new Date();
 
       this.ruleset     = 'AXE';
-      this.scopeFilter = '';
+      this.scopeFilter = validateScopeFilter(scopeFilter);
       this.ariaVersion = ariaVersion;
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
@@ -50517,13 +50694,18 @@
       allRules.forEach (rule => {
 
         if (rule.axe_refs.length) {
-          const ruleResult = new RuleResult(rule);
+          if ((this.scopeFilter === 'ALL') ||
+              ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
+              ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-          ruleResult.validate(domCache);
-          this._allRuleResults.push(ruleResult);
-          this._ruleResultsSummary.update(ruleResult);
-          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+            const ruleResult = new RuleResult(rule);
+
+            ruleResult.validate(domCache);
+            this._allRuleResults.push(ruleResult);
+            this._ruleResultsSummary.update(ruleResult);
+            this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+            this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+          }
         }
       });
 
@@ -50541,17 +50723,17 @@
      *
      * @desc Updates rule results array with results using rules with WAVE/popetech references
      *
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 (values: 'ARIA12' | ARIA13")
-     * @param  {Boolean} addDataId   - If true, create a data-opena11y-oridinal-position attribute
-     *                                 on element nodes for use in navigation and highlighting
      */
 
-    runWaveRules (ariaVersion='ARIA12') {
+    runWaveRules (scopeFilter='ALL',
+                  ariaVersion='ARIA12') {
       const startTime = new Date();
 
       this.ruleset     = 'WAVE';
-      this.scopeFilter = '';
+      this.scopeFilter = validateScopeFilter(scopeFilter);
       this.ariaVersion = ariaVersion;
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
@@ -50565,12 +50747,16 @@
 
         if (rule.wave_refs.length) {
           const ruleResult = new RuleResult(rule);
+          if ((this.scopeFilter === 'ALL') ||
+              ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
+              ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-          ruleResult.validate(domCache);
-          this._allRuleResults.push(ruleResult);
-          this._ruleResultsSummary.update(ruleResult);
-          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+            ruleResult.validate(domCache);
+            this._allRuleResults.push(ruleResult);
+            this._ruleResultsSummary.update(ruleResult);
+            this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+            this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+          }
         }
       });
 
@@ -50879,6 +51065,7 @@
      * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
      * @param  {String}  title       - Title of document being analyzed
      * @param  {String}  url         - url of document being analyzed
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 Values: 'ARIA12' | 'ARIA13'
      * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
@@ -50888,12 +51075,15 @@
      * @returns {Object}  see @desc
     */
 
-    evaluateFirstStepRules (startingDoc, title='', url='',
+    evaluateFirstStepRules (startingDoc,
+                            title='',
+                            url='',
+                            scopeFilter='ALL',
                             ariaVersion="ARIA12",
                             addDataId=false) {
 
       const evaluationResult = new EvaluationResult(startingDoc, title, url);
-      evaluationResult.runFirstStepRules(ariaVersion, addDataId);
+      evaluationResult.runFirstStepRules(scopeFilter, ariaVersion, addDataId);
 
       // Debug features
       if (debug$1.flag) {
@@ -50910,6 +51100,7 @@
      * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
      * @param  {String}  title       - Title of document being analyzed
      * @param  {String}  url         - url of document being analyzed
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 Values: 'ARIA12' | 'ARIA13'
      * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
@@ -50919,10 +51110,14 @@
      * @returns {Object}  see @desc
     */
 
-    evaluateAxeRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+    evaluateAxeRules (startingDoc,
+                      title='',
+                      url='',
+                      scopeFilter='ALL',
+                      ariaVersion="ARIA12") {
 
       const evaluationResult = new EvaluationResult(startingDoc, title, url);
-      evaluationResult.runAxeRules(ariaVersion);
+      evaluationResult.runAxeRules(scopeFilter, ariaVersion);
 
       // Debug features
       if (debug$1.flag) {
@@ -50940,6 +51135,7 @@
      * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
      * @param  {String}  title       - Title of document being analyzed
      * @param  {String}  url         - url of document being analyzed
+     * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
      * @param  {String}  ariaVersion - Version of ARIA used for validation rules
      *                                 Values: 'ARIA12' | 'ARIA13'
      * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
@@ -50949,10 +51145,14 @@
      * @returns {Object}  see @desc
     */
 
-    evaluateWaveRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+    evaluateWaveRules (startingDoc,
+                       title='',
+                       url='',
+                       scopeFilter='ALL',
+                       ariaVersion="ARIA12") {
 
       const evaluationResult = new EvaluationResult(startingDoc, title, url);
-      evaluationResult.runWaveRules(ariaVersion);
+      evaluationResult.runWaveRules(scopeFilter, ariaVersion);
 
       // Debug features
       if (debug$1.flag) {
@@ -51093,6 +51293,7 @@
       for (const id in axeInfo.rules) {
         const r = axeInfo.rules[id];
         const info = {};
+        info.ref    = r.ref;
         info.title  = r.title;
         info.url    = r.url;
         info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
@@ -51126,6 +51327,7 @@
         if (flag) {
           const r = axeInfo.rules[id];
           const info = {};
+          info.ref    = id;
           info.title  = r.title;
           info.url    = r.url;
           info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
@@ -51150,6 +51352,7 @@
 
       for (const rule in waveInfo.rules) {
         const info = {};
+        info.ref    = rule.ref;
         info.title  = rule.title;
         info.url    = rule.url;
         info.type   = rule.error ? 'Error' : rule.contrast ? 'Contrast' : 'Alert';
@@ -51183,6 +51386,7 @@
         if (flag) {
           const r = waveInfo.rules[id];
           const info = {};
+          info.ref    = id;
           info.title  = r.title;
           info.url    = r.url;
           info.type   = r.error ? 'Error' : r.contrast ? 'Contrast' : 'Alert';

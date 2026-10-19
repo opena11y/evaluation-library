@@ -93,7 +93,9 @@ export const controlRules = [
   first_step          : true,
   axe_refs            : ['label',
                          'select-name'],
-  wave_refs           : ['label_missing'],
+  wave_refs           : ['label_missing',
+                         'label_title',
+                         'select_missing_label'],
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="checkbox"]', 'input[type="date"]', 'input[type="file"]', 'input[type="radio"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', 'meter', 'progress'],
@@ -138,7 +140,8 @@ export const controlRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : ['input-image-alt'],
-  wave_refs           : [],
+  wave_refs           : ['alt_input_missing',
+                         'label_title'],
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="image"]'],
@@ -179,7 +182,9 @@ export const controlRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : [],
-  wave_refs           : [],
+  wave_refs           : ['fieldset_missing',
+                         'legend_missing',
+                         'fieldset'],
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['input[type="radio"]'],
@@ -233,7 +238,8 @@ export const controlRules = [
   first_step          : false,
   axe_refs            : ['button-name',
                          'summary-name'],
-  wave_refs           : [],
+  wave_refs           : ['button_empty',
+                         'label_title'],
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['button'],
@@ -351,12 +357,39 @@ export const controlRules = [
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : [],
-  wave_refs           : [],
+  axe_refs            : ['form-field-multiple-labels'],
+  wave_refs           : ['label_orphaned',
+                         'label_multiple'],
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label'],
   validate            : function (dom_cache, rule_result) {
+
+    const forRefs = [];
+    const multipleForRefs = [];
+
+    // Identify label for values that reference the same form control
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      if (ce.isLabel && ce.labelForAttr) {
+        if (forRefs.includes(ce.labelForAttr)) {
+          multipleForRefs.push(ce.labelForAttr);
+        }
+        else {
+          forRefs.push(ce.labelForAttr);
+        }
+      }
+    });
+
+    // Mark labels that reference the same form control
+    dom_cache.controlInfo.allControlElements.forEach(ce => {
+      if (ce.isLabel && ce.labelForAttr) {
+        if (multipleForRefs.includes(ce.labelForAttr)) {
+          ce.isLabelForAttrValid  = false;
+          ce.multipleForRefs = true;
+        }
+      }
+    });
+
     dom_cache.controlInfo.allControlElements.forEach(ce => {
       const de = ce.domElement;
       if (ce.isLabel && ce.labelForAttr) {
@@ -370,7 +403,11 @@ export const controlRules = [
             }
           }
           else {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.labelForAttr]);
+            if (ce.multipleForRefs) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [ce.labelForAttr, ce.labelForAttr]);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [ce.labelForAttr]);
+            }
           }
         } else {
           rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
@@ -393,7 +430,7 @@ export const controlRules = [
   rule_required       : true,
   first_step          : false,
   axe_refs            : [],
-  wave_refs           : [],
+  wave_refs           : ['label_empty'],
   wcag_primary_id     : '3.3.2',
   wcag_related_ids    : ['1.3.1', '2.4.6'],
   target_resources    : ['label', 'legend'],

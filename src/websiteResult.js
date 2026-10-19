@@ -7,7 +7,7 @@ import DebugLogging   from './debug.js';
 
 /* Constants */
 
-const debug = new DebugLogging('PageResult', false);
+const debug = new DebugLogging('websiteResult', false);
 debug.flag = false;
 
 /**
@@ -18,7 +18,7 @@ debug.flag = false;
  *
  * @param  {ResultRule}   rule_result         - reference to the rule result object
  * @param  {Number}       result_value        - Constant representing result value of the evaluation result
- * @param  {Object}       domCache            - DomCache reference to element information used by this rule result
+ * @param  {Object}       domElement          - DomElement of the body element of the document
  * @param  {String}       message_id          - String reference to the message string in the NLS file
  * @param  {Array}        message_arguments   - Array  array of values used in the message string
  * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -37,10 +37,14 @@ debug.flag = false;
  */
 
 export default class WebsiteResult extends BaseResult {
-  constructor (rule_result, result_value, domCache, message_id, message_arguments, resultIndex) {
-    super(rule_result, result_value, message_id, message_arguments, 'website');
+  constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
+    super(domElement,
+          rule_result,
+          result_value,
+          message_id,
+          message_arguments,
+          'website');
 
-    this.domCache     = domCache;
     this.result_type  = RESULT_TYPE.WEBSITE;
 
     this.resultId = 'wr-' + resultIndex;

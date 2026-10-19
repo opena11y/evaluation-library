@@ -39,7 +39,7 @@ export const layoutRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['table_layout'],
     wcag_primary_id     : '1.3.2',
     wcag_related_ids    : ['1.3.1'],
     target_resources    : ['Page', 'table'],

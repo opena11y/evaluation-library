@@ -30,10 +30,6 @@ document.body.appendChild(scriptNode);
 
 let lastEvaluationResult = false;
 
-const contentElem = document.body ?
-                    document.body :
-                    document.documentElement;
-
 const highlightElements = [];
 
 // Helper functions
@@ -62,13 +58,13 @@ function removeFocusFromHighlightElements () {
   highlightElements.forEach( (he) => { he.setAttribute('focus', 'false'); });
 }
 
-function getHighlightElement(highlightId, result_abbrev) {
+function getHighlightElement(attachElem, highlightId, result_abbrev) {
   let he = document.getElementById(highlightId);
   if (!he) {
     he = document.createElement('opena11y-ai-highlight');
     he.id = highlightId;
     he.setAttribute(`data-result`, result_abbrev);
-    contentElem.appendChild(he);
+    attachElem.appendChild(he);
     highlightElements.push(he);
   }
   return he;
@@ -79,7 +75,16 @@ function hightlightResults(evaluation_result, results, option) {
     if ((option === 'all') ||
         ((option === 'vw') && ((r.result_abbrev === 'V') || (r.result_abbrev === 'W')))) {
 
-      const he = getHighlightElement(r.highlightId, r.result_abbrev);
+      const de = er.getDomElementByPosition(r.position);
+
+      const attachElem = de ? de.getBodyElement() :
+                         document.body ?
+                         document.body :
+                         document.documentElement;
+
+      console.log(`[attachElem]: ${attachElem} ${de.getBodyElement}`);
+
+      const he = getHighlightElement(attachElem, r.highlightId, r.result_abbrev);
 
       if (r.isWebsite) {
         he.setAttribute('set', `${r.result_abbrev} website false`);
@@ -129,7 +134,7 @@ browserRuntime.onMessage.addListener(
         rect = de.node.getBoundingClientRect();
       }
 
-      const he = getHighlightElement(highlightId, result_type);
+      const he = getHighlightElement(de.getBodyElement(), highlightId, result_type);
 
       if (option !== 'none' && he) {
         removeFocusFromHighlightElements();
@@ -169,6 +174,7 @@ browserRuntime.onMessage.addListener(
                           doc,
                           doc.title,
                           doc.location.href,
+                          r.scope_filter,
                           r.aria_version);
           break;
 
@@ -177,6 +183,7 @@ browserRuntime.onMessage.addListener(
                           doc,
                           doc.title,
                           doc.location.href,
+                          r.scope_filter,
                           r.aria_version,
                           false);
           break;
@@ -186,6 +193,7 @@ browserRuntime.onMessage.addListener(
                           doc,
                           doc.title,
                           doc.location.href,
+                          r.scope_filter,
                           r.aria_version);
           break;
 
@@ -208,15 +216,19 @@ browserRuntime.onMessage.addListener(
       const now = new Date();
 
       let response = {
-        title:             er.getTitle(),
-        location:          er.getURL(),
-        ruleset:           r.ruleset,
-        ruleset_label:     er.getRulesetLabel(),
-        rule_scope_filter: er.getRuleScopeFilterLabel(),
-        result_view:       r.result_view,
-        date:              now.toLocaleDateString(),
-        time:              now.toLocaleTimeString(),
-        ainspector_version: ''
+        title:              er.getTitle(),
+        location:           er.getURL(),
+        ruleset:            er.evalRuleset,
+        ruleset_label:      er.getRulesetLabel(),
+        wcag_level:         er.wcagLevel,
+        scope_filter:       er.scopeFilter,
+        scope_filter_label: er.getRuleScopeFilterLabel(),
+        aria_version:       er.ariaVersion,
+        aria_version_label: er.getAriaVersionLabel(),
+        result_view:        r.result_view,
+        date:               now.toLocaleDateString(),
+        time:               now.toLocaleTimeString(),
+        library_version:    er.libraryVersion
       };
 
       debug && console.log(`[response][            title]: ${response.title}`);

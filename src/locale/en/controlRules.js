@@ -295,25 +295,29 @@ export const controlRules = {
       SUMMARY:    '@label@ must reference control',
       TARGET_RESOURCES_DESC: '@label@ elements',
       RULE_RESULT_MESSAGES: {
-        FAIL_S:   'Change the @label@ element to use the @for@ attribute to label its form control.',
-        FAIL_P:   'Change the %N_F @label@ elements to use the @for@ attribute to label their respective form controls.',
+        FAIL_S:   'Change the @label[for]@ element to use a valid @id@ reference to a form control or remove a @label[for]@ element if there is more than one @label[for]@ element referencing a control.',
+        FAIL_P:   'Change the %N_F @label[for]@ elements to use a valid #id@ reference to a form control or remove a @label[for]@ element if there is more than one @label[for]@ element referencing a control.',
         MANUAL_CHECK_S: 'There is one form control being labeled by more than one labeling technique.',
         MANUAL_CHECK_P: 'There are %N_MC form controls being labeled by more than one labeling technique.',
-        HIDDEN_S: 'The @label@ element that is hidden was not evaluated.',
-        HIDDEN_P: 'The %N_H @label@ elements that are hidden were not evaluated.',
-        NOT_APPLICABLE: 'No visible @label@ elements with invalid @for@ references on this page.'
+        HIDDEN_S: 'The @label[for]@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @label[for]@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'No visible @label[for]@ elements with invalid @for@ references on this page.'
       },
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1: '@label[for=%1]@ references a form control.',
         ELEMENT_FAIL_1: 'Change the @label@ element with the @for@ attribute value \'%1\' to reference a form control.',
-        ELEMENT_MC_1:   'The @label[for=%1]@ is being ingored as a label because the form control is being labeled with @aria-labelledby@ or @aria-label@ attribute.',
+        ELEMENT_FAIL_2: 'There is more than one @label[for="%1"]@ element referencing a form control. The form control should only be referenced by one @label[for=%2]@ element.',
+        ELEMENT_MC_1:   'The @label[for=%1]@ is being ignored as a label because the form control is being labeled with @aria-labelledby@ or @aria-label@ attribute.  Verify the ARIA labeling technique is an improvement over the visible label.',
         ELEMENT_HIDDEN_1: 'The @label@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
-        '@label@ elements are useful for accessibility only when they reference form controls.  The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.'
+        '@label[for]@ elements are useful for accessibility only when they reference form controls.',
+        'Use only one @label[for]@ element per control, using more than one @label[for]@ element per control is not supported consistently between browsers.',
+        'The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.'
       ],
       TECHNIQUES: [
-        'For a @label@ element to properly reference a form control, ensure that the @for@ attribute value on the @label@ element exactly matches the @id@ attribute value on the form control.'
+        'For a @label[for]@ element to properly reference a form control, ensure that the @for@ attribute value on the @label@ element exactly matches the @id@ attribute value on the form control.',
+        'Define only one @label[for]@ element per form control.'
       ],
       MANUAL_CHECKS: [
       ],

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>&lt;code&gt;label&lt;/code&gt; must reference control | OpenA11y Evaluation Library 2.3</title>
+    <title>&lt;code&gt;label&lt;/code&gt; must reference control | OpenA11y Evaluation Library 3.0</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -32,7 +32,7 @@
                       alt="Evaluation Library Logo">
                     </span>
                     <span class="version">
-                      Version 2.3
+                      Version 3.0
                     </span>
                   </span>
 
@@ -241,7 +241,11 @@
   <td>
     <ul>
       
-      <li><code>label</code> elements are useful for accessibility only when they reference form controls.  The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.</li>
+      <li><code>label[for]</code> elements are useful for accessibility only when they reference form controls.</li>
+      
+      <li>Use only one <code>label[for]</code> element per control, using more than one <code>label[for]</code> element per control is not supported consistently between browsers.</li>
+      
+      <li>The use of labels increase the effective size for activation of the control and provide a speak-able label for speech input activation.</li>
       
     </ul>
   </td>
@@ -310,6 +314,8 @@
   <td>
     <ul>
     
+      <li><a href="https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels">Ensure form field does not have multiple label elements</a> (Moderate) </li>
+    
     </ul>
   </td>
   
@@ -322,18 +328,24 @@
   <td>
     <ul>
     
+      <li><a href="https://wave.webaim.org/api/docs?format=html#label_orphaned">Orphaned form label - label_orphaned</a> (Alert) </li>
+    
+      <li><a href="https://wave.webaim.org/api/docs?format=html#label_multiple">Multiple form labels - label_multiple</a> (Error) </li>
+    
     </ul>
   </td>
   
 </tr>
-                  -->
+
                   
 <tr>
   <th>Techniques</th>
   <td>
     <ul>
       
-      <li>For a <code>label</code> element to properly reference a form control, ensure that the <code>for</code> attribute value on the <code>label</code> element exactly matches the <code>id</code> attribute value on the form control.</li>
+      <li>For a <code>label[for]</code> element to properly reference a form control, ensure that the <code>for</code> attribute value on the <code>label</code> element exactly matches the <code>id</code> attribute value on the form control.</li>
+      
+      <li>Define only one <code>label[for]</code> element per form control.</li>
       
     </ul>
   </td>

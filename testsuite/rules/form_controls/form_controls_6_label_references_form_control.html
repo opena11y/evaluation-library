@@ -20,16 +20,18 @@
         
       <h2>Group 2: Labels with a for value that doesn't reference a real form control</h2>
         <form>
-          <label class="CONTROL_6_FAIL" for="fake">Label 21</label><input type="text"/>
-          <label class="CONTROL_6_FAIL" for="fake">Label 22</label><input type="text"/>
+          <label class="CONTROL_6_FAIL" for="fake1">Label 21</label><input type="text"/>
+          <label class="CONTROL_6_FAIL" for="fake2">Label 22</label><input type="text"/>
         </form>
           
       <h2>Group 3: Labels with a for value that references a real form control</h2>
         <form>
           <label for="input31"  class="CONTROL_6_PASS">Label 31</label>
-            <input type="text" id="input31">button 31</input>
+          <input type="text" id="input31">button 31</input>
+
           <label for="textarea31"  class="CONTROL_6_PASS">Label 22</label>
             <textarea id="textarea31" >Textarea 31</textarea>
+
           <label for="select31"  class="CONTROL_6_PASS">Label 23</label>
             <select id="select31">
               <option>Option 1</option>
@@ -50,12 +52,22 @@
         
       </form>
 
+
       <h2>Group 6: Multiple Labeling</h2>
       <form>
         <label class="CONTROL_6_MC" for="id61">Label 61</label><input type="text" id="id61" aria-label="Label 61">
-        <label class="CONTROL_6_MC" for="id62" id="id62-label">Label 62</label><input type="text" id="id62" aria-labelledby="id62-label">
+        <label class="CONTROL_6_MC" for="id62" id="id62-label">Label 62</label>
+        <input type="text" id="id62" aria-labelledby="id62-label">
         
       </form>
+
+      <h2>Group 7: Label References more than one control</h2>
+      <form>
+        <label class="CONTROL_6_FAIL" for="id71">Label 71a</label>
+        <label class="CONTROL_6_FAIL" for="id71">Label 72b</label>
+        <input type="text" id="id71">
+      </form>
+
       
       
     </div>

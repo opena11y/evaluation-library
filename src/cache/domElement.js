@@ -67,7 +67,7 @@ export default class DOMElement {
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
                              parentInfo.document;
-
+    this.doc              = parentInfo.document ? parentInfo.document : window.document;
     this.ordinalPosition  = ordinalPosition;
     this.parentInfo       = parentInfo;
     this.node             = elementNode;
@@ -235,6 +235,25 @@ export default class DOMElement {
 
   }
 
+  /**
+   * @method getBodyElement
+   *
+   * @desc Returns the DOM node to attach highlighting element for this DOM element
+   *
+   * @return {String} see description
+   */
+
+  getBodyElement () {
+    let bodyElem = this.doc.body ?
+                     this.doc.body :
+                     this.doc.documentElement;
+
+    if (!bodyElem) {
+      bodyElem = window.document;
+    }
+
+    return bodyElem;
+  }
 
   /**
    * @method isDomText

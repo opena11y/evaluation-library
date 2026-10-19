@@ -130,7 +130,7 @@ export const colorRules = [
     rule_required       : true,
     first_step          : true,
     axe_refs            : ['color-contrast'],
-    wave_refs           : [],
+    wave_refs           : ['contrast'],
     wcag_primary_id     : '1.4.3',
     wcag_related_ids    : ['1.4.1','1.4.6'],
     target_resources    : ['text content'],

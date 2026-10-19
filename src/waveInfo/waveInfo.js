@@ -25,6 +25,7 @@ export function getWaveRuleInfo(refs, convert=false) {
     const r = waveInfo.rules[ref];
     if (r) {
       const info = {};
+      info.ref    = ref;
       info.title  = convert ? convertRuleTitle(r.title) : r.title;
       info.url    = r.url
       info.type   = r.error ? 'Error' : r.contrast ? 'Contrast' : 'Alert';

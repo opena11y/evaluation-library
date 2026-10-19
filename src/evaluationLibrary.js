@@ -137,6 +137,7 @@ export default class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
    * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
@@ -146,12 +147,15 @@ export default class EvaluationLibrary {
    * @returns {Object}  see @desc
   */
 
-  evaluateFirstStepRules (startingDoc, title='', url='',
+  evaluateFirstStepRules (startingDoc,
+                          title='',
+                          url='',
+                          scopeFilter='ALL',
                           ariaVersion="ARIA12",
                           addDataId=false) {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runFirstStepRules(ariaVersion, addDataId);
+    evaluationResult.runFirstStepRules(scopeFilter, ariaVersion, addDataId);
 
     // Debug features
     if (debug.flag) {
@@ -168,6 +172,7 @@ export default class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
    * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
@@ -177,10 +182,14 @@ export default class EvaluationLibrary {
    * @returns {Object}  see @desc
   */
 
-  evaluateAxeRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+  evaluateAxeRules (startingDoc,
+                    title='',
+                    url='',
+                    scopeFilter='ALL',
+                    ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runAxeRules(ariaVersion);
+    evaluationResult.runAxeRules(scopeFilter, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -198,6 +207,7 @@ export default class EvaluationLibrary {
    * @param  {Object}  startingDoc - Browser document object model (DOM) to be evaluated
    * @param  {String}  title       - Title of document being analyzed
    * @param  {String}  url         - url of document being analyzed
+   * @param  {String}  scopeFilter - Filter rules by scope (values: "ALL" | "PAGE" | "WEBSITE")
    * @param  {String}  ariaVersion - Version of ARIA used for validation rules
    *                                 Values: 'ARIA12' | 'ARIA13'
    * @param  {Boolean} addDataId   - If true, add an data-opena11y-id attribute based on
@@ -207,10 +217,14 @@ export default class EvaluationLibrary {
    * @returns {Object}  see @desc
   */
 
-  evaluateWaveRules (startingDoc, title='', url='', ariaVersion="ARIA12") {
+  evaluateWaveRules (startingDoc,
+                     title='',
+                     url='',
+                     scopeFilter='ALL',
+                     ariaVersion="ARIA12") {
 
     const evaluationResult = new EvaluationResult(startingDoc, title, url);
-    evaluationResult.runWaveRules(ariaVersion);
+    evaluationResult.runWaveRules(scopeFilter, ariaVersion);
 
     // Debug features
     if (debug.flag) {
@@ -351,6 +365,7 @@ export default class EvaluationLibrary {
     for (const id in axeInfo.rules) {
       const r = axeInfo.rules[id];
       const info = {};
+      info.ref    = r.ref;
       info.title  = r.title;
       info.url    = r.url
       info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
@@ -384,6 +399,7 @@ export default class EvaluationLibrary {
       if (flag) {
         const r = axeInfo.rules[id];
         const info = {};
+        info.ref    = id;
         info.title  = r.title;
         info.url    = r.url
         info.type   = r.bestPractice ? 'Best Practices' : r.experimental ? 'Experimental' : 'Required';
@@ -408,6 +424,7 @@ export default class EvaluationLibrary {
 
     for (const rule in waveInfo.rules) {
       const info = {};
+      info.ref    = rule.ref;
       info.title  = rule.title;
       info.url    = rule.url;
       info.type   = rule.error ? 'Error' : rule.contrast ? 'Contrast' : 'Alert';
@@ -441,6 +458,7 @@ export default class EvaluationLibrary {
       if (flag) {
         const r = waveInfo.rules[id];
         const info = {};
+        info.ref    = id;
         info.title  = r.title;
         info.url    = r.url
         info.type   = r.error ? 'Error' : r.contrast ? 'Contrast' : 'Alert';

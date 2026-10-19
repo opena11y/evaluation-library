@@ -34,7 +34,7 @@ export const ariaInHTMLInfo = {
     },
     abbr: {
       tagName: 'abbr',
-      defaultRole: '',
+      defaultRole: 'generic',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'abbr'
@@ -985,21 +985,21 @@ export const ariaInHTMLInfo = {
     },
     kbd: {
       tagName: 'kbd',
-      defaultRole: '',
+      defaultRole: 'generic',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'kbd'
     },
     label: {
       tagName: 'label',
-      defaultRole: '',
+      defaultRole: 'generic',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'label'
     },
     legend: {
       tagName: 'legend',
-      defaultRole: '',
+      defaultRole: 'generic',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'legend'
@@ -1037,14 +1037,14 @@ export const ariaInHTMLInfo = {
     },
     map: {
       tagName: 'map',
-      defaultRole: '',
+      defaultRole: 'generic',
       noRoleAllowed: true,
       anyRoleAllowed: false,
       id: 'map'
     },
     mark: {
       tagName: 'mark',
-      defaultRole: '',
+      defaultRole: 'genric',
       noRoleAllowed: false,
       anyRoleAllowed: true,
       id: 'mark'

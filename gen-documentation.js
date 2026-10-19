@@ -580,7 +580,6 @@ const jsRuleLinks = nunjucks.render('./src-docs/templates/js-rulelinks.njk',
 });
 outputFile('js/rulelinks.js', jsRuleLinks);
 
-
 console.log(`Total Rules: ${count}`);
 
 console.log(`wcag: ${el.getWCAG.abbreviation}`);

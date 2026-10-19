@@ -1,15 +1,16 @@
-Version 2.3.0 Overview
+Version 3.0.0 Overview
 =============================
 * Added keyboard rule 10 related to tabindex on non-interactive roles
 * Added widget rule 16 for aria-haspopup
 * Added widget rule 17 for aria-braillelabel
 * Added widget rule 18 for arfaile duplicate accesskey defintions
 * Updated keyboard rule 4 to fail elements tabindex values greater than 0
+* Updated keyboard rule 6 to include duplicate label[for] references to the same control
 * Updated widget rule 1 to fix support for ignoring link and button roles
 * Updated widget rule 13 to support ariaLabelledByElements property
-* Added 'source' html element to ignored tags
-* added support for element collections: ariaLabelledByElements, ariaDescribedByElements,
-        ariaErrorDescriptionElements, ariaControlsElements, ariaOwensElements.
+* Added support for element collections in computing accessible names and descriptions: ariaLabelledByElements, ariaDescribedByElements, ariaErrorDescriptionElements
+* Added support for element collections in computing ownership and control relationships: ariaControlsElements, ariaOwensElements.
+* Updated Widget Rule 13 to ignore elements using title or contents as the accessible name source
 
 Version 2.2.2 Overview
 =============================

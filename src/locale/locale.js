@@ -11,6 +11,7 @@ import {
 } from '../constants.js';
 
 export {
+  getAriaVersionLabel,
   getBaseResultMessages,
   getBaseResultMessage,
   getCommonMessage,
@@ -239,6 +240,27 @@ function getRulesetInfo (rulesetId) {
 }
 
 /**
+ * @function getAriaVersionLabel
+ *
+ * @desc Returns a localize string describing the aria version
+ *
+ * @param {String} ariaVersionId  - Used to identify the ruleset
+ *
+ * @return {String}  see @desc
+ */
+
+function getAriaVersionLabel(ariaVersionId) {
+  switch (ariaVersionId) {
+    case 'ARIA12':
+      return messages[locale].common.aria12;
+    case 'ARIA13':
+      return messages[locale].common.aria13;
+  }
+  return '??';
+}
+
+
+/**
  * @function getRulesetLabel
  *
  * @desc Returns a localize string describing the options
@@ -246,20 +268,11 @@ function getRulesetInfo (rulesetId) {
  *
  * @param {String} rulesetId      - Used to identify the ruleset
  * @param {String} level          - Used to identify the WCAG level
- * @param {String} ariaVersionId  - Used to identify the ARIA version
  *
  * @return {String}  see @desc
  */
 
-function getRulesetLabel(rulesetId, level, ariaVersionId) {
-
-    function addAria () {
-      switch (ariaVersionId) {
-        case 'ARIA13':
-          return messages[locale].common.aria13;
-      }
-      return '';
-    }
+function getRulesetLabel(rulesetId, level) {
 
     function addLevel () {
       switch (level) {
@@ -280,27 +293,27 @@ function getRulesetLabel(rulesetId, level, ariaVersionId) {
     switch (rulesetId) {
 
       case 'AXE':
-        label = messages[locale].common.rulesetAxe + addAria();
+        label = messages[locale].common.rulesetAxe;
         break;
 
       case 'FIRSTSTEP':
-        label = messages[locale].common.rulesetFirstStep + addAria();
+        label = messages[locale].common.rulesetFirstStep;
         break;
 
       case 'WAVE':
-        label = messages[locale].common.rulesetWave + addAria();
+        label = messages[locale].common.rulesetWave ;
         break;
 
       case 'WCAG22':
-        label = messages[locale].common.rulesetWCAG22 + addLevel() + addAria();
+        label = messages[locale].common.rulesetWCAG22 + addLevel();
         break;
 
       case 'WCAG21':
-        label = messages[locale].common.rulesetWCAG21 + addLevel() + addAria();
+        label = messages[locale].common.rulesetWCAG21 + addLevel();
         break;
 
       default:
-        label = messages[locale].common.rulesetWCAG20 + addLevel() + addAria();
+        label = messages[locale].common.rulesetWCAG20 + addLevel();
         break;
     }
 

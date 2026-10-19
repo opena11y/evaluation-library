@@ -50,6 +50,7 @@
           <p>{{unmappedWaveRules.length}} of {{allWaveRules.length}} WAVE/popetech rules are NOT mapped to OpenA11y rules.</p>
           <table class="table table-striped" aria-labelledby="wave-rules">
             <thead>
+              <th>WAVE Reference</th>
               <th>WAVE/popetech Rule</th>
               <th>Type</th>
             </thead>
@@ -57,7 +58,10 @@
             {% for r in unmappedWaveRules %}
               <tr>
                 <td>
-                  <a href="{{r.url | safe}}">{{r.title | safe}}</a>
+                  {{r.ref}}
+                </td>
+                <td>
+                  <a href="{{r.url | safe}}" target="WAVE">{{r.title | safe}}</a>
                 </td>
                 <td>
                   {{r.type | safe}}

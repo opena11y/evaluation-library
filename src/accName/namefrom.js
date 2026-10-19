@@ -231,21 +231,19 @@ function nameFromLabelElement (doc, element) {
   let label, name, inclAlt, inclAriaLabel, notVisible;
   // label [for=id]
   if (element.id) {
-    try {
-      label = doc.querySelector('[for="' + element.id + '"]');
-      if (label) {
-        [name, inclAlt, inclAriaLabel, notVisible] = label.hasAttribute('aria-label') ?
-               [label.getAttribute('aria-label'), false, true, true] :
-               getElementContents(label, element);
-        if (name.length) return { name: normalize(name),
-                                  source: 'label reference',
-                                  includeAlt: inclAlt,
-                                  includeAriaLabel: inclAriaLabel,
-                                  nameIsNotVisibile: notVisible
-                                 };
-      }
-    } catch (error) {
-      debug.log(`[nameFromLabelElement][error]: ${error}`);
+    const labels = doc.querySelectorAll('label[for="' + element.id + '"]');
+    if (labels && labels.length) {
+      label = labels[0];
+      [name, inclAlt, inclAriaLabel, notVisible] = label.hasAttribute('aria-label') ?
+             [label.getAttribute('aria-label'), false, true, true] :
+             getElementContents(label, element);
+      if (name.length) return { name: normalize(name),
+                                source: 'label reference',
+                                includeAlt: inclAlt,
+                                includeAriaLabel: inclAriaLabel,
+                                nameIsNotVisibile: notVisible,
+                                labelCount: labels.length
+                               };
     }
   }
 

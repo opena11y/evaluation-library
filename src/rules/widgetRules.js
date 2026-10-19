@@ -38,7 +38,7 @@ export const widgetRules = [
                          'aria-treeitem-name',
                          'aria-toggle-field-name',
                          'aria-tooltip-name'],
-  wave_refs           : [],
+  wave_refs           : ['aria_label'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['ARIA Widget roles'],
@@ -48,7 +48,11 @@ export const widgetRules = [
       const ai = de.ariaInfo;
       // There are other rules that check for accessible name for labelable controls, landmarks, headings and links
       // Ignore option role, since web developers are very sloppy about giving them content before they are made visible
-      if (ai.isWidget && !de.isButton && !de.isLabelable && !de.isLink && (de.role !== 'option')) {
+      if (ai.isWidget &&
+          !de.isButton &&
+          !de.isLabelable &&
+          !de.isLink &&
+          !(de.role === 'option')) {
         if (de.visibility.isVisibleToAT) {
           if (de.accName.name) {
             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [de.tagName, de.role, de.accName.name]);
@@ -148,7 +152,7 @@ export const widgetRules = [
   axe_refs            : ['aria-deprecated-role',
                          'aria-roles',
                          'aria-allowed-role'],
-  wave_refs           : [],
+  wave_refs           : ['aria'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[role]'],
@@ -220,7 +224,7 @@ export const widgetRules = [
   first_step          : true,
   axe_refs            : ['aria-conditional-attr',
                          'aria-valid-attr-value'],
-  wave_refs           : [],
+  wave_refs           : ['aria'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[aria-atomic]',
@@ -336,7 +340,7 @@ export const widgetRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : ['aria-valid-attr'],
-  wave_refs           : [],
+  wave_refs           : ['aria'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
   target_resources    : ['[aria-atomic]',
@@ -837,6 +841,8 @@ export const widgetRules = [
     dom_cache.allDomElements.forEach( de => {
       if (!de.ariaInfo.isDPUBRole &&
           de.ariaInfo.isNameProhibited &&
+          de.accName.source !== 'title' &&
+          de.accName.source !== 'contents' &&
           de.accName.name) {
 
         if (de.visibility.isVisibleToAT) {
@@ -1022,7 +1028,7 @@ export const widgetRules = [
   rule_required       : true,
   first_step          : false,
   axe_refs            : [],
-  wave_refs           : [],
+  wave_refs           : ['aria_haspopup'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '2.1.1'],
   target_resources    : ["aria-haspopup"],

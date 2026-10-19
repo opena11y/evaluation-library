@@ -33,7 +33,7 @@ export const titleRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['document-title'],
-    wave_refs           : [],
+    wave_refs           : ['title_invalid'],
     wcag_primary_id     : '2.4.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['Page', 'title'],

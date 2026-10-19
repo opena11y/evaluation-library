@@ -59,7 +59,7 @@ export const shortcutRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['accesskeys'],
-    wave_refs           : [],
+    wave_refs           : ['accesskey'],
     wcag_primary_id     : '2.1.4',
     wcag_related_ids    : [],
     target_resources    : ['a', 'input', 'output', 'select', 'textarea'],
