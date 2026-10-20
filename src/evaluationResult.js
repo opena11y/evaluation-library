@@ -59,6 +59,13 @@ debug.flag = false;
 
 /* helper functions */
 
+function hasRuleScope (rule, scope) {
+  return ((scope === 'ALL') ||
+          ((scope === 'PAGE')    && rule.isScopePage) ||
+          ((scope === 'WEBSITE') && rule.isScopeWebsite));
+}
+
+
 function validateRuleset(ruleset) {
   if (typeof ruleset === 'string') {
     ruleset = ruleset.toUpperCase();
@@ -350,9 +357,7 @@ export default class EvaluationResult {
     allRules.forEach (rule => {
 
       if (isWCAG(this.ruleset, this.level, rule)) {
-        if ((this.scopeFilter === 'ALL') ||
-            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
-            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
+        if (hasRuleScope(rule, this.scopeFilter)) {
           const ruleResult = new RuleResult(rule);
 
           ruleResult.validate(domCache);
@@ -454,19 +459,16 @@ export default class EvaluationResult {
 
     allRules.forEach (rule => {
 
-      if (rule.isFirstStep) {
-        if ((this.scopeFilter === 'ALL') ||
-            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
-            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
+      if (rule.isFirstStep && hasRuleScope(rule, this.scopeFilter)) {
 
-          const ruleResult = new RuleResult(rule);
+        const ruleResult = new RuleResult(rule);
 
-          ruleResult.validate(domCache);
-          this._allRuleResults.push(ruleResult);
-          this._ruleResultsSummary.update(ruleResult);
-          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
-        }
+        ruleResult.validate(domCache);
+        this._allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
+
       }
     });
 
@@ -506,19 +508,14 @@ export default class EvaluationResult {
 
     allRules.forEach (rule => {
 
-      if (rule.axe_refs.length) {
-        if ((this.scopeFilter === 'ALL') ||
-            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
-            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
+      if (rule.axe_refs.length && hasRuleScope(rule, this.scopeFilter)) {
+        const ruleResult = new RuleResult(rule);
 
-          const ruleResult = new RuleResult(rule);
-
-          ruleResult.validate(domCache);
-          this._allRuleResults.push(ruleResult);
-          this._ruleResultsSummary.update(ruleResult);
-          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
-        }
+        ruleResult.validate(domCache);
+        this._allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
       }
     });
 
@@ -558,18 +555,14 @@ export default class EvaluationResult {
 
     allRules.forEach (rule => {
 
-      if (rule.wave_refs.length) {
+      if (rule.wave_refs.length && hasRuleScope(rule, this.scopeFilter)) {
         const ruleResult = new RuleResult(rule);
-        if ((this.scopeFilter === 'ALL') ||
-            ((this.scopeFilter === 'PAGE')    && rule.isScopePage) ||
-            ((this.scopeFilter === 'WEBSITE') && rule.isScopeWebsite)) {
 
-          ruleResult.validate(domCache);
-          this._allRuleResults.push(ruleResult);
-          this._ruleResultsSummary.update(ruleResult);
-          this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
-          this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
-        }
+        ruleResult.validate(domCache);
+        this._allRuleResults.push(ruleResult);
+        this._ruleResultsSummary.update(ruleResult);
+        this._rcRuleResultsGroup.update(rule.rule_category_id, ruleResult);
+        this._glRuleResultsGroup.update(rule.wcag_guideline_id, ruleResult);
       }
     });
 

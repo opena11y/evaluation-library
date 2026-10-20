@@ -48,7 +48,7 @@ export const common = {
 
   rulesetLevelA:   'Level A only',
   rulesetLevelAA:  'Levels A and AA',
-  rulesetLevelAAA: 'Levels A, AA and enhanced CCR',
+  rulesetLevelAAA: 'Levels A, AA and enhanced CCR/Target Size',
 
   ruleScopeAll: "All Rules",
   ruleScopePage: "Page Rules",
