@@ -17,6 +17,7 @@ const browserRuntime = typeof browser === 'object' ?
 
 const evaluationLibrary = new EvaluationLibrary();
 let er;
+let lastEvaluationResult = false;
 
 debug && console.log(`[content.js]: loading...`);
 
@@ -28,7 +29,6 @@ scriptNode.id = 'id-ai-highlight';
 scriptNode.src = browserRuntime.getURL('ai-highlight.js');
 document.body.appendChild(scriptNode);
 
-let lastEvaluationResult = false;
 
 const highlightElements = [];
 
@@ -70,19 +70,21 @@ function getHighlightElement(attachElem, highlightId, result_abbrev) {
   return he;
 }
 
-function hightlightResults(evaluation_result, results, option) {
+function hightlightResults(results, option) {
   results.forEach( (r) => {
     if ((option === 'all') ||
         ((option === 'vw') && ((r.result_abbrev === 'V') || (r.result_abbrev === 'W')))) {
 
-      const de = er.getDomElementByPosition(r.position);
+      const attachObj = r.isWebsite || r.isPage ?
+                         er.getDomDocumentByPosition(r.position) :
+                         er.getDomElementByPosition(r.position);
 
-      const attachElem = de ? de.getBodyElement() :
-                         document.body ?
-                         document.body :
-                         document.documentElement;
 
-      console.log(`[attachElem]: ${attachElem} ${de.getBodyElement}`);
+      const attachElem = attachObj ?
+                           attachObj.getBodyElement() :
+                           document.body ?
+                             document.body :
+                             document.documentElement;
 
       const he = getHighlightElement(attachElem, r.highlightId, r.result_abbrev);
 
@@ -94,7 +96,7 @@ function hightlightResults(evaluation_result, results, option) {
           he.setAttribute('set', `${r.result_abbrev} page false`);
         }
         else {
-          const de = evaluation_result.getDomElementByPosition(r.position);
+          const de = er.getDomElementByPosition(r.position);
           if (de) {
             const rect = de.node.getBoundingClientRect();
             he.setAttribute('set', `${r.result_abbrev} element false ${Math.round(rect.left)} ${Math.round(rect.top)} ${Math.round(rect.width)} ${Math.round(rect.height)}`);
@@ -170,7 +172,7 @@ browserRuntime.onMessage.addListener(
 
       switch (r.ruleset) {
         case 'AXE':
-          er  = evaluationLibrary.evaluateAxeRules(
+          er = evaluationLibrary.evaluateAxeRules(
                           doc,
                           doc.title,
                           doc.location.href,
@@ -179,7 +181,7 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'FIRSTSTEP':
-          er  = evaluationLibrary.evaluateFirstStepRules(
+          er = evaluationLibrary.evaluateFirstStepRules(
                           doc,
                           doc.title,
                           doc.location.href,
@@ -189,7 +191,7 @@ browserRuntime.onMessage.addListener(
           break;
 
         case 'WAVE':
-          er  = evaluationLibrary.evaluateWaveRules(
+          er = evaluationLibrary.evaluateWaveRules(
                           doc,
                           doc.title,
                           doc.location.href,
@@ -199,7 +201,7 @@ browserRuntime.onMessage.addListener(
 
 
         default:
-          er  = evaluationLibrary.evaluateWCAG(
+          er = evaluationLibrary.evaluateWCAG(
                 doc,
                 doc.title,
                 doc.location.href,
@@ -309,7 +311,7 @@ browserRuntime.onMessage.addListener(
             results = results.concat(element_results);
           }
 
-          hightlightResults(er, results, r.highlight_option);
+          hightlightResults(results, r.highlight_option);
 
           debug && console.log(`[response][     rule_title]: ${response.rule_title}`);
           debug && console.log(`[response][element_summary]: ${response.element_summary.violations}`);

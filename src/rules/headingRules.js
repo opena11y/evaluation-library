@@ -37,6 +37,9 @@ export const headingRules = [
     wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
     target_resources    : ['h1'],
     validate            : function (dom_cache, rule_result) {
+
+      const domDoc = dom_cache.getRootDomDocument();
+
       let h1Count = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
@@ -57,10 +60,10 @@ export const headingRules = [
       });
 
       if (h1Count === 0) {
-        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+        rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
       }
       else {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+        rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
       }
     } // end validate function
   },
@@ -257,6 +260,9 @@ export const headingRules = [
   wcag_related_ids    : ['2.4.6', '2.4.10'],
   target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
   validate            : function (dom_cache, rule_result) {
+
+    const domDoc = dom_cache.getRootDomDocument();
+
     let nestingErrors = 0;
     let manualChecks = 0;
 
@@ -286,23 +292,22 @@ export const headingRules = [
     }
 
     if (nestingErrors > 0) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [nestingErrors]);
+      rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', [nestingErrors]);
     }
     else {
       if (dom_cache.structureInfo.allHeadingDomElements.length > 0) {
         if (manualChecks > 0) {
           if (manualChecks === 1) {
-            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
           }
           else {
-            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', [manualChecks]);
           }
         } else {
-          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+          rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
         }
       }
     }
-
 
   } // end validate function
 },

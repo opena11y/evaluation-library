@@ -2,6 +2,7 @@
 
 /* Imports */
 import ControlInfo      from './controlInfo.js';
+import DOMDocument      from './domDocument.js';
 import DOMElement       from './domElement.js';
 import DOMText          from './domText.js';
 import IFrameInfo       from './iframeInfo.js';
@@ -51,6 +52,7 @@ class ParentInfo {
   constructor (info) {
     this.controlElement  = null;
     this.document        = null;
+    this.domDocument     = null;
     this.parentDocument  = null;
     this.useParentDocForName = false;
     this.documentIndex   = 0;
@@ -73,6 +75,7 @@ class ParentInfo {
     if (info) {
       this.controlElement  = info.controlElement;
       this.document        = info.document;
+      this.domDocument     = info.domDocument;
       this.parentDocument  = info.parentDocument;
       this.useParentDocForName = info.useParentDocForName;
       this.documentIndex   = info.documentIndex;
@@ -130,24 +133,14 @@ export default class DOMCache {
       this.lang = '';
     }
 
-    this.document = startingDoc;
-    this.bodyElem = startingDoc.body ?
-                    startingDoc.body :
-                    startingDoc.documentElement;
-
-    debug.log(`[bodyELem]: ${this.bodyElem}`);
-
     this.ariaVersion = ariaVersion;
 
     this.ordinalPosition = 2;
     this.documentIndex = 0;
 
+    this.allDomDocuments  = [];
     this.allDomElements   = [];
     this.allDomTexts      = [];
-
-    const parentInfo = new ParentInfo();
-    parentInfo.document        = startingDoc;
-    parentInfo.accNameDocument = startingDoc;
 
     this.controlInfo   = new ControlInfo();
     this.idInfo        = new IdInfo();
@@ -160,6 +153,18 @@ export default class DOMCache {
     this.timingInfo    = new TimingInfo();
     this.iframeInfo    = new IFrameInfo();
 
+    const parentInfo = new ParentInfo();
+    const domDoc = new DOMDocument(parentInfo, 0, null, startingDoc);
+    this.allDomDocuments.push(domDoc);
+    parentInfo.document        = startingDoc;
+    parentInfo.domDocument     = domDoc;
+    parentInfo.accNameDocument = startingDoc;
+
+    this.document = startingDoc;
+    this.bodyElem = startingDoc.body ?
+                    startingDoc.body :
+                    startingDoc.documentElement;
+
     this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion, addDataId);
     parentInfo.positionDomElement = this.startingDomElement;
     this.allDomElements.push(this.startingDomElement);
@@ -171,6 +176,7 @@ export default class DOMCache {
     this.resultsWarnings     = [];
     this.resultsManualChecks = [];
 
+
     parentInfo.domElement = this.startingDomElement;
     this.transverseDOM(parentInfo, startingElement, addDataId);
     this.computeAriaOwnsRefs();
@@ -179,6 +185,10 @@ export default class DOMCache {
     this.controlInfo.updateLabelForReferences();
 
     this.hasScripting = startingDoc.querySelector('script') ? true : false;
+  }
+
+  getRootDomDocument() {
+    return this.allDomDocuments[0];
   }
 
   getDomElementById(id) {
@@ -347,12 +357,16 @@ export default class DOMCache {
                   let isCrossDomain = false;
                   try {
                     const doc = node.contentDocument || node.contentWindow.document;
-
                     newParentInfo.document = doc;
-                    newParentInfo.positionDomElement = doc;
+
+                    const domDoc = new DOMDocument(parentInfo, this.allDomDocuments.length, node, doc);
+                    this.allDomDocuments.push(domDoc);
 
                     this.documentIndex += 1;
                     newParentInfo.documentIndex = this.documentIndex;
+                    newParentInfo.positionDomElement = doc;
+                    newParentInfo.domDocument = domDoc;
+
                     this.transverseDOM(newParentInfo, doc, addDataId);
                   } catch (error) {
                     isCrossDomain = true;

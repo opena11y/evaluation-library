@@ -86,6 +86,8 @@ export const keyboardRules = [
     target_resources    : ['links', 'controls', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let mcCount = 0;
       let passCount = 0;
 
@@ -130,11 +132,11 @@ export const keyboardRules = [
       });
 
       if (mcCount) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
       else {
         if (passCount) {
-          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+          rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
         }
       }
 
@@ -223,6 +225,8 @@ export const keyboardRules = [
     target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let controlCount = 0;
       let hiddenCount = 0;
 
@@ -241,10 +245,10 @@ export const keyboardRules = [
 
       if (controlCount > 1) {
         if (hiddenCount == 0) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [controlCount]);
         }
         else {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', [controlCount, hiddenCount]);
         }
       }
 
@@ -304,8 +308,10 @@ export const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       if (dom_cache.hasScripting) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
 
     } // end validation function
@@ -330,7 +336,9 @@ export const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      const domDoc = dom_cache.getRootDomDocument();
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
     } // end validation function
   },
@@ -354,7 +362,9 @@ export const keyboardRules = [
     target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
     validate            : function (dom_cache, rule_result) {
 
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      const domDoc = dom_cache.getRootDomDocument();
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
     } // end validation function
   },

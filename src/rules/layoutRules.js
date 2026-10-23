@@ -45,6 +45,8 @@ export const layoutRules = [
     target_resources    : ['Page', 'table'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let layoutPass = 0;
       let layoutManualCheck = 0;
 
@@ -75,11 +77,11 @@ export const layoutRules = [
       });
 
       if (layoutManualCheck) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [layoutManualCheck]);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [layoutManualCheck]);
       }
       else {
         if (layoutPass) {
-          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+          rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
         }
       }
     }  // end validation function
@@ -182,7 +184,9 @@ export const layoutRules = [
     target_resources    : ['page'],
     validate          : function (dom_cache, rule_result) {
 
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [])
+      const domDoc = dom_cache.getRootDomDocument();
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [])
 
     } // end validate function
   }

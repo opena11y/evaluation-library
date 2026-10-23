@@ -363,7 +363,7 @@ export default class RuleResult {
    *
    * @param  {Integer}  test_result   - Number representing a result value
    * @param  {Object}   result_item   - Reference to ElementResult or PageResult object
-   * @param  {Object}   dom_item      - Reference to DOMcache or domElement objects
+   * @param  {Object}   dom_item      - Reference to DOMDocument or domElement objects
    */
 
   updateResults (result_value, result_item, dom_item) {
@@ -428,17 +428,17 @@ export default class RuleResult {
    * @desc Adds a page result from an evaluation of rule on the dom
    *
    * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
-   * @param  {Object}   dom_cache           - Reference to DOMcache for saving page results
+   * @param  {Object}   domDoc              - Reference to DOMDocument for saving page results
    * @param  {String}   message_id          - Reference to the message string in the NLS file
    * @param  {Array}    message_arguements  - Array of values used in the message string
    */
 
-  addPageResult (test_result, dom_cache, message_id, message_arguments) {
+  addPageResult (test_result, domDoc, message_id, message_arguments) {
     const result_value = getResultValue(test_result, this.isRuleRequired());
-    const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments, this.pageResultIndex);
+    const page_result = new PageResult(this, result_value, domDoc, message_id, message_arguments, this.pageResultIndex);
     this.pageResultIndex += 1;
 
-    this.updateResults(result_value, page_result, dom_cache);
+    this.updateResults(result_value, page_result, domDoc);
   }
 
   /**

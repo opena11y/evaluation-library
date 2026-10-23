@@ -76,6 +76,7 @@ export default class DOMElement {
     this.lang             = elementNode.hasAttribute('lang') ?
                             elementNode.getAttribute('lang') :
                             '';
+    this.domDoc           = parentInfo.domDocument;
 
     if (addDataId) {
       elementNode.dataset.opena11yPosition = ordinalPosition.toString();
@@ -244,16 +245,10 @@ export default class DOMElement {
    */
 
   getBodyElement () {
-    let bodyElem = this.doc.body ?
-                     this.doc.body :
-                     this.doc.documentElement;
-
-    if (!bodyElem) {
-      bodyElem = window.document;
-    }
-
-    return bodyElem;
-  }
+    return this.domDoc && this.domDoc.body ?
+           this.domDoc.body :
+           window.document.body;
+   }
 
   /**
    * @method isDomText

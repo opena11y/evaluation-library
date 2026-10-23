@@ -39,8 +39,10 @@ export const timingRules = [
     target_resources    : ['a', 'input', 'button', 'wdiget'],
     validate          : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
     if (dom_cache.controlInfo.allControlElements.length) {
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
     }
 
     } // end validate function
@@ -65,6 +67,8 @@ export const timingRules = [
     target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
     validate          : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       dom_cache.timingInfo.allTimingDomElements.forEach( de => {
         if (de.visibility.isVisibleToAT) {
           rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
@@ -75,7 +79,7 @@ export const timingRules = [
       });
 
       if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
     } // end validate function
   },
@@ -99,6 +103,8 @@ export const timingRules = [
     target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
     validate          : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       dom_cache.timingInfo.allTimingDomElements.forEach( de => {
         if (de.visibility.isVisibleToAT) {
           rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
@@ -109,7 +115,7 @@ export const timingRules = [
       });
 
       if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
 
     } // end validate function

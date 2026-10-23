@@ -38,11 +38,14 @@ export const titleRules = [
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['Page', 'title'],
     validate            : function (dom_cache, rule_result) {
+
+      const domDoc = dom_cache.getRootDomDocument();
+
       if (dom_cache.hasTitle) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
       else {
-        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+        rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
       }
     } // end validate function
   },

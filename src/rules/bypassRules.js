@@ -42,6 +42,8 @@ export const bypassRules = [
     target_resources    : ['a'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       const bypassTargets = [
         'content',
         'content-main',
@@ -103,19 +105,19 @@ export const bypassRules = [
       }
 
       if (hasSkipToButton) {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+        rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
       }
       else {
         if (hasBypassLink) {
           if (targetDomElem) {
-            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
           }
           else {
-            rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+            rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
           }
         }
         else {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', []);
         }
       }
     } // end validation function  }

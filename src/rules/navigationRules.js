@@ -54,6 +54,8 @@ export const navigationRules = [
     target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\''],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let navigationCount = 0;
       let searchCount = 0;
 
@@ -75,10 +77,10 @@ export const navigationRules = [
       });
 
       if ((navigationCount > 0) && (searchCount > 0)) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', []);
       }
       else {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_2', []);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_2', []);
       }
 
     } // end validation function
@@ -104,6 +106,8 @@ export const navigationRules = [
     target_resources    : ['Website', 'role=\'main\'', 'role=\'navigation\'', 'role=\'banner\'', 'role=\'contentinfo\'','role=\'search\''],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       const landmarkRoles = [
         'banner',
         'complementary',
@@ -125,7 +129,7 @@ export const navigationRules = [
       });
 
       if ((landmarks.length > 0)) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', [landmarks.join(', ')]);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', [landmarks.join(', ')]);
       }
     } // end validation function
   },
@@ -150,6 +154,8 @@ export const navigationRules = [
     target_resources    : ['Website', 'h2'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let headingCount = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
@@ -167,10 +173,10 @@ export const navigationRules = [
       });
 
       if ((headingCount > 0)) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', []);
       }
       else {
-        rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.FAIL, domDoc, 'WEBSITE_FAIL_1', []);
       }
 
     } // end validation function
@@ -196,6 +202,8 @@ export const navigationRules = [
     target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\'', 'role=\'main\'', 'role=\'banner\'', 'role=\'contentinfo\'', 'h2'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       const landmarkRoles = [
         'banner',
         'complementary',
@@ -217,7 +225,7 @@ export const navigationRules = [
       });
 
       if ((landmarks.length > 0)) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', [landmarks.join(', ')]);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', [landmarks.join(', ')]);
       }
 
     } // end validation function
@@ -243,6 +251,8 @@ export const navigationRules = [
     target_resources    : ['Website', 'h2'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let headingCount = 0;
 
       dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
@@ -260,10 +270,10 @@ export const navigationRules = [
       });
 
       if ((headingCount > 0)) {
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', []);
       }
       else {
-        rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+        rule_result.addWebsiteResult(TEST_RESULT.FAIL, domDoc, 'WEBSITE_FAIL_1', []);
       }
 
     } // end validation function

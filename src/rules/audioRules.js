@@ -101,7 +101,9 @@ export const audioRules = [
     target_resources    : ['video', 'audio', 'embed', 'object'],
     validate            : function (dom_cache, rule_result) {
 
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      const domDoc = dom_cache.getRootDomDocument();
+
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
     } // end validate function
   }

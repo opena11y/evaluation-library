@@ -37,6 +37,8 @@ export const liveRules = [
   target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
   validate          : function (dom_cache, rule_result) {
 
+    const domDoc = dom_cache.getRootDomDocument();
+
     let liveCount = 0;
 
     dom_cache.allDomElements.forEach( de => {
@@ -73,10 +75,10 @@ export const liveRules = [
 
     if (dom_cache.hasScripting || liveCount) {
       if (liveCount) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
       else {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', []);
       }
     }
   } // end validation function

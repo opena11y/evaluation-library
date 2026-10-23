@@ -39,7 +39,9 @@ export const helpRules = [
     target_resources    : ['page'],
     validate            : function (dom_cache, rule_result) {
 
-      rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      const domDoc = dom_cache.getRootDomDocument();
+
+      rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
    } // end validation function  }
   }

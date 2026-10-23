@@ -148,7 +148,7 @@
   /* constants.js */
 
   /* Constants */
-  const debug$19 = new DebugLogging('constants', false);
+  const debug$1a = new DebugLogging('constants', false);
 
   const VERSION = '3.0';
 
@@ -651,13 +651,13 @@
    */
 
   function getGuidelineId(sc) {
-    debug$19.flag && debug$19.log(`[getGuidelineId][sc]: ${sc}`);
+    debug$1a.flag && debug$1a.log(`[getGuidelineId][sc]: ${sc}`);
     const parts = sc.split('.');
     const gl = (parts.length === 3) ? `G_${parts[0]}_${parts[1]}` : ``;
     if (!gl) {
       return 0;
     }
-    debug$19.flag && debug$19.log(`[getGuidelineId][gl]: ${gl}`);
+    debug$1a.flag && debug$1a.log(`[getGuidelineId][gl]: ${gl}`);
     return WCAG_GUIDELINE[gl];
   }
 
@@ -1067,8 +1067,8 @@
   /* headingResults.js */
 
   /* constants */
-  const debug$18 = new DebugLogging('headingResults', false);
-  debug$18.flag = false;
+  const debug$19 = new DebugLogging('headingResults', false);
+  debug$19.flag = false;
 
   /**
    * @class headingResults
@@ -1089,11 +1089,11 @@
 
       this.headingData = [];
 
-      debug$18.flag && debug$18.log(`[        structureInfo]: ${domCache.structureInfo}`);
-      debug$18.flag && debug$18.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
+      debug$19.flag && debug$19.log(`[        structureInfo]: ${domCache.structureInfo}`);
+      debug$19.flag && debug$19.log(`[allHeadingDomElements]: ${domCache.structureInfo.allHeadingDomElements.length}`);
 
       domCache.structureInfo.allHeadingDomElements.forEach( de => {
-        debug$18.flag && debug$18.log(`[tagName]: ${de.tagName}`);
+        debug$19.flag && debug$19.log(`[tagName]: ${de.tagName}`);
 
         const dataItem = {
           level:             de.ariaInfo.ariaLevel,
@@ -1125,8 +1125,8 @@
   /* landmarkRegionResults.js */
 
   /* constants */
-  const debug$17 = new DebugLogging('landmarkRegionResults', false);
-  debug$17.flag = false;
+  const debug$18 = new DebugLogging('landmarkRegionResults', false);
+  debug$18.flag = false;
 
   /**
    * @class landmarkRegionResults
@@ -1145,14 +1145,14 @@
 
     update(domCache) {
 
-      debug$17.flag && debug$17.log(`[        structureInfo]: ${domCache.structureInfo}`);
-      debug$17.flag && debug$17.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
+      debug$18.flag && debug$18.log(`[        structureInfo]: ${domCache.structureInfo}`);
+      debug$18.flag && debug$18.log(`[allLandmarkDomElements]: ${domCache.structureInfo.allLandmarkElements.length}`);
 
       this.regionData = [];
 
       domCache.structureInfo.allLandmarkElements.forEach( le => {
         const de = le.domElement;
-        debug$17.flag && debug$17.log(`[role]: ${de.role}`);
+        debug$18.flag && debug$18.log(`[role]: ${de.role}`);
 
         const dataItem = {
           role:              de.role.toLowerCase(),
@@ -1184,8 +1184,8 @@
   /* linkResults.js */
 
   /* constants */
-  const debug$16 = new DebugLogging('linkResults', false);
-  debug$16.flag = false;
+  const debug$17 = new DebugLogging('linkResults', false);
+  debug$17.flag = false;
 
   const pdfExtensions = [
     'pdf'   // Protable document format
@@ -1346,8 +1346,8 @@
   /* ruleResultsSummary.js */
 
   /* constants */
-  const debug$15 = new DebugLogging('ruleResultsSummary', false);
-  debug$15.flag = false;
+  const debug$16 = new DebugLogging('ruleResultsSummary', false);
+  debug$16.flag = false;
 
   /**
    * @class ruleResultsSummary
@@ -11471,7 +11471,7 @@
   /* locale.js */
 
   /* Constants */
-  const debug$14 = new DebugLogging('locale', false);
+  const debug$15 = new DebugLogging('locale', false);
 
   // const globalUseCodeTags = true;
 
@@ -11527,7 +11527,7 @@
     if (!message) {
       message = `[common][error]: id="${id}"`;
     }
-    debug$14.flag && debug$14.log(`[${id}][${value}]: ${message}`);
+    debug$15.flag && debug$15.log(`[${id}][${value}]: ${message}`);
     return message;
   }
 
@@ -11754,7 +11754,7 @@
       for (const g in principle.guidelines) {
         const guideline = principle.guidelines[g];
         if (guideline.id === guidelineId) {
-          debug$14.flag && debug$14.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
+          debug$15.flag && debug$15.log(`[getGuidelineInfo][${guidelineId}]: ${guideline.title}`);
           return {
             num: g,
             title: guideline.title,
@@ -11764,7 +11764,7 @@
         }
       }
     }
-    debug$14.flag && debug$14.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
+    debug$15.flag && debug$15.log(`[getGuidelineInfo][${guidelineId}][ERROR]: `);
     // Assume all rules
     return {
       title: messages[locale].common.allRules,
@@ -11797,7 +11797,7 @@
         for (const sc in guideline.success_criteria) {
           const success_criterion = guideline.success_criteria[sc];
           if (sc === successCriterionId) {
-            debug$14.flag && debug$14.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
+            debug$15.flag && debug$15.log(`[getSuccessCriterionInfo][${successCriterionId}]: ${success_criterion.title}`);
             return {
               id: successCriterionId,
               level: success_criterion.level,
@@ -11809,7 +11809,7 @@
         }
       }
     }
-    debug$14.flag && debug$14.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
+    debug$15.flag && debug$15.log(`[getSuccessCriterionInfo][${successCriterionId}]: ERROR`);
     return null;
   }
 
@@ -11829,7 +11829,7 @@
    */
 
   function getSuccessCriteriaInfo(successCriteriaIds) {
-    debug$14.flag && debug$14.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
+    debug$15.flag && debug$15.log(`[getSuccessCriteriaInfo]: ${successCriteriaIds.length}`);
     const scInfoArray = [];
     successCriteriaIds.forEach( sc => {
       scInfoArray.push(getSuccessCriterionInfo(sc));
@@ -11877,7 +11877,7 @@
    */
 
   function getRuleDefinition (ruleId, transform=false) {
-    debug$14.flag && debug$14.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
+    debug$15.flag && debug$15.log(`[getRuleDefinition][${ruleId}]: ${messages[locale].rules[ruleId].DEFINITION}`);
     let m = messages[locale].rules[ruleId].DEFINITION;
     if (transform) m = transformToCode(m);
     return m;
@@ -11895,7 +11895,7 @@
    */
 
   function getRuleSummary (ruleId, transform=false) {
-    debug$14.flag && debug$14.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
+    debug$15.flag && debug$15.log(`[getRuleSummary][${ruleId}]: ${messages[locale].rules[ruleId].SUMMARY}`);
     let m = messages[locale].rules[ruleId].SUMMARY;
     if (transform) m = transformToCode(m);
     return m;
@@ -11913,7 +11913,7 @@
    */
 
   function getTargetResourcesDesc (ruleId, transform=false) {
-    debug$14.flag && debug$14.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
+    debug$15.flag && debug$15.log(`[getTargetResourcesDesc][${ruleId}]: ${messages[locale].rules[ruleId].TARGET_RESOURCES_DESC}`);
     let m = messages[locale].rules[ruleId].TARGET_RESOURCES_DESC;
     if (transform) m = transformToCode(m);
     return m;
@@ -11936,7 +11936,7 @@
       if (transform) p = transformToCode(p);
       purposes.push(p);
     });
-    debug$14.flag && debug$14.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
+    debug$15.flag && debug$15.log(`[getPurposes][${ruleId}]: ${purposes.join('; ')}`);
     return purposes;
   }
 
@@ -11957,7 +11957,7 @@
       if (transform) t = transformToCode(t);
       techniques.push(t);
     });
-    debug$14.flag && debug$14.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
+    debug$15.flag && debug$15.log(`[getTechniques][${ruleId}]: ${techniques.join('; ')}`);
     return techniques;
   }
 
@@ -11986,8 +11986,8 @@
           url: infoLink.url
         }
       );
-      debug$14.flag && debug$14.log(`[infoLink][title]: ${infoLink.title}`);
-      debug$14.flag && debug$14.log(`[infoLink][  url]: ${infoLink.url}`);
+      debug$15.flag && debug$15.log(`[infoLink][title]: ${infoLink.title}`);
+      debug$15.flag && debug$15.log(`[infoLink][  url]: ${infoLink.url}`);
     });
     return infoLinks;
   }
@@ -12009,7 +12009,7 @@
       if (transform) mc = transformToCode(mc);
       manualChecks.push(mc);
     });
-    debug$14.flag && debug$14.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
+    debug$15.flag && debug$15.log(`[getManualChecks][${ruleId}]: ${manualChecks.join('; ')}`);
     return manualChecks;
   }
 
@@ -12029,7 +12029,7 @@
     const msgs = messages[locale].rules[ruleId].RULE_RESULT_MESSAGES;
     for ( const key in msgs ) {
       resultMessages[key] = transform ? transformToCode(msgs[key]) : msgs[key];
-      debug$14.flag && debug$14.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+      debug$15.flag && debug$15.log(`[getRuleResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
     }
     return resultMessages;
   }
@@ -12050,7 +12050,7 @@
     const msgs = messages[locale].rules[ruleId].BASE_RESULT_MESSAGES;
     for ( const key in msgs ) {
       resultMessages[key] = transform ? transformToCode(msgs[key]) : msgs[key];
-      debug$14.flag && debug$14.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
+      debug$15.flag && debug$15.log(`[getBaseResultMessages][${ruleId}][${key}]: ${resultMessages[key]}`);
     }
     return resultMessages;
   }
@@ -12194,8 +12194,8 @@
   /* ruleResultsGroup.js */
 
   /* constants */
-  const debug$13 = new DebugLogging('ruleResultsGroup', false);
-  debug$13.flag = false;
+  const debug$14 = new DebugLogging('ruleResultsGroup', false);
+  debug$14.flag = false;
 
   /**
    * @class ruleResultsGroup
@@ -12255,8 +12255,8 @@
   /* controlInfo.js */
 
   /* Constants */
-  const debug$12 = new DebugLogging('ControlInfo', false);
-  debug$12.flag = false;
+  const debug$13 = new DebugLogging('ControlInfo', false);
+  debug$13.flag = false;
 
   /**
    * @class ControlElement
@@ -12460,7 +12460,7 @@
         prefix = '';
       }
       this.childControlElements.forEach( ce => {
-        debug$12.domElement(ce.domElement, prefix);
+        debug$13.domElement(ce.domElement, prefix);
         ce.showControlInfo(prefix + '  ');
       });
     }
@@ -12746,18 +12746,144 @@
      */
 
     showControlInfo () {
-      if (debug$12.flag) {
-        debug$12.log('== Control Tree ==', 1);
+      if (debug$13.flag) {
+        debug$13.log('== Control Tree ==', 1);
         this.childControlElements.forEach( ce => {
-          debug$12.domElement(ce.domElement);
+          debug$13.domElement(ce.domElement);
           ce.showControlInfo('  ');
         });
-        debug$12.log('== Forms ==', 1);
+        debug$13.log('== Forms ==', 1);
         this.allFormElements.forEach( ce => {
-          debug$12.domElement(ce.domElement);
+          debug$13.domElement(ce.domElement);
         });
       }
     }
+  }
+
+  /* domDocument.js */
+
+  /* Constants */
+  const debug$12 = new DebugLogging('domDocument', false);
+  debug$12.flag = false;
+
+  /**
+   * @class DOMDocument
+   *
+   * @desc Used to represent a dom document node for use in computing information
+   *       useful for accessibility rules.
+   *
+   * @param  {Object}  parentInfo - ParentInfo object 
+   * @param  {Object}  doc        - Document object
+   */
+
+  class DOMDocument {
+    constructor (parentInfo, position, node, doc) {
+      this.tagName = node && node.tagName ? node.tagName.toLowerCase() : 'root';
+      this.title   = node && node.title   ? node.title : '';
+
+
+      this.node =  node;
+      this.position   = position;
+      this.parentInfo = parentInfo;
+      this.doc = doc;
+      this._metaElems = [];
+
+      const metas = doc && doc.documentElement ?
+                       Array.from(doc.documentElement.querySelectorAll('head meta')) :
+                       [];
+
+      metas.forEach( (meta) => {
+          const domMeta = new DOMMeta(this, meta);
+          this._metaElems.push(domMeta);
+      });
+
+      // Information on rule results associated with this element
+      this.resultsHidden       = [];
+      this.resultsPassed       = [];
+      this.resultsViolations   = [];
+      this.resultsWarnings     = [];
+      this.resultsManualChecks = [];
+
+
+    }
+
+
+    /**
+     * @method getBodyElement
+     *
+     * @desc Returns the DOM node to attach highlighting element for this DOM element
+     *
+     * @return {String} see description
+     */
+
+    getBodyElement () {
+      return this.doc && this.doc.body ?
+             this.doc.body :
+             window.document.body;
+     }
+
+    /**
+     * @method metaElems
+     *
+     * @desc
+     *
+     * @return {obj} Returns body element of document
+     */
+
+    getMetaItems () {
+      return this._metaElems;
+    }
+
+    /**
+     * @method getIndentifier
+     *
+     * @desc
+     */
+
+    getIdentifier () {
+      return this.title ? `${this.tagName}: ${this.title}` : this.tagName;
+    }
+
+  }
+
+  /**
+   * @class DOMMeta
+   *
+   * @desc Used to represent a dom META element.
+   *
+   */
+
+  class DOMMeta {
+
+    constructor (domDoc, metaElem) {
+      this.domDoc = domDoc;
+      this.node = metaElem;
+      this.attrs = [];
+
+    }
+
+    /**
+     * @method getBodyElement
+     *
+     * @desc Returns the DOM node to attach highlighting element for this DOM element
+     *
+     * @return {String} see description
+     */
+
+    getBodyElement () {
+      return this.domDoc.getBodyElement();
+    }
+
+    /**
+     * @method getIndentifier
+     *
+     * @desc
+     */
+
+    getIdentifier () {
+      return 'meta';
+    }
+
   }
 
   /* gen-aria-property-data-types-1.2.js is a generated file, see https://github.com/opena11y/aria-to-code */
@@ -35705,6 +35831,7 @@
       this.lang             = elementNode.hasAttribute('lang') ?
                               elementNode.getAttribute('lang') :
                               '';
+      this.domDoc           = parentInfo.domDocument;
 
       if (addDataId) {
         elementNode.dataset.opena11yPosition = ordinalPosition.toString();
@@ -35873,16 +36000,10 @@
      */
 
     getBodyElement () {
-      let bodyElem = this.doc.body ?
-                       this.doc.body :
-                       this.doc.documentElement;
-
-      if (!bodyElem) {
-        bodyElem = window.document;
-      }
-
-      return bodyElem;
-    }
+      return this.domDoc && this.domDoc.body ?
+             this.domDoc.body :
+             window.document.body;
+     }
 
     /**
      * @method isDomText
@@ -37955,6 +38076,7 @@
     constructor (info) {
       this.controlElement  = null;
       this.document        = null;
+      this.domDocument     = null;
       this.parentDocument  = null;
       this.useParentDocForName = false;
       this.documentIndex   = 0;
@@ -37977,6 +38099,7 @@
       if (info) {
         this.controlElement  = info.controlElement;
         this.document        = info.document;
+        this.domDocument     = info.domDocument;
         this.parentDocument  = info.parentDocument;
         this.useParentDocForName = info.useParentDocForName;
         this.documentIndex   = info.documentIndex;
@@ -38034,24 +38157,14 @@
         this.lang = '';
       }
 
-      this.document = startingDoc;
-      this.bodyElem = startingDoc.body ?
-                      startingDoc.body :
-                      startingDoc.documentElement;
-
-      debug$L.log(`[bodyELem]: ${this.bodyElem}`);
-
       this.ariaVersion = ariaVersion;
 
       this.ordinalPosition = 2;
       this.documentIndex = 0;
 
+      this.allDomDocuments  = [];
       this.allDomElements   = [];
       this.allDomTexts      = [];
-
-      const parentInfo = new ParentInfo();
-      parentInfo.document        = startingDoc;
-      parentInfo.accNameDocument = startingDoc;
 
       this.controlInfo   = new ControlInfo();
       this.idInfo        = new IdInfo();
@@ -38064,6 +38177,18 @@
       this.timingInfo    = new TimingInfo();
       this.iframeInfo    = new IframeInfo();
 
+      const parentInfo = new ParentInfo();
+      const domDoc = new DOMDocument(parentInfo, 0, null, startingDoc);
+      this.allDomDocuments.push(domDoc);
+      parentInfo.document        = startingDoc;
+      parentInfo.domDocument     = domDoc;
+      parentInfo.accNameDocument = startingDoc;
+
+      this.document = startingDoc;
+      this.bodyElem = startingDoc.body ?
+                      startingDoc.body :
+                      startingDoc.documentElement;
+
       this.startingDomElement = new DOMElement(parentInfo, startingElement, 1, this.ariaVersion, addDataId);
       parentInfo.positionDomElement = this.startingDomElement;
       this.allDomElements.push(this.startingDomElement);
@@ -38075,6 +38200,7 @@
       this.resultsWarnings     = [];
       this.resultsManualChecks = [];
 
+
       parentInfo.domElement = this.startingDomElement;
       this.transverseDOM(parentInfo, startingElement, addDataId);
       this.computeAriaOwnsRefs();
@@ -38083,6 +38209,10 @@
       this.controlInfo.updateLabelForReferences();
 
       this.hasScripting = startingDoc.querySelector('script') ? true : false;
+    }
+
+    getRootDomDocument() {
+      return this.allDomDocuments[0];
     }
 
     getDomElementById(id) {
@@ -38233,12 +38363,16 @@
                     let isCrossDomain = false;
                     try {
                       const doc = node.contentDocument || node.contentWindow.document;
-
                       newParentInfo.document = doc;
-                      newParentInfo.positionDomElement = doc;
+
+                      const domDoc = new DOMDocument(parentInfo, this.allDomDocuments.length, node, doc);
+                      this.allDomDocuments.push(domDoc);
 
                       this.documentIndex += 1;
                       newParentInfo.documentIndex = this.documentIndex;
+                      newParentInfo.positionDomElement = doc;
+                      newParentInfo.domDocument = domDoc;
+
                       this.transverseDOM(newParentInfo, doc, addDataId);
                     } catch (error) {
                       isCrossDomain = true;
@@ -41618,7 +41752,7 @@
      *
      * @param  {Integer}  test_result   - Number representing a result value
      * @param  {Object}   result_item   - Reference to ElementResult or PageResult object
-     * @param  {Object}   dom_item      - Reference to DOMcache or domElement objects
+     * @param  {Object}   dom_item      - Reference to DOMDocument or domElement objects
      */
 
     updateResults (result_value, result_item, dom_item) {
@@ -41680,17 +41814,17 @@
      * @desc Adds a page result from an evaluation of rule on the dom
      *
      * @param  {Integer}  test_result         - Number representing if a node passed, failed, manual check or other test result
-     * @param  {Object}   dom_cache           - Reference to DOMcache for saving page results
+     * @param  {Object}   domDoc              - Reference to DOMDocument for saving page results
      * @param  {String}   message_id          - Reference to the message string in the NLS file
      * @param  {Array}    message_arguements  - Array of values used in the message string
      */
 
-    addPageResult (test_result, dom_cache, message_id, message_arguments) {
+    addPageResult (test_result, domDoc, message_id, message_arguments) {
       const result_value = getResultValue(test_result, this.isRuleRequired());
-      const page_result = new PageResult(this, result_value, dom_cache, message_id, message_arguments, this.pageResultIndex);
+      const page_result = new PageResult(this, result_value, domDoc, message_id, message_arguments, this.pageResultIndex);
       this.pageResultIndex += 1;
 
-      this.updateResults(result_value, page_result, dom_cache);
+      this.updateResults(result_value, page_result, domDoc);
     }
 
     /**
@@ -42005,7 +42139,9 @@
       target_resources    : ['video', 'audio', 'embed', 'object'],
       validate            : function (dom_cache, rule_result) {
 
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
       } // end validate function
     }
@@ -42044,8 +42180,10 @@
       target_resources    : ['widgets'],
       validate          : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.controlInfo.hasTextInput) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
       } // end validate function
@@ -42086,6 +42224,8 @@
       wcag_related_ids    : ['2.4.4'],
       target_resources    : ['a'],
       validate            : function (dom_cache, rule_result) {
+
+        const domDoc = dom_cache.getRootDomDocument();
 
         const bypassTargets = [
           'content',
@@ -42148,19 +42288,19 @@
         }
 
         if (hasSkipToButton) {
-          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+          rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
         }
         else {
           if (hasBypassLink) {
             if (targetDomElem) {
-              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
             }
             else {
-              rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+              rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
             }
           }
           else {
-            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', []);
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', []);
           }
         }
       } // end validation function  }
@@ -42324,7 +42464,9 @@
       target_resources    : [],
       validate            : function (dom_cache, rule_result) {
 
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
       } // end validate function
     },
@@ -42641,6 +42783,8 @@
       target_resources    : ['input[type="text"]', 'input[type="date"]', 'input[type="file"]', 'input[type="number"]', 'input[type="password"]', 'input[type="tel"]' , 'input[type="text"]', 'input[type="url"]', 'select', 'textarea', '[role="textbox"]', '[role="combobox"]', '[role="gridcell"]'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         const excludeRoles = ['group',
                               'listitem',
                               'menuitem',
@@ -42666,7 +42810,7 @@
         });
 
         if (count) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
       } // end validate function
     }
@@ -43880,6 +44024,9 @@
       wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
       target_resources    : ['h1'],
       validate            : function (dom_cache, rule_result) {
+
+        const domDoc = dom_cache.getRootDomDocument();
+
         let h1Count = 0;
 
         dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
@@ -43900,10 +44047,10 @@
         });
 
         if (h1Count === 0) {
-          rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+          rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
         }
         else {
-          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+          rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
         }
       } // end validate function
     },
@@ -44097,6 +44244,9 @@
     wcag_related_ids    : ['2.4.6', '2.4.10'],
     target_resources    : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     validate            : function (dom_cache, rule_result) {
+
+      const domDoc = dom_cache.getRootDomDocument();
+
       let nestingErrors = 0;
       let manualChecks = 0;
 
@@ -44126,23 +44276,22 @@
       }
 
       if (nestingErrors > 0) {
-        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [nestingErrors]);
+        rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', [nestingErrors]);
       }
       else {
         if (dom_cache.structureInfo.allHeadingDomElements.length > 0) {
           if (manualChecks > 0) {
             if (manualChecks === 1) {
-              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
             }
             else {
-              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [manualChecks]);
+              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', [manualChecks]);
             }
           } else {
-            rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+            rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
           }
         }
       }
-
 
     } // end validate function
   },
@@ -44299,7 +44448,9 @@
       target_resources    : ['page'],
       validate            : function (dom_cache, rule_result) {
 
-        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
      } // end validation function  }
     }
@@ -44763,6 +44914,8 @@
       target_resources    : ['links', 'controls', 'widgets'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let mcCount = 0;
         let passCount = 0;
 
@@ -44807,11 +44960,11 @@
         });
 
         if (mcCount) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
         else {
           if (passCount) {
-            rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+            rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
           }
         }
 
@@ -44900,6 +45053,8 @@
       target_resources    : ['Page', 'a', 'applet', 'area', 'button', 'input', 'object', 'select', 'area', 'widgets'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let controlCount = 0;
         let hiddenCount = 0;
 
@@ -44918,10 +45073,10 @@
 
         if (controlCount > 1) {
           if (hiddenCount == 0) {
-            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [controlCount]);
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [controlCount]);
           }
           else {
-            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [controlCount, hiddenCount]);
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', [controlCount, hiddenCount]);
           }
         }
 
@@ -44981,8 +45136,10 @@
       target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasScripting) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
       } // end validation function
@@ -45007,7 +45164,9 @@
       target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
       validate            : function (dom_cache, rule_result) {
 
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
       } // end validation function
     },
@@ -45031,7 +45190,9 @@
       target_resources    : ['button', 'input', 'links', 'output', 'textarea', 'widgets'],
       validate            : function (dom_cache, rule_result) {
 
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
       } // end validation function
     },
@@ -45173,6 +45334,8 @@
       target_resources    : ['nav', '[role="navigation"]'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         const MINIMUM_LINKS = 4;
         const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
         let navigationCount = 0;
@@ -45208,13 +45371,13 @@
           });
 
           if (listWithLinksCount > 0) {
-            rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+            rule_result.addWebsiteResult(TEST_RESULT.FAIL, domDoc, 'WEBSITE_FAIL_1', []);
           }
         } else {
           if (navigationCount === 1) {
-            rule_result.addWebsiteResult(TEST_RESULT.PASS, dom_cache, 'WEBSITE_PASS_1', []);
+            rule_result.addWebsiteResult(TEST_RESULT.PASS, domDoc, 'WEBSITE_PASS_1', []);
           } else {
-            rule_result.addWebsiteResult(TEST_RESULT.PASS, dom_cache, 'WEBSITE_PASS_2', [navigationCount]);
+            rule_result.addWebsiteResult(TEST_RESULT.PASS, domDoc, 'WEBSITE_PASS_2', [navigationCount]);
           }
         }
       } // end validate function
@@ -45670,6 +45833,9 @@
    */
 
   function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
+
+    const domDoc = dom_cache.getRootDomDocument();
+
     const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
     let roleCount = 0;
 
@@ -45697,16 +45863,16 @@
 
     if (roleCount === 0) {
       if (roleRequired) {
-        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+        rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
       }
       else {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
     } else {
       if (roleCount === 1) {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+        rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
       } else {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
+        rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_2', [roleCount]);
       }
     }
   }
@@ -45723,6 +45889,8 @@
    */
 
   function validateNoMoreThanOne(dom_cache, rule_result, role) {
+
+    const domDoc = dom_cache.getRootDomDocument();
 
     const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
     let totalRoleCount = 0;
@@ -45771,10 +45939,10 @@
 
     if (totalRoleCount > 0) {
       if (anyMoreThanOne) {
-        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
+        rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', [totalRoleCount]);
       }
       else {
-        rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+        rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
       }
     }
   }
@@ -45990,16 +46158,19 @@
       wcag_related_ids    : [],
       target_resources    : ['html'],
       validate            : function (dom_cache, rule_result) {
+
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.lang) {
           if (validLanguageCode(dom_cache.lang)) {
-            rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', [dom_cache.lang]);
+            rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', [dom_cache.lang]);
           }
           else {
-            rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_2', [dom_cache.lang]);
+            rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_2', [dom_cache.lang]);
           }
         }
         else {
-          rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+          rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
         }
       } // end validation function
     },
@@ -46023,6 +46194,8 @@
       target_resources    : ['[lang]'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let passCount = 0;
         let failCount = 0;
 
@@ -46044,11 +46217,11 @@
           }
         });
 
-        if (failCount === 1) rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
-        else if (failCount > 1) rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_2', [failCount]);
-        else if (passCount === 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-        else if (passCount > 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [passCount]);
-        else rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_3', []);
+        if (failCount === 1) rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
+        else if (failCount > 1) rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_2', [failCount]);
+        else if (passCount === 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
+        else if (passCount > 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', [passCount]);
+        else rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_3', []);
 
       } // end validation function
     }
@@ -46090,6 +46263,8 @@
       target_resources    : ['Page', 'table'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let layoutPass = 0;
         let layoutManualCheck = 0;
 
@@ -46120,11 +46295,11 @@
         });
 
         if (layoutManualCheck) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [layoutManualCheck]);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [layoutManualCheck]);
         }
         else {
           if (layoutPass) {
-            rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+            rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
           }
         }
       }  // end validation function
@@ -46227,7 +46402,9 @@
       target_resources    : ['page'],
       validate          : function (dom_cache, rule_result) {
 
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
       } // end validate function
     }
@@ -46488,6 +46665,8 @@
       target_resources    : ['ul', 'ol', 'li', '[role="list"]', '[role="listitem"]'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let listCount = 0;
 
         dom_cache.listInfo.allListElements.forEach ( le => {
@@ -46516,7 +46695,7 @@
         });
 
         if (listCount) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [listCount]);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [listCount]);
         }
 
       } // end validate function
@@ -46592,6 +46771,8 @@
     target_resources    : ['[role="alert"]','[role="log"]','[role="status"]','[aria-live]'],
     validate          : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let liveCount = 0;
 
       dom_cache.allDomElements.forEach( de => {
@@ -46628,7 +46809,7 @@
 
       if (dom_cache.hasScripting || liveCount) {
         {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', []);
         }
       }
     } // end validation function
@@ -46668,8 +46849,10 @@
       target_resources    : ['page'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasScripting) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
      } // end validation function  }
@@ -46725,6 +46908,8 @@
       target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\''],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let navigationCount = 0;
         let searchCount = 0;
 
@@ -46746,10 +46931,10 @@
         });
 
         if ((navigationCount > 0) && (searchCount > 0)) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', []);
         }
         else {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_2', []);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_2', []);
         }
 
       } // end validation function
@@ -46775,6 +46960,8 @@
       target_resources    : ['Website', 'role=\'main\'', 'role=\'navigation\'', 'role=\'banner\'', 'role=\'contentinfo\'','role=\'search\''],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         const landmarkRoles = [
           'banner',
           'complementary',
@@ -46796,7 +46983,7 @@
         });
 
         if ((landmarks.length > 0)) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', [landmarks.join(', ')]);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', [landmarks.join(', ')]);
         }
       } // end validation function
     },
@@ -46821,6 +47008,8 @@
       target_resources    : ['Website', 'h2'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let headingCount = 0;
 
         dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
@@ -46838,10 +47027,10 @@
         });
 
         if ((headingCount > 0)) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', []);
         }
         else {
-          rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.FAIL, domDoc, 'WEBSITE_FAIL_1', []);
         }
 
       } // end validation function
@@ -46867,6 +47056,8 @@
       target_resources    : ['Website', 'role=\'search\'', 'role=\'navigation\'', 'role=\'main\'', 'role=\'banner\'', 'role=\'contentinfo\'', 'h2'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         const landmarkRoles = [
           'banner',
           'complementary',
@@ -46888,7 +47079,7 @@
         });
 
         if ((landmarks.length > 0)) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', [landmarks.join(', ')]);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', [landmarks.join(', ')]);
         }
 
       } // end validation function
@@ -46914,6 +47105,8 @@
       target_resources    : ['Website', 'h2'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         let headingCount = 0;
 
         dom_cache.structureInfo.allHeadingDomElements.forEach( de => {
@@ -46931,10 +47124,10 @@
         });
 
         if ((headingCount > 0)) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'WEBSITE_MC_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'WEBSITE_MC_1', []);
         }
         else {
-          rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.FAIL, domDoc, 'WEBSITE_FAIL_1', []);
         }
 
       } // end validation function
@@ -46973,8 +47166,10 @@
       target_resources    : ['widgets'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasScripting) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
      } // end validation function  }
@@ -46999,8 +47194,10 @@
       target_resources    : ['widgets'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasScripting) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
      } // end validation function  }
@@ -47025,8 +47222,10 @@
       target_resources    : ['widgets'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasScripting) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
      } // end validation function  }
@@ -47116,7 +47315,9 @@
       wcag_related_ids    : [],
       target_resources    : ['content'],
       validate          : function (dom_cache, rule_result) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       } // end validate function
     },
 
@@ -47138,7 +47339,10 @@
       wcag_related_ids    : [],
       target_resources    : ['content'],
       validate          : function (dom_cache, rule_result) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       } // end validate function
     }
 
@@ -47175,7 +47379,9 @@
       wcag_related_ids    : [],
       target_resources    : ['button', 'link'],
       validate          : function (dom_cache, rule_result) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       } // end validate function
     }
 
@@ -47213,8 +47419,10 @@
       target_resources    : ['page'],
       validate            : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasScripting) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
      } // end validation function  }
@@ -47307,7 +47515,9 @@
       target_resources    : ['text'],
       validate          : function (dom_cache, rule_result) {
 
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        const domDoc = dom_cache.getRootDomDocument();
+
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
 
       } // end validate function
     }
@@ -48092,8 +48302,10 @@
       target_resources    : ['a', 'input', 'button', 'wdiget'],
       validate          : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
       if (dom_cache.controlInfo.allControlElements.length) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       }
 
       } // end validate function
@@ -48118,6 +48330,8 @@
       target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
       validate          : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         dom_cache.timingInfo.allTimingDomElements.forEach( de => {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
@@ -48128,7 +48342,7 @@
         });
 
         if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
       } // end validate function
     },
@@ -48152,6 +48366,8 @@
       target_resources    : ['canvas', 'embed', 'img', 'object', 'svg'],
       validate          : function (dom_cache, rule_result) {
 
+        const domDoc = dom_cache.getRootDomDocument();
+
         dom_cache.timingInfo.allTimingDomElements.forEach( de => {
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
@@ -48162,7 +48378,7 @@
         });
 
         if (dom_cache.timingInfo.allTimingDomElements.length > 0) {
-          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
 
       } // end validate function
@@ -48200,11 +48416,14 @@
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['Page', 'title'],
       validate            : function (dom_cache, rule_result) {
+
+        const domDoc = dom_cache.getRootDomDocument();
+
         if (dom_cache.hasTitle) {
-          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+          rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
         }
         else {
-          rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+          rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
         }
       } // end validate function
     },
@@ -50813,6 +51032,26 @@
       for (let i = 0; i < this.allDomElements.length; i += 1) {
         if (this.allDomElements[i].ordinalPosition === position) {
           return this.allDomElements[i];
+        }
+      }
+      return null;
+    }
+
+    /**
+     * @method getDomDocumentByPosition
+     *
+     * @desc Returns an DomDocument object with the associated id, otherwise
+     *       null if the DomDocument does not exist
+     *
+     * @param  {Number}  position  -  Position of the DOMDocument
+     *
+     * @return {DomDocument}  see @desc
+     */
+
+    getDomDocumentByPosition (position) {
+      for (let i = 0; i < this.allDomDocuments.length; i += 1) {
+        if (this.allDomDocuments[i].position === position) {
+          return this.allDomDocuments[i];
         }
       }
       return null;

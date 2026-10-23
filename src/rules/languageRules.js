@@ -83,16 +83,19 @@ export const languageRules = [
     wcag_related_ids    : [],
     target_resources    : ['html'],
     validate            : function (dom_cache, rule_result) {
+
+      const domDoc = dom_cache.getRootDomDocument();
+
       if (dom_cache.lang) {
         if (validLanguageCode(dom_cache.lang)) {
-          rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', [dom_cache.lang]);
+          rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', [dom_cache.lang]);
         }
         else {
-          rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_2', [dom_cache.lang]);
+          rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_2', [dom_cache.lang]);
         }
       }
       else {
-        rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+        rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
       }
     } // end validation function
   },
@@ -116,6 +119,8 @@ export const languageRules = [
     target_resources    : ['[lang]'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let passCount = 0;
       let failCount = 0;
 
@@ -137,11 +142,11 @@ export const languageRules = [
         }
       });
 
-      if (failCount === 1) rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
-      else if (failCount > 1) rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_2', [failCount]);
-      else if (passCount === 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
-      else if (passCount > 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_2', [passCount]);
-      else rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_3', []);
+      if (failCount === 1) rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
+      else if (failCount > 1) rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_2', [failCount]);
+      else if (passCount === 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
+      else if (passCount > 1) rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_2', [passCount]);
+      else rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_3', []);
 
     } // end validation function
   }

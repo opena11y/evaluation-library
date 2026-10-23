@@ -631,6 +631,26 @@ export default class EvaluationResult {
     return null;
   }
 
+  /**
+   * @method getDomDocumentByPosition
+   *
+   * @desc Returns an DomDocument object with the associated id, otherwise
+   *       null if the DomDocument does not exist
+   *
+   * @param  {Number}  position  -  Position of the DOMDocument
+   *
+   * @return {DomDocument}  see @desc
+   */
+
+  getDomDocumentByPosition (position) {
+    for (let i = 0; i < this.allDomDocuments.length; i += 1) {
+      if (this.allDomDocuments[i].position === position) {
+        return this.allDomDocuments[i];
+      }
+    }
+    return null;
+  }
+
 
   /**
    * @method getRuleResultsAll

@@ -106,6 +106,8 @@ export const landmarkRules = [
     target_resources    : ['nav', '[role="navigation"]'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       const MINIMUM_LINKS = 4;
       const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
       let navigationCount = 0;
@@ -141,13 +143,13 @@ export const landmarkRules = [
         });
 
         if (listWithLinksCount > 0) {
-          rule_result.addWebsiteResult(TEST_RESULT.FAIL, dom_cache, 'WEBSITE_FAIL_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.FAIL, domDoc, 'WEBSITE_FAIL_1', []);
         }
       } else {
         if (navigationCount === 1) {
-          rule_result.addWebsiteResult(TEST_RESULT.PASS, dom_cache, 'WEBSITE_PASS_1', []);
+          rule_result.addWebsiteResult(TEST_RESULT.PASS, domDoc, 'WEBSITE_PASS_1', []);
         } else {
-          rule_result.addWebsiteResult(TEST_RESULT.PASS, dom_cache, 'WEBSITE_PASS_2', [navigationCount]);
+          rule_result.addWebsiteResult(TEST_RESULT.PASS, domDoc, 'WEBSITE_PASS_2', [navigationCount]);
         }
       }
     } // end validate function
@@ -603,6 +605,9 @@ function validateTopLevelLandmark(dom_cache, rule_result, role) {
  */
 
 function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
+
+  const domDoc = dom_cache.getRootDomDocument();
+
   const allLandmarkElements = dom_cache.structureInfo.allLandmarkElements;
   let roleCount = 0;
 
@@ -630,16 +635,16 @@ function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
 
   if (roleCount === 0) {
     if (roleRequired) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', []);
+      rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', []);
     }
     else {
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', []);
+      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
     }
   } else {
     if (roleCount === 1) {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+      rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
     } else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_2', [roleCount]);
+      rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_2', [roleCount]);
     }
   }
 }
@@ -656,6 +661,8 @@ function validateAtLeastOne(dom_cache, rule_result, role, roleRequired) {
  */
 
 function validateNoMoreThanOne(dom_cache, rule_result, role) {
+
+  const domDoc = dom_cache.getRootDomDocument();
 
   const landmarkElementsByDoc = dom_cache.structureInfo.landmarkElementsByDoc;
   let totalRoleCount = 0;
@@ -704,10 +711,10 @@ function validateNoMoreThanOne(dom_cache, rule_result, role) {
 
   if (totalRoleCount > 0) {
     if (anyMoreThanOne) {
-      rule_result.addPageResult(TEST_RESULT.FAIL, dom_cache, 'PAGE_FAIL_1', [totalRoleCount]);
+      rule_result.addPageResult(TEST_RESULT.FAIL, domDoc, 'PAGE_FAIL_1', [totalRoleCount]);
     }
     else {
-      rule_result.addPageResult(TEST_RESULT.PASS, dom_cache, 'PAGE_PASS_1', []);
+      rule_result.addPageResult(TEST_RESULT.PASS, domDoc, 'PAGE_PASS_1', []);
     }
   }
 }

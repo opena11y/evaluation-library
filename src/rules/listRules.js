@@ -42,6 +42,8 @@ export const listRules = [
     target_resources    : ['ul', 'ol', 'li', '[role="list"]', '[role="listitem"]'],
     validate            : function (dom_cache, rule_result) {
 
+      const domDoc = dom_cache.getRootDomDocument();
+
       let listCount = 0;
 
       dom_cache.listInfo.allListElements.forEach ( le => {
@@ -70,7 +72,7 @@ export const listRules = [
       });
 
       if (listCount) {
-        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dom_cache, 'PAGE_MC_1', [listCount]);
+        rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', [listCount]);
       }
 
     } // end validate function
