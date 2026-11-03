@@ -184,6 +184,7 @@ export default class EvaluationResult {
     this.date           = getFormattedDate();
     this.version        = VERSION;
     this.allDomElements = [];
+    this.allDomDocuments = [];
 
     this._allRuleResults = [];
 
@@ -349,6 +350,7 @@ export default class EvaluationResult {
 
     const domCache        = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
     this.allDomElements   = domCache.allDomElements;
+    this.allDomDocuments  = domCache.allDomDocuments;
     this._allRuleResults = [];
     this._ruleResultsSummary.clear();
     this._rcRuleResultsGroup.clear();
@@ -402,7 +404,8 @@ export default class EvaluationResult {
     this.ariaVersion = validateAriaVersion(ariaVersion);
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
-    this.allDomElements = domCache.allDomElements;
+    this.allDomElements  = domCache.allDomElements;
+    this.allDomDocuments = domCache.allDomDocuments;
     this._allRuleResults = [];
     this._ruleResultsSummary.clear();
     this._rcRuleResultsGroup.clear();
@@ -451,7 +454,8 @@ export default class EvaluationResult {
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
-    this.allDomElements = domCache.allDomElements;
+    this.allDomElements  = domCache.allDomElements;
+    this.allDomDocuments = domCache.allDomDocuments;
     this._allRuleResults = [];
     this._ruleResultsSummary.clear();
     this._rcRuleResultsGroup.clear();
@@ -500,7 +504,8 @@ export default class EvaluationResult {
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
-    this.allDomElements = domCache.allDomElements;
+    this.allDomElements  = domCache.allDomElements;
+    this.allDomDocuments = domCache.allDomDocuments;
     this._allRuleResults = [];
     this._ruleResultsSummary.clear();
     this._rcRuleResultsGroup.clear();
@@ -547,7 +552,8 @@ export default class EvaluationResult {
     this.ariaVersion = ariaVersion;
 
     const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
-    this.allDomElements = domCache.allDomElements;
+    this.allDomElements  = domCache.allDomElements;
+    this.allDomDocuments = domCache.allDomDocuments;
     this._allRuleResults = [];
     this._ruleResultsSummary.clear();
     this._rcRuleResultsGroup.clear();
@@ -644,7 +650,7 @@ export default class EvaluationResult {
 
   getDomDocumentByPosition (position) {
     for (let i = 0; i < this.allDomDocuments.length; i += 1) {
-      if (this.allDomDocuments[i].position === position) {
+      if (this.allDomDocuments[i].ordinalPosition === position) {
         return this.allDomDocuments[i];
       }
     }

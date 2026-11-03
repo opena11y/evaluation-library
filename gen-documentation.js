@@ -385,12 +385,12 @@ const mainPages = [
         filename: 'rules-fs.html'
       },
       { content: 'content-rules-wave.njk',
-        title: 'WAVE Rules',
+        title: 'Related WAVE Rules',
         link: 'WAVE Rules',
         filename: 'rules-wave.html'
       },
       { content: 'content-rules-axe.njk',
-        title: 'aXe Rules',
+        title: 'Related aXe Rules',
         link: 'aXe Rules',
         filename: 'rules-axe.html'
       }
@@ -509,6 +509,8 @@ function createPage(page, mainNav, dropdownName='', dropdownPages=false) {
         wcag21: wcag21,
         wcag22: wcag22,
         firstStep: firstStep,
+        wave: wave,
+        axe: axe,
         firstStepRules: firstStepRules,
         axeRules: axeRules,
         waveRules: waveRules,
@@ -517,8 +519,10 @@ function createPage(page, mainNav, dropdownName='', dropdownPages=false) {
         allRuleScopes: allRuleScopes,
         allWaveRules: allWaveRules,
         unmappedWaveRules: unmappedWaveRules,
+        mappedWaveRulesCount: allWaveRules.length - unmappedWaveRules.length,
         allAxeRules: allAxeRules,
-        unmappedAxeRules: unmappedAxeRules
+        unmappedAxeRules: unmappedAxeRules,
+        mappedAxeRulesCount: allAxeRules.length - unmappedAxeRules.length
       });
 
     outputFile(page.filename, content);

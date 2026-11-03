@@ -513,6 +513,54 @@ export const imageRules = {
         url:   'https://a11y-101.com/development/svg'
       }
     ]
+  },
+  IMAGE_9: {
+      ID:         'Image 9',
+      DEFINITION: 'Every @figure@ element must contain exactly one @figcaption@ element.',
+      SUMMARY:    '@figure@ must have one @figcaption@',
+      TARGET_RESOURCES_DESC: '@figure@ and @figcaption@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Update the @figure@ element such that it contains only one @figcaption@ element.',
+        FAIL_P:   'Update %N_F @figure@ elements such that each contains only one @figcaption@ element.',
+        HIDDEN_S: 'One @figure@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H @figure@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'No @figure@ elements on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1: '@figure@ has one @figcaption@ element, verify the description accurately the content.',
+        ELEMENT_FAIL_1: 'The @figcapton@ element has no corresponding @figcaption@ element.  If the element does not contain a chart, graph or some other graphical image change the element to a @section@ or @div@ element, else add a @figcaption@ element describing the content.',
+        ELEMENT_FAIL_2: '@figcaption@ element is hidden from assistive technologies. Use CSS off-screen positioning instead of CSS display or visibility properties to remove @figcaption@ from graphical rendering.',
+        ELEMENT_FAIL_3: 'There are %1 @figcaption@ elements, update the code so the @figure@ contains only one @figcaption@ element.',
+        ELEMENT_HIDDEN_1: '@figure@ element was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        '@figure@ elements are like images, and the @figcaption@ is the way to provide the figure with an accessible name.',
+        'Multiple @figcaption@ elements contained in the same @figure@ may result in the improper calculation of labels for assistive technologies.',
+        'The @figure@ element without a corresponding @figcaption@ can be used as a generic container with any @role@, but it is a best practice to use the @section@ or @div@ elements instead, and reserve the @figure@/@figcaption@ elements for charts, graphs, or other composite images.'
+      ],
+      TECHNIQUES: [
+        'A @figure@ element should have one and only one @figcaption@ element to describe the purpose of the form controls it contains.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @figure@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-figure-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @figcpation@ element',
+          url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-figcaption-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <figure>: The Figure element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN <figcaption>: The Figcaption element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption'
+        }
+      ]
   }
 }
 

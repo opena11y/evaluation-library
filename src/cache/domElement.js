@@ -245,8 +245,8 @@ export default class DOMElement {
    */
 
   getBodyElement () {
-    return this.domDoc && this.domDoc.body ?
-           this.domDoc.body :
+    return this.domDoc && this.domDoc.getBodyElement() ?
+           this.domDoc.getBodyElement() :
            window.document.body;
    }
 

@@ -30,7 +30,7 @@ debug.flag = false;
  * @desc Constructor for an object that contains a the results of
  *          the evaluation of a rule on a element or page
  *
- * @param  {Object}       domElement   - DomElement reference to element information used by this rule result
+ * @param  {Object}       domItem       - DomElement od DomDocument reference to element information used by this rule result
  * @param  {ResultRule}   ruleResult   - reference to the rule result object
  * @param  {Number}       resultValue  - Constant representing result value of the evaluation result
  * @param  {String}       msgId        - String reference to the message string in the NLS file
@@ -47,11 +47,11 @@ debug.flag = false;
  */
 
 export default class BaseResult {
-  constructor (domElement, ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
+  constructor (domItem, ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
 
     const msg = ruleResult.rule.base_result_msgs[msgId];
 
-    this.domElement = domElement;
+    this.domItem = domItem;
     this.result_type       = RESULT_TYPE.BASE;
     this.rule_result       = ruleResult;
     this.result_value      = resultValue;
@@ -62,6 +62,20 @@ export default class BaseResult {
     this.result_identifier = resultIdentifier;
 
   }
+
+  /**
+   * @method getOrdinalPosition
+   *
+   * @desc Gets a string identifying the ordinal position,
+   *       is overrided by ElementResult and PageResult
+   *
+   * @return {String} see description
+   */
+
+  getOrdinalPosition () {
+    return this.domItem.ordinalPosition;
+  }
+
 
   /**
    * @getter isActionMessage
@@ -122,7 +136,7 @@ export default class BaseResult {
    */
 
   getBodyElement () {
-    const bodyElem = this.domElement.getBodyElement();
+    const bodyElem = this.domItem.getBodyElement();
     debug.log(`[getBodyElement][bodyElem]: ${bodyElem}`);
     return bodyElem;
   }

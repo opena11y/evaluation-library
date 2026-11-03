@@ -49,6 +49,8 @@ export default class ElementResult extends BaseResult {
           message_arguments,
           domElement.getIdentifier());
 
+    this.domElement = domElement;
+
     this.result_type    = RESULT_TYPE.ELEMENT;
     this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
 

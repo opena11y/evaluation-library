@@ -61,6 +61,29 @@ class MapElement {
 
 
 /**
+ * @class FigureElement
+ *
+ * @desc Identifies a DOM element as an figure element
+ *
+ * @param  {Object}  domElement   - Structural Information
+ */
+
+class FigureElement {
+  constructor (domElement) {
+    this.domElement = domElement;
+    this.figcaptionDomElements = [];
+  }
+
+  addFigcaptionDomElement (domElement) {
+    this.figcaptionDomElements.push(domElement);
+  }
+
+  toString () {
+    return this.domElement.role;
+  }
+}
+
+/**
  * @class ImageInfo
  *
  * @desc Collects information on the image elements on a web page for use in
@@ -69,9 +92,10 @@ class MapElement {
 
 export default class ImageInfo {
   constructor () {
-    this.allImageElements  = [];
+    this.allImageElements     = [];
     this.allSVGDomElements    = [];
-    this.allMapElements       = []
+    this.allMapElements       = [];
+    this.allFigureElements    = [];
   }
 
   /**
@@ -107,6 +131,23 @@ export default class ImageInfo {
   }
 
   /**
+   * @method addFigureElement
+   *
+   * @desc Creates a new FigureElementto the array of
+   *       FigureElements
+   *
+   * @param  {Object}  domElement -
+   *
+   */
+
+  addFigureElement (domElement) {
+    const fe = new FigureElement(domElement);
+    this.allFigureElements.push(fe);
+    return fe;
+  }
+
+
+  /**
    * @method isImage
    *
    * @desc Tests if a domElement for role of "img"
@@ -118,6 +159,31 @@ export default class ImageInfo {
     return (domElement.role === 'img') ||
            (domElement.role === 'image') || // Support in ARIA 1.3
            (domElement.tagName === 'img');
+  }
+
+  /**
+   * @method isFigure
+   *
+   * @desc Tests if a domElement for role of "figure"
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isFigure (domElement) {
+    return (domElement.role === 'figure') ||
+           (domElement.tagName === 'figure');
+  }
+
+  /**
+   * @method isFigcaption
+   *
+   * @desc Tests if a domElement for role of "figcaption"
+   *
+   * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+   */
+
+  isFigcaption (domElement) {
+    return (domElement.tagName === 'figcaption');
   }
 
   /**
@@ -161,14 +227,16 @@ export default class ImageInfo {
    *
    * @desc Checks to see if the domElement has a role of "img" or a graphical tag name
    *
-   * @param  {Object}  parentMapElement  - current ancestor MapElement object
-   * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+   * @param  {Object}  parentMapElement     - current ancestor MapElement object
+   * @param  {Object}  parentFigureElement  - current ancestor FigureElement object
+   * @param  {Object}  domElement           - DOMElement object representing an element in the DOM
    *
    * @return {Object}  Last MapElement object
    */
 
-  update (parentMapElement, domElement) {
+  update (parentMapElement, parentFigureElement, domElement) {
     let currentMapElement = parentMapElement;
+    let currentFigureElement = parentFigureElement;
 
     if (this.isImage(domElement)) {
       this.addImageElement(domElement);
@@ -188,7 +256,18 @@ export default class ImageInfo {
       }
     }
 
-    return currentMapElement;
+    if (this.isFigure(domElement)) {
+      currentFigureElement = this.addFigureElement(domElement);
+    }
+
+    if (this.isFigcaption(domElement)) {
+      if (parentFigureElement) {
+        parentFigureElement.addFigcaptionDomElement(domElement);
+      }
+    }
+
+
+    return [currentMapElement, currentFigureElement];
   }
 
   /**

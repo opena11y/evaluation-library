@@ -7,6 +7,7 @@
   {% endif %}
 {% endmacro %}
 
+          <p>{{mappedAxeRulesCount}} of {{allAxeRules.length}} of aXe rules have a related OpenA11y Rule.</p>
 
           {% for rc in allRuleCategories %}
             <h2 id="rc-{{rc.id}}" class="rules">{{rc.title}}</h2>
@@ -46,8 +47,7 @@
             </table>
           {% endfor %}
 
-          <h2 id="axe-rules" class="rules">Unmapped aXe Rules</h2>
-          <p>{{unmappedAxeRules.length}} of {{allAxeRules.length}} of aXe rules are NOT mapped to OpenA11y rules.</p>
+          <h2 id="axe-rules" class="rules">{{unmappedAxeRules.length}} aXe Rules without a related OpenA11y Rule</h2>
           <table class="table table-striped" aria-labelledby="axe-rules">
             <thead>
               <th>aXe Reference</th>

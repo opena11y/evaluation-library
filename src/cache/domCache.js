@@ -61,6 +61,7 @@ class ParentInfo {
     this.landmarkElement = null;
     this.listElement     = null;
     this.mapElement      = null;
+    this.figureElement   = null;
     this.mediaElement    = null;
     this.tableElement    = null;
     this.tableRowGroup   = null;
@@ -85,6 +86,7 @@ class ParentInfo {
       this.landmarkElement = info.landmarkElement;
       this.listElement     = info.listElement;
       this.mapElement      = info.mapElement;
+      this.figureElement   = info.figureElement;
       this.mediaElement    = info.mediaElement;
       this.tableElement    = info.tableElement;
       this.tableRowGroup   = info.tableRowGroup;
@@ -154,7 +156,7 @@ export default class DOMCache {
     this.iframeInfo    = new IFrameInfo();
 
     const parentInfo = new ParentInfo();
-    const domDoc = new DOMDocument(parentInfo, 0, null, startingDoc);
+    const domDoc = new DOMDocument(parentInfo, 1, startingDoc, null);
     this.allDomDocuments.push(domDoc);
     parentInfo.document        = startingDoc;
     parentInfo.domDocument     = domDoc;
@@ -359,7 +361,10 @@ export default class DOMCache {
                     const doc = node.contentDocument || node.contentWindow.document;
                     newParentInfo.document = doc;
 
-                    const domDoc = new DOMDocument(parentInfo, this.allDomDocuments.length, node, doc);
+                    const pos = this.allDomDocuments.length + 1;
+
+                    const domDoc = new DOMDocument(parentInfo, pos, doc, domItem);
+
                     this.allDomDocuments.push(domDoc);
 
                     this.documentIndex += 1;
@@ -406,6 +411,7 @@ export default class DOMCache {
     const landmarkElement = parentInfo.landmarkElement;
     const listElement     = parentInfo.listElement;
     const mapElement      = parentInfo.mapElement;
+    const figureElement   = parentInfo.figureElement;
     const mediaElement    = parentInfo.mediaElement;
     const tableElement    = parentInfo.tableElement;
     const tableRowGroup   = parentInfo.tableRowGroup;
@@ -417,7 +423,7 @@ export default class DOMCache {
     newParentInfo.isDisabled      = domElement.isDisabled;
 
     newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
-    newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
+    [newParentInfo.mapElement, newParentInfo.figureElement] = this.imageInfo.update(mapElement, figureElement, domElement);
     newParentInfo.inLink          = this.linkInfo.update(domElement, parentInfo.inLink);
     newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
     newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);

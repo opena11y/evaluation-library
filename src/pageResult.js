@@ -18,7 +18,7 @@ debug.flag = false;
  *
  * @param  {ResultRule}   rule_result         - reference to the rule result object
  * @param  {Number}       result_value        - Constant representing result value of the evaluation result
- * @param  {Object}       domElement          - DomElement of the body element of the document
+ * @param  {DOMDocument}  domDocument         - Object reference to DOMDocument object item associated with the test
  * @param  {String}       message_id          - String reference to the message string in the NLS file
  * @param  {Array}        message_arguments   - Array  array of values used in the message string
  * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -29,16 +29,16 @@ debug.flag = false;
  * @private
  * @constructor Internal Properties
  *
- * @property  {RuleResult} rule_result         - reference to the rule result object
- * @property  {Number}     result_value        - Constant representing result value of the evaluation result
- * @property  {DOMElement} cache_item          - Object reference to cache item associated with the test
- * @property  {String}     message_id          - String reference to the message string in the NLS file
- * @property  {Array}      message_arguments   - Array  array of values used in the message string
+ * @property  {RuleResult}  rule_result         - reference to the rule result object
+ * @property  {Number}      result_value        - Constant representing result value of the evaluation result
+ * @property  {DOMDocument} domDocument         - Object reference to DOMDocument object item associated with the test
+ * @property  {String}      message_id          - String reference to the message string in the NLS file
+ * @property  {Array}       message_arguments   - Array  array of values used in the message string
  */
 
 export default class PageResult extends BaseResult {
-  constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
-    super(domElement,
+  constructor (rule_result, result_value, domDocument, message_id, message_arguments, resultIndex) {
+    super(domDocument,
           rule_result,
           result_value,
           message_id,

@@ -18,24 +18,41 @@ debug.flag = false;
  */
 
 export default class DOMDocument {
-  constructor (parentInfo, position, node, doc) {
-    this.tagName = node && node.tagName ? node.tagName.toLowerCase() : 'root';
-    this.title   = node && node.title   ? node.title : '';
-
-
-    this.node =  node;
-    this.position   = position;
+  constructor (parentInfo, position, doc, domElem=null) {
     this.parentInfo = parentInfo;
+    this.ordinalPosition = position;
     this.doc = doc;
-    this._metaElems = [];
+    this.domElement = domElem;
+
+    this.tagName = domElem && domElem.tagName ? domElem.tagName.toLowerCase() : 'root';
+    this.title   = domElem && domElem.node.title   ? domElem.node.title : doc.title;
+
+    this.hasRefresh = false;
+    this.refreshTime = '';
+    this.refreshURL = '';
 
     const metas = doc && doc.documentElement ?
-                     Array.from(doc.documentElement.querySelectorAll('head meta')) :
+                     Array.from(doc.querySelectorAll('head meta')) :
                      [];
 
     metas.forEach( (meta) => {
-        const domMeta = new DOMMeta(this, meta);
-        this._metaElems.push(domMeta);
+      const hasRefresh = meta.hasAttribute('http-equiv') &&
+                         meta.getAttribute('http-equiv').toLowerCase() === 'refresh';
+      const content    = meta.hasAttribute('content') ?
+                         meta.getAttribute('content').split(';') :
+                         '';
+
+      const refreshTime = hasRefresh ? parseInt(content[0]) : '';
+
+      const refreshURL  = hasRefresh &&
+                          content.length > 1 &&
+                          content[1].includes('=')
+                          ? content[1].split('=')[1] : [];
+      if (hasRefresh && !isNaN(refreshTime)) {
+        this.hasRefresh   = true;
+        this.refreshTime  = refreshTime;
+        this.refreshURL   = refreshURL;
+      }
     });
 
     // Information on rule results associated with this element
@@ -44,9 +61,8 @@ export default class DOMDocument {
     this.resultsViolations   = [];
     this.resultsWarnings     = [];
     this.resultsManualChecks = [];
-
-
   }
+
 
 
   /**
@@ -87,42 +103,3 @@ export default class DOMDocument {
 
 }
 
-/**
- * @class DOMMeta
- *
- * @desc Used to represent a dom META element.
- *
- */
-
-class DOMMeta {
-
-  constructor (domDoc, metaElem) {
-    this.domDoc = domDoc;
-    this.node = metaElem;
-    this.attrs = [];
-
-  }
-
-  /**
-   * @method getBodyElement
-   *
-   * @desc Returns the DOM node to attach highlighting element for this DOM element
-   *
-   * @return {String} see description
-   */
-
-  getBodyElement () {
-    return this.domDoc.getBodyElement();
-  }
-
-  /**
-   * @method getIndentifier
-   *
-   * @desc
-   */
-
-  getIdentifier () {
-    return 'meta';
-  }
-
-}

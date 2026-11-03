@@ -5478,6 +5478,54 @@
           url:   'https://a11y-101.com/development/svg'
         }
       ]
+    },
+    IMAGE_9: {
+        ID:         'Image 9',
+        DEFINITION: 'Every @figure@ element must contain exactly one @figcaption@ element.',
+        SUMMARY:    '@figure@ must have one @figcaption@',
+        TARGET_RESOURCES_DESC: '@figure@ and @figcaption@ elements',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Update the @figure@ element such that it contains only one @figcaption@ element.',
+          FAIL_P:   'Update %N_F @figure@ elements such that each contains only one @figcaption@ element.',
+          HIDDEN_S: 'One @figure@ element that is hidden was not evaluated.',
+          HIDDEN_P: 'The %N_H @figure@ elements that are hidden were not evaluated.',
+          NOT_APPLICABLE: 'No @figure@ elements on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_PASS_1: '@figure@ has one @figcaption@ element, verify the description accurately the content.',
+          ELEMENT_FAIL_1: 'The @figcapton@ element has no corresponding @figcaption@ element.  If the element does not contain a chart, graph or some other graphical image change the element to a @section@ or @div@ element, else add a @figcaption@ element describing the content.',
+          ELEMENT_FAIL_2: '@figcaption@ element is hidden from assistive technologies. Use CSS off-screen positioning instead of CSS display or visibility properties to remove @figcaption@ from graphical rendering.',
+          ELEMENT_FAIL_3: 'There are %1 @figcaption@ elements, update the code so the @figure@ contains only one @figcaption@ element.',
+          ELEMENT_HIDDEN_1: '@figure@ element was not evaluated because it is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          '@figure@ elements are like images, and the @figcaption@ is the way to provide the figure with an accessible name.',
+          'Multiple @figcaption@ elements contained in the same @figure@ may result in the improper calculation of labels for assistive technologies.',
+          'The @figure@ element without a corresponding @figcaption@ can be used as a generic container with any @role@, but it is a best practice to use the @section@ or @div@ elements instead, and reserve the @figure@/@figcaption@ elements for charts, graphs, or other composite images.'
+        ],
+        TECHNIQUES: [
+          'A @figure@ element should have one and only one @figcaption@ element to describe the purpose of the form controls it contains.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'HTML Specification: The @figure@ element',
+            url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-figure-element'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'HTML Specification: The @figcpation@ element',
+            url:   'https://html.spec.whatwg.org/dev/form-elements.html#the-figcaption-element'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN <figure>: The Figure element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN <figcaption>: The Figcaption element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption'
+          }
+        ]
     }
   };
 
@@ -9863,6 +9911,46 @@
             url:   'https://www.w3.org/WAI/WCAG20/Understanding/three-flashes-or-below-threshold'
           }
         ]
+    },
+    TIMING_4: {
+        ID:                    'Timing 4',
+        DEFINITION:            'Users must be able to control refreshing or other major changes in content of a page.',
+        SUMMARY:               'Automatic refresh',
+        TARGET_RESOURCES_DESC: 'Meta elements and scripting used to automatically refresh content or change context to another window',
+        RULE_RESULT_MESSAGES: {
+          MANUAL_CHECK_S:     'Verify the page does not include scripting that automatically reloads page content or cause unanticipated changes in focus.',
+          MANUAL_CHECK_P:     'Verify the page and any of the @iframe@s do not include scripting the automatically reloads page content or cause unanticipated changes in focus .',
+          FAIL_S:             'Remove the @meta http-equiv="refresh"@ element.',
+          FAIL_P:             'Remove the %N_F @meta http-equiv="refresh"@ elements.',
+          HIDDEN_S:           'Element in hidden @iframe@ was not tested for automatic refresh.',
+          HIDDEN_P:           '%N_F elements in hidden @iframe@s were not tested for automatic refresh.'
+         },
+        BASE_RESULT_MESSAGES: {
+          PAGE_MC_1:        'Verify the scripting on the page does not automatically refresh content or cause unanticipated changes in focus.',
+          PAGE_FAIL_1:      'Remove the @meta http-equiv="refresh"@ element from the @iframe@ .',
+          PAGE_FAIL_2:      'Remove the @meta http-equiv="refresh"@ element.',
+          PAGE_HIDDEN_1:    '@iframe@ was hidden and was not tested for automatically refreshing content.'
+        },
+        PURPOSES: [
+          'Pages that automatically change location or refresh are unusable by screen reader and keyboard users since focus will constantly be taking them back to the top of the page.'
+        ],
+        TECHNIQUES: [
+          'Remove @meta http-equiv="refresh" content="{time}; url..@ elements with @time@ greater than 0 which cause automatic refresh or redirects.',
+          'Provide users with controls to update of content.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'Understanding 2.2.1 ',
+            url:   'https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html'
+          },
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'Understanding 2.2.1 ',
+            url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F40'
+          }
+
+        ]
     }
   };
 
@@ -12777,24 +12865,41 @@
    */
 
   class DOMDocument {
-    constructor (parentInfo, position, node, doc) {
-      this.tagName = node && node.tagName ? node.tagName.toLowerCase() : 'root';
-      this.title   = node && node.title   ? node.title : '';
-
-
-      this.node =  node;
-      this.position   = position;
+    constructor (parentInfo, position, doc, domElem=null) {
       this.parentInfo = parentInfo;
+      this.ordinalPosition = position;
       this.doc = doc;
-      this._metaElems = [];
+      this.domElement = domElem;
+
+      this.tagName = domElem && domElem.tagName ? domElem.tagName.toLowerCase() : 'root';
+      this.title   = domElem && domElem.node.title   ? domElem.node.title : doc.title;
+
+      this.hasRefresh = false;
+      this.refreshTime = '';
+      this.refreshURL = '';
 
       const metas = doc && doc.documentElement ?
-                       Array.from(doc.documentElement.querySelectorAll('head meta')) :
+                       Array.from(doc.querySelectorAll('head meta')) :
                        [];
 
       metas.forEach( (meta) => {
-          const domMeta = new DOMMeta(this, meta);
-          this._metaElems.push(domMeta);
+        const hasRefresh = meta.hasAttribute('http-equiv') &&
+                           meta.getAttribute('http-equiv').toLowerCase() === 'refresh';
+        const content    = meta.hasAttribute('content') ?
+                           meta.getAttribute('content').split(';') :
+                           '';
+
+        const refreshTime = hasRefresh ? parseInt(content[0]) : '';
+
+        const refreshURL  = hasRefresh &&
+                            content.length > 1 &&
+                            content[1].includes('=')
+                            ? content[1].split('=')[1] : [];
+        if (hasRefresh && !isNaN(refreshTime)) {
+          this.hasRefresh   = true;
+          this.refreshTime  = refreshTime;
+          this.refreshURL   = refreshURL;
+        }
       });
 
       // Information on rule results associated with this element
@@ -12803,9 +12908,8 @@
       this.resultsViolations   = [];
       this.resultsWarnings     = [];
       this.resultsManualChecks = [];
-
-
     }
+
 
 
     /**
@@ -12842,46 +12946,6 @@
 
     getIdentifier () {
       return this.title ? `${this.tagName}: ${this.title}` : this.tagName;
-    }
-
-  }
-
-  /**
-   * @class DOMMeta
-   *
-   * @desc Used to represent a dom META element.
-   *
-   */
-
-  class DOMMeta {
-
-    constructor (domDoc, metaElem) {
-      this.domDoc = domDoc;
-      this.node = metaElem;
-      this.attrs = [];
-
-    }
-
-    /**
-     * @method getBodyElement
-     *
-     * @desc Returns the DOM node to attach highlighting element for this DOM element
-     *
-     * @return {String} see description
-     */
-
-    getBodyElement () {
-      return this.domDoc.getBodyElement();
-    }
-
-    /**
-     * @method getIndentifier
-     *
-     * @desc
-     */
-
-    getIdentifier () {
-      return 'meta';
     }
 
   }
@@ -36000,8 +36064,8 @@
      */
 
     getBodyElement () {
-      return this.domDoc && this.domDoc.body ?
-             this.domDoc.body :
+      return this.domDoc && this.domDoc.getBodyElement() ?
+             this.domDoc.getBodyElement() :
              window.document.body;
      }
 
@@ -36582,6 +36646,29 @@
 
 
   /**
+   * @class FigureElement
+   *
+   * @desc Identifies a DOM element as an figure element
+   *
+   * @param  {Object}  domElement   - Structural Information
+   */
+
+  class FigureElement {
+    constructor (domElement) {
+      this.domElement = domElement;
+      this.figcaptionDomElements = [];
+    }
+
+    addFigcaptionDomElement (domElement) {
+      this.figcaptionDomElements.push(domElement);
+    }
+
+    toString () {
+      return this.domElement.role;
+    }
+  }
+
+  /**
    * @class ImageInfo
    *
    * @desc Collects information on the image elements on a web page for use in
@@ -36590,9 +36677,10 @@
 
   class ImageInfo {
     constructor () {
-      this.allImageElements  = [];
+      this.allImageElements     = [];
       this.allSVGDomElements    = [];
       this.allMapElements       = [];
+      this.allFigureElements    = [];
     }
 
     /**
@@ -36628,6 +36716,23 @@
     }
 
     /**
+     * @method addFigureElement
+     *
+     * @desc Creates a new FigureElementto the array of
+     *       FigureElements
+     *
+     * @param  {Object}  domElement -
+     *
+     */
+
+    addFigureElement (domElement) {
+      const fe = new FigureElement(domElement);
+      this.allFigureElements.push(fe);
+      return fe;
+    }
+
+
+    /**
      * @method isImage
      *
      * @desc Tests if a domElement for role of "img"
@@ -36639,6 +36744,31 @@
       return (domElement.role === 'img') ||
              (domElement.role === 'image') || // Support in ARIA 1.3
              (domElement.tagName === 'img');
+    }
+
+    /**
+     * @method isFigure
+     *
+     * @desc Tests if a domElement for role of "figure"
+     *
+     * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+     */
+
+    isFigure (domElement) {
+      return (domElement.role === 'figure') ||
+             (domElement.tagName === 'figure');
+    }
+
+    /**
+     * @method isFigcaption
+     *
+     * @desc Tests if a domElement for role of "figcaption"
+     *
+     * @param  {Object}  domElement - DOMElement object representing an element in the DOM
+     */
+
+    isFigcaption (domElement) {
+      return (domElement.tagName === 'figcaption');
     }
 
     /**
@@ -36682,14 +36812,16 @@
      *
      * @desc Checks to see if the domElement has a role of "img" or a graphical tag name
      *
-     * @param  {Object}  parentMapElement  - current ancestor MapElement object
-     * @param  {Object}  domElement        - DOMElement object representing an element in the DOM
+     * @param  {Object}  parentMapElement     - current ancestor MapElement object
+     * @param  {Object}  parentFigureElement  - current ancestor FigureElement object
+     * @param  {Object}  domElement           - DOMElement object representing an element in the DOM
      *
      * @return {Object}  Last MapElement object
      */
 
-    update (parentMapElement, domElement) {
+    update (parentMapElement, parentFigureElement, domElement) {
       let currentMapElement = parentMapElement;
+      let currentFigureElement = parentFigureElement;
 
       if (this.isImage(domElement)) {
         this.addImageElement(domElement);
@@ -36709,7 +36841,18 @@
         }
       }
 
-      return currentMapElement;
+      if (this.isFigure(domElement)) {
+        currentFigureElement = this.addFigureElement(domElement);
+      }
+
+      if (this.isFigcaption(domElement)) {
+        if (parentFigureElement) {
+          parentFigureElement.addFigcaptionDomElement(domElement);
+        }
+      }
+
+
+      return [currentMapElement, currentFigureElement];
     }
 
     /**
@@ -38085,6 +38228,7 @@
       this.landmarkElement = null;
       this.listElement     = null;
       this.mapElement      = null;
+      this.figureElement   = null;
       this.mediaElement    = null;
       this.tableElement    = null;
       this.tableRowGroup   = null;
@@ -38109,6 +38253,7 @@
         this.landmarkElement = info.landmarkElement;
         this.listElement     = info.listElement;
         this.mapElement      = info.mapElement;
+        this.figureElement   = info.figureElement;
         this.mediaElement    = info.mediaElement;
         this.tableElement    = info.tableElement;
         this.tableRowGroup   = info.tableRowGroup;
@@ -38178,7 +38323,7 @@
       this.iframeInfo    = new IframeInfo();
 
       const parentInfo = new ParentInfo();
-      const domDoc = new DOMDocument(parentInfo, 0, null, startingDoc);
+      const domDoc = new DOMDocument(parentInfo, 1, startingDoc, null);
       this.allDomDocuments.push(domDoc);
       parentInfo.document        = startingDoc;
       parentInfo.domDocument     = domDoc;
@@ -38365,7 +38510,10 @@
                       const doc = node.contentDocument || node.contentWindow.document;
                       newParentInfo.document = doc;
 
-                      const domDoc = new DOMDocument(parentInfo, this.allDomDocuments.length, node, doc);
+                      const pos = this.allDomDocuments.length + 1;
+
+                      const domDoc = new DOMDocument(parentInfo, pos, doc, domItem);
+
                       this.allDomDocuments.push(domDoc);
 
                       this.documentIndex += 1;
@@ -38409,6 +38557,7 @@
       const landmarkElement = parentInfo.landmarkElement;
       const listElement     = parentInfo.listElement;
       const mapElement      = parentInfo.mapElement;
+      const figureElement   = parentInfo.figureElement;
       const mediaElement    = parentInfo.mediaElement;
       const tableElement    = parentInfo.tableElement;
       const tableRowGroup   = parentInfo.tableRowGroup;
@@ -38420,7 +38569,7 @@
       newParentInfo.isDisabled      = domElement.isDisabled;
 
       newParentInfo.controlElement  = this.controlInfo.update(controlElement, domElement);
-      newParentInfo.mapElement      = this.imageInfo.update(mapElement, domElement);
+      [newParentInfo.mapElement, newParentInfo.figureElement] = this.imageInfo.update(mapElement, figureElement, domElement);
       newParentInfo.inLink          = this.linkInfo.update(domElement, parentInfo.inLink);
       newParentInfo.listElement     = this.listInfo.update(listElement, domElement);
       newParentInfo.mediaElement    = this.mediaInfo.update(mediaElement, domElement);
@@ -40426,7 +40575,7 @@
    * @desc Constructor for an object that contains a the results of
    *          the evaluation of a rule on a element or page
    *
-   * @param  {Object}       domElement   - DomElement reference to element information used by this rule result
+   * @param  {Object}       domItem       - DomElement od DomDocument reference to element information used by this rule result
    * @param  {ResultRule}   ruleResult   - reference to the rule result object
    * @param  {Number}       resultValue  - Constant representing result value of the evaluation result
    * @param  {String}       msgId        - String reference to the message string in the NLS file
@@ -40443,11 +40592,11 @@
    */
 
   class BaseResult {
-    constructor (domElement, ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
+    constructor (domItem, ruleResult, resultValue, msgId, msgArgs, resultIdentifier) {
 
       const msg = ruleResult.rule.base_result_msgs[msgId];
 
-      this.domElement = domElement;
+      this.domItem = domItem;
       this.result_type       = RESULT_TYPE.BASE;
       this.rule_result       = ruleResult;
       this.result_value      = resultValue;
@@ -40458,6 +40607,20 @@
       this.result_identifier = resultIdentifier;
 
     }
+
+    /**
+     * @method getOrdinalPosition
+     *
+     * @desc Gets a string identifying the ordinal position,
+     *       is overrided by ElementResult and PageResult
+     *
+     * @return {String} see description
+     */
+
+    getOrdinalPosition () {
+      return this.domItem.ordinalPosition;
+    }
+
 
     /**
      * @getter isActionMessage
@@ -40518,7 +40681,7 @@
      */
 
     getBodyElement () {
-      const bodyElem = this.domElement.getBodyElement();
+      const bodyElem = this.domItem.getBodyElement();
       debug$G.log(`[getBodyElement][bodyElem]: ${bodyElem}`);
       return bodyElem;
     }
@@ -40701,6 +40864,8 @@
             message_id,
             message_arguments,
             domElement.getIdentifier());
+
+      this.domElement = domElement;
 
       this.result_type    = RESULT_TYPE.ELEMENT;
       this.resultId = 'er-' + resultIndex + '-' + this.domElement.ordinalPosition;
@@ -41253,7 +41418,7 @@
    *
    * @param  {ResultRule}   rule_result         - reference to the rule result object
    * @param  {Number}       result_value        - Constant representing result value of the evaluation result
-   * @param  {Object}       domElement          - DomElement of the body element of the document
+   * @param  {DOMDocument}  domDocument         - Object reference to DOMDocument object item associated with the test
    * @param  {String}       message_id          - String reference to the message string in the NLS file
    * @param  {Array}        message_arguments   - Array  array of values used in the message string
    * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -41264,16 +41429,16 @@
    * @private
    * @constructor Internal Properties
    *
-   * @property  {RuleResult} rule_result         - reference to the rule result object
-   * @property  {Number}     result_value        - Constant representing result value of the evaluation result
-   * @property  {DOMElement} cache_item          - Object reference to cache item associated with the test
-   * @property  {String}     message_id          - String reference to the message string in the NLS file
-   * @property  {Array}      message_arguments   - Array  array of values used in the message string
+   * @property  {RuleResult}  rule_result         - reference to the rule result object
+   * @property  {Number}      result_value        - Constant representing result value of the evaluation result
+   * @property  {DOMDocument} domDocument         - Object reference to DOMDocument object item associated with the test
+   * @property  {String}      message_id          - String reference to the message string in the NLS file
+   * @property  {Array}       message_arguments   - Array  array of values used in the message string
    */
 
   class PageResult extends BaseResult {
-    constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
-      super(domElement,
+    constructor (rule_result, result_value, domDocument, message_id, message_arguments, resultIndex) {
+      super(domDocument,
             rule_result,
             result_value,
             message_id,
@@ -41342,7 +41507,7 @@
    *
    * @param  {ResultRule}   rule_result         - reference to the rule result object
    * @param  {Number}       result_value        - Constant representing result value of the evaluation result
-   * @param  {Object}       domElement          - DomElement of the body element of the document
+   * @param  {DOMDocument}  domDocument         - Object reference to DOMDocument object item associated with the test
    * @param  {String}       message_id          - String reference to the message string in the NLS file
    * @param  {Array}        message_arguments   - Array  array of values used in the message string
    * @param  {Array}        props               - Array of properties that are defined in the validation function (NOTE: typically undefined)
@@ -41353,16 +41518,16 @@
    * @private
    * @constructor Internal Properties
    *
-   * @property  {RuleResult} rule_result         - reference to the rule result object
-   * @property  {Number}     result_value        - Constant representing result value of the evaluation result
-   * @property  {DOMElement} cache_item          - Object reference to cache item associated with the test
-   * @property  {String}     message_id          - String reference to the message string in the NLS file
-   * @property  {Array}      message_arguments   - Array  array of values used in the message string
+   * @property  {RuleResult}  rule_result         - reference to the rule result object
+   * @property  {Number}      result_value        - Constant representing result value of the evaluation result
+   * @property  {DOMDocument} domDocument         - Object reference to DOMDocument object item associated with the test
+  * @property  {String}       message_id          - String reference to the message string in the NLS file
+   * @property  {Array}       message_arguments   - Array  array of values used in the message string
    */
 
   class WebsiteResult extends BaseResult {
-    constructor (rule_result, result_value, domElement, message_id, message_arguments, resultIndex) {
-      super(domElement,
+    constructor (rule_result, result_value, domDocument, message_id, message_arguments, resultIndex) {
+      super(domDocument,
             rule_result,
             result_value,
             message_id,
@@ -43042,7 +43207,8 @@
     first_step          : true,
     axe_refs            : ['input-image-alt'],
     wave_refs           : ['alt_input_missing',
-                           'label_title'],
+                           'label_title',
+                           'alt_input'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['input[type="image"]'],
@@ -43260,7 +43426,8 @@
     first_step          : false,
     axe_refs            : ['form-field-multiple-labels'],
     wave_refs           : ['label_orphaned',
-                           'label_multiple'],
+                           'label_multiple',
+                           'label'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['label'],
@@ -43331,7 +43498,8 @@
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : ['label_empty'],
+    wave_refs           : ['label_empty',
+                           'label'],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
     target_resources    : ['label', 'legend'],
@@ -43375,7 +43543,8 @@
     wave_refs           : [],
     wcag_primary_id     : '3.3.2',
     wcag_related_ids    : ['1.3.1', '2.4.6', '4.1.1'],
-    target_resources    : ['fieldset'],
+    target_resources    : ['fieldset',
+                           'label'],
     validate            : function (dom_cache, rule_result) {
       dom_cache.controlInfo.allControlElements.forEach(ce => {
         const de = ce.domElement;
@@ -44539,7 +44708,12 @@
     wave_refs           : ['alt_missing',
                           'alt_spacer_missing',
                           'alt_area_missing',
-                          'image_title'],
+                          'alt_map_missing',
+                          'image_title',
+                           'alt_null',
+                           'alt_link',
+                           'alt_map',
+                           'alt_area'],
     wcag_primary_id     : '1.1.1',
     wcag_related_ids    : [],
     target_resources    : ['img', 'area', '[role="img"]'],
@@ -44832,6 +45006,60 @@
     });
     } // end validation function
   },
+
+  /**
+   * @object IMAGE 9
+   *
+   * @desc Figure element must contain exactly one figcaption element
+   */
+
+  { rule_id             : 'IMAGE_9',
+    last_updated        : '2026-10-30',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.IMAGES,
+    rule_required       : false,
+    first_step          : false,
+    axe_refs            : [],
+    wave_refs           : ['figure'],
+    wcag_primary_id     : '1.1.1',
+    wcag_related_ids    : [],
+    target_resources    : ['figure',
+                           'figcaption'],
+    validate            : function (dom_cache, rule_result) {
+
+      dom_cache.imageInfo.allFigureElements.forEach( fe => {
+        const de = fe.domElement;
+        let fce;
+        if (de.visibility.isVisibleToAT) {
+
+          const figcaptionCount = fe.figcaptionDomElements.length;
+
+          switch (figcaptionCount) {
+            case 0:
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+              break;
+
+            case 1:
+              fce = fe.figcaptionDomElements[0];
+              if (fce.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+              }
+              break;
+
+            default:
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [figcaptionCount]);
+              break;
+          }
+
+        } else {
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+        }
+      });
+    } // end validate function
+  }
   ];
 
   /* keyboardRules.js */
@@ -45263,7 +45491,8 @@
       first_step          : true,
       axe_refs            : ['landmark-one-main',
                              'landmark-no-duplicate-main'],
-      wave_refs           : ['region_missing'],
+      wave_refs           : ['region_missing',
+                             'main'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['main', '[role="main"]'],
@@ -45328,7 +45557,8 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : ['region_missing'],
+      wave_refs           : ['region_missing',
+                             'nav'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['nav', '[role="navigation"]'],
@@ -45397,7 +45627,8 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-no-duplicate-banner'],
-      wave_refs           : ['region_missing'],
+      wave_refs           : ['region_missing',
+                             'header'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['header', '[role="banner"]'],
@@ -45420,7 +45651,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-no-duplicate-banner'],
-      wave_refs           : [],
+      wave_refs           : ['header'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['header', '[role="banner"]'],
@@ -45442,7 +45673,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-no-duplicate-contentinfo'],
-      wave_refs           : [],
+      wave_refs           : ['footer'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['footer', '[role="contentinfo"]'],
@@ -45464,7 +45695,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-no-duplicate-contentinfo'],
-      wave_refs           : [],
+      wave_refs           : ['footer'],
       wcag_primary_id     : '2.4.1',
       wcag_related_ids    : ['1.3.1', '2.4.6'],
       target_resources    : ['footer', '[role="contentinfo"]'],
@@ -45485,7 +45716,7 @@
       required            : true,
       first_step          : false,
       axe_refs            : ['landmark-banner-is-top-level'],
-      wave_refs           : [],
+      wave_refs           : ['header'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['header', '[role="banner"]'],
@@ -45506,7 +45737,9 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['header',
+                            'nav',
+                            'search'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['header', '[role="banner"]'],
@@ -45527,7 +45760,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['nav'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['nav', '[role="naviation"]'],
@@ -45548,7 +45781,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-main-is-top-level'],
-      wave_refs           : [],
+      wave_refs           : ['main'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['main', '[role="main"]'],
@@ -45569,7 +45802,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-contentinfo-is-top-level'],
-      wave_refs           : [],
+      wave_refs           : ['footer'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['footer', '[role="contentinfo"]'],
@@ -45590,7 +45823,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['footer'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['header', '[role="banner"]'],
@@ -45611,7 +45844,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['search'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['[role="search"]'],
@@ -45653,7 +45886,7 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['region'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['[role="region"]'],
@@ -45689,7 +45922,12 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['landmark-unique'],
-      wave_refs           : [],
+      wave_refs           : ['aside',
+                             'footer',
+                             'header',
+                             'main',
+                             'nav',
+                             'region'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['main', 'nav', 'header', 'footer', 'section', 'aside', '[role="application"]','[role="banner"]', '[role="complementary"]','[role="contentinfo"]','[role="form"]','[role="main"]','[role="navigation"]','[role="region"]','[role="search"]'],
@@ -45714,7 +45952,12 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : [],
+      wave_refs           : ['aside',
+                             'footer',
+                             'header',
+                             'main',
+                             'nav',
+                             'region'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['main', 'nav', 'header', 'footer', 'section', 'aside', '[role="application"]','[role="banner"]', '[role="complementary"]','[role="contentinfo"]','[role="form"]','[role="main"]','[role="navigation"]','[role="region"]','[role="search"]'],
@@ -45744,7 +45987,7 @@
       rule_required       : false,
       first_step          : false,
       axe_refs            : ['landmark-complementary-is-top-level'],
-      wave_refs           : [],
+      wave_refs           : ['aside'],
       wcag_primary_id     : '1.3.1',
       wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
       target_resources    : ['aside', '[role="complementary"]'],
@@ -48382,6 +48625,66 @@
         }
 
       } // end validate function
+    },
+
+    /**
+     * @object TIMING_4
+     *
+     * @desc Web pages do automatically refresh
+     */
+
+    { rule_id             : 'TIMING_4',
+      last_updated        : '2026-10-25',
+      rule_scope          : RULE_SCOPE.PAGE,
+      rule_category       : RULE_CATEGORIES.TIMING_LIVE,
+      rule_required       : true,
+      first_step          : false,
+      axe_refs            : ['meta-refresh'],
+      wave_refs           : ['meta_refresh'],
+      wcag_primary_id     : '2.2.1',
+      wcag_related_ids    : ['2.2.2', '3.2.5'],
+      target_resources    : [],
+      validate          : function (dom_cache, rule_result) {
+
+
+        const rootDoc = dom_cache.getRootDomDocument();
+        let fails = 0;
+
+        const domDocs = dom_cache.allDomDocuments;
+
+        domDocs.forEach( (dd) => {
+          if (dd) {
+            if (dd.domElement) {
+              if (dd.hasRefresh) {
+                if (dd.domElement.visibility.isVisibleOnScreen) {
+                  rule_result.addPageResult(TEST_RESULT.FAIL, dd, 'PAGE_FAIL_1', []);
+                  fails += 1;
+                }
+                else {
+                  rule_result.addPageResult(TEST_RESULT.HIDDEN, dd, 'PAGE_HIDDEN_1', []);
+                }
+              }
+              else {
+                if (dd.domElement.visibility.isVisibleOnScreen) {
+                  rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dd, 'PAGE_MC_1', []);
+                }
+                else {
+                  rule_result.addPageResult(TEST_RESULT.HIDDEN, dd, 'PAGE_HIDDEN_1', []);
+                }
+              }
+            }
+          }
+        });
+
+        if (rootDoc.hasRefresh) {
+          rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_1', []);
+        }
+        else {
+          fails ?
+            rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_2', []) :
+            rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, rootDoc, 'PAGE_MC_1', []);
+        }
+      } // end validate function
     }
   ];
 
@@ -49159,7 +49462,8 @@
     rule_required       : true,
     first_step          : true,
     axe_refs            : ['aria-valid-attr'],
-    wave_refs           : ['aria'],
+    wave_refs           : ['aria',
+                           'aria_reference_broken'],
     wcag_primary_id     : '4.1.2',
     wcag_related_ids    : ['1.3.1', '3.3.2'],
     target_resources    : ['[aria-atomic]',
@@ -50590,6 +50894,7 @@
       this.date           = getFormattedDate();
       this.version        = VERSION;
       this.allDomElements = [];
+      this.allDomDocuments = [];
 
       this._allRuleResults = [];
 
@@ -50755,6 +51060,7 @@
 
       const domCache        = new DOMCache(this.startingDoc, this.startingDoc.body, this.ariaVersion, addDataId);
       this.allDomElements   = domCache.allDomElements;
+      this.allDomDocuments  = domCache.allDomDocuments;
       this._allRuleResults = [];
       this._ruleResultsSummary.clear();
       this._rcRuleResultsGroup.clear();
@@ -50808,7 +51114,8 @@
       this.ariaVersion = validateAriaVersion(ariaVersion);
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
-      this.allDomElements = domCache.allDomElements;
+      this.allDomElements  = domCache.allDomElements;
+      this.allDomDocuments = domCache.allDomDocuments;
       this._allRuleResults = [];
       this._ruleResultsSummary.clear();
       this._rcRuleResultsGroup.clear();
@@ -50857,7 +51164,8 @@
       this.ariaVersion = ariaVersion;
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion, addDataId);
-      this.allDomElements = domCache.allDomElements;
+      this.allDomElements  = domCache.allDomElements;
+      this.allDomDocuments = domCache.allDomDocuments;
       this._allRuleResults = [];
       this._ruleResultsSummary.clear();
       this._rcRuleResultsGroup.clear();
@@ -50906,7 +51214,8 @@
       this.ariaVersion = ariaVersion;
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
-      this.allDomElements = domCache.allDomElements;
+      this.allDomElements  = domCache.allDomElements;
+      this.allDomDocuments = domCache.allDomDocuments;
       this._allRuleResults = [];
       this._ruleResultsSummary.clear();
       this._rcRuleResultsGroup.clear();
@@ -50953,7 +51262,8 @@
       this.ariaVersion = ariaVersion;
 
       const domCache      = new DOMCache(this.startingDoc, this.startingDoc.body, ariaVersion);
-      this.allDomElements = domCache.allDomElements;
+      this.allDomElements  = domCache.allDomElements;
+      this.allDomDocuments = domCache.allDomDocuments;
       this._allRuleResults = [];
       this._ruleResultsSummary.clear();
       this._rcRuleResultsGroup.clear();
@@ -51050,7 +51360,7 @@
 
     getDomDocumentByPosition (position) {
       for (let i = 0; i < this.allDomDocuments.length; i += 1) {
-        if (this.allDomDocuments[i].position === position) {
+        if (this.allDomDocuments[i].ordinalPosition === position) {
           return this.allDomDocuments[i];
         }
       }

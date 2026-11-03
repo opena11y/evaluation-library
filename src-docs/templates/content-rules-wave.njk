@@ -7,6 +7,7 @@
   {% endif %}
 {% endmacro %}
 
+          <p>{{mappedWaveRulesCount}} of {{allWaveRules.length}} WAVE/popetech have a related OpenA11y Rule.</p>
 
           {% for rc in allRuleCategories %}
             <h2 id="rc-{{rc.id}}" class="rules">{{rc.title}}</h2>
@@ -46,8 +47,8 @@
             </table>
           {% endfor %}
 
-          <h2 id="wave-rules" class="rules">Unmapped WAVE/popetech Rules</h2>
-          <p>{{unmappedWaveRules.length}} of {{allWaveRules.length}} WAVE/popetech rules are NOT mapped to OpenA11y rules.</p>
+          <h2 id="wave-rules" class="rules">{{unmappedWaveRules.length}} WAVE/popetech Rules without a related OpenA11y Rule</h2>
+
           <table class="table table-striped" aria-labelledby="wave-rules">
             <thead>
               <th>WAVE Reference</th>

@@ -105,5 +105,45 @@ export const timingRules = {
           url:   'https://www.w3.org/WAI/WCAG20/Understanding/three-flashes-or-below-threshold'
         }
       ]
+  },
+  TIMING_4: {
+      ID:                    'Timing 4',
+      DEFINITION:            'Users must be able to control refreshing or other major changes in content of a page.',
+      SUMMARY:               'Automatic refresh',
+      TARGET_RESOURCES_DESC: 'Meta elements and scripting used to automatically refresh content or change context to another window',
+      RULE_RESULT_MESSAGES: {
+        MANUAL_CHECK_S:     'Verify the page does not include scripting that automatically reloads page content or cause unanticipated changes in focus.',
+        MANUAL_CHECK_P:     'Verify the page and any of the @iframe@s do not include scripting the automatically reloads page content or cause unanticipated changes in focus .',
+        FAIL_S:             'Remove the @meta http-equiv="refresh"@ element.',
+        FAIL_P:             'Remove the %N_F @meta http-equiv="refresh"@ elements.',
+        HIDDEN_S:           'Element in hidden @iframe@ was not tested for automatic refresh.',
+        HIDDEN_P:           '%N_F elements in hidden @iframe@s were not tested for automatic refresh.'
+       },
+      BASE_RESULT_MESSAGES: {
+        PAGE_MC_1:        'Verify the scripting on the page does not automatically refresh content or cause unanticipated changes in focus.',
+        PAGE_FAIL_1:      'Remove the @meta http-equiv="refresh"@ element from the @iframe@ .',
+        PAGE_FAIL_2:      'Remove the @meta http-equiv="refresh"@ element.',
+        PAGE_HIDDEN_1:    '@iframe@ was hidden and was not tested for automatically refreshing content.'
+      },
+      PURPOSES: [
+        'Pages that automatically change location or refresh are unusable by screen reader and keyboard users since focus will constantly be taking them back to the top of the page.'
+      ],
+      TECHNIQUES: [
+        'Remove @meta http-equiv="refresh" content="{time}; url..@ elements with @time@ greater than 0 which cause automatic refresh or redirects.',
+        'Provide users with controls to update of content.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Understanding 2.2.1 ',
+          url:   'https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'Understanding 2.2.1 ',
+          url:   'https://www.w3.org/WAI/WCAG22/Techniques/failures/F40'
+        }
+
+      ]
   }
 }

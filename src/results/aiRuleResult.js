@@ -32,6 +32,8 @@ export default function aiRuleResult (all_rule_results, rule_id) {
   let website_result = false;
 
   const element_results = [];
+  const page_results    = [];
+  const website_results = [];
 
   let result_summary = {
             violations:    0,
@@ -53,6 +55,7 @@ export default function aiRuleResult (all_rule_results, rule_id) {
           };
 
     rule_result.getAllResultsArray().forEach( (er) => {
+
       if (er.isElementResult) {
         const de = er.domElement;
         const element_result = {
@@ -164,7 +167,6 @@ export default function aiRuleResult (all_rule_results, rule_id) {
           te_result.cell_count         = te.cellCount;
           te_result.header_cell_count  = te.headerCellCount;
         }
-
         element_results.push(element_result);
       }
 
@@ -183,11 +185,13 @@ export default function aiRuleResult (all_rule_results, rule_id) {
           rule_nls_id:   getRuleId(rule_id),
           rule_scope:    rule_scope,
           position:      er.getOrdinalPosition(),
-          highlightId:   'opena11y-pos-page',
+          highlightId:   `opena11y-pos-page-${er.getOrdinalPosition()}`,
+
           is_element: false,
           is_page: true,
           is_website: false,
         }
+        page_results.push(page_result);
       }
 
       if (er.isWebsiteResult) {
@@ -206,16 +210,17 @@ export default function aiRuleResult (all_rule_results, rule_id) {
           rule_scope:    rule_scope,
 
           position:      er.getOrdinalPosition(),
-          highlightId:   'opena11y-pos-website',
+          highlightId:   `opena11y-pos-website-${er.getOrdinalPosition()}`,
           is_element: false,
           is_page: false,
           is_website: true
 
         }
+        website_results.push(website_result);
       }
 
     });
   }
 
-  return [rule_title, rule_id_nls, result_summary, website_result, page_result, element_results];
+  return [rule_title, rule_id_nls, result_summary, website_results, page_results, element_results];
 }

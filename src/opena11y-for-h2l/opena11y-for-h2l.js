@@ -121,15 +121,22 @@ function highlightItems(dataObj) {
   function getRect (elem) {
     let rect = elem.getBoundingClientRect();
     if (isZeroDimension(rect)) {
-      rect = {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        height: 0,
-        width: 0
-      };
+
       let childElem = elem.firstElementChild;
+
+      let r = childElem.getBoundingClientRect();
+
+      rect = {
+        top: r.top,
+        right: r.right,
+        bottom: r.bottom,
+        left: r.left,
+        height: r.height,
+        width: r.width
+      };
+
+      childElem = childElem.nextElementSibling;
+
       while (childElem) {
         const r = childElem.getBoundingClientRect();
 
@@ -160,13 +167,7 @@ function highlightItems(dataObj) {
 
       const he = document.createElement(HIGHLIGHT_ELEMENT_NAME);
 
-      const docElem = de.parentInfo.document ?
-                      de.parentInfo.document :
-                      window.document;
-
-      const attachElem = docElem.body ?
-                         docElem.body :
-                         docElem.documentElement;
+      const attachElem = de.getBodyElement();
 
       if (attachElem && attachElem.appendChild) {
         // Append the highlight element to the document object that contains the DOM element

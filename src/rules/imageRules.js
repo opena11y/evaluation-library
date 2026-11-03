@@ -40,7 +40,12 @@ export const imageRules = [
   wave_refs           : ['alt_missing',
                         'alt_spacer_missing',
                         'alt_area_missing',
-                        'image_title'],
+                        'alt_map_missing',
+                        'image_title',
+                         'alt_null',
+                         'alt_link',
+                         'alt_map',
+                         'alt_area'],
   wcag_primary_id     : '1.1.1',
   wcag_related_ids    : [],
   target_resources    : ['img', 'area', '[role="img"]'],
@@ -333,5 +338,59 @@ export const imageRules = [
   });
   } // end validation function
 },
+
+/**
+ * @object IMAGE 9
+ *
+ * @desc Figure element must contain exactly one figcaption element
+ */
+
+{ rule_id             : 'IMAGE_9',
+  last_updated        : '2026-10-30',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.IMAGES,
+  rule_required       : false,
+  first_step          : false,
+  axe_refs            : [],
+  wave_refs           : ['figure'],
+  wcag_primary_id     : '1.1.1',
+  wcag_related_ids    : [],
+  target_resources    : ['figure',
+                         'figcaption'],
+  validate            : function (dom_cache, rule_result) {
+
+    dom_cache.imageInfo.allFigureElements.forEach( fe => {
+      const de = fe.domElement;
+      let fce;
+      if (de.visibility.isVisibleToAT) {
+
+        const figcaptionCount = fe.figcaptionDomElements.length;
+
+        switch (figcaptionCount) {
+          case 0:
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            break;
+
+          case 1:
+            fce = fe.figcaptionDomElements[0];
+            if (fce.visibility.isVisibleToAT) {
+              rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', []);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+            }
+            break;
+
+          default:
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [figcaptionCount]);
+            break;
+        }
+
+      } else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
+      }
+    });
+  } // end validate function
+}
 ];
 

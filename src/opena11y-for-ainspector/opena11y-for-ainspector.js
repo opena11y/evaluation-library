@@ -79,7 +79,6 @@ function hightlightResults(results, option) {
                          er.getDomDocumentByPosition(r.position) :
                          er.getDomElementByPosition(r.position);
 
-
       const attachElem = attachObj ?
                            attachObj.getBodyElement() :
                            document.body ?
@@ -98,7 +97,7 @@ function hightlightResults(results, option) {
         else {
           const de = er.getDomElementByPosition(r.position);
           if (de) {
-            const rect = de.node.getBoundingClientRect();
+            const rect = getRect(de.node);
             he.setAttribute('set', `${r.result_abbrev} element false ${Math.round(rect.left)} ${Math.round(rect.top)} ${Math.round(rect.width)} ${Math.round(rect.height)}`);
           }
         }
@@ -107,6 +106,71 @@ function hightlightResults(results, option) {
   });
 }
 
+/*
+ *   @function isZeroDimension
+ *
+ *   @desc  Returns true if element is not visible
+ *
+ *   @param {Object} rect : Rect of element to test height
+ *
+ *   @returns see @desc
+ */
+
+function isZeroDimension (rect) {
+  return rect.height === 0 && rect.width === 0;
+}
+
+
+/*
+ *   @function getRect
+ *
+ *   @desc  Returns Rect with dimensions of the element
+ *
+ *   @param {Object} elem : DOM element
+ *
+ *   @returns see @desc
+ */
+
+function getRect (elem) {
+
+  let rect = elem.getBoundingClientRect();
+
+  if (isZeroDimension(rect)) {
+
+    let childElem = elem.firstElementChild;
+
+    let r = childElem.getBoundingClientRect();
+
+    rect = {
+      top: r.top,
+      right: r.right,
+      bottom: r.bottom,
+      left: r.left,
+      height: r.height,
+      width: r.width
+    };
+
+    childElem = childElem.nextElementSibling;
+
+    while (childElem) {
+      r = childElem.getBoundingClientRect();
+
+      if (!isZeroDimension(r)) {
+        rect.top    = Math.min(r.top,    rect.top);
+        rect.right  = Math.max(r.right,  rect.right);
+        rect.bottom = Math.max(r.bottom, rect.bottom);
+        rect.left   = Math.min(r.left,   rect.left);
+      }
+
+      childElem = childElem.nextElementSibling;
+    }
+
+    rect.height = rect.bottom - rect.top;
+    rect.width  = rect.right  - rect.left;
+  }
+  return rect;
+} /* end getRect */
+
 
 
 // Listen for messages from side panel
@@ -114,12 +178,13 @@ browserRuntime.onMessage.addListener(
   function(request, sender, sendResponse) {
 
     let rect = {};
-    let de = false;
 
     // Highlight result
     if(request.highlight) {
-      const isWebsite   = request.highlight.position === 'website';
-      const isPage      = request.highlight.position === 'page';
+
+      const isWebsite   = request.highlight.item_type === 'website';
+      const isPage      = request.highlight.item_type === 'page';
+      const isElement   = request.highlight.item_type === 'element';
       const position    = parseInt(request.highlight.position);
       const result_type = request.highlight.result_type;
       const option      = request.highlight.option;
@@ -128,15 +193,19 @@ browserRuntime.onMessage.addListener(
 
       hideHighlightElements(option);
 
-      if (!isNaN(position)) {
-        de = lastEvaluationResult.getDomElementByPosition(position);
+      const di = isElement ?
+                 lastEvaluationResult.getDomElementByPosition(position) :
+                 lastEvaluationResult.getDomDocumentByPosition(position);
+
+      if (di && di.node) {
+        rect = getRect(di.node);
       }
 
-      if (de && de.node) {
-        rect = de.node.getBoundingClientRect();
-      }
+      const attachElem = di && di.getBodyElement?
+                         di.getBodyElement() :
+                         window.document.body;
 
-      const he = getHighlightElement(de.getBodyElement(), highlightId, result_type);
+      const he = getHighlightElement(attachElem, highlightId, result_type);
 
       if (option !== 'none' && he) {
         removeFocusFromHighlightElements();
@@ -239,7 +308,7 @@ browserRuntime.onMessage.addListener(
       debug && console.log(`[response][rule_scope_filter]: ${response.rule_scope_filter}`);
 
       let group_title, rule_summary, rule_results, info_rules;
-      let rule_title, rule_id_nls, result_summary, website_result, page_result, element_results;
+      let rule_title, rule_id_nls, result_summary, website_results, page_results, element_results;
 
       const parts = r.rule_group_id.split('-');
       const group_id = parseInt(parts[1]);
@@ -283,28 +352,33 @@ browserRuntime.onMessage.addListener(
 
         case 'rule':
           removeHighlightElements();
-          [rule_title, rule_id_nls, result_summary, website_result, page_result, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
+          [rule_title, rule_id_nls, result_summary, website_results, page_results, element_results] = aiRuleResult(er.allRuleResults, r.rule_id);
 
           response.rule_title      = rule_title;
           response.rule_id_nls     = rule_id_nls;
           response.result_summary  = result_summary;
-          response.website_result  = website_result;
-          response.page_result     = page_result;
+          response.website_results  = website_results;
+          response.page_results     = page_results;
           response.element_results = element_results;
 
           if (r.rule_id.includes('TITLE')) {
-            response.page_result.page_title = response.title;
+            response.page_results.forEach( (pr) => {
+              pr.page_title = response.title;
+            });
+            response.website_results.forEach( (wr) => {
+              wr.page_title = response.title;
+            });
             response.element_results.forEach( (er) => {
               er.page_title = response.title;
             });
           }
 
-          if (website_result) {
-            results.push(website_result);
+          if (website_results) {
+            results = results.concat(website_results);
           }
 
-          if (page_result) {
-            results.push(page_result);
+          if (page_results) {
+            results = results.concat(page_results);
           }
 
           if (element_results) {
