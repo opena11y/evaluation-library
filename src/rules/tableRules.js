@@ -51,9 +51,9 @@ export const tableRules = [
               }
             }
             else {
+              const headerCount = cell.headers.length;
+              const headerStr = headerCount ? cell.headers.join (' | ') : '';
               if (de.accName.name) {
-                const headerCount = cell.headers.length;
-                const headerStr = cell.headers.join (' | ');
                 if (headerCount) {
                   if (cell.headerSource === HEADER_SOURCE.ROW_COLUMN) {
                     if (headerCount === 1) {
@@ -77,7 +77,12 @@ export const tableRules = [
                 }
               }
               else {
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+                if (headerCount) {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
+                }
               }
             }
           }

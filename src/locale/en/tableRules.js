@@ -29,6 +29,7 @@ export const tableRules = {
         ELEMENT_FAIL_1:   'Add table cells to be used as header cells for the @%1@ element using either row/column headers or the @headers@ attribute.',
         ELEMENT_MC_1:     'The @%1@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need headers.',
         ELEMENT_MC_2:     'The @%1@ element does not have any text content.  Verify it is not being used for identifying the context of a data cell.',
+        ELEMENT_MC_3:     'The @%1@ element does not have any content, verify that the cell is being used for formatting.',
         ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
