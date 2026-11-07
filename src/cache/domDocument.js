@@ -97,8 +97,8 @@ export default class DOMDocument {
    * @desc
    */
 
-  getIdentifier () {
-    return this.title ? `${this.tagName}: ${this.title}` : this.tagName;
+  getIdentifier (name) {
+    return this.tagName === 'root' ?  name : `${this.tagName}${this.title ? ':  ' + this.title : ''}`;
   }
 
 }

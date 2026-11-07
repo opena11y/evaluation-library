@@ -21,10 +21,10 @@
     <div role="banner">
       <h1 class="HEADING_5_PASS">Heading 5: Properly nested in landamrks</h1>
       <h2 class="HEADING_5_PASS">h2 element A</h2>
-      <h3 class="HEADING_5_HIDDEN">  </h3>
+      <h3 class="HEADING_5_FAIL">  </h3>
       <h3 class="HEADING_5_PASS">h3 element B</h3>
       <h3 class="HEADING_5_PASS">h3 element C</h3>
-      <h4 class="HEADING_5_HIDDEN">  </h4>
+      <h4 class="HEADING_5_FAIL">  </h4>
       <h4 class="HEADING_5_PASS">h4 element D</h4>
     </div>  
 
@@ -70,6 +70,13 @@
     <h2 class="HEADING_5_MC">h2 element X</h2>
     <h3 class="HEADING_5_MC">h3 element Y</h3>
     <h5 class="HEADING_5_MC">h5 element Z</h5>
+
+    <!-- headings outside a landmark is a manual check -->
+    <div hidden>
+      <h2 class="HEADING_5_HIDDEN">h2 element X</h2>
+      <h3 class="HEADING_5_HIDDEN">h3 element Y</h3>
+      <h5 class="HEADING_5_HIDDEN">h5 element Z</h5>
+    </div>
 
   </body>
 </html>

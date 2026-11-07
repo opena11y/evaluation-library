@@ -1082,5 +1082,49 @@ export const widgetRules = {
             url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-brailleroledescription'
           }
         ]
-    }
+    },
+    WIDGET_19: {
+        ID:                    'Widget 19',
+        DEFINITION:            '@aria-hidden=true@ not allowed on body elements or elements that contain interactive elements.',
+        SUMMARY:               '@aria-hidden=true@ restrictions',
+        TARGET_RESOURCES_DESC: 'Elements with @aria-hidden=true@',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Remove @aria-hidden=true@ attribute from the body element or element that contains interactive content.',
+          FAIL_P:   'Remove @aria-hidden=true@ attribute from the the %N_F body elements or elements that contains interactive content.',
+          MANUAL_CHECK_S:  'Verify element with the @aria-hidden@ attribute is only being used to hide decorative, duplicate or off-screen content',
+          MANUAL_CHECK_P:  'Verify %N_MC elements with the @aria-hidden@ attribute are only being used to hide decorative, duplicate or off-screen content',
+          HIDDEN_S: 'The element with a @aria-hidden=true@ attribute is hidden and was not evaluated.',
+          HIDDEN_P: 'The %N_H elements with a @aria-hidden=true@ attribute is hidden and were not evaluated.',
+          NOT_APPLICABLE:  'No @aria-hidden=true@ attributes found on the page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1: 'Remove the @aria-hidden=true@ attribute from the @body@ element.',
+          ELEMENT_FAIL_2: 'Remove the @aria-hidden=true@ attribute from the @%1@ element that contains an interactive element.',
+          ELEMENT_FAIL_3: 'Remove the @aria-hidden=true@ attribute from the @%1@ element that contains %2 interactive elements.',
+          ELEMENT_MC_1:   'Verify @aria-hidden=true@ on the @%1@ element is hiding decorative, duplicate or off-screen content.',
+          ELEMENT_MC_2:   'Verify @aria-hidden=false@ on the @%1@ element is not suppose to hide content from accessibility APIs.',
+          ELEMENT_HIDDEN_1: 'The @%1@ element with @aria-hidden@ was not evaluated because the element is hidden.'
+        },
+        PURPOSES: [
+          'The @aria-hidden=true@ attribute is used to hide non-interactive content from accessibility APIs.',
+          'Content can be hidden if it is purely decorative, duplicated on other parts of the page, or off-screen or collapsed.',
+          'If @aria-hidden=true@ is used on the body element, none of the content on the page will be available to assistive technologies.',
+          'If @aria-hidden=true@ is used on elements that contain interactive elements, assistive technologies will have no information about those elements and it will leave users disoriented and confused.'
+        ],
+        TECHNIQUES: [
+          'Remove @aria-hidden=true" from the body element and any elements containing interactive elements.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type: REFERENCES.SPECIFICATION,
+            title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.3 Specification: aria-hidden',
+            url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-hidden'
+          },
+          { type: REFERENCES.WCAG_TECHNIQUE,
+            title: 'MDN: aria-hidden attribute',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-hidden'
+          }
+        ]
+    },
 }

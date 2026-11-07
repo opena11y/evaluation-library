@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table Rule 9: TH elements cannot be empty</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <style>
+      td, th {
+        border: 1px solid black;
+        padding: 0.25em;
+      }
+      caption {
+        font-weight: bold;
+        text-align: left;
+      }
+    </style>
+    <main>
+      
+      <h1>Data Table Rule 9: TH elements cannot be empty</h1>
+
+      <h2 id="id1">Empty TH elements one visible and the other hidden</h2>
+      
+      <table aria-labelledby="id1">
+        <thead>
+          <tr>
+            <th class="TABLE_9_FAIL"></th>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> 
+            <th >Header 3</th>
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr hidden>
+            <th class="TABLE_9_HIDDEN"></th>
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>          
+        </tbody>
+      </table>
+
+      <h2 id="id2">Hidden table</h2>
+
+      <table aria-labelledby="id2" hidden>
+        <thead>
+          <tr>
+            <th class="TABLE_9_HIDDEN"></th>
+            <th>Header 1</th>
+            <th>Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th >Header 3</th>
+            <td>Data Cell 11</td>
+            <td>Data Cell 12</td>
+          </tr>
+          <tr hidden>
+            <th class="TABLE_9_HIDDEN"></th>
+            <td>Data Cell 21</td>
+            <td>Data Cell 22</td>
+          </tr>
+        </tbody>
+      </table>
+
+        
+    </main>
+    
+  </body>
+</html>

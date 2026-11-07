@@ -253,7 +253,8 @@ export const headingRules = [
   rule_category       : RULE_CATEGORIES.HEADINGS,
   rule_required       : false,
   first_step          : false,
-  axe_refs            : ['heading-order'],
+  axe_refs            : ['heading-order',
+                         'empty-heading'],
   wave_refs           : ['heading_missing',
                          'heading_skipped'],
   wcag_primary_id     : '1.3.1',
@@ -275,7 +276,7 @@ export const headingRules = [
         if (!de.parentInfo.landmarkElement) {
           if (de.visibility.isVisibleToAT) {
             if (de.accName.name.length === 0) {
-              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
             }
             else {
               rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
@@ -406,7 +407,7 @@ function checkHeadingNesting(dom_cache, rule_result, headingDomElements) {
         visibleHeadings.push(de);
       }
       else {
-        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_2', [de.tagName]);
+        rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
       }
     }
     else {

@@ -172,8 +172,8 @@ export const headingRules = {
     BASE_RESULT_MESSAGES: {
       ELEMENT_PASS_1:   'The %1 element is properly nested.',
       ELEMENT_FAIL_1:   'Adjust the level of the %1 element or other heading elements so that the headings are properly nested on the page.',
+      ELEMENT_FAIL_2:   'The %1 element does not have text content. Either add content, or remove it from the page if it is not needed.',
       ELEMENT_HIDDEN_1: 'The %1 element was not evaluated because it is hidden from assistive technologies.',
-      ELEMENT_HIDDEN_2: 'The %1 element has not text content either add content, or remove it from the page if it is not needed.',
       ELEMENT_MC_1:     'The %1 element is not contained a landmark, verify that it is properly nested with the associated landmarks and other headings not in landmarks.',
       PAGE_PASS_1:      'All heading elements are properly nested',
       PAGE_FAIL_1:      'There are at least %1 header nesting level problems on the page, adjust the use of heading elements on the page so they are properly nested.',

@@ -45,6 +45,8 @@ export default class WebsiteResult extends BaseResult {
           message_arguments,
           'website');
 
+    this.domDocument = domDocument;
+
     this.result_type  = RESULT_TYPE.WEBSITE;
 
     this.resultId = 'wr-' + resultIndex;
@@ -87,7 +89,8 @@ export default class WebsiteResult extends BaseResult {
    */
 
   getResultIdentifier () {
-    return 'website';
+    return this.domDocument.getIdentifier('website');
+;
   }
 
 

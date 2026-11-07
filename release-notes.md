@@ -1,3 +1,11 @@
+Version 3.1.0 Overview
+=============================
+* Fixed issue with Table 1 rule for manual check when the table cell is empty, but has headers
+* Updated how PageResults and WebsiteResults generate identifiers
+* Updating Heading 5 to fail headings with no content
+* Added Table 9 no empty TH elements
+* Added Widet 19 testing for aria-hidden on body or interactive content
+
 Version 3.0.0 Overview
 =============================
 * Added keyboard rule 10 related to tabindex on non-interactive roles

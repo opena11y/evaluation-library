@@ -38,6 +38,7 @@ const allRuleLinksByGuidelines = [
 "rule-table-6.html",
 "rule-table-7.html",
 "rule-table-8.html",
+"rule-table-9.html",
 "rule-layout-1.html",
 "rule-layout-2.html",
 "rule-layout-3.html",
@@ -149,6 +150,7 @@ const allRuleLinksByGuidelines = [
 "rule-widget-11.html",
 "rule-widget-13.html",
 "rule-widget-16.html",
+"rule-widget-19.html",
 "rule-live-1.html"
 ];
 
@@ -222,6 +224,7 @@ const allRuleLinksByRuleCategories = [
 "rule-table-6.html",
 "rule-table-7.html",
 "rule-table-8.html",
+"rule-table-9.html",
 "rule-authorization-1.html",
 "rule-error-1.html",
 "rule-error-2.html",
@@ -270,6 +273,7 @@ const allRuleLinksByRuleCategories = [
 "rule-widget-16.html",
 "rule-widget-17.html",
 "rule-widget-18.html",
+"rule-widget-19.html",
 "rule-audio-1.html",
 "rule-audio-2.html",
 "rule-video-1.html",
@@ -427,6 +431,7 @@ const allRuleLinksByScope = [
 "rule-table-6.html",
 "rule-table-7.html",
 "rule-table-8.html",
+"rule-table-9.html",
 "rule-target-size_1.html",
 "rule-target-size_2.html",
 "rule-target-size_3.html",
@@ -455,7 +460,8 @@ const allRuleLinksByScope = [
 "rule-widget-15.html",
 "rule-widget-16.html",
 "rule-widget-17.html",
-"rule-widget-18.html"
+"rule-widget-18.html",
+"rule-widget-19.html"
 ];
 
 const allRuleLinksByFirstStepRules = [
@@ -538,6 +544,9 @@ allRuleLinksByWaveRules = [
 "rule-shortcut-2.html",
 "rule-table-2.html",
 "rule-table-5.html",
+"rule-table-6.html",
+"rule-table-8.html",
+"rule-table-9.html",
 "rule-title-1.html",
 "rule-timing-4.html",
 "rule-video-1.html",
@@ -548,7 +557,8 @@ allRuleLinksByWaveRules = [
 "rule-widget-3.html",
 "rule-widget-4.html",
 "rule-widget-5.html",
-"rule-widget-16.html"
+"rule-widget-16.html",
+"rule-widget-19.html"
 ];
 
 allRuleLinksByAxeRules = [
@@ -587,6 +597,8 @@ allRuleLinksByAxeRules = [
 "rule-list-1.html",
 "rule-shortcut-2.html",
 "rule-table-1.html",
+"rule-table-6.html",
+"rule-table-9.html",
 "rule-target-size_1.html",
 "rule-target-size_2.html",
 "rule-target-size_3.html",
@@ -605,5 +617,6 @@ allRuleLinksByAxeRules = [
 "rule-widget-12.html",
 "rule-widget-14.html",
 "rule-widget-17.html",
-"rule-widget-18.html"
+"rule-widget-18.html",
+"rule-widget-19.html"
 ];

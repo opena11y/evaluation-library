@@ -156,7 +156,7 @@
 
                 
 
-          <p>69 of 100 of aXe rules have a related OpenA11y Rule.</p>
+          <p>75 of 100 of aXe rules have a related OpenA11y Rule.</p>
 
           
             <h2 id="rc-1" class="rules">Landmarks</h2>
@@ -381,6 +381,8 @@
                         <ul>
                           
                             <li><a href="https://dequeuniversity.com/rules/axe/4.11/heading-order" target="AXE">Ensure the order of headings is semantically correct</a> (Moderate) </li>
+                          
+                            <li><a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading" target="AXE">Ensure headings have discernible text</a> (Minor) </li>
                           
                        </ul>
                       </td>
@@ -706,9 +708,35 @@
                   
                 
                   
+                    <tr id="table-6">
+                      <td>Table 6</td>
+                      <td><a href="rule-table-6.html#axe">Header cells should be <code>th</code> elements</a></td>
+                      <td>
+                        <ul>
+                          
+                            <li><a href="https://dequeuniversity.com/rules/axe/4.11/td-has-header" target="AXE">Ensure that each non-empty data cell in a &lt;table&gt; larger than 3 by 3 has one or more table headers</a> (Critical) </li>
+                          
+                       </ul>
+                      </td>
+                    </tr>
+                  
                 
                   
                 
+                  
+                
+                  
+                    <tr id="table-9">
+                      <td>Table 9</td>
+                      <td><a href="rule-table-9.html#axe">No empty <code>th</code> elements</a></td>
+                      <td>
+                        <ul>
+                          
+                            <li><a href="https://dequeuniversity.com/rules/axe/4.11/empty-table-header" target="AXE">Ensure table headers have discernible text</a> (Minor) </li>
+                          
+                       </ul>
+                      </td>
+                    </tr>
                   
                 
               
@@ -942,6 +970,8 @@
                           
                             <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-allowed-role" target="AXE">Ensure role attribute has an appropriate value for the element</a> (Minor) </li>
                           
+                            <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-text" target="AXE">Ensure role=&quot;text&quot; is used on elements with no focusable descendants</a> (Serious) </li>
+                          
                        </ul>
                       </td>
                     </tr>
@@ -1089,6 +1119,22 @@
                         <ul>
                           
                             <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent" target="AXE">Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent</a> (Serious) </li>
+                          
+                       </ul>
+                      </td>
+                    </tr>
+                  
+                
+                  
+                    <tr id="widget-19">
+                      <td>Widget 19</td>
+                      <td><a href="rule-widget-19.html#axe"><code>aria-hidden=true</code> restrictions</a></td>
+                      <td>
+                        <ul>
+                          
+                            <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body" target="AXE">Ensure aria-hidden=&quot;true&quot; is not present on the document body.</a> (Critical) </li>
+                          
+                            <li><a href="https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus" target="AXE">Ensure aria-hidden elements are not focusable nor contain focusable elements</a> (Serious) </li>
                           
                        </ul>
                       </td>
@@ -1332,7 +1378,7 @@
             </table>
           
 
-          <h2 id="axe-rules" class="rules">31 aXe Rules without a related OpenA11y Rule</h2>
+          <h2 id="axe-rules" class="rules">25 aXe Rules without a related OpenA11y Rule</h2>
           <table class="table table-striped" aria-labelledby="axe-rules">
             <thead>
               <th>aXe Reference</th>
@@ -1341,36 +1387,6 @@
               <th>Impact</th>
             </thead>
             <tbody>
-            
-              <tr>
-                <td>
-                  aria-hidden-body
-                </td>
-                <td>
-                  <a href="https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body">Ensure aria-hidden=&quot;true&quot; is not present on the document body.</a>
-                </td>
-                <td>
-                  Required
-                </td>
-                <td>
-                  Critical
-                </td>
-              </tr>
-            
-              <tr>
-                <td>
-                  aria-hidden-focus
-                </td>
-                <td>
-                  <a href="https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus">Ensure aria-hidden elements are not focusable nor contain focusable elements</a>
-                </td>
-                <td>
-                  Required
-                </td>
-                <td>
-                  Serious
-                </td>
-              </tr>
             
               <tr>
                 <td>
@@ -1549,51 +1565,6 @@
                 </td>
                 <td>
                   Serious
-                </td>
-              </tr>
-            
-              <tr>
-                <td>
-                  aria-text
-                </td>
-                <td>
-                  <a href="https://dequeuniversity.com/rules/axe/4.11/aria-text">Ensure role=&quot;text&quot; is used on elements with no focusable descendants</a>
-                </td>
-                <td>
-                  Best Practices
-                </td>
-                <td>
-                  Serious
-                </td>
-              </tr>
-            
-              <tr>
-                <td>
-                  empty-heading
-                </td>
-                <td>
-                  <a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading">Ensure headings have discernible text</a>
-                </td>
-                <td>
-                  Best Practices
-                </td>
-                <td>
-                  Minor
-                </td>
-              </tr>
-            
-              <tr>
-                <td>
-                  empty-table-header
-                </td>
-                <td>
-                  <a href="https://dequeuniversity.com/rules/axe/4.11/empty-table-header">Ensure table headers have discernible text</a>
-                </td>
-                <td>
-                  Best Practices
-                </td>
-                <td>
-                  Minor
                 </td>
               </tr>
             
@@ -1789,21 +1760,6 @@
                 </td>
                 <td>
                   Serious
-                </td>
-              </tr>
-            
-              <tr>
-                <td>
-                  td-has-header
-                </td>
-                <td>
-                  <a href="https://dequeuniversity.com/rules/axe/4.11/td-has-header">Ensure that each non-empty data cell in a &lt;table&gt; larger than 3 by 3 has one or more table headers</a>
-                </td>
-                <td>
-                  Experimental
-                </td>
-                <td>
-                  Critical
                 </td>
               </tr>
             

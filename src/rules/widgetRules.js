@@ -151,7 +151,8 @@ export const widgetRules = [
   first_step          : true,
   axe_refs            : ['aria-deprecated-role',
                          'aria-roles',
-                         'aria-allowed-role'],
+                         'aria-allowed-role',
+                         'aria-text'],
   wave_refs           : ['aria'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -1164,7 +1165,60 @@ export const widgetRules = [
     });
 
   } // end validation function
-}
+},
+/**
+ * @object WIDGET_19
+ *
+ * @desc aria-hidden must not be on body or elements with interactive content
+ */
+
+{ rule_id             : 'WIDGET_19',
+  last_updated        : '2026-11-06',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : ['aria-hidden-body',
+                         'aria-hidden-focus'],
+  wave_refs           : ['aria_hidden'],
+  wcag_primary_id     : '4.1.2',
+  wcag_related_ids    : ['1.3.1', '3.3.2'],
+  target_resources    : ['[aria-hidden]'],
+  validate            : function (dom_cache, rule_result) {
+
+    debug.log(`[WIDGET_19]`);
+
+    dom_cache.allDomElements.forEach( de => {
+      debug.log(`[WIDGET_19][${de.ordinalPosition}]: ${de.tagName}  ${de.descendantInteractiveCount}`);
+      if (de.visibility.hasAriaHidden) {
+        debug.log(`[WIDGET_19][${de.ordinalPosition}]: ${de.tagName} aria-hidden=${de.node.getAttribute('aria-hidden')}`);
+
+        if (de.visibility.ariaHiddenValue === 'true') {
+          if (de.tagName === 'body') {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+          else {
+            if (de.descendantInteractiveCount) {
+              if (de.descendantInteractiveCount === 1) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.descendantInteractiveCount]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+            }
+          }
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+        }
+      }
+    });
+   } // end validation function
+},
+
 
 ];
 

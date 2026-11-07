@@ -74,29 +74,29 @@ class ParentInfo {
     this.inDialog    = false;
 
     if (info) {
-      this.controlElement  = info.controlElement;
-      this.document        = info.document;
-      this.domDocument     = info.domDocument;
-      this.parentDocument  = info.parentDocument;
+      this.controlElement      = info.controlElement;
+      this.document            = info.document;
+      this.domDocument         = info.domDocument;
+      this.parentDocument      = info.parentDocument;
       this.useParentDocForName = info.useParentDocForName;
-      this.documentIndex   = info.documentIndex;
-      this.domElement      = info.domElement;
-      this.isInert         = info.isInert;
-      this.isDisdabled     = info.isDisabled;
-      this.landmarkElement = info.landmarkElement;
-      this.listElement     = info.listElement;
-      this.mapElement      = info.mapElement;
-      this.figureElement   = info.figureElement;
-      this.mediaElement    = info.mediaElement;
-      this.tableElement    = info.tableElement;
-      this.tableRowGroup   = info.tableRowGroup;
-      this.tableCell       = info.tableCell;
+      this.documentIndex       = info.documentIndex;
+      this.domElement          = info.domElement;
+      this.isInert             = info.isInert;
+      this.isDisdabled         = info.isDisabled;
+      this.landmarkElement     = info.landmarkElement;
+      this.listElement         = info.listElement;
+      this.mapElement          = info.mapElement;
+      this.figureElement       = info.figureElement;
+      this.mediaElement        = info.mediaElement;
+      this.tableElement        = info.tableElement;
+      this.tableRowGroup       = info.tableRowGroup;
+      this.tableCell           = info.tableCell;
 
       this.positionDomElement = info.positionDomElement;
 
-      this.inLink       = info.inLink;
-      this.inParagraph  = info.inParagraph;
-      this.inDialog     = info.inDialog;
+      this.inLink                   = info.inLink;
+      this.inParagraph              = info.inParagraph;
+      this.inDialog                 = info.inDialog;
     }
   }
 }
@@ -149,7 +149,7 @@ export default class DOMCache {
     this.imageInfo     = new ImageInfo();
     this.linkInfo      = new LinkInfo();
     this.listInfo      = new ListInfo();
-    this.mediaInfo      = new MediaInfo();
+    this.mediaInfo     = new MediaInfo();
     this.structureInfo = new StructureInfo();
     this.tableInfo     = new TableInfo();
     this.timingInfo    = new TimingInfo();

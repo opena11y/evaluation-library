@@ -22,6 +22,9 @@ export default class Visibility {
     let style = window.getComputedStyle(elementNode, null);
     let tagName = elementNode.tagName ? elementNode.tagName : '';
 
+    this.hasAriaHidden      = elementNode.hasAttribute('aria-hidden');
+    this.ariaHiddenValue    = this.hasAriaHidden ? elementNode.getAttribute('aria-hidden').toLowerCase() : '';
+
     this.isHidden           = this.normalizeHidden (elementNode, parentVisibility);
     this.isAriaHidden       = this.normalizeAriaHidden (elementNode, parentVisibility);
     this.isDisplayNone      = this.normalizeDisplay (style, parentVisibility);

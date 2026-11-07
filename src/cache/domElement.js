@@ -67,6 +67,7 @@ export default class DOMElement {
     const accNameDoc       = parentInfo.useParentDocForName ?
                              parentInfo.parentDocument :
                              parentInfo.document;
+    this.parentDomElement = parentInfo.domElement;
     this.doc              = parentInfo.document ? parentInfo.document : window.document;
     this.ordinalPosition  = ordinalPosition;
     this.parentInfo       = parentInfo;
@@ -83,6 +84,8 @@ export default class DOMElement {
     }
 
     this.accName        = getAccessibleName(accNameDoc, elementNode);
+    this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
+    this.errMessage     = getErrMessage(accNameDoc, elementNode);
 
     this.ariaInHTMLInfo  = getAriaInHTMLInfo(elementNode, this.accName.name);
     const defaultRole = this.ariaInHTMLInfo.defaultRole;
@@ -134,10 +137,11 @@ export default class DOMElement {
     this.tabIndex             = checkTabIndex(elementNode);
     this.isTabStop            = checkIsTabStop(elementNode);
     this.isInteractiveElement = checkForInteractiveElement(elementNode);
+    this.descendantInteractiveCount = this.isInteractiveElement ? 1 : 0;
+    if (this.isInteractiveElement) {
+      this.addInteractiveToAncestor(parentDomElement);
+    }
 
-    this.accName        = getAccessibleName(accNameDoc, elementNode);
-    this.accDescription = getAccessibleDesc(accNameDoc, elementNode, (this.accName.source !== 'title'));
-    this.errMessage     = getErrMessage(accNameDoc, elementNode);
 
     this.brailleName    = elementNode.hasAttribute('aria-braillelabel') ?
                           elementNode.getAttribute('aria-braillelabel') :
@@ -235,6 +239,19 @@ export default class DOMElement {
     }
 
   }
+
+  /**
+   * @method addInteractiveToAncestor
+   *
+   * @desc Updates interactive element count
+   */
+
+  addInteractiveToAncestor (parentDomElement) {
+    if (parentDomElement) {
+      parentDomElement.descendantInteractiveCount += 1;
+      parentDomElement.addInteractiveToAncestor(parentDomElement.parentDomElement)
+    }
+   }
 
   /**
    * @method getBodyElement

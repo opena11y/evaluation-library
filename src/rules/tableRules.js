@@ -78,7 +78,7 @@ export const tableRules = [
               }
               else {
                 if (headerCount) {
-                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_3', [de.elemName]);
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.elemName]);
                 }
                 else {
                   rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
@@ -252,7 +252,8 @@ export const tableRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : [],
-  wave_refs           : ['table_layout'],
+  wave_refs           : ['table_layout',
+                         'table_data'],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
   target_resources    : ['table'],
@@ -321,8 +322,10 @@ export const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : false,
   first_step          : false,
-  axe_refs            : [],
-  wave_refs           : [],
+  axe_refs            : ['td-has-header'],
+  wave_refs           : ['th',
+                         'th_col',
+                         'th_row'],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
   target_resources    : ['td[scope]'],
@@ -423,7 +426,7 @@ export const tableRules = [
   rule_required       : true,
   first_step          : false,
   axe_refs            : [],
-  wave_refs           : [],
+  wave_refs           : ['table_caption'],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
   target_resources    : ['caption', 'table[aria-label]', 'table[aria-labelledby]', 'table[aria-describedby]', 'table[title]'],
@@ -454,9 +457,43 @@ export const tableRules = [
       }
     });
   } // end validation function
+},
+
+/**
+ * @object TABLE_9
+ *
+ * @desc    Tests if table headers use TH elements have content
+ */
+
+{ rule_id             : 'TABLE_9',
+  last_updated        : '2026-11-06',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : ['empty-table-header'],
+  wave_refs           : ['th_empty'],
+  wcag_primary_id     : '1.3.1',
+  wcag_related_ids    : ['2.4.6'],
+  target_resources    : ['th'],
+  validate          : function (dom_cache, rule_result) {
+
+    dom_cache.tableInfo.allTableElements.forEach(te => {
+      te.cells.forEach( cell => {
+        const de = cell.domElement;
+        if (de.tagName === 'th' && !de.hasContent) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+    });
+  } // end validation function
 }
 ];
-
 
 
 

@@ -29,7 +29,6 @@ export const tableRules = {
         ELEMENT_FAIL_1:   'Add table cells to be used as header cells for the @%1@ element using either row/column headers or the @headers@ attribute.',
         ELEMENT_MC_1:     'The @%1@ element does not have any text content and it does not have any header cells. Verify that this cell is being used for formatting and does not need headers.',
         ELEMENT_MC_2:     'The @%1@ element does not have any text content.  Verify it is not being used for identifying the context of a data cell.',
-        ELEMENT_MC_3:     'The @%1@ element does not have any content, verify that the cell is being used for formatting.',
         ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
       },
       PURPOSES: [
@@ -354,7 +353,7 @@ export const tableRules = {
         FAIL_S:   'Change the @td[scope]@ element to a @th@ element',
         FAIL_P:   'Change the @td[scope]@ element to a @th@ element for each of the %N_F header cells using @td[scope]@',
         HIDDEN_S: 'One @table@ element that is hidden was not evaluated.',
-        HIDDEN_P: '%N_H @table@ elements elements that are hidden were not evaluated.',
+        HIDDEN_P: '%N_H @table@ elements that are hidden were not evaluated.',
         NOT_APPLICABLE:  'No td[scope]@ elements on the page'
       },
       BASE_RESULT_MESSAGES: {
@@ -491,6 +490,60 @@ export const tableRules = {
         { type:  REFERENCES.EXAMPLE,
           title: 'W3C Web Accessibility Tutorials: Tables',
           url:   'https://www.w3.org/WAI/tutorials/tables/'
+        }
+      ]
+  },
+  TABLE_9: {
+      ID:                    'Table 9',
+      DEFINITION:            'Each table header cell must have content.',
+      SUMMARY:               'No empty @th@ elements',
+      TARGET_RESOURCES_DESC: '@th@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Change the @th@ element to a @td@ element or if it is a header cell add appropriate header content',
+        FAIL_P:   'Change the %N_F @th@ elements to a @td@ element or if it is a header cell add appropriate header content',
+        HIDDEN_S: 'The empty @th@ element that is hidden was not evaluated.',
+        HIDDEN_P: 'The %N_H empty @th@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE:  'No empty @th@ elements on the page'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_FAIL_1:   'Change the @th@ element to a @td@ element, or it is is a header cell add appropriate header content.',
+        ELEMENT_HIDDEN_1: 'The @th@ element was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        '@th@ element is the web standards way to identify header cells in a table, and makes the data table source code easier to read and debug for accessibility problems.',
+        'Empty @th@ elements provide no information in identifying the meaning of @td@ elements and can confuse users of assistive technologies.'
+      ],
+      TECHNIQUES: [
+        'Use @th@ elements in the first row or column to identify row and column headers in a simple data tables.',
+        'Use @headers@ attribute on each @td@ element to identify header information in complex data tables.',
+        'Use @th@ element for cells used as header cells in the table.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TD elements',
+          url:   'https://html.spec.whatwg.org/#the-td-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The TH elements',
+          url:   'https://html.spec.whatwg.org/#the-th-element'
+        },
+        { type:  REFERENCES.EXAMPLE,
+          title: 'W3C Web Accessibility Tutorials: Tables',
+          url:   'https://www.w3.org/WAI/tutorials/tables/'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H51: Using table markup to present tabular information',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H51'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H63: Using the scope attribute to associate header cells and data cells in data tables',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H63'
+        },
+        { type:  REFERENCES.EXAMPLE,
+          title: 'IBM Web checklist Checkpoint 1.3e: Tables',
+          url:   'https://www-03.ibm.com/able/guidelines/web/webtableheaders.html'
         }
       ]
   }

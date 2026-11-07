@@ -45,6 +45,8 @@ export default class PageResult extends BaseResult {
           message_arguments,
           'page');
 
+    this.domDocument = domDocument;
+
     this.result_type  = RESULT_TYPE.PAGE;
 
     this.resultId = 'pr-' + resultIndex;
@@ -87,7 +89,7 @@ export default class PageResult extends BaseResult {
    */
 
   getResultIdentifier () {
-    return 'page';
+    return this.domDocument.getIdentifier('page');
   }
 
 }
