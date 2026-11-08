@@ -3551,6 +3551,101 @@ const frameRules$1 = {
                       url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64.html'
                     }
     ]
+  },
+  FRAME_3: {
+      ID:                    'Frame 3',
+      DEFINITION:            '@iframe@ elements should have unique accessible names to help users identify and differentiate the data tables on a page.',
+      SUMMARY:               '@iframe@s must have unique names',
+      TARGET_RESOURCES_DESC: '@iframe@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:         'Change the accessible name of the @iframe@ to be unique.',
+        FAIL_P:         'Change the accessible name of the %N_F out of %N_T @iframes@ that do not have unique names to be unique.',
+        HIDDEN_S:       'One @iframe@ element that is hidden was not evaluated.',
+        HIDDEN_P:       '%N_H @iframe@ elements that are hidden were not evaluated.',
+        NOT_APPLICABLE: 'Multiple data tables were not found on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:   'The @iframes@\'s accessible name "%1" for @%2@ element is unique on the page.',
+        ELEMENT_FAIL_1:   'The @iframes@\'s accessible name "%1" is not unique on the page for the @%2@ element, update the @title@ attribute to provide a unique and descriptive label for the @iframe@.',
+        ELEMENT_FAIL_2:   'The @iframes@ does not have an accessible name, update the @title@ attribute to provide unique and descriptive label for the @iframe@.',
+        ELEMENT_HIDDEN_1: 'The @%1@ element was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        '@iframe@ elements that share the same accessible name make it difficult to users of assistive technologies to differentiate the differences in content of each @iframe@ on the same page.',
+        'In rare cases when multiple @iframe@s have duplicate content, use "Copy 1", "Copy 2" and "Copy X" as part of the accessible name of each table to make it clear that there is more than one copy of the same information on the page.'
+      ],
+      TECHNIQUES: [
+        'Use @title@ attribute to provide an accessible name for a @iframe@.',
+        'Use @aria-label@ attribute can provide an accessible name for a @iframe@, but not recommended due to possible AT support issues.',
+        'Use @aria-labelledby@ attribute can provide an accessible name for a @iframe@, but not recommended due to possible AT support issues.',
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: 4.9.1 The @iframe@ element',
+          url:   'https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: @iframe@ HTML inline frame element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML Specification: The @title@ attribute',
+          url:   'https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H64: Using the @title@ attribute of the @iframe@ element',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H64'
+        },
+      ]
+  },
+  FRAME_4: {
+    ID:                    'Frame 4',
+    DEFINITION:            '@iframe@ that contains interactive element must not have a @tabindex@ value < 0.',
+    SUMMARY:               '@iframe@ tabindex restrictions',
+    TARGET_RESOURCES_DESC: '@iframe[tabindex < 0]@',
+    RULE_RESULT_MESSAGES: {
+      FAIL_S:         'Remove the @tabindex@ < 0 from the @iframe@ that contains interactive content.',
+      FAIL_P:         'Remove the @tabindex@ < 0 from the %N_F @iframe@s that contains interactive content.',
+      HIDDEN_S:       'The @iframe@ element that is hidden does not need to be tested for @tabindex@ value.',
+      HIDDEN_P:       'The %N_H @iframe@ elements that are hidden do not need to be tested for @tabindex@ value.',
+      NOT_APPLICABLE: 'No @iframe@s on the page containing interactive elements.'
+    },
+    BASE_RESULT_MESSAGES: {
+      ELEMENT_FAIL_1:    'Remove the @tabindex@ attribute from the @iframe@ element to ensure that the %1 interactive elements within the @iframe@ are included in the sequential focus order of the page.',
+      ELEMENT_HIDDEN_1:  'The @iframe@ element was not evaluated because it is hidden from assistive technologies.'
+    },
+    PURPOSES: [
+      'When @iframes@ have @tabindex=-1@ it removes the element and all it\'s contents from the focus order of the page.',
+      'Support for tab key traversal of focusable elements is required by people who cannot use the mouse and/or gestures to select the options and perform the actions made available to them by interactive elements.',
+      'Native HTML links and form control elements have default keyboard support for tab key traversal that are built-in and standardized among browsers.',
+      'When authors create custom interactive elements they need to support the keyboard interaction patterns that users have come to expect, and a key part of implementing this support is understanding how the @tabindex@ attribute can be used for managing keyboard focus.',
+      'The ARIA Authoring Practices Guide identifies how to use @tabindex@ to help manage keyboard focus for widget roles.',
+      'NOTE: Touch typists often prefer keyboard commands over mouse actions, especially for frequently performed operations, since they are much more efficient from a hand motion perspective.'
+    ],
+    TECHNIQUES: [
+      'Do not set the @tabindex@ value of the @iframe@.'
+    ],
+    MANUAL_CHECKS: [
+      'Use the tab key to verify the tab sequence of interactive elements of the page is in a logical.',
+      'Make a list of the functional feature of a web site.',
+      'Using only the keyboard, perform all of the functional features provided the interactive components on the web page.'
+    ],
+    INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'HTML: Focus',
+        url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: Managing Focus and Supporting Keyboard Navigation',
+        url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
+      },
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'W3C ARIA Authoring Practices: Design Patterns',
+        url:   'https://www.w3.org/WAI/ARIA/apg/patterns/'
+      }
+    ]
   }
 };
 
@@ -7984,9 +8079,6 @@ const listRules$1 = {
         'Use @ol@ as a container element for an ordered list of items.',
         'Use @ul@ as a container element for an unordered list of items.',
         'Use @li@ elements to identify items in ordered (@ol@) and unordered (@ul@) lists.',
-        'Use @dl@ as a container element for a description list (a.k.a. definition list) that contains contiguous groupings of terms and their associated descriptions or definitions.',
-        'Use @dt@ elements to identify terms being described or defined in a description list (@dl@).',
-        'Use @dd@ elements to identify descriptions or definitions for a term in a description list (@dl@).',
         'For repairing existing content that does not use list elements, you can use the ARIA @role@ attributes with value @[role="list"]@ or @[role="group"]to identify list container elements and @[role="listitem"]@ to identify list item elements.'
       ],
       MANUAL_CHECKS: [
@@ -8003,18 +8095,6 @@ const listRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML5: li element',
           url:   'https://www.w3.org/TR/html5/grouping-content.html#the-li-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: dl element',
-          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: dt element',
-          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dt-element'
-        },
-        { type:  REFERENCES.SPECIFICATION,
-          title: 'HTML5: dd element',
-          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dd-element'
         },
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: group role',
@@ -8035,6 +8115,10 @@ const listRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-setsize',
           url:   'https://www.w3.org/TR/wai-aria-1.3/#aria-setsize'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H48: Using @ol@, @ul@ and @dl@ for lists or groups of links',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H48'
         }
       ]
   },
@@ -8089,6 +8173,64 @@ const listRules$1 = {
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML Specification: The @title@ attribute',
           url:   'https://html.spec.whatwg.org/#attr-title'
+        }
+      ]
+  },
+  LIST_3: {
+      ID:                    'List 3',
+      DEFINITION:            'Definition lists (e.g. @dl@, @dt@ and @dd@ elements) must be properly structured.',
+      SUMMARY:               '@dl@, @dt@ and @dd@ element structure',
+      TARGET_RESOURCES_DESC: '@dl@, @dt@ and @dd@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:           'One definition list element is not properly structured.',
+        FAIL_P:           '%N_MC definition list elements are properly structured.',
+        HIDDEN_S:         'The hidden definition list element was not evaluated.',
+        HIDDEN_P:         'The %N_H hidden definition list elements were not evaluated.',
+        NOT_APPLICABLE:   'No definitions list elements found on the page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_PASS_1:      'The @%1@ element is a child of a @dl@ element.',
+        ELEMENT_PASS_2:      'The @dd@ element has a previous sibling @dt@ element element to providing context to the @dd@ content.',
+        ELEMENT_PASS_3:      'The @dl@ element\'s first child is a @dt@ element.',
+
+        ELEMENT_FAIL_1:      'The @%1@ element is NOT a child of a @dl@ element, update the code to make the element a child of a @dl@ element.',
+        ELEMENT_FAIL_2:      'The @dd@ element must have a previous sibling element that is a @dt@ element that provides context for the meaning of the @dd@ element content.',
+        ELEMENT_FAIL_3:      'The @dl@ element\'s first child is a @%1@ element, update the code to make a @dt@ element the first child.',
+        ELEMENT_FAIL_4:      'The @%1@ element cannot be one of the children of a @dl@ element, only @dt@ and @dd@ elements can be children of a @dl@ element.',
+
+        ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
+      },
+      PURPOSES: [
+        'When definition list markup is not properly structured, assistive technologies are not able to convey information properly to assistive technologies, which will be confusing to users.',
+        '@dt@ elements provide context for the following @dd@ elements.'
+      ],
+      TECHNIQUES: [
+        'Use @dl@ as a container element for a description list (a.k.a. definition list) that contains contiguous groupings of terms and their associated descriptions or definitions.',
+        'Use @dt@ elements to identify terms being described or defined in a description list (@dl@) and one of the should be the first child of the @dl@ element.',
+        'Use @dd@ elements to identify descriptions or definitions for a term in a description list (@dl@) and require a previous @dt@ element to be meaningful.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dl element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dl-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dt element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dt-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'HTML5: dd element',
+          url:   'https://www.w3.org/TR/html5/grouping-content.html#the-dd-element'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: @dl@ HTML description list element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl'
+        },
+        { type:  REFERENCES.WCAG_TECHNIQUE,
+          title: 'H48: Using @ol@, @ul@ and @dl@ for lists or groups of links',
+          url:   'https://www.w3.org/WAI/WCAG21/Techniques/html/H48'
         }
       ]
   }
@@ -43187,7 +43329,103 @@ const frameRules = [
         }
       });
     } // end validate function
-  }
+  },
+
+/**
+ * @object FRAME_3
+ *
+ * @desc   iframes accessible names must be unique
+ */
+
+{ rule_id             : 'FRAME_3',
+  last_updated        : '2026-11-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : ['frame-title-unique'],
+  wave_refs           : [],
+  wcag_primary_id     : '1.3.1',
+  wcag_related_ids    : ['2.4.6'],
+  target_resources    : ['iframe'],
+  validate          : function (dom_cache, rule_result) {
+
+    const visibleFrames = [];
+
+     dom_cache.iframeInfo.allIFrameElements.forEach( ife => {
+      const de = ife.domElement;
+      if (de.visibility.isVisibleToAT) {
+        visibleFrames.push(ife);
+      }
+      else {
+        rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+      }
+    });
+
+    visibleFrames.forEach( (ife1) => {
+      let count = 0;
+      const de = ife1.domElement;
+      const accName1 = ife1.domElement.accName.name;
+      if (accName1) {
+        visibleFrames.forEach( (ife2) => {
+          if (ife1 !== ife2) {
+            const accName2 = ife2.domElement.accName.name;
+            if (accName2) {
+              if (accName1.toLowerCase() === accName2.toLowerCase()) {
+                count += 1;
+              }
+            }
+          }
+        });
+        if (count) {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [accName1, de.elemName]);
+        }
+        else {
+          rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [accName1, de.elemName]);
+        }
+      }
+      else {
+          rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.elemName]);
+      }
+    });
+
+  } // end validation function
+},
+
+/**
+ * @object FRAME_4
+ *
+ * @desc   Frames that contain interactive content cannot have tabindex=-1
+ */
+
+{ rule_id             : 'FRAME_4',
+  last_updated        : '2026-11-07',
+  rule_scope          : RULE_SCOPE.ELEMENT,
+  rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+  rule_required       : true,
+  first_step          : false,
+  axe_refs            : ['frame-focusable-content'],
+  wave_refs           : [],
+  wcag_primary_id     : '2.4.3',
+  wcag_related_ids    : [],
+  target_resources    : ['iframe'],
+  validate          : function (dom_cache, rule_result) {
+
+    dom_cache.iframeInfo.allIFrameElements.forEach( (ife) => {
+      const de = ife.domElement;
+      if (de.visibility.isVisibleToAT) {
+        if (de.descendantInteractiveCount > 0 && de.tabIndex < 0) {
+         rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.descendantInteractiveCount]);
+        }
+      }
+      else {
+         rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+      }
+    });
+
+  } // end validation function
+}
+
 
 ];
 
@@ -47101,6 +47339,105 @@ const listRules = [
 
       });
     } // end validate function
+  },
+ /**
+   * @object LIST_1
+   *
+   * @desc Verify definition lists are properly structured
+  */
+
+  { rule_id             : 'LIST_3',
+    last_updated        : '2026-11-07',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : true,
+    first_step          : false,
+    axe_refs            : ['definition-list',
+                           'dlitem'],
+    wave_refs           : ['dl'],
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : [],
+    target_resources    : ['dl', 'dt', 'dd'],
+    validate            : function (dom_cache, rule_result) {
+
+      function hasPreviousSibling (node, tagName) {
+        let flag = false;
+        let elem = node.previousElementSibling;
+        while (elem) {
+          if (elem.tagName.toLowerCase() === tagName) {
+            flag = true;
+            break;
+          }
+          elem = elem.previousElementSibling;
+        }
+        return flag;
+      }
+
+      dom_cache.allDomElements.forEach ( de => {
+        const tagName       = de.tagName;
+        const parentTagName = de.parentInfo ? de.parentInfo.domElement.tagName : '';
+
+        let elem;
+        let tagName1;
+
+        switch (tagName) {
+
+          case 'dl':
+            if (de.visibility.isVisibleToAT) {
+              elem     = de.node ? de.node.firstElementChild : null;
+              tagName1 = elem ? elem.tagName.toLowerCase() : 'empty';
+              tagName1 === 'dt' ?
+                            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []) :
+                            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [tagName1]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+            }
+            break;
+
+          case 'dt':
+            if (de.visibility.isVisibleToAT) {
+              parentTagName === 'dl' ?
+                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tagName]) :
+                                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+            }
+            break;
+
+          case 'dd':
+            if (de.visibility.isVisibleToAT) {
+              if (parentTagName === 'dl') {
+                hasPreviousSibling(de.node, 'dt') ?
+                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []) :
+                                 rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+            }
+            break;
+
+          default:
+            if (parentTagName === 'dl') {
+              if (de.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+              }
+            }
+            break;
+        } /* end switch */
+
+      });
+
+
+    } // end validate function
   }
 ];
 
@@ -50471,33 +50808,33 @@ const widgetRules = [
   target_resources    : ['[aria-hidden]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug$4.log(`[WIDGET_19]`);
-
     dom_cache.allDomElements.forEach( de => {
-      debug$4.log(`[WIDGET_19][${de.ordinalPosition}]: ${de.tagName}  ${de.descendantInteractiveCount}`);
       if (de.visibility.hasAriaHidden) {
-        debug$4.log(`[WIDGET_19][${de.ordinalPosition}]: ${de.tagName} aria-hidden=${de.node.getAttribute('aria-hidden')}`);
-
-        if (de.visibility.ariaHiddenValue === 'true') {
-          if (de.tagName === 'body') {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
-          }
-          else {
-            if (de.descendantInteractiveCount) {
-              if (de.descendantInteractiveCount === 1) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.descendantInteractiveCount]);
-              }
+        if (de.visibility.isVisibleOnScreen) {
+          if (de.visibility.ariaHiddenValue === 'true') {
+            if (de.tagName === 'body') {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                if (de.descendantInteractiveCount) {
+                  if (de.descendantInteractiveCount === 1) {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.descendantInteractiveCount]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
             }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
           }
         }
         else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
       }
     });

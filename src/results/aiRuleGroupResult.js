@@ -124,8 +124,7 @@ export function aiRuleResultsByGuideline (allRuleResults, guidelineId) {
 function getRuleResultInfo (rule_result) {
 
   const summary = rule_result.getResultsSummary();
-
-  return {                id: rule_result.rule.getId(),
+  const info = {                id: rule_result.rule.getId(),
                       id_nls: rule_result.rule.getIdNLS(),
                 rule_summary: rule_result.rule.getSummary(),
 
@@ -159,6 +158,7 @@ function getRuleResultInfo (rule_result) {
 
                   has_hidden: rule_result.hasHiddenElementResults()
       };
+  return info;
 }
 
 /**

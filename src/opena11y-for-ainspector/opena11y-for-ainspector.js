@@ -139,7 +139,7 @@ function getRect (elem) {
 
     let childElem = elem.firstElementChild;
 
-    let r = childElem.getBoundingClientRect();
+    let r = childElem ? childElem.getBoundingClientRect() : rect;
 
     rect = {
       top: r.top,
@@ -150,7 +150,7 @@ function getRect (elem) {
       width: r.width
     };
 
-    childElem = childElem.nextElementSibling;
+    childElem = childElem ? childElem.nextElementSibling : null;
 
     while (childElem) {
       r = childElem.getBoundingClientRect();

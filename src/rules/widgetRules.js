@@ -1186,33 +1186,33 @@ export const widgetRules = [
   target_resources    : ['[aria-hidden]'],
   validate            : function (dom_cache, rule_result) {
 
-    debug.log(`[WIDGET_19]`);
-
     dom_cache.allDomElements.forEach( de => {
-      debug.log(`[WIDGET_19][${de.ordinalPosition}]: ${de.tagName}  ${de.descendantInteractiveCount}`);
       if (de.visibility.hasAriaHidden) {
-        debug.log(`[WIDGET_19][${de.ordinalPosition}]: ${de.tagName} aria-hidden=${de.node.getAttribute('aria-hidden')}`);
-
-        if (de.visibility.ariaHiddenValue === 'true') {
-          if (de.tagName === 'body') {
-            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
-          }
-          else {
-            if (de.descendantInteractiveCount) {
-              if (de.descendantInteractiveCount === 1) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
-              }
-              else {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.descendantInteractiveCount]);
-              }
+        if (de.visibility.isVisibleOnScreen) {
+          if (de.visibility.ariaHiddenValue === 'true') {
+            if (de.tagName === 'body') {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
             }
             else {
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                if (de.descendantInteractiveCount) {
+                  if (de.descendantInteractiveCount === 1) {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', [de.tagName]);
+                  }
+                  else {
+                    rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [de.tagName, de.descendantInteractiveCount]);
+                  }
+                }
+                else {
+                  rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_2', [de.tagName]);
+                }
             }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
           }
         }
         else {
-          rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.tagName]);
+          rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.tagName]);
         }
       }
     });

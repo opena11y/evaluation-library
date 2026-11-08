@@ -20,7 +20,12 @@
         executeTest('FRAME 1B: frame must have accessible name', 'ID_IFRAME_1B', 'FRAME_1');
 
         executeTest('FRAME 2A: iframe must have accessible name', 'ID_IFRAME_2A', 'FRAME_2');
-        executeTest('FRAME 2B: iframe must have accessible name', 'ID_IFRAME_3B', 'FRAME_2');
+        executeTest('FRAME 2B: iframe must have accessible name', 'ID_IFRAME_2B', 'FRAME_2');
+
+        executeTest('FRAME 3: iframe must have a unique accessible name', 'ID_IFRAME_3', 'FRAME_3');
+
+        executeTest('FRAME 4: iframe with interactive content cannot have tabindex < 0', 'ID_IFRAME_4', 'FRAME_4');
+
       });
     </script>
 
@@ -31,6 +36,14 @@
     <h2>iframe must have accessible name</h2>
     <iframe id="ID_IFRAME_2A" src="frames/frame_2_iframes.html"></iframe>
     <iframe id="ID_IFRAME_2B" src="frames/frame_2_iframes_with_frameset.html"></iframe>
+
+    <h2>iframe must have unique accessible name</h2>
+    <iframe id="ID_IFRAME_3" src="frames/frame_3_iframes.html"></iframe>
+
+    <h2>iframe must not have tabindex=-1</h2>
+    <iframe id="ID_IFRAME_4" src="frames/frame_4_iframes.html"></iframe>
+
+
    </body>
 
 </html>

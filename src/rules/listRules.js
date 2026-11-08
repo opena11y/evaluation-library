@@ -115,6 +115,105 @@ export const listRules = [
 
       });
     } // end validate function
+  },
+ /**
+   * @object LIST_1
+   *
+   * @desc Verify definition lists are properly structured
+  */
+
+  { rule_id             : 'LIST_3',
+    last_updated        : '2026-11-07',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : true,
+    first_step          : false,
+    axe_refs            : ['definition-list',
+                           'dlitem'],
+    wave_refs           : ['dl'],
+    wcag_primary_id     : '1.3.1',
+    wcag_related_ids    : [],
+    target_resources    : ['dl', 'dt', 'dd'],
+    validate            : function (dom_cache, rule_result) {
+
+      function hasPreviousSibling (node, tagName) {
+        let flag = false;
+        let elem = node.previousElementSibling;
+        while (elem) {
+          if (elem.tagName.toLowerCase() === tagName) {
+            flag = true;
+            break;
+          }
+          elem = elem.previousElementSibling;
+        }
+        return flag;
+      }
+
+      dom_cache.allDomElements.forEach ( de => {
+        const tagName       = de.tagName;
+        const parentTagName = de.parentInfo ? de.parentInfo.domElement.tagName : '';
+
+        let elem;
+        let tagName1;
+
+        switch (tagName) {
+
+          case 'dl':
+            if (de.visibility.isVisibleToAT) {
+              elem     = de.node ? de.node.firstElementChild : null;
+              tagName1 = elem ? elem.tagName.toLowerCase() : 'empty';
+              tagName1 === 'dt' ?
+                            rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []) :
+                            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [tagName1]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+            }
+            break;
+
+          case 'dt':
+            if (de.visibility.isVisibleToAT) {
+              parentTagName === 'dl' ?
+                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tagName]) :
+                                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+            }
+            break;
+
+          case 'dd':
+            if (de.visibility.isVisibleToAT) {
+              if (parentTagName === 'dl') {
+                hasPreviousSibling(de.node, 'dt') ?
+                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []) :
+                                 rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+            }
+            break;
+
+          default:
+            if (parentTagName === 'dl') {
+              if (de.visibility.isVisibleToAT) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [tagName]);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
+              }
+            }
+            break;
+        } /* end switch */
+
+      });
+
+
+    } // end validate function
   }
 ];
 

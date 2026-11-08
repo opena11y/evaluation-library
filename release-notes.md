@@ -4,7 +4,11 @@ Version 3.1.0 Overview
 * Updated how PageResults and WebsiteResults generate identifiers
 * Updating Heading 5 to fail headings with no content
 * Added Table 9 no empty TH elements
-* Added Widet 19 testing for aria-hidden on body or interactive content
+* Added Widget 19 testing for aria-hidden on body or interactive content
+* Added List 3 for definition list structure
+* Added Frame 3 for unique titles for iframes
+* Added Frame 4 for tabindex for frames with interactive elements
+
 
 Version 3.0.0 Overview
 =============================

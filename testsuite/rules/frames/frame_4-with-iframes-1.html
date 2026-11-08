@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML document with iframe: IFRAME_4</title>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+  <body>
+  <main>
+    <h1>IFRAME_3: Frames must not have tabindex < 0</h1>
+    <iframe src="frame-with-links.html" title="iframe 11" tabindex="-1" class="FRAME_2_FAIL"></iframe>
+    <iframe src="frame-with-links.html" title="iframe 12"></iframe>
+    <iframe src="frame-no-iframes.html" title="iframe 13" tabindex="-1"></iframe>
+    <iframe src="frame-no-iframes.html" title="iframe 14"></iframe>
+    <iframe src="frame-no-iframes.html" hidden                   class="FRAME_2_HIDDEN"></iframe>
+    <iframe src="frame-no-iframes.html" hidden title="iframe 11" class="FRAME_2_HIDDEN"></iframe>
+  </main>
+  
+  <body>
+</html>
