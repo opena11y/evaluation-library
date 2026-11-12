@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Resize text content | OpenA11y Evaluation Library 3.0</title>
+    <title>Resize text content | OpenA11y Evaluation Library 3.0.1</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -32,7 +32,7 @@
                       alt="Evaluation Library Logo">
                     </span>
                     <span class="version">
-                      Version 3.0
+                      Version 3.0.1
                     </span>
                   </span>
 
@@ -276,7 +276,7 @@
                   
 <tr>
   <th>Rule Category</th>
-  <td>Tables/Layout</td>
+  <td>Color/Content</td>
 </tr>
 
                   
@@ -300,6 +300,12 @@
   <td>
     <ul>
     
+      <li><a href="https://dequeuniversity.com/rules/axe/4.11/meta-viewport">Ensure &lt;meta name=&quot;viewport&quot;&gt; does not disable text scaling and zooming</a> (Moderate) </li>
+    
+      <li><a href="https://dequeuniversity.com/rules/axe/4.11/meta-viewport-large">Ensure &lt;meta name=&quot;viewport&quot;&gt; can scale a significant amount</a> (Minor) </li>
+    
+      <li><a href="https://dequeuniversity.com/rules/axe/4.11/hidden-content">Inform users about hidden content.</a> (Minor) </li>
+    
     </ul>
   </td>
   
@@ -322,6 +328,10 @@
   <th>Techniques</th>
   <td>
     <ul>
+      
+      <li>If you use <code>meta[name=viewport]</code> element do not use the <code>user-scalable</code> attribute.</li>
+      
+      <li>If you use <code>meta[name=viewport]</code> element with the <code>maximum-size</code> attribute do not use a value less than 2 (note: the best practice is to use a value of 5 or greater).</li>
       
       <li>Use relative CSS sized like <code>em</code> and <code>percentage</code> rather than pixels and point sizes.</li>
       

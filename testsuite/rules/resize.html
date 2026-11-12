@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QUNIT: Resize Tests</title>
+    <link rel="stylesheet" href="../qunit/qunit-2.19.1.css"/>
+    <script src="../qunit/qunit-2.19.1.js"></script>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script type="module">
+
+      import executeTest from '../scripts/testsuite.js';
+      window.addEventListener('load', () => {
+        executeTest('FRAME 1A: META no meta[name=viewport]',      'ID_IFRAME_1A', 'RESIZE_1');
+        executeTest('FRAME 1B: META maximum scaling 15',          'ID_IFRAME_1B', 'RESIZE_1');
+        executeTest('FRAME 1C: META maximum scaling 20',          'ID_IFRAME_1C', 'RESIZE_1');
+        executeTest('FRAME 1D: META no user scaling',             'ID_IFRAME_1D', 'RESIZE_1');
+        executeTest('FRAME 1E: META both',                        'ID_IFRAME_1E', 'RESIZE_1');
+      });
+
+    </script>
+    
+    <h1>Resize tests</h1>
+
+    <h2>Scaling content</h2>
+    <iframe id="ID_IFRAME_1A" src="resize/resize_1_no_viewport.html"></iframe>
+    <iframe id="ID_IFRAME_1B" src="resize/resize_1_max_size_15.html"></iframe>
+    <iframe id="ID_IFRAME_1C" src="resize/resize_1_max_size_20.html"></iframe>
+    <iframe id="ID_IFRAME_1D" src="resize/resize_1_user_scaling_no.html"></iframe>
+    <iframe id="ID_IFRAME_1E" src="resize/resize_1_user_scaling_no_max_size_15.html"></iframe>
+  </body>
+
+</html>

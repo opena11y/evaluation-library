@@ -176,7 +176,7 @@ export default class DOMElement {
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
     this.isButton    = this.role === 'button' || this.tagName === 'button';
-    this.isLink      = this.role === 'link' || this.tagName === 'a';
+    this.isLink      = (this.role === 'link' && elementNode.tabIndex >= 0) || (this.tagName === 'a' && elementNode.hasAttribute('href'));
     this.isLandmark  = this.checkIsLandamrk(this.role || this.defaultRole, this.accName.name);
     this.isHeading   = this.role === 'heading';
     this.isInDialog  = this.tagName === 'dialog' ||

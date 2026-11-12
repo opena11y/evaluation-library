@@ -33,7 +33,8 @@ export const listRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['list',
-                           'listitem'],
+                           'listitem',
+                           'hidden-content'],
     wave_refs           : ['ol',
                            'ul',
                            'dl'],
@@ -129,7 +130,8 @@ export const listRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['definition-list',
-                           'dlitem'],
+                           'dlitem',
+                           'hidden-content'],
     wave_refs           : ['dl'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : [],
@@ -160,11 +162,11 @@ export const listRules = [
 
           case 'dl':
             if (de.visibility.isVisibleToAT) {
-              elem     = de.node ? de.node.firstElementChild : null;
+              elem     = de.node.firstElementChild ? de.node.firstElementChild : null;
               tagName1 = elem ? elem.tagName.toLowerCase() : 'empty';
               tagName1 === 'dt' ?
                             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []) :
-                            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [tagName1]);
+                            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [tagName1]);
             }
             else {
               rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
@@ -173,9 +175,16 @@ export const listRules = [
 
           case 'dt':
             if (de.visibility.isVisibleToAT) {
-              parentTagName === 'dl' ?
-                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tagName]) :
-                                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+              if (parentTagName === 'dl') {
+                elem     = de.node.nextElementSibling ? de.node.nextElementSibling : null;
+                tagName1 = elem ? elem.tagName.toLowerCase() : 'empty';
+                tagName1 === 'dd' ?
+                             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tagName]) :
+                             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+              }
             }
             else {
               rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
@@ -186,7 +195,7 @@ export const listRules = [
             if (de.visibility.isVisibleToAT) {
               if (parentTagName === 'dl') {
                 hasPreviousSibling(de.node, 'dt') ?
-                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []) :
+                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [tagName]) :
                                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
               }
               else {
@@ -201,7 +210,7 @@ export const listRules = [
           default:
             if (parentTagName === 'dl') {
               if (de.visibility.isVisibleToAT) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [tagName]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [tagName]);
               }
               else {
                 rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);

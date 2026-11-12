@@ -150,12 +150,14 @@ export const listRules = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:      'The @%1@ element is a child of a @dl@ element.',
         ELEMENT_PASS_2:      'The @dd@ element has a previous sibling @dt@ element element to providing context to the @dd@ content.',
-        ELEMENT_PASS_3:      'The @dl@ element\'s first child is a @dt@ element.',
+        ELEMENT_PASS_3:      'The @dt@ element has a following sibling @dd@ element element to providing information to the @dt@ content.',
+        ELEMENT_PASS_4:      'The @dl@ element\'s first child is a @dt@ element.',
 
         ELEMENT_FAIL_1:      'The @%1@ element is NOT a child of a @dl@ element, update the code to make the element a child of a @dl@ element.',
         ELEMENT_FAIL_2:      'The @dd@ element must have a previous sibling element that is a @dt@ element that provides context for the meaning of the @dd@ element content.',
-        ELEMENT_FAIL_3:      'The @dl@ element\'s first child is a @%1@ element, update the code to make a @dt@ element the first child.',
-        ELEMENT_FAIL_4:      'The @%1@ element cannot be one of the children of a @dl@ element, only @dt@ and @dd@ elements can be children of a @dl@ element.',
+        ELEMENT_FAIL_3:      'The @dt@ element must have a next sibling element that is a @dd@ element that provides information related to the @dt@ element content.',
+        ELEMENT_FAIL_4:      'The @dl@ element\'s first child is a @%1@ element, update the code to make a @dt@ element the first child.',
+        ELEMENT_FAIL_5:      'The @%1@ element cannot be one of the children of a @dl@ element, only @dt@ and @dd@ elements can be children of a @dl@ element.',
 
         ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
       },

@@ -32,7 +32,7 @@ export const audioRules = [
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
     first_step          : true,
-    axe_refs            : [],
+    axe_refs            : ['hidden-content'],
     wave_refs           : ['audio_video',
                            'html5_video_audio'],
     wcag_primary_id     : '1.2.1',

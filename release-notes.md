@@ -1,8 +1,10 @@
-Version 3.1.0 Overview
+Version 3.0.1 Overview
 =============================
 * Fixed issue with Table 1 rule for manual check when the table cell is empty, but has headers
 * Updated how PageResults and WebsiteResults generate identifiers
 * Updating Heading 5 to fail headings with no content
+* Updated Resize 1 to including testing for meta viewport elements
+* Fixed bug in over identifying links
 * Added Table 9 no empty TH elements
 * Added Widget 19 testing for aria-hidden on body or interactive content
 * Added List 3 for definition list structure

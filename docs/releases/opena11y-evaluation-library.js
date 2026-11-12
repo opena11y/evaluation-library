@@ -147,7 +147,7 @@ class DebugLogging {
 /* Constants */
 const debug$19 = new DebugLogging('constants', false);
 
-const VERSION = '3.0';
+const VERSION = '3.0.1';
 
 /**
  * @constant RULESET
@@ -8191,12 +8191,14 @@ const listRules$1 = {
       BASE_RESULT_MESSAGES: {
         ELEMENT_PASS_1:      'The @%1@ element is a child of a @dl@ element.',
         ELEMENT_PASS_2:      'The @dd@ element has a previous sibling @dt@ element element to providing context to the @dd@ content.',
-        ELEMENT_PASS_3:      'The @dl@ element\'s first child is a @dt@ element.',
+        ELEMENT_PASS_3:      'The @dt@ element has a following sibling @dd@ element element to providing information to the @dt@ content.',
+        ELEMENT_PASS_4:      'The @dl@ element\'s first child is a @dt@ element.',
 
         ELEMENT_FAIL_1:      'The @%1@ element is NOT a child of a @dl@ element, update the code to make the element a child of a @dl@ element.',
         ELEMENT_FAIL_2:      'The @dd@ element must have a previous sibling element that is a @dt@ element that provides context for the meaning of the @dd@ element content.',
-        ELEMENT_FAIL_3:      'The @dl@ element\'s first child is a @%1@ element, update the code to make a @dt@ element the first child.',
-        ELEMENT_FAIL_4:      'The @%1@ element cannot be one of the children of a @dl@ element, only @dt@ and @dd@ elements can be children of a @dl@ element.',
+        ELEMENT_FAIL_3:      'The @dt@ element must have a next sibling element that is a @dd@ element that provides information related to the @dt@ element content.',
+        ELEMENT_FAIL_4:      'The @dl@ element\'s first child is a @%1@ element, update the code to make a @dt@ element the first child.',
+        ELEMENT_FAIL_5:      'The @%1@ element cannot be one of the children of a @dl@ element, only @dt@ and @dd@ elements can be children of a @dl@ element.',
 
         ELEMENT_HIDDEN_1:  'The hidden @%1@ element was not evaluated.'
       },
@@ -8784,16 +8786,31 @@ const resizeRules$1 = {
       SUMMARY:               'Resize text content',
       TARGET_RESOURCES_DESC: 'Page',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+        FAIL_S:          'Change the @meta[name=viewport]@ element that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
+        FAIL_P:          'Change the %N_F @meta[name=viewport]@ elements that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
+        MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
+        MANUAL_CHECK_P:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
       },
       BASE_RESULT_MESSAGES: {
-        PAGE_MC_1:      'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+        PAGE_FAIL_1:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5)',
+        PAGE_FAIL_2:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute.',
+        PAGE_FAIL_3:   'Change the @meta[name=viewport]@ element by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5).',
+        PAGE_FAIL_4:   'One or more of the @iframe@s on this page do not allow user scaling and/or limit scaling to less the 2, update the iframe @meta@ elements to remove these restrictions.',
+        PAGE_FAIL_5:   'One or more of the @iframe@s on this page do not allow user scaling, update the iframe @meta@ elements to remove this restriction.',
+        PAGE_FAIL_6:   'One or more of the @iframe@s on this page limit scaling to less the 2, update the iframe @meta@ elements to remove this restriction.',
+        PAGE_FAIL_7:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
+        PAGE_FAIL_8:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute, and also one or more @iframe@s need to be updated to remove resize restrictions.',
+        PAGE_FAIL_9:   'Change the @meta[name=viewport]@ element by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
+        PAGE_MC_1:     'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
+        PAGE_HIDDEN_1: 'The @iframe@ is hidden and so not evaluated for resizing features.'
       },
       PURPOSES: [
         'People with visual impairments may increase the size of text and the text should reflow to fit the available viewing area to make it easier to read.',
         'If text is clipped by limits on iframe sizes or CSS overflow properties some text content will be impossible to view.'
       ],
       TECHNIQUES: [
+        'If you use @meta[name=viewport]@ element do not use the @user-scalable@ attribute.',
+        'If you use @meta[name=viewport]@ element with the @maximum-size@ attribute do not use a value less than 2 (note: the best practice is to use a value of 5 or greater).',
         'Use relative CSS sized like @em@ and @percentage@ rather than pixels and point sizes.',
         'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.',
         'Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.',
@@ -13115,11 +13132,17 @@ class DOMDocument {
     this.refreshTime = '';
     this.refreshURL = '';
 
+    this.hasViewport = false;
+    this.userScalable = '';
+    this.maxScale = '';
+
+
     const metas = doc && doc.documentElement ?
                      Array.from(doc.querySelectorAll('head meta')) :
                      [];
 
     metas.forEach( (meta) => {
+      // Page refesh
       const hasRefresh = meta.hasAttribute('http-equiv') &&
                          meta.getAttribute('http-equiv').toLowerCase() === 'refresh';
       const content    = meta.hasAttribute('content') ?
@@ -13132,11 +13155,26 @@ class DOMDocument {
                           content.length > 1 &&
                           content[1].includes('=')
                           ? content[1].split('=')[1] : [];
+
       if (hasRefresh && !isNaN(refreshTime)) {
         this.hasRefresh   = true;
         this.refreshTime  = refreshTime;
         this.refreshURL   = refreshURL;
       }
+
+
+
+      // View point scaling
+
+      this.hasViewport  = meta.hasAttribute('name') &&
+                           meta.getAttribute('name').toLowerCase() === 'viewport';
+      this.userScalable = meta.hasAttribute('user-scalable') ?
+                           meta.getAttribute('user-scalable').toLowerCase() != 'no':
+                           true;
+      this.maxScale     = meta.hasAttribute('maximum-scale') ?
+                           parseFloat(meta.getAttribute('maximum-scale')) :
+                           10.0;
+
     });
 
     // Information on rule results associated with this element
@@ -36235,7 +36273,7 @@ class DOMElement {
     this.mayHaveContent = elementsThatMayHaveContent.includes(this.tagName);
 
     this.isButton    = this.role === 'button' || this.tagName === 'button';
-    this.isLink      = this.role === 'link' || this.tagName === 'a';
+    this.isLink      = (this.role === 'link' && elementNode.tabIndex >= 0) || (this.tagName === 'a' && elementNode.hasAttribute('href'));
     this.isLandmark  = this.checkIsLandamrk(this.role || this.defaultRole, this.accName.name);
     this.isHeading   = this.role === 'heading';
     this.isInDialog  = this.tagName === 'dialog' ||
@@ -42496,7 +42534,7 @@ const audioRules = [
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
     first_step          : true,
-    axe_refs            : [],
+    axe_refs            : ['hidden-content'],
     wave_refs           : ['audio_video',
                            'html5_video_audio'],
     wcag_primary_id     : '1.2.1',
@@ -42856,7 +42894,8 @@ const colorRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : true,
-    axe_refs            : ['color-contrast'],
+    axe_refs            : ['color-contrast',
+                           'hidden-content'],
     wave_refs           : ['contrast'],
     wcag_primary_id     : '1.4.3',
     wcag_related_ids    : ['1.4.1','1.4.6'],
@@ -42909,7 +42948,8 @@ const colorRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required        : false,
     first_step          : false,
-    axe_refs            : ['color-contrast-enhanced'],
+    axe_refs            : ['color-contrast-enhanced',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.6',
     wcag_related_ids    : ['1.4.1','1.4.3'],
@@ -42936,7 +42976,7 @@ const colorRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.11',
     wcag_related_ids    : [],
@@ -42971,7 +43011,7 @@ const colorRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.11',
     wcag_related_ids    : [],
@@ -43268,7 +43308,8 @@ const frameRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['frame-title'],
+    axe_refs            : ['frame-title',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : [],
@@ -43304,7 +43345,8 @@ const frameRules = [
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['frame-title'],
+    axe_refs            : ['frame-title',
+                           'hidden-content'],
     wave_refs           : ['iframe'],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : [],
@@ -43343,7 +43385,8 @@ const frameRules = [
   rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['frame-title-unique'],
+  axe_refs            : ['frame-title-unique',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -43404,7 +43447,8 @@ const frameRules = [
   rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['frame-focusable-content'],
+  axe_refs            : ['frame-focusable-content',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '2.4.3',
   wcag_related_ids    : [],
@@ -43515,7 +43559,8 @@ const controlRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : ['label',
-                         'select-name'],
+                         'select-name',
+                         'hidden-content'],
   wave_refs           : ['label_missing',
                          'label_title',
                          'select_missing_label'],
@@ -43562,7 +43607,8 @@ const controlRules = [
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : ['input-image-alt'],
+  axe_refs            : ['input-image-alt',
+                         'hidden-content'],
   wave_refs           : ['alt_input_missing',
                          'label_title',
                          'alt_input'],
@@ -43661,7 +43707,8 @@ const controlRules = [
   rule_required       : false,
   first_step          : false,
   axe_refs            : ['button-name',
-                         'summary-name'],
+                         'summary-name',
+                         'hidden-content'],
   wave_refs           : ['button_empty',
                          'label_title'],
   wcag_primary_id     : '3.3.2',
@@ -43745,7 +43792,8 @@ const controlRules = [
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['duplicate-id-aria'],
+  axe_refs            : ['duplicate-id-aria',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['3.3.2', '1.3.1', '2.4.6'],
@@ -43781,7 +43829,8 @@ const controlRules = [
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['form-field-multiple-labels'],
+  axe_refs            : ['form-field-multiple-labels',
+                         'hidden-content'],
   wave_refs           : ['label_orphaned',
                          'label_multiple',
                          'label'],
@@ -43985,7 +44034,8 @@ const controlRules = [
   rule_category       : RULE_CATEGORIES.FORMS,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : ['input-button-name'],
+  axe_refs            : ['input-button-name',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -44544,7 +44594,8 @@ const headingRules = [
     rule_category       : RULE_CATEGORIES.HEADINGS,
     rule_required       : false,
     first_step          : true,
-    axe_refs            : ['page-has-heading-one'],
+    axe_refs            : ['page-has-heading-one',
+                           'hidden-content'],
     wave_refs           : ['h1_missing'],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.2', '2.4.6', '2.4.10'],
@@ -44764,7 +44815,8 @@ const headingRules = [
   rule_required       : false,
   first_step          : false,
   axe_refs            : ['heading-order',
-                         'empty-heading'],
+                         'empty-heading',
+                         'hidden-content'],
   wave_refs           : ['heading_missing',
                          'heading_skipped'],
   wcag_primary_id     : '1.3.1',
@@ -45010,7 +45062,8 @@ const htmlRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['marquee',
-                           'blink'],
+                           'blink',
+                           'hidden-content'],
     wave_refs           : ['marquee',
                            'blink'],
     wcag_primary_id     : '2.3.1',
@@ -45062,7 +45115,8 @@ const imageRules = [
                          'area-alt',
                          'role-img-alt',
                          'svg-img-alt',
-                         'object-alt'],
+                         'object-alt',
+                         'hidden-content'],
   wave_refs           : ['alt_missing',
                         'alt_spacer_missing',
                         'alt_area_missing',
@@ -45600,7 +45654,8 @@ const keyboardRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['tabindex'],
+    axe_refs            : ['tabindex',
+                           'hidden-content'],
     wave_refs           : ['tabindex'],
     wcag_primary_id     : '2.4.3',
     wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
@@ -45794,7 +45849,8 @@ const keyboardRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['presentation-role-conflict'],
+    axe_refs            : ['presentation-role-conflict',
+                           'hidden-content'],
     wave_refs           : ['aria_tabindex'],
     wcag_primary_id     : '2.4.3',
     wcag_related_ids    : ['2.1.1', '2.1.2', '2.4.7', '3.2.1'],
@@ -45848,7 +45904,8 @@ const landmarkRules = [
     rule_required       : true,
     first_step          : true,
     axe_refs            : ['landmark-one-main',
-                           'landmark-no-duplicate-main'],
+                           'landmark-no-duplicate-main',
+                           'hidden-content'],
     wave_refs           : ['region_missing',
                            'main'],
     wcag_primary_id     : '2.4.1',
@@ -45870,7 +45927,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['region'],
+    axe_refs            : ['region',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -45984,7 +46042,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-no-duplicate-banner'],
+    axe_refs            : ['landmark-no-duplicate-banner',
+                           'hidden-content'],
     wave_refs           : ['region_missing',
                            'header'],
     wcag_primary_id     : '2.4.1',
@@ -46008,7 +46067,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-no-duplicate-banner'],
+    axe_refs            : ['landmark-no-duplicate-banner',
+                           'hidden-content'],
     wave_refs           : ['header'],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -46030,7 +46090,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-no-duplicate-contentinfo'],
+    axe_refs            : ['landmark-no-duplicate-contentinfo',
+                           'hidden-content'],
     wave_refs           : ['footer'],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -46052,7 +46113,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-no-duplicate-contentinfo'],
+    axe_refs            : ['landmark-no-duplicate-contentinfo',
+                           'hidden-content'],
     wave_refs           : ['footer'],
     wcag_primary_id     : '2.4.1',
     wcag_related_ids    : ['1.3.1', '2.4.6'],
@@ -46073,7 +46135,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     required            : true,
     first_step          : false,
-    axe_refs            : ['landmark-banner-is-top-level'],
+    axe_refs            : ['landmark-banner-is-top-level',
+                           'hidden-content'],
     wave_refs           : ['header'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -46138,7 +46201,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-main-is-top-level'],
+    axe_refs            : ['landmark-main-is-top-level',
+                           'hidden-content'],
     wave_refs           : ['main'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -46159,7 +46223,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-contentinfo-is-top-level'],
+    axe_refs            : ['landmark-contentinfo-is-top-level',
+                           'hidden-content'],
     wave_refs           : ['footer'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -46279,7 +46344,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['landmark-unique'],
+    axe_refs            : ['landmark-unique',
+                           'hidden-content'],
     wave_refs           : ['aside',
                            'footer',
                            'header',
@@ -46344,7 +46410,8 @@ const landmarkRules = [
     rule_category       : RULE_CATEGORIES.LANDMARKS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : ['landmark-complementary-is-top-level'],
+    axe_refs            : ['landmark-complementary-is-top-level',
+                           'hidden-content'],
     wave_refs           : ['aside'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : ['2.4.1', '2.4.6', '2.4.10'],
@@ -47037,7 +47104,8 @@ const linkRules = [
     rule_required       : true,
     first_step          : true,
     axe_refs            : ['link-name',
-                           'aria-command-name'],
+                           'aria-command-name',
+                           'hidden-content'],
     wave_refs           : ['alt_link_missing',
                            'link_empty'],
     wcag_primary_id     : '2.4.4',
@@ -47257,7 +47325,8 @@ const listRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['list',
-                           'listitem'],
+                           'listitem',
+                           'hidden-content'],
     wave_refs           : ['ol',
                            'ul',
                            'dl'],
@@ -47353,7 +47422,8 @@ const listRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['definition-list',
-                           'dlitem'],
+                           'dlitem',
+                           'hidden-content'],
     wave_refs           : ['dl'],
     wcag_primary_id     : '1.3.1',
     wcag_related_ids    : [],
@@ -47384,11 +47454,11 @@ const listRules = [
 
           case 'dl':
             if (de.visibility.isVisibleToAT) {
-              elem     = de.node ? de.node.firstElementChild : null;
+              elem     = de.node.firstElementChild ? de.node.firstElementChild : null;
               tagName1 = elem ? elem.tagName.toLowerCase() : 'empty';
               tagName1 === 'dt' ?
                             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_3', []) :
-                            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', [tagName1]);
+                            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [tagName1]);
             }
             else {
               rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
@@ -47397,9 +47467,16 @@ const listRules = [
 
           case 'dt':
             if (de.visibility.isVisibleToAT) {
-              parentTagName === 'dl' ?
-                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tagName]) :
-                                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+              if (parentTagName === 'dl') {
+                elem     = de.node.nextElementSibling ? de.node.nextElementSibling : null;
+                tagName1 = elem ? elem.tagName.toLowerCase() : 'empty';
+                tagName1 === 'dd' ?
+                             rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_1', [tagName]) :
+                             rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_3', []);
+              }
+              else {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [tagName]);
+              }
             }
             else {
               rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
@@ -47410,7 +47487,7 @@ const listRules = [
             if (de.visibility.isVisibleToAT) {
               if (parentTagName === 'dl') {
                 hasPreviousSibling(de.node, 'dt') ?
-                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', []) :
+                                 rule_result.addElementResult(TEST_RESULT.PASS, de, 'ELEMENT_PASS_2', [tagName]) :
                                  rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_2', []);
               }
               else {
@@ -47425,7 +47502,7 @@ const listRules = [
           default:
             if (parentTagName === 'dl') {
               if (de.visibility.isVisibleToAT) {
-                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_4', [tagName]);
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_5', [tagName]);
               }
               else {
                 rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [tagName]);
@@ -48006,23 +48083,132 @@ const resizeRules = [
   { rule_id             : 'RESIZE_1',
     last_updated        : '2023-08-25',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['meta-viewport',
+                           'meta-viewport-large',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.4',
     wcag_related_ids    : [],
     target_resources    : ['content'],
     validate          : function (dom_cache, rule_result) {
-      const domDoc = dom_cache.getRootDomDocument();
 
-      rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
+
+      const MAX_SCALE = 2.0;
+
+      const rootDoc = dom_cache.getRootDomDocument();
+      let failsUserScalable = 0;
+      let failsMaxScale     = 0;
+
+      const domDocs = dom_cache.allDomDocuments;
+
+      domDocs.forEach( (dd) => {
+        if (dd.domElement) {
+          if (dd.domElement.visibility.isVisibleOnScreen) {
+            if (dd.hasViewport) {
+              if (!dd.userScalable && dd.maxScale < MAX_SCALE) {
+                rule_result.addPageResult(TEST_RESULT.FAIL, dd, 'PAGE_FAIL_1', [dd.maxScale]);
+                failsUserScalable += 1;
+                failsMaxScale += 1;
+              }
+              else {
+                if (!dd.userScalable) {
+                  rule_result.addPageResult(TEST_RESULT.FAIL, dd, 'PAGE_FAIL_2', []);
+                  failsUserScalable += 1;
+                }
+                else {
+                  if (dd.maxScale < MAX_SCALE) {
+                    rule_result.addPageResult(TEST_RESULT.FAIL, dd, 'PAGE_FAIL_3', [dd.maxScale]);
+                    failsMaxScale += 1;
+                  }
+                  else {
+                    rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dd, 'PAGE_MC_1', []);
+                  }
+                }
+              }
+            }
+            else {
+              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, dd, 'PAGE_MC_1', []);
+            }
+          }
+          else {
+            rule_result.addPageResult(TEST_RESULT.HIDDEN, dd, 'PAGE_HIDDEN_1', []);
+          }
+        }
+      });
+
+      if (rootDoc.hasViewport) {
+        if (failsUserScalable > 0 || failsMaxScale > 0) {
+          if (!rootDoc.userScalable && rootDoc.maxScale < MAX_SCALE) {
+            rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_7', [rootDoc.maxScale]);
+            failsUserScalable += 1;
+            failsMaxScale += 1;
+          }
+          else {
+            if (!rootDoc.userScalable) {
+              rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_8', []);
+              failsUserScalable += 1;
+            }
+            else {
+              if (rootDoc.maxScale < MAX_SCALE) {
+                rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_9', [rootDoc.maxScale]);
+                failsMaxScale += 1;
+              }
+              else {
+                rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_4', []);
+              }
+            }
+          }
+        }
+        else {
+          if (!rootDoc.userScalable && rootDoc.maxScale < MAX_SCALE) {
+            rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_4', [rootDoc.maxScale]);
+            failsUserScalable += 1;
+            failsMaxScale += 1;
+          }
+          else {
+            if (!rootDoc.userScalable) {
+              rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_2', []);
+              failsUserScalable += 1;
+            }
+            else {
+              if (rootDoc.maxScale < MAX_SCALE) {
+                rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_3', [rootDoc.maxScale]);
+                failsMaxScale += 1;
+              }
+              else {
+                rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, rootDoc, 'PAGE_MC_1', []);
+              }
+            }
+          }
+        }
+      }
+      else {
+        if (failsUserScalable > 0 && failsMaxScale > 0) {
+          rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_4', []);
+        }
+        else {
+          if (failsUserScalable > 0) {
+            rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_5', []);
+          }
+          else {
+            if (failsMaxScale > 0) {
+              rule_result.addPageResult(TEST_RESULT.FAIL, rootDoc, 'PAGE_FAIL_6', []);
+            }
+            else {
+              rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, rootDoc, 'PAGE_MC_1', []);
+            }
+          }
+        }
+      }
+
     } // end validate function
   },
 
  /**
-   * @object RESIZE_1
+   * @object RESIZE_2
    *
    * @desc Resize content
    */
@@ -48030,7 +48216,7 @@ const resizeRules = [
   { rule_id             : 'RESIZE_2',
     last_updated        : '2023-09-19',
     rule_scope          : RULE_SCOPE.PAGE,
-    rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
@@ -48140,7 +48326,8 @@ const shortcutRules = [
     rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['accesskeys'],
+    axe_refs            : ['accesskeys',
+                           'hidden-content'],
     wave_refs           : ['accesskey'],
     wcag_primary_id     : '2.1.4',
     wcag_related_ids    : [],
@@ -48247,7 +48434,8 @@ const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : ['td-headers-attr'],
+  axe_refs            : ['td-headers-attr',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -48406,7 +48594,8 @@ const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : [],
+  axe_refs            : ['table-duplicate-name',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -48536,7 +48725,8 @@ const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : false,
   first_step          : false,
-  axe_refs            : ['td-has-header'],
+  axe_refs            : ['td-has-header',
+                         'hidden-content'],
   wave_refs           : ['th',
                          'th_col',
                          'th_row'],
@@ -48685,7 +48875,8 @@ const tableRules = [
   rule_category       : RULE_CATEGORIES.TABLES_LAYOUT,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['empty-table-header'],
+  axe_refs            : ['empty-table-header',
+                         'hidden-content'],
   wave_refs           : ['th_empty'],
   wcag_primary_id     : '1.3.1',
   wcag_related_ids    : ['2.4.6'],
@@ -48734,7 +48925,8 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['target-size'],
+    axe_refs            : ['target-size',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.8',
     wcag_related_ids    : [],
@@ -48775,7 +48967,8 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.LINKS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : ['target-size'],
+    axe_refs            : ['target-size',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.5',
     wcag_related_ids    : [],
@@ -48815,7 +49008,8 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['target-size'],
+    axe_refs            : ['target-size',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.8',
     wcag_related_ids    : [],
@@ -48854,7 +49048,8 @@ const targetSizeRules = [
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : false,
     first_step          : false,
-    axe_refs            : ['target-size'],
+    axe_refs            : ['target-size',
+                           'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '2.5.5',
     wcag_related_ids    : [],
@@ -49139,7 +49334,9 @@ const timingRules = [
     rule_category       : RULE_CATEGORIES.TIMING_LIVE,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['meta-refresh'],
+    axe_refs            : ['meta-refresh',
+                           'meta-refresh-no-exceptions',
+                           'hidden-content'],
     wave_refs           : ['meta_refresh'],
     wcag_primary_id     : '2.2.1',
     wcag_related_ids    : ['2.2.2', '3.2.5'],
@@ -49440,7 +49637,8 @@ const videoRules = [
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
     first_step          : true,
-    axe_refs            : ['video-caption'],
+    axe_refs            : ['video-caption',
+                           'hidden-content'],
     wave_refs           : ['audio_video',
                            'html5_video_audio'],
     wcag_primary_id     : '1.2.2',
@@ -49540,7 +49738,8 @@ const videoRules = [
     rule_category       : RULE_CATEGORIES.AUDIO_VIDEO,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : ['video-caption'],
+    axe_refs            : ['video-caption',
+                           'hidden-content'],
     wave_refs           : ['audio_video',
                            'html5_video_audio'],
     wcag_primary_id     : '1.2.4',
@@ -49659,7 +49858,8 @@ const widgetRules = [
                          'aria-progressbar-name',
                          'aria-treeitem-name',
                          'aria-toggle-field-name',
-                         'aria-tooltip-name'],
+                         'aria-tooltip-name',
+                         'hidden-content'],
   wave_refs           : ['aria_label'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -49774,7 +49974,8 @@ const widgetRules = [
   axe_refs            : ['aria-deprecated-role',
                          'aria-roles',
                          'aria-allowed-role',
-                         'aria-text'],
+                         'aria-text',
+                         'hidden-content'],
   wave_refs           : ['aria'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -49846,7 +50047,8 @@ const widgetRules = [
   rule_required       : true,
   first_step          : true,
   axe_refs            : ['aria-conditional-attr',
-                         'aria-valid-attr-value'],
+                         'aria-valid-attr-value',
+                         'hidden-content'],
   wave_refs           : ['aria'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -49962,7 +50164,8 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : ['aria-valid-attr'],
+  axe_refs            : ['aria-valid-attr',
+                         'hidden-content'],
   wave_refs           : ['aria',
                          'aria_reference_broken'],
   wcag_primary_id     : '4.1.2',
@@ -50035,7 +50238,8 @@ const widgetRules = [
   rule_required       : true,
   first_step          : false,
   axe_refs            : ['aria-conditional-attr',
-                         'aria-required-attr'],
+                         'aria-required-attr',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -50082,7 +50286,8 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['aria-required-children'],
+  axe_refs            : ['aria-required-children',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -50164,7 +50369,8 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['aria-required-parent'],
+  axe_refs            : ['aria-required-parent',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -50403,7 +50609,8 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : true,
-  axe_refs            : ['aria-conditional-attr'],
+  axe_refs            : ['aria-conditional-attr',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : ['1.3.1', '3.3.2'],
@@ -50499,7 +50706,8 @@ const widgetRules = [
   axe_refs            : ['aria-allowed-attr',
                          'aria-conditional-attr',
                          'aria-prohibited-attr',
-                         'aria-deprecated-role'],
+                         'aria-deprecated-role',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '4.1.1',
   wcag_related_ids    : ['4.1.2'],
@@ -50699,7 +50907,8 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['aria-braille-equivalent'],
+  axe_refs            : ['aria-braille-equivalent',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : [],
@@ -50748,7 +50957,8 @@ const widgetRules = [
   rule_category       : RULE_CATEGORIES.WIDGETS_SCRIPTS,
   rule_required       : true,
   first_step          : false,
-  axe_refs            : ['aria-braille-equivalent'],
+  axe_refs            : ['aria-braille-equivalent',
+                         'hidden-content'],
   wave_refs           : [],
   wcag_primary_id     : '2.4.6',
   wcag_related_ids    : [],
@@ -50801,7 +51011,8 @@ const widgetRules = [
   rule_required       : true,
   first_step          : false,
   axe_refs            : ['aria-hidden-body',
-                         'aria-hidden-focus'],
+                         'aria-hidden-focus',
+                         'hidden-content'],
   wave_refs           : ['aria_hidden'],
   wcag_primary_id     : '4.1.2',
   wcag_related_ids    : ['1.3.1', '3.3.2'],

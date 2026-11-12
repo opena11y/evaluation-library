@@ -14,16 +14,31 @@ export const resizeRules = {
       SUMMARY:               'Resize text content',
       TARGET_RESOURCES_DESC: 'Page',
       RULE_RESULT_MESSAGES: {
-        MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+        FAIL_S:          'Change the @meta[name=viewport]@ element that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
+        FAIL_P:          'Change the %N_F @meta[name=viewport]@ elements that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
+        MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
+        MANUAL_CHECK_P:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
       },
       BASE_RESULT_MESSAGES: {
-        PAGE_MC_1:      'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+        PAGE_FAIL_1:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5)',
+        PAGE_FAIL_2:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute.',
+        PAGE_FAIL_3:   'Change the @meta[name=viewport]@ element by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5).',
+        PAGE_FAIL_4:   'One or more of the @iframe@s on this page do not allow user scaling and/or limit scaling to less the 2, update the iframe @meta@ elements to remove these restrictions.',
+        PAGE_FAIL_5:   'One or more of the @iframe@s on this page do not allow user scaling, update the iframe @meta@ elements to remove this restriction.',
+        PAGE_FAIL_6:   'One or more of the @iframe@s on this page limit scaling to less the 2, update the iframe @meta@ elements to remove this restriction.',
+        PAGE_FAIL_7:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
+        PAGE_FAIL_8:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute, and also one or more @iframe@s need to be updated to remove resize restrictions.',
+        PAGE_FAIL_9:   'Change the @meta[name=viewport]@ element by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
+        PAGE_MC_1:     'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
+        PAGE_HIDDEN_1: 'The @iframe@ is hidden and so not evaluated for resizing features.'
       },
       PURPOSES: [
         'People with visual impairments may increase the size of text and the text should reflow to fit the available viewing area to make it easier to read.',
         'If text is clipped by limits on iframe sizes or CSS overflow properties some text content will be impossible to view.'
       ],
       TECHNIQUES: [
+        'If you use @meta[name=viewport]@ element do not use the @user-scalable@ attribute.',
+        'If you use @meta[name=viewport]@ element with the @maximum-size@ attribute do not use a value less than 2 (note: the best practice is to use a value of 5 or greater).',
         'Use relative CSS sized like @em@ and @percentage@ rather than pixels and point sizes.',
         'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.',
         'Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.',

@@ -31,11 +31,17 @@ export default class DOMDocument {
     this.refreshTime = '';
     this.refreshURL = '';
 
+    this.hasViewport = false;
+    this.userScalable = '';
+    this.maxScale = '';
+
+
     const metas = doc && doc.documentElement ?
                      Array.from(doc.querySelectorAll('head meta')) :
                      [];
 
     metas.forEach( (meta) => {
+      // Page refesh
       const hasRefresh = meta.hasAttribute('http-equiv') &&
                          meta.getAttribute('http-equiv').toLowerCase() === 'refresh';
       const content    = meta.hasAttribute('content') ?
@@ -48,11 +54,26 @@ export default class DOMDocument {
                           content.length > 1 &&
                           content[1].includes('=')
                           ? content[1].split('=')[1] : [];
+
       if (hasRefresh && !isNaN(refreshTime)) {
         this.hasRefresh   = true;
         this.refreshTime  = refreshTime;
         this.refreshURL   = refreshURL;
       }
+
+
+
+      // View point scaling
+
+      this.hasViewport  = meta.hasAttribute('name') &&
+                           meta.getAttribute('name').toLowerCase() === 'viewport';
+      this.userScalable = meta.hasAttribute('user-scalable') ?
+                           meta.getAttribute('user-scalable').toLowerCase() != 'no':
+                           true;
+      this.maxScale     = meta.hasAttribute('maximum-scale') ?
+                           parseFloat(meta.getAttribute('maximum-scale')) :
+                           10.0;
+
     });
 
     // Information on rule results associated with this element
