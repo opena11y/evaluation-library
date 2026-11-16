@@ -40,7 +40,10 @@ export const targetSizeRules = [
     target_resources    : ['links'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+      dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+        const de = le.domElement;
+
         const h = de.height;
         const w = de.width;
 
@@ -82,7 +85,10 @@ export const targetSizeRules = [
     target_resources    : ['links'],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+      dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+        const de = le.domElement;
+
         const h = de.height;
         const w = de.width;
         if (!de.parentInfo.inParagraph && de.authorSizing) {

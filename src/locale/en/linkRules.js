@@ -198,8 +198,7 @@ export const linkRules = {
           ELEMENT_MC_3: 'Verify that the computed name of the referenced content includes the rendered text of the link.',
           ELEMENT_HIDDEN_1: 'The hidden control with an accessible name that includes image content was not tested.',
           ELEMENT_HIDDEN_2: 'The hidden control with an accessible name with @aria-label@ content was not tested.',
-          ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.',
-          PAGE_MC_1: 'The pages contains '
+          ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.'
         },
         PURPOSES: [
           'Voice recognition users can directly activate controls on a page with fewer surprising changes of focus.',
@@ -240,5 +239,56 @@ export const linkRules = {
             url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F96'
           }
         ]
+    },
+
+    LINK_5: {
+        ID:                    'Link 5',
+        DEFINITION:            'The @alt@ text content of an image is not redundant with the text content of a link.',
+        SUMMARY:               '@alt@ is not redundant',
+        TARGET_RESOURCES_DESC: '@a@ and @[role=link]@',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:  'The @alt@ text of the link with an image is redundant with the text content of the link.',
+          FAIL_P:  '%N_F images have @alt@ text that is redundant with the text content of the links.',
+          HIDDEN_S:  'The hidden link with an image was not tested because it is hidden from assistive technologies',
+          HIDDEN_P:  '%N_H hidden links witha an image were not tested because they are hidden from assistive technologies',
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1:   'The @%1@ element has an image with @alt@ text content that is redundant with the text content of the link.',
+          ELEMENT_HIDDEN_1: 'The hidden @%1@ element with an image was not tested because it is hidden form assistive technologies.',
+        },
+        PURPOSES: [
+          'Screen reader users will have a better experience because the labels that they hear will be more succinct and understandable.',
+          'In general avoid using images and hidden text for defining accessible names whenever possible.'
+        ],
+        TECHNIQUES: [
+          'In general set the @alt@ text of images in links to an empty string, unless image is an image of text.',
+          'If an image is included as part of the accessible name of a link, make sure that the @alt@ text content contributes to understanding the purpose of the link and not just repeating the text content associated with the link.',
+          'Link labels should be succinct as possible, avoid overly descriptive labels for links.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'W3C WCAG Understanding Label in Name',
+            url:   'https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'W3C Accessible Name and Description Computation 1.1',
+            url:   'https://www.w3.org/TR/accname-1.1/'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G208: Including the text of the visible label as part of the accessible name',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G208'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'G211: Matching the accessible name to the visible label',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G211'
+          },
+          { type:  REFERENCES.TECHNIQUE,
+            title: 'F96: Failure due to the accessible name not containing the visible label text',
+            url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F96'
+          }
+        ]
     }
+
 };

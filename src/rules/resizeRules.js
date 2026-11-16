@@ -27,20 +27,18 @@ export const resizeRules = [
    */
 
   { rule_id             : 'RESIZE_1',
-    last_updated        : '2023-08-25',
+    last_updated        : '2023-11-11',
     rule_scope          : RULE_SCOPE.PAGE,
     rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
     rule_required       : true,
     first_step          : false,
     axe_refs            : ['meta-viewport',
-                           'meta-viewport-large',
                            'hidden-content'],
     wave_refs           : [],
     wcag_primary_id     : '1.4.4',
     wcag_related_ids    : [],
     target_resources    : ['content'],
     validate          : function (dom_cache, rule_result) {
-
 
       const MAX_SCALE = 2.0;
 
@@ -51,7 +49,7 @@ export const resizeRules = [
       const domDocs = dom_cache.allDomDocuments;
 
       domDocs.forEach( (dd) => {
-        if (dd.domElement) {
+        if (dd.domElement && (dd !== rootDoc)) {
           if (dd.domElement.visibility.isVisibleOnScreen) {
             if (dd.hasViewport) {
               if (!dd.userScalable && dd.maxScale < MAX_SCALE) {
@@ -176,6 +174,54 @@ export const resizeRules = [
 
       rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
     } // end validate function
+  },
+
+  /**
+   * @object RESIZE_3
+   *
+   * @desc Resize to at least 5x
+   */
+
+  { rule_id             : 'RESIZE_3',
+    last_updated        : '2023-11-12',
+    rule_scope          : RULE_SCOPE.PAGE,
+    rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+    rule_required       : false,
+    first_step          : false,
+    axe_refs            : ['meta-viewport-large',
+                           'hidden-content'],
+    wave_refs           : [],
+    wcag_primary_id     : '1.4.4',
+    wcag_related_ids    : [],
+    target_resources    : ['content'],
+    validate          : function (dom_cache, rule_result) {
+
+      const MAX_SCALE = 5.0;
+
+      const rootDoc = dom_cache.getRootDomDocument();
+
+      const domDocs = dom_cache.allDomDocuments;
+
+      domDocs.forEach( (dd) => {
+        debug.log(`[dd]: ${dd.title} ${dd === rootDoc} ${dd.domElement} ${dd.hasViewport} ${dd.hasMaxScale} ${dd.maxScale}`);
+        if (dd.domElement || (dd === rootDoc)) {
+          if (dd.hasViewport && dd.hasMaxScale) {
+            if ((dd === rootDoc) || dd.domElement.visibility.isVisibleOnScreen) {
+              if (dd.maxScale >= MAX_SCALE) {
+                rule_result.addPageResult(TEST_RESULT.PASS, dd, 'PAGE_PASS_1', [dd.maxScale]);
+              }
+              else {
+                rule_result.addPageResult(TEST_RESULT.FAIL, dd, 'PAGE_FAIL_1', [dd.maxScale]);
+              }
+            }
+            else {
+              rule_result.addPageResult(TEST_RESULT.HIDDEN, dd, 'PAGE_HIDDEN_1', []);
+            }
+          }
+        }
+      });
+    } // end validate function
   }
+
 
 ];

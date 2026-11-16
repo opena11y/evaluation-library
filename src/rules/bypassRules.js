@@ -54,11 +54,12 @@ export const bypassRules = [
         ];
 
       const domElements     = dom_cache.allDomElements;
-      const linkDomElements = dom_cache.linkInfo.allLinkDomElements;
+      const linkElements = dom_cache.linkInfo.allLinkElements;
 
       let de;
       let hasSkipToButton = false;
       let hasBypassLink = false;
+      let linkElem = false;
       let linkDomElem = false;
       let targetDomElem = false;
 
@@ -72,10 +73,11 @@ export const bypassRules = [
       }
 
       // Check for bypass block links
-      for (let i = 0; (i < linkDomElements.length) && !hasSkipToButton && !hasBypassLink; i += 1) {
-        linkDomElem = linkDomElements[i];
+      for (let i = 0; (i < linkElements.length) && !hasSkipToButton && !hasBypassLink; i += 1) {
+        linkElem = linkElements[i];
+        linkDomElem = linkElem.domElement;
 
-        let href = linkDomElem.node.href;
+        let href = de.node.href;
 
         if ((typeof href === 'string') && href.indexOf('#') >= 0) {
           let  targetId = href.slice(href.indexOf('#')+1);
@@ -92,7 +94,7 @@ export const bypassRules = [
 
             if (targetDomElem) {
               rule_result.addElementResult(TEST_RESULT.PASS, linkDomElem, 'ELEMENT_PASS_2', []);
-              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, targetDomElem, 'ELEMENT_MC_1', []);
+              rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, linkDomElem, 'ELEMENT_MC_1', []);
             }
             else {
               rule_result.addElementResult(TEST_RESULT.FAIL, linkDomElem,   'ELEMENT_FAIL_1', []);

@@ -39,6 +39,10 @@ export const keyboardRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+        url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+      },
+      { type:  REFERENCES.SPECIFICATION,
         title: 'HTML: Focus',
         url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
       },
@@ -115,6 +119,10 @@ export const keyboardRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+        url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+      },
+      { type:  REFERENCES.SPECIFICATION,
         title: 'HTML: Focus',
         url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
       },
@@ -156,6 +164,10 @@ export const keyboardRules = {
       'Move keyboard focus to the embedded application and see if you can move focus back to the web content using just the keyboard.'
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.1: Success Criterion 2.1.2 No Keyboard Trap',
+        url:   'https://www.w3.org/TR/WCAG21/#no-keyboard-trap'
+      },
       { type:  REFERENCES.WCAG_TECHNIQUE,
         title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
         url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
@@ -201,6 +213,10 @@ export const keyboardRules = {
     MANUAL_CHECKS: [
     ],
     INFORMATIONAL_LINKS: [
+      { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+        url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+      },
       { type:  REFERENCES.SPECIFICATION,
         title: 'HTML: Focus',
         url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
@@ -378,6 +394,10 @@ export const keyboardRules = {
         ],
         INFORMATIONAL_LINKS: [
           { type:  REFERENCES.SPECIFICATION,
+            title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+            url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+          },
+          { type:  REFERENCES.SPECIFICATION,
             title: 'W3C WCAG: Understanding Focus Order',
             url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
           },
@@ -480,6 +500,10 @@ export const keyboardRules = {
     ],
     INFORMATIONAL_LINKS: [
       { type:  REFERENCES.SPECIFICATION,
+        title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+        url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+      },
+      { type:  REFERENCES.SPECIFICATION,
         title: 'W3C WCAG: Focus Order',
         url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
       },
@@ -500,7 +524,52 @@ export const keyboardRules = {
         url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
       }
     ]
+  },
+  KEYBOARD_11: {
+      ID:         'Keyboard 11',
+      DEFINITION: 'Don\'t use server-side image maps.',
+      SUMMARY:    'Don\'t use server-side image maps.',
+      TARGET_RESOURCES_DESC: '@image[ismap]@ elements',
+      RULE_RESULT_MESSAGES: {
+        FAIL_S:   'Update the @img@ element using server side image maps to use client side image maps, for example the @map@ element with @area@ elements.',
+        FAIL_P:   'Update the @img@ element using server side image maps to use client side image maps, for example the @map@ element with @area@ elements.',
+        HIDDEN_S: 'One hidden @img@ using a server slide images map was not evaluated.',
+        HIDDEN_P: 'The %N_H hidden @img@ elements using server slide images maps were not evaluated.',
+        NOT_APPLICABLE: 'No @img[ismap]@ elements on this page.'
+      },
+      BASE_RESULT_MESSAGES: {
+        ELEMENT_FAIL_1: 'Remove the @img@ element with the server side image map or convert it to a client side image map using the @map@ element with @area@ elements.',
+        ELEMENT_HIDDEN_1: '@img@ element with a server side image map was not evaluated because it is hidden from assistive technologies.'
+      },
+      PURPOSES: [
+        'Server-side image maps rely on pointer action and are not keyboard accessible and are therefore inaccessible to people who only use keyboards.',
+      ],
+      TECHNIQUES: [
+        'Remove server side image maps (e.g. @img[ismap]@).',
+        'Use client side image maps (e.g. @map@ with @area@ elements) to make keyboard accessible image maps.'
+      ],
+      MANUAL_CHECKS: [
+      ],
+      INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+          url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The @img@ element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The @map@ element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/map'
+        },
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'MDN: The @area@ element',
+          url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/area'
+        }
+      ]
   }
+
 
 
 

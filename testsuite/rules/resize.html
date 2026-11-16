@@ -21,6 +21,12 @@
         executeTest('FRAME 1C: META maximum scaling 20',          'ID_IFRAME_1C', 'RESIZE_1');
         executeTest('FRAME 1D: META no user scaling',             'ID_IFRAME_1D', 'RESIZE_1');
         executeTest('FRAME 1E: META both',                        'ID_IFRAME_1E', 'RESIZE_1');
+
+        executeTest('FRAME 3A: META no meta[name=viewport]',      'ID_IFRAME_3A', 'RESIZE_3');
+        executeTest('FRAME 3B: META maximum scaling 15',          'ID_IFRAME_3B', 'RESIZE_3');
+        executeTest('FRAME 3C: META maximum scaling 20',          'ID_IFRAME_3C', 'RESIZE_3');
+        executeTest('FRAME 3D: META maximum scaling 50',          'ID_IFRAME_3D', 'RESIZE_3');
+        executeTest('FRAME 3E: All hidden',                       'ID_IFRAME_3E', 'RESIZE_3');
       });
 
     </script>
@@ -33,6 +39,15 @@
     <iframe id="ID_IFRAME_1C" src="resize/resize_1_max_size_20.html"></iframe>
     <iframe id="ID_IFRAME_1D" src="resize/resize_1_user_scaling_no.html"></iframe>
     <iframe id="ID_IFRAME_1E" src="resize/resize_1_user_scaling_no_max_size_15.html"></iframe>
+
+
+    <h2><code>meta[maximum-size]</code> >= 5</h2>
+    <iframe id="ID_IFRAME_3A" src="resize/resize_3_no_viewport.html"></iframe>
+    <iframe id="ID_IFRAME_3B" src="resize/resize_3_max_size_15.html"></iframe>
+    <iframe id="ID_IFRAME_3C" src="resize/resize_3_max_size_20.html"></iframe>
+    <iframe id="ID_IFRAME_3D" src="resize/resize_3_max_size_50.html"></iframe>
+    <iframe id="ID_IFRAME_3E" src="resize/resize_3_all_hidden.html"></iframe>
+
   </body>
 
 </html>

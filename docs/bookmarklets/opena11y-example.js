@@ -1187,11 +1187,11 @@
   const debug$17 = new DebugLogging('linkResults', false);
   debug$17.flag = false;
 
-  const pdfExtensions = [
+  const pdfExtensions$1 = [
     'pdf'   // Protable document format
   ];
 
-  const docExtensions = [
+  const docExtensions$1 = [
     'csv',   // Comma separated spaces
     'doc',   // Microsoft Word Document
     'docx',
@@ -1209,7 +1209,7 @@
     'xlsx'
   ];
 
-  const mediaExtensions = [
+  const mediaExtensions$1 = [
     'aif',   // AIF audio file
     'bmp',   // Bitmap image
     'cda',   // CD (Compact Disc) audio track file
@@ -1234,7 +1234,7 @@
     'wpl'   // Windows Media Player playlist
   ];
 
-  const zipExtensions = [
+  const zipExtensions$1 = [
     'tar',   // Linux / Unix tarball file archive
     'gz',    // Tarball compressed file'
     'zip',   // Comprerssed file format
@@ -1270,7 +1270,9 @@
 
       this.linkData = [];
 
-      domCache.linkInfo.allLinkDomElements.forEach( de => {
+      domCache.linkInfo.allLinkElements.forEach( le => {
+
+        const de = le.domElement;
 
         const parsedHref = URL.parse(de.node.href);
         const partsHref  = parsedHref && parsedHref.hostname ?
@@ -1295,13 +1297,13 @@
                                 parsedHref.pathname.substring(periodIndex+1).trim().toLowerCase() :
                                 '';
 
-          const extensionType = pdfExtensions.includes(extension) ?
+          const extensionType = pdfExtensions$1.includes(extension) ?
                                 'pdf' :
-                                docExtensions.includes(extension) ?
+                                docExtensions$1.includes(extension) ?
                                 'doc' :
-                                mediaExtensions.includes(extension) ?
+                                mediaExtensions$1.includes(extension) ?
                                 'media' :
-                                zipExtensions.includes(extension) ?
+                                zipExtensions$1.includes(extension) ?
                                 'zip' :
                                 '';
 
@@ -4497,7 +4499,7 @@
             'In general avoid using images and hidden text for defining accessible names whenever possible.'
           ],
           TECHNIQUES: [
-            'If images of text that are part of an accessible name (e.g. label), the alt text must be the same as the text of the image.',
+            'If images of text that are part of an accessible name (e.g. label), the alt text must be the same as the text on the image.',
             'If @aria-label@ is used as part of an accessible name (e.g. label), the @aria-label@ contains the same text associated the visually rendered content associated with the control.',
             'If a hidden @aria-labelledby@ reference is used as part of the accessible name (e.g. label), verify the computed name of all the referenced contain has the same text associated the visually rendered label associated with the control.',
             'Accessible names may contain additional information useful to people using assistive technologies, but should start with the visible text associated with the control.'
@@ -5663,6 +5665,10 @@
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
+          title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+          url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+        },
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: Focus',
           url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
         },
@@ -5739,6 +5745,10 @@
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
+          title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+          url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+        },
+        { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: Focus',
           url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
         },
@@ -5780,6 +5790,10 @@
         'Move keyboard focus to the embedded application and see if you can move focus back to the web content using just the keyboard.'
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'WCAG 2.1: Success Criterion 2.1.2 No Keyboard Trap',
+          url:   'https://www.w3.org/TR/WCAG21/#no-keyboard-trap'
+        },
         { type:  REFERENCES.WCAG_TECHNIQUE,
           title: 'G108: Using markup features to expose the name and role, allow user-settable properties to be directly set, and provide notification of changes',
           url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G108'
@@ -5825,6 +5839,10 @@
       MANUAL_CHECKS: [
       ],
       INFORMATIONAL_LINKS: [
+        { type:  REFERENCES.SPECIFICATION,
+          title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+          url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+        },
         { type:  REFERENCES.SPECIFICATION,
           title: 'HTML: Focus',
           url:   'https://html.spec.whatwg.org/multipage/interaction.html#focus'
@@ -6002,6 +6020,10 @@
           ],
           INFORMATIONAL_LINKS: [
             { type:  REFERENCES.SPECIFICATION,
+              title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+              url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+            },
+            { type:  REFERENCES.SPECIFICATION,
               title: 'W3C WCAG: Understanding Focus Order',
               url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
             },
@@ -6104,6 +6126,10 @@
       ],
       INFORMATIONAL_LINKS: [
         { type:  REFERENCES.SPECIFICATION,
+          title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+          url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+        },
+        { type:  REFERENCES.SPECIFICATION,
           title: 'W3C WCAG: Focus Order',
           url:   'https://www.w3.org/WAI/WCAG21/Understanding/focus-order.html'
         },
@@ -6124,7 +6150,52 @@
           url:   'https://www.w3.org/TR/wai-aria-1.3/#managingfocus'
         }
       ]
+    },
+    KEYBOARD_11: {
+        ID:         'Keyboard 11',
+        DEFINITION: 'Don\'t use server-side image maps.',
+        SUMMARY:    'Don\'t use server-side image maps.',
+        TARGET_RESOURCES_DESC: '@image[ismap]@ elements',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:   'Update the @img@ element using server side image maps to use client side image maps, for example the @map@ element with @area@ elements.',
+          FAIL_P:   'Update the @img@ element using server side image maps to use client side image maps, for example the @map@ element with @area@ elements.',
+          HIDDEN_S: 'One hidden @img@ using a server slide images map was not evaluated.',
+          HIDDEN_P: 'The %N_H hidden @img@ elements using server slide images maps were not evaluated.',
+          NOT_APPLICABLE: 'No @img[ismap]@ elements on this page.'
+        },
+        BASE_RESULT_MESSAGES: {
+          ELEMENT_FAIL_1: 'Remove the @img@ element with the server side image map or convert it to a client side image map using the @map@ element with @area@ elements.',
+          ELEMENT_HIDDEN_1: '@img@ element with a server side image map was not evaluated because it is hidden from assistive technologies.'
+        },
+        PURPOSES: [
+          'Server-side image maps rely on pointer action and are not keyboard accessible and are therefore inaccessible to people who only use keyboards.',
+        ],
+        TECHNIQUES: [
+          'Remove server side image maps (e.g. @img[ismap]@).',
+          'Use client side image maps (e.g. @map@ with @area@ elements) to make keyboard accessible image maps.'
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'WCAG 2.1: Success Criterion 2.1.1 Keyboard',
+            url:   'https://www.w3.org/TR/WCAG21/#keyboard'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN: The @img@ element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN: The @map@ element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/map'
+          },
+          { type:  REFERENCES.SPECIFICATION,
+            title: 'MDN: The @area@ element',
+            url:   'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/area'
+          }
+        ]
     }
+
 
 
 
@@ -7999,8 +8070,7 @@
             ELEMENT_MC_3: 'Verify that the computed name of the referenced content includes the rendered text of the link.',
             ELEMENT_HIDDEN_1: 'The hidden control with an accessible name that includes image content was not tested.',
             ELEMENT_HIDDEN_2: 'The hidden control with an accessible name with @aria-label@ content was not tested.',
-            ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.',
-            PAGE_MC_1: 'The pages contains '
+            ELEMENT_HIDDEN_3: 'The hidden control with an accessible name that includes references to hidden content was not tested.'
           },
           PURPOSES: [
             'Voice recognition users can directly activate controls on a page with fewer surprising changes of focus.',
@@ -8041,7 +8111,58 @@
               url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F96'
             }
           ]
+      },
+
+      LINK_5: {
+          ID:                    'Link 5',
+          DEFINITION:            'The @alt@ text content of an image is not redundant with the text content of a link.',
+          SUMMARY:               '@alt@ is not redundant',
+          TARGET_RESOURCES_DESC: '@a@ and @[role=link]@',
+          RULE_RESULT_MESSAGES: {
+            FAIL_S:  'The @alt@ text of the link with an image is redundant with the text content of the link.',
+            FAIL_P:  '%N_F images have @alt@ text that is redundant with the text content of the links.',
+            HIDDEN_S:  'The hidden link with an image was not tested because it is hidden from assistive technologies',
+            HIDDEN_P:  '%N_H hidden links witha an image were not tested because they are hidden from assistive technologies',
+          },
+          BASE_RESULT_MESSAGES: {
+            ELEMENT_FAIL_1:   'The @%1@ element has an image with @alt@ text content that is redundant with the text content of the link.',
+            ELEMENT_HIDDEN_1: 'The hidden @%1@ element with an image was not tested because it is hidden form assistive technologies.',
+          },
+          PURPOSES: [
+            'Screen reader users will have a better experience because the labels that they hear will be more succinct and understandable.',
+            'In general avoid using images and hidden text for defining accessible names whenever possible.'
+          ],
+          TECHNIQUES: [
+            'In general set the @alt@ text of images in links to an empty string, unless image is an image of text.',
+            'If an image is included as part of the accessible name of a link, make sure that the @alt@ text content contributes to understanding the purpose of the link and not just repeating the text content associated with the link.',
+            'Link labels should be succinct as possible, avoid overly descriptive labels for links.'
+          ],
+          MANUAL_CHECKS: [
+          ],
+          INFORMATIONAL_LINKS: [
+            { type:  REFERENCES.SPECIFICATION,
+              title: 'W3C WCAG Understanding Label in Name',
+              url:   'https://www.w3.org/WAI/WCAG21/Understanding/label-in-name.html'
+            },
+            { type:  REFERENCES.TECHNIQUE,
+              title: 'W3C Accessible Name and Description Computation 1.1',
+              url:   'https://www.w3.org/TR/accname-1.1/'
+            },
+            { type:  REFERENCES.TECHNIQUE,
+              title: 'G208: Including the text of the visible label as part of the accessible name',
+              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G208'
+            },
+            { type:  REFERENCES.TECHNIQUE,
+              title: 'G211: Matching the accessible name to the visible label',
+              url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G211'
+            },
+            { type:  REFERENCES.TECHNIQUE,
+              title: 'F96: Failure due to the accessible name not containing the visible label text',
+              url:   'https://www.w3.org/WAI/WCAG21/Techniques/failures/F96'
+            }
+          ]
       }
+
   };
 
   /* listRules.js */
@@ -8792,18 +8913,20 @@
           FAIL_S:          'Change the @meta[name=viewport]@ element that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
           FAIL_P:          'Change the %N_F @meta[name=viewport]@ elements that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
           MANUAL_CHECK_S:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
-          MANUAL_CHECK_P:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).'
+          MANUAL_CHECK_P:  'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
+          HIDDEN_S:        'One @iframe@ is hidden and was not evaluated for text resizin features.',
+          HIDDEN_P:        '%N_H @iframe@s are hidden and were not evaluated for text resizing features.'
         },
         BASE_RESULT_MESSAGES: {
-          PAGE_FAIL_1:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5)',
+          PAGE_FAIL_1:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-scale="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5)',
           PAGE_FAIL_2:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute.',
-          PAGE_FAIL_3:   'Change the @meta[name=viewport]@ element by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5).',
+          PAGE_FAIL_3:   'Change the @meta[name=viewport]@ element by changing the @maximum-scale="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5).',
           PAGE_FAIL_4:   'One or more of the @iframe@s on this page do not allow user scaling and/or limit scaling to less the 2, update the iframe @meta@ elements to remove these restrictions.',
           PAGE_FAIL_5:   'One or more of the @iframe@s on this page do not allow user scaling, update the iframe @meta@ elements to remove this restriction.',
           PAGE_FAIL_6:   'One or more of the @iframe@s on this page limit scaling to less the 2, update the iframe @meta@ elements to remove this restriction.',
-          PAGE_FAIL_7:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
+          PAGE_FAIL_7:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute and by changing the @maximum-scale="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
           PAGE_FAIL_8:   'Change the @meta[name=viewport]@ element by removing the @user-scalable@ attribute, and also one or more @iframe@s need to be updated to remove resize restrictions.',
-          PAGE_FAIL_9:   'Change the @meta[name=viewport]@ element by changing the @maximum-size="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
+          PAGE_FAIL_9:   'Change the @meta[name=viewport]@ element by changing the @maximum-scale="%1"@ attribute to a value greater than or equal to 2 (Note: best practice is at least 5), and also one or more @iframe@s need to be updated to remove resize restrictions.',
           PAGE_MC_1:     'Resize the text using the zoom feature of the browser to check to make sure text content is visible (e.g. text is not clipped by iframe sizes or CSS overflow limits).',
           PAGE_HIDDEN_1: 'The @iframe@ is hidden and so not evaluated for resizing features.'
         },
@@ -8813,7 +8936,7 @@
         ],
         TECHNIQUES: [
           'If you use @meta[name=viewport]@ element do not use the @user-scalable@ attribute.',
-          'If you use @meta[name=viewport]@ element with the @maximum-size@ attribute do not use a value less than 2 (note: the best practice is to use a value of 5 or greater).',
+          'If you use @meta[name=viewport]@ element with the @maximum-scale@ attribute do not use a value less than 2 (note: the best practice is to use a value of 5 or greater).',
           'Use relative CSS sized like @em@ and @percentage@ rather than pixels and point sizes.',
           'If using the CSS overflow property, @iframe@ or @frame@ check to make sure content reflows and is not clipped by changes in zoom levels.',
           'Verify when font sizes are increased to at least 400% (4 times the original size of the font), the content reflows and does not require horizontal scrolling.',
@@ -8880,7 +9003,41 @@
             url:   'https://www.w3.org/WAI/WCAG21/Techniques/general/G206'
           }
         ]
+    },
+    RESIZE_3: {
+        ID:                    'Resize 3',
+        DEFINITION:            '@meta[maximum-scale]@ value should be 5 or greater.',
+        SUMMARY:               '@meta[maximum-scale]@ >= 5',
+        TARGET_RESOURCES_DESC: 'Page',
+        RULE_RESULT_MESSAGES: {
+          FAIL_S:          'Change the @meta[name=viewport]@ element that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
+          FAIL_P:          'Change the %N_F @meta[name=viewport]@ elements that restricts scaling content by removing the user scaling setting and/or maximum scale to allow resizing content',
+          HIDDEN_S:        'One @iframe@ is hidden and was not evaluated for @maximum-scale@ value.',
+          HIDDEN_P:        '%N_H @iframe@s are hidden and were not evaluated for @maximum-scale@ value.'
+        },
+        BASE_RESULT_MESSAGES: {
+          PAGE_PASS_1:   'The @meta[name=viewport]@ element with the @maximum-scale="%1"@ attribute is great than or equal to 5.',
+          PAGE_FAIL_1:   'Change the @meta[name=viewport]@ element with the @maximum-scale="%1"@ attribute to a value greater than or equal to 5.',
+          PAGE_HIDDEN_1: 'The @iframe@ is hidden and was not evaluated for @maximum-scale@ value.'
+        },
+        PURPOSES: [
+          'People with visual impairments should be able to increase the size of text to at least 5 times its default size and the text should reflow to fit the available viewing area to make it easier to read.',
+          'If text is clipped by limits on iframe sizes or CSS overflow properties some text content will be impossible to view.'
+        ],
+        TECHNIQUES: [
+          'If you use @meta[name=viewport]@ element do not use the @maximum-scale@ attribute.',
+          'If you use @meta[name=viewport]@ element with the @maximum-scale@ attribute do not use a value less than 5.',
+        ],
+        MANUAL_CHECKS: [
+        ],
+        INFORMATIONAL_LINKS: [
+          { type:  REFERENCES.WCAG_TECHNIQUE,
+            title: 'How to meet 1.4.4 Resize Text',
+            url:   'https://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-scale'
+          }
+        ]
     }
+
 
   };
 
@@ -13174,7 +13331,8 @@
         this.userScalable = meta.hasAttribute('user-scalable') ?
                              meta.getAttribute('user-scalable').toLowerCase() != 'no':
                              true;
-        this.maxScale     = meta.hasAttribute('maximum-scale') ?
+        this.hasMaxScale  = meta.hasAttribute('maximum-scale');
+        this.maxScale     = this.hasMaxScale ?
                              parseFloat(meta.getAttribute('maximum-scale')) :
                              10.0;
 
@@ -37186,6 +37344,132 @@
   /* Constants */
   const debug$R = new DebugLogging('linkInfo', false);
 
+  const pdfExtensions = [
+    'pdf'   // Protable document format
+  ];
+
+  const docExtensions = [
+    'csv',   // Comma separated spaces
+    'doc',   // Microsoft Word Document
+    'docx',
+    'epub',  // Electronic book format
+    'odg',   // Open Document Graphics
+    'odp',   // Open Document Presentations
+    'ods',   // Open Document Spreadsheet
+    'odt',   // Open Document Text
+    'ppt',   // Microsoft Powerpoint document
+    'pptx',
+    'rtf',   // Rich text format
+    'rtfd',
+    'txt',   // Text file
+    'xls',   // Microsoft Spreadsheet document
+    'xlsx'
+  ];
+
+  const mediaExtensions = [
+    'aif',   // AIF audio file
+    'bmp',   // Bitmap image
+    'cda',   // CD (Compact Disc) audio track file
+    'ico',   // Icon file
+    'jpeg',  // JPEG (Joint Photographic Experts Group) image
+    'jpg',
+    'gif',   // GIF (Graphics Interchange Format) image
+    'mid',   // MIDI (Musical Instrument Digital Interface) audio file
+    'midi',
+    'mp3',   // MP3 audio file
+    'mpa',   // MPEG-2 audio file
+    'png',   // PNG (Portable Network Graphics) image
+    'ogg',   // Ogg Vorbis audio file
+    'ps',    // PostScript file
+    'psd',   // PSD (Photoshop document) image
+    'svg',   // Scalable Vector Graphics file
+    'tif',   // TIFF (Tagged Image File Format) image
+    'tiff',
+    'wav',   // WAV file
+    'webp',  // WebP image.
+    'wma',   // WMA (Windows Media Audio) audio file
+    'wpl'   // Windows Media Player playlist
+  ];
+
+  const zipExtensions = [
+    'tar',   // Linux / Unix tarball file archive
+    'gz',    // Tarball compressed file'
+    'zip',   // Comprerssed file format
+    '7z'     // 7-Zip compressed file
+  ];
+
+
+  /**
+   * @class LinkElement
+   *
+   * @desc Information on a specific links on a web page
+   */
+
+  class LinkElement {
+
+    constructor (domElement) {
+
+      const de = domElement;
+
+      this.domElement = de;
+
+      this.hasImage = de.node.querySelector('img');
+      this.imageAlt = this.hasImage ?
+                      this.hasImage.alt :
+                      '';
+
+      this.textContent = de.node.textContent;
+
+      this.duplicateName = this.textContent.trim().toLowerCase() === this.imageAlt.trim().toLowerCase();
+
+      const parsedUrl   = URL.parse(window.location.href);
+      const partsUrl    = parsedUrl && parsedUrl.hostname ?
+                          parsedUrl.hostname.split('.') :
+                          '';
+      const partsUrlLen = parsedUrl && parsedUrl.hostname ?
+                          partsUrl.length :
+                          0;
+
+      const parsedHref   = URL.parse(de.node.href);
+      const partsHref    = parsedHref && parsedHref.hostname ?
+                             parsedHref.hostname.split('.') :
+                             '';
+      const partsHrefLen = parsedHref && parsedHref.hostname ?
+                             partsHref.length :
+                             0;
+
+      if (parsedHref && parsedHref.hostname) {
+
+          this.hostName     = parsedHref.hostname;
+          this.sameHostname = parsedUrl.hostname === parsedHref.hostname;
+          this.sameDomain   = (partsUrlLen > 1 && partsHrefLen > 1) ?
+                               (partsUrl[partsUrlLen-1] === partsHref[partsHrefLen-1]) &&
+                               (partsUrl[partsUrlLen-2] === partsHref[partsHrefLen-2]) :
+                               false;
+
+          this.samePathname = parsedUrl.pathname === parsedHref.pathname;
+
+          const periodIndex   = parsedHref.pathname.lastIndexOf('.');
+          this.extension     = periodIndex > 0 ?
+                                parsedHref.pathname.substring(periodIndex+1).trim().toLowerCase() :
+                                '';
+
+          this.extensionType = pdfExtensions.includes(this.extension) ?
+                                'pdf' :
+                                docExtensions.includes(this.extension) ?
+                                'doc' :
+                                mediaExtensions.includes(this.extension) ?
+                                'media' :
+                                zipExtensions.includes(this.extension) ?
+                                'zip' :
+                                '';
+        }
+
+    }
+
+  }
+
+
   /**
    * @class LinkInfo
    *
@@ -37194,7 +37478,7 @@
 
   class LinkInfo {
     constructor () {
-      this.allLinkDomElements = [];
+      this.allLinkElements = [];
     }
 
     /**
@@ -37208,7 +37492,7 @@
 
     update (domElement, inLink) {
       if (domElement.isLink) {
-        this.allLinkDomElements.push(domElement);
+        this.allLinkElements.push(new LinkElement(domElement));
         return true;
       }
       return inLink;
@@ -37223,8 +37507,8 @@
     showLinkInfo () {
       if (debug$R.flag) {
         debug$R.log('== All Links ==', 1);
-        this.allLinkDomElements.forEach( de => {
-          debug$R.domElement(de);
+        this.allLinkElements.forEach( le => {
+          debug$R.domElement(le.domElement);
         });
       }
     }
@@ -42704,11 +42988,12 @@
           ];
 
         const domElements     = dom_cache.allDomElements;
-        const linkDomElements = dom_cache.linkInfo.allLinkDomElements;
+        const linkElements = dom_cache.linkInfo.allLinkElements;
 
         let de;
         let hasSkipToButton = false;
         let hasBypassLink = false;
+        let linkElem = false;
         let linkDomElem = false;
         let targetDomElem = false;
 
@@ -42722,10 +43007,11 @@
         }
 
         // Check for bypass block links
-        for (let i = 0; (i < linkDomElements.length) && !hasSkipToButton && !hasBypassLink; i += 1) {
-          linkDomElem = linkDomElements[i];
+        for (let i = 0; (i < linkElements.length) && !hasSkipToButton && !hasBypassLink; i += 1) {
+          linkElem = linkElements[i];
+          linkDomElem = linkElem.domElement;
 
-          let href = linkDomElem.node.href;
+          let href = de.node.href;
 
           if ((typeof href === 'string') && href.indexOf('#') >= 0) {
             let  targetId = href.slice(href.indexOf('#')+1);
@@ -42742,7 +43028,7 @@
 
               if (targetDomElem) {
                 rule_result.addElementResult(TEST_RESULT.PASS, linkDomElem, 'ELEMENT_PASS_2', []);
-                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, targetDomElem, 'ELEMENT_MC_1', []);
+                rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, linkDomElem, 'ELEMENT_MC_1', []);
               }
               else {
                 rule_result.addElementResult(TEST_RESULT.FAIL, linkDomElem,   'ELEMENT_FAIL_1', []);
@@ -44322,7 +44608,8 @@
     rule_category       : RULE_CATEGORIES.FORMS,
     rule_required       : true,
     first_step          : false,
-    axe_refs            : [],
+    axe_refs            : ['autocomplete-valid',
+                           'content-hidden'],
     wave_refs           : [],
     wcag_primary_id     : '1.3.5',
     wcag_related_ids    : ['3.3.2', '2.4.6'],
@@ -45315,7 +45602,8 @@
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : [],
+    wave_refs           : ['longdesc',
+                           'longdesc_invalid'],
     wcag_primary_id     : '1.1.1',
     wcag_related_ids    : [],
     target_resources    : ['img', '[role="img"]'],
@@ -45878,7 +46166,36 @@
        } // end validation function
     },
 
+    /**
+     * @object KEYBORAD_11
+     *
+     * @desc Remove server-side image maps
+     */
+    { rule_id             : 'KEYBOARD_11',
+      last_updated        : '2026-11-15',
+      rule_scope          : RULE_SCOPE.ELEMENT,
+      rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+      rule_required       : true,
+      first_step          : false,
+      axe_refs            : ['server-side-image-map'],
+      wave_refs           : [],
+      wcag_primary_id     : '2.1.1',
+      wcag_related_ids    : [],
+      target_resources    : ['img[ismap]'],
+      validate            : function (dom_cache, rule_result) {
 
+        dom_cache.imageInfo.allImageElements.forEach( ie => {
+          const de = ie.domElement;
+          if (de.node.hasAttribute('ismap')) {
+            if (de.visibility.isVisibleToAT) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+            } else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+            }
+          }
+        });
+      } // end validation function
+    }
   ];
 
   /* landmarkRules.js */
@@ -47115,7 +47432,8 @@
       wcag_related_ids    : ['2.4.9'],
       target_resources    : ['a', 'area', '[role=link]'],
       validate            : function (dom_cache, rule_result) {
-        dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+        dom_cache.linkInfo.allLinkElements.forEach (le => {
+          const de = le.domElement;
           if (de.visibility.isVisibleToAT) {
             const name = de.accName.name;
             const desc = de.accDescription.name;
@@ -47160,7 +47478,8 @@
         // array of visible DOM elements identified as links
         const visibleLinks = [];
 
-        dom_cache.linkInfo.allLinkDomElements.forEach ( de => {
+        dom_cache.linkInfo.allLinkElements.forEach ( le => {
+          const de = le.domElement;
           if (de.visibility.isVisibleToAT) {
             visibleLinks.push(de);
           }
@@ -47233,7 +47552,8 @@
       target_resources    : ['a', 'area', 'select'],
       validate            : function (dom_cache, rule_result) {
 
-        dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+        dom_cache.linkInfo.allLinkElements.forEach (le => {
+          const de = le.domElement;
           if (de.visibility.isVisibleToAT) {
             rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
           }
@@ -47257,13 +47577,15 @@
       rule_required       : true,
       first_step          : false,
       axe_refs            : [],
-      wave_refs           : ['alt_redundant'],
+      wave_refs           : [],
       wcag_primary_id     : '2.5.3',
       wcag_related_ids    : [],
       target_resources    : ["a", "[role=link]"],
       validate          : function (dom_cache, rule_result) {
 
-        dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+        dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+          const de = le.domElement;
 
           if (de.accName.includesAlt) {
             if (de.visibility.isVisibleToAT) {
@@ -47295,6 +47617,44 @@
             }
           }
 
+        });
+
+      } // end validation function
+    },
+
+    /**
+     * @object LINK_5
+     *
+     * @desc Links that contain an image, the alt text must be different than text node content
+     */
+
+    { rule_id             : 'LINK_5',
+      last_updated        : '2026-11-15',
+      rule_scope          : RULE_SCOPE.ELEMENT,
+      rule_category       : RULE_CATEGORIES.LINKS,
+      rule_required       : true,
+      first_step          : false,
+      axe_refs            : ['image-redundant-alt'],
+      wave_refs           : ['alt_redundant'],
+      wcag_primary_id     : '2.5.3',
+      wcag_related_ids    : [],
+      target_resources    : ["a", "[role=link]"],
+      validate          : function (dom_cache, rule_result) {
+
+        dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+          const de = le.domElement;
+
+          if (de.accName.includesAlt) {
+            if (de.visibility.isVisibleToAT) {
+              if (le.duplicateName) {
+                rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+              }
+            }
+            else {
+              rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+            }
+          }
         });
 
       } // end validation function
@@ -48084,20 +48444,18 @@
      */
 
     { rule_id             : 'RESIZE_1',
-      last_updated        : '2023-08-25',
+      last_updated        : '2023-11-11',
       rule_scope          : RULE_SCOPE.PAGE,
       rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
       rule_required       : true,
       first_step          : false,
       axe_refs            : ['meta-viewport',
-                             'meta-viewport-large',
                              'hidden-content'],
       wave_refs           : [],
       wcag_primary_id     : '1.4.4',
       wcag_related_ids    : [],
       target_resources    : ['content'],
       validate          : function (dom_cache, rule_result) {
-
 
         const MAX_SCALE = 2.0;
 
@@ -48108,7 +48466,7 @@
         const domDocs = dom_cache.allDomDocuments;
 
         domDocs.forEach( (dd) => {
-          if (dd.domElement) {
+          if (dd.domElement && (dd !== rootDoc)) {
             if (dd.domElement.visibility.isVisibleOnScreen) {
               if (dd.hasViewport) {
                 if (!dd.userScalable && dd.maxScale < MAX_SCALE) {
@@ -48233,7 +48591,55 @@
 
         rule_result.addPageResult(TEST_RESULT.MANUAL_CHECK, domDoc, 'PAGE_MC_1', []);
       } // end validate function
+    },
+
+    /**
+     * @object RESIZE_3
+     *
+     * @desc Resize to at least 5x
+     */
+
+    { rule_id             : 'RESIZE_3',
+      last_updated        : '2023-11-12',
+      rule_scope          : RULE_SCOPE.PAGE,
+      rule_category       : RULE_CATEGORIES.COLOR_CONTENT,
+      rule_required       : false,
+      first_step          : false,
+      axe_refs            : ['meta-viewport-large',
+                             'hidden-content'],
+      wave_refs           : [],
+      wcag_primary_id     : '1.4.4',
+      wcag_related_ids    : [],
+      target_resources    : ['content'],
+      validate          : function (dom_cache, rule_result) {
+
+        const MAX_SCALE = 5.0;
+
+        const rootDoc = dom_cache.getRootDomDocument();
+
+        const domDocs = dom_cache.allDomDocuments;
+
+        domDocs.forEach( (dd) => {
+          debug$e.log(`[dd]: ${dd.title} ${dd === rootDoc} ${dd.domElement} ${dd.hasViewport} ${dd.hasMaxScale} ${dd.maxScale}`);
+          if (dd.domElement || (dd === rootDoc)) {
+            if (dd.hasViewport && dd.hasMaxScale) {
+              if ((dd === rootDoc) || dd.domElement.visibility.isVisibleOnScreen) {
+                if (dd.maxScale >= MAX_SCALE) {
+                  rule_result.addPageResult(TEST_RESULT.PASS, dd, 'PAGE_PASS_1', [dd.maxScale]);
+                }
+                else {
+                  rule_result.addPageResult(TEST_RESULT.FAIL, dd, 'PAGE_FAIL_1', [dd.maxScale]);
+                }
+              }
+              else {
+                rule_result.addPageResult(TEST_RESULT.HIDDEN, dd, 'PAGE_HIDDEN_1', []);
+              }
+            }
+          }
+        });
+      } // end validate function
     }
+
 
   ];
 
@@ -48936,7 +49342,10 @@
       target_resources    : ['links'],
       validate          : function (dom_cache, rule_result) {
 
-        dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+        dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+          const de = le.domElement;
+
           const h = de.height;
           const w = de.width;
 
@@ -48978,7 +49387,10 @@
       target_resources    : ['links'],
       validate          : function (dom_cache, rule_result) {
 
-        dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+        dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+          const de = le.domElement;
+
           const h = de.height;
           const w = de.width;
           if (!de.parentInfo.inParagraph && de.authorSizing) {

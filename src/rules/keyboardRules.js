@@ -407,7 +407,36 @@ export const keyboardRules = [
      } // end validation function
   },
 
+  /**
+   * @object KEYBORAD_11
+   *
+   * @desc Remove server-side image maps
+   */
+  { rule_id             : 'KEYBOARD_11',
+    last_updated        : '2026-11-15',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.KEYBOARD_SUPPORT,
+    rule_required       : true,
+    first_step          : false,
+    axe_refs            : ['server-side-image-map'],
+    wave_refs           : [],
+    wcag_primary_id     : '2.1.1',
+    wcag_related_ids    : [],
+    target_resources    : ['img[ismap]'],
+    validate            : function (dom_cache, rule_result) {
 
+      dom_cache.imageInfo.allImageElements.forEach( ie => {
+        const de = ie.domElement;
+        if (de.node.hasAttribute('ismap')) {
+          if (de.visibility.isVisibleToAT) {
+            rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', []);
+          } else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', []);
+          }
+        }
+      });
+    } // end validation function
+  }
 ];
 
 

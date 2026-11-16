@@ -18,6 +18,8 @@
         executeTest('LINK_1: Link text must be descriptive', 'ID_IFRAME_1', 'LINK_1');
         executeTest('LINK_2: Links with different accessible names must have different url', 'ID_IFRAME_2', 'LINK_2');
         executeTest('LINK_3: Target focus should be in content window', 'ID_IFRAME_3', 'LINK_3');
+        executeTest('LINK_3: Target focus should be in content window', 'ID_IFRAME_3', 'LINK_3');
+        executeTest('LINK_5: Duplicate alt text', 'ID_IFRAME_5', 'LINK_5');
       });
     </script>
 
@@ -30,6 +32,9 @@
 
     <h2>Link 3: Target focus should be in content window</h2>
     <iframe id="ID_IFRAME_3" src="links/link_3_link_focus.html"></iframe>
+
+    <h2>Link 5: Duplicate ALT text in link accessible name</h2>
+    <iframe id="ID_IFRAME_5" src="links/link_5_duplicate_alt.html"></iframe>
 
 
   </body>

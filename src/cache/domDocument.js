@@ -70,7 +70,8 @@ export default class DOMDocument {
       this.userScalable = meta.hasAttribute('user-scalable') ?
                            meta.getAttribute('user-scalable').toLowerCase() != 'no':
                            true;
-      this.maxScale     = meta.hasAttribute('maximum-scale') ?
+      this.hasMaxScale  = meta.hasAttribute('maximum-scale');
+      this.maxScale     = this.hasMaxScale ?
                            parseFloat(meta.getAttribute('maximum-scale')) :
                            10.0;
 

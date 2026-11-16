@@ -94,7 +94,9 @@ export default class LinkResults {
 
     this.linkData = [];
 
-    domCache.linkInfo.allLinkDomElements.forEach( de => {
+    domCache.linkInfo.allLinkElements.forEach( le => {
+
+      const de = le.domElement;
 
       const parsedHref = URL.parse(de.node.href);
       const partsHref  = parsedHref && parsedHref.hostname ?

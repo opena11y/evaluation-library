@@ -845,7 +845,7 @@ export const controlRules = {
           'In general avoid using images and hidden text for defining accessible names whenever possible.'
         ],
         TECHNIQUES: [
-          'If images of text that are part of an accessible name (e.g. label), the alt text must be the same as the text of the image.',
+          'If images of text that are part of an accessible name (e.g. label), the alt text must be the same as the text on the image.',
           'If @aria-label@ is used as part of an accessible name (e.g. label), the @aria-label@ contains the same text associated the visually rendered content associated with the control.',
           'If a hidden @aria-labelledby@ reference is used as part of the accessible name (e.g. label), verify the computed name of all the referenced contain has the same text associated the visually rendered label associated with the control.',
           'Accessible names may contain additional information useful to people using assistive technologies, but should start with the visible text associated with the control.'

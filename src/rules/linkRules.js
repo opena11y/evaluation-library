@@ -42,7 +42,8 @@ export const linkRules = [
     wcag_related_ids    : ['2.4.9'],
     target_resources    : ['a', 'area', '[role=link]'],
     validate            : function (dom_cache, rule_result) {
-      dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+      dom_cache.linkInfo.allLinkElements.forEach (le => {
+        const de = le.domElement;
         if (de.visibility.isVisibleToAT) {
           const name = de.accName.name;
           const desc = de.accDescription.name;
@@ -87,7 +88,8 @@ export const linkRules = [
       // array of visible DOM elements identified as links
       const visibleLinks = [];
 
-      dom_cache.linkInfo.allLinkDomElements.forEach ( de => {
+      dom_cache.linkInfo.allLinkElements.forEach ( le => {
+        const de = le.domElement;
         if (de.visibility.isVisibleToAT) {
           visibleLinks.push(de);
         }
@@ -160,7 +162,8 @@ export const linkRules = [
     target_resources    : ['a', 'area', 'select'],
     validate            : function (dom_cache, rule_result) {
 
-      dom_cache.linkInfo.allLinkDomElements.forEach (de => {
+      dom_cache.linkInfo.allLinkElements.forEach (le => {
+        const de = le.domElement;
         if (de.visibility.isVisibleToAT) {
           rule_result.addElementResult(TEST_RESULT.MANUAL_CHECK, de, 'ELEMENT_MC_1', [de.elemName]);
         }
@@ -184,13 +187,15 @@ export const linkRules = [
     rule_required       : true,
     first_step          : false,
     axe_refs            : [],
-    wave_refs           : ['alt_redundant'],
+    wave_refs           : [],
     wcag_primary_id     : '2.5.3',
     wcag_related_ids    : [],
     target_resources    : ["a", "[role=link]"],
     validate          : function (dom_cache, rule_result) {
 
-      dom_cache.linkInfo.allLinkDomElements.forEach( de => {
+      dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+        const de = le.domElement;
 
         if (de.accName.includesAlt) {
           if (de.visibility.isVisibleToAT) {
@@ -222,6 +227,44 @@ export const linkRules = [
           }
         }
 
+      });
+
+    } // end validation function
+  },
+
+  /**
+   * @object LINK_5
+   *
+   * @desc Links that contain an image, the alt text must be different than text node content
+   */
+
+  { rule_id             : 'LINK_5',
+    last_updated        : '2026-11-15',
+    rule_scope          : RULE_SCOPE.ELEMENT,
+    rule_category       : RULE_CATEGORIES.LINKS,
+    rule_required       : true,
+    first_step          : false,
+    axe_refs            : ['image-redundant-alt'],
+    wave_refs           : ['alt_redundant'],
+    wcag_primary_id     : '2.5.3',
+    wcag_related_ids    : [],
+    target_resources    : ["a", "[role=link]"],
+    validate          : function (dom_cache, rule_result) {
+
+      dom_cache.linkInfo.allLinkElements.forEach( le => {
+
+        const de = le.domElement;
+
+        if (de.accName.includesAlt) {
+          if (de.visibility.isVisibleToAT) {
+            if (le.duplicateName) {
+              rule_result.addElementResult(TEST_RESULT.FAIL, de, 'ELEMENT_FAIL_1', [de.elemName]);
+            }
+          }
+          else {
+            rule_result.addElementResult(TEST_RESULT.HIDDEN, de, 'ELEMENT_HIDDEN_1', [de.elemName]);
+          }
+        }
       });
 
     } // end validation function

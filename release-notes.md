@@ -2,14 +2,18 @@ Version 3.0.1 Overview
 =============================
 * Fixed issue with Table 1 rule for manual check when the table cell is empty, but has headers
 * Updated how PageResults and WebsiteResults generate identifiers
+* Added new link object with more information about links
 * Updating Heading 5 to fail headings with no content
 * Updated Resize 1 to including testing for meta viewport elements
+* Moved resize rules from tables/layout to color/content rule category
 * Fixed bug in over identifying links
 * Added Table 9 no empty TH elements
 * Added Widget 19 testing for aria-hidden on body or interactive content
 * Added List 3 for definition list structure
 * Added Frame 3 for unique titles for iframes
 * Added Frame 4 for tabindex for frames with interactive elements
+* Added Link 5 for redundant alt text in links
+* Added Keyboard 11 for server side image maps
 
 
 Version 3.0.0 Overview
